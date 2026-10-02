@@ -1,0 +1,51 @@
+CREATE TABLE `atlas_evidence_retirements` (
+	`id` text PRIMARY KEY NOT NULL,
+	`collection` text NOT NULL,
+	`target_id` text NOT NULL,
+	`source_id` text NOT NULL,
+	`reason` text NOT NULL,
+	`replacement_id` text,
+	`metadata` text DEFAULT '{}' NOT NULL,
+	FOREIGN KEY (`source_id`) REFERENCES `atlas_sources`(`id`) ON UPDATE no action ON DELETE no action,
+	CONSTRAINT "retirement_collection" CHECK("atlas_evidence_retirements"."collection" IN ('records','names','relationships','media_links')),
+	CONSTRAINT "retirement_text" CHECK(length(trim("atlas_evidence_retirements"."id"))>0 AND length(trim("atlas_evidence_retirements"."target_id"))>0 AND length(trim("atlas_evidence_retirements"."reason"))>0),
+	CONSTRAINT "retirement_replacement" CHECK("atlas_evidence_retirements"."replacement_id" IS NULL OR (length(trim("atlas_evidence_retirements"."replacement_id"))>0 AND "atlas_evidence_retirements"."replacement_id"!="atlas_evidence_retirements"."target_id")),
+	CONSTRAINT "retirement_metadata" CHECK(json_valid("atlas_evidence_retirements"."metadata") AND json_type("atlas_evidence_retirements"."metadata")='object')
+);
+--> statement-breakpoint
+CREATE UNIQUE INDEX `retirements_target` ON `atlas_evidence_retirements` (`collection`,`target_id`);
+--> statement-breakpoint
+DROP TRIGGER atlas_attribute_contract;
+--> statement-breakpoint
+CREATE TRIGGER atlas_attribute_contract BEFORE INSERT ON atlas_attribute_records BEGIN
+ SELECT RAISE(ABORT,'Attribute requires a location territory') WHERE NOT EXISTS(SELECT 1 FROM atlas_entities e WHERE e.id=NEW.location_id AND e.kind='location');
+ SELECT RAISE(ABORT,'Category kind mismatch') WHERE NEW.category_id IS NOT NULL AND NOT EXISTS(SELECT 1 FROM atlas_categories c WHERE c.id=NEW.category_id AND c.kind=NEW.attribute);
+ SELECT RAISE(ABORT,'Overlapping attribute evidence') WHERE NOT EXISTS(SELECT 1 FROM atlas_evidence_retirements retired WHERE retired.collection='records' AND retired.target_id=NEW.id) AND EXISTS(SELECT 1 FROM atlas_attribute_records r WHERE r.id!=NEW.id AND NOT EXISTS(SELECT 1 FROM atlas_evidence_retirements retired WHERE retired.collection='records' AND retired.target_id=r.id) AND r.location_id=NEW.location_id AND r.attribute=NEW.attribute AND r.method=NEW.method AND r.is_example=NEW.is_example AND r.valid_from<NEW.valid_to AND r.valid_to>NEW.valid_from);
+ SELECT RAISE(ABORT,'Attribute exceeds location lifetime') WHERE EXISTS(SELECT 1 FROM atlas_entities e WHERE e.id=NEW.location_id AND ((e.valid_from IS NOT NULL AND NEW.valid_from<e.valid_from) OR (e.valid_to IS NOT NULL AND NEW.valid_to>e.valid_to)));
+ SELECT RAISE(ABORT,'Uninhabited conflicts with settlement attributes') WHERE NEW.method='direct' AND NOT EXISTS(SELECT 1 FROM atlas_evidence_retirements retired WHERE retired.collection='records' AND retired.target_id=NEW.id) AND EXISTS(SELECT 1 FROM atlas_attribute_records r WHERE r.id!=NEW.id AND NOT EXISTS(SELECT 1 FROM atlas_evidence_retirements retired WHERE retired.collection='records' AND retired.target_id=r.id) AND r.location_id=NEW.location_id AND r.method='direct' AND r.is_example=NEW.is_example AND r.valid_from<NEW.valid_to AND r.valid_to>NEW.valid_from AND ((NEW.attribute='habitation' AND json_extract(NEW.value,'$')='uninhabited' AND ((r.attribute='population' AND json_extract(r.value,'$')>0) OR (r.attribute='rank' AND json_type(r.value)!='null'))) OR (r.attribute='habitation' AND json_extract(r.value,'$')='uninhabited' AND ((NEW.attribute='population' AND json_extract(NEW.value,'$')>0) OR (NEW.attribute='rank' AND json_type(NEW.value)!='null')))));
+END;
+--> statement-breakpoint
+DROP TRIGGER atlas_names_contract;
+--> statement-breakpoint
+CREATE TRIGGER atlas_names_contract BEFORE INSERT ON atlas_names BEGIN
+ SELECT RAISE(ABORT,'Overlapping preferred names') WHERE NEW.role='preferred' AND NOT EXISTS(SELECT 1 FROM atlas_evidence_retirements retired WHERE retired.collection='names' AND retired.target_id=NEW.id) AND EXISTS(SELECT 1 FROM atlas_names n WHERE n.id!=NEW.id AND NOT EXISTS(SELECT 1 FROM atlas_evidence_retirements retired WHERE retired.collection='names' AND retired.target_id=n.id) AND n.entity_id=NEW.entity_id AND n.language=NEW.language AND n.role='preferred' AND n.is_example=NEW.is_example AND n.valid_from<NEW.valid_to AND n.valid_to>NEW.valid_from);
+ SELECT RAISE(ABORT,'Name exceeds entity lifetime') WHERE EXISTS(SELECT 1 FROM atlas_entities e WHERE e.id=NEW.entity_id AND ((e.valid_from IS NOT NULL AND NEW.valid_from<e.valid_from) OR (e.valid_to IS NOT NULL AND NEW.valid_to>e.valid_to)));
+END;
+--> statement-breakpoint
+CREATE TRIGGER atlas_retirements_contract BEFORE INSERT ON atlas_evidence_retirements BEGIN
+ SELECT RAISE(ABORT,'Stable ID collision: atlas_evidence_retirements') WHERE EXISTS(SELECT 1 FROM atlas_evidence_retirements x WHERE x.id=NEW.id AND NOT(x.id IS NEW.id AND x.collection IS NEW.collection AND x.target_id IS NEW.target_id AND x.source_id IS NEW.source_id AND x.reason IS NEW.reason AND x.replacement_id IS NEW.replacement_id AND x.metadata IS NEW.metadata));
+ SELECT RAISE(ABORT,'Claim already retired') WHERE EXISTS(SELECT 1 FROM atlas_evidence_retirements x WHERE x.collection=NEW.collection AND x.target_id=NEW.target_id AND x.id!=NEW.id);
+ SELECT RAISE(ABORT,'Empty retirement identity or reason') WHERE length(trim(NEW.id,char(9,10,11,12,13,32,160,5760,8192,8193,8194,8195,8196,8197,8198,8199,8200,8201,8202,8232,8233,8239,8287,12288,65279)))=0 OR length(trim(NEW.target_id,char(9,10,11,12,13,32,160,5760,8192,8193,8194,8195,8196,8197,8198,8199,8200,8201,8202,8232,8233,8239,8287,12288,65279)))=0 OR length(trim(NEW.reason,char(9,10,11,12,13,32,160,5760,8192,8193,8194,8195,8196,8197,8198,8199,8200,8201,8202,8232,8233,8239,8287,12288,65279)))=0 OR (NEW.replacement_id IS NOT NULL AND length(trim(NEW.replacement_id,char(9,10,11,12,13,32,160,5760,8192,8193,8194,8195,8196,8197,8198,8199,8200,8201,8202,8232,8233,8239,8287,12288,65279)))=0);
+ SELECT RAISE(ABORT,'Retired claim must exist') WHERE (NEW.collection='records' AND NOT EXISTS(SELECT 1 FROM atlas_attribute_records c WHERE c.id=NEW.target_id)) OR (NEW.collection='names' AND NOT EXISTS(SELECT 1 FROM atlas_names c WHERE c.id=NEW.target_id)) OR (NEW.collection='relationships' AND NOT EXISTS(SELECT 1 FROM atlas_relationships c WHERE c.id=NEW.target_id)) OR (NEW.collection='media_links' AND NOT EXISTS(SELECT 1 FROM atlas_media_links c WHERE c.id=NEW.target_id));
+ SELECT RAISE(ABORT,'Example sources cannot retire factual claims') WHERE EXISTS(SELECT 1 FROM atlas_sources s WHERE s.id=NEW.source_id AND s.status='example') AND ((NEW.collection='records' AND EXISTS(SELECT 1 FROM atlas_attribute_records c WHERE c.id=NEW.target_id AND c.is_example=0)) OR (NEW.collection='names' AND EXISTS(SELECT 1 FROM atlas_names c WHERE c.id=NEW.target_id AND c.is_example=0)) OR (NEW.collection='relationships' AND EXISTS(SELECT 1 FROM atlas_relationships c WHERE c.id=NEW.target_id AND c.is_example=0)) OR (NEW.collection='media_links' AND EXISTS(SELECT 1 FROM atlas_media_links c WHERE c.id=NEW.target_id AND c.is_example=0)));
+ WITH RECURSIVE chain(id) AS (SELECT NEW.replacement_id WHERE NEW.replacement_id IS NOT NULL UNION SELECT r.replacement_id FROM atlas_evidence_retirements r JOIN chain c ON r.target_id=c.id WHERE r.collection=NEW.collection AND r.replacement_id IS NOT NULL)
+ SELECT RAISE(ABORT,'Supersession cycle') WHERE EXISTS(SELECT 1 FROM chain WHERE id=NEW.target_id);
+END;
+--> statement-breakpoint
+CREATE TRIGGER atlas_retirements_immutable BEFORE UPDATE ON atlas_evidence_retirements BEGIN SELECT RAISE(ABORT,'Retirements are immutable; restore evidence under a new claim ID'); END;
+--> statement-breakpoint
+CREATE TRIGGER atlas_retirements_retain BEFORE DELETE ON atlas_evidence_retirements BEGIN SELECT RAISE(ABORT,'Retirement provenance must be retained'); END;
+--> statement-breakpoint
+CREATE TRIGGER atlas_ingestions_retirements_complete BEFORE INSERT ON atlas_ingestions BEGIN
+ SELECT RAISE(ABORT,'Replacement claim is missing') WHERE EXISTS(SELECT 1 FROM atlas_evidence_retirements r JOIN json_each(NEW.counts,'$._retirement_ids') batch ON batch.value=r.id WHERE r.replacement_id IS NOT NULL AND ((r.collection='records' AND NOT EXISTS(SELECT 1 FROM atlas_attribute_records c WHERE c.id=r.replacement_id)) OR (r.collection='names' AND NOT EXISTS(SELECT 1 FROM atlas_names c WHERE c.id=r.replacement_id)) OR (r.collection='relationships' AND NOT EXISTS(SELECT 1 FROM atlas_relationships c WHERE c.id=r.replacement_id)) OR (r.collection='media_links' AND NOT EXISTS(SELECT 1 FROM atlas_media_links c WHERE c.id=r.replacement_id))));
+END;

@@ -1,0 +1,43 @@
+{
+  "recorded_on": "2026-10-02",
+  "date_timezone": "America/Los_Angeles",
+  "scope": "ENG-07: establish the initial main baseline and one issue per future PR",
+  "repository": "ChengshuLi/WorldAtlas",
+  "default_branch": "main",
+  "future_base": "origin/main",
+  "future_pr_target": "main",
+  "initial_source_branch": "work",
+  "initial_base_sha": "5b5f06f87d21f16cb14c6165e75854a29dc191ec",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/1",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/2",
+  "merge_status_authority": "GitHub PR #2; this implementation receipt is included in that PR before merge",
+  "policy": {
+    "one_todo_issue_per_pr": true,
+    "one_linked_github_issue_per_pr": true,
+    "fresh_branch_from_main_after_each_merge": true,
+    "large_initial_foundation_exception": true,
+    "future_umbrella_goals_split_into_bounded_child_issues": true,
+    "completed_tracker_rows_retained": true
+  },
+  "validation": {
+    "affected_tests_passed": 27,
+    "failed": 0,
+    "skipped": 0,
+    "scope_tests_included": 13,
+    "workflow_yaml_parsed": true,
+    "manual_dispatch_selectors_reject_push": true
+  },
+  "first_github_validation": {
+    "run_id": 36982530319,
+    "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/36982530319",
+    "head_sha": "d4bd80df2e580b9be3d901f814b9951fab275eeb",
+    "initial_foundation": "success",
+    "scope": "skipped for the explicit one-time baseline"
+  },
+  "provider_workflows": "manual dispatch only; ordinary PR merges cannot invoke these workflows",
+  "historical_work_receipts_preserved": true,
+  "production_database_migrated_again": false,
+  "new_site_deployment": false,
+  "known_open_work": "Five original wider engineering goals remain open in the retained handover; this issue changes Git integration policy and records the baseline.",
+  "credentials_logged": false
+}

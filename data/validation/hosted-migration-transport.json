@@ -1,0 +1,284 @@
+{
+  "version": 1,
+  "purpose": "Test-only native migration transport diagnosis; no historical content or remote deployment",
+  "verified_on": "2026-10-02",
+  "runtime": "native workerd/D1 via Miniflare",
+  "site_private_parser_inspected": false,
+  "compiler_sha256": "9dde285ef025b87581e2c83dbc3e43fea8b3ce61ebfdfc68d16dd64154584f4b",
+  "transport_receipt_sha256": "df6b6200a2b88b11fb5bdc0e022550c4372e5e80aee4f224662abd91af9516d1",
+  "transformed_guards": 21,
+  "migrations": [
+    {
+      "file": "0000_bizarre_sentry.sql",
+      "source_sha256": "a7d4945214a37835bc6cbe8c6c0bfe2073d15fbf76fa1c510e6db072b64ba699",
+      "transport_sha256": "a7d4945214a37835bc6cbe8c6c0bfe2073d15fbf76fa1c510e6db072b64ba699",
+      "transformed_guards": 0,
+      "transformations": []
+    },
+    {
+      "file": "0001_evidence_retirements.sql",
+      "source_sha256": "1f29f4af9eb41425dbd932b9d68e1c54406cb99221a02a2a1bc6b6cab2e3846f",
+      "transport_sha256": "1f29f4af9eb41425dbd932b9d68e1c54406cb99221a02a2a1bc6b6cab2e3846f",
+      "transformed_guards": 0,
+      "transformations": []
+    },
+    {
+      "file": "0002_geographic_reference_releases.sql",
+      "source_sha256": "fc03e50b1c7053d9ffe89534395bcbb644e3192231122eca51a424fd14753c53",
+      "transport_sha256": "77459729e200a45e3c003333acbd2a30446acba1670138a4861f7315a4241e77",
+      "transformed_guards": 21,
+      "transformations": [
+        {
+          "line": 67,
+          "condition_sha256": "b3541e4e43cc4db654712d982d605cb7cbf2e925ce3d107fbfdce8fe1c64e1b2",
+          "raise_sha256": "964eaa506a7a34399c1d815dbf811f28b845d215c49c20ee13b045c7a057a1f6"
+        },
+        {
+          "line": 68,
+          "condition_sha256": "e2ee52330e3aec5df7d3afa90761df13ccd25834b477361c7781e01b04c103c5",
+          "raise_sha256": "44cf3a71e3bebc0081fd325e6aaecbec083219ec3c710cf1cf3da411c0eccc3b"
+        },
+        {
+          "line": 69,
+          "condition_sha256": "51c04d65bf33e4f1abc62e3747db833b0e70dc1aca924a69bb3764dff22ef9a6",
+          "raise_sha256": "9c075721a4d0ed03c6073c5569b7bdb0bd196ac2f35c089b81b8c4176eaf6702"
+        },
+        {
+          "line": 70,
+          "condition_sha256": "816817d004e8ae5dc57010549813b23a1fe3d641301f3a9c8f45a04a58de16d0",
+          "raise_sha256": "f0a1854fe9f073256f0a85d94b75fd7bd4e69895586042ce6f10d0c98de2f3fb"
+        },
+        {
+          "line": 74,
+          "condition_sha256": "36bfed50fb7bc673ea3acfc3b53f29a6dac85eafe7f87bacf32c16dc9f48b9b0",
+          "raise_sha256": "d141c05bf562d41cbea60c9e29b3f102303bed39a87500bc773fe6b9d98f310c"
+        },
+        {
+          "line": 75,
+          "condition_sha256": "e2ee52330e3aec5df7d3afa90761df13ccd25834b477361c7781e01b04c103c5",
+          "raise_sha256": "a9f8ef110b45fb5f807bb4a592f24307c32c5b8636e31c9987cc8a1e5d0843d3"
+        },
+        {
+          "line": 76,
+          "condition_sha256": "2fd021c75f492e86d4d6fd9a2350fe86ee60c95c1126ac1f9d4bcf53b1e5466a",
+          "raise_sha256": "b8b7022d69582c9b21b6f3288ad0a4ffa8e24a1b551922ec80a916a5ef33fa3f"
+        },
+        {
+          "line": 77,
+          "condition_sha256": "5811568cf3ee1c032edc58c3c1f4d947c044d096dabf14b44d1f94058043d13b",
+          "raise_sha256": "7b3fa360dc0f0ee98a49fd124aced9325a54de8e724265da0ab956e162eaf87b"
+        },
+        {
+          "line": 78,
+          "condition_sha256": "b6241795668b6818178b8836ea77fb7cee6ddc719c55be7aa765a46df0c74c6c",
+          "raise_sha256": "70b8a7746db1f0a977a39b5bf004b82b8ffc098255e9126ef26dfd3738d592a3"
+        },
+        {
+          "line": 82,
+          "condition_sha256": "36bfed50fb7bc673ea3acfc3b53f29a6dac85eafe7f87bacf32c16dc9f48b9b0",
+          "raise_sha256": "e59734a88bddeb9dc78dd95bbcab7f4c163a87f0869045fa176255fd622ae498"
+        },
+        {
+          "line": 83,
+          "condition_sha256": "e2ee52330e3aec5df7d3afa90761df13ccd25834b477361c7781e01b04c103c5",
+          "raise_sha256": "73c74be366f816d5179d16912afc9320a7acaf91a42b5f68c9b048074044ba19"
+        },
+        {
+          "line": 84,
+          "condition_sha256": "497780a1fd0c63f7b740a4fc0f1efdab7dc9312896166f9c9d190a94b36cfec1",
+          "raise_sha256": "8c97c65b9e11f8d677e5b678734eb78b99b4f4224ab7cac738a968bce3a26211"
+        },
+        {
+          "line": 85,
+          "condition_sha256": "e8227f38799e6a7f4a041611875544c9ee8bbf1b462913ece7aa018c85bdc4cb",
+          "raise_sha256": "594b4e6f1177876bf2f3b22d42851b02c0305bfc890cf0b2a64bc83abb7c29df"
+        },
+        {
+          "line": 86,
+          "condition_sha256": "2afa32c714cd8ae86c10d4f1c3ce1a7caaf3a18c556ad8b3500a744c1ff681cc",
+          "raise_sha256": "534e6552a94a627c373742f615511656963d66c2afd01199258d51f4dc343351"
+        },
+        {
+          "line": 87,
+          "condition_sha256": "f2bb9bb879623ec387e89122531434d1c4cf09a944af4d709ed52beb18111e26",
+          "raise_sha256": "62f97085357fa3d501c38518062f3401800f1cf2418e4fb74e1fbab06fc1b16f"
+        },
+        {
+          "line": 91,
+          "condition_sha256": "495a6a8f61494edaf541bfcb379ee0e3837f0239168564c45b722926c17c97b4",
+          "raise_sha256": "40c95e9e37a56c96ffa66a38894c891a60efd8f3277937d4604f3f598abecbf3"
+        },
+        {
+          "line": 92,
+          "condition_sha256": "d59b01b1b1fbb9d6d9059ba0d06f39b6b2a68e1a27a21e3d9900d96c55c31322",
+          "raise_sha256": "c5fd46a9b23c2def68a62be832b5c824a5cb5a8715509dc80cec544db4af4c2d"
+        },
+        {
+          "line": 93,
+          "condition_sha256": "09e5c6c2bec63840ec28fd20e5943647b92501fe6360b5b89ab9976dc400e24a",
+          "raise_sha256": "808d55e79b7842937adfee8dc2aa5bc915efc3a76f3ce313dc4b3938d9f4bd0a"
+        },
+        {
+          "line": 94,
+          "condition_sha256": "6d7be4dcd7908341eca9767037f92c090626141dad6291d4c462a981f3ca1d7f",
+          "raise_sha256": "850e29044e379c0198a850ef3fc02dfa7114b7a5ed479bb42d7e099b868e2c36"
+        },
+        {
+          "line": 95,
+          "condition_sha256": "3b46ee5fdfb69d31bcb5c7560b357a0ee2768ad29ebaf22bb55fd1f887230aaf",
+          "raise_sha256": "5555a066dba0bd8fe96893259e121188e32ac3cbe0ea3a3f0fcc7adf08a9aa83"
+        },
+        {
+          "line": 96,
+          "condition_sha256": "39cf6d32acaea42d23d461094ad5caafcbb42adef2f0530908db2f7fd77e6650",
+          "raise_sha256": "db5b1018aba002dbcc5bc6633918d5e1d0126e1a766afee28bed4b694201f7d4"
+        }
+      ]
+    },
+    {
+      "file": "0003_unsettled_location_rank.sql",
+      "source_sha256": "dc249cb326203bee26446fb010e0f2c05d8bd9bcbb918649199382d517e0fa4d",
+      "transport_sha256": "dc249cb326203bee26446fb010e0f2c05d8bd9bcbb918649199382d517e0fa4d",
+      "transformed_guards": 0,
+      "transformations": []
+    },
+    {
+      "file": "0004_population_precision_guard.sql",
+      "source_sha256": "302660bc2d4d673bab67820d3c54637ca8cd50460ace57e3142fb3c6f40da447",
+      "transport_sha256": "302660bc2d4d673bab67820d3c54637ca8cd50460ace57e3142fb3c6f40da447",
+      "transformed_guards": 0,
+      "transformations": []
+    },
+    {
+      "file": "0005_population_source_class_guard.sql",
+      "source_sha256": "44ec5f5a82317b7c430f7d98439e6ce41d04859d46719c36c3e0dc072f102194",
+      "transport_sha256": "44ec5f5a82317b7c430f7d98439e6ce41d04859d46719c36c3e0dc072f102194",
+      "transformed_guards": 0,
+      "transformations": []
+    },
+    {
+      "file": "0006_unresolved_attribute_status_guard.sql",
+      "source_sha256": "e2778adcf77945b294609111ecd21a02ffc177e41463393f07e7d15e50e97475",
+      "transport_sha256": "e2778adcf77945b294609111ecd21a02ffc177e41463393f07e7d15e50e97475",
+      "transformed_guards": 0,
+      "transformations": []
+    }
+  ],
+  "meta": [
+    {
+      "file": "meta/0000_snapshot.json",
+      "sha256": "e8fd244d13001d742632e0678dfc72210f5226cad757dfd4316128d5c38f777d"
+    },
+    {
+      "file": "meta/0001_snapshot.json",
+      "sha256": "c87009a65f84744b2716ce5e0499f0167d26fb61cd381df3cc64e7895df4bc3f"
+    },
+    {
+      "file": "meta/0002_snapshot.json",
+      "sha256": "410a03e184a5169e3d9a34055d5247b610e34e799b48c8f35ea3ac04ee2f68b9"
+    },
+    {
+      "file": "meta/0003_snapshot.json",
+      "sha256": "a092e2550c751a59ee02ea724448c126eb570790e99ec899cf071f7f7dc26838"
+    },
+    {
+      "file": "meta/0004_snapshot.json",
+      "sha256": "de04bfc01382c7c96844b96acaf38fccc92bd4e63308eceb786cfa87c4c53cae"
+    },
+    {
+      "file": "meta/0005_snapshot.json",
+      "sha256": "20e45fc7a7f1656c796744fc50fd46f9d079cb667f3ea7918abea03dd4725eed"
+    },
+    {
+      "file": "meta/0006_snapshot.json",
+      "sha256": "80077fbacf604ee38488b3197fbde0ce74ef2f75f370c2cbe4159fa3d6216cae"
+    },
+    {
+      "file": "meta/_journal.json",
+      "sha256": "10e10eff452970bf1f76529556ec84c361967299746fd1dc0931af91e8045ca9"
+    }
+  ],
+  "native_diagnosis": {
+    "BATCH": {
+      "passed": true,
+      "tables": [
+        {
+          "name": "atlas_geographic_changes"
+        },
+        {
+          "name": "atlas_geographic_memberships"
+        },
+        {
+          "name": "atlas_geographic_releases"
+        }
+      ]
+    },
+    "PREPARE": {
+      "passed": true,
+      "tables": [
+        {
+          "name": "atlas_geographic_changes"
+        },
+        {
+          "name": "atlas_geographic_memberships"
+        },
+        {
+          "name": "atlas_geographic_releases"
+        }
+      ]
+    },
+    "EXEC": {
+      "passed": false,
+      "error": "D1_EXEC_ERROR: Error in line 1: CREATE TABLE `atlas_geographic_changes` (: incomplete input: SQLITE_ERROR"
+    },
+    "NAIVE": {
+      "passed": false,
+      "error": "D1_ERROR: incomplete input: SQLITE_ERROR",
+      "failing_part": 9,
+      "failing_statement": "--> statement-breakpoint\nCREATE TRIGGER geographic_release_insert BEFORE INSERT ON atlas_geographic_releases BEGIN\n SELECT CASE WHEN NEW.status!='staged' THEN RAISE(ABORT,'Geographic release must begin staged') END;"
+    },
+    "COMPILED": {
+      "passed": true,
+      "tables": [
+        {
+          "name": "atlas_geographic_changes"
+        },
+        {
+          "name": "atlas_geographic_memberships"
+        },
+        {
+          "name": "atlas_geographic_releases"
+        }
+      ]
+    }
+  },
+  "populated_native_regression": {
+    "claims_preserved": 2,
+    "retirements_preserved": 1,
+    "all_original_indexes_and_triggers_equal": true,
+    "foreign_keys_valid": true,
+    "test": "test/hosted-migration-transport.test.mjs",
+    "passed": 3,
+    "failed": 0
+  },
+  "exhaustive_release_suite": {
+    "command": "ATLAS_DRIZZLE_MIGRATIONS=<compiled> node --test test/geographic-release-preparation.mjs",
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 78,
+    "actual_current_geography": true,
+    "derivative_migrations_used": true
+  },
+  "site_deployment": {
+    "reported_by": "native Site deployment controller and confirmed table inventory",
+    "status": "succeeded",
+    "deployment_id": "appgdep_6abf142287588191a4eb9546fc54903d",
+    "site_version": 13,
+    "source_commit": "282d0a0b0cec459db3341af61fed8236e8eb8ae0",
+    "deployed_at": "2026-10-02T02:18:04Z",
+    "geographic_release_tables_confirmed": true,
+    "geographic_membership_bootstrap": "separate milestone; not asserted complete by this receipt",
+    "staging_command": "node scripts/stage-site-migrations.mjs <separate-Site-checkout>"
+  }
+}

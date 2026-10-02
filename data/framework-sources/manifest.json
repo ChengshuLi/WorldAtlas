@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "path": "chn-prefectures.json",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbHumanitarian/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+      "sha256": "12af10d8810b00d7258df7cc6cafa70023a3db41fc48e9f69846f6cfa543ac0b",
+      "license": "CC BY 3.0 IGO"
+    },
+    {
+      "path": "italy-sll2018.geojson",
+      "url": "https://maps.regione.umbria.it/server/rest/services/Hosted/Sistemi_Locali_del_Lavoro_2011_2018/FeatureServer/2/query?where=1%3D1&outFields=sll_2011%2Csll_2011_t%2Cden_sl2011%2Creg%2Cmulti_reg%2Cmulti_prov&outSR=4326&f=geojson&resultRecordCount=1000&maxAllowableOffset=0.0005&geometryPrecision=5",
+      "sha256": "68e4520b71442423ebfe2eedcc7c86ad7d3c4dcfaa55fe28fb19fd3400ac05cd",
+      "license": "CC BY 3.0; Regione Umbria SIAT / ISTAT"
+    },
+    {
+      "path": "sll-item.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/08957f28ad604b88930175c9e1364600?f=json",
+      "sha256": "a9ffbe002ed2ecdbba9dd9359f7ac050f0db55dd5ae16d2b2521c39bea6613d0",
+      "license": "Service metadata"
+    }
+  ],
+  "grouping_source": {
+    "url": "https://www.bayarea.gov.hk/filemanager/en/share/pdf/Outline_Development_Plan.pdf",
+    "section": "Chapter 3, Section 1: Hong Kong\u2013Shenzhen, Guangzhou\u2013Foshan and Macao\u2013Zhuhai cooperation poles",
+    "basis": "Atlas geographic groupings; not official provinces"
+  }
+}

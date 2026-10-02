@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "status": "consistent-read-only-export-and-byte-verified-checkpoint",
+  "source_revision": 1321,
+  "source_manifest_sha256": "b59946f515e385d8c7c8de84a529e851fc802262f07e39cb080f5f493f3572e2",
+  "checkpoint_sha256": "9e9643de1a119f06645cf984151f910007e248378c55eb7cce09126485a84d34",
+  "source_snapshot_fingerprint": "c315f806f9b7a60cbb7196ce5f8be38cd16c385b00f883f5275ec8f5bc9202ef",
+  "raw_bytes": 206548113,
+  "compressed_bytes": 9245712,
+  "counts": {
+    "sources": 381,
+    "entity_types": 16,
+    "entities": 86797,
+    "categories": 1457,
+    "records": 396,
+    "names": 3588,
+    "relationships": 0,
+    "media": 28,
+    "media_links": 6,
+    "retirements": 0,
+    "ingestions": 1321,
+    "geographic_releases": 2,
+    "geographic_memberships": 169491,
+    "geographic_changes": 573
+  },
+  "media_bytes_included": false,
+  "postgres_migration_verified": false,
+  "database_budget_note": "512 MiB is a reviewed operational budget, not a claim about the Neon provider quota."
+}

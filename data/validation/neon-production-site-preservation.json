@@ -1,0 +1,66 @@
+{
+  "read_only": true,
+  "verified_at_utc": "2026-10-02T06:39:58.147Z",
+  "url": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+  "environment_classifications": {
+    "topography": 12,
+    "vegetation": 16,
+    "climate": 32
+  },
+  "releases": [
+    {
+      "id": "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+      "version": 1,
+      "counts": {
+        "area": 489,
+        "continent": 6,
+        "location": 49614,
+        "province": 5220,
+        "region": 66,
+        "subcontinent": 29
+      },
+      "footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+      "hierarchy_sha256": "ababc53ece8f080ff266af21a57276cab8e47a79be0763635f731dcc9df25fca"
+    },
+    {
+      "id": "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+      "version": 2,
+      "counts": {
+        "area": 471,
+        "continent": 6,
+        "location": 49589,
+        "province": 5133,
+        "region": 66,
+        "subcontinent": 29
+      },
+      "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+      "hierarchy_sha256": "bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58"
+    }
+  ],
+  "checked_prepared_claims": 3984,
+  "expected_prepared_counts": {
+    "sources": 4,
+    "categories": 11,
+    "records": 396,
+    "names": 3588
+  },
+  "checked_archive_objects": 28,
+  "checked_archive_bytes": 16199861,
+  "storage": {
+    "counts": {
+      "retirements": 0,
+      "sources": 381,
+      "entity_types": 16,
+      "entities": 86797,
+      "categories": 1457,
+      "records": 396,
+      "names": 3588,
+      "relationships": 0,
+      "media_links": 6,
+      "media": 28
+    },
+    "media_bytes": "16199861",
+    "revision": 1321,
+    "record_policy": "One sourced scalar per location attribute and date; append-only evidence; unsupported values remain unknown"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "verified_at_utc": "2026-10-02T07:05:44.864Z",
+  "url": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+  "read_only_verification": true,
+  "site_writable": true,
+  "backend": "postgres",
+  "revision": 1321,
+  "all_fact_tables": [
+    "categories",
+    "entities",
+    "entity_types",
+    "footprint_retirements",
+    "footprint_selection_validations",
+    "footprint_version_objects",
+    "footprint_versions",
+    "geographic_changes",
+    "geographic_existence_records",
+    "geographic_footprint_records",
+    "geographic_membership_records",
+    "geographic_memberships",
+    "geographic_releases",
+    "ingestions",
+    "media",
+    "media_links",
+    "names",
+    "records",
+    "relationships",
+    "retirements",
+    "sources",
+    "temporal_geography_retirements",
+    "temporal_geography_validations"
+  ],
+  "fact_table_count": 23,
+  "catalog_sha256": "9079e934e313d3f40a0f239664762d0d1053f020bfda4746b14ed56b155729db",
+  "marker_fingerprint": "688759573c7a55a57dfd1c49ec891d98dd02392b2b2ba17d7a08fc367d7e0540",
+  "capabilities": {
+    "mapSnapshots": 1,
+    "datedGeography": 1,
+    "datedFootprints": 0,
+    "storageExport": 2
+  },
+  "geography": {
+    "release_id": "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+    "hierarchy_sha256": "bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58",
+    "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8"
+  },
+  "years": [
+    -3000,
+    -1,
+    1,
+    1000,
+    1800,
+    2025,
+    2026
+  ],
+  "capacity": {
+    "measured_at": "2026-10-02T07:05:08.434Z",
+    "revision": 1321,
+    "counts": {
+      "sources": 381,
+      "entity_types": 16,
+      "entities": 86797,
+      "categories": 1457,
+      "records": 396,
+      "names": 3588,
+      "relationships": 0,
+      "media_links": 6,
+      "media": 28,
+      "retirements": 0,
+      "ingestions": 1321,
+      "geographic_releases": 2,
+      "geographic_memberships": 169491,
+      "geographic_changes": 573
+    },
+    "database": {
+      "bytes": 319209472,
+      "measurement": "postgres-pg-database-size",
+      "configured_budget_bytes": 536870912,
+      "budget_is_provider_quota": false,
+      "quota_verified": false,
+      "warning_fraction": 0.8,
+      "budget_fraction": 0.594573974609375,
+      "budget_status": "below-budget"
+    },
+    "media": {
+      "registered_objects": 28,
+      "registered_bytes": "16199861",
+      "measurement": "database metadata; object existence and checksums require separate read-back",
+      "upload_limit_bytes": 20971520
+    },
+    "storage_scope": "Hosted database and registered object metadata only; prepared ownership, environment and grid assets are separate.",
+    "backend": {
+      "kind": "postgres-plus-r2",
+      "partitioning_deployed": false,
+      "managed_plan": "unverified",
+      "growth_policy": "Use sparse supported intervals. Measure database/index bytes and query latency. Technical maintainers own storage partitioning and map-read changes behind stable IDs/API; research contributors only submit supported evidence."
+    }
+  },
+  "credentials_logged": false
+}

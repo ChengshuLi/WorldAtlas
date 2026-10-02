@@ -1,0 +1,8 @@
+{
+  "entities": [{"id":"example:v2:settlement:london","kind":"settlement","name":"London settlement (example)","parent_id":"atlas:city:GBR-Greater London","is_example":1}],
+  "entity_history": [
+    {"id":"example:v2:london-name","entity_id":"atlas:city:GBR-Greater London","field":"name","value":"London","language":"en","valid_from":1300,"valid_to":1600,"is_example":1,"source":"Illustrative temporal-name example, not a researched name interval or reconstruction of the modern metropolitan boundary."},
+    {"id":"example:v2:london-settlement-name","entity_id":"example:v2:settlement:london","field":"name","value":"London","language":"en","valid_from":1300,"valid_to":1600,"is_example":1,"source":"Illustrative settlement association; the settlement is distinct from its host map location."},
+    {"id":"example:v2:london-settlement-state","entity_id":"example:v2:settlement:london","field":"attributes","value":{"rank":"city","habitation":"inhabited"},"valid_from":1300,"valid_to":1600,"is_example":1,"source":"Illustrative settlement attributes only; not researched demographic coverage."}
+  ]
+}

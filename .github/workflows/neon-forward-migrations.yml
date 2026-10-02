@@ -1,0 +1,74 @@
+name: Apply reviewed forward database migrations
+
+# Manual reviewed maintenance only. Ordinary PR merges never apply owner DDL.
+# The operation still pins the authenticated successful original-copy receipt.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Explicit reviewed forward operation
+        required: true
+        default: verify-only
+        type: choice
+        options: [verify-only, production, rehearsal]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: neon-storage-owner-maintenance
+  cancel-in-progress: false
+
+jobs:
+  forward:
+    if: github.repository == 'ChengshuLi/WorldAtlas'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact reviewed operation
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Select explicit operation
+        id: operation
+        env:
+          REQUESTED_MODE: ${{ inputs.mode }}
+          EVENT_NAME: ${{ github.event_name }}
+        shell: bash
+        run: |
+          [ "$EVENT_NAME" = workflow_dispatch ] || exit 1
+          case "$REQUESTED_MODE" in
+            rehearsal|production|verify-only) mode="$REQUESTED_MODE" ;;
+            *) exit 1 ;;
+          esac
+          operation=.github/operations/neon-forward-rehearsal.json
+          if [ "$mode" != rehearsal ]; then
+            operation=.github/operations/neon-forward-production.json
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "file=$operation" >> "$GITHUB_OUTPUT"
+      - name: Set up Node 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Apply only authenticated forward operation
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
+          FORWARD_MODE: ${{ steps.operation.outputs.mode }}
+          FORWARD_OPERATION: ${{ steps.operation.outputs.file }}
+        run: node scripts/neon-forward-migrations.mjs "$FORWARD_MODE" "$FORWARD_OPERATION"
+      - name: Preserve sanitized forward receipt
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: neon-forward-${{ steps.operation.outputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: data/validation/neon-forward-migrations/
+          if-no-files-found: error
+          retention-days: 14

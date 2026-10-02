@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "purpose": "Test-only native runtime preservation/rejection proof; not historical content or remote deployment",
+  "runtime": "native local D1 / workerd",
+  "verified_on": "2026-10-02",
+  "migration_sql_sha256": "e2778adcf77945b294609111ecd21a02ffc177e41463393f07e7d15e50e97475",
+  "snapshot_sha256": "80077fbacf604ee38488b3197fbde0ce74ef2f75f370c2cbe4159fa3d6216cae",
+  "claims_preserved": 4,
+  "retirements_preserved": 1,
+  "before_claims_sha256": "89041eb41082f3472b66479e97a6657b91d8afc805ef09420fc37c6beeef5821",
+  "after_claims_sha256": "89041eb41082f3472b66479e97a6657b91d8afc805ef09420fc37c6beeef5821",
+  "before_retirements_sha256": "b9b665df4c44adaa570300c7d01d31be361430ebc3dd85bbcdb5d7d3ea474034",
+  "after_retirements_sha256": "b9b665df4c44adaa570300c7d01d31be361430ebc3dd85bbcdb5d7d3ea474034",
+  "before_schema_objects_sha256": "ed85e9f2e7629db7821aabd651e10fb660bd42684638c7ea47df72db8dbc6ece",
+  "after_original_schema_objects_sha256": "ed85e9f2e7629db7821aabd651e10fb660bd42684638c7ea47df72db8dbc6ece",
+  "triggers_before": 71,
+  "triggers_after": 72,
+  "added_trigger": "atlas_attribute_unresolved_status",
+  "all_other_objects_unchanged": true,
+  "foreign_keys_valid": true,
+  "rejections": {
+    "unknown": {
+      "error": "Unresolved attribute status requires null value and category_id: SQLITE_CONSTRAINT (extended: SQLITE_CONSTRAINT_TRIGGER)",
+      "sql_sha256": "af699d99ef5772ca615bdcddd67257b7623f089de4d12d9be8f224b5012cc568",
+      "expected_exit_code": 1
+    },
+    "disputed": {
+      "error": "Unresolved attribute status requires null value and category_id: SQLITE_CONSTRAINT (extended: SQLITE_CONSTRAINT_TRIGGER)",
+      "sql_sha256": "78a925f6923ff3e9accbf2b70830276e306b11cffa5c68c5fa2c451faee9d584",
+      "expected_exit_code": 1
+    },
+    "no-majority": {
+      "error": "Unresolved attribute status requires null value and category_id: SQLITE_CONSTRAINT (extended: SQLITE_CONSTRAINT_TRIGGER)",
+      "sql_sha256": "96fe2f1fb1315e9d6d30c0afe5d3485d6b2f989753e515fc00eb9299d147946e",
+      "expected_exit_code": 1
+    },
+    "category": {
+      "error": "Unresolved attribute status requires null value and category_id: SQLITE_CONSTRAINT (extended: SQLITE_CONSTRAINT_TRIGGER)",
+      "sql_sha256": "56b733a33ad1a8243b0aec49377316df69c8a2788038292c3242dabcc5b5d33d",
+      "expected_exit_code": 1
+    }
+  },
+  "reproduction": {
+    "isolated_database": true,
+    "preexisting_migrations": "0000–0005 applied first",
+    "populated_fixture": "Test-only 4 claims, 1 sourced retirement; source-class fixture copied into isolated native storage",
+    "inspection": "Claims and retirements ordered by ID; every index/trigger definition ordered by type/name; PRAGMA foreign_key_check",
+    "local_command": "npx wrangler d1 execute <fixture-db> --local --persist-to <isolated-storage> --config <isolated-config> --file drizzle/0006_unresolved_attribute_status_guard.sql --json",
+    "portable_regression": "node --test test/unresolved-attributes.test.mjs"
+  }
+}

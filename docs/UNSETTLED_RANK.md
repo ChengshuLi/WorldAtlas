@@ -1,0 +1,19 @@
+# Unsettled location rank
+
+The canonical location rank has five values: `unsettled`, `rural settlement`, `town`, `city`, and `metropolis`. Null remains unknown. Habitation is an independent attribute; absence of evidence is not evidence of absence.
+
+The shared static/server resolver derives `unsettled` from a sourced explicit `uninhabited` habitation claim or a direct, sourced literal population of zero. An explicit sourced `unsettled` rank is itself a no-inhabitants claim. Estimated, modeled, rounded, reference-only, disputed, unknown, and untyped legacy population zeros do not support this derivation. Typed count provenance can mark rounding/modeling through metadata (`estimate`, `estimated`, `is_estimate`, `modeled`, `modelled`, `rounded`, `rounding`, `model`, `precision`). Legacy snapshots have no precision/class contract, so their zero alone remains insufficient.
+
+Resolved no-inhabitants and inhabitants evidence are compared using the same precedence as the underlying attribute resolver. Stronger evidence invalidates contradictory weaker fields; equal precedence makes the conflicting fields disputed. Derivation retains the supporting source, half-open interval, and supporting attribute/record ID. It does not invent a population or habitation value. Opt-in examples retain their example status.
+
+Local and hosted import constraints reject contradictory overlapping direct claims: no-inhabitants evidence cannot coexist with an inhabited habitation, a populated settlement rank, or a positive population for the same interval/example class. Hosted withdrawals exclude retired evidence from that constraint while preserving its original record.
+
+Hosted migration `0003_unsettled_location_rank.sql` widens the rank enum through a table rebuild, copying every original field unchanged and restoring indexes and all affected triggers. Migrations 0000–0002 remain unchanged. The local opener performs the corresponding enum widening on existing databases before installing the current constraints. Neither migration manufactures historical observations or rewrites existing geography.
+
+Verification: eleven focused rank tests cover literal and estimated zeros, unsupported evidence, contradictory precedence, both import orders, raw SQL/import checks, retirement corrections, and nonempty local/hosted migration preservation. The rank, hosted-record and shared-attribute suites passed 37 tests at the precision-guard milestone. An earlier isolated native workerd D1 check also exercised the nonempty 0003 rebuild and restored contracts. The 0004 regression executes that migration on populated SQLite tables and verifies preserved claims, retirement pointers, indexes and all other triggers.
+
+Migration `0004_population_precision_guard.sql` updates only the hosted attribute trigger to recognize `metadata.estimate` alongside other model/rounding flags. Existing claims, retirement pointers, tables and indexes are unchanged; migrations 0000–0003 remain immutable.
+
+Migration `0005_population_source_class_guard.sql` aligns SQL literal-zero interpretation with the resolver by joining the authoritative source classification. Existing source triggers already reject estimate/reference sources posing as direct evidence and block example-source claims without opt-in. The new guard prevents an opt-in example source explicitly tagged `sourced` from being mistaken for a factual zero in SQL. Both insertion orders and populated claim/retirement preservation are covered; migrations 0000–0004 remain unchanged.
+
+The 0005 guard also passed a native local D1/workerd migration check in disposable storage: two claims, one retirement and all 71 triggers survived unchanged, other index/trigger definitions were identical, and foreign keys remained valid. Opt-in example zero/city inserts succeeded after migration. The source-class, rank, hosted-record, resolver and immutable-migration suites passed 40 focused checks.

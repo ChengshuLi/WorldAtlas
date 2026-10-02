@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "verified_at_utc": "2026-10-02T04:21:06.455Z",
+  "url": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+  "read_only": true,
+  "facts_mutated": false,
+  "revision": 1321,
+  "capacity": {
+    "measured_at": "2026-10-02T04:21:00.121Z",
+    "revision": 1321,
+    "counts": {
+      "sources": 381,
+      "entity_types": 16,
+      "entities": 86797,
+      "categories": 1457,
+      "records": 396,
+      "names": 3588,
+      "relationships": 0,
+      "media_links": 6,
+      "media": 28,
+      "retirements": 0,
+      "ingestions": 1321,
+      "geographic_releases": 2,
+      "geographic_memberships": 169491,
+      "geographic_changes": 573
+    },
+    "database": {
+      "bytes": 268378112,
+      "measurement": "d1-query-size-after",
+      "configured_budget_bytes": null,
+      "budget_is_provider_quota": false,
+      "quota_verified": false,
+      "warning_fraction": 0.8,
+      "budget_fraction": null,
+      "budget_status": "unknown"
+    },
+    "media": {
+      "registered_objects": 28,
+      "registered_bytes": 16199861,
+      "measurement": "database metadata; object existence and checksums require separate read-back",
+      "upload_limit_bytes": 20971520
+    },
+    "storage_scope": "Hosted database and registered object metadata only; prepared ownership, environment and grid assets are separate.",
+    "backend": {
+      "kind": "single-d1-plus-r2",
+      "partitioning_deployed": false,
+      "managed_plan": "unverified",
+      "growth_policy": "Use sparse supported intervals. Measure database/index bytes and query latency. Technical maintainers own storage partitioning and map-read changes behind stable IDs/API; research contributors only submit supported evidence."
+    }
+  },
+  "catalogs": {
+    "sources": {
+      "rows": 3,
+      "has_more": true
+    },
+    "categories": {
+      "rows": 3,
+      "has_more": true
+    },
+    "entities": {
+      "rows": 3,
+      "has_more": true
+    }
+  },
+  "compact_map": [
+    {
+      "year": 2021,
+      "entities": 1000,
+      "records": 1,
+      "names": 0,
+      "withdrawals": 0,
+      "sources": 1,
+      "has_more": true,
+      "bytes": 55924,
+      "duration_ms": 1145
+    },
+    {
+      "year": 2025,
+      "entities": 1000,
+      "records": 0,
+      "names": 0,
+      "withdrawals": 0,
+      "sources": 0,
+      "has_more": true,
+      "bytes": 54351,
+      "duration_ms": 1288
+    },
+    {
+      "year": -3000,
+      "entities": 1000,
+      "records": 0,
+      "names": 0,
+      "withdrawals": 0,
+      "sources": 0,
+      "has_more": true,
+      "bytes": 54352,
+      "duration_ms": 1052
+    }
+  ],
+  "scope": "Representative production route and shared browser-format checks; exhaustive existing claim/archive verification is recorded separately."
+}

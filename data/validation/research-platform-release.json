@@ -1,0 +1,71 @@
+{
+  "status": "validated-and-published",
+  "validated_at_utc": "2026-10-02T03:54:06.846698+00:00",
+  "scope": [
+    "generic bounded resumable research import bundles",
+    "source/category/entity catalogs",
+    "exhaustive graph/media paging",
+    "compact active geographic entity map snapshots",
+    "separate environmental reference presentation",
+    "capacity measurement without invented provider quota"
+  ],
+  "backend": "existing D1 plus R2; PostgreSQL adapter/migration not deployed",
+  "facts_mutated": false,
+  "intervals_widened": false,
+  "geography_mutated": false,
+  "tests": {
+    "command": "ATLAS_REQUIRE_PREPARED=1 ATLAS_REQUIRE_STATIC=1 npm test",
+    "passed": 202,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 226569.072634
+  },
+  "browser": {
+    "command": "ATLAS_TEST_API_URL=http://localhost:3196 node test/static-rendering.mjs",
+    "status": "passed",
+    "continents": 6,
+    "profiles": 7,
+    "modes": 14,
+    "reference_years": [
+      2025,
+      -3000
+    ],
+    "historical_location": "R\u00f8dovre",
+    "historical_year": 1444,
+    "canonical_cells_checked": 1562,
+    "mobile_submission_ms": 2,
+    "navigation_ownership_compilations": 0,
+    "navigation_ownership_uploads_changed": false,
+    "limitations": [
+      "emulated mobile viewport, not physical-device validation"
+    ]
+  },
+  "deployment_assets": {
+    "bytes": 267179237,
+    "limit_bytes": 268435456,
+    "max_asset_bytes": 14334666,
+    "excluded": [
+      "local .wrangler runtime artifacts"
+    ]
+  },
+  "sha256": {
+    "src/reference-context.js": "977ea774cdaf55894ad31adf4b7b2f5edaff717b60634f5d933b855476dbde7d",
+    "src/map-snapshot-format.js": "2f29f4ffc874c2ade56ed7b53a581aa97ca6753351f65f0dd62c4512d69c50ab",
+    "src/data-client.js": "36e46df195910f05059f2d867643b352e30b5e9a81f1f8c36c8e3940559338bb",
+    "hosted/map-snapshots.js": "ee1fcca211e2c5d1eef68d59e2c48a1d72c6147b1f51fc84201ed3a072a049df",
+    "hosted/research-catalog.js": "d7542505f1232823c68f53cdb7740af6e7137218486c7c8841bcff6a37fcd31a",
+    "hosted/worker.js": "ac4b3edf6d95421cf17a5e58cc4a5e46e1fe11436b87eb72e2543227632b973d",
+    "scripts/prepare-research-bundle.mjs": "b67803f2dc2581b925679272e51b8bca0d228f698d65e382c861add62bab7008",
+    "scripts/import-research-bundle.mjs": "9f5bc7441d1f6e069fbbbe719543e0717a8d69aa2c0e81666a400dde39ea3145"
+  },
+  "open_engineering": [
+    "authenticated Neon project verification and policy application",
+    "PostgreSQL schema/adapter/copy/backup/restore/cutover verification",
+    "dedicated hosted dated geographic membership/footprint revisions",
+    "future domain-specific views"
+  ],
+  "semantic_geographic_completion": false,
+  "publication": "data/validation/research-platform-publication.json",
+  "production_verification": "data/validation/research-service-production-verification.json",
+  "source_scope": "Frozen primary commit bfd3cb9760aeaddf4cee9244d83d11357e7e4641; subsequent PostgreSQL work is excluded."
+}

@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "lane": "engineering",
+  "job_id": "main-pr-policy",
+  "branch": "work",
+  "base_main_commit": "5b5f06f87d21f16cb14c6165e75854a29dc191ec",
+  "todo_id": "ENG-07",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/1",
+  "status": "complete",
+  "raised_on": "2026-10-02",
+  "recorded_on": "2026-10-02",
+  "completed_on": "2026-10-02",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "ENG-07"
+  ],
+  "dependencies": [],
+  "updated_at_utc": null,
+  "completed": [
+    "Main-based one-issue PR policy and both handovers",
+    "Single-issue scope/metadata checks",
+    "Manual-only provider maintenance workflow triggers"
+  ],
+  "checks": [
+    {
+      "command": "node --test test/handoff-scope.test.mjs test/neon-storage-migration.test.mjs test/neon-forward-migrations.test.mjs",
+      "passed": 27,
+      "failed": 0
+    }
+  ],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/validation/main-pr-policy.json"
+  ],
+  "blockers": [],
+  "next_action": "Merge this initial foundation PR after its final check; future issues use fresh branches from origin/main.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/2",
+  "bootstrap_integration": true,
+  "integration_status_authority": "GitHub PR #2"
+}

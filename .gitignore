@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.cache/
+data/*.sqlite*
+test-results/
+.wrangler/
+.sites-runtime/
+__pycache__/
+*.pyc
+
+# Local Neon/server credentials
+.env
+.env.*
+!.env.example

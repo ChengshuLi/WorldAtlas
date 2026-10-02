@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "scope": "Every prepared environmental tuple and current retained legacy snapshot; no evidence rewritten",
+  "fixed_classes": {
+    "topography": 12,
+    "vegetation": 16,
+    "climate": 32
+  },
+  "prepared_reference_index_sha256": "da75f8e3a2e29e39a3a502175f623f20628fba7703f217b6c448f4bf5221c418",
+  "reference_records_checked": 346167,
+  "attribute_counts": {
+    "topography": 49560,
+    "vegetation": 49277,
+    "climate": 247330
+  },
+  "explicit_unknown_counts": {
+    "topography": 0,
+    "vegetation": 16,
+    "climate": 0
+  },
+  "legacy_snapshot_values_checked": 27,
+  "all_existing_values_classified": true,
+  "source_bytes_unchanged": true,
+  "registry_sha256": "d589aa3aa91831f0d1d2b5a21e161270ba44e86ef90dea23110a761510074970",
+  "migration_sha256": "c566a87dc05a5ec5a1311019b60cfea54e8708b29ec2df6c8e80057432c4708b"
+}

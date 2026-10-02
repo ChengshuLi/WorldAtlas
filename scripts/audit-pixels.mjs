@@ -1,0 +1,10 @@
+import {footprintHash} from './check-prepared.mjs';
+import fs from 'node:fs';
+import {createGridIndex,GRID_ZOOM,GRID_WIDTH as GRID_SIZE} from '../src/pixel-grid.js';
+import {compileOwnership} from '../src/pixel-ownership.js';
+const parts=JSON.parse(fs.readFileSync('data/world-index.json')).parts,features=parts.flatMap(p=>JSON.parse(fs.readFileSync('data/'+p)).features),index=createGridIndex(features),grid=compileOwnership(index),counts=new Float64Array(index.length+1);
+for(const row of grid.rows)for(let k=0;k<row.length;k+=3)counts[row[k+2]]+=row[k+1]-row[k];
+const ringArea=r=>{let a=0;for(let j=0;j<r.length-2;j+=2)a+=r[j]*r[j+3]-r[j+2]*r[j+1];return Math.abs(a/2);};
+const locations=index.map(x=>{const area=x.polygons.reduce((n,p)=>n+ringArea(p[0])-p.slice(1).reduce((a,r)=>a+ringArea(r),0),0),cells=counts[x.index];return {id:x.feature.id,name:x.feature.properties.name,owner:x.feature.properties.reference_owner,cells,source_area_cells:Math.round(area*1000)/1000,relative_area_error:area?Math.round((cells/area-1)*1000)/1000:null,status:cells?'represented':'missing',reason:cells?null:'No canonical cell center falls inside the source territory; source-based aggregation or finer fixed resolution requires review'};});
+const report={version:1,footprints_sha256:footprintHash(features),grid_zoom:GRID_ZOOM,grid_size:GRID_SIZE,locations:locations.length,represented:locations.filter(x=>x.cells).length,missing:locations.filter(x=>!x.cells),high_distortion:locations.filter(x=>x.source_area_cells>=1&&Math.abs(x.relative_area_error)>.25),covered_cells:counts.reduce((a,b)=>a+b,0),water_or_uncovered_cells:GRID_SIZE**2-counts.reduce((a,b)=>a+b,0),background_policy:'Zero ID denotes water or source coverage gaps; it is not unclaimed land. Geographic coverage comparisons are listed in coverage-report.json.',records:locations};
+fs.writeFileSync('data/pixel-audit.json',JSON.stringify(report));console.log(JSON.stringify({locations:report.locations,represented:report.represented,missing:report.missing.length,high_distortion:report.high_distortion.length}));

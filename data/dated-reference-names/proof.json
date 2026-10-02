@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "hierarchy_sha256": "d15b845246f74f2934b32dfa8df431fb4fe92f7762ca24c33732b8d1c19999d6",
+  "footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+  "algorithm_sha256": "f404778590a8e4db9a40e766791894be7f85b67c520fb5b81b5814a9994d2b46",
+  "records": 3588,
+  "unmatched": 667,
+  "parts": [
+    {
+      "path": "names.json.gz",
+      "bytes": 188794,
+      "sha256": "c729a964efb5b3ac9bca67bd1a314a83d33d7cd283d4733f52d2bd74216f91ed"
+    },
+    {
+      "path": "crosswalk.json.gz",
+      "bytes": 157944,
+      "sha256": "42de95ea95603a356ef70e2c97d4c8e6bbf2af481776b1e85942d2fca9f77336"
+    },
+    {
+      "path": "unmatched.json.gz",
+      "bytes": 8816,
+      "sha256": "839f4ad576e918b74f23c28422a50baf04e897f747cb0acd664833418958266f"
+    }
+  ],
+  "validation": [
+    "Current stable entity IDs and exact migrated hierarchy hash",
+    "Unique entity-language-year name rows",
+    "Half-open supported annual snapshots only",
+    "Actual source correspondence retained in crosswalk",
+    "Open source attempts retained without names"
+  ]
+}

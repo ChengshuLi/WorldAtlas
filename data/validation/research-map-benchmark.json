@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "command": "node --test test/map-snapshots.test.mjs",
+  "tests": {
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0
+  },
+  "measurement": {
+    "environment": "local Node node:sqlite in-memory database with deployed SQL migrations; not hosted network latency",
+    "fixture": "1000-locations-9000-attributes",
+    "queries": 7,
+    "page_bytes": 2393036,
+    "elapsed_ms": 140.96,
+    "attribute_index": "attributes_location_dates",
+    "name_index": "names_entity_dates",
+    "total_test_runtime_ms": 5652.75152
+  },
+  "fixture": {
+    "active_locations": 1000,
+    "attributes_per_location": 9,
+    "returned_attribute_claims": 9000,
+    "returned_preferred_names": 1000,
+    "source_dictionary_rows": 1
+  },
+  "query_plan_proofs": [
+    "entities_kind_id (kind=?,active=?,id>?)",
+    "attributes_location_dates (location_id=?,attribute=?,valid_from<?)",
+    "names_entity_dates (entity_id=?,valid_from<?)"
+  ],
+  "operational_bounds": {
+    "entity_page_max": 1000,
+    "aliases_per_entity_max": 5,
+    "statement_rows_max": 50000,
+    "response_bytes_max": 8388608,
+    "claim_metadata_bytes_before_summary": 1024,
+    "source_metadata_bytes_before_summary": 2048,
+    "over_budget": "HTTP 413 with retryable=true and suggested_limit; 1000-entity large-alias fixture rejected, 500-entity retry passed"
+  },
+  "invariants_checked": [
+    "one exact shared-priority winner per location/attribute",
+    "explicit unknown and disputed evidence never replaced by weaker values",
+    "preferred names at all six tiers and settlements",
+    "UTF-16 claim ID tie-breaking matches shared resolver",
+    "all scoped withdrawals prevent prepared fallback resurrection",
+    "mid-page changes reject atomically with retryable revision conflict",
+    "metadata summaries retain habitation and population-zero proof semantics",
+    "original evidence URLs accompany claim or source metadata summaries",
+    "inactive archived identities omitted from fixed-geography map pages but retained in entity profiles and general name queries",
+    "browser format rejects malformed, duplicated and out-of-interval pages"
+  ],
+  "limits": [
+    "This fixture does not establish capacity for billions of records or sustained hosted latency.",
+    "Dated geographic membership and footprint import is a separate contract.",
+    "Full original evidence remains in immutable claims; compact pages are a map transport."
+  ],
+  "sha256": {
+    "hosted/map-snapshots.js": "ee1fcca211e2c5d1eef68d59e2c48a1d72c6147b1f51fc84201ed3a072a049df",
+    "src/map-snapshot-format.js": "2f29f4ffc874c2ade56ed7b53a581aa97ca6753351f65f0dd62c4512d69c50ab",
+    "test/map-snapshots.test.mjs": "914e98c9e7034c9a730e7c61168c2855e09447e1b8c5783383c9ffb873531060"
+  }
+}

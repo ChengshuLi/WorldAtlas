@@ -1,0 +1,43 @@
+{
+  "status": "verified",
+  "read_only": true,
+  "checked_at_utc": "2026-10-02T04:26:06.216Z",
+  "project": {
+    "id": "weathered-lab-37571695",
+    "configured_postgres_major": 18
+  },
+  "branch": {
+    "id": "br-summer-butterfly-ar8qikk5",
+    "name": "production",
+    "is_default": true
+  },
+  "databases": [
+    {
+      "name": "neondb",
+      "owner_name": "neondb_owner"
+    }
+  ],
+  "roles": [
+    {
+      "name": "neondb_owner"
+    }
+  ],
+  "api_requests": 4,
+  "checks": {
+    "expected_project": true,
+    "production_branch": true,
+    "postgres_major_observed": true,
+    "database_owners_present": true
+  },
+  "limitations": [
+    "Management API metadata only; no SQL connection or schema verification.",
+    "No migration, data import, Neon Auth configuration or runtime binding change.",
+    "A repository Actions secret does not configure the private Site runtime."
+  ],
+  "github_actions": {
+    "run_id": 36964473361,
+    "source_commit": "d98f6f1f7c0e9ad9158ae62c69ea8978263b6055",
+    "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/36964473361",
+    "conclusion": "success"
+  }
+}

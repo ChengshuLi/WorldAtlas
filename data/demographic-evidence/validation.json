@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scope": "In-memory real hosted schema/importer and shared resolver; no hosted/production mutations",
+  "checks": [
+    "Pinned footprint, hierarchy, record, source and category hashes",
+    "All396current stable IDs and complete parent chains",
+    "250-row/1MiB importer constraints and actual hosted foreign-key/category/source contracts",
+    "Exactly2021interval; absent3000BC,1000,1800,2020,2022,2026",
+    "Shared/server vs hosted resolver scalar religion parity at2020,2021,2022",
+    "One categorical scalar or explicit unknown with stable category IDs",
+    "Exhaustive49614-location coverage ledger, no culture fabrication"
+  ],
+  "records": 396,
+  "known": 193,
+  "unknown": 203,
+  "source_ids": [
+    "ons:2021:TS030",
+    "abs:2021:G14"
+  ],
+  "input_record_sha256": "6b8fcdafc3b57533898afd6b8ac1a22abd48552f3f7e15247578e1c1f868731a"
+}

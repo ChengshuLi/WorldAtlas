@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "status": "staged-not-published",
+  "records": 396,
+  "resolved_values": 193,
+  "explicit_unknowns": 203,
+  "counts_by_source": {
+    "ons:2021:TS030": 64,
+    "abs:2021:G14": 332
+  },
+  "counts_by_value": {
+    "Christianity": 153,
+    "Unknown": 203,
+    "No religion": 40
+  },
+  "supported_years": [
+    2021
+  ],
+  "culture_records": 0,
+  "rejected_location_assignments": 730,
+  "location_index_sha256": "030ced5223b9be0e42f686d9cb4697887296c408be44e724ba6810123bec6c97",
+  "record_sha256": "6b8fcdafc3b57533898afd6b8ac1a22abd48552f3f7e15247578e1c1f868731a",
+  "completion": "Observation-year-only census affiliations; globally incomplete. No ancient or 2026 backfill, no citizenship/language culture inference, no country faith priors, no LGA values copied to physical fragments.",
+  "record_parts": [
+    {
+      "path": "religion-records.json",
+      "sha256": "6b8fcdafc3b57533898afd6b8ac1a22abd48552f3f7e15247578e1c1f868731a",
+      "records": 396
+    }
+  ],
+  "sources_path": "sources.json",
+  "sources_sha256": "1269ffee37a48cef61a5a3c7b49e90b1d504cc4713a2254e9d693ac2ed03239d",
+  "categories_path": "categories.json",
+  "categories_sha256": "a39185d7f12b11dd824caa6d5b3051a849c7233d52a0ff3c1aee6cd87f1eb0e9",
+  "receipts_sha256": "464614f7370151045ab9288301724ff03d1348559aef6a5726695667dd5ad1b2",
+  "footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+  "hierarchy_sha256": "d15b845246f74f2934b32dfa8df431fb4fe92f7762ca24c33732b8d1c19999d6",
+  "location_index_hash_method": "SHA-256 of raw data/world-index.json bytes; separate footprints_sha256 uses canonical footprintHash(features) from scripts/check-prepared.mjs.",
+  "preparation_algorithm_sha256": "408a44694ffececfd9996a2d344c9507e7907c61fce9125a296bfbc038687994"
+}

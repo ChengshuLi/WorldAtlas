@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "mode": "production",
+  "status": "verified",
+  "project_id": "weathered-lab-37571695",
+  "production_branch_id": "br-summer-butterfly-ar8qikk5",
+  "credentials_logged": false,
+  "cleanup_status": "not-required",
+  "started_at_utc": "2026-10-02T06:43:01.230Z",
+  "github": {
+    "repository": "ChengshuLi/WorldAtlas",
+    "workflow_path": ".github/workflows/neon-forward-migrations.yml",
+    "head_sha": "d0cc0157e945f7d1d4102d268f97c802fc9adea6",
+    "run_id": "36974831053",
+    "run_attempt": "1"
+  },
+  "baseline": {
+    "run_id": "36973747147",
+    "run_attempt": "1",
+    "receipt_sha256": "5e49bc827227c78f3bbf49503cc2a3fae0e17b10c2409bf535bd77f67225e3d6",
+    "status": "authenticated-success"
+  },
+  "site_maintenance": {
+    "verification": "reviewed-root-attestation",
+    "runner_observed_site": false,
+    "receipt_sha256": "dee2a521d943ad79a19cbcb7d736b9c2f3f689ceee14aa5a16e2be61ea671c2c",
+    "verified_at_utc": "2026-10-02T06:40:58.333Z",
+    "site_origin": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+    "backend": "postgres",
+    "source_revision": 1321,
+    "source_snapshot_fingerprint": "c315f806f9b7a60cbb7196ce5f8be38cd16c385b00f883f5275ec8f5bc9202ef",
+    "read_only": true,
+    "deployment_id": "appgdep_6abf516837648191aa6fe214ff06b563",
+    "environment_revision": 2
+  },
+  "target_branch_id": "br-summer-butterfly-ar8qikk5",
+  "forward": {
+    "version": 1,
+    "status": "verified",
+    "read_only": false,
+    "core_schema_sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+    "source_manifest_sha256": "b59946f515e385d8c7c8de84a529e851fc802262f07e39cb080f5f493f3572e2",
+    "source_snapshot_fingerprint": "c315f806f9b7a60cbb7196ce5f8be38cd16c385b00f883f5275ec8f5bc9202ef",
+    "source_revision": 1321,
+    "migrations": [
+      {
+        "id": "0001_temporal_geography",
+        "sha256": "a4302a6f00b305205b70ed8981f929725c90b48172413ff47738a4a27186f6cd",
+        "status": "applied"
+      },
+      {
+        "id": "0002_footprint_versions",
+        "sha256": "24e22602715355e48e344649461179d69ed92cf3c0e54812dee4f315fed42f37",
+        "status": "applied"
+      }
+    ],
+    "original_collections": {
+      "sources": {
+        "count": 381,
+        "ordered_rows_sha256": "301a833f641282edd3ac7cc7608a62aa29c571a35b66161259b723d254ac22ca"
+      },
+      "entity_types": {
+        "count": 16,
+        "ordered_rows_sha256": "d853335669547515b039192d32a0b64545c1b2949b73bccdcfb8a6c5fb6bf1cc"
+      },
+      "entities": {
+        "count": 86797,
+        "ordered_rows_sha256": "f9e0380665790026c6fa97cbd63d63f35768ca0a68a7641b2ea866b27e566e71"
+      },
+      "categories": {
+        "count": 1457,
+        "ordered_rows_sha256": "eee86c200c260915a38d9193890b66e85fd1ef6a52b2227e7afc42938ffca798"
+      },
+      "records": {
+        "count": 396,
+        "ordered_rows_sha256": "aebf930586e329ce0eecfd0eac5dd6f6d5334fec7c7d9455ac3396b1a6f2c4f8"
+      },
+      "names": {
+        "count": 3588,
+        "ordered_rows_sha256": "8f9523ee61e974d0afd93f81707304ce477b343ec4e69d88d0ba66ce97c28b0b"
+      },
+      "relationships": {
+        "count": 0,
+        "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "media": {
+        "count": 28,
+        "ordered_rows_sha256": "f6002c3fa6f6964cb79b791effadbfdc95bbe42c85166c27c427477103daa99d"
+      },
+      "media_links": {
+        "count": 6,
+        "ordered_rows_sha256": "84c2d569224cb19cccbf2cf226d431ef2f4844bac95e6cf271b1d617b5935de1"
+      },
+      "retirements": {
+        "count": 0,
+        "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "ingestions": {
+        "count": 1321,
+        "ordered_rows_sha256": "06e127eaaad2b171e867ab3179811816e6df374d3abf40c159c4d094fb53e128"
+      },
+      "geographic_releases": {
+        "count": 2,
+        "ordered_rows_sha256": "40b680b4febf78d4e9e6951410b4dea909bb4793b96fced2f6c23bff05822f02"
+      },
+      "geographic_memberships": {
+        "count": 169491,
+        "ordered_rows_sha256": "7f54cfe8aa56791fce13e6054bdb2c7c31b9ecc608e7a05a188d378b1d6dfd3a"
+      },
+      "geographic_changes": {
+        "count": 573,
+        "ordered_rows_sha256": "c9fcea8ba1ab1919c90050e23b258c05c08ecc1ec91e1d6d75de9e1a5905d975"
+      }
+    },
+    "original_json_bytes_preserved": true,
+    "original_sequence_preserved": true,
+    "base_guards_sha256": "9e87f3db6d965273e2ca6e47e8ffa29f75db183168855d714c92c4179ab39a96",
+    "core_functions_sha256": "dd4b20c23857a14f6159212cc6754675b5fca1444053108bd7cd216a9b316fa9",
+    "runtime": {
+      "version": 2,
+      "status": "verified",
+      "role": "worldatlas_app",
+      "tables": 23,
+      "immutable_facts": true,
+      "footprint_catalog": "SELECT only; owner publishes",
+      "explicit_ingestion_rowid": false,
+      "registry_access": false,
+      "sequence": "USAGE only"
+    },
+    "storage_export_version": 2,
+    "atlas_fact_tables": 23,
+    "registry_table": "worldatlas_schema_migrations",
+    "registry_owner_only": true,
+    "commit_status": "committed"
+  },
+  "management_requests": 2,
+  "completed_at_utc": "2026-10-02T06:49:57.917Z",
+  "limitations": [
+    "Forward DDL and permissions only; no Site publication, credential rotation, media transfer or research import.",
+    "Runtime effective permissions checked by owner; this workflow does not obtain or test the existing private application password.",
+    "Private Site maintenance is a fresh hash-pinned root attestation; this runner does not independently access the private Site.",
+    "Keep Site read-only until root verifies compatible publication and storage v2."
+  ]
+}

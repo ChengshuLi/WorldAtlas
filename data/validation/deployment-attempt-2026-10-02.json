@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "project_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db",
+  "deployment_id": "appgdep_6abf117769508191b8a9a1f926fb61a7",
+  "site_version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_0ca8db6f03fc8191a7e6a9807b287230",
+  "site_source_commit": "def73f598ec793897b46230937fdffa9787d7a05",
+  "status": "failed",
+  "failure_message": "incomplete input: SQLITE_ERROR",
+  "failed_at_utc": "2026-10-02T02:05:50.184598+00:00",
+  "post_failure_tables": [
+    "atlas_attribute_records",
+    "atlas_categories",
+    "atlas_entities",
+    "atlas_entity_types",
+    "atlas_evidence_retirements",
+    "atlas_ingestions",
+    "atlas_media",
+    "atlas_media_links",
+    "atlas_names",
+    "atlas_relationships",
+    "atlas_sources"
+  ],
+  "observation": "Geographic release migration 0002 not applied; original production remains available. Frozen migration SQL unchanged; diagnosis in progress."
+}

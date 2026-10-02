@@ -1,0 +1,493 @@
+{
+  "version": 1,
+  "scope": "Inspected source families and retrieval gaps; this inventory does not claim every nation or historical year has demographic evidence.",
+  "sources": [
+    {
+      "id": "ons:2021:TS030",
+      "continents": [
+        "Europe"
+      ],
+      "attributes": [
+        "religion"
+      ],
+      "inspected_observation_years": [
+        2021
+      ],
+      "urls": [
+        "https://www.nomisweb.co.uk/output/census/2021/census2021-ts030.zip",
+        "https://www.nomisweb.co.uk/home/copyright.asp"
+      ],
+      "inspected_facts": [
+        "Downloaded actual ZIP, upper-tier174/lower-tier331/regional10 CSV rows and metadata; counts cover all usual residents, voluntary religious affiliation, not beliefs/practice.",
+        "2021-03-21 observation; 2022-11-29 publication. Targeted swapping/cell-key perturbation produces small non-additive totals."
+      ],
+      "license_status": "verified",
+      "license_note": "Nomis explicitly licenses ONS Crown-copyright material under Open Government Licence.",
+      "location_import_status": "staged",
+      "remaining_reasons": [
+        "Only whole, symmetric >=99% current/pinned county footprint correspondence staged. Scotland and Northern Ireland use different census sources.",
+        "Census affiliation does not provide ancient/2026 observations. Nonresponse can leave primary affiliation unknown."
+      ],
+      "inspected_content_sha256": {
+        "nomis.zip": "7b587bd7069030d96c1e7ce943cb5924c197e9e0420338967f6dda8cc29bb41a",
+        "nomis-copyright.raw": "2ac1486ab204b813202dae46fb063d3173978ce601169c3b2b9046a3cb1b70d8"
+      }
+    },
+    {
+      "id": "abs:2021:G14",
+      "continents": [
+        "Oceania",
+        "Asia"
+      ],
+      "attributes": [
+        "religion"
+      ],
+      "inspected_observation_years": [
+        2021
+      ],
+      "urls": [
+        "https://www.abs.gov.au/census/find-census-data/datapacks/download/2021_GCP_LGA_for_AUS_short-header.zip",
+        "https://www.abs.gov.au/website-privacy-copyright-and-disclaimer"
+      ],
+      "inspected_facts": [
+        "Downloaded actual565-LGA G14 table and General Community Profile metadata; total person columns distinguish broad Christianity, denominations, other religions and No religion/secular/other spiritual responses.",
+        "Compared actual official2021 LGA geometry, simplified2% keep-shapes, to current location territories. Christmas/Cocos reference locations geographically belong to Asia; dataset jurisdiction is Australia, not a continent classification rule."
+      ],
+      "license_status": "verified",
+      "license_note": "ABS copyright policy explicitly grants CC BY4.0 to ABS material except identified exclusions; aggregate census tables are not confidential microdata.",
+      "location_import_status": "staged",
+      "remaining_reasons": [
+        "Only unique symmetric >=99% correspondence staged.435 IBRA partial-LGA territories explicitly rejected.",
+        "Current source boundaries are2022 reference vs2021 census; no area-weighted allocation of faith counts."
+      ],
+      "inspected_content_sha256": {
+        "aus-gcp.raw": "7d7f0132c73c42b23ebb28df85424f6483a5062f44f0233d2b60a499fbe71dd2",
+        "abs-license.raw": "6ed0a8f1e963c2f9422a1ce4bbdb87209fd70da8ea496d9895f27de96c9fcbb9",
+        "aus-lga2021.raw": "3b42e527d3fb946fec937ed6f76b8cad9882047b46188295988c3bcaab90b99a",
+        "aus-lga2021.geojson": "8e86ef0a92c4eb5eb4ec40bf5ac9711beb8ed4feebd497c4aa6b573a58640c17"
+      }
+    },
+    {
+      "id": "statcan:2021:98100353-354",
+      "continents": [
+        "North America"
+      ],
+      "attributes": [
+        "religion"
+      ],
+      "inspected_observation_years": [
+        2021
+      ],
+      "urls": [
+        "https://www150.statcan.gc.ca/n1/tbl/csv/98100353-eng.zip",
+        "https://www150.statcan.gc.ca/n1/tbl/csv/98100354-eng.zip",
+        "https://www.statcan.gc.ca/en/terms-conditions/open-licence"
+      ],
+      "inspected_facts": [
+        "Downloaded actual religion tables for Canada/provinces/CMA/CA and census divisions. Private-household population in occupied dwellings,25% sample, differs from all-location inhabitants.",
+        "Current Canadian local municipalities/physical adaptations do not equal census divisions or metropolitan areas. Matching a city name to a CMA is insufficient."
+      ],
+      "license_status": "verified",
+      "license_note": "Statistics Canada Open Licence inspected.",
+      "location_import_status": "open",
+      "remaining_reasons": [
+        "Need CSD/exact complete current-location correspondence and universe bounds; no census-division totals copied to constituent locations."
+      ],
+      "inspected_content_sha256": {
+        "canada-data.raw": "ab5fde1b5442aa61cd01ca3ea9fc8f2fd56706477541b51de6215bdf288335c8",
+        "canada-cd.raw": "512f0943441beaf9875a79168fe9905346f64146c1cc9a3b938eb379e76633ba",
+        "canada-license.raw": "2e9cfa14534c14c27fcfc75c20a3dfcf447ad5d6e379e37ef765607d69587c88"
+      }
+    },
+    {
+      "id": "gss:2021:religion-ethnic",
+      "continents": [
+        "Africa"
+      ],
+      "attributes": [
+        "religion",
+        "culture"
+      ],
+      "inspected_observation_years": [
+        2021
+      ],
+      "urls": [
+        "https://statsbank.statsghana.gov.gh/api/v1/en/PHC%202021%20StatsBank/Population/religion_table.px",
+        "https://statsbank.statsghana.gov.gh/api/v1/en/PHC%202021%20StatsBank/Population/ethnic_table.px",
+        "https://statsbank.statsghana.gov.gh/Resources/userguide/statsbank_userguide_1.3.pdf"
+      ],
+      "inspected_facts": [
+        "Inspected actual JSON metadata and queried JSON-stat2 counts:295 geographic areas (national/regional/district) ×10 religion or ethnicity categories, all ages/both sexes/all locality types/total education.",
+        "Religion includes Christian aggregate plus overlapping sub-denominations; these cannot be summed together. Ethnic table total30,484,536 differs from religion total30,753,327; exact eligibility/population universe needs documentation.",
+        "Current260 GHA2019 district territories require full2021 district crosswalk and actual boundary correspondence."
+      ],
+      "license_status": "unverified",
+      "license_note": "Official platform is publicly accessible, but retrieved guide/pages do not explicitly grant redistribution; public download alone is not a reuse licence.",
+      "location_import_status": "open",
+      "remaining_reasons": [
+        "Verify explicit licence; preserve API exact-query receipts.",
+        "Verify ethnicity self-identification/eligible population and missing-person bound before choosing primary culture.",
+        "Verify complete current-territory census district correspondence. No staged values yet."
+      ],
+      "inspected_content_sha256": {
+        "ghana-religion-metadata.raw": "95ba775b89950ef453712412df1fe24ad14be7b17028eb425328d8405c2b5e09",
+        "ghana-ethnic-metadata.raw": "f1c777d030904052b3474a7c1bec47c93f6af20ede427bb78b50f4deceb2ec30",
+        "ghana-religion-counts.raw": "2a25645b84c30787e3fddff09328ed140b958d4e664345edab0bbfe9c3f64215",
+        "ghana-ethnic-counts.raw": "bf21f8f2dbaa683ee9772e6d3c54f09e010a7cad8ef9033c1aa6c75f6fb35a0b",
+        "ghana-guide.raw": "27724d551ded9f89010bca60dbe91077c275732143c31aba82dc4c9d80d50deb"
+      }
+    },
+    {
+      "id": "ibge:2022:9537",
+      "continents": [
+        "South America"
+      ],
+      "attributes": [
+        "religion"
+      ],
+      "inspected_observation_years": [
+        2022
+      ],
+      "urls": [
+        "https://servicodados.ibge.gov.br/api/v3/agregados/9537/metadados"
+      ],
+      "inspected_facts": [
+        "Actual official table metadata provides municipality-level religion but ONLY persons10years or older. Broad Roman Catholic/Evangelical/Spiritist/Umbanda-Candomble/Indigenous traditions/other/no religion/unknown categories."
+      ],
+      "license_status": "unverified",
+      "license_note": "Explicit redistribution policy retrieval was blocked; no table values redistributed.",
+      "location_import_status": "open",
+      "remaining_reasons": [
+        "Need all-inhabitants denominator and unknown child share; do not inherit adult faith for children.",
+        "Current municipalities and physical/immediate-region rural aggregates need exact census-code membership; no country-majority assignment."
+      ],
+      "inspected_content_sha256": {
+        "brazil-religion.raw": "88fb524c5eb3cbea96f492eed6bb9a426dfdd07c11356e33ec274cb280caa187",
+        "ibge-list.raw": "eb56b7a1c37a0c8946335fd2fd9bf3cbb51e5c21c73df24e5657bea4bca1612d"
+      }
+    },
+    {
+      "id": "epr:2021:GeoEPR",
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America",
+        "South America",
+        "Oceania"
+      ],
+      "attributes": [
+        "culture-evidence"
+      ],
+      "inspected_observation_years": [
+        1946,
+        1947,
+        1948,
+        1949,
+        1950,
+        1951,
+        1952,
+        1953,
+        1954,
+        1955,
+        1956,
+        1957,
+        1958,
+        1959,
+        1960,
+        1961,
+        1962,
+        1963,
+        1964,
+        1965,
+        1966,
+        1967,
+        1968,
+        1969,
+        1970,
+        1971,
+        1972,
+        1973,
+        1974,
+        1975,
+        1976,
+        1977,
+        1978,
+        1979,
+        1980,
+        1981,
+        1982,
+        1983,
+        1984,
+        1985,
+        1986,
+        1987,
+        1988,
+        1989,
+        1990,
+        1991,
+        1992,
+        1993,
+        1994,
+        1995,
+        1996,
+        1997,
+        1998,
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "urls": [
+        "https://icr.ethz.ch/data/epr/geoepr/",
+        "https://icr.ethz.ch/data/epr/geoepr/EPR_2021_Codebook_GeoEPR.pdf",
+        "https://icr.ethz.ch/data/epr/geoepr/GeoEPR-2021.geojson"
+      ],
+      "inspected_facts": [
+        "Actual1685 polygon records inspected, with from/to/group/groupid/settlement-type, politically relevant ethnic-group geography.",
+        "Codebook explicitly says settlement polygons may overlap; statewide groups need not be a population majority everywhere. Predominant share of a GROUP residing in a region is different from predominant share of RESIDENTS belonging to a group."
+      ],
+      "license_status": "unverified",
+      "license_note": "Citation instruction inspected; no explicit redistribution licence established from downloaded pages/codebook.",
+      "location_import_status": "open",
+      "remaining_reasons": [
+        "Unsuitable for scalar primary culture from spatial dominance or area overlap alone.",
+        "May later support nonexclusive evidence relationships after licence review; cannot fill ancient or unsupported local culture."
+      ],
+      "inspected_content_sha256": {
+        "geoepr-codebook.raw": "203b89e5aa2914860fc3a3b0aa7e7870b5d6152f80971719d2aa437a257832bd",
+        "geoepr-geojson.raw": "346e9329a136b2a1d3fbe4334d3dc8ae7775c84bf2ec6d91cdcc81935d763964"
+      }
+    },
+    {
+      "id": "usreligion:1952-2020",
+      "continents": [
+        "North America"
+      ],
+      "attributes": [
+        "religion-evidence"
+      ],
+      "inspected_observation_years": [
+        1952,
+        2000,
+        2010,
+        2020
+      ],
+      "urls": [
+        "https://www.usreligioncensus.org/data_collected",
+        "https://www.usreligioncensus.org/play-with-data"
+      ],
+      "inspected_facts": [
+        "Inspected publisher methodology: county-level congregations/members/adherents/attendees; participating religious groups may use their own definitions.",
+        "Data interaction/download page says studies extend1952to present. It does not prove all residents or uniform definitions."
+      ],
+      "license_status": "unverified",
+      "license_note": "No explicit redistribution licence confirmed.",
+      "location_import_status": "open",
+      "remaining_reasons": [
+        "Religious-group participation/definitions and double-counting prevent treating nonadherents as No religion.",
+        "Require actual downloadable licensed records and exact county footprint matches before scalar use."
+      ],
+      "inspected_content_sha256": {
+        "usreligion-collected.raw": "0038918a427ba7abfd54e761ed0018859040c2d963c42cf0f9a4474fecce2f8d",
+        "usreligion-play.raw": "97a1ceaf22f75cb44054d4cc30f7ed8ff37cbff0e347779485bd4a45ddafc45b"
+      }
+    },
+    {
+      "id": "pew:2010-2020",
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America",
+        "South America",
+        "Oceania"
+      ],
+      "attributes": [
+        "religion-evidence"
+      ],
+      "inspected_observation_years": [
+        2010,
+        2020
+      ],
+      "urls": [
+        "https://www.pewresearch.org/religion/2025/06/09/how-the-global-religious-landscape-changed-from-2010-to-2020/"
+      ],
+      "inspected_facts": [
+        "Actual published global2010/2020 religious landscape report inspected; country-level modeled estimates cannot establish every local location primary faith."
+      ],
+      "license_status": "unverified",
+      "license_note": "Dataset reuse permission and downloadable tables not yet verified.",
+      "location_import_status": "open",
+      "remaining_reasons": [
+        "Use national estimates as contextual evidence only; no local country priors."
+      ],
+      "inspected_content_sha256": {
+        "pewglobal.raw": "a2e6bad36f5e21d85e95427440723c6b8aae83756925715c8142498aae706425"
+      }
+    },
+    {
+      "id": "arabbarometer:wave-vii",
+      "continents": [
+        "Africa",
+        "Asia"
+      ],
+      "attributes": [
+        "religion-evidence"
+      ],
+      "inspected_observation_years": [
+        2021,
+        2022
+      ],
+      "urls": [
+        "https://www.arabbarometer.org/survey-data/data-downloads/",
+        "https://www.arabbarometer.org/surveys/arab-barometer-wave-vii/"
+      ],
+      "inspected_facts": [
+        "Actual WaveVII page inspected; survey observations rather than exhaustive territorial census counts."
+      ],
+      "license_status": "unverified",
+      "license_note": "Data-access terms and subnational representativeness not yet verified.",
+      "location_import_status": "open",
+      "remaining_reasons": [
+        "Survey sampling/universe/location precision must support a territory before scalar assignment."
+      ],
+      "inspected_content_sha256": {
+        "arabbarometer.raw": "647ff6046d674088040d9df35bffa11bbdc9b7698e26e437c1852a078c2e3a59"
+      }
+    },
+    {
+      "id": "nomis:2011:KS209EW",
+      "continents": [
+        "Europe"
+      ],
+      "attributes": [
+        "religion"
+      ],
+      "inspected_observation_years": [
+        2011
+      ],
+      "urls": [
+        "https://www.nomisweb.co.uk/census/2011/ks209ew"
+      ],
+      "inspected_facts": [
+        "Actual official religion dataset page inspected; earlier observation potentially useful."
+      ],
+      "license_status": "verified",
+      "license_note": "ONS reuse policy applies, but exact downloadable table not yet retrieved.",
+      "location_import_status": "open",
+      "remaining_reasons": [
+        "Need real2011 rows, exact census code/footprint correspondence and uncertainty; no2011 values imported."
+      ],
+      "inspected_content_sha256": {
+        "nomis2011.raw": "05e8978cfd29088856c979e114f1f63a128ebcfd59f06edc3467666a47dff0f6"
+      }
+    },
+    {
+      "id": "bps:2010:portal",
+      "continents": [
+        "Asia"
+      ],
+      "attributes": [
+        "religion",
+        "culture"
+      ],
+      "inspected_observation_years": [],
+      "urls": [
+        "https://sensus.bps.go.id/topik/tabular/sp2010/6",
+        "https://sensus.bps.go.id/topik/dataset/sp2010/8"
+      ],
+      "inspected_facts": [
+        "Actual census portal and dataset pages downloaded. Requested tabular6 actually describes enumeration-document/population distribution, NOT religion; it must not be cited as faith counts."
+      ],
+      "license_status": "unverified",
+      "license_note": "No explicit reuse licence verified.",
+      "location_import_status": "open",
+      "remaining_reasons": [
+        "Find correct ethnicity/religion table, eligibility definitions and local counts; no values imported."
+      ],
+      "inspected_content_sha256": {
+        "indonesia-census.raw": "58bc111e9057b6f65a7acd0788453715c5edd2d617d851e2b15fdf040b3d0246",
+        "indonesia-topic.raw": "e0487946887a7f6261c8be8877837cdb474061785ad5b422dc72337e419b064a"
+      }
+    }
+  ],
+  "failed_or_unsuitable_retrievals": [
+    {
+      "id": "knbs:2019",
+      "continent": "Africa",
+      "url": "https://www.knbs.or.ke/2019-kenya-population-and-housing-census-results/",
+      "result": "HTTP503; no inspected census table"
+    },
+    {
+      "id": "census-india:2011",
+      "continent": "Asia",
+      "url": "https://censusindia.gov.in/nada/index.php/catalog/11361",
+      "result": "HTTP503; no inspected counts or licence"
+    },
+    {
+      "id": "psa:2020",
+      "continent": "Asia",
+      "url": "https://psa.gov.ph/content/religious-affiliation-philippines-2020-census-population-and-housing",
+      "result": "HTTP403; no inspected counts or licence"
+    },
+    {
+      "id": "seshat",
+      "continents": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "North America",
+        "South America",
+        "Oceania"
+      ],
+      "url": "https://seshat-db.com/",
+      "result": "HTTP403; no inspected ancient religious/cultural evidence"
+    },
+    {
+      "id": "statsnz:2023",
+      "continent": "Oceania",
+      "url": "https://www.stats.govt.nz/information-releases/2023-census-national-and-regional-data/",
+      "result": "HTTP404; actual table URL still needs discovery"
+    },
+    {
+      "id": "statsmauritius:2022",
+      "continent": "Africa",
+      "url": "https://statsmauritius.govmu.org/Pages/Censuses%20and%20Surveys/Census/2022_Population_census.aspx",
+      "result": "HTTP404; actual census tables still need discovery"
+    },
+    {
+      "id": "statssa:2022",
+      "continent": "Africa",
+      "url": "https://www.statssa.gov.za/publications/P03014/P030142022.pdf",
+      "result": "HTTP200 but only212bytes/blank extracted body; not a verified census PDF"
+    }
+  ],
+  "ancient_coverage": {
+    "supported_records": 0,
+    "unsupported_interval": [
+      -3000,
+      1946
+    ],
+    "note": "No ancient primary-culture/religion records imported; source family1946 start is nonexclusive evidence, not a supported scalar."
+  }
+}

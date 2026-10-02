@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "scope": "Full repaired-world canonical zoom10, 49589 source territories; actual Chromium SwiftShader WebGL2 rendering/load tests, plus explicitly simulated4096 texture limit.",
+  "physical_mobile_hardware_validated": false,
+  "physical_mobile_memory_status": "open: permanent232MB CPU ownership + comparable GPU copy; observedJSheap521MB includes transient decoding. Mobileviewport emulation is not a physical device.",
+  "results": [
+    {
+      "zoom": 10,
+      "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+      "hierarchy_sha256": "bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58",
+      "locations": 49589,
+      "runs": 28796247,
+      "raw_bytes": 232467128,
+      "gzip_bytes": 47562760,
+      "gpu_texture_width": 2048,
+      "gpu_runs_texture_height": 7031,
+      "gpu_rows_texture_height": 128,
+      "gpu_padded_ownership_bytes": 232488960,
+      "compile_ms": 25737,
+      "total_prepare_ms": 39373,
+      "peak_rss_bytes": 3196305408,
+      "decoded_words_exactly_verified": 58116782,
+      "actual_loaded_bytes": 232467128,
+      "load_and_decompression_ms": 1227,
+      "gpu_upload_ms": 187,
+      "native_max_texture_size": 8192,
+      "simulated_max_texture_size": null,
+      "max_texture_size": 8192,
+      "ownership_texture_upload_shapes": [
+        {
+          "width": 2048,
+          "height": 128,
+          "bytes": 2097152
+        },
+        {
+          "width": 2048,
+          "height": 7031,
+          "bytes": 230391808
+        }
+      ],
+      "sample_queries": 665,
+      "sample_mismatch": 0,
+      "framebuffer_matches": true,
+      "webgl_error": 0,
+      "navigation_ownership_uploads": 0,
+      "navigation": [
+        {
+          "label": "desktop",
+          "width": 1280,
+          "height": 720,
+          "submission_ms": [
+            0.2,
+            0.1,
+            0,
+            0.1,
+            0.1
+          ],
+          "completed_frame_with_readback_ms": [
+            382.4,
+            210.1,
+            185,
+            203.4,
+            225.5
+          ],
+          "cpu_fallback_sampling_ms": [
+            6.3,
+            4.9,
+            4.8,
+            4.8,
+            4.8
+          ]
+        },
+        {
+          "label": "mobile viewport",
+          "width": 390,
+          "height": 844,
+          "submission_ms": [
+            0,
+            0,
+            0.1,
+            0,
+            0
+          ],
+          "completed_frame_with_readback_ms": [
+            36.2,
+            32.4,
+            32.6,
+            33.6,
+            33.5
+          ],
+          "cpu_fallback_sampling_ms": [
+            1.8,
+            2,
+            1.4,
+            1.4,
+            1.2
+          ]
+        }
+      ],
+      "js_heap_bytes": 521000000
+    },
+    {
+      "zoom": 10,
+      "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+      "hierarchy_sha256": "bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58",
+      "locations": 49589,
+      "runs": 28796247,
+      "raw_bytes": 232467128,
+      "gzip_bytes": 47562760,
+      "gpu_texture_width": 2048,
+      "gpu_runs_texture_height": 7031,
+      "gpu_rows_texture_height": 128,
+      "gpu_padded_ownership_bytes": 232488960,
+      "compile_ms": 25737,
+      "total_prepare_ms": 39373,
+      "peak_rss_bytes": 3196305408,
+      "decoded_words_exactly_verified": 58116782,
+      "actual_loaded_bytes": 232467128,
+      "load_and_decompression_ms": 1051,
+      "gpu_upload_ms": 199,
+      "native_max_texture_size": 8192,
+      "simulated_max_texture_size": 4096,
+      "max_texture_size": 4096,
+      "ownership_texture_upload_shapes": [
+        {
+          "width": 2048,
+          "height": 128,
+          "bytes": 2097152
+        },
+        {
+          "width": 4096,
+          "height": 3516,
+          "bytes": 230424576
+        }
+      ],
+      "sample_queries": 665,
+      "sample_mismatch": 0,
+      "framebuffer_matches": true,
+      "webgl_error": 0,
+      "navigation_ownership_uploads": 0,
+      "navigation": [
+        {
+          "label": "desktop",
+          "width": 1280,
+          "height": 720,
+          "submission_ms": [
+            0.2,
+            0.1,
+            0,
+            0.1,
+            0.1
+          ],
+          "completed_frame_with_readback_ms": [
+            352.2,
+            165.7,
+            174.6,
+            173.3,
+            194.8
+          ],
+          "cpu_fallback_sampling_ms": [
+            6.3,
+            4.8,
+            4.6,
+            5,
+            4.5
+          ]
+        },
+        {
+          "label": "mobile viewport",
+          "width": 390,
+          "height": 844,
+          "submission_ms": [
+            0,
+            0,
+            0.1,
+            0.1,
+            0
+          ],
+          "completed_frame_with_readback_ms": [
+            26.9,
+            27.1,
+            30.2,
+            30.6,
+            32.8
+          ],
+          "cpu_fallback_sampling_ms": [
+            1.3,
+            1.1,
+            1.2,
+            1.2,
+            1.3
+          ]
+        }
+      ],
+      "js_heap_bytes": 521000000
+    }
+  ],
+  "source_code": {
+    "src/pixel-gpu.js": "98e663635b68c5c65796a1a6948b2b31401d4e7cc834c25743aa608b93d9d937",
+    "src/pixel-ownership.js": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+    "src/ownership-codec.js": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+    "scripts/audit-grid-resolutions.mjs": "c3d6e0197c58fbef6086241dbd0e04f7a741794b53b4fffd51e633956dc26cd4",
+    "scripts/stage-canonical-grid.mjs": "a47cb1ec5b67b01cfd3c4d4515c7995b88272c4f51d473d253b9f6120ccba877",
+    "test/compact-ownership-benchmark.mjs": "49716f99413105b8cb6c10614c8bd98d44b4e419a7386ad00b33c95637a0fedc"
+  }
+}

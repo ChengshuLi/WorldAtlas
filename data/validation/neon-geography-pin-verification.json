@@ -1,0 +1,195 @@
+{
+  "status": "verified",
+  "scope": "new disposable Neon validation branch",
+  "checked_at_utc": "2026-10-02T05:44:19.865Z",
+  "project_id": "weathered-lab-37571695",
+  "production_branch_id": "br-summer-butterfly-ar8qikk5",
+  "production_sql_writes": false,
+  "credentials_logged": false,
+  "cleanup_status": "deleted",
+  "schema_sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+  "schema_statements": 56,
+  "validation_branch_name": "atlas-sql-check-e5e2d98b-404e-4cf6-8343-6efb045f3256",
+  "validation_branch_id": "br-noisy-silence-ar3is8ic",
+  "postgres_major": 18,
+  "database_name": "neondb",
+  "role_name": "neondb_owner",
+  "schema_tables": [
+    "atlas_sources",
+    "atlas_entity_types",
+    "atlas_entities",
+    "atlas_categories",
+    "atlas_attribute_records",
+    "atlas_names",
+    "atlas_relationships",
+    "atlas_media",
+    "atlas_media_links",
+    "atlas_evidence_retirements",
+    "atlas_ingestions",
+    "atlas_geographic_releases",
+    "atlas_geographic_memberships",
+    "atlas_geographic_changes"
+  ],
+  "schema_complete": true,
+  "actual_hosted_service_checks": [
+    "type registry",
+    "six-tier entity chain",
+    "immutable sources",
+    "dated attributes",
+    "dated names",
+    "atomic sourced correction",
+    "original evidence read-back",
+    "exclusive interval endpoint"
+  ],
+  "retained_original_population": 42,
+  "resolved_population": 43,
+  "runtime_role": {
+    "version": 1,
+    "role": "worldatlas_app",
+    "status": "verified",
+    "read_only": true,
+    "login": true,
+    "inheritance": false,
+    "memberships": 0,
+    "owner_administration_membership": 1,
+    "owner_administration_policy": "Only table owner ADMIN OPTION into app; INHERIT=false, SET=false. App belongs to no roles.",
+    "ownership": 0,
+    "public_schema_create": false,
+    "permissions": [
+      {
+        "table": "atlas_sources",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_entity_types",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_entities",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_categories",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_attribute_records",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_names",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_relationships",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_media",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_media_links",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_evidence_retirements",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_ingestions",
+        "select": true,
+        "insert": "id,fingerprint,counts,created_at",
+        "update": "none"
+      },
+      {
+        "table": "atlas_geographic_releases",
+        "select": true,
+        "insert": "all columns",
+        "update": "status,published_at"
+      },
+      {
+        "table": "atlas_geographic_memberships",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_geographic_changes",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      }
+    ],
+    "sequence": "USAGE only; no SELECT, UPDATE, explicit rowid or restart",
+    "guards_enabled": true,
+    "runtime_role_sql_sha256": "78198903a3a9f4174cfe198bcdb6560b54c057e869dd5bf576ea84c92713e61a",
+    "schema_sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618"
+  },
+  "runtime_current_user": "worldatlas_app",
+  "runtime_session_user": "worldatlas_app",
+  "denied_operations": [
+    "drop tables",
+    "update facts",
+    "delete evidence",
+    "truncate evidence",
+    "explicit revision IDs",
+    "reset revision sequence",
+    "restart revision sequence",
+    "read revision sequence",
+    "disable guards",
+    "bypass guards",
+    "create schema objects",
+    "create roles",
+    "assume owner role"
+  ],
+  "idempotent_application_retry": true,
+  "geographic_pin_concurrency": {
+    "version": 1,
+    "status": "verified",
+    "disposable_branch_id": "br-noisy-silence-ar3is8ic",
+    "real_independent_sessions": true,
+    "advisory_wait_observed": true,
+    "transaction_isolation": "ReadCommitted after the common publication/import lock",
+    "stale_import_status": 409,
+    "stale_import_atomic_rollback": true,
+    "original_pinned_replay_preserved": true,
+    "current_pin_import_accepted": true,
+    "production_mutation": false,
+    "fixture_scope": "Caller-created disposable PostgreSQL provider branch; caller must delete it.",
+    "limitations": [
+      "This fixture does not establish production migration or record-scale capacity."
+    ]
+  },
+  "sql_contracts_passed": true,
+  "application_connection_closed": true,
+  "owner_connection_closed": true,
+  "management_requests": 9,
+  "completed_at_utc": "2026-10-02T05:44:54.316Z",
+  "limitations": [
+    "No production schema, data import, runtime binding or Neon Auth change.",
+    "This small isolated service smoke test does not certify production migration or dataset capacity."
+  ],
+  "github_run_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/36970225978",
+  "source_commit": "a3dd16628d8c67bbc0a60cc596bf15a75f43b613"
+}
