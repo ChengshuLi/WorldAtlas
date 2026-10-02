@@ -84,7 +84,10 @@ export async function capacityReport(db,{databaseBudgetBytes=null,warningFractio
   if(Number.isSafeInteger(result.meta?.size_after)&&result.meta.size_after>=0){databaseBytes=result.meta.size_after;measurement='d1-query-size-after';}
  }
  const mediaBytes=(await db.prepare('SELECT coalesce(sum(bytes),0) bytes FROM atlas_media').first()).bytes;
- if(databaseBytes==null)try{
+ if(databaseBytes==null&&typeof db.databaseBytes==='function')try{
+  const bytes=await db.databaseBytes();if(Number.isSafeInteger(bytes)&&bytes>=0){databaseBytes=bytes;measurement='postgres-pg-database-size';}
+ }catch{/* Provider diagnostics can be restricted without disabling content reads. */}
+ if(databaseBytes==null&&db.dialect!=='postgres')try{
   const size=await db.prepare('PRAGMA page_size').first(),pages=await db.prepare('PRAGMA page_count').first();
   if(Number.isSafeInteger(size?.page_size)&&size.page_size>0&&Number.isSafeInteger(pages?.page_count)&&pages.page_count>=0&&Number.isSafeInteger(size.page_size*pages.page_count)){
    databaseBytes=size.page_size*pages.page_count;measurement='sqlite-page-count-times-page-size';
@@ -95,5 +98,5 @@ export async function capacityReport(db,{databaseBudgetBytes=null,warningFractio
   database:{bytes:databaseBytes,measurement,configured_budget_bytes:databaseBudgetBytes,budget_is_provider_quota:false,quota_verified:false,warning_fraction:warningFraction,budget_fraction:ratio,budget_status:ratio==null?'unknown':ratio>=1?'at-or-above-budget':ratio>=warningFraction?'approaching-budget':'below-budget'},
   media:{registered_objects:counts.media,registered_bytes:mediaBytes,measurement:'database metadata; object existence and checksums require separate read-back',upload_limit_bytes:20*1024*1024},
   storage_scope:'Hosted database and registered object metadata only; prepared ownership, environment and grid assets are separate.',
-  backend:{kind:'single-d1-plus-r2',partitioning_deployed:false,managed_plan:'unverified',growth_policy:'Use sparse supported intervals. Measure database/index bytes and query latency. Technical maintainers own storage partitioning and map-read changes behind stable IDs/API; research contributors only submit supported evidence.'}};
+  backend:{kind:db.dialect==='postgres'?'postgres-plus-r2':'single-d1-plus-r2',partitioning_deployed:false,managed_plan:'unverified',growth_policy:'Use sparse supported intervals. Measure database/index bytes and query latency. Technical maintainers own storage partitioning and map-read changes behind stable IDs/API; research contributors only submit supported evidence.'}};
 }

@@ -1,0 +1,49 @@
+name: Verify PostgreSQL on disposable Neon branch
+
+# SQL writes are confined to a new uniquely named validation branch. The script
+# deletes exactly that branch in finally; production receives no SQL connection.
+on:
+  workflow_dispatch:
+  push:
+    branches: [work]
+    paths:
+      - .github/workflows/neon-sql-verify.yml
+      - scripts/verify-neon-sql.mjs
+
+permissions:
+  contents: read
+
+concurrency:
+  group: neon-sql-verification
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.repository == 'ChengshuLi/WorldAtlas'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout authorized revision
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Node 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Apply schema and exercise services on a disposable branch
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }}
+        run: node scripts/verify-neon-sql.mjs data/validation/neon-sql-verification.json
+      - name: Preserve sanitized contract and cleanup receipt
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: neon-sql-verification-${{ github.run_id }}-${{ github.run_attempt }}
+          path: data/validation/neon-sql-verification.json
+          if-no-files-found: error
+          retention-days: 14

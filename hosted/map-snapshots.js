@@ -1,3 +1,4 @@
+import {postgresMapQueries} from './map-snapshot-postgres.js';
 import {validYear} from '../src/model.js';
 import {RecordError} from './records.js';
 import {locationAttributes} from '../src/attributes.js';
@@ -30,6 +31,8 @@ export const mapSnapshotQueries={
  sources:`SELECT s.id,s.name,s.url,s.license,s.vintage,s.supported_from,s.supported_to,s.status,${boundedMetadata('s',2048)} FROM json_each(?) page CROSS JOIN atlas_sources s ON s.id=page.value LIMIT ${statementRowsLimit+1}`,
 };
 
+export const postgresMapSnapshotQueries=postgresMapQueries(mapSnapshotQueries);
+
 /** One page contains complete winners/withdrawals for its entity IDs. Prepared
  * caches can therefore merge by claim identity without restoring retired data.
  * Source metadata occurs once per page; evidence remains individually queryable.
@@ -39,13 +42,14 @@ export async function mapSnapshotPage(db,year,{examples=false,cursor='',limit=10
  if(typeof cursor!=='string'||cursor.length>2000||cursor&&!cursor.trim())throw new RecordError('Invalid map cursor');
  if(!Number.isInteger(limit)||limit<1||limit>1000)throw new RecordError('Map entity page limit must be between 1 and 1000');
  if(!Number.isInteger(aliasLimit)||aliasLimit<0||aliasLimit>5)throw new RecordError('Map alias limit must be between 0 and 5');
+ const queries=db.dialect==='postgres'?postgresMapSnapshotQueries:mapSnapshotQueries;
  const initial=await revision(db),enabled=Number(Boolean(examples));
- const eligible=await query(db.prepare(mapSnapshotQueries.entities).bind(cursor,enabled,year,year,limit+1));
+ const eligible=await query(db.prepare(queries.entities).bind(cursor,enabled,year,year,limit+1));
  const entities=eligible.slice(0,limit),ids=JSON.stringify(entities.map(entity=>entity.id));
  const [attributes,names,retirements]=entities.length?await Promise.all([
-  query(db.prepare(mapSnapshotQueries.attributes).bind(ids,year,year,enabled)),
-  query(db.prepare(mapSnapshotQueries.names).bind(ids,year,year,enabled,aliasLimit+1)),
-  query(db.prepare(mapSnapshotQueries.retirements).bind(ids,year,year,enabled,ids,year,year,enabled)),
+  query(db.prepare(queries.attributes).bind(ids,year,year,enabled)),
+  query(db.prepare(queries.names).bind(ids,year,year,enabled,aliasLimit+1)),
+  query(db.prepare(queries.retirements).bind(ids,year,year,enabled,ids,year,year,enabled)),
  ]):[[],[],[]];
  const tooLarge=()=>{const error=new RecordError('Map snapshot page exceeds its operational limit; retry with fewer entities',413);error.retryable=true;error.suggested_limit=Math.max(1,Math.floor(limit/2));return error;};
  if([attributes,names,retirements].some(rows=>rows.length>statementRowsLimit))throw tooLarge();
@@ -58,7 +62,7 @@ export async function mapSnapshotPage(db,year,{examples=false,cursor='',limit=10
  for(const [id,rows] of aliases){selectedNames.push(...rows.slice(0,aliasLimit));if(aliasTotals.get(id)>aliasLimit)aliasesTruncated.push(id);}
  const records=[...fields.values()],withdrawals=retirements.map(clean);
  const sourceIds=[...new Set([...records,...selectedNames,...withdrawals].map(row=>row.source_id))];
- const sources=sourceIds.length?await query(db.prepare(mapSnapshotQueries.sources).bind(JSON.stringify(sourceIds))):[];
+ const sources=sourceIds.length?await query(db.prepare(queries.sources).bind(JSON.stringify(sourceIds))):[];
  if(await revision(db)!==initial){const error=new RecordError('Historical content changed while reading; retry the map snapshot',409);error.retryable=true;throw error;}
  const result={year,revision:initial,next_cursor:eligible.length>limit?entities.at(-1).id:null,entities:entities.map(({id,kind})=>({id,kind})),records,names:selectedNames.map(row=>({...row,field:'name',value:row.name,name_role:row.role})),retirements:withdrawals,sources:Object.fromEntries(sources.map(row=>[row.id,clean(row)])),aliases_truncated:aliasesTruncated};
  if(new TextEncoder().encode(JSON.stringify(result)).byteLength>responseBytesLimit)throw tooLarge();

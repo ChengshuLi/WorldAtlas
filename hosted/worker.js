@@ -1,5 +1,7 @@
 import * as records from './records.js';
 import {mapSnapshotPage} from './map-snapshots.js';
+import {contentDatabase,storageReadOnly} from './content-backend.js';
+import {exportStoragePage,exportStorageMarker} from './storage-export.js';
 import {catalogPage,entityRelationshipsPage,entityMediaPage,capacityReport} from './research-catalog.js';
 import * as geography from './geographic-releases.js';
 import {validYear} from '../src/model.js';
@@ -24,36 +26,40 @@ export default {
   if(!url.pathname.startsWith('/api/'))return env.ASSETS.fetch(request);
   try{
    if(url.pathname==='/api/classifications'&&request.method==='GET')return json({version:1,unknown:null,attributes:environmentClassifications});
-   if(!env.DB) return json({error:'Historical database is temporarily unavailable'},503);
-   if(url.pathname==='/api/storage/capacity'&&request.method==='GET')return json(await capacityReport(env.DB,{databaseBudgetBytes:env.ATLAS_DATABASE_BUDGET_BYTES==null?null:Number(env.ATLAS_DATABASE_BUDGET_BYTES)}));
-   if(url.pathname==='/api/map/snapshot'&&request.method==='GET')return json(await mapSnapshotPage(env.DB,selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||1000)}));
+   if(storageReadOnly(env)&&['POST','PUT','PATCH','DELETE'].includes(request.method))return json({error:'Historical storage is read-only during a verified transfer',retryable:true},503);
+   const db=contentDatabase(env);
+   if(url.pathname==='/api/storage/export-marker'&&request.method==='GET')return json({...await exportStorageMarker(db),read_only:storageReadOnly(env)});
+   const storageExport=/^\/api\/storage\/export\/([^/]+)$/.exec(url.pathname);
+   if(storageExport&&request.method==='GET')return json(await exportStoragePage(db,storageExport[1],{cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200)}));
+   if(url.pathname==='/api/storage/capacity'&&request.method==='GET')return json(await capacityReport(db,{databaseBudgetBytes:env.ATLAS_DATABASE_BUDGET_BYTES==null?null:Number(env.ATLAS_DATABASE_BUDGET_BYTES)}));
+   if(url.pathname==='/api/map/snapshot'&&request.method==='GET')return json(await mapSnapshotPage(db,selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||1000)}));
    const catalog=/^\/api\/catalog\/(sources|categories|entities)$/.exec(url.pathname);
-   if(catalog&&request.method==='GET')return json(await catalogPage(env.DB,catalog[1],{q:url.searchParams.get('q')??'',kind:url.searchParams.get('kind'),cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),examples:url.searchParams.get('examples')==='1',active:url.searchParams.has('active')?url.searchParams.get('active')==='1':null}));
+   if(catalog&&request.method==='GET')return json(await catalogPage(db,catalog[1],{q:url.searchParams.get('q')??'',kind:url.searchParams.get('kind'),cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),examples:url.searchParams.get('examples')==='1',active:url.searchParams.has('active')?url.searchParams.get('active')==='1':null}));
    const graph=/^\/api\/entities\/([^/]+)\/(relationships|media)$/.exec(url.pathname);
-   if(graph&&request.method==='GET'){const value=await (graph[2]==='relationships'?entityRelationshipsPage:entityMediaPage)(env.DB,decodeURIComponent(graph[1]),selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)});return value?json(value):json({error:'Entity not found'},404);}
-   if(url.pathname==='/api/storage'&&request.method==='GET')return json(await records.storageOverview(env.DB));
-   if(url.pathname==='/api/attributes'&&request.method==='GET')return json(await records.attributesAt(env.DB,selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),locationIds:url.searchParams.has('location_id')?url.searchParams.getAll('location_id'):undefined}));
-   if(url.pathname==='/api/names'&&request.method==='GET')return json(await records.namesAt(env.DB,selectedYear(url),{examples:url.searchParams.get('examples')==='1',mapOnly:url.searchParams.get('scope')==='map',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)}));
-   if(url.pathname==='/api/retirements'&&request.method==='GET')return json(await records.retirementsAt(env.DB,selectedYear(url),{examples:url.searchParams.get('examples')==='1',mapOnly:url.searchParams.get('scope')==='map',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)}));
-   if(url.pathname.startsWith('/api/entities/')&&request.method==='GET')return json(await records.entityProfile(env.DB,decodeURIComponent(url.pathname.slice('/api/entities/'.length)),selectedYear(url),{examples:url.searchParams.get('examples')==='1',releaseId:url.searchParams.get('release_id')}));
-   if(url.pathname==='/api/geography/release'&&request.method==='GET')return json(await geography.geographicRelease(env.DB,url.searchParams.get('release_id')));
-   if(url.pathname==='/api/geography/memberships'&&request.method==='GET')return json(await geography.geographicMembershipPage(env.DB,{releaseId:url.searchParams.get('release_id'),cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),parentId:url.searchParams.get('parent_id'),active:url.searchParams.get('include_archived')==='1'?null:true}));
-   if(url.pathname==='/api/geography/changes'&&request.method==='GET')return json(await geography.geographicChangePage(env.DB,{releaseId:url.searchParams.get('release_id'),cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)}));
+   if(graph&&request.method==='GET'){const value=await (graph[2]==='relationships'?entityRelationshipsPage:entityMediaPage)(db,decodeURIComponent(graph[1]),selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)});return value?json(value):json({error:'Entity not found'},404);}
+   if(url.pathname==='/api/storage'&&request.method==='GET')return json(await records.storageOverview(db));
+   if(url.pathname==='/api/attributes'&&request.method==='GET')return json(await records.attributesAt(db,selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),locationIds:url.searchParams.has('location_id')?url.searchParams.getAll('location_id'):undefined}));
+   if(url.pathname==='/api/names'&&request.method==='GET')return json(await records.namesAt(db,selectedYear(url),{examples:url.searchParams.get('examples')==='1',mapOnly:url.searchParams.get('scope')==='map',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)}));
+   if(url.pathname==='/api/retirements'&&request.method==='GET')return json(await records.retirementsAt(db,selectedYear(url),{examples:url.searchParams.get('examples')==='1',mapOnly:url.searchParams.get('scope')==='map',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)}));
+   if(url.pathname.startsWith('/api/entities/')&&request.method==='GET')return json(await records.entityProfile(db,decodeURIComponent(url.pathname.slice('/api/entities/'.length)),selectedYear(url),{examples:url.searchParams.get('examples')==='1',releaseId:url.searchParams.get('release_id')}));
+   if(url.pathname==='/api/geography/release'&&request.method==='GET')return json(await geography.geographicRelease(db,url.searchParams.get('release_id')));
+   if(url.pathname==='/api/geography/memberships'&&request.method==='GET')return json(await geography.geographicMembershipPage(db,{releaseId:url.searchParams.get('release_id'),cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),parentId:url.searchParams.get('parent_id'),active:url.searchParams.get('include_archived')==='1'?null:true}));
+   if(url.pathname==='/api/geography/changes'&&request.method==='GET')return json(await geography.geographicChangePage(db,{releaseId:url.searchParams.get('release_id'),cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)}));
    if(['/api/geography/stage','/api/geography/finalize'].includes(url.pathname)&&request.method==='POST'){
     sameOrigin(request);
     if(!request.headers.get('Content-Type')?.startsWith('application/json'))return json({error:'Geographic release must be JSON'},415);
     const payload=JSON.parse(new TextDecoder().decode(await boundedBody(request,1024*1024)));
-    return json(url.pathname.endsWith('/stage')?await geography.stageGeographicRelease(env.DB,payload):await geography.finalizeGeographicRelease(env.DB,payload.release_id));
+    return json(url.pathname.endsWith('/stage')?await geography.stageGeographicRelease(db,payload):await geography.finalizeGeographicRelease(db,payload.release_id));
    }
    if(url.pathname.startsWith('/api/evidence/')&&request.method==='GET'){
     const [collection,...parts]=url.pathname.slice('/api/evidence/'.length).split('/');
-    return json(await records.evidenceHistory(env.DB,collection,decodeURIComponent(parts.join('/')),{examples:url.searchParams.get('examples')==='1'}));
+    return json(await records.evidenceHistory(db,collection,decodeURIComponent(parts.join('/')),{examples:url.searchParams.get('examples')==='1'}));
    }
    if(url.pathname==='/api/records/import'&&request.method==='POST'){
     sameOrigin(request);
     if(!request.headers.get('Content-Type')?.startsWith('application/json'))return json({error:'Import must be JSON'},415);
     const text=new TextDecoder().decode(await boundedBody(request,1024*1024));
-    return json(await records.importBatch(env.DB,JSON.parse(text)));
+    return json(await records.importBatch(db,JSON.parse(text)));
    }
    if(url.pathname==='/api/media/upload'&&request.method==='POST'){
     sameOrigin(request);if(!env.BUCKET)return json({error:'Media storage is temporarily unavailable'},503);
@@ -65,13 +71,13 @@ export default {
     const input={id:url.searchParams.get('id')||`media:${sha256}`,object_key,sha256,bytes:bytes.byteLength,mime,source_id:url.searchParams.get('source_id'),name:url.searchParams.get('name')||sha256,license:url.searchParams.get('license'),attribution:url.searchParams.get('attribution')};
     // Validate relational metadata before writing blob bytes. Published objects
     // are content-addressed, so another upload never overwrites earlier media.
-    await records.validateMedia(env.DB,input);
+    await records.validateMedia(db,input);
     if(!await env.BUCKET.head(object_key))await env.BUCKET.put(object_key,bytes,{httpMetadata:{contentType:mime}});
-    return json(await records.registerMedia(env.DB,input));
+    return json(await records.registerMedia(db,input));
    }
    if(url.pathname.startsWith('/api/media/')&&request.method==='GET'){
     if(!env.BUCKET)return json({error:'Media storage is temporarily unavailable'},503);
-    const media=await records.mediaById(env.DB,decodeURIComponent(url.pathname.slice('/api/media/'.length)));
+    const media=await records.mediaById(db,decodeURIComponent(url.pathname.slice('/api/media/'.length)));
     if(!media)return json({error:'Media not found'},404);
     if(request.headers.has('Range')){
      const range=/^bytes=(\d*)-(\d*)$/.exec(request.headers.get('Range'));
