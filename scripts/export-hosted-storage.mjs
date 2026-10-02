@@ -20,20 +20,53 @@ function checkPage(page,collection,marker){
  for(const row of page.records)if(!row||Array.isArray(row)||!equivalent(Object.keys(row).sort(),[...page.columns].sort()))throw Error('Raw-storage export row columns do not match the contract');
 }
 function snapshotChanged(){throw Error('Source storage changed; preserve this partial export and start a new directory after maintenance is stable');}
+class StorageTransportError extends Error{}
+class StorageJSONError extends Error{}
+const bodyTransportFailure=error=>['ECONNRESET','ETIMEDOUT','EPIPE','UND_ERR_SOCKET','UND_ERR_CONNECT_TIMEOUT','UND_ERR_HEADERS_TIMEOUT','UND_ERR_BODY_TIMEOUT'].includes(error?.code)||error?.name==='TimeoutError'||error?.cause&&bodyTransportFailure(error.cause);
+function retryPause(milliseconds,signal){
+ signal?.throwIfAborted();
+ return new Promise((resolve,reject)=>{
+  const abort=()=>{clearTimeout(timer);signal?.removeEventListener('abort',abort);reject(signal.reason);};
+  const timer=setTimeout(()=>{signal?.removeEventListener('abort',abort);resolve();},milliseconds);
+  signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted)abort();
+ });
+}
 
 /** Read-only transfer. Secrets are kept in memory; completed pages/ledger are
  * durable and reusable after interruption with a fresh private credential.
  */
-export async function exportHostedStorage({origin:input,output,token,fetcher=fetch,onProgress=()=>{},signal,concurrency=2}={}){
+export async function exportHostedStorage({origin:input,output,token,fetcher=fetch,onProgress=()=>{},signal,concurrency=2,requestTimeoutMs=60000}={}){
  const origin=confirmedOrigin(input);if(typeof token!=='string'||!token)throw Error('A private read-only service credential is required');if(typeof output!=='string'||!output)throw Error('Supply a durable export directory');output=path.resolve(output);
  if(!Number.isSafeInteger(concurrency)||concurrency<1||concurrency>4)throw Error('Export concurrency must be an integer from one to four');
+ if(!Number.isSafeInteger(requestTimeoutMs)||requestTimeoutMs<10||requestTimeoutMs>60000)throw Error('Export request timeout must be an integer from 10 to 60000 milliseconds');
  const headers={'OAI-Sites-Authorization':`Bearer ${token}`};
+ async function request(route,attempt){
+  signal?.throwIfAborted();
+  const deadline=new AbortController(),requestSignal=signal?AbortSignal.any([signal,deadline.signal]):deadline.signal;
+  const timer=setTimeout(()=>deadline.abort(new DOMException('Read-only storage export request timed out','TimeoutError')),requestTimeoutMs);
+  let response,abort;
+  const aborted=new Promise((resolve,reject)=>{abort=()=>reject(requestSignal.reason);requestSignal.addEventListener('abort',abort,{once:true});if(requestSignal.aborted)abort();});
+  // Race explicitly as well as forwarding the signal: custom transports and
+  // stalled body readers must not hold the durable export journal indefinitely.
+  const operation=(async()=>{
+   try{response=await fetcher(origin+route,{headers,signal:requestSignal});}catch{if(requestSignal.aborted)throw requestSignal.reason;throw new StorageTransportError('Read-only storage export network request failed');}
+   if([429,502,503,504].includes(response.status)&&attempt<3){await response.body?.cancel();return {retry:true};}
+   let body;
+   try{body=await response.json();}catch(error){if(requestSignal.aborted)throw requestSignal.reason;if(bodyTransportFailure(error))throw new StorageTransportError('Read-only storage export body transfer failed');throw new StorageJSONError('Read-only storage export returned invalid JSON');}
+   return {response,body};
+  })();
+  try{return await Promise.race([operation,aborted]);}
+  finally{
+   clearTimeout(timer);requestSignal.removeEventListener('abort',abort);
+   if(requestSignal.aborted&&!response?.body?.locked){try{Promise.resolve(response?.body?.cancel()).catch(()=>{});}catch{}}
+  }
+ }
  async function get(route){
   for(let attempt=0;attempt<4;attempt++){
-   signal?.throwIfAborted();let response;
-   try{response=await fetcher(origin+route,{headers,signal});}catch(error){if(signal?.aborted)throw signal.reason;if(attempt===3)throw Error('Read-only storage export network request failed');await new Promise(resolve=>setTimeout(resolve,Math.min(4000,500*2**attempt)));continue;}
-   if([429,502,503,504].includes(response.status)&&attempt<3){await response.body?.cancel();await new Promise(resolve=>setTimeout(resolve,Math.min(4000,500*2**attempt)));continue;}
-   let body;try{body=await response.json();}catch{throw Error('Read-only storage export returned invalid JSON');}
+   signal?.throwIfAborted();let result;
+   try{result=await request(route,attempt);}catch(error){if(signal?.aborted)throw signal.reason;if(!(error instanceof StorageTransportError)&&!bodyTransportFailure(error))throw error;if(attempt===3)throw Error(error?.name==='TimeoutError'?'Read-only storage export request timed out after four bounded attempts; preserved pages can be resumed':'Read-only storage export network request failed');await retryPause(Math.min(4000,500*2**attempt),signal);continue;}
+   if(result.retry){await retryPause(Math.min(4000,500*2**attempt),signal);continue;}
+   const {response,body}=result;
    if(!response.ok){if(response.status===413&&body.retryable)return {oversized:true,suggested_limit:body.suggested_limit};throw Error(`Read-only storage export HTTP ${response.status}`);}return body;
   }
  }

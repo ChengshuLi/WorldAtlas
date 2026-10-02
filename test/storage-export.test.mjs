@@ -11,7 +11,10 @@ import {exportStoragePage,exportStorageMarker,storageExportCollections} from '..
 import {exportHostedStorage} from '../scripts/export-hosted-storage.mjs';
 
 class D1 {
- constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const file of fs.readdirSync(new URL('../drizzle/',import.meta.url)).filter(f=>f.endsWith('.sql')).sort())this.sqlite.exec(fs.readFileSync(new URL(`../drizzle/${file}`,import.meta.url),'utf8'));}
+ // This transfer contract is the frozen fourteen-table Site 17 baseline,
+ // schema 0000–0007. Forward dated-geography tables require a separate v2 raw
+ // export/backup contract before publication; do not hide them from that gate.
+ constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const file of fs.readdirSync(new URL('../drizzle/',import.meta.url)).filter(f=>f.endsWith('.sql')&&/^000[0-7]_/.test(f)).sort())this.sqlite.exec(fs.readFileSync(new URL(`../drizzle/${file}`,import.meta.url),'utf8'));}
  prepare(sql){const sqlite=this.sqlite;let args=[];return {bind(...values){args=values;return this;},async all(){return {results:sqlite.prepare(sql).all(...args)};},async first(){return sqlite.prepare(sql).get(...args)??null;},run(){return {meta:{changes:Number(sqlite.prepare(sql).run(...args).changes)}};}};}
  async batch(statements){this.sqlite.exec('BEGIN IMMEDIATE');try{const result=statements.map(s=>s.run());this.sqlite.exec('COMMIT');return result;}catch(error){this.sqlite.exec('ROLLBACK');throw error;}}
 }
@@ -102,4 +105,73 @@ test('CLI overlaps bounded independent collections while preserving serial curso
  const {db}=await fixture(),output=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-raw-export-'));let active=0,maximum=0;const inFlight=new Set();
  const fetcher=async(url,options)=>{const parsed=new URL(url);assert.equal(options.headers['OAI-Sites-Authorization'],'Bearer TEST_ONLY_CREDENTIAL');if(parsed.pathname.endsWith('export-marker'))return Response.json({...await exportStorageMarker(db),read_only:true});const collection=parsed.pathname.split('/').at(-1);assert.equal(inFlight.has(collection),false,'one collection cannot issue overlapping keyset reads');inFlight.add(collection);active++;maximum=Math.max(maximum,active);try{await new Promise(resolve=>setTimeout(resolve,2));return Response.json(await exportStoragePage(db,collection,{cursor:parsed.searchParams.get('cursor')??'',limit:3}));}finally{active--;inFlight.delete(collection);}};
  try{const result=await exportHostedStorage({origin:'https://atlas.example/',output,token:'TEST_ONLY_CREDENTIAL',fetcher,concurrency:4});assert.ok(maximum>1,'independent collections actually overlap');assert.ok(maximum<=4);assert.equal(active,0);assert.equal(result.status,'complete');assert.deepEqual(Object.fromEntries(Object.entries(result.collections).map(([key,value])=>[key,value.count])),result.snapshot_marker.counts);await assert.rejects(exportHostedStorage({origin:'https://atlas.example/',output,token:'TEST_ONLY_CREDENTIAL',fetcher,concurrency:5}),/concurrency/);}finally{db.sqlite.close();fs.rmSync(output,{recursive:true,force:true});}
+});
+
+test('stalled fetch times out with its forwarded signal and retries the same cursor without rewriting preserved source pages',async()=>{
+ const {db}=await fixture(),output=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-export-fetch-timeout-')),base=service(db);let stalled=false,saved,receipt,deadlineSignal;const retriedCursors=[];
+ const fetcher=async(url,options)=>{
+  const parsed=new URL(url);
+  if(parsed.pathname.endsWith('/sources')){
+   if(!parsed.searchParams.has('cursor')&&Number(parsed.searchParams.get('limit'))>1)return Response.json({retryable:true,suggested_limit:1},{status:413});
+   if(parsed.searchParams.has('cursor')){
+    retriedCursors.push(parsed.searchParams.get('cursor'));
+    if(!stalled){stalled=true;deadlineSignal=options.signal;const entry=JSON.parse(fs.readFileSync(path.join(output,'resume.json'))).collections.sources;receipt=entry.parts[0];saved=fs.readFileSync(path.join(output,receipt.path));return new Promise(()=>{});}
+   }
+  }
+  return base(url,options);
+ };
+ try{
+  const result=await exportHostedStorage({origin:'https://atlas.example/',output,token:'TEST_ONLY_CREDENTIAL',fetcher,concurrency:1,requestTimeoutMs:20});
+  assert.equal(result.status,'complete');assert.equal(deadlineSignal.aborted,true);assert.equal(deadlineSignal.reason.name,'TimeoutError');assert.equal(retriedCursors[0],retriedCursors[1],'timeout retry uses exactly the uncommitted cursor');assert.deepEqual(result.collections.sources.parts[0],receipt);assert.deepEqual(fs.readFileSync(path.join(output,receipt.path)),saved);assert.deepEqual(Object.fromEntries(Object.entries(result.collections).map(([key,value])=>[key,value.count])),result.snapshot_marker.counts);
+ }finally{db.sqlite.close();fs.rmSync(output,{recursive:true,force:true});}
+});
+
+test('a response with stalled JSON bytes is bounded through body consumption and preserves checkpoint receipts',async()=>{
+ const {db}=await fixture(),output=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-export-body-timeout-')),base=service(db);let stalled=false,bodySignal,bodyAborts=0,savedSources;
+ const fetcher=async(url,options)=>{
+  if(new URL(url).pathname.endsWith('/records')&&!stalled){
+   stalled=true;bodySignal=options.signal;const ledger=JSON.parse(fs.readFileSync(path.join(output,'resume.json')));savedSources=ledger.collections.sources.parts.map(part=>({part,bytes:fs.readFileSync(path.join(output,part.path))}));
+   return new Response(new ReadableStream({start(controller){controller.enqueue(new TextEncoder().encode('{"records":['));options.signal.addEventListener('abort',()=>{bodyAborts++;controller.error(options.signal.reason);},{once:true});}}),{headers:{'Content-Type':'application/json'}});
+  }
+  return base(url,options);
+ };
+ try{
+  const result=await exportHostedStorage({origin:'https://atlas.example/',output,token:'TEST_ONLY_CREDENTIAL',fetcher,concurrency:1,requestTimeoutMs:20});
+  assert.equal(bodySignal.aborted,true);assert.equal(bodySignal.reason.name,'TimeoutError');assert.equal(bodyAborts,1);assert.equal(result.status,'complete');for(const {part,bytes}of savedSources){assert.deepEqual(result.collections.sources.parts.find(p=>p.path===part.path),part);assert.deepEqual(fs.readFileSync(path.join(output,part.path)),bytes);}const records=JSON.parse(fs.readFileSync(path.join(output,result.collections.records.parts[0].path))).records;assert.equal(records[0].value,' 42 ');assert.equal(records[0].metadata,'{ "precision" : "census", "original" : "verbatim" }');
+ }finally{db.sqlite.close();fs.rmSync(output,{recursive:true,force:true});}
+});
+
+test('permanent transport stalls stop after four deadlines without logging credentials or creating a false checkpoint',async()=>{
+ const output=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-export-bounded-timeout-')),signals=[];
+ try{
+  await assert.rejects(exportHostedStorage({origin:'https://atlas.example/',output,token:'TEST_ONLY_CREDENTIAL',requestTimeoutMs:10,fetcher:async(url,options)=>{signals.push(options.signal);return new Promise(()=>{});}}),error=>{assert.match(error.message,/timed out after four bounded attempts/);assert.doesNotMatch(error.message,/TEST_ONLY_CREDENTIAL|Bearer|https:\/\//);return true;});
+  assert.equal(signals.length,4);assert.ok(signals.every(signal=>signal.aborted&&signal.reason.name==='TimeoutError'));assert.deepEqual(fs.readdirSync(output),[]);
+ }finally{fs.rmSync(output,{recursive:true,force:true});}
+});
+
+test('external cancellation aborts fetch, JSON-body reading and retry backoff without retries or checkpoint changes',async()=>{
+ for(const phase of ['fetch','body','backoff']){
+  const {db}=await fixture(),output=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-export-external-abort-')),base=service(db),cancel=new AbortController(),reason=new Error('Explicit export cancellation');let attempts=0,requestSignal,checkpoint;
+  const fetcher=async(url,options)=>{
+   if(!new URL(url).pathname.endsWith('/sources'))return base(url,options);
+   attempts++;requestSignal=options.signal;checkpoint=fs.readFileSync(path.join(output,'resume.json'));setTimeout(()=>cancel.abort(reason),15);
+   if(phase==='fetch')return new Promise(()=>{});
+   if(phase==='backoff')return Response.json({error:'Temporary service outage'},{status:503});
+   return new Response(new ReadableStream({start(controller){controller.enqueue(new TextEncoder().encode('{'));options.signal.addEventListener('abort',()=>controller.error(options.signal.reason),{once:true});}}),{headers:{'Content-Type':'application/json'}});
+  };
+  try{
+   const operation=exportHostedStorage({origin:'https://atlas.example/',output,token:'TEST_ONLY_CREDENTIAL',fetcher,concurrency:1,requestTimeoutMs:1000,signal:cancel.signal});
+   await assert.rejects(operation,error=>error===reason);assert.equal(attempts,1,`${phase} cancellation never retries`);assert.notEqual(requestSignal,cancel.signal,'transport uses combined external/deadline cancellation');assert.equal(requestSignal.aborted,true);assert.equal(requestSignal.reason,reason);assert.deepEqual(fs.readFileSync(path.join(output,'resume.json')),checkpoint);assert.equal(fs.existsSync(path.join(output,'index.json')),false);
+  }finally{db.sqlite.close();fs.rmSync(output,{recursive:true,force:true});}
+ }
+});
+
+test('malformed JSON and snapshot-conflict HTTP errors remain nonretryable, and unsafe deadline settings fail before fetching',async()=>{
+ const output=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-export-protocol-errors-'));
+ try{
+  for(const [response,message]of [[new Response('{'),/invalid JSON/],[Response.json({error:'Source storage changed',retryable:true},{status:409}),/HTTP 409/]]){
+   let calls=0;await assert.rejects(exportHostedStorage({origin:'https://atlas.example/',output,token:'TEST_ONLY_CREDENTIAL',fetcher:async()=>{calls++;return response;},requestTimeoutMs:20}),message);assert.equal(calls,1);assert.deepEqual(fs.readdirSync(output),[]);
+  }
+  for(const requestTimeoutMs of [0,9,-1,60001,Infinity,1.5,'100'])await assert.rejects(exportHostedStorage({origin:'https://atlas.example/',output,token:'TEST_ONLY_CREDENTIAL',requestTimeoutMs,fetcher:async()=>{throw Error('Must not fetch with invalid deadline');}}),/timeout must be an integer/);
+ }finally{fs.rmSync(output,{recursive:true,force:true});}
 });
