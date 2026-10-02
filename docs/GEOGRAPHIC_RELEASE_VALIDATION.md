@@ -19,6 +19,15 @@ await prepareGeographicRelease({
 
 The CLI accepts `--data`, `--geography-data`, `--output`, `--reference-date`, and `--reviewed-version`. Repeat `--geometry-manifest`, `--metadata-migration`, or `--registry-manifest` for multiple inputs. With the current data, preparation discovers the source-repair evidence manifest and the macro-boundary metadata receipt. Explicit arrays override discovery. Geometry manifests must follow migration order, starting at the original baseline. An independently staged `--geography-data` directory needs `hierarchy.json`, `world-index.json`, and the world parts named by that index. Preparation reads those inputs and writes only the selected release output directory.
 
+When source-backed land creation follows earlier metadata migrations, pass an explicit `--identity-proof-sequence FILE`. The file contains `{"version":1,"steps":[{"type":"geometry","sha256":"manifest digest"},{"type":"metadata","sha256":"receipt digest"},...]}`. Each digest is the exact SHA-256 of its supplied geometry manifest or metadata receipt bytes. The programmatic option is `identityProofSequence`. All provided proofs must appear exactly once, with geometry and metadata inputs each preserving their own declared order. Missing, duplicate, changed or reordered pins reject preparation.
+
+For the retained version-3 chain followed by new land, the identity sequence is: original geometry repair, macro-boundary metadata, macro repairs, macro area splits, macro region splits, then the new creation manifest. Later additions can have further metadata steps between them. Independent reverse footprint reconstruction still validates the complete geometry chain separately; the identity sequence does not waive geometry, source, archive, catalog or historical-preservation checks.
+
+At a pure creation step, the hierarchy snapshot must retain the exact existing chronological records. The sole generated-field update permitted is `metadata.child_count`, and only when its original and new values equal independently counted immediate members before and after the addition. Names, parent IDs, tiers, source/evidence metadata and retired identities cannot be rewritten by a creation snapshot. Complete adjacent-tier chains and nonempty groups are checked after each geometry step.
+
+The canonical sequence hash participates in the release identity and is retained with the sequence in source metadata. Existing preparations without mixed creation/metadata history retain their prior release-key behavior. This change only prepares immutable products; it does not run schema/provider migrations or publish a Site.
+
+
 For subsequent releases, supply previously registered release indexes using `--registry-manifest`, increase `--reviewed-version`, and choose the actual reference date. Previously introduced entity definitions retain their original source and immutable registry fields. They are not reimported with a new source. The original version-1 baseline retains its identity, reference date, entity inventory, membership hash, and original footprint hash across later releases.
 
 ## Geometry and identity proof contract
