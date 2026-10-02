@@ -1,5 +1,7 @@
 # Global macro-geography review
 
+Current milestone: the complete 116-unit macro reporting partition is approved and published under #33. See [MACRO_FOUNDATION_APPROVAL.md](MACRO_FOUNDATION_APPROVAL.md) and `data/validation/global-macro-publication.json`. The diagnostic below is retained historical evidence, not the current region inventory.
+
 This diagnostic pass inspected every current continent, subcontinent and region, enumerating all 487 member areas and all 49,614 descendant locations. It identifies corrections across the world; it does **not** certify the 5,221 provinces or the location territories as semantically complete. All branches remain open until their evidence and lower-level reviews are finished.
 
 The exhaustive machine-readable evidence is in `data/macro-review-evidence.json`; it pins the inspected hierarchy hash, source URLs, retrieval results, source hashes, branch IDs, every member area, country/territory counts and specific location artifacts.

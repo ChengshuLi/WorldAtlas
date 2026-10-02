@@ -1,10 +1,10 @@
 # Top-down geography and regional research handover
 
-This is the workflow for future workers. The initial meta thread owns the final global macro-partition approval before regional handoff; this document itself is not approval. GitHub Issues is the status authority. No current macro partition or complete regional branch has been certified under this contract. Antarctica stays excluded; EU5 counts remain scale references.
+This is the workflow for future workers. The initial meta thread completed and published global macro own-boundary approval under #33, with verified final handoff under #36. [MACRO_FOUNDATION_APPROVAL.md](MACRO_FOUNDATION_APPROVAL.md) links the exact certificate, release and frozen envelopes. All 81 regions have entries in `data/macro-foundation/regional-handoffs.json.gz`. GitHub Issues is the status authority. No complete regional branch has been certified under this contract. Antarctica stays excluded; EU5 counts remain scale references.
 
 ## Dependency order
 
-1. **Globally approve the macro partition:** continents first, then subcontinents, then regions. Workers may research disjoint batches concurrently, but integrate dependent decisions in that order. Reconcile every shared edge and island association before declaring the partition approved.
+1. **Global macro partition approved:** all six continents, 29 subcontinents and 81 regions have fixed sourced reporting conventions and represented-land envelopes. Future changes to an outer/shared boundary require a coordinated macro amendment. Named missing land follows its documented routing and coordinated envelope publication; source shoreline completeness remains regional work.
 2. **Review regional interiors in parallel:** after the macro milestone, multiple engineering workers review area → province → location branches inside separate fixed regional envelopes. Every region is accounted for, including small islands and cross-border geography.
 3. **Publish each complete regional branch:** validate its sourced decisions, every descendant, migrations and grid representation, and retain a certificate against the actual published release.
 4. **Start bounded Luna campaigns for that branch:** targeted population/culture/religion/etc research follows approved territorial meaning. Other regions can remain under engineering review. A campaign covers explicit subjects, attributes, sources and intervals; sparse supported records replace an annual Cartesian expansion.

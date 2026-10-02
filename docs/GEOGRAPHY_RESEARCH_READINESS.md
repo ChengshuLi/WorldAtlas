@@ -2,7 +2,11 @@
 
 **Current policy supersedes the earlier worldwide full-hierarchy pause:** approve continent, subcontinent and region boundaries globally, then release each complete regional branch independently for location-attribute research/imports. Luna never designs boundaries or hierarchy. See [TOP_DOWN_GEOGRAPHY_WORKFLOW.md](TOP_DOWN_GEOGRAPHY_WORKFLOW.md) for the dependency order and bounded worker scopes.
 
-**No macro partition or regional branch is currently approved for this policy.** New location-attribute imports remain closed. Source collection, lawful evidence preservation and provisional staging can continue, but source-only work does not establish a location's territorial meaning. This document is a contract; GitHub Issues holds current claims, progress, dependencies and completion evidence.
+**The global macro partition is approved and published; no complete regional branch is currently approved.** See [MACRO_FOUNDATION_APPROVAL.md](MACRO_FOUNDATION_APPROVAL.md), `data/validation/global-macro-publication.json` and the exhaustive 81-region inventory in `data/macro-foundation/regional-handoffs.json.gz`. Regional interior audits may proceed inside those fixed scopes. New location-attribute imports remain closed. Source collection, lawful evidence preservation and provisional staging can continue, but source-only work does not establish a location's territorial meaning. This document is a contract; GitHub Issues holds current claims, progress, dependencies and completion evidence.
+
+## Current macro publication
+
+Site 19 uses geographic version 3: 49,589 unchanged locations, 5,132 provinces, 478 areas, 81 regions, 29 subcontinents and six continents. Exact release/hierarchy/footprint pins and live preservation checks are in `data/validation/global-macro-publication.json`. Original source inspections remain immutable; `data/macro-foundation/current-membership-projection.json.gz` separately accounts for the current 5,726 groups. All regional interiors remain open. The release-2 checkpoint below is retained history.
 
 ## Recorded reference foundation
 
@@ -32,7 +36,7 @@ Prepared Monaco/Luxembourg and West Virginia corrections await coherent installa
 
 ## Required approval before location-attribute imports
 
-Engineering records approval in [research-geography-gate.json](../data/research-geography-gate.json) only through a reviewed PR with independently retained evidence. Version 2 retains `macro_boundaries` and `regions` certificates; both currently have no approvals. Content work items declare `region_ids` and a scope manifest; regional certificates list `approved_location_ids` and `approved_subject_ids` against exact `approved_release` pins. Three layers are required:
+Engineering records approval in [research-geography-gate.json](../data/research-geography-gate.json) only through a reviewed PR with independently retained evidence. Version 2 retains `macro_boundaries` and `regions` certificates; the global macro certificate is approved while the regional certificate list remains empty. Content work items declare `region_ids` and a scope manifest; regional certificates list `approved_location_ids` and `approved_subject_ids` against exact `approved_release` pins. Three layers are required:
 
 1. **Global macro approval:** all six continents, every subcontinent and every region have approved own boundaries/associations and reconciled shared edges, tied to a published release. This does not approve their descendants.
 2. **Regional branch approval:** the target region's entire area → province → location branch is reviewed, corrected or justified, validated and published. Its certificate names its stable region ID, exact permitted subject IDs, release/hierarchy/footprint pins, completed approval issue and retained evidence. An approved outer envelope alone cannot authorize London's attributes.

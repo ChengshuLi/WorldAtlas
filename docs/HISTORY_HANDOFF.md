@@ -8,7 +8,7 @@ Repository: https://github.com/ChengshuLi/WorldAtlas, integration branch **main*
 
 ## Current gate: source-only work
 
-Engineering first approves the global macro partition, then publishes completely reviewed regional branches. The v2 `data/research-geography-gate.json` opens only approved subjects in those branches; no branches are currently approved. Source research, lawful archives, staging and dry runs may proceed. Content claims require explicit region IDs and closed macro/regional approval dependencies. Do not design geography or bypass the gate. Read [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md).
+The global macro partition is approved and published. Engineering now audits and publishes completely reviewed regional branches inside the fixed scopes in `data/macro-foundation/regional-handoffs.json.gz`. The v2 `data/research-geography-gate.json` opens only approved subjects in those branches; no branches are currently approved. Source research, lawful archives, staging and dry runs may proceed. Content claims require explicit region IDs and closed macro/regional approval dependencies. Do not design geography or bypass the gate. Read [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md).
 
 ## Preserved starting point and content contract
 

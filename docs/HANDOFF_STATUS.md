@@ -4,6 +4,14 @@ GitHub Issues is the single source of truth for TODOs, current status and dated 
 
 The dated entries below are historical checkpoints. Older document-tracker and one-PR-per-issue instructions are superseded by [the current parallel protocol](PARALLEL_WORK_PROTOCOL.md). This workflow update does not change the live Site, database or facts.
 
+## Global macro approval and regional handoff — 2026-10-02 America/Los_Angeles
+
+The initial meta thread's final geographic milestone is approved and live in Site 19 / geographic version 3: **six continents, 29 subcontinents and 81 regions**, excluding Antarctica. Every macro unit has sourced own-boundary decisions and a frozen represented-land envelope built bottom up; independent checks cover all 49,589 unchanged location footprints, with zero material same-tier overlaps or child land outside its parent. Current lower counts are 5,132 provinces and 478 areas; no regional interior or complete shoreline coverage is approved.
+
+[The approval](MACRO_FOUNDATION_APPROVAL.md), `data/validation/global-macro-publication.json` and the complete 81-region `data/macro-foundation/regional-handoffs.json.gz` inventory are the current handoff. Immutable certificates retain their creation-time pending-publication checkpoint; the separate live publication receipt records its completion. Original source inspections and all 3,984 existing historical claims are preserved. Read-only live checks verified all three geographic releases, 28 original archives and 268 geographic audit objects by actual download/hash. Site audience remains custom; provider migrations were not rerun.
+
+Regional engineering workers may now claim bounded interior audits within those fixed scopes. Luna remains source-only until the selected complete branch is approved/published and the explicit cooperative gate permits its subjects and release pins. GitHub #33 records macro completion, #36 records final handoff, and #7 remains open for worldwide interiors. Loading performance, future storage growth and other engineering issues remain separate work.
+
 ---
 
 # Handoff and continuation log
