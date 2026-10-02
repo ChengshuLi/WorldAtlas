@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "verification": "passed",
+  "audience": "isolated local QA; no production imports",
+  "command": "ATLAS_CONTENT_TEST_ORIGIN=http://localhost:3202 node --test test/content-independence.mjs",
+  "test_sha256": "05bc7801e699c9c4c7fa4c05dbbcc1c9f089eb0f28f49931b8196b0a4a5c7c66",
+  "worker_port": 3202,
+  "local_storage": ".cache/content-independence-worker-final",
+  "copied_from": ".cache/installed-final-worker",
+  "copy_method": "Consistent SQLite backup for each .sqlite file; blob files copied; source Worker unmodified",
+  "application_asset_root": "dist/client",
+  "application_index_sha256": "863eb464e3d59a7cf776102619f7bd1d288e23604a17c6384052f08f9e4f3ee3",
+  "reference_release": "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+  "evidence": {
+    "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+    "hierarchy_sha256": "bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58",
+    "index_sha256": "f6d88bf71ec4f860a36038c5beed3cc179a38dc762a64b6fd5722607d3988477"
+  },
+  "source_revalidation_receipts": [
+    {
+      "path": "data/dated-reference-names/revalidation.json",
+      "sha256": "ebf0cab4fd044840bee36dd39b16b5ec22b4b1d7d5c44cd8042ee3dd47f67b32"
+    },
+    {
+      "path": "data/demographic-evidence/revalidation.json",
+      "sha256": "9a282352a74fa9cfaa403cd7eaf8cbd5a9b43c9bfa3d30d7d5d106fdbaf17885"
+    }
+  ],
+  "completed_content_counts": {
+    "dated_names": 3588,
+    "census_religion_records": 396
+  },
+  "checks": [
+    "Actual Add historical records review and submit committed local QA source/category/attribute/name batch",
+    "Successful import automatically refreshed the selected year",
+    "Historical title changed; present-day reference stayed London",
+    "Whole-location political GPU palette matched imported stable owner category",
+    "Population field changed to imported integer value",
+    "Evidence section cited QA source and remained collapsed by default",
+    "Actual ONS 2021 prepared religion claim registered then withdrawn only in isolated QA database; shipped fallback remained unavailable",
+    "Fixture retirements restored prior owner/palette/name and removed imported population",
+    "Unsupported 2022 interval did not retain 2021 fixture",
+    "No browser page errors",
+    "All HTML/JS/CSS asset byte hashes identical before and after content mutations"
+  ],
+  "fixture_scope": "Explicit automated test claims only; QA claims withdrawn after assertions. Actual ONS source evidence retained through sourced withdrawal in isolated QA DB.",
+  "result": {
+    "tests": 1,
+    "passed": 1,
+    "failed": 0,
+    "duration_ms": 24318.389245
+  },
+  "application_assets": [
+    {
+      "path": "dist/client/assets/index-CKclXncW.js",
+      "sha256": "16cd6b6bdc74cbb7cd30f50b974128a725def3b58a2035101ad5c6ab0923e883"
+    },
+    {
+      "path": "dist/client/assets/index-Dl3_2vPH.css",
+      "sha256": "471ee22ea91e34caf662843806a3dad52acde50e45f2c806dd230f33e51dd219"
+    },
+    {
+      "path": "dist/client/assets/pixel-gpu-worker-mbQXPtc5.js",
+      "sha256": "000c65a6a3ba2d2d450763d85ae6a48d47c83949887a79bdd9be8a1d03c75cbf"
+    },
+    {
+      "path": "dist/client/assets/pixel-worker-B7u4O_T1.js",
+      "sha256": "8bd963f48f661dc4548dabae3f291b8f077adf1520a90aadf74add570597f21d"
+    }
+  ],
+  "final_artifact_verification": true,
+  "build_log": "/workspace/scratch/atlas-installed-publication-build.log",
+  "browser_log": "/workspace/scratch/atlas-content-independence-browser-final.log"
+}

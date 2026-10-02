@@ -8,7 +8,7 @@ const contracts=['migration-hashes','attributes','temporal','unsettled-rank','un
 const jobs={
  contracts:[[process.execPath,['--test',...contracts.map(name=>`test/${name}.test.mjs`)]]],
  scientific:[...fs.readdirSync('test').filter(name=>name.endsWith('.py')).sort().map(name=>[process.env.ATLAS_PYTHON??'python3',[`test/${name}`]]),[process.env.ATLAS_PYTHON??'python3',['scripts/prepare-ghsl-population.py','--self-test']]],
- publication:[[process.execPath,['--test',...fs.readdirSync('test').filter(name=>name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`)]],[process.execPath,['--test','test/geographic-release-preparation.mjs']],[process.execPath,['scripts/validate-prepared.mjs']],[process.env.ATLAS_PYTHON??'python3',['scripts/validate-ownership-runtime.py','--source','data/ownership-history','--runtime','data/ownership-runtime']]],
+ publication:[[process.execPath,['--test','--test-concurrency=2',...fs.readdirSync('test').filter(name=>name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`)]],[process.execPath,['--test','test/geographic-release-preparation.mjs']],[process.execPath,['scripts/validate-prepared.mjs']],[process.env.ATLAS_PYTHON??'python3',['scripts/validate-ownership-runtime.py','--source','data/ownership-history','--runtime','data/ownership-runtime']]],
  browser:[[process.execPath,['--test','test/browser.mjs']],[process.execPath,['test/static-rendering.mjs']]],
  'content-only':[[process.execPath,['--test','test/content-independence.mjs','test/import-records-ui.mjs']]],
 };

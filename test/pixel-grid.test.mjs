@@ -30,6 +30,7 @@ test('province borders are stronger and local borders disappear at distant zoom'
 });
 
 test('Canvas fallback samples near screen resolution without four-pixel blocks',()=>{
- assert.equal(GRID_WIDTH,32768);
+ assert.equal(GRID_ZOOM,10);
+ assert.equal(GRID_WIDTH,262144);
  for(let zoom=1;zoom<=13;zoom+=.25){const size=2**(zoom-GRID_ZOOM)*viewStride(zoom);assert.ok(size>=1);if(zoom<=7)assert.ok(size<2);}
 });

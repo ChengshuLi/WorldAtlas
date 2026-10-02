@@ -21,6 +21,22 @@ For geographic preparation, use Python 3.12 and install `requirements.txt` in a 
 
 The paused GHSL output is retained in `data/interrupted-preparation/ghsl-2020`, with a byte-hash retention manifest. It is explicitly **unvalidated**, excluded from imports and public coverage, and must not be treated as completed population evidence. Its source URLs/hashes and continuation instructions are in `data/population-ghsl/sources.json` and `docs/GHSL_POPULATION_IMPORT.md`.
 
-Staged geographic repairs are separate from the active dataset until their geometry, ownership, environmental summaries, grid, migration preservation, and publication checks all agree. `data/geographic-repair-evidence` contains compact original geometry, affected ownership rows, dated footprint snapshots, hashes, and a restoration manifest. `scripts/restore-geographic-repair-stage.py` reconstructs the source-repair stage from tracked inputs, without relying on a previous thread's workspace. Macro-geographic decisions and the Namibia source review retain their own source bytes and crosswalks. Consult their migration documents for current gate status.
+The reviewed source and macro migrations are now installed in the Git working dataset: **49,589 locations → 5,133 provinces → 471 areas → 66 regions → 29 subcontinents → six continents**, with fixed canonical grid zoom 10. `data/publication-geography-receipt.json` records that installation. Its footprint SHA-256 is `5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8`; hierarchy SHA-256 is `bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58`. Installation is distinct from native Site publication; consult deployment receipts before claiming the production Site matches this checkpoint. Namibia's replacement remains blocked, so its 111 existing identities/footprints remain in the installed dataset with source-quality annotations.
+
+The complete lossless reversal uses tracked final geography plus tracked receipts, not an old thread's cache:
+
+```sh
+python scripts/restore-reviewed-geography.py \
+  --final data/world-index.json \
+  --evidence data/geographic-repair-evidence \
+  --manifest data/geographic-restoration-manifest.json \
+  --output .cache/restored-reviewed-geography
+```
+
+This creates `baseline/`, `source-stage/before/`, `source-stage/after/`, `macro-stage/before/`, and `macro-stage/after/` with complete hierarchies and immutable record/source archives. It reverses macro properties and groups first, then restores the 52 original source features and original ordered part layout. All 36 original baseline raw file hashes and all 36 source-after raw hashes were checked in the full-data proof. `data/reviewed-geography-restoration-proof.json` and `docs/REVIEWED_GEOGRAPHY_RESTORATION.md` retain the result and newline conventions. The older `restore-geographic-repair-stage.py` is a footprint-oriented source helper; use the reviewed wrapper for a complete reversal across both migrations.
+
+A `.cache` path in a producer document is an output/source-download location, not the durable handoff. Reconstruct reviewed geography with the command above before using an incremental producer's before/after arguments. Native public rasters can be downloaded from their immutable URLs and checked against retained hashes when rederivation is needed; current prepared content runs without them. Namibia's blocked candidate products and original source bytes are retained in `data/retained-geographic-sources/namibia`; do not apply that candidate merely because its local stage has disappeared. All Git evidence manifests, source-quality part hashes, and public evidence paths must match before replaying. Consult the migration documents for unresolved source, semantic, device and publication gates.
 
 The application consumes evidence through stable IDs, sparse supported intervals, and provenance. Add factual content through the existing import contract; do not materialize one row per location per year, fabricate gap-filling records, or modify map geometry as a side effect of content research.
+
+The checkpoint scan found no tracked or eligible untracked implementation file above the Site Git limit of 16 MiB, and none above GitHub's 100 MB file limit. The largest current file is `data/geographic-migration-review.json` at 16,694,976 bytes, only 82,240 bytes below 16 MiB; rerun the size gate after adding research content. Completed product/release manifests and all four public Namibia evidence links were checked for existing matching byte hashes. Local databases, caches, build output and credentials remain excluded from Git.

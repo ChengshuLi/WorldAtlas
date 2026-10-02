@@ -28,12 +28,55 @@
       "status": "passed",
       "output_sha256": "dba34ba4fb44b13aca16b94356bc2d580fa2fadd47dcff9149bdd870d2381d47",
       "result": "Local real D1/R2 bindings: dated graph, imports, idempotence, atomic collisions, example filtering, date boundaries, origin/body validation, immutable audio range/round trip, and sourced correction/withdrawal history passed."
+    },
+    {
+      "command": "npm run build:hosted",
+      "status": "passed",
+      "output_sha256": "cc7c0420ead8713ad73161c90c89fd2fdf618c071df1b3ce1622394ac43f5e87",
+      "result": "Deployment files: 266995797 bytes; catalog bootstrap and persistent media are separate."
+    },
+    {
+      "command": "python scripts/validate-ownership-runtime.py --source data/ownership-history --runtime data/ownership-runtime",
+      "status": "passed",
+      "output_sha256": "9234f8df6306f02702e7b429579177c73b176cf7d29ad0d3d5aa3edce1d72d52",
+      "result": "{\"source_index_sha256\": \"57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353\", \"runtime_index_sha256\": \"6970c9fa295da8ec3d581c50c2e4193cb5b10a62ac4a122354f5fcad32b796ef\", \"locations\": 49589, \"source_intervals\": 6833837, \"transport_intervals\": 7411391, \"all_exact_interval_and_evidence_tuples_match\": true}"
+    },
+    {
+      "command": "node --test test/geographic-release-preparation.mjs",
+      "status": "passed",
+      "output_sha256": "6848607d7406552c2bd66ef7d117cb3c17d6b8c39370b9138179d4cd4de13229",
+      "result": "\u2139 duration_ms 82969.509104"
+    },
+    {
+      "command": "npm run build:hosted",
+      "status": "passed",
+      "output_sha256": "de5ec21e8284324e5bafe348ffe699148db30569e92a341202624e263828bdee",
+      "result": "Deployment files: 266995797 bytes; catalog bootstrap and persistent media are separate."
+    },
+    {
+      "command": "ATLAS_REQUIRE_PREPARED=1 ATLAS_REQUIRE_STATIC=1 npm test",
+      "status": "passed",
+      "output_sha256": "2abb13b5fa90bff0234994023a62a8d4854dc079f6288d74ff53d9c03ddb8031",
+      "result": "\u2139 duration_ms 228864.840684"
     }
   ],
   "pending": [
-    "Matching full publication suite",
-    "Final browser and content-only checks",
     "Private Site deployment and database bootstrap"
   ],
-  "open_items_document": "docs/HANDOFF_STATUS.md"
+  "open_items_document": "docs/HANDOFF_STATUS.md",
+  "browser_receipt": "docs/validation-receipts/installed-final-browser.json",
+  "content_only_receipt": "docs/validation/content-independence.json",
+  "publication_suite": {
+    "tests": 138,
+    "passed": 138,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 228864.840684
+  },
+  "build": {
+    "bytes": 266995797,
+    "all_files_under_25_MiB": true,
+    "package_under_256_MiB": true,
+    "content_QA_asset_hashes_identical": true
+  }
 }

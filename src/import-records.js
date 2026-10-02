@@ -33,7 +33,7 @@ export function previewImport(raw){
      if(row.attribute==='population'){if(!Number.isSafeInteger(row.value)||row.value<0)throw Error('Population must be a nonnegative whole number.');}
      else text(row.value,'Attribute value');
      if(['owner','culture','religion'].includes(row.attribute))text(row.category_id,'Stable category ID');
-     if(row.attribute==='rank'&&!ranks.includes(row.value))throw Error('Rank must be rural settlement, town, city or metropolis.');
+     if(row.attribute==='rank'&&!ranks.includes(row.value))throw Error('Rank must be unsettled, rural settlement, town, city or metropolis.');
      if(row.attribute==='habitation'&&!['inhabited','uninhabited','unknown'].includes(row.value))throw Error('Habitation must be inhabited, uninhabited or unknown.');
     }
    }

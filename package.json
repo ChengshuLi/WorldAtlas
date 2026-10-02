@@ -14,7 +14,7 @@
     "db:generate": "drizzle-kit generate",
     "data:hosted-catalog": "node scripts/prepare-hosted-catalog.mjs",
     "start": "node server.mjs --production",
-    "test": "node --test test/*.test.mjs",
+    "test": "node --test --test-concurrency=2 test/*.test.mjs",
     "test:ui": "node --test test/browser.mjs",
     "data:prepare": "node scripts/prepare.mjs",
     "data:history": "node scripts/prepare-history.mjs",

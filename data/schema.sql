@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS units (
   level TEXT NOT NULL CHECK(level IN ('province','area','region','subcontinent','continent')),
   parent_id TEXT REFERENCES units(id), metadata TEXT NOT NULL DEFAULT '{}' CHECK(json_valid(metadata))
 );
+CREATE INDEX IF NOT EXISTS units_parent_id ON units(parent_id);
 DROP TRIGGER IF EXISTS unit_parent_insert;
 CREATE TRIGGER unit_parent_insert BEFORE INSERT ON units BEGIN
   SELECT RAISE(ABORT, 'Invalid hierarchy parent: levels cannot be skipped') WHERE
@@ -25,6 +26,7 @@ CREATE TABLE IF NOT EXISTS locations (
   active INTEGER NOT NULL DEFAULT 1 CHECK(active IN (0,1)),
   metadata TEXT NOT NULL DEFAULT '{}' CHECK(json_valid(metadata))
 );
+CREATE INDEX IF NOT EXISTS locations_parent_id ON locations(parent_id);
 DROP TRIGGER IF EXISTS location_parent_insert;
 CREATE TRIGGER location_parent_insert BEFORE INSERT ON locations BEGIN
   SELECT RAISE(ABORT, 'Location requires a province parent') WHERE NOT EXISTS (SELECT 1 FROM units WHERE id = NEW.parent_id AND level = 'province');
