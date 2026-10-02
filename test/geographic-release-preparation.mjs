@@ -13,6 +13,7 @@ import {stageGeographicRelease,finalizeGeographicRelease,geographicRelease,geogr
 
 const root=path.resolve(import.meta.dirname,'..'),data=path.join(root,'data');
 const geographyData=process.env.ATLAS_REVIEWED_GEOGRAPHY??data;
+const migrationFolder=process.env.ATLAS_DRIZZLE_MIGRATIONS??path.join(root,'drizzle');
 const tiers=['continent','subcontinent','region','area','province','location'];
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const bytes=file=>fs.readFileSync(file);
@@ -24,7 +25,7 @@ const hashRows=(rows,key)=>sha(JSON.stringify(rows.toSorted((a,b)=>binary(a[key]
 const normalizedMember=(m,kind)=>({entity_id:m.entity_id,kind,parent_id:m.parent_id??null,reference_name:m.reference_name??null,active:m.active,source_id:m.source_id,evidence:typeof m.evidence==='string'?JSON.parse(m.evidence):m.evidence});
 const normalizedChange=c=>({id:c.id,old_entity_id:c.old_entity_id??null,new_entity_id:c.new_entity_id??null,change_type:c.change_type,source_id:c.source_id,evidence:typeof c.evidence==='string'?JSON.parse(c.evidence):c.evidence});
 class D1 {
- constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const file of fs.readdirSync(path.join(root,'drizzle')).filter(f=>f.endsWith('.sql')).sort())this.sqlite.exec(bytes(path.join(root,'drizzle',file)).toString());}
+ constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const file of fs.readdirSync(migrationFolder).filter(f=>f.endsWith('.sql')).sort())this.sqlite.exec(bytes(path.join(migrationFolder,file)).toString());}
  prepare(sql){const sqlite=this.sqlite;let args=[];return {bind(...values){args=values;return this;},async all(){return {results:sqlite.prepare(sql).all(...args)};},async first(){return sqlite.prepare(sql).get(...args)??null;},run(){return {meta:{changes:Number(sqlite.prepare(sql).run(...args).changes)}};}};}
  async batch(statements){this.sqlite.exec('BEGIN IMMEDIATE');try{const result=statements.map(s=>s.run());this.sqlite.exec('COMMIT');return result;}catch(error){this.sqlite.exec('ROLLBACK');throw error;}}
 }
