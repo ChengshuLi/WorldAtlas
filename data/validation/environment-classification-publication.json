@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "project_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db",
+  "site_version": 14,
+  "site_source_commit": "3c36d90637e52919875940e7ad2d38fd8ec9e7b1",
+  "deployment_id": "appgdep_6abf1ee3ab088191b5aebbf98ededd08",
+  "saved_version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_20288a5d729c8191bdbc1108178f517d",
+  "status": "succeeded",
+  "url": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+  "published_at_utc": "2026-10-02T03:03:12.755165+00:00",
+  "audience": {
+    "owner_private_preserved": true
+  },
+  "feature": "Fixed topography, vegetation and climate classifications",
+  "classes": {
+    "topography": 12,
+    "vegetation": 16,
+    "climate": 32
+  },
+  "raw_migrations_0000_through_0006_unchanged": true,
+  "migration_0007_sha256": "c566a87dc05a5ec5a1311019b60cfea54e8708b29ec2df6c8e80057432c4708b",
+  "production_verification": "data/validation/environment-classification-production-verification.json"
+}
