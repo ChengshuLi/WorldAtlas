@@ -17,7 +17,8 @@ test('all six continent scopes partition every prepared location and reconcile r
  const indexPath=new URL('../data/world-index.json',import.meta.url);assert.ok(fs.existsSync(indexPath),'Prepared hierarchy required for exhaustive coverage check');
  const index=JSON.parse(fs.readFileSync(indexPath)),hierarchy=JSON.parse(fs.readFileSync(new URL('../data/hierarchy.json',import.meta.url))),parents=new Map(hierarchy.map(row=>[row.id,row])),features=[];
  for(const part of index.parts)for(const row of JSON.parse(fs.readFileSync(new URL(`../data/${part}`,import.meta.url))).features)features.push({id:row.id,properties:{reference_owner:row.properties.reference_owner,parent_id:row.properties.parent_id}});
- const review=JSON.parse(fs.readFileSync(new URL('../data/world-review.json',import.meta.url))),seen=new Set();
+ const projected=new URL('../data/macro-foundation/world-review-projection.json',import.meta.url);
+ const review=JSON.parse(fs.readFileSync(fs.existsSync(projected)?projected:new URL('../data/world-review.json',import.meta.url))),seen=new Set();
  for(const continent of hierarchy.filter(row=>row.level==='continent')){
   const scope=coverageScope(features,parents,review.territories,{continent:continent.name});assert.ok(scope.features.length>0);assert.equal(scope.profiles.reduce((sum,p)=>sum+p.selected_locations,0),scope.features.length);
   for(const feature of scope.features){assert.equal(seen.has(feature.id),false,'A location appears in only one continent');seen.add(feature.id);}
