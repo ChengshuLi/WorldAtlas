@@ -1,0 +1,1231 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "72f36713-46d6-47e8-a820-8324047e6cdb",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "atlas_attribute_records": {
+      "name": "atlas_attribute_records",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "location_id": {
+          "name": "location_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "attribute": {
+          "name": "attribute",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "category_id": {
+          "name": "category_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valid_from": {
+          "name": "valid_from",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valid_to": {
+          "name": "valid_to",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "method": {
+          "name": "method",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "is_example": {
+          "name": "is_example",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {
+        "attributes_location_dates": {
+          "name": "attributes_location_dates",
+          "columns": [
+            "location_id",
+            "attribute",
+            "valid_from",
+            "valid_to"
+          ],
+          "isUnique": false
+        },
+        "attributes_date_id": {
+          "name": "attributes_date_id",
+          "columns": [
+            "valid_from",
+            "valid_to",
+            "id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "atlas_attribute_records_location_id_atlas_entities_id_fk": {
+          "name": "atlas_attribute_records_location_id_atlas_entities_id_fk",
+          "tableFrom": "atlas_attribute_records",
+          "tableTo": "atlas_entities",
+          "columnsFrom": [
+            "location_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "atlas_attribute_records_category_id_atlas_categories_id_fk": {
+          "name": "atlas_attribute_records_category_id_atlas_categories_id_fk",
+          "tableFrom": "atlas_attribute_records",
+          "tableTo": "atlas_categories",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "atlas_attribute_records_source_id_atlas_sources_id_fk": {
+          "name": "atlas_attribute_records_source_id_atlas_sources_id_fk",
+          "tableFrom": "atlas_attribute_records",
+          "tableTo": "atlas_sources",
+          "columnsFrom": [
+            "source_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "attribute_names": {
+          "name": "attribute_names",
+          "value": "\"atlas_attribute_records\".\"attribute\" IN ('owner','population','culture','religion','rank','topography','vegetation','climate','habitation')"
+        },
+        "attribute_dates": {
+          "name": "attribute_dates",
+          "value": "typeof(\"atlas_attribute_records\".\"valid_from\")='integer' AND \"atlas_attribute_records\".\"valid_from\" BETWEEN -3000 AND 2026 AND \"atlas_attribute_records\".\"valid_from\"!=0 AND typeof(\"atlas_attribute_records\".\"valid_to\")='integer' AND \"atlas_attribute_records\".\"valid_to\" BETWEEN -2999 AND 2027 AND \"atlas_attribute_records\".\"valid_to\"!=0 AND \"atlas_attribute_records\".\"valid_to\">\"atlas_attribute_records\".\"valid_from\""
+        },
+        "attribute_value": {
+          "name": "attribute_value",
+          "value": "json_valid(\"atlas_attribute_records\".\"value\") AND (json_type(\"atlas_attribute_records\".\"value\")='null' OR (\"atlas_attribute_records\".\"attribute\"='population' AND json_type(\"atlas_attribute_records\".\"value\")='integer' AND json_extract(\"atlas_attribute_records\".\"value\",'$') BETWEEN 0 AND 9007199254740991) OR (\"atlas_attribute_records\".\"attribute\"!='population' AND json_type(\"atlas_attribute_records\".\"value\")='text' AND length(trim(json_extract(\"atlas_attribute_records\".\"value\",'$')))>0))"
+        },
+        "attribute_category": {
+          "name": "attribute_category",
+          "value": "(\"atlas_attribute_records\".\"attribute\" NOT IN ('owner','culture','religion') OR json_type(\"atlas_attribute_records\".\"value\")='null' OR \"atlas_attribute_records\".\"category_id\" IS NOT NULL) AND (\"atlas_attribute_records\".\"category_id\" IS NULL OR (\"atlas_attribute_records\".\"attribute\" IN ('owner','culture','religion') AND json_type(\"atlas_attribute_records\".\"value\")='text'))"
+        },
+        "attribute_rank": {
+          "name": "attribute_rank",
+          "value": "\"atlas_attribute_records\".\"attribute\"!='rank' OR json_type(\"atlas_attribute_records\".\"value\")='null' OR json_extract(\"atlas_attribute_records\".\"value\",'$') IN ('rural settlement','town','city','metropolis')"
+        },
+        "attribute_habitation": {
+          "name": "attribute_habitation",
+          "value": "\"atlas_attribute_records\".\"attribute\"!='habitation' OR json_type(\"atlas_attribute_records\".\"value\")='null' OR json_extract(\"atlas_attribute_records\".\"value\",'$') IN ('inhabited','uninhabited','unknown')"
+        },
+        "attribute_method": {
+          "name": "attribute_method",
+          "value": "\"atlas_attribute_records\".\"method\" IN ('direct','majority-area','derived','reference','estimate')"
+        },
+        "attribute_status": {
+          "name": "attribute_status",
+          "value": "\"atlas_attribute_records\".\"status\" IN ('sourced','derived','reference','estimate','unknown','disputed','no-majority','example')"
+        },
+        "attribute_example": {
+          "name": "attribute_example",
+          "value": "\"atlas_attribute_records\".\"is_example\" IN (0,1)"
+        },
+        "attribute_metadata": {
+          "name": "attribute_metadata",
+          "value": "json_valid(\"atlas_attribute_records\".\"metadata\") AND json_type(\"atlas_attribute_records\".\"metadata\")='object'"
+        }
+      }
+    },
+    "atlas_categories": {
+      "name": "atlas_categories",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "atlas_categories_id_atlas_entities_id_fk": {
+          "name": "atlas_categories_id_atlas_entities_id_fk",
+          "tableFrom": "atlas_categories",
+          "tableTo": "atlas_entities",
+          "columnsFrom": [
+            "id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "atlas_categories_source_id_atlas_sources_id_fk": {
+          "name": "atlas_categories_source_id_atlas_sources_id_fk",
+          "tableFrom": "atlas_categories",
+          "tableTo": "atlas_sources",
+          "columnsFrom": [
+            "source_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "category_text": {
+          "name": "category_text",
+          "value": "length(trim(\"atlas_categories\".\"id\"))>0 AND length(trim(\"atlas_categories\".\"name\"))>0"
+        },
+        "category_kind": {
+          "name": "category_kind",
+          "value": "\"atlas_categories\".\"kind\" IN ('owner','culture','religion')"
+        },
+        "category_metadata": {
+          "name": "category_metadata",
+          "value": "json_valid(\"atlas_categories\".\"metadata\") AND json_type(\"atlas_categories\".\"metadata\")='object'"
+        }
+      }
+    },
+    "atlas_entities": {
+      "name": "atlas_entities",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valid_from": {
+          "name": "valid_from",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valid_to": {
+          "name": "valid_to",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "reference_owner": {
+          "name": "reference_owner",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "is_example": {
+          "name": "is_example",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "active": {
+          "name": "active",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {
+        "entities_kind_id": {
+          "name": "entities_kind_id",
+          "columns": [
+            "kind",
+            "active",
+            "id"
+          ],
+          "isUnique": false
+        },
+        "entities_parent": {
+          "name": "entities_parent",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "atlas_entities_kind_atlas_entity_types_id_fk": {
+          "name": "atlas_entities_kind_atlas_entity_types_id_fk",
+          "tableFrom": "atlas_entities",
+          "tableTo": "atlas_entity_types",
+          "columnsFrom": [
+            "kind"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "atlas_entities_parent_id_atlas_entities_id_fk": {
+          "name": "atlas_entities_parent_id_atlas_entities_id_fk",
+          "tableFrom": "atlas_entities",
+          "tableTo": "atlas_entities",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "atlas_entities_source_id_atlas_sources_id_fk": {
+          "name": "atlas_entities_source_id_atlas_sources_id_fk",
+          "tableFrom": "atlas_entities",
+          "tableTo": "atlas_sources",
+          "columnsFrom": [
+            "source_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "entity_text": {
+          "name": "entity_text",
+          "value": "length(trim(\"atlas_entities\".\"id\"))>0 AND length(trim(\"atlas_entities\".\"name\"))>0"
+        },
+        "entity_dates": {
+          "name": "entity_dates",
+          "value": "(\"atlas_entities\".\"valid_from\" IS NULL OR typeof(\"atlas_entities\".\"valid_from\")='integer' AND \"atlas_entities\".\"valid_from\" BETWEEN -3000 AND 2026 AND \"atlas_entities\".\"valid_from\"!=0) AND (\"atlas_entities\".\"valid_to\" IS NULL OR typeof(\"atlas_entities\".\"valid_to\")='integer' AND \"atlas_entities\".\"valid_to\" BETWEEN -2999 AND 2027 AND \"atlas_entities\".\"valid_to\"!=0) AND (\"atlas_entities\".\"valid_from\" IS NULL OR \"atlas_entities\".\"valid_to\" IS NULL OR \"atlas_entities\".\"valid_to\">\"atlas_entities\".\"valid_from\") AND ((\"atlas_entities\".\"valid_from\" IS NULL AND \"atlas_entities\".\"valid_to\" IS NULL) OR \"atlas_entities\".\"source_id\" IS NOT NULL)"
+        },
+        "entity_example": {
+          "name": "entity_example",
+          "value": "\"atlas_entities\".\"is_example\" IN (0,1)"
+        },
+        "entity_active": {
+          "name": "entity_active",
+          "value": "\"atlas_entities\".\"active\" IN (0,1)"
+        },
+        "entity_metadata": {
+          "name": "entity_metadata",
+          "value": "json_valid(\"atlas_entities\".\"metadata\") AND json_type(\"atlas_entities\".\"metadata\")='object'"
+        }
+      }
+    },
+    "atlas_entity_types": {
+      "name": "atlas_entity_types",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "geographic_level": {
+          "name": "geographic_level",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "entity_type_text": {
+          "name": "entity_type_text",
+          "value": "length(trim(\"atlas_entity_types\".\"id\"))>0 AND length(trim(\"atlas_entity_types\".\"name\"))>0"
+        },
+        "entity_type_level": {
+          "name": "entity_type_level",
+          "value": "(\"atlas_entity_types\".\"id\" IN ('location','province','area','region','subcontinent','continent') AND \"atlas_entity_types\".\"geographic_level\" IS NOT NULL AND \"atlas_entity_types\".\"geographic_level\"=CASE \"atlas_entity_types\".\"id\" WHEN 'location' THEN 0 WHEN 'province' THEN 1 WHEN 'area' THEN 2 WHEN 'region' THEN 3 WHEN 'subcontinent' THEN 4 WHEN 'continent' THEN 5 END) OR (\"atlas_entity_types\".\"id\" NOT IN ('location','province','area','region','subcontinent','continent') AND \"atlas_entity_types\".\"geographic_level\" IS NULL)"
+        },
+        "entity_type_metadata": {
+          "name": "entity_type_metadata",
+          "value": "json_valid(\"atlas_entity_types\".\"metadata\") AND json_type(\"atlas_entity_types\".\"metadata\")='object'"
+        }
+      }
+    },
+    "atlas_ingestions": {
+      "name": "atlas_ingestions",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "fingerprint": {
+          "name": "fingerprint",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "counts": {
+          "name": "counts",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "ingestion_counts": {
+          "name": "ingestion_counts",
+          "value": "json_valid(\"atlas_ingestions\".\"counts\") AND json_type(\"atlas_ingestions\".\"counts\")='object'"
+        },
+        "ingestion_fingerprint": {
+          "name": "ingestion_fingerprint",
+          "value": "length(\"atlas_ingestions\".\"fingerprint\")=64"
+        }
+      }
+    },
+    "atlas_media": {
+      "name": "atlas_media",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "object_key": {
+          "name": "object_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "sha256": {
+          "name": "sha256",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "bytes": {
+          "name": "bytes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "mime": {
+          "name": "mime",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "license": {
+          "name": "license",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "attribution": {
+          "name": "attribution",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'ready'"
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {
+        "atlas_media_object_key_unique": {
+          "name": "atlas_media_object_key_unique",
+          "columns": [
+            "object_key"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "atlas_media_source_id_atlas_sources_id_fk": {
+          "name": "atlas_media_source_id_atlas_sources_id_fk",
+          "tableFrom": "atlas_media",
+          "tableTo": "atlas_sources",
+          "columnsFrom": [
+            "source_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "media_digest": {
+          "name": "media_digest",
+          "value": "length(\"atlas_media\".\"sha256\")=64 AND \"atlas_media\".\"sha256\" NOT GLOB '*[^0-9a-f]*' AND \"atlas_media\".\"object_key\"='media/'||\"atlas_media\".\"sha256\""
+        },
+        "media_bytes": {
+          "name": "media_bytes",
+          "value": "typeof(\"atlas_media\".\"bytes\")='integer' AND \"atlas_media\".\"bytes\">=0 AND \"atlas_media\".\"bytes\"<=9007199254740991"
+        },
+        "media_text": {
+          "name": "media_text",
+          "value": "length(trim(\"atlas_media\".\"object_key\"))>0 AND length(trim(\"atlas_media\".\"mime\"))>0 AND length(trim(\"atlas_media\".\"name\"))>0 AND length(trim(\"atlas_media\".\"license\"))>0 AND length(trim(\"atlas_media\".\"attribution\"))>0"
+        },
+        "media_status": {
+          "name": "media_status",
+          "value": "\"atlas_media\".\"status\" IN ('pending','ready','published')"
+        },
+        "media_metadata": {
+          "name": "media_metadata",
+          "value": "json_valid(\"atlas_media\".\"metadata\") AND json_type(\"atlas_media\".\"metadata\")='object'"
+        }
+      }
+    },
+    "atlas_media_links": {
+      "name": "atlas_media_links",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "media_id": {
+          "name": "media_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "entity_id": {
+          "name": "entity_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "caption": {
+          "name": "caption",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "is_example": {
+          "name": "is_example",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "valid_from": {
+          "name": "valid_from",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valid_to": {
+          "name": "valid_to",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {
+        "media_links_entity": {
+          "name": "media_links_entity",
+          "columns": [
+            "entity_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "atlas_media_links_media_id_atlas_media_id_fk": {
+          "name": "atlas_media_links_media_id_atlas_media_id_fk",
+          "tableFrom": "atlas_media_links",
+          "tableTo": "atlas_media",
+          "columnsFrom": [
+            "media_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "atlas_media_links_entity_id_atlas_entities_id_fk": {
+          "name": "atlas_media_links_entity_id_atlas_entities_id_fk",
+          "tableFrom": "atlas_media_links",
+          "tableTo": "atlas_entities",
+          "columnsFrom": [
+            "entity_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "atlas_media_links_source_id_atlas_sources_id_fk": {
+          "name": "atlas_media_links_source_id_atlas_sources_id_fk",
+          "tableFrom": "atlas_media_links",
+          "tableTo": "atlas_sources",
+          "columnsFrom": [
+            "source_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "media_link_example": {
+          "name": "media_link_example",
+          "value": "\"atlas_media_links\".\"is_example\" IN (0,1)"
+        },
+        "media_link_role": {
+          "name": "media_link_role",
+          "value": "length(trim(\"atlas_media_links\".\"role\"))>0"
+        },
+        "media_link_dates": {
+          "name": "media_link_dates",
+          "value": "(\"atlas_media_links\".\"valid_from\" IS NULL AND \"atlas_media_links\".\"valid_to\" IS NULL) OR (\"atlas_media_links\".\"valid_from\" IS NOT NULL AND \"atlas_media_links\".\"valid_to\" IS NOT NULL AND typeof(\"atlas_media_links\".\"valid_from\")='integer' AND \"atlas_media_links\".\"valid_from\" BETWEEN -3000 AND 2026 AND \"atlas_media_links\".\"valid_from\"!=0 AND typeof(\"atlas_media_links\".\"valid_to\")='integer' AND \"atlas_media_links\".\"valid_to\" BETWEEN -2999 AND 2027 AND \"atlas_media_links\".\"valid_to\"!=0 AND \"atlas_media_links\".\"valid_to\">\"atlas_media_links\".\"valid_from\")"
+        },
+        "media_link_metadata": {
+          "name": "media_link_metadata",
+          "value": "json_valid(\"atlas_media_links\".\"metadata\") AND json_type(\"atlas_media_links\".\"metadata\")='object'"
+        }
+      }
+    },
+    "atlas_names": {
+      "name": "atlas_names",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "entity_id": {
+          "name": "entity_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "language": {
+          "name": "language",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'und'"
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'preferred'"
+        },
+        "valid_from": {
+          "name": "valid_from",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valid_to": {
+          "name": "valid_to",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "is_example": {
+          "name": "is_example",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {
+        "names_entity_dates": {
+          "name": "names_entity_dates",
+          "columns": [
+            "entity_id",
+            "valid_from",
+            "valid_to"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "atlas_names_entity_id_atlas_entities_id_fk": {
+          "name": "atlas_names_entity_id_atlas_entities_id_fk",
+          "tableFrom": "atlas_names",
+          "tableTo": "atlas_entities",
+          "columnsFrom": [
+            "entity_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "atlas_names_source_id_atlas_sources_id_fk": {
+          "name": "atlas_names_source_id_atlas_sources_id_fk",
+          "tableFrom": "atlas_names",
+          "tableTo": "atlas_sources",
+          "columnsFrom": [
+            "source_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "name_text": {
+          "name": "name_text",
+          "value": "length(trim(\"atlas_names\".\"name\"))>0 AND length(trim(\"atlas_names\".\"language\"))>0"
+        },
+        "name_role": {
+          "name": "name_role",
+          "value": "\"atlas_names\".\"role\" IN ('preferred','alias')"
+        },
+        "name_dates": {
+          "name": "name_dates",
+          "value": "typeof(\"atlas_names\".\"valid_from\")='integer' AND \"atlas_names\".\"valid_from\" BETWEEN -3000 AND 2026 AND \"atlas_names\".\"valid_from\"!=0 AND typeof(\"atlas_names\".\"valid_to\")='integer' AND \"atlas_names\".\"valid_to\" BETWEEN -2999 AND 2027 AND \"atlas_names\".\"valid_to\"!=0 AND \"atlas_names\".\"valid_to\">\"atlas_names\".\"valid_from\""
+        },
+        "name_example": {
+          "name": "name_example",
+          "value": "\"atlas_names\".\"is_example\" IN (0,1)"
+        },
+        "name_metadata": {
+          "name": "name_metadata",
+          "value": "json_valid(\"atlas_names\".\"metadata\") AND json_type(\"atlas_names\".\"metadata\")='object'"
+        }
+      }
+    },
+    "atlas_relationships": {
+      "name": "atlas_relationships",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_entity_id": {
+          "name": "source_entity_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "target_entity_id": {
+          "name": "target_entity_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "relationship_type": {
+          "name": "relationship_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valid_from": {
+          "name": "valid_from",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valid_to": {
+          "name": "valid_to",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "is_example": {
+          "name": "is_example",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {
+        "relationships_source_dates": {
+          "name": "relationships_source_dates",
+          "columns": [
+            "source_entity_id",
+            "valid_from",
+            "valid_to"
+          ],
+          "isUnique": false
+        },
+        "relationships_target_dates": {
+          "name": "relationships_target_dates",
+          "columns": [
+            "target_entity_id",
+            "valid_from",
+            "valid_to"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "atlas_relationships_source_entity_id_atlas_entities_id_fk": {
+          "name": "atlas_relationships_source_entity_id_atlas_entities_id_fk",
+          "tableFrom": "atlas_relationships",
+          "tableTo": "atlas_entities",
+          "columnsFrom": [
+            "source_entity_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "atlas_relationships_target_entity_id_atlas_entities_id_fk": {
+          "name": "atlas_relationships_target_entity_id_atlas_entities_id_fk",
+          "tableFrom": "atlas_relationships",
+          "tableTo": "atlas_entities",
+          "columnsFrom": [
+            "target_entity_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "atlas_relationships_source_id_atlas_sources_id_fk": {
+          "name": "atlas_relationships_source_id_atlas_sources_id_fk",
+          "tableFrom": "atlas_relationships",
+          "tableTo": "atlas_sources",
+          "columnsFrom": [
+            "source_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "relationship_text": {
+          "name": "relationship_text",
+          "value": "length(trim(\"atlas_relationships\".\"relationship_type\"))>0"
+        },
+        "relationship_dates": {
+          "name": "relationship_dates",
+          "value": "(\"atlas_relationships\".\"valid_from\" IS NULL AND \"atlas_relationships\".\"valid_to\" IS NULL) OR (\"atlas_relationships\".\"valid_from\" IS NOT NULL AND \"atlas_relationships\".\"valid_to\" IS NOT NULL AND typeof(\"atlas_relationships\".\"valid_from\")='integer' AND \"atlas_relationships\".\"valid_from\" BETWEEN -3000 AND 2026 AND \"atlas_relationships\".\"valid_from\"!=0 AND typeof(\"atlas_relationships\".\"valid_to\")='integer' AND \"atlas_relationships\".\"valid_to\" BETWEEN -2999 AND 2027 AND \"atlas_relationships\".\"valid_to\"!=0 AND \"atlas_relationships\".\"valid_to\">\"atlas_relationships\".\"valid_from\")"
+        },
+        "relationship_example": {
+          "name": "relationship_example",
+          "value": "\"atlas_relationships\".\"is_example\" IN (0,1)"
+        },
+        "relationship_metadata": {
+          "name": "relationship_metadata",
+          "value": "json_valid(\"atlas_relationships\".\"metadata\") AND json_type(\"atlas_relationships\".\"metadata\")='object'"
+        }
+      }
+    },
+    "atlas_sources": {
+      "name": "atlas_sources",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "license": {
+          "name": "license",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "vintage": {
+          "name": "vintage",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "supported_from": {
+          "name": "supported_from",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "supported_to": {
+          "name": "supported_to",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "source_text": {
+          "name": "source_text",
+          "value": "length(trim(\"atlas_sources\".\"id\"))>0 AND length(trim(\"atlas_sources\".\"name\"))>0 AND length(trim(\"atlas_sources\".\"license\"))>0 AND length(trim(\"atlas_sources\".\"vintage\"))>0"
+        },
+        "source_dates": {
+          "name": "source_dates",
+          "value": "typeof(\"atlas_sources\".\"supported_from\")='integer' AND \"atlas_sources\".\"supported_from\" BETWEEN -3000 AND 2026 AND \"atlas_sources\".\"supported_from\"!=0 AND typeof(\"atlas_sources\".\"supported_to\")='integer' AND \"atlas_sources\".\"supported_to\" BETWEEN -2999 AND 2027 AND \"atlas_sources\".\"supported_to\"!=0 AND \"atlas_sources\".\"supported_to\">\"atlas_sources\".\"supported_from\""
+        },
+        "source_status": {
+          "name": "source_status",
+          "value": "\"atlas_sources\".\"status\" IN ('historical','reference','estimate','example')"
+        },
+        "source_metadata": {
+          "name": "source_metadata",
+          "value": "json_valid(\"atlas_sources\".\"metadata\") AND json_type(\"atlas_sources\".\"metadata\")='object'"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

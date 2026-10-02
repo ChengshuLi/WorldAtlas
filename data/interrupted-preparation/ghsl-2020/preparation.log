@@ -1,0 +1,29 @@
+Epoch 2020: inspected 421 locations
+Epoch 2020: inspected 848 locations
+Epoch 2020: inspected 1251 locations
+Epoch 2020: inspected 1377 locations
+Epoch 2020: wrote epoch-2020-part-0.json.gz, 1500 total locations
+Epoch 2020: inspected 1559 locations
+Epoch 2020: inspected 1786 locations
+Traceback (most recent call last):
+  File "/workspace/WorldAtlas/scripts/prepare-ghsl-population.py", line 339, in <module>
+    prepare(args.epoch)
+  File "/workspace/WorldAtlas/scripts/prepare-ghsl-population.py", line 255, in prepare
+    value, area, zero_area = allocate(p, dataset, proof)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/WorldAtlas/scripts/prepare-ghsl-population.py", line 155, in allocate
+    weights = cell_shares(piece, affine, height, width, partition)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/WorldAtlas/scripts/prepare-ghsl-population.py", line 133, in cell_shares
+    areas = np.bincount(cell_ids, weights=geometry_area(intersection(cells[cell_ids], pieces[part_ids])), minlength=len(cells))
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent/.local/lib/python3.12/site-packages/shapely/decorators.py", line 173, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent/.local/lib/python3.12/site-packages/shapely/decorators.py", line 88, in wrapped
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent/.local/lib/python3.12/site-packages/shapely/set_operations.py", line 168, in intersection
+    return lib.intersection(a, b, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

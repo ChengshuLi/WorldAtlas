@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--[if lt IE 9]>
+    <script>
+      document.createElement('header');
+      document.createElement('nav');
+      document.createElement('section');
+      document.createElement('article');
+      document.createElement('aside');
+      document.createElement('footer');
+    </script>
+    <![endif]-->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Copyright - Nomis - Official Census and Labour Market Statistics</title>
+    <meta name="description" content="nomis - official labour market statistics" />
+    <meta name="keywords" content="annual business inquiry" />
+    <meta name="viewport" content="initial-scale=1" />
+    <meta charset="UTF-8" />
+    <link title="Easy Access version" rel="alternate" href="/home/accesskeys.htm" media="aural, braille, tty">
+    <link rel="alternate" type="application/rss+xml" title="Nomis RSS News Feed" href="/articles/rssArticles.asp" />
+    <link rel="alternate" type="application/rss+xml" title="Nomis RSS Release Dates Feed" href="/home/rssRelease_dates.asp" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="/libs/jqueryui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/libs/jquery-simplePagination/simplePagination.min.css" />
+    <link rel="stylesheet" href="/libs/leaflet/leaflet.css" type="text/css" />
+
+    <link rel="stylesheet" href="/css/nomis.css" type="text/css" />
+    <link rel="stylesheet" href="/css/standard.css" type="text/css" />
+    <link rel="stylesheet" href="/css/nomis-ui.css" type="text/css" />
+    <link rel="stylesheet" href="/css/menubar.css" type="text/css" />
+    <link rel="stylesheet" href="/css/responsive.css" type="text/css" />
+    <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
+
+    <!--[if Safari]>
+        <link rel="stylesheet" href="/css/safari-nomis.css" type="text/css" />
+    <![endif]-->
+
+    <script type="text/javascript" src="/libs/modernizr/modernizr.min.js"></script>
+    <script type="text/javascript" src="/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/libs/jquery-cookie/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="/libs/jquery-simplePagination/jquery.simplePagination.min.js"></script>
+    <script type="text/javascript" src="/libs/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/libs/jqueryui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="/libs/leaflet/leaflet.min.js"></script>
+    
+    <style>
+        .prefFntCtrl:hover, .prefFntCtrl:visited { color: #00B; }
+        .prefFntCtrl { border: 1px solid transparent; padding: 1px; }
+        .activeFntSz { border-color: #00b; font-weight: normal; }
+        #nomisweb-organisation-name-title:hover { text-decoration: underline; }
+        .fa-search { border: 0; padding: 0.7em; background: #5f7d41; font-size: 13px; color: #fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
+        .fa-search:hover { cursor: pointer; }
+    </style>
+    <script type="text/javascript">
+        // Include D3 for browsers that support it
+        if (Modernizr.inlinesvg) { document.write ('<script type="text\/javascript" src="\/libs\/d3\/d3.min.js"><\/script>'); }
+    </script>
+        
+    <script type="text/javascript" src="/js/PageScripts.js"></script>
+    <script type="text/javascript" src="/js/nomis-core.js"></script>
+	<script type="text/javascript" src="/js/nomis-geography.js"></script>
+    <script type="text/javascript" src="/js/nomis-api.js"></script>
+    <script type="text/javascript" src="/js/nomis-ui.js"></script>
+    <script type="text/javascript" src="/js/nomis-stat.js"></script>
+    <script type="text/javascript" src="/js/cookies.js"></script>
+       
+	<script type="text/javascript">
+        const GA_TRACKING_ID = 'UA-3628896-1';
+
+        // Disable GA by default
+        window[`ga-disable-${GA_TRACKING_ID}`] = true;
+        if(hasCookieConsent()){
+            // Enable GA if consent is given
+            window[`ga-disable-${GA_TRACKING_ID}`] = false;
+
+            (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', GA_TRACKING_ID, 'auto');
+            ga('send', 'pageview');
+        }else{
+            // Cookies disabled 
+        	function ga(){};
+        }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+    // Set GA4 Measurement ID
+    const GA4_MEASUREMENT_ID = 'G-LMNEJ7PM1T';
+
+    // Disable GA4 by default
+    window[`ga-disable-${GA4_MEASUREMENT_ID}`] = true;
+
+    if (hasCookieConsent()) {
+        // Enable GA4 if consent is given
+        window[`ga-disable-${GA4_MEASUREMENT_ID}`] = false;
+
+        // Load the GA4 script
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`;
+        document.head.appendChild(script);
+
+        script.onload = function () {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', GA4_MEASUREMENT_ID);
+        };
+    }else{
+        // Cookies disabled 
+        function gtag(){};
+    }
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+        if(hasCookieConsent()){
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NJWJX69');
+        }
+    </script>
+    <!-- End Google Tag Manager -->
+
+</head>
+<body onload="javascript:try { pageLoaded(); } catch(er) { }" onunload="javascript:try { pageUnloaded(); } catch(er) { }">
+    <div role="status" id="titleStatusDiv" class="visually-hidden"></div>
+    <div id="nomis-webpage">
+        <div id="cookie-consent-wrapper" aria-labelledby="cookie-consent-heading" style="display: none;" role="alert">
+            <h1 id="cookie-consent-heading">Cookie Consent</h1>
+            <div class="cookie-container">
+                <div id="outstanding-cookie-decision-panel">
+                    <p id="cookie-consent-info">We use cookies to ensure you get the best experience on our website and to remember if you've accepted cookies.</p>
+                    <br>
+                    <button id="cookie-consent-accept-button" class="positive" aria-label="cookie-consent-accept" onclick="cookieAccept();" title="Consent to the use of cookies" type="button">Accept Cookies</button>
+                    <button id="cookie-consent-decline-button" class="positive" aria-label="cookie-consent-decline" onclick="cookieDecline();" title="Decline the use of cookies" type="button">Decline Cookies</button>
+                    <a href="/home/cookies.asp" id="cookie-link" title="Read about how cookies are used on the Nomis web site">View cookie policy</a>
+                </div>
+                <div id="confirmed-cookie-decision-panel" style="display: none;">
+                    <p>Thanks for confirming your cookie preference. You can view or change your <a href="javascript: showSitePrefs();">cookie settings</a> at any time.</p>
+                    <input id="cookie-consent-dismiss-button" aria-labelledby="cookie-consent-terms" onclick="cookieConsentDismiss();" title="Hide this message about cookies" type="button" value="Hide" />
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function shouldDisplayCookieConsent() { return $.cookie('cookie-consent') === undefined; }
+            function cookieAccept(){$('#outstanding-cookie-decision-panel').css('display', 'none'); $('#confirmed-cookie-decision-panel').css('display', 'block'); setCookieConsent(true);}
+            function cookieDecline(){$('#outstanding-cookie-decision-panel').css('display', 'none'); $('#confirmed-cookie-decision-panel').css('display', 'block'); setCookieConsent(false);}
+            function cookieConsentDismiss() { $('#cookie-consent-wrapper').slideUp(800); }
+            if (shouldDisplayCookieConsent()) { $('#cookie-consent-wrapper').css('display', 'block'); }
+        </script>
+        <div id="org-name-and-logo-wrapper" role="banner" aria-labelledby="nomisweb-organisation-name-title nomisweb-organisation-name-subtitle" style="overflow: hidden;">
+            <div class="hidden-until-focus">
+                <a href="#content-anchor" accesskey="s" class="skiptocontent">Skip to content</a>
+                <a href="/home/accessibility.asp" title="navigation link to Nomis website accessibility guide page">Skip to accessibility help</a>
+            </div>
+            <div id="nomisweb-organisation-name">
+                <div id="nomisweb-main-title-container"> <div id="nomisweb-organisation-name-title"><a href="/" accesskey="1">nomis</a></div> </div>
+                <div id="nomisweb-subtitle-container"> <div id="nomisweb-organisation-name-subtitle">official census and labour market statistics</div> </div>
+            </div>
+            <div class="nomisweb-ons-logo" style="float: none; text-align: right; margin-right: 0;">
+                <a href="https://www.ons.gov.uk">
+                    <img alt="National Statistics Logo" src="/images/ons-logo.svg" style="margin-top: 0; float: none; width: 19.7em;">
+                </a>
+                <div class="page-heading-tools" style="padding-left: 0 !important; background-color: #fff; margin-right: -5px; margin-top: 0; padding: 0 !important; clear: none;">
+                    <form id="site-search" onsubmit="if(document.getElementById('site-search-term').value == 'Search Nomis...') return false; else return true;" action="/home/Search" method="GET">
+                        <input type="hidden" id="site-search-context" name="context" value="" />
+                        <label class="obscure" for="site-search-term" id="lblsite-search-term">Search term</label>
+                        <input type="search" id="site-search-term" name="term" maxlength="75" aria-labelledby="lblsite-search-term" style="border: 1px solid #ddd; margin-right: 0; padding: 0.2em;" value="" />
+                        <button type="submit" style="padding: 0; border: 0;" title="Search" accesskey="4"><i class="fa fa-search"></i></button>
+                        <script type="text/javascript">
+                            NomisCore.setPlaceholder('site-search-term', 'Search...');
+                        </script>
+                    </form>
+                </div>               
+            </div>
+            
+        </div>
+        <!-- PRE-SITE-NAV-BANNER-HOOK -->
+        <div id="site-nav-banner">
+            <div id="menu-control">
+                <a title="Show/Hide site navigation menu" href="javascript:  $('#nomis-top-main-nav-wrapper').slideToggle(); event.preventDefault();"><img src="/images/menu.gif" alt="Picture of three horizontal lines representing a menu" /> Menu</a>
+                <a title="Set site preferences" href="javascript: showSitePrefs();"><img src="/images/cog.gif" alt="Picture of a cog representing settings for the web site" /></a>
+            </div>
+            <!-- Begin site navigation banner section -->
+            <div id="nomis-top-main-nav-wrapper" role="navigation" aria-label="Site Navigation">
+                <nav>
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="/" accesskey="1">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/home/profiles.asp">Reports</a>
+                            <div class="sub-nav">
+                                <h1>Area reports</h1>
+                                <ul>
+                                    <li><a href="/reports/localarea">Local Area Report (district/county and smaller areas)</a></li>
+                                    <li><a href="/reports/lmp/lad/contents.aspx">Local Authority Profile (district/county areas)</a></li>
+                                    <li><a href="/reports/lmp/gor/contents.aspx">Regional and National Profile</a></li>
+                                    <li><a href="/reports/lmp/comb/contents.aspx">Combined Authority Profile</a></li>
+                                    <li><a href="/reports/lmp/wpca24/contents.aspx">2024 Parliamentary Constituencies Profile</a></li>
+                                    <li><a href="/reports/lmp/ward2011/contents.aspx">2011 Ward Profile</a></li>
+                                </ul>
+                                
+                                <h1>Topic reports</h1>
+                                <ul>
+                                    <li><a href="/datasets/aps218/reports/employment-by-occupation">Employment by occupation (SOC2020) by sex</a></li>
+                                    <li><a href="/datasets/aps218/reports/employment-by-status-and-occupation">Occupation (SOC2020) by sex, employment status and full/part-time</a></li>
+                                    <li><a href="/datasets/aps218/reports/employment-by-temp-workers">Temporary and permanent employees by sex and broad occupation (SOC2020)</a></li>
+                                    <li><a href="/datasets/aps218/reports/employment-by-part-time-workers">Employment by broad occupation (SOC2020) for part-time workers</a></li>
+                                    <li><a href="/datasets/aps218/reports/employment-by-sex-by-ftpt-by-emp-self">Broad occupation (SOC2020) by sex, employment status and full/part-time time-series</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a id="A5" href="/sources">Data Sources</a>
+                            <div class="sub-nav">
+                                <ul>
+                                    <li><a href="/sources/acses">Annual Civil Service Employment Survey</a></li>
+                                    <li><a href="/sources/aps">Annual Population Survey/Labour Force Survey</a></li>
+                                    <li><a href="/sources/ashe">Annual Survey of Hours and Earnings</a></li>
+                                    <li><a href="/sources/bres">Business Register and Employment Survey</a></li>
+                                    <li><a href="/sources/census">Census</a></li>
+                                    <li><a href="/sources/cc">Claimant Count</a></li>
+                                    <li><a href="/sources/dwp">DWP Benefits</a></li>
+                                    <li><a href="/sources/housing">Housing</a></li>
+                                    <li><a href="/sources/eop">Economic output and productivity</a></li>
+                                    <li><a href="/sources/jd">Jobs Density</a></li>
+                                    <li><a href="/sources/jsa">Jobseekers Allowance</a></li>
+                                    <li><a href="/sources/life">Life Events</a></li>
+                                    <li><a href="/sources/pest">Population Estimates/Projections</a></li>
+                                    <li><a href="/sources/ra">Regional Accounts</a></li>
+                                    <li><a href="/sources/ukbc">UK Business Counts</a></li>
+                                    <li><a href="/sources/wfj">Workforce Jobs</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a id="A6" href="/sources/census">Census</a>
+                            <div class="sub-nav">
+                                <ul>
+                                    <li><a href="/sources/census_2021">2021 Census</a></li>
+                                    <li><a href="/sources/census_2011">2011 Census</a></li>
+                                    <li><a href="/sources/census_2001">2001 Census</a></li>
+                                    <li><a href="/sources/census_1991">1991 Census</a></li>
+                                    <li><a href="/sources/census_1981">1981 Census</a></li>
+                                    <li><a href="/sources/census_1961">1961 Census</a></li>
+                                    <li><a href="/sources/census_1951">1951 Census</a></li>
+                                    <li><a href="/sources/census_1931">1931 Census</a></li>
+                                    <li><a href="/sources/census_1921">1921 Census</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a id="A8" href="/home/contacts.asp">Contact us</a>
+                        </li>
+
+                        <li class="nav-item nav-my-account">
+                            <a id="A7" href="/myaccount/overview.asp" title="My account overview">Sign-in</a>
+                            <div class="sub-nav">
+                                <div style="display: none;">
+                                    
+                                    <ul>
+                                        <li><a href="/myaccount/overview.asp">My account</a></li>
+                                    </ul>
+                                </div>
+                                <div id="menu-my-account-not-signed-in">
+                                    <h1>You're not signed in</h1>
+                                    <ul>
+                                        <li><a id="signin_link" href="/login/login.asp" title="Sign-in and return to the current page">Sign-in</a></li>
+                                    </ul>
+                                    <h1>New to Nomis?</h1>
+                                    <p>You can use most parts of this site without registering.</p>
+                                    <ul>
+                                        <li><a href="/myaccount/userjoin.asp">Register</a></li>
+                                        <li><a href="/home/register.asp">Benefits of registering</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <a id="nomisweb-prefs-link" title="Site settings" href="javascript: showSitePrefs();"><img src="/images/cog.gif" alt="Picture of a cog representing settings for the web site" /><span>Settings</span></a>
+
+                <!-- initialize a selector as an accessibleMegaMenu -->
+                <script type="text/javascript">
+                    var mmansi = document.getElementById('menu-my-account-not-signed-in');
+
+                    // Only change sign-in urls if the user is not logged in
+                    if (mmansi != null && mmansi != undefined && mmansi.style != undefined && mmansi.style.display != 'none') {
+                        var signina = document.getElementById('signin_link');
+                        var a7a = document.getElementById('A7');
+
+                        var signin_tgt = window.location.pathname
+                        var signin_par = window.location.search;
+                        if (signin_par.length > 0) signin_par = signin_par.substring(1); // Remove ?
+                        signin_par = encodeURIComponent(signin_par);
+
+                        var signin_hrefp = '?target=' + signin_tgt + '&params=' + signin_par;
+
+                        if (signina != null && signina != undefined) signina.href = signina.href + signin_hrefp; // Make sub-menu sign-in link target go to same page
+                        if (a7a != null && a7a != undefined) a7a.href = '/login/login.asp' + signin_hrefp; // Initially make my account link target go to same page
+                    }
+                </script>
+                <script src="/libs/jquery-accessibleMegaMenu.js"></script>
+                <script type="text/javascript">
+                    $("nav:first").accessibleMegaMenu({
+                        uuidPrefix: "accessible-megamenu",
+                        menuClass: "nav-menu",
+                        topNavItemClass: "nav-item",
+                        panelClass: "sub-nav",
+                        panelGroupClass: "sub-nav-group",
+                        hoverClass: "hover",
+                        focusClass: "focus",
+                        openClass: "open"
+                    });
+                </script>
+            </div>
+            <!-- End site navigation banner section -->
+            <!-- Begin breadcrumbs -->
+            <div id="breadcrumbs-wrapper">
+                <div id="BCBox" class="breadcrumbs" role="navigation" aria-label="Breadcrumbs"></div>
+            </div>
+            <!-- End breadcrumbs -->
+            <script type="text/javascript">
+                var BaseBreadCrumbs = new Array('/default.asp', 'home');
+                SetBreadCrumbs(null);
+            </script>
+
+            <div id="skip-to-content"><a id="content-anchor"></a></div>
+<div id="page-heading-and-sub-nav"><h1>Copyright</h1></div>
+</div>
+<!-- End site navigation banner section -->
+<div id="page-wrap" role="main">
+<!-- Begin page content -->
+
+<script language="javascript" type="text/javascript">
+	SetBreadCrumbs(new Array('','copyright'));
+</script>
+
+<div class="descriptive-content-section-wrapper">
+    <div class="descriptive-content-section">
+    <section>
+
+<h3>Crown Copyright</h3> 
+<p>All material on the Office for National Statistics (ONS) and Nomis websites is subject to Crown Copyright protection unless otherwise indicated.</p> 
+<h3><br>Reproducing ONS material</h3> 
+<p>Under the terms of the <a href="http://www.nationalarchives.gov.uk/doc/open-government-licence/open-government-licence.htm" class="linkbody decorate">Open Government Licence</a> (OGL) and <a href="http://www.nationalarchives.gov.uk/information-management/uk-gov-licensing-framework.htm" class="linkbody decorate">UK Government Licensing Framework</a> (launched 30 September 2010), anyone wishing to use or re-use ONS material, whether commercially or privately, may do so freely without a specific application for a licence, subject to the conditions of the OGL and the Framework.</p> 
+<p><br>These new arrangements replace the previous Click-Use and Value Added Licences. For further information, go to the links above, phone 020 8876 3444 or email <a href="mailto:psi@nationalarchives.gov.uk" class="linkbody decorate">psi@nationalarchives.gov.uk</a></p> 
+<p><br>Users should include a source accreditation to ONS:</p> 
+<p><strong>Source: Office for National Statistics</strong></p> 
+<h3><br>Copyright of a third party</h3> 
+<p>The permission to reproduce Crown protected material does not extend to any material on this site which is identified as being authored by a third party. Authorisation to reproduce such material must be obtained from the copyright holders concerned.</p> 
+<h3><br>Confidentiality</h3> 
+<p>National Statistics products incorporate safeguards against possible identification of any particular person, household or business. You shall not use products to attempt to obtain or derive information relating specifically to an identified person, household or business, nor claim to have obtained or derived such information. </p> 
+<p><br>Business Register and Employment Survey (and former Annual Business Inquiry / Annual Employment Survey / Census of Employment) data are subject to further confidentiality restrictions. Where figures are marked as confidential, you must not pass them onto a third party (ie, appear in a paper/report/thesis or passed verbally to anyone not named on your Notice). For further information contact <strong><a href="mailto:notice.applications@ons.gov.uk" class="linkbody decorate">notice.applications@ons.gov.uk </a></strong>. </p> 
+<h3><br>Maps</h3> 
+<p>Most UK maps in ONS material are reproduced by permission of Ordnance Survey on behalf of HMSO under Ordnance Survey Licence number 100019153.</p> 
+<p><br>For permission to reproduce maps contact ONS Geography Customer Services at <a href="mailto:ons.geography@ons.gov.uk" class="linkbody decorate">ons.geography@ons.gov.uk </a>. </p> 
+<h3><br>Hyperlinks to the Nomis website</h3> 
+<p>No permission is necessary to hyperlink to pages on the Nomis website.</p>
+
+
+    </section>
+	</div>
+</div>
+    </div>
+	<!-- Begin footer -->
+    <footer style="clear:both;">
+    <div id="nomis-footer-wrapper" role="contentinfo">
+		<ul>
+            <li><a href="/api">API</a></li>
+            <li><a href="/home/sitemap.asp" accesskey="3" id="Site-map">Site map</a></li>
+            <li><a href="/home/news.asp" id="News">News</a></li>
+            <li><a href="/home/accessibility.asp">Accessibility</a></li>
+            <li><a href="/home/accesskeys.asp" id="access-keys" accesskey="0">Access keys</a></li>
+            <li><a href="/home/privacy.asp" id="Privacy-and-Cookies">Privacy and Cookies</a></li>
+            <li><a href="/home/terms.asp" id="Terms-and-Conditions" accesskey="8">Terms and Conditions</a></li>
+			<li><a href="/home/copyright.asp" id="Crown-Copyright">&copy; Crown Copyright</a></li>
+		</ul>
+
+        
+        <div id="durham-uni-logo-container">
+            <a href="http://www.dur.ac.uk"><img border="0" src="/images/du_logo.png" alt="Durham University Logo" /></a>
+        </div>
+    </div>
+
+    </footer>
+	<!-- End footer -->
+
+    <!-- Begin Site-wide Information Popup Box -->
+        <div id="modalBack" role="alert" aria-labelledby="modalDivTitle" style="display: none;">
+            <div id="modalDiv" tabindex="-1">
+                <div id="modalDivHead">
+                     <h2 id="modalDivTitle"></h2>
+	                <div id="modalDivTools"><input type="button" title="Close this pop-up (esc)" id="modalCloseButton" value="Close" onclick="modalClose();" class="modalDivTool" /></div>
+                </div>
+	            <div id="modalBusy"><p>Please wait...</p></div>
+	            <div id="modalDivBody"></div>
+            </div>
+        </div>
+        <!-- End Site-wide Information Popup Box -->
+        <!-- PRE-END-NOMISWEB-PAGE-DIV-HOOK -->
+    </div>
+    
+    <script type="text/javascript" src="/js/tips.js"></script>
+    <!-- End Nomisweb Page div -->
+  </body>
+</html>

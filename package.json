@@ -1,0 +1,35 @@
+{
+  "name": "world-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "node server.mjs",
+    "build": "vite build",
+    "build:static": "node scripts/build-static.mjs",
+    "build:hosted": "node scripts/build-hosted.mjs",
+    "db:generate": "drizzle-kit generate",
+    "data:hosted-catalog": "node scripts/prepare-hosted-catalog.mjs",
+    "start": "node server.mjs --production",
+    "test": "node --test test/*.test.mjs",
+    "test:ui": "node --test test/browser.mjs",
+    "data:prepare": "node scripts/prepare.mjs",
+    "data:history": "node scripts/prepare-history.mjs",
+    "data:import": "node scripts/import.mjs",
+    "test:static": "node test/static-rendering.mjs"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.45.3",
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "drizzle-kit": "^0.31.11",
+    "mapshaper": "^0.6.113",
+    "vite": "^7.1.7",
+    "wrangler": "^4.146.0"
+  }
+}

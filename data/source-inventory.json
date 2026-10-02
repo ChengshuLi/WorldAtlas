@@ -1,0 +1,426 @@
+{
+  "version": 2,
+  "sources": [
+    {
+      "name": "Cliopatria v0.2.0-duplicate",
+      "attributes": [
+        "owner"
+      ],
+      "scope": "Global reconstructed political territories, 3000 BC–2024 AD subset; ownership derived on location footprints",
+      "url": "https://doi.org/10.1038/s41597-025-04516-9",
+      "license": "CC BY 4.0",
+      "status": "imported-derived",
+      "limitation": "Coverage varies. Overlapping claims and missing majorities are explicit unresolved values.",
+      "reviewed_at": "2026-10-01",
+      "coverage": {
+        "locations": 49614,
+        "dated_intervals": 6834664,
+        "majority_intervals": 5664901,
+        "no_majority_intervals": 222473,
+        "disputed_intervals": 947290,
+        "valid_from": -3000,
+        "valid_to": 2025
+      },
+      "import_path": "Prepared compact dated location ownership records, using local same-polity polygon unions and precise WGS84 ellipsoid surface integration with the entire land footprint as denominator; field resolver and whole-location fills share these records."
+    },
+    {
+      "name": "Beck et al. 2023 Köppen–Geiger",
+      "attributes": [
+        "climate"
+      ],
+      "scope": "Global 1 km climate normal periods 1901–1930, 1931–1960, 1961–1990, 1991–2020; latest normal also a marked modern reference",
+      "url": "https://doi.org/10.1038/s41597-023-02549-6",
+      "license": "CC BY 4.0",
+      "status": "imported-reference",
+      "limitation": "Climatology, not an annual weather observation. Coastline cells and very small locations may be unsupported.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "RESOLVE Ecoregions 2017",
+      "attributes": [
+        "vegetation"
+      ],
+      "scope": "Global dominant potential natural biome reference",
+      "url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+      "license": "CC BY 4.0",
+      "status": "imported-reference",
+      "limitation": "Potential natural vegetation; does not establish observed farmland or current land cover.",
+      "reviewed_at": "2026-10-01",
+      "coverage": {
+        "scanned_locations": 49614,
+        "known_references": 49280,
+        "explicit_unknown_source_records": 16,
+        "unsupported_locations": 318,
+        "valid_from": 2026,
+        "valid_to": 2027,
+        "source_year": 2017
+      },
+      "import_path": "scripts/prepare-reference-attributes.py uses the independently validated chosen_summary helper from scripts/recheck-vegetation.py. The selective post-merge recheck preserves all other attributes and writes a per-location numerical receipt.",
+      "numerical_review": {
+        "path": "data/vegetation-numerical-review/index.json",
+        "area_method": "Precise WGS84 latitude-strip boundary integral, 16-point Gauss-Legendre quadrature",
+        "source_class_overlap_locations": 5793,
+        "changed_categories_or_support": 0,
+        "share_differences_over_1e-6": 10807,
+        "maximum_share_difference": 0.081740442211,
+        "denominator": "Unique covered-land union; overlapping source classes retained as evidence rather than summed in the denominator"
+      }
+    },
+    {
+      "name": "Natural Earth populated places / UN urban agglomeration series",
+      "attributes": [
+        "population"
+      ],
+      "scope": "Settlement population estimates/projections at five-year source dates 1950–2025, displayed only at supported dates",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/",
+      "license": "Natural Earth public domain; original UN attribution retained",
+      "status": "imported-settlement-estimates",
+      "limitation": "Values belong to settlements, not location territories. They do not establish rank, founding dates or historical names.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "ESA WorldCover 2021",
+      "attributes": [
+        "vegetation"
+      ],
+      "scope": "Global observed 10 m land cover for 2021",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "license": "CC BY 4.0",
+      "status": "evaluated-pending",
+      "limitation": "Verified source and license. Full global zonal aggregation remains to be implemented; the biome reference cannot substitute for observed land cover.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "GHSL GHS-POP R2023A",
+      "attributes": [
+        "population"
+      ],
+      "scope": "Global residential population estimates every five years, 1975–2020; 2025 and 2030 are projections",
+      "url": "https://doi.org/10.2905/2FF68A52-5B5B-4A22-8F40-C41DA8332CFE",
+      "license": "EU-owned data: reuse authorised with source acknowledgment; Commission CC BY 4.0 default subject to product notices",
+      "status": "evaluated-pending",
+      "limitation": "Population counts are modeled Float values, not density. NoData is -200. Nearest-cell sampling, multiplying counts by cell area, or assigning settlement totals would produce incorrect location populations.",
+      "reviewed_at": "2026-10-01",
+      "evidence_urls": [
+        "https://human-settlement.emergency.copernicus.eu/data/ghs_pop2023.json",
+        "https://human-settlement.emergency.copernicus.eu/datasets.php",
+        "https://commission.europa.eu/legal-notice_en"
+      ],
+      "import_path": "Use native 1 km Mollweide counts-per-cell tiles; split each cell count between intersecting location land footprints by equal-area overlap, account for residual land/source gaps, preserve epoch and projection status, and verify global/territory mass balance before rounding."
+    },
+    {
+      "name": "HYDE historical demographic reconstruction",
+      "attributes": [
+        "population",
+        "habitation"
+      ],
+      "scope": "HYDE 3.2 published reconstruction: 10,000 BC–2015 AD; historical population and land-use grids",
+      "url": "https://doi.org/10.17026/DANS-25G-GEZ3",
+      "license": "Article CC BY 3.0 verified; dataset-specific repository license remains unverified",
+      "status": "evaluated-pending",
+      "limitation": "The repository landing page and metadata API returned an anti-bot challenge on review. The article license is not proof of the archived dataset license. No files or values imported.",
+      "reviewed_at": "2026-10-01",
+      "evidence_urls": [
+        "https://essd.copernicus.org/articles/9/927/2017/",
+        "https://archaeology.datastations.nl/citation?persistentId=doi:10.17026/DANS-25G-GEZ3"
+      ],
+      "import_path": "Pin actual dataset version, file hashes, grid units, date convention and uncertainty products after access is available; aggregate native cell counts conservatively only at published epochs, with model status and precision."
+    },
+    {
+      "name": "GREG historical ethnic geography",
+      "attributes": [
+        "culture"
+      ],
+      "scope": "Global ethnic settlement geography derived from the Atlas Narodov Mira published in 1964, 8,969 polygons; country-code context from 1989",
+      "url": "https://icr.ethz.ch/data/greg/",
+      "license": "Reuse conditions and source edition require verification",
+      "status": "research-pending",
+      "limitation": "The inspected appendix permits up to three ethnic groups per polygon without population shares. Neither polygon area nor group order establishes primary culture. Reuse license remains unverified; no assignments imported.",
+      "reviewed_at": "2026-10-01",
+      "evidence_urls": [
+        "https://icr.ethz.ch/data/greg/",
+        "https://icr.ethz.ch/data/greg/Appendix.pdf"
+      ],
+      "import_path": "Retain ethnic-group identifiers as source concepts, obtain reuse terms and independent dated population shares, then define an explicit culture crosswalk. Geographic overlap alone cannot resolve a primary culture."
+    },
+    {
+      "name": "Pew global religious composition, 2010 and 2020",
+      "attributes": [
+        "religion"
+      ],
+      "scope": "Benchmark country/territory estimates for 201 places containing 99.98% of global population",
+      "url": "https://www.pewresearch.org/religion/2025/06/09/how-the-global-religious-landscape-changed-from-2010-to-2020/",
+      "license": "Pew website/content terms; not a blanket open-data license",
+      "status": "research-pending",
+      "limitation": "Seven broad religious categories, country averages and publication-specific usage terms cannot support each location’s primary religion or denomination. No per-location data imported.",
+      "reviewed_at": "2026-10-01",
+      "evidence_urls": [
+        "https://www.pewresearch.org/about/terms-and-conditions/"
+      ],
+      "import_path": "Use as a country-level consistency check only after selected data terms are cleared. Obtain dated subnational tables and matching boundaries for local assignment; keep category precision at the level supported by the source."
+    },
+    {
+      "name": "USGS SRTM terrain",
+      "attributes": [
+        "topography"
+      ],
+      "scope": "Measured elevation reference with latitude-limited coverage",
+      "url": "https://www.usgs.gov/centers/eros/science/usgs-eros-archive-digital-elevation-shuttle-radar-topography-mission-srtm",
+      "license": "USGS public-domain products; check selected product",
+      "status": "research-pending",
+      "limitation": "Topography classes require documented slope/relief rules and a complementary source at unsupported latitudes.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "Pleiades ancient gazetteer v4.1",
+      "attributes": [
+        "dated_names",
+        "habitation"
+      ],
+      "scope": "41,480 ancient place resources in the numbered 2025-05-28 release; uneven ancient-world coverage, not a complete global settlement census",
+      "url": "https://github.com/isawnyu/pleiades.datasets/tree/v4.1",
+      "license": "CC BY 3.0; individual contributor attribution retained",
+      "status": "evaluated-pending",
+      "evidence_urls": [
+        "https://pleiades.stoa.org/downloads",
+        "https://raw.githubusercontent.com/isawnyu/pleiades.datasets/v4.1/README.md",
+        "https://pleiades.stoa.org/places/579885/json"
+      ],
+      "import_path": "Parse per-place JSON Name resources, attested/romanized forms, language, references, association confidence and explicit attestations; crosswalk place identities to distinct settlement entities and only to uniquely supported host locations. Import names as aliases unless preferred-name precedence is supported.",
+      "limitation": "Broad period start/end values summarize attestations, not proof of uninterrupted name use or occupation. Points do not define atlas territory boundaries; a settlement name cannot automatically rename its entire location. No records imported.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "GeoNames alternateNamesV2",
+      "attributes": [
+        "dated_names"
+      ],
+      "scope": "Worldwide place identifiers, multilingual aliases and optional historical from/to periods",
+      "url": "https://download.geonames.org/export/dump/readme.txt",
+      "license": "CC BY 4.0 verified in dump README",
+      "status": "evaluated-pending",
+      "import_path": "Pin allCountries and alternateNamesV2 snapshots; use existing source IDs or independently verified feature-class/admin crosswalks. Parse supported from/to periods, preserve preferred/historic flags and language, quarantine undated or ambiguous historical dates.",
+      "limitation": "Dates and historic flags are optional and uneven. GeoNames modification date is an edit timestamp, not historical existence. Place points cannot establish territory extents or location populations.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "World Historical Gazetteer",
+      "attributes": [
+        "dated_names",
+        "habitation"
+      ],
+      "scope": "Global contributed historical gazetteers and name reconciliation; coverage and dates depend on each source dataset",
+      "url": "https://whgazetteer.org/",
+      "license": "Aggregation CC BY 4.0 from 2026-09-30; underlying source licenses still apply separately",
+      "status": "evaluated-pending",
+      "evidence_urls": [
+        "https://whgazetteer.org/licenses/",
+        "https://docs.whgazetteer.org/content/license.html",
+        "https://docs.whgazetteer.org/content/technical/apis.html"
+      ],
+      "import_path": "Inspect dataset-level source terms and API redistributable flags before export; pin each eligible LPF/LP-TSV dataset separately, retaining its names, timespans, citations, matching confidence and source IDs.",
+      "limitation": "An aggregate CC license does not override academic-use, non-redistributable or all-rights-reserved source restrictions. Older exports can carry earlier CC BY-NC terms. Gazetteer reconciliation is not evidence of polygon equivalence.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "EarthEnv topographic variables, 2018",
+      "attributes": [
+        "topography"
+      ],
+      "scope": "49,582 modern location summaries of published 1 km GMTED-based geomorphological landforms; compiled 2016, published 2018; source extent 56°S–84°N",
+      "url": "https://www.earthenv.org/topography",
+      "license": "CC BY 4.0 verified in dataset metadata",
+      "status": "imported-reference",
+      "evidence_urls": [
+        "https://www.earthenv.org/topography",
+        "https://doi.org/10.1038/sdata.2018.40",
+        "https://grass.osgeo.org/grass-stable/manuals/r.geomorphon.html"
+      ],
+      "import_path": "Prepared scripts/prepare-topography.py and data/topography-reference/index.json; dominant native geomorphon class by latitude-weighted cell centres over the whole location land footprint, with at least 50% supported coverage. Canonical classes are verified against the source paper and GRASS r.geomorphon manual.",
+      "limitation": "32 location footprints have no native cell centre and remain unknown. Published flat/peak/ridge/shoulder/spur/slope/hollow/footslope/valley/pit categories are used directly; they are not relabeled hills/mountains. Modern physical reference only, not an ancient observation.",
+      "reviewed_at": "2026-10-01",
+      "coverage": {
+        "locations": 49614,
+        "resolved": 49582,
+        "unknown": 32,
+        "valid_from": 2026,
+        "valid_to": 2027
+      },
+      "source_pin": {
+        "url": "https://data.earthenv.org/topography/geom_1KMmaj_GMTEDmd.tif",
+        "sha256": "acbb0254a6ecc5464abbdaff63c6e8af42a085ada4eba1c8feb8d40c4fc6414b",
+        "compiled_year": 2016,
+        "publication_year": 2018
+      }
+    },
+    {
+      "name": "Copernicus DEM GLO-30/GLO-90",
+      "attributes": [
+        "topography"
+      ],
+      "scope": "Worldwide measured surface-elevation reference at 30 or 90 m",
+      "url": "https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM",
+      "license": "Worldwide free product license with specified notices; not assumed CC BY",
+      "status": "evaluated-pending",
+      "import_path": "Pin a permitted global release, tile checksums and license notices; derive slope/relief at a specified analysis scale and zonally summarize each location.",
+      "limitation": "Digital surface model includes structures and vegetation. Historic relief stability is a modeling assumption, and the source does not define atlas terrain classes. Europe-only EEA-10 access rules differ from the global products.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "GHSL GHS-SMOD R2023A",
+      "attributes": [
+        "habitation",
+        "rank"
+      ],
+      "scope": "Global degree-of-urbanisation grid, five-year epochs 1975–2030",
+      "url": "https://human-settlement.emergency.copernicus.eu/data/ghs_smod2023.json",
+      "license": "EU-owned data: reuse authorised with acknowledgment; verify selected release notices",
+      "status": "evaluated-pending",
+      "import_path": "Use settlement clusters plus population and built-up evidence at the same epoch. Resolve a documented atlas rank policy on the settlement entity before considering whether that rank describes the whole location.",
+      "limitation": "Urban-centre, cluster and rural grid categories are not identical to rural settlement/town/city/metropolis. A rural grid cell is not automatically inhabited; missing values cannot establish uninhabited status.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "Glottolog 5.3",
+      "attributes": [
+        "culture"
+      ],
+      "scope": "Global language identities and bibliographic references; selected language/dialect coordinates",
+      "url": "https://glottolog.org/meta/downloads",
+      "license": "CC BY 4.0",
+      "status": "evaluated-pending",
+      "import_path": "Use stable Glottocodes for a separate linguistic reference crosswalk; import language evidence only where dated local population shares exist.",
+      "limitation": "Language identity is not culture, point coordinates are not distribution polygons, and the data do not resolve local speaker proportions.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "D-PLACE",
+      "attributes": [
+        "culture",
+        "religion"
+      ],
+      "scope": "Dated ethnographic observations on selected societies worldwide",
+      "url": "https://d-place.org/",
+      "license": "CC BY-NC 4.0 on reviewed site; dataset-specific source terms must also be checked",
+      "status": "evaluated-pending",
+      "import_path": "Use only licensed dated society-level observations with cited locality and ethnographic context, preserving uncertainty and concept definitions.",
+      "limitation": "Selected ethnographic societies are not comprehensive location populations. Cultural variables and religious practices do not directly identify a location’s primary culture or religion.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "IPUMS International microdata",
+      "attributes": [
+        "population",
+        "culture",
+        "religion"
+      ],
+      "scope": "National census/survey samples, variable and geographic availability varies by contributing country",
+      "url": "https://international.ipums.org/international/terms.shtml",
+      "license": "Individually licensed research/education use; third-party redistribution prohibited, commercial use prohibited",
+      "status": "restricted-not-imported",
+      "import_path": "Do not package microdata in this atlas. Independently source permitted public aggregate census tables from national statistical offices instead.",
+      "limitation": "Registration and research access do not authorise a public redistribution of the underlying records.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "IPUMS NHGIS",
+      "attributes": [
+        "population",
+        "dated_names"
+      ],
+      "scope": "United States aggregate census tables and boundary files, 1790 onward",
+      "url": "https://www.nhgis.org/ipums-nhgis-terms-use",
+      "license": "Redistribution requires permission except specified journal-publication subsets",
+      "status": "restricted-not-imported",
+      "import_path": "Use original public US Census products where suitable or obtain explicit redistribution permission for the selected NHGIS extract.",
+      "limitation": "No extract bundled; historical GIS availability alone does not establish permission to redistribute it.",
+      "reviewed_at": "2026-10-01"
+    },
+    {
+      "name": "CHGIS historical administrative gazetteer",
+      "attributes": [
+        "dated_names"
+      ],
+      "scope": "Historical Chinese dynastic place/admin identities; regional enrichment only",
+      "url": "https://chgis.fas.harvard.edu/",
+      "license": "Academic-use/re-distribution restrictions require checking the selected Harvard/Fudan release; WHG records this as a restricted source",
+      "status": "research-pending",
+      "evidence_urls": [
+        "https://whgazetteer.org/licenses/"
+      ],
+      "import_path": "Check actual selected release terms and obtain any required permission before re-hosting; preserve unit identity and explicit parent-change dates.",
+      "limitation": "Free search access is not an open redistribution license. This source cannot close worldwide historical-name coverage.",
+      "reviewed_at": "2026-10-01"
+    }
+  ],
+  "historical_policy": "No interpolation or backward projection from modern references; unsupported attributes and years remain unknown. Ancient gazetteer attestations are separate from continuous habitation or territory identity. Source concepts (ethnicity, language, urbanisation, potential biome) never silently become culture, rank or observed vegetation.",
+  "researched_at": "2026-10-01",
+  "research_report": "docs/HISTORICAL_COVERAGE_RESEARCH.md",
+  "status_definitions": {
+    "imported-derived": "Prepared source-derived records; publication additionally requires data and rendering gates.",
+    "imported-reference": "Prepared physical or environmental reference summaries; no ancient back-projection.",
+    "imported-settlement-estimates": "Prepared estimates for distinct settlement entities, not location populations.",
+    "evaluated-pending": "Source documentation inspected; aggregation, crosswalk or import remains incomplete.",
+    "research-pending": "Documentation or reuse terms remain insufficient for importing records.",
+    "restricted-not-imported": "Documented source restrictions prevent this distribution path without separate permission."
+  },
+  "regional_statistical_inventory": [
+    {
+      "continent": "Africa",
+      "candidate": "National statistical office census tables; KNBS Kenya 2019 reports as a first candidate",
+      "url": "https://www.knbs.or.ke/2019-kenya-population-and-housing-census-reports/",
+      "status": "research-pending",
+      "blocker": "Review request returned HTTP 503; table geography, religion/language variables and reuse terms remain unverified."
+    },
+    {
+      "continent": "Asia",
+      "candidate": "India Census 2011 C-series religion and mother-tongue tables as a first candidate",
+      "url": "https://censusindia.gov.in/census.website/data/census-tables",
+      "status": "research-pending",
+      "blocker": "Review request returned HTTP 503; exact release, boundary vintage and reuse terms must be checked. No blanket national culture assignment."
+    },
+    {
+      "continent": "Europe",
+      "candidate": "ONS England/Wales Census 2021 religion, language and ethnicity small-area aggregates",
+      "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/culturalidentity/religion/bulletins/religionenglandandwales/census2021",
+      "status": "evaluated-pending",
+      "blocker": "OGL v3.0 notice verified. Need complete small-area tables and 2021 boundary crosswalk, missing-response accounting and separate Scotland/Northern Ireland sources."
+    },
+    {
+      "continent": "North America",
+      "candidate": "Statistics Canada Census 2021 profile aggregates; original US Census products",
+      "url": "https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/index.cfm?Lang=E",
+      "status": "evaluated-pending",
+      "blocker": "Profile landing page verified. Pin selected tables, suppression rules, boundaries and product reuse notice; ethnic-origin multiple responses are not additive culture shares."
+    },
+    {
+      "continent": "South America",
+      "candidate": "IBGE Brazil Census 2022 religion and ethnicity aggregates as a first candidate",
+      "url": "https://www.ibge.gov.br/en/statistics/social/population/22836-2022-census.html",
+      "status": "research-pending",
+      "blocker": "Review request returned HTTP 403; exact religion product publication date, table availability, geography and license remain unverified."
+    },
+    {
+      "continent": "Oceania",
+      "candidate": "ABS Australia Census 2021 religion/language/ancestry and Stats NZ Census 2023 aggregates",
+      "url": "https://www.abs.gov.au/census/find-census-data/quickstats/2021/AUS",
+      "status": "evaluated-pending",
+      "blocker": "QuickStats variables verified; select full small-area counts rather than top-response excerpts, verify selected download terms and population denominators."
+    }
+  ],
+  "review_scope": "Global source families plus initial statistical-office candidates on all six inhabited continents. This inventory is not a completed worldwide local semantic audit; regional candidates do not imply all countries have been reviewed or imported.",
+  "prepared_reference_coverage": {
+    "locations": 49614,
+    "locations_with_reference_record": 49596,
+    "records": 346293,
+    "explicit_unknown_source_records": 16,
+    "climate_per_normal": {
+      "1901": 49483,
+      "1931": 49483,
+      "1961": 49483,
+      "1991": 49483
+    },
+    "known_biome_references": 49280,
+    "topography_references": 49582
+  }
+}

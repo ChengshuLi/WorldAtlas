@@ -1,0 +1,46 @@
+# Content-only handoff for future historical research
+
+The application, shared resolver, schema and map assets are independent of historical content. GPT 6 Luna can add sourced evidence through the existing import API without changing UI code, rebuilding the fixed grid, or republishing the website. Do not materialize 200 million location/year snapshots: store sparse half-open evidence intervals, with one row per attribute and supported interval. Unknown years need no invented row; the resolver produces an explicit unknown result. An explicit sourced unknown record is useful when evidence itself establishes uncertainty.
+
+## Read identities before researching
+
+Use the existing private Site and its access boundary. `GET /api/geography/release` identifies the current immutable reference release and footprint/hierarchy hashes. `GET /api/geography/memberships?limit=250&cursor=…` pages its stable geographic IDs and adjacent-tier parents. `GET /api/entities/{id}?year=…` shows dated names, reference context, relationships and media. Names are labels, not identity keys. Geographic parent membership is reference geography unless independently dated evidence establishes something else.
+
+Keep the existing location ID when adding a different owner, historical name or attribute. Do not create a new location because its name changed. A footprint split, merge or replacement is a separate reviewed geographic migration that retains predecessor geometry, records and crosswalks; a content agent must not perform one silently. Country ownership does not determine region membership.
+
+## Import existing collections
+
+`POST /api/records/import` accepts JSON collections and an optional stable `ingestion_id`. Each request contains 1–250 input rows and at most 1 MiB; use batches of 200 or fewer. Metadata is an object limited to 16 KiB. Transactions either commit the complete batch or reject it. A retry with the same ingestion ID and identical content is idempotent. Changing content under an existing identity is rejected. Preserve receipts and source bytes outside deployment assets.
+
+Import dependencies in order:
+
+1. `sources`: stable ID, name, HTTP(S) URL, license, vintage, `supported_from`, `supported_to`, status (`historical`, `reference`, `estimate`, `example`), and metadata containing original source hashes, precision, method and relevant qualifications.
+2. `categories` for owners/cultures/religions: stable ID, kind (`owner`, `culture`, `religion`), name and source ID. Categories share graph identities; do not create separate identities for alternate spellings. An owner category becomes a polity entity.
+3. `records`: stable claim ID, `location_id`, attribute, one scalar `value` (or null), category ID for a known owner/culture/religion, supported interval, source ID, method, status, `is_example`, and attribute-specific evidence metadata.
+4. `names`: stable claim ID, existing entity ID, name, language, role (`preferred` or `alias`), supported interval, source ID, example flag and matching evidence.
+
+Map attributes are owner, population, culture, religion, rank, topography, vegetation and climate. Internal habitation remains separate. Rank is unsettled, rural settlement, town, city or metropolis. Unsettled requires explicit sourced evidence of no inhabitants; unknown population and modeled or rounded zero do not establish it. Population is a nonnegative safe integer with disclosed precision; estimates use method/status `estimate`. Physical reference data uses `reference`, not a fabricated ancient interval.
+
+Supported intervals are `[valid_from, valid_to)`, within 3000 BC–2026 AD; 2027 is allowed only as an exclusive endpoint. There is no year zero: `[-1, 1)` covers 1 BC only. Source supported bounds must contain every claim interval. Do not carry a census snapshot or modern name into unsupported years, interpolate a gap, infer culture from language/citizenship, or assign primary religion from country-level priors. Keep source observation dates and finer date/calendar precision in metadata.
+
+The shared resolver prefers direct evidence over spatial/other derived assignments, modern references and opt-in examples. Evidence of equal priority remains deterministic; imports reject contradictory direct intervals. Owner/culture/religion use stable category IDs. Every mode, profile and border uses the resolved whole-location result. The historical ownership derivation requires a strict majority of the entire applicable land footprint and keeps contested coverage and the winning share as provenance.
+
+## Corrections retain original evidence
+
+Claims are immutable. Add a sourced `retirements` row with ID, collection (`records`, `names`, `relationships`, `media_links`), target ID, correction source, reason and optional replacement ID. Submit a replacement and retirement in one transaction when appropriate. A retirement is irreversible; restoration needs a new claim ID. Unknown targets and unsourced corrections are rejected. Prepared cache claims must first be registered through their prepared import batches before they can be retired. Original evidence stays accessible at `GET /api/evidence/{collection}/{claim_id}`.
+
+`GET /api/attributes?year=…`, `/api/names?year=…`, and `/api/retirements?year=…&scope=map` are cursor-paged. Retirements prevent prepared fallback assets from restoring withdrawn evidence. The browser merges live evidence with fixed prepared caches by claim identity, preserving source metadata. Each attribute/name/retirement page checks its ingestion revision before and after reading. The client also checks page and endpoint revisions, retries the entire content read at most twice, and reports unavailable live evidence if writes keep changing the revision. Database outages or unstable reads are displayed as incomplete imported evidence; they do not manufacture replacement historical facts.
+
+## Add interconnected subjects and media
+
+Existing `entity_types`, `entities` and `relationships` support people, events, places, armies, routes, artifacts and other subjects. A relationship has stable source/target entity IDs, a relationship type, source ID, and either a complete supported date interval or both dates null. Undated relationships remain explicitly undated. Do not overload geographic parent fields to express participation, command or travel. Type-specific large geometry belongs in versioned object storage, with its digest and source recorded separately.
+
+Media bytes are uploaded separately through `/api/media/upload` (currently at most 20 MiB per object). Media are content-addressed by SHA-256 and carry license, attribution and source metadata. `media_links` attach them to entities with sourced roles/captions and optional complete date intervals. Blob storage capacity is separate from the website's deployment package. Large-file multipart support or backend partitioning may be added behind this contract if needed; the current service is not unlimited. A single managed D1 database must not be assumed to fit 200 million claims. Service capacity should be measured and indexed evidence partitioned by geography/attribute/time as needed behind the same content API; stable IDs and sparse supported intervals keep that backend change separate from UI and dataset content.
+
+## Preserve the completed checkpoint
+
+Already prepared: historical ownership intervals, environmental references, 3,588 dated Census/Eurostat name attestations and 396 observation-year 2021 census religion records. The latter comprise 193 resolved values and 203 explicit unknowns. Name snapshots cover only 2020 or 2021. No culture records were fabricated. GHSL population work is paused with cached sources and incomplete/unvalidated output; do not import it as completed data.
+
+`node scripts/prepare-evidence-bundle.mjs` validates ready producer manifests, source bounds, stable identities, byte hashes and geographic proof; it emits `data/prepared-evidence/index.json`, public year-selected parts, and bounded content-addressed import batches. `node --use-env-proxy scripts/bootstrap-prepared-evidence.mjs https://…` uses hidden credential input, verifies that the live published geographic release matches, and resumes idempotently. The reusable builder accepts a product list; a new content producer need not require a UI/schema change. Incomplete products remain explicitly pending.
+
+Run `node --test test/prepared-evidence.test.mjs test/hosted-records.test.mjs` before importing, then inspect receipts, coverage and selected-year API/profile results. Static/server parity, gap behavior and preserved provenance are tested against the actual completed checkpoint. Original source archives, executed algorithm hashes and predecessor geometry are immutable evidence; retain them even when a newer source supersedes their claims.
