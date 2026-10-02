@@ -1,5 +1,5 @@
 import {importAttributes} from './attribute-records.mjs';
-import {derivedRecordsAt,preparedBoundariesMatch,invalidatePreparedFootprints} from './derived.mjs';
+import {derivedRecordsAt,preparedBoundariesMatch,invalidatePreparedFootprints,environmentalReferenceContext} from './derived.mjs';
 import {preparedEvidenceAt} from './prepared-evidence.mjs';
 import {mergePreparedEvidence} from './src/prepared-evidence.js';
 import {syncEntities,importTemporal,temporalCatalog} from './temporal.mjs';
@@ -137,5 +137,5 @@ export function snapshot(db, year, examples = false,sourceEvidence=false) {
   const evidence=preparedEvidenceAt(year,{examples});
   const merged=mergePreparedEvidence(attributes,[],evidence);
   const prepared=invalidatePreparedFootprints([...derivedRecordsAt(year),...merged.records],boundaryRows,preparedBoundariesMatch(boundaryRows));
-  return { year, temporal_history:merged.names, attributes:prepared, states: select('states'), boundaries: select('boundaries').map(r => ({...r, geometry: JSON.parse(r.geometry)})), polities };
+  return { year,referenceBaselines:invalidatePreparedFootprints(environmentalReferenceContext(),boundaryRows,preparedBoundariesMatch(boundaryRows)), temporal_history:merged.names, attributes:prepared, states: select('states'), boundaries: select('boundaries').map(r => ({...r, geometry: JSON.parse(r.geometry)})), polities };
 }

@@ -200,3 +200,5 @@ main{display:flex;flex-direction:column}
 @media(max-width:760px){header.has-record-import{height:auto;min-height:76px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:10px 18px}header.has-record-import .brand{grid-column:1/-1}header.has-record-import .quiet{font-size:10px;padding:4px 0;text-align:left}}
 
 #import-records-preview p,#import-records-context{overflow-wrap:anywhere}
+
+.reference-badge{display:inline-block;margin-left:.5rem;font-size:.75rem;font-weight:500;color:#645e54;border:1px solid #d8d0c2;border-radius:4px;padding:1px 4px;vertical-align:middle}

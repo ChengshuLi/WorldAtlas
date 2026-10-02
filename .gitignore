@@ -7,3 +7,8 @@ test-results/
 .sites-runtime/
 __pycache__/
 *.pyc
+
+# Local Neon/server credentials
+.env
+.env.*
+!.env.example

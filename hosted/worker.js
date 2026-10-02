@@ -1,4 +1,6 @@
 import * as records from './records.js';
+import {mapSnapshotPage} from './map-snapshots.js';
+import {catalogPage,entityRelationshipsPage,entityMediaPage,capacityReport} from './research-catalog.js';
 import * as geography from './geographic-releases.js';
 import {validYear} from '../src/model.js';
 import {environmentClassifications} from '../src/environment-classifications.js';
@@ -23,6 +25,12 @@ export default {
   try{
    if(url.pathname==='/api/classifications'&&request.method==='GET')return json({version:1,unknown:null,attributes:environmentClassifications});
    if(!env.DB) return json({error:'Historical database is temporarily unavailable'},503);
+   if(url.pathname==='/api/storage/capacity'&&request.method==='GET')return json(await capacityReport(env.DB,{databaseBudgetBytes:env.ATLAS_DATABASE_BUDGET_BYTES==null?null:Number(env.ATLAS_DATABASE_BUDGET_BYTES)}));
+   if(url.pathname==='/api/map/snapshot'&&request.method==='GET')return json(await mapSnapshotPage(env.DB,selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||1000)}));
+   const catalog=/^\/api\/catalog\/(sources|categories|entities)$/.exec(url.pathname);
+   if(catalog&&request.method==='GET')return json(await catalogPage(env.DB,catalog[1],{q:url.searchParams.get('q')??'',kind:url.searchParams.get('kind'),cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),examples:url.searchParams.get('examples')==='1',active:url.searchParams.has('active')?url.searchParams.get('active')==='1':null}));
+   const graph=/^\/api\/entities\/([^/]+)\/(relationships|media)$/.exec(url.pathname);
+   if(graph&&request.method==='GET'){const value=await (graph[2]==='relationships'?entityRelationshipsPage:entityMediaPage)(env.DB,decodeURIComponent(graph[1]),selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)});return value?json(value):json({error:'Entity not found'},404);}
    if(url.pathname==='/api/storage'&&request.method==='GET')return json(await records.storageOverview(env.DB));
    if(url.pathname==='/api/attributes'&&request.method==='GET')return json(await records.attributesAt(env.DB,selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),locationIds:url.searchParams.has('location_id')?url.searchParams.getAll('location_id'):undefined}));
    if(url.pathname==='/api/names'&&request.method==='GET')return json(await records.namesAt(env.DB,selectedYear(url),{examples:url.searchParams.get('examples')==='1',mapOnly:url.searchParams.get('scope')==='map',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)}));
@@ -81,7 +89,7 @@ export default {
   }catch(error){
    console.error('Atlas request failed',url.pathname,error.message);
    const status=error.status||(error instanceof SyntaxError?400:503);
-   return json({error:status===503?'Atlas storage is temporarily unavailable':error.message,...(error.retryable?{retryable:true}:{})},status);
+   return json({error:status===503?'Atlas storage is temporarily unavailable':error.message,...(error.retryable?{retryable:true}:{}),...(Number.isInteger(error.suggested_limit)?{suggested_limit:error.suggested_limit}:{})},status);
   }
  }
 };

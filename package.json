@@ -19,13 +19,19 @@
     "data:prepare": "node scripts/prepare.mjs",
     "data:history": "node scripts/prepare-history.mjs",
     "data:import": "node scripts/import.mjs",
-    "test:static": "node test/static-rendering.mjs"
+    "test:static": "node test/static-rendering.mjs",
+    "research:prepare": "node scripts/prepare-research-bundle.mjs",
+    "research:import": "node scripts/import-research-bundle.mjs"
   },
   "dependencies": {
+    "@neon/config": "^1.8.3",
+    "@neon/env": "^1.4.8",
+    "@neondatabase/serverless": "^1.2.0",
     "drizzle-orm": "^0.45.3",
     "leaflet": "^1.9.4"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
     "@playwright/test": "^1.55.1",
     "drizzle-kit": "^0.31.11",
     "mapshaper": "^0.6.113",

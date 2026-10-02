@@ -16,41 +16,68 @@ try{
  await new Promise((resolve,reject)=>{server.stdout.on('data',d=>{if(String(d).includes('Serving HTTP'))resolve();});server.once('exit',c=>reject(new Error(`Server exited ${c}`)));});
  browser=await chromium.launch();const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[],requests=[];page.on('request',r=>requests.push(r.url()));page.on('pageerror',e=>errors.push(e.message));
  await proxyAPI(page);
- const storageRoutes=/\/api\/(?:attributes|names|retirements)(?:\?|$)/;
+ const storageRoutes=/\/api\/map\/snapshot(?:\?|$)/;
  if(apiBase)await page.route(storageRoutes,route=>route.fulfill({status:503,json:{error:'Historical database temporarily unavailable'}}));
  await page.goto('http://localhost:3199');await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:60000});
  const data=()=>page.locator('.atlas-pixel-canvas').evaluate(c=>({...c.dataset}));
  await page.locator('#loading').waitFor({state:'hidden',timeout:60000});
+ const initialRequests=[...requests];
  if(apiBase){
-  assert.match(await page.locator('#year-error').textContent(),/Historical content could not load.*Attribute values are unavailable.*geography remains browsable/);
+  assert.match(await page.locator('#year-error').textContent(),/Historical content could not load.*Dated attribute values are unavailable.*labeled reference context and geography remain browsable/);
   assert.equal(await page.locator('#map-year').textContent(),'2,026 AD');assert.equal((await data()).rendered,'true');
   assert.match(await page.locator('#coverage').textContent(),/[\d,]+ geographic locations.*0 locations with ownership/);
   assert.equal(await page.locator('#borders').count(),0,'border checkbox must remain removed');
   await page.locator('#search').fill('London');await page.locator('[data-result="atlas:city:GBR-Greater London"]').click();
   assert.equal(await page.locator('.breadcrumbs [data-unit]').count(),6);
   assert.equal(await page.locator('.profile-name-context').textContent(),'Present-day reference: London');
-  assert.deepEqual(await page.locator('.profile-attributes dd').allTextContents(),Array(8).fill('Unknown'),'cold outage cannot restore potentially withdrawn prepared values or modern ownership');
+  const assertEnvironmentalContext=async()=>{
+   const values=await page.locator('.profile-attributes dd').allTextContents();
+   assert.equal(values.length,8);
+   for(let index=5;index<8;index++){
+    assert.ok(values[index].trim()&&!values[index].includes('Unknown'),'London has a classified environmental reference');
+    assert.equal(await page.locator('.profile-attributes dd').nth(index).locator('.reference-badge').textContent(),'Reference');
+   }
+  };
+  assert.deepEqual((await page.locator('.profile-attributes dd').allTextContents()).slice(0,5),Array(5).fill('Unknown'),'cold outage cannot restore potentially withdrawn prepared values or modern ownership');
+  await assertEnvironmentalContext();
   await page.unroute(storageRoutes);
-  const recovered=Promise.all(['attributes','names','retirements'].map(endpoint=>page.waitForResponse(r=>new URL(r.url()).pathname===`/api/${endpoint}`&&r.status()===200)));
+  const recovered=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/map/snapshot'&&r.status()===200);
   await page.locator('#year-form button').click();await recovered;await page.locator('#loading').waitFor({state:'hidden'});
   assert.equal(await page.locator('#year-error').textContent(),'','retry clears the database outage notice');
   assert.equal((await data()).rendered,'true');
   const completeValues=await page.locator('.profile-attributes dd').allTextContents();assert.notEqual(completeValues[0],'Unknown','a complete API snapshot permits the modern reference owner');
-  const retirementRoutes=/\/api\/retirements(?:\?|$)/;
-  await page.route(retirementRoutes,route=>route.fulfill({status:503,json:{error:'Temporary retirement stream failure'}}));
+  await page.route(storageRoutes,route=>new URL(route.request().url()).searchParams.has('cursor')?route.fulfill({status:503,json:{error:'Temporary failure after a partial snapshot'}}):route.fallback());
   await page.locator('#year-form button').click();await page.locator('#loading').waitFor({state:'hidden'});
   assert.match(await page.locator('#year-error').textContent(),/Historical content could not refresh.*last complete snapshot for this year/);
-  assert.deepEqual(await page.locator('.profile-attributes dd').allTextContents(),completeValues,'partial endpoint failure reuses only a complete consistent snapshot');
+  assert.deepEqual(await page.locator('.profile-attributes dd').allTextContents(),completeValues,'a failed later page reuses only a complete consistent snapshot');
   await page.locator('#year-input').fill('2025');await page.locator('#year-form button').click();await page.locator('#loading').waitFor({state:'hidden'});
-  assert.match(await page.locator('#year-error').textContent(),/Attribute values are unavailable/);
-  assert.deepEqual(await page.locator('.profile-attributes dd').allTextContents(),Array(8).fill('Unknown'),'a different year cannot reuse the previous complete snapshot');
-  await page.unroute(retirementRoutes);
+  assert.match(await page.locator('#year-error').textContent(),/Dated attribute values are unavailable/);
+  assert.deepEqual((await page.locator('.profile-attributes dd').allTextContents()).slice(0,5),Array(5).fill('Unknown'),'a different year cannot reuse the previous complete snapshot');
+  await assertEnvironmentalContext();
+  await page.unroute(storageRoutes);
+  for(const selectedYear of ['2025','3000 BC']){
+   await page.locator('#year-input').fill(selectedYear);await page.locator('#year-form button').click();await page.locator('#loading').waitFor({state:'hidden'});
+   assert.equal(await page.locator('#year-error').textContent(),'');
+   await assertEnvironmentalContext();
+   const evidence=page.locator('.profile-evidence');
+   assert.equal(await evidence.evaluate(element=>element.open),false);
+   await evidence.locator(':scope > summary').click();
+   assert.equal(await evidence.locator('p').filter({hasText:'Reference context; the historical state for this year remains unknown.'}).count(),3,'reference presentation must not imply supported historical environmental claims');
+   assert.match(await evidence.textContent(),/Climate normal: 1991–2020/);
+   await evidence.locator(':scope > summary').click();
+   for(const attribute of ['topography','vegetation','climate']){
+    await page.locator(`[data-mode="${attribute}"]`).click();
+    assert.match(await page.locator('#legend-items').textContent(),/[\d,]+ locations show reference context/);
+   }
+   await page.locator('[data-mode="owner"]').click();
+  }
   await page.locator('#year-input').fill('2026');await page.locator('#year-form button').click();await page.locator('#loading').waitFor({state:'hidden'});
   assert.equal(await page.locator('#year-error').textContent(),'');
   assert.deepEqual(await page.locator('.profile-attributes dd').allTextContents(),completeValues);
   const hostedRequests=requests.filter(url=>storageRoutes.test(url));assert.ok(hostedRequests.length>=6);
-  assert.ok(hostedRequests.every(url=>new URL(url).searchParams.get('scope')==='map'),'atlas queries only map-relevant names and attributes');
-  assert.deepEqual(errors,[]);console.log('PASS: cold outages keep geography browsable with unknown attributes; partial outages retain complete same-year snapshots; API recovery and default borders work.');
+  assert.ok(hostedRequests.every(url=>{const params=new URL(url).searchParams;return params.has('year')&&params.has('examples')&&Number(params.get('limit'))>0&&Number(params.get('limit'))<=1000;}),'compact pages have a bounded entity limit and explicit year/example scope');
+  assert.ok(!requests.some(url=>/\/api\/(?:attributes|names|retirements)(?:\?|$)/.test(url)),'the built map uses the shared compact snapshot rather than legacy claim streams');
+  assert.deepEqual(errors,[]);console.log('PASS: cold outages preserve geography and separately labeled environmental context; partial snapshot-page failures retain complete same-year values; 2025/3000 BC profiles, evidence and legends keep reference context explicit.');
  }
  const fields=['Owner','Population','Primary culture','Primary religion','Location rank','Topography','Vegetation','Climate'];
  const profiles=[['Hong Kong','atlas:territory:HKG','Asia'],['London','atlas:city:GBR-Greater London','Europe'],['New York City','atlas:city:USA-New-York-City','North America'],['São Paulo','gb:BRA:ADM2:56859067B92864763247255','South America'],['Cairo','atlas:city:EGY-1533','Africa'],['Melbourne','gb:AUS:ADM2:25037944B74771981745191','Oceania'],['Kabe','gb:NAM:ADM2:8085530B93169958876618','Africa']];
@@ -79,8 +106,8 @@ try{
  await page.locator('[data-mode="owner"]').click();assert.deepEqual(errors,[]);
  console.log('PASS: built profiles across all six continents and Namibia keep exactly eight attributes, six tiers and collapsed citations without desktop/mobile overflow; all 14 modes respond.');
  if(process.env.ATLAS_TEST_STORAGE_ONLY!=='1'){
- assert.ok(requests.some(url=>url.endsWith('/ownership-runtime/index.json')),'modern view checks the ownership coverage interval');
- assert.ok(!requests.some(url=>/ownership-(?:history\/(?:part-|evidence)|runtime\/century)/.test(url)),'2026 must not download historical intervals or evidence');
+ assert.ok(initialRequests.some(url=>url.endsWith('/ownership-runtime/index.json')),'modern view checks the ownership coverage interval');
+ assert.ok(!initialRequests.some(url=>/ownership-(?:history\/(?:part-|evidence)|runtime\/century)/.test(url)),'the initial 2026 view must not download historical intervals or evidence');
  const baseline=await data();assert.equal(baseline.precompiled,'true');assert.equal(baseline.compilations,'0');assert.ok(!requests.some(url=>/geography\/part-/.test(url)));assert.equal(baseline.renderer,'webgl2');assert.equal(baseline.stride,'1');
  await page.locator('#zoom-in').click();await page.waitForFunction(k=>document.querySelector('.atlas-pixel-canvas').dataset.frame!==k,baseline.frame);
  const next=await data();assert.equal(next.uploads,baseline.uploads);assert.equal(next.compilations,baseline.compilations);

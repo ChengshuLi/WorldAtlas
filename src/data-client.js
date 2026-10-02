@@ -1,4 +1,5 @@
-import {decodeReferences} from './reference-records.js';
+import {hydrateMapSnapshotPage} from './map-snapshot-format.js';
+import {decodeReferences,decodeReferenceContext} from './reference-records.js';
 import {preparedEvidencePartsAt,selectPreparedEvidence,verifyPreparedEvidencePart,verifyPreparedEvidenceIndexBytes,mergePreparedEvidence} from './prepared-evidence.js';
 import {decodeDerived} from './derived-records.js';
 import {runtimeOwnershipBucket,runtimeOwnershipData} from './runtime-ownership.js';
@@ -9,6 +10,7 @@ import { validateHierarchy } from './hierarchy.js';
 const staticAtlas = import.meta.env.VITE_STATIC_ATLAS === 'true';
 const hostedDatabase = import.meta.env.VITE_HOSTED_DATABASE === 'true';
 let historyRequest;
+let compactMapSupported=false;
 const ownershipRequests=new Map();
 let ownershipIndexRequest;
 let referenceAttributeRequest;
@@ -22,8 +24,8 @@ async function loadPreparedEvidence(year,examples,signal){
  return selectPreparedEvidence(index,parts,year,{examples,expected:preparedEvidenceProof});
 }
 async function loadReferenceAttributes(year,signal){
- referenceAttributeRequest ||= readJSON("./reference-attributes/index.json").then(async index=>({index,parts:await Promise.all(index.parts.map(p=>readJSON(`./reference-attributes/${p}`)))})).catch(error=>{referenceAttributeRequest=null;throw error;});
- const {index,parts}=await referenceAttributeRequest;signal?.throwIfAborted();return decodeReferences(parts,index,year);
+ referenceAttributeRequest ||= readJSON("./reference-attributes/index.json").then(async index=>{const parts=await Promise.all(index.parts.map(p=>readJSON(`./reference-attributes/${p}`)));return {index,parts,referenceBaselines:decodeReferenceContext(parts,index)};}).catch(error=>{referenceAttributeRequest=null;throw error;});
+ const {index,parts,referenceBaselines}=await referenceAttributeRequest;signal?.throwIfAborted();return {records:decodeReferences(parts,index,year),referenceBaselines};
 }
 
 async function loadOwnershipHistory(year,signal){
@@ -57,6 +59,22 @@ async function loadHostedRecords(endpoint,year,examples,signal){
  return {records,available:true,revision};
  }catch(error){if(error.name==='AbortError'||signal?.aborted||error.retryable)throw error;return {records:[],available:false,revision:null};}
 }
+async function loadHostedSnapshotPages(year,examples,signal){
+ const attributes=[],names=[],retirements=[];let cursor='',revision=null,limit=1000;const cursors=new Set();
+ try{
+ while(true){
+  const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),limit:String(limit)});if(cursor)params.set('cursor',cursor);
+  const response=await fetch('/api/map/snapshot?'+params,{signal});
+  if(!response.ok){const error=await response.json().catch(()=>({}));if(response.status===409&&error.retryable)throw new ContentRevisionError();if(response.status===413&&error.retryable&&limit>1){limit=Math.max(1,Math.min(limit-1,Number.isInteger(error.suggested_limit)?error.suggested_limit:Math.floor(limit/2)));continue;}throw Error(`Atlas data unavailable (${response.status})`);}
+  const page=hydrateMapSnapshotPage(await response.json());
+  if(page.year!==year)throw Error('Historical database returned an incorrect year');
+  if(revision!=null&&revision!==page.revision)throw new ContentRevisionError();revision=page.revision;
+  attributes.push(...page.records);names.push(...page.names);retirements.push(...page.retirements);
+  cursor=page.next_cursor||'';if(cursor&&cursors.has(cursor))throw Error('Historical database returned a repeated cursor');if(cursor)cursors.add(cursor);else break;
+ }
+ return [attributes,names,retirements].map(records=>({records,available:true,revision}));
+ }catch(error){if(error.name==='AbortError'||signal?.aborted||error.retryable)throw error;return [0,1,2].map(()=>({records:[],available:false,revision:null}));}
+}
 let lastCompleteHostedMap;
 function unavailableHostedMap(year,examples,{unstable=false}={}){
  const key=`${year}:${Number(examples)}`,cached=lastCompleteHostedMap?.key===key?lastCompleteHostedMap.value:null,empty={records:[],available:false,revision:null};
@@ -66,7 +84,7 @@ async function loadHostedMapEvidence(year,examples,signal){
  for(let attempt=0;attempt<3;attempt++){
   signal?.throwIfAborted();
   try{
-   const pages=await Promise.all(['/api/attributes','/api/names','/api/retirements'].map(endpoint=>loadHostedRecords(endpoint,year,examples,signal)));
+   const pages=hostedDatabase&&compactMapSupported?await loadHostedSnapshotPages(year,examples,signal):await Promise.all(['/api/attributes','/api/names','/api/retirements'].map(endpoint=>loadHostedRecords(endpoint,year,examples,signal)));
    if(pages.some(p=>!p.available))return unavailableHostedMap(year,examples);
    const versions=new Set(pages.filter(p=>p.revision!=null).map(p=>p.revision));
    if(versions.size>1)throw new ContentRevisionError();
@@ -108,6 +126,7 @@ export async function loadGeography() {
   if(data.temporalHistoryParts)data.temporal.history=(await Promise.all(data.temporalHistoryParts.map(p=>readJSON(`./${p}`)))).flat();
   validateHierarchy(data.units,data.features.map(f=>f.properties));
   preparedEvidenceProof=data.preparedEvidence;
+  compactMapSupported=data.contentCapabilities?.mapSnapshots===1;
   return data;
 }
 
@@ -121,7 +140,7 @@ export async function loadSnapshot(year, examples, signal) {
   const {attributes:hosted,names:temporal_history,retirements}=hostedMap;
   const evidenceUnavailable=hostedDatabase&&!hostedMap.retirementAuthority;
   const merged=evidenceUnavailable?{records:[],names:[]}:mergePreparedEvidence(hosted.records,temporal_history.records,evidence,{retirements:retirements.records});
-  return { year,evidenceUnavailable, temporal_history:merged.names, storage:hostedDatabase?{available:hosted.available&&temporal_history.available&&retirements.available,stale:Boolean(hostedMap.stale),cached_revision:hostedMap.cached_revision??null,...(!hosted.available?{reason:hostedMap.stale?'Historical database unavailable. Showing the last complete cached content snapshot for this year; it may be outdated. Select the year again to retry.':hostedMap.unstable?'Historical content changed during loading. Dated values are unavailable until a consistent snapshot can be read. Select the year again to retry.':'Historical database unavailable. Dated values are unavailable because withdrawals could not be verified. Geography remains browsable. Select the year again to retry.'}:{})}:null, states:evidenceUnavailable?[]:selectRecords(history.states, year, examples), boundaries: selectRecords(history.boundaries, year, examples), attributes:evidenceUnavailable?[]:mergePreparedEvidence([...merged.records,...(history.attributes||[]).filter(r=>r.valid_from<=year&&r.valid_to>year&&(!r.is_example||examples))],[],{records:[...derived,...references],names:[]},{retirements:retirements.records}).records,polities:[] };
+  return { year,evidenceUnavailable,referenceBaselines:references.referenceBaselines, temporal_history:merged.names, storage:hostedDatabase?{available:hosted.available&&temporal_history.available&&retirements.available,stale:Boolean(hostedMap.stale),cached_revision:hostedMap.cached_revision??null,...(!hosted.available?{reason:hostedMap.stale?'Historical database unavailable. Showing the last complete cached content snapshot for this year; it may be outdated. Select the year again to retry.':hostedMap.unstable?'Historical content changed during loading. Dated values are unavailable until a consistent snapshot can be read. Select the year again to retry.':'Historical database unavailable. Dated values are unavailable because withdrawals could not be verified. Geography remains browsable. Select the year again to retry.'}:{})}:null, states:evidenceUnavailable?[]:selectRecords(history.states, year, examples), boundaries: selectRecords(history.boundaries, year, examples), attributes:evidenceUnavailable?[]:mergePreparedEvidence([...merged.records,...(history.attributes||[]).filter(r=>r.valid_from<=year&&r.valid_to>year&&(!r.is_example||examples))],[],{records:[...derived,...references.records],names:[]},{retirements:retirements.records}).records,polities:[] };
 }
 
 export async function ensureGeometry(data,signal){

@@ -6,3 +6,8 @@ export function decodeReferences(parts,index,year){
  for(const part of parts)for(const [location_id,values] of part)for(const [type,value,share,coverage] of values){const t=active.get(type);if(t)records.push({...t,id:`reference:${location_id}:${t.attribute}:${t.valid_from}`,location_id,value:index.values[value],metadata:{...t.metadata,share,coverage}});}
  return records;
 }
+
+export function decodeReferenceContext(parts,index){
+ // Preserve every original supported interval and source normal period.
+ return decodeReferences(parts,index,2026).filter(row=>row.method==='reference'&&!row.is_example);
+}

@@ -1,10 +1,11 @@
 import {attributes,validYear,explicitPopulationZero} from './model.js';
 import {environmentalAttributes,environmentalClassification} from './environment-classifications.js';
+import {referenceContextByLocation} from './reference-context.js';
 export const locationAttributes=[...attributes,'habitation'];
 export const unresolvedAttributeStatuses=['unknown','disputed','no-majority'];
 export function categoryId(kind,name){return name==null?null:`${kind}:${encodeURIComponent(name.normalize('NFC').trim().toLocaleLowerCase('en'))}`;}
 const priority=r=>r.is_example?40+(r.evidence_priority||0):r.method==='direct'?(r.evidence_priority||0):r.method==='majority-area'||r.method==='derived'?10:r.method==='reference'?20:30;
-export function resolveAttributes(features,year,{states=[],records=[],temporal,examples=false,evidenceAvailable=true}={}){
+export function resolveAttributes(features,year,{states=[],records=[],temporal,examples=false,evidenceAvailable=true,referenceBaselines=[]}={}){
  if(!validYear(year))throw Error('Year must be between 3000 BC and 2026 AD, excluding zero');
  if(!evidenceAvailable){states=[];records=[];temporal=undefined;}
  const candidates=new Map();
@@ -17,7 +18,8 @@ export function resolveAttributes(features,year,{states=[],records=[],temporal,e
  for(const e of temporal?.entities.values()||[])if(e.kind==='location'&&e.attributes?.source){const a=e.attributes,r={...a,metadata:{legacy_attributes:true},method:'direct',status:a.is_example?'example':'sourced',valid_from:e.attribute_record?.valid_from??year,valid_to:e.attribute_record?.valid_to??(year===-1?1:year+1),evidence_priority:1,id:`temporal:${e.id}`};for(const attribute of locationAttributes)add(e.id,attribute,a[attribute]??null,r);}
  for(const r of records)add(r.location_id,r.attribute,r.value,r);
  const output=new Map();
- for(const f of features){const value={location_id:f.id,provenance:{},category_ids:{}};
+ const baselines=referenceContextByLocation(referenceBaselines);
+ for(const f of features){const value={location_id:f.id,provenance:{},category_ids:{},reference_baselines:baselines.get(f.id)??{}};
   for(const attribute of locationAttributes){let c=candidates.get(`${f.id}/${attribute}`);
    if(evidenceAvailable&&(!c||c.rank>20)&&year===2026&&attribute==='owner'&&f.properties.reference_owner){const m=f.properties.metadata||{},name='reference_polity' in m?m.reference_polity:f.properties.reference_owner;c={value:name,evidence:{category_id:m.reference_owner_id??categoryId('owner',name),method:'reference',status:m.reference_polity_status||'reference',valid_from:2026,valid_to:2027,source:m.reference_polity_evidence?.source||`${m.source_name||'Geographic'} ownership reference; source dates vary`,metadata:m.reference_polity_evidence||{}}};}
    const unresolved=unresolvedAttributeStatuses.includes(c?.evidence.status);

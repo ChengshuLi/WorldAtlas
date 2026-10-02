@@ -1,4 +1,5 @@
 import {readJSON} from './data-client.js';
+import {presentedAttribute} from './reference-context.js';
 import {attributes,formatYear} from './model.js';
 const safe=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function installCoverage(getContext){
@@ -27,10 +28,10 @@ export function installCoverage(getContext){
  const render=()=>{
   const {data,states,year}=getContext(),continent=dialog.querySelector('#coverage-continent').value,owner=dialog.querySelector('#coverage-territory').value,attribute=dialog.querySelector('#coverage-attribute').value;
   const profiles=review.territories.filter(p=>(!continent||p.continent===continent)&&(!owner||p.owner===owner)),owners=new Set(profiles.map(p=>p.owner)),features=data.features.filter(f=>owners.has(f.properties.reference_owner));
-  let known=0,derived=0,reference=0,disputed=0,unrepresented=0;const missingPixels=new Set(pixels?.missing?.map(p=>p.id)||[]);
-  for(const f of features){const r=states.get(f.id),p=r?.provenance?.[attribute];if(r?.[attribute]!=null)known++;if(p?.method==='majority-area')derived++;if(p?.status==='reference')reference++;if(p?.status==='disputed')disputed++;if(missingPixels.has(f.id))unrepresented++;}
+  let known=0,derived=0,reference=0,referenceContext=0,disputed=0,unrepresented=0;const missingPixels=new Set(pixels?.missing?.map(p=>p.id)||[]);
+  for(const f of features){const r=states.get(f.id),p=r?.provenance?.[attribute];if(r?.[attribute]!=null)known++;if(p?.method==='majority-area')derived++;if(p?.status==='reference')reference++;const shown=presentedAttribute(r,attribute);if(shown.value!=null&&shown.provenance?.context_only)referenceContext++;if(p?.status==='disputed')disputed++;if(missingPixels.has(f.id))unrepresented++;}
   dialog.querySelector('#coverage-context').textContent=`${formatYear(year)} · Attribute counts use the selected year and whole-location records. Territory filters use reference geography.`;
-  dialog.querySelector('#coverage-summary').innerHTML=[['Locations',features.length],['Known '+attribute,known],['Unknown '+attribute,features.length-known],['Derived assignments',derived],['Reference values',reference],['Conflicting claims',disputed],['Missing grid representation',unrepresented]].map(([label,n])=>`<div><strong>${n.toLocaleString()}</strong><span>${safe(label)}</span></div>`).join('');
+  dialog.querySelector('#coverage-summary').innerHTML=[['Locations',features.length],['Known '+attribute,known],['Unknown '+attribute,features.length-known],['Derived assignments',derived],['Dated reference values',reference],['Separate reference context',referenceContext],['Conflicting claims',disputed],['Missing grid representation',unrepresented]].map(([label,n])=>`<div><strong>${n.toLocaleString()}</strong><span>${safe(label)}</span></div>`).join('');
   const groups=new Map(review.groups.map(g=>[g.id,g]));
   dialog.querySelector('#coverage-levels').textContent=Object.entries(review.level_progress||{}).map(([level,p])=>`${level}: ${p.total.toLocaleString()} inventoried, ${(p.boundary_reviewed??p.semantic_reviewed??0).toLocaleString()} ${level==='location'?'locations':'boundaries'} reviewed, ${(p.pending??p.pending_semantic_review??0).toLocaleString()} awaiting complete review`).join(' · ');
   const tree=dialog.querySelector('#coverage-tree');tree.replaceChildren();

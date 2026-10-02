@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {decodeReferences} from './src/reference-records.js';
+import {decodeReferences,decodeReferenceContext} from './src/reference-records.js';
 import {decodeDerived} from './src/derived-records.js';
 import {runtimeOwnershipBucket,runtimeOwnershipData} from './src/runtime-ownership.js';
 let cached,referenceCache,runtimeCache;
@@ -26,6 +26,11 @@ function referencesAt(year){
  const root=new URL("./data/reference-attributes/",import.meta.url),file=new URL("index.json",root);if(!fs.existsSync(file))return [];
  const stamp=fs.statSync(file).mtimeMs;if(referenceCache?.stamp!==stamp){const index=JSON.parse(fs.readFileSync(file));referenceCache={stamp,index,parts:index.parts.map(p=>JSON.parse(gunzipSync(fs.readFileSync(new URL(p,root)))))};}
  return decodeReferences(referenceCache.parts,referenceCache.index,year);
+}
+
+export function environmentalReferenceContext(){
+ referencesAt(2026);
+ return referenceCache?(referenceCache.context??=decodeReferenceContext(referenceCache.parts,referenceCache.index)):[];
 }
 
 export function derivedRecordsAt(year){
