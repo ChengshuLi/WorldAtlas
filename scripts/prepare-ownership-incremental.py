@@ -23,6 +23,21 @@ def safe_path(root,name):
 def write_gzip(path,value):
  raw=gzip.compress(dump(value).encode(),compresslevel=9,mtime=0);path.write_bytes(raw)
  return {'path':path.name,'sha256':sha(path)}
+def retain_prior_archives(source,stage,index,names):
+ """Keep earlier lineage receipts/rows across successive compact generations."""
+ if not index.get('incremental_preparation'):return {}
+ prefix='prior-archives/'+sha(source/'index.json');target=stage/prefix;target.mkdir(parents=True)
+ retained={}
+ for name in names:
+  original=safe_path(source,name)
+  if not original.exists():continue
+  if original.is_symlink() or original.is_dir() and any(p.is_symlink() for p in original.rglob('*')):raise ValueError('Prior evidence archives must not contain symlinks')
+  destination=safe_path(target,name);destination.parent.mkdir(parents=True,exist_ok=True)
+  if original.is_dir():shutil.copytree(original,destination)
+  else:shutil.copyfile(original,destination)
+ for file in target.rglob('*'):
+  if file.is_file():retained[file.relative_to(stage).as_posix()]=sha(file)
+ return retained
 def feature_snapshot(path):
  raw=load(path)
  if isinstance(raw,list):features=raw
@@ -105,7 +120,9 @@ def check_receipt(receipt,before_hash,after_hash,changed,removed,added):
  if not receipt.get('source_evidence'):raise ValueError('Migration receipt requires source evidence')
  for relationship in receipt.get('relationships',[]):
   old=relationship.get('before_ids',[]);new=relationship.get('after_ids',[])
-  if not old or not new:raise ValueError('Invalid migration relationship')
+  if relationship.get('kind')=='source-backed-create':
+   if old or not new or not set(new)<=set(added) or relationship.get('history_transfer') is not False:raise ValueError('Invalid source-backed creation relationship')
+  elif not old or not new:raise ValueError('Invalid migration relationship')
   if not set(old)<=set(receipt['_before_ids']) or not set(new)<=set(receipt['_after_ids']):raise ValueError('Migration relationship refers to absent IDs')
  return True
 
@@ -172,7 +189,7 @@ def derive_location(id,location,total,overrides,helpers,db):
 
 def id_of(value):return id(value)
 
-def prepare(before_path,after_path,before_boundaries,after_boundaries,receipt_path,ownership,source,output):
+def prepare(before_path,after_path,before_boundaries,after_boundaries,receipt_path,ownership,source,output,unknown_changed=False):
  ownership=ownership.resolve();source=source.resolve();output=output.resolve();wrapper_start_sha=sha(pathlib.Path(__file__))
  if output.exists():raise ValueError('Output must be a new staging directory')
  if output==ownership or output.is_relative_to(ownership) or ownership.is_relative_to(output) or output.is_relative_to(source):raise ValueError('Staging must be separate from immutable ownership/political sources')
@@ -230,7 +247,10 @@ def prepare(before_path,after_path,before_boundaries,after_boundaries,receipt_pa
     result.append([a,b,owners[owner] if owner else None,index['statuses_order'].index(status),ei])
    return result
   derived_count=0;source_records=0
-  if changed:
+  if unknown_changed:
+   for id in sorted(changed):db.execute('INSERT INTO location VALUES(?,?)',(id,'[]'))
+   if changed:staged_parts.append({**write_gzip(work/'unknown-changed.json.gz',[[id,[]] for id in sorted(changed)]),'locations':len(changed)})
+  elif changed:
    geos,totals,source_records=measure_changed(changed,after,av,source,chunks,helpers,db)
    expected_ids={row[0] for row in db.execute('SELECT id FROM source')};listed_ids={r['id'] for r in pi['records']}
    if expected_ids!=listed_ids:raise ValueError('Political source chunk/index identity coverage mismatch')
@@ -250,15 +270,20 @@ def prepare(before_path,after_path,before_boundaries,after_boundaries,receipt_pa
   for entry in evidence_parts:shutil.copyfile(ownership/entry['path'],work/entry['path'])
   for start in range(index['evidence_records'],offset,20000):
    rows=[json.loads(v) for v, in db.execute('SELECT value FROM evidence WHERE id>=? AND id<? ORDER BY id',(start,min(start+20000,offset)))];evidence_parts.append(write_gzip(work/('incremental-evidence-'+str(start)+'.json.gz'),rows))
-  proof_dir=work/'algorithms';shutil.copytree(ownership/'algorithms',proof_dir);wrapper=proof_dir/'incremental/prepare-ownership-incremental.py';wrapper.parent.mkdir();shutil.copyfile(__file__,wrapper)
+  proof_dir=work/'algorithms';shutil.copytree(ownership/'algorithms',proof_dir);generation=sha(receipt_path)[:16]+'-'+wrapper_start_sha[:16];wrapper=proof_dir/('incremental/'+generation+'/prepare-ownership-incremental.py');wrapper.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(__file__,wrapper)
   for file in ['candidate-recovery.json','threshold-refinement.json']:
    if (ownership/file).exists():shutil.copyfile(ownership/file,work/file)
   mapping=[[id,old_positions.get(id),new_positions.get(id),'reused' if id in reused else 'removed' if id in removed else 'added' if id in added else 'changed',fingerprints['before'].get(id),fingerprints['after'].get(id)] for id in sorted(set(before)|set(after))]
   mapping_part=write_gzip(work/'location-identity-map.json.gz',mapping)
   archive={'original_index_sha256':sha(ownership/'index.json'),'original_index':index,'parts':removed_parts,'rule':'Lineage-only preservation. No owner/history assignment transfers from removed or changed IDs.'};(work/'archive-index.json').write_text(dump(archive))
+  previous=index.get('incremental_preparation',{});previous_names=['prior-archives','migration-receipt.json','location-identity-map.json.gz']
+  if previous.get('archive_path'):
+   previous_names.append(previous['archive_path']);previous_names.extend(p['path'] for p in load(safe_path(ownership,previous['archive_path']))['parts'])
+  retained_archives=retain_prior_archives(ownership,work,index,previous_names)
   dictionary.update(parts=staged_parts,evidence_parts=evidence_parts,evidence_records=offset,locations=len(after),intervals=kept_intervals+derived_count,statuses=dict(statuses),footprints_sha256=ah)
   dictionary['inputs']['footprints_sha256']=ah;dictionary['inputs']['boundary_versions']=avh
-  dictionary['incremental_preparation']={'version':1,'original_index_sha256':sha(ownership/'index.json'),'wrapper':{'path':'algorithms/incremental/prepare-ownership-incremental.py','sha256':sha(wrapper)},'migration_receipt_sha256':sha(receipt_path),'before_footprints_sha256':bh,'after_footprints_sha256':ah,'before_boundary_versions_sha256':bvh,'after_boundary_versions_sha256':avh,'identity_map':mapping_part,'reused_locations':len(reused),'changed_locations':len(changed-added),'added_locations':len(added),'removed_locations':len(removed),'reused_intervals':kept_intervals,'derived_intervals':derived_count,'source_records_scanned':source_records,'reused_row_bytes_exhaustively_verified':True,'archive_path':'archive-index.json','execution_note':'Original executed algorithm receipts remain immutable; this wrapper uses the hash-verified archived WGS84 helper to derive only changed/new IDs. Direct attribute evidence is not migrated or overwritten.'}
+  dictionary['incremental_preparation']={'version':1,'original_index_sha256':sha(ownership/'index.json'),'wrapper':{'path':wrapper.relative_to(work).as_posix(),'sha256':sha(wrapper)},'migration_receipt_sha256':sha(receipt_path),'before_footprints_sha256':bh,'after_footprints_sha256':ah,'before_boundary_versions_sha256':bvh,'after_boundary_versions_sha256':avh,'identity_map':mapping_part,'reused_locations':len(reused),'changed_locations':len(changed-added),'added_locations':len(added),'removed_locations':len(removed),'reused_intervals':kept_intervals,'derived_intervals':derived_count,'source_records_scanned':source_records,'unknown_changed':bool(unknown_changed),'reused_row_bytes_exhaustively_verified':True,'archive_path':'archive-index.json','execution_note':'Original executed algorithm receipts remain immutable; only changed/new IDs are derived or explicitly unresolved. Direct attribute evidence is not migrated or overwritten.'}
+  dictionary['incremental_preparation']['retained_prior_archives']=retained_archives
   for entry in staged_parts+evidence_parts:
    if sha(work/entry['path'])!=entry['sha256']:raise ValueError('Staged asset checksum mismatch')
   if sha(wrapper)!=wrapper_start_sha or sha(pathlib.Path(__file__))!=wrapper_start_sha:raise ValueError('Incremental executable changed during preparation')
@@ -298,6 +323,6 @@ def validate_compact(rows,index,evidence_count):
 if __name__=='__main__':
  parser=argparse.ArgumentParser(description=__doc__)
  for name in ['before','after','before-boundaries','after-boundaries','receipt','output']:parser.add_argument('--'+name,type=pathlib.Path,required=True)
- parser.add_argument('--ownership',type=pathlib.Path,default=ROOT/'data/ownership-history');parser.add_argument('--source',type=pathlib.Path,default=ROOT/'data/cliopatria');args=parser.parse_args()
- result=prepare(args.before,args.after,args.before_boundaries,args.after_boundaries,args.receipt,args.ownership,args.source,args.output)
+ parser.add_argument('--ownership',type=pathlib.Path,default=ROOT/'data/ownership-history');parser.add_argument('--source',type=pathlib.Path,default=ROOT/'data/cliopatria');parser.add_argument('--unknown-changed',action='store_true',help='Keep changed/new ownership unknown, retaining predecessor evidence without spatial derivation');args=parser.parse_args()
+ result=prepare(args.before,args.after,args.before_boundaries,args.after_boundaries,args.receipt,args.ownership,args.source,args.output,args.unknown_changed)
  print(dump(result['incremental_preparation']))
