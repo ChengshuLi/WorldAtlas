@@ -8,6 +8,8 @@ import { createHash } from 'node:crypto';
 import { gunzipSync } from 'node:zlib';
 import { resolve, relative, dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {footprintHash} from './check-prepared.mjs';
+import {validateMacroReviewProjection} from './prepare-macro-review-projection.mjs';
 
 export const CONTINENTS = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America'];
 export const LEDGERS = Object.fromEntries(CONTINENTS.map(name => [name, `data/geographic-semantic-followup/${name.toLowerCase().replaceAll(' ', '-')}.json.gz`]));
@@ -218,7 +220,15 @@ export function validateFollowupSnapshot({ hierarchy, locations, reports, worldR
 export async function validateSemanticFollowup(root, { expectedCounts = { locations: 49589, groups: 5705, reference_owner_groups: 250, policy_profiles: 201 } } = {}) {
   root = resolve(root); const fileHashes = new Map(), reportSizes = new Set();
   function safePath(path) { const absolute = resolve(root, path); requireThat(!relative(root, absolute).startsWith(`..${sep}`) && relative(root, absolute) !== '..', 'Source path escapes repository'); return absolute; }
-  async function bytes(path) { const body = await readFile(safePath(path)); fileHashes.set(path, hash(body)); return body; }
+  let membershipProjection=null;
+  try {membershipProjection=JSON.parse(gunzipSync(await readFile(safePath('data/macro-foundation/current-membership-projection.json.gz'))));} catch(error){if(error.code!=='ENOENT')throw error;}
+  const physicalHashes=new Map();
+  async function bytes(path) {
+    const retained=membershipProjection?.baseline_files?.[path],actualPath=retained?.archive_path??path,raw=await readFile(safePath(actualPath));physicalHashes.set(actualPath,hash(raw));
+    let body=raw;
+    if(retained){requireThat(retained.compression==='gzip'&&hash(raw)===retained.archive_sha256,'Retained inspection archive differs from its original byte proof');body=gunzipSync(raw);requireThat(hash(body)===retained.original_sha256,'Retained inspection archive does not reconstruct exact original bytes');}
+    fileHashes.set(path, hash(body));return body;
+  }
   async function read(path) { const body = await bytes(path); return JSON.parse((path.endsWith('.gz') ? gunzipSync(body) : body).toString('utf8')); }
   async function pinned(path, expected) { requireThat(HEX.test(expected), `Invalid source hash: ${path}`); const actual = fileHashes.get(path) ?? hash(await bytes(path)); requireThat(actual === expected, `Stale source hash: ${path}`); }
   const reports = [];
@@ -323,8 +333,16 @@ export async function validateSemanticFollowup(root, { expectedCounts = { locati
   result.deployment_asset_check = { existing_tree: assetRoot, files_checked: assetFilesChecked, full_followup_ledgers_found: 0, limitation: assetRoot ? 'Checks the existing asset tree only; rerun after future builds.' : 'No deployment artifact exists in this checkout; no build or publication was performed.' };
   result.source_verification = { current_repository_files_hashed: fileHashes.size, source_geometry_hash_declarations_checked: declaredSourceHashes, evidence_hash_declarations_format_checked: evidenceHashDeclarations, diagnostic_current_footprint_contexts_verified: diagnosticContextsVerified, retained_source_geometry_bytes_verified: retainedSourceBytesVerified, external_response_bytes_refetched: 0, limitation: 'External response/source hashes whose original bytes are not committed remain declarations. This validation neither refetches public sources nor claims unavailable original bytes were verified.' };
   result.critical_input_sha256 = Object.fromEntries(['data/hierarchy.json', 'data/world-index.json', 'data/world-review.json', 'data/location-policy.json', 'data/global-semantic-closure.json.gz', 'data/geographic-decision-migration.json.gz', 'data/macro-boundary-migration.json.gz', 'data/geographic-repair-evidence/migration-receipt.json.gz'].map(path => [path, fileHashes.get(path)]));
-  const checkedState = [...fileHashes];
-  for (const [path, expected] of checkedState) requireThat(hash(await readFile(safePath(path))) === expected, `Repository changed during validation: ${path}`);
+  if(membershipProjection){
+    const currentHierarchyRaw=await readFile(safePath('data/hierarchy.json')),currentIndexRaw=await readFile(safePath('data/world-index.json')),currentHierarchy=JSON.parse(currentHierarchyRaw),currentIndex=JSON.parse(currentIndexRaw),currentFeatures=[];
+    for(const part of currentIndex.parts)currentFeatures.push(...JSON.parse(await readFile(safePath(`data/${part}`))).features);
+    const currentLocations=currentFeatures.map(feature=>({id:feature.id,name:feature.properties.name,parent_id:feature.properties.parent_id,owner:feature.properties.reference_owner}));
+    const projected=validateMacroReviewProjection({projection:membershipProjection,hierarchy:currentHierarchy,locations:currentLocations,baselineHierarchy:hierarchy,baselineLocations:locations,currentPins:{hierarchy_sha256:hash(currentHierarchyRaw),location_index_sha256:hash(currentIndexRaw),footprints_sha256:footprintHash(currentFeatures)}});
+    for(const receipt of membershipProjection.crosswalks){const raw=await readFile(safePath(receipt.path));requireThat(hash(raw)===receipt.sha256,'Current membership projection receipt bytes changed');}
+    result.retained_inspection_counts=result.counts;result.counts={...result.counts,locations:projected.counts.locations,groups:projected.counts.groups};result.current_membership_projection=projected;
+    result.limitation+=' Original source inspections were checked against their exact archived baseline; current names/chains are a separately validated metadata projection, not a new inspection.';
+  }
+  for (const [path, expected] of physicalHashes) requireThat(hash(await readFile(safePath(path))) === expected, `Repository changed during validation: ${path}`);
   result.validator_sha256 = hash(await readFile(fileURLToPath(import.meta.url)));
   result.full_ledgers_are_deployment_assets = false;
   return result;
@@ -333,7 +351,7 @@ export async function validateSemanticFollowup(root, { expectedCounts = { locati
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
     const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-    const report = await validateSemanticFollowup(root); const target = resolve(root, 'data/validation/geographic-semantic-followup.json');
+    const report = await validateSemanticFollowup(root); const target = resolve(root, report.current_membership_projection?'data/validation/macro-review-projection.json':'data/validation/geographic-semantic-followup.json');
     const text = `${JSON.stringify(report, null, 2)}\n`; requireThat(Buffer.byteLength(text) <= 128 * 1024, 'Validation summary exceeds bounded 128 KiB size');
     await mkdir(dirname(target), { recursive: true }); await writeFile(target, text);
     process.stdout.write(`${JSON.stringify({ status: report.status, counts: report.counts, semantic_complete: false, output: relative(root, target), bytes: Buffer.byteLength(text) })}\n`);
