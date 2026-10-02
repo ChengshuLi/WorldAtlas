@@ -4,6 +4,20 @@ Start by cloning **branch work** of `https://github.com/ChengshuLi/WorldAtlas`. 
 
 The application, shared resolver, schema and map assets are independent of historical content. GPT 6 Luna can add sourced evidence through the existing import API without changing UI code, rebuilding the fixed grid, or republishing the website. Do not materialize 200 million location/year snapshots: store sparse half-open evidence intervals, with one row per attribute and supported interval. Unknown years need no invented row; the resolver produces an explicit unknown result. An explicit sourced unknown record is useful when evidence itself establishes uncertainty.
 
+## Open TODO: environmental references across the timeline (ENV-REFERENCE-TIMELINE)
+
+**Status: open; discussion agreed, no runtime or dataset changes made.** Switching from 2026 to 2025 currently makes topography, vegetation and climate unknown: modern topography/vegetation references apply only to 2026, climate normals cover 1901–2020, and the separate modern climate reference applies to 2026. This abrupt cutoff reflects the current reference-interval policy, not an abrupt environmental change.
+
+Luna should distinguish **an unsupported historical state** from **an available physical reference baseline**, keeping the same fixed classifications and original evidence:
+
+- Make modern topography available as clearly identified reference context across the timeline where useful. It is usually stable on historical timescales; source-backed terrain/river/coastal changes still need dated evidence.
+- Keep vegetation time-dependent. Potential natural biomes may provide reference context, but they do not prove actual forest, farmland or other land cover in a selected year. Research historical land cover independently.
+- Preserve climate normal periods. A modern or latest available normal may be offered as an explicitly labeled reference baseline; it is not an observation of ancient or unsupported-year climate.
+- Preserve original source dates, supported claim intervals, stable IDs, provenance and immutable stored records. Do not widen existing evidence intervals or manufacture historical claims to remove Unknown. Sourced dated values and explicit uncertainty keep precedence; reference context must not overwrite them.
+- Keep the location panel readable: identify a displayed baseline compactly as a reference and put detailed source periods, assumptions and limitations in collapsed Evidence. Map fills, legends and the inspector must agree on whether the displayed value is dated evidence or reference context.
+
+**Completion:** moving between 2026 and 2025 no longer hides an available terrain baseline merely because a reference snapshot has a narrow interval; unsupported historical vegetation/climate remain honestly distinguishable from reference context. Verify ancient and recent years, dated overrides, explicit unknowns, historical environmental changes, all three map modes, static/server consistency and unchanged original evidence bytes. Log the chosen policy, implementation and source coverage, then push receipts and open items to branch work. This is a future reference-policy/UI follow-up, not authorization to silently backfill historical content now.
+
 ## Read identities before researching
 
 Use the existing private Site and its access boundary. `GET /api/geography/release` identifies the current immutable reference release and footprint/hierarchy hashes. `GET /api/geography/memberships?limit=250&cursor=…` pages its stable geographic IDs and adjacent-tier parents. `GET /api/entities/{id}?year=…` shows dated names, reference context, relationships and media. Names are labels, not identity keys. Geographic parent membership is reference geography unless independently dated evidence establishes something else.
