@@ -14,7 +14,7 @@ The issue-creation thread reviews scope, dependencies and overlap before marking
 -->
 ```
 
-Modes are `engineering`, `source-only` and `content`. Source-only research defines disjoint subjects/source collections/time/attributes and stages evidence without imports. Content additionally needs `geographic_release`, `scope_manifest` and `territory_match_review`; it is currently blocked by the worldwide geography gate. Claim automation also requires worldwide issue #7 closed and the reviewed approval manifest to match the release. See [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md).
+Modes are `engineering`, `source-only` and `content`. Source-only research defines disjoint subjects/source collections/time/attributes and stages evidence without imports. Content additionally needs `geographic_release`, `scope_manifest` and `territory_match_review`, plus `region_ids` and an explicit permitted subject scope in its manifest. Claim automation requires completed global macro approval and a completed published full-branch regional certificate with matching release pins. No branches are approved yet. See [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md).
 
 A ready label is a reviewed decision, not an automatic conclusion from complete database chains. Two separate issues can still overlap; triage must record subsystem/resource or geography/source/time/attribute scope and dependencies. A worker discovering overlap stops the conflicting part and coordinates on the issues. Git claims are cooperative reservations, not security isolation or an unlimited production-capacity guarantee.
 
@@ -29,7 +29,7 @@ node scripts/issue-lease.mjs inspect --issue 22
 
 Replace placeholders. Begin only after the command exits successfully and its result says `accepted: true`. Retain the receipt, claim ID and workflow link in your owned execution artifacts. A `status:claimed` label is visible convenience; the canonical bot-authored comment is authority. Public ownership nonces prevent accidental collisions, not impersonation by someone with repository write access.
 
-Per-issue GitHub Actions concurrency serializes claim/renew/release/recover on **main**. Different issues may reserve concurrently. GitHub allows one running and one pending run per group; later requests may cancel pending requests. The client retries canceled runs boundedly with jitter and never treats cancellation, timeout or missing artifacts as success. Lack of Actions dispatch/read permissions is a blocker; do not fall back to an uncoordinated comment-only claim.
+Per-issue GitHub Actions concurrency serializes claim/renew/release/recover on **main**. Different issues may reserve concurrently. GitHub allows one running and one pending run per group; later requests may cancel pending requests. The client retries canceled runs boundedly with jitter and never treats cancellation, timeout or missing confirmation as success. Lack of Actions dispatch/read permissions is a blocker; do not fall back to an uncoordinated comment-only claim.
 
 ## Keep, rotate and release a reservation
 
@@ -52,7 +52,7 @@ Each focused PR targets main and has exactly one `Refs #N` for partial work or `
 node scripts/queue-pr-merge.mjs --pr PR-NUMBER --head VERIFIED-HEAD-SHA
 ```
 
-Inspect the exact returned run name/request ID, wait for its completion and read `merge-result.json`. Queued or successful workflow execution alone is not proof of an accepted merge. The queue serializes integration, rereads the claim, checks the exact head and successful current checks, requires latest main included, and squash-merges with the PR title as commit title. If another merge advanced main, update your branch, rerun affected checks and resubmit. Canceled pending merge requests may be retried; queues are not FIFO.
+Inspect the exact returned run name/request ID, wait for its completion and read the bot-authored **Merge result** comment on the PR with that request ID. Claims similarly return bot-authored **Reservation result** comments on their issues. Artifact copies remain available for audit, but the clients do not depend on artifact downloads. Queued or successful workflow execution alone is not proof of an accepted merge. The queue serializes integration, rereads the claim, checks the exact head and successful current checks, requires latest main included, and squash-merges with the PR title as commit title. If another merge advanced main, update your branch, rerun affected checks and resubmit. Canceled pending merge requests may be retried; queues are not FIFO.
 
 After each merge, release a completed issue or renew its claim onto a fresh branch for its remaining bounded part. When three PRs are insufficient, stop extending it and split the remaining scope into reviewed children/follow-ups. Existing closed Issues, source evidence and dates are retained.
 
@@ -60,6 +60,6 @@ One explicitly designated engineering publisher coordinates Site deployments, ge
 
 ## Current research policy
 
-The user requires **complete worldwide hierarchy review before new location-attribute imports**. `data/research-geography-gate.json` currently closes the content gate, and the standard research CLI refuses non-dry-run imports. Public research, source notes and local preparation/dry runs may continue. The existing private API and retained facts stay intact for engineering and preservation operations; this cooperative worker/CLI gate is not a new server authorization boundary.
+The user's top-down policy requires **global continent/subcontinent/region boundary approval, then complete published regional branches before their location-attribute imports**. Other regional interiors may remain unfinished. See [TOP_DOWN_GEOGRAPHY_WORKFLOW.md](TOP_DOWN_GEOGRAPHY_WORKFLOW.md). `data/research-geography-gate.json` records the macro approval and regional certificates; currently none are approved, so content imports remain closed.
 
-Only engineering may approve a matching reviewed geographic release, with `semantic_complete:true`, exhaustive closure evidence and verified publication, and open the gate through a reviewed PR after #7 is complete. Luna never designs hierarchy/boundaries. Even after approval, source populations/primary culture/religion must match the intended territory and supported interval.
+Only engineering may approve and publish the partition/branches with retained sourced evidence, exact subject IDs and matching release/hierarchy/footprint pins. The worldwide umbrella #7 stays open until all branches finish; it no longer directly blocks a certified branch. Luna never designs geography. Source-only collection/staging and dry runs may continue, but source populations/primary culture/religion still need the intended territory and supported interval before imports. The private API and retained facts remain intact; the cooperative claim/CLI gate is not new server authorization. Region completion creates a research handover/ready queue, not an automatic new chat or private credential grant.

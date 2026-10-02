@@ -1,6 +1,6 @@
 # Start a content-only Luna research thread
 
-**Current research policy (2026-10-02 America/Los_Angeles):** source-only until complete worldwide hierarchy review and matching engineering approval. New location-attribute imports are blocked; local staging and dry runs may proceed. Use [WORKER_COORDINATION.md](WORKER_COORDINATION.md) for reservations and [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md) for the global gate. Older descriptions of enabled live transport below describe capabilities, not permission to bypass this policy.
+**Current research policy (2026-10-02 America/Los_Angeles):** engineering first approves the global continent/subcontinent/region partition, then publishes complete regional branches. Luna may import only explicitly approved subjects within those branches; currently no branches are approved, so imports remain blocked and source-only staging/dry runs may proceed. See [TOP_DOWN_GEOGRAPHY_WORKFLOW.md](TOP_DOWN_GEOGRAPHY_WORKFLOW.md), [WORKER_COORDINATION.md](WORKER_COORDINATION.md) and [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md). Older descriptions of enabled transport describe capabilities, not geographic approval.
 
 For the current one-document/one-prompt workflow, use [HISTORY_HANDOFF.md](HISTORY_HANDOFF.md) and [LUNA_HISTORY.txt](prompts/LUNA_HISTORY.txt). These provide research instructions and concurrent branch rules; GitHub Issues holds the authoritative TODOs and dated work history. Engineering uses its separate [handover](ENGINEERING_HANDOFF.md).
 

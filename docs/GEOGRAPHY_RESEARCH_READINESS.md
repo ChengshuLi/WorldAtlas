@@ -1,8 +1,8 @@
 # Geography readiness for concurrent historical research
 
-The atlas has a published, versioned six-tier reference foundation. Luna can use its existing IDs, footprints and parent chains for source research without designing geography. **The user requires complete worldwide hierarchy review before any new location-attribute imports.** Worldwide geographic semantic review is still unfinished, so new location-attribute imports are blocked everywhere. Source research, evidence preservation and local staging can proceed concurrently with engineering.
+**Current policy supersedes the earlier worldwide full-hierarchy pause:** approve continent, subcontinent and region boundaries globally, then release each complete regional branch independently for location-attribute research/imports. Luna never designs boundaries or hierarchy. See [TOP_DOWN_GEOGRAPHY_WORKFLOW.md](TOP_DOWN_GEOGRAPHY_WORKFLOW.md) for the dependency order and bounded worker scopes.
 
-This document is a readiness contract, not a live task queue or new automated validator. GitHub Issues holds scope decisions, dependencies, claims and progress. Start with [HISTORY_HANDOFF.md](HISTORY_HANDOFF.md), [RESEARCH_IMPORT_WORKFLOW.md](RESEARCH_IMPORT_WORKFLOW.md) and [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md).
+**No macro partition or regional branch is currently approved for this policy.** New location-attribute imports remain closed. Source collection, lawful evidence preservation and provisional staging can continue, but source-only work does not establish a location's territorial meaning. This document is a contract; GitHub Issues holds current claims, progress, dependencies and completion evidence.
 
 ## Recorded reference foundation
 
@@ -20,71 +20,38 @@ The committed live verification receipt [neon-final-api-writable.json](../data/v
 
 The prepared definition is [release-2.json](../data/geographic-releases/release-2.json); the installed generation is evidenced by [publication-geography-receipt.json](../data/publication-geography-receipt.json). The reference is undated geographic context, not a claim that these administrations, names or borders existed in every historical year. Antarctica is excluded.
 
-These receipts record past verification. After the worldwide approval gate below is satisfied, every new import campaign must read the actual current `/api/geography/release` and capabilities through its authorized private Site access, save the exact response, and verify the matching released IDs and assets. Private credentials and a writable service do not authorize bypassing the worldwide approval gate. A fresh chat cannot inherit another workspace's private credentials. Public research can begin without those credentials.
+These receipts record past verification. After the macro and regional approval gates below are satisfied, every new import campaign must read the actual current `/api/geography/release` and capabilities through its authorized private Site access, save the exact response, and verify the matching released IDs and assets. Private credentials and a writable service do not authorize bypassing those approval gates. A fresh chat cannot inherit another workspace's private credentials. Public research can begin without those credentials.
 
 ## What remains unfinished
 
-[global-semantic-closure.json.gz](../data/global-semantic-closure.json.gz) explicitly reports `audit_complete: true`, `structural_complete: true`, and `semantic_complete: false`. Its complete-unique-chain, valid-footprint and nonoverlapping-interior checks support all 49,589 current locations. Its independent local-purpose and source-island-completeness checks remain open for all 49,589 locations. All 5,705 parent-group overall outcomes remain open. This means the inventory is exhaustive; it does not mean every existing territory is unusable or that every geographic question has been approved.
+[global-semantic-closure.json.gz](../data/global-semantic-closure.json.gz) reports `audit_complete: true`, `structural_complete: true`, and `semantic_complete: false`. All 49,589 locations have complete unique chains and checked footprints; local-purpose and source-island-completeness checks remain open for all of them. All 5,705 parent-group overall outcomes remain open. Inventory/structural completion does not mean semantic approval.
 
-The separate [geographic-semantic-followup.json](../data/validation/geographic-semantic-followup.json) verifies inventory/provenance consistency across six continental reports, with `semantic_complete: false`, `approvals_created: 0`, and `corrections_installed: 0`. Its readable findings are under [semantic-followup/](semantic-followup/). [GLOBAL_SEMANTIC_CLOSURE.md](GLOBAL_SEMANTIC_CLOSURE.md) explains measured triggers and individual source-backed closure requirements.
+[geographic-semantic-followup.json](../data/validation/geographic-semantic-followup.json) records zero follow-up approvals/corrections and unfinished semantics. Earlier macro corrections are retained separately; this is not a claim that no geographic work occurred. The older [MACRO_BOUNDARY_CONVENTION.md](MACRO_BOUNDARY_CONVENTION.md) records 20 supported reporting conventions and 15 open own-boundary reviews, 78 unresolved crossing locations and four open physical/island segments. Its 49,614-location generation must be reconciled with the current release before approval.
 
-Concrete engineering dependencies include:
+Prepared Monaco/Luxembourg and West Virginia corrections await coherent installation. Namibia's candidate replacement remains blocked by neighboring-source conflicts. Worldwide local/urban purpose, mixed source roles, repeated tiers, missing land/islands and boundary conventions remain open. Published `datedFootprints: 0` means dated membership support cannot manufacture historical footprints. See [GLOBAL_SEMANTIC_CLOSURE.md](GLOBAL_SEMANTIC_CLOSURE.md), [REFERENCE_HIERARCHY_CORRECTIONS.md](REFERENCE_HIERARCHY_CORRECTIONS.md) and [NAMIBIA_REPAIR_MIGRATION.md](NAMIBIA_REPAIR_MIGRATION.md).
 
-- Prepared Monaco/Luxembourg grouping and West Virginia duplicate-province corrections are validated candidates, awaiting coherent installation/publication. See [REFERENCE_HIERARCHY_CORRECTIONS.md](REFERENCE_HIERARCHY_CORRECTIONS.md) and [ENGINEERING_TODO.md](ENGINEERING_TODO.md).
-- Namibia's 111 existing locations retain an open source-quality guard. The candidate 107-constituency replacement has unresolved neighbor/source-land differences; it must not be imported as approved geography. See [NAMIBIA_REPAIR_MIGRATION.md](NAMIBIA_REPAIR_MIGRATION.md).
-- Local/urban purpose, mixed source roles, weak parent correspondence, repeated tiers, island/source-land completeness and geographic boundary conventions remain individually open worldwide.
-- Historical footprint browser/version/cache integration is not published (`datedFootprints: 0`). Published dated membership/existence support uses existing released location footprints; it cannot manufacture an historical footprint.
+## Required approval before location-attribute imports
 
-The documented platform handover supplies tools for supported content work. It does not establish final worldwide geography or lift the user's import pause. Geographic review/correction work belongs to engineering; Luna may retain source findings and link the affected engineering issue.
+Engineering records approval in [research-geography-gate.json](../data/research-geography-gate.json) only through a reviewed PR with independently retained evidence. Version 2 retains `macro_boundaries` and `regions` certificates; both currently have no approvals. Content work items declare `region_ids` and a scope manifest; regional certificates list `approved_location_ids` and `approved_subject_ids` against exact `approved_release` pins. Three layers are required:
 
-## Mandatory worldwide approval before location-attribute imports
+1. **Global macro approval:** all six continents, every subcontinent and every region have approved own boundaries/associations and reconciled shared edges, tied to a published release. This does not approve their descendants.
+2. **Regional branch approval:** the target region's entire area → province → location branch is reviewed, corrected or justified, validated and published. Its certificate names its stable region ID, exact permitted subject IDs, release/hierarchy/footprint pins, completed approval issue and retained evidence. An approved outer envelope alone cannot authorize London's attributes.
+3. **Bounded campaign approval:** the work item names its region, exact subjects, source collection, supported interval and attributes, plus source-territory compatibility evidence. Claims and imports must match the certificate and current release. Completing all worldwide descendants (#7) is no longer a prerequisite for an already approved branch.
 
-Every location-attribute import issue must depend on [worldwide semantic review issue #7](https://github.com/ChengshuLi/WorldAtlas/issues/7). No new owner, population, culture, religion, rank, topography, vegetation or climate claim may be imported for any location until all of these conditions hold:
+The content claim workflow and standard research import CLI enforce the recorded macro/regional gate and explicit subjects. A ready label, an open private API, a successful dry run or a complete structural chain cannot substitute for approval. The private service itself is not newly permission-isolated by this repository policy; workers must honor the reviewed workflow. Preserve existing live facts and completed research: this concerns new imports.
 
-1. Issue #7 is completed with retained evidence of complete worldwide hierarchy/semantic review, including every current location and parent branch.
-2. The closure evidence reports `semantic_complete: true` and matches the actual published reference release, hierarchy and footprint pins. A true result for an older or staged generation is insufficient.
-3. Engineering has accepted and published the reviewed generation, retained its approval/publication evidence, and verified matching served assets, memberships and hashes.
-
-An individual approved location, continent, source profile or compatible source claim cannot lift this global pause. Structural success, a writable Site, an accepted schema or a local compiler pass cannot lift it either. Preserve existing live facts and completed evidence; the pause concerns new location-attribute imports.
-
-While the gate is closed, Luna can collect sources, preserve lawful original bytes and notes, identify subjects, prepare factual JSON and run local preparation/dry runs. Mark these campaigns source-only or staged, preserve their provisional release pins, and leave their imports blocked on #7. Before later importing, recheck the approved current release and let engineering revalidate any earlier staged evidence whose geographic context changed.
-
-## Gate each bounded content campaign
-
-After worldwide approval, the following per-campaign conditions still apply before marking an issue ready for imports. Source-only workers may record this evidence provisionally while #7 remains open:
-
-1. **Released subjects:** exact release ID, hierarchy/footprint pins, stable entity IDs, their active memberships and reference footprint/source-member meaning. Use IDs to resolve ambiguity; equal place names do not establish equal entities.
-2. **Bounded evidence scope:** geography/subjects, half-open time interval, attributes, source collection/version/license, and existing claim/import receipts checked for overlap. Identify whether the source describes a whole territory, a settlement, a historical jurisdiction, a subgroup or a sampled population.
-3. **Territorial compatibility:** cite evidence that the source's spatial denominator and subject match the intended claim. A direct location population total requires the location's territory; a settlement estimate remains settlement evidence. Culture/religion claims require supported population denominators or the source's warranted primary interpretation. Broad labels, current names, nearest centroids and area shares do not establish these matches.
-4. **Geography dependencies:** retain the mandatory #7 dependency and engineering approval evidence. If a source additionally needs an unresolved historical split, merge, replacement, boundary or identity decision, link a bounded engineering issue and leave that claim unimported until resolved.
-5. **Supported transport:** after worldwide and campaign gates pass, compile with the existing tools, retain original bytes/pins, run the dry run, import only with authorized private access, retain partial receipts, and verify claim/source/interval and selected-year read-back. Existing compiler/API checks enforce structure and release consistency; they cannot automatically prove territorial compatibility or historical truth.
-
-Use these outcomes when selecting the next issue:
-
-| Outcome | Worker action |
-| --- | --- |
-| Ready for source research/staging | Research, preserve sources/notes and prepare local evidence now; every new location-attribute import remains blocked on #7. |
-| Blocked on additional geography | Preserve evidence and link #7 plus the specific engineering dependency; continue other source-only research. |
-| Ready for location-attribute imports | Available only after complete worldwide approval, matching published pins, engineering acceptance, campaign territorial compatibility and private access are verified. |
-
-Campaigns may have complete source evidence while still being blocked for imports. Local readiness does not override worldwide approval. After that approval, import only individually verified compatible claims and preserve remaining questions explicitly; worldwide geography approval does not establish whole-world historical content coverage.
+Source-only campaigns can run without approval or production credentials. Retain provisional IDs/pins and the source's actual subject. Never turn a settlement or different administrative territory into a whole-location scalar merely because names match. Before import, engineering must revalidate staged evidence against the approved branch; researchers must not silently repin completed bundles or move claims to replacement identities.
 
 ## Example: London in 1567
 
-The current location `atlas:city:GBR-Greater London` is a modern metropolitan-territory reference formed from 33 source members. The committed closure record describes about 1,580.897252 km² and this adjacent-tier chain:
+The current `atlas:city:GBR-Greater London` is a modern metropolitan-territory reference formed from 33 source members, about 1,580.897252 km²:
 
 `London → Greater London province → London and South East England area → Britain region → Northern Europe subcontinent → Europe continent`.
 
-Luna takes that released identity and chain as reference context. It does not choose a different province or redraw the boundary. This location's semantic outcome remains open, including local purpose, urban-role and source-vintage questions; its modern aggregation is not itself evidence for 1567.
+Its territorial purpose remains open. A historical source's “London population” may describe the City of London or surrounding settlement, rather than that entire footprint. Engineering must finalize the target location and complete Britain branch before targeted location-attribute imports. Luna preserves narrower settlement evidence separately; it does not stretch that population to fit Greater London. Even after geographic approval, unsupported location fields remain unknown.
 
-A source saying “London population in 1567” may describe a historical settlement or jurisdiction within the modern footprint. Its number cannot automatically become the whole modern reference-location population, and its religion/culture cannot automatically become a whole-location scalar. Retain the source's exact subject, denominator and uncertainty, including any existing independently identified settlement subject. Historical boundary creation/rendering requires engineering. Even an explicitly compatible whole-territory claim remains staged until complete worldwide approval; after approval it may supply that field without redesigning the hierarchy.
+## Changes during concurrent research
 
-Thus “fill London's 1567 fields” is a valid research goal, but unknown fields may remain when sources cover different territory or dates. A fixed reference hierarchy removes geography design from Luna's duties; it cannot remove the need to interpret a source's historical subject.
+One designated engineering publisher integrates geographic releases. Regional engineers own disjoint approved outer envelopes and coordinate shared-edge changes before implementation. Publishing a changed global release does not silently approve unchanged branches or update research pins: the publisher explicitly revalidates certificates and affected campaigns, preserving old receipts and crosswalks. The current import contract uses exact global release pins; an unrelated regional edit may therefore require revalidation of an otherwise unchanged approved branch.
 
-## Coordinate engineering changes with active research
-
-Routine code/UI work and disjoint source-only research/staging can proceed together while location-attribute imports wait for worldwide approval. A geography engineer must identify affected IDs, ancestor/descendant groups, old/new footprint/hierarchy pins, proposed crosswalk and maintenance window on the engineering issue. Record links to affected active research issues before publication. Preparing a candidate does not change the research foundation.
-
-Release publication and imports use the existing serialized database contract. When a new current release changes the pinned campaign context, the importer stops obsolete new batches. Preserve the old input, bundle and committed receipts; continue independent public research. Engineering supplies explicit before/after revalidation or a supported new subject/release decision. Researchers must not edit completed bundle bytes, silently repin, or transfer claims onto a replacement identity. Higher-tier name evidence additionally requires unchanged descendant IDs and geometries for reuse. See [LUNA_DATA_HANDOFF.md](LUNA_DATA_HANDOFF.md), [GEOGRAPHIC_RELEASES.md](GEOGRAPHIC_RELEASES.md) and [GEOGRAPHIC_RELEASE_VALIDATION.md](GEOGRAPHIC_RELEASE_VALIDATION.md).
-
-M engineering chats and N source-only history-research chats can start concurrently with isolated branches and bounded disjoint scope. They share integration and source/identity contracts. Every location-attribute import depends on completed worldwide review #7, matching published semantic approval and engineering acceptance. Their number is not a guarantee of available ready issues, private access, service capacity, or complete independence. Researchers prepare evidence while engineering finishes the hierarchy; importing location attributes starts only after the global gate passes.
+An engineer changing a released branch identifies affected IDs/ancestors, old/new pins, crosswalk, linked research campaigns and maintenance window. A change to a frozen outer boundary reopens the relevant macro/shared-edge approval. Researchers stop obsolete imports and preserve existing evidence; source collection elsewhere may continue. Higher-tier name reuse also requires compatible descendants and geometry. See [GEOGRAPHIC_RELEASES.md](GEOGRAPHIC_RELEASES.md), [GEOGRAPHIC_RELEASE_VALIDATION.md](GEOGRAPHIC_RELEASE_VALIDATION.md) and [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md).

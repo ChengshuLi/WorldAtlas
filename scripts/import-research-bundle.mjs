@@ -72,9 +72,17 @@ async function hiddenCredential(){
  return new Promise((resolve,reject)=>{let value='';const finish=()=>{process.stdin.pause();process.stdin.setRawMode(false);process.stdin.removeListener('data',receive);};const receive=chunk=>{if(chunk.includes(3)){finish();reject(Error('Credential entry cancelled'));return;}value+=chunk.toString();if(!/[\r\n]/.test(value))return;finish();try{const token=JSON.parse(value.trim()).token;if(typeof token!=='string'||!token)throw Error();resolve(token);}catch{reject(Error('Supply the private service credential JSON through hidden stdin'));}};process.stdin.on('data',receive);});
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- const args=process.argv.slice(2),dryRun=args.includes('--dry-run'),positional=args.filter(arg=>arg!=='--dry-run'),[origin,directory]=positional;
+ const args=process.argv.slice(2),dryRun=args.includes('--dry-run'),positional=[],regionIds=[];
+ for(let i=0;i<args.length;i++){
+  if(args[i]==='--dry-run')continue;
+  if(args[i]==='--regions'){if(regionIds.length||!args[i+1]||args[i+1].startsWith('--'))throw Error('Supply --regions ID,ID once');regionIds.push(...args[++i].split(','));continue;}
+  if(args[i].startsWith('--'))throw Error('Unknown research import option');
+  positional.push(args[i]);
+ }
+ const [origin,directory]=positional;
+ if(positional.length!==2)throw Error('Supply exactly the Site origin and bundle directory');
  if(!origin||!directory)throw Error('Usage: node --use-env-proxy scripts/import-research-bundle.mjs https://confirmed-site/ bundle-directory [--dry-run]');
- if(!dryRun){const gate=readResearchImportGate();assertResearchImportsReady(gate);assertResearchBundleApproved(gate,readResearchBundle(directory).manifest.geography);}
+ if(!dryRun){const gate=readResearchImportGate();assertResearchImportsReady(gate,{regionIds});const verified=readResearchBundle(directory);assertResearchBundleApproved(gate,verified.manifest.geography,{regionIds,batches:verified.batches});}
  const token=dryRun?undefined:await hiddenCredential();let last=0;
  const receipt=await importResearchBundle({origin,directory,token,dryRun,onProgress:progress=>{if(Date.now()-last>15000||progress.completed===progress.total){console.log(`Research import: ${progress.completed}/${progress.total} bounded batches committed.`);last=Date.now();}}});console.log(JSON.stringify(receipt));
 }

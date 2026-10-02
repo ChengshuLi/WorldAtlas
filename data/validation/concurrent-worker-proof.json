@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-02T18:37:20.200024+00:00",
+  "issue": 26,
+  "base_commit": "3c8ffcdaa633000021a6f63f8217c684a515ae60",
+  "race": {
+    "worker_a": {
+      "worker_id": "coordination-proof-a",
+      "request_id": "841a7976-1ee0-4244-bc28-6f1db3f2ce07",
+      "workflow": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37045726688",
+      "workflow_conclusion": "success"
+    },
+    "worker_b": {
+      "worker_id": "coordination-proof-b",
+      "request_id": "ffda650d-6a27-4245-acc3-639b54f63a70",
+      "workflow": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37045724081",
+      "workflow_conclusion": "success"
+    },
+    "observed_canonical_holder": "coordination-proof-b",
+    "observed_canonical_count": 1,
+    "interpretation": "Two dispatched contenders left one bot-managed owner. Workflow success is not itself acceptance."
+  },
+  "transport_failure": {
+    "initial_artifact_download": "HTTP 403 from artifact blob host; no credential or signed URL retained",
+    "replacement": "Bot-authored per-request GitHub result comments, with current canonical-state verification"
+  },
+  "renewal": {
+    "accepted": true,
+    "request_id": "6ca185a6-6665-40a5-a7c7-6d0290bb749e",
+    "issue_number": 26,
+    "result_source": "canonical-comment",
+    "claim": {
+      "comment_id": 5958461008,
+      "version": 1,
+      "active": true,
+      "worker_id": "coordination-proof-b",
+      "claim_id": "fc8b8064-8779-4948-9c5f-63220f046d89",
+      "branch": "engineering/concurrent-workers-proof-b",
+      "request_id": "6ca185a6-6665-40a5-a7c7-6d0290bb749e",
+      "issue_number": 26,
+      "claimed_at": "2026-10-02T18:11:28.798Z",
+      "updated_at": "2026-10-02T18:26:46.985Z",
+      "expires_at": "2026-10-03T18:26:46.985Z",
+      "live_work": false,
+      "mode": "engineering",
+      "max_prs": 2
+    },
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37047438773"
+  },
+  "canonical_repair": {
+    "original_comment": 5958461008,
+    "archived_duplicate_comment": 5958728542,
+    "cause": "Renewal transition dropped comment_id and created a second canonical comment",
+    "history_preserved": true,
+    "fix": "Retain canonical comment_id on renewal, rotation and reassignment"
+  },
+  "research_policy": {
+    "version": 2,
+    "macro_approved": false,
+    "approved_regions": 0,
+    "imports_enabled": false
+  },
+  "post_merge_verification": "Queued squash merge, new result delivery and release receipts will be retained on GitHub issue #26."
+}

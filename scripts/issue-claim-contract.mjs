@@ -1,4 +1,5 @@
 import {laneForBranch,validateIssueMetadata,validateIssuePRBody} from './check-handoff-scope.mjs';
+import {assertResearchImportsReady} from './research-import-gate.mjs';
 
 export const claimMarker='worldatlas-claim:v1';
 export function canonicalIssueNumber(value){if(!/^[1-9]\d*$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw Error('Use a canonical positive issue number, without leading zeros or exponent notation');return Number(value);}
@@ -43,7 +44,13 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,g
  if(lane.lane==='engineering'&&spec.mode!=='engineering'||lane.lane==='research'&&spec.mode==='engineering')throw Error('Scope mode must agree with the issue lane');
  if(labels.includes('kind:umbrella')||!labels.includes('kind:work-item')||!labels.includes('status:ready')||labels.includes('status:blocked'))throw Error('Only reviewed ready work items may be claimed; split umbrellas or resolve blockers first');
  if(spec.depends_on.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed')))throw Error('A dependency is still open or missing');
- if(spec.mode==='content'&&(!geographyGate?.ready_for_location_attributes||!geographyGate.semantic_complete||geographyGate.approved_release?.release_id!==spec.geographic_release||!dependencies.some(d=>d.number===7&&d.state==='closed')))throw Error('Worldwide hierarchy approval is required before location-content imports');
+ if(spec.mode==='content'){
+  if(geographyGate?.version===2){
+   const approved=assertResearchImportsReady(geographyGate,{regionIds:spec.region_ids});
+   const required=[geographyGate.macro_boundaries.approval_issue,...spec.region_ids.map(id=>geographyGate.regions.find(r=>r.region_id===id).approval_issue)];
+   if(approved.release_id!==spec.geographic_release||required.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed')))throw Error('Published macro and regional approval dependencies must be complete before content claims');
+  }else if(!geographyGate?.ready_for_location_attributes||!geographyGate.semantic_complete||geographyGate.approved_release?.release_id!==spec.geographic_release||!dependencies.some(d=>d.number===7&&d.state==='closed'))throw Error('Worldwide hierarchy approval is required before location-content imports');
+ }
  const merged=prs.filter(p=>p.merged_at).length;
  if(merged>=spec.max_prs&&!(action==='renew'&&branch===current?.branch))throw Error('PR budget exhausted; split remaining scope rather than monopolizing the issue');
  if(action==='renew'){
@@ -56,7 +63,7 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,g
   if(!current?.active||Date.parse(current.expires_at)>now||!labels.includes('coordination:recovery-approved')||String(request.reason??'').trim().length<10||openPR||current.live_work)throw Error('Recovery requires expired lease, explicit approval/reason and no active PR/live operation');
  }
  const expires_at=new Date(now+24*60*60*1000).toISOString();
- const claim={version:1,active:true,worker_id,claim_id,branch,request_id,issue_number:issue.number,claimed_at:own?current.claimed_at:new Date(now).toISOString(),updated_at:new Date(now).toISOString(),expires_at,live_work:action==='renew'?Boolean(request.live_work):false,mode:spec.mode,max_prs:spec.max_prs};
+ const claim={...(current?.comment_id?{comment_id:current.comment_id}:{}),version:1,active:true,worker_id,claim_id,branch,request_id,issue_number:issue.number,claimed_at:own?current.claimed_at:new Date(now).toISOString(),updated_at:new Date(now).toISOString(),expires_at,live_work:action==='renew'?Boolean(request.live_work):false,mode:spec.mode,max_prs:spec.max_prs};
  return {claim,previous:current};
 }
 export function verifyClaimForPR({branch,issue,comments,prs=[],now=Date.now()}){
