@@ -54,10 +54,14 @@ export async function retainGeographicArchives({archiveFiles,sourceId,request,re
   if(archive.length>20*1024*1024)throw Error('Migration archive exceeds the media-object limit');
   let stored=byDigest.get(digest);
   if(!stored){
-   const parameters=new URLSearchParams({id:`media:atlas:geographic-evidence:${digest}`,source_id:sourceId,name:file.slice(5),license:'Mixed original source licenses; notices retained in the geographic source manifests',attribution:'Cited public geographic providers and WorldAtlas review decisions'});
-   const media=await (await request('/api/media/upload?'+parameters,{method:'POST',headers:{'Content-Type':file.endsWith('.gz')?'application/gzip':'application/json'},body:archive})).json();
+   const id=`media:atlas:geographic-evidence:${digest}`,prior=await request('/api/media/'+encodeURIComponent(id)+'?metadata=1',{allowNotFound:true});
+   let media;
+   if(prior.status===404){
+    const parameters=new URLSearchParams({id,source_id:sourceId,name:file.slice(5),license:'Mixed original source licenses; notices retained in the geographic source manifests',attribution:'Cited public geographic providers and WorldAtlas review decisions'});
+    media=await (await request('/api/media/upload?'+parameters,{method:'POST',headers:{'Content-Type':file.endsWith('.gz')?'application/gzip':'application/json'},body:archive})).json();
+   }else media=await prior.json();
    if(media.sha256!==digest||media.bytes!==archive.length)throw Error('Persistent migration evidence does not match prepared archive');
-   stored={id:media.id,sha256:digest,bytes:media.bytes,canonical_path:file};byDigest.set(digest,stored);
+   stored={id:media.id,sha256:digest,bytes:media.bytes,canonical_path:'data/'+media.name};byDigest.set(digest,stored);
   }
   retained.push({path:file,...stored});
  }
@@ -75,12 +79,13 @@ if(typeof token!=='string'||!token)throw Error('Missing private service credenti
 const headers={'OAI-Sites-Authorization':`Bearer ${token}`,Origin:origin};
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 async function request(route,options={}){
+ const {allowNotFound,...fetchOptions}=options;
  let response;for(let attempt=0;attempt<4;attempt++){
-  response=await fetch(origin+route,{...options,headers:{...headers,...options.headers}});
+  response=await fetch(origin+route,{...fetchOptions,headers:{...headers,...fetchOptions.headers}});
   if(![429,502,503,504].includes(response.status))break;
   await new Promise(resolve=>setTimeout(resolve,Math.min(4000,500*2**attempt)));
  }
- if(!response.ok)throw Error(`${route}: HTTP ${response.status}: ${(await response.text()).replaceAll(token,'[redacted]').slice(0,1200)}`);
+ if(!response.ok&&!(allowNotFound&&response.status===404))throw Error(`${route}: HTTP ${response.status}: ${(await response.text()).replaceAll(token,'[redacted]').slice(0,1200)}`);
  return response;
 }
 const manifest=JSON.parse(fs.readFileSync(`${directory}/index.json`));
@@ -90,7 +95,7 @@ async function batch(part){
  await request(part.route,{method:'POST',headers:{'Content-Type':'application/json'},body:bytes});completed++;
  if(Date.now()-lastUpdate>15000){lastUpdate=Date.now();console.log(`Reference geography: ${completed} bounded import batches completed.`);}
 }
-const published=await publishGeographicReleases({manifest,batch,request,concurrency,mode});
+const published=process.argv.includes('--archives-only')?[]:await publishGeographicReleases({manifest,batch,request,concurrency,mode});
 // Retain the complete before/after crosswalk independently of deployment assets.
 const release=manifest.releases.at(-1),archiveFiles=new Set(['data/geographic-decision-migration.json.gz']);
 for(const file of ['data/macro-boundary-migration.json.gz','data/geographic-repair-evidence/index.json','data/reference-migrations/source-territory-repair-v1/index.json'])if(fs.existsSync(file))archiveFiles.add(file);
