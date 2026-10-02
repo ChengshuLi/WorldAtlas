@@ -1,5 +1,5 @@
 {
-  "status": "validated-awaiting-publication",
+  "status": "validated-and-published",
   "validated_at_utc": "2026-10-02T03:54:06.846698+00:00",
   "scope": [
     "generic bounded resumable research import bundles",
@@ -64,5 +64,8 @@
     "dedicated hosted dated geographic membership/footprint revisions",
     "future domain-specific views"
   ],
-  "semantic_geographic_completion": false
+  "semantic_geographic_completion": false,
+  "publication": "data/validation/research-platform-publication.json",
+  "production_verification": "data/validation/research-service-production-verification.json",
+  "source_scope": "Frozen primary commit bfd3cb9760aeaddf4cee9244d83d11357e7e4641; subsequent PostgreSQL work is excluded."
 }
