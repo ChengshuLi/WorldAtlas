@@ -1,5 +1,7 @@
 # Concurrent engineering and content research
 
+M engineering and N history workers follow [WORKER_COORDINATION.md](WORKER_COORDINATION.md). Claim a ready 1–3-PR work item through the serialized workflow; do not claim umbrellas. Use the merge queue and one designated Site publisher. [Worldwide geographic approval](GEOGRAPHY_RESEARCH_READINESS.md) now gates all new location-attribute imports; research workers stage sources only until engineering closes that gate.
+
 [THREE_THREAD_START.md](THREE_THREAD_START.md) links the issue-creation, engineering and history-research handovers/prompts. Issue creation changes GitHub Issues only; it does not compete for worker-owned files or production imports.
 
 GitHub Issues is the single source of truth for TODOs, current status and work history. Handover documents and prompts remain entry instructions. Execution files preserve reproducible inputs and receipts, not competing task-status lists. Existing live facts are authoritative independently of a PR's merge state.
@@ -27,7 +29,7 @@ Use exactly one of those canonical lines in the PR body. The old `TODO:` ID is o
 
 Create a fresh unique lane branch from current `origin/main` for every PR, including subsequent PRs on the same large issue. Never accumulate unrelated work or reuse a merged branch. Unique IDs match `[a-z0-9][a-z0-9-]{0,63}`. Use isolated worktrees; inspect unmerged branches and do not switch another thread's checkout. Resume an active job/campaign serially, with one writer.
 
-Maintainers integrate reviewed PRs serially after affected checks. **Squash merge, explicitly setting the squash commit title to the PR title** (`gh pr merge N --squash --subject "Exact PR title" --match-head-commit SHA`). The already merged initial foundation PR #2 preserves its full history; do not rewrite it. The historical `work` branch is not the future integration base. Branch protection has not been configured; maintainers must honor checks before merge.
+Maintainers integrate reviewed PRs serially after affected checks. **Use the serialized worker merge queue**, which checks current ownership/head/main and squash-merges using the PR title. The already merged initial foundation PR #2 preserves its full history; do not rewrite it. The historical `work` branch is not the future integration base. Branch protection has not been configured; maintainers must honor checks before merge.
 
 ## Git ownership and durable evidence
 

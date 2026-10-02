@@ -2,7 +2,13 @@
 
 Give a Luna thread this document and [its prompt](prompts/LUNA_HISTORY.txt). They explain research contracts, import commands and safe concurrency. **GitHub Issues is the single source of truth for TODOs, status and work history**: [open historical-research issues](https://github.com/ChengshuLi/WorldAtlas/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Ahistory-research). This document contains no live task checklist.
 
+M engineering and N history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), claim one ready 1–3-PR work item before implementation, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.
+
 Repository: https://github.com/ChengshuLi/WorldAtlas, integration branch **main**. Site: https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [scope guidance](HISTORICAL_RESEARCH_TODO.md), [LUNA_DATA_HANDOFF.md](LUNA_DATA_HANDOFF.md), [RESEARCH_IMPORT_WORKFLOW.md](RESEARCH_IMPORT_WORKFLOW.md), [ATTRIBUTE_CONTRACT.md](ATTRIBUTE_CONTRACT.md) and [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md).
+
+## Current gate: source-only work
+
+The user requires complete worldwide hierarchy review before new location-attribute imports. Engineering owns that review (#7); all such imports remain blocked by `data/research-geography-gate.json`. Source research, lawful archives, factual staging and dry-run preparation may proceed. Do not request a content-mode claim or import until matching worldwide approval is published. Read [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md).
 
 ## Preserved starting point and content contract
 
@@ -16,7 +22,7 @@ Store supported sparse half-open intervals, not annual snapshots. Keep stable en
 2. Create a unique **`research/<campaign-id>`** branch from fresh `origin/main` in an isolated checkout/worktree. You own **only `research/campaigns/<campaign-id>/`**. Do not edit shared handovers, code, schema, infrastructure, category registries, grid assets or geographic releases. Research factual JSON and notes using existing tools; refer engineering blockers to a linked engineering issue.
 3. Copy `coordination/templates/research-progress.json` into your campaign directory and link the GitHub issue. Keep original inputs, lawful source bytes/restoration manifests, bundles, release pins, partial/final receipts and read-back there. This is an execution/resume artifact; task status and dated progress belong to GitHub Issues.
 4. Obtain the current `/api/geography/release`, capabilities and capacity through documented private access. Save the exact release and pin every bundle. Credentials must never enter chat/Git/arguments; the GitHub Neon management key is not an import token.
-5. Compile and validate supported factual JSON, import bounded idempotent batches and retain receipts after every commit. Verify claim/source/interval read-back and selected-year results. Preserve partial progress and report uncovered scope honestly.
+5. Compile and validate supported factual JSON and retain staged inputs. After the global gate opens, import bounded idempotent batches and retain receipts after every commit. Verify claim/source/interval read-back and selected-year results. Preserve partial progress and report uncovered scope honestly.
 
 Example commands after saving factual input and current release:
 

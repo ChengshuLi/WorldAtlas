@@ -1,0 +1,45 @@
+name: Serialize worker PR merges
+run-name: 'merge #${{ inputs.pr_number }} ${{ inputs.request_id }}'
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        type: string
+        required: true
+      expected_head:
+        type: string
+        required: true
+      request_id:
+        type: string
+        required: true
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+  checks: read
+concurrency:
+  group: worldatlas-main-integrate
+  cancel-in-progress: false
+jobs:
+  merge:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main
+          persist-credentials: false
+          sparse-checkout: scripts
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Recheck ownership and merge the exact validated head
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/run-worker-merge.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: merge-${{ inputs.request_id }}
+          path: merge-result.json
+          retention-days: 30

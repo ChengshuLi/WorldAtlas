@@ -1,0 +1,62 @@
+name: Issue worker reservations
+run-name: '${{ inputs.action }} #${{ inputs.issue_number }} ${{ inputs.request_id }}'
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        type: choice
+        options: [claim, renew, release, recover]
+        required: true
+      issue_number:
+        type: string
+        required: true
+      worker_id:
+        type: string
+        required: true
+      claim_id:
+        type: string
+        required: true
+      branch:
+        type: string
+        required: true
+      request_id:
+        type: string
+        required: true
+      live_work:
+        type: boolean
+        default: false
+      reason:
+        type: string
+        default: ''
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+concurrency:
+  group: 'worldatlas-issue-${{ inputs.issue_number }}'
+  cancel-in-progress: false
+jobs:
+  reserve:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            data/research-geography-gate.json
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Reserve, renew or release the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/run-issue-claim.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: claim-${{ inputs.request_id }}
+          path: claim-result.json
+          retention-days: 30

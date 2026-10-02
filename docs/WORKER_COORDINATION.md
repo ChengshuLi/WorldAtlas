@@ -1,0 +1,65 @@
+# Many engineering and history workers
+
+M engineering chats and N history-research chats may work in isolated checkouts. GitHub Issues remains the work record; a serialized bot-managed reservation prevents two cooperative workers from taking the same issue. Threads using the same GitHub account need distinct **worker IDs**, not just an assignee.
+
+## Small, reviewed work items
+
+Each worker holds at most one active work item; do not mass-reserve the queue. Actionable issues have exactly one type label, `kind:work-item`, `status:ready`, an explicit scope and a **1–3 PR budget**. Larger objectives are `kind:umbrella`, cannot be claimed and are decomposed into bounded child issues. An umbrella can have many children, while each child normally completes in one PR and at most three. Open dependencies or `status:blocked` prevent claims. Completing a child does not close its parent.
+
+The issue-creation thread reviews scope, dependencies and overlap before marking ready. Include one machine-readable block in the issue body (GitHub is its sole authority):
+
+```text
+<!-- worldatlas-work:v1
+{"max_prs":2,"depends_on":[],"scope":"Concrete acceptance scope","mode":"engineering"}
+-->
+```
+
+Modes are `engineering`, `source-only` and `content`. Source-only research defines disjoint subjects/source collections/time/attributes and stages evidence without imports. Content additionally needs `geographic_release`, `scope_manifest` and `territory_match_review`; it is currently blocked by the worldwide geography gate. Claim automation also requires worldwide issue #7 closed and the reviewed approval manifest to match the release. See [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md).
+
+A ready label is a reviewed decision, not an automatic conclusion from complete database chains. Two separate issues can still overlap; triage must record subsystem/resource or geography/source/time/attribute scope and dependencies. A worker discovering overlap stops the conflicting part and coordinates on the issues. Git claims are cooperative reservations, not security isolation or an unlimited production-capacity guarantee.
+
+## Claim before implementation
+
+Read fresh main, inspect the issue and its active PRs, choose a globally unique worker ID (for example the chat ID or a UUID) and a planned fresh lane branch. From the repo:
+
+```sh
+node scripts/issue-lease.mjs claim --issue 22 --worker YOUR-UNIQUE-WORKER --branch engineering/YOUR-JOB --out /tmp/claim.json
+node scripts/issue-lease.mjs inspect --issue 22
+```
+
+Replace placeholders. Begin only after the command exits successfully and its result says `accepted: true`. Retain the receipt, claim ID and workflow link in your owned execution artifacts. A `status:claimed` label is visible convenience; the canonical bot-authored comment is authority. Public ownership nonces prevent accidental collisions, not impersonation by someone with repository write access.
+
+Per-issue GitHub Actions concurrency serializes claim/renew/release/recover on **main**. Different issues may reserve concurrently. GitHub allows one running and one pending run per group; later requests may cancel pending requests. The client retries canceled runs boundedly with jitter and never treats cancellation, timeout or missing artifacts as success. Lack of Actions dispatch/read permissions is a blocker; do not fall back to an uncoordinated comment-only claim.
+
+## Keep, rotate and release a reservation
+
+The lease lasts 24 hours. Renew at work milestones and before each live operation/merge; heartbeat periodically during sustained work. Use your actual claim ID:
+
+```sh
+node scripts/issue-lease.mjs renew --issue 22 --worker YOUR-UNIQUE-WORKER --branch engineering/YOUR-JOB --claim-id CLAIM-ID --out /tmp/renew.json
+node scripts/issue-lease.mjs release --issue 22 --worker YOUR-UNIQUE-WORKER --branch engineering/YOUR-JOB --claim-id CLAIM-ID --out /tmp/release.json
+```
+
+Only the holder can renew/release. Renewal can rotate to a fresh branch after a previous PR merges/closes and live work is verified. An open PR or `live_work:true` prevents branch rotation/release. Set `--live-work true` before a live operation, then renew with `--live-work false` only after its outcome/receipts are settled. Source-only workers do not perform live imports. Do not leave work pending without recording its branch, sources, receipts and next action.
+
+Expiry does not authorize destroying or silently taking another worker's work. A stale reservation requires operator inspection and explicit recovery: label `coordination:recovery-approved`, an expired lease, no active PR/live operation, and a reason supplied with `recover`. Preserve the old branch/artifacts and coordinate unresolved evidence before approval. Live/PR handovers require their existing owner/integrator first; automatic recovery is refused.
+
+## PRs and the merge queue
+
+Each focused PR targets main and has exactly one `Refs #N` for partial work or `Closes #N` for full acceptance. CI checks the current claim and exact branch as well as issue type/scope. All M workers submit merges through:
+
+```sh
+node scripts/queue-pr-merge.mjs --pr PR-NUMBER --head VERIFIED-HEAD-SHA
+```
+
+Inspect the exact returned run name/request ID, wait for its completion and read `merge-result.json`. Queued or successful workflow execution alone is not proof of an accepted merge. The queue serializes integration, rereads the claim, checks the exact head and successful current checks, requires latest main included, and squash-merges with the PR title as commit title. If another merge advanced main, update your branch, rerun affected checks and resubmit. Canceled pending merge requests may be retried; queues are not FIFO.
+
+After each merge, release a completed issue or renew its claim onto a fresh branch for its remaining bounded part. When three PRs are insufficient, stop extending it and split the remaining scope into reviewed children/follow-ups. Existing closed Issues, source evidence and dates are retained.
+
+One explicitly designated engineering publisher coordinates Site deployments, geographic releases and owner maintenance. Workers do not publish competing versions independently. The GitHub merge queue does not serialize manual Site operations or a different repository; use the existing deployment/maintenance protocol. Branch protection is not configured, so workers must honor the queue and checks; direct merge permissions are not revoked by this setup.
+
+## Current research policy
+
+The user requires **complete worldwide hierarchy review before new location-attribute imports**. `data/research-geography-gate.json` currently closes the content gate, and the standard research CLI refuses non-dry-run imports. Public research, source notes and local preparation/dry runs may continue. The existing private API and retained facts stay intact for engineering and preservation operations; this cooperative worker/CLI gate is not a new server authorization boundary.
+
+Only engineering may approve a matching reviewed geographic release, with `semantic_complete:true`, exhaustive closure evidence and verified publication, and open the gate through a reviewed PR after #7 is complete. Luna never designs hierarchy/boundaries. Even after approval, source populations/primary culture/religion must match the intended territory and supported interval.

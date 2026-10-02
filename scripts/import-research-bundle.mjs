@@ -1,3 +1,4 @@
+import {assertResearchImportsReady,assertResearchBundleApproved,readResearchImportGate} from './research-import-gate.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -73,6 +74,7 @@ async function hiddenCredential(){
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),dryRun=args.includes('--dry-run'),positional=args.filter(arg=>arg!=='--dry-run'),[origin,directory]=positional;
  if(!origin||!directory)throw Error('Usage: node --use-env-proxy scripts/import-research-bundle.mjs https://confirmed-site/ bundle-directory [--dry-run]');
+ if(!dryRun){const gate=readResearchImportGate();assertResearchImportsReady(gate);assertResearchBundleApproved(gate,readResearchBundle(directory).manifest.geography);}
  const token=dryRun?undefined:await hiddenCredential();let last=0;
  const receipt=await importResearchBundle({origin,directory,token,dryRun,onProgress:progress=>{if(Date.now()-last>15000||progress.completed===progress.total){console.log(`Research import: ${progress.completed}/${progress.total} bounded batches committed.`);last=Date.now();}}});console.log(JSON.stringify(receipt));
 }
