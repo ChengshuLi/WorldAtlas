@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "scope": "Fixed environmental classification release; preserves existing evidence and geographic review scope",
+  "registry": "src/environment-classifications.js",
+  "registry_sha256": "d589aa3aa91831f0d1d2b5a21e161270ba44e86ef90dea23110a761510074970",
+  "classes": {
+    "topography": 12,
+    "vegetation": 16,
+    "climate": 32
+  },
+  "migration": "drizzle/0007_fixed_environment_classifications.sql",
+  "migration_sha256": "c566a87dc05a5ec5a1311019b60cfea54e8708b29ec2df6c8e80057432c4708b",
+  "publication_suite": {
+    "command": "ATLAS_REQUIRE_PREPARED=1 ATLAS_REQUIRE_STATIC=1 npm test",
+    "tests": 157,
+    "passed": 157,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 220052.126595,
+    "output_sha256": "563f30ae8b9907ea1c5464af7a55fc4a7fc2854b42e2e9376536173bfb52ccd7"
+  },
+  "focused_suite": {
+    "tests": 74,
+    "passed": 74,
+    "failed": 0,
+    "skipped": 0,
+    "output_sha256": "54589f027f809e2cd4d3b57185f15a0ff7aa29951aac22d98e671c4b618b81f9"
+  },
+  "build": {
+    "bytes": 267156645,
+    "largest_asset_bytes": 14334666,
+    "package_under_256_MiB": true,
+    "all_files_under_25_MiB": true,
+    "output_sha256": "6483072f829b1cefad9c4e14ad9cbeb22e22befed9c84e28a5973d347ea0b2fb"
+  },
+  "existing_environment_evidence_audit": "data/validation/environment-vocabulary-audit.json",
+  "frozen_migrations_0000_through_0006_unchanged": true,
+  "historical_content_expanded": false,
+  "deployment_status": "ready; native publication receipt is recorded separately"
+}

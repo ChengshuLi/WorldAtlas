@@ -47,6 +47,8 @@ Read [source research and limitations](docs/DATA_SOURCES.md) for selection metho
 
 ## Database and temporal imports
 
+Topography, vegetation and climate use [fixed classifications](docs/ENVIRONMENT_CLASSIFICATIONS.md), with stable IDs, display labels and explicit legacy aliases. New imports reject unsupported text; unknown uses JSON null. The full catalog is available from `GET /api/classifications` and the import dialog. Existing evidence remains immutable.
+
 SQLite stores `units`, `locations`, `states`, `boundaries`, historical `polities`, stable `entities`, `entity_history`, and `entity_links`; see [data/schema.sql](data/schema.sql). States contain nullable owner, population, culture, religion, topography, vegetation, climate, and rank. Rank is restricted to `unsettled`, `rural settlement`, `town`, `city`, or `metropolis`; unsettled requires explicit evidence of no inhabitants, independently of unknown or estimated population. Validity uses **inclusive `valid_from`, exclusive `valid_to`**, signed calendar years (negative = BC), and no year zero. Use `2027` as an exclusive endpoint for records including 2026.
 
 Import a JSON object containing arrays named `units`, `locations`, `states`, `boundaries`, `entities`, `entity_history`, and/or `entity_links`:

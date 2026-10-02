@@ -13,6 +13,7 @@ for(const [file,expected] of Object.entries(audit.input_sha256)){
  if(actual!==expected)throw new Error(`Stale geography audit: ${file}; rerun scripts/audit-granularity.py`);
 }
 import {checkPrepared} from './check-prepared.mjs';
+import {environmentClassifications} from '../src/environment-classifications.js';
 import { openDatabase, seedDatabase, geography } from '../database.mjs';
 
 // A read-only export of the current database, suitable for a private hosted preview.
@@ -66,6 +67,7 @@ try {
   if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
   await fs.writeFile('dist/atlas-geography.json', JSON.stringify({type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
+  await fs.writeFile('dist/environment-classifications.json',JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
   await fs.cp('data/ownership-history','dist/ownership-history',{recursive:true});
   await fs.cp('data/ownership-runtime','dist/ownership-runtime',{recursive:true});
   await fs.cp('data/reference-attributes','dist/reference-attributes',{recursive:true});

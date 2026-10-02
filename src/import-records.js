@@ -1,4 +1,5 @@
 import {validYear,formatYear,ranks} from './model.js';
+import {requireEnvironmentalClassification,environmentClassifications} from './environment-classifications.js';
 import {locationAttributes,unresolvedAttributeStatuses} from './attributes.js';
 const collections=new Set(['sources','entity_types','entities','categories','records','names','relationships','media_links','units','attribute_entities','attribute_records','retirements']);
 const aliases={units:'entities',attribute_entities:'categories',attribute_records:'records'};
@@ -32,6 +33,7 @@ export function previewImport(raw){
     if(row.value!=null){
      if(row.attribute==='population'){if(!Number.isSafeInteger(row.value)||row.value<0)throw Error('Population must be a nonnegative whole number.');}
      else text(row.value,'Attribute value');
+     requireEnvironmentalClassification(row.attribute,row.value);
      if(['owner','culture','religion'].includes(row.attribute))text(row.category_id,'Stable category ID');
      if(row.attribute==='rank'&&!ranks.includes(row.value))throw Error('Rank must be unsettled, rural settlement, town, city or metropolis.');
      if(row.attribute==='habitation'&&!['inhabited','uninhabited','unknown'].includes(row.value))throw Error('Habitation must be inhabited, uninhabited or unknown.');
@@ -64,6 +66,14 @@ export function installRecordImport({getContext,refresh,enabled=import.meta.env.
  const dialog=document.createElement('dialog');dialog.id='import-records-dialog';dialog.className='coverage-dialog';
  dialog.innerHTML='<button class="dialog-close" aria-label="Close historical record import">×</button><div class="eyebrow">ADD EVIDENCE</div><h2>Import historical records</h2><p>Upload or paste sourced attributes, dated names or relationships. Existing identities and evidence are retained. Source-backed corrections can withdraw or supersede earlier evidence without deleting it. Each batch accepts up to 250 rows and 1 MiB.</p><p id="import-records-context"></p><label for="import-records-file">Choose a JSON file</label><input id="import-records-file" type="file" accept=".json,application/json"><label for="import-records-json">JSON records</label><textarea id="import-records-json" rows="12" style="display:block;width:100%;box-sizing:border-box;font:13px monospace" spellcheck="false"></textarea><details><summary>Record format</summary><p>Use stable IDs and cite a source with its license, vintage and supported interval. Start years are included; end years are excluded. Negative years mean BC. There is no year zero. Replace the source placeholders before importing.</p><pre id="import-records-format" style="overflow:auto;max-height:240px"></pre></details><button id="import-records-review">Review records</button><div id="import-records-preview"></div><p id="import-records-status" role="status" aria-live="polite"></p><button id="import-records-submit" disabled>Import reviewed records</button>';
  document.body.append(dialog);const textarea=dialog.querySelector('textarea'),file=dialog.querySelector('input[type=file]'),review=dialog.querySelector('#import-records-review'),submit=dialog.querySelector('#import-records-submit'),status=dialog.querySelector('#import-records-status'),preview=dialog.querySelector('#import-records-preview');let checked;
+ const classifications=document.createElement('details'),summary=document.createElement('summary'),explanation=document.createElement('p');
+ summary.textContent='Fixed environmental classifications';explanation.textContent='Use one listed ID for topography, vegetation or climate. Use null when unknown. Original source descriptions belong in evidence metadata.';
+ classifications.append(summary,explanation);
+ for(const [attribute,entries]of Object.entries(environmentClassifications)){
+  const heading=document.createElement('p'),list=document.createElement('pre');heading.textContent=attribute[0].toUpperCase()+attribute.slice(1);
+  list.style.cssText='overflow:auto;max-height:200px;font-size:12px';list.textContent=entries.map(entry=>`${entry.id} — ${entry.label}`).join('\n');classifications.append(heading,list);
+ }
+ dialog.querySelector('#import-records-review').before(classifications);
  const reset=()=>{checked=null;submit.disabled=true;preview.replaceChildren();status.textContent='';};
  textarea.addEventListener('input',reset);
  file.addEventListener('change',async()=>{reset();const selected=file.files[0];if(!selected)return;if(selected.size>1024*1024){status.textContent='Choose a JSON batch no larger than 1 MiB.';return;}try{textarea.value=await selected.text();}catch{status.textContent='The file could not be read.';}});

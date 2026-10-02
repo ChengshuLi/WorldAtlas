@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import { attributes, levels, ranks, validYear } from './src/model.js';
 import { migrateHierarchy, validateHierarchy } from './hierarchy.mjs';
 import { migrateTopology } from './topology.mjs';
+import {validEnvironmentalClassification} from './src/environment-classifications.js';
 export function openDatabase(path = 'data/atlas.sqlite') {
   const db = new DatabaseSync(path);
   widenRankChecks(db);
@@ -74,7 +75,7 @@ export function importRecords(db, payload) {
       if (table === 'boundaries') validateGeometry(r.geometry);
       else for (const field of attributes) if (r[field] != null) {
         if (field === 'population') { if (!Number.isSafeInteger(r[field]) || r[field] < 0) throw new Error('Population must be a nonnegative integer'); }
-        else { requiredText(r[field], field); if (field === 'rank' && !ranks.includes(r[field])) throw new Error('Invalid location rank'); }
+        else { requiredText(r[field], field); if (field === 'rank' && !ranks.includes(r[field])) throw new Error('Invalid location rank'); if(!validEnvironmentalClassification(field,r[field]))throw new Error(`Invalid fixed ${field} classification`); }
       }
       if(table==='states'&&r.rank==='unsettled'&&r.population>0)throw new Error('Unsettled conflicts with positive population');
       const fields = ['location_id', 'valid_from', 'valid_to', ...(table === 'states' ? attributes : ['geometry']), 'is_example', 'source'];

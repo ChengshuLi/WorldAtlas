@@ -13,6 +13,7 @@ const frozen={
  '0004_population_precision_guard.sql':'302660bc2d4d673bab67820d3c54637ca8cd50460ace57e3142fb3c6f40da447',
  '0005_population_source_class_guard.sql':'44ec5f5a82317b7c430f7d98439e6ce41d04859d46719c36c3e0dc072f102194',
  '0006_unresolved_attribute_status_guard.sql':'e2778adcf77945b294609111ecd21a02ffc177e41463393f07e7d15e50e97475',
+ '0007_fixed_environment_classifications.sql':'c566a87dc05a5ec5a1311019b60cfea54e8708b29ec2df6c8e80057432c4708b',
  'meta/0000_snapshot.json':'e8fd244d13001d742632e0678dfc72210f5226cad757dfd4316128d5c38f777d',
  'meta/0001_snapshot.json':'c87009a65f84744b2716ce5e0499f0167d26fb61cd381df3cc64e7895df4bc3f',
  'meta/0002_snapshot.json':'410a03e184a5169e3d9a34055d5247b610e34e799b48c8f35ea3ac04ee2f68b9',
@@ -20,14 +21,15 @@ const frozen={
  'meta/0004_snapshot.json':'de04bfc01382c7c96844b96acaf38fccc92bd4e63308eceb786cfa87c4c53cae',
  'meta/0005_snapshot.json':'20e45fc7a7f1656c796744fc50fd46f9d079cb667f3ea7918abea03dd4725eed',
  'meta/0006_snapshot.json':'80077fbacf604ee38488b3197fbde0ce74ef2f75f370c2cbe4159fa3d6216cae',
+ 'meta/0007_snapshot.json':'329921a90f920a9b53551295ab1211d16841bb7b8e700ca4bfa615bb18c37129',
 };
 test('frozen migration SQL and snapshots retain their published identities',()=>{
  for(const [path,expected]of Object.entries(frozen))assert.equal(createHash('sha256').update(fs.readFileSync(new URL(`../drizzle/${path}`,import.meta.url))).digest('hex'),expected,`Frozen migration changed: ${path}; add a new migration instead`);
  const journal=JSON.parse(fs.readFileSync(new URL('../drizzle/meta/_journal.json',import.meta.url)));
- for(const [idx,entry]of journal.entries.slice(0,7).entries()){
+ for(const [idx,entry]of journal.entries.slice(0,8).entries()){
   assert.equal(entry.idx,idx);
   assert.equal(`${entry.tag}.sql`,Object.keys(frozen).filter(path=>path.endsWith('.sql'))[idx],`Unexpected frozen journal identity ${entry.tag}`);
   if(idx){const snapshot=JSON.parse(fs.readFileSync(new URL(`../drizzle/meta/${String(idx).padStart(4,'0')}_snapshot.json`,import.meta.url))),previous=JSON.parse(fs.readFileSync(new URL(`../drizzle/meta/${String(idx-1).padStart(4,'0')}_snapshot.json`,import.meta.url)));assert.equal(snapshot.prevId,previous.id);}
  }
- assert.ok(journal.entries.length>=7);
+ assert.ok(journal.entries.length>=8);
 });

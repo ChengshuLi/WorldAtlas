@@ -1,4 +1,5 @@
 import {attributes,ranks,levels,validYear} from './src/model.js';
+import {validEnvironmentalClassification} from './src/environment-classifications.js';
 export function syncEntities(db){
   db.exec(`INSERT INTO entities(id,kind,name,parent_id) SELECT id,level,name,parent_id FROM units WHERE true ON CONFLICT(id) DO UPDATE SET name=excluded.name,parent_id=excluded.parent_id;
     INSERT INTO entities(id,kind,name,parent_id) SELECT id,'location',name,parent_id FROM locations WHERE true ON CONFLICT(id) DO UPDATE SET name=excluded.name,parent_id=excluded.parent_id;`);
@@ -40,6 +41,7 @@ export function importTemporal(db,payload){
         if(k==='population' ? !Number.isSafeInteger(v)||v<0 : !text(v))throw Error('Invalid dated attribute');
         if(k==='rank'&&!ranks.includes(v))throw Error('Invalid rank');
         if(k==='habitation'&&!['inhabited','uninhabited','unknown'].includes(v))throw Error('Invalid habitation');
+        if(!validEnvironmentalClassification(k,v))throw Error(`Invalid fixed ${k} classification`);
       }
       if(r.value.habitation==='uninhabited' && (r.value.rank!=null&&r.value.rank!=='unsettled' || r.value.population>0))throw Error('Uninhabited cannot have an inhabited settlement rank or positive population');
       if(r.value.rank==='unsettled' && (r.value.habitation==='inhabited'||r.value.population>0))throw Error('Unsettled conflicts with inhabited evidence or positive population');

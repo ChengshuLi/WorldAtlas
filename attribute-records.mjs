@@ -1,5 +1,6 @@
 import {locationAttributes,unresolvedAttributeStatuses} from './src/attributes.js';
 import {ranks,validYear} from './src/model.js';
+import {validEnvironmentalClassification} from './src/environment-classifications.js';
 const text=v=>typeof v==='string'&&v.trim().length>0&&v.length<=2000;
 const categorical=['owner','culture','religion'];
 export function importAttributes(db,payload){
@@ -12,6 +13,7 @@ export function importAttributes(db,payload){
   if(r.category_id!=null&&(!categorical.includes(r.attribute)||r.value==null))throw Error('Category ID requires a known categorical value');
   if(r.attribute==='rank'&&r.value!=null&&!ranks.includes(r.value))throw Error('Invalid rank');
   if(r.attribute==='habitation'&&r.value!=null&&!['inhabited','uninhabited','unknown'].includes(r.value))throw Error('Invalid habitation');
+  if(!validEnvironmentalClassification(r.attribute,r.value))throw Error(`Invalid fixed ${r.attribute} classification`);
   if(r.metadata!=null&&(typeof r.metadata!=='object'||Array.isArray(r.metadata)))throw Error('Attribute provenance metadata must be an object');
   const entity=db.prepare('SELECT valid_from,valid_to FROM entities WHERE id=?').get(r.location_id);
   if(entity&&(entity.valid_from!=null&&r.valid_from<entity.valid_from||entity.valid_to!=null&&r.valid_to>entity.valid_to))throw Error('Attribute record exceeds entity lifetime');

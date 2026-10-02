@@ -52,6 +52,10 @@ The exhaustive candidate-grid assessment tests every approved location at fixed 
 
 ## Checkpoint discipline
 
+### Fixed environmental vocabulary
+
+Topography, vegetation and climate now share enforced fixed classifications across preview, local/hosted imports, prepared producers, SQL and resolved map records. Existing source labels/claims stay byte-preserved; canonical IDs unite alias colors/legend categories without increasing precision. See `docs/ENVIRONMENT_CLASSIFICATIONS.md` and the feature validation receipt under `data/validation`. This change does not expand historical evidence or close geographic review items.
+
 Every new claim, correction, source archive and review decision must be pushed to the primary GitHub branch with its supported interval, identity, source hash and status. For large publicly reproducible downloads, commit immutable URLs/hashes and restoration commands; completed compact products and unique intermediate output must be retained. SQLite backups and private credentials are not source handoff assets. Record unresolved blockers before ending a thread. Keep this log and the publication scope current when a stage is installed or published.
 
 ## Publication attempt — 2026-10-02 02:05 UTC

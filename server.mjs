@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { openDatabase, seedDatabase, geography, snapshot } from './database.mjs';
+import {environmentClassifications} from './src/environment-classifications.js';
 process.chdir(path.dirname(fileURLToPath(import.meta.url)));
 const db = openDatabase(); seedDatabase(db);
 const catalog=geography(db);
@@ -30,6 +31,7 @@ const server = http.createServer((req, res) => {
     if (req.method !== 'GET') { res.writeHead(405); return res.end(JSON.stringify({error:'Method not allowed'})); }
     try {
       if (url.pathname === '/api/geography') return res.end(geo);
+      if (url.pathname === '/api/classifications') return res.end(JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
       if (url.pathname === '/api/snapshot') return res.end(JSON.stringify(snapshot(db, Number(url.searchParams.get('year')), url.searchParams.get('examples') === '1',url.searchParams.get('source_evidence')==='1')));
       res.writeHead(404); return res.end(JSON.stringify({error:'Not found'}));
     } catch (error) { res.writeHead(400); return res.end(JSON.stringify({error:error.message})); }

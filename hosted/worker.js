@@ -1,6 +1,7 @@
 import * as records from './records.js';
 import * as geography from './geographic-releases.js';
 import {validYear} from '../src/model.js';
+import {environmentClassifications} from '../src/environment-classifications.js';
 
 const json=(value,status=200)=>Response.json(value,{status,headers:{'Cache-Control':'no-store'}});
 function sameOrigin(request){
@@ -20,6 +21,7 @@ export default {
   const url=new URL(request.url);
   if(!url.pathname.startsWith('/api/'))return env.ASSETS.fetch(request);
   try{
+   if(url.pathname==='/api/classifications'&&request.method==='GET')return json({version:1,unknown:null,attributes:environmentClassifications});
    if(!env.DB) return json({error:'Historical database is temporarily unavailable'},503);
    if(url.pathname==='/api/storage'&&request.method==='GET')return json(await records.storageOverview(env.DB));
    if(url.pathname==='/api/attributes'&&request.method==='GET')return json(await records.attributesAt(env.DB,selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),locationIds:url.searchParams.has('location_id')?url.searchParams.getAll('location_id'):undefined}));

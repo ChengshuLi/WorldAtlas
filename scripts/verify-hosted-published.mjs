@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
+import {environmentClassifications} from '../src/environment-classifications.js';
 const origin=new URL(process.argv[2]??'');
 if(origin.protocol!=='https:'||origin.pathname!=='/'||origin.username||origin.password||origin.search||origin.hash)throw Error('Supply the confirmed HTTPS Site origin');
 if(!process.stdin.isTTY)throw Error('Use hidden terminal stdin for the private service credential');
@@ -7,6 +8,9 @@ process.stdin.setRawMode(true);process.stdout.write('Ready for private read-only
 const token=await new Promise((resolve,reject)=>{let value='';process.stdin.on('data',chunk=>{if(chunk.includes(3)){process.stdin.setRawMode(false);reject(Error('Cancelled'));return;}value+=chunk.toString();if(!/[\r\n]/.test(value))return;process.stdin.pause();process.stdin.setRawMode(false);try{resolve(JSON.parse(value.trim()).token);}catch{reject(Error('Invalid credential'));}});});
 if(typeof token!=='string'||!token)throw Error('Missing credential');
 async function get(route){const r=await fetch(new URL(route,origin),{headers:{'OAI-Sites-Authorization':`Bearer ${token}`}});if(!r.ok)throw Error(`Read-only verification HTTP ${r.status}`);return r.json();}
+const classifications=await get('/api/classifications'),classificationCatalog={version:1,unknown:null,attributes:environmentClassifications};
+if(JSON.stringify(classifications)!==JSON.stringify(classificationCatalog))throw Error('Published environmental classification catalog mismatch');
+const classificationCounts=Object.fromEntries(Object.entries(classifications.attributes).map(([attribute,entries])=>[attribute,entries.length]));
 const index=JSON.parse(fs.readFileSync('data/geographic-releases/index.json')),releases=[];
 for(const expected of index.releases){const actual=await get('/api/geography/release?'+new URLSearchParams({release_id:expected.id}));for(const key of ['id','version','footprints_sha256','hierarchy_sha256','membership_sha256','location_ids_sha256','changes_sha256'])if(actual?.[key]!==expected[key])throw Error(`Published release mismatch: ${key}`);if(actual.status!=='published')throw Error('Unpublished release');for(const [key,value]of Object.entries(expected.expected_counts))if(actual.expected_counts[key]!==value)throw Error('Published counts mismatch');releases.push({id:actual.id,version:actual.version,counts:actual.expected_counts,footprints_sha256:actual.footprints_sha256,hierarchy_sha256:actual.hierarchy_sha256});}
 const imports=JSON.parse(fs.readFileSync('data/prepared-evidence/imports/index.json')),expected={names:new Map(),records:new Map()};
@@ -27,4 +31,4 @@ if(fs.existsSync(archiveReceiptFile)){
  objects.set('media:atlas:archive:'+catalog.archive_sha256,{sha256:catalog.archive_sha256,bytes:fs.statSync('data/geographic-migration-archive.json.gz').size});
  for(const [id,expected]of objects){const response=await fetch(new URL('/api/media/'+encodeURIComponent(id),origin),{headers:{'OAI-Sites-Authorization':`Bearer ${token}`}});if(!response.ok)throw Error('Retained archive read-back failed');const raw=Buffer.from(await response.arrayBuffer());if(raw.length!==expected.bytes||createHash('sha256').update(raw).digest('hex')!==expected.sha256)throw Error('Retained archive bytes differ from preserved source');checkedArchiveObjects++;checkedArchiveBytes+=raw.length;}
 }
-console.log(JSON.stringify({read_only:true,releases,checked_prepared_claims:checked,expected_prepared_counts:imports.counts,checked_archive_objects:checkedArchiveObjects,checked_archive_bytes:checkedArchiveBytes,storage}));
+console.log(JSON.stringify({read_only:true,environment_classifications:classificationCounts,releases,checked_prepared_claims:checked,expected_prepared_counts:imports.counts,checked_archive_objects:checkedArchiveObjects,checked_archive_bytes:checkedArchiveBytes,storage}));

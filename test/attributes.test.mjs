@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {resolveAttributes} from '../src/attributes.js';
+import {environmentalClassification} from '../src/environment-classifications.js';
 import {openDatabase,importRecords} from '../database.mjs';
 const features=[{id:'l',properties:{reference_owner:'Modern owner'}}];
 const r=(id,attribute,value,extra={})=>({id,location_id:'l',attribute,value,valid_from:1000,valid_to:1100,method:'direct',source:'Fixture',...extra});
@@ -44,21 +45,22 @@ test('typed imports reject overlapping field records and preserve stable categor
  assert.throws(()=>importRecords(db,{entities:[{id:'l',name:'l',kind:'location',valid_from:1050,valid_to:1200,source:'Conflicting lifetime'}]}),/invalidate attribute/);
  assert.equal(db.prepare("SELECT valid_from FROM entities WHERE id='l'").get().valid_from,1000);
  assert.throws(()=>importRecords(db,{attribute_records:[r('before-existence','climate','Oceanic',{valid_from:900})]}),/lifetime/);
- assert.throws(()=>db.prepare('INSERT INTO attribute_records VALUES (?,?,?,?,?,?,?,?,?,?,?,?)').run('outside','l','topography','"Flat"',null,1200,1300,'direct','sourced','Fixture',0,'{}'),/lifetime/);
+ assert.throws(()=>db.prepare('INSERT INTO attribute_records VALUES (?,?,?,?,?,?,?,?,?,?,?,?)').run('outside','l','topography','"Flatland"',null,1200,1300,'direct','sourced','Fixture',0,'{}'),/lifetime/);
  importRecords(db,{attribute_records:[r('uninhabited','habitation','uninhabited')]});
  assert.throws(()=>importRecords(db,{attribute_records:[r('fake-city','rank','city')]}),/Uninhabited/);
  }finally{db.close();}
 });
 
 test('no-year-zero resolution, exclusive interval ends and opt-in examples remain deterministic',()=>{
- const records=[r('bc','climate','BC reference',{valid_from:-1,valid_to:1,method:'reference'}),r('ad','climate','AD reference',{valid_from:1,valid_to:2,method:'reference'}),r('example-owner','owner','Example',{valid_from:2026,valid_to:2027,is_example:1,category_id:'owner:example'})];
- assert.equal(resolveAttributes(features,-1,{records}).get('l').climate,'BC reference');
- assert.equal(resolveAttributes(features,1,{records}).get('l').climate,'AD reference');
+ const records=[r('bc','climate','climate:Cfb',{valid_from:-1,valid_to:1,method:'reference'}),r('ad','climate','climate:Af',{valid_from:1,valid_to:2,method:'reference'}),r('example-owner','owner','Example',{valid_from:2026,valid_to:2027,is_example:1,category_id:'owner:example'})];
+ assert.equal(resolveAttributes(features,-1,{records}).get('l').climate,environmentalClassification('climate','climate:Cfb').label);
+ assert.equal(resolveAttributes(features,1,{records}).get('l').climate,environmentalClassification('climate','climate:Af').label);
  assert.throws(()=>resolveAttributes(features,0,{records}),/excluding zero/);
  assert.equal(resolveAttributes(features,2026,{records,examples:true}).get('l').owner,'Modern owner');
- const forward=resolveAttributes(features,1050,{records:[r('b','vegetation','B',{method:'derived'}),r('a','vegetation','A',{method:'derived'})]}).get('l');
- const reverse=resolveAttributes(features,1050,{records:[r('a','vegetation','A',{method:'derived'}),r('b','vegetation','B',{method:'derived'})]}).get('l');
+ const forward=resolveAttributes(features,1050,{records:[r('b','vegetation','vegetation:mangroves',{method:'derived'}),r('a','vegetation','vegetation:farmlands',{method:'derived'})]}).get('l');
+ const reverse=resolveAttributes(features,1050,{records:[r('a','vegetation','vegetation:farmlands',{method:'derived'}),r('b','vegetation','vegetation:mangroves',{method:'derived'})]}).get('l');
  assert.equal(forward.vegetation,reverse.vegetation);
+ assert.equal(forward.category_ids.vegetation,'vegetation:farmlands');
 });
 
 test('compact references preserve supported dates and field provenance',async()=>{

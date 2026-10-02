@@ -1,4 +1,5 @@
 import {attributes,validYear,explicitPopulationZero} from './model.js';
+import {environmentalAttributes,environmentalClassification} from './environment-classifications.js';
 export const locationAttributes=[...attributes,'habitation'];
 export const unresolvedAttributeStatuses=['unknown','disputed','no-majority'];
 export function categoryId(kind,name){return name==null?null:`${kind}:${encodeURIComponent(name.normalize('NFC').trim().toLocaleLowerCase('en'))}`;}
@@ -23,6 +24,12 @@ export function resolveAttributes(features,year,{states=[],records=[],temporal,e
    value[attribute]=unresolved?null:c?.value??null;
    value.provenance[attribute]=c?{...c.evidence,value:undefined,location_id:undefined,attribute:undefined}:{status:'unknown',method:null,source:null};
    if(['owner','culture','religion'].includes(attribute)){value.category_ids[attribute]=value[attribute]==null?null:c?.evidence.category_id??categoryId(attribute,value[attribute]);if(value[attribute]==null)value.provenance[attribute].category_id=null;}
+  }
+  for(const attribute of environmentalAttributes){
+   const original=value[attribute],classification=environmentalClassification(attribute,original);
+   value.category_ids[attribute]=classification?.id??null;
+   if(classification){value[attribute]=classification.label;value.provenance[attribute]={...value.provenance[attribute],classification_id:classification.id,source_value:original};}
+   else if(original!=null){value[attribute]=null;value.provenance[attribute]={...value.provenance[attribute],status:'unknown',metadata:{...(value.provenance[attribute].metadata||{}),unmapped_source_value:original,reason:'Retained source value has no approved environmental classification'}};}
   }
   resolveSettlementEvidence(value,candidates);
   const evidence=value.provenance.owner;value.source=evidence.source;value.reference=evidence.method==='reference';value.is_example=Object.values(value.provenance).some(p=>p.is_example)?1:0;output.set(f.id,value);

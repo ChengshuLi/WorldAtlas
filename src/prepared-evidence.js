@@ -1,4 +1,5 @@
 import {validYear,ranks} from './model.js';
+import {requireEnvironmentalClassification} from './environment-classifications.js';
 const dateOK=y=>validYear(y)||y===2027;
 const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
 export const preparedEvidenceJSON=v=>JSON.stringify(canonical(v));
@@ -23,6 +24,7 @@ export function normalizePreparedEvidence(row,kind,sources){
  if(kind!=='records'||!row.location_id||!['owner','population','culture','religion','rank','topography','vegetation','climate','habitation'].includes(row.attribute)||!Object.hasOwn(row,'value'))throw Error('Invalid prepared attribute');
  if(row.attribute==='population'&&row.value!=null&&(!Number.isSafeInteger(row.value)||row.value<0))throw Error('Invalid prepared population');
  if(row.value!=null&&row.attribute!=='population'&&(typeof row.value!=='string'||!row.value.trim()))throw Error('Invalid prepared scalar');
+ requireEnvironmentalClassification(row.attribute,row.value);
  if(['owner','culture','religion'].includes(row.attribute)&&((row.value!=null)!==Boolean(row.category_id)))throw Error('Prepared categorical values require a stable identity');
  if(row.attribute==='rank'&&row.value!=null&&!ranks.includes(row.value)||row.attribute==='habitation'&&row.value!=null&&!['inhabited','uninhabited','unknown'].includes(row.value))throw Error('Invalid prepared rank or habitation');
  if(!['direct','majority-area','derived','reference','estimate'].includes(row.method)||!['sourced','derived','reference','estimate','unknown','disputed','no-majority','example'].includes(row.status))throw Error('Invalid prepared evidence method/status');
@@ -47,4 +49,3 @@ export function mergePreparedEvidence(records=[],names=[],prepared={records:[],n
  };
  return {records:merge(records,prepared.records,'records'),names:merge(names,prepared.names,'names')};
 }
-

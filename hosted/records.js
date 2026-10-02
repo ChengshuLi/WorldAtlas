@@ -1,5 +1,6 @@
 import {locationAttributes,unresolvedAttributeStatuses} from '../src/attributes.js';
 import {validYear,ranks} from '../src/model.js';
+import {validEnvironmentalClassification} from '../src/environment-classifications.js';
 import {referenceMembership} from './geographic-releases.js';
 
 export class RecordError extends Error{constructor(message,status=400){super(message);this.status=status;}}
@@ -25,7 +26,7 @@ const columns={
  media:['id','object_key','sha256','bytes','mime','name','license','attribution','source_id','status','metadata'],
 };
 const tables={retirements:'atlas_evidence_retirements',sources:'atlas_sources',entity_types:'atlas_entity_types',entities:'atlas_entities',categories:'atlas_categories',records:'atlas_attribute_records',names:'atlas_names',relationships:'atlas_relationships',media_links:'atlas_media_links',media:'atlas_media'};
-function normalize(kind,r){
+function normalize(kind,r,{retainedEnvironmentalValue=false}={}){
  if(!r||typeof r!=='object'||Array.isArray(r))fail(`Invalid ${kind} row`);
  const base={...r,id:text(r.id,'stable ID'),metadata:json(object(r.metadata??{}))};
  if(kind==='sources'){
@@ -52,6 +53,7 @@ function normalize(kind,r){
   if(!locationAttributes.includes(r.attribute)||!Object.hasOwn(r,'value')||r.value===undefined)fail('Invalid location attribute');
   const value=r.value;
   if(value!=null){if(r.attribute==='population'){if(!Number.isSafeInteger(value)||value<0)fail('Population must be a nonnegative safe integer');}else text(value,'attribute scalar');}
+  if(!retainedEnvironmentalValue&&!validEnvironmentalClassification(r.attribute,value))fail(`Invalid ${r.attribute} classification; choose a fixed classification ID or label, or null for unknown.`);
   const categorical=['owner','culture','religion'].includes(r.attribute),category_id=r.category_id??null;
   if(categorical&&value!=null&&!category_id)fail('Stable category_id is required');if(category_id!=null&&(!categorical||value==null))fail('Category ID requires a known categorical value');
   if(r.attribute==='rank'&&value!=null&&!ranks.includes(value))fail('Invalid rank');if(r.attribute==='habitation'&&value!=null&&!['inhabited','uninhabited','unknown'].includes(value))fail('Invalid habitation');
@@ -88,7 +90,17 @@ export async function importBatch(db,payload){
  for(const [key,rows] of Object.entries(payload)){
   if(key==='ingestion_id')continue;const kind=aliases[key]??key;
   if(!columns[kind]||kind==='media'||!Array.isArray(rows))fail(`Invalid import collection: ${key}`);
-  (collections[kind]??=[]).push(...rows.map(r=>normalize(kind,r)));
+  const target=collections[kind]??=[];
+  for(const input of rows){
+   // Grandfather only a byte-identical existing claim, never a new arbitrary
+   // classification. Retrying old immutable evidence must remain idempotent.
+   if(kind==='records'&&input&&!validEnvironmentalClassification(input.attribute,input.value)){
+    const retained=normalize(kind,input,{retainedEnvironmentalValue:true});
+    const previous=await first(db.prepare('SELECT * FROM atlas_attribute_records WHERE id=?').bind(retained.id));
+    if(!previous||columns.records.some(key=>(retained[key]??null)!==(previous[key]??null)))fail(`Invalid ${input.attribute} classification; choose a fixed classification ID or label, or null for unknown.`);
+    target.push(retained);
+   }else target.push(normalize(kind,input));
+  }
  }
  const total=Object.values(collections).reduce((n,v)=>n+v.length,0);if(!total||total>250)fail('Import must contain 1–250 rows');
  for(const rows of Object.values(collections))if(new Set(rows.map(r=>r.id)).size!==rows.length)fail('Duplicate stable IDs within an import collection');
