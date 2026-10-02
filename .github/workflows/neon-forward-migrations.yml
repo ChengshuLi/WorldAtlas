@@ -38,20 +38,11 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
         shell: bash
         run: |
-          mode=rehearsal
-          if [ "$EVENT_NAME" = workflow_dispatch ]; then
-            case "$REQUESTED_MODE" in
-              rehearsal|production|verify-only) mode="$REQUESTED_MODE" ;;
-              *) exit 1 ;;
-            esac
-          else
-            while IFS= read -r changed_file; do
-              if [ "$changed_file" = .github/operations/neon-forward-production.json ]; then
-                mode=production
-                break
-              fi
-            done < <(git diff-tree --no-commit-id --name-only -r HEAD)
-          fi
+          [ "$EVENT_NAME" = workflow_dispatch ] || exit 1
+          case "$REQUESTED_MODE" in
+            rehearsal|production|verify-only) mode="$REQUESTED_MODE" ;;
+            *) exit 1 ;;
+          esac
           operation=.github/operations/neon-forward-rehearsal.json
           if [ "$mode" != rehearsal ]; then
             operation=.github/operations/neon-forward-production.json

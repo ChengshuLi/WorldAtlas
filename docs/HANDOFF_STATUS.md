@@ -6,6 +6,12 @@ Authoritative running records: [engineering handover/TODO](ENGINEERING_HANDOFF.m
 
 Primary repository: `https://github.com/ChengshuLi/WorldAtlas`, branch **main**. This file records work that can be continued from Git. A `.cache` path below identifies a local stage only; the accompanying tracked evidence and restoration instructions are the durable handoff. Do not claim a local stage is deployed or silently apply a blocked candidate.
 
+## Main integration and incremental PR policy — 2026-10-02 America/Los_Angeles
+
+[Initial PR #2](https://github.com/ChengshuLi/WorldAtlas/pull/2) imports the complete existing `work` foundation into default branch `main` and closes [ENG-07 / issue #1](https://github.com/ChengshuLi/WorldAtlas/issues/1). The PR's live GitHub merge status is the authoritative integration record. Both updated handovers/prompts require one TODO issue, one GitHub issue and one PR from a fresh `origin/main` lane branch. Broad goals are split into bounded children; completed items retain dates, issue/PR links and evidence.
+
+All 27 affected scope/management regression tests passed locally, including selectors rejecting push events. The initial GitHub handover check passed on source `d4bd80d` (run 36982530319); later PR synchronizations receive their own check before merge. All four provider-management workflows are manual-only. Current invocation context is main, while original authenticated work-branch receipts remain preserved. The production database/Site are unchanged by this Git integration. Receipt: `data/validation/main-pr-policy.json`. The five wider engineering goals remain open.
+
 ## Parallel handover/work-record setup — 2026-10-02 America/Los_Angeles
 
 The two authoritative running documents are `docs/ENGINEERING_HANDOFF.md` and `docs/HISTORY_HANDOFF.md`, each with its copy-ready prompt in `docs/prompts/`. They retain stable TODO IDs, status, actual/unknown raised dates, first-recorded dates, completion dates and evidence. Done items remain in the record. Research may edit its own bounded campaign files and owned tracker rows; engineering owns its separate tracker, source and operational integration. Isolated lane branches submit PRs to **work** for serial integration. This initial setup is pushed on the already authorized integration branch; future routine work follows the lane protocol.

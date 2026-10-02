@@ -38,19 +38,11 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
         shell: bash
         run: |
-          mode=rehearsal
-          if [ "$EVENT_NAME" = workflow_dispatch ]; then
-            case "$REQUESTED_MODE" in
-              rehearsal|production|verify-only) mode="$REQUESTED_MODE" ;;
-              *) exit 1 ;;
-            esac
-          else
-            while IFS= read -r changed; do
-              if [ "$changed" = .github/operations/neon-production-install.json ]; then
-                mode=production
-              fi
-            done < <(git diff-tree --no-commit-id --name-only -r HEAD)
-          fi
+          [ "$EVENT_NAME" = workflow_dispatch ] || exit 1
+          case "$REQUESTED_MODE" in
+            rehearsal|production|verify-only) mode="$REQUESTED_MODE" ;;
+            *) exit 1 ;;
+          esac
           operation=.github/operations/neon-storage-rehearsal.json
           if [ "$mode" != rehearsal ]; then
             operation=.github/operations/neon-production-install.json

@@ -25,7 +25,7 @@ Dates use **America/Los_Angeles**. `Raised` records the actual first request whe
 | ENG-04 | Physical mobile performance validation | open | unknown | 2026-10-02 | — | `docs/FINAL_GRID_ASSESSMENT.md`; actual phone memory/frame-time measurements remain open |
 | ENG-05 | Actual provider allowances, growth controls and measured scaling | open | unknown | 2026-10-02 | — | `docs/LONG_TERM_STORAGE_PLAN.md`; verify configured storage/compute/backup limits before sustained growth |
 | ENG-06 | Concurrent two-lane handovers, running trackers and path guard | done | 2026-10-02 | 2026-10-02 | 2026-10-02 | `data/validation/parallel-handoff-setup.json`; 11 guard tests passed, dated trackers/prompts and trusted-base PR workflow configured |
-| ENG-07 | Establish main baseline and one-issue-per-PR development | active | 2026-10-02 | 2026-10-02 | — | [GitHub issue #1](https://github.com/ChengshuLi/WorldAtlas/issues/1); update both lanes, preserve completed migration, merge the initial foundation PR |
+| ENG-07 | Establish main baseline and one-issue-per-PR development | done | 2026-10-02 | 2026-10-02 | 2026-10-02 | [Issue #1](https://github.com/ChengshuLi/WorldAtlas/issues/1), [initial PR #2](https://github.com/ChengshuLi/WorldAtlas/pull/2), `data/validation/main-pr-policy.json`; one-issue metadata checks, 27 affected tests and manual-only management workflows |
 
 ## Engineering milestones
 
@@ -35,6 +35,8 @@ Dates use **America/Los_Angeles**. `Raised` records the actual first request whe
 ## One TODO issue per PR
 
 Use current `origin/main` for every new issue branch, and target `main` in every PR. Create/reuse one GitHub issue for one stable TODO ID. Split large umbrella goals into bounded child items before starting. Put `TODO: ENG-…` and `Closes #<issue-number>` in the PR body. Complete and merge that issue incrementally, preserve its dates/evidence/PR link, then start the next issue on a fresh branch. The initial work-to-main foundation PR is the sole approved large bootstrap exception.
+
+- **2026-10-02:** ENG-07 adopts `main` for both lanes, with one bounded TODO/GitHub issue per fresh branch and PR. Initial foundation publication is tracked by [PR #2](https://github.com/ChengshuLi/WorldAtlas/pull/2); its GitHub merge state is authoritative. Normal merges do not invoke provider workflows.
 
 ## Work in the engineering lane
 
