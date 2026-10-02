@@ -52,3 +52,7 @@ The exhaustive candidate-grid assessment tests every approved location at fixed 
 ## Checkpoint discipline
 
 Every new claim, correction, source archive and review decision must be pushed to the primary GitHub branch with its supported interval, identity, source hash and status. For large publicly reproducible downloads, commit immutable URLs/hashes and restoration commands; completed compact products and unique intermediate output must be retained. SQLite backups and private credentials are not source handoff assets. Record unresolved blockers before ending a thread. Keep this log and the publication scope current when a stage is installed or published.
+
+## Publication attempt — 2026-10-02 02:05 UTC
+
+The verified Site source `def73f598ec793897b46230937fdffa9787d7a05` was saved, but deployment `appgdep_6abf117769508191b8a9a1f926fb61a7` failed with `incomplete input: SQLITE_ERROR`. Native database inventory confirms that geographic migration 0002 was not applied; the prior production remains available. Local native D1 and all 138 publication checks passed for the same frozen SQL. Hosting migration statement splitting is being diagnosed. The original migration files and stored claims remain unchanged; retry only after a tested transport fix. Receipt: `data/validation/deployment-attempt-2026-10-02.json`.
