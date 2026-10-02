@@ -1,6 +1,6 @@
 # Start a content-only Luna research thread
 
-The ongoing content queue is [HISTORICAL_RESEARCH_TODO.md](HISTORICAL_RESEARCH_TODO.md). The separate maintainer queue is [ENGINEERING_TODO.md](ENGINEERING_TODO.md).
+For the current one-document/one-prompt workflow, use [HISTORY_HANDOFF.md](HISTORY_HANDOFF.md) and [LUNA_HISTORY.txt](prompts/LUNA_HISTORY.txt). These provide the authoritative dated research tracker and concurrent branch rules. Engineering uses its separate [handover](ENGINEERING_HANDOFF.md).
 
 Clone `https://github.com/ChengshuLi/WorldAtlas`, branch **work**. This is the durable handover; no prior workspace or `.cache` is required. The website is https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/ and retains its owner-private audience.
 
@@ -29,7 +29,7 @@ Use sparse supported intervals, not annual location snapshots. A supported 500-y
 - Prepare ordinary factual JSON and lawful source bytes or documented restoration manifests. Compile and validate with the existing scripts; use their documented network-free dry run before importing.
 - Authenticate through the documented private Site mechanism with hidden input. Credentials belong in server secrets, never chat or Git. GitHub's `NEON_API_KEY` is an Actions management credential, not a research-import token.
 - Import bounded content-addressed batches. Verify returned claim IDs, source intervals, selected-year values and receipts. Save progress even if a campaign is interrupted; retain complete original input and hashes.
-- Commit and push source notes, inputs, generated bundles, import/read-back receipts, coverage achieved and unresolved questions to **work** before ending the thread. Do not commit credentials, local databases or caches.
+- Commit and push source notes, inputs, bundles, receipts, coverage and open questions on your own `research/<campaign-id>` branch before ending; open a PR to **work** and update your owned tracker rows. Do not commit credentials, local databases or caches.
 
 The production platform is writable and has preserved its existing 3,984 historical claims and 28 archives. All 22 retained prepared batches replayed without changing revision 1321 or its snapshot fingerprint. Future successful imports will advance that revision; it is not a fixed requirement for new research.
 

@@ -1,8 +1,14 @@
 # Handoff and continuation log
 
-Separate ongoing queues: [engineering TODO](ENGINEERING_TODO.md) for technical maintainers and [historical research TODO](HISTORICAL_RESEARCH_TODO.md) for Luna content threads. Both queues must retain progress and blockers in Git.
+Authoritative running records: [engineering handover/TODO](ENGINEERING_HANDOFF.md) and [historical handover/TODO](HISTORY_HANDOFF.md), each with a copy-ready prompt under `docs/prompts/`. Retain open/done items, dates and evidence. [The parallel protocol](PARALLEL_WORK_PROTOCOL.md) separates lane branches, owned progress and serial integration; older direct-to-work instructions below are historical and superseded.
 
 Primary repository: `https://github.com/ChengshuLi/WorldAtlas`, branch **work**. This file records work that can be continued from Git. A `.cache` path below identifies a local stage only; the accompanying tracked evidence and restoration instructions are the durable handoff. Do not claim a local stage is deployed or silently apply a blocked candidate.
+
+## Parallel handover/work-record setup — 2026-10-02 America/Los_Angeles
+
+The two authoritative running documents are `docs/ENGINEERING_HANDOFF.md` and `docs/HISTORY_HANDOFF.md`, each with its copy-ready prompt in `docs/prompts/`. They retain stable TODO IDs, status, actual/unknown raised dates, first-recorded dates, completion dates and evidence. Done items remain in the record. Research may edit its own bounded campaign files and owned tracker rows; engineering owns its separate tracker, source and operational integration. Isolated lane branches submit PRs to **work** for serial integration. This initial setup is pushed on the already authorized integration branch; future routine work follows the lane protocol.
+
+The trusted-base PR scope checker and 11 focused tests verify path ownership, tracker ownership/date preservation, retained completions, rename-source checks and concurrent base advancement. Templates and an actual setup progress record are retained under `coordination/`. The workflow is configured, but no live PR run or required GitHub branch protection is claimed. No Site runtime, schema or historical fact changed. Receipt: `data/validation/parallel-handoff-setup.json`; protocol: `docs/PARALLEL_WORK_PROTOCOL.md`.
 
 ## Latest operational checkpoint — 2026-10-02 UTC
 

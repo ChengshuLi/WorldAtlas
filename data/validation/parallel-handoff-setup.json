@@ -1,0 +1,63 @@
+{
+  "recorded_at_utc": "2026-10-02T07:51:09Z",
+  "date_timezone": "America/Los_Angeles",
+  "recorded_on": "2026-10-02",
+  "scope": "Concurrent engineering/research handovers and retained dated TODO/work records",
+  "engineering_document": "docs/ENGINEERING_HANDOFF.md",
+  "engineering_prompt": "docs/prompts/ENGINEERING.txt",
+  "research_document": "docs/HISTORY_HANDOFF.md",
+  "research_prompt": "docs/prompts/LUNA_HISTORY.txt",
+  "protocol": "docs/PARALLEL_WORK_PROTOCOL.md",
+  "integration_branch": "work",
+  "lane_branches": [
+    "engineering/<job-id>",
+    "research/<campaign-id>"
+  ],
+  "owned_progress": [
+    "coordination/engineering/<job-id>.json",
+    "research/campaigns/<campaign-id>/progress.json"
+  ],
+  "retained_item_fields": [
+    "stable ID",
+    "scope",
+    "status",
+    "raised date",
+    "first-recorded date",
+    "completion date",
+    "evidence"
+  ],
+  "unknown_earlier_dates_invented": false,
+  "guard": {
+    "script": "scripts/check-handoff-scope.mjs",
+    "sha256": "5783844a438e22107a56e702c96b2cec13c3aa1a6db4cce63a1b9f950e1937a3",
+    "tests_passed": 11,
+    "tests_failed": 0,
+    "tests_skipped": 0,
+    "checks": [
+      "lane path ownership",
+      "own campaign tracker rows only",
+      "retain original dates and completed rows",
+      "real git rename source paths",
+      "concurrent integration branch advance through merge-base"
+    ]
+  },
+  "ci": {
+    "workflow": ".github/workflows/handoff-scope.yml",
+    "trusted_base_execution": true,
+    "repository_permissions": "read-only",
+    "provider_secrets_required": false,
+    "configured": true,
+    "executed_on_github": false,
+    "branch_protection_configured": false
+  },
+  "database_coordination": "Existing release-pinned, bounded idempotent imports and publication transaction locking; owner maintenance uses read-only gating and in-flight draining",
+  "new_database_migration_required": false,
+  "website_runtime_changed": false,
+  "existing_history_changed": false,
+  "limitations": [
+    "PR integration is serial; real conflicts retain both lanes rather than choose a side wholesale",
+    "Path checks are Git/document ownership checks, not historical truth checks or per-thread database authorization",
+    "Physical device and wider engineering queue remain open"
+  ],
+  "credentials_logged": false
+}

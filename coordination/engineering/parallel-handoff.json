@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "lane": "engineering",
+  "job_id": "parallel-handoff",
+  "branch": "work",
+  "base_work_commit": "5beecba",
+  "status": "complete",
+  "raised_on": "2026-10-02",
+  "recorded_on": "2026-10-02",
+  "completed_on": "2026-10-02",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "ENG-06"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-02T07:51:09Z",
+  "completed": [
+    "Two entry documents and copy-ready prompts",
+    "Retained dated TODO/work trackers",
+    "Isolated lane ownership and serial integration protocol",
+    "Trusted-base PR scope workflow and 11 passing tests"
+  ],
+  "checks": [
+    {
+      "command": "node --test test/handoff-scope.test.mjs",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/validation/parallel-handoff-setup.json"
+  ],
+  "blockers": [],
+  "next_action": "Push this authorized setup to work; future threads use isolated lane branches.",
+  "pull_request": null,
+  "bootstrap_integration": true
+}
