@@ -1,0 +1,137 @@
+{
+  "recorded_at_utc": "2026-10-02T07:19:52Z",
+  "scope": "Validated writable historical-content research platform; wider atlas completion remains open",
+  "research_platform_ready": true,
+  "all_atlas_goals_complete": false,
+  "repository": "https://github.com/ChengshuLi/WorldAtlas",
+  "branch": "work",
+  "deployed_primary_engineering_sha": "cf8769a039267407fdaab1d3bf0d8ad6ef8cef42",
+  "sites_source_sha": "c7c0b08bac068c9fd872bffcff3d104ff742b356",
+  "publication": {
+    "project_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db",
+    "version": 18,
+    "version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_d8637da8155481919317c7a2545bbbe8",
+    "deployment_id": "appgdep_6abf573be0948191a5517d0b2cbe7948",
+    "status": "succeeded",
+    "url": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+    "environment_revision": 3,
+    "succeeded_at_utc": "2026-10-02T07:03:34.504392+00:00",
+    "audience": "owner-private",
+    "backend": "postgres-plus-r2",
+    "imports_enabled": true,
+    "application_role": "worldatlas_app",
+    "credentials_server_only": true
+  },
+  "neon": {
+    "project_id": "weathered-lab-37571695",
+    "branch_id": "br-summer-butterfly-ar8qikk5",
+    "database": "neondb",
+    "postgres_version": 18,
+    "production_migration_run": 36973747147,
+    "forward_migrations_run": 36974831053,
+    "forward_migrations": [
+      "0001_temporal_geography",
+      "0002_footprint_versions"
+    ],
+    "factual_table_count": 23,
+    "original_ingestion_revision": 1321,
+    "latest_database_bytes": 319209472,
+    "operational_budget_bytes": 536870912,
+    "operational_budget_is_provider_quota": false,
+    "managed_plan_quota_verified": false
+  },
+  "preservation": {
+    "original_claims": 3984,
+    "names": 3588,
+    "attribute_records": 396,
+    "media_objects": 28,
+    "media_object_bytes": 16199861,
+    "geographic_releases": 2,
+    "original_raw_json_and_sequence_preserved": true,
+    "frozen_original_checkpoint": "data/storage-checkpoints/d1-revision-1321",
+    "all_existing_import_batches_replayed": 22,
+    "replay_changed_revision": false,
+    "replay_changed_snapshot": false,
+    "new_historical_claims_added": 0
+  },
+  "capabilities": {
+    "mapSnapshots": 1,
+    "datedGeography": 1,
+    "datedFootprints": 0,
+    "storageExport": 2
+  },
+  "validation": {
+    "functional_suite": {
+      "passed": 394,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "Final functional inputs; subsequent Site packaging change verified separately"
+    },
+    "site_packaging": {
+      "passed": 5,
+      "failed": 0
+    },
+    "focused_browser": {
+      "passed": 3,
+      "failed": 0
+    },
+    "live_api": {
+      "fact_table_routes": 23,
+      "years": [
+        -3000,
+        -1,
+        1,
+        1000,
+        1800,
+        2025,
+        2026
+      ],
+      "stable_revision_and_pins": true
+    },
+    "live_browser": {
+      "continents": 6,
+      "profiles": 6,
+      "map_modes": 14,
+      "year": 1800,
+      "attributes_per_profile": 8,
+      "hierarchy_tiers": 6,
+      "page_errors": 0,
+      "navigation_ownership_compilations": 0,
+      "navigation_ownership_uploads": 0,
+      "physical_mobile_test": false
+    }
+  },
+  "deployment_assets": {
+    "file_bytes": 267522088,
+    "archive_bytes": 185045912,
+    "uncompressed_archive_bytes": 267868160,
+    "uncompressed_limit_bytes": 268435456,
+    "archive_sha256": "97514461262d1d037e83307959f6adff24651f69d554269a2919dfc8ba77f57e",
+    "research_database_content_packaged_as_website_assets": false
+  },
+  "evidence_receipts": [
+    "data/validation/neon-production-storage-migration.json",
+    "data/validation/neon-production-forward-migrations.json",
+    "data/validation/neon-production-site-preservation.json",
+    "data/validation/neon-live-forward-api.json",
+    "data/validation/neon-final-api-maintenance.json",
+    "data/validation/neon-final-api-writable.json",
+    "data/validation/neon-final-import-replay.json",
+    "data/validation/neon-final-live-browser.json"
+  ],
+  "luna_start": "docs/LUNA_START_HERE.md",
+  "luna_scope": "Source research, factual sparse evidence preparation, bounded content imports, verification and durable Git notes. No coding, deployments, schema changes, geographic releases or infrastructure.",
+  "open_maintainer_work": [
+    "Dated-footprint browser/version-cache/renderer integration (capability remains zero)",
+    "Install three validated hierarchy candidates through an identity-preserving reviewed release",
+    "Resolve blocked Namibia and other source-based geographic repairs; complete worldwide semantic approval",
+    "Complete physical mobile memory/frame-time validation",
+    "Measure and implement scaling, partitioning and larger-media transport when capacity requires it"
+  ],
+  "open_content_work": [
+    "Expand historical names and sourced attribute intervals",
+    "Research historical environmental coverage without widening original modern reference evidence",
+    "Resume retained incomplete population preparation only after source/output validation"
+  ],
+  "credentials_logged": false
+}
