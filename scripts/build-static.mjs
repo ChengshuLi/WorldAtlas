@@ -64,7 +64,7 @@ try {
   for(let i=0;i<reference.temporal.history.length;i+=5000){const path=`geography/history-${i/5000}.json.gz`;temporalHistoryParts.push(path);await fs.writeFile(`dist/${path}`,gzipSync(JSON.stringify(reference.temporal.history.slice(i,i+5000))));}
   const geographicRelease=JSON.parse(await fs.readFile('data/geographic-releases/index.json','utf8')).releases.at(-1);
   if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
-  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({type:reference.type,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
+  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
   await fs.cp('data/ownership-history','dist/ownership-history',{recursive:true});
   await fs.cp('data/ownership-runtime','dist/ownership-runtime',{recursive:true});
@@ -83,6 +83,11 @@ try {
   }
   await fs.copyFile('data/geographic-migration-archive.json.gz','dist/geographic-migration-archive.json.gz');
   for(const name of ['global-semantic-closure.json.gz','macro-boundary-migration.json.gz','final-grid-resolution-review.json.gz'])if(await fs.access(`data/${name}`).then(()=>true,()=>false))await fs.copyFile(`data/${name}`,`dist/${name}`);
+  for(const file of new Map(Object.values(reference.sourceQualityReviews).flatMap(review=>review.public_evidence_files??[]).map(file=>[file.path,file])).values()){
+    if(!/^[\w./-]+$/.test(file.path)||file.path.split('/').includes('..'))throw Error('Invalid public review evidence path');
+    const bytes=await fs.readFile(`data/${file.path}`);if(createHash('sha256').update(bytes).digest('hex')!==file.sha256)throw Error('Public review evidence hash mismatch');
+    await fs.mkdir('dist/'+file.path.split('/').slice(0,-1).join('/'),{recursive:true});await fs.writeFile(`dist/${file.path}`,bytes);
+  }
   await fs.writeFile('dist/geographic-migration-review.json.gz',gzipSync(await fs.readFile('data/geographic-migration-review.json'),{level:9}));
   for(const file of ['world-review.json','global-refinement-report.json','source-inventory.json','pixel-audit.json','regional-membership-report.json','border-parent-review.json','attribute-sources.json','reference-polity-report.json','settlement-source-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);
   for(const file of ['administrative-sources.json','granularity-report.json','hierarchy-report.json','semantic-report.json','granularity-audit.json','location-policy.json','coverage-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);

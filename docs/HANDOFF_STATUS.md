@@ -6,6 +6,14 @@ Primary repository: `https://github.com/ChengshuLi/WorldAtlas`, branch **work**.
 
 Finish the code, contracts, geographic foundation, migrations, grid, coverage reporting and publication checks. Broad historical expansion is paused at the user's request. Preserve completed historical work and prepare GPT 6 Luna to add sourced content through the stable API. Antarctica is excluded; EU5 counts are granularity references.
 
+## Current installed checkpoint — 2026-10-02 UTC
+
+The reviewed geography is installed locally, not yet deployed: **49,589 locations → 5,133 provinces → 471 areas → 66 regions → 29 subcontinents → six continents**. The fixed resolution-10 grid represents all 49,589 locations. Footprint SHA256: `5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8`; hierarchy SHA256: `bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58`. Active ownership has 6,833,837 intervals and environmental references have 346,167 tuples; removed-footprint records remain in immutable archives.
+
+The final audit inventories all 49,589 locations, 5,705 parent groups, 250 current reference-owner groups and 201 source-policy profiles, with zero unmatched policies. The earlier 252 source-territory groups include ASM and MNP, now separately crosswalked under the USA owner group; these are not omitted territories. Structural checks pass. All local-purpose/island-completeness approvals and all 5,705 full branch approvals remain open; 486 independently supported group boundaries do not approve descendants. Closure SHA256: `3189ad65022098dbe8a27d794a7a5fe0d4e4bc6ddcf8ce2ae5e947782c34cbda`.
+
+Migrations 0005 and 0006 harden provenance and unresolved-value constraints. Populated native D1 preservation checks are recorded in `docs/STRUCTURAL_VALIDATION.md`; final matching full-suite, browser and deployment checks remain pending. Previous production remains the earlier milestone until a deployment receipt below says otherwise.
+
 ## Completed content retained in Git
 
 | Product | Retained result | Continuation |

@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 
 process.chdir(fileURLToPath(new URL('..',import.meta.url)));
 const phase=process.argv[2]??'contracts';
-const contracts=['migration-hashes','attributes','temporal','unsettled-rank','evidence-suppression','hosted-records','prepared-evidence','hosted-evidence-availability','geographic-releases','boundary-version-hash','reference-archive'];
+const contracts=['migration-hashes','attributes','temporal','unsettled-rank','unresolved-attributes','evidence-suppression','hosted-records','prepared-evidence','hosted-evidence-availability','geographic-releases','boundary-version-hash','reference-archive'];
 const jobs={
  contracts:[[process.execPath,['--test',...contracts.map(name=>`test/${name}.test.mjs`)]]],
  scientific:[...fs.readdirSync('test').filter(name=>name.endsWith('.py')).sort().map(name=>[process.env.ATLAS_PYTHON??'python3',[`test/${name}`]]),[process.env.ATLAS_PYTHON??'python3',['scripts/prepare-ghsl-population.py','--self-test']]],

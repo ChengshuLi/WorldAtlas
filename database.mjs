@@ -7,6 +7,7 @@ import {migrateReference} from './reference.mjs';
 import {restoreReferenceArchive} from './reference-archive.mjs';
 import {restoreGeographicRepairArchive} from './geographic-archive.mjs';
 import { DatabaseSync } from 'node:sqlite';
+import {createHash} from 'node:crypto';
 import fs from 'node:fs';
 import { attributes, levels, ranks, validYear } from './src/model.js';
 import { migrateHierarchy, validateHierarchy } from './hierarchy.mjs';
@@ -121,7 +122,10 @@ export function seedDatabase(db) {
 }
 export function geography(db) {
   const units=db.prepare('WITH RECURSIVE used(id) AS (SELECT parent_id FROM locations WHERE active=1 UNION SELECT u.parent_id FROM units u JOIN used x ON u.id=x.id WHERE u.parent_id IS NOT NULL) SELECT * FROM units WHERE id IN (SELECT id FROM used)').all();
-  return { type: 'FeatureCollection', temporal:temporalCatalog(db), units: units.map(u=>({...u,metadata:JSON.parse(u.metadata)})), features: db.prepare('SELECT * FROM locations WHERE active=1').all().map(({geometry, metadata, ...properties}) => ({type: 'Feature', id: properties.id, properties:{...properties,metadata:JSON.parse(metadata)}, geometry: JSON.parse(geometry)})) };
+  const features=db.prepare('SELECT * FROM locations WHERE active=1').all().map(({geometry, metadata, ...properties}) => ({type: 'Feature', id: properties.id, properties:{...properties,metadata:JSON.parse(metadata)}, geometry: JSON.parse(geometry)}));
+  const reviewIndex=new URL('./data/source-quality-reviews/index.json',import.meta.url),sourceQualityReviews={};
+  if(fs.existsSync(reviewIndex)){const index=JSON.parse(fs.readFileSync(reviewIndex)),byId=new Map(features.map(f=>[f.id,f]));for(const part of index.parts){if(!/^[\w./-]+\.json$/.test(part.path)||part.path.split('/').includes('..'))throw Error('Invalid source-review path');const raw=fs.readFileSync(new URL(`./data/${part.path}`,import.meta.url));if(createHash('sha256').update(raw).digest('hex')!==part.sha256)throw Error('Source-review hash mismatch');const plan=JSON.parse(raw);for(const row of plan.feature_annotations){const f=byId.get(row.id),p=f?.properties,m=p?.metadata,e=row.expected;if(p?.name===e.name&&p.parent_id===e.parent_id&&m?.source_id===e.source_id&&m.reference_year===e.reference_year&&JSON.stringify(m.source_member_ids??[])===JSON.stringify(e.source_member_ids))sourceQualityReviews[row.id]=row.metadata_patch.source_quality_review;}}}
+  return { type: 'FeatureCollection', sourceQualityReviews, temporal:temporalCatalog(db), units: units.map(u=>({...u,metadata:JSON.parse(u.metadata)})), features };
 }
 export function snapshot(db, year, examples = false,sourceEvidence=false) {
   if (!validYear(year)) throw new Error('Year must be between 3000 BC and 2026 AD, excluding zero');

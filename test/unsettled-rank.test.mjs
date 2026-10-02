@@ -13,7 +13,7 @@ const resolved=records=>resolveAttributes(features,1050,{records}).get('l');
 const geometry={type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]};
 const units=[{id:'c',name:'c',level:'continent'},{id:'s',name:'s',level:'subcontinent',parent_id:'c'},{id:'r',name:'r',level:'region',parent_id:'s'},{id:'a',name:'a',level:'area',parent_id:'r'},{id:'p',name:'p',level:'province',parent_id:'a'}];
 class D1{
- constructor({beforeRank=false,beforePrecision=false}={}){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const f of readdirSync(new URL('../drizzle/',import.meta.url)).filter(f=>f.endsWith('.sql')&&(!beforeRank||Number(f.slice(0,4))<3)&&(!beforePrecision||Number(f.slice(0,4))<4)).sort())this.sqlite.exec(readFileSync(new URL(`../drizzle/${f}`,import.meta.url),'utf8'));}
+ constructor({beforeRank=false,beforePrecision=false,beforeSourceClass=false}={}){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const f of readdirSync(new URL('../drizzle/',import.meta.url)).filter(f=>f.endsWith('.sql')&&(!beforeRank||Number(f.slice(0,4))<3)&&(!beforePrecision||Number(f.slice(0,4))<4)&&(!beforeSourceClass||Number(f.slice(0,4))<5)).sort())this.sqlite.exec(readFileSync(new URL(`../drizzle/${f}`,import.meta.url),'utf8'));}
  prepare(sql){const sqlite=this.sqlite;let args=[];return {bind(...values){args=values;return this;},async all(){return {results:sqlite.prepare(sql).all(...args)};},async first(){return sqlite.prepare(sql).get(...args)??null;},run(){return {meta:{changes:Number(sqlite.prepare(sql).run(...args).changes)}};}};}
  async batch(statements){this.sqlite.exec('BEGIN IMMEDIATE');try{const result=statements.map(s=>s.run());this.sqlite.exec('COMMIT');return result;}catch(error){this.sqlite.exec('ROLLBACK');throw error;}}
 }
@@ -75,6 +75,49 @@ test('0004 precision migration preserves claims, retirements, indexes and all ot
   await importBatch(db,{retirements:[{id:'retire-pop',collection:'records',target_id:'original-pop',source_id:'review',reason:'Correction'}],records:[hosted(record('model-zero','population',0,{metadata:{estimate:true}})),hosted(record('inhabited','habitation','inhabited'))]});
   assert.equal(resolveAttributes(features,1050,{records:(await attributesAt(db,1050)).records}).get('l').rank,null);
   await importBatch(db,{retirements:['model-zero','inhabited'].map(id=>({id:`retire:${id}`,collection:'records',target_id:id,source_id:'review',reason:'Correction'})),records:[hosted(record('literal-zero','population',0))]});
+  assert.equal(resolveAttributes(features,1050,{records:(await attributesAt(db,1050)).records}).get('l').rank,'unsettled');
+  assert.equal((await evidenceHistory(db,'records','original-rank')).status,'withdrawn');
+  assert.throws(()=>db.sqlite.exec("UPDATE atlas_attribute_records SET value='1' WHERE id='original-pop'"),/append-only/);
+ }finally{db.sqlite.close();}
+});
+
+test('source classes protect literal-zero evidence and example opt-in at the SQL boundary',async()=>{
+ const db=await hostedFixture();try{
+  await importBatch(db,{sources:['estimate','reference','example'].map(status=>({id:`class:${status}`,name:`${status} source`,url:'https://example.org/source-class',license:'CC0',vintage:'Test source',supported_from:1000,supported_to:1100,status}))});
+  for(const sourceClass of ['estimate','reference'])await assert.rejects(importBatch(db,{records:[{...hosted(record(`bad:${sourceClass}`,'population',0)),source_id:`class:${sourceClass}`}]}),/Source class/);
+  const claim={...hosted(record('example-zero','population',0)),source_id:'class:example'};
+  await assert.rejects(importBatch(db,{records:[claim]}),/opt-in/);
+  assert.throws(()=>db.sqlite.prepare('INSERT INTO atlas_attribute_records(id,location_id,attribute,value,valid_from,valid_to,method,status,source_id,is_example,metadata) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run('raw-example','l','population','0',1000,1100,'direct','sourced','class:example',0,'{}'),/opt-in/);
+  await assert.rejects(importBatch(db,{names:[{id:'example-name',entity_id:'l',name:'Fictional name',valid_from:1000,valid_to:1100,source_id:'class:example',is_example:0}]}),/opt-in/);
+  await importBatch(db,{records:[{...claim,is_example:1}]});
+  assert.equal((await attributesAt(db,1050)).records.length,0);
+  const rows=(await attributesAt(db,1050,{examples:true})).records;
+  assert.equal(rows[0].source_status,'example');assert.equal(resolveAttributes(features,1050,{records:rows,examples:true}).get('l').rank,null);
+  await importBatch(db,{records:[{...hosted(record('example-city','rank','city')),source_id:'class:example',is_example:1}]});
+  assert.equal(resolveAttributes(features,1050,{records:(await attributesAt(db,1050,{examples:true})).records,examples:true}).get('l').rank,'city');
+ }finally{db.sqlite.close();}
+ const reverse=await hostedFixture();try{
+  await importBatch(reverse,{sources:[{id:'class:example',name:'Example source',url:'https://example.org/source-class',license:'CC0',vintage:'Test source',supported_from:1000,supported_to:1100,status:'example'}],records:[{...hosted(record('example-city','rank','city')),source_id:'class:example',is_example:1}]});
+  await importBatch(reverse,{records:[{...hosted(record('example-zero','population',0)),source_id:'class:example',is_example:1}]});
+  assert.equal(resolveAttributes(features,1050,{records:(await attributesAt(reverse,1050,{examples:true})).records,examples:true}).get('l').rank,'city');
+ }finally{reverse.sqlite.close();}
+});
+
+test('0005 source-class migration preserves claims and retirement-aware contracts while matching example-zero resolution',async()=>{
+ const db=await hostedFixture({beforeSourceClass:true});try{
+  await importBatch(db,{sources:[{id:'class:example',name:'Example source',url:'https://example.org/source-class',license:'CC0',vintage:'Test source',supported_from:1000,supported_to:1100,status:'example'}],records:[hosted(record('original-pop','population',42)),hosted(record('original-rank','rank','city'))]});
+  await importBatch(db,{retirements:[{id:'retire-original-rank',collection:'records',target_id:'original-rank',source_id:'review',reason:'Correction fixture'}]});
+  const rows=table=>JSON.stringify(db.sqlite.prepare(`SELECT * FROM ${table} ORDER BY id`).all()),before=rows('atlas_attribute_records'),retirements=rows('atlas_evidence_retirements');
+  const definitions=()=>db.sqlite.prepare("SELECT type,name,sql FROM sqlite_master WHERE type IN ('index','trigger') ORDER BY type,name").all(),objects=definitions();
+  db.sqlite.exec(readFileSync(new URL('../drizzle/0005_population_source_class_guard.sql',import.meta.url),'utf8'));
+  assert.equal(rows('atlas_attribute_records'),before);assert.equal(rows('atlas_evidence_retirements'),retirements);
+  const after=definitions();assert.deepEqual(after.map(({type,name})=>({type,name})),objects.map(({type,name})=>({type,name})));
+  assert.deepEqual(after.filter(row=>row.name!=='atlas_attribute_contract'),objects.filter(row=>row.name!=='atlas_attribute_contract'));
+  assert.deepEqual(db.sqlite.prepare('PRAGMA foreign_key_check').all(),[]);
+  const example={source_id:'class:example',is_example:1};
+  await importBatch(db,{records:[{...hosted(record('example-zero','population',0)),...example},{...hosted(record('example-city','rank','city')),...example}]});
+  assert.equal(resolveAttributes(features,1050,{records:(await attributesAt(db,1050,{examples:true})).records,examples:true}).get('l').rank,'city');
+  await importBatch(db,{retirements:[{id:'retire-original-pop',collection:'records',target_id:'original-pop',source_id:'review',reason:'Correction fixture'}],records:[hosted(record('literal-zero','population',0))]});
   assert.equal(resolveAttributes(features,1050,{records:(await attributesAt(db,1050)).records}).get('l').rank,'unsettled');
   assert.equal((await evidenceHistory(db,'records','original-rank')).status,'withdrawn');
   assert.throws(()=>db.sqlite.exec("UPDATE atlas_attribute_records SET value='1' WHERE id='original-pop'"),/append-only/);

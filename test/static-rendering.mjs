@@ -52,6 +52,32 @@ try{
   assert.ok(hostedRequests.every(url=>new URL(url).searchParams.get('scope')==='map'),'atlas queries only map-relevant names and attributes');
   assert.deepEqual(errors,[]);console.log('PASS: cold outages keep geography browsable with unknown attributes; partial outages retain complete same-year snapshots; API recovery and default borders work.');
  }
+ const fields=['Owner','Population','Primary culture','Primary religion','Location rank','Topography','Vegetation','Climate'];
+ const profiles=[['Hong Kong','atlas:territory:HKG','Asia'],['London','atlas:city:GBR-Greater London','Europe'],['New York City','atlas:city:USA-New-York-City','North America'],['São Paulo','gb:BRA:ADM2:56859067B92864763247255','South America'],['Cairo','atlas:city:EGY-1533','Africa'],['Melbourne','gb:AUS:ADM2:25037944B74771981745191','Oceania'],['Kabe','gb:NAM:ADM2:8085530B93169958876618','Africa']];
+ for(const viewport of [{width:1440,height:1080},{width:390,height:844}]){
+  await page.setViewportSize(viewport);
+  for(const [query,id,continent] of profiles){
+   await page.locator('#search').fill(query);await page.locator(`[data-result="${id}"]`).click();
+   const main=page.locator('.profile-main'),evidence=page.locator('.profile-evidence');
+   assert.equal(await main.locator('.breadcrumbs [data-unit]').count(),6);assert.match(await main.locator('.breadcrumbs').textContent(),new RegExp(continent));
+   assert.deepEqual(await main.locator('dt').allTextContents(),fields);assert.equal(await main.locator('dd').count(),8);
+   assert.ok((await main.locator('dd').allTextContents()).every(value=>value.trim().length));
+   assert.match(await main.locator('.profile-name-context').textContent(),/^Present-day reference: .+/);
+   assert.doesNotMatch(await main.innerText(),/Historical name unknown|Reference location|Habitation|Source date|Source coverage|Method:|License:|review notes|source geometry|ILLUSTRATIVE|DERIVED OWNERSHIP|NO DATED RECORD|\bNAM\b/);
+   assert.equal(await page.locator('#details details').count(),1);assert.equal(await evidence.evaluate(element=>element.open),false);
+   assert.equal(await evidence.locator('.profile-evidence-content').isVisible(),false);assert.ok(await evidence.locator('a').count()>0);
+   await evidence.locator(':scope > summary').click();assert.equal(await evidence.locator('.profile-evidence-content').isVisible(),true);
+   assert.ok((await evidence.locator('a').evaluateAll(items=>items.map(item=>item.href))).every(url=>/^https?:\/\//i.test(url)));
+   assert.equal(await page.locator('#details').evaluate(element=>element.scrollWidth<=element.clientWidth),true);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+   await evidence.locator(':scope > summary').click();
+  }
+ }
+ await page.setViewportSize({width:1440,height:1080});
+ for(const mode of ['owner','population','culture','religion','rank','topography','vegetation','climate','location','province','area','region','subcontinent','continent']){
+  await page.locator(`[data-mode="${mode}"]`).click();assert.equal(await page.locator(`[data-mode="${mode}"]`).getAttribute('aria-pressed'),'true');
+ }
+ await page.locator('[data-mode="owner"]').click();assert.deepEqual(errors,[]);
+ console.log('PASS: built profiles across all six continents and Namibia keep exactly eight attributes, six tiers and collapsed citations without desktop/mobile overflow; all 14 modes respond.');
  if(process.env.ATLAS_TEST_STORAGE_ONLY!=='1'){
  assert.ok(requests.some(url=>url.endsWith('/ownership-runtime/index.json')),'modern view checks the ownership coverage interval');
  assert.ok(!requests.some(url=>/ownership-(?:history\/(?:part-|evidence)|runtime\/century)/.test(url)),'2026 must not download historical intervals or evidence');

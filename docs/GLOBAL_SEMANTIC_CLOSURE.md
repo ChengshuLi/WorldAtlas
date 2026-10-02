@@ -2,11 +2,11 @@
 
 `python scripts/review-global-semantic-closure.py` evaluates every current location, parent group, reference-owner group and country-policy profile. Its output is `data/global-semantic-closure.json.gz`. It reads the six independently prepared continent inspections and the current, migrated hierarchy. It never changes geography or historical records.
 
-The first run covers 49,614 locations, 5,703 geographic groups, 252 reference-owner groups and 201 policy profiles. It is an exhaustive **review inventory and diagnostic pass**. It is not semantic approval of the world. The output deliberately distinguishes `audit_complete` from `semantic_complete`.
+The post-install run covers 49,589 locations, 5,705 geographic groups, 250 reference-owner groups and 201 policy profiles. The original six frozen source-inspection inventories describe the earlier 49,614-location snapshot; current IDs are reconciled through explicit stable identities and migration predecessor crosswalks. It is an exhaustive **review inventory and diagnostic pass**. It is not semantic approval of the world. The output deliberately distinguishes `audit_complete` from `semantic_complete`.
 
 ## What is checked
 
-Each location has thirteen individually recorded checks: complete adjacent-tier membership; a valid positive-area land footprint; nonoverlapping interiors; published source role; source vintage/license; independently justified local geographic purpose; neighboring granularity; urban fragmentation; anonymous remainders; disconnected parts; repeated original source identities; source omissions/islands; and parent correspondence.
+Each location has fourteen individually recorded checks: externally filed source-quality issues; complete adjacent-tier membership; a valid positive-area land footprint; nonoverlapping interiors; published source role; source vintage/license; independently justified local geographic purpose; neighboring granularity; urban fragmentation; anonymous remainders; disconnected parts; repeated original source identities; source omissions/islands; and parent correspondence.
 
 Areas use a WGS84 ellipsoidal polygon diagnostic with hole areas removed. Actual spatial intersections identify adjacent territories, point contacts and overlapping interiors. These diagnostics are separate from the precise antimeridian-safe historical ownership preparer. Latitude-dependent visual sizes are not used as territorial-size evidence.
 
@@ -14,7 +14,7 @@ A 20-fold contrast against adjacent-location median area, or a territory exceedi
 
 Original source atoms are reconstructed from stable `source_member_ids` when an adaptation changes the collection name. A shared source atom raises a fragmentation question. It never forces a merge: named physical subdivisions can legitimately share their original administrative envelope. Dedicated source-union research supplies corrections for artificial political-mask partitions separately.
 
-Each parent group receives checks for its member-derived footprint, independently supported tier purpose, repeated/coextensive tiers, remaining boundary questions and independently reviewed children. One supported boundary cannot close an unresolved branch. The six-continent source inventories are evidence of what was inspected, not blanket approval of their descendants.
+Each parent group receives checks for externally filed source-quality issues, its member-derived footprint, independently supported tier purpose, repeated/coextensive tiers, remaining boundary questions and independently reviewed children. One supported boundary cannot close an unresolved branch. The six-continent source inventories are evidence of what was inspected, not blanket approval of their descendants.
 
 ## Completion and publication
 
@@ -35,7 +35,15 @@ Eleven focused gate tests run with `python test/global-semantic-closure.py`. The
 5. Resolve all repeated/coextensive tiers with either a meaningful sourced intermediate grouping or an explicit compact-territory exception.
 6. Resolve missing-island/source-land evidence independently of pixel representation. A grid covering every current polygon cannot prove that the source contained every island.
 
-The machine-readable file contains every individual outcome and source-review pointer, plus the full 201-profile ↔ 252-reference-owner crosswalk and unmatched lists. No country or continent is exempted because it was not a user example.
+The machine-readable file contains every individual outcome and source-review pointer, plus the full 201-profile ↔ 250-reference-owner crosswalk and unmatched lists. No country or continent is exempted because it was not a user example.
+
+## Source-quality issues outside canonical geography
+
+The Namibia source-quality plan is validated against all 111 current locations, all 24 affected ancestor groups and four retained evidence assets. `source_quality_review` is attached to the external world-review records and propagated to the closure gate. Neither hierarchy metadata nor location geometry is rewritten. The candidate licensed 107-constituency replacement remains blocked by unresolved neighbor/source-land differences; it does not prove modern 121-constituency coverage. Each filed issue stays open, including individually plausible labels. Independent generic semantic resolutions cannot override this guard.
+
+Reference-owner groups and source-country profiles remain separate concepts. The current sovereignty labels combine American Samoa and Northern Mariana Islands into the United States owner group; the source crosswalk preserves ASM and MNP explicitly. Every one of the 201 country policies has a represented source-country crosswalk.
+
+Run `python scripts/review-framework.py --report-only` before the granularity/world/closure report sequence. Report-only mode derives current immediate child counts and aggregate review diagnostics without touching the frozen hierarchy, source policy, catalog or footprint. Report-only is also the default. The explicit legacy `--update-metadata` mode is unsuitable for a frozen published generation.
 
 ## Every current region
 
@@ -54,11 +62,11 @@ Each of the 66 region branches below has every current location tested. The meas
 | Central China | 307 | 1 | 0 | 6 | 0 |
 | Central Europe | 1385 | 39 | 70 | 63 | 0 |
 | East China | 512 | 2 | 1 | 26 | 0 |
-| East Tropical Africa | 581 | 14 | 38 | 37 | 0 |
-| Eastern European Plain | 2010 | 134 | 95 | 85 | 0 |
+| East Tropical Africa | 728 | 14 | 44 | 43 | 0 |
+| Eastern European Plain | 2007 | 133 | 96 | 85 | 0 |
 | Equatorial Micronesia | 3 | 0 | 2 | 2 | 0 |
 | France | 323 | 1 | 17 | 7 | 0 |
-| Iberia | 655 | 11 | 71 | 72 | 0 |
+| Iberia | 674 | 11 | 71 | 87 | 0 |
 | Indian Subcontinent | 4686 | 21 | 324 | 111 | 0 |
 | Indo-China | 2194 | 6 | 95 | 206 | 0 |
 | Interior North America | 1108 | 24 | 36 | 2 | 0 |
@@ -67,10 +75,10 @@ Each of the 66 region branches below has every current location tested. The meas
 | Japan | 1688 | 22 | 104 | 170 | 1686 |
 | Korean Peninsula | 335 | 3 | 29 | 38 | 0 |
 | Low Countries | 388 | 1 | 4 | 54 | 0 |
-| Macaronesia | 62 | 0 | 4 | 36 | 0 |
+| Macaronesia | 43 | 0 | 4 | 21 | 0 |
 | Malesia | 2278 | 42 | 275 | 410 | 0 |
 | Mexico | 2442 | 17 | 59 | 102 | 0 |
-| Middle Asia | 550 | 49 | 79 | 29 | 0 |
+| Middle Asia | 554 | 50 | 78 | 29 | 0 |
 | Middle Atlantic Ocean | 2 | 0 | 0 | 2 | 0 |
 | Mongolia | 339 | 17 | 3 | 6 | 0 |
 | New Zealand and Southwest Pacific Islands | 94 | 5 | 16 | 13 | 21 |
@@ -78,17 +86,17 @@ Each of the 66 region branches below has every current location tested. The meas
 | North China | 366 | 10 | 11 | 3 | 0 |
 | North-Central Pacific | 7 | 2 | 2 | 4 | 0 |
 | Northeast China | 189 | 3 | 9 | 7 | 0 |
-| Northeast Tropical Africa | 1238 | 32 | 73 | 30 | 0 |
+| Northeast Tropical Africa | 1226 | 23 | 65 | 30 | 0 |
 | Northeastern North America | 464 | 34 | 116 | 11 | 1 |
-| Northern Africa | 2236 | 89 | 96 | 122 | 0 |
+| Northern Africa | 2227 | 91 | 91 | 121 | 0 |
 | Northern South America | 415 | 7 | 19 | 32 | 0 |
 | Northwest China | 352 | 17 | 15 | 14 | 0 |
-| Northwestern Pacific | 54 | 0 | 12 | 48 | 0 |
+| Northwestern Pacific | 50 | 0 | 9 | 44 | 0 |
 | Papuasia | 377 | 23 | 63 | 53 | 0 |
 | Russian Far East | 160 | 40 | 51 | 7 | 0 |
-| Siberia | 679 | 147 | 87 | 2 | 0 |
-| South Atlantic Islands | 2 | 0 | 1 | 1 | 0 |
-| South Atlantic Islands | 2 | 0 | 2 | 0 | 0 |
+| Siberia | 678 | 147 | 87 | 2 | 0 |
+| South Atlantic Islands (Africa) | 2 | 0 | 1 | 1 | 0 |
+| South Atlantic Islands (South America) | 2 | 0 | 2 | 0 | 0 |
 | South China | 200 | 0 | 4 | 16 | 0 |
 | South China Sea Islands | 5 | 2 | 2 | 5 | 0 |
 | South Tropical Africa | 548 | 30 | 51 | 10 | 0 |
@@ -102,12 +110,12 @@ Each of the 66 region branches below has every current location tested. The meas
 | Southwest China | 488 | 9 | 22 | 6 | 0 |
 | Subarctic America | 125 | 37 | 79 | 0 | 0 |
 | Taiwan and Penghu | 197 | 3 | 4 | 17 | 0 |
-| West Tropical Africa | 2713 | 45 | 123 | 136 | 0 |
-| West-Central Tropical Africa | 1000 | 48 | 43 | 74 | 0 |
-| Western Asia | 2061 | 7 | 67 | 116 | 0 |
+| West Tropical Africa | 2713 | 46 | 123 | 136 | 0 |
+| West-Central Tropical Africa | 853 | 48 | 37 | 68 | 0 |
+| Western Asia | 2066 | 7 | 68 | 117 | 0 |
 | Western Indian Ocean | 145 | 4 | 13 | 22 | 0 |
 | Western North America | 533 | 25 | 87 | 8 | 0 |
-| Western Polynesian Islands | 29 | 0 | 10 | 23 | 0 |
+| Western Polynesian Islands | 24 | 0 | 9 | 18 | 0 |
 | Western South America | 1668 | 15 | 52 | 24 | 0 |
 
 ## Filling review evidence without changing the website

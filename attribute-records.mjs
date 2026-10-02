@@ -1,4 +1,4 @@
-import {locationAttributes} from './src/attributes.js';
+import {locationAttributes,unresolvedAttributeStatuses} from './src/attributes.js';
 import {ranks,validYear} from './src/model.js';
 const text=v=>typeof v==='string'&&v.trim().length>0&&v.length<=2000;
 const categorical=['owner','culture','religion'];
@@ -7,6 +7,7 @@ export function importAttributes(db,payload){
  for(const r of payload.attribute_records||[]){
   if(!text(r.id)||!text(r.location_id)||!text(r.source)||!Object.hasOwn(r,'value')||r.value===undefined||!locationAttributes.includes(r.attribute)||!validYear(r.valid_from)||!(validYear(r.valid_to)||r.valid_to===2027)||r.valid_to<=r.valid_from)throw Error('Invalid attribute evidence');
   if(r.value!=null){if(r.attribute==='population'){if(!Number.isSafeInteger(r.value)||r.value<0)throw Error('Invalid population');}else if(!text(r.value))throw Error('Attribute must have one scalar value');}
+  if(unresolvedAttributeStatuses.includes(r.status)&&(r.value!==null||r.category_id!=null))throw Error('Unresolved attribute status requires null value and category_id');
   if(categorical.includes(r.attribute)&&r.value!=null&&!text(r.category_id))throw Error('Stable category_id required');
   if(r.category_id!=null&&(!categorical.includes(r.attribute)||r.value==null))throw Error('Category ID requires a known categorical value');
   if(r.attribute==='rank'&&r.value!=null&&!ranks.includes(r.value))throw Error('Invalid rank');

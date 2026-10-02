@@ -120,6 +120,9 @@ CREATE TABLE IF NOT EXISTS attribute_records (
  CHECK(attribute!='habitation' OR json_type(value)='null' OR json_extract(value,'$') IN ('inhabited','uninhabited','unknown'))
 );
 CREATE INDEX IF NOT EXISTS attribute_record_dates ON attribute_records(location_id,attribute,valid_from,valid_to);
+CREATE TRIGGER IF NOT EXISTS attribute_record_unresolved_status BEFORE INSERT ON attribute_records
+WHEN NEW.status IN ('unknown','disputed','no-majority') AND (json_type(NEW.value)!='null' OR NEW.category_id IS NOT NULL)
+BEGIN SELECT RAISE(ABORT,'Unresolved attribute status requires null value and category_id'); END;
 CREATE TRIGGER IF NOT EXISTS attribute_record_overlap BEFORE INSERT ON attribute_records BEGIN
  SELECT RAISE(ABORT,'Overlapping attribute evidence') WHERE EXISTS(SELECT 1 FROM attribute_records WHERE location_id=NEW.location_id AND attribute=NEW.attribute AND method=NEW.method AND is_example=NEW.is_example AND valid_from<NEW.valid_to AND valid_to>NEW.valid_from);
  SELECT RAISE(ABORT,'Category kind mismatch') WHERE NEW.category_id IS NOT NULL AND NOT EXISTS(SELECT 1 FROM attribute_entities WHERE id=NEW.category_id AND kind=NEW.attribute);

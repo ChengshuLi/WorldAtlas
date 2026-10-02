@@ -3,7 +3,7 @@
 Every active ID gets every rubric check. Geometric screens never substitute for
 an independent geographic-purpose decision. No live geography is modified.
 """
-import argparse, collections, functools, gzip, hashlib, json, pathlib, re, statistics
+import argparse, collections, functools, gzip, hashlib, json, pathlib, re, statistics, importlib.util
 from pyproj import Geod
 from shapely import STRtree
 from shapely.geometry import shape
@@ -95,7 +95,7 @@ def apply_resolutions(id, checks, resolutions, footprint_hash):
         raise ValueError(f'Stale semantic resolution footprint: {id}')
     for key, decision in record.get('checks', {}).items():
         if key not in checks or key in ('complete_unique_chain', 'valid_land_footprint',
-                'nonoverlapping_interiors', 'complete_member_footprint', 'independent_children'):
+                'nonoverlapping_interiors', 'complete_member_footprint', 'independent_children', 'external_source_quality'):
             raise ValueError(f'Cannot override structural or unknown check: {id}/{key}')
         evidence = decision.get('evidence', [])
         if decision.get('status') not in ('supported', 'not-applicable') or not evidence or not decision.get('rationale'):
@@ -115,11 +115,17 @@ def main(data, resolutions_path=None):
     if len(files) != 6:
         raise ValueError('All six frozen continent decision inventories are required')
     inputs += [str(p.relative_to(data)) for p in files]
+    if (data/'namibia-source-quality-annotations.json').exists():
+        inputs.append('namibia-source-quality-annotations.json')
+        inputs += [r['path'] for r in load(data/'namibia-source-quality-annotations.json')['profile_review']['public_evidence_files']]
     hashes = {p: digest(data / p) for p in inputs}
     resolution_hash = digest(resolutions_path) if resolutions_path else None
     resolutions = load(resolutions_path) if resolutions_path else {}
     features = [f for p in index['parts'] for f in load(data / p)['features']]
     units = {u['id']: u for u in load(data / 'hierarchy.json')}
+    spec=importlib.util.spec_from_file_location('external_source_quality',pathlib.Path(__file__).with_name('external-source-quality.py'))
+    external=importlib.util.module_from_spec(spec);spec.loader.exec_module(external)
+    source_quality=external.validated_reviews(data,features,units)
     assert_complete_inventory([f['id'] for f in features], [f['id'] for f in features], 'locations')
     if len([u for u in units.values() if u['level'] == 'continent']) != 6:
         raise ValueError('Exactly six inhabited continents are required')
@@ -207,6 +213,7 @@ def main(data, resolutions_path=None):
             'role': role, 'location_basis': m.get('location_basis'), 'represented_year': m.get('reference_year'), 'license': m.get('license')}
         checks = {
             'complete_unique_chain': check('supported', chain),
+            'external_source_quality': check('open' if f['id'] in source_quality['locations'] else 'not-applicable', source_quality['locations'].get(f['id'], 'No separately filed source-quality issue; this does not certify source completeness')),
             'valid_land_footprint': check('supported' if geoms[i].is_valid and areas[i] > 0 else 'attention',
                 {'valid': geoms[i].is_valid, 'wgs84_diagnostic_km2': round(areas[i], 6)}),
             'nonoverlapping_interiors': check('attention' if overlaps else 'supported', overlaps),
@@ -247,6 +254,7 @@ def main(data, resolutions_path=None):
             assessment = u['metadata'].get('semantic_review', {})
             direct = children[id]
             checks = {
+                'external_source_quality': check('open' if id in source_quality['groups'] else 'not-applicable', source_quality['groups'].get(id, 'No separately filed source-quality issue; source-purpose and child checks remain independent')),
                 'complete_member_footprint': check('supported' if members[id] and direct else 'attention', {'method': 'Union of exact member locations',
                     'locations': len(members[id]), 'children': len(direct)}),
                 'tier_geographic_purpose': check('supported' if assessment.get('boundary_status') == 'supported' else 'open',
@@ -270,16 +278,17 @@ def main(data, resolutions_path=None):
     territories = []
     for owner in sorted(counts):
         old = territory_by_owner[owner]; iso = old.get('iso')
-        territories.append({'owner': owner, 'iso': iso, 'policy_present': iso in profiles,
+        territories.append({'owner': owner, 'iso': iso, 'source_country_codes': old.get('source_country_codes', []), 'policy_present': iso in profiles,
             'locations': counts[owner], 'source_roles': old.get('source_roles', []),
             'sources': old['sources'], 'issues': old.get('issues', []),
+            'source_quality_review': source_quality['profiles'].get(owner),
             'status': 'open', 'note': 'All member IDs have full rubric outcomes; aggregate source assessment is separate from semantic closure'})
     checks_count = {}
     for kind, rows in [('location', locations), ('group', groups)]:
         for row in rows:
             for key, result in row['checks'].items():
                 checks_count.setdefault(f'{kind}:{key}', collections.Counter())[result['status']] += 1
-    profiles_crosswalk = {iso: [r['owner'] for r in territories if r['iso'] == iso] for iso in sorted(profiles)}
+    profiles_crosswalk = {iso: [r['owner'] for r in territories if r['iso'] == iso or iso in r['source_country_codes']] for iso in sorted(profiles)}
     for p, old in hashes.items():
         if digest(data / p) != old:
             raise ValueError(f'Input changed during the exhaustive audit: {p}; rerun against the completed migration')
@@ -290,7 +299,7 @@ def main(data, resolutions_path=None):
         row['checks']['complete_member_footprint']['status'] == 'supported' for row in groups)
     result = {'version': 1, 'scope': 'Every current location, every parent group, all reference-owner groups and all policy profiles; exhaustive review coverage is distinct from independent semantic approval.',
         'audit_complete': True, 'structural_complete': structural_complete, 'semantic_complete': all(r['status'] == 'supported' for r in locations + groups),
-        'input_sha256': hashes, 'code_sha256': digest(pathlib.Path(__file__)), 'independent_resolutions_sha256': resolution_hash, 'counts': {'locations': len(locations), 'groups': len(groups),
+        'source_quality_reviews': source_quality['manifest'], 'input_sha256': hashes, 'code_sha256': digest(pathlib.Path(__file__)), 'source_review_code_sha256': {p:digest(pathlib.Path(__file__).with_name(p)) for p in ['external-source-quality.py','prepare-namibia-source-annotations.py']}, 'independent_resolutions_sha256': resolution_hash, 'counts': {'locations': len(locations), 'groups': len(groups),
             'reference_owner_groups': len(territories), 'policy_profiles': len(profiles)},
         'level_counts': dict(collections.Counter(g['level'] for g in groups)),
         'check_status_counts': {k: dict(v) for k, v in checks_count.items()},

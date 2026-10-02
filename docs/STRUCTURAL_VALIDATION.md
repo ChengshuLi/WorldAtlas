@@ -14,7 +14,7 @@ node scripts/validate-structure.mjs scientific
 
 ## Immutable schema and retained evidence
 
-`test/migration-hashes.test.mjs` pins SQL and Drizzle snapshots for migrations 0000–0004. Existing installations must retain these bytes. Subsequent changes require a new migration; the journal may append entries. The test also verifies migration order and the snapshot identity chain.
+`test/migration-hashes.test.mjs` pins SQL and Drizzle snapshots for migrations 0000–0006. Existing installations must retain these bytes. Subsequent changes require a new migration; the journal may append entries. The test also verifies migration order and the snapshot identity chain.
 
 | Migration | SQL SHA-256 |
 | --- | --- |
@@ -23,6 +23,8 @@ node scripts/validate-structure.mjs scientific
 | 0002_geographic_reference_releases | `fc03e50b1c7053d9ffe89534395bcbb644e3192231122eca51a424fd14753c53` |
 | 0003_unsettled_location_rank | `dc249cb326203bee26446fb010e0f2c05d8bd9bcbb918649199382d517e0fa4d` |
 | 0004_population_precision_guard | `302660bc2d4d673bab67820d3c54637ca8cd50460ace57e3142fb3c6f40da447` |
+| 0005_population_source_class_guard | `44ec5f5a82317b7c430f7d98439e6ce41d04859d46719c36c3e0dc072f102194` |
+| 0006_unresolved_attribute_status_guard | `e2778adcf77945b294609111ecd21a02ffc177e41463393f07e7d15e50e97475` |
 
 The hosted contract fixtures apply the real migration SQL to SQLite using the D1 service interface. Nonempty migration tests compare original claims, retirement pointers, indexes and trigger definitions; they also check foreign keys and append-only behavior after migration. These tests complement native workerd/D1 checks; the SQLite adapter alone is not a native Worker runtime check.
 
@@ -32,7 +34,7 @@ The hosted contract fixtures apply the real migration SQL to SQLite using the D1
 
 The focused suites check half-open source intervals, no year zero, direct/derived/reference/estimate precedence, opt-in examples, stable category IDs, explicit unknowns and unsupported-year gaps. Reference or modeled data cannot become direct historical evidence through import. Names have dated preferred/alias roles; an undated reference name remains separate from a sourced historical name.
 
-Unsettled requires sourced evidence of no inhabitants. Direct literal zero may support it; estimated, modeled, rounded, reference-only, unknown or legacy untyped zero cannot. `metadata.estimate` is recognized in both the shared resolver and SQL contracts. Both import orders are tested against inhabited/settled evidence, including corrected or retired claims.
+Unsettled requires sourced evidence of no inhabitants. Direct literal zero may support it; estimated, modeled, rounded, reference-only, unknown or legacy untyped zero cannot. `metadata.estimate` is recognized in both the shared resolver and SQL contracts. Both import orders are tested against inhabited/settled evidence, including corrected or retired claims. Authoritative source classes are checked separately: estimate/reference sources cannot masquerade as direct evidence, example claims require opt-in, and an example-source zero cannot become factual no-inhabitants evidence even if a claim explicitly supplies `status=sourced`. Migration 0005 aligns the SQL guard with that resolver rule.
 
 Retirements must reach every reader. `test/prepared-evidence.test.mjs` verifies that withdrawn attributes and names cannot reappear through prepared fallback assets, that all API evidence pages have a consistent revision, and that imported/prepared duplicates preserve full provenance. Stable-ID collisions and failed corrections must roll back the whole import, including the ingestion ledger. Old claims remain inspectable.
 
@@ -80,4 +82,10 @@ The precision-guard milestone passed 37 rank/hosted-record/shared-attribute chec
 
 Atomic hosted-stream availability is a separate regression gate: partial failures may not mix fresh attributes/names with missing retirements. A stale cache must retain a complete consistent triple and its actual revision, and may not cross a year/example setting. Its focused regression passes; the contracts runner passed 75 checks before the separate suppression check was added, and that added check also passes. Unavailable withdrawals suppress all attribute sources, including modern ownership fallback and derived Unsettled, without changing the stored content. Final browser checks must confirm the matching cold/warm outage behavior in the built UI.
 
+The source-class guard passed 40 focused contract checks. An isolated native local D1/workerd application of migration 0005 preserved two populated claims, one retirement, all 71 triggers and every other index/trigger definition; foreign keys remained valid. Native inserts also confirmed that an opt-in example zero and example city may coexist without being mistaken for factual no-inhabitants evidence. This receipt is a migration check against disposable storage, not a production deployment or capacity benchmark.
+
 Final publication parity and browser results must be recorded against the final build, after staged geographic repairs and their derived products are activated together. Existing completed historical data is retained; unfinished population output remains unvalidated staging. These checks do not manufacture missing history, finish semantic review, prove capacity for 200 million claims, or substitute for production database capacity planning and device/load benchmarks.
+
+Migration 0006 adds one bounded INSERT trigger: `unknown`, `disputed`, and `no-majority` attribute evidence requires both a null value and a null category ID. Hosted imports, local imports, and the UI preview reject contradictory records before saving. The shared resolver suppresses malformed retained values and category IDs while preserving provenance and precedence; a direct unresolved assignment blocks weaker derived/reference values, including inferred Unsettled rank. Existing claims remain physically unchanged.
+
+Verified on 2 October 2026: 49 focused resolver/import/migration tests passed with no skips and Drizzle reported no schema drift. Native local D1 preserved all four test claims, one retirement, and every original index/trigger definition (71 old triggers plus the single new guard), with foreign keys valid. Native SQL rejected each of the three unresolved statuses with a non-null value and also a null value carrying a category ID. The durable test-only receipt is `data/validation/unresolved-attribute-contract.json`; the portable populated-legacy regression is `test/unresolved-attributes.test.mjs`. These checks do not assert a remote deployment.

@@ -1,4 +1,4 @@
-import {locationAttributes} from '../src/attributes.js';
+import {locationAttributes,unresolvedAttributeStatuses} from '../src/attributes.js';
 import {validYear,ranks} from '../src/model.js';
 import {referenceMembership} from './geographic-releases.js';
 
@@ -57,6 +57,7 @@ function normalize(kind,r){
   if(r.attribute==='rank'&&value!=null&&!ranks.includes(value))fail('Invalid rank');if(r.attribute==='habitation'&&value!=null&&!['inhabited','uninhabited','unknown'].includes(value))fail('Invalid habitation');
   const [valid_from,valid_to]=dates(r.valid_from,r.valid_to),is_example=example(r.is_example),method=r.method??'direct',status=r.status??(is_example?'example':value==null?'unknown':method==='reference'?'reference':method==='estimate'?'estimate':['derived','majority-area'].includes(method)?'derived':'sourced');
   if(!['direct','majority-area','derived','reference','estimate'].includes(method)||!['sourced','derived','reference','estimate','unknown','disputed','no-majority','example'].includes(status))fail('Invalid evidence method/status');
+  if(unresolvedAttributeStatuses.includes(status)&&(value!==null||category_id!==null))fail('Unresolved attribute status requires null value and category_id');
   return {...base,location_id:text(r.location_id,'location ID'),attribute:r.attribute,value:json(value),category_id,valid_from,valid_to,method,status,source_id,is_example};
  }
  if(kind==='names'){

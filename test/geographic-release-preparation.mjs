@@ -12,8 +12,7 @@ import {importBatch,entityProfile,attributesAt} from '../hosted/records.js';
 import {stageGeographicRelease,finalizeGeographicRelease,geographicRelease,geographicMembershipPage,geographicChangePage,referenceMembership} from '../hosted/geographic-releases.js';
 
 const root=path.resolve(import.meta.dirname,'..'),data=path.join(root,'data');
-const stage=path.join(root,'.cache/macro-boundary-repair-stage/after');
-const geographyData=process.env.ATLAS_REVIEWED_GEOGRAPHY??(fs.existsSync(path.join(stage,'world-index.json'))?stage:data);
+const geographyData=process.env.ATLAS_REVIEWED_GEOGRAPHY??data;
 const tiers=['continent','subcontinent','region','area','province','location'];
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const bytes=file=>fs.readFileSync(file);
@@ -164,4 +163,14 @@ test('an untouched ID with edited land, wrong archived original, or tampered sou
 });
 test('unvalidated geometry, historical transfer, or omitted identity dispositions are rejected before any output',()=>{
  const f=replacementProofFixture();try{f.receipt.geometry_stage_validated=false;f.save();assert.throws(()=>validateGeometryMigrations(f.options()),/independent validation/);f.receipt.geometry_stage_validated=true;f.receipt.historical_claims_transferred=true;f.save();assert.throws(()=>validateGeometryMigrations(f.options()),/zero historical transfer/);f.receipt.historical_claims_transferred=false;f.receipt.removed_ids.pop();f.save();assert.throws(()=>validateGeometryMigrations(f.options()),/exact archived original/);}finally{fs.rmSync(f.folder,{recursive:true,force:true});}
+});
+
+test('later release preparation reuses registered identities while retaining the exact original baseline manifest',async()=>{
+ const folder=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-geographic-next-version-'));try{
+  const firstFolder=path.join(folder,'first'),nextFolder=path.join(folder,'next');
+  const first=await prepareGeographicRelease({data,geographyData,output:firstFolder});
+  const next=await prepareGeographicRelease({data,geographyData,output:nextFolder,reviewedVersion:3,referenceDate:'2027-01-01',registryManifests:[path.join(firstFolder,'index.json')]});
+  assert.deepEqual(next.releases[0],first.releases[0],'Original baseline release identity, date, geometry and membership hashes are immutable');assert.equal(next.new_entities,0,'Previously registered identities must not be imported again with a new origin');assert.equal(next.releases[1].version,3);assert.equal(next.releases[1].reference_date,'2027-01-01');assert.notEqual(next.releases[1].id,first.releases[1].id);assert.equal(next.total_memberships,first.total_memberships);
+  assert.ok(next.registered_identity_manifest_sha256);assert.ok(next.batches.every(b=>!b.path.startsWith('entities-')));
+ }finally{fs.rmSync(folder,{recursive:true,force:true});}
 });

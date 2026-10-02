@@ -1,5 +1,6 @@
-// Stable Web Mercator cells. At zoom 7 one cell is ~1.22 km at the equator.
-export const GRID_ZOOM=7;
+// Stable Web Mercator cells, selected by exhaustive global representation audit.
+// One canonical cell is ~153 m at the equator; navigation never changes it.
+export const GRID_ZOOM=10;
 export const GRID_WIDTH=256*2**GRID_ZOOM;
 export function projectCell(lon,lat){
   const s=Math.sin(Math.max(-85.05112878,Math.min(85.05112878,lat))*Math.PI/180);

@@ -1,5 +1,5 @@
 import {validYear,formatYear,ranks} from './model.js';
-import {locationAttributes} from './attributes.js';
+import {locationAttributes,unresolvedAttributeStatuses} from './attributes.js';
 const collections=new Set(['sources','entity_types','entities','categories','records','names','relationships','media_links','units','attribute_entities','attribute_records','retirements']);
 const aliases={units:'entities',attribute_entities:'categories',attribute_records:'records'};
 const text=(value,label)=>{if(typeof value!=='string'||!value.trim())throw Error(`${label} must be nonempty text.`);};
@@ -28,6 +28,7 @@ export function previewImport(raw){
    if(kind==='records'){
     text(row.location_id,'Location ID');if(!locationAttributes.includes(row.attribute)||!Object.hasOwn(row,'value'))throw Error('Each attribute record needs a known attribute and one value, or null for unknown.');
     interval(row.valid_from,row.valid_to,'Attribute interval');
+    if(unresolvedAttributeStatuses.includes(row.status)&&(row.value!==null||row.category_id!=null))throw Error('Unresolved attribute status requires null value and category_id.');
     if(row.value!=null){
      if(row.attribute==='population'){if(!Number.isSafeInteger(row.value)||row.value<0)throw Error('Population must be a nonnegative whole number.');}
      else text(row.value,'Attribute value');

@@ -1,7 +1,8 @@
 {
   "version": 1,
-  "footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
-  "hierarchy_sha256": "d15b845246f74f2934b32dfa8df431fb4fe92f7762ca24c33732b8d1c19999d6",
+  "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+  "hierarchy_sha256": "bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58",
+  "location_index_sha256": "59552ee8d7d8d0848df6e67fbd43a442e3d4769e6784df984556479c0ae55cf0",
   "sources": [
     {
       "id": "census-county-gazetteer:2020",
@@ -219,6 +220,10 @@
           "sha256": "a472baeb18b587f018658fbc5683fa33abaa2961dee3f1483bb11df04bd07e53"
         },
         {
+          "path": "revalidation.json",
+          "sha256": "ebf0cab4fd044840bee36dd39b16b5ec22b4b1d7d5c44cd8042ee3dd47f67b32"
+        },
+        {
           "path": "names.json.gz",
           "sha256": "c729a964efb5b3ac9bca67bd1a314a83d33d7cd283d4733f52d2bd74216f91ed"
         },
@@ -233,6 +238,12 @@
         "census-county-gazetteer:2020",
         "eurostat:nuts:2021"
       ],
+      "revalidation": {
+        "path": "dated-reference-names/revalidation.json",
+        "sha256": "ebf0cab4fd044840bee36dd39b16b5ec22b4b1d7d5c44cd8042ee3dd47f67b32",
+        "entities": 3588,
+        "historical_membership_assigned": false
+      },
       "producer_proofs": {
         "footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
         "hierarchy_sha256": "d15b845246f74f2934b32dfa8df431fb4fe92f7762ca24c33732b8d1c19999d6",
@@ -247,6 +258,10 @@
         {
           "path": "index.json",
           "sha256": "e944267b8c0f0cfdf57ab6f6e4571d4ad537e0e5121b6f0f5ced1a3e46c54280"
+        },
+        {
+          "path": "revalidation.json",
+          "sha256": "9a282352a74fa9cfaa403cd7eaf8cbd5a9b43c9bfa3d30d7d5d106fdbaf17885"
         },
         {
           "path": "sources.json",
@@ -275,6 +290,12 @@
         "ons:2021:TS030",
         "abs:2021:G14"
       ],
+      "revalidation": {
+        "path": "demographic-evidence/revalidation.json",
+        "sha256": "9a282352a74fa9cfaa403cd7eaf8cbd5a9b43c9bfa3d30d7d5d106fdbaf17885",
+        "entities": 396,
+        "historical_membership_assigned": false
+      },
       "producer_proofs": {
         "footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
         "hierarchy_sha256": "d15b845246f74f2934b32dfa8df431fb4fe92f7762ca24c33732b8d1c19999d6",
@@ -373,7 +394,7 @@
   "names": 3588,
   "imports": {
     "path": "imports/index.json",
-    "sha256": "3fe6ca092ea5dfd4db0ba5b8efff3c57f2d87ca4d448e6177ef2cc8fd6c66877",
+    "sha256": "e987246020096fc67945d7c80aef98b72ab0a904180eadad61874bfdde4b9110",
     "batches": 22
   }
 }
