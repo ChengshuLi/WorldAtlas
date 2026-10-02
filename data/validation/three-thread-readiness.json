@@ -1,0 +1,33 @@
+{
+  "kind": "three_thread_readiness_checkpoint",
+  "observed_at_utc": "2026-10-02T08:54:27.800724+00:00",
+  "human_date_timezone": "America/Los_Angeles",
+  "issue": "https://github.com/ChengshuLi/WorldAtlas/issues/24",
+  "base_main_commit": "1171417d7e81378eaacfd817e30f73cae9650ea9",
+  "runtime": {
+    "provider": "cloud",
+    "source_config_id": "2893a6dc-94f1-4e57-aedb-7c1e604179bd~cecfg_6abdc386c10c81a3bb8b1820d66a159e",
+    "observations_current": true,
+    "phase": "running",
+    "observed_spec_revision": "104",
+    "network_policy": {
+      "mode": "unrestricted",
+      "state": "enforced"
+    },
+    "configured_secrets": [],
+    "configured_runtime_variables": [],
+    "configured_outbound_identities": [],
+    "tcp_destinations": [],
+    "node": "24.19.0",
+    "python": "3.12.14",
+    "github_issue_and_pr_access": "observed working",
+    "saved_environment_editor": "not exposed by runtime tools; saved name/latest draft not verified"
+  },
+  "scope": "Instructions/readiness only; no saved environment, Site, database or content changes",
+  "roles": [
+    "issue creation",
+    "engineering",
+    "history research"
+  ],
+  "private_access": "Fresh threads require authorized private Site access for live imports/deployment; public research and local preparation can begin without it"
+}

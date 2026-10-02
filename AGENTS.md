@@ -2,6 +2,8 @@
 
 ## Project context
 
+`docs/THREE_THREAD_START.md` links the three role handovers/prompts. Issue creation updates GitHub Issues only; engineering and history-research workers use their isolated lane branches and continue through their queues.
+
 WorldAtlas is a world-history atlas with stable territorial locations, a six-tier hierarchy, whole-location map modes, sparse dated evidence, and a persistent hosted content API. Read `README.md`, `docs/IMPLEMENTATION_PROGRESS.md`, and `docs/LUNA_DATA_HANDOFF.md` before changing its geography or historical content.
 
 Application code and database content are independent. A factual content import must not require rewriting the UI, rebuilding the canonical grid, or extending an unsupported interval. Preserve completed evidence, original source bytes/hashes, predecessor identities, geometry and immutable records. Do not materialize one record per location per year; represent supported half-open intervals, with no year zero.
