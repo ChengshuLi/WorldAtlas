@@ -93,6 +93,8 @@ try {
   await fs.writeFile('dist/geographic-migration-review.json.gz',gzipSync(await fs.readFile('data/geographic-migration-review.json'),{level:9}));
   for(const file of ['world-review.json','global-refinement-report.json','source-inventory.json','pixel-audit.json','regional-membership-report.json','border-parent-review.json','attribute-sources.json','reference-polity-report.json','settlement-source-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);
   for(const file of ['administrative-sources.json','granularity-report.json','hierarchy-report.json','semantic-report.json','granularity-audit.json','location-policy.json','coverage-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);
+  await fs.mkdir('dist/source-policy-corrections',{recursive:true});
+  await fs.copyFile('data/source-policy-corrections/summary.json','dist/source-policy-corrections/summary.json');
   const frameworkReport=JSON.parse(await fs.readFile('data/hierarchy-report.json','utf8'));
   const worldReview=JSON.parse(await fs.readFile('data/world-review.json','utf8'));
   for(const file of worldReview.location_parts||[])await fs.copyFile(`data/${file}`,`dist/${file}`);
