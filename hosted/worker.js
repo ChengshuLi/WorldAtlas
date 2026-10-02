@@ -2,6 +2,7 @@ import * as records from './records.js';
 import {mapSnapshotPage} from './map-snapshots.js';
 import {contentDatabase,storageReadOnly} from './content-backend.js';
 import {exportStoragePage,exportStorageMarker} from './storage-export.js';
+import {exportStoragePageV2,exportStorageMarkerV2,storageCatalogV2} from './storage-export-v2.js';
 import {catalogPage,entityRelationshipsPage,entityMediaPage,capacityReport} from './research-catalog.js';
 import * as geography from './geographic-releases.js';
 import {importTemporalGeography,temporalGeographySnapshotPage,temporalGeographyEvidence} from './temporal-geography.js';
@@ -30,6 +31,10 @@ export default {
    if(storageReadOnly(env)&&['POST','PUT','PATCH','DELETE'].includes(request.method))return json({error:'Historical storage is read-only during a verified transfer',retryable:true},503);
    const db=contentDatabase(env);
    if(url.pathname==='/api/storage/export-marker'&&request.method==='GET')return json({...await exportStorageMarker(db),read_only:storageReadOnly(env)});
+   if(url.pathname==='/api/storage/v2/export-marker'&&request.method==='GET')return json({...await exportStorageMarkerV2(db),read_only:storageReadOnly(env)});
+   if(url.pathname==='/api/storage/v2/catalog'&&request.method==='GET')return json(await storageCatalogV2(db));
+   const storageExportV2=/^\/api\/storage\/v2\/export\/([^/]+)$/.exec(url.pathname);
+   if(storageExportV2&&request.method==='GET')return json(await exportStoragePageV2(db,storageExportV2[1],{cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200)}));
    const storageExport=/^\/api\/storage\/export\/([^/]+)$/.exec(url.pathname);
    if(storageExport&&request.method==='GET')return json(await exportStoragePage(db,storageExport[1],{cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200)}));
    if(url.pathname==='/api/storage/capacity'&&request.method==='GET')return json(await capacityReport(db,{databaseBudgetBytes:env.ATLAS_DATABASE_BUDGET_BYTES==null?null:Number(env.ATLAS_DATABASE_BUDGET_BYTES)}));
