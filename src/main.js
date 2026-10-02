@@ -170,7 +170,7 @@ async function loadYear(next) {
   $('#loading').hidden=false; $('#loading').textContent=`Loading ${formatYear(next)}…`;
   try {
     const result=await loadSnapshot(next, $('#examples').checked, signal);
-    const temporalReference=result.evidenceUnavailable?{...referenceData,temporal:{...referenceData.temporal,history:[]}}:result.temporal_history?.length?{...referenceData,temporal:{...referenceData.temporal,history:[...(referenceData.temporal.history||[]),...result.temporal_history]}}:referenceData;
+    const temporalReference=result.evidenceUnavailable?{...referenceData,temporal:{...referenceData.temporal,history:[]}}:result.temporalHistoryComplete?{...referenceData,temporal:{...referenceData.temporal,history:result.temporal_history}}:result.temporal_history?.length?{...referenceData,temporal:{...referenceData.temporal,history:[...(referenceData.temporal.history||[]),...result.temporal_history]}}:referenceData;
     let resolved=resolveTemporal(temporalReference,next,$('#examples').checked);
     if(result.boundaries.length||resolved.features.length!==referenceData.features.length){await ensureGeometry(referenceData,signal);resolved=resolveTemporal(temporalReference,next,$('#examples').checked);}
     signal.throwIfAborted();year=next;temporal=resolved;
