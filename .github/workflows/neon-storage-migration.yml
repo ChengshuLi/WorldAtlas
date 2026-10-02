@@ -55,8 +55,12 @@ jobs:
               rehearsal|production|verify-only) mode="$REQUESTED_MODE" ;;
               *) exit 1 ;;
             esac
-          elif git diff-tree --no-commit-id --name-only -r HEAD | rg -Fxq '.github/operations/neon-production-install.json'; then
-            mode=production
+          else
+            while IFS= read -r changed; do
+              if [ "$changed" = .github/operations/neon-production-install.json ]; then
+                mode=production
+              fi
+            done < <(git diff-tree --no-commit-id --name-only -r HEAD)
           fi
           operation=.github/operations/neon-storage-rehearsal.json
           if [ "$mode" != rehearsal ]; then

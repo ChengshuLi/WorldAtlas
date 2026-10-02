@@ -15,6 +15,7 @@
     "execution_policy": "direct-production-with-source-readback",
     "authorization": "User explicitly requested proceeding with production without waiting for the disposable rehearsal.",
     "recipient_public_key_file": "data/storage-migration/recipient-public.pem",
-    "recipient_sha256": "37880f25bb59b092d24c2f1d947ddfea74558d1411c646a08321c448ed4d96a5"
+    "recipient_sha256": "37880f25bb59b092d24c2f1d947ddfea74558d1411c646a08321c448ed4d96a5",
+    "execution_note": "Direct production requested; selector uses Bash builtins rather than an unavailable runner command."
   }
 }
