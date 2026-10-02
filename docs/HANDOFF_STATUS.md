@@ -2,6 +2,14 @@
 
 Primary repository: `https://github.com/ChengshuLi/WorldAtlas`, branch **work**. This file records work that can be continued from Git. A `.cache` path below identifies a local stage only; the accompanying tracked evidence and restoration instructions are the durable handoff. Do not claim a local stage is deployed or silently apply a blocked candidate.
 
+## Latest operational checkpoint — 2026-10-02 06:52 UTC
+
+Production PostgreSQL migration is complete. Actions run **36973747147** restored every original row into Neon production and verified byte preservation, sequence continuity and the restricted `worldatlas_app` account. The existing owner-private Site **17** now uses PostgreSQL and unchanged R2 media through secret environment revision **2**; writes remain temporarily paused for the final API release. Live read-back verified **3,984 prepared claims**, **28 archives / 16,199,861 bytes**, both geographic versions and revision **1321**.
+
+Forward production run **36974831053** applied the dated-geography and immutable-footprint schema extensions, preserving original bytes and sequence. The restricted application role can read all **23 factual tables**; immutable footprint publication and administrative migration registry remain owner-only. A direct read-only check against live Neon matched the version-two catalog pin and returned a valid empty dated-geography snapshot for AD 1000. No new historical claims or footprints were manufactured.
+
+Authoritative receipts: `data/validation/neon-production-storage-migration.json`, `neon-production-site-preservation.json`, `neon-production-forward-migrations.json` and `neon-live-forward-api.json`. The final engineering suite passed **394/394, no skips**; three focused browser checks passed. Final Site publication, live v2 route checks and write enablement are pending below. Historical footprint browser integration and source-based geographic corrections remain maintainer-owned open work; Luna is responsible for supported research/content imports only. Older dated checkpoints below describe earlier states and do not override this section.
+
 ## Current scope
 
 Finish the code, contracts, geographic foundation, migrations, grid, coverage reporting and publication checks. Broad historical expansion is paused in this engineering thread at the user's request. Preserve completed work and prepare GPT 6 Luna for **internet/source research, factual evidence preparation, supported content imports and durable research notes only**. Coding, UI, schema/deployments, geographic mutations, performance and infrastructure remain technical-maintainer duties. Antarctica is excluded; EU5 counts are granularity references. A bounded research-ready workflow does not establish unlimited database capacity or worldwide geographic semantic completion.
@@ -82,7 +90,7 @@ Read-only verification also downloaded all **28 hosted archive objects (16,199,8
 
 Authoritative receipts: `data/validation/published-milestone-2026-10-02.json`, `geographic-release-bootstrap-2026-10-02.json`, `prepared-evidence-bootstrap-2026-10-02.json` and `production-verification-2026-10-02.json`. A new Luna thread should clone branch **work**, read this log and `docs/LUNA_DATA_HANDOFF.md`, and add sourced sparse content through the stable contract. Geographic semantic/source completeness and physical-device checks remain open as listed above; this publication does not close them.
 
-The long-term storage recommendation is managed PostgreSQL plus object storage, retaining the private Site and stable research API. See `docs/LONG_TERM_STORAGE_PLAN.md` for the measured migration and provisioning gates. PostgreSQL is not yet provisioned; this engineering work remains with the technical maintainer, not Luna.
+The long-term storage recommendation is managed PostgreSQL plus object storage, retaining the private Site and stable research API. See `docs/LONG_TERM_STORAGE_PLAN.md` for the measured migration and provisioning gates. This earlier recommendation is superseded by the verified PostgreSQL production checkpoint at the top of this log.
 
 ## Research workflow publication and Neon engineering checkpoint — 2026-10-02 UTC
 
