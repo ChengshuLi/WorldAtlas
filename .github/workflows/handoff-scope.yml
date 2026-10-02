@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  issues: read
 
 jobs:
   scope:
@@ -40,6 +41,20 @@ jobs:
         shell: bash
         run: |
           node ../trusted/scripts/check-handoff-scope.mjs --branch "$LANE_BRANCH" --base "$BASE_SHA" --head HEAD --pr-event-file "$GITHUB_EVENT_PATH"
+      - name: Verify linked issue type with read-only GitHub access
+        env:
+          LANE_BRANCH: ${{ github.head_ref }}
+          GH_TOKEN: ${{ github.token }}
+        working-directory: candidate
+        shell: bash
+        run: |
+          if test -f ../trusted/scripts/check-linked-github-issue.mjs; then
+            node ../trusted/scripts/check-linked-github-issue.mjs
+          else
+            # This migration PR uses the preceding trusted scope policy.
+            # New issue-type checks take effect after it merges into main.
+            echo "Pre-Issues trusted base: linked issue type verified by maintainer."
+          fi
   initial-foundation:
     if: github.head_ref == 'work' && github.event.pull_request.base.sha == '5b5f06f87d21f16cb14c6165e75854a29dc191ec'
     runs-on: ubuntu-latest

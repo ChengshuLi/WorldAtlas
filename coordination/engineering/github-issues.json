@@ -1,0 +1,52 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "github-issues",
+  "branch": "engineering/github-issues",
+  "base_main_commit": "032deb0b609f72cfa541d76a7855d9fac5af3335",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/3",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Issue-only work tracking and retained lane prompts",
+    "Partial/final issue linkage and squash merge policy"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-02T08:38:50.227089+00:00",
+  "completed": [
+    "Migrated 18 work records with original evidence and dates",
+    "Preserved original tracker snapshots and prompts"
+  ],
+  "checks": [
+    {
+      "verified_at_utc": "2026-10-02T08:38:50.227089+00:00",
+      "records": 18,
+      "original_open": 14,
+      "original_completed": 4,
+      "archive_matches_source_commit": true,
+      "issue_states_types_and_dates": "passed",
+      "active_document_links": "passed",
+      "yaml_syntax": "passed",
+      "focused_scope_tests": {
+        "passed": 9,
+        "failed": 0
+      },
+      "scope": "Workflow only; no Site, database or factual content changes",
+      "repository_squash_defaults": "Settings API returned 403; explicit --squash --subject PR-title at merge"
+    }
+  ],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/validation/github-issues-migration.json",
+    "docs/archive/pre-github-issues-20261002/README.md"
+  ],
+  "blockers": [],
+  "next_action": "Merge validated workflow PR; future status belongs to issue #3",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

@@ -1,3 +1,11 @@
+# Current workflow update — 2026-10-02 America/Los_Angeles
+
+GitHub Issues is the single source of truth for TODOs, current status and dated work history, with `type:engineering` and `type:history-research` labels. Handover documents/prompts remain architecture and workflow instructions. Each focused PR addresses one issue or part of it; large issues may use multiple PRs. Use `Refs #N` for partial work, `Closes #N` only for final verified acceptance, and squash merge with the PR title as commit title. Every PR starts from fresh main. Original tracker snapshots and completion dates are retained in `docs/archive/pre-github-issues-20261002/`; the immutable crosswalk is `data/validation/github-issues-migration.json`.
+
+The dated entries below are historical checkpoints. Older document-tracker and one-PR-per-issue instructions are superseded by [the current parallel protocol](PARALLEL_WORK_PROTOCOL.md). This workflow update does not change the live Site, database or facts.
+
+---
+
 # Handoff and continuation log
 
 **Current branch policy (2026-10-02 America/Los_Angeles):** `main` is the shared base and PR target. Every future engineering/research TODO issue gets its own fresh lane branch, one GitHub issue and one PR; umbrella goals are split into bounded child/campaign issues. The large initial `work` → `main` foundation PR is explicitly authorized as the one bootstrap exception. Earlier `work` integration instructions below are historical and superseded. Provider/migration workflows now use manual dispatch only; this Git transition does not rerun the completed Neon migration. Tracked issue: [ENG-07 / #1](https://github.com/ChengshuLi/WorldAtlas/issues/1).

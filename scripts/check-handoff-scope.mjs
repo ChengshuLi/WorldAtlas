@@ -3,8 +3,6 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
 
-const tracker='docs/HISTORY_HANDOFF.md';
-const start='<!-- RESEARCH-CAMPAIGNS:START -->',end='<!-- RESEARCH-CAMPAIGNS:END -->';
 export function laneForBranch(branch){
  const match=/^(engineering|research)\/([a-z0-9][a-z0-9-]{0,63})$/.exec(branch??'');
  if(!match)throw Error('Use engineering/<job-id> or research/<campaign-id> with a unique lower-case ID');
@@ -14,56 +12,28 @@ export function validateLanePaths(branch,paths){
  const {lane,id}=laneForBranch(branch);
  for(const file of paths){
   if(typeof file!=='string'||!file||file.startsWith('/')||file.includes('\\')||file.includes('\0')||file.split('/').some(part=>part==='..'||part===''||part==='.'))throw Error('Invalid repository path');
-  if(lane==='research'&&file!==tracker&&!file.startsWith(`research/campaigns/${id}/`))throw Error(`Research changes must stay in its own campaign or owned tracker rows: ${file}`);
+  if(lane==='research'&&!file.startsWith(`research/campaigns/${id}/`))throw Error(`Research changes must stay in its own campaign: ${file}`);
   if(lane==='engineering'&&(file.startsWith('research/campaigns/')||file.startsWith('coordination/engineering/')&&file!==`coordination/engineering/${id}.json`&&!file.startsWith(`coordination/engineering/${id}/`)))throw Error(`Engineering must preserve other lanes' owned progress and research: ${file}`);
  }
  return {lane,id};
 }
-function trackerParts(text){
- const parts=text.split(start);if(parts.length!==2)throw Error('Research tracker start marker must be preserved exactly once');
- const tail=parts[1].split(end);if(tail.length!==2)throw Error('Research tracker end marker must be preserved exactly once');
- return {before:parts[0],body:tail[0],after:tail[1]};
-}
-const validDate=value=>/^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value+'T00:00:00Z'))&&new Date(value+'T00:00:00Z').toISOString().startsWith(value);
-function trackerRows(body){
- const lines=body.trim().split('\n');if(lines.length<2)throw Error('Research tracker table is required');
- const rows=new Map();
- for(const line of lines.slice(2)){
-  if(!line.startsWith('|')||!line.endsWith('|'))throw Error('Research tracker must contain only table rows');
-  const columns=line.slice(1,-1).split('|').map(value=>value.trim());
-  const [id,scope,status,raised,recorded,completed,evidence]=columns;
-  if(columns.length!==7||!/^CAM:[a-z0-9][a-z0-9-]{0,63}:\d+$/.test(id)||!scope||!['open','active','blocked','done'].includes(status)||raised!=='unknown'&&!validDate(raised)||!validDate(recorded)||status==='done'&&(!validDate(completed)||!evidence||evidence==='—')||status!=='done'&&completed!=='—'||rows.has(id))throw Error('Invalid or duplicate research tracker row; completion requires date and evidence');
-  rows.set(id,line);
- }
- return {header:lines.slice(0,2).join('\n'),rows};
-}
-export function validateTrackerChange(branch,before,after){
- const {lane,id}=laneForBranch(branch),old=trackerParts(before),next=trackerParts(after);
- if(lane==='engineering'){
-  if(old.body!==next.body)throw Error('Engineering must preserve campaign-owned tracker rows; integrate the research PR instead');
-  return;
- }
- if(old.before!==next.before||old.after!==next.after)throw Error('Research may change only its campaign rows, not shared handover instructions or global TODOs');
- const previous=trackerRows(old.body),current=trackerRows(next.body);
- const changedOwn=[...current.rows].filter(([key,value])=>key.startsWith(`CAM:${id}:`)&&previous.rows.get(key)!==value);
- if(changedOwn.length>1)throw Error('One research TODO issue per PR; split campaign issues into separate branches');
- if(previous.header!==current.header)throw Error('Research tracker header must remain unchanged');
- for(const [key,value] of previous.rows){
-  if(!current.rows.has(key))throw Error('Keep completed/open tracker items as records; do not delete rows');
-  if(!key.startsWith(`CAM:${id}:`)&&current.rows.get(key)!==value)throw Error('Research must preserve another campaign tracker row');
-  if(key.startsWith(`CAM:${id}:`)){
-   const oldColumns=value.slice(1,-1).split('|').map(cell=>cell.trim()),newColumns=current.rows.get(key).slice(1,-1).split('|').map(cell=>cell.trim());
-   if(oldColumns[3]!==newColumns[3]||oldColumns[4]!==newColumns[4])throw Error('Preserve first-raised and first-recorded dates');
-   if(oldColumns[2]==='done'&&value!==current.rows.get(key))throw Error('Keep completed milestone rows unchanged; append a linked follow-up');
-  }
- }
- for(const key of current.rows.keys())if(!previous.rows.has(key)&&!key.startsWith(`CAM:${id}:`))throw Error('New research tracker items must use this campaign ID');
-}
 export function validateIssuePRBody(body){
  if(typeof body!=='string')throw Error('Supply the PR body');
- const todos=[...body.matchAll(/^TODO:\s*(\S+)\s*$/gm)],closing=body.split('\n').filter(line=>/^\s*(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\b/i.test(line));
- if(todos.length!==1||!closing||closing.length!==1||!/^Closes #[1-9]\d*$/.test(closing[0]))throw Error('One issue per PR: exactly one TODO: <stable-id> and one Closes #<issue-number> line are required');
- return {todo_id:todos[0][1],github_issue:Number(closing[0].slice(8))};
+ const links=body.split('\n').filter(line=>/^\s*(?:refs?|close[sd]?|fix(?:e[sd])?|resolve[sd]?)\b/i.test(line));
+ if(links.length!==1||!/^(Refs|Closes) #[1-9]\d*$/.test(links[0]))throw Error('One issue per PR: use exactly one Refs #<issue-number> for partial work or Closes #<issue-number> for final completion');
+ const automaticClosures=[...body.matchAll(/\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s+#[1-9]\d*/gi)];
+ if(automaticClosures.length!==(links[0].startsWith('Closes')?1:0))throw Error('Additional automatic issue closures are not allowed anywhere in the PR body');
+ // Optional historical IDs support the transition from the archived document trackers.
+ const todos=[...body.matchAll(/^TODO:\s*(\S+)\s*$/gm)];
+ if(todos.length>1)throw Error('Only one legacy TODO ID may be supplied');
+ return {...(todos.length?{todo_id:todos[0][1]}:{}),github_issue:Number(links[0].split('#')[1]),issue_action:links[0].startsWith('Closes')?'close':'reference'};
+}
+export function validateIssueMetadata(branch,issue){
+ const {lane}=laneForBranch(branch),expected=lane==='engineering'?'type:engineering':'type:history-research';
+ if(!issue||issue.pull_request||issue.state!=='open')throw Error('Link an open GitHub issue, not a PR or closed issue');
+ const types=(issue.labels??[]).map(label=>typeof label==='string'?label:label.name).filter(label=>label?.startsWith('type:'));
+ if(types.length!==1||types[0]!==expected)throw Error(`Linked issue must have exactly one type label: ${expected}`);
+ return {issue_type:expected};
 }
 export function checkGitScope({branch,base,head='HEAD',run=execFileSync,prBody}){
  const git=args=>run('git',args,{encoding:'utf8',maxBuffer:16*1024*1024});
@@ -74,8 +44,7 @@ export function checkGitScope({branch,base,head='HEAD',run=execFileSync,prBody})
  const files=git(['diff','--name-only','--no-renames','-z',mergeBaseSHA,headSHA,'--']).split('\0').filter(Boolean);
  const lane=validateLanePaths(branch,files);
  const issue=prBody===undefined?{}:validateIssuePRBody(prBody);
- if(prBody!==undefined&&!(lane.lane==='engineering'?/^ENG-\d+(?:-\d+)*$/.test(issue.todo_id):new RegExp('^CAM:'+lane.id+':\\d+$').test(issue.todo_id)))throw Error('PR TODO ID must identify the single issue in its engineering/research lane');
- if(files.includes(tracker))validateTrackerChange(branch,git(['show',mergeBaseSHA+':'+tracker]),git(['show',headSHA+':'+tracker]));
+ if(issue.todo_id&&!(lane.lane==='engineering'?/^ENG-\d+(?:-\d+)*$/.test(issue.todo_id):new RegExp('^CAM:'+lane.id+':\\d+$').test(issue.todo_id)))throw Error('PR TODO ID must identify the single issue in its engineering/research lane');
  return {...lane,...issue,base:baseSHA,merge_base:mergeBaseSHA,head:headSHA,changed_files:files.length};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){

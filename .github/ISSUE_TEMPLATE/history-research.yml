@@ -1,0 +1,34 @@
+name: Historical research
+description: Sourced factual content, imports and coverage
+labels: ["type:history-research"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Goal and scope
+      description: Explain the concrete problem or bounded geography, time, attributes and source scope.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What evidence establishes completion? Large issues can have several focused PRs; partial PRs must keep the issue open.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources, evidence and existing work
+      description: Link sources, contracts, preserved inputs or receipts. Never include credentials.
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies and related issues
+      description: Link parent or child issues and coordinate overlapping work before starting.
+  - type: input
+    id: raised
+    attributes:
+      label: Original raised date, if known
+      description: America/Los_Angeles date; use unknown when earlier history does not establish it. GitHub records creation separately.
+      placeholder: YYYY-MM-DD or unknown
