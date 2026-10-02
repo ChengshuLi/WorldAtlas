@@ -2,8 +2,9 @@ name: Rehearse reviewed storage migration
 
 # Source and operation files must be reviewed and committed before running.
 # Ordinary pushes only rehearse. Production requires an explicit dispatch or a
-# production operation file changed in this exact commit, plus authenticated
-# successful rehearsal artifacts and an empty-target guard in the script.
+# production operation file changed in this exact commit. The operation records
+# either a successful rehearsal or explicit user authorization to proceed
+# directly. Both paths require an empty target and exhaustive source readback.
 on:
   workflow_dispatch:
     inputs:
@@ -27,7 +28,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: neon-storage-owner-maintenance
+  group: neon-storage-production-maintenance
   cancel-in-progress: false
 
 jobs:

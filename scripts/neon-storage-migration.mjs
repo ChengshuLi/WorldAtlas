@@ -46,7 +46,8 @@ export function validateMigrationOperation(operation,{mode,root=process.cwd()}={
  for(const key of ['source_manifest_sha256','source_snapshot_fingerprint','source_revision'])if(index[key]!==operation[key])fail('reviewed-source-identity-mismatch');
  if(mode!=='rehearsal'){
   const approved=operation.production,proof=approved?.rehearsal;
-  if(!object(approved)||approved.acknowledgement!=='install-reviewed-snapshot-into-empty-production'||!object(proof)||!validNumber(proof.run_id)||!validNumber(proof.run_attempt)||!validNumber(proof.artifact_id)||typeof proof.head_sha!=='string'||!/^[a-f0-9]{40}$/.test(proof.head_sha)||!validHash(proof.artifact_sha256)||!validHash(proof.receipt_sha256)||proof.run_url!==`https://github.com/${migrationRepository}/actions/runs/${proof.run_id}`)fail('production-rehearsal-approval-required');
+  const direct=approved?.execution_policy==='direct-production-with-source-readback'&&approved?.authorization==='User explicitly requested proceeding with production without waiting for the disposable rehearsal.';
+  if(!object(approved)||approved.acknowledgement!=='install-reviewed-snapshot-into-empty-production'||!direct&&(!object(proof)||!validNumber(proof.run_id)||!validNumber(proof.run_attempt)||!validNumber(proof.artifact_id)||typeof proof.head_sha!=='string'||!/^[a-f0-9]{40}$/.test(proof.head_sha)||!validHash(proof.artifact_sha256)||!validHash(proof.receipt_sha256)||proof.run_url!==`https://github.com/${migrationRepository}/actions/runs/${proof.run_id}`))fail('production-rehearsal-approval-required');
   if(mode==='production'){
    if(!validHash(approved.recipient_sha256)||typeof approved.recipient_public_key_file!=='string'||!['.github/operations/','data/storage-migration/'].some(prefix=>approved.recipient_public_key_file.startsWith(prefix)))fail('approved-recipient-required');
    const recipient=repoFile(root,approved.recipient_public_key_file,32768);
@@ -184,7 +185,11 @@ export async function runNeonStorageMigration({mode='rehearsal',operationFile='.
   await unpackStorageCheckpoint({directory:path.join(root,operation.checkpoint_directory),output:source});const snapshot=readVerifiedStorageSnapshot(source);
   if(snapshot.manifest_sha256!==operation.source_manifest_sha256||snapshot.revision!==operation.source_revision||snapshot.manifest.snapshot_marker.fingerprint!==operation.source_snapshot_fingerprint)fail('verified-original-source-mismatch');
   receipt.source_collections=snapshot.proofs;receipt.source_backup_preserved=true;checkpoint();
-  if(mode!=='rehearsal'){stage='authenticated-rehearsal';receipt.authenticated_rehearsal=await authenticateRehearsal({operation,env,fetchImpl});checkpoint();}
+  if(mode!=='rehearsal'){
+   if(operation.production.execution_policy==='direct-production-with-source-readback')receipt.execution_policy={mode:'direct-production-with-source-readback',authorization:operation.production.authorization,rehearsal_required:false,empty_target_and_full_row_verification_required:true};
+   else {stage='authenticated-rehearsal';receipt.authenticated_rehearsal=await authenticateRehearsal({operation,env,fetchImpl});}
+   checkpoint();
+  }
   stage='production-metadata';const parent=await verifyNeonProject({apiKey:env.NEON_API_KEY,projectId:env.NEON_PROJECT_ID,fetchImpl});requests+=parent.api_requests;
   if(parent.branch.id!==productionBranchId||parent.project.configured_postgres_major!==18||!parent.databases.some(row=>row.name==='neondb'&&row.owner_name==='neondb_owner'))fail('verified-neon-parent-mismatch');
   let branchId=productionBranchId,host;

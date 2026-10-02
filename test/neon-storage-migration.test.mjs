@@ -27,7 +27,7 @@ const baseEnv={NEON_PROJECT_ID:expectedNeonProjectId,NEON_API_KEY:neonSecret,GIT
 const {publicKey,privateKey}=generateKeyPairSync('rsa',{modulusLength:3072,publicKeyEncoding:{type:'spki',format:'pem'},privateKeyEncoding:{type:'pkcs8',format:'pem'}});
 
 class D1{
- constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const name of fs.readdirSync(new URL('../drizzle/',import.meta.url)).filter(name=>name.endsWith('.sql')).sort())this.sqlite.exec(fs.readFileSync(new URL('../drizzle/'+name,import.meta.url),'utf8'));}
+ constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const name of fs.readdirSync(new URL('../drizzle/',import.meta.url)).filter(name=>/^000[0-7]_.*\.sql$/.test(name)).sort())this.sqlite.exec(fs.readFileSync(new URL('../drizzle/'+name,import.meta.url),'utf8'));}
  prepare(sql){const sqlite=this.sqlite;let args=[];return {bind(...values){args=values;return this;},async all(){return {results:sqlite.prepare(sql).all(...args)};},async first(){return sqlite.prepare(sql).get(...args)??null;},run(){return {meta:{changes:Number(sqlite.prepare(sql).run(...args).changes)}};}};}
  async batch(statements){this.sqlite.exec('BEGIN IMMEDIATE');try{const results=statements.map(statement=>statement.run());this.sqlite.exec('COMMIT');return results;}catch(error){this.sqlite.exec('ROLLBACK');throw error;}}
 }
@@ -174,4 +174,18 @@ test('artifact reader accepts one bounded receipt without extracting paths and r
  const raw=Buffer.from('{"status":"fixture"}'),archive=receiptZIP(raw);assert.deepEqual(rehearsalReceiptFromZIP(archive),raw);
  for(const invalid of [Buffer.alloc(0),archive.subarray(0,-1),Buffer.concat([archive,Buffer.from('extra')]),Buffer.alloc(2*1024*1024+1)])assert.throws(()=>rehearsalReceiptFromZIP(invalid));
  const traversal=Buffer.from(archive);const original=Buffer.from('receipt.json');for(let at=0;(at=traversal.indexOf(original,at))>=0;at+=original.length)traversal.write('../evil.json',at,'utf8');assert.throws(()=>rehearsalReceiptFromZIP(traversal));
+});
+
+// Explicit user authorization may skip a disposable rehearsal. It cannot skip
+// the empty production guard, original-byte proof or restricted runtime checks.
+test('authorized direct production preserves exhaustive verification and refuses a second installation',async t=>{
+ const f=await snapshotFixture(t),db=await databaseFixture(t),api=managementFixture({database:db});
+ const operation={...f.operation,production:{acknowledgement:'install-reviewed-snapshot-into-empty-production',execution_policy:'direct-production-with-source-readback',authorization:'User explicitly requested proceeding with production without waiting for the disposable rehearsal.',recipient_public_key_file:'data/storage-migration/recipient-public.pem',recipient_sha256:credentialRecipientFingerprint(publicKey)}};
+ const operationFile='.github/operations/neon-production-install.json';fs.writeFileSync(path.join(f.root,operationFile),JSON.stringify(operation));
+ const options={mode:'production',operationFile,root:f.root,env:baseEnv,fetchImpl:api.fetchImpl,ownerDriverFactory:async()=>db.owner,appDatabaseFactory:db.appFactory};
+ const receipt=await runNeonStorageMigration({...options,output:'data/validation/direct'});
+ assert.equal(receipt.status,'verified',JSON.stringify(receipt));assert.equal(receipt.raw_snapshot_verified,true);assert.equal(receipt.runtime_read_only_checks,true);assert.equal(receipt.execution_policy.rehearsal_required,false);assert.equal(receipt.target_branch_id,productionBranchId);
+ assert.equal(api.calls.some(call=>call.host==='api.github.com'||call.method==='POST'||call.method==='DELETE'),false);assert.deepEqual(receipt.restore.collections,f.snapshot.proofs);
+ const before=db.ownerWrites,retry=await runNeonStorageMigration({...options,output:'data/validation/direct-retry'});assert.equal(retry.error_code,'target-not-empty-use-explicit-verify-only');assert.equal(db.ownerWrites,before);
+ const invalid={...operation,production:{...operation.production,authorization:'assumed'}};assert.throws(()=>validateMigrationOperation(invalid,{mode:'production',root:f.root}));
 });
