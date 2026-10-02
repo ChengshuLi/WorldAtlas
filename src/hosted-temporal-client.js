@@ -77,7 +77,10 @@ export async function loadHostedTemporalGeography({apiGet,year,examples=false,ex
    await Promise.all([stream('records'),stream('withdrawals')]);cancelled(signal);
    const compare=(left,right)=>left<right?-1:left>right?1:0,ordered=map=>[...map.values()].sort((left,right)=>compare(left.id,right.id));
    const claims=[...records.values()].sort((left,right)=>compare(left.entity_id,right.entity_id)||compare(left.collection,right.collection)||compare(left.id,right.id));
-   const combinedSnapshot={year,stream:'records',...pins,records:claims,withdrawals:ordered(withdrawals),sources:ordered(sources),next_cursor:null,revision,capability:{datedMembership:1,datedExistence:1,datedFootprints:0}};
+   // Raw source observations were compared before normalization. Parse legacy
+   // JSON metadata once so every hydrated claim can share its source object.
+   const sharedSources=ordered(sources).map(source=>typeof source.metadata==='string'?{...source,metadata:JSON.parse(source.metadata)}:source);
+   const combinedSnapshot={year,stream:'records',...pins,records:claims,withdrawals:ordered(withdrawals),sources:sharedSources,next_cursor:null,revision,capability:{datedMembership:1,datedExistence:1,datedFootprints:0}};
    hydrateHostedTemporalGeographyPage(combinedSnapshot,{year,examples,expectedGeography:pins,complete:true});cancelled(signal);
    const mergedHistory=mergeHostedTemporalHistory(legacyHistory,combinedSnapshot,{year,examples,expectedGeography:pins,complete:true});
    return {available:true,complete:true,revision,combinedSnapshot,mergedHistory};
