@@ -1,0 +1,33 @@
+name: Geography research
+description: Sourced boundary, hierarchy, granularity or geographic-source evidence and proposals
+labels: ["type:geography"]
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Exact reviewed geography and evidence scope
+      description: List stable subject IDs, region/release pins and the source/geographic questions. Work packets do not create new geography.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Sourced acceptance and unresolved findings
+      description: Keep ready work to 1–3 PRs. Engineering implements shared migrations/releases; research supplies evidence and bounded proposals.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources, retained evidence and dependencies
+      description: Link inspected sources, original hashes, claims and related work. No credentials.
+  - type: textarea
+    id: coordination
+    attributes:
+      label: Reviewed readiness and ownership (triage)
+      description: Add one worldatlas-work:v1 block with max_prs, depends_on, scope, mode geography and disjoint owned_paths limited to data/regional-review/<packet-id>/ or research/geography/<campaign-id>/. See docs/GEOGRAPHY_HANDOFF.md.
+  - type: input
+    id: raised
+    attributes:
+      label: Original raised date, if known
+      description: America/Los_Angeles; keep unknown earlier dates unknown.

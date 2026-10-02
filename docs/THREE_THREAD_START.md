@@ -1,6 +1,6 @@
 # Start the WorldAtlas worker roles
 
-These are three roles, not a limit of three chats: use one issue-creation role, M engineering chats and N history-research chats. Read [WORKER_COORDINATION.md](WORKER_COORDINATION.md) for claims, bounded issues and the serialized merge queue.
+These are worker roles, not a limit on chat counts: use an issue-creation role plus M geography, N engineering and P history-research chats in parallel. Models are selected by the user; either research role can run on Luna. Read [WORKER_COORDINATION.md](WORKER_COORDINATION.md) for claims, bounded issues and the serialized merge queue.
 
 Repository: https://github.com/ChengshuLi/WorldAtlas. Start every new thread from current **main**. Give it the matching handover document and copy-ready prompt below; no earlier chat/workspace is required. GitHub Issues holds the queue, current status, dated progress and completed work history.
 
@@ -8,11 +8,14 @@ Repository: https://github.com/ChengshuLi/WorldAtlas. Start every new thread fro
 | --- | --- | --- | --- |
 | Issue creation | [ISSUE_CREATION_HANDOFF.md](ISSUE_CREATION_HANDOFF.md) | [ISSUE_CREATION.txt](prompts/ISSUE_CREATION.txt) | Capture/classify requests and link duplicates/dependencies in GitHub Issues |
 | Engineering | [ENGINEERING_HANDOFF.md](ENGINEERING_HANDOFF.md) | [ENGINEERING.txt](prompts/ENGINEERING.txt) | Work through engineering issues; code, UI, infrastructure and geographic releases |
+| Geography research | [GEOGRAPHY_HANDOFF.md](GEOGRAPHY_HANDOFF.md) | [GEOGRAPHY.txt](prompts/GEOGRAPHY.txt) | Research boundaries, hierarchy and source suitability; scoped evidence/proposals only |
 | History research | [HISTORY_HANDOFF.md](HISTORY_HANDOFF.md) | [LUNA_HISTORY.txt](prompts/LUNA_HISTORY.txt) | Work through research issues; internet sources, factual content, supported imports and receipts |
 
 The issue-creation thread changes Issues only and needs no Git branch. Working threads use separate checkouts/worktrees, inspect active claims/PRs, claim a reviewed ready work item using the serialized reservation workflow, and branch from fresh `origin/main`. Each focused PR addresses one issue or a part of it. Large issues may have multiple PRs; partial work references the issue and final verified work closes it. Workers submit validated PRs to the serialized merge queue, which uses squash merges with the PR title as commit title. After each merge, start a fresh branch for the next focused PR. Provider migrations and Site deployment do not run merely because a PR merges.
 
-Workers continue with the next unclaimed issue in their type queue after each completed PR, until the user asks them to stop, the agreed scope is complete, or a real access/resource/dependency blocker requires handover. Post milestones/blockers/evidence on Issues and report progress every 30 minutes during sustained work. Do not close a worldwide objective after one campaign. Research owns only its campaign directory; engineering preserves research and other jobs. See [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md) for database/geographic maintenance safety.
+Workers continue with the next unclaimed issue in their type queue after each completed PR, until the user asks them to stop, the agreed scope is complete, or a real access/resource/dependency blocker requires handover. Post milestones/blockers/evidence on Issues and report progress every 30 minutes during sustained work. Do not close a worldwide objective after one campaign. History research owns only its campaign directory. Geography owns only reviewed issue-declared evidence directories; engineering preserves both research lanes and other jobs, and implements shared migrations/publication. See [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md) for database/geographic maintenance safety.
+
+Geography proposals feed bounded engineering corrections, validation and publication of a complete regional branch; only then do that branch's historical attribute imports become ready. Independent engineering UI/performance/infrastructure tasks and historical source-only collection can proceed meanwhile. An inter-region inconsistency creates one coordinated task covering affected neighbors rather than unilateral boundary edits. Shared changes require current release pins, revised certificates and content-scope revalidation.
 
 ## Access and cloud setup
 

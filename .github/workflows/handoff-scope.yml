@@ -41,10 +41,14 @@ jobs:
         working-directory: candidate
         shell: bash
         run: |
-          node ../trusted/scripts/check-handoff-scope.mjs --branch "$LANE_BRANCH" --base "$BASE_SHA" --head HEAD --pr-event-file "$GITHUB_EVENT_PATH"
+          if [[ "$LANE_BRANCH" != geography/* ]]; then
+            node ../trusted/scripts/check-handoff-scope.mjs --branch "$LANE_BRANCH" --base "$BASE_SHA" --head HEAD --pr-event-file "$GITHUB_EVENT_PATH"
+          fi
+          # Geography ownership must come from the actual linked issue in the next step.
       - name: Verify linked issue type with read-only GitHub access
         env:
           LANE_BRANCH: ${{ github.head_ref }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
           GH_TOKEN: ${{ github.token }}
         working-directory: candidate
         shell: bash
@@ -58,7 +62,7 @@ jobs:
           fi
       - name: Check worker reservations and regional content gates
         working-directory: candidate
-        run: node --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs
+        run: node --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs
   initial-foundation:
     if: github.head_ref == 'work' && github.event.pull_request.base.sha == '5b5f06f87d21f16cb14c6165e75854a29dc191ec'
     runs-on: ubuntu-latest
