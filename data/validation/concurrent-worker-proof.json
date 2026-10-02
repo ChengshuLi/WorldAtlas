@@ -60,5 +60,11 @@
     "approved_regions": 0,
     "imports_enabled": false
   },
-  "post_merge_verification": "Queued squash merge, new result delivery and release receipts will be retained on GitHub issue #26."
+  "post_merge_verification": "Queued squash merge, new result delivery and release receipts will be retained on GitHub issue #26.",
+  "queued_merge_bootstrap": {
+    "workflow": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37049094968",
+    "accepted": false,
+    "reason": "GitHub GET HTTP 403; old workflow lacked commit-status read permission",
+    "fix": "Explicit statuses:read grant; main bootstrap merge requires maintainer after verified head/claim/checks."
+  }
 }

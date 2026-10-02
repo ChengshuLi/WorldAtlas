@@ -86,7 +86,7 @@ export function githubAPI(token){
  if(!token)throw Error('Read/write GitHub token required');
  return async(route,method='GET',body)=>{
   const response=await fetch('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(20000)});
-  if(!response.ok)throw Error(`GitHub ${method} request failed (HTTP ${response.status})`);
+  if(!response.ok)throw Error(`GitHub ${method} ${route} failed (HTTP ${response.status})`);
   return response.status===204?null:response.json();
  };
 }
