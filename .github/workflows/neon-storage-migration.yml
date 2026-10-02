@@ -1,0 +1,88 @@
+name: Rehearse reviewed storage migration
+
+# Source and operation files must be reviewed and committed before running.
+# Ordinary pushes only rehearse. Production requires an explicit dispatch or a
+# production operation file changed in this exact commit, plus authenticated
+# successful rehearsal artifacts and an empty-target guard in the script.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Reviewed operation to run
+        required: true
+        default: rehearsal
+        type: choice
+        options: [rehearsal, production, verify-only]
+  push:
+    branches: [work]
+    paths:
+      - .github/workflows/neon-storage-migration.yml
+      - scripts/neon-storage-migration.mjs
+      - .github/operations/neon-storage-rehearsal.json
+      - .github/operations/neon-production-install.json
+      - data/storage-checkpoints/**
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: neon-storage-owner-maintenance
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    if: github.repository == 'ChengshuLi/WorldAtlas'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout reviewed checkpoint and operation
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Select explicit reviewed operation
+        id: operation
+        env:
+          REQUESTED_MODE: ${{ inputs.mode }}
+          EVENT_NAME: ${{ github.event_name }}
+        shell: bash
+        run: |
+          mode=rehearsal
+          if [ "$EVENT_NAME" = workflow_dispatch ]; then
+            case "$REQUESTED_MODE" in
+              rehearsal|production|verify-only) mode="$REQUESTED_MODE" ;;
+              *) exit 1 ;;
+            esac
+          elif git diff-tree --no-commit-id --name-only -r HEAD | rg -Fxq '.github/operations/neon-production-install.json'; then
+            mode=production
+          fi
+          operation=.github/operations/neon-storage-rehearsal.json
+          if [ "$mode" != rehearsal ]; then
+            operation=.github/operations/neon-production-install.json
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "file=$operation" >> "$GITHUB_OUTPUT"
+      - name: Set up Node 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run reviewed storage operation
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
+          MIGRATION_MODE: ${{ steps.operation.outputs.mode }}
+          MIGRATION_OPERATION: ${{ steps.operation.outputs.file }}
+        run: node scripts/neon-storage-migration.mjs "$MIGRATION_MODE" "$MIGRATION_OPERATION"
+      - name: Preserve authenticated receipt and encrypted handoff
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: neon-storage-${{ steps.operation.outputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: data/validation/neon-storage-migration/
+          if-no-files-found: error
+          retention-days: 14
