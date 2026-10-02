@@ -1,8 +1,10 @@
 # Handoff and continuation log
 
+**Current branch policy (2026-10-02 America/Los_Angeles):** `main` is the shared base and PR target. Every future engineering/research TODO issue gets its own fresh lane branch, one GitHub issue and one PR; umbrella goals are split into bounded child/campaign issues. The large initial `work` → `main` foundation PR is explicitly authorized as the one bootstrap exception. Earlier `work` integration instructions below are historical and superseded. Provider/migration workflows now use manual dispatch only; this Git transition does not rerun the completed Neon migration. Tracked issue: [ENG-07 / #1](https://github.com/ChengshuLi/WorldAtlas/issues/1).
+
 Authoritative running records: [engineering handover/TODO](ENGINEERING_HANDOFF.md) and [historical handover/TODO](HISTORY_HANDOFF.md), each with a copy-ready prompt under `docs/prompts/`. Retain open/done items, dates and evidence. [The parallel protocol](PARALLEL_WORK_PROTOCOL.md) separates lane branches, owned progress and serial integration; older direct-to-work instructions below are historical and superseded.
 
-Primary repository: `https://github.com/ChengshuLi/WorldAtlas`, branch **work**. This file records work that can be continued from Git. A `.cache` path below identifies a local stage only; the accompanying tracked evidence and restoration instructions are the durable handoff. Do not claim a local stage is deployed or silently apply a blocked candidate.
+Primary repository: `https://github.com/ChengshuLi/WorldAtlas`, branch **main**. This file records work that can be continued from Git. A `.cache` path below identifies a local stage only; the accompanying tracked evidence and restoration instructions are the durable handoff. Do not claim a local stage is deployed or silently apply a blocked candidate.
 
 ## Parallel handover/work-record setup — 2026-10-02 America/Los_Angeles
 

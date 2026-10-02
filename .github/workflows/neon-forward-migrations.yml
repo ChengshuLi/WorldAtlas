@@ -1,8 +1,7 @@
 name: Apply reviewed forward database migrations
 
-# Only an explicitly reviewed production operation changed in this exact work
-# commit can activate production on push. The operation pins an authenticated
-# successful original-copy receipt. Ordinary pushes do not modify production.
+# Manual reviewed maintenance only. Ordinary PR merges never apply owner DDL.
+# The operation still pins the authenticated successful original-copy receipt.
 on:
   workflow_dispatch:
     inputs:
@@ -12,13 +11,6 @@ on:
         default: verify-only
         type: choice
         options: [verify-only, production, rehearsal]
-  push:
-    branches: [work]
-    paths:
-      - .github/workflows/neon-forward-migrations.yml
-      - scripts/neon-forward-migrations.mjs
-      - .github/operations/neon-forward-rehearsal.json
-      - .github/operations/neon-forward-production.json
 
 permissions:
   contents: read

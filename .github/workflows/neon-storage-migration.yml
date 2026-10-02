@@ -1,10 +1,7 @@
 name: Rehearse reviewed storage migration
 
-# Source and operation files must be reviewed and committed before running.
-# Ordinary pushes only rehearse. Production requires an explicit dispatch or a
-# production operation file changed in this exact commit. The operation records
-# either a successful rehearsal or explicit user authorization to proceed
-# directly. Both paths require an empty target and exhaustive source readback.
+# Manual reviewed maintenance only. Merging a PR into main never reruns
+# the completed production storage copy or starts a disposable rehearsal.
 on:
   workflow_dispatch:
     inputs:
@@ -14,14 +11,6 @@ on:
         default: rehearsal
         type: choice
         options: [rehearsal, production, verify-only]
-  push:
-    branches: [work]
-    paths:
-      - .github/workflows/neon-storage-migration.yml
-      - scripts/neon-storage-migration.mjs
-      - .github/operations/neon-storage-rehearsal.json
-      - .github/operations/neon-production-install.json
-      - data/storage-checkpoints/**
 
 permissions:
   contents: read

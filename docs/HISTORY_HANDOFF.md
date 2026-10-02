@@ -2,7 +2,7 @@
 
 Give a Luna thread this document and [its prompt](prompts/LUNA_HISTORY.txt). This entry point describes the research lane without requiring the prior chat or workspace.
 
-**Repository:** `https://github.com/ChengshuLi/WorldAtlas`, integration branch **work**. **Site:** https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [HISTORICAL_RESEARCH_TODO.md](HISTORICAL_RESEARCH_TODO.md), [LUNA_DATA_HANDOFF.md](LUNA_DATA_HANDOFF.md), [RESEARCH_IMPORT_WORKFLOW.md](RESEARCH_IMPORT_WORKFLOW.md) and [ATTRIBUTE_CONTRACT.md](ATTRIBUTE_CONTRACT.md). Inspect existing campaign branches/PRs before selecting new scope.
+**Repository:** `https://github.com/ChengshuLi/WorldAtlas`, integration branch **main**. **Site:** https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [HISTORICAL_RESEARCH_TODO.md](HISTORICAL_RESEARCH_TODO.md), [LUNA_DATA_HANDOFF.md](LUNA_DATA_HANDOFF.md), [RESEARCH_IMPORT_WORKFLOW.md](RESEARCH_IMPORT_WORKFLOW.md) and [ATTRIBUTE_CONTRACT.md](ATTRIBUTE_CONTRACT.md). Inspect existing campaign branches/PRs before selecting new scope.
 
 ## Current starting point
 
@@ -40,13 +40,17 @@ Each research branch may add/update **only its own rows** in this section. Use I
 
 The campaign directory also contains dated notes and an owned progress JSON, so a single table row can link to detailed sources, intermediate work and multiple milestones. Empty campaign rows mean no new post-handover campaign is claimed here; inspect unmerged research branches/PRs before starting.
 
+## One bounded research issue per PR
+
+For each scoped campaign TODO, create/reuse one GitHub issue and one new `research/<campaign-id>` branch from current `origin/main`. Use one owned campaign item (for example `CAM:<campaign-id>:1`); the broad RES goals remain umbrellas. Put that item in `TODO: <stable-id>` and link one `Closes #<issue-number>` line in the PR body targeting `main`. Keep input/import/read-back evidence bounded to that issue. After its PR merges, create a fresh branch for the next issue. Do not gather several campaigns into one later omnibus PR. Retain done items with completion dates and issue/PR evidence.
+
 ## Work in the research lane
 
-1. Use a separate checkout/worktree. Fetch `origin/work`, choose a unique lower-case campaign ID such as `japan-names-1900-20261002`, and create **`research/<campaign-id>`** from that integration branch. Never switch another active thread's checkout or push routine work directly to `work`.
+1. Use a separate checkout/worktree. Fetch `origin/main`, choose a unique lower-case campaign ID such as `japan-names-1900-20261002`, and create **`research/<campaign-id>`** from that integration branch. Never switch another active thread's checkout or push routine work directly to `main`.
 2. You own **`research/campaigns/<campaign-id>/` and this document's `CAM:<campaign-id>:…` rows**. Copy `coordination/templates/research-progress.json` to `research/campaigns/<campaign-id>/progress.json`; fill in scope, dates, branch, base commit, source paths, release pins, receipts and open questions. Save research input, lawful source bytes or restoration manifests, notes and bundles within that directory. Mark completed scoped tracker items `done` with dates and evidence; preserve them as the ongoing record. Do not edit global objectives, handover instructions or another campaign's rows.
 3. Choose a bounded campaign from the research TODO, check existing sources/entities/categories, and reuse stable IDs. Before importing, obtain the current `/api/geography/release`, capacities and capabilities through documented private access; save the exact release JSON with the campaign. Private credentials come from the authorized Site mechanism, never Git/chat/arguments; GitHub's Neon management key is not an import token.
 4. Prepare factual JSON and compile/validate it using existing tools. Import accepted batches, retain receipts after every commit, verify new claims and selected-year results, and log uncovered scope. Preserve incomplete progress if interrupted.
-5. Push your branch frequently. Open a PR targeting **work** that describes campaign coverage, sources, imports, read-back and unresolved questions. Run `node scripts/check-handoff-scope.mjs --branch research/<campaign-id> --base origin/work --head HEAD`. Technical maintainers integrate PRs serially; do not merge or rewrite application releases yourself. Follow applicable Codex PR attachment instructions.
+5. Push your branch frequently. Open a PR targeting **main** that describes campaign coverage, sources, imports, read-back and unresolved questions. Run `node scripts/check-handoff-scope.mjs --branch research/<campaign-id> --base origin/main --head HEAD`. Technical maintainers integrate PRs serially; do not merge or rewrite application releases yourself. Follow applicable Codex PR attachment instructions.
 
 Example commands after saving the factual input and current release:
 

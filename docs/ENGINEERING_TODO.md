@@ -2,7 +2,7 @@
 
 The authoritative dated TODO/work record is [ENGINEERING_HANDOFF.md](ENGINEERING_HANDOFF.md#engineering-todo-and-retained-work-record). Update statuses/dates there and retain completed entries. This guide supplies detailed acceptance criteria.
 
-This is the open engineering queue for future maintainer threads. Historical-content campaigns have a separate queue in [HISTORICAL_RESEARCH_TODO.md](HISTORICAL_RESEARCH_TODO.md). Clone branch **work**, read `AGENTS.md` and [HANDOFF_STATUS.md](HANDOFF_STATUS.md), and inspect the current live release before changing anything. The verified Site 18 platform is writable; no new baseline migration or rehearsal is required to start research.
+This is the open engineering queue for future maintainer threads. Historical-content campaigns have a separate queue in [HISTORICAL_RESEARCH_TODO.md](HISTORICAL_RESEARCH_TODO.md). Clone branch **main**, read `AGENTS.md` and [HANDOFF_STATUS.md](HANDOFF_STATUS.md), and inspect the current live release before changing anything. The verified Site 18 platform is writable; no new baseline migration or rehearsal is required to start research.
 
 Use the authoritative tracker for current status. A source checkpoint, candidate, structural pass or inventory does not establish deployment or semantic completion. Completion requires retained evidence, validation and actual publication receipts when applicable.
 
@@ -58,4 +58,4 @@ Use the authoritative tracker for current status. A source checkpoint, candidate
 
 ## End-of-thread record
 
-Update the engineering handover tracker, dated milestones and owned job progress with completed scope, receipts, blockers and next action. Push an `engineering/<job-id>` branch and PR to **work**; integrate validated PRs serially and update central operational summaries. Preserve the original evidence and fixed migrations. Keep credentials out of Git. Leave research tasks in the research queue; do not transfer these engineering items to Luna.
+Update the engineering handover tracker, dated milestones and owned job progress with completed scope, receipts, blockers and next action. Push an `engineering/<job-id>` branch and PR to **main**; integrate validated PRs serially and update central operational summaries. Preserve the original evidence and fixed migrations. Keep credentials out of Git. Leave research tasks in the research queue; do not transfer these engineering items to Luna.

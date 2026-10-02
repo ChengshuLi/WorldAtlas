@@ -23,7 +23,7 @@ import {credentialRecipientFingerprint,decryptCredentialEnvelope} from '../scrip
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const neonSecret='private-test-neon-key',githubSecret='private-test-actions-key',ownerPassword='private-test-owner-password';
 const childId='br-full-storage-fixture',childHost='ep-storage-fixture.aws.neon.tech',productionHost='ep-production-fixture.aws.neon.tech';
-const baseEnv={NEON_PROJECT_ID:expectedNeonProjectId,NEON_API_KEY:neonSecret,GITHUB_TOKEN:githubSecret,GITHUB_REPOSITORY:migrationRepository,GITHUB_RUN_ID:'111000',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:'a'.repeat(40),GITHUB_WORKFLOW_REF:`${migrationRepository}/${migrationWorkflowPath}@refs/heads/work`};
+const baseEnv={NEON_PROJECT_ID:expectedNeonProjectId,NEON_API_KEY:neonSecret,GITHUB_TOKEN:githubSecret,GITHUB_REPOSITORY:migrationRepository,GITHUB_RUN_ID:'111000',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:'a'.repeat(40),GITHUB_WORKFLOW_REF:`${migrationRepository}/${migrationWorkflowPath}@refs/heads/main`};
 const {publicKey,privateKey}=generateKeyPairSync('rsa',{modulusLength:3072,publicKeyEncoding:{type:'spki',format:'pem'},privateKeyEncoding:{type:'pkcs8',format:'pem'}});
 
 class D1{

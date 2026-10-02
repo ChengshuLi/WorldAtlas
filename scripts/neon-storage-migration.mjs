@@ -57,7 +57,7 @@ export function validateMigrationOperation(operation,{mode,root=process.cwd()}={
  return operation;
 }
 function githubContext(env){
- if(env.GITHUB_REPOSITORY!==migrationRepository||!validNumber(env.GITHUB_RUN_ID)||!validNumber(env.GITHUB_RUN_ATTEMPT)||!/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')||env.GITHUB_WORKFLOW_REF!==`${migrationRepository}/${migrationWorkflowPath}@refs/heads/work`)fail('authorized-actions-context-required');
+ if(env.GITHUB_REPOSITORY!==migrationRepository||!validNumber(env.GITHUB_RUN_ID)||!validNumber(env.GITHUB_RUN_ATTEMPT)||!/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')||env.GITHUB_WORKFLOW_REF!==`${migrationRepository}/${migrationWorkflowPath}@refs/heads/main`)fail('authorized-actions-context-required');
  return {repository:migrationRepository,workflow_path:migrationWorkflowPath,head_sha:env.GITHUB_SHA,run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT};
 }
 async function boundedBytes(response,limit){
@@ -114,7 +114,7 @@ async function authenticateRehearsal({operation,env,fetchImpl}){
   if(!response.ok){await response.body?.cancel().catch(()=>{});fail('actions-verification-http-failed');}return JSON.parse((await boundedBytes(response,2*1024*1024)).toString('utf8'));
  };
  const run=await request('/actions/runs/'+expected.run_id);
- if(!Number.isSafeInteger(run.id)||!Number.isSafeInteger(run.run_attempt)||String(run.id)!==expected.run_id||String(run.run_attempt)!==expected.run_attempt||run.repository?.full_name!==migrationRepository||run.head_branch!=='work'||run.head_sha!==expected.head_sha||run.path!==migrationWorkflowPath||run.status!=='completed'||run.conclusion!=='success'||run.html_url!==expected.run_url)fail('successful-authorized-rehearsal-run-required');
+ if(!Number.isSafeInteger(run.id)||!Number.isSafeInteger(run.run_attempt)||String(run.id)!==expected.run_id||String(run.run_attempt)!==expected.run_attempt||run.repository?.full_name!==migrationRepository||!['work','main'].includes(run.head_branch)||run.head_sha!==expected.head_sha||run.path!==migrationWorkflowPath||run.status!=='completed'||run.conclusion!=='success'||run.html_url!==expected.run_url)fail('successful-authorized-rehearsal-run-required');
  const artifact=await request('/actions/artifacts/'+expected.artifact_id);
  if(!Number.isSafeInteger(artifact.id)||String(artifact.id)!==expected.artifact_id||artifact.name!==`neon-storage-rehearsal-${expected.run_id}-${expected.run_attempt}`||artifact.expired!==false||!Number.isSafeInteger(artifact.workflow_run?.id)||artifact.workflow_run.id!==Number(expected.run_id)||artifact.workflow_run?.head_sha!==expected.head_sha||artifact.digest!=='sha256:'+expected.artifact_sha256||!Number.isSafeInteger(artifact.size_in_bytes)||artifact.size_in_bytes<1||artifact.size_in_bytes>2*1024*1024)fail('authenticated-rehearsal-artifact-required');
  let redirect;try{redirect=await fetchImpl(`https://api.github.com/repos/${migrationRepository}/actions/artifacts/${expected.artifact_id}/zip`,{headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json'},redirect:'manual',signal:AbortSignal.timeout(15000)});}catch{fail('artifact-download-unavailable');}

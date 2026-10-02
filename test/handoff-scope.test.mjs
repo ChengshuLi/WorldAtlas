@@ -4,7 +4,7 @@ import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {laneForBranch,validateLanePaths,validateTrackerChange,checkGitScope} from '../scripts/check-handoff-scope.mjs';
+import {laneForBranch,validateLanePaths,validateTrackerChange,checkGitScope,validateIssuePRBody} from '../scripts/check-handoff-scope.mjs';
 
 const header='| ID | Scope | Status | Raised | Recorded | Completed | Evidence |\n| --- | --- | --- | --- | --- | --- | --- |';
 const doc=rows=>`Instructions\n<!-- RESEARCH-CAMPAIGNS:START -->\n${header}\n${rows.join('\n')}\n<!-- RESEARCH-CAMPAIGNS:END -->\nEnd instructions\n`;
@@ -17,6 +17,8 @@ test('research can add owned rows and mark them done with a date and evidence',(
 test('research cannot change instructions, other campaign rows, global rows or delete records',()=>{const original=doc([row('japan'),row('italy')]);for(const changed of [original.replace('Instructions','Changed instructions'),doc([row('japan')]),doc([row('japan'),row('italy','blocked')]),doc([row('japan'),row('italy'),row('france')])])assert.throws(()=>validateTrackerChange('research/japan',original,changed));});
 test('completion requires a real date and an evidence path',()=>{for(const changed of [row('japan','done','—','receipt.json'),row('japan','done','2026-02-31','receipt.json'),row('japan','done','2026-10-02','—'),row('japan','active','2026-10-02','receipt.json')])assert.throws(()=>validateTrackerChange('research/japan',doc([]),doc([changed])));});
 test('original tracker dates and completed milestones remain retained',()=>{const original=doc([row('japan')]),done=doc([row('japan','done','2026-10-02','receipt.json')]);assert.throws(()=>validateTrackerChange('research/japan',original,original.replace('| unknown |','| 2026-10-01 |')));assert.throws(()=>validateTrackerChange('research/japan',done,done.replace('Dated names','New scope')));assert.throws(()=>validateTrackerChange('research/japan',done,original));});
+test('a research PR cannot combine two separate TODO items',()=>{assert.throws(()=>validateTrackerChange('research/japan',doc([]),doc([row('japan'),row('japan').replace(':1 |',':2 |')])),/One research TODO/);});
+test('PR policy requires exactly one TODO issue and one linked GitHub issue',()=>{assert.deepEqual(validateIssuePRBody('TODO: ENG-01-01\nCloses #12\n\nValidation passed.'),{todo_id:'ENG-01-01',github_issue:12});for(const body of ['No issue','TODO: ENG-01\nCloses #12\nCloses #13','TODO: ENG-01\nTODO: ENG-02\nCloses #12','TODO: ENG-01\nCloses #12 and #13','TODO: ENG-01\nCloses #12\nFixes #13'])assert.throws(()=>validateIssuePRBody(body));});
 test('engineering may update handover instructions but not campaign-owned rows',()=>{validateTrackerChange('engineering/grid',doc([row('japan')]),doc([row('japan')]).replace('Instructions','Updated instructions'));assert.throws(()=>validateTrackerChange('engineering/grid',doc([row('japan')]),doc([row('japan','done','2026-10-02','receipt.json')])));});
 test('tracker markers and unique row identities are mandatory',()=>{for(const changed of [doc([]).replace('RESEARCH-CAMPAIGNS:END','REMOVED'),doc([row('japan'),row('japan')]),doc([])+'<!-- RESEARCH-CAMPAIGNS:START -->'])assert.throws(()=>validateTrackerChange('research/japan',doc([]),changed));});
 test('real git diff checks rename source paths, not only allowed destinations',()=>{

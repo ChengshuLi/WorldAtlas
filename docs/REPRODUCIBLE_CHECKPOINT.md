@@ -1,11 +1,11 @@
 # Reproducible development and research checkpoint
 
-The primary repository is `https://github.com/ChengshuLi/WorldAtlas`, development branch `work`. A new Codex thread should clone that branch and read `AGENTS.md`, `docs/IMPLEMENTATION_PROGRESS.md`, and `docs/LUNA_DATA_HANDOFF.md` before changing content. The separate Site source repository is a deployment mirror; it is not the research handoff repository.
+The primary repository is `https://github.com/ChengshuLi/WorldAtlas`, development branch `main`. A new Codex thread should clone that branch and read `AGENTS.md`, `docs/IMPLEMENTATION_PROGRESS.md`, and `docs/LUNA_DATA_HANDOFF.md` before changing content. The separate Site source repository is a deployment mirror; it is not the research handoff repository.
 
 ## Start from Git
 
 ```sh
-git clone --branch work https://github.com/ChengshuLi/WorldAtlas.git
+git clone --branch main https://github.com/ChengshuLi/WorldAtlas.git
 cd WorldAtlas
 npm ci
 npm run dev

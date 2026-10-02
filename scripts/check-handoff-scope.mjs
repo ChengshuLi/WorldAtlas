@@ -1,6 +1,7 @@
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
+import fs from 'node:fs';
 
 const tracker='docs/HISTORY_HANDOFF.md';
 const start='<!-- RESEARCH-CAMPAIGNS:START -->',end='<!-- RESEARCH-CAMPAIGNS:END -->';
@@ -44,6 +45,8 @@ export function validateTrackerChange(branch,before,after){
  }
  if(old.before!==next.before||old.after!==next.after)throw Error('Research may change only its campaign rows, not shared handover instructions or global TODOs');
  const previous=trackerRows(old.body),current=trackerRows(next.body);
+ const changedOwn=[...current.rows].filter(([key,value])=>key.startsWith(`CAM:${id}:`)&&previous.rows.get(key)!==value);
+ if(changedOwn.length>1)throw Error('One research TODO issue per PR; split campaign issues into separate branches');
  if(previous.header!==current.header)throw Error('Research tracker header must remain unchanged');
  for(const [key,value] of previous.rows){
   if(!current.rows.has(key))throw Error('Keep completed/open tracker items as records; do not delete rows');
@@ -56,7 +59,13 @@ export function validateTrackerChange(branch,before,after){
  }
  for(const key of current.rows.keys())if(!previous.rows.has(key)&&!key.startsWith(`CAM:${id}:`))throw Error('New research tracker items must use this campaign ID');
 }
-export function checkGitScope({branch,base,head='HEAD',run=execFileSync}){
+export function validateIssuePRBody(body){
+ if(typeof body!=='string')throw Error('Supply the PR body');
+ const todos=[...body.matchAll(/^TODO:\s*(\S+)\s*$/gm)],closing=body.split('\n').filter(line=>/^\s*(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\b/i.test(line));
+ if(todos.length!==1||!closing||closing.length!==1||!/^Closes #[1-9]\d*$/.test(closing[0]))throw Error('One issue per PR: exactly one TODO: <stable-id> and one Closes #<issue-number> line are required');
+ return {todo_id:todos[0][1],github_issue:Number(closing[0].slice(8))};
+}
+export function checkGitScope({branch,base,head='HEAD',run=execFileSync,prBody}){
  const git=args=>run('git',args,{encoding:'utf8',maxBuffer:16*1024*1024});
  // Resolve refs first: untrusted values never become git options or shell code.
  const resolve=ref=>{const sha=git(['rev-parse','--verify','--end-of-options',ref+'^{commit}']).trim();if(!/^[a-f0-9]{40,64}$/.test(sha))throw Error('Invalid commit');return sha;};
@@ -64,12 +73,17 @@ export function checkGitScope({branch,base,head='HEAD',run=execFileSync}){
  if(!/^[a-f0-9]{40,64}$/.test(mergeBaseSHA))throw Error('Branches need a common integration base');
  const files=git(['diff','--name-only','--no-renames','-z',mergeBaseSHA,headSHA,'--']).split('\0').filter(Boolean);
  const lane=validateLanePaths(branch,files);
+ const issue=prBody===undefined?{}:validateIssuePRBody(prBody);
+ if(prBody!==undefined&&!(lane.lane==='engineering'?/^ENG-\d+(?:-\d+)*$/.test(issue.todo_id):new RegExp('^CAM:'+lane.id+':\\d+$').test(issue.todo_id)))throw Error('PR TODO ID must identify the single issue in its engineering/research lane');
  if(files.includes(tracker))validateTrackerChange(branch,git(['show',mergeBaseSHA+':'+tracker]),git(['show',headSHA+':'+tracker]));
- return {...lane,base:baseSHA,merge_base:mergeBaseSHA,head:headSHA,changed_files:files.length};
+ return {...lane,...issue,base:baseSHA,merge_base:mergeBaseSHA,head:headSHA,changed_files:files.length};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const args=process.argv.slice(2),options={};
- for(let i=0;i<args.length;i+=2){if(!['--branch','--base','--head'].includes(args[i])||!args[i+1]||options[args[i].slice(2)])throw Error('Usage: node scripts/check-handoff-scope.mjs --branch lane/id --base origin/work [--head HEAD]');options[args[i].slice(2)]=args[i+1];}
+ for(let i=0;i<args.length;i+=2){if(!['--branch','--base','--head','--pr-body-file','--pr-event-file'].includes(args[i])||!args[i+1]||options[args[i].slice(2)])throw Error('Usage: node scripts/check-handoff-scope.mjs --branch lane/id --base origin/main [--head HEAD] [--pr-body-file path]');options[args[i].slice(2)]=args[i+1];}
  if(!options.branch||!options.base)throw Error('Supply branch and base');
+ if(options['pr-body-file']&&options['pr-event-file'])throw Error('Use one PR body source');
+ if(options['pr-body-file'])options.prBody=fs.readFileSync(options['pr-body-file'],'utf8');
+ if(options['pr-event-file'])options.prBody=JSON.parse(fs.readFileSync(options['pr-event-file'],'utf8')).pull_request?.body??'';
  console.log(JSON.stringify({scope_check:'passed',...checkGitScope(options)}));
 }

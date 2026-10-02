@@ -2,7 +2,7 @@
 
 Give a future engineering thread this document and [its prompt](prompts/ENGINEERING.txt). The document is an entry point to the durable repository; no prior chat, workspace, cache or private credential is required for understanding the work.
 
-**Repository:** `https://github.com/ChengshuLi/WorldAtlas`, integration branch **work**. **Site:** https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [ENGINEERING_TODO.md](ENGINEERING_TODO.md), [HANDOFF_STATUS.md](HANDOFF_STATUS.md) and `data/validation/neon-final-publication.json`. Recheck the live state rather than assuming an old receipt is current.
+**Repository:** `https://github.com/ChengshuLi/WorldAtlas`, integration branch **main**. **Site:** https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [ENGINEERING_TODO.md](ENGINEERING_TODO.md), [HANDOFF_STATUS.md](HANDOFF_STATUS.md) and `data/validation/neon-final-publication.json`. Recheck the live state rather than assuming an old receipt is current.
 
 ## Current starting point
 
@@ -25,19 +25,24 @@ Dates use **America/Los_Angeles**. `Raised` records the actual first request whe
 | ENG-04 | Physical mobile performance validation | open | unknown | 2026-10-02 | — | `docs/FINAL_GRID_ASSESSMENT.md`; actual phone memory/frame-time measurements remain open |
 | ENG-05 | Actual provider allowances, growth controls and measured scaling | open | unknown | 2026-10-02 | — | `docs/LONG_TERM_STORAGE_PLAN.md`; verify configured storage/compute/backup limits before sustained growth |
 | ENG-06 | Concurrent two-lane handovers, running trackers and path guard | done | 2026-10-02 | 2026-10-02 | 2026-10-02 | `data/validation/parallel-handoff-setup.json`; 11 guard tests passed, dated trackers/prompts and trusted-base PR workflow configured |
+| ENG-07 | Establish main baseline and one-issue-per-PR development | active | 2026-10-02 | 2026-10-02 | — | [GitHub issue #1](https://github.com/ChengshuLi/WorldAtlas/issues/1); update both lanes, preserve completed migration, merge the initial foundation PR |
 
 ## Engineering milestones
 
 - **2026-10-02:** verified the writable production research platform and retained facts/archives; recorded exact deployment and validation receipts in `data/validation/neon-final-publication.json`. The five wider engineering items above remain open.
 - **2026-10-02:** established separate engineering/research branches, handover prompts, owned progress templates and continuing work records. Verified with 11 passing scope tests; ENG-06 retains its completion date and evidence. GitHub workflow execution and required branch protection are not claimed.
 
+## One TODO issue per PR
+
+Use current `origin/main` for every new issue branch, and target `main` in every PR. Create/reuse one GitHub issue for one stable TODO ID. Split large umbrella goals into bounded child items before starting. Put `TODO: ENG-…` and `Closes #<issue-number>` in the PR body. Complete and merge that issue incrementally, preserve its dates/evidence/PR link, then start the next issue on a fresh branch. The initial work-to-main foundation PR is the sole approved large bootstrap exception.
+
 ## Work in the engineering lane
 
-1. Use a separate checkout/worktree. Fetch `origin/work`, choose a unique lower-case job ID such as `dated-footprints-20261002`, and create **`engineering/<job-id>`** from that integration branch. Never switch another active thread's checkout or push routine work directly to `work`.
+1. Use a separate checkout/worktree. Fetch `origin/main`, choose a unique lower-case job ID such as `dated-footprints-20261002`, and create **`engineering/<job-id>`** from that integration branch. Never switch another active thread's checkout or push routine work directly to `main`.
 2. Copy `coordination/templates/engineering-progress.json` to **`coordination/engineering/<job-id>.json`**. Set the job ID, branch, scope, base commit and evidence paths. Update this owned file periodically and at milestones; do not replace another thread's progress file.
 3. Keep source changes, tests, maintainer documentation and receipts on your branch. Update this tracker and append dated engineering milestones as items progress. Do not edit `research/campaigns/`, campaign-owned rows in the historical tracker, or another engineering job's progress. If research inputs need correction or revalidation, produce a separate maintainer receipt and request a new immutable content campaign; preserve original bundles.
-4. Push your branch frequently. Open a PR targeting **work**, including status, checks, deployed state and open items. Run `node scripts/check-handoff-scope.mjs --branch engineering/<job-id> --base origin/work --head HEAD` before submission. Follow applicable Codex PR attachment instructions.
-5. Technical maintainers integrate reviewed branches serially. Rebase or merge the latest `origin/work`, preserve both lanes' files, rerun affected checks, and merge only verified changes. Update central TODOs and `HANDOFF_STATUS.md` as part of integration. A pushed PR is durable progress, not proof of a live deployment.
+4. Push your branch frequently. Open a PR targeting **main**, including status, checks, deployed state and open items. Run `node scripts/check-handoff-scope.mjs --branch engineering/<job-id> --base origin/main --head HEAD` before submission. Follow applicable Codex PR attachment instructions.
+5. Technical maintainers integrate reviewed branches serially. Rebase or merge the latest `origin/main`, preserve both lanes' files, rerun affected checks, and merge only verified changes. Update central TODOs and `HANDOFF_STATUS.md` as part of integration. A pushed PR is durable progress, not proof of a live deployment.
 
 Read [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md) for exact file ownership, PR checks and live-database coordination. Do not mix two implementation jobs that touch the same subsystem without an explicit dependency and one integration owner.
 
@@ -50,4 +55,4 @@ Read [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md) for exact file owner
 
 ## End-of-thread handover
 
-Push the branch, progress record, source, reproducible inputs and validation/publication receipts. Record exact commits, PR, deployed release and next concrete action. Leave unknowns and incomplete tests explicit. Use the engineering TODO as your queue; Luna is responsible for content research/imports, not engineering. Another thread can resume by reading this document, current `origin/work` and any open engineering PR/branch and its owned progress file.
+Push the branch, progress record, source, reproducible inputs and validation/publication receipts. Record exact commits, PR, deployed release and next concrete action. Leave unknowns and incomplete tests explicit. Use the engineering TODO as your queue; Luna is responsible for content research/imports, not engineering. Another thread can resume by reading this document, current `origin/main` and any open engineering PR/branch and its owned progress file.
