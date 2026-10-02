@@ -12,14 +12,19 @@ function validatePrior(actual,release){
  if(!actual.expected_counts||Object.keys(actual.expected_counts).length!==Object.keys(release.expected_counts).length||Object.keys(release.expected_counts).some(k=>actual.expected_counts[k]!==release.expected_counts[k]))throw Error('Existing reference counts mismatch');
  if(!['staged','published'].includes(actual.status))throw Error('Unexpected existing reference status');
 }
-export async function publishGeographicReleases({manifest,batch,request,concurrency=bootstrapConcurrency()}){
+export async function publishGeographicReleases({manifest,batch,request,concurrency=bootstrapConcurrency(),mode='publish'}){
+ if(!['publish','stage','finalize'].includes(mode))throw Error('Unknown geographic publication mode');
  concurrency=bootstrapConcurrency(concurrency);
  const need=pathname=>{const part=manifest.batches.find(p=>p.path===pathname);if(!part)throw Error(`Missing prepared reference batch: ${pathname}`);return part;};
  async function concurrent(parts){let index=0,failure;await Promise.all(Array.from({length:Math.min(concurrency,parts.length)},async()=>{while(!failure&&index<parts.length){const part=parts[index++];try{await batch(part);}catch(error){failure??=error;}}}));if(failure)throw failure;}
  // Sources and stable identities precede memberships. All retries use the same
  // pinned ingestion IDs; staging service idempotence preserves completed rows.
- await batch(need('sources.json'));
+ const sourcePaths=manifest.sources_batches??manifest.batches.filter(p=>/^sources(?:-\d+)?\.json$/.test(p.path)).map(p=>p.path);
+ if(!sourcePaths.length||new Set(sourcePaths).size!==sourcePaths.length)throw Error('Missing or duplicate prepared reference source batches');
+ if(mode!=='finalize'){
+ await concurrent(sourcePaths.map(need));
  for(const tier of ['continent','subcontinent','region','area','province','location'])await concurrent(manifest.batches.filter(p=>p.path.startsWith(`entities-${tier}-`)));
+ }
  const published=[];
  for(const release of manifest.releases){
   const route='/api/geography/release?'+new URLSearchParams({release_id:release.id}),prior=await (await request(route)).json();
@@ -27,8 +32,11 @@ export async function publishGeographicReleases({manifest,batch,request,concurre
   // Public readers may hide staged releases; an absent or explicit staged row
   // both require idempotent replay of every bounded batch before finalization.
   if(!prior||prior.status!=='published'){
-   await batch(need(`release-${release.version}.json`));
-   await concurrent(manifest.batches.filter(p=>p.path.startsWith(`${release.version}-`)));
+   if(mode!=='finalize'){
+    await batch(need(`release-${release.version}.json`));
+    await concurrent(manifest.batches.filter(p=>p.path.startsWith(`${release.version}-`)));
+   }
+   if(mode==='stage'){published.push({id:release.id,version:release.version,status:'staged',public_readback_verified:false});continue;}
    await request('/api/geography/finalize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({release_id:release.id})});
   }
   const actual=await (await request(route)).json();if(!actual)throw Error('Published reference release is missing');validatePrior(actual,release);
@@ -57,7 +65,8 @@ export async function retainGeographicArchives({archiveFiles,sourceId,request,re
 }
 async function main(){
 process.chdir(path.dirname(path.dirname(fileURLToPath(import.meta.url))));
-const origin=process.argv[2],directory=process.argv[3]??'data/geographic-releases',concurrency=bootstrapConcurrency();
+const origin=process.argv[2],directory=process.argv[3]??'data/geographic-releases',concurrency=bootstrapConcurrency(),mode=process.argv.includes('--stage-only')?'stage':process.argv.includes('--finalize-only')?'finalize':'publish';
+if(process.argv.includes('--stage-only')&&process.argv.includes('--finalize-only'))throw Error('Choose staging or finalization');
 if(!origin||new URL(origin).protocol!=='https:')throw Error('Supply the confirmed owner-private Site origin');
 if(!process.stdin.isTTY)throw Error('A private service credential must be supplied on hidden terminal stdin');
 process.stdin.setRawMode(true);process.stdout.write('Ready for private service credential on hidden stdin.\n');
@@ -81,7 +90,7 @@ async function batch(part){
  await request(part.route,{method:'POST',headers:{'Content-Type':'application/json'},body:bytes});completed++;
  if(Date.now()-lastUpdate>15000){lastUpdate=Date.now();console.log(`Reference geography: ${completed} bounded import batches completed.`);}
 }
-const published=await publishGeographicReleases({manifest,batch,request,concurrency});
+const published=await publishGeographicReleases({manifest,batch,request,concurrency,mode});
 // Retain the complete before/after crosswalk independently of deployment assets.
 const release=manifest.releases.at(-1),archiveFiles=new Set(['data/geographic-decision-migration.json.gz']);
 for(const file of ['data/macro-boundary-migration.json.gz','data/geographic-repair-evidence/index.json','data/reference-migrations/source-territory-repair-v1/index.json'])if(fs.existsSync(file))archiveFiles.add(file);
@@ -89,8 +98,9 @@ const repairIndex='data/geographic-repair-evidence/index.json';
 if(fs.existsSync(repairIndex)){const index=JSON.parse(fs.readFileSync(repairIndex));for(const pin of Object.values(index.files)){const file='data/geographic-repair-evidence/'+pin.archive_path;if(sha(fs.readFileSync(file))!==pin.sha256)throw Error('Retained geographic evidence changed');archiveFiles.add(file);}}
 const references='data/reference-migrations/source-territory-repair-v1';
 if(fs.existsSync(references))for(const file of fs.readdirSync(references))archiveFiles.add(references+'/'+file);
-const retained=await retainGeographicArchives({archiveFiles,sourceId:release.source_id,request});
-console.log(JSON.stringify({published,bounded_batches:completed,migration_archives:retained}));
+for(const directory of ['data/macro-foundation','data/reference-migrations/global-macro-reference-v3'])if(fs.existsSync(directory))for(const file of fs.readdirSync(directory,{recursive:true})){const full=directory+'/'+file;if(fs.statSync(full).isFile())archiveFiles.add(full);}
+const retained=mode==='finalize'?[]:await retainGeographicArchives({archiveFiles,sourceId:release.source_id,request});
+console.log(JSON.stringify({mode,published,bounded_batches:completed,migration_archives:retained}));
 
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))await main();

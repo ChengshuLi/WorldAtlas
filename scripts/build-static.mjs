@@ -1,3 +1,4 @@
+import path from 'node:path';
 import fs from 'node:fs/promises';
 import { build } from 'vite';
 import {gzipSync,gunzipSync} from 'node:zlib';
@@ -92,12 +93,14 @@ try {
   }
   await fs.writeFile('dist/geographic-migration-review.json.gz',gzipSync(await fs.readFile('data/geographic-migration-review.json'),{level:9}));
   for(const file of ['world-review.json','global-refinement-report.json','source-inventory.json','pixel-audit.json','regional-membership-report.json','border-parent-review.json','attribute-sources.json','reference-polity-report.json','settlement-source-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);
+  const projectedReviewFile='data/macro-foundation/world-review-projection.json',hasProjectedReview=await fs.access(projectedReviewFile).then(()=>true,()=>false);
+  if(hasProjectedReview){await fs.writeFile('dist/world-review-source-inspection.json.gz',gzipSync(await fs.readFile('data/world-review.json'),{level:9}));await fs.copyFile(projectedReviewFile,'dist/world-review.json');}
   for(const file of ['administrative-sources.json','granularity-report.json','hierarchy-report.json','semantic-report.json','granularity-audit.json','location-policy.json','coverage-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);
   await fs.mkdir('dist/source-policy-corrections',{recursive:true});
   await fs.copyFile('data/source-policy-corrections/summary.json','dist/source-policy-corrections/summary.json');
   const frameworkReport=JSON.parse(await fs.readFile('data/hierarchy-report.json','utf8'));
-  const worldReview=JSON.parse(await fs.readFile('data/world-review.json','utf8'));
-  for(const file of worldReview.location_parts||[])await fs.copyFile(`data/${file}`,`dist/${file}`);
+  const worldReview=JSON.parse(await fs.readFile(hasProjectedReview?projectedReviewFile:'data/world-review.json','utf8'));
+  for(const file of worldReview.location_parts||[]){await fs.mkdir(path.dirname(`dist/${file}`),{recursive:true});await fs.copyFile(`data/${file}`,`dist/${file}`);}
   for(const file of frameworkReport.change_parts||[])await fs.copyFile(`data/${file}`,`dist/${file}`);
   await fs.copyFile('data/framework-sources/manifest.json','dist/framework-sources.json');
   for(const file of await fs.readdir('dist',{recursive:true})){const stat=await fs.stat(`dist/${file}`);if(stat.isFile()&&stat.size>25*1024*1024)throw new Error(`Static asset exceeds 25 MiB: ${file}`);}

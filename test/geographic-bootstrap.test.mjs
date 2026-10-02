@@ -29,6 +29,36 @@ async function fixture({visibleStaged=true}={}){
 
 test('bounded import concurrency defaults to six and accepts only one through eight',()=>{assert.equal(bootstrapConcurrency('6'),6);assert.equal(bootstrapConcurrency(8),8);assert.equal(bootstrapConcurrency(1),1);for(const value of ['0','9','3.5','06','six','',null])assert.throws(()=>bootstrapConcurrency(value),/integer from 1 to 8/);});
 
+test('stage then finalize publishes atomically without replaying ownership batches',async()=>{
+ const f=await fixture({visibleStaged:false});try{
+  const staged=await publishGeographicReleases({...f,mode:'stage'});
+  assert.equal(staged[0].status,'staged');assert.equal(staged[0].public_readback_verified,false);
+  assert.equal(await geographicRelease(f.db,f.release.id),null);
+  assert.equal((await geographicRelease(f.db,f.release.id,{includeStaged:true})).status,'staged');
+  const count=f.calls.length;
+  const published=await publishGeographicReleases({...f,mode:'finalize'});
+  assert.equal(published[0].id,f.release.id);assert.equal(f.calls.length,count);
+  assert.equal((await geographicRelease(f.db,f.release.id)).status,'published');
+  await assert.rejects(publishGeographicReleases({...f,mode:'incorrect'}),/Unknown/);
+ }finally{f.db.sqlite.close();}
+});
+
+test('append-only source batches import before newly registered geography and retain the original source bytes',async()=>{
+ const f=await fixture();try{
+  const original=f.manifest.batches.find(p=>p.path==='sources.json'),later={path:'sources-3.json',route:'/api/records/import'};
+  const manifest={...f.manifest,sources_batches:['sources.json','sources-3.json'],batches:[...f.manifest.batches,later]};
+  let newSourceImported=false;
+  await publishGeographicReleases({...f,manifest,batch:async part=>{
+   if(part.path===later.path){await importBatch(f.db,{sources:[{id:'later-source',name:'Later inspected reference',license:'CC0 test-only',vintage:'2026',status:'reference',supported_from:2026,supported_to:2027}]});newSourceImported=true;return;}
+   if(part.path.startsWith('entities-'))assert.equal(newSourceImported,true);
+   return f.batch(part);
+  }});
+  assert.equal(f.manifest.batches.find(p=>p.path==='sources.json'),original);
+  assert.equal(f.db.sqlite.prepare("SELECT count(*) n FROM atlas_sources WHERE id IN ('reference','later-source')").get().n,2);
+  await assert.rejects(publishGeographicReleases({...f,manifest:{...manifest,sources_batches:['sources.json','sources.json']}}),/duplicate/);
+ }finally{f.db.sqlite.close();}
+});
+
 test('interrupted real-D1 staging resumes explicit or hidden staged releases without rewriting history',async()=>{
  for(const visibleStaged of [true,false]){const f=await fixture({visibleStaged});try{
   let interrupted=false;await assert.rejects(publishGeographicReleases({...f,concurrency:1,batch:async p=>{if(p.path==='1-memberships-12.json'&&!interrupted){interrupted=true;throw Error('Interrupted fixture transport');}return f.batch(p);}}),/Interrupted/);
