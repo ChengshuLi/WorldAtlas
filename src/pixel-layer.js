@@ -3,6 +3,7 @@ import {GRID_ZOOM,createGridIndex} from './pixel-grid.js';
 import {pickOwnership} from './pixel-ownership.js';
 import {PixelGPU} from './pixel-gpu.js';
 import {PixelCanvasLayer} from './pixel-canvas-layer.js';
+import {updateLocationMetadata} from './pixel-metadata.js';
 const colorCache=new Map();
 function rgb(css){
   if(colorCache.has(css))return colorCache.get(css);
@@ -58,6 +59,7 @@ export class PixelLayer extends L.Layer {
     L.DomUtil.setTransform(this.canvas,this.map._latLngToNewLayerPoint(this.origin,event.zoom,event.center),this.map.getZoomScale(event.zoom,this.drawZoom));
   }
   setStyle(){this.styleDirty=true;this.redraw();}
+  updateMetadata(features){updateLocationMetadata(this.index,features);this.styleDirty=true;}
   bringToFront(){}
   setPolitical(features){
     if(this.politicalFeatures===features)return;
@@ -89,7 +91,7 @@ export class PixelLayer extends L.Layer {
     L.DomUtil.setTransform(this.canvas,this.map.containerPointToLayerPoint([0,0]),1);
     const origin=this.map.project(this.origin,GRID_ZOOM);
     this.gpu.draw({origin,scale,zoom,dpr,localBorders:this.options.locationBorders(),selected:this.ids.get(this.options.selected())||0,hasPolitical:!!this.grids.political});
-    Object.assign(this.canvas.dataset,{rendered:'true',locationBorders:String(zoom>=7&&this.options.locationBorders()),provinceBorders:'true',cellCount:String(width*height),renderMs:String(Math.round(performance.now()-started)),worker:'true',frame:[origin.x,origin.y,zoom,width,height].join('/'),uploads:String(this.gpu.uploads),cellPixels:String(scale),stride:'1'});
+    Object.assign(this.canvas.dataset,{rendered:'true',locationBorders:String(zoom>=7&&this.options.locationBorders()),provinceBorders:'true',cellCount:String(width*height),renderMs:String(Math.round(performance.now()-started)),worker:'true',frame:[origin.x,origin.y,zoom,width,height].join('/'),uploads:String(this.gpu.uploads),ownershipUploads:String(this.gpu.ownershipUploads),cellPixels:String(scale),stride:'1'});
   }
   pick(latlng){const p=this.map.project(latlng,GRID_ZOOM);return this.index[pickOwnership(this.grids.locations,p.x,p.y)-1]?.feature||null;}
   hover(event){const f=this.pick(event.latlng);if(!f){this.tooltip.remove();return;}const text=document.createElement('span');text.textContent=this.options.label?.(f)||f.properties.name;this.tooltip.setContent(text).setLatLng(event.latlng).addTo(this.map);}

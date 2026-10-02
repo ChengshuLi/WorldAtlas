@@ -79,7 +79,7 @@ export class PixelGPU{
     const program=this.program=gl.createProgram();const shaders=[shader(gl.VERTEX_SHADER,vertex),shader(gl.FRAGMENT_SHADER,fragment)];
     shaders.forEach(s=>gl.attachShader(program,s));gl.linkProgram(program);shaders.forEach(s=>gl.deleteShader(s));
     if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));
-    gl.useProgram(program);this.textures=new Map();this.uploads=0;this.ownershipLayouts={};
+    gl.useProgram(program);this.textures=new Map();this.uploads=0;this.ownershipUploads=0;this.ownershipLayouts={};
     ['locationRows','locationRuns','politicalRows','politicalRuns','metadata','colors','politicalColors'].forEach((name,i)=>{
       this.textures.set(name,{unit:i,texture:gl.createTexture()});gl.uniform1i(gl.getUniformLocation(program,name),i);
       this.upload(name,name.includes('Colors')||name==='colors'?new Uint8Array(4):new Uint32Array(4),4);
@@ -107,7 +107,7 @@ export class PixelGPU{
     gl.uniform1ui(gl.getUniformLocation(this.program,name+'CoordinateBits'),this.ownershipLayouts[name].coordinateBits);
     gl.uniform1i(gl.getUniformLocation(this.program,name+'Compact'),grid.version===2);
   }
-  ownership(name,grid){this.upload(name+'Rows',grid.rows,2);this.upload(name+'Runs',grid.runs);this.layout(name,grid);}
+  ownership(name,grid){this.upload(name+'Rows',grid.rows,2);this.upload(name+'Runs',grid.runs);this.ownershipUploads+=2;this.layout(name,grid);}
   draw({origin,scale,zoom,localBorders,selected,hasPolitical,dpr}){
     const gl=this.gl,u=name=>gl.getUniformLocation(this.program,name);gl.viewport(0,0,gl.canvas.width,gl.canvas.height);
     gl.uniform2f(u('origin'),origin.x,origin.y);gl.uniform2f(u('viewport'),gl.canvas.width,gl.canvas.height);

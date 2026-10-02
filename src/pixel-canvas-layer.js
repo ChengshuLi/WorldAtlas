@@ -1,5 +1,6 @@
 import L from 'leaflet';
 import {GRID_ZOOM,createGridIndex,borderKind,borderStyle,viewStride} from './pixel-grid.js';
+import {updateLocationMetadata} from './pixel-metadata.js';
 const colorCache=new Map();
 function rgb(css){
   if(colorCache.has(css))return colorCache.get(css);
@@ -30,6 +31,7 @@ export class PixelCanvasLayer extends L.Layer {
     L.DomUtil.setTransform(this.canvas,position,scale);
   }
   setStyle(){this.redraw();}
+  updateMetadata(features){this.provinceIds=updateLocationMetadata(this.index,features);}
   bringToFront(){}
   setPolitical(features){if(this.politicalFeatures!==features){this.politicalFeatures=features;this.political=features.length?createGridIndex(features):null;this.sendIndex('political',this.political || []);this.frame=null;}this.redraw();}
   redraw(){cancelAnimationFrame(this.pending);this.pending=requestAnimationFrame(()=>this.draw());}
@@ -85,7 +87,7 @@ export class PixelCanvasLayer extends L.Layer {
     out.strokeStyle='#fff6d7';out.lineWidth=2.5;out.stroke(paths.selected);
     this.canvas.dataset.rendered='true';this.canvas.dataset.locationBorders=String(zoom>=7 && this.options.locationBorders());
     this.canvas.dataset.provinceBorders='true';this.canvas.dataset.cellCount=String(ids.length);this.canvas.dataset.renderMs=String(Math.round(performance.now()-started));this.canvas.dataset.worker='true';
-    this.canvas.dataset.compilations=String(frame.compilations);this.canvas.dataset.compileMs=String(Math.round(frame.compileMs));this.canvas.dataset.frame=key;
+    this.canvas.dataset.compilations=String(frame.compilations);this.canvas.dataset.compileMs=String(Math.round(frame.compileMs));this.canvas.dataset.frame=key;this.canvas.dataset.ownershipUploads='0';
   }
   pick(latlng){
     if(!this.frame)return null;

@@ -10,6 +10,7 @@ import {presentedAttribute} from './reference-context.js';
 import { loadGeography, loadSnapshot, ensureGeometry } from './data-client.js';
 import { pointInGeometry } from './geometry.js';
 import { PixelLayer } from './pixel-layer.js';
+import {locationInventoryChanged,boundaryFootprintsChanged} from './pixel-metadata.js';
 import { GRID_ZOOM } from './pixel-grid.js';
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -173,16 +174,17 @@ async function loadYear(next) {
     let resolved=resolveTemporal(temporalReference,next,$('#examples').checked);
     if(result.boundaries.length||resolved.features.length!==referenceData.features.length){await ensureGeometry(referenceData,signal);resolved=resolveTemporal(temporalReference,next,$('#examples').checked);}
     signal.throwIfAborted();year=next;temporal=resolved;
-    const previousMembership=data.features.map(f=>`${f.id}/${f.properties.parent_id}`).join('|');
+    const previousFeatures=data.features;
     data={...referenceData,units:temporal.units,features:temporal.features};
     parents=new Map(data.units.map(u=>[u.id,u]));features=new Map(data.features.map(f=>[f.id,f]));
     for(const e of temporal.entities.values())if(e.kind==='settlement'&&features.has(e.parent_id)){const p=features.get(e.parent_id).properties;p.settlement_search=[...(p.settlement_search||[]),...e.search_names];}
     polities=[];
     states=resolveAttributes(data.features,year,{states:result.states,records:result.attributes||[],temporal,examples:$('#examples').checked,evidenceAvailable:!result.evidenceUnavailable,referenceBaselines:result.referenceBaselines||[]});
-    const changed = JSON.stringify([...boundaries]) !== JSON.stringify(result.boundaries.map(b=>[b.location_id,b]));
-    boundaries=new Map(result.boundaries.map(b=>[b.location_id,b]));
-    if (changed || previousMembership!==data.features.map(f=>`${f.id}/${f.properties.parent_id}`).join('|'))rebuildGeometry();
-    else for(const item of geoLayer.index)item.feature={...item.feature,properties:features.get(item.feature.id).properties};
+    const nextBoundaries=new Map(result.boundaries.map(b=>[b.location_id,b]));
+    const changed=boundaryFootprintsChanged(boundaries,nextBoundaries)||locationInventoryChanged(previousFeatures,data.features);
+    boundaries=nextBoundaries;
+    if(changed)rebuildGeometry();
+    else geoLayer.updateMetadata(data.features);
     $('#results').innerHTML='';
     render(); $('#loading').hidden=true;
     if(result.storage&&!result.storage.available)$('#year-error').textContent=result.evidenceUnavailable?'Historical content could not load. Dated attribute values are unavailable; labeled reference context and geography remain browsable. Select the year again to retry.':'Historical content could not refresh. Showing the last complete snapshot for this year. Select the year again to retry.';
