@@ -17,7 +17,12 @@ export async function loadOwnershipAssets(manifest,fetcher=fetch){
   const loadPart=async part=>{
     const response=await fetcher(`./${part.path}`);if(!response.ok)throw new Error('Pixel map could not load');
     const compressed=new Uint8Array(await response.arrayBuffer());
-    const raw=compressed[0]===31&&compressed[1]===139?await new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer():compressed.buffer;
+    const verify=async(bytes,expected)=>{if(!expected)return;const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');if(digest!==expected)throw Error('Ownership asset checksum mismatch');};
+    const isCompressed=compressed[0]===31&&compressed[1]===139;
+    // A host may already decode Content-Encoding:gzip. In that case the
+    // reconstructed-word digest validates the exact same ownership values.
+    if(isCompressed||!part.decoded_sha256)await verify(compressed,part.sha256);
+    const raw=isCompressed?await new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer():compressed.buffer;
     let words;
     if(part.encoding==='byte-shuffle')words=unshuffleOwnershipBytes(new Uint8Array(raw),part.words);
     else if(part.encoding==='row-varint'){
@@ -27,11 +32,13 @@ export async function loadOwnershipAssets(manifest,fetcher=fetch){
       if(part.encoding&&part.encoding!=='uint32-le')throw Error('Unsupported ownership transport encoding');
       if(raw.byteLength!==part.words*4)throw new Error('Incomplete ownership asset');words=new Uint32Array(raw);
     }
+    await verify(new Uint8Array(words.buffer,words.byteOffset,words.byteLength),part.decoded_sha256);
     output[part.kind].set(words,part.offset);
   };
+  const loadParts=async parts=>{let next=0;await Promise.all(Array.from({length:Math.min(4,parts.length)},async()=>{while(next<parts.length)await loadPart(parts[next++]);}));};
   // Row-local delta streams depend on the complete immutable row table.
-  await Promise.all(manifest.parts.filter(part=>part.kind==='rows').map(loadPart));
-  await Promise.all(manifest.parts.filter(part=>part.kind==='runs').map(loadPart));
+  await loadParts(manifest.parts.filter(part=>part.kind==='rows'));
+  await loadParts(manifest.parts.filter(part=>part.kind==='runs'));
   let offset=0;
   for(let y=0;y<output.size;y++){
     if(output.rows[y*2]!==offset)throw Error('Invalid ownership row offset');

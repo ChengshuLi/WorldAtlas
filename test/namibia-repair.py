@@ -17,7 +17,8 @@ from ellipsoidal_area import area
 
 
 def read(path):
-    return json.load(gzip.open(path, 'rt') if str(path).endswith('.gz') else open(path))
+    with gzip.open(path, 'rt') if str(path).endswith('.gz') else open(path) as stream:
+        return json.load(stream)
 
 
 class NamibiaReplacement(unittest.TestCase):
@@ -107,6 +108,41 @@ class NamibiaReplacement(unittest.TestCase):
                     if 'input_cache_path' in record:
                         restored = module.CACHE/record['input_cache_path']
                         self.assertEqual(hashlib.sha256(restored.read_bytes()).hexdigest(), record['original_sha256'])
+
+    def test_coast_extensions_have_full_source_concordance_and_no_new_overlap(self):
+        review = read(self.stage/'coastal-extension-review.json.gz')
+        extended = read(self.stage/'locations-coastal-concordance.geojson.gz')['features']
+        self.assertEqual(review['original_records_reviewed'], 109)
+        self.assertEqual(review['candidate_groups_reviewed'], 107)
+        self.assertEqual(len(review['source_groups']), 107)
+        self.assertFalse(review['conflicts'])
+        self.assertGreater(review['safe_coast_restored_m2'], 0)
+        self.assertGreater(review['remaining_unresolved_old_land_m2'], 0)
+        additions = []
+        for old, new in zip(self.locations, extended):
+            self.assertEqual(old['properties']['id'], new['properties']['id'])
+            additions.append(shape(new['geometry']).difference(shape(old['geometry'])))
+        self.assertAlmostEqual(sum(area(g) for g in additions), review['safe_coast_restored_m2'], delta=.1)
+        self.assertAlmostEqual(sum(area(g) for g in additions), area(union_all(additions)), delta=.1)
+
+    def test_synthetic_coast_restore_rejects_inland_and_weak_geometry_matches(self):
+        spec = importlib.util.spec_from_file_location('stage_namibia_repair', ROOT/'scripts/stage-namibia-repair.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        from shapely.geometry import box, mapping, LineString
+        original = {'features': [{'properties': {'ADM2': 'Untrusted wrong name'}, 'geometry': mapping(box(0, 0, 10, 10))}]}
+        source = [{'properties': {'adm2_pcode': 'CODE', 'adm2_name': 'Verified name'}}]
+        land = box(0, 0, 10, 10)
+        coast = LineString([(10, 0), (10, 10)])
+        with patch.object(module, 'load', return_value=original):
+            safe, review = module.coastal_concordance(source, [box(0, 0, 9.8, 10)], land, coast, box(9.8, 0, 10, 10), land)
+            self.assertGreater(review['safe_coast_restored_m2'], 0)
+            self.assertEqual(review['historical_attribute_transfer'], 'None')
+            safe, review = module.coastal_concordance(source, [box(0, 0, 10, 9.8)], land, coast, box(0, 9.8, 9, 10), land)
+            self.assertEqual(review['safe_coast_restored_m2'], 0)
+            self.assertTrue(any('inland' in row['decision'] for row in review['residual_components']))
+            safe, review = module.coastal_concordance(source, [box(0, 0, 5, 10)], land, coast, box(5, 0, 10, 10), land)
+            self.assertEqual(review['safe_coast_restored_m2'], 0)
 
 
 if __name__ == '__main__':

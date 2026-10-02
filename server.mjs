@@ -1,6 +1,7 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import {gzipSync} from 'node:zlib';
+import {createHash} from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { openDatabase, seedDatabase, geography, snapshot } from './database.mjs';
@@ -8,6 +9,7 @@ process.chdir(path.dirname(fileURLToPath(import.meta.url)));
 const db = openDatabase(); seedDatabase(db);
 const catalog=geography(db);
 if(fs.existsSync('data/pixel-audit.json'))catalog.pixelMissing=JSON.parse(fs.readFileSync('data/pixel-audit.json')).missing.map(f=>f.id);
+if(fs.existsSync('data/prepared-evidence/index.json')){const raw=fs.readFileSync('data/prepared-evidence/index.json'),index=JSON.parse(raw);catalog.preparedEvidence={footprints_sha256:index.footprints_sha256,hierarchy_sha256:index.hierarchy_sha256,index_sha256:createHash('sha256').update(raw).digest('hex')};}
 const geo = JSON.stringify(catalog);
 const production = process.argv.includes('--production');
 const vite = production ? null : await (await import('vite')).createServer({ server: { middlewareMode: true, host: '0.0.0.0', hmr: process.env.ATLAS_TEST_MODE === '1' ? false : undefined } });

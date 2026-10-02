@@ -47,8 +47,19 @@ for(const release of manifest.releases){
  published.push({id:actual.id,version:actual.version,counts:actual.expected_counts,membership_sha256:actual.membership_sha256});
 }
 // Retain the complete before/after crosswalk independently of deployment assets.
-const archive=fs.readFileSync('data/geographic-decision-migration.json.gz'),digest=sha(archive),release=manifest.releases.at(-1);
-const parameters=new URLSearchParams({id:`media:atlas:geographic-migration:${digest}`,source_id:release.source_id,name:'Worldwide reference hierarchy before-and-after crosswalk',license:'Original source licenses retained in cited continent decisions',attribution:'Cited public geographic providers and WorldAtlas review decisions'});
-const media=await (await request('/api/media/upload?'+parameters,{method:'POST',headers:{'Content-Type':'application/gzip'},body:archive})).json();
-if(media.sha256!==digest||media.bytes!==archive.length)throw Error('Persistent migration evidence does not match prepared archive');
-console.log(JSON.stringify({published,bounded_batches:completed,migration_archive:{id:media.id,sha256:digest,bytes:media.bytes}}));
+const release=manifest.releases.at(-1),archiveFiles=new Set(['data/geographic-decision-migration.json.gz']);
+for(const file of ['data/macro-boundary-migration.json.gz','data/geographic-repair-evidence/index.json','data/reference-migrations/source-territory-repair-v1/index.json'])if(fs.existsSync(file))archiveFiles.add(file);
+const repairIndex='data/geographic-repair-evidence/index.json';
+if(fs.existsSync(repairIndex)){const index=JSON.parse(fs.readFileSync(repairIndex));for(const pin of Object.values(index.files)){const file='data/geographic-repair-evidence/'+pin.archive_path;if(sha(fs.readFileSync(file))!==pin.sha256)throw Error('Retained geographic evidence changed');archiveFiles.add(file);}}
+const references='data/reference-migrations/source-territory-repair-v1';
+if(fs.existsSync(references))for(const file of fs.readdirSync(references))archiveFiles.add(references+'/'+file);
+const retained=[];
+for(const file of [...archiveFiles].sort()){
+ const archive=fs.readFileSync(file),digest=sha(archive);
+ if(archive.length>20*1024*1024)throw Error('Migration archive exceeds the media-object limit');
+ const parameters=new URLSearchParams({id:`media:atlas:geographic-evidence:${digest}`,source_id:release.source_id,name:file.slice(5),license:'Mixed original source licenses; notices retained in the geographic source manifests',attribution:'Cited public geographic providers and WorldAtlas review decisions'});
+ const media=await (await request('/api/media/upload?'+parameters,{method:'POST',headers:{'Content-Type':file.endsWith('.gz')?'application/gzip':'application/json'},body:archive})).json();
+ if(media.sha256!==digest||media.bytes!==archive.length)throw Error('Persistent migration evidence does not match prepared archive');
+ retained.push({path:file,id:media.id,sha256:digest,bytes:media.bytes});
+}
+console.log(JSON.stringify({published,bounded_batches:completed,migration_archives:retained}));

@@ -16,24 +16,41 @@ try{
  await new Promise((resolve,reject)=>{server.stdout.on('data',d=>{if(String(d).includes('Serving HTTP'))resolve();});server.once('exit',c=>reject(new Error(`Server exited ${c}`)));});
  browser=await chromium.launch();const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[],requests=[];page.on('request',r=>requests.push(r.url()));page.on('pageerror',e=>errors.push(e.message));
  await proxyAPI(page);
- const storageRoutes=/\/api\/(?:attributes|names)(?:\?|$)/;
+ const storageRoutes=/\/api\/(?:attributes|names|retirements)(?:\?|$)/;
  if(apiBase)await page.route(storageRoutes,route=>route.fulfill({status:503,json:{error:'Historical database temporarily unavailable'}}));
  await page.goto('http://localhost:3199');await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:60000});
  const data=()=>page.locator('.atlas-pixel-canvas').evaluate(c=>({...c.dataset}));
  await page.locator('#loading').waitFor({state:'hidden',timeout:60000});
  if(apiBase){
-  assert.match(await page.locator('#year-error').textContent(),/Historical database unavailable.*Showing prepared source data/);
+  assert.match(await page.locator('#year-error').textContent(),/Historical content could not load.*Attribute values are unavailable.*geography remains browsable/);
   assert.equal(await page.locator('#map-year').textContent(),'2,026 AD');assert.equal((await data()).rendered,'true');
-  assert.match(await page.locator('#coverage').textContent(),/49,614 geographic locations/);
+  assert.match(await page.locator('#coverage').textContent(),/[\d,]+ geographic locations.*0 locations with ownership/);
   assert.equal(await page.locator('#borders').count(),0,'border checkbox must remain removed');
+  await page.locator('#search').fill('London');await page.locator('[data-result="atlas:city:GBR-Greater London"]').click();
+  assert.equal(await page.locator('.breadcrumbs [data-unit]').count(),6);
+  assert.equal(await page.locator('.profile-name-context').textContent(),'Present-day reference: London');
+  assert.deepEqual(await page.locator('.profile-attributes dd').allTextContents(),Array(8).fill('Unknown'),'cold outage cannot restore potentially withdrawn prepared values or modern ownership');
   await page.unroute(storageRoutes);
-  const recovered=Promise.all(['attributes','names'].map(endpoint=>page.waitForResponse(r=>new URL(r.url()).pathname===`/api/${endpoint}`&&r.status()===200)));
+  const recovered=Promise.all(['attributes','names','retirements'].map(endpoint=>page.waitForResponse(r=>new URL(r.url()).pathname===`/api/${endpoint}`&&r.status()===200)));
   await page.locator('#year-form button').click();await recovered;await page.locator('#loading').waitFor({state:'hidden'});
   assert.equal(await page.locator('#year-error').textContent(),'','retry clears the database outage notice');
   assert.equal((await data()).rendered,'true');
-  const hostedRequests=requests.filter(url=>storageRoutes.test(url));assert.ok(hostedRequests.length>=4);
+  const completeValues=await page.locator('.profile-attributes dd').allTextContents();assert.notEqual(completeValues[0],'Unknown','a complete API snapshot permits the modern reference owner');
+  const retirementRoutes=/\/api\/retirements(?:\?|$)/;
+  await page.route(retirementRoutes,route=>route.fulfill({status:503,json:{error:'Temporary retirement stream failure'}}));
+  await page.locator('#year-form button').click();await page.locator('#loading').waitFor({state:'hidden'});
+  assert.match(await page.locator('#year-error').textContent(),/Historical content could not refresh.*last complete snapshot for this year/);
+  assert.deepEqual(await page.locator('.profile-attributes dd').allTextContents(),completeValues,'partial endpoint failure reuses only a complete consistent snapshot');
+  await page.locator('#year-input').fill('2025');await page.locator('#year-form button').click();await page.locator('#loading').waitFor({state:'hidden'});
+  assert.match(await page.locator('#year-error').textContent(),/Attribute values are unavailable/);
+  assert.deepEqual(await page.locator('.profile-attributes dd').allTextContents(),Array(8).fill('Unknown'),'a different year cannot reuse the previous complete snapshot');
+  await page.unroute(retirementRoutes);
+  await page.locator('#year-input').fill('2026');await page.locator('#year-form button').click();await page.locator('#loading').waitFor({state:'hidden'});
+  assert.equal(await page.locator('#year-error').textContent(),'');
+  assert.deepEqual(await page.locator('.profile-attributes dd').allTextContents(),completeValues);
+  const hostedRequests=requests.filter(url=>storageRoutes.test(url));assert.ok(hostedRequests.length>=6);
   assert.ok(hostedRequests.every(url=>new URL(url).searchParams.get('scope')==='map'),'atlas queries only map-relevant names and attributes');
-  assert.deepEqual(errors,[]);console.log('PASS: prepared map survives historical database 503s and recovers through the real Worker API; default borders have no checkbox.');
+  assert.deepEqual(errors,[]);console.log('PASS: cold outages keep geography browsable with unknown attributes; partial outages retain complete same-year snapshots; API recovery and default borders work.');
  }
  if(process.env.ATLAS_TEST_STORAGE_ONLY!=='1'){
  assert.ok(requests.some(url=>url.endsWith('/ownership-runtime/index.json')),'modern view checks the ownership coverage interval');

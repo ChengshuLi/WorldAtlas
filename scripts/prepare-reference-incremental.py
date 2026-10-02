@@ -9,6 +9,7 @@ from shapely import STRtree,make_valid,prepare as prepare_geometries
 from shapely.geometry import shape,mapping
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
+from majority import canonical
 sys.dont_write_bytecode=True
 
 def module(name,path):
@@ -68,7 +69,7 @@ def source_proof(index,sources):
  if expected.get('vegetation_area_algorithm')!=area_sha or any(t['metadata'].get('area_algorithm_sha256')!=area_sha for t in veg_types):raise ValueError('Precise vegetation algorithm changed; full preparation required')
  topo_algorithm=index['merged_sources']['topography-reference']['inputs']['algorithm']
  if sha(ROOT/'scripts/prepare-topography.py')!=topo_algorithm:raise ValueError('Terrain summary algorithm changed; full preparation required')
- result['algorithms']={name:sha(ROOT/'scripts'/name) for name in ['ellipsoidal_area.py','recheck-vegetation.py','prepare-topography.py','prepare-reference-attributes.py']}
+ result['algorithms']={name:sha(ROOT/'scripts'/name) for name in ['ellipsoidal_area.py','majority.py','recheck-vegetation.py','prepare-topography.py','prepare-reference-attributes.py']}
  # Verify all extracted native rasters against the already pinned source archive.
  with zipfile.ZipFile(sources['climate_archive']) as archive:
   for begin,end in [(1901,1930),(1931,1960),(1961,1990),(1991,2020)]:
@@ -91,7 +92,7 @@ def type_schema(index):
  return climate
 
 def summarize_changed(ids,after,index,sources):
- climate_types=type_schema(index);rows={id:[] for id in sorted(ids)};missing=collections.defaultdict(dict);evidence={};geometries={id:shape(after[id]) for id in ids}
+ climate_types=type_schema(index);rows={id:[] for id in sorted(ids)};missing=collections.defaultdict(dict);evidence={};geometries={id:canonical(shape(after[id])) for id in ids}
  def value_index(value):
   if value not in index['values']:index['values'].append(value)
   return index['values'].index(value)
@@ -184,10 +185,12 @@ def prepare(before_path,after_path,receipt_path,references,output,sources):
   for year in missing_climate:
    if ('climate',int(year)) not in by_attribute:missing_climate[year].append(id)
  records=sum(map(len,active_records.values()));known_topo=counts[('topography',2026,'reference')]
- report={'version':1,'before_footprints_sha256':bh,'after_footprints_sha256':ah,'original_index_sha256':start_index_sha,'migration_receipt_sha256':sha(receipt_path),'wrapper_sha256':wrapper_sha,'sources':proof,'changed_ids':sorted(changed-added),'added_ids':sorted(added),'removed_ids':sorted(removed),'reused_locations':len(reused),'recomputed_locations':len(changed),'reused_records':reused_records,'derived_records':sum(map(len,fresh.values())),'archive':{'path':'migration-before-records.json.gz','sha256':archive_hash,'locations':len(archive_rows),'records':sum(len(rows) for _,rows in archive_rows)},'missing_changed':missing,'historical_claims_transferred':False,'source_intervals_unchanged':True,'source_dictionaries_prefix_preserved':True,'after_records':records}
+ report={'version':1,'before_footprints_sha256':bh,'after_footprints_sha256':ah,'original_index_sha256':start_index_sha,'migration_receipt_sha256':sha(receipt_path),'before_snapshot_sha256':sha(before_path),'after_snapshot_sha256':sha(after_path),'wrapper_sha256':wrapper_sha,'sources':proof,'changed_ids':sorted(changed-added),'added_ids':sorted(added),'removed_ids':sorted(removed),'reused_locations':len(reused),'recomputed_locations':len(changed),'reused_records':reused_records,'derived_records':sum(map(len,fresh.values())),'archive':{'path':'migration-before-records.json.gz','sha256':archive_hash,'locations':len(archive_rows),'records':sum(len(rows) for _,rows in archive_rows)},'missing_changed':missing,'historical_claims_transferred':False,'source_intervals_unchanged':True,'source_dictionaries_prefix_preserved':True,'after_records':records}
  write_gzip(stage/'migration-new-evidence.json.gz',evidence);(stage/'incremental-receipt.json').write_text(dump(report))
  index.update(parts=parts,parts_sha256={name:sha(stage/name) for name in parts},records=records,locations=len(after),represented_locations=sum(bool(rows) for rows in active_records.values()),footprints_sha256=ah,climate_counts={str(y):counts[('climate',y,'reference')] for y in [1901,1931,1961,1991]},missing_climate=missing_climate,vegetation_references=counts[('vegetation',2026,'reference')],unknown_source_records=counts[('vegetation',2026,'unknown')],incremental_preparation={'receipt':'incremental-receipt.json','receipt_sha256':sha(stage/'incremental-receipt.json'),**{k:report[k] for k in ['original_index_sha256','reused_locations','recomputed_locations','reused_records','derived_records']}})
  index['merged_sources']['topography-reference']['records']=known_topo
+ index['inputs'].setdefault('original_preparation_geography',index['inputs'].get('geography'))
+ after_manifest=load(after_path);index['inputs']['geography']=hashlib.sha256(''.join(sha(OWN.safe_path(after_path.parent,p)) for p in after_manifest['parts']).encode()).hexdigest() if isinstance(after_manifest,dict) and 'parts' in after_manifest else sha(after_path)
  index['inputs'].update(footprints_sha256=ah,incremental_migration_sha256=sha(receipt_path))
  if 'vegetation_numerical_review' in index:index['vegetation_numerical_review_applicability']='Original review retained for unchanged IDs; changed footprints are covered by incremental preparation receipt'
  (stage/'index.json').write_text(dump(index));stage.rename(output);pending.cleanup();print(dump(report),flush=True);return index

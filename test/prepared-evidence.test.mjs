@@ -7,6 +7,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {DatabaseSync} from 'node:sqlite';
 import {prepareEvidenceBundle} from '../scripts/prepare-evidence-bundle.mjs';
+import {revalidatePreparedEvidence} from '../scripts/revalidate-prepared-evidence.mjs';
 import {preparedEvidenceAt} from '../prepared-evidence.mjs';
 import {preparedEvidencePartsAt,selectPreparedEvidence,verifyPreparedEvidencePart,verifyPreparedEvidenceIndexBytes,mergePreparedEvidence} from '../src/prepared-evidence.js';
 import {resolveAttributes} from '../src/attributes.js';
@@ -86,8 +87,23 @@ test('client retries complete map reads for mixed revisions, caps retries and ob
  const loader=await import('data:text/javascript;base64,'+Buffer.from(sourceText).toString('base64')),prior=global.fetch;try{
   let calls=0;global.fetch=async(url,{signal}={})=>{signal?.throwIfAborted();const n=calls++;return Response.json({records:[{id:url.split('?')[0]}],next_cursor:null,revision:n<3?(n===1?2:1):3});};
   const good=await loader.loadHostedMapEvidence(2020,false);assert.equal(calls,6);assert.equal(good.attributes.revision,3);assert.equal(good.names.revision,3);assert.equal(good.retirements.revision,3);
-  calls=0;global.fetch=async()=>{calls++;return Response.json({error:'Changed',retryable:true},{status:409});};const unstable=await loader.loadHostedMapEvidence(2020,false);assert.equal(calls,9);assert.equal(unstable.unstable,true);assert.equal(unstable.attributes.available,false);assert.deepEqual(unstable.names.records,[]);
-  const abort=new AbortController();abort.abort();await assert.rejects(loader.loadHostedMapEvidence(2020,false,abort.signal),error=>error.name==='AbortError');assert.equal(calls,9);
+  calls=0;global.fetch=async()=>{calls++;return Response.json({error:'Changed',retryable:true},{status:409});};const unstable=await loader.loadHostedMapEvidence(2020,false);assert.equal(calls,9);assert.equal(unstable.unstable,true);assert.equal(unstable.attributes.available,false);assert.equal(unstable.stale,true);assert.deepEqual(unstable.names.records,good.names.records);const uncached=await loader.loadHostedMapEvidence(2022,false);assert.equal(uncached.stale,false);assert.deepEqual(uncached.names.records,[]);
+  const abort=new AbortController();abort.abort();await assert.rejects(loader.loadHostedMapEvidence(2020,false,abort.signal),error=>error.name==='AbortError');assert.equal(calls,18);
   calls=0;global.fetch=async(url)=>{calls++;return Response.json({records:[],next_cursor:url.includes('cursor=')?null:'next',revision:url.includes('cursor=')?2:1});};const changedPages=await loader.loadHostedMapEvidence(2020,false);assert.equal(changedPages.unstable,true);assert.equal(calls,18);
  }finally{global.fetch=prior;}
+});
+
+
+test('reference migrations revalidate immutable claims only when every corresponding footprint stays identical',()=>{
+ const f=fixture();try{
+  const target=`${f.folder}/target`;fs.mkdirSync(target);for(const name of ['hierarchy.json','world-index.json','geography'])fs.cpSync(`${f.folder}/${name}`,`${target}/${name}`,{recursive:true});
+  const sourceFile=`${f.folder}/names/rows.json.gz`,rows=read(sourceFile);rows[0].entity_id='province';fs.writeFileSync(sourceFile,gzipSync(JSON.stringify(rows)));const manifest=read(`${f.folder}/names/index.json`);manifest.parts[0].sha256=sha(fs.readFileSync(sourceFile));fs.writeFileSync(`${f.folder}/names/index.json`,JSON.stringify(manifest));
+  const products=[{id:'names',kind:'names',directory:`${f.folder}/names`}],originalRows=sha(fs.readFileSync(sourceFile)),originalManifest=sha(fs.readFileSync(`${f.folder}/names/index.json`));
+  const units=read(`${target}/hierarchy.json`);units.find(u=>u.id==='region').name='Revised reference macro label';fs.writeFileSync(`${target}/hierarchy.json`,JSON.stringify(units));
+  assert.throws(()=>prepareEvidenceBundle({data:target,products}),/Stale producer/);
+  const result=revalidatePreparedEvidence({before:f.folder,after:target,products});assert.equal(result[0].records,1);const receipt=read(`${f.folder}/names/revalidation.json`);assert.equal(receipt.historical_membership_assigned,false);assert.equal(receipt.entities[0].kind,'province');assert.equal(receipt.entities[0].member_locations,1);
+  const index=prepareEvidenceBundle({data:target,products});assert.equal(index.names,1);assert.equal(index.products[0].revalidation.historical_membership_assigned,false);assert.equal(sha(fs.readFileSync(sourceFile)),originalRows);assert.equal(sha(fs.readFileSync(`${f.folder}/names/index.json`)),originalManifest);
+  rows[0].name='Unreviewed content change';fs.writeFileSync(sourceFile,gzipSync(JSON.stringify(rows)));assert.throws(()=>prepareEvidenceBundle({data:target,products}),/source bytes changed/);fs.writeFileSync(sourceFile,gzipSync(JSON.stringify([{...rows[0],name:'2020 attested name'}])));
+  const feature=read(`${target}/geography/part-0.json`);feature.features[0].geometry.coordinates[0][1][0]=2;fs.writeFileSync(`${target}/geography/part-0.json`,JSON.stringify(feature));assert.throws(()=>revalidatePreparedEvidence({before:f.folder,after:target,products,write:false}),/footprint changed/);assert.throws(()=>prepareEvidenceBundle({data:target,products}),/revalidation geography/);
+ }finally{fs.rmSync(f.folder,{recursive:true,force:true});}
 });

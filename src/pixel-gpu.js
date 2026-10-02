@@ -14,10 +14,11 @@ uniform uint selected;
 uniform uint locationWorldSize,politicalWorldSize,locationCoordinateBits,politicalCoordinateBits;
 uniform bool locationCompact,politicalCompact;
 out vec4 outColor;
-ivec2 texel(uint i){return ivec2(int(i%2048u),int(i/2048u));}
+ivec2 texel(uint i,usampler2D data){uint width=uint(textureSize(data,0).x);return ivec2(int(i%width),int(i/width));}
+ivec2 texel(uint i,sampler2D data){uint width=uint(textureSize(data,0).x);return ivec2(int(i%width),int(i/width));}
 uvec3 unpackRun(usampler2D runs,uint i,bool compact,uint bits){
-  if(!compact)return texelFetch(runs,texel(i),0).xyz;
-  uvec4 pair=texelFetch(runs,texel(i/2u),0);
+  if(!compact)return texelFetch(runs,texel(i,runs),0).xyz;
+  uvec4 pair=texelFetch(runs,texel(i/2u,runs),0);
   uvec2 words=(i&1u)==0u?pair.xy:pair.zw;
   uint mask=(1u<<bits)-1u;
   return uvec3(words.x&mask,(words.y&mask)+1u,(words.x>>bits)|((words.y>>bits)<<(32u-bits)));
@@ -25,7 +26,7 @@ uvec3 unpackRun(usampler2D runs,uint i,bool compact,uint bits){
 uint lookup(usampler2D rows,usampler2D runs,vec2 p,bool compact,uint bits,uint worldSize){
   ivec2 cell=ivec2(floor(p));
   if(cell.x<0||cell.y<0||uint(cell.x)>=worldSize||uint(cell.y)>=worldSize)return 0u;
-  uvec2 row=texelFetch(rows,texel(uint(cell.y)),0).rg;
+  uvec2 row=texelFetch(rows,texel(uint(cell.y),rows),0).rg;
   uint lo=row.x,hi=lo+row.y,end=hi;
   for(int i=0;i<32&&lo<hi;i++){uint mid=lo+(hi-lo)/2u;uvec3 run=unpackRun(runs,mid,compact,bits);if(run.y<=uint(cell.x))lo=mid+1u;else hi=mid;}
   if(lo==end)return 0u;
@@ -37,7 +38,7 @@ vec2 boundary(uint a,uint b,uint pa,uint pb){
   if(a==b&&(!hasPolitical||pa==pb))return vec2(0.);
   if(a==selected||b==selected){if(selected!=0u&&a!=b)return vec2(2.5,1.);}
   if(a==0u||b==0u)return a==b?vec2(0.):vec2(1.,.65);
-  uvec2 ma=texelFetch(metadata,texel(a),0).rg,mb=texelFetch(metadata,texel(b),0).rg;
+  uvec2 ma=texelFetch(metadata,texel(a,metadata),0).rg,mb=texelFetch(metadata,texel(b,metadata),0).rg;
   if((hasPolitical&&pa!=pb)||(!hasPolitical&&ma.y!=mb.y))return vec2(2.,.95);
   if(a==b)return vec2(0.);
   if(ma.x!=mb.x)return vec2(zoom<7.?.8:1.5,.8);
@@ -50,8 +51,8 @@ void main(){
   // Distant water needs no outside half-stroke or further ownership lookups.
   if(id==0u&&scale<1.){outColor=vec4(0.);return;}
   uint pid=hasPolitical?lookup(politicalRows,politicalRuns,p,politicalCompact,politicalCoordinateBits,politicalWorldSize):0u;
-  vec4 color=id==0u?vec4(0.):texelFetch(colors,texel(id),0);
-  if(id!=0u&&pid!=0u)color=texelFetch(politicalColors,texel(pid),0);
+  vec4 color=id==0u?vec4(0.):texelFetch(colors,texel(id,colors),0);
+  if(id!=0u&&pid!=0u)color=texelFetch(politicalColors,texel(pid,politicalColors),0);
   float alpha=0.;bool highlight=false;
   for(int axis=0;axis<4;axis++){
     vec2 dir=axis==0?vec2(-1.,0.):axis==1?vec2(1.,0.):axis==2?vec2(0.,-1.):vec2(0.,1.);
@@ -87,13 +88,17 @@ export class PixelGPU{
   }
   upload(name,data,channels=4){
     const gl=this.gl,{unit,texture}=this.textures.get(name),bytes=data instanceof Uint8Array;
-    const height=Math.max(1,Math.ceil(data.length/channels/2048));
-    if(height>gl.getParameter(gl.MAX_TEXTURE_SIZE))throw new Error('Ownership texture exceeds device limit');
-    const padded=new data.constructor(2048*height*channels);padded.set(data);
+    const limit=gl.getParameter(gl.MAX_TEXTURE_SIZE),texels=Math.ceil(data.length/channels);
+    // Keep one ownership asset on every device. Wider textures accommodate the
+    // same fixed grid on devices whose texture height is limited to 4096.
+    let width=Math.min(2048,limit);while(Math.ceil(texels/width)>limit&&width<limit)width=Math.min(width*2,limit);
+    const height=Math.max(1,Math.ceil(texels/width));
+    if(height>limit)throw new Error('Ownership texture exceeds device limit');
+    const padded=new data.constructor(width*height*channels);padded.set(data);
     gl.activeTexture(gl.TEXTURE0+unit);gl.bindTexture(gl.TEXTURE_2D,texture);
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
-    gl.texImage2D(gl.TEXTURE_2D,0,bytes?gl.RGBA8:channels===2?gl.RG32UI:gl.RGBA32UI,2048,height,0,bytes?gl.RGBA:channels===2?gl.RG_INTEGER:gl.RGBA_INTEGER,bytes?gl.UNSIGNED_BYTE:gl.UNSIGNED_INT,padded);
+    gl.texImage2D(gl.TEXTURE_2D,0,bytes?gl.RGBA8:channels===2?gl.RG32UI:gl.RGBA32UI,width,height,0,bytes?gl.RGBA:channels===2?gl.RG_INTEGER:gl.RGBA_INTEGER,bytes?gl.UNSIGNED_BYTE:gl.UNSIGNED_INT,padded);
     this.uploads++;
   }
   layout(name,grid){

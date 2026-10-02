@@ -23,7 +23,7 @@ export function loadFeatures(){
   const result=[];
   for(const part of readJSON(worldIndex).parts){
     const parsed=readJSON(path.join(path.dirname(worldIndex),part));
-    for(const f of parsed.features)result.push({id:f.id??f.properties.id,geometry:f.geometry,properties:{name:f.properties.name,reference_owner:f.properties.reference_owner}});
+    for(const f of parsed.features)result.push({id:f.id??f.properties.id,geometry:f.geometry,properties:{name:f.properties.name,reference_owner:f.properties.reference_owner,parent_id:f.properties.parent_id}});
   }
   return result;
 }
@@ -82,11 +82,12 @@ export function compileSparse(index,size){
   return {rows,counts,wgs84Areas,size,runs,spans:spanCount,overlap_cells_including_same_location_components:overlapCells};
 }
 function packedBytes(grid){
-  const packed=packOwnership(grid),rows=packed.rows;let gzip=0,shuffledGzip=0,maxPart=0;const hashes=[];
+  const packed=packOwnership(grid),rows=packed.rows;let gzip=0,shuffledGzip=0,maxPart=0;const hashes=[],parts=[],assetDirectory=path.join(cache,'assets',String(Math.log2(grid.size/256)));fs.mkdirSync(path.join(assetDirectory,'ownership'),{recursive:true});
   for(const kind of ['rows','runs'])for(let offset=0;offset<packed[kind].length;offset+=1048576){
     const words=packed[kind].subarray(offset,offset+1048576),buffer=Buffer.from(words.buffer,words.byteOffset,words.byteLength),compressed=gzipSync(buffer,{level:9}),shuffled=gzipSync(shuffleOwnershipBytes(words),{level:9});
-    gzip+=compressed.length;shuffledGzip+=shuffled.length;maxPart=Math.max(maxPart,shuffled.length);hashes.push(createHash('sha256').update(buffer).digest('hex'));
+    gzip+=compressed.length;shuffledGzip+=shuffled.length;maxPart=Math.max(maxPart,shuffled.length);const rawHash=createHash('sha256').update(buffer).digest('hex');hashes.push(rawHash);const file=`ownership/${kind}-${offset}.bin.gz`;fs.writeFileSync(path.join(assetDirectory,file),shuffled);parts.push({kind,offset,words:words.length,path:file,encoding:'byte-shuffle',sha256:createHash('sha256').update(shuffled).digest('hex'),decoded_sha256:rawHash,compressed_bytes:shuffled.length});const decoded=unshuffleOwnershipBytes(gunzipSync(shuffled),words.length);for(let k=0;k<words.length;k++)if(decoded[k]!==words[k])throw Error('Canonical ownership transport changed a word');
   }
+  fs.writeFileSync(path.join(assetDirectory,'pixel-map.json'),JSON.stringify({version:2,coordinateBits:packed.coordinateBits,size:packed.size,runWords:packed.runs.length,parts}));
   return {version:2,coordinate_bits:packed.coordinateBits,row_table_bytes:rows.byteLength,run_table_bytes:packed.runs.byteLength,packed_bytes:rows.byteLength+packed.runs.byteLength,gzip_bytes:shuffledGzip,plain_gzip_bytes:gzip,transport:'byte-shuffle',maximum_gzip_part_bytes:maxPart,packed_chunk_sha256:hashes,gpu_texture_width:2048,gpu_rows_texture_height:Math.ceil(grid.size/2048),gpu_runs_texture_height:Math.ceil(grid.runs/2/2048),gpu_padded_bytes:2048*Math.ceil(grid.size/2048)*8+2048*Math.ceil(grid.runs/2/2048)*16};
 }
 
@@ -149,7 +150,7 @@ if(isMain&&process.argv.includes('--candidate')){
     }
     isolated.push({id:missing.id,name:missing.name,owner:missing.owner,checks,first_isolated_hit_zoom:checks.find(x=>x.isolated_component_cell_hits)?.zoom??null});
   }
-  const sourceReview=JSON.parse(fs.readFileSync('data/region-semantic-review.json')).pixel_missing_source_comparison??[],sourceById=new Map(sourceReview.map(x=>[x.id,x]));
+  const sourceReview=JSON.parse(fs.readFileSync('data/region-semantic-review.json')).pixel_missing_source_comparison??[],changedIds=stagedInput&&fs.existsSync('data/geographic-repair-evidence/migration-receipt.json.gz')?new Set(readJSON('data/geographic-repair-evidence/migration-receipt.json.gz').changed_ids):new Set(),sourceById=new Map(sourceReview.filter(x=>!changedIds.has(x.id)).map(x=>[x.id,x]));
   const report={version:1,footprints_sha256:base.footprints_sha256,method:'Fixed Web Mercator grid cell centers, even-odd source polygons including holes, smallest stable location-index tie priority; complete world ownership compiled independently once per candidate. Navigation is never involved.',scope:{locations:base.location_ids.length,all_location_ids:base.location_ids,source_area_cells_zoom7:base.source_area_cells_zoom7,source_wgs84_area_m2:base.source_wgs84_area_m2,locations_semantically_approved:'Global semantic approval remains incomplete; all current footprints evaluated, not falsely marked approved'},candidates:candidates.map(({location_ids,source_area_cells_zoom7,source_wgs84_area_m2,...x})=>x),missing_union_isolated_research:isolated.map(x=>({...x,source_comparison:sourceById.get(x.id)??null})),selection:{status:'pending-source-and-device-review',reason:'Candidate results must meet source correctness, disappearing-unit and distortion requirements together. No arbitrary cell reassignment or polygon inflation is permitted. Finer resolution does not repair bad source geometry/masks.'},constraints:{hosting_artifact_limit_bytes:256*1024*1024,hosting_asset_file_limit_bytes:25*1024*1024,shader_world_size:'uniform; stage activation must update renderer canonical GRID_ZOOM consistently',gpu_texture_width:2048,device_texture_sizes_to_assess:[2048,4096,8192,16384],cpu_fallback:'Packed rows/runs sampling is resolution independent; renderer transforms still import fixed GRID_ZOOM and must change consistently before deployment.'},completion:false};
   const aggregateErrors=(values,source)=>{const errors=values.map((v,i)=>source[i]?v/source[i]-1:null),above=errors.flatMap((error,i)=>error!==null&&Math.abs(error)>.25?[{id:report.scope.all_location_ids[i],relative_area_error:Number(error.toFixed(9))}]:[]);return {absolute_error_above25_count:above.length,maximum_absolute_relative_error:Math.max(...errors.map(e=>Math.abs(e??0))),records_above25:above};};
   const sumFiles=directory=>fs.existsSync(directory)?fs.readdirSync(directory,{withFileTypes:true}).reduce((n,e)=>n+(e.isDirectory()?sumFiles(path.join(directory,e.name)):e.isFile()?fs.statSync(path.join(directory,e.name)).size:0),0):0;
@@ -160,7 +161,7 @@ if(isMain&&process.argv.includes('--candidate')){
     candidate.wgs84_all_location_distortion=aggregateErrors(candidate.grid_wgs84_area_m2,report.scope.source_wgs84_area_m2);
     candidate.estimated_artifact_bytes_replacing_existing_grid=artifactBytes-oldOwnershipBytes+candidate.layout.gzip_bytes;
     candidate.estimated_artifact_limit_headroom_bytes=report.constraints.hosting_artifact_limit_bytes-candidate.estimated_artifact_bytes_replacing_existing_grid;
-    candidate.device_capacity=report.constraints.device_texture_sizes_to_assess.map(max=>({max_texture_size:max,current_single_texture_layout_fits:candidate.layout.gpu_runs_texture_height<=max&&candidate.layout.gpu_rows_texture_height<=max}));
+    candidate.device_capacity=report.constraints.device_texture_sizes_to_assess.map(max=>{let width=Math.min(2048,max);const texels=Math.ceil(candidate.runs/2);while(Math.ceil(texels/width)>max&&width<max)width=Math.min(width*2,max);return {max_texture_size:max,default_texture_layout_fits:candidate.layout.gpu_runs_texture_height<=max&&candidate.layout.gpu_rows_texture_height<=max,adaptive_texture_layout_fits:Math.ceil(texels/width)<=max&&candidate.layout.gpu_rows_texture_height<=max,adaptive_runs_width:width,adaptive_runs_height:Math.ceil(texels/width)};});
   }
   const adequate=report.candidates.filter(c=>c.missing.length===0&&c.projected_all_location_distortion.absolute_error_above25_count===0&&c.wgs84_all_location_distortion.absolute_error_above25_count===0).sort((a,b)=>a.zoom-b.zoom);
   report.selection={status:adequate.length?'numeric-candidate-selected-deployment-pending':'no-adequate-candidate',coarsest_tested_zoom_for_current_footprints:adequate[0]?.zoom??null,criteria:'Every current location has an actual collision-resolved cell; all-location projected and WGS84 geographic area errors at most 25%. This is a representation criterion, not approval of source semantics.',reason:'Finer resolution does not repair source label/coordinate defects or coastline/political-mask truncation. Activation requires consistent renderer constants, GPU device compatibility and measured mobile memory/loading performance; no source approval or deployment change is implied.'};

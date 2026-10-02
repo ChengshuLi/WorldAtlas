@@ -57,17 +57,25 @@ async function loadHostedRecords(endpoint,year,examples,signal){
  return {records,available:true,revision};
  }catch(error){if(error.name==='AbortError'||signal?.aborted||error.retryable)throw error;return {records:[],available:false,revision:null};}
 }
+let lastCompleteHostedMap;
+function unavailableHostedMap(year,examples,{unstable=false}={}){
+ const key=`${year}:${Number(examples)}`,cached=lastCompleteHostedMap?.key===key?lastCompleteHostedMap.value:null,empty={records:[],available:false,revision:null};
+ return {attributes:cached?{...cached.attributes,available:false}:empty,names:cached?{...cached.names,available:false}:empty,retirements:cached?{...cached.retirements,available:false}:empty,stale:Boolean(cached),retirementAuthority:Boolean(cached),cached_revision:cached?.attributes.revision??null,...(unstable?{unstable:true}:{})};
+}
 async function loadHostedMapEvidence(year,examples,signal){
  for(let attempt=0;attempt<3;attempt++){
   signal?.throwIfAborted();
   try{
    const pages=await Promise.all(['/api/attributes','/api/names','/api/retirements'].map(endpoint=>loadHostedRecords(endpoint,year,examples,signal)));
-   const versions=new Set(pages.filter(p=>p.available&&p.revision!=null).map(p=>p.revision));
+   if(pages.some(p=>!p.available))return unavailableHostedMap(year,examples);
+   const versions=new Set(pages.filter(p=>p.revision!=null).map(p=>p.revision));
    if(versions.size>1)throw new ContentRevisionError();
-   return {attributes:pages[0],names:pages[1],retirements:pages[2]};
+   const value={attributes:pages[0],names:pages[1],retirements:pages[2],retirementAuthority:true};
+   if(hostedDatabase)lastCompleteHostedMap={key:`${year}:${Number(examples)}`,value};
+   return value;
   }catch(error){
    if(error.name==='AbortError'||signal?.aborted||!error.retryable)throw error;
-   if(attempt===2)return {attributes:{records:[],available:false},names:{records:[],available:false},retirements:{records:[],available:false},unstable:true};
+   if(attempt===2)return unavailableHostedMap(year,examples,{unstable:true});
   }
  }
 }
@@ -111,8 +119,9 @@ export async function loadSnapshot(year, examples, signal) {
   const [history,derived,references,hostedMap,evidence] = await Promise.all([historyRequest,loadOwnershipHistory(year,signal),loadReferenceAttributes(year,signal),loadHostedMapEvidence(year,examples,signal),loadPreparedEvidence(year,examples,signal)]);
   signal?.throwIfAborted();
   const {attributes:hosted,names:temporal_history,retirements}=hostedMap;
-  const merged=mergePreparedEvidence(hosted.records,temporal_history.records,evidence,{retirements:retirements.records});
-  return { year, temporal_history:merged.names, storage:hostedDatabase?{available:hosted.available&&temporal_history.available&&retirements.available,...(hostedMap.unstable?{reason:'Historical content changed during loading; retry to load a consistent database snapshot'}:{})}:null, states: selectRecords(history.states, year, examples), boundaries: selectRecords(history.boundaries, year, examples), attributes:mergePreparedEvidence([...merged.records,...(history.attributes||[]).filter(r=>r.valid_from<=year&&r.valid_to>year&&(!r.is_example||examples))],[],{records:[...derived,...references],names:[]},{retirements:retirements.records}).records,polities:[] };
+  const evidenceUnavailable=hostedDatabase&&!hostedMap.retirementAuthority;
+  const merged=evidenceUnavailable?{records:[],names:[]}:mergePreparedEvidence(hosted.records,temporal_history.records,evidence,{retirements:retirements.records});
+  return { year,evidenceUnavailable, temporal_history:merged.names, storage:hostedDatabase?{available:hosted.available&&temporal_history.available&&retirements.available,stale:Boolean(hostedMap.stale),cached_revision:hostedMap.cached_revision??null,...(!hosted.available?{reason:hostedMap.stale?'Historical database unavailable. Showing the last complete cached content snapshot for this year; it may be outdated. Select the year again to retry.':hostedMap.unstable?'Historical content changed during loading. Dated values are unavailable until a consistent snapshot can be read. Select the year again to retry.':'Historical database unavailable. Dated values are unavailable because withdrawals could not be verified. Geography remains browsable. Select the year again to retry.'}:{})}:null, states:evidenceUnavailable?[]:selectRecords(history.states, year, examples), boundaries: selectRecords(history.boundaries, year, examples), attributes:evidenceUnavailable?[]:mergePreparedEvidence([...merged.records,...(history.attributes||[]).filter(r=>r.valid_from<=year&&r.valid_to>year&&(!r.is_example||examples))],[],{records:[...derived,...references],names:[]},{retirements:retirements.records}).records,polities:[] };
 }
 
 export async function ensureGeometry(data,signal){

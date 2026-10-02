@@ -9,11 +9,9 @@ import gzip
 import hashlib
 import json
 import pathlib
-import shutil
-import sys
 
 from shapely import make_valid, union_all, normalize
-from shapely.geometry import box, mapping, shape
+from shapely.geometry import box, mapping, shape, LineString
 from ellipsoidal_area import area
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -25,7 +23,8 @@ NE = f'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/{REVISION}
 
 
 def load(path):
-    return json.load(gzip.open(path, 'rt') if str(path).endswith('.gz') else open(path))
+    with gzip.open(path, 'rt') if str(path).endswith('.gz') else open(path) as stream:
+        return json.load(stream)
 
 
 def digest(data):
@@ -36,7 +35,7 @@ def dump(path, value):
     data = json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode()
     path.parent.mkdir(parents=True, exist_ok=True)
     if str(path).endswith('.gz'):
-        with gzip.GzipFile(filename='', mode='wb', fileobj=open(path, 'wb'), mtime=0) as out:
+        with open(path, 'wb') as stream, gzip.GzipFile(filename='', mode='wb', fileobj=stream, mtime=0) as out:
             out.write(data)
     else:
         path.write_bytes(data)
@@ -71,6 +70,7 @@ def archive_sources(current, hierarchy, neighboring_conflicts):
         ('NAM.dbf', 'original-2007.dbf.gz', 'https://purl.stanford.edu/cs051py0596', 'Public Domain', True),
         ('NAM.shx', 'original-2007.shx.gz', 'https://purl.stanford.edu/cs051py0596', 'Public Domain', True),
         ('NAM.prj', 'original-2007.prj.gz', 'https://purl.stanford.edu/cs051py0596', 'Public Domain', True),
+        ('stanford-original.geojson', 'original-2007-constituencies.geojson.gz', 'https://purl.stanford.edu/cs051py0596', 'Public Domain', True),
         ('stanfordxml.txt', 'original-2007-metadata.xml.gz', 'https://purl.stanford.edu/cs051py0596', 'Public Domain', True),
         ('ne_10m_land.geojson', 'natural-earth-land.geojson.gz', NE, 'Public Domain', True),
         ('../ne_10m_admin_0_countries.json', 'natural-earth-reference-countries.geojson.gz',
@@ -85,7 +85,7 @@ def archive_sources(current, hierarchy, neighboring_conflicts):
         data = (CACHE / original).read_bytes()
         path = RETAINED / retained
         if compressed:
-            with gzip.GzipFile(filename='', mode='wb', fileobj=open(path, 'wb'), mtime=0) as out:
+            with open(path, 'wb') as stream, gzip.GzipFile(filename='', mode='wb', fileobj=stream, mtime=0) as out:
                 out.write(data)
         else:
             path.write_bytes(data)
@@ -129,6 +129,94 @@ def restore_pinned_inputs():
         destination.write_bytes(raw)
 
 
+def pieces(g):
+    if g.geom_type == 'Polygon':
+        return [g]
+    return [p for q in getattr(g, 'geoms', ()) for p in pieces(q)]
+
+
+def coastal_concordance(source, raw_geoms, land, shoreline, unresolved_land, ne_namibia):
+    """Geometry-only two-way source matches; never extend an inland border.
+
+    A candidate coast component must already be in the old atlas, be physical
+    reference land, touch the physical exterior shoreline, and belong to a
+    published original footprint with >=95% correspondence in both directions.
+    Names from the corrupt source are kept as evidence but never used to match.
+    """
+    original = load(CACHE / 'stanford-original.geojson')['features']
+    rows, groups = [], {}
+    for i, f in enumerate(original):
+        g = poly(shape(f['geometry'])).intersection(land)
+        measured = area(g)
+        matches = [(j, area(g.intersection(h))) for j, h in enumerate(raw_geoms) if g.intersects(h)]
+        matches.sort(key=lambda row: -row[1])
+        winner = matches[0] if measured > 0 and matches else None
+        share = winner[1] / measured if winner else 0
+        rows.append({'original_record': i + 1, 'original_name_untrusted': f['properties']['ADM2'],
+                     'original_physical_land_m2': measured,
+                     'winner_code': source[winner[0]]['properties']['adm2_pcode'] if winner else None,
+                     'winning_old_land_share': share,
+                     'eligible_one_way': share >= .95,
+                     'matching_method': 'Spatial footprint correspondence only; corrupt source names ignored.'})
+        if share >= .95:
+            groups.setdefault(winner[0], []).append((i, g))
+    extensions, group_rows, coast_rows = {}, [], []
+    for j in range(len(source)):
+        members = groups.get(j, [])
+        if not members:
+            group_rows.append({'source_code': source[j]['properties']['adm2_pcode'],
+                               'source_name': source[j]['properties']['adm2_name'],
+                               'original_records': [], 'combined_old_land_share': None,
+                               'candidate_land_share': 0, 'eligible_bidirectional': False,
+                               'reason': 'No original source footprint passed the one-way >=95% geometry correspondence.'})
+            continue
+        combined = union_all([g for i, g in members])
+        target = raw_geoms[j].intersection(land)
+        old_share = area(combined.intersection(target)) / area(combined)
+        target_share = area(combined.intersection(target)) / area(target)
+        eligible = old_share >= .95 and target_share >= .95
+        group_rows.append({'source_code': source[j]['properties']['adm2_pcode'],
+                           'source_name': source[j]['properties']['adm2_name'],
+                           'original_records': [i + 1 for i, g in members],
+                           'combined_old_land_share': old_share, 'candidate_land_share': target_share,
+                           'eligible_bidirectional': eligible})
+        if not eligible:
+            continue
+        remainder = combined.intersection(unresolved_land).intersection(ne_namibia)
+        accepted = []
+        for g in pieces(remainder):
+            coastline = g.boundary.intersection(shoreline)
+            coastal = not coastline.is_empty and coastline.length > 1e-10
+            coast_rows.append({'source_code': source[j]['properties']['adm2_pcode'],
+                               'area_m2': area(g), 'bounds': list(g.bounds),
+                               'touches_physical_exterior_shoreline': coastal,
+                               'decision': 'Source-supported coast restoration' if coastal else
+                               'Blocked: inland source-border offset, not a coastal correction'})
+            if coastal:
+                accepted.append(g)
+        extensions[j] = union_all(accepted)
+    conflicts = []
+    keys = list(extensions)
+    for position, i in enumerate(keys):
+        for j in keys[position + 1:]:
+            overlap = extensions[i].intersection(extensions[j])
+            if area(overlap) > .001:
+                conflicts.append({'a': source[i]['properties']['adm2_pcode'],
+                                  'b': source[j]['properties']['adm2_pcode'],
+                                  'area_m2': area(overlap), '_geometry': overlap})
+    disputed = union_all([row['_geometry'] for row in conflicts])
+    for row in conflicts:
+        del row['_geometry']
+    safe = {j: g.difference(disputed) for j, g in extensions.items()}
+    return safe, {'schema_version': 1, 'method': coastal_concordance.__doc__,
+                  'original_records_reviewed': len(rows), 'candidate_groups_reviewed': len(group_rows),
+                  'source_records': rows, 'source_groups': group_rows, 'residual_components': coast_rows,
+                  'conflicts': conflicts, 'ambiguous_coast_overlap_m2': area(disputed),
+                  'safe_coast_restored_m2': area(union_all(list(safe.values()))),
+                  'historical_attribute_transfer': 'None',
+                  'uncertainty': 'Reference coastline restoration by strong two-source shape correspondence. Does not certify the historical identity or modern administrative vintage.'}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--stage', default='.cache/namibia-repair-stage')
@@ -149,7 +237,8 @@ def main():
     land_features = load(CACHE / 'ne_10m_land.geojson')['features']
     relevant_land = [poly(shape(f['geometry'])) for f in land_features
                      if bounds_intersect(shape(f['geometry']).bounds, country.bounds)]
-    land = union_all(relevant_land).intersection(box(*country.bounds))
+    physical_land = union_all(relevant_land)
+    land = physical_land.intersection(box(*country.bounds))
     geoms = [g.intersection(land) for g in raw_geoms]
     footprint = union_all(geoms)
     current, neighbors, world_count, world_hashes = [], [], 0, {}
@@ -261,6 +350,29 @@ def main():
     residual_components = [{'area_m2': area(g), 'bounds': list(g.bounds),
                             'reference_point': list(g.representative_point().coords)[0]}
                            for g in residual_parts]
+    namibia_context = union_all([g for p, g in reference_countries
+                                if (p.get('ADM0_A3') or p.get('adm0_a3')) == 'NAM'])
+    shoreline = union_all([LineString(g.exterior.coords) for g in pieces(physical_land)]).intersection(box(*country.bounds))
+    safe_extensions, coast_review = coastal_concordance(source, raw_geoms, land, shoreline,
+                                                       uncovered_removed_land, namibia_context)
+    coast_locations = []
+    for j, f in enumerate(locations):
+        value = json.loads(json.dumps(f))
+        extension = safe_extensions.get(j)
+        if extension is not None and not extension.is_empty:
+            merged = poly(union_all([geoms[j], extension]))
+            value['geometry'] = mapping(merged)
+            value['properties']['metadata']['coastal_concordance'] = {
+                'method': 'Geometry-only bidirectional >=95% original-2007 / COD correspondence; restore only previously mapped physical land components touching the independent exterior coastline.',
+                'restored_area_m2': area(extension), 'original_source_url': 'https://purl.stanford.edu/cs051py0596',
+                'original_source_license': 'Public Domain', 'physical_land_url': NE,
+                'historical_records_transferred': False,
+                'evidence_file': 'coastal-extension-review.json.gz',
+                'uncertainty': coast_review['uncertainty']}
+        coast_locations.append(value)
+    coast_union = union_all([shape(f['geometry']) for f in coast_locations])
+    assert abs(area(coast_union.intersection(neighbors_union)) - area(footprint.intersection(neighbors_union))) < .1
+    coast_review['remaining_unresolved_old_land_m2'] = area(uncovered_removed_land.difference(coast_union))
     blocks = []
     if conflict_rows:
         blocks.append({'code': 'neighbor-source-boundary-conflicts', 'locations': len(conflict_rows),
@@ -282,6 +394,10 @@ def main():
               'neighbor_conflicts': conflict_rows, 'blocks': blocks,
               'uncovered_old_land_reference_country_context': residual_country_context,
               'uncovered_old_land_components': residual_components,
+              'coastal_concordance': {'safe_restoration_m2': coast_review['safe_coast_restored_m2'],
+                                      'remaining_unresolved_old_land_m2': coast_review['remaining_unresolved_old_land_m2'],
+                                      'review_file': 'coastal-extension-review.json.gz',
+                                      'candidate_file': 'locations-coastal-concordance.geojson.gz'},
               'old_to_candidate_crosswalk': candidate_crosswalk,
               'archival_policy': 'Every old ID, footprint, source reference and record retained; no source of direct historical evidence moved automatically.',
               'hierarchy_policy': '107 locations in 14 published regional constituency clusters at province tier, within two existing sourced geographical areas; all five adjacent-tier parents resolved. No count quota or invented intermediate administrative division.',
@@ -290,11 +406,35 @@ def main():
     dump(stage / 'hierarchy.json', staged_units)
     dump(stage / 'migration.json.gz', result)
     dump(stage / 'archive.geojson.gz', {'type': 'FeatureCollection', 'features': current})
+    dump(stage / 'locations-coastal-concordance.geojson.gz', {'type': 'FeatureCollection', 'features': coast_locations})
+    dump(stage / 'coastal-extension-review.json.gz', coast_review)
+    dump(RETAINED / 'coastal-concordance-receipt.json.gz', coast_review)
     dump(stage / 'unresolved-land.geojson.gz', {'type': 'FeatureCollection',
                                               'features': [{'type': 'Feature', 'geometry': mapping(g),
                                                             'properties': {'status': 'unresolved-source-boundary-gap',
                                                                            'area_m2': area(g), 'assigned_location': None}}
                                                            for g in residual_parts]})
+    manifest = load(RETAINED / 'manifest.json')
+    for source_path, retained_name in [('locations.geojson.gz', 'staged-cod-locations.geojson.gz'),
+                                       ('locations-coastal-concordance.geojson.gz', 'staged-coast-concordance-locations.geojson.gz'),
+                                       ('migration.json.gz', 'migration-receipt.json.gz'),
+                                       ('coastal-extension-review.json.gz', 'coastal-concordance-receipt.json.gz'),
+                                       ('unresolved-land.geojson.gz', 'unresolved-land.geojson.gz')]:
+        data = (stage / source_path).read_bytes()
+        (RETAINED / retained_name).write_bytes(data)
+        manifest['sources'].append({'path': retained_name, 'encoding': 'gzip',
+                                    'original_sha256': digest(gzip.decompress(data)),
+                                    'retained_sha256': digest(data), 'bytes': len(data),
+                                    'role': 'Blocked migration candidate or preparation receipt; not an applied release',
+                                    'url': SOURCE, 'license': 'Underlying COD CC BY-IGO; original 2007 and Natural Earth inputs Public Domain'})
+    raw_sha = dump(RETAINED / 'staged-hierarchy.json.gz', staged_units)
+    manifest['sources'].append({'path': 'staged-hierarchy.json.gz', 'encoding': 'gzip',
+                                'original_sha256': raw_sha, 'retained_sha256': digest((RETAINED / 'staged-hierarchy.json.gz').read_bytes()),
+                                'bytes': (RETAINED / 'staged-hierarchy.json.gz').stat().st_size,
+                                'role': 'Blocked migration reference hierarchy, not an applied release',
+                                'url': SOURCE, 'license': 'COD CC BY-IGO; existing geographic source licenses retained per unit'})
+    manifest['total_bytes'] = sum(r['bytes'] for r in manifest['sources'])
+    dump(RETAINED / 'manifest.json', manifest)
     print(json.dumps({'stage': str(stage), 'status': result['status'], 'counts': result['counts'],
                       'geometry': result['geometry'], 'blocks': blocks}, indent=2))
 

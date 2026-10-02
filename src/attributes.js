@@ -2,8 +2,9 @@ import {attributes,validYear,explicitPopulationZero} from './model.js';
 export const locationAttributes=[...attributes,'habitation'];
 export function categoryId(kind,name){return name==null?null:`${kind}:${encodeURIComponent(name.normalize('NFC').trim().toLocaleLowerCase('en'))}`;}
 const priority=r=>r.is_example?40+(r.evidence_priority||0):r.method==='direct'?(r.evidence_priority||0):r.method==='majority-area'||r.method==='derived'?10:r.method==='reference'?20:30;
-export function resolveAttributes(features,year,{states=[],records=[],temporal,examples=false}={}){
+export function resolveAttributes(features,year,{states=[],records=[],temporal,examples=false,evidenceAvailable=true}={}){
  if(!validYear(year))throw Error('Year must be between 3000 BC and 2026 AD, excluding zero');
+ if(!evidenceAvailable){states=[];records=[];temporal=undefined;}
  const candidates=new Map();
  const add=(id,attribute,value,r)=>{
   if(r.valid_from>year||r.valid_to<=year||r.is_example&&!examples)return;
@@ -16,7 +17,7 @@ export function resolveAttributes(features,year,{states=[],records=[],temporal,e
  const output=new Map();
  for(const f of features){const value={location_id:f.id,provenance:{},category_ids:{}};
   for(const attribute of locationAttributes){let c=candidates.get(`${f.id}/${attribute}`);
-   if((!c||c.rank>20)&&year===2026&&attribute==='owner'&&f.properties.reference_owner){const m=f.properties.metadata||{},name='reference_polity' in m?m.reference_polity:f.properties.reference_owner;c={value:name,evidence:{category_id:m.reference_owner_id??categoryId('owner',name),method:'reference',status:m.reference_polity_status||'reference',valid_from:2026,valid_to:2027,source:m.reference_polity_evidence?.source||`${m.source_name||'Geographic'} ownership reference; source dates vary`,metadata:m.reference_polity_evidence||{}}};}
+   if(evidenceAvailable&&(!c||c.rank>20)&&year===2026&&attribute==='owner'&&f.properties.reference_owner){const m=f.properties.metadata||{},name='reference_polity' in m?m.reference_polity:f.properties.reference_owner;c={value:name,evidence:{category_id:m.reference_owner_id??categoryId('owner',name),method:'reference',status:m.reference_polity_status||'reference',valid_from:2026,valid_to:2027,source:m.reference_polity_evidence?.source||`${m.source_name||'Geographic'} ownership reference; source dates vary`,metadata:m.reference_polity_evidence||{}}};}
    value[attribute]=c?.value??null;
    value.provenance[attribute]=c?{...c.evidence,value:undefined,location_id:undefined,attribute:undefined}:{status:'unknown',method:null,source:null};
    if(['owner','culture','religion'].includes(attribute))value.category_ids[attribute]=c?.evidence.category_id??categoryId(attribute,value[attribute]);

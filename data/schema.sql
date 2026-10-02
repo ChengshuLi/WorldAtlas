@@ -164,3 +164,15 @@ DROP TRIGGER IF EXISTS states_settlement_consistency;
 CREATE TRIGGER states_settlement_consistency BEFORE INSERT ON states BEGIN
  SELECT RAISE(ABORT,'Unsettled conflicts with positive population') WHERE NEW.rank='unsettled' AND NEW.population>0;
 END;
+
+-- Reference corrections have no invented historical effective date. Retain the
+-- original serialized geometry, label, chain and evidence context separately.
+CREATE TABLE IF NOT EXISTS reference_location_archives (
+ id TEXT PRIMARY KEY,
+ location_id TEXT NOT NULL,
+ snapshot TEXT NOT NULL CHECK(json_valid(snapshot) AND json_type(snapshot)='object'),
+ source TEXT NOT NULL CHECK(length(trim(source))>0)
+);
+CREATE INDEX IF NOT EXISTS reference_location_archive_identity ON reference_location_archives(location_id);
+CREATE TRIGGER IF NOT EXISTS reference_location_archive_immutable BEFORE UPDATE ON reference_location_archives BEGIN SELECT RAISE(ABORT,'Reference archives are immutable'); END;
+CREATE TRIGGER IF NOT EXISTS reference_location_archive_no_delete BEFORE DELETE ON reference_location_archives BEGIN SELECT RAISE(ABORT,'Reference archives are immutable'); END;

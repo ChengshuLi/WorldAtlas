@@ -165,7 +165,7 @@ async function loadYear(next) {
   $('#loading').hidden=false; $('#loading').textContent=`Loading ${formatYear(next)}…`;
   try {
     const result=await loadSnapshot(next, $('#examples').checked, signal);
-    const temporalReference=result.temporal_history?.length?{...referenceData,temporal:{...referenceData.temporal,history:[...(referenceData.temporal.history||[]),...result.temporal_history]}}:referenceData;
+    const temporalReference=result.evidenceUnavailable?{...referenceData,temporal:{...referenceData.temporal,history:[]}}:result.temporal_history?.length?{...referenceData,temporal:{...referenceData.temporal,history:[...(referenceData.temporal.history||[]),...result.temporal_history]}}:referenceData;
     let resolved=resolveTemporal(temporalReference,next,$('#examples').checked);
     if(result.boundaries.length||resolved.features.length!==referenceData.features.length){await ensureGeometry(referenceData,signal);resolved=resolveTemporal(temporalReference,next,$('#examples').checked);}
     signal.throwIfAborted();year=next;temporal=resolved;
@@ -174,14 +174,14 @@ async function loadYear(next) {
     parents=new Map(data.units.map(u=>[u.id,u]));features=new Map(data.features.map(f=>[f.id,f]));
     for(const e of temporal.entities.values())if(e.kind==='settlement'&&features.has(e.parent_id)){const p=features.get(e.parent_id).properties;p.settlement_search=[...(p.settlement_search||[]),...e.search_names];}
     polities=[];
-    states=resolveAttributes(data.features,year,{states:result.states,records:result.attributes||[],temporal,examples:$('#examples').checked});
+    states=resolveAttributes(data.features,year,{states:result.states,records:result.attributes||[],temporal,examples:$('#examples').checked,evidenceAvailable:!result.evidenceUnavailable});
     const changed = JSON.stringify([...boundaries]) !== JSON.stringify(result.boundaries.map(b=>[b.location_id,b]));
     boundaries=new Map(result.boundaries.map(b=>[b.location_id,b]));
     if (changed || previousMembership!==data.features.map(f=>`${f.id}/${f.properties.parent_id}`).join('|'))rebuildGeometry();
     else for(const item of geoLayer.index)item.feature={...item.feature,properties:features.get(item.feature.id).properties};
     $('#results').innerHTML='';
     render(); $('#loading').hidden=true;
-    if(result.storage&&!result.storage.available)$('#year-error').textContent='Historical database unavailable. Showing prepared source data; imported evidence could not be loaded. Select the year again to retry.';
+    if(result.storage&&!result.storage.available)$('#year-error').textContent=result.evidenceUnavailable?'Historical content could not load. Attribute values are unavailable; geography remains browsable. Select the year again to retry.':'Historical content could not refresh. Showing the last complete snapshot for this year. Select the year again to retry.';
   } catch(error) { if (error.name!=='AbortError') { $('#loading').textContent='Could not load this year. Submit the year again to retry.'; $('#year-error').textContent='Map unavailable. Check the server connection and retry.'; } }
 }
 $('#year-form').onsubmit = event => { event.preventDefault(); const next=parseYear($('#year-input').value); if (next===null) $('#year-error').textContent='Enter a year from 3000 BC to 2026 AD. There is no year zero.'; else loadYear(next); };

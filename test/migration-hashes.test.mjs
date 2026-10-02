@@ -22,7 +22,7 @@ test('frozen migration SQL and snapshots retain their published identities',()=>
  const journal=JSON.parse(fs.readFileSync(new URL('../drizzle/meta/_journal.json',import.meta.url)));
  for(const [idx,entry]of journal.entries.slice(0,5).entries()){
   assert.equal(entry.idx,idx);
-  assert.ok(frozen[`${entry.tag}.sql`],`Unexpected frozen journal identity ${entry.tag}`);
+  assert.equal(`${entry.tag}.sql`,Object.keys(frozen).filter(path=>path.endsWith('.sql'))[idx],`Unexpected frozen journal identity ${entry.tag}`);
   if(idx){const snapshot=JSON.parse(fs.readFileSync(new URL(`../drizzle/meta/${String(idx).padStart(4,'0')}_snapshot.json`,import.meta.url))),previous=JSON.parse(fs.readFileSync(new URL(`../drizzle/meta/${String(idx-1).padStart(4,'0')}_snapshot.json`,import.meta.url)));assert.equal(snapshot.prevId,previous.id);}
  }
  assert.ok(journal.entries.length>=5);

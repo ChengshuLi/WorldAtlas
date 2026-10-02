@@ -5,6 +5,7 @@ import {mergePreparedEvidence} from './src/prepared-evidence.js';
 import {syncEntities,importTemporal,temporalCatalog} from './temporal.mjs';
 import {migrateReference} from './reference.mjs';
 import {restoreReferenceArchive} from './reference-archive.mjs';
+import {restoreGeographicRepairArchive} from './geographic-archive.mjs';
 import { DatabaseSync } from 'node:sqlite';
 import fs from 'node:fs';
 import { attributes, levels, ranks, validYear } from './src/model.js';
@@ -96,6 +97,7 @@ export function seedDatabase(db) {
   migrateReference(db,read);
   migrateHierarchy(db,read);
   migrateTopology(db,read);
+  restoreGeographicRepairArchive(db);
   syncEntities(db);
   const putCategory=db.prepare('INSERT OR IGNORE INTO attribute_entities VALUES (?,?,?,?)');
   for(const r of db.prepare("SELECT DISTINCT json_extract(metadata,'$.reference_owner_id') id,coalesce(json_extract(metadata,'$.reference_polity'),reference_owner) name FROM locations WHERE active=1 AND json_extract(metadata,'$.reference_owner_id') IS NOT NULL").all())putCategory.run(r.id,'owner',r.name,'Natural Earth / source-geography modern reference');

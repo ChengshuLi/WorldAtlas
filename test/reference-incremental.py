@@ -2,7 +2,7 @@
 import contextlib,copy,gzip,importlib.util,io,json,pathlib,subprocess,sys,tempfile,unittest,zipfile
 import numpy as np,rasterio
 from rasterio.transform import from_origin
-from shapely.geometry import box,mapping
+from shapely.geometry import box,mapping,Polygon
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('incremental_references',ROOT/'scripts/prepare-reference-incremental.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 def put(path,value):path.write_text(m.dump(value));return m.sha(path)
@@ -85,6 +85,16 @@ class ReferenceMigrations(unittest.TestCase):
  def test_future_replacement_supports_many_added_and_removed_ids(self):
   self.after=[feature('new'+str(i),box((i%4)*2,0,(i%4)*2+1,1)) for i in range(12)]+[self.before[1]];put(self.a,{'features':self.after});self.refresh_receipt();self.run_prepare();index,result=rows(self.root/'stage')
   self.assertEqual(index['locations'],13);self.assertEqual(index['incremental_preparation']['recomputed_locations'],12);self.assertEqual(result['keep'],self.oldrows[1][1]);self.assertEqual(set(result),{'keep',*[f'new{i}' for i in range(12)]})
+ def test_dateline_location_samples_two_small_sides_not_the_whole_world(self):
+  path=self.root/'dateline.tif';cells=np.zeros((2,360),dtype='uint8');cells[:,0]=1;cells[:,-1]=1
+  with rasterio.open(path,'w',driver='GTiff',width=360,height=2,count=1,dtype='uint8',crs='EPSG:4326',transform=from_origin(-180,2,1,1)) as raster:raster.write(cells,1)
+  geometry=m.canonical(Polygon([(179,0),(-179,0),(-179,2),(179,2),(179,0)]))
+  with rasterio.open(path) as raster:result,reason=m.climate_summary(geometry,raster)
+  self.assertEqual(result,(1,1.0,1.0));self.assertIsNone(reason)
+ def test_cli_uses_explicit_pinned_sources_and_writes_only_a_stage(self):
+  manifest=self.root/'sources.json';put(manifest,{**{key:str(value) for key,value in self.sources.items() if key!='climate_rasters'},'climate_rasters':{key:str(value) for key,value in self.sources['climate_rasters'].items()}})
+  command=[sys.executable,'-W','ignore::PendingDeprecationWarning',str(ROOT/'scripts/prepare-reference-incremental.py'),'--before',str(self.b),'--after',str(self.a),'--receipt',str(self.receipt),'--references',str(self.old),'--output',str(self.root/'stage'),'--sources',str(manifest)]
+  finished=subprocess.run(command,check=True,capture_output=True,text=True);receipt=json.loads(finished.stdout.strip().splitlines()[-1]);self.assertEqual(receipt['recomputed_locations'],2);self.assertEqual(receipt['derived_records'],14);self.assertTrue((self.root/'stage/index.json').exists())
  def test_other_historical_intervals_are_not_overwritten(self):
   self.index['types'][5]['valid_from']=1800;put(self.old/'index.json',self.index)
   with self.assertRaises(ValueError):self.run_prepare()

@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import { build } from 'vite';
-import {gzipSync} from 'node:zlib';
+import {gzipSync,gunzipSync} from 'node:zlib';
 import {createGridIndex} from '../src/pixel-grid.js';
 import {compileOwnership,packOwnership} from '../src/pixel-ownership.js';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
@@ -24,7 +24,17 @@ try {
   const pixelAudit=JSON.parse(await fs.readFile('data/pixel-audit.json','utf8'));
   reference.pixelMissing=pixelAudit.missing.map(f=>f.id);
   checkPrepared(reference.features);
-  const gridIndex=createGridIndex(reference.features),ownership=packOwnership(compileOwnership(gridIndex));
+  const fixedGridPath='data/canonical-grid/manifest.json';
+  const fixedGrid=await fs.access(fixedGridPath).then(async()=>JSON.parse(await fs.readFile(fixedGridPath)),()=>null);
+  let gridIndex,ownership;
+  if(fixedGrid){
+    if(fixedGrid.footprints_sha256!==checkPrepared(reference.features)||fixedGrid.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex'))throw Error('Precompiled canonical grid is stale');
+    const bytes=await fs.readFile(`data/canonical-grid/${fixedGrid.bounds.path}`);
+    if(createHash('sha256').update(bytes).digest('hex')!==fixedGrid.bounds.sha256)throw Error('Precompiled location bounds hash mismatch');
+    const bounds=JSON.parse(gunzipSync(bytes)),byId=new Map(bounds.map(row=>[row.id,row]));
+    if(byId.size!==reference.features.length||bounds.some((row,i)=>row.index!==i+1)||reference.features.some(f=>!byId.has(f.id)))throw Error('Precompiled grid identity inventory mismatch');
+    gridIndex=createGridIndex(reference.features.map(feature=>({...feature,geometry:null,gridBounds:byId.get(feature.id).bounds,pixelIndex:byId.get(feature.id).index})));
+  }else{gridIndex=createGridIndex(reference.features);ownership=packOwnership(compileOwnership(gridIndex));}
   const history = {
     attributes:db.prepare('SELECT * FROM attribute_records WHERE location_id IN (SELECT id FROM locations WHERE active=1)').all().map(r=>({...r,value:JSON.parse(r.value),metadata:JSON.parse(r.metadata)})),
     states: db.prepare('SELECT * FROM states WHERE location_id IN (SELECT id FROM locations WHERE active=1)').all(),
@@ -39,8 +49,9 @@ try {
     await fs.writeFile(`dist/${part}`,gzipSync(JSON.stringify(reference.features.slice(i,i+1500).map(({id,geometry})=>({id,geometry}))),{level:9}));
   }
   await fs.mkdir('dist/ownership',{recursive:true});
-  const pixelMap={version:ownership.version??1,coordinateBits:ownership.coordinateBits,size:ownership.size,runWords:ownership.runs.length,parts:[]};
-  for(const kind of ['rows','runs'])for(let offset=0;offset<ownership[kind].length;offset+=1048576){
+  const pixelMap=fixedGrid?Object.fromEntries(['version','coordinateBits','size','runWords','parts'].map(key=>[key,fixedGrid[key]])):{version:ownership.version??1,coordinateBits:ownership.coordinateBits,size:ownership.size,runWords:ownership.runs.length,parts:[]};
+  if(fixedGrid)for(const part of fixedGrid.parts){const bytes=await fs.readFile(`data/canonical-grid/${part.path}`);if(createHash('sha256').update(bytes).digest('hex')!==part.sha256)throw Error(`Precompiled ownership hash mismatch: ${part.path}`);await fs.writeFile(`dist/${part.path}`,bytes);}
+  else for(const kind of ['rows','runs'])for(let offset=0;offset<ownership[kind].length;offset+=1048576){
     const words=ownership[kind].slice(offset,offset+1048576),path=`ownership/${kind}-${offset}.bin.gz`;
     await fs.writeFile(`dist/${path}`,gzipSync(shuffleOwnershipBytes(words),{level:9}));pixelMap.parts.push({kind,offset,words:words.length,path,encoding:'byte-shuffle'});
   }
@@ -53,7 +64,7 @@ try {
   for(let i=0;i<reference.temporal.history.length;i+=5000){const path=`geography/history-${i/5000}.json.gz`;temporalHistoryParts.push(path);await fs.writeFile(`dist/${path}`,gzipSync(JSON.stringify(reference.temporal.history.slice(i,i+5000))));}
   const geographicRelease=JSON.parse(await fs.readFile('data/geographic-releases/index.json','utf8')).releases.at(-1);
   if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
-  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({type:reference.type,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
+  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({type:reference.type,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
   await fs.cp('data/ownership-history','dist/ownership-history',{recursive:true});
   await fs.cp('data/ownership-runtime','dist/ownership-runtime',{recursive:true});
@@ -71,6 +82,7 @@ try {
     await fs.copyFile('data/geographic-decision-migration.json.gz','dist/geographic-decision-migration.json.gz');
   }
   await fs.copyFile('data/geographic-migration-archive.json.gz','dist/geographic-migration-archive.json.gz');
+  for(const name of ['global-semantic-closure.json.gz','macro-boundary-migration.json.gz','final-grid-resolution-review.json.gz'])if(await fs.access(`data/${name}`).then(()=>true,()=>false))await fs.copyFile(`data/${name}`,`dist/${name}`);
   await fs.writeFile('dist/geographic-migration-review.json.gz',gzipSync(await fs.readFile('data/geographic-migration-review.json'),{level:9}));
   for(const file of ['world-review.json','global-refinement-report.json','source-inventory.json','pixel-audit.json','regional-membership-report.json','border-parent-review.json','attribute-sources.json','reference-polity-report.json','settlement-source-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);
   for(const file of ['administrative-sources.json','granularity-report.json','hierarchy-report.json','semantic-report.json','granularity-audit.json','location-policy.json','coverage-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);

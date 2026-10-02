@@ -31,7 +31,7 @@ Climate uses the original native cell-centre and cosine-latitude weighted catego
 
 Potential-natural biome uses the independently audited precise WGS84 surface-area helper. Same-biome source polygons are unioned before measuring, and coverage uses the entire location footprint. Source `N/A` remains an explicit unknown category with its evidence. These references describe potential-natural vegetation, not observed farmland.
 
-Topography uses the existing EarthEnv geomorphon summary helper. Source windows are read directly from the SHA-verified original TIFF; an unverified native-array cache is never trusted. Bounded strips and the full out-of-source latitude denominator preserve polar behavior and limit memory allocation.
+Topography uses the existing EarthEnv geomorphon summary helper. Source windows are read directly from the SHA-verified original TIFF; an unverified native-array cache is never trusted. Bounded strips and the full out-of-source latitude denominator preserve polar behavior and limit memory allocation. Changed geometries are canonicalized at the antimeridian before native raster and biome queries; a dateline crossing samples its two small sides rather than nearly the entire world.
 
 ## Publication and retained evidence
 
@@ -41,4 +41,12 @@ The output index retains original source citations, original type definitions an
 
 Before publishing a migration, retain the original preparation and these receipts/archives in durable versioned storage or tracked prepared-migration evidence. Validate current/server/static resolution against the new index. Never replace the old archive merely because another later migration uses the same staging filenames.
 
-Run focused migration tests with `python -W ignore::PendingDeprecationWarning test/reference-incremental.py`. Fixtures exercise real native rasters and precise biome geometry, unchanged bytes, changed/added/retired identities, source-proof failures, unsupported source extent, unknown biome classes, interval preservation and larger source replacements.
+Run focused migration tests with `python -W ignore::PendingDeprecationWarning test/reference-incremental.py`. Fixtures exercise real native rasters and precise biome geometry, unchanged bytes, changed/added/retired identities, source-proof failures, unsupported source extent, unknown biome classes, interval preservation larger source replacements, antimeridian sampling and the standalone CLI.
+
+## Validated source-territory repair stage
+
+The first real stage pins before footprint `1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58` and after footprint `5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8`. It reuses 49,562 location identities and 345,984 original reference tuples, recomputes only 27 locations into 183 supported tuples, and archives 309 original tuples for the 52 changed/retired before identities. The result has 346,167 reference tuples for 49,589 locations; category/source dictionaries retain their original 8 types and 54 values.
+
+The full unchanged-row, dictionary-prefix, part-hash and current-code comparison passed. Ten focused native-source and CLI tests passed. Swains Island's unsupported climate and biome summaries remain unknown. This stage does not claim full worldwide environmental or historical coverage.
+
+Durable migration evidence is tracked under `data/reference-migrations/source-territory-repair-v1/`. The validated stage index SHA-256 is `da75f8e3a2e29e39a3a502175f623f20628fba7703f217b6c448f4bf5221c418`.

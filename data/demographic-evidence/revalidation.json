@@ -1,0 +1,3225 @@
+{
+  "version": 1,
+  "revalidation_algorithm_sha256": "ec96896394da6569010545a61b31202b0f805212b93561dad3d8565d4748bd69",
+  "scope": "Revalidation of immutable dated evidence against a revised reference geographic release; no historical membership or claim transfer",
+  "historical_membership_assigned": false,
+  "records": 396,
+  "original_geography": {
+    "footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+    "hierarchy_sha256": "d15b845246f74f2934b32dfa8df431fb4fe92f7762ca24c33732b8d1c19999d6",
+    "location_index_sha256": "030ced5223b9be0e42f686d9cb4697887296c408be44e724ba6810123bec6c97"
+  },
+  "revalidated_geography": {
+    "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+    "hierarchy_sha256": "bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58",
+    "location_index_sha256": "59552ee8d7d8d0848df6e67fbd43a442e3d4769e6784df984556479c0ae55cf0"
+  },
+  "source_product_files": [
+    {
+      "path": "categories.json",
+      "sha256": "a39185d7f12b11dd824caa6d5b3051a849c7233d52a0ff3c1aee6cd87f1eb0e9"
+    },
+    {
+      "path": "index.json",
+      "sha256": "e944267b8c0f0cfdf57ab6f6e4571d4ad537e0e5121b6f0f5ced1a3e46c54280"
+    },
+    {
+      "path": "location-crosswalk.json",
+      "sha256": "d8b67983a11740ab29715e93e26ae4b2a50d9dda30a5d570e9300474700e5153"
+    },
+    {
+      "path": "religion-records.json",
+      "sha256": "6b8fcdafc3b57533898afd6b8ac1a22abd48552f3f7e15247578e1c1f868731a"
+    },
+    {
+      "path": "source-receipts.json",
+      "sha256": "464614f7370151045ab9288301724ff03d1348559aef6a5726695667dd5ad1b2"
+    },
+    {
+      "path": "sources.json",
+      "sha256": "1269ffee37a48cef61a5a3c7b49e90b1d504cc4713a2254e9d693ac2ed03239d"
+    }
+  ],
+  "migration_receipts": [
+    {
+      "path": ".cache/macro-boundary-repair-stage/migration-receipt.json.gz",
+      "sha256": "cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5"
+    }
+  ],
+  "entities": [
+    {
+      "entity_id": "atlas:city:GBR-Greater London",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f96d94dbd9f0c234e41c172ae9648a72a163090896111aa1a2dc8a9963c5c0db",
+      "revalidated_footprint_sha256": "f96d94dbd9f0c234e41c172ae9648a72a163090896111aa1a2dc8a9963c5c0db",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B10145309156113",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3ff8aaaefa6748de5209aa91d2f613289aade3adcc6691ef4e0600fd63db9f16",
+      "revalidated_footprint_sha256": "3ff8aaaefa6748de5209aa91d2f613289aade3adcc6691ef4e0600fd63db9f16",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B1081142143908",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7f0896168f20da4d75873d7baf8c9d3ccc7692bd95ab477713a1a50d7d48227a",
+      "revalidated_footprint_sha256": "7f0896168f20da4d75873d7baf8c9d3ccc7692bd95ab477713a1a50d7d48227a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B10831634124389",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f05acbf4b4a7fb6be60d25a8021ca27a47ff296b39761b1e446dd900403cd175",
+      "revalidated_footprint_sha256": "f05acbf4b4a7fb6be60d25a8021ca27a47ff296b39761b1e446dd900403cd175",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B10938266492584",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "127e2cfb3a98b5617801bc4a1b633ecc0751b68625e4ea4dd996d081be83eb43",
+      "revalidated_footprint_sha256": "127e2cfb3a98b5617801bc4a1b633ecc0751b68625e4ea4dd996d081be83eb43",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B11828737752872",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "cce8040ec301cd57603844c52ec585f868f486bf562ea959db4ee311a9754695",
+      "revalidated_footprint_sha256": "cce8040ec301cd57603844c52ec585f868f486bf562ea959db4ee311a9754695",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B11916296746250",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0825b15a487004588b10061afafefc76ee20dc2744ce6bac3b0cd0e7863c57ca",
+      "revalidated_footprint_sha256": "0825b15a487004588b10061afafefc76ee20dc2744ce6bac3b0cd0e7863c57ca",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B12129239120455",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e04da64491a6ca1587372e272fbf5ecd8a5428bac1b5a40abec99782ea2e22c4",
+      "revalidated_footprint_sha256": "e04da64491a6ca1587372e272fbf5ecd8a5428bac1b5a40abec99782ea2e22c4",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B13028513234480",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "acd96e6ce6cc68ef263402929df703ce1ce51ea8cc33d86a13ea8fec1d88a422",
+      "revalidated_footprint_sha256": "acd96e6ce6cc68ef263402929df703ce1ce51ea8cc33d86a13ea8fec1d88a422",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B13114344079677",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "edba248802b3376da378bc9aafcc94024c02fa2fdb58b857fedad7b49241c373",
+      "revalidated_footprint_sha256": "edba248802b3376da378bc9aafcc94024c02fa2fdb58b857fedad7b49241c373",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B13244512579669",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8ecd8c99bbf4bb52ff810431365ce96e6599c242e5bdb61fa4fa02d6bfe13e3a",
+      "revalidated_footprint_sha256": "8ecd8c99bbf4bb52ff810431365ce96e6599c242e5bdb61fa4fa02d6bfe13e3a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B13506382949724",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "68de1060b5b93803d301ac81561b0780ba588fc59ebab135b54e3544fbe6329d",
+      "revalidated_footprint_sha256": "68de1060b5b93803d301ac81561b0780ba588fc59ebab135b54e3544fbe6329d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B14025919363288",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "eada3809597914cd935d2eda03350dcd01d1f6c56f67770befcd19e9417cfe18",
+      "revalidated_footprint_sha256": "eada3809597914cd935d2eda03350dcd01d1f6c56f67770befcd19e9417cfe18",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B14398404968325",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "cbeaf0f326817b81388fd6e28663ef529ac8f9bf5299ac5d40a8e6a045ab5f44",
+      "revalidated_footprint_sha256": "cbeaf0f326817b81388fd6e28663ef529ac8f9bf5299ac5d40a8e6a045ab5f44",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B15079852191884",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "c68d2dfc06285c073a5cca6d2817085eef10b9c027db4ddaa02a245033439486",
+      "revalidated_footprint_sha256": "c68d2dfc06285c073a5cca6d2817085eef10b9c027db4ddaa02a245033439486",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B15172244637897",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "cbb385db9858e5eb859ee3a25b5b566f06660aad9667858088461e2f02529b46",
+      "revalidated_footprint_sha256": "cbb385db9858e5eb859ee3a25b5b566f06660aad9667858088461e2f02529b46",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B15313699759774",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "aa6cf1e7434094fc8693c1e1be38986034d666df33a95a09ce3cb929785c32ac",
+      "revalidated_footprint_sha256": "aa6cf1e7434094fc8693c1e1be38986034d666df33a95a09ce3cb929785c32ac",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B15390433377666",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0021acff2afa79f247ec170894216cf9bb9e25d86e47651092d3566ef18ec58d",
+      "revalidated_footprint_sha256": "0021acff2afa79f247ec170894216cf9bb9e25d86e47651092d3566ef18ec58d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B15582539719607",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "404832b828655a8cb96c98ed12c617fc7f12d3b10bfb9bbb36968aa4294bae8b",
+      "revalidated_footprint_sha256": "404832b828655a8cb96c98ed12c617fc7f12d3b10bfb9bbb36968aa4294bae8b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B15813892804113",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "cc6b0bac559ba82eeef80e58ad82f99fd90c26fc457b353a8a199e6b17cd11db",
+      "revalidated_footprint_sha256": "cc6b0bac559ba82eeef80e58ad82f99fd90c26fc457b353a8a199e6b17cd11db",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B16131127641558",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "24e2aa22c57d2477e6d262670da69bfe09ea3124d6416156c10fec5705a646e5",
+      "revalidated_footprint_sha256": "24e2aa22c57d2477e6d262670da69bfe09ea3124d6416156c10fec5705a646e5",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B1656499074776",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0220fa5cde84f81b2fcc81f4c4253e2e5ded3ab69cac8b9384ce37592845baa3",
+      "revalidated_footprint_sha256": "0220fa5cde84f81b2fcc81f4c4253e2e5ded3ab69cac8b9384ce37592845baa3",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B1672021896244",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0ace586d04f6fbfa17e60444badecbf9d1374c44917f5a67feaf158e3af556a6",
+      "revalidated_footprint_sha256": "0ace586d04f6fbfa17e60444badecbf9d1374c44917f5a67feaf158e3af556a6",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B16722839752740",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "65408b06dc308517be9e09f5759c32e3e8cd2b909b79069cdfb3970abaa51e62",
+      "revalidated_footprint_sha256": "65408b06dc308517be9e09f5759c32e3e8cd2b909b79069cdfb3970abaa51e62",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B16759006021093",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "08a32c996df868bde94191ff75bd90c648eb1314edce9cd4811f46bd23b50a75",
+      "revalidated_footprint_sha256": "08a32c996df868bde94191ff75bd90c648eb1314edce9cd4811f46bd23b50a75",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B16767086981220",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6775fc75eac1663fa9cc2e1ede5743e7c04ac528e60c2ffbf308a52439f6c647",
+      "revalidated_footprint_sha256": "6775fc75eac1663fa9cc2e1ede5743e7c04ac528e60c2ffbf308a52439f6c647",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B16840847352668",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "2a3910c83bec5723240ad2c92339166116bf417bbea2d5ebc6789c8565a26ee8",
+      "revalidated_footprint_sha256": "2a3910c83bec5723240ad2c92339166116bf417bbea2d5ebc6789c8565a26ee8",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B16891547173569",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0b389279c1020f16d5332f51d71b7339a70ee83b04f9fc9253fb37814c73b33d",
+      "revalidated_footprint_sha256": "0b389279c1020f16d5332f51d71b7339a70ee83b04f9fc9253fb37814c73b33d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B17305446148962",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b4dca91a3c0c4e0b5aa67bcaaed6255158fa8cee9836eee99cd4b98e56d432bf",
+      "revalidated_footprint_sha256": "b4dca91a3c0c4e0b5aa67bcaaed6255158fa8cee9836eee99cd4b98e56d432bf",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B17356947881143",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "bee0a99d74742069b7d4531b90226681737a3517a0e9ad84fb9363575f158d07",
+      "revalidated_footprint_sha256": "bee0a99d74742069b7d4531b90226681737a3517a0e9ad84fb9363575f158d07",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B17459590153092",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "51265791c604f4e27623a1d2ded3574f91bb30bf7e483fd4611c9c352ec85fb2",
+      "revalidated_footprint_sha256": "51265791c604f4e27623a1d2ded3574f91bb30bf7e483fd4611c9c352ec85fb2",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B17734063205402",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "c2561de9b379860e9d9b437bf435f3ce87c7900b488f0bace840c3b0f27338c9",
+      "revalidated_footprint_sha256": "c2561de9b379860e9d9b437bf435f3ce87c7900b488f0bace840c3b0f27338c9",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B1782787006296",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "2250c377635bbf4bef01aa4638af7d26ca0065c9c5e4391d133c721ec3c7f73e",
+      "revalidated_footprint_sha256": "2250c377635bbf4bef01aa4638af7d26ca0065c9c5e4391d133c721ec3c7f73e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B17845862979070",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "33fde5a25ee1400b3d0a2013e8dd3a74c499298f8dc6643fefb4704ffbe8fd93",
+      "revalidated_footprint_sha256": "33fde5a25ee1400b3d0a2013e8dd3a74c499298f8dc6643fefb4704ffbe8fd93",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B17943761568072",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "43b04228ae2b9b6fd16f04e711d5eae616fd292f570bcdb47363fb73619d1b11",
+      "revalidated_footprint_sha256": "43b04228ae2b9b6fd16f04e711d5eae616fd292f570bcdb47363fb73619d1b11",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B18161391001525",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "632556c74012f125b52a46d49cdbcc458a265a5353ec9a887ef56a2752d6b399",
+      "revalidated_footprint_sha256": "632556c74012f125b52a46d49cdbcc458a265a5353ec9a887ef56a2752d6b399",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B18187162419032",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "5268f57c920aa61d01596932d41e0de87e8db23812fd6154a38046aa7682327d",
+      "revalidated_footprint_sha256": "5268f57c920aa61d01596932d41e0de87e8db23812fd6154a38046aa7682327d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B18504039205701",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "12b4d99a2b9047b0ba0b58ffebd80904357de19a964d0c8d4ae57a08648c149f",
+      "revalidated_footprint_sha256": "12b4d99a2b9047b0ba0b58ffebd80904357de19a964d0c8d4ae57a08648c149f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B18898865249121",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "5183baadb553c098ecea961345a2ae7d17a9fa46d3ebcbda0332ede2aa7e3d68",
+      "revalidated_footprint_sha256": "5183baadb553c098ecea961345a2ae7d17a9fa46d3ebcbda0332ede2aa7e3d68",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B18987498065819",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3a9323b8d00d1eba6c3700fc25394113aa8278c2c2d202e429e901f819c8613f",
+      "revalidated_footprint_sha256": "3a9323b8d00d1eba6c3700fc25394113aa8278c2c2d202e429e901f819c8613f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B19057969948609",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "52287d618469e6cd56803b5b45c9002f043d74e200651cce9dc4d998a74e83ae",
+      "revalidated_footprint_sha256": "52287d618469e6cd56803b5b45c9002f043d74e200651cce9dc4d998a74e83ae",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B19226887893594",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "ac9cce65471b1120a8f1182d16c87fd8af4034683fb9bf57740d30e972b6e444",
+      "revalidated_footprint_sha256": "ac9cce65471b1120a8f1182d16c87fd8af4034683fb9bf57740d30e972b6e444",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B19485668266020",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d33834755c3d8443661103693ce7fcbe6d9a53c952d27a4b2fab7be72fa6bd2b",
+      "revalidated_footprint_sha256": "d33834755c3d8443661103693ce7fcbe6d9a53c952d27a4b2fab7be72fa6bd2b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B19706345556765",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "45d063b807e33cb7263ea05cbfd995c86212cbca3a11b542e225d6911aee1a54",
+      "revalidated_footprint_sha256": "45d063b807e33cb7263ea05cbfd995c86212cbca3a11b542e225d6911aee1a54",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B19938962930750",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a5be9bc8dc773bb1966d4de4a830c1f4ddb6a86d31561433f7e11b4b085c21f4",
+      "revalidated_footprint_sha256": "a5be9bc8dc773bb1966d4de4a830c1f4ddb6a86d31561433f7e11b4b085c21f4",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B20309273511019",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f92e6622cc1df31aab2595d815923766b0ed1b277480b9c3af0e23e39b6ce47c",
+      "revalidated_footprint_sha256": "f92e6622cc1df31aab2595d815923766b0ed1b277480b9c3af0e23e39b6ce47c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B20594454480773",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "84702fa3173b01ee21ff3f71c6f1b518423991ccd59c3a33c2494c2668371d3a",
+      "revalidated_footprint_sha256": "84702fa3173b01ee21ff3f71c6f1b518423991ccd59c3a33c2494c2668371d3a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B20792422717007",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "77807909452dcdec004c8e40d8957b81d0ed602796687eb27727e67a7a111d43",
+      "revalidated_footprint_sha256": "77807909452dcdec004c8e40d8957b81d0ed602796687eb27727e67a7a111d43",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B20957215446412",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "76e03ad50cdd52b3dfd2a3b03b6c7cedf93fa3bd68ec80fbbfc7a623cf93c74e",
+      "revalidated_footprint_sha256": "76e03ad50cdd52b3dfd2a3b03b6c7cedf93fa3bd68ec80fbbfc7a623cf93c74e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B21166714819483",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d5bde9614859c70dcc00f6fda9bb68f5bf575104d11b0c98451933fad3c861d5",
+      "revalidated_footprint_sha256": "d5bde9614859c70dcc00f6fda9bb68f5bf575104d11b0c98451933fad3c861d5",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B21501160534360",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7b74b572465a8fe88f0452489ab6689a1ed1a99a384ec4ad50f94930cf25da02",
+      "revalidated_footprint_sha256": "7b74b572465a8fe88f0452489ab6689a1ed1a99a384ec4ad50f94930cf25da02",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B21518620554178",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "ad9d75e149b7162cfab9189f25733e4613182ae7c2714ef06e91315c149d2a87",
+      "revalidated_footprint_sha256": "ad9d75e149b7162cfab9189f25733e4613182ae7c2714ef06e91315c149d2a87",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B21796127243371",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "32882565e05b24c0bee7199c88c8b8f6e676fa0d2354eac7d0b7ac567a5f4600",
+      "revalidated_footprint_sha256": "32882565e05b24c0bee7199c88c8b8f6e676fa0d2354eac7d0b7ac567a5f4600",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B21858000962433",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "fd7b06aabe2a200c8754ced3293f5b90446da437e6b8fbc27dc0a6b46d37b495",
+      "revalidated_footprint_sha256": "fd7b06aabe2a200c8754ced3293f5b90446da437e6b8fbc27dc0a6b46d37b495",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B22463121274190",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "cc9050b529523b98cb26a976606f12fe66c7650496a549e5c3a6a4f60d1f8eb7",
+      "revalidated_footprint_sha256": "cc9050b529523b98cb26a976606f12fe66c7650496a549e5c3a6a4f60d1f8eb7",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B22879671704108",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "baefc5e6528294e142c934098ec5c3df7e0da3134a6791addeb190e0d737a44e",
+      "revalidated_footprint_sha256": "baefc5e6528294e142c934098ec5c3df7e0da3134a6791addeb190e0d737a44e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B23405884319913",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "83180e12715bacdcdd76669e46efd38ae0bdb7e7145d4d15409c41816e55f811",
+      "revalidated_footprint_sha256": "83180e12715bacdcdd76669e46efd38ae0bdb7e7145d4d15409c41816e55f811",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B23551861043119",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d71469d6e15510b331c5cafb1795c4431ee48e90e215afc6dae36e3e3c82af48",
+      "revalidated_footprint_sha256": "d71469d6e15510b331c5cafb1795c4431ee48e90e215afc6dae36e3e3c82af48",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B24149747688554",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "473230b2aeade105efb826ce4d1bbe067cbd8abfea6ef40350f23fbc6871ea86",
+      "revalidated_footprint_sha256": "473230b2aeade105efb826ce4d1bbe067cbd8abfea6ef40350f23fbc6871ea86",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B24690359827006",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "49abc1fbff5afc4657cbfe989425b2d6fed6cdb8bcbee51df4ce74285293c06b",
+      "revalidated_footprint_sha256": "49abc1fbff5afc4657cbfe989425b2d6fed6cdb8bcbee51df4ce74285293c06b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B24812283687541",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "efa4eb9c58983e45529ada45381aac18343e340bfa494acea1da9c41c2f0e417",
+      "revalidated_footprint_sha256": "efa4eb9c58983e45529ada45381aac18343e340bfa494acea1da9c41c2f0e417",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B24842060506409",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "c6d03f3e6d29067cc1993b65f088e291ff4a254194ec82ee8bca5223abcadf8b",
+      "revalidated_footprint_sha256": "c6d03f3e6d29067cc1993b65f088e291ff4a254194ec82ee8bca5223abcadf8b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B2591711256956",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9cbd5acd5b097f506941d59333dc11babd35b2a7c83d22d54371ae19e21521da",
+      "revalidated_footprint_sha256": "9cbd5acd5b097f506941d59333dc11babd35b2a7c83d22d54371ae19e21521da",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B25957721357526",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d10cb9e8f9b33026f1bd092c526c49c5c4a10170dbcfaf91c63fbd42620151ba",
+      "revalidated_footprint_sha256": "d10cb9e8f9b33026f1bd092c526c49c5c4a10170dbcfaf91c63fbd42620151ba",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B25972327200509",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9c5cc8dc7b30d434ab06dd33018167a66d83589108b7b4f96ccc27879d8a624b",
+      "revalidated_footprint_sha256": "9c5cc8dc7b30d434ab06dd33018167a66d83589108b7b4f96ccc27879d8a624b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B26387144583263",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1966008f89d0eed43b9c8b1d219997ca30968ef2b535cb480c60ded2a6a5d41c",
+      "revalidated_footprint_sha256": "1966008f89d0eed43b9c8b1d219997ca30968ef2b535cb480c60ded2a6a5d41c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B27165515239628",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9a8d66989b7ba4a090f63d854bdeea81da7cf6e45cf17a791512e96607cafc82",
+      "revalidated_footprint_sha256": "9a8d66989b7ba4a090f63d854bdeea81da7cf6e45cf17a791512e96607cafc82",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B2745809655475",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1c3a33abd8e064d0302cc02390d452a613fd1cb34366f85d14d834bf5fb0ac9f",
+      "revalidated_footprint_sha256": "1c3a33abd8e064d0302cc02390d452a613fd1cb34366f85d14d834bf5fb0ac9f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B28032354001178",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "80934783ea17e55cbf37be3b47617419ef18e2d35e4b26afa25f15de60aa1de7",
+      "revalidated_footprint_sha256": "80934783ea17e55cbf37be3b47617419ef18e2d35e4b26afa25f15de60aa1de7",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B28082311396997",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "292f9bc78407dc75d778cbfa1e4ffc920edc87e39c7fb90ff26eff21dd01da83",
+      "revalidated_footprint_sha256": "292f9bc78407dc75d778cbfa1e4ffc920edc87e39c7fb90ff26eff21dd01da83",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B28138275471855",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "5e203f39634f5c519a28994f260cb5f243020bfa5593d04019841f155e0bfff7",
+      "revalidated_footprint_sha256": "5e203f39634f5c519a28994f260cb5f243020bfa5593d04019841f155e0bfff7",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B28322742618410",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "daff9e9e11823c3f7cf23083a98b88275c09ab3e530c6a9b1f4df63b2814d5dc",
+      "revalidated_footprint_sha256": "daff9e9e11823c3f7cf23083a98b88275c09ab3e530c6a9b1f4df63b2814d5dc",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B28741170589797",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d68876c56b2eddf68a7ede3cfada76a2277ee19ebec443f929b83428c374c7fb",
+      "revalidated_footprint_sha256": "d68876c56b2eddf68a7ede3cfada76a2277ee19ebec443f929b83428c374c7fb",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B29779306176871",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9ea132402be47d644a3ab6d96cfec81232bd90645bbed30131461fec3bdee2ff",
+      "revalidated_footprint_sha256": "9ea132402be47d644a3ab6d96cfec81232bd90645bbed30131461fec3bdee2ff",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B29882714445476",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e890d32147cb59c3cf60e9cbf058931d092209fea3b8e9f2397aa2c53dff312b",
+      "revalidated_footprint_sha256": "e890d32147cb59c3cf60e9cbf058931d092209fea3b8e9f2397aa2c53dff312b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B30102722037957",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d20f1fc3b2bbfc09cf6250984fa780e360d1e5ea1909ed36c47b7df5c59b79cb",
+      "revalidated_footprint_sha256": "d20f1fc3b2bbfc09cf6250984fa780e360d1e5ea1909ed36c47b7df5c59b79cb",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B30189264259012",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b38c24dccef80f8fd295497b14cf795458a7c0dce2e8a125a89529ace4a82fa9",
+      "revalidated_footprint_sha256": "b38c24dccef80f8fd295497b14cf795458a7c0dce2e8a125a89529ace4a82fa9",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B30530613092043",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a071a28be8a96284e7e55604eeb2eb22609282aafe48c260bbe8f8ad90e5624e",
+      "revalidated_footprint_sha256": "a071a28be8a96284e7e55604eeb2eb22609282aafe48c260bbe8f8ad90e5624e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B30748912552839",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "cc16041aaf1882118bac9cf0348d55d30b60d53c661337e6d0b4fe208854c8ec",
+      "revalidated_footprint_sha256": "cc16041aaf1882118bac9cf0348d55d30b60d53c661337e6d0b4fe208854c8ec",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B30802850607008",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6b51d522da466f93e96b58467cd3d6c2241ee97a830523aa23d28052bf151024",
+      "revalidated_footprint_sha256": "6b51d522da466f93e96b58467cd3d6c2241ee97a830523aa23d28052bf151024",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B30828491037515",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4dab67131dd0bdd8787aafbac6a4a2ab40f3e78d331099f957ce9a173d5307bc",
+      "revalidated_footprint_sha256": "4dab67131dd0bdd8787aafbac6a4a2ab40f3e78d331099f957ce9a173d5307bc",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B31087465274776",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a1ee6c98d7931b6589ea02efb192125ff837b5569b14b3ae719b611ca449184d",
+      "revalidated_footprint_sha256": "a1ee6c98d7931b6589ea02efb192125ff837b5569b14b3ae719b611ca449184d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B31372279830401",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "ae741e8081cae50a3b8d467ca90968ac11a90a108af4a0d32266086e50a1be47",
+      "revalidated_footprint_sha256": "ae741e8081cae50a3b8d467ca90968ac11a90a108af4a0d32266086e50a1be47",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B31801469695154",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "fbe069b98da5c414066dc814bed662f35eb857a1db5f6d1e6b8a96d137fb857f",
+      "revalidated_footprint_sha256": "fbe069b98da5c414066dc814bed662f35eb857a1db5f6d1e6b8a96d137fb857f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B31947016083721",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b0fc5aa12353a8ec77eee0e8ba35f63929d9076ac12cc87900cc071ccb2ee9f2",
+      "revalidated_footprint_sha256": "b0fc5aa12353a8ec77eee0e8ba35f63929d9076ac12cc87900cc071ccb2ee9f2",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B32288278809201",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f302acb4c1127a0848707fcd4905fce4e077452900d4e7f7b6a99f69389bde02",
+      "revalidated_footprint_sha256": "f302acb4c1127a0848707fcd4905fce4e077452900d4e7f7b6a99f69389bde02",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B33150906552836",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b9beccac1ae7715ab60fc218be72027a9f01ef896e3913827f3a4537b93d9213",
+      "revalidated_footprint_sha256": "b9beccac1ae7715ab60fc218be72027a9f01ef896e3913827f3a4537b93d9213",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B33361376852028",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e0914732c2b8389bc310f69e631d7f4c0fa37589c1131319bfc94dee516bbc16",
+      "revalidated_footprint_sha256": "e0914732c2b8389bc310f69e631d7f4c0fa37589c1131319bfc94dee516bbc16",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B33520850609711",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "02e73557e902a709f4e577cb05398a7d4bc8f310d3f17cc3bcd5085d45a93f6f",
+      "revalidated_footprint_sha256": "02e73557e902a709f4e577cb05398a7d4bc8f310d3f17cc3bcd5085d45a93f6f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B34284730981486",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b18823e348afe2f7a6c4e960a0d7196586cac1a6f1447f384a83c86df46382c1",
+      "revalidated_footprint_sha256": "b18823e348afe2f7a6c4e960a0d7196586cac1a6f1447f384a83c86df46382c1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B34353436415485",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e141d5fd8cb18abe70563b2c353ccde6091666d60b0a15da46f9e233b0311a4f",
+      "revalidated_footprint_sha256": "e141d5fd8cb18abe70563b2c353ccde6091666d60b0a15da46f9e233b0311a4f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B34694615904571",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "2c2f99ff8b7c2985f259e28f32e18ae62f0ac0935b5cfc249ced794bc641a458",
+      "revalidated_footprint_sha256": "2c2f99ff8b7c2985f259e28f32e18ae62f0ac0935b5cfc249ced794bc641a458",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B34836506967909",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "15954ed144a45f4c1a220d12b6caed29aa10940a3f34dd5fa3d89a8129b325af",
+      "revalidated_footprint_sha256": "15954ed144a45f4c1a220d12b6caed29aa10940a3f34dd5fa3d89a8129b325af",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B35156214632360",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "bff006d230ba181f069f24628f7c1e826aae37d3f56de33df5e24f3c155c34d9",
+      "revalidated_footprint_sha256": "bff006d230ba181f069f24628f7c1e826aae37d3f56de33df5e24f3c155c34d9",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B3535860838783",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "78eb96986e8f1447289f32456766168c7965ef16ccc440e816caf0176111f364",
+      "revalidated_footprint_sha256": "78eb96986e8f1447289f32456766168c7965ef16ccc440e816caf0176111f364",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B36221284354416",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "cc2e96ebd7cc1ab5f6903ad346f26de1905dc6743c906896e0eeab5be9c3ddbf",
+      "revalidated_footprint_sha256": "cc2e96ebd7cc1ab5f6903ad346f26de1905dc6743c906896e0eeab5be9c3ddbf",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B36470505967652",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7d18652e032a39d37396c622e27cc5eb9a2e5bbd49595ce4902b398f45859c35",
+      "revalidated_footprint_sha256": "7d18652e032a39d37396c622e27cc5eb9a2e5bbd49595ce4902b398f45859c35",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B37268575436611",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d7acc43db93d06d38d1b7526ab883a2d0d97591343bb4f58be475db04cb43597",
+      "revalidated_footprint_sha256": "d7acc43db93d06d38d1b7526ab883a2d0d97591343bb4f58be475db04cb43597",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B37494903355321",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b121e91102bacfaf7496997cb7328ee7eedbcf27111b5541a5dca4e23edbcc99",
+      "revalidated_footprint_sha256": "b121e91102bacfaf7496997cb7328ee7eedbcf27111b5541a5dca4e23edbcc99",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B3824833794033",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "32774419934d446e3b135c36d4379cfd06a1ddf066629a95096ea44012628129",
+      "revalidated_footprint_sha256": "32774419934d446e3b135c36d4379cfd06a1ddf066629a95096ea44012628129",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B38569575724277",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "98d3595388ed01c981922d24ceed8f4f1ccbf04bc447c84d618d094c0af3c49b",
+      "revalidated_footprint_sha256": "98d3595388ed01c981922d24ceed8f4f1ccbf04bc447c84d618d094c0af3c49b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B38691483406712",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0a8c0bc409175ae1a5dda554c5f76be41925757e5f87301c9077a411720d166c",
+      "revalidated_footprint_sha256": "0a8c0bc409175ae1a5dda554c5f76be41925757e5f87301c9077a411720d166c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B39208221478861",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3faf320dfbda4518c1eb18e572083f6066e2c41fd6cf87f992266e1d3c2a30ba",
+      "revalidated_footprint_sha256": "3faf320dfbda4518c1eb18e572083f6066e2c41fd6cf87f992266e1d3c2a30ba",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B39236446518145",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "552598b1384882d3fe5ea69a2bfa6e70c9e10a56f7c1af6c7b01f1610386cb75",
+      "revalidated_footprint_sha256": "552598b1384882d3fe5ea69a2bfa6e70c9e10a56f7c1af6c7b01f1610386cb75",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B39877699410120",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "023b5b0195758fb8957f30925d41447513571a31ec3d9a0a90af46ab5bc03a9d",
+      "revalidated_footprint_sha256": "023b5b0195758fb8957f30925d41447513571a31ec3d9a0a90af46ab5bc03a9d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B40013954886351",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0083ccdbf6582ccb946f36310ab2206b1db8b621d48c48e1c0654203c35848fa",
+      "revalidated_footprint_sha256": "0083ccdbf6582ccb946f36310ab2206b1db8b621d48c48e1c0654203c35848fa",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B40039133464345",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "70f738b07e8c9fc3336a7334943d7d63228fe6ba234d3b21ec38cc10114b7eb9",
+      "revalidated_footprint_sha256": "70f738b07e8c9fc3336a7334943d7d63228fe6ba234d3b21ec38cc10114b7eb9",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B40233060499011",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "10ddb025ce1b1a0736c7737acc7a027a833d6c8cf540fad61cd0395d0cd97db9",
+      "revalidated_footprint_sha256": "10ddb025ce1b1a0736c7737acc7a027a833d6c8cf540fad61cd0395d0cd97db9",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B4040834169290",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d8ef2794ac1f480bd6459c4e972448f326804fbf7b7719a2d1b67200bb462588",
+      "revalidated_footprint_sha256": "d8ef2794ac1f480bd6459c4e972448f326804fbf7b7719a2d1b67200bb462588",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B4073485904680",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8522fffea0cb1fe4f7993b80e98bbe04838f4d745e76f7a9746c9edd0869197c",
+      "revalidated_footprint_sha256": "8522fffea0cb1fe4f7993b80e98bbe04838f4d745e76f7a9746c9edd0869197c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B41363903956940",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4842d1a848f286f24764bf154644a72f4e65c8e914702367a906aeda07cb498e",
+      "revalidated_footprint_sha256": "4842d1a848f286f24764bf154644a72f4e65c8e914702367a906aeda07cb498e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B4139819915576",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d2b30967522af1caebdeebb155ae0651232fc5756f18d0c951544cbc360484ba",
+      "revalidated_footprint_sha256": "d2b30967522af1caebdeebb155ae0651232fc5756f18d0c951544cbc360484ba",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B42386149342522",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b7a2524ac40793ab957a9764d6c67654b824f4925af72c027350f0bb2796d660",
+      "revalidated_footprint_sha256": "b7a2524ac40793ab957a9764d6c67654b824f4925af72c027350f0bb2796d660",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B42711318671021",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "77f85af55513bd66b7f53f98415051d8cbe87cbe367f1fb08a10894bcac60257",
+      "revalidated_footprint_sha256": "77f85af55513bd66b7f53f98415051d8cbe87cbe367f1fb08a10894bcac60257",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B43785864788030",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0a155e532fb62bf8713b2f404274347b1395adb8d91c0b3fc04dc038667fb7a3",
+      "revalidated_footprint_sha256": "0a155e532fb62bf8713b2f404274347b1395adb8d91c0b3fc04dc038667fb7a3",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B43886071852017",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8a7d462026a578cad49c320524db515ebb6360ede1b0e1237368d5ee72bf8ca5",
+      "revalidated_footprint_sha256": "8a7d462026a578cad49c320524db515ebb6360ede1b0e1237368d5ee72bf8ca5",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B440592647056",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a5b69a58e701d017cf2de18343963451a839f4ac41eb5fcbdf6258a0d241b46f",
+      "revalidated_footprint_sha256": "a5b69a58e701d017cf2de18343963451a839f4ac41eb5fcbdf6258a0d241b46f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B44454952814800",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "210c8a688ea56247272825ca951670f94dc408dc546c58002347a038741593ee",
+      "revalidated_footprint_sha256": "210c8a688ea56247272825ca951670f94dc408dc546c58002347a038741593ee",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B44637712818530",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "14e369310777a9c6292fcb420c367a9df6a93db9333b8abdcdbac4b065681d96",
+      "revalidated_footprint_sha256": "14e369310777a9c6292fcb420c367a9df6a93db9333b8abdcdbac4b065681d96",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B45289981242640",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d6b0db69f5a4454a8266781c63ff8eaa543b9cd6cf826039c489eb0225c92cbd",
+      "revalidated_footprint_sha256": "d6b0db69f5a4454a8266781c63ff8eaa543b9cd6cf826039c489eb0225c92cbd",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B45596854652330",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "48c352acd2e96a036f957f57b62360c1a93fd558b9826aa8f1de06835622fed2",
+      "revalidated_footprint_sha256": "48c352acd2e96a036f957f57b62360c1a93fd558b9826aa8f1de06835622fed2",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B45600387855719",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d16f561c4c9d4d76f77f36b64016a3d9af33e9c15162a15bd61792fd4d98fd81",
+      "revalidated_footprint_sha256": "d16f561c4c9d4d76f77f36b64016a3d9af33e9c15162a15bd61792fd4d98fd81",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B46034099777028",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "05d13adfa2aa4f765cd1f9527184706453a106868d9fbf1057242d4d01883eec",
+      "revalidated_footprint_sha256": "05d13adfa2aa4f765cd1f9527184706453a106868d9fbf1057242d4d01883eec",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B46502413321481",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d2644b42f831329304759c43eca3d1533a048bd4a789c239eef291a23cec64b0",
+      "revalidated_footprint_sha256": "d2644b42f831329304759c43eca3d1533a048bd4a789c239eef291a23cec64b0",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B46578815208654",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b09e981f4b03cb662c975f7edc5509234053296b2327e76ae95bf61b10425c5a",
+      "revalidated_footprint_sha256": "b09e981f4b03cb662c975f7edc5509234053296b2327e76ae95bf61b10425c5a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B46798430259876",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "56927aa3429b68efe9bfdbaf3af4a32fa27372bca9eb36fe20f11884cc1f549b",
+      "revalidated_footprint_sha256": "56927aa3429b68efe9bfdbaf3af4a32fa27372bca9eb36fe20f11884cc1f549b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B46844675944162",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "61939ef2ef7abde896ff0bd6c43ad104f051558dc972c3f32919dc70dc69f628",
+      "revalidated_footprint_sha256": "61939ef2ef7abde896ff0bd6c43ad104f051558dc972c3f32919dc70dc69f628",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B47240806764449",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7e9d6bf62cd34bcce6b4db330f9d97fcc9f0e5bd18744695af67bc08b393bb5e",
+      "revalidated_footprint_sha256": "7e9d6bf62cd34bcce6b4db330f9d97fcc9f0e5bd18744695af67bc08b393bb5e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B47305351718046",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "118ad3f8b91c77b5a6613c222b6c6b724f922e09a8a9aefb40cd43d5424e16ea",
+      "revalidated_footprint_sha256": "118ad3f8b91c77b5a6613c222b6c6b724f922e09a8a9aefb40cd43d5424e16ea",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B47874528632088",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "43cf664065606c1033081656fbcbd235b5ddf9edab377e9be2d6aeacbc433bda",
+      "revalidated_footprint_sha256": "43cf664065606c1033081656fbcbd235b5ddf9edab377e9be2d6aeacbc433bda",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B4799895230449",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "ed80543a9c68aca954f3cf8a57956a05ea3cec11aca3a1faea0ea1e7df577ee4",
+      "revalidated_footprint_sha256": "ed80543a9c68aca954f3cf8a57956a05ea3cec11aca3a1faea0ea1e7df577ee4",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B48452017149194",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4b0dbb34bb5af8bf72e4c5a40796279e809dd27254c2c4d5358109a229622d81",
+      "revalidated_footprint_sha256": "4b0dbb34bb5af8bf72e4c5a40796279e809dd27254c2c4d5358109a229622d81",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B48660808239770",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e16979bcb48ad29ef09af6b36da47d46f79c96d1a2d330e66448c0def0171f48",
+      "revalidated_footprint_sha256": "e16979bcb48ad29ef09af6b36da47d46f79c96d1a2d330e66448c0def0171f48",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B48925496758456",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "01f5aaf3dfae93525adb9924caf4fb2a02b9bc20c3809a1fc88574981f15eaba",
+      "revalidated_footprint_sha256": "01f5aaf3dfae93525adb9924caf4fb2a02b9bc20c3809a1fc88574981f15eaba",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B48952282466613",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6f7de87241e160d2b6da185cf1b2f697a132d7b1f10971d44ce67fdad431e799",
+      "revalidated_footprint_sha256": "6f7de87241e160d2b6da185cf1b2f697a132d7b1f10971d44ce67fdad431e799",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B48990901921332",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "fa19d7943ff10b61b9b1354fe718350d59e283d2339ecbb4798e15232839d02a",
+      "revalidated_footprint_sha256": "fa19d7943ff10b61b9b1354fe718350d59e283d2339ecbb4798e15232839d02a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B49536287471778",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "00523a82516b6b05518bf37fe003d843470c6766ab744bb6fc7fcf999b40c789",
+      "revalidated_footprint_sha256": "00523a82516b6b05518bf37fe003d843470c6766ab744bb6fc7fcf999b40c789",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B49622483033966",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7fc383495ad6fa1627e8bbe18712c5d915ab59a142ddb0a2bbadffd901047262",
+      "revalidated_footprint_sha256": "7fc383495ad6fa1627e8bbe18712c5d915ab59a142ddb0a2bbadffd901047262",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B49978280072491",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "2c4e75d011fbc0022094a971a52dd393c9639fc9280833e2e80f8331ff89d8a9",
+      "revalidated_footprint_sha256": "2c4e75d011fbc0022094a971a52dd393c9639fc9280833e2e80f8331ff89d8a9",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B50058704827939",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "88a7669e0ba503fccf2b15ba2204bcfa96da1857484a2701a1deb8b300c3a591",
+      "revalidated_footprint_sha256": "88a7669e0ba503fccf2b15ba2204bcfa96da1857484a2701a1deb8b300c3a591",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B50241547651602",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6f7c2844862e0b1e6c6bc8c2d9402d6756c8c500fe2fe8adfab504c8a65e3cc3",
+      "revalidated_footprint_sha256": "6f7c2844862e0b1e6c6bc8c2d9402d6756c8c500fe2fe8adfab504c8a65e3cc3",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B50548000085953",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "aca0c0babdb36542eb876e73aa050c4c5d76c6b3b439272f72337fd41bf04add",
+      "revalidated_footprint_sha256": "aca0c0babdb36542eb876e73aa050c4c5d76c6b3b439272f72337fd41bf04add",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B51137520992535",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "dab5b2c7b0e2d3db42388f49f2b17704cecdda91720c57ca05a3ddea953fa5d1",
+      "revalidated_footprint_sha256": "dab5b2c7b0e2d3db42388f49f2b17704cecdda91720c57ca05a3ddea953fa5d1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B5205782179519",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "bb5328ba0806e14fc2ba133931c4afa61f6961dd454932685977db4f5e64da60",
+      "revalidated_footprint_sha256": "bb5328ba0806e14fc2ba133931c4afa61f6961dd454932685977db4f5e64da60",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B53188273537939",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3a184e37a8a1be507d86d9ba59ee534bf5736c0e0e2470609438966eae05ff9d",
+      "revalidated_footprint_sha256": "3a184e37a8a1be507d86d9ba59ee534bf5736c0e0e2470609438966eae05ff9d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B53650156153507",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "50608254f8477ce1a611c0e9def3e61a8c16ce47a2539c4feb09dd9a932bc97b",
+      "revalidated_footprint_sha256": "50608254f8477ce1a611c0e9def3e61a8c16ce47a2539c4feb09dd9a932bc97b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B53664742087650",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b0f32a9c4d34bbba67bf09441d9a45290248970640752799d4f8d0a5a4436417",
+      "revalidated_footprint_sha256": "b0f32a9c4d34bbba67bf09441d9a45290248970640752799d4f8d0a5a4436417",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B53831779764710",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4f6d336e90f64d51eca71400b9fc2b70f680c6ba2332c4b5fc341c4e2f51f674",
+      "revalidated_footprint_sha256": "4f6d336e90f64d51eca71400b9fc2b70f680c6ba2332c4b5fc341c4e2f51f674",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B54111637534658",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "5bf985f59760c5d1b58b3c7c814960599b347de602b81e1c55f113e9923c3c49",
+      "revalidated_footprint_sha256": "5bf985f59760c5d1b58b3c7c814960599b347de602b81e1c55f113e9923c3c49",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B54195415642362",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9df41f56fa5050052f3870e3c3ad2758403a2e618512ab55eece4fc5c30c7cf0",
+      "revalidated_footprint_sha256": "9df41f56fa5050052f3870e3c3ad2758403a2e618512ab55eece4fc5c30c7cf0",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B54834386088268",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "355348f6cd75fb8c00f5d8d851b7afb8cf115b6defe80bc5a80463fed2e9ace6",
+      "revalidated_footprint_sha256": "355348f6cd75fb8c00f5d8d851b7afb8cf115b6defe80bc5a80463fed2e9ace6",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B54836880156068",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3a735b66860b465df282b4568968f5f7fe5dc18cad2cf8139e97d1f28ea040b6",
+      "revalidated_footprint_sha256": "3a735b66860b465df282b4568968f5f7fe5dc18cad2cf8139e97d1f28ea040b6",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B54845573421137",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7a110380c942fff21c88a314cc71beb458f6423ec5b510e5dc30f080163a056b",
+      "revalidated_footprint_sha256": "7a110380c942fff21c88a314cc71beb458f6423ec5b510e5dc30f080163a056b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B5488167520198",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "904cab86c5e26c685ffafc4774fbde319bb3d8e3a306b892b2ac5494aeadf67e",
+      "revalidated_footprint_sha256": "904cab86c5e26c685ffafc4774fbde319bb3d8e3a306b892b2ac5494aeadf67e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B5517287997374",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "5cfc2d18bb001faea33ff3ceaecf316c04f99cee80198d7d526e114c099af101",
+      "revalidated_footprint_sha256": "5cfc2d18bb001faea33ff3ceaecf316c04f99cee80198d7d526e114c099af101",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B56409622243598",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "61dad382f6b26b14d6acf9c1b93b7268d89c3d0ce7dd401807a1683cdf75f1fe",
+      "revalidated_footprint_sha256": "61dad382f6b26b14d6acf9c1b93b7268d89c3d0ce7dd401807a1683cdf75f1fe",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B56581938984526",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "babc3874e59b72e09b25380395edeee82465cbf48fa0447c034e13f952b19ff0",
+      "revalidated_footprint_sha256": "babc3874e59b72e09b25380395edeee82465cbf48fa0447c034e13f952b19ff0",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B56627334914518",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "faed82d64db932c5e1774b2b4b2e6a3149eece86e9d3666f64b177c624e3d06e",
+      "revalidated_footprint_sha256": "faed82d64db932c5e1774b2b4b2e6a3149eece86e9d3666f64b177c624e3d06e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B56685676634678",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9bfa73ee6cf4d7d562db7cec297e99a6e4e65bdce59e326fda87aee027c5e432",
+      "revalidated_footprint_sha256": "9bfa73ee6cf4d7d562db7cec297e99a6e4e65bdce59e326fda87aee027c5e432",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B57185706761007",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4991e71841c4e4a5cebea8f54faadf7d2005444a2e00bb93e9e344862943414a",
+      "revalidated_footprint_sha256": "4991e71841c4e4a5cebea8f54faadf7d2005444a2e00bb93e9e344862943414a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B57482962875901",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "bbad3f16a2f5a3743562f8f56b3cac04567a43ebcc2816742b65f43c8a75e7e8",
+      "revalidated_footprint_sha256": "bbad3f16a2f5a3743562f8f56b3cac04567a43ebcc2816742b65f43c8a75e7e8",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B57687505469181",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f13e627023b55a1624b0ef258b482877c5cae41f6f0c40b58893261497d212ba",
+      "revalidated_footprint_sha256": "f13e627023b55a1624b0ef258b482877c5cae41f6f0c40b58893261497d212ba",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B57812572751517",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9c0aa570c5c76741829f260a2d993b97929e68fdedce478e5f25dce487be34b9",
+      "revalidated_footprint_sha256": "9c0aa570c5c76741829f260a2d993b97929e68fdedce478e5f25dce487be34b9",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B57868667695206",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "c477432dca4c61efb64a7724c3b1a5accf16941e81ce9df3c1ca2a14220e578e",
+      "revalidated_footprint_sha256": "c477432dca4c61efb64a7724c3b1a5accf16941e81ce9df3c1ca2a14220e578e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B57924194295774",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "337197262b4d3aeb73fd6ce420015af7f676d4e14d977f799973441cf2d9fadd",
+      "revalidated_footprint_sha256": "337197262b4d3aeb73fd6ce420015af7f676d4e14d977f799973441cf2d9fadd",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B58207809126055",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a7dd5f40a519c9a04d75ce42aa15ed02faf32ff3914c6bdef1d9bacf9c780dc1",
+      "revalidated_footprint_sha256": "a7dd5f40a519c9a04d75ce42aa15ed02faf32ff3914c6bdef1d9bacf9c780dc1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B58383707208646",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b279919802f11a55b451b05935eeb1954a75460207462283aa1347cab0803a55",
+      "revalidated_footprint_sha256": "b279919802f11a55b451b05935eeb1954a75460207462283aa1347cab0803a55",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B58524535883846",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4d6f34f28e8eac8a49656bc4d5409f611562c675dc0c0b12c863856a2b459d75",
+      "revalidated_footprint_sha256": "4d6f34f28e8eac8a49656bc4d5409f611562c675dc0c0b12c863856a2b459d75",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B58577428038391",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "206d7a4d112dafa04ebfba244a96f6dc99bf89ee87284c270d8afd885d9f66fa",
+      "revalidated_footprint_sha256": "206d7a4d112dafa04ebfba244a96f6dc99bf89ee87284c270d8afd885d9f66fa",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B58594911461534",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a6a89398ffdcfb3a62db2fcb51c47618ab074e41f48fd2e612dc82e877ca0ece",
+      "revalidated_footprint_sha256": "a6a89398ffdcfb3a62db2fcb51c47618ab074e41f48fd2e612dc82e877ca0ece",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B5872723036943",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "350763813eb12c4ba54fa61cf0ea1fc628607b2ecca7e061b826a584b135564e",
+      "revalidated_footprint_sha256": "350763813eb12c4ba54fa61cf0ea1fc628607b2ecca7e061b826a584b135564e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B59235958721533",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "cf4d37d5af6a8252bad88b191a8fc351b620a475ab8bcd9b4f6d420e4117d453",
+      "revalidated_footprint_sha256": "cf4d37d5af6a8252bad88b191a8fc351b620a475ab8bcd9b4f6d420e4117d453",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B5935933559707",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f56e6f6dc5fbe210da1ed1ba69327752a1ec6e7636edbca36e41584743ca3498",
+      "revalidated_footprint_sha256": "f56e6f6dc5fbe210da1ed1ba69327752a1ec6e7636edbca36e41584743ca3498",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B6031326285684",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7e64d5c7a95620e23c130e339ebf8aae691547ed4350442f1c6ca68e2a56a5f4",
+      "revalidated_footprint_sha256": "7e64d5c7a95620e23c130e339ebf8aae691547ed4350442f1c6ca68e2a56a5f4",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B60313460254351",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e171bdcb0df419874d74b4043383e2fa60bb34927795a5a4641722bc58d9a526",
+      "revalidated_footprint_sha256": "e171bdcb0df419874d74b4043383e2fa60bb34927795a5a4641722bc58d9a526",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B61185375235969",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "63efb74db92a1c5dfbe85a04f4628c83d01256def7b284fd0a4722cfdb1a6133",
+      "revalidated_footprint_sha256": "63efb74db92a1c5dfbe85a04f4628c83d01256def7b284fd0a4722cfdb1a6133",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B61457505310320",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "c45d93ae16a7ecd89cd9186bc096f5ebdaf1b8e826a4c8dca052066890b1ad1c",
+      "revalidated_footprint_sha256": "c45d93ae16a7ecd89cd9186bc096f5ebdaf1b8e826a4c8dca052066890b1ad1c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B61750008694929",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d3a81d13f9b83e0c3abf9dd15e3e7f0c60c29af48e3b471f505bfe7daed19824",
+      "revalidated_footprint_sha256": "d3a81d13f9b83e0c3abf9dd15e3e7f0c60c29af48e3b471f505bfe7daed19824",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B61768543919434",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "97f35d155e855325588c48c0d8e070ff7109e21ad071a35d5ae9ac72cd1c4412",
+      "revalidated_footprint_sha256": "97f35d155e855325588c48c0d8e070ff7109e21ad071a35d5ae9ac72cd1c4412",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B62285809064209",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9f389f16ab55ef53c956c45f02d0c86f8735acc5c89702333eee95d336eea6ec",
+      "revalidated_footprint_sha256": "9f389f16ab55ef53c956c45f02d0c86f8735acc5c89702333eee95d336eea6ec",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B62573329843514",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0e90b3affdc8261f5b33b2d9fe3ad9ec9f2a4dedcb65b40c1eb22dc960a4e5b3",
+      "revalidated_footprint_sha256": "0e90b3affdc8261f5b33b2d9fe3ad9ec9f2a4dedcb65b40c1eb22dc960a4e5b3",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B6261933942264",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "047494cdec903f55cd9efad0ee85ba5fb902269d789875726be8fa875211085f",
+      "revalidated_footprint_sha256": "047494cdec903f55cd9efad0ee85ba5fb902269d789875726be8fa875211085f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B62712341328684",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6fa12f312196306d96fff262e1a8d44c42e7990ee73084ee37cc4d9315c1abad",
+      "revalidated_footprint_sha256": "6fa12f312196306d96fff262e1a8d44c42e7990ee73084ee37cc4d9315c1abad",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B63042885451223",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6417da2a7f762c6a742dcaf9e37bdf81450ed88a1cd6fa641ec8acda3162256c",
+      "revalidated_footprint_sha256": "6417da2a7f762c6a742dcaf9e37bdf81450ed88a1cd6fa641ec8acda3162256c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B63393422883772",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9b248a557b3c294f181ca200a70f4c78047deccf231810302bc9f81149bfa3ec",
+      "revalidated_footprint_sha256": "9b248a557b3c294f181ca200a70f4c78047deccf231810302bc9f81149bfa3ec",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B63512656480867",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "05d96bbe0e12bfa1500659638cc9a2cc8b21495614b9cd29cf24167a4aed7cbd",
+      "revalidated_footprint_sha256": "05d96bbe0e12bfa1500659638cc9a2cc8b21495614b9cd29cf24167a4aed7cbd",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B63787272509894",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4bd20b0a8f00514af088e1239079e1b4fc84ce0b269773d9bf38729fe5dfee74",
+      "revalidated_footprint_sha256": "4bd20b0a8f00514af088e1239079e1b4fc84ce0b269773d9bf38729fe5dfee74",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B63911738750692",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "763a9209708c446b91410ffe1f56cd588f5ebe02082e51262f183096aba4f203",
+      "revalidated_footprint_sha256": "763a9209708c446b91410ffe1f56cd588f5ebe02082e51262f183096aba4f203",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B6409140573096",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b4c4528967d65d9a067f45334910a84519901cc9e5bcb3a757ab8c1b937b9ea3",
+      "revalidated_footprint_sha256": "b4c4528967d65d9a067f45334910a84519901cc9e5bcb3a757ab8c1b937b9ea3",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B64479708811178",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "041ef7c383e306ab703f4e27984b60b0b0b5d9a05572154269a594ab84211d20",
+      "revalidated_footprint_sha256": "041ef7c383e306ab703f4e27984b60b0b0b5d9a05572154269a594ab84211d20",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B64884179183706",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "97a6e163d479eeda1ec46eea03fe9b464512a7c6b9c70351de17dc86b2d60e1e",
+      "revalidated_footprint_sha256": "97a6e163d479eeda1ec46eea03fe9b464512a7c6b9c70351de17dc86b2d60e1e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B65347816419811",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f66af2fff402463a334d7caee7a6fdb8ccd2b759fdd12765cec12d0c221da8d8",
+      "revalidated_footprint_sha256": "f66af2fff402463a334d7caee7a6fdb8ccd2b759fdd12765cec12d0c221da8d8",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B67387382130548",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a57e74a775abfb17c223b31b1e6b1572991539e61d877abf5f6bb6e13fb97d64",
+      "revalidated_footprint_sha256": "a57e74a775abfb17c223b31b1e6b1572991539e61d877abf5f6bb6e13fb97d64",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B67416490528235",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a45a62b50f2416f2cec46f2640cbfd14453642ba09dd1ff5303b548c4185d564",
+      "revalidated_footprint_sha256": "a45a62b50f2416f2cec46f2640cbfd14453642ba09dd1ff5303b548c4185d564",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B67422185849488",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "cb16700681b15efb29c2b83d97200e3c148b86f559b0202db7545484c95b1a16",
+      "revalidated_footprint_sha256": "cb16700681b15efb29c2b83d97200e3c148b86f559b0202db7545484c95b1a16",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B67552272844427",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "29d8ea3b096818035ef2f6b51ed475ca46248851e32678306025d5defb34641a",
+      "revalidated_footprint_sha256": "29d8ea3b096818035ef2f6b51ed475ca46248851e32678306025d5defb34641a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B68071810644037",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3a390867e850dbf647eaef909ba7f1f17443284bd49ccccfc91b4f1a8a96318b",
+      "revalidated_footprint_sha256": "3a390867e850dbf647eaef909ba7f1f17443284bd49ccccfc91b4f1a8a96318b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B68247262621131",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "99d0141f6aefcf28c37a7d34dd7fc53d7cb611232e5524e7cbd269d23393be90",
+      "revalidated_footprint_sha256": "99d0141f6aefcf28c37a7d34dd7fc53d7cb611232e5524e7cbd269d23393be90",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B68362175930798",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "ad14337f7fcc431ecad727da71004fbd2c4780aa05b7e0f89db6674ab1d48e48",
+      "revalidated_footprint_sha256": "ad14337f7fcc431ecad727da71004fbd2c4780aa05b7e0f89db6674ab1d48e48",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B6865905771327",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e912939a02c5eac8c4a7aec8f8c7875f8c5ca36d249b972c853ccd2e9d73e256",
+      "revalidated_footprint_sha256": "e912939a02c5eac8c4a7aec8f8c7875f8c5ca36d249b972c853ccd2e9d73e256",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B6902911043133",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7441b747056baad82d2f767ffae6026e9d68fd9dca673c08bf7905ab799c2d5d",
+      "revalidated_footprint_sha256": "7441b747056baad82d2f767ffae6026e9d68fd9dca673c08bf7905ab799c2d5d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B69063028114827",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f6d87bc02218036d936844118743d0ef9bf292accc740ee8096d4b66fb6c14f1",
+      "revalidated_footprint_sha256": "f6d87bc02218036d936844118743d0ef9bf292accc740ee8096d4b66fb6c14f1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B69069268480762",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f1b480130c4f375b3317308da7ea5d8bd0950125e96d72e377b1f9ececc344cd",
+      "revalidated_footprint_sha256": "f1b480130c4f375b3317308da7ea5d8bd0950125e96d72e377b1f9ececc344cd",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B69125352721348",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "825ee281a9aeeaf9a6df565a9d912281eaf8a37fbc45c0883b17b0e9c7520831",
+      "revalidated_footprint_sha256": "825ee281a9aeeaf9a6df565a9d912281eaf8a37fbc45c0883b17b0e9c7520831",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B69715811070998",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "bb7fc10a053bfc73b0f4997c9cc0105ed68ab30b5faf852fba1db49385f2ba33",
+      "revalidated_footprint_sha256": "bb7fc10a053bfc73b0f4997c9cc0105ed68ab30b5faf852fba1db49385f2ba33",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B69891051906105",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "724221bf50c0d6e9ef8f59998a5f883dcf55a415e7434e9812671da613c8519e",
+      "revalidated_footprint_sha256": "724221bf50c0d6e9ef8f59998a5f883dcf55a415e7434e9812671da613c8519e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B702157588032",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e06dd1e611b1d771ccfcc6dcff0002e9b4157739f16cf68565c3360ca3a38e91",
+      "revalidated_footprint_sha256": "e06dd1e611b1d771ccfcc6dcff0002e9b4157739f16cf68565c3360ca3a38e91",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B7078020583356",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "672b51ca0833af467669125af574a9217538bd7b800df298564a17ae337b166c",
+      "revalidated_footprint_sha256": "672b51ca0833af467669125af574a9217538bd7b800df298564a17ae337b166c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B70988604830145",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9c8441dd3ccb732cc56ff4dad6c564d83902a012be3f5d4d740e0ebc6daebc32",
+      "revalidated_footprint_sha256": "9c8441dd3ccb732cc56ff4dad6c564d83902a012be3f5d4d740e0ebc6daebc32",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B71438306812596",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a4a69ed7b23da55ae0edec7c260361179808ee8758e9e92ffd59702e699beef9",
+      "revalidated_footprint_sha256": "a4a69ed7b23da55ae0edec7c260361179808ee8758e9e92ffd59702e699beef9",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B71441363107667",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "883f69bb9a24db2af6c0bc33d8860a412b2080fba7276076079768bf592cb970",
+      "revalidated_footprint_sha256": "883f69bb9a24db2af6c0bc33d8860a412b2080fba7276076079768bf592cb970",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B71614254655380",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d7c3e0231f5cfb29c03261e6ac42d8be8da2a8d3715f9d463c8e338a967375be",
+      "revalidated_footprint_sha256": "d7c3e0231f5cfb29c03261e6ac42d8be8da2a8d3715f9d463c8e338a967375be",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B72215071742446",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3a8e8783525c349cda1df09bd69092686d5fa81f496bb70792fb4ea3837e91b2",
+      "revalidated_footprint_sha256": "3a8e8783525c349cda1df09bd69092686d5fa81f496bb70792fb4ea3837e91b2",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B73025640718230",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "07d5434bab3539af1d4ad2a81a9f50bf7567678fd15a11d14aec2855ad255f9d",
+      "revalidated_footprint_sha256": "07d5434bab3539af1d4ad2a81a9f50bf7567678fd15a11d14aec2855ad255f9d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B73163589668910",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "87360ab4448e5cc518f4d7eba7f997f5eb99b8bac11ae5f3a1bc639e0da4e124",
+      "revalidated_footprint_sha256": "87360ab4448e5cc518f4d7eba7f997f5eb99b8bac11ae5f3a1bc639e0da4e124",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B73531494726593",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "324da0cb4ec2ebac8d33ee2dd253e131f6b2034ae4869ce586069e7eba31e7ed",
+      "revalidated_footprint_sha256": "324da0cb4ec2ebac8d33ee2dd253e131f6b2034ae4869ce586069e7eba31e7ed",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B73642390976852",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "24c47f500963f59aef8b6e1fb993f5a000eff6631f55adc427bc222dbe680654",
+      "revalidated_footprint_sha256": "24c47f500963f59aef8b6e1fb993f5a000eff6631f55adc427bc222dbe680654",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B73720065991414",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "71215e2880d490b0928c244d84d0b54862a6ba608cbc7cf6bc41c8a2ea5f865d",
+      "revalidated_footprint_sha256": "71215e2880d490b0928c244d84d0b54862a6ba608cbc7cf6bc41c8a2ea5f865d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B7394804053319",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d780ac6e7c450b6838b83808db777c4a074af4186691ee18cd4266a9d1c57560",
+      "revalidated_footprint_sha256": "d780ac6e7c450b6838b83808db777c4a074af4186691ee18cd4266a9d1c57560",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B74261156915694",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "53e43559a1571610004749d5f2e8f5d308fbb32d9208693b60e81cf643907b65",
+      "revalidated_footprint_sha256": "53e43559a1571610004749d5f2e8f5d308fbb32d9208693b60e81cf643907b65",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B74799247287960",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "758e7dc211078c567b576856f3d004799fe2ef654c7bd78647e4a3858d51ba5c",
+      "revalidated_footprint_sha256": "758e7dc211078c567b576856f3d004799fe2ef654c7bd78647e4a3858d51ba5c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B75354234976201",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0c61e5aaeb53691ece02ae7c347883ad026d15da466e5a1254f938637860be7d",
+      "revalidated_footprint_sha256": "0c61e5aaeb53691ece02ae7c347883ad026d15da466e5a1254f938637860be7d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B75420720277181",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "06400e0ef6b45d12aa0010f05f645c538d7745684a78f5ba91c2b4b60e121204",
+      "revalidated_footprint_sha256": "06400e0ef6b45d12aa0010f05f645c538d7745684a78f5ba91c2b4b60e121204",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B75577230273205",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "32d90499433f90186c46e71b6fb78ab3c56600fee93ee985a9cc26accc4d0904",
+      "revalidated_footprint_sha256": "32d90499433f90186c46e71b6fb78ab3c56600fee93ee985a9cc26accc4d0904",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B7589359748935",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0ab617e830e6e73b548a295b6dffcf08a93b59a018b525c8ee2c5da563306a03",
+      "revalidated_footprint_sha256": "0ab617e830e6e73b548a295b6dffcf08a93b59a018b525c8ee2c5da563306a03",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B7624735907381",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4e7ef3e3aa1b2cdea5d1ee1e49ae412e18965fa20b3a847f00668524b82c147a",
+      "revalidated_footprint_sha256": "4e7ef3e3aa1b2cdea5d1ee1e49ae412e18965fa20b3a847f00668524b82c147a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B7628366145494",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "eb9f1f97fc99d9ae032ad249a5e8a7a4e9623feaefd1e9eb1035a755ac8ad6b5",
+      "revalidated_footprint_sha256": "eb9f1f97fc99d9ae032ad249a5e8a7a4e9623feaefd1e9eb1035a755ac8ad6b5",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B76361191538419",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8f38106d8731f0077c8d428abdbfbce375c151860fb657460a307d64b3e97602",
+      "revalidated_footprint_sha256": "8f38106d8731f0077c8d428abdbfbce375c151860fb657460a307d64b3e97602",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B76556859341208",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "07c00026025d4bfcaf7c417e5f09a37e5efcd6eed177bd8f6fdadaa7e8e99be8",
+      "revalidated_footprint_sha256": "07c00026025d4bfcaf7c417e5f09a37e5efcd6eed177bd8f6fdadaa7e8e99be8",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B76580037794190",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e7c7402cab00074068fac8054d2b51a1216b11b8bf2b22c30369bab92aafa67e",
+      "revalidated_footprint_sha256": "e7c7402cab00074068fac8054d2b51a1216b11b8bf2b22c30369bab92aafa67e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B76630671058420",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6f07c174f0604dd4c17685772993b1eb174c2b087c9d99a43faaad27a85b6eb4",
+      "revalidated_footprint_sha256": "6f07c174f0604dd4c17685772993b1eb174c2b087c9d99a43faaad27a85b6eb4",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B76718204715141",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "848ff29c01c3460849423f4c2ed3d73338b5548d4f939f719abfe5bb6cea3fdc",
+      "revalidated_footprint_sha256": "848ff29c01c3460849423f4c2ed3d73338b5548d4f939f719abfe5bb6cea3fdc",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B76870107962046",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f61cd9183368cfaa7f88338bdf48cd72810d7b4e85b8f79c94d510cc100f54e9",
+      "revalidated_footprint_sha256": "f61cd9183368cfaa7f88338bdf48cd72810d7b4e85b8f79c94d510cc100f54e9",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B77006542086789",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9f14bb59cdb2d06c02d827564bdd882b0ece30c150dd62e424e9bbf90ed82c31",
+      "revalidated_footprint_sha256": "9f14bb59cdb2d06c02d827564bdd882b0ece30c150dd62e424e9bbf90ed82c31",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B77062531378131",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e1b4a5d357a559294f819723a12de30e4a9d538a053349931e985bb4fdd413c1",
+      "revalidated_footprint_sha256": "e1b4a5d357a559294f819723a12de30e4a9d538a053349931e985bb4fdd413c1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B77099976714827",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "20cd28dec185328e81adf356392d4e10293f79767fa485f6324aa59fd5678a06",
+      "revalidated_footprint_sha256": "20cd28dec185328e81adf356392d4e10293f79767fa485f6324aa59fd5678a06",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B77283019061987",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b350a770d3181b51dc5891b9eb984c65585b2612679202afb81b04fae9fce769",
+      "revalidated_footprint_sha256": "b350a770d3181b51dc5891b9eb984c65585b2612679202afb81b04fae9fce769",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B77423054355343",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7891c3cd94f12df793fca6a137d98d70199e66818fd25068dd1e5b845c92b09f",
+      "revalidated_footprint_sha256": "7891c3cd94f12df793fca6a137d98d70199e66818fd25068dd1e5b845c92b09f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B7753328322432",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "c5ba7bf4e0de422c5345fd4014c7232a40340f52c48a1e23593c7a4bf2c18948",
+      "revalidated_footprint_sha256": "c5ba7bf4e0de422c5345fd4014c7232a40340f52c48a1e23593c7a4bf2c18948",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B77651628616749",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a45de04fe5d0b4b94dc0a08d80d92e2670673cb01b5d7e00548538aca5f9b8f6",
+      "revalidated_footprint_sha256": "a45de04fe5d0b4b94dc0a08d80d92e2670673cb01b5d7e00548538aca5f9b8f6",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B7803908509786",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "78545e68e2b8982f8413d31f47434fbd4e4aecc689166d71dd7350b1fbe5a9ae",
+      "revalidated_footprint_sha256": "78545e68e2b8982f8413d31f47434fbd4e4aecc689166d71dd7350b1fbe5a9ae",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B78078629114467",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d1980bdcd154c8de63bfabb36ea9eaf765dede71207e1c7dee619171fa3a0775",
+      "revalidated_footprint_sha256": "d1980bdcd154c8de63bfabb36ea9eaf765dede71207e1c7dee619171fa3a0775",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B78114295205688",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e2b85da3c90108253902fa513fda0f5e1afe0c55d69ef9f7bcc801ea4584b4af",
+      "revalidated_footprint_sha256": "e2b85da3c90108253902fa513fda0f5e1afe0c55d69ef9f7bcc801ea4584b4af",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B78152286064279",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d10be03ca0043b318c1178b08166229d9ab81add9800ba54b106f96becc2a550",
+      "revalidated_footprint_sha256": "d10be03ca0043b318c1178b08166229d9ab81add9800ba54b106f96becc2a550",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B78300731498703",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1edb23f0c61d2856287c2ea533bfedbcd8bb2bb438bd972d782a5befa7fd94f1",
+      "revalidated_footprint_sha256": "1edb23f0c61d2856287c2ea533bfedbcd8bb2bb438bd972d782a5befa7fd94f1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B78442704405462",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d09debaeec8ec2b7427dc7ae8bb14a82e7982a55473f690efe7881e46d2c8c39",
+      "revalidated_footprint_sha256": "d09debaeec8ec2b7427dc7ae8bb14a82e7982a55473f690efe7881e46d2c8c39",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B79165272170091",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e7ccd50b963d230b3927b392f616b802d08ee52d5b81d658b73ee037518bf9ac",
+      "revalidated_footprint_sha256": "e7ccd50b963d230b3927b392f616b802d08ee52d5b81d658b73ee037518bf9ac",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B79646276692029",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d91a68f953b1c5fcf52854b51924f02d1740ee84e186fb39a00ffa61da5aff1e",
+      "revalidated_footprint_sha256": "d91a68f953b1c5fcf52854b51924f02d1740ee84e186fb39a00ffa61da5aff1e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B79892386490083",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b74efd9cdd7c31da6bfb4899935160daf735654d3ec99747b612c201a1c68a06",
+      "revalidated_footprint_sha256": "b74efd9cdd7c31da6bfb4899935160daf735654d3ec99747b612c201a1c68a06",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B80191544000233",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "ee59db4a3fbcca4374b2ff526c44689cce6bfa7688e6c54101bdf83b4c44d8b8",
+      "revalidated_footprint_sha256": "ee59db4a3fbcca4374b2ff526c44689cce6bfa7688e6c54101bdf83b4c44d8b8",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B8066772871928",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "429ffc7c4e1c0d71961a9efb918b7d5ce4fe2a1804d83bb9ae8648464a213886",
+      "revalidated_footprint_sha256": "429ffc7c4e1c0d71961a9efb918b7d5ce4fe2a1804d83bb9ae8648464a213886",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B8068903410129",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "91e40c955df86c5427f12cce3eaba7b4a3880b2e35d57b81ff18f991ee767d60",
+      "revalidated_footprint_sha256": "91e40c955df86c5427f12cce3eaba7b4a3880b2e35d57b81ff18f991ee767d60",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B80693108839344",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1ab27a1dc2f140e11a5f4e4533463f117348af9e9668a730f2e780cbaf0468e8",
+      "revalidated_footprint_sha256": "1ab27a1dc2f140e11a5f4e4533463f117348af9e9668a730f2e780cbaf0468e8",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B80977400134390",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "445159a4d0586349ebc41e052bf17e4dcf84549af0b5611fba4aee265e0d2323",
+      "revalidated_footprint_sha256": "445159a4d0586349ebc41e052bf17e4dcf84549af0b5611fba4aee265e0d2323",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B81088097646541",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4f074d8d809c63b84d72e95caff3145883d59e874f222859e559accd8ccfa00e",
+      "revalidated_footprint_sha256": "4f074d8d809c63b84d72e95caff3145883d59e874f222859e559accd8ccfa00e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B81892326519969",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6d939ceaf4072bc048e4b56e9c1bdea14a4ea67e24a0c7fde209250d95fba975",
+      "revalidated_footprint_sha256": "6d939ceaf4072bc048e4b56e9c1bdea14a4ea67e24a0c7fde209250d95fba975",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B82098291834434",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "77ce0f5f74442d5ae3a6d9dacb64ceadce0abf962a7b274cb974ce84ed439fbd",
+      "revalidated_footprint_sha256": "77ce0f5f74442d5ae3a6d9dacb64ceadce0abf962a7b274cb974ce84ed439fbd",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B82153403198712",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b6e1215633c5f822f1fed1c5a597d06a2824868f6f87d303fd04232eb2f517bc",
+      "revalidated_footprint_sha256": "b6e1215633c5f822f1fed1c5a597d06a2824868f6f87d303fd04232eb2f517bc",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B82439387593982",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6160638b9903f77a97e4fe6386a34b9bb65a81e0677b5aebf82cdc295fd3a541",
+      "revalidated_footprint_sha256": "6160638b9903f77a97e4fe6386a34b9bb65a81e0677b5aebf82cdc295fd3a541",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B82919316631597",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "bb506c69e98c5df6e636161c5f3395a1caa71ae5f8faec0af32d427813a24e48",
+      "revalidated_footprint_sha256": "bb506c69e98c5df6e636161c5f3395a1caa71ae5f8faec0af32d427813a24e48",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B83412079426782",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "88fa9dc4e661c3679b0654027aeb95e7c214d97b29ac8c41c51e05378e076102",
+      "revalidated_footprint_sha256": "88fa9dc4e661c3679b0654027aeb95e7c214d97b29ac8c41c51e05378e076102",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B83786043255817",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7b1e8bec63b2dfdd4797540fa0db24a57cc07bec0b0e11cb74182643bc67520f",
+      "revalidated_footprint_sha256": "7b1e8bec63b2dfdd4797540fa0db24a57cc07bec0b0e11cb74182643bc67520f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B83825062814696",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a7d8f4463bf78d9817408d89c2158a00d6f4b62de9afaf15ab26bcd9312e1348",
+      "revalidated_footprint_sha256": "a7d8f4463bf78d9817408d89c2158a00d6f4b62de9afaf15ab26bcd9312e1348",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B8385607479474",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "dd712403cd12e8373480bcddc1410a0b8cff83ab26c52d911af1e4d47eb93ee5",
+      "revalidated_footprint_sha256": "dd712403cd12e8373480bcddc1410a0b8cff83ab26c52d911af1e4d47eb93ee5",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B84147386402076",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7afd6dc96a23a1b4ff78126624439ca8c645835ac0a49da19730d7b0151d2ae2",
+      "revalidated_footprint_sha256": "7afd6dc96a23a1b4ff78126624439ca8c645835ac0a49da19730d7b0151d2ae2",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B85069153423068",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1c4279d8e0b3f65bbd61dfd630e21a96113640c50ce29fa7531a2bb33ed109fc",
+      "revalidated_footprint_sha256": "1c4279d8e0b3f65bbd61dfd630e21a96113640c50ce29fa7531a2bb33ed109fc",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B85106510810268",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3b82581da947f702fa724f11ca5f3e517035755d440078ac40b6cd4315d74339",
+      "revalidated_footprint_sha256": "3b82581da947f702fa724f11ca5f3e517035755d440078ac40b6cd4315d74339",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B85276451636106",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "df844300e24fa10ea0f0ded7cba728b9ebdb8f22d01d32221b7a7d342dddc9d4",
+      "revalidated_footprint_sha256": "df844300e24fa10ea0f0ded7cba728b9ebdb8f22d01d32221b7a7d342dddc9d4",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B85643834616367",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "5037e393040aa8dad131ee3d7866eadb6f9d7874ce551e43d323d38e556b59a0",
+      "revalidated_footprint_sha256": "5037e393040aa8dad131ee3d7866eadb6f9d7874ce551e43d323d38e556b59a0",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B85732743205299",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "977ce8d3173bd0e34fd82c0de2d77a2a8922c632234744c603552fb2c13c20d1",
+      "revalidated_footprint_sha256": "977ce8d3173bd0e34fd82c0de2d77a2a8922c632234744c603552fb2c13c20d1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B85754900082747",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "eb98c40c970efc891778163658b8177f6c8de2fc10acc52b0ec25fbfe749ece3",
+      "revalidated_footprint_sha256": "eb98c40c970efc891778163658b8177f6c8de2fc10acc52b0ec25fbfe749ece3",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B87064425958741",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "67580508958b61f93a287c128bd39d849528f65a7c2ea48f164bfe9cf0ae8604",
+      "revalidated_footprint_sha256": "67580508958b61f93a287c128bd39d849528f65a7c2ea48f164bfe9cf0ae8604",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B87142005071762",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "14d5814753443d31d36bad7a0173d0c32d89e16a829495028fb04bc38db5cbc3",
+      "revalidated_footprint_sha256": "14d5814753443d31d36bad7a0173d0c32d89e16a829495028fb04bc38db5cbc3",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B87274721652905",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "495814b78e064963d2f62645be76ab6074190febddfbe0720816a4ae9afb890f",
+      "revalidated_footprint_sha256": "495814b78e064963d2f62645be76ab6074190febddfbe0720816a4ae9afb890f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B87416382826718",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "ef76bb2bbb9700d6f08a31144a30d1a793a78879ee28cc469a71581ea0c3676f",
+      "revalidated_footprint_sha256": "ef76bb2bbb9700d6f08a31144a30d1a793a78879ee28cc469a71581ea0c3676f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B87455208948659",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "ce10c2ef63b277cc2296de04b9aeb6da70ce9478a3c077ecfa61b998ebd31300",
+      "revalidated_footprint_sha256": "ce10c2ef63b277cc2296de04b9aeb6da70ce9478a3c077ecfa61b998ebd31300",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B87513158470011",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "83caf05ddb591f1c384d8bc5f6fd7bdbaad376c553083dd9e64153ee15dbd936",
+      "revalidated_footprint_sha256": "83caf05ddb591f1c384d8bc5f6fd7bdbaad376c553083dd9e64153ee15dbd936",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B88075036338207",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1eb7621e38638f1979fc0ea64bce4656bcddb11e81cc611b2a7f1d28b1dda82c",
+      "revalidated_footprint_sha256": "1eb7621e38638f1979fc0ea64bce4656bcddb11e81cc611b2a7f1d28b1dda82c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B88199537818715",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8fbf07136f15aa012be7ef7f1d736ba23baaa14b1dca1e44fd97a3f5136b593e",
+      "revalidated_footprint_sha256": "8fbf07136f15aa012be7ef7f1d736ba23baaa14b1dca1e44fd97a3f5136b593e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B88537048948574",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9c1e3f18c382e68a5c7c09e5903ab4654efcef424dc39ba7f6b728fcc1d7a394",
+      "revalidated_footprint_sha256": "9c1e3f18c382e68a5c7c09e5903ab4654efcef424dc39ba7f6b728fcc1d7a394",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B88670568151833",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "65afa64d6458dfc3f6455a5952d67048a45af1384e9ae50de20a4253fc7f9a8e",
+      "revalidated_footprint_sha256": "65afa64d6458dfc3f6455a5952d67048a45af1384e9ae50de20a4253fc7f9a8e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B88748338867232",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1e38cbe366b33c7c7020f825c7ff52c4aaddf88618d7354a8fb45731a9f7e3b1",
+      "revalidated_footprint_sha256": "1e38cbe366b33c7c7020f825c7ff52c4aaddf88618d7354a8fb45731a9f7e3b1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B88873459559234",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b40a18e6f43e5bf9b4456781eecc77210e84e22f8be6fdb2a7bf4db2a4743197",
+      "revalidated_footprint_sha256": "b40a18e6f43e5bf9b4456781eecc77210e84e22f8be6fdb2a7bf4db2a4743197",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B89171502248139",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6e8dc44453829a1c1d31d944f73ba59c92bf3b6266cf2deb8ee9ff0139d9951f",
+      "revalidated_footprint_sha256": "6e8dc44453829a1c1d31d944f73ba59c92bf3b6266cf2deb8ee9ff0139d9951f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B8971178176615",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3c1ad8c8945fdabbaa1c99bdf9e69746d0a57fbef809efe6fd5219975743bc1e",
+      "revalidated_footprint_sha256": "3c1ad8c8945fdabbaa1c99bdf9e69746d0a57fbef809efe6fd5219975743bc1e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B89790845522775",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "acf2f9f362178fb0c445443ee3f7fba8deec0d52c25325ff67d4836ccbbf14b7",
+      "revalidated_footprint_sha256": "acf2f9f362178fb0c445443ee3f7fba8deec0d52c25325ff67d4836ccbbf14b7",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B90327134540623",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6aed560752b82a3d11d05bb99ed77248baae69931024db7b264f33b5b897db51",
+      "revalidated_footprint_sha256": "6aed560752b82a3d11d05bb99ed77248baae69931024db7b264f33b5b897db51",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B90464299025642",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "882f5122d1158bab4b338a374e364766c2ac6c41d1d76f6b1915c7c30cb72bcc",
+      "revalidated_footprint_sha256": "882f5122d1158bab4b338a374e364766c2ac6c41d1d76f6b1915c7c30cb72bcc",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B90574007914814",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "843220b2e30692d036f605995eac437431ecd48f8ec8db61f71bae640c95da59",
+      "revalidated_footprint_sha256": "843220b2e30692d036f605995eac437431ecd48f8ec8db61f71bae640c95da59",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B90970778714828",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "37e1fe229bb1ada7a246bdb360b1f62923019a1d7b49c3ab4d5b98460f97f678",
+      "revalidated_footprint_sha256": "37e1fe229bb1ada7a246bdb360b1f62923019a1d7b49c3ab4d5b98460f97f678",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B90980309349747",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "80707e7fa18055e430a1d1cdc201aed3a630719e0278ba3a1c59d833b7fcf9d8",
+      "revalidated_footprint_sha256": "80707e7fa18055e430a1d1cdc201aed3a630719e0278ba3a1c59d833b7fcf9d8",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B91209319772795",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "364ea5085c359c6cf7546adce4388474ec0dc6f8a7e22866d38c9b4386d00337",
+      "revalidated_footprint_sha256": "364ea5085c359c6cf7546adce4388474ec0dc6f8a7e22866d38c9b4386d00337",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B91391383703186",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7861602de8cb44ce131565c37e7fa8845ac11305cbd78df9dbe4888158044170",
+      "revalidated_footprint_sha256": "7861602de8cb44ce131565c37e7fa8845ac11305cbd78df9dbe4888158044170",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B91781040485830",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b2a210c7ddd28c0d44d2ac45e733e712e6638882622b91a6058d344dc424027d",
+      "revalidated_footprint_sha256": "b2a210c7ddd28c0d44d2ac45e733e712e6638882622b91a6058d344dc424027d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B91914901383533",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "16e4c7ab653d84ff1fe9f26bb720d2104627cf4e63ccdd532f6f1b03e51714e4",
+      "revalidated_footprint_sha256": "16e4c7ab653d84ff1fe9f26bb720d2104627cf4e63ccdd532f6f1b03e51714e4",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B92361056365890",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "af4ba0e9ead741b42e90bc04bd371a77d53f180cb784787023de06e5f617f5d1",
+      "revalidated_footprint_sha256": "af4ba0e9ead741b42e90bc04bd371a77d53f180cb784787023de06e5f617f5d1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B92431338165184",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f8b3086d18947cb8d74dd333c5e2f1c24038369e9d7872eba173694f694bb2d5",
+      "revalidated_footprint_sha256": "f8b3086d18947cb8d74dd333c5e2f1c24038369e9d7872eba173694f694bb2d5",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B9270414762897",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a37b287712855bbbc4ba7649ba29484af596e850dccf4e080d8179de309154aa",
+      "revalidated_footprint_sha256": "a37b287712855bbbc4ba7649ba29484af596e850dccf4e080d8179de309154aa",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B92926148840872",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "eaa5965d0f9180dff9cff6c4e04bc597d5f15abd202bfd7c987f96f5888184ca",
+      "revalidated_footprint_sha256": "eaa5965d0f9180dff9cff6c4e04bc597d5f15abd202bfd7c987f96f5888184ca",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B92973083305975",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "caa77c7cd5061665436a07b6da7fcf417978f34c7589ce7d02cf84ac4c87ed7a",
+      "revalidated_footprint_sha256": "caa77c7cd5061665436a07b6da7fcf417978f34c7589ce7d02cf84ac4c87ed7a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B92991223821328",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "bff4faab64333420b5c5a6c5729b1f8e2b4920b657aab2e12c85c45264977a2d",
+      "revalidated_footprint_sha256": "bff4faab64333420b5c5a6c5729b1f8e2b4920b657aab2e12c85c45264977a2d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B93002214322562",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4a5acd5d82fd3f22064a07406345ddd4d5d3e3ca285839fe730eb56d13872dd3",
+      "revalidated_footprint_sha256": "4a5acd5d82fd3f22064a07406345ddd4d5d3e3ca285839fe730eb56d13872dd3",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B93105500759341",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "702725bfd209481664daba0e85c5480529bbf1188955b55c37b4774ef52afff5",
+      "revalidated_footprint_sha256": "702725bfd209481664daba0e85c5480529bbf1188955b55c37b4774ef52afff5",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B93129192801754",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d6f04cc22ce0420b56757645defb17b9b858d70478b873b8de4cc6f821bce799",
+      "revalidated_footprint_sha256": "d6f04cc22ce0420b56757645defb17b9b858d70478b873b8de4cc6f821bce799",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B93362533996498",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4d87ec511b4d21e9de24cbcde7588073c6ffe679ea9cc30153680028661ec089",
+      "revalidated_footprint_sha256": "4d87ec511b4d21e9de24cbcde7588073c6ffe679ea9cc30153680028661ec089",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B93557893838922",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "85df25aa18e03ab03a8d389951359febf60d20e636265b17db0ff81a72d6bf14",
+      "revalidated_footprint_sha256": "85df25aa18e03ab03a8d389951359febf60d20e636265b17db0ff81a72d6bf14",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B93610458864606",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "04b7358a2963417b1be28fb3acebe17160baf41106c87c95551014d3afd4e8c2",
+      "revalidated_footprint_sha256": "04b7358a2963417b1be28fb3acebe17160baf41106c87c95551014d3afd4e8c2",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B9363307042095",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f3b7ca93733e66ad2a67f61addaec6dd5ee0d0c6bbc7d99943e948bec637157f",
+      "revalidated_footprint_sha256": "f3b7ca93733e66ad2a67f61addaec6dd5ee0d0c6bbc7d99943e948bec637157f",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B94110641032660",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6f779f461621f6c40c094cbf2b0960dc17af36667a8524d5cff2b3dfdf046175",
+      "revalidated_footprint_sha256": "6f779f461621f6c40c094cbf2b0960dc17af36667a8524d5cff2b3dfdf046175",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B94364154888431",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "42a41e3a20af8629b0086a75c50a275cfa319aede083b3cae53ac1b4b5733766",
+      "revalidated_footprint_sha256": "42a41e3a20af8629b0086a75c50a275cfa319aede083b3cae53ac1b4b5733766",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B94548184912338",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "389c76b0d0d9c06ec9a00a3fe9dfdde2a1df66f62586dfd1918b43b6cc6d16df",
+      "revalidated_footprint_sha256": "389c76b0d0d9c06ec9a00a3fe9dfdde2a1df66f62586dfd1918b43b6cc6d16df",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B9471741195126",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6920092d0da02a3a5d7ee2f9fe680fa5f7549f57e2a1f40850fddc30cf2987ee",
+      "revalidated_footprint_sha256": "6920092d0da02a3a5d7ee2f9fe680fa5f7549f57e2a1f40850fddc30cf2987ee",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B94844051789605",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "811c2e1dfba95f1126378114c61fe921496d5125d7ea0c7b7a6c0a7ffe82f686",
+      "revalidated_footprint_sha256": "811c2e1dfba95f1126378114c61fe921496d5125d7ea0c7b7a6c0a7ffe82f686",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B95428670663886",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6e334e1c603721fcc73d0d5c2f92ba2d29436341de21468cc8a7de2af4ae1cd6",
+      "revalidated_footprint_sha256": "6e334e1c603721fcc73d0d5c2f92ba2d29436341de21468cc8a7de2af4ae1cd6",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B96271376045080",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "04a30947b7949bf4b1ed30ae5fcf366ec08591d83bb407acb1a200eb90bf895a",
+      "revalidated_footprint_sha256": "04a30947b7949bf4b1ed30ae5fcf366ec08591d83bb407acb1a200eb90bf895a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B96392818490355",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4a9d35149bf455287100899c711f2264fc3a339dcb55cd8fe2e0b3c999d72576",
+      "revalidated_footprint_sha256": "4a9d35149bf455287100899c711f2264fc3a339dcb55cd8fe2e0b3c999d72576",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B9675874244357",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "99c664c4ed4340ff5ca748816013d3fc67d42bd2fb7d76f7629c80e50ef8e812",
+      "revalidated_footprint_sha256": "99c664c4ed4340ff5ca748816013d3fc67d42bd2fb7d76f7629c80e50ef8e812",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B96867361654532",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "55019a2a979dcbbb315d8d8bf525455a9b0d8d8697e82a1a35233b1a66be61ba",
+      "revalidated_footprint_sha256": "55019a2a979dcbbb315d8d8bf525455a9b0d8d8697e82a1a35233b1a66be61ba",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B97234562917936",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "fcf6ac9a8596fbf7194f735f8c9d08bb176cfe2968e5ed1a31956a88d061f511",
+      "revalidated_footprint_sha256": "fcf6ac9a8596fbf7194f735f8c9d08bb176cfe2968e5ed1a31956a88d061f511",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B97460463632510",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4781f0cbc8bdf2a5115ecdad4eb268cea3709ee1483e8ad8b08bec78811ced1c",
+      "revalidated_footprint_sha256": "4781f0cbc8bdf2a5115ecdad4eb268cea3709ee1483e8ad8b08bec78811ced1c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B97488266373518",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f6258e582780a24430052889c7122926ed378b6baec9954788f42530a00f22c1",
+      "revalidated_footprint_sha256": "f6258e582780a24430052889c7122926ed378b6baec9954788f42530a00f22c1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B97560087028013",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "967616663f99dcfd22505a35ddb1e665bc0a1a29aae8e85457807e3baac778ff",
+      "revalidated_footprint_sha256": "967616663f99dcfd22505a35ddb1e665bc0a1a29aae8e85457807e3baac778ff",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B97850876136128",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1cd36641f46ee783e3213384250a2cd55fb1732d6cd5cf7c85e7f66d6c4a56b1",
+      "revalidated_footprint_sha256": "1cd36641f46ee783e3213384250a2cd55fb1732d6cd5cf7c85e7f66d6c4a56b1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B97955965068321",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3d46c5455e3ea912679ad0851e279a1e5e91b193b7846b014e67d99274b0fb32",
+      "revalidated_footprint_sha256": "3d46c5455e3ea912679ad0851e279a1e5e91b193b7846b014e67d99274b0fb32",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B98257545318432",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "12c64bb96ad5841e79c7561c40c28c9450b61fa56e8c41cfdebae6b1c48e865d",
+      "revalidated_footprint_sha256": "12c64bb96ad5841e79c7561c40c28c9450b61fa56e8c41cfdebae6b1c48e865d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B98291984831496",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "e09fd15c9b2f5f9f0296908de1187d2aea08688842ece420818469ee03b7e020",
+      "revalidated_footprint_sha256": "e09fd15c9b2f5f9f0296908de1187d2aea08688842ece420818469ee03b7e020",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B98295779161883",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0aa3e365893e9fa572c2515ad62ff9766c1468194dc160e44f2af0911681566d",
+      "revalidated_footprint_sha256": "0aa3e365893e9fa572c2515ad62ff9766c1468194dc160e44f2af0911681566d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B98652038613248",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8b89025a7dc3159647349134e3218e32e07ce7a07276b692247375e869e80841",
+      "revalidated_footprint_sha256": "8b89025a7dc3159647349134e3218e32e07ce7a07276b692247375e869e80841",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B98973302778113",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "fa7038b897d6d1ea03bc8da5849b0352e65796a598447eb9a27052f01951f37d",
+      "revalidated_footprint_sha256": "fa7038b897d6d1ea03bc8da5849b0352e65796a598447eb9a27052f01951f37d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B99333709196563",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1856e22af1e2372be32a22520f9f887e8b6b2fcdfc81b50ee977945fc0b88618",
+      "revalidated_footprint_sha256": "1856e22af1e2372be32a22520f9f887e8b6b2fcdfc81b50ee977945fc0b88618",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B99375808826492",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7e0aa23f79a3e22f138b956d566b06f8ef0f46b5d43ceff65ef0f583c68f04a8",
+      "revalidated_footprint_sha256": "7e0aa23f79a3e22f138b956d566b06f8ef0f46b5d43ceff65ef0f583c68f04a8",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B99590448240631",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8ebe6481376744d590f97b345fac92f62e83f9d51eeb0385aa57705929e84549",
+      "revalidated_footprint_sha256": "8ebe6481376744d590f97b345fac92f62e83f9d51eeb0385aa57705929e84549",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:AUS:ADM2:25037944B99849949120083",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "312e26c3bcf650942a62bd374c86e7f613badba7e5156e8f3cadd539c4ee8436",
+      "revalidated_footprint_sha256": "312e26c3bcf650942a62bd374c86e7f613badba7e5156e8f3cadd539c4ee8436",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B11141313508988",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "881ba9e917ded834554cc42097412ae474840968591002a1e339f224a16545c2",
+      "revalidated_footprint_sha256": "881ba9e917ded834554cc42097412ae474840968591002a1e339f224a16545c2",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B12556953600805",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "931bb9a5930fcdc81741a465b1cc674372220a5a75f9b6d680f1985074f541ac",
+      "revalidated_footprint_sha256": "931bb9a5930fcdc81741a465b1cc674372220a5a75f9b6d680f1985074f541ac",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B13475745568199",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7ed9adfd5e24653e9d849913655848df8077c94aec06b5927b51d91c4f2e10cd",
+      "revalidated_footprint_sha256": "7ed9adfd5e24653e9d849913655848df8077c94aec06b5927b51d91c4f2e10cd",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B15930172924849",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b8f2d9684babcacba43be34263dce52d9abab672378eb175a19d5619d6995fe8",
+      "revalidated_footprint_sha256": "b8f2d9684babcacba43be34263dce52d9abab672378eb175a19d5619d6995fe8",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B16572211542142",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8a0631cfd327fbe672d4729d87aa9876a1256b3cb1bcb23ac8888cd0cbee8f31",
+      "revalidated_footprint_sha256": "8a0631cfd327fbe672d4729d87aa9876a1256b3cb1bcb23ac8888cd0cbee8f31",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B19665394937089",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f3c5f45cbd9d5b194f1c2bc8d84420a9beecd0adc4d6fa42af6316b3fd6bc3a1",
+      "revalidated_footprint_sha256": "f3c5f45cbd9d5b194f1c2bc8d84420a9beecd0adc4d6fa42af6316b3fd6bc3a1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B23643149504284",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b8cbbad1def28da004f7ba0fa1cf843860415cccb2c3e8fd95d028aea5a45560",
+      "revalidated_footprint_sha256": "b8cbbad1def28da004f7ba0fa1cf843860415cccb2c3e8fd95d028aea5a45560",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B25638337328506",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "5ffe0fd1b61c93f0cfa7b9fb2d6b9b5bf78e37b5bdb0960defc9cdd7b21aa408",
+      "revalidated_footprint_sha256": "5ffe0fd1b61c93f0cfa7b9fb2d6b9b5bf78e37b5bdb0960defc9cdd7b21aa408",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B26415072681887",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "2b0db5214876a1beded30885ad641c4936d531da08cd72c1c812b0e87d3f01b3",
+      "revalidated_footprint_sha256": "2b0db5214876a1beded30885ad641c4936d531da08cd72c1c812b0e87d3f01b3",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B28065602717884",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8d62f59b7d271b468f61e7c251a070689531d03e28924eea44fa28f93ae09c21",
+      "revalidated_footprint_sha256": "8d62f59b7d271b468f61e7c251a070689531d03e28924eea44fa28f93ae09c21",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B28971928404108",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1e6ded74f776ea9720f31058c7407ac2e8eaee4464f4d5a9b084fb97c61bf451",
+      "revalidated_footprint_sha256": "1e6ded74f776ea9720f31058c7407ac2e8eaee4464f4d5a9b084fb97c61bf451",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B31316334032792",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "5e714dffd8868beea633b1048cced2a191186a8e1f2e99f3a6b628ece0daa262",
+      "revalidated_footprint_sha256": "5e714dffd8868beea633b1048cced2a191186a8e1f2e99f3a6b628ece0daa262",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B31567540756481",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "447481bab1c9f503da9938fb27cd21b13f463e3814a0896bc46640df9b91551e",
+      "revalidated_footprint_sha256": "447481bab1c9f503da9938fb27cd21b13f463e3814a0896bc46640df9b91551e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B3282712316304",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b2e2b882f72805f5dd702582c81d4572c1a59c859f208bba357f97f5f0f722ef",
+      "revalidated_footprint_sha256": "b2e2b882f72805f5dd702582c81d4572c1a59c859f208bba357f97f5f0f722ef",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B35554323277661",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "248dfc937e0f965589aa3fc596d8a00ab7805cde0fbdb24712a0fce0776218ed",
+      "revalidated_footprint_sha256": "248dfc937e0f965589aa3fc596d8a00ab7805cde0fbdb24712a0fce0776218ed",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B36657010499477",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "b7fa04f1962bfa58343c15865167fa3084b4417ea4b9da1a4e4425c8ae12374d",
+      "revalidated_footprint_sha256": "b7fa04f1962bfa58343c15865167fa3084b4417ea4b9da1a4e4425c8ae12374d",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B36857766137746",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "70489eeb7e7c2c69b88c1f178f1d3f12e6de01b77e2061e1d422b00fdf112b85",
+      "revalidated_footprint_sha256": "70489eeb7e7c2c69b88c1f178f1d3f12e6de01b77e2061e1d422b00fdf112b85",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B37427777231285",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3cef651b972deef63089c9de26ce1f415c1b8eed7f036b89afd63c8dfdb28ed0",
+      "revalidated_footprint_sha256": "3cef651b972deef63089c9de26ce1f415c1b8eed7f036b89afd63c8dfdb28ed0",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B40461513313000",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4671f7522e3cb016f10e67773e3b51168c8aaa5c94b3fcf3ccd5c873213adc24",
+      "revalidated_footprint_sha256": "4671f7522e3cb016f10e67773e3b51168c8aaa5c94b3fcf3ccd5c873213adc24",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B4133396952261",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "85eb58d6f177b1a048bfcf0da4dd4b9d4ae5d5ef8f6581ed3ac7e1ebece4ae39",
+      "revalidated_footprint_sha256": "85eb58d6f177b1a048bfcf0da4dd4b9d4ae5d5ef8f6581ed3ac7e1ebece4ae39",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B41579914196826",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "527e7f54ca6b798864a063f5329a19aa8e6de20230e344c13d4166085ba155fa",
+      "revalidated_footprint_sha256": "527e7f54ca6b798864a063f5329a19aa8e6de20230e344c13d4166085ba155fa",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B4246065068944",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "29c6a84561a4be6b3399aae2455228dabfa354c3a6352273a635f795709152ef",
+      "revalidated_footprint_sha256": "29c6a84561a4be6b3399aae2455228dabfa354c3a6352273a635f795709152ef",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B45484448191926",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "3446a8aa30347ebb6c9b20286490feba60d10e0b9c7a0fc290fc436f9057c621",
+      "revalidated_footprint_sha256": "3446a8aa30347ebb6c9b20286490feba60d10e0b9c7a0fc290fc436f9057c621",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B46320351698050",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "53a81dc8740ef6f1f5b943c35a6fec57a5b74b697acd15542a65ed1579e88c48",
+      "revalidated_footprint_sha256": "53a81dc8740ef6f1f5b943c35a6fec57a5b74b697acd15542a65ed1579e88c48",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B48550997087693",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "2c850654693b710e37534512e426179c19d1f677f4db75e4defb33a82ee5e36c",
+      "revalidated_footprint_sha256": "2c850654693b710e37534512e426179c19d1f677f4db75e4defb33a82ee5e36c",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B4855529337749",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "2147790e000ba678770f1134fa352cf8a1b9fdbfd1cbc8268b07ee3313f18216",
+      "revalidated_footprint_sha256": "2147790e000ba678770f1134fa352cf8a1b9fdbfd1cbc8268b07ee3313f18216",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B49710830872213",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8b6c62ccb487d124ded5bcae1370044eaaeb834ecd10af2fd217190d444a4500",
+      "revalidated_footprint_sha256": "8b6c62ccb487d124ded5bcae1370044eaaeb834ecd10af2fd217190d444a4500",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B50502218108090",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6b6903771dd8b6eb679a4a304a566a9464ae6f8006495f578be11692f9c0c695",
+      "revalidated_footprint_sha256": "6b6903771dd8b6eb679a4a304a566a9464ae6f8006495f578be11692f9c0c695",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B53048697166448",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "0011db0c93af1d27c5b332421d9b02f295ff1b0e490c75f58fc6666f8e4ac776",
+      "revalidated_footprint_sha256": "0011db0c93af1d27c5b332421d9b02f295ff1b0e490c75f58fc6666f8e4ac776",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B55803343495584",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9ef85f2755ad804e002b0a5be954cb3ad770541de7abb51860a56235f78fc36e",
+      "revalidated_footprint_sha256": "9ef85f2755ad804e002b0a5be954cb3ad770541de7abb51860a56235f78fc36e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B5594507413041",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "bd93afb8431e10d68af6d97ff77ec0447e08cd9fd028c574b199a43771d2d5d1",
+      "revalidated_footprint_sha256": "bd93afb8431e10d68af6d97ff77ec0447e08cd9fd028c574b199a43771d2d5d1",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B59490743406981",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "8c15a99c0e4c05548c44dcf60ccb41cd7e663578042ca0fd65559b1d4b7fafee",
+      "revalidated_footprint_sha256": "8c15a99c0e4c05548c44dcf60ccb41cd7e663578042ca0fd65559b1d4b7fafee",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B6175013023687",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "bda39b26798ec2331ed0c7fb6b46008128a727bce18153eb11999af80ff11cb0",
+      "revalidated_footprint_sha256": "bda39b26798ec2331ed0c7fb6b46008128a727bce18153eb11999af80ff11cb0",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B61960711063879",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "68daa118bd1ce170316a158588251dde8831cd4ffa5f12a25f859d13065336bd",
+      "revalidated_footprint_sha256": "68daa118bd1ce170316a158588251dde8831cd4ffa5f12a25f859d13065336bd",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B62596959688734",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "372dca3a55dabaab5d4709bc4173c8ffd4e460ec408328731424bf8d7c17a913",
+      "revalidated_footprint_sha256": "372dca3a55dabaab5d4709bc4173c8ffd4e460ec408328731424bf8d7c17a913",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B62740831619911",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "75ef2254b3c3cb709c1c40f1455c92e84fe0c2ea0af4af146bb7c93d97e6f16a",
+      "revalidated_footprint_sha256": "75ef2254b3c3cb709c1c40f1455c92e84fe0c2ea0af4af146bb7c93d97e6f16a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B63045965946923",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f5a94fa60e2a3458194ff7ff602e43dddb19bcd03eddca677249ed05916e55ff",
+      "revalidated_footprint_sha256": "f5a94fa60e2a3458194ff7ff602e43dddb19bcd03eddca677249ed05916e55ff",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B65780734394683",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "752cc0abeedd1809f4c9e6d892c4a9c49e74eaf845d7354dbc60f4f4df50a963",
+      "revalidated_footprint_sha256": "752cc0abeedd1809f4c9e6d892c4a9c49e74eaf845d7354dbc60f4f4df50a963",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B65892771938338",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "324413be9cd8510d38d45a100cc5e48710098497848d27c0e8542f9ca31bda98",
+      "revalidated_footprint_sha256": "324413be9cd8510d38d45a100cc5e48710098497848d27c0e8542f9ca31bda98",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B66020945008942",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "cdbfe5dccf601b511403aa79f0d11a6511a3c8e22a69b6c8cc02a4808b5e1d14",
+      "revalidated_footprint_sha256": "cdbfe5dccf601b511403aa79f0d11a6511a3c8e22a69b6c8cc02a4808b5e1d14",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B70108318673900",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1247d1d7604467e4e5e3f166c9b7cb1d9302ab20f588b7c32e92194328a1aabb",
+      "revalidated_footprint_sha256": "1247d1d7604467e4e5e3f166c9b7cb1d9302ab20f588b7c32e92194328a1aabb",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B70395567962126",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f4c5a7ff9df4b750ea5d1875b2f20468523d9cabc7f0a06d98e3240ff32b7bcd",
+      "revalidated_footprint_sha256": "f4c5a7ff9df4b750ea5d1875b2f20468523d9cabc7f0a06d98e3240ff32b7bcd",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B7142008744258",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "ba45a3a8de5a4d55f4e07f90c02c9056599db34dca7af985c6bb8104a250193a",
+      "revalidated_footprint_sha256": "ba45a3a8de5a4d55f4e07f90c02c9056599db34dca7af985c6bb8104a250193a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B71751850087335",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "bbceba8376fc3eca914652b98b319f4b5e2433083d303dc44aaf7f95102bbaa6",
+      "revalidated_footprint_sha256": "bbceba8376fc3eca914652b98b319f4b5e2433083d303dc44aaf7f95102bbaa6",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B73406686460432",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "7258ecd1a62400827492db194883b277f0ecb93b34be0a0b752190ac377804f5",
+      "revalidated_footprint_sha256": "7258ecd1a62400827492db194883b277f0ecb93b34be0a0b752190ac377804f5",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B7447903754756",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "23b17692853e0baa69e2f3da585eadc225b74c5d20f70441fa3d370e74882aa2",
+      "revalidated_footprint_sha256": "23b17692853e0baa69e2f3da585eadc225b74c5d20f70441fa3d370e74882aa2",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B74961375967872",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "994d8dbd0ccbcd1e6fc8dbe93fb78910eb7422e390ab14300f1176cd966ac743",
+      "revalidated_footprint_sha256": "994d8dbd0ccbcd1e6fc8dbe93fb78910eb7422e390ab14300f1176cd966ac743",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B77152843970873",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a2ce74aa4b96b7a33f0e9a7e11aa66e8d1da3ec6713f8f340da3dcb890831984",
+      "revalidated_footprint_sha256": "a2ce74aa4b96b7a33f0e9a7e11aa66e8d1da3ec6713f8f340da3dcb890831984",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B78235082436645",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d454bd3a70516372132eb09e29e1871af4e320a33313d0868f6cb4f9c25382ed",
+      "revalidated_footprint_sha256": "d454bd3a70516372132eb09e29e1871af4e320a33313d0868f6cb4f9c25382ed",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B79420428964989",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "d00c31d7ee5e930d2fc25ab5d6153273d3c6e5abb1dec171ef13fa6226cc6cf3",
+      "revalidated_footprint_sha256": "d00c31d7ee5e930d2fc25ab5d6153273d3c6e5abb1dec171ef13fa6226cc6cf3",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B80551480535536",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "4704c91e132f935ea8278955100491ef737679bb870bbf33e3c5ac211665f65e",
+      "revalidated_footprint_sha256": "4704c91e132f935ea8278955100491ef737679bb870bbf33e3c5ac211665f65e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B80842466042481",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "9d01d49152b571a8743994b4aaa73efd4bb5baace767a7b7b8ea431d2ebf1774",
+      "revalidated_footprint_sha256": "9d01d49152b571a8743994b4aaa73efd4bb5baace767a7b7b8ea431d2ebf1774",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B82982752923250",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "5f32a729ca83de4de1e6410be7ff9a2c638909adcb4ad037feb1306742e52abf",
+      "revalidated_footprint_sha256": "5f32a729ca83de4de1e6410be7ff9a2c638909adcb4ad037feb1306742e52abf",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B83077014043228",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "779f2eb6c3a15b791f9528b2d344186a1631f5e533310f12d355fba3ae1a511a",
+      "revalidated_footprint_sha256": "779f2eb6c3a15b791f9528b2d344186a1631f5e533310f12d355fba3ae1a511a",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B8322367437762",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "6d383915642b833f212fb4b9dcfb3030f14d6f205ae2ecb2af21bafb9e984562",
+      "revalidated_footprint_sha256": "6d383915642b833f212fb4b9dcfb3030f14d6f205ae2ecb2af21bafb9e984562",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B86479073269736",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "a4709640a98d92101ffc404975b5b7636ba8ef9b0c59ca9909e986486da7ac03",
+      "revalidated_footprint_sha256": "a4709640a98d92101ffc404975b5b7636ba8ef9b0c59ca9909e986486da7ac03",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B8704755387481",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "192d46a7de48451b833a6426522285b096334e9afce21754423442e859fc393b",
+      "revalidated_footprint_sha256": "192d46a7de48451b833a6426522285b096334e9afce21754423442e859fc393b",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B87157839876770",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f97968e4e125cf4140aa662c96edcf7992cfaa9fd0c1f4a9fd6de6a743bc6f5e",
+      "revalidated_footprint_sha256": "f97968e4e125cf4140aa662c96edcf7992cfaa9fd0c1f4a9fd6de6a743bc6f5e",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B90248628602253",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "192a4039673a37e36ce09b5cefcd28f959698123661d919f29c883ba4b725bf2",
+      "revalidated_footprint_sha256": "192a4039673a37e36ce09b5cefcd28f959698123661d919f29c883ba4b725bf2",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B97607393689303",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "ae97154dad50cedf12b0927f3ff7ddf4261564e87c2d4cd5b0e1381de0223fc9",
+      "revalidated_footprint_sha256": "ae97154dad50cedf12b0927f3ff7ddf4261564e87c2d4cd5b0e1381de0223fc9",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B98057919128788",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "1ff0e211f25ea6207e621073e5d4ca5f5638537c0e8707cbd9d142d5d27d3952",
+      "revalidated_footprint_sha256": "1ff0e211f25ea6207e621073e5d4ca5f5638537c0e8707cbd9d142d5d27d3952",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B98094820769769",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "f054bf451707fefa5a73893442181b27da4ad8540eff256649dab2c478242c95",
+      "revalidated_footprint_sha256": "f054bf451707fefa5a73893442181b27da4ad8540eff256649dab2c478242c95",
+      "result": "identical-footprint"
+    },
+    {
+      "entity_id": "gb:GBR:ADM2:9080712B98965500414849",
+      "kind": "location",
+      "member_locations": 1,
+      "original_footprint_sha256": "26092c00010478eb8d7a24ed5f7242be4300b4d6890ce954e6fcc8e78d0a4e3d",
+      "revalidated_footprint_sha256": "26092c00010478eb8d7a24ed5f7242be4300b4d6890ce954e6fcc8e78d0a4e3d",
+      "result": "identical-footprint"
+    }
+  ],
+  "validation": [
+    "Every original identity retained at the same tier",
+    "Exact location geometries and all descendant location identities unchanged for every evidence entity",
+    "Original source, record, interval and executed-algorithm bytes preserved",
+    "Reference macro-parent changes do not establish dated administrative membership"
+  ]
+}
