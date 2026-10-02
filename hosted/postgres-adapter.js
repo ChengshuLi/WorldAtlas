@@ -65,7 +65,9 @@ function compile(sql){
  let count=0;const native=new Set();for(const token of stream){if(token.type==='parameter')token.text=`$${++count}`;else if(token.type==='native_parameter')native.add(Number(token.text.slice(1)));}
  if(count&&native.size)invalid('Mixed SQL parameter conventions are not supported');
  if(native.size){count=Math.max(...native);if(native.has(0)||count!==native.size)invalid('PostgreSQL parameters must be numbered consecutively');}
- return {query:stream.map(t=>t.text).join(''),parameterCount:count,operation:upper(meaningful[0]),ingestion:ignored&&meaningful.some(t=>t.type==='word'&&t.text==='atlas_ingestions')||upper(meaningful[0])==='INSERT'&&meaningful.some(t=>t.type==='word'&&t.text==='atlas_ingestions')};
+ const ingestion=upper(meaningful[0])==='INSERT'&&meaningful.some(t=>t.type==='word'&&t.text==='atlas_ingestions');
+ const publication=upper(meaningful[0])==='UPDATE'&&meaningful[1]?.type==='word'&&meaningful[1].text==='atlas_geographic_releases';
+ return {query:stream.map(t=>t.text).join(''),parameterCount:count,operation:upper(meaningful[0]),ingestion,publication};
 }
 
 function parameters(values,count){
@@ -123,9 +125,12 @@ export function createPostgresDatabase(driver,{timeoutMs=15000}={}){
   async batch(batch){
    if(!Array.isArray(batch)||batch.length>1000)invalid('PostgreSQL batch must contain at most 1000 statements');if(!batch.length)return [];
    const items=batch.map(s=>{const item=statements.get(s);if(!item)invalid('Batch statement belongs to a different database adapter');return item;});
-   const locked=items.some(item=>item.compiled.ingestion),prepared=items.map(item=>item.get());
+   const locked=items.some(item=>item.compiled.ingestion||item.compiled.publication),prepared=items.map(item=>item.get());
    if(locked)prepared.unshift(ingestionLock);
-   const results=await execute(options=>driver.transaction(prepared,{...options,isolationLevel:'Serializable'}));
+   // A Serializable snapshot can be captured before a waiting advisory lock
+   // is granted. ReadCommitted gives the following guard a fresh snapshot;
+   // every service import and release publication takes this same lock.
+   const results=await execute(options=>driver.transaction(prepared,{...options,isolationLevel:locked?'ReadCommitted':'Serializable'}));
    if(!Array.isArray(results)||results.length!==prepared.length)throw new PostgresAdapterError('Invalid PostgreSQL transaction result');
    return results.slice(Number(locked)).map((result,i)=>normalized(result,items[i].compiled.operation));
   },

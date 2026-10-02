@@ -31,9 +31,18 @@ test('injected driver returns D1 results with safe numeric dates and unchanged t
 
 test('batches remain ordered, atomic and ingestion-locked before identity allocation',async()=>{
  let seen;const driver={async query(){return {rows:[],rowCount:0};},async transaction(statements,options){seen={statements,options};return statements.map((statement,index)=>({command:index?'INSERT':'SELECT',rowCount:index?1:0,rows:[]}));}};
- const db=createPostgresDatabase(driver),result=await db.batch([db.prepare('INSERT OR IGNORE INTO atlas_ingestions(id) VALUES (?)').bind('receipt')]);assert.equal(seen.statements.length,2);assert.equal(seen.statements[0].query,'SELECT pg_advisory_xact_lock(807245315,1)');assert.match(seen.statements[1].query,/ON CONFLICT DO NOTHING/);assert.equal(seen.options.isolationLevel,'Serializable');assert.equal(result.length,1);assert.equal(result[0].meta.changes,1);
+ const db=createPostgresDatabase(driver),result=await db.batch([db.prepare('INSERT OR IGNORE INTO atlas_ingestions(id) VALUES (?)').bind('receipt')]);assert.equal(seen.statements.length,2);assert.equal(seen.statements[0].query,'SELECT pg_advisory_xact_lock(807245315,1)');assert.match(seen.statements[1].query,/ON CONFLICT DO NOTHING/);assert.equal(seen.options.isolationLevel,'ReadCommitted');assert.equal(result.length,1);assert.equal(result[0].meta.changes,1);
  const other=createPostgresDatabase(driver);await assert.rejects(db.batch([other.prepare('SELECT 1')]),/different database/);assert.deepEqual(await db.batch([]),[]);
  driver.transaction=async()=>[{rows:[],rowCount:0}];await assert.rejects(db.batch([db.prepare('SELECT 1'),db.prepare('SELECT 2')]),/transaction result/);
+});
+test('publication and guarded imports share a lock before fresh ReadCommitted guard snapshots',async()=>{
+ const calls=[],driver={async query(){return {rows:[],rowCount:0};},async transaction(statements,options){calls.push({statements,options});return statements.map(()=>({rows:[],rowCount:0}));}},db=createPostgresDatabase(driver);
+ const guard=db.prepare("SELECT json_extract(CASE WHEN ?=1 THEN 'true' ELSE 'ATLAS_GEOGRAPHY_CONFLICT' END,'$')").bind(1);
+ await db.batch([guard,db.prepare('INSERT OR IGNORE INTO atlas_ingestions(id) VALUES (?)').bind('pinned')]);
+ await db.batch([db.prepare("UPDATE atlas_geographic_releases SET status='published',published_at=? WHERE id=? AND status='staged'").bind(1,'second')]);
+ for(const call of calls){assert.equal(call.statements[0].query,'SELECT pg_advisory_xact_lock(807245315,1)');assert.equal(call.options.isolationLevel,'ReadCommitted');}
+ assert.match(calls[0].statements[1].query,/ATLAS_GEOGRAPHY_CONFLICT/);assert.match(calls[1].statements[1].query,/UPDATE atlas_geographic_releases/);
+ await db.batch([db.prepare('SELECT 1')]);assert.equal(calls[2].options.isolationLevel,'Serializable');assert.equal(calls[2].statements.length,1);
 });
 
 test('driver failures preserve SQLSTATE while removing credentials, payloads and server details',async()=>{

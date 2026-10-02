@@ -38,6 +38,7 @@ jobs:
         env:
           NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
           NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }}
+          ATLAS_VERIFY_PIN_CONCURRENCY: '1'
         run: node scripts/verify-neon-sql.mjs data/validation/neon-sql-verification.json
       - name: Preserve sanitized contract and cleanup receipt
         if: always()

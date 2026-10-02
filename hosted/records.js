@@ -82,13 +82,27 @@ function normalize(kind,r,{retainedEnvironmentalValue=false}={}){
  fail('Unsupported collection');
 }
 function insert(db,kind,row){const keys=columns[kind];return db.prepare(`INSERT OR IGNORE INTO ${tables[kind]} (${keys.join(',')}) VALUES (${keys.map(()=>'?').join(',')})`).bind(...keys.map(k=>row[k]??null));}
+function expectedGeography(value){
+ if(value===undefined)return null;
+ if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).sort().join(',')!=='footprints_sha256,hierarchy_sha256,release_id')fail('Invalid expected_geography; provide release_id and both geographic hashes');
+ text(value.release_id,'expected geographic release ID');for(const key of ['hierarchy_sha256','footprints_sha256'])if(!/^[a-f0-9]{64}$/.test(value[key]))fail(`Invalid expected geographic ${key}`);
+ return {release_id:value.release_id,hierarchy_sha256:value.hierarchy_sha256,footprints_sha256:value.footprints_sha256};
+}
+const publicCounts=counts=>Object.fromEntries(Object.entries(counts).filter(([key])=>!['_retirement_ids','_expected_geography'].includes(key)));
+function geographyGuard(db,geography,id,digest){
+ // D1 batch holds the write transaction; PostgreSQL acquires the shared
+ // publication/import advisory lock before this statement's fresh snapshot.
+ // Invalid JSON deliberately aborts the complete transaction on a mismatch.
+ return db.prepare(`SELECT json_extract(CASE WHEN EXISTS(SELECT 1 FROM atlas_ingestions WHERE id=? AND fingerprint=?) OR EXISTS(SELECT 1 FROM atlas_geographic_releases g WHERE g.id=? AND g.hierarchy_sha256=? AND g.footprints_sha256=? AND g.status='published' AND NOT EXISTS(SELECT 1 FROM atlas_geographic_releases newer WHERE newer.status='published' AND newer.version>g.version)) THEN 'true' ELSE 'ATLAS_GEOGRAPHY_CONFLICT' END,'$') AS expected_geography_matches`).bind(id,digest,geography.release_id,geography.hierarchy_sha256,geography.footprints_sha256);
+}
 
 export async function importBatch(db,payload){
  if(!payload||typeof payload!=='object'||Array.isArray(payload))fail('Import must be an object');
  if(new TextEncoder().encode(JSON.stringify(payload)).length>1024*1024)fail('Import exceeds 1 MiB',413);
+ const geography=expectedGeography(payload.expected_geography);
  const aliases={units:'entities',attribute_entities:'categories',attribute_records:'records'},collections={};
  for(const [key,rows] of Object.entries(payload)){
-  if(key==='ingestion_id')continue;const kind=aliases[key]??key;
+  if(key==='ingestion_id'||key==='expected_geography')continue;const kind=aliases[key]??key;
   if(!columns[kind]||kind==='media'||!Array.isArray(rows))fail(`Invalid import collection: ${key}`);
   const target=collections[kind]??=[];
   for(const input of rows){
@@ -104,9 +118,9 @@ export async function importBatch(db,payload){
  }
  const total=Object.values(collections).reduce((n,v)=>n+v.length,0);if(!total||total>250)fail('Import must contain 1–250 rows');
  for(const rows of Object.values(collections))if(new Set(rows.map(r=>r.id)).size!==rows.length)fail('Duplicate stable IDs within an import collection');
- const digest=await fingerprint(collections),id=payload.ingestion_id==null?digest:text(payload.ingestion_id,'ingestion ID');
+ const digest=await fingerprint(geography?{collections,expected_geography:geography}:collections),id=payload.ingestion_id==null?digest:text(payload.ingestion_id,'ingestion ID');
  const prior=await first(db.prepare('SELECT * FROM atlas_ingestions WHERE id=?').bind(id));
- if(prior){if(prior.fingerprint!==digest)fail('Ingestion ID already identifies different evidence',409);return {ingestion_id:id,duplicate:true,counts:Object.fromEntries(Object.entries(JSON.parse(prior.counts)).filter(([key])=>key!=='_retirement_ids')),revision:await revision(db)};}
+ if(prior){if(prior.fingerprint!==digest)fail('Ingestion ID already identifies different evidence or geographic context',409);const retained=JSON.parse(prior.counts);return {ingestion_id:id,duplicate:true,counts:publicCounts(retained),revision:await revision(db),...(retained._expected_geography?{expected_geography:retained._expected_geography}:{})};}
  const sourceById=new Map((collections.sources??[]).map(r=>[r.id,r]));
  const entityById=new Map((collections.entities??[]).map(r=>[r.id,r]));
  for(const category of collections.categories??[]){
@@ -119,10 +133,14 @@ export async function importBatch(db,payload){
  }
  for(const retirement of collections.retirements??[]){if(retirement.replacement_id!=null&&!collections[retirement.collection]?.some(row=>row.id===retirement.replacement_id)&&!await first(db.prepare(`SELECT id FROM ${tables[retirement.collection]} WHERE id=?`).bind(retirement.replacement_id)))fail('Replacement claim must exist or be submitted in the same import',409);}
  if(collections.entities){const pending=new Map(collections.entities.map(r=>[r.id,r])),ordered=[];while(pending.size){const ready=[...pending.values()].filter(r=>!r.parent_id||!pending.has(r.parent_id));if(!ready.length)fail('Entity parent cycle');for(const r of ready){ordered.push(r);pending.delete(r.id);}}collections.entities=ordered;}
- const statements=[],counts={};for(const kind of ['sources','entity_types','entities','categories','retirements','records','names','relationships','media_links']){counts[kind]=collections[kind]?.length??0;for(const row of collections[kind]??[])statements.push(insert(db,kind,row));}
- statements.push(db.prepare('INSERT OR IGNORE INTO atlas_ingestions(id,fingerprint,counts,created_at) VALUES (?,?,?,?)').bind(id,digest,json({...counts,...(collections.retirements?.length?{_retirement_ids:collections.retirements.map(r=>r.id)}:{})}),Date.now()));
- let result;try{result=await db.batch(statements);}catch(e){fail(`Import rejected: ${e.message}`,409);}
- return {ingestion_id:id,duplicate:result.at(-1)?.meta?.changes===0,counts,revision:await revision(db)};
+ const statements=geography?[geographyGuard(db,geography,id,digest)]:[],counts={};for(const kind of ['sources','entity_types','entities','categories','retirements','records','names','relationships','media_links']){counts[kind]=collections[kind]?.length??0;for(const row of collections[kind]??[])statements.push(insert(db,kind,row));}
+ statements.push(db.prepare('INSERT OR IGNORE INTO atlas_ingestions(id,fingerprint,counts,created_at) VALUES (?,?,?,?)').bind(id,digest,json({...counts,...(geography?{_expected_geography:geography}:{}),...(collections.retirements?.length?{_retirement_ids:collections.retirements.map(r=>r.id)}:{})}),Date.now()));
+ let result;try{result=await db.batch(statements);}catch(e){
+  if(e.commit_status==='unknown'){const error=new RecordError('Import outcome is unknown; retry the identical ingestion to verify its original receipt',503);error.retryable=true;error.commit_status='unknown';throw error;}
+  if(geography&&(e.sqlstate==='22P02'||/malformed JSON|ATLAS_GEOGRAPHY_CONFLICT/i.test(e.message))){const error=new RecordError('Published geography changed or does not match the pinned import; no records were committed',409);error.retryable=true;throw error;}
+  const error=new RecordError(`Import rejected: ${e.message}`,e.retryable?503:409);if(e.retryable)error.retryable=true;throw error;
+ }
+ return {ingestion_id:id,duplicate:result.at(-1)?.meta?.changes===0,counts,revision:await revision(db),...(geography?{expected_geography:geography}:{})};
 }
 async function revision(db){return (await first(db.prepare('SELECT coalesce(max(rowid),0) revision FROM atlas_ingestions'))).revision;}
 async function unchangedRevision(db,expected){if(await revision(db)!==expected){const error=new RecordError('Historical content changed while reading; retry the snapshot',409);error.retryable=true;throw error;}return expected;}

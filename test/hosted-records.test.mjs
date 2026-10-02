@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync,readdirSync} from 'node:fs';
 import {DatabaseSync} from 'node:sqlite';
 import {importBatch,attributesAt,namesAt,entityProfile,registerMedia,validateMedia,storageOverview,evidenceHistory} from '../hosted/records.js';
+import {stageGeographicRelease,finalizeGeographicRelease,geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
 
 class D1 {
  constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const f of readdirSync(new URL('../drizzle/',import.meta.url)).filter(f=>f.endsWith('.sql')).sort())this.sqlite.exec(readFileSync(new URL(`../drizzle/${f}`,import.meta.url),'utf8'));if(!this.sqlite.prepare("SELECT 1 FROM sqlite_master WHERE type='trigger' AND name='atlas_entities_immutable'").get())this.sqlite.exec(readFileSync(new URL('../hosted/records-constraints.sql',import.meta.url),'utf8'));}
@@ -12,6 +13,42 @@ class D1 {
 const source=(id='historical',from=-3000,to=2027,status='historical')=>({id,name:`Source ${id}`,url:'https://example.org/evidence',license:'CC0-1.0',vintage:'2026',supported_from:from,supported_to:to,status});
 const record=(id,attribute,value,extra={})=>({id,location_id:'location',attribute,value,valid_from:1000,valid_to:1100,source_id:'historical',...extra});
 async function fixture(){const db=new D1();await importBatch(db,JSON.parse(readFileSync(new URL('../data/hosted-type-catalog.json',import.meta.url))));const kinds=['continent','subcontinent','region','area','province','location'];await importBatch(db,{sources:[source(),source('modern',2026,2027,'reference'),source('examples',-3000,2027,'example')],entities:kinds.map((kind,i)=>({id:kind,kind,name:kind,parent_id:i?kinds[i-1]:null})).reverse(),categories:[{id:'owner-a',kind:'owner',name:'Owner A',source_id:'historical'},{id:'culture-a',kind:'culture',name:'Culture A',source_id:'historical'}]});return db;}
+async function pinRelease(db,id='pin-first',version=1,{publish=true}={}){
+ const tiers=['continent','subcontinent','region','area','province','location'];
+ if(version===1)await importBatch(db,{entities:Array.from({length:5},(_,c)=>tiers.map((kind,i)=>({id:`pin:${c}:${kind}`,kind,name:kind,parent_id:i?`pin:${c}:${tiers[i-1]}`:null}))).flat()});
+ const members=db.sqlite.prepare("SELECT id entity_id,kind,parent_id,name reference_name FROM atlas_entities WHERE kind IN ('continent','subcontinent','region','area','province','location')").all().map(row=>({...row,active:1,source_id:'modern',evidence:{test_only:true}}));
+ const release={id,version,source_id:'modern',reference_date:'2026-10-02',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64),membership_sha256:await geographicMembershipHash(members),location_ids_sha256:await geographicLocationIdsHash(members),changes_sha256:await geographicChangesHash([]),expected_counts:Object.fromEntries(tiers.map(kind=>[kind,6]))};
+ await stageGeographicRelease(db,{release,memberships:members});if(publish)await finalizeGeographicRelease(db,id);
+ return {release_id:id,hierarchy_sha256:release.hierarchy_sha256,footprints_sha256:release.footprints_sha256};
+}
+
+test('geographic pin guards the write transaction and retains exact original replay context',async()=>{
+ const db=await fixture();try{
+  const first=await pinRelease(db),payload={ingestion_id:'pinned-evidence',expected_geography:first,records:[record('pinned-pop','population',42)]};
+  const original=await importBatch(db,payload);assert.deepEqual(original.expected_geography,first);assert.equal(original.duplicate,false);
+  const stored=db.sqlite.prepare('SELECT * FROM atlas_ingestions WHERE id=?').get(payload.ingestion_id);assert.deepEqual(JSON.parse(stored.counts)._expected_geography,first);assert.equal('_expected_geography' in original.counts,false);
+  await pinRelease(db,'pin-next',2);
+  const replay=await importBatch(db,payload);assert.equal(replay.duplicate,true);assert.deepEqual(replay.expected_geography,first);assert.deepEqual(db.sqlite.prepare('SELECT * FROM atlas_ingestions WHERE id=?').get(payload.ingestion_id),stored);
+  await assert.rejects(importBatch(db,{...payload,expected_geography:{...first,release_id:'pin-next'}}),error=>error.status===409);
+  await assert.rejects(importBatch(db,{ingestion_id:payload.ingestion_id,records:payload.records}),error=>error.status===409);
+  await assert.rejects(importBatch(db,{ingestion_id:'stale-new',expected_geography:first,sources:[source('must-rollback')]}),error=>error.status===409&&error.retryable&&/no records were committed/.test(error.message));
+  assert.equal(db.sqlite.prepare("SELECT count(*) n FROM atlas_sources WHERE id='must-rollback'").get().n,0);assert.equal(db.sqlite.prepare("SELECT count(*) n FROM atlas_ingestions WHERE id='stale-new'").get().n,0);
+ }finally{db.sqlite.close();}
+});
+test('publication between preflight and batch rejects stale pins atomically, staged/malformed pins never authorize writes',async()=>{
+ const db=await fixture();try{
+  const first=await pinRelease(db),next=await pinRelease(db,'pin-next',2,{publish:false});
+  await assert.rejects(importBatch(db,{expected_geography:next,sources:[source('staged-pin')]}),error=>error.status===409);assert.equal(db.sqlite.prepare("SELECT count(*) n FROM atlas_sources WHERE id='staged-pin'").get().n,0);
+  for(const pin of [null,{},first.release_id,{...first,extra:true},{...first,hierarchy_sha256:'bad'}])await assert.rejects(importBatch(db,{expected_geography:pin,sources:[source('invalid-pin')]}),error=>error.status===400);
+  const batch=db.batch.bind(db);db.batch=async statements=>{db.batch=batch;await finalizeGeographicRelease(db,'pin-next');return batch(statements);};
+  await assert.rejects(importBatch(db,{expected_geography:first,sources:[source('preflight-race')]}),error=>error.status===409&&error.retryable);assert.equal(db.sqlite.prepare("SELECT count(*) n FROM atlas_sources WHERE id='preflight-race'").get().n,0);
+  const fresh=await importBatch(db,{expected_geography:next,sources:[source('fresh-pin')]});assert.deepEqual(fresh.expected_geography,next);
+  const legacy={ingestion_id:'legacy-no-pin',sources:[source('legacy-source')]};await importBatch(db,legacy);assert.equal((await importBatch(db,legacy)).duplicate,true);
+ }finally{db.sqlite.close();}
+});
+test('unknown pinned commit outcome stays retryable and never claims a rollback',async()=>{
+ const db=await fixture();try{const pin=await pinRelease(db);db.batch=async()=>{throw Object.assign(new Error('private provider detail'),{commit_status:'unknown',retryable:true});};await assert.rejects(importBatch(db,{expected_geography:pin,sources:[source('uncertain')]}),error=>error.status===503&&error.retryable&&error.commit_status==='unknown'&&!/private provider/.test(error.message)&&!/no records were committed/.test(error.message));}finally{db.sqlite.close();}
+});
 
 test('profile titles prefer direct dated evidence over English reference attestations and opt-in examples',async()=>{
  const db=await fixture();try{

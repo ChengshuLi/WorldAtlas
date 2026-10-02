@@ -80,3 +80,17 @@ test('PostgreSQL compact metadata summaries retain zero-population proof semanti
  await importBatch(db,{retirements:[retirement('withdraw-modeled','large-modeled-zero')],records:[record('large-literal-zero','population',0,{metadata:{details:'x'.repeat(2500),precision:{source:'literal observed zero'}}})]});
  const literal=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000));assert.equal(resolveAttributes([{id:'location',properties:{}}],1000,{records:literal.records}).get('location').rank,'unsettled');
 }));
+test('PostgreSQL geographic transaction guards reject unpublished/stale hashes and retain pinned replay receipts',withFixture(async({db,engine})=>{
+ const extras=Array.from({length:5},(_,c)=>tiers.map((kind,i)=>({id:`pin:${c}:${kind}`,kind,name:kind,parent_id:i?`pin:${c}:${tiers[i-1]}`:null}))).flat();await importBatch(db,{entities:extras});
+ const members=[...tiers.map((kind,i)=>({entity_id:kind,kind,parent_id:i?tiers[i-1]:null})),...extras.map(row=>({entity_id:row.id,kind:row.kind,parent_id:row.parent_id}))].map(row=>({...row,active:1,source_id:'reference',evidence:{test_only:true}}));
+ const manifest=async(id,version)=>({id,version,source_id:'reference',reference_date:'2026-10-02',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64),membership_sha256:await geographicMembershipHash(members),location_ids_sha256:await geographicLocationIdsHash(members),changes_sha256:await geographicChangesHash([]),expected_counts:Object.fromEntries(tiers.map(kind=>[kind,6]))});
+ const first=await manifest('pin:first',1),pin={release_id:first.id,hierarchy_sha256:first.hierarchy_sha256,footprints_sha256:first.footprints_sha256};await stageGeographicRelease(db,{release:first,memberships:members});
+ await assert.rejects(importBatch(db,{expected_geography:pin,sources:[source('staged-must-rollback')]}),error=>error.status===409&&error.retryable);assert.equal((await engine.query("SELECT count(*)::int n FROM atlas_sources WHERE id='staged-must-rollback'")).rows[0].n,0);
+ await finalizeGeographicRelease(db,first.id);const payload={ingestion_id:'pg:pinned',expected_geography:pin,records:[record('pg:pinned-pop','population',42)]},original=await importBatch(db,payload);assert.deepEqual(original.expected_geography,pin);
+ const retained=(await engine.query("SELECT * FROM atlas_ingestions WHERE id='pg:pinned'")).rows[0];const second=await manifest('pin:second',2);await stageGeographicRelease(db,{release:second,memberships:members});await finalizeGeographicRelease(db,second.id);
+ const replay=await importBatch(db,payload);assert.equal(replay.duplicate,true);assert.deepEqual(replay.expected_geography,pin);assert.deepEqual((await engine.query("SELECT * FROM atlas_ingestions WHERE id='pg:pinned'")).rows[0],retained);
+ await assert.rejects(importBatch(db,{expected_geography:pin,sources:[source('stale-must-rollback')]}),error=>error.status===409&&error.retryable&&!/22P02|postgresql:\/\//.test(error.message));assert.equal((await engine.query("SELECT count(*)::int n FROM atlas_sources WHERE id='stale-must-rollback'")).rows[0].n,0);
+ await assert.rejects(importBatch(db,{ingestion_id:payload.ingestion_id,records:payload.records}),error=>error.status===409);
+ const current={...pin,release_id:second.id};await assert.rejects(importBatch(db,{expected_geography:{...current,footprints_sha256:'c'.repeat(64)},sources:[source('hash-mismatch')]}),error=>error.status===409);
+ assert.deepEqual((await importBatch(db,{expected_geography:current,sources:[source('fresh-pinned-source')]})).expected_geography,current);
+}));

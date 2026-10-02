@@ -8,6 +8,7 @@ import {exercisePostgresSmoke,postgresSchemaInventory,postgresSchemaURL,postgres
 import {expectedNeonProjectId,verifyNeonProject} from './verify-neon-project.mjs';
 import {runtimeRole,provisionPostgresRuntimeRole,verifyPostgresRuntimeRole} from './provision-postgres-runtime-role.mjs';
 import {importBatch,attributesAt} from '../hosted/records.js';
+import {exerciseGeographyImportPin} from './verify-geography-import-pin.mjs';
 
 export const productionBranchId='br-summer-butterfly-ar8qikk5';
 const databaseName='neondb',roleName='neondb_owner';
@@ -149,7 +150,7 @@ async function restrictedRoleChecks(drivers){
  */
 export async function verifyNeonSQL({env=process.env,filename='data/validation/neon-sql-verification.json',fetchImpl=fetch,driverFactory=liveDrivers,ownerDriverFactory=liveOwnerDriver,sleep=pause,uuid=randomUUID}={}){
  const receipt={status:'running',scope:'new disposable Neon validation branch',checked_at_utc:new Date().toISOString(),project_id:expectedNeonProjectId,production_branch_id:productionBranchId,production_sql_writes:false,credentials_logged:false,cleanup_status:'not-required'};
- let createdId=null,ownerDriver=null,requestCount=0,parentRequestCount=0,stage='configuration';
+ let createdId=null,ownerDriver=null,applicationDriver=null,requestCount=0,parentRequestCount=0,stage='configuration';
  const checkpoint=()=>writeReceipt(filename,receipt);
  const apiKey=env.NEON_API_KEY,projectId=env.NEON_PROJECT_ID;
  const request=async(method,route,body)=>{
@@ -224,12 +225,21 @@ export async function verifyNeonSQL({env=process.env,filename='data/validation/n
   receipt.runtime_role=checked.proof;
   receipt.runtime_current_user=runtimeRole;receipt.runtime_session_user=runtimeRole;
   receipt.denied_operations=checked.denied;receipt.idempotent_application_retry=true;
+  if(env.ATLAS_VERIFY_PIN_CONCURRENCY==='1'){
+   stage='geographic-pin-concurrency';
+   applicationDriver=await ownerDriverFactory(appURI.href);
+   receipt.geographic_pin_concurrency=await exerciseGeographyImportPin({publisherDriver:ownerDriver,importDriver:applicationDriver,disposableBranchId:createdId,disposableBranch:true});
+  }
   receipt.sql_contracts_passed=true;receipt.status='verified';
  }catch(error){
   receipt.status='failed';receipt.failure_stage=stage;receipt.error_code=error instanceof VerificationError?error.code:`${stage}-failed`;
   const sqlstate=error?.sqlstate??error?.code;if(!(error instanceof VerificationError)&&typeof sqlstate==='string'&&/^[A-Z0-9]{5}$/.test(sqlstate))receipt.sqlstate=sqlstate;
  }
  finally{
+  if(applicationDriver){
+   try{await applicationDriver.close();receipt.application_connection_closed=true;}
+   catch{receipt.application_connection_closed=false;receipt.status='failed';receipt.application_close_error_code='private-application-close-failed';}
+  }
   if(ownerDriver){
    try{await ownerDriver.close();receipt.owner_connection_closed=true;}
    catch{receipt.owner_connection_closed=false;receipt.status='failed';receipt.owner_close_error_code='private-owner-close-failed';}

@@ -95,7 +95,7 @@ export default {
   }catch(error){
    console.error('Atlas request failed',url.pathname,error.message);
    const status=error.status||(error instanceof SyntaxError?400:503);
-   return json({error:status===503?'Atlas storage is temporarily unavailable':error.message,...(error.retryable?{retryable:true}:{}),...(Number.isInteger(error.suggested_limit)?{suggested_limit:error.suggested_limit}:{})},status);
+   return json({error:status===503?'Atlas storage is temporarily unavailable':error.message,...(error.retryable?{retryable:true}:{}),...(['unknown','committed','rolled-back-or-not-started'].includes(error.commit_status)?{commit_status:error.commit_status}:{}),...(Number.isInteger(error.suggested_limit)?{suggested_limit:error.suggested_limit}:{})},status);
   }
  }
 };
