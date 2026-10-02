@@ -1,0 +1,13 @@
+# Approved global macro reporting partition
+
+Issue #33 approves the own-boundary conventions for all six continents, 29 subcontinents and 81 regions, excluding Antarctica. The four sourced continental decision sheets, original inspection ledgers and explicit migration receipts are retained. `data/macro-foundation/approved-boundary-decisions.json` records every current group, fulfilled correction and named-land route; `macro-certificate.json` pins the exact release, membership fingerprints and immutable envelope manifest.
+
+The hierarchy remains constructed bottom up. Regions union their represented location land; subcontinents union regions; continents union subcontinents. Independent verification checks every source location's inclusion, asset hashes, exact membership, valid geometry, child containment and same-tier material overlap. The frozen envelopes remain independent audit constraints for subsequent interior edits.
+
+These are sourced, fixed geographic reporting conventions, including explicit administrative reference edges where physical divides lack adequate evidence. They do not follow changing political ownership or imply those administrations existed historically. Original physical-precision uncertainties remain preserved; this is not surveyed watershed/crest approval. GEOS zero-area collapsed boundary segments are retained explicitly, not classified as land. Source-overlay ribbons are measured under a 1e-6-degree corridor (at most about 0.112 m); land conservation uses 1e-9 degrees. Input land is neither clipped nor reassigned to conceal those ribbons.
+
+All named absent or partially represented island families have a fixed regional destination and an explicit coverage limitation. Missing shoreline/islet source coverage remains regional work; represented-land envelope approval does not assert complete world shoreline coverage. Adding missing land follows its sourced routing and a coordinated envelope/certificate publication, never an arbitrary cell reassignment.
+
+`regional-handoffs.json.gz` covers every one of the 81 regions. Each future regional worker must audit its complete area/province/location branch, source suitability, granularity, coverage and grid representation. Approval here does not approve any regional interior, permit new location-attribute imports, or close worldwide semantic issue #7. Source-only research may continue.
+
+The corrected reference preserves all 49,589 location identities and footprints, existing history and original inspection bytes. The immutable ownership grid is reused; only province lookup metadata changes. Publication verification and the cooperative research gate must match the actual live release before marking this macro milestone ready for regional workers.

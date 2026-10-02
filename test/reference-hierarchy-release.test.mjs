@@ -10,6 +10,25 @@ import {prepareGeographicRelease,validateMetadataRelationships} from '../scripts
 const root=path.resolve(import.meta.dirname,'..'),data=path.join(root,'data');
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const read=file=>JSON.parse(file.endsWith('.gz')?gunzipSync(fs.readFileSync(file)):fs.readFileSync(file));
+const retained=read(path.join(data,'macro-foundation/current-membership-projection.json.gz'));
+function release2Bytes(relative){
+ const proof=retained.baseline_files[`data/${relative}`];assert.ok(proof,`Exact release-2 archive required: ${relative}`);
+ const archive=fs.readFileSync(path.join(root,proof.archive_path));assert.equal(sha(archive),proof.archive_sha256);
+ const original=gunzipSync(archive);assert.equal(sha(original),proof.original_sha256);return original;
+}
+function release2Data(temporary){
+ const baseline=path.join(temporary,'baseline');fs.mkdirSync(baseline);
+ for(const name of fs.readdirSync(data))if(!['hierarchy.json','world-index.json','geography','geographic-releases'].includes(name))fs.symlinkSync(path.join(data,name),path.join(baseline,name));
+ for(const name of ['hierarchy.json','world-index.json'])fs.writeFileSync(path.join(baseline,name),release2Bytes(name));
+ const index=JSON.parse(release2Bytes('world-index.json'));
+ for(const part of index.parts){const target=path.join(baseline,part);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,release2Bytes(part));}
+ const registry=path.join(baseline,'geographic-releases');fs.mkdirSync(registry);
+ const registryBytes=gunzipSync(fs.readFileSync(path.join(data,'reference-migrations/global-macro-reference-v3/before/geographic-releases/index.json.archive.gz'))),published=JSON.parse(registryBytes),current=read(path.join(data,'geographic-releases/index.json'));
+ assert.equal(published.releases.at(-1).version,2);assert.equal(current.releases.find(row=>row.version===3).metadata.registered_identity_manifest_sha256[sha(registryBytes)],published.releases.at(-1).id);
+ fs.writeFileSync(path.join(registry,'index.json'),registryBytes);
+ for(const batch of published.batches){const original=path.join(data,'geographic-releases',batch.path);assert.equal(sha(fs.readFileSync(original)),batch.sha256);fs.symlinkSync(original,path.join(registry,batch.path));}
+ return baseline;
+}
 const normalized=row=>({id:row.id,name:row.name,parent_id:row.parent_id,kind:row.level??row.kind});
 const receiptHash='a'.repeat(64);
 function fixture(){
@@ -104,8 +123,8 @@ test('complete original unit records, explicit source proof and zero historical 
 test('the complete real candidate validates all 49,589 locations and the 55-county source-backed merge',()=>{
  const receipt=read(path.join(data,'reference-hierarchy-corrections/migration-receipt.json.gz'));
  const beforeGroups=new Map(receipt.before_units.map(row=>[row.id,normalized(row)])),beforeLocations=new Map();
- const world=read(path.join(data,'world-index.json'));
- for(const part of world.parts)for(const feature of read(path.join(data,part)).features){
+ const world=JSON.parse(release2Bytes('world-index.json'));
+ for(const part of world.parts)for(const feature of JSON.parse(release2Bytes(part)).features){
   const p=feature.properties;beforeLocations.set(feature.id,{id:feature.id,name:p.name,parent_id:p.parent_id,kind:'location'});
  }
  assert.equal(beforeLocations.size,49589);assert.equal(beforeGroups.size,5705);
@@ -123,22 +142,22 @@ test('the complete real candidate validates all 49,589 locations and the 55-coun
 test('full candidate release preparation emits the explicit merge, archived predecessor and exact unchanged baseline',async()=>{
  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-reference-hierarchy-release-'));
  const receiptFile=path.join(data,'reference-hierarchy-corrections/migration-receipt.json.gz'),receipt=read(receiptFile);
- const registryManifest=path.join(data,'geographic-releases/index.json'),published=read(registryManifest);
- const snapshot=new Map([registryManifest,path.join(data,'hierarchy.json'),path.join(data,'hosted-catalog/index.json')]
+ const snapshot=new Map([path.join(data,'geographic-releases/index.json'),path.join(data,'hierarchy.json'),path.join(data,'hosted-catalog/index.json')]
   .map(file=>[file,sha(fs.readFileSync(file))]));
  try{
+  const baseline=release2Data(temporary),registryManifest=path.join(baseline,'geographic-releases/index.json'),published=read(registryManifest);
   const geography=path.join(temporary,'geography'),output=path.join(temporary,'prepared');fs.mkdirSync(geography);
   const deltas=new Map(receipt.group_changes.map(row=>[row.id,row]));
   const units=receipt.before_units.flatMap(row=>deltas.has(row.id)?deltas.get(row.id).after?[deltas.get(row.id).after]:[]:[row]);
   fs.writeFileSync(path.join(geography,'hierarchy.json'),JSON.stringify(units));
-  const index=read(path.join(data,'world-index.json'));fs.copyFileSync(path.join(data,'world-index.json'),path.join(geography,'world-index.json'));
+  const index=read(path.join(baseline,'world-index.json'));fs.copyFileSync(path.join(baseline,'world-index.json'),path.join(geography,'world-index.json'));
   const pair=receipt.relationships[0];
   for(const part of index.parts){
    const target=path.join(geography,part);fs.mkdirSync(path.dirname(target),{recursive:true});
-   const raw=fs.readFileSync(path.join(data,part));
-   fs.writeFileSync(target,part===receipt.candidate.changed_geography_part?Buffer.from(raw.toString().replace(pair.old_entity_id,pair.new_entity_id)):raw);
+   if(part===receipt.candidate.changed_geography_part){const raw=fs.readFileSync(path.join(baseline,part));fs.writeFileSync(target,Buffer.from(raw.toString().replace(pair.old_entity_id,pair.new_entity_id)));}
+   else fs.linkSync(path.join(baseline,part),target);
   }
-  const generated=await prepareGeographicRelease({data,geographyData:geography,output,reviewedVersion:3,
+  const generated=await prepareGeographicRelease({data:baseline,geographyData:geography,output,reviewedVersion:3,
    registryManifests:[registryManifest],metadataMigrations:[path.join(data,'macro-boundary-migration.json.gz'),receiptFile]});
   assert.deepEqual(generated.releases[0],published.releases[0],'Baseline release stays exactly immutable');
   assert.equal(generated.new_entities,0);assert.equal(generated.releases[1].expected_counts.location,49589);

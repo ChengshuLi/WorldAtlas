@@ -11,7 +11,7 @@
   },
   "revalidated_geography": {
     "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
-    "hierarchy_sha256": "bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58",
+    "hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
     "location_index_sha256": "59552ee8d7d8d0848df6e67fbd43a442e3d4769e6784df984556479c0ae55cf0"
   },
   "source_product_files": [
@@ -38,9 +38,11 @@
   ],
   "migration_receipts": [
     {
-      "path": ".cache/macro-boundary-repair-stage/migration-receipt.json.gz",
-      "sha256": "cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5"
-    }
+      "path": "data/macro-foundation/migration-repairs.json.gz",
+      "sha256": "290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937"
+    },
+    {"path":"data/macro-foundation/migration-areas.json.gz","sha256":"5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468"},
+    {"path":"data/macro-foundation/migration-regions.json.gz","sha256":"09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f"}
   ],
   "entities": [
     {
@@ -28753,5 +28755,6 @@
     "Exact location geometries and all descendant location identities unchanged for every evidence entity",
     "Original source, record, interval and executed-algorithm bytes preserved",
     "Reference macro-parent changes do not establish dated administrative membership"
-  ]
+  ],
+  "projection": {"method":"Previous immutable-footprint proof composed with exact current-to-candidate membership/footprint equality","previous_revalidation_sha256":"ebf0cab4fd044840bee36dd39b16b5ec22b4b1d7d5c44cd8042ee3dd47f67b32","installer_sha256":"545da835a0a3781dbd4ef69e7e09d2bc5ebbef8072df2d67c817ecc4685d300e"}
 }
