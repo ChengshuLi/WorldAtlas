@@ -1,5 +1,5 @@
 {
-  "status": "validated-awaiting-publication",
+  "status": "validated-and-published",
   "trigger": "Production GET /api/storage/export-marker returned 503: D1_ERROR too many terms in compound SELECT",
   "correction": "Single SELECT with fourteen scalar counts preserves one complete marker read without compound SELECT terms",
   "facts_mutated": false,
@@ -11,5 +11,6 @@
   },
   "browser_gate_reused": "No client/map/renderer change; matching Site16 browser result retained",
   "deployment_asset_bytes": 267343530,
-  "production_export_complete": false
+  "production_export_complete": false,
+  "publication": "data/validation/storage-marker-provider-publication.json"
 }

@@ -31,4 +31,6 @@ if(fs.existsSync(archiveReceiptFile)){
  objects.set('media:atlas:archive:'+catalog.archive_sha256,{sha256:catalog.archive_sha256,bytes:fs.statSync('data/geographic-migration-archive.json.gz').size});
  for(const [id,expected]of objects){const response=await fetch(new URL('/api/media/'+encodeURIComponent(id),origin),{headers:{'OAI-Sites-Authorization':`Bearer ${token}`}});if(!response.ok)throw Error('Retained archive read-back failed');const raw=Buffer.from(await response.arrayBuffer());if(raw.length!==expected.bytes||createHash('sha256').update(raw).digest('hex')!==expected.sha256)throw Error('Retained archive bytes differ from preserved source');checkedArchiveObjects++;checkedArchiveBytes+=raw.length;}
 }
-console.log(JSON.stringify({read_only:true,environment_classifications:classificationCounts,releases,checked_prepared_claims:checked,expected_prepared_counts:imports.counts,checked_archive_objects:checkedArchiveObjects,checked_archive_bytes:checkedArchiveBytes,storage}));
+const verification={read_only:true,verified_at_utc:new Date().toISOString(),url:origin.origin,environment_classifications:classificationCounts,releases,checked_prepared_claims:checked,expected_prepared_counts:imports.counts,checked_archive_objects:checkedArchiveObjects,checked_archive_bytes:checkedArchiveBytes,storage};
+if(process.argv[3])fs.writeFileSync(process.argv[3],JSON.stringify(verification,null,2)+"\n");
+console.log(JSON.stringify(verification));
