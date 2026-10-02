@@ -1,5 +1,7 @@
 # Start a content-only Luna research thread
 
+The ongoing content queue is [HISTORICAL_RESEARCH_TODO.md](HISTORICAL_RESEARCH_TODO.md). The separate maintainer queue is [ENGINEERING_TODO.md](ENGINEERING_TODO.md).
+
 Clone `https://github.com/ChengshuLi/WorldAtlas`, branch **work**. This is the durable handover; no prior workspace or `.cache` is required. The website is https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/ and retains its owner-private audience.
 
 Read, in order:

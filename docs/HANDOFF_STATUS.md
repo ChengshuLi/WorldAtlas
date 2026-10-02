@@ -1,5 +1,7 @@
 # Handoff and continuation log
 
+Separate ongoing queues: [engineering TODO](ENGINEERING_TODO.md) for technical maintainers and [historical research TODO](HISTORICAL_RESEARCH_TODO.md) for Luna content threads. Both queues must retain progress and blockers in Git.
+
 Primary repository: `https://github.com/ChengshuLi/WorldAtlas`, branch **work**. This file records work that can be continued from Git. A `.cache` path below identifies a local stage only; the accompanying tracked evidence and restoration instructions are the durable handoff. Do not claim a local stage is deployed or silently apply a blocked candidate.
 
 ## Latest operational checkpoint — 2026-10-02 UTC
