@@ -2,6 +2,8 @@
 
 Give the issue-creation thread this document and [its prompt](prompts/ISSUE_CREATION.txt). Repository: https://github.com/ChengshuLi/WorldAtlas, default/integration branch **main**. GitHub Issues is the single source of truth for TODOs, status and work history. See [the three-thread start page](THREE_THREAD_START.md).
 
+Read [WORKER_COORDINATION.md](WORKER_COORDINATION.md). Ready actionable issues need `kind:work-item`, `status:ready`, a reviewed scope block, explicit dependencies and a 1–3 PR budget. Larger goals are unclaimable `kind:umbrella` issues with bounded children. Review overlap before marking ready. Research is currently source-only; location-content issues depend on worldwide #7 approval and remain blocked.
+
 This role captures requests and keeps the queue readable. It does not implement code, research/import historical facts, deploy, merge worker PRs or modify campaign/job artifacts. Ordinary issue creation requires no Git branch, commit or PR.
 
 1. Check open and closed issues for duplicates before creating one. Reuse/comment on an existing issue when appropriate; preserve existing evidence and completion history.

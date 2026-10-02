@@ -1,5 +1,7 @@
 # Start a content-only Luna research thread
 
+**Current research policy (2026-10-02 America/Los_Angeles):** source-only until complete worldwide hierarchy review and matching engineering approval. New location-attribute imports are blocked; local staging and dry runs may proceed. Use [WORKER_COORDINATION.md](WORKER_COORDINATION.md) for reservations and [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md) for the global gate. Older descriptions of enabled live transport below describe capabilities, not permission to bypass this policy.
+
 For the current one-document/one-prompt workflow, use [HISTORY_HANDOFF.md](HISTORY_HANDOFF.md) and [LUNA_HISTORY.txt](prompts/LUNA_HISTORY.txt). These provide research instructions and concurrent branch rules; GitHub Issues holds the authoritative TODOs and dated work history. Engineering uses its separate [handover](ENGINEERING_HANDOFF.md).
 
 Clone `https://github.com/ChengshuLi/WorldAtlas`, branch **main**. This is the durable handover; no prior workspace or `.cache` is required. The website is https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/ and retains its owner-private audience.

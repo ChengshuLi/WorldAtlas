@@ -13,7 +13,7 @@ body:
     id: acceptance
     attributes:
       label: Acceptance criteria
-      description: What evidence establishes completion? Large issues can have several focused PRs; partial PRs must keep the issue open.
+      description: What evidence establishes completion? Keep actionable issues to 1–3 PRs; larger goals become umbrellas with bounded children. Partial PRs keep the issue open.
     validations:
       required: true
   - type: textarea
@@ -32,3 +32,8 @@ body:
       label: Original raised date, if known
       description: America/Los_Angeles date; use unknown when earlier history does not establish it. GitHub records creation separately.
       placeholder: YYYY-MM-DD or unknown
+  - type: textarea
+    id: coordination
+    attributes:
+      label: Work-item readiness (triage)
+      description: Before ready labeling, add a reviewed worldatlas-work:v1 scope block with max_prs (1–3), depends_on and mode. Research is source-only until worldwide hierarchy approval. See docs/WORKER_COORDINATION.md.

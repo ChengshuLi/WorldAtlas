@@ -1,0 +1,28 @@
+import fs from 'node:fs';
+import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,workSpec,canonicalIssueNumber} from './issue-claim-contract.mjs';
+
+const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8')),input=event.inputs??{},repo=process.env.GITHUB_REPOSITORY;
+if(process.env.GITHUB_REF!=='refs/heads/main'||!/^[-\w.]+\/[-\w.]+$/.test(repo??''))throw Error('Claim mutations run only from trusted main');
+const number=canonicalIssueNumber(input.issue_number);
+if(!Number.isSafeInteger(number)||number<1)throw Error('Invalid issue number');
+const api=githubAPI(process.env.GH_TOKEN),result={accepted:false,request_id:input.request_id,issue_number:number};
+try{
+ const [issue,comments,prs]=await Promise.all([api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),linkedPulls(api,repo,number)]);
+ const spec=input.action==='release'?null:workSpec(issue.body);
+ const ids=new Set([...(spec?.depends_on??[]),...(spec?.mode==='content'?[7]:[])]);
+ const dependencies=await Promise.all([...ids].map(id=>api(`/repos/${repo}/issues/${id}`)));
+ const geographyGate=spec?.mode==='content'?JSON.parse(fs.readFileSync('data/research-geography-gate.json','utf8')):null;
+ const next=transitionClaim({issue,comments,prs,dependencies,geographyGate,request:{...input,live_work:input.live_work==='true'}}),claim=next.claim;
+ // The canonical bot comment is authority; labels are a repairable display projection.
+ if(claim.comment_id)await api(`/repos/${repo}/issues/comments/${claim.comment_id}`,'PATCH',{body:renderClaim(claim)});
+ else claim.comment_id=(await api(`/repos/${repo}/issues/${number}/comments`,'POST',{body:renderClaim(claim)})).id;
+ const hasClaimLabel=issue.labels.some(l=>l.name==='status:claimed');
+ if(claim.active&&!hasClaimLabel)await api(`/repos/${repo}/issues/${number}/labels`,'POST',{labels:['status:claimed']});
+ if(!claim.active&&hasClaimLabel)await api(`/repos/${repo}/issues/${number}/labels/${encodeURIComponent('status:claimed')}`,'DELETE');
+ if(input.action==='recover'&&issue.labels.some(l=>l.name==='coordination:recovery-approved'))await api(`/repos/${repo}/issues/${number}/labels/${encodeURIComponent('coordination:recovery-approved')}`,'DELETE');
+ if(input.action!=='renew'||next.previous?.branch!==claim.branch)await api(`/repos/${repo}/issues/${number}/comments`,'POST',{body:`Worker coordination: ${input.action} by \`${claim.worker_id}\`, branch \`${claim.branch}\`, lease ${claim.expires_at}. Request \`${input.request_id}\`.${next.previous?` Previous branch retained: \`${next.previous.branch}\`.`:''}${input.reason?` Reason: ${input.reason}`:''}`});
+ Object.assign(result,{accepted:true,claim,replayed:Boolean(next.replayed)});
+}catch(error){result.reason=error.message;}
+fs.writeFileSync('claim-result.json',JSON.stringify(result,null,2)+'\n');
+fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`${result.accepted?'Accepted':'Not accepted'} ${input.action} for #${number}. ${result.reason??''}\n`);
+console.log(JSON.stringify(result));

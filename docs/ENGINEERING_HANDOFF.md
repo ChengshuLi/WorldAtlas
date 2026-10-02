@@ -2,6 +2,8 @@
 
 Give a future engineering thread this document and [its prompt](prompts/ENGINEERING.txt). They provide architecture, workflow and validation instructions. **GitHub Issues is the single source of truth for TODOs, status and work history**: [open engineering issues](https://github.com/ChengshuLi/WorldAtlas/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Aengineering). This document contains no live task checklist.
 
+M engineering and N history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), claim one ready 1–3-PR work item before implementation, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.
+
 Repository: https://github.com/ChengshuLi/WorldAtlas, integration branch **main**. Site: https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [acceptance guidance](ENGINEERING_TODO.md), [HANDOFF_STATUS.md](HANDOFF_STATUS.md), [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md) and `data/validation/neon-final-publication.json`. Recheck live capabilities rather than assuming old receipts are current.
 
 ## Architecture and preserved starting point
@@ -17,7 +19,7 @@ Application code and factual content are independent. Keep stable IDs, sparse su
 3. Copy `coordination/templates/engineering-progress.json` to **`coordination/engineering/<job-id>.json`**. Link the issue and keep implementation receipts, dependencies, checks and maintenance context there. This file is a resumable execution artifact, not another task-status tracker. Do not modify research campaign files or another job's progress.
 4. Preserve compatibility and existing live facts. Test the actual change and retain evidence. Update the GitHub issue at milestones with date, completed scope, blockers, evidence, PR and next action. Do not rewrite archived tracker snapshots or completed receipts.
 5. Push frequently and open a PR to **main**. Use exactly one `Refs #N` line for partial work or one `Closes #N` line only when all issue acceptance criteria are met. No document TODO ID is required. Include concrete behavior, validation and live deployment state. Run `node scripts/check-handoff-scope.mjs --branch engineering/<job-id> --base origin/main --head HEAD --pr-body-file /path/to/body.md` and follow applicable Codex PR attachment instructions.
-6. Integrate reviewed PRs serially after affected checks pass. **Squash merge and explicitly use the PR title as the squash commit title.** Example: `gh pr merge N --squash --subject "Exact PR title" --match-head-commit SHA`. A merge does not automatically deploy the Site or run a migration. Close an issue only after required implementation/publication verification; keep closed issues and evidence as the work record.
+6. Integrate reviewed PRs serially after affected checks pass. **Submit to the serialized worker merge queue** (`node scripts/queue-pr-merge.mjs --pr N --head SHA`), which verifies current ownership and uses the PR title as squash commit title. A merge does not automatically deploy the Site or run a migration. Close an issue only after required implementation/publication verification; keep closed issues and evidence as the work record.
 
 ## While Luna imports concurrently
 
