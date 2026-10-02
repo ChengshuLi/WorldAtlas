@@ -195,7 +195,24 @@ export function validateMetadataRelationships({beforeGroups,beforeLocations,befo
  return pairs;
 }
 
-function validateReviewedIdentities({original,current,migration,geometryProof,metadataProofs,registry}){
+/** Pin an exhaustive identity chronology without changing reverse footprint validation. */
+export function identityProofOrder({geometryProofs,metadataProofs,sequence=null}){
+ if(sequence===null&&metadataProofs.length&&geometryProofs.some(p=>p.creationProofs.length))throw Error('Mixed creation/metadata history requires an explicit pinned identity proof sequence');
+ const declared=sequence??{version:1,steps:[...geometryProofs.map(p=>({type:'geometry',sha256:p.manifest_sha256})),...metadataProofs.map(p=>({type:'metadata',sha256:p.sha256}))]};
+ if(declared.version!==1||Object.keys(declared).some(k=>!['version','steps'].includes(k))||!Array.isArray(declared.steps)||declared.steps.length!==geometryProofs.length+metadataProofs.length)throw Error('Identity proof sequence must exhaustively account for every validated proof');
+ const at={geometry:0,metadata:0},sets={geometry:geometryProofs,metadata:metadataProofs},ordered=[],seen=new Set();
+ for(const step of declared.steps){
+  if(!step||Object.keys(step).some(k=>!['type','sha256'].includes(k))||!Object.hasOwn(sets,step.type)||!/^[a-f0-9]{64}$/.test(step.sha256??''))throw Error('Invalid identity proof sequence entry');
+  const key=`${step.type}:${step.sha256}`;if(seen.has(key))throw Error('Identity proof sequence duplicates a validated proof');seen.add(key);
+  const proof=sets[step.type][at[step.type]++],pin=step.type==='geometry'?proof?.manifest_sha256:proof?.sha256;
+  if(!proof||pin!==step.sha256)throw Error('Identity proof sequence is skipped, reordered, duplicated or mutated');
+  ordered.push({type:step.type,proof});
+ }
+ if(at.geometry!==geometryProofs.length||at.metadata!==metadataProofs.length)throw Error('Identity proof sequence omits a validated proof');
+ return {ordered,sha256:sequence===null?null:contentHash(declared)};
+}
+
+export function validateReviewedIdentities({original,current,migration,geometryProof,metadataProofs,registry,identitySequence=null}){
  const expectedGroups=new Map([...original.values()].filter(e=>e.active&&e.kind!=='location').map(e=>[e.id,{id:e.id,name:e.name,parent_id:e.parent_id,kind:e.kind}]));
  const expectedLocations=new Map([...original.values()].filter(e=>e.active&&e.kind==='location').map(e=>[e.id,{id:e.id,name:e.name,parent_id:e.parent_id,kind:'location'}]));
  const expectedUnitRecords=new Map((migration.before_units??[]).map(row=>[row.id,row]));
@@ -203,16 +220,42 @@ function validateReviewedIdentities({original,current,migration,geometryProof,me
  const removeGroup=id=>{expectedGroups.delete(id);expectedUnitRecords.delete(id);};
  for(const row of migration.group_changes??[]){if(row.after)putGroup(row.after);else removeGroup(row.id);}
  for(const row of migration.changes??[]){const p=row.after_properties;if(p)expectedLocations.set(row.location_id,{id:row.location_id,name:p.name,parent_id:p.parent_id,kind:'location'});}
- for(const proof of geometryProof.proofs){
+ const metadataRelationships=new Map(),metadataCreatedRelationships=new Map();
+ const chronology=identityProofOrder({geometryProofs:geometryProof.proofs,metadataProofs,sequence:identitySequence});
+ for(const step of chronology.ordered){
+  const proof=step.proof;
+  if(step.type==='geometry'){
   const hierarchy=proof.files['after/hierarchy.json']??proof.files['after-hierarchy.json'];
-  if(hierarchy){expectedGroups.clear();expectedUnitRecords.clear();for(const row of read(hierarchy.file))putGroup(row);}
+  if(hierarchy){
+   const rows=read(hierarchy.file),snapshot=new Map(rows.map(row=>[row.id,row]));
+   if(snapshot.size!==rows.length)throw Error('Duplicate geometry hierarchy snapshot identity');
+   if(proof.creationProofs.length){
+    if(proof.changed.size||proof.removed.size||proof.creationProofs.length!==proof.added.size)throw Error('Creation identity step must be a pure source-backed addition');
+    const childCounts=records=>{const counts=new Map();for(const row of records)counts.set(row.parent_id,(counts.get(row.parent_id)??0)+1);return counts;};
+    const previousCounts=childCounts([...expectedGroups.values(),...expectedLocations.values()]);
+    const addedLocations=(proof.receipt.new_entities??proof.receipt.added_features??[]).map(row=>row.properties??row);
+    const nextCounts=childCounts([...rows,...expectedLocations.values(),...addedLocations]);
+    for(const [id,row] of expectedUnitRecords){
+     const next=snapshot.get(id);
+     if(next&&contentHash(next)===contentHash(row))continue;
+     // child_count is a generated immediate-member count, never factual source
+     // metadata. A legitimate addition may update it; every other byte remains.
+     const count=row.metadata?.child_count,newCount=next?.metadata?.child_count;
+     const restored=next?{...next,metadata:{...next.metadata,child_count:count}}:null;
+     if(!Number.isInteger(count)||count!==(previousCounts.get(id)??0)||!Number.isInteger(newCount)||newCount!==(nextCounts.get(id)??0)||contentHash(restored)!==contentHash(row))throw Error(`Creation hierarchy snapshot alters the exact chronological predecessor unit: ${id}`);
+    }
+    for(const row of rows)if(!expectedGroups.has(row.id)&&registry.has(row.id))throw Error('Creation hierarchy snapshot revives an archived group without a relationship');
+   }
+   expectedGroups.clear();expectedUnitRecords.clear();for(const row of rows)putGroup(row);
+  }
   else for(const row of proof.receipt.retired_units??[])removeGroup(row.id);
   for(const id of proof.removed)expectedLocations.delete(id);
   const newRows=new Map((proof.receipt.new_entities??proof.receipt.added_features??[]).map(row=>{const p=row.properties??row;return [p.id,{id:p.id,name:p.name,parent_id:p.parent_id,kind:row.kind??'location'}];}));
   for(const id of proof.added){const row=newRows.get(id);if(!row||row.kind!=='location'||!row.name||!row.parent_id)throw Error('New location requires its precise sourced name/parent definition in the receipt');expectedLocations.set(id,row);}
- }
- const metadataRelationships=new Map(),metadataCreatedRelationships=new Map();
- for(const proof of metadataProofs){
+
+   descendantInventory(expectedGroups,expectedLocations);continue;
+  }
+
   const proofPairs=validateMetadataRelationships({beforeGroups:expectedGroups,beforeLocations:expectedLocations,beforeUnitRecords:expectedUnitRecords,receipt:proof.receipt,receiptSha256:proof.sha256,registry});
   for(const old of new Set(proofPairs.filter(pair=>pair.old_entity_id!==null).map(pair=>pair.old_entity_id))){
    if(metadataRelationships.has(old))throw Error('Duplicate retired metadata relationship across receipts');
@@ -234,7 +277,7 @@ function validateReviewedIdentities({original,current,migration,geometryProof,me
 }
 
 /** Prepare immutable reference membership versions; never overwrite the catalog. */
-export async function prepareGeographicRelease({data='data',geographyData=data,output='data/geographic-releases',referenceDate='2026-10-01',geometryManifests=null,metadataMigrations=null,reviewedVersion=2,registryManifests=[]}={}){
+export async function prepareGeographicRelease({data='data',geographyData=data,output='data/geographic-releases',referenceDate='2026-10-01',geometryManifests=null,metadataMigrations=null,reviewedVersion=2,registryManifests=[],identityProofSequence=null}={}){
  if(!Number.isInteger(reviewedVersion)||reviewedVersion<2)throw Error('Reviewed release version must be an integer greater than baseline version 1');
  if(!/^\d{4}-\d{2}-\d{2}$/.test(referenceDate)||!Number(referenceDate.slice(0,4))||Number.isNaN(Date.parse(referenceDate))||new Date(referenceDate).toISOString().slice(0,10)!==referenceDate)throw Error('Reference date must be a valid ISO calendar date without year zero');
  const referenceYear=Number(referenceDate.slice(0,4));
@@ -258,7 +301,7 @@ export async function prepareGeographicRelease({data='data',geographyData=data,o
  const metadataProofs=extraMigrations.map(file=>({file,sha256:sha(fs.readFileSync(file)),receipt:read(file)}));
  for(const proof of metadataProofs)if(proof.receipt.historical_claims_transferred!==false||proof.receipt.summary?.geometry_changes!==0)throw Error('Metadata migration may not alter footprints or transfer historical claims');
  for(const [id,now] of current)if(registry.has(id)&&registry.get(id).kind!==now.kind)throw Error(`Immutable geographic identity tier changed: ${id}`);
- const {retired:metadataRelationships,created:metadataCreatedRelationships}=validateReviewedIdentities({original,current,migration,geometryProof,metadataProofs,registry});
+ const {retired:metadataRelationships,created:metadataCreatedRelationships}=validateReviewedIdentities({original,current,migration,geometryProof,metadataProofs,registry,identitySequence:identityProofSequence});
  const decisionFiles=fs.readdirSync(`${data}/geographic-decisions`).filter(f=>f.endsWith('.json')).sort();
  if(decisionFiles.length!==6)throw Error('Six continent review files are required');
  const proofs=Object.fromEntries(decisionFiles.map(f=>[f,sha(fs.readFileSync(`${data}/geographic-decisions/${f}`))]));
@@ -268,9 +311,12 @@ export async function prepareGeographicRelease({data='data',geographyData=data,o
  const metadataPins=Object.fromEntries(metadataProofs.map((p,i)=>[`metadata-${i}`,p.sha256]));
  const releaseInputs=geometryProof.proofs.length||metadataProofs.length?[proofs,migrationHash,referenceDate,proofPins,metadataPins,footprints]:[proofs,migrationHash,referenceDate];
  if(reviewedVersion!==2||registryManifests.length)releaseInputs.push({reviewed_version:reviewedVersion,registered_identity_manifest_sha256:registryPins});
+ const identitySequencePin=identityProofSequence===null?null:contentHash(identityProofSequence);
+ if(identitySequencePin)releaseInputs.push({identity_proof_sequence_sha256:identitySequencePin});
  const releaseKey=sha(json(releaseInputs));
  const source={id:`source:atlas:geographic-review:${releaseKey}`,name:'Worldwide inspected reference-geography decisions',url:null,license:'Original source licenses retained in each cited continent decision',vintage:referenceDate,status:'reference',supported_from:referenceYear,supported_to:referenceYear+1,metadata:{reference_only:true,historical_membership_not_asserted:true,decision_sha256:proofs,migration_sha256:migrationHash}};
  if(registryManifests.length)source.metadata.registered_identity_manifest_sha256=registryPins;
+ if(identitySequencePin)source.metadata.identity_proof_sequence={sha256:identitySequencePin,sequence:identityProofSequence};
  if(geometryProof.proofs.length||metadataProofs.length){source.metadata.geometry_proof_sha256=proofPins;source.metadata.metadata_migration_sha256=metadataPins;}
  const retained={id:`source:atlas:geographic-baseline:${catalog.archive_sha256}`,name:'Retained original atlas reference memberships',url:null,license:'Original source licenses retained in immutable archive',vintage:'Original source vintages retained; modern reference context',status:'reference',supported_from:2026,supported_to:2027,metadata:{reference_only:true,historical_membership_not_asserted:true,archive_sha256:catalog.archive_sha256}};
  const newEntities=[...current.values()].filter(e=>!registry.has(e.id)).map(e=>({id:e.id,kind:e.kind,name:e.name,parent_id:e.parent_id,source_id:source.id,active:1,is_example:0,metadata:{reference_context:true,decision_file:decisions.get(e.id)?.evidence??[],history_transfer:'none'}}));
@@ -324,6 +370,6 @@ export async function prepareGeographicRelease({data='data',geographyData=data,o
  return result;
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- const options={};for(let at=2;at<process.argv.length;at++){const key=process.argv[at],value=process.argv[++at];if(!value)throw Error(`Missing value for ${key}`);if(key==='--data')options.data=value;else if(key==='--geography-data')options.geographyData=value;else if(key==='--output')options.output=value;else if(key==='--reference-date')options.referenceDate=value;else if(key==='--reviewed-version')options.reviewedVersion=Number(value);else if(key==='--registry-manifest')(options.registryManifests??=[]).push(value);else if(key==='--geometry-manifest')(options.geometryManifests??=[]).push(value);else if(key==='--metadata-migration')(options.metadataMigrations??=[]).push(value);else throw Error(`Unknown option ${key}`);}
+ const options={};for(let at=2;at<process.argv.length;at++){const key=process.argv[at],value=process.argv[++at];if(!value)throw Error(`Missing value for ${key}`);if(key==='--data')options.data=value;else if(key==='--geography-data')options.geographyData=value;else if(key==='--output')options.output=value;else if(key==='--reference-date')options.referenceDate=value;else if(key==='--reviewed-version')options.reviewedVersion=Number(value);else if(key==='--registry-manifest')(options.registryManifests??=[]).push(value);else if(key==='--geometry-manifest')(options.geometryManifests??=[]).push(value);else if(key==='--metadata-migration')(options.metadataMigrations??=[]).push(value);else if(key==='--identity-proof-sequence')options.identityProofSequence=read(value);else throw Error(`Unknown option ${key}`);}
  const result=await prepareGeographicRelease(options);console.log(JSON.stringify({new_entities:result.new_entities,total_memberships:result.total_memberships,changes:result.changes,batches:result.batches.length,releases:result.releases.map(r=>({id:r.id,counts:r.expected_counts,footprints_sha256:r.footprints_sha256}))}));
 }
