@@ -1,5 +1,7 @@
 # Concurrent engineering and content research
 
+[THREE_THREAD_START.md](THREE_THREAD_START.md) links the issue-creation, engineering and history-research handovers/prompts. Issue creation changes GitHub Issues only; it does not compete for worker-owned files or production imports.
+
 GitHub Issues is the single source of truth for TODOs, current status and work history. Handover documents and prompts remain entry instructions. Execution files preserve reproducible inputs and receipts, not competing task-status lists. Existing live facts are authoritative independently of a PR's merge state.
 
 | Concern | Engineering | Historical research / Luna |
