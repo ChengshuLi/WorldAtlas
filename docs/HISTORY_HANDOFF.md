@@ -1,5 +1,7 @@
 # Historical-content handover for Luna
 
+This lane researches dated attributes for approved territories. Boundary/hierarchy/source suitability research uses [GEOGRAPHY_HANDOFF.md](GEOGRAPHY_HANDOFF.md) and `type:geography`; it can also run on Luna if the user chooses. Engineering owns executable geographic migrations and publication. Neither research lane bypasses complete published regional approval for location-attribute imports.
+
 Give a Luna thread this document and [its prompt](prompts/LUNA_HISTORY.txt). They explain research contracts, import commands and safe concurrency. **GitHub Issues is the single source of truth for TODOs, status and work history**: [open historical-research issues](https://github.com/ChengshuLi/WorldAtlas/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Ahistory-research). This document contains no live task checklist.
 
 M engineering and N history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), claim one ready 1–3-PR work item before implementation, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.

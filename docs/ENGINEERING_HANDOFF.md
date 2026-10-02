@@ -1,10 +1,12 @@
 # Engineering handover
 
+Geography source/boundary/hierarchy/granularity review uses the separate [geography research lane](GEOGRAPHY_HANDOFF.md), which can run on the user-selected model, including Luna. Engineering consumes accepted evidence and owns executable migrations, shared-core/grid changes, integration and publication. Preserve `data/regional-review/` and `research/geography/` as well as history campaigns; write migration outputs elsewhere.
+
 
 The global macro partition is approved and published under #33/#36. Use [MACRO_FOUNDATION_APPROVAL.md](MACRO_FOUNDATION_APPROVAL.md) and `data/macro-foundation/regional-handoffs.json.gz` for all 81 fixed regional scopes. Regional interior audits can proceed in bounded parallel work items; no regional location-content imports are approved yet.
 Give a future engineering thread this document and [its prompt](prompts/ENGINEERING.txt). They provide architecture, workflow and validation instructions. **GitHub Issues is the single source of truth for TODOs, status and work history**: [open engineering issues](https://github.com/ChengshuLi/WorldAtlas/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Aengineering). This document contains no live task checklist.
 
-M engineering and N history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), claim one ready 1–3-PR work item before implementation, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.
+All geography, engineering and history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), claim one ready 1–3-PR work item before implementation, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.
 
 Repository: https://github.com/ChengshuLi/WorldAtlas, integration branch **main**. Site: https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [acceptance guidance](ENGINEERING_TODO.md), [HANDOFF_STATUS.md](HANDOFF_STATUS.md), [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md) and `data/validation/neon-final-publication.json`. Recheck live capabilities rather than assuming old receipts are current.
 

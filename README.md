@@ -2,6 +2,8 @@
 
 A polygon-based world history atlas with a six-level spatial hierarchy, fourteen map modes, and a timeline from 3000 BC to 2026 AD.
 
+Parallel worker roles start at [THREE_THREAD_START.md](docs/THREE_THREAD_START.md): engineering implements code/migrations/publication, [geography research](docs/GEOGRAPHY_HANDOFF.md) supplies scoped territorial evidence/proposals, and history research supplies dated facts for approved territories. Either research role can run on Luna when selected by the user. All use bounded claimed Issues and serialized squash PRs.
+
 ## Run
 
 Requires Node.js 24 or later. Prepared geography is committed; Python and data downloads are **not** needed to run the app.

@@ -1,7 +1,7 @@
 import {renderWorkerResult} from './worker-result.mjs';
 import fs from 'node:fs';
 import {githubAPI,githubPages,linkedPulls,verifyClaimForPR} from './issue-claim-contract.mjs';
-import {validateIssuePRBody} from './check-handoff-scope.mjs';
+import {validateIssuePRBody,validateLanePaths} from './check-handoff-scope.mjs';
 
 const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8')),input=event.inputs??{},repo=process.env.GITHUB_REPOSITORY;
 if(process.env.GITHUB_REF!=='refs/heads/main'||!/^[-\w.]+\/[-\w.]+$/.test(repo??''))throw Error('Merges run only from trusted main');
@@ -15,7 +15,10 @@ try{
  else{
   if(pr.state!=='open'||pr.draft||pr.base.ref!=='main'||pr.head.repo?.full_name!==repo)throw Error('Only open non-draft repository PRs targeting main may merge');
   const {github_issue}=validateIssuePRBody(pr.body??''),issue=await api(`/repos/${repo}/issues/${github_issue}`),comments=await githubPages(api,`/repos/${repo}/issues/${github_issue}/comments`);
-  verifyClaimForPR({branch:pr.head.ref,issue,comments,prs:await linkedPulls(api,repo,github_issue)});
+  const reservation=verifyClaimForPR({branch:pr.head.ref,issue,comments,prs:await linkedPulls(api,repo,github_issue)});
+  const files=await githubPages(api,`/repos/${repo}/pulls/${number}/files`);
+  if(files.length!==pr.changed_files)throw Error('Incomplete PR file inventory; refuse truncated ownership validation');
+  validateLanePaths(pr.head.ref,files.flatMap(file=>[file.filename,...(file.previous_filename?[file.previous_filename]:[])]),{ownedPaths:reservation.owned_paths});
   const main=await api(`/repos/${repo}/git/ref/heads/main`),comparison=await api(`/repos/${repo}/compare/${main.object.sha}...${pr.head.sha}`);
   if(!['ahead','identical'].includes(comparison.status))throw Error('Update this PR with latest main and rerun checks before merge');
   const checks=await githubPages(api,`/repos/${repo}/commits/${pr.head.sha}/check-runs`);

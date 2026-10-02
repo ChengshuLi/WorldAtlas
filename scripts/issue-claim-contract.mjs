@@ -1,4 +1,4 @@
-import {laneForBranch,validateIssueMetadata,validateIssuePRBody} from './check-handoff-scope.mjs';
+import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths} from './check-handoff-scope.mjs';
 import {assertResearchImportsReady} from './research-import-gate.mjs';
 
 export const claimMarker='worldatlas-claim:v1';
@@ -8,9 +8,14 @@ export function workSpec(body){
  if(matches.length!==1)throw Error('A reviewed worldatlas-work:v1 scope is required');
  const spec=JSON.parse(matches[0][1]);
  if(!Number.isInteger(spec.max_prs)||spec.max_prs<1||spec.max_prs>3||!Array.isArray(spec.depends_on)||spec.depends_on.some(n=>!Number.isSafeInteger(n)||n<1)||!spec.scope||typeof spec.scope!=='string')throw Error('Work items need bounded scope, 1–3 PRs and explicit dependency issue numbers');
- if(!['content','source-only','engineering'].includes(spec.mode))throw Error('Declare engineering, content or source-only mode');
+ if(!['content','source-only','engineering','geography'].includes(spec.mode))throw Error('Declare engineering, geography, content or source-only mode');
+ if(spec.mode==='geography')validateGeographyOwnedPaths(spec.owned_paths);
  if(spec.mode==='content'&&(!spec.geographic_release||!spec.scope_manifest||!spec.territory_match_review))throw Error('Content issues need released geography, an entity/interval/attribute scope manifest and territory-match review');
  return spec;
+}
+function checkLaneMode(branch,spec){
+ const {lane}=laneForBranch(branch);
+ if(lane==='engineering'&&spec.mode!=='engineering'||lane==='geography'&&spec.mode!=='geography'||lane==='research'&&!['source-only','content'].includes(spec.mode))throw Error('Scope mode must agree with the issue lane');
 }
 export function readClaim(comments){
  const canonical=comments.filter(c=>c.user?.login==='github-actions[bot]'&&c.body?.startsWith('**Worker reservation:**'));
@@ -20,6 +25,7 @@ export function readClaim(comments){
  if(!match)throw Error('Malformed canonical claim; preserve it and request repair');
  const claim=JSON.parse(match[1]);
  if(claim.version!==1||typeof claim.active!=='boolean'||!claim.worker_id||!claim.claim_id||!claim.branch||!Number.isFinite(Date.parse(claim.expires_at)))throw Error('Invalid canonical claim');
+ if(claim.mode==='geography')validateGeographyOwnedPaths(claim.owned_paths);
  return {comment_id:comment.id,...claim};
 }
 export function renderClaim(claim){
@@ -41,7 +47,9 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,g
  }
  validateIssueMetadata(branch,issue);
  const spec=workSpec(issue.body);
- if(lane.lane==='engineering'&&spec.mode!=='engineering'||lane.lane==='research'&&spec.mode==='engineering')throw Error('Scope mode must agree with the issue lane');
+ checkLaneMode(branch,spec);
+ if(spec.mode==='geography'&&request.live_work)throw Error('Geography workers stage evidence only and cannot reserve live operations');
+ if(current?.active&&own&&spec.mode==='geography'&&JSON.stringify(current.owned_paths)!==JSON.stringify(spec.owned_paths))throw Error('Geography ownership changed; preserve the work and coordinate release/reclaim before expanding scope');
  if(labels.includes('kind:umbrella')||!labels.includes('kind:work-item')||!labels.includes('status:ready')||labels.includes('status:blocked'))throw Error('Only reviewed ready work items may be claimed; split umbrellas or resolve blockers first');
  if(spec.depends_on.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed')))throw Error('A dependency is still open or missing');
  if(spec.mode==='content'){
@@ -63,16 +71,18 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,g
   if(!current?.active||Date.parse(current.expires_at)>now||!labels.includes('coordination:recovery-approved')||String(request.reason??'').trim().length<10||openPR||current.live_work)throw Error('Recovery requires expired lease, explicit approval/reason and no active PR/live operation');
  }
  const expires_at=new Date(now+24*60*60*1000).toISOString();
- const claim={...(current?.comment_id?{comment_id:current.comment_id}:{}),version:1,active:true,worker_id,claim_id,branch,request_id,issue_number:issue.number,claimed_at:own?current.claimed_at:new Date(now).toISOString(),updated_at:new Date(now).toISOString(),expires_at,live_work:action==='renew'?Boolean(request.live_work):false,mode:spec.mode,max_prs:spec.max_prs};
+ const claim={...(current?.comment_id?{comment_id:current.comment_id}:{}),version:1,active:true,worker_id,claim_id,branch,request_id,issue_number:issue.number,claimed_at:own?current.claimed_at:new Date(now).toISOString(),updated_at:new Date(now).toISOString(),expires_at,live_work:action==='renew'?Boolean(request.live_work):false,mode:spec.mode,max_prs:spec.max_prs,...(spec.mode==='geography'?{owned_paths:[...spec.owned_paths]}:{})};
  return {claim,previous:current};
 }
 export function verifyClaimForPR({branch,issue,comments,prs=[],now=Date.now()}){
  validateIssueMetadata(branch,issue);const spec=workSpec(issue.body),claim=readClaim(comments);
+ checkLaneMode(branch,spec);
  const labels=issue.labels.map(l=>typeof l==='string'?l:l.name);
  if(labels.includes('kind:umbrella')||labels.includes('status:blocked')||!labels.includes('status:ready'))throw Error('Issue is not ready for implementation');
  if(prs.filter(p=>p.merged_at).length>=spec.max_prs)throw Error('Issue PR budget exhausted; create a bounded follow-up');
  if(!claim?.active||claim.branch!==branch||Date.parse(claim.expires_at)<=now)throw Error('PR needs a current unexpired claim for this exact branch');
- return {worker_id:claim.worker_id,claim_id:claim.claim_id,mode:spec.mode};
+ if(spec.mode==='geography'&&(claim.mode!==spec.mode||JSON.stringify(claim.owned_paths)!==JSON.stringify(spec.owned_paths)))throw Error('Geography claim must retain the exact declared ownership scope');
+ return {worker_id:claim.worker_id,claim_id:claim.claim_id,mode:spec.mode,...(spec.mode==='geography'?{owned_paths:[...spec.owned_paths]}:{})};
 }
 export async function githubPages(api,route){
  const all=[];for(let page=1;page<=100;page++){const rows=await api(`${route}${route.includes('?')?'&':'?'}per_page=100&page=${page}`);const list=Array.isArray(rows)?rows:rows?.check_runs;if(!Array.isArray(list))throw Error('Invalid paginated GitHub response');all.push(...list);if(list.length<100)return all;}throw Error('GitHub pagination limit reached; stop rather than assume completeness');

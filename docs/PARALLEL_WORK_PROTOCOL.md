@@ -1,8 +1,8 @@
-# Concurrent engineering and content research
+# Concurrent engineering, geography and content research
 
-M engineering and N history workers follow [WORKER_COORDINATION.md](WORKER_COORDINATION.md). Claim a ready 1–3-PR work item through the serialized workflow; do not claim umbrellas. Use the merge queue and one designated Site publisher. [Worldwide geographic approval](GEOGRAPHY_RESEARCH_READINESS.md) now gates all new location-attribute imports; research workers stage sources only until engineering closes that gate.
+M geography, N engineering and P history workers follow [WORKER_COORDINATION.md](WORKER_COORDINATION.md). Claim a ready 1–3-PR work item through the serialized workflow; do not claim umbrellas. Use the merge queue and one designated Site publisher. [Worldwide geographic approval](GEOGRAPHY_RESEARCH_READINESS.md) now gates all new location-attribute imports; research workers stage sources only until engineering closes that gate.
 
-[THREE_THREAD_START.md](THREE_THREAD_START.md) links the issue-creation, engineering and history-research handovers/prompts. Issue creation changes GitHub Issues only; it does not compete for worker-owned files or production imports.
+[THREE_THREAD_START.md](THREE_THREAD_START.md) links the issue-creation, engineering, geography and history-research handovers/prompts. Issue creation changes GitHub Issues only; it does not compete for worker-owned files or production imports.
 
 GitHub Issues is the single source of truth for TODOs, current status and work history. Handover documents and prompts remain entry instructions. Execution files preserve reproducible inputs and receipts, not competing task-status lists. Existing live facts are authoritative independently of a PR's merge state.
 
@@ -16,9 +16,11 @@ GitHub Issues is the single source of truth for TODOs, current status and work h
 | Git scope | Code/tests, maintainer documentation, geography releases; preserve research and other jobs | Own campaign directory only; no shared document edits |
 | Live actions | Reviewed deployment/geography/owner maintenance | Supported factual imports and licensed media via existing API |
 
+Geography researchers use `docs/GEOGRAPHY_HANDOFF.md` and `docs/prompts/GEOGRAPHY.txt`, label `type:geography`, branch `geography/<job-id>`, and the issue's exact evidence ownership prefixes. They do not execute migrations, update shared geography, perform live imports or publish. The existing table's engineering geographic releases and historical content responsibilities remain distinct.
+
 ## Issue workflow and incremental PRs
 
-Use issue forms and exactly one type label. Future work types may add `type:*` labels/forms and appropriate ownership rules; the current two Git lanes remain engineering and research. Labels describe type; GitHub open/closed state and dated comments describe progress. Keep completed issues. Preserve legacy dates and evidence; never substitute a migrated issue's creation timestamp for an unknown original raised date.
+Use issue forms and exactly one type label. Future work types may add `type:*` labels/forms and appropriate ownership rules; the current Git lanes are engineering, geography and research. Geography is evidence/proposal-only, with safe issue-declared `owned_paths`; history keeps its campaign ownership and complete-region import gate. Labels describe type; GitHub open/closed state and dated comments describe progress. Keep completed issues. Preserve legacy dates and evidence; never substitute a migrated issue's creation timestamp for an unknown original raised date.
 
 Inspect Issues, assignments, comments and active PRs before claiming scope. Post planned scope/validation and dependencies on the issue. Large objectives can have multiple focused PRs or bounded linked child issues. `kind:umbrella` identifies broad objectives; one child/campaign completion does not close its parent. Every PR addresses exactly one issue or part of it and targets **main**:
 
@@ -33,7 +35,7 @@ Maintainers integrate reviewed PRs serially after affected checks. **Use the ser
 
 ## Git ownership and durable evidence
 
-Research only edits its campaign directory. Shared handover updates are engineering work; task progress never requires a shared Markdown edit. Engineering cannot change researcher-owned campaign directories or another job's progress. CI uses trusted base scripts and read-only permissions to check candidate paths, including rename sources, PR issue linkage and issue type. These checks protect Git scope, not historical truth or database authorization.
+Research only edits its campaign directory. Shared handover updates are engineering work; task progress never requires a shared Markdown edit. Geography edits only issue-declared `data/regional-review/<packet-id>/` or `research/geography/<campaign-id>/` directories; local reproductions cannot mutate the baseline or call live APIs. Engineering cannot change these evidence directories, history campaign directories or another job's progress. It consumes source/proposal evidence and writes supported migrations elsewhere. Declared geography ownership is bound into the claim, checked from the actual linked GitHub issue by trusted CI, and rechecked with all PR paths before merge. CI uses trusted base scripts and read-only permissions to check candidate paths, including rename sources, PR issue linkage and issue type. These checks protect Git scope, not historical truth or database authorization.
 
 Keep lawful original sources/restoration manifests, factual inputs, bundles, release pins and import/read-back receipts in the campaign directory. Templates under `coordination/templates/` are execution artifacts. A follow-up PR uses a new directory and links preserved prior campaign evidence; it does not overwrite another campaign. Push early/often, attach PRs as instructed and leave exact branch/commit/issue/PR and next action. Fresh threads cannot access your caches or private credentials. The pre-Issues tracker archive and migration receipt remain immutable snapshots.
 
