@@ -1,7 +1,7 @@
 {
   "version": 1,
   "date_utc": "2026-10-02",
-  "scope": "Installed local structural milestone; not a production or global semantic approval",
+  "scope": "Published structural milestone, Site version 13; not a global semantic approval",
   "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
   "hierarchy_sha256": "bb083958f4ccee3ca1aa4b9d0392433a79c4ebbf023c873168c0900ca4a36d58",
   "checks": [
@@ -60,9 +60,7 @@
       "result": "\u2139 duration_ms 228864.840684"
     }
   ],
-  "pending": [
-    "Private Site deployment and database bootstrap"
-  ],
+  "pending": [],
   "open_items_document": "docs/HANDOFF_STATUS.md",
   "browser_receipt": "docs/validation-receipts/installed-final-browser.json",
   "content_only_receipt": "docs/validation/content-independence.json",
@@ -74,9 +72,17 @@
     "duration_ms": 228864.840684
   },
   "build": {
-    "bytes": 266995797,
+    "bytes": 267012581,
     "all_files_under_25_MiB": true,
     "package_under_256_MiB": true,
-    "content_QA_asset_hashes_identical": true
+    "content_QA_asset_hashes_identical": true,
+    "final_transport_build_receipt": "data/validation/hosted-migration-transport.json"
+  },
+  "publication_receipt": "data/validation/published-milestone-2026-10-02.json",
+  "additional_gates": {
+    "geographic_release_tests": 14,
+    "native_transport_tests": 3,
+    "bootstrap_retry_and_archive_tests": 4,
+    "all_passed": true
   }
 }

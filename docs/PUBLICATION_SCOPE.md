@@ -1,6 +1,6 @@
-# Publication scope: installed foundation, final release pending
+# Publication scope: published structural milestone
 
-This document describes the installed repository data and the scope of the candidate final release. **The matching final build, publication checks and owner-private Site deployment are pending.** Earlier successful tests or deployment receipts do not certify the current installed assets. Worldwide semantic completion is not claimed.
+The matching structural milestone is **published in owner-private Site version 13**, with both geographic releases and completed sparse content provisioned and verified. All 138 publication checks passed with zero skips, followed by native SQL transport, resumable-bootstrap and production read-back checks. Worldwide semantic completion is not claimed.
 
 ## Current installed scope
 
@@ -21,10 +21,10 @@ This document describes the installed repository data and the scope of the candi
 | Global dry-land/island completeness | **Open.** Every current polygon is represented, but missing source islands, marine territory, shoreline-vintage differences and dry-land gaps are not thereby resolved. Zero grid ownership can denote water or a source coverage gap. |
 | Namibia | **Blocked.** All 111 current locations and 24 parent groups are annotated as pending source review. The licensed former-107 candidate is not installed. Its 25 neighboring-source conflicts total 331.61 km², with 339.46 km² of old land still unresolved after supported coastal restoration. Proofs and candidates are retained in Git; no silent neighbor clipping, nearest-location fill or historical transfer is approved. |
 | Macro physical conventions | **Open.** Fifteen named own-boundary conventions need stronger exact physical/island evidence, independently of descendant semantic review. |
+| Dated geographic publication | **Future extension.** Published adjacent-tier memberships are undated reference snapshots. Sourced dated associations do not automatically supply historic footprint revisions; dedicated dated geography/grid publication must remain separate from current reference labels. |
 | Physical mobile performance | **Open.** Actual browser and simulated texture-limit checks are retained, but physical-device memory/frame-time validation is unavailable. Permanent CPU ownership is about 232 MB plus a comparable GPU copy. Viewport emulation is not hardware evidence. |
 | Historical expansion | **Paused at the user's request.** Unsupported names, population, primary culture/religion, habitation and rank stay unknown outside sourced intervals. Modern references do not fill ancient dates. No 200-million-record snapshot requirement is imposed on future content work. |
 | Long-term service scale | **Bounded implementation, future scaling required.** The current service is not an unlimited 200-million-row database. Backend partitioning must be introduced behind the stable API when measured load requires it. Media uploads currently have a 20 MiB limit; larger media requires multipart transport. |
-| Final release | **Pending.** Matching build, exhaustive dataset/static-server/browser/hosted checks, hosting limits and native deployment must produce receipts for the exact committed source. Existing audience remains owner-private. |
 
 ## Evidence and release gates
 
@@ -39,3 +39,7 @@ The durable Git evidence is:
 - `data/geographic-migration-archive.json.gz`: 19,050 earlier location identities, original chains/geometry, nine original state rows and six original historical rows.
 
 A `.cache` path alone is not durable handoff evidence. Source preparation, local installation, test results, hosted provisioning and native deployment are separate states. Follow `docs/STRUCTURAL_VALIDATION.md`, `docs/IMPLEMENTATION_PROGRESS.md` and `docs/HANDOFF_STATUS.md`; publish only after the matching final gates pass, then record the actual source SHA, deployed version, URL and database/bootstrap receipts. Do not retroactively label earlier validation as a successful final release.
+
+## Published structural milestone
+
+The matching owner-private Site version 13 was successfully deployed on 2 October 2026 at https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/. Both geographic release versions and all completed 3,588 dated names/396 religion records are provisioned. The full publication suite passed 138/138 with zero skips; additional native SQL transport and interrupted-bootstrap/archive-alias checks passed. Production read-only verification matched all 3,984 prepared claims, both release manifests and all 28 archive objects (16,199,861 bytes, exact SHA-256 and length). Exact IDs, source commits, hashes and import/archive receipts are in `data/validation` and `docs/HANDOFF_STATUS.md`. The semantic, source-coverage and physical-device limitations above remain open.

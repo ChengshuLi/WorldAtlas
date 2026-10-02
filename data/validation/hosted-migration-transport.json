@@ -269,5 +269,16 @@
     "duration_seconds": 78,
     "actual_current_geography": true,
     "derivative_migrations_used": true
+  },
+  "site_deployment": {
+    "reported_by": "native Site deployment controller and confirmed table inventory",
+    "status": "succeeded",
+    "deployment_id": "appgdep_6abf142287588191a4eb9546fc54903d",
+    "site_version": 13,
+    "source_commit": "282d0a0b0cec459db3341af61fed8236e8eb8ae0",
+    "deployed_at": "2026-10-02T02:18:04Z",
+    "geographic_release_tables_confirmed": true,
+    "geographic_membership_bootstrap": "separate milestone; not asserted complete by this receipt",
+    "staging_command": "node scripts/stage-site-migrations.mjs <separate-Site-checkout>"
   }
 }

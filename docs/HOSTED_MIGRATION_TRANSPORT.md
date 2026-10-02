@@ -29,3 +29,15 @@ The focused tests check compiler determinism, all source/meta byte hashes, all 2
 This local proof does not establish a successful Site deployment. Root deployment must confirm the new schema inventory and run the retained-record checks before claiming publication success. The preferred long-term upstream repair is a migration parser that prepares complete Drizzle statements or uses SQLite's trigger-aware statement-completion rules, retaining original SQL without adaptation.
 
 Verified on 2 October 2026: all three focused transport/native tests and all 14 exhaustive release tests against derivative migrations passed, with no skips. The durable test-only receipt is `data/validation/hosted-migration-transport.json`. No hosted deployment success is asserted by these local results.
+
+## Confirmed Site deployment
+
+After local transport validation, the deployment controller reported a successful native private Site deployment on 2 October 2026 at 02:18:04 UTC: deployment `appgdep_6abf142287588191a4eb9546fc54903d`, Site version 13, source commit `282d0a0b0cec459db3341af61fed8236e8eb8ae0`. The native table inventory confirms all three geographic release tables exist. This confirms the derivative transport crossed the failed migration stage; publication of the geographic reference memberships is a separate bootstrap milestone.
+
+The staging command checks the prepared derivative receipt against raw source and build bytes, preserves the immutable source as `drizzle-source` in the separate Site checkout, and copies derivatives into its deployment `drizzle` folder:
+
+```sh
+node scripts/stage-site-migrations.mjs <separate-Site-checkout>
+```
+
+Run this after the hosted build and before saving/deploying the Site source. It rejects the primary repository or a checkout lacking its existing hosting manifest. Source/meta hashes and copied source/derivative bytes are checked; credentials and existing historical claims are not touched.

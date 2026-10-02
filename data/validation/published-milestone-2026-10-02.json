@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "project_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db",
+  "site_version": 13,
+  "site_source_commit": "282d0a0b0cec459db3341af61fed8236e8eb8ae0",
+  "deployment_id": "appgdep_6abf142287588191a4eb9546fc54903d",
+  "site_version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_4224c6285c00819182e857202771c496",
+  "status": "succeeded",
+  "published_at_utc": "2026-10-02T02:18:04.092601+00:00",
+  "url": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+  "audience": {
+    "mode": "custom",
+    "allowed_users": 1,
+    "allowed_groups": 0,
+    "owner_private_preserved": true
+  },
+  "schema_migrations": "0000\u20130006",
+  "geographic_tables_verified": true,
+  "prepared_imports_status": "completed: 22 bounded batches; 3588 names and 396 scalar records",
+  "geographic_release_bootstrap_status": "completed: both versions published; 856 initial batches, 3 idempotent retry identity batches",
+  "raw_migration_source_unchanged": true,
+  "transport_receipt_sha256": "df6b6200a2b88b11fb5bdc0e022550c4372e5e80aee4f224662abd91af9516d1",
+  "retained_archive_paths": 28,
+  "unique_migration_archive_objects": 27,
+  "production_verification": "data/validation/production-verification-2026-10-02.json"
+}
