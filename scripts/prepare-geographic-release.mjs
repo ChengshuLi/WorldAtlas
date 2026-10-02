@@ -13,6 +13,12 @@ const json=value=>JSON.stringify(value);
 
 const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(k=>[k,canonical(value[k])])):value;
 const contentHash=value=>sha(json(canonical(value)));
+export function metadataRelationshipEvidence(pair){
+ const evidence={receipt_sha256:pair.receipt_sha256,relationship:pair.relationship};
+ if(Buffer.byteLength(json(pair.source_evidence))<=4096)evidence.source_evidence=pair.source_evidence;
+ else evidence.source_evidence_ref={receipt_sha256:pair.receipt_sha256,json_pointer:'/source_evidence',content_sha256:contentHash(pair.source_evidence),records:pair.source_evidence.length};
+ return evidence;
+}
 const uniqueIds=(rows,label)=>{if(!Array.isArray(rows)||rows.some(v=>typeof v!=='string'||!v)||new Set(rows).size!==rows.length)throw Error(`Invalid or duplicate ${label}`);return new Set(rows);};
 const equalIds=(a,b)=>a.size===b.size&&[...a].every(v=>b.has(v));
 const geometryId=f=>{if(!f?.id||f.id!==f.properties?.id||!f.geometry)throw Error('Geometry identity must match properties.id');return f.id;};
@@ -100,7 +106,7 @@ function descendantInventory(groups,locations){
  return members;
 }
 
-/** Opt-in same-tier reference parent merges; source receipts never transfer history. */
+/** Opt-in reference-only same-tier merges/splits, sourced creations and retirements. */
 export function validateMetadataRelationships({beforeGroups,beforeLocations,beforeUnitRecords=null,receipt,receiptSha256,registry=null}){
  if(!Object.hasOwn(receipt,'relationships'))return [];
  if(!Array.isArray(receipt.relationships)||receipt.reference_only!==true||receipt.historical_claims_transferred!==false||receipt.summary?.geometry_changes!==0)throw Error('Metadata relationships require explicit reference-only evidence and zero history/geometry transfer');
@@ -110,12 +116,19 @@ export function validateMetadataRelationships({beforeGroups,beforeLocations,befo
  const archivedBefore=new Map(receipt.before_units.map(row=>[row.id,row]));
  if(!equalIds(new Set(archivedBefore.keys()),new Set(beforeGroups.keys()))||[...archivedBefore].some(([id,row])=>contentHash(identity(row))!==contentHash(identity(beforeGroups.get(id)))))throw Error('Metadata original unit archive differs from actual before identities');
  if(beforeUnitRecords&&(!equalIds(new Set(archivedBefore.keys()),new Set(beforeUnitRecords.keys()))||[...archivedBefore].some(([id,row])=>contentHash(row)!==contentHash(beforeUnitRecords.get(id)))))throw Error('Metadata original unit archive alters the exact retained before records');
- const groups=new Map(beforeGroups),locations=new Map(beforeLocations),deltas=new Map(),retired=new Set();
+ const groups=new Map(beforeGroups),locations=new Map(beforeLocations),deltas=new Map(),retired=new Set(),created=new Set();
  for(const delta of receipt.group_changes??[]){
-  if(!delta?.id||deltas.has(delta.id)||!beforeGroups.has(delta.id)||!delta.before||delta.id!==delta.before.id||contentHash(delta.before)!==contentHash(archivedBefore.get(delta.id)))throw Error('Metadata group delta has an extra identity or altered original archive');
+  if(!delta?.id||deltas.has(delta.id))throw Error('Metadata group delta has an extra identity or altered original archive');
+  if(!beforeGroups.has(delta.id)){
+   if(delta.before!==null||!delta.after||delta.after.id!==delta.id||!tiers.slice(1,-1).includes(delta.after.level??delta.after.kind))throw Error('New metadata group needs an explicit null before record and same-tier split receipt');
+   if(registry?.has(delta.id)&&registry.get(delta.id).kind!==(delta.after.level??delta.after.kind))throw Error('New metadata group changes a registered stable identity tier');
+   created.add(delta.id);groups.set(delta.id,identity(delta.after));
+  }else{
+   if(!delta.before||delta.id!==delta.before.id||contentHash(delta.before)!==contentHash(archivedBefore.get(delta.id)))throw Error('Metadata group delta has an extra identity or altered original archive');
+   if(delta.after){if(delta.id!==delta.after.id||(delta.after.level??delta.after.kind)!==beforeGroups.get(delta.id).kind)throw Error('Metadata group delta changes a stable identity tier');groups.set(delta.id,identity(delta.after));}
+   else{retired.add(delta.id);groups.delete(delta.id);}
+  }
   deltas.set(delta.id,delta);
-  if(delta.after){if(delta.id!==delta.after.id||(delta.after.level??delta.after.kind)!==beforeGroups.get(delta.id).kind)throw Error('Metadata group delta changes a stable identity tier');groups.set(delta.id,identity(delta.after));}
-  else{retired.add(delta.id);groups.delete(delta.id);}
  }
  const archivedRetired=new Map();
  for(const row of receipt.retired_units??[]){if(!row?.id||archivedRetired.has(row.id))throw Error('Duplicate retired metadata unit archive');archivedRetired.set(row.id,row);}
@@ -126,20 +139,45 @@ export function validateMetadataRelationships({beforeGroups,beforeLocations,befo
   if(!old||changedLocations.has(delta.location_id)||!p||!b||p.id!==old.id||b.id!==old.id||contentHash(identity({...b,kind:'location'}))!==contentHash(identity(old)))throw Error('Metadata location delta has an extra identity or mismatched original properties');
   changedLocations.add(old.id);locations.set(old.id,identity({...p,kind:'location'}));
  }
- const beforeMembers=descendantInventory(beforeGroups,beforeLocations),afterMembers=descendantInventory(groups,locations),covered=new Set(),targets=new Map(),pairs=[];
+ const beforeMembers=descendantInventory(beforeGroups,beforeLocations),afterMembers=descendantInventory(groups,locations),covered=new Set(),targets=new Map(),splits=new Map(),splitTargets=new Set(),createTargets=new Set(),oldTypes=new Map(),pairs=[];
  for(const relationship of receipt.relationships){
-  const old=relationship?.old_entity_id,target=relationship?.new_entity_id,oldGroup=beforeGroups.get(old),survivor=groups.get(target);
-  if(relationship?.change_type!=='merge'||relationship.reference_only!==true||relationship.history_transfer!=='none')throw Error('Metadata relationship must be an explicit reference-only merge without history transfer');
-  if(!retired.has(old)||covered.has(old)||old===target||!oldGroup||!beforeGroups.has(target)||!survivor)throw Error('Metadata merge has extra, duplicate, unretired or missing endpoints');
-  if(oldGroup.kind==='continent'||oldGroup.kind!==survivor.kind||oldGroup.parent_id!==beforeGroups.get(target).parent_id||survivor.parent_id!==beforeGroups.get(target).parent_id)throw Error('Metadata merge requires existing same-tier groups with the same unchanged adjacent-tier parent');
-  if(registry&&(!registry.get(old)||!registry.get(target)||registry.get(old).kind!==oldGroup.kind||registry.get(target).kind!==survivor.kind))throw Error('Metadata merge endpoints lack registered stable same-tier identities');
-  covered.add(old);if(!targets.has(target))targets.set(target,new Set(beforeMembers.get(target)));
-  const union=targets.get(target);for(const id of beforeMembers.get(old)){if(union.has(id))throw Error('Metadata merge original member footprints overlap');union.add(id);}
-  pairs.push({old_entity_id:old,new_entity_id:target,change_type:'merge',receipt_sha256:receiptSha256,relationship,source_evidence:receipt.source_evidence});
+  const old=relationship?.old_entity_id,target=relationship?.new_entity_id,oldGroup=beforeGroups.get(old),survivor=groups.get(target),type=relationship?.change_type;
+  if(!['merge','split','retire','create'].includes(type)||relationship.reference_only!==true||relationship.history_transfer!=='none')throw Error('Metadata relationship must be an explicit reference-only merge/split/retire/create without history transfer');
+  if(type==='create'){
+   if(old!==null||!created.has(target)||!survivor||createTargets.has(target)||splitTargets.has(target))throw Error('Metadata creation requires a unique new-group endpoint and explicit null old identity');
+   const derived=relationship.derived_from_id;
+   if(derived!==undefined&&(!beforeGroups.has(derived)||beforeGroups.get(derived).kind!==survivor.kind||registry&&(!registry.has(derived)||registry.get(derived).kind!==survivor.kind)))throw Error('Metadata creation derived-from identity must be an existing registered same-tier group');
+   createTargets.add(target);pairs.push({old_entity_id:null,new_entity_id:target,change_type:type,receipt_sha256:receiptSha256,relationship,source_evidence:receipt.source_evidence});continue;
+  }
+  if(!retired.has(old)||!oldGroup||old===target||oldTypes.has(old)&&(oldTypes.get(old)!==type||type!=='split'))throw Error('Metadata relationship has extra, duplicate, unretired or missing endpoints');
+  if(registry&&(!registry.get(old)||registry.get(old).kind!==oldGroup.kind))throw Error('Metadata relationship endpoints lack registered stable same-tier identities');
+  oldTypes.set(old,type);covered.add(old);
+  if(type==='retire'){
+   if(target!==null||!['province','area'].includes(oldGroup.kind))throw Error('Explicit metadata retirement requires a null successor and a local province/area identity');
+   for(const id of beforeMembers.get(old))if(!locations.has(id))throw Error('Metadata retirement cannot drop descendant locations');
+  }else if(type==='merge'){
+   if(!beforeGroups.has(target)||!survivor)throw Error('Metadata merge has extra, duplicate, unretired or missing endpoints');
+   if(oldGroup.kind==='continent'||oldGroup.kind!==survivor.kind||oldGroup.parent_id!==beforeGroups.get(target).parent_id||survivor.parent_id!==beforeGroups.get(target).parent_id)throw Error('Metadata merge requires existing same-tier groups with the same unchanged adjacent-tier parent');
+   if(registry&&(!registry.get(target)||registry.get(target).kind!==survivor.kind))throw Error('Metadata merge endpoints lack registered stable same-tier identities');
+   if(!targets.has(target))targets.set(target,new Set(beforeMembers.get(target)));
+   const union=targets.get(target);for(const id of beforeMembers.get(old)){if(union.has(id))throw Error('Metadata merge original member footprints overlap');union.add(id);}
+  }else{
+   if(!created.has(target)||!survivor||splitTargets.has(target)||createTargets.has(target))throw Error('Metadata split has extra, duplicate, or unreceipted successor endpoints');
+   if(oldGroup.kind==='continent'||oldGroup.kind!==survivor.kind||survivor.parent_id!==oldGroup.parent_id||!groups.has(oldGroup.parent_id)||groups.get(oldGroup.parent_id).parent_id!==beforeGroups.get(oldGroup.parent_id)?.parent_id)throw Error('Metadata split requires same-tier successors under the same unchanged adjacent-tier parent');
+   splitTargets.add(target);if(!splits.has(old))splits.set(old,[]);splits.get(old).push(target);
+  }
+  pairs.push({old_entity_id:old,new_entity_id:target,change_type:type,receipt_sha256:receiptSha256,relationship,source_evidence:receipt.source_evidence});
  }
- if(!equalIds(covered,retired))throw Error('Metadata merge crosswalk must account for every retired parent exactly once');
+ if(!equalIds(covered,retired))throw Error('Metadata crosswalk must account for every retired parent exactly once (or every explicit split successor)');
+ if(!equalIds(new Set([...splitTargets,...createTargets]),created))throw Error('Every new metadata group requires exactly one explicit split successor or create relationship');
  for(const [target,union] of targets)if(!equalIds(union,afterMembers.get(target)))throw Error('Metadata merge must conserve the exact union of original descendant location footprints');
- for(const pair of pairs){const parent=beforeGroups.get(pair.old_entity_id).parent_id;if(!equalIds(beforeMembers.get(parent),afterMembers.get(parent)))throw Error('Metadata merge changes its containing parent footprint');}
+ for(const [old,successors] of splits){
+  if(successors.length<2)throw Error('Metadata split requires at least two unique successors');
+  const union=new Set();for(const target of successors)for(const id of afterMembers.get(target)){if(union.has(id))throw Error('Metadata split successor member footprints overlap');union.add(id);}
+  if(!equalIds(union,beforeMembers.get(old)))throw Error('Metadata split must conserve the exact disjoint union of original descendant location footprints');
+ }
+ for(const pair of pairs.filter(pair=>['merge','split'].includes(pair.change_type))){const parent=beforeGroups.get(pair.old_entity_id).parent_id;if(!equalIds(beforeMembers.get(parent),afterMembers.get(parent)))throw Error('Metadata merge/split changes its containing parent footprint');}
+
  return pairs;
 }
 
@@ -159,11 +197,16 @@ function validateReviewedIdentities({original,current,migration,geometryProof,me
   const newRows=new Map((proof.receipt.new_entities??proof.receipt.added_features??[]).map(row=>{const p=row.properties??row;return [p.id,{id:p.id,name:p.name,parent_id:p.parent_id,kind:row.kind??'location'}];}));
   for(const id of proof.added){const row=newRows.get(id);if(!row||row.kind!=='location'||!row.name||!row.parent_id)throw Error('New location requires its precise sourced name/parent definition in the receipt');expectedLocations.set(id,row);}
  }
- const metadataRelationships=new Map();
+ const metadataRelationships=new Map(),metadataCreatedRelationships=new Map();
  for(const proof of metadataProofs){
-  for(const pair of validateMetadataRelationships({beforeGroups:expectedGroups,beforeLocations:expectedLocations,beforeUnitRecords:expectedUnitRecords,receipt:proof.receipt,receiptSha256:proof.sha256,registry})){
-   if(metadataRelationships.has(pair.old_entity_id))throw Error('Duplicate retired metadata relationship across receipts');
-   metadataRelationships.set(pair.old_entity_id,pair);
+  const proofPairs=validateMetadataRelationships({beforeGroups:expectedGroups,beforeLocations:expectedLocations,beforeUnitRecords:expectedUnitRecords,receipt:proof.receipt,receiptSha256:proof.sha256,registry});
+  for(const old of new Set(proofPairs.filter(pair=>pair.old_entity_id!==null).map(pair=>pair.old_entity_id))){
+   if(metadataRelationships.has(old))throw Error('Duplicate retired metadata relationship across receipts');
+   metadataRelationships.set(old,proofPairs.filter(pair=>pair.old_entity_id===old));
+  }
+  for(const pair of proofPairs.filter(pair=>pair.old_entity_id===null)){
+   if(metadataCreatedRelationships.has(pair.new_entity_id))throw Error('Duplicate created metadata relationship across receipts');
+   metadataCreatedRelationships.set(pair.new_entity_id,pair);
   }
   for(const row of proof.receipt.group_changes??[]){if(row.after)putGroup(row.after);else removeGroup(row.id);}
   for(const row of proof.receipt.changed_location_properties??[]){const p=row.after_properties;if(!expectedLocations.has(row.location_id))throw Error('Metadata change targets an unmatched/retired location identity');expectedLocations.set(row.location_id,{id:row.location_id,name:p.name,parent_id:p.parent_id,kind:'location'});}
@@ -171,8 +214,9 @@ function validateReviewedIdentities({original,current,migration,geometryProof,me
  const expected=new Map([...expectedGroups,...expectedLocations]);
  if(!equalIds(new Set(expected.keys()),new Set(current.keys())))throw Error('Unreceipted geographic identity creation/retirement');
  for(const [id,now] of current){const wanted=expected.get(id);if(now.kind!==wanted.kind||now.name!==wanted.name||now.parent_id!==wanted.parent_id)throw Error(`Unreceipted geographic name/parent mutation: ${id}`);}
- for(const pair of metadataRelationships.values())if(current.has(pair.old_entity_id)||current.get(pair.new_entity_id)?.kind!==registry.get(pair.old_entity_id)?.kind)throw Error('Metadata merge is inconsistent with the final active geography');
- return metadataRelationships;
+ for(const pair of [...metadataRelationships.values()].flat())if(current.has(pair.old_entity_id)||pair.new_entity_id!==null&&current.get(pair.new_entity_id)?.kind!==registry.get(pair.old_entity_id)?.kind)throw Error('Metadata relationship is inconsistent with the final active geography');
+ for(const id of metadataCreatedRelationships.keys())if(!current.has(id))throw Error('Created metadata identity is missing from the final active geography');
+ return {retired:metadataRelationships,created:metadataCreatedRelationships};
 }
 
 /** Prepare immutable reference membership versions; never overwrite the catalog. */
@@ -200,7 +244,7 @@ export async function prepareGeographicRelease({data='data',geographyData=data,o
  const metadataProofs=extraMigrations.map(file=>({file,sha256:sha(fs.readFileSync(file)),receipt:read(file)}));
  for(const proof of metadataProofs)if(proof.receipt.historical_claims_transferred!==false||proof.receipt.summary?.geometry_changes!==0)throw Error('Metadata migration may not alter footprints or transfer historical claims');
  for(const [id,now] of current)if(registry.has(id)&&registry.get(id).kind!==now.kind)throw Error(`Immutable geographic identity tier changed: ${id}`);
- const metadataRelationships=validateReviewedIdentities({original,current,migration,geometryProof,metadataProofs,registry});
+ const {retired:metadataRelationships,created:metadataCreatedRelationships}=validateReviewedIdentities({original,current,migration,geometryProof,metadataProofs,registry});
  const decisionFiles=fs.readdirSync(`${data}/geographic-decisions`).filter(f=>f.endsWith('.json')).sort();
  if(decisionFiles.length!==6)throw Error('Six continent review files are required');
  const proofs=Object.fromEntries(decisionFiles.map(f=>[f,sha(fs.readFileSync(`${data}/geographic-decisions/${f}`))]));
@@ -234,8 +278,8 @@ export async function prepareGeographicRelease({data='data',geographyData=data,o
  for(const e of memberships){
   const old=registry.get(e.entity_id),decision=decisions.get(e.entity_id);
   const add=(type,target=e.entity_id)=>changes.push({id:`${releaseKey}:${type}:${e.entity_id}`,old_entity_id:old?e.entity_id:null,new_entity_id:target,change_type:type,source_id:source.id,evidence:{...commonEvidence,migration_sha256:migrationHash,decision:decision?{action:decision.action,rationale:decision.rationale,evidence:decision.evidence}:null,before:old?{name:old.name,parent_id:old.parent_id,active:old.active}:null,after:{name:e.reference_name,parent_id:e.parent_id,active:e.active}}});
-  if(!old)add('create');
-  else if((old.active||metadataRelationships.has(e.entity_id))&&e.active===0){const locationPairs=geometryProof.pairs.filter(p=>p.old_entity_id===e.entity_id&&p.old_entity_id!==p.new_entity_id),metadataPair=metadataRelationships.get(e.entity_id);if(!locationPairs.length){add(metadataPair?'merge':decision?.action==='merge'?'merge':'retire',metadataPair?.new_entity_id??(decision?.action==='merge'?decision.target_id:null));if(metadataPair)changes.at(-1).evidence.metadata_relationship={receipt_sha256:metadataPair.receipt_sha256,relationship:metadataPair.relationship,source_evidence:metadataPair.source_evidence};}}
+  if(!old){add('create');const pair=metadataCreatedRelationships.get(e.entity_id);if(pair)changes.at(-1).evidence.metadata_relationship=metadataRelationshipEvidence(pair);}
+  else if((old.active||metadataRelationships.has(e.entity_id))&&e.active===0){const locationPairs=geometryProof.pairs.filter(p=>p.old_entity_id===e.entity_id&&p.old_entity_id!==p.new_entity_id),metadataPairs=metadataRelationships.get(e.entity_id);if(!locationPairs.length){if(metadataPairs){for(const pair of metadataPairs){add(pair.change_type,pair.new_entity_id);if(pair.change_type==='split')changes.at(-1).id+=`:${pair.new_entity_id}`;changes.at(-1).evidence.metadata_relationship=metadataRelationshipEvidence(pair);}}else add(decision?.action==='merge'?'merge':'retire',decision?.action==='merge'?decision.target_id:null);}}
   else if(e.active){if(old.name!==e.reference_name)add('rename');if(old.parent_id!==e.parent_id)add('reparent');}
  }
  for(const [at,pair] of geometryProof.pairs.entries())if(pair.old_entity_id!==pair.new_entity_id||current.has(pair.new_entity_id))changes.push({id:`${releaseKey}:geometry:${at}:${pair.old_entity_id}`,old_entity_id:pair.old_entity_id,new_entity_id:pair.new_entity_id,change_type:pair.change_type,source_id:source.id,evidence:{...commonEvidence,geometry_migration:pair,migration_sha256:migrationHash}});
