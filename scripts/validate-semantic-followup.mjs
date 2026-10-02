@@ -267,7 +267,7 @@ export async function validateSemanticFollowup(root, { expectedCounts = { locati
   const retiredArchiveIds = new Set(repair.archives.map(r => r.id ?? r.properties?.id));
   for (const id of repair.removed_ids) requireThat(retiredArchiveIds.has(id), `Missing original location archive in repair receipt: ${id}`);
   const result = validateFollowupSnapshot({ hierarchy, locations, reports, worldReview, policies, frozen, migrations, closure, groupRecordHashes, expectedCounts });
-  const admin = await read('data/administrative-sources.json'); let declaredSourceHashes = 0, retainedSourceBytesVerified = 0, diagnosticContextsVerified = 0, evidenceHashDeclarations = 0;
+  const admin = await read('data/administrative-sources.json'), currentLocationsById = new Map(locations.map(row => [row.id, row])); let declaredSourceHashes = 0, retainedSourceBytesVerified = 0, diagnosticContextsVerified = 0, evidenceHashDeclarations = 0;
   function validateEvidenceHashes(value, context) {
     if (Array.isArray(value)) { for (const item of value) validateEvidenceHashes(item, context); return; }
     if (!value || typeof value !== 'object') return;
@@ -284,7 +284,7 @@ export async function validateSemanticFollowup(root, { expectedCounts = { locati
     for (const [id, diagnostic] of Object.entries(report.source_evidence?.original_parent_geometry_diagnostics ?? {})) {
       requireThat(diagnostic.current_group_footprint_sha256 === closure.groups.get(id)?.footprint_sha256, `Stale original-parent diagnostic context: ${id}`); diagnosticContextsVerified++;
       for (const candidate of diagnostic.original_parent_candidates ?? []) for (const member of candidate.member_matches ?? []) {
-        const location = locations.find(row => row.id === member.id);
+        const location = currentLocationsById.get(member.id);
         requireThat(location?.chain.includes(id), `Original-parent diagnostic references a nonmember: ${member.id}`);
       }
     }

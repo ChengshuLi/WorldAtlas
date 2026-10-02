@@ -308,6 +308,8 @@
   "source_verification": {
     "current_repository_files_hashed": 74,
     "source_geometry_hash_declarations_checked": 74,
+    "evidence_hash_declarations_format_checked": 45371,
+    "diagnostic_current_footprint_contexts_verified": 280,
     "retained_source_geometry_bytes_verified": 1,
     "external_response_bytes_refetched": 0,
     "limitation": "External response/source hashes whose original bytes are not committed remain declarations. This validation neither refetches public sources nor claims unavailable original bytes were verified."
@@ -322,6 +324,6 @@
     "data/macro-boundary-migration.json.gz": "cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5",
     "data/geographic-repair-evidence/migration-receipt.json.gz": "c53b644a641f85d6bc225997e8f6836afd0a4ae82d46e0a86d5147a3d9255c3e"
   },
-  "validator_sha256": "ef3da1ad18ea491789055d38e44391756bbf3c8c9cad25f70ed0c1f947789426",
+  "validator_sha256": "e5b2aad46ea545165d7604a4e3436c221fca22c7601d676de1c37ad5baa17de3",
   "full_ledgers_are_deployment_assets": false
 }

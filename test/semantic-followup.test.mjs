@@ -48,7 +48,8 @@ async function fixtureRepository(t) {
   await put('data/hierarchy.json', data.hierarchy); await put('data/world-index.json', { parts: ['geography/part-0.json'] });
   await put('data/world-review.json', data.worldReview); await put('data/location-policy.json', { countries: data.policies }); await put('data/administrative-sources.json', {});
   const input_sha256 = Object.fromEntries(await Promise.all(['data/hierarchy.json', 'data/world-index.json', 'data/geography/part-0.json'].map(async path => [path, hash(await readFile(join(root, path)))])));
-  await put('data/global-semantic-closure.json.gz', { input_sha256: Object.fromEntries(Object.entries(input_sha256).map(([path, digest]) => [path.slice(5), digest])), locations: data.locations.map(r => ({ id: r.id, status: 'open', footprint_sha256: r.footprint_sha256 })), groups: data.hierarchy.map(r => ({ id: r.id, status: 'open' })), policy_crosswalk: data.worldReview.policy_crosswalk });
+  const groupHashes = new Map(data.reports.flatMap(r => r.groups.map(g => [g.id, g.footprint_sha256])));
+  await put('data/global-semantic-closure.json.gz', { input_sha256: Object.fromEntries(Object.entries(input_sha256).map(([path, digest]) => [path.slice(5), digest])), locations: data.locations.map(r => ({ id: r.id, status: 'open', footprint_sha256: r.footprint_sha256 })), groups: data.hierarchy.map(r => ({ id: r.id, status: 'open', footprint_sha256: groupHashes.get(r.id) })), policy_crosswalk: data.worldReview.policy_crosswalk });
   for (const report of data.reports) { await put(LEDGERS[report.continent], { ...report, input_sha256 }); await put(`data/geographic-decisions/${report.continent.toLowerCase().replaceAll(' ', '-')}.json`, data.frozen[report.continent]); }
   await put('data/geographic-decision-migration.json.gz', { retired_units: [], group_changes: [] });
   await put('data/macro-boundary-migration.json.gz', { retired_units: [], group_changes: [], location_chain_crosswalk: [] });
@@ -117,4 +118,20 @@ test('a renamed complete ledger cannot leak into website deployment assets', asy
   await mkdir(join(root, 'dist/client'), { recursive: true });
   await writeFile(join(root, 'dist/client/renamed-evidence.bin'), await readFile(join(root, LEDGERS.Africa)));
   await assert.rejects(validateSemanticFollowup(root, { expectedCounts }), /Full semantic follow-up ledger is a deployment asset/);
+});
+
+test('source-parent measurements require current footprint context and actual members', async t => {
+  const { root, expectedCounts } = await fixtureRepository(t), path = join(root, LEDGERS.Africa);
+  const { gunzipSync } = await import('node:zlib');
+  const report = JSON.parse(gunzipSync(await readFile(path)));
+  report.source_evidence = { original_parent_geometry_diagnostics: { 'Africa:continent': { current_group_footprint_sha256: report.groups[0].footprint_sha256, original_parent_candidates: [{ member_matches: [{ id: 'location:0' }] }] } } };
+  await writeFile(path, gzipSync(JSON.stringify(report), { mtime: 0 }));
+  assert.equal((await validateSemanticFollowup(root, { expectedCounts })).source_verification.diagnostic_current_footprint_contexts_verified, 1);
+  report.source_evidence.original_parent_geometry_diagnostics['Africa:continent'].current_group_footprint_sha256 = '0'.repeat(64);
+  await writeFile(path, gzipSync(JSON.stringify(report), { mtime: 0 }));
+  await assert.rejects(validateSemanticFollowup(root, { expectedCounts }), /Stale original-parent diagnostic context/);
+  report.source_evidence.original_parent_geometry_diagnostics['Africa:continent'].current_group_footprint_sha256 = report.groups[0].footprint_sha256;
+  report.source_evidence.original_parent_geometry_diagnostics['Africa:continent'].original_parent_candidates[0].member_matches[0].id = 'location:1';
+  await writeFile(path, gzipSync(JSON.stringify(report), { mtime: 0 }));
+  await assert.rejects(validateSemanticFollowup(root, { expectedCounts }), /references a nonmember/);
 });

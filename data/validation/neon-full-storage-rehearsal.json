@@ -1,0 +1,491 @@
+{
+  "version": 1,
+  "mode": "rehearsal",
+  "status": "verified",
+  "project_id": "weathered-lab-37571695",
+  "production_branch_id": "br-summer-butterfly-ar8qikk5",
+  "production_deleted": false,
+  "credentials_logged": false,
+  "cleanup_status": "deleted",
+  "started_at_utc": "2026-10-02T06:16:41.678Z",
+  "github": {
+    "repository": "ChengshuLi/WorldAtlas",
+    "workflow_path": ".github/workflows/neon-storage-migration.yml",
+    "head_sha": "c5edc1790bcc4043b49d4052248ea896856a22c4",
+    "run_id": "36972719017",
+    "run_attempt": "1"
+  },
+  "checkpoint_sha256": "9e9643de1a119f06645cf984151f910007e248378c55eb7cce09126485a84d34",
+  "source_manifest_sha256": "b59946f515e385d8c7c8de84a529e851fc802262f07e39cb080f5f493f3572e2",
+  "source_snapshot_fingerprint": "c315f806f9b7a60cbb7196ce5f8be38cd16c385b00f883f5275ec8f5bc9202ef",
+  "source_revision": 1321,
+  "schema_sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+  "runtime_role_sql_sha256": "78198903a3a9f4174cfe198bcdb6560b54c057e869dd5bf576ea84c92713e61a",
+  "database_budget_bytes": 536870912,
+  "source_collections": {
+    "sources": {
+      "count": 381,
+      "ordered_rows_sha256": "301a833f641282edd3ac7cc7608a62aa29c571a35b66161259b723d254ac22ca"
+    },
+    "entity_types": {
+      "count": 16,
+      "ordered_rows_sha256": "d853335669547515b039192d32a0b64545c1b2949b73bccdcfb8a6c5fb6bf1cc"
+    },
+    "entities": {
+      "count": 86797,
+      "ordered_rows_sha256": "f9e0380665790026c6fa97cbd63d63f35768ca0a68a7641b2ea866b27e566e71"
+    },
+    "categories": {
+      "count": 1457,
+      "ordered_rows_sha256": "eee86c200c260915a38d9193890b66e85fd1ef6a52b2227e7afc42938ffca798"
+    },
+    "records": {
+      "count": 396,
+      "ordered_rows_sha256": "aebf930586e329ce0eecfd0eac5dd6f6d5334fec7c7d9455ac3396b1a6f2c4f8"
+    },
+    "names": {
+      "count": 3588,
+      "ordered_rows_sha256": "8f9523ee61e974d0afd93f81707304ce477b343ec4e69d88d0ba66ce97c28b0b"
+    },
+    "relationships": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "media": {
+      "count": 28,
+      "ordered_rows_sha256": "f6002c3fa6f6964cb79b791effadbfdc95bbe42c85166c27c427477103daa99d"
+    },
+    "media_links": {
+      "count": 6,
+      "ordered_rows_sha256": "84c2d569224cb19cccbf2cf226d431ef2f4844bac95e6cf271b1d617b5935de1"
+    },
+    "retirements": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "ingestions": {
+      "count": 1321,
+      "ordered_rows_sha256": "06e127eaaad2b171e867ab3179811816e6df374d3abf40c159c4d094fb53e128"
+    },
+    "geographic_releases": {
+      "count": 2,
+      "ordered_rows_sha256": "40b680b4febf78d4e9e6951410b4dea909bb4793b96fced2f6c23bff05822f02"
+    },
+    "geographic_memberships": {
+      "count": 169491,
+      "ordered_rows_sha256": "7f54cfe8aa56791fce13e6054bdb2c7c31b9ecc608e7a05a188d378b1d6dfd3a"
+    },
+    "geographic_changes": {
+      "count": 573,
+      "ordered_rows_sha256": "c9fcea8ba1ab1919c90050e23b258c05c08ecc1ec91e1d6d75de9e1a5905d975"
+    }
+  },
+  "source_backup_preserved": true,
+  "validation_branch_name": "atlas-storage-rehearsal-670f4005-dcf2-4424-8b96-97be710091a4",
+  "validation_branch_id": "br-spring-mode-arq2p349",
+  "target_branch_id": "br-spring-mode-arq2p349",
+  "target_endpoint_host": "ep-red-king-arkje57t.c-4.us-west-2.aws.neon.tech",
+  "schema_installed": true,
+  "restore": {
+    "version": 1,
+    "source_manifest_sha256": "b59946f515e385d8c7c8de84a529e851fc802262f07e39cb080f5f493f3572e2",
+    "source_snapshot_fingerprint": "c315f806f9b7a60cbb7196ce5f8be38cd16c385b00f883f5275ec8f5bc9202ef",
+    "source_backend": "d1",
+    "source_revision": 1321,
+    "target_schema_sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+    "collections": {
+      "sources": {
+        "count": 381,
+        "ordered_rows_sha256": "301a833f641282edd3ac7cc7608a62aa29c571a35b66161259b723d254ac22ca"
+      },
+      "entity_types": {
+        "count": 16,
+        "ordered_rows_sha256": "d853335669547515b039192d32a0b64545c1b2949b73bccdcfb8a6c5fb6bf1cc"
+      },
+      "entities": {
+        "count": 86797,
+        "ordered_rows_sha256": "f9e0380665790026c6fa97cbd63d63f35768ca0a68a7641b2ea866b27e566e71"
+      },
+      "categories": {
+        "count": 1457,
+        "ordered_rows_sha256": "eee86c200c260915a38d9193890b66e85fd1ef6a52b2227e7afc42938ffca798"
+      },
+      "records": {
+        "count": 396,
+        "ordered_rows_sha256": "aebf930586e329ce0eecfd0eac5dd6f6d5334fec7c7d9455ac3396b1a6f2c4f8"
+      },
+      "names": {
+        "count": 3588,
+        "ordered_rows_sha256": "8f9523ee61e974d0afd93f81707304ce477b343ec4e69d88d0ba66ce97c28b0b"
+      },
+      "relationships": {
+        "count": 0,
+        "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "media": {
+        "count": 28,
+        "ordered_rows_sha256": "f6002c3fa6f6964cb79b791effadbfdc95bbe42c85166c27c427477103daa99d"
+      },
+      "media_links": {
+        "count": 6,
+        "ordered_rows_sha256": "84c2d569224cb19cccbf2cf226d431ef2f4844bac95e6cf271b1d617b5935de1"
+      },
+      "retirements": {
+        "count": 0,
+        "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "ingestions": {
+        "count": 1321,
+        "ordered_rows_sha256": "06e127eaaad2b171e867ab3179811816e6df374d3abf40c159c4d094fb53e128"
+      },
+      "geographic_releases": {
+        "count": 2,
+        "ordered_rows_sha256": "40b680b4febf78d4e9e6951410b4dea909bb4793b96fced2f6c23bff05822f02"
+      },
+      "geographic_memberships": {
+        "count": 169491,
+        "ordered_rows_sha256": "7f54cfe8aa56791fce13e6054bdb2c7c31b9ecc608e7a05a188d378b1d6dfd3a"
+      },
+      "geographic_changes": {
+        "count": 573,
+        "ordered_rows_sha256": "c9fcea8ba1ab1919c90050e23b258c05c08ecc1ec91e1d6d75de9e1a5905d975"
+      }
+    },
+    "json_text_preserved": true,
+    "archived_examples_withdrawals_preserved": true,
+    "media_bytes_moved": false,
+    "status": "restored",
+    "atomic": true,
+    "trigger_inventory_sha256": "9e87f3db6d965273e2ca6e47e8ffa29f75db183168855d714c92c4179ab39a96",
+    "sequence": {
+      "next_rowid": 1322,
+      "is_called": false,
+      "reset_method": "transactional ALTER SEQUENCE RESTART"
+    }
+  },
+  "raw_snapshot_verified": true,
+  "runtime_role": {
+    "version": 1,
+    "role": "worldatlas_app",
+    "status": "verified",
+    "read_only": true,
+    "login": true,
+    "inheritance": false,
+    "memberships": 0,
+    "owner_administration_membership": 1,
+    "owner_administration_policy": "Only table owner ADMIN OPTION into app; INHERIT=false, SET=false. App belongs to no roles.",
+    "ownership": 0,
+    "public_schema_create": false,
+    "permissions": [
+      {
+        "table": "atlas_sources",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_entity_types",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_entities",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_categories",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_attribute_records",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_names",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_relationships",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_media",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_media_links",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_evidence_retirements",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_ingestions",
+        "select": true,
+        "insert": "id,fingerprint,counts,created_at",
+        "update": "none"
+      },
+      {
+        "table": "atlas_geographic_releases",
+        "select": true,
+        "insert": "all columns",
+        "update": "status,published_at"
+      },
+      {
+        "table": "atlas_geographic_memberships",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      },
+      {
+        "table": "atlas_geographic_changes",
+        "select": true,
+        "insert": "all columns",
+        "update": "none"
+      }
+    ],
+    "sequence": "USAGE only; no SELECT, UPDATE, explicit rowid or restart",
+    "guards_enabled": true,
+    "runtime_role_sql_sha256": "78198903a3a9f4174cfe198bcdb6560b54c057e869dd5bf576ea84c92713e61a",
+    "schema_sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618"
+  },
+  "runtime": {
+    "all_fourteen_counts": {
+      "sources": 381,
+      "entity_types": 16,
+      "entities": 86797,
+      "categories": 1457,
+      "records": 396,
+      "names": 3588,
+      "relationships": 0,
+      "media": 28,
+      "media_links": 6,
+      "retirements": 0,
+      "ingestions": 1321,
+      "geographic_releases": 2,
+      "geographic_memberships": 169491,
+      "geographic_changes": 573
+    },
+    "storage_marker_fingerprint": "c315f806f9b7a60cbb7196ce5f8be38cd16c385b00f883f5275ec8f5bc9202ef",
+    "database": {
+      "bytes": 318275584,
+      "measurement": "postgres-pg-database-size",
+      "configured_budget_bytes": 536870912,
+      "budget_is_provider_quota": false,
+      "quota_verified": false,
+      "warning_fraction": 0.8,
+      "budget_fraction": 0.59283447265625,
+      "budget_status": "below-budget"
+    },
+    "registered_media": {
+      "registered_objects": 28,
+      "registered_bytes": "16199861",
+      "measurement": "database metadata; object existence and checksums require separate read-back",
+      "upload_limit_bytes": 20971520
+    },
+    "maps": [
+      {
+        "year": -3000,
+        "page": 1,
+        "entities": 1000,
+        "records": 0,
+        "names": 0,
+        "retirements": 0,
+        "bytes": 54352,
+        "elapsed_ms": 1005,
+        "entity_ids_sha256": "87a007453c549f3649c6c481e3f2ec7e297c2b9d20e270b430fc29e7a3267cce",
+        "revision": 1321
+      },
+      {
+        "year": -3000,
+        "page": 2,
+        "entities": 1000,
+        "records": 0,
+        "names": 0,
+        "retirements": 0,
+        "bytes": 65058,
+        "elapsed_ms": 691,
+        "entity_ids_sha256": "151da75c947abc3bc87bce4901bdcb5192558917412a0dcee12902f59668f0be",
+        "revision": 1321
+      },
+      {
+        "year": 1000,
+        "page": 1,
+        "entities": 1000,
+        "records": 0,
+        "names": 0,
+        "retirements": 0,
+        "bytes": 54351,
+        "elapsed_ms": 517,
+        "entity_ids_sha256": "87a007453c549f3649c6c481e3f2ec7e297c2b9d20e270b430fc29e7a3267cce",
+        "revision": 1321
+      },
+      {
+        "year": 1000,
+        "page": 2,
+        "entities": 1000,
+        "records": 0,
+        "names": 0,
+        "retirements": 0,
+        "bytes": 65057,
+        "elapsed_ms": 441,
+        "entity_ids_sha256": "151da75c947abc3bc87bce4901bdcb5192558917412a0dcee12902f59668f0be",
+        "revision": 1321
+      },
+      {
+        "year": 1800,
+        "page": 1,
+        "entities": 1000,
+        "records": 0,
+        "names": 0,
+        "retirements": 0,
+        "bytes": 54351,
+        "elapsed_ms": 438,
+        "entity_ids_sha256": "87a007453c549f3649c6c481e3f2ec7e297c2b9d20e270b430fc29e7a3267cce",
+        "revision": 1321
+      },
+      {
+        "year": 1800,
+        "page": 2,
+        "entities": 1000,
+        "records": 0,
+        "names": 0,
+        "retirements": 0,
+        "bytes": 65057,
+        "elapsed_ms": 440,
+        "entity_ids_sha256": "151da75c947abc3bc87bce4901bdcb5192558917412a0dcee12902f59668f0be",
+        "revision": 1321
+      },
+      {
+        "year": 2026,
+        "page": 1,
+        "entities": 1000,
+        "records": 0,
+        "names": 0,
+        "retirements": 0,
+        "bytes": 54351,
+        "elapsed_ms": 438,
+        "entity_ids_sha256": "87a007453c549f3649c6c481e3f2ec7e297c2b9d20e270b430fc29e7a3267cce",
+        "revision": 1321
+      },
+      {
+        "year": 2026,
+        "page": 2,
+        "entities": 1000,
+        "records": 0,
+        "names": 0,
+        "retirements": 0,
+        "bytes": 65057,
+        "elapsed_ms": 437,
+        "entity_ids_sha256": "151da75c947abc3bc87bce4901bdcb5192558917412a0dcee12902f59668f0be",
+        "revision": 1321
+      }
+    ],
+    "catalog_reads_verified": true,
+    "scope": "Read-only app storage/catalog and at most two compact map pages per representative year; exhaustive original rows proven separately."
+  },
+  "runtime_read_only_checks": true,
+  "readback": {
+    "version": 1,
+    "source_manifest_sha256": "b59946f515e385d8c7c8de84a529e851fc802262f07e39cb080f5f493f3572e2",
+    "source_snapshot_fingerprint": "c315f806f9b7a60cbb7196ce5f8be38cd16c385b00f883f5275ec8f5bc9202ef",
+    "source_backend": "d1",
+    "source_revision": 1321,
+    "target_schema_sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+    "collections": {
+      "sources": {
+        "count": 381,
+        "ordered_rows_sha256": "301a833f641282edd3ac7cc7608a62aa29c571a35b66161259b723d254ac22ca"
+      },
+      "entity_types": {
+        "count": 16,
+        "ordered_rows_sha256": "d853335669547515b039192d32a0b64545c1b2949b73bccdcfb8a6c5fb6bf1cc"
+      },
+      "entities": {
+        "count": 86797,
+        "ordered_rows_sha256": "f9e0380665790026c6fa97cbd63d63f35768ca0a68a7641b2ea866b27e566e71"
+      },
+      "categories": {
+        "count": 1457,
+        "ordered_rows_sha256": "eee86c200c260915a38d9193890b66e85fd1ef6a52b2227e7afc42938ffca798"
+      },
+      "records": {
+        "count": 396,
+        "ordered_rows_sha256": "aebf930586e329ce0eecfd0eac5dd6f6d5334fec7c7d9455ac3396b1a6f2c4f8"
+      },
+      "names": {
+        "count": 3588,
+        "ordered_rows_sha256": "8f9523ee61e974d0afd93f81707304ce477b343ec4e69d88d0ba66ce97c28b0b"
+      },
+      "relationships": {
+        "count": 0,
+        "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "media": {
+        "count": 28,
+        "ordered_rows_sha256": "f6002c3fa6f6964cb79b791effadbfdc95bbe42c85166c27c427477103daa99d"
+      },
+      "media_links": {
+        "count": 6,
+        "ordered_rows_sha256": "84c2d569224cb19cccbf2cf226d431ef2f4844bac95e6cf271b1d617b5935de1"
+      },
+      "retirements": {
+        "count": 0,
+        "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "ingestions": {
+        "count": 1321,
+        "ordered_rows_sha256": "06e127eaaad2b171e867ab3179811816e6df374d3abf40c159c4d094fb53e128"
+      },
+      "geographic_releases": {
+        "count": 2,
+        "ordered_rows_sha256": "40b680b4febf78d4e9e6951410b4dea909bb4793b96fced2f6c23bff05822f02"
+      },
+      "geographic_memberships": {
+        "count": 169491,
+        "ordered_rows_sha256": "7f54cfe8aa56791fce13e6054bdb2c7c31b9ecc608e7a05a188d378b1d6dfd3a"
+      },
+      "geographic_changes": {
+        "count": 573,
+        "ordered_rows_sha256": "c9fcea8ba1ab1919c90050e23b258c05c08ecc1ec91e1d6d75de9e1a5905d975"
+      }
+    },
+    "json_text_preserved": true,
+    "archived_examples_withdrawals_preserved": true,
+    "media_bytes_moved": false,
+    "status": "verified",
+    "read_only": true,
+    "trigger_inventory_sha256": "9e87f3db6d965273e2ca6e47e8ffa29f75db183168855d714c92c4179ab39a96",
+    "sequence": {
+      "next_rowid": 1322,
+      "is_called": false,
+      "reset_method": "transactional ALTER SEQUENCE RESTART"
+    }
+  },
+  "owner_connection_closed": true,
+  "management_requests": 9,
+  "completed_at_utc": "2026-10-02T06:23:06.234Z",
+  "limitations": [
+    "No private Site runtime binding, Neon Auth or media-object relocation.",
+    "Capacity uses a reviewed operational budget, not verified provider quota.",
+    "Production partial or ambiguous installation requires explicit read-only verification; no data reset or automatic nonempty retry."
+  ]
+}
