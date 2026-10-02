@@ -1,0 +1,15 @@
+{
+  "status": "validated-awaiting-publication",
+  "trigger": "Production GET /api/storage/export-marker returned 503: D1_ERROR too many terms in compound SELECT",
+  "correction": "Single SELECT with fourteen scalar counts preserves one complete marker read without compound SELECT terms",
+  "facts_mutated": false,
+  "tests": {
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0,
+    "command": "node --test --test-concurrency=2 test/storage-export.test.mjs test/postgres-restore.test.mjs test/content-backend.test.mjs"
+  },
+  "browser_gate_reused": "No client/map/renderer change; matching Site16 browser result retained",
+  "deployment_asset_bytes": 267343530,
+  "production_export_complete": false
+}

@@ -1,5 +1,5 @@
 {
-  "status": "validated-awaiting-publication",
+  "status": "validated-and-published",
   "validated_at_utc": "2026-10-02T05:22:15.538419+00:00",
   "primary_source_commit": "f61605eaf0cdfea9dd11a41be117863e73852791",
   "scope": [
@@ -64,5 +64,6 @@
   },
   "neon_rehearsal": "data/validation/neon-runtime-role-verification.json",
   "production_migration_complete": false,
-  "semantic_geographic_completion": false
+  "semantic_geographic_completion": false,
+  "publication": "data/validation/postgres-platform-publication.json"
 }

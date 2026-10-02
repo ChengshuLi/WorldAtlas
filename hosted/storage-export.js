@@ -32,8 +32,11 @@ function oversized(limit){const error=new RecordError('Storage export page excee
  */
 export async function exportStorageMarker(db){
  const before=await revision(db),counts=Object.fromEntries(storageExportCollections.map(key=>[key,0]));
- const countSql=storageExportCollections.map(key=>`SELECT '${key}' collection,count(*) n FROM ${definitions[key].table}`).join(' UNION ALL ');
- for(const row of await rows(db.prepare(countSql))){if(!Number.isSafeInteger(row.n)||row.n<0)throw new RecordError('Invalid storage counter',503);counts[row.collection]=row.n;}
+ // Managed D1 limits compound SELECT terms below the local SQLite default.
+ // Scalar counts keep the complete marker in one read without a UNION chain.
+ const countSql='SELECT '+storageExportCollections.map(key=>`(SELECT count(*) FROM ${definitions[key].table}) AS ${key}`).join(',');
+ const counters=await db.prepare(countSql).first();
+ for(const key of storageExportCollections){const n=counters?.[key];if(!Number.isSafeInteger(n)||n<0)throw new RecordError('Invalid storage counter',503);counts[key]=n;}
  const releases=await rows(db.prepare(`SELECT ${definitions.geographic_releases.columns.join(',')} FROM atlas_geographic_releases ORDER BY id`));
  if(await revision(db)!==before||releases.length!==counts.geographic_releases)changed();
  const snapshot={version:1,revision:before,counts,geographic_releases_sha256:await digest(releases)};

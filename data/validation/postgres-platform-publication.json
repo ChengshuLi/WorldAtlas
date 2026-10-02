@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "status": "succeeded",
+  "project_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db",
+  "site_version": 16,
+  "site_source_commit": "81f37396de22c82dd4060f9ceaefbc680779f62c",
+  "primary_source_commit": "62f56705b580e4ab58b9eaab51c2bb6d900f2505",
+  "url": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+  "deployment_id": "appgdep_6abf3ff3f20c81919e2e328491442210",
+  "version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_acf9d4b7c49c8191910f522e69a9e08b",
+  "updated_at": "2026-10-02T05:24:18.344012+00:00",
+  "env_set_revision": 0,
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000095288230bd8fb79601b3b4ef",
+    "content_hash": "sha256:4558300ac03ff78d6f86acaec6e8adf24a8af1790297fd22634eca6825c7b5f0",
+    "size_bytes": 268318720,
+    "file_count": 549
+  },
+  "backend": "D1 plus R2; production PostgreSQL cutover remains pending",
+  "audience": "owner-private preserved",
+  "maintenance": {
+    "status": "succeeded",
+    "deployment_id": "appgdep_6abf402d39308191966610a303dec2d8",
+    "updated_at": "2026-10-02T05:25:12.531354+00:00",
+    "env_set_revision": 1,
+    "imports_read_only": true
+  }
+}

@@ -18,6 +18,12 @@ class D1 {
 const tableFor=collection=>({records:'atlas_attribute_records',retirements:'atlas_evidence_retirements'}[collection]??`atlas_${collection}`);
 const source=(id,status='historical')=>({id,name:id,url:'https://example.org/source',license:'CC0',vintage:'2026',supported_from:status==='reference'?2026:-3000,supported_to:2027,status});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+test('complete export marker works under managed D1 compound-SELECT limits',async()=>{
+ const {db}=await fixture();const prepare=db.prepare.bind(db);
+ db.prepare=sql=>{if((sql.match(/\bUNION\b/gi)||[]).length>=5)throw Error('D1_ERROR: too many terms in compound SELECT');return prepare(sql);};
+ try{const marker=await exportStorageMarker(db);assert.equal(Object.keys(marker.counts).length,14);for(const collection of storageExportCollections)assert.equal(marker.counts[collection],db.sqlite.prepare(`SELECT count(*) n FROM ${tableFor(collection)}`).get().n);assert.equal((await exportStoragePage(db,'entities')).snapshot_marker.fingerprint,marker.fingerprint);}
+ finally{db.sqlite.close();}
+});
 async function fixture(){
  const db=new D1();await importBatch(db,JSON.parse(fs.readFileSync(new URL('../data/hosted-type-catalog.json',import.meta.url))));
  const kinds=['continent','subcontinent','region','area','province','location'],entities=[];for(let c=0;c<6;c++)for(let i=0;i<6;i++)entities.push({id:`${kinds[i]}-${c}`,kind:kinds[i],name:`Reference ${kinds[i]} ${c}`,parent_id:i?`${kinds[i-1]}-${c}`:null});
