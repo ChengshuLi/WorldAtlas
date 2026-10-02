@@ -4,10 +4,11 @@ import {contentDatabase,storageReadOnly} from './content-backend.js';
 import {exportStoragePage,exportStorageMarker} from './storage-export.js';
 import {catalogPage,entityRelationshipsPage,entityMediaPage,capacityReport} from './research-catalog.js';
 import * as geography from './geographic-releases.js';
+import {importTemporalGeography,temporalGeographySnapshotPage,temporalGeographyEvidence} from './temporal-geography.js';
 import {validYear} from '../src/model.js';
 import {environmentClassifications} from '../src/environment-classifications.js';
 
-const json=(value,status=200)=>Response.json(value,{status,headers:{'Cache-Control':'no-store'}});
+const json=(value,status=200,headers={})=>Response.json(value,{status,headers:{'Cache-Control':'no-store',...headers}});
 function sameOrigin(request){
  const origin=request.headers.get('Origin');
  if(origin&&origin!==new URL(request.url).origin)throw Object.assign(new Error('Cross-origin writes are not permitted'),{status:403});
@@ -45,6 +46,17 @@ export default {
    if(url.pathname==='/api/geography/release'&&request.method==='GET')return json(await geography.geographicRelease(db,url.searchParams.get('release_id')));
    if(url.pathname==='/api/geography/memberships'&&request.method==='GET')return json(await geography.geographicMembershipPage(db,{releaseId:url.searchParams.get('release_id'),cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250),parentId:url.searchParams.get('parent_id'),active:url.searchParams.get('include_archived')==='1'?null:true}));
    if(url.pathname==='/api/geography/changes'&&request.method==='GET')return json(await geography.geographicChangePage(db,{releaseId:url.searchParams.get('release_id'),cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||250)}));
+   if(url.pathname==='/api/geography/temporal/snapshot'&&request.method==='GET')return json(await temporalGeographySnapshotPage(db,selectedYear(url),{releaseId:url.searchParams.get('release_id'),examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200),stream:url.searchParams.get('stream')??'records'}));
+   const temporalEvidence=/^\/api\/geography\/temporal\/evidence\/(memberships|existence)\/([^/]+)$/.exec(url.pathname);
+   if(temporalEvidence&&request.method==='GET'){
+    const evidence=await temporalGeographyEvidence(db,temporalEvidence[1],decodeURIComponent(temporalEvidence[2]));
+    return evidence?json(evidence):json({error:'Geographic evidence not found'},404);
+   }
+   if(url.pathname==='/api/geography/temporal/import'&&request.method==='POST'){
+    sameOrigin(request);
+    if(!request.headers.get('Content-Type')?.startsWith('application/json'))return json({error:'Dated geography import must be JSON'},415);
+    return json(await importTemporalGeography(db,JSON.parse(new TextDecoder().decode(await boundedBody(request,1024*1024)))));
+   }
    if(['/api/geography/stage','/api/geography/finalize'].includes(url.pathname)&&request.method==='POST'){
     sameOrigin(request);
     if(!request.headers.get('Content-Type')?.startsWith('application/json'))return json({error:'Geographic release must be JSON'},415);
@@ -63,12 +75,16 @@ export default {
    }
    if(url.pathname==='/api/media/upload'&&request.method==='POST'){
     sameOrigin(request);if(!env.BUCKET)return json({error:'Media storage is temporarily unavailable'},503);
+    const metadataText=url.searchParams.get('metadata')??'{}';
+    if(new TextEncoder().encode(metadataText).byteLength>4096)return json({error:'Media provenance must be at most 4096 bytes'},413);
+    let metadata;try{metadata=JSON.parse(metadataText);}catch{return json({error:'Media provenance must be a JSON object'},400);}
+    if(!metadata||typeof metadata!=='object'||Array.isArray(metadata))return json({error:'Media provenance must be a JSON object'},400);
     const length=Number(request.headers.get('Content-Length'));
     if(length>20*1024*1024)return json({error:'This upload endpoint accepts media files up to 20 MiB'},413);
     const bytes=await boundedBody(request,20*1024*1024);
     const sha256=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('');
     const object_key=`media/${sha256}`,mime=request.headers.get('Content-Type')||'application/octet-stream';
-    const input={id:url.searchParams.get('id')||`media:${sha256}`,object_key,sha256,bytes:bytes.byteLength,mime,source_id:url.searchParams.get('source_id'),name:url.searchParams.get('name')||sha256,license:url.searchParams.get('license'),attribution:url.searchParams.get('attribution')};
+    const input={id:url.searchParams.get('id')||`media:${sha256}`,object_key,sha256,bytes:bytes.byteLength,mime,source_id:url.searchParams.get('source_id'),name:url.searchParams.get('name')||sha256,license:url.searchParams.get('license'),attribution:url.searchParams.get('attribution'),metadata};
     // Validate relational metadata before writing blob bytes. Published objects
     // are content-addressed, so another upload never overwrites earlier media.
     await records.validateMedia(db,input);
@@ -76,9 +92,12 @@ export default {
     return json(await records.registerMedia(db,input));
    }
    if(url.pathname.startsWith('/api/media/')&&request.method==='GET'){
-    if(!env.BUCKET)return json({error:'Media storage is temporarily unavailable'},503);
+    const metadataOnly=url.searchParams.get('metadata')==='1';
+    const mediaHeaders=metadataOnly?{'X-Atlas-Media-Metadata-Version':'1'}:{};
     const media=await records.mediaById(db,decodeURIComponent(url.pathname.slice('/api/media/'.length)));
-    if(!media)return json({error:'Media not found'},404);
+    if(!media)return json({error:'Media not found'},404,mediaHeaders);
+    if(metadataOnly)return json(media,200,mediaHeaders);
+    if(!env.BUCKET)return json({error:'Media storage is temporarily unavailable'},503);
     if(request.headers.has('Range')){
      const range=/^bytes=(\d*)-(\d*)$/.exec(request.headers.get('Range'));
      const start=range?.[1]?Number(range[1]):null,end=range?.[2]?Number(range[2]):null;

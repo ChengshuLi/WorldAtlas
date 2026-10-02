@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
-import {compileResearchInput,prepareResearchBundle,researchHash} from '../scripts/prepare-research-bundle.mjs';
+import {compileResearchInput,prepareResearchBundle,researchHash,temporalResearchEndpoint} from '../scripts/prepare-research-bundle.mjs';
 import {readResearchBundle,importResearchBundle} from '../scripts/import-research-bundle.mjs';
 import {importBatch,attributesAt,evidenceHistory} from '../hosted/records.js';
 
@@ -76,5 +76,35 @@ test('unpinned server receipts are rejected and legacy receipts are preserved wh
   assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.output,'import-receipts.json'))).batches,[old]);
   const good=async(url,init)=>{const response=await request(url,init);if(init.method)return Response.json({ingestion_id:payload.ingestion_id,expected_geography:payload.expected_geography,counts:old.counts,revision:8,duplicate:true});return response;};await importResearchBundle({directory:f.output,origin:'https://example.org/',token:'private',request:good});
   const entry=JSON.parse(fs.readFileSync(path.join(f.output,'import-receipts.json'))).batches[0];assert.deepEqual(entry.previous_unpinned_receipt,old);assert.equal(entry.revision,8);assert.notEqual(entry.request_ingestion_id,part.ingestion_id);
+ }finally{f.close();}
+});
+const membership=(id,parent_id='province')=>({id,entity_id:'location',parent_id,valid_from:1000,valid_to:1100,source_id:source.id});
+test('temporal campaigns retain ordinary source dependencies and route atomic sourced geography corrections separately',()=>{
+ const metadata=' { "source_wording" : "Retain original bytes" } ',withdrawal={id:'withdraw-parent',collection:'memberships',target_id:'parent-old',replacement_id:'parent-new',source_id:source.id,reason:'Test-only source correction'};
+ const input={sources:[source],records:[claim('population')],temporal_geography:{memberships:[membership('parent-old'),{...membership('parent-new','province:new'),metadata}],retirements:[withdrawal]}};
+ const result=compileResearchInput(input,release),ordinary=result.batches.filter(part=>!part.endpoint),dated=result.batches.filter(part=>part.endpoint===temporalResearchEndpoint);
+ assert.equal(ordinary.length,1);assert.equal(ordinary[0].payload.sources[0].id,source.id);assert.equal(result.batches[0].endpoint,undefined);assert.equal(dated.length,2);assert.equal(dated[0].payload.memberships[0].id,'parent-old');assert.equal(dated[1].payload.retirements[0].id,withdrawal.id);assert.equal(dated[1].payload.memberships[0].metadata,metadata);assert.deepEqual(result.counts.temporal_geography,{memberships:2,existence:0,retirements:1});
+ const legacy=compileResearchInput({sources:[source],records:[claim('population')]},release);assert.deepEqual(ordinary[0].bytes,legacy.batches[0].bytes);assert.equal('temporal_geography' in legacy.counts,false,'Fact-only manifest counts remain unchanged');
+});
+test('temporal compiler bounds sources/dates/classification and rejects reference mutations/unvetted footprints',()=>{
+ const compile=temporal_geography=>compileResearchInput({sources:[source],temporal_geography},release);
+ assert.throws(()=>compile({memberships:[{...membership('outside'),valid_from:999}]}),/source interval/);
+ assert.throws(()=>compile({memberships:[{...membership('zero'),valid_from:0}]}),/year zero/);
+ assert.throws(()=>compile({memberships:[{...membership('unsupported'),method:'majority-area'}]}),/method/);
+ assert.throws(()=>compile({memberships:[{...membership('unresolved'),status:'unknown'}]}),/unknown value/);
+ assert.throws(()=>compile({memberships:[{...membership('fake-proof'),validation_id:'self-approved'}]}),/server-assigned/);
+ assert.throws(()=>compile({footprint_selections:[{}]}),/Unsupported/);
+ assert.throws(()=>compile({existence:[{...membership('bad-existence'),value:'uninhabited'}]}),/existence value/);
+ assert.throws(()=>compile({retirements:[{id:'wrong',collection:'records',target_id:'ordinary',source_id:source.id,reason:'Wrong namespace'}]}),/retirement collection/);
+ const unknown=compile({memberships:[membership('unknown',null)],existence:[{id:'existence-unknown',entity_id:'location',value:'unknown',valid_from:1000,valid_to:1100,source_id:source.id}]});assert.equal(unknown.counts.temporal_geography.memberships,1);
+});
+test('temporal bundle manifests validate endpoint identity, pinned receipts and resume independently of ordinary imports',async()=>{
+ const f=fixture({sources:[source],temporal_geography:{memberships:[membership('dated-parent')],existence:[{id:'dated-existence',entity_id:'location',value:'unknown',valid_from:1000,valid_to:1100,source_id:source.id}]}});
+ try{f.build();assert.equal(readResearchBundle(f.output).batches.length,2);const routes=[];
+  const request=async(url,init)=>{if(url.endsWith('/api/geography/release'))return Response.json(release);const body=JSON.parse(init.body);routes.push(new URL(url).pathname);return Response.json({ingestion_id:body.ingestion_id,expected_geography:body.expected_geography,counts:url.endsWith(temporalResearchEndpoint)?{memberships:1,existence:1,retirements:0}:{sources:1},revision:routes.length});};
+  const result=await importResearchBundle({directory:f.output,origin:'https://example.org/',token:'private',request});assert.equal(result.complete,true);assert.deepEqual(routes,['/api/records/import',temporalResearchEndpoint]);
+  const ledger=JSON.parse(fs.readFileSync(path.join(f.output,'import-receipts.json')));assert.equal(ledger.batches[0].endpoint,undefined);assert.equal(ledger.batches[1].endpoint,temporalResearchEndpoint);assert.equal(ledger.batches[1].counts.memberships,1);
+  await importResearchBundle({directory:f.output,origin:'https://example.org/',token:'private',request});assert.equal(routes.length,2,'Committed pinned temporal and ordinary batches are skipped');
+  const manifest=JSON.parse(fs.readFileSync(path.join(f.output,'index.json')));manifest.batches[1].endpoint='/api/records/import';fs.writeFileSync(path.join(f.output,'index.json'),JSON.stringify(manifest));assert.throws(()=>readResearchBundle(f.output),/endpoint/);
  }finally{f.close();}
 });

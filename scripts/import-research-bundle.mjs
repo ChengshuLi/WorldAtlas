@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {previewImport} from '../src/import-records.js';
-import {researchHash,researchJSON,validateResearchGeography,compileResearchInput} from './prepare-research-bundle.mjs';
+import {researchHash,researchJSON,validateResearchGeography,compileResearchInput,previewTemporalResearchBatch,temporalResearchEndpoint} from './prepare-research-bundle.mjs';
 
 const safePath=(directory,name)=>{if(typeof name!=='string'||!name||path.isAbsolute(name)||name.split(/[\\/]/).some(part=>part==='..'||part===''))throw Error('Unsafe research bundle path');const resolved=path.resolve(directory,name),real=fs.realpathSync(resolved);if(real!==path.resolve(directory)&&!real.startsWith(fs.realpathSync(directory)+path.sep))throw Error('Research bundle path escapes directory');return resolved;};
 export function readResearchBundle(directory){
@@ -14,9 +14,10 @@ export function readResearchBundle(directory){
  if(researchJSON(prepared.counts)!==researchJSON(manifest.counts)||prepared.batches.length!==manifest.batches.length)throw Error('Research manifest does not match its preserved input');
  const ids=new Set(),batches=[];
  for(const part of manifest.batches){
-  const raw=validate(part),checked=previewImport(raw.toString()),payload=checked.payload,rows=checked.rows.length;
-  if(rows>200||rows!==part.rows||payload.ingestion_id!==part.ingestion_id||payload.ingestion_id!==`research:${researchHash(researchJSON(Object.fromEntries(Object.entries(payload).filter(([key])=>key!=='ingestion_id'))))}`||ids.has(payload.ingestion_id))throw Error('Invalid or repeated research batch identity');
-  if(prepared.batches[batches.length].sha256!==part.sha256)throw Error('Research batches do not match their preserved input');
+  if(part.endpoint!==undefined&&part.endpoint!==temporalResearchEndpoint)throw Error('Unsupported research batch endpoint');
+  const raw=validate(part),temporal=part.endpoint===temporalResearchEndpoint,checked=temporal?previewTemporalResearchBatch(JSON.parse(raw),manifest.geography):previewImport(raw.toString()),payload=checked.payload,rows=checked.rows.length;
+  if(rows>200||rows!==part.rows||payload.ingestion_id!==part.ingestion_id||payload.ingestion_id!==`${temporal?'temporal-research':'research'}:${researchHash(researchJSON(Object.fromEntries(Object.entries(payload).filter(([key])=>key!=='ingestion_id'))))}`||ids.has(payload.ingestion_id))throw Error('Invalid or repeated research batch identity');
+  if(prepared.batches[batches.length].sha256!==part.sha256||prepared.batches[batches.length].endpoint!==part.endpoint)throw Error('Research batches do not match their preserved input or endpoint');
   ids.add(payload.ingestion_id);batches.push({part,raw});
  }
  for(const file of manifest.source_files??[]){if(file.redistribution_permitted!==true||!file.license||!file.source_id)throw Error('Invalid licensed research archive');validate(file);}
@@ -33,7 +34,7 @@ export async function importResearchBundle({directory,origin,token,ledgerFile=pa
  let ledger=fs.existsSync(ledgerFile)?JSON.parse(fs.readFileSync(ledgerFile)):{version:1,origin,manifest_sha256:bundle.manifest_sha256,geography:bundle.manifest.geography,batches:[],complete:false};
  if(ledger.version!==1||ledger.origin!==origin||ledger.manifest_sha256!==bundle.manifest_sha256||researchJSON(ledger.geography)!==researchJSON(bundle.manifest.geography)||!Array.isArray(ledger.batches))throw Error('Receipt ledger belongs to another bundle, geography or Site');
  const expected=new Map(bundle.batches.map(({part})=>[part.ingestion_id,part]));
- for(const row of ledger.batches)if(!expected.has(row.ingestion_id)||row.sha256!==expected.get(row.ingestion_id).sha256||row.status!=='committed'||row.expected_geography&&(researchJSON(row.expected_geography)!==researchJSON(expected_geography)||row.request_ingestion_id!==wire.get(row.ingestion_id).id))throw Error('Invalid completed batch receipt');
+ for(const row of ledger.batches)if(!expected.has(row.ingestion_id)||row.sha256!==expected.get(row.ingestion_id).sha256||row.endpoint!==expected.get(row.ingestion_id).endpoint||row.status!=='committed'||row.expected_geography&&(researchJSON(row.expected_geography)!==researchJSON(expected_geography)||row.request_ingestion_id!==wire.get(row.ingestion_id).id))throw Error('Invalid completed batch receipt');
  if(new Set(ledger.batches.map(row=>row.ingestion_id)).size!==ledger.batches.length)throw Error('Duplicate completed receipt');
  // Legacy receipts remain preserved; only a matching pinned transaction is
  // sufficient to skip this campaign's new guarded import on resume.
@@ -53,11 +54,12 @@ export async function importResearchBundle({directory,origin,token,ledgerFile=pa
   atomicLedger(ledgerFile,ledger);
   for(const {part}of bundle.batches){
    if(completed.has(part.ingestion_id)){onProgress({completed:completed.size,total:bundle.batches.length,resumed:true});continue;}
-   const sent=wire.get(part.ingestion_id),response=await call('/api/records/import',{method:'POST',headers:{'Content-Type':'application/json',Origin:origin},body:sent.bytes});
+   const sent=wire.get(part.ingestion_id),response=await call(part.endpoint??'/api/records/import',{method:'POST',headers:{'Content-Type':'application/json',Origin:origin},body:sent.bytes});
    if(!response.ok)throw Error(`Research import HTTP ${response.status}: ${redact(await response.text())}`);
-   const receipt=await response.json();if(receipt.ingestion_id!==sent.id||researchJSON(receipt.expected_geography)!==researchJSON(expected_geography)||!Number.isSafeInteger(receipt.revision)||receipt.revision<0||!receipt.counts||typeof receipt.counts!=='object'||Array.isArray(receipt.counts)||Object.entries(receipt.counts).some(([key,value])=>!['sources','entity_types','entities','categories','records','names','relationships','media_links','retirements'].includes(key)||!Number.isSafeInteger(value)||value<0))throw Error('Server returned an invalid or unpinned research import receipt');
+   const countKeys=part.endpoint===temporalResearchEndpoint?['memberships','existence','retirements']:['sources','entity_types','entities','categories','records','names','relationships','media_links','retirements'];
+   const receipt=await response.json();if(receipt.ingestion_id!==sent.id||researchJSON(receipt.expected_geography)!==researchJSON(expected_geography)||!Number.isSafeInteger(receipt.revision)||receipt.revision<0||!receipt.counts||typeof receipt.counts!=='object'||Array.isArray(receipt.counts)||Object.entries(receipt.counts).some(([key,value])=>!countKeys.includes(key)||!Number.isSafeInteger(value)||value<0))throw Error('Server returned an invalid or unpinned research import receipt');
    // Retain only documented, nonsensitive receipt fields, never headers/token.
-   const index=ledger.batches.findIndex(row=>row.ingestion_id===part.ingestion_id),entry={ingestion_id:part.ingestion_id,request_ingestion_id:sent.id,expected_geography,path:part.path,sha256:part.sha256,rows:part.rows,status:'committed',duplicate:Boolean(receipt.duplicate),counts:receipt.counts,revision:receipt.revision,...(index>=0?{previous_unpinned_receipt:ledger.batches[index]}:{})};if(index>=0)ledger.batches[index]=entry;else ledger.batches.push(entry);completed.add(part.ingestion_id);
+   const index=ledger.batches.findIndex(row=>row.ingestion_id===part.ingestion_id),entry={ingestion_id:part.ingestion_id,request_ingestion_id:sent.id,expected_geography,path:part.path,sha256:part.sha256,rows:part.rows,status:'committed',duplicate:Boolean(receipt.duplicate),counts:receipt.counts,revision:receipt.revision,...(part.endpoint?{endpoint:part.endpoint}:{}),...(index>=0?{previous_unpinned_receipt:ledger.batches[index]}:{})};if(index>=0)ledger.batches[index]=entry;else ledger.batches.push(entry);completed.add(part.ingestion_id);
    delete ledger.last_error;ledger.complete=false;atomicLedger(ledgerFile,ledger);onProgress({completed:completed.size,total:bundle.batches.length,resumed:false});
   }
   ledger.complete=true;delete ledger.last_error;atomicLedger(ledgerFile,ledger);return {complete:true,committed_batches:completed.size,counts:bundle.manifest.counts,manifest_sha256:bundle.manifest_sha256,geography:bundle.manifest.geography,ledger:ledgerFile};

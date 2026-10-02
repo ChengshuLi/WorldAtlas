@@ -7,7 +7,11 @@ export function resolveTemporal(reference,year,examples=false){
   for(const r of available){
     if(r.valid_from>year || r.valid_to<=year || r.name_role==='alias')continue;
     const key=`${r.entity_id}/${r.field}`,old=chosen.get(key);
-    const priority=x=>Number(Boolean(x.is_example))*100+(x.field==='name'&&(x.method==='reference'||x.source_status==='reference')?10:0)+(x.language==='en'?0:x.language==='und'?1:2);
+    const priority=x=>{
+      const example=Number(Boolean(x.is_example))*100;
+      if(['parent','existence'].includes(x.field))return example+(x.method==='direct'?0:x.method==='derived'?10:x.method==='reference'||x.source_status==='reference'?20:0);
+      return example+(x.field==='name'&&(x.method==='reference'||x.source_status==='reference')?10:0)+(x.language==='en'?0:x.language==='und'?1:2);
+    };
     if(!old || priority(r)<priority(old)||priority(r)===priority(old)&&String(r.id)<String(old.id))chosen.set(key,r);
   }
   for(const e of entities.values()){
