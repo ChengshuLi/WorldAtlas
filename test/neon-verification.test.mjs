@@ -50,6 +50,7 @@ function managementFixture(options={}){
   let result;
   if(method==='DELETE'){
    assert.equal(url.pathname,prefix+'/branches/'+temporaryId);
+   options.onDelete?.();
    return new Response(options.cleanupFailure?'raw-private-error '+password:null,{status:options.cleanupFailure?503:204});
   }
   if(method==='POST'){
@@ -89,14 +90,17 @@ function managementFixture(options={}){
  };
  return {calls,fetchImpl};
 }
-async function sqlFixture(t,options={},driverFactory){
+async function sqlFixture(t,options={},driverFactory,ownerDriverFactory){
  const filename=receiptFile(t),api=managementFixture(options);
  let driverCalls=0;
  const receipt=await verifyNeonSQL({env,filename,fetchImpl:api.fetchImpl,uuid:()=>nonce,sleep:async()=>{},driverFactory:uri=>{
-  driverCalls++;assert.equal(uri,connection);
+  driverCalls++;
+  const parsed=new URL(uri);
+  if(parsed.username==='neondb_owner')assert.equal(uri,connection);
+  else{assert.equal(parsed.username,'worldatlas_app');assert.match(parsed.password,/^[A-Za-z0-9_-]{43}$/);}
   if(driverFactory)return driverFactory(uri);
   throw Error('raw-private-error '+credential+' '+uri);
- }});
+ },...(ownerDriverFactory?{ownerDriverFactory}:{})});
  assertSanitized(receipt,filename);
  assert.equal(receipt.production_sql_writes,false);
  assert.equal(api.calls.some(call=>call.method==='DELETE'&&call.path.endsWith(productionBranchId)),false);
@@ -159,6 +163,12 @@ test('PostgreSQL schema splitter retains command bytes while respecting nested c
 
 test('isolated Neon verifier applies the exact schema atomically on real PostgreSQL and exercises actual hosted services',async t=>{
  const engine=new PGlite();t.after(()=>engine.close());
+ // Reproduce Neon owner administration without superuser privileges. PGlite's
+ // original superuser authentication only switches independent test sessions.
+ await engine.query('CREATE ROLE neondb_owner LOGIN CREATEROLE NOINHERIT');
+ const database=(await engine.query('SELECT current_database() AS name')).rows[0].name;
+ assert.match(database,/^[a-z_]+$/);await engine.query(`ALTER DATABASE ${database} OWNER TO neondb_owner`);
+ await engine.query('SET SESSION AUTHORIZATION neondb_owner');
  const appliedCommands=[];
  const driver={
   async query(query,params=[]){
@@ -171,22 +181,54 @@ test('isolated Neon verifier applies the exact schema atomically on real Postgre
    const results=[];for(const item of items){const result=await tx.query(item.query,item.params??[]);results.push({...result,rowCount:result.affectedRows??result.rows.length});}return results;
   });},
  };
- const sql={transaction:async(callback,options)=>{
+ const sql={query:(query,params)=>driver.query(query,params),transaction:async(callback,options)=>{
   assert.equal(options.isolationLevel,'Serializable');
   const statements=callback({query:(query,params)=>({query,params})});appliedCommands.push(...statements.map(item=>item.query));
   return driver.transaction(statements);
  }};
- const {receipt,api,driverCalls}=await sqlFixture(t,{},()=>({sql,db:createPostgresDatabase(driver)}));
+ let ownerClosed=false,appPassword;
+ const ownerFactory=async uri=>{
+  assert.equal(uri,connection);
+  return {query:(query,params)=>engine.query(query,params),runTransaction:callback=>engine.transaction(tx=>callback({query:(query,params)=>tx.query(query,params)})),close:async()=>{await engine.query('SET SESSION AUTHORIZATION postgres');ownerClosed=true;}};
+ };
+ const {receipt,filename,api,driverCalls}=await sqlFixture(t,{onDelete:()=>assert.equal(ownerClosed,true)},uri=>{
+  const parsed=new URL(uri);
+  if(parsed.username==='neondb_owner')return {sql,db:createPostgresDatabase(driver)};
+  appPassword=parsed.password;
+  const authenticated=engine.query('SET SESSION AUTHORIZATION worldatlas_app');
+  const appDriver={query:async(query,params)=>{await authenticated;return driver.query(query,params);},transaction:async items=>{await authenticated;return driver.transaction(items);}};
+  return {sql:{query:appDriver.query},db:createPostgresDatabase(appDriver)};
+ },ownerFactory);
  const bytes=fs.readFileSync(postgresSchemaURL),expectedCommands=schemaTransactionStatements(bytes.toString('utf8'));
  assert.equal(expectedCommands.length,56);assert.deepEqual(appliedCommands,expectedCommands);
  assert.equal(receipt.schema_sha256,createHash('sha256').update(bytes).digest('hex'));
- assert.equal(receipt.status,'verified');assert.equal(receipt.cleanup_status,'deleted');assert.equal(driverCalls,1);
+ assert.equal(receipt.status,'verified',JSON.stringify(receipt));assert.equal(receipt.cleanup_status,'deleted');assert.equal(driverCalls,2);
  assert.equal(receipt.schema_complete,true);assert.deepEqual(receipt.schema_tables,postgresTables);
  assert.equal(receipt.sql_contracts_passed,true);assert.equal(receipt.retained_original_population,42);assert.equal(receipt.resolved_population,43);
+ assert.equal(receipt.runtime_current_user,'worldatlas_app');assert.equal(receipt.runtime_session_user,'worldatlas_app');
+ assert.equal(receipt.runtime_role.permissions.length,14);assert.equal(receipt.runtime_role.memberships,0);assert.equal(receipt.runtime_role.public_schema_create,false);
+ assert.equal(receipt.idempotent_application_retry,true);assert.equal(receipt.denied_operations.length,13);assert.equal(receipt.owner_connection_closed,true);
+ assert.ok(appPassword);assert.equal(fs.readFileSync(filename,'utf8').includes(appPassword),false);
+ assert.equal(api.calls.some(call=>call.path.includes('password')||call.path.endsWith('/roles')&&call.query.includes('worldatlas_app')),false);
  const retained=(await engine.query("SELECT id,value FROM atlas_attribute_records WHERE id IN ('pg-verification:old','pg-verification:new') ORDER BY id")).rows;
  assert.deepEqual(retained,[{id:'pg-verification:new',value:'43'},{id:'pg-verification:old',value:'42'}]);
  assert.deepEqual(api.calls.filter(call=>call.method==='DELETE').map(call=>call.path),[prefix+'/branches/'+temporaryId]);
  assert.equal(receipt.management_requests,api.calls.length);
+});
+
+test('private owner connection failures remain sanitized and cleanup still deletes the validation branch',async t=>{
+ let closeAttempted=false;
+ const {receipt}=await sqlFixture(t,{},()=>({
+  sql:{transaction:callback=>Promise.resolve(callback({query:()=>({})}))},
+  db:{prepare:query=>({first:async()=>query.startsWith('SELECT current_database()')?{database_name:'neondb',role_name:'neondb_owner',schema_name:'public',server_version_num:'180003'}:{count:0},all:async()=>({results:postgresTables.map(table_name=>({table_name}))})})},
+ }),async()=>({
+  query:async()=>{throw Error('raw-private-error '+connection);},
+  runTransaction:async callback=>callback({query:async()=>{throw Error('raw-private-error '+connection);}}),
+  close:async()=>{closeAttempted=true;throw Error('raw-private-error '+password);},
+ }));
+ assert.equal(receipt.status,'failed');assert.equal(receipt.failure_stage,'restricted-role-provisioning');
+ assert.equal(closeAttempted,true);assert.equal(receipt.owner_connection_closed,false);
+ assert.equal(receipt.owner_close_error_code,'private-owner-close-failed');assert.equal(receipt.cleanup_status,'deleted');
 });
 
 test('isolated SQL verifier refuses production IDs and production hosts before any SQL connection',async t=>{

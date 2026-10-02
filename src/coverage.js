@@ -1,6 +1,7 @@
 import {readJSON} from './data-client.js';
 import {presentedAttribute} from './reference-context.js';
 import {attributes,formatYear} from './model.js';
+import {coverageScope} from './coverage-scope.js';
 const safe=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function installCoverage(getContext){
  const button=document.createElement('button');button.id='coverage-button';button.className='quiet';button.textContent='Coverage and review';document.querySelector('header').insertBefore(button,document.querySelector('#about'));
@@ -26,8 +27,8 @@ export function installCoverage(getContext){
   catch{dialog.querySelector('#coverage-macro-evidence').textContent='Research findings could not load. Close and reopen this section to retry.';}
  });
  const render=()=>{
-  const {data,states,year}=getContext(),continent=dialog.querySelector('#coverage-continent').value,owner=dialog.querySelector('#coverage-territory').value,attribute=dialog.querySelector('#coverage-attribute').value;
-  const profiles=review.territories.filter(p=>(!continent||p.continent===continent)&&(!owner||p.owner===owner)),owners=new Set(profiles.map(p=>p.owner)),features=data.features.filter(f=>owners.has(f.properties.reference_owner));
+  const {data,states,year,parents}=getContext(),continent=dialog.querySelector('#coverage-continent').value,owner=dialog.querySelector('#coverage-territory').value,attribute=dialog.querySelector('#coverage-attribute').value;
+  const {profiles,features}=coverageScope(data.features,parents,review.territories,{continent,owner});
   let known=0,derived=0,reference=0,referenceContext=0,disputed=0,unrepresented=0;const missingPixels=new Set(pixels?.missing?.map(p=>p.id)||[]);
   for(const f of features){const r=states.get(f.id),p=r?.provenance?.[attribute];if(r?.[attribute]!=null)known++;if(p?.method==='majority-area')derived++;if(p?.status==='reference')reference++;const shown=presentedAttribute(r,attribute);if(shown.value!=null&&shown.provenance?.context_only)referenceContext++;if(p?.status==='disputed')disputed++;if(missingPixels.has(f.id))unrepresented++;}
   dialog.querySelector('#coverage-context').textContent=`${formatYear(year)} · Attribute counts use the selected year and whole-location records. Territory filters use reference geography.`;
@@ -63,7 +64,7 @@ export function installCoverage(getContext){
    details.addEventListener('toggle',()=>{if(details.open)void loadBranch();});
   };
   for(const id of review.root_ids||[])if(!continent||groups.get(id)?.name===continent)addBranch(id,tree);
-  dialog.querySelector('#coverage-reviews').innerHTML=`<p>${profiles.length} territories shown · ${review.policy_profiles} source policies crosswalked to ${review.reference_owner_groups} reference groups · ${review.semantic_complete?'Semantic review complete':'Semantic review in progress'}</p>`+profiles.map(p=>`<details><summary>${safe(p.owner)} · ${p.locations.toLocaleString()} locations · ${safe(p.status)}</summary><p><strong>Source role:</strong> ${safe(p.policy?.role||'Territorial source requires separate review')}</p>${p.issues.map(i=>`<p>${safe(i)}</p>`).join('')}<p>${p.open_group_ids.length} groups have open notes.</p>${p.candidate_refinement?`<p>Finer source assessment: ${safe(p.candidate_refinement.status)}</p>`:''}${p.sources.map(s=>`<p><a href="${safe((s.url||'').startsWith('http')?s.url:'https://'+s.url)}" target="_blank" rel="noreferrer">${safe(s.role||s.id)}</a> · ${safe(s.year)} · ${safe(s.license)}</p>`).join('')}<details><summary>Group decisions</summary>${p.open_group_ids.map(id=>{const g=groups.get(id);return `<p><strong>${safe(g.name)}</strong> (${safe(g.level)}): ${g.reasons.map(safe).join('; ')}<br><small>${safe(g.basis)}</small></p>`;}).join('')}</details></details>`).join('');
+  dialog.querySelector('#coverage-reviews').innerHTML=`<p>${profiles.length} territories shown · ${review.policy_profiles} source policies crosswalked to ${review.reference_owner_groups} reference groups · ${review.semantic_complete?'Semantic review complete':'Semantic review in progress'}</p>`+profiles.map(p=>`<details><summary>${safe(p.owner)} · ${p.selected_locations.toLocaleString()} locations in selection · ${safe(p.status)}</summary><p><strong>Source role:</strong> ${safe(p.policy?.role||'Territorial source requires separate review')}</p>${p.issues.map(i=>`<p>${safe(i)}</p>`).join('')}<p>${p.open_group_ids.length} groups have open notes.</p>${p.candidate_refinement?`<p>Finer source assessment: ${safe(p.candidate_refinement.status)}</p>`:''}${p.sources.map(s=>`<p><a href="${safe((s.url||'').startsWith('http')?s.url:'https://'+s.url)}" target="_blank" rel="noreferrer">${safe(s.role||s.id)}</a> · ${safe(s.year)} · ${safe(s.license)}</p>`).join('')}<details><summary>Group decisions</summary>${p.open_group_ids.map(id=>{const g=groups.get(id);return `<p><strong>${safe(g.name)}</strong> (${safe(g.level)}): ${g.reasons.map(safe).join('; ')}<br><small>${safe(g.basis)}</small></p>`;}).join('')}</details></details>`).join('');
   renderResearch();
   dialog.querySelector('#coverage-sources').innerHTML=inventory.sources.filter(s=>s.attributes.includes(attribute)).map(s=>`<p><a href="${safe(s.url)}" target="_blank" rel="noreferrer">${safe(s.name)}</a> · ${safe(s.status)}<br>${safe(s.scope)}<br><small>${safe(s.license)} · ${safe(s.limitation)}</small></p>`).join('');
  };

@@ -212,6 +212,6 @@ async function start() {
     rebuildGeometry(); await loadYear(desiredYear);
   } catch { $('#loading').textContent='Atlas could not load. Check the server and reload the page.'; }
 }
-installCoverage(()=>({data,states,year}));
+installCoverage(()=>({data,states,year,parents}));
 installRecordImport({getContext:()=>({year,selected,feature:features.get(selected)}),refresh:async()=>{await loadYear(desiredYear);if($('#year-error').textContent)throw Error('Map refresh failed');}});
 start();

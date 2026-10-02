@@ -1,11 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import {createHash,randomUUID} from 'node:crypto';
+import {createHash,randomUUID,randomBytes} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
-import {neon} from '@neondatabase/serverless';
+import {neon,Client,neonConfig} from '@neondatabase/serverless';
 import {createNeonDatabase} from '../hosted/postgres-adapter.js';
 import {exercisePostgresSmoke,postgresSchemaInventory,postgresSchemaURL,postgresTables} from './verify-postgres-schema.mjs';
 import {expectedNeonProjectId,verifyNeonProject} from './verify-neon-project.mjs';
+import {runtimeRole,provisionPostgresRuntimeRole,verifyPostgresRuntimeRole} from './provision-postgres-runtime-role.mjs';
+import {importBatch,attributesAt} from '../hosted/records.js';
 
 export const productionBranchId='br-summer-butterfly-ar8qikk5';
 const databaseName='neondb',roleName='neondb_owner';
@@ -92,14 +94,62 @@ function connectionURI(value,endpointHost){
  return value;
 }
 const liveDrivers=uri=>({sql:neon(uri,{fullResults:true,arrayMode:false}),db:createNeonDatabase(uri,{timeoutMs:30000})});
+async function liveOwnerDriver(uri){
+ neonConfig.webSocketConstructor=globalThis.WebSocket;
+ const client=new Client({connectionString:uri,connectionTimeoutMillis:30000,query_timeout:30000});
+ // Unsolicited socket errors can include credentials in driver messages. The
+ // pending query/connect rejects normally and the outer verifier sanitizes it.
+ client.on('error',()=>{});
+ try{await client.connect();}catch(error){try{await client.end();}catch{}throw error;}
+ return {
+  query:(query,params)=>client.query(query,params),
+  async runTransaction(callback){
+   await client.query('BEGIN ISOLATION LEVEL SERIALIZABLE');
+   try{const result=await callback({query:(query,params)=>client.query(query,params)});await client.query('COMMIT');return result;}
+   catch(error){try{await client.query('ROLLBACK');}catch{}throw error;}
+  },
+  close:()=>client.end(),
+ };
+}
+async function restrictedRoleChecks(drivers){
+ const query=(text,params=[])=>drivers.sql.query(text,params,{fullResults:true,arrayMode:false,fetchOptions:{signal:AbortSignal.timeout(30000)}});
+ const identity=await query('SELECT current_user AS current_user,session_user AS session_user');
+ if(identity.rows?.length!==1||identity.rows[0].current_user!==runtimeRole||identity.rows[0].session_user!==runtimeRole)fail('application-login-identity-mismatch');
+ const proof=await verifyPostgresRuntimeRole({query});
+ const smoke=await exercisePostgresSmoke(drivers.db);
+ const retry={ingestion_id:'pg-verification:app-retry',records:[{id:'pg-verification:app-climate',location_id:'pg-verification:location',attribute:'climate',value:'climate:Cfb',valid_from:1000,valid_to:1100,source_id:'pg-verification:source'}]};
+ if((await importBatch(drivers.db,retry)).duplicate||(await importBatch(drivers.db,retry)).duplicate!==true||(await attributesAt(drivers.db,1000)).records.find(row=>row.id==='pg-verification:app-climate')?.value!=='climate:Cfb')fail('application-idempotency-contract-mismatch');
+ const probes=[
+  ['drop tables','DROP TABLE atlas_names'],
+  ['update facts',"UPDATE atlas_sources SET name='forbidden' WHERE id='pg-verification:source'"],
+  ['delete evidence','DELETE FROM atlas_attribute_records'],
+  ['truncate evidence','TRUNCATE atlas_names'],
+  ['explicit revision IDs',"INSERT INTO atlas_ingestions(rowid,id,fingerprint,counts,created_at) VALUES(99,'forbidden',repeat('a',64),'{}',1)"],
+  ['reset revision sequence',"SELECT setval('atlas_ingestions_rowid_seq',1)"],
+  ['restart revision sequence','ALTER SEQUENCE atlas_ingestions_rowid_seq RESTART WITH 1'],
+  ['read revision sequence','SELECT last_value FROM atlas_ingestions_rowid_seq'],
+  ['disable guards','ALTER TABLE atlas_sources DISABLE TRIGGER USER'],
+  ['bypass guards',"SET session_replication_role='replica'"],
+  ['create schema objects','CREATE TABLE public.forbidden(id text)'],
+  ['create roles','CREATE ROLE atlas_verification_forbidden LOGIN'],
+  ['assume owner role',`SET ROLE ${roleName}`],
+ ];
+ const denied=[];
+ for(const [label,statement] of probes){
+  let rejected=false;
+  try{await query(statement);}catch(error){if(!['42501','0LP01'].includes(error?.code??error?.sqlstate))fail('application-denial-probe-unverified');rejected=true;}
+  if(!rejected)fail('application-excessive-privilege');denied.push(label);
+ }
+ return {proof,smoke,denied};
+}
 
 /** All SQL writes target the connection returned for this invocation's newly
  * created branch. Production is queried through management metadata only.
  * No connection string, API response body or raw driver error enters receipts.
  */
-export async function verifyNeonSQL({env=process.env,filename='data/validation/neon-sql-verification.json',fetchImpl=fetch,driverFactory=liveDrivers,sleep=pause,uuid=randomUUID}={}){
+export async function verifyNeonSQL({env=process.env,filename='data/validation/neon-sql-verification.json',fetchImpl=fetch,driverFactory=liveDrivers,ownerDriverFactory=liveOwnerDriver,sleep=pause,uuid=randomUUID}={}){
  const receipt={status:'running',scope:'new disposable Neon validation branch',checked_at_utc:new Date().toISOString(),project_id:expectedNeonProjectId,production_branch_id:productionBranchId,production_sql_writes:false,credentials_logged:false,cleanup_status:'not-required'};
- let createdId=null,requestCount=0,parentRequestCount=0,stage='configuration';
+ let createdId=null,ownerDriver=null,requestCount=0,parentRequestCount=0,stage='configuration';
  const checkpoint=()=>writeReceipt(filename,receipt);
  const apiKey=env.NEON_API_KEY,projectId=env.NEON_PROJECT_ID;
  const request=async(method,route,body)=>{
@@ -144,7 +194,7 @@ export async function verifyNeonSQL({env=process.env,filename='data/validation/n
   stage='isolated-connection';
   const params=new URLSearchParams({branch_id:createdId,database_name:databaseName,role_name:roleName,pooled:'true'});
   const connection=await request('GET',prefix+'/connection_uri?'+params);
-  const drivers=driverFactory(connectionURI(connection.uri,endpointHost));
+  const ownerURI=connectionURI(connection.uri,endpointHost),drivers=driverFactory(ownerURI);
   let identity;
   for(let attempt=0;attempt<4;attempt++){
    try{identity=await drivers.db.prepare("SELECT current_database() AS database_name,current_user AS role_name,current_schema() AS schema_name,current_setting('server_version_num') AS server_version_num").first();break;}
@@ -161,17 +211,29 @@ export async function verifyNeonSQL({env=process.env,filename='data/validation/n
   stage='schema-inventory';const inventory=await postgresSchemaInventory(drivers.db);
   if(!inventory.schema_complete||inventory.tables.length!==postgresTables.length||inventory.tables.some(name=>!postgresTables.includes(name)))fail('schema-inventory-mismatch');
   receipt.schema_tables=[...postgresTables];receipt.schema_complete=true;
-  stage='hosted-service-contracts';
-  const smoke=await exercisePostgresSmoke(drivers.db);
+  stage='restricted-role-provisioning';
+  const appPassword=randomBytes(32).toString('base64url');
+  ownerDriver=await ownerDriverFactory(ownerURI);
+  await provisionPostgresRuntimeRole({driver:ownerDriver,password:appPassword});
+  const appURI=new URL(ownerURI);appURI.username=runtimeRole;appURI.password=appPassword;
+  stage='restricted-application-contracts';
+  const checked=await restrictedRoleChecks(driverFactory(appURI.href)),smoke=checked.smoke;
   if(smoke.retained_original_population!==42||smoke.resolved_population!==43)fail('hosted-service-contract-mismatch');
   receipt.actual_hosted_service_checks=smoke.actual_hosted_service_checks;
   receipt.retained_original_population=42;receipt.resolved_population=43;
+  receipt.runtime_role=checked.proof;
+  receipt.runtime_current_user=runtimeRole;receipt.runtime_session_user=runtimeRole;
+  receipt.denied_operations=checked.denied;receipt.idempotent_application_retry=true;
   receipt.sql_contracts_passed=true;receipt.status='verified';
  }catch(error){
   receipt.status='failed';receipt.failure_stage=stage;receipt.error_code=error instanceof VerificationError?error.code:`${stage}-failed`;
   const sqlstate=error?.sqlstate??error?.code;if(!(error instanceof VerificationError)&&typeof sqlstate==='string'&&/^[A-Z0-9]{5}$/.test(sqlstate))receipt.sqlstate=sqlstate;
  }
  finally{
+  if(ownerDriver){
+   try{await ownerDriver.close();receipt.owner_connection_closed=true;}
+   catch{receipt.owner_connection_closed=false;receipt.status='failed';receipt.owner_close_error_code='private-owner-close-failed';}
+  }
   if(createdId){
    try{
     if(!validBranchId(createdId)||createdId===productionBranchId)fail('unsafe-cleanup-target');
