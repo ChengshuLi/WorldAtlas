@@ -99,4 +99,11 @@ class ReferenceMigrations(unittest.TestCase):
   self.index['types'][5]['valid_from']=1800;put(self.old/'index.json',self.index)
   with self.assertRaises(ValueError):self.run_prepare()
   self.assertFalse((self.root/'stage').exists())
+ def test_unknown_changed_preserves_originals_without_native_source_reads(self):
+  result=m.prepare(self.b,self.a,self.receipt,self.old,self.root/'stage',{},True);index,values=rows(self.root/'stage')
+  self.assertEqual(index['incremental_preparation']['derived_records'],0);self.assertEqual(values['keep'],self.oldrows[1][1]);self.assertNotIn('change',values);self.assertEqual(result['types'],self.index['types']);self.assertTrue(m.load(self.root/'stage/incremental-receipt.json')['unknown_changed'])
+ def test_second_generation_retains_earlier_archives_and_uses_distinct_delta_names(self):
+  self.run_prepare();first=self.root/'stage';next_path=self.root/'next.json';next_features=copy.deepcopy(self.after);next_features[0]['geometry']=mapping(box(0,0,3,1));put(next_path,{'features':next_features});receipt=self.root/'next-receipt.json';before=m.OWN.feature_snapshot(self.a);after=m.OWN.feature_snapshot(next_path);reused,changed,removed,added=m.geometry_delta(before,after)
+  put(receipt,{'before_footprints_sha256':m.OWN.published_footprint_hash(before),'after_footprints_sha256':m.OWN.published_footprint_hash(after),'changed_ids':sorted(changed-added),'added_ids':sorted(added),'removed_ids':sorted(removed),'relationships':[],'source_evidence':[{'url':'https://example.org/test','source_sha256':'a'*64}]})
+  second=m.prepare(self.a,next_path,receipt,first,self.root/'second',self.sources);proof=m.load(self.root/'second/incremental-receipt.json');self.assertTrue(any(p.endswith('incremental-receipt.json') for p in proof['retained_prior_archives']));self.assertTrue(second['parts']);self.assertEqual(len(second['parts']),len(set(second['parts'])))
 if __name__=='__main__':unittest.main()

@@ -28,7 +28,16 @@ const memberFields=['release_id','entity_id','parent_id','reference_name','activ
 const releaseFields=['id','source_id','version','reference_date','status','hierarchy_sha256','footprints_sha256','membership_sha256','location_ids_sha256','changes_sha256','expected_counts','metadata','published_at'];
 const changeFields=['id','release_id','old_entity_id','new_entity_id','change_type','source_id','evidence'];
 function member(row,release){return {release_id:release.id,entity_id:text(row.entity_id??row.id,'entity ID'),parent_id:row.parent_id==null?null:text(row.parent_id,'parent ID'),reference_name:row.reference_name==null?null:text(row.reference_name,'reference name'),active:row.active??1,source_id:text(row.source_id??release.source_id,'source ID'),evidence:object(row.evidence??{})};}
-function change(row,release){return {id:text(row.id,'change ID'),release_id:release.id,old_entity_id:row.old_entity_id==null?null:text(row.old_entity_id,'old entity ID'),new_entity_id:row.new_entity_id==null?null:text(row.new_entity_id,'new entity ID'),change_type:text(row.change_type,'change type'),source_id:text(row.source_id??release.source_id,'source ID'),evidence:object(row.evidence)};}
+function change(row,release){
+ const result={id:text(row.id,'change ID'),release_id:release.id,old_entity_id:row.old_entity_id==null?null:text(row.old_entity_id,'old entity ID'),new_entity_id:row.new_entity_id==null?null:text(row.new_entity_id,'new entity ID'),change_type:text(row.change_type,'change type'),source_id:text(row.source_id??release.source_id,'source ID'),evidence:object(row.evidence)};
+ const creation=result.evidence.geometry_creation;if(creation){const proof=creation.creation_proof,source=proof?.source;
+  if(result.change_type!=='create'||result.old_entity_id!==null||creation.old_entity_id!==null||creation.new_entity_id!==result.new_entity_id||proof?.location_id!==result.new_entity_id||creation.history_transfer!=='none')fail('Invalid source-backed creation endpoints/history');
+  if(!source||!/^https?:\/\//.test(source.url??''))fail('Creation requires source evidence');digest(source.sha256);text(source.identity,'source identity');text(source.license,'source license');text(source.attribution,'source attribution');
+  if(!Number.isSafeInteger(source.supported_from)||!Number.isSafeInteger(source.supported_to)||source.supported_from===0||source.supported_to===0||source.supported_from>=source.supported_to||source.supported_from< -3000||source.supported_to>2027)fail('Invalid creation source interval');
+  if(!Array.isArray(proof.parent_chain)||proof.parent_chain.length!==5||new Set(proof.parent_chain).size!==5)fail('Invalid creation parent chain');for(const id of proof.parent_chain)text(id,'creation parent ID');
+ }
+ return result;
+}
 export async function geographicMembershipHash(input){return hash(input.map(hashMember).sort((a,b)=>binaryCompare(a.entity_id,b.entity_id)));}
 export async function geographicLocationIdsHash(input){return hash(input.filter(r=>(r.active??1)===1&&(r.kind??r.level)==='location').map(r=>r.entity_id??r.id).sort(binaryCompare));}
 export async function geographicChangesHash(input){return hash(input.map(hashChange).sort((a,b)=>binaryCompare(a.id,b.id)));}
@@ -69,6 +78,10 @@ export async function finalizeGeographicRelease(db,id){
  if(await first(db.prepare("SELECT m.entity_id FROM atlas_geographic_memberships m JOIN atlas_entities e ON e.id=m.entity_id LEFT JOIN atlas_geographic_memberships p ON p.release_id=m.release_id AND p.entity_id=m.parent_id AND p.active=1 WHERE m.release_id=? AND m.active=1 AND e.kind!='continent' AND p.entity_id IS NULL LIMIT 1").bind(id)))fail('Incomplete active same-release adjacent-tier parent chain');
  if(await first(db.prepare("SELECT m.entity_id FROM atlas_geographic_memberships m JOIN atlas_entities e ON e.id=m.entity_id WHERE m.release_id=? AND m.active=1 AND e.kind!='location' AND NOT EXISTS(SELECT 1 FROM atlas_geographic_memberships c WHERE c.release_id=m.release_id AND c.parent_id=m.entity_id AND c.active=1) LIMIT 1").bind(id)))fail('Active geographic group has no member territory');
  if(tiers.some(k=>counts[k]!==release.expected_counts[k]))fail('Reference release node counts do not match pinned manifest',409);
+ for await(const row of changeRows(db,id))if(row.evidence.geometry_creation){const proof=row.evidence.geometry_creation.creation_proof,chain=[row.new_entity_id,...proof.parent_chain];
+  const nodes=await rows(db.prepare(`SELECT m.entity_id,m.parent_id,e.kind FROM atlas_geographic_memberships m JOIN atlas_entities e ON e.id=m.entity_id WHERE m.release_id=? AND m.active=1 AND m.entity_id IN (${chain.map(()=>'?').join(',')})`).bind(id,...chain)),byId=new Map(nodes.map(n=>[n.entity_id,n]));
+  if(chain.some((entity,index)=>byId.get(entity)?.kind!==tiers[index]||byId.get(entity)?.parent_id!==(chain[index+1]??null)))fail('Creation proof does not match the published parent chain',409);
+ }
  const membershipHash=await streamedArrayHash(memberRows(db,id),hashMember),locationsHash=await streamedArrayHash(memberRows(db,id,true),r=>r.entity_id),changesHash=await streamedArrayHash(changeRows(db,id),hashChange);
  if(membershipHash!==release.membership_sha256||locationsHash!==release.location_ids_sha256||changesHash!==release.changes_sha256)fail('Reference release content hash does not match pinned manifest',409);
  // Count predicates close the staging/read race: append-only rows cannot change

@@ -127,7 +127,7 @@ def summarize_changed(ids,after,index,sources):
    code,share,coverage=result;rows[id].append([ti,value_index(TOPO.CLASSES[code]),share,coverage])
  return rows,dict(missing),evidence
 
-def prepare(before_path,after_path,receipt_path,references,output,sources):
+def prepare(before_path,after_path,receipt_path,references,output,sources,unknown_changed=False):
  references=references.resolve();output=output.resolve();start_index_sha=sha(references/'index.json');wrapper_sha=sha(pathlib.Path(__file__))
  if output.exists():raise ValueError('Output must be a new staging directory')
  if output.is_relative_to(references) or references.is_relative_to(output):raise ValueError('Stage must be separate from immutable prepared references')
@@ -138,7 +138,7 @@ def prepare(before_path,after_path,receipt_path,references,output,sources):
  if index.get('footprints_sha256')!=bh or index.get('locations')!=len(before):raise ValueError('Before geography does not match frozen references')
  reused,changed,removed,added=geometry_delta(before,after);receipt=load(receipt_path);receipt['_before_ids']=list(before);receipt['_after_ids']=list(after)
  OWN.check_receipt(receipt,bh,ah,changed,removed,added)
- proof=source_proof(index,sources);old_types=copy.deepcopy(index['types']);old_values=copy.deepcopy(index['values']);archived=collections.defaultdict(list);old_records=collections.defaultdict(list);part_hashes={}
+ proof={'mode':'unknown-changed','original_inputs':copy.deepcopy(index['inputs'])} if unknown_changed else source_proof(index,sources);old_types=copy.deepcopy(index['types']);old_values=copy.deepcopy(index['values']);archived=collections.defaultdict(list);old_records=collections.defaultdict(list);part_hashes={}
  for name in index['parts']:
   path=OWN.safe_path(references,name);expected=index.get('parts_sha256',{}).get(name)
   if not expected or sha(path)!=expected:raise ValueError('Original reference asset proof mismatch: '+name)
@@ -156,11 +156,11 @@ def prepare(before_path,after_path,receipt_path,references,output,sources):
    t=old_types[row[0]];key=(t['attribute'],t['valid_from'],t['valid_to'])
    if key in seen:raise ValueError('Duplicate resolved reference attribute interval: '+id)
    seen.add(key)
- fresh,missing,evidence=summarize_changed(changed,after,index,sources) if changed else ({},{},{})
+ fresh,missing,evidence=({},{'unknown_changed':sorted(changed)},{}) if unknown_changed else summarize_changed(changed,after,index,sources) if changed else ({},{},{})
  if index['types'][:len(old_types)]!=old_types or index['values'][:len(old_values)]!=old_values:raise ValueError('Original source/category dictionaries were renumbered')
  if sha(references/'index.json')!=start_index_sha or sha(pathlib.Path(__file__))!=wrapper_sha:raise ValueError('Reference inputs/code changed during preparation')
  if OWN.published_footprint_hash(OWN.feature_snapshot(before_path))!=bh or OWN.published_footprint_hash(OWN.feature_snapshot(after_path))!=ah:raise ValueError('Input footprints changed during preparation')
- if source_proof(index,sources)!=proof:raise ValueError('Native sources changed during preparation')
+ if not unknown_changed and source_proof(index,sources)!=proof:raise ValueError('Native sources changed during preparation')
  output.parent.mkdir(parents=True,exist_ok=True);pending=tempfile.TemporaryDirectory(prefix=output.name+'.pending-',dir=output.parent);stage=pathlib.Path(pending.name);parts=[];active_records=collections.defaultdict(list);reused_records=0
  for name in index['parts']:
   previous=load(references/name);kept=[[id,rows] for id,rows in previous if id in reused]
@@ -171,12 +171,14 @@ def prepare(before_path,after_path,receipt_path,references,output,sources):
   for id,rows in kept:active_records[id]+=rows;reused_records+=len(rows)
  changed_rows=[[id,rows] for id,rows in sorted(fresh.items()) if rows]
  for offset in range(0,len(changed_rows),1500):
-  name=f'incremental-delta-{offset//1500}.json.gz'
+  name=f'incremental-{sha(receipt_path)[:16]}-delta-{offset//1500}.json.gz'
   if name in parts:raise ValueError('Incremental output part name already exists')
   write_gzip(stage/name,changed_rows[offset:offset+1500]);parts.append(name)
  for id,rows in fresh.items():active_records[id]+=rows
  archive_rows=[[id,archived.get(id,[])] for id in sorted((changed|removed)&set(before))]
  archive_hash=write_gzip(stage/'migration-before-records.json.gz',archive_rows)
+ previous_names=['prior-archives','incremental-receipt.json','migration-before-records.json.gz','migration-new-evidence.json.gz']
+ retained_archives=OWN.retain_prior_archives(references,stage,index,previous_names)
  counts=collections.Counter();missing_climate={str(y):[] for y in [1901,1931,1961,1991]}
  for id in sorted(after):
   by_attribute={}
@@ -185,8 +187,9 @@ def prepare(before_path,after_path,receipt_path,references,output,sources):
   for year in missing_climate:
    if ('climate',int(year)) not in by_attribute:missing_climate[year].append(id)
  records=sum(map(len,active_records.values()));known_topo=counts[('topography',2026,'reference')]
- report={'version':1,'before_footprints_sha256':bh,'after_footprints_sha256':ah,'original_index_sha256':start_index_sha,'migration_receipt_sha256':sha(receipt_path),'before_snapshot_sha256':sha(before_path),'after_snapshot_sha256':sha(after_path),'wrapper_sha256':wrapper_sha,'sources':proof,'changed_ids':sorted(changed-added),'added_ids':sorted(added),'removed_ids':sorted(removed),'reused_locations':len(reused),'recomputed_locations':len(changed),'reused_records':reused_records,'derived_records':sum(map(len,fresh.values())),'archive':{'path':'migration-before-records.json.gz','sha256':archive_hash,'locations':len(archive_rows),'records':sum(len(rows) for _,rows in archive_rows)},'missing_changed':missing,'historical_claims_transferred':False,'source_intervals_unchanged':True,'source_dictionaries_prefix_preserved':True,'after_records':records}
+ report={'version':1,'before_footprints_sha256':bh,'after_footprints_sha256':ah,'original_index_sha256':start_index_sha,'migration_receipt_sha256':sha(receipt_path),'before_snapshot_sha256':sha(before_path),'after_snapshot_sha256':sha(after_path),'wrapper_sha256':wrapper_sha,'sources':proof,'changed_ids':sorted(changed-added),'added_ids':sorted(added),'removed_ids':sorted(removed),'reused_locations':len(reused),'recomputed_locations':0 if unknown_changed else len(changed),'unknown_changed':bool(unknown_changed),'reused_records':reused_records,'derived_records':sum(map(len,fresh.values())),'archive':{'path':'migration-before-records.json.gz','sha256':archive_hash,'locations':len(archive_rows),'records':sum(len(rows) for _,rows in archive_rows)},'missing_changed':missing,'historical_claims_transferred':False,'source_intervals_unchanged':True,'source_dictionaries_prefix_preserved':True,'after_records':records}
  write_gzip(stage/'migration-new-evidence.json.gz',evidence);(stage/'incremental-receipt.json').write_text(dump(report))
+ report['retained_prior_archives']=retained_archives;(stage/'incremental-receipt.json').write_text(dump(report))
  index.update(parts=parts,parts_sha256={name:sha(stage/name) for name in parts},records=records,locations=len(after),represented_locations=sum(bool(rows) for rows in active_records.values()),footprints_sha256=ah,climate_counts={str(y):counts[('climate',y,'reference')] for y in [1901,1931,1961,1991]},missing_climate=missing_climate,vegetation_references=counts[('vegetation',2026,'reference')],unknown_source_records=counts[('vegetation',2026,'unknown')],incremental_preparation={'receipt':'incremental-receipt.json','receipt_sha256':sha(stage/'incremental-receipt.json'),**{k:report[k] for k in ['original_index_sha256','reused_locations','recomputed_locations','reused_records','derived_records']}})
  index['merged_sources']['topography-reference']['records']=known_topo
  index['inputs'].setdefault('original_preparation_geography',index['inputs'].get('geography'))
@@ -199,7 +202,8 @@ if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__)
  for name in ['before','after','receipt','output']:p.add_argument('--'+name,type=pathlib.Path,required=True)
  p.add_argument('--references',type=pathlib.Path,default=ROOT/'data/reference-attributes');p.add_argument('--sources',type=pathlib.Path,help='Optional explicit native source path manifest')
+ p.add_argument('--unknown-changed',action='store_true',help='Retain unchanged references; archive changed footprint values and leave new/changed fields unknown without native source recomputation')
  args=p.parse_args();cache=ROOT/'.cache/research'
  sources=load(args.sources) if args.sources else {'climate_archive':str(cache/'koppen-geiger-tif.zip'),'climate_rasters':{str(a):str(cache/f'koppen-tif/{a}_{b}/koppen_geiger_0p00833333.tif') for a,b in [(1901,1930),(1931,1960),(1961,1990),(1991,2020)]},'vegetation':str(ROOT/'.cache/semantic/resolve-ecoregions.geojson'),'topography':str(cache/'terrain-geom_1KMmaj_GMTEDmd.tif')}
  sources={**sources,**{key:pathlib.Path(sources[key]) for key in ['climate_archive','vegetation','topography']},'climate_rasters':{key:pathlib.Path(value) for key,value in sources['climate_rasters'].items()}}
- prepare(args.before,args.after,args.receipt,args.references,args.output,sources)
+ prepare(args.before,args.after,args.receipt,args.references,args.output,sources,args.unknown_changed)

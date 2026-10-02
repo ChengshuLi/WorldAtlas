@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {footprintHash} from './check-prepared.mjs';
 import {geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
 
@@ -25,7 +26,7 @@ const geometryId=f=>{if(!f?.id||f.id!==f.properties?.id||!f.geometry)throw Error
 const safeProofFile=(base,relative)=>{const file=path.resolve(base,relative);if(!file.startsWith(path.resolve(base)+path.sep))throw Error('Proof archive path escapes evidence directory');return file;};
 
 /** Validate exact before/after identity/footprint chains, never infer replacements. */
-export function validateGeometryMigrations({features,baselineIds,baselineFootprints,manifestFiles=[]}){
+export function validateGeometryMigrations({features,baselineIds,baselineFootprints,manifestFiles=[],units=[]}){
  const proofs=[];let state=new Map(features.map(f=>[geometryId(f),f]));
  if(state.size!==features.length)throw Error('Duplicate current location identities');
  for(const manifestFile of manifestFiles){
@@ -47,9 +48,17 @@ export function validateGeometryMigrations({features,baselineIds,baselineFootpri
   for(const row of receipt.archives??[]){const f=row.feature;if(row.id!==geometryId(f)||archives.has(row.id))throw Error('Invalid or duplicate original geometry archive identity');archives.set(row.id,f);}
   if(!equalIds(new Set(archives.keys()),new Set([...changed,...removed])))throw Error('Every changed/retired identity requires its exact archived original feature');
   const pairs=[],coveredBefore=new Set(),coveredAfter=new Set();
+  const creationProofs=receipt.creation_proofs??[],creations=new Set();
   for(const relationship of receipt.relationships??[]){
    if(relationship.history_transfer!==false)throw Error('Geometry relationship may not transfer historical evidence');
    const before=uniqueIds(relationship.before_ids,'relationship before IDs'),after=uniqueIds(relationship.after_ids,'relationship after IDs');
+   if(relationship.kind==='source-backed-create'){
+    if(before.size||!after.size||[...after].some(id=>!added.has(id)||creations.has(id)))throw Error('Source-backed creation requires unique new identities and no predecessor');
+    for(const id of after){const matches=creationProofs.filter(p=>p.location_id===id);if(matches.length!==1)throw Error('Creation requires one exact source proof');const evidence=matches[0];
+     const sourceFile=safeProofFile(base,evidence.source?.path??'');if(!Object.values(files).some(p=>p.file===sourceFile&&p.sha256===evidence.source.sha256))throw Error('Creation source must be an immutable manifest archive');
+     creations.add(id);coveredAfter.add(id);pairs.push({old_entity_id:null,new_entity_id:id,change_type:'create',proposal_id:relationship.proposal_id,kind:relationship.kind,history_transfer:'none',creation_proof:evidence});
+    }continue;
+   }
    if(!before.size||!after.size||[...before].some(id=>!changed.has(id)&&!removed.has(id))||[...after].some(id=>!changed.has(id)&&!added.has(id)))throw Error('Geometry relationship endpoints must match changed/retired/new dispositions');
    let links=relationship.identity_pairs;
    if(!links){
@@ -68,8 +77,9 @@ export function validateGeometryMigrations({features,baselineIds,baselineFootpri
    for(const id of before)coveredBefore.add(id);for(const id of after)coveredAfter.add(id);
   }
   if(!equalIds(coveredBefore,new Set([...changed,...removed]))||!equalIds(coveredAfter,new Set([...changed,...added])))throw Error('Geometry relationships do not exhaustively account for identity changes');
+  if(creationProofs.length!==creations.size||creationProofs.some(p=>!creations.has(p.location_id)))throw Error('Extra or duplicate creation proof');
   if(!Array.isArray(receipt.source_evidence)||!receipt.source_evidence.length||receipt.source_evidence.some(e=>!/^https?:\/\//.test(e.url??'')||!/^[a-f0-9]{64}$/.test(e.source_sha256??'')))throw Error('Geometry changes require inspected source URLs and reproducible source hashes');
-  proofs.push({manifestFile:absolute,manifest_sha256:sha(fs.readFileSync(absolute)),receipt_sha256:pinned.sha256,manifest,receipt,changed,removed,added,reused,archives,pairs,files});
+  proofs.push({manifestFile:absolute,manifest_sha256:sha(fs.readFileSync(absolute)),receipt_sha256:pinned.sha256,manifest,receipt,changed,removed,added,reused,archives,pairs,files,creationProofs,base});
  }
  // Reconstruct the entire original footprint set, validating every unchanged
  // polygon as well as explicit edits. IDs alone are never evidence of equality.
@@ -77,8 +87,12 @@ export function validateGeometryMigrations({features,baselineIds,baselineFootpri
   const {receipt,changed,removed,added,reused,archives}=proof;
   if(footprintHash([...state.values()])!==receipt.after_footprints_sha256)throw Error('Current geometry contains an unreceipted footprint mutation or wrong migration order');
   if(!equalIds(new Set(state.keys()),new Set([...changed,...added,...reused])))throw Error('After-geometry identity inventory differs from validated receipt');
+  const afterFeatures=[...state.values()];
   for(const id of added)state.delete(id);for(const [id,feature] of archives)state.set(id,feature);
   if(!equalIds(new Set(state.keys()),new Set([...changed,...removed,...reused]))||footprintHash([...state.values()])!==receipt.before_footprints_sha256)throw Error('Archived originals do not reconstruct the pinned pre-migration footprints');
+  if(proof.creationProofs.length){const hierarchy=proof.files['after/hierarchy.json']??proof.files['after-hierarchy.json'];
+   execFileSync('python3',[fileURLToPath(new URL('./validate-land-creations.py',import.meta.url))],{input:json({before:[...state.values()],after:afterFeatures,units:hierarchy?read(hierarchy.file):units,proofs:proof.creationProofs,base:proof.base}),maxBuffer:16*1024*1024});
+  }
  }
  if(!equalIds(new Set(state.keys()),new Set(baselineIds)))throw Error('Location migration requires a separately validated footprint/identity crosswalk');
  if(footprintHash([...state.values()])!==baselineFootprints)throw Error('Names/membership-only release changed the pinned pre-migration location footprints');
@@ -239,7 +253,7 @@ export async function prepareGeographicRelease({data='data',geographyData=data,o
  const footprints=footprintHash(features),pinnedFootprints=read(`${data}/macro-corrections.json`).footprints_sha256_before;
  if(!/^[a-f0-9]{64}$/.test(pinnedFootprints))throw Error('Original baseline footprint pin is missing');
  const manifestFiles=geometryManifests??(footprints!==pinnedFootprints&&fs.existsSync(`${data}/geographic-repair-evidence/index.json`)?[`${data}/geographic-repair-evidence/index.json`]:[]);
- const geometryProof=validateGeometryMigrations({features,baselineIds:oldLocationIds,baselineFootprints:pinnedFootprints,manifestFiles});
+ const geometryProof=validateGeometryMigrations({features,baselineIds:oldLocationIds,baselineFootprints:pinnedFootprints,manifestFiles,units});
  const extraMigrations=metadataMigrations??(geometryProof.proofs.length&&fs.existsSync(`${data}/macro-boundary-migration.json.gz`)?[`${data}/macro-boundary-migration.json.gz`]:[]);
  const metadataProofs=extraMigrations.map(file=>({file,sha256:sha(fs.readFileSync(file)),receipt:read(file)}));
  for(const proof of metadataProofs)if(proof.receipt.historical_claims_transferred!==false||proof.receipt.summary?.geometry_changes!==0)throw Error('Metadata migration may not alter footprints or transfer historical claims');
@@ -278,11 +292,11 @@ export async function prepareGeographicRelease({data='data',geographyData=data,o
  for(const e of memberships){
   const old=registry.get(e.entity_id),decision=decisions.get(e.entity_id);
   const add=(type,target=e.entity_id)=>changes.push({id:`${releaseKey}:${type}:${e.entity_id}`,old_entity_id:old?e.entity_id:null,new_entity_id:target,change_type:type,source_id:source.id,evidence:{...commonEvidence,migration_sha256:migrationHash,decision:decision?{action:decision.action,rationale:decision.rationale,evidence:decision.evidence}:null,before:old?{name:old.name,parent_id:old.parent_id,active:old.active}:null,after:{name:e.reference_name,parent_id:e.parent_id,active:e.active}}});
-  if(!old){add('create');const pair=metadataCreatedRelationships.get(e.entity_id);if(pair)changes.at(-1).evidence.metadata_relationship=metadataRelationshipEvidence(pair);}
+  if(!old){add('create');const pair=metadataCreatedRelationships.get(e.entity_id);if(pair)changes.at(-1).evidence.metadata_relationship=metadataRelationshipEvidence(pair);const creation=geometryProof.pairs.find(p=>p.change_type==='create'&&p.new_entity_id===e.entity_id);if(creation)changes.at(-1).evidence.geometry_creation=creation;}
   else if((old.active||metadataRelationships.has(e.entity_id))&&e.active===0){const locationPairs=geometryProof.pairs.filter(p=>p.old_entity_id===e.entity_id&&p.old_entity_id!==p.new_entity_id),metadataPairs=metadataRelationships.get(e.entity_id);if(!locationPairs.length){if(metadataPairs){for(const pair of metadataPairs){add(pair.change_type,pair.new_entity_id);if(pair.change_type==='split')changes.at(-1).id+=`:${pair.new_entity_id}`;changes.at(-1).evidence.metadata_relationship=metadataRelationshipEvidence(pair);}}else add(decision?.action==='merge'?'merge':'retire',decision?.action==='merge'?decision.target_id:null);}}
   else if(e.active){if(old.name!==e.reference_name)add('rename');if(old.parent_id!==e.parent_id)add('reparent');}
  }
- for(const [at,pair] of geometryProof.pairs.entries())if(pair.old_entity_id!==pair.new_entity_id||current.has(pair.new_entity_id))changes.push({id:`${releaseKey}:geometry:${at}:${pair.old_entity_id}`,old_entity_id:pair.old_entity_id,new_entity_id:pair.new_entity_id,change_type:pair.change_type,source_id:source.id,evidence:{...commonEvidence,geometry_migration:pair,migration_sha256:migrationHash}});
+ for(const [at,pair] of geometryProof.pairs.entries())if(pair.change_type!=='create'&&(pair.old_entity_id!==pair.new_entity_id||current.has(pair.new_entity_id)))changes.push({id:`${releaseKey}:geometry:${at}:${pair.old_entity_id}`,old_entity_id:pair.old_entity_id,new_entity_id:pair.new_entity_id,change_type:pair.change_type,source_id:source.id,evidence:{...commonEvidence,geometry_migration:pair,migration_sha256:migrationHash}});
  // Resolve merge chains so every retired ID points to the surviving identity.
  const byId=new Map(memberships.map(e=>[e.entity_id,e]));
  for(const change of changes.filter(c=>['merge','split','replace'].includes(c.change_type))){
