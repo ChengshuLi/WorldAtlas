@@ -1,3 +1,4 @@
+import {renderWorkerResult} from './worker-result.mjs';
 import fs from 'node:fs';
 import {githubAPI,githubPages,linkedPulls,verifyClaimForPR} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
@@ -30,5 +31,7 @@ try{
   Object.assign(result,{accepted:true,merge_commit:merged.sha,title:pr.title,github_issue});
  }
 }catch(error){result.reason=error.message;}
+// GitHub comments deliver durable confirmations without artifact-host access.
+await api(`/repos/${repo}/issues/${number}/comments`,'POST',{body:renderWorkerResult('merge',result)});
 fs.writeFileSync('merge-result.json',JSON.stringify(result,null,2)+'\n');
 fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`${result.accepted?'Merged':'Not merged'} PR #${number}. ${result.reason??''}\n`);console.log(JSON.stringify(result));

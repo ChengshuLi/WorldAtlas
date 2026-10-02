@@ -1,6 +1,6 @@
 # Historical research acceptance reference — detailed scope guidance
 
-**Current research policy (2026-10-02 America/Los_Angeles):** source-only until complete worldwide hierarchy review and matching engineering approval. New location-attribute imports are blocked; local staging and dry runs may proceed. Use [WORKER_COORDINATION.md](WORKER_COORDINATION.md) for reservations and [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md) for the global gate. Older descriptions of enabled live transport below describe capabilities, not permission to bypass this policy.
+**Current research policy (2026-10-02 America/Los_Angeles):** engineering first approves the global continent/subcontinent/region partition, then publishes complete regional branches. Luna may import only explicitly approved subjects within those branches; currently no branches are approved, so imports remain blocked and source-only staging/dry runs may proceed. See [TOP_DOWN_GEOGRAPHY_WORKFLOW.md](TOP_DOWN_GEOGRAPHY_WORKFLOW.md), [WORKER_COORDINATION.md](WORKER_COORDINATION.md) and [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md). Older descriptions of enabled transport describe capabilities, not geographic approval.
 
 GitHub Issues is the single source of truth for TODOs, status and dated work history: [open issues](https://github.com/ChengshuLi/WorldAtlas/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Ahistory-research). This file retains detailed scope/acceptance references; its legacy ENG/RES IDs identify migrated issues, not a live checklist.
 

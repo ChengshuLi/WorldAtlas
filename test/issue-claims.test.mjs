@@ -28,6 +28,16 @@ test('an idempotent lost-response retry retains original ownership',()=>{
  const original=first(),replayed=transitionClaim(next({request:request(),now:now+1000}));
  assert.equal(replayed.replayed,true);assert.equal(replayed.claim.expires_at,original.expires_at);
 });
+test('renewal, rotation and reassignment retain one canonical comment ID',()=>{
+ const renewed=transitionClaim(next()).claim;
+ assert.equal(renewed.comment_id,101);
+ const rotated=transitionClaim(next({request:request({action:'renew',request_id:'ssssssss-ssss-ssss-ssss-ssssssssssss',branch:'engineering/part2'})})).claim;
+ assert.equal(rotated.comment_id,101);
+ const released=transitionClaim(next({request:request({action:'release',request_id:'ssssssss-ssss-ssss-ssss-ssssssssssss'})})).claim;
+ const reassigned=transitionClaim(next({comments:[comment(released)],request:request({worker_id:'thread-b',claim_id:'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',request_id:'tttttttt-tttt-tttt-tttt-tttttttttttt'})})).claim;
+ assert.equal(reassigned.comment_id,101);
+ assert.equal(renderClaim(renewed).includes('comment_id'),false);
+});
 test('umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed',()=>{
  for(const labels of [['type:engineering','kind:umbrella','status:ready'],['type:engineering','kind:work-item','status:ready','status:blocked'],['type:engineering','kind:work-item']])assert.throws(()=>transitionClaim({issue:issue({labels}),comments:[],request:request(),now}));
  for(const max_prs of [0,4,30])assert.throws(()=>workSpec(`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,max_prs})}\n-->`));

@@ -1,3 +1,5 @@
+import {renderWorkerResult} from './worker-result.mjs';
+import {assertResearchImportsReady} from './research-import-gate.mjs';
 import fs from 'node:fs';
 import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,workSpec,canonicalIssueNumber} from './issue-claim-contract.mjs';
 
@@ -9,9 +11,16 @@ const api=githubAPI(process.env.GH_TOKEN),result={accepted:false,request_id:inpu
 try{
  const [issue,comments,prs]=await Promise.all([api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),linkedPulls(api,repo,number)]);
  const spec=input.action==='release'?null:workSpec(issue.body);
- const ids=new Set([...(spec?.depends_on??[]),...(spec?.mode==='content'?[7]:[])]);
- const dependencies=await Promise.all([...ids].map(id=>api(`/repos/${repo}/issues/${id}`)));
  const geographyGate=spec?.mode==='content'?JSON.parse(fs.readFileSync('data/research-geography-gate.json','utf8')):null;
+ const ids=new Set(spec?.depends_on??[]);
+ if(spec?.mode==='content'){
+  if(geographyGate.version===2){
+   assertResearchImportsReady(geographyGate,{regionIds:spec.region_ids});
+   ids.add(geographyGate.macro_boundaries.approval_issue);
+   for(const id of spec.region_ids)ids.add(geographyGate.regions.find(r=>r.region_id===id).approval_issue);
+  }else ids.add(7);
+ }
+ const dependencies=await Promise.all([...ids].map(id=>api(`/repos/${repo}/issues/${id}`)));
  const next=transitionClaim({issue,comments,prs,dependencies,geographyGate,request:{...input,live_work:input.live_work==='true'}}),claim=next.claim;
  // The canonical bot comment is authority; labels are a repairable display projection.
  if(claim.comment_id)await api(`/repos/${repo}/issues/comments/${claim.comment_id}`,'PATCH',{body:renderClaim(claim)});
@@ -23,6 +32,8 @@ try{
  if(input.action!=='renew'||next.previous?.branch!==claim.branch)await api(`/repos/${repo}/issues/${number}/comments`,'POST',{body:`Worker coordination: ${input.action} by \`${claim.worker_id}\`, branch \`${claim.branch}\`, lease ${claim.expires_at}. Request \`${input.request_id}\`.${next.previous?` Previous branch retained: \`${next.previous.branch}\`.`:''}${input.reason?` Reason: ${input.reason}`:''}`});
  Object.assign(result,{accepted:true,claim,replayed:Boolean(next.replayed)});
 }catch(error){result.reason=error.message;}
+// GitHub comments deliver durable confirmations without artifact-host access.
+await api(`/repos/${repo}/issues/${number}/comments`,'POST',{body:renderWorkerResult('claim',result)});
 fs.writeFileSync('claim-result.json',JSON.stringify(result,null,2)+'\n');
 fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`${result.accepted?'Accepted':'Not accepted'} ${input.action} for #${number}. ${result.reason??''}\n`);
 console.log(JSON.stringify(result));

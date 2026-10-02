@@ -1,11 +1,15 @@
 {
-  "version": 1,
+  "version": 2,
   "ready_for_location_attributes": false,
-  "semantic_complete": false,
   "worldwide_review_issue": 7,
-  "reason": "User requires complete worldwide hierarchy review before new location-attribute imports. Current worldwide semantic review is incomplete. Source-only research and staging may proceed.",
-  "approved_release": null,
-  "approval_evidence": null,
+  "reason": "Approve continent, subcontinent and region boundaries globally first. Then approve and publish each complete regional branch before permitting its location-attribute imports. No macro or regional approvals have been recorded; source-only research and staging may proceed.",
+  "macro_boundaries": {
+    "approved": false,
+    "approval_issue": null,
+    "approval_evidence": null,
+    "boundary_sha256": null
+  },
+  "regions": [],
   "recorded_on": "2026-10-02",
   "date_timezone": "America/Los_Angeles"
 }
