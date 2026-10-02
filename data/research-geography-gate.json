@@ -2,12 +2,19 @@
   "version": 2,
   "ready_for_location_attributes": false,
   "worldwide_review_issue": 7,
-  "reason": "Approve continent, subcontinent and region boundaries globally first. Then approve and publish each complete regional branch before permitting its location-attribute imports. No macro or regional approvals have been recorded; source-only research and staging may proceed.",
+  "reason": "Global continent, subcontinent and region boundaries are approved and published. No complete regional branch has been approved; location-attribute imports remain paused. Source-only research and bounded parallel regional interior audits may proceed.",
   "macro_boundaries": {
-    "approved": false,
-    "approval_issue": null,
-    "approval_evidence": null,
-    "boundary_sha256": null
+    "approved": true,
+    "approval_issue": 33,
+    "approval_evidence": "docs/MACRO_FOUNDATION_APPROVAL.md",
+    "boundary_sha256": "a3571a1f51fa7231a8db975896be739e9d3b54a5bb9eb0af204cd3c8b305116d",
+    "approved_release": {
+      "id": "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+      "version": 3,
+      "hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
+      "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8"
+    },
+    "publication_evidence": "data/validation/global-macro-publication.json"
   },
   "regions": [],
   "recorded_on": "2026-10-02",

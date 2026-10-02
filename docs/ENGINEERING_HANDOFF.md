@@ -1,5 +1,7 @@
 # Engineering handover
 
+
+The global macro partition is approved and published under #33/#36. Use [MACRO_FOUNDATION_APPROVAL.md](MACRO_FOUNDATION_APPROVAL.md) and `data/macro-foundation/regional-handoffs.json.gz` for all 81 fixed regional scopes. Regional interior audits can proceed in bounded parallel work items; no regional location-content imports are approved yet.
 Give a future engineering thread this document and [its prompt](prompts/ENGINEERING.txt). They provide architecture, workflow and validation instructions. **GitHub Issues is the single source of truth for TODOs, status and work history**: [open engineering issues](https://github.com/ChengshuLi/WorldAtlas/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Aengineering). This document contains no live task checklist.
 
 M engineering and N history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), claim one ready 1–3-PR work item before implementation, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.

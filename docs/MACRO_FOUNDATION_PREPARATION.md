@@ -1,8 +1,8 @@
 # Global macro foundation preparation
 
-GitHub #33 owns this bounded milestone beneath #32. The artifacts here are
-**candidates, not installed geography or approval**. Regional interiors and new
-location-attribute imports remain unapproved. Antarctica remains excluded.
+GitHub #33 completed this milestone beneath #32; #36 retains final publication/handoff proof. The corrected macro reference is installed and published in Site 19 / geographic version 3. See [MACRO_FOUNDATION_APPROVAL.md](MACRO_FOUNDATION_APPROVAL.md) and `data/validation/global-macro-publication.json`. Regional interiors and new location-attribute imports remain unapproved. Antarctica remains excluded.
+
+The original source inspections and preparation sequence below are retained history. Reproduction starts from the exact archived release-2 baseline, not by rerunning candidate preparation against the already installed release-3 data. Final approved decisions cover 116 macro groups; the original ledgers retain their 101-group input inventory.
 
 The four `data/macro-foundation/*-review.json.gz` ledgers assess all current
 6 continents, 29 subcontinents and 66 regions. Their original input hash and

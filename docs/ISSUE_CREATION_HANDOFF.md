@@ -1,5 +1,7 @@
 # Issue-creation handover
 
+
+The global macro partition is approved and published under #33/#36. Use [MACRO_FOUNDATION_APPROVAL.md](MACRO_FOUNDATION_APPROVAL.md) and `data/macro-foundation/regional-handoffs.json.gz` for all 81 fixed regional scopes. Regional interior audits can proceed in bounded parallel work items; no regional location-content imports are approved yet.
 Give the issue-creation thread this document and [its prompt](prompts/ISSUE_CREATION.txt). Repository: https://github.com/ChengshuLi/WorldAtlas, default/integration branch **main**. GitHub Issues is the single source of truth for TODOs, status and work history. See [the three-thread start page](THREE_THREAD_START.md).
 
 Read [WORKER_COORDINATION.md](WORKER_COORDINATION.md). Ready actionable issues need `kind:work-item`, `status:ready`, a reviewed scope block, explicit dependencies and a 1–3 PR budget. Larger goals are unclaimable `kind:umbrella` issues with bounded children. Review overlap before marking ready. Research is currently source-only. Future location-content work items require explicit region IDs, approved subject scope, and dependencies on completed global macro and regional branch approval. Use [TOP_DOWN_GEOGRAPHY_WORKFLOW.md](TOP_DOWN_GEOGRAPHY_WORKFLOW.md); #7 remains the worldwide umbrella, not a mandatory closure dependency for already-approved regional content.
