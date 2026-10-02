@@ -1,55 +1,48 @@
 # Concurrent engineering and content research
 
-Engineering and Luna use separate handovers, prompts, branches and owned progress files. `main` is the integration branch, not a shared working checkout. Existing live facts are authoritative independently of a research PR's merge state.
+GitHub Issues is the single source of truth for TODOs, current status and work history. Handover documents and prompts remain entry instructions. Execution files preserve reproducible inputs and receipts, not competing task-status lists. Existing live facts are authoritative independently of a PR's merge state.
 
-| Concern | Engineering lane | Luna research lane |
+| Concern | Engineering | Historical research / Luna |
 | --- | --- | --- |
 | Entry document | `docs/ENGINEERING_HANDOFF.md` | `docs/HISTORY_HANDOFF.md` |
-| Copy-ready prompt | `docs/prompts/ENGINEERING.txt` | `docs/prompts/LUNA_HISTORY.txt` |
-| Queue | `docs/ENGINEERING_TODO.md` | `docs/HISTORICAL_RESEARCH_TODO.md` |
-| Branch | `engineering/<job-id>` | `research/<campaign-id>` |
-| Owned progress | `coordination/engineering/<job-id>.json` | `research/campaigns/<campaign-id>/progress.json` |
-| Changes | Source/tests, maintainer documents, reviewed geographic products and release receipts; no researcher-owned campaign files/rows | Files inside that campaign's directory and its own `CAM:<campaign-id>:…` historical-tracker rows only |
-| Production action | Validated deployment/geographic publication/maintenance | Supported content imports and media through existing APIs |
-| Shared integration | Technical maintainer merges reviewed PRs into `main` serially and updates central summaries | Push campaign PR; maintainer integrates it |
+| Prompt | `docs/prompts/ENGINEERING.txt` | `docs/prompts/LUNA_HISTORY.txt` |
+| GitHub type label | `type:engineering` | `type:history-research` |
+| Branch from current main | `engineering/<job-id>` | `research/<campaign-id>` |
+| Owned execution artifact | `coordination/engineering/<job-id>.json` | `research/campaigns/<campaign-id>/progress.json` |
+| Git scope | Code/tests, maintainer documentation, geography releases; preserve research and other jobs | Own campaign directory only; no shared document edits |
+| Live actions | Reviewed deployment/geography/owner maintenance | Supported factual imports and licensed media via existing API |
 
-## One issue, one branch, one PR
+## Issue workflow and incremental PRs
 
-`main` is the repository default and shared base/target. The previous `work` branch accumulated the initial foundation; its first PR into `main` is an explicitly authorized large bootstrap exception. Retain that branch as history; future work does not accumulate there.
+Use issue forms and exactly one type label. Future work types may add `type:*` labels/forms and appropriate ownership rules; the current two Git lanes remain engineering and research. Labels describe type; GitHub open/closed state and dated comments describe progress. Keep completed issues. Preserve legacy dates and evidence; never substitute a migrated issue's creation timestamp for an unknown original raised date.
 
-For every bounded TODO issue, create or reuse one GitHub issue tied to its stable tracker ID. Large ENG/RES goals are umbrellas: split them into small dated child issues or bounded research campaign items before implementation. Branch from current `origin/main`, solve that issue only, and open one PR to `main`. Its body must contain exactly one `TODO: <stable-id>` line and one `Closes #<issue-number>` line. Include validation and evidence for that issue. The PR checker validates this metadata and permits only one changed research campaign item. Once merged, start the next issue on a fresh branch from updated `origin/main`.
+Inspect Issues, assignments, comments and active PRs before claiming scope. Post planned scope/validation and dependencies on the issue. Large objectives can have multiple focused PRs or bounded linked child issues. `kind:umbrella` identifies broad objectives; one child/campaign completion does not close its parent. Every PR addresses exactly one issue or part of it and targets **main**:
 
-Engineering and Luna can each have one issue PR active concurrently. Partial progress stays on that issue branch/PR; do not bundle several completed issues into a later omnibus PR. A scoped issue is marked done when its validated change is integrated and any required live import/deployment is verified. Completion evidence includes the GitHub issue and merged PR. Luna campaign rows retain their imported/read-back milestone even when PR integration is still pending.
+- `Refs #N` for partial work; the issue stays open.
+- `Closes #N` for final work only after its complete acceptance criteria and required live verification are met.
 
-## Start and resume
+Use exactly one of those canonical lines in the PR body. The old `TODO:` ID is optional historical context, not a second tracker. A focused PR may cite source evidence/dependencies without closing other issues. Report milestones, blockers, evidence and next actions in issue comments with dates. The GitHub issue is the authoritative completion record.
 
-Each thread uses its own checkout/worktree from current `origin/main`. Pick a unique ID matching `[a-z0-9][a-z0-9-]{0,63}`. Inspect remote lane branches and PRs, not only merged files, for active work. Publish the scope/progress file early. Another thread resumes an existing campaign/job branch serially; two threads must not write the same campaign/job concurrently. Multiple Luna threads must use different campaign IDs and avoid overlapping geographic/time/attribute research unless explicitly coordinated.
+Create a fresh unique lane branch from current `origin/main` for every PR, including subsequent PRs on the same large issue. Never accumulate unrelated work or reuse a merged branch. Unique IDs match `[a-z0-9][a-z0-9-]{0,63}`. Use isolated worktrees; inspect unmerged branches and do not switch another thread's checkout. Resume an active job/campaign serially, with one writer.
 
-Research directories contain original input, source notes/bytes or restoration manifests, bundles, receipts and a progress file. Technical-maintainer progress contains implementation state, checks, deployment/maintenance and dependencies. Templates are under `coordination/templates/`. Progress-file status values are `active`, `blocked`, `review`, `complete`; tracker items use `open`, `active`, `blocked`, `done`. Completion requires stated evidence and does not automatically mean deployed or globally researched. Fill actual values; template nulls do not establish coverage. Preserve raised/recorded/completed dates in America/Los_Angeles and retain exact UTC receipts.
+Maintainers integrate reviewed PRs serially after affected checks. **Squash merge, explicitly setting the squash commit title to the PR title** (`gh pr merge N --squash --subject "Exact PR title" --match-head-commit SHA`). The already merged initial foundation PR #2 preserves its full history; do not rewrite it. The historical `work` branch is not the future integration base. Branch protection has not been configured; maintainers must honor checks before merge.
 
-Push lane branches frequently and create PRs against `main`. The guard checks every changed old/new path, including rename sources. Research may change its directory and its own historical-tracker rows only: instructions, global objectives, other campaigns, original dates and completed milestone rows are preserved. Engineering preserves researcher-owned directories/rows and other jobs' progress. CI runs trusted base code against the candidate checkout with read-only permissions and no secrets. This checks Git/document ownership, not historical accuracy or database permissions. GitHub branch protection has not been configured by this setup; maintainers must honor the integration rule and should require the scope check if repository settings permit.
+## Git ownership and durable evidence
 
-The maintainer integrates one PR at a time against fresh `origin/main`, preserving source, receipts and unrelated files. Resolve genuine code/content dependencies explicitly; never force-push `main`, copy over another thread's checkout or overwrite research files with an old snapshot. If revalidation is required, retain original bundles and create a separate maintainer migration/revalidation receipt. Engineering owns its authoritative tracker and shared operational summaries; Luna owns its campaign files and dated tracker rows. Global research objectives are maintained during integration. If simultaneous research PRs add rows at the same insertion point, merge all distinct rows; never choose one side wholesale. Git conflicts can require a serial integration, but neither lane may discard the other's work.
+Research only edits its campaign directory. Shared handover updates are engineering work; task progress never requires a shared Markdown edit. Engineering cannot change researcher-owned campaign directories or another job's progress. CI uses trusted base scripts and read-only permissions to check candidate paths, including rename sources, PR issue linkage and issue type. These checks protect Git scope, not historical truth or database authorization.
 
-## Live data safety already implemented
+Keep lawful original sources/restoration manifests, factual inputs, bundles, release pins and import/read-back receipts in the campaign directory. Templates under `coordination/templates/` are execution artifacts. A follow-up PR uses a new directory and links preserved prior campaign evidence; it does not overwrite another campaign. Push early/often, attach PRs as instructed and leave exact branch/commit/issue/PR and next action. Fresh threads cannot access your caches or private credentials. The pre-Issues tracker archive and migration receipt remain immutable snapshots.
 
-- All normal source/content imports are immutable, bounded, transactional and idempotent by ingestion identity. Duplicate stable IDs must not be changed to conceal a conflict. New evidence/corrections use the documented source and retirement contracts.
-- Compiler/importer pins release ID, hierarchy hash and footprint hash. A production batch checks those pins inside its transaction. PostgreSQL imports and geographic publication share advisory transaction lock `(807245315,1)` and fresh reads after waiting. A publication cannot race a new unvalidated old-release import into the same transaction.
-- An import that committed before publication remains preserved with its original context; a byte-identical committed retry is recognized. That does not authorize a different batch or automatic evidence transfer to a changed footprint. The importer stops on changed release and retains partial receipts.
-- Live revision changes during reads trigger bounded retries/atomic cache behavior. Future validation must use the actual live revision/counts, not permanently expect the original 1321 checkpoint after new research.
+## Live data safety
 
-These mechanisms protect integrity; they do not adjudicate contradictory historical sources or guarantee unlimited capacity. Research still requires sourced methods and documented uncertainty.
+Imports are immutable, bounded, transactional and idempotent by ingestion identity. Duplicate IDs cannot conceal conflicts. Compiler/importer pins release, hierarchy and footprint hashes. PostgreSQL imports and geographic publication share advisory transaction lock `(807245315,1)` and fresh reads after waiting; obsolete new batches stop. Previously committed byte-identical retries retain original evidence and context. Changes require explicit migration/revalidation receipts, never silent repinning or evidence transfer.
 
-## Maintenance and geographic changes
+Concurrent writes trigger bounded read retries/atomic caches. Use current live revision/counts rather than permanently expecting checkpoint 1321. Different research campaigns must have disjoint scope or an explicit dependency; file ownership alone cannot prevent duplicate imports. Scope notices belong to issue comments and execution artifacts. These mechanisms preserve integrity, not source accuracy or unlimited capacity.
 
-Routine UI development and factual imports can proceed together. For owner DDL/storage changes, the maintainer records intent/current scope in its progress file, enables and deploys `ATLAS_READ_ONLY=1`, and waits for in-flight transactions through the shared database lock before the bounded operation. Keep owner migration operations serialized. Verify fresh before/after preservation and API compatibility; remove maintenance, deploy and prove imports resume. Never hold a database transaction open while waiting for an agent/network response.
+## Maintenance and geography releases
 
-Provider-management workflows, including storage transfer and forward DDL, are **manual-dispatch only**. Ordinary merges do not invoke them. The original successful `work` run receipts remain immutable and accepted as historical proof; future reviewed invocation context is `main`. Do not dispatch the old baseline transfer merely because its code is now on main.
+Routine UI development and factual imports proceed concurrently. For owner DDL/storage changes, record intent on the engineering issue, enable/deploy `ATLAS_READ_ONLY=1`, drain in-flight mutations through the shared lock, execute a bounded serialized change, verify fresh before/after preservation/API compatibility, then re-enable/deploy and prove imports resume. Never hold a database transaction while waiting for a person or network response.
 
-During maintenance the server rejects mutations with retryable HTTP 503 before database/bucket work. The existing importer retries a bounded number of times and preserves partial receipts; Luna then stops imports and continues source research or network-free preparation. This remains safe even if a Git notice arrives late.
+Provider-management workflows are **manual-dispatch only**. Merging a PR does not invoke storage transfer or forward DDL. Original successful production receipts remain immutable; do not rerun the baseline transfer merely because it is on main.
 
-For a geographic release, preserve stable/predecessor identities and original evidence. Publish a versioned crosswalk and explicit supported revalidation result. Luna retains the old bundle/pins and waits for a compatible campaign input; it never silently edits release hashes. Engineering can continue preparing migrations while Luna imports into the currently published release; publication provides the transaction boundary.
-
-## Durable handovers
-
-Users give each new thread one lane document and its prompt. Those documents link contracts/queues; campaign/job-specific progress lives in unique paths and is accessible from GitHub even before merge. End each thread with branch, exact commit, PR, completed scope, live import/deployment state, evidence paths, blockers and next action. Credentials remain in authorized server/session mechanisms and are excluded from every handover.
+Maintenance returns retryable HTTP 503 before mutations. Importers retry boundedly and retain partial receipts; Luna then continues independent source research/preparation. Geographic publication preserves stable/predecessor identities, original evidence and versioned crosswalks. Maintainers supply supported revalidation and new inputs; Luna retains obsolete bundles/pins and waits rather than silently changing them.

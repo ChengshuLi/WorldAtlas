@@ -1,58 +1,24 @@
 # Historical-content handover for Luna
 
-Give a Luna thread this document and [its prompt](prompts/LUNA_HISTORY.txt). This entry point describes the research lane without requiring the prior chat or workspace.
+Give a Luna thread this document and [its prompt](prompts/LUNA_HISTORY.txt). They explain research contracts, import commands and safe concurrency. **GitHub Issues is the single source of truth for TODOs, status and work history**: [open historical-research issues](https://github.com/ChengshuLi/WorldAtlas/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Ahistory-research). This document contains no live task checklist.
 
-**Repository:** `https://github.com/ChengshuLi/WorldAtlas`, integration branch **main**. **Site:** https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [HISTORICAL_RESEARCH_TODO.md](HISTORICAL_RESEARCH_TODO.md), [LUNA_DATA_HANDOFF.md](LUNA_DATA_HANDOFF.md), [RESEARCH_IMPORT_WORKFLOW.md](RESEARCH_IMPORT_WORKFLOW.md) and [ATTRIBUTE_CONTRACT.md](ATTRIBUTE_CONTRACT.md). Inspect existing campaign branches/PRs before selecting new scope.
+Repository: https://github.com/ChengshuLi/WorldAtlas, integration branch **main**. Site: https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [scope guidance](HISTORICAL_RESEARCH_TODO.md), [LUNA_DATA_HANDOFF.md](LUNA_DATA_HANDOFF.md), [RESEARCH_IMPORT_WORKFLOW.md](RESEARCH_IMPORT_WORKFLOW.md), [ATTRIBUTE_CONTRACT.md](ATTRIBUTE_CONTRACT.md) and [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md).
 
-## Current starting point
+## Preserved starting point and content contract
 
-The Site uses production Neon PostgreSQL and R2. Content imports are enabled, with bounded validation, immutable claims and idempotent receipts. Existing ownership/environmental products, 3,588 dated names, 396 religion records, 9,301 separate-settlement estimates and original archives are retained. Do not discard or repeat completed research. Interrupted GHSL preparation is not validated import content.
+The Site uses production Neon PostgreSQL and R2, with bounded validation, immutable claims and idempotent imports. The checkpoint retains ownership/environmental products, 3,588 dated names, 396 religion records, 9,301 separate-settlement estimates and original archives. Preserve completed research. Interrupted GHSL preparation is not validated import content. Recheck current live state before continuing.
 
-Names, attributes, source provenance and stable entity identities are independent of application code. Store supported sparse half-open intervals, not annual location snapshots. Missing evidence remains unknown. Preserve fixed classifications, source dates and uncertainty. Modern physical reference context is already labeled by the UI; it is not historical evidence. Research historical environmental intervals, including recent gaps, without automatically widening modern observations.
+Store supported sparse half-open intervals, not annual snapshots. Keep stable entity IDs, original source bytes/hashes, licenses, methods, uncertainty and fixed classifications. Missing evidence remains unknown. Present-day physical reference context is separately labeled; it is not historical evidence and cannot justify widening observation intervals. Research gaps such as 2025 using actual sources.
 
-## Historical research TODO and retained work record
+## Select a campaign and preserve evidence
 
-This document is the authoritative research tracker. Keep done items and evidence; never delete or renumber historical entries. Global objectives stay open until their explicitly stated coverage is achieved. Completing one bounded campaign does not close a worldwide attribute. Detailed scope guidance is in [HISTORICAL_RESEARCH_TODO.md](HISTORICAL_RESEARCH_TODO.md).
+1. Inspect labeled GitHub Issues, comments, active PRs and campaign directories before choosing disjoint geography/time/attribute/source scope. Post your bounded scope and sources on the issue and claim it when possible. Worldwide objectives remain open until their complete coverage is evidenced; use linked child issues when useful.
+2. Create a unique **`research/<campaign-id>`** branch from fresh `origin/main` in an isolated checkout/worktree. You own **only `research/campaigns/<campaign-id>/`**. Do not edit shared handovers, code, schema, infrastructure, category registries, grid assets or geographic releases. Research factual JSON and notes using existing tools; refer engineering blockers to a linked engineering issue.
+3. Copy `coordination/templates/research-progress.json` into your campaign directory and link the GitHub issue. Keep original inputs, lawful source bytes/restoration manifests, bundles, release pins, partial/final receipts and read-back there. This is an execution/resume artifact; task status and dated progress belong to GitHub Issues.
+4. Obtain the current `/api/geography/release`, capabilities and capacity through documented private access. Save the exact release and pin every bundle. Credentials must never enter chat/Git/arguments; the GitHub Neon management key is not an import token.
+5. Compile and validate supported factual JSON, import bounded idempotent batches and retain receipts after every commit. Verify claim/source/interval read-back and selected-year results. Preserve partial progress and report uncovered scope honestly.
 
-Dates use **America/Los_Angeles**. Preserve the actual first-raised date when known; use `unknown` for earlier requests without a reliable date. `Recorded` is the first durable tracker entry. Completion is the verified scoped milestone, with original UTC receipts retained. Existing source research below predates this tracker; its original completion date is not invented.
-
-| ID | Global objective / retained milestone | Status | Raised | Recorded | Completed | Evidence / next action |
-| --- | --- | --- | --- | --- | --- | --- |
-| RES-00 | Preserve and verify the completed historical checkpoint for handover | done | unknown | 2026-10-02 | 2026-10-02 | `data/validation/neon-final-import-replay.json`; retained names/religion claims, ownership/environment products, estimates and archives; this is verification, not their original research completion date |
-| RES-01 | Source inventory and systematic campaign coverage | open | unknown | 2026-10-02 | — | Assess geography, time, attributes, licensing and uncertainty; choose disjoint campaigns across all six continents |
-| RES-02 | Historical names and aliases at every tier | open | unknown | 2026-10-02 | — | Extend retained 3,588 observation-year names with supported intervals and stable IDs |
-| RES-03 | Historical ownership evidence | open | unknown | 2026-10-02 | — | Extend/improve retained reconstruction; direct evidence and explicit uncertainty; hand spatial preparation needs to maintainer |
-| RES-04 | Population, habitation and rank | open | unknown | 2026-10-02 | — | Separate settlements from location totals; retained GHSL preparation remains unvalidated |
-| RES-05 | Primary culture | open | unknown | 2026-10-02 | — | Supported population distributions/attestations, warranted primary interpretation and uncertainty |
-| RES-06 | Primary religion | open | unknown | 2026-10-02 | — | Extend retained 396 observation-year records with warranted dated evidence |
-| RES-07 | Historical topography, vegetation and climate intervals | open | unknown | 2026-10-02 | — | Fixed classifications; investigate recent/ancient gaps without silently widening modern reference dates |
-| RES-08 | Sourced dated parent membership and existence | open | unknown | 2026-10-02 | — | Use published contract/atomic phases; refer changed footprints or geographic identity migrations to maintainer |
-| RES-09 | Interconnected historical subjects, relationships and licensed media | open | unknown | 2026-10-02 | — | Later scoped campaigns through supported generic content APIs; new domain UI is engineering |
-
-## Campaign work record — owned by Luna threads
-
-Each research branch may add/update **only its own rows** in this section. Use IDs `CAM:<campaign-id>:<number>`, state the bounded scope and related RES objective, and record status, raised/recorded/completed dates and evidence. Keep all existing rows, including completed ones. Completion requires source/import/read-back evidence. Do not use raw `|` characters inside a cell. The CI guard checks ownership, retained rows and completion fields. Global objective updates above belong to maintainer integration.
-
-<!-- RESEARCH-CAMPAIGNS:START -->
-| ID | Scope | Status | Raised | Recorded | Completed | Evidence |
-| --- | --- | --- | --- | --- | --- | --- |
-<!-- RESEARCH-CAMPAIGNS:END -->
-
-The campaign directory also contains dated notes and an owned progress JSON, so a single table row can link to detailed sources, intermediate work and multiple milestones. Empty campaign rows mean no new post-handover campaign is claimed here; inspect unmerged research branches/PRs before starting.
-
-## One bounded research issue per PR
-
-For each scoped campaign TODO, create/reuse one GitHub issue and one new `research/<campaign-id>` branch from current `origin/main`. Use one owned campaign item (for example `CAM:<campaign-id>:1`); the broad RES goals remain umbrellas. Put that item in `TODO: <stable-id>` and link one `Closes #<issue-number>` line in the PR body targeting `main`. Keep input/import/read-back evidence bounded to that issue. After its PR merges, create a fresh branch for the next issue. Do not gather several campaigns into one later omnibus PR. Retain done items with completion dates and issue/PR evidence.
-
-## Work in the research lane
-
-1. Use a separate checkout/worktree. Fetch `origin/main`, choose a unique lower-case campaign ID such as `japan-names-1900-20261002`, and create **`research/<campaign-id>`** from that integration branch. Never switch another active thread's checkout or push routine work directly to `main`.
-2. You own **`research/campaigns/<campaign-id>/` and this document's `CAM:<campaign-id>:…` rows**. Copy `coordination/templates/research-progress.json` to `research/campaigns/<campaign-id>/progress.json`; fill in scope, dates, branch, base commit, source paths, release pins, receipts and open questions. Save research input, lawful source bytes or restoration manifests, notes and bundles within that directory. Mark completed scoped tracker items `done` with dates and evidence; preserve them as the ongoing record. Do not edit global objectives, handover instructions or another campaign's rows.
-3. Choose a bounded campaign from the research TODO, check existing sources/entities/categories, and reuse stable IDs. Before importing, obtain the current `/api/geography/release`, capacities and capabilities through documented private access; save the exact release JSON with the campaign. Private credentials come from the authorized Site mechanism, never Git/chat/arguments; GitHub's Neon management key is not an import token.
-4. Prepare factual JSON and compile/validate it using existing tools. Import accepted batches, retain receipts after every commit, verify new claims and selected-year results, and log uncovered scope. Preserve incomplete progress if interrupted.
-5. Push your branch frequently. Open a PR targeting **main** that describes campaign coverage, sources, imports, read-back and unresolved questions. Run `node scripts/check-handoff-scope.mjs --branch research/<campaign-id> --base origin/main --head HEAD`. Technical maintainers integrate PRs serially; do not merge or rewrite application releases yourself. Follow applicable Codex PR attachment instructions.
-
-Example commands after saving the factual input and current release:
+Example commands after saving factual input and current release:
 
 ```sh
 node scripts/prepare-research-bundle.mjs research/campaigns/CAMPAIGN/input.json research/campaigns/CAMPAIGN/geographic-release.json research/campaigns/CAMPAIGN/bundle
@@ -60,14 +26,26 @@ node scripts/import-research-bundle.mjs https://worldatlas-explorer.chengshu-li-
 node --use-env-proxy scripts/import-research-bundle.mjs https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/ research/campaigns/CAMPAIGN/bundle
 ```
 
-Replace `CAMPAIGN` with your actual unique ID. Normal facts go through the existing content contract. Sourced dated membership/existence uses its documented contract and atomic phases. New geography/footprints, category registry changes, code, schema, UI, migrations, infrastructure and deployment are outside this lane. Existing generic subjects/relationships and linked licensed media are allowed through supported imports; new domain interfaces belong to engineering.
+Replace `CAMPAIGN` with your unique ID. Use documented atomic phases for sourced dated membership/existence. Generic subjects/relationships and licensed media may use supported imports; new domain UI and geographic identity/footprint migrations belong to engineering.
 
-## Concurrent engineering and other research
+## Incremental PRs and concurrent imports
 
-Read [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md). Different campaign directories prevent Git overwrites; source/geography/time/attribute scope prevents duplicate effort. Inspect other campaign progress files, including unmerged PRs, and pick a disjoint campaign. If extending somebody else's campaign, resume that same branch serially rather than create two writers for the same ID.
+Push evidence frequently and open a focused PR to **main** addressing one issue or part of it. Large issues may have multiple PRs. Use exactly one `Refs #N` line for partial work, or one `Closes #N` only when all acceptance criteria are verified. Include source/import/read-back evidence and unresolved questions. Run `node scripts/check-handoff-scope.mjs --branch research/<campaign-id> --base origin/main --head HEAD --pr-body-file /path/to/body.md`; follow applicable Codex PR attachment instructions. Maintainers integrate validated PRs serially with **squash merges using the PR title as commit title**. After each merge, branch afresh from current main; preserve earlier campaign directories and link them rather than modifying another campaign's files.
 
-Production imports and geographic publication are transactionally serialized. Every new batch is release-pinned; changing geography stops an obsolete campaign. Preserve the old input, bundle and receipts, and report the precise mismatch for maintainer revalidation; do not silently change pins or recreate IDs. During server maintenance or capacity errors, stop import attempts after bounded retries and continue source research/preparation. Live import success and Git merge are different events: an already imported fact may be live before its PR merges, so retain receipts and inspect the API before retrying.
+Import success and Git merge are separate events: a fact may already be live before its PR merges. Check existing receipts/API before retrying. Publication and imports are transactionally serialized. On changed release, maintenance or capacity errors, retain pins/receipts, stop after bounded retries and continue independent research; never silently repin or weaken constraints. Resume the same active campaign serially if another thread already owns it.
 
-## End-of-thread handover
+## Work history and handover
 
-Push notes, original hashes/licensing, input, bundles, partial/final receipts, read-back, owned tracker rows and progress file. Record which supported coverage was achieved and what remains unresolved. The technical maintainer updates global objective summaries after integration. A fresh Luna thread resumes from the campaign branch and directory; it never needs your workspace. Do not count a successfully imported batch as worldwide historical completion.
+Update the issue at milestones with dates, actual coverage, evidence, blockers and next action. Retain closed issues and original raised/recorded/completed dates. Human work dates use America/Los_Angeles; receipts retain exact UTC timestamps. Unknown earlier dates remain unknown; completing one batch does not close a worldwide objective.
+
+Before ending, push every source note, input, bundle and receipt needed by a fresh thread. Report issue, branch/commit/PR, imports/read-back and remaining questions. Keep this document as instructions, not a parallel TODO tracker. Original records are preserved in [the pre-Issues archive](archive/pre-github-issues-20261002/README.md).
+
+<div hidden aria-hidden="true">
+
+<!-- Empty legacy markers retained for the trusted pre-migration PR guard only. No tasks are tracked here. -->
+<!-- RESEARCH-CAMPAIGNS:START -->
+| ID | Scope | Status | Raised | Recorded | Completed | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+<!-- RESEARCH-CAMPAIGNS:END -->
+
+</div>

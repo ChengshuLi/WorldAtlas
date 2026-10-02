@@ -4,23 +4,24 @@ import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {laneForBranch,validateLanePaths,validateTrackerChange,checkGitScope,validateIssuePRBody} from '../scripts/check-handoff-scope.mjs';
-
-const header='| ID | Scope | Status | Raised | Recorded | Completed | Evidence |\n| --- | --- | --- | --- | --- | --- | --- |';
-const doc=rows=>`Instructions\n<!-- RESEARCH-CAMPAIGNS:START -->\n${header}\n${rows.join('\n')}\n<!-- RESEARCH-CAMPAIGNS:END -->\nEnd instructions\n`;
-const row=(id,status='active',date='—',evidence='—')=>`| CAM:${id}:1 | Dated names | ${status} | unknown | 2026-10-02 | ${date} | ${evidence} |`;
+import {laneForBranch,validateLanePaths,checkGitScope,validateIssuePRBody,validateIssueMetadata} from '../scripts/check-handoff-scope.mjs';
 
 test('lane IDs must be explicit and safe',()=>{assert.deepEqual(laneForBranch('research/japan-names'),{lane:'research',id:'japan-names'});for(const branch of ['work','research/../code','engineering/a/b','research/Japan','research/a;echo'])assert.throws(()=>laneForBranch(branch));});
-test('research owns its campaign files and tracker, excluding code and other campaigns',()=>{validateLanePaths('research/japan',['research/campaigns/japan/input.json','docs/HISTORY_HANDOFF.md']);for(const file of ['src/main.js','AGENTS.md','.github/workflows/run.yml','docs/HANDOFF_STATUS.md','research/campaigns/italy/input.json','research/campaigns/japan/../italy/notes.md'])assert.throws(()=>validateLanePaths('research/japan',[file]));});
+test('research owns only campaign files, excluding shared handovers and other campaigns',()=>{validateLanePaths('research/japan',['research/campaigns/japan/input.json']);for(const file of ['docs/HISTORY_HANDOFF.md','src/main.js','AGENTS.md','.github/workflows/run.yml','docs/HANDOFF_STATUS.md','research/campaigns/italy/input.json','research/campaigns/japan/../italy/notes.md'])assert.throws(()=>validateLanePaths('research/japan',[file]));});
 test('engineering preserves research and other engineering progress',()=>{validateLanePaths('engineering/grid',['src/pixel-layer.js','coordination/engineering/grid.json']);for(const file of ['research/campaigns/japan/input.json','coordination/engineering/other.json'])assert.throws(()=>validateLanePaths('engineering/grid',[file]));});
-test('research can add owned rows and mark them done with a date and evidence',()=>{const first=doc([row('japan')]);validateTrackerChange('research/japan',doc([]),first);validateTrackerChange('research/japan',first,doc([row('japan','done','2026-10-02','bundle/import-receipts.json')]));});
-test('research cannot change instructions, other campaign rows, global rows or delete records',()=>{const original=doc([row('japan'),row('italy')]);for(const changed of [original.replace('Instructions','Changed instructions'),doc([row('japan')]),doc([row('japan'),row('italy','blocked')]),doc([row('japan'),row('italy'),row('france')])])assert.throws(()=>validateTrackerChange('research/japan',original,changed));});
-test('completion requires a real date and an evidence path',()=>{for(const changed of [row('japan','done','—','receipt.json'),row('japan','done','2026-02-31','receipt.json'),row('japan','done','2026-10-02','—'),row('japan','active','2026-10-02','receipt.json')])assert.throws(()=>validateTrackerChange('research/japan',doc([]),doc([changed])));});
-test('original tracker dates and completed milestones remain retained',()=>{const original=doc([row('japan')]),done=doc([row('japan','done','2026-10-02','receipt.json')]);assert.throws(()=>validateTrackerChange('research/japan',original,original.replace('| unknown |','| 2026-10-01 |')));assert.throws(()=>validateTrackerChange('research/japan',done,done.replace('Dated names','New scope')));assert.throws(()=>validateTrackerChange('research/japan',done,original));});
-test('a research PR cannot combine two separate TODO items',()=>{assert.throws(()=>validateTrackerChange('research/japan',doc([]),doc([row('japan'),row('japan').replace(':1 |',':2 |')])),/One research TODO/);});
-test('PR policy requires exactly one TODO issue and one linked GitHub issue',()=>{assert.deepEqual(validateIssuePRBody('TODO: ENG-01-01\nCloses #12\n\nValidation passed.'),{todo_id:'ENG-01-01',github_issue:12});for(const body of ['No issue','TODO: ENG-01\nCloses #12\nCloses #13','TODO: ENG-01\nTODO: ENG-02\nCloses #12','TODO: ENG-01\nCloses #12 and #13','TODO: ENG-01\nCloses #12\nFixes #13'])assert.throws(()=>validateIssuePRBody(body));});
-test('engineering may update handover instructions but not campaign-owned rows',()=>{validateTrackerChange('engineering/grid',doc([row('japan')]),doc([row('japan')]).replace('Instructions','Updated instructions'));assert.throws(()=>validateTrackerChange('engineering/grid',doc([row('japan')]),doc([row('japan','done','2026-10-02','receipt.json')])));});
-test('tracker markers and unique row identities are mandatory',()=>{for(const changed of [doc([]).replace('RESEARCH-CAMPAIGNS:END','REMOVED'),doc([row('japan'),row('japan')]),doc([])+'<!-- RESEARCH-CAMPAIGNS:START -->'])assert.throws(()=>validateTrackerChange('research/japan',doc([]),changed));});
+test('partial and final PRs link one issue without needing a document tracker ID',()=>{
+ assert.deepEqual(validateIssuePRBody('Refs #12\n\nImplement the first part.'),{github_issue:12,issue_action:'reference'});
+ assert.deepEqual(validateIssuePRBody('Closes #12\n\nAll acceptance criteria verified.'),{github_issue:12,issue_action:'close'});
+ assert.deepEqual(validateIssuePRBody('TODO: ENG-08\nCloses #12'),{todo_id:'ENG-08',github_issue:12,issue_action:'close'});
+});
+test('PR policy rejects ambiguous issue links and accidental additional closures',()=>{
+ for(const body of ['No issue','Refs #0','Refs #12\nCloses #13','Closes #12 and #13','Closes #12\nFixes #13','Fixes #12','Refs #12\nRefs #13','Refs #12\nThis fixes #13 too.','Closes #12\nThis also resolves #13.','TODO: ENG-01\nTODO: ENG-02\nCloses #12'])assert.throws(()=>validateIssuePRBody(body));
+});
+test('GitHub issue type agrees with its lane and references an open issue',()=>{
+ validateIssueMetadata('engineering/grid',{state:'open',labels:[{name:'type:engineering'},{name:'kind:umbrella'}]});
+ validateIssueMetadata('research/japan',{state:'open',labels:['type:history-research']});
+ for(const issue of [{state:'closed',labels:['type:engineering']},{state:'open',pull_request:{},labels:['type:engineering']},{state:'open',labels:[]},{state:'open',labels:['type:history-research']},{state:'open',labels:['type:engineering','type:future']}])assert.throws(()=>validateIssueMetadata('engineering/grid',issue));
+});
 test('real git diff checks rename source paths, not only allowed destinations',()=>{
  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-lanes-'));
  const git=args=>execFileSync('git',args,{cwd:directory,encoding:'utf8'});
@@ -39,4 +40,16 @@ test('another lane advancing work is not mistaken for this branch changing its f
   git(['checkout','-q','--detach',original]);fs.writeFileSync(path.join(directory,'src/main.js'),'Unrelated engineering advance\n');git(['add','.']);git(['commit','-qm','engineering integration']);const base=git(['rev-parse','HEAD']).trim();
   const result=checkGitScope({branch:'research/japan',base,head,run:(command,args,options)=>execFileSync(command,args,{...options,cwd:directory})});assert.equal(result.changed_files,1);assert.equal(result.merge_base,original);
  }finally{fs.rmSync(directory,{recursive:true,force:true});}
+});
+
+test('remote issue validation reads only the event repository and requires successful labeled issue metadata',async()=>{
+ const {checkLinkedIssue}=await import('../scripts/check-linked-github-issue.mjs');
+ const event={repository:{full_name:'ChengshuLi/WorldAtlas'},pull_request:{body:'Refs #12'}};
+ let requests=0;
+ const fetchIssue=async(url,options)=>{requests++;assert.equal(url,'https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/12');assert.equal(options.headers.Authorization,'Bearer test-only');return {ok:true,json:async()=>({state:'open',labels:[{name:'type:history-research'}]})};};
+ assert.deepEqual(await checkLinkedIssue({branch:'research/japan',event,token:'test-only',fetchIssue}),{github_issue:12,issue_action:'reference',issue_type:'type:history-research'});
+ await assert.rejects(checkLinkedIssue({branch:'engineering/grid',event,token:'test-only',fetchIssue}),/type:engineering/);
+ await assert.rejects(checkLinkedIssue({branch:'research/japan',event,fetchIssue}),/token/);
+ assert.equal(requests,2);
+ await assert.rejects(checkLinkedIssue({branch:'research/japan',event,token:'test-only',fetchIssue:async()=>({ok:false,status:404})}),/HTTP 404/);
 });

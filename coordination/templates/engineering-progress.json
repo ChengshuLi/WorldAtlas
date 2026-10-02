@@ -1,15 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "lane": "engineering",
   "job_id": null,
   "branch": null,
   "base_main_commit": null,
-  "todo_id": null,
   "github_issue": null,
-  "status": "active",
-  "raised_on": null,
-  "recorded_on": null,
-  "completed_on": null,
   "date_timezone": "America/Los_Angeles",
   "scope": [],
   "dependencies": [],
@@ -17,9 +12,15 @@
   "completed": [],
   "checks": [],
   "deployment": null,
-  "maintenance": {"required": false, "active": false, "reason": null},
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
   "evidence_paths": [],
   "blockers": [],
   "next_action": null,
-  "pull_request": null
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }

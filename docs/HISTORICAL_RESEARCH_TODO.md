@@ -1,8 +1,8 @@
-# Historical research TODO — detailed scope guidance
+# Historical research acceptance reference — detailed scope guidance
 
-The authoritative dated TODO/work record is [HISTORY_HANDOFF.md](HISTORY_HANDOFF.md#historical-research-todo-and-retained-work-record). Luna updates its own campaign rows, retains completed entries and preserves dates/evidence. This guide supplies detailed research scope.
+GitHub Issues is the single source of truth for TODOs, status and dated work history: [open issues](https://github.com/ChengshuLi/WorldAtlas/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Ahistory-research). This file retains detailed scope/acceptance references; its legacy ENG/RES IDs identify migrated issues, not a live checklist.
 
-This is the source-research and dataset-content queue. Follow [LUNA_START_HERE.md](LUNA_START_HERE.md), [LUNA_DATA_HANDOFF.md](LUNA_DATA_HANDOFF.md) and [RESEARCH_IMPORT_WORKFLOW.md](RESEARCH_IMPORT_WORKFLOW.md). Engineering has a separate owner and queue in [ENGINEERING_TODO.md](ENGINEERING_TODO.md). Do not edit code, schema, UI, infrastructure, reference geography or grid assets to complete a research campaign.
+This is detailed source-research and dataset-content scope guidance. Follow [LUNA_START_HERE.md](LUNA_START_HERE.md), [LUNA_DATA_HANDOFF.md](LUNA_DATA_HANDOFF.md) and [RESEARCH_IMPORT_WORKFLOW.md](RESEARCH_IMPORT_WORKFLOW.md). Engineering has a separate owner and queue in [ENGINEERING_TODO.md](ENGINEERING_TODO.md). Do not edit code, schema, UI, infrastructure, reference geography or grid assets to complete a research campaign.
 
 The platform is writable. Existing ownership/environmental products, 3,588 dated names, 396 religion records, 9,301 separate-settlement estimates and original archives are retained. Preserve and extend them. Interrupted GHSL output is unvalidated; it is not a completed import. Existing dated evidence covers particular supported intervals, not every year.
 
@@ -61,4 +61,4 @@ Choose bounded source/geography/time/attribute campaigns. Research all six inhab
 
 A campaign is complete only for its explicitly documented scope: validated source input, accepted bounded imports, preserved receipts, claim/source/interval read-back, selected-year checks and recorded remaining uncertainty. A successful import is not proof of historical truth or global coverage.
 
-Commit and push your `research/<campaign-id>` branch with notes, lawful source bytes/restoration manifests, input/bundles, import/read-back receipts, owned progress and dated campaign tracker rows. Open a PR targeting **main**; maintainers integrate serially and update global summaries. Never close a worldwide objective after one bounded batch. On capacity, identity, release-pin or unsupported-contract errors, retain progress and report the blocker to the maintainer. Do not redesign the platform.
+Commit and push your `research/<campaign-id>` branch with notes, lawful source bytes/restoration manifests, input/bundles, import/read-back receipts, owned execution artifacts. Post dated coverage, progress, blockers and evidence on the GitHub issue. Open a PR targeting **main**; maintainers integrate serially and update global summaries. Never close a worldwide objective after one bounded batch. On capacity, identity, release-pin or unsupported-contract errors, retain progress and report the blocker to the maintainer. Do not redesign the platform.
