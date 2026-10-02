@@ -1,0 +1,68 @@
+{
+  "status": "validated-awaiting-publication",
+  "validated_at_utc": "2026-10-02T05:22:15.538419+00:00",
+  "primary_source_commit": "f61605eaf0cdfea9dd11a41be117863e73852791",
+  "scope": [
+    "explicit D1/PostgreSQL backend selection and safe maintenance flag",
+    "byte-preserving fourteen-table export",
+    "Neon adapter and explicit PostgreSQL queries",
+    "restricted runtime role and verified owner restoration",
+    "location-chain continent coverage scope"
+  ],
+  "production_backend": "D1 plus R2 until verified production cutover",
+  "facts_mutated": false,
+  "geography_mutated": false,
+  "tests": {
+    "command": "ATLAS_REQUIRE_PREPARED=1 ATLAS_REQUIRE_STATIC=1 npm test",
+    "passed": 257,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 239587.594141
+  },
+  "browser": {
+    "command": "ATLAS_TEST_API_URL=http://localhost:3196 node test/static-rendering.mjs",
+    "status": "passed",
+    "continents": 6,
+    "profiles": 7,
+    "modes": 14,
+    "reference_years": [
+      2025,
+      -3000
+    ],
+    "historical_location": "R\u00f8dovre",
+    "historical_year": 1444,
+    "canonical_cells_checked": 1562,
+    "mobile_submission_ms": 1,
+    "navigation_ownership_compilations": 0,
+    "navigation_ownership_uploads_changed": false,
+    "limitations": [
+      "Emulated mobile viewport; physical-device testing remains open."
+    ]
+  },
+  "deployment_assets": {
+    "bytes": 267343535,
+    "limit_bytes": 268435456,
+    "max_asset_bytes": 14334666,
+    "excluded": [
+      "local .wrangler artifacts",
+      "full semantic follow-up gzip ledgers"
+    ]
+  },
+  "sha256": {
+    "hosted/worker.js": "0f9543fe3c1d5482fd462f06ee45bdc378680839707634a22bb50c06fbde3b73",
+    "hosted/content-backend.js": "fe2ba22d7c1ee519914b1c7f81f05e00e35625f43746a64e9819ba10f45700d0",
+    "hosted/postgres-adapter.js": "ba3ce4c4d9745ec922580524386cae96ae580f820ae1dc1e07b719f7154c93dd",
+    "hosted/map-snapshots.js": "0d1f0abc8bd8095606071021ab326171f7cf782332e446f99873e4f263a52901",
+    "hosted/map-snapshot-postgres.js": "9ddaa99aae4f049bcb2dc60a806a02c6fb89c5e0d7aac5a04da919a8f4dc2d29",
+    "hosted/storage-export.js": "00ca047684904676aca796b41ed8785db6a6b4f94b5fa1a505e3f4caf2949ae2",
+    "hosted/research-catalog.js": "3f3c9a518a26677ee2615257cbbe3374509cd3afad703f0aa06fad40d44db453",
+    "postgres/schema.sql": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+    "postgres/runtime-role.sql": "78198903a3a9f4174cfe198bcdb6560b54c057e869dd5bf576ea84c92713e61a",
+    "src/coverage.js": "bb8d30d3786888e5d61a74f39b0c0710179cd519b2f1df710ff410891f4ae89b",
+    "src/coverage-scope.js": "3fa2b6eaf17dbfa4ee8cab454517163764749e8606c90857d01305d1eea3a450",
+    "src/main.js": "f510bf61b567b8321ce47fa41e829649cfa3b48e8c25df19e608c17c2599d768"
+  },
+  "neon_rehearsal": "data/validation/neon-runtime-role-verification.json",
+  "production_migration_complete": false,
+  "semantic_geographic_completion": false
+}
