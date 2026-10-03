@@ -6,7 +6,8 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {DatabaseSync} from 'node:sqlite';
-import {prepareGeographicRelease,validateGeometryMigrations} from '../scripts/prepare-geographic-release.mjs';
+import {execFileSync} from 'node:child_process';
+import {prepareGeographicRelease,validateGeometryMigrations,validateReviewedIdentities} from '../scripts/prepare-geographic-release.mjs';
 import {footprintHash} from '../scripts/check-prepared.mjs';
 import {importBatch,entityProfile,attributesAt} from '../hosted/records.js';
 import {stageGeographicRelease,finalizeGeographicRelease,geographicRelease,geographicMembershipPage,geographicChangePage,referenceMembership} from '../hosted/geographic-releases.js';
@@ -32,6 +33,38 @@ class D1 {
 const tableHash=(db,table,where='1',args=[])=>{const h=createHash('sha256');for(const row of db.sqlite.prepare(`SELECT * FROM ${table} WHERE ${where} ORDER BY id`).iterate(...args))h.update(JSON.stringify(canonical(row))+'\n');return h.digest('hex');};
 const assetSnapshot=(folder,index)=>new Map(['index.json',...index.batches.map(b=>b.path)].map(p=>[p,sha(bytes(path.join(folder,p)))]));
 const assertSnapshot=(folder,snapshot)=>{for(const [p,hash] of snapshot)assert.equal(sha(bytes(path.join(folder,p))),hash,`Immutable asset changed: ${p}`);};
+function reviewedProofOptions(folder){
+ const installedFile=path.join(data,'publication-geography-receipt.json');
+ if(!fs.existsSync(installedFile)||!read(installedFile).sources?.geometryProofs)return {};
+ const bundle=path.join(data,'macro-improvements/combined-restoration'),index=read(path.join(bundle,'installation-proof-index.json.gz'));
+ assert.equal(index.history_transfer,false);const archive=path.join(bundle,index.archive.path),raw=bytes(archive);
+ assert.equal(sha(raw),index.archive.sha256);assert.equal(raw.length,index.archive.bytes);
+ const proof=path.join(folder,'reviewed-proof');fs.mkdirSync(proof);
+ // Extract only exhaustive, hash-pinned regular files; reject traversal and links.
+ execFileSync('python3',['-c',`
+import gzip,hashlib,json,pathlib,sys,tarfile
+index=json.loads(gzip.decompress(pathlib.Path(sys.argv[1]).read_bytes()));target=pathlib.Path(sys.argv[3]).resolve()
+expected={f['path']:f['sha256'] for f in index['files']};assert len(expected)==len(index['files'])
+with tarfile.open(sys.argv[2]) as archive:
+ members=archive.getmembers();assert len(members)==len(expected) and {m.name for m in members}==set(expected)
+ for member in members:
+  name=pathlib.PurePosixPath(member.name);assert member.isfile() and not name.is_absolute() and '..' not in name.parts
+  raw=archive.extractfile(member).read();assert hashlib.sha256(raw).hexdigest()==expected[member.name]
+  destination=target/member.name;destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(raw)
+`,path.join(bundle,'installation-proof-index.json.gz'),archive,proof]);
+ const receipt=read(path.join(proof,'aggregate-source-receipt.json'));
+ assert.equal(sha(bytes(path.join(proof,'aggregate-source-receipt.json'))),read(installedFile).sources.sourceReceipt.sha256);
+ assert.equal(receipt.historical_claims_transferred,false);
+ const geometryManifests=[path.join(data,'geographic-repair-evidence/index.json'),path.join(proof,'replacement-migration/index.json'),path.join(proof,'creation-migration/index.json')];
+ const metadataMigrations=['macro-boundary-migration.json.gz','macro-foundation/migration-repairs.json.gz','macro-foundation/migration-areas.json.gz','macro-foundation/migration-regions.json.gz'].map(p=>path.join(data,p));
+ metadataMigrations.push(path.join(proof,'reference-receipt.json'));
+ const identityProofSequence=read(path.join(bundle,'identity-proof-sequence.json'));
+ assert.deepEqual(identityProofSequence,{version:1,steps:[{type:'geometry',sha256:sha(bytes(geometryManifests[0]))},...metadataMigrations.map(p=>({type:'metadata',sha256:sha(bytes(p))})),...geometryManifests.slice(1).map(p=>({type:'geometry',sha256:sha(bytes(p))}))]});
+ // The isolated fixture begins with the original registry, so every subsequent
+ // identity is generated/imported here. Live publication additionally reuses
+ // previously registered identities through its immutable release manifests.
+ return {geometryManifests,metadataMigrations,identityProofSequence,reviewedVersion:4};
+}
 
 // Exhaustive dataset gate: this test intentionally exercises the real preparation,
 // staging, publication and profile code rather than a miniature substitute schema.
@@ -44,9 +77,10 @@ test('both complete geographic reference releases publish against real D1 constr
  const migration=read(path.join(data,'geographic-decision-migration.json.gz'));
  const original=new Map(),db=new D1();
  try {
+  const proofOptions=reviewedProofOptions(folder);
   let generated;
   await t.test('preparation is reproducible and preserves every immutable catalog/archive asset',async()=>{
-   generated=await prepareGeographicRelease({data,geographyData,output:folder});
+   generated=await prepareGeographicRelease({data,geographyData,output:folder,...proofOptions});
    if(geographyData===data&&generated.releases[1].id===preparedIndex.releases[1].id)assert.deepEqual(generated,preparedIndex);
    for(const batch of generated.batches){const raw=bytes(path.join(folder,batch.path));assert.equal(sha(raw),batch.sha256,batch.path);assert.ok(raw.byteLength<=1048576,batch.path);if(geographyData===data&&generated.releases[1].id===preparedIndex.releases[1].id)assert.equal(sha(bytes(path.join(preparedFolder,batch.path))),batch.sha256);const payload=JSON.parse(raw);assert.ok((payload.memberships?.length??0)+(payload.changes?.length??0)+(payload.entities?.length??0)+(payload.sources?.length??0)+Number(Boolean(payload.release))<=250);}
    assert.equal(generated.original_catalog_sha256,catalogSnapshot.get('index.json'));
@@ -101,9 +135,10 @@ test('both complete geographic reference releases publish against real D1 constr
    const delta=changes.get(reviewed.id),seen=new Set(),expected=new Set();assert.equal(delta.length,generated.changes);assert.equal(changes.get(baseline.id).length,0);
    for(const [id,m] of reviewedRows){const old=original.get(id);if(!old)expected.add(`create:${id}`);else if(old.active&&!m.active)expected.add(`deactivate:${id}`);else if(m.active){if(old.name!==m.reference_name)expected.add(`rename:${id}`);if(old.parent_id!==m.parent_id)expected.add(`reparent:${id}`);}}
    for(const id of generated.validated_geometry?.changed_location_ids??[])if(reviewedRows.get(id)?.active)expected.add(`retain:${id}`);
-   const geometryPairs=new Set();
-   for(const c of delta){const endpoint=c.old_entity_id??c.new_entity_id,key=`${['merge','retire'].includes(c.change_type)?'deactivate':c.change_type}:${endpoint}`;assert.ok(expected.has(key),key);if(c.evidence.geometry_migration){const pairKey=JSON.stringify([c.change_type,c.old_entity_id,c.new_entity_id]);assert.ok(!geometryPairs.has(pairKey));geometryPairs.add(pairKey);assert.ok(c.evidence.geometry_migration.receipt_sha256);}else assert.ok(!seen.has(key));seen.add(key);assert.equal(c.evidence.history_transfer,'none');assert.ok(c.evidence.migration_sha256);if(c.new_entity_id!=null)assert.equal(reviewedRows.get(c.new_entity_id)?.active,1);if(['rename','reparent'].includes(c.change_type)){assert.equal(c.old_entity_id,c.new_entity_id);const old=original.get(endpoint),now=reviewedRows.get(endpoint);assert.deepEqual(c.evidence.before,{name:old.name,parent_id:old.parent_id,active:old.active});assert.deepEqual(c.evidence.after,{name:now.reference_name,parent_id:now.parent_id,active:now.active});}if(c.change_type==='merge'){assert.notEqual(c.old_entity_id,c.new_entity_id);assert.equal(kindMap.get(c.old_entity_id),kindMap.get(c.new_entity_id));assert.equal(reviewedRows.get(c.old_entity_id).active,0);}}
-   assert.deepEqual(seen,expected);assert.equal(hashRows(delta.map(normalizedChange),'id'),reviewed.changes_sha256);
+   const geometryPairs=new Set(),splitPairs=new Set(),expectedSplits=new Map();
+   for(const file of proofOptions.metadataMigrations??[])for(const relationship of read(file).relationships??[])if(relationship.change_type==='split'&&original.has(relationship.old_entity_id)&&reviewedRows.get(relationship.old_entity_id)?.active===0){const pair=JSON.stringify(['split',relationship.old_entity_id,relationship.new_entity_id]);assert.ok(!expectedSplits.has(pair),'Duplicate declared split pair');expectedSplits.set(pair,{relationship,receipt_sha256:sha(bytes(file))});}
+   for(const c of delta){const endpoint=c.old_entity_id??c.new_entity_id,key=`${['merge','retire','split'].includes(c.change_type)?'deactivate':c.change_type}:${endpoint}`;assert.ok(expected.has(key),key);if(c.evidence.geometry_migration){const pairKey=JSON.stringify([c.change_type,c.old_entity_id,c.new_entity_id]);assert.ok(!geometryPairs.has(pairKey));geometryPairs.add(pairKey);assert.ok(c.evidence.geometry_migration.receipt_sha256);}else if(c.change_type==='split'){const pair=JSON.stringify([c.change_type,c.old_entity_id,c.new_entity_id]),declared=expectedSplits.get(pair);assert.ok(declared,'Split is not in an exact pinned metadata receipt');assert.ok(!splitPairs.has(pair),'Duplicate split successor');splitPairs.add(pair);assert.equal(c.evidence.metadata_relationship?.receipt_sha256,declared.receipt_sha256);assert.deepEqual(c.evidence.metadata_relationship.relationship,declared.relationship);assert.equal(reviewedRows.get(c.old_entity_id).active,0);assert.equal(kindMap.get(c.old_entity_id),kindMap.get(c.new_entity_id));assert.notEqual(c.old_entity_id,c.new_entity_id);}else assert.ok(!seen.has(key));seen.add(key);assert.equal(c.evidence.history_transfer,'none');assert.ok(c.evidence.migration_sha256);if(c.new_entity_id!=null)assert.equal(reviewedRows.get(c.new_entity_id)?.active,1);if(['rename','reparent'].includes(c.change_type)){assert.equal(c.old_entity_id,c.new_entity_id);const old=original.get(endpoint),now=reviewedRows.get(endpoint);assert.deepEqual(c.evidence.before,{name:old.name,parent_id:old.parent_id,active:old.active});assert.deepEqual(c.evidence.after,{name:now.reference_name,parent_id:now.parent_id,active:now.active});}if(c.change_type==='merge'){assert.notEqual(c.old_entity_id,c.new_entity_id);assert.equal(kindMap.get(c.old_entity_id),kindMap.get(c.new_entity_id));assert.equal(reviewedRows.get(c.old_entity_id).active,0);}}
+   assert.deepEqual(seen,expected);assert.deepEqual(splitPairs,new Set(expectedSplits.keys()),'Every declared retired identity split must account for every successor exactly once');assert.equal(hashRows(delta.map(normalizedChange),'id'),reviewed.changes_sha256);
   });
   await t.test('actual streamed finalization verifies every SQL row and publishes both immutable versions',async()=>{
    for(const r of generated.releases){const published=await finalizeGeographicRelease(db,r.id);assert.equal(published.status,'published');assert.deepEqual(published.expected_counts,r.expected_counts);assert.equal((await finalizeGeographicRelease(db,r.id)).duplicate,true);}
@@ -169,9 +204,31 @@ test('unvalidated geometry, historical transfer, or omitted identity disposition
 test('later release preparation reuses registered identities while retaining the exact original baseline manifest',async()=>{
  const folder=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-geographic-next-version-'));try{
   const firstFolder=path.join(folder,'first'),nextFolder=path.join(folder,'next');
-  const first=await prepareGeographicRelease({data,geographyData,output:firstFolder});
-  const next=await prepareGeographicRelease({data,geographyData,output:nextFolder,reviewedVersion:3,referenceDate:'2027-01-01',registryManifests:[path.join(firstFolder,'index.json')]});
-  assert.deepEqual(next.releases[0],first.releases[0],'Original baseline release identity, date, geometry and membership hashes are immutable');assert.equal(next.new_entities,0,'Previously registered identities must not be imported again with a new origin');assert.equal(next.releases[1].version,3);assert.equal(next.releases[1].reference_date,'2027-01-01');assert.notEqual(next.releases[1].id,first.releases[1].id);assert.equal(next.total_memberships,first.total_memberships);
+  const proofOptions=reviewedProofOptions(folder),nextVersion=(proofOptions.reviewedVersion??2)+1;
+  const first=await prepareGeographicRelease({data,geographyData,output:firstFolder,...proofOptions});
+  const next=await prepareGeographicRelease({data,geographyData,output:nextFolder,...proofOptions,reviewedVersion:nextVersion,referenceDate:'2027-01-01',registryManifests:[path.join(firstFolder,'index.json')]});
+  assert.deepEqual(next.releases[0],first.releases[0],'Original baseline release identity, date, geometry and membership hashes are immutable');assert.equal(next.new_entities,0,'Previously registered identities must not be imported again with a new origin');assert.equal(next.releases[1].version,nextVersion);assert.equal(next.releases[1].reference_date,'2027-01-01');assert.notEqual(next.releases[1].id,first.releases[1].id);assert.equal(next.total_memberships,first.total_memberships);
   assert.ok(next.registered_identity_manifest_sha256);assert.ok(next.batches.every(b=>!b.path.startsWith('entities-')));
+ }finally{fs.rmSync(folder,{recursive:true,force:true});}
+});
+
+test('replaying a previously registered creation preserves true archived-group and identity-collision guards',()=>{
+ const folder=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-creation-replay-'));
+ try{
+  const before=tiers.slice(0,-1).map((level,i)=>({id:level,name:level,level,parent_id:i?tiers[i-1]:null,metadata:{child_count:1}}));
+  const oldLocation={id:'old-land',name:'Old land',kind:'location',parent_id:'province',active:1};
+  const group={id:'new-province',name:'New province',level:'province',parent_id:'area',metadata:{child_count:1}};
+  const added={id:'new-land',name:'New land',kind:'location',parent_id:group.id};
+  const after=before.map(row=>row.id==='area'?{...row,metadata:{child_count:2}}:row).concat(group);
+  const snapshot=path.join(folder,'after-hierarchy.json');fs.writeFileSync(snapshot,JSON.stringify(after));
+  const original=new Map([...before.map(row=>[row.id,{...row,kind:row.level,active:1}]),[oldLocation.id,oldLocation]]);
+  const current=new Map([...after.map(row=>[row.id,{id:row.id,name:row.name,kind:row.level,parent_id:row.parent_id}]),[oldLocation.id,oldLocation],[added.id,added]]);
+  const registered={id:group.id,name:group.name,kind:group.level,parent_id:group.parent_id,active:1};
+  const proof={manifest_sha256:'0'.repeat(64),files:{'after-hierarchy.json':{file:snapshot}},creationProofs:[{location_id:added.id}],changed:new Set(),removed:new Set(),added:new Set([added.id]),receipt:{new_entities:[added]}};
+  const options={original,current,migration:{before_units:before},geometryProof:{proofs:[proof]},metadataProofs:[],registry:new Map([...original,[group.id,registered]])};
+  assert.doesNotThrow(()=>validateReviewedIdentities(options),'Exact previously registered source creation remains replayable');
+  assert.throws(()=>validateReviewedIdentities({...options,registry:new Map([...original,[group.id,{...registered,name:'Different immutable identity'}]])}),/exact original definition/);
+  const archived={...registered,active:0};
+  assert.throws(()=>validateReviewedIdentities({...options,original:new Map([...original,[group.id,archived]]),registry:new Map([...original,[group.id,archived]])}),/revives an archived group/);
  }finally{fs.rmSync(folder,{recursive:true,force:true});}
 });

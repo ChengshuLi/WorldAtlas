@@ -2,19 +2,29 @@
   "version": 2,
   "ready_for_location_attributes": false,
   "worldwide_review_issue": 7,
-  "reason": "Global continent, subcontinent and region boundaries are approved and published. No complete regional branch has been approved; location-attribute imports remain paused. Source-only research and bounded parallel regional interior audits may proceed.",
+  "reason": "Source-backed macro reference conventions are approved and locally installed for release4. Live release4/Site publication is pending. No complete regional branch is approved; location-attribute imports remain paused. Source-only research may proceed; regional workers must use published release pins until the publication checkpoint succeeds.",
   "macro_boundaries": {
     "approved": true,
-    "approval_issue": 33,
-    "approval_evidence": "docs/MACRO_FOUNDATION_APPROVAL.md",
-    "boundary_sha256": "a3571a1f51fa7231a8db975896be739e9d3b54a5bb9eb0af204cd3c8b305116d",
+    "approval_issue": 45,
+    "approval_evidence": "data/macro-improvements/combined-restoration/routing/README.md",
+    "boundary_sha256": "055e176193ed0cf7d7e9a45159e41d7777ad90b96035324bebed2937d14ce008",
     "approved_release": {
+      "id": "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+      "version": 4,
+      "hierarchy_sha256": "e199013d2db784631f9965b183ce078cd7af5dd37c8e60c3799bf80cf891c071",
+      "footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338"
+    },
+    "publication_evidence": "data/validation/macro-publication-v4.json",
+    "macro_certificate_sha256": "66a780aae17f18a8a7acbf11dcef68266b836c22e5fb70a026671ae3cfda6b5b",
+    "publication_verified": false,
+    "publication_status": "pending-release4-import-and-matched-site-verification",
+    "prior_published_release": {
       "id": "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
       "version": 3,
       "hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
       "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8"
     },
-    "publication_evidence": "data/validation/global-macro-publication.json"
+    "prior_publication_evidence": "data/validation/global-macro-publication.json"
   },
   "regions": [],
   "recorded_on": "2026-10-02",

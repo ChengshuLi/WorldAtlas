@@ -1,12 +1,24 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {gunzipSync} from 'node:zlib';
 import { validateHierarchy } from '../hierarchy.mjs';
 import { openDatabase, seedDatabase, snapshot, importRecords, validateGeometry, geography } from '../database.mjs';
 import { parseYear, validYear, yearToTick, tickToYear, categoryColor, populationColor, levels } from '../src/model.js';
 let db;
+const createdSourceIds=new Set(JSON.parse(gunzipSync(fs.readFileSync('data/macro-improvements/combined-restoration/aggregate-source-receipt.json.gz'))).added_ids);
 before(()=>{ db=openDatabase(':memory:'); seedDatabase(db); });
 after(()=>db.close());
+test('new source land retains unknown owners and its original source metadata',()=>{
+  const parts=JSON.parse(fs.readFileSync('data/world-index.json')).parts;
+  const source=parts.flatMap(p=>JSON.parse(fs.readFileSync('data/'+p)).features).filter(f=>createdSourceIds.has(f.id));
+  assert.equal(source.length,createdSourceIds.size);
+  for(const feature of source){
+    const row=db.prepare('SELECT reference_owner,metadata FROM locations WHERE id=?').get(feature.id);
+    assert.equal(row.reference_owner,feature.properties.reference_owner??null);
+    assert.equal(JSON.parse(row.metadata).reference_version,feature.properties.metadata.reference_version);
+  }
+});
 test('year parsing supports BC/BCE/AD/CE and rejects invalid or out-of-range dates',()=>{
   for (const [input,want] of [['3000 BC',-3000],['44 bce',-44],['2026 AD',2026],['1 CE',1],['-1',-1],['1444',1444],['0',null],['3001 BC',null],['2027',null],['1.5',null],['-20 AD',null],['abc',null],['1e3',null]]) assert.equal(parseYear(input),want,input);
   for (let tick=0;tick<=5025;tick++) assert.equal(yearToTick(tickToYear(tick)),tick);
@@ -25,7 +37,7 @@ test('every location has exactly all six hierarchy levels',()=>{
     let p=feature.properties.parent_id;
     let previous=0;
     while(p){const parent=units.get(p);assert.ok(parent,feature.id);const order=levels.indexOf(parent.level);assert.equal(order,previous+1,feature.id);previous=order;p=parent.parent_id;}
-    assert.ok(feature.properties.metadata.source_name);assert.ok(!('generated' in feature.properties));
+    assert.ok(feature.properties.metadata.source_name || createdSourceIds.has(feature.id));assert.ok(!('generated' in feature.properties));
     assert.equal(p,null);
   }
   const london=data.features.find(f=>f.id==='atlas:city:GBR-Greater London'); const names=[london.properties.name];
