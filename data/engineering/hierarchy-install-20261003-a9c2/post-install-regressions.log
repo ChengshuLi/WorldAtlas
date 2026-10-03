@@ -1,0 +1,983 @@
+
+> world-atlas@0.1.0 test
+> node --test --test-concurrency=2 test/*.test.mjs
+
+✔ attributes resolve independently with direct evidence ahead of spatial derivations and examples (2.392226ms)
+✔ field evidence does not erase an independently supported attribute and examples do not mask modern reference (0.29815ms)
+✔ typed imports reject overlapping field records and preserve stable category IDs (16.288879ms)
+✔ no-year-zero resolution, exclusive interval ends and opt-in examples remain deterministic (0.595998ms)
+✔ compact references preserve supported dates and field provenance (1.276575ms)
+✔ reference territories resolve to their political owner without changing geographic identity (0.220302ms)
+✔ dated non-example footprint fingerprints change with geometry/date and ignore examples (1156.228627ms)
+✔ boundary fingerprints verify the archived executed canonical algorithm (338.301689ms)
+✔ changed footprints invalidate cached values while direct evidence can still resolve the location (214.244554ms)
+✔ fixed graph assignment is independent of input ordering and meets a dense categorical control (74.252847ms)
+✔ concurrent names sharing the upstream ID get distinct presentation colors without new source IDs (5.103123ms)
+✔ unconstrained names of the same identity retain the same preferred color (2.695664ms)
+✔ invalid or incomplete category graphs are rejected (0.521897ms)
+✔ the shipped palette passes all pinned historical constraints and matches the audited modern candidate (30.068218ms)
+✔ map and legend presentation keys preserve source identities and distinguish concurrent names (0.924063ms)
+✔ shared named modes distinguish display groups; fixed classifications and hierarchy use stable IDs (0.70338ms)
+✔ published OKLab reference controls include white, black and red (0.989761ms)
+✔ full-severity models preserve achromatic controls and reduce red/green separation (0.66297ms)
+✔ generated HSL colors decode consistently and malformed colors are rejected (1.634524ms)
+✔ source-name display distinction preserves entity identity without ambiguous concatenation (0.285291ms)
+✔ older Workers negotiate the sparse limit without masking unrelated bad requests (51.473376ms)
+✔ complete inline temporal streams use the existing pin and revision validator without extra HTTP reads (22.956437ms)
+✔ inline temporal revision or release drift restarts the scalar snapshot rather than repinning it (8.201704ms)
+✔ absent inline temporal pages retain bounded ordinary geography paging (4.254404ms)
+✔ partial inline temporal pages cannot become authoritative or trigger unbounded reads (5.780133ms)
+✔ compact client hydrates two atomic entity pages and retains shared source provenance (6.180767ms)
+✔ oversized second page reduces its limit and retries its cursor without duplicating completed pages (4.360815ms)
+✔ a first-page size retry reaches the reduced request and preserves retirement authority (3.894271ms)
+✔ retryable conflicts and cross-page revision changes restart the complete compact snapshot (6.933292ms)
+✔ three persistently inconsistent attempts produce unavailable evidence without cold-cache authority (5.669297ms)
+✔ warm failures retain claims and withdrawals atomically only for the same year and example setting (3.384603ms)
+✔ malformed compact pages, incorrect years and cursor cycles fail atomically (18.751458ms)
+✔ compact client propagates aborts and passes the signal to its network request (3.003798ms)
+✔ clients without a compact capability keep the original three-stream protocol (3.262017ms)
+✔ the geography capability enables compact reads through the actual manifest loader (3.727449ms)
+✔ every published canonical run survives compact packing, including its boundary cells and gaps (0.798304ms)
+✔ compact full coordinate range, split high owner bits, seam cells and owner capacity are exact (139.50946ms)
+✔ v1 and v2 asset loaders preserve gzip/raw words, split row chunks and reject ambiguous manifests (61.708836ms)
+✔ shuffled and row-local varint transports reconstruct every packed bit across chunk and empty-row boundaries (223.417502ms)
+{"results":[{"version":1,"mismatches":0,"error":0},{"version":2,"mismatches":0,"error":0}],"high":{"pixel":[193,71,29,255],"error":0,"size":262144,"maxTextureSize":8192,"navigationOwnershipUploads":0}}
+✔ real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum coordinates and high IDs (2620.004283ms)
+✔ backend cutover is explicit and cannot expose credentials or silently return D1 (1.179888ms)
+✔ transfer maintenance blocks every API mutation before touching a database or object bucket (26.800862ms)
+✔ PostgreSQL diagnostics and raw export routes use the selected backend and retain honest quota status (1967.884693ms)
+✔ continent filters follow location membership for overseas and transcontinental reference owners (2.400319ms)
+✖ all six continent scopes partition every prepared location and reconcile reference profiles (1498.039947ms)
+✔ bounded source-policy projection is exact, reproducible, and small enough to deploy (69.430196ms)
+✔ coverage corrections count selected location identities on every applicable continent (243.196529ms)
+✔ coverage presents corrected roles with collapsed evidence and explicitly retained earlier descriptions (20.814434ms)
+✔ duplicate role IDs and stale policy assumptions cannot silently update coverage (1.90388ms)
+✔ standard envelope roundtrip uses fresh randomness, authenticated context and no plaintext fields (13.104879ms)
+✔ tampered ciphertext, authentication tag, IV, wrapped key and recipient are rejected (11.615103ms)
+✔ malformed or oversized envelopes, unapproved algorithms and invalid intervals fail closed (2.545358ms)
+✔ owner credentials, other endpoints, missing TLS and non-RSA keys cannot be transported (1.670679ms)
+✖ private delivery writes owner-only outside-Git file and refuses wrong digest, unsafe permissions, symlinks and overwrite (2.259828ms)
+✖ CLI encryption/decryption returns metadata only and failures never print plaintext or key material (121.398402ms)
+✔ exact upload archive accounting includes transport/config and preserves excluded sources (71.625485ms)
+✔ reserve breaches fail before hard limits and diagnostics name large files/categories (0.731312ms)
+✔ staged Site inventory agrees with actual archive and rejects redundant transport/linked inputs (26.824615ms)
+✔ fixed environmental database guards reproduce exactly from the shared registry (2.497785ms)
+✔ all fixed IDs, display labels, explicit legacy aliases and null pass raw local and hosted SQL (355.21115ms)
+✔ unlisted environmental values reject every local import and raw snapshot/history/typed insertion (33.79692ms)
+✔ adding local guards preserves existing unrecognized evidence byte for byte and blocks changed values (8.753877ms)
+✔ hosted migration retains old claim bytes, permits exact retries and still rejects stable-ID collisions (25.462465ms)
+✔ fixed environmental classifications have unique stable identities and cover every existing reference value (6.725038ms)
+✔ classification API exposes the exact fixed vocabulary independently of database content (52.692296ms)
+✔ aliases and stable IDs produce identical whole-location values, colors and category identities (1.994597ms)
+✔ preview, both importers and raw SQL reject environmental typos while retaining explicit unknowns (46.987015ms)
+✔ grandfathered free-form evidence is retained and exact hosted replays stay idempotent without admitting new text (28.2649ms)
+✔ accepted aliases and canonical identities remain source evidence instead of rewriting imported records (36.804424ms)
+✔ bounded root and child evidence verify complete changed-file union and baseline inventory (14.522022ms)
+✔ changed child manifest and absent/unassigned changed files reject (7.026723ms)
+✔ root hash cycles, duplicate assignments and changed context reject (1.486471ms)
+✔ partial baseline inventory cannot replace actual byte verification (5.514152ms)
+✔ trusted per-partition descriptor and individual byte budgets are not raised (37.293021ms)
+✔ verifies bytes without claiming factual correctness (2.697226ms)
+✔ schema-only validation reports unverified bytes (0.214684ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (1.289784ms)
+✔ source access/license limits remain explicit; no unsafe retention (0.388305ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.330408ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (0.427775ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (1.507543ms)
+✔ paths and symlinks cannot escape candidate reader (1.555645ms)
+✔ exact predecessor bytes retain original claims and append migration chronology (3.706227ms)
+✔ damaged archive, raw digest, current projection and previous geography reject (1.849328ms)
+✔ replaced migration history and changed proof bytes reject (0.752795ms)
+✔ claim, source inventory, count and territorial transfer reject (1.447612ms)
+✔ escaping, absolute paths and unknown archive compression reject (0.442507ms)
+✔ legacy detached terminal hash is recorded as a limit without inventing an archive (0.206872ms)
+✔ unverified withdrawals suppress every attribute source and modern owner fallback without modifying content (1.829147ms)
+✔ maintainer gate publishes complete signed, byte-verified products on both databases (2489.256226ms)
+✔ forged signatures, altered R2 bytes and incomplete inventories cannot publish (1647.973712ms)
+✔ selection corrections are source bounded, sealed, retirement-aware and preserve original bytes (1629.969402ms)
+✔ manifest and streamed object limits reject arbitrary classifications, duplicate IDs and registry byte tampering (1476.597552ms)
+✔ obsolete known evidence is removed before precedence while explicit unknown and sourced continuity remain eligible (1.076984ms)
+✔ even a trusted signed receipt cannot publish overlapping grid runs or wrong decoded bytes (1524.982136ms)
+✔ a reference correction retains exact claim bytes, original coordinates and the complete original chain (11.624334ms)
+✔ all receipted predecessor identities restore without overwriting active geography or transferring evidence (549.621061ms)
+✔ bounded import concurrency defaults to six and accepts only one through eight (1.444537ms)
+✔ stage then finalize publishes atomically without replaying ownership batches (92.655041ms)
+✔ append-only source batches import before newly registered geography and retain the original source bytes (63.650767ms)
+✔ interrupted real-D1 staging resumes explicit or hidden staged releases without rewriting history (117.380346ms)
+✔ a mismatched existing staged or published manifest blocks all geographic staging before writes (170.892857ms)
+✔ identical archive bytes upload once with a stable first-sorted name and preserve every receipt alias across retries (7.729092ms)
+✔ four retained metadata predecessors replay before a late creation and a future second addition (7.871416ms)
+✔ mixed creation and metadata chronology must be explicit (1.114771ms)
+✔ a creation snapshot cannot advance a previous metadata identity or alter its full source record (3.846559ms)
+✔ skipped, duplicate, reordered and mutated sequence pins fail (2.774012ms)
+✔ metadata archive tampering still fails at its chronological predecessor (1.361212ms)
+✔ legacy noncreation order remains stable and an unused new group is rejected (1.489776ms)
+✔ derived child counts must equal actual before and after immediate memberships (2.40828ms)
+✔ legacy index remains unchanged; verified extension resolves new release (7.996915ms)
+✔ pointer rejects traversal, wrong digest and changed predecessor bytes (5.633443ms)
+✔ extension rejects altered predecessor release or batch metadata (1.129212ms)
+✔ extension rejects duplicate identities, decreasing versions and repeated batch paths (1.376625ms)
+✔ manifest pointers cannot load symbolic links (4.907519ms)
+✔ compressed transport retains exact JSON bytes and rejects transport or payload tampering (0.509808ms)
+✔ staging is invisible; publication requires complete pinned membership and preserves original registry (40.631724ms)
+✔ rename/reparent releases and same-tier merge crosswalk preserve historical evidence and archived releases (52.742151ms)
+✔ manifest counts, complete same-release chains, no-year-zero calendar labels and hashes are real gates (50.775776ms)
+✔ bounded atomic staging rejects unknown/nongeographic/example identities and wrong-tier parents (23.93928ms)
+✔ immutable staged contents and ingestion collisions reject atomically; raw SQL blocks cycles and publication bypass (28.979673ms)
+✔ crosswalk evidence, tier identity and retired membership must match the published release (67.094192ms)
+✔ published pages use indexed keyset queries and older releases remain inspectable (44.950125ms)
+✔ streamed publication hashing matches exported UTF-8 canonical hashes across page boundaries (189.511497ms)
+✔ source-backed new territory publishes with a null predecessor and no invented historical attributes (59.591386ms)
+✔ live geography concurrency verifier refuses production, shared sessions and missing interactive drivers before writes (1.561464ms)
+✔ geography has its own branch and exactly one matching type (3.176829ms)
+✔ declared geography ownership is finite, safe and limited to source evidence namespaces (0.356257ms)
+✔ geography cannot edit core, history, another packet or an undeclared proposal directory (0.730531ms)
+✔ engineering consumes but preserves geography evidence while existing lanes still work (0.206872ms)
+✔ geography claims retain exact ownership through renewal and rotation, without content approval (1.523367ms)
+✔ claims and PRs refuse issue ownership expansion and incompatible modes (0.662148ms)
+✔ actual linked GitHub issue supplies geography ownership, not a PR-controlled declaration (1.438038ms)
+✔ real geography Git scope checks renamed source paths, symlinks and issue-backed CLI ownership (149.348329ms)
+✔ lane IDs must be explicit and safe (3.086603ms)
+✔ research owns only campaign files, excluding shared handovers and other campaigns (0.494325ms)
+✔ engineering preserves research and other engineering progress (0.26539ms)
+✔ partial and final PRs link one issue without needing a document tracker ID (0.783541ms)
+✔ PR policy rejects ambiguous issue links and accidental additional closures (0.35137ms)
+✔ GitHub issue type agrees with its lane and references an open issue (0.337429ms)
+✔ real git diff checks rename source paths, not only allowed destinations (35.585867ms)
+✔ another lane advancing work is not mistaken for this branch changing its files (58.588155ms)
+✔ remote issue validation reads only the event repository and requires successful labeled issue metadata (12.94839ms)
+✔ hosted catalog keeps active ancestor closure and categories as undated identities without ancient source coverage (44.948702ms)
+{"catalog_batches_imported":438,"entities":85315,"categories":1446,"sources":374,"active_units":5810,"archived_units":10259}
+✔ every generated hosted catalog batch imports through the actual service and generated D1 constraints (13747.705992ms)
+✔ a failed evidence stream cannot mix live claims with an absent retirement snapshot (41.34517ms)
+✔ dated geography shares scalar revision and complete same-year cache authority (11.240256ms)
+✔ transport compiler changes exactly the pinned 21 guards and preserves all other raw SQL and metadata (12.522199ms)
+✔ raw and derivative guards have identical original schemas and preserve all 21 conditions and error messages (12.1326ms)
+✔ native workerd D1 reproduces CASE-block truncation and applies the derivative over populated retained claims (4078.249377ms)
+✔ geographic pin guards the write transaction and retains exact original replay context (81.671565ms)
+✔ publication between preflight and batch rejects stale pins atomically, staged/malformed pins never authorize writes (49.999567ms)
+✔ unknown pinned commit outcome stays retryable and never claims a rollback (40.910214ms)
+✔ profile titles prefer direct dated evidence over English reference attestations and opt-in examples (29.578202ms)
+✔ hosted imports preserve whole-location raw values, precedence evidence and exact intervals (28.500051ms)
+✔ stable ID collisions roll back the entire batch and identical evidence stays idempotent (37.706845ms)
+✔ all tiers and nongeographic graph entities obey parent contracts (20.720047ms)
+✔ source intervals, category identity, typed scalars and habitation contradictions reject imports (23.897547ms)
+✔ raw SQL protects typed records, Unicode blank evidence, no-year-zero and retained identity (18.635353ms)
+✔ dated names and graph claims are sourced, pageable and never silently become ancient names (20.804273ms)
+✔ examples remain opt-in and bounded attribute pages preserve every location record (24.766337ms)
+✔ media metadata is immutable and content-addressed with retained sourced links (18.395062ms)
+✔ raw SQL rejects half-dated graph and media links (40.936224ms)
+✔ dated graph assertions cannot exceed known endpoint lifetimes (42.053358ms)
+✔ category IDs are shared graph identities and fictional entities remain opt-in (30.733923ms)
+✔ example media on real locations stays opt-in regardless of link source (24.112993ms)
+✔ reference and estimate source classes cannot masquerade as direct evidence (35.332536ms)
+✔ sourced corrections supersede attributes atomically while preserving old evidence (28.867459ms)
+✔ dated name corrections and habitation withdrawal update every reader and conflict check (30.927496ms)
+✔ withdrawn relationships and media links disappear from profiles but remain inspectable (43.744017ms)
+✔ failed replacements roll back retirements and the ingestion ledger together (24.755801ms)
+✔ raw SQL keeps retirement provenance sourced, immutable, unique and atomically finalized (18.745435ms)
+✔ supersession chains remain traceable and cannot form cycles (31.126095ms)
+✔ evidence history keeps fictional claims opt-in after retirement (27.73405ms)
+✔ map name paging excludes future graph names while default queries retain them (24.75541ms)
+✔ both sparse streams complete under fixed pins/revision before legacy history becomes authoritative (4.663811ms)
+✔ a source-free year makes exactly two bounded requests and retains caller-owned unrelated history (0.59666ms)
+✔ identical affected rows and sources across pages deduplicate without granting conflicting claims authority (4.519493ms)
+✔ permanent withdrawals apply independently and cross-stream active/withdrawn contradictions reject completion (1.727644ms)
+✔ expected scalar revision never silently repins or locally retries a partial snapshot (1.242834ms)
+✔ unanchored standalone reads retry both streams within the bounded attempt budget (1.045356ms)
+✔ abort/cancellation preserves its reason and no completed or partial result escapes (0.450279ms)
+✔ retryable oversized pages reduce only that stream limit and keep the same cursor/revision (0.858905ms)
+✔ rows, cursors, response/aggregate budgets and malformed source/capability reject authority (2.001217ms)
+✔ explicit unknown parents and BC/AD boundaries retain source evidence and reference context (0.851604ms)
+✔ dated parent bridge preserves stable identity, source support and effective complete chains (4.047682ms)
+✔ explicit unknown membership keeps the reference chain and original uncertainty rather than adopting a weaker claim (0.453253ms)
+✔ existence exclusions survive adaptation, including sourced unknown and BC/AD reference exclusions without year zero (0.597461ms)
+✔ bridge rejects wrong release, unsupported source/year, examples, withdrawn winners and unvetted footprints (1.436376ms)
+✔ joined-source snapshots hydrate exact JSON text metadata without requiring a duplicate source dictionary (0.820868ms)
+✔ shared temporal parent/existence resolution matches direct/derived/reference/example precedence independently of language and IDs (0.645273ms)
+✔ complete hosted snapshot authority removes withdrawn legacy IDs and overridden fields without reviving excluded entities (0.809491ms)
+✔ bounded production pages hydrate source-deduplicated winners and generate histories/exclusions without a full reference registry (0.836661ms)
+✔ bounded withdrawals remain authoritative independently of selected-year claims; malformed stream/context cannot become history (0.712755ms)
+✔ source IDs are ordinary stable identities even when their spelling matches JavaScript object properties (0.497981ms)
+✔ import preview rejects invalid dates, scalar values and unsupported source intervals before upload (1.89691ms)
+✔ import preview enforces whole-batch row and UTF-8 byte bounds (4.307514ms)
+✔ import submission preserves evidence and reports database rejection without treating it as saved (26.73765ms)
+✔ source-backed corrections preview withdrawal and replacement while retaining source evidence (0.422918ms)
+✔ JSON projection retains original nested formatting and appends bounded one-line entries (3.536752ms)
+✔ JSON projection handles changed array rows, escaped strings, empty containers and removals (0.63004ms)
+✔ province projection changes only province metadata and retains canonical cell/index bounds (1.988668ms)
+✔ append-only release retains original generations and drops regenerated baseline (1.779393ms)
+✔ evidence composes unchanged territory while preserving original supported facts (1.687845ms)
+✔ apply rejects unapproved hash and rolls back partial metadata transaction (2.335681ms)
+✔ immutable bytes changing after preparation block application (0.759144ms)
+✔ successful metadata install records a committed journal and retains rollback originals (1.019727ms)
+✔ compressed release append preserves prior descriptors and checks compressed/payload bytes (321.703002ms)
+✔ reference-only metadata mode validates exact archived group and source-backed parent merge (4.66356ms)
+✔ dry run validates a whole generation without changing any live bytes (25.638742ms)
+✔ apply requires the exact dry-run hash and preserves database/catalog/history originals (21.665412ms)
+✔ failure during the multi-path commit restores every original live byte (9.894036ms)
+✔ stale runtime, prepared source hashes, province membership and grid counts fail before activation (20.567387ms)
+✔ approved hashes prevent changes between inspection and activation (6.243162ms)
+✔ unexpected predecessor files or changed historical payload block approved activation (12.50418ms)
+✔ path traversal and staging symlinks cannot replace unrelated files (3.743674ms)
+✔ duplicate geographic identities and empty groups cannot pass as a complete hierarchy (2.982236ms)
+✔ a genuine unknown-attribute creation installs reversibly without changing original history (581.234629ms)
+✔ ordered replacement then pure creation validates exact current ancestry and pinned source bytes (614.08391ms)
+✔ composed installer rejects skipped or reordered manifests, changed pins and unmatched creation inventories (1510.622974ms)
+✔ composed installer rejects child historical transfers and changed source archive bytes (830.563897ms)
+✔ geometry evidence cannot silently authorize current source-name changes (550.787655ms)
+✔ source-name correction requires pinned exact metadata before/after evidence (1009.612721ms)
+✔ installer summary pins geometry proof members and rejects altered evidence after approval (374.412414ms)
+✔ serialized contenders on one issue have exactly one holder even under the same GitHub account (2.929687ms)
+✔ renewal and release require the actual worker plus ownership nonce (0.615017ms)
+✔ an idempotent lost-response retry retains original ownership (0.270969ms)
+✔ renewal, rotation and reassignment retain one canonical comment ID (0.48393ms)
+✔ umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed (0.47048ms)
+✔ expired reservations cannot silently discard branches or active PR/live operations (1.447512ms)
+✔ multiple PRs retain ownership and rotate branches only after previous work completes (0.400444ms)
+✔ canonical comments cannot be impersonated or ambiguous (0.327644ms)
+✔ PR validation uses current exact-branch ownership and rejects expired or blocked claims (0.584231ms)
+✔ location-content claims wait for worldwide approval while source-only work can start (78.806015ms)
+✔ the PR budget cannot be bypassed by claiming another part indefinitely (0.411109ms)
+✔ pagination inspects later pages rather than assuming only the first page exists (0.315455ms)
+✔ claim lock keys use canonical issue numbers so aliases cannot acquire independent locks (0.445362ms)
+✔ approved research is bound to all three geographic pins and ordinary bot audit text is not authority (0.399202ms)
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 108, in validate
+    raise ValueError('Creation overlaps existing or competing land: ' + other)
+ValueError: Creation overlaps existing or competing land: original
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 108, in validate
+    raise ValueError('Creation overlaps existing or competing land: ' + other)
+ValueError: Creation overlaps existing or competing land: original
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 91, in validate
+    raise ValueError('Ambiguous existing name requires explicit identity review')
+ValueError: Ambiguous existing name requires explicit identity review
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 36, in validate
+    raise ValueError('Creation requires source identity, URL, license and attribution')
+ValueError: Creation requires source identity, URL, license and attribution
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 46, in validate
+    raise ValueError('Creation source bytes changed')
+ValueError: Creation source bytes changed
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 39, in validate
+    raise ValueError('Invalid source support interval')
+ValueError: Invalid source support interval
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 81, in validate
+    raise ValueError('Created land differs from the exact source geometry')
+ValueError: Created land differs from the exact source geometry
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 101, in validate
+    raise ValueError('Creation parent chain differs from reviewed proof')
+ValueError: Creation parent chain differs from reviewed proof
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 86, in validate
+    raise ValueError('Source identity rename must not masquerade as new land')
+ValueError: Source identity rename must not masquerade as new land
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 88, in validate
+    raise ValueError('Existing source identity cannot be created again')
+ValueError: Existing source identity cannot be created again
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 71, in validate
+    rings(matches[0]['geometry']['coordinates'])
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 70, in rings
+    rings(row)
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 67, in rings
+    raise ValueError('Source polygon rings must be explicitly closed')
+ValueError: Source polygon rings must be explicitly closed
+✔ pure source-backed creation has a null predecessor and retains every original geometry (570.497025ms)
+✔ latitude and antimeridian creation uses actual narrow land, not a world-width polygon (373.124559ms)
+✔ reject existing identity, duplicate land and competing overlap without writing output (528.783555ms)
+✔ reject unsupported source, altered geometry, invalid coordinates, chain gaps and disguised rename (1573.317604ms)
+✔ a creation receipt cannot transfer history or add an unaccounted identity (368.028855ms)
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 62, in validate
+    coordinates(matches[0]['geometry']['coordinates'])
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 61, in coordinates
+    coordinates(row)
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 61, in coordinates
+    coordinates(row)
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 58, in coordinates
+    raise ValueError('Invalid longitude/latitude source coordinates')
+ValueError: Invalid longitude/latitude source coordinates
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 54, in validate
+    raise ValueError('Invalid raw source geometry must not be silently repaired')
+ValueError: Invalid raw source geometry must not be silently repaired
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 108, in validate
+    raise ValueError('Creation overlaps existing or competing land: ' + other)
+ValueError: Creation overlaps existing or competing land: competing
+✔ staged source creation compiles and publishes identical static/hosted crosswalks (717.240659ms)
+✔ invalid source coordinates, competing new land and old group mutations are rejected (533.645257ms)
+✔ macro partition checks separate member coherence from source completeness and descendant approval (10.594683ms)
+✔ a structural pass cannot invent semantic approval or permit regional interiors (1.568976ms)
+✔ each current macro identity and adjacent-tier parent must have exact decision and envelope coverage (1.038445ms)
+✔ member and footprint hashes detect cross-region reassignment and geometry edits (0.635468ms)
+✔ only inspected successful sources with URLs and reproducible hashes support boundary decisions (0.851363ms)
+✔ named missing islands receive explicit routing without imaginary geometry (1.335433ms)
+✔ supplemental boundary sources receive the same inspection and pin requirements as retained ledgers (1.14051ms)
+✔ partial named-land evidence preserves existing geometry while explicitly withholding completeness (1.247891ms)
+✔ large source collections retain a bounded reference to the exact archived receipt (2.426743ms)
+✔ same-tier reference split preserves exact archived originals and disjoint descendant members (1.766784ms)
+✔ split successors require unique explicit new-group deltas and a complete crosswalk (3.268527ms)
+✔ split endpoints cannot change tier, containing parent, registry identity or source/history proof (2.139235ms)
+✔ a same-count swap of unrelated territory fails exact split-member conservation (0.66982ms)
+✔ explicit local-group retirement retains every descendant and exact full archive (1.884351ms)
+✔ preparation emits every split pair and retains new identities, predecessor and original baseline (17.635847ms)
+✔ explicit reference creation can extract a location while retaining its original populated groups (2.619979ms)
+✔ sourced creations and explicit local-group retirements can share a conserving receipt (0.811684ms)
+✔ release creation crosswalks retain source relationship evidence without null-old retirement collisions (11.147275ms)
+✔ retained replacements archive all six exact originals without predecessor transfer (8.227083ms)
+✔ an unrelated old feature mutation is rejected (0.585643ms)
+✔ exact changed feature archives cannot substitute modified originals (0.295375ms)
+✔ duplicate or replaced stable identities are rejected (0.434385ms)
+✔ source proof cannot authorize historical transfer or missing independent validation (0.191148ms)
+✔ bounded replacement subprocess writes the same exact validated receipt (55.470054ms)
+✔ current projection preserves identities and keeps source inspection separate from semantic approval (1.581555ms)
+✔ source-backed projection cannot change timeline facts or invent geographic review completion (0.474986ms)
+✔ current pins and exact counts must describe the actual geography (0.24594ms)
+✔ complete current chains cannot be reordered or silently assigned different parents (0.550309ms)
+✔ every retired or created parent has exact original archive and explicit crosswalk (0.240633ms)
+✔ location conservation and exact parent descendant membership remain exhaustive (0.230307ms)
+✔ source-backed projection resolves exact replacements and creations while all semantic branches remain open (469.170803ms)
+✔ projection preparation rejects altered source pins, wrong order and invented historical transfers (359.141197ms)
+✔ projection validator exhausts added identities, retained archives and new source-assessed groups (526.523817ms)
+✔ later geometry projection preserves original inspection bytes and namespaces current predecessor snapshots (2.072695ms)
+✔ successive source migrations conserve earlier additions and their sourced new groups (486.981604ms)
+✔ projection predecessor loading pins both gzip layers and joins exact releases (1.370877ms)
+✔ raster presentation graph includes true horizontal and vertical shared cells (3.613067ms)
+✔ ocean gaps and diagonal corners do not become territorial adjacency (0.302286ms)
+✔ date-line screen wrap is included and same-owner contact is ignored (5.544804ms)
+✔ malformed packed rows fail closed instead of emitting an incomplete graph (0.460745ms)
+✔ evidence-only pages omit empty identities but retain withdrawal-only subjects and complete claims (48.750945ms)
+✔ entity pages return exactly shared whole-location winners, source dictionaries and all-tier preferred names (41.604552ms)
+✔ entity cursor pages never split an attribute set and preserve aliases, examples, lifetimes and end sentinels (40.313185ms)
+✔ inactive archived identities stay inspectable without inflating fixed-geography map pages (45.295525ms)
+✔ page withdrawals suppress prepared fallback claims for attributes and names with no wrong truncation (29.88276ms)
+✔ metadata summarization preserves all no-inhabitants proof semantics and points to original evidence (38.913484ms)
+✔ mid-page writes reject the entire map page with a retryable revision conflict (19.845959ms)
+✔ priority ties use the shared UTF-16 identity order instead of SQLite UTF-8 collation (33.198038ms)
+✔ the shared browser format rejects incomplete, duplicated, mismatched and unscoped response pages (32.670593ms)
+{"fixture":"1000-locations-9000-attributes","queries":7,"page_bytes":2393036,"elapsed_ms":147.44,"attribute_index":"attributes_location_dates","name_index":"names_entity_dates"}
+✔ 1000 locations and 9000 attributes use seven bounded indexed queries instead of claim pages (5874.005314ms)
+✔ finite Marcus routing is independent of sovereignty and retains provisional lower-tier roles (0.913357ms)
+✔ reject asymmetric Japan exclusion, alternate macro routing and invented readiness (0.605252ms)
+✔ original water-masked Marcus land reconstructs from exact OSM bytes (173.705366ms)
+✔ removing the source water hole or changing the coastline is rejected (182.187298ms)
+Atlas request failed /api/media/upload Media ID already identifies a different immutable object
+✔ media bytes and sourced provenance survive upload, metadata-only reads and identical retries (43.457345ms)
+✔ invalid or oversized provenance and maintenance never write source objects (20.233433ms)
+✔ frozen migration SQL and snapshots retain their published identities (6.326508ms)
+✔ new source land retains unknown owners and its original source metadata (1768.755162ms)
+✔ year parsing supports BC/BCE/AD/CE and rejects invalid or out-of-range dates (1.865672ms)
+✔ every location has exactly all six hierarchy levels (1906.819966ms)
+✔ seed is idempotent and missing history stays missing (16307.86746ms)
+✔ example intervals are opt-in and end-exclusive, including ownership changes (3020.841745ms)
+✔ atomic imports reject overlapping records, invalid populations, ranks, and parents (354.275373ms)
+✔ real records take precedence over examples, with no population interpolation (918.771632ms)
+✔ boundary versions require polygons and sources, and resolve by date (1593.393077ms)
+✔ unknown, zero population, and category colors have stable, distinct semantics (1610.01473ms)
+✔ historical political records are dated, sourced, and do not extend into 2025 (1482.603374ms)
+✔ both Huidong counties have complete, distinct geographical parents (1608.665846ms)
+✔ inserts and updates cannot skip hierarchy levels (1.051525ms)
+✔ legacy hierarchy migration preserves historical records and repairs skipped parents (52015.700401ms)
+✔ topology migration retires duplicate coverage while preserving its imported history (60444.135901ms)
+✔ geographic regions cross ownership borders and subdivide large countries (1639.237025ms)
+✔ semantic replacements preserve source history and custom locations without transferring their values (59420.032959ms)
+✔ non-Latin municipalities remain distinct and city memberships contain all districts (1842.888644ms)
+✔ account proof and configured quotas/compute remain typed, scoped and free of arbitrary private fields (22.829336ms)
+✔ denied organization proof stays unavailable while actual project settings remain verified (1.139848ms)
+✔ missing organization and quota are explicit unknowns, never inferred from public pricing (1.013899ms)
+✔ wrong project and lossy quotas fail before a misleading capacity receipt can be produced (1.268823ms)
+✔ actual PostgreSQL forward DDL preserves every baseline byte and sequence, grants minimum runtime access, and retries idempotently (3052.623968ms)
+✔ forward failure rolls back DDL, registry and grants without changing original bytes (1475.280665ms)
+✔ registered catalog tampering and unreviewed hashes reject instead of silently repairing a database (1943.265552ms)
+✔ missing reviewed rehearsal operation performs no management requests or database mutation (2.509613ms)
+✔ reviewed forward operation requires an actual production baseline and exact ordered files (0.836491ms)
+✔ fresh hash-pinned private Site maintenance attestation rejects stale, writable and mismatched context (1.75138ms)
+✔ management workflows require explicit manual dispatch and reject push selection (60.423878ms)
+✔ full rehearsal restores every original table byte, authenticates restricted read-only services, and deletes only its child (2274.158064ms)
+✔ production requires authenticated successful rehearsal artifact, restores once, and delivers only encrypted app credential (3403.852007ms)
+✔ missing or tampered reviewed checkpoints and missing production acknowledgement cause zero network/DB calls (56.786228ms)
+✔ production branch IDs and mismatched endpoint hosts are refused before connection or production deletion (2298.801258ms)
+✔ rehearsal failed cleanup preserves the exact child ID without claiming validated production handoff (1815.158549ms)
+✔ artifact reader accepts one bounded receipt without extracting paths and rejects malformed archive bytes (1.607383ms)
+✔ authorized direct production preserves exhaustive verification and refuses a second installation (1810.426253ms)
+✔ Neon metadata verification authenticates read-only requests, follows pagination, and omits secret response fields (29.014181ms)
+✔ Neon verifier rejects wrong project configuration and absent credentials without requests (2.501141ms)
+✔ Neon metadata failures never retain raw HTTP/network bodies, mismatched projects, or repeated pagination cursors (3.397291ms)
+✔ PostgreSQL schema splitter retains command bytes while respecting nested comments, quoted identifiers, strings and dollar bodies (0.826116ms)
+✔ isolated Neon verifier applies the exact schema atomically on real PostgreSQL and exercises actual hosted services (2077.035427ms)
+✔ private owner connection failures remain sanitized and cleanup still deletes the validation branch (4.482718ms)
+✔ isolated SQL verifier refuses production IDs and production hosts before any SQL connection (7.619547ms)
+✔ SQL driver errors are sanitized and clean up only the newly created branch (1.975809ms)
+✔ cleanup failures retain the exact validation branch ID and fail the verification receipt (2.172646ms)
+✔ ambiguous creation persists its unique name without guessing a deletion target or SQL connection (1.770139ms)
+✔ read-only metadata helper does not accept a project mismatch supplied by the API (0.584311ms)
+✔ canonical screen reports actual source-land cells for a compact territorial polygon (1.176724ms)
+✔ a genuine polygon smaller than a cell remains unrepresented without assigning water (0.6036ms)
+✔ archived original dry land blocks a purported new identity on that land (158.857487ms)
+✔ an exact-name homonym on different land does not transfer or reuse archived identity (168.887377ms)
+✔ changed archive bytes fail before considering identity absence (171.740124ms)
+✔ candidate preparation refuses an existing output instead of overwriting evidence (1.296404ms)
+✔ ownership assets reconstruct out-of-order compressed chunks and reject truncation (28.020778ms)
+✔ version-pinned ownership digests reject mixed deployments and support host-decoded gzip (6.097692ms)
+✔ hosted omission accounts for all prior bytes and preserves every current/source file exactly (21.932444ms)
+✔ portable static export retains the full tree without a delivery manifest (8.395436ms)
+✔ existing pinned archive tampering fails before packaging (5.076984ms)
+✔ verification rejects unlisted excluded files, altered retained bytes and deployed tampering (22.215997ms)
+✔ symbolic links cannot silently omit archive content (7.038942ms)
+✔ contrast constraints use actual half-open interval overlap, never range envelopes (31.281113ms)
+✔ parent lookups and unused-unit foreign-key checks use local parent indexes (5.149735ms)
+✔ opening a populated pre-index database installs parent indexes without rewriting geography or evidence (20.923684ms)
+✔ pixel ownership is exclusive and adjacent locations tile without a seam (1.926395ms)
+✔ holes, water and defensive overlap handling have one integer ID per cell (0.341615ms)
+✔ panning and lower-detail views sample the same canonical geographic cells (4.416658ms)
+✔ province borders are stronger and local borders disappear at distant zoom (0.221103ms)
+✔ Canvas fallback samples near screen resolution without four-pixel blocks (0.217308ms)
+✔ fixed non-power-of-two grid projects the entire world consistently (0.246762ms)
+✔ dated membership changes province lookup and picking records while retaining exact grid cells and geometry (2.778729ms)
+✔ metadata refresh accepts reordered identities and atomically rejects replacements, missing and duplicate locations (0.961329ms)
+✔ boundary geometry cache ignores source/date/provenance changes but detects actual dated footprints (0.297819ms)
+✔ compiled ownership preserves holes, shared edges, overlaps and water at every detail level (13.494734ms)
+✔ ownership survives geometry disposal and alternating zoom/pan views (1.669347ms)
+✔ GPU row tables and picking retain every canonical cell, including tiny features (1.165036ms)
+✔ prepacked browser fallback samples the same canonical grid (1.621645ms)
+✔ placeholder translation preserves quoted values, dollar bodies and nested comments exactly (2.975386ms)
+✔ only reviewed inserts and index hints are adapted; SQLite metadata needs an explicit query (0.714156ms)
+✔ injected driver returns D1 results with safe numeric dates and unchanged text evidence (1.754345ms)
+✔ batches remain ordered, atomic and ingestion-locked before identity allocation (0.949642ms)
+✔ publication and guarded imports share a lock before fresh ReadCommitted guard snapshots (0.697882ms)
+✔ driver failures preserve SQLSTATE while removing credentials, payloads and server details (1.390767ms)
+✔ bounded timeouts cancel network work and preserve uncertain commit status for idempotent retries (100.960424ms)
+✔ Neon HTTP wrapper submits lazy ordered queries as one transaction without exposing its URL (1.239158ms)
+✔ actual PostgreSQL parses translated placeholders, idempotence and rollback without touching immutable evidence text (1902.820305ms)
+✔ PostgreSQL evidence-only map pages retain retirement-only subjects without enumerating empty geography (1933.413861ms)
+✔ actual PostgreSQL applies all 14 tables and hosted smoke preserves original corrected evidence (1230.47677ms)
+✔ PostgreSQL claim/name readers preserve JSON bytes, stable identities, half-open dates, nulls and examples (1552.439038ms)
+✔ PostgreSQL guards reject interval/source/classification/owner contradictions and roll back complete failed batches (1276.694195ms)
+✔ PostgreSQL atomic correction retires overlap, retains old bytes and cannot resurrect immutable evidence (1361.823403ms)
+✔ PostgreSQL rank/habitation and fixed environment guards match literal-zero proof policy (1687.957151ms)
+✔ PostgreSQL catalogs/graph/media paging and compact map use actual hosted SQL with whole-location parity (1282.080184ms)
+✔ PostgreSQL stages and publishes complete pinned reference geography without mutating registry/evidence (1348.567328ms)
+✔ actual PostgreSQL and frozen D1 produce identical evidence/source bytes and selected-year service values (1576.514333ms)
+✔ PostgreSQL compact metadata summaries retain zero-population proof semantics and evidence links (1833.21046ms)
+✔ PostgreSQL geographic transaction guards reject unpublished/stale hashes and retain pinned replay receipts (1584.312601ms)
+✔ verified owner restore copies all fourteen original tables, legacy bytes, archives, examples, releases and rowids (2101.635949ms)
+✔ nonempty target refuses restoration without replacing evidence or disabled guards (1360.69706ms)
+✔ insert failure rolls back every copied table and USER-trigger state with no unsafe partial resume (1480.877831ms)
+✔ read-back verification failure rolls back source rows and prevents sequence advancement (1379.628781ms)
+✔ tampered source parts and unacknowledged owner restore make no target writes (1357.564805ms)
+✔ sequence-reset failure rolls back transactional RESTART and preserves all original guards (1267.427762ms)
+✔ lost commit acknowledgement requires read-only verification before any retry (1487.466809ms)
+✔ raw row digests preserve original text and obey D1 binary key order (0.549769ms)
+✔ actual restricted LOGIN runs hosted imports, corrections, idempotent retries and selected-year readers (2352.470657ms)
+✔ runtime role cannot mutate facts, suppress guards, restore revisions or escalate privileges (1435.383111ms)
+✔ restricted publication updates only validated status and publication columns (1448.713919ms)
+✔ idempotent maintenance preserves existing password and explicit rotation safely changes it (1576.996873ms)
+✔ existing inherited, privileged, owning or broadly granted role is rejected without silent downgrade (12700.946689ms)
+✔ weak credentials and inherited PUBLIC schema CREATE prevent reopening without weakening PUBLIC permissions (1154.526791ms)
+✔ non-superuser schema owner retains only automatic ADMIN-without-INHERIT-or-SET role management (1520.606091ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (6.406799ms)
+✔ positive real-format ledger validates actual files and binds an independent review (2.094308ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (5.720424ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (0.675137ms)
+✔ coordinate/helper policies require positive and negative controls; generators need reproducibility (0.768829ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (0.734468ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (0.742349ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (7.43582ms)
+✔ incomplete remote trees cannot become a passed byte check (0.474836ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (6.402953ms)
+✔ browser/server adapters agree, use only matching source intervals, and preserve complete provenance (22.477787ms)
+✔ source bounds, producer byte hashes, current identity and geography proof failures block publication (3.574669ms)
+✔ prepared producers reject free-form environmental text even when hashes and source dates match (5.199449ms)
+✔ both runtime paths reject stale manifests and tampered prepared assets (3.972269ms)
+✔ duplicate input identities are rejected and hosted duplicates retain imported evidence without dropping prepared metadata (2.930248ms)
+✔ bounded persistent batches import through actual hosted schema/service and are idempotent (31.356993ms)
+✔ prepared reference attestations retain direct historical name priority and aliases do not become preferred (2.54034ms)
+✔ retirement pages prevent every prepared fallback from resurrecting withdrawn names or attributes (63.881666ms)
+✔ hosted duplicate enrichment keeps prepared provenance while preserving the imported claim (9.0407ms)
+✔ completed real name and census products import persistently and resolve identically without gap filling (9657.754529ms)
+✔ public manifest byte pin protects source provenance as well as record parts (3.390752ms)
+✔ record APIs reject pages whose ingestion revision changed during the read (42.622216ms)
+✔ client retries complete map reads for mixed revisions, caps retries and obeys cancellation (13.025076ms)
+✔ reference migrations revalidate immutable claims only when every corresponding footprint stays identical (4.528708ms)
+✔ chained reference revalidation preserves original evidence and pins the prior receipt archive (6.106106ms)
+✔ ownership codecs preserve identity, dated labels, competing evidence and the BC/AD edge (2.71953ms)
+✔ actual environmental tables decode exactly at all normal-period boundaries (12567.843725ms)
+✔ reference codecs preserve supported precision and do not bridge unsupported intervals (0.452863ms)
+✔ actual prepared historical records match independent compact-table interpretation (21050.954265ms)
+✔ static and server exports resolve every active location identically, with examples on and off (124227.869248ms)
+✔ missing readiness is a review candidate, not permission (2.141208ms)
+✔ explicit source access blockers survive closed dependencies; prose needs review (0.578272ms)
+✔ unknown lane, invalid prefixes, umbrellas and import approval are separate (0.316297ms)
+✔ same-account workers retain distinct canonical leases and live work constraints (0.57064ms)
+✔ all issue pages and duplicate ownership; checkpoints deduplicate by state (18.689285ms)
+✔ failed reads preserve checkpoint and never report false resolutions (0.576399ms)
+✔ reference restoration preserves archived IDs, source context and exact original records idempotently (8.967008ms)
+✔ existing active territory names, geometry, parents and owner context are never overwritten (5.231828ms)
+✔ original record ID conflicts fail explicitly and restoration rolls back broken archives (4.665263ms)
+✔ the published source archive restores every original record into a fresh reference database (4611.058367ms)
+✔ environmental context can be displayed without inventing historical field evidence (1.536757ms)
+✔ modern supported records and historical reference context share a category and map color (0.408125ms)
+✔ dated historical observations override modern context until their exclusive interval end (0.240423ms)
+✔ explicit dated uncertainty and unmapped source text cannot be replaced by a baseline (0.264208ms)
+✔ only supported environmental references can supply presentation context (0.169896ms)
+✔ invalidated geography cannot retain environmental context or restore a dated field (0.933537ms)
+✔ reference source dates and environmental caveats survive display unchanged (0.616639ms)
+✔ an evidence outage leaves historical fields unknown while immutable reference context remains available (0.138218ms)
+✔ missing baselines remain unknown and non-environmental fields never acquire environmental context (0.192289ms)
+✔ baseline selection is deterministic and keeps the chosen source interval rather than extending it (0.280333ms)
+✔ compact and legacy context decoding preserve original supported intervals and source metadata (0.460404ms)
+✔ explicit metadata parent merge conserves full descendant identities and exact relationship provenance (2.967073ms)
+✔ receipts without the opt-in relationship field preserve the legacy preparation contract (0.500515ms)
+✔ missing, duplicate, extra and unretired merge endpoints cannot masquerade as complete crosswalks (2.449993ms)
+✔ same-tier registered identities and adjacent parent conservation are required (1.347461ms)
+✔ a same-count swap of unrelated territories fails exact descendant-footprint conservation (0.595678ms)
+✔ complete original unit records, explicit source proof and zero historical transfer are required (1.900024ms)
+✔ the complete real candidate validates all 49,589 locations and the 55-county source-backed merge (1868.868022ms)
+✔ full candidate release preparation emits the explicit merge, archived predecessor and exact unchanged baseline (11934.405537ms)
+✔ current manifest is closed and no region can claim invented approvals (1.725872ms)
+✔ v1 worldwide approval remains compatible (0.930893ms)
+✔ regional content claims depend on macro and branch approval, not unfinished worldwide descendants (2.127398ms)
+✔ macro approval and explicit complete region certificates are required (0.574626ms)
+✔ pins and every location target are checked against explicitly selected regions (1.010032ms)
+✔ ambiguous territorial membership fails closed (0.21225ms)
+✔ all name, relationship and media targets are scoped; ancillary or geographic writes are refused (0.625252ms)
+✔ verified raw batches are inspected rather than trusting caller target summaries (0.53791ms)
+✔ corrections require a territorial crosswalk and cannot transfer facts to another location (0.752384ms)
+✔ research compiler produces deterministic bounded batches and preserves exact input/source bytes (839.131097ms)
+✔ compiler rejects unsupported classifications, unsupported dates, source classes, cycles and geographic writes (1.004214ms)
+✔ parent entities precede child entities and atomic correction groups stay together at batch boundaries (117.39509ms)
+✔ dry-run rejects tampering and performs zero network requests (3.723934ms)
+✔ import refuses mismatched geography before writes and rejects unsafe origins (22.667943ms)
+✔ partial successful receipts survive failure, resumable retry skips committed batches and never logs credentials (519.414939ms)
+✔ network/transient failures retry an identical ingestion within a bounded budget (2.157933ms)
+✔ compiled content imports against actual frozen hosted SQL and preserves corrected evidence immutably (35.355551ms)
+✔ targets first introduced by a campaign commit before its retirement transaction (34.964251ms)
+✔ shared replacements stay atomic and chained corrections respect target availability (1.328563ms)
+✔ each research batch carries its geographic pin and a conflict preserves prior receipts (159.803494ms)
+✔ unpinned server receipts are rejected and legacy receipts are preserved while newly pinned transactions verify them (3.191852ms)
+✔ temporal campaigns retain ordinary source dependencies and route atomic sourced geography corrections separately (1.913114ms)
+✔ temporal compiler bounds sources/dates/classification and rejects reference mutations/unvetted footprints (1.064625ms)
+✔ temporal bundle manifests validate endpoint identity, pinned receipts and resume independently of ordinary imports (3.610473ms)
+✔ discovery preserves identity/source metadata and pages every result with bounded filters (119.377919ms)
+✔ relationship pages exhaust both directions beyond profile truncation with date/example/withdrawal filtering (55.461432ms)
+✔ media link pages preserve every active link and omit withdrawn, pending and unsupported-year links (60.248198ms)
+✔ capacity reports measured bytes and declared budgets without claiming a managed quota or prepared assets (21.174592ms)
+✔ catalog and graph reads reject revision changes instead of publishing inconsistent pages (19.311764ms)
+✔ media campaign dry run validates original bytes and rights without network or receipts (78.735728ms)
+✔ actual Worker and registerMedia roundtrip retains provenance, immutable R2 bytes and resumable receipt hashes (65.39049ms)
+✔ lost upload response rereads committed identity and full bytes without a second POST (19.018281ms)
+✔ failed campaign preserves verified objects and safely resumes only missing identities (25.005166ms)
+✔ source mismatches, changed claims and changed local or remote bytes stop before replacing originals (35.220867ms)
+✔ tampered checkpoints, duplicate content identities and missing source dependencies are rejected (24.014524ms)
+✔ redirects never forward the private credential and untrusted API errors are not persisted (18.094709ms)
+✔ encoded URL bounds and escaped local paths are enforced before any upload (18.120267ms)
+✔ a truncated successful POST receipt is resolved by direct immutable metadata reread (17.913686ms)
+✔ optional registered source archives are checked by stable ID and digest before linking provenance (26.135731ms)
+✔ older services without provenance capability stop before creating immutable incomplete metadata (20.050828ms)
+✔ century transport preserves exact intervals, dated identities and contested provenance with deterministic assets (158.488652ms)
+✔ six schema variants partition all IDs and preserve explicit semantic openness (5.059378ms)
+✔ raw hashing preserves float lexemes, signed zero, exponent precision and Unicode policy (0.871894ms)
+✔ duplicate reports, stale polygons and incomplete parent chains fail (1.374452ms)
+✔ parent membership cannot overlap, omit a child or claim unsupported approval (2.471086ms)
+✔ owner labels and source policy identities are exhaustively crosswalked (1.858402ms)
+✔ removed/new IDs require archival receipts and migration is never inferred (3.537253ms)
+✔ fresh-clone reader verifies every file pin without Python or cache access (37.25224ms)
+✔ changed source bytes or missing continent ledger reject the read-only snapshot (25.155203ms)
+✔ a renamed complete ledger cannot leak into website deployment assets (15.103449ms)
+✔ source-parent measurements require current footprint context and actual members (31.397368ms)
+✔ sourced policy overlay changes exactly the three proven roles without mutating original source policy (3.21019ms)
+✔ unrelated original-policy edits and duplicate correction identities require new review (9.338678ms)
+✔ every crosswalked location exposes its individually supported role and unchanged source vintage (2.349722ms)
+✖ Monaco and Luxembourg remain explicit stable-ID proposals with no hierarchy mutation (49.891219ms)
+✖ explicit legacy staging retains every original migration and metadata byte and deploys exactly 0000–0007 (4.359452ms)
+✖ default staging keeps the complete derivative and opt-in retries remove old forward files (0.658552ms)
+✔ all forward migration/source/journal hashes are checked before any deployment cutoff (11.810225ms)
+✖ the eight staged migrations have the original eight-migration schema and no forward tables (0.560946ms)
+✖ staging requires explicit valid mode, a separate real checkout and a supported CLI flag (81.874181ms)
+✔ checkpoint packing deterministically preserves all fourteen exported tables and every original byte (165.264927ms)
+✔ checkpoint rejects compressed tampering, original hashes and unsafe paths without publishing partial output (71.796578ms)
+✔ a recomputed gzip hash cannot bypass the independent decompression bound (76.966471ms)
+✔ symlinked checkpoint parts and changed source exports are rejected without replacing evidence (78.334685ms)
+✔ existing destinations are immutable and ordinary restore validates source hashes before any database call (75.049987ms)
+✔ verified existing destinations reject checkpoint identity-summary tampering (127.988576ms)
+✔ v2 inventories all twenty-three tables and pins every reviewed D1/PostgreSQL migration (16.607416ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (1824.934927ms)
+✔ forward owner restoration streams all twenty-three tables, original JSON bytes, deferred receipts and sequence (2104.589757ms)
+✔ v2 detects changing staged publication, missing source guards and unexpected factual tables (1326.338632ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1503.8283ms)
+✔ a deferred cross-table FK failure rolls back all twenty-three tables, guards and sequence (1496.960709ms)
+✔ interrupted v2 capture resumes preserved pages and its v2 cursor cannot be sent to v1 (209.475578ms)
+✔ v3 inventories all twenty-six tables and pins every reviewed D1/PostgreSQL migration (17.534154ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (2039.12421ms)
+✔ forward owner restoration streams all twenty-six tables, original JSON bytes, deferred receipts and sequence (2237.931683ms)
+✔ v3 detects changing staged publication, missing source guards and unexpected factual tables (1562.031485ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1530.262019ms)
+✔ a deferred cross-table FK failure rolls back all twenty-six tables, guards and sequence (2044.043474ms)
+✔ interrupted v3 capture resumes preserved pages and its v3 cursor cannot be sent to v1 (286.526695ms)
+✔ typed storage on actual SQLite/PostgreSQL preserves replays and rejects unsupported evidence or incomplete corrections atomically (1801.911579ms)
+✔ pure and actual SQLite/PostgreSQL contracts retain supported uncertainty/example labels, zero/false, and reject known-status null (1962.26478ms)
+✔ standalone owner SQL without its ingestion journal is explicitly outside the atomic correction guarantee (1886.376006ms)
+✔ complete export marker works under managed D1 compound-SELECT limits (55.050899ms)
+✔ all fourteen raw tables export exhaustively with original text, rowids and archived evidence (98.998059ms)
+✔ composite keyset cursors page across releases and reject foreign, malformed or injected cursors (42.522622ms)
+✔ markers detect publication and media writes outside ingestion revisions and reject raced pages (35.452134ms)
+✔ oversized retained evidence is reduced through explicit 413 rather than truncated (65.677288ms)
+✔ CLI exporter preserves a partial ledger, resumes hashed pages and proves frozen all-table counts (75.79482ms)
+✔ CLI rejects unfrozen, changed or tampered exports without mixing checkpoints (55.472875ms)
+✔ CLI overlaps bounded independent collections while preserving serial cursors and journals (132.714506ms)
+✔ stalled fetch times out with its forwarded signal and retries the same cursor without rewriting preserved source pages (570.487473ms)
+✔ a response with stalled JSON bytes is bounded through body consumption and preserves checkpoint receipts (572.978508ms)
+✔ permanent transport stalls stop after four deadlines without logging credentials or creating a false checkpoint (3546.590515ms)
+✔ external cancellation aborts fetch, JSON-body reading and retry backoff without retries or checkpoint changes (165.677304ms)
+✔ malformed JSON and snapshot-conflict HTTP errors remain nonretryable, and unsafe deadline settings fail before fetching (4.15927ms)
+✔ stale body, state, candidate bytes and active worker/PR prevent writes (2.642744ms)
+✔ unrelated scope and original prose cannot be overwritten (0.355876ms)
+✔ read-only preflight issues no writes and checks the complete batch before applying (4.469819ms)
+✔ bounded application reads back each correction and is idempotent (2.831439ms)
+✔ failed readback retains partial receipt and stops before remaining writes (2.372507ms)
+✔ unexpected issue scope cannot expand the mutation targets (0.417389ms)
+✔ fresh body recheck prevents overwriting an edit after batch preflight (0.894629ms)
+✔ scope property serialization order does not imply changed release or ownership (0.263978ms)
+✔ a wrong hash label is rejected even when source scope is otherwise unchanged (0.322416ms)
+Atlas request failed /api/geography/temporal/import Ingestion ID identifies another input
+✔ Worker dated geography routes, revision, evidence and retry work on actual sqlite (116.453461ms)
+Atlas request failed /api/geography/temporal/import Cross-origin writes are not permitted
+Atlas request failed /api/geography/temporal/import Expected property name or '}' in JSON at position 1 (line 1 column 2)
+Atlas request failed /api/geography/temporal/import Request exceeds the supported upload size
+Atlas request failed /api/geography/temporal/import Dated geography import rejected; no partial changes may be used
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Invalid temporal snapshot stream
+✔ Worker dated geography rejects unsafe writes without changing scalar/media routes on actual sqlite (48.046794ms)
+Atlas request failed /api/geography/temporal/import Ingestion ID identifies another input
+✔ Worker dated geography routes, revision, evidence and retry work on actual postgres (2228.430672ms)
+Atlas request failed /api/geography/temporal/import Cross-origin writes are not permitted
+Atlas request failed /api/geography/temporal/import Expected property name or '}' in JSON at position 1 (line 1 column 2)
+Atlas request failed /api/geography/temporal/import Request exceeds the supported upload size
+Atlas request failed /api/geography/temporal/import Dated geography import rejected; no partial changes may be used
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Invalid temporal snapshot stream
+✔ Worker dated geography rejects unsafe writes without changing scalar/media routes on actual postgres (1583.478517ms)
+✔ opt-in inline temporal pages retain exact standalone claims, permanent withdrawals, source and release pins (2213.247938ms)
+✔ a revision change between scalar and inline temporal reads rejects the complete response (1619.054068ms)
+✔ incomplete bounded temporal streams stay on the ordinary paging protocol (3534.891711ms)
+✔ inline geography never widens the total scalar response byte limit (5521.638604ms)
+✔ complete reference chains remain labeled fallback; BC/AD, exclusive end and province-level changes resolve identically (1608.854243ms)
+✔ SQL source, tier, equal-precedence overlap, release and example guards reject atomic invalid imports (1399.587775ms)
+✔ ancestor absence rejects disconnected descendants but permits atomic reparenting or existence suppression (1412.461594ms)
+✔ all overlapping ancestor transitions are validated, including interior absence outside child endpoints (1419.997034ms)
+✔ explicit unknown blocks weaker and opt-in examples while maintaining the complete reference chain (1380.879451ms)
+✔ atomic corrections preserve original JSON text, withdrawals, stable retries and missing-replacement rollback (1448.464955ms)
+✔ SQL independently prevents forged validation, dangling receipts and appending to a sealed receipt (1483.179305ms)
+✔ known identity lifetimes cannot be resurrected or widened by a dated claim (1414.297996ms)
+✔ paged claims retain exclusions, provenance, release and one shared revision (1431.63088ms)
+✔ bounded production pages skip the reference registry in source-free years and return only winners with deduplicated sources (1440.448167ms)
+✔ permanent withdrawal pages retain claims outside the selected year and share the pinned revision (1364.426069ms)
+✔ legacy source metadata is byte-preflighted before materialization and oversized pages fail with a bounded retry suggestion (1584.12086ms)
+✔ raw SQL cannot store fractional years or alter retained temporal facts and receipts (1361.629143ms)
+✔ actual hosted winner and withdrawal streams hydrate the browser resolver without full registry reads (1517.491288ms)
+✔ direct dated names precede reference attestations in any language, with stable ties and examples last (4.129285ms)
+✔ unknown historical name and habitation do not imply an absent or rural settlement (4.926336ms)
+✔ dated names at every level retain stable identity; aliases remain searchable outside their dates (12.70268ms)
+✔ dated membership changes the hierarchy used by map colors and province borders (8.444531ms)
+✔ settlement attributes and existence are separate from a location and successor links keep distinct IDs (13.430126ms)
+✔ explicit uninhabited differs from unknown, and sourced states beat examples (7.155828ms)
+✔ broken dated parent chains, invalid dates and interval overlaps roll back atomically (10.754592ms)
+✔ future historical graph entities do not enter geographic grouping tiers (2.546609ms)
+✔ registration is additive, versioned, immutable and JSON-only; conflicts fail closed (4.147352ms)
+✔ serialization hooks/getters cannot replace module identity or metadata, and never execute (2.117903ms)
+✔ false and literal zero remain sourced; absent, unknown and unresolved are distinct (0.811453ms)
+✔ no year zero, interval extrapolation, lifetime overflow or modern-reference promotion (0.626405ms)
+✔ numeric measurement rejects incompatible units, PPP, cohort, household weighting and uncertainty (2.149821ms)
+✔ entity government, controlled identities and feature links preserve the existing graph (0.59078ms)
+✔ direct/derived/reference/estimate/example precedence, explicit unknown and retirements are deterministic (0.857543ms)
+✔ directly quoted estimates retain estimate labels and the preserved method-based priority (0.448686ms)
+✔ shared pure snapshot seam round-trips all retained source, unit and derivation metadata without mutation (0.783251ms)
+✔ existing eight attributes, legacy values and precedence stay unchanged (0.952897ms)
+✔ retained synthetic transport fixture matches date-pinned expected results and original bytes (2.122059ms)
+✔ malformed unresolved evidence resolves to the unknown fill for every attribute, including category IDs (1.673844ms)
+✔ direct unresolved evidence blocks weaker assignments and modern fallback without losing its provenance (0.812966ms)
+✔ API, local import, UI preview and raw SQL reject both unresolved/non-null contract violations (74.965943ms)
+✔ 0006 preserves populated claims, retirements and all existing schema objects while suppressing retained malformed claims (19.461899ms)
+✔ opening a populated legacy local database retains malformed historical claims and applies the new INSERT guard (9.728686ms)
+✔ explicit no-inhabitant evidence produces unsettled with its supported interval and source record provenance (2.074878ms)
+✔ unknown, reference, modeled, rounded and untyped legacy zeros never imply unsettled (0.524961ms)
+✔ settlement contradictions obey cross-field precedence and tied evidence remains disputed (0.882931ms)
+✔ local imports accept canonical unsettled, reject both orders of direct contradictions and retain unknown/model-zero behavior (12.534967ms)
+✔ hosted imports and shared resolver agree; corrections exclude retired negative claims (54.171324ms)
+✔ 0003 migration preserves all old claim fields, retirement pointers, indexes and triggers (15.52164ms)
+✔ existing local enum migration preserves snapshots/history and enables new rank without touching geometry (17.142763ms)
+✔ precision flags prevent false habitation conflicts in both local and hosted import orders (139.214692ms)
+✔ 0004 precision migration preserves claims, retirements, indexes and all other triggers (19.99954ms)
+✔ source classes protect literal-zero evidence and example opt-in at the SQL boundary (43.973462ms)
+✔ 0005 source-class migration preserves claims and retirement-aware contracts while matching example-zero resolution (21.574175ms)
+✔ results are bound to the bot, request and issue, including denial (1.028109ms)
+✔ latest matching response wins, unrelated or malformed comments cannot confer ownership (0.197077ms)
+✔ positive confirmations require current exact canonical ownership, not stale success (0.777822ms)
+✔ bootstrap fallback requires exact request and releases require inactive state (0.301725ms)
+✔ merge responses retain exact PR binding and embedded HTML cannot break the marker (0.255134ms)
+ℹ tests 638
+ℹ suites 0
+ℹ pass 630
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 334059.579912
+
+✖ failing tests:
+
+test at test/coverage-scope.test.mjs:16:1
+✖ all six continent scopes partition every prepared location and reconcile reference profiles (1498.039947ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  8908 !== 8909
+  
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/coverage-scope.test.mjs:23:135)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 8908,
+    expected: 8909,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/credential-envelope.test.mjs:33:1
+✖ private delivery writes owner-only outside-Git file and refuses wrong digest, unsafe permissions, symlinks and overwrite (2.259828ms)
+  Error: Credential envelope validation or private delivery failed
+      at fail (file:///workspace/worldatlas-hierarchy-install/scripts/credential-envelope.mjs:11:23)
+      at outsideGit (file:///workspace/worldatlas-hierarchy-install/scripts/credential-envelope.mjs:66:53)
+      at readPrivateKey (file:///workspace/worldatlas-hierarchy-install/scripts/credential-envelope.mjs:69:2)
+      at deliverCredentialFile (file:///workspace/worldatlas-hierarchy-install/scripts/credential-envelope.mjs:85:12)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/credential-envelope.test.mjs:38:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at test/credential-envelope.test.mjs:41:1
+✖ CLI encryption/decryption returns metadata only and failures never print plaintext or key material (121.398402ms)
+  AssertionError [ERR_ASSERTION]: {"status":"failed","error_code":"credential-envelope-delivery-rejected","credential_logged":false,"private_key_logged":false}
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/credential-envelope.test.mjs:45:218)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/source-policy-corrections.test.mjs:28:1
+✖ Monaco and Luxembourg remain explicit stable-ID proposals with no hierarchy mutation (49.891219ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      id: 'framework:area:france:a85924a668ef',
+      level: 'area',
+      metadata: {
+        basis: 'WGSRPD level 3 geographic area; source calls these botanical countries',
+  ...
+        kind: 'geographic',
+  +     reference_hierarchy_correction: {
+  +       basis: 'Atlas reference label normalized to the exact sole member; original source metadata retained',
+  +       before_name: 'France',
+  +       proposal_id: 'europe:area-label:monaco',
+  +       reference_only: true,
+  +       semantic_approval: false
+  +     },
+        review_reasons: [
+          'Single-child tier: geographic role requires individual review',
+          'Previous reference grouping retained; semantic tier review outstanding'
+        ],
+        semantic_review: {
+  ...
+      },
+  +   name: 'Monaco',
+  -   name: 'France',
+      parent_id: 'framework:region:france:5800d29ad327'
+    }
+  
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/source-policy-corrections.test.mjs:29:186)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { id: 'framework:area:france:a85924a668ef', level: 'area', metadata: { basis: 'WGSRPD level 3 geographic area; source calls these botanical countries', child_count: 1, framework_status: 'retained-reference', kind: 'geographic', reference_hierarchy_correction: [Object], review_reasons: [Array], semantic_review: [Object], source: 'Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew', source_url: 'https://github.com/tdwg/wgsrpd' }, name: 'Monaco', parent_id: 'framework:region:france:5800d29ad327' },
+    expected: { id: 'framework:area:france:a85924a668ef', name: 'France', level: 'area', parent_id: 'framework:region:france:5800d29ad327', metadata: { source: 'Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew', source_url: 'https://github.com/tdwg/wgsrpd', basis: 'WGSRPD level 3 geographic area; source calls these botanical countries', kind: 'geographic', framework_status: 'retained-reference', child_count: 1, review_reasons: [Array], semantic_review: [Object] } },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/stage-site-migrations.test.mjs:20:1
+✖ explicit legacy staging retains every original migration and metadata byte and deploys exactly 0000–0007 (4.359452ms)
+  Error: ENOENT: no such file or directory, scandir '/workspace/worldatlas-hierarchy-install/dist/drizzle'
+      at read (node:fs:1536:35)
+      at readdirSyncRecursive (node:fs:1554:5)
+      at Object.readdirSync (node:fs:1628:12)
+      at snapshot (file:///workspace/worldatlas-hierarchy-install/test/stage-site-migrations.test.mjs:17:48)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/stage-site-migrations.test.mjs:21:64)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'scandir',
+    path: '/workspace/worldatlas-hierarchy-install/dist/drizzle'
+  }
+
+test at test/stage-site-migrations.test.mjs:51:1
+✖ default staging keeps the complete derivative and opt-in retries remove old forward files (0.658552ms)
+  Error: ENOENT: no such file or directory, open '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+      at Object.openSync (node:fs:622:18)
+      at Object.readFileSync (node:fs:488:35)
+      at validateSiteMigrationInputs (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:7:30)
+      at stageSiteMigrations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:27:70)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/stage-site-migrations.test.mjs:53:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+  }
+
+test at test/stage-site-migrations.test.mjs:90:1
+✖ the eight staged migrations have the original eight-migration schema and no forward tables (0.560946ms)
+  Error: ENOENT: no such file or directory, open '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+      at Object.openSync (node:fs:622:18)
+      at Object.readFileSync (node:fs:488:35)
+      at validateSiteMigrationInputs (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:7:30)
+      at stageSiteMigrations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:27:70)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/stage-site-migrations.test.mjs:93:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+  }
+
+test at test/stage-site-migrations.test.mjs:106:1
+✖ staging requires explicit valid mode, a separate real checkout and a supported CLI flag (81.874181ms)
+  AssertionError [ERR_ASSERTION]: node:fs:622
+    return binding.open(
+                   ^
+  
+  Error: ENOENT: no such file or directory, open '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+      at Object.openSync (node:fs:622:18)
+      at Object.readFileSync (node:fs:488:35)
+      at validateSiteMigrationInputs (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:7:30)
+      at stageSiteMigrations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:27:70)
+      at file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:52:374
+      at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+      at async node:internal/modules/esm/loader:643:26
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+  }
+  
+  Node.js v24.19.0
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/stage-site-migrations.test.mjs:116:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,13 @@
+file:///workspace/worldatlas-hierarchy-regeneration/scripts/prepare-macro-review-projection.mjs:107
+  if(members.some(row=>!row.source_assessment||row.source_assessment.regional_interior_approved!==false||row.source_assessment.historical_attributes_assessed!==false))throw Error('Additional owner profile lacks retained open source assessments');
+                                                                                                                                                                             ^
+
+Error: Additional owner profile lacks retained open source assessments
+    at file:///workspace/worldatlas-hierarchy-regeneration/scripts/prepare-macro-review-projection.mjs:107:174
+    at Array.map (<anonymous>)
+    at projectAdditionalOwnerProfiles (file:///workspace/worldatlas-hierarchy-regeneration/scripts/prepare-macro-review-projection.mjs:106:21)
+    at prepareMacroReviewProjection (file:///workspace/worldatlas-hierarchy-regeneration/scripts/prepare-macro-review-projection.mjs:135:31)
+    at async prepareInstall (file:///workspace/worldatlas-hierarchy-regeneration/scripts/install-macro-reference.mjs:157:20)
+    at async file:///workspace/worldatlas-hierarchy-regeneration/scripts/prepare-hierarchy-correction-install.mjs:19:16
+
+Node.js v24.19.0

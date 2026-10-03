@@ -1,0 +1,16 @@
+
+> world-atlas@0.1.0 build:static
+> node scripts/build-static.mjs
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 40 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                             0.46 kB │ gzip:   0.30 kB
+dist/assets/pixel-gpu-worker-DOOaZKfq.js    2.33 kB
+dist/assets/pixel-worker-DTOGFbAn.js        2.59 kB
+dist/assets/index-bXIaIiI7.css             31.40 kB │ gzip:  10.62 kB
+dist/assets/index-DvU7opwD.js             346.54 kB │ gzip: 105.41 kB
+✓ built in 1.18s
+Static atlas ready: 49625 polygons and 4 dated records.

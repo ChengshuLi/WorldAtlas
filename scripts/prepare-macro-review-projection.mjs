@@ -83,6 +83,32 @@ export function retainProjectionInputs({data,sourcePaths,files,previousProjectio
  }
  return {baselineFiles,predecessorFiles};
 }
+/** Compose retained source assessments; metadata edits do not create inspections. */
+export function inheritProjectionAssessments({previous,current,geometryProof=null}){
+ const changed=new Set([...(geometryProof?.changed_ids??[]),...(geometryProof?.removed_ids??[])]);
+ const oldLocations=new Map((previous?.locations??[]).map(row=>[row.id,row]));
+ const oldGroups=new Map((previous?.groups??[]).map(row=>[row.id,row]));
+ for(const row of current.rows){const old=oldLocations.get(row.id);if(old?.source_assessment&&!changed.has(row.id)){
+  if(old.owner!==row.owner)throw Error('Retained source assessment cannot assign a new owner');
+  row.source_assessment=old.source_assessment;
+ }}
+ for(const row of current.projectedGroups){const old=oldGroups.get(row.id);if(old?.source_assessment)row.source_assessment=old.source_assessment;}
+ if(geometryProof){
+  const assessments=new Map(geometryProof.source_assessments.locations.map(row=>[row.id,row]));
+  for(const row of current.rows)if(assessments.has(row.id))row.source_assessment=assessments.get(row.id);
+  const groups=new Map(geometryProof.source_assessments.groups.map(row=>[row.id,row]));
+  for(const row of current.projectedGroups)if(groups.has(row.id))row.source_assessment=groups.get(row.id);
+ }
+}
+export function projectAdditionalOwnerProfiles(originalProfiles,rows,previousProfiles=[]){
+ const known=new Set(originalProfiles.map(row=>row.owner)),owners=new Map();
+ for(const row of rows)if(!known.has(row.owner)){if(!owners.has(row.owner))owners.set(row.owner,[]);owners.get(row.owner).push(row);}
+ return [...owners].map(([owner,members])=>{
+  const retained=previousProfiles.find(row=>row.owner===owner),assessments=members.map(row=>row.source_assessment).filter(Boolean);
+  if((!retained&&assessments.length!==members.length)||assessments.some(row=>row.regional_interior_approved!==false||row.historical_attributes_assessed!==false)||retained&&retained.regional_interiors_approved!==false)throw Error('Additional owner profile lacks retained open source assessments');
+  return {...retained,owner,locations:members.length,continent:[...new Set(members.map(row=>row.continent))].sort().join(', '),open_group_ids:[...new Set(members.flatMap(row=>row.parent_chain))],status:'source-assessed-open',source_assessment_context:retained?.source_assessment_context??'Source-backed omitted land; owner remains unknown unless separately evidenced',source_assessment_entries:assessments,regional_interiors_approved:false};
+ });
+}
 /** Explicit current membership projection; preserved inspections are never relabeled. */
 export async function prepareMacroReviewProjection({data,before,after,receipts=[],geometryProofs=null,sourceReceipt=null}){
  data=path.resolve(data);const root=path.dirname(data);
@@ -91,23 +117,25 @@ export async function prepareMacroReviewProjection({data,before,after,receipts=[
  const prior=snapshot(before),current=snapshot(after),files=new Map(),geometryProof=await resolveProjectionGeometry({before,after,geometryProofs,sourceReceipt});
  if(!geometryProof&&(!same(prior.rows.map(row=>row.id),current.rows.map(row=>row.id))||footprintHash(before.features)!==footprintHash(after.features)))throw Error('Metadata projection cannot transfer, remove or alter location footprints/history');
  const previousFile=path.join(data,'macro-foundation/current-membership-projection.json.gz'),previous=fs.existsSync(previousFile)?read(previousFile):null;
+ const previousDashboard=previous?read(path.join(data,'macro-foundation/world-review-projection.json')):null;
+ if(previousDashboard&&['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>previousDashboard.current_pins?.[key]!==before.proof[key]))throw Error('Prior owner profiles differ from the exact predecessor');
  if(previous){if(['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>previous.current_pins?.[key]!==before.proof[key])||!same(previous.locations.map(row=>row.id),prior.rows.map(row=>row.id)))throw Error('Prior projection is not the exact current predecessor');const previousRows=new Map(previous.locations.map(row=>[row.id,row]));if(prior.rows.some(row=>JSON.stringify(reference(row))!==JSON.stringify(reference(previousRows.get(row.id)))))throw Error('Prior projected reference context changed without evidence');if(geometryProof)geometryProof.predecessor_reference_context={source_projection_sha256:sha(fs.readFileSync(previousFile)),locations:geometryProof.archived_location_references.map(row=>reference(previousRows.get(row.reference.id)))};}
  const originalWorld=previous?.baseline_files?.['data/world-review.json']?JSON.parse(gunzipSync(fs.readFileSync(path.join(root,previous.baseline_files['data/world-review.json'].archive_path)))):read(path.join(data,'world-review.json')),closure=read(path.join(data,'global-semantic-closure.json.gz'));
  const sourcePaths=new Set(['hierarchy.json','world-index.json','world-review.json','global-semantic-closure.json.gz','location-policy.json','administrative-sources.json','geographic-decision-migration.json.gz','macro-boundary-migration.json.gz','geographic-repair-evidence/migration-receipt.json.gz']);
  const index=read(path.join(data,'world-index.json'));index.parts.forEach(part=>sourcePaths.add(part));Object.keys(closure.input_sha256).forEach(file=>sourcePaths.add(file));
  const ledgers=[];
  for(const continent of ['africa','asia','europe','north-america','oceania','south-america']){const name=`geographic-semantic-followup/${continent}.json.gz`,report=read(path.join(data,name));ledgers.push({path:`data/${name}`,sha256:sha(fs.readFileSync(path.join(data,name)))});[...Object.keys(report.input_sha256??{}),...Object.keys(report.source_evidence?.diagnostics?.additional_input_sha256??{})].forEach(file=>{if(!file.startsWith('scripts/'))sourcePaths.add(file.replace(/^data\//,''));});}
- if(previous)sourcePaths.add('macro-foundation/current-membership-projection.json.gz');
+ if(previous){sourcePaths.add('macro-foundation/current-membership-projection.json.gz');sourcePaths.add('macro-foundation/world-review-projection.json');}
  const {baselineFiles,predecessorFiles}=retainProjectionInputs({data,sourcePaths,files,previousProjection:previous,predecessorKey:previous?sha(fs.readFileSync(previousFile)):null});
  const crosswalks=[...(previous?.crosswalks??[])];for(const file of receipts){const raw=fs.readFileSync(file),receipt=JSON.parse(file.endsWith('.gz')?gunzipSync(raw):raw);if(receipt.reference_only!==true||receipt.historical_claims_transferred!==false||receipt.summary?.geometry_changes!==0)throw Error('Projection requires reference-only immutable-footprint receipts');crosswalks.push({path:path.relative(root,file),sha256:sha(raw),group_changes:receipt.group_changes,relationships:receipt.relationships,retired_units:receipt.retired_units,history_transfer:'none'});}
  const removed=prior.units.filter(row=>!current.groups.has(row.id)),added=current.units.filter(row=>!prior.groups.has(row.id)),retired=new Set(crosswalks.flatMap(row=>row.retired_units??[]).map(row=>row.id)),created=new Set([...crosswalks.flatMap(row=>row.group_changes??[]).filter(row=>row.before===null&&row.after).map(row=>row.id),...(geometryProof?.created_group_ids??[])]);
  if(removed.some(row=>!retired.has(row.id))||added.some(row=>!created.has(row.id)))throw Error('Projection changed group identities lack explicit archive/creation receipts');
- if(geometryProof){const assessments=new Map(geometryProof.source_assessments.locations.map(row=>[row.id,row]));for(const row of current.rows)if(assessments.has(row.id))row.source_assessment=assessments.get(row.id);const groupAssessments=new Map(geometryProof.source_assessments.groups.map(row=>[row.id,row]));for(const row of current.projectedGroups)if(groupAssessments.has(row.id))row.source_assessment=groupAssessments.get(row.id);}
- const projection={version:1,kind:'current-membership-projection',scope:geometryProof?'Current membership projection of explicit source-backed migrations; retained source inspections remain unchanged and regional interiors remain open':'Metadata projection of current memberships from retained inspections; not a new source audit or semantic approval',semantic_complete:false,regional_interiors_approved:false,historical_claims_transferred:false,geometry_changes:geometryProof?geometryProof.changed_ids.length+geometryProof.removed_ids.length+geometryProof.added_ids.length:0,...(geometryProof?{geometry_proof:geometryProof}:{}),source_inspections:previous?.source_inspections??{world_review:{path:'data/world-review.json',sha256:sha(fs.readFileSync(path.join(data,'world-review.json')))},closure:{path:'data/global-semantic-closure.json.gz',sha256:sha(fs.readFileSync(path.join(data,'global-semantic-closure.json.gz')))},continent_ledgers:ledgers},baseline_files:baselineFiles,...(previous?{predecessor_files:predecessorFiles}:{}),before_pins:before.proof,current_pins:after.proof,counts:{locations:current.rows.length,groups:current.units.length,...Object.fromEntries(tiers.map(tier=>[tier,current.units.filter(row=>row.level===tier).length]))},locations:current.rows,groups:current.projectedGroups,archived_predecessors:[...(previous?.archived_predecessors??[]),...removed],created_groups:[...(previous?.created_groups??[]),...added],crosswalks};
+ inheritProjectionAssessments({previous,current,geometryProof});
+ const projection={version:1,kind:'current-membership-projection',retained_source_assessments:true,scope:geometryProof?'Current membership projection of explicit source-backed migrations; retained source inspections remain unchanged and regional interiors remain open':'Metadata projection of current memberships from retained inspections; not a new source audit or semantic approval',semantic_complete:false,regional_interiors_approved:false,historical_claims_transferred:false,geometry_changes:geometryProof?geometryProof.changed_ids.length+geometryProof.removed_ids.length+geometryProof.added_ids.length:0,...(geometryProof?{geometry_proof:geometryProof}:{}),source_inspections:previous?.source_inspections??{world_review:{path:'data/world-review.json',sha256:sha(fs.readFileSync(path.join(data,'world-review.json')))},closure:{path:'data/global-semantic-closure.json.gz',sha256:sha(fs.readFileSync(path.join(data,'global-semantic-closure.json.gz')))},continent_ledgers:ledgers},baseline_files:baselineFiles,...(previous?{predecessor_files:predecessorFiles}:{}),before_pins:before.proof,current_pins:after.proof,counts:{locations:current.rows.length,groups:current.units.length,...Object.fromEntries(tiers.map(tier=>[tier,current.units.filter(row=>row.level===tier).length]))},locations:current.rows,groups:current.projectedGroups,archived_predecessors:[...(previous?.archived_predecessors??[]),...removed],created_groups:[...(previous?.created_groups??[]),...added],crosswalks};
  files.set('macro-foundation/current-membership-projection.json.gz',gzipSync(encode(projection),{level:9}));
  const ownerGroups=new Map();for(const row of current.rows){if(!ownerGroups.has(row.owner))ownerGroups.set(row.owner,[]);ownerGroups.get(row.owner).push(row);}
  const projectedTerritories=originalWorld.territories.map(row=>{const members=ownerGroups.get(row.owner)??[];return {...row,locations:members.length,continent:[...new Set(members.map(loc=>loc.continent))].sort().join(', '),open_group_ids:[...new Set(members.flatMap(loc=>loc.parent_chain))],status:'source-assessed-open',source_assessment_context:'Retained original inspection; membership counts projected to current geography'};});
- if(geometryProof){const knownOwners=new Set(projectedTerritories.map(row=>row.owner));for(const [owner,members] of ownerGroups)if(!knownOwners.has(owner))projectedTerritories.push({owner,locations:members.length,continent:[...new Set(members.map(row=>row.continent))].sort().join(', '),open_group_ids:[...new Set(members.flatMap(row=>row.parent_chain))],status:'source-assessed-open',source_assessment_context:'Source-backed omitted land; owner remains unknown unless separately evidenced',source_assessment_entries:members.map(row=>row.source_assessment).filter(Boolean),regional_interiors_approved:false});}
+ projectedTerritories.push(...projectAdditionalOwnerProfiles(projectedTerritories,current.rows,previousDashboard?.territories));
  const rowById=new Map(current.rows.map(row=>[row.id,row])),originalGroups=new Map(originalWorld.groups.map(row=>[row.id,row]));
  const dashboardGroups=current.projectedGroups.map(row=>{const old=originalGroups.get(row.id);return {id:row.id,name:row.name,level:row.level,parent_id:row.parent_id,status:'open',semantic_status:'pending',checks:row.checks,basis:old?.basis??'Current reference grouping; interior review open',source:old?.source??(geometryProof?row.metadata?.source:null)??null,source_url:old?.source_url??(geometryProof?row.metadata?.source_url:null)??null,...(row.source_assessment?{source_assessment:row.source_assessment}:{}),locations:row.descendant_location_count,children:row.children.length,child_ids:row.children,owners:[...new Set(row.member_location_ids.map(id=>rowById.get(id).owner))],inspection_context:old?'Retained original source inspection; current members may differ':'New reference group; no descendant inspection approval'};});
  const locationParts=[];for(let start=0;start<current.rows.length;start+=1500){const file=`macro-foundation/world-review-locations-${start/1500}.json.gz`;files.set(file,gzipSync(encode(current.rows.slice(start,start+1500)),{level:9}));locationParts.push(file);}
@@ -119,11 +147,17 @@ export async function prepareMacroReviewProjection({data,before,after,receipts=[
 
 export function validateMacroReviewProjection({projection,hierarchy,locations,currentPins,baselineHierarchy=null,baselineLocations=null,predecessorProjections=[]}){
  const predecessor=predecessorProjections[0];
- if(predecessor){
+ if(predecessor&&projection.retained_source_assessments===true){
   if(['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>projection.before_pins?.[key]!==predecessor.current_pins?.[key]))throw Error('Projection predecessor does not match exact before pins');
   validateMacroReviewProjection({projection:predecessor,hierarchy:predecessor.groups,locations:predecessor.locations,currentPins:predecessor.current_pins,baselineHierarchy,baselineLocations,predecessorProjections:predecessorProjections.slice(1)});
  }
  const predecessorLocations=predecessor?.locations??baselineLocations,geometryProof=validateProjectionGeometry(projection,predecessorLocations,locations);
+ if(predecessor){
+  const changed=new Set(geometryProof?.changed_ids??[]),current=new Map(projection.locations.map(row=>[row.id,row]));
+  for(const row of predecessor.locations)if(row.source_assessment&&current.has(row.id)&&!changed.has(row.id)){
+   if(JSON.stringify(current.get(row.id).source_assessment)!==JSON.stringify(row.source_assessment))throw Error('Projection dropped or rewrote retained source assessment');
+  }
+ }
  if(projection?.version!==1||projection.kind!=='current-membership-projection'||projection.semantic_complete!==false||projection.regional_interiors_approved!==false||projection.historical_claims_transferred!==false||(!geometryProof&&projection.geometry_changes!==0))throw Error('Invalid current membership projection contract');
  for(const key of ['hierarchy_sha256','location_index_sha256','footprints_sha256'])if(projection.current_pins?.[key]!==currentPins[key])throw Error('Current membership projection has stale geographic pins');
  const groups=new Map(hierarchy.map(row=>[row.id,row])),projected=new Map(projection.groups.map(row=>[row.id,row]));

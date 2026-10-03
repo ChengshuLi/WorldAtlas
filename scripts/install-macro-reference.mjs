@@ -174,7 +174,7 @@ export async function prepareInstall({data='data',geographyData='.cache/global-m
   }});
  }
  const originals=Object.fromEntries([...writes.keys()].map(p=>[p,fs.existsSync(safe(data,p))?hashFile(safe(data,p)):null]));
- const report={version:1,reference_only:true,release_id:latest.id,before_geography:before.proof,after_geography:after.proof,receipts:receipts.map(p=>({path:p,sha256:hashFile(p)})),writes:Object.fromEntries([...writes].map(([p,b])=>[p,sha(b)])),originals,archives,preserved,evidence_chains:evidenceChains,macro_compatibility:macroCompatibility,immutable_grid_parts:grid.parts.map(p=>({path:'canonical-grid/'+p.path,sha256:p.sha256})),counts:latest.expected_counts,ownership_recompiled:false,historical_records_changed:false,semantic_complete:false};
+ const report={version:1,reference_only:true,release_id:latest.id,before_geography:before.proof,after_geography:after.proof,receipts:receipts.map(p=>({path:path.relative(path.dirname(data),p),sha256:hashFile(p)})),writes:Object.fromEntries([...writes].map(([p,b])=>[p,sha(b)])),originals,archives,preserved,evidence_chains:evidenceChains,macro_compatibility:macroCompatibility,immutable_grid_parts:grid.parts.map(p=>({path:'canonical-grid/'+p.path,sha256:p.sha256})),counts:latest.expected_counts,ownership_recompiled:false,historical_records_changed:false,semantic_complete:false};
  const validation=sha(json(report));fs.mkdirSync(stage,{recursive:true});for(const [p,b]of writes){const target=safe(path.join(stage,'after'),p);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,b);}fs.writeFileSync(path.join(stage,'report.json'),json({...report,validation_sha256:validation}));
  return {data,stage,report,validation_sha256:validation};
 }
