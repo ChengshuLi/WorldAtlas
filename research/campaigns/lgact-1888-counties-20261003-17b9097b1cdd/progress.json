@@ -19,7 +19,7 @@
       "Local Government Act 1888, 51 & 52 Vict. c.41, official as-enacted XML and schedules"
     ]
   },
-  "updated_at_utc": "2026-10-03T08:44:50+00:00",
+  "updated_at_utc": "2026-10-03T08:47:51+00:00",
   "geographic_release": null,
   "input_paths": [
     "research/campaigns/lgact-1888-counties-20261003-17b9097b1cdd/source-manifest.json",
@@ -40,8 +40,8 @@
     "The Third Schedule does not identify which named borough met the population threshold versus the \u201ccounty of itself\u201d criterion."
   ],
   "blockers": [],
-  "next_action": "Check manifest/hash and owned-path scope, report bounded findings to issue #68, submit one source-evaluation PR, then use the serialized merge queue and release the claim after verified integration.",
-  "pull_request": null,
+  "next_action": "Check latest main and CI, submit PR #556 to the serialized merge queue, verify the request-matched Merge result, then release claim 68.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/556",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
