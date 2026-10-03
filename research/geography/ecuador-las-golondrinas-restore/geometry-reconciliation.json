@@ -1,0 +1,209 @@
+{
+  "administrative_source_vintage_comparison": {
+    "2024_name_or_code_matches": 0,
+    "code_EC9001_matches": 1,
+    "code_EC9001_row": {
+      "ADM0_EN": "Ecuador",
+      "ADM0_ES": "Ecuador (el)",
+      "ADM0_PCODE": "EC",
+      "ADM1_ES": "Zona No Delimitada",
+      "ADM1_PCODE": "EC90",
+      "ADM2ALT1_ES": null,
+      "ADM2ALT2_ES": null,
+      "ADM2_ES": "Las Golondrinas",
+      "ADM2_PCODE": "EC9001",
+      "ADM2_REF": null
+    },
+    "inec_ocha_2023_roster_rows": 224,
+    "inec_ocha_2024_gazetteer_rows": 223
+  },
+  "axis_control": {
+    "ogr_pyproj_difference_m": 0.0,
+    "point_lonlat": [
+      -73.0,
+      5.0
+    ],
+    "wrong_authority_axis_separation_m": 10735490.23024829
+  },
+  "baseline_commit": "cff18b92cd89210df844f118a6e0b5c2afc3fd75",
+  "current_geometry": {
+    "area_m2_epsg6933": 129613500.18802738,
+    "area_m2_wgs84_geodesic": 129613524.99259648,
+    "bounds_lonlat": [
+      -79.272,
+      0.2592,
+      -78.9229,
+      0.3595
+    ],
+    "coordinate_count": 36,
+    "equal_area_vs_geodesic_relative_difference": 1.913733084320482e-07,
+    "interior_rings": 0,
+    "polygon_components": 1,
+    "rings": 1,
+    "type": "POLYGON",
+    "valid": true
+  },
+  "current_same_country_admin2_neighbours": [
+    {
+      "areal_overlap_m2_epsg6933": 0.0,
+      "id": "gb:ECU:ADM2:8360857B15521483188159",
+      "name": "Cotacachi",
+      "parent_id": "framework:province:imbabura:5b3789120dfb",
+      "shared_boundary_length_km_epsg6933": 17.402263
+    },
+    {
+      "areal_overlap_m2_epsg6933": 0.0,
+      "id": "gb:ECU:ADM2:8360857B19300187334866",
+      "name": "Quininde",
+      "parent_id": "framework:province:esmeraldas:933c2a3df460",
+      "shared_boundary_length_km_epsg6933": 40.832177
+    },
+    {
+      "areal_overlap_m2_epsg6933": 0.0,
+      "id": "gb:ECU:ADM2:8360857B46981965589636",
+      "name": "Eloy Alfaro",
+      "parent_id": "framework:province:esmeraldas:933c2a3df460",
+      "shared_boundary_length_km_epsg6933": 0.163666
+    },
+    {
+      "areal_overlap_m2_epsg6933": 0.0,
+      "id": "gb:ECU:ADM2:8360857B71791990485840",
+      "name": "Puerto Quito",
+      "parent_id": "framework:province:pichincha:83f8b01a750e",
+      "shared_boundary_length_km_epsg6933": 13.514566
+    },
+    {
+      "areal_overlap_m2_epsg6933": 0.0,
+      "id": "gb:ECU:ADM2:8360857B92001887030544",
+      "name": "Pedro Vicente Maldonado",
+      "parent_id": "framework:province:pichincha:83f8b01a750e",
+      "shared_boundary_length_km_epsg6933": 17.432215
+    }
+  ],
+  "geometry_method": {
+    "axis_policy": "OSR OAMS_TRADITIONAL_GIS_ORDER",
+    "coordinate_order": "longitude, latitude",
+    "independent_area_check": "WGS84 ellipsoidal polygon area from pyproj.Geod.polygon_area_perimeter; GeoJSON edges follow straight lon/lat segments",
+    "measurement_crs": "EPSG:6933 World Equidistant Cylindrical / equal area",
+    "software": {
+      "GDAL": "3.10.3",
+      "pyproj": "3.7.1"
+    },
+    "source_crs": "EPSG:4326"
+  },
+  "issue": 575,
+  "limitations": [
+    "The 2017 statute fixes a provincial boundary segment; it is not a complete physical-land inventory or a downloadable polygon for the named Las Golondrinas location.",
+    "The 2023 and 2024 INEC/OCHA tabular vintages disagree with the statute in different ways; the 2024 absence is not interpreted as physical disappearance.",
+    "A coarse 2017 GSHHG centroid screen in the parent packet is not a national physical-land, island, coastline or settlement source.",
+    "No 2022/2026 authoritative settlement inventory or current IGM/CONALI georeferenced parcel/boundary was retained or identified; no completeness claim is made.",
+    "The listed neighbours describe the current indexed geometry only, not legal boundaries or proof of source-to-source neighbor consistency.",
+    "The source/current symmetric difference is a diagnostic of two vintages; it does not identify which contour is correct and proposes no boundary edit."
+  ],
+  "overlay": {
+    "current_area_outside_source_fraction": 0.055103362206147484,
+    "intersection_area_m2_epsg6933": 122471360.54035994,
+    "relative_area_difference_absolute": 0.013254093960318632,
+    "source_area_outside_current_fraction": 0.0425796133860386,
+    "symmetric_difference_area_m2_epsg6933": 12588841.27978278,
+    "symmetric_difference_fraction_of_source": 0.09841332073011036
+  },
+  "parent_chain": [
+    {
+      "id": "gb:ECU:ADM2:8360857B1829680752404",
+      "level": "location",
+      "name": "Las Golondrinas",
+      "parent_id": "framework:province:imbabura:5b3789120dfb"
+    },
+    {
+      "id": "framework:province:imbabura:5b3789120dfb",
+      "level": "province",
+      "name": "Imbabura",
+      "parent_id": "framework:area:ecuador:4b56c159dc75"
+    },
+    {
+      "id": "framework:area:ecuador:4b56c159dc75",
+      "level": "area",
+      "name": "Ecuador",
+      "parent_id": "framework:region:western-south-america:7fe9d26228d5"
+    },
+    {
+      "id": "framework:region:western-south-america:7fe9d26228d5",
+      "level": "region",
+      "name": "Western South America",
+      "parent_id": "framework:subcontinent:andean-south-america:9579d3e91c2b"
+    },
+    {
+      "id": "framework:subcontinent:andean-south-america:9579d3e91c2b",
+      "level": "subcontinent",
+      "name": "Western South America",
+      "parent_id": "framework:continent:south-america:bbda637e3435"
+    },
+    {
+      "id": "framework:continent:south-america:bbda637e3435",
+      "level": "continent",
+      "name": "South America",
+      "parent_id": null
+    }
+  ],
+  "scope": {
+    "parent_review_subjects": 228,
+    "source_2019_features": 223,
+    "source_feature_occurrences": 1,
+    "source_file_bytes_compressed": 14386990,
+    "source_file_bytes_uncompressed": 48871363,
+    "source_file_sha256_compressed": "afda62cc58aae797b8152c19d8307cbd21b1fbd6e9ac9ede23856896711693d2",
+    "source_file_sha256_uncompressed": "3bec5261a078ec78ef1d24d175fa1ec8f619dc887e59f1cfe39fefba65cd4c76",
+    "subject_count": 1,
+    "subject_ids_sha256": "88f0eb42585875bddfea5134116b4c72f87a8a8fa16c57032b2cc24c28237920"
+  },
+  "source_geometry": {
+    "area_m2_epsg6933": 127918062.17276764,
+    "area_m2_wgs84_geodesic": 127918062.29319622,
+    "bounds_lonlat": [
+      -79.27494642799996,
+      0.258917932000031,
+      -78.92278853799996,
+      0.359465557000021
+    ],
+    "components": [
+      {
+        "area_m2_epsg6933": 127918062.03691183,
+        "index": 0,
+        "source_bounds_lonlat": [
+          -79.27494642799996,
+          0.258917932000031,
+          -78.92278853799996,
+          0.359465557000021
+        ]
+      },
+      {
+        "area_m2_epsg6933": 0.13585581444203854,
+        "index": 1,
+        "source_bounds_lonlat": [
+          -78.98937335499994,
+          0.262439836000055,
+          -78.98935440299994,
+          0.262452277000023
+        ]
+      }
+    ],
+    "coordinate_count": 3098,
+    "equal_area_vs_geodesic_relative_difference": 9.414509171459929e-10,
+    "interior_rings": 0,
+    "polygon_components": 2,
+    "rings": 2,
+    "type": "MULTIPOLYGON",
+    "valid": true
+  },
+  "subject": {
+    "containing_file": "data/geography/part-7.json",
+    "containing_file_sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+    "current_geometry_canonical_json_sha256": "0c51174a00cf70d8595ac7383a82f4cc4414dd6a3de517806eb41a78a9ff33a5",
+    "id": "gb:ECU:ADM2:8360857B1829680752404",
+    "name": "Las Golondrinas",
+    "source_geometry_canonical_json_sha256": "29095b3240d506b1a6ad07dd0bfafaa0106ca1ab0fa76761756d1e0f7db4230e",
+    "source_shape_id": "8360857B1829680752404"
+  },
+  "version": 1
+}
