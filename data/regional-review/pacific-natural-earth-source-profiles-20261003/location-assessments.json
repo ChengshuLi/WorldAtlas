@@ -1,0 +1,657 @@
+{
+  "scope_count": 8,
+  "status_definitions": {
+    "supported-with-limits": "identity/role is supported for a stated purpose; stated boundary or completeness limits remain",
+    "unresolved": "material role/name/source question remains open; no replacement conclusion proposed"
+  },
+  "assessments": [
+    {
+      "id": "ASM-4998",
+      "name": "Eastern",
+      "status": "supported-with-limits",
+      "assessment": "Eastern District; §5.0101 and 2020 Census GARM identify the district, and §5.0102 statutory counties match Census TIGER normalized names (5/5). Census statistical polygons and 2020 place inventory are coverage references; three place polygons cross county-subdivision extents. Natural Earth original polygon is cartographic only; current and source geometry differ materially and neither resolves island or intertidal completeness.",
+      "natural_earth": {
+        "adm1_code": "ASM-4998",
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "type": "",
+        "type_en": "",
+        "gn_name": "Eastern District",
+        "iso_3166_2": "AS-X01~",
+        "source_components": 1
+      },
+      "parent_chain": [
+        {
+          "id": "framework:province:eastern:d7fd8ac945aa",
+          "level": "province",
+          "name": "Eastern"
+        },
+        {
+          "id": "framework:area:samoa:d63b2a1b51c1",
+          "level": "area",
+          "name": "Samoa"
+        },
+        {
+          "id": "atlas:macro-review:region:3f0693a087ae4902",
+          "level": "region",
+          "name": "Western Polynesian Islands"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "level": "subcontinent",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "level": "continent",
+          "name": "Oceania"
+        }
+      ],
+      "current_geometry_screen": {
+        "current_area_covered_by_source_pct": 64.94095935,
+        "current_area_km2": 83.66552523,
+        "current_bounds_lonlat": [
+          -170.7436,
+          -14.331,
+          -170.5521,
+          -14.2296
+        ],
+        "current_geometry_type": "MultiPolygon",
+        "current_polygon_components": 2,
+        "current_valid": true,
+        "id": "ASM-4998",
+        "intersection_km2": 54.33319473,
+        "name": "Eastern",
+        "source_area_covered_by_current_pct": 99.98470122,
+        "source_area_km2": 54.34150832,
+        "source_bounds_lonlat": [
+          -170.72150631,
+          -14.31481969,
+          -170.56725013,
+          -14.25237396
+        ],
+        "source_geometry_type": "Polygon",
+        "source_polygon_components": 1,
+        "source_valid": true,
+        "sym_difference_pct_of_current": 35.06897734
+      },
+      "evidence_files": [
+        "natural-earth-source-profiles.json",
+        "natural-earth-current-geometry-comparison.json",
+        "gshhg-screen.json",
+        "american-samoa-census-inventory.json"
+      ],
+      "limitations": [
+        "Natural Earth geometry is cartographic and does not define sovereign title or legal boundaries.",
+        "GSHHG shoreline intersections are a physical screen only; no intersection cannot prove no land."
+      ]
+    },
+    {
+      "id": "ASM-4999",
+      "name": "Manu's",
+      "status": "supported-with-limits",
+      "assessment": "Manu’a District, not an apostrophe-defined administrative tier; §5.0101 and Census GARM identify the district and §5.0102 counties match TIGER normalized names (5/5). Its Manu’a island set spans multiple landforms. Census place polygons/statistical water extents are not legal boundary evidence; Natural Earth/current geometry differences are screening leads only.",
+      "natural_earth": {
+        "adm1_code": "ASM-4999",
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "type": "",
+        "type_en": "",
+        "gn_name": "Manu'a District",
+        "iso_3166_2": "AS-X02~",
+        "source_components": 2
+      },
+      "parent_chain": [
+        {
+          "id": "framework:province:manu-s:2bfa7d96db32",
+          "level": "province",
+          "name": "Manu's"
+        },
+        {
+          "id": "framework:area:samoa:d63b2a1b51c1",
+          "level": "area",
+          "name": "Samoa"
+        },
+        {
+          "id": "atlas:macro-review:region:3f0693a087ae4902",
+          "level": "region",
+          "name": "Western Polynesian Islands"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "level": "subcontinent",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "level": "continent",
+          "name": "Oceania"
+        }
+      ],
+      "current_geometry_screen": {
+        "current_area_covered_by_source_pct": 55.58763857,
+        "current_area_km2": 82.45526046,
+        "current_bounds_lonlat": [
+          -169.6873,
+          -14.2722,
+          -169.4188,
+          -14.1574
+        ],
+        "current_geometry_type": "MultiPolygon",
+        "current_polygon_components": 2,
+        "current_valid": true,
+        "id": "ASM-4999",
+        "intersection_km2": 45.83493217,
+        "name": "Manu's",
+        "source_area_covered_by_current_pct": 99.71124901,
+        "source_area_km2": 45.96766425,
+        "source_bounds_lonlat": [
+          -169.67621823,
+          -14.27174245,
+          -169.44013424,
+          -14.16887786
+        ],
+        "source_geometry_type": "MultiPolygon",
+        "source_polygon_components": 2,
+        "source_valid": true,
+        "sym_difference_pct_of_current": 44.5733361
+      },
+      "evidence_files": [
+        "natural-earth-source-profiles.json",
+        "natural-earth-current-geometry-comparison.json",
+        "gshhg-screen.json",
+        "american-samoa-census-inventory.json"
+      ],
+      "limitations": [
+        "Natural Earth geometry is cartographic and does not define sovereign title or legal boundaries.",
+        "GSHHG shoreline intersections are a physical screen only; no intersection cannot prove no land."
+      ]
+    },
+    {
+      "id": "ASM-5000",
+      "name": "Rose Atoll",
+      "status": "unresolved",
+      "assessment": "Rose Atoll/Rose Island is listed as a Census county-equivalent map unit, with TIGER county group but no county-subdivision or place polygon. It is absent from the §5.0102 fourteen statutory county names and not named in §5.0101’s three districts. This does not establish absence of management or other jurisdiction. Natural Earth labels Rose Atoll; GSHHG level-1 has zero intersections and nearby candidates about 1.87/2.32 km away; non-detection does not establish no land. Exact present administrative role and land/reef boundary remain unresolved.",
+      "natural_earth": {
+        "adm1_code": "ASM-5000",
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "type": "",
+        "type_en": "",
+        "gn_name": "Rose Atoll",
+        "iso_3166_2": "AS-X03~",
+        "source_components": 1
+      },
+      "parent_chain": [
+        {
+          "id": "framework:province:rose-atoll:d2143af2cd95",
+          "level": "province",
+          "name": "Rose Atoll"
+        },
+        {
+          "id": "framework:area:samoa:d63b2a1b51c1",
+          "level": "area",
+          "name": "Samoa"
+        },
+        {
+          "id": "atlas:macro-review:region:3f0693a087ae4902",
+          "level": "region",
+          "name": "Western Polynesian Islands"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "level": "subcontinent",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "level": "continent",
+          "name": "Oceania"
+        }
+      ],
+      "current_geometry_screen": {
+        "current_area_covered_by_source_pct": 20.22675486,
+        "current_area_km2": 4.34994245,
+        "current_bounds_lonlat": [
+          -168.1731,
+          -14.5495,
+          -168.1397,
+          -14.5209
+        ],
+        "current_geometry_type": "MultiPolygon",
+        "current_polygon_components": 2,
+        "current_valid": true,
+        "id": "ASM-5000",
+        "intersection_km2": 0.8798522,
+        "name": "Rose Atoll",
+        "source_area_covered_by_current_pct": 86.45488105,
+        "source_area_km2": 1.01770101,
+        "source_bounds_lonlat": [
+          -168.17308509,
+          -14.53289153,
+          -168.16047116,
+          -14.51978932
+        ],
+        "source_geometry_type": "Polygon",
+        "source_polygon_components": 1,
+        "source_valid": true,
+        "sym_difference_pct_of_current": 82.94222527
+      },
+      "evidence_files": [
+        "natural-earth-source-profiles.json",
+        "natural-earth-current-geometry-comparison.json",
+        "gshhg-screen.json",
+        "american-samoa-census-inventory.json"
+      ],
+      "limitations": [
+        "Natural Earth geometry is cartographic and does not define sovereign title or legal boundaries.",
+        "GSHHG shoreline intersections are a physical screen only; no intersection cannot prove no land."
+      ]
+    },
+    {
+      "id": "ASM-5001",
+      "name": "Swain's Island",
+      "status": "supported-with-limits",
+      "assessment": "Swains Island is a separate island/county-equivalent in 2020 Census materials. §5.0101 expressly excludes it from the three named districts and says administration is directly under the Governor. Natural Earth’s Admin-1 feature class is cartographic and must not be read as a statutory district. The source’s region_sub Tokelau is a geography grouping, not American Samoa administration and not sovereignty evidence. Preserve its published area cross-reference pending coordinated wider-footprint review.",
+      "natural_earth": {
+        "adm1_code": "ASM-5001",
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "type": "",
+        "type_en": "",
+        "gn_name": "Swains Island",
+        "iso_3166_2": "AS-X04~",
+        "source_components": 1
+      },
+      "parent_chain": [
+        {
+          "id": "framework:province:swain-s-island:069443c54686",
+          "level": "province",
+          "name": "Swain's Island"
+        },
+        {
+          "id": "framework:area:tokelau-manihiki:770fbc288b00",
+          "level": "area",
+          "name": "Tokelau Archipelago"
+        },
+        {
+          "id": "atlas:macro-review:region:3f0693a087ae4902",
+          "level": "region",
+          "name": "Western Polynesian Islands"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "level": "subcontinent",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "level": "continent",
+          "name": "Oceania"
+        }
+      ],
+      "current_geometry_screen": {
+        "current_area_covered_by_source_pct": 57.88694164,
+        "current_area_km2": 3.21841649,
+        "current_bounds_lonlat": [
+          -171.0896,
+          -11.0661,
+          -171.0661,
+          -11.0469
+        ],
+        "current_geometry_type": "Polygon",
+        "current_polygon_components": 1,
+        "current_valid": true,
+        "id": "ASM-5001",
+        "intersection_km2": 1.86304288,
+        "name": "Swain's Island",
+        "source_area_covered_by_current_pct": 99.8135045,
+        "source_area_km2": 1.86652386,
+        "source_bounds_lonlat": [
+          -171.08653724,
+          -11.06609466,
+          -171.07282467,
+          -11.05136484
+        ],
+        "source_geometry_type": "Polygon",
+        "source_polygon_components": 1,
+        "source_valid": true,
+        "sym_difference_pct_of_current": 42.22121661
+      },
+      "evidence_files": [
+        "natural-earth-source-profiles.json",
+        "natural-earth-current-geometry-comparison.json",
+        "gshhg-screen.json",
+        "american-samoa-census-inventory.json"
+      ],
+      "limitations": [
+        "Natural Earth geometry is cartographic and does not define sovereign title or legal boundaries.",
+        "GSHHG shoreline intersections are a physical screen only; no intersection cannot prove no land."
+      ]
+    },
+    {
+      "id": "ASM-5002",
+      "name": "Western",
+      "status": "supported-with-limits",
+      "assessment": "Western District; §5.0101 and 2020 Census GARM identify it, and §5.0102 statutory counties match TIGER normalized names (4/4). TIGER has 31 place features associated with Western; source/current footprints have material differences and source-land/islet completeness is unresolved. Census water scopes are not comparable as legal borders.",
+      "natural_earth": {
+        "adm1_code": "ASM-5002",
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "type": "",
+        "type_en": "",
+        "gn_name": "Western District",
+        "iso_3166_2": "AS-X05~",
+        "source_components": 1
+      },
+      "parent_chain": [
+        {
+          "id": "framework:province:western:6b808b7a2306",
+          "level": "province",
+          "name": "Western"
+        },
+        {
+          "id": "framework:area:samoa:d63b2a1b51c1",
+          "level": "area",
+          "name": "Samoa"
+        },
+        {
+          "id": "atlas:macro-review:region:3f0693a087ae4902",
+          "level": "region",
+          "name": "Western Polynesian Islands"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "level": "subcontinent",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "level": "continent",
+          "name": "Oceania"
+        }
+      ],
+      "current_geometry_screen": {
+        "current_area_covered_by_source_pct": 84.35498365,
+        "current_area_km2": 90.82773387,
+        "current_bounds_lonlat": [
+          -170.8469,
+          -14.3747,
+          -170.6926,
+          -14.289
+        ],
+        "current_geometry_type": "Polygon",
+        "current_polygon_components": 1,
+        "current_valid": true,
+        "id": "ASM-5002",
+        "intersection_km2": 76.61772005,
+        "name": "Western",
+        "source_area_covered_by_current_pct": 99.36021524,
+        "source_area_km2": 77.11106489,
+        "source_bounds_lonlat": [
+          -170.83124752,
+          -14.37468841,
+          -170.69263347,
+          -14.28923919
+        ],
+        "source_geometry_type": "Polygon",
+        "source_polygon_components": 1,
+        "source_valid": true,
+        "sym_difference_pct_of_current": 16.18818177
+      },
+      "evidence_files": [
+        "natural-earth-source-profiles.json",
+        "natural-earth-current-geometry-comparison.json",
+        "gshhg-screen.json",
+        "american-samoa-census-inventory.json"
+      ],
+      "limitations": [
+        "Natural Earth geometry is cartographic and does not define sovereign title or legal boundaries.",
+        "GSHHG shoreline intersections are a physical screen only; no intersection cannot prove no land."
+      ]
+    },
+    {
+      "id": "WLF-4995",
+      "name": "Sigave",
+      "status": "supported-with-limits",
+      "assessment": "Sigave matches Natural Earth WF-SG/GeoNames identity and Territorial Assembly’s current circonscription/customary kingdom account. INSEE 2018 names 6 Sigave villages; the Assembly also reports 6. No digitized authoritative legal boundary source was located; Natural Earth is cartographic. Current geometry differences and component/shoreline fit are screening results only.",
+      "natural_earth": {
+        "adm1_code": "WLF-4995",
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "type": "",
+        "type_en": "",
+        "gn_name": "Circonscription de Sigave",
+        "iso_3166_2": "WF-SG",
+        "source_components": 1
+      },
+      "parent_chain": [
+        {
+          "id": "framework:province:sigave:c747f3552e76",
+          "level": "province",
+          "name": "Sigave"
+        },
+        {
+          "id": "framework:area:wallis-futuna-is:e4f7505b4b7c",
+          "level": "area",
+          "name": "Wallis and Futuna Islands"
+        },
+        {
+          "id": "atlas:macro-review:region:3f0693a087ae4902",
+          "level": "region",
+          "name": "Western Polynesian Islands"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "level": "subcontinent",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "level": "continent",
+          "name": "Oceania"
+        }
+      ],
+      "current_geometry_screen": {
+        "current_area_covered_by_source_pct": 99.60619284,
+        "current_area_km2": 33.1533906,
+        "current_bounds_lonlat": [
+          -178.1857,
+          -14.3131,
+          -178.1266,
+          -14.2326
+        ],
+        "current_geometry_type": "Polygon",
+        "current_polygon_components": 1,
+        "current_valid": true,
+        "id": "WLF-4995",
+        "intersection_km2": 33.02283018,
+        "name": "Sigave",
+        "source_area_covered_by_current_pct": 97.89038805,
+        "source_area_km2": 33.73449716,
+        "source_bounds_lonlat": [
+          -178.18573971,
+          -14.31314759,
+          -178.12655128,
+          -14.23259857
+        ],
+        "source_geometry_type": "Polygon",
+        "source_polygon_components": 1,
+        "source_valid": true,
+        "sym_difference_pct_of_current": 2.540396
+      },
+      "evidence_files": [
+        "natural-earth-source-profiles.json",
+        "natural-earth-current-geometry-comparison.json",
+        "gshhg-screen.json",
+        "wallis-futuna-insee-inventory.json"
+      ],
+      "limitations": [
+        "Natural Earth geometry is cartographic and does not define sovereign title or legal boundaries.",
+        "GSHHG shoreline intersections are a physical screen only; no intersection cannot prove no land."
+      ]
+    },
+    {
+      "id": "WLF-4996",
+      "name": "`Uvea",
+      "status": "unresolved",
+      "assessment": "Natural Earth `Uvea / WF-UV` corresponds to official Uvéa circonscription/customary kingdom. Assembly lists 21 villages split Hihifo 5, Hahake 6, Mua 10; INSEE 2018 has the same three Wallis statistical districts and 21 villages. One village name remains discrepant: Assembly Malaefoon vs INSEE Mala’efo’ou. INSEE’s Districts worksheet also labels Alo and Sigave statistically, while Assembly uses districts for Wallis only and calls Futuna units kingdoms/circonscriptions. No authoritative digital legal boundary found; WOE Hahake is a child district label, not Uvéa’s name.",
+      "natural_earth": {
+        "adm1_code": "WLF-4996",
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "type": "",
+        "type_en": "",
+        "gn_name": "Circonscription d'Uvea",
+        "iso_3166_2": "WF-UV",
+        "source_components": 1
+      },
+      "parent_chain": [
+        {
+          "id": "framework:province:uvea:eb8025731917",
+          "level": "province",
+          "name": "`Uvea"
+        },
+        {
+          "id": "framework:area:wallis-futuna-is:e4f7505b4b7c",
+          "level": "area",
+          "name": "Wallis and Futuna Islands"
+        },
+        {
+          "id": "atlas:macro-review:region:3f0693a087ae4902",
+          "level": "region",
+          "name": "Western Polynesian Islands"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "level": "subcontinent",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "level": "continent",
+          "name": "Oceania"
+        }
+      ],
+      "current_geometry_screen": {
+        "current_area_covered_by_source_pct": 99.37571873,
+        "current_area_km2": 72.83374139,
+        "current_bounds_lonlat": [
+          -176.1996,
+          -13.3503,
+          -176.1256,
+          -13.2089
+        ],
+        "current_geometry_type": "Polygon",
+        "current_polygon_components": 1,
+        "current_valid": true,
+        "id": "WLF-4996",
+        "intersection_km2": 72.37905398,
+        "name": "`Uvea",
+        "source_area_covered_by_current_pct": 95.25406586,
+        "source_area_km2": 75.9852646,
+        "source_bounds_lonlat": [
+          -176.19957435,
+          -13.35027435,
+          -176.12559974,
+          -13.20891692
+        ],
+        "source_geometry_type": "Polygon",
+        "source_polygon_components": 1,
+        "source_valid": true,
+        "sym_difference_pct_of_current": 5.57557245
+      },
+      "evidence_files": [
+        "natural-earth-source-profiles.json",
+        "natural-earth-current-geometry-comparison.json",
+        "gshhg-screen.json",
+        "wallis-futuna-insee-inventory.json"
+      ],
+      "limitations": [
+        "Natural Earth geometry is cartographic and does not define sovereign title or legal boundaries.",
+        "GSHHG shoreline intersections are a physical screen only; no intersection cannot prove no land."
+      ]
+    },
+    {
+      "id": "WLF-4997",
+      "name": "Alo",
+      "status": "supported-with-limits",
+      "assessment": "Alo matches Natural Earth WF-AL and official circonscription/customary kingdom. Assembly and INSEE list 9 Alo villages, including Alofi; Natural Earth geometry has two disconnected polygons, a plausible island screen correspondence only, not legal proof. No authoritative digitized boundary source located; current/source differences are screening leads.",
+      "natural_earth": {
+        "adm1_code": "WLF-4997",
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "type": "",
+        "type_en": "",
+        "gn_name": "Circonscription d'Alo",
+        "iso_3166_2": "WF-AL",
+        "source_components": 2
+      },
+      "parent_chain": [
+        {
+          "id": "framework:province:alo:5ab48d886169",
+          "level": "province",
+          "name": "Alo"
+        },
+        {
+          "id": "framework:area:wallis-futuna-is:e4f7505b4b7c",
+          "level": "area",
+          "name": "Wallis and Futuna Islands"
+        },
+        {
+          "id": "atlas:macro-review:region:3f0693a087ae4902",
+          "level": "region",
+          "name": "Western Polynesian Islands"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "level": "subcontinent",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "level": "continent",
+          "name": "Oceania"
+        }
+      ],
+      "current_geometry_screen": {
+        "current_area_covered_by_source_pct": 97.3642413,
+        "current_area_km2": 58.68708482,
+        "current_bounds_lonlat": [
+          -178.1371,
+          -14.3789,
+          -177.9816,
+          -14.2555
+        ],
+        "current_geometry_type": "MultiPolygon",
+        "current_polygon_components": 2,
+        "current_valid": true,
+        "id": "WLF-4997",
+        "intersection_km2": 57.14023487,
+        "name": "Alo",
+        "source_area_covered_by_current_pct": 95.91924552,
+        "source_area_km2": 59.57118883,
+        "source_bounds_lonlat": [
+          -178.13708564,
+          -14.37892018,
+          -177.97671465,
+          -14.25554686
+        ],
+        "source_geometry_type": "MultiPolygon",
+        "source_polygon_components": 2,
+        "source_valid": true,
+        "sym_difference_pct_of_current": 6.77798857
+      },
+      "evidence_files": [
+        "natural-earth-source-profiles.json",
+        "natural-earth-current-geometry-comparison.json",
+        "gshhg-screen.json",
+        "wallis-futuna-insee-inventory.json"
+      ],
+      "limitations": [
+        "Natural Earth geometry is cartographic and does not define sovereign title or legal boundaries.",
+        "GSHHG shoreline intersections are a physical screen only; no intersection cannot prove no land."
+      ]
+    }
+  ]
+}

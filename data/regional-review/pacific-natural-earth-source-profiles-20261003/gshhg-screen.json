@@ -1,0 +1,7280 @@
+{
+  "source": {
+    "name": "GSHHG 2.3.7 full-resolution L1 physical coastline polygons",
+    "release_date": "2017-06-15",
+    "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+    "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+    "member_name": "gshhs_f.b",
+    "member_bytes": 95809336,
+    "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "license_file": "sources/gshhg-LGPL.txt"
+  },
+  "method": {
+    "scan": "Every L1 record in 5-degree regional windows for both assigned island groups; original selected record bytes preserved compressed.",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:6933",
+    "intersection": "Equal-area overlay of source physical-land polygon with original Natural Earth and published baseline feature geometry; invalid GSHHG rings are omitted from overlay and recorded as a method limit.",
+    "distance": "Projected Euclidean boundary distance; screening only."
+  },
+  "scope_count": 8,
+  "source_total_records_scanned": 188612,
+  "source_level1_records_scanned": 179832,
+  "regional_window_candidate_records": 99,
+  "regional_window_level1_counts": {
+    "American Samoa": 77,
+    "Wallis-Futuna": 22
+  },
+  "retained": {
+    "path": "sources/gshhg-local-records.bin.gz",
+    "record_count": 99,
+    "uncompressed_bytes": 50100,
+    "uncompressed_sha256": "4d2de3ba794fbf439624174af25fe6b2f713cc82b2250bd62a511e8957542b67",
+    "compressed_bytes": 30751,
+    "compressed_sha256": "23a82a9c8d32a2b0538a479dfbcb6a5e8a5ed26ebcb981a91e13e3e81efe4294"
+  },
+  "location_metrics": {
+    "ASM-4998:natural_earth": {
+      "name": "Eastern",
+      "positive_intersecting_record_count": 2,
+      "total_intersection_area_km2": 33.88651535,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 1207,
+          "area_km2": 33.8416169,
+          "gshhg_polygon_area_km2": 141.79383501,
+          "fraction_gshhg_polygon": 0.23866776
+        },
+        {
+          "gshhg_id": 134751,
+          "area_km2": 0.04489845,
+          "gshhg_polygon_area_km2": 0.04489845,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ]
+    },
+    "ASM-4998:current_baseline": {
+      "name": "Eastern",
+      "positive_intersecting_record_count": 2,
+      "total_intersection_area_km2": 44.29683787,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 1207,
+          "area_km2": 44.25193942,
+          "gshhg_polygon_area_km2": 141.79383501,
+          "fraction_gshhg_polygon": 0.31208648
+        },
+        {
+          "gshhg_id": 134751,
+          "area_km2": 0.04489845,
+          "gshhg_polygon_area_km2": 0.04489845,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ]
+    },
+    "ASM-4999:natural_earth": {
+      "name": "Manu's",
+      "positive_intersecting_record_count": 3,
+      "total_intersection_area_km2": 38.73890197,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 2335,
+          "area_km2": 35.93792964,
+          "gshhg_polygon_area_km2": 46.8318195,
+          "fraction_gshhg_polygon": 0.76738273
+        },
+        {
+          "gshhg_id": 6596,
+          "area_km2": 0.70437333,
+          "gshhg_polygon_area_km2": 8.15306977,
+          "fraction_gshhg_polygon": 0.08639363
+        },
+        {
+          "gshhg_id": 7897,
+          "area_km2": 2.096599,
+          "gshhg_polygon_area_km2": 5.89639544,
+          "fraction_gshhg_polygon": 0.355573
+        }
+      ]
+    },
+    "ASM-4999:current_baseline": {
+      "name": "Manu's",
+      "positive_intersecting_record_count": 3,
+      "total_intersection_area_km2": 45.61289459,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 2335,
+          "area_km2": 40.85640362,
+          "gshhg_polygon_area_km2": 46.8318195,
+          "fraction_gshhg_polygon": 0.87240692
+        },
+        {
+          "gshhg_id": 6596,
+          "area_km2": 1.28817786,
+          "gshhg_polygon_area_km2": 8.15306977,
+          "fraction_gshhg_polygon": 0.15799912
+        },
+        {
+          "gshhg_id": 7897,
+          "area_km2": 3.46831311,
+          "gshhg_polygon_area_km2": 5.89639544,
+          "fraction_gshhg_polygon": 0.58820904
+        }
+      ]
+    },
+    "ASM-5000:natural_earth": {
+      "name": "Rose Atoll",
+      "positive_intersecting_record_count": 0,
+      "total_intersection_area_km2": 0.0,
+      "gshhg_record_intersections": []
+    },
+    "ASM-5000:current_baseline": {
+      "name": "Rose Atoll",
+      "positive_intersecting_record_count": 0,
+      "total_intersection_area_km2": 0.0,
+      "gshhg_record_intersections": []
+    },
+    "ASM-5001:natural_earth": {
+      "name": "Swain's Island",
+      "positive_intersecting_record_count": 1,
+      "total_intersection_area_km2": 1.86332292,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 9703,
+          "area_km2": 1.86332292,
+          "gshhg_polygon_area_km2": 4.11986643,
+          "fraction_gshhg_polygon": 0.45227751
+        }
+      ]
+    },
+    "ASM-5001:current_baseline": {
+      "name": "Swain's Island",
+      "positive_intersecting_record_count": 1,
+      "total_intersection_area_km2": 3.15594035,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 9703,
+          "area_km2": 3.15594035,
+          "gshhg_polygon_area_km2": 4.11986643,
+          "fraction_gshhg_polygon": 0.76602977
+        }
+      ]
+    },
+    "ASM-5002:natural_earth": {
+      "name": "Western",
+      "positive_intersecting_record_count": 1,
+      "total_intersection_area_km2": 56.1292962,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 1207,
+          "area_km2": 56.1292962,
+          "gshhg_polygon_area_km2": 141.79383501,
+          "fraction_gshhg_polygon": 0.39585146
+        }
+      ]
+    },
+    "ASM-5002:current_baseline": {
+      "name": "Western",
+      "positive_intersecting_record_count": 3,
+      "total_intersection_area_km2": 66.32326318,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 1207,
+          "area_km2": 66.25158727,
+          "gshhg_polygon_area_km2": 141.79383501,
+          "fraction_gshhg_polygon": 0.46723884
+        },
+        {
+          "gshhg_id": 134731,
+          "area_km2": 0.03436489,
+          "gshhg_polygon_area_km2": 0.04491193,
+          "fraction_gshhg_polygon": 0.76516191
+        },
+        {
+          "gshhg_id": 144380,
+          "area_km2": 0.03731102,
+          "gshhg_polygon_area_km2": 0.03731102,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ]
+    },
+    "WLF-4995:natural_earth": {
+      "name": "Sigave",
+      "positive_intersecting_record_count": 1,
+      "total_intersection_area_km2": 31.25131481,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 1966,
+          "area_km2": 31.25131481,
+          "gshhg_polygon_area_km2": 64.3329361,
+          "fraction_gshhg_polygon": 0.48577473
+        }
+      ]
+    },
+    "WLF-4995:current_baseline": {
+      "name": "Sigave",
+      "positive_intersecting_record_count": 1,
+      "total_intersection_area_km2": 30.6678042,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 1966,
+          "area_km2": 30.6678042,
+          "gshhg_polygon_area_km2": 64.3329361,
+          "fraction_gshhg_polygon": 0.47670456
+        }
+      ]
+    },
+    "WLF-4996:natural_earth": {
+      "name": "`Uvea",
+      "positive_intersecting_record_count": 4,
+      "total_intersection_area_km2": 14.18690722,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 1738,
+          "area_km2": 13.62072512,
+          "gshhg_polygon_area_km2": 80.85967131,
+          "fraction_gshhg_polygon": 0.16844893
+        },
+        {
+          "gshhg_id": 49643,
+          "area_km2": 0.25615095,
+          "gshhg_polygon_area_km2": 0.25615095,
+          "fraction_gshhg_polygon": 1.0
+        },
+        {
+          "gshhg_id": 49725,
+          "area_km2": 0.2555714,
+          "gshhg_polygon_area_km2": 0.2555714,
+          "fraction_gshhg_polygon": 1.0
+        },
+        {
+          "gshhg_id": 122856,
+          "area_km2": 0.05445975,
+          "gshhg_polygon_area_km2": 0.05445975,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ]
+    },
+    "WLF-4996:current_baseline": {
+      "name": "`Uvea",
+      "positive_intersecting_record_count": 4,
+      "total_intersection_area_km2": 13.65020223,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 1738,
+          "area_km2": 13.08402013,
+          "gshhg_polygon_area_km2": 80.85967131,
+          "fraction_gshhg_polygon": 0.16181144
+        },
+        {
+          "gshhg_id": 49643,
+          "area_km2": 0.25615095,
+          "gshhg_polygon_area_km2": 0.25615095,
+          "fraction_gshhg_polygon": 1.0
+        },
+        {
+          "gshhg_id": 49725,
+          "area_km2": 0.2555714,
+          "gshhg_polygon_area_km2": 0.2555714,
+          "fraction_gshhg_polygon": 1.0
+        },
+        {
+          "gshhg_id": 122856,
+          "area_km2": 0.05445975,
+          "gshhg_polygon_area_km2": 0.05445975,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ]
+    },
+    "WLF-4997:natural_earth": {
+      "name": "Alo",
+      "positive_intersecting_record_count": 3,
+      "total_intersection_area_km2": 52.29919032,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 1966,
+          "area_km2": 23.40662125,
+          "gshhg_polygon_area_km2": 64.3329361,
+          "fraction_gshhg_polygon": 0.36383574
+        },
+        {
+          "gshhg_id": 3021,
+          "area_km2": 28.84068218,
+          "gshhg_polygon_area_km2": 30.6360834,
+          "fraction_gshhg_polygon": 0.94139586
+        },
+        {
+          "gshhg_id": 125496,
+          "area_km2": 0.05188689,
+          "gshhg_polygon_area_km2": 0.05188689,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ]
+    },
+    "WLF-4997:current_baseline": {
+      "name": "Alo",
+      "positive_intersecting_record_count": 3,
+      "total_intersection_area_km2": 50.36314814,
+      "gshhg_record_intersections": [
+        {
+          "gshhg_id": 1966,
+          "area_km2": 22.58454358,
+          "gshhg_polygon_area_km2": 64.3329361,
+          "fraction_gshhg_polygon": 0.35105725
+        },
+        {
+          "gshhg_id": 3021,
+          "area_km2": 27.72671767,
+          "gshhg_polygon_area_km2": 30.6360834,
+          "fraction_gshhg_polygon": 0.90503467
+        },
+        {
+          "gshhg_id": 125496,
+          "area_km2": 0.05188689,
+          "gshhg_polygon_area_km2": 0.05188689,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ]
+    }
+  },
+  "nearby_candidate_records": [
+    {
+      "id": 228,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -172.834667,
+        -13.804694,
+        -172.186306,
+        -13.438778
+      ],
+      "centroid": [
+        -172.5104865,
+        -13.621736
+      ],
+      "source_area_header": 172311274,
+      "area_full_header": 172311274,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 1158,
+      "geometry_sha256_wkb": "54fc1148891a15913ea8065a07d07334d0e1697e3dce24a732e931cfa4bf8304",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 158.28245438
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 156.30882829
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 250.13789213
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 248.77648627
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 401.38854583
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 401.38730216
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 320.85023004
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 320.85079487
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 150.16809494
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 148.99795064
+        }
+      ]
+    },
+    {
+      "id": 294,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -172.096333,
+        -14.052083,
+        -171.444667,
+        -13.789639
+      ],
+      "centroid": [
+        -171.7705,
+        -13.920861
+      ],
+      "source_area_header": 114555504,
+      "area_full_header": 114555504,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 1219,
+      "geometry_sha256_wkb": "85e4313b2d3efbe7b985b3b64698febe53ce9042197cfd971648b5bcf9e4b91e",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 76.42165618
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 74.44803718
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 171.67365857
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 170.47081006
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 321.698849
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 321.6975429
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 347.52737775
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 347.52739177
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 68.5118113
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 67.40854136
+        }
+      ]
+    },
+    {
+      "id": 1207,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -170.867972,
+        -14.377944,
+        -170.586278,
+        -14.244583
+      ],
+      "centroid": [
+        -170.727125,
+        -14.3112635
+      ],
+      "source_area_header": 141793837,
+      "area_full_header": 141793837,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 682,
+      "geometry_sha256_wkb": "c56cf71b529a2c0b7ca3a17794b998fadac70d55cb66ab98b4af722a3a5aa46d",
+      "hits": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "intersection_km2": 33.8416169,
+          "fraction_gshhg_polygon": 0.23866776
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "intersection_km2": 44.25193942,
+          "fraction_gshhg_polygon": 0.31208648
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "intersection_km2": 56.1292962,
+          "fraction_gshhg_polygon": 0.39585146
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "intersection_km2": 66.25158727,
+          "fraction_gshhg_polygon": 0.46723884
+        }
+      ],
+      "distances": [
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 88.38479595
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 87.47270343
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 235.0272387
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 235.02588799
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 397.55111162
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 397.55015645
+        }
+      ]
+    },
+    {
+      "id": 1738,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.253806,
+        -13.352111,
+        -176.163778,
+        -13.215417
+      ],
+      "centroid": [
+        -176.208792,
+        -13.283764
+      ],
+      "source_area_header": 808596690,
+      "area_full_header": 808596690,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 309,
+      "geometry_sha256_wkb": "b9dba90f145104295d00e234b10224d83875c8aef72ad64f850e4cb3e0d54850",
+      "hits": [
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "intersection_km2": 13.62072512,
+          "fraction_gshhg_polygon": 0.16844893
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "intersection_km2": 13.08402013,
+          "fraction_gshhg_polygon": 0.16181144
+        }
+      ],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 215.84831596
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 215.84729639
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 209.93411249
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 210.01695762
+        }
+      ]
+    },
+    {
+      "id": 1966,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -178.192972,
+        -14.321278,
+        -178.040472,
+        -14.232083
+      ],
+      "centroid": [
+        -178.116722,
+        -14.2766805
+      ],
+      "source_area_header": 643329394,
+      "area_full_header": 643329394,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 229,
+      "geometry_sha256_wkb": "a06928ae535324dbd50ad805a78060440b347433f43ff2aee18969ecd25ce6f6",
+      "hits": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "intersection_km2": 31.25131481,
+          "fraction_gshhg_polygon": 0.48577473
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "intersection_km2": 30.6678042,
+          "fraction_gshhg_polygon": 0.47670456
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "intersection_km2": 23.40662125,
+          "fraction_gshhg_polygon": 0.36383574
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "intersection_km2": 22.58454358,
+          "fraction_gshhg_polygon": 0.35105725
+        }
+      ],
+      "distances": [
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 216.18120749
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 216.18117741
+        }
+      ]
+    },
+    {
+      "id": 2184,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -175.677083,
+        -15.635444,
+        -175.597111,
+        -15.560417
+      ],
+      "centroid": [
+        -175.637097,
+        -15.5979305
+      ],
+      "source_area_header": 524885561,
+      "area_full_header": 524885561,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 148,
+      "geometry_sha256_wkb": "0c240bdebf105ec5812a1cb9e3c744cfa7c52935a80d195517434800dfc09766",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 283.81803747
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 283.82520249
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 277.99102241
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 277.98798411
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 269.40965239
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 269.60332247
+        }
+      ]
+    },
+    {
+      "id": 2335,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -169.548,
+        -14.277139,
+        -169.446306,
+        -14.217056
+      ],
+      "centroid": [
+        -169.497153,
+        -14.2470975
+      ],
+      "source_area_header": 468318158,
+      "area_full_header": 468318158,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 192,
+      "geometry_sha256_wkb": "c9ad058d8d4602cb539d4e3d84276e93cc8a956518aa8661801018c2308b5668",
+      "hits": [
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "intersection_km2": 35.93792964,
+          "fraction_gshhg_polygon": 0.76738273
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "intersection_km2": 40.85640362,
+          "fraction_gshhg_polygon": 0.87240692
+        }
+      ],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 98.41859994
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 97.0877943
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 127.41063268
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 127.40938209
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 419.85256437
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 419.85082953
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 110.96834974
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 110.96489888
+        }
+      ]
+    },
+    {
+      "id": 3021,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -178.067972,
+        -14.381278,
+        -177.973806,
+        -14.329583
+      ],
+      "centroid": [
+        -178.020889,
+        -14.3554305
+      ],
+      "source_area_header": 306360820,
+      "area_full_header": 306360820,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 153,
+      "geometry_sha256_wkb": "97ee2d7d84fc1cd044d9eccf184f39e82f79c083596574e6b059c89851eddf1d",
+      "hits": [
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "intersection_km2": 28.84068218,
+          "fraction_gshhg_polygon": 0.94139586
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "intersection_km2": 27.72671767,
+          "fraction_gshhg_polygon": 0.90503467
+        }
+      ],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 7.51690038
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 7.52417767
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 213.3252077
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 213.32511862
+        }
+      ]
+    },
+    {
+      "id": 4424,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -179.962972,
+        -15.762972,
+        -179.862083,
+        -15.709583
+      ],
+      "centroid": [
+        -179.9125275,
+        -15.7362775
+      ],
+      "source_area_header": 161601855,
+      "area_full_header": 161601855,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 157,
+      "geometry_sha256_wkb": "234b97fc9a631b5fe1c660bad1e39c5345a9bf402c017966a57d48e965a59cdc",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 242.93720082
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 242.93832403
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 463.87774199
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 463.87752735
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 243.96149095
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 243.97622535
+        }
+      ]
+    },
+    {
+      "id": 6596,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -169.7105,
+        -14.191306,
+        -169.661278,
+        -14.162944
+      ],
+      "centroid": [
+        -169.685889,
+        -14.177125
+      ],
+      "source_area_header": 815307228,
+      "area_full_header": 815307228,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 79,
+      "geometry_sha256_wkb": "8d722fa928b636a442504f245d7641fafc03b437bf81df920223993cbcf7bb05",
+      "hits": [
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "intersection_km2": 0.70437333,
+          "fraction_gshhg_polygon": 0.08639363
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "intersection_km2": 1.28817786,
+          "fraction_gshhg_polygon": 0.15799912
+        }
+      ],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 83.34980003
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 82.25925797
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 149.95801756
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 149.95679787
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 407.85794965
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 407.85630278
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 96.38658893
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 96.38296928
+        }
+      ]
+    },
+    {
+      "id": 7897,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -169.660472,
+        -14.198722,
+        -169.634639,
+        -14.159583
+      ],
+      "centroid": [
+        -169.6475555,
+        -14.1791525
+      ],
+      "source_area_header": 589639711,
+      "area_full_header": 589639711,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 73,
+      "geometry_sha256_wkb": "90b5f18c1a3e9661e066cbf06884e63394a83dda3b1098965f2d92ea34b35d1a",
+      "hits": [
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "intersection_km2": 2.096599,
+          "fraction_gshhg_polygon": 0.355573
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "intersection_km2": 3.46831311,
+          "fraction_gshhg_polygon": 0.58820904
+        }
+      ],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 88.12478678
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 87.01020627
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 147.11025887
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 147.1090357
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 409.5762724
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 409.57458472
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 101.11628434
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 101.11268233
+        }
+      ]
+    },
+    {
+      "id": 9703,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.090472,
+        -11.066278,
+        -171.064611,
+        -11.047917
+      ],
+      "centroid": [
+        -171.0775415,
+        -11.0570975
+      ],
+      "source_area_header": 411986618,
+      "area_full_header": 411986618,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 37,
+      "geometry_sha256_wkb": "26c7be217581dfd10c9caca6d392bf02db1c0ec6805a1cfd5cdc7620f98809d3",
+      "hits": [
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "intersection_km2": 1.86332292,
+          "fraction_gshhg_polygon": 0.45227751
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "intersection_km2": 3.15594035,
+          "fraction_gshhg_polygon": 0.76602977
+        }
+      ],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 398.81798211
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 395.91594198
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 409.71385493
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 408.1320123
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 513.54285621
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 513.54253103
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 402.70201644
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 402.27619114
+        }
+      ]
+    },
+    {
+      "id": 10174,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -172.147194,
+        -13.863861,
+        -172.1205,
+        -13.842139
+      ],
+      "centroid": [
+        -172.133847,
+        -13.853
+      ],
+      "source_area_header": 380630877,
+      "area_full_header": 380630877,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 52,
+      "geometry_sha256_wkb": "8cb6bcd86f7225e12a934f720e1c1ac1354bc796fe52465a84687b25f48881c3",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 145.2222092
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 143.22720242
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 239.18355966
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 237.91338772
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 389.80855602
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 389.80726689
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 360.440098
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 360.44033065
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 136.90917065
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 135.71417867
+        }
+      ]
+    },
+    {
+      "id": 14460,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.21725,
+        -9.36375,
+        -171.183083,
+        -9.325444
+      ],
+      "centroid": [
+        -171.2001665,
+        -9.344597
+      ],
+      "source_area_header": 206692248,
+      "area_full_header": 206692248,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 91,
+      "geometry_sha256_wkb": "bc3d9c3edb0a58a0ed9089c64065885e680a4ef4cc7e62000cfc475da4ac68d7",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 612.7284342
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 609.83906694
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 617.95999534
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 616.45341143
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 706.73873641
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 706.79824642
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 212.19679148
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 211.6947779
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 616.75654093
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 616.34825517
+        }
+      ]
+    },
+    {
+      "id": 14830,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.797139,
+        -9.188028,
+        -171.77625,
+        -9.137167
+      ],
+      "centroid": [
+        -171.7866945,
+        -9.1625975
+      ],
+      "source_area_header": 198000504,
+      "area_full_header": 198000504,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 88,
+      "geometry_sha256_wkb": "535e58d7f357aa03330421d0e1b4f0be125a9b48ea46812f1e193f48c97cad4b",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 641.89260354
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 638.94986371
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 654.95437527
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 653.38776889
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 751.72308015
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 751.72313062
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 243.50003254
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 243.28263455
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 644.95485056
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 644.33473183
+        }
+      ]
+    },
+    {
+      "id": 17810,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -170.586306,
+        -14.295444,
+        -170.572139,
+        -14.284611
+      ],
+      "centroid": [
+        -170.5792225,
+        -14.2900275
+      ],
+      "source_area_header": 144991326,
+      "area_full_header": 144991326,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 25,
+      "geometry_sha256_wkb": "1bbfc1299f9ab785231d4d761e688fe48fe2988d4e12cbb9055c62ef73ec97d9",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 0.86143998
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 0.85753466
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 87.54372457
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 86.70761652
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 233.2478381
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 233.24647777
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 403.67810934
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 403.67707277
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 10.65412984
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 10.6503649
+        }
+      ]
+    },
+    {
+      "id": 18182,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.450472,
+        -14.069556,
+        -171.436306,
+        -14.057111
+      ],
+      "centroid": [
+        -171.443389,
+        -14.0633335
+      ],
+      "source_area_header": 140123425,
+      "area_full_header": 140123425,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 30,
+      "geometry_sha256_wkb": "082906306bf95b6de8b6855065e311931ae9c33af381030f52f926c87da0c259",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 74.22967708
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 72.24209717
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 170.3441675
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 169.18018857
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 319.87505048
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 319.87373104
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 374.26637103
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 374.26599614
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 66.18629774
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 65.06548898
+        }
+      ]
+    },
+    {
+      "id": 21767,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -172.175528,
+        -13.829694,
+        -172.165472,
+        -13.818861
+      ],
+      "centroid": [
+        -172.1705,
+        -13.8242775
+      ],
+      "source_area_header": 102655427,
+      "area_full_header": 102655427,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 23,
+      "geometry_sha256_wkb": "5e095c77f3d50cb19cbb39b92a1274f961ccfe4de001c3c52f7b7283f836f12e",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 150.7172507
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 148.73627403
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 244.0597122
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 242.77696884
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 394.80123322
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 394.79994946
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 358.78224365
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 358.78251642
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 142.53915683
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 141.36173612
+        }
+      ]
+    },
+    {
+      "id": 22468,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.223028,
+        -13.379611,
+        -176.21125,
+        -13.364611
+      ],
+      "centroid": [
+        -176.217139,
+        -13.372111
+      ],
+      "source_area_header": 967878943,
+      "area_full_header": 967878943,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 43,
+      "geometry_sha256_wkb": "177ae8656439b2932da170bfaa125245dc0b5be206aa3bea54ed968b366c598f",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 213.82058346
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 213.81980697
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 4.83662255
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 4.83638976
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 207.55797521
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 207.65067659
+        }
+      ]
+    },
+    {
+      "id": 24003,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.1755,
+        -13.38875,
+        -176.169639,
+        -13.36625
+      ],
+      "centroid": [
+        -176.1725695,
+        -13.3775
+      ],
+      "source_area_header": 869915317,
+      "area_full_header": 869915317,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 32,
+      "geometry_sha256_wkb": "2de56f2264a7e95f2c0c6496e94ef88cef8d72bc7e7abae851068bc63a380e57",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 217.31605021
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 217.31536441
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 2.29350091
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 2.34726063
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 210.7864014
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 210.88996326
+        }
+      ]
+    },
+    {
+      "id": 25252,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -179.388833,
+        -15.960444,
+        -179.372944,
+        -15.95125
+      ],
+      "centroid": [
+        -179.3808885,
+        -15.955847
+      ],
+      "source_area_header": 799863113,
+      "area_full_header": 799863113,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 28,
+      "geometry_sha256_wkb": "a74b71fe2ec98e520a981c2cb84e86eed6a6bf8c7c44546c9fb7a43c4e1cafcc",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 234.35493629
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 234.42575964
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 445.94401062
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 445.94575064
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 232.75195151
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 232.97861088
+        }
+      ]
+    },
+    {
+      "id": 25688,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.203833,
+        -9.424639,
+        -171.197194,
+        -9.402917
+      ],
+      "centroid": [
+        -171.2005135,
+        -9.413778
+      ],
+      "source_area_header": 775289929,
+      "area_full_header": 775289929,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 41,
+      "geometry_sha256_wkb": "62a5899fcd94127e5fe661b8f348f7fbe18c0ba3e2b67d3cbc6f631e9e4c1cdd",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 605.17070741
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 602.27938371
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 610.74827527
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 609.237921
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 700.16740477
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 700.22090428
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 204.58780136
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 204.09354388
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 609.17093099
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 608.75676996
+        }
+      ]
+    },
+    {
+      "id": 27093,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.809639,
+        -9.103028,
+        -171.798806,
+        -9.092972
+      ],
+      "centroid": [
+        -171.8042225,
+        -9.098
+      ],
+      "source_area_header": 706904356,
+      "area_full_header": 706904356,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 23,
+      "geometry_sha256_wkb": "4ed4a0eb9816b3d11d6c2859a91a59ae398f9eaeb8b5d6f847ea88cc26a2e9dd",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 652.84233484
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 649.89921407
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 665.85957963
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 664.29417464
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 762.29811985
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 762.30199686
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 254.43943284
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 254.21840826
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 655.89422029
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 655.27145836
+        }
+      ]
+    },
+    {
+      "id": 29025,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.861333,
+        -9.180528,
+        -171.846306,
+        -9.163833
+      ],
+      "centroid": [
+        -171.8538195,
+        -9.1721805
+      ],
+      "source_area_header": 629949512,
+      "area_full_header": 629949512,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 30,
+      "geometry_sha256_wkb": "1050883c00f88747c7dbcee10b00268a89992d45645b53d73e79e3281cd52b32",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 643.93572258
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 640.98837415
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 657.88016718
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 656.30723947
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 755.55838245
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 755.558191
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 246.25041498
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 246.06343467
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 646.88870759
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 646.24526212
+        }
+      ]
+    },
+    {
+      "id": 29893,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.202944,
+        -13.192111,
+        -176.189611,
+        -13.182944
+      ],
+      "centroid": [
+        -176.1962775,
+        -13.1875275
+      ],
+      "source_area_header": 599897507,
+      "area_full_header": 599897507,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 26,
+      "geometry_sha256_wkb": "089c22a4354a1baf79ceb7edb9f91c7e10f88caf8aaa4afe765534948dbdc962",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 228.47353686
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 228.47222284
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 3.86836106
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 3.91379334
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 223.72881586
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 223.7643399
+        }
+      ]
+    },
+    {
+      "id": 30231,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.273889,
+        -9.377083,
+        -171.261389,
+        -9.370417
+      ],
+      "centroid": [
+        -171.267639,
+        -9.37375
+      ],
+      "source_area_header": 588910367,
+      "area_full_header": 588910367,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 21,
+      "geometry_sha256_wkb": "ae2cbdb403f2cf918704bb3ea27a39181d27d46a016a8135ebdceb67a67113c3",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 611.7758817
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 608.87682973
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 618.28887262
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 616.7718238
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 708.42184105
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 708.47076663
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 211.04843205
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 210.59213792
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 615.65702837
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 615.21613234
+        }
+      ]
+    },
+    {
+      "id": 33016,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.436306,
+        -14.07625,
+        -171.426306,
+        -14.070444
+      ],
+      "centroid": [
+        -171.431306,
+        -14.073347
+      ],
+      "source_area_header": 508310291,
+      "area_full_header": 508310291,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 17,
+      "geometry_sha256_wkb": "e68dde8a985812c49b721b220797483fc8e318fdb074bfb942f12e8ab9f6f765",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 72.98898189
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 70.9960293
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 169.3113709
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 168.15368041
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 318.76109566
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 318.75977435
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 375.77929017
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 375.77890187
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 64.8954136
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 63.76847037
+        }
+      ]
+    },
+    {
+      "id": 35234,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.213,
+        -9.442944,
+        -171.206333,
+        -9.434639
+      ],
+      "centroid": [
+        -171.2096665,
+        -9.4387915
+      ],
+      "source_area_header": 456793517,
+      "area_full_header": 456793517,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 15,
+      "geometry_sha256_wkb": "0aedf2011576c6141a70df343e056a8b498ba442cec513e274aa62b24fed35ef",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 602.97939621
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 600.08636876
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 608.80595525
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 607.29324628
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 698.58134736
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 698.63177869
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 202.35459222
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 201.86813619
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 606.95440518
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 606.53473267
+        }
+      ]
+    },
+    {
+      "id": 35864,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.419611,
+        -14.017944,
+        -171.410417,
+        -14.012944
+      ],
+      "centroid": [
+        -171.415014,
+        -14.015444
+      ],
+      "source_area_header": 443673426,
+      "area_full_header": 443673426,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 13,
+      "geometry_sha256_wkb": "366561d38ec9bc07007d3babcf85304c03629f45addeb62a25fb9f38d8216e09",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 74.59056396
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 72.68355511
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 168.48136242
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 167.27022059
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 318.61610064
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 318.61479825
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 368.55024191
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 368.54984594
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 67.3425141
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 66.33958333
+        }
+      ]
+    },
+    {
+      "id": 38641,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.437944,
+        -14.02875,
+        -171.432167,
+        -14.021278
+      ],
+      "centroid": [
+        -171.4350555,
+        -14.025014
+      ],
+      "source_area_header": 391229058,
+      "area_full_header": 391229058,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 11,
+      "geometry_sha256_wkb": "6ac6ec26dce769ee551b0e1352c35c3fde7565dc11c6394ed5bf2716b2d94bab",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 75.94998624
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 74.01594372
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 170.43835218
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 169.23676128
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 320.45314842
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 320.45184213
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 369.75808804
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 369.75770849
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 68.43689315
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 67.39300859
+        }
+      ]
+    },
+    {
+      "id": 47487,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -170.701333,
+        -14.242917,
+        -170.69625,
+        -14.235472
+      ],
+      "centroid": [
+        -170.6987915,
+        -14.2391945
+      ],
+      "source_area_header": 275789359,
+      "area_full_header": 275789359,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 17,
+      "geometry_sha256_wkb": "6c15fbfefeb83a5166495fe072bc06fa1c7316bae35f4ad8b1655f31b4a77b3e",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 2.0701313
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 0.9437755
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 98.74026236
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 97.7901918
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 245.96886883
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 245.96752302
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 396.42844787
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 396.42749191
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 6.15255307
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 6.14781432
+        }
+      ]
+    },
+    {
+      "id": 48681,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.253833,
+        -9.38625,
+        -171.247194,
+        -9.380444
+      ],
+      "centroid": [
+        -171.2505135,
+        -9.383347
+      ],
+      "source_area_header": 264812019,
+      "area_full_header": 264812019,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 13,
+      "geometry_sha256_wkb": "0aa580790fa22556cd4ab25b54e4813a530304452f1efd0e72550435034190e9",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 610.42872025
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 607.53197362
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 616.65182585
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 615.13654781
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 706.64335067
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 706.69315794
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 209.73024184
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 209.26261838
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 614.34587632
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 613.91302006
+        }
+      ]
+    },
+    {
+      "id": 49643,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.153806,
+        -13.273778,
+        -176.1455,
+        -13.269583
+      ],
+      "centroid": [
+        -176.149653,
+        -13.2716805
+      ],
+      "source_area_header": 256150753,
+      "area_full_header": 256150753,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 14,
+      "geometry_sha256_wkb": "edaf021c033ba352d862586551f5533b9d5783a158bfaaea0a7124e656566818",
+      "hits": [
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "intersection_km2": 0.25615095,
+          "fraction_gshhg_polygon": 1.0
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "intersection_km2": 0.25615095,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 226.37614007
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 226.37514061
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 220.71299331
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 220.78384811
+        }
+      ]
+    },
+    {
+      "id": 49725,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.150472,
+        -13.282111,
+        -176.145472,
+        -13.277111
+      ],
+      "centroid": [
+        -176.147972,
+        -13.279611
+      ],
+      "source_area_header": 255571425,
+      "area_full_header": 255571425,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 11,
+      "geometry_sha256_wkb": "04b0707e24c25a1b8d6b26dff93985764aebd7c90c620461f0afe486ba021b8f",
+      "hits": [
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "intersection_km2": 0.2555714,
+          "fraction_gshhg_polygon": 1.0
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "intersection_km2": 0.2555714,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 226.08834304
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 226.08737262
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 220.34536874
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 220.41920461
+        }
+      ]
+    },
+    {
+      "id": 50162,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.865472,
+        -9.108806,
+        -171.858806,
+        -9.102139
+      ],
+      "centroid": [
+        -171.862139,
+        -9.1054725
+      ],
+      "source_area_header": 251777121,
+      "area_full_header": 251777121,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 16,
+      "geometry_sha256_wkb": "575f0175bddbbce306e19cd5e05bd027c4277933a65eca816be80f4ebbc6f041",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 653.11328626
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 650.1659552
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 666.95655406
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 665.38507557
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 764.29593846
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 764.29575265
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 255.35642618
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 255.16354827
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 656.06534485
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 655.42134057
+        }
+      ]
+    },
+    {
+      "id": 52825,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.196389,
+        -9.372083,
+        -171.189722,
+        -9.367083
+      ],
+      "centroid": [
+        -171.1930555,
+        -9.369583
+      ],
+      "source_area_header": 231409352,
+      "area_full_header": 231409352,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 19,
+      "geometry_sha256_wkb": "672c2b0c92b1c50cb7227c7fd62cac4632ab55e77e8552f59759eb8a7bf3ba13",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 611.7227881
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 608.83273361
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 617.05491464
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 615.54735977
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 705.98166959
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 706.0398972
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 211.17155982
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 210.67251271
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 615.74088359
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 615.33041072
+        }
+      ]
+    },
+    {
+      "id": 53453,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.715472,
+        -14.051306,
+        -171.709667,
+        -14.047083
+      ],
+      "centroid": [
+        -171.7125695,
+        -14.0491945
+      ],
+      "source_area_header": 226790243,
+      "area_full_header": 226790243,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 11,
+      "geometry_sha256_wkb": "6200f9400d1a35402131a0c7ecf910c1a8e95ad41179ff8309f53d14a1b24aee",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 99.83911494
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 97.79638887
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 196.81080937
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 195.6456169
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 346.23038059
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 346.2290554
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 376.32799886
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 376.32784239
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 91.08229075
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 89.83906393
+        }
+      ]
+    },
+    {
+      "id": 56127,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.861333,
+        -9.143833,
+        -171.85625,
+        -9.137194
+      ],
+      "centroid": [
+        -171.8587915,
+        -9.1405135
+      ],
+      "source_area_header": 209410871,
+      "area_full_header": 209410871,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 13,
+      "geometry_sha256_wkb": "2dc46d29179088a9ef6cff3828c926fd67837fd08432e0677a6610248c1549be",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 648.72035465
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 645.77268911
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 662.67779877
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 661.10514892
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 760.25033127
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 760.25014191
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 251.0527251
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 250.86489809
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 651.66487668
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 651.01944545
+        }
+      ]
+    },
+    {
+      "id": 58187,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.181278,
+        -13.205444,
+        -176.174639,
+        -13.200389
+      ],
+      "centroid": [
+        -176.1779585,
+        -13.2029165
+      ],
+      "source_area_header": 196498027,
+      "area_full_header": 196498027,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 14,
+      "geometry_sha256_wkb": "67f1d255ef6654203d8431e00de76dde70b430b946f84e28ec211786b64f2a27",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 229.10877621
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 229.10753428
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 1.68061432
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 1.7600283
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 224.13776911
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 224.1824365
+        }
+      ]
+    },
+    {
+      "id": 59536,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -169.715472,
+        -14.175444,
+        -169.711278,
+        -14.168778
+      ],
+      "centroid": [
+        -169.713375,
+        -14.172111
+      ],
+      "source_area_header": 189166156,
+      "area_full_header": 189166156,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 15,
+      "geometry_sha256_wkb": "279eefae7bfc614c6c76b2c473d1c91fa647824ff20178c57cb50fb45faeb89b",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 82.90123175
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 81.81387367
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 3.39520858
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 2.47526051
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 154.63962439
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 154.63839745
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 408.33205891
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 408.33041771
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 95.93567066
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 95.93205529
+        }
+      ]
+    },
+    {
+      "id": 59798,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.800472,
+        -9.123028,
+        -171.797111,
+        -9.1155
+      ],
+      "centroid": [
+        -171.7987915,
+        -9.119264
+      ],
+      "source_area_header": 187688698,
+      "area_full_header": 187688698,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 13,
+      "geometry_sha256_wkb": "034ed6d4df8fd13f50beae7c5052332e586184e55819b47aadd0dd58216f1d98",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 650.26293315
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 647.31991278
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 663.28823892
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 661.72257119
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 759.80122862
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 759.80420292
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 251.86063789
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 251.64036019
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 653.31750421
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 652.69541571
+        }
+      ]
+    },
+    {
+      "id": 63230,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -170.874611,
+        -14.331278,
+        -170.870472,
+        -14.327083
+      ],
+      "centroid": [
+        -170.8725415,
+        -14.3291805
+      ],
+      "source_area_header": 170372017,
+      "area_full_header": 170372017,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "ef6800df32ffb15bea92957cd57bbd578b37760eb80733c0639df9721dc547dc",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 15.1650794
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 13.17313703
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 116.78291998
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 115.95054736
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 261.3605802
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 261.35919781
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 406.54778486
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 406.54696244
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 3.9415824
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 2.37160374
+        }
+      ]
+    },
+    {
+      "id": 66648,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.205528,
+        -9.43625,
+        -171.202167,
+        -9.430444
+      ],
+      "centroid": [
+        -171.2038475,
+        -9.433347
+      ],
+      "source_area_header": 155829160,
+      "area_full_header": 155829160,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 15,
+      "geometry_sha256_wkb": "b721cb3fa5a2d82496ddace978fab4be1958dcb0c0ed331c51996cbbba342bc3",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 603.7628013
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 600.87064171
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 609.4664811
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 607.9549008
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 699.07576879
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 699.12759733
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 203.15881435
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 202.66830579
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 607.75073738
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 607.33390502
+        }
+      ]
+    },
+    {
+      "id": 68640,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.216361,
+        -9.424639,
+        -171.212194,
+        -9.420444
+      ],
+      "centroid": [
+        -171.2142775,
+        -9.4225415
+      ],
+      "source_area_header": 148291430,
+      "area_full_header": 148291430,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 10,
+      "geometry_sha256_wkb": "ac8bd052139f08243df81505b4d64ba66b5e0d124d109ed8270af3fc6b053df8",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 605.30982896
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 602.41656686
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 611.13751872
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 609.62504969
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 700.83904416
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 700.89037936
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 204.67871419
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 204.19372103
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 609.28093525
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 608.86028923
+        }
+      ]
+    },
+    {
+      "id": 71186,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.840444,
+        -9.192139,
+        -171.833778,
+        -9.188806
+      ],
+      "centroid": [
+        -171.837111,
+        -9.1904725
+      ],
+      "source_area_header": 139380041,
+      "area_full_header": 139380041,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 14,
+      "geometry_sha256_wkb": "67a1b783321692c34124b3036c6e0b38407ba16bc737a676b777245b11923be0",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 642.28221186
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 639.33554093
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 656.10821399
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 654.53601896
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 753.69960093
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 753.69941025
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 244.49479146
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 244.30411521
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 645.25189316
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 644.61205863
+        }
+      ]
+    },
+    {
+      "id": 73601,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.861333,
+        -9.128806,
+        -171.857972,
+        -9.123806
+      ],
+      "centroid": [
+        -171.8596525,
+        -9.126306
+      ],
+      "source_area_header": 131472976,
+      "area_full_header": 131472976,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 11,
+      "geometry_sha256_wkb": "dd567e4f73deb1385ee9e2e09bbfbb037d46d78b6fe1d29ede0ac515b6245bd4",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 650.54808247
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 647.60076971
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 664.41468113
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 662.842835
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 761.84292416
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 761.84273685
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 252.80680777
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 252.61537464
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 653.50096073
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 652.8572306
+        }
+      ]
+    },
+    {
+      "id": 76098,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.199694,
+        -9.378806,
+        -171.194694,
+        -9.375417
+      ],
+      "centroid": [
+        -171.197194,
+        -9.3771115
+      ],
+      "source_area_header": 124131351,
+      "area_full_header": 124131351,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 14,
+      "geometry_sha256_wkb": "6e7b86dbd06daf851b1cdc0dff3ad1ca54039cb5f1ae09d802b5170615c38ce1",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 610.89953193
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 608.00909956
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 616.29044852
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 614.78230193
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 705.31118425
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 705.36857112
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 210.33802756
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 209.84057898
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 614.91214696
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 614.5004894
+        }
+      ]
+    },
+    {
+      "id": 80019,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.242194,
+        -9.39625,
+        -171.237222,
+        -9.392917
+      ],
+      "centroid": [
+        -171.239708,
+        -9.3945835
+      ],
+      "source_area_header": 114317162,
+      "area_full_header": 114317162,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 15,
+      "geometry_sha256_wkb": "b72554b4f173ca5ce64123c07dcd8af78464d7a4cd9c82dc26178abd26c877f9",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 609.07916011
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 606.18349875
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 615.17500917
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 613.66066559
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 705.06344779
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 705.11386638
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 208.39859934
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 207.92560509
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 613.01320158
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 612.58415199
+        }
+      ]
+    },
+    {
+      "id": 81809,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -170.86875,
+        -14.337139,
+        -170.865472,
+        -14.333806
+      ],
+      "centroid": [
+        -170.867111,
+        -14.3354725
+      ],
+      "source_area_header": 110024267,
+      "area_full_header": 110024267,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "ecdf380caa8e8c0357b3cf58ab96b70a30471c068403da17a401e3bb525ac42a",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 14.83202113
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 13.02055797
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 116.42749194
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 115.60525222
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 260.81461786
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 260.81323371
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 407.40684853
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 407.40602212
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 3.77355174
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 2.27223578
+        }
+      ]
+    },
+    {
+      "id": 83377,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.203889,
+        -9.402111,
+        -171.200556,
+        -9.397917
+      ],
+      "centroid": [
+        -171.2022225,
+        -9.400014
+      ],
+      "source_area_header": 106526004,
+      "area_full_header": 106526004,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 13,
+      "geometry_sha256_wkb": "fcc6a4d01dddd8ecfe4dda6a7ee2a8606d894585cde5438c3ac446fa2d7d0905",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 608.0376671
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 605.14605543
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 613.61647469
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 612.10641618
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 702.94485251
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 702.99946024
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 207.44572831
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 206.95330193
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 612.03314738
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 611.61780143
+        }
+      ]
+    },
+    {
+      "id": 86213,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -168.174611,
+        -14.552944,
+        -168.171333,
+        -14.549611
+      ],
+      "centroid": [
+        -168.172972,
+        -14.5512775
+      ],
+      "source_area_header": 100618371,
+      "area_full_header": 100618371,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "d1286f94a0a1ee5d776da2682e0d20200619ac4f0dda1646d9f1cdf7b9e88512",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 233.5395744
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 231.83813957
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 127.79001971
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 125.86402292
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 2.32359193
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 1.01321085
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 516.4021106
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 516.40191497
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 244.68960171
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 244.68668498
+        }
+      ]
+    },
+    {
+      "id": 87645,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.201361,
+        -9.383806,
+        -171.198056,
+        -9.380417
+      ],
+      "centroid": [
+        -171.1997085,
+        -9.3821115
+      ],
+      "source_area_header": 979941736,
+      "area_full_header": 979941736,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 11,
+      "geometry_sha256_wkb": "32ec83678f44ac59f86d710e0b16391df1fbac5f67eb21bb7166ec1393633f79",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 610.30626816
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 607.4152854
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 615.77549407
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 614.26661351
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 704.90533526
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 704.96179648
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 209.72989397
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 209.23489659
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 614.31078753
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 613.89735303
+        }
+      ]
+    },
+    {
+      "id": 89637,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.171306,
+        -13.219611,
+        -176.167972,
+        -13.216278
+      ],
+      "centroid": [
+        -176.169639,
+        -13.2179445
+      ],
+      "source_area_header": 945768697,
+      "area_full_header": 945768697,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "0b66a3ce7f24dd60417c5b7a9f03704aa3a9978e4c8ae38997ac54673b2d7c8d",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 228.73161357
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 228.73043277
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 0.01313339
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 0.1806556
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 223.58572494
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 223.63744232
+        }
+      ]
+    },
+    {
+      "id": 90396,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.644694,
+        -13.875417,
+        -171.640528,
+        -13.872944
+      ],
+      "centroid": [
+        -171.642611,
+        -13.8741805
+      ],
+      "source_area_header": 930498005,
+      "area_full_header": 930498005,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "7a0aefcad86628489b8162046e9c20c6747eb6971a3903ddb6adc498e1d35e57",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 102.49397333
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 100.64026176
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 193.15503608
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 191.85585397
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 344.08466431
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 344.08339343
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 353.96790611
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 353.96772168
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 95.58899882
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 94.61072018
+        }
+      ]
+    },
+    {
+      "id": 93524,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.232167,
+        -9.407972,
+        -171.228,
+        -9.404639
+      ],
+      "centroid": [
+        -171.2300835,
+        -9.4063055
+      ],
+      "source_area_header": 882737793,
+      "area_full_header": 882737793,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 11,
+      "geometry_sha256_wkb": "2b36bd9e0fad819fbb6be8446bfba723b9d2e055b5f556982135a2523d17d0e7",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 607.54362413
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 604.64866058
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 613.56648526
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 612.05259793
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 703.42011375
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 703.4705866
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 206.87617154
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 206.39964796
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 611.48856752
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 611.06200713
+        }
+      ]
+    },
+    {
+      "id": 94270,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -172.151361,
+        -13.843806,
+        -172.148028,
+        -13.840472
+      ],
+      "centroid": [
+        -172.1496945,
+        -13.842139
+      ],
+      "source_area_header": 870191555,
+      "area_full_header": 870191555,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "76bf35713e79543f9b0ab5c86ca36354cdaab004b0ee75fbedad5b18afb43bee",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 148.37809193
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 146.39159596
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 242.04003083
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 240.76527465
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 392.70723055
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 392.70594324
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 360.81127206
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 360.81152227
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 140.14759232
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 138.9633903
+        }
+      ]
+    },
+    {
+      "id": 94812,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.130472,
+        -13.28875,
+        -176.1255,
+        -13.287083
+      ],
+      "centroid": [
+        -176.127986,
+        -13.2879165
+      ],
+      "source_area_header": 859596334,
+      "area_full_header": 859596334,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "62ad4d3689a78cfdf7d20288eccd913d41bc8be96a7a1ce5a5acc5df61920283",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 227.28480835
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 227.28388548
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 0.20453387
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 0.56774148
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 221.40074053
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 221.48021849
+        }
+      ]
+    },
+    {
+      "id": 97099,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.798833,
+        -9.131361,
+        -171.797111,
+        -9.127167
+      ],
+      "centroid": [
+        -171.797972,
+        -9.129264
+      ],
+      "source_area_header": 822306483,
+      "area_full_header": 822306483,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "0a5ba57e1553ac0052b2a1bd408706a716744308ee6e34af6bb6a5f0591e0f07",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 649.22129865
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 646.27820527
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 662.27168859
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 660.7057521
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 758.83897204
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 758.84138359
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 250.83538095
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 250.61616036
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 652.27433977
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 651.65196608
+        }
+      ]
+    },
+    {
+      "id": 97467,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.204722,
+        -9.397139,
+        -171.201361,
+        -9.394583
+      ],
+      "centroid": [
+        -171.2030415,
+        -9.395861
+      ],
+      "source_area_header": 818515506,
+      "area_full_header": 818515506,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 10,
+      "geometry_sha256_wkb": "61cba059c697499ffee1191880d422879ee4d4386a38fbf45c90eacb223b274a",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 608.65446877
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 605.76301886
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 614.20463154
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 612.69488334
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 703.48033954
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 703.53544137
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 208.06646139
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 207.57337465
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 612.6522719
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 612.23741549
+        }
+      ]
+    },
+    {
+      "id": 97872,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.204722,
+        -9.392139,
+        -171.201361,
+        -9.389611
+      ],
+      "centroid": [
+        -171.2030415,
+        -9.390875
+      ],
+      "source_area_header": 814327131,
+      "area_full_header": 814327131,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "868d0268c2771173624063fe3a682e32a2127d472c79faa26a1264793a85d104",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 609.28169309
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 606.39030806
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 614.81564316
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 613.30610015
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 704.05266004
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 704.10814925
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 208.6950861
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 208.20179697
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 613.2803691
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 612.86567903
+        }
+      ]
+    },
+    {
+      "id": 103762,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.221361,
+        -9.418778,
+        -171.218028,
+        -9.41625
+      ],
+      "centroid": [
+        -171.2196945,
+        -9.417514
+      ],
+      "source_area_header": 735367557,
+      "area_full_header": 735367557,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 10,
+      "geometry_sha256_wkb": "1661025e03727e004f1313f49fe881a0fdaa1e543de40c0e1bea2274423a4bea",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 606.09463909
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 603.20077976
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 611.99057145
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 610.47760663
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 701.74509981
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 701.79613591
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 205.45001353
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 204.96799577
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 610.05659151
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 609.63387515
+        }
+      ]
+    },
+    {
+      "id": 104574,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.193,
+        -9.366278,
+        -171.188833,
+        -9.36375
+      ],
+      "centroid": [
+        -171.1909165,
+        -9.365014
+      ],
+      "source_area_header": 727286578,
+      "area_full_header": 727286578,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "4927b3e1c47e0992ee6753c4f2c490943a31636bd7a8743e335870e4585c3559",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 612.42478874
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 609.53519113
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 617.68960753
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 616.18270538
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 706.51638862
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 706.57548571
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 211.88647183
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 211.385455
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 616.44953918
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 616.04051858
+        }
+      ]
+    },
+    {
+      "id": 105306,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.198056,
+        -9.375417,
+        -171.193,
+        -9.372083
+      ],
+      "centroid": [
+        -171.195528,
+        -9.37375
+      ],
+      "source_area_header": 720507641,
+      "area_full_header": 720507641,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 15,
+      "geometry_sha256_wkb": "2aab89fb793f1ae79be0569a8e3aaf60d7ffb73c91242e1d2f453d0d0629b064",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 611.31166271
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 608.42146184
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 616.66768989
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 615.15988631
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 705.63508729
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 705.69294363
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 210.75648028
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 210.25803476
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 615.32765065
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 614.91672633
+        }
+      ]
+    },
+    {
+      "id": 106851,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.203806,
+        -13.183778,
+        -176.202139,
+        -13.179639
+      ],
+      "centroid": [
+        -176.2029725,
+        -13.1817085
+      ],
+      "source_area_header": 703912335,
+      "area_full_header": 703912335,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "472bb17a1512d8c02761ec916240b2f842e633ac34b9185e785c7752b94789cb",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 228.58607022
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 228.58474632
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 5.5140773
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 5.56536664
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 223.8696507
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 223.90428577
+        }
+      ]
+    },
+    {
+      "id": 110876,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.801306,
+        -9.112167,
+        -171.799583,
+        -9.108833
+      ],
+      "centroid": [
+        -171.8004445,
+        -9.1105
+      ],
+      "source_area_header": 652642023,
+      "area_full_header": 652642023,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "893acae89eda9052816e0e0fdf94191c798d480592b07833eb5ebb537d607416",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 651.6389839
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 648.69601781
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 664.63929927
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 663.07392587
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 761.08964179
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 761.09328491
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 253.22117367
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 252.99978765
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 654.6946042
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 654.07268545
+        }
+      ]
+    },
+    {
+      "id": 112858,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.824667,
+        -9.197167,
+        -171.822167,
+        -9.194639
+      ],
+      "centroid": [
+        -171.823417,
+        -9.195903
+      ],
+      "source_area_header": 636617953,
+      "area_full_header": 636617953,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "33b2332b5cdfcdc2a5dc2d6c02ad70fe3c953e604c7e885b13290664adf42642",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 641.46069974
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 638.51476443
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 655.14896046
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 653.5777062
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 752.61156685
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 752.61137759
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 243.5579563
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 243.36265964
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 644.44818847
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 643.81217047
+        }
+      ]
+    },
+    {
+      "id": 112868,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.788,
+        -9.195472,
+        -171.784611,
+        -9.193
+      ],
+      "centroid": [
+        -171.7863055,
+        -9.194236
+      ],
+      "source_area_header": 636549981,
+      "area_full_header": 636549981,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "8dee7644dadbe3e2114c2277ae76ba5e19678bbd41ed2c42a823c200809efcc1",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 641.04960429
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 638.10637817
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 654.21365869
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 652.64622684
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 751.11592907
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 751.11574652
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 242.73226973
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 242.51863841
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 644.10079118
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 643.47834829
+        }
+      ]
+    },
+    {
+      "id": 114143,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -170.847111,
+        -14.304611,
+        -170.84375,
+        -14.302083
+      ],
+      "centroid": [
+        -170.8454305,
+        -14.303347
+      ],
+      "source_area_header": 624521131,
+      "area_full_header": 624521131,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "20b13284f5a0e71990891be82f9343663231a94290bf22b32a2971b7fedfc26e",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 11.92354498
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 9.82509644
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 113.76702187
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 112.9009314
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 259.11901203
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 259.11763896
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 403.59967612
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 403.59883227
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 2.26776117
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 1.37608735
+        }
+      ]
+    },
+    {
+      "id": 121372,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.261389,
+        -9.377972,
+        -171.258889,
+        -9.375444
+      ],
+      "centroid": [
+        -171.260139,
+        -9.376708
+      ],
+      "source_area_header": 555469516,
+      "area_full_header": 555469516,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "2c7a90e1e440cc38fbd21ec3e695410af4faa9c76066ddedb91b19323f0c4c15",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 611.56485488
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 608.66699825
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 617.92210443
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 616.40581307
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 708.03146663
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 708.08051668
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 210.85087538
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 210.38872596
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 615.46466254
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 615.02790964
+        }
+      ]
+    },
+    {
+      "id": 122856,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.133778,
+        -13.274583,
+        -176.131278,
+        -13.27125
+      ],
+      "centroid": [
+        -176.132528,
+        -13.2729165
+      ],
+      "source_area_header": 544596232,
+      "area_full_header": 544596232,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "9b099e320043907053ee189307f15d9c707b8c30dae30f35e7468bd662182870",
+      "hits": [
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "intersection_km2": 0.05445975,
+          "fraction_gshhg_polygon": 1.0
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "intersection_km2": 0.05445975,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 227.89250326
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 227.89153725
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 222.12996435
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 222.20491953
+        }
+      ]
+    },
+    {
+      "id": 123210,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.784611,
+        -9.1905,
+        -171.781333,
+        -9.188806
+      ],
+      "centroid": [
+        -171.782972,
+        -9.189653
+      ],
+      "source_area_header": 541506163,
+      "area_full_header": 541506163,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "68633787ab3a81e9bb8b44fc0634adb372f63f2316a57e67564c34e563313b5b",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 641.61222518
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 638.66932532
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 654.70762785
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 653.14074959
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 751.52043739
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 751.520318
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 243.24423719
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 243.02807642
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 644.67084058
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 644.04995871
+        }
+      ]
+    },
+    {
+      "id": 123224,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.216333,
+        -13.389583,
+        -176.214639,
+        -13.386306
+      ],
+      "centroid": [
+        -176.215486,
+        -13.3879445
+      ],
+      "source_area_header": 541394491,
+      "area_full_header": 541394491,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "e552eada40ed0f4fa44f3b2c59821adbadfd08c85303574619bf47506ad9a117",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 213.67450178
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 213.67376516
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 6.38493118
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 6.60291687
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 207.30191997
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 207.39882288
+        }
+      ]
+    },
+    {
+      "id": 125496,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -178.084583,
+        -14.299611,
+        -178.081306,
+        -14.297944
+      ],
+      "centroid": [
+        -178.0829445,
+        -14.2987775
+      ],
+      "source_area_header": 518868673,
+      "area_full_header": 518868673,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "94da72ba792bc682f6433adf2e927405e2ce4b861499804398c3765bc55d8a2b",
+      "hits": [
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "intersection_km2": 0.05188689,
+          "fraction_gshhg_polygon": 1.0
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "intersection_km2": 0.05188689,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 4.3601173
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 4.42517851
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 218.38435555
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 218.3843566
+        }
+      ]
+    },
+    {
+      "id": 130003,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.798028,
+        -9.1355,
+        -171.796306,
+        -9.133028
+      ],
+      "centroid": [
+        -171.797167,
+        -9.134264
+      ],
+      "source_area_header": 477373942,
+      "area_full_header": 477373942,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "8bff4268f25d3736bcd94baca88f1b491f017e29a5465cca0a0d56af2318b1e3",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 648.6859657
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 645.74286892
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 661.74271866
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 660.17669253
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 758.33071447
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 758.33289533
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 250.30366231
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 250.08476226
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 651.73900667
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 651.11665406
+        }
+      ]
+    },
+    {
+      "id": 131189,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.202167,
+        -9.430444,
+        -171.199667,
+        -9.427917
+      ],
+      "centroid": [
+        -171.200917,
+        -9.4291805
+      ],
+      "source_area_header": 471522282,
+      "area_full_header": 471522282,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "6a69fc3a591b4e26a8098034556d686bd37d5eeabb7f3734c01fa770b6d78adc",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 604.46302448
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 601.57133496
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 610.09687518
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 608.58596488
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 699.60345071
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 699.65617343
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 203.87078448
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 203.37814563
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 608.45789214
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 608.04257074
+        }
+      ]
+    },
+    {
+      "id": 131570,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -172.236333,
+        -13.738861,
+        -172.232944,
+        -13.737139
+      ],
+      "centroid": [
+        -172.2346385,
+        -13.738
+      ],
+      "source_area_header": 469605989,
+      "area_full_header": 469605989,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "f19d4d949ebdf5a3478e467454b74acb4a12cc2152573201be92cdf445988359",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 161.04822266
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 159.10774756
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 252.56898816
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 251.24535244
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 403.63030204
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 403.62903788
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 351.03663207
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 351.03698587
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 153.24742865
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 152.12029706
+        }
+      ]
+    },
+    {
+      "id": 131657,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -172.137194,
+        -13.863861,
+        -172.134694,
+        -13.861333
+      ],
+      "centroid": [
+        -172.135944,
+        -13.862597
+      ],
+      "source_area_header": 469098218,
+      "area_full_header": 469098218,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "304f57a292531ff957429c2c378934750b940432b94ee3ee00db97caa0f2f2ea",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 146.23264894
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 144.23614954
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 240.34325109
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 239.07937549
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 390.90210685
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 390.90081471
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 362.95162477
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 362.95185842
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 137.90297292
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 136.70543453
+        }
+      ]
+    },
+    {
+      "id": 132364,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.201361,
+        -9.427917,
+        -171.198,
+        -9.425444
+      ],
+      "centroid": [
+        -171.1996805,
+        -9.4266805
+      ],
+      "source_area_header": 465515665,
+      "area_full_header": 465515665,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "0d7eb10d229e219989b1039aaf15f674e7c07feebf7191efcf44ae0a227d3eef",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 604.76595877
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 601.87450099
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 610.36597929
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 608.85539
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 699.82395036
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 699.877092
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 204.17967857
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 203.68598861
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 608.76424321
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 608.34966873
+        }
+      ]
+    },
+    {
+      "id": 133447,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.800417,
+        -9.107167,
+        -171.797944,
+        -9.1055
+      ],
+      "centroid": [
+        -171.7991805,
+        -9.1063335
+      ],
+      "source_area_header": 458977628,
+      "area_full_header": 458977628,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "92ad5f292b716a949b206d181a917c89515f1543be1ad855eacf3af106689baf",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 652.23293549
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 649.29016943
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 665.18871107
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 663.62371613
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 761.57469901
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 761.57893484
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 253.78383918
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 253.56082377
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 655.29306508
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 654.67208462
+        }
+      ]
+    },
+    {
+      "id": 134731,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -170.809639,
+        -14.295417,
+        -170.807056,
+        -14.293806
+      ],
+      "centroid": [
+        -170.8083475,
+        -14.2946115
+      ],
+      "source_area_header": 449119254,
+      "area_full_header": 449119254,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "3f913d5e498b85e33ea56ba23ade133e6b96d53eaf837cfa348fc685ca3f0a9a",
+      "hits": [
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "intersection_km2": 0.03436489,
+          "fraction_gshhg_polygon": 0.76516191
+        }
+      ],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 8.27710435
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 6.1562665
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 110.10459872
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 109.23050148
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 255.71078226
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 255.70941302
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 402.79257375
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 402.7917025
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 1.00755189
+        }
+      ]
+    },
+    {
+      "id": 134751,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -170.651278,
+        -14.255444,
+        -170.647972,
+        -14.253778
+      ],
+      "centroid": [
+        -170.649625,
+        -14.254611
+      ],
+      "source_area_header": 448984461,
+      "area_full_header": 448984461,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "8f765ea6716466ccc245ea23396d5a278d2cbee4b4d615130e36f5bcfd6afb41",
+      "hits": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "intersection_km2": 0.04489845,
+          "fraction_gshhg_polygon": 1.0
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "intersection_km2": 0.04489845,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ],
+      "distances": [
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 94.27277819
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 93.35664423
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 241.10795851
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 241.1066094
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 399.15920845
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 399.15821743
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 7.9896722
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 7.98658726
+        }
+      ]
+    },
+    {
+      "id": 134855,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.196278,
+        -13.35875,
+        -176.192972,
+        -13.356278
+      ],
+      "centroid": [
+        -176.194625,
+        -13.357514
+      ],
+      "source_area_header": 448043174,
+      "area_full_header": 448043174,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "68fad42be93f775ac992ff3a83d78fe08f2c517515bc8c1bc30f0414bdf2af36",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 217.28492605
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 217.28412191
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 2.22740553
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 2.33141959
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 211.09091559
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 211.18141369
+        }
+      ]
+    },
+    {
+      "id": 135947,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.799583,
+        -9.201306,
+        -171.798,
+        -9.198833
+      ],
+      "centroid": [
+        -171.7987915,
+        -9.2000695
+      ],
+      "source_area_header": 437724890,
+      "area_full_header": 437724890,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "a98b2ed81c29b9ec2f6889b63035484b5e4d27930edda8bc9a6bda96d78d38f6",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 640.54432178
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 637.60003546
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 653.91870528
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 652.34968076
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 751.06323626
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 751.06305069
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 242.38823487
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 242.18211815
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 643.57095248
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 642.94329847
+        }
+      ]
+    },
+    {
+      "id": 142425,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.227139,
+        -13.363778,
+        -176.224583,
+        -13.362111
+      ],
+      "centroid": [
+        -176.225861,
+        -13.3629445
+      ],
+      "source_area_header": 384374960,
+      "area_full_header": 384374960,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "83c9c1633b76e9596f9a4f668f45989e20dbf29d566f167187ae1e6a00055e22",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 214.41313234
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 214.41229914
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 5.01860343
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 5.01849383
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 208.31234932
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 208.39884946
+        }
+      ]
+    },
+    {
+      "id": 142932,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.218056,
+        -9.420444,
+        -171.215556,
+        -9.417917
+      ],
+      "centroid": [
+        -171.216806,
+        -9.4191805
+      ],
+      "source_area_header": 381744601,
+      "area_full_header": 381744601,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "13bc82d412aff701c4ef77d0364addfbcb353a894c0dc31b52d51948d7b61561",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 605.85696061
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 602.96346778
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 611.70791085
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 610.19530258
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 701.41851883
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 701.46986135
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 205.2204452
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 204.73663488
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 609.82449648
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 609.40303196
+        }
+      ]
+    },
+    {
+      "id": 143135,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.8605,
+        -9.133,
+        -171.858833,
+        -9.130472
+      ],
+      "centroid": [
+        -171.8596665,
+        -9.131736
+      ],
+      "source_area_header": 380673890,
+      "area_full_header": 380673890,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "49424a519e39b215a5350994332ce5f618b9c7073502e67a74fb8111cf08eea2",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 650.04184629
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 647.09441177
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 663.93843147
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 662.3663274
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 761.41189117
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 761.41170323
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 252.32488449
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 252.13461265
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 652.99182691
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 652.34750177
+        }
+      ]
+    },
+    {
+      "id": 143637,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -178.195472,
+        -14.246278,
+        -178.193778,
+        -14.24375
+      ],
+      "centroid": [
+        -178.194625,
+        -14.245014
+      ],
+      "source_area_header": 377747765,
+      "area_full_header": 377747765,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "fde8fb8c417e24190b3795866aaa549437a508c8b9b18986e6d2712f33dd344e",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 0.8338068
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 0.83634722
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 224.13625544
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 224.13634778
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 6.20004082
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 6.19644425
+        }
+      ]
+    },
+    {
+      "id": 144380,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -170.794639,
+        -14.292111,
+        -170.792139,
+        -14.290444
+      ],
+      "centroid": [
+        -170.793389,
+        -14.2912775
+      ],
+      "source_area_header": 373110066,
+      "area_full_header": 373110066,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 8,
+      "geometry_sha256_wkb": "ae9d98036357b6542475178cefc06ca44b12f2367be334edf24635980d96f8ba",
+      "hits": [
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "intersection_km2": 0.03731102,
+          "fraction_gshhg_polygon": 1.0
+        }
+      ],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 6.81803859
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 4.68900438
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 108.62323027
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 107.74637626
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 254.32580295
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 254.32443527
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 402.47995791
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 402.47907484
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 0.46408043
+        }
+      ]
+    },
+    {
+      "id": 152588,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.203889,
+        -9.393806,
+        -171.200556,
+        -9.392944
+      ],
+      "centroid": [
+        -171.2022225,
+        -9.393375
+      ],
+      "source_area_header": 305412383,
+      "area_full_header": 305412383,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "16895f5c097ef4435f325a6e3c710dd0d6d13d5c33b85c15c5f6e7aa3212146f",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 609.06546972
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 606.17416342
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 614.59193114
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 613.08242922
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 703.82724108
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 703.882713
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 208.4810525
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 207.98735992
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 613.06535416
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 612.65094279
+        }
+      ]
+    },
+    {
+      "id": 154993,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -169.713778,
+        -14.177944,
+        -169.712056,
+        -14.176222
+      ],
+      "centroid": [
+        -169.712917,
+        -14.177083
+      ],
+      "source_area_header": 295902472,
+      "area_full_header": 295902472,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "750635f97537328566c9794d47d16f2975eca3405424ab12b3d9055ab0175a5d",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 82.95720343
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 81.8485866
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 3.46497723
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 2.71578755
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 154.54933865
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 154.54810801
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 409.25699258
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 409.25535233
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 95.96272446
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 95.95911509
+        }
+      ]
+    },
+    {
+      "id": 156026,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.817111,
+        -9.198861,
+        -171.815528,
+        -9.197139
+      ],
+      "centroid": [
+        -171.8163195,
+        -9.198
+      ],
+      "source_area_header": 290883155,
+      "area_full_header": 290883155,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 9,
+      "geometry_sha256_wkb": "c92f6a3d4bda97def737d470fb63bdf9939eaf3c7d3fc0843d673aadb3c1cd32",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 641.13897756
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 638.19348279
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 654.74356391
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 653.17289648
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 752.12340369
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 752.12321538
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 243.16747527
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 242.96931819
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 644.13701986
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 643.50325853
+        }
+      ]
+    },
+    {
+      "id": 164072,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.799611,
+        -9.1255,
+        -171.797111,
+        -9.124639
+      ],
+      "centroid": [
+        -171.798361,
+        -9.1250695
+      ],
+      "source_area_header": 216572805,
+      "area_full_header": 216572805,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "a0955b964789d995aa413b00b4249a279400357db0d58ee54b5923836a801484",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 649.94236332
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 646.99936326
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 662.96718965
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 661.40150018
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 759.48782445
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 759.49069952
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 251.53905258
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 251.31881771
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 652.99744811
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 652.37548172
+        }
+      ]
+    },
+    {
+      "id": 164216,
+      "group": "Wallis-Futuna",
+      "level": 1,
+      "bbox": [
+        -176.214667,
+        -13.358806,
+        -176.212972,
+        -13.357083
+      ],
+      "centroid": [
+        -176.2138195,
+        -13.3579445
+      ],
+      "source_area_header": 215791847,
+      "area_full_header": 215791847,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "62514bebb7c82c9d541f1aeca782c39d51aa7b5222992457ac8b45447b471c79",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "WLF-4995",
+          "vintage": "natural_earth",
+          "distance_km": 215.76268893
+        },
+        {
+          "unit": "WLF-4995",
+          "vintage": "current_baseline",
+          "distance_km": 215.76185839
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "natural_earth",
+          "distance_km": 3.74952079
+        },
+        {
+          "unit": "WLF-4996",
+          "vintage": "current_baseline",
+          "distance_km": 3.74937168
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "natural_earth",
+          "distance_km": 209.65127832
+        },
+        {
+          "unit": "WLF-4997",
+          "vintage": "current_baseline",
+          "distance_km": 209.73820667
+        }
+      ]
+    },
+    {
+      "id": 165094,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.205528,
+        -9.389611,
+        -171.203861,
+        -9.387944
+      ],
+      "centroid": [
+        -171.2046945,
+        -9.3887775
+      ],
+      "source_area_header": 210429858,
+      "area_full_header": 210429858,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "ee088467246c5b4bb2ed87c6d7b74be2d34729122e0bfdb19a75b33beea58a01",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 609.62617772
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 606.73444097
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 615.20137674
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 613.69151765
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 704.47484726
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 704.53010335
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 209.03026282
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 208.5386748
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 613.61954408
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 613.20365667
+        }
+      ]
+    },
+    {
+      "id": 165492,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -168.180444,
+        -14.542139,
+        -168.178778,
+        -14.540472
+      ],
+      "centroid": [
+        -168.179611,
+        -14.5413055
+      ],
+      "source_area_header": 207569103,
+      "area_full_header": 207569103,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "4a7440512576e9b22eb4c088e28400e7f91a00f03e8afe0f8d5d461bda809f5b",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 232.83209956
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 231.13354718
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 126.95010963
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 125.02902783
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 1.87286238
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 1.5396379
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 515.18704044
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 515.1872152
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 244.00982421
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 244.00689649
+        }
+      ]
+    },
+    {
+      "id": 165493,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.810444,
+        -9.199667,
+        -171.808778,
+        -9.198
+      ],
+      "centroid": [
+        -171.809611,
+        -9.1988335
+      ],
+      "source_area_header": 207557103,
+      "area_full_header": 207557103,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "35e61a97ebf49a28ae2177ba237e786fd67517d051256e06e96aa5cf5022d385",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 640.94188207
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 637.99678599
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 654.47013475
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 652.90001123
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 751.7719788
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 751.77179139
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 242.90850318
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 242.70770914
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 643.94940746
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 643.31767111
+        }
+      ]
+    },
+    {
+      "id": 165513,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.812944,
+        -9.199667,
+        -171.811306,
+        -9.198
+      ],
+      "centroid": [
+        -171.812125,
+        -9.1988335
+      ],
+      "source_area_header": 207414155,
+      "area_full_header": 207414155,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "35ddc2e36a046a3746c0d09c12604c762af7ee5c20ff64987dd63c9e4243f5e5",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 640.98363556
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 638.03836188
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 654.54634492
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 652.975972
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 751.88460638
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 751.88441854
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 242.97802449
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 242.77843279
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 643.98694987
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 643.35431605
+        }
+      ]
+    },
+    {
+      "id": 170848,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -171.235556,
+        -9.397972,
+        -171.233861,
+        -9.397111
+      ],
+      "centroid": [
+        -171.2347085,
+        -9.3975415
+      ],
+      "source_area_header": 132209463,
+      "area_full_header": 132209463,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "16804f68617dfe80d9f5d0f8cd144f884585fb862094b3442a0de9306e5969a7",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 608.82663514
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 605.93142525
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 614.86597035
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 613.35207862
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 704.69767613
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 704.74849923
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 208.15425218
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 207.67905517
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 612.7676211
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 612.3401245
+        }
+      ]
+    },
+    {
+      "id": 172060,
+      "group": "American Samoa",
+      "level": 1,
+      "bbox": [
+        -170.595417,
+        -14.250472,
+        -170.593806,
+        -14.249611
+      ],
+      "centroid": [
+        -170.5946115,
+        -14.2500415
+      ],
+      "source_area_header": 127116574,
+      "area_full_header": 127116574,
+      "parent_id": -1,
+      "ancestor_id": -1,
+      "vertices": 7,
+      "geometry_sha256_wkb": "f88a37ea9af7b575b388b93ebd1e5ea30cfc7380ee3138ad36b6c3bb0b146a00",
+      "hits": [],
+      "distances": [
+        {
+          "unit": "ASM-4998",
+          "vintage": "natural_earth",
+          "distance_km": 1.43849954
+        },
+        {
+          "unit": "ASM-4998",
+          "vintage": "current_baseline",
+          "distance_km": 0.0911732
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "natural_earth",
+          "distance_km": 89.02122226
+        },
+        {
+          "unit": "ASM-4999",
+          "vintage": "current_baseline",
+          "distance_km": 88.10622754
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "natural_earth",
+          "distance_km": 236.00638212
+        },
+        {
+          "unit": "ASM-5000",
+          "vintage": "current_baseline",
+          "distance_km": 236.0050369
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "natural_earth",
+          "distance_km": 399.23488784
+        },
+        {
+          "unit": "ASM-5001",
+          "vintage": "current_baseline",
+          "distance_km": 399.23385642
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "natural_earth",
+          "distance_km": 12.33005553
+        },
+        {
+          "unit": "ASM-5002",
+          "vintage": "current_baseline",
+          "distance_km": 12.32601721
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "GSHHG is physical shoreline evidence, not administrative boundary or ownership evidence.",
+    "GSHHG documents mixed-vintage source data and potential misregistration; zero intersection/non-detection does not prove land absent.",
+    "This screen preserves every L1 record in two broad nearby-island windows and computes geometry intersections; the windows include neighboring islands outside the assigned scope. It is not a complete inventory of reef, lagoon, intertidal, tiny or emerged land.",
+    "Antarctica is excluded and is outside this assigned scope."
+  ]
+}
