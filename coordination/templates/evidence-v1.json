@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "issue": 0,
+  "lane": "geography",
+  "worker_id": "REPLACE_WITH_ACTUAL_WORKER_ID",
+  "subject_ids": [
+    "REPLACE_WITH_EXACT_SUBJECT_ID"
+  ],
+  "subject_ids_sha256": "REPLACE_WITH_SORTED_JSON_ARRAY_SHA256",
+  "baseline": {
+    "commit": "REPLACE_WITH_IMMUTABLE_COMMIT",
+    "files": [
+      {
+        "path": "REPLACE_WITH_ACTUAL_CONTAINING_FILE",
+        "bytes": 0,
+        "sha256": "REPLACE_WITH_WHOLE_FILE_SHA256",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {
+      "REPLACE_WITH_EXACT_SUBJECT_ID": "REPLACE_WITH_ACTUAL_CONTAINING_FILE"
+    }
+  },
+  "sources": [
+    {
+      "id": "REPLACE_WITH_SOURCE_ID",
+      "url": "https://example.org/REPLACE",
+      "role": "REPLACE_WITH_INSPECTED_ROLE",
+      "vintage": "REPLACE_WITH_SOURCE_VINTAGE",
+      "retrieved_at": "REPLACE_WITH_RETRIEVAL_DATE",
+      "license": {
+        "status": "unknown",
+        "terms": "Not yet established"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "REPLACE_WITH_RESTORATION_METHOD",
+      "limit": "REPLACE_WITH_ACTUAL_LIMIT",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "source-review",
+      "description": "REPLACE_WITH_ACTUAL_METHOD",
+      "software": "REPLACE_WITH_VERSIONS",
+      "units": "REPLACE_WITH_UNITS"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": []
+}

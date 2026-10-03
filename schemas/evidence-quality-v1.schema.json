@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://worldatlas.invalid/schemas/evidence-quality-v1",
+  "title": "WorldAtlas evidence manifest v1",
+  "type": "object",
+  "required": [
+    "version",
+    "issue",
+    "lane",
+    "worker_id",
+    "subject_ids",
+    "subject_ids_sha256",
+    "baseline",
+    "sources",
+    "outputs",
+    "methods",
+    "metrics",
+    "summaries",
+    "conclusions",
+    "stages",
+    "commands"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "issue": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "lane": {
+      "enum": [
+        "engineering",
+        "geography",
+        "source-only",
+        "content"
+      ]
+    },
+    "worker_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "subject_ids_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "baseline": {
+      "type": "object",
+      "required": [
+        "commit",
+        "files"
+      ],
+      "properties": {
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/file"
+          }
+        },
+        "pins": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "pin_files": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "subject_files": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/file"
+      }
+    },
+    "stages": {
+      "type": "object",
+      "required": [
+        "research",
+        "implementation",
+        "geographic_approval"
+      ],
+      "properties": {
+        "research": {
+          "enum": [
+            "partial",
+            "complete"
+          ]
+        },
+        "implementation": {
+          "enum": [
+            "not-proposed",
+            "proposed",
+            "implemented",
+            "published"
+          ]
+        },
+        "geographic_approval": {
+          "enum": [
+            "not-requested",
+            "unapproved",
+            "approved"
+          ]
+        }
+      }
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "methods": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "summaries": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "conclusions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "$defs": {
+    "file": {
+      "type": "object",
+      "required": [
+        "path",
+        "bytes",
+        "sha256",
+        "hash_kind"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "hash_kind": {
+          "const": "file-bytes"
+        },
+        "uncompressed_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "uncompressed_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
+}
