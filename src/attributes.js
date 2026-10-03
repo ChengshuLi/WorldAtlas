@@ -1,10 +1,10 @@
 import {attributes,validYear,explicitPopulationZero} from './model.js';
 import {environmentalAttributes,environmentalClassification} from './environment-classifications.js';
 import {referenceContextByLocation} from './reference-context.js';
+import {evidencePriority as priority} from './evidence-priority.js';
 export const locationAttributes=[...attributes,'habitation'];
 export const unresolvedAttributeStatuses=['unknown','disputed','no-majority'];
 export function categoryId(kind,name){return name==null?null:`${kind}:${encodeURIComponent(name.normalize('NFC').trim().toLocaleLowerCase('en'))}`;}
-const priority=r=>r.is_example?40+(r.evidence_priority||0):r.method==='direct'?(r.evidence_priority||0):r.method==='majority-area'||r.method==='derived'?10:r.method==='reference'?20:30;
 export function resolveAttributes(features,year,{states=[],records=[],temporal,examples=false,evidenceAvailable=true,referenceBaselines=[]}={}){
  if(!validYear(year))throw Error('Year must be between 3000 BC and 2026 AD, excluding zero');
  if(!evidenceAvailable){states=[];records=[];temporal=undefined;}

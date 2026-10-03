@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "pr_number": 659,
+  "head_sha": "4a59506a8a7457bf5aee6cac2c031ca13a642505",
+  "base_sha": "d6fb7b7938797dc69e69afef3a2fd1e7f86899cc",
+  "reviewer_worker_id": "review-palette-651-20261003",
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "outcome": "accepted",
+  "manifest_binding": null,
+  "policy": "report-only, legacy issue529 no evidence-quality manifest binding",
+  "inspected_files": [
+    {
+      "path": "coordination/engineering/observation-contracts-20261003-7e91.json",
+      "bytes": 2958,
+      "sha256": "08e5ddb8ada2249974cea1fe073d6df276611466c88d6eee94bf08b4a722fcdf"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/baseline-preservation.json",
+      "bytes": 1401,
+      "sha256": "27800a917932c48d2c6630af7d91e4c3a55100a4231a00714e525b7c0cdcca36"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/fixture-tests.tap",
+      "bytes": 1079,
+      "sha256": "31cb03666c423478f7f82cfc860bb261a3738e897ea05dd80cbbac5ab087d201"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/focused-tests-before-install.tap",
+      "bytes": 3514,
+      "sha256": "2cadc8bb468b6d80a4dc2cdba3eeeca6b0c03f4cf2204fba39ece4db8967be03"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/focused-tests-final.tap",
+      "bytes": 2931,
+      "sha256": "5b4890e2cb9bd2ca366d107ff3e785bff6cdcaaf6f904b92372949f7863dc6ce"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/focused-tests.tap",
+      "bytes": 2932,
+      "sha256": "e977c8f3bfdb1df58c1aecd90866bd26403eabc07a0742363573d481567ad328"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/issue-529-preclaim.json",
+      "bytes": 2968,
+      "sha256": "0aff5f541ccf5d367390391f38fb2999ef44840160f83980f5b57132b0f86e58"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/parent-528-specification.md",
+      "bytes": 22322,
+      "sha256": "d4d246f827afddbe222b49f25fe873592b4c690424a0352b319ed3ad2ef4e42f"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/previous-50-merge.json",
+      "bytes": 174,
+      "sha256": "6638915a835c3c7910dbf97f97aef00fb5eeae66ac67b72a7d2416435cdf13bc"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/previous-50-queue.json",
+      "bytes": 616,
+      "sha256": "29acf8d8dc60a51a2b17e6e834595f7991843912585a3f06af747441fc748b42"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/previous-50-release.json",
+      "bytes": 876,
+      "sha256": "03bfd6640627135364e47c4a982400017f6399ead9f181f5183a5b681c198aff"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/registry-contract.json",
+      "bytes": 7204,
+      "sha256": "038de84c62eb8c11784a6061e01ce0b9aff92c368613b704b164790776ae1bcf"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/reservation.json",
+      "bytes": 834,
+      "sha256": "840a9b7f4f0de190936ef533373bfef4168581834552c84ca16638625a536464"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/source-context.json",
+      "bytes": 515,
+      "sha256": "aca7756510a9b764206cb30d6b507595faecef38551ffde0a6e8a7623324cc0d"
+    },
+    {
+      "path": "docs/TYPED_OBSERVATION_CONTRACT.md",
+      "bytes": 7728,
+      "sha256": "bcdaafe06b413c1279941471cc12647fba063c0067d93824481f0e6dcb76d233"
+    },
+    {
+      "path": "src/attributes.js",
+      "bytes": 7802,
+      "sha256": "bfe70437bfc9977e42dcb71bdcd41459d8b2cc5020415f6caf20d639bcc4ee00"
+    },
+    {
+      "path": "src/evidence-priority.js",
+      "bytes": 441,
+      "sha256": "9e98e8c403d3a8068d286dbac160dc6126331d91958b7801b55ad9ecefa2244c"
+    },
+    {
+      "path": "src/observation-registry.js",
+      "bytes": 8711,
+      "sha256": "23adc09cfe78151b9959294a480d7b10ae9d796db92e8e2005b74a43c3b140b2"
+    },
+    {
+      "path": "src/typed-observations.js",
+      "bytes": 12664,
+      "sha256": "eb95c99fb8aa5cf0100c49515fe83e37e1b9f57852fd51343ca5d70ad0befdc0"
+    },
+    {
+      "path": "test/fixtures/typed-observation-contract-v1.json",
+      "bytes": 2512,
+      "sha256": "a5505361c147acf229545a3ccd915e81f79673501c00a98aee028f3afdafaaf5"
+    },
+    {
+      "path": "test/typed-observations.test.mjs",
+      "bytes": 14780,
+      "sha256": "4a3eae0447710a65444bb5bd5a473926bcd532e4536417e44cf74102d321e2d5"
+    }
+  ],
+  "independent_checks": [
+    "26 focusedtyped/legacy/environment/unresolved tests independentlypass",
+    "72 extractedlegacy priority cases equaloriginalternary",
+    "13 additional malformed controls reject",
+    "registryreceipt matchesactualexport",
+    "snapshot reverse order resolution same",
+    "six initial baseline bytes/hashes samebase"
+  ],
+  "limits": [
+    "First partial seam only; hosted storage/API/import/read/export/snapshot/prepared parity and forward migrations remain unimplemented",
+    "No live endpoint claims typedcapability; no publication or providerDDL reviewed",
+    "Measurement declarations retain labels/units but do not establish semantic/historicalsource truth",
+    "Domain GDP compatibility/full derivationDAG, annualmortalityallocation/dedup, geometrycontact, operationalports remain child/adapterscope",
+    "No physical browser/mobile, geographic approval or factualimport certificate",
+    "No claim that stillrunningfullunit suite has passed; pendingreceipts/head needincrementalreview",
+    "Originalparentterminalblank retained intentionally; diffcheck whitespace warning is not evidencealteration",
+    "Newheadinvalidates review"
+  ]
+}
