@@ -11,8 +11,12 @@
     "Verify GPU/canvas fill/legend consistency, unknowns, reload/year stability, no ownership recompilation, actual private publication and rollback; maximum two focused PRs"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-03T17:15:07.177285+00:00",
-  "completed": [],
+  "updated_at_utc": "2026-10-03T17:20:59.756798+00:00",
+  "completed": [
+    "Confirmed actual current reproduction: PRC and ROC selected profiles both resolve owner:Q148, with distinct source names. Both share rgb(49,60,196), and one legend entry replaces the other.",
+    "Actual production four-year sequence and two profile screenshots completed with zero navigation ownership compilation/upload and no page errors.",
+    "Read-only complete source-name audit: 1338 owner-ID/name combinations, 111 IDs with multiple retained names; source hash verified before each part read. Q148 has both actual named groups; range envelopes are not overlap certificates."
+  ],
   "checks": [],
   "deployment": null,
   "maintenance": {
@@ -21,17 +25,21 @@
     "reason": null
   },
   "evidence_paths": [
-    "data/engineering/palette-contrast-20261003-7e91/claim.json"
+    "data/engineering/palette-contrast-20261003-7e91/claim.json",
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before.json.gz",
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before-beijing.png",
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before-taipei.png",
+    "data/engineering/palette-contrast-20261003-7e91/source-owner-names.json"
   ],
   "blockers": [],
-  "next_action": "Read-only actual Site23 palette reproduction is running. Capture actual 1950 legend colors and Beijing/Taipei owner profiles/source identities; retain non-reproduction honestly before general contrast work.",
+  "next_action": "Audit source owner ID/name combinations and exact raster adjacency across dates; implement general display-category distinction and stable perceptual contrast, preserving all source identity records.",
   "pull_request": null,
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
   "worker_id": "engineering-night-20261003-7e91f438",
   "reservation": {
     "accepted": true,
-    "request_id": "59a61370-650a-419f-b0c5-e3779ae00c84",
+    "request_id": "a51cca2b-4148-4ebc-bbc3-68763e4d9623",
     "issue_number": 23,
     "claim": {
       "comment_id": 5971540602,
@@ -40,19 +48,19 @@
       "worker_id": "engineering-night-20261003-7e91f438",
       "claim_id": "4406050d-c644-4160-99aa-e43c1d052fd3",
       "branch": "engineering/palette-contrast-20261003-7e91",
-      "request_id": "59a61370-650a-419f-b0c5-e3779ae00c84",
+      "request_id": "a51cca2b-4148-4ebc-bbc3-68763e4d9623",
       "issue_number": 23,
       "claimed_at": "2026-10-03T17:14:24.771Z",
-      "updated_at": "2026-10-03T17:15:21.832Z",
-      "expires_at": "2026-10-04T17:15:21.832Z",
-      "live_work": true,
+      "updated_at": "2026-10-03T17:19:54.347Z",
+      "expires_at": "2026-10-04T17:19:54.347Z",
+      "live_work": false,
       "mode": "engineering",
       "max_prs": 2
     },
     "replayed": false,
     "result_source": "github-comment",
-    "result_comment_id": 5971549211,
-    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37139823504"
+    "result_comment_id": 5971586840,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37140096499"
   },
   "previous_completed_work": {
     "issue": 22,
@@ -61,5 +69,11 @@
     "release_request": "ccf0df7b-c663-4df5-891d-7e2f9d98d348",
     "release_result": 5971532786,
     "remaining_proposal_issue": 638
+  },
+  "evidence_hashes": {
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before.json.gz": "aaad2dcad22664aee326ed2d28b34ee8bad7312cd8817b0939c093742e25d52a",
+    "data/engineering/palette-contrast-20261003-7e91/claim.json": "174823d401de6d2d373bb2858b72d2d6f42e61d1860737e70c8dbd59c6f52af8",
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before-beijing.png": "f8265289acf41caaf79f38cefa535a846dd294eb233bd6f97eda72cbea748c21",
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before-taipei.png": "e57a19e12ad5f87a48316df682ed53533c7cf30f61bc264da2312814d2f2f813"
   }
 }
