@@ -10,12 +10,25 @@
     "One permitted PR: read-only provider/capacity facts, diagnostic/operator warnings and dated official/account evidence; no upgrades, provisioning, migrations or publication"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-03T18:29:42.793641+00:00",
+  "updated_at_utc": "2026-10-03T18:41:51.926521+00:00",
   "completed": [
     "Confirmed previous issue23 actual squash merge and claim release",
-    "Fresh isolated branch from current main; confirmed issue50 reservation"
+    "Fresh isolated branch from current main; confirmed issue50 reservation",
+    "Existing authorized Neon project metadata workflow37144379658 succeeded and sanitized receipt retained",
+    "Source-pinned capacity metadata workflow37144853024 at61c8b31 succeeded; organization plan404 remains explicitly unverified",
+    "Actual private PostgreSQL827506688-byte measurement and414 R2 ranged sizes236228730-byte total passed at unchanged snapshot",
+    "Retained official Neon/R2 pricing and exact API definitions; 9 focused contract tests passed"
   ],
-  "checks": [],
+  "checks": [
+    {
+      "command": "node --test test/research-catalog.test.mjs test/neon-capacity.test.mjs",
+      "result": "9 passed, zero skipped/failed"
+    },
+    {
+      "command": "verify-live-capacity.mjs (fresh corrected attempt)",
+      "result": "420 GET requests, 6HTTP200+414HTTP206; registered size total exact and snapshot stable"
+    }
+  ],
   "deployment": null,
   "maintenance": {
     "required": false,
@@ -26,7 +39,7 @@
     "data/engineering/provider-capacity-20261003-7e91"
   ],
   "blockers": [],
-  "next_action": "Existing read-only neon-verify.yml dispatched on main; confirm exact run/receipt once, inspect current private capacity and separate R2 object evidence, then bounded account/official facts and operator documentation.",
+  "next_action": "Finalize scoped capacity/operator docs and whole-file hashes; push exact head, request distinct worker review, create only permitted issue50 PR and run exact-head checks, serialized queue, verify actual merge then release. No application publication/DDL/import required.",
   "pull_request": null,
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
@@ -55,5 +68,9 @@
     "result_source": "github-comment",
     "result_comment_id": 5972181081,
     "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37144339325"
-  }
+  },
+  "verification_limits": [
+    "Neon organization plan404 and monthly allowances unverified",
+    "R2 account/billing/class/unregistered objects unverified; registered range sizes not full SHA proof"
+  ]
 }

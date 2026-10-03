@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "checked_at_utc": "2026-10-03T18:41:51.926521+00:00",
+  "issue": 50,
+  "scope": "Read-only configured/official/actual usage facts, not provisioning or geographic approval",
+  "measured_database": {
+    "bytes": 827506688,
+    "measurement": "postgres-pg-database-size",
+    "configured_budget_bytes": 800000000,
+    "budget_is_provider_quota": false,
+    "quota_verified": false,
+    "warning_fraction": 0.8,
+    "budget_fraction": 1.03438336,
+    "budget_status": "at-or-above-budget"
+  },
+  "measured_revision": 2620,
+  "registered_media_objects": 414,
+  "registered_metadata_bytes": 236228730,
+  "r2_registered_object_bytes": 236228730,
+  "r2_range_requests": 414,
+  "r2_whole_hashes_verified": false,
+  "snapshot_stable": true,
+  "configured_neon": {
+    "history_retention_seconds": 21600,
+    "branch_logical_size_limit_mib": 1024,
+    "project_quotas": {
+      "active_time_seconds": null,
+      "compute_time_seconds": null,
+      "written_data_bytes": null,
+      "data_transfer_bytes": null,
+      "logical_size_bytes": null
+    },
+    "production_branch_endpoints": [
+      {
+        "id": "ep-autumn-silence-arf6frt6",
+        "branch_id": "br-summer-butterfly-ar8qikk5",
+        "autoscaling_limit_min_cu": 0.25,
+        "autoscaling_limit_max_cu": 2,
+        "suspend_timeout_seconds": 0
+      }
+    ]
+  },
+  "account_plan": {
+    "status": "unavailable",
+    "organization_id": "org-calm-shadow-59145971",
+    "reason": "neon-api-http-error",
+    "http_status": 404
+  },
+  "provider_limits": {
+    "r2_account_billing": "unverified; management connection unavailable",
+    "neon_monthly_account_allowances": "unverified; organization GET404",
+    "sites_package_limits": "separate publication39 budget, not provider data storage"
+  },
+  "publication_required": false,
+  "factual_mutations": false,
+  "provider_mutations": false,
+  "failed_attempt": "live-capacity.json; client strict aggregate-number/string comparison, all five requests200",
+  "checks": "9 focused capacity/catalog/metadata contract tests passed"
+}

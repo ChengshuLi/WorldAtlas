@@ -1,0 +1,17 @@
+✔ account proof and configured quotas/compute remain typed, scoped and free of arbitrary private fields (29.69301ms)
+✔ denied organization proof stays unavailable while actual project settings remain verified (1.403761ms)
+✔ missing organization and quota are explicit unknowns, never inferred from public pricing (1.415414ms)
+✔ wrong project and lossy quotas fail before a misleading capacity receipt can be produced (1.711199ms)
+✔ discovery preserves identity/source metadata and pages every result with bounded filters (112.171754ms)
+✔ relationship pages exhaust both directions beyond profile truncation with date/example/withdrawal filtering (50.866902ms)
+✔ media link pages preserve every active link and omit withdrawn, pending and unsupported-year links (53.568082ms)
+✔ capacity reports measured bytes and declared budgets without claiming a managed quota or prepared assets (18.057424ms)
+✔ catalog and graph reads reject revision changes instead of publishing inconsistent pages (16.649943ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 322.697439
