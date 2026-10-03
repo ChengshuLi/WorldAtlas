@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue",
+  "lane": "engineering",
+  "job_id": "palette-publish-20261003-7e91",
+  "worker_id": "engineering-night-20261003-7e91f438",
+  "branch": "engineering/palette-publish-20261003-7e91",
+  "base_main_commit": "c5fce09842a0af2ae05cf6c611f012b6a71befff",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/23",
+  "date_timezone": "America/Los_Angeles",
+  "updated_at_utc": "2026-10-03T18:01:05.077872+00:00",
+  "scope": [
+    "Second and final permitted PR: coordinated private publication of merged palette implementation, exact production GPU/Canvas/legend/year/reload/unknown acceptance and retained rollback; no factual/geographic/provider change"
+  ],
+  "reservation": {
+    "accepted": true,
+    "request_id": "69b9a372-62ee-47df-8592-0770caf4715a",
+    "issue_number": 23,
+    "claim": {
+      "comment_id": 5971540602,
+      "version": 1,
+      "active": true,
+      "worker_id": "engineering-night-20261003-7e91f438",
+      "claim_id": "4406050d-c644-4160-99aa-e43c1d052fd3",
+      "branch": "engineering/palette-publish-20261003-7e91",
+      "request_id": "69b9a372-62ee-47df-8592-0770caf4715a",
+      "issue_number": 23,
+      "claimed_at": "2026-10-03T17:14:24.771Z",
+      "updated_at": "2026-10-03T18:00:04.625Z",
+      "expires_at": "2026-10-04T18:00:04.625Z",
+      "live_work": false,
+      "mode": "engineering",
+      "max_prs": 2
+    },
+    "replayed": false,
+    "result_source": "github-comment",
+    "result_comment_id": 5971925519,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37142548231"
+  },
+  "dependencies": [],
+  "previous_pr": {
+    "number": 645,
+    "head": "7b62a2239ad77841aa4855ddc8095a3cc225a8b0",
+    "actual_merge": "c5fce09842a0af2ae05cf6c611f012b6a71befff",
+    "accepted_queue_request": "dc434b6b-3136-4281-a740-2897af91e9ea",
+    "workflow": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37142455951",
+    "bot_result": 5971913001
+  },
+  "checks": [
+    {
+      "command": "validate-structure publication",
+      "result": "581 unit + 15 geographic preparation, prepared parity and 51 exact ownership buckets passed"
+    },
+    {
+      "command": "Exact Git input comparison against validated build",
+      "result": "Application/prepared inputs identical; copied build reused, archive audit pending"
+    }
+  ],
+  "completed": [
+    "Verified actual squash merge and matching bot result; renewed canonical claim onto fresh branch with live_work=false"
+  ],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "blockers": [],
+  "next_action": "Post issue39 notice, confirm live_work=true, prepare/push exact Site source and audit final package; explicitly private save/deploy, verify actual success and renderer acceptance, then settle live_work=false before final evidence PR and serialized queue.",
+  "evidence_paths": [
+    "data/engineering/palette-publish-20261003-7e91"
+  ],
+  "pull_request": null
+}
