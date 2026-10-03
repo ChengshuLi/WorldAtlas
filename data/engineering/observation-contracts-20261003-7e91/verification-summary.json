@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "scope": "First partial529 typed contract/seams; not hosted typed adapter completion",
+  "recorded_at_utc": "2026-10-03T19:17:53.897170+00:00",
+  "base_main_commit": "68479f66b4f919a4dd6a4ff39c5ba20182e04761",
+  "checks": [
+    {
+      "command": "npm ci --no-audit --no-fund",
+      "result": "Installed committed pinned dependencies"
+    },
+    {
+      "command": "initial npm test",
+      "tests": 604,
+      "passed": 599,
+      "failed": 4,
+      "skipped": 1,
+      "receipt": "unit-tests.tap",
+      "limits": [
+        "Missing localdist/drizzle derivative caused4stagingfailures; staticnotbuilt skip. Original outcome preserved."
+      ]
+    },
+    {
+      "command": "compile-hosted-migrations --input drizzle --output dist/drizzle; node --test stage-site-migrations",
+      "tests": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "migration-staging-recheck.tap",
+      "limits": [
+        "Local derivative only; no provider operation"
+      ]
+    },
+    {
+      "command": "node --test typed/legacy/unresolved/environment focused suites after JSON guard correction",
+      "tests": 28,
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "focused-tests-corrected.tap"
+    },
+    {
+      "command": "npm run build:hosted",
+      "result": "passed",
+      "archive_uncompressed_bytes": 262492160,
+      "violations": [],
+      "receipt": "deployment-budget.json"
+    },
+    {
+      "command": "ATLAS_REQUIRE_PREPARED=1 ATLAS_REQUIRE_STATIC=1 node --test test/prepared-parity.test.mjs",
+      "tests": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "prepared-static-parity.tap",
+      "limits": [
+        "Actual legacy application server/static parity; new typed hosted adapters remain pending"
+      ]
+    },
+    {
+      "command": "npm test (final after derivative/build/guard correction)",
+      "tests": 606,
+      "passed": 606,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "unit-tests-final.tap"
+    },
+    {
+      "command": "reproduce-fixture.mjs --out freshpath",
+      "result": "Two independent JSON runs equal and expected syntheticdate states matched",
+      "receipt": "fixture-reproduction.json"
+    }
+  ],
+  "independent_review": "Initial acceptance was withdrawn for hidden-toJSON defect; correction reassessed successfully in workingtree. Final committed exact-head review pending.",
+  "limits": [
+    "No factual import, providerDDL, source/historical truth or geographic certificate",
+    "No typed API capability, actual new adapter parity, domain map algorithms or physical-mobile certificate",
+    "Existing identities/source archives/migrations/export contracts preserved; source-only mainresearch commits not geographic approval"
+  ]
+}
