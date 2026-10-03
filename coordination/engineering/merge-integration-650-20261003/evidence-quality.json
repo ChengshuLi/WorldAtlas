@@ -75,8 +75,8 @@
     },
     {
       "path": "scripts/merge-integration.mjs",
-      "bytes": 8983,
-      "sha256": "fe7ffd4cefa6379fbe769b308fe4f1bfe47e2a83772a16c92482b8eeda1f44ab",
+      "bytes": 8993,
+      "sha256": "af417f8f68d520b4761f31ef5feb2404a04a840fbfb8afb57db4cb6122fc65e4",
       "hash_kind": "file-bytes"
     },
     {
@@ -99,8 +99,8 @@
     },
     {
       "path": "test/merge-integration.test.mjs",
-      "bytes": 8907,
-      "sha256": "33e698ce70a83c90b0f242960b0fe2284c6ad6b808afebce51c4cce0c89e6832",
+      "bytes": 9021,
+      "sha256": "24118309365cdff865d34bb0b4edec1e81a93956096450921666c22c93cc5339",
       "hash_kind": "file-bytes"
     },
     {
@@ -131,6 +131,18 @@
       "path": "scripts/run-integration-tests.mjs",
       "bytes": 1503,
       "sha256": "f37c69fd8c499c4769e7dca3fec6db05d20208c4ecb8da3d0e6f2fe62fbb5aae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-profile-corrected.tap",
+      "bytes": 8489,
+      "sha256": "ced9fe53da2af2bce770a3e7397bf061630cc7fa1243ee7ffbcb1e29618bd55f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/profile-review-correction.json",
+      "bytes": 509,
+      "sha256": "bec55528cac0bd37444abdb184dca33baf333e4608334dc2d2ae801b0bdbf68a",
       "hash_kind": "file-bytes"
     }
   ],
@@ -235,6 +247,14 @@
     },
     {
       "path": "scripts/run-integration-tests.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-profile-corrected.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/profile-review-correction.json",
       "status": "added"
     }
   ],

@@ -98,7 +98,8 @@ test('commit status changing during final review prevents the merge', async () =
 
 test('trusted profile uses focused invariants only for isolated evidence and docs', () => {
  assert.equal(integrationProfile('geography/example',[{filename:'research/geography/packet/a.json'}],{owned_paths:['research/geography/packet/']}),'evidence');
- assert.equal(integrationProfile('research/example',[{filename:'research/example/a.json'}],{}),'evidence');
+ assert.equal(integrationProfile('research/example',[{filename:'research/campaigns/example/a.json'}],{}),'evidence');
+ assert.equal(integrationProfile('research/example',[{filename:'research/example/a.json'}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/WORKER_COORDINATION.md'},{filename:'coordination/engineering/example/receipt.json'}],{}),'evidence');
  for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','.github/workflows/worker-merge.yml'])
    assert.equal(integrationProfile('engineering/example',[{filename}],{}),'full');

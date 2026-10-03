@@ -36,7 +36,7 @@ export function integrationProfile(branch, files, reservation) {
   if (branch.startsWith('geography/') && Array.isArray(reservation.owned_paths) &&
       names.every(name => reservation.owned_paths.some(prefix => name.startsWith(prefix)))) return 'evidence';
   const job = branch.split('/').slice(1).join('/');
-  if (branch.startsWith('research/') && names.every(name => name.startsWith(`research/${job}/`))) return 'evidence';
+  if (branch.startsWith('research/') && names.every(name => name.startsWith(`research/campaigns/${job}/`))) return 'evidence';
   if (branch.startsWith('engineering/') && names.every(name =>
       (name.startsWith('docs/') && /\.(md|txt)$/.test(name)) || name.startsWith(`coordination/engineering/${job}/`) ||
       name === `coordination/engineering/${job}.json`)) return 'evidence';

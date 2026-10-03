@@ -1,0 +1,15 @@
+{
+  "recorded_at": "2026-10-03T22:19:29.429757+00:00",
+  "finding": "Independent reviewer caught history campaign prefix mismatch, before merge.",
+  "correction": "Classifier and positive/negative tests now use canonical research/campaigns/<job>/ ownership.",
+  "tests_passed": 84,
+  "tests_failed": 0,
+  "prior_unsharded_run": {
+    "id": 37156616764,
+    "conclusion": "cancelled",
+    "success_claimed": false
+  },
+  "limits": [
+    "Hosted final matrix checks and final independent review pending."
+  ]
+}
