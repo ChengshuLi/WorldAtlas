@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "issue": 650,
+  "lane": "engineering",
+  "worker_id": "moderator-merge-650-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "5f8bc5893fb055ed89ce84965ae148cc99e95591",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 7304,
+        "sha256": "b73e25e3113ecd3573a1a58acaca50c6d6d2d1da6c577eecdf90787363272e12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/evidence-policy.json",
+        "bytes": 225,
+        "sha256": "69310e9dfbc92a7bfc954f6374a13dafb47a12ea53e27406cfd89138fc87463b",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 941,
+      "sha256": "a9e3f146e81144a9522e44cd5678caac146db30c65bd22344764e07d3c8286eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 3998,
+      "sha256": "01287c48121226b1d1cb87f717370ce76d92d45f0c6d04af815daa4ea0638e81",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003.json",
+      "bytes": 1364,
+      "sha256": "3eccbe97f6ba8e6117a864e1579cb6b8512d136b6391b29f36e4318fc92ffb1e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-tests.tap",
+      "bytes": 7892,
+      "sha256": "0a594d4d19ab4f15e43278f8babc2ec679ffac6a27a11287bb56fe64d8401bb9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/implementation-receipt.json",
+      "bytes": 1969,
+      "sha256": "3cfeeae3248dccc01015cf1065ce2caba079f2b12f3e1872b0c487290317bff5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/local-full-suite-unavailable.tap.gz",
+      "bytes": 37500,
+      "sha256": "229492cebe93e816bd0f822a668160222cae0f46579d83e8130c98907e8d7112",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/reservation.json",
+      "bytes": 822,
+      "sha256": "03e01a4ab996a4944f9d50d1ff7997db95962ab178b455e0560b6678a153eb3c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 13385,
+      "sha256": "2b1ccd53d033f11aad4bb53649b55f869b9e00c6e56271eb13ea0dd59cf99b20",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 8045,
+      "sha256": "ab289d50f4c3682864377aedfc40c456f7493e4a0fadc94f29b2eaa60ee92b62",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "bytes": 3117,
+      "sha256": "2daedba75ce32cbe246bd37156dcfe2ce345810a96c21ade8f970b7ed8f336c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 2500,
+      "sha256": "2a97fbaca8bdb8acdaf66d1ca17f754f649c3f148551087b7adb17e447c961f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "bytes": 3934,
+      "sha256": "8798b35229da3e56471b1f0b339a1b54ef3a2b5052ca821c299bb748c0371584",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 6999,
+      "sha256": "1d90946934593e363b151b03589990af122a8fde39f211d0a12dce3892b8d177",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "bytes": 13694,
+      "sha256": "ee18a36c8b61029e49b9aa90b995004200c129b1d0d130963ba179c3b09c922b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "serialized-integration-code",
+      "kind": "code",
+      "description": "Isolated and mocked integration/client controls; hosted full checkout validates complete candidate without publication",
+      "software": "Node24",
+      "units": "code review"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/trusted-workflow-checkouts.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "added"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "804c934c882f746dcd35859889ed001ae2bc5047eb57498a1646bfa64e31d3cb"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/implementation-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/local-full-suite-unavailable.tap.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/reservation.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "509aa5d36723b782859a325eb988b32ebd7ff8c0c77af3623011c3dc3641fd43"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "status": "modified",
+      "original_sha256": "a266d4052f77d5566120e681d474cd67e203148dc303ef75c7722757aad44652"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "a460048affe0dc90407a5cb13a69d250fddc791fb7ee5ed9ae06fc3e2d28158b"
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "status": "modified",
+      "original_sha256": "14f3be23108fc906194ee32843174e9f732c5c4f332ec6f80fa67ced2332c3fc"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": []
+}
