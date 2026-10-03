@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "mexico-1895-population-source",
+  "branch": "research/mexico-1895-population-source",
+  "base_main_commit": "a0e212c47cee0ffed7eec2408ec6ccd5708b1fae",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/29",
+  "date_timezone": "UTC",
+  "scope": {
+    "geographies": ["Mexico census national sum and source-era States, grouped under the report's own regional headings; no modern crosswalk"],
+    "attributes": ["population table definitions, sex counts, and age-table heading"],
+    "supported_window": "Single census observation, 20 October 1895",
+    "source_version": "Censo General de la República Mexicana, Resumen General, official INEGI historical-product scan; cover imprint 1899 and scan running footer 1897 unresolved"
+  },
+  "updated_at_utc": "2026-10-03T11:33:00Z",
+  "geographic_release": null,
+  "input_paths": ["source-manifest.json", "source-evaluation.md"],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Retrieved and hashed all three official scan segments and INEGI general free-use terms.",
+    "Visually reviewed the title page and printed page 6; retained two population rows and identified the adjacent age-table heading.",
+    "Recorded an unresolved 30-person mismatch in Aguascalientes sex subtotals versus printed total and a 1897/1899 publication-date discrepancy."
+  ],
+  "source_gaps": [
+    "The reviewed summary is state-level; municipalities and settlements, sub-state tables, source population-universe definition, and undercount uncertainty remain unevaluated.",
+    "No regional content approval certificate with exact permitted subjects and matching release pins."
+  ],
+  "blockers": ["No approved regional certificate for any import; this work remains source-only."],
+  "next_action": "Submit one focused source-evaluation PR, wait for exact-head checks, use the serialized merge queue, verify the merge on fresh main, release the claim, and continue with the next ready history-research issue.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
