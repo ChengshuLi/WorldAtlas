@@ -1,6 +1,7 @@
 import {validYear} from './model.js';
 import {evidencePriority} from './evidence-priority.js';
 import {observationRegistry} from './observation-registry.js';
+import {assertJSONData} from './json-contract.js';
 
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const text = (value, label) => {
@@ -16,18 +17,7 @@ export function supportedInterval(from, to) {
 }
 function jsonObject(value, label) {
   if (!object(value)) throw Error(`Invalid ${label}`);
-  // Validate without rewriting the original source/provenance metadata.
-  const inspect = (v, ancestors = new Set()) => {
-    if (v === null || typeof v === 'string' || typeof v === 'boolean') return;
-    if (typeof v === 'number') { if (Number.isFinite(v)) return; throw Error('Nonfinite JSON number'); }
-    if (!v || typeof v !== 'object' || !Array.isArray(v) && Object.getPrototypeOf(v) !== Object.prototype && Object.getPrototypeOf(v) !== null) throw Error('Metadata must contain only JSON data');
-    if (ancestors.has(v)) throw Error('Cyclic metadata');
-    const next = new Set(ancestors); next.add(v);
-    for (const item of Object.values(v)) inspect(item, next);
-  };
-  inspect(value);
-  if (new TextEncoder().encode(JSON.stringify(value)).length > 16384) throw Error('Metadata exceeds 16 KiB');
-  return value;
+  return assertJSONData(value, {objectRequired: true});
 }
 function entity(id, kind, entities, label) {
   text(id, label);
@@ -56,7 +46,7 @@ function contextMaps({sources = [], entities = []} = {}) {
   return {sources: map(sources, 'source'), entities: map(entities, 'entity')};
 }
 function evidence(input, sources) {
-  if (!object(input)) throw Error('Invalid typed evidence');
+  assertJSONData(input, {objectRequired: true, maxBytes: 1048576});
   text(input.id, 'stable observation/link ID'); text(input.source_id, 'source ID');
   supportedInterval(input.valid_from, input.valid_to);
   const source = sources.get(input.source_id);

@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "check": "synthetic-contract-json-roundtrip",
+  "outcome": "passed",
+  "fixture_kind": "synthetic-only-not-historical-evidence",
+  "fixture_sha256": "a5505361c147acf229545a3ccd915e81f79673501c00a98aee028f3afdafaaf5",
+  "run_one_sha256": "695431052020a1254d546ba1e37e10b1cc43f0967c48289a5d289aef73af62c8",
+  "run_two_sha256": "695431052020a1254d546ba1e37e10b1cc43f0967c48289a5d289aef73af62c8",
+  "years": [
+    -3000,
+    -1,
+    1,
+    1000,
+    1050,
+    1100,
+    2026
+  ],
+  "snapshots": [
+    {
+      "year": -3000,
+      "rows": []
+    },
+    {
+      "year": -1,
+      "rows": [
+        {
+          "subject_kind": "location",
+          "subject_id": "fixture:territory",
+          "field_id": "atlas.marine-contact",
+          "value": false,
+          "status": "sourced",
+          "priority": 0,
+          "evidence": {
+            "version": 1,
+            "id": "fixture:no-marine",
+            "subject_id": "fixture:territory",
+            "subject_kind": "location",
+            "field_id": "atlas.marine-contact",
+            "value": false,
+            "valid_from": -1,
+            "valid_to": 1,
+            "source_id": "fixture:past-source",
+            "method": "direct",
+            "status": "sourced",
+            "metadata": {
+              "coverage": "Synthetic complete catalog",
+              "footprints_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            },
+            "is_example": 0,
+            "source_status": "historical"
+          }
+        }
+      ]
+    },
+    {
+      "year": 1,
+      "rows": []
+    },
+    {
+      "year": 1000,
+      "rows": [
+        {
+          "subject_kind": "location",
+          "subject_id": "fixture:territory",
+          "field_id": "atlas.adult-literacy",
+          "value": 0,
+          "status": "sourced",
+          "priority": 0,
+          "evidence": {
+            "version": 1,
+            "id": "fixture:zero-literacy",
+            "subject_id": "fixture:territory",
+            "subject_kind": "location",
+            "field_id": "atlas.adult-literacy",
+            "value": 0,
+            "valid_from": 1000,
+            "valid_to": 1001,
+            "source_id": "fixture:past-source",
+            "method": "direct",
+            "status": "sourced",
+            "metadata": {
+              "measurement": {
+                "unit": "percent",
+                "definition": "Synthetic adult literacy measurement",
+                "period": {
+                  "from": 1000,
+                  "to": 1001
+                },
+                "cohort": "age-15-plus"
+              },
+              "original_values": [
+                {
+                  "value": "0.00",
+                  "unit": "percent"
+                }
+              ],
+              "source_hashes": [
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              ]
+            },
+            "is_example": 0,
+            "source_status": "historical"
+          }
+        },
+        {
+          "subject_kind": "location",
+          "subject_id": "fixture:territory",
+          "field_id": "atlas.river-lake-contact",
+          "value": null,
+          "status": "unresolved",
+          "priority": 0,
+          "evidence": {
+            "version": 1,
+            "id": "fixture:uncertain-water",
+            "subject_id": "fixture:territory",
+            "subject_kind": "location",
+            "field_id": "atlas.river-lake-contact",
+            "value": null,
+            "valid_from": 1000,
+            "valid_to": 1100,
+            "source_id": "fixture:past-source",
+            "method": "direct",
+            "status": "unresolved",
+            "metadata": {
+              "reason": "Synthetic contradictory sources"
+            },
+            "is_example": 0,
+            "source_status": "historical"
+          }
+        }
+      ]
+    },
+    {
+      "year": 1050,
+      "rows": [
+        {
+          "subject_kind": "location",
+          "subject_id": "fixture:territory",
+          "field_id": "atlas.river-lake-contact",
+          "value": null,
+          "status": "unresolved",
+          "priority": 0,
+          "evidence": {
+            "version": 1,
+            "id": "fixture:uncertain-water",
+            "subject_id": "fixture:territory",
+            "subject_kind": "location",
+            "field_id": "atlas.river-lake-contact",
+            "value": null,
+            "valid_from": 1000,
+            "valid_to": 1100,
+            "source_id": "fixture:past-source",
+            "method": "direct",
+            "status": "unresolved",
+            "metadata": {
+              "reason": "Synthetic contradictory sources"
+            },
+            "is_example": 0,
+            "source_status": "historical"
+          }
+        }
+      ]
+    },
+    {
+      "year": 1100,
+      "rows": []
+    },
+    {
+      "year": 2026,
+      "rows": [
+        {
+          "subject_kind": "location",
+          "subject_id": "fixture:territory",
+          "field_id": "atlas.marine-contact",
+          "value": true,
+          "status": "reference",
+          "priority": 20,
+          "evidence": {
+            "version": 1,
+            "id": "fixture:modern-contact",
+            "subject_id": "fixture:territory",
+            "subject_kind": "location",
+            "field_id": "atlas.marine-contact",
+            "value": true,
+            "valid_from": 2026,
+            "valid_to": 2027,
+            "source_id": "fixture:modern-source",
+            "method": "reference",
+            "status": "reference",
+            "metadata": {
+              "reference_year": 2026
+            },
+            "is_example": 0,
+            "source_status": "reference"
+          }
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Pure shared seam only; not actual hosted/static adapter parity",
+    "No factual import, source truth, geographic approval, provider operation or certificate"
+  ]
+}

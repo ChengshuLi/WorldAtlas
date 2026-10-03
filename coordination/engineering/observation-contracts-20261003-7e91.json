@@ -7,7 +7,7 @@
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/529",
   "worker_id": "engineering-night-20261003-7e91f438",
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T19:02:52.096233+00:00",
+  "updated_at_utc": "2026-10-03T19:11:35.633586+00:00",
   "scope": [
     "First of max3 PRs: additive versioned typed observation/feature-link contracts, controlled registrar, pure shared normalization/resolution seam and legacy preservation tests. No domain map implementations, DDL, live facts or publication."
   ],
@@ -15,12 +15,27 @@
   "completed": [
     "Previous issue50 actual merge d6fb7b7 and confirmed release preserved in owned receipts",
     "Fresh isolated branch and confirmed529 claim",
-    "Shared precedence extracted without changing legacy behavior; declarative vocabulary and pure typed contract implemented"
+    "Shared precedence extracted without changing legacy behavior; declarative vocabulary and pure typed contract implemented",
+    "Incorporated source-only maina1fd338 intact",
+    "Independent reviewer found hidden-toJSON namespace/export mismatch; original review withdrawn, descriptor-first guards and zero-execution controls implemented",
+    "28 corrected focused checks passed; migration staging5passed after local derivative; hosted build reserve gate passed"
   ],
   "checks": [
     {
-      "command": "focused contract/attribute/unresolved/environment checks after npm ci",
-      "result": "25 passed; newly retained synthetic transport fixture separately passed in9contracttests; full regression suite running"
+      "command": "node --test typed/legacy/environment/unresolved focused suite",
+      "result": "28 passed, zero skipped/failed after JSON guard correction"
+    },
+    {
+      "command": "initial npm test",
+      "result": "604 total,599passed,4missing-derivativefailures,1static-not-built skip; original outcome preserved"
+    },
+    {
+      "command": "migration derivative generation + stage-site-migrations tests",
+      "result": "Local source-only generation;5passed no skip/fail, no provider operation"
+    },
+    {
+      "command": "npm run build:hosted",
+      "result": "Passed, archive262492160bytes, no budget violation"
     }
   ],
   "deployment": null,
@@ -33,7 +48,7 @@
     "data/engineering/observation-contracts-20261003-7e91"
   ],
   "blockers": [],
-  "next_action": "Run focused and complete checks, exact-head distinct-worker review, serialized queue, actual merge; then renew onto fresh branch for remaining bounded529 adapters/parity. Issue remains open.",
+  "next_action": "Corrected source pushed; actual legacy prepared/static parity with skip forbidden and final full regression are running. Finish receipts/whole-file ledger, distinct-worker final exact-head review, current-head CI and serialized actual merge. Then fresh branch + confirmed renewal for remaining529 backend/parity parts.",
   "reservation": {
     "accepted": true,
     "request_id": "7f013666-b6f4-4518-a99e-1893d7f79a1d",
@@ -64,5 +79,6 @@
   "remaining_scope": [
     "Forward supported adapter storage/import/read/export and optional capabilities",
     "Actual server/static/prepared/snapshot parity and final module integration handover; max3 totalPRs"
-  ]
+  ],
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/659"
 }

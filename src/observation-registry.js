@@ -1,4 +1,5 @@
 /** Declarative structural vocabulary; no factual assignments or map algorithms. */
+import {assertJSONData} from './json-contract.js';
 const freeze = value => {
   if (value && typeof value === 'object') {
     Object.values(value).forEach(freeze);
@@ -54,31 +55,24 @@ function text(value, label) {
 }
 const kinds = (values, types) => Array.isArray(values) && values.length > 0
   && new Set(values).size === values.length && values.every(id => Object.hasOwn(types, id));
-function assertJSON(value, ancestors = new Set()) {
-  if (value === null || ['string', 'boolean'].includes(typeof value)) return;
-  if (typeof value === 'number' && Number.isFinite(value)) return;
-  if (!value || typeof value !== 'object' || !Array.isArray(value)
-    && Object.getPrototypeOf(value) !== Object.prototype && Object.getPrototypeOf(value) !== null) throw Error('Registry must be JSON data');
-  if (ancestors.has(value)) throw Error('Cyclic registry data');
-  const next = new Set(ancestors); next.add(value);
-  for (const entry of Object.values(value)) assertJSON(entry, next);
-}
 
 /** Explicit module list is the only registration seam; no global mutation/plugins. */
 export function createObservationRegistry(modules = []) {
   if (!Array.isArray(modules) || modules.length > 32) throw Error('Invalid observation module list');
+  assertJSONData(modules, {maxBytes: 2097152});
   const result = {version: 1, modules: [], types: {}, metrics: {}, fields: {}, relationships: {}};
   const moduleIds = new Set();
   for (const input of [atlasObservationModule, ...modules]) {
+    assertJSONData(input, {objectRequired: true, maxBytes: 65536});
     if (!input || typeof input !== 'object' || Array.isArray(input)
       || !/^[a-z][a-z0-9-]{0,63}$/.test(input.id) || input.version !== 1
       || moduleIds.has(input.id)) throw Error('Invalid or duplicate observation module');
     moduleIds.add(input.id);
     // Round-trip only JSON data; functions/undefined/nonfinite values are rejected.
-    assertJSON(input);
     const raw = JSON.stringify(input);
     if (raw.length > 65536) throw Error('Observation module exceeds 64 KiB');
     const module = JSON.parse(raw);
+    if (module.id !== input.id || module.version !== input.version) throw Error('Serialized module identity changed');
     result.modules.push({id: module.id, version: module.version});
     for (const collection of ['types', 'metrics', 'fields', 'relationships']) {
       const entries = module[collection] ?? [];

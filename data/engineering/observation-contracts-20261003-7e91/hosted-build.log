@@ -1,0 +1,39 @@
+
+> world-atlas@0.1.0 build:hosted
+> node scripts/build-hosted.mjs
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 40 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                             0.46 kB │ gzip:   0.30 kB
+dist/assets/pixel-gpu-worker-DOOaZKfq.js    2.33 kB
+dist/assets/pixel-worker-DTOGFbAn.js        2.59 kB
+dist/assets/index-bXIaIiI7.css             31.40 kB │ gzip:  10.62 kB
+dist/assets/index-BHcfV7ll.js             354.34 kB │ gzip: 107.80 kB
+✓ built in 925ms
+Static atlas ready: 49625 polygons and 4 dated records.
+Deployment: 262042798 file bytes; tar 262492160 bytes; gzip 186369031 bytes.
+Package reserve: 4194304 bytes; asset reserve: 1048576 bytes (1 MiB = 1048576 bytes).
+Categories:
+  hosting-config: 95 bytes (1 files)
+  review-and-reference: 105380464 bytes (80 files)
+  application: 391126 bytes (5 files)
+  prepared-evidence: 2442574 bytes (89 files)
+  geography: 39967574 bytes (88 files)
+  ownership: 112363748 bytes (238 files)
+  migration-transport: 1172630 bytes (40 files)
+  worker: 324587 bytes (2 files)
+Largest files:
+  dist/client/pixel-audit.json: 14261738 bytes
+  dist/client/geographic-migration-archive.json.gz: 10765139 bytes
+  dist/client/atlas-geography.json: 10525834 bytes
+  dist/client/granularity-audit.json: 10364271 bytes
+  dist/client/ownership-history/candidate-recovery.json: 8663175 bytes
+  dist/client/global-semantic-closure.json.gz: 8647580 bytes
+  dist/client/world-review.json: 7716794 bytes
+  dist/client/semantic-report.json: 6091596 bytes
+  dist/client/ownership-history/location-identity-map.json.gz: 5087769 bytes
+  dist/client/geographic-migration-review.json.gz: 3674892 bytes
+Hosted atlas ready: Worker API, persistent database declarations, media storage and fixed map assets.

@@ -44,6 +44,25 @@ test('registration is additive, versioned, immutable and JSON-only; conflicts fa
   }
 });
 
+test('serialization hooks/getters cannot replace module identity or metadata, and never execute', () => {
+  let executions = 0;
+  const replacement = {id: 'fixture', version: 1};
+  Object.defineProperty(replacement, 'toJSON', {value: () => {executions++; return {id: 'atlas', version: 1};}});
+  assert.throws(() => createObservationRegistry([replacement]), /hidden/);
+  const getter = {id: 'fixture', version: 1};
+  Object.defineProperty(getter, 'fields', {enumerable: true, get() {executions++; return [];}});
+  assert.throws(() => createObservationRegistry([getter]), /Accessors/);
+  const metadata = {};
+  Object.defineProperty(metadata, 'toJSON', {value: () => {executions++; return {evidence_priority: -1000};}});
+  assert.throws(() => normalizeTypedObservation(contact({metadata}), context), /hidden/);
+  assert.equal(executions, 0);
+  for (const invalid of [Array(2), Object.assign([], {note: 'lost'}), Object.assign({}, {[Symbol('lost')]: 1}), {date: new Date()}]) {
+    assert.throws(() => normalizeTypedObservation(contact({metadata: {nested: invalid}}), context));
+  }
+  const parsed = JSON.parse(JSON.stringify(extension));
+  assert.deepEqual(createObservationRegistry([parsed]), createObservationRegistry([extension]));
+});
+
 test('false and literal zero remain sourced; absent, unknown and unresolved are distinct', () => {
   assert.equal(normalizeTypedObservation(contact(), context).value, false);
   assert.equal(normalizeTypedObservation(numeric(), context).value, 0);
@@ -130,6 +149,14 @@ test('direct/derived/reference/estimate/example precedence, explicit unknown and
   assert.throws(() => normalizeTypedObservation({...derived, metadata: {derivation_input_ids: [derived.id]}}, context), /Self-derived/);
   assert.throws(() => normalizeTypedObservation(contact({evidence_priority: -100}), context), /priority/);
   assert.throws(() => resolveTypedObservations([direct, direct], 1050, context), /Duplicate/);
+});
+
+test('directly quoted estimates retain estimate labels and the preserved method-based priority', () => {
+  const sourced = contact({id: 'fixture:z'});
+  const quoted = contact({id: 'fixture:a', method: 'direct', status: 'estimate', source_id: 'fixture:estimate', value: true});
+  const result = resolveTypedObservations([sourced, quoted], 1050, context)[0];
+  assert.equal(result.priority, 0); assert.equal(result.status, 'estimate'); assert.equal(result.evidence.id, quoted.id);
+  assert.equal(resolveTypedObservations([{...quoted, method: 'estimate'}, sourced], 1050, context)[0].evidence.id, sourced.id);
 });
 
 test('shared pure snapshot seam round-trips all retained source, unit and derivation metadata without mutation', () => {
