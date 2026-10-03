@@ -7,22 +7,34 @@
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/60",
   "date_timezone": "UTC",
   "scope": {
-    "geographies": ["Source-era 1901 census district/subdistrict divisions, limited here to Ontario district 97; no boundary proposal"],
-    "attributes": ["historical origin classification counts and source language-variable availability only"],
+    "geographies": [
+      "Source-era 1901 census district/subdistrict divisions, limited here to Ontario district 97; no boundary proposal"
+    ],
+    "attributes": [
+      "historical origin classification counts and source language-variable availability only"
+    ],
     "supported_window": "Population reference moment: midnight 31 March 1901",
     "source_version": "Fourth Census of Canada, 1901, Volume I, Population, published 1902; Table XI"
   },
   "updated_at_utc": "2026-10-03T10:45:00Z",
   "geographic_release": null,
-  "input_paths": ["source-manifest.json", "source-evaluation.md"],
+  "input_paths": [
+    "source-manifest.json",
+    "source-evaluation.md"
+  ],
   "bundle_paths": [],
   "import_receipt_paths": [],
   "readback_paths": [],
-  "coverage_achieved": ["Located and evaluated Table XI, origin counts by subdistrict; retained 15 visually checked example rows and seven source columns."],
-  "source_gaps": ["Volume I contains instructions for mother tongue but no published mother-tongue aggregate table was found; coverage outside the sampled 15 rows and other volumes remains unevaluated."],
+  "coverage_achieved": [
+    "Located and evaluated Table XI, origin counts by subdistrict; retained 15 visually checked example rows and seven source columns.",
+    "The owned packet adds 15 sample rows (seven selected origin columns); no generated deployment data or private source bytes are included."
+  ],
+  "source_gaps": [
+    "Volume I contains instructions for mother tongue but no published mother-tongue aggregate table was found; coverage outside the sampled 15 rows and other volumes remains unevaluated."
+  ],
   "blockers": [],
   "next_action": "Complete packet review, run the issue scope check and submit one focused PR. After exact-head queue merge, verify main, release the claim and continue with the next ready issue.",
-  "pull_request": null,
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/581",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
