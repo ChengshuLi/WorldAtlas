@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "pleiades-v41-provenance-correction",
+  "branch": "research/pleiades-v41-provenance-correction",
+  "base_main_commit": "fb9331c0d020396f28d5720ee5cd302359ee7b8e",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/591",
+  "date_timezone": "UTC",
+  "scope": {
+    "geographies": ["Same 25 purposively selected Iberian Pleiades resources as the preserved original campaign; no geography or location assignment"],
+    "attributes": ["Release provenance, immutable restoration paths, original per-resource byte hashes"],
+    "supported_window": "No new historical interval; existing source assertions remain as published in Pleiades v4.1",
+    "source_version": "Pleiades datasets v4.1, tag refs/v4.1 resolving to commit b6a6790f71c45e4a4ef60fce296c506f28f458bf"
+  },
+  "updated_at_utc": "2026-10-03T16:28:00Z",
+  "geographic_release": null,
+  "input_paths": ["correction.md", "source-manifest.json", "restoration-check.json", "tag-ref-response.json", "invalid-narrative-sha-response.json", "commit-record-summary.json", "claim-receipt.json"],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Confirmed the GitHub v4.1 tag ref resolves directly to commit b6a6790f71c45e4a4ef60fce296c506f28f458bf; the conflicting narrative SHA c4423b89541d752792d84fab5d824c7a2db96a44 returns HTTP 422.",
+    "Fetched all 25 original resources under the immutable commit path. All returned HTTP 200 and matched the original manifest byte lengths and SHA-256 values exactly.",
+    "Added a superseding provenance correction without changing the original research packet; verified the pinned README's CC BY 3.0 statement and contributor-rights caveat."
+  ],
+  "source_gaps": [
+    "The direct tag-ref API response contains no annotated-tag object or tagger timestamp.",
+    "Ancient source attestations, citations, Pleiades date conventions, and historical geographic semantics were not independently re-evaluated."
+  ],
+  "blockers": [],
+  "next_action": "Run the exact-path scope check, submit one focused PR, wait for successful current-head checks, enter the serialized squash-merge queue, verify the merge on fresh main, and release claim 591.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
