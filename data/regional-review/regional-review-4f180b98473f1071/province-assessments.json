@@ -1,0 +1,774 @@
+{
+  "as_of": "2026-10-03",
+  "scope_count": 47,
+  "records": [
+    {
+      "id": "framework:province:comoros:ab8f8eda904c",
+      "name": "Comoros",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "atlas:territory:COM"
+      ],
+      "area_id": "framework:area:comoros:587db8bc8c19",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:comoros:ab8f8eda904c has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:comoros:587db8bc8c19. Singleton parent retains a distinct named island/archipelago or overseas territory child. Evidence documents its spatial/source identity separately from political ownership; small-island completeness remains limited by scale.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:mayotte:fa15b20853d8",
+      "name": "Mayotte",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "atlas:coverage:FRA-4602"
+      ],
+      "area_id": "framework:area:mayotte:3cfd222e9e7c",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:mayotte:fa15b20853d8 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mayotte:3cfd222e9e7c. Singleton parent retains a distinct named island/archipelago or overseas territory child. Evidence documents its spatial/source identity separately from political ownership; small-island completeness remains limited by scale.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:la-reunion:31f4268e6f50",
+      "name": "La Réunion",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "atlas:coverage:FRA-4601"
+      ],
+      "area_id": "framework:area:reunion:59f4b2b507fd",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:la-reunion:31f4268e6f50 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:reunion:59f4b2b507fd. Singleton parent retains a distinct named island/archipelago or overseas territory child. Evidence documents its spatial/source identity separately from political ownership; small-island completeness remains limited by scale.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:iles-eparses-de-l-ocean-indien:1900b2fa0555",
+      "name": "Iles Eparses de l'ocean Indien",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "atlas:coverage:ATF-5919"
+      ],
+      "area_id": "framework:area:mozambique-channel-is:3a4f67a407f4",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:iles-eparses-de-l-ocean-indien:1900b2fa0555 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mozambique-channel-is:3a4f67a407f4. Singleton parent retains a distinct named island/archipelago or overseas territory child. Evidence documents its spatial/source identity separately from political ownership; small-island completeness remains limited by scale.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:atsimo-andrefana:1cc32d2a5ce6",
+      "name": "Atsimo-Andrefana",
+      "expected_scoped_location_descendants": 9,
+      "observed_scoped_location_descendants": 9,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B36331574429859",
+        "gb:MDG:ADM2:10022922B39697778193382",
+        "gb:MDG:ADM2:10022922B49716742274905",
+        "gb:MDG:ADM2:10022922B63491232053463",
+        "gb:MDG:ADM2:10022922B67140219559440",
+        "gb:MDG:ADM2:10022922B72547257848133",
+        "gb:MDG:ADM2:10022922B75767771564463",
+        "gb:MDG:ADM2:10022922B93003724204974",
+        "gb:MDG:ADM2:10022922B9355726550011"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:atsimo-andrefana:1cc32d2a5ce6 has 9 assigned location descendant(s) in this issue; expected descendant count 9; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:menabe:43f9e06465ae",
+      "name": "Menabe",
+      "expected_scoped_location_descendants": 5,
+      "observed_scoped_location_descendants": 5,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B2580716977723",
+        "gb:MDG:ADM2:10022922B50417492685621",
+        "gb:MDG:ADM2:10022922B70120442307447",
+        "gb:MDG:ADM2:10022922B70385192089273",
+        "gb:MDG:ADM2:10022922B91714644312966"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:menabe:43f9e06465ae has 5 assigned location descendant(s) in this issue; expected descendant count 5; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:melaky:4e89b88e3f8a",
+      "name": "Melaky",
+      "expected_scoped_location_descendants": 5,
+      "observed_scoped_location_descendants": 5,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B27026898293410",
+        "gb:MDG:ADM2:10022922B40533998311047",
+        "gb:MDG:ADM2:10022922B48021466276127",
+        "gb:MDG:ADM2:10022922B59098628147577",
+        "gb:MDG:ADM2:10022922B83460232588272"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:melaky:4e89b88e3f8a has 5 assigned location descendant(s) in this issue; expected descendant count 5; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:androy:3b99c242c388",
+      "name": "Androy",
+      "expected_scoped_location_descendants": 4,
+      "observed_scoped_location_descendants": 4,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B3330352702203",
+        "gb:MDG:ADM2:10022922B63714971659336",
+        "gb:MDG:ADM2:10022922B6580820782603",
+        "gb:MDG:ADM2:10022922B95964642483948"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:androy:3b99c242c388 has 4 assigned location descendant(s) in this issue; expected descendant count 4; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:bongolava:f4edf4fb171f",
+      "name": "Bongolava",
+      "expected_scoped_location_descendants": 2,
+      "observed_scoped_location_descendants": 2,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B23923498940873",
+        "gb:MDG:ADM2:10022922B70813515121555"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:bongolava:f4edf4fb171f has 2 assigned location descendant(s) in this issue; expected descendant count 2; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:boeny:7ec37bad3e1e",
+      "name": "Boeny",
+      "expected_scoped_location_descendants": 6,
+      "observed_scoped_location_descendants": 6,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B29824664852903",
+        "gb:MDG:ADM2:10022922B34339999190032",
+        "gb:MDG:ADM2:10022922B51504984909978",
+        "gb:MDG:ADM2:10022922B60996293868186",
+        "gb:MDG:ADM2:10022922B7387017022835",
+        "gb:MDG:ADM2:10022922B91378939255033"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:boeny:7ec37bad3e1e has 6 assigned location descendant(s) in this issue; expected descendant count 6; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:anosy:7da4337b48c4",
+      "name": "Anosy",
+      "expected_scoped_location_descendants": 3,
+      "observed_scoped_location_descendants": 3,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B59412081262724",
+        "gb:MDG:ADM2:10022922B61088153240222",
+        "gb:MDG:ADM2:10022922B85658862424992"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:anosy:7da4337b48c4 has 3 assigned location descendant(s) in this issue; expected descendant count 3; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:ihorombe:2affd18821d8",
+      "name": "Ihorombe",
+      "expected_scoped_location_descendants": 3,
+      "observed_scoped_location_descendants": 3,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B30377745880071",
+        "gb:MDG:ADM2:10022922B57896428715958",
+        "gb:MDG:ADM2:10022922B7074189327891"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:ihorombe:2affd18821d8 has 3 assigned location descendant(s) in this issue; expected descendant count 3; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:betsiboka:e18d82279c0a",
+      "name": "Betsiboka",
+      "expected_scoped_location_descendants": 3,
+      "observed_scoped_location_descendants": 3,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B38821373259374",
+        "gb:MDG:ADM2:10022922B61824869015313",
+        "gb:MDG:ADM2:10022922B96360954496738"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:betsiboka:e18d82279c0a has 3 assigned location descendant(s) in this issue; expected descendant count 3; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:itasy:0663218bfff1",
+      "name": "Itasy",
+      "expected_scoped_location_descendants": 3,
+      "observed_scoped_location_descendants": 3,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B59328070281510",
+        "gb:MDG:ADM2:10022922B79563685419763",
+        "gb:MDG:ADM2:10022922B99194691228489"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:itasy:0663218bfff1 has 3 assigned location descendant(s) in this issue; expected descendant count 3; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:matsiatra-ambony:09ff4a1e88d4",
+      "name": "Matsiatra Ambony",
+      "expected_scoped_location_descendants": 7,
+      "observed_scoped_location_descendants": 7,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B21478747844721",
+        "gb:MDG:ADM2:10022922B29889196912325",
+        "gb:MDG:ADM2:10022922B34392392155891",
+        "gb:MDG:ADM2:10022922B39439372576611",
+        "gb:MDG:ADM2:10022922B72540367204165",
+        "gb:MDG:ADM2:10022922B7475622417535",
+        "gb:MDG:ADM2:10022922B85703559853082"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:matsiatra-ambony:09ff4a1e88d4 has 7 assigned location descendant(s) in this issue; expected descendant count 7; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:vakinankaratra:957a00091589",
+      "name": "Vakinankaratra",
+      "expected_scoped_location_descendants": 7,
+      "observed_scoped_location_descendants": 7,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B38771191417556",
+        "gb:MDG:ADM2:10022922B65379850816186",
+        "gb:MDG:ADM2:10022922B69082959012584",
+        "gb:MDG:ADM2:10022922B69129581267436",
+        "gb:MDG:ADM2:10022922B74688195218658",
+        "gb:MDG:ADM2:10022922B80317071360034",
+        "gb:MDG:ADM2:10022922B90393204210047"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:vakinankaratra:957a00091589 has 7 assigned location descendant(s) in this issue; expected descendant count 7; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:amoron-i-mania:c66930176e6b",
+      "name": "Amoron'i Mania",
+      "expected_scoped_location_descendants": 4,
+      "observed_scoped_location_descendants": 4,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B11162683268422",
+        "gb:MDG:ADM2:10022922B13687813160362",
+        "gb:MDG:ADM2:10022922B23434626058692",
+        "gb:MDG:ADM2:10022922B47245353926014"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:amoron-i-mania:c66930176e6b has 4 assigned location descendant(s) in this issue; expected descendant count 4; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:atsimo-atsinanana:724c40d9292e",
+      "name": "Atsimo-Atsinanana",
+      "expected_scoped_location_descendants": 6,
+      "observed_scoped_location_descendants": 6,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B11101019287712",
+        "gb:MDG:ADM2:10022922B72475763343132",
+        "gb:MDG:ADM2:10022922B74242760889111",
+        "gb:MDG:ADM2:10022922B75046296685916",
+        "gb:MDG:ADM2:10022922B81120329184352",
+        "gb:MDG:ADM2:10022922B86038713071830"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:atsimo-atsinanana:724c40d9292e has 6 assigned location descendant(s) in this issue; expected descendant count 6; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:analamanga:d75aa3d1c6b6",
+      "name": "Analamanga",
+      "expected_scoped_location_descendants": 13,
+      "observed_scoped_location_descendants": 13,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B11040894453097",
+        "gb:MDG:ADM2:10022922B1306198900476",
+        "gb:MDG:ADM2:10022922B36895306051586",
+        "gb:MDG:ADM2:10022922B42847936410668",
+        "gb:MDG:ADM2:10022922B50774823120221",
+        "gb:MDG:ADM2:10022922B52736847594449",
+        "gb:MDG:ADM2:10022922B53755400100934",
+        "gb:MDG:ADM2:10022922B59270450060951",
+        "gb:MDG:ADM2:10022922B64856352127888",
+        "gb:MDG:ADM2:10022922B82805843876956",
+        "gb:MDG:ADM2:10022922B83786714905046",
+        "gb:MDG:ADM2:10022922B97289291498871",
+        "gb:MDG:ADM2:10022922B99940912082943"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:analamanga:d75aa3d1c6b6 has 13 assigned location descendant(s) in this issue; expected descendant count 13; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:vatovavy-fitovinany:fd10ec52071e",
+      "name": "Vatovavy-Fitovinany",
+      "expected_scoped_location_descendants": 5,
+      "observed_scoped_location_descendants": 5,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B12403701465046",
+        "gb:MDG:ADM2:10022922B29911348985828",
+        "gb:MDG:ADM2:10022922B31790128040616",
+        "gb:MDG:ADM2:10022922B52512193010711",
+        "gb:MDG:ADM2:10022922B6018255004858"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:vatovavy-fitovinany:fd10ec52071e has 5 assigned location descendant(s) in this issue; expected descendant count 5; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:sofia:ba14dfc4c2b8",
+      "name": "Sofia",
+      "expected_scoped_location_descendants": 7,
+      "observed_scoped_location_descendants": 7,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B13687974105922",
+        "gb:MDG:ADM2:10022922B21608854890468",
+        "gb:MDG:ADM2:10022922B32579750162608",
+        "gb:MDG:ADM2:10022922B54557741887580",
+        "gb:MDG:ADM2:10022922B54995100782210",
+        "gb:MDG:ADM2:10022922B55197674782137",
+        "gb:MDG:ADM2:10022922B56468572037030"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:sofia:ba14dfc4c2b8 has 7 assigned location descendant(s) in this issue; expected descendant count 7; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:alaotra-mangoro:8985a17e55c9",
+      "name": "Alaotra-Mangoro",
+      "expected_scoped_location_descendants": 5,
+      "observed_scoped_location_descendants": 5,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B15285270155057",
+        "gb:MDG:ADM2:10022922B56031688474611",
+        "gb:MDG:ADM2:10022922B80147144228565",
+        "gb:MDG:ADM2:10022922B82658288648411",
+        "gb:MDG:ADM2:10022922B97539486376385"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:alaotra-mangoro:8985a17e55c9 has 5 assigned location descendant(s) in this issue; expected descendant count 5; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:atsinanana:6c35e3949712",
+      "name": "Atsinanana",
+      "expected_scoped_location_descendants": 7,
+      "observed_scoped_location_descendants": 7,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B10629043557873",
+        "gb:MDG:ADM2:10022922B31178585124685",
+        "gb:MDG:ADM2:10022922B32937301443957",
+        "gb:MDG:ADM2:10022922B42807663031303",
+        "gb:MDG:ADM2:10022922B55539380638871",
+        "gb:MDG:ADM2:10022922B63046975451138",
+        "gb:MDG:ADM2:10022922B71585303896889"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:atsinanana:6c35e3949712 has 7 assigned location descendant(s) in this issue; expected descendant count 7; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:diana:5164c5025b26",
+      "name": "Diana",
+      "expected_scoped_location_descendants": 5,
+      "observed_scoped_location_descendants": 5,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B10293113814705",
+        "gb:MDG:ADM2:10022922B22775533170221",
+        "gb:MDG:ADM2:10022922B52521872200932",
+        "gb:MDG:ADM2:10022922B66036521727834",
+        "gb:MDG:ADM2:10022922B77517626674469"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:diana:5164c5025b26 has 5 assigned location descendant(s) in this issue; expected descendant count 5; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:analanjirofo:4c0f91bb5d03",
+      "name": "Analanjirofo",
+      "expected_scoped_location_descendants": 6,
+      "observed_scoped_location_descendants": 6,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B25342620887316",
+        "gb:MDG:ADM2:10022922B54073545298219",
+        "gb:MDG:ADM2:10022922B56427545477040",
+        "gb:MDG:ADM2:10022922B77596397547877",
+        "gb:MDG:ADM2:10022922B79548799707119",
+        "gb:MDG:ADM2:10022922B92224420422748"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:analanjirofo:4c0f91bb5d03 has 6 assigned location descendant(s) in this issue; expected descendant count 6; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:sava:05bd80cd59a9",
+      "name": "Sava",
+      "expected_scoped_location_descendants": 4,
+      "observed_scoped_location_descendants": 4,
+      "location_ids": [
+        "gb:MDG:ADM2:10022922B15279482214677",
+        "gb:MDG:ADM2:10022922B16213196407560",
+        "gb:MDG:ADM2:10022922B40357207342555",
+        "gb:MDG:ADM2:10022922B78580830473532"
+      ],
+      "area_id": "framework:area:madagascar:319396eea00d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:sava:05bd80cd59a9 has 4 assigned location descendant(s) in this issue; expected descendant count 4; area=framework:area:madagascar:319396eea00d. Madagascar current parent partition has 22 regions aligned to 2017 geoBoundaries ADM1, while OCHA COD-AB reviewed in 2026 and valid from 2018 reports 24 ADM1 regions. Its unmatched names include Ambatosoa, Fitovinany and Vatovavy; current has Vatovavy-Fitovinany and Matsiatra Ambony vs source Haute Matsiatra. Do not alter the shared parent partition from labels or tier counts alone.",
+      "uncertainties": [
+        "Requires a bounded, country-wide Madagascar administrative crosswalk/restoration follow-up before parent and child district footprints can be reconciled, including all four unmatched region labels, changed COD-AB ADM2 geometries and the Antanimora Atsimo unit."
+      ]
+    },
+    {
+      "id": "framework:province:agalega:65fe675f0572",
+      "name": "Agaléga",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "atlas:coverage:MUS-5180"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:agalega:65fe675f0572 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Two scoped, spatially disjoint children share this province label but derive from separate Natural Earth and OSM/Wambacher administrative records. Shared naming does not prove duplication or shared province footprint.",
+      "uncertainties": [
+        "Official island-component crosswalk must determine whether both records are complementary, misassigned or an unaccounted source split."
+      ]
+    },
+    {
+      "id": "framework:province:agalega:acc988d45a6a",
+      "name": "Agaléga",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B83452679821580"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:agalega:acc988d45a6a has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": [
+        "Official island/reef-scale footprint crosswalk is needed for St Brandon/Agaléga source non-detections and the two separate Agaléga source records."
+      ]
+    },
+    {
+      "id": "framework:province:black-river:489c728e4bf8",
+      "name": "Black River",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B99203907341133"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:black-river:489c728e4bf8 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:savanne:b695523401c5",
+      "name": "Savanne",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B93866494923153"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:savanne:b695523401c5 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:plaines-wilhems:7acf9d2b6455",
+      "name": "Plaines Wilhems",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B21568199301359"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:plaines-wilhems:7acf9d2b6455 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:port-louis:0e2cdd4114d4",
+      "name": "Port Louis",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B53255720811613"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:port-louis:0e2cdd4114d4 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:pamplemousses:bfae589e0c33",
+      "name": "Pamplemousses",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B91551715822340"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:pamplemousses:bfae589e0c33 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:moka:5e53f0a17b1f",
+      "name": "Moka",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B64352145242214"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:moka:5e53f0a17b1f has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:grand-port:79b8a188be70",
+      "name": "Grand Port",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B660734165567"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:grand-port:79b8a188be70 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:riviere-du-rempart:64cd705cd522",
+      "name": "Rivière du Rempart",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B93227578092779"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:riviere-du-rempart:64cd705cd522 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:flacq:58f96c14996e",
+      "name": "Flacq",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B3325932502431"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:flacq:58f96c14996e has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:st-brandon:24ac7adfd8b8",
+      "name": "St. Brandon",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B12885462064369"
+      ],
+      "area_id": "framework:area:mauritius:8cfda2299628",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:st-brandon:24ac7adfd8b8 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:mauritius:8cfda2299628. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": [
+        "Official island/reef-scale footprint crosswalk is needed for St Brandon/Agaléga source non-detections and the two separate Agaléga source records."
+      ]
+    },
+    {
+      "id": "framework:province:rodrigues:5771978b58f2",
+      "name": "Rodrigues",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:MUS:ADM1:65221844B37057547030311"
+      ],
+      "area_id": "framework:area:rodrigues:23d7a7154873",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:rodrigues:5771978b58f2 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:rodrigues:23d7a7154873. Single source/current child is an ADM1 record from a mixed layer described by its producer as “Districts and Outer Islands of Mauritius”; census distinguishes nine Mauritius Island districts, Rodrigues island regions, and outlying islands.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:outer-isla:a6cf2e7c6ab6",
+      "name": "Outer Isla",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:SYC:ADM2:34574756B54247629098598"
+      ],
+      "area_id": "framework:area:seychelles:322b66318f1d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:outer-isla:a6cf2e7c6ab6 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:seychelles:322b66318f1d. All assigned child geometries are within the scoped Seychelles region set; region names and official island/district tier confirmed against geoBoundaries 2020 and NBS-provenance OCHA 2019, with that reference age limitation.",
+      "uncertainties": [
+        "Current NBS administrative region crosswalk needed for source/current label mismatch on the scoped child feature(s).",
+        "Other Islands generalization needs official island list/scale review; current source component counts differ substantially."
+      ]
+    },
+    {
+      "id": "framework:province:bel-air:10495555fee6",
+      "name": "Bel Air",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:SYC:ADM2:34574756B27990728867894"
+      ],
+      "area_id": "framework:area:seychelles:322b66318f1d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:bel-air:10495555fee6 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:seychelles:322b66318f1d. All assigned child geometries are within the scoped Seychelles region set; region names and official island/district tier confirmed against geoBoundaries 2020 and NBS-provenance OCHA 2019, with that reference age limitation.",
+      "uncertainties": [
+        "Current NBS administrative region crosswalk needed for source/current label mismatch on the scoped child feature(s)."
+      ]
+    },
+    {
+      "id": "framework:province:north-mahe:2e5a35560c80",
+      "name": "North Mahe",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:SYC:ADM2:34574756B41664711494427"
+      ],
+      "area_id": "framework:area:seychelles:322b66318f1d",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:north-mahe:2e5a35560c80 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:seychelles:322b66318f1d. All assigned child geometries are within the scoped Seychelles region set; region names and official island/district tier confirmed against geoBoundaries 2020 and NBS-provenance OCHA 2019, with that reference age limitation.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:central-2-mahe:5d048c28461d",
+      "name": "Central 2 Mahe",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:SYC:ADM2:34574756B38092183622343"
+      ],
+      "area_id": "framework:area:seychelles:322b66318f1d",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:central-2-mahe:5d048c28461d has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:seychelles:322b66318f1d. All assigned child geometries are within the scoped Seychelles region set; region names and official island/district tier confirmed against geoBoundaries 2020 and NBS-provenance OCHA 2019, with that reference age limitation.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:west-mahe:11db86531499",
+      "name": "West Mahe",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:SYC:ADM2:34574756B14018612202061"
+      ],
+      "area_id": "framework:area:seychelles:322b66318f1d",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:west-mahe:11db86531499 has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:seychelles:322b66318f1d. All assigned child geometries are within the scoped Seychelles region set; region names and official island/district tier confirmed against geoBoundaries 2020 and NBS-provenance OCHA 2019, with that reference age limitation.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:east-mahe:51dca9c9723c",
+      "name": "East Mahe",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:SYC:ADM2:34574756B49819614716360"
+      ],
+      "area_id": "framework:area:seychelles:322b66318f1d",
+      "assessment_status": "justified",
+      "assessment": "Pinned parent framework:province:east-mahe:51dca9c9723c has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:seychelles:322b66318f1d. All assigned child geometries are within the scoped Seychelles region set; region names and official island/district tier confirmed against geoBoundaries 2020 and NBS-provenance OCHA 2019, with that reference age limitation.",
+      "uncertainties": []
+    },
+    {
+      "id": "framework:province:baie-saint:05a167f8ef7e",
+      "name": "Baie Saint",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:SYC:ADM2:34574756B43978553392406"
+      ],
+      "area_id": "framework:area:seychelles:322b66318f1d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:baie-saint:05a167f8ef7e has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:seychelles:322b66318f1d. All assigned child geometries are within the scoped Seychelles region set; region names and official island/district tier confirmed against geoBoundaries 2020 and NBS-provenance OCHA 2019, with that reference age limitation.",
+      "uncertainties": [
+        "Current NBS administrative region crosswalk needed for source/current label mismatch on the scoped child feature(s)."
+      ]
+    },
+    {
+      "id": "framework:province:la-digue-a:fe6297df956d",
+      "name": "La Digue a",
+      "expected_scoped_location_descendants": 1,
+      "observed_scoped_location_descendants": 1,
+      "location_ids": [
+        "gb:SYC:ADM2:34574756B18865708954128"
+      ],
+      "area_id": "framework:area:seychelles:322b66318f1d",
+      "assessment_status": "insufficient-evidence",
+      "assessment": "Pinned parent framework:province:la-digue-a:fe6297df956d has 1 assigned location descendant(s) in this issue; expected descendant count 1; area=framework:area:seychelles:322b66318f1d. All assigned child geometries are within the scoped Seychelles region set; region names and official island/district tier confirmed against geoBoundaries 2020 and NBS-provenance OCHA 2019, with that reference age limitation.",
+      "uncertainties": [
+        "Current NBS administrative region crosswalk needed for source/current label mismatch on the scoped child feature(s)."
+      ]
+    }
+  ],
+  "method": "Audited every province ID in issue scope against every assigned child location. Parent footprints derive bottom-up from locations; this file contains no proposed/shared parent geometry edits."
+}
