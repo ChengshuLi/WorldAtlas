@@ -7,15 +7,26 @@
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/62",
   "date_timezone": "UTC",
   "scope": {
-    "geographies": ["At most 10 Iberian-area Cliopatria source records; source territory query window only, not a boundary proposal"],
-    "attributes": ["ownership source provenance and meaning only"],
+    "geographies": [
+      "At most 10 Iberian-area Cliopatria source records; source territory query window only, not a boundary proposal"
+    ],
+    "attributes": [
+      "ownership source provenance and meaning only"
+    ],
     "supported_window": "1800–1820, retaining source-supported sparse inclusive intervals",
     "source_version": "v0.2.0-duplicate, exact pinned archive SHA-256 d01ae3a20d358cc5d54f69d9d725d390767d9c8759ac89ad6f90c58d106f3370",
-    "sources": ["Bennett et al. 2025 Cliopatria article/repository; up to four Spain-region citations from article Table 1"]
+    "sources": [
+      "Bennett et al. 2025 Cliopatria article/repository; up to four Spain-region citations from article Table 1"
+    ]
   },
-  "updated_at_utc": "2026-10-03T10:08:00Z",
+  "updated_at_utc": "2026-10-03T10:16:00Z",
   "geographic_release": null,
-  "input_paths": ["data/cliopatria/index.json", "data/cliopatria/part-*.json", "data/source-inventory.json", "docs/DATA_SOURCES.md"],
+  "input_paths": [
+    "data/cliopatria/index.json",
+    "data/cliopatria/part-*.json",
+    "data/source-inventory.json",
+    "docs/DATA_SOURCES.md"
+  ],
   "bundle_paths": [],
   "import_receipt_paths": [],
   "readback_paths": [],
@@ -29,8 +40,8 @@
     "No feature-level border uncertainty, competing claims, or sovereignty/control distinction is encoded."
   ],
   "blockers": [],
-  "next_action": "Run JSON and lane scope checks, submit one focused PR. Wait for exact-head CI, renew claim before serialized queue, verify accepted merge in fresh origin/main, release the issue claim and continue to next eligible issue.",
-  "pull_request": null,
+  "next_action": "Wait for exact-head scope check. If main advances, rebase and rerun checks. Renew issue claim before requesting serialized merge. Verify accepted merge on fresh origin/main, release claim and continue.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/574",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
