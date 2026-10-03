@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "issue": 594,
+  "assigned_ids": [
+    "atlas:physical:13555fd3cb230149ca55",
+    "atlas:physical:3b59e885effd69f1222e",
+    "atlas:physical:75e371c0a1abf3e8ed1c",
+    "atlas:physical:b777739e348ded01aa2a",
+    "atlas:physical:c76d054c56a021341333",
+    "atlas:physical:d0122fb389f7245bd5e8",
+    "atlas:physical:d66136b1837cb5240030",
+    "atlas:physical:e1658818a26c4d0055fa",
+    "atlas:physical:f24b672de863caf54859"
+  ],
+  "source_records": [
+    {
+      "id": "geoboundaries-BOL-ADM2-2015",
+      "title": "geoBoundaries gbOpen Bolivia ADM2",
+      "publisher_source_declared": "GeoBolivia, described by geoBoundaries as derived from ADM3 layer",
+      "boundary_vintage": "2015",
+      "source_update_date": "Thu Jan 19 07:31:04 2023",
+      "build_date": "Dec 12, 2023",
+      "admin_role": "Province, as named in pinned issue metadata; shapeType ADM2. Canonical role metadata is blank.",
+      "unit_count": 110,
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/BOL/ADM2/geoBoundaries-BOL-ADM2.geojson",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/BOL/ADM2/geoBoundaries-BOL-ADM2-metaData.json",
+      "source_record_url": "https://geo.gob.bo/geonetwork/srv/spa/catalog.search#/metadata/aeeb85a9-23df-48d4-a4e5-dd19e8b206db",
+      "license": "Public Domain; Public Domain; \"free use and access to information\"",
+      "retained_metadata": {
+        "path": "sources/geoboundaries-BOL-ADM2-metadata.json",
+        "bytes": 961,
+        "sha256": "c2812d930bdd2aa54ed0fea4d5917156e8fa612fe411442cba90691b5b9e5e94"
+      },
+      "retained_data": {
+        "path": "sources/geoboundaries-BOL-ADM2-2015.geojson.gz",
+        "compressed_bytes": 8035896,
+        "compressed_sha256": "1df8ea802edec3cfe578bb3503437cee969fd8fbc785116ce84439b9a2bd6f96",
+        "uncompressed_bytes": 22473600,
+        "uncompressed_sha256": "33a11ff32d935ad24f2e412a09ff383cbab2c63daff6b21de905dd3953ccac8c"
+      },
+      "access_note": "The official GeoBolivia catalog record endpoint returned HTTP 403 in this run. Retained geoBoundaries metadata identifies the official source, vintage, public-domain terms, declared 110 ADM2 units and 2023 build/update. Do not treat the unverified catalog as an independent row-level crosswalk.",
+      "restoration": "Restore the pinned canonical URL and verify the raw SHA-256. Query GeoBolivia catalog record when reachable for original method/attribution and version."
+    },
+    {
+      "id": "resolve-ecoregions-2017",
+      "title": "RESOLVE Ecoregions and Biomes",
+      "publisher": " RESOLVE, Esri",
+      "item_url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+      "feature_service_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer",
+      "layer_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0",
+      "source_vintage": "2017",
+      "layer_data_last_edit_utc": "2022-01-27T07:53:44.237Z",
+      "item_created_utc": "2021-06-03T00:37:51Z",
+      "item_modified_utc": "2026-05-28T22:41:52Z",
+      "license": "CC BY 4.0, as declared both in ArcGIS item licenseInfo and the feature-level LICENSE field",
+      "feature_set": "Seven named Bolivian-intersecting ecoregions selected by ECO_ID values in the current feature source mapping. REST query returns original full global ecoregion polygons, not clipped province shapes.",
+      "item_metadata": {
+        "path": "sources/resolve-arcgis-item-metadata.json",
+        "bytes": 8638,
+        "sha256": "5ac94f88d5b6d75e7e5619a05fc0cdcce803906004fbd7648f60cd9dfd3a8b85"
+      },
+      "service_metadata": {
+        "path": "sources/resolve-feature-service-metadata.json",
+        "bytes": 3399,
+        "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15"
+      },
+      "layer_metadata": {
+        "path": "sources/resolve-layer0-metadata.json",
+        "bytes": 25682,
+        "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3"
+      },
+      "retained_features": {
+        "path": "sources/resolve-bolivia-ecoregions-7.geojson.gz",
+        "compressed_bytes": 494189,
+        "compressed_sha256": "1beba7fa4d223cc776702e5b85d342234d1992016184d8c7fce4e05663e563ae",
+        "uncompressed_bytes": 1188735,
+        "uncompressed_sha256": "295be58007007f355f0a4a2c56cc64961c54390452e56ef82f808c27d905e10d"
+      },
+      "query": "FeatureServer/0/query; exact where ECO_NAME IN (...) list and outFields FID,ECO_NAME,BIOME_NAME,REALM,ECO_BIOME_,NNH,ECO_ID,LICENSE; returnGeometry=true,outSR=4326,f=geojson. Exact URL in query receipt.",
+      "source_suitability": "Explicitly ecological: ArcGIS item says ecoregions use natural rather than political boundaries. Suitable to identify physical ecoregions, not administrative provinces or sovereign ownership.",
+      "restoration": "Run the retained REST query or export from the pinned layer; retain original query response and check CC BY attribution."
+    }
+  ],
+  "preservation": "All retained raw source bytes stay in the merged parent #490 packet and are only read by this packet. This packet does not duplicate or alter them. Exact hashes, sizes, attribution/licenses, dates, access limits and lawful restoration instructions remain tied to the parent source registry.",
+  "role_evidence": "RESOLVE layer metadata and feature properties explicitly identify natural/ecological ecoregions. Its licensing is CC BY 4.0 with attribution. The Bolivia ADM2 2015 source is described as Province in geoBoundaries metadata, while its `canonical role` is blank; its source update/build dates are 2023 and the source license declares Public Domain/free access. The official GeoBolivia metadata-record endpoint returned HTTP 403 in the prior packet; the 2015/2023 source vintage is not asserted current.",
+  "restoration_for_unavailable_authority": "If current Bolivian administrative status or province boundaries are needed to decide tier/parent semantics, retry the GeoBolivia catalog only when the access path changes, or obtain an authorized official GeoBolivia/INE/Census export and accompanying license/version metadata. Do not treat this ecological partition as an administrative crosswalk."
+}

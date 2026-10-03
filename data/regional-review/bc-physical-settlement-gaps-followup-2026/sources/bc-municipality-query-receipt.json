@@ -1,0 +1,19 @@
+{
+  "source": "British Columbia Municipalities - Legally Defined Administrative Areas",
+  "catalogue": "https://catalogue.data.gov.bc.ca/dataset/municipalities-legally-defined-administrative-areas-of-bc",
+  "license": "Open Government Licence - British Columbia",
+  "catalogue_metadata_modified": "2026-08-05T23:37:26.142220",
+  "service_url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP/ows",
+  "capabilities_file": "bc-municipalities-wfs-capabilities-20261003.xml",
+  "query_date_utc": "2026-10-03",
+  "protocol": "WFS 2.0.0 GetFeature, CRS84 WGS84 bounding box from exact current unit extent, JSON output, count 1000; exact polygon intersects are checked locally in EPSG:3347.",
+  "responses": [
+    {"location_id":"atlas:physical:CAN-173:BRC","bbox_wgs84":[-139.0522,59.18482,-136.8095105272844,60.0],"candidate_features":0,"response_file":"bc-municipalities-173-bbox-20261003.geojson","response_time":"2026-10-03T19:14:50.601Z","bytes":147,"sha256":"db246259b2fb2369fd471ad07c1f658fea9eb64739e189962e0fc749b0f14f64"},
+    {"location_id":"atlas:physical:CAN-177:BRC","bbox_wgs84":[-133.63845,58.90547,-131.3323,60.00000699652852],"candidate_features":0,"response_file":"bc-municipalities-177-bbox-20261003.geojson","response_time":"2026-10-03T19:14:50.750Z","bytes":147,"sha256":"e17e2a92035c18f29304cb99396ebb2e6fbb9a5982ed700f16c33c8d3f1c21d0"},
+    {"location_id":"atlas:physical:CAN-178:BRC","bbox_wgs84":[-131.93811,59.78328,-129.85145,60.0001],"candidate_features":0,"response_file":"bc-municipalities-178-bbox-20261003.geojson","response_time":"2026-10-03T19:14:50.745Z","bytes":147,"sha256":"4e5e152b7b62efa0286919a61c22b57e2d044b4052e2a50848c961ce8af43cd5"},
+    {"location_id":"atlas:physical:CAN-195:BRC","bbox_wgs84":[-124.9231,49.0025,-123.5824,50.1471],"candidate_features":9,"response_file":"bc-municipalities-195-bbox-20261003.geojson","response_time":"2026-10-03T19:14:50.629Z","bytes":350923,"sha256":"800890443774e266bac0d4b1fb9b44a14468a2dda80279893bc7b48c9425e3dd"},
+    {"location_id":"atlas:physical:CAN-201:BRC","bbox_wgs84":[-127.87051,54.03263,-126.95088851290241,55.04882],"candidate_features":2,"response_file":"bc-municipalities-201-bbox-20261003.geojson","response_time":"2026-10-03T19:14:50.603Z","bytes":27415,"sha256":"428cdd72ee4d511283815734e56f650701be01296dfb3dde0e0062ed5266c743"},
+    {"location_id":"atlas:physical:CAN-207:BRC","bbox_wgs84":[-120.59837,50.638401305513156,-115.28454510471033,54.59115],"candidate_features":14,"response_file":"bc-municipalities-207-bbox-20261003.geojson","response_time":"2026-10-03T19:14:50.756Z","bytes":164409,"sha256":"1eccfed7e0c1b854f5f10d47130e568ffb5b67009dcbf578543c40ab9cf12d80"}
+  ],
+  "exact_result": "No municipal polygon intersects any of the six complete current physical-unit footprints. BBox candidates are not intersections. Municipal boundaries do not cover unincorporated settlement evidence."
+}

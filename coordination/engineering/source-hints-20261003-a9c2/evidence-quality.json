@@ -1,0 +1,513 @@
+{
+  "version": 1,
+  "issue": 554,
+  "lane": "engineering",
+  "worker_id": "engineering-continuous-a9c25e14-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "58a4f380c99bb2bcbae5df021acb1881245cbba9",
+    "files": [
+      {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "bytes": 18839,
+        "sha256": "f13cb0b2a023c5bce5abdb3223f99148685961d4608b4acb81c3c2ea800d680e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/reproduction.tar.gz",
+        "bytes": 15315,
+        "sha256": "441ab07f1697287527b659f36e968d3596e9abdd02fb55347fcecd8fc2127ae0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 7090,
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 10007,
+        "sha256": "6030e2d0eb3ce26b6d762f425c0c1684cb22996d4df4d1ad726c3e517e1432db",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/source-hints-20261003-a9c2.json",
+      "bytes": 2698,
+      "sha256": "70b18b0121114abe84843ffe791006b0b146a03c60d8fb77ca3a0f66d4e7851c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/README.md",
+      "bytes": 5327,
+      "sha256": "09e2884a1c5ebaf8fac057f15770053a7b3b9f2a7047ef757befd7b916073372",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/apply-fresh-read-tests.log",
+      "bytes": 901,
+      "sha256": "0189d6dc5910e1feaf492eefeddc28055644a631ab667418619872163342532b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/apply-guard-tests-before-order-fix.log",
+      "bytes": 711,
+      "sha256": "d8d571e0fe131a2359458cb43ab4243f83050d038a6e228e686b6615d99fa127",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/apply-guard-tests.log",
+      "bytes": 900,
+      "sha256": "dcd567e21d4f10df81eeb10472e6892e4dd4b8a751fdb195770e62a283524b65",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/apply-initial-fixture-failure.log",
+      "bytes": 2110,
+      "sha256": "bd5afe982691a2df587141d7962256104470e3046bbd5ed0424732ca921015ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/apply-initial-restricted-execution.log",
+      "bytes": 311,
+      "sha256": "66a8bfc511323514f43f2e78498ec68c2b6d5bf75832ee7cb9e87eac3b12bcfd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/audit-summary.json",
+      "bytes": 5794,
+      "sha256": "eddd53db5264f38b3cac4a2fd7f0dd40d2182f7fbcb2070db9ef04b7859b2dfe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/claim-receipt.json",
+      "bytes": 830,
+      "sha256": "3a88e4d9246f618eb11d35c7d3d04ecf735cf11bd91c6e85c738b9ce154c6e7c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/final-readback-audit.json",
+      "bytes": 411,
+      "sha256": "aa07a1f9da1bcf766ef8d16a80a4c23709cd5121a182d12582c3e262a496287a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/github-apply-readback.json",
+      "bytes": 2607,
+      "sha256": "a097f69cd6c04f10301e1646c3f86f01241cffc0224253ea36d8b053433b0425",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/github-apply-retry-readback.json",
+      "bytes": 3959,
+      "sha256": "4d44743b9f0e603f2d778f6bf8dd4abb387b439e0b70431b40d6bee203ec4107",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/github-preflight-initial-order-failure.json",
+      "bytes": 301,
+      "sha256": "b27d1613bda1241d0eb5f9c09550a310f461f6a8f40fb28e4ac083a10686d08c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/github-preflight.json",
+      "bytes": 3934,
+      "sha256": "072613798ec7de29835b1618aaa5e66833d8d83fbf8c6d9d3ff0f81de86d7dcd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/instruction-operation-reservation.json",
+      "bytes": 829,
+      "sha256": "b0653beb4652bdb935423d71a12da1b5912221c2f23c467e7f872c3a8a43bbc6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/instruction-operation-settled.json",
+      "bytes": 830,
+      "sha256": "9b55ace3dc2b2df1ddf431944b03ae4d16a3b215f44b3d1f90b8b0977ccc28b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-520.json",
+      "bytes": 13681,
+      "sha256": "3a535f08d57636af373a27a49e51f3aaf2793f967cc626daab3064503cede067",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-521.json",
+      "bytes": 13726,
+      "sha256": "607eafe62c79bfc966f237a1e9c64d6f94810adfa975c296d795e7a77dd8cb8b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-522.json",
+      "bytes": 13449,
+      "sha256": "fae8d095635966b70fbe10af1204dc09080ae5049c6618432710388b96a82b76",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-523.json",
+      "bytes": 22600,
+      "sha256": "e295b717aa915bb280572631d37a30f1d315788c60f5ab4d8748e4385ccca5ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-524.json",
+      "bytes": 13631,
+      "sha256": "095157cd3438800ec23f4733677d695d451e7d19c44880d0841f77e7a541ab2f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-525.json",
+      "bytes": 13671,
+      "sha256": "02b6c8cd103a51407da3833a9f1abb67623da03b815e0bd448655cbc535a2808",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-526.json",
+      "bytes": 44615,
+      "sha256": "596ed472bb24e0e15c04f134c8e6aeeed80c4b4b3cf9edbe054303abe86c233d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-527.json",
+      "bytes": 15364,
+      "sha256": "dcfbf715b914432b62ef57c60f9aa86b8b7f58118c794623c20c97590ecb3198",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-520.json",
+      "bytes": 12892,
+      "sha256": "8fb56761867a4db9ffa9cf7ae07a76d8ab23299b53adbc6f8230da57de57ff5b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-521.json",
+      "bytes": 12937,
+      "sha256": "1cf6be6073bc3cb4aecea4cdeb6c3d89c057c249d6b3f27294eb66c56c70ad18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-522.json",
+      "bytes": 12660,
+      "sha256": "48b0b8a4fd5a9cade6c0ef2523509602229322e3af49ec211422e13756e34793",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-523.json",
+      "bytes": 21013,
+      "sha256": "37659b6501f63cb4c33fcc10df611c4a55ba8105940a3e546e1c8ea5cc487988",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-524.json",
+      "bytes": 12842,
+      "sha256": "877e68cd15d2f1cb04602fb34e0bb4f33f70271e66a4fe83a3d58b71a4051be7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-525.json",
+      "bytes": 12882,
+      "sha256": "dfb3cefd19cc7f299f1f2d707847fc7127e8090c2400a299939af283f1827342",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-526.json",
+      "bytes": 41299,
+      "sha256": "484748b17819dde42719c63dfc7ec43bcb1762163bd2bf955d4a4459b18c127c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-527.json",
+      "bytes": 14442,
+      "sha256": "95965ee0606c0df2b883435d7e96735a517178417072b742da186134d1ff5a72",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/negative-control.json",
+      "bytes": 219,
+      "sha256": "8db9e32d60d0617d3f5ec5693ae2b9d439d813ad1591b6badac9690ca8ad752c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/planner-control-tests.log",
+      "bytes": 106,
+      "sha256": "698d16d7b93c4bd9707d3cfacda6fb1e0fea99ed0cda6e69bedc42772940540a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/positive-control.json",
+      "bytes": 219,
+      "sha256": "713214426d1d71ac850e8cacfa238c15e5b64dc167e746e6fc905622966fa8c8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/previous-claim-release.json",
+      "bytes": 879,
+      "sha256": "870470f30d2d4bb339376e896cf5f3a445c9dbcab542b50c368b2f08bb387779",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/repair-plan.json",
+      "bytes": 112288,
+      "sha256": "a6a1fab3f329cb82751847db6338656b86cf5a21ecc5a1b62a95be9ddf011d55",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/reproducibility.json",
+      "bytes": 394,
+      "sha256": "93b27cf060a7bb1d2dc50ec9caaf05bd6e3c2d3403a32f71a962e9ba7cd1468c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/apply-supplement-source-hints.mjs",
+      "bytes": 6372,
+      "sha256": "aba206ba49a7ef2a2082c1f75dab9e966769c1dbb623a37d7b4afa086b6b4a8d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/repair-supplement-source-hints.py",
+      "bytes": 8273,
+      "sha256": "0722dec7c8faa6abb490eb47660d67c0f44ca47ff8368cf247ad1d9ba4e13812",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/supplement-source-hints.py",
+      "bytes": 6140,
+      "sha256": "fa083315e6b48b39095b98fbf533a6637fee9afb5179c6c041221f890a967864",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/supplement-source-hints.test.mjs",
+      "bytes": 7191,
+      "sha256": "ebc8f982cd45546cca41a03ed7cd11bb1b9a1b76b2c32f5b4b65b37e4faef97a",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "instruction-repair-generator",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Offline exact-baseline byte/entry verification and bounded instruction repair; synthetic positive/negative controls, two-run plan reproducibility, actual guarded GitHub readback. No factual geography generation.",
+      "software": "Python 3, Node 24, Git and GitHub REST",
+      "units": "whole-file bytes and exact instruction comparisons"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "python test/supplement-source-hints.py",
+    "node --test test/supplement-source-hints.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/source-hints-20261003-a9c2/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/source-hints-20261003-a9c2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/source-hints-20261003-a9c2/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/apply-fresh-read-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/apply-guard-tests-before-order-fix.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/apply-guard-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/apply-initial-fixture-failure.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/apply-initial-restricted-execution.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/audit-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/final-readback-audit.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/github-apply-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/github-apply-retry-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/github-preflight-initial-order-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/github-preflight.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/instruction-operation-reservation.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/instruction-operation-settled.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-520.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-521.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-522.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-523.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-524.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-525.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-526.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-after/issue-527.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-520.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-521.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-522.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-523.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-524.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-525.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-526.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/issues-before/issue-527.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/planner-control-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/previous-claim-release.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/repair-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/source-hints-20261003-a9c2/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/apply-supplement-source-hints.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/repair-supplement-source-hints.py",
+      "status": "added"
+    },
+    {
+      "path": "test/supplement-source-hints.py",
+      "status": "added"
+    },
+    {
+      "path": "test/supplement-source-hints.test.mjs",
+      "status": "added"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "instruction-repair-generator",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/engineering/source-hints-20261003-a9c2/positive-control.json"
+    },
+    {
+      "method_id": "instruction-repair-generator",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/engineering/source-hints-20261003-a9c2/negative-control.json"
+    },
+    {
+      "method_id": "instruction-repair-generator",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/engineering/source-hints-20261003-a9c2/reproducibility.json"
+    }
+  ]
+}
