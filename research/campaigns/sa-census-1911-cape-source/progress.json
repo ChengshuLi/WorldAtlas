@@ -12,7 +12,7 @@
     "supported_window": "1911 census observation; date corroborated as 7 May 1911",
     "source_version": "Census of the Union of South Africa Report. 1911, publication 1912-1913, LSE Digital Library scan"
   },
-  "updated_at_utc": "2026-10-03T11:22:00Z",
+  "updated_at_utc": "2026-10-03T11:23:00Z",
   "geographic_release": null,
   "input_paths": ["source-manifest.json", "source-evaluation.md"],
   "bundle_paths": [],
@@ -21,15 +21,16 @@
   "coverage_achieved": [
     "Verified LSE edition metadata, source office, publication dates, historical Cape of Good Hope province row, and high-resolution scan pages.",
     "Recorded one visually transcribed Cape all-races preliminary/final reconciliation row and its source-published increase; no OCR values used.",
-    "Documented Province versus district reporting scope, census-date corroboration, LSE rights-status note, scan hashes, and restoration steps."
+    "Documented Province versus district reporting scope, census-date corroboration, LSE rights-status note, scan hashes, and restoration steps.",
+    "Opened focused source-evaluation PR #589 at c43a278cbbfe1a0adae0621536ba40790a8e2f4b."
   ],
   "source_gaps": [
     "Schedule B district values and exact unit labels remain uninspected; no municipality or settlement totals, historical boundaries, or footprint evidence.",
     "No explicit scan reuse license; Stats SA site blocked by anti-bot interstitial."
   ],
   "blockers": ["No regional content approval certificate with permitted subjects and matching release pins; no import attempted."],
-  "next_action": "Submit one focused source-evaluation PR, then verify exact-head checks, merge via serialized queue, release claim, and continue with the next ready unclaimed history-research item.",
-  "pull_request": null,
+  "next_action": "Wait for exact-head checks; renew the issue claim before merge-queue submission, verify the serialized merge on fresh main, release the claim, then continue with the next ready unclaimed history-research item.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/589",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
