@@ -1,0 +1,41 @@
+✔ stale body, state, candidate bytes and active worker/PR prevent writes (1.836629ms)
+✔ unrelated scope and original prose cannot be overwritten (1.265357ms)
+✖ read-only preflight issues no writes and checks the complete batch before applying (4.745794ms)
+✔ bounded application reads back each correction and is idempotent (2.785319ms)
+✔ failed readback retains partial receipt and stops before remaining writes (1.530638ms)
+✔ unexpected issue scope cannot expand the mutation targets (0.337188ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.95978
+
+✖ failing tests:
+
+test at test/supplement-source-hints.test.mjs:63:1
+✖ read-only preflight issues no writes and checks the complete batch before applying (4.745794ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /active worker/. Input:
+  
+  'Error: Invalid canonical claim'
+  
+      at async TestContext.<anonymous> (file:///workspace/worldatlas-source-hints/test/supplement-source-hints.test.mjs:69:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Invalid canonical claim
+        at readClaim (file:///workspace/worldatlas-source-hints/scripts/issue-claim-contract.mjs:27:160)
+        at inspect (file:///workspace/worldatlas-source-hints/scripts/apply-supplement-source-hints.mjs:60:53)
+        at async applyPlan (file:///workspace/worldatlas-source-hints/scripts/apply-supplement-source-hints.mjs:63:35)
+        at async waitForActual (node:assert:646:5)
+        at async strict.rejects (node:assert:769:25)
+        at async TestContext.<anonymous> (file:///workspace/worldatlas-source-hints/test/supplement-source-hints.test.mjs:69:3)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7),
+    expected: /active worker/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
