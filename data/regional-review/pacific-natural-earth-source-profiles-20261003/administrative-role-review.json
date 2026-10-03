@@ -1,0 +1,280 @@
+{
+  "AmericanSamoa": {
+    "access": "Direct host returned HTTP 403 in this session; source text inspected through text-access proxy. Preserve the original URLs and verify against local public-law/code originals before a legal implementation.",
+    "administrative_districts": {
+      "Rose_Atoll": "Rose Island/Atoll is a Census county-equivalent map feature and 2020 TIGER county group (COUNTYFP 030), but not in the statutory 14-county list or §5.0101 three districts. Exact current statutory/admin jurisdiction remains unresolved; absence from those county lists is not proof it lacks any authority/management.",
+      "Swains_Island": "§5.0101 explicitly excludes Swains Island from the three districts and places its administration directly under the Governor. Census 2020 separately maps Swains Island as a county-equivalent and TIGER includes a Swains Island county-subdivision and place. These are legal text/Census roles, not a source-demarcation of title.",
+      "count": 3,
+      "settlements": "§5.0102 enumerates villages/settlements per the 14 counties; 2020 TIGER PLACE provides 77 statistical village features. Treat these as differing date and purpose inventories, not equal rosters.",
+      "source_names": {
+        "010": "Eastern District",
+        "020": "Manu'a District",
+        "050": "Western District"
+      },
+      "statute_vs_2020_TIGER_counties": {
+        "010": {
+          "TIGER_2020_county_subdivision_names": [
+            "Ituau",
+            "Ma'oputasi",
+            "Sa'ole",
+            "Sua",
+            "Vaifanua"
+          ],
+          "normalized_name_set_match": true,
+          "statute_county_names": [
+            "Ituau",
+            "Ma’oputasi",
+            "Sa’ole",
+            "Sua",
+            "Vaifanua"
+          ],
+          "statute_only": [],
+          "tiger_only": []
+        },
+        "020": {
+          "TIGER_2020_county_subdivision_names": [
+            "Faleasao",
+            "Fitiuta",
+            "Ofu",
+            "Olosega",
+            "Ta'u"
+          ],
+          "normalized_name_set_match": true,
+          "statute_county_names": [
+            "Ta’u",
+            "Faleasao",
+            "Fitiuta",
+            "Ofu",
+            "Olosega"
+          ],
+          "statute_only": [],
+          "tiger_only": []
+        },
+        "050": {
+          "TIGER_2020_county_subdivision_names": [
+            "Lealataua",
+            "Leasina",
+            "Tualatai",
+            "Tualauta"
+          ],
+          "normalized_name_set_match": true,
+          "statute_county_names": [
+            "Lealataua",
+            "Leasina",
+            "Tualatai",
+            "Tualauta"
+          ],
+          "statute_only": [],
+          "tiger_only": []
+        }
+      },
+      "statutory_county_lists": {
+        "010": [
+          "Ituau",
+          "Ma’oputasi",
+          "Sa’ole",
+          "Sua",
+          "Vaifanua"
+        ],
+        "020": [
+          "Ta’u",
+          "Faleasao",
+          "Fitiuta",
+          "Ofu",
+          "Olosega"
+        ],
+        "050": [
+          "Lealataua",
+          "Leasina",
+          "Tualatai",
+          "Tualauta"
+        ]
+      }
+    },
+    "source": "American Samoa Code Annotated §§5.0101–5.0102 (published online by American Samoa Bar Association; PL 7-28 (1962) cited as history)"
+  },
+  "WallisFutuna": {
+    "assembly_to_insee_village_crosswalk": {
+      "WLF-4995_Sigave": {
+        "assembly_only_or_spelling_unresolved": [],
+        "insee_2018_count": 6,
+        "insee_only_or_spelling_unresolved": [],
+        "normalized_exact_matches": [
+          {
+            "assembly": "Fiua",
+            "insee": "Fiua"
+          },
+          {
+            "assembly": "Leava",
+            "insee": "Leava"
+          },
+          {
+            "assembly": "Nuku",
+            "insee": "Nuku"
+          },
+          {
+            "assembly": "Tavai",
+            "insee": "Tavai"
+          },
+          {
+            "assembly": "Toloke",
+            "insee": "Toloke"
+          },
+          {
+            "assembly": "Vaisei",
+            "insee": "Vaisei"
+          }
+        ],
+        "official_assembly_count": 6
+      },
+      "WLF-4996_Uvea": {
+        "assembly_only_or_spelling_unresolved": [
+          "Malaefoon"
+        ],
+        "insee_2018_count": 21,
+        "insee_only_or_spelling_unresolved": [
+          "Mala’efo’ou"
+        ],
+        "normalized_exact_matches": [
+          {
+            "assembly": "Ahoa",
+            "insee": "Ahoa"
+          },
+          {
+            "assembly": "Akaaka",
+            "insee": "Aka’aka"
+          },
+          {
+            "assembly": "Alele",
+            "insee": "Alele"
+          },
+          {
+            "assembly": "Falaleu",
+            "insee": "Falaleu"
+          },
+          {
+            "assembly": "Gahi",
+            "insee": "Gahi"
+          },
+          {
+            "assembly": "Haafuasia",
+            "insee": "Ha’afuasia"
+          },
+          {
+            "assembly": "Haatofo",
+            "insee": "Ha’atofo"
+          },
+          {
+            "assembly": "Halalo",
+            "insee": "Halalo"
+          },
+          {
+            "assembly": "Kolopopo",
+            "insee": "Kolopopo"
+          },
+          {
+            "assembly": "Lavegahau",
+            "insee": "Lavegahau"
+          },
+          {
+            "assembly": "Liku",
+            "insee": "Liku"
+          },
+          {
+            "assembly": "Malae",
+            "insee": "Mala’e"
+          },
+          {
+            "assembly": "Mata’Utu",
+            "insee": "Mata’utu"
+          },
+          {
+            "assembly": "Teesi",
+            "insee": "Te’esi"
+          },
+          {
+            "assembly": "Tepa",
+            "insee": "Tepa"
+          },
+          {
+            "assembly": "Tufuone",
+            "insee": "Tufu’one"
+          },
+          {
+            "assembly": "Utufua",
+            "insee": "Utufua"
+          },
+          {
+            "assembly": "Vailala",
+            "insee": "Vailala"
+          },
+          {
+            "assembly": "Vaimalau",
+            "insee": "Vaimalau"
+          },
+          {
+            "assembly": "Vaitupu",
+            "insee": "Vaitupu"
+          }
+        ],
+        "official_assembly_count": 21
+      },
+      "WLF-4997_Alo": {
+        "assembly_only_or_spelling_unresolved": [],
+        "insee_2018_count": 9,
+        "insee_only_or_spelling_unresolved": [],
+        "normalized_exact_matches": [
+          {
+            "assembly": "Alofi",
+            "insee": "Alofi"
+          },
+          {
+            "assembly": "Kolia",
+            "insee": "Kolia"
+          },
+          {
+            "assembly": "Malae",
+            "insee": "Mala’e"
+          },
+          {
+            "assembly": "Ono",
+            "insee": "Ono"
+          },
+          {
+            "assembly": "Poï",
+            "insee": "Poï"
+          },
+          {
+            "assembly": "Tamana",
+            "insee": "Tamana"
+          },
+          {
+            "assembly": "Taoa",
+            "insee": "Taoa"
+          },
+          {
+            "assembly": "Tuatafa",
+            "insee": "Tuatafa"
+          },
+          {
+            "assembly": "Vele",
+            "insee": "Vele"
+          }
+        ],
+        "official_assembly_count": 9
+      }
+    },
+    "counts": {
+      "WLF-4995_Sigave": 6,
+      "WLF-4996_Uvea": 21,
+      "WLF-4997_Alo": 9,
+      "circonscriptions": 3,
+      "futuna_customary_kingdom_units": 2,
+      "villages": 36,
+      "wallis_districts": 3
+    },
+    "official_structure": "The assembly reports three circonscriptions corresponding to three customary kingdoms, Uvéa, Alo and Sigave, with civil-registry/roads competences, autonomous budgets, customary institutions and each king presiding over the council. It reports 21 Wallis villages across Hihifo, Hahake and Mua districts, plus 15 Futuna villages: 9 Alo (including Alofi) and 6 Sigave.",
+    "source": "Official Assemblée Territoriale de Wallis et Futuna, “Organisation Institutionnelle”; INSEE legal populations (2018 reference) by circonscription, district and village.",
+    "source_tier_limit": "INSEE has a “Districts” table with Hahake, Hihifo, Mua, Alo and Sigave; the official Territorial Assembly calls only the three Wallis subdivisions districts, and describes Alo/Sigave as Futuna kingdoms/circonscriptions. Do not make the table label an assertion of a shared legal tier. Neither INSEE statistics nor the assembly page supplies authoritative digital boundaries."
+  }
+}

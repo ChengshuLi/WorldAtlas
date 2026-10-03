@@ -1,0 +1,668 @@
+{
+  "version": 1,
+  "issue": 616,
+  "lane": "geography",
+  "worker_id": "codex-20261003-pacific-ne-source-profile-4df7efdd-f170-4e23-85dd-e628e2ea72f1",
+  "subject_ids": [
+    "ASM-4998",
+    "ASM-4999",
+    "ASM-5000",
+    "ASM-5001",
+    "ASM-5002",
+    "WLF-4995",
+    "WLF-4996",
+    "WLF-4997"
+  ],
+  "subject_ids_sha256": "3e837d2a295aceec180784a1594bc3fad8f37b844597ea2d2a83b07c827bf3ed",
+  "baseline": {
+    "commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+    "files": [
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10165703,
+        "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2367982,
+        "sha256": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 10317900,
+        "uncompressed_sha256": "a093e708a4874bc6013d0fb20d2ed15e862b75fa3988663db133e1995e3b6865"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 70253,
+        "sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 440878,
+        "uncompressed_sha256": "d482e7fadfb95b95769b26717e2dea5993667a91abdbbefddd5de8531f19c302"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "geography_part_28": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "hierarchy": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "current_membership": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae",
+      "regional_handoffs": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1"
+    },
+    "pin_files": {
+      "geography_part_28": "data/geography/part-28.json",
+      "hierarchy": "data/hierarchy.json",
+      "world_index": "data/world-index.json",
+      "current_membership": "data/macro-foundation/current-membership-inventory.json.gz",
+      "regional_handoffs": "data/macro-foundation/regional-handoffs.json.gz"
+    },
+    "subject_files": {
+      "ASM-4998": "data/geography/part-28.json",
+      "ASM-4999": "data/geography/part-28.json",
+      "ASM-5000": "data/geography/part-28.json",
+      "ASM-5001": "data/geography/part-28.json",
+      "ASM-5002": "data/geography/part-28.json",
+      "WLF-4995": "data/geography/part-28.json",
+      "WLF-4996": "data/geography/part-28.json",
+      "WLF-4997": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "natural-earth-5-1-1",
+      "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19/10m_cultural",
+      "role": "Pinned cartographic Admin-1 identities and polygons; source policy, names and geometry only, not legal boundaries or ownership",
+      "vintage": "Natural Earth 5.1.1; upstream commit ca96624a56bd078437bca8184e78163e5039ad19 dated 2022-06-02",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth states its vector and raster maps are public domain; retain its README/source attribution and exact upstream commit."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.shp",
+          "bytes": 20998780,
+          "sha256": "c6f5c8b4b1320d9417033762419c6df1eb423989cd880fba78ea0b1e3522cbe4",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.shx",
+          "bytes": 36868,
+          "sha256": "37a9e2bc79ed31d3bdea3cb62d928f77281a1c88d645cd33430231c75dbcf350",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.dbf",
+          "bytes": 15161514,
+          "sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.VERSION.txt",
+          "bytes": 6,
+          "sha256": "f9893302cd3158f3b5aea394dcd2a91574869e9e6ff69e9235b10a3bf8c983fb",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.README.html",
+          "bytes": 44181,
+          "sha256": "27d12def2c79a2ff3744abb27a3ba2783334f4dc1ec2dedc3ce3c00c4ea71e25",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Upstream pinned commit, 10m_cultural/ne_10m_admin_1_states_provinces.*; exact local whole-file SHA-256 and sizes in evidence-quality.json and sources.json."
+    },
+    {
+      "id": "us-census-2020-as",
+      "url": "https://www.census.gov/programs-surveys/geography.html",
+      "role": "American Samoa Census county-equivalent, county subdivision and place statistical names/coverage; does not determine jurisdiction, title or land ownership",
+      "vintage": "2020 Census geography; geographic reference date 2020-01-01; GARM PDF host Last-Modified 2023-07-18, TIGER files Last-Modified 2021-02-02",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal government Census geography/public-domain data; source cautions Census statistical boundaries do not determine jurisdiction or title."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/census-as/GARM2020_ST60_AS.pdf",
+          "bytes": 2487049,
+          "sha256": "46cd1acfb0b6f0cbc62a98a82755f8a26d72e861133f97fbac99267e1e03800a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/census-as/tl_2020_60_cousub.zip",
+          "bytes": 31892,
+          "sha256": "8dbd2da4dc77649c061bc665bd05f75661467273c23cce4e17fad7e0f73d0ecf",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/census-as/tl_2020_60_place.zip",
+          "bytes": 80539,
+          "sha256": "6d370059faeb4b3398b43d45de3df66f60e54c09b90ce8e788e91181e7150584",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Exact canonical URLs: https://www2.census.gov/geo/maps/DC2020/GARM20/GARM2020_ST60_AS.pdf ; https://www2.census.gov/geo/tiger/TIGER2020/COUSUB/tl_2020_60_cousub.zip ; https://www2.census.gov/geo/tiger/TIGER2020/PLACE/tl_2020_60_place.zip."
+    },
+    {
+      "id": "american-samoa-code",
+      "url": "https://asbar.org/code-annotated/",
+      "role": "American Samoa Code §§5.0101–5.0102 for stated district and county roles; not a demarcation source",
+      "vintage": "Code history identifies 1962 PL 7-28; current text as presented by American Samoa Bar Association, retrieval date 2026-10-03",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "Page reuse rights not established; original host returned HTTP 403; text was inspected through a text-access proxy. No source text retained."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore https://asbar.org/code-annotated/ and verify sections 5.0101 and 5.0102 against the current local public-law/code originals; earlier direct fetch returned HTTP 403, only proxy text access succeeded.",
+      "limit": "Legal-source fidelity and current codification not verified against the official local original; proxy page/hash captured in source notes only."
+    },
+    {
+      "id": "wf-insee-2018",
+      "url": "https://www.insee.fr/fr/statistiques/5392492",
+      "role": "Official INSEE 2018 circonscriptions, statistical districts and village names/population rows; not legal boundary authority",
+      "vintage": "Population légale 2018; INSEE tables published 2021 (source metadata); workbook downloaded 2026-10-03",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "INSEE reuse terms state public data are reusable under Licence Ouverte/Open Licence 2.0 unless otherwise specified; attribution retained."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/insee-wf/3685976.html",
+          "bytes": 71966,
+          "sha256": "4605da940e037d67175c009068f1a37ff7c0b6631fe6f1cdec320027bb34b8ef",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/insee-wf/3685978.html",
+          "bytes": 72821,
+          "sha256": "7f18f6f25ac828c6253eff2cb1326ed8b655492dd584171ee04e168bfa25cf62",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/insee-wf/3685981.html",
+          "bytes": 75262,
+          "sha256": "af97f11fcbeb909c10138730c3ceb9930cf055053d453a0ec97829d299e5dd81",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/insee-wf/reuse.html",
+          "bytes": 56467,
+          "sha256": "2b904c7415e3b241540640e706a79a2eb1ed3de580c9415efd4614c74740c73d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/insee-wf/wetf-2018.xlsx",
+          "bytes": 9415,
+          "sha256": "258dd10e064082dc1546ca09703e6919e90aed44963138c80a28a2b90e8a88e0",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "INSEE table pages 3685976, 3685978, 3685981 and workbook https://www.insee.fr/fr/statistiques/fichier/5392492/wetf-RP2018-tableaux_pop_legale.xlsx; reuse terms retained as reuse.html."
+    },
+    {
+      "id": "territorial-assembly-wf",
+      "url": "https://www.assembleeterritoriale.wf/assemblee/organisation-politique",
+      "role": "Current territorial description of three customary kingdoms/circonscriptions, Wallis districts and village roster",
+      "vintage": "Live official territorial-assembly web page inspected 2026-10-03; page indicates 1961 statute/2003 status context",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for HTML not established; no page bytes retained. SHA-256 of retrieved response fd995a55312447d91542562488c79c34f37ea30caafbf0b429fc07a4ebf8e60a, 77,559 bytes."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore canonical HTTPS page and verify current content; recorded response size/hash and retrieval date allow recheck.",
+      "limit": "Webpage is not a digitized legal boundary source; no explicit HTML reuse terms."
+    },
+    {
+      "id": "gshhg-2-3-7",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+      "role": "Physical shoreline/land screen for mapped polygon intersections and nearest candidates only",
+      "vintage": "GSHHG 2.3.7, archive release 2017-06-15; archive SHA-256 28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "LGPL terms from release retained as sources/gshhg-LGPL.txt; archive not fully retained, exact gshhs_f.b member SHA-256 af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6, 92 MB."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/gshhg-LGPL.txt",
+          "bytes": 7651,
+          "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/gshhg-local-records.bin.gz",
+          "bytes": 30751,
+          "sha256": "23a82a9c8d32a2b0538a479dfbcb6a5e8a5ed26ebcb981a91e13e3e81efe4294",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 50100,
+          "uncompressed_sha256": "4d2de3ba794fbf439624174af25fe6b2f713cc82b2250bd62a511e8957542b67"
+        }
+      ],
+      "restoration": "Download pinned 2.3.7 archive, verify archive and gshhs_f.b member hashes above, then run screen_gshhg.py with the restored member."
+    },
+    {
+      "id": "legifrance-1961-status-statute",
+      "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000684031/",
+      "role": "Candidate official statute mentioned by the Territorial Assembly; not used for legal conclusions because the page was inaccessible",
+      "vintage": "Law 61-814 of 29 July 1961; 2026-10-03 retrieval returned HTTP 403/CAPTCHA",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "No content accessed; reuse terms and text version unverified."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore the canonical URL and verify the statute against its official text and local promulgation.",
+      "limit": "Access failure is not evidence; no legal conclusion in this packet relies on this page."
+    },
+    {
+      "id": "wgsrpd-level-3",
+      "url": "https://github.com/tdwg/wgsrpd",
+      "role": "Published reference lineage for the geographic area labels; not an administrative hierarchy or current boundary authority",
+      "vintage": "WGSRPD second edition (Brummitt 2001), retained-reference metadata in published baseline",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "No WGSRPD data redistributed; verify upstream terms before retaining original bytes."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Inspect linked TDWG repository and baseline area metadata for cited version/area lineage.",
+      "limit": "Botanical reporting areas do not establish partition boundaries or land membership."
+    },
+    {
+      "id": "un-m49-regions",
+      "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+      "role": "Contextual geographic/statistical convention cited by published baseline area metadata, not a polygon or political ownership authority",
+      "vintage": "UN M49 overview page; retrieval date 2026-10-03",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "No copy retained; verify source reuse terms."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore canonical UN Statistics URL and inspect overview table.",
+      "limit": "Statistical subregion labels do not establish geographic boundaries."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/README.md",
+      "bytes": 8605,
+      "sha256": "c2acf4b96e585cb096cdc9af284a42ebc0ae533136ea43f55e7c15722fb6e51d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/administrative-role-review.json",
+      "bytes": 8576,
+      "sha256": "613ba68226ac73099482cd99a3742403452208e0fb7702398c3f4f9bb42de061",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/american-samoa-census-geometry-comparison.json",
+      "bytes": 7877,
+      "sha256": "3d9a809c5ac89ae1af890149a43748c72340a3a7a69e3d64233fee7e7cdff987",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/american-samoa-census-inventory.json",
+      "bytes": 47565,
+      "sha256": "6143fd6920456595f5dae711468f42ee3fbde73b69a82ff9d4eb7141ab1a9b06",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/area-assessments.json",
+      "bytes": 2686,
+      "sha256": "db389dd8b73c9819ce220d9639483ea99d795eb56d2b1f4aca6352328719039b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/build_audit.py",
+      "bytes": 22663,
+      "sha256": "745e27f60b04c8f59260160c75eb973174d3e85af1f3b6264e1c823236e68f4a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/claim-616-receipt.json",
+      "bytes": 988,
+      "sha256": "2bb73131dd8422088d5de1fcf7730451251ec7db002659b3b6a4769bf0435a96",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/followups.json",
+      "bytes": 2795,
+      "sha256": "839caf66b0db743a45023f37f066eb3beb6326198244f44b80fd5c20df25abd2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/gshhg-screen.json",
+      "bytes": 182459,
+      "sha256": "cc9eb2325fb26ed65aeeff8bef6ec0e321505ffe2027588d3e112190075862fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/issue-616-snapshot.json",
+      "bytes": 4588,
+      "sha256": "52ef7b5fdad160d7e6f473c4f977e75e88c0cae65b184efaca6635979abe56e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/issue-scope.json",
+      "bytes": 69241,
+      "sha256": "0f21cb40519b3e16e912866242068d76687682a2afeefb45288d1d57bb698cc0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/location-assessments.json",
+      "bytes": 24028,
+      "sha256": "560c2dd1b6e8d3ea554a670a624dc7cc29008834c4ef7a5b10b058a84391112d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/natural-earth-current-geometry-comparison.json",
+      "bytes": 6912,
+      "sha256": "1c6e304adc2ed271e2f583540728c8b4fdeafa39153aeccc6bad61906bb6d8dd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/natural-earth-source-profiles.json",
+      "bytes": 29466,
+      "sha256": "84f53275effe0394ab0feb015b1aceeca39ce370c25786a2975d4bb03b703f15",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/province-assessments.json",
+      "bytes": 4769,
+      "sha256": "29fd12632d033947622907e39427e247972806b44c6e69b9e165fe971a77d803",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/screen_gshhg.py",
+      "bytes": 6689,
+      "sha256": "b264c60a8a206d810085265362ff2c22b1f74cc500d0603328e9a06abeca25fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources.json",
+      "bytes": 14324,
+      "sha256": "943963584e135c3975c68852cd87c4afd3ae463bd8c49e641591a28344aca44b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/verify_packet.py",
+      "bytes": 2294,
+      "sha256": "9532c5ce76b5a8f2f0c795a2fe7bf98756ce0c6b601f8c29b2cadb1d994abfeb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/wallis-futuna-insee-inventory.json",
+      "bytes": 7147,
+      "sha256": "ffc6a3a0278fec76f9773f4c1e23bffaed92d3f47c3ea0278e3ee70f3bf55ee9",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-identity-and-administration",
+      "description": "Exact pinned adm1_code match for all eight locations; compare names and attributes with the official/statistical records listed in sources.json; normalize Unicode punctuation/case for crosswalk only; preserve source text.",
+      "software": "Python 3.12; Node.js 24; pyshp 2.3.1; openpyxl 3.1.5",
+      "units": "features, counties, villages, administrative roles"
+    },
+    {
+      "id": "geometry-screen",
+      "kind": "geography",
+      "description": "Reconstruct source and baseline polygons; compare validity, components and overlays; screen GSHHG v2.3.7 level-1 record intersections and nearest candidates; never interpret result as political or legal boundary evidence.",
+      "software": "Python 3.12; Shapely 2.1.2; pyproj 3.7.2; pyshp 2.3.1",
+      "units": "km2, percent, projected metres, record counts",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:6933 for area and distance comparisons; source coordinates EPSG:4326",
+      "area_method": "Planar area in equal-area EPSG:6933; symmetric difference percentages as recorded by script; TIGER water-bearing statistical polygons are expressly not whole-area comparable to land-only source shapes.",
+      "distance_method": "Euclidean nearest projected-point distance in EPSG:6933; screening only."
+    }
+  ],
+  "metrics": [
+    {
+      "id": "assigned_locations",
+      "value": 8,
+      "unit": "locations",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+      "vintage": "baseline"
+    },
+    {
+      "id": "exact_ne_rows",
+      "value": 8,
+      "unit": "features",
+      "input_sha256": "84f53275effe0394ab0feb015b1aceeca39ce370c25786a2975d4bb03b703f15",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+      "vintage": "baseline"
+    },
+    {
+      "id": "source_role_type_blank",
+      "value": 8,
+      "unit": "features",
+      "input_sha256": "84f53275effe0394ab0feb015b1aceeca39ce370c25786a2975d4bb03b703f15",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+      "vintage": "baseline"
+    },
+    {
+      "id": "province_wrappers",
+      "value": 8,
+      "unit": "wrappers",
+      "input_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+      "vintage": "baseline"
+    },
+    {
+      "id": "assigned_areas",
+      "value": 3,
+      "unit": "areas",
+      "input_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+      "vintage": "baseline"
+    },
+    {
+      "id": "as_tiger_county_subdivisions",
+      "value": 16,
+      "unit": "features",
+      "input_sha256": "6143fd6920456595f5dae711468f42ee3fbde73b69a82ff9d4eb7141ab1a9b06",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+      "vintage": "baseline"
+    },
+    {
+      "id": "as_tiger_place_features",
+      "value": 77,
+      "unit": "features",
+      "input_sha256": "6143fd6920456595f5dae711468f42ee3fbde73b69a82ff9d4eb7141ab1a9b06",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+      "vintage": "baseline"
+    },
+    {
+      "id": "wf_insee_villages",
+      "value": 36,
+      "unit": "villages",
+      "input_sha256": "ffc6a3a0278fec76f9773f4c1e23bffaed92d3f47c3ea0278e3ee70f3bf55ee9",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+      "vintage": "baseline"
+    },
+    {
+      "id": "gshhg_level1_source_scanned",
+      "value": 179832,
+      "unit": "records",
+      "input_sha256": "cc9eb2325fb26ed65aeeff8bef6ec0e321505ffe2027588d3e112190075862fd",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+      "vintage": "baseline"
+    },
+    {
+      "id": "gshhg_retained_nearby_records",
+      "value": 99,
+      "unit": "records",
+      "input_sha256": "cc9eb2325fb26ed65aeeff8bef6ec0e321505ffe2027588d3e112190075862fd",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+      "vintage": "baseline"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "assigned_locations",
+      "value": 8,
+      "unit": "locations"
+    },
+    {
+      "metric_id": "exact_ne_rows",
+      "value": 8,
+      "unit": "features"
+    },
+    {
+      "metric_id": "source_role_type_blank",
+      "value": 8,
+      "unit": "features"
+    },
+    {
+      "metric_id": "province_wrappers",
+      "value": 8,
+      "unit": "wrappers"
+    },
+    {
+      "metric_id": "assigned_areas",
+      "value": 3,
+      "unit": "areas"
+    },
+    {
+      "metric_id": "as_tiger_county_subdivisions",
+      "value": 16,
+      "unit": "features"
+    },
+    {
+      "metric_id": "as_tiger_place_features",
+      "value": 77,
+      "unit": "features"
+    },
+    {
+      "metric_id": "wf_insee_villages",
+      "value": 36,
+      "unit": "villages"
+    },
+    {
+      "metric_id": "gshhg_level1_source_scanned",
+      "value": 179832,
+      "unit": "records"
+    },
+    {
+      "metric_id": "gshhg_retained_nearby_records",
+      "value": 99,
+      "unit": "records"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "All eight assigned location identities match a pinned Natural Earth Admin-1 record by exact adm1_code, and every declared province wrapper and complete parent chain is accounted for. The layer is cartographic and its type/type_en fields are blank for all eight.",
+      "source_ids": [
+        "natural-earth-5-1-1"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "The statutory American Samoa district/county names and Census statistical divisions can be crosswalked for Eastern, Manu’a and Western; Swains has a distinct Governor-administered role under §5.0101. Census boundaries do not determine jurisdiction/title.",
+      "source_ids": [
+        "us-census-2020-as",
+        "american-samoa-code"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Rose Island/Atoll’s current administrative/management role and authoritative island/reef inventory are unresolved; Census county-equivalent mapping and GSHHG non-detection do not settle the question.",
+      "source_ids": [
+        "us-census-2020-as",
+        "american-samoa-code",
+        "gshhg-2-3-7"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "The three Wallis and Futuna Natural Earth identities correspond to the three current official circonscriptions/customary kingdoms; INSEE and Assembly sources establish named subunit/village counts, not legal polygon boundaries.",
+      "source_ids": [
+        "natural-earth-5-1-1",
+        "wf-insee-2018",
+        "territorial-assembly-wf"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "One Uvea/Mua village spelling discrepancy and absence of authoritative digitized boundary geometry remain open; geometric differences and GSHHG screening cannot be converted into boundary corrections.",
+      "source_ids": [
+        "wf-insee-2018",
+        "territorial-assembly-wf",
+        "gshhg-2-3-7"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Swains Island’s published Tokelau-Manihiki geographic grouping cross-reference warrants coordinated neighboring review; this evidence does not establish a regional inconsistency or political claim.",
+      "source_ids": [
+        "natural-earth-5-1-1",
+        "american-samoa-code"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/pacific-natural-earth-source-profiles-20261003/build_audit.py",
+    "python3 data/regional-review/pacific-natural-earth-source-profiles-20261003/screen_gshhg.py /path/to/restored/gshhs_f.b",
+    "python3 data/regional-review/pacific-natural-earth-source-profiles-20261003/verify_packet.py",
+    "node scripts/evidence-quality.mjs data/regional-review/pacific-natural-earth-source-profiles-20261003/evidence-quality.json",
+    "node --test test/evidence-quality.test.mjs"
+  ],
+  "generated_data_note": "Evidence-only packet. Retained Natural Earth shapefile bytes total approximately 36.2 MB across separate files; each descriptor is within 32 MiB. Census/INSEE retained originals are separately accounted for. No generated or source input is a canonical atlas mutation."
+}
