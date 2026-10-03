@@ -11,7 +11,7 @@
     "Verify GPU/canvas fill/legend consistency, unknowns, reload/year stability, no ownership recompilation, actual private publication and rollback; maximum two focused PRs"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-03T17:43:29.565719+00:00",
+  "updated_at_utc": "2026-10-03T17:45:09.842124+00:00",
   "completed": [
     "Confirmed actual current reproduction: PRC and ROC selected profiles both resolve owner:Q148, with distinct source names. Both share rgb(49,60,196), and one legend entry replaces the other.",
     "Actual production four-year sequence and two profile screenshots completed with zero navigation ownership compilation/upload and no page errors.",
@@ -45,6 +45,18 @@
     {
       "command": "node scripts/audit-palette-raster.mjs data/engineering/palette-contrast-20261003-7e91 --check",
       "result": "passed exact 135963/6240 pairs"
+    },
+    {
+      "command": "npm run build:hosted",
+      "result": "passed; archive 262492160 uncompressed bytes, target headroom 1748992 bytes"
+    },
+    {
+      "command": "built modern reference contrast check",
+      "result": "49625 features, zero missing palette keys, all 393 adjacent/nearby display edges pass all four modeled budgets"
+    },
+    {
+      "command": "node scripts/validate-structure.mjs publication",
+      "result": "running; required before deployment"
     }
   ],
   "deployment": null,
@@ -65,13 +77,13 @@
   ],
   "blockers": [],
   "next_action": "Finish exact source/raster checks and unit suite, retain receipts, push coherent first PR Refs #23 through exact-head CI and serialized squash queue. Actual production publication and acceptance remain pending; no fourth PR on issue 22.",
-  "pull_request": null,
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/645",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
   "worker_id": "engineering-night-20261003-7e91f438",
   "reservation": {
     "accepted": true,
-    "request_id": "a51cca2b-4148-4ebc-bbc3-68763e4d9623",
+    "request_id": "c20c5ca6-d4ad-4bac-b373-98a701a5eb16",
     "issue_number": 23,
     "claim": {
       "comment_id": 5971540602,
@@ -80,19 +92,19 @@
       "worker_id": "engineering-night-20261003-7e91f438",
       "claim_id": "4406050d-c644-4160-99aa-e43c1d052fd3",
       "branch": "engineering/palette-contrast-20261003-7e91",
-      "request_id": "a51cca2b-4148-4ebc-bbc3-68763e4d9623",
+      "request_id": "c20c5ca6-d4ad-4bac-b373-98a701a5eb16",
       "issue_number": 23,
       "claimed_at": "2026-10-03T17:14:24.771Z",
-      "updated_at": "2026-10-03T17:19:54.347Z",
-      "expires_at": "2026-10-04T17:19:54.347Z",
+      "updated_at": "2026-10-03T17:43:46.792Z",
+      "expires_at": "2026-10-04T17:43:46.792Z",
       "live_work": false,
       "mode": "engineering",
       "max_prs": 2
     },
     "replayed": false,
     "result_source": "github-comment",
-    "result_comment_id": 5971586840,
-    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37140096499"
+    "result_comment_id": 5971782625,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37141563981"
   },
   "previous_completed_work": {
     "issue": 22,
