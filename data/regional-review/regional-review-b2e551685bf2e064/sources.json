@@ -1,0 +1,122 @@
+{
+  "snapshot_utc": "2026-10-03",
+  "sources": [
+    {
+      "id": "geoboundaries-col-adm2-2020",
+      "title": "geoBoundaries gbOpen Colombia ADM2",
+      "producer_declared_by_source_metadata": "Departamento Administrativo Nacional de Estadística (DANE), Colombia",
+      "admin_vintage": "2020",
+      "source_update_date": "2023-01-19",
+      "build_date": "2023-12-12",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM2/geoBoundaries-COL-ADM2.geojson",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM2/geoBoundaries-COL-ADM2-metaData.json",
+      "official_source_portal": "https://geoportal.dane.gov.co/",
+      "license": "Creative Commons Attribution 4.0 International (CC BY 4.0), as declared in the pinned geoBoundaries metadata",
+      "attribution": "geoBoundaries, citing DANE as underlying boundary source",
+      "canonical_role": "The pinned metadata declares ADM2; Colombia's municipal role is supported by the DANE DIVIPOLA/MGN source descriptions. The 2020 row-level table was not obtained, so do not use ADM2 number alone as proof of semantic role.",
+      "feature_count": 1122,
+      "metadata_bytes": 974,
+      "metadata_sha256": "89c779be4b254a019a46f4c37d7ae24dcf41ff48b6d805d8cc9aceadef8165ff",
+      "retained_data": {
+        "path": "sources/geoboundaries-COL-ADM2-2020.geojson.gz",
+        "compressed_bytes": 74845471,
+        "compressed_sha256": "586b057e43ca97d608148d5f3b3067a25bb468a94a7cac6d3c1c2ffb8eb20e3d",
+        "uncompressed_bytes": 210605856,
+        "uncompressed_sha256": "fe715854fc3383d2fd39e8692f3df0c60bd12208cb2cd36ef1ec2220ea8972fe"
+      },
+      "restoration": "Download the pinned media URL, verify uncompressed SHA-256, and gzip with mtime=0 to reproduce the retained packet copy. The raw file is 210,605,856 bytes; the source is too large to retain uncompressed in Git."
+    },
+    {
+      "id": "geoboundaries-col-adm2-metadata",
+      "title": "Pinned geoBoundaries metadata for Colombia ADM2",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM2/geoBoundaries-COL-ADM2-metaData.json",
+      "boundary_year": "2020",
+      "boundary_source": "Departamento Administrativo Nacional de Estadística",
+      "boundary_license": "CC BY 4.0",
+      "declared_admin_unit_count": 1122,
+      "retained_path": "sources/geoboundaries-COL-ADM2-metadata.json",
+      "bytes": 974,
+      "sha256": "89c779be4b254a019a46f4c37d7ae24dcf41ff48b6d805d8cc9aceadef8165ff"
+    },
+    {
+      "id": "dane-divipola-mgn-2024-service-item",
+      "title": "DIVIPOLA MGN 2024",
+      "publisher": "Departamento Administrativo Nacional de Estadística (DANE), Colombia; ArcGIS service item access information names DANE",
+      "description": "Service item says it represents DIVIPOLA levels under Marco Geoestadístico Nacional (MGN), version 2024.",
+      "item_url": "https://www.arcgis.com/home/item.html?id=d39c73ca6ece41e3a27f2ab946e600b4",
+      "service_url": "https://portalgis.dane.gov.co/mparcgis/rest/services/Divipola/Serv_DIVIPOLA_MGN_2024/FeatureServer",
+      "service_vintage": "2024",
+      "item_created_utc": "2026-05-08T16:02:48Z",
+      "item_modified_utc": "2026-05-08T16:03:08Z",
+      "license": "Not stated in the retained ArcGIS item metadata (licenseInfo empty). Public access is stated; this packet does not redistribute service geometry.",
+      "retained_metadata": {
+        "path": "sources/dane-divipola-mgn-2024-item-metadata.json",
+        "bytes": 1489,
+        "sha256": "10ce3e608e49059b420a87e56bf0f7d8bd224aa4997f15ee1712d7367fe892e4"
+      },
+      "access_status": "Official ArcGIS item metadata retrieved. Direct REST service query was blocked by the network edge and returned HTML instead of service JSON; no feature rows were read or crosswalked.",
+      "restore": "Read the ArcGIS item metadata URL, then query the public FeatureServer service and retain the exact layer metadata and rows with their per-layer licensing/attribution."
+    },
+    {
+      "id": "dane-centros-poblados-divipola-2013i-service-item",
+      "title": "Centros Poblados Divipola 2013I",
+      "publisher": "Departamento Administrativo Nacional de Estadística (DANE), Colombia; item access information names DANE",
+      "item_url": "https://www.arcgis.com/home/item.html?id=cfee697b589343b7ad69bd0a702622c9",
+      "service_url": "https://portalgis.dane.gov.co/mparcgis/rest/services/Divipola/Serv_PuntosCentrosPoblados2013I/MapServer",
+      "source_vintage": "2013I",
+      "item_created_utc": "2025-07-31T21:38:36Z",
+      "item_modified_utc": "2025-07-31T21:38:37Z",
+      "license": "Not stated in the retained ArcGIS item metadata (licenseInfo empty). Public access is stated; no feature data are redistributed.",
+      "retained_metadata": {
+        "path": "sources/dane-centros-poblados-2013-item-metadata.json",
+        "bytes": 1308,
+        "sha256": "54d87a47d370212fd4203d0e7b7f4f93d01b699467a217bb7708c2252b02ea07"
+      },
+      "access_status": "Official item metadata confirms a DANE settlement point service exists, but the service rows were not retrieved. Its 2013 vintage cannot establish present settlement coverage.",
+      "restore": "Query the public MapServer layers and retain exact layer metadata, point rows, attribution and per-layer reuse license."
+    },
+    {
+      "id": "geoboundaries-col-adm1-parent-reference",
+      "title": "geoBoundaries Colombia ADM1 reference used by existing hierarchy",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM1/geoBoundaries-COL-ADM1.geojson",
+      "boundary_year": "2017",
+      "source": "OpenStreetMap, Wambacher",
+      "canonical_role": "Departments",
+      "license": "Open Data Commons Open Database License 1.0",
+      "metadata_path": "sources/geoboundaries-COL-ADM1-metadata.json",
+      "metadata_sha256": "a88c4f5ca647e1f491dc718994f90b3cfdea81609fbb9fcf10d48362fbad296b",
+      "metadata_bytes": 819,
+      "retained_admin1_geojson": {
+        "path": "sources/geoboundaries-COL-ADM1-2017.geojson.gz",
+        "bytes_compressed": 2569301,
+        "sha256_compressed": "bd9fea0bb711e999b0b3b7672014a366bc3877651de8e7dc2811695a6b43cfee",
+        "bytes_uncompressed": 8898990,
+        "sha256_uncompressed": "5e058b9e44eb4c83e4a33ea507c636029d08ddc6c93797f6963de99bf3f7cef2"
+      }
+    }
+  ],
+  "scope_inventory": {
+    "issue": 492,
+    "assigned_count": 194,
+    "area": "Colombia",
+    "full_area_member_count": 1122,
+    "assigned_member_share": "194/1122",
+    "countries": [
+      "COL"
+    ],
+    "source_id": "gb:COL:ADM2",
+    "source_match_count": 194,
+    "duplicate_current_display_names": [
+      "Valparaíso",
+      "La Unión",
+      "San Pedro"
+    ],
+    "duplicate_identity_method": "Exact original_id plus department parent chain; name-only join is rejected."
+  },
+  "limits": {
+    "settlements": "DANE's 2013I Centros Poblados DIVIPOLA point-service metadata was found but its data layers were inaccessible in this run; no authoritative point inventory was compared to the 194 assigned geometries.",
+    "islands_and_disconnected_land": "Current/source component counts are recorded for all 194; no dated complete island, coastline, hydrography or connected-territory register has yet been cross-matched.",
+    "current_dpa": "DANE DIVIPOLA MGN 2024 official public item is identified, but service rows could not be retrieved; no 2024 parent/municipality row-level match is claimed.",
+    "neighbors": "No inter-region shared-edge correction has been established from this tranche; if the current source comparison identifies one, coordinate with #489 and the other region's owner before proposing it."
+  }
+}
