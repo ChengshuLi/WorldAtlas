@@ -16,7 +16,6 @@ import types
 OWNED = Path(__file__).resolve().parent
 REPO = OWNED.parents[2]
 ORIGINAL_COMMIT = "24629e5918a144a1979db80ba7012baea42036e7"
-DERIVED_COMMIT = "e472565221c93195e533532cfaa057781355c821"
 INPUT_BASELINE_SHA256 = "e05d2aab2cd465bc3e3dcb0e47cc2a3a994f81d75cb38a3f2b1c69c6e37a3cb9"
 ORIGINAL = "data/regional-review/bc-administrative-remainders-followup-2026"
 PARENT = "data/regional-review/regional-review-4254da254d94f450"
@@ -86,6 +85,17 @@ def load_input_baseline() -> dict:
     return record
 
 
+def derived_baseline_commit() -> str:
+    # The immutable derivative baseline is the first issue-packet commit. Read
+    # its identifier from the evidence manifest so rebasing the packet does not
+    # leave a dangling pre-rebase commit SHA in this reproduction tool.
+    manifest = json.loads((OWNED / "evidence-quality.json").read_text(encoding="utf-8"))
+    commit = manifest.get("baseline", {}).get("commit")
+    if not isinstance(commit, str) or len(commit) != 40 or any(c not in "0123456789abcdef" for c in commit):
+        raise ValueError("Evidence manifest has no valid immutable derivative baseline commit")
+    return commit
+
+
 def verify_original_inputs(record: dict) -> None:
     for entry in record["files"]:
         verify_file(REPO, entry, ORIGINAL_COMMIT)
@@ -118,9 +128,10 @@ def verify_derived_inputs(record: dict) -> None:
     # against commit A; custom streaming pins above cover the >32 MiB originals.
     sys.path.insert(0, str(REPO / "scripts"))
     from evidence.immutable import Baseline
-    Baseline(REPO, DERIVED_COMMIT, derived_descriptors(record))
+    derived_commit = derived_baseline_commit()
+    Baseline(REPO, derived_commit, derived_descriptors(record))
     for row in record["bounded_derived_inputs"]:
-        verify_file(REPO, {**row, "path": OWNED.relative_to(REPO).as_posix() + "/" + row["path"]}, DERIVED_COMMIT)
+        verify_file(REPO, {**row, "path": OWNED.relative_to(REPO).as_posix() + "/" + row["path"]}, derived_commit)
 
 
 def verify_complete_geoboundaries() -> dict:
