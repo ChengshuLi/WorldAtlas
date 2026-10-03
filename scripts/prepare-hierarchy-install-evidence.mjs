@@ -37,6 +37,8 @@ for(let i=0;i<raw.length&&raw[i];){
 const protectedFiles=new Map(Object.entries(report.preserved).map(([name,pin])=>['data/'+name,pin]));
 for(const file of report.immutable_grid_parts)protectedFiles.set('data/'+file.path,file.sha256);
 const outputNames=new Set([...changes.map(row=>row.path),...protectedFiles.keys()]);
+const codeInventoryPath=`${owned}/generation-code-inventory.json`,codeInventory=JSON.parse(read(codeInventoryPath));
+for(const file of codeInventory.files){if(sha256(read(file.path))!==file.sha256)throw Error('Generation code differs from the two-run source snapshot');outputNames.add(file.path);}
 for(const [name,pin]of protectedFiles)if(sha256(read(name))!==pin)throw Error('Protected installed bytes changed: '+name);
 const commonName='data/hierarchy.json',common=inventory.files.find(row=>row.path===commonName);
 if(!common)throw Error('Missing common hierarchy baseline');

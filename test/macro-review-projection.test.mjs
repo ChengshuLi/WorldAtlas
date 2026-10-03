@@ -2,9 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import os from 'node:os';import {createHash} from 'node:crypto';import {gzipSync,gunzipSync} from 'node:zlib';
 import {stageLandCreations} from '../scripts/stage-land-creations.mjs';import {footprintHash} from '../scripts/check-prepared.mjs';
-import {validateMacroReviewProjection,resolveProjectionGeometry,retainProjectionInputs,loadProjectionPredecessors,inheritProjectionAssessments,projectAdditionalOwnerProfiles} from '../scripts/prepare-macro-review-projection.mjs';
+import {validateMacroReviewProjection,resolveProjectionGeometry,retainProjectionInputs,loadProjectionPredecessors,inheritProjectionAssessments,projectAdditionalOwnerProfiles,validatePriorDashboardPins} from '../scripts/prepare-macro-review-projection.mjs';
 const units=[{id:'c',name:'C',level:'continent',parent_id:null},{id:'s',name:'S',level:'subcontinent',parent_id:'c'},{id:'r',name:'R',level:'region',parent_id:'s'},{id:'a',name:'A',level:'area',parent_id:'r'},{id:'p',name:'P',level:'province',parent_id:'a'}];
 const pins={hierarchy_sha256:'a'.repeat(64),location_index_sha256:'b'.repeat(64),footprints_sha256:'c'.repeat(64)};
+test('owner-profile reuse rejects stale hierarchy, catalog and footprint pins',()=>{
+ const dashboard={current_pins:{...pins}};assert.doesNotThrow(()=>validatePriorDashboardPins(dashboard,pins));
+ for(const key of Object.keys(pins))assert.throws(()=>validatePriorDashboardPins({current_pins:{...pins,[key]:'d'.repeat(64)}},pins),/exact predecessor/);
+ assert.throws(()=>validatePriorDashboardPins({},pins),/exact predecessor/);
+});
 test('metadata-only projection retains source-backed unknown-owner coverage without approving it',()=>{
  const assessment={id:'island',regional_interior_approved:false,historical_attributes_assessed:false,source_evidence:[{source_sha256:'d'.repeat(64)}]};
  const previous={locations:[{id:'island',owner:null,source_assessment:assessment}],groups:[]};

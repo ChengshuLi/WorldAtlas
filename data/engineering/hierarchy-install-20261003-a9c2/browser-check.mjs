@@ -6,7 +6,10 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {chromium} from '@playwright/test';
-const root=process.cwd(),dist=path.join(root,'dist'),output=path.dirname(new URL(import.meta.url).pathname);
+const root=process.cwd(),dist=path.resolve(root,process.env.ATLAS_LOCAL_BROWSER_DIST??'dist'),output=path.dirname(new URL(import.meta.url).pathname);
+const receiptName=process.env.ATLAS_LOCAL_BROWSER_RECEIPT??'browser-check.json',screenshotName=process.env.ATLAS_LOCAL_BROWSER_SCREENSHOT??'hancock-local-static.png';
+if(!/^[a-z0-9-]+\.json$/.test(receiptName)||!/^[a-z0-9-]+\.png$/.test(screenshotName))throw Error('Owned output basenames required');
+if(fs.existsSync(path.join(output,receiptName))||fs.existsSync(path.join(output,screenshotName)))throw Error('Fresh browser evidence outputs required');
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const atlas=JSON.parse(fs.readFileSync(path.join(dist,'atlas-geography.json')));
 const read=name=>JSON.parse(gunzipSync(fs.readFileSync(path.join(dist,name))));
@@ -38,7 +41,7 @@ try{
   }
   checks.push({id:ids[key],name,chain,complete_tiers:6,modes_checked:5});
  }
- await page.screenshot({path:path.join(output,'hancock-local-static.png')});assert.deepEqual(errors,[]);
+ await page.screenshot({path:path.join(output,screenshotName)});assert.deepEqual(errors,[]);
  const result={version:1,verified:true,headless_local_browser:true,physical_device_verified:false,live_publication:false,release_id:atlas.reference_release.id,release_version:6,hierarchy_sha256:atlas.reference_release.hierarchy_sha256,footprints_sha256:atlas.reference_release.footprints_sha256,locations:features.length,provinces:atlas.units.filter(row=>row.level==='province').length,west_virginia_locations:55,retired_parent_active:false,inspector_checks:checks,console_errors:errors,browser_version:browser.version(),static_atlas_sha256:sha(fs.readFileSync(path.join(dist,'atlas-geography.json')))};
- fs.writeFileSync(path.join(output,'browser-check.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(result));
+ fs.writeFileSync(path.join(output,receiptName),JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(result));
 }finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}

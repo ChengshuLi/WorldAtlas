@@ -1,0 +1,15 @@
+node:fs:978
+  handleErrorFromBinding(ctx);
+  ^
+
+Error: ENOSPC: no space left on device, write
+    at Object.writeSync (node:fs:978:3)
+    at Object.writeFileSync (node:fs:2503:26)
+    at prepareInstall (file:///workspace/worldatlas-hierarchy-regeneration/scripts/install-macro-reference.mjs:178:201)
+    at async file:///workspace/worldatlas-hierarchy-regeneration/scripts/prepare-hierarchy-correction-install.mjs:19:16 {
+  errno: -28,
+  syscall: 'write',
+  code: 'ENOSPC'
+}
+
+Node.js v24.19.0

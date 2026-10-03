@@ -109,6 +109,9 @@ export function projectAdditionalOwnerProfiles(originalProfiles,rows,previousPro
   return {...retained,owner,locations:members.length,continent:[...new Set(members.map(row=>row.continent))].sort().join(', '),open_group_ids:[...new Set(members.flatMap(row=>row.parent_chain))],status:'source-assessed-open',source_assessment_context:retained?.source_assessment_context??'Source-backed omitted land; owner remains unknown unless separately evidenced',source_assessment_entries:assessments,regional_interiors_approved:false};
  });
 }
+export function validatePriorDashboardPins(dashboard,beforePins){
+ if(['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>!HEX.test(dashboard.current_pins?.[key]??'')||dashboard.current_pins[key]!==beforePins[key]))throw Error('Prior owner profiles differ from the exact predecessor');
+}
 /** Explicit current membership projection; preserved inspections are never relabeled. */
 export async function prepareMacroReviewProjection({data,before,after,receipts=[],geometryProofs=null,sourceReceipt=null}){
  data=path.resolve(data);const root=path.dirname(data);
@@ -118,7 +121,7 @@ export async function prepareMacroReviewProjection({data,before,after,receipts=[
  if(!geometryProof&&(!same(prior.rows.map(row=>row.id),current.rows.map(row=>row.id))||footprintHash(before.features)!==footprintHash(after.features)))throw Error('Metadata projection cannot transfer, remove or alter location footprints/history');
  const previousFile=path.join(data,'macro-foundation/current-membership-projection.json.gz'),previous=fs.existsSync(previousFile)?read(previousFile):null;
  const previousDashboard=previous?read(path.join(data,'macro-foundation/world-review-projection.json')):null;
- if(previousDashboard&&['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>previousDashboard.current_pins?.[key]!==before.proof[key]))throw Error('Prior owner profiles differ from the exact predecessor');
+ if(previousDashboard)validatePriorDashboardPins(previousDashboard,before.proof);
  if(previous){if(['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>previous.current_pins?.[key]!==before.proof[key])||!same(previous.locations.map(row=>row.id),prior.rows.map(row=>row.id)))throw Error('Prior projection is not the exact current predecessor');const previousRows=new Map(previous.locations.map(row=>[row.id,row]));if(prior.rows.some(row=>JSON.stringify(reference(row))!==JSON.stringify(reference(previousRows.get(row.id)))))throw Error('Prior projected reference context changed without evidence');if(geometryProof)geometryProof.predecessor_reference_context={source_projection_sha256:sha(fs.readFileSync(previousFile)),locations:geometryProof.archived_location_references.map(row=>reference(previousRows.get(row.reference.id)))};}
  const originalWorld=previous?.baseline_files?.['data/world-review.json']?JSON.parse(gunzipSync(fs.readFileSync(path.join(root,previous.baseline_files['data/world-review.json'].archive_path)))):read(path.join(data,'world-review.json')),closure=read(path.join(data,'global-semantic-closure.json.gz'));
  const sourcePaths=new Set(['hierarchy.json','world-index.json','world-review.json','global-semantic-closure.json.gz','location-policy.json','administrative-sources.json','geographic-decision-migration.json.gz','macro-boundary-migration.json.gz','geographic-repair-evidence/migration-receipt.json.gz']);
@@ -147,12 +150,12 @@ export async function prepareMacroReviewProjection({data,before,after,receipts=[
 
 export function validateMacroReviewProjection({projection,hierarchy,locations,currentPins,baselineHierarchy=null,baselineLocations=null,predecessorProjections=[]}){
  const predecessor=predecessorProjections[0];
- if(predecessor&&projection.retained_source_assessments===true){
+ if(predecessor){
   if(['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>projection.before_pins?.[key]!==predecessor.current_pins?.[key]))throw Error('Projection predecessor does not match exact before pins');
   validateMacroReviewProjection({projection:predecessor,hierarchy:predecessor.groups,locations:predecessor.locations,currentPins:predecessor.current_pins,baselineHierarchy,baselineLocations,predecessorProjections:predecessorProjections.slice(1)});
  }
  const predecessorLocations=predecessor?.locations??baselineLocations,geometryProof=validateProjectionGeometry(projection,predecessorLocations,locations);
- if(predecessor){
+ if(predecessor&&projection.retained_source_assessments===true){
   const changed=new Set(geometryProof?.changed_ids??[]),current=new Map(projection.locations.map(row=>[row.id,row]));
   for(const row of predecessor.locations)if(row.source_assessment&&current.has(row.id)&&!changed.has(row.id)){
    if(JSON.stringify(current.get(row.id).source_assessment)!==JSON.stringify(row.source_assessment))throw Error('Projection dropped or rewrote retained source assessment');

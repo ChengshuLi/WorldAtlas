@@ -4,7 +4,7 @@ import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {encodeEvidenceJSON} from './evidence/encode-json.mjs';
 const owned='data/engineering/hierarchy-install-20261003-a9c2';
-const files=['test/install-macro-reference.test.mjs','test/evidence-revalidation-chain.test.mjs','test/evidence-partitions.test.mjs','test/macro-review-projection.test.mjs','test/source-policy-corrections.test.mjs'];
+const files=['test/install-macro-reference.test.mjs','test/evidence-revalidation-chain.test.mjs','test/evidence-partitions.test.mjs','test/macro-review-projection.test.mjs','test/source-policy-corrections.test.mjs','test/reference-macro-binding.test.mjs','test/evidence-partition-review.test.mjs'];
 const result=spawnSync(process.execPath,['--test',...files],{encoding:'utf8',maxBuffer:8*1024*1024,env:process.env});
 const log=Buffer.from(result.stdout+result.stderr),name=`${owned}/final-controls.log`;
 fs.writeFileSync(name,log);
