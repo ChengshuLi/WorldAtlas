@@ -1,0 +1,62 @@
+{
+  "campaign_id": "england-wales-1911-population-source",
+  "github_issue": 27,
+  "retrieved_at_utc": "2026-10-03",
+  "source_edition": {
+    "title": "Census of England and Wales, 1911. Summary Tables",
+    "subtitle": "Area, families or separate occupiers and population; also population classified by ages, condition as to marriage, occupations, tenements, birthplaces, and infirmities",
+    "creator": "Great Britain. Census Office",
+    "publisher": "H.M. Stationery Office; printed by Harrison and Sons, London",
+    "publication_date": "1915, as shown on the official report title matter and Internet Archive bibliographic metadata",
+    "observation_date": "1911-04-02, Sunday; stated in explanatory note 4 as the Census night",
+    "source_item_url": "https://archive.org/details/censusofenglandw1911grea",
+    "item_identifier": "censusofenglandw1911grea",
+    "item_metadata_url": "https://archive.org/metadata/censusofenglandw1911grea",
+    "item_metadata_bytes": 83763,
+    "item_metadata_sha256": "4cb93a0cb81a14892eef408130e051c24674c7b093c02861074fdd8034ef06e6",
+    "pdf_url": "https://archive.org/download/censusofenglandw1911grea/censusofenglandw1911grea.pdf",
+    "pdf_pages": 436,
+    "pdf_bytes": 42757593,
+    "pdf_sha256": "686c4c7b0d51bd76bfa297c99c86b42dab62779b946328f3add3aac16f28d24f",
+    "internet_archive_pdf_sha1": "dae20660228f6d9d677c24a452a9495f617a91a6",
+    "printed_table_location": "Table 5, printed page 5, PDF page 15; explanatory notes are on the preceding page",
+    "ocr_url": "https://archive.org/download/censusofenglandw1911grea/censusofenglandw1911grea_djvu.txt",
+    "ocr_bytes": 1948838,
+    "ocr_sha256": "fb5452a22fec13fe5bac44e31ecdf65d70e84c40d6f0919fa4dcd18381878cab",
+    "internet_archive_ocr_sha1": "d5d82a48d22b667d5af11ea76fc291238da9fb7a",
+    "restoration": "Download the 43-page-megabyte-class book PDF from the canonical Internet Archive item URL and verify bytes and SHA-256 above. The OCR text is an Internet Archive derivative for discovery only; original scanned pages govern the transcription. The PDF has 436 pages; table 5 is PDF page 15 / printed page 5. The metadata endpoint records additional IA-provided derivative files and checksums."
+  },
+  "license_and_attribution": {
+    "access": "Publicly downloadable through Internet Archive",
+    "license_status": "The Internet Archive metadata and item record inspected provide no explicit reuse license or rights statement for this digitized item. The 1915 work is a historical official publication; no formal public-domain or Crown-copyright determination was recorded in this evaluation.",
+    "attribution": "Great Britain, Census Office, Census of England and Wales, 1911: Summary Tables (London: H.M. Stationery Office, 1915), table 5, scanned by the Internet Archive from an Allen County Public Library copy; identify any transcription as independently prepared.",
+    "rights_caveat": "Public access is not itself a grant of reuse rights for the scan. The retained example is a small transcription of government statistical facts; any later reproduction of page images or substantial expressive text requires separate rights review."
+  },
+  "evaluated_tables": [
+    {
+      "location": "Table 5, printed page 5, PDF page 15",
+      "title": "Parliamentary counties, administrative counties (together with associated county boroughs), and registration counties—area; families or separate occupiers and population, 1911",
+      "geographic_unit": "The source's England and Wales combined row and source-era parliamentary, administrative and registration county units. The scan explicitly groups associated county boroughs with administrative counties for the relevant column; the table's multiple county systems are not interchangeable.",
+      "variables": ["area in statute acres", "families or separate occupiers (number of schedules collected)", "population (persons)"],
+      "population_count_universe": "The explanatory notes say the count includes persons on vessels in English and Welsh ports on Census night, or arriving the next day, with stated exceptions; absent fishermen who remained at sea and did not arrive Monday were excluded. No independent undercount estimate is supplied in the reviewed pages.",
+      "illustrative_rows": [
+        {
+          "source_geography": "England and Wales",
+          "population_persons": "36,070,492",
+          "check": "Visually read from the combined source row; the table repeats this total across Parliamentary County, Administrative County with associated County Boroughs, and Registration County population columns."
+        }
+      ]
+    }
+  ],
+  "other_collection_definitions_seen": [
+    "Table 1: England and Wales families or separate occupiers, population, decennial increase and females per 1,000 males at each census, 1801–1911.",
+    "Table 2: estimated mid-year population, 1801–1911, with estimates interpolated from censuses; not used as annual evidence here.",
+    "The volume contents list tables for administrative, registration, parliamentary and ecclesiastical areas; age, marriage, occupations, tenements, birthplace and infirmities are covered elsewhere in the same summary volume."
+  ],
+  "methods": {
+    "retrieval": "Downloaded the public Internet Archive item metadata, full text PDF derivative and OCR text derivative; retained their exact byte lengths and SHA-256 hashes. The Internet Archive metadata's SHA-1 values are separately recorded as an additional restoration check.",
+    "inspection": "Used OCR/text extraction to locate table 5 and explanatory notes, then rendered and visually reviewed PDF page 15. Only the combined England and Wales population row was transcribed. OCR is a navigation aid, not the numeric authority.",
+    "territorial_scope": "The evaluated row is the report's combined England and Wales aggregate. Table 5 also offers different source-era parliamentary, administrative, and registration county systems. No row is assigned to modern boundaries or Atlas locations. Scotland, Ireland and wider United Kingdom figures are outside this table's England and Wales scope.",
+    "uncertainty": "The page scan is legible at high resolution and the combined row is repeated in three population columns. No independent second transcription, census undercount assessment, or exact subnational boundary reconstruction was performed. The report says 1901 and 1911 figures generally use areas as constituted at the latter date; it also records changes through 30 June 1912 in footnotes."
+  }
+}
