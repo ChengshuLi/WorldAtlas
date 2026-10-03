@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "incorporated_main_commit": "68479f66b4f919a4dd6a4ff39c5ba20182e04761",
+  "original_branch_base": "d6fb7b7938797dc69e69afef3a2fd1e7f86899cc",
+  "checked_at_utc": "2026-10-03T19:15:25.076099+00:00",
+  "incorporated_source_only_commits": [
+    "a1fd3383e89dea4c4497bf3a6f469494871ad758",
+    "68479f66b4f919a4dd6a4ff39c5ba20182e04761"
+  ],
+  "preservation_check": "git diff --name-only incorporated-main HEAD -- research/campaigns research/geography data/regional-review",
+  "changed_owned_research_paths": [],
+  "limits": [
+    "Unchanged Git bytes/paths, not geographic approval, complete branch certificate or factual import permission",
+    "Runtime contract code unchanged by these source-only main commits"
+  ]
+}

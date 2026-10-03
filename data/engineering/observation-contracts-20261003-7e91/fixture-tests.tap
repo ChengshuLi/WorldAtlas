@@ -1,0 +1,17 @@
+✔ registration is additive, versioned, immutable and JSON-only; conflicts fail closed (4.970273ms)
+✔ false and literal zero remain sourced; absent, unknown and unresolved are distinct (1.544318ms)
+✔ no year zero, interval extrapolation, lifetime overflow or modern-reference promotion (0.469638ms)
+✔ numeric measurement rejects incompatible units, PPP, cohort, household weighting and uncertainty (1.046948ms)
+✔ entity government, controlled identities and feature links preserve the existing graph (0.495016ms)
+✔ direct/derived/reference/estimate/example precedence, explicit unknown and retirements are deterministic (0.931874ms)
+✔ shared pure snapshot seam round-trips all retained source, unit and derivation metadata without mutation (0.422186ms)
+✔ existing eight attributes, legacy values and precedence stay unchanged (0.803462ms)
+✔ retained synthetic transport fixture matches date-pinned expected results and original bytes (1.643658ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 112.893213
