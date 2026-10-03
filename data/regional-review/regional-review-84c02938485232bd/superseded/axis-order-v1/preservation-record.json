@@ -1,0 +1,36 @@
+{
+  "preserved_on": "2026-10-03",
+  "reason": "Issue #580 identified an EPSG:4326 axis-order defect; retain original outputs and script as the historical reproducer. These pre-correction diagnostic values must not be presented as current corrected results.",
+  "files": [
+    {
+      "file": "superseded/axis-order-v1/PROPOSALS.md",
+      "bytes": 1054,
+      "sha256": "299f0e41b1c52e795d6f689779955e3c214cf628532add432581a03dd15ee96b",
+      "description": "Original pre-axis-correction evidence or reproduction instructions; preserved verbatim."
+    },
+    {
+      "file": "superseded/axis-order-v1/README.md",
+      "bytes": 6408,
+      "sha256": "ec10ae6937cc1f68a5f7fed344c276bd55d03621f8456757c841564788c17177",
+      "description": "Original pre-axis-correction evidence or reproduction instructions; preserved verbatim."
+    },
+    {
+      "file": "superseded/axis-order-v1/audit.jsonl",
+      "bytes": 596199,
+      "sha256": "c5ebb6f3004ec19341d8d10cf4ae160fbf2ef9575ee7190d41ad16c6d96bd58b",
+      "description": "Original pre-axis-correction evidence or reproduction instructions; preserved verbatim."
+    },
+    {
+      "file": "superseded/axis-order-v1/department-union-comparison.json",
+      "bytes": 2371,
+      "sha256": "0afac0583a043f25734eeb71fd9bccd451cb1ea11e2cd2bf1b43478780272359",
+      "description": "Original pre-axis-correction evidence or reproduction instructions; preserved verbatim."
+    },
+    {
+      "file": "superseded/axis-order-v1/reproduce-geometry.py",
+      "bytes": 4657,
+      "sha256": "9f5c8b0a89b708764cb5b81ced4ad8d9f1242e76394231a28b618de2950de649",
+      "description": "Original pre-axis-correction evidence or reproduction instructions; preserved verbatim."
+    }
+  ]
+}
