@@ -24,7 +24,7 @@ export function migrateReference(db,read){
     const putUnit=db.prepare('INSERT INTO units VALUES (?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET name=excluded.name,parent_id=excluded.parent_id,metadata=excluded.metadata');
     for(const u of read('hierarchy.json').sort((a,b)=>levels.indexOf(b.level)-levels.indexOf(a.level)))putUnit.run(u.id,u.name,u.level,u.parent_id,JSON.stringify(u.metadata));
     const put=db.prepare('INSERT INTO locations(id,name,parent_id,geometry,reference_owner,metadata) VALUES (?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET name=excluded.name,parent_id=excluded.parent_id,geometry=excluded.geometry,reference_owner=excluded.reference_owner,metadata=excluded.metadata,active=1');
-    for(const f of features){const p=f.properties;put.run(f.id,p.name,p.parent_id,JSON.stringify(f.geometry),p.reference_owner,JSON.stringify({...current.get(f.id)?.metadata,...p.metadata,reference_version:3,reference_revision:revision}));}
+    for(const f of features){const p=f.properties;put.run(f.id,p.name,p.parent_id,JSON.stringify(f.geometry),p.reference_owner??null,JSON.stringify({...current.get(f.id)?.metadata,...p.metadata,reference_revision:revision}));}
     for(const l of obsolete)db.prepare('UPDATE locations SET active=0,metadata=? WHERE id=?').run(JSON.stringify({...l.metadata,retired_reason:'Superseded by the semantic reference coverage; original geometry and all historical records retained'}),l.id);
     db.exec('COMMIT');
   }catch(e){db.exec('ROLLBACK');throw e;}

@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
+import {readGeographicReleaseManifest,decodeGeographicReleaseBatch} from './read-geographic-release-manifest.mjs';
 const releasePins=['membership_sha256','footprints_sha256','hierarchy_sha256','location_ids_sha256','changes_sha256'];
 export function bootstrapConcurrency(value=process.env.ATLAS_IMPORT_CONCURRENCY??'6'){
  if(!/^[1-8]$/.test(String(value)))throw Error('ATLAS_IMPORT_CONCURRENCY must be an integer from 1 to 8');
@@ -15,7 +16,7 @@ function validatePrior(actual,release){
 export async function publishGeographicReleases({manifest,batch,request,concurrency=bootstrapConcurrency(),mode='publish'}){
  if(!['publish','stage','finalize'].includes(mode))throw Error('Unknown geographic publication mode');
  concurrency=bootstrapConcurrency(concurrency);
- const need=pathname=>{const part=manifest.batches.find(p=>p.path===pathname);if(!part)throw Error(`Missing prepared reference batch: ${pathname}`);return part;};
+ const need=pathname=>{const part=manifest.batches.find(p=>p.path===pathname||p.path===pathname+'.gz');if(!part)throw Error(`Missing prepared reference batch: ${pathname}`);return part;};
  async function concurrent(parts){let index=0,failure;await Promise.all(Array.from({length:Math.min(concurrency,parts.length)},async()=>{while(!failure&&index<parts.length){const part=parts[index++];try{await batch(part);}catch(error){failure??=error;}}}));if(failure)throw failure;}
  // Sources and stable identities precede memberships. All retries use the same
  // pinned ingestion IDs; staging service idempotence preserves completed rows.
@@ -88,10 +89,10 @@ async function request(route,options={}){
  if(!response.ok&&!(allowNotFound&&response.status===404))throw Error(`${route}: HTTP ${response.status}: ${(await response.text()).replaceAll(token,'[redacted]').slice(0,1200)}`);
  return response;
 }
-const manifest=JSON.parse(fs.readFileSync(`${directory}/index.json`));
+const manifest=readGeographicReleaseManifest(directory);
 let completed=0,lastUpdate=Date.now();
 async function batch(part){
- const bytes=fs.readFileSync(`${directory}/${part.path}`);if(sha(bytes)!==part.sha256)throw Error(`Prepared release hash mismatch: ${part.path}`);
+ const bytes=decodeGeographicReleaseBatch(fs.readFileSync(`${directory}/${part.path}`),part);
  await request(part.route,{method:'POST',headers:{'Content-Type':'application/json'},body:bytes});completed++;
  if(Date.now()-lastUpdate>15000){lastUpdate=Date.now();console.log(`Reference geography: ${completed} bounded import batches completed.`);}
 }
