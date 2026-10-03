@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "nz-census-1891-wellington-source",
+  "branch": "research/nz-census-1891-wellington-source",
+  "base_main_commit": "e4346af",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/59",
+  "date_timezone": "UTC",
+  "scope": {
+    "geographies": [
+      "Wellington Provincial District and Wellington Borough as named in the 1891 report; no boundary proposal"
+    ],
+    "attributes": [
+      "population and religious-denomination counts and source definitions"
+    ],
+    "supported_window": "Single census night, 5 April 1891",
+    "source_version": "Results of a Census of the Colony of New Zealand, 1891; printed 1892"
+  },
+  "updated_at_utc": "2026-10-03T11:00:00Z",
+  "geographic_release": null,
+  "input_paths": [
+    "source-manifest.json",
+    "source-evaluation.md"
+  ],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Verified exact Wellington province and borough population/religion totals and sex counts across paired tables; retained 21 religion rows plus borough total with source headers, definitions, license, and restoration hashes."
+  ],
+  "source_gaps": [
+    "Illustrative religion subset is not exhaustive; Māori were enumerated separately in February and have no matched religion counts in these 5 April tables; no table uncertainty estimates or boundary geometry."
+  ],
+  "blockers": [],
+  "next_action": "Run handoff scope check and submit one focused PR. After exact-head queue acceptance, verify main, release claim, and continue with the next ready issue.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
