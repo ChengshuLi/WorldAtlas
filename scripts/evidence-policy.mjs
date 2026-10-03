@@ -16,7 +16,7 @@ export function evidenceRequirement(issue, spec, policy = loadEvidencePolicy(), 
     return {required: false, legacy, decision: legacy ? `Original scope preserved; deficiencies tracked in #${policy.legacy_follow_up}` : 'Reporting rollout: no declared evidence contract'};
   }
   if (quality.version !== 1 || !Array.isArray(quality.subject_ids) || quality.subject_ids.some(id => typeof id !== 'string' || !id) ||
-      new Set(quality.subject_ids).size !== quality.subject_ids.length || !quality.pins || typeof quality.pins !== 'object' ||
+      new Set(quality.subject_ids).size !== quality.subject_ids.length || !quality.pins || Array.isArray(quality.pins) || typeof quality.pins !== 'object' ||
       Object.values(quality.pins).some(pin => !/^[a-f0-9]{64}$/.test(pin)) ||
       !['code', 'source', 'geometry', 'release'].includes(quality.review_kind)) throw Error('Invalid evidence_quality issue contract');
   const manifestPath = safeEvidencePath(quality.manifest_path.replaceAll('{job}', branch?.split('/').slice(1).join('/') ?? '{job}'));

@@ -22,6 +22,7 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             scripts
+            src
             .github
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
@@ -92,7 +93,7 @@ jobs:
           fi
       - name: Check worker reservations and regional content gates
         working-directory: candidate
-        run: node --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/evidence-quality.test.mjs test/premerge-evidence.test.mjs
+        run: node --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/evidence-quality.test.mjs test/premerge-evidence.test.mjs test/trusted-workflow-checkouts.test.mjs
   initial-foundation:
     if: github.head_ref == 'work' && github.event.pull_request.base.sha == '5b5f06f87d21f16cb14c6165e75854a29dc191ec'
     runs-on: ubuntu-latest

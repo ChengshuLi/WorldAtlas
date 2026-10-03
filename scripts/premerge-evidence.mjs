@@ -14,7 +14,7 @@ const geometryPolicy = {
 };
 
 /** Strengthen byte receipts with actual output bindings and change accounting. No submitted code runs. */
-export function validatePremergeManifest(manifest, {readFile, files, manifestPath, issue, spec, reservation, branch}) {
+export function validatePremergeManifest(manifest, {readFile, files, manifestPath, issue, spec, reservation, branch, pr}) {
   const quality = spec.evidence_quality;
   validateLanePaths(branch, [manifestPath], {ownedPaths: reservation.owned_paths});
   need(manifest.worker_id === reservation.worker_id, 'Manifest worker differs from canonical reservation');
@@ -45,6 +45,9 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
       [file.filename, file.previous_filename].includes(input.path)), 'Cannot overwrite original-source baseline evidence');
   }
   need(descriptors.length <= 512, 'Evidence file inventory exceeds bounded review budget');
+  for (const metric of manifest.metrics) if (metric.vintage === 'current') {
+    need(pr?.base?.sha === manifest.baseline.commit, 'Current metrics must use the actual PR-base vintage; use baseline/archived for older results');
+  }
   const bindings = manifest.metric_bindings ?? [];
   need(bindings.length === manifest.metrics.length && new Set(bindings.map(row => row.metric_id)).size === bindings.length,
     'Every metric needs an actual generated-output binding');
@@ -59,7 +62,21 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
     }
     need(value === metric.value, `Generated result differs from ledger: ${metric.id}`);
   }
+  const tables = manifest.rendered_tables ?? [];
+  for (const output of manifest.outputs.filter(file => file.role === 'generated-table')) {
+    const table = tables.find(table => table.path === output.path);
+    need(table && Array.isArray(table.rows) && table.rows.length, 'Generated table needs ledger-bound rows');
+    const lines = readFile(output.path, 'candidate').toString('utf8').split('\n');
+    for (const row of table.rows) {
+      const metric = manifest.metrics.find(metric => metric.id === row.metric_id);
+      need(metric && Number.isSafeInteger(row.line) && row.line > 0 && typeof row.template === 'string' && row.template.includes('{value}') &&
+        Number.isSafeInteger(row.decimals) && row.decimals >= 0 && row.decimals <= 12 && [1, 100].includes(row.scale ?? 1), 'Invalid rendered table row binding');
+      const value = (metric.value * (row.scale ?? 1)).toFixed(row.decimals);
+      need(lines[row.line - 1] === row.template.replaceAll('{value}', value), 'Rendered table differs from numeric ledger');
+    }
+  }
   for (const method of manifest.methods) {
+    need(['code', 'source', 'geography', 'generator', 'measurement'].includes(method.kind), 'Explicit supported method kind required');
     if (method.kind === 'geography') {
       need(method.helper_version === GEOMETRY_VERSION && Object.entries(geometryPolicy).every(([key, value]) => method[key] === value),
         'Unsupported geographic helper/coordinate/method policy');
@@ -153,7 +170,7 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
       ...files.filter(file => file.status !== 'added').map(file => [file.previous_filename ?? file.filename, 'base'])];
     for (const [name, vintage] of loads) await reader.load(name, vintage);
     const checked = validatePremergeManifest(manifest, {readFile: reader.read, files, manifestPath: requirement.manifestPath,
-      issue, spec, reservation, branch: pr.head.ref});
+      issue, spec, reservation, branch: pr.head.ref, pr});
     const result = {status: 'checked', head_sha: pr.head.sha, manifest_sha256: sha256(manifestBytes), ...checked};
     if (review) {
       const comments = await githubPages(api, `/repos/${repo}/issues/${pr.number}/comments`);
