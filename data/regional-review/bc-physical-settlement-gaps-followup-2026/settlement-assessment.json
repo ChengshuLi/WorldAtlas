@@ -1,0 +1,972 @@
+{
+  "issue": 606,
+  "retrieved_utc_date": "2026-10-03",
+  "assigned_ids": [
+    "atlas:physical:CAN-173:BRC",
+    "atlas:physical:CAN-177:BRC",
+    "atlas:physical:CAN-178:BRC",
+    "atlas:physical:CAN-195:BRC",
+    "atlas:physical:CAN-201:BRC",
+    "atlas:physical:CAN-207:BRC"
+  ],
+  "assessed_subject_count": 6,
+  "baseline": {
+    "source_main_commit": "05c6de936040d82e0e93cd82a83c2450aeb0b253",
+    "wna_region_id": "framework:region:western-north-america:d2a1c2775a57",
+    "frozen_region_geometry_sha256": "7697f7a1a388f6b3e289ef00795cdb5e86bf9138f89eb97ec8d19bcfa1c131a9",
+    "frozen_region_member_ids_sha256": "3e060c8e712c4955bdb2996d4edf3b9271aaa8d0120501171cc7327e10797aaf",
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"
+  },
+  "method": "For each of exactly the six issue IDs, verify immutable #485 baseline hashes, project pinned current unit geometry and official 2021 Census Subdivision/Population Centre/NRCan GNBC source geometries to EPSG:3347, temporarily MakeValid when needed, and use envelope-prefiltered OGR exact intersection. Enumerate every intersecting 2021 Census Subdivision with area over 0.00001 km2 and join its DGUID to the exact official 2021 Census population and dwelling counts table. Test exact point-in-unit/intersection for all retained GNBC British Columbia Populated Place records. Report source geometries requiring temporary repair. Shared geometry/source objects are never modified.",
+  "source_cohort_counts": {
+    "assigned_ids": 6,
+    "bc_2021_census_subdivision_polygons": 751,
+    "bc_2021_population_centre_polygons": 108,
+    "bc_gnbc_populated_place_points": 2228,
+    "census_table_rows": 5468,
+    "bc_legal_municipality_bbox_queries": 6,
+    "bc_legal_municipality_bbox_candidate_features": 25
+  },
+  "municipal_wfs_query": {
+    "canonical_layer": "https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP/ows",
+    "wfs_version": "2.0.0",
+    "typeName": "pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP",
+    "bbox_crs": "urn:ogc:def:crs:OGC:1.3:CRS84",
+    "result_crs": "urn:ogc:def:crs:OGC:1.3:CRS84",
+    "outputFormat": "application/json",
+    "count": 1000,
+    "retrieval_date_utc": "2026-10-03",
+    "queries": [
+      {
+        "location_id": "atlas:physical:CAN-173:BRC",
+        "bbox_wgs84": [
+          -139.0522,
+          59.18482,
+          -136.8095105272844,
+          60.0
+        ],
+        "candidate_features": 0,
+        "response_timestamp": "2026-10-03T19:14:50.601Z",
+        "response_file": "sources/bc-municipalities-173-bbox-20261003.geojson",
+        "response_sha256": "db246259b2fb2369fd471ad07c1f658fea9eb64739e189962e0fc749b0f14f64"
+      },
+      {
+        "location_id": "atlas:physical:CAN-177:BRC",
+        "bbox_wgs84": [
+          -133.63845,
+          58.90547,
+          -131.3323,
+          60.00000699652852
+        ],
+        "candidate_features": 0,
+        "response_timestamp": "2026-10-03T19:14:50.750Z",
+        "response_file": "sources/bc-municipalities-177-bbox-20261003.geojson",
+        "response_sha256": "e17e2a92035c18f29304cb99396ebb2e6fbb9a5982ed700f16c33c8d3f1c21d0"
+      },
+      {
+        "location_id": "atlas:physical:CAN-178:BRC",
+        "bbox_wgs84": [
+          -131.93811,
+          59.78328,
+          -129.85145,
+          60.0001
+        ],
+        "candidate_features": 0,
+        "response_timestamp": "2026-10-03T19:14:50.745Z",
+        "response_file": "sources/bc-municipalities-178-bbox-20261003.geojson",
+        "response_sha256": "4e5e152b7b62efa0286919a61c22b57e2d044b4052e2a50848c961ce8af43cd5"
+      },
+      {
+        "location_id": "atlas:physical:CAN-195:BRC",
+        "bbox_wgs84": [
+          -124.9231,
+          49.0025,
+          -123.5824,
+          50.1471
+        ],
+        "candidate_features": 9,
+        "response_timestamp": "2026-10-03T19:14:50.629Z",
+        "response_file": "sources/bc-municipalities-195-bbox-20261003.geojson",
+        "response_sha256": "800890443774e266bac0d4b1fb9b44a14468a2dda80279893bc7b48c9425e3dd"
+      },
+      {
+        "location_id": "atlas:physical:CAN-201:BRC",
+        "bbox_wgs84": [
+          -127.87051,
+          54.03263,
+          -126.95088851290241,
+          55.04882
+        ],
+        "candidate_features": 2,
+        "response_timestamp": "2026-10-03T19:14:50.603Z",
+        "response_file": "sources/bc-municipalities-201-bbox-20261003.geojson",
+        "response_sha256": "428cdd72ee4d511283815734e56f650701be01296dfb3dde0e0062ed5266c743"
+      },
+      {
+        "location_id": "atlas:physical:CAN-207:BRC",
+        "bbox_wgs84": [
+          -120.59837,
+          50.638401305513156,
+          -115.28454510471033,
+          54.59115
+        ],
+        "candidate_features": 14,
+        "response_timestamp": "2026-10-03T19:14:50.756Z",
+        "response_file": "sources/bc-municipalities-207-bbox-20261003.geojson",
+        "response_sha256": "1eccfed7e0c1b854f5f10d47130e568ffb5b67009dcbf578543c40ab9cf12d80"
+      }
+    ]
+  },
+  "results": [
+    {
+      "location_id": "atlas:physical:CAN-173:BRC",
+      "name": "St. Elias Mountains",
+      "role_and_source": {
+        "eco_id": 173,
+        "source_feature_count": 1,
+        "source_name": "St. Elias Mountains",
+        "current_overlap_over_source_pct": 21.291362,
+        "source_overlap_over_current_pct": 99.833031,
+        "symdiff_km2": 18227.096855,
+        "current_area_km2": 4936.598947,
+        "source_area_km2": 23147.210609,
+        "geometry_repaired_temporarily": true
+      },
+      "current_parent_chain": [
+        {
+          "id": "atlas:physical:CAN-173:BRC",
+          "name": "St. Elias Mountains",
+          "parent_id": "framework:province:wrangel-mountains:ac25e9adb67b",
+          "administrative_level": "Named physical region",
+          "reference_year": "National Ecological Framework reference",
+          "source_name": "AAFC physical geography adaptation",
+          "source_id": "aafc:ecoregion:173"
+        },
+        {
+          "id": "framework:province:wrangel-mountains:ac25e9adb67b",
+          "name": "Wrangel Mountains",
+          "parent_id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "name": "British Columbia",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null,
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        }
+      ],
+      "current_geometry": {
+        "projected_crs": "EPSG:3347",
+        "area_km2": 4936.598947,
+        "polygon_component_count": 7,
+        "interior_ring_count": 0,
+        "temporary_repair_after_projection": true,
+        "land_water_or_disconnected_review": "component and ring counts are retained; GSHHG comparison follows in physical_land_screen; these metrics alone do not determine islands or completeness"
+      },
+      "source_physical_screen": {
+        "name": "St. Elias Mountains",
+        "current_polygon_components": 7,
+        "current_interior_rings": 0,
+        "representative_point": [
+          -137.6966772329705,
+          59.589960000000005
+        ],
+        "representative_point_in_level1_land": true,
+        "gshhg_level1_containing_source_ids": [
+          2
+        ],
+        "level1_centroid_hits": 0,
+        "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+      },
+      "settlement_screen": {
+        "bc_legal_municipality_boundaries_intersecting": [],
+        "bc_municipal_wfs_bbox_candidate_count": 0,
+        "bc_municipal_wfs_observation_time": "2026-10-03T19:14:50.601Z",
+        "statistics_canada_population_centres_2021_intersections": [],
+        "nrCan_gnbc_populated_place_points_inside_or_touching": [],
+        "statscan_2021_csd_intersections_with_census_population": [
+          {
+            "csduid": "5957022",
+            "dguid": "2021A00055957022",
+            "name": "Stikine Region",
+            "csd_type": "RDA",
+            "overlap_km2": 4932.547525,
+            "csd_landarea_km2": 118395.88680000001,
+            "population_2021": "424",
+            "population_2016": "455",
+            "source_geometry_invalid_before_temporary_repair": false
+          }
+        ],
+        "csd_source_invalid_geometries_temporarily_repaired": [],
+        "csd_geometries_after_geographic_bbox_prefilter": 1,
+        "interpretation": "CSD population is an aggregate for the whole census subdivision. A large regional district electoral area intersecting a physical unit does not locate its residents inside that physical unit; reserve counts of zero are 2021 usual-resident counts and do not prove settlement absence or historical absence."
+      },
+      "finding": "Unresolved: no retained 2021 Population Centre polygon or GNBC Populated Place point locates a settlement in this unit. Official census subdivision overlap/population and current BC community-location metadata do not resolve where residents or communities lie within the physical footprint."
+    },
+    {
+      "location_id": "atlas:physical:CAN-177:BRC",
+      "name": "Yukon Southern Lakes",
+      "role_and_source": {
+        "eco_id": 177,
+        "source_feature_count": 1,
+        "source_name": "Yukon Southern Lakes",
+        "current_overlap_over_source_pct": 16.14296,
+        "source_overlap_over_current_pct": 99.859447,
+        "symdiff_km2": 28395.057378,
+        "current_area_km2": 5472.421758,
+        "source_area_km2": 33852.095883,
+        "geometry_repaired_temporarily": false
+      },
+      "current_parent_chain": [
+        {
+          "id": "atlas:physical:CAN-177:BRC",
+          "name": "Yukon Southern Lakes",
+          "parent_id": "framework:province:northern-boreal-cordillera:62704b2800fe",
+          "administrative_level": "Named physical region",
+          "reference_year": "National Ecological Framework reference",
+          "source_name": "AAFC physical geography adaptation",
+          "source_id": "aafc:ecoregion:177"
+        },
+        {
+          "id": "framework:province:northern-boreal-cordillera:62704b2800fe",
+          "name": "Northern Boreal Cordillera",
+          "parent_id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "name": "British Columbia",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null,
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        }
+      ],
+      "current_geometry": {
+        "projected_crs": "EPSG:3347",
+        "area_km2": 5472.421758,
+        "polygon_component_count": 1,
+        "interior_ring_count": 0,
+        "temporary_repair_after_projection": false,
+        "land_water_or_disconnected_review": "component and ring counts are retained; GSHHG comparison follows in physical_land_screen; these metrics alone do not determine islands or completeness"
+      },
+      "source_physical_screen": {
+        "name": "Yukon Southern Lakes",
+        "current_polygon_components": 1,
+        "current_interior_rings": 0,
+        "representative_point": [
+          -132.0420209383289,
+          59.457625
+        ],
+        "representative_point_in_level1_land": true,
+        "gshhg_level1_containing_source_ids": [
+          2
+        ],
+        "level1_centroid_hits": 0,
+        "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+      },
+      "settlement_screen": {
+        "bc_legal_municipality_boundaries_intersecting": [],
+        "bc_municipal_wfs_bbox_candidate_count": 0,
+        "bc_municipal_wfs_observation_time": "2026-10-03T19:14:50.750Z",
+        "statistics_canada_population_centres_2021_intersections": [],
+        "nrCan_gnbc_populated_place_points_inside_or_touching": [],
+        "statscan_2021_csd_intersections_with_census_population": [
+          {
+            "csduid": "5957022",
+            "dguid": "2021A00055957022",
+            "name": "Stikine Region",
+            "csd_type": "RDA",
+            "overlap_km2": 5471.337777,
+            "csd_landarea_km2": 118395.88680000001,
+            "population_2021": "424",
+            "population_2016": "455",
+            "source_geometry_invalid_before_temporary_repair": false
+          }
+        ],
+        "csd_source_invalid_geometries_temporarily_repaired": [],
+        "csd_geometries_after_geographic_bbox_prefilter": 2,
+        "interpretation": "CSD population is an aggregate for the whole census subdivision. A large regional district electoral area intersecting a physical unit does not locate its residents inside that physical unit; reserve counts of zero are 2021 usual-resident counts and do not prove settlement absence or historical absence."
+      },
+      "finding": "Unresolved: no retained 2021 Population Centre polygon or GNBC Populated Place point locates a settlement in this unit. Official census subdivision overlap/population and current BC community-location metadata do not resolve where residents or communities lie within the physical footprint."
+    },
+    {
+      "location_id": "atlas:physical:CAN-178:BRC",
+      "name": "Pelly Mountains",
+      "role_and_source": {
+        "eco_id": 178,
+        "source_feature_count": 1,
+        "source_name": "Pelly Mountains",
+        "current_overlap_over_source_pct": 3.324381,
+        "source_overlap_over_current_pct": 99.752823,
+        "symdiff_km2": 32377.129803,
+        "current_area_km2": 1116.014834,
+        "source_area_km2": 33487.627562,
+        "geometry_repaired_temporarily": false
+      },
+      "current_parent_chain": [
+        {
+          "id": "atlas:physical:CAN-178:BRC",
+          "name": "Pelly Mountains",
+          "parent_id": "framework:province:northern-boreal-cordillera:62704b2800fe",
+          "administrative_level": "Named physical region",
+          "reference_year": "National Ecological Framework reference",
+          "source_name": "AAFC physical geography adaptation",
+          "source_id": "aafc:ecoregion:178"
+        },
+        {
+          "id": "framework:province:northern-boreal-cordillera:62704b2800fe",
+          "name": "Northern Boreal Cordillera",
+          "parent_id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "name": "British Columbia",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null,
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        }
+      ],
+      "current_geometry": {
+        "projected_crs": "EPSG:3347",
+        "area_km2": 1116.014834,
+        "polygon_component_count": 4,
+        "interior_ring_count": 0,
+        "temporary_repair_after_projection": false,
+        "land_water_or_disconnected_review": "component and ring counts are retained; GSHHG comparison follows in physical_land_screen; these metrics alone do not determine islands or completeness"
+      },
+      "source_physical_screen": {
+        "name": "Pelly Mountains",
+        "current_polygon_components": 4,
+        "current_interior_rings": 0,
+        "representative_point": [
+          -130.2576753845454,
+          59.898365
+        ],
+        "representative_point_in_level1_land": true,
+        "gshhg_level1_containing_source_ids": [
+          2
+        ],
+        "level1_centroid_hits": 0,
+        "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+      },
+      "settlement_screen": {
+        "bc_legal_municipality_boundaries_intersecting": [],
+        "bc_municipal_wfs_bbox_candidate_count": 0,
+        "bc_municipal_wfs_observation_time": "2026-10-03T19:14:50.745Z",
+        "statistics_canada_population_centres_2021_intersections": [],
+        "nrCan_gnbc_populated_place_points_inside_or_touching": [],
+        "statscan_2021_csd_intersections_with_census_population": [
+          {
+            "csduid": "5957022",
+            "dguid": "2021A00055957022",
+            "name": "Stikine Region",
+            "csd_type": "RDA",
+            "overlap_km2": 1114.170776,
+            "csd_landarea_km2": 118395.88680000001,
+            "population_2021": "424",
+            "population_2016": "455",
+            "source_geometry_invalid_before_temporary_repair": false
+          }
+        ],
+        "csd_source_invalid_geometries_temporarily_repaired": [],
+        "csd_geometries_after_geographic_bbox_prefilter": 1,
+        "interpretation": "CSD population is an aggregate for the whole census subdivision. A large regional district electoral area intersecting a physical unit does not locate its residents inside that physical unit; reserve counts of zero are 2021 usual-resident counts and do not prove settlement absence or historical absence."
+      },
+      "finding": "Unresolved: no retained 2021 Population Centre polygon or GNBC Populated Place point locates a settlement in this unit. Official census subdivision overlap/population and current BC community-location metadata do not resolve where residents or communities lie within the physical footprint."
+    },
+    {
+      "location_id": "atlas:physical:CAN-195:BRC",
+      "name": "Georgia-Puget Basin",
+      "role_and_source": {
+        "eco_id": 195,
+        "source_feature_count": 1,
+        "source_name": "Georgia-Puget Basin",
+        "current_overlap_over_source_pct": 0.004505,
+        "source_overlap_over_current_pct": 100.0,
+        "symdiff_km2": 7023.076215,
+        "current_area_km2": 0.316388,
+        "source_area_km2": 7023.392603,
+        "geometry_repaired_temporarily": false
+      },
+      "current_parent_chain": [
+        {
+          "id": "atlas:physical:CAN-195:BRC",
+          "name": "Georgia-Puget Basin",
+          "parent_id": "framework:province:georgia-depression:5ddd962e26c8",
+          "administrative_level": "Named physical region",
+          "reference_year": "National Ecological Framework reference",
+          "source_name": "AAFC physical geography adaptation",
+          "source_id": "aafc:ecoregion:195"
+        },
+        {
+          "id": "framework:province:georgia-depression:5ddd962e26c8",
+          "name": "Georgia Depression",
+          "parent_id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "name": "British Columbia",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null,
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        }
+      ],
+      "current_geometry": {
+        "projected_crs": "EPSG:3347",
+        "area_km2": 0.316388,
+        "polygon_component_count": 3,
+        "interior_ring_count": 0,
+        "temporary_repair_after_projection": false,
+        "land_water_or_disconnected_review": "component and ring counts are retained; GSHHG comparison follows in physical_land_screen; these metrics alone do not determine islands or completeness"
+      },
+      "source_physical_screen": {
+        "name": "Georgia-Puget Basin",
+        "current_polygon_components": 3,
+        "current_interior_rings": 0,
+        "representative_point": [
+          -124.92013571428572,
+          50.1456
+        ],
+        "representative_point_in_level1_land": true,
+        "gshhg_level1_containing_source_ids": [
+          1203
+        ],
+        "level1_centroid_hits": 0,
+        "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+      },
+      "settlement_screen": {
+        "bc_legal_municipality_boundaries_intersecting": [],
+        "bc_municipal_wfs_bbox_candidate_count": 9,
+        "bc_municipal_wfs_observation_time": "2026-10-03T19:14:50.629Z",
+        "statistics_canada_population_centres_2021_intersections": [],
+        "nrCan_gnbc_populated_place_points_inside_or_touching": [],
+        "statscan_2021_csd_intersections_with_census_population": [
+          {
+            "csduid": "5917805",
+            "dguid": "2021A00055917805",
+            "name": "Galiano Island 9",
+            "csd_type": "IRI",
+            "overlap_km2": 0.180737,
+            "csd_landarea_km2": 0.24180000000000001,
+            "population_2021": "0",
+            "population_2016": "0",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5924818",
+            "dguid": "2021A00055924818",
+            "name": "Squirrel Cove 8",
+            "csd_type": "IRI",
+            "overlap_km2": 0.078112,
+            "csd_landarea_km2": 0.1706,
+            "population_2021": "0",
+            "population_2016": "0",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5919817",
+            "dguid": "2021A00055919817",
+            "name": "Portier Pass 5",
+            "csd_type": "IRI",
+            "overlap_km2": 0.015146,
+            "csd_landarea_km2": 0.0195,
+            "population_2021": "0",
+            "population_2016": "0",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5917029",
+            "dguid": "2021A00055917029",
+            "name": "Southern Gulf Islands",
+            "csd_type": "RDA",
+            "overlap_km2": 0.000793,
+            "csd_landarea_km2": 191.0754,
+            "population_2021": "6101",
+            "population_2016": "4732",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5919015",
+            "dguid": "2021A00055919015",
+            "name": "Cowichan Valley G",
+            "csd_type": "RDA",
+            "overlap_km2": 0.000186,
+            "csd_landarea_km2": 286.9032,
+            "population_2021": "2442",
+            "population_2016": "2315",
+            "source_geometry_invalid_before_temporary_repair": false
+          }
+        ],
+        "csd_source_invalid_geometries_temporarily_repaired": [
+          "5929018",
+          "5929022",
+          "5929803"
+        ],
+        "csd_geometries_after_geographic_bbox_prefilter": 59,
+        "interpretation": "CSD population is an aggregate for the whole census subdivision. A large regional district electoral area intersecting a physical unit does not locate its residents inside that physical unit; reserve counts of zero are 2021 usual-resident counts and do not prove settlement absence or historical absence."
+      },
+      "finding": "Unresolved: no retained 2021 Population Centre polygon or GNBC Populated Place point locates a settlement in this unit. Official census subdivision overlap/population and current BC community-location metadata do not resolve where residents or communities lie within the physical footprint."
+    },
+    {
+      "location_id": "atlas:physical:CAN-201:BRC",
+      "name": "Bulkley Ranges",
+      "role_and_source": {
+        "eco_id": 201,
+        "source_feature_count": 1,
+        "source_name": "Bulkley Ranges",
+        "current_overlap_over_source_pct": 99.716186,
+        "source_overlap_over_current_pct": 99.794184,
+        "symdiff_km2": 13.703409,
+        "current_area_km2": 2797.461399,
+        "source_area_km2": 2799.64958,
+        "geometry_repaired_temporarily": false
+      },
+      "current_parent_chain": [
+        {
+          "id": "atlas:physical:CAN-201:BRC",
+          "name": "Bulkley Ranges",
+          "parent_id": "framework:province:central-montane-cordillera:d5da55f00704",
+          "administrative_level": "Named physical region",
+          "reference_year": "National Ecological Framework reference",
+          "source_name": "AAFC physical geography adaptation",
+          "source_id": "aafc:ecoregion:201"
+        },
+        {
+          "id": "framework:province:central-montane-cordillera:d5da55f00704",
+          "name": "Central Montane Cordillera",
+          "parent_id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "name": "British Columbia",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null,
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        }
+      ],
+      "current_geometry": {
+        "projected_crs": "EPSG:3347",
+        "area_km2": 2797.461399,
+        "polygon_component_count": 1,
+        "interior_ring_count": 0,
+        "temporary_repair_after_projection": false,
+        "land_water_or_disconnected_review": "component and ring counts are retained; GSHHG comparison follows in physical_land_screen; these metrics alone do not determine islands or completeness"
+      },
+      "source_physical_screen": {
+        "name": "Bulkley Ranges",
+        "current_polygon_components": 1,
+        "current_interior_rings": 0,
+        "representative_point": [
+          -127.35584375480704,
+          54.539561632325544
+        ],
+        "representative_point_in_level1_land": true,
+        "gshhg_level1_containing_source_ids": [
+          2
+        ],
+        "level1_centroid_hits": 0,
+        "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+      },
+      "settlement_screen": {
+        "bc_legal_municipality_boundaries_intersecting": [],
+        "bc_municipal_wfs_bbox_candidate_count": 2,
+        "bc_municipal_wfs_observation_time": "2026-10-03T19:14:50.603Z",
+        "statistics_canada_population_centres_2021_intersections": [],
+        "nrCan_gnbc_populated_place_points_inside_or_touching": [],
+        "statscan_2021_csd_intersections_with_census_population": [
+          {
+            "csduid": "5951051",
+            "dguid": "2021A00055951051",
+            "name": "Bulkley-Nechako A",
+            "csd_type": "RDA",
+            "overlap_km2": 1281.48601,
+            "csd_landarea_km2": 3674.4277,
+            "population_2021": "5587",
+            "population_2016": "5256",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5951053",
+            "dguid": "2021A00055951053",
+            "name": "Bulkley-Nechako G",
+            "csd_type": "RDA",
+            "overlap_km2": 1247.955308,
+            "csd_landarea_km2": 14417.3803,
+            "population_2021": "836",
+            "population_2016": "903",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5949013",
+            "dguid": "2021A00055949013",
+            "name": "Kitimat-Stikine C (Part 1)",
+            "csd_type": "RDA",
+            "overlap_km2": 261.095299,
+            "csd_landarea_km2": 9635.7713,
+            "population_2021": "2978",
+            "population_2016": "2834",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5949028",
+            "dguid": "2021A00055949028",
+            "name": "Kitimat-Stikine B",
+            "csd_type": "RDA",
+            "overlap_km2": 6.924782,
+            "csd_landarea_km2": 7382.1691,
+            "population_2021": "1455",
+            "population_2016": "1473",
+            "source_geometry_invalid_before_temporary_repair": true
+          }
+        ],
+        "csd_source_invalid_geometries_temporarily_repaired": [
+          "5949028",
+          "5951031"
+        ],
+        "csd_geometries_after_geographic_bbox_prefilter": 15,
+        "interpretation": "CSD population is an aggregate for the whole census subdivision. A large regional district electoral area intersecting a physical unit does not locate its residents inside that physical unit; reserve counts of zero are 2021 usual-resident counts and do not prove settlement absence or historical absence."
+      },
+      "finding": "Unresolved: no retained 2021 Population Centre polygon or GNBC Populated Place point locates a settlement in this unit. Official census subdivision overlap/population and current BC community-location metadata do not resolve where residents or communities lie within the physical footprint."
+    },
+    {
+      "location_id": "atlas:physical:CAN-207:BRC",
+      "name": "Eastern Continental Ranges",
+      "role_and_source": {
+        "eco_id": 207,
+        "source_feature_count": 1,
+        "source_name": "Eastern Continental Ranges",
+        "current_overlap_over_source_pct": 5.100967,
+        "source_overlap_over_current_pct": 99.628307,
+        "symdiff_km2": 36258.091108,
+        "current_area_km2": 1955.806062,
+        "source_area_km2": 38199.357989,
+        "geometry_repaired_temporarily": false
+      },
+      "current_parent_chain": [
+        {
+          "id": "atlas:physical:CAN-207:BRC",
+          "name": "Eastern Continental Ranges",
+          "parent_id": "framework:province:columbia-montane-cordillera:f39a13d80364",
+          "administrative_level": "Named physical region",
+          "reference_year": "National Ecological Framework reference",
+          "source_name": "AAFC physical geography adaptation",
+          "source_id": "aafc:ecoregion:207"
+        },
+        {
+          "id": "framework:province:columbia-montane-cordillera:f39a13d80364",
+          "name": "Columbia Montane Cordillera",
+          "parent_id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:area:british-columbia:4ac4bdf4a9b8",
+          "name": "British Columbia",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338",
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null,
+          "administrative_level": null,
+          "reference_year": null,
+          "source_name": null,
+          "source_id": null
+        }
+      ],
+      "current_geometry": {
+        "projected_crs": "EPSG:3347",
+        "area_km2": 1955.806062,
+        "polygon_component_count": 110,
+        "interior_ring_count": 0,
+        "temporary_repair_after_projection": false,
+        "land_water_or_disconnected_review": "component and ring counts are retained; GSHHG comparison follows in physical_land_screen; these metrics alone do not determine islands or completeness"
+      },
+      "source_physical_screen": {
+        "name": "Eastern Continental Ranges",
+        "current_polygon_components": 110,
+        "current_interior_rings": 0,
+        "representative_point": [
+          -120.2494075,
+          54.182990000000004
+        ],
+        "representative_point_in_level1_land": true,
+        "gshhg_level1_containing_source_ids": [
+          2
+        ],
+        "level1_centroid_hits": 0,
+        "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+      },
+      "settlement_screen": {
+        "bc_legal_municipality_boundaries_intersecting": [],
+        "bc_municipal_wfs_bbox_candidate_count": 14,
+        "bc_municipal_wfs_observation_time": "2026-10-03T19:14:50.756Z",
+        "statistics_canada_population_centres_2021_intersections": [],
+        "nrCan_gnbc_populated_place_points_inside_or_touching": [],
+        "statscan_2021_csd_intersections_with_census_population": [
+          {
+            "csduid": "5955021",
+            "dguid": "2021A00055955021",
+            "name": "Peace River D",
+            "csd_type": "RDA",
+            "overlap_km2": 1756.096156,
+            "csd_landarea_km2": 11688.0134,
+            "population_2021": "4793",
+            "population_2016": "5920",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5953048",
+            "dguid": "2021A00055953048",
+            "name": "Fraser-Fort George F",
+            "csd_type": "RDA",
+            "overlap_km2": 76.778302,
+            "csd_landarea_km2": 12487.289,
+            "population_2021": "1249",
+            "population_2016": "1246",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5953019",
+            "dguid": "2021A00055953019",
+            "name": "Fraser-Fort George H",
+            "csd_type": "RDA",
+            "overlap_km2": 50.377933,
+            "csd_landarea_km2": 14926.732800000002,
+            "population_2021": "1589",
+            "population_2016": "1586",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5939011",
+            "dguid": "2021A00055939011",
+            "name": "Columbia-Shuswap A",
+            "csd_type": "RDA",
+            "overlap_km2": 46.074438,
+            "csd_landarea_km2": 13434.855800000001,
+            "population_2021": "3325",
+            "population_2016": "3148",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5901048",
+            "dguid": "2021A00055901048",
+            "name": "East Kootenay G",
+            "csd_type": "RDA",
+            "overlap_km2": 6.540406,
+            "csd_landarea_km2": 4656.389,
+            "population_2021": "1654",
+            "population_2016": "1467",
+            "source_geometry_invalid_before_temporary_repair": false
+          },
+          {
+            "csduid": "5901046",
+            "dguid": "2021A00055901046",
+            "name": "East Kootenay F",
+            "csd_type": "RDA",
+            "overlap_km2": 1.048825,
+            "csd_landarea_km2": 6091.9125,
+            "population_2021": "3521",
+            "population_2016": "2726",
+            "source_geometry_invalid_before_temporary_repair": false
+          }
+        ],
+        "csd_source_invalid_geometries_temporarily_repaired": [
+          "5933044"
+        ],
+        "csd_geometries_after_geographic_bbox_prefilter": 54,
+        "interpretation": "CSD population is an aggregate for the whole census subdivision. A large regional district electoral area intersecting a physical unit does not locate its residents inside that physical unit; reserve counts of zero are 2021 usual-resident counts and do not prove settlement absence or historical absence."
+      },
+      "finding": "Unresolved: no retained 2021 Population Centre polygon or GNBC Populated Place point locates a settlement in this unit. Official census subdivision overlap/population and current BC community-location metadata do not resolve where residents or communities lie within the physical footprint."
+    }
+  ],
+  "overall_conclusion": "All six subjects are individually assessed. The official local-area census boundaries overlap each area, but regional-district population totals cannot geolocate residents in the portions. Three Georgia-Puget Basin reserve Census Subdivisions intersect a very small assigned physical feature and each reports zero 2021 usual residents. The complete retained population-centre and GNBC populated-place screens have no hits for all six, and the current official BC legally-defined municipal boundary WFS has no polygon intersection with any assigned physical unit. BC First Nation Community Locations is catalogued Access Only and expressly approximate; its metadata is retained, its restricted coordinates are not. Settlement presence/absence within each physical unit remains unresolved. Do not infer empty land, political ownership, or settlement absence from the screening no-hits."
+}

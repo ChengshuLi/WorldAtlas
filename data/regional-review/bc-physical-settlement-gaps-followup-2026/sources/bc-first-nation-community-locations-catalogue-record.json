@@ -1,0 +1,15 @@
+{
+  "source": "BC Data Catalogue CKAN package metadata",
+  "canonical_package": "https://catalogue.data.gov.bc.ca/dataset/first-nation-community-locations",
+  "api_url": "https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=first-nation-community-locations",
+  "retrieved_utc_date": "2026-10-03",
+  "title": "First Nation Community Locations",
+  "license_title": "Access Only",
+  "description": "Approximate locations of First Nations in British Columbia, based on the main community as obtained from AANDC. The publisher warns locations may be missing or inaccurate and recommends contacting the First Nations for definitive locations.",
+  "resources": [
+    {"name":"BC Geographic Warehouse Custom Download","format":"multiple","access":"Access Only; no source geometry downloaded or retained"},
+    {"name":"WMS GetCapabilities","url":"https://openmaps.gov.bc.ca/geo/pub/WHSE_HUMAN_CULTURAL_ECONOMIC.FN_COMMUNITY_LOCATIONS_SP/ows?service=WMS&request=GetCapabilities","access":"Map service advertised; not used as settlement evidence because its location precision is expressly approximate and the catalog marks the dataset Access Only"},
+    {"name":"KML Ground Overlay file","url":"https://openmaps.gov.bc.ca/kml/geo/layers/WHSE_HUMAN_CULTURAL_ECONOMIC.FN_COMMUNITY_LOCATIONS_SP_loader.kml","access":"Not downloaded or retained"}
+  ],
+  "decision": "Not used to assign settlement presence/absence or to infer land/community ownership. Recommend an authorized community-confirmed source if precise verification is necessary."
+}
