@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "campaign_id": "beck-australia-climate-source",
+  "github_issue": 66,
+  "retrieved_date_utc": "2026-10-03",
+  "selected_edition": {
+    "article_doi": "10.1038/s41597-023-02549-6",
+    "article_title": "High-resolution (1 km) Köppen-Geiger maps for 1901–2099 based on constrained CMIP6 projections",
+    "article_online_date": "2023-10-23",
+    "data_record_doi": "10.6084/m9.figshare.21789074.v2",
+    "edition_version": 2,
+    "edition_published_date": "2026-01-14T12:04:18Z",
+    "edition_modified_date": "2026-01-14T12:11:24Z",
+    "edition_note": "Figshare v2 says the data were updated in January 2026 to correct a small calculation error; it refers to an associated article correction for details. The exact correction details were not independently recovered in this bounded review.",
+    "product": "Historical and future Köppen–Geiger class-map GeoTIFF archive; the article also describes associated confidence products",
+    "license": "CC BY 4.0",
+    "scope": "Global land raster extent; no Australia-specific mask, denominator, or coverage percentage in the examined metadata."
+  },
+  "evidence_item_count": 9,
+  "existing_pinned_evidence": {
+    "base_commit": "bd0cfbc34350a23ea92746074cffb9231ba1fd0e",
+    "inventory_path": "data/source-inventory.json",
+    "coverage_statement": "Four global historical Köppen–Geiger normals: 1901–1930, 1931–1960, 1961–1990, 1991–2020; latest may be labeled a separate modern reference.",
+    "incremental_receipt_path": "data/reference-attributes/incremental-receipt.json",
+    "pinned_archive_path": "/workspace/WorldAtlas/.cache/research/koppen-geiger-tif.zip",
+    "pinned_archive_sha256": "bb84453d4541f1a0bc5a804ead83f483c19ce70f16a5197f6d3a7b6a63e65562",
+    "pinned_rasters": [
+      {"interval": "1901–1930", "archive_entry": "1901_1930/koppen_geiger_0p00833333.tif", "sha256": "bcce8f83c6c850a34705ff49dbbeb19baae2a409ca2492e18e30ace1786893ef", "crc32": 3005294377},
+      {"interval": "1931–1960", "archive_entry": "1931_1960/koppen_geiger_0p00833333.tif", "sha256": "cc71784dcb61635a4913cb42111bdf98ab7fba3157b5f9f3e297da633f3e33d3", "crc32": 2386518035},
+      {"interval": "1961–1990", "archive_entry": "1961_1990/koppen_geiger_0p00833333.tif", "sha256": "ccdc6c70b20a62eb09b9dac715c136c48a7d3721e2fccaf19b52ad282916fefd", "crc32": 2657137481},
+      {"interval": "1991–2020", "archive_entry": "1991_2020/koppen_geiger_0p00833333.tif", "sha256": "2130f0071dfb2904947d8ec3a0d807fac71004df76e769262004f1602e4d6a13", "crc32": 3172180613}
+    ],
+    "comparison": "Downloaded and hashed the exact public version 2 archive. Its SHA-256 equals the existing pinned archive hash above; no replacement or re-preparation was made."
+  },
+  "sources": [
+    {
+      "name": "Scientific Data article HTML",
+      "url": "https://www.nature.com/articles/s41597-023-02549-6",
+      "http_status": 200,
+      "response_bytes": 546549,
+      "sha256": "487fb997f0684abe0d56915ebd32b599039fcc2dfa755638069b919631a13245",
+      "observations": ["online 2023-10-23", "four historical periods", "historical inputs and methods", "global scope", "future projection periods", "open-access license"]
+    },
+    {
+      "name": "Scientific Data article PDF",
+      "url": "https://www.nature.com/articles/s41597-023-02549-6.pdf",
+      "http_status": 200,
+      "response_bytes": 8338570,
+      "sha256": "9b541136a7cdaefc22d82959acbe5f5c76f5a9c2a55ab2769515b75188b5f36e",
+      "publication": "Scientific Data 10, 724 (2023); online 2023-10-23",
+      "sections": ["Historical Köppen-Geiger maps", "Data Records", "Technical Validation", "open-access licence"]
+    },
+    {
+      "name": "Figshare version 2 record API JSON",
+      "url": "https://api.figshare.com/v2/articles/21789074/versions/2",
+      "http_status": 200,
+      "response_bytes": 7778,
+      "sha256": "ccc7f6c0a0f9006f885d188a238996061fbf0da0870b65c37cce9f90ff9f4abc",
+      "record_doi": "10.6084/m9.figshare.21789074.v2",
+      "license": "CC BY 4.0",
+      "observations": ["version-specific 2026-01-14 publication and modification dates", "current ZIP metadata and checksum", "dataset correction note"]
+    },
+    {
+      "name": "Figshare current version 2 GeoTIFF archive",
+      "filename": "koppen_geiger_tif.zip",
+      "url": "https://ndownloader.figshare.com/files/61012822",
+      "http_status": 200,
+      "response_bytes": 130618411,
+      "sha256": "bb84453d4541f1a0bc5a804ead83f483c19ce70f16a5197f6d3a7b6a63e65562",
+      "figshare_md5": "7fc2f5a15d4f5fe0ce59c9a9b502aa09",
+      "license": "CC BY 4.0",
+      "retention": "Downloaded for full-object hash and read-only archive listing/header inspection. Temporary copy is outside the repository; restore exact bytes from URL and compare size and SHA-256. No source raster or archive is included in Git."
+    }
+  ],
+  "observations": [
+    "1. Existing source inventory and source receipt reviewed; exact current Figshare v2 archive hash equals the previously pinned source archive hash.",
+    "2. Article publication date is 2023-10-23; Figshare version 2 is a later data edition published/modified 2026-01-14 and notes a small calculation correction.",
+    "3. Historical map directories are 1901–1930, 1931–1960, 1961–1990 and 1991–2020; outputs are climatological categories, not annual weather observations. Article-documented confidence outputs are not inspected in the selected GeoTIFF ZIP.",
+    "4. Paper method derives each normal from adjusted temperature and precipitation reference climatologies and a modal combination; source-input observation coverage does not enlarge output intervals.",
+    "5. Each historical 0.00833333-degree TIFF is a 43200x21600 EPSG:4326 global grid; Australia lies within the described global land raster footprint. No Australia-only mask/area denominator was found.",
+    "6. Archive future directories begin 2041–2070 and 2071–2099 under SSPs; no 2021–2040 or 2025 classification output exists.",
+    "7. The 1991–2020 normal remains a normal ending in 2020; it is not a 2025 observation. No extrapolation or interpolation is supported.",
+    "8. Both article and data record identify CC BY 4.0; public archive download needs no private access.",
+    "9. Station-validation aggregates and WorldAtlas global location counts are not Australia-specific accuracy or territory denominators. Per-cell input provenance and Australian support percentages were not in examined metadata."
+  ],
+  "header_method": "Read-only GDAL gdalinfo -json -noct on the four selected global historical GeoTIFF entries through /vsizip/; inspected ZIP central-directory filenames and timestamps. No cropping, class sampling, transformation, preparation, or import was performed.",
+  "uncertainties": [
+    "No Australian territorial boundary or area denominator was independently evaluated; the global raster extent only establishes source footprint coverage, not a country-level coverage percentage.",
+    "The v2 record identifies a small calculation correction but the associated correction details were not recovered in this bounded review.",
+    "Global station-validation rates do not quantify Australia-only map error; no Australia-specific accuracy guarantee is claimed.",
+    "ZIP internal file timestamps are package/file metadata and are not climate observation dates."
+  ],
+  "no_private_credentials_used": true,
+  "no_imports_or_location_mappings": true
+}
