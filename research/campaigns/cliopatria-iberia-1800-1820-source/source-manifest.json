@@ -1,0 +1,355 @@
+{
+  "version": 1,
+  "campaign_id": "cliopatria-iberia-1800-1820-source",
+  "github_issue": 62,
+  "retrieved_at_utc": "2026-10-03",
+  "pinned_edition": {
+    "dataset": "Bennett et al. (2025), Cliopatria v0.2.0-duplicate",
+    "tag": "v0.2.0-duplicate",
+    "git_commit": "ad28a691b7c07c1fca89d0e0636d324667d2a258",
+    "source_url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.0-duplicate/cliopatria.geojson.zip",
+    "source_bytes": 44231317,
+    "source_sha256": "d01ae3a20d358cc5d54f69d9d725d390767d9c8759ac89ad6f90c58d106f3370",
+    "index_path": "data/cliopatria/index.json",
+    "hash_comparison": "Downloaded source ZIP SHA-256 exactly matches pinned index SHA-256.",
+    "license": "CC BY 4.0",
+    "source_fields": [
+      "Name",
+      "FromYear",
+      "ToYear",
+      "Area",
+      "Type",
+      "Wikipedia",
+      "Wikidata",
+      "SeshatID",
+      "Components",
+      "MemberOf"
+    ],
+    "license_scope_note": "CC BY 4.0 applies to Cliopatria dataset; do not assume it grants rights in third-party sources cited by its article."
+  },
+  "article": {
+    "title": "Cliopatria: a dataset of world-wide polities from 3400 BCE to 2024 CE",
+    "doi": "10.1038/s41597-025-04516-9",
+    "url": "https://www.nature.com/articles/s41597-025-04516-9",
+    "pdf_url": "https://www.nature.com/articles/s41597-025-04516-9.pdf",
+    "online_publication_year": 2025,
+    "pdf_bytes": 2674678,
+    "pdf_sha256": "9b8f4979c800ab10f9f410493e20b632927863951985b0b2e4013b359aeca9cb",
+    "html_bytes": 456617,
+    "html_sha256": "0c021d157258c604aea85260df302f00e09b64b7d1f91f9a8723cd0914bd740e",
+    "license": "CC BY 4.0",
+    "relevant_statements": [
+      "508 hand-created map images each associated with a specific, irregularly sampled year",
+      "source references organized by modern-state region in Table 1",
+      "specialized regional sources consulted to confirm/resolve changes and plausible mutually consistent borders",
+      "approximate boundaries; border uncertainty and territorial disputes not encoded",
+      "occupation and treaties may change borders within polity lifetimes",
+      "the single data file has one or more records per entity and row interval"
+    ]
+  },
+  "period_semantics": {
+    "source_fields": "FromYear and ToYear are inclusive in upstream README/paper",
+    "local_representation": "App index preserves source_from/source_to and uses half-open valid_from/valid_to for normalization",
+    "no_annual_inference": true
+  },
+  "selection": {
+    "query_geometry_wgs84_bbox": [
+      -10,
+      35,
+      5,
+      44
+    ],
+    "method": "OGR spatial filter against exact pinned GeoJSON, source year interval intersects 1800–1820 inclusive, exact Name Kingdom of Spain or Kingdom of Portugal; retain first 10 in upstream feature order. Window only aids sample retrieval; no new boundary is created.",
+    "source_fid": "OGR GeoJSON driver FID assigned in zero-based feature order for this exact archive; raw GeoJSON has no explicit feature id property. Treat identity as archive hash + FID + attributes; not portable across version changes.",
+    "record_count": 10,
+    "records": [
+      {
+        "ogr_fid": 9489,
+        "name": "Kingdom of Portugal",
+        "from_year_inclusive": 1709,
+        "to_year_inclusive": 1808,
+        "wikidata": "Q45670",
+        "seshat_id": "pt_portuguese_emp_2",
+        "member_of": "(Portuguese Empire)",
+        "issue_window_intersection": [
+          1800,
+          1808
+        ]
+      },
+      {
+        "ogr_fid": 10531,
+        "name": "Kingdom of Spain",
+        "from_year_inclusive": 1800,
+        "to_year_inclusive": 1802,
+        "wikidata": "Q29",
+        "seshat_id": "es_spanish_emp_2",
+        "member_of": "(Spanish Empire)",
+        "issue_window_intersection": [
+          1800,
+          1802
+        ]
+      },
+      {
+        "ogr_fid": 10578,
+        "name": "Kingdom of Spain",
+        "from_year_inclusive": 1803,
+        "to_year_inclusive": 1808,
+        "wikidata": "Q29",
+        "seshat_id": "es_spanish_emp_2",
+        "member_of": "(Spanish Empire)",
+        "issue_window_intersection": [
+          1803,
+          1808
+        ]
+      },
+      {
+        "ogr_fid": 10750,
+        "name": "Kingdom of Spain",
+        "from_year_inclusive": 1809,
+        "to_year_inclusive": 1810,
+        "wikidata": "Q29",
+        "seshat_id": "es_spanish_emp_2",
+        "member_of": "(Spanish Empire)",
+        "issue_window_intersection": [
+          1809,
+          1810
+        ]
+      },
+      {
+        "ogr_fid": 10760,
+        "name": "Kingdom of Portugal",
+        "from_year_inclusive": 1809,
+        "to_year_inclusive": 1810,
+        "wikidata": "Q45670",
+        "seshat_id": "pt_portuguese_emp_2",
+        "member_of": "(Portuguese Empire)",
+        "issue_window_intersection": [
+          1809,
+          1810
+        ]
+      },
+      {
+        "ogr_fid": 10800,
+        "name": "Kingdom of Portugal",
+        "from_year_inclusive": 1811,
+        "to_year_inclusive": 1811,
+        "wikidata": "Q45670",
+        "seshat_id": "pt_portuguese_emp_2",
+        "member_of": "(Portuguese Empire)",
+        "issue_window_intersection": [
+          1811,
+          1811
+        ]
+      },
+      {
+        "ogr_fid": 10811,
+        "name": "Kingdom of Spain",
+        "from_year_inclusive": 1811,
+        "to_year_inclusive": 1811,
+        "wikidata": "Q29",
+        "seshat_id": "es_spanish_emp_2",
+        "member_of": "(Spanish Empire)",
+        "issue_window_intersection": [
+          1811,
+          1811
+        ]
+      },
+      {
+        "ogr_fid": 10868,
+        "name": "Kingdom of Spain",
+        "from_year_inclusive": 1812,
+        "to_year_inclusive": 1813,
+        "wikidata": "Q29",
+        "seshat_id": "es_spanish_emp_2",
+        "member_of": "(Spanish Empire)",
+        "issue_window_intersection": [
+          1812,
+          1813
+        ]
+      },
+      {
+        "ogr_fid": 10874,
+        "name": "Kingdom of Portugal",
+        "from_year_inclusive": 1812,
+        "to_year_inclusive": 1823,
+        "wikidata": "Q45670",
+        "seshat_id": "pt_portuguese_emp_2",
+        "member_of": "(Portuguese Empire)",
+        "issue_window_intersection": [
+          1812,
+          1820
+        ]
+      },
+      {
+        "ogr_fid": 10915,
+        "name": "Kingdom of Spain",
+        "from_year_inclusive": 1814,
+        "to_year_inclusive": 1814,
+        "wikidata": "Q29",
+        "seshat_id": "es_spanish_emp_2",
+        "member_of": "(Spanish Empire)",
+        "issue_window_intersection": [
+          1814,
+          1814
+        ]
+      }
+    ]
+  },
+  "source_references": [
+    {
+      "article_table_entry": 89,
+      "regional_bucket": "Spain",
+      "citation": "García de Cortázar Ruiz de Aguirre, F. Atlas de historia de España/Fernando García de Cortázar. Barcelona: Planeta, citation shows “2005., 2009.”",
+      "scope_observation": "Secondary historical atlas; book/pages unavailable in bounded review; citation has ambiguous dates and no feature/year link. Rights not determined."
+    },
+    {
+      "article_table_entry": 90,
+      "regional_bucket": "Spain",
+      "citation": "Campo Arqueológico de Tavira. Cídades pré-romanas, indígenas e coloniais, que emitiram moeda até 45 a.C.",
+      "url": "https://photos1.blogger.com/blogger/2121/1119/1600/populi.jpg",
+      "http_status": 200,
+      "bytes": 198539,
+      "sha256": "b5e67cc4f9f8866183c4def9bbd7d8e609e2673d5dd92ffd2e8ea25256bdeaa0",
+      "inspection": "Image depicts pre-Roman / ancient settlement and coinage context through 45 BCE; it is outside 1800–1820. Image contains a reserved-rights/reproduction-prohibited notice; not redistributed."
+    },
+    {
+      "article_table_entry": 91,
+      "regional_bucket": "Spain",
+      "citation": "Expansión peninsular de la Corona de Aragón.svg - Wikipedia, la enciclopedia libre. (2008).",
+      "url": "https://commons.wikimedia.org/wiki/File:Expansi%C3%B3n_peninsular_de_la_Corona_de_Arag%C3%B3n.svg",
+      "metadata_url": "https://commons.wikimedia.org/w/api.php?action=query&titles=File%3AExpansi%C3%B3n_peninsular_de_la_Corona_de_Arag%C3%B3n.svg&prop=imageinfo&iiprop=extmetadata%7Curl%7Csize&format=json",
+      "author": "HansenBCN",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "metadata_response_bytes": 2974,
+      "metadata_response_sha256": "1fcb523bef6663b41105cbe65629113e93ad8ee9ff75cfbe5079ca1c712311e5",
+      "inspection": "Map concerns the Crown of Aragon’s historical expansion, outside the reviewed 1800–1820 rows. Its separate CC BY-SA terms do not override or expand the Cliopatria dataset license."
+    },
+    {
+      "article_table_entry": 92,
+      "regional_bucket": "Spain",
+      "citation": "de Abreu Galindo, J. Historia de la conquista de las siete islas Canarias. Goya, Santa Cruz de Tenerife, 1977.",
+      "inspection": "Bibliographic citation only; book text/pages and reuse terms not accessed; no feature/year link in article. Rights not determined."
+    }
+  ],
+  "source_map_snapshots": [
+    {
+      "repository_path": "original_map_images/B011-1800.PNG",
+      "tag": "v0.2.0-duplicate",
+      "interpretation": "1800 BCE after visual legend check",
+      "bytes": 473828,
+      "sha256": "5661b9eebb6d92c6a6437b94298695b4748b3b3b5db20b02c70a80636b095345",
+      "git_blob_sha1": "9a08ae93c2a0ff25a2d81c57477205e02ae3bc09",
+      "restoration_url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.0-duplicate/original_map_images/B011-1800.PNG"
+    },
+    {
+      "repository_path": "original_map_images/C304-1800.PNG",
+      "tag": "v0.2.0-duplicate",
+      "interpretation": "1800 CE after visual legend check",
+      "bytes": 535210,
+      "sha256": "0d96df97cf81ea0322e41c979fb1ebe32d6de99238817195ad65e7709ff3c74a",
+      "git_blob_sha1": "44c5d5394e81821714e5e052905331bc21ba17e5",
+      "restoration_url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.0-duplicate/original_map_images/C304-1800.PNG"
+    },
+    {
+      "repository_path": "original_map_images/C305-1803.PNG",
+      "tag": "v0.2.0-duplicate",
+      "interpretation": "1803 CE by filename and surrounding snapshot series",
+      "bytes": 541555,
+      "sha256": "da61896888f3a075c0d25c3763eecb027074c7b5e4a8ba25ea219dd5d7541ca9",
+      "git_blob_sha1": "f6d56bd4ac889bb7961e8973131d20b1b194ef17",
+      "restoration_url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.0-duplicate/original_map_images/C305-1803.PNG"
+    },
+    {
+      "repository_path": "original_map_images/C309-1809.PNG",
+      "tag": "v0.2.0-duplicate",
+      "interpretation": "1809 CE by filename and surrounding snapshot series",
+      "bytes": 536641,
+      "sha256": "57e9ad94f73cb3bb303ec2ade1249302cdec90fd3431f1173f6f070831d6a076",
+      "git_blob_sha1": "b55df180849468985b6c65556f6ea8bf0e00a8f3",
+      "restoration_url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.0-duplicate/original_map_images/C309-1809.PNG"
+    },
+    {
+      "repository_path": "original_map_images/C311-1812.PNG",
+      "tag": "v0.2.0-duplicate",
+      "interpretation": "1812 CE by filename and surrounding snapshot series",
+      "bytes": 537759,
+      "sha256": "bfa5e2be2ba84b9cb5c199a2581f38198367fd01327b5fe1b3d0e4299f2be11a",
+      "git_blob_sha1": "880e0888a80b6b8ece9a32763a3256bd731812bb",
+      "restoration_url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.0-duplicate/original_map_images/C311-1812.PNG"
+    },
+    {
+      "repository_path": "original_map_images/C312-1814.PNG",
+      "tag": "v0.2.0-duplicate",
+      "interpretation": "1814 CE by filename and surrounding snapshot series",
+      "bytes": 543735,
+      "sha256": "c682fc77c3964c682c0dedf88aabfcada5f81ebedbbff29de5431e27fe46ce9b",
+      "git_blob_sha1": "e23d37908e8f1de53a9e0b175bdb3bfcd76a088e",
+      "restoration_url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.0-duplicate/original_map_images/C312-1814.PNG"
+    },
+    {
+      "repository_path": "original_map_images/C315-1820.PNG",
+      "tag": "v0.2.0-duplicate",
+      "interpretation": "1820 CE by filename and surrounding snapshot series",
+      "bytes": 541618,
+      "sha256": "913126944e328edaa156e1af6dd09f1c15eec3857595d1069848f4d54bc6e820",
+      "git_blob_sha1": "5aaab0669b4f166d8422cb068122cddacaa86033",
+      "restoration_url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.0-duplicate/original_map_images/C315-1820.PNG"
+    }
+  ],
+  "source_data_publications": [
+    {
+      "name": "GitHub tag LICENSE.md",
+      "url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.0-duplicate/LICENSE.md",
+      "http_status": 200,
+      "bytes": 404,
+      "sha256": "62ca7e92dee4ebe402372d5e64f87845de445a6c0e5d76fddb68b3e33739d1a6",
+      "license": "CC BY 4.0"
+    },
+    {
+      "name": "GitHub tag README.md",
+      "url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.0-duplicate/README.md",
+      "http_status": 200,
+      "bytes": 6535,
+      "sha256": "25a2723e607dd03b01cfa0c9e0ecc83ea3e4c227198bd77faee04c3646be46b8",
+      "observations": [
+        "describes GeoJSON fields and inclusive date endpoints",
+        "warns boundaries reflect one version and users must assess suitability"
+      ]
+    },
+    {
+      "name": "Paper-cited Zenodo release 0.1.3 record",
+      "url": "https://zenodo.org/records/14714684",
+      "doi": "10.5281/zenodo.14714684",
+      "version": "v0.1.3",
+      "publication_date": "2025-01-21",
+      "license": "CC BY 4.0",
+      "note": "Paper cites this earlier release; not the exact app-pinned GitHub tag."
+    },
+    {
+      "name": "Zenodo 0.2.0 record current at review",
+      "url": "https://zenodo.org/records/20274630",
+      "doi": "10.5281/zenodo.20274630",
+      "version": "v0.2.0",
+      "publication_date": "2026-05-16",
+      "license": "CC BY 4.0",
+      "note": "A distinct upstream record/version; this review retained exact GitHub -duplicate tag/ZIP pinned by the application."
+    }
+  ],
+  "limitations": [
+    "Article Table 1 lists Spain references by region, not by individual GeoJSON feature or map-year; there is no row-level citation key in the pinned GeoJSON properties.",
+    "The SeshatID pages listed by the article returned HTTP 403 in this review, so their detailed linked evidence was unavailable.",
+    "No cited reference in this bounded list resolves sovereignty/control/claim meaning feature by feature.",
+    "No direct treaties, local administrative records or alternative claimant maps were independently evaluated."
+  ],
+  "methods": [
+    "Read current source inventory and existing data/cliopatria index/parts; did not recreate the source archive from scratch.",
+    "Downloaded exact index-pinned public ZIP and verified full SHA-256 equality.",
+    "Read original schema and queried at most ten matching records using GDAL spatial/time/name filters; no majority overlay, territory statistics, or geometry changes.",
+    "Inspected article/README/license, source map snapshots at selected years, and four Spain-region citations; retained source restoration hashes, access status and rights findings."
+  ],
+  "no_private_credentials_used": true,
+  "no_location_assignments_or_imports": true,
+  "no_spatial_majority_recomputed": true,
+  "no_geography_schema_code_changes": true
+}
