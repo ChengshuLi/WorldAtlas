@@ -1,0 +1,43 @@
+{
+  "status": "verified",
+  "read_only": true,
+  "checked_at_utc": "2026-10-03T18:30:48.067Z",
+  "project": {
+    "id": "weathered-lab-37571695",
+    "configured_postgres_major": 18
+  },
+  "branch": {
+    "id": "br-summer-butterfly-ar8qikk5",
+    "name": "production",
+    "is_default": true
+  },
+  "databases": [
+    {
+      "name": "neondb",
+      "owner_name": "neondb_owner"
+    }
+  ],
+  "roles": [
+    {
+      "name": "neondb_owner"
+    },
+    {
+      "name": "worldatlas_app"
+    }
+  ],
+  "api_requests": 4,
+  "checks": {
+    "expected_project": true,
+    "production_branch": true,
+    "postgres_major_observed": true,
+    "database_owners_present": true
+  },
+  "limitations": [
+    "Management API metadata only; no SQL connection or schema verification.",
+    "No migration, data import, Neon Auth configuration or runtime binding change.",
+    "A repository Actions secret does not configure the private Site runtime."
+  ],
+  "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37144379658",
+  "workflow_head": "8a22c155c114bf1ce4393a38e26535a74a3d7f32",
+  "receipt_transport": "Sanitized console JSON from successful workflow; artifact download unavailable through current egress"
+}

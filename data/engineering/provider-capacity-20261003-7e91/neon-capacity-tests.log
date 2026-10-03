@@ -1,0 +1,12 @@
+✔ account proof and configured quotas/compute remain typed, scoped and free of arbitrary private fields (24.086961ms)
+✔ denied organization proof stays unavailable while actual project settings remain verified (1.176663ms)
+✔ missing organization and quota are explicit unknowns, never inferred from public pricing (0.96234ms)
+✔ wrong project and lossy quotas fail before a misleading capacity receipt can be produced (1.210725ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 83.390798

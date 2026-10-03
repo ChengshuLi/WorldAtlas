@@ -34,11 +34,18 @@ jobs:
           NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
           NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }}
         run: node scripts/verify-neon-project.mjs data/validation/neon-project-verification.json
+      - name: Read configured capacity and available organization plan
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }}
+        run: node scripts/verify-neon-capacity.mjs data/validation/neon-capacity-verification.json
       - name: Preserve sanitized verification receipt
         if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: neon-project-verification-${{ github.run_id }}-${{ github.run_attempt }}
-          path: data/validation/neon-project-verification.json
+          path: |
+            data/validation/neon-project-verification.json
+            data/validation/neon-capacity-verification.json
           if-no-files-found: error
           retention-days: 14
