@@ -12,20 +12,24 @@ on:
       request_id:
         type: string
         required: true
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
-  checks: read
-  statuses: read
-concurrency:
-  group: worldatlas-main-integrate
-  cancel-in-progress: false
+permissions: {}
+# Candidate preparation and testing run independently across workers.
 jobs:
-  merge:
+  prepare:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: write
+      checks: read
+      statuses: read
+    outputs:
+      candidate: ${{ steps.prepare.outputs.candidate }}
+      base: ${{ steps.prepare.outputs.base }}
+      profile: ${{ steps.prepare.outputs.profile }}
+      shards: ${{ steps.prepare.outputs.shards }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -38,11 +42,98 @@ jobs:
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'
-      - name: Recheck ownership and merge the exact validated head
+      - id: prepare
+        name: Validate ready reviewed head and pin current integration candidate
         env:
           GH_TOKEN: ${{ github.token }}
+          MERGE_PHASE: prepare
         run: node scripts/run-worker-merge.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: merge-preflight-${{ inputs.request_id }}
+          path: merge-result.json
+          retention-days: 30
+  integration:
+    needs: prepare
+    if: needs.prepare.outputs.candidate != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.prepare.outputs.shards) }}
+    permissions:
+      contents: read
+    steps:
+      # Candidate code runs only in this isolated job, without write credentials,
+      # repository secrets, persistent checkout authentication, or OIDC rights.
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ needs.prepare.outputs.candidate }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+      - run: python -m pip install -r requirements.txt
+        if: needs.prepare.outputs.profile == 'full'
+      - name: Install browser dependencies only for tests that use Playwright
+        env:
+          INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
+          INTEGRATION_SHARD: ${{ matrix.shard }}
+        run: |
+          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then
+            npx playwright install --with-deps chromium
+          fi
+      - name: Build the combined application once before asset-dependent tests
+        if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0
+        run: npm run build:hosted
+      - name: Test applicable combined-tree invariants without publishing or live imports
+        env:
+          INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
+          INTEGRATION_SHARD: ${{ matrix.shard }}
+        run: node scripts/run-integration-tests.mjs
+  merge:
+    needs: [prepare, integration]
+    if: always() && needs.prepare.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: worldatlas-main-integrate
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      checks: read
+      statuses: read
+    steps:
+      # Fresh trusted main code only; candidate code never runs in this job.
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            src
+            .github
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Recheck tested base, ownership, reviewed bytes and checks before squash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MERGE_PHASE: merge
+          TESTED_BASE: ${{ needs.prepare.outputs.base }}
+          TESTED_CANDIDATE: ${{ needs.prepare.outputs.candidate }}
+          INTEGRATION_RESULT: ${{ needs.integration.result }}
+        run: node scripts/run-worker-merge.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
           name: merge-${{ inputs.request_id }}
           path: merge-result.json

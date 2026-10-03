@@ -74,9 +74,10 @@ test('shuffled and row-local varint transports reconstruct every packed bit acro
  assert.throws(()=>decodeOwnershipVarints(Uint8Array.of(128),{rows:grid.rows,offset:0,words:2,coordinateBits:grid.coordinateBits,size}),/Incomplete/);
 });
 test('real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum coordinates and high IDs',async()=>{
- const server=await createServer({server:{port:3294,strictPort:true},logLevel:'error'});await server.listen();
- const browser=await chromium.launch({args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ const server=await createServer({server:{port:3294,strictPort:true},logLevel:'error'});let browser;
  try{
+  await server.listen();
+  browser=await chromium.launch({args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   const page=await browser.newPage();await page.goto('http://localhost:3294/src/pixel-ownership.js');
   const result=await page.evaluate(async()=>{
    const {PixelGPU}=await import('/src/pixel-gpu.js'),{compileOwnership,packOwnership,pickOwnership}=await import('/src/pixel-ownership.js');
@@ -99,5 +100,5 @@ test('real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum 
    const uploads=gpu.uploads;for(let k=0;k<30;k++)gpu.draw({origin:{x:size-1+k/100,y:size-1},scale:16+k/10,zoom:10,localBorders:false,selected:0,hasPolitical:false,dpr:1});high.navigationOwnershipUploads=gpu.uploads-uploads;gpu.destroy();return {results,high};
   });
   assert.deepEqual(result.results,[{version:1,mismatches:0,error:0},{version:2,mismatches:0,error:0}]);assert.deepEqual(result.high.pixel,[193,71,29,255]);assert.equal(result.high.error,0);assert.equal(result.high.size,262144);assert.equal(result.high.navigationOwnershipUploads,0);console.log(JSON.stringify(result));
- }finally{await browser.close();await server.close();}
+ }finally{try{await browser?.close();}finally{await server.close();}}
 });

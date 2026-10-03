@@ -1,0 +1,20 @@
+{
+  "recorded_at": "2026-10-03T22:15:33.574068+00:00",
+  "scope_update": "User explicitly prioritized quality AND efficiency: do not serialize long tests or run full regressions for evidence-only work. GitHub650acceptance updated; original body retained.",
+  "changes": [
+    "Only final authority reread/squash job holds the global merge slot; candidate preparation/testing parallel across workers.",
+    "Trusted changed/renamed-path profile: isolated geography/history evidence, engineering-owned receipts and Markdown/text docs use focused invariant tests. Any code/workflow/schema/core-data change uses full regression.",
+    "Full regression split deterministically across3parallel shards; package build only on shard0. Test proves union equals all npm unit-test files exactly once."
+  ],
+  "tests": {
+    "command": "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "passed": 84,
+    "failed": 0
+  },
+  "limits": [
+    "Previous unsharded CI run is obsolete after updated source; no success is claimed. New hosted shard results required.",
+    "Claim, source/provenance evidence, independent exact-head review and unchanged reviewed-byte checks remain mandatory for both profiles.",
+    "Out-of-band main writers still require queue drain; atomic base guard not supplied by GitHub API.",
+    "First partialPR still does not close650; subsequent activationproof required."
+  ]
+}

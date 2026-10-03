@@ -1,0 +1,353 @@
+{
+  "version": 1,
+  "issue": 650,
+  "lane": "engineering",
+  "worker_id": "moderator-merge-650-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "5f8bc5893fb055ed89ce84965ae148cc99e95591",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 7304,
+        "sha256": "b73e25e3113ecd3573a1a58acaca50c6d6d2d1da6c577eecdf90787363272e12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/evidence-policy.json",
+        "bytes": 225,
+        "sha256": "69310e9dfbc92a7bfc954f6374a13dafb47a12ea53e27406cfd89138fc87463b",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 1862,
+      "sha256": "7199e3d714b593e06ec2e6c6a8342e9331c3c0f239db97c4739d59c1d1ea970b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 5116,
+      "sha256": "452894cefd464ea8be2c45f8f9cd8894e2949977a81d38bced4272cf56f69cf5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003.json",
+      "bytes": 1364,
+      "sha256": "3eccbe97f6ba8e6117a864e1579cb6b8512d136b6391b29f36e4318fc92ffb1e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/browser-ci-setup-receipt.json",
+      "bytes": 1107,
+      "sha256": "d0ae6f824d93337dcf62c5909746249786f14915a2135e7d748896307314b65a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/efficiency-update-receipt.json",
+      "bytes": 1430,
+      "sha256": "934dd525971ffa3a36874c288b1e09cd8cf5269d990dae700e8eb236643f6ba3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-browser-setup-final.tap",
+      "bytes": 8496,
+      "sha256": "d59f63966a37384b3430441559b568b30a220c2bbb1639ca888f06f16f771a64",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-prerequisites.tap",
+      "bytes": 8569,
+      "sha256": "e92bcaa75e4f984f866b7209010d1781281081327ba607a337ccdfc9489117b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-profile-corrected.tap",
+      "bytes": 8489,
+      "sha256": "ced9fe53da2af2bce770a3e7397bf061630cc7fa1243ee7ffbcb1e29618bd55f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-profile-tests.tap",
+      "bytes": 8489,
+      "sha256": "4f9a0ee8669001525d1c5784e1c321741b53194189fca31987ec5f81edf15dfd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-tests.tap",
+      "bytes": 7892,
+      "sha256": "0a594d4d19ab4f15e43278f8babc2ec679ffac6a27a11287bb56fe64d8401bb9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/hosted-missing-migration-derivative.log.gz",
+      "bytes": 24971,
+      "sha256": "1d4ba33e93cfe3ae085130590bef8bba99b98c1b57e17a58f80ff5928b0c9a5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/implementation-receipt.json",
+      "bytes": 1969,
+      "sha256": "3cfeeae3248dccc01015cf1065ce2caba079f2b12f3e1872b0c487290317bff5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/issue650-original-scope.md",
+      "bytes": 2269,
+      "sha256": "55a04072bfa571801a8b2bc5644aa1dfe1b902ff02711be83c97e92463bc2bb7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/local-full-suite-unavailable.tap.gz",
+      "bytes": 37500,
+      "sha256": "229492cebe93e816bd0f822a668160222cae0f46579d83e8130c98907e8d7112",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/migration-ci-setup-receipt.json",
+      "bytes": 816,
+      "sha256": "ca8a19d0d06e15f3449cf75fc5f8dbad76810615e1a96ff6e225feef1496b9f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/migration-prerequisites.tap",
+      "bytes": 665,
+      "sha256": "27b77b98237553bc1c7387e48467fb2dda927d5010eafbc6e155e1ed58e8b71b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/missing-browser-cleanup-negative.tap",
+      "bytes": 1514,
+      "sha256": "ac46e602398366ee1a1166f9df5b273ca129db2355ee643c6abb2eb6e635d81e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/profile-review-correction.json",
+      "bytes": 509,
+      "sha256": "bec55528cac0bd37444abdb184dca33baf333e4608334dc2d2ae801b0bdbf68a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/reservation.json",
+      "bytes": 822,
+      "sha256": "03e01a4ab996a4944f9d50d1ff7997db95962ab178b455e0560b6678a153eb3c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 13999,
+      "sha256": "5e84883ffd5aaada648a71463d892ec63f6da593d9309d3afc8cfe8c751188fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_SYSTEM_BEFORE_AFTER.md",
+      "bytes": 5678,
+      "sha256": "bca6924c9961d54d5cb0dda566a7bc308fbc2db9910058aa12ab2eccb40eaab9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 8993,
+      "sha256": "af417f8f68d520b4761f31ef5feb2404a04a840fbfb8afb57db4cb6122fc65e4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "bytes": 3117,
+      "sha256": "2daedba75ce32cbe246bd37156dcfe2ce345810a96c21ade8f970b7ed8f336c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 1999,
+      "sha256": "88323a6b7e57d3fb5d3e5721c0ad4847e199b46d9ec3ee612e0323785f4472d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 2632,
+      "sha256": "8d19b3b94a90dfd19a541c9bc03a3963800c007c5c90c5de3b8008a14f4aa906",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-ownership.test.mjs",
+      "bytes": 9705,
+      "sha256": "489752619dda02efaf2af0b3f29d60f3c1ec4a88cd3d0fe9a0f76565ddb79986",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "bytes": 3934,
+      "sha256": "8798b35229da3e56471b1f0b339a1b54ef3a2b5052ca821c299bb748c0371584",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 10308,
+      "sha256": "d70252d7a707738a655405e0f30c7df6464fe988fdb1b3dc97b6512da2e57ea2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "bytes": 13694,
+      "sha256": "ee18a36c8b61029e49b9aa90b995004200c129b1d0d130963ba179c3b09c922b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "serialized-integration-code",
+      "kind": "code",
+      "description": "Isolated and mocked integration/client controls; hosted full checkout validates complete candidate without publication",
+      "software": "Node24",
+      "units": "code review"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/trusted-workflow-checkouts.test.mjs",
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "added"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "804c934c882f746dcd35859889ed001ae2bc5047eb57498a1646bfa64e31d3cb"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/browser-ci-setup-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/efficiency-update-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-browser-setup-final.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-prerequisites.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-profile-corrected.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-profile-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/hosted-missing-migration-derivative.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/implementation-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/issue650-original-scope.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/local-full-suite-unavailable.tap.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/migration-ci-setup-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/migration-prerequisites.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/missing-browser-cleanup-negative.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/profile-review-correction.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/reservation.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "509aa5d36723b782859a325eb988b32ebd7ff8c0c77af3623011c3dc3641fd43"
+    },
+    {
+      "path": "docs/WORKER_SYSTEM_BEFORE_AFTER.md",
+      "status": "added"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "status": "modified",
+      "original_sha256": "a266d4052f77d5566120e681d474cd67e203148dc303ef75c7722757aad44652"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "a460048affe0dc90407a5cb13a69d250fddc791fb7ee5ed9ae06fc3e2d28158b"
+    },
+    {
+      "path": "test/compact-ownership.test.mjs",
+      "status": "modified",
+      "original_sha256": "3bf9b6d561796f127fe633d3539e6e925715e43296b51f0087e07eafb5759bb1"
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "status": "modified",
+      "original_sha256": "14f3be23108fc906194ee32843174e9f732c5c4f332ec6f80fa67ced2332c3fc"
+    }
+  ],
+  "metric_bindings": []
+}

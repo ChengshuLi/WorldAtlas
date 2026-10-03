@@ -153,3 +153,11 @@ test('remote decisions reject stale exact-head reviews and a later change reques
   await assert.rejects(() => checkPremergeEvidence({...f, repo: 'test/repo', policy,
     api: route => route.includes('/compare/') ? Promise.resolve({status: 'diverged'}) : remote.api(route)}), /ancestor/);
 });
+
+test('unchanged authored evidence survives unrelated main advance, while current metrics require refresh', () => {
+  const f = fixture(); f.pr.base.sha = 'c'.repeat(40);
+  f.manifest.metrics[0].vintage = 'baseline';
+  assert.equal(validate(f).change_files_checked, 2);
+  f.manifest.metrics[0].vintage = 'current';
+  assert.throws(() => validate(f), /actual PR-base vintage/);
+});
