@@ -83,5 +83,12 @@
     ],
     "this_part": 3,
     "remaining_after_this_part": 0
+  },
+  "derivation_review_correction": {
+    "candidate": "c256249747ed62e5d820b64678ac418d05dafea2",
+    "independent_review": "data/engineering/observation-integration-20261003-7e91/early-independent-review.json",
+    "outcome": "three reproduced findings corrected; six actual SQLite/PostgreSQL integration groups pass; final review pending",
+    "receipt": "data/engineering/observation-integration-20261003-7e91/derivation-correction-controls.tap",
+    "limits": "Synthetic fixture only; no actual approval, factual import or provider operation; static/client/owner integration unfinished"
   }
 }

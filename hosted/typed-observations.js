@@ -5,6 +5,7 @@ import {assertJSONData} from '../src/json-contract.js';
 import {observationContract,observationDigest,registryForDigest} from '../src/observation-modules.js';
 import {canonicalTypedJSON,decodeTypedRow,normalizeTypedEvidence,normalizeTypedRetirement} from '../src/typed-snapshot.js';
 import {assertResearchBundleApproved} from '../src/regional-import-gate.js';
+import {derivationInputIds,validateTypedDerivations} from '../src/typed-derivations.js';
 import researchGate from '../data/research-geography-gate.json' with {type:'json'};
 
 const definitions={observations:storage.typed_observations,feature_links:storage.typed_feature_links,retirements:storage.typed_retirements};
@@ -54,18 +55,30 @@ async function catalogContext(db,collections,contract){
   retained[collection]=(await byIds(db,definitions[collection].table,ids)).map(row=>decodeTypedRow(collection,row));
  }
  const evidence=[...collections.observations.map(row=>['observations',row]),...collections.feature_links.map(row=>['feature_links',row]),...retained.observations.map(row=>['observations',row]),...retained.feature_links.map(row=>['feature_links',row])];
- const entityIds=[],sourceIds=collections.retirements.map(row=>row.source_id),derivationIds=[];
- for(const [collection,row] of evidence){const registry=await registryForDigest(row.registry_sha256);entityIds.push(...endpointIds(collection,row,registry));sourceIds.push(row.source_id);const inputs=row.metadata?.derivation_input_ids??[];if(!Array.isArray(inputs)||inputs.length>128)fail('Invalid derivation input IDs');inputs.forEach(id=>text(id,'derivation identity'));derivationIds.push(...inputs);}
- const derivedTyped=await byIds(db,definitions.observations.table,derivationIds),derivedLegacy=await byIds(db,storage.records.table,derivationIds);
- for(const id of new Set(derivationIds)){
-  const matches=[...collections.observations,...derivedTyped,...derivedLegacy].filter(row=>row.id===id);
-  const distinct=[...new Set(matches.map(row=>row.subject_id===undefined?'legacy':'typed'))];
-  if(!matches.length||distinct.length!==1)fail('Derivation input is absent or ambiguous',409);
+ const entityIds=[],sourceIds=collections.retirements.map(row=>row.source_id);
+ const derivations=new Map(),scanned=new Set();
+ let pending=evidence.map(([,row])=>row);
+ for(let depth=0;pending.length;depth++){
+  if(depth>64)fail('Derivation chain exceeds 64 levels',413);
+  const requested=[...new Set(pending.flatMap(derivationInputIds))].filter(id=>!scanned.has(id));
+  requested.forEach(id=>scanned.add(id));if(scanned.size>4096)fail('Derivation closure exceeds 4096 identities',413);
+  const typed=await byIds(db,definitions.observations.table,requested),legacy=await byIds(db,storage.records.table,requested);
+  pending=[];
+  for(const id of requested){
+   const incoming=collections.observations.find(row=>row.id===id),retainedTyped=typed.find(row=>row.id===id),retainedLegacy=legacy.find(row=>row.id===id);
+   if((incoming||retainedTyped)&&retainedLegacy||!incoming&&!retainedTyped&&!retainedLegacy)fail('Derivation input is absent or ambiguous',409);
+   const row=incoming??(retainedTyped?decodeTypedRow('observations',retainedTyped):{...retainedLegacy,metadata:JSON.parse(retainedLegacy.metadata)});
+   derivations.set(id,{row,typed:Boolean(incoming||retainedTyped)});pending.push(row);
+  }
  }
- for(const row of [...derivedTyped,...derivedLegacy]){sourceIds.push(row.source_id);entityIds.push(row.subject_id??row.location_id);}
+ for(const [collection,row] of evidence){const registry=await registryForDigest(row.registry_sha256);entityIds.push(...endpointIds(collection,row,registry));sourceIds.push(row.source_id);}
+ for(const {row,typed} of derivations.values()){
+  sourceIds.push(row.source_id);entityIds.push(...(typed?endpointIds('observations',row,await registryForDigest(row.registry_sha256)):[row.location_id]));
+ }
  const rawSources=await byIds(db,storage.sources.table,sourceIds),entities=await byIds(db,storage.entities.table,entityIds);
- const context={sources:rawSources.map(cleanCatalog),entities:entities.map(cleanCatalog),rawSources,retained,derivation_subject_ids:[...derivedTyped,...derivedLegacy].map(row=>row.subject_id??row.location_id)};
+ const context={sources:rawSources.map(cleanCatalog),entities:entities.map(cleanCatalog),rawSources,retained,derivations};
  for(const collection of ['observations','feature_links'])for(let i=0;i<retained[collection].length;i++)retained[collection][i]=await normalizeTypedEvidence(collection,retained[collection][i],context);
+ for(const [id,input] of derivations)if(input.typed)derivations.set(id,{...input,row:await normalizeTypedEvidence('observations',input.row,context)});
  return context;
 }
 
@@ -103,7 +116,7 @@ async function importTypedBatchCore(db,payload,{gate=researchGate}={}){
  for(const input of collections.retirements)normalized.retirements.push(normalizeTypedRetirement(input,allClaims));
  const expectedPins=await typedSourcePins(context.rawSources);
  if(!Array.isArray(payload.source_pins)||payload.source_pins.length!==expectedPins.length||new Set(payload.source_pins.map(row=>row?.id)).size!==expectedPins.length||expectedPins.some(expected=>!payload.source_pins.some(row=>row?.id===expected.id&&row.sha256===expected.sha256)))fail('Typed import must pin original source catalog bytes',409);
- const factualSubjects=new Set(context.derivation_subject_ids);
+ const factualSubjects=new Set(validateTypedDerivations([...normalized.observations,...normalized.feature_links,...context.retained.observations,...context.retained.feature_links],new Map([...context.derivations].map(([id,input])=>[id,input.row])),context.sources));
  for(const collection of ['observations','feature_links'])for(const row of normalized[collection])if(!row.is_example){const ids=collection==='observations'?[row.subject_id]:[row.source_entity_id,row.target_entity_id];ids.forEach(id=>factualSubjects.add(id));}
  for(const row of normalized.retirements){const target=allClaims[row.collection].find(target=>target.id===row.target_id);if(target.is_example&&!payload.examples)fail('Example retirement requires explicit batch opt-in');if(!target.is_example){const ids=row.collection==='observations'?[target.subject_id]:[target.source_entity_id,target.target_entity_id];ids.forEach(id=>factualSubjects.add(id));}}
  if(factualSubjects.size){if(gate.version!==2)fail('Typed factual imports require complete regional certificates',409);try{assertResearchBundleApproved(gate,pins,{regionIds:payload.region_ids,subjectIds:[...factualSubjects]});}catch(error){fail(error.message,409);}}
@@ -135,6 +148,7 @@ async function typedSnapshotPageCore(db,year,{stream='observations',examples=fal
  // quietly return malformed evidence or reinterpret an old definition.
  if(stream!=='retirements')for(let i=0;i<selected.length;i++)selected[i]=await normalizeTypedEvidence(stream,selected[i],context);
  else for(let i=0;i<selected.length;i++)selected[i]=normalizeTypedRetirement(selected[i],{sources:context.sources,...context.retained},{requireReplacement:false});
+ validateTypedDerivations(stream==='retirements'?[...context.retained.observations,...context.retained.feature_links]:selected,new Map([...context.derivations].map(([id,input])=>[id,input.row])),context.sources);
  const afterMarker=await exportStorageMarkerV3(db);if(marker.fingerprint!==afterMarker.fingerprint)fail('Typed evidence changed during loading; restart all streams',409);
  const result={version:1,year,stream,examples:enabled,registry_sha256:contract.registry_sha256,fingerprint:marker.fingerprint,revision:marker.revision,total,rows:selected,sources:context.sources,entities:context.entities,source_pins:await typedSourcePins(context.rawSources),next_cursor:found.length>limit?encodeCursor({version:1,year,stream,examples:enabled,after:selected.at(-1).id,fingerprint:marker.fingerprint,registry_sha256:contract.registry_sha256}):null};
  if(new TextEncoder().encode(JSON.stringify(result)).length>8*1024*1024){const error=new RecordError('Typed snapshot page exceeds8 MiB; retry a smaller limit',413);error.retryable=true;error.suggested_limit=Math.max(1,Math.floor(limit/2));throw error;}return result;

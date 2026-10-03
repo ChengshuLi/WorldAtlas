@@ -98,9 +98,36 @@ test('legacy23-table projections require the complete known schema and current m
  const marker=await legacyStorageMarker(f.db);assert.equal(marker.version,2);assert.equal(Object.keys(marker.counts).length,23);assert.equal(marker.legacy_projection.complete,false);assert.equal(marker.legacy_projection.required_complete_export_version,3);
  const page=await legacyStoragePage(f.db,'sources',{limit:1});assert.equal(page.records.length,1);assert.ok(page.next_cursor);const next=await legacyStoragePage(f.db,'sources',{limit:1,cursor:page.next_cursor});assert.equal(next.records.length,1);assert.notEqual(next.records[0].id,page.records[0].id);assert.equal(page.snapshot_marker.legacy_projection.complete,false);
  const catalog=await legacyStorageCatalog(f.db);assert.equal(catalog.legacy_projection.complete,false);
- const {default:worker}=await import('../hosted/worker.js');const response=await worker.fetch(new Request('https://example.org/api/storage/v2/catalog'),{DB:f.db},{});assert.equal(response.headers.get('X-Atlas-Complete-Export-Version'),'3');assert.deepEqual(await response.json(),catalog.catalog);
+ const {default:worker}=await import('../hosted/worker.js');const response=await worker.fetch(new Request('https://example.org/api/storage/v2/catalog'),{DB:f.db},{});assert.equal(response.headers.get('X-Atlas-Complete-Export-Version'),'3');assert.equal(await response.text(),JSON.stringify(catalog.catalog));
  const {default:os}=await import('node:os'),{default:path}=await import('node:path');const directory=fs.mkdtempSync(path.join(os.tmpdir(),'typed-legacy-export-'));
  try{await assert.rejects(exportHostedStorageV2({origin:'https://example.org',output:path.join(directory,'capture'),token:'isolated fixture token',fetcher:async()=>Response.json({...marker,read_only:true})}),/labelled legacy projection/);}finally{fs.rmSync(directory,{recursive:true,force:true});}
  if(f.pg)await f.pg.engine.exec('DROP TRIGGER atlas_typed_retirements_immutable ON atlas_typed_retirements');else f.db.sqlite.exec('DROP TRIGGER atlas_typed_retirements_collision');
  await assert.rejects(legacyStorageMarker(f.db),error=>error.status===503);
+}));
+
+test('derivation closures reject example promotion, cycles and ambiguous roots while example-only acyclic chains remain available under the paused factual gate',()=>both(async f=>{
+ const approved={version:2,ready_for_location_attributes:true,macro_boundaries:{approved:true,approval_issue:1,approval_evidence:'synthetic-only',boundary_sha256:'c'.repeat(64)},regions:[{region_id:'synthetic',semantic_complete:true,approval_issue:1,approval_evidence:'synthetic-only',macro_boundary_sha256:'c'.repeat(64),approved_release:pins,approved_location_ids:['location-0','location-1'],approved_subject_ids:['location-0','location-1']}]};
+ // This fixture is not a geographic approval or a production operation.
+ await importTypedBatch(f.db,await f.envelope({observations:[observation('retained-example')]}));
+ await importBatch(f.db,{expected_geography:pins,records:[{id:'legacy-example',location_id:'location-0',attribute:'population',value:0,source_id:'example',is_example:1,valid_from:-100,valid_to:-99}]});
+ const raw=(await f.db.prepare('SELECT * FROM atlas_sources ORDER BY id').all()).results;
+ const withSources=async(rows,sourceIds,extra={})=>({...await f.envelope(rows),source_pins:await typedSourcePins(raw.filter(row=>sourceIds.includes(row.id))),...extra});
+ const derived=(id,inputs,extra={})=>observation(id,{method:'derived',metadata:{derivation_input_ids:inputs},...extra});
+ const factual=(id,inputs)=>derived(id,inputs,{source_id:'historical',is_example:0});
+ const rejected=[
+  [await withSources({observations:[factual('promoted-typed',['retained-example'])]},['example','historical'],{examples:false,region_ids:['synthetic']}),/cannot consume example/],
+  [await withSources({observations:[factual('promoted-legacy',['legacy-example'])]},['example','historical'],{examples:false,region_ids:['synthetic']}),/cannot consume example/],
+  [await withSources({observations:[observation('same-batch-example'),factual('promoted-batch',['same-batch-example'])]},['example','historical'],{region_ids:['synthetic']}),/cannot consume example/],
+  [await f.envelope({observations:[derived('cycle-a',['cycle-b']),derived('cycle-b',['cycle-a'])]}),/Circular derivation/],
+ ];
+ const before=await exportStorageMarkerV3(f.db);
+ for(const [payload,message] of rejected){await assert.rejects(importTypedBatch(f.db,payload,{gate:approved}),message);assert.deepEqual(await exportStorageMarkerV3(f.db),before);}
+ const positive=await withSources({observations:[derived('example-child',['retained-example'],{subject_id:'location-1'}),derived('example-grandchild',['example-child'],{subject_id:'location-2'}),derived('legacy-child',['legacy-example'],{subject_id:'location-3'})]},['example']);
+ await assert.rejects(importTypedBatch(f.db,{...positive,examples:false}),/explicit batch opt-in/);assert.deepEqual(await exportStorageMarkerV3(f.db),before);
+ assert.equal((await importTypedBatch(f.db,positive)).duplicate,false);
+ for(const id of ['example-child','example-grandchild','legacy-child'])assert.equal((await f.db.prepare('SELECT is_example FROM atlas_typed_observations WHERE id=?').bind(id).first()).is_example,1);
+ const {default:worker}=await import('../hosted/worker.js');
+ const response=await worker.fetch(new Request('https://example.org/api/typed/v1/snapshot?year=-100&examples=1'),{DB:f.db},{});assert.equal(response.status,200);assert.equal((await response.json()).rows.length,4);
+ const factualPayload=await withSources({observations:[observation('still-paused',{source_id:'historical',is_example:0})]},['historical']);
+ const marker=await exportStorageMarkerV3(f.db);await assert.rejects(importTypedBatch(f.db,factualPayload),/paused/);assert.deepEqual(await exportStorageMarkerV3(f.db),marker);
 }));

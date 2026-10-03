@@ -1,0 +1,31 @@
+{
+  "scope": "isolated SQLite synthetic fixtures only",
+  "results": [
+    {
+      "probe": "same-batch-two-node-cycle",
+      "accepted": true,
+      "result": {
+        "version": 1,
+        "ingestion_id": "typed:78587b9cfe5169285d0ceff86bab10b5b930bfe62a29fbd39e4b57d422e19f40",
+        "duplicate": false,
+        "counts": {
+          "retirements": 0,
+          "observations": 2,
+          "feature_links": 0
+        },
+        "registry_sha256": "cc6aae6c18099d3e776c73ee4144556422ac87b911aa30aa95bef831ca18d2d2",
+        "expected_geography": {
+          "release_id": "synthetic-typed-release",
+          "hierarchy_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "footprints_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "revision": 5
+      }
+    },
+    {
+      "probe": "retained-example-to-example-without-factual-certificate",
+      "accepted": false,
+      "error": "Research imports are paused pending approved upper-level boundaries and complete regional hierarchy approval. Continue source-only research/staging; dry-run is available."
+    }
+  ]
+}
