@@ -1,0 +1,131 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "palette-contrast-20261003-7e91",
+  "branch": "engineering/palette-contrast-20261003-7e91",
+  "base_main_commit": "0652897abb84e85147a0eab072b56cb655f73d57",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/23",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Reproduce actual current political colors and resolved identities; audit worldwide multi-date adjacent/nearby categorical contrast; implement deterministic stable identity colors preserving data and shared semantic modes",
+    "Verify GPU/canvas fill/legend consistency, unknowns, reload/year stability, no ownership recompilation, actual private publication and rollback; maximum two focused PRs"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-03T17:47:32.849664+00:00",
+  "completed": [
+    "Confirmed actual current reproduction: PRC and ROC selected profiles both resolve owner:Q148, with distinct source names. Both share rgb(49,60,196), and one legend entry replaces the other.",
+    "Actual production four-year sequence and two profile screenshots completed with zero navigation ownership compilation/upload and no page errors.",
+    "Read-only complete source-name audit: 1338 owner-ID/name combinations, 111 IDs with multiple retained names; source hash verified before each part read. Q148 has both actual named groups; range envelopes are not overlap certificates.",
+    "Pinned all-time source intervals and modern reference graph: 1479 display categories, 5614 constraints, zero below-budget normal/protanopia/deuteranopia/tritanopia pairs.",
+    "Presentation-only composite keys and stable generated political colors wired consistently into map/legend; original identities, facts, geometry and population semantics unchanged.",
+    "Actual local GPU and Canvas checks: two PRC/ROC profiles each, four-year sequence, all 14 modes, exact palette/legend/pixel evidence, reload stability, zero navigation ownership deltas and no page errors.",
+    "Three-date assessment retained for shared nonpolitical modes: below-budget environmental/hierarchy pairs remain explicit limitations; absent sparse culture/religion/rank evidence is not a pass certificate."
+  ],
+  "checks": [
+    {
+      "command": "npm run build:static",
+      "result": "passed; 49625 locations"
+    },
+    {
+      "command": "npm run test:static",
+      "result": "passed; whole-location historical fill, all modes/continents, mobile layout, GPU and Canvas"
+    },
+    {
+      "command": "node scripts/verify-category-browser.mjs data/engineering/palette-contrast-20261003-7e91/local-browser.json",
+      "result": "passed; exact actual RGB, legend, year/reload stability, zero ownership delta"
+    },
+    {
+      "command": "npm test, then node scripts/compile-hosted-migrations.mjs --output dist/drizzle and affected rerun",
+      "result": "Initial 573: 569 passes/4 missing derivative failures; prerequisite compiled, affected staging/new main rerun 11 passes. Full publication gate pending."
+    },
+    {
+      "command": "node --test focused palette/presentation/raster/interval tests",
+      "result": "16 passed"
+    },
+    {
+      "command": "node scripts/audit-palette-raster.mjs data/engineering/palette-contrast-20261003-7e91 --check",
+      "result": "passed exact 135963/6240 pairs"
+    },
+    {
+      "command": "npm run build:hosted",
+      "result": "passed; archive 262492160 uncompressed bytes, target headroom 1748992 bytes"
+    },
+    {
+      "command": "built modern reference contrast check",
+      "result": "49625 features, zero missing palette keys, all 393 adjacent/nearby display edges pass all four modeled budgets"
+    },
+    {
+      "command": "node scripts/validate-structure.mjs publication",
+      "result": "running; required before deployment"
+    },
+    {
+      "command": "all registered category colors versus unknown gray",
+      "result": "1479 comparisons pass all four modeled budgets"
+    },
+    {
+      "command": "hosted standalone browser guard",
+      "result": "invalid test setup retained and stopped; guard rejects hosted build lacking API before browser startup"
+    }
+  ],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/palette-contrast-20261003-7e91/claim.json",
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before.json.gz",
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before-beijing.png",
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before-taipei.png",
+    "data/engineering/palette-contrast-20261003-7e91/source-owner-names.json",
+    "data/engineering/palette-contrast-20261003-7e91/local-browser.json",
+    "data/engineering/palette-contrast-20261003-7e91/contrast-all-times-modern-audit.json",
+    "data/engineering/palette-contrast-20261003-7e91/shared-mode-assessment.json"
+  ],
+  "blockers": [],
+  "next_action": "Finish exact source/raster checks and unit suite, retain receipts, push coherent first PR Refs #23 through exact-head CI and serialized squash queue. Actual production publication and acceptance remain pending; no fourth PR on issue 22.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/645",
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "worker_id": "engineering-night-20261003-7e91f438",
+  "reservation": {
+    "accepted": true,
+    "request_id": "c20c5ca6-d4ad-4bac-b373-98a701a5eb16",
+    "issue_number": 23,
+    "claim": {
+      "comment_id": 5971540602,
+      "version": 1,
+      "active": true,
+      "worker_id": "engineering-night-20261003-7e91f438",
+      "claim_id": "4406050d-c644-4160-99aa-e43c1d052fd3",
+      "branch": "engineering/palette-contrast-20261003-7e91",
+      "request_id": "c20c5ca6-d4ad-4bac-b373-98a701a5eb16",
+      "issue_number": 23,
+      "claimed_at": "2026-10-03T17:14:24.771Z",
+      "updated_at": "2026-10-03T17:43:46.792Z",
+      "expires_at": "2026-10-04T17:43:46.792Z",
+      "live_work": false,
+      "mode": "engineering",
+      "max_prs": 2
+    },
+    "replayed": false,
+    "result_source": "github-comment",
+    "result_comment_id": 5971782625,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37141563981"
+  },
+  "previous_completed_work": {
+    "issue": 22,
+    "final_pr": 630,
+    "actual_merge": "0652897abb84e85147a0eab072b56cb655f73d57",
+    "release_request": "ccf0df7b-c663-4df5-891d-7e2f9d98d348",
+    "release_result": 5971532786,
+    "remaining_proposal_issue": 638
+  },
+  "evidence_hashes": {
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before.json.gz": "aaad2dcad22664aee326ed2d28b34ee8bad7312cd8817b0939c093742e25d52a",
+    "data/engineering/palette-contrast-20261003-7e91/claim.json": "174823d401de6d2d373bb2858b72d2d6f42e61d1860737e70c8dbd59c6f52af8",
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before-beijing.png": "f8265289acf41caaf79f38cefa535a846dd294eb233bd6f97eda72cbea748c21",
+    "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before-taipei.png": "e57a19e12ad5f87a48316df682ed53533c7cf30f61bc264da2312814d2f2f813"
+  }
+}

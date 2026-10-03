@@ -2,6 +2,7 @@ import {DatabaseSync} from 'node:sqlite';
 import {createGridIndex} from '../src/pixel-grid.js';
 import {compileOwnership,packOwnership,pickOwnership,ownershipRun} from '../src/pixel-ownership.js';
 import {categoryColor,formatYear} from '../src/model.js';
+import {categoryPresentationKey} from '../src/category-presentation.js';
 
 // Select a real, partially covered territory rather than a mocked owner value.
 export async function findHistoricalMapCase(getSnapshot){
@@ -87,5 +88,5 @@ export async function checkHistoricalMapCase(page,example){
   const expected=getComputedStyle(probe).backgroundColor;probe.remove();
   const legend=[...document.querySelectorAll('#legend-items .legend-item')].find(line=>line.querySelector('span')?.textContent===owner);
   return {selected,tested,eligible:eligible.length,totalCells:cells.length,mismatches,palette:[...palette],expected,legend:legend?getComputedStyle(legend.querySelector('i')).backgroundColor:null,hasPolitical:u('hasPolitical'),error:gl.getError()};
- },{cells:example.cells,owner:example.record.value,css:categoryColor(example.record.category_id)});
+ },{cells:example.cells,owner:example.record.value,css:categoryColor(categoryPresentationKey('owner',{value:example.record.value,category_id:example.record.category_id}))});
 }
