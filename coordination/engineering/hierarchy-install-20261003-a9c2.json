@@ -1,0 +1,68 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "hierarchy-install-20261003-a9c2",
+  "branch": "engineering/hierarchy-install-20261003-a9c2",
+  "base_main_commit": "277b8ecbb3199ae3d5fb07bab96353d17a049b1c",
+  "github_issue": 6,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Offline coherent metadata installation and append-only correction release preserving original identity/geometry/grid/evidence bytes",
+    "Publisher-reviewed fresh served-release check and matching release/static/server handoff"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-03T20:21:46.305982+00:00",
+  "completed": [
+    "Partial PR673 actually merged; first of two permitted PRs",
+    "Confirmed reservation rotated without live operations",
+    "Fresh crosswalk reconstructed against immutable original baseline",
+    "Existing full identity chronology replay passed; candidate release6 is offline/unpublished",
+    "Both dated-evidence producer predecessor chains composed with exact archived bytes and complete prior migration lists",
+    "Metadata-only macro compatibility stages116 unchanged identities/members/footprints and preserves116 exact envelope buffers; candidate publication false",
+    "All3307 original inputs matched immutable277b8ec baseline through10 bounded partitions",
+    "Concurrent actual529/PR671 merge af5ed573 incorporated intact"
+  ],
+  "checks": [
+    {
+      "check": "release replay initial attempt",
+      "outcome": "failed",
+      "reason": "Initial adapter used different hierarchy field names than the retained receipt; corrected before retry"
+    },
+    {
+      "check": "release replay second attempt",
+      "outcome": "failed",
+      "reason": "Full historical geometry replay requires committed Python dependencies; shapely absent in fresh checkout. Installing requirements into isolated ignored venv; no validation gate bypassed."
+    },
+    {
+      "check": "current scoped controls",
+      "outcome": "passed",
+      "tests": 16,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/controls-current.log"
+    },
+    {
+      "check": "immutable baseline input verification",
+      "outcome": "passed",
+      "files": 3307,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/baseline-verification.json"
+    }
+  ],
+  "deployment": {
+    "published": false,
+    "live_work": false
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/hierarchy-install-20261003-a9c2/reservation-renewal.json"
+  ],
+  "blockers": [
+    "Live execution awaits concrete reviewed package and designated publisher coordination; no live operation begun"
+  ],
+  "next_action": "Finish two-run final generation and preservation checks, validate static/server/inspector/chain/lookup compatibility locally, build independently reviewed bounded evidence partitions, create focused partial second PR and hand off concrete matched package to designated publisher. No live operation or issue closure from offline preparation.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
