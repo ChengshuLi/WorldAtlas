@@ -1,0 +1,92 @@
+{
+  "campaign_id": "mexico-1895-population-source",
+  "github_issue": 29,
+  "retrieved_at_utc": "2026-10-03",
+  "source_edition": {
+    "title_page_title": "Censo General de la República Mexicana",
+    "digital_product_title": "I Censo General de la República Mexicana, 1895. Resumen General",
+    "compiler": "Dirección General de Estadística, under Dr. Antonio Peñafiel (title page)",
+    "imprint": "Oficina Tipográfica de la Secretaría de Fomento, México",
+    "observation_date": "1895-10-20 (title page: Verificado el 20 de Octubre de 1895; INEGI program metadata also gives 1895-10-20)",
+    "publication_date": "Unresolved discrepancy: title-page imprint is 1899; the digital product's repeated running footer labels it Resumen General, 1897.",
+    "official_product_record": "https://www.inegi.org.mx/programas/ccpv/1895/",
+    "catalogue_record": "https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=702825410100",
+    "document_collection": "INEGI historical products, identifier 702825410100; one work split into three downloadable PDF segments",
+    "pdf_segments": [
+      {
+        "part": 1,
+        "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/historicos/1329/702825410100/702825410100_1.pdf",
+        "bytes": 13696626,
+        "sha256": "2964d789c501eeabc57bb71aa44a5ad4f87fc127b5c8ee1d2fa83905a4768349",
+        "pages": 498,
+        "relevant_page": "Printed page 6 is PDF page 4"
+      },
+      {
+        "part": 2,
+        "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/historicos/1329/702825410100/702825410100_2.pdf",
+        "bytes": 5178638,
+        "sha256": "8ffc65c6ed68a9a7afea2baefaab5b0786e2e6fad40a4c91d35fa4fabd8f0db2",
+        "pages": 150
+      },
+      {
+        "part": 3,
+        "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/historicos/1329/702825410100/702825410100_3.pdf",
+        "bytes": 4961506,
+        "sha256": "87c0e97cae1cb7daf59ccf3d948f96d61afefb1df284fbddceca6ca805ad1fdf",
+        "pages": 198
+      }
+    ],
+    "record_page_bytes": 3963,
+    "record_page_sha256": "aa04cf6ec233adb634ff6b253e80f12f94e222a50085bbd48faa160dc9f3f4c5",
+    "catalogue_page_bytes": 10106,
+    "catalogue_page_sha256": "641418d9fce5bf7dd9e4e133cfbfae539e357bcaf3f1d7a00bd00fc60f461be2",
+    "restoration": "Download the three numbered PDF segment URLs; verify each length and SHA-256 separately. The scanned files are not included in this packet. The relevant population table is printed page 6 in segment 1, PDF page 4."
+  },
+  "license_and_attribution": {
+    "terms_title": "Términos de Libre Uso de la Información del INEGI",
+    "terms_url": "https://www.inegi.org.mx/contenidos/inegi/doc/terminos_info.pdf",
+    "terms_pdf_bytes": 69195,
+    "terms_pdf_sha256": "8900206bbe4a2b8cf461e7e7ff111564cf4de2f863c7cd00b99ac19a4b925d62",
+    "terms_summary": "INEGI permits copying, publishing, adapting, reordering, partial extraction, and commercial use, subject to preserving metadata, crediting INEGI and the source product, notifying users of transformations, and not implying INEGI endorsement.",
+    "scope_caveat": "These are INEGI's general free-use terms; the historical product record itself has no item-specific license field. Attribute the 1895 census product to INEGI and the Dirección General de Estadística; distinguish original historical content from INEGI's digitization."
+  },
+  "evaluated_tables": [
+    {
+      "location": "Resumen del Censo, printed page 6, PDF segment 1 page 4",
+      "title": "Población por sexos",
+      "geographic_unit": "Named source-era Estados, arranged under the report's regional headings Del Centro, Del Norte, Del Golfo, Del Pacífico; also national Sumas row",
+      "variables": ["Hombres", "Mujeres", "Total", "Hombres de 0 a 1 año", "Mujeres de 0 a 1 año", "Total de 0 a 1 año"],
+      "count_unit": "Número de habitantes; persons",
+      "illustrative_rows": [
+        {
+          "source_geography": "Sumas",
+          "men": "6,190,311",
+          "women": "6,301,262",
+          "total": "12,491,573",
+          "check": "Men plus women equals printed total."
+        },
+        {
+          "source_geography": "Aguascalientes",
+          "men": "50,514",
+          "women": "51,834",
+          "printed_total": "102,378",
+          "check": "Published sex counts sum to 102,348, 30 below the printed total; discrepancy retained unresolved."
+        }
+      ]
+    },
+    {
+      "location": "Following summary page, printed page 7",
+      "title": "Población por edades",
+      "geographic_unit": "Source-era Estados as organized in the summary",
+      "variables": "Age-specific population columns (page heading begins with age 2); no age values transcribed in this evaluation."
+    }
+  ],
+  "methods": {
+    "retrieval": "Downloaded all three official INEGI PDF segments and recorded byte lengths and SHA-256 values; fetched the INEGI 1895 program record, catalogue page, and free-use terms PDF.",
+    "inspection": "Used pdfinfo and pdftotext to locate tables; visually reviewed the original title page and printed page 6. Transcribed two rows from the scan. OCR output was not accepted as a numeric authority.",
+    "territorial_scope": "The evaluated table is summarized by source-era States and has a national sum row. Its four named region headings are source organization labels. No municipalities, settlements, modern parent assignments, or historical footprints are inferred.",
+    "uncertainty": "The Aguascalientes row has an arithmetic discrepancy of 30 between sex columns and printed total. No correction is inferred. The reviewed page does not define usual-resident versus present-person universe, undercount, or uncertainty interval. The publication-year discrepancy between cover and running footer remains unresolved."
+  },
+  "illustrative_row_count": 2,
+  "illustrative_row_limit": 25
+}
