@@ -1,0 +1,302 @@
+{
+  "campaign_id": "nz-census-1891-wellington-source",
+  "github_issue": 59,
+  "retrieved_at_utc": "2026-10-03",
+  "source_edition": {
+    "title": "Results of a Census of the Colony of New Zealand taken for the night of the 5th April, 1891",
+    "issuing_office": "Registrar-General’s Office, Wellington",
+    "report_submission_date": "1892-12-05",
+    "imprint": "By Authority: George Didsbury, Government Printer, Wellington, 1892",
+    "census_reference": "Night of 5 April 1891",
+    "official_collection": "Stats NZ historic publications",
+    "parent_index": "https://www3.stats.govt.nz/historic_publications/",
+    "edition_folder": "https://www3.stats.govt.nz/historic_publications/1891-census/1891-results-census/",
+    "source_url": "https://www3.stats.govt.nz/historic_publications/1891-census/1891-results-census/1891-results-census.html",
+    "source_bytes": 7271539,
+    "source_sha256": "4f72f989ec408cfcfa6484cc6060d7a4de644d69f6a395bfe32154b19be76b4f",
+    "directory_timestamp": "2013-06-26 16:09 as shown on official directory listing",
+    "restoration": "Download the exact official HTML URL and verify byte length and SHA-256. It contains the report text and structured tables. Source index/listing and copyright-page hashes are in discovery_evidence."
+  },
+  "license_and_attribution": {
+    "license": "CC BY 4.0, per Stats NZ copyright statement for Stats NZ content unless otherwise noted; no separate rights exception was visible on this historic item.",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "official_copyright_page": "https://www.stats.govt.nz/about-us/copyright/",
+    "attribution_statement": "This work is based on/includes Stats NZ’s data which are licensed by Stats NZ for reuse under the Creative Commons Attribution 4.0 International licence.",
+    "caveat": "The cited terms are a site-level statement; this review found no item-specific license text. Credit both the 1891 report and Stats NZ."
+  },
+  "discovery_evidence": {
+    "historic_index_bytes": 3657,
+    "historic_index_sha256": "0418671e01ca81d136f8cae8fab1035aa4dd435da34bd89964f97b3d5c146761",
+    "1891_folder_listing_bytes": 549,
+    "1891_folder_listing_sha256": "9b280b9f15138aa12f8886fc66facad453118d4a47525aeb395e25f100c5fcf5",
+    "copyright_page_bytes": 48279,
+    "copyright_page_sha256": "822e45fbc6e61dd00f2f03db5c13559f00cc72274c34b1834c7dca87cd9f4eae"
+  },
+  "evaluated_tables": [
+    {
+      "part": "I. Population and Houses",
+      "chapter": 6,
+      "table": "VI",
+      "title": "Population of each Provincial District (exclusive of Maoris) at different Census Periods, 1871–1891",
+      "unit": "Provincial District",
+      "Wellington_1891_total": {
+        "persons": "97,725",
+        "males": "52,375",
+        "females": "45,350"
+      }
+    },
+    {
+      "part": "I. Population and Houses",
+      "chapter": 18,
+      "table": "XVII",
+      "title": "Population of the Boroughs (exclusive of Maoris), distinguishing Chinese and Half-castes",
+      "unit": "Borough",
+      "Wellington_total": {
+        "persons_including_Chinese_and_Half-castes": "31,021",
+        "males": "15,189",
+        "females": "15,832",
+        "Chinese_males": "107",
+        "Chinese_females": null,
+        "Half-caste_males": "9",
+        "Half-caste_females": "11"
+      }
+    },
+    {
+      "part": "III. Religions of the People",
+      "chapter": 38,
+      "table": "V",
+      "title": "Religions of Persons, Males, and Females (exclusive of Maoris) in each Provincial District",
+      "unit": "Provincial District",
+      "Wellington_total": {
+        "persons": "97,725",
+        "males": "52,375",
+        "females": "45,350"
+      }
+    },
+    {
+      "part": "III. Religions of the People",
+      "chapter": 40,
+      "table": "VII",
+      "title": "Religions of Persons, Males, and Females (exclusive of Maoris) in each Borough",
+      "unit": "Borough",
+      "Wellington_table_header": [
+        "Religious Denominations",
+        "Napier",
+        "Woodville",
+        "Masterton",
+        "Carterton",
+        "Greytown",
+        "Wellington",
+        "Onslow"
+      ],
+      "Wellington_total": {
+        "persons": "31,021",
+        "males": "15,189",
+        "females": "15,832"
+      }
+    }
+  ],
+  "territory_and_denominator_checks": {
+    "provincial_district_wellington": {
+      "population_table_VI_1891": [
+        "97,725",
+        "52,375",
+        "45,350"
+      ],
+      "religion_table_V": [
+        "97,725",
+        "52,375",
+        "45,350"
+      ],
+      "exact_match_persons_males_females": true
+    },
+    "wellington_borough": {
+      "population_table_XVII": [
+        "31,021",
+        "15,189",
+        "15,832"
+      ],
+      "religion_table_VII": [
+        "31,021",
+        "15,189",
+        "15,832"
+      ],
+      "exact_match_persons_males_females": true
+    }
+  },
+  "maori_and_population_scope": {
+    "volume_note": "Māori population is excluded from tables in Parts I–X and separately reported in Appendix C. The Māori census was taken in February 1891, apart from the 5 April census night for the other tables.",
+    "both_population_and_religion_tables_exclude_maori": true,
+    "borough_population_total_label": "Total (including Chinese and Half-castes)",
+    "religion_table_label": "exclusive of Maoris",
+    "interpretation": "The Wellington Borough totals and male/female counts match exactly (31,021; 15,189; 15,832). The population table explicitly includes Chinese and half-castes in its total; the religion table’s exclusion is Māori only. Their responses are not separately cross-tabulated in this sample."
+  },
+  "religion_sample": {
+    "unit": "Wellington Borough, same 1891 source unit in Table XVII and Table VII",
+    "total_row": {
+      "persons": "31,021",
+      "males": "15,189",
+      "females": "15,832"
+    },
+    "selected_category_rows": 21,
+    "sample_size_including_total": 22,
+    "selection": "Purposive examples of common denominations and response-status categories; no exhaustive table extraction, percentages, or category sums.",
+    "rows": [
+      {
+        "source_section": "Episcopalians",
+        "denomination": "Church of England",
+        "persons": "13,803",
+        "males": "6,706",
+        "females": "7,097"
+      },
+      {
+        "source_section": null,
+        "denomination": "Protestants (undefined)",
+        "persons": "180",
+        "males": "115",
+        "females": "65"
+      },
+      {
+        "source_section": null,
+        "denomination": "Presbyterians",
+        "persons": "4,243",
+        "males": "2,044",
+        "females": "2,199"
+      },
+      {
+        "source_section": "Methodists",
+        "denomination": "Wesleyans",
+        "persons": "2,820",
+        "males": "1,341",
+        "females": "1,479"
+      },
+      {
+        "source_section": "Methodists",
+        "denomination": "Methodists (undefined)",
+        "persons": "150",
+        "males": "80",
+        "females": "70"
+      },
+      {
+        "source_section": "Methodists",
+        "denomination": "Primitive Methodists",
+        "persons": "448",
+        "males": "204",
+        "females": "244"
+      },
+      {
+        "source_section": "Methodists",
+        "denomination": "United Methodist Free Church",
+        "persons": "135",
+        "males": "59",
+        "females": "76"
+      },
+      {
+        "source_section": "Other Protestants",
+        "denomination": "Baptists",
+        "persons": "708",
+        "males": "308",
+        "females": "400"
+      },
+      {
+        "source_section": "Other Protestants",
+        "denomination": "Congregational Independents",
+        "persons": "483",
+        "males": "220",
+        "females": "263"
+      },
+      {
+        "source_section": "Other Protestants",
+        "denomination": "Lutherans",
+        "persons": "136",
+        "males": "79",
+        "females": "57"
+      },
+      {
+        "source_section": "Other Protestants",
+        "denomination": "Church of Christ (Disciples)",
+        "persons": "391",
+        "males": "186",
+        "females": "205"
+      },
+      {
+        "source_section": "Other Protestants",
+        "denomination": "Brethren",
+        "persons": "204",
+        "males": "84",
+        "females": "120"
+      },
+      {
+        "source_section": "Other Protestants",
+        "denomination": "Salvation Army",
+        "persons": "491",
+        "males": "240",
+        "females": "251"
+      },
+      {
+        "source_section": "Catholics",
+        "denomination": "Roman Catholics",
+        "persons": "4,742",
+        "males": "2,218",
+        "females": "2,524"
+      },
+      {
+        "source_section": "Catholics",
+        "denomination": "Catholics (undefined)",
+        "persons": "72",
+        "males": "40",
+        "females": "32"
+      },
+      {
+        "source_section": "Other Denominations",
+        "denomination": "Hebrews",
+        "persons": "229",
+        "males": "112",
+        "females": "117"
+      },
+      {
+        "source_section": "Other Denominations",
+        "denomination": "Spiritualists",
+        "persons": "37",
+        "males": "21",
+        "females": "16"
+      },
+      {
+        "source_section": "No Denomination",
+        "denomination": "Freethinkers",
+        "persons": "272",
+        "males": "193",
+        "females": "79"
+      },
+      {
+        "source_section": "No Denomination",
+        "denomination": "No religion",
+        "persons": "90",
+        "males": "71",
+        "females": "19"
+      },
+      {
+        "source_section": "No Denomination",
+        "denomination": "Unspecified",
+        "persons": "80",
+        "males": "48",
+        "females": "32"
+      },
+      {
+        "source_section": "No Denomination",
+        "denomination": "Object to state",
+        "persons": "732",
+        "males": "448",
+        "females": "284"
+      }
+    ],
+    "not_selected": "Bible Christians; Methodists—Others; Evangelists; Christadelphians; Unitarians; Society of Friends; Swedenborgians; Greek Church; Catholic Apostolic; Latter-day Saints/Mormons; Pagans; other table rows. Their omission from this packet is not zero."
+  },
+  "methods_and_uncertainty": {
+    "method": "Transcribed exact rows from structured tables in official Stats NZ HTML. Compared totals and sex counts between paired population and religion tables at provincial-district and borough levels.",
+    "variable": "Published religious-denomination counts; not translated to Atlas identities, culture, primary affiliation, or beliefs beyond the table heading.",
+    "precision": "Integer headcounts of persons, males, and females; no interpolation or spatial allocation.",
+    "uncertainty": "The publication supplies no sampling errors or confidence intervals for these census counts. This review does not independently assess response coverage, classification practices, or exact historical boundary footprints. Matching table totals show denominator compatibility, not individual-row validation.",
+    "temporal_scope": "Single census night on 5 April 1891, not an interval. Historical unit labels retained as printed; no modern geographic equivalence inferred."
+  }
+}
