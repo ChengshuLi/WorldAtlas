@@ -1,0 +1,825 @@
+{
+  "issue": 609,
+  "retrieved_utc": "2026-10-03T18:49:58+00:00",
+  "parent_packet": "#485; these inputs are read-only and retained there; do not duplicate/modify originals",
+  "sources": [
+    {
+      "name": "Statistics Canada 2021 Census Divisions and Census Subdivisions",
+      "canonical_urls": [
+        "https://www.arcgis.com/home/item.html?id=24f45c7b49d84aaf8e55e566a7fd670b",
+        "https://www.arcgis.com/home/item.html?id=594124f0380d42b7a4b450574dd9630c",
+        "https://www.statcan.gc.ca/en/subjects/standard/sgc/2021/introduction",
+        "https://www.statcan.gc.ca/en/subjects/standard/sgc/2021/tablef"
+      ],
+      "vintage": "2021 Census; see parent item metadata and exact retained responses",
+      "license": "Statistics Canada Open Licence",
+      "role": "Census statistical divisions/subdivisions and CSD type definitions; not a legal boundary/ownership decision",
+      "retained_files": {
+        "statistics-canada-bc-census-divisions-2021.geojson.gz": {
+          "bytes": 38880150,
+          "sha256": "8a31cf19ad0694638c88275fec9ff1005970cd8600ca6baed245b8826756e9bf"
+        },
+        "statistics-canada-bc-census-subdivisions-2021.geojson.gz": {
+          "bytes": 42765402,
+          "sha256": "a16ca45708ab0ccd898994e5e792187d5a108741c2ff6f5f9f74e91242206ad4"
+        }
+      },
+      "response_files": {}
+    },
+    {
+      "name": "geoBoundaries Canada ADM3",
+      "canonical_urls": [
+        "https://github.com/wmgeolab/geoBoundaries/releases/tag/9469f09"
+      ],
+      "vintage": "2016 ADM3; source-data metadata update 2023-01-19",
+      "license": "Upstream metadata says ODbL 1.0; licenseDetail cites Statistics Canada Open License Agreement; discrepancy retained",
+      "role": "Historical administrative-source roster for source crosswalk only",
+      "retained_files": {
+        "geoboundaries-CAN-ADM3-2016.geojson": {
+          "bytes": 42649707,
+          "sha256": "9d292ebf9a09010fc81ee5fa69683b4a8ba1b0d969bb20f6b90ffc587d3f215f"
+        }
+      },
+      "response_files": {}
+    },
+    {
+      "name": "BC Data Catalogue legal administrative boundaries",
+      "canonical_urls": [
+        "https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9",
+        "https://catalogue.data.gov.bc.ca/dataset/81940c47-a534-47e0-94d0-947c96a59de4",
+        "https://catalogue.data.gov.bc.ca/dataset/e3c3c580-996a-4668-8bc5-6aa7c7dc4932",
+        "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer"
+      ],
+      "vintage": "Live service acquired 2026-10-03; catalog metadata modified 2026-08-05",
+      "license": "Open Government Licence - British Columbia",
+      "role": "Current provincial legal regional districts, electoral areas, and municipal boundaries. Layer notes Letters Patent/metes and bounds prevail over digital discrepancies; digital representation may differ from current administration.",
+      "retained_files": {},
+      "response_files": {
+        "bc-electoral-areas-cd-5901.geojson.gz": {
+          "bytes": 7525783,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-116.79654643935%2C%22ymin%22%3A48.998850496329%2C%22xmax%22%3A-114.053758264715%2C%22ymax%22%3A51.331501844784%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 14,
+          "retained_bytes": 2860231,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas-cd-5901.geojson.gz",
+          "retained_sha256": "ba80f6e33bff1b7b3472f48dce34c5f853c33b058d9112ee5b321759836127cf",
+          "retrieved_utc": "2026-10-03T18:48:35+00:00",
+          "sha256": "939663005d0a805a1f0aac25039b61297278a8d37f2b9adde274ffe4c1d359ee"
+        },
+        "bc-electoral-areas-cd-5933.geojson.gz": {
+          "bytes": 15016859,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-122.677424737054%2C%22ymin%22%3A49.6097943293814%2C%22xmax%22%3A-118.78649116942%2C%22ymax%22%3A52.8778689863037%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 50,
+          "retained_bytes": 5735364,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas-cd-5933.geojson.gz",
+          "retained_sha256": "4f9c12ed942aa2480cd6b6a919cd741e84dcf8aefda6fc5a0cd727137544d8ff",
+          "retrieved_utc": "2026-10-03T18:48:40+00:00",
+          "sha256": "3dfd13bec9e59bfc18bc47b1e5112739f503b1e71a59fb0763dadf3caa0eaec0"
+        },
+        "bc-electoral-areas-cd-5939.geojson.gz": {
+          "bytes": 9335881,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-119.704531266341%2C%22ymin%22%3A50.4020514667587%2C%22xmax%22%3A-116.25645367026%2C%22ymax%22%3A52.5002384909872%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 23,
+          "retained_bytes": 3564041,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas-cd-5939.geojson.gz",
+          "retained_sha256": "aa8da63424c64ca9a33d0fccf54d35a57fe1acd7086af58cb5e3ca2e58427092",
+          "retrieved_utc": "2026-10-03T18:48:43+00:00",
+          "sha256": "b6209eba4c202fa9964c93b4a45f1c6ff554b5d0eee53723606195927593d2ac"
+        },
+        "bc-electoral-areas-cd-5941.geojson.gz": {
+          "bytes": 12756202,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-126.646062872552%2C%22ymin%22%3A50.87693883344%2C%22xmax%22%3A-120.142545495158%2C%22ymax%22%3A53.5311087749779%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 34,
+          "retained_bytes": 4886501,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas-cd-5941.geojson.gz",
+          "retained_sha256": "0746d2075a1e9ba32757b03997bac7d0002495769d013c7154de99bf56e2e16a",
+          "retrieved_utc": "2026-10-03T18:48:47+00:00",
+          "sha256": "e34d31e63759c55673d17edb5b5c52cbe9e60c6887a4b09412989a0dc0761577"
+        },
+        "bc-electoral-areas-cd-5949.geojson.gz": {
+          "bytes": 11570734,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-133.069543165159%2C%22ymin%22%3A52.2500776580854%2C%22xmax%22%3A-126.644700080743%2C%22ymax%22%3A59.0022546032169%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 20,
+          "retained_bytes": 4431585,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas-cd-5949.geojson.gz",
+          "retained_sha256": "d284bf01b0b0f5e435f24c0a60bd4d6445e678ac3cee49b9b9417d2fb9fd3166",
+          "retrieved_utc": "2026-10-03T18:48:50+00:00",
+          "sha256": "a70189b6d5e420b07d5cb225d0cacbb0491490a69846944f2bb99b2ac3555448"
+        },
+        "bc-electoral-areas-cd-5951.geojson.gz": {
+          "bytes": 12326554,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-128.485550374576%2C%22ymin%22%3A52.9925636005906%2C%22xmax%22%3A-123.27774508308%2C%22ymax%22%3A56.0031791233115%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 19,
+          "retained_bytes": 4724233,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas-cd-5951.geojson.gz",
+          "retained_sha256": "df4289524998c9fe4723c862c19b0509f98393cf76f192e6404762d6d0370130",
+          "retrieved_utc": "2026-10-03T18:48:54+00:00",
+          "sha256": "329e12dbb8427d4ccc633cfbf54100cba1d48d123346f54289f7fb8a4d8b6952"
+        },
+        "bc-electoral-areas-cd-5953.geojson.gz": {
+          "bytes": 12816917,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-124.0532617555%2C%22ymin%22%3A52.1514631116905%2C%22xmax%22%3A-118.193350932993%2C%22ymax%22%3A55.9832757622535%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 28,
+          "retained_bytes": 4917090,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas-cd-5953.geojson.gz",
+          "retained_sha256": "b81dcc742defd26023be369a1828a498d6de3bdd9412fcf21eeb146a3db9b912",
+          "retrieved_utc": "2026-10-03T18:48:57+00:00",
+          "sha256": "90efbb6f7d59f2fb424650e8c1ef88ad651af97375e27f44898d4e0e02052a45"
+        },
+        "bc-electoral-areas-cd-5955.geojson.gz": {
+          "bytes": 12346656,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-127.738412504957%2C%22ymin%22%3A53.7953512056034%2C%22xmax%22%3A-119.999731727497%2C%22ymax%22%3A58.0271042203471%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 20,
+          "retained_bytes": 4732646,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas-cd-5955.geojson.gz",
+          "retained_sha256": "b5b1e09da6d8e0c6d8ff6883ff8f56e6cc97004361f2929c2f900f3cceb5d9c0",
+          "retrieved_utc": "2026-10-03T18:49:01+00:00",
+          "sha256": "c50ad3be3f3d7a5e69015431676778b57dff76bdee36950338a6bb9e43639743"
+        },
+        "bc-electoral-areas-cd-5957.geojson.gz": {
+          "bytes": 6027686,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-139.052201041135%2C%22ymin%22%3A55.9975580378895%2C%22xmax%22%3A-124.440685746742%2C%22ymax%22%3A60.0000615323855%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 7,
+          "retained_bytes": 2304174,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas-cd-5957.geojson.gz",
+          "retained_sha256": "2d945524d19a8e1bf352b2fd45030ddeaf70a0ee3ada516ec7aca03c4d4e05de",
+          "retrieved_utc": "2026-10-03T18:49:03+00:00",
+          "sha256": "ad093f27224384b191cb07b09b46e5f086712cd071fd11dec5a48066cfed3b07"
+        },
+        "bc-electoral-areas-cd-5959.geojson.gz": {
+          "bytes": 1592406,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-127.810586146787%2C%22ymin%22%3A57.9975658150026%2C%22xmax%22%3A-119.999988643502%2C%22ymax%22%3A60.0000615316082%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 1,
+          "retained_bytes": 609340,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas-cd-5959.geojson.gz",
+          "retained_sha256": "582adc9d88ae609a0fdb3e38c0eb642ded2e56b510e73d60622eada0ee65a4a9",
+          "retrieved_utc": "2026-10-03T18:49:04+00:00",
+          "sha256": "44c40039f18c90efaf864af67e10e05f7f90933e4156321da75dabcce351720f"
+        },
+        "bc-electoral-areas.geojson.gz": {
+          "bytes": 39377175,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-116.79654643935%2C%22ymin%22%3A48.998850496329%2C%22xmax%22%3A-114.053758264715%2C%22ymax%22%3A51.331501844784%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-122.677424737054%2C%22ymin%22%3A49.6097943293814%2C%22xmax%22%3A-118.78649116942%2C%22ymax%22%3A52.8778689863037%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-119.704531266341%2C%22ymin%22%3A50.4020514667587%2C%22xmax%22%3A-116.25645367026%2C%22ymax%22%3A52.5002384909872%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-126.646062872552%2C%22ymin%22%3A50.87693883344%2C%22xmax%22%3A-120.142545495158%2C%22ymax%22%3A53.5311087749779%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-133.069543165159%2C%22ymin%22%3A52.2500776580854%2C%22xmax%22%3A-126.644700080743%2C%22ymax%22%3A59.0022546032169%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-128.485550374576%2C%22ymin%22%3A52.9925636005906%2C%22xmax%22%3A-123.27774508308%2C%22ymax%22%3A56.0031791233115%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-124.0532617555%2C%22ymin%22%3A52.1514631116905%2C%22xmax%22%3A-118.193350932993%2C%22ymax%22%3A55.9832757622535%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-127.738412504957%2C%22ymin%22%3A53.7953512056034%2C%22xmax%22%3A-119.999731727497%2C%22ymax%22%3A58.0271042203471%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-139.052201041135%2C%22ymin%22%3A55.9975580378895%2C%22xmax%22%3A-124.440685746742%2C%22ymax%22%3A60.0000615323855%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-127.810586146787%2C%22ymin%22%3A57.9975658150026%2C%22xmax%22%3A-119.999988643502%2C%22ymax%22%3A60.0000615316082%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+          "feature_count": 99,
+          "note": "Derived deduplicated OBJECTID union; all raw original per-CD responses are retained beside it.",
+          "retained_bytes": 14944019,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-electoral-areas.geojson.gz",
+          "retained_sha256": "104aff4803b249bf1698cedbff6531b65a723d80feca8639f799a12a30cc1a18",
+          "retrieved_utc": "2026-10-03T18:49:10+00:00",
+          "sha256": "11b4bb1d52e6bb35792b12019a968c541346d66d4ad63fb0a7b285ee57b40fd1"
+        },
+        "bc-layer-16-catalog.json": {
+          "bytes": 36028,
+          "canonical_request_url": "https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=d1aff64e-dbfe-45a6-af97-582b7f6418b9",
+          "feature_count": 0,
+          "retained_bytes": 36028,
+          "retained_encoding": "identity",
+          "retained_path": "sources/bc-layer-16-catalog.json",
+          "retained_sha256": "77afb6eb3e4ee67cb96136aef646e42715f2456ec91a9dadafa36225e851e0bc",
+          "retrieved_utc": "2026-10-03T18:48:26+00:00",
+          "sha256": "77afb6eb3e4ee67cb96136aef646e42715f2456ec91a9dadafa36225e851e0bc"
+        },
+        "bc-layer-16-metadata.json": {
+          "bytes": 5882,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/16/info/metadata?f=json",
+          "feature_count": 0,
+          "retained_bytes": 5882,
+          "retained_encoding": "identity",
+          "retained_path": "sources/bc-layer-16-metadata.json",
+          "retained_sha256": "24e871d2b8d5b059ce4d174937c74218d17882dc34029317f77ff2d9a106dcbf",
+          "retrieved_utc": "2026-10-03T18:48:27+00:00",
+          "sha256": "24e871d2b8d5b059ce4d174937c74218d17882dc34029317f77ff2d9a106dcbf"
+        },
+        "bc-layer-18-catalog.json": {
+          "bytes": 42836,
+          "canonical_request_url": "https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=e3c3c580-996a-4668-8bc5-6aa7c7dc4932",
+          "feature_count": 0,
+          "retained_bytes": 42836,
+          "retained_encoding": "identity",
+          "retained_path": "sources/bc-layer-18-catalog.json",
+          "retained_sha256": "00550bc37a88aad6884e185853ce24a8a9f3d19d4d3dd7d57d2ed4842face1ea",
+          "retrieved_utc": "2026-10-03T18:48:28+00:00",
+          "sha256": "00550bc37a88aad6884e185853ce24a8a9f3d19d4d3dd7d57d2ed4842face1ea"
+        },
+        "bc-layer-18-metadata.json": {
+          "bytes": 5888,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/18/info/metadata?f=json",
+          "feature_count": 0,
+          "retained_bytes": 5888,
+          "retained_encoding": "identity",
+          "retained_path": "sources/bc-layer-18-metadata.json",
+          "retained_sha256": "b72028afbdabcde7e09817bbb098c48585762f3b395fba8fe0bb84af0888e70d",
+          "retrieved_utc": "2026-10-03T18:48:28+00:00",
+          "sha256": "b72028afbdabcde7e09817bbb098c48585762f3b395fba8fe0bb84af0888e70d"
+        },
+        "bc-layer-24-catalog.json": {
+          "bytes": 34941,
+          "canonical_request_url": "https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=81940c47-a534-47e0-94d0-947c96a59de4",
+          "feature_count": 0,
+          "retained_bytes": 34941,
+          "retained_encoding": "identity",
+          "retained_path": "sources/bc-layer-24-catalog.json",
+          "retained_sha256": "aa9b68ea18643e5f299c216bf8ae21481e3c2d0455b5e938277447104cf580f3",
+          "retrieved_utc": "2026-10-03T18:48:27+00:00",
+          "sha256": "aa9b68ea18643e5f299c216bf8ae21481e3c2d0455b5e938277447104cf580f3"
+        },
+        "bc-layer-24-metadata.json": {
+          "bytes": 5871,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/info/metadata?f=json",
+          "feature_count": 0,
+          "retained_bytes": 5871,
+          "retained_encoding": "identity",
+          "retained_path": "sources/bc-layer-24-metadata.json",
+          "retained_sha256": "a89933720da5bce5910952be1752d46d43c74550ece80bcc2f6f7fac902964f8",
+          "retrieved_utc": "2026-10-03T18:48:28+00:00",
+          "sha256": "a89933720da5bce5910952be1752d46d43c74550ece80bcc2f6f7fac902964f8"
+        },
+        "bc-municipalities.geojson.gz": {
+          "bytes": 1673255,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/18/query?where=ADMIN_AREA_GROUP_NAME+IN+%28%27Regional+District+of+East+Kootenay%27%2C%27Thompson-Nicola+Regional+District%27%2C%27Columbia+Shuswap+Regional+District%27%2C%27Cariboo+Regional+District%27%2C%27Regional+District+of+Kitimat-Stikine%27%2C%27Regional+District+of+Bulkley-Nechako%27%2C%27Regional+District+of+Fraser-Fort+George%27%2C%27Peace+River+Regional+District%27%29+OR+ADMIN_AREA_NAME+LIKE+%27%25Northern+Rockies%25%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000",
+          "feature_count": 52,
+          "retained_bytes": 632125,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-municipalities.geojson.gz",
+          "retained_sha256": "b651a7e71a9948f6311c9e090b0e85e639de0dce28eccc0fc33b117a93c45cc5",
+          "retrieved_utc": "2026-10-03T18:49:13+00:00",
+          "sha256": "a7b800fbeeba3945b465b7bcf4ac644fb6672a566d0c4d781daa9d40714cefa7"
+        },
+        "bc-regional-districts-and-stikine.geojson.gz": {
+          "bytes": 16604506,
+          "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/16/query?where=ADMIN_AREA_NAME+IN+%28%27Regional+District+of+East+Kootenay%27%2C%27Thompson-Nicola+Regional+District%27%2C%27Columbia-Shuswap+Regional+District%27%2C%27Cariboo+Regional+District%27%2C%27Regional+District+of+Kitimat-Stikine%27%2C%27Regional+District+of+Bulkley-Nechako%27%2C%27Regional+District+of+Fraser-Fort+George%27%2C%27Peace+River+Regional+District%27%2C%27Stikine+Region+%28Unincorporated%29%27%29&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000",
+          "feature_count": 9,
+          "retained_bytes": 6346297,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/bc-regional-districts-and-stikine.geojson.gz",
+          "retained_sha256": "b3272948b12b1e3cbdd16ba45f09385f5270fb3fdfc4f1ae7bcf7c5cb41c99a5",
+          "retrieved_utc": "2026-10-03T18:48:33+00:00",
+          "sha256": "5613d2628d729c043d814e0b49512f6695ce5fda384d15e5d90df0385b82dd2e"
+        }
+      }
+    },
+    {
+      "name": "NRCan Aboriginal Lands of Canada Legislative Boundaries",
+      "canonical_urls": [
+        "https://open.canada.ca/data/api/3/action/package_show?id=522b07b9-78e2-4819-b736-ad9208eb1067",
+        "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0"
+      ],
+      "vintage": "Catalog metadata modified 2024-02-15; feature service queried 2026-10-03 by target CD envelope",
+      "license": "Open Government Licence - Canada",
+      "role": "Federal legislative boundaries for Indian Reserves and certain claim/Indian lands. Catalog explicitly excludes Indian Settlements and Indian Communities; candidates do not settle statistical/legal boundary equivalence.",
+      "retained_files": {},
+      "response_files": {
+        "nrcan-alclb-catalog.json": {
+          "bytes": 36855,
+          "canonical_request_url": "https://open.canada.ca/data/api/3/action/package_show?id=522b07b9-78e2-4819-b736-ad9208eb1067",
+          "feature_count": 0,
+          "retained_bytes": 36855,
+          "retained_encoding": "identity",
+          "retained_path": "sources/nrcan-alclb-catalog.json",
+          "retained_sha256": "f10a7aed2edac7989c3617a5e73e440cfb1f692fc1758210442692d518843642",
+          "retrieved_utc": "2026-10-03T18:49:14+00:00",
+          "sha256": "f10a7aed2edac7989c3617a5e73e440cfb1f692fc1758210442692d518843642"
+        },
+        "nrcan-alclb-cd-5901-page-0.geojson.gz": {
+          "bytes": 2370466,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-116.79654643935%2C%22ymin%22%3A48.998850496329%2C%22xmax%22%3A-114.053758264715%2C%22ymax%22%3A51.331501844784%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+          "feature_count": 25,
+          "retained_bytes": 879226,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5901-page-0.geojson.gz",
+          "retained_sha256": "cce16271414e0c995e2a2dd727ea04deec43710168b970be7b328589b45555c3",
+          "retrieved_utc": "2026-10-03T18:49:19+00:00",
+          "sha256": "44d29687452bd0f1a11c4d856983041937d472541ee15c24c47fb3bb29a0d306"
+        },
+        "nrcan-alclb-cd-5933-page-0.geojson.gz": {
+          "bytes": 7466066,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-122.677424737054%2C%22ymin%22%3A49.6097943293814%2C%22xmax%22%3A-118.78649116942%2C%22ymax%22%3A52.8778689863037%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+          "feature_count": 500,
+          "retained_bytes": 2608965,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5933-page-0.geojson.gz",
+          "retained_sha256": "85d38e1dfa2e6ba2483f0d591745cda6cdca23ba7ffc0b583264d576084116bf",
+          "retrieved_utc": "2026-10-03T18:49:28+00:00",
+          "sha256": "1ac856a876ce81f31defa5f01e976b5990c1c4387987eb313ddbb8165dd803e8"
+        },
+        "nrcan-alclb-cd-5933-page-1.geojson.gz": {
+          "bytes": 840751,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-122.677424737054%2C%22ymin%22%3A49.6097943293814%2C%22xmax%22%3A-118.78649116942%2C%22ymax%22%3A52.8778689863037%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=500",
+          "feature_count": 54,
+          "retained_bytes": 293706,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5933-page-1.geojson.gz",
+          "retained_sha256": "606ae9757b7b760763814c71c15558b9709e7dac90af65eb3819ca36c4fc27f6",
+          "retrieved_utc": "2026-10-03T18:49:29+00:00",
+          "sha256": "48f117b554ce8f80f3cad9043e7b373b9173beea4a49e9410c4d4f84d4d540b2"
+        },
+        "nrcan-alclb-cd-5939-page-0.geojson.gz": {
+          "bytes": 1402263,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-119.704531266341%2C%22ymin%22%3A50.4020514667587%2C%22xmax%22%3A-116.25645367026%2C%22ymax%22%3A52.5002384909872%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+          "feature_count": 37,
+          "retained_bytes": 512395,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5939-page-0.geojson.gz",
+          "retained_sha256": "19ec9309d86de5f921bc050961199e84f52ef1483d42f217706979acdaf09aa9",
+          "retrieved_utc": "2026-10-03T18:49:30+00:00",
+          "sha256": "86b3a62afc91255042e3cd0693870783120c9597e1b7741e7db884f677b68d08"
+        },
+        "nrcan-alclb-cd-5941-page-0.geojson.gz": {
+          "bytes": 4913651,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-126.646062872552%2C%22ymin%22%3A50.87693883344%2C%22xmax%22%3A-120.142545495158%2C%22ymax%22%3A53.5311087749779%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+          "feature_count": 438,
+          "retained_bytes": 1675617,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5941-page-0.geojson.gz",
+          "retained_sha256": "d0160f971f9e63667d0d8e33d07f36ef5c96b5b60ad1a4279961fd61c49e28b3",
+          "retrieved_utc": "2026-10-03T18:49:33+00:00",
+          "sha256": "6f0b5dff793bd7c6a548e6baba5aabd7aeec5b48339808c32ee31342e5473687"
+        },
+        "nrcan-alclb-cd-5949-page-0.geojson.gz": {
+          "bytes": 3741616,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-133.069543165159%2C%22ymin%22%3A52.2500776580854%2C%22xmax%22%3A-126.644700080743%2C%22ymax%22%3A59.0022546032169%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+          "feature_count": 500,
+          "retained_bytes": 1266305,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5949-page-0.geojson.gz",
+          "retained_sha256": "43bb5ddeff5d79c6ab5e282c5e53a07713d8e25063953318d31bc3af633b43d0",
+          "retrieved_utc": "2026-10-03T18:49:36+00:00",
+          "sha256": "7bf0749928a058ea6f885319110c96c9db82e08c73cf9b52243966a6edf99cb3"
+        },
+        "nrcan-alclb-cd-5949-page-1.geojson.gz": {
+          "bytes": 209742,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-133.069543165159%2C%22ymin%22%3A52.2500776580854%2C%22xmax%22%3A-126.644700080743%2C%22ymax%22%3A59.0022546032169%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=500",
+          "feature_count": 32,
+          "retained_bytes": 70615,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5949-page-1.geojson.gz",
+          "retained_sha256": "0c239e8d8bb547308b78005598bad836717bc61371151baa58d3d8f17801f6b2",
+          "retrieved_utc": "2026-10-03T18:49:37+00:00",
+          "sha256": "3468de76541c42afd18c6410e338619ad5602792461c6658a66d90a9efba47d1"
+        },
+        "nrcan-alclb-cd-5951-page-0.geojson.gz": {
+          "bytes": 3149813,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-128.485550374576%2C%22ymin%22%3A52.9925636005906%2C%22xmax%22%3A-123.27774508308%2C%22ymax%22%3A56.0031791233115%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+          "feature_count": 366,
+          "retained_bytes": 1075288,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5951-page-0.geojson.gz",
+          "retained_sha256": "b0b533fffe33d984746af7f73103c14f697648598b76fc8cfaa58d4a44f1878e",
+          "retrieved_utc": "2026-10-03T18:49:39+00:00",
+          "sha256": "d3f7c2c75a751508e53cc32db79fb05c0661ea7b8cc2387d2b2ddb387ae8d8c2"
+        },
+        "nrcan-alclb-cd-5953-page-0.geojson.gz": {
+          "bytes": 2633161,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-124.0532617555%2C%22ymin%22%3A52.1514631116905%2C%22xmax%22%3A-118.193350932993%2C%22ymax%22%3A55.9832757622535%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+          "feature_count": 307,
+          "retained_bytes": 903506,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5953-page-0.geojson.gz",
+          "retained_sha256": "985e4ebd5c220d185641070dd4cc5c331355c06c86777c491aa946ab6e3435c8",
+          "retrieved_utc": "2026-10-03T18:49:41+00:00",
+          "sha256": "82beeaafd4d895444b992e7e72a07dbe5cc855ccd49acb31b4988a19f60af2d8"
+        },
+        "nrcan-alclb-cd-5955-page-0.geojson.gz": {
+          "bytes": 3372907,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-127.738412504957%2C%22ymin%22%3A53.7953512056034%2C%22xmax%22%3A-119.999731727497%2C%22ymax%22%3A58.0271042203471%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+          "feature_count": 324,
+          "retained_bytes": 1173073,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5955-page-0.geojson.gz",
+          "retained_sha256": "353c7704e32396f34cc1fe9009269791b642f052549f961f08fa65eff6ffaa53",
+          "retrieved_utc": "2026-10-03T18:49:43+00:00",
+          "sha256": "9bfacc596e95779f91e66dca81a49fbb1b46063ef43a86efdab907201f95a7f4"
+        },
+        "nrcan-alclb-cd-5957-page-0.geojson.gz": {
+          "bytes": 32555058,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-139.052201041135%2C%22ymin%22%3A55.9975580378895%2C%22xmax%22%3A-124.440685746742%2C%22ymax%22%3A60.0000615323855%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+          "feature_count": 186,
+          "retained_bytes": 12109421,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5957-page-0.geojson.gz",
+          "retained_sha256": "eeee04242fb342353c33c3a9e7bf0969ef581655280e9f78735305c5e19a2d39",
+          "retrieved_utc": "2026-10-03T18:49:57+00:00",
+          "sha256": "9a2d4ebb0bc1f9bafa2ae38da2709cf739a89f08db58ab677cc12d7ebcfeb6a4"
+        },
+        "nrcan-alclb-cd-5959-page-0.geojson.gz": {
+          "bytes": 172960,
+          "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-127.810586146787%2C%22ymin%22%3A57.9975658150026%2C%22xmax%22%3A-119.999988643502%2C%22ymax%22%3A60.0000615316082%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+          "feature_count": 16,
+          "retained_bytes": 62492,
+          "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+          "retained_path": "sources/nrcan-alclb-cd-5959-page-0.geojson.gz",
+          "retained_sha256": "b678392f94e368bad08bc7b15b39e630396d4475f1e3ed3a4a417b0b96c16d3f",
+          "retrieved_utc": "2026-10-03T18:49:58+00:00",
+          "sha256": "25a6d6030ffc496bbe00885ac4709e000436d62986a0c305f84162d4d22e2075"
+        }
+      }
+    },
+    {
+      "name": "Statistics Canada 2021 Population Centres",
+      "canonical_urls": [
+        "https://www.arcgis.com/home/item.html?id=94507e9ee40746f6a52a65387dbd4f73"
+      ],
+      "vintage": "2021 Census",
+      "license": "Statistics Canada Open Licence Agreement",
+      "role": "Population-centre polygons use population/density thresholds; positive evidence only, not a complete settlement inventory",
+      "retained_files": {
+        "statistics-canada-bc-population-centres-2021.geojson.gz": {
+          "bytes": 1339233,
+          "sha256": "511c74952f6a826503cbbee7907c749cceb2dd8ac0d2f8bf009f3f183fb3d86f"
+        }
+      },
+      "response_files": {}
+    },
+    {
+      "name": "NRCan Canadian Geographical Names Database, populated places in BC",
+      "canonical_urls": [
+        "https://www.arcgis.com/home/item.html?id=79781d18a7fe469989bee7e4060aad94",
+        "https://natural-resources.canada.ca/maps-tools-publications/maps/geographical-names-canada/download-geographical-names-data"
+      ],
+      "vintage": "Scoped BC extract retrieved as retained by #485; source service is maintained quarterly",
+      "license": "Open Government Licence - Canada",
+      "role": "Official named-place point evidence; not exhaustive settlement coverage",
+      "retained_files": {
+        "canadian-geographical-names-populated-places-BC.geojson.gz": {
+          "bytes": 157224,
+          "sha256": "6863a835d8c599ec28bc81b587beb59540c7708835212ca9f1e637e3c7d1074b"
+        }
+      },
+      "response_files": {}
+    }
+  ],
+  "new_response_inventory": {
+    "bc-electoral-areas-cd-5901.geojson.gz": {
+      "bytes": 7525783,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-116.79654643935%2C%22ymin%22%3A48.998850496329%2C%22xmax%22%3A-114.053758264715%2C%22ymax%22%3A51.331501844784%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 14,
+      "retained_bytes": 2860231,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas-cd-5901.geojson.gz",
+      "retained_sha256": "ba80f6e33bff1b7b3472f48dce34c5f853c33b058d9112ee5b321759836127cf",
+      "retrieved_utc": "2026-10-03T18:48:35+00:00",
+      "sha256": "939663005d0a805a1f0aac25039b61297278a8d37f2b9adde274ffe4c1d359ee"
+    },
+    "bc-electoral-areas-cd-5933.geojson.gz": {
+      "bytes": 15016859,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-122.677424737054%2C%22ymin%22%3A49.6097943293814%2C%22xmax%22%3A-118.78649116942%2C%22ymax%22%3A52.8778689863037%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 50,
+      "retained_bytes": 5735364,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas-cd-5933.geojson.gz",
+      "retained_sha256": "4f9c12ed942aa2480cd6b6a919cd741e84dcf8aefda6fc5a0cd727137544d8ff",
+      "retrieved_utc": "2026-10-03T18:48:40+00:00",
+      "sha256": "3dfd13bec9e59bfc18bc47b1e5112739f503b1e71a59fb0763dadf3caa0eaec0"
+    },
+    "bc-electoral-areas-cd-5939.geojson.gz": {
+      "bytes": 9335881,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-119.704531266341%2C%22ymin%22%3A50.4020514667587%2C%22xmax%22%3A-116.25645367026%2C%22ymax%22%3A52.5002384909872%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 23,
+      "retained_bytes": 3564041,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas-cd-5939.geojson.gz",
+      "retained_sha256": "aa8da63424c64ca9a33d0fccf54d35a57fe1acd7086af58cb5e3ca2e58427092",
+      "retrieved_utc": "2026-10-03T18:48:43+00:00",
+      "sha256": "b6209eba4c202fa9964c93b4a45f1c6ff554b5d0eee53723606195927593d2ac"
+    },
+    "bc-electoral-areas-cd-5941.geojson.gz": {
+      "bytes": 12756202,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-126.646062872552%2C%22ymin%22%3A50.87693883344%2C%22xmax%22%3A-120.142545495158%2C%22ymax%22%3A53.5311087749779%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 34,
+      "retained_bytes": 4886501,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas-cd-5941.geojson.gz",
+      "retained_sha256": "0746d2075a1e9ba32757b03997bac7d0002495769d013c7154de99bf56e2e16a",
+      "retrieved_utc": "2026-10-03T18:48:47+00:00",
+      "sha256": "e34d31e63759c55673d17edb5b5c52cbe9e60c6887a4b09412989a0dc0761577"
+    },
+    "bc-electoral-areas-cd-5949.geojson.gz": {
+      "bytes": 11570734,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-133.069543165159%2C%22ymin%22%3A52.2500776580854%2C%22xmax%22%3A-126.644700080743%2C%22ymax%22%3A59.0022546032169%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 20,
+      "retained_bytes": 4431585,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas-cd-5949.geojson.gz",
+      "retained_sha256": "d284bf01b0b0f5e435f24c0a60bd4d6445e678ac3cee49b9b9417d2fb9fd3166",
+      "retrieved_utc": "2026-10-03T18:48:50+00:00",
+      "sha256": "a70189b6d5e420b07d5cb225d0cacbb0491490a69846944f2bb99b2ac3555448"
+    },
+    "bc-electoral-areas-cd-5951.geojson.gz": {
+      "bytes": 12326554,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-128.485550374576%2C%22ymin%22%3A52.9925636005906%2C%22xmax%22%3A-123.27774508308%2C%22ymax%22%3A56.0031791233115%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 19,
+      "retained_bytes": 4724233,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas-cd-5951.geojson.gz",
+      "retained_sha256": "df4289524998c9fe4723c862c19b0509f98393cf76f192e6404762d6d0370130",
+      "retrieved_utc": "2026-10-03T18:48:54+00:00",
+      "sha256": "329e12dbb8427d4ccc633cfbf54100cba1d48d123346f54289f7fb8a4d8b6952"
+    },
+    "bc-electoral-areas-cd-5953.geojson.gz": {
+      "bytes": 12816917,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-124.0532617555%2C%22ymin%22%3A52.1514631116905%2C%22xmax%22%3A-118.193350932993%2C%22ymax%22%3A55.9832757622535%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 28,
+      "retained_bytes": 4917090,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas-cd-5953.geojson.gz",
+      "retained_sha256": "b81dcc742defd26023be369a1828a498d6de3bdd9412fcf21eeb146a3db9b912",
+      "retrieved_utc": "2026-10-03T18:48:57+00:00",
+      "sha256": "90efbb6f7d59f2fb424650e8c1ef88ad651af97375e27f44898d4e0e02052a45"
+    },
+    "bc-electoral-areas-cd-5955.geojson.gz": {
+      "bytes": 12346656,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-127.738412504957%2C%22ymin%22%3A53.7953512056034%2C%22xmax%22%3A-119.999731727497%2C%22ymax%22%3A58.0271042203471%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 20,
+      "retained_bytes": 4732646,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas-cd-5955.geojson.gz",
+      "retained_sha256": "b5b1e09da6d8e0c6d8ff6883ff8f56e6cc97004361f2929c2f900f3cceb5d9c0",
+      "retrieved_utc": "2026-10-03T18:49:01+00:00",
+      "sha256": "c50ad3be3f3d7a5e69015431676778b57dff76bdee36950338a6bb9e43639743"
+    },
+    "bc-electoral-areas-cd-5957.geojson.gz": {
+      "bytes": 6027686,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-139.052201041135%2C%22ymin%22%3A55.9975580378895%2C%22xmax%22%3A-124.440685746742%2C%22ymax%22%3A60.0000615323855%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 7,
+      "retained_bytes": 2304174,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas-cd-5957.geojson.gz",
+      "retained_sha256": "2d945524d19a8e1bf352b2fd45030ddeaf70a0ee3ada516ec7aca03c4d4e05de",
+      "retrieved_utc": "2026-10-03T18:49:03+00:00",
+      "sha256": "ad093f27224384b191cb07b09b46e5f086712cd071fd11dec5a48066cfed3b07"
+    },
+    "bc-electoral-areas-cd-5959.geojson.gz": {
+      "bytes": 1592406,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-127.810586146787%2C%22ymin%22%3A57.9975658150026%2C%22xmax%22%3A-119.999988643502%2C%22ymax%22%3A60.0000615316082%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 1,
+      "retained_bytes": 609340,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas-cd-5959.geojson.gz",
+      "retained_sha256": "582adc9d88ae609a0fdb3e38c0eb642ded2e56b510e73d60622eada0ee65a4a9",
+      "retrieved_utc": "2026-10-03T18:49:04+00:00",
+      "sha256": "44c40039f18c90efaf864af67e10e05f7f90933e4156321da75dabcce351720f"
+    },
+    "bc-electoral-areas.geojson.gz": {
+      "bytes": 39377175,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-116.79654643935%2C%22ymin%22%3A48.998850496329%2C%22xmax%22%3A-114.053758264715%2C%22ymax%22%3A51.331501844784%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-122.677424737054%2C%22ymin%22%3A49.6097943293814%2C%22xmax%22%3A-118.78649116942%2C%22ymax%22%3A52.8778689863037%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-119.704531266341%2C%22ymin%22%3A50.4020514667587%2C%22xmax%22%3A-116.25645367026%2C%22ymax%22%3A52.5002384909872%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-126.646062872552%2C%22ymin%22%3A50.87693883344%2C%22xmax%22%3A-120.142545495158%2C%22ymax%22%3A53.5311087749779%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-133.069543165159%2C%22ymin%22%3A52.2500776580854%2C%22xmax%22%3A-126.644700080743%2C%22ymax%22%3A59.0022546032169%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-128.485550374576%2C%22ymin%22%3A52.9925636005906%2C%22xmax%22%3A-123.27774508308%2C%22ymax%22%3A56.0031791233115%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-124.0532617555%2C%22ymin%22%3A52.1514631116905%2C%22xmax%22%3A-118.193350932993%2C%22ymax%22%3A55.9832757622535%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-127.738412504957%2C%22ymin%22%3A53.7953512056034%2C%22xmax%22%3A-119.999731727497%2C%22ymax%22%3A58.0271042203471%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-139.052201041135%2C%22ymin%22%3A55.9975580378895%2C%22xmax%22%3A-124.440685746742%2C%22ymax%22%3A60.0000615323855%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects\nhttps://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&geometry=%7B%22xmin%22%3A-127.810586146787%2C%22ymin%22%3A57.9975658150026%2C%22xmax%22%3A-119.999988643502%2C%22ymax%22%3A60.0000615316082%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects",
+      "feature_count": 99,
+      "note": "Derived deduplicated OBJECTID union; all raw original per-CD responses are retained beside it.",
+      "retained_bytes": 14944019,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-electoral-areas.geojson.gz",
+      "retained_sha256": "104aff4803b249bf1698cedbff6531b65a723d80feca8639f799a12a30cc1a18",
+      "retrieved_utc": "2026-10-03T18:49:10+00:00",
+      "sha256": "11b4bb1d52e6bb35792b12019a968c541346d66d4ad63fb0a7b285ee57b40fd1"
+    },
+    "bc-layer-16-catalog.json": {
+      "bytes": 36028,
+      "canonical_request_url": "https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=d1aff64e-dbfe-45a6-af97-582b7f6418b9",
+      "feature_count": 0,
+      "retained_bytes": 36028,
+      "retained_encoding": "identity",
+      "retained_path": "sources/bc-layer-16-catalog.json",
+      "retained_sha256": "77afb6eb3e4ee67cb96136aef646e42715f2456ec91a9dadafa36225e851e0bc",
+      "retrieved_utc": "2026-10-03T18:48:26+00:00",
+      "sha256": "77afb6eb3e4ee67cb96136aef646e42715f2456ec91a9dadafa36225e851e0bc"
+    },
+    "bc-layer-16-metadata.json": {
+      "bytes": 5882,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/16/info/metadata?f=json",
+      "feature_count": 0,
+      "retained_bytes": 5882,
+      "retained_encoding": "identity",
+      "retained_path": "sources/bc-layer-16-metadata.json",
+      "retained_sha256": "24e871d2b8d5b059ce4d174937c74218d17882dc34029317f77ff2d9a106dcbf",
+      "retrieved_utc": "2026-10-03T18:48:27+00:00",
+      "sha256": "24e871d2b8d5b059ce4d174937c74218d17882dc34029317f77ff2d9a106dcbf"
+    },
+    "bc-layer-18-catalog.json": {
+      "bytes": 42836,
+      "canonical_request_url": "https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=e3c3c580-996a-4668-8bc5-6aa7c7dc4932",
+      "feature_count": 0,
+      "retained_bytes": 42836,
+      "retained_encoding": "identity",
+      "retained_path": "sources/bc-layer-18-catalog.json",
+      "retained_sha256": "00550bc37a88aad6884e185853ce24a8a9f3d19d4d3dd7d57d2ed4842face1ea",
+      "retrieved_utc": "2026-10-03T18:48:28+00:00",
+      "sha256": "00550bc37a88aad6884e185853ce24a8a9f3d19d4d3dd7d57d2ed4842face1ea"
+    },
+    "bc-layer-18-metadata.json": {
+      "bytes": 5888,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/18/info/metadata?f=json",
+      "feature_count": 0,
+      "retained_bytes": 5888,
+      "retained_encoding": "identity",
+      "retained_path": "sources/bc-layer-18-metadata.json",
+      "retained_sha256": "b72028afbdabcde7e09817bbb098c48585762f3b395fba8fe0bb84af0888e70d",
+      "retrieved_utc": "2026-10-03T18:48:28+00:00",
+      "sha256": "b72028afbdabcde7e09817bbb098c48585762f3b395fba8fe0bb84af0888e70d"
+    },
+    "bc-layer-24-catalog.json": {
+      "bytes": 34941,
+      "canonical_request_url": "https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=81940c47-a534-47e0-94d0-947c96a59de4",
+      "feature_count": 0,
+      "retained_bytes": 34941,
+      "retained_encoding": "identity",
+      "retained_path": "sources/bc-layer-24-catalog.json",
+      "retained_sha256": "aa9b68ea18643e5f299c216bf8ae21481e3c2d0455b5e938277447104cf580f3",
+      "retrieved_utc": "2026-10-03T18:48:27+00:00",
+      "sha256": "aa9b68ea18643e5f299c216bf8ae21481e3c2d0455b5e938277447104cf580f3"
+    },
+    "bc-layer-24-metadata.json": {
+      "bytes": 5871,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/24/info/metadata?f=json",
+      "feature_count": 0,
+      "retained_bytes": 5871,
+      "retained_encoding": "identity",
+      "retained_path": "sources/bc-layer-24-metadata.json",
+      "retained_sha256": "a89933720da5bce5910952be1752d46d43c74550ece80bcc2f6f7fac902964f8",
+      "retrieved_utc": "2026-10-03T18:48:28+00:00",
+      "sha256": "a89933720da5bce5910952be1752d46d43c74550ece80bcc2f6f7fac902964f8"
+    },
+    "bc-municipalities.geojson.gz": {
+      "bytes": 1673255,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/18/query?where=ADMIN_AREA_GROUP_NAME+IN+%28%27Regional+District+of+East+Kootenay%27%2C%27Thompson-Nicola+Regional+District%27%2C%27Columbia+Shuswap+Regional+District%27%2C%27Cariboo+Regional+District%27%2C%27Regional+District+of+Kitimat-Stikine%27%2C%27Regional+District+of+Bulkley-Nechako%27%2C%27Regional+District+of+Fraser-Fort+George%27%2C%27Peace+River+Regional+District%27%29+OR+ADMIN_AREA_NAME+LIKE+%27%25Northern+Rockies%25%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000",
+      "feature_count": 52,
+      "retained_bytes": 632125,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-municipalities.geojson.gz",
+      "retained_sha256": "b651a7e71a9948f6311c9e090b0e85e639de0dce28eccc0fc33b117a93c45cc5",
+      "retrieved_utc": "2026-10-03T18:49:13+00:00",
+      "sha256": "a7b800fbeeba3945b465b7bcf4ac644fb6672a566d0c4d781daa9d40714cefa7"
+    },
+    "bc-regional-districts-and-stikine.geojson.gz": {
+      "bytes": 16604506,
+      "canonical_request_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/16/query?where=ADMIN_AREA_NAME+IN+%28%27Regional+District+of+East+Kootenay%27%2C%27Thompson-Nicola+Regional+District%27%2C%27Columbia-Shuswap+Regional+District%27%2C%27Cariboo+Regional+District%27%2C%27Regional+District+of+Kitimat-Stikine%27%2C%27Regional+District+of+Bulkley-Nechako%27%2C%27Regional+District+of+Fraser-Fort+George%27%2C%27Peace+River+Regional+District%27%2C%27Stikine+Region+%28Unincorporated%29%27%29&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000",
+      "feature_count": 9,
+      "retained_bytes": 6346297,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/bc-regional-districts-and-stikine.geojson.gz",
+      "retained_sha256": "b3272948b12b1e3cbdd16ba45f09385f5270fb3fdfc4f1ae7bcf7c5cb41c99a5",
+      "retrieved_utc": "2026-10-03T18:48:33+00:00",
+      "sha256": "5613d2628d729c043d814e0b49512f6695ce5fda384d15e5d90df0385b82dd2e"
+    },
+    "nrcan-alclb-catalog.json": {
+      "bytes": 36855,
+      "canonical_request_url": "https://open.canada.ca/data/api/3/action/package_show?id=522b07b9-78e2-4819-b736-ad9208eb1067",
+      "feature_count": 0,
+      "retained_bytes": 36855,
+      "retained_encoding": "identity",
+      "retained_path": "sources/nrcan-alclb-catalog.json",
+      "retained_sha256": "f10a7aed2edac7989c3617a5e73e440cfb1f692fc1758210442692d518843642",
+      "retrieved_utc": "2026-10-03T18:49:14+00:00",
+      "sha256": "f10a7aed2edac7989c3617a5e73e440cfb1f692fc1758210442692d518843642"
+    },
+    "nrcan-alclb-cd-5901-page-0.geojson.gz": {
+      "bytes": 2370466,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-116.79654643935%2C%22ymin%22%3A48.998850496329%2C%22xmax%22%3A-114.053758264715%2C%22ymax%22%3A51.331501844784%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+      "feature_count": 25,
+      "retained_bytes": 879226,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5901-page-0.geojson.gz",
+      "retained_sha256": "cce16271414e0c995e2a2dd727ea04deec43710168b970be7b328589b45555c3",
+      "retrieved_utc": "2026-10-03T18:49:19+00:00",
+      "sha256": "44d29687452bd0f1a11c4d856983041937d472541ee15c24c47fb3bb29a0d306"
+    },
+    "nrcan-alclb-cd-5933-page-0.geojson.gz": {
+      "bytes": 7466066,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-122.677424737054%2C%22ymin%22%3A49.6097943293814%2C%22xmax%22%3A-118.78649116942%2C%22ymax%22%3A52.8778689863037%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+      "feature_count": 500,
+      "retained_bytes": 2608965,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5933-page-0.geojson.gz",
+      "retained_sha256": "85d38e1dfa2e6ba2483f0d591745cda6cdca23ba7ffc0b583264d576084116bf",
+      "retrieved_utc": "2026-10-03T18:49:28+00:00",
+      "sha256": "1ac856a876ce81f31defa5f01e976b5990c1c4387987eb313ddbb8165dd803e8"
+    },
+    "nrcan-alclb-cd-5933-page-1.geojson.gz": {
+      "bytes": 840751,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-122.677424737054%2C%22ymin%22%3A49.6097943293814%2C%22xmax%22%3A-118.78649116942%2C%22ymax%22%3A52.8778689863037%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=500",
+      "feature_count": 54,
+      "retained_bytes": 293706,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5933-page-1.geojson.gz",
+      "retained_sha256": "606ae9757b7b760763814c71c15558b9709e7dac90af65eb3819ca36c4fc27f6",
+      "retrieved_utc": "2026-10-03T18:49:29+00:00",
+      "sha256": "48f117b554ce8f80f3cad9043e7b373b9173beea4a49e9410c4d4f84d4d540b2"
+    },
+    "nrcan-alclb-cd-5939-page-0.geojson.gz": {
+      "bytes": 1402263,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-119.704531266341%2C%22ymin%22%3A50.4020514667587%2C%22xmax%22%3A-116.25645367026%2C%22ymax%22%3A52.5002384909872%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+      "feature_count": 37,
+      "retained_bytes": 512395,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5939-page-0.geojson.gz",
+      "retained_sha256": "19ec9309d86de5f921bc050961199e84f52ef1483d42f217706979acdaf09aa9",
+      "retrieved_utc": "2026-10-03T18:49:30+00:00",
+      "sha256": "86b3a62afc91255042e3cd0693870783120c9597e1b7741e7db884f677b68d08"
+    },
+    "nrcan-alclb-cd-5941-page-0.geojson.gz": {
+      "bytes": 4913651,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-126.646062872552%2C%22ymin%22%3A50.87693883344%2C%22xmax%22%3A-120.142545495158%2C%22ymax%22%3A53.5311087749779%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+      "feature_count": 438,
+      "retained_bytes": 1675617,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5941-page-0.geojson.gz",
+      "retained_sha256": "d0160f971f9e63667d0d8e33d07f36ef5c96b5b60ad1a4279961fd61c49e28b3",
+      "retrieved_utc": "2026-10-03T18:49:33+00:00",
+      "sha256": "6f0b5dff793bd7c6a548e6baba5aabd7aeec5b48339808c32ee31342e5473687"
+    },
+    "nrcan-alclb-cd-5949-page-0.geojson.gz": {
+      "bytes": 3741616,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-133.069543165159%2C%22ymin%22%3A52.2500776580854%2C%22xmax%22%3A-126.644700080743%2C%22ymax%22%3A59.0022546032169%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+      "feature_count": 500,
+      "retained_bytes": 1266305,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5949-page-0.geojson.gz",
+      "retained_sha256": "43bb5ddeff5d79c6ab5e282c5e53a07713d8e25063953318d31bc3af633b43d0",
+      "retrieved_utc": "2026-10-03T18:49:36+00:00",
+      "sha256": "7bf0749928a058ea6f885319110c96c9db82e08c73cf9b52243966a6edf99cb3"
+    },
+    "nrcan-alclb-cd-5949-page-1.geojson.gz": {
+      "bytes": 209742,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-133.069543165159%2C%22ymin%22%3A52.2500776580854%2C%22xmax%22%3A-126.644700080743%2C%22ymax%22%3A59.0022546032169%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=500",
+      "feature_count": 32,
+      "retained_bytes": 70615,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5949-page-1.geojson.gz",
+      "retained_sha256": "0c239e8d8bb547308b78005598bad836717bc61371151baa58d3d8f17801f6b2",
+      "retrieved_utc": "2026-10-03T18:49:37+00:00",
+      "sha256": "3468de76541c42afd18c6410e338619ad5602792461c6658a66d90a9efba47d1"
+    },
+    "nrcan-alclb-cd-5951-page-0.geojson.gz": {
+      "bytes": 3149813,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-128.485550374576%2C%22ymin%22%3A52.9925636005906%2C%22xmax%22%3A-123.27774508308%2C%22ymax%22%3A56.0031791233115%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+      "feature_count": 366,
+      "retained_bytes": 1075288,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5951-page-0.geojson.gz",
+      "retained_sha256": "b0b533fffe33d984746af7f73103c14f697648598b76fc8cfaa58d4a44f1878e",
+      "retrieved_utc": "2026-10-03T18:49:39+00:00",
+      "sha256": "d3f7c2c75a751508e53cc32db79fb05c0661ea7b8cc2387d2b2ddb387ae8d8c2"
+    },
+    "nrcan-alclb-cd-5953-page-0.geojson.gz": {
+      "bytes": 2633161,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-124.0532617555%2C%22ymin%22%3A52.1514631116905%2C%22xmax%22%3A-118.193350932993%2C%22ymax%22%3A55.9832757622535%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+      "feature_count": 307,
+      "retained_bytes": 903506,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5953-page-0.geojson.gz",
+      "retained_sha256": "985e4ebd5c220d185641070dd4cc5c331355c06c86777c491aa946ab6e3435c8",
+      "retrieved_utc": "2026-10-03T18:49:41+00:00",
+      "sha256": "82beeaafd4d895444b992e7e72a07dbe5cc855ccd49acb31b4988a19f60af2d8"
+    },
+    "nrcan-alclb-cd-5955-page-0.geojson.gz": {
+      "bytes": 3372907,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-127.738412504957%2C%22ymin%22%3A53.7953512056034%2C%22xmax%22%3A-119.999731727497%2C%22ymax%22%3A58.0271042203471%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+      "feature_count": 324,
+      "retained_bytes": 1173073,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5955-page-0.geojson.gz",
+      "retained_sha256": "353c7704e32396f34cc1fe9009269791b642f052549f961f08fa65eff6ffaa53",
+      "retrieved_utc": "2026-10-03T18:49:43+00:00",
+      "sha256": "9bfacc596e95779f91e66dca81a49fbb1b46063ef43a86efdab907201f95a7f4"
+    },
+    "nrcan-alclb-cd-5957-page-0.geojson.gz": {
+      "bytes": 32555058,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-139.052201041135%2C%22ymin%22%3A55.9975580378895%2C%22xmax%22%3A-124.440685746742%2C%22ymax%22%3A60.0000615323855%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+      "feature_count": 186,
+      "retained_bytes": 12109421,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5957-page-0.geojson.gz",
+      "retained_sha256": "eeee04242fb342353c33c3a9e7bf0969ef581655280e9f78735305c5e19a2d39",
+      "retrieved_utc": "2026-10-03T18:49:57+00:00",
+      "sha256": "9a2d4ebb0bc1f9bafa2ae38da2709cf739a89f08db58ab677cc12d7ebcfeb6a4"
+    },
+    "nrcan-alclb-cd-5959-page-0.geojson.gz": {
+      "bytes": 172960,
+      "canonical_request_url": "https://proxyinternet.nrcan-rncan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=500&orderByFields=OBJECTID+ASC&geometry=%7B%22xmin%22%3A-127.810586146787%2C%22ymin%22%3A57.9975658150026%2C%22xmax%22%3A-119.999988643502%2C%22ymax%22%3A60.0000615316082%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&resultOffset=0",
+      "feature_count": 16,
+      "retained_bytes": 62492,
+      "retained_encoding": "gzip (lossless; decompress to recover exact response bytes)",
+      "retained_path": "sources/nrcan-alclb-cd-5959-page-0.geojson.gz",
+      "retained_sha256": "b678392f94e368bad08bc7b15b39e630396d4475f1e3ed3a4a417b0b96c16d3f",
+      "retrieved_utc": "2026-10-03T18:49:58+00:00",
+      "sha256": "25a6d6030ffc496bbe00885ac4709e000436d62986a0c305f84162d4d22e2075"
+    }
+  },
+  "restoration": "For each response, issue canonical_request_url, preserve the exact raw response, and verify its raw SHA-256. Compressed retained files decompress to those exact bytes. If live response differs, store as a new dated vintage; do not replace pinned bytes.",
+  "compression_note": "GeoJSON HTTP response bytes are retained as deterministic gzip files. The receipt records both uncompressed response and retained gzip byte counts/SHA-256; gzip decompression recovers the exact response bytes. Catalog JSON responses are stored unchanged.",
+  "baseline_context": {
+    "description": "Current WorldAtlas IDs and full parent chains joined by the source-member IDs in the retained 2016 geoBoundaries ADM3 roster. This is the shared baseline identity context, not independent administrative evidence.",
+    "origin": "#485 packet current-parent-chains.json.gz and its source manifest",
+    "retained_in_parent_packet": true,
+    "path": "sources/current-parent-chains.json.gz",
+    "bytes": 106481,
+    "sha256": "aa0c1643d376baa9b7478d26886510718d3c0e242782df004e2defd028938290"
+  }
+}
