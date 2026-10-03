@@ -1,0 +1,47 @@
+{
+  "result": "passed",
+  "source_baseline_commit": "276d72e1f316ad58d52c8fea7974a873c2ec9387",
+  "artifact_snapshot_commit": "39188aadf6efdae60357d9d4a1bbb62ffd981003",
+  "assigned_subjects": 222,
+  "original_packet_files_hash_checked": 45,
+  "checks": {
+    "positive_existing_output": {
+      "status": "passed",
+      "diagnostic": "exact pinned output bytes matched"
+    },
+    "two_run_determinism": {
+      "status": "passed",
+      "byte_identical": true
+    },
+    "changed_baseline": {
+      "status": "passed",
+      "rejected_before_output_directory_creation": true,
+      "diagnostic": "ERROR: Baseline override mismatch: expected 276d72e1f316ad58d52c8fea7974a873c2ec9387"
+    },
+    "changed_output_candidate": {
+      "status": "passed",
+      "rejected_by_check_mode": true,
+      "diagnostic": "ERROR: Pinned reproduction differs from existing output set"
+    },
+    "overwrite_protection": {
+      "status": "passed",
+      "existing_correction_outputs_unchanged": true,
+      "diagnostic": "ERROR: Refusing to overwrite existing deterministic output"
+    },
+    "original_preservation": {
+      "status": "passed",
+      "original_hashes_unchanged": true,
+      "files_checked": 45
+    }
+  },
+  "outputs_sha256": {
+    "current-scope-and-parents.deterministic.json.gz": "936c011416909e3ea66f552516bed06b167e064b4df16d319f603c553976f024",
+    "current-parent-chains.deterministic.json.gz": "6634b1c88d40324085819760cb1656c1823b117368fb872dec4b44680aa65047",
+    "deterministic-reproduction-manifest.json": "ce9fee28f3974dab60da02fe170b1de800f872d032ccd472b722163828db159d"
+  },
+  "commands": [
+    "python reproduce.py",
+    "python reproduce.py --check",
+    "python verify_controls.py"
+  ]
+}
