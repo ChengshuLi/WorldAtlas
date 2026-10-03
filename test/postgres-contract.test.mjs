@@ -16,6 +16,15 @@ const retirement=(id,target,replacement=null)=>({id,collection:'records',target_
 const contractRejected=error=>[400,409].includes(error.status)&&!String(error.message).match(/\b42[A-Z0-9]{3}\b/);
 async function fixture(){const value=await createLocalPostgres();try{await importBatch(value.db,JSON.parse(fs.readFileSync(new URL('../data/hosted-type-catalog.json',import.meta.url))));await importBatch(value.db,{sources:[source(),source('reference','reference',2026,2027),source('example','example'),source('estimate','estimate')],entities:tiers.map((kind,index)=>({id:kind,kind,name:`Original ${kind}`,parent_id:index?tiers[index-1]:null})),categories:['owner','culture','religion'].map(kind=>({id:`${kind}:a`,kind,name:`${kind} A`,source_id:'history'}))});return value;}catch(error){await value.close();throw error;}}
 const withFixture=fn=>async()=>{const fixtureValue=await fixture();try{await fn(fixtureValue);}finally{await fixtureValue.close();}};
+
+test('PostgreSQL evidence-only map pages retain retirement-only subjects without enumerating empty geography',withFixture(async({db})=>{
+ await importBatch(db,{records:[record('withdrawn-only','population',42)],names:[{id:'dated-region',entity_id:'region',name:'Dated region',valid_from:1000,valid_to:1100,source_id:'history'}]});
+ await importBatch(db,{retirements:[retirement('retire-only','withdrawn-only')]});
+ const first=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000,{evidenceOnly:true,limit:1}));assert.deepEqual(first.entities.map(e=>e.id),['location']);assert.equal(first.records.length,0);assert.equal(first.retirements[0].target_id,'withdrawn-only');assert.equal(first.next_cursor,'location');
+ const last=hydrateMapSnapshotPage(await mapSnapshotPage(db,1000,{evidenceOnly:true,limit:1,cursor:first.next_cursor}));assert.deepEqual(last.entities.map(e=>e.id),['region']);assert.equal(last.names[0].value,'Dated region');assert.equal(last.next_cursor,null);
+ const empty=await mapSnapshotPage(db,1100,{evidenceOnly:true});assert.deepEqual(empty.entities,[]);assert.equal(empty.next_cursor,null);
+ assert.equal((await mapSnapshotPage(db,1000)).entities.length,6);
+}));
 class FrozenD1 {
  constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const file of fs.readdirSync(new URL('../drizzle/',import.meta.url)).filter(file=>file.endsWith('.sql')).sort())this.sqlite.exec(fs.readFileSync(new URL(`../drizzle/${file}`,import.meta.url),'utf8'));}
  prepare(sql){const sqlite=this.sqlite;let args=[];return {bind(...values){args=values;return this;},async all(){return {results:sqlite.prepare(sql).all(...args)};},async first(){return sqlite.prepare(sql).get(...args)??null;},run(){return {meta:{changes:Number(sqlite.prepare(sql).run(...args).changes)}};}};}

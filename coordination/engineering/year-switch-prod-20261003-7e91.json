@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "year-switch-prod-20261003-7e91",
+  "branch": "engineering/year-switch-prod-20261003-7e91",
+  "base_main_commit": "0319970547edc8b499cb8a258a199aec0448b0ac",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/22",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Production year-switch baseline and opt-in evidence-only map pages"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-03T08:34:00Z",
+  "completed": [
+    "Authenticated private production verification; no audience or data change",
+    "Completed five navigation samples and invalid-year browser check",
+    "Implemented compatible evidence-only paging retaining retirement-only subjects"
+  ],
+  "checks": [
+    {
+      "command": "node --test test/map-snapshots.test.mjs test/postgres-contract.test.mjs",
+      "passed": 21,
+      "failed": 0
+    },
+    {
+      "command": "node --test test/compact-map-client.test.mjs",
+      "passed": 10,
+      "failed": 0
+    },
+    {
+      "command": "npm run build:hosted",
+      "result": "passed"
+    }
+  ],
+  "deployment": {
+    "changed": false,
+    "baseline_site_version": 21,
+    "baseline_reference_release": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e"
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/year-switch-prod-20261003-7e91/before-1950.png",
+    "data/engineering/year-switch-prod-20261003-7e91/before-trace.json.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/before.json.gz"
+  ],
+  "blockers": [],
+  "next_action": "Complete full tests; submit focused partial PR; verify actual queued merge, controlled publication and production before/after checks before closure.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "reservation": {
+    "worker_id": "engineering-night-20261003-7e91f438",
+    "claim_id": "35a7dbdb-842b-4282-8e21-d073cb7d7ac1",
+    "initial_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37109476435",
+    "live_measurement_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37109555536"
+  },
+  "private_access": {
+    "resolved": true,
+    "credential_retention": "session memory only; no credential in artifacts",
+    "geography_status": 200,
+    "geography_bytes": 10525834,
+    "geography_sha256": "3465d8f227958342cc6457f50fdf302462ffefb9fe2e6e5625cd12373a3bf7de",
+    "coordination_notice": "https://github.com/ChengshuLi/WorldAtlas/issues/39#issuecomment-5967129879",
+    "verification_receipt": "https://github.com/ChengshuLi/WorldAtlas/issues/22#issuecomment-5967172865"
+  },
+  "evidence_hashes": {
+    "data/engineering/year-switch-prod-20261003-7e91/before-1950.png": "a69749565e127b7c4ebfd2da807a207311064d17dc84e36808481169fb4693e7",
+    "data/engineering/year-switch-prod-20261003-7e91/before-trace.json.gz": "e2b5a4bf9ce21ce5d2b43d3852508961f00d3048e512f14050c337adc0ea17ab",
+    "data/engineering/year-switch-prod-20261003-7e91/before.json.gz": "4aa41e6c97bb706b5349aab193b1503335867da0b65cdbdd5f950318bedc3aee"
+  }
+}
