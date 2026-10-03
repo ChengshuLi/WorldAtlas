@@ -2,6 +2,8 @@
 
 # Approved global macro reporting partition
 
+The [macro-boundary follow-up](../data/macro-improvements/macro-boundary-followup/README.md) distinguishes the 49 incomplete finite-river measurements from demonstrated assignment errors: 48 do not intersect the inspected source river/canal and one does. All retain their approved reporting conventions; none becomes physically verified merely through this clarification. It also records the separate, repairable island/source/grid coverage limitations. The original publication receipt and uncertainty ledger remain unchanged.
+
 Issue #33 approves the own-boundary conventions for all six continents, 29 subcontinents and 81 regions, excluding Antarctica. The four sourced continental decision sheets, original inspection ledgers and explicit migration receipts are retained. `data/macro-foundation/approved-boundary-decisions.json` records every current group, fulfilled correction and named-land route; `macro-certificate.json` pins the exact release, membership fingerprints and immutable envelope manifest.
 
 The hierarchy remains constructed bottom up. Regions union their represented location land; subcontinents union regions; continents union subcontinents. Independent verification checks every source location's inclusion, asset hashes, exact membership, valid geometry, child containment and same-tier material overlap. The frozen envelopes remain independent audit constraints for subsequent interior edits.

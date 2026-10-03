@@ -27,10 +27,29 @@ def read(path):
     return json.loads(gzip.decompress(raw) if path.suffix == '.gz' else raw)
 
 
+def pinned_bytes(path, expected, release):
+    """Replay original bytes, never substitute a new release for a pinned input."""
+    original = ROOT / path
+    if original.is_file() and digest(original.read_bytes()) == expected:
+        return original.read_bytes()
+    if path in ('data/hierarchy.json', 'data/world-index.json'):
+        archived = (ROOT / 'data/macro-foundation/predecessor-inspections' /
+                    release['hierarchy_sha256'] / (pathlib.Path(path).name + '.gz'))
+    elif path.startswith('data/macro-foundation/'):
+        archived = (ROOT / 'data/reference-migrations/macro-improvements-v4/prior-macro' /
+                    (str(pathlib.Path(path).relative_to('data')) + '.archive.gz'))
+    else:
+        raise AssertionError(f'Changed pinned input without preserved archive: {path}')
+    raw = gzip.decompress(archived.read_bytes())
+    assert digest(raw) == expected, (path, 'archived input hash')
+    return raw
+
+
 def main():
     report = read(OWN / 'reconciliation.json')
+    pinned = {}
     for path, expected in report['immutable_input_pins'].items():
-        assert digest((ROOT / path).read_bytes()) == expected, path
+        pinned[path] = pinned_bytes(path, expected, report['geographic_release'])
     for entry in ('measurement_archive', 'current_candidate_snapshot', 'larger_corridor_sensitivity'):
         item = report[entry]
         assert digest((ROOT / item['path']).read_bytes()) == item['sha256'], entry
@@ -70,7 +89,7 @@ def main():
     assert len(rows) == len(old_rows) == 570
     assert {x['location_id'] for x in rows} == set(old_rows)
     snapshots = {x['location_id']: x for x in rows}
-    approved = read(ROOT / 'data/macro-foundation/approved-boundary-decisions.json')
+    approved = json.loads(pinned['data/macro-foundation/approved-boundary-decisions.json'])
     routes = [x for x in approved['named_land_routing'] if 'aegean-islands' in x.get('source_ids', [])]
     route_targets = {identity: x['region_id'] for x in routes for identity in x['existing_location_ids']}
     assert len(routes) == 19 and len(route_targets) == 19
