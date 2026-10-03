@@ -1,0 +1,40 @@
+{
+  "verification_date_utc": "2026-10-03",
+  "method": "Restored each canonical HTTPS source to temporary storage outside the repository, streamed byte count and SHA-256, compared to the exact #613 source-receipts.json descriptor, then removed temporary bytes. No restricted PDF or 149 MB archive was retained.",
+  "verified_sources": [
+    {
+      "id": "KIR-2020-census",
+      "url": "https://nso.gov.ki/download/146/2020/1965/kiribati-2020-population-and-housing-census-report.pdf",
+      "bytes": 23188330,
+      "sha256": "a4f158ddf3548468825338d9ced5bc8d04dca1f349916748ff204974a0102eed",
+      "verified": true,
+      "retention": "temporary only; no explicit open-reuse terms were found"
+    },
+    {
+      "id": "KIR-2022-atlas",
+      "url": "https://nso.gov.ki/download/117/other-reports/2022/kiribati-census-atlas-2022.pdf",
+      "bytes": 8415857,
+      "sha256": "56b0461dd54bbfb6f3ab894fa6b4f9be68f0d1b28a34670b9c67fcc3aa1f464b",
+      "verified": true,
+      "retention": "temporary only; no explicit open-reuse terms were found"
+    },
+    {
+      "id": "NRU-2021-census",
+      "url": "https://stats.gov.nr/download/49/2021/359/nauru-2021-population-and-housing-census-analytical-report.pdf",
+      "bytes": 10235852,
+      "sha256": "fcbb52f6e46b420c100caa074689b9354959b8a6aec57eebe2de82da1a78847b",
+      "verified": true,
+      "retention": "temporary only; no explicit open-reuse terms were found"
+    },
+    {
+      "id": "GSHHG-L1-screen",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip",
+      "bytes": 149157845,
+      "sha256": "8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41",
+      "verified": true,
+      "retention": "temporary only; archive not copied into repository"
+    }
+  ],
+  "workbook_sources_present": false,
+  "workbook_note": "The preserved #613 source-receipts.json and sources-manifest.json contain no workbook input. No workbook descriptor is inferred or invented."
+}
