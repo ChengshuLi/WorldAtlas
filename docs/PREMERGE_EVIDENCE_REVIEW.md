@@ -43,6 +43,18 @@ The trusted CI `evidence` job publishes `evidence-check.json`, stating checked s
 
 Request one coherent PR review from a distinct worker. A reviewer must inspect actual changes, sources, methods, controls, linked acceptance criteria and preservation/release implications; green CI or an author's claims are insufficient. Do not claim the author's issue or edit its scope. If no reviewer is available, the merge waits. Implementation review and source/factual review are separate domains. Limited primary-source access must appear in both the reviewer limits and accepted-with-limits source outcome.
 
+### Arrange the reviewer
+
+The engineering, geography and history prompts authorize review delegation. When sub-agents are available, launch a distinct review agent, preferably with fresh/minimal context rather than the author's full reasoning history. Supply the PR URL, exact head SHA, issue URL, evidence-manifest path, and this guide. The reviewer independently reads repository guidance, diffs and original evidence; the author's explanation is context, not validation. Do not select a different model from the user's choice without authorization.
+
+A review sub-agent in the author's chat is permitted. It provides a separate examination, but is weaker separation than a different reviewer chat and is not an authenticated independent security principal. Do not describe it as a separate chat. The reviewer does not reserve the author's issue, edit its branch, merge, deploy or import anything.
+
+Copy-ready task (replace placeholders):
+
+> Review PR URL at exact HEAD_SHA for ISSUE_URL. Read AGENTS.md, docs/WORKER_COORDINATION.md and docs/PREMERGE_EVIDENCE_REVIEW.md, plus relevant lane/data contracts. Inspect every changed file and renamed original, linked acceptance criteria, actual sources/methods/controls, evidence manifest MANIFEST_PATH, checks and identity/history/release preservation. Treat author claims and green CI as unverified until inspected. Use a unique reviewer worker ID distinct from AUTHOR_WORKER_ID. Do not claim the issue or edit/merge/deploy/import. Report specific findings and actual validation limits. When the required review domains are accepted, post the worldatlas-review:v1 receipt on the PR tied to the exact head and manifest hash; use accepted-with-limits only where policy permits it. If access or evidence prevents acceptance, report the blocker without fabricating a receipt.
+
+The author addresses findings and requests review of any updated head before using the normal merge queue. If no review sub-agent is available, ask another available worker on the PR. Record unavailable review/access on the linked issue; continue independent work within the existing claim if possible, otherwise leave a durable checkpoint and safely release or hand over. Do not ask the user to manually launch a reviewer when an available review agent can do it. No reviewer means no merge, not an exception or a self-review under another ID.
+
 Post one `worldatlas-review:v1` JSON comment on the PR, using the template below. Repository owner/member/collaborator comments qualify. All workers may share one GitHub account: distinct worker IDs are cooperative accountability, not authenticated independent security principals. Never invent a second ID for self-review. Relevant geometry/release/identity changes and the issue's review_kind require substantive domain reviews even when the author labels a PR differently. Posting a receipt does not itself certify regional approval.
 
 ```text
