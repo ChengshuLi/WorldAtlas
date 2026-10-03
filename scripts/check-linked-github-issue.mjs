@@ -3,8 +3,9 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {githubPages,githubAPI,linkedPulls,verifyClaimForPR,workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody,validateIssueMetadata,checkGitScope,laneForBranch} from './check-handoff-scope.mjs';
+import {evidenceRequirement,loadEvidencePolicy} from './evidence-policy.mjs';
 
-export async function checkLinkedIssue({branch,event,token,fetchIssue=fetch,checkClaim=false,base,head='HEAD',run}){
+export async function checkLinkedIssue({branch,event,token,fetchIssue=fetch,checkClaim=false,base,head='HEAD',run,evidencePolicy}){
  const pr=event.pull_request,repo=event.repository?.full_name;
  if(!pr||!/^[-\w.]+\/[-\w.]+$/.test(repo??''))throw Error('Supply a repository pull_request event');
  const {github_issue,issue_action}=validateIssuePRBody(pr.body??'');
@@ -12,6 +13,9 @@ export async function checkLinkedIssue({branch,event,token,fetchIssue=fetch,chec
  const response=await fetchIssue(`https://api.github.com/repos/${repo}/issues/${github_issue}`,{headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},signal:AbortSignal.timeout(15000)});
  if(!response.ok)throw Error(`Could not read linked GitHub issue (HTTP ${response.status})`);
  const issue=await response.json(),metadata=validateIssueMetadata(branch,issue);
+ const policy=evidencePolicy??loadEvidencePolicy();
+ try{metadata.evidence_policy=evidenceRequirement(issue,workSpec(issue.body),policy,branch);}
+ catch(error){if(policy.mode!=='report-only')throw error;metadata.evidence_policy={status:'report-failure',reason:error.message};}
  const ownedPaths=laneForBranch(branch).lane==='geography'?workSpec(issue.body).owned_paths:undefined;
  if(ownedPaths)metadata.owned_paths=ownedPaths;
  if(checkClaim){const api=githubAPI(token),[comments,prs]=await Promise.all([githubPages(api,`/repos/${repo}/issues/${github_issue}/comments`),linkedPulls(api,repo,github_issue)]);Object.assign(metadata,verifyClaimForPR({branch,issue,comments,prs}));}

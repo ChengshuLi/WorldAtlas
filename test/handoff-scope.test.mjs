@@ -46,9 +46,9 @@ test('remote issue validation reads only the event repository and requires succe
  const {checkLinkedIssue}=await import('../scripts/check-linked-github-issue.mjs');
  const event={repository:{full_name:'ChengshuLi/WorldAtlas'},pull_request:{body:'Refs #12'}};
  let requests=0;
- const fetchIssue=async(url,options)=>{requests++;assert.equal(url,'https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/12');assert.equal(options.headers.Authorization,'Bearer test-only');return {ok:true,json:async()=>({state:'open',labels:[{name:'type:history-research'}]})};};
- assert.deepEqual(await checkLinkedIssue({branch:'research/japan',event,token:'test-only',fetchIssue}),{github_issue:12,issue_action:'reference',issue_type:'type:history-research'});
- await assert.rejects(checkLinkedIssue({branch:'engineering/grid',event,token:'test-only',fetchIssue}),/type:engineering/);
+ const fetchIssue=async(url,options)=>{requests++;assert.equal(url,'https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/12');assert.equal(options.headers.Authorization,'Bearer test-only');return {ok:true,json:async()=>({state:'open',body:'<!-- worldatlas-work:v1\n{"max_prs":1,"depends_on":[],"mode":"source-only","scope":"Synthetic source-only fixture"}\n-->',labels:[{name:'type:history-research'}]})};};
+ assert.deepEqual(await checkLinkedIssue({branch:'research/japan',event,token:'test-only',fetchIssue,evidencePolicy:{version:1,mode:'report-only'}}),{github_issue:12,issue_action:'reference',issue_type:'type:history-research',evidence_policy:{required:false,legacy:false,decision:'Reporting rollout: no declared evidence contract'}});
+ await assert.rejects(checkLinkedIssue({branch:'engineering/grid',event,token:'test-only',fetchIssue,evidencePolicy:{version:1,mode:'report-only'}}),/type:engineering/);
  await assert.rejects(checkLinkedIssue({branch:'research/japan',event,fetchIssue}),/token/);
  assert.equal(requests,2);
  await assert.rejects(checkLinkedIssue({branch:'research/japan',event,token:'test-only',fetchIssue:async()=>({ok:false,status:404})}),/HTTP 404/);

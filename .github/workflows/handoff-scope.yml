@@ -11,6 +11,36 @@ permissions:
   pull-requests: read
 
 jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Only trusted base code runs with the read-only token. Candidate code is never executed here.
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            .github
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Validate actual evidence bytes with trusted code
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if test -f scripts/check-pr-evidence.mjs; then
+            node scripts/check-pr-evidence.mjs
+          else
+            echo '{"status":"bootstrap-not-checked","limits":["Evidence checker not yet present on trusted base"]}' > evidence-check.json
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: evidence-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+          path: evidence-check.json
+          retention-days: 30
   scope:
     # One explicitly authorized bootstrap PR imports the existing foundation.
     # This exception expires once main advances beyond its original commit.

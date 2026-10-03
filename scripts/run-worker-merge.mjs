@@ -2,6 +2,9 @@ import {renderWorkerResult} from './worker-result.mjs';
 import fs from 'node:fs';
 import {githubAPI,githubPages,linkedPulls,verifyClaimForPR} from './issue-claim-contract.mjs';
 import {validateIssuePRBody,validateLanePaths} from './check-handoff-scope.mjs';
+import {checkPremergeEvidence} from './premerge-evidence.mjs';
+import {evidenceRequirement,loadEvidencePolicy} from './evidence-policy.mjs';
+import {workSpec} from './issue-claim-contract.mjs';
 
 const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8')),input=event.inputs??{},repo=process.env.GITHUB_REPOSITORY;
 if(process.env.GITHUB_REF!=='refs/heads/main'||!/^[-\w.]+\/[-\w.]+$/.test(repo??''))throw Error('Merges run only from trusted main');
@@ -29,6 +32,21 @@ try{
   if([...latest.values()].some(c=>c.status!=='completed'||!['success','skipped','neutral'].includes(c.conclusion)))throw Error('A current check is pending or failed');
   const statuses=await api(`/repos/${repo}/commits/${pr.head.sha}/status`);
   if(statuses.statuses?.length&&statuses.state!=='success')throw Error('A commit status is pending or failed');
+  const policy=loadEvidencePolicy();
+  if(policy.mode==='enforce-new'&&evidenceRequirement(issue,workSpec(issue.body),policy,pr.head.ref).required){
+   const evidence=checks.filter(c=>c.name==='evidence').sort((a,b)=>b.id-a.id)[0];
+   if(!evidence||evidence.status!=='completed'||evidence.conclusion!=='success')throw Error('Current head must pass trusted evidence check');
+  }
+  result.evidence=await checkPremergeEvidence({api,repo,pr,issue,reservation,files,policy,review:true});
+  // Receipt validation may take time: reread mutable authorities before the SHA-guarded merge.
+  const currentPR=await api(`/repos/${repo}/pulls/${number}`),currentIssue=await api(`/repos/${repo}/issues/${github_issue}`);
+  if(currentPR.head.sha!==pr.head.sha||currentPR.body!==pr.body||currentIssue.body!==issue.body)throw Error('PR head/body or issue contract changed during review; retry');
+  verifyClaimForPR({branch:pr.head.ref,issue:currentIssue,comments:await githubPages(api,`/repos/${repo}/issues/${github_issue}/comments`),prs:await linkedPulls(api,repo,github_issue)});
+  const freshChecks=await githubPages(api,`/repos/${repo}/commits/${pr.head.sha}/check-runs`),freshLatest=new Map();
+  for(const check of freshChecks){const key=`${check.app?.id}:${check.name}`;if(!freshLatest.has(key)||freshLatest.get(key).id<check.id)freshLatest.set(key,check);}
+  if([...freshLatest.values()].some(check=>check.status!=='completed'||!['success','skipped','neutral'].includes(check.conclusion)))throw Error('Checks changed during evidence review; retry');
+  const freshMain=await api(`/repos/${repo}/git/ref/heads/main`);
+  if(freshMain.object.sha!==main.object.sha)throw Error('Main advanced during review; update and retry');
   const merged=await api(`/repos/${repo}/pulls/${number}/merge`,'PUT',{sha:pr.head.sha,merge_method:'squash',commit_title:pr.title,commit_message:pr.body});
   if(!merged.merged)throw Error('GitHub did not merge the PR');
   Object.assign(result,{accepted:true,merge_commit:merged.sha,title:pr.title,github_issue});
