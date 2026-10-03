@@ -1,0 +1,182 @@
+{
+  "issue": 521,
+  "review_date": "2026-10-03",
+  "location": {
+    "id": "atlas:macro-coverage:location:73281d3672f84a47a770",
+    "name": "Bounty Islands",
+    "classification": "insufficient-evidence for exact whole-land coverage; named archipelago association is justified, proposed reference-footprint correction is needed",
+    "role": "Named multi-island physical group in New Zealand’s subantarctic islands. DOC describes 22 granite rocks divided approximately into Main, Centre and East groups. One named archipelago subject; rocks/islets are not automatically separate atlas locations.",
+    "settlements": "DOC describes a remote group without safe anchorage or easy landing; it does not identify permanent settlements. No settlement evidence for any source ring was found in the retained extract.",
+    "proposal": "Retain one location for the complete named Bounty Islands group and its fixed parent route. Integrate reference geometry only after resolving DOC 135 ha, OSM 50.156 ha and GSHHG 276.964 ha and producing a source-supported crosswalk. No geography edit in this evidence packet.",
+    "unresolved": [
+      "Official 22-rock count is not accompanied by a complete feature-by-feature name list or survey boundary on the reviewed DOC page.",
+      "All 27 OSM coastline ways are anonymous; exact mapping of 27 rings to DOC’s 22 rocks is unknown.",
+      "Fourteen GSHHG polygons have no verified crosswalk to the OSM rings or DOC island groups.",
+      "OSM and GSHHG dry-land areas differ by over fivefold; both differ materially from DOC’s approximate area. Tide, generalization, vintage, and method are unreconciled.",
+      "Complete modern physical shoreline is not certified; unnamed rocks omitted from the extract remain possible."
+    ]
+  },
+  "province": {
+    "id": "atlas:macro-coverage:province:e97e94b1d0009c0b8cf4",
+    "name": "Bounty Islands",
+    "classification": "insufficient evidence for an independent administrative/semantic tier; the one-child province is coextensive in intended scope with its named-island location",
+    "finding": "No ordinary administrative district or local-government province is evidenced for this remote island group. The issue source hint says no invented modern county. This appears to be a geographic wrapper; the analogous single-child wrappers among sibling outlying groups do not independently justify repeating this tier.",
+    "proposal": "Do not change shared hierarchy here. Regional integration should document a consistent policy exception for coextensive geographic wrappers across all six area members or propose a coordinated tier simplification."
+  },
+  "area": {
+    "id": "framework:area:new-zealand-outlying-islands:b6cf28048e04",
+    "name": "New Zealand Outlying Islands",
+    "classification": "broad geographic grouping plausible; whole-area purpose and semantic tier remain open",
+    "declared_full_member_count": 6,
+    "owned_members": [
+      "Bounty Islands"
+    ],
+    "other_current_members": [
+      {
+        "id": "framework:province:auckland-islands:b0e2653306e1",
+        "name": "Auckland Islands"
+      },
+      {
+        "id": "framework:province:campbell-islands:c5f0eac962f2",
+        "name": "Campbell Islands"
+      },
+      {
+        "id": "framework:province:antipodes-islands:e93eea73105f",
+        "name": "Antipodes Islands"
+      },
+      {
+        "id": "framework:province:kermadec-islands:ea65c933d173",
+        "name": "Kermadec Islands"
+      },
+      {
+        "id": "framework:province:the-snares:f256c6697d41",
+        "name": "The Snares"
+      }
+    ],
+    "finding": "The area groups six named outlying island territories. DOC/UNESCO define five groups as New Zealand Subantarctic Islands (Snares, Bounty, Antipodes, Auckland, Campbell); Kermadec is a different, more northerly subtropical group. “Outlying islands” can describe the broad purpose, but is not equivalent to the strict subantarctic physical region. Five original sibling province packets share this area; assess all six together.",
+    "proposal": "Leave all shared area memberships and boundaries unchanged. Coordinate review of all six member identities, the area tier and its distinction from other Southwest Pacific island groups."
+  },
+  "parent_chain": [
+    "atlas:macro-coverage:location:73281d3672f84a47a770",
+    "atlas:macro-coverage:province:e97e94b1d0009c0b8cf4",
+    "framework:area:new-zealand-outlying-islands:b6cf28048e04",
+    "framework:region:new-zealand:e79e5965932c",
+    "framework:subcontinent:australasia:25a7f3c4d7eb",
+    "framework:continent:oceania:48580dd0c4b4"
+  ],
+  "source": {
+    "canonical": "OpenStreetMap API map extract",
+    "url": "https://api.openstreetmap.org/api/0.6/map?bbox=178.97,-47.83,179.13,-47.67",
+    "retrieved": "2026-10-02",
+    "retained_path": "data/macro-improvements/macro-coverage-oceania/osm-28c1ddf724e1.xml.gz",
+    "compressed_bytes": 26124,
+    "compressed_sha256": "45545b5d4cdf82c3bcab305a437cdf0c388a515df9b6d20857a51ba04de7af18",
+    "uncompressed_bytes": 341174,
+    "uncompressed_sha256": "9bb048bfe6efb335bffbe08bda484a0283571eb7b6f839e9e0e99268ca8f177c",
+    "license": "ODbL 1.0; attribution © OpenStreetMap contributors; share-alike obligations apply to adapted database.",
+    "method": "Archived API response; filter natural=coastline ways in the original bbox, reconstruct full closed rings from node references without clipping, then compare using the retained macro-coverage analyses. Bbox is retrieval extent only.",
+    "limitations": "27 unlabelled rings are source database components, not an authoritative rock count. No ownership or historical effective interval is implied.",
+    "source_profile_canonical_sha256": "7e0fcf5312b21455c14a73433afe0ad15bcafb8486edf4a8cf6399290030d2a1"
+  },
+  "authoritative_sources": [
+    {
+      "title": "New Zealand Department of Conservation, Bounty Islands",
+      "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/southland/places/subantarctic-islands/bounty-islands/",
+      "retrieved": "2026-10-03",
+      "site_sitemap_lastmod": "2026-04-28",
+      "content_sha256": "a066f4871846830045cca0981bbfe59cdd453f2f157ee4e23f2decf4475a3380",
+      "license": "Crown copyright; no open reuse license stated on page. No page bytes redistributed. Restore from canonical URL and record a fresh date/hash before reuse.",
+      "findings": "DOC describes 22 bare granite rocks, grouped approximately into Main, Centre and East, total land mass about 135 ha; Depot Island largest, 800 m long and 88 m high. No safe anchorage/easy landing. Supports one island-group role and conflicts with assuming OSM is complete.",
+      "publication_date": "Not displayed; site sitemap lastmod 2026-04-28"
+    },
+    {
+      "title": "UNESCO World Heritage Centre, New Zealand Sub-Antarctic Islands",
+      "url": "https://whc.unesco.org/en/list/877/",
+      "retrieved": "2026-10-03",
+      "content_sha256": "fb231018d2a99d07f4d8e9ef9fa9459bfd513fbdcbcc5239de69f61d340e7e74",
+      "license": "UNESCO page copyright; no open reuse license assumed. No page bytes redistributed; canonical URL is restoration instruction.",
+      "findings": "Identifies five subantarctic groups: Snares, Bounty, Antipodes, Auckland and Campbell; describes protected marine extent. This distinguishes the more northerly Kermadec Islands and does not define the WorldAtlas area boundary.",
+      "publication_date": "Not displayed on live page"
+    },
+    {
+      "title": "OpenStreetMap copyright and license",
+      "url": "https://www.openstreetmap.org/copyright",
+      "retrieved": "2026-10-03",
+      "license": "ODbL 1.0; attribution/share-alike terms apply."
+    }
+  ],
+  "audit": {
+    "osm_coastline_ways": 27,
+    "closed_land_rings": 27,
+    "closed_water_rings": 0,
+    "unclosed_chains": [],
+    "missing_node_ways": [],
+    "ring_land_area_km2": 0.501560774325394,
+    "osm_ring_inventory": [
+      {"osm_way_ids":["176112274"],"osm_source_versions":[{"id":"176112274","version":"7","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.0034069497193377463,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0200922,-47.7474321,179.0210589,-47.7467287],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"7","source_timestamp":"2023-02-12T04:20:17Z","node_count":14},
+      {"osm_way_ids":["176112273"],"osm_source_versions":[{"id":"176112273","version":"7","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.0018239320139996707,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0114685,-47.7620466,179.0123789,-47.7616374],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"7","source_timestamp":"2023-02-12T04:20:17Z","node_count":14},
+      {"osm_way_ids":["176112272"],"osm_source_versions":[{"id":"176112272","version":"7","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.002315111569946632,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0212218,-47.7467359,179.0222427,-47.746069],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"7","source_timestamp":"2023-02-12T04:20:17Z","node_count":11},
+      {"osm_way_ids":["176112271"],"osm_source_versions":[{"id":"176112271","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.01741784930101782,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0266917,-47.7516748,179.0296217,-47.7504331],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":30},
+      {"osm_way_ids":["176112270"],"osm_source_versions":[{"id":"176112270","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.04129530694239494,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0193864,-47.7491099,179.0236772,-47.746633],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":54},
+      {"osm_way_ids":["176112269"],"osm_source_versions":[{"id":"176112269","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.006683478730477393,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0185286,-47.7494913,179.0198431,-47.7485533],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":18},
+      {"osm_way_ids":["176112268"],"osm_source_versions":[{"id":"176112268","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.004641628613983281,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.022135,-47.7483549,179.0238512,-47.7475633],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":20},
+      {"osm_way_ids":["176112267"],"osm_source_versions":[{"id":"176112267","version":"6","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.05506829594155261,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0220606,-47.7566054,179.0268062,-47.7537443],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"6","source_timestamp":"2023-02-12T04:20:17Z","node_count":58},
+      {"osm_way_ids":["176112266"],"osm_source_versions":[{"id":"176112266","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.014116907792448306,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0290458,-47.7520957,179.0323598,-47.7510693],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":30},
+      {"osm_way_ids":["176112265"],"osm_source_versions":[{"id":"176112265","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.03378910014456088,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0248659,-47.7507251,179.0290764,-47.7490189],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":34},
+      {"osm_way_ids":["176112264"],"osm_source_versions":[{"id":"176112264","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.05125536578224227,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0150168,-47.7549998,179.0232145,-47.752806],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":70},
+      {"osm_way_ids":["176112263"],"osm_source_versions":[{"id":"176112263","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.0017343365961262024,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0229931,-47.7537903,179.0241383,-47.7533634],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":14},
+      {"osm_way_ids":["176112262"],"osm_source_versions":[{"id":"176112262","version":"6","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.1304371735729929,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0198074,-47.7526374,179.0281332,-47.7494732],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"6","source_timestamp":"2023-02-12T04:20:17Z","node_count":68},
+      {"osm_way_ids":["176112238"],"osm_source_versions":[{"id":"176112238","version":"7","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.0015439904994107782,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0602689,-47.7650246,179.0609493,-47.7644851],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"7","source_timestamp":"2023-02-12T04:20:17Z","node_count":8},
+      {"osm_way_ids":["176112237"],"osm_source_versions":[{"id":"176112237","version":"6","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.00039455756530724467,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0609656,-47.7641062,179.061408,-47.7638994],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"6","source_timestamp":"2023-02-12T04:20:17Z","node_count":7},
+      {"osm_way_ids":["176112236"],"osm_source_versions":[{"id":"176112236","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.00011107172292470932,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0422916,-47.7606251,179.0424626,-47.7605061],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":7},
+      {"osm_way_ids":["176112235"],"osm_source_versions":[{"id":"176112235","version":"6","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.007275742947014049,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0407868,-47.7651412,179.0427086,-47.7641755],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"6","source_timestamp":"2023-02-12T04:20:17Z","node_count":22},
+      {"osm_way_ids":["176112234"],"osm_source_versions":[{"id":"176112234","version":"7","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.000956349822929129,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0579262,-47.7634774,179.0585968,-47.7631406],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"7","source_timestamp":"2023-02-12T04:20:17Z","node_count":18},
+      {"osm_way_ids":["176112233"],"osm_source_versions":[{"id":"176112233","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.0005136916499622166,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0381574,-47.7639045,179.0387365,-47.76357],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":13},
+      {"osm_way_ids":["176112232"],"osm_source_versions":[{"id":"176112232","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.012433333144676173,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0397377,-47.7631804,179.0431563,-47.762086],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":55},
+      {"osm_way_ids":["176112231"],"osm_source_versions":[{"id":"176112231","version":"5","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.04792222749379999,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0343174,-47.7525902,179.042519,-47.7511168],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"5","source_timestamp":"2023-02-12T04:20:17Z","node_count":84},
+      {"osm_way_ids":["176112230"],"osm_source_versions":[{"id":"176112230","version":"7","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.02709086951598705,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0398187,-47.7622423,179.0433397,-47.760351],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"7","source_timestamp":"2023-02-12T04:20:17Z","node_count":58},
+      {"osm_way_ids":["176112229"],"osm_source_versions":[{"id":"176112229","version":"6","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.0028506138737311123,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.037072,-47.7636267,179.0386379,-47.7629907],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"6","source_timestamp":"2023-02-12T04:20:17Z","node_count":22},
+      {"osm_way_ids":["176112228"],"osm_source_versions":[{"id":"176112228","version":"6","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.003799273571056547,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0606099,-47.7613814,179.0622663,-47.7605307],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"6","source_timestamp":"2023-02-12T04:20:17Z","node_count":25},
+      {"osm_way_ids":["176112201"],"osm_source_versions":[{"id":"176112201","version":"6","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":8.285706401523202e-05,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0676389,-47.7625282,179.0677903,-47.7624172],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"6","source_timestamp":"2023-02-12T04:20:17Z","node_count":10},
+      {"osm_way_ids":["176112200"],"osm_source_versions":[{"id":"176112200","version":"6","timestamp":"2023-02-12T04:20:17Z"}],"source_area_km2":0.008639358057051547,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0628404,-47.7599106,179.06505,-47.758913],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"6","source_timestamp":"2023-02-12T04:20:17Z","node_count":43},
+      {"osm_way_ids":["176112120"],"osm_source_versions":[{"id":"176112120","version":"7","timestamp":"2023-01-22T09:27:14Z"}],"source_area_km2":0.023961400676447645,"valid_source_ring":true,"geometry_type":"Polygon","whole_source_polygon_inside_query_domain":true,"bbox":[179.0599419,-47.7681922,179.0625192,-47.7654076],"all_location_overlap_fraction":0.0,"intended_region_overlap_fraction":0.0,"intersecting_locations":[],"nearby_locations_0_001_degrees":[],"status":"corroborated-current-source-land-absent-from-existing-footprints","name":null,"place":null,"source_version":"7","source_timestamp":"2023-01-22T09:27:14Z","node_count":43}
+    ],
+    "gshhg_source": {
+      "name": "Global Self-consistent Hierarchical High-resolution Geography (GSHHG), full resolution, version 2.3.7",
+      "release_date": "2017-06-15",
+      "canonical_project": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+      "upstream_archive": "https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-bin-2.3.7.zip",
+      "license": "LGPLv3 or later",
+      "selected_records_path": "data/macro-improvements/macro-coverage-oceania/gshhg-selected-full-records.bin.gz",
+      "selected_records_compressed_bytes": 5717896,
+      "selected_records_compressed_sha256": "7e52c4c7c13ea3b2d35120cc0f1f6832007865750b98f42d5cd9c95162df1df4",
+      "extraction_manifest": "data/macro-improvements/macro-coverage-oceania/gshhg-extraction.json",
+      "upstream_archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+      "upstream_member": "gshhg_f.b",
+      "upstream_member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+      "selected_native_bytes": 8081872,
+      "selected_native_sha256": "a7c071d1e80655b7a929d9a0a3f694f915a224b59b449505560fd40433c71b51",
+      "selected_record_count": 906,
+      "method": "Byte-for-byte complete native headers and coordinate records retained in source order, selected by declared named-land domains; no source polygon editing. Follow the extraction manifest and README to restore/replay."
+    },
+    "gshhg_components": [
+      {"gshhg_id":24188,"source_level":1,"source_land_area_km2":0.8573075508421566,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.04875,-47.70125,179.069611,-47.691278],"source_vertex_count":42,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":37709,"source_level":1,"source_land_area_km2":0.4074252580152489,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.064583,-47.717944,179.07625,-47.707944],"source_vertex_count":36,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":39100,"source_level":1,"source_land_area_km2":0.3838748412157893,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.051278,-47.709583,179.061278,-47.70375],"source_vertex_count":17,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":39257,"source_level":1,"source_land_area_km2":0.38113243254657836,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.091222,-47.717083,179.099583,-47.709583],"source_vertex_count":16,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":70484,"source_level":1,"source_land_area_km2":0.14151167553095706,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.093778,-47.701278,179.099583,-47.695444],"source_vertex_count":8,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":77827,"source_level":1,"source_land_area_km2":0.11957206895243935,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.04375,-47.70125,179.047972,-47.694556],"source_vertex_count":16,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":78211,"source_level":1,"source_land_area_km2":0.11846298868748173,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.038722,-47.693722,179.044583,-47.68875],"source_vertex_count":15,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":81061,"source_level":1,"source_land_area_km2":0.11191490187515318,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.094583,-47.70875,179.098806,-47.702944],"source_vertex_count":19,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":88568,"source_level":1,"source_land_area_km2":0.09650698013665528,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.058722,-47.703806,179.062917,-47.699556],"source_vertex_count":12,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":110472,"source_level":1,"source_land_area_km2":0.0656678127913177,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.077028,-47.71625,179.080389,-47.712917],"source_vertex_count":10,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":127894,"source_level":1,"source_land_area_km2":0.04920946686290577,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.047083,-47.704611,179.050472,-47.702111],"source_vertex_count":10,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":169979,"source_level":1,"source_land_area_km2":0.014352926874190569,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.045417,-47.692944,179.047056,-47.691278],"source_vertex_count":7,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":170214,"source_level":1,"source_land_area_km2":0.013851070850323886,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.051278,-47.692944,179.052944,-47.691278],"source_vertex_count":7,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false},
+      {"gshhg_id":177591,"source_level":1,"source_land_area_km2":0.008845324965100735,"same_region_covered_area_km2":0,"all_regions_covered_area_km2":0,"same_region_covered_fraction":0.0,"all_regions_covered_fraction":0.0,"source_bounds":[179.056222,-47.702917,179.057111,-47.70125],"source_vertex_count":7,"overlap_locations":[],"status":"absent-from-all-current-footprints","near_current_land_0_003_degrees":false}
+    ],
+    "gshhg_land_area_km2": 2.7696353001462986,
+    "comparison": "Repository analysis reports 14 full-resolution GSHHG polygons totaling 2.769635300 km², absent from all current footprints. OSM reports 27 closed rings totaling 0.501560774 km²; DOC reports approximate total land mass 1.35 km². Material disagreement remains; older shoreline displacement/generalization may explain part but is not proven."
+  },
+  "ownership_history": "DOC conservation stewardship and UNESCO listing are context only, not evidence of land title. Parent hierarchy and profile hints do not establish sovereign ownership or historical affiliations. No attributes are transferred."
+}
