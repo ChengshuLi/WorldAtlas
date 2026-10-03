@@ -1,0 +1,34 @@
+{
+  "result": "passed",
+  "positive_existing_output_check": {
+    "status": "passed",
+    "output_sha256": "5ef11501c2962dc93539134aa12c4240c68503de04babf92de3959fd0d890203"
+  },
+  "repeat_generation": {
+    "status": "passed",
+    "byte_identical": true,
+    "output_sha256": "5ef11501c2962dc93539134aa12c4240c68503de04babf92de3959fd0d890203"
+  },
+  "mismatched_baseline": {
+    "status": "passed",
+    "rejected_before_output_creation": true,
+    "diagnostic": "ERROR: Baseline override mismatch: expected 3d2c5cee2fa748a7eff90051088b6998c9c84968"
+  },
+  "changed_output_input_check": {
+    "status": "passed",
+    "corrupted_candidate_rejected": true,
+    "diagnostic": "ERROR: Immutable extraction differs from existing output"
+  },
+  "overwrite_protection": {
+    "status": "passed",
+    "existing_output_unchanged": true,
+    "diagnostic": "ERROR: Refusing to overwrite existing evidence: corrected-baseline-extract.json"
+  },
+  "commands": [
+    "python build_immutable_extract.py",
+    "python build_immutable_extract.py --check",
+    "python verify_controls.py"
+  ],
+  "baseline_commit": "3d2c5cee2fa748a7eff90051088b6998c9c84968",
+  "scope_snapshot_commit": "4909f04e6e035ffc003d237db68323d005ccdb89"
+}
