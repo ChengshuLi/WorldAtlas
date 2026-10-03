@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
+import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 
 export function integrationTestFiles(profile, shard) {
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
@@ -16,9 +17,15 @@ export function integrationTestFiles(profile, shard) {
 export function integrationNeedsBrowser(profile, shard) {
   return integrationTestFiles(profile, shard).some(name => /['"](?:@playwright\/test|playwright)['"]/.test(fs.readFileSync(name, 'utf8')));
 }
+export function prepareIntegrationTests(files) {
+  if (files.includes('test/stage-site-migrations.test.mjs')) {
+    compileHostedMigrations({input:'drizzle', output:'dist/drizzle'});
+  }
+}
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
   const files = integrationTestFiles(profile, shard);
+  prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, shard, files}));
   const result = spawnSync(process.execPath, ['--test','--test-concurrency=2', ...files], {stdio:'inherit'});
   if (result.error) throw result.error;

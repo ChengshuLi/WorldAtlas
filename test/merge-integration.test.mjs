@@ -1,11 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {integrationTestFiles, integrationNeedsBrowser} from '../scripts/run-integration-tests.mjs';
+import os from 'node:os';
+import path from 'node:path';
+import {integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile} from '../scripts/merge-integration.mjs';
 
 const sha = letter => letter.repeat(40);
+test('only staging-test shards prepare the immutable migration derivative', () => {
+  const cwd=process.cwd(), temporary=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-integration-prerequisite-'));
+  fs.cpSync('drizzle',path.join(temporary,'drizzle'),{recursive:true});
+  const original=fs.readFileSync(path.join(temporary,'drizzle/0002_geographic_reference_releases.sql'));
+  try {
+    process.chdir(temporary);
+    prepareIntegrationTests(['test/merge-integration.test.mjs']);
+    assert.equal(fs.existsSync('dist'),false);
+    prepareIntegrationTests(['test/stage-site-migrations.test.mjs']);
+    const receipt=JSON.parse(fs.readFileSync('dist/drizzle/transport-receipt.json'));
+    assert.equal(receipt.source_sql_rewritten,false);
+    assert.equal(receipt.migrations.length,fs.readdirSync('drizzle').filter(name=>name.endsWith('.sql')).length);
+    assert.deepEqual(fs.readFileSync('drizzle/0002_geographic_reference_releases.sql'),original);
+  } finally { process.chdir(cwd); fs.rmSync(temporary,{recursive:true,force:true}); }
+});
 function fixture() {
   const repo = 'owner/repo', head = sha('a'), base = sha('b'), candidate = sha('c');
   const issue = {number: 1, state: 'open', created_at: '2026-10-03T00:00:00Z', labels: ['type:engineering','kind:work-item','status:ready'],

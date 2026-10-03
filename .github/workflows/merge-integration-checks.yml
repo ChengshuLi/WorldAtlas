@@ -40,6 +40,9 @@ jobs:
           if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then
             npx playwright install --with-deps chromium
           fi
+      - name: Build once before asset-dependent regression tests
+        if: matrix.shard == 0
+        run: npm run build:hosted
       - name: Complete regression shard
         env:
           INTEGRATION_PROFILE: full
