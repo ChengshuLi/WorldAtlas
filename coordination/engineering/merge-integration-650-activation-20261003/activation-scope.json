@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-10-03T22:44:46.018771+00:00",
+  "implementation_pr": 681,
+  "implementation_head": "f9427ed1eac4290589316642a8795ad7d2abf74d",
+  "implementation_squash": "0d07f66165ddcfbcc93fc8f52622dbb7454e5214",
+  "identical_implementation_tree": "2796a4dffc9bd4397120d76338593a352ae3272e",
+  "implementation_merge_run": 37159339970,
+  "implementation_review_comment": 5974257015,
+  "regression_run": 37158837728,
+  "regression_jobs": [
+    111307789781,
+    111307789743,
+    111307789574
+  ],
+  "tests": {
+    "passed": 658,
+    "failed": 0,
+    "skipped": 0
+  },
+  "current_packet_focused_tests": 85,
+  "activation_state": "Pending actual new-pipeline candidate preparation, focused validation and final merge; this packet does not claim its own future merge.",
+  "closure": "After this PR passes through the new queue, inspect actual bot receipt, exact candidate parents, unchanged authored head, each job permissions/results and actual merge; record those actual results on #650 before closing.",
+  "limits": [
+    "No production deployment, live import, factual geographic approval or credential change.",
+    "Receipt logs are retained decoded GitHub job logs, not a claimed download of unavailable workflow artifacts.",
+    "No new source repair in this packet; all implementation changes are in PR681."
+  ]
+}

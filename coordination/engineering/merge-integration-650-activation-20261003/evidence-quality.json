@@ -1,0 +1,281 @@
+{
+  "version": 1,
+  "issue": 650,
+  "lane": "engineering",
+  "worker_id": "moderator-merge-650-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "0d07f66165ddcfbcc93fc8f52622dbb7454e5214",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 7304,
+        "sha256": "b73e25e3113ecd3573a1a58acaca50c6d6d2d1da6c577eecdf90787363272e12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/evidence-policy.json",
+        "bytes": 225,
+        "sha256": "69310e9dfbc92a7bfc954f6374a13dafb47a12ea53e27406cfd89138fc87463b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 5116,
+        "sha256": "452894cefd464ea8be2c45f8f9cd8894e2949977a81d38bced4272cf56f69cf5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 8993,
+        "sha256": "af417f8f68d520b4761f31ef5feb2404a04a840fbfb8afb57db4cb6122fc65e4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 1999,
+        "sha256": "88323a6b7e57d3fb5d3e5721c0ad4847e199b46d9ec3ee612e0323785f4472d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/queue-pr-merge.mjs",
+        "bytes": 3117,
+        "sha256": "2daedba75ce32cbe246bd37156dcfe2ce345810a96c21ade8f970b7ed8f336c9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_SYSTEM_BEFORE_AFTER.md",
+        "bytes": 5678,
+        "sha256": "bca6924c9961d54d5cb0dda566a7bc308fbc2db9910058aa12ab2eccb40eaab9",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 5272,
+      "sha256": "4cbebe22a32a6e79f15a2b4c8ec43922b3c610bd407608b6db02b938e5412411",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/activation-preparation-permission-failure.log.gz",
+      "bytes": 5678,
+      "sha256": "82eb30efacdd0e837f7f9b63ea5b8dd8c9f63ad6d604adc13db89372ad473f46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/activation-scope.json",
+      "bytes": 1329,
+      "sha256": "0677098b41007a73aeee19e7c47095a74bbc7f5f38557ed112155643bfa13fdb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/asset-shard-correction.json",
+      "bytes": 960,
+      "sha256": "255c7edc76ac455df2cb30ef19fbaeaa77a59af807f0da058a02fcf2aafa79c0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/asset-shard-focused.tap",
+      "bytes": 8931,
+      "sha256": "ba970d5bc544588263f02d2e49067c291761bde298bd210a8fd0f4487e726e4c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/focused-tests.tap",
+      "bytes": 8579,
+      "sha256": "741c43b039f2f9974d792ab3c1dc35205cbc61b13cddb58dba98d946e3c3476e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/implementation-merge.json",
+      "bytes": 315,
+      "sha256": "184fd95f05a8a760f1da5158a9c03bc9a26750cb7475d756eb3de4f5c488b342",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-focused.tap",
+      "bytes": 8933,
+      "sha256": "6e899b85b649de4d4915c0d8edf6d5360065e583817e17f6a73c1deac0c63c1f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-scope.json",
+      "bytes": 1552,
+      "sha256": "92683100746d4ba937b63ff3d436c0da2701849f5b53e7d470007b54bfdc99c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-tests.tap",
+      "bytes": 1506,
+      "sha256": "2a1bdad32dc6506f68215b906da7f965d61faa438d54fadd183bd75aff8b68b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/regression-0.log.gz",
+      "bytes": 24827,
+      "sha256": "de5ae2e687560f27f2ccc4eaa16a3f11a5fbc518f3b21fd51aed5140284de620",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/regression-1.log.gz",
+      "bytes": 18677,
+      "sha256": "ba19caaaf4165f139882bc7cac42711a4dd04399e7d9465fece8999a023bc89a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/regression-2.log.gz",
+      "bytes": 20469,
+      "sha256": "962a6b24b7778bba5b7d9c855f8dca770e084e705fb854d508fb7df3588c5309",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/reservation.json",
+      "bytes": 833,
+      "sha256": "7fede08faf90085b045ac065fb7a83ccd065224f130cd0db7698993f92768d9d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/skipped-parity-shard.log.gz",
+      "bytes": 19267,
+      "sha256": "cffb39640345ef62c9b28a0cb5af4bd07360e4e9ea25caf8e0375d9f1984802a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 2604,
+      "sha256": "cee83f95838d631c52a19dec9b84e9de3cd1e23f1dbcf698da8479791705b9fe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 2788,
+      "sha256": "cc62f288bf5c25791926ee9887d93ed4298a0acc16a736419db9d978a948e61d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "bytes": 3007,
+      "sha256": "42147257046a42ac5c9db72750a32b49f636213fa808dc012b44d4b6be4a6ba0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 10824,
+      "sha256": "954090cb65cb6e346fb4b2fd07449dbf3ccc2139bbd0fa3c66601e086ccba036",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "activation-record",
+      "description": "Retain actual hosted failures and passing verification; repair trusted PR-comment permission and failure diagnostics, with actual entrypoint controls. Actual activation remains pending until inspected after merge.",
+      "software": "GitHub Actions; Node 24; repository trusted queue and evidence validators",
+      "units": "whole-file SHA-256; exact Git commit/tree identities",
+      "kind": "code"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "node scripts/queue-pr-merge.mjs --pr ACTIVATION_PR --head EXACT_REVIEWED_HEAD"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "452894cefd464ea8be2c45f8f9cd8894e2949977a81d38bced4272cf56f69cf5"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/activation-preparation-permission-failure.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/activation-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/asset-shard-correction.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/asset-shard-focused.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/focused-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/implementation-merge.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-focused.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/regression-0.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/regression-1.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/regression-2.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/reservation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/skipped-parity-shard.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "88323a6b7e57d3fb5d3e5721c0ad4847e199b46d9ec3ee612e0323785f4472d1"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "8d19b3b94a90dfd19a541c9bc03a3963800c007c5c90c5de3b8008a14f4aa906"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "d70252d7a707738a655405e0f30c7df6464fe988fdb1b3dc97b6512da2e57ea2"
+    }
+  ],
+  "metric_bindings": []
+}

@@ -1,0 +1,23 @@
+{
+  "recorded_at": "2026-10-03T22:55:41.319015+00:00",
+  "supersedes_initial_scope": "activation-scope.json describes the earlier evidence-only intention. This later revision includes the actual permission/diagnostic repair below; original records remain retained.",
+  "actual_failed_run": 37159751828,
+  "actual_failed_job": 111310564069,
+  "request_id": "310397be-0f67-40e3-bdb3-50aea5af1ee1",
+  "failure": "HTTP 403 posting trusted prepare receipt to the PR; PullRequests read insufficient for this comment. Candidate tests and merge skipped; no successful activation.",
+  "repairs": [
+    "Grant pull-requests write to trusted main preparation only; isolated candidate job remains contents read with no secrets or write token.",
+    "Write result/summary before remote comment so denied notification preserves original diagnosis.",
+    "Include actual entrypoint positive/negative permission-failure tests in focused invariants."
+  ],
+  "validation": {
+    "targeted_passed": 15,
+    "focused_passed": 88,
+    "new_hosted_checks": "pending"
+  },
+  "remaining": "Exact-head independent review/current checks, explicit narrowly scoped guarded repair-merge authorization because normal queue cannot merge its own permission repair, then real new-pipeline activation proof. Earlier one-time PR653 authorization is expired and not reused.",
+  "limits": [
+    "No production deployment, import or token/provider operation.",
+    "Preserved earlier658-pass logs apply to PR681, not a claim that this revised head has passed full hosted regression."
+  ]
+}

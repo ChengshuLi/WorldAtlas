@@ -1,0 +1,23 @@
+✔ actual trusted entry point preserves the original rejection before a denied comment (77.045225ms)
+✔ actual trusted entry point retains its preparation receipt before successful notification (72.803272ms)
+✔ trusted preparation has PR comment permission while candidate tests remain read-only (0.375879ms)
+✔ only staging-test shards prepare the immutable migration derivative (9.910398ms)
+✔ two reviewed PRs sharing a base integrate serially without changing authored head (4.68174ms)
+✔ conflicts and non-conflicting changes to reviewed bytes require intervention (1.475595ms)
+✔ stale merge object and truncated inventories fail closed (1.034807ms)
+✔ stale head or review and expired ownership prohibit integration (1.966077ms)
+✔ failed or skipped candidate tests never merge an open PR (0.592797ms)
+✔ base advances before or during final validation are retryable without branch updates (0.919583ms)
+✔ latest failed or pending check replaces old success (0.209857ms)
+✔ workflow separates untrusted candidate tests from write credentials and serializes the lifecycle (0.493838ms)
+✔ commit status changing during final review prevents the merge (1.345467ms)
+✔ trusted profile uses focused invariants only for isolated evidence and docs (0.403291ms)
+✔ parallel full-regression shards cover each unit file once and focused profile retains core gates (3.524197ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 213.921557

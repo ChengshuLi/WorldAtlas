@@ -30,7 +30,9 @@ try {
   result.retryable = /resubmit unchanged head/.test(error.message);
   if (phase === 'prepare') process.exitCode = 1;
 }
-await api(`/repos/${repo}/issues/${number}/comments`, 'POST', {body: renderWorkerResult('merge', result)});
 fs.writeFileSync('merge-result.json', JSON.stringify(result, null, 2) + '\n');
 fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${result.status} PR #${number}: ${result.reason ?? ''}\n`);
 console.log(JSON.stringify(result));
+// Preserve the decision before attempting its remote notification. A comment
+// permission/network failure must not discard the original result or reason.
+await api(`/repos/${repo}/issues/${number}/comments`, 'POST', {body: renderWorkerResult('merge', result)});

@@ -14,6 +14,8 @@ test('only staging-test shards prepare the immutable migration derivative', () =
   const original=fs.readFileSync(path.join(temporary,'drizzle/0002_geographic_reference_releases.sql'));
   try {
     process.chdir(temporary);
+    assert.throws(()=>prepareIntegrationTests(['test/compact-ownership.test.mjs']),/requires the actual hosted build/);
+    assert.throws(()=>prepareIntegrationTests(['test/prepared-parity.test.mjs']),/requires the actual hosted build/);
     prepareIntegrationTests(['test/merge-integration.test.mjs']);
     assert.equal(fs.existsSync('dist'),false);
     prepareIntegrationTests(['test/stage-site-migrations.test.mjs']);
@@ -127,6 +129,11 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
 test('parallel full-regression shards cover each unit file once and focused profile retains core gates', () => {
  const expected=fs.readdirSync('test').filter(name=>name.endsWith('.test.mjs')).map(name=>`test/${name}`).sort();
  const shards=[0,1,2].flatMap(shard=>integrationTestFiles('full',shard));
+ for(const name of ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs']) {
+   assert.ok(integrationTestFiles('full',0).includes(name));
+   assert.ok(!integrationTestFiles('full',1).includes(name));
+   assert.ok(!integrationTestFiles('full',2).includes(name));
+ }
  assert.deepEqual([...shards].sort(),expected);assert.equal(new Set(shards).size,expected.length);
  const focused=integrationTestFiles('evidence',0);
  for(const name of ['premerge-evidence','regional-research-gate','handoff-scope','merge-integration'])assert.ok(focused.includes(`test/${name}.test.mjs`));
