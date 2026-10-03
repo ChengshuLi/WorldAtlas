@@ -3,7 +3,7 @@
   "lane": "research",
   "campaign_id": "nz-census-1891-wellington-source",
   "branch": "research/nz-census-1891-wellington-source",
-  "base_main_commit": "e4346af53f235f62965ebb75fc57fbb0e8b351c8",
+  "base_main_commit": "e4d3ce6d03cb67038df47aa65a95c426a56ef7e8",
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/59",
   "date_timezone": "UTC",
   "scope": {
@@ -28,7 +28,8 @@
   "coverage_achieved": [
     "Verified exact Wellington province and borough population/religion totals and sex counts across paired tables; retained 21 religion rows plus borough total with source headers, definitions, license, and restoration hashes.",
     "Source manifest records the detailed HTML volume, three coordinated source layers, the exact denominator matches, and 21 selected Wellington Borough religion rows plus their total.",
-    "Rebased on fresh origin/main at e4346af after another research merge advanced main."
+    "Rebased on fresh origin/main at e4346af after another research merge advanced main.",
+    "Rebased PR #585 onto fresh main at e4d3ce6 after issue #584 merged; current-head checks will be rerun."
   ],
   "source_gaps": [
     "Illustrative religion subset is not exhaustive; Māori were enumerated separately in February and have no matched religion counts in these 5 April tables; no table uncertainty estimates or boundary geometry."
