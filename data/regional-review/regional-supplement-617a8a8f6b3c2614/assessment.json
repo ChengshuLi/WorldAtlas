@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "issue": 543,
+  "reviewed_on": "2026-10-03",
+  "worker_id": "codex-20261003-gardner-pinnacles-f73a91d5",
+  "claim_id": "4e0282f4-c92e-472c-b8a6-f7a65c5d97da",
+  "scope": {
+    "region_id": "framework:region:north-central-pacific:4e0ad85ab366",
+    "release": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+    },
+    "member_location_ids": ["atlas:macro-coverage:location:37c3c7fb6cd6cf260c68"],
+    "member_location_ids_sha256": "fb258aaf61549ceb48a3d6ec7462e2854efd19ad7eb13ea9216c5383f44b8828",
+    "owned_member_count": 1,
+    "assessment_status": "reviewed-with-source-reconciliation-limit"
+  },
+  "sources": [
+    {
+      "id": "osm:gardner:api-map:2026-10-02",
+      "title": "OpenStreetMap API map response for Gardner Pinnacles coastline ways",
+      "canonical_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-168.126944,24.868056,-167.866944,25.128056",
+      "retrieved_on": "2026-10-02",
+      "license": "Open Database License 1.0 (ODbL); attribution: © OpenStreetMap contributors. Derived database use remains subject to ODbL terms.",
+      "retained_original": {
+        "path": "data/macro-improvements/macro-coverage-oceania/osm-e3de5671fd1c.xml.gz",
+        "compressed_bytes": 9577,
+        "sha256": "ac5e565a083b08ce1fb4d83d64cd3e5b522d1766defadbbc082093e200e01b94",
+        "uncompressed_bytes": 73911,
+        "uncompressed_sha256": "4042db2e1fff71d26c3b01e12c49d49e18aace181866d4af7bb83ba9f28e94c3",
+        "restoration": "Use the canonical API URL above to obtain a new snapshot; it will not reproduce this historical response. The repository's retained XML.gz is the exact 2026-10-02 source snapshot."
+      },
+      "inspected_facts": {
+        "query_bbox_wgs84": [-168.126944, 24.868056, -167.866944, 25.128056],
+        "coastline_way_ids": ["42063621", "42063620", "42063619"],
+        "way_tags": {"natural": "coastline", "place": "islet", "source": "NOAA U.S. Vector Shoreline"},
+        "node_elements_in_source_snapshot": 97,
+        "target_way_node_references": 50,
+        "unique_target_way_nodes": 47,
+        "name_tags_on_these_ways": false
+      },
+      "method": "Inspected exact preserved OSM XML and compared its three named way IDs with the preserved three-polygon MultiPolygon source extraction. The OSM API response is a dated snapshot, not a timeless coastline authority."
+    },
+    {
+      "id": "usfws:hawaiian-islands-refuge:about-us",
+      "title": "Hawaiian Islands National Wildlife Refuge, About Us",
+      "canonical_url": "https://www.fws.gov/refuge/hawaiian-islands/about-us",
+      "retrieved_on": "2026-10-03",
+      "source_date": "Page did not expose a publication or revision date in the inspected content.",
+      "license": "U.S. federal agency page. No page-specific reuse license was displayed; no page bytes copied into this packet.",
+      "retained_original": false,
+      "restoration": "Retrieve the current page at the canonical URL; for historical reproduction, consult FWS archived captures because the live page can change.",
+      "inspected_facts": [
+        "FWS describes Gardner Pinnacles as two volcanic-rock pinnacles between French Frigate Shoals and Maro Reef.",
+        "FWS describes the island as five acres and as the smallest land area in the Northwestern Hawaiian Islands.",
+        "FWS identifies extensive underwater shelves separately from the island's dry-land area.",
+        "The refuge history states that President Theodore Roosevelt set aside the Northwestern Hawaiian chain (except Midway Atoll) as the Hawaiian Islands Reservation on 1909-02-03; the page identifies its refuge conservation role."
+      ],
+      "method": "Read the Gardner-specific section and refuge-history text on the official refuge page. FWS statements support named feature, broad dry-land scale and administrative conservation context, not a surveyed modern shoreline or political-sovereignty history."
+    },
+    {
+      "id": "noaa:us-vector-shoreline:osm-source-tag",
+      "title": "NOAA U.S. Vector Shoreline (identified by OSM source tags)",
+      "canonical_url": "https://coast.noaa.gov/dataviewer/#/",
+      "retrieved_on": "2026-10-03",
+      "source_date": "The specific NOAA shoreline vintage used by the OSM contributor is not present in the tags or preserved query response.",
+      "license": "NOAA source attribution is recorded by OSM. This packet does not redistribute NOAA source files.",
+      "retained_original": false,
+      "restoration": "Use NOAA Digital Coast Data Access Viewer to identify available shoreline products and vintages; the OSM tag alone is insufficient to recover which source release was used.",
+      "inspected_facts": ["All three source coastline ways carry the literal source tag 'NOAA U.S. Vector Shoreline'."],
+      "method": "Recorded provenance tag only. No independent NOAA shoreline product or vintage was matched to these three ways; exact source lineage remains unresolved."
+    }
+  ],
+  "subject_assessments": [
+    {
+      "location_id": "atlas:macro-coverage:location:37c3c7fb6cd6cf260c68",
+      "name": "Gardner Pinnacles",
+      "role": "One named whole dry-land territory covering the Gardner Pinnacles feature; do not split by source polygon, shoreline ring, or individual rock without an independently defined territorial subject.",
+      "accounting": {
+        "assigned_subjects": 1,
+        "assessed_subjects": 1,
+        "source_polygons": 3,
+        "closed_exterior_rings": 3,
+        "holes_detected_in_source_representation": 0,
+        "all_three_rings_present": true,
+        "associated_named_dry_land_omitted_by_this_source_check": "No omitted associated feature identified within the issue's supplied source query. Query is local and cannot prove no remote or sub-resolution dry land exists."
+      },
+      "assessment": "The retained OSM snapshot contains three closed coastline ways tagged natural=coastline and place=islet, with 50 node references (47 unique nodes) in total. The preserved extracted MultiPolygon contains three polygons, one exterior ring each, matching the three supplied way IDs. FWS independently describes the named feature as two volcanic pinnacles and a five-acre island. OSM's three shoreline components versus FWS's two pinnacles is a scale/feature-count difference, not grounds for inventing a third named location; the packet cannot establish whether each OSM component maps one-to-one to the two exposed pinnacle masses.",
+      "settlement_assessment": "No permanent settlement is evidenced in the inspected FWS feature account or the target OSM coastline ways. The OSM ways are physical coastline features and carry no name or settlement tags. This limited evidence does not establish historical non-habitation; historical settlement remains outside this geography packet and unresolved.",
+      "source_coverage_limit": "Bounding-box response contains four ways total (three target coastline ways and one other way), but it is not a complete regional inventory, bathymetric source, tidal datum study or sub-meter-independent shoreline survey. Shoreline completeness at high/low tide and omitted emergent rocks remain unresolved.",
+      "recommended_treatment": "Retain one location and the full three-ring source geometry as the dated 2026 source-backed representation. Do not enlarge it using underwater shelves, reef, bathymetry, political claims or administrative extent. Keep modern coverage/shoreline-completeness review open. No hierarchy or geometry change proposed."
+    }
+  ],
+  "parent_chain_assessment": {
+    "location_id": "atlas:macro-coverage:location:37c3c7fb6cd6cf260c68",
+    "chain": [
+      {"id": "framework:province:hawaii:88e4dd68a18b", "name": "Hawaii", "role_assessment": "Existing Hawaiian archipelago grouping. FWS's 1909 refuge history supports the administrative conservation connection, but not assignment by current sovereignty."},
+      {"id": "framework:area:hawaii:964dab8e8ef8", "name": "Hawaii", "role_assessment": "Same named Hawaii grouping at the next parent tier; local grouping remains open to regional interior review."},
+      {"id": "framework:region:north-central-pacific:4e0ad85ab366", "name": "North-Central Pacific", "role_assessment": "Consistent with the source description placing Gardner between French Frigate Shoals and Maro Reef in the Northwestern Hawaiian Islands; do not alter shared region envelope in this packet."},
+      {"id": "framework:subcontinent:polynesia:c8f106884f04", "name": "Polynesia", "role_assessment": "Retain the approved macro assignment; this interior packet supplies no new macro partition evidence."},
+      {"id": "framework:continent:oceania:48580dd0c4b4", "name": "Oceania", "role_assessment": "Retain the approved macro assignment; not a conclusion about political ownership."}
+    ],
+    "completeness": "All five declared ancestors and the one assigned location reviewed against the pinned scope. Province/area contain other members and are not exhaustively assessed by this single-location issue.",
+    "neighbor_context": "FWS places Gardner between French Frigate Shoals and Maro Reef, supporting its current North-Central Pacific region routing at the named-feature scale. Their individual memberships/footprints and the shared region envelope are not audited by this one-location issue.",
+    "cross_region_consistency": "No inter-region inconsistency is indicated by the inspected sources. This packet does not compare neighboring footprints or approve shared boundaries; any future contradictory placement requires a coordinated neighboring-region issue."
+  },
+  "political_and_historical_separation": {
+    "political_owner": null,
+    "owner_assignment": "No political owner inferred. FWS refuge administration is not treated as sovereignty.",
+    "historical_attributes_transferred": false,
+    "historical_attributes_claimed": false
+  },
+  "unresolved_findings": [
+    "Exact NOAA U.S. Vector Shoreline release and its shoreline/tidal datum are not recoverable from the source tag; seek a versioned NOAA product or retain this lineage gap.",
+    "The three source polygons and FWS's two-pinnacle description are not a verified one-to-one correspondence.",
+    "The finite OSM bbox plus FWS narrative cannot certify all tiny/submerged-at-high-tide features or complete regional shoreline coverage.",
+    "Regional interior review and Hawaii parent purpose remain open under the regional certificate process."
+  ],
+  "decision": "Evidence supports retaining this one whole named territory and current macro parent chain provisionally. No correction proposal. This packet does not certify the full North-Central Pacific branch, island completeness, region envelope, historical applicability, or research-import readiness."
+}
