@@ -1,0 +1,64 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "source-hints-20261003-a9c2",
+  "branch": "engineering/source-hints-20261003-a9c2",
+  "base_main_commit": "58a4f380c99bb2bcbae5df021acb1881245cbba9",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/554",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Repair supplemental source-profile instruction pointers and distinguish file and entry hashes; preserve source bytes and issue scope/history"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-03T19:28:56.367153+00:00",
+  "completed": [
+    "Verified all 34 advertised entry hashes in eight original supplement bodies against immutable profile bytes",
+    "Prepared deterministic pointer/hash-only repair and retained exact original issue responses",
+    "Eight Python controls and nine mutation-guard controls passed after retained initial failures"
+  ],
+  "checks": [
+    {
+      "command": "python test/supplement-source-hints.py",
+      "outcome": "passed"
+    },
+    {
+      "command": "node --test test/supplement-source-hints.test.mjs",
+      "outcome": "passed"
+    }
+  ],
+  "deployment": {
+    "required": false,
+    "performed": false
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": "GitHub instruction updates only; no live atlas operation"
+  },
+  "evidence_paths": [
+    "data/engineering/source-hints-20261003-a9c2/audit-summary.json",
+    "data/engineering/source-hints-20261003-a9c2/repair-plan.json",
+    "data/engineering/source-hints-20261003-a9c2/issues-before/"
+  ],
+  "blockers": [],
+  "next_action": "Verify complete fresh GitHub preflight; record pending body corrections; apply and read back narrowly scoped repairs, retain evidence; focused reviewed PR and serialized queue; release claim and continue",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "reservation": {
+    "comment_id": 5972665374,
+    "version": 1,
+    "active": true,
+    "worker_id": "engineering-continuous-a9c25e14-20261003",
+    "claim_id": "d8c912da-3bcc-48af-8507-8dc652399cbe",
+    "branch": "engineering/source-hints-20261003-a9c2",
+    "request_id": "e25cf397-cfd0-4630-9541-17ce32843bfa",
+    "issue_number": 554,
+    "claimed_at": "2026-10-03T19:22:15.121Z",
+    "updated_at": "2026-10-03T19:22:15.121Z",
+    "expires_at": "2026-10-04T19:22:15.121Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 1
+  }
+}
