@@ -1,0 +1,66 @@
+{
+  "method": "Transform source and current shapes temporarily to EPSG:5070 equal-area coordinates, run GEOS MakeValid only where reprojection introduced invalid topology, then compare each exact San Bernardino ADM2 × RESOLVE ecoregion intersection with its assigned current atlas fragment. Original bytes and baseline geometries remain unmodified.",
+  "fragment_count": 4,
+  "fragments": [
+    {
+      "location_id": "atlas:physical:5dcc72971bb4b1ede2f5",
+      "name": "San Bernardino · Mojave desert",
+      "predecessor_shape_id": "52423323B23069932539838",
+      "eco_id": 433,
+      "eco_name": "Mojave desert",
+      "expected_area_km2": 44227.147168,
+      "current_area_km2": 44235.090422,
+      "current_intersection_over_expected_pct": 99.922501,
+      "symmetric_difference_km2": 76.49467,
+      "raw_inputs_preserved": true,
+      "temporary_projected_makevalid": true
+    },
+    {
+      "location_id": "atlas:physical:9cfc4fc5de3925d6f841",
+      "name": "San Bernardino · Sonoran desert",
+      "predecessor_shape_id": "52423323B23069932539838",
+      "eco_id": 435,
+      "eco_name": "Sonoran desert",
+      "expected_area_km2": 3938.63357,
+      "current_area_km2": 3932.866629,
+      "current_intersection_over_expected_pct": 99.23154,
+      "symmetric_difference_km2": 54.766714,
+      "raw_inputs_preserved": true,
+      "temporary_projected_makevalid": true
+    },
+    {
+      "location_id": "atlas:physical:d76eb273e99a0f96a575",
+      "name": "San Bernardino · California montane chaparral and woodlands",
+      "predecessor_shape_id": "52423323B23069932539838",
+      "eco_id": 424,
+      "eco_name": "California montane chaparral and woodlands",
+      "expected_area_km2": 2699.372642,
+      "current_area_km2": 2695.708682,
+      "current_intersection_over_expected_pct": 99.278258,
+      "symmetric_difference_km2": 35.301046,
+      "raw_inputs_preserved": true,
+      "temporary_projected_makevalid": true
+    },
+    {
+      "location_id": "atlas:physical:dcc393fbc988381d899c",
+      "name": "San Bernardino · California coastal sage and chaparral",
+      "predecessor_shape_id": "52423323B23069932539838",
+      "eco_id": 422,
+      "eco_name": "California coastal sage and chaparral",
+      "expected_area_km2": 1227.949708,
+      "current_area_km2": 1233.430132,
+      "current_intersection_over_expected_pct": 99.596482,
+      "symmetric_difference_km2": 15.390413,
+      "raw_inputs_preserved": true,
+      "temporary_projected_makevalid": true
+    }
+  ],
+  "parent_union": {
+    "predecessor_shape_id": "52423323B23069932539838",
+    "predecessor_area_km2": 52093.103089,
+    "current_four_fragment_union_km2": 52097.094192,
+    "intersection_over_predecessor_pct": 99.980296,
+    "symmetric_difference_km2": 24.520472
+  },
+  "interpretation": "An ecoregion overlay tests the declared derivation, not a political boundary or county classification. Measured differences require scale, shoreline and precision review; they do not support an uncoordinated line relocation."
+}
