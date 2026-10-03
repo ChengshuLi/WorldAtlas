@@ -23,5 +23,7 @@ test('all six continent scopes partition every prepared location and reconcile r
   const scope=coverageScope(features,parents,review.territories,{continent:continent.name});assert.ok(scope.features.length>0);assert.equal(scope.profiles.reduce((sum,p)=>sum+p.selected_locations,0),scope.features.length);
   for(const feature of scope.features){assert.equal(seen.has(feature.id),false,'A location appears in only one continent');seen.add(feature.id);}
  }
- assert.equal(seen.size,features.length);assert.equal(features.length,49589);
+ // Published release 5 adds sourced land identities while retaining predecessors:
+ // data/validation/macro-publication-v5.json records live_location_count: 49625.
+ assert.equal(seen.size,features.length);assert.equal(features.length,49625);
 });
