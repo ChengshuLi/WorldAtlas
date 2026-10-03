@@ -4,6 +4,8 @@ Current provider/capacity inspection and operator response (3 October 2026) are 
 
 The accepted architecture keeps the owner-private Sites website/API, managed PostgreSQL for indexed historical facts, and object storage for licensed source archives/media. Owner-private **Site 18 is deployed with Neon PostgreSQL, retained R2 archives and imports enabled** (environment revision 3; deployment `appgdep_6abf573be0948191a5517d0b2cbe7948`, succeeded 2026-10-02 07:03:34.504 UTC). Production migration run 36973747147 and forward migration run 36974831053 are verified. Live checks cover all 23 factual tables and seven dates from 3000 BC to 2026 AD; capabilities are `mapSnapshots:1`, `datedGeography:1`, `datedFootprints:0`, `storageExport:2`. Original read-back preserved all 3,984 historical claims and 28 archives (16,199,861 bytes), at ingestion revision 1321. See `data/validation/neon-final-publication.json` and `neon-final-api-writable.json` for the exact release and checks. The existing content-research/import platform is ready for Luna. This does **not** complete every atlas goal: dated-footprint browser/cache integration, installation of three validated hierarchy candidates, blocked geographic repairs, worldwide semantic approval and physical mobile validation remain technical-maintainer work. Luna researches sources, prepares supported sparse evidence, imports it and logs results; Luna does not change code, geography, infrastructure or deployments. Read [the engineering checkpoint](HANDOFF_ENGINEERING_CHECKPOINT.md) and [continuation log](HANDOFF_STATUS.md).
 
+The preceding Site 18 paragraph is the **2 October 2026 UTC cutover checkpoint**, not the latest Site version, live revision or capacity measurement. Later publication receipts remain in their owned engineering directories and GitHub issues. [Current capacity guidance](PROVIDER_CAPACITY.md) records subsequent measured use and limits. Recheck live capabilities and release pins through documented private access; preserve earlier receipts. A writable platform does not permit location-attribute imports before [complete published regional approval](GEOGRAPHY_RESEARCH_READINESS.md).
+
 ## What belongs where
 
 | Store | Content | Retrieval |
@@ -30,18 +32,20 @@ The user selected Neon project `weathered-lab-37571695`, with PostgreSQL 18 and 
 
 Provisioning requires the selected provider/account, project/region and budget. Store connection credentials as server secrets; never browser assets, research bundles, command arguments, receipts or Git. Preserve the current private audience and server-side write authorization. Luna should not set up providers or rewrite code.
 
-## Migration work remains engineering
+## Preserved cutover procedure and future engineering migrations
+
+The baseline transfer and forward release below are complete, as the retained receipts show. This procedure governs preservation and any explicitly reviewed future cutover; it is not an instruction to rerun production restoration.
 
 1. Retain the implemented PostgreSQL adapter/schema and matching API contracts; publish the exact tested source.
 2. Preserve tested constraints, source-bound imports, correction history and idempotent resume; verify new forward migrations and restricted-role grants on the actual target.
 3. Retain the verified production copy of all original identities, claims, corrections and ingestion receipts, plus frozen D1 migrations and the restorable original export. Verify every new forward table through version-two export/restore.
 4. Check exhaustive counts/hashes and representative indexed queries, publication authorization, backups and a tested restore before switching production reads/writes.
-5. Retain the verified private API PostgreSQL binding. Complete the forward schema and matching new release, then verify write availability with an explicit checkpoint; avoid uncontrolled dual writes.
+5. Retain the verified private API PostgreSQL binding and completed forward-schema checkpoint. Any new forward schema needs its own matching reviewed release and write-availability verification; avoid uncontrolled dual writes.
 6. Recheck media manifests/object bytes separately. Blob storage can remain in R2 if its actual quota, access and cost are suitable.
 
 Hosted dated membership/existence, its bounded client loader and version-two 23-table factual backup routes are now published with matching production DDL. Browser footprint/version-cache integration and installation of three validated hierarchy candidates remain maintainer work. The footprint scaffold advertises capability zero. PostgreSQL and structural checks do not establish global geographic semantic completion.
 
-The research workflow prepares and validates bounded campaigns independently of infrastructure. Production imports are enabled; research must recheck current capabilities, release pins, revision and capacity. Large sustained expansion still requires measured storage/compute/query budgets. Technical maintainers own scaling and code; Luna owns source research, content, citations, imports and notes.
+The research workflow prepares and validates bounded campaigns independently of infrastructure. Production import transport is enabled; research must recheck current capabilities, release pins, revision, capacity and complete-regional approval. No regional location-attribute imports are currently permitted. Large sustained expansion still requires measured storage/compute/query budgets. Technical maintainers own scaling and code; Luna owns source research, content, citations, imports and notes.
 
 ## Accepted direction and initial free tier — checked 1 October 2026 Pacific
 
