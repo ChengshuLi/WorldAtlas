@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "issue": 650,
+  "lane": "engineering",
+  "worker_id": "moderator-merge-650-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "b29dfebb4080929e5c25c51a4ad6891790de3f1a",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 7304,
+        "sha256": "b73e25e3113ecd3573a1a58acaca50c6d6d2d1da6c577eecdf90787363272e12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/evidence-policy.json",
+        "bytes": 225,
+        "sha256": "69310e9dfbc92a7bfc954f6374a13dafb47a12ea53e27406cfd89138fc87463b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 5272,
+        "sha256": "4cbebe22a32a6e79f15a2b4c8ec43922b3c610bd407608b6db02b938e5412411",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 8993,
+        "sha256": "af417f8f68d520b4761f31ef5feb2404a04a840fbfb8afb57db4cb6122fc65e4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-worker-merge.mjs",
+        "bytes": 2788,
+        "sha256": "cc62f288bf5c25791926ee9887d93ed4298a0acc16a736419db9d978a948e61d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 2604,
+        "sha256": "cee83f95838d631c52a19dec9b84e9de3cd1e23f1dbcf698da8479791705b9fe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/queue-pr-merge.mjs",
+        "bytes": 3117,
+        "sha256": "2daedba75ce32cbe246bd37156dcfe2ce345810a96c21ade8f970b7ed8f336c9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_SYSTEM_BEFORE_AFTER.md",
+        "bytes": 5678,
+        "sha256": "bca6924c9961d54d5cb0dda566a7bc308fbc2db9910058aa12ab2eccb40eaab9",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/focused-tests.tap",
+      "bytes": 8926,
+      "sha256": "222a924c6b788dc62a9acadb091882c1424430d9254f48bf16ea411a5b9aba8d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/repair-regression-0.log.gz",
+      "bytes": 25059,
+      "sha256": "e3740d95cdb001664f2f87c963f4d4413e8cdeb2d72ca993ffe56f70aa1ad35d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/repair-regression-1.log.gz",
+      "bytes": 19448,
+      "sha256": "f86536848d3fe165bb23e53b16c4bbe5355c56d30c10beff88766a723f85086f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/repair-regression-2.log.gz",
+      "bytes": 19443,
+      "sha256": "f7ee7c12c9ab9ceaa98d6888946becd93c2cb85ab65b5d815be2a399e9c1bac3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/reservation.json",
+      "bytes": 832,
+      "sha256": "c4588f8f760d55347c850d67a8406d79068a1c6a5e229949c95869dcebcbf14a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/verification-scope.json",
+      "bytes": 1365,
+      "sha256": "88aedb6e9141707f41897b5ae7a128c097b1be02cade0c70f8b8d554a0e94e82",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "queue-activation",
+      "kind": "code",
+      "description": "Retain actual reviewed repair and its complete hosted tests; use the repaired normal queue for this owned evidence-only PR and inspect its actual result before closure.",
+      "software": "GitHub Actions; Node 24; trusted repository queue and evidence validators",
+      "units": "whole-file SHA-256 and exact Git identities"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "node scripts/queue-pr-merge.mjs --pr VERIFICATION_PR --head EXACT_REVIEWED_HEAD"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/focused-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/repair-regression-0.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/repair-regression-1.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/repair-regression-2.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/reservation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/verification-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-confirmed-20261003/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": []
+}
