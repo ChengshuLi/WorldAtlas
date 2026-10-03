@@ -9,13 +9,13 @@
   "base_main_commit": "c5fce09842a0af2ae05cf6c611f012b6a71befff",
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/23",
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T18:16:49.656276+00:00",
+  "updated_at_utc": "2026-10-03T18:20:50.651078+00:00",
   "scope": [
     "Second and final permitted PR: coordinated private publication of merged palette implementation, exact production GPU/Canvas/legend/year/reload/unknown acceptance and retained rollback; no factual/geographic/provider change"
   ],
   "reservation": {
     "accepted": true,
-    "request_id": "094c4f70-10f5-409d-95ed-e0bdd619bec8",
+    "request_id": "ad285d31-4a5c-4f64-82f9-e17885743126",
     "issue_number": 23,
     "claim": {
       "comment_id": 5971540602,
@@ -24,19 +24,19 @@
       "worker_id": "engineering-night-20261003-7e91f438",
       "claim_id": "4406050d-c644-4160-99aa-e43c1d052fd3",
       "branch": "engineering/palette-publish-20261003-7e91",
-      "request_id": "094c4f70-10f5-409d-95ed-e0bdd619bec8",
+      "request_id": "ad285d31-4a5c-4f64-82f9-e17885743126",
       "issue_number": 23,
       "claimed_at": "2026-10-03T17:14:24.771Z",
-      "updated_at": "2026-10-03T18:01:47.335Z",
-      "expires_at": "2026-10-04T18:01:47.335Z",
-      "live_work": true,
+      "updated_at": "2026-10-03T18:20:29.395Z",
+      "expires_at": "2026-10-04T18:20:29.395Z",
+      "live_work": false,
       "mode": "engineering",
       "max_prs": 2
     },
     "replayed": false,
     "result_source": "github-comment",
-    "result_comment_id": 5971939913,
-    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37142667996"
+    "result_comment_id": 5972112213,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37143802747"
   },
   "dependencies": [],
   "previous_pr": {
@@ -58,10 +58,12 @@
     }
   ],
   "completed": [
-    "Verified actual squash merge and matching bot result; renewed canonical claim onto fresh branch with live_work=false"
+    "Verified actual squash merge and matching bot result; renewed canonical claim onto fresh branch with live_work=false",
+    "Actual Site24 deployment succeeded; full actual private GPU/Canvas verification passed after retained failed first attempt",
+    "Confirmed canonical live_work=false renewal ad285d31-4a5c-4f64-82f9-e17885743126 / run37143802747 / bot5972112213"
   ],
   "deployment": {
-    "status": "succeeded-verification-running",
+    "status": "succeeded-verification-passed",
     "project_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db",
     "rollback": {
       "version_number": 23,
@@ -87,7 +89,7 @@
     "native_archive_uncompressed_bytes": 262389760,
     "native_archive_content_hash": "sha256:d06648cdc833b47020614be807d912e81904c2ccfc9ddbbc20e8cc4a33ada20d",
     "native_archive_files": 539,
-    "verification": "first-attempt-reload-HTTP500; bounded full recheck running"
+    "verification": "Complete independent rerun: 989 HTTP200 requests, WebGL2 and Canvas, four years, two original owner profiles, all14 modes, unknown styling, reloads, zero navigation ownership delta, no page errors; first HTTP500 attempt retained."
   },
   "maintenance": {
     "required": false,
@@ -95,7 +97,7 @@
     "reason": null
   },
   "blockers": [],
-  "next_action": "Full actual Site24 production recheck is running after preserved one-asset HTTP500 reload failure; two direct probes returned exact packaged bytes. Keep live_work=true until verification settles, then confirmed renewal false, final evidence PR, exact-head queue and actual merge/release.",
+  "next_action": "Create final permitted evidence PR for issue23, run exact-head scope/package checks, serialized squash queue, verify matching bot result and actual merge, release claim and continue next ready unclaimed item.",
   "evidence_paths": [
     "data/engineering/palette-publish-20261003-7e91"
   ],
