@@ -1,0 +1,535 @@
+{
+  "source": "neon-api-project-20261003.html",
+  "source_url": "https://api-docs.neon.tech/reference/getproject",
+  "scope": "Selected official schema definitions, not example/account facts",
+  "definitions": {
+    "ProjectQuota": {
+      "type": "object",
+      "description": "Per-project consumption quotas. If a quota is exceeded, all active computes\nare automatically suspended and cannot be started via API calls or incoming connections.\n\nThe exception is `logical_size_bytes`, which is enforced per branch.\nIf a branch exceeds its `logical_size_bytes` quota, computes can still be started,\nbut write operations will fail\u2014allowing data to be deleted to free up space.\nComputes on other branches are not affected.\n\nSetting `logical_size_bytes` overrides any lower value set by the `neon.max_cluster_size` Postgres setting.\n\nQuotas are enforced using per-project consumption metrics with the same names.\nThese metrics reset at the start of each billing period. `logical_size_bytes`\nis also an exception\u2014it reflects the total data stored in a branch and does not reset.\n\nA zero or empty quota value means \u201cunlimited.\u201d\n",
+      "properties": {
+        "active_time_seconds": {
+          "description": "The total amount of wall-clock time allowed to be spent by the project's compute endpoints.\n",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "compute_time_seconds": {
+          "description": "The total amount of CPU seconds allowed to be spent by the project's compute endpoints.\n",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "written_data_bytes": {
+          "description": "Total amount of data written to all of a project's branches.\n",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "data_transfer_bytes": {
+          "description": "Total amount of data transferred from all of a project's branches using the proxy.\n",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "logical_size_bytes": {
+          "description": "Limit on the logical size of every project's branch.\n\nIf a branch exceeds its `logical_size_bytes` quota, computes can still be started,\nbut write operations will fail\u2014allowing data to be deleted to free up space.\nComputes on other branches are not affected.\n\nSetting `logical_size_bytes` overrides any lower value set by the `neon.max_cluster_size` Postgres setting.\n",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        }
+      }
+    },
+    "ProjectSettingsData": {
+      "type": "object",
+      "properties": {
+        "quota": {
+          "$ref": "#/components/schemas/ProjectQuota"
+        },
+        "allowed_ips": {
+          "$ref": "#/components/schemas/AllowedIps"
+        },
+        "enable_logical_replication": {
+          "description": "Sets wal_level=logical for all compute endpoints in this project.\nAll active endpoints will be suspended.\nOnce enabled, logical replication cannot be disabled.\n",
+          "type": "boolean"
+        },
+        "maintenance_window": {
+          "$ref": "#/components/schemas/MaintenanceWindow"
+        },
+        "block_public_connections": {
+          "description": "When set, connections from the public internet\nare disallowed. This supersedes the AllowedIPs list.\nThis parameter is under active development and its semantics may change in the future.\n",
+          "type": "boolean"
+        },
+        "block_vpc_connections": {
+          "description": "When set, connections using VPC endpoints are disallowed.\nThis parameter is under active development and its semantics may change in the future.\n",
+          "type": "boolean"
+        },
+        "audit_log_level": {
+          "$ref": "#/components/schemas/ProjectAuditLogLevel",
+          "description": "Audit logging level, set only on HIPAA-enabled organizations (absent otherwise). Values: `base`, `extended`, `full`; HIPAA defaults to `extended`. Cannot be lowered back to `base` once `extended` or `full`."
+        },
+        "hipaa": {
+          "type": "boolean",
+          "description": "Enables HIPAA compliance mode for the project, including audit logging."
+        },
+        "preload_libraries": {
+          "$ref": "#/components/schemas/PreloadLibraries"
+        }
+      }
+    },
+    "Project": {
+      "type": "object",
+      "required": [
+        "consumption_period_end",
+        "consumption_period_start",
+        "active_time_seconds",
+        "compute_time_seconds",
+        "written_data_bytes",
+        "data_transfer_bytes",
+        "data_storage_bytes_hour",
+        "id",
+        "platform_id",
+        "region_id",
+        "name",
+        "pg_version",
+        "proxy_host",
+        "branch_logical_size_limit",
+        "branch_logical_size_limit_bytes",
+        "store_passwords",
+        "cpu_used_sec",
+        "provisioner",
+        "creation_source",
+        "history_retention_seconds",
+        "created_at",
+        "updated_at",
+        "owner_id"
+      ],
+      "properties": {
+        "data_storage_bytes_hour": {
+          "description": "Deprecated: always returns 0. Use the consumption history v2 endpoints (`/consumption_history/v2/projects`, `/consumption_history/v2/branches`) instead.\nBytes-Hour. Project consumed that much Postgres storage hourly during the billing period. The value has some lag.\nThe value is reset at the beginning of each billing period.\n",
+          "deprecated": true,
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "data_transfer_bytes": {
+          "description": "Bytes. Egress traffic from the Neon cloud to the client for given project over the billing period.\nIncludes deleted endpoints. The value has some lag. The value is reset at the beginning of each billing period.\n",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "written_data_bytes": {
+          "description": "Bytes. Amount of WAL that travelled through Postgres storage for given project across all branches.\nThe value has some lag. The value is reset at the beginning of each billing period.\n",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "compute_time_seconds": {
+          "description": "Seconds. The number of CPU seconds used by the project's compute endpoints, including compute endpoints that have been deleted.\nThe value has some lag. The value is reset at the beginning of each billing period.\nExamples:\n1. An endpoint that uses 1 CPU for 1 second is equal to `compute_time=1`.\n2. An endpoint that uses 2 CPUs simultaneously for 1 second is equal to `compute_time=2`.\n",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "active_time_seconds": {
+          "description": "Seconds. Control plane observed endpoints of this project being active this amount of wall-clock time.\nThe value has some lag.\nThe value is reset at the beginning of each billing period.\n",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "cpu_used_sec": {
+          "description": "Deprecated. Use `compute_time_seconds` instead.\n",
+          "type": "integer",
+          "format": "int64",
+          "deprecated": true
+        },
+        "id": {
+          "description": "The Neon project ID. Use as the `project_id` path parameter in other endpoints.",
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,60}$"
+        },
+        "platform_id": {
+          "description": "The cloud platform identifier. Currently, only AWS is supported, for which the identifier is `aws`.\n",
+          "type": "string"
+        },
+        "region_id": {
+          "description": "Cloud region where the resource's Postgres compute and storage reside (for example, `aws-us-east-1`). Valid values are returned by `GET /regions`.\n",
+          "type": "string",
+          "example": "aws-us-east-1"
+        },
+        "name": {
+          "description": "The project name\n",
+          "type": "string"
+        },
+        "provisioner": {
+          "$ref": "#/components/schemas/Provisioner",
+          "description": "Compute provisioner. `k8s-neonvm` (default) supports Autoscaling; `k8s-pod` is fixed-size compute. Also `docker` and `serverless-platform`."
+        },
+        "default_endpoint_settings": {
+          "$ref": "#/components/schemas/DefaultEndpointSettings"
+        },
+        "settings": {
+          "$ref": "#/components/schemas/ProjectSettingsData",
+          "description": "Project-level settings, for example `quota`, `allowed_ips`, `enable_logical_replication`, and `maintenance_window`."
+        },
+        "pg_version": {
+          "$ref": "#/components/schemas/PgVersion"
+        },
+        "proxy_host": {
+          "description": "The proxy host for the project. This value combines the `region_id`, the `platform_id`, and the Neon domain (`neon.tech`).\n",
+          "type": "string"
+        },
+        "branch_logical_size_limit": {
+          "description": "The logical size limit for a branch. The value is in MiB.\n",
+          "type": "integer",
+          "format": "int64"
+        },
+        "branch_logical_size_limit_bytes": {
+          "description": "The logical size limit for a branch. The value is in B.\n",
+          "type": "integer",
+          "format": "int64"
+        },
+        "store_passwords": {
+          "description": "Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization.\n",
+          "type": "boolean"
+        },
+        "maintenance_starts_at": {
+          "description": "A timestamp indicating when project maintenance begins. If set, the project is placed into maintenance mode at this time.\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "creation_source": {
+          "description": "The project creation source\n",
+          "type": "string"
+        },
+        "history_retention_seconds": {
+          "description": "The number of seconds to retain the shared history for all branches in this project.\n",
+          "type": "integer",
+          "format": "int32"
+        },
+        "created_at": {
+          "description": "A timestamp indicating when the project was created\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "description": "A timestamp indicating when the project was last updated\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "synthetic_storage_size": {
+          "description": "The current space occupied by the project in Postgres storage, in bytes. Synthetic Postgres storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches in a project.\n",
+          "type": "integer",
+          "format": "int64"
+        },
+        "consumption_period_start": {
+          "description": "A date-time indicating when Neon Cloud started measuring consumption for current consumption period.\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "consumption_period_end": {
+          "description": "A date-time indicating when Neon Cloud plans to stop measuring consumption for current consumption period.\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "quota_reset_at": {
+          "deprecated": true,
+          "description": "Deprecated. Use the `consumption_period_end` field instead. A timestamp indicating when the project quota resets.\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "owner_id": {
+          "type": "string",
+          "description": "ID of the organization that owns the project.",
+          "example": "org-cool-darkness-12345678"
+        },
+        "owner": {
+          "$ref": "#/components/schemas/ProjectOwnerData",
+          "description": "Ownership details for the project, including the owner's name and email."
+        },
+        "compute_last_active_at": {
+          "description": "The most recent time when any endpoint of this project was active.\n\nOmitted when observed no activity for endpoints of this project.\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "org_id": {
+          "description": "The Neon organization ID. Returned as `id` from `GET /users/me/organizations`.",
+          "example": "org-cool-darkness-12345678",
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,60}$"
+        },
+        "maintenance_scheduled_for": {
+          "description": "A timestamp indicating when project update begins. If set, computes might experience a brief restart around this time.\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "hipaa_enabled_at": {
+          "description": "A timestamp indicating when HIPAA was enabled for this project",
+          "type": "string",
+          "format": "date-time"
+        },
+        "effective_project_permission": {
+          "type": "string",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ProjectPermissionLevel"
+            }
+          ],
+          "nullable": true
+        }
+      },
+      "example": {
+        "id": "spring-example-302709",
+        "platform_id": "aws",
+        "region_id": "aws-us-east-2",
+        "name": "spring-example-302709",
+        "provisioner": "k8s-pod",
+        "pg_version": 15,
+        "proxy_host": "us-east-2.aws.neon.tech",
+        "store_passwords": true,
+        "creation_source": "console",
+        "history_retention_seconds": 604800,
+        "created_at": "2022-12-13T01:30:55Z",
+        "updated_at": "2022-12-13T01:30:55Z",
+        "owner": {
+          "name": "John Smith",
+          "email": "some@email.com",
+          "branches_limit": 10,
+          "subscription_type": "scale"
+        },
+        "org_id": "org-morning-bread-81040908",
+        "owner_id": "629982cc-de05-43db-ae16-28f2399c4910",
+        "data_storage_bytes_hour": 2831928,
+        "branch_logical_size_limit": 10,
+        "branch_logical_size_limit_bytes": 10485760,
+        "data_transfer_bytes": 1000,
+        "written_data_bytes": 193990002,
+        "compute_time_seconds": 2485760,
+        "active_time_seconds": 621440,
+        "cpu_used_sec": 155350,
+        "consumption_period_start": "2022-11-01T00:00:00Z",
+        "consumption_period_end": "2022-12-01T00:00:00Z"
+      }
+    },
+    "Endpoint": {
+      "type": "object",
+      "required": [
+        "host",
+        "id",
+        "project_id",
+        "branch_id",
+        "region_id",
+        "autoscaling_limit_max_cu",
+        "autoscaling_limit_min_cu",
+        "type",
+        "current_state",
+        "pooler_enabled",
+        "pooler_mode",
+        "disabled",
+        "passwordless_access",
+        "creation_source",
+        "created_at",
+        "updated_at",
+        "settings",
+        "proxy_host",
+        "suspend_timeout_seconds",
+        "provisioner"
+      ],
+      "x-sensitive": [
+        "host"
+      ],
+      "properties": {
+        "host": {
+          "description": "The hostname of the compute endpoint. This is the hostname specified when connecting to a Neon database.\n",
+          "type": "string"
+        },
+        "id": {
+          "description": "The compute endpoint ID. Compute endpoint IDs have an `ep-` prefix. For example: `ep-little-smoke-851426`\n",
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,60}$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional name of the compute endpoint\n"
+        },
+        "project_id": {
+          "description": "The ID of the project this compute endpoint belongs to.",
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,60}$"
+        },
+        "branch_id": {
+          "description": "The ID of the branch this compute endpoint belongs to.",
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,60}$"
+        },
+        "autoscaling_limit_min_cu": {
+          "description": "The minimum number of Compute Units\n",
+          "$ref": "#/components/schemas/ComputeUnit"
+        },
+        "autoscaling_limit_max_cu": {
+          "description": "The maximum number of Compute Units\n",
+          "$ref": "#/components/schemas/ComputeUnit"
+        },
+        "region_id": {
+          "type": "string",
+          "description": "Cloud region where the resource's Postgres compute and storage reside (for example, `aws-us-east-1`). Valid values are returned by `GET /regions`.\n",
+          "example": "aws-us-east-1"
+        },
+        "type": {
+          "$ref": "#/components/schemas/EndpointType"
+        },
+        "current_state": {
+          "$ref": "#/components/schemas/EndpointState"
+        },
+        "pending_state": {
+          "$ref": "#/components/schemas/EndpointState",
+          "description": "Target state the compute endpoint is transitioning to. Omitted when no transition is in progress."
+        },
+        "settings": {
+          "$ref": "#/components/schemas/EndpointSettingsData"
+        },
+        "pooler_enabled": {
+          "deprecated": true,
+          "description": "Deprecated. To use connection pooling, append `-pooler` to the endpoint ID in the connection string.\n",
+          "type": "boolean"
+        },
+        "pooler_mode": {
+          "deprecated": true,
+          "x-sunset": "2026-06-20",
+          "description": "Deprecated. The connection pooler mode. Removal scheduled for June 20, 2026.\n",
+          "$ref": "#/components/schemas/EndpointPoolerMode"
+        },
+        "disabled": {
+          "description": "Whether to restrict connections to the compute endpoint.\nEnabling this option schedules a suspend compute operation.\nA disabled compute endpoint cannot be enabled by a connection or\nconsole action.\n",
+          "type": "boolean"
+        },
+        "passwordless_access": {
+          "description": "Whether to permit passwordless access to the compute endpoint\n",
+          "type": "boolean"
+        },
+        "last_active": {
+          "description": "A timestamp indicating when the compute endpoint was last active\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "creation_source": {
+          "description": "The compute endpoint creation source\n",
+          "type": "string"
+        },
+        "created_at": {
+          "description": "A timestamp indicating when the compute endpoint was created\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "description": "A timestamp indicating when the compute endpoint was last updated\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A timestamp indicating when the compute endpoint was last started\n"
+        },
+        "suspended_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A timestamp indicating when the compute endpoint was last suspended\n"
+        },
+        "proxy_host": {
+          "description": "Deprecated. Use the `host` property instead.\n",
+          "type": "string"
+        },
+        "suspend_timeout_seconds": {
+          "$ref": "#/components/schemas/SuspendTimeoutSeconds",
+          "description": "Scale-to-zero idle timeout, in seconds, before the compute suspends. `0` means the plan default applies; `-1` means scale-to-zero is disabled (never suspends)."
+        },
+        "provisioner": {
+          "$ref": "#/components/schemas/Provisioner",
+          "description": "Compute provisioner. `k8s-neonvm` (default) supports Autoscaling; `k8s-pod` is fixed-size compute. Also `docker` and `serverless-platform`."
+        },
+        "compute_release_version": {
+          "description": "Attached compute's release version number.\n",
+          "type": "string"
+        }
+      },
+      "example": {
+        "host": "ep-silent-smoke-806639.us-east-2.aws.neon.tech",
+        "id": "ep-silent-smoke-806639",
+        "name": "My cool compute",
+        "project_id": "spring-example-302709",
+        "branch_id": "br-wispy-meadow-118737",
+        "autoscaling_limit_min_cu": 1,
+        "autoscaling_limit_max_cu": 1,
+        "region_id": "aws-us-east-2",
+        "type": "read_write",
+        "current_state": "init",
+        "pending_state": "active",
+        "settings": {
+          "pg_settings": {}
+        },
+        "pooler_enabled": false,
+        "pooler_mode": "transaction",
+        "disabled": false,
+        "passwordless_access": true,
+        "creation_source": "console",
+        "created_at": "2022-12-03T15:37:07Z",
+        "updated_at": "2022-12-03T15:37:07Z",
+        "proxy_host": "us-east-2.aws.neon.tech",
+        "suspend_timeout_seconds": 0,
+        "provisioner": "k8s-neonvm"
+      }
+    },
+    "Organization": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "handle",
+        "plan",
+        "created_at",
+        "updated_at",
+        "managed_by"
+      ],
+      "properties": {
+        "id": {
+          "description": "The Neon organization ID. Use as the `org_id` path parameter in other endpoints.",
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,60}$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable display name of the organization."
+        },
+        "handle": {
+          "type": "string",
+          "description": "URL-safe identifier for the organization, used in API paths. Distinct from the display name."
+        },
+        "plan": {
+          "type": "string",
+          "description": "Billing plan for the organization, for example `free`, `launch`, or `scale`."
+        },
+        "created_at": {
+          "description": "A timestamp indicting when the organization was created\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "managed_by": {
+          "description": "Organizations created via the Console or the API are managed by `console`.\nOrganizations created by other methods can't be deleted via the Console or the API.\n",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "A timestamp indicating when the organization was updated\n",
+          "type": "string",
+          "format": "date-time"
+        },
+        "allow_hipaa_projects": {
+          "description": "If true, allow account to mark projects as HIPAA",
+          "type": "boolean"
+        },
+        "require_mfa": {
+          "description": "If true, all members must have MFA enabled to access this organization",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

@@ -31,6 +31,13 @@ const receipt = {version: 1, checked_at_utc: new Date().toISOString(), site: ori
     'One-byte ranged reads establish availability and provider-reported object size, not whole-object integrity.',
     'Configured database budget is an application guard, never a provider quota.'
   ]};
+function safeBytes(value) {
+  assert.ok(typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 ||
+    typeof value === 'string' && /^(0|[1-9][0-9]*)$/.test(value), 'Exact nonnegative byte count required');
+  const integer = BigInt(value);
+  assert.ok(integer <= BigInt(Number.MAX_SAFE_INTEGER), 'Byte count exceeds exact numeric range');
+  return Number(integer);
+}
 async function get(route, {range = false} = {}) {
   const url = new URL(route, origin);
   assert.equal(url.origin, origin);
@@ -62,14 +69,15 @@ try {
     const query = new URLSearchParams({limit: '200'}); if (cursor) query.set('cursor', cursor);
     const result = await get('/api/storage/v2/export/media?' + query);
     assert.equal(result.snapshot_marker.fingerprint, receipt.before_marker.fingerprint, 'Same snapshot required');
-    media.push(...result.records.map(row => ({id: row.id, object_key: row.object_key, bytes: row.bytes, sha256: row.sha256, status: row.status})));
+    media.push(...result.records.map(row => ({id: row.id, object_key: row.object_key, bytes: safeBytes(row.bytes), sha256: row.sha256, status: row.status})));
     cursor = result.next_cursor;
     if (!cursor) break;
     assert.ok(!cursors.has(cursor)); cursors.add(cursor);
   }
   assert.ok(!cursor, 'Bounded media inventory must be complete');
+  receipt.media_inventory = media;
   assert.equal(media.length, receipt.capacity.media.registered_objects);
-  assert.equal(media.reduce((sum, row) => sum + row.bytes, 0), receipt.capacity.media.registered_bytes);
+  assert.equal(media.reduce((sum, row) => sum + row.bytes, 0), safeBytes(receipt.capacity.media.registered_bytes));
   for (const row of media) {
     assert.ok(Number.isSafeInteger(row.bytes) && row.bytes > 0);
     const response = await get('/api/media/' + encodeURIComponent(row.id), {range: true});
