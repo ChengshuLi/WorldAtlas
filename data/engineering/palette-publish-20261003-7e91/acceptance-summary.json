@@ -1,0 +1,259 @@
+{
+  "version": 1,
+  "recorded_at_utc": "2026-10-03T18:20:24.233650+00:00",
+  "completed": true,
+  "actual_deployed_site_version": 24,
+  "source_commit": "2326792cc52fc353264abc33c2ac4e983fb2c3e5",
+  "production_receipt": "production-after-recheck.json",
+  "renderer_receipt": "production-after-recheck-renderers.json",
+  "requests": 989,
+  "all_request_statuses": [
+    200
+  ],
+  "years": [
+    1950,
+    1951,
+    2020,
+    1950
+  ],
+  "source_index_sha256": "6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed",
+  "renderers": [
+    {
+      "renderer": "webgl2",
+      "reload_stable": true,
+      "modes": [
+        "owner",
+        "population",
+        "culture",
+        "religion",
+        "rank",
+        "topography",
+        "vegetation",
+        "climate",
+        "location",
+        "province",
+        "area",
+        "region",
+        "subcontinent",
+        "continent"
+      ],
+      "navigation_ownership_delta": 0,
+      "profiles": [
+        {
+          "query": "Beijing",
+          "id": "gb:CHN:ADM2:17275852B40522342172572",
+          "name": "People's Republic of China",
+          "original_category_id": "owner:Q148",
+          "expected_rgb": [
+            132,
+            48,
+            216
+          ],
+          "palette": [
+            132,
+            48,
+            216,
+            255
+          ],
+          "matching_pixels": 785388,
+          "values": [
+            "People's Republic of China",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "FlatlandReference",
+            "Temperate Broadleaf & Mixed ForestsReference",
+            "Dwa hot dry-winter continentalReference"
+          ],
+          "screenshot": "data/engineering/palette-publish-20261003-7e91/production-after-recheck-renderers-webgl2-beijing.png"
+        },
+        {
+          "query": "Taipei",
+          "id": "atlas:city:TWN-1166",
+          "name": "Republic of China",
+          "original_category_id": "owner:Q148",
+          "expected_rgb": [
+            216,
+            76,
+            244
+          ],
+          "palette": [
+            216,
+            76,
+            244,
+            255
+          ],
+          "matching_pixels": 603176,
+          "values": [
+            "Republic of China",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "FlatlandReference",
+            "Tropical & Subtropical Moist Broadleaf ForestsReference",
+            "Cfa humid subtropicalReference"
+          ],
+          "screenshot": "data/engineering/palette-publish-20261003-7e91/production-after-recheck-renderers-webgl2-taipei.png"
+        }
+      ]
+    },
+    {
+      "renderer": "canvas",
+      "reload_stable": true,
+      "modes": [
+        "owner",
+        "population",
+        "culture",
+        "religion",
+        "rank",
+        "topography",
+        "vegetation",
+        "climate",
+        "location",
+        "province",
+        "area",
+        "region",
+        "subcontinent",
+        "continent"
+      ],
+      "navigation_ownership_delta": 0,
+      "profiles": [
+        {
+          "query": "Beijing",
+          "id": "gb:CHN:ADM2:17275852B40522342172572",
+          "name": "People's Republic of China",
+          "original_category_id": "owner:Q148",
+          "expected_rgb": [
+            132,
+            48,
+            216
+          ],
+          "palette": null,
+          "matching_pixels": 786768,
+          "values": [
+            "People's Republic of China",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "FlatlandReference",
+            "Temperate Broadleaf & Mixed ForestsReference",
+            "Dwa hot dry-winter continentalReference"
+          ],
+          "screenshot": "data/engineering/palette-publish-20261003-7e91/production-after-recheck-renderers-canvas-beijing.png"
+        },
+        {
+          "query": "Taipei",
+          "id": "atlas:city:TWN-1166",
+          "name": "Republic of China",
+          "original_category_id": "owner:Q148",
+          "expected_rgb": [
+            216,
+            76,
+            244
+          ],
+          "palette": null,
+          "matching_pixels": 609355,
+          "values": [
+            "Republic of China",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "Unknown",
+            "FlatlandReference",
+            "Tropical & Subtropical Moist Broadleaf ForestsReference",
+            "Cfa humid subtropicalReference"
+          ],
+          "screenshot": "data/engineering/palette-publish-20261003-7e91/production-after-recheck-renderers-canvas-taipei.png"
+        }
+      ]
+    }
+  ],
+  "page_errors": [],
+  "retained_failed_attempt": "production-first-attempt-status.json",
+  "limitation": "A complete rerun passed after one retained transient HTTP500 asset response; this is not a guarantee of provider availability, physical-mobile or human color-vision certification.",
+  "file_receipts": [
+    {
+      "path": "production-after-beijing.png",
+      "bytes": 127014,
+      "sha256": "b6fe5360b24c60604a36f0b589a862ecdf41a0acac0110725c6186ca910bbe17"
+    },
+    {
+      "path": "production-after-recheck-beijing.png",
+      "bytes": 127014,
+      "sha256": "b6fe5360b24c60604a36f0b589a862ecdf41a0acac0110725c6186ca910bbe17"
+    },
+    {
+      "path": "production-after-recheck-renderers-canvas-beijing.png",
+      "bytes": 161232,
+      "sha256": "15f68169a9e74023f74055a744e855a71057d3f361510c00dc6a14425cbd94a4"
+    },
+    {
+      "path": "production-after-recheck-renderers-canvas-taipei.png",
+      "bytes": 151542,
+      "sha256": "a3d9948022eba117558878581843586788b6c540578ada8d9a24059fa2162f96"
+    },
+    {
+      "path": "production-after-recheck-renderers-webgl2-beijing.png",
+      "bytes": 127014,
+      "sha256": "b6fe5360b24c60604a36f0b589a862ecdf41a0acac0110725c6186ca910bbe17"
+    },
+    {
+      "path": "production-after-recheck-renderers-webgl2-taipei.png",
+      "bytes": 138995,
+      "sha256": "6f7e908ab4dc161c9db6e8c15e14aee1d7b8c1acd2c9eae20d366497c632fda6"
+    },
+    {
+      "path": "production-after-recheck-renderers.json",
+      "bytes": 212187,
+      "sha256": "f4840ea68a1d2003a4240489c7abef8fa034351a3ec77bd7c41e5a671bd9d835"
+    },
+    {
+      "path": "production-after-recheck-taipei.png",
+      "bytes": 138995,
+      "sha256": "6f7e908ab4dc161c9db6e8c15e14aee1d7b8c1acd2c9eae20d366497c632fda6"
+    },
+    {
+      "path": "production-after-recheck.json",
+      "bytes": 170363,
+      "sha256": "22d996822bb0304793f52db6eefee1376a304a2981d011ad9b335df5175a5f28"
+    },
+    {
+      "path": "production-after-renderers-webgl2-beijing.png",
+      "bytes": 127014,
+      "sha256": "b6fe5360b24c60604a36f0b589a862ecdf41a0acac0110725c6186ca910bbe17"
+    },
+    {
+      "path": "production-after-renderers-webgl2-taipei.png",
+      "bytes": 138995,
+      "sha256": "6f7e908ab4dc161c9db6e8c15e14aee1d7b8c1acd2c9eae20d366497c632fda6"
+    },
+    {
+      "path": "production-after-renderers.json",
+      "bytes": 108477,
+      "sha256": "2e1bfb15151e694716c7e7d925877454a1783630f9bb279ff544be16f12fb048"
+    },
+    {
+      "path": "production-after-taipei.png",
+      "bytes": 138995,
+      "sha256": "6f7e908ab4dc161c9db6e8c15e14aee1d7b8c1acd2c9eae20d366497c632fda6"
+    },
+    {
+      "path": "production-after.json",
+      "bytes": 104951,
+      "sha256": "bca366e59321c0ed61259e118213cd6ff6d34435e3132c39bcf44f0d7abc38bf"
+    },
+    {
+      "path": "production-asset-recheck.json",
+      "bytes": 477,
+      "sha256": "5fb1c1c3d8117ba2756daf7ddf922a09c863fee483e1c53cf0b287bc0a083c89"
+    },
+    {
+      "path": "production-first-attempt-status.json",
+      "bytes": 737,
+      "sha256": "4c259a69c71b57c4931e949e67b9f4eb2b0ea44cdb0a0ed5bcda76fedc779019"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "recorded_at_utc": "2026-10-03T18:16:49.656276+00:00",
+  "first_attempt": "production-after.json",
+  "renderer_attempt": "production-after-renderers.json",
+  "outcome": "Failed reload; not a complete acceptance pass",
+  "failed_requests": [
+    {
+      "path": "/ownership/runs-54525952.bin.gz",
+      "year": null,
+      "status": 500,
+      "bytes": 1274
+    }
+  ],
+  "narrow_recheck": "production-asset-recheck.json",
+  "packaged_asset_sha256": "a82bfc28b4398ebe4febafbe2b939b7a70a9989c4aa9ee522c75ebb28cdddd3b",
+  "interpretation": "Both bounded read-only asset rechecks returned 200 and exact packaged bytes. Full production GPU/Canvas/reload recheck is running separately; no code, provider or token change."
+}
