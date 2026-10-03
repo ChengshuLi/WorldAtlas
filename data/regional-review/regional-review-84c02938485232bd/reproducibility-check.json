@@ -1,0 +1,43 @@
+{
+  "issue": 580,
+  "baseline_commit": "6c6271af6b0dac49b82eaafb2db4de8b9c4611f2",
+  "scope_sha256": "c4f4430d695763766785c95e895970428ea627086071fdad581e7929ce6f2c39",
+  "as_of": "2026-10-03",
+  "command": "/usr/bin/python3 data/regional-review/regional-review-84c02938485232bd/reproduce-geometry.py",
+  "reproducibility": "two consecutive runs produced byte-identical output files",
+  "run_1": [
+    {
+      "path": "audit.jsonl",
+      "bytes": 572676,
+      "sha256": "9a2e51a823460ddd3647bac712faccd27f796619827bd151e82ab73dcd209284"
+    },
+    {
+      "path": "department-union-comparison.json",
+      "bytes": 2731,
+      "sha256": "c9886f2abd53b2304808564cecd2ddf10287bb023d055a705cb893384280048f"
+    },
+    {
+      "path": "axis-order-correction.json",
+      "bytes": 136724,
+      "sha256": "97766974c1eb9bbc441e9f87e24ef0d613b04f5632bb01648576f8b5200ee575"
+    }
+  ],
+  "run_2": [
+    {
+      "path": "audit.jsonl",
+      "bytes": 572676,
+      "sha256": "9a2e51a823460ddd3647bac712faccd27f796619827bd151e82ab73dcd209284"
+    },
+    {
+      "path": "department-union-comparison.json",
+      "bytes": 2731,
+      "sha256": "c9886f2abd53b2304808564cecd2ddf10287bb023d055a705cb893384280048f"
+    },
+    {
+      "path": "axis-order-correction.json",
+      "bytes": 136724,
+      "sha256": "97766974c1eb9bbc441e9f87e24ef0d613b04f5632bb01648576f8b5200ee575"
+    }
+  ],
+  "all_files_match": true
+}

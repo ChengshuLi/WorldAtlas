@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Reproduce issue #494 membership, ancestry, DANE crosswalk and settlement audit."""
-import gzip, hashlib, json, pathlib, unicodedata, collections
+import gzip, hashlib, json, pathlib, unicodedata, collections, subprocess
 P=pathlib.Path(__file__).resolve().parent; ROOT=P.parents[2]; S=P/'sources'
 def sha(b): return hashlib.sha256(b).hexdigest()
 def read_gz(name): return gzip.decompress((S/name).read_bytes())
@@ -10,13 +10,16 @@ def check(ok,msg):
 def norm(t): return ''.join(c for c in unicodedata.normalize('NFKD',t.casefold()) if not unicodedata.combining(c) and c.isalnum())
 scope=json.loads((P/'issue-scope.json').read_text()); ids=scope['member_location_ids']; check(len(ids)==265==scope['location_count'],'issue pins 265 assigned location IDs')
 check(sha('\n'.join(sorted(ids)).encode())==scope['member_location_ids_sha256'],'issue member fingerprint')
-index=json.loads((ROOT/'data/world-index.json').read_text()); assigned=set(ids); features={}
+correction=json.loads((P/'axis-order-correction.json').read_text()); baseline=correction['baseline_commit']
+def baseline_bytes(path): return subprocess.check_output(['git','-C',str(ROOT),'show',f'{baseline}:{path}'])
+index_bytes=baseline_bytes('data/world-index.json'); index=json.loads(index_bytes); assigned=set(ids); features={}
 for rel in index['parts']:
- for f in json.loads((ROOT/'data'/rel).read_text()).get('features',[]):
+ data=baseline_bytes('data/'+rel)
+ for f in json.loads(data).get('features',[]):
   if f['id'] in assigned: features[f['id']]=f
-check(set(features)==assigned,'all assigned features appear in indexed geography')
-hierarchy=json.loads((ROOT/'data/hierarchy.json').read_text()); groups={x['id']:x for x in hierarchy}
-check(sha((ROOT/'data/hierarchy.json').read_bytes())==scope['release']['hierarchy_sha256'],'pinned published hierarchy hash')
+check(set(features)==assigned,'all assigned features appear in indexed immutable geography')
+hierarchy_bytes=baseline_bytes('data/hierarchy.json'); hierarchy=json.loads(hierarchy_bytes); groups={x['id']:x for x in hierarchy}
+check(sha(hierarchy_bytes)==scope['release']['hierarchy_sha256'],'pinned published hierarchy hash')
 expected_area=scope['area_scopes'][0]['id']; region=scope['region_id']; expected_tail=[expected_area,region,'framework:subcontinent:andean-south-america:9579d3e91c2b','framework:continent:south-america:bbda637e3435']
 for id,f in features.items():
  chain=[]; q=f['properties'].get('parent_id')
@@ -58,7 +61,7 @@ for packet in peer['packets']:
  n=packet['issue'];subset=peer_sets[n]
  check(len(subset)==packet['filtered_current_area_count'] and sha('\n'.join(sorted(subset)).encode())==packet['member_ids_sha256'],f'peer issue #{n} area scope fingerprint')
 rows=[json.loads(line) for line in (P/'audit.jsonl').read_text().splitlines() if line.strip()]; audit={'subjects':rows,'name_variant_location_ids':[r['location_id'] for r in rows if r['assessment']=='correction-needed']};check(len(rows)==265 and {x['location_id'] for x in rows}==assigned,'audit has one row for each of 265 subjects')
-check(collections.Counter(x['assessment'] for x in rows)=={'justified':260,'correction-needed':3,'insufficient-evidence':2},'every subject has a justified/correction-needed/insufficient-evidence classification')
+check(collections.Counter(x['assessment'] for x in rows)=={'justified':259,'correction-needed':3,'insufficient-evidence':3},'every subject has a justified/correction-needed/insufficient-evidence classification')
 scoped=collections.Counter(); centers_total=collections.Counter(); variants=[]
 for row in rows:
  id=row['location_id']; f=features[id]; md=f['properties']['metadata']; source_feature=src.get(row['geoBoundaries_shape_id'])
@@ -82,7 +85,10 @@ for row in rows:
 check(scoped=={'BOGOTÁ, D.C.':1,'CESAR':25,'META':29,'SANTANDER':87,'BOYACÁ':123},'five assigned parent scopes reconcile exact DANE 2024 counts')
 check(len({r['dane_divipola_code'] for r in rows})==265,'all DANE DIVIPOLA municipality codes are unique within issue scope')
 check(len(variants)==3 and set(variants)==set(audit['name_variant_location_ids']),'all three municipality name variants individually flagged')
-check(collections.Counter(x['assessment'] for x in rows)=={'justified':260,'correction-needed':3,'insufficient-evidence':2},'every assigned subject has an explicit issue-acceptance classification')
+check(collections.Counter(x['assessment'] for x in rows)=={'justified':259,'correction-needed':3,'insufficient-evidence':3},'every assigned subject has an explicit issue-acceptance classification')
+invalid_ids={r['location_id'] for r in rows if r['geometry_comparison']['status']=='invalid overlay'}
+check(invalid_ids=={'gb:COL:ADM2:7082276B21922340436225','gb:COL:ADM2:7082276B29749803006962','gb:COL:ADM2:7082276B94072212482436'},'corrected longitude-first overlays retain exactly three invalid geometry subjects')
+check({r['location_id'] for r in rows if r['assessment']=='insufficient-evidence'}==invalid_ids,'invalid geometry findings are all classified insufficient-evidence')
 check(centers_total=={'CM':265,'CP':750},'settlement roster totals 265 CM + 750 CP = 1,015')
 parent_audit=json.loads((P/'parent-assessments.json').read_text())
 check(len(parent_audit['parents'])==5,'all five assigned parents have individual administrative assessments')
