@@ -1,0 +1,4693 @@
+{
+  "issue": 490,
+  "method": {
+    "source": "Exact shared undirected consecutive coordinate segments in all 1,122 retained geoBoundaries ADM2 source features; report immediate neighbors for the 94 assigned sourceIDs.",
+    "current": "Exact shared undirected consecutive coordinate segments in current Atlas polygons; scan all world-index features to identify every exact-segment contact with the 94 assigned polygons.",
+    "interpretation": "This detects exact common segments only. It can miss shared borders represented with different vertex splits, contact only at points, unsplit overlaps, or water/island relationships. A graph difference is a candidate for review, not proof of a boundary error."
+  },
+  "source_uncompressed_sha256": "fe715854fc3383d2fd39e8692f3df0c60bd12208cb2cd36ef1ec2220ea8972fe",
+  "assigned_count": 94,
+  "whole_colombia_source_count": 1122,
+  "whole_atlas_location_count": 49625,
+  "source_assigned_internal_neighbor_pair_count": 227,
+  "current_assigned_internal_neighbor_pair_count": 227,
+  "assigned_internal_pair_graph_differences": 0,
+  "source_pairs_missing_current": [],
+  "current_pairs_missing_source": [],
+  "per_location": {
+    "gb:COL:ADM2:7082276B11470740818947": {
+      "name": "Tumaco",
+      "source_neighbor_shape_ids": [
+        "7082276B21872376500424",
+        "7082276B42923877059842",
+        "7082276B69446102501587",
+        "7082276B72973217917261"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B72973217917261",
+        "gb:ECU:ADM2:8360857B36933905288912"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:ECU:ADM2:8360857B36933905288912",
+          "name": "San Lorenzo",
+          "parent_id": "framework:province:esmeraldas:933c2a3df460",
+          "source_id": "gb:ECU:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B12521758233842": {
+      "name": "Bagadó",
+      "source_neighbor_shape_ids": [
+        "7082276B18686190591622",
+        "7082276B22807037286061",
+        "7082276B30380127815857",
+        "7082276B47980594061529",
+        "7082276B50429445082332",
+        "7082276B53063145531643",
+        "7082276B86904559809659",
+        "7082276B87448620862857"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B22807037286061",
+        "gb:COL:ADM2:7082276B30380127815857",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B53063145531643",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B87448620862857"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B22807037286061",
+        "gb:COL:ADM2:7082276B30380127815857",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B53063145531643",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B87448620862857"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B22807037286061",
+          "name": "Pueblo Rico",
+          "parent_id": "framework:province:risaralda:13ecd30d00f7",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B30380127815857",
+          "name": "Andes",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B53063145531643",
+          "name": "Betania",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B87448620862857",
+          "name": "Mistrató",
+          "parent_id": "framework:province:risaralda:13ecd30d00f7",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B86904559809659"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B86904559809659"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B14140540221362": {
+      "name": "Magüí (Payán)",
+      "source_neighbor_shape_ids": [
+        "7082276B29400931083820",
+        "7082276B35669712343607",
+        "7082276B42923877059842",
+        "7082276B65989383346082",
+        "7082276B69446102501587",
+        "7082276B87562004853041",
+        "7082276B90386853477374"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B87562004853041",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B87562004853041",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B87562004853041",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B87562004853041",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B17013880517014": {
+      "name": "Medio Atrato (Beté)",
+      "source_neighbor_shape_ids": [
+        "7082276B16172876286455",
+        "7082276B47907246338324",
+        "7082276B88455186246146"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B16172876286455",
+        "gb:COL:ADM2:7082276B47907246338324",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B16172876286455",
+        "gb:COL:ADM2:7082276B47907246338324",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B16172876286455",
+          "name": "Vigia Del Fuerte",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B47907246338324",
+          "name": "Urrao",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B17700118356894": {
+      "name": "Aldana",
+      "source_neighbor_shape_ids": [
+        "7082276B22938058716201",
+        "7082276B48690619382287",
+        "7082276B52108893597118",
+        "7082276B62012861578772"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B62012861578772"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B62012861578772"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B62012861578772"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B62012861578772"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B18686190591622": {
+      "name": "Lloró",
+      "source_neighbor_shape_ids": [
+        "7082276B12521758233842",
+        "7082276B47980594061529",
+        "7082276B50429445082332",
+        "7082276B67821658402915",
+        "7082276B88455186246146"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B20687876454915": {
+      "name": "Unguía",
+      "source_neighbor_shape_ids": [
+        "7082276B6840641027062",
+        "7082276B90132082814174",
+        "7082276B91740979880715"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:COL:ADM2:7082276B90132082814174",
+        "gb:COL:ADM2:7082276B91740979880715"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:COL:ADM2:7082276B90132082814174",
+        "gb:COL:ADM2:7082276B91740979880715",
+        "gb:PAN:ADM2:35544464B85836861885504"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B90132082814174",
+          "name": "Turbo",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:PAN:ADM2:35544464B85836861885504",
+          "name": "Pinogana",
+          "parent_id": "framework:province:provincia-de-darien:a212b00658c4",
+          "source_id": "gb:PAN:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:COL:ADM2:7082276B91740979880715"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:COL:ADM2:7082276B91740979880715"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B21872376500424": {
+      "name": "Francisco Pizarro (Salahonda)",
+      "source_neighbor_shape_ids": [
+        "7082276B11470740818947",
+        "7082276B42923877059842",
+        "7082276B72973217917261"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B22938058716201": {
+      "name": "Pupiales",
+      "source_neighbor_shape_ids": [
+        "7082276B17700118356894",
+        "7082276B40313955384200",
+        "7082276B44566424011980",
+        "7082276B52108893597118",
+        "7082276B62012861578772",
+        "7082276B76262709729970"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B76262709729970"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B76262709729970"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B76262709729970"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B76262709729970"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B24246563186016": {
+      "name": "Ancuya",
+      "source_neighbor_shape_ids": [
+        "7082276B31690225930459",
+        "7082276B44735629456030",
+        "7082276B52993229250097",
+        "7082276B86818396743416",
+        "7082276B98763994729952"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B24330192528349": {
+      "name": "Bojayá (Bellavista)",
+      "source_neighbor_shape_ids": [
+        "7082276B16172876286455",
+        "7082276B3053585301138",
+        "7082276B67825714501436",
+        "7082276B82467093202899",
+        "7082276B88455186246146"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B16172876286455",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B16172876286455",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B16172876286455",
+          "name": "Vigia Del Fuerte",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B26608751492830": {
+      "name": "Bajo Baudó (Pizarro)",
+      "source_neighbor_shape_ids": [
+        "7082276B3053585301138",
+        "7082276B37005238590154",
+        "7082276B42421945632945",
+        "7082276B60850908313742",
+        "7082276B77502299141728"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B77502299141728"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B77502299141728"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B77502299141728"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B77502299141728"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B27137373904269": {
+      "name": "El Tambo",
+      "source_neighbor_shape_ids": [
+        "7082276B51356117311945",
+        "7082276B52993229250097",
+        "7082276B60716782034360",
+        "7082276B70460159125708",
+        "7082276B8054790353271",
+        "7082276B86818396743416"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B28332930136844": {
+      "name": "Potosí",
+      "source_neighbor_shape_ids": [
+        "7082276B38923915219362",
+        "7082276B52108893597118"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B52108893597118"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B52108893597118"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B52108893597118"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B52108893597118"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B29262956514041": {
+      "name": "Leiva",
+      "source_neighbor_shape_ids": [
+        "7082276B32433349406288",
+        "7082276B43653558961889",
+        "7082276B87562004853041",
+        "7082276B98120491021397"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B87562004853041",
+        "gb:COL:ADM2:7082276B98120491021397"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B87562004853041",
+        "gb:COL:ADM2:7082276B98120491021397"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B43653558961889",
+          "name": "Mercaderes",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B98120491021397",
+          "name": "Balboa",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B29400931083820": {
+      "name": "Olaya Herrera (Bocas De Satinga)",
+      "source_neighbor_shape_ids": [
+        "7082276B14140540221362",
+        "7082276B35669712343607",
+        "7082276B42923877059842",
+        "7082276B72973217917261"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B3053585301138": {
+      "name": "Alto Baudó (Pie De Pato)",
+      "source_neighbor_shape_ids": [
+        "7082276B24330192528349",
+        "7082276B26608751492830",
+        "7082276B42421945632945",
+        "7082276B43042384629965",
+        "7082276B67825714501436",
+        "7082276B77502299141728",
+        "7082276B88455186246146",
+        "7082276B94568538347754"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B77502299141728",
+        "gb:COL:ADM2:7082276B88455186246146",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B77502299141728",
+        "gb:COL:ADM2:7082276B88455186246146",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B77502299141728",
+        "gb:COL:ADM2:7082276B88455186246146",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B77502299141728",
+        "gb:COL:ADM2:7082276B88455186246146",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B31672425369097": {
+      "name": "Policarpa",
+      "source_neighbor_shape_ids": [
+        "7082276B32433349406288",
+        "7082276B60716782034360",
+        "7082276B65989383346082",
+        "7082276B8054790353271",
+        "7082276B90386853477374"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B31690225930459": {
+      "name": "Guaitarilla",
+      "source_neighbor_shape_ids": [
+        "7082276B24246563186016",
+        "7082276B38506776880205",
+        "7082276B44735629456030",
+        "7082276B68439482186320",
+        "7082276B88389252568355",
+        "7082276B96517824635471",
+        "7082276B98763994729952"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B88389252568355",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B88389252568355",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B88389252568355",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B88389252568355",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B32433349406288": {
+      "name": "El Rosario",
+      "source_neighbor_shape_ids": [
+        "7082276B29262956514041",
+        "7082276B31672425369097",
+        "7082276B43653558961889",
+        "7082276B60716782034360",
+        "7082276B87562004853041",
+        "7082276B90386853477374"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B29262956514041",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B87562004853041",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B29262956514041",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B87562004853041",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B43653558961889",
+          "name": "Mercaderes",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B29262956514041",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B87562004853041",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B29262956514041",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B87562004853041",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B34896182965166": {
+      "name": "San José Del Palmar",
+      "source_neighbor_shape_ids": [
+        "7082276B1381167873192",
+        "7082276B22807037286061",
+        "7082276B50547805834837",
+        "7082276B75435633270321",
+        "7082276B80062952170187",
+        "7082276B86904559809659",
+        "7082276B8825594364674",
+        "7082276B90998600886333",
+        "7082276B9908924507903"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B1381167873192",
+        "gb:COL:ADM2:7082276B22807037286061",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B75435633270321",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B8825594364674",
+        "gb:COL:ADM2:7082276B90998600886333",
+        "gb:COL:ADM2:7082276B9908924507903"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B1381167873192",
+        "gb:COL:ADM2:7082276B22807037286061",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B75435633270321",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B8825594364674",
+        "gb:COL:ADM2:7082276B90998600886333",
+        "gb:COL:ADM2:7082276B9908924507903"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B1381167873192",
+          "name": "El Águila",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B22807037286061",
+          "name": "Pueblo Rico",
+          "parent_id": "framework:province:risaralda:13ecd30d00f7",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B75435633270321",
+          "name": "Ansermanuevo",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B90998600886333",
+          "name": "El Cairo",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B9908924507903",
+          "name": "Santuario",
+          "parent_id": "framework:province:risaralda:13ecd30d00f7",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B35669712343607": {
+      "name": "La Tola",
+      "source_neighbor_shape_ids": [
+        "7082276B14140540221362",
+        "7082276B29400931083820",
+        "7082276B87562004853041"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B37005238590154": {
+      "name": "Istmina",
+      "source_neighbor_shape_ids": [
+        "7082276B26608751492830",
+        "7082276B42421945632945",
+        "7082276B50547805834837",
+        "7082276B57881293772314",
+        "7082276B59837369743013",
+        "7082276B60850908313742",
+        "7082276B61520359869131",
+        "7082276B86904559809659",
+        "7082276B94568538347754"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B37445492905123": {
+      "name": "Nariño",
+      "source_neighbor_shape_ids": [
+        "7082276B51356117311945",
+        "7082276B828212266438"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B828212266438"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B828212266438"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B828212266438"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B828212266438"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B38506776880205": {
+      "name": "Imues",
+      "source_neighbor_shape_ids": [
+        "7082276B31690225930459",
+        "7082276B68439482186320",
+        "7082276B72595090323112",
+        "7082276B76262709729970",
+        "7082276B86870454083257",
+        "7082276B96517824635471"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B38923915219362": {
+      "name": "Córdoba",
+      "source_neighbor_shape_ids": [
+        "7082276B12408702465478",
+        "7082276B28332930136844",
+        "7082276B46740439042483",
+        "7082276B52108893597118"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B28332930136844",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B52108893597118"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B28332930136844",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B52108893597118"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B12408702465478",
+          "name": "Orito",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B28332930136844",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B52108893597118"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B28332930136844",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B52108893597118"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B40313955384200": {
+      "name": "Gualmatán",
+      "source_neighbor_shape_ids": [
+        "7082276B22938058716201",
+        "7082276B52108893597118",
+        "7082276B76262709729970",
+        "7082276B82030364647033"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B82030364647033"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B82030364647033"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B82030364647033"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B82030364647033"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B42421945632945": {
+      "name": "Medio Baudó(boca De Pepé)",
+      "source_neighbor_shape_ids": [
+        "7082276B26608751492830",
+        "7082276B3053585301138",
+        "7082276B37005238590154",
+        "7082276B94568538347754"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B42923877059842": {
+      "name": "Roberto Payán (San José)",
+      "source_neighbor_shape_ids": [
+        "7082276B11470740818947",
+        "7082276B14140540221362",
+        "7082276B21872376500424",
+        "7082276B29400931083820",
+        "7082276B69446102501587",
+        "7082276B72973217917261"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B72973217917261"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B43042384629965": {
+      "name": "Rio Quito (Paimadó)",
+      "source_neighbor_shape_ids": [
+        "7082276B3053585301138",
+        "7082276B47980594061529",
+        "7082276B67821658402915",
+        "7082276B88455186246146",
+        "7082276B94568538347754"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B88455186246146",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B88455186246146",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B88455186246146",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B88455186246146",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B44566424011980": {
+      "name": "Sapuyes",
+      "source_neighbor_shape_ids": [
+        "7082276B22938058716201",
+        "7082276B62012861578772",
+        "7082276B62156244785095",
+        "7082276B67820358645790",
+        "7082276B72595090323112",
+        "7082276B96517824635471"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B44735629456030": {
+      "name": "Consacá",
+      "source_neighbor_shape_ids": [
+        "7082276B24246563186016",
+        "7082276B31690225930459",
+        "7082276B51356117311945",
+        "7082276B52993229250097",
+        "7082276B68439482186320",
+        "7082276B828212266438",
+        "7082276B88194767649924"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B46740439042483": {
+      "name": "Puerres",
+      "source_neighbor_shape_ids": [
+        "7082276B12408702465478",
+        "7082276B38923915219362",
+        "7082276B52108893597118",
+        "7082276B82030364647033",
+        "7082276B86870454083257"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B12408702465478",
+          "name": "Orito",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B47092068992796": {
+      "name": "Ricaurte",
+      "source_neighbor_shape_ids": [
+        "7082276B54446489784787",
+        "7082276B62156244785095",
+        "7082276B67820358645790",
+        "7082276B69446102501587",
+        "7082276B98763994729952"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B98763994729952",
+        "gb:ECU:ADM2:8360857B85617002422218"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:ECU:ADM2:8360857B85617002422218",
+          "name": "Tulcan",
+          "parent_id": "framework:province:carchi:f082f076ad25",
+          "source_id": "gb:ECU:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B47980594061529": {
+      "name": "Cértegui",
+      "source_neighbor_shape_ids": [
+        "7082276B12521758233842",
+        "7082276B18686190591622",
+        "7082276B43042384629965",
+        "7082276B59837369743013",
+        "7082276B67821658402915",
+        "7082276B86904559809659",
+        "7082276B94568538347754"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B67821658402915",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B48690619382287": {
+      "name": "Cuaspud",
+      "source_neighbor_shape_ids": [
+        "7082276B17700118356894",
+        "7082276B52108893597118",
+        "7082276B54446489784787",
+        "7082276B62012861578772"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62012861578772"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:ECU:ADM2:8360857B85617002422218"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:ECU:ADM2:8360857B85617002422218",
+          "name": "Tulcan",
+          "parent_id": "framework:province:carchi:f082f076ad25",
+          "source_id": "gb:ECU:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62012861578772"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62012861578772"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B50257092239175": {
+      "name": "La Unión",
+      "source_neighbor_shape_ids": [
+        "7082276B30849628494153",
+        "7082276B43653558961889",
+        "7082276B55719342922597",
+        "7082276B73573713575428",
+        "7082276B83182105185370",
+        "7082276B92699344699207",
+        "7082276B96726097904374"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B30849628494153",
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B92699344699207",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B30849628494153",
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B92699344699207",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B30849628494153",
+          "name": "Florencia",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B43653558961889",
+          "name": "Mercaderes",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B92699344699207",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B92699344699207",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B50429445082332": {
+      "name": "El Carmen",
+      "source_neighbor_shape_ids": [
+        "7082276B12521758233842",
+        "7082276B18686190591622",
+        "7082276B35389673608197",
+        "7082276B47907246338324",
+        "7082276B53063145531643",
+        "7082276B68857935293525",
+        "7082276B88455186246146"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B35389673608197",
+        "gb:COL:ADM2:7082276B47907246338324",
+        "gb:COL:ADM2:7082276B53063145531643",
+        "gb:COL:ADM2:7082276B68857935293525",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B35389673608197",
+        "gb:COL:ADM2:7082276B47907246338324",
+        "gb:COL:ADM2:7082276B53063145531643",
+        "gb:COL:ADM2:7082276B68857935293525",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B35389673608197",
+          "name": "Ciudad Bolívar",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B47907246338324",
+          "name": "Urrao",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B53063145531643",
+          "name": "Betania",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B68857935293525",
+          "name": "Salgar",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B50547805834837": {
+      "name": "Sipí",
+      "source_neighbor_shape_ids": [
+        "7082276B19709317443254",
+        "7082276B34896182965166",
+        "7082276B37005238590154",
+        "7082276B38814266492224",
+        "7082276B43348198009946",
+        "7082276B60850908313742",
+        "7082276B61520359869131",
+        "7082276B8825594364674",
+        "7082276B90998600886333"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B19709317443254",
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B38814266492224",
+        "gb:COL:ADM2:7082276B43348198009946",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B8825594364674",
+        "gb:COL:ADM2:7082276B90998600886333"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B19709317443254",
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B38814266492224",
+        "gb:COL:ADM2:7082276B43348198009946",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B8825594364674",
+        "gb:COL:ADM2:7082276B90998600886333"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B19709317443254",
+          "name": "Bolívar",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B38814266492224",
+          "name": "El Dovio",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B43348198009946",
+          "name": "Versalles",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B90998600886333",
+          "name": "El Cairo",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B60850908313742",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B51356117311945": {
+      "name": "La Florida",
+      "source_neighbor_shape_ids": [
+        "7082276B27137373904269",
+        "7082276B37445492905123",
+        "7082276B44735629456030",
+        "7082276B52993229250097",
+        "7082276B70460159125708",
+        "7082276B828212266438"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B37445492905123",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B828212266438"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B37445492905123",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B828212266438"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B37445492905123",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B828212266438"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B37445492905123",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B828212266438"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B52108893597118": {
+      "name": "Ipiales",
+      "source_neighbor_shape_ids": [
+        "7082276B12408702465478",
+        "7082276B17700118356894",
+        "7082276B22938058716201",
+        "7082276B28332930136844",
+        "7082276B38923915219362",
+        "7082276B40313955384200",
+        "7082276B46740439042483",
+        "7082276B48690619382287",
+        "7082276B82030364647033",
+        "7082276B97476971281230"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B28332930136844",
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B97476971281230"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B28332930136844",
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B97476971281230",
+        "gb:ECU:ADM2:8360857B32687179357863",
+        "gb:ECU:ADM2:8360857B63398910527025",
+        "gb:ECU:ADM2:8360857B67239224798881",
+        "gb:ECU:ADM2:8360857B85617002422218"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B12408702465478",
+          "name": "Orito",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B97476971281230",
+          "name": "Valle Del Guamuez",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:ECU:ADM2:8360857B32687179357863",
+          "name": "Lago Agrio",
+          "parent_id": "framework:province:sucumbios:221cc9eccc3a",
+          "source_id": "gb:ECU:ADM2"
+        },
+        {
+          "id": "gb:ECU:ADM2:8360857B63398910527025",
+          "name": "Cascales",
+          "parent_id": "framework:province:sucumbios:221cc9eccc3a",
+          "source_id": "gb:ECU:ADM2"
+        },
+        {
+          "id": "gb:ECU:ADM2:8360857B67239224798881",
+          "name": "Sucumbios",
+          "parent_id": "framework:province:sucumbios:221cc9eccc3a",
+          "source_id": "gb:ECU:ADM2"
+        },
+        {
+          "id": "gb:ECU:ADM2:8360857B85617002422218",
+          "name": "Tulcan",
+          "parent_id": "framework:province:carchi:f082f076ad25",
+          "source_id": "gb:ECU:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B28332930136844",
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B82030364647033"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B28332930136844",
+        "gb:COL:ADM2:7082276B38923915219362",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B82030364647033"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B52993229250097": {
+      "name": "Sandoná",
+      "source_neighbor_shape_ids": [
+        "7082276B24246563186016",
+        "7082276B27137373904269",
+        "7082276B44735629456030",
+        "7082276B51356117311945",
+        "7082276B86818396743416"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B54446489784787": {
+      "name": "Cumbal",
+      "source_neighbor_shape_ids": [
+        "7082276B47092068992796",
+        "7082276B48690619382287",
+        "7082276B62012861578772",
+        "7082276B67820358645790"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B67820358645790"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:ECU:ADM2:8360857B85617002422218"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:ECU:ADM2:8360857B85617002422218",
+          "name": "Tulcan",
+          "parent_id": "framework:province:carchi:f082f076ad25",
+          "source_id": "gb:ECU:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B67820358645790"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B67820358645790"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B55719342922597": {
+      "name": "Colon",
+      "source_neighbor_shape_ids": [
+        "7082276B50257092239175",
+        "7082276B65589798073625",
+        "7082276B83182105185370",
+        "7082276B96726097904374"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B56257511215317": {
+      "name": "Arboleda",
+      "source_neighbor_shape_ids": [
+        "7082276B58803331462787",
+        "7082276B67005743436838",
+        "7082276B73573713575428",
+        "7082276B92699344699207"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B57596135767585": {
+      "name": "La Llanada",
+      "source_neighbor_shape_ids": [
+        "7082276B65989383346082",
+        "7082276B69446102501587",
+        "7082276B86818396743416",
+        "7082276B98763994729952"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B57881293772314": {
+      "name": "Rio Iró (Santa Rita)",
+      "source_neighbor_shape_ids": [
+        "7082276B37005238590154",
+        "7082276B61520359869131",
+        "7082276B80062952170187",
+        "7082276B86904559809659"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B86904559809659"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B86904559809659"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B86904559809659"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B86904559809659"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B58803331462787": {
+      "name": "Albán (San José)",
+      "source_neighbor_shape_ids": [
+        "7082276B56257511215317",
+        "7082276B67005743436838",
+        "7082276B73573713575428",
+        "7082276B75597823165208",
+        "7082276B75736959401017"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B75736959401017"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B75736959401017"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B75736959401017"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B75736959401017"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B59837369743013": {
+      "name": "Unión Panamericana ( Animas)",
+      "source_neighbor_shape_ids": [
+        "7082276B37005238590154",
+        "7082276B47980594061529",
+        "7082276B86904559809659",
+        "7082276B94568538347754"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B94568538347754"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B60716782034360": {
+      "name": "Taminango",
+      "source_neighbor_shape_ids": [
+        "7082276B27137373904269",
+        "7082276B31672425369097",
+        "7082276B32433349406288",
+        "7082276B43653558961889",
+        "7082276B70460159125708",
+        "7082276B8054790353271",
+        "7082276B92699344699207"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B43653558961889",
+          "name": "Mercaderes",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B60850908313742": {
+      "name": "El Litoral Del San Juán (Docordó)",
+      "source_neighbor_shape_ids": [
+        "7082276B19709317443254",
+        "7082276B26608751492830",
+        "7082276B33798425293322",
+        "7082276B37005238590154",
+        "7082276B50547805834837",
+        "7082276B51151260265899",
+        "7082276B82326475607220",
+        "7082276B94395141643556"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B19709317443254",
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B33798425293322",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B51151260265899",
+        "gb:COL:ADM2:7082276B82326475607220",
+        "gb:COL:ADM2:7082276B94395141643556"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B19709317443254",
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B33798425293322",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B51151260265899",
+        "gb:COL:ADM2:7082276B82326475607220",
+        "gb:COL:ADM2:7082276B94395141643556"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B19709317443254",
+          "name": "Bolívar",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B33798425293322",
+          "name": "Riofrío",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B51151260265899",
+          "name": "Trujillo",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B82326475607220",
+          "name": "Buenaventura",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B94395141643556",
+          "name": "Calima",
+          "parent_id": "framework:province:valle-del-cauca:0543b001f1fa",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B50547805834837"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B50547805834837"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B61520359869131": {
+      "name": "Medio San Juan (Andagoya)",
+      "source_neighbor_shape_ids": [
+        "7082276B37005238590154",
+        "7082276B50547805834837",
+        "7082276B57881293772314",
+        "7082276B80062952170187",
+        "7082276B8825594364674"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B80062952170187",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B62012861578772": {
+      "name": "Guachucal",
+      "source_neighbor_shape_ids": [
+        "7082276B17700118356894",
+        "7082276B22938058716201",
+        "7082276B44566424011980",
+        "7082276B48690619382287",
+        "7082276B54446489784787",
+        "7082276B67820358645790"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B67820358645790"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B67820358645790"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B67820358645790"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B17700118356894",
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B48690619382287",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B67820358645790"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B62156244785095": {
+      "name": "Santa Cruz (Guachavés)",
+      "source_neighbor_shape_ids": [
+        "7082276B44566424011980",
+        "7082276B47092068992796",
+        "7082276B67820358645790",
+        "7082276B88389252568355",
+        "7082276B96517824635471",
+        "7082276B98763994729952"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B88389252568355",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B88389252568355",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B88389252568355",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B67820358645790",
+        "gb:COL:ADM2:7082276B88389252568355",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B65589798073625": {
+      "name": "La Cruz",
+      "source_neighbor_shape_ids": [
+        "7082276B53672126014760",
+        "7082276B55719342922597",
+        "7082276B65287171655445",
+        "7082276B75597823165208",
+        "7082276B75736959401017",
+        "7082276B83182105185370",
+        "7082276B96726097904374"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B53672126014760",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B65287171655445",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B53672126014760",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B65287171655445",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B53672126014760",
+          "name": "Bolívar",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B65287171655445",
+          "name": "Santa Rosa",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B83182105185370",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B65989383346082": {
+      "name": "Los Andes",
+      "source_neighbor_shape_ids": [
+        "7082276B14140540221362",
+        "7082276B31672425369097",
+        "7082276B57596135767585",
+        "7082276B69446102501587",
+        "7082276B8054790353271",
+        "7082276B86818396743416",
+        "7082276B90386853477374"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B90386853477374"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B67005743436838": {
+      "name": "Buesaco",
+      "source_neighbor_shape_ids": [
+        "7082276B56257511215317",
+        "7082276B58803331462787",
+        "7082276B6069538576370",
+        "7082276B70460159125708",
+        "7082276B75736959401017",
+        "7082276B828212266438",
+        "7082276B92699344699207",
+        "7082276B98098551259160"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B6069538576370",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B92699344699207",
+        "gb:COL:ADM2:7082276B98098551259160"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B6069538576370",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B92699344699207",
+        "gb:COL:ADM2:7082276B98098551259160"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B6069538576370",
+          "name": "Santiago",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B98098551259160",
+          "name": "Colón",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B67820358645790": {
+      "name": "Mallama (Piedrancha)",
+      "source_neighbor_shape_ids": [
+        "7082276B44566424011980",
+        "7082276B47092068992796",
+        "7082276B54446489784787",
+        "7082276B62012861578772",
+        "7082276B62156244785095"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B62156244785095"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B62156244785095"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B62156244785095"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B54446489784787",
+        "gb:COL:ADM2:7082276B62012861578772",
+        "gb:COL:ADM2:7082276B62156244785095"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B67821658402915": {
+      "name": "Atrato (Yuto)",
+      "source_neighbor_shape_ids": [
+        "7082276B18686190591622",
+        "7082276B43042384629965",
+        "7082276B47980594061529",
+        "7082276B88455186246146"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B88455186246146"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B67825714501436": {
+      "name": "Bahía Solano (Mutis)",
+      "source_neighbor_shape_ids": [
+        "7082276B24330192528349",
+        "7082276B3053585301138",
+        "7082276B6840641027062",
+        "7082276B77502299141728",
+        "7082276B82467093202899",
+        "7082276B94755540005328"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:COL:ADM2:7082276B77502299141728",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B94755540005328"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:COL:ADM2:7082276B77502299141728",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B94755540005328"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:COL:ADM2:7082276B77502299141728",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B94755540005328"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:COL:ADM2:7082276B77502299141728",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B94755540005328"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B6840641027062": {
+      "name": "Riosucio",
+      "source_neighbor_shape_ids": [
+        "7082276B10402397965480",
+        "7082276B20687876454915",
+        "7082276B67825714501436",
+        "7082276B69715084527622",
+        "7082276B82467093202899",
+        "7082276B90132082814174",
+        "7082276B94755540005328"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B10402397965480",
+        "gb:COL:ADM2:7082276B20687876454915",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B69715084527622",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B90132082814174",
+        "gb:COL:ADM2:7082276B94755540005328"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B10402397965480",
+        "gb:COL:ADM2:7082276B20687876454915",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B69715084527622",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B90132082814174",
+        "gb:COL:ADM2:7082276B94755540005328",
+        "gb:PAN:ADM2:35544464B85836861885504",
+        "gb:PAN:ADM2:35544464B97743116241572"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B10402397965480",
+          "name": "Mutatá",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B69715084527622",
+          "name": "Dabeiba",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B90132082814174",
+          "name": "Turbo",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:PAN:ADM2:35544464B85836861885504",
+          "name": "Pinogana",
+          "parent_id": "framework:province:provincia-de-darien:a212b00658c4",
+          "source_id": "gb:PAN:ADM2"
+        },
+        {
+          "id": "gb:PAN:ADM2:35544464B97743116241572",
+          "name": "Chepigana",
+          "parent_id": "framework:province:provincia-de-darien:a212b00658c4",
+          "source_id": "gb:PAN:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B20687876454915",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B94755540005328"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B20687876454915",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B82467093202899",
+        "gb:COL:ADM2:7082276B94755540005328"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B68439482186320": {
+      "name": "Yacuanquer",
+      "source_neighbor_shape_ids": [
+        "7082276B31690225930459",
+        "7082276B38506776880205",
+        "7082276B44735629456030",
+        "7082276B86870454083257",
+        "7082276B88194767649924"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B69446102501587": {
+      "name": "Barbacoas",
+      "source_neighbor_shape_ids": [
+        "7082276B11470740818947",
+        "7082276B14140540221362",
+        "7082276B42923877059842",
+        "7082276B47092068992796",
+        "7082276B57596135767585",
+        "7082276B65989383346082",
+        "7082276B98763994729952"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B98763994729952",
+        "gb:ECU:ADM2:8360857B85617002422218"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:ECU:ADM2:8360857B85617002422218",
+          "name": "Tulcan",
+          "parent_id": "framework:province:carchi:f082f076ad25",
+          "source_id": "gb:ECU:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B42923877059842",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B70460159125708": {
+      "name": "Chachagüí",
+      "source_neighbor_shape_ids": [
+        "7082276B27137373904269",
+        "7082276B51356117311945",
+        "7082276B60716782034360",
+        "7082276B67005743436838",
+        "7082276B828212266438",
+        "7082276B92699344699207"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B72595090323112": {
+      "name": "Ospina",
+      "source_neighbor_shape_ids": [
+        "7082276B38506776880205",
+        "7082276B44566424011980",
+        "7082276B76262709729970",
+        "7082276B96517824635471"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B96517824635471"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B72973217917261": {
+      "name": "Mosquera",
+      "source_neighbor_shape_ids": [
+        "7082276B11470740818947",
+        "7082276B21872376500424",
+        "7082276B29400931083820",
+        "7082276B42923877059842"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B42923877059842"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B42923877059842"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B42923877059842"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B11470740818947",
+        "gb:COL:ADM2:7082276B21872376500424",
+        "gb:COL:ADM2:7082276B29400931083820",
+        "gb:COL:ADM2:7082276B42923877059842"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B73573713575428": {
+      "name": "San Pedro De Cartago",
+      "source_neighbor_shape_ids": [
+        "7082276B50257092239175",
+        "7082276B56257511215317",
+        "7082276B58803331462787",
+        "7082276B75597823165208",
+        "7082276B92699344699207"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B92699344699207"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B75597823165208": {
+      "name": "San Bernardo",
+      "source_neighbor_shape_ids": [
+        "7082276B58803331462787",
+        "7082276B65589798073625",
+        "7082276B73573713575428",
+        "7082276B75736959401017",
+        "7082276B96726097904374"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B73573713575428",
+        "gb:COL:ADM2:7082276B75736959401017",
+        "gb:COL:ADM2:7082276B96726097904374"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B75736959401017": {
+      "name": "El Tablón De Gómez",
+      "source_neighbor_shape_ids": [
+        "7082276B56868740164332",
+        "7082276B58803331462787",
+        "7082276B65287171655445",
+        "7082276B65589798073625",
+        "7082276B67005743436838",
+        "7082276B75597823165208",
+        "7082276B87047054998240"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B56868740164332",
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B65287171655445",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B87047054998240"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B56868740164332",
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B65287171655445",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B75597823165208",
+        "gb:COL:ADM2:7082276B87047054998240"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B56868740164332",
+          "name": "Mocoa",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B65287171655445",
+          "name": "Santa Rosa",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B87047054998240",
+          "name": "Sibundoy",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B75597823165208"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B58803331462787",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B75597823165208"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B76262709729970": {
+      "name": "Iles",
+      "source_neighbor_shape_ids": [
+        "7082276B22938058716201",
+        "7082276B38506776880205",
+        "7082276B40313955384200",
+        "7082276B72595090323112",
+        "7082276B82030364647033",
+        "7082276B86870454083257"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B22938058716201",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B77502299141728": {
+      "name": "Nuquí",
+      "source_neighbor_shape_ids": [
+        "7082276B26608751492830",
+        "7082276B3053585301138",
+        "7082276B67825714501436"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B67825714501436"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B67825714501436"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B67825714501436"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B26608751492830",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B67825714501436"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B80062952170187": {
+      "name": "Condoto",
+      "source_neighbor_shape_ids": [
+        "7082276B34896182965166",
+        "7082276B57881293772314",
+        "7082276B61520359869131",
+        "7082276B86904559809659",
+        "7082276B8825594364674"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B86904559809659",
+        "gb:COL:ADM2:7082276B8825594364674"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B8054790353271": {
+      "name": "El Peñol",
+      "source_neighbor_shape_ids": [
+        "7082276B27137373904269",
+        "7082276B31672425369097",
+        "7082276B60716782034360",
+        "7082276B65989383346082",
+        "7082276B86818396743416"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B86818396743416"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B82030364647033": {
+      "name": "Contadero",
+      "source_neighbor_shape_ids": [
+        "7082276B40313955384200",
+        "7082276B46740439042483",
+        "7082276B52108893597118",
+        "7082276B76262709729970",
+        "7082276B86870454083257"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B40313955384200",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B52108893597118",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B82467093202899": {
+      "name": "Carmen Del Darién  (Curbaradó)",
+      "source_neighbor_shape_ids": [
+        "7082276B16172876286455",
+        "7082276B24330192528349",
+        "7082276B39517489210154",
+        "7082276B67825714501436",
+        "7082276B6840641027062",
+        "7082276B69715084527622"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B16172876286455",
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B39517489210154",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:COL:ADM2:7082276B69715084527622"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B16172876286455",
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B39517489210154",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:COL:ADM2:7082276B69715084527622"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B16172876286455",
+          "name": "Vigia Del Fuerte",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B39517489210154",
+          "name": "Murindó",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B69715084527622",
+          "name": "Dabeiba",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B6840641027062"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B6840641027062"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B828212266438": {
+      "name": "Pasto",
+      "source_neighbor_shape_ids": [
+        "7082276B12408702465478",
+        "7082276B37445492905123",
+        "7082276B38703124782657",
+        "7082276B44735629456030",
+        "7082276B51356117311945",
+        "7082276B6069538576370",
+        "7082276B67005743436838",
+        "7082276B70460159125708",
+        "7082276B86870454083257",
+        "7082276B88194767649924"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B37445492905123",
+        "gb:COL:ADM2:7082276B38703124782657",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B6069538576370",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B37445492905123",
+        "gb:COL:ADM2:7082276B38703124782657",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B6069538576370",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B12408702465478",
+          "name": "Orito",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B38703124782657",
+          "name": "Villagarzón",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B6069538576370",
+          "name": "Santiago",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B37445492905123",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B37445492905123",
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B51356117311945",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B86870454083257",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B83182105185370": {
+      "name": "San Pablo",
+      "source_neighbor_shape_ids": [
+        "7082276B30849628494153",
+        "7082276B50257092239175",
+        "7082276B53672126014760",
+        "7082276B55719342922597",
+        "7082276B65589798073625"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B30849628494153",
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B53672126014760",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B65589798073625"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B30849628494153",
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B53672126014760",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B65589798073625"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B30849628494153",
+          "name": "Florencia",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B53672126014760",
+          "name": "Bolívar",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B65589798073625"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B65589798073625"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B86818396743416": {
+      "name": "Linares",
+      "source_neighbor_shape_ids": [
+        "7082276B24246563186016",
+        "7082276B27137373904269",
+        "7082276B52993229250097",
+        "7082276B57596135767585",
+        "7082276B65989383346082",
+        "7082276B8054790353271",
+        "7082276B98763994729952"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B27137373904269",
+        "gb:COL:ADM2:7082276B52993229250097",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B8054790353271",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B86870454083257": {
+      "name": "Funes",
+      "source_neighbor_shape_ids": [
+        "7082276B12408702465478",
+        "7082276B38506776880205",
+        "7082276B46740439042483",
+        "7082276B68439482186320",
+        "7082276B76262709729970",
+        "7082276B82030364647033",
+        "7082276B828212266438",
+        "7082276B88194767649924"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B12408702465478",
+          "name": "Orito",
+          "parent_id": "framework:province:putumayo:3f8669fc6afd",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B46740439042483",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B76262709729970",
+        "gb:COL:ADM2:7082276B82030364647033",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B88194767649924"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B86904559809659": {
+      "name": "Tadó",
+      "source_neighbor_shape_ids": [
+        "7082276B12521758233842",
+        "7082276B22807037286061",
+        "7082276B34896182965166",
+        "7082276B37005238590154",
+        "7082276B47980594061529",
+        "7082276B57881293772314",
+        "7082276B59837369743013",
+        "7082276B80062952170187"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B22807037286061",
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B80062952170187"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B22807037286061",
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B80062952170187"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B22807037286061",
+          "name": "Pueblo Rico",
+          "parent_id": "framework:province:risaralda:13ecd30d00f7",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B80062952170187"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B12521758233842",
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B57881293772314",
+        "gb:COL:ADM2:7082276B59837369743013",
+        "gb:COL:ADM2:7082276B80062952170187"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B87562004853041": {
+      "name": "El Charco",
+      "source_neighbor_shape_ids": [
+        "7082276B14140540221362",
+        "7082276B29262956514041",
+        "7082276B32433349406288",
+        "7082276B333930671770",
+        "7082276B35669712343607",
+        "7082276B47350774570245",
+        "7082276B90386853477374",
+        "7082276B98120491021397",
+        "7082276B99136561352014"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B29262956514041",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B333930671770",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B47350774570245",
+        "gb:COL:ADM2:7082276B90386853477374",
+        "gb:COL:ADM2:7082276B98120491021397",
+        "gb:COL:ADM2:7082276B99136561352014"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B29262956514041",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B333930671770",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B47350774570245",
+        "gb:COL:ADM2:7082276B90386853477374",
+        "gb:COL:ADM2:7082276B98120491021397",
+        "gb:COL:ADM2:7082276B99136561352014"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B333930671770",
+          "name": "Guapi",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B47350774570245",
+          "name": "Argelia",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B98120491021397",
+          "name": "Balboa",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B29262956514041",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B90386853477374",
+        "gb:COL:ADM2:7082276B99136561352014"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B29262956514041",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B35669712343607",
+        "gb:COL:ADM2:7082276B90386853477374",
+        "gb:COL:ADM2:7082276B99136561352014"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B88194767649924": {
+      "name": "Tangua",
+      "source_neighbor_shape_ids": [
+        "7082276B44735629456030",
+        "7082276B68439482186320",
+        "7082276B828212266438",
+        "7082276B86870454083257"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B44735629456030",
+        "gb:COL:ADM2:7082276B68439482186320",
+        "gb:COL:ADM2:7082276B828212266438",
+        "gb:COL:ADM2:7082276B86870454083257"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B8825594364674": {
+      "name": "Nóvita",
+      "source_neighbor_shape_ids": [
+        "7082276B34896182965166",
+        "7082276B50547805834837",
+        "7082276B61520359869131",
+        "7082276B80062952170187"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B80062952170187"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B80062952170187"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B80062952170187"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B34896182965166",
+        "gb:COL:ADM2:7082276B50547805834837",
+        "gb:COL:ADM2:7082276B61520359869131",
+        "gb:COL:ADM2:7082276B80062952170187"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B88389252568355": {
+      "name": "Providencia",
+      "source_neighbor_shape_ids": [
+        "7082276B31690225930459",
+        "7082276B62156244785095",
+        "7082276B96517824635471",
+        "7082276B98763994729952"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B96517824635471",
+        "gb:COL:ADM2:7082276B98763994729952"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B88455186246146": {
+      "name": "Quibdó",
+      "source_neighbor_shape_ids": [
+        "7082276B16172876286455",
+        "7082276B17013880517014",
+        "7082276B18686190591622",
+        "7082276B24330192528349",
+        "7082276B3053585301138",
+        "7082276B43042384629965",
+        "7082276B47907246338324",
+        "7082276B50429445082332",
+        "7082276B67821658402915"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B16172876286455",
+        "gb:COL:ADM2:7082276B17013880517014",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B47907246338324",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B67821658402915"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B16172876286455",
+        "gb:COL:ADM2:7082276B17013880517014",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B47907246338324",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B67821658402915"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B16172876286455",
+          "name": "Vigia Del Fuerte",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        },
+        {
+          "id": "gb:COL:ADM2:7082276B47907246338324",
+          "name": "Urrao",
+          "parent_id": "framework:province:antioquia:2daa0644b2e6",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B17013880517014",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B67821658402915"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B17013880517014",
+        "gb:COL:ADM2:7082276B18686190591622",
+        "gb:COL:ADM2:7082276B24330192528349",
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B50429445082332",
+        "gb:COL:ADM2:7082276B67821658402915"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B90386853477374": {
+      "name": "Cumbitara",
+      "source_neighbor_shape_ids": [
+        "7082276B14140540221362",
+        "7082276B31672425369097",
+        "7082276B32433349406288",
+        "7082276B65989383346082",
+        "7082276B87562004853041"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B14140540221362",
+        "gb:COL:ADM2:7082276B31672425369097",
+        "gb:COL:ADM2:7082276B32433349406288",
+        "gb:COL:ADM2:7082276B65989383346082",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B91740979880715": {
+      "name": "Acandí",
+      "source_neighbor_shape_ids": [
+        "7082276B20687876454915"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B20687876454915"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B20687876454915",
+        "gb:PAN:ADM2:35544464B26872392116911",
+        "gb:PAN:ADM2:35544464B97787935745550"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:PAN:ADM2:35544464B26872392116911",
+          "name": "Comarca Kuna Yala",
+          "parent_id": "framework:province:comarca-guna-yala:bb69f97dc659",
+          "source_id": "gb:PAN:ADM2"
+        },
+        {
+          "id": "gb:PAN:ADM2:35544464B97787935745550",
+          "name": "Cémaco",
+          "parent_id": "framework:province:comarca-embera-wounaan:b8281bbaa945",
+          "source_id": "gb:PAN:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B20687876454915"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B20687876454915"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B92699344699207": {
+      "name": "San Lorenzo",
+      "source_neighbor_shape_ids": [
+        "7082276B43653558961889",
+        "7082276B50257092239175",
+        "7082276B56257511215317",
+        "7082276B60716782034360",
+        "7082276B67005743436838",
+        "7082276B70460159125708",
+        "7082276B73573713575428"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B73573713575428"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B73573713575428"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B43653558961889",
+          "name": "Mercaderes",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B73573713575428"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B56257511215317",
+        "gb:COL:ADM2:7082276B60716782034360",
+        "gb:COL:ADM2:7082276B67005743436838",
+        "gb:COL:ADM2:7082276B70460159125708",
+        "gb:COL:ADM2:7082276B73573713575428"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B94568538347754": {
+      "name": "El Cantón Del San Pablo (Managrú)",
+      "source_neighbor_shape_ids": [
+        "7082276B3053585301138",
+        "7082276B37005238590154",
+        "7082276B42421945632945",
+        "7082276B43042384629965",
+        "7082276B47980594061529",
+        "7082276B59837369743013"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B59837369743013"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B59837369743013"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B59837369743013"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B3053585301138",
+        "gb:COL:ADM2:7082276B37005238590154",
+        "gb:COL:ADM2:7082276B42421945632945",
+        "gb:COL:ADM2:7082276B43042384629965",
+        "gb:COL:ADM2:7082276B47980594061529",
+        "gb:COL:ADM2:7082276B59837369743013"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B94755540005328": {
+      "name": "Juradó",
+      "source_neighbor_shape_ids": [
+        "7082276B67825714501436",
+        "7082276B6840641027062"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B6840641027062"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B6840641027062",
+        "gb:PAN:ADM2:35544464B97743116241572"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:PAN:ADM2:35544464B97743116241572",
+          "name": "Chepigana",
+          "parent_id": "framework:province:provincia-de-darien:a212b00658c4",
+          "source_id": "gb:PAN:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B6840641027062"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B67825714501436",
+        "gb:COL:ADM2:7082276B6840641027062"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B96517824635471": {
+      "name": "Tuquerres",
+      "source_neighbor_shape_ids": [
+        "7082276B31690225930459",
+        "7082276B38506776880205",
+        "7082276B44566424011980",
+        "7082276B62156244785095",
+        "7082276B72595090323112",
+        "7082276B88389252568355"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B88389252568355"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B88389252568355"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B88389252568355"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B38506776880205",
+        "gb:COL:ADM2:7082276B44566424011980",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B72595090323112",
+        "gb:COL:ADM2:7082276B88389252568355"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B96726097904374": {
+      "name": "Belen",
+      "source_neighbor_shape_ids": [
+        "7082276B50257092239175",
+        "7082276B55719342922597",
+        "7082276B65589798073625",
+        "7082276B75597823165208"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B75597823165208"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B75597823165208"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B75597823165208"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B50257092239175",
+        "gb:COL:ADM2:7082276B55719342922597",
+        "gb:COL:ADM2:7082276B65589798073625",
+        "gb:COL:ADM2:7082276B75597823165208"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B98763994729952": {
+      "name": "Samaniego",
+      "source_neighbor_shape_ids": [
+        "7082276B24246563186016",
+        "7082276B31690225930459",
+        "7082276B47092068992796",
+        "7082276B57596135767585",
+        "7082276B62156244785095",
+        "7082276B69446102501587",
+        "7082276B86818396743416",
+        "7082276B88389252568355"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B88389252568355"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B88389252568355"
+      ],
+      "current_external_neighbors": [],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B88389252568355"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B24246563186016",
+        "gb:COL:ADM2:7082276B31690225930459",
+        "gb:COL:ADM2:7082276B47092068992796",
+        "gb:COL:ADM2:7082276B57596135767585",
+        "gb:COL:ADM2:7082276B62156244785095",
+        "gb:COL:ADM2:7082276B69446102501587",
+        "gb:COL:ADM2:7082276B86818396743416",
+        "gb:COL:ADM2:7082276B88389252568355"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    },
+    "gb:COL:ADM2:7082276B99136561352014": {
+      "name": "Santa Bárbara (Iscuandé)",
+      "source_neighbor_shape_ids": [
+        "7082276B333930671770",
+        "7082276B87562004853041"
+      ],
+      "source_neighbor_atlas_ids": [
+        "gb:COL:ADM2:7082276B333930671770",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "current_shared_edge_neighbor_ids": [
+        "gb:COL:ADM2:7082276B333930671770",
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "current_external_neighbors": [
+        {
+          "id": "gb:COL:ADM2:7082276B333930671770",
+          "name": "Guapi",
+          "parent_id": "framework:province:cauca:cb145b39c4ac",
+          "source_id": "gb:COL:ADM2"
+        }
+      ],
+      "assigned_internal_source_neighbors": [
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "assigned_internal_current_neighbors": [
+        "gb:COL:ADM2:7082276B87562004853041"
+      ],
+      "assigned_internal_neighbor_graph_difference": {
+        "source_missing_in_current": [],
+        "current_missing_in_source": []
+      }
+    }
+  },
+  "limitations": [
+    "Segment equality is an exact-coordinate screen, not a full polygon overlay or shared-boundary certification.",
+    "Current adjacent-unit findings are context only; no parent, geometry or neighboring region is changed.",
+    "The region-wide shared edge network and any cross-region consistency claim remain for #489/affected owners."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "retrieved_utc": "2026-10-03",
+  "http_method": "GET",
+  "url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=ECO_NAME+IN+%28%27Pantanal%27%2C%27Chiquitano+dry+forests%27%2C%27Dry+Chaco%27%2C%27Cerrado%27%2C%27Madeira-Tapaj%C3%B3s+moist+forests%27%2C%27Southern+Andean+Yungas%27%2C%27Bolivian+montane+dry+forests%27%29&outFields=FID%2CECO_NAME%2CBIOME_NAME%2CREALM%2CECO_BIOME_%2CNNH%2CECO_ID%2CLICENSE&returnGeometry=true&outSR=4326&f=geojson",
+  "feature_count": 7,
+  "response_bytes": 1188735,
+  "response_sha256": "295be58007007f355f0a4a2c56cc64961c54390452e56ef82f808c27d905e10d",
+  "compression": {
+    "path": "sources/resolve-bolivia-ecoregions-7.geojson.gz",
+    "compressed_bytes": 494189,
+    "compressed_sha256": "1beba7fa4d223cc776702e5b85d342234d1992016184d8c7fce4e05663e563ae"
+  },
+  "method": "Explicit exact ECO_NAME IN seven set; returnGeometry true; retain every original global ecoregion polygon selected. Source attributes ECO_ID match the nine RESOLVE source ID suffixes in the current Atlas metadata."
+}
