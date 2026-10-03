@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "greg-west-africa-1964-source",
+  "branch": "research/greg-west-africa-1964-source",
+  "base_main_commit": "954e3e2e7b30b3c5899f0ff64f98f4f18e7bcb09",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/63",
+  "date_timezone": "UTC",
+  "scope": {
+    "geographies": [
+      "At most 25 GREG polygons intersecting a bounded WGS84 query envelope; not an Atlas region or territory definition"
+    ],
+    "attributes": [
+      "Published GREG schema, ethnic group concept semantics and reuse terms"
+    ],
+    "dates": "Underlying ANM published 1964; article says maps compiled in early 1960s; no polygon-specific observation dates; 1989 COW codes are separate context",
+    "sources": [
+      "ETH ICR GREG public data page/archive, online appendix, Weidmann et al. 2010 article"
+    ]
+  },
+  "updated_at_utc": "2026-10-03T09:58:16Z",
+  "geographic_release": null,
+  "input_paths": [
+    "data/source-inventory.json",
+    "docs/HISTORICAL_COVERAGE_RESEARCH.md"
+  ],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Inspected official page, dataset ZIP/schema, group list, article and appendix; retained hashes and exact 25 bounded records without geometries.",
+    "Confirmed no population-share field, no primary-group ranking and no feature-specific dates; documented the source’s positional/time limitations.",
+    "Public access and citation request found, but no dataset-specific reuse grant; source license remains unverified and no redistribution/import is authorized by this review."
+  ],
+  "source_gaps": [
+    "No dataset-specific GREG reuse license/permission or polygon-level observation dates found; no population shares in GREG."
+  ],
+  "blockers": [],
+  "next_action": "Run local scope and diff checks; submit one focused source-only PR. Wait for exact-head CI and merge queue, verify fresh-main merge, release claim and continue to next eligible issue.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
