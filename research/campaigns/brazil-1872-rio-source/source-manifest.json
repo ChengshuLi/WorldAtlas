@@ -1,0 +1,51 @@
+{
+  "campaign_id": "brazil-1872-rio-source",
+  "github_issue": 58,
+  "retrieved_at_utc": "2026-10-03",
+  "source_edition": {
+    "title": "Recenseamento do Brazil em 1872",
+    "issuing_body": "Directoria Geral de Estatistica (as identified by the source-era census context)",
+    "imprint": "Typ. G. Leuzinger, Rio de Janeiro, catalogued as [1874?]",
+    "census_reference": "1872 census; one historical census publication, not a time series",
+    "official_collection": "IBGE Biblioteca",
+    "catalog_record": "https://biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?id=225477&view=detalhes",
+    "catalog_record_id": 25477,
+    "cataloged_extent": "12 volumes; catalogue notes identify volume 10 as Rio de Janeiro and volume 5 as Município Neutro",
+    "source_url": "https://biblioteca.ibge.gov.br/visualizacao/livros/liv25477_v10_rj.pdf",
+    "source_bytes": 44880247,
+    "source_sha256": "0b018866c7f487423883b12ae68100a9cf31565bed387831e0757bcc59098e31",
+    "pdf_pages": 360,
+    "restoration": "Download the exact official volume 10 PDF URL and verify byte length and SHA-256. The PDF is a scanned volume with image-based tabular pages; local text extraction is only a discovery aid and is not authoritative for numeric transcription."
+  },
+  "license_and_attribution": {
+    "license": "No item-specific reuse license was identified in the IBGE catalogue record or scanned volume during this review.",
+    "rights_status": "Unresolved; do not treat this as a license determination. The work is an 1870s government publication, while the digital scan and current-hosting terms are separate questions.",
+    "attribution_statement": "Cite the original Recenseamento do Brazil em 1872, volume 10, and the IBGE Biblioteca digital copy.",
+    "caveat": "No data redistribution or import is proposed in this source-only evaluation. Confirm applicable IBGE reuse terms before downstream publication."
+  },
+  "discovery_evidence": {
+    "catalog_page_bytes": 19833,
+    "catalog_page_local_path_at_research_time": "/tmp/ibge-19833.html",
+    "catalog_metadata": "The record identifies 12 volumes and explicitly assigns v.10 to Rio de Janeiro, v.5 to Município Neutro; bibliographic year is uncertain [1874?].",
+    "visual_review": "Rendered source page 2 (printed page 1) from the official volume PDF to inspect the table form; no numeric rows were transcribed into this packet."
+  },
+  "evaluated_tables": [
+    {
+      "table_family": "Quadro geral da população da parochia",
+      "geographic_unit": "Named historical parish (parochia), printed within Provincia do Rio de Janeiro volume 10",
+      "fields_visible_on_reviewed_page": ["sex", "free/slave condition", "race", "marital status", "religion", "nationality", "instruction", "physical defects", "houses"],
+      "religion_labels_visible": ["Catholicos/Catholicas", "Acatholicos/Acatholicas"],
+      "population_table_note": "A separate age table labels present population as população de facto and also shows an absent-population table. Geography and denominator must be taken from each table heading, not inferred from the book title alone."
+    }
+  ],
+  "illustrative_rows": {
+    "count": 0,
+    "reason": "The high-resolution scan is legible visually, but the extracted OCR is materially corrupted in the dense multi-axis numerals. The review deliberately retains no unverified counts. The visible labels are schema evidence only, not observation rows."
+  },
+  "methods": {
+    "retrieval": "Downloaded the official IBGE-hosted PDF; recorded exact byte count and SHA-256.",
+    "inspection": "Used PDF metadata, pdftotext for discovery, and rendered source page 2 for visual review. OCR was not used as a numeric authority.",
+    "territorial_scope": "Restricted to the volume catalogued as Province of Rio de Janeiro. Município Neutro is a separately catalogued volume (v.5) and is excluded.",
+    "uncertainty": "No municipality/parish concordance or historical boundary geometry evaluated; the full numeric transcription, denominator reconciliation, enumeration date within 1872, and scan reuse rights remain unresolved."
+  }
+}
