@@ -27,14 +27,14 @@
   "outputs": [
     {
       "path": ".github/workflows/merge-integration-checks.yml",
-      "bytes": 941,
-      "sha256": "a9e3f146e81144a9522e44cd5678caac146db30c65bd22344764e07d3c8286eb",
+      "bytes": 1229,
+      "sha256": "0e699465bffc324947ab74f104cda2ab563026f6e8495d122434d938bb6f5173",
       "hash_kind": "file-bytes"
     },
     {
       "path": ".github/workflows/worker-merge.yml",
-      "bytes": 3998,
-      "sha256": "01287c48121226b1d1cb87f717370ce76d92d45f0c6d04af815daa4ea0638e81",
+      "bytes": 4579,
+      "sha256": "24b026484b2d63692464f2e3975eedf4b97368396479f0a8b89d635df69befce",
       "hash_kind": "file-bytes"
     },
     {
@@ -69,14 +69,14 @@
     },
     {
       "path": "docs/WORKER_COORDINATION.md",
-      "bytes": 13385,
-      "sha256": "2b1ccd53d033f11aad4bb53649b55f869b9e00c6e56271eb13ea0dd59cf99b20",
+      "bytes": 13999,
+      "sha256": "5e84883ffd5aaada648a71463d892ec63f6da593d9309d3afc8cfe8c751188fa",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/merge-integration.mjs",
-      "bytes": 8045,
-      "sha256": "ab289d50f4c3682864377aedfc40c456f7493e4a0fadc94f29b2eaa60ee92b62",
+      "bytes": 8983,
+      "sha256": "fe7ffd4cefa6379fbe769b308fe4f1bfe47e2a83772a16c92482b8eeda1f44ab",
       "hash_kind": "file-bytes"
     },
     {
@@ -87,8 +87,8 @@
     },
     {
       "path": "scripts/run-worker-merge.mjs",
-      "bytes": 2500,
-      "sha256": "2a97fbaca8bdb8acdaf66d1ca17f754f649c3f148551087b7adb17e447c961f3",
+      "bytes": 2632,
+      "sha256": "8d19b3b94a90dfd19a541c9bc03a3963800c007c5c90c5de3b8008a14f4aa906",
       "hash_kind": "file-bytes"
     },
     {
@@ -99,14 +99,38 @@
     },
     {
       "path": "test/merge-integration.test.mjs",
-      "bytes": 6999,
-      "sha256": "1d90946934593e363b151b03589990af122a8fde39f211d0a12dce3892b8d177",
+      "bytes": 8907,
+      "sha256": "33e698ce70a83c90b0f242960b0fe2284c6ad6b808afebce51c4cce0c89e6832",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/premerge-evidence.test.mjs",
       "bytes": 13694,
       "sha256": "ee18a36c8b61029e49b9aa90b995004200c129b1d0d130963ba179c3b09c922b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/efficiency-update-receipt.json",
+      "bytes": 1430,
+      "sha256": "934dd525971ffa3a36874c288b1e09cd8cf5269d990dae700e8eb236643f6ba3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-profile-tests.tap",
+      "bytes": 8489,
+      "sha256": "4f9a0ee8669001525d1c5784e1c321741b53194189fca31987ec5f81edf15dfd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/issue650-original-scope.md",
+      "bytes": 2269,
+      "sha256": "55a04072bfa571801a8b2bc5644aa1dfe1b902ff02711be83c97e92463bc2bb7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 1503,
+      "sha256": "f37c69fd8c499c4769e7dca3fec6db05d20208c4ecb8da3d0e6f2fe62fbb5aae",
       "hash_kind": "file-bytes"
     }
   ],
@@ -128,7 +152,8 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/trusted-workflow-checkouts.test.mjs"
+    "node --test test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/trusted-workflow-checkouts.test.mjs",
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs"
   ],
   "change_receipts": [
     {
@@ -194,6 +219,22 @@
     },
     {
       "path": "coordination/engineering/merge-integration-650-20261003/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/efficiency-update-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/focused-profile-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-20261003/issue650-original-scope.md",
+      "status": "added"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
       "status": "added"
     }
   ],

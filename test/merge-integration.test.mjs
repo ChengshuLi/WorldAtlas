@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {integrationTestFiles} from '../scripts/run-integration-tests.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
-import {prepareIntegration, completeIntegration, checkCurrentChecks} from '../scripts/merge-integration.mjs';
+import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile} from '../scripts/merge-integration.mjs';
 
 const sha = letter => letter.repeat(40);
 function fixture() {
@@ -83,13 +84,33 @@ test('latest failed or pending check replaces old success', () => {
 test('workflow separates untrusted candidate tests from write credentials and serializes the lifecycle', () => {
   const yaml=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
   const integration=yaml.split('  integration:\n')[1].split('  merge:\n')[0];
-  assert.match(yaml,/concurrency:\n  group: worldatlas-main-integrate/);
+  assert.match(yaml.split('  merge:\n')[1],/concurrency:\n      group: worldatlas-main-integrate/);
+  assert.doesNotMatch(integration,/concurrency:/);
   assert.match(integration,/permissions:\n      contents: read/);
   assert.doesNotMatch(integration,/GH_TOKEN|secrets\.|contents: write|issues: write|pull-requests: write/);
-  assert.match(integration,/persist-credentials: false/);assert.match(integration,/npm test\n          npm run build:hosted/);
+  assert.match(integration,/persist-credentials: false/);assert.match(integration,/node scripts\/run-integration-tests.mjs/);assert.match(integration,/run: npm run build:hosted/);
   assert.match(yaml,/needs: \[prepare, integration\]/);
 });
 
 test('commit status changing during final review prevents the merge', async () => {
   const f=fixture();f.failStatusOnRead=2;await assert.rejects(f.complete(),/statuses changed/);assert.equal(f.writes.length,0);
+});
+
+test('trusted profile uses focused invariants only for isolated evidence and docs', () => {
+ assert.equal(integrationProfile('geography/example',[{filename:'research/geography/packet/a.json'}],{owned_paths:['research/geography/packet/']}),'evidence');
+ assert.equal(integrationProfile('research/example',[{filename:'research/example/a.json'}],{}),'evidence');
+ assert.equal(integrationProfile('engineering/example',[{filename:'docs/WORKER_COORDINATION.md'},{filename:'coordination/engineering/example/receipt.json'}],{}),'evidence');
+ for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','.github/workflows/worker-merge.yml'])
+   assert.equal(integrationProfile('engineering/example',[{filename}],{}),'full');
+ assert.equal(integrationProfile('engineering/example',[{filename:'docs/a.md',previous_filename:'src/attributes.js'}],{}),'full');
+ assert.equal(integrationProfile('engineering/example',[{filename:'coordination/engineering/other/receipt.json'}],{}),'full');
+});
+
+test('parallel full-regression shards cover each unit file once and focused profile retains core gates', () => {
+ const expected=fs.readdirSync('test').filter(name=>name.endsWith('.test.mjs')).map(name=>`test/${name}`).sort();
+ const shards=[0,1,2].flatMap(shard=>integrationTestFiles('full',shard));
+ assert.deepEqual([...shards].sort(),expected);assert.equal(new Set(shards).size,expected.length);
+ const focused=integrationTestFiles('evidence',0);
+ for(const name of ['premerge-evidence','regional-research-gate','handoff-scope','merge-integration'])assert.ok(focused.includes(`test/${name}.test.mjs`));
+ assert.throws(()=>integrationTestFiles('evidence',1),/Invalid/);
 });

@@ -16,9 +16,9 @@ try {
   if (phase === 'prepare') {
     const state = await prepareIntegration(options);
     result = {...result, status: state.replayed ? 'already-merged' : 'testing',
-      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head};
+      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile};
     // Only validated hexadecimal IDs are exposed to the isolated candidate job.
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `candidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\n`);
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `candidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.profile === 'full' ? [0,1,2] : [0])}\n`);
   } else {
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
       testedBase: process.env.TESTED_BASE, testedCandidate: process.env.TESTED_CANDIDATE});

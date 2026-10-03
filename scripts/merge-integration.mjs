@@ -30,6 +30,19 @@ export function checkReviewedTrees(files, authored, integrated) {
       `Integration changes reviewed bytes at ${name}; update and obtain substantive review`);
   }
 }
+export function integrationProfile(branch, files, reservation) {
+  const names = files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]);
+  if (!names.length) return 'full';
+  if (branch.startsWith('geography/') && Array.isArray(reservation.owned_paths) &&
+      names.every(name => reservation.owned_paths.some(prefix => name.startsWith(prefix)))) return 'evidence';
+  const job = branch.split('/').slice(1).join('/');
+  if (branch.startsWith('research/') && names.every(name => name.startsWith(`research/${job}/`))) return 'evidence';
+  if (branch.startsWith('engineering/') && names.every(name =>
+      (name.startsWith('docs/') && /\.(md|txt)$/.test(name)) || name.startsWith(`coordination/engineering/${job}/`) ||
+      name === `coordination/engineering/${job}.json`)) return 'evidence';
+  return 'full';
+}
+
 async function tree(api, repo, commit) {
   const object = await api(`${root(repo)}/git/commits/${commit}`);
   const value = await api(`${root(repo)}/git/trees/${object.tree.sha}?recursive=1`);
@@ -76,7 +89,7 @@ export async function prepareIntegration(options) {
   ]);
   checkCandidateParents(integrated.object, state.base, state.pr.head.sha);
   checkReviewedTrees(state.files, authored.entries, integrated.entries);
-  return {...state, candidate};
+  return {...state, candidate, profile: integrationProfile(state.pr.head.ref, state.files, state.reservation)};
 }
 export async function completeIntegration(options) {
   need(options.integrationResult === 'success' || options.integrationResult === 'skipped',

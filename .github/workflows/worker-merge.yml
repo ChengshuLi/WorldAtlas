@@ -13,10 +13,7 @@ on:
         type: string
         required: true
 permissions: {}
-# Hold the slot across preflight, isolated tests, and guarded final integration.
-concurrency:
-  group: worldatlas-main-integrate
-  cancel-in-progress: false
+# Candidate preparation and testing run independently across workers.
 jobs:
   prepare:
     if: github.ref == 'refs/heads/main'
@@ -31,6 +28,8 @@ jobs:
     outputs:
       candidate: ${{ steps.prepare.outputs.candidate }}
       base: ${{ steps.prepare.outputs.base }}
+      profile: ${{ steps.prepare.outputs.profile }}
+      shards: ${{ steps.prepare.outputs.shards }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -60,6 +59,10 @@ jobs:
     if: needs.prepare.outputs.candidate != ''
     runs-on: ubuntu-latest
     timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.prepare.outputs.shards) }}
     permissions:
       contents: read
     steps:
@@ -77,15 +80,23 @@ jobs:
           python-version: '3.12'
       - run: npm ci --no-audit --no-fund
       - run: python -m pip install -r requirements.txt
-      - name: Test the exact combined tree without publishing or live imports
-        run: |
-          npm test
-          npm run build:hosted
+        if: needs.prepare.outputs.profile == 'full'
+      - name: Test applicable combined-tree invariants without publishing or live imports
+        env:
+          INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
+          INTEGRATION_SHARD: ${{ matrix.shard }}
+        run: node scripts/run-integration-tests.mjs
+      - name: Check the combined application package once for runtime changes
+        if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0
+        run: npm run build:hosted
   merge:
     needs: [prepare, integration]
     if: always() && needs.prepare.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: worldatlas-main-integrate
+      cancel-in-progress: false
     permissions:
       contents: write
       pull-requests: write
