@@ -15,6 +15,7 @@ assert len(crosswalk["districts"]) == 15
 assert sum(row["geoboundaries_shape_id"] is not None for row in crosswalk["districts"]) == 14
 assert len({row["geoboundaries_shape_id"] for row in crosswalk["districts"] if row["geoboundaries_shape_id"]}) == 14
 assert crosswalk["districts"][-1]["official_popgis_name"] == "Location"
+assert all("census_population_2021" in row for row in crosswalk["districts"])
 
 geo_path = PRIOR / "sources/geoBoundaries-NRU-ADM1.geojson"
 geo_doc = json.loads(geo_path.read_text())
@@ -34,7 +35,16 @@ current = shape(baseline["locations"]["atlas:territory:NRU"]["geometry"])
 district_union = unary_union([shape(f["geometry"]) for f in geo_doc["features"]])
 project = Transformer.from_crs("EPSG:4326", "EPSG:6933", always_xy=True).transform
 area = lambda g: transform(project, g).area / 1e6
+per_district = []
+for row in crosswalk["districts"][:14]:
+    feature = shape(feature_map[row["geoboundaries_shape_id"]]["geometry"])
+    fraction = area(feature.intersection(current)) / area(feature)
+    outside = area(feature.difference(current))
+    assert abs(fraction - row["overlap_with_current_territory_fraction"]) < 1e-8
+    assert abs(outside - row["outside_current_territory_area_km2_equal_area"]) < 0.00001
+    per_district.append({"district": row["official_popgis_name"], "current_overlap_fraction": round(fraction, 8), "outside_current_km2": round(outside, 6), "census_population_2021": row["census_population_2021"]})
 result = {
+    "per_district_crosswalk": per_district,
     "district_features": len(geo_doc["features"]),
     "current_atlas_km2_equal_area": round(area(current), 6),
     "secondary_district_union_km2_equal_area": round(area(district_union), 6),
