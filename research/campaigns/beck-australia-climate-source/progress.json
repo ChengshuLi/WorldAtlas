@@ -7,14 +7,30 @@
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/66",
   "date_timezone": "UTC",
   "scope": {
-    "geographies": ["Australian portion of the existing global Beck et al. climate product; no territorial boundary design or location mapping"],
-    "attributes": ["climate source and date-semantics evaluation only"],
-    "supported_normal_periods": ["1901-1930", "1931-1960", "1961-1990", "1991-2020"],
-    "future_projection_periods": ["2041-2070", "2071-2099; SSP scenario products"],
+    "geographies": [
+      "Australian portion of the existing global Beck et al. climate product; no territorial boundary design or location mapping"
+    ],
+    "attributes": [
+      "climate source and date-semantics evaluation only"
+    ],
+    "supported_normal_periods": [
+      "1901-1930",
+      "1931-1960",
+      "1961-1990",
+      "1991-2020"
+    ],
+    "future_projection_periods": [
+      "2041-2070",
+      "2071-2099; SSP scenario products"
+    ],
     "unsupported_gap": "No 2025 output or 2021-2040 map; do not interpolate or extend the 1991-2020 normal.",
-    "sources": ["Beck et al. 2023 Scientific Data article", "Figshare 10.6084/m9.figshare.21789074.v2 GeoTIFF archive", "existing WorldAtlas source inventory and pinned source receipt"]
+    "sources": [
+      "Beck et al. 2023 Scientific Data article",
+      "Figshare 10.6084/m9.figshare.21789074.v2 GeoTIFF archive",
+      "existing WorldAtlas source inventory and pinned source receipt"
+    ]
   },
-  "updated_at_utc": "2026-10-03T09:17:45+00:00",
+  "updated_at_utc": "2026-10-03T09:18:56.155+00:00",
   "geographic_release": null,
   "input_paths": [
     "data/source-inventory.json",
@@ -35,8 +51,8 @@
     "The associated correction details referenced by Figshare version 2 were not recovered; the archive bytes nevertheless match the pre-existing pinned SHA-256 exactly."
   ],
   "blockers": [],
-  "next_action": "Submit one source-only PR for issue #66, pass the scope check, follow the exact PR head through the serialized merge queue, verify integration, release the claim, and continue with the next ready history issue.",
-  "pull_request": null,
+  "next_action": "Wait for the exact PR-head scope check; fetch/rebase fresh main and revalidate if it advances; request the serialized queue for the exact passed head; verify accepted merge and fresh-main integration; release issue #66 claim; continue with the next ready issue.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/561",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
