@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import './style.css';
 import { levels, attributes, parseYear, formatYear, yearToTick, tickToYear, categoryColor, populationColor } from './model.js';
 import {presentedAttribute} from './reference-context.js';
+import {categoryPresentationKey} from './category-presentation.js';
 import { loadGeography, loadSnapshot, ensureGeometry } from './data-client.js';
 import { pointInGeometry } from './geometry.js';
 import { PixelLayer } from './pixel-layer.js';
@@ -66,13 +67,14 @@ const trail = feature => {
 };
 function state(feature) {return states.get(feature.id)||{};}
 function value(feature) { return levels.includes(mode) ? trail(feature).find(u=>u.level===mode)?.id : presentedAttribute(state(feature),mode).value; }
-function color(feature) {return mode==='population'?populationColor(value(feature),maxPopulation):categoryColor(presentedAttribute(state(feature),mode).category_id??value(feature));}
+function categoryKey(feature) {return categoryPresentationKey(mode,presentedAttribute(state(feature),mode),value(feature));}
+function color(feature) {return mode==='population'?populationColor(value(feature),maxPopulation):categoryColor(categoryKey(feature));}
 function style(feature) { return { fillColor:color(feature), fillOpacity:mode==='owner'&&polities.length?0.12:0.87, color:feature.id===selected?'#fff9db':'#344f45', weight:feature.id===selected?2.5:0.45 }; }
 function renderLegend() {
   $('#legend-title').textContent = labels[mode].toUpperCase();
   const categories = new Map(); let unknown = 0;
   let referenceContexts=0;
-  for (const feature of data.features) { const v = value(feature),shown=presentedAttribute(state(feature),mode),key=shown.category_id??v; if (v == null) unknown++; else categories.set(key, levels.includes(mode) ? unitName(trail(feature).find(u=>u.id===v)) : v);if(v!=null&&shown.reference_context)referenceContexts++; }
+  for (const feature of data.features) { const v = value(feature),shown=presentedAttribute(state(feature),mode),key=categoryKey(feature); if (v == null) unknown++; else categories.set(key, levels.includes(mode) ? unitName(trail(feature).find(u=>u.id===v)) : v);if(v!=null&&shown.reference_context)referenceContexts++; }
   if(mode==='owner' && polities.length){categories.clear();polities.forEach(f=>categories.set(f.properties.name,f.properties.name));unknown=0;}
   $('#legend-count').textContent = mode==='population' ? 'LOG SCALE' : `${categories.size.toLocaleString()} ${levels.includes(mode)?'UNITS':'GROUPS'}`;
   if (mode==='population') $('#legend-items').innerHTML = `<div class="gradient"></div><div class="scale"><span>0</span><span>${maxPopulation.toLocaleString()}</span></div>`;

@@ -11,13 +11,34 @@
     "Verify GPU/canvas fill/legend consistency, unknowns, reload/year stability, no ownership recompilation, actual private publication and rollback; maximum two focused PRs"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-03T17:20:59.756798+00:00",
+  "updated_at_utc": "2026-10-03T17:41:46.150752+00:00",
   "completed": [
     "Confirmed actual current reproduction: PRC and ROC selected profiles both resolve owner:Q148, with distinct source names. Both share rgb(49,60,196), and one legend entry replaces the other.",
     "Actual production four-year sequence and two profile screenshots completed with zero navigation ownership compilation/upload and no page errors.",
-    "Read-only complete source-name audit: 1338 owner-ID/name combinations, 111 IDs with multiple retained names; source hash verified before each part read. Q148 has both actual named groups; range envelopes are not overlap certificates."
+    "Read-only complete source-name audit: 1338 owner-ID/name combinations, 111 IDs with multiple retained names; source hash verified before each part read. Q148 has both actual named groups; range envelopes are not overlap certificates.",
+    "Pinned all-time source intervals and modern reference graph: 1479 display categories, 5614 constraints, zero below-budget normal/protanopia/deuteranopia/tritanopia pairs.",
+    "Presentation-only composite keys and stable generated political colors wired consistently into map/legend; original identities, facts, geometry and population semantics unchanged.",
+    "Actual local GPU and Canvas checks: two PRC/ROC profiles each, four-year sequence, all 14 modes, exact palette/legend/pixel evidence, reload stability, zero navigation ownership deltas and no page errors.",
+    "Three-date assessment retained for shared nonpolitical modes: below-budget environmental/hierarchy pairs remain explicit limitations; absent sparse culture/religion/rank evidence is not a pass certificate."
   ],
-  "checks": [],
+  "checks": [
+    {
+      "command": "npm run build:static",
+      "result": "passed; 49625 locations"
+    },
+    {
+      "command": "npm run test:static",
+      "result": "passed; whole-location historical fill, all modes/continents, mobile layout, GPU and Canvas"
+    },
+    {
+      "command": "node scripts/verify-category-browser.mjs data/engineering/palette-contrast-20261003-7e91/local-browser.json",
+      "result": "passed; exact actual RGB, legend, year/reload stability, zero ownership delta"
+    },
+    {
+      "command": "npm test",
+      "result": "running; no final result yet"
+    }
+  ],
   "deployment": null,
   "maintenance": {
     "required": false,
@@ -29,10 +50,13 @@
     "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before.json.gz",
     "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before-beijing.png",
     "data/engineering/palette-contrast-20261003-7e91/worldatlas-palette-before-taipei.png",
-    "data/engineering/palette-contrast-20261003-7e91/source-owner-names.json"
+    "data/engineering/palette-contrast-20261003-7e91/source-owner-names.json",
+    "data/engineering/palette-contrast-20261003-7e91/local-browser.json",
+    "data/engineering/palette-contrast-20261003-7e91/contrast-all-times-modern-audit.json",
+    "data/engineering/palette-contrast-20261003-7e91/shared-mode-assessment.json"
   ],
   "blockers": [],
-  "next_action": "Audit source owner ID/name combinations and exact raster adjacency across dates; implement general display-category distinction and stable perceptual contrast, preserving all source identity records.",
+  "next_action": "Finish exact source/raster checks and unit suite, retain receipts, push coherent first PR Refs #23 through exact-head CI and serialized squash queue. Actual production publication and acceptance remain pending; no fourth PR on issue 22.",
   "pull_request": null,
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
