@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "campaign_id": "smithsonian-benin-media-20261003-1e2b2c5a1345",
+  "github_issue": 69,
+  "retrieved_date_utc": "2026-10-03",
+  "hash_algorithm": "SHA-256",
+  "retention": "HTML response bytes were inspected and hashed locally but are not redistributed here. Restore by fetching the canonical URLs. Image bytes were not downloaded.",
+  "records": [
+    {
+      "accession": "nmafa_2005-6-2",
+      "title": "Crest mask",
+      "url": "https://www.si.edu/object/crest-mask:nmafa_2005-6-2",
+      "response_status": 200,
+      "response_bytes": 81979,
+      "response_sha256": "ad2370f5df2d5e923728b0e7eba5d02766cc367e2a9651426a1b92af20e8d3bf",
+      "image_ids": ["NMAfA-D20060010-000005", "NMAfA-D20060011-000005", "NMAfA-D20060012-000005"],
+      "image_rights": "Usage conditions apply; not verified CC0"
+    },
+    {
+      "accession": "nmafa_2002-19-3",
+      "title": "Ceremonial sword",
+      "url": "https://www.si.edu/object/ceremonial-sword:nmafa_2002-19-3",
+      "response_status": 200,
+      "response_bytes": 68221,
+      "response_sha256": "b0713a6c73037fc727a5382cd88a6b12afd42981c7e8146726667d3961e07581",
+      "image_ids": ["NMAfA-S20080048-000001"],
+      "image_rights": "Usage conditions apply; not verified CC0"
+    },
+    {
+      "accession": "nmafa_2002-19-2",
+      "title": "Ceremonial sword",
+      "url": "https://www.si.edu/object/ceremonial-sword:nmafa_2002-19-2",
+      "response_status": 200,
+      "response_bytes": 67660,
+      "response_sha256": "3368da6aa8a34d9ded7faaa5344c7df0736de7ec86a287aa0af7fd077279948f",
+      "image_ids": ["NMAfA-R20021239"],
+      "image_rights": "Usage conditions apply; not verified CC0"
+    },
+    {
+      "accession": "nmafa_85-19-5",
+      "title": "Pendant",
+      "url": "https://www.si.edu/object/pendant:nmafa_85-19-5",
+      "response_status": 200,
+      "response_bytes": 77546,
+      "response_sha256": "04017f7153cbef053559cf33d481ee3949fd5b418125cb225a4d4d6fa6bfedf5",
+      "image_ids": ["NMAfA-D20030051", "NMAfA-S20130125"],
+      "image_rights": "Usage conditions apply; not verified CC0"
+    },
+    {
+      "accession": "nmafa_2005-6-36",
+      "title": "Salt cellar",
+      "url": "https://www.si.edu/object/salt-cellar:nmafa_2005-6-36",
+      "response_status": 200,
+      "response_bytes": 84542,
+      "response_sha256": "b6d99d3d9a14498a2fc1e77852e720b103dbf26a677e0b79b512aadfca6ebf85",
+      "image_ids": ["NMAfA-D20060285-000002", "NMAfA-D20060286-000002", "NMAfA-D20060287-000002"],
+      "image_rights": "Usage conditions apply; not verified CC0"
+    }
+  ],
+  "policy_sources": [
+    {
+      "url": "https://www.si.edu/openaccess",
+      "response_status": 200,
+      "response_bytes": 120266,
+      "response_sha256": "d75c90a24dd9badd8af63de3185a4c8e43f1d252146f3bf63037b77c40d69fa7"
+    },
+    {
+      "url": "https://www.si.edu/openaccess/faq/",
+      "response_status": 200,
+      "response_bytes": 85749,
+      "response_sha256": "a7429bff4abef24587d4ffc093117255bcb733efd5135edb99221539e9c2f02d"
+    },
+    {
+      "url": "https://www.si.edu/termsofuse",
+      "response_status": 200,
+      "response_bytes": 65458,
+      "response_sha256": "ba5d511f5b6738e81ed342126ffe2e5132cbe9f6bce0d1983ffd329ac0c7b538"
+    },
+    {
+      "url": "https://edan.si.edu/openaccess/apidocs/",
+      "response_status": 200,
+      "response_bytes": 44522,
+      "response_sha256": "ffe0fe2e2ac46f1efecee67594d013bd75336e39a40e52d7ffdfb40c3143a2d1"
+    }
+  ],
+  "search_method": {
+    "queries": ["Benin court", "Benin plaque", "Benin bronze"],
+    "collection_unit": "National Museum of African Art",
+    "cc0_filtered_search_url": "https://www.si.edu/search/images?edan_fq%5B0%5D=data_source%3A%22National%20Museum%20of%20African%20Art%22&edan_fq%5B1%5D=media_usage%3ACC0&edan_q=Benin",
+    "result": "The five selected direct object pages each state Usage conditions apply. No selected object image is recorded as CC0."
+  }
+}
