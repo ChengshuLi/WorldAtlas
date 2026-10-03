@@ -1,0 +1,112 @@
+{
+  "issue": 491,
+  "sources": [
+    {
+      "id": "geoboundaries-col-adm2-2020",
+      "title": "geoBoundaries gbOpen Colombia ADM2",
+      "producer_declared_by_source_metadata": "Departamento Administrativo Nacional de Estadística (DANE), Colombia",
+      "admin_vintage": "2020",
+      "source_update_date": "2023-01-19",
+      "build_date": "2023-12-12",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM2/geoBoundaries-COL-ADM2.geojson",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM2/geoBoundaries-COL-ADM2-metaData.json",
+      "official_source_portal": "https://geoportal.dane.gov.co/",
+      "license": "Creative Commons Attribution 4.0 International (CC BY 4.0), declared in pinned geoBoundaries metadata",
+      "attribution": "geoBoundaries, citing DANE as underlying source",
+      "canonical_role": "geoBoundaries declares ADM2 and the pinned hierarchy designates these 190 as municipalities. Exact shape ID and label are crosschecked. The pinned metadata canonicalRole is blank; no DANE MGN 2024 feature rows or row-level license were obtained, so present official role and current validity are not fully verified.",
+      "feature_count": 1122,
+      "metadata_bytes": 974,
+      "metadata_sha256": "89c779be4b254a019a46f4c37d7ae24dcf41ff48b6d805d8cc9aceadef8165ff",
+      "retained_data": {
+        "path": "../regional-review-b2e551685bf2e064/sources/geoboundaries-COL-ADM2-2020.geojson.gz",
+        "compressed_bytes": 74845471,
+        "compressed_sha256": "586b057e43ca97d608148d5f3b3067a25bb468a94a7cac6d3c1c2ffb8eb20e3d",
+        "uncompressed_bytes": 210605856,
+        "uncompressed_sha256": "fe715854fc3383d2fd39e8692f3df0c60bd12208cb2cd36ef1ec2220ea8972fe"
+      },
+      "restoration": "Download exact pinned media URL, verify raw SHA-256 and gzip deterministically. The prior merged issue #492 packet stores these same lawful bytes and metadata at the retained path; this packet references rather than duplicates 74.8 MB."
+    },
+    {
+      "id": "dane-divipola-mgn-2024-service-item",
+      "title": "DIVIPOLA MGN 2024",
+      "publisher": "DANE, Colombia; ArcGIS item access information names DANE",
+      "item_url": "https://www.arcgis.com/home/item.html?id=d39c73ca6ece41e3a27f2ab946e600b4",
+      "service_url": "https://portalgis.dane.gov.co/mparcgis/rest/services/Divipola/Serv_DIVIPOLA_MGN_2024/FeatureServer",
+      "vintage": "2024",
+      "license": "Not stated in retained item metadata; no service rows redistributed",
+      "retained_metadata_path": "../regional-review-b2e551685bf2e064/sources/dane-divipola-mgn-2024-item-metadata.json",
+      "metadata_bytes": 1489,
+      "metadata_sha256": "10ce3e608e49059b420a87e56bf0f7d8bd224aa4997f15ee1712d7367fe892e4",
+      "access_status": "Item metadata retrieved; service query returned network-edge HTML instead of REST layer metadata or feature rows in issue #492 research.",
+      "restore": "Obtain exact layer metadata, all seven department rows and assigned municipality rows, row counts, dates, attribution and reuse license; reconcile 190/190 exact IDs and all current labels/parent links."
+    },
+    {
+      "id": "dane-centros-poblados-divipola-2013i-service-item",
+      "title": "Centros Poblados Divipola 2013I",
+      "publisher": "DANE; ArcGIS item access information names DANE",
+      "item_url": "https://www.arcgis.com/home/item.html?id=cfee697b589343b7ad69bd0a702622c9",
+      "service_url": "https://portalgis.dane.gov.co/mparcgis/rest/services/Divipola/Serv_PuntosCentrosPoblados2013I/MapServer",
+      "vintage": "2013I",
+      "license": "Not stated in retained item metadata; no point rows redistributed",
+      "retained_metadata_path": "../regional-review-b2e551685bf2e064/sources/dane-centros-poblados-2013-item-metadata.json",
+      "metadata_bytes": 1308,
+      "metadata_sha256": "54d87a47d370212fd4203d0e7b7f4f93d01b699467a217bb7708c2252b02ea07",
+      "access_status": "Official item metadata confirms an older settlement-point service; features and licensing not obtained. 2013I cannot establish present completeness.",
+      "restore": "Obtain layers, complete point rows, vintage, attribution/license and document point-in-polygon method, duplicates, multi-class settlements and named outliers for exactly the assigned 190 units."
+    },
+    {
+      "id": "gshhg-2.3.7-global-physical-land-reference",
+      "title": "Global Self-consistent Hierarchical High-resolution Geography, full-resolution binary release 2.3.7",
+      "publisher": "Wessel and Smith; University of Hawaiʻi SOEST mirror",
+      "release_date": "2017-06-15",
+      "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+      "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+      "member": "gshhs_f.b",
+      "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+      "license": "LGPLv3 or later; license text retained in #492 packet source root",
+      "assigned_review": "Not screened for this issue's 190 IDs. The #492 packet screen applies only to its own 194 IDs and is not extrapolated.",
+      "restore": "Restore the exact archive/member, verify hashes, then run point and component/coastline screens for the complete 190-ID set. These physical-land screens cannot prove administrative boundaries or settlement completeness.",
+      "archive_bytes": 118617033,
+      "member_bytes": 95809336,
+      "retained_selected_records": {
+        "path": "sources/gshhg-colombia-land-candidates.bin.gz",
+        "records": 30,
+        "uncompressed_bytes": 2721616,
+        "uncompressed_sha256": "bcc737fcc80322b50a69a6f58e5302db7c5686dee5ddb2ccb950e8f20b5cc402",
+        "compressed_bytes": 1764872,
+        "compressed_sha256": "f75a44b00939519bc4822a4343023aafd9a81c606c7f46cc2c4cd1a9cf073580"
+      },
+      "license_text": {
+        "path": "../../macro-improvements/macro-coverage-oceania/gshhg-LGPL.txt",
+        "bytes": 7816,
+        "sha256": "ea7d049c7705dc13afc202dd18e1827f3484f8212fd3fa7b82fc4a0c363432c9"
+      },
+      "method": "Screen all 188,612 GSHHG records; among 179,832 level-1 land records retain exact bytes for the 30 records whose centroids fall within an assigned current polygon or whose rings contain an assigned source representative point."
+    }
+  ],
+  "scope_inventory": {
+    "assigned": 190,
+    "area": "Colombia",
+    "full_area_members": 1122,
+    "share": "190/1122",
+    "province_cohorts": [
+      "Cauca",
+      "Putumayo",
+      "Valle del Cauca",
+      "Risaralda",
+      "Córdoba",
+      "Quindío",
+      "Huila"
+    ],
+    "source_id_match_count": 190,
+    "exact_source_name_match_count": 190,
+    "current_display_name_duplicate_join": "Names are not used as join keys; each decision is tied to exact original source ID and full parent chain."
+  },
+  "legal_retention": "Only source bytes already retained under CC BY 4.0 in merged #492 packet are referenced; official DANE service feature bytes are not redistributed because the service/license could not be verified.",
+  "limitations": [
+    "No current official row-level role/label/parent reconciliation because DANE MGN 2024 service rows and licensing were unavailable.",
+    "No complete authoritative current settlement inventory was compared.",
+    "No full island/disconnected territory, hydrography, coastline or administrative remainder register was reconciled.",
+    "Exact-edge graph differences indicate review leads only and miss shared-border vertex segmentation differences."
+  ]
+}
