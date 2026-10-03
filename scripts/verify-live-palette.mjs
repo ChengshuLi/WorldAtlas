@@ -7,6 +7,7 @@ import {createHash} from 'node:crypto';
 import {chromium} from '@playwright/test';
 import {runtimeOwnershipData} from '../src/runtime-ownership.js';
 import {decodeDerived} from '../src/derived-records.js';
+import {spawn} from 'node:child_process';
 
 const [site, output, phase = 'before'] = process.argv.slice(2), origin = new URL(site ?? '');
 if (origin.origin !== 'https://worldatlas-explorer.chengshu-li-2013.chatgpt.site' || origin.pathname !== '/' || origin.search || origin.hash || !output || !process.stdin.isTTY) throw Error('Use the production origin and receipt path with hidden credential stdin');
@@ -75,6 +76,16 @@ try {
     await page.locator('#close-details').click(); save();
   }
   const after = await canvas(); assert.equal(after.compilations, before.compilations); assert.equal(after.ownershipUploads, before.ownershipUploads); assert.deepEqual(receipt.page_errors, []);
+  if(phase==='after'){
+    // The child browser receives only the loopback URL. The private header stays
+    // in this fixed-origin GET-only parent proxy, never in browser or child input.
+    await browser.close();browser=null;
+    const detailed=output.replace(/\.json$/,'-renderers.json');
+    if(!detailed.startsWith('data/engineering/'))throw Error('After verification requires an owned engineering receipt path');
+    const child=spawn(process.execPath,['scripts/verify-category-browser.mjs',detailed,'http://127.0.0.1:'+server.address().port],{stdio:['ignore','inherit','inherit']});
+    const code=await new Promise(resolve=>child.once('exit',resolve));assert.equal(code,0,'Actual private GPU/Canvas verification must pass');
+    receipt.detailed_renderer_receipt=detailed;
+  }
   receipt.completed = true; receipt.completed_at_utc = new Date().toISOString(); save();
   console.log(JSON.stringify({completed: true, years: receipt.years.length, profiles: receipt.selected_profiles.length, navigation_ownership_delta: 0, output}));
 } catch (error) {

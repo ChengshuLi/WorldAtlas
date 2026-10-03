@@ -8,19 +8,22 @@ import {displayCategoryKey,cssRGB} from '../src/color-perception.js';
 
 const output=process.argv[2];
 if(!output||!output.startsWith('data/engineering/'))throw Error('Owned engineering receipt path required');
-const receipt={version:1,started_at_utc:new Date().toISOString(),conditions:'Local committed static build, actual prepared data; Linux headless Chromium, not physical-device or color-vision certification',page_errors:[],renderers:[]};
-const server=spawn('python3',['-u','-m','http.server','3203','--bind','127.0.0.1','--directory','dist'],{stdio:['ignore','pipe','pipe']});
+const supplied=process.argv[3],origin=new URL(supplied??'http://127.0.0.1:3203');
+if(origin.protocol!=='http:'||origin.hostname!=='127.0.0.1'||origin.pathname!=='/'||origin.search||origin.hash||origin.username||origin.password)throw Error('Use only a local static server or fixed-origin private verification proxy');
+if(!supplied&&fs.existsSync('dist/client/index.html'))throw Error('A hosted build needs its local Worker or private verification proxy; use the static build for standalone checks');
+const receipt={version:1,started_at_utc:new Date().toISOString(),conditions:(supplied?'Actual deployed client/API through provided local private verification proxy':'Local committed static build, actual prepared data')+'; Linux headless Chromium, not physical-device or color-vision certification',page_errors:[],renderers:[]};
+const server=supplied?null:spawn('python3',['-u','-m','http.server','3203','--bind','127.0.0.1','--directory','dist'],{stdio:['ignore','pipe','pipe']});
 let browser;
 const save=()=>{fs.mkdirSync(path.dirname(output),{recursive:true});fs.writeFileSync(output,JSON.stringify(receipt,null,2)+'\n');};
 try{
-  await new Promise((resolve,reject)=>{server.stdout.on('data',d=>{if(String(d).includes('Serving HTTP'))resolve();});server.once('exit',()=>reject(Error('Static server unavailable')));});
+  if(server)await new Promise((resolve,reject)=>{server.stdout.on('data',d=>{if(String(d).includes('Serving HTTP'))resolve();});server.once('exit',()=>reject(Error('Static server unavailable')));});
   browser=await chromium.launch();receipt.browser_version=browser.version();
   for(const renderer of ['webgl2','canvas']){
     const page=await browser.newPage({viewport:{width:1440,height:1080}});
     page.on('pageerror',e=>receipt.page_errors.push(e.message));
     if(renderer==='canvas')await page.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,...args){return type==='webgl2'?null:original.call(this,type,...args);};});
     const ready=async()=>{await page.locator('#loading').waitFor({state:'hidden',timeout:180000});await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:180000});await page.waitForTimeout(100);};
-    await page.goto('http://127.0.0.1:3203');await ready();
+    await page.goto(origin.href);await ready();
     const canvas=()=>page.locator('.atlas-pixel-canvas').evaluate(c=>({...c.dataset}));
     const initial=await canvas(),run={renderer,initial,samples:[],modes:[],profiles:[]};receipt.renderers.push(run);
     const legend=()=>page.locator('#legend-items .legend-item').evaluateAll(rows=>rows.map(r=>({name:r.querySelector('span')?.textContent??r.textContent.trim(),rgb:r.querySelector('i')?getComputedStyle(r.querySelector('i')).backgroundColor:null})));
@@ -64,7 +67,9 @@ try{
     for(const mode of ['population','culture','religion','rank','topography','vegetation','climate','location','province','area','region','subcontinent','continent']){
       await page.locator(`[data-mode="${mode}"]`).click();await page.waitForTimeout(150);
       assert.equal(await page.locator(`[data-mode="${mode}"]`).getAttribute('aria-pressed'),'true');
-      run.modes.push({mode,legend:await legend(),canvas:await canvas()});
+      const rows=await legend();
+      for(const row of rows.filter(row=>row.name.startsWith('Unknown')&&row.rgb))assert.equal(row.rgb,'rgb(83, 97, 92)');
+      run.modes.push({mode,legend:rows,canvas:await canvas()});
     }
     await page.locator('[data-mode="owner"]').click();
     const final=await canvas();assert.equal(final.compilations,initial.compilations);
@@ -77,4 +82,4 @@ try{
   }
   assert.deepEqual(receipt.page_errors,[]);receipt.completed=true;receipt.completed_at_utc=new Date().toISOString();save();console.log(JSON.stringify({completed:true,renderers:receipt.renderers.length,output}));
 }catch(e){receipt.completed=false;receipt.failure=e.message;save();throw e;}
-finally{await browser?.close();server.kill('SIGTERM');}
+finally{await browser?.close();server?.kill('SIGTERM');}

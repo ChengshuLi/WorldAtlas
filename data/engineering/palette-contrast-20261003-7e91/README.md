@@ -48,3 +48,11 @@ the serialized queue, then rotate the confirmed reservation onto a fresh branch
 for actual sole-publisher deployment and acceptance receipts within the two-PR
 budget. Do not close issue 23 before production verification. Preserve all other
 workers' research and original data. Resume serially, never with a competing writer.
+
+The later `invalid-hosted-static-invocation.json` is a retained setup failure, not
+a product regression or passing receipt. A standalone static check was mistakenly
+pointed at the hosted build without its API, then stopped. The runner now rejects
+that setup before starting a browser. The private after-deployment runner uses a
+fixed-origin parent proxy and passes only its loopback URL to renderer checks.
+`unknown-fill-contrast.json` separately confirms all 1,479 prepared colors pass
+the modeled budgets against the unchanged unknown gray.

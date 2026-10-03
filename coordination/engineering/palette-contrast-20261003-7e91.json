@@ -11,7 +11,7 @@
     "Verify GPU/canvas fill/legend consistency, unknowns, reload/year stability, no ownership recompilation, actual private publication and rollback; maximum two focused PRs"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-03T17:45:09.842124+00:00",
+  "updated_at_utc": "2026-10-03T17:47:32.849664+00:00",
   "completed": [
     "Confirmed actual current reproduction: PRC and ROC selected profiles both resolve owner:Q148, with distinct source names. Both share rgb(49,60,196), and one legend entry replaces the other.",
     "Actual production four-year sequence and two profile screenshots completed with zero navigation ownership compilation/upload and no page errors.",
@@ -57,6 +57,14 @@
     {
       "command": "node scripts/validate-structure.mjs publication",
       "result": "running; required before deployment"
+    },
+    {
+      "command": "all registered category colors versus unknown gray",
+      "result": "1479 comparisons pass all four modeled budgets"
+    },
+    {
+      "command": "hosted standalone browser guard",
+      "result": "invalid test setup retained and stopped; guard rejects hosted build lacking API before browser startup"
     }
   ],
   "deployment": null,
