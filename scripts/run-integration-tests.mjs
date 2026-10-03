@@ -13,6 +13,9 @@ export function integrationTestFiles(profile, shard) {
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
 }
+export function integrationNeedsBrowser(profile, shard) {
+  return integrationTestFiles(profile, shard).some(name => /['"](?:@playwright\/test|playwright)['"]/.test(fs.readFileSync(name, 'utf8')));
+}
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
   const files = integrationTestFiles(profile, shard);

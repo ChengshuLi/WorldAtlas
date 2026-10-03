@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {integrationTestFiles} from '../scripts/run-integration-tests.mjs';
+import {integrationTestFiles, integrationNeedsBrowser} from '../scripts/run-integration-tests.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile} from '../scripts/merge-integration.mjs';
 
@@ -114,4 +114,6 @@ test('parallel full-regression shards cover each unit file once and focused prof
  const focused=integrationTestFiles('evidence',0);
  for(const name of ['premerge-evidence','regional-research-gate','handoff-scope','merge-integration'])assert.ok(focused.includes(`test/${name}.test.mjs`));
  assert.throws(()=>integrationTestFiles('evidence',1),/Invalid/);
+ assert.equal(integrationNeedsBrowser('evidence',0),false);
+ assert.equal([0,1,2].filter(shard=>integrationNeedsBrowser('full',shard)).length,1);
 });

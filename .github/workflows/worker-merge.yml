@@ -81,6 +81,14 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: python -m pip install -r requirements.txt
         if: needs.prepare.outputs.profile == 'full'
+      - name: Install browser dependencies only for tests that use Playwright
+        env:
+          INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
+          INTEGRATION_SHARD: ${{ matrix.shard }}
+        run: |
+          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then
+            npx playwright install --with-deps chromium
+          fi
       - name: Test applicable combined-tree invariants without publishing or live imports
         env:
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}

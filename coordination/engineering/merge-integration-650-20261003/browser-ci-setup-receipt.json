@@ -1,0 +1,20 @@
+{
+  "recorded_at": "2026-10-03T22:24:21.217905+00:00",
+  "scope": "Make actual full CI runnable without a leaked-server hang, with no reduced application regression.",
+  "findings": [
+    "CI setup did not install Playwright browser binaries required by the real WebGL unit test.",
+    "Browser launch occurred before try/finally, leaving Vite server open on launch failure."
+  ],
+  "corrections": [
+    "Detect selected shard tests importing Playwright; install Chromium and OS dependencies only for those shards. Focused evidence jobs never install a browser.",
+    "Move listen/launch inside cleanup scope; close server even if browser startup or shutdown fails."
+  ],
+  "validation": {
+    "focused_passed": 84,
+    "focused_failed": 0,
+    "missing_browser_negative": "Actual missing-browser test fails as expected and process exits normally, with no leaked server hang. Original failure output retained; not labeled passing browser validation."
+  },
+  "limits": [
+    "Hosted final positive WebGL/full-regression checks required. Earlier passing source shards are not reused for this new head."
+  ]
+}

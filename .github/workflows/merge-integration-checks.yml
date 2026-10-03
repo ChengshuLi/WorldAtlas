@@ -32,6 +32,14 @@ jobs:
           python-version: '3.12'
       - run: npm ci --no-audit --no-fund
       - run: python -m pip install -r requirements.txt
+      - name: Install browser dependencies only for tests that use Playwright
+        env:
+          INTEGRATION_PROFILE: full
+          INTEGRATION_SHARD: ${{ matrix.shard }}
+        run: |
+          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then
+            npx playwright install --with-deps chromium
+          fi
       - name: Complete regression shard
         env:
           INTEGRATION_PROFILE: full
