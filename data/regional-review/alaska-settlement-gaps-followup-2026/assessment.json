@@ -1,0 +1,758 @@
+{
+  "issue": 603,
+  "assessment_date_utc": "2026-10-03",
+  "assigned_subject_count": 8,
+  "assessed_subject_count": 8,
+  "result_counts": {
+    "evidence": 0,
+    "justified_exception": 0,
+    "unresolved": 8
+  },
+  "source_limit": "DCRA is an additional named-point layer, not a comprehensive population/settlement inventory; inherited Census and GNIS screens also are not absence evidence.",
+  "subjects": [
+    {
+      "id": "atlas:physical:15fa62117dba20fdd7a3",
+      "name": "Yukon-Koyukuk · Beringia upland tundra",
+      "full_parent_chain": [
+        {
+          "id": "atlas:physical:15fa62117dba20fdd7a3",
+          "name": "Yukon-Koyukuk · Beringia upland tundra",
+          "parent_id": "framework:province:alaska:4057e2fddbc5"
+        },
+        {
+          "id": "framework:province:alaska:4057e2fddbc5",
+          "name": "Alaska",
+          "parent_id": "framework:area:pacific:31aced66907e"
+        },
+        {
+          "id": "framework:area:pacific:31aced66907e",
+          "name": "Pacific",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null
+        }
+      ],
+      "project_geometry_summary": {
+        "type": "Polygon",
+        "components": 1,
+        "rings": 1,
+        "interior_rings": 0,
+        "vertices": 14,
+        "area_km2_equal_area_screen": 671.444268,
+        "temporary_projected_geometry_repair": false,
+        "equal_area_crs": "EPSG:3338"
+      },
+      "administrative_identity": {
+        "2018_source": "geoBoundaries gbOpen USA ADM2; source-declared U.S. Census MAF/TIGER origin; Public Domain; boundary vintage 2018",
+        "source_shape_id": "52423323B20923510604078",
+        "source_name_2018": "Yukon-Koyukuk",
+        "source_type": "ADM2",
+        "match_kind": "2018 county predecessor represented by physical fragments",
+        "current_display_name": "Yukon-Koyukuk · Beringia upland tundra",
+        "census_2024_counterparts": [
+          {
+            "geoid": "02290",
+            "name": "Yukon-Koyukuk",
+            "namelsad": "Yukon-Koyukuk Census Area",
+            "classfp": "H5",
+            "aland_m2": 377540283397,
+            "awater_m2": 5462354664,
+            "source_intersection_pct": 99.970234
+          }
+        ]
+      },
+      "physical_source_identity": {
+        "eco_id": 410,
+        "eco_name": "Beringia upland tundra",
+        "biome": "Tundra",
+        "realm": "Nearctic",
+        "license": "CC-BY 4.0",
+        "source_role": "Natural ecological unit; does not define administrative county membership or political ownership."
+      },
+      "prior_settlement_screens": {
+        "census_places_2024_intersecting_count": 0,
+        "census_places_2024_intersections": [],
+        "usgs_gnis_populated_place_hit_count": 0,
+        "usgs_gnis_populated_place_hits": [],
+        "source_limit_interpretation": "Census Places supplies 2024 incorporated-place/CDP polygons. USGS GNIS adds federally maintained named Populated Place point records with Feature IDs. GNIS is a flat names database, not a hierarchy, current settlement census, or complete inventory. A no-hit in either screen does not prove no settlement; location edge and accuracy remain subject-specific."
+      },
+      "alaska_dcced_dcra_screen": {
+        "source": "DCCED DCRA Community Locations and Boundaries MapServer layer 0",
+        "response_intersection_count": 0,
+        "intersecting_records": [],
+        "method": "Exact planar point-in-polygon/intersection test in EPSG:4326 against current project scope polygons; source layer reports point features. Alaska-wide bounding-envelope response contained 487 features.",
+        "interpretation": "No DCRA point record intersected this project geometry in the captured response. The layer is not a complete settlement census; a zero hit does not establish absence. Community/Place-of-Interest categories have different and sometimes historical/seasonal meanings.",
+        "decision": "unresolved",
+        "gap": "No authoritative finer-scale local source with dated inhabited-status and geometry sufficient to establish settlement completeness has yet been identified for this fragment."
+      },
+      "administrative_remainder_implication": "This is a physical/ecological fragment of the 2018 Census county-equivalent predecessor identified in the parent chain. Census Areas are statistical geographies; this DCRA point-layer no-hit does not establish unassigned territory, municipality limits, population remainder, or a boundary correction. Do not change membership or parent from this screen.",
+      "political_and_historical_distinction": "The current reference owner and administrative predecessor do not establish political ownership of ecological features or historical settlement status. No historical claim is made.",
+      "decision": "unresolved",
+      "follow_up": "Research dated local-government, tribal/community, borough/Census Area, and federal settlement evidence with spatial coverage adequate to distinguish current, seasonal, former, and unincorporated places; retain unresolved if evidence remains insufficient."
+    },
+    {
+      "id": "atlas:physical:2e1dd8f380b0a4f65ad9",
+      "name": "Yukon-Koyukuk · Ogilvie-MacKenzie alpine tundra",
+      "full_parent_chain": [
+        {
+          "id": "atlas:physical:2e1dd8f380b0a4f65ad9",
+          "name": "Yukon-Koyukuk · Ogilvie-MacKenzie alpine tundra",
+          "parent_id": "framework:province:alaska:4057e2fddbc5"
+        },
+        {
+          "id": "framework:province:alaska:4057e2fddbc5",
+          "name": "Alaska",
+          "parent_id": "framework:area:pacific:31aced66907e"
+        },
+        {
+          "id": "framework:area:pacific:31aced66907e",
+          "name": "Pacific",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null
+        }
+      ],
+      "project_geometry_summary": {
+        "type": "Polygon",
+        "components": 1,
+        "rings": 1,
+        "interior_rings": 0,
+        "vertices": 66,
+        "area_km2_equal_area_screen": 6397.371903,
+        "temporary_projected_geometry_repair": false,
+        "equal_area_crs": "EPSG:3338"
+      },
+      "administrative_identity": {
+        "2018_source": "geoBoundaries gbOpen USA ADM2; source-declared U.S. Census MAF/TIGER origin; Public Domain; boundary vintage 2018",
+        "source_shape_id": "52423323B20923510604078",
+        "source_name_2018": "Yukon-Koyukuk",
+        "source_type": "ADM2",
+        "match_kind": "2018 county predecessor represented by physical fragments",
+        "current_display_name": "Yukon-Koyukuk · Ogilvie-MacKenzie alpine tundra",
+        "census_2024_counterparts": [
+          {
+            "geoid": "02290",
+            "name": "Yukon-Koyukuk",
+            "namelsad": "Yukon-Koyukuk Census Area",
+            "classfp": "H5",
+            "aland_m2": 377540283397,
+            "awater_m2": 5462354664,
+            "source_intersection_pct": 99.970234
+          }
+        ]
+      },
+      "physical_source_identity": {
+        "eco_id": 419,
+        "eco_name": "Ogilvie-MacKenzie alpine tundra",
+        "biome": "Tundra",
+        "realm": "Nearctic",
+        "license": "CC-BY 4.0",
+        "source_role": "Natural ecological unit; does not define administrative county membership or political ownership."
+      },
+      "prior_settlement_screens": {
+        "census_places_2024_intersecting_count": 0,
+        "census_places_2024_intersections": [],
+        "usgs_gnis_populated_place_hit_count": 0,
+        "usgs_gnis_populated_place_hits": [],
+        "source_limit_interpretation": "Census Places supplies 2024 incorporated-place/CDP polygons. USGS GNIS adds federally maintained named Populated Place point records with Feature IDs. GNIS is a flat names database, not a hierarchy, current settlement census, or complete inventory. A no-hit in either screen does not prove no settlement; location edge and accuracy remain subject-specific."
+      },
+      "alaska_dcced_dcra_screen": {
+        "source": "DCCED DCRA Community Locations and Boundaries MapServer layer 0",
+        "response_intersection_count": 0,
+        "intersecting_records": [],
+        "method": "Exact planar point-in-polygon/intersection test in EPSG:4326 against current project scope polygons; source layer reports point features. Alaska-wide bounding-envelope response contained 487 features.",
+        "interpretation": "No DCRA point record intersected this project geometry in the captured response. The layer is not a complete settlement census; a zero hit does not establish absence. Community/Place-of-Interest categories have different and sometimes historical/seasonal meanings.",
+        "decision": "unresolved",
+        "gap": "No authoritative finer-scale local source with dated inhabited-status and geometry sufficient to establish settlement completeness has yet been identified for this fragment."
+      },
+      "administrative_remainder_implication": "This is a physical/ecological fragment of the 2018 Census county-equivalent predecessor identified in the parent chain. Census Areas are statistical geographies; this DCRA point-layer no-hit does not establish unassigned territory, municipality limits, population remainder, or a boundary correction. Do not change membership or parent from this screen.",
+      "political_and_historical_distinction": "The current reference owner and administrative predecessor do not establish political ownership of ecological features or historical settlement status. No historical claim is made.",
+      "decision": "unresolved",
+      "follow_up": "Research dated local-government, tribal/community, borough/Census Area, and federal settlement evidence with spatial coverage adequate to distinguish current, seasonal, former, and unincorporated places; retain unresolved if evidence remains insufficient."
+    },
+    {
+      "id": "atlas:physical:3c48debb2430313aff99",
+      "name": "Yukon-Koyukuk · Beringia lowland tundra",
+      "full_parent_chain": [
+        {
+          "id": "atlas:physical:3c48debb2430313aff99",
+          "name": "Yukon-Koyukuk · Beringia lowland tundra",
+          "parent_id": "framework:province:alaska:4057e2fddbc5"
+        },
+        {
+          "id": "framework:province:alaska:4057e2fddbc5",
+          "name": "Alaska",
+          "parent_id": "framework:area:pacific:31aced66907e"
+        },
+        {
+          "id": "framework:area:pacific:31aced66907e",
+          "name": "Pacific",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null
+        }
+      ],
+      "project_geometry_summary": {
+        "type": "Polygon",
+        "components": 1,
+        "rings": 1,
+        "interior_rings": 0,
+        "vertices": 4,
+        "area_km2_equal_area_screen": 14.619962,
+        "temporary_projected_geometry_repair": false,
+        "equal_area_crs": "EPSG:3338"
+      },
+      "administrative_identity": {
+        "2018_source": "geoBoundaries gbOpen USA ADM2; source-declared U.S. Census MAF/TIGER origin; Public Domain; boundary vintage 2018",
+        "source_shape_id": "52423323B20923510604078",
+        "source_name_2018": "Yukon-Koyukuk",
+        "source_type": "ADM2",
+        "match_kind": "2018 county predecessor represented by physical fragments",
+        "current_display_name": "Yukon-Koyukuk · Beringia lowland tundra",
+        "census_2024_counterparts": [
+          {
+            "geoid": "02290",
+            "name": "Yukon-Koyukuk",
+            "namelsad": "Yukon-Koyukuk Census Area",
+            "classfp": "H5",
+            "aland_m2": 377540283397,
+            "awater_m2": 5462354664,
+            "source_intersection_pct": 99.970234
+          }
+        ]
+      },
+      "physical_source_identity": {
+        "eco_id": 409,
+        "eco_name": "Beringia lowland tundra",
+        "biome": "Tundra",
+        "realm": "Nearctic",
+        "license": "CC-BY 4.0",
+        "source_role": "Natural ecological unit; does not define administrative county membership or political ownership."
+      },
+      "prior_settlement_screens": {
+        "census_places_2024_intersecting_count": 0,
+        "census_places_2024_intersections": [],
+        "usgs_gnis_populated_place_hit_count": 0,
+        "usgs_gnis_populated_place_hits": [],
+        "source_limit_interpretation": "Census Places supplies 2024 incorporated-place/CDP polygons. USGS GNIS adds federally maintained named Populated Place point records with Feature IDs. GNIS is a flat names database, not a hierarchy, current settlement census, or complete inventory. A no-hit in either screen does not prove no settlement; location edge and accuracy remain subject-specific."
+      },
+      "alaska_dcced_dcra_screen": {
+        "source": "DCCED DCRA Community Locations and Boundaries MapServer layer 0",
+        "response_intersection_count": 0,
+        "intersecting_records": [],
+        "method": "Exact planar point-in-polygon/intersection test in EPSG:4326 against current project scope polygons; source layer reports point features. Alaska-wide bounding-envelope response contained 487 features.",
+        "interpretation": "No DCRA point record intersected this project geometry in the captured response. The layer is not a complete settlement census; a zero hit does not establish absence. Community/Place-of-Interest categories have different and sometimes historical/seasonal meanings.",
+        "decision": "unresolved",
+        "gap": "No authoritative finer-scale local source with dated inhabited-status and geometry sufficient to establish settlement completeness has yet been identified for this fragment."
+      },
+      "administrative_remainder_implication": "This is a physical/ecological fragment of the 2018 Census county-equivalent predecessor identified in the parent chain. Census Areas are statistical geographies; this DCRA point-layer no-hit does not establish unassigned territory, municipality limits, population remainder, or a boundary correction. Do not change membership or parent from this screen.",
+      "political_and_historical_distinction": "The current reference owner and administrative predecessor do not establish political ownership of ecological features or historical settlement status. No historical claim is made.",
+      "decision": "unresolved",
+      "follow_up": "Research dated local-government, tribal/community, borough/Census Area, and federal settlement evidence with spatial coverage adequate to distinguish current, seasonal, former, and unincorporated places; retain unresolved if evidence remains insufficient."
+    },
+    {
+      "id": "atlas:physical:674981b93623e9cbe385",
+      "name": "North Slope · Interior Alaska-Yukon lowland taiga",
+      "full_parent_chain": [
+        {
+          "id": "atlas:physical:674981b93623e9cbe385",
+          "name": "North Slope · Interior Alaska-Yukon lowland taiga",
+          "parent_id": "framework:province:alaska:4057e2fddbc5"
+        },
+        {
+          "id": "framework:province:alaska:4057e2fddbc5",
+          "name": "Alaska",
+          "parent_id": "framework:area:pacific:31aced66907e"
+        },
+        {
+          "id": "framework:area:pacific:31aced66907e",
+          "name": "Pacific",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null
+        }
+      ],
+      "project_geometry_summary": {
+        "type": "Polygon",
+        "components": 1,
+        "rings": 1,
+        "interior_rings": 0,
+        "vertices": 8,
+        "area_km2_equal_area_screen": 212.901543,
+        "temporary_projected_geometry_repair": false,
+        "equal_area_crs": "EPSG:3338"
+      },
+      "administrative_identity": {
+        "2018_source": "geoBoundaries gbOpen USA ADM2; source-declared U.S. Census MAF/TIGER origin; Public Domain; boundary vintage 2018",
+        "source_shape_id": "52423323B80059195101619",
+        "source_name_2018": "North Slope",
+        "source_type": "ADM2",
+        "match_kind": "2018 county predecessor represented by physical fragments",
+        "current_display_name": "North Slope · Interior Alaska-Yukon lowland taiga",
+        "census_2024_counterparts": [
+          {
+            "geoid": "02185",
+            "name": "North Slope",
+            "namelsad": "North Slope Borough",
+            "classfp": "H1",
+            "aland_m2": 229972282345,
+            "awater_m2": 15630901229,
+            "source_intersection_pct": 99.999973
+          }
+        ]
+      },
+      "physical_source_identity": {
+        "eco_id": 375,
+        "eco_name": "Interior Alaska-Yukon lowland taiga",
+        "biome": "Boreal Forests/Taiga",
+        "realm": "Nearctic",
+        "license": "CC-BY 4.0",
+        "source_role": "Natural ecological unit; does not define administrative county membership or political ownership."
+      },
+      "prior_settlement_screens": {
+        "census_places_2024_intersecting_count": 0,
+        "census_places_2024_intersections": [],
+        "usgs_gnis_populated_place_hit_count": 0,
+        "usgs_gnis_populated_place_hits": [],
+        "source_limit_interpretation": "Census Places supplies 2024 incorporated-place/CDP polygons. USGS GNIS adds federally maintained named Populated Place point records with Feature IDs. GNIS is a flat names database, not a hierarchy, current settlement census, or complete inventory. A no-hit in either screen does not prove no settlement; location edge and accuracy remain subject-specific."
+      },
+      "alaska_dcced_dcra_screen": {
+        "source": "DCCED DCRA Community Locations and Boundaries MapServer layer 0",
+        "response_intersection_count": 0,
+        "intersecting_records": [],
+        "method": "Exact planar point-in-polygon/intersection test in EPSG:4326 against current project scope polygons; source layer reports point features. Alaska-wide bounding-envelope response contained 487 features.",
+        "interpretation": "No DCRA point record intersected this project geometry in the captured response. The layer is not a complete settlement census; a zero hit does not establish absence. Community/Place-of-Interest categories have different and sometimes historical/seasonal meanings.",
+        "decision": "unresolved",
+        "gap": "No authoritative finer-scale local source with dated inhabited-status and geometry sufficient to establish settlement completeness has yet been identified for this fragment."
+      },
+      "administrative_remainder_implication": "This is a physical/ecological fragment of the 2018 Census county-equivalent predecessor identified in the parent chain. Census Areas are statistical geographies; this DCRA point-layer no-hit does not establish unassigned territory, municipality limits, population remainder, or a boundary correction. Do not change membership or parent from this screen.",
+      "political_and_historical_distinction": "The current reference owner and administrative predecessor do not establish political ownership of ecological features or historical settlement status. No historical claim is made.",
+      "decision": "unresolved",
+      "follow_up": "Research dated local-government, tribal/community, borough/Census Area, and federal settlement evidence with spatial coverage adequate to distinguish current, seasonal, former, and unincorporated places; retain unresolved if evidence remains insufficient."
+    },
+    {
+      "id": "atlas:physical:770135c5de8a7faad962",
+      "name": "North Slope · Interior Yukon-Alaska alpine tundra",
+      "full_parent_chain": [
+        {
+          "id": "atlas:physical:770135c5de8a7faad962",
+          "name": "North Slope · Interior Yukon-Alaska alpine tundra",
+          "parent_id": "framework:province:alaska:4057e2fddbc5"
+        },
+        {
+          "id": "framework:province:alaska:4057e2fddbc5",
+          "name": "Alaska",
+          "parent_id": "framework:area:pacific:31aced66907e"
+        },
+        {
+          "id": "framework:area:pacific:31aced66907e",
+          "name": "Pacific",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null
+        }
+      ],
+      "project_geometry_summary": {
+        "type": "Polygon",
+        "components": 1,
+        "rings": 1,
+        "interior_rings": 0,
+        "vertices": 10,
+        "area_km2_equal_area_screen": 403.241266,
+        "temporary_projected_geometry_repair": false,
+        "equal_area_crs": "EPSG:3338"
+      },
+      "administrative_identity": {
+        "2018_source": "geoBoundaries gbOpen USA ADM2; source-declared U.S. Census MAF/TIGER origin; Public Domain; boundary vintage 2018",
+        "source_shape_id": "52423323B80059195101619",
+        "source_name_2018": "North Slope",
+        "source_type": "ADM2",
+        "match_kind": "2018 county predecessor represented by physical fragments",
+        "current_display_name": "North Slope · Interior Yukon-Alaska alpine tundra",
+        "census_2024_counterparts": [
+          {
+            "geoid": "02185",
+            "name": "North Slope",
+            "namelsad": "North Slope Borough",
+            "classfp": "H1",
+            "aland_m2": 229972282345,
+            "awater_m2": 15630901229,
+            "source_intersection_pct": 99.999973
+          }
+        ]
+      },
+      "physical_source_identity": {
+        "eco_id": 416,
+        "eco_name": "Interior Yukon-Alaska alpine tundra",
+        "biome": "Tundra",
+        "realm": "Nearctic",
+        "license": "CC-BY 4.0",
+        "source_role": "Natural ecological unit; does not define administrative county membership or political ownership."
+      },
+      "prior_settlement_screens": {
+        "census_places_2024_intersecting_count": 0,
+        "census_places_2024_intersections": [],
+        "usgs_gnis_populated_place_hit_count": 0,
+        "usgs_gnis_populated_place_hits": [],
+        "source_limit_interpretation": "Census Places supplies 2024 incorporated-place/CDP polygons. USGS GNIS adds federally maintained named Populated Place point records with Feature IDs. GNIS is a flat names database, not a hierarchy, current settlement census, or complete inventory. A no-hit in either screen does not prove no settlement; location edge and accuracy remain subject-specific."
+      },
+      "alaska_dcced_dcra_screen": {
+        "source": "DCCED DCRA Community Locations and Boundaries MapServer layer 0",
+        "response_intersection_count": 0,
+        "intersecting_records": [],
+        "method": "Exact planar point-in-polygon/intersection test in EPSG:4326 against current project scope polygons; source layer reports point features. Alaska-wide bounding-envelope response contained 487 features.",
+        "interpretation": "No DCRA point record intersected this project geometry in the captured response. The layer is not a complete settlement census; a zero hit does not establish absence. Community/Place-of-Interest categories have different and sometimes historical/seasonal meanings.",
+        "decision": "unresolved",
+        "gap": "No authoritative finer-scale local source with dated inhabited-status and geometry sufficient to establish settlement completeness has yet been identified for this fragment."
+      },
+      "administrative_remainder_implication": "This is a physical/ecological fragment of the 2018 Census county-equivalent predecessor identified in the parent chain. Census Areas are statistical geographies; this DCRA point-layer no-hit does not establish unassigned territory, municipality limits, population remainder, or a boundary correction. Do not change membership or parent from this screen.",
+      "political_and_historical_distinction": "The current reference owner and administrative predecessor do not establish political ownership of ecological features or historical settlement status. No historical claim is made.",
+      "decision": "unresolved",
+      "follow_up": "Research dated local-government, tribal/community, borough/Census Area, and federal settlement evidence with spatial coverage adequate to distinguish current, seasonal, former, and unincorporated places; retain unresolved if evidence remains insufficient."
+    },
+    {
+      "id": "atlas:physical:d5c6a8a99d213d352ffc",
+      "name": "Nome · Interior Yukon-Alaska alpine tundra",
+      "full_parent_chain": [
+        {
+          "id": "atlas:physical:d5c6a8a99d213d352ffc",
+          "name": "Nome · Interior Yukon-Alaska alpine tundra",
+          "parent_id": "framework:province:alaska:4057e2fddbc5"
+        },
+        {
+          "id": "framework:province:alaska:4057e2fddbc5",
+          "name": "Alaska",
+          "parent_id": "framework:area:pacific:31aced66907e"
+        },
+        {
+          "id": "framework:area:pacific:31aced66907e",
+          "name": "Pacific",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null
+        }
+      ],
+      "project_geometry_summary": {
+        "type": "MultiPolygon",
+        "components": 6,
+        "rings": 6,
+        "interior_rings": 0,
+        "vertices": 51,
+        "area_km2_equal_area_screen": 769.489227,
+        "temporary_projected_geometry_repair": false,
+        "equal_area_crs": "EPSG:3338"
+      },
+      "administrative_identity": {
+        "2018_source": "geoBoundaries gbOpen USA ADM2; source-declared U.S. Census MAF/TIGER origin; Public Domain; boundary vintage 2018",
+        "source_shape_id": "52423323B54983735958036",
+        "source_name_2018": "Nome",
+        "source_type": "ADM2",
+        "match_kind": "2018 county predecessor represented by physical fragments",
+        "current_display_name": "Nome · Interior Yukon-Alaska alpine tundra",
+        "census_2024_counterparts": [
+          {
+            "geoid": "02180",
+            "name": "Nome",
+            "namelsad": "Nome Census Area",
+            "classfp": "H5",
+            "aland_m2": 59491231652,
+            "awater_m2": 13780160833,
+            "source_intersection_pct": 99.987374
+          }
+        ]
+      },
+      "physical_source_identity": {
+        "eco_id": 416,
+        "eco_name": "Interior Yukon-Alaska alpine tundra",
+        "biome": "Tundra",
+        "realm": "Nearctic",
+        "license": "CC-BY 4.0",
+        "source_role": "Natural ecological unit; does not define administrative county membership or political ownership."
+      },
+      "prior_settlement_screens": {
+        "census_places_2024_intersecting_count": 0,
+        "census_places_2024_intersections": [],
+        "usgs_gnis_populated_place_hit_count": 0,
+        "usgs_gnis_populated_place_hits": [],
+        "source_limit_interpretation": "Census Places supplies 2024 incorporated-place/CDP polygons. USGS GNIS adds federally maintained named Populated Place point records with Feature IDs. GNIS is a flat names database, not a hierarchy, current settlement census, or complete inventory. A no-hit in either screen does not prove no settlement; location edge and accuracy remain subject-specific."
+      },
+      "alaska_dcced_dcra_screen": {
+        "source": "DCCED DCRA Community Locations and Boundaries MapServer layer 0",
+        "response_intersection_count": 0,
+        "intersecting_records": [],
+        "method": "Exact planar point-in-polygon/intersection test in EPSG:4326 against current project scope polygons; source layer reports point features. Alaska-wide bounding-envelope response contained 487 features.",
+        "interpretation": "No DCRA point record intersected this project geometry in the captured response. The layer is not a complete settlement census; a zero hit does not establish absence. Community/Place-of-Interest categories have different and sometimes historical/seasonal meanings.",
+        "decision": "unresolved",
+        "gap": "No authoritative finer-scale local source with dated inhabited-status and geometry sufficient to establish settlement completeness has yet been identified for this fragment."
+      },
+      "administrative_remainder_implication": "This is a physical/ecological fragment of the 2018 Census county-equivalent predecessor identified in the parent chain. Census Areas are statistical geographies; this DCRA point-layer no-hit does not establish unassigned territory, municipality limits, population remainder, or a boundary correction. Do not change membership or parent from this screen.",
+      "political_and_historical_distinction": "The current reference owner and administrative predecessor do not establish political ownership of ecological features or historical settlement status. No historical claim is made.",
+      "decision": "unresolved",
+      "follow_up": "Research dated local-government, tribal/community, borough/Census Area, and federal settlement evidence with spatial coverage adequate to distinguish current, seasonal, former, and unincorporated places; retain unresolved if evidence remains insufficient."
+    },
+    {
+      "id": "atlas:physical:db25f36496f102a4e01b",
+      "name": "Yukon-Koyukuk · Alaska-St. Elias Range tundra",
+      "full_parent_chain": [
+        {
+          "id": "atlas:physical:db25f36496f102a4e01b",
+          "name": "Yukon-Koyukuk · Alaska-St. Elias Range tundra",
+          "parent_id": "framework:province:alaska:4057e2fddbc5"
+        },
+        {
+          "id": "framework:province:alaska:4057e2fddbc5",
+          "name": "Alaska",
+          "parent_id": "framework:area:pacific:31aced66907e"
+        },
+        {
+          "id": "framework:area:pacific:31aced66907e",
+          "name": "Pacific",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null
+        }
+      ],
+      "project_geometry_summary": {
+        "type": "Polygon",
+        "components": 1,
+        "rings": 1,
+        "interior_rings": 0,
+        "vertices": 27,
+        "area_km2_equal_area_screen": 4287.925503,
+        "temporary_projected_geometry_repair": false,
+        "equal_area_crs": "EPSG:3338"
+      },
+      "administrative_identity": {
+        "2018_source": "geoBoundaries gbOpen USA ADM2; source-declared U.S. Census MAF/TIGER origin; Public Domain; boundary vintage 2018",
+        "source_shape_id": "52423323B20923510604078",
+        "source_name_2018": "Yukon-Koyukuk",
+        "source_type": "ADM2",
+        "match_kind": "2018 county predecessor represented by physical fragments",
+        "current_display_name": "Yukon-Koyukuk · Alaska-St. Elias Range tundra",
+        "census_2024_counterparts": [
+          {
+            "geoid": "02290",
+            "name": "Yukon-Koyukuk",
+            "namelsad": "Yukon-Koyukuk Census Area",
+            "classfp": "H5",
+            "aland_m2": 377540283397,
+            "awater_m2": 5462354664,
+            "source_intersection_pct": 99.970234
+          }
+        ]
+      },
+      "physical_source_identity": {
+        "eco_id": 405,
+        "eco_name": "Alaska-St. Elias Range tundra",
+        "biome": "Tundra",
+        "realm": "Nearctic",
+        "license": "CC-BY 4.0",
+        "source_role": "Natural ecological unit; does not define administrative county membership or political ownership."
+      },
+      "prior_settlement_screens": {
+        "census_places_2024_intersecting_count": 0,
+        "census_places_2024_intersections": [],
+        "usgs_gnis_populated_place_hit_count": 0,
+        "usgs_gnis_populated_place_hits": [],
+        "source_limit_interpretation": "Census Places supplies 2024 incorporated-place/CDP polygons. USGS GNIS adds federally maintained named Populated Place point records with Feature IDs. GNIS is a flat names database, not a hierarchy, current settlement census, or complete inventory. A no-hit in either screen does not prove no settlement; location edge and accuracy remain subject-specific."
+      },
+      "alaska_dcced_dcra_screen": {
+        "source": "DCCED DCRA Community Locations and Boundaries MapServer layer 0",
+        "response_intersection_count": 0,
+        "intersecting_records": [],
+        "method": "Exact planar point-in-polygon/intersection test in EPSG:4326 against current project scope polygons; source layer reports point features. Alaska-wide bounding-envelope response contained 487 features.",
+        "interpretation": "No DCRA point record intersected this project geometry in the captured response. The layer is not a complete settlement census; a zero hit does not establish absence. Community/Place-of-Interest categories have different and sometimes historical/seasonal meanings.",
+        "decision": "unresolved",
+        "gap": "No authoritative finer-scale local source with dated inhabited-status and geometry sufficient to establish settlement completeness has yet been identified for this fragment."
+      },
+      "administrative_remainder_implication": "This is a physical/ecological fragment of the 2018 Census county-equivalent predecessor identified in the parent chain. Census Areas are statistical geographies; this DCRA point-layer no-hit does not establish unassigned territory, municipality limits, population remainder, or a boundary correction. Do not change membership or parent from this screen.",
+      "political_and_historical_distinction": "The current reference owner and administrative predecessor do not establish political ownership of ecological features or historical settlement status. No historical claim is made.",
+      "decision": "unresolved",
+      "follow_up": "Research dated local-government, tribal/community, borough/Census Area, and federal settlement evidence with spatial coverage adequate to distinguish current, seasonal, former, and unincorporated places; retain unresolved if evidence remains insufficient."
+    },
+    {
+      "id": "atlas:physical:f1337f9008d75f1a400d",
+      "name": "Bethel · Alaska-St. Elias Range tundra",
+      "full_parent_chain": [
+        {
+          "id": "atlas:physical:f1337f9008d75f1a400d",
+          "name": "Bethel · Alaska-St. Elias Range tundra",
+          "parent_id": "framework:province:alaska:4057e2fddbc5"
+        },
+        {
+          "id": "framework:province:alaska:4057e2fddbc5",
+          "name": "Alaska",
+          "parent_id": "framework:area:pacific:31aced66907e"
+        },
+        {
+          "id": "framework:area:pacific:31aced66907e",
+          "name": "Pacific",
+          "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+        },
+        {
+          "id": "framework:region:western-north-america:d2a1c2775a57",
+          "name": "Western North America",
+          "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "parent_id": "framework:continent:north-america:1ca27616f338"
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "parent_id": null
+        }
+      ],
+      "project_geometry_summary": {
+        "type": "Polygon",
+        "components": 1,
+        "rings": 1,
+        "interior_rings": 0,
+        "vertices": 43,
+        "area_km2_equal_area_screen": 9485.08004,
+        "temporary_projected_geometry_repair": false,
+        "equal_area_crs": "EPSG:3338"
+      },
+      "administrative_identity": {
+        "2018_source": "geoBoundaries gbOpen USA ADM2; source-declared U.S. Census MAF/TIGER origin; Public Domain; boundary vintage 2018",
+        "source_shape_id": "52423323B92128631774297",
+        "source_name_2018": "Bethel",
+        "source_type": "ADM2",
+        "match_kind": "2018 county predecessor represented by physical fragments",
+        "current_display_name": "Bethel · Alaska-St. Elias Range tundra",
+        "census_2024_counterparts": [
+          {
+            "geoid": "02050",
+            "name": "Bethel",
+            "namelsad": "Bethel Census Area",
+            "classfp": "H5",
+            "aland_m2": 105310429084,
+            "awater_m2": 12678050559,
+            "source_intersection_pct": 99.968392
+          }
+        ]
+      },
+      "physical_source_identity": {
+        "eco_id": 405,
+        "eco_name": "Alaska-St. Elias Range tundra",
+        "biome": "Tundra",
+        "realm": "Nearctic",
+        "license": "CC-BY 4.0",
+        "source_role": "Natural ecological unit; does not define administrative county membership or political ownership."
+      },
+      "prior_settlement_screens": {
+        "census_places_2024_intersecting_count": 0,
+        "census_places_2024_intersections": [],
+        "usgs_gnis_populated_place_hit_count": 0,
+        "usgs_gnis_populated_place_hits": [],
+        "source_limit_interpretation": "Census Places supplies 2024 incorporated-place/CDP polygons. USGS GNIS adds federally maintained named Populated Place point records with Feature IDs. GNIS is a flat names database, not a hierarchy, current settlement census, or complete inventory. A no-hit in either screen does not prove no settlement; location edge and accuracy remain subject-specific."
+      },
+      "alaska_dcced_dcra_screen": {
+        "source": "DCCED DCRA Community Locations and Boundaries MapServer layer 0",
+        "response_intersection_count": 0,
+        "intersecting_records": [],
+        "method": "Exact planar point-in-polygon/intersection test in EPSG:4326 against current project scope polygons; source layer reports point features. Alaska-wide bounding-envelope response contained 487 features.",
+        "interpretation": "No DCRA point record intersected this project geometry in the captured response. The layer is not a complete settlement census; a zero hit does not establish absence. Community/Place-of-Interest categories have different and sometimes historical/seasonal meanings.",
+        "decision": "unresolved",
+        "gap": "No authoritative finer-scale local source with dated inhabited-status and geometry sufficient to establish settlement completeness has yet been identified for this fragment."
+      },
+      "administrative_remainder_implication": "This is a physical/ecological fragment of the 2018 Census county-equivalent predecessor identified in the parent chain. Census Areas are statistical geographies; this DCRA point-layer no-hit does not establish unassigned territory, municipality limits, population remainder, or a boundary correction. Do not change membership or parent from this screen.",
+      "political_and_historical_distinction": "The current reference owner and administrative predecessor do not establish political ownership of ecological features or historical settlement status. No historical claim is made.",
+      "decision": "unresolved",
+      "follow_up": "Research dated local-government, tribal/community, borough/Census Area, and federal settlement evidence with spatial coverage adequate to distinguish current, seasonal, former, and unincorporated places; retain unresolved if evidence remains insufficient."
+    }
+  ]
+}
