@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "copdem-sahara-20261003-a44eff82017e",
+  "branch": "research/copdem-sahara-20261003-a44eff82017e",
+  "base_main_commit": "6f1b2bc",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/67",
+  "date_timezone": "America/Los_Angeles",
+  "scope": {
+    "geographies": [
+      "one GLO-90 1x1 degree tile at N25 E010, sampled as central Sahara; no atlas mapping"
+    ],
+    "attributes": [
+      "topography source evaluation/reference context only"
+    ],
+    "supported_from": "Product-wide published acquisition interval 2011-2015; selected tile-specific source dates not exposed in inspected COG header",
+    "supported_to": "No historical interval or dated claim inferred",
+    "sources": [
+      "Copernicus DEM GLO-90 official product documentation, GLO-90 full/free/open license, and one public COG tile/header"
+    ]
+  },
+  "updated_at_utc": "2026-10-03T08:58:52.129+00:00",
+  "geographic_release": null,
+  "input_paths": [
+    "research/campaigns/copdem-sahara-20261003-a44eff82017e/source-evaluation.md",
+    "research/campaigns/copdem-sahara-20261003-a44eff82017e/source-manifest.json"
+  ],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Confirmed selected GLO-90 tile object exists in the provider tile list and inspected its public COG header/metadata.",
+    "Verified official global product documentation reports the 2011-2015 acquisition frame and warns that older elevation data can fill gaps.",
+    "Verified the selected GLO-90 global full/free/open license and separated it from distinct EEA-10 restrictions.",
+    "Recorded DSM-vs-DTM caveat, exact hashes, access/restoration URLs, tile geometry, precision and missing tile-specific acquisition metadata."
+  ],
+  "source_gaps": [
+    "The GLO-90 COG contains no per-tile acquisition date, source-scene list, SRC layer or source XML; exact input dates for the selected tile were not verifiable from the public COG distribution.",
+    "Older fill-source acquisition years are not attributed to specific cells by the public COG header.",
+    "This tile is modern physical surface context and does not establish any earlier historical terrain state."
+  ],
+  "blockers": [],
+  "next_action": "Wait for exact PR-head scope check, refresh/rebase if main advances, request the serialized merge queue for the exact accepted head, verify merge in fresh origin/main, then release issue #67 claim and continue.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/559",
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

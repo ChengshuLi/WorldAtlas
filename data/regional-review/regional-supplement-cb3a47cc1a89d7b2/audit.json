@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "issue": 524,
+  "recorded_on": "2026-10-03",
+  "worker": "codex-20261003-marcus-island-7c1c62b3-60ec-41d4-b6f1-4a457e0af901",
+  "scope": {
+    "assigned_subject_count": 1,
+    "assessed_subject_count": 1,
+    "locations": [
+      {
+        "id": "atlas:named-land:location:825337016c35d6a8235a",
+        "name": "Minamitorishima (Marcus Island)",
+        "granularity": "whole named emergent island",
+        "physical_identity": "supported",
+        "current_published_parent": "atlas:named-land:province:8e2c400cda9a948c06bb",
+        "reference_owner": null,
+        "settlement": "No separate civilian settlement or community is established by the audited sources. JMA says the meteorological station is continuously staffed; mapping also depicts government facilities and an airfield. Facility staffing does not establish a settlement. Community/resident status remains unresolved.",
+        "geometry": "Existing candidate uses OSM coastline way 130970566 v27 and subtracts one mapped reservoir ring; prior source calculation is approximately 1.455657 km2. This is source evidence, not an approval to alter geometry.",
+        "political_and_historical": "Do not infer geographic tier from Japanese administration or ownership. No historical ownership or culture claims transferred.",
+        "assessment": "Location identity and whole-island granularity supported; local area/province semantics unresolved pending cross-region archipelago source review."
+      }
+    ]
+  },
+  "current_parent_chain_child_to_ancestor": [
+    {
+      "id": "atlas:named-land:province:8e2c400cda9a948c06bb",
+      "name": "Marcus Island",
+      "level": "province",
+      "parent_id": "atlas:named-land:area:812ad26d42ad1d6edb86",
+      "child_count": 1,
+      "role_assessment": "singleton local container; coextensive exception remains provisional"
+    },
+    {
+      "id": "atlas:named-land:area:812ad26d42ad1d6edb86",
+      "name": "Marcus isolated island",
+      "level": "area",
+      "parent_id": "framework:region:northwestern-pacific:2357073b3888",
+      "child_count": 1,
+      "role_assessment": "singleton geographic container; conflict with OSM named Bonin/Ogasawara archipelago relation unresolved"
+    },
+    {
+      "id": "framework:region:northwestern-pacific:2357073b3888",
+      "name": "Northwestern Pacific",
+      "level": "region",
+      "parent_id": "framework:subcontinent:micronesia:44f839aaab87",
+      "child_count": 5,
+      "role_assessment": "retain published parent pending coordinated review; regional approval remains open"
+    },
+    {
+      "id": "framework:subcontinent:micronesia:44f839aaab87",
+      "name": "Micronesia",
+      "level": "subcontinent",
+      "parent_id": "framework:continent:oceania:48580dd0c4b4",
+      "child_count": 2,
+      "role_assessment": "published macro baseline; no change proposed"
+    },
+    {
+      "id": "framework:continent:oceania:48580dd0c4b4",
+      "name": "Oceania",
+      "level": "continent",
+      "parent_id": null,
+      "child_count": 5,
+      "role_assessment": "published macro baseline; no change proposed"
+    }
+  ],
+  "cross_region_finding": {
+    "status": "unresolved; coordinated follow-up required",
+    "osm_relation": {
+      "id": "11775500",
+      "version": 38,
+      "timestamp": "2025-04-18T05:32:38Z",
+      "name_en": "Bonin Islands",
+      "name_ja": "小笠原群島",
+      "place": "archipelago",
+      "type": "multipolygon",
+      "member": {
+        "type": "way",
+        "ref": "130970566",
+        "role": "outer"
+      },
+      "member_count": 2606
+    },
+    "affected_regions": [
+      "framework:region:japan:d79de169a905",
+      "framework:region:northwestern-pacific:2357073b3888"
+    ],
+    "issue_umbrellas": [
+      275,
+      382
+    ],
+    "interpretive_limits": "A direct named relation membership is evidence of an OSM grouping, not proof that the physical island belongs to that archipelago. Conversely it cannot be ignored when asserting a detached singleton local group. Administrative relations 8004038 (boundary=administrative, admin_level=8) and 8004037 (land_area=administrative) are separate and cannot decide physical grouping.",
+    "requested_follow_up": "Jointly review the retained OSM relation against authoritative physical/naming sources and both regional assessments; decide whether source aggregation is unsuitable for parent inference, represents a physical grouping, or requires another sourced treatment. Preserve the published release until joint assessment; no unilateral boundary or membership edit."
+  },
+  "baseline_pins": {
+    "release_id": "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+    "release_version": 3,
+    "hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
+    "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+    "membership_sha256": "7f417ad9ba3417737847aab72dfeb718a941adc2c058de24b1596bd7e78543b5",
+    "note": "This packet is a source audit against current repository main; these are immutable published pins, not approvals."
+  },
+  "source_profile_gap": {
+    "path": "data/macro-foundation/new-location-source-profiles-v4.json.gz",
+    "present": false,
+    "expected_sha256": "cc782e4ad59694f37b29f484ad427e26997f9c077b856f1fdf770335e83fe9da"
+  },
+  "no_shared_geometry_hierarchy_certificate_or_live_data_changed": true
+}
