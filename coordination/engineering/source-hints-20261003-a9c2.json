@@ -10,11 +10,13 @@
     "Repair supplemental source-profile instruction pointers and distinguish file and entry hashes; preserve source bytes and issue scope/history"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-03T19:28:56.367153+00:00",
+  "updated_at_utc": "2026-10-03T19:35:31.817248+00:00",
   "completed": [
     "Verified all 34 advertised entry hashes in eight original supplement bodies against immutable profile bytes",
     "Prepared deterministic pointer/hash-only repair and retained exact original issue responses",
-    "Eight Python controls and nine mutation-guard controls passed after retained initial failures"
+    "Eight Python controls and nine mutation-guard controls passed after retained initial failures",
+    "All eight GitHub instruction bodies corrected and freshly verified; all 34 entry hashes revalidated; idempotent corrected planner changes zero rows",
+    "Clarification linked to PR 551; external operation settled and live_work=false confirmed"
   ],
   "checks": [
     {
@@ -41,7 +43,7 @@
     "data/engineering/source-hints-20261003-a9c2/issues-before/"
   ],
   "blockers": [],
-  "next_action": "Verify complete fresh GitHub preflight; record pending body corrections; apply and read back narrowly scoped repairs, retain evidence; focused reviewed PR and serialized queue; release claim and continue",
+  "next_action": "Independent exact-head review, hosted checks and serialized merge; verify acceptance and release claim before selecting next eligible item",
   "pull_request": null,
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
@@ -52,11 +54,11 @@
     "worker_id": "engineering-continuous-a9c25e14-20261003",
     "claim_id": "d8c912da-3bcc-48af-8507-8dc652399cbe",
     "branch": "engineering/source-hints-20261003-a9c2",
-    "request_id": "e25cf397-cfd0-4630-9541-17ce32843bfa",
+    "request_id": "fdff2f9f-ca38-4bb8-9144-a651d2e2c1d4",
     "issue_number": 554,
     "claimed_at": "2026-10-03T19:22:15.121Z",
-    "updated_at": "2026-10-03T19:22:15.121Z",
-    "expires_at": "2026-10-04T19:22:15.121Z",
+    "updated_at": "2026-10-03T19:35:04.565Z",
+    "expires_at": "2026-10-04T19:35:04.565Z",
     "live_work": false,
     "mode": "engineering",
     "max_prs": 1

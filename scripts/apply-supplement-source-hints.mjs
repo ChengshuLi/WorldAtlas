@@ -56,9 +56,9 @@ export async function applyPlan(plan, api, {apply = false, checkpoint = () => {}
     limits: ['GitHub instruction corrections only; no source evidence, work contracts, completion state or live atlas changes.']};
   checkpoint(receipt);
   async function inspect(row) {
-    const issue = await api(`/repos/${repo}/issues/${row.number}`);
     const comments = await githubPages(api, `/repos/${repo}/issues/${row.number}/comments`);
     const pulls = await linkedPulls(api, repo, row.number);
+    const issue = await api(`/repos/${repo}/issues/${row.number}`); // body read is the last pre-write network read
     return {issue, result: verifyRepair(row, issue, readClaim(comments), pulls)};
   }
   // Establish eligibility for the entire batch before the first write.
