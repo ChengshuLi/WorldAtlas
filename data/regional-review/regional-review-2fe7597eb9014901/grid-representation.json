@@ -1,0 +1,26 @@
+{
+  "method": "Read-only full scan of all canonical ownership run chunks. Verify compressed and unshuffled decoded bytes against manifest SHA-256, decode v2 (19-bit coordinate packing), and sum interval cell counts for exact 1-based feature indexes in bounds.json.gz. No canonical grid files edited. Counts are discrete canonical cell assignment counts, not area estimates or evidence of source completeness.",
+  "baseline_commit": "ff171e1dd1998684d9b3549943d5725817a7aef4",
+  "manifest_path": "data/canonical-grid/manifest.json",
+  "manifest_version": 2,
+  "coordinate_bits": 19,
+  "size": 262166,
+  "run_words": 57618658,
+  "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+  "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+  "bounds_sha256": "dfc0eca8c2725f47aa9d66e5bb78140f57273b009628c8ae4f1c0f31188ce91a",
+  "run_chunks_verified": 55,
+  "words_verified": 57618658,
+  "location_feature_indexes": {
+    "atlas:coverage:ATF-5916": 62,
+    "atlas:coverage:ATF-5917": 63,
+    "atlas:coverage:ATF-5918": 64,
+    "atlas:coverage:HMD+00?": 74
+  },
+  "assigned_cells": {
+    "atlas:coverage:ATF-5916": 702445,
+    "atlas:coverage:ATF-5917": 18400,
+    "atlas:coverage:ATF-5918": 4344,
+    "atlas:coverage:HMD+00?": 46754
+  }
+}
