@@ -2,6 +2,7 @@ import {postgresMapQueries} from './map-snapshot-postgres.js';
 import {validYear} from '../src/model.js';
 import {RecordError} from './records.js';
 import {locationAttributes} from '../src/attributes.js';
+import {temporalGeographySnapshotPage} from './temporal-geography.js';
 export {hydrateMapSnapshotPage} from '../src/map-snapshot-format.js';
 
 const kinds="'location','province','area','region','subcontinent','continent','settlement'";
@@ -38,10 +39,11 @@ export const postgresMapSnapshotQueries=postgresMapQueries(mapSnapshotQueries);
  * caches can therefore merge by claim identity without restoring retired data.
  * Source metadata occurs once per page; evidence remains individually queryable.
  */
-export async function mapSnapshotPage(db,year,{examples=false,cursor='',limit=1000,aliasLimit=5,evidenceOnly=false}={}){
+export async function mapSnapshotPage(db,year,{examples=false,cursor='',limit=1000,aliasLimit=5,evidenceOnly=false,includeTemporal=false}={}){
  if(!validYear(year))throw new RecordError('Invalid selected year');
  if(typeof cursor!=='string'||cursor.length>2000||cursor&&!cursor.trim())throw new RecordError('Invalid map cursor');
- if(!Number.isInteger(limit)||limit<1||limit>1000)throw new RecordError('Map entity page limit must be between 1 and 1000');
+ const entityLimit=evidenceOnly?4096:1000;
+ if(!Number.isInteger(limit)||limit<1||limit>entityLimit)throw new RecordError(`Map entity page limit must be between 1 and ${entityLimit}`);
  if(!Number.isInteger(aliasLimit)||aliasLimit<0||aliasLimit>5)throw new RecordError('Map alias limit must be between 0 and 5');
  const queries=db.dialect==='postgres'?postgresMapSnapshotQueries:mapSnapshotQueries;
  const initial=await revision(db),enabled=Number(Boolean(examples));
@@ -73,5 +75,20 @@ export async function mapSnapshotPage(db,year,{examples=false,cursor='',limit=10
  if(await revision(db)!==initial){const error=new RecordError('Historical content changed while reading; retry the map snapshot',409);error.retryable=true;throw error;}
  const result={year,revision:initial,next_cursor:eligible.length>limit?entities.at(-1).id:null,entities:entities.map(({id,kind})=>({id,kind})),records,names:selectedNames.map(row=>({...row,field:'name',value:row.name,name_role:row.role})),retirements:withdrawals,sources:Object.fromEntries(sources.map(row=>[row.id,clean(row)])),aliases_truncated:aliasesTruncated};
  if(new TextEncoder().encode(JSON.stringify(result)).byteLength>responseBytesLimit)throw tooLarge();
+ // Attach only complete, bounded temporal pages. Large geographic histories
+ // retain their existing paging protocol; never truncate a stream to inline it.
+ if(evidenceOnly&&includeTemporal&&result.next_cursor===null){
+  let pages;
+  try{pages=await Promise.all(['records','withdrawals'].map(stream=>temporalGeographySnapshotPage(db,year,{examples,stream})));}
+  catch(error){if(error.status===409)error.retryable=true;if(error.status!==413)throw error;}
+  if(pages){
+   if(pages.some(page=>page.revision!==initial)||['release_id','hierarchy_sha256','footprints_sha256'].some(key=>pages[0][key]!==pages[1][key])){const error=new RecordError('Historical content changed while reading; retry the map snapshot',409);error.retryable=true;throw error;}
+   if(pages.every(page=>page.next_cursor===null)){
+    result.temporal_geography={records:pages[0],withdrawals:pages[1]};
+    if(new TextEncoder().encode(JSON.stringify(result)).byteLength>responseBytesLimit)delete result.temporal_geography;
+   }
+  }
+  if(await revision(db)!==initial){const error=new RecordError('Historical content changed while reading; retry the map snapshot',409);error.retryable=true;throw error;}
+ }
  return result;
 }

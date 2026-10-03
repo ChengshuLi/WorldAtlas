@@ -11,10 +11,10 @@
     "Publish verified evidence-only snapshot client and retain actual production after measurements"
   ],
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T16:11:00Z",
+  "updated_at_utc": "2026-10-03T16:31:00Z",
   "reservation": {
     "accepted": true,
-    "request_id": "e1058b49-cb96-4123-88b3-6034b732b6c5",
+    "request_id": "4e155d1a-8ace-4d36-acf0-61a679bac47a",
     "issue_number": 22,
     "claim": {
       "comment_id": 5967005967,
@@ -23,23 +23,23 @@
       "worker_id": "engineering-night-20261003-7e91f438",
       "claim_id": "35a7dbdb-842b-4282-8e21-d073cb7d7ac1",
       "branch": "engineering/year-switch-publish-20261003-7e91",
-      "request_id": "e1058b49-cb96-4123-88b3-6034b732b6c5",
+      "request_id": "4e155d1a-8ace-4d36-acf0-61a679bac47a",
       "issue_number": 22,
       "claimed_at": "2026-10-03T08:22:37.727Z",
-      "updated_at": "2026-10-03T16:08:39.961Z",
-      "expires_at": "2026-10-04T16:08:39.961Z",
-      "live_work": true,
+      "updated_at": "2026-10-03T16:22:37.717Z",
+      "expires_at": "2026-10-04T16:22:37.717Z",
+      "live_work": false,
       "mode": "engineering",
       "max_prs": 3
     },
     "replayed": false,
     "result_source": "github-comment",
-    "result_comment_id": 5970910320,
-    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37135743328"
+    "result_comment_id": 5971036936,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37136593597"
   },
   "publication_gate": "data/engineering/year-switch-prod-20261003-7e91/publication-final.log.gz",
   "deployment": {
-    "changed": false,
+    "changed": true,
     "rollback_version": 21,
     "rollback_source_sha": "917c66338166cb60ffe5c28cde75e43ed7ebecd2",
     "rollback_version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_b853dc160a808191ba1c68ec6458739b",
@@ -56,18 +56,72 @@
       "preservation": "Primary research and local source copies retained. Existing accepted Site research inventory is byte-identical to source parent 917c663. Only deployment-source Git inventory excludes newly copied research; application/build/migration trees unchanged. No forced remote update.",
       "new_source_blob_bytes": 34811467,
       "largest_new_source_blob_bytes": 2483959
+    },
+    "status": "succeeded",
+    "site_version": 22,
+    "version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_cde99aa08a7481919dc9b60340db619d",
+    "deployment_id": "appgdep_6ac12a822168819191df237bed3d44bb",
+    "environment_revision": 4,
+    "native_archive": {
+      "sha256": "fae193205e3e84b2da2ce04b5d863c0e674fe78ac91328be60239dac5a94c36e",
+      "bytes": 262246400,
+      "files": 539
     }
   },
   "evidence_paths": [
+    "data/engineering/year-switch-publish-20261003-7e91/inline-client-sql.log.gz",
+    "data/engineering/year-switch-publish-20261003-7e91/inline-temporal-pins.log.gz",
+    "data/engineering/year-switch-publish-20261003-7e91/inline-total-byte-limit.log.gz",
+    "data/engineering/year-switch-publish-20261003-7e91/publish-build.log.gz",
     "data/engineering/year-switch-publish-20261003-7e91/site-budget.json.gz",
-    "data/engineering/year-switch-publish-20261003-7e91/publish-build.log.gz"
+    "data/engineering/year-switch-publish-20261003-7e91/site22-historical-trace.json.gz",
+    "data/engineering/year-switch-publish-20261003-7e91/site22-historical.json.gz",
+    "data/engineering/year-switch-publish-20261003-7e91/site22-historical.png",
+    "data/engineering/year-switch-publish-20261003-7e91/site22-supported-trace.json.gz",
+    "data/engineering/year-switch-publish-20261003-7e91/site22-supported.json.gz",
+    "data/engineering/year-switch-publish-20261003-7e91/site22-supported.png"
   ],
   "blockers": [],
-  "next_action": "Finish hidden-credential source push, save/deploy exact owner-private source archive, verify deployment then historical/supported-evidence timings and all modes/profiles.",
+  "next_action": "Complete bounded sparse4096/inline-pinned-temporal transport correction in PR618. Run targeted SQL/client/budget correctness and complete publication gate, queued merge, then publish matching new source and retain production after receipts on third/final fresh PR. Site22 is live; no next publish until merged and validated.",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue",
   "evidence_hashes": {
     "data/engineering/year-switch-publish-20261003-7e91/publish-build.log.gz": "d7ee59f46789db9b614ce49e257f9f364e3e364cc796892185b259585c706862",
-    "data/engineering/year-switch-publish-20261003-7e91/site-budget.json.gz": "a4fc696245b0cdb0a30645b2da826ae075dc0d3f233d20acfe5e05b387c39b1c"
+    "data/engineering/year-switch-publish-20261003-7e91/site22-historical.png": "094b46ebabaffbf22c5ae8d4c49cf830d34808f20a093aa3ad4770713a0baad6",
+    "data/engineering/year-switch-publish-20261003-7e91/site22-historical.json.gz": "2ef9f710e8bda236ed85c75a5b2f1f51c6d89568b13a594e3ca238a3c7a14db6",
+    "data/engineering/year-switch-publish-20261003-7e91/site-budget.json.gz": "a4fc696245b0cdb0a30645b2da826ae075dc0d3f233d20acfe5e05b387c39b1c",
+    "data/engineering/year-switch-publish-20261003-7e91/site22-historical-trace.json.gz": "1020362acc48be4f4be5b46dc76698469c46e9d57b4a184553e7390229d1444e",
+    "data/engineering/year-switch-publish-20261003-7e91/site22-supported.png": "7a9848d8a1b14315ffb4ed37e7618674702f0577a9b8e81312059f40cb29f7f9",
+    "data/engineering/year-switch-publish-20261003-7e91/inline-temporal-pins.log.gz": "d28a4835acc34977f3d19a7b9a14513e331d834fc0f6207677578ef2682c3050",
+    "data/engineering/year-switch-publish-20261003-7e91/inline-total-byte-limit.log.gz": "146abea0fc76a05dfcf057825915988e085b8f2f4faff730331d64983ab39687",
+    "data/engineering/year-switch-publish-20261003-7e91/site22-supported-trace.json.gz": "7278f9ff6f035b6387a2851aa70b8ec7f2bc53876fccd09a655cccb6d4e02f7f",
+    "data/engineering/year-switch-publish-20261003-7e91/site22-supported.json.gz": "a7988a38f012c64970a8175c2f3e7c26ef20ee665b92ecfefbd2dbac5bfdc6d4",
+    "data/engineering/year-switch-publish-20261003-7e91/inline-client-sql.log.gz": "cbf2acd2d85296bc634033af8995bb53813b7c482188b1097723c0f5ed35396c"
+  },
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/618",
+  "checks": {
+    "site22_historical_navigation_ms": [
+      4151,
+      3502,
+      3119,
+      3401,
+      3652
+    ],
+    "site22_supported_navigation_ms": [
+      8145,
+      3902,
+      8734,
+      2952,
+      8582
+    ],
+    "navigation_ownership_compilation_and_upload_delta": 0,
+    "normal_warm_target_ms": 3000,
+    "target_met": false,
+    "provider_idle_wake_verified": false,
+    "physical_mobile_verified": false,
+    "inline_targeted_client_sql": "25/25 passed",
+    "inline_temporal_pg_sqlite": "27/27 passed before additional bounds fixtures",
+    "inline_total_byte_limit": "Both SQLite/PostgreSQL preserve <=8MiB total response and ordinary geographic stream fallback",
+    "full_publication_inline": "in progress; no new publication before actual PASS"
   }
 }

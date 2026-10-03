@@ -7,6 +7,7 @@ import {importBatch} from '../hosted/records.js';
 import {hydrateHostedTemporalGeographyPage,hostedTemporalHistory,mergeHostedTemporalHistory} from '../src/hosted-temporal-geography.js';
 import {stageGeographicRelease,finalizeGeographicRelease,geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
 import {importTemporalGeography,temporalGeographySnapshot,temporalGeographyPage,temporalWithdrawalsPage,temporalGeographyEvidence,temporalGeographySnapshotPage} from '../hosted/temporal-geography.js';
+import {mapSnapshotPage} from '../hosted/map-snapshots.js';
 
 class D1{constructor(){this.sqlite=new DatabaseSync(':memory:');this.sqlite.exec('PRAGMA foreign_keys=ON');for(const file of fs.readdirSync(new URL('../drizzle/',import.meta.url)).filter(x=>x.endsWith('.sql')).sort())this.sqlite.exec(fs.readFileSync(new URL(`../drizzle/${file}`,import.meta.url),'utf8'));}prepare(sql){const sqlite=this.sqlite;let values=[];return {bind(...args){values=args;return this;},async first(){return sqlite.prepare(sql).get(...values)??null;},async all(){return {results:sqlite.prepare(sql).all(...values)};},run(){return {meta:{changes:Number(sqlite.prepare(sql).run(...values).changes)}};}};}async batch(statements){this.sqlite.exec('BEGIN IMMEDIATE');try{const result=statements.map(row=>row.run());this.sqlite.exec('COMMIT');return result;}catch(error){this.sqlite.exec('ROLLBACK');throw error;}}}
 const kinds=['continent','subcontinent','region','area','province','location'],pins={release_id:'reference-release',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
@@ -14,13 +15,47 @@ const source=(id,status)=>({id,name:`Isolated ${id}`,url:'https://example.org/te
 const membership=(id,parent='province-1',extra={})=>({id,entity_id:'location-0',parent_id:parent,valid_from:1000,valid_to:1100,source_id:'history',...extra});
 const existence=(id,entity,value,extra={})=>({id,entity_id:entity,value,valid_from:1000,valid_to:1100,source_id:'history',...extra});
 const payload=value=>({expected_geography:pins,...value});
-async function fixture(backend,{lifetime=false}={}){
+async function fixture(backend,{lifetime=false,extraLocations=0}={}){
  const pg=backend==='postgres'?await createLocalPostgres():null,db=pg?.db??new D1();if(pg)await pg.engine.exec(fs.readFileSync(new URL('../postgres/migrations/0001_temporal_geography.sql',import.meta.url),'utf8'));
- try{await importBatch(db,JSON.parse(fs.readFileSync(new URL('../data/hosted-type-catalog.json',import.meta.url))));const entities=Array.from({length:6},(_,continent)=>kinds.map((kind,index)=>({id:`${kind}-${continent}`,kind,name:`Reference ${kind} ${continent}`,parent_id:index?`${kinds[index-1]}-${continent}`:null,...(lifetime&&kind==='location'&&continent===0?{valid_from:1000,valid_to:1100,source_id:'history'}:{})}))).flat();await importBatch(db,{sources:[source('history','historical'),source('reference','reference'),source('example','example')],entities});const memberships=entities.map(row=>({entity_id:row.id,kind:row.kind,parent_id:row.parent_id,reference_name:row.name,active:1,source_id:'reference',evidence:{method:'isolated-reference'}}));await stageGeographicRelease(db,{release:{id:pins.release_id,source_id:'reference',version:1,reference_date:'2026-10-02',hierarchy_sha256:pins.hierarchy_sha256,footprints_sha256:pins.footprints_sha256,membership_sha256:await geographicMembershipHash(memberships),location_ids_sha256:await geographicLocationIdsHash(memberships),changes_sha256:await geographicChangesHash([]),expected_counts:Object.fromEntries(kinds.map(kind=>[kind,6]))},memberships});await finalizeGeographicRelease(db,pins.release_id);return {db,close:()=>pg?pg.close():db.sqlite.close()};}catch(error){await (pg?pg.close():Promise.resolve(db.sqlite.close()));throw error;}
+ try{await importBatch(db,JSON.parse(fs.readFileSync(new URL('../data/hosted-type-catalog.json',import.meta.url))));const entities=Array.from({length:6},(_,continent)=>kinds.map((kind,index)=>({id:`${kind}-${continent}`,kind,name:`Reference ${kind} ${continent}`,parent_id:index?`${kinds[index-1]}-${continent}`:null,...(lifetime&&kind==='location'&&continent===0?{valid_from:1000,valid_to:1100,source_id:'history'}:{})}))).flat();entities.push(...Array.from({length:extraLocations},(_,i)=>({id:`extra-location-${String(i).padStart(4,'0')}`,kind:'location',name:'Synthetic extra location',parent_id:'province-0'})));await importBatch(db,{sources:[source('history','historical'),source('reference','reference'),source('example','example')],entities:entities.slice(0,240)});for(let i=240;i<entities.length;i+=250)await importBatch(db,{entities:entities.slice(i,i+250)});const memberships=entities.map(row=>({entity_id:row.id,kind:row.kind,parent_id:row.parent_id,reference_name:row.name,active:1,source_id:'reference',evidence:{method:'isolated-reference'}}));await stageGeographicRelease(db,{release:{id:pins.release_id,source_id:'reference',version:1,reference_date:'2026-10-02',hierarchy_sha256:pins.hierarchy_sha256,footprints_sha256:pins.footprints_sha256,membership_sha256:await geographicMembershipHash(memberships),location_ids_sha256:await geographicLocationIdsHash(memberships),changes_sha256:await geographicChangesHash([]),expected_counts:Object.fromEntries(kinds.map(kind=>[kind,6+(kind==='location'?extraLocations:0)]))},memberships:memberships.slice(0,249)});for(let i=249;i<memberships.length;i+=250)await stageGeographicRelease(db,{release_id:pins.release_id,memberships:memberships.slice(i,i+250)});await finalizeGeographicRelease(db,pins.release_id);return {db,close:()=>pg?pg.close():db.sqlite.close()};}catch(error){await (pg?pg.close():Promise.resolve(db.sqlite.close()));throw error;}
 }
 async function both(callback,options){for(const backend of ['sqlite','postgres']){const f=await fixture(backend,options);try{await callback(f.db,backend);}finally{await f.close();}}}
 const entity=(snapshot,id)=>snapshot.entities.find(row=>row.id===id);
 const rejected=error=>error.status===400||error.status===409;
+
+test('opt-in inline temporal pages retain exact standalone claims, permanent withdrawals, source and release pins',()=>both(async db=>{
+ await importBatch(db,{records:[{id:'inline-population',location_id:'location-0',attribute:'population',value:42,valid_from:1000,valid_to:1100,source_id:'history'}]});
+ await importTemporalGeography(db,payload({memberships:[membership('inline-membership'),membership('inline-withdrawn','province-1',{entity_id:'location-3'})],existence:[existence('inline-exclusion','location-2','not_exists')]}));
+ await importTemporalGeography(db,payload({retirements:[{id:'inline-withdrawal',collection:'memberships',target_id:'inline-withdrawn',source_id:'history',reason:'Synthetic test withdrawal'}]}));
+ const scalar=await mapSnapshotPage(db,1000,{evidenceOnly:true,limit:4096}),inline=await mapSnapshotPage(db,1000,{evidenceOnly:true,limit:4096,includeTemporal:true});
+ const {temporal_geography,...sameScalar}=inline;assert.deepEqual(sameScalar,scalar);
+ assert.deepEqual(temporal_geography.records,await temporalGeographySnapshotPage(db,1000));assert.deepEqual(temporal_geography.withdrawals,await temporalGeographySnapshotPage(db,1000,{stream:'withdrawals'}));
+ assert.equal(temporal_geography.records.revision,inline.revision);assert.equal(temporal_geography.withdrawals.revision,inline.revision);
+ assert.equal(temporal_geography.records.records.find(row=>row.id==='inline-exclusion').value,'not_exists');assert.equal(temporal_geography.withdrawals.withdrawals[0].target_id,'inline-withdrawn');
+ assert.equal((await mapSnapshotPage(db,1000,{includeTemporal:true})).temporal_geography,undefined);
+}));
+
+test('a revision change between scalar and inline temporal reads rejects the complete response',()=>both(async db=>{
+ const prepare=db.prepare.bind(db);let reads=0;
+ db.prepare=sql=>{const statement=prepare(sql);if(/coalesce\(max\(rowid\),0\) revision/.test(sql)){const first=statement.first.bind(statement);statement.first=async()=>{const row=await first();reads++;return {...row,revision:row.revision+(reads>=3?1:0)};};}return statement;};
+ await assert.rejects(mapSnapshotPage(db,1000,{evidenceOnly:true,includeTemporal:true}),error=>error.status===409&&error.retryable===true);
+}));
+
+test('incomplete bounded temporal streams stay on the ordinary paging protocol',()=>both(async db=>{
+ const claims=Array.from({length:201},(_,i)=>existence(`paged-${i}`,`extra-location-${String(i).padStart(4,'0')}`,'unknown'));await importTemporalGeography(db,payload({existence:claims.slice(0,200)}));await importTemporalGeography(db,payload({existence:claims.slice(200)}));
+ const first=await temporalGeographySnapshotPage(db,1000);assert.ok(first.next_cursor);assert.equal(first.records.length,200);
+ const inline=await mapSnapshotPage(db,1000,{evidenceOnly:true,includeTemporal:true});assert.equal(inline.temporal_geography,undefined);
+ const second=await temporalGeographySnapshotPage(db,1000,{cursor:first.next_cursor});assert.equal(second.records.length,1);assert.equal(second.next_cursor,null);assert.equal(second.revision,inline.revision);
+},{extraLocations:201}));
+
+test('inline geography never widens the total scalar response byte limit',()=>both(async db=>{
+ await importBatch(db,{records:[{id:'large-source-scalar',location_id:'location-0',attribute:'population',value:42,valid_from:1000,valid_to:1100,source_id:'history'}]});
+ const names=Array.from({length:1000},(_,i)=>({id:`byte-name-${i}`,entity_id:`extra-location-${String(i).padStart(4,'0')}`,name:'Synthetic historical name',language:'en',valid_from:1000,valid_to:1100,source_id:'history',metadata:{retained:'x'.repeat(900)}}));for(let i=0;i<names.length;i+=100)await importBatch(db,{names:names.slice(i,i+100)});
+ await db.batch([db.prepare('INSERT INTO atlas_sources(id,name,url,license,vintage,supported_from,supported_to,status,metadata) VALUES(?,?,?,?,?,-3000,2027,?,?)').bind('inline-legacy-source','Synthetic legacy source','https://example.org/inline-byte-test','CC0','2026','historical',JSON.stringify({retained:'x'.repeat(7*1024*1024)}))]);
+ await importTemporalGeography(db,payload({existence:[existence('large-source-geo','location-0','unknown',{source_id:'inline-legacy-source'})]}));
+ const result=await mapSnapshotPage(db,1000,{evidenceOnly:true,limit:4096,includeTemporal:true});assert.equal(result.records.length,1);assert.equal(result.names.length,1000);assert.equal(result.temporal_geography,undefined);assert.ok(Buffer.byteLength(JSON.stringify(result))<=8*1024*1024);
+ assert.equal((await temporalGeographySnapshotPage(db,1000)).records.length,1);
+},{extraLocations:1000}));
 
 test('complete reference chains remain labeled fallback; BC/AD, exclusive end and province-level changes resolve identically',()=>both(async db=>{
  const initial=await temporalGeographySnapshot(db,-3000);assert.equal(initial.entities.filter(row=>row.present).length,36);assert.equal(entity(initial,'location-0').parent_context,'reference');assert.equal(initial.capability.datedFootprints,0);
@@ -76,7 +111,7 @@ test('permanent withdrawal pages retain claims outside the selected year and sha
 
 test('legacy source metadata is byte-preflighted before materialization and oversized pages fail with a bounded retry suggestion',()=>both(async db=>{
  const legacyMetadata=JSON.stringify({legacy:'x'.repeat(8*1024*1024)});await db.batch([db.prepare('INSERT INTO atlas_sources(id,name,url,license,vintage,supported_from,supported_to,status,metadata) VALUES(?,?,?,?,?,-3000,2027,?,?)').bind('large-legacy-source','Large isolated legacy metadata','https://example.org/isolated-large-source','CC0','2026','historical',legacyMetadata)]);
- await importTemporalGeography(db,payload({memberships:[membership('large-source-claim','province-1',{source_id:'large-legacy-source'})]}));const queries=[],prepare=db.prepare.bind(db);db.prepare=sql=>{queries.push(sql);return prepare(sql);};await assert.rejects(temporalGeographySnapshotPage(db,1000,{limit:200}),error=>error.status===413&&error.suggested_limit===100);assert.ok(queries.some(sql=>/sum\(/.test(sql)&&/FROM atlas_sources/.test(sql)));assert.ok(!queries.some(sql=>/^SELECT \* FROM atlas_sources/.test(sql)));
+ await importTemporalGeography(db,payload({memberships:[membership('large-source-claim','province-1',{source_id:'large-legacy-source'})]}));const queries=[],prepare=db.prepare.bind(db);db.prepare=sql=>{queries.push(sql);return prepare(sql);};await assert.rejects(temporalGeographySnapshotPage(db,1000,{limit:200}),error=>error.status===413&&error.suggested_limit===100);assert.ok(queries.some(sql=>/sum\(/.test(sql)&&/FROM atlas_sources/.test(sql)));assert.ok(!queries.some(sql=>/^SELECT \* FROM atlas_sources/.test(sql)));assert.equal((await mapSnapshotPage(db,1000,{evidenceOnly:true,includeTemporal:true})).temporal_geography,undefined);
 }));
 
 test('raw SQL cannot store fractional years or alter retained temporal facts and receipts',()=>both(async(db,backend)=>{

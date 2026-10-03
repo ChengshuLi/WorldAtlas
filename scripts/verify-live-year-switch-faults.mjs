@@ -35,9 +35,11 @@ try {
     try {
       const remote = await fetch(url, {headers: {'OAI-Sites-Authorization': 'Bearer ' + token}, redirect: 'error', signal: AbortSignal.timeout(120000)});
       let bytes = Buffer.from(await remote.arrayBuffer()); entry.status = remote.status;
-      if (fault === 'revision-once' && url.pathname === '/api/geography/temporal/snapshot' && remote.ok) {
-        const page = JSON.parse(bytes); assert.ok(Number.isSafeInteger(page.revision));
-        entry.injected = fault; entry.original_revision = page.revision; page.revision++; bytes = Buffer.from(JSON.stringify(page)); fault = 'none';
+      if (fault === 'revision-once' && ['/api/geography/temporal/snapshot', '/api/map/snapshot'].includes(url.pathname) && remote.ok) {
+        const page = JSON.parse(bytes), target = url.pathname === '/api/map/snapshot' ? page.temporal_geography?.records : page;
+        if (target) { assert.ok(Number.isSafeInteger(target.revision));
+          entry.injected = fault; entry.original_revision = target.revision; target.revision++; bytes = Buffer.from(JSON.stringify(page)); fault = 'none';
+        }
       }
       const headers = {}; for (const key of ['content-type', 'cache-control', 'etag', 'last-modified']) if (remote.headers.has(key)) headers[key] = remote.headers.get(key);
       res.writeHead(remote.status, headers); res.end(bytes);
