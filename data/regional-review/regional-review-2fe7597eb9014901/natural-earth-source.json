@@ -1,0 +1,235 @@
+{
+  "dataset": "Natural Earth 10m cultural vectors: ne_10m_admin_1_states_provinces",
+  "source_repository_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+  "source_commit_date": "2022-06-02",
+  "dataset_version": "5.1.1",
+  "license": "Public domain under Natural Earth terms of use",
+  "source_files": {
+    "shp": {
+      "bytes": 20998780,
+      "sha256": "c6f5c8b4b1320d9417033762419c6df1eb423989cd880fba78ea0b1e3522cbe4"
+    },
+    "dbf": {
+      "bytes": 15161514,
+      "sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359"
+    },
+    "shx": {
+      "bytes": 36868,
+      "sha256": "37a9e2bc79ed31d3bdea3cb62d928f77281a1c88d645cd33430231c75dbcf350"
+    },
+    "prj": {
+      "bytes": 145,
+      "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+    },
+    "cpg": {
+      "bytes": 5,
+      "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+    },
+    "VERSION.txt": {
+      "bytes": 6,
+      "sha256": "f9893302cd3158f3b5aea394dcd2a91574869e9e6ff69e9235b10a3bf8c983fb"
+    }
+  },
+  "records": [
+    {
+      "source_id": "ATF-5916",
+      "atlas_location_id": "atlas:coverage:ATF-5916",
+      "attributes": {
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "adm1_code": "ATF-5916",
+        "iso_3166_2": "TF-X01~",
+        "iso_a2": "TF",
+        "sov_a3": "FR1",
+        "adm0_a3": "ATF",
+        "admin": "French Southern and Antarctic Lands",
+        "geonunit": "French Southern and Antarctic Lands",
+        "gu_a3": "ATF",
+        "name": "Archipel des Kerguelen",
+        "name_en": "Kerguelen Islands",
+        "name_fr": "Île Kerguelen",
+        "gn_id": 1546558,
+        "gn_name": "Archipel des Kerguelen",
+        "gn_level": 1,
+        "gn_a1_code": "TF.03",
+        "latitude": -49.3179,
+        "longitude": 69.2725,
+        "ne_id": 1159315609,
+        "wikidataid": ""
+      },
+      "source_geometry_type": "MultiPolygon",
+      "source_ring_count": 9,
+      "source_vertices": 439,
+      "source_bounds_wgs84": [
+        68.61011803500008,
+        -49.72161223799992,
+        70.56853274800005,
+        -48.566664320999905
+      ],
+      "source_geometry_sha256": "13fff21b4524c34bb991b5e83d0efd1231835ea091c438f122cdf48026cc9bee",
+      "atlas_geometry_type": "MultiPolygon",
+      "atlas_component_count": 9,
+      "atlas_vertices_including_closure": 432,
+      "atlas_bounds_wgs84": [
+        68.610118,
+        -49.721612,
+        70.568533,
+        -48.566664
+      ],
+      "source_area_epsg6933_km2": 6986.787494690251,
+      "atlas_area_epsg6933_km2": 6986.826850756827,
+      "source_atlas_symmetric_difference_epsg6933_km2": 0.08399783670088697,
+      "source_atlas_hausdorff_distance_m_epsg6933": 7.341194632573161
+    },
+    {
+      "source_id": "ATF-5917",
+      "atlas_location_id": "atlas:coverage:ATF-5917",
+      "attributes": {
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "adm1_code": "ATF-5917",
+        "iso_3166_2": "TF-X02~",
+        "iso_a2": "TF",
+        "sov_a3": "FR1",
+        "adm0_a3": "ATF",
+        "admin": "French Southern and Antarctic Lands",
+        "geonunit": "French Southern and Antarctic Lands",
+        "gu_a3": "ATF",
+        "name": "Archipel des Crozet",
+        "name_en": "Crozet Islands",
+        "name_fr": "Îles Crozet",
+        "gn_id": 936339,
+        "gn_name": "Archipel des Crozet",
+        "gn_level": 1,
+        "gn_a1_code": "TF.02",
+        "latitude": -46.3974,
+        "longitude": 51.7536,
+        "ne_id": 1159317941,
+        "wikidataid": ""
+      },
+      "source_geometry_type": "MultiPolygon",
+      "source_ring_count": 2,
+      "source_vertices": 35,
+      "source_bounds_wgs84": [
+        50.17554772200003,
+        -46.45126718499995,
+        51.868174675000034,
+        -46.04371510199991
+      ],
+      "source_geometry_sha256": "6ec1632a6422229148bce99d4749e8e9e5467f7f9a97b8ef7caf01430674c0d4",
+      "atlas_geometry_type": "MultiPolygon",
+      "atlas_component_count": 2,
+      "atlas_vertices_including_closure": 35,
+      "atlas_bounds_wgs84": [
+        50.175548,
+        -46.451267,
+        51.868175,
+        -46.043715
+      ],
+      "source_area_epsg6933_km2": 205.27974437629973,
+      "atlas_area_epsg6933_km2": 205.27948650105634,
+      "source_atlas_symmetric_difference_epsg6933_km2": 0.0014690923134693123,
+      "source_atlas_hausdorff_distance_m_epsg6933": 0.0616840199972681
+    },
+    {
+      "source_id": "ATF-5918",
+      "atlas_location_id": "atlas:coverage:ATF-5918",
+      "attributes": {
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "adm1_code": "ATF-5918",
+        "iso_3166_2": "TF-X1~",
+        "iso_a2": "TF",
+        "sov_a3": "FR1",
+        "adm0_a3": "ATF",
+        "admin": "French Southern and Antarctic Lands",
+        "geonunit": "French Southern and Antarctic Lands",
+        "gu_a3": "ATF",
+        "name": "Iles Saint-Paul et Nouvelle-Amsterdam",
+        "name_en": "Amsterdam and Saint-Paul Islands",
+        "name_fr": "Îles Saint-Paul et Nouvelle-Amsterdam",
+        "gn_id": 1547221,
+        "gn_name": "Iles Saint-Paul et Nouvelle-Amsterdam",
+        "gn_level": 1,
+        "gn_a1_code": "TF.01",
+        "latitude": -37.861,
+        "longitude": 77.5353,
+        "ne_id": 1159317943,
+        "wikidataid": ""
+      },
+      "source_geometry_type": "MultiPolygon",
+      "source_ring_count": 2,
+      "source_vertices": 21,
+      "source_bounds_wgs84": [
+        77.48755944100003,
+        -38.73845794099992,
+        77.58521569100003,
+        -37.820245049999926
+      ],
+      "source_geometry_sha256": "6fbfd16f878fb94230b4a9112b776e303f24ef958d4846933f65f46f782e9c78",
+      "atlas_geometry_type": "MultiPolygon",
+      "atlas_component_count": 2,
+      "atlas_vertices_including_closure": 21,
+      "atlas_bounds_wgs84": [
+        77.487559,
+        -38.738458,
+        77.585216,
+        -37.820245
+      ],
+      "source_area_epsg6933_km2": 62.92595479066524,
+      "atlas_area_epsg6933_km2": 62.92648902528492,
+      "source_atlas_symmetric_difference_epsg6933_km2": 0.0008583992626665528,
+      "source_atlas_hausdorff_distance_m_epsg6933": 0.061095533440097015
+    },
+    {
+      "source_id": "HMD+00?",
+      "atlas_location_id": "atlas:coverage:HMD+00?",
+      "attributes": {
+        "featurecla": "Admin-1 states provinces",
+        "scalerank": 10,
+        "adm1_code": "HMD+00?",
+        "iso_3166_2": "HM-X01~",
+        "iso_a2": "HM",
+        "sov_a3": "AU1",
+        "adm0_a3": "HMD",
+        "admin": "Heard Island and McDonald Islands",
+        "geonunit": "Heard Island and McDonald Islands",
+        "gu_a3": "HMD",
+        "name": "Heard Island and McDonald Islands",
+        "name_en": "Heard Island and McDonald Islands",
+        "name_fr": "Îles Heard et McDonald",
+        "gn_id": 6620381,
+        "gn_name": "Heard Island and McDonald Islands (general)",
+        "gn_level": 1,
+        "gn_a1_code": "HM.00",
+        "latitude": -53.1036,
+        "longitude": 73.5247,
+        "ne_id": 1159315607,
+        "wikidataid": ""
+      },
+      "source_geometry_type": "Polygon",
+      "source_ring_count": 1,
+      "source_vertices": 54,
+      "source_bounds_wgs84": [
+        73.23601321700005,
+        -53.19255950299993,
+        73.81218509200005,
+        -52.961602471999925
+      ],
+      "source_geometry_sha256": "ab382d92dfc8ad6ff4ef14367d10c1362f2b7e4b8779a74a8c8f09b137de7aec",
+      "atlas_geometry_type": "Polygon",
+      "atlas_component_count": 1,
+      "atlas_vertices_including_closure": 54,
+      "atlas_bounds_wgs84": [
+        73.236013,
+        -53.19256,
+        73.812185,
+        -52.961602
+      ],
+      "source_area_epsg6933_km2": 394.83316284675635,
+      "atlas_area_epsg6933_km2": 394.83347519574744,
+      "source_atlas_symmetric_difference_epsg6933_km2": 0.0022833924396019867,
+      "source_atlas_hausdorff_distance_m_epsg6933": 0.05288764804639406
+    }
+  ]
+}

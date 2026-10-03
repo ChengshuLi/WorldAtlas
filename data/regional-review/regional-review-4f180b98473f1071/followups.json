@@ -1,0 +1,104 @@
+{
+  "as_of": "2026-10-03",
+  "parent_issue": 482,
+  "recommendations": [
+    {
+      "type": "geography-source-crosswalk",
+      "proposed_title": "Reconcile Madagascar 119 scoped districts and 22 regions with current OCHA COD-AB",
+      "bounded_scope": {
+        "source_version": "OCHA COD-AB Madagascar v01, reviewed 2026-07-06, valid_on 2018-08-10",
+        "source_units": "All 120 ADM2 districts and all 24 ADM1 regions",
+        "current_subjects": "All 119 pinned Madagascar district IDs and all 22 current Madagascar province IDs in issue #482; include no other country/region",
+        "exact_unmatched_source_unit": {
+          "name": "Antanimora Atsimo",
+          "adm2_pcode": "MG52519",
+          "adm1_name": "Androy"
+        },
+        "primary_current_overlap": {
+          "id": "gb:MDG:ADM2:10022922B3330352702203",
+          "name": "Ambovombe-Androy"
+        },
+        "other_intersected_current_ids": [
+          "gb:MDG:ADM2:10022922B6580820782603",
+          "gb:MDG:ADM2:10022922B61088153240222",
+          "gb:MDG:ADM2:10022922B63714971659336",
+          "gb:MDG:ADM2:10022922B95964642483948"
+        ],
+        "parent_crosswalk_questions": [
+          "COD-AB Vatovavy and Fitovinany versus current Vatovavy-Fitovinany",
+          "COD-AB Haute Matsiatra versus current Matsiatra Ambony",
+          "COD-AB Ambatosoa spatially overlaps current Analanjirofo but has no normalized name match",
+          "Reconcile 15 name-matched COD-AB ADM2 overlays above the 5% screen and retained predecessor source versions"
+        ]
+      },
+      "required_evidence": [
+        "Restore original OCHA/BNGRC and predecessor administrative source notes, legal change instruments or current official boundary gazetteer, and licenses.",
+        "Exact code/name/date crosswalk for every 120 ADM2 and 24 ADM1 feature; explain new, split, renamed, removed and unchanged units.",
+        "Reproduce equal-area source/current geometry overlays for all matched units and parent descendant unions; inspect boundary slivers and neighbor consistency.",
+        "Engineering-owned integration proposal only after source authority and identity are resolved; no unilateral edits by geography research.",
+        "Reconcile 55 disconnected source components over 0.01 km² (64.588 km² total) across 10 assigned districts; they have <1% overlap current union and no GSHHG L1 intersections, which is inconclusive. Preserve component indexes/centroids and obtain official coastline/island history."
+      ],
+      "reason": "The current scope does not contain Antanimora Atsimo as an independent subject and its 22 parent regions do not directly map to all 24 COD-AB ADM1 source names. The source review is strong enough to require bounded reconciliation but not to prescribe an automatic split, merge or boundary change.",
+      "created_issue": 632
+    },
+    {
+      "type": "geography-source-restoration",
+      "proposed_title": "Obtain current official Seychelles region-to-island and outer-island inventory",
+      "bounded_scope": {
+        "current_subjects": [
+          "all 12 gb:MUS:ADM1 locations in issue #482",
+          "atlas:coverage:MUS-5180",
+          "atlas:coverage:ATF-5919",
+          "atlas:coverage:FRA-4601",
+          "atlas:coverage:FRA-4602",
+          "all 8 gb:SYC:ADM2 locations in issue #482"
+        ],
+        "full_packet_context": "All 8 Seychelles source region locations and their 27 NBS-provenance ADM3 district rows"
+      },
+      "required_evidence": [
+        "Current dated Seychelles NBS region/district/island crosswalk and official island inventory with source licenses.",
+        "Resolve four parent-label mismatches and trace Other Islands source 1,057 parts versus current 7 parts to named island/rock identities.",
+        "Use scale-appropriate official physical coast/island evidence; do not use census population or GSHHG non-detection as island absence proof.",
+        "Crosswalk every Mauritius Island district to 2022 municipal ward/Village Council Area records and Rodrigues local regions/locality lists; search for current official geocoded settlement sources for all 12 assigned Mauritius ADM1 subjects and 8 Seychelles regions, recording any source-access failure and leaving unavailable coverage unresolved."
+      ],
+      "reason": "The only retained statistical crosswalk is 2019/2010-derived; current labels and grouped outer-island completeness remain unresolved.",
+      "created_issue": 633
+    },
+    {
+      "type": "geography-source-restoration",
+      "proposed_title": "Resolve official island/reef geometry for Mauritius outer islands and Agalega records",
+      "bounded_scope": {
+        "current_subjects": [
+          "gb:MUS:ADM1:65221844B12885462064369",
+          "gb:MUS:ADM1:65221844B83452679821580",
+          "atlas:coverage:MUS-5180"
+        ],
+        "context": "Inspect all 12 Mauritius ADM1 source records because the producer defines a mixed district/outer-islands layer."
+      },
+      "required_evidence": [
+        "Current official island/reef inventory with dated source, scale, coordinate reference, license and named components.",
+        "Reconcile both spatially disjoint Agalega footprints against the 2022 census group and identify each included island/rock.",
+        "Determine what St Brandon source geometry represents; population count/no permanent residents is not physical geography.",
+        "Check other Mauritius/outer-island assigned members for completeness against the same official inventory."
+      ],
+      "reason": "GSHHG 2.3.7 level 1 does not intersect St Brandon or the Natural Earth Agalega footprint, but that coarse non-detection cannot establish absent reef or land.",
+      "created_issue": 633
+    },
+    {
+      "type": "geography-source-restoration",
+      "proposed_title": "Find an authoritative Comoros settlement/locality gazetteer with geospatial coordinates",
+      "bounded_scope": {
+        "current_subject": "atlas:territory:COM",
+        "physical_components": "The three retained source island units: Anjouan, Grande Comore and Mohéli"
+      },
+      "required_evidence": [
+        "Official dated gazetteer/census locality list tied to the three named islands and administrative hierarchy, with geometry or coordinates and reuse terms.",
+        "Compare every official locality to the HOTOSM/OSM screen while preserving its volunteer-mapping limitation.",
+        "Inspect outer islets and administrative remainders without inferring boundaries from political claims."
+      ],
+      "reason": "COD-AB supports a 3/17/55 admin hierarchy and COD-PS supports ADM1 statistics, but no authoritative complete settlement coordinate source was found; HOTOSM supplies only 565 volunteer-mapped features.",
+      "created_issue": 634
+    }
+  ],
+  "issue_creation_notes": "Three source-restoration follow-up issues were created blocked and depend on completion of #482. They are not ready or claimable; readiness/overlap review remains required."
+}

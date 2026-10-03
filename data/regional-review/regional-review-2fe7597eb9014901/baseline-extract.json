@@ -1,0 +1,461 @@
+{
+  "baseline_commit": "ff171e1dd1998684d9b3549943d5725817a7aef4",
+  "issue": 439,
+  "region": {
+    "id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+    "name": "Southern Indian Ocean Islands",
+    "continent_id": "framework:continent:oceania:48580dd0c4b4",
+    "subcontinent_id": "framework:subcontinent:southern-ocean-islands:5cbfa7306483",
+    "frozen_geometry_sha256": "bbc4c04dec706c1762545b72be5f153bb7fd13e6f9ab1591332293ec08a4bf03",
+    "frozen_member_ids_sha256": "63f9ec0c6e5f8ccfccd83e3309bc01dde97c7985219bf32beab8580c7c9241b4",
+    "location_count": 4
+  },
+  "scope_location_ids": [
+    "atlas:coverage:ATF-5916",
+    "atlas:coverage:ATF-5917",
+    "atlas:coverage:ATF-5918",
+    "atlas:coverage:HMD+00?"
+  ],
+  "locations": {
+    "atlas:coverage:ATF-5916": {
+      "id": "atlas:coverage:ATF-5916",
+      "name": "Archipel des Kerguelen",
+      "parent_id": "framework:province:archipel-des-kerguelen:0186c2974b8f",
+      "reference_owner": "French Southern and Antarctic Lands",
+      "geometry_type": "MultiPolygon",
+      "geometry_sha256": "17f5a788aa91ea1f3af7e2182392c91aa1a8a741bf44cf3ee1424eeca1d6aa4d",
+      "vertices": 432,
+      "bounds": [
+        68.610118,
+        -49.721612,
+        70.568533,
+        -48.566664
+      ],
+      "metadata": {
+        "source_name": "Natural Earth",
+        "source_id": "natural-earth:ATF-5916",
+        "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "location_basis": "Named source island / overseas territory",
+        "source_role": "Named territory",
+        "hierarchy_source": "WGSRPD / Natural Earth",
+        "parent_match": "Named source territory; no smaller province asserted",
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 63,
+          "evidence_file": "geographic-decisions"
+        }
+      }
+    },
+    "atlas:coverage:ATF-5917": {
+      "id": "atlas:coverage:ATF-5917",
+      "name": "Archipel des Crozet",
+      "parent_id": "framework:province:archipel-des-crozet:13fab451c57f",
+      "reference_owner": "French Southern and Antarctic Lands",
+      "geometry_type": "MultiPolygon",
+      "geometry_sha256": "c32fd8517f439aa3f0c4351102029b25984e106f249f7d410286995b0309fd84",
+      "vertices": 35,
+      "bounds": [
+        50.175548,
+        -46.451267,
+        51.868175,
+        -46.043715
+      ],
+      "metadata": {
+        "source_name": "Natural Earth",
+        "source_id": "natural-earth:ATF-5917",
+        "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "location_basis": "Named source island / overseas territory",
+        "source_role": "Named territory",
+        "hierarchy_source": "WGSRPD / Natural Earth",
+        "parent_match": "Named source territory; no smaller province asserted",
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 63,
+          "evidence_file": "geographic-decisions"
+        }
+      }
+    },
+    "atlas:coverage:ATF-5918": {
+      "id": "atlas:coverage:ATF-5918",
+      "name": "Iles Saint-Paul et Nouvelle-Amsterdam",
+      "parent_id": "framework:province:iles-saint-paul-et-nouvelle-amsterdam:ecadfbb105a4",
+      "reference_owner": "French Southern and Antarctic Lands",
+      "geometry_type": "MultiPolygon",
+      "geometry_sha256": "a1cf21d3b437d2382d0c6c98b4bf52848c4c6c908fda19afe96b3f73baf11781",
+      "vertices": 21,
+      "bounds": [
+        77.487559,
+        -38.738458,
+        77.585216,
+        -37.820245
+      ],
+      "metadata": {
+        "source_name": "Natural Earth",
+        "source_id": "natural-earth:ATF-5918",
+        "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "location_basis": "Named source island / overseas territory",
+        "source_role": "Named territory",
+        "hierarchy_source": "WGSRPD / Natural Earth",
+        "parent_match": "Named source territory; no smaller province asserted",
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 63,
+          "evidence_file": "geographic-decisions"
+        }
+      }
+    },
+    "atlas:coverage:HMD+00?": {
+      "id": "atlas:coverage:HMD+00?",
+      "name": "Heard Island and McDonald Islands",
+      "parent_id": "framework:province:heard-island-and-mcdonald-islands:489abffe1bdc",
+      "reference_owner": "Heard Island and McDonald Islands",
+      "geometry_type": "Polygon",
+      "geometry_sha256": "cf4693eada5134648f37d7182eb9d5e2a0ac957caed52b9d8ac3cfaa67d2f4c0",
+      "vertices": 54,
+      "bounds": [
+        73.236013,
+        -53.19256,
+        73.812185,
+        -52.961602
+      ],
+      "metadata": {
+        "source_name": "Natural Earth",
+        "source_id": "natural-earth:HMD+00?",
+        "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "location_basis": "Named source island / overseas territory",
+        "source_role": "Named territory",
+        "hierarchy_source": "WGSRPD / Natural Earth",
+        "parent_match": "Named source territory; no smaller province asserted",
+        "semantic_review": {
+          "status": "open",
+          "continent": "Oceania",
+          "decision_index": 62,
+          "evidence_file": "geographic-decisions"
+        }
+      }
+    }
+  },
+  "complete_parent_chains": {
+    "atlas:coverage:HMD+00?": [
+      {
+        "id": "atlas:coverage:HMD+00?",
+        "name": "Heard Island and McDonald Islands",
+        "level": null,
+        "parent_id": "framework:province:heard-island-and-mcdonald-islands:489abffe1bdc"
+      },
+      {
+        "id": "framework:province:heard-island-and-mcdonald-islands:489abffe1bdc",
+        "name": "Heard Island and McDonald Islands",
+        "level": "province",
+        "parent_id": "framework:area:heard-mcdonald-is:bffd3505554c"
+      },
+      {
+        "id": "framework:area:heard-mcdonald-is:bffd3505554c",
+        "name": "Heard and McDonald Islands",
+        "level": "area",
+        "parent_id": "framework:region:southern-indian-ocean-islands:db862edea88a"
+      },
+      {
+        "id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+        "name": "Southern Indian Ocean Islands",
+        "level": "region",
+        "parent_id": "framework:subcontinent:southern-ocean-islands:5cbfa7306483"
+      },
+      {
+        "id": "framework:subcontinent:southern-ocean-islands:5cbfa7306483",
+        "name": "Subantarctic Indian Ocean Islands",
+        "level": "subcontinent",
+        "parent_id": "framework:continent:oceania:48580dd0c4b4"
+      },
+      {
+        "id": "framework:continent:oceania:48580dd0c4b4",
+        "name": "Oceania",
+        "level": "continent",
+        "parent_id": null
+      }
+    ],
+    "atlas:coverage:ATF-5916": [
+      {
+        "id": "atlas:coverage:ATF-5916",
+        "name": "Archipel des Kerguelen",
+        "level": null,
+        "parent_id": "framework:province:archipel-des-kerguelen:0186c2974b8f"
+      },
+      {
+        "id": "framework:province:archipel-des-kerguelen:0186c2974b8f",
+        "name": "Archipel des Kerguelen",
+        "level": "province",
+        "parent_id": "framework:area:kerguelen:919141a446a8"
+      },
+      {
+        "id": "framework:area:kerguelen:919141a446a8",
+        "name": "Kerguelen",
+        "level": "area",
+        "parent_id": "framework:region:southern-indian-ocean-islands:db862edea88a"
+      },
+      {
+        "id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+        "name": "Southern Indian Ocean Islands",
+        "level": "region",
+        "parent_id": "framework:subcontinent:southern-ocean-islands:5cbfa7306483"
+      },
+      {
+        "id": "framework:subcontinent:southern-ocean-islands:5cbfa7306483",
+        "name": "Subantarctic Indian Ocean Islands",
+        "level": "subcontinent",
+        "parent_id": "framework:continent:oceania:48580dd0c4b4"
+      },
+      {
+        "id": "framework:continent:oceania:48580dd0c4b4",
+        "name": "Oceania",
+        "level": "continent",
+        "parent_id": null
+      }
+    ],
+    "atlas:coverage:ATF-5917": [
+      {
+        "id": "atlas:coverage:ATF-5917",
+        "name": "Archipel des Crozet",
+        "level": null,
+        "parent_id": "framework:province:archipel-des-crozet:13fab451c57f"
+      },
+      {
+        "id": "framework:province:archipel-des-crozet:13fab451c57f",
+        "name": "Archipel des Crozet",
+        "level": "province",
+        "parent_id": "framework:area:crozet-is:1fb088114cd2"
+      },
+      {
+        "id": "framework:area:crozet-is:1fb088114cd2",
+        "name": "Crozet Islands",
+        "level": "area",
+        "parent_id": "framework:region:southern-indian-ocean-islands:db862edea88a"
+      },
+      {
+        "id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+        "name": "Southern Indian Ocean Islands",
+        "level": "region",
+        "parent_id": "framework:subcontinent:southern-ocean-islands:5cbfa7306483"
+      },
+      {
+        "id": "framework:subcontinent:southern-ocean-islands:5cbfa7306483",
+        "name": "Subantarctic Indian Ocean Islands",
+        "level": "subcontinent",
+        "parent_id": "framework:continent:oceania:48580dd0c4b4"
+      },
+      {
+        "id": "framework:continent:oceania:48580dd0c4b4",
+        "name": "Oceania",
+        "level": "continent",
+        "parent_id": null
+      }
+    ],
+    "atlas:coverage:ATF-5918": [
+      {
+        "id": "atlas:coverage:ATF-5918",
+        "name": "Iles Saint-Paul et Nouvelle-Amsterdam",
+        "level": null,
+        "parent_id": "framework:province:iles-saint-paul-et-nouvelle-amsterdam:ecadfbb105a4"
+      },
+      {
+        "id": "framework:province:iles-saint-paul-et-nouvelle-amsterdam:ecadfbb105a4",
+        "name": "Iles Saint-Paul et Nouvelle-Amsterdam",
+        "level": "province",
+        "parent_id": "framework:area:amsterdam-st-paul-is:cd1d6a1e4243"
+      },
+      {
+        "id": "framework:area:amsterdam-st-paul-is:cd1d6a1e4243",
+        "name": "Amsterdam and Saint-Paul Islands",
+        "level": "area",
+        "parent_id": "framework:region:southern-indian-ocean-islands:db862edea88a"
+      },
+      {
+        "id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+        "name": "Southern Indian Ocean Islands",
+        "level": "region",
+        "parent_id": "framework:subcontinent:southern-ocean-islands:5cbfa7306483"
+      },
+      {
+        "id": "framework:subcontinent:southern-ocean-islands:5cbfa7306483",
+        "name": "Subantarctic Indian Ocean Islands",
+        "level": "subcontinent",
+        "parent_id": "framework:continent:oceania:48580dd0c4b4"
+      },
+      {
+        "id": "framework:continent:oceania:48580dd0c4b4",
+        "name": "Oceania",
+        "level": "continent",
+        "parent_id": null
+      }
+    ]
+  },
+  "review_group_member_location_ids": {
+    "framework:area:amsterdam-st-paul-is:cd1d6a1e4243": [
+      "atlas:coverage:ATF-5918"
+    ],
+    "framework:area:crozet-is:1fb088114cd2": [
+      "atlas:coverage:ATF-5917"
+    ],
+    "framework:area:heard-mcdonald-is:bffd3505554c": [
+      "atlas:coverage:HMD+00?"
+    ],
+    "framework:area:kerguelen:919141a446a8": [
+      "atlas:coverage:ATF-5916"
+    ],
+    "framework:province:archipel-des-crozet:13fab451c57f": [
+      "atlas:coverage:ATF-5917"
+    ],
+    "framework:province:archipel-des-kerguelen:0186c2974b8f": [
+      "atlas:coverage:ATF-5916"
+    ],
+    "framework:province:heard-island-and-mcdonald-islands:489abffe1bdc": [
+      "atlas:coverage:HMD+00?"
+    ],
+    "framework:province:iles-saint-paul-et-nouvelle-amsterdam:ecadfbb105a4": [
+      "atlas:coverage:ATF-5918"
+    ],
+    "framework:region:southern-indian-ocean-islands:db862edea88a": [
+      "atlas:coverage:ATF-5916",
+      "atlas:coverage:ATF-5917",
+      "atlas:coverage:ATF-5918",
+      "atlas:coverage:HMD+00?"
+    ]
+  },
+  "region_member_location_ids": [
+    "atlas:coverage:ATF-5916",
+    "atlas:coverage:ATF-5917",
+    "atlas:coverage:ATF-5918",
+    "atlas:coverage:HMD+00?"
+  ],
+  "projection_rows": {
+    "atlas:coverage:HMD+00?": {
+      "id": "atlas:coverage:HMD+00?",
+      "name": "Heard Island and McDonald Islands",
+      "parent_id": "framework:province:heard-island-and-mcdonald-islands:489abffe1bdc",
+      "parent_chain": [
+        "framework:province:heard-island-and-mcdonald-islands:489abffe1bdc",
+        "framework:area:heard-mcdonald-is:bffd3505554c",
+        "framework:region:southern-indian-ocean-islands:db862edea88a",
+        "framework:subcontinent:southern-ocean-islands:5cbfa7306483",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "owner": "Heard Island and McDonald Islands",
+      "continent": "Oceania",
+      "region_id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+      "source_id": "natural-earth:HMD+00?",
+      "source_year": "Undated modern reference",
+      "status": "open",
+      "semantic_status": "open"
+    },
+    "atlas:coverage:ATF-5916": {
+      "id": "atlas:coverage:ATF-5916",
+      "name": "Archipel des Kerguelen",
+      "parent_id": "framework:province:archipel-des-kerguelen:0186c2974b8f",
+      "parent_chain": [
+        "framework:province:archipel-des-kerguelen:0186c2974b8f",
+        "framework:area:kerguelen:919141a446a8",
+        "framework:region:southern-indian-ocean-islands:db862edea88a",
+        "framework:subcontinent:southern-ocean-islands:5cbfa7306483",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "owner": "French Southern and Antarctic Lands",
+      "continent": "Oceania",
+      "region_id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+      "source_id": "natural-earth:ATF-5916",
+      "source_year": "Undated modern reference",
+      "status": "open",
+      "semantic_status": "open"
+    },
+    "atlas:coverage:ATF-5917": {
+      "id": "atlas:coverage:ATF-5917",
+      "name": "Archipel des Crozet",
+      "parent_id": "framework:province:archipel-des-crozet:13fab451c57f",
+      "parent_chain": [
+        "framework:province:archipel-des-crozet:13fab451c57f",
+        "framework:area:crozet-is:1fb088114cd2",
+        "framework:region:southern-indian-ocean-islands:db862edea88a",
+        "framework:subcontinent:southern-ocean-islands:5cbfa7306483",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "owner": "French Southern and Antarctic Lands",
+      "continent": "Oceania",
+      "region_id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+      "source_id": "natural-earth:ATF-5917",
+      "source_year": "Undated modern reference",
+      "status": "open",
+      "semantic_status": "open"
+    },
+    "atlas:coverage:ATF-5918": {
+      "id": "atlas:coverage:ATF-5918",
+      "name": "Iles Saint-Paul et Nouvelle-Amsterdam",
+      "parent_id": "framework:province:iles-saint-paul-et-nouvelle-amsterdam:ecadfbb105a4",
+      "parent_chain": [
+        "framework:province:iles-saint-paul-et-nouvelle-amsterdam:ecadfbb105a4",
+        "framework:area:amsterdam-st-paul-is:cd1d6a1e4243",
+        "framework:region:southern-indian-ocean-islands:db862edea88a",
+        "framework:subcontinent:southern-ocean-islands:5cbfa7306483",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "owner": "French Southern and Antarctic Lands",
+      "continent": "Oceania",
+      "region_id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+      "source_id": "natural-earth:ATF-5918",
+      "source_year": "Undated modern reference",
+      "status": "open",
+      "semantic_status": "open"
+    }
+  },
+  "baseline_files": [
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10165703,
+      "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d"
+    },
+    {
+      "path": "data/semantic-report.json",
+      "bytes": 6091596,
+      "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2367982,
+      "sha256": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-projection.json.gz",
+      "bytes": 5005075,
+      "sha256": "beb2739a65c67f01a65deab96ebf209a159b257453e156ef590106e1f1c9a348"
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 70253,
+      "sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1"
+    },
+    {
+      "path": "data/macro-foundation/macro-certificate.json",
+      "bytes": 38430,
+      "sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    }
+  ]
+}

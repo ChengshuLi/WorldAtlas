@@ -1,0 +1,1391 @@
+{
+  "source": {
+    "title": "GSHHG full-resolution global shoreline database, version 2.3.7",
+    "authors": "Paul Wessel and Walter H. F. Smith, University of Hawaii / NOAA",
+    "release_date": "2017-06-15",
+    "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+    "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+    "member": "gshhs_f.b",
+    "member_bytes": 95809336,
+    "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "license": "LGPLv3 or later; exact notice retained in sources/gshhg-LGPL.txt",
+    "restoration": "Download the pinned archive, verify its SHA-256, extract gshhs_f.b, and verify member SHA-256."
+  },
+  "scope_count": 144,
+  "source_level1_record_count": 179832,
+  "source_total_record_count": 188612,
+  "retained": {
+    "path": "sources/gshhg-scope-land-candidates.bin.gz",
+    "record_count": 205,
+    "uncompressed_bytes": 493348,
+    "uncompressed_sha256": "0aa3dbb63b21f535c73d71c6d969da00126bcb706127218a0f629598329186bb",
+    "compressed_bytes": 315407,
+    "compressed_sha256": "eeb3f2ae1eacbe879f21b4a097244009b5128121d983ab0d95a1e5ca3ef2dfa9"
+  },
+  "method": "Scan every source record in the complete GSHHG 2.3.7 binary. For each level-1 physical-land record whose bbox intersects at least one assigned location bbox, compute the closed ring shoelace centroid and test it against all bbox-compatible current location geometries (including holes). Retain the full source record when its centroid is covered by one or more assigned locations.",
+  "interpretation": "A hit shows only that the centroid of one 2017 GSHHG physical-land polygon falls inside an assigned current feature. It does not certify shoreline completeness, island identity, administrative membership, or absence of omitted land. A zero hit is not proof of omitted land; feature geometry is not changed.",
+  "per_location": {
+    "gb:MDG:ADM2:10022922B83786714905046": {
+      "name": "1er Arrondissement",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B64856352127888": {
+      "name": "2e Arrondissement",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B59270450060951": {
+      "name": "3e Arrondissement",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B42847936410668": {
+      "name": "4e Arrondissement",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B36895306051586": {
+      "name": "5e Arrondissement",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B53755400100934": {
+      "name": "6e Arrondissement",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B99940912082943": {
+      "name": "Antananarivo Avaradrano",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B52736847594449": {
+      "name": "Ambohidratrimo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B97289291498871": {
+      "name": "Ankazobe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B50774823120221": {
+      "name": "Manjakandriana",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B1306198900476": {
+      "name": "Anjozorobe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B11040894453097": {
+      "name": "Andramasina",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B82805843876956": {
+      "name": "Antananarivo Atsimondrano",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B38771191417556": {
+      "name": "Antsirabe I",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B74688195218658": {
+      "name": "Betafo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B90393204210047": {
+      "name": "Ambatolampy",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B69082959012584": {
+      "name": "Antanifotsy",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B80317071360034": {
+      "name": "Faratsiho",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        10
+      ]
+    },
+    "gb:MDG:ADM2:10022922B65379850816186": {
+      "name": "Antsirabe II",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B69129581267436": {
+      "name": "Mandoto",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B99194691228489": {
+      "name": "Arivonimamo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B79563685419763": {
+      "name": "Miarinarivo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B59328070281510": {
+      "name": "Soavinandriana",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B70813515121555": {
+      "name": "Tsiroanomandidy",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B23923498940873": {
+      "name": "Fenoarivobe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B21478747844721": {
+      "name": "Fianarantsoa I",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B7475622417535": {
+      "name": "Ambalavao",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B34392392155891": {
+      "name": "Ambohimahasoa",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B85703559853082": {
+      "name": "Ikalamavony",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B72540367204165": {
+      "name": "Lalangina",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B39439372576611": {
+      "name": "Vohibato",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B29889196912325": {
+      "name": "Isandra",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B11162683268422": {
+      "name": "Ambatofinandrahana",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B13687813160362": {
+      "name": "Ambositra",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B23434626058692": {
+      "name": "Fandriana",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B47245353926014": {
+      "name": "Manandriana",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B31790128040616": {
+      "name": "Ifanadiana",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B12403701465046": {
+      "name": "Nosy-Varika",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B52512193010711": {
+      "name": "Mananjary",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B29911348985828": {
+      "name": "Manakara Atsimo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B6018255004858": {
+      "name": "Ikongo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B81120329184352": {
+      "name": "Vohipeno",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B7074189327891": {
+      "name": "Ihosy",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B57896428715958": {
+      "name": "Ivohibe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B30377745880071": {
+      "name": "Iakora",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B75046296685916": {
+      "name": "Farafangana",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        125490
+      ]
+    },
+    "gb:MDG:ADM2:10022922B74242760889111": {
+      "name": "Vangaindrano",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        17714
+      ]
+    },
+    "gb:MDG:ADM2:10022922B72475763343132": {
+      "name": "Midongy-Atsimo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B86038713071830": {
+      "name": "Vondrozo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B11101019287712": {
+      "name": "Befotaka",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B32937301443957": {
+      "name": "Toamasina I",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B71585303896889": {
+      "name": "Brickaville",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B31178585124685": {
+      "name": "Vatomandry",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B42807663031303": {
+      "name": "Mahanoro",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B10629043557873": {
+      "name": "Marolambo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B55539380638871": {
+      "name": "Toamasina II",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        62473
+      ]
+    },
+    "gb:MDG:ADM2:10022922B63046975451138": {
+      "name": "Antanambao Manampontsy",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B25342620887316": {
+      "name": "Sainte Marie",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 2,
+      "gshhg_record_ids": [
+        1059,
+        156671
+      ]
+    },
+    "gb:MDG:ADM2:10022922B79548799707119": {
+      "name": "Maroantsetra",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 2,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        8429
+      ]
+    },
+    "gb:MDG:ADM2:10022922B77596397547877": {
+      "name": "Mananara-Avaratra",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B92224420422748": {
+      "name": "Fenerive Est",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 2,
+      "gshhg_record_ids": [
+        35720,
+        100858
+      ]
+    },
+    "gb:MDG:ADM2:10022922B54073545298219": {
+      "name": "Vavatenina",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B56427545477040": {
+      "name": "Soanierana Ivongo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B80147144228565": {
+      "name": "Amparafaravola",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B15285270155057": {
+      "name": "Ambatondrazaka",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B82658288648411": {
+      "name": "Moramanga",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B97539486376385": {
+      "name": "Andilamena",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B56031688474611": {
+      "name": "Anosibe-An'ala",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B60996293868186": {
+      "name": "Mahajanga I",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B91378939255033": {
+      "name": "Soalala",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 2,
+      "gshhg_record_ids": [
+        23530,
+        55278
+      ]
+    },
+    "gb:MDG:ADM2:10022922B29824664852903": {
+      "name": "Ambato Boeni",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B7387017022835": {
+      "name": "Marovoay",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 2,
+      "gshhg_record_ids": [
+        9571,
+        24444
+      ]
+    },
+    "gb:MDG:ADM2:10022922B34339999190032": {
+      "name": "Mitsinjo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 14,
+      "gshhg_record_ids": [
+        15662,
+        17104,
+        21745,
+        25878,
+        52241,
+        74416,
+        101243,
+        112717,
+        123874,
+        124586,
+        144197,
+        164213,
+        165200,
+        165807
+      ]
+    },
+    "gb:MDG:ADM2:10022922B51504984909978": {
+      "name": "Mahajanga II",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 33,
+      "gshhg_record_ids": [
+        5571,
+        5665,
+        5975,
+        7472,
+        8196,
+        9184,
+        9560,
+        11974,
+        12152,
+        12247,
+        13169,
+        13260,
+        14448,
+        14690,
+        16749,
+        17888,
+        18510,
+        23714,
+        26407,
+        27200,
+        29068,
+        29977,
+        32835,
+        41159,
+        41164,
+        45219,
+        49240,
+        51458,
+        59879,
+        62025,
+        75321,
+        106269,
+        156013
+      ]
+    },
+    "gb:MDG:ADM2:10022922B55197674782137": {
+      "name": "Port-Berge (Boriziny-Vaovao)",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 14,
+      "gshhg_record_ids": [
+        15533,
+        16422,
+        16911,
+        17065,
+        20590,
+        21544,
+        24041,
+        28560,
+        39090,
+        43646,
+        44313,
+        85109,
+        99840,
+        144583
+      ]
+    },
+    "gb:MDG:ADM2:10022922B13687974105922": {
+      "name": "Mandritsara",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B21608854890468": {
+      "name": "Analalava",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 3,
+      "gshhg_level1_centroid_hits": 12,
+      "gshhg_record_ids": [
+        2949,
+        6626,
+        45104,
+        47370,
+        48789,
+        54544,
+        63309,
+        78026,
+        89847,
+        145802,
+        155079,
+        165354
+      ]
+    },
+    "gb:MDG:ADM2:10022922B32579750162608": {
+      "name": "Befandriana Nord",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B54557741887580": {
+      "name": "Antsohihy",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B56468572037030": {
+      "name": "Bealanana",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B54995100782210": {
+      "name": "Mampikony",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B61824869015313": {
+      "name": "Maevatanana",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B96360954496738": {
+      "name": "Tsaratanana",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B38821373259374": {
+      "name": "Kandreho",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B83460232588272": {
+      "name": "Besalampy",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 4,
+      "gshhg_record_ids": [
+        15879,
+        69943,
+        75067,
+        85269
+      ]
+    },
+    "gb:MDG:ADM2:10022922B59098628147577": {
+      "name": "Ambatomainty",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B48021466276127": {
+      "name": "Antsalova",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        60134
+      ]
+    },
+    "gb:MDG:ADM2:10022922B40533998311047": {
+      "name": "Maintirano",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        55383
+      ]
+    },
+    "gb:MDG:ADM2:10022922B27026898293410": {
+      "name": "Morafenobe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B36331574429859": {
+      "name": "Toliary-I",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B39697778193382": {
+      "name": "Beroroha",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B72547257848133": {
+      "name": "Morombe",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 2,
+      "gshhg_level1_centroid_hits": 6,
+      "gshhg_record_ids": [
+        6595,
+        28531,
+        32882,
+        58583,
+        73798,
+        136068
+      ]
+    },
+    "gb:MDG:ADM2:10022922B67140219559440": {
+      "name": "Ankazoabo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B63491232053463": {
+      "name": "Betioky Atsimo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B9355726550011": {
+      "name": "Ampanihy Ouest",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 3,
+      "gshhg_record_ids": [
+        22620,
+        25780,
+        56287
+      ]
+    },
+    "gb:MDG:ADM2:10022922B49716742274905": {
+      "name": "Sakaraha",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B75767771564463": {
+      "name": "Toliary-II",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B93003724204974": {
+      "name": "Benenitra",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B63714971659336": {
+      "name": "Beloha",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B95964642483948": {
+      "name": "Tsihombe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B3330352702203": {
+      "name": "Ambovombe-Androy",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B6580820782603": {
+      "name": "Bekily",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B85658862424992": {
+      "name": "Taolagnaro",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 4,
+      "gshhg_record_ids": [
+        27815,
+        44416,
+        158622,
+        174406
+      ]
+    },
+    "gb:MDG:ADM2:10022922B59412081262724": {
+      "name": "Betroka",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B61088153240222": {
+      "name": "Amboasary-Atsimo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        35419
+      ]
+    },
+    "gb:MDG:ADM2:10022922B70385192089273": {
+      "name": "Manja",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 7,
+      "gshhg_record_ids": [
+        3482,
+        12359,
+        33187,
+        34017,
+        42970,
+        55700,
+        57221
+      ]
+    },
+    "gb:MDG:ADM2:10022922B91714644312966": {
+      "name": "Morondava",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 19,
+      "gshhg_record_ids": [
+        22342,
+        27593,
+        30713,
+        33495,
+        35782,
+        36061,
+        36530,
+        37664,
+        46697,
+        48051,
+        62894,
+        82014,
+        82105,
+        101497,
+        115903,
+        125138,
+        166857,
+        172119,
+        175071
+      ]
+    },
+    "gb:MDG:ADM2:10022922B70120442307447": {
+      "name": "Mahabo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B50417492685621": {
+      "name": "Belo Sur Tsiribihina",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 8,
+      "gshhg_record_ids": [
+        10159,
+        11519,
+        21099,
+        25433,
+        70275,
+        78216,
+        101690,
+        145631
+      ]
+    },
+    "gb:MDG:ADM2:10022922B2580716977723": {
+      "name": "Miandrivazo",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B22775533170221": {
+      "name": "Antsiranana II",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 3,
+      "gshhg_level1_centroid_hits": 3,
+      "gshhg_record_ids": [
+        9048,
+        9850,
+        173309
+      ]
+    },
+    "gb:MDG:ADM2:10022922B77517626674469": {
+      "name": "Antsiranana I",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 2,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B52521872200932": {
+      "name": "Ambilobe",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 2,
+      "gshhg_level1_centroid_hits": 8,
+      "gshhg_record_ids": [
+        3251,
+        47866,
+        54140,
+        74067,
+        93720,
+        94098,
+        144057,
+        172263
+      ]
+    },
+    "gb:MDG:ADM2:10022922B66036521727834": {
+      "name": "Nosy-Be",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 3,
+      "gshhg_level1_centroid_hits": 3,
+      "gshhg_record_ids": [
+        770,
+        3322,
+        7418
+      ]
+    },
+    "gb:MDG:ADM2:10022922B10293113814705": {
+      "name": "Ambanja",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 3,
+      "gshhg_level1_centroid_hits": 16,
+      "gshhg_record_ids": [
+        3621,
+        4172,
+        26984,
+        28008,
+        41198,
+        42570,
+        46603,
+        55635,
+        66815,
+        74315,
+        74393,
+        106782,
+        113572,
+        121252,
+        152756,
+        157807
+      ]
+    },
+    "gb:MDG:ADM2:10022922B15279482214677": {
+      "name": "Antalaha",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B78580830473532": {
+      "name": "Sambava",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B40357207342555": {
+      "name": "Andapa",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MDG:ADM2:10022922B16213196407560": {
+      "name": "Vohemar",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MUS:ADM1:65221844B99203907341133": {
+      "name": "Black River",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MUS:ADM1:65221844B3325932502431": {
+      "name": "Flacq",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 5,
+      "gshhg_record_ids": [
+        19897,
+        40892,
+        115073,
+        135895,
+        157092
+      ]
+    },
+    "gb:MUS:ADM1:65221844B660734165567": {
+      "name": "Grand Port",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        126415
+      ]
+    },
+    "gb:MUS:ADM1:65221844B64352145242214": {
+      "name": "Moka",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        218
+      ]
+    },
+    "gb:MUS:ADM1:65221844B91551715822340": {
+      "name": "Pamplemousses",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MUS:ADM1:65221844B21568199301359": {
+      "name": "Plaines Wilhems",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MUS:ADM1:65221844B53255720811613": {
+      "name": "Port Louis",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MUS:ADM1:65221844B93227578092779": {
+      "name": "Rivière du Rempart",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MUS:ADM1:65221844B93866494923153": {
+      "name": "Savanne",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MUS:ADM1:65221844B37057547030311": {
+      "name": "Rodrigues",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 2,
+      "gshhg_record_ids": [
+        1406,
+        101105
+      ]
+    },
+    "gb:MUS:ADM1:65221844B12885462064369": {
+      "name": "St. Brandon",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:MUS:ADM1:65221844B83452679821580": {
+      "name": "Agaléga",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 2,
+      "gshhg_level1_centroid_hits": 2,
+      "gshhg_record_ids": [
+        4560,
+        5238
+      ]
+    },
+    "gb:SYC:ADM2:34574756B18865708954128": {
+      "name": "La Digue",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        5514
+      ]
+    },
+    "gb:SYC:ADM2:34574756B27990728867894": {
+      "name": "Central 1 Mahe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:SYC:ADM2:34574756B38092183622343": {
+      "name": "Central 2 Mahe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:SYC:ADM2:34574756B49819614716360": {
+      "name": "East Mahe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:SYC:ADM2:34574756B41664711494427": {
+      "name": "North Mahe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "gb:SYC:ADM2:34574756B14018612202061": {
+      "name": "West Mahe",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        1125
+      ]
+    },
+    "gb:SYC:ADM2:34574756B54247629098598": {
+      "name": "Other Islands",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 7,
+      "gshhg_level1_centroid_hits": 5,
+      "gshhg_record_ids": [
+        2971,
+        3862,
+        5043,
+        5218,
+        5732
+      ]
+    },
+    "gb:SYC:ADM2:34574756B43978553392406": {
+      "name": "Praslin",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 1,
+      "gshhg_record_ids": [
+        2567
+      ]
+    },
+    "atlas:coverage:ATF-5919": {
+      "name": "Iles Eparses de l'ocean Indien",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 7,
+      "gshhg_level1_centroid_hits": 3,
+      "gshhg_record_ids": [
+        3431,
+        10109,
+        21516
+      ]
+    },
+    "atlas:coverage:FRA-4601": {
+      "name": "La Réunion",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 2,
+      "gshhg_record_ids": [
+        183,
+        125103
+      ]
+    },
+    "atlas:coverage:FRA-4602": {
+      "name": "Mayotte",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 2,
+      "gshhg_level1_centroid_hits": 7,
+      "gshhg_record_ids": [
+        645,
+        4977,
+        48478,
+        155247,
+        163930,
+        164284,
+        165891
+      ]
+    },
+    "atlas:coverage:MUS-5180": {
+      "name": "Agaléga",
+      "current_geometry_type": "Polygon",
+      "current_geometry_components": 1,
+      "gshhg_level1_centroid_hits": 0,
+      "gshhg_record_ids": []
+    },
+    "atlas:territory:COM": {
+      "name": "Comoros",
+      "current_geometry_type": "MultiPolygon",
+      "current_geometry_components": 3,
+      "gshhg_level1_centroid_hits": 4,
+      "gshhg_record_ids": [
+        313,
+        573,
+        918,
+        170980
+      ]
+    }
+  },
+  "summary": {
+    "locations_with_one_or_more_GSHHG_centroid_hits": 40,
+    "locations_without_GSHHG_centroid_hits": [
+      "gb:MDG:ADM2:10022922B83786714905046",
+      "gb:MDG:ADM2:10022922B64856352127888",
+      "gb:MDG:ADM2:10022922B59270450060951",
+      "gb:MDG:ADM2:10022922B42847936410668",
+      "gb:MDG:ADM2:10022922B36895306051586",
+      "gb:MDG:ADM2:10022922B53755400100934",
+      "gb:MDG:ADM2:10022922B99940912082943",
+      "gb:MDG:ADM2:10022922B52736847594449",
+      "gb:MDG:ADM2:10022922B97289291498871",
+      "gb:MDG:ADM2:10022922B50774823120221",
+      "gb:MDG:ADM2:10022922B1306198900476",
+      "gb:MDG:ADM2:10022922B11040894453097",
+      "gb:MDG:ADM2:10022922B82805843876956",
+      "gb:MDG:ADM2:10022922B38771191417556",
+      "gb:MDG:ADM2:10022922B74688195218658",
+      "gb:MDG:ADM2:10022922B90393204210047",
+      "gb:MDG:ADM2:10022922B69082959012584",
+      "gb:MDG:ADM2:10022922B65379850816186",
+      "gb:MDG:ADM2:10022922B69129581267436",
+      "gb:MDG:ADM2:10022922B99194691228489",
+      "gb:MDG:ADM2:10022922B79563685419763",
+      "gb:MDG:ADM2:10022922B59328070281510",
+      "gb:MDG:ADM2:10022922B70813515121555",
+      "gb:MDG:ADM2:10022922B23923498940873",
+      "gb:MDG:ADM2:10022922B21478747844721",
+      "gb:MDG:ADM2:10022922B7475622417535",
+      "gb:MDG:ADM2:10022922B34392392155891",
+      "gb:MDG:ADM2:10022922B85703559853082",
+      "gb:MDG:ADM2:10022922B72540367204165",
+      "gb:MDG:ADM2:10022922B39439372576611",
+      "gb:MDG:ADM2:10022922B29889196912325",
+      "gb:MDG:ADM2:10022922B11162683268422",
+      "gb:MDG:ADM2:10022922B13687813160362",
+      "gb:MDG:ADM2:10022922B23434626058692",
+      "gb:MDG:ADM2:10022922B47245353926014",
+      "gb:MDG:ADM2:10022922B31790128040616",
+      "gb:MDG:ADM2:10022922B12403701465046",
+      "gb:MDG:ADM2:10022922B52512193010711",
+      "gb:MDG:ADM2:10022922B29911348985828",
+      "gb:MDG:ADM2:10022922B6018255004858",
+      "gb:MDG:ADM2:10022922B81120329184352",
+      "gb:MDG:ADM2:10022922B7074189327891",
+      "gb:MDG:ADM2:10022922B57896428715958",
+      "gb:MDG:ADM2:10022922B30377745880071",
+      "gb:MDG:ADM2:10022922B72475763343132",
+      "gb:MDG:ADM2:10022922B86038713071830",
+      "gb:MDG:ADM2:10022922B11101019287712",
+      "gb:MDG:ADM2:10022922B32937301443957",
+      "gb:MDG:ADM2:10022922B71585303896889",
+      "gb:MDG:ADM2:10022922B31178585124685",
+      "gb:MDG:ADM2:10022922B42807663031303",
+      "gb:MDG:ADM2:10022922B10629043557873",
+      "gb:MDG:ADM2:10022922B63046975451138",
+      "gb:MDG:ADM2:10022922B77596397547877",
+      "gb:MDG:ADM2:10022922B54073545298219",
+      "gb:MDG:ADM2:10022922B56427545477040",
+      "gb:MDG:ADM2:10022922B80147144228565",
+      "gb:MDG:ADM2:10022922B15285270155057",
+      "gb:MDG:ADM2:10022922B82658288648411",
+      "gb:MDG:ADM2:10022922B97539486376385",
+      "gb:MDG:ADM2:10022922B56031688474611",
+      "gb:MDG:ADM2:10022922B60996293868186",
+      "gb:MDG:ADM2:10022922B29824664852903",
+      "gb:MDG:ADM2:10022922B13687974105922",
+      "gb:MDG:ADM2:10022922B32579750162608",
+      "gb:MDG:ADM2:10022922B54557741887580",
+      "gb:MDG:ADM2:10022922B56468572037030",
+      "gb:MDG:ADM2:10022922B54995100782210",
+      "gb:MDG:ADM2:10022922B61824869015313",
+      "gb:MDG:ADM2:10022922B96360954496738",
+      "gb:MDG:ADM2:10022922B38821373259374",
+      "gb:MDG:ADM2:10022922B59098628147577",
+      "gb:MDG:ADM2:10022922B27026898293410",
+      "gb:MDG:ADM2:10022922B36331574429859",
+      "gb:MDG:ADM2:10022922B39697778193382",
+      "gb:MDG:ADM2:10022922B67140219559440",
+      "gb:MDG:ADM2:10022922B63491232053463",
+      "gb:MDG:ADM2:10022922B49716742274905",
+      "gb:MDG:ADM2:10022922B75767771564463",
+      "gb:MDG:ADM2:10022922B93003724204974",
+      "gb:MDG:ADM2:10022922B63714971659336",
+      "gb:MDG:ADM2:10022922B95964642483948",
+      "gb:MDG:ADM2:10022922B3330352702203",
+      "gb:MDG:ADM2:10022922B6580820782603",
+      "gb:MDG:ADM2:10022922B59412081262724",
+      "gb:MDG:ADM2:10022922B70120442307447",
+      "gb:MDG:ADM2:10022922B2580716977723",
+      "gb:MDG:ADM2:10022922B77517626674469",
+      "gb:MDG:ADM2:10022922B15279482214677",
+      "gb:MDG:ADM2:10022922B78580830473532",
+      "gb:MDG:ADM2:10022922B40357207342555",
+      "gb:MDG:ADM2:10022922B16213196407560",
+      "gb:MUS:ADM1:65221844B99203907341133",
+      "gb:MUS:ADM1:65221844B91551715822340",
+      "gb:MUS:ADM1:65221844B21568199301359",
+      "gb:MUS:ADM1:65221844B53255720811613",
+      "gb:MUS:ADM1:65221844B93227578092779",
+      "gb:MUS:ADM1:65221844B93866494923153",
+      "gb:MUS:ADM1:65221844B12885462064369",
+      "gb:SYC:ADM2:34574756B27990728867894",
+      "gb:SYC:ADM2:34574756B38092183622343",
+      "gb:SYC:ADM2:34574756B49819614716360",
+      "gb:SYC:ADM2:34574756B41664711494427",
+      "atlas:coverage:MUS-5180"
+    ]
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "method": "Window-scan every current geography part for polygon overlap with GSHHG candidate bounds; read the 81 frozen v5 region envelope geometries and measure polygon-to-polygon distances after EPSG:6933 projection. This is an assignment-routing diagnostic, not legal/administrative classification. The island-name crosswalk remains a sourced hypothesis based on TAAF text and these coordinate matches.",
+  "baseline_commit": "ff171e1dd1998684d9b3549943d5725817a7aef4",
+  "window_wgs84": [
+    36.5,
+    -47.5,
+    38.7,
+    -46.0
+  ],
+  "gshhg_shapefile_sha256": "121435427911ea80624802e0f352d777eaf6ba6966ca5f07e687650e95329fd9",
+  "source_candidates": {
+    "757": {
+      "id": "757",
+      "official_crosswalk_name_lead": "Marion Island candidate",
+      "source_code": "WVS",
+      "area_attribute_km2": 293.839614897,
+      "bbox_wgs84": [
+        37.583667,
+        -46.982139,
+        37.911222,
+        -46.822917
+      ]
+    },
+    "2328": {
+      "id": "2328",
+      "official_crosswalk_name_lead": "Prince Edward Island candidate",
+      "source_code": "WVS",
+      "area_attribute_km2": 47.0796519541,
+      "bbox_wgs84": [
+        37.866222,
+        -46.673778,
+        37.999556,
+        -46.604583
+      ]
+    }
+  },
+  "current_atlas_features_intersecting_window": [],
+  "current_region_member_ids": [
+    "atlas:coverage:ATF-5916",
+    "atlas:coverage:ATF-5917",
+    "atlas:coverage:ATF-5918",
+    "atlas:coverage:HMD+00?"
+  ],
+  "nearest_region_envelopes": {
+    "757": [
+      {
+        "region_id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+        "name": "Southern Indian Ocean Islands",
+        "distance_km_epsg6933": 1185.6515233613438,
+        "envelope_path": "ac7c994418c29fd98eaf7b22.wkb.gz",
+        "envelope_geometry_sha256": "bbc4c04dec706c1762545b72be5f153bb7fd13e6f9ab1591332293ec08a4bf03"
+      },
+      {
+        "region_id": "framework:region:southern-africa:6589ef98fc37",
+        "name": "Southern Africa",
+        "distance_km_epsg6933": 1649.188753122095,
+        "envelope_path": "91b201752251c50e4f442c66.wkb.gz",
+        "envelope_geometry_sha256": "2a13a6099e2a8b25ec710b5059ad98ab7be00cf8ebe7b3b58b6310dee2e78426"
+      },
+      {
+        "region_id": "framework:region:south-tropical-africa:4095de68737c",
+        "name": "Southern African Interior and Southeast Coast",
+        "distance_km_epsg6933": 2089.9489138530134,
+        "envelope_path": "7333d57f427d8a9a4a12ac18.wkb.gz",
+        "envelope_geometry_sha256": "25fadfff13f93063e229db967698a9b3a2c95891bd1ccdb13e64b6aea3e8df99"
+      },
+      {
+        "region_id": "framework:region:western-indian-ocean:1393877a77f7",
+        "name": "Western Indian Ocean",
+        "distance_km_epsg6933": 2295.4254780862066,
+        "envelope_path": "6254dd247738fab52d097f82.wkb.gz",
+        "envelope_geometry_sha256": "c175264e1e91edd92df8f1dd033082bb8ea5d0be6955a85be00626479c329a4f"
+      },
+      {
+        "region_id": "framework:region:south-atlantic-islands:242a7633c849",
+        "name": "Eastern South Atlantic Islands",
+        "distance_km_epsg6933": 3345.595665750815,
+        "envelope_path": "3bef582de67fab1f51799c70.wkb.gz",
+        "envelope_geometry_sha256": "d1b8e1bfccee98ab7add6824f4c947c8928f46ee282b35a4eb4e38c87b0950ee"
+      }
+    ],
+    "2328": [
+      {
+        "region_id": "framework:region:southern-indian-ocean-islands:db862edea88a",
+        "name": "Southern Indian Ocean Islands",
+        "distance_km_epsg6933": 1175.9295965947429,
+        "envelope_path": "ac7c994418c29fd98eaf7b22.wkb.gz",
+        "envelope_geometry_sha256": "bbc4c04dec706c1762545b72be5f153bb7fd13e6f9ab1591332293ec08a4bf03"
+      },
+      {
+        "region_id": "framework:region:southern-africa:6589ef98fc37",
+        "name": "Southern Africa",
+        "distance_km_epsg6933": 1644.7980137161203,
+        "envelope_path": "91b201752251c50e4f442c66.wkb.gz",
+        "envelope_geometry_sha256": "2a13a6099e2a8b25ec710b5059ad98ab7be00cf8ebe7b3b58b6310dee2e78426"
+      },
+      {
+        "region_id": "framework:region:south-tropical-africa:4095de68737c",
+        "name": "Southern African Interior and Southeast Coast",
+        "distance_km_epsg6933": 2075.6716150763295,
+        "envelope_path": "7333d57f427d8a9a4a12ac18.wkb.gz",
+        "envelope_geometry_sha256": "25fadfff13f93063e229db967698a9b3a2c95891bd1ccdb13e64b6aea3e8df99"
+      },
+      {
+        "region_id": "framework:region:western-indian-ocean:1393877a77f7",
+        "name": "Western Indian Ocean",
+        "distance_km_epsg6933": 2271.8882296520255,
+        "envelope_path": "6254dd247738fab52d097f82.wkb.gz",
+        "envelope_geometry_sha256": "c175264e1e91edd92df8f1dd033082bb8ea5d0be6955a85be00626479c329a4f"
+      },
+      {
+        "region_id": "framework:region:south-atlantic-islands:242a7633c849",
+        "name": "Eastern South Atlantic Islands",
+        "distance_km_epsg6933": 3377.4592163269226,
+        "envelope_path": "3bef582de67fab1f51799c70.wkb.gz",
+        "envelope_geometry_sha256": "d1b8e1bfccee98ab7add6824f4c947c8928f46ee282b35a4eb4e38c87b0950ee"
+      }
+    ]
+  },
+  "coordination_needed": true,
+  "no_region_assignment_or_envelope_change": true
+}
