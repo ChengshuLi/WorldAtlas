@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "pr_number": 677,
+  "issue_number": 529,
+  "reviewer_worker_id": "review-palette-651-20261003",
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "candidate_commit": "c256249747ed62e5d820b64678ac418d05dafea2",
+  "candidate_base": "a1bd5f18ad6bc6a7e9c6e9c9b5a7a34340811909",
+  "outcome": "changes-requested-early-review",
+  "exact_head_acceptance": false,
+  "review_scope": "Stable core controlled registry/history, portable regional gate, additive structural types, typed import/read/retirement/raw JSON, capabilities and known-V3 legacy projection. Final static/prepared/client/owner workflow still unfinished; no final approval.",
+  "findings": [
+    {
+      "priority": "P1",
+      "file": "hosted/typed-observations.js",
+      "line": 59,
+      "title": "Factual derivations can consume explicitly example evidence",
+      "evidence": "Actual isolated SQLite accepted historical-source is_example=0 method=derived output referencing retained is_example=1 example-input, even with examples:false. Only derivation ID existence/namespace is checked. Synthetic complete regional gate used solely to reach factual validation; no actual approval.",
+      "requested_fix": "Validate retained and same-batch dependency classification. Reject factual output consuming any example input, typed or legacy; preserve original labels and require explicit example opt-in for example outputs. Add actual backend/Worker rejection and unchanged-marker controls."
+    },
+    {
+      "priority": "P2",
+      "file": "hosted/typed-observations.js",
+      "line": 61,
+      "title": "Same-batch circular derivation is accepted without retained root evidence",
+      "evidence": "Actual isolated SQLite accepted example-derived cycle-a referring to cycle-b and cycle-b referring to cycle-a. Self-reference checks do not reject graph cycles.",
+      "requested_fix": "Bound dependency traversal and reject cycles in the supported dependency closure, including same-batch inputs, without guessing domain calculation semantics. Add positive acyclic same-batch and retained-root controls."
+    },
+    {
+      "priority": "P2",
+      "file": "hosted/typed-observations.js",
+      "line": 106,
+      "title": "Example-only retained derivation wrongly requires factual regional approval",
+      "evidence": "Actual isolated SQLite rejected retained example-original to is_example=1 example-derived under the real paused gate: derivation_subject_ids unconditionally populate factualSubjects. Other example-only typed batches correctly work with explicit opt-in.",
+      "requested_fix": "Carry derivation input labels/classification and select regional subject checks only for factual dependencies/results. Preserve published geography pins and explicit examples opt-in; add actual example-only derived positive control while paused factual imports remain rejected."
+    }
+  ],
+  "other_assessment": [
+    "Portable gate diff removes only Node fs/url imports and readResearchImportGate; original readiness, region/crosswalk/retirement semantics remain unchanged.",
+    "Explicit empty module registration list and retained base digest prevent arbitrary server module upload and reinterpretation of retained definitions.",
+    "Nine structural-only type rows add no factual assignments or geography approval.",
+    "Raw JSON comparison retains storage bytes separately; source pins cover original source catalog columns.",
+    "Installed complete catalog validation gates capabilities. Known V3 legacy projection validates complete catalog and before/after marker; maintenance V2 client rejects incomplete projection.",
+    "Atomic SQL batch retains geography guard, append-only guards and ingestion receipt. Retirement same-subject checks and source-example guard remain supported.",
+    "Green current groups do not cover the reproduced semantic findings."
+  ],
+  "independent_controls": {
+    "command": "node --test test/typed-integration.test.mjs",
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 8916.978374,
+    "limit": "Author-owned working-tree test assertion differs from c256249 only in exact catalog JSON wire comparison; no reviewer repository edits. Candidate core source is unchanged."
+  },
+  "proof_receipts": [
+    {
+      "path": "/tmp/worldatlas-677-derivation-probe.json",
+      "bytes": 1376,
+      "sha256": "0f03efc58ff5952746b3adcc7e851fe1c0c58fafed5caf338ecb7d07e10f0d63"
+    },
+    {
+      "path": "/tmp/worldatlas-677-cycle-probe.json",
+      "bytes": 1155,
+      "sha256": "079155663465b42268f48340bad49c558e4e9ba4901eadb1f467aceca93236ca"
+    },
+    {
+      "path": "/tmp/worldatlas-677-derivation-probe.mjs",
+      "bytes": 7059,
+      "sha256": "3342499edc6a9d147cf4d73d36c64040b7577fd668abbec931cc3f0f2ecb75e4"
+    },
+    {
+      "path": "/tmp/worldatlas-677-cycle-probe.mjs",
+      "bytes": 6674,
+      "sha256": "e5dc0088f7f89b65a1ed03fe81015b771856ddf1ae537d8c712e98e3cceaf950"
+    },
+    {
+      "path": "/tmp/worldatlas-677-early-independent-controls.log",
+      "bytes": 1567,
+      "sha256": "d4fabedcec46eed662b3c1abfa41f5b7825065c8893d0e178545e0a8480bb7fa"
+    }
+  ],
+  "candidate_file_inventory": [
+    {
+      "path": "coordination/engineering/observation-integration-20261003-7e91.json",
+      "bytes": 4077,
+      "sha256": "95deea5137493880bf36eed7a151e9990d3e11a89ca9ee373a9e3b41f3450a87"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/README.md",
+      "bytes": 1717,
+      "sha256": "d5281d1c0549f198cf37183fdee01938ed930c8040c50545a02ae1459a3daf1f"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/npm-ci.log",
+      "bytes": 466,
+      "sha256": "350739232c29bc123eb2a578ecf594c754c232612bab082c97038ed11a21e3c4"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/original-export-hosted-storage-v2.mjs",
+      "bytes": 15673,
+      "sha256": "31322f0fda1916410436f772286ea8be50632f8f0d061671f2630b1eedf27ff4"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/original-research-import-gate.mjs",
+      "bytes": 7523,
+      "sha256": "d693251c8448c7f1aca30d210d9ed8cf8c0ca4895f2ccf2454c40cdb52d07552"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/portable-policy-contracts.tap",
+      "bytes": 2111,
+      "sha256": "a89ae12d45155a07f7816c52ec730aa1bde0d094ce36981fd9882855b48c31a3"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/regional-gate-portability.json",
+      "bytes": 561,
+      "sha256": "449f0b53c076d9e36cfc9e2cda37c531583a4abfcd328ec5888c74933e44f5fb"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/typed-http-and-correction-controls.tap",
+      "bytes": 1422,
+      "sha256": "339a8adef36267854abf347207a35391443b966f65244b3c38839c53cec3f8ce"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/typed-http-source-controls.tap",
+      "bytes": 523,
+      "sha256": "91470f6daaca850558fad2608c68ce43c58280f705b6ac7308f2a08ec0fdcd81"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/typed-import-first.tap",
+      "bytes": 2136,
+      "sha256": "fe199efee2888aa9c5f7a10fe36b5543362b0a0fd78806af9c5bb28cd58f22a4"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/typed-import-with-types.tap",
+      "bytes": 523,
+      "sha256": "6dce0ff0c43af2acddd578fa4609ac9cd839a7bc79dda9bc0a42abb9eb691566"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/typed-legacy-projection-controls.tap",
+      "bytes": 1567,
+      "sha256": "99450e48505f2f3944a12a02877cfb21cf95bafc324387d62d52d308d12a3655"
+    },
+    {
+      "path": "data/engineering/observation-integration-20261003-7e91/typed-legacy-schema-controls.tap",
+      "bytes": 208829,
+      "sha256": "637a0a8053516e1e0760db6f619f583506f72397c16cc0b2bc17ab653bc1c1e4"
+    },
+    {
+      "path": "data/observation-registry-history/base-v1.json",
+      "bytes": 7204,
+      "sha256": "038de84c62eb8c11784a6061e01ce0b9aff92c368613b704b164790776ae1bcf"
+    },
+    {
+      "path": "data/typed-entity-types-v1.json",
+      "bytes": 2590,
+      "sha256": "e7cfedbbb7e2d17cbb9cbd69eb523cd34288a01e73f48f9f23644541a2337ff9"
+    },
+    {
+      "path": "hosted/storage-export-compat.js",
+      "bytes": 2594,
+      "sha256": "602f26740417b7bb3c4f7b45d9051807763e981c9207afa12e19dd4d32101f3e"
+    },
+    {
+      "path": "hosted/typed-observations.js",
+      "bytes": 17187,
+      "sha256": "cf35066e12d8a06ca0a57e8f8d2716aca61fd74e175e9cf046183b85d8ed05c5"
+    },
+    {
+      "path": "hosted/worker.js",
+      "bytes": 15668,
+      "sha256": "d99b251fc67e12e53fa457c8b5cc73de7be3ef5cf92deb045f6bcfbcc334ff09"
+    },
+    {
+      "path": "scripts/export-hosted-storage-v2.mjs",
+      "bytes": 15822,
+      "sha256": "7d55f1c62bb505aa00c45b4581acda8e5df271458db1ab9fddf81e6a02617772"
+    },
+    {
+      "path": "scripts/research-import-gate.mjs",
+      "bytes": 335,
+      "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905"
+    },
+    {
+      "path": "src/observation-modules.js",
+      "bytes": 2502,
+      "sha256": "4555be0c82b07668d614d05e766f0b213b3e43694c4e4126ecdf48c3dfe394d2"
+    },
+    {
+      "path": "src/regional-import-gate.js",
+      "bytes": 7292,
+      "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d"
+    },
+    {
+      "path": "src/typed-snapshot.js",
+      "bytes": 6747,
+      "sha256": "7367cbb7bbca87cb16c3ad2093dffd2c6902d790653bc2ae516ecff396a14f98"
+    },
+    {
+      "path": "test/typed-integration.test.mjs",
+      "bytes": 15657,
+      "sha256": "a414474d01a85002736f4675598ed63f341cbb26888557343e2c56d2def0a639"
+    }
+  ],
+  "limits": [
+    "Read-only isolated SQLite/PGlite tests and synthetic approval fixture only; no actual approval/provider/publication.",
+    "No final exact-head approval or claim operation.",
+    "Final acceptance of529 remains pending unfinished integration and corrected semantics.",
+    "Report-only legacy evidence policy; no mandatory manifest/hash invented."
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "probe": "verify-only after excessive new typed trigger-function EXECUTE grant",
+  "scope": "isolated PGlite owner fixture, no provider",
+  "allowed": true,
+  "result": {
+    "accepted": false,
+    "error": "unexpected-typed-function-privileges"
+  }
+}

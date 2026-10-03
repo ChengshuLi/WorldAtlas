@@ -1,0 +1,9 @@
+{
+  "probe": "example-input-to-factual-derived",
+  "scope": "isolated SQLite synthetic approvals only, no provider or actual approval",
+  "outcome": {
+    "accepted": false,
+    "error": "Factual derivation cannot consume example evidence",
+    "status": 400
+  }
+}

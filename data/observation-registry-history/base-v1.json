@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "modules": [
+    {
+      "id": "atlas",
+      "version": 1
+    }
+  ],
+  "types": {
+    "location": {
+      "id": "location",
+      "definition": "Existing indivisible territorial polygon identity."
+    },
+    "polity": {
+      "id": "polity",
+      "definition": "Political entity; government belongs here, not to each owned location."
+    },
+    "government-class": {
+      "id": "government-class",
+      "definition": "Controlled primary government vocabulary identity; not an assignment."
+    },
+    "language": {
+      "id": "language",
+      "definition": "Spoken-language identity; does not imply culture, script or dialect."
+    },
+    "disease": {
+      "id": "disease",
+      "definition": "Disease identity independent of its dated outbreaks."
+    },
+    "outbreak": {
+      "id": "outbreak",
+      "definition": "One outbreak identity; multiple outbreaks may affect a location concurrently."
+    },
+    "river": {
+      "id": "river",
+      "definition": "Cataloged river or reach; contact does not establish navigability."
+    },
+    "lake": {
+      "id": "lake",
+      "definition": "Cataloged inland lake, including saline lakes."
+    },
+    "marine-shoreline": {
+      "id": "marine-shoreline",
+      "definition": "Marine shoreline reference feature; distinct from inland lakes."
+    },
+    "port": {
+      "id": "port",
+      "definition": "Port facility identity, independent of settlement rank and coastal contact."
+    },
+    "port-function": {
+      "id": "port-function",
+      "definition": "Reviewed functional service vocabulary; no inferred maritime capability."
+    }
+  },
+  "metrics": {
+    "atlas.gdp-per-person": {
+      "id": "atlas.gdp-per-person",
+      "unit": "constant-gdp-ppp/per-person",
+      "definition": "Annual output per supported resident.",
+      "minimum": 0,
+      "ppp_scope": "gdp"
+    },
+    "atlas.total-gdp": {
+      "id": "atlas.total-gdp",
+      "unit": "constant-gdp-ppp",
+      "definition": "Total annual output for the supported territory.",
+      "minimum": 0,
+      "ppp_scope": "gdp"
+    },
+    "atlas.median-purchasing-power": {
+      "id": "atlas.median-purchasing-power",
+      "unit": "constant-consumption-ppp/equivalized-person",
+      "definition": "Person-weighted median equivalized real disposable household income; not a mean or GDP.",
+      "minimum": 0,
+      "ppp_scope": "consumption",
+      "household": true
+    },
+    "atlas.adult-literacy": {
+      "id": "atlas.adult-literacy",
+      "unit": "percent",
+      "definition": "Residents aged 15+ who read and write with understanding a short everyday statement.",
+      "minimum": 0,
+      "maximum": 100,
+      "cohort": "age-15-plus"
+    },
+    "atlas.annual-disease-deaths": {
+      "id": "atlas.annual-disease-deaths",
+      "unit": "persons",
+      "definition": "Disease-attributed deaths during the supported selected year; not cumulative cases or excess mortality.",
+      "minimum": 0,
+      "period_basis": "annual"
+    }
+  },
+  "fields": {
+    "atlas.government-primary": {
+      "id": "atlas.government-primary",
+      "subject_kinds": [
+        "polity"
+      ],
+      "value_type": "identity",
+      "definition": "One exclusive primary government class; ambiguity stays unresolved.",
+      "value_kind": "government-class"
+    },
+    "atlas.primary-spoken-language": {
+      "id": "atlas.primary-spoken-language",
+      "subject_kinds": [
+        "location"
+      ],
+      "value_type": "identity",
+      "definition": "Supported primary everyday/home spoken language; broad evidence is not silently refined.",
+      "value_kind": "language"
+    },
+    "atlas.gdp-per-person": {
+      "id": "atlas.gdp-per-person",
+      "subject_kinds": [
+        "location"
+      ],
+      "value_type": "number",
+      "definition": "Supported gdp-per-person observation; derivation is a separate domain responsibility.",
+      "metric_id": "atlas.gdp-per-person"
+    },
+    "atlas.total-gdp": {
+      "id": "atlas.total-gdp",
+      "subject_kinds": [
+        "location"
+      ],
+      "value_type": "number",
+      "definition": "Supported total-gdp observation; derivation is a separate domain responsibility.",
+      "metric_id": "atlas.total-gdp"
+    },
+    "atlas.median-purchasing-power": {
+      "id": "atlas.median-purchasing-power",
+      "subject_kinds": [
+        "location"
+      ],
+      "value_type": "number",
+      "definition": "Supported median-purchasing-power observation; derivation is a separate domain responsibility.",
+      "metric_id": "atlas.median-purchasing-power"
+    },
+    "atlas.adult-literacy": {
+      "id": "atlas.adult-literacy",
+      "subject_kinds": [
+        "location"
+      ],
+      "value_type": "number",
+      "definition": "Supported adult-literacy observation; derivation is a separate domain responsibility.",
+      "metric_id": "atlas.adult-literacy"
+    },
+    "atlas.annual-disease-deaths": {
+      "id": "atlas.annual-disease-deaths",
+      "subject_kinds": [
+        "location"
+      ],
+      "value_type": "number",
+      "definition": "Supported annual-disease-deaths observation; derivation is a separate domain responsibility.",
+      "metric_id": "atlas.annual-disease-deaths"
+    },
+    "atlas.river-lake-contact": {
+      "id": "atlas.river-lake-contact",
+      "subject_kinds": [
+        "location"
+      ],
+      "value_type": "boolean",
+      "definition": "Contact with a complete applicable major-river/lake catalog; missing coverage is unknown."
+    },
+    "atlas.marine-contact": {
+      "id": "atlas.marine-contact",
+      "subject_kinds": [
+        "location"
+      ],
+      "value_type": "boolean",
+      "definition": "Supported direct marine-shoreline contact; inland lakes and nearby pixels do not establish it."
+    },
+    "atlas.port-functions": {
+      "id": "atlas.port-functions",
+      "subject_kinds": [
+        "port"
+      ],
+      "value_type": "identity-list",
+      "definition": "Explicitly documented active facility functions; river-sited maritime is not automatically mixed.",
+      "value_kind": "port-function"
+    }
+  },
+  "relationships": {
+    "atlas.outbreak-disease": {
+      "id": "atlas.outbreak-disease",
+      "source_kinds": [
+        "outbreak"
+      ],
+      "target_kinds": [
+        "disease"
+      ],
+      "definition": "Dated sourced disease attribution for an outbreak."
+    },
+    "atlas.outbreak-location": {
+      "id": "atlas.outbreak-location",
+      "source_kinds": [
+        "outbreak"
+      ],
+      "target_kinds": [
+        "location"
+      ],
+      "definition": "Dated affected location; no automatic aggregation or annual allocation."
+    },
+    "atlas.water-location": {
+      "id": "atlas.water-location",
+      "source_kinds": [
+        "river",
+        "lake",
+        "marine-shoreline"
+      ],
+      "target_kinds": [
+        "location"
+      ],
+      "definition": "Sourced dated feature contact; geometry approval remains separate."
+    },
+    "atlas.port-location": {
+      "id": "atlas.port-location",
+      "source_kinds": [
+        "port"
+      ],
+      "target_kinds": [
+        "location"
+      ],
+      "definition": "Dated location association; does not alone establish operating status or functions."
+    }
+  }
+}

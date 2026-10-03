@@ -9,6 +9,8 @@ import * as geography from './geographic-releases.js';
 import {importTemporalGeography,temporalGeographySnapshotPage,temporalGeographyEvidence} from './temporal-geography.js';
 import {validYear} from '../src/model.js';
 import {environmentClassifications} from '../src/environment-classifications.js';
+import {typedCapabilities,typedRegistry,typedSnapshotPage,importTypedBatch} from './typed-observations.js';
+import {legacyStorageMarker,legacyStoragePage,legacyStorageCatalog} from './storage-export-compat.js';
 
 const json=(value,status=200,headers={})=>Response.json(value,{status,headers:{'Cache-Control':'no-store',...headers}});
 function sameOrigin(request){
@@ -32,16 +34,27 @@ export default {
    if(storageReadOnly(env)&&['POST','PUT','PATCH','DELETE'].includes(request.method))return json({error:'Historical storage is read-only during a verified transfer',retryable:true},503);
    const db=contentDatabase(env);
    if(url.pathname==='/api/storage/export-marker'&&request.method==='GET')return json({...await exportStorageMarker(db),read_only:storageReadOnly(env)});
-   if(url.pathname==='/api/storage/v2/export-marker'&&request.method==='GET')return json({...await exportStorageMarkerV2(db),read_only:storageReadOnly(env)});
-   if(url.pathname==='/api/storage/v2/catalog'&&request.method==='GET')return json(await storageCatalogV2(db));
+   if(url.pathname==='/api/storage/v2/export-marker'&&request.method==='GET')return json({...await legacyStorageMarker(db),read_only:storageReadOnly(env)});
+   if(url.pathname==='/api/storage/v2/catalog'&&request.method==='GET'){
+    const value=await legacyStorageCatalog(db);
+    return value.legacy_projection?json(value.catalog,200,{'X-Atlas-Storage-Scope':'legacy-v2-projection','X-Atlas-Complete-Export-Version':'3'}):json(value);
+   }
    if(url.pathname==='/api/storage/v3/export-marker'&&request.method==='GET')return json({...await exportStorageMarkerV3(db),read_only:storageReadOnly(env)});
    if(url.pathname==='/api/storage/v3/catalog'&&request.method==='GET')return json(await storageCatalogV3(db));
    const storageExportV3=/^\/api\/storage\/v3\/export\/([^/]+)$/.exec(url.pathname);
    if(storageExportV3&&request.method==='GET')return json(await exportStoragePageV3(db,storageExportV3[1],{cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200)}));
    const storageExportV2=/^\/api\/storage\/v2\/export\/([^/]+)$/.exec(url.pathname);
-   if(storageExportV2&&request.method==='GET')return json(await exportStoragePageV2(db,storageExportV2[1],{cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200)}));
+   if(storageExportV2&&request.method==='GET')return json(await legacyStoragePage(db,storageExportV2[1],{cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200)}));
    const storageExport=/^\/api\/storage\/export\/([^/]+)$/.exec(url.pathname);
    if(storageExport&&request.method==='GET')return json(await exportStoragePage(db,storageExport[1],{cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200)}));
+   if(url.pathname==='/api/typed/v1/capabilities'&&request.method==='GET')return json({...await typedCapabilities(db),read_only:storageReadOnly(env)});
+   if(url.pathname==='/api/typed/v1/registry'&&request.method==='GET')return json(await typedRegistry(db));
+   if(url.pathname==='/api/typed/v1/snapshot'&&request.method==='GET')return json(await typedSnapshotPage(db,selectedYear(url),{stream:url.searchParams.get('stream')??'observations',examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')??100)}));
+   if(url.pathname==='/api/typed/v1/import'&&request.method==='POST'){
+    sameOrigin(request);
+    if(!request.headers.get('Content-Type')?.startsWith('application/json'))return json({error:'Typed import must be JSON'},415);
+    return json(await importTypedBatch(db,JSON.parse(new TextDecoder().decode(await boundedBody(request,1024*1024)))));
+   }
    if(url.pathname==='/api/storage/capacity'&&request.method==='GET')return json(await capacityReport(db,{databaseBudgetBytes:env.ATLAS_DATABASE_BUDGET_BYTES==null?null:Number(env.ATLAS_DATABASE_BUDGET_BYTES)}));
    if(url.pathname==='/api/map/snapshot'&&request.method==='GET')return json(await mapSnapshotPage(db,selectedYear(url),{examples:url.searchParams.get('examples')==='1',cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||1000),evidenceOnly:url.searchParams.get('evidence_only')==='1',includeTemporal:url.searchParams.get('include_temporal')==='1'}));
    const catalog=/^\/api\/catalog\/(sources|categories|entities)$/.exec(url.pathname);

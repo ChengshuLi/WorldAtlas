@@ -1,0 +1,38 @@
+{
+  "owner": "engineering-night-20261003-7e91f438",
+  "completed_pr": 671,
+  "preserved_remote_head": "bd48350a9fed47b6ca66401a0a21db4ca8cee4ba",
+  "tracked_status_before": "clean",
+  "removed_only_own_reproducible_ignored_paths": [
+    "/workspace/worldatlas-observation-storage-20261003-7e91/data/atlas.sqlite",
+    "/workspace/worldatlas-observation-storage-20261003-7e91/dist",
+    "/workspace/worldatlas-observation-storage-20261003-7e91/node_modules"
+  ],
+  "preserved": "all source, branch, receipts, research, primary Git objects and deployment budget bytes",
+  "completed_build_and_node_parity_backups_removed": [
+    {
+      "path": "data/atlas.sqlite.reference-backup-1791060035414",
+      "bytes": 344653824
+    },
+    {
+      "path": "data/atlas.sqlite.hierarchy-v3-backup-1791060041618",
+      "bytes": 346333184
+    },
+    {
+      "path": "data/atlas.sqlite.topology-backup-1791060044840",
+      "bytes": 342904832
+    }
+  ],
+  "preservation_limit": "Only this job\u2019s completed reproducible local SQLite derivatives; no tracked facts, archived sources, research artifacts or currently running test backups removed",
+  "completed_full_regressions_generated_backups_removed": [
+    {
+      "path": "data/atlas.sqlite.topology-backup-1791060137209",
+      "bytes": 401051648
+    },
+    {
+      "path": "data/atlas.sqlite.hierarchy-v3-backup-1791060133310",
+      "bytes": 401080320
+    }
+  ],
+  "preserved_primary_generated_database": "data/atlas.sqlite retained"
+}

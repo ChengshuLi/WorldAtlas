@@ -1,0 +1,53 @@
+✔ typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL (2194.129627ms)
+✔ typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes (2265.320595ms)
+✔ legacy or altered installed schemas never advertise typed capabilities (25.824396ms)
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+✔ actual Worker typed routes enforce transport/maintenance and keep atomic corrections, raw source pins and snapshot paging consistent (2101.44113ms)
+✔ legacy23-table projections require the complete known schema and current maintenance clients refuse them as complete backups (2424.43065ms)
+✔ derivation closures reject example promotion, cycles and ambiguous roots while example-only acyclic chains remain available under the paused factual gate (2315.122692ms)
+✖ bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes (118.663631ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11558.646113
+
+✖ failing tests:
+
+test at test/typed-integration.test.mjs:135:1
+✖ bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes (118.663631ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Circular derivation/. Input:
+  
+  'Error: Only JSON data is supported'
+  
+      at async file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:151:259
+      at async both (file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:35:110)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Only JSON data is supported
+        at inspect (file:///workspace/worldatlas-observation-integration-20261003-7e91/src/json-contract.js:7:52)
+        at inspect (file:///workspace/worldatlas-observation-integration-20261003-7e91/src/json-contract.js:22:7)
+        at inspect (file:///workspace/worldatlas-observation-integration-20261003-7e91/src/json-contract.js:22:7)
+        at inspect (file:///workspace/worldatlas-observation-integration-20261003-7e91/src/json-contract.js:22:7)
+        at assertJSONData (file:///workspace/worldatlas-observation-integration-20261003-7e91/src/json-contract.js:25:3)
+        at resolveTypedSnapshot (file:///workspace/worldatlas-observation-integration-20261003-7e91/src/typed-snapshot.js:60:2)
+        at file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:151:280
+        at async both (file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:35:110)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7),
+    expected: /Circular derivation/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

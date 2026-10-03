@@ -1,5 +1,7 @@
 # Typed storage version 3: compatibility and maintenance
 
+Current integration is documented in [TYPED_MODULE_INTEGRATION.md](TYPED_MODULE_INTEGRATION.md). The part-specific descriptions below retain their implementation checkpoint and verification limits.
+
 This is the second bounded part of #529, following the pure contract/registry seam in PR #659. It adds empty forward storage and a complete versioned raw backup path. Typed import/read APIs, optional capabilities, actual new adapter/static/prepared/snapshot parity and the final domain module handover remain the third part. No domain algorithms, factual records, geographic approvals or production maintenance happen as a side effect of merging this code.
 
 ## Additive storage
