@@ -9,7 +9,7 @@
   "base_main_commit": "c5fce09842a0af2ae05cf6c611f012b6a71befff",
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/23",
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T18:05:57.461393+00:00",
+  "updated_at_utc": "2026-10-03T18:08:34.142133+00:00",
   "scope": [
     "Second and final permitted PR: coordinated private publication of merged palette implementation, exact production GPU/Canvas/legend/year/reload/unknown acceptance and retained rollback; no factual/geographic/provider change"
   ],
@@ -61,7 +61,7 @@
     "Verified actual squash merge and matching bot result; renewed canonical claim onto fresh branch with live_work=false"
   ],
   "deployment": {
-    "status": "source-pushed-awaiting-explicit-private-save-deploy",
+    "status": "succeeded-verification-running",
     "project_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db",
     "rollback": {
       "version_number": 23,
@@ -79,7 +79,14 @@
     "local_archive_gzip_bytes": 186358149,
     "local_archive_sha256": "dbc36f8e482a5e7c7de284fddfe477e9d5959d1fbd469a6e3ca88de96710d94a",
     "verified_packaged_files": 539,
-    "source_push_confirmed": true
+    "source_push_confirmed": true,
+    "deployment_id": "appgdep_6ac14428eaac8191b59b5d3d8f05fb0d",
+    "version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_12fb5ab6e7c48191a07c4cdad90d82bf",
+    "url": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+    "version_number": 24,
+    "native_archive_uncompressed_bytes": 262389760,
+    "native_archive_content_hash": "sha256:d06648cdc833b47020614be807d912e81904c2ccfc9ddbbc20e8cc4a33ada20d",
+    "native_archive_files": 539
   },
   "maintenance": {
     "required": false,
