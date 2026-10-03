@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Verify the #526 second-part assessment against retained source reports/archives."""
+"""Verify #526's second-part assessment against retained source reports/archives."""
 import gzip
 import hashlib
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
 PACKET = Path(__file__).resolve().parent
+ROOT = PACKET.parents[2]
 DATA = ROOT / "data/macro-improvements/macro-coverage-oceania"
 assessment = json.loads((PACKET / "remaining-assessment.json").read_text())
 osm = json.loads((DATA / "osm-report.json").read_text())
@@ -17,25 +17,35 @@ for key, source_path in (("osm_report_sha256", DATA / "osm-report.json"), ("gshh
     assert hashlib.sha256(source_path.read_bytes()).hexdigest() == assessment["sources"][key]
 osm_routes = {row["name"]: row for row in osm["routes"]}
 gshhg_routes = {row["name"]: row for row in gshhg["routes"]}
+component_rows = [json.loads(line) for line in (PACKET / "component-inventory.jsonl").read_text().splitlines()]
 for row in assessment["locations"]:
     name = row["name"]
-    route_copy = json.loads(json.dumps(row["osm_2026-10-02"]))
-    route_copy["source"].pop("retained_archive_bytes", None)
-    route_copy["source"].pop("retained_archive_sha256", None)
-    assert route_copy == osm_routes[name], name
-    assert row["gshhg_2.3.7"] == gshhg_routes[name], name
-    route = osm_routes[name]
-    archive_source = row["osm_2026-10-02"]["source"]
-    archive = DATA / archive_source["path"]
+    inventory = row["source_inventory"]
+    o = inventory["osm"]
+    source = osm_routes[name]
+    assert o["route_name"] == name and o["source_url"] == source["source"]["url"], name
+    assert o["raw_xml_sha256"] == source["source"]["sha256"], name
+    assert o["coastline_way_count"] == source["coastline_way_count"], name
+    osm_components = [c for c in component_rows if c["location_id"] == row["id"] and c["source_family"] == "osm"]
+    assert o["closed_land_rings"] == source["closed_land_rings"] == o["component_inventory_count"] == len(osm_components), name
+    assert o["open_chains"] == source["unclosed_chains"] == [] and o["missing_node_ways"] == source["missing_node_ways"] == [], name
+    assert o["component_status"] == source["status"] and o["source_land_area_km2"] == source["source_land_area_km2"], name
+    for compact, full in zip(osm_components, source["current_source_components"]):
+        compact = {k:v for k,v in compact.items() if k not in ("location_id", "location_name", "source_family")}
+        assert compact["way_ids"] == full["osm_way_ids"] and compact["versions"] == full["osm_source_versions"], name
+        assert compact["area_km2"] == full["source_area_km2"] and compact["bbox"] == full["bbox"], name
+    archive = DATA / o["retained_archive"]
     compressed = archive.read_bytes()
-    assert len(compressed) == archive_source["retained_archive_bytes"], name
-    assert hashlib.sha256(compressed).hexdigest() == archive_source["retained_archive_sha256"], name
+    assert len(compressed) == o["retained_archive_bytes"] and hashlib.sha256(compressed).hexdigest() == o["retained_archive_sha256"], name
     raw = gzip.decompress(compressed)
-    assert hashlib.sha256(raw).hexdigest() == route["source"]["sha256"], name
-    # OSM report's source SHA is the compressed archive digest; XML is independently parseable.
+    assert hashlib.sha256(raw).hexdigest() == o["raw_xml_sha256"], name
     assert raw.startswith(b"<?xml") or b"<osm" in raw[:1000], name
-    assert route["complete_ring_reconstruction"] is True, name
-    assert route["unclosed_chains"] == [] and route["missing_node_ways"] == [], name
-    assert len(route["current_source_components"]) == route["closed_land_rings"], name
-    assert row["gshhg_2.3.7"]["source_component_count"] == len(row["gshhg_2.3.7"]["independent_land_components"]), name
-print("verified 12 assigned locations, complete OSM/GSHHG inventories, retained archives and source report hashes")
+    g = inventory["gshhg"]
+    full_g = gshhg_routes[name]
+    g_components = [c for c in component_rows if c["location_id"] == row["id"] and c["source_family"] == "gshhg"]
+    assert g["source_component_count"] == full_g["source_component_count"] == g["component_inventory_count"] == len(g_components), name
+    assert g["source_domain_land_area_km2"] == full_g["source_domain_land_area_km2"], name
+    for compact, full in zip(g_components, full_g["independent_land_components"]):
+        compact = {k:v for k,v in compact.items() if k not in ("location_id", "location_name", "source_family")}
+        assert compact == {'id':full['gshhg_id'],'level':full['source_level'],'area_km2':full['source_land_area_km2'],'bbox':full['source_bounds'],'vertex_count':full['source_vertex_count'],'status':full['status']}, name
+print("verified 12 assigned locations, OSM/GSHHG component inventories, retained archives and pinned report hashes")
