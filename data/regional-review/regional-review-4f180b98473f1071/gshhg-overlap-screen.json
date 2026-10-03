@@ -1,0 +1,5575 @@
+{
+  "source": {
+    "title": "GSHHG full-resolution global shoreline database version 2.3.7",
+    "release_date": "2017-06-15",
+    "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+    "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+    "member": "gshhs_f.b",
+    "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "license": "LGPLv3 or later; retained sources/gshhg-LGPL.txt"
+  },
+  "scope_count": 144,
+  "source_records_scanned": 188612,
+  "source_level1_records_scanned": 179832,
+  "retained": {
+    "path": "sources/gshhg-land-intersections.bin.gz",
+    "records": 239,
+    "raw_bytes": 507564,
+    "raw_sha256": "cb20970ee12d226c3cc7e21c854cff640b0cf0ce42226474fa1e661401ea06fe",
+    "gzip_bytes": 324304,
+    "gzip_sha256": "e165d54abc65c716d82ef6de23e7c747c4cae7e14b7963dca59e1f9aae559c74"
+  },
+  "method": "All 179,832 GSHHG level-1 polygons were scanned. Candidate bbox intersections were constructed from complete source ring coordinate records, repaired only in transient memory when invalid, projected to equal-area EPSG:6933 and intersected against every bbox-compatible current location. The per-location land fraction is the unary union of GSHHG L1 intersection pieces divided by the assigned geometry area. Inland lake boundaries (GSHHG level 2), sub-threshold rocks, coast-date differences, admin source differences, attribution and settlement completeness are not certified.",
+  "summary": {
+    "locations_intersecting_gshhg_l1": 142,
+    "locations_no_gshhg_l1_overlap": [
+      "gb:MUS:ADM1:65221844B12885462064369",
+      "atlas:coverage:MUS-5180"
+    ],
+    "minimum_positive_land_fraction": 0.8207768437364088,
+    "locations_land_fraction_lt_50pct": [
+      {
+        "id": "gb:MUS:ADM1:65221844B12885462064369",
+        "name": "St. Brandon",
+        "fraction": 0
+      },
+      {
+        "id": "atlas:coverage:MUS-5180",
+        "name": "Agaléga",
+        "fraction": 0
+      }
+    ]
+  },
+  "per_location": {
+    "gb:MDG:ADM2:10022922B83786714905046": {
+      "name": "1er Arrondissement",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 10.072082193282833,
+      "current_footprint_area_km2": 10.072082193282833,
+      "gshhg_land_fraction_of_current_footprint": 1.0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B64856352127888": {
+      "name": "2e Arrondissement",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 13.075793891646272,
+      "current_footprint_area_km2": 13.075793891646274,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999999,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B59270450060951": {
+      "name": "3e Arrondissement",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 6.653543915761835,
+      "current_footprint_area_km2": 6.653543915761834,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B42847936410668": {
+      "name": "4e Arrondissement",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 12.947288368595164,
+      "current_footprint_area_km2": 12.947288368595164,
+      "gshhg_land_fraction_of_current_footprint": 1.0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B36895306051586": {
+      "name": "5e Arrondissement",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 25.040767944044497,
+      "current_footprint_area_km2": 25.040767944044497,
+      "gshhg_land_fraction_of_current_footprint": 1.0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B53755400100934": {
+      "name": "6e Arrondissement",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 16.432652083468486,
+      "current_footprint_area_km2": 16.432652083468483,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B99940912082943": {
+      "name": "Antananarivo Avaradrano",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 582.6499159885941,
+      "current_footprint_area_km2": 582.6499159885941,
+      "gshhg_land_fraction_of_current_footprint": 1.0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B52736847594449": {
+      "name": "Ambohidratrimo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1434.8164808815936,
+      "current_footprint_area_km2": 1434.8164808815934,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B97289291498871": {
+      "name": "Ankazobe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 7358.859167930762,
+      "current_footprint_area_km2": 7358.859167930763,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999999,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B50774823120221": {
+      "name": "Manjakandriana",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1800.888542353677,
+      "current_footprint_area_km2": 1800.8885423536758,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000007,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B1306198900476": {
+      "name": "Anjozorobe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4274.431896952563,
+      "current_footprint_area_km2": 4274.43189695256,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000007,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B11040894453097": {
+      "name": "Andramasina",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1404.9446359948977,
+      "current_footprint_area_km2": 1404.9446359948975,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B82805843876956": {
+      "name": "Antananarivo Atsimondrano",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 418.372914620505,
+      "current_footprint_area_km2": 418.37291462050496,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B38771191417556": {
+      "name": "Antsirabe I",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 131.50606996006084,
+      "current_footprint_area_km2": 131.50606996006084,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B74688195218658": {
+      "name": "Betafo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4153.606962705215,
+      "current_footprint_area_km2": 4153.606962705217,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999996,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B90393204210047": {
+      "name": "Ambatolampy",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1657.9230736494876,
+      "current_footprint_area_km2": 1657.9230736494876,
+      "gshhg_land_fraction_of_current_footprint": 1.0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B69082959012584": {
+      "name": "Antanifotsy",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2779.8312474588156,
+      "current_footprint_area_km2": 2779.8312474588142,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B80317071360034": {
+      "name": "Faratsiho",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1860.315984312392,
+      "current_footprint_area_km2": 1860.3159843123917,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B65379850816186": {
+      "name": "Antsirabe II",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2476.3110164795658,
+      "current_footprint_area_km2": 2476.3110164795667,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999997,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B69129581267436": {
+      "name": "Mandoto",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4848.523051027899,
+      "current_footprint_area_km2": 4848.523051027901,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999996,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B99194691228489": {
+      "name": "Arivonimamo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2132.0083826329296,
+      "current_footprint_area_km2": 2132.0083826329287,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B79563685419763": {
+      "name": "Miarinarivo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2580.7907393545793,
+      "current_footprint_area_km2": 2580.7907393545784,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B59328070281510": {
+      "name": "Soavinandriana",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1865.7102480779727,
+      "current_footprint_area_km2": 1865.7102480779731,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999998,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B70813515121555": {
+      "name": "Tsiroanomandidy",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 10561.498590800578,
+      "current_footprint_area_km2": 10561.498590800575,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B23923498940873": {
+      "name": "Fenoarivobe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 7545.4511205432245,
+      "current_footprint_area_km2": 7545.451120543225,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999999,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B21478747844721": {
+      "name": "Fianarantsoa I",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 89.30165448269337,
+      "current_footprint_area_km2": 89.30165448269335,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B7475622417535": {
+      "name": "Ambalavao",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4804.367716369038,
+      "current_footprint_area_km2": 4804.367716369036,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B34392392155891": {
+      "name": "Ambohimahasoa",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1930.2038510126708,
+      "current_footprint_area_km2": 1930.2038510126706,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B85703559853082": {
+      "name": "Ikalamavony",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 9794.86734792857,
+      "current_footprint_area_km2": 9794.86734792858,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999988,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B72540367204165": {
+      "name": "Lalangina",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1045.0374918286655,
+      "current_footprint_area_km2": 1045.0374918286655,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B39439372576611": {
+      "name": "Vohibato",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1826.7473297594906,
+      "current_footprint_area_km2": 1826.7473297594915,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999996,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B29889196912325": {
+      "name": "Isandra",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1346.865377502882,
+      "current_footprint_area_km2": 1346.8653775028827,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999994,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B11162683268422": {
+      "name": "Ambatofinandrahana",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 10322.63817138512,
+      "current_footprint_area_km2": 10322.638171385124,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999997,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B13687813160362": {
+      "name": "Ambositra",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2918.3324295801417,
+      "current_footprint_area_km2": 2918.3324295801417,
+      "gshhg_land_fraction_of_current_footprint": 1.0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B23434626058692": {
+      "name": "Fandriana",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2271.6030992690958,
+      "current_footprint_area_km2": 2271.603099269096,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999998,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B47245353926014": {
+      "name": "Manandriana",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 983.1974825223526,
+      "current_footprint_area_km2": 983.197482522353,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999997,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B31790128040616": {
+      "name": "Ifanadiana",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 3965.618173694379,
+      "current_footprint_area_km2": 3965.6181736943763,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000007,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B12403701465046": {
+      "name": "Nosy-Varika",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 3823.696348296587,
+      "current_footprint_area_km2": 3825.9181926937163,
+      "gshhg_land_fraction_of_current_footprint": 0.9994192650534525,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B52512193010711": {
+      "name": "Mananjary",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 5459.507505827223,
+      "current_footprint_area_km2": 5464.261411557706,
+      "gshhg_land_fraction_of_current_footprint": 0.9991300003106682,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B29911348985828": {
+      "name": "Manakara Atsimo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 3165.266912617745,
+      "current_footprint_area_km2": 3171.3856549561187,
+      "gshhg_land_fraction_of_current_footprint": 0.9980706407217265,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B6018255004858": {
+      "name": "Ikongo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 3147.693029863289,
+      "current_footprint_area_km2": 3147.6930298632897,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999999,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B81120329184352": {
+      "name": "Vohipeno",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1147.160049319787,
+      "current_footprint_area_km2": 1147.168628253343,
+      "gshhg_land_fraction_of_current_footprint": 0.9999925216456023,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B7074189327891": {
+      "name": "Ihosy",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 17198.7251809458,
+      "current_footprint_area_km2": 17198.725180945778,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000013,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B57896428715958": {
+      "name": "Ivohibe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4311.976438042119,
+      "current_footprint_area_km2": 4311.976438042123,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999991,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B30377745880071": {
+      "name": "Iakora",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4551.181992544191,
+      "current_footprint_area_km2": 4551.181992544192,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999998,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B75046296685916": {
+      "name": "Farafangana",
+      "gshhg_l1_intersecting_records": 2,
+      "gshhg_l1_intersection_area_km2": 2813.6282668809804,
+      "current_footprint_area_km2": 2827.0169009223823,
+      "gshhg_land_fraction_of_current_footprint": 0.9952640417405947,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B74242760889111": {
+      "name": "Vangaindrano",
+      "gshhg_l1_intersecting_records": 3,
+      "gshhg_l1_intersection_area_km2": 4749.002485048046,
+      "current_footprint_area_km2": 4814.248531876924,
+      "gshhg_land_fraction_of_current_footprint": 0.9864473039983582,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B72475763343132": {
+      "name": "Midongy-Atsimo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2547.946314406676,
+      "current_footprint_area_km2": 2547.946314406675,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B86038713071830": {
+      "name": "Vondrozo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 3207.9245248709212,
+      "current_footprint_area_km2": 3207.924524870923,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999994,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B11101019287712": {
+      "name": "Befotaka",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 3235.49546642948,
+      "current_footprint_area_km2": 3235.4954664294773,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000009,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B32937301443957": {
+      "name": "Toamasina I",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 29.17954386682869,
+      "current_footprint_area_km2": 29.289024234227746,
+      "gshhg_land_fraction_of_current_footprint": 0.9962620684621131,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B71585303896889": {
+      "name": "Brickaville",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 6050.826840998293,
+      "current_footprint_area_km2": 6056.845522585549,
+      "gshhg_land_fraction_of_current_footprint": 0.9990063009590038,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B31178585124685": {
+      "name": "Vatomandry",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2269.1542274860612,
+      "current_footprint_area_km2": 2276.9665755053156,
+      "gshhg_land_fraction_of_current_footprint": 0.9965689667545863,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B42807663031303": {
+      "name": "Mahanoro",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 3742.198473363287,
+      "current_footprint_area_km2": 3768.151896748903,
+      "gshhg_land_fraction_of_current_footprint": 0.993112426436947,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B10629043557873": {
+      "name": "Marolambo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 3583.133418777318,
+      "current_footprint_area_km2": 3583.1334187773195,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999996,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B55539380638871": {
+      "name": "Toamasina II",
+      "gshhg_l1_intersecting_records": 2,
+      "gshhg_l1_intersection_area_km2": 5007.620263101215,
+      "current_footprint_area_km2": 5010.619360768408,
+      "gshhg_land_fraction_of_current_footprint": 0.9994014517066143,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B63046975451138": {
+      "name": "Antanambao Manampontsy",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 1300.9140237338104,
+      "current_footprint_area_km2": 1300.9140237338113,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999992,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B25342620887316": {
+      "name": "Sainte Marie",
+      "gshhg_l1_intersecting_records": 3,
+      "gshhg_l1_intersection_area_km2": 167.83955399009085,
+      "current_footprint_area_km2": 176.1883965651821,
+      "gshhg_land_fraction_of_current_footprint": 0.9526141179677373,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B79548799707119": {
+      "name": "Maroantsetra",
+      "gshhg_l1_intersecting_records": 2,
+      "gshhg_l1_intersection_area_km2": 6924.219267584027,
+      "current_footprint_area_km2": 6966.248341462728,
+      "gshhg_land_fraction_of_current_footprint": 0.9939667563057514,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B77596397547877": {
+      "name": "Mananara-Avaratra",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4463.297035675924,
+      "current_footprint_area_km2": 4480.51929554971,
+      "gshhg_land_fraction_of_current_footprint": 0.9961561911158622,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B92224420422748": {
+      "name": "Fenerive Est",
+      "gshhg_l1_intersecting_records": 3,
+      "gshhg_l1_intersection_area_km2": 3000.159708483066,
+      "current_footprint_area_km2": 3007.1941911822296,
+      "gshhg_land_fraction_of_current_footprint": 0.9976607820273828,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B54073545298219": {
+      "name": "Vavatenina",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2666.749896159265,
+      "current_footprint_area_km2": 2666.7498961592655,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999998,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B56427545477040": {
+      "name": "Soanierana Ivongo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4353.344850083152,
+      "current_footprint_area_km2": 4363.690345393193,
+      "gshhg_land_fraction_of_current_footprint": 0.9976291866536858,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B80147144228565": {
+      "name": "Amparafaravola",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4622.2331344078075,
+      "current_footprint_area_km2": 4622.233134407809,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999996,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B15285270155057": {
+      "name": "Ambatondrazaka",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 5544.806385473048,
+      "current_footprint_area_km2": 5544.806385473045,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B82658288648411": {
+      "name": "Moramanga",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 7150.385329715632,
+      "current_footprint_area_km2": 7150.385329715635,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999998,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B97539486376385": {
+      "name": "Andilamena",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 7689.413958921653,
+      "current_footprint_area_km2": 7689.413958921652,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B56031688474611": {
+      "name": "Anosibe-An'ala",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2857.5900281147115,
+      "current_footprint_area_km2": 2857.5900281147105,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B60996293868186": {
+      "name": "Mahajanga I",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 43.202756560614205,
+      "current_footprint_area_km2": 52.63642229956564,
+      "gshhg_land_fraction_of_current_footprint": 0.8207768437364088,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B91378939255033": {
+      "name": "Soalala",
+      "gshhg_l1_intersecting_records": 3,
+      "gshhg_l1_intersection_area_km2": 7709.016925828205,
+      "current_footprint_area_km2": 7726.357124688177,
+      "gshhg_land_fraction_of_current_footprint": 0.9977557083396309,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B29824664852903": {
+      "name": "Ambato Boeni",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 8524.009378994011,
+      "current_footprint_area_km2": 8524.009378994017,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999994,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B7387017022835": {
+      "name": "Marovoay",
+      "gshhg_l1_intersecting_records": 6,
+      "gshhg_l1_intersection_area_km2": 5561.587447488979,
+      "current_footprint_area_km2": 5613.354697131648,
+      "gshhg_land_fraction_of_current_footprint": 0.9907778409817712,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B34339999190032": {
+      "name": "Mitsinjo",
+      "gshhg_l1_intersecting_records": 15,
+      "gshhg_l1_intersection_area_km2": 4474.680424135806,
+      "current_footprint_area_km2": 4670.053368732811,
+      "gshhg_land_fraction_of_current_footprint": 0.9581647297855146,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B51504984909978": {
+      "name": "Mahajanga II",
+      "gshhg_l1_intersecting_records": 35,
+      "gshhg_l1_intersection_area_km2": 4501.47329581999,
+      "current_footprint_area_km2": 4687.156002889295,
+      "gshhg_land_fraction_of_current_footprint": 0.9603847819541647,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B55197674782137": {
+      "name": "Port-Berge (Boriziny-Vaovao)",
+      "gshhg_l1_intersecting_records": 18,
+      "gshhg_l1_intersection_area_km2": 7050.509524571328,
+      "current_footprint_area_km2": 7086.5459770133975,
+      "gshhg_land_fraction_of_current_footprint": 0.9949148072193477,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B13687974105922": {
+      "name": "Mandritsara",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 10288.718792851085,
+      "current_footprint_area_km2": 10288.718792851096,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999991,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B21608854890468": {
+      "name": "Analalava",
+      "gshhg_l1_intersecting_records": 18,
+      "gshhg_l1_intersection_area_km2": 8668.645440157716,
+      "current_footprint_area_km2": 8739.076399465666,
+      "gshhg_land_fraction_of_current_footprint": 0.9919406861676758,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B32579750162608": {
+      "name": "Befandriana Nord",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 8714.85347752174,
+      "current_footprint_area_km2": 8714.853477521729,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000013,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B54557741887580": {
+      "name": "Antsohihy",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4772.545021952175,
+      "current_footprint_area_km2": 4772.545021952175,
+      "gshhg_land_fraction_of_current_footprint": 1.0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B56468572037030": {
+      "name": "Bealanana",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 6827.01973244804,
+      "current_footprint_area_km2": 6827.019732448047,
+      "gshhg_land_fraction_of_current_footprint": 0.999999999999999,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B54995100782210": {
+      "name": "Mampikony",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4575.620693261617,
+      "current_footprint_area_km2": 4575.620693261618,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999998,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B61824869015313": {
+      "name": "Maevatanana",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 10750.442494119778,
+      "current_footprint_area_km2": 10750.442494119778,
+      "gshhg_land_fraction_of_current_footprint": 1.0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B96360954496738": {
+      "name": "Tsaratanana",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 12134.820885982173,
+      "current_footprint_area_km2": 12134.820885982164,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000009,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B38821373259374": {
+      "name": "Kandreho",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 6106.020562003074,
+      "current_footprint_area_km2": 6106.020562003073,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B83460232588272": {
+      "name": "Besalampy",
+      "gshhg_l1_intersecting_records": 5,
+      "gshhg_l1_intersection_area_km2": 11928.110601754372,
+      "current_footprint_area_km2": 11946.567449425065,
+      "gshhg_land_fraction_of_current_footprint": 0.998455050143162,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B59098628147577": {
+      "name": "Ambatomainty",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4750.379441826044,
+      "current_footprint_area_km2": 4750.379441826046,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999996,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B48021466276127": {
+      "name": "Antsalova",
+      "gshhg_l1_intersecting_records": 3,
+      "gshhg_l1_intersection_area_km2": 6876.636950933474,
+      "current_footprint_area_km2": 6883.444038602187,
+      "gshhg_land_fraction_of_current_footprint": 0.999011092756687,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B40533998311047": {
+      "name": "Maintirano",
+      "gshhg_l1_intersecting_records": 3,
+      "gshhg_l1_intersection_area_km2": 9815.10896450172,
+      "current_footprint_area_km2": 9904.024182910187,
+      "gshhg_land_fraction_of_current_footprint": 0.9910223140850268,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B27026898293410": {
+      "name": "Morafenobe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 7398.556338910042,
+      "current_footprint_area_km2": 7398.556338910043,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999998,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B36331574429859": {
+      "name": "Toliary-I",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 31.10308421132721,
+      "current_footprint_area_km2": 34.507070203244574,
+      "gshhg_land_fraction_of_current_footprint": 0.9013539552367648,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B39697778193382": {
+      "name": "Beroroha",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 7320.325221848146,
+      "current_footprint_area_km2": 7320.325221848142,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B72547257848133": {
+      "name": "Morombe",
+      "gshhg_l1_intersecting_records": 9,
+      "gshhg_l1_intersection_area_km2": 7689.57575037901,
+      "current_footprint_area_km2": 7782.039310096859,
+      "gshhg_land_fraction_of_current_footprint": 0.9881183381330545,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B67140219559440": {
+      "name": "Ankazoabo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 7447.311864060098,
+      "current_footprint_area_km2": 7447.311864060098,
+      "gshhg_land_fraction_of_current_footprint": 1.0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B63491232053463": {
+      "name": "Betioky Atsimo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 7697.645207739833,
+      "current_footprint_area_km2": 7697.6452077398335,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999999,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B9355726550011": {
+      "name": "Ampanihy Ouest",
+      "gshhg_l1_intersecting_records": 4,
+      "gshhg_l1_intersection_area_km2": 13484.992793283984,
+      "current_footprint_area_km2": 13844.82347905364,
+      "gshhg_land_fraction_of_current_footprint": 0.9740097310511717,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B49716742274905": {
+      "name": "Sakaraha",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 8576.171572651234,
+      "current_footprint_area_km2": 8576.17157265123,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B75767771564463": {
+      "name": "Toliary-II",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 9546.33785464241,
+      "current_footprint_area_km2": 9625.885926693703,
+      "gshhg_land_fraction_of_current_footprint": 0.9917360258933989,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B93003724204974": {
+      "name": "Benenitra",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4364.518092515441,
+      "current_footprint_area_km2": 4364.51809251544,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B63714971659336": {
+      "name": "Beloha",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4780.704082329106,
+      "current_footprint_area_km2": 4782.534673957046,
+      "gshhg_land_fraction_of_current_footprint": 0.9996172340081698,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B95964642483948": {
+      "name": "Tsihombe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 2529.790791392716,
+      "current_footprint_area_km2": 2531.088885143448,
+      "gshhg_land_fraction_of_current_footprint": 0.9994871401955295,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B3330352702203": {
+      "name": "Ambovombe-Androy",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 6501.5875358665635,
+      "current_footprint_area_km2": 6501.587535866568,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999994,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B6580820782603": {
+      "name": "Bekily",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 5144.940760764383,
+      "current_footprint_area_km2": 5144.940760764382,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000004,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B85658862424992": {
+      "name": "Taolagnaro",
+      "gshhg_l1_intersecting_records": 5,
+      "gshhg_l1_intersection_area_km2": 5910.844148287753,
+      "current_footprint_area_km2": 5951.563094675889,
+      "gshhg_land_fraction_of_current_footprint": 0.9931582769534003,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B59412081262724": {
+      "name": "Betroka",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 13665.362374588107,
+      "current_footprint_area_km2": 13665.362374588094,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000009,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B61088153240222": {
+      "name": "Amboasary-Atsimo",
+      "gshhg_l1_intersecting_records": 2,
+      "gshhg_l1_intersection_area_km2": 9893.016612708963,
+      "current_footprint_area_km2": 9894.644396813801,
+      "gshhg_land_fraction_of_current_footprint": 0.9998354883672866,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B70385192089273": {
+      "name": "Manja",
+      "gshhg_l1_intersecting_records": 8,
+      "gshhg_l1_intersection_area_km2": 9030.065153322865,
+      "current_footprint_area_km2": 9070.394551527972,
+      "gshhg_land_fraction_of_current_footprint": 0.9955537327537408,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B91714644312966": {
+      "name": "Morondava",
+      "gshhg_l1_intersecting_records": 24,
+      "gshhg_l1_intersection_area_km2": 5644.932933888139,
+      "current_footprint_area_km2": 5692.808354291159,
+      "gshhg_land_fraction_of_current_footprint": 0.9915901928497326,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B70120442307447": {
+      "name": "Mahabo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 13713.988899562399,
+      "current_footprint_area_km2": 13713.988899562404,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999996,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B50417492685621": {
+      "name": "Belo Sur Tsiribihina",
+      "gshhg_l1_intersecting_records": 11,
+      "gshhg_l1_intersection_area_km2": 7995.9835403603065,
+      "current_footprint_area_km2": 8036.7074279377675,
+      "gshhg_land_fraction_of_current_footprint": 0.9949327646996463,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B2580716977723": {
+      "name": "Miandrivazo",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 12335.890190174707,
+      "current_footprint_area_km2": 12335.89019017471,
+      "gshhg_land_fraction_of_current_footprint": 0.9999999999999997,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B22775533170221": {
+      "name": "Antsiranana II",
+      "gshhg_l1_intersecting_records": 7,
+      "gshhg_l1_intersection_area_km2": 5518.895419229168,
+      "current_footprint_area_km2": 5597.240875892227,
+      "gshhg_land_fraction_of_current_footprint": 0.986002843472308,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B77517626674469": {
+      "name": "Antsiranana I",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 65.66235408272563,
+      "current_footprint_area_km2": 70.1164291136201,
+      "gshhg_land_fraction_of_current_footprint": 0.9364760144348356,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B52521872200932": {
+      "name": "Ambilobe",
+      "gshhg_l1_intersecting_records": 9,
+      "gshhg_l1_intersection_area_km2": 7984.645490560366,
+      "current_footprint_area_km2": 8021.536777662802,
+      "gshhg_land_fraction_of_current_footprint": 0.9954009701476199,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B66036521727834": {
+      "name": "Nosy-Be",
+      "gshhg_l1_intersecting_records": 3,
+      "gshhg_l1_intersection_area_km2": 296.2317864767853,
+      "current_footprint_area_km2": 304.66551616375153,
+      "gshhg_land_fraction_of_current_footprint": 0.9723180693596013,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B10293113814705": {
+      "name": "Ambanja",
+      "gshhg_l1_intersecting_records": 24,
+      "gshhg_l1_intersection_area_km2": 5955.7948726463455,
+      "current_footprint_area_km2": 6011.784645730972,
+      "gshhg_land_fraction_of_current_footprint": 0.9906866635476728,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B15279482214677": {
+      "name": "Antalaha",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 6746.340641893193,
+      "current_footprint_area_km2": 6807.766381412714,
+      "gshhg_land_fraction_of_current_footprint": 0.990977108191134,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B78580830473532": {
+      "name": "Sambava",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4675.90015103137,
+      "current_footprint_area_km2": 4678.077393596898,
+      "gshhg_land_fraction_of_current_footprint": 0.999534586031324,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B40357207342555": {
+      "name": "Andapa",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 4051.566793122291,
+      "current_footprint_area_km2": 4051.566793122288,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000009,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MDG:ADM2:10022922B16213196407560": {
+      "name": "Vohemar",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 8249.262763740566,
+      "current_footprint_area_km2": 8261.622954938981,
+      "gshhg_land_fraction_of_current_footprint": 0.9985039027723934,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B99203907341133": {
+      "name": "Black River",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 246.67580689395274,
+      "current_footprint_area_km2": 247.5664532499593,
+      "gshhg_land_fraction_of_current_footprint": 0.9964023948143438,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B3325932502431": {
+      "name": "Flacq",
+      "gshhg_l1_intersecting_records": 6,
+      "gshhg_l1_intersection_area_km2": 267.08167544934906,
+      "current_footprint_area_km2": 298.52355962409143,
+      "gshhg_land_fraction_of_current_footprint": 0.8946753676181043,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B660734165567": {
+      "name": "Grand Port",
+      "gshhg_l1_intersecting_records": 3,
+      "gshhg_l1_intersection_area_km2": 240.41796600111513,
+      "current_footprint_area_km2": 261.307157664109,
+      "gshhg_land_fraction_of_current_footprint": 0.9200588615722292,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B64352145242214": {
+      "name": "Moka",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 237.43526248658364,
+      "current_footprint_area_km2": 237.43526248658358,
+      "gshhg_land_fraction_of_current_footprint": 1.0000000000000002,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B91551715822340": {
+      "name": "Pamplemousses",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 175.56157066244336,
+      "current_footprint_area_km2": 175.6846267846963,
+      "gshhg_land_fraction_of_current_footprint": 0.9992995623777389,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B21568199301359": {
+      "name": "Plaines Wilhems",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 200.95991550523559,
+      "current_footprint_area_km2": 200.95991550523559,
+      "gshhg_land_fraction_of_current_footprint": 1.0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B53255720811613": {
+      "name": "Port Louis",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 40.128251803846,
+      "current_footprint_area_km2": 41.14107866277742,
+      "gshhg_land_fraction_of_current_footprint": 0.9753816163345329,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B93227578092779": {
+      "name": "Rivière du Rempart",
+      "gshhg_l1_intersecting_records": 3,
+      "gshhg_l1_intersection_area_km2": 127.89005325636438,
+      "current_footprint_area_km2": 145.54929003800515,
+      "gshhg_land_fraction_of_current_footprint": 0.8786717765711556,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B93866494923153": {
+      "name": "Savanne",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 245.5064660691438,
+      "current_footprint_area_km2": 247.4826332310629,
+      "gshhg_land_fraction_of_current_footprint": 0.992014925911694,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B37057547030311": {
+      "name": "Rodrigues",
+      "gshhg_l1_intersecting_records": 2,
+      "gshhg_l1_intersection_area_km2": 101.79834579239092,
+      "current_footprint_area_km2": 109.14359475138616,
+      "gshhg_land_fraction_of_current_footprint": 0.9327010533625294,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B12885462064369": {
+      "name": "St. Brandon",
+      "gshhg_l1_intersecting_records": 0,
+      "gshhg_l1_intersection_area_km2": 0,
+      "current_footprint_area_km2": 0.2975896743765891,
+      "gshhg_land_fraction_of_current_footprint": 0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:MUS:ADM1:65221844B83452679821580": {
+      "name": "Agaléga",
+      "gshhg_l1_intersecting_records": 2,
+      "gshhg_l1_intersection_area_km2": 18.64160007795194,
+      "current_footprint_area_km2": 20.718192755371334,
+      "gshhg_land_fraction_of_current_footprint": 0.8997696033655723,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:SYC:ADM2:34574756B18865708954128": {
+      "name": "La Digue",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 7.607401514684256,
+      "current_footprint_area_km2": 7.743931447986502,
+      "gshhg_land_fraction_of_current_footprint": 0.9823694289884571,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:SYC:ADM2:34574756B27990728867894": {
+      "name": "Central 1 Mahe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 8.241969854102093,
+      "current_footprint_area_km2": 8.242519796409049,
+      "gshhg_land_fraction_of_current_footprint": 0.9999332798318307,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:SYC:ADM2:34574756B38092183622343": {
+      "name": "Central 2 Mahe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 6.458932990682914,
+      "current_footprint_area_km2": 7.190812046230329,
+      "gshhg_land_fraction_of_current_footprint": 0.8982202495570593,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:SYC:ADM2:34574756B49819614716360": {
+      "name": "East Mahe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 43.041925430984996,
+      "current_footprint_area_km2": 44.97272048682121,
+      "gshhg_land_fraction_of_current_footprint": 0.9570674169822122,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:SYC:ADM2:34574756B41664711494427": {
+      "name": "North Mahe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 27.24779220134687,
+      "current_footprint_area_km2": 27.89888481627011,
+      "gshhg_land_fraction_of_current_footprint": 0.9766624143147277,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:SYC:ADM2:34574756B14018612202061": {
+      "name": "West Mahe",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 59.2213106491405,
+      "current_footprint_area_km2": 64.92487333479347,
+      "gshhg_land_fraction_of_current_footprint": 0.9121513467382243,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:SYC:ADM2:34574756B54247629098598": {
+      "name": "Other Islands",
+      "gshhg_l1_intersecting_records": 7,
+      "gshhg_l1_intersection_area_km2": 150.45010260912673,
+      "current_footprint_area_km2": 172.52995612200792,
+      "gshhg_land_fraction_of_current_footprint": 0.8720230735045977,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "gb:SYC:ADM2:34574756B43978553392406": {
+      "name": "Praslin",
+      "gshhg_l1_intersecting_records": 1,
+      "gshhg_l1_intersection_area_km2": 33.518154887346185,
+      "current_footprint_area_km2": 37.2093491381326,
+      "gshhg_land_fraction_of_current_footprint": 0.9007992793132833,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "atlas:coverage:ATF-5919": {
+      "name": "Iles Eparses de l'ocean Indien",
+      "gshhg_l1_intersecting_records": 7,
+      "gshhg_l1_intersection_area_km2": 20.63601910960167,
+      "current_footprint_area_km2": 25.08300992105595,
+      "gshhg_land_fraction_of_current_footprint": 0.8227090438727112,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "atlas:coverage:FRA-4601": {
+      "name": "La Réunion",
+      "gshhg_l1_intersecting_records": 2,
+      "gshhg_l1_intersection_area_km2": 2497.344103103099,
+      "current_footprint_area_km2": 2582.4208572200546,
+      "gshhg_land_fraction_of_current_footprint": 0.9670554263534954,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "atlas:coverage:FRA-4602": {
+      "name": "Mayotte",
+      "gshhg_l1_intersecting_records": 8,
+      "gshhg_l1_intersection_area_km2": 342.2798268060577,
+      "current_footprint_area_km2": 394.89990673218927,
+      "gshhg_land_fraction_of_current_footprint": 0.8667508423550551,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "atlas:coverage:MUS-5180": {
+      "name": "Agaléga",
+      "gshhg_l1_intersecting_records": 0,
+      "gshhg_l1_intersection_area_km2": 0,
+      "current_footprint_area_km2": 14.022507643834336,
+      "gshhg_land_fraction_of_current_footprint": 0,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    },
+    "atlas:territory:COM": {
+      "name": "Comoros",
+      "gshhg_l1_intersecting_records": 4,
+      "gshhg_l1_intersection_area_km2": 1573.2117390826409,
+      "current_footprint_area_km2": 1647.7552527357316,
+      "gshhg_land_fraction_of_current_footprint": 0.9547605668200252,
+      "interpretation": "coarse physical-land overlap screen only; GSHHG 2017 level-1 boundaries include no administrative or settlement evidence and do not resolve small/sub-grid islands"
+    }
+  },
+  "retained_candidate_records": [
+    {
+      "record_id": 10,
+      "bbox": [
+        43.221222,
+        -25.607111,
+        50.48375,
+        -11.95125
+      ],
+      "source_area_km2": 590729.7396156156,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B83786714905046",
+          "intersection_area_km2": 10.072082193282833
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B64856352127888",
+          "intersection_area_km2": 13.075793891646272
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B59270450060951",
+          "intersection_area_km2": 6.653543915761835
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B42847936410668",
+          "intersection_area_km2": 12.947288368595164
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B36895306051586",
+          "intersection_area_km2": 25.040767944044497
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B53755400100934",
+          "intersection_area_km2": 16.432652083468486
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B99940912082943",
+          "intersection_area_km2": 582.6499159885941
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B52736847594449",
+          "intersection_area_km2": 1434.8164808815936
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B97289291498871",
+          "intersection_area_km2": 7358.859167930762
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B50774823120221",
+          "intersection_area_km2": 1800.888542353677
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B1306198900476",
+          "intersection_area_km2": 4274.431896952563
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B11040894453097",
+          "intersection_area_km2": 1404.9446359948977
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B82805843876956",
+          "intersection_area_km2": 418.372914620505
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B38771191417556",
+          "intersection_area_km2": 131.50606996006084
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B74688195218658",
+          "intersection_area_km2": 4153.606962705215
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B90393204210047",
+          "intersection_area_km2": 1657.9230736494876
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B69082959012584",
+          "intersection_area_km2": 2779.8312474588156
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B80317071360034",
+          "intersection_area_km2": 1860.315984312392
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B65379850816186",
+          "intersection_area_km2": 2476.3110164795658
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B69129581267436",
+          "intersection_area_km2": 4848.523051027899
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B99194691228489",
+          "intersection_area_km2": 2132.0083826329296
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B79563685419763",
+          "intersection_area_km2": 2580.7907393545793
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B59328070281510",
+          "intersection_area_km2": 1865.7102480779727
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B70813515121555",
+          "intersection_area_km2": 10561.498590800578
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B23923498940873",
+          "intersection_area_km2": 7545.4511205432245
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B21478747844721",
+          "intersection_area_km2": 89.30165448269337
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B7475622417535",
+          "intersection_area_km2": 4804.367716369038
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B34392392155891",
+          "intersection_area_km2": 1930.2038510126708
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B85703559853082",
+          "intersection_area_km2": 9794.86734792857
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B72540367204165",
+          "intersection_area_km2": 1045.0374918286655
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B39439372576611",
+          "intersection_area_km2": 1826.7473297594906
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B29889196912325",
+          "intersection_area_km2": 1346.865377502882
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B11162683268422",
+          "intersection_area_km2": 10322.63817138512
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B13687813160362",
+          "intersection_area_km2": 2918.3324295801417
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B23434626058692",
+          "intersection_area_km2": 2271.6030992690958
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B47245353926014",
+          "intersection_area_km2": 983.1974825223526
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B31790128040616",
+          "intersection_area_km2": 3965.618173694379
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B12403701465046",
+          "intersection_area_km2": 3823.696348296587
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B52512193010711",
+          "intersection_area_km2": 5459.507505827223
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B29911348985828",
+          "intersection_area_km2": 3165.266912617745
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B6018255004858",
+          "intersection_area_km2": 3147.693029863289
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B81120329184352",
+          "intersection_area_km2": 1147.160049319787
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B7074189327891",
+          "intersection_area_km2": 17198.7251809458
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B57896428715958",
+          "intersection_area_km2": 4311.976438042119
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B30377745880071",
+          "intersection_area_km2": 4551.181992544191
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B75046296685916",
+          "intersection_area_km2": 2813.5763753416995
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B74242760889111",
+          "intersection_area_km2": 4747.499755092752
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B72475763343132",
+          "intersection_area_km2": 2547.946314406676
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B86038713071830",
+          "intersection_area_km2": 3207.9245248709212
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B11101019287712",
+          "intersection_area_km2": 3235.49546642948
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B32937301443957",
+          "intersection_area_km2": 29.17954386682869
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B71585303896889",
+          "intersection_area_km2": 6050.826840998293
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B31178585124685",
+          "intersection_area_km2": 2269.154227486061
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B42807663031303",
+          "intersection_area_km2": 3742.198473363287
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B10629043557873",
+          "intersection_area_km2": 3583.133418777318
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B55539380638871",
+          "intersection_area_km2": 5007.446360362469
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B63046975451138",
+          "intersection_area_km2": 1300.9140237338104
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B79548799707119",
+          "intersection_area_km2": 6921.857704668178
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B77596397547877",
+          "intersection_area_km2": 4463.297035675924
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B92224420422748",
+          "intersection_area_km2": 2999.635675552622
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B54073545298219",
+          "intersection_area_km2": 2666.749896159265
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B56427545477040",
+          "intersection_area_km2": 4353.344850083152
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B80147144228565",
+          "intersection_area_km2": 4622.2331344078075
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B15285270155057",
+          "intersection_area_km2": 5544.806385473048
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B82658288648411",
+          "intersection_area_km2": 7150.385329715632
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B97539486376385",
+          "intersection_area_km2": 7689.413958921653
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B56031688474611",
+          "intersection_area_km2": 2857.5900281147115
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B60996293868186",
+          "intersection_area_km2": 43.202756560614226
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B91378939255033",
+          "intersection_area_km2": 7708.074029676278
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B29824664852903",
+          "intersection_area_km2": 8524.009378994011
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B7387017022835",
+          "intersection_area_km2": 5550.805857853239
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 4468.8252614754065
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 4429.342364610533
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 7039.091372112426
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B13687974105922",
+          "intersection_area_km2": 10288.718792851085
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 8634.340150771963
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B32579750162608",
+          "intersection_area_km2": 8714.85347752174
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B54557741887580",
+          "intersection_area_km2": 4772.545021952175
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B56468572037030",
+          "intersection_area_km2": 6827.01973244804
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B54995100782210",
+          "intersection_area_km2": 4575.620693261617
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B61824869015313",
+          "intersection_area_km2": 10750.442494119778
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B96360954496738",
+          "intersection_area_km2": 12134.820885982173
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B38821373259374",
+          "intersection_area_km2": 6106.020562003074
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B83460232588272",
+          "intersection_area_km2": 11926.512933382714
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B59098628147577",
+          "intersection_area_km2": 4750.379441826044
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B48021466276127",
+          "intersection_area_km2": 6876.489031249257
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B40533998311047",
+          "intersection_area_km2": 9814.885723532358
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B27026898293410",
+          "intersection_area_km2": 7398.556338910042
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B36331574429859",
+          "intersection_area_km2": 31.103084211327232
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B39697778193382",
+          "intersection_area_km2": 7320.325221848146
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B72547257848133",
+          "intersection_area_km2": 7672.672750429183
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B67140219559440",
+          "intersection_area_km2": 7447.311864060098
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B63491232053463",
+          "intersection_area_km2": 7697.645207739833
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B9355726550011",
+          "intersection_area_km2": 13483.056081857492
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B49716742274905",
+          "intersection_area_km2": 8576.171572651234
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B75767771564463",
+          "intersection_area_km2": 9546.337854642388
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B93003724204974",
+          "intersection_area_km2": 4364.518092515441
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B63714971659336",
+          "intersection_area_km2": 4780.704082329106
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B95964642483948",
+          "intersection_area_km2": 2529.790791392716
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B3330352702203",
+          "intersection_area_km2": 6501.5875358665635
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B6580820782603",
+          "intersection_area_km2": 5144.940760764383
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B85658862424992",
+          "intersection_area_km2": 5909.826633106911
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B59412081262724",
+          "intersection_area_km2": 13665.362374588107
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B61088153240222",
+          "intersection_area_km2": 9892.563736534396
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B70385192089273",
+          "intersection_area_km2": 9012.248757172554
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 5639.065755606372
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B70120442307447",
+          "intersection_area_km2": 13713.988899562399
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 7987.452549557935
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B2580716977723",
+          "intersection_area_km2": 12335.890190174707
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B22775533170221",
+          "intersection_area_km2": 5513.399101335888
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B77517626674469",
+          "intersection_area_km2": 65.66235408272561
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B52521872200932",
+          "intersection_area_km2": 7964.65274296906
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 5925.113445126943
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B15279482214677",
+          "intersection_area_km2": 6746.34064189319
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B78580830473532",
+          "intersection_area_km2": 4675.900151031369
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B40357207342555",
+          "intersection_area_km2": 4051.566793122291
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B16213196407560",
+          "intersection_area_km2": 8249.26276374056
+        }
+      ]
+    },
+    {
+      "record_id": 183,
+      "bbox": [
+        55.222083,
+        -21.378806,
+        55.842917,
+        -20.85875
+      ],
+      "source_area_km2": 2523.658450586283,
+      "matches": [
+        {
+          "id": "atlas:coverage:FRA-4601",
+          "intersection_area_km2": 2497.2917821174474
+        }
+      ]
+    },
+    {
+      "record_id": 218,
+      "bbox": [
+        57.295417,
+        -20.528722,
+        57.792917,
+        -19.980444
+      ],
+      "source_area_km2": 1872.9511345854708,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B99203907341133",
+          "intersection_area_km2": 246.67580689395274
+        },
+        {
+          "id": "gb:MUS:ADM1:65221844B3325932502431",
+          "intersection_area_km2": 265.4778063681144
+        },
+        {
+          "id": "gb:MUS:ADM1:65221844B660734165567",
+          "intersection_area_km2": 240.22362571432032
+        },
+        {
+          "id": "gb:MUS:ADM1:65221844B64352145242214",
+          "intersection_area_km2": 237.43526248658364
+        },
+        {
+          "id": "gb:MUS:ADM1:65221844B91551715822340",
+          "intersection_area_km2": 175.56157066244336
+        },
+        {
+          "id": "gb:MUS:ADM1:65221844B21568199301359",
+          "intersection_area_km2": 200.95991550523559
+        },
+        {
+          "id": "gb:MUS:ADM1:65221844B53255720811613",
+          "intersection_area_km2": 40.128251803846
+        },
+        {
+          "id": "gb:MUS:ADM1:65221844B93227578092779",
+          "intersection_area_km2": 126.94077833308502
+        },
+        {
+          "id": "gb:MUS:ADM1:65221844B93866494923153",
+          "intersection_area_km2": 245.5064660691438
+        }
+      ]
+    },
+    {
+      "record_id": 313,
+      "bbox": [
+        43.219556,
+        -11.937111,
+        43.509583,
+        -11.362083
+      ],
+      "source_area_km2": 1030.1561368982552,
+      "matches": [
+        {
+          "id": "atlas:territory:COM",
+          "intersection_area_km2": 961.2901772545439
+        }
+      ]
+    },
+    {
+      "record_id": 573,
+      "bbox": [
+        44.202889,
+        -12.382944,
+        44.54125,
+        -12.064611
+      ],
+      "source_area_km2": 437.4290371059886,
+      "matches": [
+        {
+          "id": "atlas:territory:COM",
+          "intersection_area_km2": 419.3872093460074
+        }
+      ]
+    },
+    {
+      "record_id": 645,
+      "bbox": [
+        45.036222,
+        -12.997944,
+        45.23875,
+        -12.648778
+      ],
+      "source_area_km2": 374.0187588100616,
+      "matches": [
+        {
+          "id": "atlas:coverage:FRA-4602",
+          "intersection_area_km2": 333.4561722267365
+        }
+      ]
+    },
+    {
+      "record_id": 770,
+      "bbox": [
+        48.172861,
+        -13.424583,
+        48.360417,
+        -13.197944
+      ],
+      "source_area_km2": 288.21516835126147,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B66036521727834",
+          "intersection_area_km2": 269.53733503794194
+        }
+      ]
+    },
+    {
+      "record_id": 918,
+      "bbox": [
+        43.621222,
+        -12.387944,
+        43.872944,
+        -12.242083
+      ],
+      "source_area_km2": 214.65976062486115,
+      "matches": [
+        {
+          "id": "atlas:territory:COM",
+          "intersection_area_km2": 192.52270044582892
+        }
+      ]
+    },
+    {
+      "record_id": 1059,
+      "bbox": [
+        49.810389,
+        -17.104639,
+        50.022111,
+        -16.702917
+      ],
+      "source_area_km2": 175.6062566974684,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B25342620887316",
+          "intersection_area_km2": 167.79677846405065
+        }
+      ]
+    },
+    {
+      "record_id": 1125,
+      "bbox": [
+        55.36625,
+        -4.805444,
+        55.541222,
+        -4.558722
+      ],
+      "source_area_km2": 158.69321015082184,
+      "matches": [
+        {
+          "id": "gb:SYC:ADM2:34574756B27990728867894",
+          "intersection_area_km2": 8.241969854102093
+        },
+        {
+          "id": "gb:SYC:ADM2:34574756B38092183622343",
+          "intersection_area_km2": 6.458932990682914
+        },
+        {
+          "id": "gb:SYC:ADM2:34574756B49819614716360",
+          "intersection_area_km2": 43.041925430984996
+        },
+        {
+          "id": "gb:SYC:ADM2:34574756B41664711494427",
+          "intersection_area_km2": 27.24779220134687
+        },
+        {
+          "id": "gb:SYC:ADM2:34574756B14018612202061",
+          "intersection_area_km2": 59.2213106491405
+        }
+      ]
+    },
+    {
+      "record_id": 1360,
+      "bbox": [
+        46.202889,
+        -9.49125,
+        46.52125,
+        -9.370417
+      ],
+      "source_area_km2": 118.40954374529124,
+      "matches": [
+        {
+          "id": "gb:SYC:ADM2:34574756B54247629098598",
+          "intersection_area_km2": 93.77414938298601
+        }
+      ]
+    },
+    {
+      "record_id": 1406,
+      "bbox": [
+        63.329583,
+        -19.769611,
+        63.502083,
+        -19.662917
+      ],
+      "source_area_km2": 112.79334493462088,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B37057547030311",
+          "intersection_area_km2": 101.73307266223827
+        }
+      ]
+    },
+    {
+      "record_id": 2567,
+      "bbox": [
+        55.677889,
+        -4.360472,
+        55.792083,
+        -4.287083
+      ],
+      "source_area_km2": 39.87273396356773,
+      "matches": [
+        {
+          "id": "gb:SYC:ADM2:34574756B43978553392406",
+          "intersection_area_km2": 33.518154887346185
+        }
+      ]
+    },
+    {
+      "record_id": 2949,
+      "bbox": [
+        47.570361,
+        -14.584639,
+        47.63125,
+        -14.505444
+      ],
+      "source_area_km2": 31.899486931321192,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 27.263404125027215
+        }
+      ]
+    },
+    {
+      "record_id": 2971,
+      "bbox": [
+        46.242083,
+        -9.384611,
+        46.437056,
+        -9.362917
+      ],
+      "source_area_km2": 31.379521051845764,
+      "matches": [
+        {
+          "id": "gb:SYC:ADM2:34574756B54247629098598",
+          "intersection_area_km2": 19.198144704074
+        }
+      ]
+    },
+    {
+      "record_id": 3251,
+      "bbox": [
+        48.539583,
+        -12.934583,
+        48.632889,
+        -12.819583
+      ],
+      "source_area_km2": 26.92797534550059,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B52521872200932",
+          "intersection_area_km2": 19.172994368298838
+        }
+      ]
+    },
+    {
+      "record_id": 3322,
+      "bbox": [
+        48.324556,
+        -13.49875,
+        48.374583,
+        -13.438806
+      ],
+      "source_area_km2": 25.96128565012684,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B66036521727834",
+          "intersection_area_km2": 22.43377520747365
+        }
+      ]
+    },
+    {
+      "record_id": 3431,
+      "bbox": [
+        40.326167,
+        -22.367972,
+        40.392861,
+        -22.313806
+      ],
+      "source_area_km2": 24.72278958625156,
+      "matches": [
+        {
+          "id": "atlas:coverage:ATF-5919",
+          "intersection_area_km2": 16.938772194542945
+        }
+      ]
+    },
+    {
+      "record_id": 3482,
+      "bbox": [
+        43.525417,
+        -21.354583,
+        43.595417,
+        -21.293778
+      ],
+      "source_area_km2": 24.151348258876823,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B72547257848133",
+          "intersection_area_km2": 10.579907565007142
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B70385192089273",
+          "intersection_area_km2": 13.515621136361256
+        }
+      ]
+    },
+    {
+      "record_id": 3621,
+      "bbox": [
+        47.777056,
+        -14.054611,
+        47.829556,
+        -13.972083
+      ],
+      "source_area_km2": 22.73159077460592,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 18.527720349626073
+        }
+      ]
+    },
+    {
+      "record_id": 3862,
+      "bbox": [
+        55.206194,
+        -4.512111,
+        55.257889,
+        -4.462917
+      ],
+      "source_area_km2": 20.340490551185127,
+      "matches": [
+        {
+          "id": "gb:SYC:ADM2:34574756B54247629098598",
+          "intersection_area_km2": 17.404729836216376
+        }
+      ]
+    },
+    {
+      "record_id": 4172,
+      "bbox": [
+        48.456222,
+        -13.377944,
+        48.516222,
+        -13.302083
+      ],
+      "source_area_km2": 17.842040962918823,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 8.762246400481127
+        }
+      ]
+    },
+    {
+      "record_id": 4560,
+      "bbox": [
+        56.586378,
+        -10.431755,
+        56.651433,
+        -10.337616
+      ],
+      "source_area_km2": 15.356453963857232,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B83452679821580",
+          "intersection_area_km2": 11.006873135651976
+        }
+      ]
+    },
+    {
+      "record_id": 4977,
+      "bbox": [
+        45.251222,
+        -12.812944,
+        45.297917,
+        -12.757083
+      ],
+      "source_area_km2": 13.199542157283197,
+      "matches": [
+        {
+          "id": "atlas:coverage:FRA-4602",
+          "intersection_area_km2": 8.452230857819373
+        }
+      ]
+    },
+    {
+      "record_id": 5043,
+      "bbox": [
+        56.257056,
+        -7.17875,
+        56.29875,
+        -7.087083
+      ],
+      "source_area_km2": 12.915870119326877,
+      "matches": [
+        {
+          "id": "gb:SYC:ADM2:34574756B54247629098598",
+          "intersection_area_km2": 5.859775937312185
+        }
+      ]
+    },
+    {
+      "record_id": 5218,
+      "bbox": [
+        46.487056,
+        -9.752139,
+        46.52375,
+        -9.695417
+      ],
+      "source_area_km2": 12.115422269523558,
+      "matches": [
+        {
+          "id": "gb:SYC:ADM2:34574756B54247629098598",
+          "intersection_area_km2": 8.35690727390576
+        }
+      ]
+    },
+    {
+      "record_id": 5238,
+      "bbox": [
+        56.658906,
+        -10.491755,
+        56.707239,
+        -10.443422
+      ],
+      "source_area_km2": 12.059619003792001,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B83452679821580",
+          "intersection_area_km2": 7.634726942299959
+        }
+      ]
+    },
+    {
+      "record_id": 5514,
+      "bbox": [
+        55.824583,
+        -4.382944,
+        55.857944,
+        -4.335417
+      ],
+      "source_area_km2": 10.933630124180814,
+      "matches": [
+        {
+          "id": "gb:SYC:ADM2:34574756B18865708954128",
+          "intersection_area_km2": 7.607401514684256
+        }
+      ]
+    },
+    {
+      "record_id": 5571,
+      "bbox": [
+        46.399583,
+        -15.967972,
+        46.463722,
+        -15.929583
+      ],
+      "source_area_km2": 10.723115604532502,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B7387017022835",
+          "intersection_area_km2": 4.796099970668695
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 5.927015633863671
+        }
+      ]
+    },
+    {
+      "record_id": 5665,
+      "bbox": [
+        46.372056,
+        -15.930444,
+        46.429583,
+        -15.89375
+      ],
+      "source_area_km2": 10.455634867993139,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 10.375693255643588
+        }
+      ]
+    },
+    {
+      "record_id": 5732,
+      "bbox": [
+        46.199528,
+        -9.401278,
+        46.242028,
+        -9.36625
+      ],
+      "source_area_km2": 10.27094103490244,
+      "matches": [
+        {
+          "id": "gb:SYC:ADM2:34574756B54247629098598",
+          "intersection_area_km2": 3.359130271886776
+        }
+      ]
+    },
+    {
+      "record_id": 5975,
+      "bbox": [
+        46.405389,
+        -15.904611,
+        46.463778,
+        -15.858778
+      ],
+      "source_area_km2": 9.607961237546329,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 9.607961237546345
+        }
+      ]
+    },
+    {
+      "record_id": 6595,
+      "bbox": [
+        43.178722,
+        -22.127111,
+        43.198722,
+        -22.07625
+      ],
+      "source_area_km2": 8.153675371567584,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B72547257848133",
+          "intersection_area_km2": 4.788316541359703
+        }
+      ]
+    },
+    {
+      "record_id": 6626,
+      "bbox": [
+        47.793694,
+        -14.182944,
+        47.82875,
+        -14.142944
+      ],
+      "source_area_km2": 8.078831150230533,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 5.283799367665911
+        }
+      ]
+    },
+    {
+      "record_id": 7418,
+      "bbox": [
+        48.148694,
+        -13.320444,
+        48.178722,
+        -13.289583
+      ],
+      "source_area_km2": 6.625584722725472,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B66036521727834",
+          "intersection_area_km2": 4.260676231369598
+        }
+      ]
+    },
+    {
+      "record_id": 7472,
+      "bbox": [
+        46.913694,
+        -15.593806,
+        46.952917,
+        -15.568778
+      ],
+      "source_area_km2": 6.53697929470782,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 6.536979294707818
+        }
+      ]
+    },
+    {
+      "record_id": 7694,
+      "bbox": [
+        47.715389,
+        -10.089583,
+        47.750444,
+        -10.042917
+      ],
+      "source_area_km2": 6.178352834935878,
+      "matches": [
+        {
+          "id": "gb:SYC:ADM2:34574756B54247629098598",
+          "intersection_area_km2": 2.4972652027455897
+        }
+      ]
+    },
+    {
+      "record_id": 7710,
+      "bbox": [
+        42.69375,
+        -17.068778,
+        42.747917,
+        -17.047917
+      ],
+      "source_area_km2": 6.146136045395493,
+      "matches": [
+        {
+          "id": "atlas:coverage:ATF-5919",
+          "intersection_area_km2": 1.299123554187384
+        }
+      ]
+    },
+    {
+      "record_id": 8196,
+      "bbox": [
+        47.02875,
+        -15.556306,
+        47.050417,
+        -15.510417
+      ],
+      "source_area_km2": 5.502920004991276,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 5.502920004991277
+        }
+      ]
+    },
+    {
+      "record_id": 8429,
+      "bbox": [
+        49.761222,
+        -15.503778,
+        49.78125,
+        -15.474583
+      ],
+      "source_area_km2": 5.248105221637826,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B79548799707119",
+          "intersection_area_km2": 2.361562915834393
+        }
+      ]
+    },
+    {
+      "record_id": 8533,
+      "bbox": [
+        43.228722,
+        -22.208806,
+        43.257111,
+        -22.175417
+      ],
+      "source_area_km2": 5.151391973983658,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B72547257848133",
+          "intersection_area_km2": 0.006281697628682161
+        }
+      ]
+    },
+    {
+      "record_id": 9048,
+      "bbox": [
+        49.574583,
+        -12.617139,
+        49.60375,
+        -12.592944
+      ],
+      "source_area_km2": 4.642984469696602,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B22775533170221",
+          "intersection_area_km2": 2.933131033820067
+        }
+      ]
+    },
+    {
+      "record_id": 9184,
+      "bbox": [
+        47.012889,
+        -15.547111,
+        47.039556,
+        -15.512083
+      ],
+      "source_area_km2": 4.519135266624438,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 4.519135266624437
+        }
+      ]
+    },
+    {
+      "record_id": 9560,
+      "bbox": [
+        47.012889,
+        -15.519639,
+        47.034583,
+        -15.492917
+      ],
+      "source_area_km2": 4.209969863923476,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 3.791356975816301
+        }
+      ]
+    },
+    {
+      "record_id": 9571,
+      "bbox": [
+        46.327083,
+        -15.96875,
+        46.360389,
+        -15.944583
+      ],
+      "source_area_km2": 4.202342446299939,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B7387017022835",
+          "intersection_area_km2": 4.202342446299938
+        }
+      ]
+    },
+    {
+      "record_id": 9850,
+      "bbox": [
+        48.672861,
+        -12.757111,
+        48.69125,
+        -12.72625
+      ],
+      "source_area_km2": 4.015332902778116,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B22775533170221",
+          "intersection_area_km2": 2.532062459039911
+        }
+      ]
+    },
+    {
+      "record_id": 10109,
+      "bbox": [
+        47.28875,
+        -11.569611,
+        47.312917,
+        -11.550389
+      ],
+      "source_area_km2": 3.8535005401472566,
+      "matches": [
+        {
+          "id": "atlas:coverage:ATF-5919",
+          "intersection_area_km2": 1.9249032639023498
+        }
+      ]
+    },
+    {
+      "record_id": 10159,
+      "bbox": [
+        44.439583,
+        -19.87625,
+        44.45625,
+        -19.845444
+      ],
+      "source_area_km2": 3.8162864623715738,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 3.655985189466973
+        }
+      ]
+    },
+    {
+      "record_id": 11519,
+      "bbox": [
+        44.432917,
+        -19.84625,
+        44.464556,
+        -19.827917
+      ],
+      "source_area_km2": 3.0622486024784785,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 2.6067864400848735
+        }
+      ]
+    },
+    {
+      "record_id": 11961,
+      "bbox": [
+        49.53625,
+        -12.418778,
+        49.558722,
+        -12.395417
+      ],
+      "source_area_km2": 2.873930705054895,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B22775533170221",
+          "intersection_area_km2": 0.0012149501914499386
+        }
+      ]
+    },
+    {
+      "record_id": 11974,
+      "bbox": [
+        46.392889,
+        -15.966278,
+        46.424556,
+        -15.947917
+      ],
+      "source_area_km2": 2.8694614295345784,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 2.869461429534578
+        }
+      ]
+    },
+    {
+      "record_id": 12152,
+      "bbox": [
+        46.356194,
+        -15.95375,
+        46.385389,
+        -15.924583
+      ],
+      "source_area_km2": 2.7969124957476095,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 2.796912495747607
+        }
+      ]
+    },
+    {
+      "record_id": 12247,
+      "bbox": [
+        46.357889,
+        -15.933806,
+        46.397111,
+        -15.895444
+      ],
+      "source_area_km2": 2.7600194926064807,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 2.760019492606482
+        }
+      ]
+    },
+    {
+      "record_id": 12359,
+      "bbox": [
+        43.562083,
+        -21.302111,
+        43.589583,
+        -21.279611
+      ],
+      "source_area_km2": 2.7181253182265954,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B70385192089273",
+          "intersection_area_km2": 2.573381731980372
+        }
+      ]
+    },
+    {
+      "record_id": 12842,
+      "bbox": [
+        44.396222,
+        -19.750417,
+        44.419556,
+        -19.714611
+      ],
+      "source_area_km2": 2.5353108165739955,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 0.014842456694285102
+        }
+      ]
+    },
+    {
+      "record_id": 13169,
+      "bbox": [
+        46.376222,
+        -15.947944,
+        46.402889,
+        -15.92375
+      ],
+      "source_area_km2": 2.4270355520898836,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 2.427035552089883
+        }
+      ]
+    },
+    {
+      "record_id": 13260,
+      "bbox": [
+        47.03875,
+        -15.511306,
+        47.050389,
+        -15.484611
+      ],
+      "source_area_km2": 2.3959734412843052,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 2.340309754155904
+        }
+      ]
+    },
+    {
+      "record_id": 14448,
+      "bbox": [
+        46.431222,
+        -15.947111,
+        46.449583,
+        -15.917944
+      ],
+      "source_area_km2": 2.0692215451621303,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B7387017022835",
+          "intersection_area_km2": 0.7124630094320261
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 1.3567585357300656
+        }
+      ]
+    },
+    {
+      "record_id": 14690,
+      "bbox": [
+        46.33375,
+        -15.939583,
+        46.355389,
+        -15.919583
+      ],
+      "source_area_km2": 2.009313772389093,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 1.3067474102638805
+        }
+      ]
+    },
+    {
+      "record_id": 14696,
+      "bbox": [
+        57.675361,
+        -20.045444,
+        57.698694,
+        -20.027944
+      ],
+      "source_area_km2": 2.0077537701660386,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B93227578092779",
+          "intersection_area_km2": 0.9490595339469248
+        }
+      ]
+    },
+    {
+      "record_id": 15533,
+      "bbox": [
+        47.184556,
+        -15.437917,
+        47.21625,
+        -15.427917
+      ],
+      "source_area_km2": 1.8306336169811928,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 1.67211612060648
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.15851749637474993
+        }
+      ]
+    },
+    {
+      "record_id": 15662,
+      "bbox": [
+        46.057028,
+        -15.864611,
+        46.082861,
+        -15.852944
+      ],
+      "source_area_km2": 1.800820481364796,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 1.8008204813647952
+        }
+      ]
+    },
+    {
+      "record_id": 15879,
+      "bbox": [
+        44.820417,
+        -16.22875,
+        44.842056,
+        -16.212917
+      ],
+      "source_area_km2": 1.757308663893063,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B83460232588272",
+          "intersection_area_km2": 1.2243902216847562
+        }
+      ]
+    },
+    {
+      "record_id": 15973,
+      "bbox": [
+        48.328722,
+        -13.754639,
+        48.34625,
+        -13.742111
+      ],
+      "source_area_km2": 1.7411195844142078,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.029346993083143265
+        }
+      ]
+    },
+    {
+      "record_id": 16422,
+      "bbox": [
+        47.174556,
+        -15.477111,
+        47.197944,
+        -15.467944
+      ],
+      "source_area_km2": 1.6572921600775825,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 1.657292160077582
+        }
+      ]
+    },
+    {
+      "record_id": 16749,
+      "bbox": [
+        47.067889,
+        -15.492083,
+        47.08375,
+        -15.477083
+      ],
+      "source_area_km2": 1.6020209875349114,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 1.5906655215139827
+        }
+      ]
+    },
+    {
+      "record_id": 16911,
+      "bbox": [
+        47.142056,
+        -15.477917,
+        47.15625,
+        -15.455472
+      ],
+      "source_area_km2": 1.5769029403854629,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 1.576902940385463
+        }
+      ]
+    },
+    {
+      "record_id": 17065,
+      "bbox": [
+        47.221222,
+        -15.429611,
+        47.242111,
+        -15.41625
+      ],
+      "source_area_km2": 1.5540378019716463,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 1.5540378019716468
+        }
+      ]
+    },
+    {
+      "record_id": 17104,
+      "bbox": [
+        45.970389,
+        -15.809639,
+        45.981222,
+        -15.784556
+      ],
+      "source_area_km2": 1.5483782395260033,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 1.5483782395260042
+        }
+      ]
+    },
+    {
+      "record_id": 17541,
+      "bbox": [
+        48.324556,
+        -13.76625,
+        48.342944,
+        -13.753722
+      ],
+      "source_area_km2": 1.4823117046283698,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.00954617496514276
+        }
+      ]
+    },
+    {
+      "record_id": 17714,
+      "bbox": [
+        47.597917,
+        -23.573806,
+        47.61375,
+        -23.561278
+      ],
+      "source_area_km2": 1.4626624308205927,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B74242760889111",
+          "intersection_area_km2": 1.4626624308205927
+        }
+      ]
+    },
+    {
+      "record_id": 17888,
+      "bbox": [
+        46.424556,
+        -15.922139,
+        46.442944,
+        -15.89625
+      ],
+      "source_area_km2": 1.4411994127083219,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 1.4411994127083219
+        }
+      ]
+    },
+    {
+      "record_id": 18510,
+      "bbox": [
+        47.058694,
+        -15.495444,
+        47.080389,
+        -15.479611
+      ],
+      "source_area_km2": 1.3598135151455784,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 1.2333562249340797
+        }
+      ]
+    },
+    {
+      "record_id": 19897,
+      "bbox": [
+        57.783694,
+        -20.28375,
+        57.79625,
+        -20.267944
+      ],
+      "source_area_km2": 1.1999765723228524,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B3325932502431",
+          "intersection_area_km2": 1.1184698029955003
+        }
+      ]
+    },
+    {
+      "record_id": 20590,
+      "bbox": [
+        47.189583,
+        -15.447917,
+        47.207917,
+        -15.439583
+      ],
+      "source_area_km2": 1.1321647666465269,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 1.1321647666465275
+        }
+      ]
+    },
+    {
+      "record_id": 21099,
+      "bbox": [
+        44.402861,
+        -19.760444,
+        44.410389,
+        -19.74125
+      ],
+      "source_area_km2": 1.086140462159834,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 1.086140462159834
+        }
+      ]
+    },
+    {
+      "record_id": 21516,
+      "bbox": [
+        54.511972,
+        -15.893889,
+        54.523694,
+        -15.881306
+      ],
+      "source_area_km2": 1.046372616047361,
+      "matches": [
+        {
+          "id": "atlas:coverage:ATF-5919",
+          "intersection_area_km2": 0.3455150169707523
+        }
+      ]
+    },
+    {
+      "record_id": 21544,
+      "bbox": [
+        47.178722,
+        -15.457944,
+        47.203722,
+        -15.452083
+      ],
+      "source_area_km2": 1.0445911897852815,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 1.0445911897852813
+        }
+      ]
+    },
+    {
+      "record_id": 21745,
+      "bbox": [
+        45.971222,
+        -15.839611,
+        45.992889,
+        -15.832083
+      ],
+      "source_area_km2": 1.0276070386482326,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 1.0276070386482326
+        }
+      ]
+    },
+    {
+      "record_id": 22342,
+      "bbox": [
+        44.224556,
+        -20.395417,
+        44.24125,
+        -20.378778
+      ],
+      "source_area_km2": 0.9769396799325731,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.9769396799325731
+        }
+      ]
+    },
+    {
+      "record_id": 22620,
+      "bbox": [
+        44.38125,
+        -25.252944,
+        44.390417,
+        -25.237972
+      ],
+      "source_area_km2": 0.9580057262996035,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B9355726550011",
+          "intersection_area_km2": 0.9580057262996036
+        }
+      ]
+    },
+    {
+      "record_id": 23220,
+      "bbox": [
+        44.210417,
+        -20.41125,
+        44.224583,
+        -20.397083
+      ],
+      "source_area_km2": 0.9186463767632185,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.28132048013273425
+        }
+      ]
+    },
+    {
+      "record_id": 23530,
+      "bbox": [
+        44.917889,
+        -16.175444,
+        44.944556,
+        -16.165444
+      ],
+      "source_area_km2": 0.8992392272042132,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91378939255033",
+          "intersection_area_km2": 0.7280220431316143
+        }
+      ]
+    },
+    {
+      "record_id": 23714,
+      "bbox": [
+        47.005389,
+        -15.512944,
+        47.01375,
+        -15.497056
+      ],
+      "source_area_km2": 0.8880653830472331,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.8742469648305133
+        }
+      ]
+    },
+    {
+      "record_id": 24041,
+      "bbox": [
+        47.162083,
+        -15.472111,
+        47.17875,
+        -15.46375
+      ],
+      "source_area_km2": 0.8676355926055757,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.8676355926055757
+        }
+      ]
+    },
+    {
+      "record_id": 24444,
+      "bbox": [
+        46.462056,
+        -15.983778,
+        46.482889,
+        -15.972083
+      ],
+      "source_area_km2": 0.842960211874617,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B7387017022835",
+          "intersection_area_km2": 0.8429602118746168
+        }
+      ]
+    },
+    {
+      "record_id": 24688,
+      "bbox": [
+        48.313722,
+        -13.742111,
+        48.327083,
+        -13.735417
+      ],
+      "source_area_km2": 0.8299221202710523,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.011221254385840282
+        }
+      ]
+    },
+    {
+      "record_id": 25433,
+      "bbox": [
+        44.462083,
+        -19.532139,
+        44.472889,
+        -19.518722
+      ],
+      "source_area_km2": 0.7884958757330283,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 0.7777340481861781
+        }
+      ]
+    },
+    {
+      "record_id": 25546,
+      "bbox": [
+        43.957056,
+        -20.760472,
+        43.96625,
+        -20.750417
+      ],
+      "source_area_km2": 0.7826181958001802,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.1167395037230093
+        }
+      ]
+    },
+    {
+      "record_id": 25780,
+      "bbox": [
+        44.367056,
+        -25.249611,
+        44.37625,
+        -25.239583
+      ],
+      "source_area_km2": 0.7704922401921337,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B9355726550011",
+          "intersection_area_km2": 0.7704922401921338
+        }
+      ]
+    },
+    {
+      "record_id": 25878,
+      "bbox": [
+        46.073694,
+        -15.812111,
+        46.087056,
+        -15.80625
+      ],
+      "source_area_km2": 0.7660563161744953,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.7660563161744955
+        }
+      ]
+    },
+    {
+      "record_id": 26347,
+      "bbox": [
+        47.975389,
+        -13.94875,
+        47.982889,
+        -13.935444
+      ],
+      "source_area_km2": 0.7418589453205465,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 7.56154153276485e-05
+        }
+      ]
+    },
+    {
+      "record_id": 26407,
+      "bbox": [
+        46.347889,
+        -15.741278,
+        46.37375,
+        -15.732917
+      ],
+      "source_area_km2": 0.7391558371569752,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.5993626488846197
+        }
+      ]
+    },
+    {
+      "record_id": 26984,
+      "bbox": [
+        48.003694,
+        -13.956278,
+        48.013778,
+        -13.947083
+      ],
+      "source_area_km2": 0.7117236608038574,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.6944595761890919
+        }
+      ]
+    },
+    {
+      "record_id": 27200,
+      "bbox": [
+        47.033722,
+        -15.50625,
+        47.040389,
+        -15.492111
+      ],
+      "source_area_km2": 0.7019704544095089,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.7019704544095089
+        }
+      ]
+    },
+    {
+      "record_id": 27593,
+      "bbox": [
+        44.009583,
+        -20.764583,
+        44.02375,
+        -20.757111
+      ],
+      "source_area_km2": 0.6853247600448342,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.6853247600448344
+        }
+      ]
+    },
+    {
+      "record_id": 27815,
+      "bbox": [
+        47.347028,
+        -24.282944,
+        47.357889,
+        -24.272083
+      ],
+      "source_area_km2": 0.6761536443086311,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B85658862424992",
+          "intersection_area_km2": 0.676153644308631
+        }
+      ]
+    },
+    {
+      "record_id": 28008,
+      "bbox": [
+        48.318694,
+        -13.644611,
+        48.330417,
+        -13.635444
+      ],
+      "source_area_km2": 0.6680761108995092,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.6001047186965671
+        }
+      ]
+    },
+    {
+      "record_id": 28531,
+      "bbox": [
+        43.489583,
+        -21.390417,
+        43.495444,
+        -21.372083
+      ],
+      "source_area_km2": 0.6479191227804588,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B72547257848133",
+          "intersection_area_km2": 0.6479191227804586
+        }
+      ]
+    },
+    {
+      "record_id": 28560,
+      "bbox": [
+        47.239583,
+        -15.418778,
+        47.252056,
+        -15.412111
+      ],
+      "source_area_km2": 0.6466505597344286,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.6466505597344288
+        }
+      ]
+    },
+    {
+      "record_id": 29068,
+      "bbox": [
+        47.090389,
+        -15.487917,
+        47.09875,
+        -15.474583
+      ],
+      "source_area_km2": 0.6284458597867971,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.6284458597867971
+        }
+      ]
+    },
+    {
+      "record_id": 29168,
+      "bbox": [
+        44.401222,
+        -19.650444,
+        44.410417,
+        -19.642083
+      ],
+      "source_area_km2": 0.625001440032875,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 0.016274561512815665
+        }
+      ]
+    },
+    {
+      "record_id": 29977,
+      "bbox": [
+        47.092917,
+        -15.477944,
+        47.09875,
+        -15.464583
+      ],
+      "source_area_km2": 0.596785876033922,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.5311346385544199
+        }
+      ]
+    },
+    {
+      "record_id": 30713,
+      "bbox": [
+        43.972889,
+        -20.741278,
+        43.987056,
+        -20.731222
+      ],
+      "source_area_km2": 0.5733880999844668,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.5733880999844669
+        }
+      ]
+    },
+    {
+      "record_id": 32548,
+      "bbox": [
+        48.507889,
+        -13.537111,
+        48.515417,
+        -13.527111
+      ],
+      "source_area_km2": 0.5210153724339626,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.0836045339677276
+        }
+      ]
+    },
+    {
+      "record_id": 32835,
+      "bbox": [
+        46.420417,
+        -15.962917,
+        46.432083,
+        -15.956222
+      ],
+      "source_area_km2": 0.5131488767959801,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B7387017022835",
+          "intersection_area_km2": 0.22772399746393585
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.28542487933206845
+        }
+      ]
+    },
+    {
+      "record_id": 32882,
+      "bbox": [
+        43.500417,
+        -21.362944,
+        43.508722,
+        -21.348806
+      ],
+      "source_area_km2": 0.5118012442199014,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B72547257848133",
+          "intersection_area_km2": 0.5118012442199016
+        }
+      ]
+    },
+    {
+      "record_id": 33187,
+      "bbox": [
+        43.557861,
+        -21.297944,
+        43.568722,
+        -21.292083
+      ],
+      "source_area_km2": 0.5043419028623489,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B70385192089273",
+          "intersection_area_km2": 0.5043419028623487
+        }
+      ]
+    },
+    {
+      "record_id": 33495,
+      "bbox": [
+        43.992889,
+        -20.737083,
+        43.999583,
+        -20.726278
+      ],
+      "source_area_km2": 0.49720966803937905,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.4072507624894838
+        }
+      ]
+    },
+    {
+      "record_id": 33707,
+      "bbox": [
+        47.374611,
+        -14.876306,
+        47.38625,
+        -14.871278
+      ],
+      "source_area_km2": 0.4914309246792008,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.1128550419253106
+        }
+      ]
+    },
+    {
+      "record_id": 34017,
+      "bbox": [
+        43.587083,
+        -21.292944,
+        43.594611,
+        -21.28375
+      ],
+      "source_area_km2": 0.48358293207997755,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B70385192089273",
+          "intersection_area_km2": 0.48358293207997755
+        }
+      ]
+    },
+    {
+      "record_id": 35419,
+      "bbox": [
+        46.430417,
+        -25.169639,
+        46.439583,
+        -25.157083
+      ],
+      "source_area_km2": 0.452876174564123,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B61088153240222",
+          "intersection_area_km2": 0.45287617456412294
+        }
+      ]
+    },
+    {
+      "record_id": 35720,
+      "bbox": [
+        49.449583,
+        -17.208778,
+        49.45875,
+        -17.200389
+      ],
+      "source_area_km2": 0.4464927991278872,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B92224420422748",
+          "intersection_area_km2": 0.44649279912788714
+        }
+      ]
+    },
+    {
+      "record_id": 35782,
+      "bbox": [
+        44.224583,
+        -20.403806,
+        44.232944,
+        -20.395444
+      ],
+      "source_area_km2": 0.4451189077800038,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.44511890778000396
+        }
+      ]
+    },
+    {
+      "record_id": 35842,
+      "bbox": [
+        48.314556,
+        -13.702139,
+        48.322889,
+        -13.695417
+      ],
+      "source_area_km2": 0.444112968226627,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.19197349191013693
+        }
+      ]
+    },
+    {
+      "record_id": 36061,
+      "bbox": [
+        44.401194,
+        -20.097111,
+        44.412111,
+        -20.085444
+      ],
+      "source_area_km2": 0.43997439481305317,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.4399743948130534
+        }
+      ]
+    },
+    {
+      "record_id": 36530,
+      "bbox": [
+        44.29625,
+        -20.257111,
+        44.302889,
+        -20.242139
+      ],
+      "source_area_km2": 0.43025821378094437,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.4302582137809444
+        }
+      ]
+    },
+    {
+      "record_id": 37664,
+      "bbox": [
+        44.468722,
+        -19.984583,
+        44.476194,
+        -19.974611
+      ],
+      "source_area_km2": 0.4084079252470259,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.4084079252470258
+        }
+      ]
+    },
+    {
+      "record_id": 39090,
+      "bbox": [
+        47.181278,
+        -15.442139,
+        47.192111,
+        -15.437056
+      ],
+      "source_area_km2": 0.3840263491909645,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.3840263491909646
+        }
+      ]
+    },
+    {
+      "record_id": 40892,
+      "bbox": [
+        57.787056,
+        -20.26625,
+        57.796222,
+        -20.260417
+      ],
+      "source_area_km2": 0.354124938367319,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B3325932502431",
+          "intersection_area_km2": 0.3517147985264971
+        }
+      ]
+    },
+    {
+      "record_id": 41159,
+      "bbox": [
+        47.083722,
+        -15.49875,
+        47.087917,
+        -15.489583
+      ],
+      "source_area_km2": 0.3504951207017896,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.35049512070178973
+        }
+      ]
+    },
+    {
+      "record_id": 41164,
+      "bbox": [
+        46.403722,
+        -15.908778,
+        46.414556,
+        -15.902111
+      ],
+      "source_area_km2": 0.35035649123138846,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.3503564912313884
+        }
+      ]
+    },
+    {
+      "record_id": 41198,
+      "bbox": [
+        48.322083,
+        -13.702083,
+        48.329556,
+        -13.69625
+      ],
+      "source_area_km2": 0.3497425223065508,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.3497425223065508
+        }
+      ]
+    },
+    {
+      "record_id": 42570,
+      "bbox": [
+        48.012861,
+        -13.954639,
+        48.019583,
+        -13.947111
+      ],
+      "source_area_km2": 0.3305471440803518,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.3305471440803518
+        }
+      ]
+    },
+    {
+      "record_id": 42970,
+      "bbox": [
+        43.720389,
+        -21.302944,
+        43.725444,
+        -21.294583
+      ],
+      "source_area_km2": 0.32520266470368625,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B70385192089273",
+          "intersection_area_km2": 0.32520266470368625
+        }
+      ]
+    },
+    {
+      "record_id": 43646,
+      "bbox": [
+        47.167889,
+        -15.462944,
+        47.177917,
+        -15.458778
+      ],
+      "source_area_km2": 0.3167706325032667,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.31677063250326687
+        }
+      ]
+    },
+    {
+      "record_id": 44264,
+      "bbox": [
+        57.717028,
+        -20.425417,
+        57.723722,
+        -20.420417
+      ],
+      "source_area_km2": 0.3094561224451887,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B660734165567",
+          "intersection_area_km2": 0.1435090670103379
+        }
+      ]
+    },
+    {
+      "record_id": 44313,
+      "bbox": [
+        47.205417,
+        -15.43875,
+        47.216222,
+        -15.432083
+      ],
+      "source_area_km2": 0.30885353235820984,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.3088535323582099
+        }
+      ]
+    },
+    {
+      "record_id": 44416,
+      "bbox": [
+        47.332861,
+        -24.287111,
+        47.343722,
+        -24.282944
+      ],
+      "source_area_km2": 0.3076554883366531,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B85658862424992",
+          "intersection_area_km2": 0.3076554883366533
+        }
+      ]
+    },
+    {
+      "record_id": 45104,
+      "bbox": [
+        47.377944,
+        -14.870472,
+        47.387889,
+        -14.865417
+      ],
+      "source_area_km2": 0.3005526828292064,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.30029972692831886
+        }
+      ]
+    },
+    {
+      "record_id": 45219,
+      "bbox": [
+        46.392917,
+        -15.896278,
+        46.402917,
+        -15.892083
+      ],
+      "source_area_km2": 0.2991513825732582,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.2991513825732583
+        }
+      ]
+    },
+    {
+      "record_id": 46603,
+      "bbox": [
+        47.99875,
+        -13.984611,
+        48.00375,
+        -13.97625
+      ],
+      "source_area_km2": 0.28471203641518883,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.21264817395935104
+        }
+      ]
+    },
+    {
+      "record_id": 46697,
+      "bbox": [
+        44.467083,
+        -19.971278,
+        44.47375,
+        -19.964639
+      ],
+      "source_area_km2": 0.28378175455113347,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.16962147321315757
+        }
+      ]
+    },
+    {
+      "record_id": 47370,
+      "bbox": [
+        47.238694,
+        -15.412139,
+        47.247056,
+        -15.407917
+      ],
+      "source_area_km2": 0.27688981486081227,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.0188721763576871
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.2580176385031473
+        }
+      ]
+    },
+    {
+      "record_id": 47653,
+      "bbox": [
+        48.376222,
+        -13.584583,
+        48.382083,
+        -13.573806
+      ],
+      "source_area_km2": 0.27427315848874567,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.06430854252551534
+        }
+      ]
+    },
+    {
+      "record_id": 47866,
+      "bbox": [
+        48.925361,
+        -12.967944,
+        48.93125,
+        -12.962083
+      ],
+      "source_area_km2": 0.27229584598444484,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B52521872200932",
+          "intersection_area_km2": 0.2722958459844448
+        }
+      ]
+    },
+    {
+      "record_id": 48051,
+      "bbox": [
+        44.26625,
+        -20.345472,
+        44.272861,
+        -20.337083
+      ],
+      "source_area_km2": 0.27035939072117565,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.27035939072117565
+        }
+      ]
+    },
+    {
+      "record_id": 48478,
+      "bbox": [
+        45.137028,
+        -12.921306,
+        45.142083,
+        -12.915444
+      ],
+      "source_area_km2": 0.26659930030005147,
+      "matches": [
+        {
+          "id": "atlas:coverage:FRA-4602",
+          "intersection_area_km2": 0.2665993003000516
+        }
+      ]
+    },
+    {
+      "record_id": 48789,
+      "bbox": [
+        47.981222,
+        -14.353806,
+        47.984611,
+        -14.345417
+      ],
+      "source_area_km2": 0.2638564661707577,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.26385646617075764
+        }
+      ]
+    },
+    {
+      "record_id": 49240,
+      "bbox": [
+        46.675389,
+        -15.429611,
+        46.680389,
+        -15.422083
+      ],
+      "source_area_km2": 0.25987366158897024,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.25987366158897024
+        }
+      ]
+    },
+    {
+      "record_id": 51458,
+      "bbox": [
+        47.084556,
+        -15.487917,
+        47.087889,
+        -15.480444
+      ],
+      "source_area_km2": 0.24149345598298932,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.24149345598298932
+        }
+      ]
+    },
+    {
+      "record_id": 52241,
+      "bbox": [
+        45.627917,
+        -15.967111,
+        45.634583,
+        -15.96125
+      ],
+      "source_area_km2": 0.2356440900258369,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.23564409002583692
+        }
+      ]
+    },
+    {
+      "record_id": 54140,
+      "bbox": [
+        48.822889,
+        -13.122139,
+        48.827111,
+        -13.11625
+      ],
+      "source_area_km2": 0.22229218020920066,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B52521872200932",
+          "intersection_area_km2": 0.22229218020920063
+        }
+      ]
+    },
+    {
+      "record_id": 54544,
+      "bbox": [
+        47.215417,
+        -15.424611,
+        47.222083,
+        -15.419583
+      ],
+      "source_area_km2": 0.2194993583666089,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.21949935836660892
+        }
+      ]
+    },
+    {
+      "record_id": 55278,
+      "bbox": [
+        44.954528,
+        -16.182972,
+        44.964583,
+        -16.179583
+      ],
+      "source_area_km2": 0.2148741087991762,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91378939255033",
+          "intersection_area_km2": 0.21487410879917618
+        }
+      ]
+    },
+    {
+      "record_id": 55383,
+      "bbox": [
+        44.053722,
+        -18.423778,
+        44.060389,
+        -18.41875
+      ],
+      "source_area_km2": 0.21416837272153402,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B40533998311047",
+          "intersection_area_km2": 0.21416837272153405
+        }
+      ]
+    },
+    {
+      "record_id": 55635,
+      "bbox": [
+        47.978694,
+        -13.933806,
+        47.984611,
+        -13.929583
+      ],
+      "source_area_km2": 0.21245048577836656,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.21245048577836656
+        }
+      ]
+    },
+    {
+      "record_id": 55700,
+      "bbox": [
+        43.719556,
+        -21.307111,
+        43.729583,
+        -21.302917
+      ],
+      "source_area_km2": 0.2120786874479294,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B70385192089273",
+          "intersection_area_km2": 0.2120786874479294
+        }
+      ]
+    },
+    {
+      "record_id": 56287,
+      "bbox": [
+        44.074556,
+        -25.042972,
+        44.083722,
+        -25.039611
+      ],
+      "source_area_km2": 0.20821345997815754,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B9355726550011",
+          "intersection_area_km2": 0.20821345997815757
+        }
+      ]
+    },
+    {
+      "record_id": 56532,
+      "bbox": [
+        47.551222,
+        -23.879611,
+        47.555389,
+        -23.87375
+      ],
+      "source_area_km2": 0.20668882081773,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B74242760889111",
+          "intersection_area_km2": 0.04006752447777742
+        }
+      ]
+    },
+    {
+      "record_id": 56923,
+      "bbox": [
+        39.693722,
+        -21.498806,
+        39.69875,
+        -21.493778
+      ],
+      "source_area_km2": 0.20399917806025308,
+      "matches": [
+        {
+          "id": "atlas:coverage:ATF-5919",
+          "intersection_area_km2": 0.07062071624471908
+        }
+      ]
+    },
+    {
+      "record_id": 57221,
+      "bbox": [
+        43.612083,
+        -21.439583,
+        43.61625,
+        -21.432917
+      ],
+      "source_area_km2": 0.20218709484946862,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B70385192089273",
+          "intersection_area_km2": 0.20218709484946862
+        }
+      ]
+    },
+    {
+      "record_id": 58583,
+      "bbox": [
+        43.331222,
+        -21.910417,
+        43.335389,
+        -21.902917
+      ],
+      "source_area_km2": 0.1941889130187233,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B72547257848133",
+          "intersection_area_km2": 0.1941889130187233
+        }
+      ]
+    },
+    {
+      "record_id": 59879,
+      "bbox": [
+        47.049556,
+        -15.504611,
+        47.052111,
+        -15.494611
+      ],
+      "source_area_km2": 0.18721175225769565,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.18721175225769562
+        }
+      ]
+    },
+    {
+      "record_id": 60134,
+      "bbox": [
+        44.245417,
+        -18.961306,
+        44.25125,
+        -18.957889
+      ],
+      "source_area_km2": 0.18582280313973093,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B48021466276127",
+          "intersection_area_km2": 0.14761130515282692
+        }
+      ]
+    },
+    {
+      "record_id": 60908,
+      "bbox": [
+        44.009556,
+        -17.90375,
+        44.014528,
+        -17.897917
+      ],
+      "source_area_km2": 0.1818323205310823,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B40533998311047",
+          "intersection_area_km2": 0.009072596675515519
+        }
+      ]
+    },
+    {
+      "record_id": 62025,
+      "bbox": [
+        46.916222,
+        -15.597111,
+        46.922917,
+        -15.59375
+      ],
+      "source_area_km2": 0.17594069265986947,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.1759406926598695
+        }
+      ]
+    },
+    {
+      "record_id": 62473,
+      "bbox": [
+        49.477917,
+        -17.65125,
+        49.485361,
+        -17.647083
+      ],
+      "source_area_km2": 0.1739027387396828,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55539380638871",
+          "intersection_area_km2": 0.17390273873968282
+        }
+      ]
+    },
+    {
+      "record_id": 62894,
+      "bbox": [
+        44.233722,
+        -20.399583,
+        44.238722,
+        -20.39375
+      ],
+      "source_area_km2": 0.17211215637242736,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.17211215637242738
+        }
+      ]
+    },
+    {
+      "record_id": 63309,
+      "bbox": [
+        47.207944,
+        -15.427972,
+        47.21375,
+        -15.424556
+      ],
+      "source_area_km2": 0.16999397167307068,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.061410679859937464
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.10858329181315272
+        }
+      ]
+    },
+    {
+      "record_id": 66815,
+      "bbox": [
+        48.318722,
+        -13.705444,
+        48.32625,
+        -13.702917
+      ],
+      "source_area_km2": 0.15512280930093852,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.13059217139683513
+        }
+      ]
+    },
+    {
+      "record_id": 69943,
+      "bbox": [
+        44.784611,
+        -16.216278,
+        44.79125,
+        -16.212944
+      ],
+      "source_area_km2": 0.1434183782131676,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B83460232588272",
+          "intersection_area_km2": 0.14341837821316764
+        }
+      ]
+    },
+    {
+      "record_id": 70275,
+      "bbox": [
+        44.420417,
+        -19.667111,
+        44.426222,
+        -19.663722
+      ],
+      "source_area_km2": 0.14222954298110663,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 0.14222954298110663
+        }
+      ]
+    },
+    {
+      "record_id": 70894,
+      "bbox": [
+        39.728694,
+        -21.444611,
+        39.732917,
+        -21.441278
+      ],
+      "source_area_km2": 0.14033113419215626,
+      "matches": [
+        {
+          "id": "atlas:coverage:ATF-5919",
+          "intersection_area_km2": 0.03778046784862675
+        }
+      ]
+    },
+    {
+      "record_id": 72260,
+      "bbox": [
+        46.352889,
+        -15.735444,
+        46.358778,
+        -15.732944
+      ],
+      "source_area_km2": 0.13553855775268608,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.03599357176366243
+        }
+      ]
+    },
+    {
+      "record_id": 73244,
+      "bbox": [
+        44.207056,
+        -20.415417,
+        44.212056,
+        -20.412111
+      ],
+      "source_area_km2": 0.13247978744513728,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.030365719715769016
+        }
+      ]
+    },
+    {
+      "record_id": 73798,
+      "bbox": [
+        43.275389,
+        -21.964611,
+        43.277917,
+        -21.95875
+      ],
+      "source_area_km2": 0.1309410932093456,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B72547257848133",
+          "intersection_area_km2": 0.13094109320934563
+        }
+      ]
+    },
+    {
+      "record_id": 74067,
+      "bbox": [
+        48.807028,
+        -13.166306,
+        48.814556,
+        -13.16125
+      ],
+      "source_area_km2": 0.13009645888900648,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B52521872200932",
+          "intersection_area_km2": 0.09971684005213549
+        }
+      ]
+    },
+    {
+      "record_id": 74315,
+      "bbox": [
+        48.472889,
+        -13.524611,
+        48.476222,
+        -13.520417
+      ],
+      "source_area_km2": 0.12931709495504315,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.12931709495504312
+        }
+      ]
+    },
+    {
+      "record_id": 74393,
+      "bbox": [
+        48.47625,
+        -13.524611,
+        48.479556,
+        -13.518778
+      ],
+      "source_area_km2": 0.12909727769836446,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.12909727769836443
+        }
+      ]
+    },
+    {
+      "record_id": 74416,
+      "bbox": [
+        45.617917,
+        -16.052111,
+        45.62125,
+        -16.044611
+      ],
+      "source_area_km2": 0.1290302438019338,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.12903024380193379
+        }
+      ]
+    },
+    {
+      "record_id": 75067,
+      "bbox": [
+        44.512889,
+        -16.203778,
+        44.517861,
+        -16.198778
+      ],
+      "source_area_km2": 0.12690925554118293,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B83460232588272",
+          "intersection_area_km2": 0.12690925554118293
+        }
+      ]
+    },
+    {
+      "record_id": 75321,
+      "bbox": [
+        46.897056,
+        -15.604611,
+        46.902889,
+        -15.598778
+      ],
+      "source_area_km2": 0.1261458044776111,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.12614580447761106
+        }
+      ]
+    },
+    {
+      "record_id": 78026,
+      "bbox": [
+        47.483722,
+        -15.08625,
+        47.487917,
+        -15.082917
+      ],
+      "source_area_km2": 0.11897233931806817,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.11003985245069985
+        }
+      ]
+    },
+    {
+      "record_id": 78216,
+      "bbox": [
+        44.458694,
+        -19.827111,
+        44.464528,
+        -19.822917
+      ],
+      "source_area_km2": 0.11843419059291711,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 0.1184341905929171
+        }
+      ]
+    },
+    {
+      "record_id": 82014,
+      "bbox": [
+        44.273722,
+        -20.346222,
+        44.277056,
+        -20.341222
+      ],
+      "source_area_km2": 0.10951886302861841,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.10951886302861844
+        }
+      ]
+    },
+    {
+      "record_id": 82105,
+      "bbox": [
+        44.00875,
+        -20.766306,
+        44.01375,
+        -20.762944
+      ],
+      "source_area_km2": 0.10929862842595696,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.10929862842595699
+        }
+      ]
+    },
+    {
+      "record_id": 83130,
+      "bbox": [
+        39.734556,
+        -21.448778,
+        39.737917,
+        -21.445444
+      ],
+      "source_area_km2": 0.10702556146513895,
+      "matches": [
+        {
+          "id": "atlas:coverage:ATF-5919",
+          "intersection_area_km2": 0.01930389590489803
+        }
+      ]
+    },
+    {
+      "record_id": 85109,
+      "bbox": [
+        47.197917,
+        -15.430472,
+        47.203722,
+        -15.427944
+      ],
+      "source_area_km2": 0.10328121295862473,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.08134263885243843
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.02193857410618487
+        }
+      ]
+    },
+    {
+      "record_id": 85269,
+      "bbox": [
+        44.764583,
+        -16.213778,
+        44.772056,
+        -16.210444
+      ],
+      "source_area_km2": 0.10295051617093416,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B83460232588272",
+          "intersection_area_km2": 0.10295051617093415
+        }
+      ]
+    },
+    {
+      "record_id": 89847,
+      "bbox": [
+        47.182056,
+        -15.42875,
+        47.187917,
+        -15.427083
+      ],
+      "source_area_km2": 0.09417497891961085,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.007126653691964806
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.08704832522767038
+        }
+      ]
+    },
+    {
+      "record_id": 93720,
+      "bbox": [
+        48.837056,
+        -13.070444,
+        48.840417,
+        -13.067917
+      ],
+      "source_area_km2": 0.08796169027640321,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B52521872200932",
+          "intersection_area_km2": 0.08796169027640321
+        }
+      ]
+    },
+    {
+      "record_id": 94098,
+      "bbox": [
+        48.867861,
+        -13.034611,
+        48.87125,
+        -13.031278
+      ],
+      "source_area_km2": 0.08733482029090377,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B52521872200932",
+          "intersection_area_km2": 0.0873346499242915
+        }
+      ]
+    },
+    {
+      "record_id": 95003,
+      "bbox": [
+        49.843722,
+        -17.006306,
+        49.846222,
+        -17.002917
+      ],
+      "source_area_km2": 0.0855823638563128,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B25342620887316",
+          "intersection_area_km2": 0.01405335763639205
+        }
+      ]
+    },
+    {
+      "record_id": 99840,
+      "bbox": [
+        47.202861,
+        -15.429611,
+        47.207083,
+        -15.427083
+      ],
+      "source_area_km2": 0.07909857530365673,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.051170426229423506
+        },
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.027928149074248076
+        }
+      ]
+    },
+    {
+      "record_id": 100858,
+      "bbox": [
+        49.460361,
+        -17.205417,
+        49.463722,
+        -17.202111
+      ],
+      "source_area_km2": 0.07754013132008775,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B92224420422748",
+          "intersection_area_km2": 0.07754013132008776
+        }
+      ]
+    },
+    {
+      "record_id": 101105,
+      "bbox": [
+        63.342083,
+        -19.754583,
+        63.344583,
+        -19.75125
+      ],
+      "source_area_km2": 0.07713602529791955,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B37057547030311",
+          "intersection_area_km2": 0.06527313015258178
+        }
+      ]
+    },
+    {
+      "record_id": 101243,
+      "bbox": [
+        45.600389,
+        -16.04125,
+        45.602889,
+        -16.037944
+      ],
+      "source_area_km2": 0.07688817449230402,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.076888174492304
+        }
+      ]
+    },
+    {
+      "record_id": 101497,
+      "bbox": [
+        44.241194,
+        -20.388778,
+        44.244556,
+        -20.38625
+      ],
+      "source_area_km2": 0.07645593642886303,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.07645593642886302
+        }
+      ]
+    },
+    {
+      "record_id": 101690,
+      "bbox": [
+        44.465389,
+        -19.823778,
+        44.471194,
+        -19.821278
+      ],
+      "source_area_km2": 0.07618171725225395,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 0.07618171725225396
+        }
+      ]
+    },
+    {
+      "record_id": 106269,
+      "bbox": [
+        47.114556,
+        -15.499611,
+        47.117889,
+        -15.496222
+      ],
+      "source_area_km2": 0.07105870276446005,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.07105870276446002
+        }
+      ]
+    },
+    {
+      "record_id": 106782,
+      "bbox": [
+        48.384583,
+        -13.557083,
+        48.387083,
+        -13.55375
+      ],
+      "source_area_km2": 0.07046789988462393,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.0383977164543999
+        }
+      ]
+    },
+    {
+      "record_id": 108442,
+      "bbox": [
+        44.268722,
+        -19.15125,
+        44.272056,
+        -19.147917
+      ],
+      "source_area_km2": 0.06822663548299489,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B48021466276127",
+          "intersection_area_km2": 0.0003083790708053674
+        }
+      ]
+    },
+    {
+      "record_id": 112717,
+      "bbox": [
+        46.099556,
+        -15.721306,
+        46.102917,
+        -15.718778
+      ],
+      "source_area_km2": 0.06376651929007787,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.06376651929007787
+        }
+      ]
+    },
+    {
+      "record_id": 113572,
+      "bbox": [
+        47.920389,
+        -13.708778,
+        47.922917,
+        -13.704639
+      ],
+      "source_area_km2": 0.06301360306885213,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.06301360306885213
+        }
+      ]
+    },
+    {
+      "record_id": 115073,
+      "bbox": [
+        57.783722,
+        -20.263806,
+        57.787917,
+        -20.262083
+      ],
+      "source_area_km2": 0.061405246191081654,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B3325932502431",
+          "intersection_area_km2": 0.061405246191081654
+        }
+      ]
+    },
+    {
+      "record_id": 115903,
+      "bbox": [
+        44.00625,
+        -20.767139,
+        44.009528,
+        -20.764583
+      ],
+      "source_area_km2": 0.06045660552584843,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.06045660552584844
+        }
+      ]
+    },
+    {
+      "record_id": 116941,
+      "bbox": [
+        44.037917,
+        -20.707056,
+        44.040417,
+        -20.704583
+      ],
+      "source_area_km2": 0.05940909575869084,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.008510770832517792
+        }
+      ]
+    },
+    {
+      "record_id": 121252,
+      "bbox": [
+        48.331194,
+        -13.643778,
+        48.332944,
+        -13.640444
+      ],
+      "source_area_km2": 0.05563363553887807,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.05563363553887807
+        }
+      ]
+    },
+    {
+      "record_id": 123874,
+      "bbox": [
+        46.074556,
+        -15.805472,
+        46.077056,
+        -15.802917
+      ],
+      "source_area_km2": 0.053580948241785165,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.053580948241785165
+        }
+      ]
+    },
+    {
+      "record_id": 124586,
+      "bbox": [
+        45.617056,
+        -16.042083,
+        45.619556,
+        -16.039611
+      ],
+      "source_area_km2": 0.05290202726596463,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.05290202726596463
+        }
+      ]
+    },
+    {
+      "record_id": 125103,
+      "bbox": [
+        55.572889,
+        -21.367139,
+        55.575417,
+        -21.364611
+      ],
+      "source_area_km2": 0.052320985649589875,
+      "matches": [
+        {
+          "id": "atlas:coverage:FRA-4601",
+          "intersection_area_km2": 0.05232098564958988
+        }
+      ]
+    },
+    {
+      "record_id": 125138,
+      "bbox": [
+        44.43875,
+        -20.072111,
+        44.442056,
+        -20.070444
+      ],
+      "source_area_km2": 0.052279441728042636,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.05227944172804264
+        }
+      ]
+    },
+    {
+      "record_id": 125490,
+      "bbox": [
+        47.787056,
+        -23.027139,
+        47.789583,
+        -23.024611
+      ],
+      "source_area_km2": 0.051891539279291715,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B75046296685916",
+          "intersection_area_km2": 0.0518915392792917
+        }
+      ]
+    },
+    {
+      "record_id": 126415,
+      "bbox": [
+        57.697083,
+        -20.45375,
+        57.699556,
+        -20.451278
+      ],
+      "source_area_km2": 0.05083121978461302,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B660734165567",
+          "intersection_area_km2": 0.050831219784613024
+        }
+      ]
+    },
+    {
+      "record_id": 135895,
+      "bbox": [
+        57.78625,
+        -20.260444,
+        57.789583,
+        -20.258778
+      ],
+      "source_area_km2": 0.043818230875677225,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B3325932502431",
+          "intersection_area_km2": 0.043818230875677225
+        }
+      ]
+    },
+    {
+      "record_id": 136068,
+      "bbox": [
+        43.277056,
+        -21.967944,
+        43.279583,
+        -21.966278
+      ],
+      "source_area_km2": 0.04364377256818723,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B72547257848133",
+          "intersection_area_km2": 0.04364377256818722
+        }
+      ]
+    },
+    {
+      "record_id": 143975,
+      "bbox": [
+        48.939583,
+        -12.487972,
+        48.94125,
+        -12.484639
+      ],
+      "source_area_km2": 0.037574871720342365,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B22775533170221",
+          "intersection_area_km2": 0.0036240749949106857
+        }
+      ]
+    },
+    {
+      "record_id": 144057,
+      "bbox": [
+        48.827889,
+        -13.272944,
+        48.830417,
+        -13.27125
+      ],
+      "source_area_km2": 0.037517982964526596,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B52521872200932",
+          "intersection_area_km2": 0.0375179829645266
+        }
+      ]
+    },
+    {
+      "record_id": 144197,
+      "bbox": [
+        46.077889,
+        -15.804583,
+        46.080444,
+        -15.802917
+      ],
+      "source_area_km2": 0.03743343642410251,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.03743343642410251
+        }
+      ]
+    },
+    {
+      "record_id": 144583,
+      "bbox": [
+        47.207083,
+        -15.446278,
+        47.209556,
+        -15.44375
+      ],
+      "source_area_km2": 0.03718823803205842,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B55197674782137",
+          "intersection_area_km2": 0.03718823803205842
+        }
+      ]
+    },
+    {
+      "record_id": 145631,
+      "bbox": [
+        44.466222,
+        -19.458778,
+        44.468778,
+        -19.457111
+      ],
+      "source_area_km2": 0.036382193468618686,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B50417492685621",
+          "intersection_area_km2": 0.03638219346861868
+        }
+      ]
+    },
+    {
+      "record_id": 145802,
+      "bbox": [
+        47.977889,
+        -14.370444,
+        47.980361,
+        -14.368778
+      ],
+      "source_area_km2": 0.03625320587049329,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.0362532058704933
+        }
+      ]
+    },
+    {
+      "record_id": 152756,
+      "bbox": [
+        48.457861,
+        -13.535472,
+        48.459583,
+        -13.532944
+      ],
+      "source_area_km2": 0.03047164731947765,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.027462507930681463
+        }
+      ]
+    },
+    {
+      "record_id": 155079,
+      "bbox": [
+        48.055417,
+        -14.180444,
+        48.057083,
+        -14.177917
+      ],
+      "source_area_km2": 0.029553708523625696,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.0295537085236257
+        }
+      ]
+    },
+    {
+      "record_id": 155247,
+      "bbox": [
+        45.143722,
+        -12.72375,
+        45.145417,
+        -12.722111
+      ],
+      "source_area_km2": 0.029480075277950258,
+      "matches": [
+        {
+          "id": "atlas:coverage:FRA-4602",
+          "intersection_area_km2": 0.029480075277950258
+        }
+      ]
+    },
+    {
+      "record_id": 156013,
+      "bbox": [
+        46.370361,
+        -15.731278,
+        46.37375,
+        -15.730417
+      ],
+      "source_area_km2": 0.029097629175141165,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B51504984909978",
+          "intersection_area_km2": 0.02909762917514117
+        }
+      ]
+    },
+    {
+      "record_id": 156642,
+      "bbox": [
+        49.522917,
+        -12.437944,
+        49.524556,
+        -12.436278
+      ],
+      "source_area_km2": 0.028737382347641203,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B22775533170221",
+          "intersection_area_km2": 0.014040159968873075
+        }
+      ]
+    },
+    {
+      "record_id": 156671,
+      "bbox": [
+        49.850361,
+        -17.009611,
+        49.852056,
+        -17.007944
+      ],
+      "source_area_km2": 0.028722168403717704,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B25342620887316",
+          "intersection_area_km2": 0.028722168403717704
+        }
+      ]
+    },
+    {
+      "record_id": 157092,
+      "bbox": [
+        57.781194,
+        -20.295417,
+        57.78375,
+        -20.29375
+      ],
+      "source_area_km2": 0.028461002645711834,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B3325932502431",
+          "intersection_area_km2": 0.028461002645711837
+        }
+      ]
+    },
+    {
+      "record_id": 157807,
+      "bbox": [
+        48.469556,
+        -13.522917,
+        48.47125,
+        -13.521306
+      ],
+      "source_area_km2": 0.027917534989238095,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B10293113814705",
+          "intersection_area_km2": 0.027917534989238095
+        }
+      ]
+    },
+    {
+      "record_id": 158497,
+      "bbox": [
+        45.169583,
+        -12.71875,
+        45.171194,
+        -12.717139
+      ],
+      "source_area_km2": 0.02742022100489697,
+      "matches": [
+        {
+          "id": "atlas:coverage:FRA-4602",
+          "intersection_area_km2": 0.01164175293064326
+        }
+      ]
+    },
+    {
+      "record_id": 158622,
+      "bbox": [
+        47.39125,
+        -24.171306,
+        47.393694,
+        -24.169583
+      ],
+      "source_area_km2": 0.027316182489482987,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B85658862424992",
+          "intersection_area_km2": 0.027316182489482983
+        }
+      ]
+    },
+    {
+      "record_id": 158727,
+      "bbox": [
+        57.683694,
+        -20.027083,
+        57.685389,
+        -20.025472
+      ],
+      "source_area_km2": 0.027227810500771592,
+      "matches": [
+        {
+          "id": "gb:MUS:ADM1:65221844B93227578092779",
+          "intersection_area_km2": 0.00021538933241686473
+        }
+      ]
+    },
+    {
+      "record_id": 163930,
+      "bbox": [
+        45.184556,
+        -12.724611,
+        45.187056,
+        -12.723722
+      ],
+      "source_area_km2": 0.021749179963265322,
+      "matches": [
+        {
+          "id": "atlas:coverage:FRA-4602",
+          "intersection_area_km2": 0.02174917996326533
+        }
+      ]
+    },
+    {
+      "record_id": 164213,
+      "bbox": [
+        46.082028,
+        -15.805417,
+        46.08375,
+        -15.80375
+      ],
+      "source_area_km2": 0.021581724119460095,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.021581724119460095
+        }
+      ]
+    },
+    {
+      "record_id": 164284,
+      "bbox": [
+        45.119556,
+        -12.982111,
+        45.122028,
+        -12.98125
+      ],
+      "source_area_km2": 0.021531357562913033,
+      "matches": [
+        {
+          "id": "atlas:coverage:FRA-4602",
+          "intersection_area_km2": 0.02153135756291304
+        }
+      ]
+    },
+    {
+      "record_id": 165200,
+      "bbox": [
+        45.62875,
+        -15.882944,
+        45.631222,
+        -15.882083
+      ],
+      "source_area_km2": 0.020973820122186144,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.020973820122186144
+        }
+      ]
+    },
+    {
+      "record_id": 165354,
+      "bbox": [
+        47.240361,
+        -14.994611,
+        47.242917,
+        -14.99375
+      ],
+      "source_area_km2": 0.020876139254168865,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.020876139254168872
+        }
+      ]
+    },
+    {
+      "record_id": 165807,
+      "bbox": [
+        45.632111,
+        -15.877083,
+        45.63375,
+        -15.875417
+      ],
+      "source_area_km2": 0.020499600896374433,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B34339999190032",
+          "intersection_area_km2": 0.020499600896374433
+        }
+      ]
+    },
+    {
+      "record_id": 165891,
+      "bbox": [
+        45.116222,
+        -12.98125,
+        45.11875,
+        -12.980444
+      ],
+      "source_area_km2": 0.02042205546682877,
+      "matches": [
+        {
+          "id": "atlas:coverage:FRA-4602",
+          "intersection_area_km2": 0.020422055466828782
+        }
+      ]
+    },
+    {
+      "record_id": 166857,
+      "bbox": [
+        44.029556,
+        -20.75625,
+        44.032056,
+        -20.755417
+      ],
+      "source_area_km2": 0.019472966998954427,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.019472966998954427
+        }
+      ]
+    },
+    {
+      "record_id": 170980,
+      "bbox": [
+        43.404556,
+        -11.407139,
+        43.405417,
+        -11.405417
+      ],
+      "source_area_km2": 0.01313831371662363,
+      "matches": [
+        {
+          "id": "atlas:territory:COM",
+          "intersection_area_km2": 0.011652036260583644
+        }
+      ]
+    },
+    {
+      "record_id": 172119,
+      "bbox": [
+        44.008722,
+        -20.772139,
+        44.010417,
+        -20.77125
+      ],
+      "source_area_km2": 0.01268536679344295,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.012685366793442948
+        }
+      ]
+    },
+    {
+      "record_id": 172263,
+      "bbox": [
+        48.820389,
+        -13.149611,
+        48.82125,
+        -13.147944
+      ],
+      "source_area_km2": 0.012634033585788807,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B52521872200932",
+          "intersection_area_km2": 0.012634033585788807
+        }
+      ]
+    },
+    {
+      "record_id": 173309,
+      "bbox": [
+        49.402917,
+        -12.288778,
+        49.403722,
+        -12.287111
+      ],
+      "source_area_km2": 0.012245215264196592,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B22775533170221",
+          "intersection_area_km2": 0.012245215264196592
+        }
+      ]
+    },
+    {
+      "record_id": 173848,
+      "bbox": [
+        47.959611,
+        -14.31125,
+        47.96125,
+        -14.310444
+      ],
+      "source_area_km2": 0.01195671057600313,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B21608854890468",
+          "intersection_area_km2": 0.0028189184395186135
+        }
+      ]
+    },
+    {
+      "record_id": 174406,
+      "bbox": [
+        47.09125,
+        -24.980444,
+        47.092056,
+        -24.978722
+      ],
+      "source_area_km2": 0.011646843304083243,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B85658862424992",
+          "intersection_area_km2": 0.006389865702614598
+        }
+      ]
+    },
+    {
+      "record_id": 175071,
+      "bbox": [
+        44.27625,
+        -20.349611,
+        44.277056,
+        -20.347944
+      ],
+      "source_area_km2": 0.011318234040170006,
+      "matches": [
+        {
+          "id": "gb:MDG:ADM2:10022922B91714644312966",
+          "intersection_area_km2": 0.011318234040170006
+        }
+      ]
+    }
+  ]
+}

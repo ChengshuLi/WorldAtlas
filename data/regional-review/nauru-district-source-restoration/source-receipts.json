@@ -1,0 +1,70 @@
+{
+  "official_and_secondary_sources": [
+    {
+      "title": "nauru-2021-census.pdf",
+      "canonical_url": "https://stats.gov.nr/download/49/2021/359/nauru-2021-population-and-housing-census-analytical-report.pdf",
+      "retrieved": "2026-10-03",
+      "bytes": 10235852,
+      "sha256": "fcbb52f6e46b420c100caa074689b9354959b8a6aec57eebe2de82da1a78847b",
+      "license_and_retention": "Official 2021 census analytical report; publication August 2023; 10,235,852 bytes; SHA-256 fcbb52f6e46b420c100caa074689b9354959b8a6aec57eebe2de82da1a78847b. No explicit open reuse license located; not retained; restore from URL and verify hash."
+    },
+    {
+      "title": "popgis3-district-layer.gz",
+      "canonical_url": "https://nauru.popgis.spc.int/maps/nru_did_2011_4326_DR.gz?v=4.16.1",
+      "retrieved": "2026-10-03",
+      "bytes": 20769,
+      "sha256": "90c2485419c2d39148fda3802e699cb8bc13fb93212ca72b0db3283c398e2197",
+      "license_and_retention": "Official PopGIS3 map layer; retrieved compressed payload; proprietary GCO5 after gzip; response reports NBS copyright and layer 2011 vintage. No open license located; not retained; fetch canonical URL and verify hash."
+    },
+    {
+      "title": "popgis3-reference.json",
+      "canonical_url": "https://nauru.popgis.spc.int/GC_refdata.php?nivgeo=did&extent=cid&lang=en",
+      "retrieved": "2026-10-03",
+      "bytes": 475,
+      "sha256": "70f492e9b86296bc8a4b85be9b408c298fc8ba0f1e8aa4d9c3a7c750b67c4bbb",
+      "license_and_retention": "NBS PopGIS3 district code/name reference API response; retrieved 2026-10-03."
+    },
+    {
+      "title": "popgis3-init.json",
+      "canonical_url": "https://nauru.popgis.spc.int/GC_init.php?lang=en&obs=main",
+      "retrieved": "2026-10-03",
+      "bytes": 69279,
+      "sha256": "e122b199da9afd98d4c288055300aec47069f6cc8acad59a27989243a081cd31",
+      "license_and_retention": "NBS PopGIS3 initialization metadata; identifies Country/District layers and NBS as source; retrieved 2026-10-03."
+    },
+    {
+      "title": "popgis3-announcement.html",
+      "canonical_url": "https://stats.gov.nr/2024/02/08/2021-census-tables-and-maps-are-now-available-on-popgis3-site/",
+      "retrieved": "2026-10-03",
+      "bytes": 262018,
+      "sha256": "e81877f313a74f41a043f7718237d5a689224486d2b636f29e6a9ffa81b9801d",
+      "license_and_retention": "NBS announcement dated 2024-02-08 linking 2021 census tables/maps to PopGIS3; retrieved 2026-10-03."
+    }
+  ],
+  "existing_retained_sources": [
+    {
+      "path": "data/regional-review/regional-review-4857646bb9b55df5/sources/geoBoundaries-NRU-ADM1.geojson",
+      "bytes": 152843,
+      "sha256": "afb3d32bd9c6ec0fc04e5feb4a943cdf0db71a83f7f25d8f0f12b1270d1617fe",
+      "license": "Metadata declares Public Domain; secondary geoBoundaries aggregation, not official Nauru authority."
+    },
+    {
+      "path": "data/regional-review/regional-review-4857646bb9b55df5/sources/geoBoundaries-NRU-ADM1-metaData.json",
+      "bytes": 821,
+      "sha256": "b78be7729af40d485d28d1a22d9482362f39080d9c67b7c5a8d5866c1758dad7",
+      "license": "Metadata declares Public Domain; secondary geoBoundaries aggregation, not official Nauru authority."
+    },
+    {
+      "path": "data/regional-review/regional-review-4857646bb9b55df5/sources/geoBoundaries-NRU-ADM1-metaData.txt",
+      "bytes": 982,
+      "sha256": "b7e71f1c30f35db728b8bbfef40f85d5f7c9dbacc785bc9dfc123afef34039f2",
+      "license": "Metadata declares Public Domain; secondary geoBoundaries aggregation, not official Nauru authority."
+    }
+  ],
+  "service_notes": {
+    "viewer": "https://nauru.popgis.spc.int/#c=home",
+    "copyright": "Naoero Bureau of Statistics reported in PopGIS3 init metadata",
+    "status": "URLs were reachable during retrieval on 2026-10-03; later curl HEAD probes in this work session returned 404 for PopGIS endpoints, so restore by canonical URL and check current service availability before relying on it.",
+    "geometry": "No PopGIS bytes redistributed. Compressed response gzip SHA is recorded above; decompressed proprietary binary SHA-256 66d5140b5b4849db37ed5f72b621cff9c6b00bb06b42998d12c5f855fe4eec5a, 33,699 bytes."
+  }
+}
