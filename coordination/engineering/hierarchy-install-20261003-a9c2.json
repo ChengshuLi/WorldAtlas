@@ -11,7 +11,7 @@
     "Publisher-reviewed fresh served-release check and matching release/static/server handoff"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-03T20:44:16.473619+00:00",
+  "updated_at_utc": "2026-10-03T21:18:30.040649+00:00",
   "completed": [
     "Partial PR673 actually merged; first of two permitted PRs",
     "Confirmed reservation rotated without live operations",
@@ -24,7 +24,13 @@
     "Initial complete 893-file generation reproduced twice byte-for-byte; all2941 protected payloads and56 ownership buffers checked",
     "Local isolated checkout apply verified; exhaustive prepared evidence and local static browser checks passed; production publication unverified",
     "Hosted and static packaging passed; migration staging controls passed after hosted packaging",
-    "Independent review hardens complete baseline/candidate preservation and executed-index binding; source-assessment inheritance regression fixed with meaningful controls"
+    "Independent review hardens complete baseline/candidate preservation and executed-index binding; source-assessment inheritance regression fixed with meaningful controls",
+    "All894 local candidate output hashes match fresh publisher-integrated generation1cd3329cc68bb3914b59416c2854e75d4082892e7a2c6491738e6808e308bd0b",
+    "Pending macro certificate database-readback flag fixedfalse with meaningful rejection control; original published flag retained only archived",
+    "Actual45 scoped controls/38 negative-preservation scenarios passed after publisher integration",
+    "Actual46 typed-runtime/release tests passed after main51540f0",
+    "Corrected pinned-Python hosted packaging and fresh local browser passed;546 package output whole-file hashes recorded",
+    "Both full publisher-integrated generations completed; all894 raw output bytes matched,2941 original payloads and56 ownership buffers verified; final validation1cd3329cc68bb3914b59416c2854e75d4082892e7a2c6491738e6808e308bd0b"
   ],
   "checks": [
     {
@@ -80,6 +86,67 @@
       "check": "migration staging after packaging",
       "outcome": "passed",
       "receipt": "data/engineering/hierarchy-install-20261003-a9c2/migration-staging-packaged.log"
+    },
+    {
+      "check": "corrected broad suite before publisher integration",
+      "outcome": "failed-with-two-reproduced-environment-limitations",
+      "tests": 640,
+      "passed": 638,
+      "failed": 2,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/post-install-regressions-final.log",
+      "limit": "Credential controls reject managed /tmp/.git marker; unchanged baseline reproduces same failures; protections retained."
+    },
+    {
+      "check": "reviewed-final second regeneration",
+      "outcome": "failed",
+      "reason": "ENOSPC temporary filesystem; partial inventory and all prior reports preserved before removing only explicit own regenerable stages",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/regeneration-disk-cleanup.json"
+    },
+    {
+      "check": "publisher-integrated scoped controls",
+      "outcome": "passed",
+      "tests": 45,
+      "negative_preservation_scenarios": 38,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/controls-publisher-integrated.log"
+    },
+    {
+      "check": "publisher-integrated typed-runtime/release suite",
+      "outcome": "passed",
+      "tests": 46,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/typed-runtime-publisher-integrated.log"
+    },
+    {
+      "check": "publisher-integrated packaging initial invocation",
+      "outcome": "failed",
+      "reason": "System Python lacked Shapely because this invocation omitted isolated environment PATH; corrected command completed",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/hosted-build-publisher-integrated.log"
+    },
+    {
+      "check": "publisher-integrated hosted packaging",
+      "outcome": "passed",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/hosted-build-publisher-integrated-corrected.log"
+    },
+    {
+      "check": "publisher-integrated actual local Chromium",
+      "outcome": "passed",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/browser-check-publisher-integrated.json",
+      "live_publication": false,
+      "physical_device_verified": false
+    },
+    {
+      "check": "serialized reservation renewal",
+      "outcome": "failed",
+      "run_id": 37154493208,
+      "reason": "Trusted main workflow sparse checkout omits src/regional-import-gate.js introduced by PR677; canonical reservation remains active/unchanged. Reported to publisher and627, no bypass/repeated retry.",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/reservation-renewal-before-second-pr-failed.json"
+    },
+    {
+      "check": "complete publisher-integrated two-run reproducibility",
+      "outcome": "passed",
+      "written_files": 894,
+      "preserved_files": 2941,
+      "ownership_buffers": 56,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/reproducibility-publisher-integrated.json"
     }
   ],
   "deployment": {
@@ -95,10 +162,13 @@
     "data/engineering/hierarchy-install-20261003-a9c2/reservation-renewal.json"
   ],
   "blockers": [
-    "Live execution awaits concrete reviewed package and designated publisher coordination; no live operation begun"
+    "Main Actions sparse-checkout dependency repair required for serialized renewal/merge; coordination529 comment5973566674 and627 comment5973569272",
+    "Live execution awaits concrete exact-head reviewed package and designated publisher matching release/Site/claims/archive verification; no live operation begun"
   ],
-  "next_action": "Finish fresh-baseline source-assessment/profile regeneration and two-run byte checks, refresh only own local generated assets after verifying old-stage hashes, run ordered regressions, produce complete bounded evidence manifests, independent exact-head review and focused second PR. Production remains unverified pending designated publisher.",
+  "next_action": "Stage and commit complete bounded evidence, open focused second partial PR, obtain substantive independent exact-head review. Await authoritative Actions dependency repair before accepted renewal/serialized merge; designated publisher controls actual matched release/Site/claims/archive verification.",
   "pull_request": null,
   "record_kind": "resumable_execution_artifact",
-  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "incorporated_main_commit": "51540f0bccd1f0958b44cbd4dea4ad2c1a5157d6",
+  "pushed_source_checkpoint": "0aec48f8649e614b7b1d618e915f4a5081326a83"
 }
