@@ -1,0 +1,49 @@
+{
+  "issue": 399,
+  "baseline_commit": "3d2c5cee2fa748a7eff90051088b6998c9c84968",
+  "reviewed_location_count": 2,
+  "assignments": [
+    {
+      "id": "atlas:coverage:BVT+00?",
+      "name": "Bouvet Island",
+      "status": "insufficient-evidence",
+      "location_role": "Distinct named physical island territory, source geometry from Natural Earth ADM1 layer; this source label alone does not establish an administrative tier.",
+      "land_and_islands": "Single disconnected island. Natural Earth geometry and independent GSHHG 2.3.7 high-resolution screen each show one principal land component. Norsk Polarinstitutt identifies it as volcanic and about 89% ice covered. No smaller islands or settlements established by sources reviewed.",
+      "settlements": "No settlement conclusion sourced; reserve description is not proof of permanent or absent settlement.",
+      "political_separation": "Natural Earth says Norway; used only as a political reference and not to justify geographic tier/role.",
+      "province_id": "framework:province:bouvet-island:f25adb7c3670",
+      "province_members": 1,
+      "area_id": "framework:area:bouvet-i:6f8a0a0de684",
+      "area_members": 1,
+      "parent_chain": ["framework:province:bouvet-island:f25adb7c3670", "framework:area:bouvet-i:6f8a0a0de684", "framework:region:south-atlantic-islands:242a7633c849", "framework:subcontinent:atlantic-islands:49ea8d869118", "framework:continent:africa:d14fc0b285b2"],
+      "recommendation": "Retain baseline feature and outer envelope. Require explicit sourced purpose for singleton province and area; do not silently collapse tiers. No shared-boundary amendment is proposed."
+    },
+    {
+      "id": "SHN-4865",
+      "name": "Tristan da Cunha",
+      "status": "correction-needed",
+      "location_role": "Natural Earth ADM1 feature is a two-part source geometry corresponding spatially to Tristan and Gough; statutory role and its fit as a location tier remain unverified.",
+      "land_and_islands": "Official Tristan Government page calls out four main island groups: Tristan, Nightingale (incl. Middle and Stoltenhoff), Inaccessible, Gough. Current geometry has Tristan and Gough components; current region has separate unowned Inaccessible location; no Nightingale location is in the current region inventory. Small island scale/generalization leaves exact coverage unresolved.",
+      "settlements": "Tristan Government states Edinburgh of the Seven Seas is its only settlement. Gough is described as uninhabited with a South African meteorological station; official Nightingale and Inaccessible pages describe both as uninhabited. Do not classify research station as a settlement.",
+      "political_separation": "Natural Earth names Saint Helena as admin/geographic unit and UK as sovereignty reference. These fields are not physical-geography evidence and are not accepted as historical attributes.",
+      "province_id": "framework:province:tristan-da-cunha:33a276e2dcef",
+      "province_members": 2,
+      "owned_province_members": 1,
+      "area_id": "framework:area:tristan-da-cunha:9cc13f608018",
+      "area_members": 2,
+      "owned_area_members": 1,
+      "unowned_neighbor": "atlas:island:geonames:3370905 (Inaccessible Island); current neighbor only, not modified or copied",
+      "parent_chain": ["framework:province:tristan-da-cunha:33a276e2dcef", "framework:area:tristan-da-cunha:9cc13f608018", "framework:region:south-atlantic-islands:242a7633c849", "framework:subcontinent:atlantic-islands:49ea8d869118", "framework:continent:africa:d14fc0b285b2"],
+      "recommendation": "Recover absent SHN source policy profile and add a source crosswalk for the government-listed island groups, Natural Earth two source components and current separately scoped Inaccessible ID. Withhold complete parent decisions; do not mutate area membership, location shapes or shared boundary in this packet."
+    }
+  ],
+  "reviewed_parent_groups": [
+    {"id":"framework:province:bouvet-island:f25adb7c3670","review":"one owned member; purpose unresolved because Natural Earth feature class is not sufficient basis for an administrative tier"},
+    {"id":"framework:area:bouvet-i:6f8a0a0de684","review":"one owned member; singleton broad group repeats province/location and requires explicit physical/functional role"},
+    {"id":"framework:province:tristan-da-cunha:33a276e2dcef","review":"two current members; one owned by #399. Natural Earth shape encompasses Tristan and Gough but other government-listed groups require source crosswalk; complete role deferred to integrated parent review"},
+    {"id":"framework:area:tristan-da-cunha:9cc13f608018","review":"two current members; one owned by #399. Area purpose and coverage must be reviewed with companion member packet; no complete-parent approval"}
+  ],
+  "source_gaps": ["Missing original Saint Helena (SHN) source-policy profile", "No authoritative source-to-feature geometry crosswalk retrieved for Nightingale and the smaller islands", "No settlement or subdivision evidence for Bouvet beyond the source profile", "Original NE ADM1 feature role does not itself show legal jurisdiction or tier suitability"],
+  "no_geometry_or_hierarchy_change": true,
+  "region_certificate_or_import_approval": false
+}

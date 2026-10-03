@@ -1,0 +1,270 @@
+{
+  "baseline_commit": "3d2c5cee2fa748a7eff90051088b6998c9c84968",
+  "issue": 399,
+  "region": {
+    "id": "framework:region:south-atlantic-islands:242a7633c849",
+    "name": "Eastern South Atlantic Islands",
+    "continent_id": "framework:continent:africa:d14fc0b285b2",
+    "subcontinent_id": "framework:subcontinent:atlantic-islands:49ea8d869118",
+    "frozen_geometry_sha256": "d1b8e1bfccee98ab7add6824f4c947c8928f46ee282b35a4eb4e38c87b0950ee",
+    "frozen_member_ids_sha256": "c984bcbce9a42369f472cd1888c3aa16c75c95e57544f77f0ed109cef0e0ad53",
+    "location_count": 3
+  },
+  "scope_location_ids": [
+    "SHN-4865",
+    "atlas:coverage:BVT+00?"
+  ],
+  "locations": {
+    "SHN-4865": {
+      "id": "SHN-4865",
+      "name": "Tristan da Cunha",
+      "parent_id": "framework:province:tristan-da-cunha:33a276e2dcef",
+      "reference_owner": "Saint Helena",
+      "geometry_type": "MultiPolygon",
+      "geometry_sha256": "0e388969279a44c0f5d218995e4322328b8aa01cfbb4e9e48d3e4e048cbf648d",
+      "bounds": [
+        -12.3353,
+        -40.3979,
+        -9.8954,
+        -37.0558
+      ],
+      "vertices": 21,
+      "metadata": {
+        "source_name": "Natural Earth",
+        "source_id": "natural-earth",
+        "source_url": "https://www.naturalearthdata.com/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "ADM1 fallback",
+        "hierarchy_source": "Natural Earth admin-1",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "geographic_area_code": "TDC",
+        "geographic_region_code": 90,
+        "semantic_review": {
+          "status": "open",
+          "continent": "Africa",
+          "decision_index": 157,
+          "evidence_file": "geographic-decisions"
+        }
+      }
+    },
+    "atlas:coverage:BVT+00?": {
+      "id": "atlas:coverage:BVT+00?",
+      "name": "Bouvet Island",
+      "parent_id": "framework:province:bouvet-island:f25adb7c3670",
+      "reference_owner": "Norway",
+      "geometry_type": "Polygon",
+      "geometry_sha256": "05b28c1c00f92211ef911cf384f97b7eacddb6c390697fe78c0e13a334d5804b",
+      "bounds": [
+        3.345551,
+        -54.462498,
+        3.486664,
+        -54.380141
+      ],
+      "vertices": 18,
+      "metadata": {
+        "source_name": "Natural Earth",
+        "source_id": "natural-earth:BVT+00?",
+        "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "location_basis": "Named source island / overseas territory",
+        "source_role": "Named territory",
+        "hierarchy_source": "WGSRPD / Natural Earth",
+        "parent_match": "Named source territory; no smaller province asserted",
+        "semantic_review": {
+          "status": "open",
+          "continent": "Africa",
+          "decision_index": 152,
+          "evidence_file": "geographic-decisions"
+        }
+      }
+    }
+  },
+  "projection_rows": {
+    "SHN-4865": {
+      "id": "SHN-4865",
+      "name": "Tristan da Cunha",
+      "parent_id": "framework:province:tristan-da-cunha:33a276e2dcef",
+      "parent_chain": [
+        "framework:province:tristan-da-cunha:33a276e2dcef",
+        "framework:area:tristan-da-cunha:9cc13f608018",
+        "framework:region:south-atlantic-islands:242a7633c849",
+        "framework:subcontinent:atlantic-islands:49ea8d869118",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "owner": "Saint Helena",
+      "continent": "Africa",
+      "region_id": "framework:region:south-atlantic-islands:242a7633c849",
+      "source_id": "natural-earth",
+      "source_year": "Undated modern reference",
+      "status": "open",
+      "semantic_status": "open"
+    },
+    "atlas:coverage:BVT+00?": {
+      "id": "atlas:coverage:BVT+00?",
+      "name": "Bouvet Island",
+      "parent_id": "framework:province:bouvet-island:f25adb7c3670",
+      "parent_chain": [
+        "framework:province:bouvet-island:f25adb7c3670",
+        "framework:area:bouvet-i:6f8a0a0de684",
+        "framework:region:south-atlantic-islands:242a7633c849",
+        "framework:subcontinent:atlantic-islands:49ea8d869118",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "owner": "Norway",
+      "continent": "Africa",
+      "region_id": "framework:region:south-atlantic-islands:242a7633c849",
+      "source_id": "natural-earth:BVT+00?",
+      "source_year": "Undated modern reference",
+      "status": "open",
+      "semantic_status": "open"
+    }
+  },
+  "complete_parent_chains": {
+    "SHN-4865": [
+      {
+        "id": "SHN-4865",
+        "name": "Tristan da Cunha",
+        "level": null,
+        "parent_id": "framework:province:tristan-da-cunha:33a276e2dcef"
+      },
+      {
+        "id": "framework:province:tristan-da-cunha:33a276e2dcef",
+        "name": "Tristan da Cunha",
+        "level": "province",
+        "parent_id": "framework:area:tristan-da-cunha:9cc13f608018"
+      },
+      {
+        "id": "framework:area:tristan-da-cunha:9cc13f608018",
+        "name": "Tristan da Cunha",
+        "level": "area",
+        "parent_id": "framework:region:south-atlantic-islands:242a7633c849"
+      },
+      {
+        "id": "framework:region:south-atlantic-islands:242a7633c849",
+        "name": "Eastern South Atlantic Islands",
+        "level": "region",
+        "parent_id": "framework:subcontinent:atlantic-islands:49ea8d869118"
+      },
+      {
+        "id": "framework:subcontinent:atlantic-islands:49ea8d869118",
+        "name": "Central and Eastern South Atlantic Islands",
+        "level": "subcontinent",
+        "parent_id": "framework:continent:africa:d14fc0b285b2"
+      },
+      {
+        "id": "framework:continent:africa:d14fc0b285b2",
+        "name": "Africa",
+        "level": "continent",
+        "parent_id": null
+      }
+    ],
+    "atlas:coverage:BVT+00?": [
+      {
+        "id": "atlas:coverage:BVT+00?",
+        "name": "Bouvet Island",
+        "level": null,
+        "parent_id": "framework:province:bouvet-island:f25adb7c3670"
+      },
+      {
+        "id": "framework:province:bouvet-island:f25adb7c3670",
+        "name": "Bouvet Island",
+        "level": "province",
+        "parent_id": "framework:area:bouvet-i:6f8a0a0de684"
+      },
+      {
+        "id": "framework:area:bouvet-i:6f8a0a0de684",
+        "name": "Bouvet Island",
+        "level": "area",
+        "parent_id": "framework:region:south-atlantic-islands:242a7633c849"
+      },
+      {
+        "id": "framework:region:south-atlantic-islands:242a7633c849",
+        "name": "Eastern South Atlantic Islands",
+        "level": "region",
+        "parent_id": "framework:subcontinent:atlantic-islands:49ea8d869118"
+      },
+      {
+        "id": "framework:subcontinent:atlantic-islands:49ea8d869118",
+        "name": "Central and Eastern South Atlantic Islands",
+        "level": "subcontinent",
+        "parent_id": "framework:continent:africa:d14fc0b285b2"
+      },
+      {
+        "id": "framework:continent:africa:d14fc0b285b2",
+        "name": "Africa",
+        "level": "continent",
+        "parent_id": null
+      }
+    ]
+  },
+  "review_group_member_location_ids": {
+    "framework:area:bouvet-i:6f8a0a0de684": [
+      "atlas:coverage:BVT+00?"
+    ],
+    "framework:area:tristan-da-cunha:9cc13f608018": [
+      "SHN-4865",
+      "atlas:island:geonames:3370905"
+    ],
+    "framework:province:bouvet-island:f25adb7c3670": [
+      "atlas:coverage:BVT+00?"
+    ],
+    "framework:province:tristan-da-cunha:33a276e2dcef": [
+      "SHN-4865",
+      "atlas:island:geonames:3370905"
+    ],
+    "framework:region:south-atlantic-islands:242a7633c849": [
+      "SHN-4865",
+      "atlas:coverage:BVT+00?",
+      "atlas:island:geonames:3370905"
+    ]
+  },
+  "region_member_location_ids": [
+    "SHN-4865",
+    "atlas:coverage:BVT+00?",
+    "atlas:island:geonames:3370905"
+  ],
+  "baseline_files": [
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10165703,
+      "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d"
+    },
+    {
+      "path": "data/semantic-report.json",
+      "bytes": 6091596,
+      "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2367982,
+      "sha256": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-projection.json.gz",
+      "bytes": 5005075,
+      "sha256": "beb2739a65c67f01a65deab96ebf209a159b257453e156ef590106e1f1c9a348"
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 70253,
+      "sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1"
+    },
+    {
+      "path": "data/macro-foundation/macro-certificate.json",
+      "bytes": 38430,
+      "sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"
+    },
+    {
+      "path": "data/geography/part-0.json",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    }
+  ]
+}
