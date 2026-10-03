@@ -1,0 +1,910 @@
+{
+  "version": 1,
+  "issue": 522,
+  "reviewed_on": "2026-10-03",
+  "worker_id": "codex-20261003-fugloy-9a2de3ad-5f2c-44c8-bbad-20d19de96147",
+  "claim_id": "fab72196-7786-4367-9bbe-364fdeafa168",
+  "scope": {
+    "region_id": "framework:region:nordic-europe:830e13d9350b",
+    "release": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+    },
+    "member_location_ids": [
+      "atlas:restoration:location:fugloy"
+    ],
+    "member_location_ids_sha256": "863da652252cd08da0c6faddb721d79c1d6dfd8804aaa2663fa09087ae0f36ce",
+    "owned_member_count": 1,
+    "assigned_assessed": 1,
+    "assessment_status": "reviewed-with-explicit-source-and-coextensivity-gaps"
+  },
+  "sources": [
+    {
+      "id": "osm:fugloy:map-snapshot:2026-10-02",
+      "title": "OpenStreetMap API map response (FugloyWide extraction)",
+      "canonical_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-6.43,62.26,-6.22,62.4",
+      "retrieved_on": "2026-10-02",
+      "source_vintage": "Snapshot retrieved 2026-10-02; underlying targeted way edits span 2025-02-10 to 2025-04-03. Edit timestamps are not shoreline observation dates.",
+      "license": "OpenStreetMap contributors, ODbL 1.0; attribution: © OpenStreetMap contributors; database reuse remains subject to ODbL.",
+      "retained_original": {
+        "repository_archive": "data/macro-improvements/macro-coverage-europe-asia/geometry-and-modern-sources.tar.gz",
+        "archive_sha256": "64c2a158eaa703df7047b01f676c7a085656b00b926cc525fc68038edb6feff2",
+        "archive_member": "modern-coastlines/FugloyWide.osm.xml.gz",
+        "member_compressed_bytes": 428310,
+        "member_compressed_sha256": "790d3a162c478e37a85d6b775bb35aa9a0ce3b267cc3a1eead3b25b043911780",
+        "member_uncompressed_bytes": 5692258,
+        "member_uncompressed_sha256": "722e3ff6a509393ac591e44bb7d292cfddabae756377009ded00a47a7cddb1e0",
+        "restoration": "From repository root: tar -xzOf data/macro-improvements/macro-coverage-europe-asia/geometry-and-modern-sources.tar.gz modern-coastlines/FugloyWide.osm.xml.gz > /tmp/FugloyWide.osm.xml.gz; gzip -dc /tmp/FugloyWide.osm.xml.gz > /tmp/FugloyWide.osm.xml. This restores the exact retained 2026-10-02 API response; the live API URL does not reproduce that snapshot.",
+        "candidate_land_geometry": {
+          "archive_member": "modern-candidates/813316e1075f759252942cdd.wkb.gz",
+          "compressed_bytes": 40518,
+          "compressed_sha256": "4816013cb820794306bbae43006d1710b8a6222f530186d645d60d2586df76fe",
+          "uncompressed_bytes": 54789,
+          "uncompressed_sha256": "813316e1075f759252942cdd102ec628e0a88c2a18567500257fe9942b2e5bf1",
+          "mask_count": 2,
+          "mask_lineage": [
+            {
+              "kind": "closed-water-way",
+              "id": "501264110",
+              "version": "3",
+              "timestamp": "2022-03-20T15:17:05Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "501264115",
+              "version": "4",
+              "timestamp": "2026-07-27T15:18:55Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "526512376",
+              "version": "3",
+              "timestamp": "2022-03-11T20:00:07Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "609460181",
+              "version": "3",
+              "timestamp": "2022-03-05T17:25:59Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993155",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993156",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993157",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993158",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993159",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993160",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993161",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993162",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993163",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993164",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993165",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1041993166",
+              "version": "1",
+              "timestamp": "2022-03-20T16:38:21Z"
+            },
+            {
+              "kind": "closed-water-way",
+              "id": "1042600884",
+              "version": "1",
+              "timestamp": "2022-03-22T11:14:01Z"
+            }
+          ]
+        }
+      },
+      "inspected_facts": {
+        "bbox_wgs84": [
+          -6.43,
+          62.26,
+          -6.22,
+          62.4
+        ],
+        "api_raw_uncompressed_bytes": 5692258,
+        "api_raw_sha256": "722e3ff6a509393ac591e44bb7d292cfddabae756377009ded00a47a7cddb1e0",
+        "node_count": 24227,
+        "coastline_way_count": 74,
+        "closed_rings": 35,
+        "open_chains": 2,
+        "main_island_ring": {
+          "way_ids": [
+            "1370373521",
+            "940041976",
+            "1033638558",
+            "1033638537",
+            "1033638536",
+            "28788018",
+            "1041264848",
+            "1041264844",
+            "1041264846",
+            "1370373518",
+            "1370373519",
+            "1370373517",
+            "1033638544",
+            "1370373520"
+          ],
+          "area_km2": 10.99363710992782,
+          "bounds_wgs84": [
+            -6.3348582,
+            62.316417,
+            -6.2562199,
+            62.3545972
+          ],
+          "closed": true,
+          "natural_coastline_tagged_way_count": 14
+        },
+        "other_closed_rings": 34,
+        "other_ring_area_sum_km2": 0.014353194089349505,
+        "other_ring_inventory": [
+          {
+            "ring_index_in_source_review": 2,
+            "way_ids": [
+              "1340280937"
+            ],
+            "area_km2": 2.9684407399501652e-05,
+            "bounds_wgs84": [
+              -6.3940692,
+              62.2821297,
+              -6.3939496,
+              62.2821929
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 3,
+            "way_ids": [
+              "1340280936"
+            ],
+            "area_km2": 1.3166576708084903e-05,
+            "bounds_wgs84": [
+              -6.4128582,
+              62.2742984,
+              -6.4127635,
+              62.2743363
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 4,
+            "way_ids": [
+              "1340280932",
+              "1340280931"
+            ],
+            "area_km2": 0.0013223987554289633,
+            "bounds_wgs84": [
+              -6.4160431,
+              62.2729259,
+              -6.4149835,
+              62.2734743
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 5,
+            "way_ids": [
+              "1340280930"
+            ],
+            "area_km2": 6.719134650658817e-05,
+            "bounds_wgs84": [
+              -6.4162989,
+              62.2732141,
+              -6.4161168,
+              62.2733015
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 6,
+            "way_ids": [
+              "1340280926"
+            ],
+            "area_km2": 3.3544894416350875e-05,
+            "bounds_wgs84": [
+              -6.416676,
+              62.2722695,
+              -6.4164659,
+              62.2723276
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 7,
+            "way_ids": [
+              "1340280925"
+            ],
+            "area_km2": 3.669527757208562e-05,
+            "bounds_wgs84": [
+              -6.4166577,
+              62.2713549,
+              -6.4165323,
+              62.2714285
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 8,
+            "way_ids": [
+              "1340280924"
+            ],
+            "area_km2": 0.0001361219804417342,
+            "bounds_wgs84": [
+              -6.4148331,
+              62.2692562,
+              -6.4143281,
+              62.2694839
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 9,
+            "way_ids": [
+              "1340280917"
+            ],
+            "area_km2": 0.0001545425343811512,
+            "bounds_wgs84": [
+              -6.3194688,
+              62.2668251,
+              -6.319147,
+              62.2669706
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 10,
+            "way_ids": [
+              "1340280916"
+            ],
+            "area_km2": 0.00024297484202496708,
+            "bounds_wgs84": [
+              -6.3463414,
+              62.3034408,
+              -6.3459603,
+              62.303635
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 11,
+            "way_ids": [
+              "1340171315"
+            ],
+            "area_km2": 0.0002335872732095886,
+            "bounds_wgs84": [
+              -6.2546799,
+              62.3387144,
+              -6.2543257,
+              62.3388612
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 12,
+            "way_ids": [
+              "1340171314"
+            ],
+            "area_km2": 0.00011960290614701808,
+            "bounds_wgs84": [
+              -6.2550527,
+              62.3377957,
+              -6.2547802,
+              62.3379082
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 13,
+            "way_ids": [
+              "1340171313"
+            ],
+            "area_km2": 0.00011098816808569245,
+            "bounds_wgs84": [
+              -6.2551777,
+              62.3375237,
+              -6.25495,
+              62.3376291
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 14,
+            "way_ids": [
+              "1340171312"
+            ],
+            "area_km2": 6.96078012753278e-05,
+            "bounds_wgs84": [
+              -6.2555064,
+              62.3377989,
+              -6.2553094,
+              62.337885
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 15,
+            "way_ids": [
+              "1340171311"
+            ],
+            "area_km2": 0.00014665090263445745,
+            "bounds_wgs84": [
+              -6.2578214,
+              62.3335619,
+              -6.2575509,
+              62.3336878
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 16,
+            "way_ids": [
+              "1340171310"
+            ],
+            "area_km2": 6.244240998895839e-05,
+            "bounds_wgs84": [
+              -6.2757776,
+              62.328243,
+              -6.2756158,
+              62.3283487
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 17,
+            "way_ids": [
+              "1340171309"
+            ],
+            "area_km2": 0.001730472938160645,
+            "bounds_wgs84": [
+              -6.2873795,
+              62.3410372,
+              -6.2863703,
+              62.3414598
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 18,
+            "way_ids": [
+              "1340171308"
+            ],
+            "area_km2": 0.0007651087860418484,
+            "bounds_wgs84": [
+              -6.2865271,
+              62.3409597,
+              -6.2858734,
+              62.3412308
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 19,
+            "way_ids": [
+              "1340171307"
+            ],
+            "area_km2": 0.00033317316777363887,
+            "bounds_wgs84": [
+              -6.2867893,
+              62.340773,
+              -6.2863251,
+              62.3409457
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 20,
+            "way_ids": [
+              "1340171306"
+            ],
+            "area_km2": 0.00022248412896879016,
+            "bounds_wgs84": [
+              -6.287999,
+              62.3411734,
+              -6.2876854,
+              62.341345
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 21,
+            "way_ids": [
+              "1340171305"
+            ],
+            "area_km2": 0.0001985563766179839,
+            "bounds_wgs84": [
+              -6.2983029,
+              62.3474427,
+              -6.2981118,
+              62.3477227
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 22,
+            "way_ids": [
+              "1340171304"
+            ],
+            "area_km2": 0.0001383175688420888,
+            "bounds_wgs84": [
+              -6.2979432,
+              62.3481927,
+              -6.2976045,
+              62.3483537
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 23,
+            "way_ids": [
+              "1340171303"
+            ],
+            "area_km2": 0.0006645707757286728,
+            "bounds_wgs84": [
+              -6.2976971,
+              62.3483276,
+              -6.2972562,
+              62.3486651
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 24,
+            "way_ids": [
+              "1340165007"
+            ],
+            "area_km2": 0.00010298932951432652,
+            "bounds_wgs84": [
+              -6.3335221,
+              62.3418771,
+              -6.333248,
+              62.3419828
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 25,
+            "way_ids": [
+              "1340165006"
+            ],
+            "area_km2": 0.00018120764088071882,
+            "bounds_wgs84": [
+              -6.3331169,
+              62.3418828,
+              -6.332793,
+              62.3420246
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 26,
+            "way_ids": [
+              "1340165005"
+            ],
+            "area_km2": 0.0002883471633531153,
+            "bounds_wgs84": [
+              -6.3070959,
+              62.3174877,
+              -6.3067224,
+              62.317689
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 27,
+            "way_ids": [
+              "1340165004"
+            ],
+            "area_km2": 0.0011516354279601947,
+            "bounds_wgs84": [
+              -6.3092663,
+              62.3164616,
+              -6.3084454,
+              62.3168269
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 28,
+            "way_ids": [
+              "1051323012"
+            ],
+            "area_km2": 0.00027293006245000286,
+            "bounds_wgs84": [
+              -6.403399,
+              62.2804643,
+              -6.4029773,
+              62.2806446
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 29,
+            "way_ids": [
+              "1041264847"
+            ],
+            "area_km2": 0.00028099668998713605,
+            "bounds_wgs84": [
+              -6.2992041,
+              62.3526479,
+              -6.2988228,
+              62.3528173
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 30,
+            "way_ids": [
+              "1041264845"
+            ],
+            "area_km2": 0.0010465890356912279,
+            "bounds_wgs84": [
+              -6.3335143,
+              62.3436687,
+              -6.3329554,
+              62.3442409
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 31,
+            "way_ids": [
+              "1033638553"
+            ],
+            "area_km2": 0.0008281931134006008,
+            "bounds_wgs84": [
+              -6.2569125,
+              62.3397867,
+              -6.2563474,
+              62.340126
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 32,
+            "way_ids": [
+              "1033638551"
+            ],
+            "area_km2": 0.002845525596734369,
+            "bounds_wgs84": [
+              -6.2557238,
+              62.3401237,
+              -6.253579,
+              62.340696
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 33,
+            "way_ids": [
+              "1023138466"
+            ],
+            "area_km2": 0.00033713397587556394,
+            "bounds_wgs84": [
+              -6.3217344,
+              62.3186541,
+              -6.3210631,
+              62.3187878
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 34,
+            "way_ids": [
+              "1022350082"
+            ],
+            "area_km2": 0.00017937119538825937,
+            "bounds_wgs84": [
+              -6.3202073,
+              62.3183344,
+              -6.3197549,
+              62.3184573
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          },
+          {
+            "ring_index_in_source_review": 35,
+            "way_ids": [
+              "1022272137"
+            ],
+            "area_km2": 6.3910397598519925e-06,
+            "bounds_wgs84": [
+              -6.3167421,
+              62.3172032,
+              -6.3166868,
+              62.3172315
+            ],
+            "decision": "insufficient-evidence-for-named-island-association",
+            "reason": "Unlabelled detached natural=coastline ring in the finite OSM query. No named-feature/admin-boundary source establishes whether this is a Fugloy-associated skerry, another subject, or an unsuitable shoreline artifact."
+          }
+        ],
+        "open_chain_way_ids": [
+          [
+            "1340280934",
+            "1044469278",
+            "1124293804",
+            "1124417344",
+            "1052309179",
+            "1124293788",
+            "1124293789",
+            "1044469274",
+            "1044469273",
+            "1050884270",
+            "1041264850",
+            "1044469272",
+            "1124293807",
+            "1041264849",
+            "1124293806",
+            "1340280928",
+            "1340280927",
+            "1051323014",
+            "1124293805",
+            "1044469284",
+            "1124293801",
+            "1124293798"
+          ],
+          [
+            "1106036296",
+            "1044469276",
+            "1044469279"
+          ]
+        ]
+      },
+      "method": "Read the retained source review and exact XML response; counted all natural=coastline ways, closed component rings and open chains in the bounded response. Compared the proposed location source footprint with the single 10.993637 km² main-island ring. Detached rings have no name tags in the OSM ways used by this check; no nearest-point assignment or political boundary inference was made. This finite bbox is not a region-complete land census."
+    },
+    {
+      "id": "fugloyar-kommuna:fugloy-settlements",
+      "title": "Fugloyar kommuna, Fugloy page",
+      "canonical_url": "https://www.fugloy.fo/fugloy.html",
+      "retrieved_on": "2026-10-03",
+      "source_date": "No page publication/revision date displayed. Page uses undated wording “today” for small population counts; counts not treated as current evidence.",
+      "license": "No page-specific reuse license found; no page bytes or images retained.",
+      "retained_original": false,
+      "restoration": "Retrieve the current municipal page at its canonical URL; because it may change and has no displayed revision date, it cannot reproduce this retrieval. The source claim recorded here is a citation/assessment, not copied municipal text.",
+      "inspected_facts": [
+        "The municipality describes Fugloy as a municipality with two villages, Kirkja and Hattarvík.",
+        "The page links separate official municipal pages for Hattarvík and Kirkja.",
+        "No dated or legally delineated municipal boundary is supplied on the inspected page."
+      ],
+      "method": "Read the body text of the municipality-operated site page after removing navigation, script and style content. Used it to identify the municipality’s named settlement set only; did not rely on its undated population sentence as a 2026 count."
+    },
+    {
+      "id": "fugloyar-kommuna:municipal-site",
+      "title": "Fugloyar kommuna official website and contact page",
+      "canonical_url": "https://www.fugloy.fo/",
+      "retrieved_on": "2026-10-03",
+      "source_date": "No publication/revision date shown on contact content; navigation includes 2024 municipal election and 2026 budget pages.",
+      "license": "No site-wide or page-specific reuse license found; no bytes retained.",
+      "retained_original": false,
+      "restoration": "Retrieve the current municipality site. Current pages may change; use the retained citation and downloaded OSM snapshot for reproducible source bytes.",
+      "inspected_facts": [
+        "The site identifies itself as Fugloyar kommuna and lists a municipal address at Kirkja, Faroe Islands.",
+        "The navigation provides separate municipal pages for the island and both settlements."
+      ],
+      "method": "Read the current municipal website navigation and contact footer; administrative authority is direct for the municipality’s name and services, not an independent geodetic boundary dataset."
+    },
+    {
+      "id": "atlas:regional-handoffs:nordic-v5",
+      "title": "Pinned regional handoff and current hierarchy (project reference)",
+      "canonical_url": "https://github.com/ChengshuLi/WorldAtlas/blob/main/data/macro-foundation/regional-handoffs.json.gz",
+      "retrieved_on": "2026-10-03",
+      "source_date": "Release 5, v5 handoff.",
+      "license": "WorldAtlas repository license applies; referenced facts are not external source evidence.",
+      "retained_original": true,
+      "restoration": "Read the pinned main release files and verify hashes above.",
+      "inspected_facts": [
+        "Fugloy’s current parent chain is Fugloyar municipality → Føroyar → Nordic Europe → Northern Europe → Europe.",
+        "Føroyar is a partial area scope with two location members; its other member is FRO-1443 / Eysturoyar.",
+        "The Eysturoyar location source metadata is Natural Earth ADM1 fallback; its recorded overlap metrics and aliases reveal a broad, unresolved source-to-parent fit that should be handled in the regional review."
+      ],
+      "method": "Read the issue-pinned source profile and v5 region handoff; verified ids and parent_ids against the current hierarchy and world-index. Structural membership establishes current links only, not geographic semantic approval."
+    },
+    {
+      "id": "fugloyar-kommuna:settlement:hattarvik",
+      "title": "Hattarvík village page",
+      "canonical_url": "https://www.fugloy.fo/hattarviacutek.html",
+      "retrieved_on": "2026-10-03",
+      "source_date": "No publication/revision date shown.",
+      "license": "No page-specific reuse license found; no bytes or images copied.",
+      "retained_original": false,
+      "restoration": "Retrieve the current page from the municipal site; the undated current page cannot reproduce this retrieval.",
+      "inspected_facts": [
+        "The municipality lists this as a separate village page beneath the Fugloy municipal/island information."
+      ],
+      "method": "Used only as corroboration that the municipality treats the named settlement as a separate village; no dated population count or historic status inferred."
+    },
+    {
+      "id": "fugloyar-kommuna:settlement:kirkja",
+      "title": "Kirkja village page",
+      "canonical_url": "https://www.fugloy.fo/kirkja.html",
+      "retrieved_on": "2026-10-03",
+      "source_date": "No publication/revision date shown.",
+      "license": "No page-specific reuse license found; no bytes or images copied.",
+      "retained_original": false,
+      "restoration": "Retrieve the current page from the municipal site; the undated current page cannot reproduce this retrieval.",
+      "inspected_facts": [
+        "The municipality lists this as a separate village page beneath the Fugloy municipal/island information."
+      ],
+      "method": "Used only as corroboration that the municipality treats the named settlement as a separate village; no dated population count or historic status inferred."
+    }
+  ],
+  "subject_assessments": [
+    {
+      "location_id": "atlas:restoration:location:fugloy",
+      "name": "Fugloy",
+      "role": "One location for the named main island of Fugloy at the source’s comparison floor. Do not split its 14-way coastline ring into one location per source way or village. This review makes no determination that all 34 detached rings are part of this named territorial subject.",
+      "accounting": {
+        "assigned_location_count": 1,
+        "assessed_location_count": 1,
+        "province_count": 1,
+        "area_scope_member_count": 1,
+        "full_area_location_count": 2,
+        "mainland_or_remote_island": "remote island",
+        "primary_coastline_way_count": 14,
+        "main_ring_km2": 10.99363710992782,
+        "other_closed_coastline_rings_in_bbox": 34,
+        "other_closed_ring_total_km2": 0.014353194089349505,
+        "unclosed_coastline_chains": 2,
+        "settlements_named_by_authoritative_municipality": 2,
+        "administrative_remainder": "No named remainder is identified; exact outer boundary and any outlying islet assignment cannot be tested without a municipal boundary source."
+      },
+      "assessment": "The retained snapshot supports one contiguous named island ring made from 14 coastline ways, about 10.994 km² in the source review. The municipality itself names one remote island municipality and two villages. This supports one island location and argues against splitting settlements or coastline segments into locations. The source profile’s “whole-island dry-land source” is a role hint, not a certified complete coastline. A finite API bbox also returns 34 detached, unlabelled closed rings totaling about 0.01435 km² and two open chains; they may be skerries or other neighboring land, but their association, exposure threshold and municipal assignment are not independently sourced. Treat them as explicit coverage gaps, not as automatically included or as new locations. No added or clipped geometry is proposed.",
+      "settlement_assessment": "The municipality explicitly names Kirkja and Hattarvík as its two villages. Its page’s “today” population figures are undated and excluded from present-day counts. The OSM coastline ways describe physical shorelines, not settlements. No evidence here supports settlement exclusion through time; historical habitation is outside scope.",
+      "administrative_role": "The named local government supplies a plausible one-island municipality purpose for the province tier. The retained province has one child location and is marked as a coextensive exception. No official boundary polygon was located in the inspected municipal material, so exact coextensivity of its legal territory with the main island-only footprint (including rocks and islets) is insufficiently evidenced. Retain this as a sourced proposal subject to later boundary data; do not treat one-child counts as proof.",
+      "parent_chain_assessment": {
+        "chain": [
+          {
+            "id": "atlas:restoration:province:fugloyar-municipality",
+            "name": "Fugloyar municipality",
+            "level": "province",
+            "role": "Administrative island-municipality group supported by the municipality website; exact legal boundary and offshore-islet relation unverified."
+          },
+          {
+            "id": "framework:area:froyar:04fca3ca6320",
+            "name": "Føroyar",
+            "level": "area",
+            "role": "WGSRPD/TDWG geographic botanical area for the Faroe archipelago; this packet owns only Fugloy. Full area has a second member, FRO-1443/Eysturoyar, whose source-to-geographic-role fit and inclusion across the archipelago require regional integration review."
+          },
+          {
+            "id": "framework:region:nordic-europe:830e13d9350b",
+            "name": "Nordic Europe",
+            "level": "region",
+            "role": "Approved fixed macro reporting group for Nordic and North Atlantic/Arctic islands; this packet supplies no evidence to alter its frozen envelope."
+          },
+          {
+            "id": "framework:subcontinent:northern-europe:de794fa8b517",
+            "name": "Northern Europe",
+            "level": "subcontinent",
+            "role": "Retain published macro parent; no source supports parent change."
+          },
+          {
+            "id": "framework:continent:europe:d247cf0382c8",
+            "name": "Europe",
+            "level": "continent",
+            "role": "Retain published macro parent; Faroe routing is geographic/archipelago association, not Danish or other political ownership."
+          }
+        ],
+        "completeness": "All five declared ancestors and the one assigned location were checked against v5 pins. The area is only partially owned (1 of 2 locations); no approval of its sibling or the Nordic Europe branch is implied."
+      },
+      "neighbor_context": "No inter-region inconsistency is evidenced in this one-location review. The retained source query includes many additional islands/islets and two incomplete shoreline chains in the wider bbox, but names and regional membership for these fragments are not inferred. The area sibling FRO-1443/Eysturoyar has a broad source shape that appears to encompass much of the archipelago despite its name; this is an intra-region source/role question for the existing Nordic Europe review (#332), not authorization to move or relabel any shared unit.",
+      "recommended_treatment": "Provisional retain one named Fugloy location and the one-island municipality province as sourced representations; do not change geometry or shared parents. Keep the 34 detached rings, two open chains and exact province coextensivity unresolved until an official higher-resolution shoreline/islet and municipal-boundary source or matching independent hydrographic dataset is obtained."
+    }
+  ],
+  "neighboring_scope": {
+    "partial_parent": "framework:area:froyar:04fca3ca6320",
+    "owned_member_count": 1,
+    "full_member_count": 2,
+    "sibling_location_id": "FRO-1443",
+    "sibling_name": "Eysturoyar",
+    "sibling_source": "Natural Earth ADM1 fallback, undated, public domain",
+    "recorded_framework_overlap": 0.970022,
+    "recorded_area_overlap": 0.6256,
+    "interpretation": "These source metadata overlap values do not establish coastline accuracy or prove each location’s legal/physical extent. Request that issue #332 account for the two full area members together and the relevant outlying islets; do not alter this shared area or neighboring province in this packet."
+  },
+  "political_and_historical_separation": {
+    "political_owner": null,
+    "owner_assignment": "No owner inferred from macro membership or Danish polity metadata. Municipal administrative scope is evidence of local-government role only.",
+    "historical_attributes_transferred": false,
+    "historical_attributes_claimed": false,
+    "modern_source_dates_are_not_historical_intervals": true
+  },
+  "unresolved_findings": [
+    "The 34 unlabelled detached OSM closed rings (0.014353 km² combined) and two open chains have no verified physical association to Fugloy or its legal municipality; source completeness and tidal exposure are not established.",
+    "The official municipal pages inspected do not provide a dated legal boundary polygon; exact province-location coextensivity, especially offshore islets, remains insufficiently evidenced.",
+    "OSM source edit timestamps are not a shoreline observation date; no independent national hydrographic coastline/datum dataset was reconciled to the 2026-10-02 map response.",
+    "The second Føroyar area member FRO-1443/Eysturoyar has an unresolved broad source-to-parent fit; coordinate joint review of the full partial area under Nordic Europe issue #332.",
+    "Regional interior review remains open; this packet does not certify the area, region, grid, regional envelope or location-attribute import readiness."
+  ],
+  "bounded_follow_up_recommendation": {
+    "existing_issue": 332,
+    "request": "At Nordic Europe area review, assess Føroyar as one complete two-location grouping, source and bound the Eysturoyar feature against all Faroe islands, and obtain official municipal/islet coastline data to resolve Fugloy’s 34 detached rings and two open chains. Preserve both existing IDs and the release-5 envelope; any shared-parent or cross-region change requires a coordinated neighboring-scope task."
+  },
+  "decision": "Insufficient evidence for a conclusive whole-municipality shoreline/islet footprint and for the detached rings’ subject association. Current sourced one-location named main-island representation and administrative purpose are plausible and provisionally retained; no geographic correction or ownership conclusion. Review packet completion is not regional approval."
+}
