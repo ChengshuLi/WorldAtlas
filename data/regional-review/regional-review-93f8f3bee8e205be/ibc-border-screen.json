@@ -1,0 +1,105 @@
+{
+  "source": "International Boundary Commission US–Canada boundary shapefile v1.3 (2018-04-20), official digital boundary page; NAD83 EPSG:4269, reprojected temporarily to Alaska Albers EPSG:3338. The IBC page and embedded metadata say mapping use only; do not use to define the boundary.",
+  "source_feature_count": 30,
+  "alaska_segments": [
+    {
+      "section_num": 28,
+      "section_name": "Southeast Alaska",
+      "max_scale": "1:250,000",
+      "length_km_epsg3338": 1143.124,
+      "within_m_of_reference_boundary_pct": {
+        "2018_USA_ADM1_Alaska": {
+          "25": 81.57864,
+          "100": 90.16262,
+          "250": 96.20556,
+          "500": 99.87756,
+          "1000": 100.0
+        },
+        "2018_USA_ADM2_county_union": {
+          "25": 78.21721,
+          "100": 89.14258,
+          "250": 96.15041,
+          "500": 99.87756,
+          "1000": 100.0
+        },
+        "current_assigned_location_union": {
+          "25": 55.04244,
+          "100": 73.27365,
+          "250": 90.65691,
+          "500": 99.70432,
+          "1000": 100.0
+        }
+      },
+      "interpretation": "The official IBC v1.3 segment is a mapping representation with source-declared scale limits; proximity screens are not a legal boundary determination."
+    },
+    {
+      "section_num": 29,
+      "section_name": "141st Meridian (YK/AK)",
+      "max_scale": "1:62,500",
+      "length_km_epsg3338": 1039.529,
+      "within_m_of_reference_boundary_pct": {
+        "2018_USA_ADM1_Alaska": {
+          "25": 63.69583,
+          "100": 100.0,
+          "250": 100.0,
+          "500": 100.0,
+          "1000": 100.0
+        },
+        "2018_USA_ADM2_county_union": {
+          "25": 6.11002,
+          "100": 94.6909,
+          "250": 100.0,
+          "500": 100.0,
+          "1000": 100.0
+        },
+        "current_assigned_location_union": {
+          "25": 4.49056,
+          "100": 47.19731,
+          "250": 100.0,
+          "500": 100.0,
+          "1000": 100.0
+        }
+      },
+      "interpretation": "The official IBC v1.3 segment is a mapping representation with source-declared scale limits; proximity screens are not a legal boundary determination."
+    },
+    {
+      "section_num": 27,
+      "section_name": "Portland Canal",
+      "max_scale": "1:250,000",
+      "length_km_epsg3338": 157.564,
+      "within_m_of_reference_boundary_pct": {
+        "2018_USA_ADM1_Alaska": {
+          "25": 91.76212,
+          "100": 97.64735,
+          "250": 97.7579,
+          "500": 97.93991,
+          "1000": 98.39013
+        },
+        "2018_USA_ADM2_county_union": {
+          "25": 88.51392,
+          "100": 97.24662,
+          "250": 97.34373,
+          "500": 97.50558,
+          "1000": 97.91433
+        },
+        "current_assigned_location_union": {
+          "25": 86.20064,
+          "100": 97.24536,
+          "250": 97.34065,
+          "500": 97.49946,
+          "1000": 97.86405
+        }
+      },
+      "interpretation": "The official IBC v1.3 segment is a mapping representation with source-declared scale limits; proximity screens are not a legal boundary determination."
+    }
+  ],
+  "aggregate_selected_segment_length_km": 2340.218,
+  "scope_source_predecessor_count": 29,
+  "method": "Buffer the pinned official Alaska-related IBC section lines by 25, 100, 250, 500 and 1,000 m and measure line fraction inside each buffered boundary of the pinned 2018 ADM1 Alaska polygon, assigned 2018 ADM2 county union, and current assigned Alaska-location union. Temporary projected geometries only.",
+  "limitations": [
+    "The IBC source contains both Canada and U.S. metadata with a conflicting 29-vs-30 segment count; the retained Shapefile has 30 features.",
+    "IBC metadata describes sections and map scales; it expressly says the line is for mapping, generated from recent surveys and datum conversions, and is not intended to define the boundary beyond the segment scale.",
+    "Buffer proximity does not prove same line, ownership, legal delimitation, or a basis for changing released geography.",
+    "No official Canadian territorial polygon was separately compared here; coordinate with the Canadian-side packet/integrator before any correction proposal."
+  ]
+}
