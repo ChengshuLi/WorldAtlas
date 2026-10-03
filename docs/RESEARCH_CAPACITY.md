@@ -2,6 +2,14 @@
 
 Research contributors add supported evidence through the stable content contract. Technical maintainers own schema changes, imports tooling, website/UI behavior, media transport, publication, performance and storage growth. Luna should not be asked to implement those systems while researching history. Read `docs/LUNA_DATA_HANDOFF.md` for factual import policy and `docs/HANDOFF_STATUS.md` for preserved products and explicitly open geography.
 
+## Published storage and research gate — 3 October 2026 Pacific
+
+Production uses Neon PostgreSQL for indexed facts, R2 for retained source/media objects, and the owner-private Sites website/API for delivery. D1 remains a preserved migration/rollback baseline; it is not the selected production content backend. The verified cutover is recorded in [neon-final-publication.json](../data/validation/neon-final-publication.json), with original row/sequence preservation in [the production migration](../data/validation/neon-production-storage-migration.json) and [forward migrations](../data/validation/neon-production-forward-migrations.json). These are dated receipts, not fixed expectations for today's revision, counts or database size. No baseline transfer needs to be rerun.
+
+[Provider capacity](PROVIDER_CAPACITY.md) links the 3 October account/project readbacks and measured use. Configured settings, application guards, physical database bytes, logical branch limits and public pricing have different meanings. Account-plan/monthly allowances and R2 billing/storage-class facts remain unverified where access is unavailable. Sites package limits constrain website assets separately.
+
+The published transport supports immutable, bounded imports and 23-table factual export. Transport availability does not approve historical location-attribute imports: the global macro partition is approved/published, but no complete regional branch certificate currently permits them. Follow [the top-down workflow](TOP_DOWN_GEOGRAPHY_WORKFLOW.md), [research readiness](GEOGRAPHY_RESEARCH_READINESS.md) and the current GitHub dependencies. Source-only staging and dry runs may continue.
+
 ## Discover existing identities
 
 The bounded catalogs return complete stored rows, including parsed metadata:
@@ -28,15 +36,17 @@ Each catalog/graph page brackets its read with the ingestion revision. A concurr
 
 ## Measure capacity independently of website assets
 
-`GET /api/storage/capacity` is an administrative diagnostic. It counts the actual hosted tables, reports registered media objects/bytes and measures database bytes through D1 query metadata (`size_after`) when available. SQLite previews fall back to `page_count × page_size`. If the managed service supplies neither measurement, bytes remain null; row counts are not converted into invented storage estimates.
+`GET /api/storage/capacity` is an administrative diagnostic. It reports counts for the original fourteen hosted collections and registered media objects/bytes. The production PostgreSQL adapter measures database bytes with `pg_database_size(current_database())` (`postgres-pg-database-size`). Legacy D1 uses query metadata (`size_after`) when available; SQLite previews fall back to `page_count × page_size`. The diagnostic counts are not a complete 23-table backup inventory; use the separate [v2 export contract](STORAGE_EXPORT_V2.md) for that scope. If the managed service supplies neither measurement, bytes remain null; row counts are not converted into invented storage estimates.
 
 These measurements include database pages/indexes when the service reports them. They exclude prepared historical ownership/environmental products and canonical map/grid assets. Registered media bytes are metadata totals, not an exhaustive proof that every object exists: source/media read-back checks separately verify lengths and digests. The diagnostic may scan large tables, so it must not run on every map navigation.
 
 Technical maintainers may configure an operational database budget in bytes through `ATLAS_DATABASE_BUDGET_BYTES`. This is an internal planning budget, **not a verified hosting quota**. The response identifies whether a measured database is below, approaching (80% by default), or at/above that budget. Without a valid configured budget and measured size, status remains unknown. Invalid budget configuration must not be silently interpreted as a provider capacity guarantee.
 
-The deployed storage implementation is one D1 database plus one R2 bucket. Backend partitioning is not deployed merely because stable APIs permit a later implementation. The existing bounded media upload accepts at most 20 MiB per object; this application cap is separate from R2 platform object limits. Streaming/multipart transport and more database capacity remain technical maintainer responsibilities when needed.
+The selected production backend reports `postgres-plus-r2`. The preserved D1 path reports `single-d1-plus-r2`; this is a compatibility/rollback path, not evidence that production still uses D1. Backend partitioning is not deployed merely because stable APIs permit a later implementation. The existing bounded media upload accepts at most 20 MiB per object; this application cap is separate from R2 platform object limits. Streaming/multipart transport and more database capacity remain technical maintainer responsibilities when needed.
 
-## Platform references and what they do not prove
+## Retained pre-Neon provider references
+
+The following public Cloudflare limits are retained from the D1-era capacity guidance, before the verified 2 October 2026 Neon cutover. They describe the former provider path, not current Neon quotas or an inspected account plan. Recheck official terms before using that path:
 
 Cloudflare's public documentation states:
 
@@ -51,7 +61,7 @@ Cloudflare's public documentation states:
 | Maximum row/string/BLOB size | 2,000,000 bytes | 2,000,000 bytes |
 | Worker isolate memory | 128 MB | 128 MB |
 
-R2 specifies no aggregate bucket storage/object count limit, but limits individual objects to approximately 4.995 TiB. Multipart and inbound Worker request limits still apply. These public provider limits do not establish which plan/quota the Site-managed account actually has. The API therefore marks the managed plan and provider quota as unverified.
+R2 specifies no aggregate bucket storage/object count limit, but limits individual objects to approximately 4.995 TiB. Multipart and inbound Worker request limits still apply. These public provider limits do not establish which plan/quota the Site-managed account actually has. The capacity API therefore marks the managed plan and provider quota as unverified. Separately inspected project settings and account-access gaps are recorded in [PROVIDER_CAPACITY.md](PROVIDER_CAPACITY.md); do not turn public terms into account proof.
 
 Sources: [D1 limits](https://developers.cloudflare.com/d1/platform/limits/), [D1 query return metadata](https://developers.cloudflare.com/d1/worker-api/return-object/), [R2 limits](https://developers.cloudflare.com/r2/platform/limits/), [Workers limits](https://developers.cloudflare.com/workers/platform/limits/). Their official public documentation source is maintained in [cloudflare/cloudflare-docs](https://github.com/cloudflare/cloudflare-docs/tree/production/src/content/docs). Platform limits can change; technical maintainers must recheck them before capacity planning or provisioning.
 
@@ -67,10 +77,10 @@ Before large-scale expansion, technical maintainers measure representative row/i
 
 If measured indexed evidence outgrows the managed database, implement backend partitioning or a separately provisioned query service behind that contract. Preserve original claim IDs, intervals, source digests, correction history and ingestion idempotency. R2 archives alone do not provide indexed historical queries. A capacity warning must trigger maintainer work, not require Luna to rewrite the schema, UI or deployment.
 
-Separately managed PostgreSQL or additional database accounts need verified provider configuration and access. This repository does not pretend those services are provisioned. The current discovery, paging and measurement interfaces let Luna research and import supported batches now while technical maintainers retain ownership of that growth work.
+Neon PostgreSQL is already provisioned and bound to the private API; [NEON_SETUP.md](NEON_SETUP.md) records that verification. Additional accounts, partitioning or different providers still need reviewed configuration and access. The discovery, paging and measurement interfaces support research preparation now; imports remain subject to the geographic gate and capacity review. Technical maintainers own growth work.
 
 ## Validation
 
 `node --test test/research-catalog.test.mjs` uses the actual frozen migrations and import service. It exhausts catalogs, relationships and media with more than 250 results; tests both relationship directions, supported interval boundaries, examples, withdrawals, pending blobs, source metadata, immutable identities, revision races, measured capacity and unavailable service measurements. The module does not modify stored evidence or migrations.
 
-The long-term storage recommendation is managed PostgreSQL plus object storage, retaining the private Site and stable research API. See `docs/LONG_TERM_STORAGE_PLAN.md` for the measured migration and provisioning gates. PostgreSQL is not yet provisioned; this engineering work remains with the technical maintainer, not Luna.
+The accepted managed PostgreSQL plus object-storage architecture is deployed, retaining the private Site and stable research API. See [LONG_TERM_STORAGE_PLAN.md](LONG_TERM_STORAGE_PLAN.md) for the preserved cutover and future migration/measurement rules. Current recovery proof and growth measurements remain separate engineering work; do not assign infrastructure changes to Luna.
