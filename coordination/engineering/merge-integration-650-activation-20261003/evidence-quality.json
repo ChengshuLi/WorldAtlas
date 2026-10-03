@@ -74,6 +74,18 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/asset-shard-correction.json",
+      "bytes": 960,
+      "sha256": "255c7edc76ac455df2cb30ef19fbaeaa77a59af807f0da058a02fcf2aafa79c0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/asset-shard-focused.tap",
+      "bytes": 8931,
+      "sha256": "ba970d5bc544588263f02d2e49067c291761bde298bd210a8fd0f4487e726e4c",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/merge-integration-650-activation-20261003/focused-tests.tap",
       "bytes": 8579,
       "sha256": "741c43b039f2f9974d792ab3c1dc35205cbc61b13cddb58dba98d946e3c3476e",
@@ -128,9 +140,15 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/skipped-parity-shard.log.gz",
+      "bytes": 19267,
+      "sha256": "cffb39640345ef62c9b28a0cb5af4bd07360e4e9ea25caf8e0375d9f1984802a",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "scripts/run-integration-tests.mjs",
-      "bytes": 2030,
-      "sha256": "9690ebe6d0e2e57bdb0511e3883301aac92b1f4b565ea02f1bdffd474d5bcdc1",
+      "bytes": 2604,
+      "sha256": "cee83f95838d631c52a19dec9b84e9de3cd1e23f1dbcf698da8479791705b9fe",
       "hash_kind": "file-bytes"
     },
     {
@@ -143,6 +161,12 @@
       "path": "test/merge-integration-entrypoint.test.mjs",
       "bytes": 3007,
       "sha256": "42147257046a42ac5c9db72750a32b49f636213fa808dc012b44d4b6be4a6ba0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 10824,
+      "sha256": "954090cb65cb6e346fb4b2fd07449dbf3ccc2139bbd0fa3c66601e086ccba036",
       "hash_kind": "file-bytes"
     }
   ],
@@ -179,6 +203,14 @@
     },
     {
       "path": "coordination/engineering/merge-integration-650-activation-20261003/activation-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/asset-shard-correction.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/asset-shard-focused.tap",
       "status": "added"
     },
     {
@@ -222,6 +254,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/skipped-parity-shard.log.gz",
+      "status": "added"
+    },
+    {
       "path": "scripts/run-integration-tests.mjs",
       "status": "modified",
       "original_sha256": "88323a6b7e57d3fb5d3e5721c0ad4847e199b46d9ec3ee612e0323785f4472d1"
@@ -234,6 +270,11 @@
     {
       "path": "test/merge-integration-entrypoint.test.mjs",
       "status": "added"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "d70252d7a707738a655405e0f30c7df6464fe988fdb1b3dc97b6512da2e57ea2"
     }
   ],
   "metric_bindings": []
