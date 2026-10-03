@@ -1,3 +1,4 @@
+import {categoryPalette} from './category-palette.js';
 export const levels = ['location', 'province', 'area', 'region', 'subcontinent', 'continent'];
 export const attributes = ['owner', 'population', 'culture', 'religion', 'rank', 'topography', 'vegetation', 'climate'];
 export const ranks = ['unsettled', 'rural settlement', 'town', 'city', 'metropolis'];
@@ -24,6 +25,16 @@ export const formatYear = year => `${Math.abs(year).toLocaleString('en-US')} ${y
 export const yearToTick = year => year < 0 ? year + 3000 : year + 2999;
 export const tickToYear = tick => tick < 3000 ? tick - 3000 : tick - 2999;
 export function categoryColor(value) {
+  if (value == null) return '#53615c';
+  if (Object.hasOwn(categoryPalette,value)) return categoryPalette[value];
+  // New/hosted-only display keys retain deterministic identity colors until the
+  // offline pinned adjacency audit is refreshed; no contrast guarantee is implied.
+  if (String(value).startsWith('[')) {
+    try {const pair=JSON.parse(value);if(Array.isArray(pair)&&pair.length===2&&typeof pair[0]==='string')value=pair[0];} catch {}
+  }
+  return legacyCategoryColor(value);
+}
+export function legacyCategoryColor(value) {
   if (value == null) return '#53615c';
   let hash = 2166136261;
   for (const char of String(value)) hash = Math.imul(hash ^ char.charCodeAt(0), 16777619);
