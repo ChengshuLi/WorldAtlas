@@ -1,0 +1,55 @@
+{
+  "method": "OGR EPSG:6933. For aggregate-only diagnostics, invalid clones were normalized with MakeValid before union; no published geometry was changed. Each union contains only the 2020 source or current features for the assigned municipalities. It does not prove external department-envelope coverage or lack of omitted physical land.",
+  "departments": [
+    {
+      "department": "Boyac\u00e1",
+      "locations": 123,
+      "current_union_area_km2": 6837.694272118989,
+      "source_union_area_km2": 6839.515609517068,
+      "relative_area_delta": -0.00026629625576766856,
+      "union_symmetric_difference_fraction": 0.009026922066038803,
+      "invalid_current_inputs_made_valid_for_union": 0,
+      "invalid_source_inputs_made_valid_for_union": 0
+    },
+    {
+      "department": "Santander",
+      "locations": 87,
+      "current_union_area_km2": 8850.916707841161,
+      "source_union_area_km2": 8852.301989203192,
+      "relative_area_delta": -0.00015648826302125743,
+      "union_symmetric_difference_fraction": 0.004799684380195183,
+      "invalid_current_inputs_made_valid_for_union": 0,
+      "invalid_source_inputs_made_valid_for_union": 0
+    },
+    {
+      "department": "Meta",
+      "locations": 29,
+      "current_union_area_km2": 25399.2148595183,
+      "source_union_area_km2": 25398.84713318884,
+      "relative_area_delta": 1.4478071683010906e-05,
+      "union_symmetric_difference_fraction": 0.002561112672241437,
+      "invalid_current_inputs_made_valid_for_union": 0,
+      "invalid_source_inputs_made_valid_for_union": 0
+    },
+    {
+      "department": "Cesar",
+      "locations": 25,
+      "current_union_area_km2": 6555.444436272892,
+      "source_union_area_km2": 6569.101046082713,
+      "relative_area_delta": -0.002078916082127377,
+      "union_symmetric_difference_fraction": 0.007656213727846144,
+      "invalid_current_inputs_made_valid_for_union": 2,
+      "invalid_source_inputs_made_valid_for_union": 0
+    },
+    {
+      "department": "Bogota Capital District",
+      "locations": 1,
+      "current_union_area_km2": 449.722917332751,
+      "source_union_area_km2": 449.1630523094824,
+      "relative_area_delta": 0.0012464627720155436,
+      "union_symmetric_difference_fraction": 0.025809273304798448,
+      "invalid_current_inputs_made_valid_for_union": 0,
+      "invalid_source_inputs_made_valid_for_union": 0
+    }
+  ]
+}
