@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "lgact-1888-counties-20261003-17b9097b1cdd",
+  "branch": "research/lgact-1888-counties-20261003-17b9097b1cdd",
+  "base_main_commit": "99175aa",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/68",
+  "date_timezone": "America/Los_Angeles",
+  "scope": {
+    "geographies": [
+      "Lancashire and Yorkshire county-related legal units explicitly named in the enacted Act and Third Schedule"
+    ],
+    "attributes": [
+      "dated_membership and existence source evaluation only"
+    ],
+    "supported_from": "1888 enactment and source-stated/default commencement mechanism only; no location claim interval",
+    "supported_to": "No annual or later interval asserted",
+    "sources": [
+      "Local Government Act 1888, 51 & 52 Vict. c.41, official as-enacted XML and schedules"
+    ]
+  },
+  "updated_at_utc": "2026-10-03T08:47:51+00:00",
+  "geographic_release": null,
+  "input_paths": [
+    "research/campaigns/lgact-1888-counties-20261003-17b9097b1cdd/source-manifest.json",
+    "research/campaigns/lgact-1888-counties-20261003-17b9097b1cdd/source-evaluation.md"
+  ],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Recorded the exact official enacted XML response URL, byte count, and SHA-256; verified the source page's OGL v3.0 notice and separately hashed that version page.",
+    "Evaluated 13 Act/schedule extracts concerning Lancashire, Yorkshire, legal unit distinctions, commencement and transitions, below the 15-extract cap.",
+    "Identified 1888-08-13 enactment, 1889-04-01 default appointed day by the statutory formula, immediate-effect exception, and Board power for county/provision-specific alternatives.",
+    "Separated county borough treatment, Yorkshire riding units/joint functions, and Lancashire special-rate preservation; created no geography or memberships."
+  ],
+  "source_gaps": [
+    "No Local Government Board order confirming or varying appointed days for Lancashire or Yorkshire was searched or verified.",
+    "The enacted XML is the official online transcription, not a scan of the 1888 printed King's Printer copy.",
+    "The Third Schedule does not identify which named borough met the population threshold versus the \u201ccounty of itself\u201d criterion."
+  ],
+  "blockers": [],
+  "next_action": "Check latest main and CI, submit PR #556 to the serialized merge queue, verify the request-matched Merge result, then release claim 68.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/556",
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
