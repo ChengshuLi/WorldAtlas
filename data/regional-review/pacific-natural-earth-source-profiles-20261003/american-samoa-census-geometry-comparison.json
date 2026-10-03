@@ -1,0 +1,151 @@
+{
+  "baseline_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+  "method": {
+    "crs": "EPSG:6933",
+    "note": "2020 Census map states its boundaries support census collection/tabulation and do not determine jurisdiction/ownership. TIGER polygons include extensive water. Whole-area overlaps are descriptive only and must not be interpreted as administrative boundary accuracy.",
+    "source": "2020 TIGER/Line county-subdivision polygons"
+  },
+  "units": [
+    {
+      "area_comparability_limit": "These Census polygons include extensive statistical water and are not comparable with land-only or different-water-scope naturalearth polygons by whole area; percentages are descriptive diagnostics only, not boundary match weights.",
+      "census_county_subdivision_count": 5,
+      "census_county_subdivision_names": [
+        "Ituau",
+        "Ma'oputasi",
+        "Sa'ole",
+        "Sua",
+        "Vaifanua"
+      ],
+      "census_geometry_union_available": true,
+      "census_name": "Eastern District",
+      "countyfp": "010",
+      "exploratory_current_vs_census_union": {
+        "census_union_area_in_feature_pct": 20.16766632,
+        "census_union_area_km2": 414.84932898,
+        "feature_area_in_census_union_pct": 99.99988427,
+        "feature_area_km2": 83.66552523,
+        "sym_difference_pct_of_feature": 395.84284747
+      },
+      "exploratory_ne_vs_census_union": {
+        "census_union_area_in_feature_pct": 13.09909515,
+        "census_union_area_km2": 414.84932898,
+        "feature_area_in_census_union_pct": 100.0,
+        "feature_area_km2": 54.34150832,
+        "sym_difference_pct_of_feature": 663.41150959
+      },
+      "location_id": "ASM-4998",
+      "scope_gap": "The TIGER 2020 COUSUB inventory contains 14 statutory county records plus Swains Island but no Rose Island/Atoll COUSUB record. Rose Island is mapped in the Census GARM as a county-equivalent island; no authoritative digital census county outline was retained for it."
+    },
+    {
+      "area_comparability_limit": "These Census polygons include extensive statistical water and are not comparable with land-only or different-water-scope naturalearth polygons by whole area; percentages are descriptive diagnostics only, not boundary match weights.",
+      "census_county_subdivision_count": 5,
+      "census_county_subdivision_names": [
+        "Faleasao",
+        "Fitiuta",
+        "Ofu",
+        "Olosega",
+        "Ta'u"
+      ],
+      "census_geometry_union_available": true,
+      "census_name": "Manu'a District",
+      "countyfp": "020",
+      "exploratory_current_vs_census_union": {
+        "census_union_area_in_feature_pct": 15.80029429,
+        "census_union_area_km2": 521.85901684,
+        "feature_area_in_census_union_pct": 100.0,
+        "feature_area_km2": 82.45526046,
+        "sym_difference_pct_of_feature": 532.8996039
+      },
+      "exploratory_ne_vs_census_union": {
+        "census_union_area_in_feature_pct": 8.80844496,
+        "census_union_area_km2": 521.85901684,
+        "feature_area_in_census_union_pct": 100.0,
+        "feature_area_km2": 45.96766425,
+        "sym_difference_pct_of_feature": 1035.27416567
+      },
+      "location_id": "ASM-4999",
+      "scope_gap": "The TIGER 2020 COUSUB inventory contains 14 statutory county records plus Swains Island but no Rose Island/Atoll COUSUB record. Rose Island is mapped in the Census GARM as a county-equivalent island; no authoritative digital census county outline was retained for it."
+    },
+    {
+      "area_comparability_limit": "These Census polygons include extensive statistical water and are not comparable with land-only or different-water-scope naturalearth polygons by whole area; percentages are descriptive diagnostics only, not boundary match weights.",
+      "census_county_subdivision_count": 1,
+      "census_county_subdivision_names": [
+        "Rose Island"
+      ],
+      "census_geometry_union_available": true,
+      "census_name": "Rose Island",
+      "countyfp": "030",
+      "exploratory_current_vs_census_union": {
+        "census_union_area_in_feature_pct": 2.94979248,
+        "census_union_area_km2": 147.46604983,
+        "feature_area_in_census_union_pct": 100.0,
+        "feature_area_km2": 4.34994245,
+        "sym_difference_pct_of_feature": 3290.06898763
+      },
+      "exploratory_ne_vs_census_union": {
+        "census_union_area_in_feature_pct": 0.69012563,
+        "census_union_area_km2": 147.46604983,
+        "feature_area_in_census_union_pct": 100.0,
+        "feature_area_km2": 1.01770101,
+        "sym_difference_pct_of_feature": 14390.11534739
+      },
+      "location_id": "ASM-5000",
+      "scope_gap": "The TIGER 2020 COUSUB inventory contains 14 statutory county records plus Swains Island but no Rose Island/Atoll COUSUB record. Rose Island is mapped in the Census GARM as a county-equivalent island; no authoritative digital census county outline was retained for it."
+    },
+    {
+      "area_comparability_limit": "These Census polygons include extensive statistical water and are not comparable with land-only or different-water-scope naturalearth polygons by whole area; percentages are descriptive diagnostics only, not boundary match weights.",
+      "census_county_subdivision_count": 1,
+      "census_county_subdivision_names": [
+        "Swains Island"
+      ],
+      "census_geometry_union_available": true,
+      "census_name": "Swains Island",
+      "countyfp": "040",
+      "exploratory_current_vs_census_union": {
+        "census_union_area_in_feature_pct": 2.12291873,
+        "census_union_area_km2": 151.60337722,
+        "feature_area_in_census_union_pct": 100.0,
+        "feature_area_km2": 3.21841649,
+        "sym_difference_pct_of_feature": 4610.4959134
+      },
+      "exploratory_ne_vs_census_union": {
+        "census_union_area_in_feature_pct": 1.23118884,
+        "census_union_area_km2": 151.60337722,
+        "feature_area_in_census_union_pct": 100.0,
+        "feature_area_km2": 1.86652386,
+        "sym_difference_pct_of_feature": 8022.23088174
+      },
+      "location_id": "ASM-5001",
+      "scope_gap": "The TIGER 2020 COUSUB inventory contains 14 statutory county records plus Swains Island but no Rose Island/Atoll COUSUB record. Rose Island is mapped in the Census GARM as a county-equivalent island; no authoritative digital census county outline was retained for it."
+    },
+    {
+      "area_comparability_limit": "These Census polygons include extensive statistical water and are not comparable with land-only or different-water-scope naturalearth polygons by whole area; percentages are descriptive diagnostics only, not boundary match weights.",
+      "census_county_subdivision_count": 4,
+      "census_county_subdivision_names": [
+        "Lealataua",
+        "Leasina",
+        "Tualatai",
+        "Tualauta"
+      ],
+      "census_geometry_union_available": true,
+      "census_name": "Western District",
+      "countyfp": "050",
+      "exploratory_current_vs_census_union": {
+        "census_union_area_in_feature_pct": 31.55159408,
+        "census_union_area_km2": 269.22529377,
+        "feature_area_in_census_union_pct": 93.52305539,
+        "feature_area_km2": 90.82773387,
+        "sym_difference_pct_of_feature": 209.36698058
+      },
+      "exploratory_ne_vs_census_union": {
+        "census_union_area_in_feature_pct": 26.28226017,
+        "census_union_area_km2": 269.22529377,
+        "feature_area_in_census_union_pct": 91.76178833,
+        "feature_area_km2": 77.11106489,
+        "sym_difference_pct_of_feature": 265.61606258
+      },
+      "location_id": "ASM-5002",
+      "scope_gap": "The TIGER 2020 COUSUB inventory contains 14 statutory county records plus Swains Island but no Rose Island/Atoll COUSUB record. Rose Island is mapped in the Census GARM as a county-equivalent island; no authoritative digital census county outline was retained for it."
+    }
+  ]
+}

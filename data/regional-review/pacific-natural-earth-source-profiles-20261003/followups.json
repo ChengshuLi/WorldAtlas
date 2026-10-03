@@ -1,0 +1,67 @@
+{
+  "followups": [
+    {
+      "id": "F1",
+      "priority": "bounded",
+      "subject_ids": [
+        "ASM-5000"
+      ],
+      "question": "Identify the current lawful administrative/management role for Rose Island and obtain a dated, licensed island/reef inventory suitable for physical land completeness. Census county-equivalent representation is not legal authority.",
+      "sources": [
+        "U.S. Census 2020 GARM",
+        "ASCA §§5.0101–5.0102 (restoration only)",
+        "GSHHG 2.3.7 physical screen"
+      ],
+      "owner_recommendation": "Create a separate bounded source work item; preserve Rose as unresolved until official authority is checked."
+    },
+    {
+      "id": "F2",
+      "priority": "bounded",
+      "subject_ids": [
+        "WLF-4996"
+      ],
+      "question": "Resolve the Uvea/Mua settlement spelling Malaefoon vs Mala’efo’ou against a current territorial village register, and locate official georeferenced circonscription boundaries including Alofi/offshore land.",
+      "sources": [
+        "Territorial Assembly organization page",
+        "INSEE 2018 population tables"
+      ],
+      "owner_recommendation": "Request a current local register and lawful boundary geometry; current cartographic lines remain screening only."
+    },
+    {
+      "id": "F3",
+      "priority": "coordinated",
+      "subject_ids": [
+        "ASM-5001"
+      ],
+      "question": "Review the Swains island’s published Tokelau-Manihiki geographic area membership against neighboring Tokelau/New Zealand area footprints using the shared partition; keep political administration, physical land and geographic reference roles separate.",
+      "sources": [
+        "ASCA §5.0101",
+        "Natural Earth v5.1.1",
+        "current issue-scope membership"
+      ],
+      "owner_recommendation": "Coordinate with neighboring area owners before proposing any shared boundary or membership adjustment; this packet identifies role distinctions, not a proven inconsistency."
+    },
+    {
+      "id": "F4",
+      "priority": "bounded",
+      "subject_ids": [
+        "ASM-4998",
+        "ASM-4999",
+        "ASM-5000",
+        "ASM-5001",
+        "ASM-5002",
+        "WLF-4995",
+        "WLF-4996",
+        "WLF-4997"
+      ],
+      "question": "Find original Natural Earth 5.1.1 source metadata/history and official local boundary/land-source documentation sufficient to explain source-current geometry differences and detached feature completeness.",
+      "sources": [
+        "Natural Earth commit ca96624",
+        "Census TIGER/GARM",
+        "INSEE/Assembly",
+        "GSHHG screen"
+      ],
+      "owner_recommendation": "Do not treat geometric differences alone as errors; retain exact source version and seek authoritative boundary and island registers."
+    }
+  ]
+}
