@@ -7,7 +7,7 @@
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/529",
   "worker_id": "engineering-night-20261003-7e91f438",
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T19:17:53.897426+00:00",
+  "updated_at_utc": "2026-10-03T19:22:10.805072+00:00",
   "scope": [
     "First of max3 PRs: additive versioned typed observation/feature-link contracts, controlled registrar, pure shared normalization/resolution seam and legacy preservation tests. No domain map implementations, DDL, live facts or publication."
   ],
@@ -21,7 +21,8 @@
     "28 corrected focused checks passed; migration staging5passed after local derivative; hosted build reserve gate passed",
     "Actual legacyprepared/staticparity5passedwithskipforbidden",
     "Final fullregression606passedzerofail/skip; syntheticreproductiontwo identicalhashes",
-    "Second source-only main68479f6 preserved unchanged"
+    "Second source-only main68479f6 preserved unchanged",
+    "Distinct reviewer accepted correctedd608head; superseded by incorporated source-onlymain58a4f38, new exactreview required"
   ],
   "checks": [
     {
@@ -100,10 +101,10 @@
     "data/engineering/observation-contracts-20261003-7e91"
   ],
   "blockers": [],
-  "next_action": "Final local receipts passed; obtain substantive independent review tied to final committed head, wait current scope/evidence/package, renewlease and queue serialized squash, verify matching bot/actualmerge; then confirmedrenewal onto fresh next529 branch for remaining boundedbackend/parity work. This partial PR does not close529.",
+  "next_action": "Currentmain58a4f38 merged intact; source/tests unchanged from606passing source. Obtain updated exacthead review and required scope/evidence/package; submit serializedqueue and verify bot/actualmerge. Partial529 remainsopen; next freshbranch confirmedrenewal forremainingbackend/parity.",
   "reservation": {
     "accepted": true,
-    "request_id": "7f013666-b6f4-4518-a99e-1893d7f79a1d",
+    "request_id": "c79dc236-f945-4e48-89ea-18cbc09fb67e",
     "issue_number": 529,
     "claim": {
       "comment_id": 5972401777,
@@ -112,19 +113,19 @@
       "worker_id": "engineering-night-20261003-7e91f438",
       "claim_id": "9ea71518-3663-4baf-98ef-8cb7c9a8be4c",
       "branch": "engineering/observation-contracts-20261003-7e91",
-      "request_id": "7f013666-b6f4-4518-a99e-1893d7f79a1d",
+      "request_id": "c79dc236-f945-4e48-89ea-18cbc09fb67e",
       "issue_number": 529,
       "claimed_at": "2026-10-03T18:53:45.897Z",
-      "updated_at": "2026-10-03T18:53:45.897Z",
-      "expires_at": "2026-10-04T18:53:45.897Z",
+      "updated_at": "2026-10-03T19:19:39.310Z",
+      "expires_at": "2026-10-04T19:19:39.310Z",
       "live_work": false,
       "mode": "engineering",
       "max_prs": 3
     },
     "replayed": false,
     "result_source": "github-comment",
-    "result_comment_id": 5972402086,
-    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37145897483"
+    "result_comment_id": 5972645392,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37147464102"
   },
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
@@ -133,5 +134,5 @@
     "Actual server/static/prepared/snapshot parity and final module integration handover; max3 totalPRs"
   ],
   "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/659",
-  "incorporated_main_commit": "68479f66b4f919a4dd6a4ff39c5ba20182e04761"
+  "incorporated_main_commit": "58a4f380c99bb2bcbae5df021acb1881245cbba9"
 }

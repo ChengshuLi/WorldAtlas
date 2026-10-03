@@ -1,12 +1,23 @@
 {
   "version": 1,
-  "base_main_commit": "58a4f380c99bb2bcbae5df021acb1881245cbba9",
-  "files": [
+  "pr_number": 659,
+  "head_sha": "d608fdf0cb453ffffac0ebc717a09ef88a1c73aa",
+  "base_sha": "68479f66b4f919a4dd6a4ff39c5ba20182e04761",
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "reviewer_worker_id": "review-palette-651-20261003",
+  "outcome": "accepted",
+  "supersedes": [
+    "initialacceptedreview4a59506",
+    "changes-requestedfollowup4a59506"
+  ],
+  "manifest_binding": null,
+  "policy": "report-only; legacyissue529 no required evidence-quality manifest",
+  "inspected_files": [
     {
       "path": "coordination/engineering/observation-contracts-20261003-7e91.json",
       "status": "A",
-      "bytes": 5645,
-      "sha256": "023216194e8e8b66690fe6a4c8a153e59f8d6c39b5cde43b91ef7730ab2917f9"
+      "bytes": 5562,
+      "sha256": "046b67d855561e676553f523a7fb6bb214acb360c5984a5e7d7456439ffc1c23"
     },
     {
       "path": "data/engineering/observation-contracts-20261003-7e91/README.md",
@@ -25,6 +36,12 @@
       "status": "A",
       "bytes": 121473,
       "sha256": "d98afa91a52bdb9ed6a6a82696044af0136e12fc157d4eec8d6a79b35168a126"
+    },
+    {
+      "path": "data/engineering/observation-contracts-20261003-7e91/file-receipts.json",
+      "status": "A",
+      "bytes": 8859,
+      "sha256": "335d5d1158bb2f4ba34b14476148016ebe57d5a903edd5bfeda2909dde03d196"
     },
     {
       "path": "data/engineering/observation-contracts-20261003-7e91/fixture-reproduction.json",
@@ -81,12 +98,6 @@
       "sha256": "25e979ffb2fe72cc05820ef3320498f0b4bcf13f211be717289e33dcce4d98b4"
     },
     {
-      "path": "data/engineering/observation-contracts-20261003-7e91/independent-review-d608fdf.json",
-      "status": "A",
-      "bytes": 11620,
-      "sha256": "a21aaf9f1b9f8740afb717b2fe44817ad0a3edf6a4da927ac756e6d777f34fa0"
-    },
-    {
       "path": "data/engineering/observation-contracts-20261003-7e91/independent-review-initial.json",
       "status": "A",
       "bytes": 5698,
@@ -97,12 +108,6 @@
       "status": "A",
       "bytes": 737,
       "sha256": "f74066b12da958d73c331d6bc8a3d3e1f101be924cc70b157d59baaa353f85e3"
-    },
-    {
-      "path": "data/engineering/observation-contracts-20261003-7e91/integration-58a4f38.json",
-      "status": "A",
-      "bytes": 714,
-      "sha256": "6f39d6b0733511f17aea84199bc6c1319e5f90e55ea542e671b595b1c43d41d3"
     },
     {
       "path": "data/engineering/observation-contracts-20261003-7e91/issue-529-preclaim.json",
@@ -127,12 +132,6 @@
       "status": "A",
       "bytes": 22322,
       "sha256": "d4d246f827afddbe222b49f25fe873592b4c690424a0352b319ed3ad2ef4e42f"
-    },
-    {
-      "path": "data/engineering/observation-contracts-20261003-7e91/premerge-renew.json",
-      "status": "A",
-      "bytes": 834,
-      "sha256": "a429616a53249c150a4b85dad981d65f2b69cce24623a8a46c0756020fe7382b"
     },
     {
       "path": "data/engineering/observation-contracts-20261003-7e91/prepared-static-parity.tap",
@@ -250,9 +249,32 @@
       "sha256": "1cff55d1bb68205ea9edf2703d89b080de0c9fb1c66d294a9aba0b18507e17c9"
     }
   ],
+  "independent_checks": [
+    "All39 changed filebytes match immutable Githead",
+    "All38 ledger bytes/SHA256 match; ledger itself excluded from ownhash",
+    "All16 baseline sourcepins match originalbase and currentbytes",
+    "Rawparent/child/sourcecontext preservedbyteidentical toinitialhead",
+    "26initial then28corrected focusedtests independently passed",
+    "72legacypriority cases exactly match oldexpression;13additionalnegativecontrols reject",
+    "Hiddenmodule/metadata serialization hooks and input/module ID getters rejected withzeroexecution; Unicodebyte/depth controls reject; parsedJSON passes",
+    "Final retained reproducer independently rerun: exactJSONmatchesoriginalreceipt, bothsnapshot hashes695431052020a1254d546ba1e37e10b1cc43f0967c48289a5d289aef73af62c8",
+    "Actualfinalunitreceipt606passed0failed0skipped; initial599/4/1retained",
+    "Actualretainedlegacyserver/static/prepared parity5passed0failed0skipped andstaging5passed; buildbudget262492160uncompressedtar bytes0violations",
+    "Currentmainresearch/regional/corefacts/provideradapters byteunchanged from68479f66"
+  ],
+  "resolved_findings": [
+    "Descriptor-firstsharedJSONguard rejects originalhiddenhooks/accessors without invocation; serializedmoduleidentity rechecked",
+    "Directquotedestimate retainsstatusestimate and methoddirectpriority; explicitcompetingtest/documentation preserveslegacyrule"
+  ],
   "limits": [
-    "Whole files, not sampled; excludes this self-referential ledger",
-    "Source bytes/checks only, not factual or geographic approval",
-    "Final PRhead must be independently bound after commit"
+    "FirstpartialRefs529 only; nofullissueacceptance/completion",
+    "No new hosted/import/export/read/storage adapter or forwardmigration/optionalcapability enabled; those andnewserver/static/prepared/snapshot parity remainfollowupscope",
+    "I inspected finalfullsuite/build/parity/stagingreceipts, not independently rerunning thoseexpensivefullchecks",
+    "Puremetadata declarations neither establishhistoricalsource truth norvalidate fullGDPdependencyDAG/mortality/geometry/portdomainalgorithms",
+    "No privateproductionverification/deployment/providerDDL/factualimport/browsermobile certificate",
+    "Research sourcebytes unchanged but no geographic approval/completebranch certificate",
+    "Initialreviewwithdrawal andfailedtestoutcomes honestlyretained; olderacceptance notauthority",
+    "No mandatorymanifestexists; no fabricatedmanifesthash",
+    "Review invalidated by anynewhead"
   ]
 }
