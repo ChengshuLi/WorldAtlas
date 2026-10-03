@@ -3,7 +3,7 @@
   "lane": "research",
   "campaign_id": "cliopatria-iberia-1800-1820-source",
   "branch": "research/cliopatria-iberia-1800-1820-source",
-  "base_main_commit": "239e5c53911091d02749dac2bb4033fe2a31ee35",
+  "base_main_commit": "3fb8724602959b28e0ac85a67365fef21123c60e",
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/62",
   "date_timezone": "UTC",
   "scope": {
@@ -19,7 +19,7 @@
       "Bennett et al. 2025 Cliopatria article/repository; up to four Spain-region citations from article Table 1"
     ]
   },
-  "updated_at_utc": "2026-10-03T10:17:00Z",
+  "updated_at_utc": "2026-10-03T10:20:00Z",
   "geographic_release": null,
   "input_paths": [
     "data/cliopatria/index.json",
@@ -40,7 +40,7 @@
     "No feature-level border uncertainty, competing claims, or sovereignty/control distinction is encoded."
   ],
   "blockers": [],
-  "next_action": "Wait for exact rebased-head scope check. If main advances, rebase and rerun checks. Renew issue claim before requesting serialized merge. Verify accepted merge on fresh origin/main, release claim and continue.",
+  "next_action": "Exact merge-queue request was rejected because main advanced; branch has now been rebased on latest origin/main. Wait for new exact-head scope check, renew issue claim before requeue, verify accepted merge in fresh origin/main, release claim and continue.",
   "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/574",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
