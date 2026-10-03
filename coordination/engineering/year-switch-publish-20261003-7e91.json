@@ -11,7 +11,7 @@
     "Publish verified evidence-only snapshot client and retain actual production after measurements"
   ],
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T16:09:00Z",
+  "updated_at_utc": "2026-10-03T16:11:00Z",
   "reservation": {
     "accepted": true,
     "request_id": "e1058b49-cb96-4123-88b3-6034b732b6c5",
@@ -43,11 +43,24 @@
     "rollback_version": 21,
     "rollback_source_sha": "917c66338166cb60ffe5c28cde75e43ed7ebecd2",
     "rollback_version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_b853dc160a808191ba1c68ec6458739b",
-    "primary_sha": "6fcd6a01897978653c7a107ddd2cf12072658e86"
+    "primary_sha": "6fcd6a01897978653c7a107ddd2cf12072658e86",
+    "source_sha": "0c8904c40fe0067afd55fa45a6a371a86205ceae",
+    "archive_sha256": "ec0898a7d80bc62af2250b644c7d04d36534d9381f990694ec85ee4284f48cc4",
+    "archive_tar_bytes": 262266880,
+    "archive_gzip_bytes": 186318592,
+    "headroom_to_reserved_target_bytes": 1974272,
+    "build_geography_sha256": "3465d8f227958342cc6457f50fdf302462ffefb9fe2e6e5625cd12373a3bf7de"
   },
-  "evidence_paths": [],
+  "evidence_paths": [
+    "data/engineering/year-switch-publish-20261003-7e91/site-budget.json.gz",
+    "data/engineering/year-switch-publish-20261003-7e91/publish-build.log.gz"
+  ],
   "blockers": [],
-  "next_action": "Stage matching built assets and preserved migration sources; enforce archive/file reserves, push Site mirror with hidden ephemeral credential and deploy owner-private. Verify actual deployment and production before/after, supported-evidence years, modes/profiles, fault handling. Do not close issue on source tests alone.",
+  "next_action": "Finish hidden-credential source push, save/deploy exact owner-private source archive, verify deployment then historical/supported-evidence timings and all modes/profiles.",
   "record_kind": "resumable_execution_artifact",
-  "task_status_source": "Linked GitHub issue"
+  "task_status_source": "Linked GitHub issue",
+  "evidence_hashes": {
+    "data/engineering/year-switch-publish-20261003-7e91/publish-build.log.gz": "d7ee59f46789db9b614ce49e257f9f364e3e364cc796892185b259585c706862",
+    "data/engineering/year-switch-publish-20261003-7e91/site-budget.json.gz": "a4fc696245b0cdb0a30645b2da826ae075dc0d3f233d20acfe5e05b387c39b1c"
+  }
 }
