@@ -1,0 +1,49 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "smithsonian-benin-media-20261003-1e2b2c5a1345",
+  "branch": "research/smithsonian-benin-media-20261003-1e2b2c5a1345",
+  "base_main_commit": "534c20a",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/69",
+  "date_timezone": "America/Los_Angeles",
+  "scope": {
+    "geographies": [
+      "Kingdom of Benin provenance in selected Smithsonian NMAfA catalog records (provisional; no atlas subject mapping)"
+    ],
+    "attributes": [
+      "artifact metadata",
+      "provenance/date evidence",
+      "item-specific media rights"
+    ],
+    "supported_from": "1400 target search only; only source-documented creation/use bounds are retained",
+    "supported_to": "1897 target search only; no inferred/import interval",
+    "sources": [
+      "Smithsonian Open Access EDAN API, NMAfA unit; five catalog records to be selected"
+    ]
+  },
+  "updated_at_utc": "2026-10-03T08:30:52+00:00",
+  "geographic_release": null,
+  "input_paths": [
+    "research/campaigns/smithsonian-benin-media-20261003-1e2b2c5a1345/source-evaluation.md",
+    "research/campaigns/smithsonian-benin-media-20261003-1e2b2c5a1345/restoration-manifest.json"
+  ],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Evaluated exactly five NMAfA object records and their own catalog date, maker/Benin references, geography, image IDs and item-level Restrictions & Rights statements.",
+    "All five item pages state \u201cUsage conditions apply\u201d; no selected image is verified CC0 or cleared for reuse.",
+    "Recorded source dates verbatim, separated object dates from acquisition/provenance, retained uncertainty and did not create atlas claims or imports.",
+    "Saved restoration URLs and SHA-256 digests for official record/policy page responses; no restricted image bytes retained."
+  ],
+  "source_gaps": [
+    "None of the five selected NMAfA images is cleared for reuse by the displayed terms.",
+    "Catalog pages do not provide a dated chain of custody or precise findspot for all selected objects; source-specific geography and broad object dates do not establish exact provenance.",
+    "Two separate ceremonial-sword records have overlapping descriptions and shared donor but are not asserted to be linked."
+  ],
+  "blockers": [],
+  "next_action": "Wait for required checks, verify current main/claim/head, then submit PR #552 through the serialized merge queue and verify its Merge result comment before releasing claim 69.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/552",
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
