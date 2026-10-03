@@ -1,0 +1,534 @@
+{
+  "version": 1,
+  "campaign_id": "greg-west-africa-1964-source",
+  "github_issue": 63,
+  "retrieved_date_utc": "2026-10-03",
+  "source_identity": {
+    "name": "Geo-referencing of Ethnic Groups (GREG)",
+    "publisher": "ETH Zurich, International Conflict Research",
+    "source_atlas": "Bruk, Solomon I. and V. S. Apenchenko (eds.), Atlas narodov mira / Atlas of the Peoples of the World, Moscow, 1964",
+    "research_article": "Weidmann, Nils B., Jan Ketil Rød, Lars-Erik Cederman. “Representing Ethnic Groups in Space: A New Dataset.” Journal of Peace Research 47(4), 491–499. Published online 2010-05-25; issue date 2010-07-01. DOI 10.1177/0022343310368352.",
+    "dataset_public_page": "https://icr.ethz.ch/data/greg/",
+    "current_version_notice": "GREG page says an up-to-date version of the dataset is at the EPR GeoEPR page; this bounded review evaluates the explicitly selected GREG ZIP, not the later/current GeoEPR product.",
+    "scope": "Global GREG release (8,969 polygons); bounded example subset is 25 source polygon records intersecting the rectangular query envelope [−5,4,5,15] degrees WGS84. This envelope is a retrieval window only, not an Atlas boundary or region definition.",
+    "edition_dates": {
+      "underlying_atlas_publication": "1964",
+      "underlying_observation_date": "No polygon-specific date. Article says the source ANM maps were collected in the early 1960s; exact underlying observations vary and are not specified per polygon.",
+      "GREG_shapefile_archive_metadata": "DBF_DATE_LAST_UPDATE 2008-11-01; ZIP member timestamps from 2008. These are file/edition metadata, not group observation dates.",
+      "article_online": "2010-05-25",
+      "article_print": "2010-07-01",
+      "site_imprint": "© 2023 ETH Zurich on accessed page; not a dataset release or dataset rights notice.",
+      "retrieved": "2026-10-03 UTC"
+    }
+  },
+  "license_assessment": {
+    "status": "unverified; no dataset-specific reuse license found in the inspected public data page, shapefile archive/XML, online appendix, or paper.",
+    "public_access": "GREG ZIP and group list are directly downloadable without authentication.",
+    "citation_request": "The GREG page requests citation to Weidmann, Rød and Cederman (2010), JPR 47(4):491–499.",
+    "rights_distinction": "Public download and a citation request do not state rights to redistribute or adapt the dataset. The journal article’s standard publication-reuse rights metadata and the ETH website imprint are not a dataset license. The 1964 atlas is a distinct upstream work; no permission to reproduce it was found.",
+    "decision": "Do not bundle source files or geometry, redistribute the global dataset, or treat the license as open. Keep only this bounded research evidence and exact restoration/hash notes. Seek rights-holder clarification before reuse or import."
+  },
+  "schema": {
+    "actual_feature_count": 8969,
+    "geometry": "Polygon",
+    "coordinate_reference_system": "WGS84 / EPSG:4326 (verified from GREG.prj and GDAL)",
+    "fields": {
+      "FeatureID": "unique polygon identifier",
+      "G1ID,G2ID,G3ID": "group IDs; zero means not applicable; each polygon has one to three group identifiers; G1ID is never zero",
+      "G1SHORTNAM/G2SHORTNAM/G3SHORTNAM": "translated short names from ANM",
+      "G1LONGNAM/G2LONGNAM/G3LONGNAM": "translated long names from ANM",
+      "AREA": "source polygon area in square metres, computed in Eckert VI equal-area projection",
+      "COW": "1989 Correlates of War country code context",
+      "FIPS_CNTRY": "two-character FIPS country code context"
+    },
+    "population_shares": "No population or group-share field in the inspected shapefile schema. The research article says source maps can show up to three groups sharing a territory; it provides no polygon-level relative share. G1/G2/G3 are identifiers, not population ranks or proportions.",
+    "primary_culture": "Not defined by GREG; ethnic group labels cannot be promoted to a single primary culture using order, polygon area, or overlap."
+  },
+  "method_and_uncertainty": {
+    "production": "Authors scanned 57 ANM ethnographic maps, georeferenced them in GIS using WGS84 latitude/longitude, distributed ground-control points (usually about 20/map), applied affine transformation, visually checked fit, and digitized areas. English group names were assigned using ANM translations.",
+    "source_map_scale": "Reported 1:4,000,000 to 1:15,000,000.",
+    "positional_rule_of_thumb": "Appendix estimates 0.5 mm map position error; at 1:15,000,000 this is 7.5 km, and gives about 10 km as a conservative general assessment. This is not a measured per-feature uncertainty or confidence interval.",
+    "temporal_caveat": "The source represents a static map compiled in the early 1960s; no dated snapshots or per-feature observation intervals. The article warns that conflict and forced movement can make configurations outdated.",
+    "selection": "GDAL spatial-filter query window [−5,4,5,15] degrees WGS84; export intersecting features in source order and retain the first 25. The sample is purposive and non-random; no geometry or whole dataset is retained. This is not zonal allocation or an Atlas territorial definition."
+  },
+  "bounded_sample_count": 25,
+  "sample_rows": [
+    {
+      "feature_id": 361,
+      "group_ids": [
+        140
+      ],
+      "group_short_names": [
+        "Barba"
+      ],
+      "group_long_names": [
+        "Barba"
+      ],
+      "source_area_m2": 298375527.984,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 362,
+      "group_ids": [
+        1021
+      ],
+      "group_short_names": [
+        "Songai"
+      ],
+      "group_long_names": [
+        "Songai"
+      ],
+      "source_area_m2": 4543776137.56,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 363,
+      "group_ids": [
+        376
+      ],
+      "group_short_names": [
+        "Fulbe"
+      ],
+      "group_long_names": [
+        "Fulbe (incl. Tukuler)"
+      ],
+      "source_area_m2": 262414614.635,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 364,
+      "group_ids": [
+        432
+      ],
+      "group_short_names": [
+        "Hausa"
+      ],
+      "group_long_names": [
+        "Hausa"
+      ],
+      "source_area_m2": 122999065.05,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 365,
+      "group_ids": [
+        362
+      ],
+      "group_short_names": [
+        "Ewe"
+      ],
+      "group_long_names": [
+        "Ewe (incl. Fon, Tofini, Makse)"
+      ],
+      "source_area_m2": 21345674333.0,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 366,
+      "group_ids": [
+        1070
+      ],
+      "group_short_names": [
+        "Tem"
+      ],
+      "group_long_names": [
+        "Tem (incl. Kabre, Loso)"
+      ],
+      "source_area_m2": 137872564.578,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 367,
+      "group_ids": [
+        376
+      ],
+      "group_short_names": [
+        "Fulbe"
+      ],
+      "group_long_names": [
+        "Fulbe (incl. Tukuler)"
+      ],
+      "source_area_m2": 168363441.671,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 368,
+      "group_ids": [
+        376
+      ],
+      "group_short_names": [
+        "Fulbe"
+      ],
+      "group_long_names": [
+        "Fulbe (incl. Tukuler)"
+      ],
+      "source_area_m2": 428655550.72,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 369,
+      "group_ids": [
+        376
+      ],
+      "group_short_names": [
+        "Fulbe"
+      ],
+      "group_long_names": [
+        "Fulbe (incl. Tukuler)"
+      ],
+      "source_area_m2": 604386195.039,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 370,
+      "group_ids": [
+        376
+      ],
+      "group_short_names": [
+        "Fulbe"
+      ],
+      "group_long_names": [
+        "Fulbe (incl. Tukuler)"
+      ],
+      "source_area_m2": 168486540.551,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 371,
+      "group_ids": [
+        140
+      ],
+      "group_short_names": [
+        "Barba"
+      ],
+      "group_long_names": [
+        "Barba"
+      ],
+      "source_area_m2": 47354604585.0,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 372,
+      "group_ids": [
+        376
+      ],
+      "group_short_names": [
+        "Fulbe"
+      ],
+      "group_long_names": [
+        "Fulbe (incl. Tukuler)"
+      ],
+      "source_area_m2": 151532622.845,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 373,
+      "group_ids": [
+        222
+      ],
+      "group_short_names": [
+        "Busa"
+      ],
+      "group_long_names": [
+        "Busa"
+      ],
+      "source_area_m2": 3769840160.27,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 374,
+      "group_ids": [
+        1070
+      ],
+      "group_short_names": [
+        "Tem"
+      ],
+      "group_long_names": [
+        "Tem (incl. Kabre, Loso)"
+      ],
+      "source_area_m2": 260524058.735,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 375,
+      "group_ids": [
+        1236
+      ],
+      "group_short_names": [
+        "Yoruba"
+      ],
+      "group_long_names": [
+        "Yoruba"
+      ],
+      "source_area_m2": 15476181383.7,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 376,
+      "group_ids": [
+        1070
+      ],
+      "group_short_names": [
+        "Tem"
+      ],
+      "group_long_names": [
+        "Tem (incl. Kabre, Loso)"
+      ],
+      "source_area_m2": 816072301.768,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 377,
+      "group_ids": [
+        1020
+      ],
+      "group_short_names": [
+        "Somba (incl. Berba, Bilapila)"
+      ],
+      "group_long_names": [
+        "Somba (incl. Berba, Bilapila)"
+      ],
+      "source_area_m2": 21008977626.5,
+      "cow_1989": 434,
+      "fips_country": "BN"
+    },
+    {
+      "feature_id": 2363,
+      "group_ids": [
+        20
+      ],
+      "group_short_names": [
+        "Akan"
+      ],
+      "group_long_names": [
+        "Akan (Ashanti, Fanti, Akim, Akwapim, Baule-Anya, Abrong, Gonja)"
+      ],
+      "source_area_m2": 779713971.111,
+      "cow_1989": 452,
+      "fips_country": "GH"
+    },
+    {
+      "feature_id": 2364,
+      "group_ids": [
+        1020
+      ],
+      "group_short_names": [
+        "Somba (incl. Berba, Bilapila)"
+      ],
+      "group_long_names": [
+        "Somba (incl. Berba, Bilapila)"
+      ],
+      "source_area_m2": 266854457.795,
+      "cow_1989": 452,
+      "fips_country": "GH"
+    },
+    {
+      "feature_id": 2365,
+      "group_ids": [
+        425
+      ],
+      "group_short_names": [
+        "Gurma"
+      ],
+      "group_long_names": [
+        "Gurma (incl. Konkomba, Moba, Tabote)"
+      ],
+      "source_area_m2": 5750297568.87,
+      "cow_1989": 452,
+      "fips_country": "GH"
+    },
+    {
+      "feature_id": 2366,
+      "group_ids": [
+        409
+      ],
+      "group_short_names": [
+        "Grusi"
+      ],
+      "group_long_names": [
+        "Grusi (incl. Kasena, Nunuma, Sisala, Kurumba)"
+      ],
+      "source_area_m2": 8717273279.88,
+      "cow_1989": 452,
+      "fips_country": "GH"
+    },
+    {
+      "feature_id": 2367,
+      "group_ids": [
+        222
+      ],
+      "group_short_names": [
+        "Busa"
+      ],
+      "group_long_names": [
+        "Busa"
+      ],
+      "source_area_m2": 36698199.9586,
+      "cow_1989": 452,
+      "fips_country": "GH"
+    },
+    {
+      "feature_id": 2368,
+      "group_ids": [
+        1109
+      ],
+      "group_short_names": [
+        "Togo tribes"
+      ],
+      "group_long_names": [
+        "Togo tribes: Avatime, Nyangbo, Tafi, Logba, Likpe, Lefana (Lelemi), Ahlo, Bowili, Akpafu, Santrokofi, Adele, Akposo, Akebu"
+      ],
+      "source_area_m2": 633430973.46,
+      "cow_1989": 452,
+      "fips_country": "GH"
+    },
+    {
+      "feature_id": 2369,
+      "group_ids": [
+        1070
+      ],
+      "group_short_names": [
+        "Tem"
+      ],
+      "group_long_names": [
+        "Tem (incl. Kabre, Loso)"
+      ],
+      "source_area_m2": 873494729.014,
+      "cow_1989": 452,
+      "fips_country": "GH"
+    },
+    {
+      "feature_id": 2370,
+      "group_ids": [
+        1109
+      ],
+      "group_short_names": [
+        "Togo tribes"
+      ],
+      "group_long_names": [
+        "Togo tribes: Avatime, Nyangbo, Tafi, Logba, Likpe, Lefana (Lelemi), Ahlo, Bowili, Akpafu, Santrokofi, Adele, Akposo, Akebu"
+      ],
+      "source_area_m2": 2035779235.95,
+      "cow_1989": 452,
+      "fips_country": "GH"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Official ETH GREG project/data page",
+      "url": "https://icr.ethz.ch/data/greg/",
+      "http_status": 200,
+      "bytes": 15471,
+      "sha256": "6757cc9d672ccd7b392e6eacda6237690a98b2c8f2df803fb8afb88e01382274",
+      "observations": [
+        "8,969 polygons",
+        "ESRI shapefile",
+        "links to GREG ZIP and groups list",
+        "asks for 2010 paper citation",
+        "no dataset-specific license text observed",
+        "points readers to an up-to-date EPR GeoEPR version"
+      ]
+    },
+    {
+      "name": "GREG.zip shapefile release",
+      "url": "https://icr.ethz.ch/data/greg/GREG.zip",
+      "http_status": 200,
+      "bytes": 7535135,
+      "sha256": "6423624f603e34d4bc52d39698ecc18d9fca9b55d3aa46c4490c6af47f7089e7",
+      "internal_files": [
+        "GREG.dbf",
+        "GREG.prj",
+        "GREG.qix",
+        "GREG.sbn",
+        "GREG.sbx",
+        "GREG.shp",
+        "GREG.shp.xml",
+        "GREG.shx"
+      ],
+      "retention": "Temporary download inspected locally then not committed; restore from URL and verify SHA-256. No geometry or full archive is redistributed."
+    },
+    {
+      "name": "Official group ID/name list",
+      "url": "https://icr.ethz.ch/data/greg/groups.xls",
+      "http_status": 200,
+      "bytes": 308707,
+      "sha256": "35cb6580d9e3b334a0a8361f458f48d4cfc2ca6c4c4fb1425aaf518e5af1af8b",
+      "use": "Public group list downloaded for source verification; example names also appear in selected shapefile rows. No explicit reuse license observed."
+    },
+    {
+      "name": "Online appendix PDF",
+      "url": "https://icr.ethz.ch/data/greg/Appendix.pdf",
+      "http_status": 200,
+      "bytes": 39954,
+      "sha256": "e2285a5c65d7a95602d3934328c678198500db499952a8dea27c242ab5213a26",
+      "document_metadata": "Created and modified 2009-03-20; 8 pages. No dataset-specific license clause found.",
+      "observations": [
+        "ESRI shapefile schema",
+        "up to three groups per polygon",
+        "WGS84",
+        "AREA definition",
+        "COW 1989 coding",
+        "digitization/georeferencing methods and accuracy rule of thumb"
+      ]
+    },
+    {
+      "name": "Weidmann, Rød and Cederman research article PDF",
+      "url": "https://icr.ethz.ch/data/greg/weidmann10greg.pdf",
+      "http_status": 200,
+      "bytes": 222680,
+      "sha256": "e838ee5438ac55f57d43513a1821aad9f695522d819fb98d1b6641a0de954096",
+      "doi": "10.1177/0022343310368352",
+      "publication_dates": {
+        "online": "2010-05-25",
+        "print": "2010-07-01"
+      },
+      "observations": [
+        "ANM 1964 source basis and early-1960s compilation",
+        "no per-polygon population proportions",
+        "static temporal limitations",
+        "citation and methods"
+      ]
+    },
+    {
+      "name": "Crossref article metadata",
+      "url": "https://api.crossref.org/works/10.1177/0022343310368352",
+      "http_status": 200,
+      "observations": [
+        "DOI, article title, journal, volume/issue/pages and online/print dates; metadata license link is the journal’s standard publication reuse rights, not a GREG dataset grant."
+      ],
+      "bytes": 11019,
+      "sha256": "f840268d8c8faf3358a67575f3a602d1150780e152190ac8a7997f63ba7942b7"
+    },
+    {
+      "name": "ETH ICR imprint",
+      "url": "https://icr.ethz.ch/imprint/",
+      "http_status": 200,
+      "bytes": 13054,
+      "sha256": "7a710f3e7255f1dca4f52dc7a8c4ca891a311144decbdda5cc869e86bd5d8380",
+      "observations": [
+        "Identifies site publisher and © 2023 ETH Zurich; does not grant rights to dataset files."
+      ]
+    }
+  ],
+  "no_private_credentials_used": true,
+  "source_archives_not_committed": true,
+  "no_final_culture_mapping_or_atlas_assignment": true,
+  "no_boundaries_schema_or_code_changed": true,
+  "no_imports": true
+}
