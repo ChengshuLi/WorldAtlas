@@ -6,7 +6,8 @@ import {performance} from 'node:perf_hooks';
 import {chromium} from '@playwright/test';
 import {formatYear} from '../src/model.js';
 
-const [site, output, phase = 'before'] = process.argv.slice(2), origin = new URL(site ?? '');
+const [site, output, phase = 'before', suite = 'historical'] = process.argv.slice(2), origin = new URL(site ?? '');
+if (!['historical', 'supported'].includes(suite)) throw Error('Use historical or supported measurement suite');
 if (origin.origin !== 'https://worldatlas-explorer.chengshu-li-2013.chatgpt.site' || origin.pathname !== '/' || origin.search || origin.hash || !output || !process.stdin.isTTY) throw Error('Use the WorldAtlas origin and receipt path with hidden credential stdin');
 process.stdin.setRawMode(true);
 console.log('Ready for private verification credential on hidden stdin.');
@@ -23,7 +24,7 @@ const token = await new Promise((resolve, reject) => {
 const requests = [], errors = [], navigation = [], trace = [];
 let browser, server;
 const receipt = {version: 1, phase, site: origin.origin, started_at_utc: new Date().toISOString(), read_only: true,
-  conditions: {transport: 'GET-only localhost proxy of actual private production responses; service credential remains server-side',
+  conditions: {suite, transport: 'GET-only localhost proxy of actual private production responses; service credential remains server-side',
     browser: 'headless Chromium on Linux, 1440x1080, no CPU/network throttling', physical_mobile: false,
     cold_definition: 'Fresh browser context/asset cache; first in this verification session. Provider idle/wake state is unknown.'},
   requests, navigation, page_errors: errors};
@@ -91,11 +92,12 @@ try {
   }
   cdp.on('Tracing.dataCollected', data => { if (trace.length < 100000) trace.push(...data.value); });
   await cdp.send('Tracing.start', {categories: 'devtools.timeline,blink.user_timing,v8', transferMode: 'ReportEvents'});
-  await select(1950, 'first-distant-year');
-  await select(1951, 'warm-nearby-year');
-  await select(1950, 'warm-return');
-  await select(1800, 'warm-distant-year');
-  await select(1950, 'rapid-latest-wins', [1951, 1000, 1800, 1950]);
+  const [target, nearby, distant] = suite === 'supported' ? [2020, 2021, 1900] : [1950, 1951, 1800];
+  await select(target, 'first-distant-year');
+  await select(nearby, 'warm-nearby-year');
+  await select(target, 'warm-return');
+  await select(distant, 'warm-distant-year');
+  await select(target, 'rapid-latest-wins', [nearby, 1000, distant, target]);
   const tracingComplete = new Promise(resolve => cdp.once('Tracing.tracingComplete', resolve));
   await cdp.send('Tracing.end'); await tracingComplete;
   fs.writeFileSync(output.replace(/\.json$/, '') + '-trace.json.gz', gzipSync(JSON.stringify({traceEvents: trace}), {level: 9}));
@@ -105,7 +107,7 @@ try {
   await page.evaluate(() => document.querySelector('#year-form').requestSubmit());
   receipt.invalid_year = {previous_year: oldYear, visible_year: await page.locator('#map-year').textContent(),
     error: await page.locator('#year-error').textContent(), new_requests: requests.length - from};
-  await page.screenshot({path: output.replace(/\.json$/, '') + '-1950.png'});
+  await page.screenshot({path: output.replace(/\.json$/, '') + '-' + target + '.png'});
   receipt.completed_at_utc = new Date().toISOString(); receipt.completed = true; save();
   console.log(JSON.stringify({completed: true, samples: navigation.length, output}));
 } catch (error) {

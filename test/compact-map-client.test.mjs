@@ -3,9 +3,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 let loaderSerial=0;
-async function withLoader(run,{enabled=true}={}){
+const temporalPins={release_id:'reference:test',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
+const temporalPage=(stream,year=2020,revision=7)=>({year,stream,...temporalPins,records:[],withdrawals:[],sources:[],next_cursor:null,revision,capability:{datedMembership:1,datedExistence:1,datedFootprints:0}});
+async function withLoader(run,{enabled=true,geography=false}={}){
  const file=new URL('../src/data-client.js',import.meta.url);
- const source=fs.readFileSync(file,'utf8').replace(/from '(\.\/[^']+)'/g,(_,path)=>`from '${new URL(path,file).href}'`).replace("import.meta.env.VITE_STATIC_ATLAS === 'true'",'true').replace("import.meta.env.VITE_HOSTED_DATABASE === 'true'",'true')+`\n${enabled?'compactMapSupported=true;':''}\nexport {loadHostedMapEvidence};\n// isolated client fixture ${++loaderSerial}`;
+ const source=fs.readFileSync(file,'utf8').replace(/from '(\.\/[^']+)'/g,(_,path)=>`from '${new URL(path,file).href}'`).replace("import.meta.env.VITE_STATIC_ATLAS === 'true'",'true').replace("import.meta.env.VITE_HOSTED_DATABASE === 'true'",'true')+`\n${enabled?'compactMapSupported=true;':''}\n${geography?`datedGeographySupported=true;expectedGeography=${JSON.stringify(temporalPins)};`:''}\nexport {loadHostedMapEvidence};\n// isolated client fixture ${++loaderSerial}`;
  const loader=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64')),previous=global.fetch;
  try{return await run(loader);}finally{global.fetch=previous;}
 }
@@ -22,8 +24,34 @@ function unavailable(result,{stale=false,authority=false}={}){
  for(const key of ['attributes','names','retirements']){assert.equal(result[key].available,false);if(!stale)assert.deepEqual(result[key].records,[]);}
 }
 
+test('older Workers negotiate the sparse limit without masking unrelated bad requests',async()=>withLoader(async loader=>{
+ const limits=[];global.fetch=async url=>{const p=request(url),limit=Number(p.get('limit'));limits.push(limit);return limit>1000?Response.json({error:'Map entity page limit must be between 1 and 1000'},{status:400}):Response.json(validPage());};
+ const result=await loader.loadHostedMapEvidence(2020,false);assert.deepEqual(limits,[4096,1000]);assert.equal(result.retirementAuthority,true);
+ global.fetch=async()=>Response.json({error:'Invalid selected year'},{status:400});unavailable(await loader.loadHostedMapEvidence(2021,false));
+}));
+
+test('complete inline temporal streams use the existing pin and revision validator without extra HTTP reads',async()=>withLoader(async loader=>{
+ let calls=0;global.fetch=async url=>{const p=request(url);assert.equal(p.get('include_temporal'),'1');calls++;return Response.json({...validPage(),temporal_geography:{records:temporalPage('records'),withdrawals:temporalPage('withdrawals')}});};
+ const result=await loader.loadHostedMapEvidence(2020,false);assert.equal(calls,1);assert.equal(result.temporalGeography.complete,true);assert.equal(result.temporalGeography.revision,7);assert.equal(result.retirementAuthority,true);
+},{geography:true}));
+
+test('inline temporal revision or release drift restarts the scalar snapshot rather than repinning it',async()=>withLoader(async loader=>{
+ let calls=0;global.fetch=async url=>{request(url);calls++;const records=temporalPage('records');if(calls===1)records.revision++;if(calls===2)records.hierarchy_sha256='c'.repeat(64);return Response.json({...validPage({stamp:':'+calls}),temporal_geography:{records,withdrawals:temporalPage('withdrawals')}});};
+ const result=await loader.loadHostedMapEvidence(2020,false);assert.equal(calls,3);assert.equal(result.temporalGeography.revision,7);assert.ok(result.attributes.records.every(r=>r.id.endsWith(':3')));
+},{geography:true}));
+
+test('absent inline temporal pages retain bounded ordinary geography paging',async()=>withLoader(async loader=>{
+ const calls=[];global.fetch=async url=>{const p=new URL(url,'https://atlas.invalid');calls.push(p.pathname);if(p.pathname==='/api/map/snapshot')return Response.json(validPage());assert.equal(p.pathname,'/api/geography/temporal/snapshot');return Response.json(temporalPage(p.searchParams.get('stream')));};
+ const result=await loader.loadHostedMapEvidence(2020,false);assert.equal(calls.length,3);assert.equal(result.temporalGeography.complete,true);
+},{geography:true}));
+
+test('partial inline temporal pages cannot become authoritative or trigger unbounded reads',async()=>withLoader(async loader=>{
+ let calls=0;global.fetch=async()=>{calls++;return Response.json({...validPage(),temporal_geography:{records:temporalPage('records'),withdrawals:{...temporalPage('withdrawals'),next_cursor:'unfinished'}}});};
+ unavailable(await loader.loadHostedMapEvidence(2020,false));assert.equal(calls,1);
+},{geography:true}));
+
 test('compact client hydrates two atomic entity pages and retains shared source provenance',async()=>withLoader(async loader=>{
- const calls=[];global.fetch=async(url,options)=>{const params=request(url);calls.push(params);assert.equal(params.get('year'),'2020');assert.equal(params.get('examples'),'0');assert.equal(params.get('limit'),'1000');assert.equal(options.signal,undefined);return Response.json(params.has('cursor')?validPage({id:'location:B'}):validPage({next_cursor:'location:A'}));};
+ const calls=[];global.fetch=async(url,options)=>{const params=request(url);calls.push(params);assert.equal(params.get('year'),'2020');assert.equal(params.get('examples'),'0');assert.equal(params.get('limit'),'4096');assert.equal(options.signal,undefined);return Response.json(params.has('cursor')?validPage({id:'location:B'}):validPage({next_cursor:'location:A'}));};
  const result=await loader.loadHostedMapEvidence(2020,false);assert.equal(calls.length,2);assert.equal(calls[1].get('cursor'),'location:A');assert.equal(result.retirementAuthority,true);
  for(const key of ['attributes','names','retirements']){assert.equal(result[key].available,true);assert.equal(result[key].revision,7);assert.equal(result[key].records.length,2);assert.equal(result[key].records[0].source,'Published historical source');assert.equal(result[key].records[0].source_metadata.sha256,'f'.repeat(64));}
  assert.deepEqual(result.attributes.records.map(r=>r.location_id),['location:A','location:B']);assert.equal(result.names.records[0].value,'Historical location:A');assert.equal(result.retirements.records[0].target_id,'prepared:location:A');
@@ -31,14 +59,14 @@ test('compact client hydrates two atomic entity pages and retains shared source 
 
 test('oversized second page reduces its limit and retries its cursor without duplicating completed pages',async()=>withLoader(async loader=>{
  const calls=[];global.fetch=async url=>{const params=request(url);calls.push({cursor:params.get('cursor'),limit:Number(params.get('limit'))});if(!params.has('cursor'))return Response.json(validPage({next_cursor:'location:A'}));if(Number(params.get('limit'))>400)return Response.json({error:'Page too large',retryable:true,suggested_limit:400},{status:413});return Response.json(validPage({id:'location:B'}));};
- const result=await loader.loadHostedMapEvidence(2020,false);assert.deepEqual(calls,[{cursor:null,limit:1000},{cursor:'location:A',limit:1000},{cursor:'location:A',limit:400}]);assert.equal(result.attributes.available,true);assert.equal(result.attributes.records.length,2);assert.equal(new Set(result.attributes.records.map(r=>r.id)).size,2);
+ const result=await loader.loadHostedMapEvidence(2020,false);assert.deepEqual(calls,[{cursor:null,limit:4096},{cursor:'location:A',limit:4096},{cursor:'location:A',limit:400}]);assert.equal(result.attributes.available,true);assert.equal(result.attributes.records.length,2);assert.equal(new Set(result.attributes.records.map(r=>r.id)).size,2);
  global.fetch=async url=>{const params=request(url);return Number(params.get('limit'))>1?Response.json({error:'Too large',retryable:true,suggested_limit:1},{status:413}):Response.json({error:'Still too large',retryable:true,suggested_limit:1},{status:413});};
  unavailable(await loader.loadHostedMapEvidence(2021,false));
 }));
 
 test('a first-page size retry reaches the reduced request and preserves retirement authority',async()=>withLoader(async loader=>{
  const limits=[];global.fetch=async url=>{const params=request(url),limit=Number(params.get('limit'));limits.push(limit);assert.equal(params.has('cursor'),false);return limit>500?Response.json({error:'Too large',retryable:true},{status:413}):Response.json(validPage());};
- const result=await loader.loadHostedMapEvidence(2020,false);assert.deepEqual(limits,[1000,500]);assert.equal(result.attributes.records.length,1);assert.equal(result.attributes.revision,7);assert.equal(result.retirements.records[0].target_id,'prepared:location:A');assert.equal(result.retirementAuthority,true);
+ const result=await loader.loadHostedMapEvidence(2020,false);assert.deepEqual(limits,[4096,2048,1024,512,256]);assert.equal(result.attributes.records.length,1);assert.equal(result.attributes.revision,7);assert.equal(result.retirements.records[0].target_id,'prepared:location:A');assert.equal(result.retirementAuthority,true);
 }));
 
 test('retryable conflicts and cross-page revision changes restart the complete compact snapshot',async()=>withLoader(async loader=>{

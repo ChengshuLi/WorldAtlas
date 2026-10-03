@@ -63,19 +63,20 @@ async function loadHostedRecords(endpoint,year,examples,signal){
  }catch(error){if(error.name==='AbortError'||signal?.aborted||error.retryable)throw error;return {records:[],available:false,revision:null};}
 }
 async function loadHostedSnapshotPages(year,examples,signal){
- const attributes=[],names=[],retirements=[];let cursor='',revision=null,limit=1000;const cursors=new Set();
+ const attributes=[],names=[],retirements=[];let cursor='',revision=null,limit=4096,temporalPages;const cursors=new Set();
  try{
  while(true){
-  const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),limit:String(limit),evidence_only:'1'});if(cursor)params.set('cursor',cursor);
+  const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),limit:String(limit),evidence_only:'1',include_temporal:String(Number(datedGeographySupported))});if(cursor)params.set('cursor',cursor);
   const response=await fetch('/api/map/snapshot?'+params,{signal});
-  if(!response.ok){const error=await response.json().catch(()=>({}));if(response.status===409&&error.retryable)throw new ContentRevisionError();if(response.status===413&&error.retryable&&limit>1){limit=Math.max(1,Math.min(limit-1,Number.isInteger(error.suggested_limit)?error.suggested_limit:Math.floor(limit/2)));continue;}throw Error(`Atlas data unavailable (${response.status})`);}
-  const page=hydrateMapSnapshotPage(await response.json());
+  if(!response.ok){const error=await response.json().catch(()=>({}));if(response.status===400&&limit>1000&&error.error==='Map entity page limit must be between 1 and 1000'){limit=1000;continue;}if(response.status===409&&error.retryable)throw new ContentRevisionError();if(response.status===413&&error.retryable&&limit>1){limit=Math.max(1,Math.min(limit-1,Number.isInteger(error.suggested_limit)?error.suggested_limit:Math.floor(limit/2)));continue;}throw Error(`Atlas data unavailable (${response.status})`);}
+  const raw=await response.json(),page=hydrateMapSnapshotPage(raw);
   if(page.year!==year)throw Error('Historical database returned an incorrect year');
   if(revision!=null&&revision!==page.revision)throw new ContentRevisionError();revision=page.revision;
   attributes.push(...page.records);names.push(...page.names);retirements.push(...page.retirements);
+  if(page.next_cursor===null)temporalPages=raw.temporal_geography;
   cursor=page.next_cursor||'';if(cursor&&cursors.has(cursor))throw Error('Historical database returned a repeated cursor');if(cursor)cursors.add(cursor);else break;
  }
- return [attributes,names,retirements].map(records=>({records,available:true,revision}));
+ const result=[attributes,names,retirements].map(records=>({records,available:true,revision}));result.temporalPages=temporalPages;return result;
  }catch(error){if(error.name==='AbortError'||signal?.aborted||error.retryable)throw error;return [0,1,2].map(()=>({records:[],available:false,revision:null}));}
 }
 let lastCompleteHostedMap;
@@ -98,7 +99,9 @@ async function loadHostedMapEvidence(year,examples,signal){
    if(versions.size>1)throw new ContentRevisionError();
    let temporalGeography=null;
    if(hostedDatabase&&datedGeographySupported){
-    try{temporalGeography=await loadHostedTemporalGeography({apiGet:temporalAPIGet,year,examples,expectedGeography,expectedRevision:pages[0].revision,signal});}
+    const bundled=pages.temporalPages;
+    const apiGet=bundled?async url=>{const stream=new URL(url,'https://atlas.invalid').searchParams.get('stream');const page=bundled[stream];if(!page||page.next_cursor!==null)throw Error('Incomplete inline temporal geography');return page;}:temporalAPIGet;
+    try{temporalGeography=await loadHostedTemporalGeography({apiGet,year,examples,expectedGeography,expectedRevision:pages[0].revision,signal});}
     catch(error){if(error.name==='AbortError'||signal?.aborted||error.retryable)throw error;return unavailableHostedMap(year,examples);}
    }
    const value={attributes:pages[0],names:pages[1],retirements:pages[2],temporalGeography,retirementAuthority:true};
