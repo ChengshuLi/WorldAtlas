@@ -1,0 +1,80 @@
+{
+  "campaign_id": "pleiades-v41-provenance-correction",
+  "github_issue": 591,
+  "retrieved_at_utc": "2026-10-03T16:27:19Z",
+  "supersedes": {
+    "campaign_id": "pleiades-iberia-names-source",
+    "original_evaluation": "research/campaigns/pleiades-iberia-names-source/source-evaluation.md",
+    "original_manifest": "research/campaigns/pleiades-iberia-names-source/source-manifest.json",
+    "original_manifest_bytes": 34706,
+    "original_manifest_sha256": "f9ab9d0ef554c7d697b36597f68e284d445b9b44c70b54b1249b35337e5f592a",
+    "original_evaluation_bytes": 10938,
+    "original_evaluation_sha256": "b97c2450ce7b4244710724630599d74418b82ee201044eb1e76c866b038923cd",
+    "preservation": "The original campaign directory is unchanged. This correction supersedes only the incorrect release commit sentence in its narrative; the original selected names, contributors, dates, citations, and per-resource hashes remain intact."
+  },
+  "finding": {
+    "incorrect_narrative_commit": "c4423b89541d752792d84fab5d824c7a2db96a44",
+    "correct_release_tag": "v4.1",
+    "correct_release_commit": "b6a6790f71c45e4a4ef60fce296c506f28f458bf",
+    "release_tree_sha": "6866f80535a25dfed2ca3ba978c62d7fc8573e98",
+    "release_date_recorded_in_original_manifest": "2025-05-28",
+    "commit_author_and_committer_date": "2025-05-28T20:52:22Z",
+    "tag_resolution": "GitHub refs/tags/v4.1 API response directly identifies a commit object with SHA b6a6790f71c45e4a4ef60fce296c506f28f458bf.",
+    "invalid_commit_lookup": "GitHub commit API lookup for c4423b89541d752792d84fab5d824c7a2db96a44 returned HTTP 422 with “No commit found for SHA”."
+  },
+  "evidence_snapshots": [
+    {
+      "path": "tag-ref-response.json",
+      "url": "https://api.github.com/repos/isawnyu/pleiades.datasets/git/ref/tags/v4.1",
+      "http_status": 200,
+      "retrieved_at_utc": "2026-10-03T16:27:00Z",
+      "bytes": 351,
+      "sha256": "7812a54f5897dacea1ff9306eb344602a87db6c114252ca905541927135eecde"
+    },
+    {
+      "path": "invalid-narrative-sha-response.json",
+      "url": "https://api.github.com/repos/isawnyu/pleiades.datasets/commits/c4423b89541d752792d84fab5d824c7a2db96a44",
+      "http_status": 422,
+      "retrieved_at_utc": "2026-10-03T16:27:00Z",
+      "bytes": 174,
+      "sha256": "2e1ffdbd85b2cb5080e7d758c61b0491cb2d95deeda9c2cb66baf0885ff84e11"
+    },
+    {
+      "path": "commit-record-summary.json",
+      "url": "https://api.github.com/repos/isawnyu/pleiades.datasets/commits/b6a6790f71c45e4a4ef60fce296c506f28f458bf",
+      "http_status": 200,
+      "retrieved_at_utc": "2026-10-03T16:27:00Z",
+      "response_bytes": 46464,
+      "response_sha256": "575cc055fd12b745ced4d89e7bf74826c6debf5e1ab3773ed5f4684d455d5143"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/isawnyu/pleiades.datasets/b6a6790f71c45e4a4ef60fce296c506f28f458bf/README.md",
+      "http_status": 200,
+      "retrieved_at_utc": "2026-10-03T16:28:00Z",
+      "bytes": 14395,
+      "sha256": "5dde1ee9473e22c6768e53b144c104cbcb8a57c3450139eeb06fd51e0c1a851d"
+    }
+  ],
+  "license_and_attribution": {
+    "license": "CC BY 3.0, as stated in the pinned v4.1 README. The README says content remains governed by the copyrights of its individual contributors; per-resource contributor lists and attribution are preserved in the original manifest.",
+    "source": "Pleiades datasets v4.1 README at immutable commit b6a6790f71c45e4a4ef60fce296c506f28f458bf.",
+    "attribution": "Pleiades datasets v4.1; cite the pinned commit and preserve individual contributor attribution from the original resource manifest."
+  },
+  "territorial_scope": "This correction concerns provenance for the same purposive sample of 25 Iberian Pleiades place resources recorded in the original campaign. It changes no place membership, geographic interpretation, boundary, or historical claim.",
+  "methods": {
+    "tag_and_commit": "Queried the GitHub tag-ref API for v4.1, the commit API for the resolved b6a6790 commit, and the commit API for the narrative c4423b8 identifier. Retained exact response bodies for tag resolution and failed lookup, plus the extracted successful commit record and response digest.",
+    "restoration_check": "For every original record, replaced the mutable release-tag segment in its raw URL with the 40-character resolved commit SHA; fetched the resource and compared HTTP status, byte length, and SHA-256 against the original manifest.",
+    "result_count": 25,
+    "all_urls_http_200": true,
+    "all_byte_lengths_match_original": true,
+    "all_sha256_match_original": true,
+    "resource_evidence_file": "restoration-check.json",
+    "restoration_check_file": "restoration-check.json"
+  },
+  "uncertainty_and_limits": [
+    "The tag-ref API response identifies a commit directly rather than an annotated tag object; it contains no independent tagger timestamp. The original release date remains 2025-05-28, and the resolved commit author/committer dates are 2025-05-28T20:52:22Z.",
+    "Resolving the tag and matching current resource bytes to the prior hashes establishes provenance and restoration for these 25 files only.",
+    "This does not independently validate ancient texts, citation quality, name attestation, Pleiades temporal conventions, historical territorial meanings, or continuous use. The original evaluation limitations remain in force.",
+    "No import was attempted; this campaign grants no regional approval or import permission."
+  ]
+}
