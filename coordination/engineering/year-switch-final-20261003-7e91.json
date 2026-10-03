@@ -6,7 +6,7 @@
   "branch": "engineering/year-switch-final-20261003-7e91",
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/22",
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T17:00:00Z",
+  "updated_at_utc": "2026-10-03T17:05:00Z",
   "base_main_commit": "79624f7695fa2e564a465bb9a4fb499af75d97f8",
   "completed_implementation_prs": [
     553,
@@ -17,7 +17,7 @@
   ],
   "reservation": {
     "accepted": true,
-    "request_id": "52231d57-0118-4953-96e6-ef6e6577e38f",
+    "request_id": "26778542-5a0c-4d51-a1d9-092f30b21b0c",
     "issue_number": 22,
     "claim": {
       "comment_id": 5967005967,
@@ -26,19 +26,19 @@
       "worker_id": "engineering-night-20261003-7e91f438",
       "claim_id": "35a7dbdb-842b-4282-8e21-d073cb7d7ac1",
       "branch": "engineering/year-switch-final-20261003-7e91",
-      "request_id": "52231d57-0118-4953-96e6-ef6e6577e38f",
+      "request_id": "26778542-5a0c-4d51-a1d9-092f30b21b0c",
       "issue_number": 22,
       "claimed_at": "2026-10-03T08:22:37.727Z",
-      "updated_at": "2026-10-03T16:48:39.655Z",
-      "expires_at": "2026-10-04T16:48:39.655Z",
-      "live_work": true,
+      "updated_at": "2026-10-03T17:04:25.400Z",
+      "expires_at": "2026-10-04T17:04:25.400Z",
+      "live_work": false,
       "mode": "engineering",
       "max_prs": 3
     },
     "replayed": false,
     "result_source": "github-comment",
-    "result_comment_id": 5971253071,
-    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37138203985"
+    "result_comment_id": 5971392808,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37139154012"
   },
   "publication_gate": "data/engineering/year-switch-publish-20261003-7e91/publication-inline-final.log.gz",
   "checks": {
@@ -54,7 +54,14 @@
     "attributes_per_profile": 8,
     "hierarchy_tiers": 6,
     "transport_injected_fault_scenarios": 9,
-    "transport_faults_completed": true
+    "transport_faults_completed": true,
+    "local_scope_exact_native_head": "passed against fresh origin/main7e0d5c97aeb1f0d98ac035959a2fe7a3cafe99c3",
+    "prior_exact_head_CI": {
+      "head": "6717206905cfa305e2e11e5601ed79772222779d",
+      "scope_run": 37138885334,
+      "package_run": 37138885343,
+      "conclusions": "success; latestreceiptupdate must pass exactnewhead"
+    }
   },
   "deployment": {
     "source_sha": "8aaeb86cdfe9fc49a3ca52c76151989ec994ece1",
@@ -95,10 +102,8 @@
     "data/engineering/year-switch-final-20261003-7e91/site23-faults.json.gz": "135c2e7abe1e89cd24c6c8db066c0e8ce528a419dcb15886f8e4a33fb9b7ffaa",
     "data/engineering/year-switch-final-20261003-7e91/site23-evidence-transfer.json": "ae4f8d2216020cffccdeb174919c60cf079afe82784f7b5d8bd0fd3d47c177e1"
   },
-  "blockers": [
-    "Workspace GitHub CLI GH_TOKEN returns401; native connector remains usable but exposes no authoritative Actions workflow dispatch for lease/queue. Need runtime GitHub credential reconnection/refresh, never credentials pasted into chat."
-  ],
-  "next_action": "Use working native GitHub connector to persist final evidence/record and create final partial PR. Runtime GitHub credential refresh required before authoritative lease live-work=false, scope exact-head CI verification, serialized queue and next ready issue claim. No live operation remains running; canonical claim still true until confirmed renewal.",
+  "blockers": [],
+  "next_action": "Recheck exact finalhead CI after this receipt update; markPR630 ready; submitserializedsquashqueue; verifyactualmerge and matchingbotresult; releaseissue22claim; continuefreshreadyissue23. Issue22remainsopen for coordinatorreviewedboundedfollowup because supported3secondtargetunmet.",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue",
   "historical_measurement": {
@@ -143,7 +148,7 @@
     "Fresh browser asset loading remains 34.7-36.3seconds; provider wake unknown, not attributed."
   ],
   "live_operations_settled": true,
-  "canonical_live_work_update": "pending authoritative Actions dispatch; no deployment/read requests running",
+  "canonical_live_work_update": "confirmed false by issue-claims.yml run37139154012, result5971392808",
   "acceptance_complete": false,
   "durable_binary_transport": "data/engineering/year-switch-final-20261003-7e91/site23-evidence-transfer.json",
   "decoded_evidence_paths": [
@@ -158,5 +163,6 @@
     "data/engineering/year-switch-final-20261003-7e91/site23-supported.json.gz",
     "data/engineering/year-switch-final-20261003-7e91/site23-faults.json.gz"
   ],
-  "evidence_transfer_commit": "709c2591ecbcff0a5bdf6b063f760a4c08ead98d"
+  "evidence_transfer_commit": "709c2591ecbcff0a5bdf6b063f760a4c08ead98d",
+  "historical_access_interruption": "Transient runtime GitHub HTTP401 recovered17:03UTC; native connector preserved evidence while blocked. Hourly wakeup enabled in samechat; no credentials exposed."
 }
