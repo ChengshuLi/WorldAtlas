@@ -1,0 +1,2134 @@
+{
+  "source": {
+    "title": "Global Self-consistent Hierarchical High-resolution Geography (GSHHG), full resolution binary, release 2.3.7",
+    "release_date": "2017-06-15",
+    "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+    "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+    "archive_bytes": 118617033,
+    "member": "gshhs_f.b",
+    "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "member_bytes": 95809336,
+    "license": "LGPLv3 or later; see archive LICENSE.TXT and retained WorldAtlas copy data/macro-improvements/macro-coverage-oceania/gshhg-LGPL.txt",
+    "restore": "Download the pinned archive, verify archive SHA-256, extract gshhs_f.b, and verify member SHA-256."
+  },
+  "selection": {
+    "purpose": "screen known Galápagos land components for three assigned Ecuador ADM2 features",
+    "bbox_wgs84": [
+      -92.0,
+      -2.0,
+      -89.0,
+      1.0
+    ],
+    "source_level": 1,
+    "whole_records_retained": true,
+    "retained_file": "sources/gshhg-galapagos-level1.bin.gz",
+    "retained_compressed_sha256": "05314d3ca6399985ec1751e53d7b69e38094b121959980511e10a291743db435",
+    "retained_uncompressed_sha256": "4537dc69af806dc4206e77aa51b3a72ac6099e794d9ed23ec9bf11ff9e5c3724",
+    "retained_bytes": 69200,
+    "record_count": 100,
+    "member_source_polygon_level_counts": {
+      "1": 179832,
+      "5": 329,
+      "6": 344,
+      "2": 6659,
+      "3": 1437,
+      "4": 11
+    }
+  },
+  "method": {
+    "records": "Big-endian 44-byte GSHHG header and coordinate pairs; normalize 0–360 longitudes to −180–180. Select complete level-1 source records by bbox overlap. No records or atlas geometries are edited.",
+    "candidate_attribution": "Calculate one planar vertex centroid per source polygon and use ray-crossing point-in-polygon against each assigned current Polygon/MultiPolygon, respecting interior rings. A matched point is screening only; it does not prove full overlap or containment. A non-match does not prove omission."
+  },
+  "galapagos_admin_features": {
+    "gb:ECU:ADM2:8360857B49822942031092": {
+      "name": "Isabela",
+      "current_polygon_components": 2
+    },
+    "gb:ECU:ADM2:8360857B73941749048341": {
+      "name": "Santa Cruz",
+      "current_polygon_components": 7
+    },
+    "gb:ECU:ADM2:8360857B96374734157472": {
+      "name": "San Cristobal",
+      "current_polygon_components": 5
+    }
+  },
+  "source_land_candidates": [
+    {
+      "gshhg_id": 127,
+      "level": 1,
+      "coordinate_count": 2887,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 4717.42206,
+      "bounds": [
+        -91.595417,
+        -1.052139,
+        -90.78122200000001,
+        0.166722
+      ],
+      "representative_point": [
+        -91.18504564547693,
+        -0.5574547961238115
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 318,
+      "level": 1,
+      "coordinate_count": 840,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 995.435019,
+      "bounds": [
+        -90.55127800000002,
+        -0.776306,
+        -90.16963900000002,
+        -0.481278
+      ],
+      "representative_point": [
+        -90.35950398572561,
+        -0.6267512502164594
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B73941749048341",
+          "name": "Santa Cruz"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 424,
+      "level": 1,
+      "coordinate_count": 497,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 653.743094,
+      "bounds": [
+        -91.66294399999998,
+        -0.503778,
+        -91.37627800000001,
+        -0.259583
+      ],
+      "representative_point": [
+        -91.5129337223955,
+        -0.38240153282896017
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B49822942031092",
+          "name": "Isabela"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 466,
+      "level": 1,
+      "coordinate_count": 610,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 577.81967,
+      "bounds": [
+        -90.87374999999997,
+        -0.372917,
+        -90.54794399999997,
+        -0.144611
+      ],
+      "representative_point": [
+        -90.71441132869445,
+        -0.2640503607338612
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B73941749048341",
+          "name": "Santa Cruz"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 473,
+      "level": 1,
+      "coordinate_count": 805,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 565.552082,
+      "bounds": [
+        -89.62877800000001,
+        -0.952944,
+        -89.24047200000001,
+        -0.682083
+      ],
+      "representative_point": [
+        -89.43046640269202,
+        -0.8234534412662127
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B96374734157472",
+          "name": "San Cristobal"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 1044,
+      "level": 1,
+      "coordinate_count": 327,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 177.752391,
+      "bounds": [
+        -90.513778,
+        -1.357917,
+        -90.352083,
+        -1.217111
+      ],
+      "representative_point": [
+        -90.43635396164508,
+        -1.2898399836290393
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B96374734157472",
+          "name": "San Cristobal"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 1280,
+      "level": 1,
+      "coordinate_count": 283,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 130.912876,
+      "bounds": [
+        -90.54344400000002,
+        0.276639,
+        -90.402333,
+        0.386944
+      ],
+      "representative_point": [
+        -90.47652371820695,
+        0.3315415259643241
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B73941749048341",
+          "name": "Santa Cruz"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 1975,
+      "level": 1,
+      "coordinate_count": 193,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 63.8348772,
+      "bounds": [
+        -89.74624999999997,
+        -1.407111,
+        -89.61791699999998,
+        -1.339639
+      ],
+      "representative_point": [
+        -89.67701412829375,
+        -1.3721373627238347
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B96374734157472",
+          "name": "San Cristobal"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 2006,
+      "level": 1,
+      "coordinate_count": 187,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 62.1241035,
+      "bounds": [
+        -90.79177800000002,
+        0.539833,
+        -90.71916700000003,
+        0.6435
+      ],
+      "representative_point": [
+        -90.75857370800934,
+        0.587136127920146
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B73941749048341",
+          "name": "Santa Cruz"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 3210,
+      "level": 1,
+      "coordinate_count": 149,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 27.5938941,
+      "bounds": [
+        -90.30044400000003,
+        -0.484611,
+        -90.24958299999997,
+        -0.40875
+      ],
+      "representative_point": [
+        -90.27792543334527,
+        -0.4517758106113845
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B73941749048341",
+          "name": "Santa Cruz"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 3334,
+      "level": 1,
+      "coordinate_count": 96,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 25.7729428,
+      "bounds": [
+        -90.09127799999999,
+        -0.837083,
+        -90.02875,
+        -0.794583
+      ],
+      "representative_point": [
+        -90.05904445728322,
+        -0.8150063131907642
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B96374734157472",
+          "name": "San Cristobal"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 4023,
+      "level": 1,
+      "coordinate_count": 98,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 18.9557751,
+      "bounds": [
+        -90.69041700000002,
+        -0.632111,
+        -90.643778,
+        -0.583778
+      ],
+      "representative_point": [
+        -90.66771032176342,
+        -0.6080232151232269
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B73941749048341",
+          "name": "Santa Cruz"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 4372,
+      "level": 1,
+      "coordinate_count": 140,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 16.5160878,
+      "bounds": [
+        -89.980167,
+        0.298333,
+        -89.93502799999999,
+        0.348417
+      ],
+      "representative_point": [
+        -89.95657970726747,
+        0.32549596516642737
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B96374734157472",
+          "name": "San Cristobal"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 8161,
+      "level": 1,
+      "coordinate_count": 63,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 5.55505136,
+      "bounds": [
+        -90.72127799999998,
+        -0.424556,
+        -90.69788899999998,
+        -0.393722
+      ],
+      "representative_point": [
+        -90.70977562982465,
+        -0.4098691522451633
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B73941749048341",
+          "name": "Santa Cruz"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 14260,
+      "level": 1,
+      "coordinate_count": 36,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 2.11321854,
+      "bounds": [
+        -90.29624999999999,
+        -0.399583,
+        -90.27794399999999,
+        -0.38625
+      ],
+      "representative_point": [
+        -90.28739990906674,
+        -0.39278604201672856
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 15925,
+      "level": 1,
+      "coordinate_count": 45,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 1.74814474,
+      "bounds": [
+        -90.885472,
+        -1.017139,
+        -90.86208299999998,
+        -1.002917
+      ],
+      "representative_point": [
+        -90.8738173767875,
+        -1.0082889396546153
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 16698,
+      "level": 1,
+      "coordinate_count": 36,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 1.60993316,
+      "bounds": [
+        -90.56211100000002,
+        -0.287972,
+        -90.54211099999998,
+        -0.277139
+      ],
+      "representative_point": [
+        -90.55174318737335,
+        -0.28239527558408684
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 22374,
+      "level": 1,
+      "coordinate_count": 21,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.974645382,
+      "bounds": [
+        -90.30213900000001,
+        -1.334611,
+        -90.29041699999999,
+        -1.324583
+      ],
+      "representative_point": [
+        -90.29637497605991,
+        -1.329354654354905
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 22931,
+      "level": 1,
+      "coordinate_count": 25,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.936460678,
+      "bounds": [
+        -90.78461099999998,
+        -0.864611,
+        -90.772111,
+        -0.855417
+      ],
+      "representative_point": [
+        -90.77887547529832,
+        -0.8597293156022978
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 25186,
+      "level": 1,
+      "coordinate_count": 27,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.803808912,
+      "bounds": [
+        -89.648778,
+        -1.34375,
+        -89.63708300000002,
+        -1.33375
+      ],
+      "representative_point": [
+        -89.64351330253886,
+        -1.3388191265175498
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 37570,
+      "level": 1,
+      "coordinate_count": 13,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.410288169,
+      "bounds": [
+        -90.377139,
+        -0.425417,
+        -90.37124999999997,
+        -0.417917
+      ],
+      "representative_point": [
+        -90.37399616017942,
+        -0.42165740058927176
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 43920,
+      "level": 1,
+      "coordinate_count": 13,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.313439967,
+      "bounds": [
+        -90.96463899999998,
+        -0.97375,
+        -90.961278,
+        -0.96375
+      ],
+      "representative_point": [
+        -90.96313348568482,
+        -0.9689815258218124
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 44042,
+      "level": 1,
+      "coordinate_count": 14,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.312059759,
+      "bounds": [
+        -90.80458299999998,
+        -0.847111,
+        -90.79711099999997,
+        -0.842917
+      ],
+      "representative_point": [
+        -90.8008533554024,
+        -0.844913708124657
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 47139,
+      "level": 1,
+      "coordinate_count": 21,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.279356348,
+      "bounds": [
+        -90.34380599999997,
+        -1.30875,
+        -90.335417,
+        -1.301278
+      ],
+      "representative_point": [
+        -90.34058935665719,
+        -1.3041626451909403
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 49586,
+      "level": 1,
+      "coordinate_count": 13,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.256667472,
+      "bounds": [
+        -90.587917,
+        -0.369583,
+        -90.582111,
+        -0.364611
+      ],
+      "representative_point": [
+        -90.58479643570396,
+        -0.36735747264614765
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 50007,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.25316136,
+      "bounds": [
+        -90.569639,
+        -0.351278,
+        -90.56461100000001,
+        -0.346278
+      ],
+      "representative_point": [
+        -90.5672268467563,
+        -0.3488847300958238
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 54842,
+      "level": 1,
+      "coordinate_count": 14,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.217541006,
+      "bounds": [
+        -90.81455599999998,
+        -0.84625,
+        -90.80958299999998,
+        -0.84125
+      ],
+      "representative_point": [
+        -90.81185701988461,
+        -0.8441099599444793
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 55780,
+      "level": 1,
+      "coordinate_count": 11,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.211576865,
+      "bounds": [
+        -90.16877799999997,
+        -0.585444,
+        -90.15961099999998,
+        -0.582111
+      ],
+      "representative_point": [
+        -90.16399493818453,
+        -0.5837889056393755
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 58851,
+      "level": 1,
+      "coordinate_count": 15,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.192761161,
+      "bounds": [
+        -90.36627800000002,
+        -1.231306,
+        -90.36047200000002,
+        -1.227111
+      ],
+      "representative_point": [
+        -90.36381129889061,
+        -1.2290681691486758
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 58954,
+      "level": 1,
+      "coordinate_count": 11,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.192177573,
+      "bounds": [
+        -90.54041699999999,
+        -0.561278,
+        -90.53544399999998,
+        -0.557083
+      ],
+      "representative_point": [
+        -90.53810356560219,
+        -0.5593706488831197
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 61832,
+      "level": 1,
+      "coordinate_count": 16,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.176881897,
+      "bounds": [
+        -89.26713899999999,
+        -0.673778,
+        -89.26291700000002,
+        -0.668806
+      ],
+      "representative_point": [
+        -89.2646943320114,
+        -0.6712638701054375
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 64550,
+      "level": 1,
+      "coordinate_count": 10,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.164601343,
+      "bounds": [
+        -90.28125,
+        -0.405417,
+        -90.27794399999999,
+        -0.399583
+      ],
+      "representative_point": [
+        -90.27925578593616,
+        -0.4024130785064894
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 68099,
+      "level": 1,
+      "coordinate_count": 16,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.150053732,
+      "bounds": [
+        -89.57041700000002,
+        -0.854583,
+        -89.56372199999998,
+        -0.851278
+      ],
+      "representative_point": [
+        -89.56730874524797,
+        -0.8528786552288992
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 70989,
+      "level": 1,
+      "coordinate_count": 12,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.139988622,
+      "bounds": [
+        -90.850417,
+        -0.173778,
+        -90.84461099999999,
+        -0.170444
+      ],
+      "representative_point": [
+        -90.84791068213707,
+        -0.17187603018120595
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 72879,
+      "level": 1,
+      "coordinate_count": 10,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.133456592,
+      "bounds": [
+        -90.75291700000002,
+        -0.847139,
+        -90.74794400000002,
+        -0.84375
+      ],
+      "representative_point": [
+        -90.75075649988716,
+        -0.8452215400369952
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 73165,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.132671921,
+      "bounds": [
+        -90.38958300000002,
+        -1.236306,
+        -90.385444,
+        -1.232917
+      ],
+      "representative_point": [
+        -90.38751616215251,
+        -1.2346073749719295
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 73263,
+      "level": 1,
+      "coordinate_count": 8,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.132424245,
+      "bounds": [
+        -89.521278,
+        -0.777083,
+        -89.51797199999999,
+        -0.772889
+      ],
+      "representative_point": [
+        -89.5195198568608,
+        -0.774618989606682
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 75131,
+      "level": 1,
+      "coordinate_count": 13,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.126728624,
+      "bounds": [
+        -91.62816700000002,
+        0.271667,
+        -91.623444,
+        0.275222
+      ],
+      "representative_point": [
+        -91.62599938933293,
+        0.27349182217552975
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 75775,
+      "level": 1,
+      "coordinate_count": 10,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.124863905,
+      "bounds": [
+        -90.56208299999997,
+        -0.341278,
+        -90.55794400000002,
+        -0.337889
+      ],
+      "representative_point": [
+        -90.55989617846895,
+        -0.33961681675119915
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 76275,
+      "level": 1,
+      "coordinate_count": 12,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.123730119,
+      "bounds": [
+        -90.164556,
+        -0.580444,
+        -90.15875,
+        -0.577917
+      ],
+      "representative_point": [
+        -90.16144622061577,
+        -0.579471591331695
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 82390,
+      "level": 1,
+      "coordinate_count": 8,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.108558435,
+      "bounds": [
+        -90.527083,
+        -0.516278,
+        -90.52372200000002,
+        -0.512083
+      ],
+      "representative_point": [
+        -90.52551210683406,
+        -0.5143102378950639
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 87396,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0984181611,
+      "bounds": [
+        -90.58877799999999,
+        -0.669556,
+        -90.585417,
+        -0.666278
+      ],
+      "representative_point": [
+        -90.58709748763856,
+        -0.6679205172455042
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 87685,
+      "level": 1,
+      "coordinate_count": 11,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0979396859,
+      "bounds": [
+        -90.56124999999997,
+        -0.347944,
+        -90.55794400000002,
+        -0.344611
+      ],
+      "representative_point": [
+        -90.55961192698177,
+        -0.34642280140347753
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 87999,
+      "level": 1,
+      "coordinate_count": 11,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0974056711,
+      "bounds": [
+        -90.958778,
+        -0.973722,
+        -90.954611,
+        -0.970417
+      ],
+      "representative_point": [
+        -90.95696888403192,
+        -0.972113936295875
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 89386,
+      "level": 1,
+      "coordinate_count": 11,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0950727823,
+      "bounds": [
+        -91.369194,
+        0.162694,
+        -91.36508300000003,
+        0.166028
+      ],
+      "representative_point": [
+        -91.36724668321595,
+        0.1643464351000566
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 91265,
+      "level": 1,
+      "coordinate_count": 10,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0914435715,
+      "bounds": [
+        -90.87544400000002,
+        -0.974611,
+        -90.87208299999998,
+        -0.971278
+      ],
+      "representative_point": [
+        -90.87380203948979,
+        -0.973049039952832
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 93158,
+      "level": 1,
+      "coordinate_count": 8,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0887643882,
+      "bounds": [
+        -90.53211099999999,
+        -0.515417,
+        -90.52880599999997,
+        -0.512083
+      ],
+      "representative_point": [
+        -90.53018473754116,
+        -0.5137072561896238
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 95357,
+      "level": 1,
+      "coordinate_count": 10,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0849113726,
+      "bounds": [
+        -91.35652800000003,
+        0.165056,
+        -91.35258299999998,
+        0.167639
+      ],
+      "representative_point": [
+        -91.35458899365028,
+        0.16630633225478844
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 95921,
+      "level": 1,
+      "coordinate_count": 10,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0838202474,
+      "bounds": [
+        -91.34580599999998,
+        0.167389,
+        -91.34238900000003,
+        0.170806
+      ],
+      "representative_point": [
+        -91.34397983778503,
+        0.16897443244897137
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 98345,
+      "level": 1,
+      "coordinate_count": 11,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0809174394,
+      "bounds": [
+        -90.63375000000002,
+        -0.417083,
+        -90.62877800000001,
+        -0.414611
+      ],
+      "representative_point": [
+        -90.6312578674114,
+        -0.41584742532442653
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 99236,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.079885831,
+      "bounds": [
+        -90.27961099999999,
+        -0.759611,
+        -90.27630599999998,
+        -0.757139
+      ],
+      "representative_point": [
+        -90.27794292127963,
+        -0.7583683731687886
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 104042,
+      "level": 1,
+      "coordinate_count": 10,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0732607753,
+      "bounds": [
+        -90.31044400000002,
+        -1.344583,
+        -90.30708299999998,
+        -1.34125
+      ],
+      "representative_point": [
+        -90.30872258671779,
+        -1.3427790022368025
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 105966,
+      "level": 1,
+      "coordinate_count": 10,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0713837905,
+      "bounds": [
+        -89.340417,
+        -0.68375,
+        -89.337111,
+        -0.681278
+      ],
+      "representative_point": [
+        -89.33871909192784,
+        -0.6827958456194613
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 106339,
+      "level": 1,
+      "coordinate_count": 10,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0709829379,
+      "bounds": [
+        -90.447944,
+        -1.224611,
+        -90.44377800000001,
+        -1.222139
+      ],
+      "representative_point": [
+        -90.44547238117781,
+        -1.2235652973275797
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 110067,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0660947949,
+      "bounds": [
+        -90.96463899999998,
+        -0.382944,
+        -90.962111,
+        -0.380417
+      ],
+      "representative_point": [
+        -90.96348233884096,
+        -0.38157525150575733
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 111258,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.064933944,
+      "bounds": [
+        -90.582944,
+        -0.237111,
+        -90.58041700000001,
+        -0.234583
+      ],
+      "representative_point": [
+        -90.5815781368922,
+        -0.2357406799932649
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 117367,
+      "level": 1,
+      "coordinate_count": 10,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0589687124,
+      "bounds": [
+        -90.40677799999997,
+        0.305083,
+        -90.404,
+        0.307722
+      ],
+      "representative_point": [
+        -90.40532731661543,
+        0.3064456942092004
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 119428,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0569774294,
+      "bounds": [
+        -90.56627800000001,
+        -0.357944,
+        -90.56375000000003,
+        -0.355417
+      ],
+      "representative_point": [
+        -90.56500933741957,
+        -0.3566759334776208
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 119664,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0567968233,
+      "bounds": [
+        -90.634611,
+        -0.413806,
+        -90.63208300000002,
+        -0.411278
+      ],
+      "representative_point": [
+        -90.63335730645007,
+        -0.4125334407682509
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 129485,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.048020534,
+      "bounds": [
+        -90.35461099999998,
+        -0.395472,
+        -90.35211099999998,
+        -0.392944
+      ],
+      "representative_point": [
+        -90.35320939463075,
+        -0.3943383681981864
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 133307,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0459902792,
+      "bounds": [
+        -90.86208299999998,
+        -0.547944,
+        -90.85963900000002,
+        -0.545444
+      ],
+      "representative_point": [
+        -90.86070892811657,
+        -0.5468307690442875
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 140700,
+      "level": 1,
+      "coordinate_count": 8,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.039310154,
+      "bounds": [
+        -90.58038900000003,
+        -0.372972,
+        -90.577944,
+        -0.37125
+      ],
+      "representative_point": [
+        -90.57899850037637,
+        -0.3720217441420137
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 141217,
+      "level": 1,
+      "coordinate_count": 8,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0390238102,
+      "bounds": [
+        -89.64963899999998,
+        -1.347944,
+        -89.647111,
+        -1.346278
+      ],
+      "representative_point": [
+        -89.64855158910463,
+        -1.3470276981283227
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 141310,
+      "level": 1,
+      "coordinate_count": 8,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0389701503,
+      "bounds": [
+        -90.57213899999999,
+        -0.36625,
+        -90.56961100000001,
+        -0.364583
+      ],
+      "representative_point": [
+        -90.57104147164323,
+        -0.36550017268419605
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 141520,
+      "level": 1,
+      "coordinate_count": 5,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0388709841,
+      "bounds": [
+        -90.502972,
+        -1.337944,
+        -90.500472,
+        -1.335417
+      ],
+      "representative_point": [
+        -90.5017036220421,
+        -1.336684999336674
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 142408,
+      "level": 1,
+      "coordinate_count": 8,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0384458724,
+      "bounds": [
+        -91.09125,
+        -0.597944,
+        -91.08877799999999,
+        -0.596278
+      ],
+      "representative_point": [
+        -91.08984063684404,
+        -0.5970308137030726
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 142925,
+      "level": 1,
+      "coordinate_count": 8,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0381773159,
+      "bounds": [
+        -89.54461099999997,
+        -0.823778,
+        -89.54297200000002,
+        -0.82125
+      ],
+      "representative_point": [
+        -89.54387302709078,
+        -0.822687207420838
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 143898,
+      "level": 1,
+      "coordinate_count": 8,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0376206387,
+      "bounds": [
+        -91.09455600000001,
+        -1.03875,
+        -91.09211099999999,
+        -1.037083
+      ],
+      "representative_point": [
+        -91.09316420554107,
+        -1.0380040025538684
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 144696,
+      "level": 1,
+      "coordinate_count": 11,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.037102465,
+      "bounds": [
+        -90.404222,
+        0.311528,
+        -90.40188899999998,
+        0.313417
+      ],
+      "representative_point": [
+        -90.40300892080363,
+        0.31249876359432643
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 145245,
+      "level": 1,
+      "coordinate_count": 8,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0367093096,
+      "bounds": [
+        -90.56791700000002,
+        -0.362917,
+        -90.566306,
+        -0.360472
+      ],
+      "representative_point": [
+        -90.56719086141435,
+        -0.36186200187052847
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 153424,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0301875396,
+      "bounds": [
+        -90.81455599999998,
+        -0.851306,
+        -90.81211100000002,
+        -0.849583
+      ],
+      "representative_point": [
+        -90.81355408322813,
+        -0.8502019039544593
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 153785,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0300391854,
+      "bounds": [
+        -89.36794400000002,
+        -0.857944,
+        -89.36627800000002,
+        -0.856278
+      ],
+      "representative_point": [
+        -89.36711109780474,
+        -0.8571084023404631
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 155520,
+      "level": 1,
+      "coordinate_count": 6,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0293589617,
+      "bounds": [
+        -90.96877799999999,
+        -0.965417,
+        -90.96711099999999,
+        -0.962944
+      ],
+      "representative_point": [
+        -90.96772076293087,
+        -0.9641980557147806
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 155529,
+      "level": 1,
+      "coordinate_count": 9,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0293553919,
+      "bounds": [
+        -90.87124999999997,
+        -1.026278,
+        -90.86961100000002,
+        -1.024611
+      ],
+      "representative_point": [
+        -90.87043870116186,
+        -1.0254368345370057
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 162829,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0226484024,
+      "bounds": [
+        -90.959611,
+        -0.965417,
+        -90.95872200000002,
+        -0.962944
+      ],
+      "representative_point": [
+        -90.95917000625381,
+        -0.9641739532712164
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 163046,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0224312155,
+      "bounds": [
+        -90.88294400000001,
+        -1.022944,
+        -90.88122199999998,
+        -1.021278
+      ],
+      "representative_point": [
+        -90.88193786992579,
+        -1.021969028394253
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 163746,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0218577503,
+      "bounds": [
+        -90.575444,
+        -0.372972,
+        -90.573778,
+        -0.37125
+      ],
+      "representative_point": [
+        -90.57445409662375,
+        -0.37194696634827384
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 163861,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0217889169,
+      "bounds": [
+        -90.51547199999999,
+        -0.498778,
+        -90.51375000000002,
+        -0.497111
+      ],
+      "representative_point": [
+        -90.5144422153117,
+        -0.497783183225668
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 164566,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0213630192,
+      "bounds": [
+        -90.62958300000003,
+        -0.411278,
+        -90.62791700000002,
+        -0.409611
+      ],
+      "representative_point": [
+        -90.6289084691024,
+        -0.41028929607702025
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 164577,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0213556632,
+      "bounds": [
+        -90.92708299999998,
+        -0.962111,
+        -90.92541699999998,
+        -0.960444
+      ],
+      "representative_point": [
+        -90.92640066944513,
+        -0.9614243767398609
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 165185,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.020984126,
+      "bounds": [
+        -89.643778,
+        -1.352944,
+        -89.64213899999999,
+        -1.351278
+      ],
+      "representative_point": [
+        -89.64311663053141,
+        -1.3522705684708847
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 170408,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0135385214,
+      "bounds": [
+        -90.519611,
+        -0.53125,
+        -90.51791700000001,
+        -0.530389
+      ],
+      "representative_point": [
+        -90.51877629892675,
+        -0.5308240102978133
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 170539,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0133953784,
+      "bounds": [
+        -90.14297199999999,
+        -0.565472,
+        -90.14125000000001,
+        -0.564611
+      ],
+      "representative_point": [
+        -90.14210475247053,
+        -0.565036487023247
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 170541,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.01339503,
+      "bounds": [
+        -90.211278,
+        -0.703778,
+        -90.209611,
+        -0.702917
+      ],
+      "representative_point": [
+        -90.21042563884345,
+        -0.7033519097447599
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 171084,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0130982187,
+      "bounds": [
+        -90.80874999999997,
+        -0.734583,
+        -90.80708299999998,
+        -0.733722
+      ],
+      "representative_point": [
+        -90.80792231430743,
+        -0.7341573207480377
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 171119,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0130869119,
+      "bounds": [
+        -89.24541699999997,
+        -0.702111,
+        -89.24377800000002,
+        -0.701222
+      ],
+      "representative_point": [
+        -89.24460386049013,
+        -0.7016727795503047
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 171361,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0129719141,
+      "bounds": [
+        -90.22791699999999,
+        -0.712111,
+        -90.22627799999998,
+        -0.71125
+      ],
+      "representative_point": [
+        -90.22709487312699,
+        -0.7116670728304286
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 171375,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0129648354,
+      "bounds": [
+        -90.31044400000002,
+        -0.756306,
+        -90.308806,
+        -0.755444
+      ],
+      "representative_point": [
+        -90.30961252482251,
+        -0.7558702335071333
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 172137,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0126741359,
+      "bounds": [
+        -90.60711099999997,
+        -0.212889,
+        -90.60541699999999,
+        -0.212083
+      ],
+      "representative_point": [
+        -90.60627624449278,
+        -0.2124875214342182
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 172139,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.012673688,
+      "bounds": [
+        -90.519611,
+        -0.532917,
+        -90.51791700000001,
+        -0.532111
+      ],
+      "representative_point": [
+        -90.51877634852836,
+        -0.5325155220073201
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 172174,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0126629244,
+      "bounds": [
+        -91.01455600000003,
+        -0.984611,
+        -91.01297199999999,
+        -0.98375
+      ],
+      "representative_point": [
+        -91.01376401769146,
+        -0.9841790353388161
+      ],
+      "current_assigned_units_containing_point": [
+        {
+          "location_id": "gb:ECU:ADM2:8360857B49822942031092",
+          "name": "Isabela"
+        }
+      ],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 172190,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.012658071,
+      "bounds": [
+        -90.259611,
+        -0.476222,
+        -90.25791700000002,
+        -0.475417
+      ],
+      "representative_point": [
+        -90.25875149578928,
+        -0.475820965813613
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 172579,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0125240825,
+      "bounds": [
+        -90.68791700000003,
+        -0.589583,
+        -90.68624999999997,
+        -0.588778
+      ],
+      "representative_point": [
+        -90.68708968309355,
+        -0.5891819342546298
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 172906,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0124009382,
+      "bounds": [
+        -90.516278,
+        -0.49625,
+        -90.514611,
+        -0.495444
+      ],
+      "representative_point": [
+        -90.5154446102644,
+        -0.4958454438008635
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 172909,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0124003049,
+      "bounds": [
+        -90.31875000000002,
+        -0.76875,
+        -90.31711100000001,
+        -0.767944
+      ],
+      "representative_point": [
+        -90.3179303974789,
+        -0.7683484513960894
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 172915,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0123986876,
+      "bounds": [
+        -90.42541699999998,
+        -1.212917,
+        -90.42377800000003,
+        -1.212111
+      ],
+      "representative_point": [
+        -90.42459760924478,
+        -1.2125154537347549
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 172949,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0123854142,
+      "bounds": [
+        -90.14375000000001,
+        -0.567083,
+        -90.142111,
+        -0.566278
+      ],
+      "representative_point": [
+        -90.14293053404091,
+        -0.5666790998141298
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 172952,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0123851063,
+      "bounds": [
+        -90.845417,
+        -0.699583,
+        -90.84377799999999,
+        -0.698778
+      ],
+      "representative_point": [
+        -90.84459764063656,
+        -0.6991819014815733
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 173262,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0122614215,
+      "bounds": [
+        -90.31627800000001,
+        -0.76875,
+        -90.31461100000001,
+        -0.767944
+      ],
+      "representative_point": [
+        -90.31545083596687,
+        -0.7683486285651391
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    },
+    {
+      "gshhg_id": 174865,
+      "level": 1,
+      "coordinate_count": 7,
+      "container_id": -1,
+      "ancestor_id": -1,
+      "area_km2_header": 0.0114240749,
+      "bounds": [
+        -90.35958299999999,
+        -0.422083,
+        -90.35797200000002,
+        -0.421306
+      ],
+      "representative_point": [
+        -90.35877783309593,
+        -0.4216944424098596
+      ],
+      "current_assigned_units_containing_point": [],
+      "classification": "candidate source land polygon; attribution uses one point-in-polygon test only"
+    }
+  ],
+  "limitations": [
+    "GSHHG is a 2017 global physical-shoreline compilation, not an authoritative Ecuador island register, cadastral source, administrative boundary, settlement gazetteer, or complete modern shoreline.",
+    "The GSHHG polygon IDs have no toponyms. The 2017 source and this coarse screening do not establish the names or completeness of the 14 current canton components.",
+    "A bbox selector and one centroid overlay do not validate shoreline topology or certify complete land assignment. All named island, settlement, coastal, and land-hole review remains open.",
+    "No political ownership or current parent membership is inferred from physical land polygons."
+  ]
+}

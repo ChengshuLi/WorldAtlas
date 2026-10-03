@@ -1,0 +1,137 @@
+{
+  "retrieved_utc": "2026-10-03",
+  "sources": [
+    {
+      "id": "gb-ecu-adm2-2019",
+      "title": "geoBoundaries gbOpen Ecuador ADM2",
+      "publisher": "geoBoundaries; underlying boundary source declared as INEC Ecuador and OCHA ROLAC",
+      "boundary_vintage": "2019",
+      "source_update": "2023-01-19",
+      "build": "2023-12-12",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/ECU/ADM2/geoBoundaries-ECU-ADM2.geojson",
+      "license": "CC BY 3.0 IGO for this boundary file; geoBoundaries citation text also requires attribution; see https://www.geoboundaries.org/terms-of-use/",
+      "attribution": "geoBoundaries; underlying INEC and OCHA ROLAC source as named in pinned metadata",
+      "metadata_url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09/releaseData/gbOpen/ECU/ADM2/geoBoundaries-ECU-ADM2-metaData.json",
+      "metadata_sha256": "969a57b7298d7e71205963b33b8aa3222b4bab26c24481e7de286f3a0681acb0",
+      "metadata_bytes": 946,
+      "feature_count": 223,
+      "metadata_declared_count": 224,
+      "uncompressed_sha256": "3bec5261a078ec78ef1d24d175fa1ec8f619dc887e59f1cfe39fefba65cd4c76",
+      "stored_gzip": {
+        "retained_path": "sources/geoboundaries-ECU-ADM2-2019.geojson.gz",
+        "bytes": 14386990,
+        "sha256": "afda62cc58aae797b8152c19d8307cbd21b1fbd6e9ac9ede23856896711693d2"
+      },
+      "restore": "Download the pinned media URL and verify uncompressed SHA-256. The ordinary raw.githubusercontent endpoint for the LFS metadata may return a pointer; the media URL returns bytes."
+    },
+    {
+      "id": "inec-ecu-codab-2023-tabular",
+      "title": "Ecuador administrative boundaries tabular data, ADM2",
+      "publisher": "Instituto Nacional de Estadística y Censos (INEC), distributed by OCHA ROLAC COD-AB",
+      "administrative_vintage": "DPA established 2017; this table version resource modified 2023-04-04",
+      "canonical_dataset": "https://data.humdata.org/dataset/cod-ab-ecu",
+      "download_url": "https://data.humdata.org/dataset/538a4523-8d2f-4875-b2c6-e7ba2b85fcd8/resource/a882d581-e78a-4a55-ab7f-1683dd847fc9/download/ecu_adminboundaries_tabulardata.xlsx",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "attribution": "INEC Ecuador; OCHA ROLAC COD-AB",
+      "source_sheet": "ADM2",
+      "official_row_count": 224,
+      "extract_method": "Openpyxl 3.1.5, data_only=True, read_only=True; preserve all values in the ADM2 official-roster JSON. This is administrative name/code data, not geometry.",
+      "original_file": {
+        "retained_path": "sources/ecu-admin-boundaries-tabular-data-2023.xlsx",
+        "bytes": 95508,
+        "sha256": "cfb9c6e0b77ecc3a74a9a3bfe02dd8ad7a8fe9de3567e8be7c47eff624eed35d"
+      },
+      "retained_fact_extract": {
+        "retained_path": "sources/ecu-admin2-official-roster.json",
+        "bytes": 66555,
+        "sha256": "da5ab1a27b35772c84b3f67cfec3dac0fd222fbacbd2dda07d7b507dd43f267c"
+      },
+      "restore": "Download the exact workbook URL above and verify original file SHA-256; extracted rows contain the exact source columns and carry this citation/license."
+    },
+    {
+      "id": "inec-ecu-codab-2024-gazetteer",
+      "title": "Ecuador administrative gazetteer, COD-AB resource ecu_admgz.xlsx",
+      "publisher": "INEC Ecuador source, distributed by OCHA ROLAC COD-AB",
+      "release": "2024 DPA gazetteer resource; posted 2025-03-21; package last modified 2025-07-01",
+      "canonical_dataset": "https://data.humdata.org/dataset/cod-ab-ecu",
+      "download_url": "https://data.humdata.org/dataset/ab3c7592-3b0c-41cd-999a-2919a6b243f2/resource/e59b7aaf-755d-47e5-95e4-a98f9bfa5856/download/ecu_admgz.xlsx",
+      "license": "Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO)",
+      "attribution": "INEC Ecuador; OCHA ROLAC COD-AB",
+      "source_sheet": "ecu_admgz_adm2",
+      "official_row_count": 223,
+      "extract_method": "Openpyxl 3.1.5, data_only=True, read_only=True; all source columns preserved in official JSON extract. Gazetteer omits the old Zona No Delimitada ADM2 codes present in the 2023 file; no absence is interpreted as land disappearance.",
+      "original_file": {
+        "retained_path": "sources/ecu-admin-gazetteer-2024.xlsx",
+        "bytes": 143813,
+        "sha256": "5512f9314147556cec415ae87534c20491f9e4cf5a673d7bfc2ca4da18793afc"
+      },
+      "retained_fact_extract": {
+        "retained_path": "sources/ecu-admin2-gazetteer-2024.json",
+        "bytes": 55339,
+        "sha256": "027cd64f8912f7989661182c5c7c279807486baea3d156a99dfc06215c773cdf"
+      },
+      "restore": "Download the exact XLSX URL above and verify SHA-256."
+    },
+    {
+      "id": "geoboundaries-per-adm2-2020",
+      "title": "geoBoundaries gbOpen Peru ADM2",
+      "publisher": "geoBoundaries; underlying boundary source declared as Instituto Geográfico Nacional (IGN), Peru and OCHA ROLAC",
+      "boundary_vintage": "2020",
+      "source_update": "2023-01-19",
+      "build": "2023-12-12",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/PER/ADM2/geoBoundaries-PER-ADM2.geojson",
+      "license": "CC BY 3.0 IGO",
+      "attribution": "geoBoundaries; underlying IGN and OCHA ROLAC source as named in pinned metadata",
+      "metadata_url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09/releaseData/gbOpen/PER/ADM2/geoBoundaries-PER-ADM2-metaData.json",
+      "metadata_sha256": "d6f5b546a17b37172d5e818051c3bc79dedd522d337698381ec2a23f768539ba",
+      "uncompressed_sha256": "58d0720bc01abd27bd02fb73d2ee8443fc6067352d97b752d100a18e3b97bb58",
+      "stored_in": "data/regional-review/regional-review-d2dae235991eaa49/sources/geoboundaries-PER-ADM2-2020.geojson.gz (merged evidence PR #565; this packet reads and preserves it without editing)",
+      "stored_compressed_sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+      "feature_count": 196,
+      "restore": "Use the pinned media URL. Decompress the merged packet source copy and verify the uncompressed hash. The current packet does not duplicate or mutate peer source bytes."
+    },
+    {
+      "id": "inei-bulletin-26",
+      "title": "Perú: Proyecciones de Población, Según Departamento, Provincia y Distrito, 2018–2020 (Boletín Especial N°26)",
+      "publisher": "Instituto Nacional de Estadística e Informática (INEI)",
+      "publication": "2020-01; administrative table cut-off 2019-12-31",
+      "relevant_pages": "printed pp.45–49, complete department/province roster (195 rows plus the combined Constitutional Province of Callao record; 196 official provinces total)",
+      "url": "https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1715/Libro.pdf",
+      "license": "INEI notice permits whole/partial reproduction with source citation, recorded in merged packet #497",
+      "attribution": "Instituto Nacional de Estadística e Informática (INEI), Perú",
+      "retained_in": "data/regional-review/regional-review-d2dae235991eaa49/sources/inei-bulletin-26-2020.pdf (merged evidence PR #565; original source bytes not duplicated)",
+      "original_bytes": 3160162,
+      "original_sha256": "5a0a84793cddcd19e7f9db9cc9f62e03cb1240f93c0cc275abc135ba09c4d053",
+      "derived_roster": {
+        "retained_path": "sources/inei-2019-province-roster-pp45-49.csv",
+        "bytes": 4952,
+        "sha256": "a28e210ec22dc27c94c148c4b4151dabe0741b4059d3014b7482220bbf857182"
+      },
+      "derived_roster_rows": 196,
+      "derived_roster_sha256": "a28e210ec22dc27c94c148c4b4151dabe0741b4059d3014b7482220bbf857182",
+      "extract_method": "pdftotext -layout physical pages 45–49 from the retained PDF. Parse UBIGEO + department/province labels. INEI lists Callao as a combined province/department line; the extract preserves that official unit as code 070000. Name matching is accent-insensitive and code/parent candidates are explicitly reported."
+    },
+    {
+      "id": "worldatlas-peer-peru-batch",
+      "title": "Merged sibling geography packet #497 / PR #565",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/565",
+      "owner_path": "data/regional-review/regional-review-d2dae235991eaa49/",
+      "scope_relation": "Disjoint 89 IDs in sibling #497 plus 228 IDs in #496; the two exact issue ID sets have empty intersection; Peru area members form 89 + 115 = 204."
+    }
+  ],
+  "inspected_facts": {
+    "exact_assigned_member_count": 228,
+    "Ecuador_assigned": 113,
+    "Peru_assigned": 115,
+    "INEC_2023_Ecuador_match_count": 113,
+    "INEC_2024_Ecuador_match_count": 112,
+    "INEI_2019_Peru_province_match_count": 115,
+    "classification": "One correction-needed administrative role/source-vintage mismatch (Las Golondrinas). Remaining subjects have sourced administrative identity but unresolved physical/settlement and semantic-tier completeness; no subject is marked justified solely from structure."
+  },
+  "unresolved_source_work": {
+    "settlements": "No authoritative point settlement or complete named-place dataset was reconciled against the 228 polygons. Province/canton administrative roster and population tables are not settlement inventories.",
+    "physical_geography": "No authoritative shoreline, named island, hydrographic, lake/islet or enclave inventory was reconciled. Galápagos canton component identities and five inland interior rings remain open.",
+    "latest_admin_source": "The 2024 Ecuador gazetteer lacks the 2019/2023 Zona No Delimitada records; authoritative effective-date and geometry crosswalk for Las Golondrinas/Manga del Cura remains a coordinated source restoration item under #495/#496 and integration #489."
+  },
+  "notes": "This register records geographic administrative identity separately from physical land and political ownership. Source byte hashes do not certify semantic suitability or topology."
+}
