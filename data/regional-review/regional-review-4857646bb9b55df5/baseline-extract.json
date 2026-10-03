@@ -1,0 +1,3877 @@
+{
+  "baseline_commit": "39188aadf6efdae60357d9d4a1bbb62ffd981003",
+  "issue": 140,
+  "region": {
+    "id": "atlas:macro-review:region:ba863bc35dac7390",
+    "name": "Equatorial Micronesia",
+    "envelope": {
+      "id": "atlas:macro-review:region:ba863bc35dac7390",
+      "name": "Equatorial Micronesia",
+      "level": "region",
+      "parent_id": "framework:subcontinent:micronesia:44f839aaab87",
+      "path": "eba468342f42eb16b622758d.wkb.gz",
+      "sha256": "3bf8182c48fe7a7bf412e26f49b0909b1a20108cf48db3e213de60463f8f20e0",
+      "geometry_sha256": "b9be238fcabbcafa4ca1cdaf49ad506a3b958d8a850768563fe484c9612dc303",
+      "member_location_ids_sha256": "860b8b77033b0cb40242f67195c59b2a64760fe007d392044c9f466f961b9da8",
+      "locations": 3,
+      "area_m2": 149425156.43982038,
+      "bounds": [
+        166.9112,
+        -2.6556,
+        176.8434,
+        3.3929
+      ]
+    },
+    "subcontinent_id": "framework:subcontinent:micronesia:44f839aaab87",
+    "continent_id": "framework:continent:oceania:48580dd0c4b4",
+    "location_count": 3,
+    "required_work": [
+      "Review every area, province and location for sourced territorial purpose and neighboring granularity.",
+      "Resolve source island/shoreline gaps and document grid representation, verifying all reviewed island representations.",
+      "Preserve frozen outer land and shared boundaries; coordinate any external boundary amendment.",
+      "Publish full-branch certificate with exact approved subjects and release pins before Luna imports."
+    ]
+  },
+  "scope_location_ids": [
+    "atlas:territory:NRU",
+    "gb:KIR:ADM1:97431129B36644055464690",
+    "gb:KIR:ADM1:97431129B55805139245338"
+  ],
+  "locations": {
+    "gb:KIR:ADM1:97431129B55805139245338": {
+      "type": "Feature",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                176.7915,
+                -2.6128
+              ],
+              [
+                176.8434,
+                -2.6556
+              ],
+              [
+                176.82,
+                -2.6242
+              ],
+              [
+                176.7915,
+                -2.6128
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                175.522,
+                -1.7906
+              ],
+              [
+                175.5269,
+                -1.8002
+              ],
+              [
+                175.5541,
+                -1.8191
+              ],
+              [
+                175.5569,
+                -1.8067
+              ],
+              [
+                175.522,
+                -1.7906
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                176.4121,
+                -1.3118
+              ],
+              [
+                176.4162,
+                -1.3249
+              ],
+              [
+                176.4696,
+                -1.3727
+              ],
+              [
+                176.4768,
+                -1.3944
+              ],
+              [
+                176.4878,
+                -1.3847
+              ],
+              [
+                176.4661,
+                -1.3663
+              ],
+              [
+                176.449,
+                -1.3239
+              ],
+              [
+                176.4396,
+                -1.3152
+              ],
+              [
+                176.4121,
+                -1.3118
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                175.9623,
+                -1.2757
+              ],
+              [
+                175.9589,
+                -1.2964
+              ],
+              [
+                175.9845,
+                -1.3079
+              ],
+              [
+                175.9942,
+                -1.3278
+              ],
+              [
+                175.9836,
+                -1.3396
+              ],
+              [
+                175.9946,
+                -1.3568
+              ],
+              [
+                176.0194,
+                -1.3738
+              ],
+              [
+                176.0259,
+                -1.3614
+              ],
+              [
+                176.0053,
+                -1.3373
+              ],
+              [
+                175.9817,
+                -1.2944
+              ],
+              [
+                175.9623,
+                -1.2757
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                174.6832,
+                -1.1265
+              ],
+              [
+                174.6643,
+                -1.104
+              ],
+              [
+                174.6587,
+                -1.1273
+              ],
+              [
+                174.7079,
+                -1.1568
+              ],
+              [
+                174.7237,
+                -1.1689
+              ],
+              [
+                174.7313,
+                -1.187
+              ],
+              [
+                174.7499,
+                -1.1991
+              ],
+              [
+                174.7189,
+                -1.1488
+              ],
+              [
+                174.6896,
+                -1.1388
+              ],
+              [
+                174.6832,
+                -1.1265
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                174.3241,
+                -0.5723
+              ],
+              [
+                174.332,
+                -0.5816
+              ],
+              [
+                174.3479,
+                -0.5807
+              ],
+              [
+                174.3689,
+                -0.591
+              ],
+              [
+                174.3991,
+                -0.6133
+              ],
+              [
+                174.4098,
+                -0.6299
+              ],
+              [
+                174.4228,
+                -0.6404
+              ],
+              [
+                174.4363,
+                -0.644
+              ],
+              [
+                174.4456,
+                -0.6547
+              ],
+              [
+                174.452,
+                -0.6887
+              ],
+              [
+                174.4492,
+                -0.7178
+              ],
+              [
+                174.454,
+                -0.7406
+              ],
+              [
+                174.4673,
+                -0.761
+              ],
+              [
+                174.4719,
+                -0.7593
+              ],
+              [
+                174.455,
+                -0.7235
+              ],
+              [
+                174.4529,
+                -0.7067
+              ],
+              [
+                174.456,
+                -0.6874
+              ],
+              [
+                174.4524,
+                -0.6615
+              ],
+              [
+                174.4418,
+                -0.6444
+              ],
+              [
+                174.4151,
+                -0.6272
+              ],
+              [
+                174.3956,
+                -0.6052
+              ],
+              [
+                174.3642,
+                -0.5809
+              ],
+              [
+                174.3241,
+                -0.5723
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                173.566,
+                0.1861
+              ],
+              [
+                173.5441,
+                0.1891
+              ],
+              [
+                173.5442,
+                0.1769
+              ],
+              [
+                173.5634,
+                0.1698
+              ],
+              [
+                173.566,
+                0.1861
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                173.4111,
+                0.2319
+              ],
+              [
+                173.415,
+                0.206
+              ],
+              [
+                173.4273,
+                0.1981
+              ],
+              [
+                173.453,
+                0.2136
+              ],
+              [
+                173.4329,
+                0.2278
+              ],
+              [
+                173.4111,
+                0.2319
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                173.4038,
+                0.2595
+              ],
+              [
+                173.3875,
+                0.2712
+              ],
+              [
+                173.3792,
+                0.2613
+              ],
+              [
+                173.4044,
+                0.2414
+              ],
+              [
+                173.4038,
+                0.2595
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                173.8376,
+                0.4954
+              ],
+              [
+                173.9055,
+                0.4298
+              ],
+              [
+                173.9139,
+                0.4356
+              ],
+              [
+                173.8376,
+                0.4954
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                173.0022,
+                1.0304
+              ],
+              [
+                173.0001,
+                1.0131
+              ],
+              [
+                173.0206,
+                1.0145
+              ],
+              [
+                173.0265,
+                1.0028
+              ],
+              [
+                173.0458,
+                0.9919
+              ],
+              [
+                173.0636,
+                0.9662
+              ],
+              [
+                173.07,
+                0.9798
+              ],
+              [
+                173.0516,
+                0.9984
+              ],
+              [
+                173.0173,
+                1.0238
+              ],
+              [
+                173.0022,
+                1.0304
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                173.2738,
+                2.0596
+              ],
+              [
+                173.2594,
+                2.0468
+              ],
+              [
+                173.2811,
+                2.0386
+              ],
+              [
+                173.2738,
+                2.0596
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                172.8943,
+                3.1027
+              ],
+              [
+                172.8248,
+                3.0982
+              ],
+              [
+                172.8253,
+                3.092
+              ],
+              [
+                172.8603,
+                3.0989
+              ],
+              [
+                172.8998,
+                3.0916
+              ],
+              [
+                172.8943,
+                3.1027
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                173.009,
+                3.3929
+              ],
+              [
+                172.9946,
+                3.3927
+              ],
+              [
+                172.9774,
+                3.3761
+              ],
+              [
+                172.9826,
+                3.3646
+              ],
+              [
+                173.0062,
+                3.3787
+              ],
+              [
+                173.009,
+                3.3929
+              ]
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "gb:KIR:ADM1:97431129B55805139245338",
+        "name": "Gilbert Islands",
+        "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+        "reference_owner": "Kiribati",
+        "metadata": {
+          "source_id": "gb:KIR:ADM1",
+          "source_name": "geoBoundaries gbOpen",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KIR/ADM1/geoBoundaries-KIR-ADM1.geojson",
+          "license": "Open Data Commons Open Database License 1.0",
+          "reference_year": "2017",
+          "administrative_level": "ADM1",
+          "parent_source_level": "ADM1",
+          "granularity_version": 3,
+          "source_role": "Named local administrative territory",
+          "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "original_id": "97431129B55805139245338",
+          "representative_point": [
+            173.42786824324324,
+            0.2207
+          ],
+          "hierarchy_version": 4,
+          "hierarchy_source": "gb:KIR:ADM1",
+          "hierarchy_overlap": 0.911044,
+          "topology_version": 1,
+          "reference_version": 3,
+          "geographic_area_code": "GIL",
+          "geographic_region_code": 60,
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.1533,
+          "coverage_version": 1,
+          "semantic_version": 1,
+          "remote_version": 1,
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "framework_match": {
+            "source": "Natural Earth",
+            "id": "KIR+00?",
+            "overlap": 0.137529
+          },
+          "regional_match": {
+            "reference_iso": "KIR",
+            "source_id": null,
+            "overlap": 0.137529,
+            "method": "reference-territory-constrained overlap"
+          },
+          "reference_owner_id": "owner:Q710",
+          "reference_polity": "Kiribati",
+          "reference_polity_status": "reference",
+          "reference_polity_evidence": {
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "reference_territory": "Kiribati",
+            "classification": "Sovereign country",
+            "note": null,
+            "uncertainty": false
+          },
+          "macro_membership_evidence": {
+            "case_id": "pacific-archipelagos",
+            "method": "source-supported geographic reference reconciliation",
+            "source_urls": [
+              "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "https://en.wikipedia.org/wiki/Melanesia"
+            ],
+            "basis": "Separate Melanesian, Micronesian and Polynesian archipelago roles; M49 corroborates subregion conventions, while geographic archipelagos override whole-country statistical assignment.",
+            "historical_event": false,
+            "semantic_review": "open"
+          },
+          "semantic_review": {
+            "status": "open",
+            "continent": "Oceania",
+            "decision_index": 12,
+            "evidence_file": "geographic-decisions"
+          }
+        }
+      },
+      "id": "gb:KIR:ADM1:97431129B55805139245338"
+    },
+    "gb:KIR:ADM1:97431129B36644055464690": {
+      "type": "Feature",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                169.5493,
+                -0.8634
+              ],
+              [
+                169.548,
+                -0.8512
+              ],
+              [
+                169.5302,
+                -0.8448
+              ],
+              [
+                169.5211,
+                -0.8529
+              ],
+              [
+                169.5264,
+                -0.8659
+              ],
+              [
+                169.5493,
+                -0.8634
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                173.1384,
+                1.3918
+              ],
+              [
+                173.1448,
+                1.3657
+              ],
+              [
+                173.1589,
+                1.3587
+              ],
+              [
+                173.1599,
+                1.3789
+              ],
+              [
+                173.1384,
+                1.3918
+              ]
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "gb:KIR:ADM1:97431129B36644055464690",
+        "name": "Western equatorial Pacific source remainder",
+        "parent_id": "framework:province:phoenix-islands:8b6d333d3b82",
+        "reference_owner": "Kiribati",
+        "metadata": {
+          "source_id": "gb:KIR:ADM1",
+          "source_name": "geoBoundaries gbOpen",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KIR/ADM1/geoBoundaries-KIR-ADM1.geojson",
+          "license": "Open Data Commons Open Database License 1.0",
+          "reference_year": "2017",
+          "administrative_level": "ADM1",
+          "parent_source_level": "ADM1",
+          "granularity_version": 3,
+          "source_role": "Named local administrative territory",
+          "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "original_id": "97431129B36644055464690",
+          "representative_point": [
+            169.53599047919295,
+            -0.85815
+          ],
+          "hierarchy_version": 4,
+          "hierarchy_source": "gb:KIR:ADM1",
+          "hierarchy_overlap": 0.954108,
+          "topology_version": 1,
+          "reference_version": 3,
+          "geographic_area_code": "GIL",
+          "geographic_region_code": 60,
+          "geographic_match": "nearest source coastline (source coverage gap)",
+          "geographic_overlap": 0,
+          "coverage_version": 1,
+          "semantic_version": 1,
+          "remote_version": 1,
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "framework_match": {
+            "source": "Natural Earth",
+            "id": "KIR+00?",
+            "overlap": 0.725117
+          },
+          "regional_match": {
+            "reference_iso": "KIR",
+            "source_id": "KIR+00?",
+            "overlap": 0.725117,
+            "method": "reference-territory-constrained overlap"
+          },
+          "reference_owner_id": "owner:Q710",
+          "reference_polity": "Kiribati",
+          "reference_polity_status": "reference",
+          "reference_polity_evidence": {
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "reference_territory": "Kiribati",
+            "classification": "Sovereign country",
+            "note": null,
+            "uncertainty": false
+          },
+          "macro_membership_evidence": {
+            "case_id": "phoenix-source-footprint-mismatch",
+            "method": "source-supported geographic reference reconciliation",
+            "source_urls": [
+              "https://en.wikipedia.org/wiki/Phoenix_Islands",
+              "https://en.wikipedia.org/wiki/Howland_Island",
+              "https://en.wikipedia.org/wiki/Baker_Island"
+            ],
+            "basis": "The retained location footprint lies in the western equatorial Pacific near Gilbert/Banaba geography, not the actual Phoenix archipelago around 172 W. Keep physical parent in Micronesia, expose the mismatched label, and leave missing eastern coverage open.",
+            "historical_event": false,
+            "semantic_review": "open"
+          },
+          "original_source_name": "Phoenix Islands",
+          "name_evidence_status": "unknown",
+          "semantic_review_reasons": [
+            "Source Phoenix Islands label disagrees with retained western footprint; eastern Phoenix coverage requires sourced geometry correction"
+          ],
+          "semantic_review": {
+            "status": "open",
+            "continent": "Oceania",
+            "decision_index": 13,
+            "evidence_file": "geographic-decisions"
+          }
+        }
+      },
+      "id": "gb:KIR:ADM1:97431129B36644055464690"
+    },
+    "atlas:territory:NRU": {
+      "type": "Feature",
+      "id": "atlas:territory:NRU",
+      "properties": {
+        "id": "atlas:territory:NRU",
+        "name": "Nauru",
+        "parent_id": "framework:province:nauru:160e9c4694e3",
+        "reference_owner": "Nauru",
+        "metadata": {
+          "source_name": "Atlas source aggregation",
+          "source_id": "atlas:territory:NRU",
+          "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+          "license": "Underlying source licenses retained in semantic-report.json",
+          "reference_year": "Undated modern reference",
+          "administrative_level": "Compact source country/territory",
+          "location_basis": "Compact source country/territory",
+          "representative_point": [
+            166.93297094594595,
+            -0.52925
+          ],
+          "search_aliases": [
+            "Aiwo",
+            "Anabar",
+            "Anetan",
+            "Anibare",
+            "Baiti",
+            "Boe",
+            "Buada",
+            "Denigomodu",
+            "Ewa",
+            "Ijuw",
+            "Meneng",
+            "Nauru",
+            "Nibok",
+            "Uaboe",
+            "Yaren"
+          ],
+          "reference_version": 3,
+          "hierarchy_version": 4,
+          "topology_version": 1,
+          "semantic_version": 1,
+          "source_member_ids": [
+            "gb:NRU:ADM1:42797286B38537109036861",
+            "gb:NRU:ADM1:42797286B56995611670757",
+            "gb:NRU:ADM1:42797286B13012859405048",
+            "gb:NRU:ADM1:42797286B57716352557989",
+            "gb:NRU:ADM1:42797286B10235022797721",
+            "gb:NRU:ADM1:42797286B47186779397710",
+            "gb:NRU:ADM1:42797286B43186886097675",
+            "gb:NRU:ADM1:42797286B47390171381253",
+            "gb:NRU:ADM1:42797286B16537422686347",
+            "gb:NRU:ADM1:42797286B97017492085150",
+            "gb:NRU:ADM1:42797286B1837224955513",
+            "gb:NRU:ADM1:42797286B70192209207598",
+            "gb:NRU:ADM1:42797286B93959359959633",
+            "gb:NRU:ADM1:42797286B3474402438736"
+          ],
+          "coverage_version": 1,
+          "remote_version": 1,
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "framework_match": {
+            "source": "Natural Earth",
+            "id": "NRU-4981",
+            "overlap": 0.284365
+          },
+          "hierarchy_source": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+          "parent_match": "Named city/territory represented as one atlas province; coextensive with its location",
+          "regional_match": {
+            "reference_iso": "NRU",
+            "source_id": null,
+            "overlap": 0.284365,
+            "method": "reference-territory-constrained overlap"
+          },
+          "reference_owner_id": "owner:Q697",
+          "reference_polity": "Nauru",
+          "reference_polity_status": "reference",
+          "reference_polity_evidence": {
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "reference_territory": "Nauru",
+            "classification": "Sovereign country",
+            "note": null,
+            "uncertainty": false
+          },
+          "macro_membership_evidence": {
+            "case_id": "pacific-archipelagos",
+            "method": "source-supported geographic reference reconciliation",
+            "source_urls": [
+              "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "https://en.wikipedia.org/wiki/Melanesia"
+            ],
+            "basis": "Separate Melanesian, Micronesian and Polynesian archipelago roles; M49 corroborates subregion conventions, while geographic archipelagos override whole-country statistical assignment.",
+            "historical_event": false,
+            "semantic_review": "open"
+          },
+          "semantic_review": {
+            "status": "open",
+            "continent": "Oceania",
+            "decision_index": 68,
+            "evidence_file": "geographic-decisions"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              166.9112,
+              -0.5285
+            ],
+            [
+              166.917,
+              -0.5213
+            ],
+            [
+              166.9231,
+              -0.5155
+            ],
+            [
+              166.9257,
+              -0.5125
+            ],
+            [
+              166.9304,
+              -0.5073
+            ],
+            [
+              166.9389,
+              -0.5035
+            ],
+            [
+              166.9482,
+              -0.5043
+            ],
+            [
+              166.9579,
+              -0.5136
+            ],
+            [
+              166.9566,
+              -0.523
+            ],
+            [
+              166.9511,
+              -0.5415
+            ],
+            [
+              166.9294,
+              -0.5543
+            ],
+            [
+              166.9112,
+              -0.5426
+            ],
+            [
+              166.9112,
+              -0.5285
+            ]
+          ],
+          [
+            [
+              166.9344,
+              -0.5375
+            ],
+            [
+              166.9369,
+              -0.5373
+            ],
+            [
+              166.9367,
+              -0.5364
+            ],
+            [
+              166.9344,
+              -0.5375
+            ]
+          ],
+          [
+            [
+              166.9186,
+              -0.5398
+            ],
+            [
+              166.9183,
+              -0.54
+            ],
+            [
+              166.9187,
+              -0.5408
+            ],
+            [
+              166.9186,
+              -0.5398
+            ]
+          ],
+          [
+            [
+              166.918,
+              -0.53
+            ],
+            [
+              166.9181,
+              -0.5314
+            ],
+            [
+              166.9187,
+              -0.5303
+            ],
+            [
+              166.918,
+              -0.53
+            ]
+          ]
+        ]
+      }
+    }
+  },
+  "projection_rows": {
+    "gb:KIR:ADM1:97431129B55805139245338": {
+      "id": "gb:KIR:ADM1:97431129B55805139245338",
+      "name": "Gilbert Islands",
+      "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+      "parent_chain": [
+        "framework:province:gilbert-islands:8667250dbe42",
+        "framework:area:gilbert-is:6cc9d10b937c",
+        "atlas:macro-review:region:ba863bc35dac7390",
+        "framework:subcontinent:micronesia:44f839aaab87",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "owner": "Kiribati",
+      "continent": "Oceania",
+      "region_id": "atlas:macro-review:region:ba863bc35dac7390",
+      "source_id": "gb:KIR:ADM1",
+      "source_year": "2017",
+      "status": "open",
+      "semantic_status": "open"
+    },
+    "gb:KIR:ADM1:97431129B36644055464690": {
+      "id": "gb:KIR:ADM1:97431129B36644055464690",
+      "name": "Western equatorial Pacific source remainder",
+      "parent_id": "framework:province:phoenix-islands:8b6d333d3b82",
+      "parent_chain": [
+        "framework:province:phoenix-islands:8b6d333d3b82",
+        "framework:area:gilbert-is:6cc9d10b937c",
+        "atlas:macro-review:region:ba863bc35dac7390",
+        "framework:subcontinent:micronesia:44f839aaab87",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "owner": "Kiribati",
+      "continent": "Oceania",
+      "region_id": "atlas:macro-review:region:ba863bc35dac7390",
+      "source_id": "gb:KIR:ADM1",
+      "source_year": "2017",
+      "status": "open",
+      "semantic_status": "open"
+    },
+    "atlas:territory:NRU": {
+      "id": "atlas:territory:NRU",
+      "name": "Nauru",
+      "parent_id": "framework:province:nauru:160e9c4694e3",
+      "parent_chain": [
+        "framework:province:nauru:160e9c4694e3",
+        "framework:area:nauru:fdf8055f9edb",
+        "atlas:macro-review:region:ba863bc35dac7390",
+        "framework:subcontinent:micronesia:44f839aaab87",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "owner": "Nauru",
+      "continent": "Oceania",
+      "region_id": "atlas:macro-review:region:ba863bc35dac7390",
+      "source_id": "atlas:territory:NRU",
+      "source_year": "Undated modern reference",
+      "status": "open",
+      "semantic_status": "open"
+    }
+  },
+  "complete_parent_chains": {
+    "gb:KIR:ADM1:97431129B55805139245338": [
+      {
+        "id": "gb:KIR:ADM1:97431129B55805139245338",
+        "name": "Gilbert Islands",
+        "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+        "reference_owner": "Kiribati",
+        "metadata": {
+          "source_id": "gb:KIR:ADM1",
+          "source_name": "geoBoundaries gbOpen",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KIR/ADM1/geoBoundaries-KIR-ADM1.geojson",
+          "license": "Open Data Commons Open Database License 1.0",
+          "reference_year": "2017",
+          "administrative_level": "ADM1",
+          "parent_source_level": "ADM1",
+          "granularity_version": 3,
+          "source_role": "Named local administrative territory",
+          "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "original_id": "97431129B55805139245338",
+          "representative_point": [
+            173.42786824324324,
+            0.2207
+          ],
+          "hierarchy_version": 4,
+          "hierarchy_source": "gb:KIR:ADM1",
+          "hierarchy_overlap": 0.911044,
+          "topology_version": 1,
+          "reference_version": 3,
+          "geographic_area_code": "GIL",
+          "geographic_region_code": 60,
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.1533,
+          "coverage_version": 1,
+          "semantic_version": 1,
+          "remote_version": 1,
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "framework_match": {
+            "source": "Natural Earth",
+            "id": "KIR+00?",
+            "overlap": 0.137529
+          },
+          "regional_match": {
+            "reference_iso": "KIR",
+            "source_id": null,
+            "overlap": 0.137529,
+            "method": "reference-territory-constrained overlap"
+          },
+          "reference_owner_id": "owner:Q710",
+          "reference_polity": "Kiribati",
+          "reference_polity_status": "reference",
+          "reference_polity_evidence": {
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "reference_territory": "Kiribati",
+            "classification": "Sovereign country",
+            "note": null,
+            "uncertainty": false
+          },
+          "macro_membership_evidence": {
+            "case_id": "pacific-archipelagos",
+            "method": "source-supported geographic reference reconciliation",
+            "source_urls": [
+              "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "https://en.wikipedia.org/wiki/Melanesia"
+            ],
+            "basis": "Separate Melanesian, Micronesian and Polynesian archipelago roles; M49 corroborates subregion conventions, while geographic archipelagos override whole-country statistical assignment.",
+            "historical_event": false,
+            "semantic_review": "open"
+          },
+          "semantic_review": {
+            "status": "open",
+            "continent": "Oceania",
+            "decision_index": 12,
+            "evidence_file": "geographic-decisions"
+          }
+        }
+      },
+      {
+        "id": "framework:province:gilbert-islands:8667250dbe42",
+        "name": "Gilbert Islands",
+        "level": "province",
+        "parent_id": "framework:area:gilbert-is:6cc9d10b937c",
+        "metadata": {
+          "source": "gb:KIR:ADM1",
+          "source_url": "https://www.geoboundaries.org/",
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "kind": "geographic",
+          "framework_status": "retained-reference",
+          "child_count": 1,
+          "review_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "rationale": "Gilbert and Line Islands plus the mislabeled Phoenix source remainder do not certify all Kiribati island land. Source remainder sits in the western equatorial Pacific, not the actual Phoenix archipelago; restore Phoenix coverage from inspected independent licensed island geometry. Nauru may justify a whole-island local exception, but source completeness remains open.",
+            "evidence": [
+              {
+                "url": "https://github.com/tdwg/wgsrpd",
+                "title": "WGSRPD botanical geography",
+                "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+              },
+              {
+                "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+                "title": "UN M49 geographic regions",
+                "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+              }
+            ],
+            "remaining_reasons": [
+              "Single-child tier: geographic role requires individual review",
+              "Previous reference grouping retained; semantic tier review outstanding",
+              "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+            ]
+          }
+        }
+      },
+      {
+        "id": "framework:area:gilbert-is:6cc9d10b937c",
+        "name": "Gilbert Islands",
+        "level": "area",
+        "parent_id": "atlas:macro-review:region:ba863bc35dac7390",
+        "metadata": {
+          "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+          "source_url": "https://github.com/tdwg/wgsrpd",
+          "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+          "kind": "geographic",
+          "framework_status": "retained-reference",
+          "child_count": 2,
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "previous_parent_id": "framework:region:southwestern-pacific:f41052c09453",
+          "source_urls": [
+            "https://unstats.un.org/unsd/methodology/m49/overview/",
+            "https://en.wikipedia.org/wiki/Melanesia"
+          ],
+          "membership_correction": "Separate Melanesian, Micronesian and Polynesian archipelago roles; M49 corroborates subregion conventions, while geographic archipelagos override whole-country statistical assignment.",
+          "macro_correction_version": 1,
+          "semantic_approved": false,
+          "semantic_review": {
+            "action": "rename",
+            "boundary_status": "open",
+            "rationale": "Expand legacy abbreviation or use the full named archipelago matching actual member source provinces: Gilbert Islands, Western equatorial Pacific source remainder. Stable identity and geometry remain; this does not close local-scale or coastline review.",
+            "evidence": [
+              {
+                "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+                "title": "Pinned Natural Earth named islands and administrative subdivisions",
+                "inspected_fact": "Actual member province names inspected: Gilbert Islands, Western equatorial Pacific source remainder"
+              },
+              {
+                "url": "https://github.com/tdwg/wgsrpd",
+                "title": "WGSRPD inherited abbreviation",
+                "inspected_fact": "Current botanical area label Gilbert Is. is an abbreviated reporting name, not a distinct historical identity."
+              }
+            ],
+            "remaining_reasons": [
+              "Previous reference grouping retained; semantic tier review outstanding",
+              "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+            ]
+          }
+        }
+      },
+      {
+        "id": "atlas:macro-review:region:ba863bc35dac7390",
+        "name": "Equatorial Micronesia",
+        "level": "region",
+        "parent_id": "framework:subcontinent:micronesia:44f839aaab87",
+        "metadata": {
+          "source": "Atlas geographic reference / inspected macro-review sources",
+          "source_url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+          "source_urls": [
+            "https://unstats.un.org/unsd/methodology/m49/overview/",
+            "https://en.wikipedia.org/wiki/Melanesia"
+          ],
+          "basis": "Gilbert and Nauru equatorial island groups; independent of owners",
+          "kind": "geographic",
+          "framework_status": "atlas-defined",
+          "macro_correction_version": 1,
+          "semantic_approved": false,
+          "review_reasons": [
+            "Source-backed macro membership; every lower-tier role and boundary still needs semantic review"
+          ],
+          "child_count": 2,
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "rationale": "Gilbert and Line Islands plus the mislabeled Phoenix source remainder do not certify all Kiribati island land. Source remainder sits in the western equatorial Pacific, not the actual Phoenix archipelago; restore Phoenix coverage from inspected independent licensed island geometry. Nauru may justify a whole-island local exception, but source completeness remains open.",
+            "evidence": [
+              {
+                "url": "https://github.com/tdwg/wgsrpd",
+                "title": "WGSRPD botanical geography",
+                "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+              },
+              {
+                "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+                "title": "UN M49 geographic regions",
+                "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+              }
+            ],
+            "remaining_reasons": [
+              "Source-backed macro membership; every lower-tier role and boundary still needs semantic review"
+            ]
+          }
+        }
+      },
+      {
+        "id": "framework:subcontinent:micronesia:44f839aaab87",
+        "name": "Micronesia",
+        "level": "subcontinent",
+        "parent_id": "framework:continent:oceania:48580dd0c4b4",
+        "metadata": {
+          "source": "Atlas geographic macro-groups",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "basis": "Stable geographic framework, not dated political membership",
+          "kind": "geographic",
+          "framework_status": "atlas-defined",
+          "child_count": 2,
+          "review_reasons": [],
+          "semantic_review": {
+            "action": "retain",
+            "boundary_status": "open",
+            "rationale": "Mariana/Caroline/Marshall/Gilbert/Nauru/Wake island groups and documented equatorial associations. Kiribati ownership does not place its Line or Phoenix archipelagos here. An existing mislabeled Phoenix source remainder lacks true eastern Phoenix land and remains a source defect.",
+            "evidence": [
+              {
+                "url": "https://en.wikipedia.org/wiki/Micronesia",
+                "title": "micronesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "936c25acdb172164ec57f31363b0e864af07bf73a17254fa6d6fa5fd3d963795"
+              },
+              {
+                "url": "https://education.nationalgeographic.org/resource/oceania-physical-geography/",
+                "title": "oceania",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "c502365fb95fc575e8f9f756402ce7619059754249844b36c25c00c6aea5f258"
+              }
+            ],
+            "remaining_reasons": [
+              "Exact physical segment, pending geographic association, named-island crosswalk or source omission remains open; see macro-boundary-decisions."
+            ],
+            "semantic_status": "open",
+            "convention_status": "documented",
+            "descendant_completion": "not implied by own convention/boundary review"
+          },
+          "macro_boundary_review": {
+            "convention": "Mariana/Caroline/Marshall/Gilbert/Nauru/Wake island groups and documented equatorial associations. Kiribati ownership does not place its Line or Phoenix archipelagos here. An existing mislabeled Phoenix source remainder lacks true eastern Phoenix land and remains a source defect.",
+            "source_ids": [
+              "micronesia",
+              "oceania"
+            ],
+            "convention_status": "documented",
+            "boundary_status": "open",
+            "semantic_status": "open",
+            "descendant_completion": "not implied by own convention/boundary review",
+            "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+            "evidence_file": "macro-boundary-decisions"
+          }
+        }
+      },
+      {
+        "id": "framework:continent:oceania:48580dd0c4b4",
+        "name": "Oceania",
+        "level": "continent",
+        "parent_id": null,
+        "metadata": {
+          "source": "Atlas six-continent convention",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "basis": "Antarctica excluded",
+          "kind": "geographic",
+          "framework_status": "atlas-defined",
+          "child_count": 5,
+          "review_reasons": [],
+          "semantic_review": {
+            "action": "retain",
+            "boundary_status": "supported",
+            "rationale": "Australia and Zealandia; all New Guinea, Bismarck/Solomon archipelagos, and Melanesian, Micronesian and Polynesian island groups. Asian Wallacea is excluded. Hawaii and Rapa Nui are Polynesian irrespective of their political owners. The four listed southern Indian Ocean archipelagos are a declared reporting association after Antarctica exclusion, not continental shelf claims.",
+            "evidence": [
+              {
+                "url": "https://education.nationalgeographic.org/resource/oceania-physical-geography/",
+                "title": "oceania",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "c502365fb95fc575e8f9f756402ce7619059754249844b36c25c00c6aea5f258"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/New_Guinea",
+                "title": "new-guinea",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "e592a3ed2d9cc3225163b1e233cf9fe9e2a7906612075072a1c8d562ad9949f4"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Wallacea",
+                "title": "wallacea",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "b1b542ef0a3bc8d9a277aa475dcb933459fd4a317d75e03fb174cbedb96519fb"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Melanesia",
+                "title": "melanesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "64bef496f4af09fe741cd08fdc046e4cb7d8850cbe76052f4a8f592cf9d531f2"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Micronesia",
+                "title": "micronesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "936c25acdb172164ec57f31363b0e864af07bf73a17254fa6d6fa5fd3d963795"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Polynesia",
+                "title": "polynesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "e646c25b0ac69c9665ef48c5c7324cbbf7cb9b87f191b7669d0088b875ee2542"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Subantarctic",
+                "title": "subantarctic",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "8c5bd4cc94a22a70dd5b97f5d31004b0bc9ed66271fa310d4b924ebc9a5c4011"
+              }
+            ],
+            "remaining_reasons": [],
+            "semantic_status": "open",
+            "convention_status": "documented",
+            "descendant_completion": "not implied by own convention/boundary review"
+          },
+          "macro_boundary_review": {
+            "convention": "Australia and Zealandia; all New Guinea, Bismarck/Solomon archipelagos, and Melanesian, Micronesian and Polynesian island groups. Asian Wallacea is excluded. Hawaii and Rapa Nui are Polynesian irrespective of their political owners. The four listed southern Indian Ocean archipelagos are a declared reporting association after Antarctica exclusion, not continental shelf claims.",
+            "source_ids": [
+              "oceania",
+              "new-guinea",
+              "wallacea",
+              "melanesia",
+              "micronesia",
+              "polynesia",
+              "subantarctic"
+            ],
+            "convention_status": "documented",
+            "boundary_status": "supported-convention",
+            "semantic_status": "open",
+            "descendant_completion": "not implied by own convention/boundary review",
+            "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+            "evidence_file": "macro-boundary-decisions"
+          }
+        }
+      }
+    ],
+    "gb:KIR:ADM1:97431129B36644055464690": [
+      {
+        "id": "gb:KIR:ADM1:97431129B36644055464690",
+        "name": "Western equatorial Pacific source remainder",
+        "parent_id": "framework:province:phoenix-islands:8b6d333d3b82",
+        "reference_owner": "Kiribati",
+        "metadata": {
+          "source_id": "gb:KIR:ADM1",
+          "source_name": "geoBoundaries gbOpen",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KIR/ADM1/geoBoundaries-KIR-ADM1.geojson",
+          "license": "Open Data Commons Open Database License 1.0",
+          "reference_year": "2017",
+          "administrative_level": "ADM1",
+          "parent_source_level": "ADM1",
+          "granularity_version": 3,
+          "source_role": "Named local administrative territory",
+          "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "original_id": "97431129B36644055464690",
+          "representative_point": [
+            169.53599047919295,
+            -0.85815
+          ],
+          "hierarchy_version": 4,
+          "hierarchy_source": "gb:KIR:ADM1",
+          "hierarchy_overlap": 0.954108,
+          "topology_version": 1,
+          "reference_version": 3,
+          "geographic_area_code": "GIL",
+          "geographic_region_code": 60,
+          "geographic_match": "nearest source coastline (source coverage gap)",
+          "geographic_overlap": 0,
+          "coverage_version": 1,
+          "semantic_version": 1,
+          "remote_version": 1,
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "framework_match": {
+            "source": "Natural Earth",
+            "id": "KIR+00?",
+            "overlap": 0.725117
+          },
+          "regional_match": {
+            "reference_iso": "KIR",
+            "source_id": "KIR+00?",
+            "overlap": 0.725117,
+            "method": "reference-territory-constrained overlap"
+          },
+          "reference_owner_id": "owner:Q710",
+          "reference_polity": "Kiribati",
+          "reference_polity_status": "reference",
+          "reference_polity_evidence": {
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "reference_territory": "Kiribati",
+            "classification": "Sovereign country",
+            "note": null,
+            "uncertainty": false
+          },
+          "macro_membership_evidence": {
+            "case_id": "phoenix-source-footprint-mismatch",
+            "method": "source-supported geographic reference reconciliation",
+            "source_urls": [
+              "https://en.wikipedia.org/wiki/Phoenix_Islands",
+              "https://en.wikipedia.org/wiki/Howland_Island",
+              "https://en.wikipedia.org/wiki/Baker_Island"
+            ],
+            "basis": "The retained location footprint lies in the western equatorial Pacific near Gilbert/Banaba geography, not the actual Phoenix archipelago around 172 W. Keep physical parent in Micronesia, expose the mismatched label, and leave missing eastern coverage open.",
+            "historical_event": false,
+            "semantic_review": "open"
+          },
+          "original_source_name": "Phoenix Islands",
+          "name_evidence_status": "unknown",
+          "semantic_review_reasons": [
+            "Source Phoenix Islands label disagrees with retained western footprint; eastern Phoenix coverage requires sourced geometry correction"
+          ],
+          "semantic_review": {
+            "status": "open",
+            "continent": "Oceania",
+            "decision_index": 13,
+            "evidence_file": "geographic-decisions"
+          }
+        }
+      },
+      {
+        "id": "framework:province:phoenix-islands:8b6d333d3b82",
+        "name": "Western equatorial Pacific source remainder",
+        "level": "province",
+        "parent_id": "framework:area:gilbert-is:6cc9d10b937c",
+        "metadata": {
+          "source": "gb:KIR:ADM1",
+          "source_url": "https://www.geoboundaries.org/",
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "kind": "geographic",
+          "framework_status": "retained-reference",
+          "child_count": 1,
+          "review_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "original_source_name": "Phoenix Islands",
+          "reference_name_evidence": {
+            "source_urls": [
+              "https://en.wikipedia.org/wiki/Phoenix_Islands",
+              "https://en.wikipedia.org/wiki/Howland_Island",
+              "https://en.wikipedia.org/wiki/Baker_Island"
+            ],
+            "method": "geographic footprint/role reference correction",
+            "historical_rename": false
+          },
+          "macro_correction_version": 1,
+          "semantic_approved": false,
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "rationale": "Gilbert and Line Islands plus the mislabeled Phoenix source remainder do not certify all Kiribati island land. Source remainder sits in the western equatorial Pacific, not the actual Phoenix archipelago; restore Phoenix coverage from inspected independent licensed island geometry. Nauru may justify a whole-island local exception, but source completeness remains open.",
+            "evidence": [
+              {
+                "url": "https://github.com/tdwg/wgsrpd",
+                "title": "WGSRPD botanical geography",
+                "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+              },
+              {
+                "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+                "title": "UN M49 geographic regions",
+                "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+              }
+            ],
+            "remaining_reasons": [
+              "Single-child tier: geographic role requires individual review",
+              "Previous reference grouping retained; semantic tier review outstanding",
+              "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+            ]
+          }
+        }
+      },
+      {
+        "id": "framework:area:gilbert-is:6cc9d10b937c",
+        "name": "Gilbert Islands",
+        "level": "area",
+        "parent_id": "atlas:macro-review:region:ba863bc35dac7390",
+        "metadata": {
+          "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+          "source_url": "https://github.com/tdwg/wgsrpd",
+          "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+          "kind": "geographic",
+          "framework_status": "retained-reference",
+          "child_count": 2,
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "previous_parent_id": "framework:region:southwestern-pacific:f41052c09453",
+          "source_urls": [
+            "https://unstats.un.org/unsd/methodology/m49/overview/",
+            "https://en.wikipedia.org/wiki/Melanesia"
+          ],
+          "membership_correction": "Separate Melanesian, Micronesian and Polynesian archipelago roles; M49 corroborates subregion conventions, while geographic archipelagos override whole-country statistical assignment.",
+          "macro_correction_version": 1,
+          "semantic_approved": false,
+          "semantic_review": {
+            "action": "rename",
+            "boundary_status": "open",
+            "rationale": "Expand legacy abbreviation or use the full named archipelago matching actual member source provinces: Gilbert Islands, Western equatorial Pacific source remainder. Stable identity and geometry remain; this does not close local-scale or coastline review.",
+            "evidence": [
+              {
+                "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+                "title": "Pinned Natural Earth named islands and administrative subdivisions",
+                "inspected_fact": "Actual member province names inspected: Gilbert Islands, Western equatorial Pacific source remainder"
+              },
+              {
+                "url": "https://github.com/tdwg/wgsrpd",
+                "title": "WGSRPD inherited abbreviation",
+                "inspected_fact": "Current botanical area label Gilbert Is. is an abbreviated reporting name, not a distinct historical identity."
+              }
+            ],
+            "remaining_reasons": [
+              "Previous reference grouping retained; semantic tier review outstanding",
+              "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+            ]
+          }
+        }
+      },
+      {
+        "id": "atlas:macro-review:region:ba863bc35dac7390",
+        "name": "Equatorial Micronesia",
+        "level": "region",
+        "parent_id": "framework:subcontinent:micronesia:44f839aaab87",
+        "metadata": {
+          "source": "Atlas geographic reference / inspected macro-review sources",
+          "source_url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+          "source_urls": [
+            "https://unstats.un.org/unsd/methodology/m49/overview/",
+            "https://en.wikipedia.org/wiki/Melanesia"
+          ],
+          "basis": "Gilbert and Nauru equatorial island groups; independent of owners",
+          "kind": "geographic",
+          "framework_status": "atlas-defined",
+          "macro_correction_version": 1,
+          "semantic_approved": false,
+          "review_reasons": [
+            "Source-backed macro membership; every lower-tier role and boundary still needs semantic review"
+          ],
+          "child_count": 2,
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "rationale": "Gilbert and Line Islands plus the mislabeled Phoenix source remainder do not certify all Kiribati island land. Source remainder sits in the western equatorial Pacific, not the actual Phoenix archipelago; restore Phoenix coverage from inspected independent licensed island geometry. Nauru may justify a whole-island local exception, but source completeness remains open.",
+            "evidence": [
+              {
+                "url": "https://github.com/tdwg/wgsrpd",
+                "title": "WGSRPD botanical geography",
+                "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+              },
+              {
+                "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+                "title": "UN M49 geographic regions",
+                "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+              }
+            ],
+            "remaining_reasons": [
+              "Source-backed macro membership; every lower-tier role and boundary still needs semantic review"
+            ]
+          }
+        }
+      },
+      {
+        "id": "framework:subcontinent:micronesia:44f839aaab87",
+        "name": "Micronesia",
+        "level": "subcontinent",
+        "parent_id": "framework:continent:oceania:48580dd0c4b4",
+        "metadata": {
+          "source": "Atlas geographic macro-groups",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "basis": "Stable geographic framework, not dated political membership",
+          "kind": "geographic",
+          "framework_status": "atlas-defined",
+          "child_count": 2,
+          "review_reasons": [],
+          "semantic_review": {
+            "action": "retain",
+            "boundary_status": "open",
+            "rationale": "Mariana/Caroline/Marshall/Gilbert/Nauru/Wake island groups and documented equatorial associations. Kiribati ownership does not place its Line or Phoenix archipelagos here. An existing mislabeled Phoenix source remainder lacks true eastern Phoenix land and remains a source defect.",
+            "evidence": [
+              {
+                "url": "https://en.wikipedia.org/wiki/Micronesia",
+                "title": "micronesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "936c25acdb172164ec57f31363b0e864af07bf73a17254fa6d6fa5fd3d963795"
+              },
+              {
+                "url": "https://education.nationalgeographic.org/resource/oceania-physical-geography/",
+                "title": "oceania",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "c502365fb95fc575e8f9f756402ce7619059754249844b36c25c00c6aea5f258"
+              }
+            ],
+            "remaining_reasons": [
+              "Exact physical segment, pending geographic association, named-island crosswalk or source omission remains open; see macro-boundary-decisions."
+            ],
+            "semantic_status": "open",
+            "convention_status": "documented",
+            "descendant_completion": "not implied by own convention/boundary review"
+          },
+          "macro_boundary_review": {
+            "convention": "Mariana/Caroline/Marshall/Gilbert/Nauru/Wake island groups and documented equatorial associations. Kiribati ownership does not place its Line or Phoenix archipelagos here. An existing mislabeled Phoenix source remainder lacks true eastern Phoenix land and remains a source defect.",
+            "source_ids": [
+              "micronesia",
+              "oceania"
+            ],
+            "convention_status": "documented",
+            "boundary_status": "open",
+            "semantic_status": "open",
+            "descendant_completion": "not implied by own convention/boundary review",
+            "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+            "evidence_file": "macro-boundary-decisions"
+          }
+        }
+      },
+      {
+        "id": "framework:continent:oceania:48580dd0c4b4",
+        "name": "Oceania",
+        "level": "continent",
+        "parent_id": null,
+        "metadata": {
+          "source": "Atlas six-continent convention",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "basis": "Antarctica excluded",
+          "kind": "geographic",
+          "framework_status": "atlas-defined",
+          "child_count": 5,
+          "review_reasons": [],
+          "semantic_review": {
+            "action": "retain",
+            "boundary_status": "supported",
+            "rationale": "Australia and Zealandia; all New Guinea, Bismarck/Solomon archipelagos, and Melanesian, Micronesian and Polynesian island groups. Asian Wallacea is excluded. Hawaii and Rapa Nui are Polynesian irrespective of their political owners. The four listed southern Indian Ocean archipelagos are a declared reporting association after Antarctica exclusion, not continental shelf claims.",
+            "evidence": [
+              {
+                "url": "https://education.nationalgeographic.org/resource/oceania-physical-geography/",
+                "title": "oceania",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "c502365fb95fc575e8f9f756402ce7619059754249844b36c25c00c6aea5f258"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/New_Guinea",
+                "title": "new-guinea",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "e592a3ed2d9cc3225163b1e233cf9fe9e2a7906612075072a1c8d562ad9949f4"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Wallacea",
+                "title": "wallacea",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "b1b542ef0a3bc8d9a277aa475dcb933459fd4a317d75e03fb174cbedb96519fb"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Melanesia",
+                "title": "melanesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "64bef496f4af09fe741cd08fdc046e4cb7d8850cbe76052f4a8f592cf9d531f2"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Micronesia",
+                "title": "micronesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "936c25acdb172164ec57f31363b0e864af07bf73a17254fa6d6fa5fd3d963795"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Polynesia",
+                "title": "polynesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "e646c25b0ac69c9665ef48c5c7324cbbf7cb9b87f191b7669d0088b875ee2542"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Subantarctic",
+                "title": "subantarctic",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "8c5bd4cc94a22a70dd5b97f5d31004b0bc9ed66271fa310d4b924ebc9a5c4011"
+              }
+            ],
+            "remaining_reasons": [],
+            "semantic_status": "open",
+            "convention_status": "documented",
+            "descendant_completion": "not implied by own convention/boundary review"
+          },
+          "macro_boundary_review": {
+            "convention": "Australia and Zealandia; all New Guinea, Bismarck/Solomon archipelagos, and Melanesian, Micronesian and Polynesian island groups. Asian Wallacea is excluded. Hawaii and Rapa Nui are Polynesian irrespective of their political owners. The four listed southern Indian Ocean archipelagos are a declared reporting association after Antarctica exclusion, not continental shelf claims.",
+            "source_ids": [
+              "oceania",
+              "new-guinea",
+              "wallacea",
+              "melanesia",
+              "micronesia",
+              "polynesia",
+              "subantarctic"
+            ],
+            "convention_status": "documented",
+            "boundary_status": "supported-convention",
+            "semantic_status": "open",
+            "descendant_completion": "not implied by own convention/boundary review",
+            "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+            "evidence_file": "macro-boundary-decisions"
+          }
+        }
+      }
+    ],
+    "atlas:territory:NRU": [
+      {
+        "id": "atlas:territory:NRU",
+        "name": "Nauru",
+        "parent_id": "framework:province:nauru:160e9c4694e3",
+        "reference_owner": "Nauru",
+        "metadata": {
+          "source_name": "Atlas source aggregation",
+          "source_id": "atlas:territory:NRU",
+          "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+          "license": "Underlying source licenses retained in semantic-report.json",
+          "reference_year": "Undated modern reference",
+          "administrative_level": "Compact source country/territory",
+          "location_basis": "Compact source country/territory",
+          "representative_point": [
+            166.93297094594595,
+            -0.52925
+          ],
+          "search_aliases": [
+            "Aiwo",
+            "Anabar",
+            "Anetan",
+            "Anibare",
+            "Baiti",
+            "Boe",
+            "Buada",
+            "Denigomodu",
+            "Ewa",
+            "Ijuw",
+            "Meneng",
+            "Nauru",
+            "Nibok",
+            "Uaboe",
+            "Yaren"
+          ],
+          "reference_version": 3,
+          "hierarchy_version": 4,
+          "topology_version": 1,
+          "semantic_version": 1,
+          "source_member_ids": [
+            "gb:NRU:ADM1:42797286B38537109036861",
+            "gb:NRU:ADM1:42797286B56995611670757",
+            "gb:NRU:ADM1:42797286B13012859405048",
+            "gb:NRU:ADM1:42797286B57716352557989",
+            "gb:NRU:ADM1:42797286B10235022797721",
+            "gb:NRU:ADM1:42797286B47186779397710",
+            "gb:NRU:ADM1:42797286B43186886097675",
+            "gb:NRU:ADM1:42797286B47390171381253",
+            "gb:NRU:ADM1:42797286B16537422686347",
+            "gb:NRU:ADM1:42797286B97017492085150",
+            "gb:NRU:ADM1:42797286B1837224955513",
+            "gb:NRU:ADM1:42797286B70192209207598",
+            "gb:NRU:ADM1:42797286B93959359959633",
+            "gb:NRU:ADM1:42797286B3474402438736"
+          ],
+          "coverage_version": 1,
+          "remote_version": 1,
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "framework_match": {
+            "source": "Natural Earth",
+            "id": "NRU-4981",
+            "overlap": 0.284365
+          },
+          "hierarchy_source": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+          "parent_match": "Named city/territory represented as one atlas province; coextensive with its location",
+          "regional_match": {
+            "reference_iso": "NRU",
+            "source_id": null,
+            "overlap": 0.284365,
+            "method": "reference-territory-constrained overlap"
+          },
+          "reference_owner_id": "owner:Q697",
+          "reference_polity": "Nauru",
+          "reference_polity_status": "reference",
+          "reference_polity_evidence": {
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "reference_territory": "Nauru",
+            "classification": "Sovereign country",
+            "note": null,
+            "uncertainty": false
+          },
+          "macro_membership_evidence": {
+            "case_id": "pacific-archipelagos",
+            "method": "source-supported geographic reference reconciliation",
+            "source_urls": [
+              "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "https://en.wikipedia.org/wiki/Melanesia"
+            ],
+            "basis": "Separate Melanesian, Micronesian and Polynesian archipelago roles; M49 corroborates subregion conventions, while geographic archipelagos override whole-country statistical assignment.",
+            "historical_event": false,
+            "semantic_review": "open"
+          },
+          "semantic_review": {
+            "status": "open",
+            "continent": "Oceania",
+            "decision_index": 68,
+            "evidence_file": "geographic-decisions"
+          }
+        }
+      },
+      {
+        "id": "framework:province:nauru:160e9c4694e3",
+        "name": "Nauru",
+        "level": "province",
+        "parent_id": "framework:area:nauru:fdf8055f9edb",
+        "metadata": {
+          "source": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+          "source_url": "https://www.geoboundaries.org/",
+          "basis": "Named city/territory represented as one atlas province; coextensive with its location",
+          "kind": "geographic",
+          "framework_status": "retained-reference",
+          "child_count": 1,
+          "review_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "rationale": "Gilbert and Line Islands plus the mislabeled Phoenix source remainder do not certify all Kiribati island land. Source remainder sits in the western equatorial Pacific, not the actual Phoenix archipelago; restore Phoenix coverage from inspected independent licensed island geometry. Nauru may justify a whole-island local exception, but source completeness remains open.",
+            "evidence": [
+              {
+                "url": "https://github.com/tdwg/wgsrpd",
+                "title": "WGSRPD botanical geography",
+                "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+              },
+              {
+                "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+                "title": "UN M49 geographic regions",
+                "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+              }
+            ],
+            "remaining_reasons": [
+              "Single-child tier: geographic role requires individual review",
+              "Previous reference grouping retained; semantic tier review outstanding",
+              "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+            ]
+          }
+        }
+      },
+      {
+        "id": "framework:area:nauru:fdf8055f9edb",
+        "name": "Nauru",
+        "level": "area",
+        "parent_id": "atlas:macro-review:region:ba863bc35dac7390",
+        "metadata": {
+          "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+          "source_url": "https://github.com/tdwg/wgsrpd",
+          "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+          "kind": "geographic",
+          "framework_status": "retained-reference",
+          "child_count": 1,
+          "review_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "previous_parent_id": "framework:region:southwestern-pacific:f41052c09453",
+          "source_urls": [
+            "https://unstats.un.org/unsd/methodology/m49/overview/",
+            "https://en.wikipedia.org/wiki/Melanesia"
+          ],
+          "membership_correction": "Separate Melanesian, Micronesian and Polynesian archipelago roles; M49 corroborates subregion conventions, while geographic archipelagos override whole-country statistical assignment.",
+          "macro_correction_version": 1,
+          "semantic_approved": false,
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "rationale": "Gilbert and Line Islands plus the mislabeled Phoenix source remainder do not certify all Kiribati island land. Source remainder sits in the western equatorial Pacific, not the actual Phoenix archipelago; restore Phoenix coverage from inspected independent licensed island geometry. Nauru may justify a whole-island local exception, but source completeness remains open.",
+            "evidence": [
+              {
+                "url": "https://github.com/tdwg/wgsrpd",
+                "title": "WGSRPD botanical geography",
+                "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+              },
+              {
+                "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+                "title": "UN M49 geographic regions",
+                "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+              }
+            ],
+            "remaining_reasons": [
+              "Single-child tier: geographic role requires individual review",
+              "Previous reference grouping retained; semantic tier review outstanding",
+              "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+            ]
+          }
+        }
+      },
+      {
+        "id": "atlas:macro-review:region:ba863bc35dac7390",
+        "name": "Equatorial Micronesia",
+        "level": "region",
+        "parent_id": "framework:subcontinent:micronesia:44f839aaab87",
+        "metadata": {
+          "source": "Atlas geographic reference / inspected macro-review sources",
+          "source_url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+          "source_urls": [
+            "https://unstats.un.org/unsd/methodology/m49/overview/",
+            "https://en.wikipedia.org/wiki/Melanesia"
+          ],
+          "basis": "Gilbert and Nauru equatorial island groups; independent of owners",
+          "kind": "geographic",
+          "framework_status": "atlas-defined",
+          "macro_correction_version": 1,
+          "semantic_approved": false,
+          "review_reasons": [
+            "Source-backed macro membership; every lower-tier role and boundary still needs semantic review"
+          ],
+          "child_count": 2,
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "rationale": "Gilbert and Line Islands plus the mislabeled Phoenix source remainder do not certify all Kiribati island land. Source remainder sits in the western equatorial Pacific, not the actual Phoenix archipelago; restore Phoenix coverage from inspected independent licensed island geometry. Nauru may justify a whole-island local exception, but source completeness remains open.",
+            "evidence": [
+              {
+                "url": "https://github.com/tdwg/wgsrpd",
+                "title": "WGSRPD botanical geography",
+                "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+              },
+              {
+                "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+                "title": "UN M49 geographic regions",
+                "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+              }
+            ],
+            "remaining_reasons": [
+              "Source-backed macro membership; every lower-tier role and boundary still needs semantic review"
+            ]
+          }
+        }
+      },
+      {
+        "id": "framework:subcontinent:micronesia:44f839aaab87",
+        "name": "Micronesia",
+        "level": "subcontinent",
+        "parent_id": "framework:continent:oceania:48580dd0c4b4",
+        "metadata": {
+          "source": "Atlas geographic macro-groups",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "basis": "Stable geographic framework, not dated political membership",
+          "kind": "geographic",
+          "framework_status": "atlas-defined",
+          "child_count": 2,
+          "review_reasons": [],
+          "semantic_review": {
+            "action": "retain",
+            "boundary_status": "open",
+            "rationale": "Mariana/Caroline/Marshall/Gilbert/Nauru/Wake island groups and documented equatorial associations. Kiribati ownership does not place its Line or Phoenix archipelagos here. An existing mislabeled Phoenix source remainder lacks true eastern Phoenix land and remains a source defect.",
+            "evidence": [
+              {
+                "url": "https://en.wikipedia.org/wiki/Micronesia",
+                "title": "micronesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "936c25acdb172164ec57f31363b0e864af07bf73a17254fa6d6fa5fd3d963795"
+              },
+              {
+                "url": "https://education.nationalgeographic.org/resource/oceania-physical-geography/",
+                "title": "oceania",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "c502365fb95fc575e8f9f756402ce7619059754249844b36c25c00c6aea5f258"
+              }
+            ],
+            "remaining_reasons": [
+              "Exact physical segment, pending geographic association, named-island crosswalk or source omission remains open; see macro-boundary-decisions."
+            ],
+            "semantic_status": "open",
+            "convention_status": "documented",
+            "descendant_completion": "not implied by own convention/boundary review"
+          },
+          "macro_boundary_review": {
+            "convention": "Mariana/Caroline/Marshall/Gilbert/Nauru/Wake island groups and documented equatorial associations. Kiribati ownership does not place its Line or Phoenix archipelagos here. An existing mislabeled Phoenix source remainder lacks true eastern Phoenix land and remains a source defect.",
+            "source_ids": [
+              "micronesia",
+              "oceania"
+            ],
+            "convention_status": "documented",
+            "boundary_status": "open",
+            "semantic_status": "open",
+            "descendant_completion": "not implied by own convention/boundary review",
+            "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+            "evidence_file": "macro-boundary-decisions"
+          }
+        }
+      },
+      {
+        "id": "framework:continent:oceania:48580dd0c4b4",
+        "name": "Oceania",
+        "level": "continent",
+        "parent_id": null,
+        "metadata": {
+          "source": "Atlas six-continent convention",
+          "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+          "basis": "Antarctica excluded",
+          "kind": "geographic",
+          "framework_status": "atlas-defined",
+          "child_count": 5,
+          "review_reasons": [],
+          "semantic_review": {
+            "action": "retain",
+            "boundary_status": "supported",
+            "rationale": "Australia and Zealandia; all New Guinea, Bismarck/Solomon archipelagos, and Melanesian, Micronesian and Polynesian island groups. Asian Wallacea is excluded. Hawaii and Rapa Nui are Polynesian irrespective of their political owners. The four listed southern Indian Ocean archipelagos are a declared reporting association after Antarctica exclusion, not continental shelf claims.",
+            "evidence": [
+              {
+                "url": "https://education.nationalgeographic.org/resource/oceania-physical-geography/",
+                "title": "oceania",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "c502365fb95fc575e8f9f756402ce7619059754249844b36c25c00c6aea5f258"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/New_Guinea",
+                "title": "new-guinea",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "e592a3ed2d9cc3225163b1e233cf9fe9e2a7906612075072a1c8d562ad9949f4"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Wallacea",
+                "title": "wallacea",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "b1b542ef0a3bc8d9a277aa475dcb933459fd4a317d75e03fb174cbedb96519fb"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Melanesia",
+                "title": "melanesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "64bef496f4af09fe741cd08fdc046e4cb7d8850cbe76052f4a8f592cf9d531f2"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Micronesia",
+                "title": "micronesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "936c25acdb172164ec57f31363b0e864af07bf73a17254fa6d6fa5fd3d963795"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Polynesia",
+                "title": "polynesia",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "e646c25b0ac69c9665ef48c5c7324cbbf7cb9b87f191b7669d0088b875ee2542"
+              },
+              {
+                "url": "https://en.wikipedia.org/wiki/Subantarctic",
+                "title": "subantarctic",
+                "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+                "source_sha256": "8c5bd4cc94a22a70dd5b97f5d31004b0bc9ed66271fa310d4b924ebc9a5c4011"
+              }
+            ],
+            "remaining_reasons": [],
+            "semantic_status": "open",
+            "convention_status": "documented",
+            "descendant_completion": "not implied by own convention/boundary review"
+          },
+          "macro_boundary_review": {
+            "convention": "Australia and Zealandia; all New Guinea, Bismarck/Solomon archipelagos, and Melanesian, Micronesian and Polynesian island groups. Asian Wallacea is excluded. Hawaii and Rapa Nui are Polynesian irrespective of their political owners. The four listed southern Indian Ocean archipelagos are a declared reporting association after Antarctica exclusion, not continental shelf claims.",
+            "source_ids": [
+              "oceania",
+              "new-guinea",
+              "wallacea",
+              "melanesia",
+              "micronesia",
+              "polynesia",
+              "subantarctic"
+            ],
+            "convention_status": "documented",
+            "boundary_status": "supported-convention",
+            "semantic_status": "open",
+            "descendant_completion": "not implied by own convention/boundary review",
+            "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+            "evidence_file": "macro-boundary-decisions"
+          }
+        }
+      }
+    ]
+  },
+  "parent_membership_inventory_rows": {
+    "atlas:macro-review:region:ba863bc35dac7390": {
+      "id": "atlas:macro-review:region:ba863bc35dac7390",
+      "name": "Equatorial Micronesia",
+      "level": "region",
+      "parent_id": "framework:subcontinent:micronesia:44f839aaab87",
+      "member_location_ids": [
+        "atlas:territory:NRU",
+        "gb:KIR:ADM1:97431129B36644055464690",
+        "gb:KIR:ADM1:97431129B55805139245338"
+      ]
+    },
+    "framework:area:gilbert-is:6cc9d10b937c": {
+      "id": "framework:area:gilbert-is:6cc9d10b937c",
+      "name": "Gilbert Islands",
+      "level": "area",
+      "parent_id": "atlas:macro-review:region:ba863bc35dac7390",
+      "member_location_ids": [
+        "gb:KIR:ADM1:97431129B36644055464690",
+        "gb:KIR:ADM1:97431129B55805139245338"
+      ]
+    },
+    "framework:area:nauru:fdf8055f9edb": {
+      "id": "framework:area:nauru:fdf8055f9edb",
+      "name": "Nauru",
+      "level": "area",
+      "parent_id": "atlas:macro-review:region:ba863bc35dac7390",
+      "member_location_ids": [
+        "atlas:territory:NRU"
+      ]
+    },
+    "framework:continent:oceania:48580dd0c4b4": {
+      "id": "framework:continent:oceania:48580dd0c4b4",
+      "name": "Oceania",
+      "level": "continent",
+      "parent_id": null,
+      "member_location_ids": [
+        "ASM-4998",
+        "ASM-4999",
+        "ASM-5000",
+        "ASM-5001",
+        "ASM-5002",
+        "COK-4950",
+        "COK-4951",
+        "COK-4952",
+        "COK-4953",
+        "COK-4954",
+        "COK-4955",
+        "COK-4956",
+        "COK-4959",
+        "COK-4960",
+        "COK-4961",
+        "COK-4962",
+        "NCL-1258",
+        "NCL-1259",
+        "NCL-559",
+        "NFK+00?",
+        "PCN+00?",
+        "PYF-4963",
+        "PYF-4964",
+        "PYF-4965",
+        "PYF-4966",
+        "PYF-4967",
+        "UMI-5171",
+        "UMI-5172",
+        "UMI-5173",
+        "UMI-5174",
+        "UMI-5176",
+        "UMI-5178",
+        "UMI-5179",
+        "WLF-4995",
+        "WLF-4996",
+        "WLF-4997",
+        "atlas:coverage:ATC+00?",
+        "atlas:coverage:ATF-5916",
+        "atlas:coverage:ATF-5917",
+        "atlas:coverage:ATF-5918",
+        "atlas:coverage:AUS+00?",
+        "atlas:coverage:CSI+00?",
+        "atlas:coverage:HMD+00?",
+        "atlas:coverage:NZL-5471",
+        "atlas:coverage:NZL-5472",
+        "atlas:coverage:NZL-5477",
+        "atlas:coverage:NZL-5478",
+        "atlas:coverage:NZL-5479",
+        "atlas:coverage:NZL-5480",
+        "atlas:macro-coverage:location:0975e8de92d354d008e1",
+        "atlas:macro-coverage:location:0dbfec002a36a9e16a06",
+        "atlas:macro-coverage:location:1e18dcded9449985ca8a",
+        "atlas:macro-coverage:location:2101427491f47935e872",
+        "atlas:macro-coverage:location:27168565fdb921e17e10",
+        "atlas:macro-coverage:location:2fa179f5e949ad8feb5f",
+        "atlas:macro-coverage:location:37c3c7fb6cd6cf260c68",
+        "atlas:macro-coverage:location:3940e881f1dbdcf7fc34",
+        "atlas:macro-coverage:location:3b2cde91249f00b06692",
+        "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+        "atlas:macro-coverage:location:582224a070f8ca238d16",
+        "atlas:macro-coverage:location:6451efbcf8f38240fbfb",
+        "atlas:macro-coverage:location:7027bd6abf854cc7716f",
+        "atlas:macro-coverage:location:73281d3672f84a47a770",
+        "atlas:macro-coverage:location:749f2fc5f82ad9366ce0",
+        "atlas:macro-coverage:location:8490f73e96d2a404ce07",
+        "atlas:macro-coverage:location:9e202f85d736fc409244",
+        "atlas:macro-coverage:location:a0457f0d44c94b71f00d",
+        "atlas:macro-coverage:location:a60032ee05803bef7502",
+        "atlas:macro-coverage:location:b654c3c6ddce111fc151",
+        "atlas:macro-coverage:location:bcec1e1e5eb00bd49e80",
+        "atlas:macro-coverage:location:c02eea88d089c5d447cd",
+        "atlas:macro-coverage:location:d155bd916ef221e751bd",
+        "atlas:macro-coverage:location:d6cbe0b3996925b59b66",
+        "atlas:macro-coverage:location:d8962cf6d87a3c9fc9ee",
+        "atlas:macro-coverage:location:db077050d5ed3c720982",
+        "atlas:macro-coverage:location:df975d92f90219ddd9f6",
+        "atlas:macro-coverage:location:f745c0922348bbedc6e1",
+        "atlas:macro-coverage:location:f88f121102f24b08e39b",
+        "atlas:macro-coverage:location:f9c0d5074e2f0e30e5cc",
+        "atlas:macro-coverage:location:faec45c524d0018fcec9",
+        "atlas:named-land:location:825337016c35d6a8235a",
+        "atlas:physical:0061e83748226df87e93",
+        "atlas:physical:006c33126514a7c70692",
+        "atlas:physical:0131342f976a6d463fdf",
+        "atlas:physical:01e2641fc3c4ff9f7f05",
+        "atlas:physical:020f1c7ce9a075425879",
+        "atlas:physical:026457da56dd92ca2b71",
+        "atlas:physical:02b333462a04a88aa7ad",
+        "atlas:physical:0352196457dca14a842b",
+        "atlas:physical:048dfb1b16dc64017a3e",
+        "atlas:physical:054934be61d84031054e",
+        "atlas:physical:056f2d8dd39e6d54f6ca",
+        "atlas:physical:057404f62fdc378c65d0",
+        "atlas:physical:057c5d0fc8f87cabba23",
+        "atlas:physical:057c6049126f9a358c93",
+        "atlas:physical:077a3974762d7d46850c",
+        "atlas:physical:07bfb66d1c915a8b3216",
+        "atlas:physical:08ebde6d2c8435d102e4",
+        "atlas:physical:09b02591d81ac75a1347",
+        "atlas:physical:0ab9e3ff6ad7819c2e65",
+        "atlas:physical:0b1d5cd41045dcb0d7a4",
+        "atlas:physical:0b2aef1c24456920ec23",
+        "atlas:physical:0bb2111ba01f66eb5a61",
+        "atlas:physical:0d07bc684c2588e4cb31",
+        "atlas:physical:0d6802afb6c43f522f0a",
+        "atlas:physical:0dfa600908b8e5f88a75",
+        "atlas:physical:0f0430d523a83876d1bb",
+        "atlas:physical:0fa1d2e43651039ce1e3",
+        "atlas:physical:0fa648dc237c1c050717",
+        "atlas:physical:104b1548164a18da4c52",
+        "atlas:physical:104b562c103754277334",
+        "atlas:physical:107054af049cbc987d24",
+        "atlas:physical:1143eb695d9bd62b6b6b",
+        "atlas:physical:11860da2cee61cc00495",
+        "atlas:physical:11b4b35b46d9de99e847",
+        "atlas:physical:11ff4b2c38858456a373",
+        "atlas:physical:1312c4133a4a1598cb83",
+        "atlas:physical:132dee74cc32d41476ec",
+        "atlas:physical:13c7236f30c6f360e2fa",
+        "atlas:physical:141b8ca81f598adb7a38",
+        "atlas:physical:14fb3ecb4852d510e041",
+        "atlas:physical:15d5acad9c8393d12919",
+        "atlas:physical:15e613c6809fbe5cdd48",
+        "atlas:physical:16d3fe1f264049dff2f3",
+        "atlas:physical:1700d59ecccfbad962b6",
+        "atlas:physical:1714aa36516ce3ea364b",
+        "atlas:physical:1740d8a821fd2b7b84a9",
+        "atlas:physical:176553da6effe6547219",
+        "atlas:physical:18beddad7c16505691e6",
+        "atlas:physical:1940801164d3ce547e0e",
+        "atlas:physical:1a067b3240c385527060",
+        "atlas:physical:1b1bae579a9b6876a963",
+        "atlas:physical:1bc8176e52ffd83265f4",
+        "atlas:physical:1c2198cf58a7c23da665",
+        "atlas:physical:1c587cc9b4b6ca923fc9",
+        "atlas:physical:1c95e8b472df44e16c84",
+        "atlas:physical:1d3abd4b79b1f9b76f82",
+        "atlas:physical:1d6ac37ce7995334ee60",
+        "atlas:physical:1d95674c16fd5d991c4a",
+        "atlas:physical:1d95878f8e22b994c2b1",
+        "atlas:physical:1dfbcd4642443ac25189",
+        "atlas:physical:1e8d34fc3c6e6011e37c",
+        "atlas:physical:1f4e116f24dab2711f83",
+        "atlas:physical:1fc552d1a750cd782d56",
+        "atlas:physical:202cb48aefcd6a353604",
+        "atlas:physical:22670a7633c171fbfa30",
+        "atlas:physical:22ae1b1c348c030ad68c",
+        "atlas:physical:24a191ae11095b02c010",
+        "atlas:physical:261c38317eb4c6db66e9",
+        "atlas:physical:262839ca019d9edc0a66",
+        "atlas:physical:26e12d58a711f3201e80",
+        "atlas:physical:271082a6555317629eb0",
+        "atlas:physical:27ae99f64f66a90a1fdd",
+        "atlas:physical:28cbeb6795c52aab4192",
+        "atlas:physical:29c718d6ac3d74cfbdf8",
+        "atlas:physical:2a258dd1cd6bfbd9ece1",
+        "atlas:physical:2b548651e4f4c4d678ab",
+        "atlas:physical:2b6c8661d8fe0b63c385",
+        "atlas:physical:2cf83cd253fde8006e8c",
+        "atlas:physical:2d1c477ac46085f95e61",
+        "atlas:physical:2d1eb747413b0aff13fc",
+        "atlas:physical:2d817d7f12e72d436e10",
+        "atlas:physical:2dac4ca9d8f72a160df8",
+        "atlas:physical:2ef9a912fe5524cb98d9",
+        "atlas:physical:2f2d45c2a0cdeddc4f65",
+        "atlas:physical:2f9d53832fa633afcfd6",
+        "atlas:physical:30257a053543ffd2cb58",
+        "atlas:physical:31250882533c56a9184a",
+        "atlas:physical:31319754f67ff672eb55",
+        "atlas:physical:31bc022b861c7533e7a2",
+        "atlas:physical:32914f0f75906ef4123d",
+        "atlas:physical:32e57ed2e05e5e09e759",
+        "atlas:physical:33412645de70ba8a7cd8",
+        "atlas:physical:33f00b881010f0d5b22a",
+        "atlas:physical:3453c91c0ecffc8425fb",
+        "atlas:physical:3467d3064e3b84cf4a3b",
+        "atlas:physical:348e88f3d17a0c251b9c",
+        "atlas:physical:34c1342c74041c74751d",
+        "atlas:physical:35658ec73b8f9d12fcd7",
+        "atlas:physical:35b13f77e3baf1d8d49c",
+        "atlas:physical:35cd28756f51f0b82aac",
+        "atlas:physical:361a3aec7c6f3f9a1294",
+        "atlas:physical:37d08726d96c777316fd",
+        "atlas:physical:37dff7ac4b7d9eb404c9",
+        "atlas:physical:38638c9e2709d040da54",
+        "atlas:physical:388f55be5d816509e071",
+        "atlas:physical:38b619c8e5c9b0c1ba09",
+        "atlas:physical:38b798f3ae8009a0b9e6",
+        "atlas:physical:396aec3365f66d8264b5",
+        "atlas:physical:3a082148383fbc6721c4",
+        "atlas:physical:3a7426baf4a5e40e0a53",
+        "atlas:physical:3b4f451bcd935c11380a",
+        "atlas:physical:3c605ab4408457de2fb4",
+        "atlas:physical:3c65a62fb1ae029f6a80",
+        "atlas:physical:3c8233b60327a646a016",
+        "atlas:physical:3dd5c42cfe36efd152ee",
+        "atlas:physical:3ebace7438567f93fe08",
+        "atlas:physical:3f9c4124c94b6331f768",
+        "atlas:physical:3fecf5a400461c49ca13",
+        "atlas:physical:40a22a372ef0974d9aba",
+        "atlas:physical:4116ae6f7015e967a16d",
+        "atlas:physical:420d8b353ae39a4c1279",
+        "atlas:physical:43b9a0beebda6d4903c4",
+        "atlas:physical:44156192001641db2f63",
+        "atlas:physical:44872d9d67e04323d2f3",
+        "atlas:physical:457014fde87fb4084c2f",
+        "atlas:physical:4589eca1644d5b452eaa",
+        "atlas:physical:45d7f979c71c693e972a",
+        "atlas:physical:467e573d21e6338d4024",
+        "atlas:physical:46df2a39e7bf9ec97249",
+        "atlas:physical:46ff0f1d712e23c49f14",
+        "atlas:physical:47712acb54053e4764fd",
+        "atlas:physical:47d7c0263fb66cd5bb49",
+        "atlas:physical:490a0da24500c994357a",
+        "atlas:physical:49b0cedf5e674c2a4cbb",
+        "atlas:physical:49b892569a45d6804f34",
+        "atlas:physical:49c2dad434645fef9787",
+        "atlas:physical:4ab229dee0047e47818e",
+        "atlas:physical:4ade5d42e988ec498dd3",
+        "atlas:physical:4af39eb05e4f367727e2",
+        "atlas:physical:4afadc633a1003ed6080",
+        "atlas:physical:4b0d28c6f523856d9858",
+        "atlas:physical:4b223798d201b4f5b02b",
+        "atlas:physical:4b4828ae2c49ee5be150",
+        "atlas:physical:4bc23555372d7c74e4c8",
+        "atlas:physical:4bcc8ac44c7a9c0c6e41",
+        "atlas:physical:4be3cc1fcc94c76a5277",
+        "atlas:physical:4bfd5e44c56072b61d2d",
+        "atlas:physical:4c02b594c13eedd30751",
+        "atlas:physical:4cd0666518c1f359661b",
+        "atlas:physical:4d80ccd61afc4ed88ad3",
+        "atlas:physical:4e434c5587da43aeb9b6",
+        "atlas:physical:4e4c9573a51b1cd2b79f",
+        "atlas:physical:4e4d591e11f21357dd7a",
+        "atlas:physical:4f141d21ebfadc50d3cf",
+        "atlas:physical:5040af584cba4d95e720",
+        "atlas:physical:5094469d54a50bdd865d",
+        "atlas:physical:50a3532bb4cf000762a2",
+        "atlas:physical:50c60645bc64beaef230",
+        "atlas:physical:50d23db0fea18200926d",
+        "atlas:physical:514abaf87024ee69262e",
+        "atlas:physical:5152903e9930e4760e3d",
+        "atlas:physical:52047eb3d3c090363da0",
+        "atlas:physical:524e442ad11b9ca65f75",
+        "atlas:physical:5426deb3fdf75aa58f2e",
+        "atlas:physical:5502fa04d6795d365dba",
+        "atlas:physical:5553184e064079d70381",
+        "atlas:physical:566f75423b2d0f311133",
+        "atlas:physical:58dae83f2a088c6a63de",
+        "atlas:physical:59f70c617a3741225f8f",
+        "atlas:physical:5a42e2066b10be485d25",
+        "atlas:physical:5a8a235777e11e0b0fb8",
+        "atlas:physical:5aa861816fd0966df683",
+        "atlas:physical:5b418368aa3bb5b57ac5",
+        "atlas:physical:5bc7e3269e60aac146e7",
+        "atlas:physical:5c164bc700c0b16c44d1",
+        "atlas:physical:5c409a92f2c03a552ff7",
+        "atlas:physical:5cc85231c0e0ebec8a2a",
+        "atlas:physical:5ec42b34fc52a48318c5",
+        "atlas:physical:5ed56f2fa933493cfbe2",
+        "atlas:physical:5ef23a3d300d7786ac64",
+        "atlas:physical:5f7061262b34c28802a8",
+        "atlas:physical:63bcdf799834ce781588",
+        "atlas:physical:646c66ec06fb06ac303f",
+        "atlas:physical:650aea9d7d8861f6841b",
+        "atlas:physical:65a9e5d9ff811a620c20",
+        "atlas:physical:67d212635e0c884558ad",
+        "atlas:physical:680b97be224f71abab82",
+        "atlas:physical:683f0b605e5e9ac1fd75",
+        "atlas:physical:698be0b905ac8ba5fa0c",
+        "atlas:physical:6ba9278d49945d9bc715",
+        "atlas:physical:6ccace825195f16de08d",
+        "atlas:physical:6e48c726f0315a320857",
+        "atlas:physical:724bb8916d7c98f6171b",
+        "atlas:physical:72930ecb8d67bb6751b9",
+        "atlas:physical:72ae0589b8babaf46e7d",
+        "atlas:physical:72d34db94c70e070afca",
+        "atlas:physical:73abe28a674152c48392",
+        "atlas:physical:73ef1d322ba71f4e89c9",
+        "atlas:physical:740f51e2aa7cd9137e92",
+        "atlas:physical:7741ff0b6225bbf14a83",
+        "atlas:physical:775a3e415ad20f97cf4d",
+        "atlas:physical:7798f96d6208447a1f3d",
+        "atlas:physical:782b3957e2ee75176ed7",
+        "atlas:physical:789fa052d35c08a129eb",
+        "atlas:physical:7a66635643c2050ebebc",
+        "atlas:physical:7e63117118e946440431",
+        "atlas:physical:7ee7a7ba564a985c04b0",
+        "atlas:physical:7f990861231935b40873",
+        "atlas:physical:8005f911baff9ea55b5a",
+        "atlas:physical:8016594c7556f6e87870",
+        "atlas:physical:80657869844f0d49a6d2",
+        "atlas:physical:8120e91624b5e17c513e",
+        "atlas:physical:81ddd7f51ec860d75c1d",
+        "atlas:physical:8240a5e92e30f27e21b1",
+        "atlas:physical:8246f2d7a95f022b8717",
+        "atlas:physical:82559b19fae3fc355ab1",
+        "atlas:physical:82c837285460fa0538ab",
+        "atlas:physical:831965614b3ab07918e2",
+        "atlas:physical:84af5b6d338f1c37da03",
+        "atlas:physical:854b3a0cb1d7ee6cab1e",
+        "atlas:physical:855be1452623e6516230",
+        "atlas:physical:858997f7a52b67a4629f",
+        "atlas:physical:8617c89c7ec33a2ac7a4",
+        "atlas:physical:862047bdfeaddde8e57f",
+        "atlas:physical:86a6409a6f88453a569e",
+        "atlas:physical:88358adc2d3550f62cf5",
+        "atlas:physical:88ddb58dae80cf2643ee",
+        "atlas:physical:890ed0f45f8280989406",
+        "atlas:physical:89354e1d1d24494bdb2f",
+        "atlas:physical:8bad671edefe81982e20",
+        "atlas:physical:8c2843d8ed287924dc5b",
+        "atlas:physical:8d766998b2b33fbae8fd",
+        "atlas:physical:8e49edb5827b46084b06",
+        "atlas:physical:8efadeb8f28e4853614b",
+        "atlas:physical:8f57560107a76b283ac6",
+        "atlas:physical:8fb70a3741b7c9ef1588",
+        "atlas:physical:90657e60e64ba353d92e",
+        "atlas:physical:90c75e259d4cda659d8c",
+        "atlas:physical:917af5f8c6727cc86cc7",
+        "atlas:physical:91baa283dc3b4991d29f",
+        "atlas:physical:91dea2d60c6fba6ca2f7",
+        "atlas:physical:92e2512c4c01a8646620",
+        "atlas:physical:92ece722ca9275cea1ca",
+        "atlas:physical:9362f1ce2affcaf35866",
+        "atlas:physical:93bc0701c8ec4b0a317d",
+        "atlas:physical:94193b5581e3e7032d73",
+        "atlas:physical:94214d865c532a867ea3",
+        "atlas:physical:94ac2007264da678c1b9",
+        "atlas:physical:957d7c39872187caf558",
+        "atlas:physical:95a27affb2c953b056bd",
+        "atlas:physical:96628af67c205e01c2bd",
+        "atlas:physical:97d4ab300d8625cd1481",
+        "atlas:physical:98010024d3716a01a870",
+        "atlas:physical:990cb8443a1c374d1ab5",
+        "atlas:physical:9949fa4436f3d35eb525",
+        "atlas:physical:9a09fa4bae58ed34b463",
+        "atlas:physical:9a32518218e1a05925ec",
+        "atlas:physical:9a36332925e487b653cf",
+        "atlas:physical:9a3fd2d2a11576dac6cb",
+        "atlas:physical:9ad73cea422d4d3821fa",
+        "atlas:physical:9ba686192ef9268830d9",
+        "atlas:physical:9c75bb3703ac70ba9bcb",
+        "atlas:physical:9c7b995fcf07579bdc69",
+        "atlas:physical:9cad9a5180106d7ce05a",
+        "atlas:physical:9cc069b8dacbe7886e27",
+        "atlas:physical:9da1de04f2b1d895675a",
+        "atlas:physical:9e41949e3302abf3cb1e",
+        "atlas:physical:9f536df48b3853dac49b",
+        "atlas:physical:9fb7047de984a564c710",
+        "atlas:physical:a03f03146ecd9495fdd4",
+        "atlas:physical:a0a711a4a0c8cb4c8ff2",
+        "atlas:physical:a0c607301f353c5c65b3",
+        "atlas:physical:a14a1f8e83496f2fe99f",
+        "atlas:physical:a18512262cebf5358f6c",
+        "atlas:physical:a1ad99a2a0a837cf5a08",
+        "atlas:physical:a1cf3b310f050ae03206",
+        "atlas:physical:a1eee87b3ca41f4e28e4",
+        "atlas:physical:a24341304ed20296958d",
+        "atlas:physical:a2a3e617a5d0eb05a1b3",
+        "atlas:physical:a2f081b4acb7dcabf281",
+        "atlas:physical:a3195baca97b00fd14f7",
+        "atlas:physical:a3f7863e0046bdb4efb2",
+        "atlas:physical:a804bb01a95a7ebf3ad4",
+        "atlas:physical:a813f1b5af136b0de4e3",
+        "atlas:physical:a860d4df7e96f4e1ee56",
+        "atlas:physical:a9382ce19e9723643ea1",
+        "atlas:physical:a97bb151935cbb262534",
+        "atlas:physical:a9d0ea96c5c79dcfd209",
+        "atlas:physical:aa6a61dc93decc23e6d5",
+        "atlas:physical:ab696443aae27609fc1a",
+        "atlas:physical:ab7de5cd01d6959af6d9",
+        "atlas:physical:ab98e572110b297d5cc0",
+        "atlas:physical:abde63860ea40810bcf3",
+        "atlas:physical:ac1f5da5b9e3b0d116ea",
+        "atlas:physical:ad9778262dfec49771fd",
+        "atlas:physical:af1b4fe897da7ba407cb",
+        "atlas:physical:af7fb2caf3dd8107a18e",
+        "atlas:physical:b057fd58c24ba65fe4c0",
+        "atlas:physical:b11a249d551b4383d099",
+        "atlas:physical:b2793f88892c07b5d204",
+        "atlas:physical:b2c7205ba828c791fad1",
+        "atlas:physical:b2d1875f9ecbaefd18d6",
+        "atlas:physical:b38d4ac039640b2b891e",
+        "atlas:physical:b407989d8bade04ca78d",
+        "atlas:physical:b465588c71a0d5cadd6c",
+        "atlas:physical:b4e79f69a0eaaedfb699",
+        "atlas:physical:b582e98427be6253af76",
+        "atlas:physical:b62bed9e34c2eff46563",
+        "atlas:physical:b65a41a3b367e60b531d",
+        "atlas:physical:b6e004a43f35eb86c683",
+        "atlas:physical:ba9ef3fe2d074ba60bc4",
+        "atlas:physical:bb5600bee6ab89334eb2",
+        "atlas:physical:bcbc11cf776352fea0d8",
+        "atlas:physical:bd274ffd14b900455e96",
+        "atlas:physical:be1904679666c8e482f2",
+        "atlas:physical:c06803bccfe77bbfa8c5",
+        "atlas:physical:c06a7aa9ca309f1786e5",
+        "atlas:physical:c0867523fadf3a4ae3ac",
+        "atlas:physical:c11bc8d8a7946e3e8dbf",
+        "atlas:physical:c11da63867a9c0f86caf",
+        "atlas:physical:c1201257cdbb7335ce94",
+        "atlas:physical:c139fd93fdbd4ee0f027",
+        "atlas:physical:c16689d551c681ba29bc",
+        "atlas:physical:c22f5667ced3b293b1bb",
+        "atlas:physical:c2f5aa0da35d5ced8377",
+        "atlas:physical:c38c2dbd1f45b506c3ef",
+        "atlas:physical:c39684deb77cd3f2e77e",
+        "atlas:physical:c39b0d5ec486c5876771",
+        "atlas:physical:c41ecee4a422e1c97d86",
+        "atlas:physical:c482e8e215818bb38407",
+        "atlas:physical:c4b2e82387f49f967dfb",
+        "atlas:physical:c56db83fe412d8132fc1",
+        "atlas:physical:c577667f92ed4019e33e",
+        "atlas:physical:c5e430ee22d89e865b6e",
+        "atlas:physical:c7a00ba5515f136ed2d9",
+        "atlas:physical:c806b48fc2e9feb760a4",
+        "atlas:physical:c8beedcfc026ae64d351",
+        "atlas:physical:c9463d4c4c8ac944913e",
+        "atlas:physical:c9d61d2b2288c70fa266",
+        "atlas:physical:ca969c3ca715973f0a42",
+        "atlas:physical:cb021d7fd6af06a8fedc",
+        "atlas:physical:cb0b33030e48a0c67b7c",
+        "atlas:physical:cbae5fd590ca49f2dcd7",
+        "atlas:physical:cbd16ce28c083412b231",
+        "atlas:physical:cbdae5e23b90d4a98bcd",
+        "atlas:physical:cc755d33eded4dfd442a",
+        "atlas:physical:cd27b23bbf294d97348d",
+        "atlas:physical:cddb65c66e4e8a88c107",
+        "atlas:physical:cde27c1e66bbaa5f95d3",
+        "atlas:physical:ce0565d592902fc7a4d4",
+        "atlas:physical:cecb155c5f5a93408ae7",
+        "atlas:physical:cee8db8a39c7b682e298",
+        "atlas:physical:cf7dca11a6d597eb7e56",
+        "atlas:physical:d09f9f3ed9d72620daa7",
+        "atlas:physical:d14aa0d7248437a929c3",
+        "atlas:physical:d1777808c219deba8b2f",
+        "atlas:physical:d2cdfe58639726810001",
+        "atlas:physical:d3d7e1303559ae84eec4",
+        "atlas:physical:d4447311f7739a97a4e7",
+        "atlas:physical:d5d9f126c1494b95d939",
+        "atlas:physical:d688e56fbb0249294309",
+        "atlas:physical:d6fc2ecdb5379e07565d",
+        "atlas:physical:d801bcee68e8a367d53b",
+        "atlas:physical:d82e2a7a9996be4ef6ca",
+        "atlas:physical:d8b9b01726996fc435c7",
+        "atlas:physical:d8d3d70cc5db4cbd3b2d",
+        "atlas:physical:d94d1bbfdc334b742ebb",
+        "atlas:physical:da2df79d758cb04533e4",
+        "atlas:physical:da46b84970e8efbefffb",
+        "atlas:physical:da807965ccc5e599f486",
+        "atlas:physical:da8bcf596f9d033de66f",
+        "atlas:physical:dabf20a2d646df7627e2",
+        "atlas:physical:db485a8beaa8ae65f4ca",
+        "atlas:physical:db78bbe7f41449e1e464",
+        "atlas:physical:dcdecab68a2cc1a3d8ab",
+        "atlas:physical:ddba0cb9a57815d46443",
+        "atlas:physical:ddc9e77763329ac40456",
+        "atlas:physical:de5ce892c07c3cd5f6b0",
+        "atlas:physical:dedf1c8c887ceffa67ac",
+        "atlas:physical:deedecf9467377ee77ae",
+        "atlas:physical:df1f0b42e5a6bd5ac8c6",
+        "atlas:physical:dfbb9e01acdd4d03e412",
+        "atlas:physical:e0f37fb94ef3d62a96aa",
+        "atlas:physical:e187caa8dce322b0f195",
+        "atlas:physical:e1f008c6bc35e7a996a1",
+        "atlas:physical:e2ec9b861c0ebb5f5dc4",
+        "atlas:physical:e392933d46d569348ec5",
+        "atlas:physical:e3ee693d0856dbfcffd6",
+        "atlas:physical:e4ab138f741074d52b34",
+        "atlas:physical:e523718ad57c5c29a588",
+        "atlas:physical:e59231d10e8a9afae819",
+        "atlas:physical:e66da640781f74d688ee",
+        "atlas:physical:e6765a7dc9766c050244",
+        "atlas:physical:e6826611b37d1f6fe9f6",
+        "atlas:physical:e7a910db773096b7288b",
+        "atlas:physical:e9a1d24bbbf1df4b069e",
+        "atlas:physical:e9acf1ac4f929f3141ee",
+        "atlas:physical:ea5d28f67d9c9520e359",
+        "atlas:physical:ea60058ee5d4891db3bb",
+        "atlas:physical:ead4f29a058c14636a7d",
+        "atlas:physical:eae29bceb96d31406437",
+        "atlas:physical:ec869e3a81813ff1bdcc",
+        "atlas:physical:ecea61f8976a7f94fa4d",
+        "atlas:physical:ed21dbfc567941f286cc",
+        "atlas:physical:ed3a5cd2143bc33dcdcd",
+        "atlas:physical:ed44f0f7cc9d97fede91",
+        "atlas:physical:ed8e7e9089171190b03c",
+        "atlas:physical:f03666384220ce43cffd",
+        "atlas:physical:f048473ec3963c8ba95d",
+        "atlas:physical:f0535f1ce79207afa72b",
+        "atlas:physical:f07cae65009c266c2670",
+        "atlas:physical:f0db2fa6c85df9efbfbb",
+        "atlas:physical:f403d97c9083c97a9986",
+        "atlas:physical:f4365f2af5d3ddf62e2e",
+        "atlas:physical:f4bd821ce336175eab7a",
+        "atlas:physical:f4f28ebfac187f05114e",
+        "atlas:physical:f562eb7b70b7d08440bb",
+        "atlas:physical:f5b388c7a42eab58de4a",
+        "atlas:physical:f5f391ec51458643bc63",
+        "atlas:physical:f6e590179a2532febd57",
+        "atlas:physical:f78f84f83fa64e994e87",
+        "atlas:physical:f7b90ddecfc58fe1ab0d",
+        "atlas:physical:f7f98ef2736236221d61",
+        "atlas:physical:f8f4fe4e1e5db07057b5",
+        "atlas:physical:f93676b7744c406ac3c2",
+        "atlas:physical:f9a832f99d89a9d711a2",
+        "atlas:physical:f9b5bbe58f65757bbc1a",
+        "atlas:physical:fa33e50bdb2482f5c421",
+        "atlas:physical:fa7ab7ad063f2c76a914",
+        "atlas:physical:fafa26b1515ea7147e39",
+        "atlas:physical:fc394d8ab651a781c9b4",
+        "atlas:physical:fd342d74b9ebbc75d71c",
+        "atlas:physical:fe4eb36822abf4220f3f",
+        "atlas:physical:ff113bc52ecbf287d7b4",
+        "atlas:physical:ff21c80f10fe73ddea22",
+        "atlas:territory:GUM",
+        "atlas:territory:NIU",
+        "atlas:territory:NRU",
+        "atlas:territory:WSM",
+        "gb:AUS:ADM2:25037944B10145309156113",
+        "gb:AUS:ADM2:25037944B10619545343998",
+        "gb:AUS:ADM2:25037944B1081142143908",
+        "gb:AUS:ADM2:25037944B10831634124389",
+        "gb:AUS:ADM2:25037944B10938266492584",
+        "gb:AUS:ADM2:25037944B1137671739470",
+        "gb:AUS:ADM2:25037944B11828737752872",
+        "gb:AUS:ADM2:25037944B11916296746250",
+        "gb:AUS:ADM2:25037944B12129239120455",
+        "gb:AUS:ADM2:25037944B12143686182506",
+        "gb:AUS:ADM2:25037944B13028513234480",
+        "gb:AUS:ADM2:25037944B13114344079677",
+        "gb:AUS:ADM2:25037944B13244512579669",
+        "gb:AUS:ADM2:25037944B13506382949724",
+        "gb:AUS:ADM2:25037944B14025919363288",
+        "gb:AUS:ADM2:25037944B14398404968325",
+        "gb:AUS:ADM2:25037944B15079852191884",
+        "gb:AUS:ADM2:25037944B15172244637897",
+        "gb:AUS:ADM2:25037944B15233431502175",
+        "gb:AUS:ADM2:25037944B1530675969406",
+        "gb:AUS:ADM2:25037944B15313699759774",
+        "gb:AUS:ADM2:25037944B15390433377666",
+        "gb:AUS:ADM2:25037944B15550630319657",
+        "gb:AUS:ADM2:25037944B15582539719607",
+        "gb:AUS:ADM2:25037944B15813892804113",
+        "gb:AUS:ADM2:25037944B16030223882467",
+        "gb:AUS:ADM2:25037944B16131127641558",
+        "gb:AUS:ADM2:25037944B16136262303417",
+        "gb:AUS:ADM2:25037944B1656499074776",
+        "gb:AUS:ADM2:25037944B16571921668942",
+        "gb:AUS:ADM2:25037944B16645516556899",
+        "gb:AUS:ADM2:25037944B1672021896244",
+        "gb:AUS:ADM2:25037944B16722839752740",
+        "gb:AUS:ADM2:25037944B16759006021093",
+        "gb:AUS:ADM2:25037944B16767086981220",
+        "gb:AUS:ADM2:25037944B16840847352668",
+        "gb:AUS:ADM2:25037944B16891547173569",
+        "gb:AUS:ADM2:25037944B16955456805205",
+        "gb:AUS:ADM2:25037944B17305446148962",
+        "gb:AUS:ADM2:25037944B17324059091414",
+        "gb:AUS:ADM2:25037944B17356947881143",
+        "gb:AUS:ADM2:25037944B17459590153092",
+        "gb:AUS:ADM2:25037944B17662775697590",
+        "gb:AUS:ADM2:25037944B17734063205402",
+        "gb:AUS:ADM2:25037944B1782787006296",
+        "gb:AUS:ADM2:25037944B17845862979070",
+        "gb:AUS:ADM2:25037944B17943761568072",
+        "gb:AUS:ADM2:25037944B18161391001525",
+        "gb:AUS:ADM2:25037944B18187162419032",
+        "gb:AUS:ADM2:25037944B18504039205701",
+        "gb:AUS:ADM2:25037944B18898865249121",
+        "gb:AUS:ADM2:25037944B18987498065819",
+        "gb:AUS:ADM2:25037944B19057969948609",
+        "gb:AUS:ADM2:25037944B19226887893594",
+        "gb:AUS:ADM2:25037944B19400187923346",
+        "gb:AUS:ADM2:25037944B19485668266020",
+        "gb:AUS:ADM2:25037944B19605677345756",
+        "gb:AUS:ADM2:25037944B19706345556765",
+        "gb:AUS:ADM2:25037944B19747941889194",
+        "gb:AUS:ADM2:25037944B19938962930750",
+        "gb:AUS:ADM2:25037944B2025658304279",
+        "gb:AUS:ADM2:25037944B20309273511019",
+        "gb:AUS:ADM2:25037944B20594454480773",
+        "gb:AUS:ADM2:25037944B20792422717007",
+        "gb:AUS:ADM2:25037944B20957215446412",
+        "gb:AUS:ADM2:25037944B21166714819483",
+        "gb:AUS:ADM2:25037944B21501160534360",
+        "gb:AUS:ADM2:25037944B21518620554178",
+        "gb:AUS:ADM2:25037944B21796127243371",
+        "gb:AUS:ADM2:25037944B21858000962433",
+        "gb:AUS:ADM2:25037944B22326870513085",
+        "gb:AUS:ADM2:25037944B22463121274190",
+        "gb:AUS:ADM2:25037944B22879671704108",
+        "gb:AUS:ADM2:25037944B23246777843178",
+        "gb:AUS:ADM2:25037944B23324068897437",
+        "gb:AUS:ADM2:25037944B23405884319913",
+        "gb:AUS:ADM2:25037944B23551861043119",
+        "gb:AUS:ADM2:25037944B23801424172448",
+        "gb:AUS:ADM2:25037944B24149747688554",
+        "gb:AUS:ADM2:25037944B24270951064752",
+        "gb:AUS:ADM2:25037944B24614013246759",
+        "gb:AUS:ADM2:25037944B24690359827006",
+        "gb:AUS:ADM2:25037944B24701814738895",
+        "gb:AUS:ADM2:25037944B24790092852260",
+        "gb:AUS:ADM2:25037944B24812283687541",
+        "gb:AUS:ADM2:25037944B24816754384688",
+        "gb:AUS:ADM2:25037944B24842060506409",
+        "gb:AUS:ADM2:25037944B2496866637958",
+        "gb:AUS:ADM2:25037944B25466476596436",
+        "gb:AUS:ADM2:25037944B2591711256956",
+        "gb:AUS:ADM2:25037944B25957721357526",
+        "gb:AUS:ADM2:25037944B25972327200509",
+        "gb:AUS:ADM2:25037944B26135803940358",
+        "gb:AUS:ADM2:25037944B26153550017793",
+        "gb:AUS:ADM2:25037944B26241388024664",
+        "gb:AUS:ADM2:25037944B26387144583263",
+        "gb:AUS:ADM2:25037944B26487143019559",
+        "gb:AUS:ADM2:25037944B26997804636733",
+        "gb:AUS:ADM2:25037944B27145137337674",
+        "gb:AUS:ADM2:25037944B27165515239628",
+        "gb:AUS:ADM2:25037944B27259655099788",
+        "gb:AUS:ADM2:25037944B2745809655475",
+        "gb:AUS:ADM2:25037944B28032354001178",
+        "gb:AUS:ADM2:25037944B28082311396997",
+        "gb:AUS:ADM2:25037944B28116798937362",
+        "gb:AUS:ADM2:25037944B28138275471855",
+        "gb:AUS:ADM2:25037944B28322742618410",
+        "gb:AUS:ADM2:25037944B28335850506337",
+        "gb:AUS:ADM2:25037944B28600424223398",
+        "gb:AUS:ADM2:25037944B28741170589797",
+        "gb:AUS:ADM2:25037944B29539471298626",
+        "gb:AUS:ADM2:25037944B29779306176871",
+        "gb:AUS:ADM2:25037944B29882714445476",
+        "gb:AUS:ADM2:25037944B29927872698138",
+        "gb:AUS:ADM2:25037944B30082174620136",
+        "gb:AUS:ADM2:25037944B30102722037957",
+        "gb:AUS:ADM2:25037944B30189264259012",
+        "gb:AUS:ADM2:25037944B30530613092043",
+        "gb:AUS:ADM2:25037944B30748912552839",
+        "gb:AUS:ADM2:25037944B30802850607008",
+        "gb:AUS:ADM2:25037944B30828491037515",
+        "gb:AUS:ADM2:25037944B31087465274776",
+        "gb:AUS:ADM2:25037944B31367314847764",
+        "gb:AUS:ADM2:25037944B31372279830401",
+        "gb:AUS:ADM2:25037944B31531764292735",
+        "gb:AUS:ADM2:25037944B31801469695154",
+        "gb:AUS:ADM2:25037944B31947016083721",
+        "gb:AUS:ADM2:25037944B3196758006224",
+        "gb:AUS:ADM2:25037944B32211395389119",
+        "gb:AUS:ADM2:25037944B32288278809201",
+        "gb:AUS:ADM2:25037944B32453744991132",
+        "gb:AUS:ADM2:25037944B32706868282963",
+        "gb:AUS:ADM2:25037944B32793785148952",
+        "gb:AUS:ADM2:25037944B33150906552836",
+        "gb:AUS:ADM2:25037944B33361376852028",
+        "gb:AUS:ADM2:25037944B33468423524116",
+        "gb:AUS:ADM2:25037944B33474506304148",
+        "gb:AUS:ADM2:25037944B33520850609711",
+        "gb:AUS:ADM2:25037944B34284730981486",
+        "gb:AUS:ADM2:25037944B34296859753223",
+        "gb:AUS:ADM2:25037944B34353436415485",
+        "gb:AUS:ADM2:25037944B34694615904571",
+        "gb:AUS:ADM2:25037944B34836506967909",
+        "gb:AUS:ADM2:25037944B35156214632360",
+        "gb:AUS:ADM2:25037944B3535860838783",
+        "gb:AUS:ADM2:25037944B35450059513963",
+        "gb:AUS:ADM2:25037944B35750934340746",
+        "gb:AUS:ADM2:25037944B36221284354416",
+        "gb:AUS:ADM2:25037944B36269977330964",
+        "gb:AUS:ADM2:25037944B36323732446250",
+        "gb:AUS:ADM2:25037944B36470505967652",
+        "gb:AUS:ADM2:25037944B36908504302594",
+        "gb:AUS:ADM2:25037944B37268575436611",
+        "gb:AUS:ADM2:25037944B37493883083174",
+        "gb:AUS:ADM2:25037944B37494903355321",
+        "gb:AUS:ADM2:25037944B37547853464186",
+        "gb:AUS:ADM2:25037944B3824833794033",
+        "gb:AUS:ADM2:25037944B38277479897228",
+        "gb:AUS:ADM2:25037944B38569575724277",
+        "gb:AUS:ADM2:25037944B38638552543628",
+        "gb:AUS:ADM2:25037944B38646980032426",
+        "gb:AUS:ADM2:25037944B38691483406712",
+        "gb:AUS:ADM2:25037944B39208221478861",
+        "gb:AUS:ADM2:25037944B39236446518145",
+        "gb:AUS:ADM2:25037944B39404082196295",
+        "gb:AUS:ADM2:25037944B39543590028882",
+        "gb:AUS:ADM2:25037944B39877699410120",
+        "gb:AUS:ADM2:25037944B40013954886351",
+        "gb:AUS:ADM2:25037944B40039133464345",
+        "gb:AUS:ADM2:25037944B40163460524303",
+        "gb:AUS:ADM2:25037944B40233060499011",
+        "gb:AUS:ADM2:25037944B4040834169290",
+        "gb:AUS:ADM2:25037944B4073485904680",
+        "gb:AUS:ADM2:25037944B40753124190116",
+        "gb:AUS:ADM2:25037944B41007206704884",
+        "gb:AUS:ADM2:25037944B41308394801248",
+        "gb:AUS:ADM2:25037944B41363903956940",
+        "gb:AUS:ADM2:25037944B4139819915576",
+        "gb:AUS:ADM2:25037944B42386149342522",
+        "gb:AUS:ADM2:25037944B42711318671021",
+        "gb:AUS:ADM2:25037944B43303794043608",
+        "gb:AUS:ADM2:25037944B43785864788030",
+        "gb:AUS:ADM2:25037944B43886071852017",
+        "gb:AUS:ADM2:25037944B440592647056",
+        "gb:AUS:ADM2:25037944B44262560811074",
+        "gb:AUS:ADM2:25037944B44278737612916",
+        "gb:AUS:ADM2:25037944B44454952814800",
+        "gb:AUS:ADM2:25037944B44637712818530",
+        "gb:AUS:ADM2:25037944B44962811090312",
+        "gb:AUS:ADM2:25037944B45289981242640",
+        "gb:AUS:ADM2:25037944B45596854652330",
+        "gb:AUS:ADM2:25037944B45600387855719",
+        "gb:AUS:ADM2:25037944B45643684874460",
+        "gb:AUS:ADM2:25037944B45717157651515",
+        "gb:AUS:ADM2:25037944B46034099777028",
+        "gb:AUS:ADM2:25037944B46502413321481",
+        "gb:AUS:ADM2:25037944B46578815208654",
+        "gb:AUS:ADM2:25037944B46798430259876",
+        "gb:AUS:ADM2:25037944B46822546280655",
+        "gb:AUS:ADM2:25037944B46844675944162",
+        "gb:AUS:ADM2:25037944B47240806764449",
+        "gb:AUS:ADM2:25037944B47305351718046",
+        "gb:AUS:ADM2:25037944B47816389357030",
+        "gb:AUS:ADM2:25037944B47874528632088",
+        "gb:AUS:ADM2:25037944B47979939025085",
+        "gb:AUS:ADM2:25037944B4799895230449",
+        "gb:AUS:ADM2:25037944B48452017149194",
+        "gb:AUS:ADM2:25037944B48526955129661",
+        "gb:AUS:ADM2:25037944B48660808239770",
+        "gb:AUS:ADM2:25037944B48925496758456",
+        "gb:AUS:ADM2:25037944B48952282466613",
+        "gb:AUS:ADM2:25037944B48970679767962",
+        "gb:AUS:ADM2:25037944B48990901921332",
+        "gb:AUS:ADM2:25037944B49484594449228",
+        "gb:AUS:ADM2:25037944B49536287471778",
+        "gb:AUS:ADM2:25037944B49622483033966",
+        "gb:AUS:ADM2:25037944B49978280072491",
+        "gb:AUS:ADM2:25037944B50058704827939",
+        "gb:AUS:ADM2:25037944B50083435969321",
+        "gb:AUS:ADM2:25037944B50241547651602",
+        "gb:AUS:ADM2:25037944B50548000085953",
+        "gb:AUS:ADM2:25037944B50824863548632",
+        "gb:AUS:ADM2:25037944B51137520992535",
+        "gb:AUS:ADM2:25037944B5205782179519",
+        "gb:AUS:ADM2:25037944B52457612567816",
+        "gb:AUS:ADM2:25037944B52648858671508",
+        "gb:AUS:ADM2:25037944B52772221720298",
+        "gb:AUS:ADM2:25037944B53188273537939",
+        "gb:AUS:ADM2:25037944B53457392645615",
+        "gb:AUS:ADM2:25037944B53650156153507",
+        "gb:AUS:ADM2:25037944B53664742087650",
+        "gb:AUS:ADM2:25037944B53831779764710",
+        "gb:AUS:ADM2:25037944B54111637534658",
+        "gb:AUS:ADM2:25037944B54195415642362",
+        "gb:AUS:ADM2:25037944B54594589896924",
+        "gb:AUS:ADM2:25037944B54834386088268",
+        "gb:AUS:ADM2:25037944B54836880156068",
+        "gb:AUS:ADM2:25037944B54845573421137",
+        "gb:AUS:ADM2:25037944B5488167520198",
+        "gb:AUS:ADM2:25037944B55090185866802",
+        "gb:AUS:ADM2:25037944B5517287997374",
+        "gb:AUS:ADM2:25037944B55724853403969",
+        "gb:AUS:ADM2:25037944B56409622243598",
+        "gb:AUS:ADM2:25037944B56581938984526",
+        "gb:AUS:ADM2:25037944B5658593283329",
+        "gb:AUS:ADM2:25037944B56618295646151",
+        "gb:AUS:ADM2:25037944B56627334914518",
+        "gb:AUS:ADM2:25037944B56639802047851",
+        "gb:AUS:ADM2:25037944B56685676634678",
+        "gb:AUS:ADM2:25037944B56718384218889",
+        "gb:AUS:ADM2:25037944B57060386363407",
+        "gb:AUS:ADM2:25037944B57151940201314",
+        "gb:AUS:ADM2:25037944B57185706761007",
+        "gb:AUS:ADM2:25037944B57460012888659",
+        "gb:AUS:ADM2:25037944B57482962875901",
+        "gb:AUS:ADM2:25037944B57687505469181",
+        "gb:AUS:ADM2:25037944B57812572751517",
+        "gb:AUS:ADM2:25037944B57868667695206",
+        "gb:AUS:ADM2:25037944B57870334231273",
+        "gb:AUS:ADM2:25037944B57924194295774",
+        "gb:AUS:ADM2:25037944B58207809126055",
+        "gb:AUS:ADM2:25037944B58220940224419",
+        "gb:AUS:ADM2:25037944B58383707208646",
+        "gb:AUS:ADM2:25037944B58524535883846",
+        "gb:AUS:ADM2:25037944B58577428038391",
+        "gb:AUS:ADM2:25037944B58594911461534",
+        "gb:AUS:ADM2:25037944B5872723036943",
+        "gb:AUS:ADM2:25037944B5888724581246",
+        "gb:AUS:ADM2:25037944B59054376052464",
+        "gb:AUS:ADM2:25037944B5908676794620",
+        "gb:AUS:ADM2:25037944B59235958721533",
+        "gb:AUS:ADM2:25037944B5935933559707",
+        "gb:AUS:ADM2:25037944B6031326285684",
+        "gb:AUS:ADM2:25037944B60313460254351",
+        "gb:AUS:ADM2:25037944B61039645174942",
+        "gb:AUS:ADM2:25037944B61185375235969",
+        "gb:AUS:ADM2:25037944B61457505310320",
+        "gb:AUS:ADM2:25037944B61744382554137",
+        "gb:AUS:ADM2:25037944B61750008694929",
+        "gb:AUS:ADM2:25037944B61768543919434",
+        "gb:AUS:ADM2:25037944B61801605957585",
+        "gb:AUS:ADM2:25037944B62034941870385",
+        "gb:AUS:ADM2:25037944B62285809064209",
+        "gb:AUS:ADM2:25037944B62573329843514",
+        "gb:AUS:ADM2:25037944B6261933942264",
+        "gb:AUS:ADM2:25037944B62637049608158",
+        "gb:AUS:ADM2:25037944B62712341328684",
+        "gb:AUS:ADM2:25037944B62747843124796",
+        "gb:AUS:ADM2:25037944B63042885451223",
+        "gb:AUS:ADM2:25037944B63075132073997",
+        "gb:AUS:ADM2:25037944B63393422883772",
+        "gb:AUS:ADM2:25037944B63512656480867",
+        "gb:AUS:ADM2:25037944B63650800772080",
+        "gb:AUS:ADM2:25037944B63787272509894",
+        "gb:AUS:ADM2:25037944B63911738750692",
+        "gb:AUS:ADM2:25037944B6409140573096",
+        "gb:AUS:ADM2:25037944B64122646541538",
+        "gb:AUS:ADM2:25037944B64238988080325",
+        "gb:AUS:ADM2:25037944B64479708811178",
+        "gb:AUS:ADM2:25037944B64529810539086",
+        "gb:AUS:ADM2:25037944B64781294564969",
+        "gb:AUS:ADM2:25037944B64884179183706",
+        "gb:AUS:ADM2:25037944B65284638011134",
+        "gb:AUS:ADM2:25037944B65347816419811",
+        "gb:AUS:ADM2:25037944B65528874584429",
+        "gb:AUS:ADM2:25037944B66566842359979",
+        "gb:AUS:ADM2:25037944B66764167138958",
+        "gb:AUS:ADM2:25037944B67387382130548",
+        "gb:AUS:ADM2:25037944B67416490528235",
+        "gb:AUS:ADM2:25037944B67422185849488",
+        "gb:AUS:ADM2:25037944B67552272844427",
+        "gb:AUS:ADM2:25037944B67888909972324",
+        "gb:AUS:ADM2:25037944B67942507441975",
+        "gb:AUS:ADM2:25037944B68071810644037",
+        "gb:AUS:ADM2:25037944B68165922230856",
+        "gb:AUS:ADM2:25037944B68247262621131",
+        "gb:AUS:ADM2:25037944B68362175930798",
+        "gb:AUS:ADM2:25037944B6865905771327",
+        "gb:AUS:ADM2:25037944B68706686187302",
+        "gb:AUS:ADM2:25037944B6902911043133",
+        "gb:AUS:ADM2:25037944B69063028114827",
+        "gb:AUS:ADM2:25037944B69069268480762",
+        "gb:AUS:ADM2:25037944B69125352721348",
+        "gb:AUS:ADM2:25037944B69528063359333",
+        "gb:AUS:ADM2:25037944B69715811070998",
+        "gb:AUS:ADM2:25037944B69891051906105",
+        "gb:AUS:ADM2:25037944B69948285060259",
+        "gb:AUS:ADM2:25037944B70017345976481",
+        "gb:AUS:ADM2:25037944B70077936823133",
+        "gb:AUS:ADM2:25037944B702157588032",
+        "gb:AUS:ADM2:25037944B70302192671386",
+        "gb:AUS:ADM2:25037944B70656955995006",
+        "gb:AUS:ADM2:25037944B7078020583356",
+        "gb:AUS:ADM2:25037944B70988604830145",
+        "gb:AUS:ADM2:25037944B71438306812596",
+        "gb:AUS:ADM2:25037944B71441363107667",
+        "gb:AUS:ADM2:25037944B71447631493326",
+        "gb:AUS:ADM2:25037944B71614254655380",
+        "gb:AUS:ADM2:25037944B72215071742446",
+        "gb:AUS:ADM2:25037944B72297710108089",
+        "gb:AUS:ADM2:25037944B73025640718230",
+        "gb:AUS:ADM2:25037944B73163589668910",
+        "gb:AUS:ADM2:25037944B73531494726593",
+        "gb:AUS:ADM2:25037944B73642390976852",
+        "gb:AUS:ADM2:25037944B73720065991414",
+        "gb:AUS:ADM2:25037944B7394804053319",
+        "gb:AUS:ADM2:25037944B74007778337807",
+        "gb:AUS:ADM2:25037944B74261156915694",
+        "gb:AUS:ADM2:25037944B74578967995842",
+        "gb:AUS:ADM2:25037944B74627164094069",
+        "gb:AUS:ADM2:25037944B74771981745191",
+        "gb:AUS:ADM2:25037944B74799247287960",
+        "gb:AUS:ADM2:25037944B74850979375149",
+        "gb:AUS:ADM2:25037944B75055977098300",
+        "gb:AUS:ADM2:25037944B7523913669113",
+        "gb:AUS:ADM2:25037944B75354234976201",
+        "gb:AUS:ADM2:25037944B75420720277181",
+        "gb:AUS:ADM2:25037944B75577230273205",
+        "gb:AUS:ADM2:25037944B7589359748935",
+        "gb:AUS:ADM2:25037944B76061046607907",
+        "gb:AUS:ADM2:25037944B7624735907381",
+        "gb:AUS:ADM2:25037944B7628366145494",
+        "gb:AUS:ADM2:25037944B76361191538419",
+        "gb:AUS:ADM2:25037944B76556859341208",
+        "gb:AUS:ADM2:25037944B76580037794190",
+        "gb:AUS:ADM2:25037944B76630671058420",
+        "gb:AUS:ADM2:25037944B76718204715141",
+        "gb:AUS:ADM2:25037944B76769094445269",
+        "gb:AUS:ADM2:25037944B76870107962046",
+        "gb:AUS:ADM2:25037944B77006542086789",
+        "gb:AUS:ADM2:25037944B77062531378131",
+        "gb:AUS:ADM2:25037944B77099976714827",
+        "gb:AUS:ADM2:25037944B77283019061987",
+        "gb:AUS:ADM2:25037944B77423054355343",
+        "gb:AUS:ADM2:25037944B7753328322432",
+        "gb:AUS:ADM2:25037944B77651628616749",
+        "gb:AUS:ADM2:25037944B77698637071191",
+        "gb:AUS:ADM2:25037944B78024073086928",
+        "gb:AUS:ADM2:25037944B7803908509786",
+        "gb:AUS:ADM2:25037944B78078629114467",
+        "gb:AUS:ADM2:25037944B78114295205688",
+        "gb:AUS:ADM2:25037944B78152286064279",
+        "gb:AUS:ADM2:25037944B78300731498703",
+        "gb:AUS:ADM2:25037944B78442704405462",
+        "gb:AUS:ADM2:25037944B78861208186776",
+        "gb:AUS:ADM2:25037944B79165272170091",
+        "gb:AUS:ADM2:25037944B79646276692029",
+        "gb:AUS:ADM2:25037944B79892386490083",
+        "gb:AUS:ADM2:25037944B80188408210929",
+        "gb:AUS:ADM2:25037944B80191544000233",
+        "gb:AUS:ADM2:25037944B80247248268591",
+        "gb:AUS:ADM2:25037944B8066772871928",
+        "gb:AUS:ADM2:25037944B8068903410129",
+        "gb:AUS:ADM2:25037944B80693108839344",
+        "gb:AUS:ADM2:25037944B80977400134390",
+        "gb:AUS:ADM2:25037944B81088097646541",
+        "gb:AUS:ADM2:25037944B81164112312357",
+        "gb:AUS:ADM2:25037944B81627065680382",
+        "gb:AUS:ADM2:25037944B81685478885528",
+        "gb:AUS:ADM2:25037944B81755283628627",
+        "gb:AUS:ADM2:25037944B81795940513405",
+        "gb:AUS:ADM2:25037944B81892326519969",
+        "gb:AUS:ADM2:25037944B82098291834434",
+        "gb:AUS:ADM2:25037944B82153403198712",
+        "gb:AUS:ADM2:25037944B82328591625586",
+        "gb:AUS:ADM2:25037944B82439387593982",
+        "gb:AUS:ADM2:25037944B82919316631597",
+        "gb:AUS:ADM2:25037944B83412079426782",
+        "gb:AUS:ADM2:25037944B83528217861906",
+        "gb:AUS:ADM2:25037944B83786043255817",
+        "gb:AUS:ADM2:25037944B83825062814696",
+        "gb:AUS:ADM2:25037944B8385607479474",
+        "gb:AUS:ADM2:25037944B83996664476279",
+        "gb:AUS:ADM2:25037944B84147386402076",
+        "gb:AUS:ADM2:25037944B8488281546819",
+        "gb:AUS:ADM2:25037944B85069153423068",
+        "gb:AUS:ADM2:25037944B85106510810268",
+        "gb:AUS:ADM2:25037944B85276451636106",
+        "gb:AUS:ADM2:25037944B85643834616367",
+        "gb:AUS:ADM2:25037944B85732743205299",
+        "gb:AUS:ADM2:25037944B85754900082747",
+        "gb:AUS:ADM2:25037944B87064425958741",
+        "gb:AUS:ADM2:25037944B87142005071762",
+        "gb:AUS:ADM2:25037944B87274721652905",
+        "gb:AUS:ADM2:25037944B87416382826718",
+        "gb:AUS:ADM2:25037944B87455208948659",
+        "gb:AUS:ADM2:25037944B87513158470011",
+        "gb:AUS:ADM2:25037944B88075036338207",
+        "gb:AUS:ADM2:25037944B88199537818715",
+        "gb:AUS:ADM2:25037944B88537048948574",
+        "gb:AUS:ADM2:25037944B88670568151833",
+        "gb:AUS:ADM2:25037944B88748338867232",
+        "gb:AUS:ADM2:25037944B88873459559234",
+        "gb:AUS:ADM2:25037944B89171502248139",
+        "gb:AUS:ADM2:25037944B89194743408802",
+        "gb:AUS:ADM2:25037944B8971178176615",
+        "gb:AUS:ADM2:25037944B89790845522775",
+        "gb:AUS:ADM2:25037944B90171787297249",
+        "gb:AUS:ADM2:25037944B90195923531970",
+        "gb:AUS:ADM2:25037944B90327134540623",
+        "gb:AUS:ADM2:25037944B9039648932577",
+        "gb:AUS:ADM2:25037944B90464299025642",
+        "gb:AUS:ADM2:25037944B90533392045393",
+        "gb:AUS:ADM2:25037944B90574007914814",
+        "gb:AUS:ADM2:25037944B90970778714828",
+        "gb:AUS:ADM2:25037944B90980309349747",
+        "gb:AUS:ADM2:25037944B91209319772795",
+        "gb:AUS:ADM2:25037944B91391383703186",
+        "gb:AUS:ADM2:25037944B91720609998953",
+        "gb:AUS:ADM2:25037944B91781040485830",
+        "gb:AUS:ADM2:25037944B91914901383533",
+        "gb:AUS:ADM2:25037944B92127790017854",
+        "gb:AUS:ADM2:25037944B92361056365890",
+        "gb:AUS:ADM2:25037944B92381930700505",
+        "gb:AUS:ADM2:25037944B92431338165184",
+        "gb:AUS:ADM2:25037944B9270414762897",
+        "gb:AUS:ADM2:25037944B92926148840872",
+        "gb:AUS:ADM2:25037944B92973083305975",
+        "gb:AUS:ADM2:25037944B92991223821328",
+        "gb:AUS:ADM2:25037944B93002214322562",
+        "gb:AUS:ADM2:25037944B93105500759341",
+        "gb:AUS:ADM2:25037944B93129192801754",
+        "gb:AUS:ADM2:25037944B93306496735140",
+        "gb:AUS:ADM2:25037944B93362533996498",
+        "gb:AUS:ADM2:25037944B93557893838922",
+        "gb:AUS:ADM2:25037944B93608479315967",
+        "gb:AUS:ADM2:25037944B93610458864606",
+        "gb:AUS:ADM2:25037944B9363307042095",
+        "gb:AUS:ADM2:25037944B93635537501367",
+        "gb:AUS:ADM2:25037944B94110641032660",
+        "gb:AUS:ADM2:25037944B9436355571028",
+        "gb:AUS:ADM2:25037944B94364154888431",
+        "gb:AUS:ADM2:25037944B94548184912338",
+        "gb:AUS:ADM2:25037944B9471741195126",
+        "gb:AUS:ADM2:25037944B94844051789605",
+        "gb:AUS:ADM2:25037944B95117000304737",
+        "gb:AUS:ADM2:25037944B95382354250521",
+        "gb:AUS:ADM2:25037944B95428670663886",
+        "gb:AUS:ADM2:25037944B95616539853674",
+        "gb:AUS:ADM2:25037944B96070195853153",
+        "gb:AUS:ADM2:25037944B96271376045080",
+        "gb:AUS:ADM2:25037944B96315201731576",
+        "gb:AUS:ADM2:25037944B96392818490355",
+        "gb:AUS:ADM2:25037944B9675874244357",
+        "gb:AUS:ADM2:25037944B96867361654532",
+        "gb:AUS:ADM2:25037944B97234562917936",
+        "gb:AUS:ADM2:25037944B97460463632510",
+        "gb:AUS:ADM2:25037944B97488266373518",
+        "gb:AUS:ADM2:25037944B97560087028013",
+        "gb:AUS:ADM2:25037944B97586454911655",
+        "gb:AUS:ADM2:25037944B97802920285494",
+        "gb:AUS:ADM2:25037944B97850876136128",
+        "gb:AUS:ADM2:25037944B97955965068321",
+        "gb:AUS:ADM2:25037944B98162521374910",
+        "gb:AUS:ADM2:25037944B98257545318432",
+        "gb:AUS:ADM2:25037944B98291984831496",
+        "gb:AUS:ADM2:25037944B98295779161883",
+        "gb:AUS:ADM2:25037944B98652038613248",
+        "gb:AUS:ADM2:25037944B98854570895907",
+        "gb:AUS:ADM2:25037944B98973302778113",
+        "gb:AUS:ADM2:25037944B99055337236234",
+        "gb:AUS:ADM2:25037944B99333709196563",
+        "gb:AUS:ADM2:25037944B99375808826492",
+        "gb:AUS:ADM2:25037944B99590448240631",
+        "gb:AUS:ADM2:25037944B99849949120083",
+        "gb:CHL:ADM3:31580391B33082267781919",
+        "gb:FJI:ADM2:14151628B20319301670654",
+        "gb:FJI:ADM2:14151628B28251361437248",
+        "gb:FJI:ADM2:14151628B39642918357252",
+        "gb:FJI:ADM2:14151628B42533076410957",
+        "gb:FJI:ADM2:14151628B48978228339800",
+        "gb:FJI:ADM2:14151628B53541640625043",
+        "gb:FJI:ADM2:14151628B53702400461405",
+        "gb:FJI:ADM2:14151628B59272471160482",
+        "gb:FJI:ADM2:14151628B61046117406534",
+        "gb:FJI:ADM2:14151628B68154180840071",
+        "gb:FJI:ADM2:14151628B71764118664060",
+        "gb:FJI:ADM2:14151628B80423492752803",
+        "gb:FJI:ADM2:14151628B8492423103487",
+        "gb:FJI:ADM2:14151628B95966095088914",
+        "gb:FJI:ADM2:14151628B98370545668292",
+        "gb:FSM:ADM1:64989084B14644801478174",
+        "gb:FSM:ADM1:64989084B22448563958302",
+        "gb:FSM:ADM1:64989084B48422588925966",
+        "gb:FSM:ADM1:64989084B53067458551386",
+        "gb:IDN:ADM2:22746128B10188501962211",
+        "gb:IDN:ADM2:22746128B10432975654062",
+        "gb:IDN:ADM2:22746128B11366688050704",
+        "gb:IDN:ADM2:22746128B11480476919105",
+        "gb:IDN:ADM2:22746128B1222572676249",
+        "gb:IDN:ADM2:22746128B12986554349068",
+        "gb:IDN:ADM2:22746128B17511076551422",
+        "gb:IDN:ADM2:22746128B17774751253690",
+        "gb:IDN:ADM2:22746128B19254678251292",
+        "gb:IDN:ADM2:22746128B21145180666794",
+        "gb:IDN:ADM2:22746128B21273779065212",
+        "gb:IDN:ADM2:22746128B2349164731379",
+        "gb:IDN:ADM2:22746128B25112391877259",
+        "gb:IDN:ADM2:22746128B27261093121909",
+        "gb:IDN:ADM2:22746128B29146649309875",
+        "gb:IDN:ADM2:22746128B30560862468368",
+        "gb:IDN:ADM2:22746128B39960960221771",
+        "gb:IDN:ADM2:22746128B40289792856685",
+        "gb:IDN:ADM2:22746128B40741333574981",
+        "gb:IDN:ADM2:22746128B44891092584435",
+        "gb:IDN:ADM2:22746128B47515282892276",
+        "gb:IDN:ADM2:22746128B50358350022934",
+        "gb:IDN:ADM2:22746128B51921656212420",
+        "gb:IDN:ADM2:22746128B58641314112332",
+        "gb:IDN:ADM2:22746128B62198228854475",
+        "gb:IDN:ADM2:22746128B63262525003276",
+        "gb:IDN:ADM2:22746128B65756496772256",
+        "gb:IDN:ADM2:22746128B68810971865676",
+        "gb:IDN:ADM2:22746128B71103770185906",
+        "gb:IDN:ADM2:22746128B72382312298600",
+        "gb:IDN:ADM2:22746128B73598541988454",
+        "gb:IDN:ADM2:22746128B7624163664321",
+        "gb:IDN:ADM2:22746128B76462588476684",
+        "gb:IDN:ADM2:22746128B79106566109504",
+        "gb:IDN:ADM2:22746128B83440404091664",
+        "gb:IDN:ADM2:22746128B85346986276333",
+        "gb:IDN:ADM2:22746128B87177062694316",
+        "gb:IDN:ADM2:22746128B90221566890304",
+        "gb:IDN:ADM2:22746128B90822416479405",
+        "gb:IDN:ADM2:22746128B93097528927367",
+        "gb:IDN:ADM2:22746128B96094928872069",
+        "gb:IDN:ADM2:22746128B99267537228675",
+        "gb:IDN:ADM2:22746128B99426029309213",
+        "gb:KIR:ADM1:97431129B35506555718846",
+        "gb:KIR:ADM1:97431129B36644055464690",
+        "gb:KIR:ADM1:97431129B55805139245338",
+        "gb:MHL:ADM1:77969171B15122701338463",
+        "gb:MHL:ADM1:77969171B260410775552",
+        "gb:MHL:ADM1:77969171B26181209823953",
+        "gb:MHL:ADM1:77969171B34066116483983",
+        "gb:MHL:ADM1:77969171B35666329157800",
+        "gb:MHL:ADM1:77969171B37424980791701",
+        "gb:MHL:ADM1:77969171B38536087618645",
+        "gb:MHL:ADM1:77969171B38591821482466",
+        "gb:MHL:ADM1:77969171B4211054760807",
+        "gb:MHL:ADM1:77969171B5098285569707",
+        "gb:MHL:ADM1:77969171B53385125256121",
+        "gb:MHL:ADM1:77969171B54378659360174",
+        "gb:MHL:ADM1:77969171B57525149952276",
+        "gb:MHL:ADM1:77969171B58043664047812",
+        "gb:MHL:ADM1:77969171B58637068818674",
+        "gb:MHL:ADM1:77969171B60065562167569",
+        "gb:MHL:ADM1:77969171B60639821987115",
+        "gb:MHL:ADM1:77969171B69777139929553",
+        "gb:MHL:ADM1:77969171B75968789186626",
+        "gb:MHL:ADM1:77969171B77738089577037",
+        "gb:MHL:ADM1:77969171B78565267382439",
+        "gb:MHL:ADM1:77969171B80728608262829",
+        "gb:MHL:ADM1:77969171B89836250003833",
+        "gb:MHL:ADM1:77969171B95504405890016",
+        "gb:MNP:ADM2:39175420B24162802066299",
+        "gb:MNP:ADM2:39175420B42755231479115",
+        "gb:MNP:ADM2:39175420B64217482742742",
+        "gb:MNP:ADM2:39175420B77088391070908",
+        "gb:NZL:ADM2:76426892B10420121574176",
+        "gb:NZL:ADM2:76426892B10896556014",
+        "gb:NZL:ADM2:76426892B12142127553015",
+        "gb:NZL:ADM2:76426892B13163294507058",
+        "gb:NZL:ADM2:76426892B14162355231744",
+        "gb:NZL:ADM2:76426892B14381320629181",
+        "gb:NZL:ADM2:76426892B14950908560920",
+        "gb:NZL:ADM2:76426892B1616776897166",
+        "gb:NZL:ADM2:76426892B16622223508882",
+        "gb:NZL:ADM2:76426892B18513134445034",
+        "gb:NZL:ADM2:76426892B18906871273548",
+        "gb:NZL:ADM2:76426892B20926799897700",
+        "gb:NZL:ADM2:76426892B20989652719934",
+        "gb:NZL:ADM2:76426892B22916001519888",
+        "gb:NZL:ADM2:76426892B24718175617028",
+        "gb:NZL:ADM2:76426892B25406189221199",
+        "gb:NZL:ADM2:76426892B28277932455235",
+        "gb:NZL:ADM2:76426892B29825208127723",
+        "gb:NZL:ADM2:76426892B29950050378985",
+        "gb:NZL:ADM2:76426892B32484543258144",
+        "gb:NZL:ADM2:76426892B3481372105760",
+        "gb:NZL:ADM2:76426892B38400120345954",
+        "gb:NZL:ADM2:76426892B38653513639865",
+        "gb:NZL:ADM2:76426892B40296921759207",
+        "gb:NZL:ADM2:76426892B40420864534448",
+        "gb:NZL:ADM2:76426892B40769329119322",
+        "gb:NZL:ADM2:76426892B41441178851735",
+        "gb:NZL:ADM2:76426892B41625514987736",
+        "gb:NZL:ADM2:76426892B42496743885166",
+        "gb:NZL:ADM2:76426892B43791511168362",
+        "gb:NZL:ADM2:76426892B45923139634861",
+        "gb:NZL:ADM2:76426892B47640846355576",
+        "gb:NZL:ADM2:76426892B48866186202191",
+        "gb:NZL:ADM2:76426892B49452595685205",
+        "gb:NZL:ADM2:76426892B50034078290765",
+        "gb:NZL:ADM2:76426892B53697269366586",
+        "gb:NZL:ADM2:76426892B55441287291699",
+        "gb:NZL:ADM2:76426892B55565569034738",
+        "gb:NZL:ADM2:76426892B55715625268474",
+        "gb:NZL:ADM2:76426892B5692080734545",
+        "gb:NZL:ADM2:76426892B58919482239418",
+        "gb:NZL:ADM2:76426892B59525679970548",
+        "gb:NZL:ADM2:76426892B596097138687",
+        "gb:NZL:ADM2:76426892B60533113586032",
+        "gb:NZL:ADM2:76426892B60758051011646",
+        "gb:NZL:ADM2:76426892B61751173785029",
+        "gb:NZL:ADM2:76426892B62509674219060",
+        "gb:NZL:ADM2:76426892B632863576138",
+        "gb:NZL:ADM2:76426892B63494088345666",
+        "gb:NZL:ADM2:76426892B63659956028788",
+        "gb:NZL:ADM2:76426892B65793329230414",
+        "gb:NZL:ADM2:76426892B67490392619743",
+        "gb:NZL:ADM2:76426892B67902923412925",
+        "gb:NZL:ADM2:76426892B68430055344516",
+        "gb:NZL:ADM2:76426892B68447981538079",
+        "gb:NZL:ADM2:76426892B69033052068966",
+        "gb:NZL:ADM2:76426892B70069822471948",
+        "gb:NZL:ADM2:76426892B70848202071782",
+        "gb:NZL:ADM2:76426892B7250308358266",
+        "gb:NZL:ADM2:76426892B73257627899839",
+        "gb:NZL:ADM2:76426892B73686765097584",
+        "gb:NZL:ADM2:76426892B73880124121288",
+        "gb:NZL:ADM2:76426892B74237617683232",
+        "gb:NZL:ADM2:76426892B74267582170982",
+        "gb:NZL:ADM2:76426892B75799514296056",
+        "gb:NZL:ADM2:76426892B76499292811538",
+        "gb:NZL:ADM2:76426892B8082635890344",
+        "gb:NZL:ADM2:76426892B81213624592516",
+        "gb:NZL:ADM2:76426892B81581642165693",
+        "gb:NZL:ADM2:76426892B83106555775362",
+        "gb:NZL:ADM2:76426892B8336521277252",
+        "gb:NZL:ADM2:76426892B84594849147158",
+        "gb:NZL:ADM2:76426892B8837637515397",
+        "gb:NZL:ADM2:76426892B88537535922351",
+        "gb:NZL:ADM2:76426892B89020441057678",
+        "gb:NZL:ADM2:76426892B89444897674661",
+        "gb:NZL:ADM2:76426892B89827280876957",
+        "gb:NZL:ADM2:76426892B89864020181471",
+        "gb:NZL:ADM2:76426892B89930780438599",
+        "gb:NZL:ADM2:76426892B9049934298416",
+        "gb:NZL:ADM2:76426892B91014587529392",
+        "gb:NZL:ADM2:76426892B94157809900768",
+        "gb:NZL:ADM2:76426892B94592608071475",
+        "gb:NZL:ADM2:76426892B94819834972279",
+        "gb:NZL:ADM2:76426892B9784131965054",
+        "gb:NZL:ADM2:76426892B98543988194896",
+        "gb:NZL:ADM2:76426892B98769695069148",
+        "gb:NZL:ADM2:76426892B99609638104575",
+        "gb:PLW:ADM1:51375826B1021187793063",
+        "gb:PLW:ADM1:51375826B14634142702996",
+        "gb:PLW:ADM1:51375826B16617280953256",
+        "gb:PLW:ADM1:51375826B21693494950446",
+        "gb:PLW:ADM1:51375826B25708098730444",
+        "gb:PLW:ADM1:51375826B32695076810418",
+        "gb:PLW:ADM1:51375826B36601808440460",
+        "gb:PLW:ADM1:51375826B48991434772650",
+        "gb:PLW:ADM1:51375826B59587402164376",
+        "gb:PLW:ADM1:51375826B6202415756314",
+        "gb:PLW:ADM1:51375826B68373509078236",
+        "gb:PLW:ADM1:51375826B69298749218873",
+        "gb:PLW:ADM1:51375826B76455151990264",
+        "gb:PLW:ADM1:51375826B80300454073965",
+        "gb:PLW:ADM1:51375826B83906845617852",
+        "gb:PLW:ADM1:51375826B95953962908269",
+        "gb:PNG:ADM3:22992897B10443899652278",
+        "gb:PNG:ADM3:22992897B10491052681174",
+        "gb:PNG:ADM3:22992897B10756892306877",
+        "gb:PNG:ADM3:22992897B10909039893566",
+        "gb:PNG:ADM3:22992897B11251638182530",
+        "gb:PNG:ADM3:22992897B11291222608509",
+        "gb:PNG:ADM3:22992897B11309901036116",
+        "gb:PNG:ADM3:22992897B1145360678277",
+        "gb:PNG:ADM3:22992897B12358037123225",
+        "gb:PNG:ADM3:22992897B12579091535575",
+        "gb:PNG:ADM3:22992897B12722137120100",
+        "gb:PNG:ADM3:22992897B12973865263546",
+        "gb:PNG:ADM3:22992897B13185041751167",
+        "gb:PNG:ADM3:22992897B13300656793457",
+        "gb:PNG:ADM3:22992897B13717526102171",
+        "gb:PNG:ADM3:22992897B13873917705828",
+        "gb:PNG:ADM3:22992897B13981874488558",
+        "gb:PNG:ADM3:22992897B14707934293556",
+        "gb:PNG:ADM3:22992897B1477214734898",
+        "gb:PNG:ADM3:22992897B14787677400131",
+        "gb:PNG:ADM3:22992897B15196249368430",
+        "gb:PNG:ADM3:22992897B15493223276023",
+        "gb:PNG:ADM3:22992897B15498142204614",
+        "gb:PNG:ADM3:22992897B15613067538582",
+        "gb:PNG:ADM3:22992897B15909170487571",
+        "gb:PNG:ADM3:22992897B16510147853664",
+        "gb:PNG:ADM3:22992897B16840447810765",
+        "gb:PNG:ADM3:22992897B18055134714911",
+        "gb:PNG:ADM3:22992897B18328256906121",
+        "gb:PNG:ADM3:22992897B18769534429526",
+        "gb:PNG:ADM3:22992897B19132961500",
+        "gb:PNG:ADM3:22992897B1933944884191",
+        "gb:PNG:ADM3:22992897B19461716959258",
+        "gb:PNG:ADM3:22992897B19757393688208",
+        "gb:PNG:ADM3:22992897B21203347803566",
+        "gb:PNG:ADM3:22992897B21254442778046",
+        "gb:PNG:ADM3:22992897B22632936774220",
+        "gb:PNG:ADM3:22992897B22686822187914",
+        "gb:PNG:ADM3:22992897B22831367488606",
+        "gb:PNG:ADM3:22992897B23044802307352",
+        "gb:PNG:ADM3:22992897B23196868210194",
+        "gb:PNG:ADM3:22992897B23370960313829",
+        "gb:PNG:ADM3:22992897B23740327620507",
+        "gb:PNG:ADM3:22992897B23794403393827",
+        "gb:PNG:ADM3:22992897B24256964981700",
+        "gb:PNG:ADM3:22992897B24780512329532",
+        "gb:PNG:ADM3:22992897B2487077600213",
+        "gb:PNG:ADM3:22992897B2523542589221",
+        "gb:PNG:ADM3:22992897B2533196863247",
+        "gb:PNG:ADM3:22992897B25866541115994",
+        "gb:PNG:ADM3:22992897B26168010602656",
+        "gb:PNG:ADM3:22992897B26701312469031",
+        "gb:PNG:ADM3:22992897B26765117583309",
+        "gb:PNG:ADM3:22992897B26866961696400",
+        "gb:PNG:ADM3:22992897B26967215032101",
+        "gb:PNG:ADM3:22992897B27128462191793",
+        "gb:PNG:ADM3:22992897B27264355842283",
+        "gb:PNG:ADM3:22992897B27347647564889",
+        "gb:PNG:ADM3:22992897B27434739919452",
+        "gb:PNG:ADM3:22992897B27561513612395",
+        "gb:PNG:ADM3:22992897B27898727815970",
+        "gb:PNG:ADM3:22992897B28397042333267",
+        "gb:PNG:ADM3:22992897B28571093601784",
+        "gb:PNG:ADM3:22992897B28879926401639",
+        "gb:PNG:ADM3:22992897B28984024473374",
+        "gb:PNG:ADM3:22992897B29609127339612",
+        "gb:PNG:ADM3:22992897B29899458981674",
+        "gb:PNG:ADM3:22992897B30368653787875",
+        "gb:PNG:ADM3:22992897B30439246137914",
+        "gb:PNG:ADM3:22992897B30694362864536",
+        "gb:PNG:ADM3:22992897B31020599344214",
+        "gb:PNG:ADM3:22992897B31081528909391",
+        "gb:PNG:ADM3:22992897B31138306665947",
+        "gb:PNG:ADM3:22992897B31310524144319",
+        "gb:PNG:ADM3:22992897B31396105362846",
+        "gb:PNG:ADM3:22992897B31658808597843",
+        "gb:PNG:ADM3:22992897B31850359537633",
+        "gb:PNG:ADM3:22992897B31960460930963",
+        "gb:PNG:ADM3:22992897B32219862188446",
+        "gb:PNG:ADM3:22992897B32349961877679",
+        "gb:PNG:ADM3:22992897B32812758348106",
+        "gb:PNG:ADM3:22992897B32815275932301",
+        "gb:PNG:ADM3:22992897B33126314012831",
+        "gb:PNG:ADM3:22992897B33221368169662",
+        "gb:PNG:ADM3:22992897B33623563501029",
+        "gb:PNG:ADM3:22992897B33712599601023",
+        "gb:PNG:ADM3:22992897B33789575232520",
+        "gb:PNG:ADM3:22992897B33791889715867",
+        "gb:PNG:ADM3:22992897B34141621206083",
+        "gb:PNG:ADM3:22992897B34521438934690",
+        "gb:PNG:ADM3:22992897B3455517001904",
+        "gb:PNG:ADM3:22992897B35172396803050",
+        "gb:PNG:ADM3:22992897B35207056037578",
+        "gb:PNG:ADM3:22992897B35496706642726",
+        "gb:PNG:ADM3:22992897B35800147697485",
+        "gb:PNG:ADM3:22992897B36064773562098",
+        "gb:PNG:ADM3:22992897B36121222906844",
+        "gb:PNG:ADM3:22992897B36588018325561",
+        "gb:PNG:ADM3:22992897B36804310300594",
+        "gb:PNG:ADM3:22992897B37031795645346",
+        "gb:PNG:ADM3:22992897B37149985054824",
+        "gb:PNG:ADM3:22992897B37150682086773",
+        "gb:PNG:ADM3:22992897B37314966275834",
+        "gb:PNG:ADM3:22992897B37853678622445",
+        "gb:PNG:ADM3:22992897B37911961429357",
+        "gb:PNG:ADM3:22992897B38381814635205",
+        "gb:PNG:ADM3:22992897B38408543877139",
+        "gb:PNG:ADM3:22992897B38615281575709",
+        "gb:PNG:ADM3:22992897B38631729545391",
+        "gb:PNG:ADM3:22992897B39263034307948",
+        "gb:PNG:ADM3:22992897B39472855457813",
+        "gb:PNG:ADM3:22992897B39965731409483",
+        "gb:PNG:ADM3:22992897B40204941867323",
+        "gb:PNG:ADM3:22992897B40725102907217",
+        "gb:PNG:ADM3:22992897B40738787766677",
+        "gb:PNG:ADM3:22992897B40846777343832",
+        "gb:PNG:ADM3:22992897B40886948586738",
+        "gb:PNG:ADM3:22992897B41050959472816",
+        "gb:PNG:ADM3:22992897B4190666258103",
+        "gb:PNG:ADM3:22992897B42603657180063",
+        "gb:PNG:ADM3:22992897B42612087287251",
+        "gb:PNG:ADM3:22992897B4280241021703",
+        "gb:PNG:ADM3:22992897B42927715858367",
+        "gb:PNG:ADM3:22992897B43724225539588",
+        "gb:PNG:ADM3:22992897B43925807363873",
+        "gb:PNG:ADM3:22992897B43981809227250",
+        "gb:PNG:ADM3:22992897B43983600318341",
+        "gb:PNG:ADM3:22992897B44390839084781",
+        "gb:PNG:ADM3:22992897B44604164953923",
+        "gb:PNG:ADM3:22992897B44714203140338",
+        "gb:PNG:ADM3:22992897B44970503280907",
+        "gb:PNG:ADM3:22992897B45046916686582",
+        "gb:PNG:ADM3:22992897B45101045973195",
+        "gb:PNG:ADM3:22992897B45189744656138",
+        "gb:PNG:ADM3:22992897B45351953385492",
+        "gb:PNG:ADM3:22992897B45414717761676",
+        "gb:PNG:ADM3:22992897B45857210891017",
+        "gb:PNG:ADM3:22992897B46255503024948",
+        "gb:PNG:ADM3:22992897B46298838662834",
+        "gb:PNG:ADM3:22992897B46610155397515",
+        "gb:PNG:ADM3:22992897B46994515760659",
+        "gb:PNG:ADM3:22992897B47370059726907",
+        "gb:PNG:ADM3:22992897B48039202538838",
+        "gb:PNG:ADM3:22992897B48292963810197",
+        "gb:PNG:ADM3:22992897B48657641147101",
+        "gb:PNG:ADM3:22992897B48925316722632",
+        "gb:PNG:ADM3:22992897B49452531148302",
+        "gb:PNG:ADM3:22992897B50599746033238",
+        "gb:PNG:ADM3:22992897B5103912321133",
+        "gb:PNG:ADM3:22992897B51075159497258",
+        "gb:PNG:ADM3:22992897B51415231258775",
+        "gb:PNG:ADM3:22992897B52070282647607",
+        "gb:PNG:ADM3:22992897B52124986483346",
+        "gb:PNG:ADM3:22992897B52224635170758",
+        "gb:PNG:ADM3:22992897B5225430071044",
+        "gb:PNG:ADM3:22992897B5270575083168",
+        "gb:PNG:ADM3:22992897B52750840820778",
+        "gb:PNG:ADM3:22992897B53165065114060",
+        "gb:PNG:ADM3:22992897B53500557254420",
+        "gb:PNG:ADM3:22992897B53794352351096",
+        "gb:PNG:ADM3:22992897B53945903674714",
+        "gb:PNG:ADM3:22992897B54125692472233",
+        "gb:PNG:ADM3:22992897B54321135375808",
+        "gb:PNG:ADM3:22992897B54764332250731",
+        "gb:PNG:ADM3:22992897B54769964772785",
+        "gb:PNG:ADM3:22992897B55694698735847",
+        "gb:PNG:ADM3:22992897B55791738173493",
+        "gb:PNG:ADM3:22992897B55841465496956",
+        "gb:PNG:ADM3:22992897B56023109418188",
+        "gb:PNG:ADM3:22992897B56075577448680",
+        "gb:PNG:ADM3:22992897B56117684648019",
+        "gb:PNG:ADM3:22992897B56162521888322",
+        "gb:PNG:ADM3:22992897B56194340256431",
+        "gb:PNG:ADM3:22992897B56211391847794",
+        "gb:PNG:ADM3:22992897B56435550682323",
+        "gb:PNG:ADM3:22992897B56699379862451",
+        "gb:PNG:ADM3:22992897B56783619894445",
+        "gb:PNG:ADM3:22992897B5715850951824",
+        "gb:PNG:ADM3:22992897B59448459499826",
+        "gb:PNG:ADM3:22992897B60014832477760",
+        "gb:PNG:ADM3:22992897B60281397398423",
+        "gb:PNG:ADM3:22992897B60412698243309",
+        "gb:PNG:ADM3:22992897B60724082650920",
+        "gb:PNG:ADM3:22992897B61702610115621",
+        "gb:PNG:ADM3:22992897B61761839412188",
+        "gb:PNG:ADM3:22992897B62467767975407",
+        "gb:PNG:ADM3:22992897B62606317181094",
+        "gb:PNG:ADM3:22992897B62692299594383",
+        "gb:PNG:ADM3:22992897B62885541719465",
+        "gb:PNG:ADM3:22992897B63048700833334",
+        "gb:PNG:ADM3:22992897B63294333088378",
+        "gb:PNG:ADM3:22992897B63298844157367",
+        "gb:PNG:ADM3:22992897B63718806691960",
+        "gb:PNG:ADM3:22992897B63894798927987",
+        "gb:PNG:ADM3:22992897B64164437481561",
+        "gb:PNG:ADM3:22992897B64915172903051",
+        "gb:PNG:ADM3:22992897B65485555850926",
+        "gb:PNG:ADM3:22992897B65576654033963",
+        "gb:PNG:ADM3:22992897B66148838903513",
+        "gb:PNG:ADM3:22992897B66932764089658",
+        "gb:PNG:ADM3:22992897B67126126032773",
+        "gb:PNG:ADM3:22992897B67281958124083",
+        "gb:PNG:ADM3:22992897B67798725340199",
+        "gb:PNG:ADM3:22992897B67992075801500",
+        "gb:PNG:ADM3:22992897B68213896389278",
+        "gb:PNG:ADM3:22992897B68323649902749",
+        "gb:PNG:ADM3:22992897B68675628290846",
+        "gb:PNG:ADM3:22992897B69006538684770",
+        "gb:PNG:ADM3:22992897B69157064906509",
+        "gb:PNG:ADM3:22992897B69731867953290",
+        "gb:PNG:ADM3:22992897B70128882702386",
+        "gb:PNG:ADM3:22992897B70170809305952",
+        "gb:PNG:ADM3:22992897B7045938865562",
+        "gb:PNG:ADM3:22992897B7055435972116",
+        "gb:PNG:ADM3:22992897B70753869649436",
+        "gb:PNG:ADM3:22992897B71053160604509",
+        "gb:PNG:ADM3:22992897B71097372261086",
+        "gb:PNG:ADM3:22992897B7115026982047",
+        "gb:PNG:ADM3:22992897B71277737344863",
+        "gb:PNG:ADM3:22992897B71852028059058",
+        "gb:PNG:ADM3:22992897B72381137880066",
+        "gb:PNG:ADM3:22992897B72437797906531",
+        "gb:PNG:ADM3:22992897B72702274338543",
+        "gb:PNG:ADM3:22992897B72786741673014",
+        "gb:PNG:ADM3:22992897B7316507421417",
+        "gb:PNG:ADM3:22992897B73291116704988",
+        "gb:PNG:ADM3:22992897B73403627417664",
+        "gb:PNG:ADM3:22992897B73831454606234",
+        "gb:PNG:ADM3:22992897B73885567320451",
+        "gb:PNG:ADM3:22992897B73938863221851",
+        "gb:PNG:ADM3:22992897B73997797092964",
+        "gb:PNG:ADM3:22992897B74091033314988",
+        "gb:PNG:ADM3:22992897B74387204225073",
+        "gb:PNG:ADM3:22992897B74880724634014",
+        "gb:PNG:ADM3:22992897B74968946915742",
+        "gb:PNG:ADM3:22992897B75007645396029",
+        "gb:PNG:ADM3:22992897B75168409876731",
+        "gb:PNG:ADM3:22992897B75644347258054",
+        "gb:PNG:ADM3:22992897B76518985487686",
+        "gb:PNG:ADM3:22992897B7652574804118",
+        "gb:PNG:ADM3:22992897B76663975808458",
+        "gb:PNG:ADM3:22992897B76808354695056",
+        "gb:PNG:ADM3:22992897B77038650859300",
+        "gb:PNG:ADM3:22992897B77383054089627",
+        "gb:PNG:ADM3:22992897B77619345700361",
+        "gb:PNG:ADM3:22992897B77934893111661",
+        "gb:PNG:ADM3:22992897B78063049633885",
+        "gb:PNG:ADM3:22992897B7817709571144",
+        "gb:PNG:ADM3:22992897B78270236939339",
+        "gb:PNG:ADM3:22992897B78301432578959",
+        "gb:PNG:ADM3:22992897B78353214438792",
+        "gb:PNG:ADM3:22992897B78497916765365",
+        "gb:PNG:ADM3:22992897B78983903267546",
+        "gb:PNG:ADM3:22992897B79243592218544",
+        "gb:PNG:ADM3:22992897B79488459684451",
+        "gb:PNG:ADM3:22992897B79748473129974",
+        "gb:PNG:ADM3:22992897B80104444378164",
+        "gb:PNG:ADM3:22992897B80846780099677",
+        "gb:PNG:ADM3:22992897B81012526970419",
+        "gb:PNG:ADM3:22992897B818673198594",
+        "gb:PNG:ADM3:22992897B82790915997483",
+        "gb:PNG:ADM3:22992897B82912780578891",
+        "gb:PNG:ADM3:22992897B84145866118775",
+        "gb:PNG:ADM3:22992897B84236836857403",
+        "gb:PNG:ADM3:22992897B84328666805295",
+        "gb:PNG:ADM3:22992897B84498983538415",
+        "gb:PNG:ADM3:22992897B84583581347939",
+        "gb:PNG:ADM3:22992897B85235786246757",
+        "gb:PNG:ADM3:22992897B85514933712231",
+        "gb:PNG:ADM3:22992897B85970465950777",
+        "gb:PNG:ADM3:22992897B86054247038002",
+        "gb:PNG:ADM3:22992897B86212473502291",
+        "gb:PNG:ADM3:22992897B8635364029439",
+        "gb:PNG:ADM3:22992897B86435833710097",
+        "gb:PNG:ADM3:22992897B8666493390209",
+        "gb:PNG:ADM3:22992897B87041871118557",
+        "gb:PNG:ADM3:22992897B87068931350652",
+        "gb:PNG:ADM3:22992897B874298032475",
+        "gb:PNG:ADM3:22992897B87619880625449",
+        "gb:PNG:ADM3:22992897B88152069797672",
+        "gb:PNG:ADM3:22992897B88152359659355",
+        "gb:PNG:ADM3:22992897B88298410747863",
+        "gb:PNG:ADM3:22992897B88613231962733",
+        "gb:PNG:ADM3:22992897B88781212446611",
+        "gb:PNG:ADM3:22992897B88986885356561",
+        "gb:PNG:ADM3:22992897B89148238230439",
+        "gb:PNG:ADM3:22992897B89256777108050",
+        "gb:PNG:ADM3:22992897B89310121453122",
+        "gb:PNG:ADM3:22992897B89852769449867",
+        "gb:PNG:ADM3:22992897B89967969246497",
+        "gb:PNG:ADM3:22992897B90035319530873",
+        "gb:PNG:ADM3:22992897B90140133258921",
+        "gb:PNG:ADM3:22992897B90396118849893",
+        "gb:PNG:ADM3:22992897B90734093907128",
+        "gb:PNG:ADM3:22992897B91831207091282",
+        "gb:PNG:ADM3:22992897B91834012084096",
+        "gb:PNG:ADM3:22992897B91939158203242",
+        "gb:PNG:ADM3:22992897B91945804057259",
+        "gb:PNG:ADM3:22992897B92333184996498",
+        "gb:PNG:ADM3:22992897B92334626460492",
+        "gb:PNG:ADM3:22992897B93124691371632",
+        "gb:PNG:ADM3:22992897B93214625497969",
+        "gb:PNG:ADM3:22992897B9356118607888",
+        "gb:PNG:ADM3:22992897B94053974645504",
+        "gb:PNG:ADM3:22992897B94532223591769",
+        "gb:PNG:ADM3:22992897B94949011497978",
+        "gb:PNG:ADM3:22992897B95345663507483",
+        "gb:PNG:ADM3:22992897B95606019213275",
+        "gb:PNG:ADM3:22992897B95641416915371",
+        "gb:PNG:ADM3:22992897B95665730371411",
+        "gb:PNG:ADM3:22992897B95855167871378",
+        "gb:PNG:ADM3:22992897B96010738195789",
+        "gb:PNG:ADM3:22992897B96088938652345",
+        "gb:PNG:ADM3:22992897B96483864421066",
+        "gb:PNG:ADM3:22992897B97074754417917",
+        "gb:PNG:ADM3:22992897B97191193312102",
+        "gb:PNG:ADM3:22992897B97542007702415",
+        "gb:PNG:ADM3:22992897B97812937334438",
+        "gb:PNG:ADM3:22992897B97830542158003",
+        "gb:PNG:ADM3:22992897B98584532598932",
+        "gb:PNG:ADM3:22992897B98948010169824",
+        "gb:PNG:ADM3:22992897B99031950937161",
+        "gb:PNG:ADM3:22992897B99153305963268",
+        "gb:PNG:ADM3:22992897B99192672201996",
+        "gb:PNG:ADM3:22992897B99465407776061",
+        "gb:PNG:ADM3:22992897B99573705087373",
+        "gb:SLB:ADM1:17018030B19935783635883",
+        "gb:SLB:ADM1:17018030B21058058503942",
+        "gb:SLB:ADM1:17018030B21762340724861",
+        "gb:SLB:ADM1:17018030B28135645457785",
+        "gb:SLB:ADM1:17018030B36628097040544",
+        "gb:SLB:ADM1:17018030B43755880178831",
+        "gb:SLB:ADM1:17018030B49873759306190",
+        "gb:SLB:ADM1:17018030B68013150931387",
+        "gb:SLB:ADM1:17018030B84591335552725",
+        "gb:SLB:ADM1:17018030B8659224027401",
+        "gb:TON:ADM1:12702645B14713027314985",
+        "gb:TON:ADM1:12702645B14719640472686",
+        "gb:TON:ADM1:12702645B16834523743175",
+        "gb:TON:ADM1:12702645B50986277851262",
+        "gb:TON:ADM1:12702645B6842520552302",
+        "gb:TUV:ADM1:17741764B1294645335794",
+        "gb:TUV:ADM1:17741764B30576374901893",
+        "gb:TUV:ADM1:17741764B36602748519227",
+        "gb:TUV:ADM1:17741764B42950471856320",
+        "gb:TUV:ADM1:17741764B45323499156113",
+        "gb:TUV:ADM1:17741764B49308440506872",
+        "gb:TUV:ADM1:17741764B83632895409465",
+        "gb:TUV:ADM1:17741764B90379454256238",
+        "gb:USA:ADM2:52423323B10350916691509",
+        "gb:USA:ADM2:52423323B23592629733445",
+        "gb:USA:ADM2:52423323B55631926154060",
+        "gb:USA:ADM2:52423323B70973006487009",
+        "gb:USA:ADM2:52423323B8965190317075",
+        "gb:VUT:ADM1:32282491B17169683382430",
+        "gb:VUT:ADM1:32282491B5439526076152",
+        "gb:VUT:ADM1:32282491B61228346728599",
+        "gb:VUT:ADM1:32282491B7486560380604",
+        "gb:VUT:ADM1:32282491B78905986242135",
+        "gb:VUT:ADM1:32282491B8417950609019"
+      ]
+    },
+    "framework:province:gilbert-islands:8667250dbe42": {
+      "id": "framework:province:gilbert-islands:8667250dbe42",
+      "name": "Gilbert Islands",
+      "level": "province",
+      "parent_id": "framework:area:gilbert-is:6cc9d10b937c",
+      "member_location_ids": [
+        "gb:KIR:ADM1:97431129B55805139245338"
+      ]
+    },
+    "framework:province:nauru:160e9c4694e3": {
+      "id": "framework:province:nauru:160e9c4694e3",
+      "name": "Nauru",
+      "level": "province",
+      "parent_id": "framework:area:nauru:fdf8055f9edb",
+      "member_location_ids": [
+        "atlas:territory:NRU"
+      ]
+    },
+    "framework:province:phoenix-islands:8b6d333d3b82": {
+      "id": "framework:province:phoenix-islands:8b6d333d3b82",
+      "name": "Western equatorial Pacific source remainder",
+      "level": "province",
+      "parent_id": "framework:area:gilbert-is:6cc9d10b937c",
+      "member_location_ids": [
+        "gb:KIR:ADM1:97431129B36644055464690"
+      ]
+    },
+    "framework:subcontinent:micronesia:44f839aaab87": {
+      "id": "framework:subcontinent:micronesia:44f839aaab87",
+      "name": "Micronesia",
+      "level": "subcontinent",
+      "parent_id": "framework:continent:oceania:48580dd0c4b4",
+      "member_location_ids": [
+        "UMI-5179",
+        "atlas:named-land:location:825337016c35d6a8235a",
+        "atlas:territory:GUM",
+        "atlas:territory:NRU",
+        "gb:FSM:ADM1:64989084B14644801478174",
+        "gb:FSM:ADM1:64989084B22448563958302",
+        "gb:FSM:ADM1:64989084B48422588925966",
+        "gb:FSM:ADM1:64989084B53067458551386",
+        "gb:KIR:ADM1:97431129B36644055464690",
+        "gb:KIR:ADM1:97431129B55805139245338",
+        "gb:MHL:ADM1:77969171B15122701338463",
+        "gb:MHL:ADM1:77969171B260410775552",
+        "gb:MHL:ADM1:77969171B26181209823953",
+        "gb:MHL:ADM1:77969171B34066116483983",
+        "gb:MHL:ADM1:77969171B35666329157800",
+        "gb:MHL:ADM1:77969171B37424980791701",
+        "gb:MHL:ADM1:77969171B38536087618645",
+        "gb:MHL:ADM1:77969171B38591821482466",
+        "gb:MHL:ADM1:77969171B4211054760807",
+        "gb:MHL:ADM1:77969171B5098285569707",
+        "gb:MHL:ADM1:77969171B53385125256121",
+        "gb:MHL:ADM1:77969171B54378659360174",
+        "gb:MHL:ADM1:77969171B57525149952276",
+        "gb:MHL:ADM1:77969171B58043664047812",
+        "gb:MHL:ADM1:77969171B58637068818674",
+        "gb:MHL:ADM1:77969171B60065562167569",
+        "gb:MHL:ADM1:77969171B60639821987115",
+        "gb:MHL:ADM1:77969171B69777139929553",
+        "gb:MHL:ADM1:77969171B75968789186626",
+        "gb:MHL:ADM1:77969171B77738089577037",
+        "gb:MHL:ADM1:77969171B78565267382439",
+        "gb:MHL:ADM1:77969171B80728608262829",
+        "gb:MHL:ADM1:77969171B89836250003833",
+        "gb:MHL:ADM1:77969171B95504405890016",
+        "gb:MNP:ADM2:39175420B24162802066299",
+        "gb:MNP:ADM2:39175420B42755231479115",
+        "gb:MNP:ADM2:39175420B64217482742742",
+        "gb:MNP:ADM2:39175420B77088391070908",
+        "gb:PLW:ADM1:51375826B1021187793063",
+        "gb:PLW:ADM1:51375826B14634142702996",
+        "gb:PLW:ADM1:51375826B16617280953256",
+        "gb:PLW:ADM1:51375826B21693494950446",
+        "gb:PLW:ADM1:51375826B25708098730444",
+        "gb:PLW:ADM1:51375826B32695076810418",
+        "gb:PLW:ADM1:51375826B36601808440460",
+        "gb:PLW:ADM1:51375826B48991434772650",
+        "gb:PLW:ADM1:51375826B59587402164376",
+        "gb:PLW:ADM1:51375826B6202415756314",
+        "gb:PLW:ADM1:51375826B68373509078236",
+        "gb:PLW:ADM1:51375826B69298749218873",
+        "gb:PLW:ADM1:51375826B76455151990264",
+        "gb:PLW:ADM1:51375826B80300454073965",
+        "gb:PLW:ADM1:51375826B83906845617852",
+        "gb:PLW:ADM1:51375826B95953962908269"
+      ]
+    }
+  },
+  "baseline_files": [
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10165703,
+      "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d"
+    },
+    {
+      "path": "data/semantic-report.json",
+      "bytes": 6091596,
+      "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2367982,
+      "sha256": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-projection.json.gz",
+      "bytes": 5005075,
+      "sha256": "beb2739a65c67f01a65deab96ebf209a159b257453e156ef590106e1f1c9a348"
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 70253,
+      "sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1"
+    },
+    {
+      "path": "data/macro-foundation/macro-certificate.json",
+      "bytes": 38430,
+      "sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"
+    },
+    {
+      "path": "data/geography/part-13.json",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    }
+  ]
+}
