@@ -1,0 +1,59 @@
+{
+  "retrieved_at_utc": "2026-10-03T13:25:00.290411+00:00",
+  "endpoint": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query",
+  "query_parameters": {
+    "where": "state_alpha IN ('AK','CO','NM','OR','WY') AND gaz_featureclass = 'Populated Place'",
+    "outFields": "OBJECTID,gaz_name,gaz_featureclass,state_alpha,county_name,objectid_1,isunknowncoords,gaz_id,fcode,incounty_id",
+    "returnGeometry": "true",
+    "outSR": "4326",
+    "f": "geojson",
+    "orderByFields": "OBJECTID ASC"
+  },
+  "page_size": 2000,
+  "pages": [
+    {
+      "result_offset": 0,
+      "requested_count": 2000,
+      "returned_count": 2000,
+      "response_bytes": 703181,
+      "response_sha256": "227ea090f1e981366fc5289d202df0fffe1d15c9a54d1c41cf4c143d07071c4d",
+      "request_url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AK%27%2C%27CO%27%2C%27NM%27%2C%27OR%27%2C%27WY%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=OBJECTID%2Cgaz_name%2Cgaz_featureclass%2Cstate_alpha%2Ccounty_name%2Cobjectid_1%2Cisunknowncoords%2Cgaz_id%2Cfcode%2Cincounty_id&returnGeometry=true&outSR=4326&f=geojson&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=2000",
+      "exceeded_transfer_limit": true
+    },
+    {
+      "result_offset": 2000,
+      "requested_count": 2000,
+      "returned_count": 2000,
+      "response_bytes": 707906,
+      "response_sha256": "c073a5aa687dd910d6e85038d65bbf933cd3d79dbd8a54b4b310699f268b06a5",
+      "request_url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AK%27%2C%27CO%27%2C%27NM%27%2C%27OR%27%2C%27WY%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=OBJECTID%2Cgaz_name%2Cgaz_featureclass%2Cstate_alpha%2Ccounty_name%2Cobjectid_1%2Cisunknowncoords%2Cgaz_id%2Cfcode%2Cincounty_id&returnGeometry=true&outSR=4326&f=geojson&orderByFields=OBJECTID+ASC&resultOffset=2000&resultRecordCount=2000",
+      "exceeded_transfer_limit": true
+    },
+    {
+      "result_offset": 4000,
+      "requested_count": 2000,
+      "returned_count": 2000,
+      "response_bytes": 706442,
+      "response_sha256": "bc8a1f83ccc1f8141ff08dd89a4279120192141ac40be935e08117077b0e243a",
+      "request_url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AK%27%2C%27CO%27%2C%27NM%27%2C%27OR%27%2C%27WY%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=OBJECTID%2Cgaz_name%2Cgaz_featureclass%2Cstate_alpha%2Ccounty_name%2Cobjectid_1%2Cisunknowncoords%2Cgaz_id%2Cfcode%2Cincounty_id&returnGeometry=true&outSR=4326&f=geojson&orderByFields=OBJECTID+ASC&resultOffset=4000&resultRecordCount=2000",
+      "exceeded_transfer_limit": true
+    },
+    {
+      "result_offset": 6000,
+      "requested_count": 2000,
+      "returned_count": 67,
+      "response_bytes": 23905,
+      "response_sha256": "b19b43fe6c168e314af9696cfbffe84e67134cf969d3dc15580912cbd21adad4",
+      "request_url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AK%27%2C%27CO%27%2C%27NM%27%2C%27OR%27%2C%27WY%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=OBJECTID%2Cgaz_name%2Cgaz_featureclass%2Cstate_alpha%2Ccounty_name%2Cobjectid_1%2Cisunknowncoords%2Cgaz_id%2Cfcode%2Cincounty_id&returnGeometry=true&outSR=4326&f=geojson&orderByFields=OBJECTID+ASC&resultOffset=6000&resultRecordCount=2000",
+      "exceeded_transfer_limit": false
+    }
+  ],
+  "feature_count": 6067,
+  "retained_feature_count": 6067,
+  "retained_path": "sources/usgs-gnis-populated-places-AK-CO-NM-OR-WY.geojson.gz",
+  "retained_compressed_bytes": 341742,
+  "retained_compressed_sha256": "92a36da017be9046b63deac15f44e2118049913800b7485a66e2c79dfd2d13f4",
+  "retained_uncompressed_bytes": 2136417,
+  "retained_uncompressed_sha256": "b17eff09eb6eb52da37a99dc6db4a2f51d95b84d9a235657fc5e185f0309cd9e",
+  "source_description": "USGS The National Map Gazetteer based on GNIS; source service documents official/federally standardized named features but explicitly uses a flat model with no administrative, jurisdictional or other feature relationships. This query is only gaz_featureclass=Populated Place in the five assigned states. Features are not a complete settlement census."
+}
