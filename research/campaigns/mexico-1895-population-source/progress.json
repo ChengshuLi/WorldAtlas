@@ -3,7 +3,7 @@
   "lane": "research",
   "campaign_id": "mexico-1895-population-source",
   "branch": "research/mexico-1895-population-source",
-  "base_main_commit": "a0e212c47cee0ffed7eec2408ec6ccd5708b1fae",
+  "base_main_commit": "8bd9186ecf95b625453674b0a18a31aeac1ac255",
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/29",
   "date_timezone": "UTC",
   "scope": {
@@ -22,7 +22,7 @@
     "Retrieved and hashed all three official scan segments and INEGI general free-use terms.",
     "Visually reviewed the title page and printed page 6; retained two population rows and identified the adjacent age-table heading.",
     "Recorded an unresolved 30-person mismatch in Aguascalientes sex subtotals versus printed total and a 1897/1899 publication-date discrepancy.",
-    "Opened focused source-evaluation PR #590 at ba62db6957bc054c1b7f6a264fd2f5f333e3be37."
+    "Opened focused source-evaluation PR #590; rebased on fresh main 8bd9186 after another merge advanced the queue. Exact-head scope check will be rerun."
   ],
   "source_gaps": [
     "The reviewed summary is state-level; municipalities and settlements, sub-state tables, source population-universe definition, and undercount uncertainty remain unevaluated.",
