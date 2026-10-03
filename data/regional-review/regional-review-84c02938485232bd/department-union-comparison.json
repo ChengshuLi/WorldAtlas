@@ -1,53 +1,56 @@
 {
-  "method": "OGR EPSG:6933. For aggregate-only diagnostics, invalid clones were normalized with MakeValid before union; no published geometry was changed. Each union contains only the 2020 source or current features for the assigned municipalities. It does not prove external department-envelope coverage or lack of omitted physical land.",
+  "method": "Corrected OGR EPSG:6933 with EPSG:4326 OAMS_TRADITIONAL_GIS_ORDER (GeoJSON longitude,latitude). Parent aggregates use the exact 265 assigned current baseline and original source records. Invalid geometries are cloned and MakeValid is applied only for diagnostic union calculations; no published/source shape is mutated. These union metrics do not establish external parent-envelope completeness or omitted physical land.",
+  "baseline_commit": "6c6271af6b0dac49b82eaafb2db4de8b9c4611f2",
+  "source_sha256_compressed": "33a3bfedf3d11d3da9d434072ba3672419e92ba6b655ab56911aee7eb14f6dc5",
+  "source_sha256_uncompressed": "fe715854fc3383d2fd39e8692f3df0c60bd12208cb2cd36ef1ec2220ea8972fe",
   "departments": [
     {
-      "department": "Boyac\u00e1",
+      "department": "Bogota Capital District",
+      "locations": 1,
+      "current_union_area_km2": 1624.8074983404026,
+      "source_union_area_km2": 1622.842331720112,
+      "relative_area_delta": 0.0012109411874951298,
+      "union_symmetric_difference_fraction": 0.025839186705343308,
+      "invalid_current_inputs_made_valid_for_union": 0,
+      "invalid_source_inputs_made_valid_for_union": 0
+    },
+    {
+      "department": "Boyacá",
       "locations": 123,
-      "current_union_area_km2": 6837.694272118989,
-      "source_union_area_km2": 6839.515609517068,
-      "relative_area_delta": -0.00026629625576766856,
-      "union_symmetric_difference_fraction": 0.009026922066038803,
-      "invalid_current_inputs_made_valid_for_union": 0,
-      "invalid_source_inputs_made_valid_for_union": 0
-    },
-    {
-      "department": "Santander",
-      "locations": 87,
-      "current_union_area_km2": 8850.916707841161,
-      "source_union_area_km2": 8852.301989203192,
-      "relative_area_delta": -0.00015648826302125743,
-      "union_symmetric_difference_fraction": 0.004799684380195183,
-      "invalid_current_inputs_made_valid_for_union": 0,
-      "invalid_source_inputs_made_valid_for_union": 0
-    },
-    {
-      "department": "Meta",
-      "locations": 29,
-      "current_union_area_km2": 25399.2148595183,
-      "source_union_area_km2": 25398.84713318884,
-      "relative_area_delta": 1.4478071683010906e-05,
-      "union_symmetric_difference_fraction": 0.002561112672241437,
+      "current_union_area_km2": 23123.18505139488,
+      "source_union_area_km2": 23128.56635342797,
+      "relative_area_delta": -0.00023266907039791947,
+      "union_symmetric_difference_fraction": 0.009100919197971584,
       "invalid_current_inputs_made_valid_for_union": 0,
       "invalid_source_inputs_made_valid_for_union": 0
     },
     {
       "department": "Cesar",
       "locations": 25,
-      "current_union_area_km2": 6555.444436272892,
-      "source_union_area_km2": 6569.101046082713,
-      "relative_area_delta": -0.002078916082127377,
-      "union_symmetric_difference_fraction": 0.007656213727846144,
-      "invalid_current_inputs_made_valid_for_union": 2,
+      "current_union_area_km2": 22514.03201106541,
+      "source_union_area_km2": 22559.85010320477,
+      "relative_area_delta": -0.002030957294918089,
+      "union_symmetric_difference_fraction": 0.007643574457954843,
+      "invalid_current_inputs_made_valid_for_union": 3,
       "invalid_source_inputs_made_valid_for_union": 0
     },
     {
-      "department": "Bogota Capital District",
-      "locations": 1,
-      "current_union_area_km2": 449.722917332751,
-      "source_union_area_km2": 449.1630523094824,
-      "relative_area_delta": 0.0012464627720155436,
-      "union_symmetric_difference_fraction": 0.025809273304798448,
+      "department": "Meta",
+      "locations": 29,
+      "current_union_area_km2": 85466.69499109326,
+      "source_union_area_km2": 85466.27128669033,
+      "relative_area_delta": 4.957562750132138e-06,
+      "union_symmetric_difference_fraction": 0.0025950401374084183,
+      "invalid_current_inputs_made_valid_for_union": 0,
+      "invalid_source_inputs_made_valid_for_union": 0
+    },
+    {
+      "department": "Santander",
+      "locations": 87,
+      "current_union_area_km2": 30552.240907022548,
+      "source_union_area_km2": 30556.376769238293,
+      "relative_area_delta": -0.00013535185296928505,
+      "union_symmetric_difference_fraction": 0.004788419713532928,
       "invalid_current_inputs_made_valid_for_union": 0,
       "invalid_source_inputs_made_valid_for_union": 0
     }
