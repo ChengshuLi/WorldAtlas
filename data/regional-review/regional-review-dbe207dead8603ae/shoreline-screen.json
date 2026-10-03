@@ -1,0 +1,266 @@
+{
+  "source": "GSHHG 2.3.7 high-resolution GSHHS level 1",
+  "archive_sha256": "8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41",
+  "method": "Read GSHHS_f_L1 polygons; select every record intersecting each WGS84 lon/lat window; transform retained polygon to EPSG:6933 and calculate area. Windows intentionally screen principal island clusters, not all regional water. This is not authoritative source crosswalk or boundary validation. GSHHG source codes and attribution are mixed; see upstream README.",
+  "windows": {
+    "Tristan vicinity": [
+      -13,
+      -38,
+      -12,
+      -37
+    ],
+    "Gough vicinity": [
+      -10.1,
+      -40.5,
+      -9.8,
+      -40.2
+    ],
+    "Bouvet vicinity": [
+      3.3,
+      -54.5,
+      3.55,
+      -54.3
+    ]
+  },
+  "record_count": 17,
+  "records": [
+    {
+      "context": "Bouvet vicinity",
+      "gshhg_id": "2237",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        3.334111,
+        -54.46625,
+        3.487417,
+        -54.399611
+      ],
+      "area_attribute_km2": 50.6650701906,
+      "area_epsg6933_km2": 50.6650726841184
+    },
+    {
+      "context": "Bouvet vicinity",
+      "gshhg_id": "95884",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        3.364167,
+        -54.467083,
+        3.370806,
+        -54.464611
+      ],
+      "area_attribute_km2": 0.0838889815198,
+      "area_epsg6933_km2": 0.08388928550768127
+    },
+    {
+      "context": "Gough vicinity",
+      "gshhg_id": "1924",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -10.012944,
+        -40.371333,
+        -9.87125,
+        -40.275444
+      ],
+      "area_attribute_km2": 66.9314480307,
+      "area_epsg6933_km2": 66.931454021003
+    },
+    {
+      "context": "Gough vicinity",
+      "gshhg_id": "120932",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -9.932111,
+        -40.357944,
+        -9.928806,
+        -40.355444
+      ],
+      "area_attribute_km2": 0.0558819809545,
+      "area_epsg6933_km2": 0.05588205570739932
+    },
+    {
+      "context": "Gough vicinity",
+      "gshhg_id": "121376",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -9.895444,
+        -40.300444,
+        -9.892111,
+        -40.297889
+      ],
+      "area_attribute_km2": 0.0555451146124,
+      "area_epsg6933_km2": 0.0555451020081311
+    },
+    {
+      "context": "Gough vicinity",
+      "gshhg_id": "126621",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -9.957139,
+        -40.276278,
+        -9.954583,
+        -40.27375
+      ],
+      "area_attribute_km2": 0.050588244775,
+      "area_epsg6933_km2": 0.05058830239040021
+    },
+    {
+      "context": "Gough vicinity",
+      "gshhg_id": "130487",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -10.010389,
+        -40.302917,
+        -10.007111,
+        -40.300444
+      ],
+      "area_attribute_km2": 0.0474818749174,
+      "area_epsg6933_km2": 0.047481921908488336
+    },
+    {
+      "context": "Gough vicinity",
+      "gshhg_id": "136380",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -9.915472,
+        -40.371333,
+        -9.912917,
+        -40.368778
+      ],
+      "area_attribute_km2": 0.0433125821153,
+      "area_epsg6933_km2": 0.04331257542784857
+    },
+    {
+      "context": "Gough vicinity",
+      "gshhg_id": "137365",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -10.000472,
+        -40.282944,
+        -9.997917,
+        -40.280444
+      ],
+      "area_attribute_km2": 0.0423580384225,
+      "area_epsg6933_km2": 0.04235811193249998
+    },
+    {
+      "context": "Gough vicinity",
+      "gshhg_id": "163596",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -9.95375,
+        -40.273778,
+        -9.952083,
+        -40.272139
+      ],
+      "area_attribute_km2": 0.0219497581994,
+      "area_epsg6933_km2": 0.02194975930171919
+    },
+    {
+      "context": "Gough vicinity",
+      "gshhg_id": "169299",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -9.872111,
+        -40.343778,
+        -9.869639,
+        -40.342972
+      ],
+      "area_attribute_km2": 0.0156856463092,
+      "area_epsg6933_km2": 0.01568564756773299
+    },
+    {
+      "context": "Tristan vicinity",
+      "gshhg_id": "1398",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -12.355444,
+        -37.198778,
+        -12.217083,
+        -37.075444
+      ],
+      "area_attribute_km2": 113.698261197,
+      "area_epsg6933_km2": 113.69825175359396
+    },
+    {
+      "context": "Tristan vicinity",
+      "gshhg_id": "4118",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -12.704639,
+        -37.344583,
+        -12.637083,
+        -37.29625
+      ],
+      "area_attribute_km2": 18.1858286297,
+      "area_epsg6933_km2": 18.185834211015226
+    },
+    {
+      "context": "Tristan vicinity",
+      "gshhg_id": "10730",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -12.490472,
+        -37.465472,
+        -12.462972,
+        -37.443722
+      ],
+      "area_attribute_km2": 3.4506799587,
+      "area_epsg6933_km2": 3.450677022336272
+    },
+    {
+      "context": "Tristan vicinity",
+      "gshhg_id": "55189",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -12.477944,
+        -37.443,
+        -12.470389,
+        -37.43875
+      ],
+      "area_attribute_km2": 0.215347015876,
+      "area_epsg6933_km2": 0.21534731520150144
+    },
+    {
+      "context": "Tristan vicinity",
+      "gshhg_id": "56587",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -12.487111,
+        -37.433778,
+        -12.480444,
+        -37.429583
+      ],
+      "area_attribute_km2": 0.206300234658,
+      "area_epsg6933_km2": 0.20630045047112727
+    },
+    {
+      "context": "Tristan vicinity",
+      "gshhg_id": "134724",
+      "level": 1,
+      "source_code": "WVS",
+      "bbox_wgs84": [
+        -12.687944,
+        -37.34625,
+        -12.685389,
+        -37.34375
+      ],
+      "area_attribute_km2": 0.0449201162783,
+      "area_epsg6933_km2": 0.04492012486003672
+    }
+  ]
+}
