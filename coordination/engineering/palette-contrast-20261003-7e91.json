@@ -11,7 +11,7 @@
     "Verify GPU/canvas fill/legend consistency, unknowns, reload/year stability, no ownership recompilation, actual private publication and rollback; maximum two focused PRs"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-03T17:41:46.150752+00:00",
+  "updated_at_utc": "2026-10-03T17:43:29.565719+00:00",
   "completed": [
     "Confirmed actual current reproduction: PRC and ROC selected profiles both resolve owner:Q148, with distinct source names. Both share rgb(49,60,196), and one legend entry replaces the other.",
     "Actual production four-year sequence and two profile screenshots completed with zero navigation ownership compilation/upload and no page errors.",
@@ -35,8 +35,16 @@
       "result": "passed; exact actual RGB, legend, year/reload stability, zero ownership delta"
     },
     {
-      "command": "npm test",
-      "result": "running; no final result yet"
+      "command": "npm test, then node scripts/compile-hosted-migrations.mjs --output dist/drizzle and affected rerun",
+      "result": "Initial 573: 569 passes/4 missing derivative failures; prerequisite compiled, affected staging/new main rerun 11 passes. Full publication gate pending."
+    },
+    {
+      "command": "node --test focused palette/presentation/raster/interval tests",
+      "result": "16 passed"
+    },
+    {
+      "command": "node scripts/audit-palette-raster.mjs data/engineering/palette-contrast-20261003-7e91 --check",
+      "result": "passed exact 135963/6240 pairs"
     }
   ],
   "deployment": null,
