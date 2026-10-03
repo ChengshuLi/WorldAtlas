@@ -90,5 +90,34 @@
     "outcome": "three reproduced findings corrected; six actual SQLite/PostgreSQL integration groups pass; final review pending",
     "receipt": "data/engineering/observation-integration-20261003-7e91/derivation-correction-controls.tap",
     "limits": "Synthetic fixture only; no actual approval, factual import or provider operation; static/client/owner integration unfinished"
+  },
+  "integration_checkpoint": {
+    "status": "source integration implemented; full regression running; no final review/merge/production installation claimed",
+    "completed_controls": {
+      "typed_integration": {
+        "groups": 8,
+        "backends": [
+          "Node SQLite",
+          "isolated PGlite PostgreSQL"
+        ],
+        "receipt": "data/engineering/observation-integration-20261003-7e91/typed-territorial-preservation-controls.tap"
+      },
+      "owner_forward": {
+        "groups": 8,
+        "receipt": "data/engineering/observation-integration-20261003-7e91/owner-forward-controls-first.tap",
+        "extra_runtime_function_privilege_assertion": "included in running full regression"
+      },
+      "actual_node_static_prepared": "data/engineering/observation-integration-20261003-7e91/prepared-server-parity.json",
+      "hosted_build": "data/engineering/observation-integration-20261003-7e91/hosted-build-first.log",
+      "deployment_budget": "data/engineering/observation-integration-20261003-7e91/hosted-deployment-budget.json"
+    },
+    "independent_derivation_reassessment": "data/engineering/observation-integration-20261003-7e91/derivation-correction-independent-review.json",
+    "next": "finish full regression, exact source/receipt ledger, final distinct review, required exact-head checks and serialized actual squash merge",
+    "production_limits": [
+      "No actual owner DDL/provider facts/Site operation",
+      "Production PG remains V2 until reviewed current-source owner preservation operation",
+      "Native D1 frozen0008 installation limit retained; typed capability zero on legacy/unverified schemas",
+      "No complete regional branches approved; factual import gate paused"
+    ]
   }
 }

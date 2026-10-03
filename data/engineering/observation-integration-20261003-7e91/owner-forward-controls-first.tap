@@ -1,0 +1,16 @@
+✔ actual PostgreSQL forward DDL preserves every baseline byte and sequence, grants minimum runtime access, and retries idempotently (2465.601371ms)
+✔ forward failure rolls back DDL, registry and grants without changing original bytes (1553.465567ms)
+✔ registered catalog tampering and unreviewed hashes reject instead of silently repairing a database (1657.385114ms)
+✔ missing reviewed rehearsal operation performs no management requests or database mutation (1.686733ms)
+✔ reviewed forward operation requires an actual production baseline and exact ordered files (0.536719ms)
+✔ fresh hash-pinned private Site maintenance attestation rejects stale, writable and mismatched context (1.142132ms)
+✔ management workflows require explicit manual dispatch and reject push selection (59.048729ms)
+✔ third reviewed forward migration installs typed runtime privileges without changing retained core contracts or replay identity (2100.222462ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7956.37942

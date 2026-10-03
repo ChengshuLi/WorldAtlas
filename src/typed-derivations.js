@@ -30,3 +30,16 @@ export function validateTypedDerivations(roots, inputs, sources) {
   for (const row of roots) visit(row, 0);
   return [...factualSubjects];
 }
+
+/** Original territorial meaning is evidence, never a caller-selected repin. */
+export function validateTypedGeography(rows, pins) {
+  for (const row of rows) {
+    if (row.is_example === 1) continue;
+    const retained = row.metadata?.expected_geography;
+    if (!pins || !retained
+      || Object.keys(retained).sort().join(',') !== 'footprints_sha256,hierarchy_sha256,release_id'
+      || ['release_id', 'hierarchy_sha256', 'footprints_sha256'].some(key => retained[key] !== pins[key])) {
+      throw Error('Factual typed evidence requires retained matching geography pins; revalidation is required');
+    }
+  }
+}

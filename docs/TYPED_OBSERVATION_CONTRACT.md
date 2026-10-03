@@ -1,5 +1,7 @@
 # Shared typed observation contract, version 1
 
+Current integration is documented in [TYPED_MODULE_INTEGRATION.md](TYPED_MODULE_INTEGRATION.md). The part-specific descriptions below retain their implementation checkpoint and verification limits.
+
 This is the first bounded part of issue #529. It defines an additive, pure contract and explicit module registration seam. It does not enable hosted imports, add tables, advertise a production capability, implement domain map modes or close #529. The existing eight attributes, identities, source archives, immutable migrations and v1/v2 storage exports retain their contracts.
 
 `src/observation-registry.js` distinguishes a polity's exclusive government class from location measures and separately linked feature identities. Stable type IDs reuse existing graph kinds where applicable. Vocabulary definitions are structural definitions, not factual assignments. The initial registry contains no government classifications, language assignments, ports, diseases or geographic feature data.

@@ -3,6 +3,7 @@
 import {assertJSONData} from './json-contract.js';
 import {normalizeTypedObservation,normalizeTypedRelationship,resolveTypedObservations,supportedInterval} from './typed-observations.js';
 import {observationContract,registryForDigest} from './observation-modules.js';
+import {validateTypedDerivations,validateTypedGeography} from './typed-derivations.js';
 
 export const canonicalTypedJSON=value=>JSON.stringify(canonical(value));
 function canonical(value){return Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;}
@@ -66,6 +67,16 @@ export async function resolveTypedSnapshot(input,year,{examples=false}={}){
  const observations=[],links=[],retirements=[];
  for(const row of input.observations)observations.push(await normalizeTypedEvidence('observations',row,context));
  for(const row of input.feature_links)links.push(await normalizeTypedEvidence('feature_links',row,context));
+ const derivations=new Map(observations.map(row=>[row.id,row]));
+ for(const entry of input.derivation_inputs??[]){
+  if(!['typed','legacy'].includes(entry.kind))throw Error('Unknown derivation input namespace');
+  const row=entry.kind==='typed'?await normalizeTypedEvidence('observations',entry.row,context):entry.row;
+  const existing=derivations.get(row.id);
+  if(existing&&(entry.kind==='legacy'||canonicalTypedJSON(existing)!==canonicalTypedJSON(row)))throw Error('Ambiguous derivation input identity');
+  derivations.set(row.id,row);
+ }
+ validateTypedDerivations([...observations,...links],derivations,input.sources);
+ validateTypedGeography([...observations,...links,...derivations.values()],input.geography_pins);
  const seen=new Set(),targets=new Set(),retired={observations:[],feature_links:[]};
  for(const inputRow of input.retirements){
   const row=normalizeTypedRetirement(inputRow,{sources:input.sources,observations,feature_links:links},{requireReplacement:false});

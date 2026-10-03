@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "pr_number": 677,
+  "issue_number": 529,
+  "reviewer_worker_id": "review-palette-651-20261003",
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "candidate_commit": "0335d8f11e89cdc78702e03f4a88398a00ee8c8c",
+  "review_scope": "Independent reassessment of three early derivation findings only",
+  "outcome": "three-corrections-reassessed-no-blocker",
+  "exact_head_acceptance": false,
+  "resolves": [
+    "Actual original SQLite promotion probe now rejects factual output consuming retained example input with status400.",
+    "Actual original two-node cycle probe now rejects circular derivation evidence.",
+    "Actual original paused-gate example-only derivation probe now succeeds with retained is_example1 and explicit opt-in."
+  ],
+  "independent_control": {
+    "command": "node --test --test-name-pattern='derivation closures' test/typed-integration.test.mjs",
+    "tests": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 2704.729085,
+    "coverage": "Actual isolated SQLite/PGlite retained typed and legacy example promotion, same-batch promotion and cycle rejection with unchanged complete markers; positive retained/same-batch acyclic example chains under real paused gate; no-opt-in rejection; HTTP snapshot and factual paused-gate rejection."
+  },
+  "source_assessment": "Bounded recursive catalog closure retains source rows and typed normalization, distinguishes ambiguous legacy/typed IDs, passes normalized dependency labels to shared cycle/example-promotion validation, and derives factual subject approval requirements from factual dependencies instead of all inputs. Source/registry/geography pins and atomic ingestion remain required. Snapshot path also validates provenance. Domain calculations and historical truth remain outside this helper.",
+  "source_receipts": [
+    {
+      "path": "src/typed-derivations.js",
+      "bytes": 1516,
+      "sha256": "244ff98090e35c602072356089a966efd1009be75eaa053b3a0655b5b75648fe"
+    },
+    {
+      "path": "hosted/typed-observations.js",
+      "bytes": 18234,
+      "sha256": "43ac81c50ecd8fa959a313ba4a78604b8e8fd45ba5abbb5cb0b5d415a9295458"
+    },
+    {
+      "path": "test/typed-integration.test.mjs",
+      "bytes": 19380,
+      "sha256": "581720b7249de781bebbf618a915620fb422788cf1d4aea6a5d834e6cb56a75e"
+    }
+  ],
+  "proof_receipts": [
+    {
+      "path": "/tmp/worldatlas-677-derivation-reassessment.log",
+      "bytes": 290,
+      "sha256": "23c06e94b3a40a2d5df01e570062c6a2007b962325dd4ac00650494b91413222"
+    },
+    {
+      "path": "/tmp/worldatlas-677-derivation-reassessment-promotion.json",
+      "bytes": 265,
+      "sha256": "629f869f7a1ab669fc0e289b988404982c2128e60403dc835a33c767d06723ea"
+    },
+    {
+      "path": "/tmp/worldatlas-677-derivation-reassessment-cycle.json",
+      "bytes": 1013,
+      "sha256": "9320d928535d9956a21116e7ccc45669b8d5a5c6a4902e22c61feb391c025f26"
+    }
+  ],
+  "limits": [
+    "No final exact-head acceptance; unfinished final adapters/client/owner integration require final review.",
+    "Synthetic isolated database fixture and synthetic positive gate only; no actual geographic approval/provider operations/publication.",
+    "Full regression/build not rerun for this bounded reassessment.",
+    "No edits, claims, posts or token access; report-only legacy evidence, no invented manifest."
+  ]
+}
