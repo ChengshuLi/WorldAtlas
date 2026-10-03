@@ -1,0 +1,1318 @@
+{
+  "packet_version": 1,
+  "issue": 523,
+  "title": "Review North-Central Pacific new named-land territories: 7 locations",
+  "recorded_on": "2026-10-03",
+  "audit_status": "in_progress_checkpoint",
+  "main_at_reservation": "7c084899f784ded379c4c533f9a8dd003a4fd8bf",
+  "scope": {
+    "owned_path": "data/regional-review/regional-supplement-256993a64222ee97/",
+    "region_id": "framework:region:north-central-pacific:4e0ad85ab366",
+    "area_id": "framework:area:hawaii:964dab8e8ef8",
+    "province_id": "framework:province:hawaii:88e4dd68a18b",
+    "assigned_location_count": 7,
+    "assigned_ids": [
+      "atlas:macro-coverage:location:0975e8de92d354d008e1",
+      "atlas:macro-coverage:location:27168565fdb921e17e10",
+      "atlas:macro-coverage:location:8490f73e96d2a404ce07",
+      "atlas:macro-coverage:location:a60032ee05803bef7502",
+      "atlas:macro-coverage:location:d8962cf6d87a3c9fc9ee",
+      "atlas:macro-coverage:location:f745c0922348bbedc6e1",
+      "atlas:macro-coverage:location:f88f121102f24b08e39b"
+    ],
+    "full_area_descendant_count": 14,
+    "full_province_descendant_count": 13,
+    "partial_area_packet": true,
+    "full_current_region_location_count": 15,
+    "parent_chain_each": "location -> framework:province:hawaii:88e4dd68a18b -> framework:area:hawaii:964dab8e8ef8 -> framework:region:north-central-pacific:4e0ad85ab366 -> framework:subcontinent:polynesia:c8f106884f04 -> framework:continent:oceania:48580dd0c4b4"
+  },
+  "provenance_pins": {
+    "release_id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "frozen_region_geometry_sha256": "c4de85c09d450b2d509608b42bbf8fd863995eadbb69f0ae801e9e9634c1d8dd",
+    "frozen_region_member_ids_sha256": "89c5369b86ce8b68e00953655482b00b00bed9f00eb1d1d994637a810eb5c51b"
+  },
+  "sources": [
+    {
+      "id": "usfws-hawaiian-islands-about",
+      "title": "Hawaiian Islands National Wildlife Refuge: About Us",
+      "url": "https://www.fws.gov/refuge/hawaiian-islands/about-us",
+      "publisher": "U.S. Fish and Wildlife Service",
+      "source_date": "webpage has no publication/update date identified",
+      "accessed_on": "2026-10-03",
+      "license": "no explicit page license located; short factual paraphrases retained here; canonical URL and access date are restoration instructions",
+      "use": "primary federal wildlife refuge description of landforms, rounded areas, reef/land distinction, historic use, seasonal camps and management context; not an authoritative surveyed contemporary shoreline"
+    },
+    {
+      "id": "usfws-hawaiian-islands-refuge",
+      "title": "Hawaiian Islands National Wildlife Refuge",
+      "url": "https://www.fws.gov/refuge/hawaiian-islands",
+      "publisher": "U.S. Fish and Wildlife Service",
+      "source_date": "webpage has no publication/update date identified",
+      "accessed_on": "2026-10-03",
+      "license": "no explicit page license located; canonical URL and access date are restoration instructions",
+      "use": "refuge history and management/co-trustee context; identifies Northwestern Hawaiian chain and Kure sanctuary context"
+    },
+    {
+      "id": "census-tiger-2024-honolulu-county",
+      "title": "TIGER/Line Shapefile, 2024, County and Equivalent",
+      "url": "https://www2.census.gov/geo/tiger/TIGER2024/COUNTY/tl_2024_us_county.zip",
+      "publisher": "U.S. Census Bureau",
+      "source_date": "2024 TIGER/Line county boundary vintage",
+      "accessed_on": "2026-10-03",
+      "license": "U.S. federal government work; no additional license restriction found",
+      "archive_bytes": 83913260,
+      "archive_sha256": "04e668d3502757c837c13444730547cd967f28a2c49aeffb873d1792ab2cb97b",
+      "restoration": "download URL above; verify exact SHA-256, select GEOID 15003 (STATEFP 15, COUNTYFP 003, Honolulu) and run OGR tests in verify.py",
+      "use": "official county boundary contains all seven candidate physical land geometries; administrative inclusion only, not sovereign ownership"
+    },
+    {
+      "id": "osm-nwhi-source-extracts",
+      "title": "OpenStreetMap bounded map extracts for the seven locations",
+      "publisher": "OpenStreetMap contributors",
+      "source_date": "retrieved 2026-10-02; OSM object metadata does not identify inherited NOAA U.S. Vector Shoreline survey vintage",
+      "license": "ODbL 1.0 with attribution; exact source bytes retained in data/macro-improvements/macro-coverage-oceania/ and referenced by path/hash per location",
+      "use": "closed land rings, named components, OSM notes and source topology; not a primary guarantee every present above-water islet is represented",
+      "license_reference": "https://www.openstreetmap.org/copyright"
+    },
+    {
+      "id": "gshhg-2.3.7",
+      "title": "Global Self-consistent Hierarchical High-resolution Geography shoreline database",
+      "publisher": "NOAA/NCEI distributed GSHHG; University of Hawaiʻi SOEST",
+      "source_date": "version 2.3.7; precise source data vintage is not specified in this evidence file",
+      "license": "LGPL version 3 or later",
+      "retained_path": "data/macro-improvements/macro-coverage-oceania/gshhg-selected-full-records.bin.gz",
+      "retained_parent_archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+      "use": "upstream #501 archipelago-level historical coast comparison is retained in the source package; this packet did not establish a one-to-one GSHHG component crosswalk for the seven assigned IDs, so it cannot resolve their modern completeness",
+      "canonical_references": [
+        "https://www.soest.hawaii.edu/pwessel/gshhg/",
+        "https://www.ncei.noaa.gov/products/shoreline-coastline-database"
+      ]
+    }
+  ],
+  "neighbor_and_parent_audit": {
+    "same_area_partial_coverage": "Hawaii area has 14 current descendant locations in two provinces. This issue owns exactly seven of the 13 Hawaii-province locations; the other six are five existing GB ADM2 units and Gardner Pinnacles (separate issue #543). The other province is Midway Islands with its own location, outside this issue. Current region has 15 locations; #543 is in North-Central Pacific.",
+    "province_sibling_ids": [
+      "atlas:macro-coverage:location:37c3c7fb6cd6cf260c68",
+      "gb:USA:ADM2:52423323B10350916691509",
+      "gb:USA:ADM2:52423323B23592629733445",
+      "gb:USA:ADM2:52423323B55631926154060",
+      "gb:USA:ADM2:52423323B70973006487009",
+      "gb:USA:ADM2:52423323B8965190317075"
+    ],
+    "administrative_completeness_finding": {
+      "classification": "coordinated_follow_up_required",
+      "official_boundary": "2024 Census TIGER/Line Honolulu County, GEOID 15003, Honolulu County (StateFP 15, countyFP 003)",
+      "result": "All seven candidate island geometries are wholly contained by TIGER Honolulu County (OGR ST_Contains true; intersection-area ratios 1.0 within floating precision). Current indexed Honolulu ADM2 geometry has bbox [-158.2777,21.2577,-157.6510,21.7127] around Oahu and no intersection with assigned NWHI land. This indicates a detached administrative remainder/source-completeness or role-representation gap; it does not establish that island locations should move or that County geometry should be edited here.",
+      "follow_up": "Regional integrator should coordinate a bounded source-completeness/role review for Honolulu County detached NWHI lands alongside this packet. Request recorded on issues #523 and #339. No inter-region inconsistency demonstrated.",
+      "affected_neighbor_id": "gb:USA:ADM2:52423323B23592629733445",
+      "affected_neighbor_name": "Honolulu"
+    }
+  },
+  "methods_and_uncertainty": {
+    "physical_method": "Pinned v5 candidate report and issue #501 OSM reconstruction report; compare every scoped source polygon and exact source coastline way, checking ring closure, missing nodes, named islet parts, OSM notes, areas, current membership and independent USFWS descriptions. Reefs are distinct from exposed land; ring/way counts are not location quotas.",
+    "area_method": "Upstream #501 report labels areas as source land km2 and uses WGS84 ellipsoidal measurement; values are source calculations, not surveyed shoreline area.",
+    "administrative_method": "Downloaded Census 2024 county archive, verified SHA-256, extracted GEOID 15003, and used GDAL/OGR ST_Contains/intersection-area ratios against all seven candidates. Checked current Honolulu feature extents/intersections.",
+    "settlement_method": "For each raw OSM extract, enumerate every place=island/islet/atoll/archipelago object, all populated-settlement place values, and tagged buildings/man-made/aeroway/tourism features. No city/town/village/hamlet/isolated_dwelling/locality feature and no island population is mapped. Several extracts show field/research/runway/pier/visitor infrastructure; USFWS contextualizes historical or seasonal human use. These data do not prove present occupancy or absence.",
+    "uncertainty": [
+      "USFWS web content is undated and gives rounded land/reef values, not survey-grade contemporary high-tide polygons.",
+      "OSM response date is not a shoreline data vintage; NOAA U.S. Vector Shoreline is an object source tag without a release/date.",
+      "French Frigate Shoals and Pearl and Hermes emergent-land status changes with sediment, storms, tides and survey epoch; source disagreement remains unresolved.",
+      "Laysan hypersaline lagoon ring exists in retained OSM bytes but is absent as a hole in the staged polygon; exact hydrologic boundary/version needs review.",
+      "TIGER establishes administrative inclusion, not sovereign ownership or atlas geographic membership.",
+      "Two Nihoa coastline ways carry source=Mapbox or NOAA U.S. Vector Shoreline;Mapbox tags. OSM geometry remains ODbL, but the underlying imagery is neither retained nor used as independent primary physical evidence.",
+      "Although upstream #501 retains GSHHG 2.3.7 Hawaiʻi/NWHI search-domain records, this packet did not independently associate every older GSHHG component to the seven assigned locations; no exact per-island GSHHG completeness claim is made."
+    ]
+  },
+  "follow_ups": [
+    {
+      "id": "laysan-central-lagoon",
+      "kind": "source-restoration",
+      "scope": "Laysan central inland hypersaline lagoon",
+      "recommendation": "Retrieve dated licensed hydrography/shoreline polygon from USFWS/NOAA; decide dry-land water-hole convention and propose a local hole while preserving Laysan ID, outer coast and history."
+    },
+    {
+      "id": "nwhi-emergent-components",
+      "kind": "source-restoration",
+      "scope": "French Frigate Shoals, Kure Atoll, Pearl and Hermes Atoll; Necker/Nihoa detached components for cross-check",
+      "recommendation": "Obtain dated NOAA/USFWS/USGS high-resolution emergent-land inventory/high-tide status; reconcile every OSM component/way and named/unnamed/washed-away islet. Do not create a location per component."
+    },
+    {
+      "id": "honolulu-county-disconnected-lands",
+      "kind": "coordinated-parent-source-review",
+      "scope": "Honolulu County disconnected NWHI lands versus the seven physical-island candidates",
+      "recommendation": "Coordinate with #339/regional integration to audit whether the Honolulu ADM2 source omitted detached NWHI lands or intentionally uses a narrower physical role; no shared edit in this packet."
+    },
+    {
+      "id": "mokumanamana-toponym",
+      "kind": "source-validation",
+      "scope": "Necker Island (Hawaii) display name",
+      "recommendation": "Cross-check authoritative Hawaiian-language/cultural and geographic gazetteer sources for Mokumanamana/Necker name precedence; preserve source names separately from policy label."
+    }
+  ],
+  "locations": [
+    {
+      "id": "atlas:macro-coverage:location:0975e8de92d354d008e1",
+      "name": "Laysan",
+      "individual_classification": "correction-needed",
+      "assessment": "An independently sourced, closed OSM natural=water/salt=yes/water=lagoon ring (way 170022053; 57 nodes) lies inside the assigned outer coastline, but the accepted location polygon has only one outer ring and no interior water hole. USFWS describes a hypersaline central lake and calls it the only lake in the chain. For a dry-land footprint this is a concrete omitted-water correction: propose subtracting the verified lake boundary while retaining the Laysan identity; exact lake margin/source vintage still needs review.",
+      "candidate_source_identity": "osm:named-land:northwestern-hawaii-laysan",
+      "reference_owner_profile": "unknown; no sovereign owner inferred from macro membership",
+      "source_profile_status": "Modern sourced whole-island/reference patch is not an approved atlas granularity or source-policy profile; independently verify geographic role, vintage, license and full-family completeness",
+      "source_profile_hash": "9a10a580cf9b2b36db0d9a8d4e56fc4c31ea0538f2da07542bd85562e1f55502",
+      "parent_chain": [
+        "framework:province:hawaii:88e4dd68a18b",
+        "framework:area:hawaii:964dab8e8ef8",
+        "framework:region:north-central-pacific:4e0ad85ab366",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "physical_role": "one named island or named atoll/islet-group candidate; not an administrative polygon",
+      "coastline_evidence": {
+        "source_identity": "osm-api-2026-10-02",
+        "request_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-171.8675,25.64,-171.6075,25.9",
+        "retrieved_on": "2026-10-02",
+        "license": "Open Database License 1.0; OpenStreetMap contributors attribution",
+        "retained_path": "data/macro-improvements/macro-coverage-oceania/osm-a244f2461bc0.xml.gz",
+        "gzip_bytes": 22164,
+        "gzip_sha256": "0182e36c2a96794d093d6d81a50d8c6ce64947c26b10de8c87ada362c257c2f9",
+        "uncompressed_xml_bytes": 226849,
+        "uncompressed_xml_sha256": "53256d8b397fdc060cd1d429d70fe4b80848d3c732cf7be41e89793b2fa2d446",
+        "underlying_NOAA_vector_shoreline_vintage": "not stated in OSM object metadata; extract retrieval date is not survey date",
+        "coastline_ways": [
+          {
+            "osm_way_id": "42063536",
+            "name": null,
+            "vertex_count": 404,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          }
+        ],
+        "reconstruction": {
+          "complete": true,
+          "land_rings": 1,
+          "unclosed_chains": [],
+          "missing_node_ways": [],
+          "geometry_components": 1,
+          "geometry_rings": 1,
+          "area_km2": 4.113830418227428,
+          "geometry_type": "Polygon"
+        }
+      },
+      "settlement_and_infrastructure": {
+        "osm_place_features": [
+          {
+            "osm_relation_id": "7259209",
+            "name": "Hawaiian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "7259241",
+            "name": "Northwestern Hawaiʻian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "11560443",
+            "name": "Laysan",
+            "place": "island"
+          }
+        ],
+        "mapped_inhabited_place_features": [],
+        "osm_infrastructure_tag_counts": {
+          "building:yes": 11,
+          "man_made:monitoring_station": 1,
+          "man_made:survey_point": 1,
+          "place:archipelago": 2,
+          "place:county": 1,
+          "place:island": 1
+        },
+        "population_tagged_objects": [
+          {
+            "element_type": "relation",
+            "element_id": "166563",
+            "name": "Hawaii",
+            "population": "1446146",
+            "population_date": "2024-07-01",
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          },
+          {
+            "element_type": "relation",
+            "element_id": "3861844",
+            "name": "Honolulu County",
+            "population": "998714",
+            "population_date": null,
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          }
+        ],
+        "assessment": "OSM has 11 building=yes objects plus a monitoring station; these indicate field/research infrastructure, not a populated settlement. The undated USFWS refuge page describes historical six-month volunteer field camps at Laysan and says the Refuge lacked capacity to operate safe island-based field operations at page retrieval; current staffing/occupancy is not established."
+      },
+      "supporting_source_ids": [
+        "osm-nwhi-source-extracts",
+        "usfws-hawaiian-islands-about",
+        "census-tiger-2024-honolulu-county"
+      ]
+    },
+    {
+      "id": "atlas:macro-coverage:location:27168565fdb921e17e10",
+      "name": "French Frigate Shoals",
+      "individual_classification": "insufficient-evidence",
+      "assessment": "USFWS identifies an atoll with a crescent reef, numerous sandy islets, about 0.25 km2 land and 744 km2 reef (undated rounded values). OSM coastline union has eight dry-land components from nine ways and area 0.211878 km2. It includes Tern, East, Gin, Little Gin, Disappearing, Shark, La Perouse Pinnacle and an unnamed way; retained OSM notes explicitly question whether East/Gin/Little Gin/Disappearing remain emergent and whether Shark remains above water. Current high-tide status needs authoritative time-stamped imagery or shoreline products; do not split the shoals into islet locations or assert the 8-part union complete.",
+      "candidate_source_identity": "osm:named-land:northwestern-hawaii-french-frigate-shoals",
+      "reference_owner_profile": "unknown; no sovereign owner inferred from macro membership",
+      "source_profile_status": "Modern sourced whole-island/reference patch is not an approved atlas granularity or source-policy profile; independently verify geographic role, vintage, license and full-family completeness",
+      "source_profile_hash": "2385a46a147defc2d8cfe6ea3157c6b63dd34ee36e6a76b767b3136fa968126f",
+      "parent_chain": [
+        "framework:province:hawaii:88e4dd68a18b",
+        "framework:area:hawaii:964dab8e8ef8",
+        "framework:region:north-central-pacific:4e0ad85ab366",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "physical_role": "one named island or named atoll/islet-group candidate; not an administrative polygon",
+      "coastline_evidence": {
+        "source_identity": "osm-api-2026-10-02",
+        "request_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-166.366111,23.528889,-165.926111,23.968889",
+        "retrieved_on": "2026-10-02",
+        "license": "Open Database License 1.0; OpenStreetMap contributors attribution",
+        "retained_path": "data/macro-improvements/macro-coverage-oceania/osm-79342aae4046.xml.gz",
+        "gzip_bytes": 61725,
+        "gzip_sha256": "0bf0f64c466b89866c7e0544a4e857195384f7a6f3622a6afd35f8cced7510c0",
+        "uncompressed_xml_bytes": 640238,
+        "uncompressed_xml_sha256": "097f1469f77ed8489738ae49458544dc1e9b2b6d45c75ed430a693ff48d3edd6",
+        "underlying_NOAA_vector_shoreline_vintage": "not stated in OSM object metadata; extract retrieval date is not survey date",
+        "coastline_ways": [
+          {
+            "osm_way_id": "42063721",
+            "name": "Disappearing Island",
+            "vertex_count": 29,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": "Confirmation is needed that East, Gin, Little Gin, and Disappearing Islands still break the surface at high tide. Other islets in French Frigate Shoals have been fully washed away. Disappearing Island may have disappeared!",
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063729",
+            "name": "Tern Island",
+            "vertex_count": 99,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063732",
+            "name": "Shark Island",
+            "vertex_count": 35,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": "This islet needs verification if it still exists or if it has sunk. See Trig Island as example of sunken island."
+          },
+          {
+            "osm_way_id": "42063742",
+            "name": "East Island",
+            "vertex_count": 63,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": "Confirmation is needed that East, Gin, Little Gin, and Disappearing Islands still break the surface at high tide. Other islets in French Frigate Shoals have been fully washed away.",
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063743",
+            "name": "La Perouse Pinnacle",
+            "vertex_count": 23,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063744",
+            "name": null,
+            "vertex_count": 9,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1332693152",
+            "name": "Gin Island",
+            "vertex_count": 52,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": "Confirmation is needed that East, Gin, Little Gin, and Disappearing Islands still break the surface at high tide. Other islets in French Frigate Shoals have been fully washed away.",
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1332693339",
+            "name": "Little Gin Island",
+            "vertex_count": 61,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": "Confirmation is needed that East, Gin, Little Gin, and Disappearing Islands still break the surface at high tide. Other islets in French Frigate Shoals have been fully washed away.",
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1513393168",
+            "name": null,
+            "vertex_count": 3,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          }
+        ],
+        "reconstruction": {
+          "complete": true,
+          "land_rings": 8,
+          "unclosed_chains": [],
+          "missing_node_ways": [],
+          "geometry_components": 8,
+          "geometry_rings": 8,
+          "area_km2": 0.21187818886364368,
+          "geometry_type": "MultiPolygon"
+        }
+      },
+      "settlement_and_infrastructure": {
+        "osm_place_features": [
+          {
+            "osm_way_id": "42063721",
+            "name": "Disappearing Island",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "42063729",
+            "name": "Tern Island",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "42063732",
+            "name": "Shark Island",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "42063742",
+            "name": "East Island",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "42063743",
+            "name": "La Perouse Pinnacle",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "1332693152",
+            "name": "Gin Island",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "1332693339",
+            "name": "Little Gin Island",
+            "place": "islet"
+          },
+          {
+            "osm_relation_id": "7259209",
+            "name": "Hawaiian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "7259241",
+            "name": "Northwestern Hawaiʻian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "20682344",
+            "name": "French Frigate Shoals",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "20682402",
+            "name": null,
+            "place": "islet"
+          }
+        ],
+        "mapped_inhabited_place_features": [],
+        "osm_infrastructure_tag_counts": {
+          "aeroway:aerodrome": 1,
+          "aeroway:runway": 1,
+          "building:ruins": 2,
+          "building:yes": 4,
+          "man_made:survey_point": 1,
+          "place:archipelago": 3,
+          "place:county": 1,
+          "place:islet": 8
+        },
+        "population_tagged_objects": [
+          {
+            "element_type": "relation",
+            "element_id": "148838",
+            "name": "United States",
+            "population": "331449281",
+            "population_date": "2020",
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          },
+          {
+            "element_type": "relation",
+            "element_id": "166563",
+            "name": "Hawaii",
+            "population": "1446146",
+            "population_date": "2024-07-01",
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          },
+          {
+            "element_type": "relation",
+            "element_id": "3861844",
+            "name": "Honolulu County",
+            "population": "998714",
+            "population_date": null,
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          }
+        ],
+        "assessment": "OSM has 4 building=yes, 2 building=ruins, an aerodrome and runway (Tern Island); USFWS says Tern Island hosted summer NOAA monk-seal/turtle camps and was converted to a runway/refuelling stop. These are seasonal/service uses, not evidence of a permanent town. Current operation is undated."
+      },
+      "supporting_source_ids": [
+        "osm-nwhi-source-extracts",
+        "usfws-hawaiian-islands-about",
+        "census-tiger-2024-honolulu-county"
+      ]
+    },
+    {
+      "id": "atlas:macro-coverage:location:8490f73e96d2a404ce07",
+      "name": "Kure Atoll",
+      "individual_classification": "insufficient-evidence",
+      "assessment": "USFWS identifies Kure Atoll as a State Wildlife Sanctuary in its Northwestern Hawaiian refuge overview. The modern-source packet reconstructs two closed land components from four shoreline ways (0.910683 km2), but does not establish a complete named-islet inventory or high-tide status. The single named atoll is a defensible candidate location role; exact island/component completeness and underlying NOAA shoreline vintage remain unresolved.",
+      "candidate_source_identity": "osm:named-land:northwestern-hawaii-kure-atoll",
+      "reference_owner_profile": "unknown; no sovereign owner inferred from macro membership",
+      "source_profile_status": "Modern sourced whole-island/reference patch is not an approved atlas granularity or source-policy profile; independently verify geographic role, vintage, license and full-family completeness",
+      "source_profile_hash": "63a6c1fbc51f2b3815066e8c93a74f2090236a84593934aa18280049ed6b4ffe",
+      "parent_chain": [
+        "framework:province:hawaii:88e4dd68a18b",
+        "framework:area:hawaii:964dab8e8ef8",
+        "framework:region:north-central-pacific:4e0ad85ab366",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "physical_role": "one named island or named atoll/islet-group candidate; not an administrative polygon",
+      "coastline_evidence": {
+        "source_identity": "osm-api-2026-10-02",
+        "request_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-178.4633333,28.2866667,-178.2033333,28.5466667",
+        "retrieved_on": "2026-10-02",
+        "license": "Open Database License 1.0; OpenStreetMap contributors attribution",
+        "retained_path": "data/macro-improvements/macro-coverage-oceania/osm-fe59a9fa37d7.xml.gz",
+        "gzip_bytes": 27126,
+        "gzip_sha256": "445dac649c9f4753705e82b9c0a97943cad0f707f861988799487a2cd48de8f8",
+        "uncompressed_xml_bytes": 279148,
+        "uncompressed_xml_sha256": "c259bb3c12cc404ca984cf67bb244534aab4887189844f53a30cd976e3d7a40c",
+        "underlying_NOAA_vector_shoreline_vintage": "not stated in OSM object metadata; extract retrieval date is not survey date",
+        "coastline_ways": [
+          {
+            "osm_way_id": "678616565",
+            "name": null,
+            "vertex_count": 21,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1274422469",
+            "name": null,
+            "vertex_count": 96,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1274422470",
+            "name": null,
+            "vertex_count": 51,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1274423311",
+            "name": null,
+            "vertex_count": 19,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          }
+        ],
+        "reconstruction": {
+          "complete": true,
+          "land_rings": 2,
+          "unclosed_chains": [],
+          "missing_node_ways": [],
+          "geometry_components": 2,
+          "geometry_rings": 2,
+          "area_km2": 0.910683028412028,
+          "geometry_type": "MultiPolygon"
+        }
+      },
+      "settlement_and_infrastructure": {
+        "osm_place_features": [
+          {
+            "osm_relation_id": "7259209",
+            "name": "Hawaiian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "7259241",
+            "name": "Northwestern Hawaiʻian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "11858522",
+            "name": "Kure Atoll",
+            "place": "atoll"
+          },
+          {
+            "osm_relation_id": "17494085",
+            "name": "Green Island",
+            "place": "island"
+          },
+          {
+            "osm_relation_id": "17494112",
+            "name": "Sand Island",
+            "place": "islet"
+          }
+        ],
+        "mapped_inhabited_place_features": [],
+        "osm_infrastructure_tag_counts": {
+          "building:yes": 4,
+          "man_made:pier": 1,
+          "man_made:survey_point": 1,
+          "place:archipelago": 2,
+          "place:atoll": 1,
+          "place:county": 1,
+          "place:island": 1,
+          "place:islet": 1
+        },
+        "population_tagged_objects": [
+          {
+            "element_type": "relation",
+            "element_id": "166563",
+            "name": "Hawaii",
+            "population": "1446146",
+            "population_date": "2024-07-01",
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          },
+          {
+            "element_type": "relation",
+            "element_id": "3861844",
+            "name": "Honolulu County",
+            "population": "998714",
+            "population_date": null,
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          }
+        ],
+        "assessment": "OSM has 4 building=yes objects and a pier, but no inhabited-place feature or island population. These structures require an authoritative current occupancy/status source; do not infer permanent settlement or absence of staff."
+      },
+      "supporting_source_ids": [
+        "osm-nwhi-source-extracts",
+        "usfws-hawaiian-islands-about",
+        "census-tiger-2024-honolulu-county",
+        "usfws-hawaiian-islands-refuge"
+      ]
+    },
+    {
+      "id": "atlas:macro-coverage:location:a60032ee05803bef7502",
+      "name": "Lisianski Island",
+      "individual_classification": "justified",
+      "assessment": "USFWS describes Lisianski as an individual raised coral-bank island, about 1.4 km2, with the separate Neva Shoals reef southeast of it. OSM yields one closed dry-land component from four ways, 1.424241 km2. This supports a single named-island location and correctly excludes the separate submerged Neva Shoals reef. The rounded, undated area is a reasonableness comparison, not surveyed completeness proof.",
+      "candidate_source_identity": "osm:named-land:northwestern-hawaii-lisianski-island",
+      "reference_owner_profile": "unknown; no sovereign owner inferred from macro membership",
+      "source_profile_status": "Modern sourced whole-island/reference patch is not an approved atlas granularity or source-policy profile; independently verify geographic role, vintage, license and full-family completeness",
+      "source_profile_hash": "a0fdd43e7fd6e414c979a4784cf83f8d895793b5aa44a5c899bd2b7afc01404c",
+      "parent_chain": [
+        "framework:province:hawaii:88e4dd68a18b",
+        "framework:area:hawaii:964dab8e8ef8",
+        "framework:region:north-central-pacific:4e0ad85ab366",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "physical_role": "one named island or named atoll/islet-group candidate; not an administrative polygon",
+      "coastline_evidence": {
+        "source_identity": "osm-api-2026-10-02",
+        "request_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-174.0958333,25.9341667,-173.8358333,26.1941667",
+        "retrieved_on": "2026-10-02",
+        "license": "Open Database License 1.0; OpenStreetMap contributors attribution",
+        "retained_path": "data/macro-improvements/macro-coverage-oceania/osm-19f6eb5f5913.xml.gz",
+        "gzip_bytes": 18936,
+        "gzip_sha256": "7c11a4159da48b9de9d145825ffbab69e679e94c820a6ab5b58637ee5cc99b68",
+        "uncompressed_xml_bytes": 189701,
+        "uncompressed_xml_sha256": "d43dbb9f7c4b085b5bdc926bb22ae096dd5547e1c7a3bc32e01a0d75c4840774",
+        "underlying_NOAA_vector_shoreline_vintage": "not stated in OSM object metadata; extract retrieval date is not survey date",
+        "coastline_ways": [
+          {
+            "osm_way_id": "42063506",
+            "name": null,
+            "vertex_count": 108,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1514947889",
+            "name": null,
+            "vertex_count": 25,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1514947894",
+            "name": null,
+            "vertex_count": 30,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1514947897",
+            "name": null,
+            "vertex_count": 19,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          }
+        ],
+        "reconstruction": {
+          "complete": true,
+          "land_rings": 1,
+          "unclosed_chains": [],
+          "missing_node_ways": [],
+          "geometry_components": 1,
+          "geometry_rings": 1,
+          "area_km2": 1.4242414453191221,
+          "geometry_type": "Polygon"
+        }
+      },
+      "settlement_and_infrastructure": {
+        "osm_place_features": [
+          {
+            "osm_relation_id": "7259209",
+            "name": "Hawaiian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "7259241",
+            "name": "Northwestern Hawaiʻian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "20694474",
+            "name": "Lisianski Island",
+            "place": "island"
+          }
+        ],
+        "mapped_inhabited_place_features": [],
+        "osm_infrastructure_tag_counts": {
+          "man_made:survey_point": 1,
+          "place:archipelago": 2,
+          "place:county": 1,
+          "place:island": 1
+        },
+        "population_tagged_objects": [
+          {
+            "element_type": "relation",
+            "element_id": "166563",
+            "name": "Hawaii",
+            "population": "1446146",
+            "population_date": "2024-07-01",
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          },
+          {
+            "element_type": "relation",
+            "element_id": "3861844",
+            "name": "Honolulu County",
+            "population": "998714",
+            "population_date": null,
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          }
+        ],
+        "assessment": "No city/town/village/hamlet/isolated-dwelling feature or building is tagged in the extract; a survey point is present. This is source silence, not proof that no fieldwork or temporary use occurs."
+      },
+      "supporting_source_ids": [
+        "osm-nwhi-source-extracts",
+        "usfws-hawaiian-islands-about",
+        "census-tiger-2024-honolulu-county"
+      ]
+    },
+    {
+      "id": "atlas:macro-coverage:location:d8962cf6d87a3c9fc9ee",
+      "name": "Necker Island (Hawaii)",
+      "individual_classification": "justified",
+      "assessment": "USFWS calls the island Mokumanamana, about 155 miles northwest of Nihoa, a small basalt island about 1/6 km2; it reports worship-site use and no evidence that the small dry island supported resident farming. OSM returns four closed components (one named Mokumanamana, three unnamed) and 0.185836 km2. A single island/islet-group location is suitable, but the displayed Necker name versus the USFWS Hawaiian name warrants a cultural/toponym authority cross-check before any label change; historical use does not imply present habitation.",
+      "candidate_source_identity": "osm:named-land:northwestern-hawaii-necker-island",
+      "reference_owner_profile": "unknown; no sovereign owner inferred from macro membership",
+      "source_profile_status": "Modern sourced whole-island/reference patch is not an approved atlas granularity or source-policy profile; independently verify geographic role, vintage, license and full-family completeness",
+      "source_profile_hash": "7853af673d127578c287f41fdcc92609584e4dd118de13511c26bc33c411dd21",
+      "parent_chain": [
+        "framework:province:hawaii:88e4dd68a18b",
+        "framework:area:hawaii:964dab8e8ef8",
+        "framework:region:north-central-pacific:4e0ad85ab366",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "physical_role": "one named island or named atoll/islet-group candidate; not an administrative polygon",
+      "coastline_evidence": {
+        "source_identity": "osm-api-2026-10-02",
+        "request_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-164.8302778,23.445,-164.5702778,23.705",
+        "retrieved_on": "2026-10-02",
+        "license": "Open Database License 1.0; OpenStreetMap contributors attribution",
+        "retained_path": "data/macro-improvements/macro-coverage-oceania/osm-2105a2710b68.xml.gz",
+        "gzip_bytes": 12474,
+        "gzip_sha256": "82609a9b1188359c9b7b27d7c6ca4771539e5a617078266cdb6610b0b253872d",
+        "uncompressed_xml_bytes": 104974,
+        "uncompressed_xml_sha256": "e3843781630c4c9b47b0660804e593fed0df555baa72322a036d75cbe6318f96",
+        "underlying_NOAA_vector_shoreline_vintage": "not stated in OSM object metadata; extract retrieval date is not survey date",
+        "coastline_ways": [
+          {
+            "osm_way_id": "42063753",
+            "name": "Mokumanamana",
+            "vertex_count": 180,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063754",
+            "name": null,
+            "vertex_count": 9,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063755",
+            "name": null,
+            "vertex_count": 11,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "949370421",
+            "name": null,
+            "vertex_count": 7,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          }
+        ],
+        "reconstruction": {
+          "complete": true,
+          "land_rings": 4,
+          "unclosed_chains": [],
+          "missing_node_ways": [],
+          "geometry_components": 4,
+          "geometry_rings": 4,
+          "area_km2": 0.1858357545749212,
+          "geometry_type": "MultiPolygon"
+        }
+      },
+      "settlement_and_infrastructure": {
+        "osm_place_features": [
+          {
+            "osm_way_id": "42063753",
+            "name": "Mokumanamana",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "42063754",
+            "name": null,
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "42063755",
+            "name": null,
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "949370421",
+            "name": null,
+            "place": "islet"
+          },
+          {
+            "osm_relation_id": "7259209",
+            "name": "Hawaiian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "7259241",
+            "name": "Northwestern Hawaiʻian Islands",
+            "place": "archipelago"
+          }
+        ],
+        "mapped_inhabited_place_features": [],
+        "osm_infrastructure_tag_counts": {
+          "man_made:survey_point": 1,
+          "place:archipelago": 2,
+          "place:county": 1,
+          "place:islet": 4
+        },
+        "population_tagged_objects": [
+          {
+            "element_type": "relation",
+            "element_id": "166563",
+            "name": "Hawaii",
+            "population": "1446146",
+            "population_date": "2024-07-01",
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          },
+          {
+            "element_type": "relation",
+            "element_id": "3861844",
+            "name": "Honolulu County",
+            "population": "998714",
+            "population_date": null,
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          }
+        ],
+        "assessment": "No inhabited-place or building feature is tagged. USFWS describes documented religious sites and visits by Hawaiians from Nihoa and other islands, not a present settlement."
+      },
+      "supporting_source_ids": [
+        "osm-nwhi-source-extracts",
+        "usfws-hawaiian-islands-about",
+        "census-tiger-2024-honolulu-county"
+      ]
+    },
+    {
+      "id": "atlas:macro-coverage:location:f745c0922348bbedc6e1",
+      "name": "Nihoa",
+      "individual_classification": "insufficient-evidence",
+      "assessment": "USFWS describes Nihoa as one rugged basalt island with roughly 900-foot cliffs, about 1 km2, and archaeological remains; the page estimates prehistoric short-stay use rather than permanent residence. OSM reconstruction contains three closed components (one named Nihoa, two unnamed), 0.701013 km2, but the two unnamed way geometries are tagged as traced from Mapbox imagery and have no independent primary shoreline citation in the retained packet. A single named-island location is a defensible candidate, but all three source pieces and complete modern land inventory are insufficiently established; no current settlement is shown.",
+      "candidate_source_identity": "osm:named-land:northwestern-hawaii-nihoa",
+      "reference_owner_profile": "unknown; no sovereign owner inferred from macro membership",
+      "source_profile_status": "Modern sourced whole-island/reference patch is not an approved atlas granularity or source-policy profile; independently verify geographic role, vintage, license and full-family completeness",
+      "source_profile_hash": "69a8ebc7df013d77dc24cfa8490278d6d114facd4fbb0a0b86c0be14dcc11b97",
+      "parent_chain": [
+        "framework:province:hawaii:88e4dd68a18b",
+        "framework:area:hawaii:964dab8e8ef8",
+        "framework:region:north-central-pacific:4e0ad85ab366",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "physical_role": "one named island or named atoll/islet-group candidate; not an administrative polygon",
+      "coastline_evidence": {
+        "source_identity": "osm-api-2026-10-02",
+        "request_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-162.0519444,22.9305556,-161.7919444,23.1905556",
+        "retrieved_on": "2026-10-02",
+        "license": "Open Database License 1.0; OpenStreetMap contributors attribution",
+        "retained_path": "data/macro-improvements/macro-coverage-oceania/osm-90a03d5cafbe.xml.gz",
+        "gzip_bytes": 30568,
+        "gzip_sha256": "408f98ac1b32f187da03f09d0d76fe13f6f01cb3efdfe1147546b04770a329e0",
+        "uncompressed_xml_bytes": 336203,
+        "uncompressed_xml_sha256": "f760acdd815d96dd92edf3f5eb72a40c3058096873b8866be9d8cf35443a7f5f",
+        "underlying_NOAA_vector_shoreline_vintage": "not stated in OSM object metadata; extract retrieval date is not survey date",
+        "coastline_ways": [
+          {
+            "osm_way_id": "436455398",
+            "name": "Nīhoa",
+            "vertex_count": 267,
+            "source_tag": "NOAA U.S. Vector Shoreline;Mapbox",
+            "note": null,
+            "fixme": null,
+            "underlying_imagery_license": "Mapbox imagery is not retained; OSM feature data is ODbL, but imagery terms and geographic fidelity are not independently audited here.",
+            "source_role": "secondary tracing provenance only; not independent geographic validation"
+          },
+          {
+            "osm_way_id": "436604179",
+            "name": null,
+            "vertex_count": 6,
+            "source_tag": "Mapbox",
+            "note": null,
+            "fixme": null,
+            "underlying_imagery_license": "Mapbox imagery is not retained; OSM feature data is ODbL, but imagery terms and geographic fidelity are not independently audited here.",
+            "source_role": "secondary tracing provenance only; not independent geographic validation"
+          },
+          {
+            "osm_way_id": "436604180",
+            "name": null,
+            "vertex_count": 8,
+            "source_tag": "Mapbox",
+            "note": null,
+            "fixme": null,
+            "underlying_imagery_license": "Mapbox imagery is not retained; OSM feature data is ODbL, but imagery terms and geographic fidelity are not independently audited here.",
+            "source_role": "secondary tracing provenance only; not independent geographic validation"
+          }
+        ],
+        "reconstruction": {
+          "complete": true,
+          "land_rings": 3,
+          "unclosed_chains": [],
+          "missing_node_ways": [],
+          "geometry_components": 3,
+          "geometry_rings": 3,
+          "area_km2": 0.7010127386459711,
+          "geometry_type": "MultiPolygon"
+        }
+      },
+      "settlement_and_infrastructure": {
+        "osm_place_features": [
+          {
+            "osm_way_id": "436455398",
+            "name": "Nīhoa",
+            "place": "island"
+          },
+          {
+            "osm_relation_id": "7259209",
+            "name": "Hawaiian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "7259241",
+            "name": "Northwestern Hawaiʻian Islands",
+            "place": "archipelago"
+          }
+        ],
+        "mapped_inhabited_place_features": [],
+        "osm_infrastructure_tag_counts": {
+          "man_made:survey_point": 1,
+          "place:archipelago": 2,
+          "place:county": 1,
+          "place:island": 1,
+          "tourism:viewpoint": 1
+        },
+        "population_tagged_objects": [
+          {
+            "element_type": "relation",
+            "element_id": "166563",
+            "name": "Hawaii",
+            "population": "1446146",
+            "population_date": "2024-07-01",
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          },
+          {
+            "element_type": "relation",
+            "element_id": "3861844",
+            "name": "Honolulu County",
+            "population": "998714",
+            "population_date": null,
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          }
+        ],
+        "assessment": "No inhabited-place or building feature is tagged; OSM maps a viewpoint and survey point. USFWS documents archaeological sites and estimates historical short-stay use due to water/resource scarcity, not present settlement."
+      },
+      "supporting_source_ids": [
+        "osm-nwhi-source-extracts",
+        "usfws-hawaiian-islands-about",
+        "census-tiger-2024-honolulu-county"
+      ]
+    },
+    {
+      "id": "atlas:macro-coverage:location:f88f121102f24b08e39b",
+      "name": "Pearl and Hermes Atoll",
+      "individual_classification": "insufficient-evidence",
+      "assessment": "USFWS describes a true, mostly submerged atoll with numerous islets, seven reported above sea level, about 0.36 km2 land, and says emergent islets change. The 2026 OSM-derived union has 13 closed components from 18 coastline ways, 0.417407 km2, with five named components (North, Little North, Seal Kittery, Green/Grass, Bird) and eight unnamed; OSM notes Bird Island changes shape. The count/area mismatch cannot be resolved against an undated USFWS page or inherited NOAA shoreline tag. Preserve one atoll-level location provisionally; request current high-tide/island-status source restoration and component reconciliation before claiming complete membership.",
+      "candidate_source_identity": "osm:named-land:northwestern-hawaii-pearl-and-hermes-atoll",
+      "reference_owner_profile": "unknown; no sovereign owner inferred from macro membership",
+      "source_profile_status": "Modern sourced whole-island/reference patch is not an approved atlas granularity or source-policy profile; independently verify geographic role, vintage, license and full-family completeness",
+      "source_profile_hash": "59f1796831624d241aab43a0280f8c1c4099ca2f3c91670cecb672a3b30de51a",
+      "parent_chain": [
+        "framework:province:hawaii:88e4dd68a18b",
+        "framework:area:hawaii:964dab8e8ef8",
+        "framework:region:north-central-pacific:4e0ad85ab366",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "physical_role": "one named island or named atoll/islet-group candidate; not an administrative polygon",
+      "coastline_evidence": {
+        "source_identity": "osm-api-2026-10-02",
+        "request_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-175.9827778,27.7311111,-175.7227778,27.9911111",
+        "retrieved_on": "2026-10-02",
+        "license": "Open Database License 1.0; OpenStreetMap contributors attribution",
+        "retained_path": "data/macro-improvements/macro-coverage-oceania/osm-f18a589ceec8.xml.gz",
+        "gzip_bytes": 28628,
+        "gzip_sha256": "bda983b25db3583177d818a8c74d126fef53ce76ae215fd82482bcbb4b2fe69d",
+        "uncompressed_xml_bytes": 312848,
+        "uncompressed_xml_sha256": "4c99b378223560b980740ec92b5e741b73139adf2f9d26b766af0f124db741da",
+        "underlying_NOAA_vector_shoreline_vintage": "not stated in OSM object metadata; extract retrieval date is not survey date",
+        "coastline_ways": [
+          {
+            "osm_way_id": "42063257",
+            "name": "North Island",
+            "vertex_count": 50,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063263",
+            "name": null,
+            "vertex_count": 8,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063286",
+            "name": "Seal Kittery Island",
+            "vertex_count": 52,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063315",
+            "name": null,
+            "vertex_count": 43,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063327",
+            "name": "Green Island",
+            "vertex_count": 30,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "42063335",
+            "name": null,
+            "vertex_count": 7,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "750622299",
+            "name": null,
+            "vertex_count": 34,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "971188864",
+            "name": "Little North Island",
+            "vertex_count": 53,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "971188865",
+            "name": null,
+            "vertex_count": 19,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "971188866",
+            "name": null,
+            "vertex_count": 14,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "971188867",
+            "name": null,
+            "vertex_count": 25,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "971188868",
+            "name": null,
+            "vertex_count": 40,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "971188869",
+            "name": null,
+            "vertex_count": 165,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "971188871",
+            "name": null,
+            "vertex_count": 7,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1121407400",
+            "name": "Bird Island",
+            "vertex_count": 15,
+            "source_tag": null,
+            "note": "Bird Island appears to change in size and shape over time.",
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1509388251",
+            "name": null,
+            "vertex_count": 32,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1509388253",
+            "name": null,
+            "vertex_count": 3,
+            "source_tag": "NOAA U.S. Vector Shoreline",
+            "note": null,
+            "fixme": null
+          },
+          {
+            "osm_way_id": "1509388254",
+            "name": null,
+            "vertex_count": 16,
+            "source_tag": null,
+            "note": null,
+            "fixme": null
+          }
+        ],
+        "reconstruction": {
+          "complete": true,
+          "land_rings": 13,
+          "unclosed_chains": [],
+          "missing_node_ways": [],
+          "geometry_components": 13,
+          "geometry_rings": 13,
+          "area_km2": 0.41740716856532145,
+          "geometry_type": "MultiPolygon"
+        }
+      },
+      "settlement_and_infrastructure": {
+        "osm_place_features": [
+          {
+            "osm_node_id": "524439061",
+            "name": "Pearl and Hermes Reef",
+            "place": "island"
+          },
+          {
+            "osm_way_id": "42063257",
+            "name": "North Island",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "42063263",
+            "name": null,
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "42063286",
+            "name": "Seal Kittery Island",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "42063327",
+            "name": "Green Island",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "42063335",
+            "name": null,
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "750622299",
+            "name": null,
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "971188864",
+            "name": "Little North Island",
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "971188865",
+            "name": null,
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "971188866",
+            "name": null,
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "971188867",
+            "name": null,
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "971188868",
+            "name": null,
+            "place": "islet"
+          },
+          {
+            "osm_way_id": "1121407400",
+            "name": "Bird Island",
+            "place": "islet"
+          },
+          {
+            "osm_relation_id": "7259209",
+            "name": "Hawaiian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "7259241",
+            "name": "Northwestern Hawaiʻian Islands",
+            "place": "archipelago"
+          },
+          {
+            "osm_relation_id": "20628751",
+            "name": "Southeast Island",
+            "place": "island"
+          },
+          {
+            "osm_relation_id": "20697680",
+            "name": "Pearl and Hermes Atoll",
+            "place": "archipelago"
+          }
+        ],
+        "mapped_inhabited_place_features": [],
+        "osm_infrastructure_tag_counts": {
+          "man_made:survey_point": 1,
+          "place:archipelago": 3,
+          "place:county": 1,
+          "place:island": 2,
+          "place:islet": 12,
+          "tourism:information": 1
+        },
+        "population_tagged_objects": [
+          {
+            "element_type": "relation",
+            "element_id": "166563",
+            "name": "Hawaii",
+            "population": "1446146",
+            "population_date": "2024-07-01",
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          },
+          {
+            "element_type": "relation",
+            "element_id": "3861844",
+            "name": "Honolulu County",
+            "population": "998714",
+            "population_date": null,
+            "scope": "enclosing Hawaiian state or Honolulu County; not location population"
+          }
+        ],
+        "assessment": "No inhabited-place or building feature is tagged; OSM maps a tourism information point and vegetation patches. This does not establish visitor numbers or absence of seasonal conservation/research use."
+      },
+      "supporting_source_ids": [
+        "osm-nwhi-source-extracts",
+        "usfws-hawaiian-islands-about",
+        "census-tiger-2024-honolulu-county"
+      ]
+    }
+  ],
+  "province_assessment": {
+    "id": "framework:province:hawaii:88e4dd68a18b",
+    "name": "Hawaii",
+    "classification": "insufficient-evidence",
+    "status": "shared-parent/partial-scope review only",
+    "current_descendant_location_count": 13,
+    "scoped_descendant_locations": 7,
+    "other_child_roles": "Current siblings include the five gb:USA:ADM2 Hawaii, Honolulu, Kauai, Maui and Kalawao units and Gardner Pinnacles from #543. Thus the child set currently mixes named physical island/atoll locations and administrative county locations. TIGER proves all seven NWHI geometries are in Honolulu County while the current Honolulu ADM2 feature is only Oahu. Regional integration owns combined-parent interpretation under the issue metadata.",
+    "finding": "Do not infer a coherent homogeneous ADM tier or make shared-parent edits from this partial packet. Resolve source roles and Honolulu County detached members with the other Hawaii packets and regional integrator."
+  }
+}
