@@ -74,7 +74,10 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
       const name = mappings[id];
       require(manifest.baseline.files.some(f => f.path === name), 'Subject references unpinned file');
       if (readFile) {
-        if (!parsed.has(name)) parsed.set(name, JSON.parse(readFile(name, manifest.baseline.commit)));
+        if (!parsed.has(name)) {
+          const raw = readFile(name, manifest.baseline.commit);
+          parsed.set(name, JSON.parse(name.endsWith('.gz') ? gunzipSync(raw, {maxOutputLength: maxFileBytes}) : raw));
+        }
         require(parsed.get(name).features?.some(f => (f.id ?? f.properties?.id) === id),
           `Subject missing from claimed containing file: ${id}`);
       }

@@ -1,0 +1,74 @@
+# Trusted evidence and independent premerge review
+
+This is a preventive gate, not proof that every fact is true. Read `EVIDENCE_QUALITY.md` and, for geographic measurements or generators, `EVIDENCE_GEOGRAPHY_HELPERS.md`. CI reads immutable Git blobs with trusted base code and a read-only token; it never executes a packet's reproduction commands. The merge queue repeats byte checks using trusted main, then requires a separate worker's review of the exact head. Existing regional approval, import and publisher gates remain in force.
+
+## Issue creation and rollout
+
+`.github/evidence-policy.json` is authoritative. Initially `report-only` reports failures without changing existing merge rules. Activation changes it to `enforce-new` with an explicit UTC timestamp. Issues created before that timestamp retain their original scopes unless they explicitly adopt `evidence_quality`. This exception preserves completed evidence and currently claimed work; it does not endorse legacy findings. The inventory records current claims, open PRs and decisions; deficiencies remain bounded corrective work under #624, not silent invalidation or blanket geographic approval. New issues must declare this additive field inside their existing `worldatlas-work:v1` JSON:
+
+```json
+"evidence_quality": {
+  "version": 1,
+  "manifest_path": "coordination/engineering/{job}/evidence-quality.json",
+  "subject_ids": [],
+  "pins": {},
+  "review_kind": "code"
+}
+```
+
+The example is a field fragment, not a replacement for max_prs, dependencies, mode or scope. `subject_ids` lists the exact geographic subjects if applicable; `pins` maps named release/scope/input hashes to actual baseline files. `review_kind` is `code`, `source`, `geometry` or `release`. Use geography's declared owned directory or history's campaign directory for those lanes. Engineering's `{job}` resolves to the branch ID, allowing a new owned manifest for each PR. A claim checks this declaration before implementation; it does not require an as-yet unwritten manifest. Missing issue creation timestamps cannot claim legacy status.
+
+## Preparing each PR
+
+Start with `coordination/templates/evidence-v1.json`, replace placeholders, and retain an immutable baseline. Run the shared byte validator and scientific controls. List every changed ordinary file, including code, tests and documentation, as an output or newly retained source (the manifest itself is excluded from its own hash). Source restoration instructions remain explicit limits. Do not overwrite original sources; make a new vintage. The manifest adds:
+
+- `change_receipts`: one row per GitHub changed file, with `path`, GitHub `status`, and `previous_path` for renames. Non-added rows record `original_sha256` of the exact PR-base file; deletions additionally explain preservation in `reason`. Include renamed source paths in review scope. Baseline descriptors for retained original evidence use `role: "original-source"`.
+- `metric_bindings`: one row per numeric metric with `metric_id`, actual output `path`, and RFC 6901 `json_pointer` to its value. Generated results must agree with the ledger and summaries. Prose interpretation requires human/worker review.
+- Geographic methods use `helper_version: "worldatlas-evidence-geometry-v1"` and the exact shared helper method policy. Generator methods use `kind: "generator"` and `helper_version: "worldatlas-evidence-preparation-v1"`. Measurement methods use `kind: "measurement"`.
+- `validation`: methods of these kinds require positive and negative controls. Generators also require two-run reproducibility. Each row has `method_id`, `kind`, `outcome: "passed"`, and `evidence_path` referring to a hashed JSON output with the same first three fields. Reproducibility outputs also record equal `run_one_sha256` and `run_two_sha256`. Review must assess whether controls are meaningful; typed receipts cannot prove an experiment was honestly performed.
+
+The gate checks hashes, files, subjects, supported vintages, method policy, change accounting and result bindings. Ordinary input/decompressed files are bounded to 32 MiB, declared bytes to 256 MiB and descriptors to 512; remote Git trees must be complete. Larger datasets need reviewed partitioning rather than disabled checks. A premerge manifest cannot certify a deployment or geographic approval. Initial research may be complete with unresolved facts; it cannot close a correction that remains unresolved.
+
+Local self-check:
+
+```sh
+node scripts/evidence-quality.mjs PATH/TO/evidence-quality.json
+node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs
+```
+
+The trusted CI `evidence` job publishes `evidence-check.json`, stating checked scope and unavailable evidence. It runs with read-only rights. Its success is mechanical validation, not an independent review.
+
+## Independent reviewer
+
+Request one coherent PR review from a distinct worker. A reviewer must inspect actual changes, sources, methods, controls, linked acceptance criteria and preservation/release implications; green CI or an author's claims are insufficient. Do not claim the author's issue or edit its scope. If no reviewer is available, the merge waits. Implementation review and source/factual review are separate domains. Limited primary-source access must appear in both the reviewer limits and accepted-with-limits source outcome.
+
+Post one `worldatlas-review:v1` JSON comment on the PR, using the template below. Repository owner/member/collaborator comments qualify. All workers may share one GitHub account: distinct worker IDs are cooperative accountability, not authenticated independent security principals. Never invent a second ID for self-review. Relevant geometry/release/identity changes and the issue's review_kind require substantive domain reviews even when the author labels a PR differently. Posting a receipt does not itself certify regional approval.
+
+```text
+<!-- worldatlas-review:v1
+{
+  "version": 1,
+  "pr_number": 123,
+  "head_sha": "REPLACE_WITH_CURRENT_40_CHARACTER_HEAD",
+  "manifest_sha256": "REPLACE_WITH_RAW_MANIFEST_FILE_SHA256",
+  "author_worker_id": "actual-reservation-worker",
+  "reviewer_worker_id": "distinct-review-worker",
+  "inspected_files": ["every changed file and renamed original path"],
+  "evidence_hashes": ["every unique baseline/source/output whole-file SHA256"],
+  "outcome": "accepted",
+  "limits": [],
+  "domains": {
+    "implementation": {"outcome": "accepted", "scope": "Describe actual inspected code/acceptance", "limits": []},
+    "source": {"outcome": "accepted-with-limits", "scope": "Describe citations/primary evidence checked", "limits": ["Actual limits"]},
+    "geometry": {"outcome": "accepted", "scope": "Describe methods/control/source support", "limits": []},
+    "release": {"outcome": "accepted", "scope": "Describe identity/history preservation and gates", "limits": []}
+  }
+}
+-->
+```
+
+Only needed domains are required; do not claim a review you did not perform. The latest receipt from each worker for the current head is authoritative; any unresolved changes-requested outcome blocks. New commits invalidate reviews even if they only update main. The queue rereads the head, current checks, issue contract, actual files/bytes and receipts before a SHA-guarded squash merge. It preserves the soft 1,000 non-test-line review target. No provider changes, token rotation, deployment or live import occurs as part of this gate.
+
+## Activation proof and limitations
+
+Activation must follow a merged reporting implementation, actual hosted report results, positive and negative real-format fixtures, and an inventory of current claimed/open work. Record the timestamp, decision and checks in the activation PR; the earlier implementation PR uses `Refs #627`. The final activation PR may use `Closes #627` only after these checks. Unit tests use synthetic data and mocked read-only API responses, never production merge mutations. Neither this gate nor moderator review eliminates all factual errors: unavailable sources and unexecuted reproduction remain explicit limitations.
