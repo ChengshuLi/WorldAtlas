@@ -19,7 +19,7 @@
       "Copernicus DEM GLO-90 official product documentation, GLO-90 full/free/open license, and one public COG tile/header"
     ]
   },
-  "updated_at_utc": "2026-10-03T08:56:17+00:00",
+  "updated_at_utc": "2026-10-03T08:58:52.129+00:00",
   "geographic_release": null,
   "input_paths": [
     "research/campaigns/copdem-sahara-20261003-a44eff82017e/source-evaluation.md",
@@ -40,8 +40,8 @@
     "This tile is modern physical surface context and does not establish any earlier historical terrain state."
   ],
   "blockers": [],
-  "next_action": "Validate the 9-item metadata cap and restoration hashes, post findings to issue #67, submit one source-only PR, then use the serialized merge queue and release the claim after verified integration.",
-  "pull_request": null,
+  "next_action": "Wait for exact PR-head scope check, refresh/rebase if main advances, request the serialized merge queue for the exact accepted head, verify merge in fresh origin/main, then release issue #67 claim and continue.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/559",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
