@@ -9,13 +9,13 @@
   "base_main_commit": "c5fce09842a0af2ae05cf6c611f012b6a71befff",
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/23",
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T18:01:05.077872+00:00",
+  "updated_at_utc": "2026-10-03T18:02:36.161820+00:00",
   "scope": [
     "Second and final permitted PR: coordinated private publication of merged palette implementation, exact production GPU/Canvas/legend/year/reload/unknown acceptance and retained rollback; no factual/geographic/provider change"
   ],
   "reservation": {
     "accepted": true,
-    "request_id": "69b9a372-62ee-47df-8592-0770caf4715a",
+    "request_id": "094c4f70-10f5-409d-95ed-e0bdd619bec8",
     "issue_number": 23,
     "claim": {
       "comment_id": 5971540602,
@@ -24,19 +24,19 @@
       "worker_id": "engineering-night-20261003-7e91f438",
       "claim_id": "4406050d-c644-4160-99aa-e43c1d052fd3",
       "branch": "engineering/palette-publish-20261003-7e91",
-      "request_id": "69b9a372-62ee-47df-8592-0770caf4715a",
+      "request_id": "094c4f70-10f5-409d-95ed-e0bdd619bec8",
       "issue_number": 23,
       "claimed_at": "2026-10-03T17:14:24.771Z",
-      "updated_at": "2026-10-03T18:00:04.625Z",
-      "expires_at": "2026-10-04T18:00:04.625Z",
-      "live_work": false,
+      "updated_at": "2026-10-03T18:01:47.335Z",
+      "expires_at": "2026-10-04T18:01:47.335Z",
+      "live_work": true,
       "mode": "engineering",
       "max_prs": 2
     },
     "replayed": false,
     "result_source": "github-comment",
-    "result_comment_id": 5971925519,
-    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37142548231"
+    "result_comment_id": 5971939913,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37142667996"
   },
   "dependencies": [],
   "previous_pr": {
@@ -60,7 +60,21 @@
   "completed": [
     "Verified actual squash merge and matching bot result; renewed canonical claim onto fresh branch with live_work=false"
   ],
-  "deployment": null,
+  "deployment": {
+    "status": "preparing-source-and-package",
+    "project_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db",
+    "rollback": {
+      "version_number": 23,
+      "source_commit": "8aaeb86cdfe9fc49a3ca52c76151989ec994ece1",
+      "version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_0656cd2f66a88191b43d0ff43852b85f",
+      "deployment_id": "appgdep_6ac132614ab08191b1dab4d525bdae4c"
+    },
+    "audience": "existing owner-private custom policy; no change",
+    "environment_revision": 4,
+    "provider_ddl": false,
+    "baseline_transfer": false,
+    "factual_import": false
+  },
   "maintenance": {
     "required": false,
     "active": false,
