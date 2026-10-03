@@ -22,7 +22,7 @@
     "Verified official catalog volume assignment: volume 10 is Rio de Janeiro; Município Neutro is separately in volume 5.",
     "Recorded the official PDF byte count and SHA-256; visually reviewed the parish table form and religion labels.",
     "Rejected OCR-derived numeric values; retained zero illustrative count rows and documented why.",
-    "Opened focused source-evaluation PR #586; initial handoff scope check passed at c54cdabb326a4a9f6dc49314a9c085f02bf1fd64."
+    "Opened focused source-evaluation PR #586; initial CI caught punctuation on the exact issue-closing line. Corrected the PR body to the required standalone `Closes #58` syntax and pushed a fresh head to rerun the check."
   ],
   "source_gaps": [
     "Exact enumeration day, reuse license, full count transcription, territory denominator reconciliation, and historical geography concordance remain unresolved.",
