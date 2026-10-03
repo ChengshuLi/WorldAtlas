@@ -18,7 +18,7 @@ The primary handoff branch is `main` in `ChengshuLi/WorldAtlas`; `work` retains 
 ## Working in this repository
 
 - Keep changes focused on the requested work.
-- Keep each future pull request below 1,000 changed lines, excluding test changes. The user explicitly permits the initial work-to-main foundation PR to exceed this limit. One GitHub issue or part of it per PR; retain dated progress, evidence and closed issues.
+- Keep PRs focused on one issue or a coherent part. Aim for fewer than 1,000 changed non-test lines as a soft review target, not a hard cutoff. Larger focused PRs are allowed when splitting would make implementation, migration or validation harder to review safely; explain the reason in the PR description. Report generated-data changes separately. Do not compress code or documentation merely to meet a line budget. Retain dated progress, evidence and closed issues.
 - Follow conventions established by the code and documentation as they appear.
 - Update relevant documentation when a change affects how the project is used or developed.
 - Avoid introducing dependencies or tooling unless the task calls for them.
