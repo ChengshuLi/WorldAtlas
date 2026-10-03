@@ -11,10 +11,10 @@
     "Publish verified evidence-only snapshot client and retain actual production after measurements"
   ],
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T16:31:00Z",
+  "updated_at_utc": "2026-10-03T16:40:00Z",
   "reservation": {
     "accepted": true,
-    "request_id": "4e155d1a-8ace-4d36-acf0-61a679bac47a",
+    "request_id": "7381f9e8-f50c-447d-a725-1cf3b8ffc843",
     "issue_number": 22,
     "claim": {
       "comment_id": 5967005967,
@@ -23,19 +23,19 @@
       "worker_id": "engineering-night-20261003-7e91f438",
       "claim_id": "35a7dbdb-842b-4282-8e21-d073cb7d7ac1",
       "branch": "engineering/year-switch-publish-20261003-7e91",
-      "request_id": "4e155d1a-8ace-4d36-acf0-61a679bac47a",
+      "request_id": "7381f9e8-f50c-447d-a725-1cf3b8ffc843",
       "issue_number": 22,
       "claimed_at": "2026-10-03T08:22:37.727Z",
-      "updated_at": "2026-10-03T16:22:37.717Z",
-      "expires_at": "2026-10-04T16:22:37.717Z",
+      "updated_at": "2026-10-03T16:36:19.918Z",
+      "expires_at": "2026-10-04T16:36:19.918Z",
       "live_work": false,
       "mode": "engineering",
       "max_prs": 3
     },
     "replayed": false,
     "result_source": "github-comment",
-    "result_comment_id": 5971036936,
-    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37136593597"
+    "result_comment_id": 5971147025,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37137447353"
   },
   "publication_gate": "data/engineering/year-switch-prod-20261003-7e91/publication-final.log.gz",
   "deployment": {
@@ -70,8 +70,10 @@
   },
   "evidence_paths": [
     "data/engineering/year-switch-publish-20261003-7e91/inline-client-sql.log.gz",
+    "data/engineering/year-switch-publish-20261003-7e91/inline-hosted-build.log.gz",
     "data/engineering/year-switch-publish-20261003-7e91/inline-temporal-pins.log.gz",
     "data/engineering/year-switch-publish-20261003-7e91/inline-total-byte-limit.log.gz",
+    "data/engineering/year-switch-publish-20261003-7e91/publication-inline-final.log.gz",
     "data/engineering/year-switch-publish-20261003-7e91/publish-build.log.gz",
     "data/engineering/year-switch-publish-20261003-7e91/site-budget.json.gz",
     "data/engineering/year-switch-publish-20261003-7e91/site22-historical-trace.json.gz",
@@ -82,7 +84,7 @@
     "data/engineering/year-switch-publish-20261003-7e91/site22-supported.png"
   ],
   "blockers": [],
-  "next_action": "Complete bounded sparse4096/inline-pinned-temporal transport correction in PR618. Run targeted SQL/client/budget correctness and complete publication gate, queued merge, then publish matching new source and retain production after receipts on third/final fresh PR. Site22 is live; no next publish until merged and validated.",
+  "next_action": "After exact-head CI and matching main, submit serialized PR618 merge and verify actual accepted squash. Create fresh third/final #22 branch from that main and rotate claim with live=true only after prior PR/live outcomes are settled. Publish matching bounded Site source/build/archive, then measure both suites and complete mode/profile/fault checks. Close only if acceptance passes; otherwise record bounded follow-up within the three-PR budget.",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue",
   "evidence_hashes": {
@@ -92,7 +94,9 @@
     "data/engineering/year-switch-publish-20261003-7e91/site-budget.json.gz": "a4fc696245b0cdb0a30645b2da826ae075dc0d3f233d20acfe5e05b387c39b1c",
     "data/engineering/year-switch-publish-20261003-7e91/site22-historical-trace.json.gz": "1020362acc48be4f4be5b46dc76698469c46e9d57b4a184553e7390229d1444e",
     "data/engineering/year-switch-publish-20261003-7e91/site22-supported.png": "7a9848d8a1b14315ffb4ed37e7618674702f0577a9b8e81312059f40cb29f7f9",
+    "data/engineering/year-switch-publish-20261003-7e91/publication-inline-final.log.gz": "9a1227553fc7fea5e3a5c8468d8a0a3f4487ddd547de5539d16cab1f953c0cd3",
     "data/engineering/year-switch-publish-20261003-7e91/inline-temporal-pins.log.gz": "d28a4835acc34977f3d19a7b9a14513e331d834fc0f6207677578ef2682c3050",
+    "data/engineering/year-switch-publish-20261003-7e91/inline-hosted-build.log.gz": "e716b3a89b367bb39a462322984675198e5cc42549f45aeecb4f98904abe0cab",
     "data/engineering/year-switch-publish-20261003-7e91/inline-total-byte-limit.log.gz": "146abea0fc76a05dfcf057825915988e085b8f2f4faff730331d64983ab39687",
     "data/engineering/year-switch-publish-20261003-7e91/site22-supported-trace.json.gz": "7278f9ff6f035b6387a2851aa70b8ec7f2bc53876fccd09a655cccb6d4e02f7f",
     "data/engineering/year-switch-publish-20261003-7e91/site22-supported.json.gz": "a7988a38f012c64970a8175c2f3e7c26ef20ee665b92ecfefbd2dbac5bfdc6d4",
@@ -122,6 +126,13 @@
     "inline_targeted_client_sql": "25/25 passed",
     "inline_temporal_pg_sqlite": "27/27 passed before additional bounds fixtures",
     "inline_total_byte_limit": "Both SQLite/PostgreSQL preserve <=8MiB total response and ordinary geographic stream fallback",
-    "full_publication_inline": "in progress; no new publication before actual PASS"
+    "full_publication_inline": {
+      "result": "passed",
+      "unit_contract_checks": 551,
+      "geographic_preparation_checks": 15,
+      "exact_ownership_buckets": 51,
+      "all_interval_and_evidence_tuples_match": true
+    },
+    "inline_hosted_build": "passed"
   }
 }
