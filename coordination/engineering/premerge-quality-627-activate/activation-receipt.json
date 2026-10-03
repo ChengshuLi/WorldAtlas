@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "issue": 627,
+  "reporting_merge": {
+    "pr": 649,
+    "merge_commit": "865c93d8966cd9957a436516f43af9729cc266f1",
+    "queue_request_id": "efabdeb4-e760-4aaf-bba0-456515cd6d05",
+    "workflow_run": 37143937734,
+    "canonical_confirmation_comment": 5972131251
+  },
+  "activation_time": "2026-10-03T18:30:00Z",
+  "validation": {
+    "focused_tests": 64,
+    "outcome": "passed",
+    "log": "coordination/engineering/premerge-quality-627-activate/focused-tests.tap",
+    "remote_setup_tests": "Mocked GET-only API responses; no production merge mutation as a setup test",
+    "positive_fixture": "Versioned manifest hashes, numeric output binding and independent exact-head review",
+    "negative_fixtures": [
+      "malformed/entry hashes",
+      "wrong baseline/pins/path",
+      "stale current vintage",
+      "wrong containing subject file",
+      "contradictory output and rendered table values",
+      "swapped axes/unsupported helper",
+      "missing controls/nonreproducible output",
+      "missing rename/deletion receipts",
+      "original-source refresh",
+      "unsupported approval/publication",
+      "self/stale/changes-requested review",
+      "truncated remote trees"
+    ]
+  },
+  "legacy_decision": "Retain all pre-cutoff issue scopes; explicit opt-in contracts remain valid; inventory is not geographic approval",
+  "limits": [
+    "The first reporting PR used the preceding trusted base, so its evidence job was an explicit bootstrap-not-checked result",
+    "Downloaded artifact contents were unavailable in this environment; no artifact inspection claimed",
+    "Initial rollout work #627 retains its original pre-activation contract; no independent author review claimed",
+    "Real-world source truth and honest execution still require substantive independent review",
+    "No regional approval, history import, deployment or provider credential change"
+  ]
+}
