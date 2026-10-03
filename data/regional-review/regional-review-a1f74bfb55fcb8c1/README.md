@@ -40,3 +40,22 @@ This packet does not establish current settlement coverage, identify every islan
 ## Checks
 
 `verify.py` checks exact scope accounting, row completeness and decisions, source hashes/restoration metadata, cross-reference scope separation and the retained GSHHG subset digest without editing baseline data. The actual GitHub issue metadata and declared `owned_paths` must also pass `scripts/check-handoff-scope.mjs` before PR submission.
+
+## PR 2 physical source screen
+
+The second tranche adds a repeatable GSHHG level-1 physical-land centroid screen across all 228 assigned geometries. It indexed the full-resolution 2017 source's 179,832 level-1 records by their bboxes, tested candidate ring centroids against each compatible current polygon with interior rings respected, and retained 25 full source records whose centroids fall within nine assigned coastal/island locations. Three Galápagos location matches reproduce the earlier 14 component-centroid count; additional hits occur in Tumbes, Sechura, Paita, Ica, Casma and Zarumilla. Each row records its count in `assessment.json` and the full detail is in `gshhg-scope-screen.json`.
+
+This is strictly a physical-land screen. GSHHG 2.3.7 is a global shoreline compilation dated 2017, not an authoritative national island, settlement, hydrography or administrative inventory. A centroid hit does not validate coastlines or components; a zero does not indicate missing land. All 228 settlement reviews, named island identities, five interior ring interpretations, and source/current topology comparisons remain unresolved. No political parent or sovereignty conclusion is drawn.
+
+Reproduce with the same pinned archive and extracted member described above:
+
+```sh
+python3 data/regional-review/regional-review-a1f74bfb55fcb8c1/screen_gshhg_scope.py /path/to/gshhs_f.b
+python3 data/regional-review/regional-review-a1f74bfb55fcb8c1/build_assessment.py
+python3 data/regional-review/regional-review-a1f74bfb55fcb8c1/verify.py
+```
+
+
+## Bounded source-restoration child
+
+Issue [#575](https://github.com/ChengshuLi/WorldAtlas/issues/575) is a blocked, single-location follow-up depending on this review. It owns only Las Golondrinas, requests dated competent-authority status and full physical-source restoration, and records the explicit role conflict without assuming a parent or political ownership. The related Manga del Cura record remains in #495 and is not reassigned.

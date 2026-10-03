@@ -42,4 +42,12 @@ assert hashlib.sha256(packed).hexdigest()==g['selection']['retained_compressed_s
 assert hashlib.sha256(raw).hexdigest()==g['selection']['retained_uncompressed_sha256']
 assert len(raw)==g['selection']['retained_bytes']
 assert len(g['source_land_candidates'])==g['selection']['record_count']
-print(json.dumps({'verified':True,'assigned':len(ids),'assessed':len(rows),'parents':len(a['parents']),'source_register_entries':len(sources['sources']),'gshhg_records':len(g['source_land_candidates'])},indent=2))
+allg=json.loads((HERE/'gshhg-scope-screen.json').read_text())
+assert allg['scope_count']==len(ids) and set(allg['per_location'])==set(ids)
+for row in rows:
+    assert row['physical_source_screen']['level1_centroid_hits']==allg['per_location'][row['location_id']]['level1_centroid_hits']
+ret=allg['retained']; q=(HERE/ret['path']).read_bytes(); qr=gzip.decompress(q)
+assert len(qr)==ret['uncompressed_bytes'] and hashlib.sha256(qr).hexdigest()==ret['uncompressed_sha256']
+assert len(q)==ret['compressed_bytes'] and hashlib.sha256(q).hexdigest()==ret['compressed_sha256']
+assert len(allg['matched_source_records'])==ret['record_count']
+print(json.dumps({'verified':True,'assigned':len(ids),'assessed':len(rows),'parents':len(a['parents']),'source_register_entries':len(sources['sources']),'galapagos_gshhg_records':len(g['source_land_candidates']),'all_scope_gshhg_records':len(allg['matched_source_records']),'locations_with_land_centroid_hits':sum(x['level1_centroid_hits']>0 for x in allg['per_location'].values())},indent=2))
