@@ -1,0 +1,23 @@
+# BC remainder audit reproduction repair — issue #667
+
+This issue repairs the reproducibility of the ten-Census-Division, 335-Census-Subdivision source-only packet in #609 / PR #658. It preserves all original #609 evidence and outputs. It does not review or alter any shared geographic boundary, approve the regional branch, or authorize imports.
+
+## Immutable input baseline
+
+The source baseline is Git commit `24629e5918a144a1979db80ba7012baea42036e7`, the fresh `main` used when this issue was claimed. `input-baseline.json` inventories every tracked file in the #609 packet and all #485 files read by its reproduction, with exact file-byte SHA-256 and size; gzip entries also carry the uncompressed byte SHA-256 and size. It pins the #609 source catalog, evidence manifest and acquisition receipt as actual files, not as mutable authority for their own contents. The acquired response bytes are checked against both retained and decompressed hashes from the original receipt.
+
+Three inherited inputs exceed the shared evidence validator's 32 MiB-per-file inspection ceiling. The Census Division and Subdivision compressed source files are 38,880,150 and 42,765,402 bytes; the geoBoundaries file is 42,649,707 bytes. The reproduction tool verifies each complete Git blob and working-tree byte stream against the pinned SHA-256 before it reads or derives any input. Their bounded derivatives retain every assigned CD, every one of the 335 target CSDs, every BC CD needed for neighbor-edge screening, and every geoBoundaries feature whose coordinate bounding box intersects a target CD or target CSD. Source order is preserved. The only oversized CD feature is split at original MultiPolygon component boundaries and reassembled before measurement. Thus bounding-box filtering is a complete candidate superset, not an exact-intersection filter.
+
+All retained derivatives, the parent identity assessment, full parent-chain snapshot, 2021 population-centre extract, GNBC populated-place extract, source subject registry and extraction receipts are under `inputs/` and `research/geography/bc-remainders-reproduction-followup/`. Each file remains below 32 MiB both compressed and uncompressed. The derived files are reproducible from the pinned original commit with `extract_inputs.py`; preparation refuses to overwrite an existing `inputs/` directory.
+
+## Reproduction and validation
+
+`reproduce.py` checks original and derived inputs before reading them, loads the original audit algorithm from the pinned #609 Git blob, and redirects all output to a required new path inside this owned directory. No-argument/check mode is read-only. A write requires an explicit path that does not already exist. The mapping check rejects any conflicting assignment of one geoBoundaries source-member ID to multiple Atlas location IDs and compares every source roster/candidate ID and full parent chain with #485's pinned assessment and parent-chain snapshot.
+
+`controls.py` exercises changed-parent-assessment, changed-acquired-layer, missing-input, source-member mapping conflict and output-overwrite refusals using temporary fixtures inside this owned directory. Each control verifies that original #609 files remain at their baseline byte hashes. Two independent output directories are compared with the original #609 result files and with each other. A metadata-only difference in input receipts is described by exact JSON pointers; any changed finding/row is listed explicitly with an explanation.
+
+## Source context and limits
+
+The original source vintages, retrieval dates, licenses, canonical links and lawful retained bytes remain documented in the #609 README and `source-catalog.json`, including Statistics Canada 2021 census geography (Open Licence), geoBoundaries Canada ADM3 2016 (upstream license metadata discrepancy preserved), BC Data Catalogue legal regional-district/electoral-area/municipality layers (Open Government Licence–BC), and NRCan Aboriginal Lands of Canada Legislative Boundaries (Open Government Licence–Canada). The 2021 Population Centre and GNBC populated-place extracts are inherited from #485 under their cited Statistics Canada and Open Government Licence–Canada terms. #485 assessment and current parent chains are internal WorldAtlas evidence, not political ownership evidence.
+
+This is an input-integrity and reproduction repair. CSD types and overlap candidates remain statistical/cartographic references, not legal equivalence. Zero hits do not prove absence. Indian Settlement and Indian Community limits, all #609 unresolved findings, inter-region coordination requirements and neighboring CD slivers remain as originally recorded.
