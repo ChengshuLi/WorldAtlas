@@ -12,7 +12,7 @@
     "supported_window": "Single census observation, 20 October 1895",
     "source_version": "Censo General de la República Mexicana, Resumen General, official INEGI historical-product scan; cover imprint 1899 and scan running footer 1897 unresolved"
   },
-  "updated_at_utc": "2026-10-03T11:33:00Z",
+  "updated_at_utc": "2026-10-03T11:35:00Z",
   "geographic_release": null,
   "input_paths": ["source-manifest.json", "source-evaluation.md"],
   "bundle_paths": [],
@@ -21,15 +21,16 @@
   "coverage_achieved": [
     "Retrieved and hashed all three official scan segments and INEGI general free-use terms.",
     "Visually reviewed the title page and printed page 6; retained two population rows and identified the adjacent age-table heading.",
-    "Recorded an unresolved 30-person mismatch in Aguascalientes sex subtotals versus printed total and a 1897/1899 publication-date discrepancy."
+    "Recorded an unresolved 30-person mismatch in Aguascalientes sex subtotals versus printed total and a 1897/1899 publication-date discrepancy.",
+    "Opened focused source-evaluation PR #590 at ba62db6957bc054c1b7f6a264fd2f5f333e3be37."
   ],
   "source_gaps": [
     "The reviewed summary is state-level; municipalities and settlements, sub-state tables, source population-universe definition, and undercount uncertainty remain unevaluated.",
     "No regional content approval certificate with exact permitted subjects and matching release pins."
   ],
   "blockers": ["No approved regional certificate for any import; this work remains source-only."],
-  "next_action": "Submit one focused source-evaluation PR, wait for exact-head checks, use the serialized merge queue, verify the merge on fresh main, release the claim, and continue with the next ready history-research issue.",
-  "pull_request": null,
+  "next_action": "Wait for exact-head checks; renew the claim before merge-queue submission, verify the serialized merge on fresh main, release the claim, and continue with the next ready unclaimed history-research issue.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/590",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
