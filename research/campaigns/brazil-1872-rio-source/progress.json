@@ -12,7 +12,7 @@
     "supported_window": "1872 census reference; exact enumeration date not verified",
     "source_version": "Recenseamento do Brazil em 1872, volume 10, IBGE Biblioteca scan"
   },
-  "updated_at_utc": "2026-10-03T11:10:00Z",
+  "updated_at_utc": "2026-10-03T11:12:00Z",
   "geographic_release": null,
   "input_paths": ["source-manifest.json", "source-evaluation.md"],
   "bundle_paths": [],
@@ -21,15 +21,16 @@
   "coverage_achieved": [
     "Verified official catalog volume assignment: volume 10 is Rio de Janeiro; Município Neutro is separately in volume 5.",
     "Recorded the official PDF byte count and SHA-256; visually reviewed the parish table form and religion labels.",
-    "Rejected OCR-derived numeric values; retained zero illustrative count rows and documented why."
+    "Rejected OCR-derived numeric values; retained zero illustrative count rows and documented why.",
+    "Opened focused source-evaluation PR #586; initial handoff scope check passed at c54cdabb326a4a9f6dc49314a9c085f02bf1fd64."
   ],
   "source_gaps": [
     "Exact enumeration day, reuse license, full count transcription, territory denominator reconciliation, and historical geography concordance remain unresolved.",
     "No permitted-subject/release-pin certificate for regional import."
   ],
   "blockers": ["Source-only result: numeric transcription and rights terms need further evidence before downstream use."],
-  "next_action": "Submit one focused source-evaluation PR, then continue with the next ready unclaimed history-research issue after merge and claim release.",
-  "pull_request": null,
+  "next_action": "Wait for exact-head checks; renew the claim before merge-queue submission, verify the merge on fresh main, release the claim, then continue with the next ready unclaimed history-research issue.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/586",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
