@@ -10,7 +10,7 @@
     "Production year-switch baseline and opt-in evidence-only map pages"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-03T08:57:00Z",
+  "updated_at_utc": "2026-10-03T09:12:00Z",
   "completed": [
     "Authenticated private production verification; no audience or data change",
     "Completed five navigation samples and invalid-year browser check",
@@ -46,7 +46,10 @@
     },
     {
       "command": "node scripts/validate-structure.mjs publication",
-      "result": "in progress after bounded assertion repair"
+      "result": "passed",
+      "unit_contract_checks": 542,
+      "geographic_checks": 15,
+      "exact_ownership_buckets": 51
     },
     {
       "command": "publication unit/contract phase",
@@ -106,10 +109,11 @@
     "data/engineering/year-switch-prod-20261003-7e91/native-migrations.log.gz",
     "data/engineering/year-switch-prod-20261003-7e91/native-sparse.log.gz",
     "data/engineering/year-switch-prod-20261003-7e91/ownership-validation.log.gz",
-    "data/engineering/year-switch-prod-20261003-7e91/prepared-validation.log.gz"
+    "data/engineering/year-switch-prod-20261003-7e91/prepared-validation.log.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/publication-final.log.gz"
   ],
   "blockers": [],
-  "next_action": "Run final complete publication command; merge exact current CI head through queue; stage/push matching source mirror and explicit private deployment, then production before/after verification.",
+  "next_action": "Merge exact current CI head through serialized queue; rotate settled claim to fresh main branch for publication and after-production receipts. Site21 remains unchanged.",
   "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/553",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
@@ -119,7 +123,8 @@
     "initial_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37109476435",
     "live_measurement_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37109555536",
     "post_baseline_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37110068564",
-    "publication_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37110554563"
+    "publication_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37110554563",
+    "merge_preparation_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37111780844"
   },
   "private_access": {
     "resolved": true,
@@ -146,7 +151,8 @@
     "data/engineering/year-switch-prod-20261003-7e91/before-trace.json.gz": "e2b5a4bf9ce21ce5d2b43d3852508961f00d3048e512f14050c337adc0ea17ab",
     "data/engineering/year-switch-prod-20261003-7e91/baseline-geographic.log.gz": "4fcf128a9db4dd7554ad1167fb030cd8eef3e2c59c690ac72eabf5c8cd8379cd",
     "data/engineering/year-switch-prod-20261003-7e91/before.json.gz": "4aa41e6c97bb706b5349aab193b1503335867da0b65cdbdd5f950318bedc3aee",
-    "data/engineering/year-switch-prod-20261003-7e91/ownership-validation.log.gz": "152b1354c0fe31075e0f1ae9b93fb0f4737119c1a4d30c777ecbfab9f198f207"
+    "data/engineering/year-switch-prod-20261003-7e91/ownership-validation.log.gz": "152b1354c0fe31075e0f1ae9b93fb0f4737119c1a4d30c777ecbfab9f198f207",
+    "data/engineering/year-switch-prod-20261003-7e91/publication-final.log.gz": "615a281e54d56f21a970bd1f29e8439127d0945672198c23d5b4fc13b4441e41"
   },
   "validation_repair_notice": "https://github.com/ChengshuLi/WorldAtlas/issues/22#issuecomment-5967251315"
 }
