@@ -1,0 +1,178 @@
+{
+  "issue": 439,
+  "baseline_commit": "ff171e1dd1998684d9b3549943d5725817a7aef4",
+  "method": "Read-only audit of all four issue-owned locations, their complete area/province/region/subcontinent/continent parent chains, direct group memberships and current v5 projection; independently scanned every GSHHG 2.3.7 high-resolution level-1 polygon in fixed subject windows; cross-checked named island/group inventories and settlement statements against official TAAF, Australian Antarctic Program/Division and UNESCO sources. Natural Earth is a coarse administrative/reference comparator, not controlling natural geography. Political title is not used to infer physical location, semantic tier, or settlement.",
+  "scope": {
+    "locations": [
+      "atlas:coverage:ATF-5916",
+      "atlas:coverage:ATF-5917",
+      "atlas:coverage:ATF-5918",
+      "atlas:coverage:HMD+00?"
+    ],
+    "areas": [
+      "framework:area:kerguelen:919141a446a8",
+      "framework:area:crozet-is:1fb088114cd2",
+      "framework:area:amsterdam-st-paul-is:cd1d6a1e4243",
+      "framework:area:heard-mcdonald-is:bffd3505554c"
+    ],
+    "provinces": [
+      "framework:province:archipel-des-kerguelen:0186c2974b8f",
+      "framework:province:archipel-des-crozet:13fab451c57f",
+      "framework:province:iles-saint-paul-et-nouvelle-amsterdam:ecadfbb105a4",
+      "framework:province:heard-island-and-mcdonald-islands:489abffe1bdc"
+    ],
+    "all_parent_chains_in_baseline_extract": "complete_parent_chains; each chain is location -> singleton province -> singleton area -> region -> subcontinent -> Oceania continent. Every current direct membership in all four issue-owned areas/provinces is the matching one location; each repeats its child name/meaning. Region has exactly the four issue locations. All location semantic statuses are open."
+  },
+  "decisions": [
+    {
+      "location_id": "atlas:coverage:ATF-5916",
+      "name": "Archipel des Kerguelen",
+      "classification": "correction-needed; source crosswalk and exact omitted-land geometry unresolved",
+      "current": "Natural Earth ADM1 record ATF-5916, 9 current polygon components, EPSG:6933 current area 6986.827 km2. Current Natural Earth is nearly congruent with atlas (symmetric difference 0.083998 km2; Hausdorff 7.34 m), so the present atlas inherits this coarse source rather than an independent archipelago inventory. Canonical grid v2 owns 702445 cells for this location.",
+      "authoritative evidence": "TAAF Austral Islands page describes Kerguelen as Grande Terre plus more than 300 satellite islands, approximately 7215 km2, and permanent Port-aux-Français research station. This establishes a materially richer group inventory than nine generalized components, but does not identify exact boundaries for every satellite.",
+      "screen": "GSHHG high-resolution level-1 window yielded 364 polygons; 47 report area >1 km2, of which 29 screen >500 m from the current atlas footprint. These 29 IDs are in shoreline-screen.json and are screening leads, not authoritative feature identities. Sum of all window source areas is 7391.986 km2 and must not be treated as authoritative area because of overlaps/scale/lineage.",
+      "roles_and_settlements": "The named source row is an admin-1 reference feature titled “Kerguelen Islands”; an ADM1 label alone does not establish province-tier purpose. TAAF reports Port-aux-Français as permanent station; a scientific station is not by itself evidence of a settlement location. No independently verified city fragments, remainder, or complete settlement roster established in this packet.",
+      "recommendation": "#635 should restore an authoritative island inventory and exact crosswalk, propose additions/corrections with neighbor checks, and resolve source provenance. Leave source-specific polygon identity and any tier changes open pending this work."
+    },
+    {
+      "location_id": "atlas:coverage:ATF-5917",
+      "name": "Archipel des Crozet",
+      "classification": "correction-needed; source crosswalk and exact omitted-land geometry unresolved",
+      "current": "Natural Earth ADM1 record ATF-5917, 2 current polygon components, EPSG:6933 area 205.279 km2. Atlas/current source symmetric difference 0.001469 km2; Hausdorff 0.062 m. Canonical grid owns 18400 cells.",
+      "authoritative evidence": "TAAF lists five volcanic islands/groups: eastern group Île de la Possession and Île de l’Est; western group Îles des Cochons, des Apôtres and des Pingouins, about 110 km apart. The page reports total archipelago area ~340 km2 and the permanent Alfred Faure base on Possession. The named inventory and stated area do not agree with treating the 2 generalized components/current 205.279 km2 as a complete archipelago geometry.",
+      "screen": "GSHHG window yielded 21 polygons, five >1 km2; three >1 km2 candidates outside current by >500 m, IDs 1275, 8012, 11924. Spatial compatibility suggests omitted island groups, but there is no authoritative per-polygon name crosswalk yet. Total screened area 364.618 km2 is only a scale/lineage diagnostic.",
+      "roles_and_settlements": "ADM1 record says admin-1 but no statutory province evidence found; it should not justify a province tier by itself. Alfred Faure is an inhabited research base on Possession, not a complete settlement survey. Named component count, disconnected western/eastern groups and complete island coverage need source-level crosswalk.",
+      "recommendation": "#635 should reconcile all five TAAF-named islands/groups to geometry and exact source records before correction proposal; investigate area discrepancy and neighboring overlaps."
+    },
+    {
+      "location_id": "atlas:coverage:ATF-5918",
+      "name": "Iles Saint-Paul et Nouvelle-Amsterdam",
+      "classification": "conditionally justified at named two-island-group coverage level; province/area semantic purpose remains insufficient evidence",
+      "current": "Natural Earth ADM1 record ATF-5918, 2 current components and EPSG:6933 area 62.926 km2; current-vs-source symmetric difference 0.000858 km2 and Hausdorff 0.061 m. Canonical grid owns 4344 cells.",
+      "authoritative evidence": "TAAF describes Amsterdam and Saint-Paul as two distinct volcanic islands approximately 85 km apart. Both are assigned to one TAAF administrative district. GSHHG screen has three records, two >1 km2; both major landmasses align with atlas and the remaining small rock (~0.0159 km2) lacks a settled name crosswalk. This supports a deliberate paired physical-geography location, while scale/coverage of that rock is unresolved.",
+      "settlements": "Martin-de-Viviès station on Amsterdam has about 20 overwintering people; TAAF states Saint-Paul has no permanent human presence and only short science visits. Do not infer a permanent settlement at Saint-Paul or turn the research station into a settlement without appropriate source evidence.",
+      "roles": "Natural Earth ADM1 label “Isles Saint-Paul et Nouvelle-Amsterdam” and one-member repeated area/province do not establish three distinct semantic tiers. Keep the physical paired-group representation provisionally; request engineering’s identity-preserving tier/role assessment across the four singleton chains."
+    },
+    {
+      "location_id": "atlas:coverage:HMD+00?",
+      "name": "Heard Island and McDonald Islands",
+      "classification": "correction-needed; Natural Earth input omits named group land",
+      "current": "Natural Earth HMD+00? record forms one current component, EPSG:6933 area 394.833 km2, canonical grid owns 46754 cells. Natural Earth’s feature bounds correspond to Heard; no atlas footprint around McDonald candidate coordinates.",
+      "authoritative evidence": "Australian Antarctic Program describes HIMI as an Australian external territory comprising Heard Island and McDonald Islands, with associated waters. UNESCO describes Heard as dominant, McDonald as smaller, with minor rocks/islands. AAD map is a location corroboration. GSHHG 2.3.7 feature 17235, at 72.58742–72.60747E and 53.05375–53.03542S, is a spatial candidate for McDonald land outside the current footprint, but screen attribution is not authoritative geometry.",
+      "settlements_and_roles": "AAD says the group is unoccupied by humans and largely undisturbed; UNESCO describes limited visits/no protracted stay since the 1992 winter program. Do not infer a settlement from research/management visits. Natural Earth “admin-1” row reflects a named territory; political territory title does not set physical land extent or justify a province tier.",
+      "recommendation": "#635 should source a lawful authoritative natural-geography inventory/map or public geometry and compare Heard, McDonald and rocks; identify whether surrounding associated waters are outside land coverage. No legal maritime/ownership extent inferred."
+    }
+  ],
+  "cross_cutting": {
+    "administrative_roles": "Natural Earth vintage 5.1.1 admin-1 records are modern reference objects with admin-1 classification, not evidence that repeated area and province tiers have distinct geographic purposes. All 4 provinces and all 4 areas are singleton wrappers; each has the same one matching member and repeats location meaning. Source-specific TAAF districts/territory differ in governance and do not automatically equal province/area semantics. Engineering should decide identity-preserving role/tier treatment after source crosswalks; this packet makes no shared hierarchy mutation.",
+    "complete_parent_chains": "The four chains are complete in baseline-extract.json. Each ascends matching named location -> named province -> physical-group area -> Southern Indian Ocean Islands region -> Subantarctic Indian Ocean Islands subcontinent -> Oceania. Structural completeness is not semantic approval. All 4 region members are exactly the issue-owned four locations.",
+    "remainders_and_fragmentation": "No anonymous remainder or urban/city-territory fragment was identified among these four remote island-group source rows. All are disconnected/island geographies; TAAF and UNESCO inventories plus GSHHG screening show the need to account for small islands explicitly, particularly Crozet and Kerguelen. For Amsterdam/Saint Paul one minor rock is an unresolved small feature. HMD missing McDonald is the primary omission lead.",
+    "antarctica": "No Antarctic continent subjects included or inferred; issue scope is subantarctic island groups."
+  },
+  "cross_region": "TAAF explicitly names neighboring Marion and Prince Edward as administered by South Africa. Candidate shoreline polygons 757 and 2328 are absent from current atlas parts in tested window and not enclosed by current region envelopes. Routing is inter-region and not resolved by this packet. Follow-up #636 records candidate affected neighboring regions and calls for coordinated source review; no shared border/ownership assignment made.",
+  "followups": {
+    "source_island_inventory": "https://github.com/ChengshuLi/WorldAtlas/issues/635",
+    "marion_prince_edward_neighbor_routing": "https://github.com/ChengshuLi/WorldAtlas/issues/636"
+  },
+  "sources": [
+    "TAAF Austral Islands: https://taaf.fr/collectivites/presentation-des-territoires/les-iles-australes/ (page modified 2025-02-19; captured 2026-10-03; page reuse license not found; citation/hash/restoration only)",
+    "UNESCO French Austral Lands and Seas: https://whc.unesco.org/en/list/1603/ (inscribed 2019; text CC BY-SA IGO 3.0; captured 2026-10-03)",
+    "Australian Antarctic Program, Territory of Heard Island and McDonald Islands: https://www.antarctica.gov.au/about-antarctica/australia-in-antarctica/the-territory-of-heard-island-and-mcdonald-islands/ (modified 2026-06-26; captured 2026-10-03; page reuse license not identified)",
+    "Australian Antarctic Program Heard Island operations page: https://www.antarctica.gov.au/antarctic-operations/stations-and-field-locations/heard-island/ (modified 2026-09-28; captured 2026-10-03; reuse license not identified)",
+    "UNESCO Heard and McDonald Islands: https://whc.unesco.org/en/list/577/ (inscribed 1997; text CC BY-SA IGO 3.0; captured 2026-10-03)",
+    "Natural Earth 10m Admin-1: https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/; dataset v5.1.1 at commit ca96624a56bd078437bca8184e78163e5039ad19 (2022-06-02), Public Domain; exact retained source component hashes in natural-earth-source.json",
+    "GSHHG 2.3.7 high-resolution GSHHS_f_L1: https://www.soest.hawaii.edu/pwessel/gshhg/; GNU LGPL 3.0 release terms; downloaded/recovered bytes at source sha in shoreline-screen.json and component hashes in README.md; mixed lineage and scale, screen only."
+  ],
+  "limits": [
+    "Source pages establish inventories and statements, not a modern authoritative high-resolution polygon for every island.",
+    "No statutory boundaries for the repeated area/province tier purpose were found; exact tier recommendation is unresolved.",
+    "GSHHG is a diagnostic candidate screen; its components cannot individually be identified by name from this screen alone.",
+    "No evidence in this packet approves the complete region, semantic imports, historical attributes or regional boundary corrections."
+  ],
+  "group_review": {
+    "areas": [
+      {
+        "id": "framework:area:kerguelen:919141a446a8",
+        "name": "Kerguelen",
+        "owned_members": [
+          "atlas:coverage:ATF-5916"
+        ],
+        "member_count": 1,
+        "classification": "insufficient-evidence for independent semantic tier",
+        "assessment": "One member, exactly the matching child location; this is a useful named group container but no distinct physical/admin footprint or role is established by the singleton membership. TAAF grouping or Australian territory grouping describes official geography/governance; it does not by itself decide the atlas area tier. Preserve as review evidence pending engineering role policy."
+      },
+      {
+        "id": "framework:area:crozet-is:1fb088114cd2",
+        "name": "Crozet Islands",
+        "owned_members": [
+          "atlas:coverage:ATF-5917"
+        ],
+        "member_count": 1,
+        "classification": "insufficient-evidence for independent semantic tier",
+        "assessment": "One member, exactly the matching child location; this is a useful named group container but no distinct physical/admin footprint or role is established by the singleton membership. TAAF grouping or Australian territory grouping describes official geography/governance; it does not by itself decide the atlas area tier. Preserve as review evidence pending engineering role policy."
+      },
+      {
+        "id": "framework:area:amsterdam-st-paul-is:cd1d6a1e4243",
+        "name": "Amsterdam and Saint-Paul Islands",
+        "owned_members": [
+          "atlas:coverage:ATF-5918"
+        ],
+        "member_count": 1,
+        "classification": "insufficient-evidence for independent semantic tier",
+        "assessment": "One member, exactly the matching child location; this is a useful named group container but no distinct physical/admin footprint or role is established by the singleton membership. TAAF grouping or Australian territory grouping describes official geography/governance; it does not by itself decide the atlas area tier. Preserve as review evidence pending engineering role policy."
+      },
+      {
+        "id": "framework:area:heard-mcdonald-is:bffd3505554c",
+        "name": "Heard and McDonald Islands",
+        "owned_members": [
+          "atlas:coverage:HMD+00?"
+        ],
+        "member_count": 1,
+        "classification": "insufficient-evidence for independent semantic tier",
+        "assessment": "One member, exactly the matching child location; this is a useful named group container but no distinct physical/admin footprint or role is established by the singleton membership. TAAF grouping or Australian territory grouping describes official geography/governance; it does not by itself decide the atlas area tier. Preserve as review evidence pending engineering role policy."
+      }
+    ],
+    "provinces": [
+      {
+        "id": "framework:province:archipel-des-kerguelen:0186c2974b8f",
+        "name": "Archipel des Kerguelen",
+        "owned_members": [
+          "atlas:coverage:ATF-5916"
+        ],
+        "member_count": 1,
+        "classification": "insufficient-evidence for independent province-tier semantic purpose",
+        "assessment": "One member, exactly the matching child location and name. The source is Natural Earth modern Admin-1 reference rather than evidence of an independently bounded province; ADM1 classification alone is insufficient. It does not establish separate province and area purposes. Preserve identity/history and refer tier migration/retention decision to engineering; no hierarchy change in this packet."
+      },
+      {
+        "id": "framework:province:archipel-des-crozet:13fab451c57f",
+        "name": "Archipel des Crozet",
+        "owned_members": [
+          "atlas:coverage:ATF-5917"
+        ],
+        "member_count": 1,
+        "classification": "insufficient-evidence for independent province-tier semantic purpose",
+        "assessment": "One member, exactly the matching child location and name. The source is Natural Earth modern Admin-1 reference rather than evidence of an independently bounded province; ADM1 classification alone is insufficient. It does not establish separate province and area purposes. Preserve identity/history and refer tier migration/retention decision to engineering; no hierarchy change in this packet."
+      },
+      {
+        "id": "framework:province:iles-saint-paul-et-nouvelle-amsterdam:ecadfbb105a4",
+        "name": "Iles Saint-Paul et Nouvelle-Amsterdam",
+        "owned_members": [
+          "atlas:coverage:ATF-5918"
+        ],
+        "member_count": 1,
+        "classification": "insufficient-evidence for independent province-tier semantic purpose",
+        "assessment": "One member, exactly the matching child location and name. The source is Natural Earth modern Admin-1 reference rather than evidence of an independently bounded province; ADM1 classification alone is insufficient. It does not establish separate province and area purposes. Preserve identity/history and refer tier migration/retention decision to engineering; no hierarchy change in this packet."
+      },
+      {
+        "id": "framework:province:heard-island-and-mcdonald-islands:489abffe1bdc",
+        "name": "Heard Island and McDonald Islands",
+        "owned_members": [
+          "atlas:coverage:HMD+00?"
+        ],
+        "member_count": 1,
+        "classification": "insufficient-evidence for independent province-tier semantic purpose",
+        "assessment": "One member, exactly the matching child location and name. The source is Natural Earth modern Admin-1 reference rather than evidence of an independently bounded province; ADM1 classification alone is insufficient. It does not establish separate province and area purposes. Preserve identity/history and refer tier migration/retention decision to engineering; no hierarchy change in this packet."
+      }
+    ]
+  }
+}

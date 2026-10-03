@@ -1,0 +1,110 @@
+{
+  "source": "GSHHG 2.3.7 high-resolution GSHHS_f_L1 shoreline",
+  "official_url": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+  "license": "GNU LGPL 3.0 as stated by the distributed GSHHG release",
+  "method": "Enumerate every level-1 GSHHS polygon intersecting each fixed WGS84 window, project to EPSG:6933 and measure its distance/area against the current atlas location polygon. Current atlas geometry and the canonical region membership are read-only. 500 m is only a diagnostic coast-tolerance; >1 km2 is a reporting threshold, not an island definition. Overlapping/nearby islands and source-scale differences prevent using counts/areas as authoritative unit totals. GSHHG has mixed source lineage; do not treat it as an administrative or ownership authority.",
+  "baseline_commit": "ff171e1dd1998684d9b3549943d5725817a7aef4",
+  "shapefile_sha256": "121435427911ea80624802e0f352d777eaf6ba6966ca5f07e687650e95329fd9",
+  "shapefile_bytes": 161320396,
+  "component_counts_current": {
+    "atlas:coverage:HMD+00?": 1,
+    "atlas:coverage:ATF-5916": 9,
+    "atlas:coverage:ATF-5917": 2,
+    "atlas:coverage:ATF-5918": 2
+  },
+  "windows_wgs84": {
+    "Kerguelen": [
+      67.5,
+      -50.5,
+      71.6,
+      -47.8
+    ],
+    "Crozet": [
+      49.5,
+      -47.2,
+      53,
+      -45.5
+    ],
+    "Amsterdam-Saint-Paul": [
+      77.2,
+      -39,
+      78,
+      -37.5
+    ],
+    "Heard-McDonald": [
+      72.5,
+      -53.6,
+      74.5,
+      -52.5
+    ]
+  },
+  "screen_summary": {
+    "Kerguelen": {
+      "features_screened": 364,
+      "features_over_1km2": 47,
+      "features_over_1km2_outside_500m": 29,
+      "total_screened_area_epsg6933_km2": 7391.985893484545,
+      "unmatched_over_1km2": [
+        "6210",
+        "7947",
+        "7974",
+        "8168",
+        "8794",
+        "9522",
+        "10248",
+        "10648",
+        "10675",
+        "10964",
+        "11729",
+        "11747",
+        "11786",
+        "11897",
+        "13399",
+        "13579",
+        "14313",
+        "14546",
+        "14874",
+        "14923",
+        "15382",
+        "16189",
+        "16572",
+        "17727",
+        "18333",
+        "18771",
+        "19651",
+        "19946",
+        "21539"
+      ]
+    },
+    "Crozet": {
+      "features_screened": 21,
+      "features_over_1km2": 5,
+      "features_over_1km2_outside_500m": 3,
+      "total_screened_area_epsg6933_km2": 364.6183207896292,
+      "unmatched_over_1km2": [
+        "1275",
+        "8012",
+        "11924"
+      ]
+    },
+    "Amsterdam-Saint-Paul": {
+      "features_screened": 3,
+      "features_over_1km2": 2,
+      "features_over_1km2_outside_500m": 0,
+      "total_screened_area_epsg6933_km2": 72.93008007282766,
+      "unmatched_over_1km2": []
+    },
+    "Heard-McDonald": {
+      "features_screened": 12,
+      "features_over_1km2": 2,
+      "features_over_1km2_outside_500m": 1,
+      "total_screened_area_epsg6933_km2": 391.9275181101288,
+      "unmatched_over_1km2": [
+        "17235"
+      ]
+    }
+  },
+  "record_count": 400,
+  "records_path": "shoreline-records.jsonl",
+  "records_sha256": "46511673e0e92694d6149c75a36f886726f46528683b25ab7feef0f3ad7b9085"
+}
