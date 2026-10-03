@@ -88,6 +88,7 @@
         "associated_named_dry_land_omitted_by_this_source_check": "No omitted associated feature identified within the issue's supplied source query. Query is local and cannot prove no remote or sub-resolution dry land exists."
       },
       "assessment": "The retained OSM snapshot contains three closed coastline ways tagged natural=coastline and place=islet, with 50 node references (47 unique nodes) in total. The preserved extracted MultiPolygon contains three polygons, one exterior ring each, matching the three supplied way IDs. FWS independently describes the named feature as two volcanic pinnacles and a five-acre island. OSM's three shoreline components versus FWS's two pinnacles is a scale/feature-count difference, not grounds for inventing a third named location; the packet cannot establish whether each OSM component maps one-to-one to the two exposed pinnacle masses.",
+      "settlement_assessment": "No permanent settlement is evidenced in the inspected FWS feature account or the target OSM coastline ways. The OSM ways are physical coastline features and carry no name or settlement tags. This limited evidence does not establish historical non-habitation; historical settlement remains outside this geography packet and unresolved.",
       "source_coverage_limit": "Bounding-box response contains four ways total (three target coastline ways and one other way), but it is not a complete regional inventory, bathymetric source, tidal datum study or sub-meter-independent shoreline survey. Shoreline completeness at high/low tide and omitted emergent rocks remain unresolved.",
       "recommended_treatment": "Retain one location and the full three-ring source geometry as the dated 2026 source-backed representation. Do not enlarge it using underwater shelves, reef, bathymetry, political claims or administrative extent. Keep modern coverage/shoreline-completeness review open. No hierarchy or geometry change proposed."
     }
@@ -102,7 +103,8 @@
       {"id": "framework:continent:oceania:48580dd0c4b4", "name": "Oceania", "role_assessment": "Retain the approved macro assignment; not a conclusion about political ownership."}
     ],
     "completeness": "All five declared ancestors and the one assigned location reviewed against the pinned scope. Province/area contain other members and are not exhaustively assessed by this single-location issue.",
-    "cross_region_consistency": "No evidence of an inter-region boundary inconsistency found. The packet does not audit neighboring locations, so it makes no joint boundary approval."
+    "neighbor_context": "FWS places Gardner between French Frigate Shoals and Maro Reef, supporting its current North-Central Pacific region routing at the named-feature scale. Their individual memberships/footprints and the shared region envelope are not audited by this one-location issue.",
+    "cross_region_consistency": "No inter-region inconsistency is indicated by the inspected sources. This packet does not compare neighboring footprints or approve shared boundaries; any future contradictory placement requires a coordinated neighboring-region issue."
   },
   "political_and_historical_separation": {
     "political_owner": null,
