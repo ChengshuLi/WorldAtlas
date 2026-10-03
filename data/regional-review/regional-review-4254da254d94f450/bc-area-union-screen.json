@@ -1,0 +1,58 @@
+{
+  "scope": {
+    "british_columbia_area_id": "framework:area:british-columbia:4ac4bdf4a9b8",
+    "assigned_location_count": 61,
+    "administrative_aggregation_and_city_count": 23,
+    "ecoregion_count": 38,
+    "statistics_canada_2021_census_division_count": 29
+  },
+  "union_metrics": {
+    "assigned_area_km2": 917659.208635,
+    "official_2021_cd_union_km2": 917299.814184,
+    "assigned_area_coverage_of_2021_cd_union_pct": 99.766017,
+    "2021_cd_union_coverage_of_assigned_area_pct": 99.726944,
+    "symmetric_difference_km2": 4652.054018,
+    "admin_city_union_km2": 194600.554693,
+    "ecoregion_union_km2": 723058.666859,
+    "admin_ecoregion_intersection_km2": 0.012916,
+    "admin_ecoregion_symmetric_difference_km2": 917659.195719
+  },
+  "per_cd_assigned_area_coverage_pct": {
+    "5901": 99.869434,
+    "5903": 99.978787,
+    "5905": 99.978619,
+    "5907": 99.986846,
+    "5909": 99.985489,
+    "5915": 99.255859,
+    "5917": 96.726947,
+    "5919": 99.307975,
+    "5921": 98.695406,
+    "5923": 98.103013,
+    "5924": 98.830635,
+    "5926": 98.854487,
+    "5927": 98.852346,
+    "5929": 98.477498,
+    "5931": 99.967482,
+    "5933": 99.999998,
+    "5935": 100.0,
+    "5937": 100.0,
+    "5939": 99.957983,
+    "5941": 99.999999,
+    "5943": 98.679208,
+    "5945": 98.723299,
+    "5947": 97.519766,
+    "5949": 99.657556,
+    "5951": 100.0,
+    "5953": 99.970374,
+    "5955": 99.997966,
+    "5957": 99.991379,
+    "5959": 99.999882
+  },
+  "method": "Project all 61 current British Columbia-assigned location geometries and all 29 official Statistics Canada 2021 Census Division geometries into EPSG:3347; temporarily repair invalid projected shapes for overlay; union within each cohort; compute area ratios and symmetric differences. No output geometry is proposed.",
+  "interpretation": "Independent, cross-vintage coverage screen only. Statistical Census Division extents are not legal provincial boundaries. The 23 administrative/grouped-city and 38 physical ecoregion roles are preserved separately; overlap and symmetric difference are not political ownership or an instruction to alter the shared baseline.",
+  "limitations": [
+    "Some Canadian input polygons are invalid or nested as released; only temporary projected overlay geometries are repaired.",
+    "Census Division and assigned location products use distinct source families, vintages and feature purposes; no difference alone demonstrates an error.",
+    "This cohort is British Columbia only; Canada–US neighbor lines require a separately documented mapping-source screen and coordinated follow-up if implicated."
+  ]
+}

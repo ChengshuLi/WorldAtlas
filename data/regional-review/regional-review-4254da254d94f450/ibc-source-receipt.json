@@ -1,0 +1,13 @@
+{
+  "publisher": "International Boundary Commission",
+  "title": "US–Canada International Boundary Shapefile v1.3",
+  "source_metadata_date": "2018-04-20",
+  "canonical_page": "https://www.internationalboundarycommission.org/en/data-downloads/",
+  "direct_download_listed_by_source_page": "https://www.internationalboundarycommission.org/uploads/shapefile/us-canada-boundary-v1-3.zip",
+  "source_archive_bytes": 258764,
+  "source_archive_sha256": "eb327459528b87cbc27e55ccc6bfd6982562c75559823a00b6dc50c04abcaab1",
+  "feature_count": 30,
+  "source_page_terms": "Copyright 2015 International Boundary Commission. All Rights Reserved. Source page says the shapefile is for mapping use only and must not be used to define the boundary. No open redistribution license was identified; the source archive is not included in this packet.",
+  "restoration": "If authorized under the source terms, download the v1.3 archive from the official IBC page/direct link, verify exact 258764-byte size and stated SHA-256, then pass its path to audit_ibc_bc_neighbors.py. Keep it outside the repository; do not republish source bytes. The page and source metadata must be rechecked for terms/date before a future use.",
+  "use_in_this_packet": "Derived sampled map-proximity statistics only; not a legal delimitation or political-ownership determination."
+}

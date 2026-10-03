@@ -1,0 +1,22 @@
+{
+  "service_url": "https://services.arcgis.com/wjcPoefzjpzCgffS/arcgis/rest/services/CanadianGeographicalNames_gdb/FeatureServer",
+  "layer_id": 0,
+  "retrieval_date_utc": "2026-10-03",
+  "where": "PROV_TERR = 'British Columbia' AND CATEGORY = 'Populated Place'",
+  "feature_count": 2228,
+  "page_count": 2,
+  "pages": [
+    {
+      "offset": 0,
+      "count": 2000,
+      "url": "https://services.arcgis.com/wjcPoefzjpzCgffS/arcgis/rest/services/CanadianGeographicalNames_gdb/FeatureServer/0/query?where=PROV_TERR+%3D+%27British+Columbia%27+AND+CATEGORY+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=0&resultRecordCount=2000&orderByFields=CGNDB_ID"
+    },
+    {
+      "offset": 2000,
+      "count": 228,
+      "url": "https://services.arcgis.com/wjcPoefzjpzCgffS/arcgis/rest/services/CanadianGeographicalNames_gdb/FeatureServer/0/query?where=PROV_TERR+%3D+%27British+Columbia%27+AND+CATEGORY+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=2000&resultRecordCount=2000&orderByFields=CGNDB_ID"
+    }
+  ],
+  "interpretation": "GNBC/NRCan authoritative federal named features classified as Populated Place; this is a names database, not a settlement census. No-hit does not establish absence.",
+  "license": "Open Government Licence - Canada per item/service metadata"
+}
