@@ -1,0 +1,23 @@
+{
+  "units": "metres after OGR reprojection to EPSG:32618",
+  "municipalities": [
+    {
+      "id": "gb:COL:ADM2:7082276B25468013916959",
+      "name": "San Miguel (La Dorada)"
+    },
+    {
+      "id": "gb:COL:ADM2:7082276B42533804398270",
+      "name": "Puerto Asís"
+    }
+  ],
+  "source_uncompressed_sha256": "fe715854fc3383d2fd39e8692f3df0c60bd12208cb2cd36ef1ec2220ea8972fe",
+  "metrics": {
+    "source_common_edge_m": 8261.9311262635,
+    "current_exact_shared_edge_m": 0.0,
+    "source_edge_within_5m_of_current_a_m": 8185.2203830115,
+    "source_edge_within_5m_of_current_b_m": 8185.22437206195,
+    "source_edge_within_25m_of_current_a_m": 8207.01402782528,
+    "source_edge_within_25m_of_current_b_m": 8205.59445402639
+  },
+  "interpretation": "Source boundaries share an 8.262 km line. Current simplified boundaries have zero exact shared-line length, but 8.185 km of that source line lies within 5 m of each current boundary. This is consistent with a small vertex/precision representation difference. It is not evidence to move either unit; named source precision and full geometry validation remain open."
+}

@@ -1,0 +1,3286 @@
+{
+  "source": {
+    "title": "GSHHG full-resolution binary, release 2.3.7",
+    "release_date": "2017-06-15",
+    "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+    "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+    "member": "gshhs_f.b",
+    "member_bytes": 95809336,
+    "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "license": "LGPLv3 or later; license retained at data/macro-improvements/macro-coverage-oceania/gshhg-LGPL.txt",
+    "restore": "Download the pinned archive, verify archive SHA-256, extract gshhs_f.b and verify member SHA-256."
+  },
+  "scope_count": 190,
+  "source_level1_record_count": 179832,
+  "source_total_record_count": 188612,
+  "retained": {
+    "path": "sources/gshhg-colombia-land-candidates.bin.gz",
+    "record_count": 30,
+    "uncompressed_bytes": 2721616,
+    "uncompressed_sha256": "bcc737fcc80322b50a69a6f58e5302db7c5686dee5ddb2ccb950e8f20b5cc402",
+    "compressed_bytes": 1764872,
+    "compressed_sha256": "f75a44b00939519bc4822a4343023aafd9a81c606c7f46cc2c4cd1a9cf073580"
+  },
+  "method": {
+    "selection": "For every pinned assigned location, bbox-index full-resolution level-1 physical land records, calculate each candidate ring vertex centroid, and ray-crossing test that point against all bbox-compatible assigned polygons, respecting current holes. Retain complete matched GSHHG records only.",
+    "interpretation": "Two distinct screens are reported: (1) source land-polygon centroid within a current assigned polygon; (2) each pinned source representative point lies within a GSHHG level-1 land polygon. Either point test is screening only; it does not establish whole-boundary agreement, component containment, island identity, named-land completeness, or settlement coverage. A no-hit does not prove omitted land. Physical source is independent of political ownership and current administrative status."
+  },
+  "per_location": {
+    "gb:COL:ADM2:7082276B10918286355": {
+      "name": "Neiva",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.2609244355146,
+        3.0043499999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B12261061715125": {
+      "name": "Cereté",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.82047524474652,
+        8.87805
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B12408702465478": {
+      "name": "Orito",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.91327757461252,
+        0.6835
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B1259376417396": {
+      "name": "Dosquebradas",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.67413391472869,
+        4.8513
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B12628358742837": {
+      "name": "Los Córdobas",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.33270381960762,
+        8.8232
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B12666092596275": {
+      "name": "Palestina",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.15738091389419,
+        1.67635
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B13648445071260": {
+      "name": "San Antero",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.79015545657015,
+        9.3586
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B1381167873192": {
+      "name": "El Águila",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.06150181451613,
+        4.95045
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B15347498266609": {
+      "name": "Puracé (Coconuco)",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.4672224103783,
+        2.2503
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B15762794727081": {
+      "name": "Tierralta",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.22278422874578,
+        7.84385
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B16171151514761": {
+      "name": "La Victoria",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.97598740077007,
+        4.4803999999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B16460113853729": {
+      "name": "Andalucía",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.16864449685535,
+        4.14215
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B17294841242383": {
+      "name": "Suárez",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.73732692121564,
+        2.9405
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B17617494286143": {
+      "name": "Teruel",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.75149985065711,
+        2.8318000000000003
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B17720170478465": {
+      "name": "Puerto Libertador",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.77564528681037,
+        7.6880500000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B1809548619611": {
+      "name": "Dagua",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.72630543828218,
+        3.6483
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B19709317443254": {
+      "name": "Bolívar",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.35238586502857,
+        4.3594
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B2042357516453": {
+      "name": "Paicol",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.71137510167992,
+        2.4061
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B21026196123050": {
+      "name": "Tello",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.07768593073594,
+        3.0303500000000003
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B22050163903058": {
+      "name": "Altamira",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.77423924180329,
+        2.08345
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B22277763183107": {
+      "name": "Pijao",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.6879525422767,
+        4.2996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B22377249652696": {
+      "name": "Timbío",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.72134062686345,
+        2.37975
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B22807037286061": {
+      "name": "Pueblo Rico",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.06922563139821,
+        5.28885
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B2298083414171": {
+      "name": "Piamonte",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.29658271028038,
+        1.2787000000000002
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B24911475844532": {
+      "name": "San Francisco",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.86980862177064,
+        1.1496
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B25468013916959": {
+      "name": "San Miguel (La Dorada)",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.9427296927664,
+        0.31015000000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B27401481263527": {
+      "name": "Yotoco",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.40308946808511,
+        3.8903
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B27593936754080": {
+      "name": "Nátaga",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.79414942188107,
+        2.58065
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B28031700236172": {
+      "name": "Quimbaya",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.80129180243702,
+        4.61135
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B28574289150765": {
+      "name": "Candelaria",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.39334827935222,
+        3.3777
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B29582947964512": {
+      "name": "Suaza",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.81596126373627,
+        1.87345
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B30491480162439": {
+      "name": "Montería",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.9790402138158,
+        8.61205
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B30849628494153": {
+      "name": "Florencia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -77.09371194878392,
+        1.6892
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B31327332190978": {
+      "name": "Palermo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.41071931166348,
+        2.9223
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B31723879079802": {
+      "name": "Aipe",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.29635725338491,
+        3.23785
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B32366816455434": {
+      "name": "San Pedro",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.20563306447718,
+        3.9702
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B32711967571175": {
+      "name": "La Cumbre",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.57933531073446,
+        3.71575
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B3276683190429": {
+      "name": "Puerto Escondido",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.17922682436635,
+        8.99215
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B33285563238152": {
+      "name": "Pradera",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.17140703843464,
+        3.4308
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B333930671770": {
+      "name": "Guapi",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -77.68429524709407,
+        2.4362000000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B33539636068872": {
+      "name": "López",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -77.26751795415959,
+        2.9619999999999997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 7,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B33798425293322": {
+      "name": "Riofrío",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.38367427607781,
+        4.1075
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B344609225912": {
+      "name": "El Tambo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -77.03730766871166,
+        2.5252
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B34643153596427": {
+      "name": "Jamundí",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.62002789495799,
+        3.2182000000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B34877429512170": {
+      "name": "Sahagún",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.45198914473684,
+        8.797049999999999
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B35662466924312": {
+      "name": "Purísima",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.73454894366198,
+        9.2896
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B36183297139579": {
+      "name": "San Bernardo Del Viento",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.99663974705169,
+        9.3284
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 2,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B36252942932690": {
+      "name": "Alcalá",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.79132757139743,
+        4.68615
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B37156056726077": {
+      "name": "Ulloa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.78500606961441,
+        4.71055
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B37195114642514": {
+      "name": "Salento",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.55693335138422,
+        4.5931
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B37197913893650": {
+      "name": "Cotorra",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.76020651850803,
+        9.062850000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B37421860048311": {
+      "name": "Yumbo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.51408544269418,
+        3.5936500000000002
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B37489805673697": {
+      "name": "Montenegro",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.82393465189875,
+        4.52215
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B37596185991621": {
+      "name": "Armenia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.73889959338095,
+        4.492900000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B37830397780712": {
+      "name": "Toro",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.07636497524751,
+        4.64015
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B37877063835041": {
+      "name": "Córdoba",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.65300916168698,
+        4.39325
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B3788770543565": {
+      "name": "Corinto",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.20015292897548,
+        3.1451000000000002
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B38703124782657": {
+      "name": "Villagarzón",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.78138873126997,
+        0.9208000000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B38814266492224": {
+      "name": "El Dovio",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.28460855235602,
+        4.562749999999999
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B40300003971845": {
+      "name": "Algeciras",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.2746559229221,
+        2.51445
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B40499260653390": {
+      "name": "Morales",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.85126457269487,
+        2.8415
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B42477107224042": {
+      "name": "Buenavista",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.74296140625,
+        4.3712
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B42533804398270": {
+      "name": "Puerto Asís",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.23010599599311,
+        0.44279999999999997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B42793488331490": {
+      "name": "Inza",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.10340731707316,
+        2.4885
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B43348198009946": {
+      "name": "Versalles",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.21692988487607,
+        4.61915
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B43653558961889": {
+      "name": "Mercaderes",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -77.16159986352358,
+        1.80815
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B45851614752586": {
+      "name": "San Carlos",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.69068666666666,
+        8.6859
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B46133695651434": {
+      "name": "Patía",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -77.01765788870607,
+        2.13115
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B4639527364844": {
+      "name": "Puerto Leguízamo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.25369389223445,
+        0.0806
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B46612550724020": {
+      "name": "El Cerrito",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.33699543948458,
+        3.68655
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B47350774570245": {
+      "name": "Argelia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -77.26494642857142,
+        2.32545
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B47374862925181": {
+      "name": "Guachené",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.39230951253232,
+        3.14715
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B47769001538338": {
+      "name": "Sucre",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.9135366270431,
+        2.0745500000000003
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B47892047719845": {
+      "name": "Buenos Aires",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.63308170973674,
+        3.0579
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B48600116890158": {
+      "name": "Ayapel",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.02899912368386,
+        8.281400000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B48757885087630": {
+      "name": "Marsella",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.75427544770045,
+        4.96205
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B48843599795866": {
+      "name": "Montelíbano",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.90219979755001,
+        7.7652
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B49685507148696": {
+      "name": "Páez",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.99172706611571,
+        2.7358000000000002
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B49686436836196": {
+      "name": "Palmira",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.22312728136882,
+        3.58215
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B50002192579952": {
+      "name": "La Argentina",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.01676012544803,
+        2.1858
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B51071963604741": {
+      "name": "Piendamó",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.55820885472212,
+        2.7499000000000002
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B51151260265899": {
+      "name": "Trujillo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.3362282722513,
+        4.239649999999999
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B512677824118": {
+      "name": "Yaguará",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.52210880597015,
+        2.6338999999999997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B51677864129735": {
+      "name": "Vijes",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.48993588032505,
+        3.7541
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B51797720548410": {
+      "name": "La Tebaida",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.82631222222223,
+        4.43685
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B53054479905694": {
+      "name": "Sevilla",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.8747104091653,
+        4.1577
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B53441696517759": {
+      "name": "La Sierra",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.8002562028399,
+        2.202
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B53672126014760": {
+      "name": "Bolívar",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.99479537037038,
+        1.8837000000000002
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B53955243236004": {
+      "name": "Oporapa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.04434122032866,
+        2.0591
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B54028982815343": {
+      "name": "Génova",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.74371406230134,
+        4.19325
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B54316712133185": {
+      "name": "Tuluá",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.03198348012731,
+        4.0367
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B54402931041417": {
+      "name": "Santander De Quilichao",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.50977182833948,
+        2.98785
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B54436910707179": {
+      "name": "Cajibío",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.7134025462963,
+        2.65195
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B54920381077672": {
+      "name": "Timbiquí",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -77.43314031862745,
+        2.6662999999999997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 3,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B55620946871412": {
+      "name": "Gigante",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.52673538851352,
+        2.3964499999999997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B55716898367144": {
+      "name": "Zarzal",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.04919166666667,
+        4.3612
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B5619967708975": {
+      "name": "Chinú",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.37676152152903,
+        9.027249999999999
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B56423369756647": {
+      "name": "Caldono",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.46298800182481,
+        2.81305
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B56557214099866": {
+      "name": "Pereira",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.78518610741911,
+        4.7826
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B56868740164332": {
+      "name": "Mocoa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.64708520541959,
+        1.1778499999999998
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B59383263331081": {
+      "name": "Silvia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.37481751589857,
+        2.6582999999999997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B59907465773306": {
+      "name": "Filandia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.66060498043292,
+        4.6682500000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B59987699383018": {
+      "name": "La Plata",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.98785802325581,
+        2.3363
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B60306197316687": {
+      "name": "Padilla",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.33742340561224,
+        3.1936
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B60614758896668": {
+      "name": "Hobo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.44924782522801,
+        2.56515
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B6069538576370": {
+      "name": "Santiago",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -77.01555563380282,
+        1.0916
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B60713931967074": {
+      "name": "Pitalito",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.09430833333332,
+        1.8285
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B61077651934720": {
+      "name": "Tesalia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.70464994570648,
+        2.54565
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B61573549340712": {
+      "name": "Villa Rica",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.46552836134454,
+        3.1769
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B61798378462298": {
+      "name": "Cali",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.58173333333333,
+        3.4096
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B62857285064431": {
+      "name": "Roldanillo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.1683429748062,
+        4.447649999999999
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B63113141901274": {
+      "name": "Agrado",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.71660026372558,
+        2.2558
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B64022238164064": {
+      "name": "Tuchin",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.54221847826086,
+        9.225750000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B64224569928745": {
+      "name": "Miranda",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.16591305419848,
+        3.2205500000000002
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B64544196905368": {
+      "name": "Puerto Caicedo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.4875167032967,
+        0.7406999999999999
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B64894766259605": {
+      "name": "Bugalagrande",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.09582007042253,
+        4.2048000000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B65287171655445": {
+      "name": "Santa Rosa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.58572024000253,
+        1.4717
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B65356767722018": {
+      "name": "Cartago",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.93303109932498,
+        4.7029499999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B65922719732159": {
+      "name": "Villavieja",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.12397591931409,
+        3.28365
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B66968724645536": {
+      "name": "Caicedonia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.8387991212527,
+        4.308199999999999
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B67113151062555": {
+      "name": "Valencia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.20573640350878,
+        8.1995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B67782051899776": {
+      "name": "Chimá",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.6555197327044,
+        9.10295
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B6796098252529": {
+      "name": "La Celia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.00065344802509,
+        4.9754000000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B6986127045268": {
+      "name": "Acevedo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.01404884580339,
+        1.7036
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B70785210683383": {
+      "name": "Obando",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.94059560439561,
+        4.604
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B70920947673933": {
+      "name": "Rosas",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.7547591108453,
+        2.2500999999999998
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B71281345129005": {
+      "name": "La Virginia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.8534051980198,
+        4.904
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B71793235558462": {
+      "name": "Saladoblanco",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.26901513157895,
+        2.1189999999999998
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B7209337263297": {
+      "name": "Balboa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.93787211538462,
+        4.9232
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B7280150646528": {
+      "name": "Guática",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.81458263403263,
+        5.3309999999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B72857503251060": {
+      "name": "Florida",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.1927433313837,
+        3.2958499999999997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B74381710029853": {
+      "name": "Guadalupe",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.70111774719305,
+        1.9753
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B74568314469162": {
+      "name": "Santa María",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.64102848948374,
+        2.9288
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B7472768394533": {
+      "name": "Pital",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.83765490385682,
+        2.2523999999999997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B75435633270321": {
+      "name": "Ansermanuevo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.05065634681583,
+        4.7877
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B75993550725955": {
+      "name": "Argelia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.1375423516651,
+        4.7185500000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B76225783159695": {
+      "name": "Isnos",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.3308710342501,
+        2.07025
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B76767712756641": {
+      "name": "Pueblo Nuevo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.38799387254902,
+        8.471250000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B77383139939829": {
+      "name": "San Andres De Sotavento",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.51339999999999,
+        9.132100000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B77686816472796": {
+      "name": "La Unión",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.1072122113503,
+        4.5332
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B78082705771395": {
+      "name": "Colombia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -74.69657704918033,
+        3.4654
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B79425124325602": {
+      "name": "Campoalegre",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.33104620098038,
+        2.63775
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B80590541322952": {
+      "name": "Planeta Rica",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.59933300211154,
+        8.301950000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B81179954496146": {
+      "name": "Quinchia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.71759020979022,
+        5.3391
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B81203589950086": {
+      "name": "San Pelayo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.90261794030437,
+        8.98535
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B81769369413646": {
+      "name": "Tarqui",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.86871839900714,
+        2.1246
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B82326475607220": {
+      "name": "Buenaventura",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.97920754364091,
+        3.67175
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 17,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B82675854286902": {
+      "name": "Canalete",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.25022205128205,
+        8.7146
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B82824229693572": {
+      "name": "Rivera",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.24919441470766,
+        2.78815
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B83235998403741": {
+      "name": "Santa Rosa De Cabal",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.53213712638856,
+        4.840450000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B83850714200687": {
+      "name": "San Sebastian",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.70683650306748,
+        1.8401
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B84035448775523": {
+      "name": "Jambaló",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.3332534776352,
+        2.8681
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B84090204325710": {
+      "name": "La Apartada",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.31481927480917,
+        8.040600000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B84273930819596": {
+      "name": "Moñitos",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.12335742307692,
+        9.201699999999999
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B84511387855625": {
+      "name": "Garzón",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.56234092261906,
+        2.16275
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B85477944676343": {
+      "name": "Puerto Guzmán",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.87921538461539,
+        0.75705
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B86132048215988": {
+      "name": "Circasia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.6601417673716,
+        4.61375
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B86170920101397": {
+      "name": "Sotará (Paispamba)",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.59777085755815,
+        2.21745
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B86237155674580": {
+      "name": "Ginebra",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.20079734411085,
+        3.7525500000000003
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B86437588749871": {
+      "name": "Popayán",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.55346375853712,
+        2.4484000000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B86469624898936": {
+      "name": "Puerto Tejada",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.41635181818182,
+        3.2723000000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B87047054998240": {
+      "name": "Sibundoy",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.91307203586499,
+        1.2357999999999998
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B87448620862857": {
+      "name": "Mistrató",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.96253510727561,
+        5.40405
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B8755035279913": {
+      "name": "Timaná",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.92693046494226,
+        1.9492
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B89105760254188": {
+      "name": "Buga",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.11574293580279,
+        3.8569
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B89146120642235": {
+      "name": "San José De Uré",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.53879043711235,
+        7.7688
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B89331867807141": {
+      "name": "La Vega",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.77750237741456,
+        2.059
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B90066028966732": {
+      "name": "Calarca",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.6443912782515,
+        4.4543
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B90107957997642": {
+      "name": "Cienaga De Oro",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.6035006501182,
+        8.8174
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B90578297769705": {
+      "name": "Lorica",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.8751203437733,
+        9.18345
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B90942286802218": {
+      "name": "Almaguer",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.83757016517856,
+        1.9111500000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B90998600886333": {
+      "name": "El Cairo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.22287662790697,
+        4.7593
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B91777379467178": {
+      "name": "Guacarí",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.30783218224789,
+        3.7763
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B91973001860083": {
+      "name": "Baraya",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -74.98554839848677,
+        3.12575
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B92483962355634": {
+      "name": "Belén De Umbría",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.8705581986028,
+        5.18845
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B93831290188836": {
+      "name": "Íquira",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.6612466875,
+        2.6637500000000003
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B94395141643556": {
+      "name": "Calima",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.64307649381631,
+        3.9570499999999997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B94822224819710": {
+      "name": "Apía",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.97262136824324,
+        5.13865
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B94855321058702": {
+      "name": "Totoró",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.35753304593237,
+        2.5008999999999997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B96393406171347": {
+      "name": "Buenavista",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.45500390772128,
+        8.1874
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B97277797661378": {
+      "name": "Momil",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.64483399122807,
+        9.25835
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B97476971281230": {
+      "name": "Valle Del Guamuez",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.87780822453398,
+        0.451
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B97721102897015": {
+      "name": "Restrepo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.52509608106169,
+        3.82005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B97741553625130": {
+      "name": "San Agustín",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.44971032359334,
+        1.929
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B98035381809124": {
+      "name": "Caloto",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.35730486563517,
+        3.05865
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B98056345530252": {
+      "name": "Toribío",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.208557327309,
+        2.9655
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B98098551259160": {
+      "name": "Colón",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -76.9656015898345,
+        1.218
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B98120491021397": {
+      "name": "Balboa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -77.20879918503215,
+        2.0753500000000003
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B98315935443": {
+      "name": "Elías",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.95608651061775,
+        2.00185
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:COL:ADM2:7082276B9908924507903": {
+      "name": "Santuario",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -75.94363216634544,
+        5.0215499999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        3
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    }
+  },
+  "matched_source_records": [
+    {
+      "gshhg_id": 3,
+      "land_polygon_centroid_hits": [],
+      "assigned_location_representative_points_inside_land_polygon": [
+        "gb:COL:ADM2:7082276B10918286355",
+        "gb:COL:ADM2:7082276B6986127045268",
+        "gb:COL:ADM2:7082276B63113141901274",
+        "gb:COL:ADM2:7082276B31723879079802",
+        "gb:COL:ADM2:7082276B40300003971845",
+        "gb:COL:ADM2:7082276B22050163903058",
+        "gb:COL:ADM2:7082276B91973001860083",
+        "gb:COL:ADM2:7082276B79425124325602",
+        "gb:COL:ADM2:7082276B78082705771395",
+        "gb:COL:ADM2:7082276B98315935443",
+        "gb:COL:ADM2:7082276B84511387855625",
+        "gb:COL:ADM2:7082276B55620946871412",
+        "gb:COL:ADM2:7082276B74381710029853",
+        "gb:COL:ADM2:7082276B93831290188836",
+        "gb:COL:ADM2:7082276B76225783159695",
+        "gb:COL:ADM2:7082276B50002192579952",
+        "gb:COL:ADM2:7082276B59987699383018",
+        "gb:COL:ADM2:7082276B27593936754080",
+        "gb:COL:ADM2:7082276B53955243236004",
+        "gb:COL:ADM2:7082276B2042357516453",
+        "gb:COL:ADM2:7082276B31327332190978",
+        "gb:COL:ADM2:7082276B12666092596275",
+        "gb:COL:ADM2:7082276B7472768394533",
+        "gb:COL:ADM2:7082276B60713931967074",
+        "gb:COL:ADM2:7082276B82824229693572",
+        "gb:COL:ADM2:7082276B71793235558462",
+        "gb:COL:ADM2:7082276B97741553625130",
+        "gb:COL:ADM2:7082276B74568314469162",
+        "gb:COL:ADM2:7082276B29582947964512",
+        "gb:COL:ADM2:7082276B81769369413646",
+        "gb:COL:ADM2:7082276B61077651934720",
+        "gb:COL:ADM2:7082276B21026196123050",
+        "gb:COL:ADM2:7082276B17617494286143",
+        "gb:COL:ADM2:7082276B8755035279913",
+        "gb:COL:ADM2:7082276B65922719732159",
+        "gb:COL:ADM2:7082276B512677824118",
+        "gb:COL:ADM2:7082276B86437588749871",
+        "gb:COL:ADM2:7082276B90942286802218",
+        "gb:COL:ADM2:7082276B47350774570245",
+        "gb:COL:ADM2:7082276B98120491021397",
+        "gb:COL:ADM2:7082276B53672126014760",
+        "gb:COL:ADM2:7082276B47892047719845",
+        "gb:COL:ADM2:7082276B54436910707179",
+        "gb:COL:ADM2:7082276B56423369756647",
+        "gb:COL:ADM2:7082276B98035381809124",
+        "gb:COL:ADM2:7082276B3788770543565",
+        "gb:COL:ADM2:7082276B344609225912",
+        "gb:COL:ADM2:7082276B30849628494153",
+        "gb:COL:ADM2:7082276B47374862925181",
+        "gb:COL:ADM2:7082276B42793488331490",
+        "gb:COL:ADM2:7082276B84035448775523",
+        "gb:COL:ADM2:7082276B53441696517759",
+        "gb:COL:ADM2:7082276B89331867807141",
+        "gb:COL:ADM2:7082276B43653558961889",
+        "gb:COL:ADM2:7082276B64224569928745",
+        "gb:COL:ADM2:7082276B40499260653390",
+        "gb:COL:ADM2:7082276B60306197316687",
+        "gb:COL:ADM2:7082276B49685507148696",
+        "gb:COL:ADM2:7082276B46133695651434",
+        "gb:COL:ADM2:7082276B2298083414171",
+        "gb:COL:ADM2:7082276B51071963604741",
+        "gb:COL:ADM2:7082276B86469624898936",
+        "gb:COL:ADM2:7082276B15347498266609",
+        "gb:COL:ADM2:7082276B70920947673933",
+        "gb:COL:ADM2:7082276B83850714200687",
+        "gb:COL:ADM2:7082276B54402931041417",
+        "gb:COL:ADM2:7082276B65287171655445",
+        "gb:COL:ADM2:7082276B59383263331081",
+        "gb:COL:ADM2:7082276B86170920101397",
+        "gb:COL:ADM2:7082276B17294841242383",
+        "gb:COL:ADM2:7082276B47769001538338",
+        "gb:COL:ADM2:7082276B22377249652696",
+        "gb:COL:ADM2:7082276B98056345530252",
+        "gb:COL:ADM2:7082276B94855321058702",
+        "gb:COL:ADM2:7082276B61573549340712",
+        "gb:COL:ADM2:7082276B30491480162439",
+        "gb:COL:ADM2:7082276B48600116890158",
+        "gb:COL:ADM2:7082276B96393406171347",
+        "gb:COL:ADM2:7082276B82675854286902",
+        "gb:COL:ADM2:7082276B12261061715125",
+        "gb:COL:ADM2:7082276B67782051899776",
+        "gb:COL:ADM2:7082276B5619967708975",
+        "gb:COL:ADM2:7082276B90107957997642",
+        "gb:COL:ADM2:7082276B37197913893650",
+        "gb:COL:ADM2:7082276B84090204325710",
+        "gb:COL:ADM2:7082276B90578297769705",
+        "gb:COL:ADM2:7082276B12628358742837",
+        "gb:COL:ADM2:7082276B97277797661378",
+        "gb:COL:ADM2:7082276B48843599795866",
+        "gb:COL:ADM2:7082276B84273930819596",
+        "gb:COL:ADM2:7082276B80590541322952",
+        "gb:COL:ADM2:7082276B76767712756641",
+        "gb:COL:ADM2:7082276B3276683190429",
+        "gb:COL:ADM2:7082276B35662466924312",
+        "gb:COL:ADM2:7082276B34877429512170",
+        "gb:COL:ADM2:7082276B77383139939829",
+        "gb:COL:ADM2:7082276B13648445071260",
+        "gb:COL:ADM2:7082276B36183297139579",
+        "gb:COL:ADM2:7082276B45851614752586",
+        "gb:COL:ADM2:7082276B89146120642235",
+        "gb:COL:ADM2:7082276B81203589950086",
+        "gb:COL:ADM2:7082276B64022238164064",
+        "gb:COL:ADM2:7082276B67113151062555",
+        "gb:COL:ADM2:7082276B86132048215988",
+        "gb:COL:ADM2:7082276B37877063835041",
+        "gb:COL:ADM2:7082276B59907465773306",
+        "gb:COL:ADM2:7082276B54028982815343",
+        "gb:COL:ADM2:7082276B51797720548410",
+        "gb:COL:ADM2:7082276B37489805673697",
+        "gb:COL:ADM2:7082276B22277763183107",
+        "gb:COL:ADM2:7082276B28031700236172",
+        "gb:COL:ADM2:7082276B37195114642514",
+        "gb:COL:ADM2:7082276B56557214099866",
+        "gb:COL:ADM2:7082276B94822224819710",
+        "gb:COL:ADM2:7082276B92483962355634",
+        "gb:COL:ADM2:7082276B7280150646528",
+        "gb:COL:ADM2:7082276B6796098252529",
+        "gb:COL:ADM2:7082276B71281345129005",
+        "gb:COL:ADM2:7082276B48757885087630",
+        "gb:COL:ADM2:7082276B22807037286061",
+        "gb:COL:ADM2:7082276B81179954496146",
+        "gb:COL:ADM2:7082276B83235998403741",
+        "gb:COL:ADM2:7082276B9908924507903",
+        "gb:COL:ADM2:7082276B37596185991621",
+        "gb:COL:ADM2:7082276B42477107224042",
+        "gb:COL:ADM2:7082276B90066028966732",
+        "gb:COL:ADM2:7082276B36252942932690",
+        "gb:COL:ADM2:7082276B16460113853729",
+        "gb:COL:ADM2:7082276B75435633270321",
+        "gb:COL:ADM2:7082276B75993550725955",
+        "gb:COL:ADM2:7082276B19709317443254",
+        "gb:COL:ADM2:7082276B89105760254188",
+        "gb:COL:ADM2:7082276B64894766259605",
+        "gb:COL:ADM2:7082276B66968724645536",
+        "gb:COL:ADM2:7082276B94395141643556",
+        "gb:COL:ADM2:7082276B61798378462298",
+        "gb:COL:ADM2:7082276B1381167873192",
+        "gb:COL:ADM2:7082276B90998600886333",
+        "gb:COL:ADM2:7082276B46612550724020",
+        "gb:COL:ADM2:7082276B38814266492224",
+        "gb:COL:ADM2:7082276B72857503251060",
+        "gb:COL:ADM2:7082276B86237155674580",
+        "gb:COL:ADM2:7082276B91777379467178",
+        "gb:COL:ADM2:7082276B34643153596427",
+        "gb:COL:ADM2:7082276B32711967571175",
+        "gb:COL:ADM2:7082276B77686816472796",
+        "gb:COL:ADM2:7082276B16171151514761",
+        "gb:COL:ADM2:7082276B70785210683383",
+        "gb:COL:ADM2:7082276B49686436836196",
+        "gb:COL:ADM2:7082276B33285563238152",
+        "gb:COL:ADM2:7082276B97721102897015",
+        "gb:COL:ADM2:7082276B33798425293322",
+        "gb:COL:ADM2:7082276B62857285064431",
+        "gb:COL:ADM2:7082276B32366816455434",
+        "gb:COL:ADM2:7082276B53054479905694",
+        "gb:COL:ADM2:7082276B37830397780712",
+        "gb:COL:ADM2:7082276B51151260265899",
+        "gb:COL:ADM2:7082276B54316712133185",
+        "gb:COL:ADM2:7082276B37156056726077",
+        "gb:COL:ADM2:7082276B43348198009946",
+        "gb:COL:ADM2:7082276B51677864129735",
+        "gb:COL:ADM2:7082276B27401481263527",
+        "gb:COL:ADM2:7082276B37421860048311",
+        "gb:COL:ADM2:7082276B55716898367144",
+        "gb:COL:ADM2:7082276B87448620862857",
+        "gb:COL:ADM2:7082276B17720170478465",
+        "gb:COL:ADM2:7082276B15762794727081",
+        "gb:COL:ADM2:7082276B1259376417396",
+        "gb:COL:ADM2:7082276B28574289150765",
+        "gb:COL:ADM2:7082276B65356767722018",
+        "gb:COL:ADM2:7082276B98098551259160",
+        "gb:COL:ADM2:7082276B64544196905368",
+        "gb:COL:ADM2:7082276B87047054998240",
+        "gb:COL:ADM2:7082276B6069538576370",
+        "gb:COL:ADM2:7082276B97476971281230",
+        "gb:COL:ADM2:7082276B25468013916959",
+        "gb:COL:ADM2:7082276B42533804398270",
+        "gb:COL:ADM2:7082276B4639527364844",
+        "gb:COL:ADM2:7082276B12408702465478",
+        "gb:COL:ADM2:7082276B85477944676343",
+        "gb:COL:ADM2:7082276B38703124782657",
+        "gb:COL:ADM2:7082276B24911475844532",
+        "gb:COL:ADM2:7082276B56868740164332",
+        "gb:COL:ADM2:7082276B7209337263297",
+        "gb:COL:ADM2:7082276B60614758896668",
+        "gb:COL:ADM2:7082276B333930671770",
+        "gb:COL:ADM2:7082276B54920381077672",
+        "gb:COL:ADM2:7082276B33539636068872",
+        "gb:COL:ADM2:7082276B1809548619611",
+        "gb:COL:ADM2:7082276B82326475607220"
+      ]
+    },
+    {
+      "gshhg_id": 1326,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B33539636068872"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1619,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2803,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3592,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B33539636068872"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4617,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4687,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 8862,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B54920381077672"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 9230,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 11169,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 19892,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 22398,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B36183297139579"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 23366,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 24288,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B54920381077672"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 29745,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B33539636068872"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 30706,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B54920381077672"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 32075,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 33387,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 35541,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 35884,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 39735,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B33539636068872"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 43315,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B33539636068872"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 43830,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B36183297139579"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 45752,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 45857,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B33539636068872"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 49671,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 49885,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 60708,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 60916,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B33539636068872"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 92032,
+      "land_polygon_centroid_hits": [
+        "gb:COL:ADM2:7082276B82326475607220"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    }
+  ],
+  "limitations": [
+    "2017 global shoreline compilation is not an authoritative national island gazetteer, administrative boundary, hydrographic inventory, or settlement source.",
+    "The centroid screen leaves coastlines, tiny islands, enclosed waters and geometry intersections unverified. A complete no-hit location can be an inland feature far from any separately centroided island polygon.",
+    "A candidate matched to an assigned polygon is not evidence of legal ownership or the correctness of its parent chain."
+  ]
+}
