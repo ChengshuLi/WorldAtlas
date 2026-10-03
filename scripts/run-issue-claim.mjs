@@ -2,6 +2,7 @@ import {renderWorkerResult} from './worker-result.mjs';
 import {assertResearchImportsReady} from './research-import-gate.mjs';
 import fs from 'node:fs';
 import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,workSpec,canonicalIssueNumber} from './issue-claim-contract.mjs';
+import {evidenceRequirement,loadEvidencePolicy} from './evidence-policy.mjs';
 
 const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8')),input=event.inputs??{},repo=process.env.GITHUB_REPOSITORY;
 if(process.env.GITHUB_REF!=='refs/heads/main'||!/^[-\w.]+\/[-\w.]+$/.test(repo??''))throw Error('Claim mutations run only from trusted main');
@@ -11,6 +12,7 @@ const api=githubAPI(process.env.GH_TOKEN),result={accepted:false,request_id:inpu
 try{
  const [issue,comments,prs]=await Promise.all([api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),linkedPulls(api,repo,number)]);
  const spec=input.action==='release'?null:workSpec(issue.body);
+ if(spec&&loadEvidencePolicy().mode==='enforce-new')evidenceRequirement(issue,spec,undefined,input.branch);
  const geographyGate=spec?.mode==='content'?JSON.parse(fs.readFileSync('data/research-geography-gate.json','utf8')):null;
  const ids=new Set(spec?.depends_on??[]);
  if(spec?.mode==='content'){

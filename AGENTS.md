@@ -30,3 +30,7 @@ The primary handoff branch is `main` in `ChengshuLi/WorldAtlas`; `work` retains 
 - Do not report checks as passing unless you ran them.
 - `npm ci` and `npm run dev` run the committed prepared atlas on Node 24. Python preparation dependencies are pinned in `requirements.txt`.
 - `docs/STRUCTURAL_VALIDATION.md` and `scripts/validate-structure.mjs` define contract, scientific, publication, browser and content-only verification phases. Match prepared products, grid, release and build before publication tests; source checks do not establish semantic or historical completion.
+
+## Evidence and independent review
+
+Follow `docs/PREMERGE_EVIDENCE_REVIEW.md` and the authoritative `.github/evidence-policy.json`. New work after activation declares exact subjects/pins and its owned manifest in the issue contract; legacy scopes remain preserved. Prepare versioned whole-file evidence, immutable scientific helper results and honest source/publication limits. Request a distinct worker's substantive review tied to the exact PR head; never self-review under a second worker ID. The queue rechecks evidence and review; green CI alone does not approve geography or authorize imports.
