@@ -21,7 +21,7 @@
       "Smithsonian Open Access EDAN API, NMAfA unit; five catalog records to be selected"
     ]
   },
-  "updated_at_utc": "2026-10-03T08:29:19+00:00",
+  "updated_at_utc": "2026-10-03T08:30:52+00:00",
   "geographic_release": null,
   "input_paths": [
     "research/campaigns/smithsonian-benin-media-20261003-1e2b2c5a1345/source-evaluation.md",
@@ -42,8 +42,8 @@
     "Two separate ceremonial-sword records have overlapping descriptions and shared donor but are not asserted to be linked."
   ],
   "blockers": [],
-  "next_action": "Validate campaign JSON and owned-path scope, post evidence to issue #69, submit the single source-evaluation PR, then follow the serialized merge queue and release the claim after verified integration.",
-  "pull_request": null,
+  "next_action": "Wait for required checks, verify current main/claim/head, then submit PR #552 through the serialized merge queue and verify its Merge result comment before releasing claim 69.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/552",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
