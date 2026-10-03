@@ -1,0 +1,24 @@
+{
+  "source": {
+    "title": "GSHHG full-resolution binary, release 2.3.7",
+    "release_date": "2017-06-15",
+    "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+    "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+    "member": "gshhs_f.b",
+    "member_bytes": 95809336,
+    "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "license": "LGPLv3 or later; license retained at data/macro-improvements/macro-coverage-oceania/gshhg-LGPL.txt",
+    "restore": "Download the pinned archive, verify archive SHA-256, extract gshhs_f.b and verify member SHA-256."
+  },
+  "scope_count": 211,
+  "source_level1_record_count": 179832,
+  "source_total_record_count": 188612,
+  "retained": {
+    "path": "sources/gshhg-colombia-land-candidates.bin.gz",
+    "record_count": 72,
+    "uncompressed_bytes": 2735984,
+    "uncompressed_sha256": "220e587ac2ed3205ae5913689b890d9045edb85de064b438f1af6b10c080a18a",
+    "compressed_bytes": 1774469,
+    "compressed_sha256": "68514b5d418697c65a386050cfb5839ee7836d3f1d2e521bcd635c895e9252d8"
+  }
+}

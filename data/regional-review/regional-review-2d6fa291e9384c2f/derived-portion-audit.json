@@ -1,0 +1,515 @@
+{
+  "method": "GeoJSON boundaries reprojected by ogr2ogr to EPSG:6933 equal-area projection; source-expected geometry is ST_Intersection of pinned GeoBolivia-derived 2015 BOL ADM2 province and matching RESOLVE ECO_ID polygon. Current geometry is the exact pinned Atlas fragment. Areas and symmetric differences are planar equal-area estimates. OGR ST_MakeValid is applied only in temporary overlay for raw invalid geometries; original retained features are preserved and input validity is recorded per fragment. Values do not establish administrative semantic suitability or official boundary precision.",
+  "ogr2ogr_version": "GDAL 3.10.3, released 2025/04/01",
+  "source_hashes": {
+    "bol_adm2_raw_sha256": "33a11ff32d935ad24f2e412a09ff383cbab2c63daff6b21de905dd3953ccac8c",
+    "resolve_raw_sha256": "295be58007007f355f0a4a2c56cc64961c54390452e56ef82f808c27d905e10d"
+  },
+  "fragment_count": 9,
+  "fragments": [
+    {
+      "location_id": "atlas:physical:13555fd3cb230149ca55",
+      "current_name": "Cordillera · Pantanal",
+      "admin_source_id": "80513517B19404624083023",
+      "admin_source_name": "Cordillera",
+      "ecoregion_source_id": "584",
+      "ecoregion_name": "Pantanal",
+      "expected_intersection_area_km2_equal_area": 318.128345790518,
+      "current_area_km2_equal_area": 322.504533078043,
+      "overlap_area_km2_equal_area": 314.104357224264,
+      "expected_area_covered_by_current_fraction": 0.9873510530592463,
+      "current_area_inside_expected_fraction": 0.9739533092028004,
+      "symmetric_difference_area_km2_equal_area": 12.42416442003298,
+      "raw_geometry_validity": {
+        "source_province": true,
+        "source_ecoregion": true,
+        "current_atlas_fragment": true
+      },
+      "overlay_repair": "ST_MakeValid used only in temporary overlay because some original ecoregion/current inputs are invalid; original bytes remain untouched."
+    },
+    {
+      "location_id": "atlas:physical:3b59e885effd69f1222e",
+      "current_name": "Velasco · Chiquitano dry forests",
+      "admin_source_id": "80513517B10383084964738",
+      "admin_source_name": "Velasco",
+      "ecoregion_source_id": "529",
+      "ecoregion_name": "Chiquitano dry forests",
+      "expected_intersection_area_km2_equal_area": 50115.450286355,
+      "current_area_km2_equal_area": 50121.3517557148,
+      "overlap_area_km2_equal_area": 49957.6234452688,
+      "expected_area_covered_by_current_fraction": 0.9968507348495446,
+      "current_area_inside_expected_fraction": 0.9967333620361241,
+      "symmetric_difference_area_km2_equal_area": 321.5551515322004,
+      "raw_geometry_validity": {
+        "source_province": true,
+        "source_ecoregion": false,
+        "current_atlas_fragment": false
+      },
+      "overlay_repair": "ST_MakeValid used only in temporary overlay because some original ecoregion/current inputs are invalid; original bytes remain untouched."
+    },
+    {
+      "location_id": "atlas:physical:75e371c0a1abf3e8ed1c",
+      "current_name": "Cordillera · Dry Chaco",
+      "admin_source_id": "80513517B19404624083023",
+      "admin_source_name": "Cordillera",
+      "ecoregion_source_id": "569",
+      "ecoregion_name": "Dry Chaco",
+      "expected_intersection_area_km2_equal_area": 81260.5493598238,
+      "current_area_km2_equal_area": 80954.6125539603,
+      "overlap_area_km2_equal_area": 80897.3227811739,
+      "expected_area_covered_by_current_fraction": 0.9955300993961841,
+      "current_area_inside_expected_fraction": 0.999292322315196,
+      "symmetric_difference_area_km2_equal_area": 420.5163514362939,
+      "raw_geometry_validity": {
+        "source_province": true,
+        "source_ecoregion": true,
+        "current_atlas_fragment": true
+      },
+      "overlay_repair": "ST_MakeValid used only in temporary overlay because some original ecoregion/current inputs are invalid; original bytes remain untouched."
+    },
+    {
+      "location_id": "atlas:physical:b777739e348ded01aa2a",
+      "current_name": "Velasco · Cerrado",
+      "admin_source_id": "80513517B10383084964738",
+      "admin_source_name": "Velasco",
+      "ecoregion_source_id": "567",
+      "ecoregion_name": "Cerrado",
+      "expected_intersection_area_km2_equal_area": 4944.93669211088,
+      "current_area_km2_equal_area": 4933.82745264259,
+      "overlap_area_km2_equal_area": 4886.31389921966,
+      "expected_area_covered_by_current_fraction": 0.9881448850528771,
+      "current_area_inside_expected_fraction": 0.9903698388565491,
+      "symmetric_difference_area_km2_equal_area": 106.1363463141497,
+      "raw_geometry_validity": {
+        "source_province": true,
+        "source_ecoregion": false,
+        "current_atlas_fragment": false
+      },
+      "overlay_repair": "ST_MakeValid used only in temporary overlay because some original ecoregion/current inputs are invalid; original bytes remain untouched."
+    },
+    {
+      "location_id": "atlas:physical:c76d054c56a021341333",
+      "current_name": "Velasco · Madeira-Tapajós moist forests",
+      "admin_source_id": "80513517B10383084964738",
+      "admin_source_name": "Velasco",
+      "ecoregion_source_id": "476",
+      "ecoregion_name": "Madeira-Tapajós moist forests",
+      "expected_intersection_area_km2_equal_area": 6019.28893157629,
+      "current_area_km2_equal_area": 6000.93441109907,
+      "overlap_area_km2_equal_area": 5971.40097966081,
+      "expected_area_covered_by_current_fraction": 0.9920442509971124,
+      "current_area_inside_expected_fraction": 0.9950785278733199,
+      "symmetric_difference_area_km2_equal_area": 77.42138335373966,
+      "raw_geometry_validity": {
+        "source_province": true,
+        "source_ecoregion": false,
+        "current_atlas_fragment": true
+      },
+      "overlay_repair": "ST_MakeValid used only in temporary overlay because some original ecoregion/current inputs are invalid; original bytes remain untouched."
+    },
+    {
+      "location_id": "atlas:physical:d0122fb389f7245bd5e8",
+      "current_name": "Cordillera · Chiquitano dry forests",
+      "admin_source_id": "80513517B19404624083023",
+      "admin_source_name": "Cordillera",
+      "ecoregion_source_id": "529",
+      "ecoregion_name": "Chiquitano dry forests",
+      "expected_intersection_area_km2_equal_area": 806.281573672593,
+      "current_area_km2_equal_area": 811.857926447801,
+      "overlap_area_km2_equal_area": 804.912329693898,
+      "expected_area_covered_by_current_fraction": 0.9983017793989037,
+      "current_area_inside_expected_fraction": 0.9914448125372222,
+      "symmetric_difference_area_km2_equal_area": 8.314840732598213,
+      "raw_geometry_validity": {
+        "source_province": true,
+        "source_ecoregion": false,
+        "current_atlas_fragment": true
+      },
+      "overlay_repair": "ST_MakeValid used only in temporary overlay because some original ecoregion/current inputs are invalid; original bytes remain untouched."
+    },
+    {
+      "location_id": "atlas:physical:d66136b1837cb5240030",
+      "current_name": "Cordillera · Bolivian montane dry forests",
+      "admin_source_id": "80513517B19404624083023",
+      "admin_source_name": "Cordillera",
+      "ecoregion_source_id": "523",
+      "ecoregion_name": "Bolivian montane dry forests",
+      "expected_intersection_area_km2_equal_area": 50.6642653167487,
+      "current_area_km2_equal_area": 48.2926616116505,
+      "overlap_area_km2_equal_area": 47.2696415231704,
+      "expected_area_covered_by_current_fraction": 0.9329976705996742,
+      "current_area_inside_expected_fraction": 0.9788162413431092,
+      "symmetric_difference_area_km2_equal_area": 4.4176438820584,
+      "raw_geometry_validity": {
+        "source_province": true,
+        "source_ecoregion": true,
+        "current_atlas_fragment": true
+      },
+      "overlay_repair": "ST_MakeValid used only in temporary overlay because some original ecoregion/current inputs are invalid; original bytes remain untouched."
+    },
+    {
+      "location_id": "atlas:physical:e1658818a26c4d0055fa",
+      "current_name": "Velasco · Pantanal",
+      "admin_source_id": "80513517B10383084964738",
+      "admin_source_name": "Velasco",
+      "ecoregion_source_id": "584",
+      "ecoregion_name": "Pantanal",
+      "expected_intersection_area_km2_equal_area": 7648.17464576684,
+      "current_area_km2_equal_area": 7560.00659289243,
+      "overlap_area_km2_equal_area": 7515.95965548253,
+      "expected_area_covered_by_current_fraction": 0.9827128698796792,
+      "current_area_inside_expected_fraction": 0.994173690608774,
+      "symmetric_difference_area_km2_equal_area": 176.26192769420777,
+      "raw_geometry_validity": {
+        "source_province": true,
+        "source_ecoregion": true,
+        "current_atlas_fragment": false
+      },
+      "overlay_repair": "ST_MakeValid used only in temporary overlay because some original ecoregion/current inputs are invalid; original bytes remain untouched."
+    },
+    {
+      "location_id": "atlas:physical:f24b672de863caf54859",
+      "current_name": "Cordillera · Southern Andean Yungas",
+      "admin_source_id": "80513517B19404624083023",
+      "admin_source_name": "Cordillera",
+      "ecoregion_source_id": "504",
+      "ecoregion_name": "Southern Andean Yungas",
+      "expected_intersection_area_km2_equal_area": 1035.2374375868,
+      "current_area_km2_equal_area": 1030.36766079176,
+      "overlap_area_km2_equal_area": 1013.63288691996,
+      "expected_area_covered_by_current_fraction": 0.979130825564808,
+      "current_area_inside_expected_fraction": 0.9837584441858932,
+      "symmetric_difference_area_km2_equal_area": 38.33932453863986,
+      "raw_geometry_validity": {
+        "source_province": true,
+        "source_ecoregion": true,
+        "current_atlas_fragment": true
+      },
+      "overlay_repair": "ST_MakeValid used only in temporary overlay because some original ecoregion/current inputs are invalid; original bytes remain untouched."
+    }
+  ],
+  "parent_unions": [
+    {
+      "admin_source_id": "80513517B19404624083023",
+      "admin_source_name": "Cordillera",
+      "portion_count": 5,
+      "metrics_equal_area_km2": {
+        "source_admin_area": 83470.8609821906,
+        "source_admin_area_covered_by_selected_ecoregions": 83470.8609821907,
+        "admin_vs_selected_ecoregion_union_symmetric_difference": 7.9967034736228e-12,
+        "current_portion_union_area": 83167.635335173,
+        "source_admin_vs_current_portion_union_symmetric_difference": 393.562620590245
+      }
+    },
+    {
+      "admin_source_id": "80513517B10383084964738",
+      "admin_source_name": "Velasco",
+      "portion_count": 4,
+      "metrics_equal_area_km2": {
+        "source_admin_area": 68727.8505558089,
+        "source_admin_area_covered_by_selected_ecoregions": 68727.8505558088,
+        "admin_vs_selected_ecoregion_union_symmetric_difference": 4.91395269186512e-12,
+        "current_portion_union_area": 68616.11990919,
+        "source_admin_vs_current_portion_union_symmetric_difference": 200.774033037763
+      }
+    }
+  ],
+  "fragment_pair_count": 36,
+  "source_expected_neighbor_pair_count": 9,
+  "current_exact_neighbor_pair_count": 9,
+  "neighbor_pair_graph_differences": {
+    "expected_missing_current": [],
+    "current_missing_expected": []
+  },
+  "fragment_pairs": [
+    {
+      "left": "atlas:physical:13555fd3cb230149ca55",
+      "right": "atlas:physical:3b59e885effd69f1222e",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:13555fd3cb230149ca55",
+      "right": "atlas:physical:75e371c0a1abf3e8ed1c",
+      "expected_source_intersection_edge_m": 75678.2539043376,
+      "current_exact_edge_m": 72105.8795815528,
+      "expected_neighbor": true,
+      "current_exact_neighbor": true
+    },
+    {
+      "left": "atlas:physical:13555fd3cb230149ca55",
+      "right": "atlas:physical:b777739e348ded01aa2a",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:13555fd3cb230149ca55",
+      "right": "atlas:physical:c76d054c56a021341333",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:13555fd3cb230149ca55",
+      "right": "atlas:physical:d0122fb389f7245bd5e8",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:13555fd3cb230149ca55",
+      "right": "atlas:physical:d66136b1837cb5240030",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:13555fd3cb230149ca55",
+      "right": "atlas:physical:e1658818a26c4d0055fa",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:13555fd3cb230149ca55",
+      "right": "atlas:physical:f24b672de863caf54859",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:3b59e885effd69f1222e",
+      "right": "atlas:physical:75e371c0a1abf3e8ed1c",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:3b59e885effd69f1222e",
+      "right": "atlas:physical:b777739e348ded01aa2a",
+      "expected_source_intersection_edge_m": 747164.906179053,
+      "current_exact_edge_m": 671977.305520365,
+      "expected_neighbor": true,
+      "current_exact_neighbor": true
+    },
+    {
+      "left": "atlas:physical:3b59e885effd69f1222e",
+      "right": "atlas:physical:c76d054c56a021341333",
+      "expected_source_intersection_edge_m": 366982.807068242,
+      "current_exact_edge_m": 353059.9585306,
+      "expected_neighbor": true,
+      "current_exact_neighbor": true
+    },
+    {
+      "left": "atlas:physical:3b59e885effd69f1222e",
+      "right": "atlas:physical:d0122fb389f7245bd5e8",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:3b59e885effd69f1222e",
+      "right": "atlas:physical:d66136b1837cb5240030",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:3b59e885effd69f1222e",
+      "right": "atlas:physical:e1658818a26c4d0055fa",
+      "expected_source_intersection_edge_m": 839491.156756628,
+      "current_exact_edge_m": 796069.612848424,
+      "expected_neighbor": true,
+      "current_exact_neighbor": true
+    },
+    {
+      "left": "atlas:physical:3b59e885effd69f1222e",
+      "right": "atlas:physical:f24b672de863caf54859",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:75e371c0a1abf3e8ed1c",
+      "right": "atlas:physical:b777739e348ded01aa2a",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:75e371c0a1abf3e8ed1c",
+      "right": "atlas:physical:c76d054c56a021341333",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:75e371c0a1abf3e8ed1c",
+      "right": "atlas:physical:d0122fb389f7245bd5e8",
+      "expected_source_intersection_edge_m": 73000.8233378783,
+      "current_exact_edge_m": 68032.1330750268,
+      "expected_neighbor": true,
+      "current_exact_neighbor": true
+    },
+    {
+      "left": "atlas:physical:75e371c0a1abf3e8ed1c",
+      "right": "atlas:physical:d66136b1837cb5240030",
+      "expected_source_intersection_edge_m": 26995.768923517,
+      "current_exact_edge_m": 25380.2357533215,
+      "expected_neighbor": true,
+      "current_exact_neighbor": true
+    },
+    {
+      "left": "atlas:physical:75e371c0a1abf3e8ed1c",
+      "right": "atlas:physical:e1658818a26c4d0055fa",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:75e371c0a1abf3e8ed1c",
+      "right": "atlas:physical:f24b672de863caf54859",
+      "expected_source_intersection_edge_m": 227387.94816774,
+      "current_exact_edge_m": 212004.387073464,
+      "expected_neighbor": true,
+      "current_exact_neighbor": true
+    },
+    {
+      "left": "atlas:physical:b777739e348ded01aa2a",
+      "right": "atlas:physical:c76d054c56a021341333",
+      "expected_source_intersection_edge_m": 142048.694572167,
+      "current_exact_edge_m": 126839.326655943,
+      "expected_neighbor": true,
+      "current_exact_neighbor": true
+    },
+    {
+      "left": "atlas:physical:b777739e348ded01aa2a",
+      "right": "atlas:physical:d0122fb389f7245bd5e8",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:b777739e348ded01aa2a",
+      "right": "atlas:physical:d66136b1837cb5240030",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:b777739e348ded01aa2a",
+      "right": "atlas:physical:e1658818a26c4d0055fa",
+      "expected_source_intersection_edge_m": 15523.1550412534,
+      "current_exact_edge_m": 7036.22759632729,
+      "expected_neighbor": true,
+      "current_exact_neighbor": true
+    },
+    {
+      "left": "atlas:physical:b777739e348ded01aa2a",
+      "right": "atlas:physical:f24b672de863caf54859",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:c76d054c56a021341333",
+      "right": "atlas:physical:d0122fb389f7245bd5e8",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:c76d054c56a021341333",
+      "right": "atlas:physical:d66136b1837cb5240030",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:c76d054c56a021341333",
+      "right": "atlas:physical:e1658818a26c4d0055fa",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:c76d054c56a021341333",
+      "right": "atlas:physical:f24b672de863caf54859",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:d0122fb389f7245bd5e8",
+      "right": "atlas:physical:d66136b1837cb5240030",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:d0122fb389f7245bd5e8",
+      "right": "atlas:physical:e1658818a26c4d0055fa",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:d0122fb389f7245bd5e8",
+      "right": "atlas:physical:f24b672de863caf54859",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:d66136b1837cb5240030",
+      "right": "atlas:physical:e1658818a26c4d0055fa",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:d66136b1837cb5240030",
+      "right": "atlas:physical:f24b672de863caf54859",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    },
+    {
+      "left": "atlas:physical:e1658818a26c4d0055fa",
+      "right": "atlas:physical:f24b672de863caf54859",
+      "expected_source_intersection_edge_m": 0.0,
+      "current_exact_edge_m": 0.0,
+      "expected_neighbor": false,
+      "current_exact_neighbor": false
+    }
+  ],
+  "interpretation": "The overlay tests whether the nine shared location geometries reproduce the two complete administrative predecessor provinces and their natural ecoregion subdivisions. A close fit would support geometry derivation only; it cannot promote ecozones or province fragments to an administrative tier."
+}

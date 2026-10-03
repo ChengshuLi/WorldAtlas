@@ -1,0 +1,163 @@
+{
+  "issue": 490,
+  "snapshot_utc": "2026-10-03",
+  "sources": [
+    {
+      "id": "geoboundaries-BOL-ADM2-2015",
+      "title": "geoBoundaries gbOpen Bolivia ADM2",
+      "publisher_source_declared": "GeoBolivia, described by geoBoundaries as derived from ADM3 layer",
+      "boundary_vintage": "2015",
+      "source_update_date": "Thu Jan 19 07:31:04 2023",
+      "build_date": "Dec 12, 2023",
+      "admin_role": "Province, as named in pinned issue metadata; shapeType ADM2. Canonical role metadata is blank.",
+      "unit_count": 110,
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/BOL/ADM2/geoBoundaries-BOL-ADM2.geojson",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/BOL/ADM2/geoBoundaries-BOL-ADM2-metaData.json",
+      "source_record_url": "https://geo.gob.bo/geonetwork/srv/spa/catalog.search#/metadata/aeeb85a9-23df-48d4-a4e5-dd19e8b206db",
+      "license": "Public Domain; Public Domain; \"free use and access to information\"",
+      "retained_metadata": {
+        "path": "sources/geoboundaries-BOL-ADM2-metadata.json",
+        "bytes": 961,
+        "sha256": "c2812d930bdd2aa54ed0fea4d5917156e8fa612fe411442cba90691b5b9e5e94"
+      },
+      "retained_data": {
+        "path": "sources/geoboundaries-BOL-ADM2-2015.geojson.gz",
+        "compressed_bytes": 8035896,
+        "compressed_sha256": "1df8ea802edec3cfe578bb3503437cee969fd8fbc785116ce84439b9a2bd6f96",
+        "uncompressed_bytes": 22473600,
+        "uncompressed_sha256": "33a11ff32d935ad24f2e412a09ff383cbab2c63daff6b21de905dd3953ccac8c"
+      },
+      "access_note": "The official GeoBolivia catalog record endpoint returned HTTP 403 in this run. Retained geoBoundaries metadata identifies the official source, vintage, public-domain terms, declared 110 ADM2 units and 2023 build/update. Do not treat the unverified catalog as an independent row-level crosswalk.",
+      "restoration": "Restore the pinned canonical URL and verify the raw SHA-256. Query GeoBolivia catalog record when reachable for original method/attribution and version."
+    },
+    {
+      "id": "geoboundaries-BOL-ADM3-2015",
+      "title": "geoBoundaries gbOpen Bolivia ADM3",
+      "publisher_source_declared": "GeoBolivia",
+      "boundary_vintage": "2015",
+      "source_update_date": "Thu Jan 19 07:31:04 2023",
+      "build_date": "Dec 12, 2023",
+      "admin_role": "Municipality candidate, source metadata ADM3; use as hierarchy context only.",
+      "unit_count": 339,
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/BOL/ADM3/geoBoundaries-BOL-ADM3.geojson",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/BOL/ADM3/geoBoundaries-BOL-ADM3-metaData.json",
+      "license": "Public Domain; Public Domain; \"free use and access to information\"",
+      "retained_metadata": {
+        "path": "sources/geoboundaries-BOL-ADM3-metadata.json",
+        "bytes": 936,
+        "sha256": "bd92e404f4878a684e32ac995607c730b60806dd9e6c01dafc2ebe90f11452f9"
+      },
+      "retained_data": {
+        "path": "sources/geoboundaries-BOL-ADM3-2015.geojson.gz",
+        "compressed_bytes": 11866872,
+        "compressed_sha256": "4ea84d52f24aaabcc984ac0836749f7107a12299da3c6fa52a503c3108f5bb17",
+        "uncompressed_bytes": 33234141,
+        "uncompressed_sha256": "35bf9e07686f94dddb7d9c592aed36c8d981bafa91df12ddd7295142cbdc6aa2"
+      },
+      "restoration": "Download pinned media URL, verify raw SHA-256 and deterministically gzip. Source-wide count 339; source does not provide row-level parent field."
+    },
+    {
+      "id": "resolve-ecoregions-2017",
+      "title": "RESOLVE Ecoregions and Biomes",
+      "publisher": " RESOLVE, Esri",
+      "item_url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+      "feature_service_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer",
+      "layer_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0",
+      "source_vintage": "2017",
+      "layer_data_last_edit_utc": "2022-01-27T07:53:44.237Z",
+      "item_created_utc": "2021-06-03T00:37:51Z",
+      "item_modified_utc": "2026-05-28T22:41:52Z",
+      "license": "CC BY 4.0, as declared both in ArcGIS item licenseInfo and the feature-level LICENSE field",
+      "feature_set": "Seven named Bolivian-intersecting ecoregions selected by ECO_ID values in the current feature source mapping. REST query returns original full global ecoregion polygons, not clipped province shapes.",
+      "item_metadata": {
+        "path": "sources/resolve-arcgis-item-metadata.json",
+        "bytes": 8638,
+        "sha256": "5ac94f88d5b6d75e7e5619a05fc0cdcce803906004fbd7648f60cd9dfd3a8b85"
+      },
+      "service_metadata": {
+        "path": "sources/resolve-feature-service-metadata.json",
+        "bytes": 3399,
+        "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15"
+      },
+      "layer_metadata": {
+        "path": "sources/resolve-layer0-metadata.json",
+        "bytes": 25682,
+        "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3"
+      },
+      "retained_features": {
+        "path": "sources/resolve-bolivia-ecoregions-7.geojson.gz",
+        "compressed_bytes": 494189,
+        "compressed_sha256": "1beba7fa4d223cc776702e5b85d342234d1992016184d8c7fce4e05663e563ae",
+        "uncompressed_bytes": 1188735,
+        "uncompressed_sha256": "295be58007007f355f0a4a2c56cc64961c54390452e56ef82f808c27d905e10d"
+      },
+      "query": "FeatureServer/0/query; exact where ECO_NAME IN (...) list and outFields FID,ECO_NAME,BIOME_NAME,REALM,ECO_BIOME_,NNH,ECO_ID,LICENSE; returnGeometry=true,outSR=4326,f=geojson. Exact URL in query receipt.",
+      "source_suitability": "Explicitly ecological: ArcGIS item says ecoregions use natural rather than political boundaries. Suitable to identify physical ecoregions, not administrative provinces or sovereign ownership.",
+      "restoration": "Run the retained REST query or export from the pinned layer; retain original query response and check CC BY attribution."
+    },
+    {
+      "id": "geoboundaries-COL-ADM2-2020",
+      "title": "geoBoundaries gbOpen Colombia ADM2",
+      "publisher_source_declared": "DANE, via geoBoundaries metadata",
+      "boundary_vintage": "2020",
+      "source_update_date": "2023-01-19",
+      "build_date": "2023-12-12",
+      "admin_role": "Municipality (issue metadata; each assigned item matches unique original_id and name).",
+      "license": "CC BY 4.0, declared in source metadata",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM2/geoBoundaries-COL-ADM2.geojson",
+      "retained_in_merged_packet": "../regional-review-58ad57d566ac2b50/sources/geoboundaries-COL-ADM2-2020.geojson.gz (issue #491)",
+      "compressed_bytes": 74845471,
+      "compressed_sha256": "586b057e43ca97d608148d5f3b3067a25bb468a94a7cac6d3c1c2ffb8eb20e3d",
+      "raw_bytes": 210605856,
+      "raw_sha256": "fe715854fc3383d2fd39e8692f3df0c60bd12208cb2cd36ef1ec2220ea8972fe",
+      "metadata_sha256": "89c779be4b254a019a46f4c37d7ae24dcf41ff48b6d805d8cc9aceadef8165ff",
+      "restoration": "Reuse the byte-verified retained copy in merged issue #491 packet or download pinned URL; verify both compressed and raw hashes."
+    },
+    {
+      "id": "dane-mgn-2024-and-centros-poblados-2013i",
+      "title": "DANE current DIVIPOLA MGN 2024 and Centros Poblados DIVIPOLA 2013I",
+      "source_urls": [
+        "https://www.arcgis.com/home/item.html?id=d39c73ca6ece41e3a27f2ab946e600b4",
+        "https://www.arcgis.com/home/item.html?id=cfee697b589343b7ad69bd0a702622c9"
+      ],
+      "service_urls": [
+        "https://portalgis.dane.gov.co/mparcgis/rest/services/Divipola/Serv_DIVIPOLA_MGN_2024/FeatureServer",
+        "https://portalgis.dane.gov.co/mparcgis/rest/services/Divipola/Serv_PuntosCentrosPoblados2013I/MapServer"
+      ],
+      "record": "Item metadata bytes/hashes and access failures retained in issue #491 packet; direct service queries returned a network-edge HTML block instead of rows, layer licenses blank. No row-level current crosswalk or settlement completeness claims made here.",
+      "follow_up": "This issue needs an exact 211-ID bounded restoration child; #587 covers only #491 exact 194-ID scope."
+    },
+    {
+      "id": "gshhg-2.3.7-global-physical-land",
+      "title": "Global Self-consistent Hierarchical High-resolution Geography, full-resolution binary release 2.3.7",
+      "release_date": "2017-06-15",
+      "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+      "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+      "archive_bytes": 118617033,
+      "member": "gshhs_f.b",
+      "member_bytes": 95809336,
+      "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+      "license": "LGPLv3 or later; full license retained in data/macro-improvements/macro-coverage-oceania/gshhg-LGPL.txt",
+      "limits": "Physical polygon point/centroid screens only; no administrative role, exact boundary, named-island, hydrography or settlement certification. Restore full archive and verify archive/member hashes; retain only complete relevant records.",
+      "scope_screen": {
+        "assigned_locations": 211,
+        "level1_records": 179832,
+        "total_records": 188612,
+        "representative_points_on_land": 210,
+        "representative_points_outside_land": 1,
+        "location_centroid_hits": 12,
+        "retained_selected_records": {
+          "path": "sources/gshhg-colombia-land-candidates.bin.gz",
+          "record_count": 72,
+          "uncompressed_bytes": 2735984,
+          "uncompressed_sha256": "220e587ac2ed3205ae5913689b890d9045edb85de064b438f1af6b10c080a18a",
+          "compressed_bytes": 1774469,
+          "compressed_sha256": "68514b5d418697c65a386050cfb5839ee7836d3f1d2e521bcd635c895e9252d8"
+        },
+        "provenance_file": "sources/gshhg-screen-provenance.json"
+      }
+    }
+  ],
+  "policy_profiles": "Original country policy/administrative source profiles are marked unknown in the parent issue. Report actual source and candidate meaning; do not infer suitability from country code or ADM number.",
+  "attribution_and_retention": "GeoBoundaries and DANE attribution is retained with CC BY 4.0; Bolivia boundary source metadata declares public domain with access-to-information wording; RESOLVE feature service marks each feature CC-BY 4.0; GSHHG selected complete records are retained under LGPLv3+ with source data bytes/hashes. The inaccessible DANE feature layers are not redistributed."
+}
