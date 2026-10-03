@@ -23,5 +23,16 @@
       "bytes": 342904832
     }
   ],
-  "preservation_limit": "Only this job\u2019s completed reproducible local SQLite derivatives; no tracked facts, archived sources, research artifacts or currently running test backups removed"
+  "preservation_limit": "Only this job\u2019s completed reproducible local SQLite derivatives; no tracked facts, archived sources, research artifacts or currently running test backups removed",
+  "completed_full_regressions_generated_backups_removed": [
+    {
+      "path": "data/atlas.sqlite.topology-backup-1791060137209",
+      "bytes": 401051648
+    },
+    {
+      "path": "data/atlas.sqlite.hierarchy-v3-backup-1791060133310",
+      "bytes": 401080320
+    }
+  ],
+  "preserved_primary_generated_database": "data/atlas.sqlite retained"
 }

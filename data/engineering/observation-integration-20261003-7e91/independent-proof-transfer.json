@@ -85,6 +85,27 @@
       "retained_path": "data/engineering/observation-integration-20261003-7e91/independent-worldatlas-677-full-source-independent-controls.log",
       "bytes": 2997,
       "sha256": "16aa8f3fadad61e0d117cbffd9fea6fd70b4f5224eb236a17aec6fbdd4176ba6"
+    },
+    {
+      "report": "full-source-correction-independent-review.json",
+      "original_path": "/tmp/worldatlas-677-finalized-source-correction-controls.log",
+      "retained_path": "data/engineering/observation-integration-20261003-7e91/independent-worldatlas-677-finalized-source-correction-controls.log",
+      "bytes": 3267,
+      "sha256": "84f475b0931003d258082b8882761b1e0013427a45b823cf608004f89a6cfe49"
+    },
+    {
+      "report": "full-source-correction-independent-review.json",
+      "original_path": "/tmp/worldatlas-677-source-context-correction-probe.json",
+      "retained_path": "data/engineering/observation-integration-20261003-7e91/independent-worldatlas-677-source-context-correction-probe.json",
+      "bytes": 394,
+      "sha256": "c50d2c1c69dbf075719c07a294fa3935a5d9895ef440728c72a315c59240ac85"
+    },
+    {
+      "report": "full-source-correction-independent-review.json",
+      "original_path": "/tmp/worldatlas-677-function-grant-correction-probe.json",
+      "retained_path": "data/engineering/observation-integration-20261003-7e91/independent-worldatlas-677-function-grant-correction-probe.json",
+      "bytes": 256,
+      "sha256": "be48a3511680226eb7f283f6d5e6b80c7dec27395a41302dce89a16d6d8b847b"
     }
   ],
   "reproduction": "Original isolated proof scripts retain original absolute checkout locator; reproduce against their report candidate commit in a fresh read-only checkout and replace that locator explicitly, never use current source as the original failing head."
