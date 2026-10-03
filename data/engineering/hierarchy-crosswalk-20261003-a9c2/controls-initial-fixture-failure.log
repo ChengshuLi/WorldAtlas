@@ -1,0 +1,14 @@
+.......F
+======================================================================
+FAIL: test_skipped_cycle_and_missing_parent_rejected (__main__.RebaseControls.test_skipped_cycle_and_missing_parent_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-crosswalk/test/reference-hierarchy-rebase.py", line 51, in test_skipped_cycle_and_missing_parent_rejected
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.816s
+
+FAILED (failures=1)
