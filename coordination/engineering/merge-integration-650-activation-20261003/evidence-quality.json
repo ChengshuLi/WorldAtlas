@@ -56,6 +56,18 @@
   "sources": [],
   "outputs": [
     {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 5272,
+      "sha256": "4cbebe22a32a6e79f15a2b4c8ec43922b3c610bd407608b6db02b938e5412411",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/activation-preparation-permission-failure.log.gz",
+      "bytes": 5678,
+      "sha256": "82eb30efacdd0e837f7f9b63ea5b8dd8c9f63ad6d604adc13db89372ad473f46",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/merge-integration-650-activation-20261003/activation-scope.json",
       "bytes": 1329,
       "sha256": "0677098b41007a73aeee19e7c47095a74bbc7f5f38557ed112155643bfa13fdb",
@@ -71,6 +83,24 @@
       "path": "coordination/engineering/merge-integration-650-activation-20261003/implementation-merge.json",
       "bytes": 315,
       "sha256": "184fd95f05a8a760f1da5158a9c03bc9a26750cb7475d756eb3de4f5c488b342",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-focused.tap",
+      "bytes": 8933,
+      "sha256": "6e899b85b649de4d4915c0d8edf6d5360065e583817e17f6a73c1deac0c63c1f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-scope.json",
+      "bytes": 1552,
+      "sha256": "92683100746d4ba937b63ff3d436c0da2701849f5b53e7d470007b54bfdc99c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-tests.tap",
+      "bytes": 1506,
+      "sha256": "2a1bdad32dc6506f68215b906da7f965d61faa438d54fadd183bd75aff8b68b2",
       "hash_kind": "file-bytes"
     },
     {
@@ -96,12 +126,30 @@
       "bytes": 833,
       "sha256": "7fede08faf90085b045ac065fb7a83ccd065224f130cd0db7698993f92768d9d",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 2030,
+      "sha256": "9690ebe6d0e2e57bdb0511e3883301aac92b1f4b565ea02f1bdffd474d5bcdc1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 2788,
+      "sha256": "cc62f288bf5c25791926ee9887d93ed4298a0acc16a736419db9d978a948e61d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "bytes": 3007,
+      "sha256": "42147257046a42ac5c9db72750a32b49f636213fa808dc012b44d4b6be4a6ba0",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
       "id": "activation-record",
-      "description": "Retain actual implementation merge and full hosted regression logs, then exercise the merged pipeline with an owned evidence-only PR. Verify actual accepted receipt and PR state after the queue finishes.",
+      "description": "Retain actual hosted failures and passing verification; repair trusted PR-comment permission and failure diagnostics, with actual entrypoint controls. Actual activation remains pending until inspected after merge.",
       "software": "GitHub Actions; Node 24; repository trusted queue and evidence validators",
       "units": "whole-file SHA-256; exact Git commit/tree identities",
       "kind": "code"
@@ -121,7 +169,20 @@
   ],
   "change_receipts": [
     {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "452894cefd464ea8be2c45f8f9cd8894e2949977a81d38bced4272cf56f69cf5"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/activation-preparation-permission-failure.log.gz",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/merge-integration-650-activation-20261003/activation-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/evidence-quality.json",
       "status": "added"
     },
     {
@@ -130,6 +191,18 @@
     },
     {
       "path": "coordination/engineering/merge-integration-650-activation-20261003/implementation-merge.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-focused.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-integration-650-activation-20261003/permission-repair-tests.tap",
       "status": "added"
     },
     {
@@ -149,7 +222,17 @@
       "status": "added"
     },
     {
-      "path": "coordination/engineering/merge-integration-650-activation-20261003/evidence-quality.json",
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "88323a6b7e57d3fb5d3e5721c0ad4847e199b46d9ec3ee612e0323785f4472d1"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "8d19b3b94a90dfd19a541c9bc03a3963800c007c5c90c5de3b8008a14f4aa906"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
       "status": "added"
     }
   ],

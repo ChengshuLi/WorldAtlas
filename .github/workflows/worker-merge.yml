@@ -21,7 +21,9 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
-      pull-requests: read
+      # GitHub requires PR write permission to post the durable preparation
+      # receipt on a pull request. Only trusted main code receives this token.
+      pull-requests: write
       issues: write
       checks: read
       statuses: read
