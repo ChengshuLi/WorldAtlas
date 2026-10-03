@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "palette-contrast-20261003-7e91",
+  "branch": "engineering/palette-contrast-20261003-7e91",
+  "base_main_commit": "0652897abb84e85147a0eab072b56cb655f73d57",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/23",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Reproduce actual current political colors and resolved identities; audit worldwide multi-date adjacent/nearby categorical contrast; implement deterministic stable identity colors preserving data and shared semantic modes",
+    "Verify GPU/canvas fill/legend consistency, unknowns, reload/year stability, no ownership recompilation, actual private publication and rollback; maximum two focused PRs"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-03T17:15:07.177285+00:00",
+  "completed": [],
+  "checks": [],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/palette-contrast-20261003-7e91/claim.json"
+  ],
+  "blockers": [],
+  "next_action": "Read-only actual Site23 palette reproduction is running. Capture actual 1950 legend colors and Beijing/Taipei owner profiles/source identities; retain non-reproduction honestly before general contrast work.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "worker_id": "engineering-night-20261003-7e91f438",
+  "reservation": {
+    "accepted": true,
+    "request_id": "59a61370-650a-419f-b0c5-e3779ae00c84",
+    "issue_number": 23,
+    "claim": {
+      "comment_id": 5971540602,
+      "version": 1,
+      "active": true,
+      "worker_id": "engineering-night-20261003-7e91f438",
+      "claim_id": "4406050d-c644-4160-99aa-e43c1d052fd3",
+      "branch": "engineering/palette-contrast-20261003-7e91",
+      "request_id": "59a61370-650a-419f-b0c5-e3779ae00c84",
+      "issue_number": 23,
+      "claimed_at": "2026-10-03T17:14:24.771Z",
+      "updated_at": "2026-10-03T17:15:21.832Z",
+      "expires_at": "2026-10-04T17:15:21.832Z",
+      "live_work": true,
+      "mode": "engineering",
+      "max_prs": 2
+    },
+    "replayed": false,
+    "result_source": "github-comment",
+    "result_comment_id": 5971549211,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37139823504"
+  },
+  "previous_completed_work": {
+    "issue": 22,
+    "final_pr": 630,
+    "actual_merge": "0652897abb84e85147a0eab072b56cb655f73d57",
+    "release_request": "ccf0df7b-c663-4df5-891d-7e2f9d98d348",
+    "release_result": 5971532786,
+    "remaining_proposal_issue": 638
+  }
+}
