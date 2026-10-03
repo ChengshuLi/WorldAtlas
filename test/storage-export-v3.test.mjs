@@ -174,6 +174,21 @@ test('typed storage on actual SQLite/PostgreSQL preserves replays and rejects un
    const link=await db.prepare("SELECT * FROM atlas_typed_feature_links WHERE id='typed-port-link'").first();
    await assert.rejects(async()=>insert('typed_feature_links',{...link,id:'past-port-lifetime',valid_from:999}).run(),guarded(/lifetime|endpoint/i));
    await assert.rejects(async()=>insert('typed_retirements',{id:'example-withdrawal',collection:'observations',target_id:'typed-false',source_id:'example',reason:'Rejected synthetic example withdrawal',replacement_id:null,metadata:'{}'}).run(),guarded(/Example sources/i));
+   // Both retirement uniqueness keys must preserve identity and raw provenance,
+   // even when a caller asks SQL to ignore conflicts.
+   const linkRetirement={id:'typed-link-retirement',collection:'feature_links',target_id:link.id,source_id:'history',reason:'Original link withdrawal',replacement_id:null,metadata:' { \"original\" : \"link provenance\" } '};
+   await insert('typed_retirements',linkRetirement).run();
+   for(const target of ['typed-retirement',linkRetirement.id]){
+    const retirement=await db.prepare('SELECT * FROM atlas_typed_retirements WHERE id=?').bind(target).first();
+    await insert('typed_retirements',retirement).run();
+    const d=storageExportV3Definitions.typed_retirements;
+    const ignored=row=>db.prepare(`INSERT OR IGNORE INTO ${d.table} (${d.columns.join(',')}) VALUES (${d.columns.map(()=>'?').join(',')})`).bind(...d.columns.map(key=>row[key]??null));
+    await ignored(retirement).run();
+    const different={...retirement,id:`${target}-different`,source_id:'estimate',reason:'Different withdrawal provenance',metadata:' { \"provenance\" : \"different\" } '};
+    for(const attempt of [insert,(_collection,row)=>ignored(row)])await assert.rejects(async()=>attempt('typed_retirements',different).run(),guarded(/immutable|different evidence/i));
+    assert.equal(await db.prepare('SELECT id FROM atlas_typed_retirements WHERE id=?').bind(different.id).first(),null);
+    assert.deepEqual(await db.prepare('SELECT * FROM atlas_typed_retirements WHERE id=?').bind(target).first(),retirement);
+   }
    const before=await exportStorageMarkerV3(db);
    const incomplete={id:'missing-replacement-withdrawal',collection:'observations',target_id:'typed-false',source_id:'history',reason:'Rejected incomplete correction',replacement_id:'missing-replacement',metadata:' { "original" : "incomplete" } '};
    const journal=db.prepare('INSERT INTO atlas_ingestions(id,fingerprint,counts,created_at) VALUES (?,?,?,?)').bind('incomplete-typed-batch','a'.repeat(64),'{}',1);

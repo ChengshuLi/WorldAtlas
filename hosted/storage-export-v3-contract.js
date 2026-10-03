@@ -10,10 +10,10 @@ export const storageExportV3Contract = freeze({
   typed_feature_links: {"table":"atlas_typed_feature_links","columns":["id","source_entity_id","target_entity_id","relationship_type","contract_version","registry_sha256","valid_from","valid_to","method","status","source_id","is_example","metadata"],"keys":["id"],"guard":"atlas_typed_feature_links_immutable"},
   typed_retirements: {"table":"atlas_typed_retirements","columns":["id","collection","target_id","source_id","reason","replacement_id","metadata"],"keys":["id"],"guard":"atlas_typed_retirements_immutable"},
  },
- d1_migrations: [...storageExportV2Contract.d1_migrations, {"path": "drizzle/0010_typed_observations.sql", "sha256": "ed2a36e987c5754181d3ca9f03fa1a8ee04551b36f937fe706a138994e214d80"}],
- postgres_migrations: [...storageExportV2Contract.postgres_migrations, {"path": "postgres/migrations/0003_typed_observations.sql", "sha256": "f1f4c05f4f732b0398280cd2e847ac7ac63f542393d43d714097531979313f9d"}],
- d1_catalog_sha256: "6cf13cff19ae2d3cf99cc4c65d8ed704f10488ed7cf62b62391af7352c3787b8",
- postgres_catalog_sha256: "f4bd89d501a8efe65d899a4507786c7c6a5e8febc9d2b08de5a2833094bc7be3",
+ d1_migrations: [...storageExportV2Contract.d1_migrations, {"path": "drizzle/0010_typed_observations.sql", "sha256": "672cb4f723a84ce2958f90f7c5d1fe517d566d6753da520ec3246a00dfe234c1"}],
+ postgres_migrations: [...storageExportV2Contract.postgres_migrations, {"path": "postgres/migrations/0003_typed_observations.sql", "sha256": "0c9c1c402c0f1ee707a0083199ea07314233846deb9fddb79723108a0c439041"}],
+ d1_catalog_sha256: "e7474b3d88f1d7d4b4c33b8b2581a1d17d59039abc73d8bd076078ab92639616",
+ postgres_catalog_sha256: "cd51f2e42fb343cb4994a2c25a08c96d768c5fdeddfe8a56931ad3e7a694b26c",
 });
 export const storageExportV3Definitions = storageExportV3Contract.definitions;
 export const storageExportV3Collections = Object.freeze(Object.keys(storageExportV3Definitions));

@@ -86,7 +86,7 @@ CREATE TRIGGER atlas_typed_feature_links_no_update BEFORE UPDATE ON atlas_typed_
 BEGIN SELECT RAISE(ABORT,'Typed evidence is immutable; append a retirement/correction'); END;
 CREATE TRIGGER atlas_typed_feature_links_no_delete BEFORE DELETE ON atlas_typed_feature_links
 BEGIN SELECT RAISE(ABORT,'Typed evidence is immutable; append a retirement/correction'); END;
-CREATE TRIGGER atlas_typed_retirements_collision BEFORE INSERT ON atlas_typed_retirements WHEN EXISTS (SELECT 1 FROM atlas_typed_retirements old WHERE old.id=NEW.id AND (old.id IS NOT NEW.id OR old.collection IS NOT NEW.collection OR old.target_id IS NOT NEW.target_id OR old.source_id IS NOT NEW.source_id OR old.reason IS NOT NEW.reason OR old.replacement_id IS NOT NEW.replacement_id OR old.metadata IS NOT NEW.metadata))
+CREATE TRIGGER atlas_typed_retirements_collision BEFORE INSERT ON atlas_typed_retirements WHEN EXISTS (SELECT 1 FROM atlas_typed_retirements old WHERE (old.id=NEW.id OR (old.collection=NEW.collection AND old.target_id=NEW.target_id)) AND (old.id IS NOT NEW.id OR old.collection IS NOT NEW.collection OR old.target_id IS NOT NEW.target_id OR old.source_id IS NOT NEW.source_id OR old.reason IS NOT NEW.reason OR old.replacement_id IS NOT NEW.replacement_id OR old.metadata IS NOT NEW.metadata))
 BEGIN SELECT RAISE(ABORT,'Typed identity already identifies different evidence'); END;
 CREATE TRIGGER atlas_typed_retirements_no_update BEFORE UPDATE ON atlas_typed_retirements
 BEGIN SELECT RAISE(ABORT,'Typed evidence is immutable; append a retirement/correction'); END;

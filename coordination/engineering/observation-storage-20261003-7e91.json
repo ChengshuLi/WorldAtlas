@@ -7,7 +7,7 @@
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/529",
   "worker_id": "engineering-night-20261003-7e91f438",
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T19:40:38.214523+00:00",
+  "updated_at_utc": "2026-10-03T19:59:36.953227+00:00",
   "scope": [
     "Second of max3 PRs: reviewed additive forward typed storage and complete versioned raw export/restore with legacy evidence/guards preserved. Final third part reserved for actual new adapter API/import/static/prepared/snapshot parity and handover."
   ],
@@ -18,7 +18,9 @@
     "Append-only3typed tables and complete26table rawbackup/restore implemented; no existing SQL/oldbackupcontract rewrites",
     "Initial PG ambiguousOLDalias corrected; failedreceipts preserved",
     "Actual all-version SQLite/PostgreSQL storage/replay/invalid-evidence/rollback controls28pass0fail0skip",
-    "Hosted build reserve gate passed; full regression running"
+    "Hosted build reserve gate passed; full regression running",
+    "Independent status/null gap corrected with cross-adapter controls;625 candidate regressions passed",
+    "Independent retirement uniqueness collision reproduced; both uniqueness-key guards corrected and41 actual/pure controls passed"
   ],
   "checks": [
     {
@@ -45,7 +47,7 @@
     "data/engineering/observation-storage-20261003-7e91"
   ],
   "blockers": [],
-  "next_action": "Fullregression and staging checks running; push focused secondpart draft with remaining3rdpart limits; distinct source review and exacthead requiredCI then serializedqueue/actualmerge. No provider DDL/publication.",
+  "next_action": "Finish corrected-source hosted build/staging/full regression; retain all candidate findings/results; final whole-file ledger and distinct exact-head review then requiredCI/serializedqueue and actualmerge. Canonical claim active same worker/branch,livefalse. No provider/publication operations.",
   "reservation": {
     "accepted": true,
     "request_id": "a3fe9701-83e3-49f8-b7c4-fa31f881a566",
@@ -75,5 +77,6 @@
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
   "remaining_scope": [
     "Complete third bounded API/import/read/static/prepared/snapshot parity and module handover; total hard3PRbudget."
-  ]
+  ],
+  "incorporated_main_commit": "529deb71f911e9a675b49a11d1deaff1d894d1b7"
 }

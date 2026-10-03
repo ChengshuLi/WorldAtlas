@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "reviewer_worker_id": "review-palette-651-20261003",
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "issue": 529,
+  "pr_number": 671,
+  "head_sha": "b4f10996d581127c5943e63a84fd4541279bfc64",
+  "outcome": "changes-requested",
+  "source": {
+    "path": "drizzle/0010_typed_observations.sql",
+    "bytes": 12553,
+    "sha256": "ed2a36e987c5754181d3ca9f03fa1a8ee04551b36f937fe706a138994e214d80"
+  },
+  "proof": {
+    "originalChanges": 1,
+    "plainError": "UNIQUE constraint failed: atlas_typed_retirements.collection, atlas_typed_retirements.target_id",
+    "ignoreChanges": 0,
+    "conflictChanges": 0,
+    "replayChanges": 0,
+    "attempted": [
+      "retirement-different",
+      "observations",
+      "claim",
+      "hist-other",
+      "Different reason",
+      null,
+      " { \"provenance\" : \"different\" } "
+    ],
+    "retained": [
+      {
+        "id": "retirement-original",
+        "collection": "observations",
+        "target_id": "claim",
+        "source_id": "hist",
+        "reason": "Original retained reason",
+        "replacement_id": null,
+        "metadata": " { \"provenance\" : \"original\" } "
+      }
+    ],
+    "new_id_persisted": false
+  },
+  "finding": "A different typed retirement ID/source/reason/metadata for an existing (collection,target_id) is silently ignored by both conflict forms; same-ID-only provenance trigger never detects this second uniqueness collision.",
+  "recommendation": "Guard prior rows matching either NEW.id or the same collection+target identity, rejecting any different full-row identity/provenance before conflict resolution. Keep exact same-row replay idempotent; test bothobservations/linkcollections onactualSQLite/PGlite.",
+  "limits": [
+    "ActualSQLite candidateSQLprobe; correspondingPostgreSQLpredicate inspected but not independentlyprobed inthisrun",
+    "No production/provider/factual writes; isolatedinmemory synthetic catalogs only",
+    "Originalretirementremainsunchanged; defect is silentdiscardofnewprovenance/identity, not overwrite",
+    "Not finalexactheadapproval or manifestbinding"
+  ]
+}
