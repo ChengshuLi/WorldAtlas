@@ -1,0 +1,3237 @@
+{
+  "version": 1,
+  "issue": 134,
+  "review_date": "2026-10-03",
+  "baseline_commit": "dd83dcad2ec486b89844a78e5e137935b101c167",
+  "region": {
+    "id": "atlas:macro-review:region:3f0693a087ae4902",
+    "name": "Western Polynesian Islands",
+    "envelope": {
+      "id": "atlas:macro-review:region:3f0693a087ae4902",
+      "name": "Western Polynesian Islands",
+      "level": "region",
+      "parent_id": "framework:subcontinent:polynesia:c8f106884f04",
+      "path": "f625f5584e92b6c9e6b0a718.wkb.gz",
+      "sha256": "a6c79f2b158cd7e5677c4a2dabdba5e80feb387dcf5401e9283d9ed1d25e4700",
+      "geometry_sha256": "3e07e8ef96300447086f3a91f061fd1876f6ce634be80efdb86df19ab8a340fd",
+      "member_location_ids_sha256": "4f422ca4e6909fe74494f5586318459128bb956521278073f116d57cec8f9a85",
+      "locations": 25,
+      "area_m2": 4156158327.147892,
+      "bounds": [
+        -178.1857,
+        -21.4546,
+        179.8383,
+        -5.6792
+      ]
+    },
+    "subcontinent_id": "framework:subcontinent:polynesia:c8f106884f04",
+    "continent_id": "framework:continent:oceania:48580dd0c4b4",
+    "location_count": 25,
+    "required_work": [
+      "Review every area, province and location for sourced territorial purpose and neighboring granularity.",
+      "Resolve source island/shoreline gaps and document grid representation, verifying all reviewed island representations.",
+      "Preserve frozen outer land and shared boundaries; coordinate any external boundary amendment.",
+      "Publish full-branch certificate with exact approved subjects and release pins before Luna imports."
+    ]
+  },
+  "scope_counts": {
+    "assigned_locations": 24,
+    "assessed_locations": 24,
+    "assigned_provinces": 24,
+    "assessed_provinces": 24,
+    "area_assessments": 6
+  },
+  "locations": [
+    {
+      "location_id": "ASM-4998",
+      "name": "Eastern",
+      "source_id": "natural-earth",
+      "source_role_observed": "Natural Earth Admin 1 mapping used for American Samoa and Wallis & Futuna",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence for the current province-sized location role and footprint. Names align with district/island labels, but authoritative boundary source, vintage, license, dry-land/lagoon treatment and complete island lists are not established by pinned source metadata.",
+      "individual_unresolved_items": [
+        "Issue baseline explicitly has no original source-policy crosswalk for ASM and WLF; source vintage, license, role, selection rationale and source completeness need recovery.",
+        "GSHHG physical land screen intersects only part (and for Rose Atoll none) of current footprints, but is mixed-vintage generalized land evidence and cannot establish administrative extent or error."
+      ],
+      "physical_land_screen": {
+        "name": "Eastern",
+        "current_equal_area_km2": 83.66552523,
+        "gshhg_intersection_km2": 44.29683787,
+        "current_area_fraction_intersecting_gshhg": 0.5294515,
+        "bbox": [
+          -170.7436,
+          -14.331,
+          -170.5521,
+          -14.2296
+        ],
+        "parts": 2
+      },
+      "province_id": "framework:province:eastern:d7fd8ac945aa",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "MultiPolygon",
+        "connected_geometry_parts": 2,
+        "vertex_count": 35,
+        "bbox_wgs84": [
+          -170.7436,
+          -14.331,
+          -170.5521,
+          -14.2296
+        ]
+      },
+      "island_enumeration_crosswalk": "Natural Earth reference shape name is retained; no official census/admin source policy crosswalk was pinned by the issue. Do not equate its mapped label with census enumeration or legal extent.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.ASM-4998"
+      },
+      "parent_chain_ids": [
+        "ASM-4998",
+        "framework:province:eastern:d7fd8ac945aa",
+        "framework:area:samoa:d63b2a1b51c1",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Eastern",
+        "Eastern",
+        "Samoa",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "natural-earth",
+        "source_name": "Natural Earth",
+        "source_url": "https://www.naturalearthdata.com/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "ADM1 fallback",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      }
+    },
+    {
+      "location_id": "ASM-4999",
+      "name": "Manu's",
+      "source_id": "natural-earth",
+      "source_role_observed": "Natural Earth Admin 1 mapping used for American Samoa and Wallis & Futuna",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence for the current province-sized location role and footprint. Names align with district/island labels, but authoritative boundary source, vintage, license, dry-land/lagoon treatment and complete island lists are not established by pinned source metadata.",
+      "individual_unresolved_items": [
+        "Issue baseline explicitly has no original source-policy crosswalk for ASM and WLF; source vintage, license, role, selection rationale and source completeness need recovery.",
+        "GSHHG physical land screen intersects only part (and for Rose Atoll none) of current footprints, but is mixed-vintage generalized land evidence and cannot establish administrative extent or error."
+      ],
+      "physical_land_screen": {
+        "name": "Manu's",
+        "current_equal_area_km2": 82.45526046,
+        "gshhg_intersection_km2": 45.61289459,
+        "current_area_fraction_intersecting_gshhg": 0.55318356,
+        "bbox": [
+          -169.6873,
+          -14.2722,
+          -169.4188,
+          -14.1574
+        ],
+        "parts": 2
+      },
+      "province_id": "framework:province:manu-s:2bfa7d96db32",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "MultiPolygon",
+        "connected_geometry_parts": 2,
+        "vertex_count": 38,
+        "bbox_wgs84": [
+          -169.6873,
+          -14.2722,
+          -169.4188,
+          -14.1574
+        ]
+      },
+      "island_enumeration_crosswalk": "Natural Earth reference shape name is retained; no official census/admin source policy crosswalk was pinned by the issue. Do not equate its mapped label with census enumeration or legal extent.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.ASM-4999"
+      },
+      "parent_chain_ids": [
+        "ASM-4999",
+        "framework:province:manu-s:2bfa7d96db32",
+        "framework:area:samoa:d63b2a1b51c1",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Manu's",
+        "Manu's",
+        "Samoa",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "natural-earth",
+        "source_name": "Natural Earth",
+        "source_url": "https://www.naturalearthdata.com/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "ADM1 fallback",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      }
+    },
+    {
+      "location_id": "ASM-5000",
+      "name": "Rose Atoll",
+      "source_id": "natural-earth",
+      "source_role_observed": "Natural Earth Admin 1 mapping used for American Samoa and Wallis & Futuna",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence for the current province-sized location role and footprint. Names align with district/island labels, but authoritative boundary source, vintage, license, dry-land/lagoon treatment and complete island lists are not established by pinned source metadata.",
+      "individual_unresolved_items": [
+        "Issue baseline explicitly has no original source-policy crosswalk for ASM and WLF; source vintage, license, role, selection rationale and source completeness need recovery.",
+        "GSHHG physical land screen intersects only part (and for Rose Atoll none) of current footprints, but is mixed-vintage generalized land evidence and cannot establish administrative extent or error."
+      ],
+      "physical_land_screen": {
+        "name": "Rose Atoll",
+        "current_equal_area_km2": 4.34994245,
+        "gshhg_intersection_km2": 0.0,
+        "current_area_fraction_intersecting_gshhg": 0.0,
+        "bbox": [
+          -168.1731,
+          -14.5495,
+          -168.1397,
+          -14.5209
+        ],
+        "parts": 2
+      },
+      "province_id": "framework:province:rose-atoll:d2143af2cd95",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "MultiPolygon",
+        "connected_geometry_parts": 2,
+        "vertex_count": 9,
+        "bbox_wgs84": [
+          -168.1731,
+          -14.5495,
+          -168.1397,
+          -14.5209
+        ]
+      },
+      "island_enumeration_crosswalk": "Natural Earth reference shape name is retained; no official census/admin source policy crosswalk was pinned by the issue. Do not equate its mapped label with census enumeration or legal extent.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.ASM-5000"
+      },
+      "parent_chain_ids": [
+        "ASM-5000",
+        "framework:province:rose-atoll:d2143af2cd95",
+        "framework:area:samoa:d63b2a1b51c1",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Rose Atoll",
+        "Rose Atoll",
+        "Samoa",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "natural-earth",
+        "source_name": "Natural Earth",
+        "source_url": "https://www.naturalearthdata.com/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "ADM1 fallback",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      }
+    },
+    {
+      "location_id": "ASM-5001",
+      "name": "Swain's Island",
+      "source_id": "natural-earth",
+      "source_role_observed": "Natural Earth Admin 1 mapping used for American Samoa and Wallis & Futuna",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence for the current province-sized location role and footprint. Names align with district/island labels, but authoritative boundary source, vintage, license, dry-land/lagoon treatment and complete island lists are not established by pinned source metadata.",
+      "individual_unresolved_items": [
+        "Issue baseline explicitly has no original source-policy crosswalk for ASM and WLF; source vintage, license, role, selection rationale and source completeness need recovery.",
+        "GSHHG physical land screen intersects only part (and for Rose Atoll none) of current footprints, but is mixed-vintage generalized land evidence and cannot establish administrative extent or error."
+      ],
+      "physical_land_screen": {
+        "name": "Swain's Island",
+        "current_equal_area_km2": 3.21841649,
+        "gshhg_intersection_km2": 3.15594035,
+        "current_area_fraction_intersecting_gshhg": 0.98058793,
+        "bbox": [
+          -171.0896,
+          -11.0661,
+          -171.0661,
+          -11.0469
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:swain-s-island:069443c54686",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 15,
+        "bbox_wgs84": [
+          -171.0896,
+          -11.0661,
+          -171.0661,
+          -11.0469
+        ]
+      },
+      "island_enumeration_crosswalk": "Natural Earth reference shape name is retained; no official census/admin source policy crosswalk was pinned by the issue. Do not equate its mapped label with census enumeration or legal extent.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.ASM-5001"
+      },
+      "parent_chain_ids": [
+        "ASM-5001",
+        "framework:province:swain-s-island:069443c54686",
+        "framework:area:tokelau-manihiki:770fbc288b00",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Swain's Island",
+        "Swain's Island",
+        "Tokelau Archipelago",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "natural-earth",
+        "source_name": "Natural Earth",
+        "source_url": "https://www.naturalearthdata.com/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "ADM1 fallback",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      }
+    },
+    {
+      "location_id": "ASM-5002",
+      "name": "Western",
+      "source_id": "natural-earth",
+      "source_role_observed": "Natural Earth Admin 1 mapping used for American Samoa and Wallis & Futuna",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence for the current province-sized location role and footprint. Names align with district/island labels, but authoritative boundary source, vintage, license, dry-land/lagoon treatment and complete island lists are not established by pinned source metadata.",
+      "individual_unresolved_items": [
+        "Issue baseline explicitly has no original source-policy crosswalk for ASM and WLF; source vintage, license, role, selection rationale and source completeness need recovery.",
+        "GSHHG physical land screen intersects only part (and for Rose Atoll none) of current footprints, but is mixed-vintage generalized land evidence and cannot establish administrative extent or error."
+      ],
+      "physical_land_screen": {
+        "name": "Western",
+        "current_equal_area_km2": 90.82773387,
+        "gshhg_intersection_km2": 66.32326319,
+        "current_area_fraction_intersecting_gshhg": 0.73020938,
+        "bbox": [
+          -170.8469,
+          -14.3747,
+          -170.6926,
+          -14.289
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:western:6b808b7a2306",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 23,
+        "bbox_wgs84": [
+          -170.8469,
+          -14.3747,
+          -170.6926,
+          -14.289
+        ]
+      },
+      "island_enumeration_crosswalk": "Natural Earth reference shape name is retained; no official census/admin source policy crosswalk was pinned by the issue. Do not equate its mapped label with census enumeration or legal extent.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.ASM-5002"
+      },
+      "parent_chain_ids": [
+        "ASM-5002",
+        "framework:province:western:6b808b7a2306",
+        "framework:area:samoa:d63b2a1b51c1",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Western",
+        "Western",
+        "Samoa",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "natural-earth",
+        "source_name": "Natural Earth",
+        "source_url": "https://www.naturalearthdata.com/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "ADM1 fallback",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      }
+    },
+    {
+      "location_id": "WLF-4995",
+      "name": "Sigave",
+      "source_id": "natural-earth",
+      "source_role_observed": "Natural Earth Admin 1 mapping used for American Samoa and Wallis & Futuna",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence for the current province-sized location role and footprint. Names align with district/island labels, but authoritative boundary source, vintage, license, dry-land/lagoon treatment and complete island lists are not established by pinned source metadata.",
+      "individual_unresolved_items": [
+        "Issue baseline explicitly has no original source-policy crosswalk for ASM and WLF; source vintage, license, role, selection rationale and source completeness need recovery.",
+        "GSHHG physical land screen intersects only part (and for Rose Atoll none) of current footprints, but is mixed-vintage generalized land evidence and cannot establish administrative extent or error."
+      ],
+      "physical_land_screen": {
+        "name": "Sigave",
+        "current_equal_area_km2": 33.1533906,
+        "gshhg_intersection_km2": 30.6678042,
+        "current_area_fraction_intersecting_gshhg": 0.92502769,
+        "bbox": [
+          -178.1857,
+          -14.3131,
+          -178.1266,
+          -14.2326
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:sigave:c747f3552e76",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 9,
+        "bbox_wgs84": [
+          -178.1857,
+          -14.3131,
+          -178.1266,
+          -14.2326
+        ]
+      },
+      "island_enumeration_crosswalk": "Natural Earth reference shape name is retained; ISEE census endpoint inspected but issue source-role/profile gap remains. Do not equate names with precise legal boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.WLF-4995"
+      },
+      "parent_chain_ids": [
+        "WLF-4995",
+        "framework:province:sigave:c747f3552e76",
+        "framework:area:wallis-futuna-is:e4f7505b4b7c",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Sigave",
+        "Sigave",
+        "Wallis and Futuna Islands",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "natural-earth",
+        "source_name": "Natural Earth",
+        "source_url": "https://www.naturalearthdata.com/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "ADM1 fallback",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      }
+    },
+    {
+      "location_id": "WLF-4996",
+      "name": "`Uvea",
+      "source_id": "natural-earth",
+      "source_role_observed": "Natural Earth Admin 1 mapping used for American Samoa and Wallis & Futuna",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence for the current province-sized location role and footprint. Names align with district/island labels, but authoritative boundary source, vintage, license, dry-land/lagoon treatment and complete island lists are not established by pinned source metadata.",
+      "individual_unresolved_items": [
+        "Issue baseline explicitly has no original source-policy crosswalk for ASM and WLF; source vintage, license, role, selection rationale and source completeness need recovery.",
+        "GSHHG physical land screen intersects only part (and for Rose Atoll none) of current footprints, but is mixed-vintage generalized land evidence and cannot establish administrative extent or error."
+      ],
+      "physical_land_screen": {
+        "name": "`Uvea",
+        "current_equal_area_km2": 72.83374139,
+        "gshhg_intersection_km2": 13.65020223,
+        "current_area_fraction_intersecting_gshhg": 0.18741591,
+        "bbox": [
+          -176.1996,
+          -13.3503,
+          -176.1256,
+          -13.2089
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:uvea:eb8025731917",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 13,
+        "bbox_wgs84": [
+          -176.1996,
+          -13.3503,
+          -176.1256,
+          -13.2089
+        ]
+      },
+      "island_enumeration_crosswalk": "Natural Earth reference shape name is retained; ISEE census endpoint inspected but issue source-role/profile gap remains. Do not equate names with precise legal boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.WLF-4996"
+      },
+      "parent_chain_ids": [
+        "WLF-4996",
+        "framework:province:uvea:eb8025731917",
+        "framework:area:wallis-futuna-is:e4f7505b4b7c",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "`Uvea",
+        "`Uvea",
+        "Wallis and Futuna Islands",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "natural-earth",
+        "source_name": "Natural Earth",
+        "source_url": "https://www.naturalearthdata.com/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "ADM1 fallback",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      }
+    },
+    {
+      "location_id": "WLF-4997",
+      "name": "Alo",
+      "source_id": "natural-earth",
+      "source_role_observed": "Natural Earth Admin 1 mapping used for American Samoa and Wallis & Futuna",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence for the current province-sized location role and footprint. Names align with district/island labels, but authoritative boundary source, vintage, license, dry-land/lagoon treatment and complete island lists are not established by pinned source metadata.",
+      "individual_unresolved_items": [
+        "Issue baseline explicitly has no original source-policy crosswalk for ASM and WLF; source vintage, license, role, selection rationale and source completeness need recovery.",
+        "GSHHG physical land screen intersects only part (and for Rose Atoll none) of current footprints, but is mixed-vintage generalized land evidence and cannot establish administrative extent or error."
+      ],
+      "physical_land_screen": {
+        "name": "Alo",
+        "current_equal_area_km2": 58.68708482,
+        "gshhg_intersection_km2": 50.36314814,
+        "current_area_fraction_intersecting_gshhg": 0.85816408,
+        "bbox": [
+          -178.1371,
+          -14.3789,
+          -177.9816,
+          -14.2555
+        ],
+        "parts": 2
+      },
+      "province_id": "framework:province:alo:5ab48d886169",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "MultiPolygon",
+        "connected_geometry_parts": 2,
+        "vertex_count": 16,
+        "bbox_wgs84": [
+          -178.1371,
+          -14.3789,
+          -177.9816,
+          -14.2555
+        ]
+      },
+      "island_enumeration_crosswalk": "Natural Earth reference shape name is retained; ISEE census endpoint inspected but issue source-role/profile gap remains. Do not equate names with precise legal boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.WLF-4997"
+      },
+      "parent_chain_ids": [
+        "WLF-4997",
+        "framework:province:alo:5ab48d886169",
+        "framework:area:wallis-futuna-is:e4f7505b4b7c",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Alo",
+        "Alo",
+        "Wallis and Futuna Islands",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "natural-earth",
+        "source_name": "Natural Earth",
+        "source_url": "https://www.naturalearthdata.com/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "ADM1 fallback",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      }
+    },
+    {
+      "location_id": "atlas:coverage:NZL-5472",
+      "name": "Tokelau",
+      "source_id": "natural-earth:NZL-5472",
+      "source_role_observed": "Natural Earth ADM1; original source-policy profile absent from issue pin",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence for geometry and parent completeness. Keep present membership provisional and request an area integration/cross-packet source crosswalk; no parent change is proposed.",
+      "individual_unresolved_items": [
+        "Natural Earth named-area source vintage and land-water semantics are not pinned within this packet; Tokelau Government statistics do not establish geometry.",
+        "The published Tokelau Archipelago area has two unowned-to-this-issue members (Nukunonu in a supplemental packet; Swains in American Samoa packet); combined purpose reconciliation belongs to integration."
+      ],
+      "physical_land_screen": {
+        "name": "Tokelau",
+        "current_equal_area_km2": 4.23466959,
+        "gshhg_intersection_km2": 2.43648472,
+        "current_area_fraction_intersecting_gshhg": 0.57536596,
+        "bbox": [
+          -172.502553,
+          -9.361749,
+          -171.185658,
+          -8.543227
+        ],
+        "parts": 2
+      },
+      "province_id": "framework:province:tokelau:4cc7d2b1e7cf",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "MultiPolygon",
+        "connected_geometry_parts": 2,
+        "vertex_count": 22,
+        "bbox_wgs84": [
+          -172.502553,
+          -9.361749,
+          -171.185658,
+          -8.543227
+        ]
+      },
+      "island_enumeration_crosswalk": "Tokelau Government identifies the three atolls and settlement patterns; Tokelau Archipelago parent also contains separately scoped Nukunonu and American Samoa Swains identities requiring area-purpose crosswalk.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.atlas:coverage:NZL-5472"
+      },
+      "parent_chain_ids": [
+        "atlas:coverage:NZL-5472",
+        "framework:province:tokelau:4cc7d2b1e7cf",
+        "framework:area:tokelau-manihiki:770fbc288b00",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Tokelau",
+        "Tokelau",
+        "Tokelau Archipelago",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "natural-earth:NZL-5472",
+        "source_name": "Natural Earth",
+        "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+        "license": "Public domain",
+        "reference_year": "Undated modern reference",
+        "source_role": "Named territory",
+        "parent_match": "Named source territory; no smaller province asserted"
+      }
+    },
+    {
+      "location_id": "atlas:territory:NIU",
+      "name": "Niue",
+      "source_id": "atlas:territory:NIU",
+      "source_role_observed": "Natural Earth ADM0 / national island-state aggregation",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence to endorse the aggregate as an interior partition. Country/island-state identity is supported, but local completeness and island treatment remain unresolved.",
+      "individual_unresolved_items": [
+        "Natural Earth ADM0 aggregation is country-scale rather than local island/district boundary evidence; exact vintage and island/land-water completeness not independently retained here.",
+        "Country-level single-location tier versus settlement and outer-island detail needs semantic purpose validation at regional integration."
+      ],
+      "physical_land_screen": {
+        "name": "Niue",
+        "current_equal_area_km2": 260.72814899,
+        "gshhg_intersection_km2": 253.87102954,
+        "current_area_fraction_intersecting_gshhg": 0.97370012,
+        "bbox": [
+          -169.9489,
+          -19.1552,
+          -169.7737,
+          -18.9531
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:niue:41699e810a4a",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 24,
+        "bbox_wgs84": [
+          -169.9489,
+          -19.1552,
+          -169.7737,
+          -18.9531
+        ]
+      },
+      "island_enumeration_crosswalk": "Current identity is Natural Earth ADM0 island-state aggregation; Niue official statistical source access failed at the proxy, leaving source-vintage and coastline crosswalk unresolved.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.atlas:territory:NIU"
+      },
+      "parent_chain_ids": [
+        "atlas:territory:NIU",
+        "framework:province:niue:41699e810a4a",
+        "framework:area:niue:c65e05c54ad0",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Niue",
+        "Niue",
+        "Niue",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "atlas:territory:NIU",
+        "source_name": "Atlas source aggregation",
+        "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+        "license": "Underlying source licenses retained in semantic-report.json",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "Compact source country/territory",
+        "parent_match": "Named city/territory represented as one atlas province; coextensive with its location"
+      }
+    },
+    {
+      "location_id": "atlas:territory:WSM",
+      "name": "Samoa",
+      "source_id": "atlas:territory:WSM",
+      "source_role_observed": "Natural Earth ADM0 / sovereign-state aggregation",
+      "source_vintage_observed": "Undated modern reference",
+      "classification": "insufficient-evidence",
+      "assessment": "Insufficient evidence to endorse the aggregate as an interior partition. Country/island-state identity is supported, but local completeness and island treatment remain unresolved.",
+      "individual_unresolved_items": [
+        "Natural Earth ADM0 aggregation is country-scale rather than local island/district boundary evidence; exact vintage and island/land-water completeness not independently retained here.",
+        "Country-level single-location tier versus settlement and outer-island detail needs semantic purpose validation at regional integration."
+      ],
+      "physical_land_screen": {
+        "name": "Samoa",
+        "current_equal_area_km2": 2827.79135723,
+        "gshhg_intersection_km2": 2657.56028306,
+        "current_area_fraction_intersecting_gshhg": 0.9398007,
+        "bbox": [
+          -172.8041,
+          -14.0476,
+          -171.4238,
+          -13.4407
+        ],
+        "parts": 2
+      },
+      "province_id": "framework:province:samoa:c3e94ef76253",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "MultiPolygon",
+        "connected_geometry_parts": 2,
+        "vertex_count": 137,
+        "bbox_wgs84": [
+          -172.8041,
+          -14.0476,
+          -171.4238,
+          -13.4407
+        ]
+      },
+      "island_enumeration_crosswalk": "Samoa PHC 2021 enumerates population over 51 political districts and villages, including populated offshore islands; current ID is Natural Earth ADM0 national aggregation, not a district subdivision.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.atlas:territory:WSM"
+      },
+      "parent_chain_ids": [
+        "atlas:territory:WSM",
+        "framework:province:samoa:c3e94ef76253",
+        "framework:area:samoa:d63b2a1b51c1",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Samoa",
+        "Samoa",
+        "Samoa",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "atlas:territory:WSM",
+        "source_name": "Atlas source aggregation",
+        "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+        "license": "Underlying source licenses retained in semantic-report.json",
+        "reference_year": "Undated modern reference",
+        "administrative_level": "Compact source country/territory",
+        "parent_match": "Named city/territory represented as one atlas province; coextensive with its location"
+      }
+    },
+    {
+      "location_id": "gb:TON:ADM1:12702645B14713027314985",
+      "name": "Vava'u",
+      "source_id": "gb:TON:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tonga ADM1 (five island divisions)",
+      "source_vintage_observed": "2017",
+      "classification": "justified-with-caveat",
+      "assessment": "Named division-tier administrative source is provisionally suitable as a province-sized location: the official 2021 census defines exactly five main island divisions and enumerates districts and villages within them. Retain source-year caveat; census tables do not establish exact legal boundaries.",
+      "individual_unresolved_items": [
+        "2021 Tonga census supports five main island divisions and settlement-by-village structure, but is not legal boundary geometry or an explicit license for table reuse.",
+        "GeoBoundaries metadata disclaims completeness/accuracy; validate original boundary provenance and dry-land/lagoon edge treatment before integration."
+      ],
+      "physical_land_screen": {
+        "name": "Vava'u",
+        "current_equal_area_km2": 125.09882317,
+        "gshhg_intersection_km2": 109.76268465,
+        "current_area_fraction_intersecting_gshhg": 0.87740781,
+        "bbox": [
+          -174.6693,
+          -18.8261,
+          -173.9048,
+          -18.0128
+        ],
+        "parts": 5
+      },
+      "province_id": "framework:province:vava-u:2054ce027a75",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "MultiPolygon",
+        "connected_geometry_parts": 5,
+        "vertex_count": 48,
+        "bbox_wgs84": [
+          -174.6693,
+          -18.8261,
+          -173.9048,
+          -18.0128
+        ]
+      },
+      "island_enumeration_crosswalk": "Tonga PHC 2021 glossary lists this named division among exactly five main island divisions; settlement tables enumerate subordinate districts and villages.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TON:ADM1:12702645B14713027314985"
+      },
+      "parent_chain_ids": [
+        "gb:TON:ADM1:12702645B14713027314985",
+        "framework:province:vava-u:2054ce027a75",
+        "framework:area:tonga:36a6092e6771",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Vava'u",
+        "Vava'u",
+        "Tonga",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TON:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "12702645B14713027314985"
+      }
+    },
+    {
+      "location_id": "gb:TON:ADM1:12702645B14719640472686",
+      "name": "Ha'apai",
+      "source_id": "gb:TON:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tonga ADM1 (five island divisions)",
+      "source_vintage_observed": "2017",
+      "classification": "justified-with-caveat",
+      "assessment": "Named division-tier administrative source is provisionally suitable as a province-sized location: the official 2021 census defines exactly five main island divisions and enumerates districts and villages within them. Retain source-year caveat; census tables do not establish exact legal boundaries.",
+      "individual_unresolved_items": [
+        "2021 Tonga census supports five main island divisions and settlement-by-village structure, but is not legal boundary geometry or an explicit license for table reuse.",
+        "GeoBoundaries metadata disclaims completeness/accuracy; validate original boundary provenance and dry-land/lagoon edge treatment before integration."
+      ],
+      "physical_land_screen": {
+        "name": "Ha'apai",
+        "current_equal_area_km2": 92.639489,
+        "gshhg_intersection_km2": 79.72351523,
+        "current_area_fraction_intersecting_gshhg": 0.8605781,
+        "bbox": [
+          -175.1066,
+          -20.2663,
+          -174.2681,
+          -19.6468
+        ],
+        "parts": 7
+      },
+      "province_id": "framework:province:ha-apai:e88847494ddc",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "MultiPolygon",
+        "connected_geometry_parts": 7,
+        "vertex_count": 44,
+        "bbox_wgs84": [
+          -175.1066,
+          -20.2663,
+          -174.2681,
+          -19.6468
+        ]
+      },
+      "island_enumeration_crosswalk": "Tonga PHC 2021 glossary lists this named division among exactly five main island divisions; settlement tables enumerate subordinate districts and villages.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TON:ADM1:12702645B14719640472686"
+      },
+      "parent_chain_ids": [
+        "gb:TON:ADM1:12702645B14719640472686",
+        "framework:province:ha-apai:e88847494ddc",
+        "framework:area:tonga:36a6092e6771",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Ha'apai",
+        "Ha'apai",
+        "Tonga",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TON:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "12702645B14719640472686"
+      }
+    },
+    {
+      "location_id": "gb:TON:ADM1:12702645B16834523743175",
+      "name": "Niuas",
+      "source_id": "gb:TON:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tonga ADM1 (five island divisions)",
+      "source_vintage_observed": "2017",
+      "classification": "justified-with-caveat",
+      "assessment": "Named division-tier administrative source is provisionally suitable as a province-sized location: the official 2021 census defines exactly five main island divisions and enumerates districts and villages within them. Retain source-year caveat; census tables do not establish exact legal boundaries.",
+      "individual_unresolved_items": [
+        "2021 Tonga census supports five main island divisions and settlement-by-village structure, but is not legal boundary geometry or an explicit license for table reuse.",
+        "GeoBoundaries metadata disclaims completeness/accuracy; validate original boundary provenance and dry-land/lagoon edge treatment before integration."
+      ],
+      "physical_land_screen": {
+        "name": "Niuas",
+        "current_equal_area_km2": 61.18222231,
+        "gshhg_intersection_km2": 46.7874752,
+        "current_area_fraction_intersecting_gshhg": 0.76472337,
+        "bbox": [
+          -175.6799,
+          -15.9811,
+          -173.7517,
+          -15.5661
+        ],
+        "parts": 2
+      },
+      "province_id": "framework:province:niuas:6e2e18552131",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "MultiPolygon",
+        "connected_geometry_parts": 2,
+        "vertex_count": 16,
+        "bbox_wgs84": [
+          -175.6799,
+          -15.9811,
+          -173.7517,
+          -15.5661
+        ]
+      },
+      "island_enumeration_crosswalk": "Tonga PHC 2021 glossary lists this named division among exactly five main island divisions; settlement tables enumerate subordinate districts and villages.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TON:ADM1:12702645B16834523743175"
+      },
+      "parent_chain_ids": [
+        "gb:TON:ADM1:12702645B16834523743175",
+        "framework:province:niuas:6e2e18552131",
+        "framework:area:tonga:36a6092e6771",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Niuas",
+        "Niuas",
+        "Tonga",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TON:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "12702645B16834523743175"
+      }
+    },
+    {
+      "location_id": "gb:TON:ADM1:12702645B50986277851262",
+      "name": "Tongatapu",
+      "source_id": "gb:TON:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tonga ADM1 (five island divisions)",
+      "source_vintage_observed": "2017",
+      "classification": "justified-with-caveat",
+      "assessment": "Named division-tier administrative source is provisionally suitable as a province-sized location: the official 2021 census defines exactly five main island divisions and enumerates districts and villages within them. Retain source-year caveat; census tables do not establish exact legal boundaries.",
+      "individual_unresolved_items": [
+        "2021 Tonga census supports five main island divisions and settlement-by-village structure, but is not legal boundary geometry or an explicit license for table reuse.",
+        "GeoBoundaries metadata disclaims completeness/accuracy; validate original boundary provenance and dry-land/lagoon edge treatment before integration."
+      ],
+      "physical_land_screen": {
+        "name": "Tongatapu",
+        "current_equal_area_km2": 250.70951913,
+        "gshhg_intersection_km2": 237.39589779,
+        "current_area_fraction_intersecting_gshhg": 0.94689623,
+        "bbox": [
+          -175.3565,
+          -21.271,
+          -175.0318,
+          -21.0936
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:tongatapu:a388b5003bd7",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 43,
+        "bbox_wgs84": [
+          -175.3565,
+          -21.271,
+          -175.0318,
+          -21.0936
+        ]
+      },
+      "island_enumeration_crosswalk": "Tonga PHC 2021 glossary lists this named division among exactly five main island divisions; settlement tables enumerate subordinate districts and villages.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TON:ADM1:12702645B50986277851262"
+      },
+      "parent_chain_ids": [
+        "gb:TON:ADM1:12702645B50986277851262",
+        "framework:province:tongatapu:a388b5003bd7",
+        "framework:area:tonga:36a6092e6771",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Tongatapu",
+        "Tongatapu",
+        "Tonga",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TON:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "12702645B50986277851262"
+      }
+    },
+    {
+      "location_id": "gb:TON:ADM1:12702645B6842520552302",
+      "name": "'Eua",
+      "source_id": "gb:TON:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tonga ADM1 (five island divisions)",
+      "source_vintage_observed": "2017",
+      "classification": "justified-with-caveat",
+      "assessment": "Named division-tier administrative source is provisionally suitable as a province-sized location: the official 2021 census defines exactly five main island divisions and enumerates districts and villages within them. Retain source-year caveat; census tables do not establish exact legal boundaries.",
+      "individual_unresolved_items": [
+        "2021 Tonga census supports five main island divisions and settlement-by-village structure, but is not legal boundary geometry or an explicit license for table reuse.",
+        "GeoBoundaries metadata disclaims completeness/accuracy; validate original boundary provenance and dry-land/lagoon edge treatment before integration."
+      ],
+      "physical_land_screen": {
+        "name": "'Eua",
+        "current_equal_area_km2": 87.16686386,
+        "gshhg_intersection_km2": 85.43985787,
+        "current_area_fraction_intersecting_gshhg": 0.98018736,
+        "bbox": [
+          -174.9748,
+          -21.4546,
+          -174.9018,
+          -21.2838
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:eua:237244c6da44",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 17,
+        "bbox_wgs84": [
+          -174.9748,
+          -21.4546,
+          -174.9018,
+          -21.2838
+        ]
+      },
+      "island_enumeration_crosswalk": "Tonga PHC 2021 glossary lists this named division among exactly five main island divisions; settlement tables enumerate subordinate districts and villages.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TON:ADM1:12702645B6842520552302"
+      },
+      "parent_chain_ids": [
+        "gb:TON:ADM1:12702645B6842520552302",
+        "framework:province:eua:237244c6da44",
+        "framework:area:tonga:36a6092e6771",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "'Eua",
+        "'Eua",
+        "Tonga",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TON:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "12702645B6842520552302"
+      }
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B1294645335794",
+      "name": "Niutao",
+      "source_id": "gb:TUV:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tuvalu ADM1 (eight administrative island features)",
+      "source_vintage_observed": "2017",
+      "classification": "correction-needed",
+      "assessment": "Correction-needed source completeness follow-up: Niulakita is affirmatively counted as a ninth island by the official census, with 36 enumerated residents in 2022. The current source has only eight ADM1 features and the Niutao footprint bbox is remote from Niulakita. This is a source/identity discrepancy, not authority to edit a shared footprint or assign ownership.",
+      "individual_unresolved_items": [
+        "Official 2022 census lists nine islands including Niulakita; this eight-feature source has no named Niulakita feature.",
+        "Unresolved whether Niulakita is represented administratively within another council footprint, omitted, or represented in another source."
+      ],
+      "physical_land_screen": {
+        "name": "Niutao",
+        "current_equal_area_km2": 1.58227655,
+        "gshhg_intersection_km2": 0.0,
+        "current_area_fraction_intersecting_gshhg": 0.0,
+        "bbox": [
+          177.3378,
+          -6.1141,
+          177.3508,
+          -6.1029
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:niutao:0e6b35ca7ede",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 5,
+        "bbox_wgs84": [
+          177.3378,
+          -6.1141,
+          177.3508,
+          -6.1029
+        ]
+      },
+      "island_enumeration_crosswalk": "Tuvalu PHC 2022 names this ADM1 feature’s atoll among eight of its nine islands. Niulakita appears in the official nine-island list; feature enumeration contains no Niulakita. The local Kaupule official 2021–2024 island strategy titled for Niutao and Niulakita confirms a local development-planning connection but is not proof of statutory boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B1294645335794"
+      },
+      "parent_chain_ids": [
+        "gb:TUV:ADM1:17741764B1294645335794",
+        "framework:province:niutao:0e6b35ca7ede",
+        "framework:area:tuvalu:aa448e049a04",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Niutao",
+        "Niutao",
+        "Tuvalu",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TUV:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TUV/ADM1/geoBoundaries-TUV-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "17741764B1294645335794"
+      }
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B30576374901893",
+      "name": "Nukufetau",
+      "source_id": "gb:TUV:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tuvalu ADM1 (eight administrative island features)",
+      "source_vintage_observed": "2017",
+      "classification": "correction-needed",
+      "assessment": "Correction-needed source completeness follow-up: Niulakita is affirmatively counted as a ninth island by the official census, with 36 enumerated residents in 2022. The current source has only eight ADM1 features and the Niutao footprint bbox is remote from Niulakita. This is a source/identity discrepancy, not authority to edit a shared footprint or assign ownership.",
+      "individual_unresolved_items": [
+        "Official 2022 census lists nine islands including Niulakita; this eight-feature source has no named Niulakita feature.",
+        "Unresolved whether Niulakita is represented administratively within another council footprint, omitted, or represented in another source."
+      ],
+      "physical_land_screen": {
+        "name": "Nukufetau",
+        "current_equal_area_km2": 1.19750385,
+        "gshhg_intersection_km2": 0.35982568,
+        "current_area_fraction_intersecting_gshhg": 0.30047977,
+        "bbox": [
+          178.3715,
+          -8.0725,
+          178.3957,
+          -8.0242
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:nukufetau:5f8840dd7581",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 9,
+        "bbox_wgs84": [
+          178.3715,
+          -8.0725,
+          178.3957,
+          -8.0242
+        ]
+      },
+      "island_enumeration_crosswalk": "Tuvalu PHC 2022 names this ADM1 feature’s atoll among eight of its nine islands. Niulakita appears in the official nine-island list; feature enumeration contains no Niulakita. The local Kaupule official 2021–2024 island strategy titled for Niutao and Niulakita confirms a local development-planning connection but is not proof of statutory boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B30576374901893"
+      },
+      "parent_chain_ids": [
+        "gb:TUV:ADM1:17741764B30576374901893",
+        "framework:province:nukufetau:5f8840dd7581",
+        "framework:area:tuvalu:aa448e049a04",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Nukufetau",
+        "Nukufetau",
+        "Tuvalu",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TUV:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TUV/ADM1/geoBoundaries-TUV-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "17741764B30576374901893"
+      }
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B36602748519227",
+      "name": "Nanumea",
+      "source_id": "gb:TUV:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tuvalu ADM1 (eight administrative island features)",
+      "source_vintage_observed": "2017",
+      "classification": "correction-needed",
+      "assessment": "Correction-needed source completeness follow-up: Niulakita is affirmatively counted as a ninth island by the official census, with 36 enumerated residents in 2022. The current source has only eight ADM1 features and the Niutao footprint bbox is remote from Niulakita. This is a source/identity discrepancy, not authority to edit a shared footprint or assign ownership.",
+      "individual_unresolved_items": [
+        "Official 2022 census lists nine islands including Niulakita; this eight-feature source has no named Niulakita feature.",
+        "Unresolved whether Niulakita is represented administratively within another council footprint, omitted, or represented in another source."
+      ],
+      "physical_land_screen": {
+        "name": "Nanumea",
+        "current_equal_area_km2": 0.79919536,
+        "gshhg_intersection_km2": 0.0,
+        "current_area_fraction_intersecting_gshhg": 0.0,
+        "bbox": [
+          176.1217,
+          -5.7014,
+          176.1363,
+          -5.6792
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:nanumea:aca6fdeee786",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 4,
+        "bbox_wgs84": [
+          176.1217,
+          -5.7014,
+          176.1363,
+          -5.6792
+        ]
+      },
+      "island_enumeration_crosswalk": "Tuvalu PHC 2022 names this ADM1 feature’s atoll among eight of its nine islands. Niulakita appears in the official nine-island list; feature enumeration contains no Niulakita. The local Kaupule official 2021–2024 island strategy titled for Niutao and Niulakita confirms a local development-planning connection but is not proof of statutory boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B36602748519227"
+      },
+      "parent_chain_ids": [
+        "gb:TUV:ADM1:17741764B36602748519227",
+        "framework:province:nanumea:aca6fdeee786",
+        "framework:area:tuvalu:aa448e049a04",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Nanumea",
+        "Nanumea",
+        "Tuvalu",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TUV:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TUV/ADM1/geoBoundaries-TUV-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "17741764B36602748519227"
+      }
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B42950471856320",
+      "name": "Funafuti",
+      "source_id": "gb:TUV:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tuvalu ADM1 (eight administrative island features)",
+      "source_vintage_observed": "2017",
+      "classification": "correction-needed",
+      "assessment": "Correction-needed source completeness follow-up: Niulakita is affirmatively counted as a ninth island by the official census, with 36 enumerated residents in 2022. The current source has only eight ADM1 features and the Niutao footprint bbox is remote from Niulakita. This is a source/identity discrepancy, not authority to edit a shared footprint or assign ownership.",
+      "individual_unresolved_items": [
+        "Official 2022 census lists nine islands including Niulakita; this eight-feature source has no named Niulakita feature.",
+        "Unresolved whether Niulakita is represented administratively within another council footprint, omitted, or represented in another source."
+      ],
+      "physical_land_screen": {
+        "name": "Funafuti",
+        "current_equal_area_km2": 0.82229081,
+        "gshhg_intersection_km2": 0.0,
+        "current_area_fraction_intersecting_gshhg": 0.0,
+        "bbox": [
+          179.1826,
+          -8.5365,
+          179.2016,
+          -8.5137
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:funafuti:bb93df822c1e",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 5,
+        "bbox_wgs84": [
+          179.1826,
+          -8.5365,
+          179.2016,
+          -8.5137
+        ]
+      },
+      "island_enumeration_crosswalk": "Tuvalu PHC 2022 names this ADM1 feature’s atoll among eight of its nine islands. Niulakita appears in the official nine-island list; feature enumeration contains no Niulakita. The local Kaupule official 2021–2024 island strategy titled for Niutao and Niulakita confirms a local development-planning connection but is not proof of statutory boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B42950471856320"
+      },
+      "parent_chain_ids": [
+        "gb:TUV:ADM1:17741764B42950471856320",
+        "framework:province:funafuti:bb93df822c1e",
+        "framework:area:tuvalu:aa448e049a04",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Funafuti",
+        "Funafuti",
+        "Tuvalu",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TUV:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TUV/ADM1/geoBoundaries-TUV-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "17741764B42950471856320"
+      }
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B45323499156113",
+      "name": "Nukulaelae",
+      "source_id": "gb:TUV:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tuvalu ADM1 (eight administrative island features)",
+      "source_vintage_observed": "2017",
+      "classification": "correction-needed",
+      "assessment": "Correction-needed source completeness follow-up: Niulakita is affirmatively counted as a ninth island by the official census, with 36 enumerated residents in 2022. The current source has only eight ADM1 features and the Niutao footprint bbox is remote from Niulakita. This is a source/identity discrepancy, not authority to edit a shared footprint or assign ownership.",
+      "individual_unresolved_items": [
+        "Official 2022 census lists nine islands including Niulakita; this eight-feature source has no named Niulakita feature.",
+        "Unresolved whether Niulakita is represented administratively within another council footprint, omitted, or represented in another source."
+      ],
+      "physical_land_screen": {
+        "name": "Nukulaelae",
+        "current_equal_area_km2": 0.87632699,
+        "gshhg_intersection_km2": 0.0,
+        "current_area_fraction_intersecting_gshhg": 0.0,
+        "bbox": [
+          179.8078,
+          -9.4117,
+          179.8383,
+          -9.3682
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:nukulaelae:95844662e871",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 14,
+        "bbox_wgs84": [
+          179.8078,
+          -9.4117,
+          179.8383,
+          -9.3682
+        ]
+      },
+      "island_enumeration_crosswalk": "Tuvalu PHC 2022 names this ADM1 feature’s atoll among eight of its nine islands. Niulakita appears in the official nine-island list; feature enumeration contains no Niulakita. The local Kaupule official 2021–2024 island strategy titled for Niutao and Niulakita confirms a local development-planning connection but is not proof of statutory boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B45323499156113"
+      },
+      "parent_chain_ids": [
+        "gb:TUV:ADM1:17741764B45323499156113",
+        "framework:province:nukulaelae:95844662e871",
+        "framework:area:tuvalu:aa448e049a04",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Nukulaelae",
+        "Nukulaelae",
+        "Tuvalu",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TUV:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TUV/ADM1/geoBoundaries-TUV-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "17741764B45323499156113"
+      }
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B49308440506872",
+      "name": "Nanumanga",
+      "source_id": "gb:TUV:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tuvalu ADM1 (eight administrative island features)",
+      "source_vintage_observed": "2017",
+      "classification": "correction-needed",
+      "assessment": "Correction-needed source completeness follow-up: Niulakita is affirmatively counted as a ninth island by the official census, with 36 enumerated residents in 2022. The current source has only eight ADM1 features and the Niutao footprint bbox is remote from Niulakita. This is a source/identity discrepancy, not authority to edit a shared footprint or assign ownership.",
+      "individual_unresolved_items": [
+        "Official 2022 census lists nine islands including Niulakita; this eight-feature source has no named Niulakita feature.",
+        "Unresolved whether Niulakita is represented administratively within another council footprint, omitted, or represented in another source."
+      ],
+      "physical_land_screen": {
+        "name": "Nanumanga",
+        "current_equal_area_km2": 2.31707617,
+        "gshhg_intersection_km2": 0.0,
+        "current_area_fraction_intersecting_gshhg": 0.0,
+        "bbox": [
+          176.3128,
+          -6.3006,
+          176.3267,
+          -6.274
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:nanumanga:def782189614",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 5,
+        "bbox_wgs84": [
+          176.3128,
+          -6.3006,
+          176.3267,
+          -6.274
+        ]
+      },
+      "island_enumeration_crosswalk": "Tuvalu PHC 2022 names this ADM1 feature’s atoll among eight of its nine islands. Niulakita appears in the official nine-island list; feature enumeration contains no Niulakita. The local Kaupule official 2021–2024 island strategy titled for Niutao and Niulakita confirms a local development-planning connection but is not proof of statutory boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B49308440506872"
+      },
+      "parent_chain_ids": [
+        "gb:TUV:ADM1:17741764B49308440506872",
+        "framework:province:nanumanga:def782189614",
+        "framework:area:tuvalu:aa448e049a04",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Nanumanga",
+        "Nanumanga",
+        "Tuvalu",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TUV:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TUV/ADM1/geoBoundaries-TUV-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "17741764B49308440506872"
+      }
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B83632895409465",
+      "name": "Vaitupu",
+      "source_id": "gb:TUV:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tuvalu ADM1 (eight administrative island features)",
+      "source_vintage_observed": "2017",
+      "classification": "correction-needed",
+      "assessment": "Correction-needed source completeness follow-up: Niulakita is affirmatively counted as a ninth island by the official census, with 36 enumerated residents in 2022. The current source has only eight ADM1 features and the Niutao footprint bbox is remote from Niulakita. This is a source/identity discrepancy, not authority to edit a shared footprint or assign ownership.",
+      "individual_unresolved_items": [
+        "Official 2022 census lists nine islands including Niulakita; this eight-feature source has no named Niulakita feature.",
+        "Unresolved whether Niulakita is represented administratively within another council footprint, omitted, or represented in another source."
+      ],
+      "physical_land_screen": {
+        "name": "Vaitupu",
+        "current_equal_area_km2": 3.83909472,
+        "gshhg_intersection_km2": 0.43535842,
+        "current_area_fraction_intersecting_gshhg": 0.11340132,
+        "bbox": [
+          178.6632,
+          -7.4986,
+          178.6973,
+          -7.4603
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:vaitupu:ca67aef14178",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 7,
+        "bbox_wgs84": [
+          178.6632,
+          -7.4986,
+          178.6973,
+          -7.4603
+        ]
+      },
+      "island_enumeration_crosswalk": "Tuvalu PHC 2022 names this ADM1 feature’s atoll among eight of its nine islands. Niulakita appears in the official nine-island list; feature enumeration contains no Niulakita. The local Kaupule official 2021–2024 island strategy titled for Niutao and Niulakita confirms a local development-planning connection but is not proof of statutory boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B83632895409465"
+      },
+      "parent_chain_ids": [
+        "gb:TUV:ADM1:17741764B83632895409465",
+        "framework:province:vaitupu:ca67aef14178",
+        "framework:area:tuvalu:aa448e049a04",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Vaitupu",
+        "Vaitupu",
+        "Tuvalu",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TUV:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TUV/ADM1/geoBoundaries-TUV-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "17741764B83632895409465"
+      }
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B90379454256238",
+      "name": "Nui",
+      "source_id": "gb:TUV:ADM1",
+      "source_role_observed": "geoBoundaries gbOpen Tuvalu ADM1 (eight administrative island features)",
+      "source_vintage_observed": "2017",
+      "classification": "correction-needed",
+      "assessment": "Correction-needed source completeness follow-up: Niulakita is affirmatively counted as a ninth island by the official census, with 36 enumerated residents in 2022. The current source has only eight ADM1 features and the Niutao footprint bbox is remote from Niulakita. This is a source/identity discrepancy, not authority to edit a shared footprint or assign ownership.",
+      "individual_unresolved_items": [
+        "Official 2022 census lists nine islands including Niulakita; this eight-feature source has no named Niulakita feature.",
+        "Unresolved whether Niulakita is represented administratively within another council footprint, omitted, or represented in another source."
+      ],
+      "physical_land_screen": {
+        "name": "Nui",
+        "current_equal_area_km2": 0.49928393,
+        "gshhg_intersection_km2": 0.0,
+        "current_area_fraction_intersecting_gshhg": 0.0,
+        "bbox": [
+          177.1455,
+          -7.2522,
+          177.1533,
+          -7.2393
+        ],
+        "parts": 1
+      },
+      "province_id": "framework:province:nui:088ac96b7859",
+      "geometry_review": "GSHHG 2.3.7 high-resolution L1 physical-land comparison is diagnostic only; candidate proximity/intersection cannot authorize political or administrative changes.",
+      "source_feature_attributes": {},
+      "source_geometry_inventory": {
+        "type": "Polygon",
+        "connected_geometry_parts": 1,
+        "vertex_count": 4,
+        "bbox_wgs84": [
+          177.1455,
+          -7.2522,
+          177.1533,
+          -7.2393
+        ]
+      },
+      "island_enumeration_crosswalk": "Tuvalu PHC 2022 names this ADM1 feature’s atoll among eight of its nine islands. Niulakita appears in the official nine-island list; feature enumeration contains no Niulakita. The local Kaupule official 2021–2024 island strategy titled for Niutao and Niulakita confirms a local development-planning connection but is not proof of statutory boundary geometry.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B90379454256238"
+      },
+      "parent_chain_ids": [
+        "gb:TUV:ADM1:17741764B90379454256238",
+        "framework:province:nui:088ac96b7859",
+        "framework:area:tuvalu:aa448e049a04",
+        "atlas:macro-review:region:3f0693a087ae4902",
+        "framework:subcontinent:polynesia:c8f106884f04",
+        "framework:continent:oceania:48580dd0c4b4"
+      ],
+      "parent_chain_names": [
+        "Nui",
+        "Nui",
+        "Tuvalu",
+        "Western Polynesian Islands",
+        "Polynesia",
+        "Oceania"
+      ],
+      "pinned_location_source_profile": {
+        "source_id": "gb:TUV:ADM1",
+        "source_name": "geoBoundaries gbOpen",
+        "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TUV/ADM1/geoBoundaries-TUV-ADM1.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "reference_year": "2017",
+        "administrative_level": "ADM1",
+        "parent_source_level": "ADM1",
+        "source_role": "Named local administrative territory",
+        "selection_reason": "Named local administrative territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "parent_match": "Named source administrative unit grouped within this geographic area",
+        "original_id": "17741764B90379454256238"
+      }
+    }
+  ],
+  "provinces": [
+    {
+      "province_id": "framework:province:eastern:d7fd8ac945aa",
+      "province_name": "Eastern",
+      "location_id": "ASM-4998",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.ASM-4998"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "Natural Earth admin-1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:manu-s:2bfa7d96db32",
+      "province_name": "Manu's",
+      "location_id": "ASM-4999",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.ASM-4999"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "Natural Earth admin-1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:rose-atoll:d2143af2cd95",
+      "province_name": "Rose Atoll",
+      "location_id": "ASM-5000",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.ASM-5000"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "Natural Earth admin-1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:swain-s-island:069443c54686",
+      "province_name": "Swain's Island",
+      "location_id": "ASM-5001",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.ASM-5001"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "Natural Earth admin-1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:western:6b808b7a2306",
+      "province_name": "Western",
+      "location_id": "ASM-5002",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.ASM-5002"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "Natural Earth admin-1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:sigave:c747f3552e76",
+      "province_name": "Sigave",
+      "location_id": "WLF-4995",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.WLF-4995"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "Natural Earth admin-1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:uvea:eb8025731917",
+      "province_name": "`Uvea",
+      "location_id": "WLF-4996",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.WLF-4996"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "Natural Earth admin-1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:alo:5ab48d886169",
+      "province_name": "Alo",
+      "location_id": "WLF-4997",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.WLF-4997"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "Natural Earth admin-1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:tokelau:4cc7d2b1e7cf",
+      "province_name": "Tokelau",
+      "location_id": "atlas:coverage:NZL-5472",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.atlas:coverage:NZL-5472"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "WGSRPD / Natural Earth",
+        "source_url": "https://github.com/tdwg/wgsrpd",
+        "basis": "Named source territory; no smaller province asserted",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:niue:41699e810a4a",
+      "province_name": "Niue",
+      "location_id": "atlas:territory:NIU",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.atlas:territory:NIU"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named city/territory represented as one atlas province; coextensive with its location",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:samoa:c3e94ef76253",
+      "province_name": "Samoa",
+      "location_id": "atlas:territory:WSM",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.atlas:territory:WSM"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named city/territory represented as one atlas province; coextensive with its location",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:vava-u:2054ce027a75",
+      "province_name": "Vava'u",
+      "location_id": "gb:TON:ADM1:12702645B14713027314985",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TON:ADM1:12702645B14713027314985"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TON:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:ha-apai:e88847494ddc",
+      "province_name": "Ha'apai",
+      "location_id": "gb:TON:ADM1:12702645B14719640472686",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TON:ADM1:12702645B14719640472686"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TON:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:niuas:6e2e18552131",
+      "province_name": "Niuas",
+      "location_id": "gb:TON:ADM1:12702645B16834523743175",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TON:ADM1:12702645B16834523743175"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TON:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:tongatapu:a388b5003bd7",
+      "province_name": "Tongatapu",
+      "location_id": "gb:TON:ADM1:12702645B50986277851262",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TON:ADM1:12702645B50986277851262"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TON:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:eua:237244c6da44",
+      "province_name": "'Eua",
+      "location_id": "gb:TON:ADM1:12702645B6842520552302",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TON:ADM1:12702645B6842520552302"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TON:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:niutao:0e6b35ca7ede",
+      "province_name": "Niutao",
+      "location_id": "gb:TUV:ADM1:17741764B1294645335794",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B1294645335794"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TUV:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:nukufetau:5f8840dd7581",
+      "province_name": "Nukufetau",
+      "location_id": "gb:TUV:ADM1:17741764B30576374901893",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B30576374901893"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TUV:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:nanumea:aca6fdeee786",
+      "province_name": "Nanumea",
+      "location_id": "gb:TUV:ADM1:17741764B36602748519227",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B36602748519227"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TUV:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:funafuti:bb93df822c1e",
+      "province_name": "Funafuti",
+      "location_id": "gb:TUV:ADM1:17741764B42950471856320",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B42950471856320"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TUV:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:nukulaelae:95844662e871",
+      "province_name": "Nukulaelae",
+      "location_id": "gb:TUV:ADM1:17741764B45323499156113",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B45323499156113"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TUV:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:nanumanga:def782189614",
+      "province_name": "Nanumanga",
+      "location_id": "gb:TUV:ADM1:17741764B49308440506872",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B49308440506872"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TUV:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:vaitupu:ca67aef14178",
+      "province_name": "Vaitupu",
+      "location_id": "gb:TUV:ADM1:17741764B83632895409465",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B83632895409465"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TUV:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "province_id": "framework:province:nui:088ac96b7859",
+      "province_name": "Nui",
+      "location_id": "gb:TUV:ADM1:17741764B90379454256238",
+      "child_count_in_scope": 1,
+      "role_assessment": "One-to-one named wrapper over a single location. For Tonga ADM1 and Tuvalu ADM1, the wrapper duplicates the only mapped island-division/island-admin tier; census supports named settlement/district levels below the island tier, not this duplicate wrapper. For ADM0 aggregates, Tokelau, and ASM/WLF with null original source-policy crosswalk, no independent province boundary role is demonstrated. Assessment does not itself authorize hierarchy edits.",
+      "classification": "insufficient-evidence",
+      "basis": "No independent second-tier boundary/source evidence is pinned for the wrapper itself. Structural ancestry proves linkage only.",
+      "complete_parent_chain_reference": {
+        "file": "baseline-extract.json",
+        "key": "complete_parent_chains.gb:TUV:ADM1:17741764B90379454256238"
+      },
+      "pinned_framework_province_metadata": {
+        "source": "gb:TUV:ADM1",
+        "source_url": "https://www.geoboundaries.org/",
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    }
+  ],
+  "areas": [
+    {
+      "area_id": "framework:area:niue:c65e05c54ad0",
+      "area_name": "Niue",
+      "parent_id": "atlas:macro-review:region:3f0693a087ae4902",
+      "full_published_member_ids": [
+        "atlas:territory:NIU"
+      ],
+      "owned_members": [
+        "atlas:territory:NIU"
+      ],
+      "unowned_members": [],
+      "full_purpose_assessment": "Published baseline group, not an approved interior or purely political grouping. Exact current IDs/ancestry are inventoried, but the source packet does not establish the complete intended physical/biogeographic extent or justify a boundary edit.",
+      "classification": "insufficient-evidence",
+      "required_neighbor_reconciliation": true,
+      "pinned_framework_area_metadata": {
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd",
+        "source_urls": [
+          "https://unstats.un.org/unsd/methodology/m49/overview/",
+          "https://en.wikipedia.org/wiki/Melanesia"
+        ],
+        "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Single-child tier: geographic role requires individual review",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "area_id": "framework:area:samoa:d63b2a1b51c1",
+      "area_name": "Samoa",
+      "parent_id": "atlas:macro-review:region:3f0693a087ae4902",
+      "full_published_member_ids": [
+        "ASM-4998",
+        "ASM-4999",
+        "ASM-5000",
+        "ASM-5002",
+        "atlas:territory:WSM"
+      ],
+      "owned_members": [
+        "ASM-4998",
+        "ASM-4999",
+        "ASM-5000",
+        "ASM-5002",
+        "atlas:territory:WSM"
+      ],
+      "unowned_members": [],
+      "full_purpose_assessment": "Published baseline group, not an approved interior or purely political grouping. Exact current IDs/ancestry are inventoried, but the source packet does not establish the complete intended physical/biogeographic extent or justify a boundary edit.",
+      "classification": "insufficient-evidence",
+      "required_neighbor_reconciliation": true,
+      "pinned_framework_area_metadata": {
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd",
+        "source_urls": [
+          "https://unstats.un.org/unsd/methodology/m49/overview/",
+          "https://en.wikipedia.org/wiki/Melanesia"
+        ],
+        "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "area_id": "framework:area:tokelau-manihiki:770fbc288b00",
+      "area_name": "Tokelau Archipelago",
+      "parent_id": "atlas:macro-review:region:3f0693a087ae4902",
+      "full_published_member_ids": [
+        "ASM-5001",
+        "atlas:coverage:NZL-5472",
+        "atlas:macro-coverage:location:a0457f0d44c94b71f00d"
+      ],
+      "owned_members": [
+        "ASM-5001",
+        "atlas:coverage:NZL-5472"
+      ],
+      "unowned_members": [
+        "atlas:macro-coverage:location:a0457f0d44c94b71f00d"
+      ],
+      "full_purpose_assessment": "Published baseline group, not an approved interior or purely political grouping. Exact current IDs/ancestry are inventoried, but the source packet does not establish the complete intended physical/biogeographic extent or justify a boundary edit.",
+      "classification": "insufficient-evidence",
+      "required_neighbor_reconciliation": true,
+      "pinned_framework_area_metadata": {
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd",
+        "source_urls": [
+          "https://unstats.un.org/unsd/methodology/m49/overview/",
+          "https://en.wikipedia.org/wiki/Melanesia"
+        ],
+        "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      },
+      "cross_packet_purpose_note": "The baseline issue metadata explicitly describes legacy WGSRPD level-3 grouping. The current three members are Tokelau, Nukunonu (outside #134), and Swains Island (American Samoa). Government settlement sources support Tokelau’s three atolls but do not establish the botanical-area choice to include Swains or prove shared membership. Requires cross-packet integration; do not edit unilaterally."
+    },
+    {
+      "area_id": "framework:area:tonga:36a6092e6771",
+      "area_name": "Tonga",
+      "parent_id": "atlas:macro-review:region:3f0693a087ae4902",
+      "full_published_member_ids": [
+        "gb:TON:ADM1:12702645B14713027314985",
+        "gb:TON:ADM1:12702645B14719640472686",
+        "gb:TON:ADM1:12702645B16834523743175",
+        "gb:TON:ADM1:12702645B50986277851262",
+        "gb:TON:ADM1:12702645B6842520552302"
+      ],
+      "owned_members": [
+        "gb:TON:ADM1:12702645B14713027314985",
+        "gb:TON:ADM1:12702645B14719640472686",
+        "gb:TON:ADM1:12702645B16834523743175",
+        "gb:TON:ADM1:12702645B50986277851262",
+        "gb:TON:ADM1:12702645B6842520552302"
+      ],
+      "unowned_members": [],
+      "full_purpose_assessment": "Published baseline group, not an approved interior or purely political grouping. Exact current IDs/ancestry are inventoried, but the source packet does not establish the complete intended physical/biogeographic extent or justify a boundary edit.",
+      "classification": "insufficient-evidence",
+      "required_neighbor_reconciliation": true,
+      "pinned_framework_area_metadata": {
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd",
+        "source_urls": [
+          "https://unstats.un.org/unsd/methodology/m49/overview/",
+          "https://en.wikipedia.org/wiki/Melanesia"
+        ],
+        "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "area_id": "framework:area:tuvalu:aa448e049a04",
+      "area_name": "Tuvalu",
+      "parent_id": "atlas:macro-review:region:3f0693a087ae4902",
+      "full_published_member_ids": [
+        "gb:TUV:ADM1:17741764B1294645335794",
+        "gb:TUV:ADM1:17741764B30576374901893",
+        "gb:TUV:ADM1:17741764B36602748519227",
+        "gb:TUV:ADM1:17741764B42950471856320",
+        "gb:TUV:ADM1:17741764B45323499156113",
+        "gb:TUV:ADM1:17741764B49308440506872",
+        "gb:TUV:ADM1:17741764B83632895409465",
+        "gb:TUV:ADM1:17741764B90379454256238"
+      ],
+      "owned_members": [
+        "gb:TUV:ADM1:17741764B1294645335794",
+        "gb:TUV:ADM1:17741764B30576374901893",
+        "gb:TUV:ADM1:17741764B36602748519227",
+        "gb:TUV:ADM1:17741764B42950471856320",
+        "gb:TUV:ADM1:17741764B45323499156113",
+        "gb:TUV:ADM1:17741764B49308440506872",
+        "gb:TUV:ADM1:17741764B83632895409465",
+        "gb:TUV:ADM1:17741764B90379454256238"
+      ],
+      "unowned_members": [],
+      "full_purpose_assessment": "Published baseline group, not an approved interior or purely political grouping. Exact current IDs/ancestry are inventoried, but the source packet does not establish the complete intended physical/biogeographic extent or justify a boundary edit.",
+      "classification": "insufficient-evidence",
+      "required_neighbor_reconciliation": true,
+      "pinned_framework_area_metadata": {
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd",
+        "source_urls": [
+          "https://unstats.un.org/unsd/methodology/m49/overview/",
+          "https://en.wikipedia.org/wiki/Melanesia"
+        ],
+        "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "rationale": "Samoa is a whole-country local adaptation while neighbouring units are named island groups; the official Samoa district-profile service is evidence for finer sourced geography research. Tonga groups, Tuvalu atolls and Wallis/Futuna traditional districts serve different roles. Five American Samoa geographic units also have five independent USA-source residual polygons; source replacement requires archived crosswalks. Tokelau is three separated atolls in one local source territory.",
+          "evidence": [
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD botanical geography",
+              "inspected_fact": "The existing macro labels originate in a botanical reporting geography; neither its regions nor botanical countries are administrative atlas tiers."
+            },
+            {
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+              "title": "UN M49 geographic regions",
+              "inspected_fact": "The inspected table distinguishes Australia and New Zealand, Melanesia, Micronesia and Polynesia; it is a statistical country/territory convention, not a land-polygon boundary verification."
+            }
+          ],
+          "remaining_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    },
+    {
+      "area_id": "framework:area:wallis-futuna-is:e4f7505b4b7c",
+      "area_name": "Wallis and Futuna Islands",
+      "parent_id": "atlas:macro-review:region:3f0693a087ae4902",
+      "full_published_member_ids": [
+        "WLF-4995",
+        "WLF-4996",
+        "WLF-4997"
+      ],
+      "owned_members": [
+        "WLF-4995",
+        "WLF-4996",
+        "WLF-4997"
+      ],
+      "unowned_members": [],
+      "full_purpose_assessment": "Published baseline group, not an approved interior or purely political grouping. Exact current IDs/ancestry are inventoried, but the source packet does not establish the complete intended physical/biogeographic extent or justify a boundary edit.",
+      "classification": "insufficient-evidence",
+      "required_neighbor_reconciliation": true,
+      "pinned_framework_area_metadata": {
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd",
+        "source_urls": [
+          "https://unstats.un.org/unsd/methodology/m49/overview/",
+          "https://en.wikipedia.org/wiki/Melanesia"
+        ],
+        "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+        "kind": "geographic",
+        "framework_status": "retained-reference",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "rename",
+          "boundary_status": "open",
+          "rationale": "Expand legacy abbreviation or use the full named archipelago matching actual member source provinces: Sigave, Alo, `Uvea. Stable identity and geometry remain; this does not close local-scale or coastline review.",
+          "evidence": [
+            {
+              "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "title": "Pinned Natural Earth named islands and administrative subdivisions",
+              "inspected_fact": "Actual member province names inspected: Sigave, Alo, `Uvea"
+            },
+            {
+              "url": "https://github.com/tdwg/wgsrpd",
+              "title": "WGSRPD inherited abbreviation",
+              "inspected_fact": "Current botanical area label Wallis-Futuna Is. is an abbreviated reporting name, not a distinct historical identity."
+            }
+          ],
+          "remaining_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Exact descendant geography/granularity and full source-land coverage are not certified by this label/source-role assessment."
+          ]
+        }
+      }
+    }
+  ],
+  "scope_audit": {
+    "every_exact_scope_id_in_baseline": true,
+    "complete_ancestry_for_every_location": true,
+    "province_wrapper_for_every_location": true,
+    "all_areas_with_owned_scope_inventoried": true,
+    "published_region_membership_count": 25,
+    "published_region_membership_note": "25 total, including one supplemental location outside this issue, per pinned main baseline."
+  },
+  "packet_conclusion": "Exhaustive over all pinned location and province identities and all six areas. Identifies Tuvalu source completeness discrepancy and unresolved provenance/semantic limits; does not endorse or mutate the shared region."
+}
