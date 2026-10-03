@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "issue": 45,
+  "status": "offline-source-grid-envelopes-prepared-data-passed-publication-pending",
+  "focused_tests": {
+    "node": 6,
+    "python": 7
+  },
+  "all_current_locations_checked": 49623,
+  "archived_polygons_checked": 19102,
+  "new_attributes": "explicit unknown, not copied from modern source owners",
+  "prior_releases_preserved": true,
+  "prior_catalog_sha256": "ade11c54ae041f48c305b79223bb5b230db608b2bb0ee1e8a74edd1bc54f6d2b",
+  "prior_release_index_sha256": "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd",
+  "live_preflight_revision": 1754,
+  "snapshot_claims": 3984,
+  "media_links": 6,
+  "new_registry_matches": 0,
+  "changed_subject_direct_claim_matches": 0,
+  "configured_database_budget_bytes": 536870912,
+  "observed_database_bytes": 481394688,
+  "configured_database_headroom_bytes": 55476224,
+  "reviewed_payload_bytes": 92935927,
+  "physical_database_growth_verified": false,
+  "capacity_gate": "Historical512MiB guard is below modeled requirement. Subsequent official pricingcheck advertises1GB Free and new800MB conservative applicationbudget pendingdeployment; actualgrowth/account-specificallowance remainsunmeasured. See capacity-plan-update.json.",
+  "remaining_gates": [
+    "controlled actual installation with final proof pins",
+    "final macro certificates/projections/handoff inventories",
+    "hosting package limits and publication source parity",
+    "bounded import physical growth measurement and originalclaim readback",
+    "matching Site deployment and regional queue finalpin refresh"
+  ],
+  "published": false,
+  "capacity_assessment": "capacity-assessment.json",
+  "aggregate_source_receipt_raw_sha256": "f44affea3bf822e7d87a8913054ae2c8c96edb2235fa903bc559c2e7c1e90607",
+  "geometry_proofs_sha256": "df04ba0d0bf631a38301d267c766118f66eefb9e24d3e5439616fffc8fedd3ff",
+  "canonical_grid": {
+    "locations": 49623,
+    "missing": 0,
+    "projected_distortion_above25pct": 0,
+    "wgs84_distortion_above25pct": 0,
+    "zoom": 10
+  },
+  "macro_envelopes": {
+    "groups": 116,
+    "independently_verified": true,
+    "same_tier_material_overlaps": 0,
+    "child_land_outside_parent": 0
+  },
+  "prepared_cache": {
+    "reused_locations": 49583,
+    "recomputed_footprints": 40,
+    "reused_ownership_intervals": 6833529,
+    "derived_ownership_intervals": 326,
+    "derived_reference_records": 207,
+    "supported_reference_intervals_unchanged": true
+  }
+}
