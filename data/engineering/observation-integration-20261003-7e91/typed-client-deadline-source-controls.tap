@@ -1,0 +1,55 @@
+✔ prepared and hosted typed loads terminate stalled fetches and cancel stalled bodies without accepting partial evidence (146.998018ms)
+✔ external cancellation reaches typed transport/read cleanup and completed exact-byte loads clear their deadline (15.835124ms)
+✔ typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL (3162.933888ms)
+✔ typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes (2328.641033ms)
+✔ legacy or altered installed schemas never advertise typed capabilities (26.845732ms)
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+✔ actual Worker typed routes enforce transport/maintenance and keep atomic corrections, raw source pins and snapshot paging consistent (2143.500654ms)
+✔ legacy23-table projections require the complete known schema and current maintenance clients refuse them as complete backups (2330.672745ms)
+✔ derivation closures reject example promotion, cycles and ambiguous roots while example-only acyclic chains remain available under the paused factual gate (2134.270397ms)
+✖ bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes (254.484354ms)
+✔ factual typed geography is retained per claim and cannot be silently repinned on import, correction or prepared reads (1733.484928ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14285.741196
+
+✖ failing tests:
+
+test at test/typed-integration.test.mjs:135:1
+✖ bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes (254.484354ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /source bytes differ/. Input:
+  
+  'Error: Original source metadata JSON identifies different evidence'
+  
+      at async file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:150:2
+      at async both (file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:35:110)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Original source metadata JSON identifies different evidence
+        at retainedTypedJSON (file:///workspace/worldatlas-observation-integration-20261003-7e91/src/typed-snapshot.js:15:66)
+        at loadHostedCore (file:///workspace/worldatlas-observation-integration-20261003-7e91/src/typed-client.js:70:127)
+        at async boundedLoad (file:///workspace/worldatlas-observation-integration-20261003-7e91/src/typed-client.js:17:48)
+        at async waitForActual (node:assert:646:5)
+        at async strict.rejects (node:assert:769:25)
+        at async file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:150:2
+        at async both (file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:35:110)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7),
+    expected: /source bytes differ/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

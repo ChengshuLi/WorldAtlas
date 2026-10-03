@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "source_commit": "09f7953019d34ba14c790c39fe03d2deeb9f5487",
+  "base_main_commit": "af5ed5739774dd2ed6de8241de72250891609529",
+  "full_regression": {
+    "command": "npm test",
+    "receipt": "data/engineering/observation-integration-20261003-7e91/full-regression-final.tap",
+    "sha256": "b7c64ac1903817349b6c54d59320ebda4ce20f6842cc00eb980fc947e37dc1e2",
+    "bytes": 80192,
+    "tests": 636,
+    "pass": 636,
+    "fail": 0,
+    "skipped": 0,
+    "duration_ms": 322748.31183
+  },
+  "focused_corrections": {
+    "command": "node --test test/typed-client-deadline.test.mjs test/typed-integration.test.mjs test/neon-forward-migrations.test.mjs",
+    "receipt": "data/engineering/observation-integration-20261003-7e91/client-owner-correction-controls.tap",
+    "tests": 18,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0
+  },
+  "source_whitespace_check": {
+    "command": "git diff --check -- src hosted scripts server.mjs docs test",
+    "passed": true,
+    "limit": "Raw original TAP/probe logs deliberately retain their bytes and any whitespace; no whole-receipt whitespace-clean claim"
+  },
+  "distinct_source_reassessment": {
+    "path": "data/engineering/observation-integration-20261003-7e91/full-source-correction-independent-review.json",
+    "sha256": "5e0295dcd557d26ee5967299a9ee1b38e89adb8f8ead00f672d42ae1bd405c81",
+    "limit": "Source review, not final receipt-head acceptance"
+  },
+  "limits": [
+    "No provider DDL, factual import, new Site operation, geographic or physical-device certificate",
+    "Production PG remains V2 until reviewed current-source owner preservation/maintenance operation",
+    "Native D1 frozen0008 limitation retained; legacy/unverified typed capability zero"
+  ],
+  "final_required_checks_and_review": "Must be tied to final pushed receipt head on GitHub; queue and actual merge remain pending",
+  "hosted_rebuild": {
+    "receipt": "data/engineering/observation-integration-20261003-7e91/hosted-build-final.log",
+    "passed": true,
+    "budget_receipt": "data/engineering/observation-integration-20261003-7e91/hosted-deployment-budget-final.json",
+    "violations": 0
+  },
+  "actual_node_static_prepared_final": "data/engineering/observation-integration-20261003-7e91/prepared-server-parity-final.json"
+}

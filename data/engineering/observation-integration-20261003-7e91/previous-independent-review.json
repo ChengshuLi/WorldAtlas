@@ -1,0 +1,575 @@
+{
+  "version": 1,
+  "pr_number": 671,
+  "issue_number": 529,
+  "reviewer_worker_id": "review-palette-651-20261003",
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "head_sha": "bd48350a9fed47b6ca66401a0a21db4ca8cee4ba",
+  "base_sha": "277b8ecbb3199ae3d5fb07bab96353d17a049b1c",
+  "outcome": "accepted-with-explicit-limits",
+  "blocking_findings": [],
+  "review_text": "Independent substantive review by review-palette-651-20261003 of PR671 exact head bd48350a9fed47b6ca66401a0a21db4ca8cee4ba against base 277b8ecbb3199ae3d5fb07bab96353d17a049b1c: accepted as the second bounded, partial #529 contribution. This is not full issue acceptance or permission to run migrations or publish.\n\nI inspected the additive SQL guards, complete version3 contract/export/restore, private GET routing, actual SQLite/PostgreSQL tests, documentation, all63 changed-file byte receipts and retained attempts. Both SQL implementations now agree with the merged pure status/source/null branches. Exact replay keeps original raw provenance; the two retirement uniqueness keys are checked before either conflict-ignore form can silently discard a different retained identity/source/reason/metadata. The independent initial findings, original collision proof and corrected reassessment are preserved verbatim. I independently reran all41 focused controls on this exact committed source:41 passed,0 failures,0 skips. The separately reproduced complete catalog hashes match unchanged final SQL/contract/test bytes.\n\nThe version3 path covers all26 factual tables and fails on uninstalled/altered schema, missing guards, unknown tables or changed source pins. Actual restore controls cover all populated collections, raw JSON whitespace/zero/false/null, retained corrections, ordered identity hashes, deferred-FK rollback, enabled guards and sequence. Owner/empty-target acknowledgements, maintenance read-only capture, cursor/version binding and bounded transport are retained. These SQL backups preserve media registrations, not object-store payload bytes. All27 legacy source pins match original baseline, incorporated current main and reviewed head. The original whole journal is retained and precisely one entry appended; no legacy migration/snapshot, v1/v2 contract or research/factual path is rewritten.\n\nI inspected the actual source-bound625-pass full regression,41-pass focused and9-pass staging/transport receipts, successful hosted archive reserve audit (262522880 uncompressed bytes, zero violations), and older failed/superseded runs. I did not independently rerun the full regression or hosted build. Native workerd D1 failed in unchanged0008 with too many terms in compound SELECT, before0010; its log/hash and explicit unavailable status are honest. Local SQLite/PGlite evidence is not a native D1 pass. Legacy D10000-0007 must not advertise typed capabilities, and native forward compatibility requires reviewed follow-up if needed.\n\nRetirement/replacement integrity is guaranteed for the supported atomic ingestion-plus-journal batch, not arbitrary standalone owner SQL. Typed module/metric/metadata/source/registry/regional approval checks belong to the unfinished controlled adapter. One final budgeted PR remains for import/read/capabilities, static/prepared/snapshot parity, labeled v2-compatible projection and closed owner forward-workflow/role integration; domain children stay blocked. This PR honestly uses only Refs #529. If that final scope cannot fit, obtain coordinator-reviewed follow-ups rather than a fourth PR.\n\nCanonical ownership currently matches author/branch/claim9ea71518 with live_work=false; required exact-head CI and serialized queue/actual merge verification remain separate gates. No provider operation, Site publication, geographic/historical approval, physical-device certificate, token access or formal mandatory manifest binding is conferred by this review. New commits invalidate this head-bound acceptance.",
+  "independent_execution": {
+    "command": "node --test test/storage-export-v3.test.mjs test/storage-export-v2.test.mjs test/storage-export.test.mjs test/typed-observations.test.mjs",
+    "exit_code": 0,
+    "tests": 41,
+    "passed": 41,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 14449.809924,
+    "log_path": "/tmp/worldatlas-671-independent-focused.log",
+    "log_bytes": 4794,
+    "log_sha256": "f9f3766903e113855d57befca48bc9758b5bf57599f7ea27494b9d9b64f0c9cf"
+  },
+  "independent_catalog_reproduction": {
+    "version": 3,
+    "tables": 26,
+    "scope": "Actual isolated SQLite and PostgreSQL full catalog byte hashes. No provider operation, historical/geographic approval or production certificate.",
+    "d1": "e7474b3d88f1d7d4b4c33b8b2581a1d17d59039abc73d8bd076078ab92639616",
+    "postgres": "cd51f2e42fb343cb4994a2c25a08c96d768c5fdeddfe8a56931ad3e7a694b26c"
+  },
+  "verification": {
+    "changed_files": 63,
+    "ledger_rows_verified": 62,
+    "ledger_self_excluded": true,
+    "git_blobs_match_checkout": true,
+    "legacy_pins_verified_at_original_base_current_main_and_head": 27,
+    "original_journal_whole_bytes_retained": true,
+    "exactly_one_journal_entry_appended": true,
+    "original_review_receipts_byte_equal": true,
+    "source_checks_bound_to_final_blobs": true,
+    "factual_research_paths_changed": false,
+    "claim_verified_via_github_comment": 5972401777,
+    "claim_id": "9ea71518-3663-4baf-98ef-8cb7c9a8be4c",
+    "live_work": false,
+    "required_ci_pending_at_review": true
+  },
+  "limits": [
+    "Second partial of maximum3PR budget; issue529 remains open.",
+    "Actual isolated SQLite/PGlite only; native D1 failed before new migration and is unavailable.",
+    "Supported atomic journal ingestion only; standalone owner SQL may leave incomplete replacement.",
+    "Final controlled API/capability/static/prepared/parity/legacy projection/owner workflow not completed.",
+    "No production operations, private token access, source truth or geographic/device approval.",
+    "Report-only legacy evidence policy; no invented manifest or manifest hash.",
+    "Acceptance bound only to this exact head; queue checks and actual merge still required."
+  ],
+  "file_inventory": [
+    {
+      "path": "coordination/engineering/observation-storage-20261003-7e91.json",
+      "status": "A",
+      "bytes": 5338,
+      "sha256": "c6dff84926e4a5e14c26584ef07547b5c45f0de213a912a60ef7cc731983215e"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/README.md",
+      "status": "A",
+      "bytes": 6670,
+      "sha256": "318c389926d837e33c8bea2e46999fdfeb522fbd12b6705c9cdf5dded33b356d"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/catalog-pins-current.json",
+      "status": "A",
+      "bytes": 352,
+      "sha256": "a26e8376ab5f1bc930e90397e9af2e1b4208e5f329c1fe92f87df8640860b86a"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/catalog-pins-final.json",
+      "status": "A",
+      "bytes": 352,
+      "sha256": "d1f4360b8547b1d0e692f6a79216f6cadadfde76f7b57796e46cf4d42c9cbd56"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/catalog-pins-local.json",
+      "status": "A",
+      "bytes": 313,
+      "sha256": "a97b221d0c87cd6aecf21215718d15d0012ff1d780729d81d07c436ffa565862"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/catalog-pins-retirement-identity.json",
+      "status": "A",
+      "bytes": 352,
+      "sha256": "96b2b8feaa5e3bc01f76a0d6de05b7f545abb0397477fb7ea7b2f03e031cb4c8"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/catalog-pins-status-aligned.json",
+      "status": "A",
+      "bytes": 352,
+      "sha256": "c1fda85b910ef7ace31ceb6806d7f7be0936621013f746044347599e27442732"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/catalog-reproduction.mjs",
+      "status": "A",
+      "bytes": 1645,
+      "sha256": "9a3123756e8a15c3d6c61496702ab5c2dfea383cba41f35f5b14acede4ad999d"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/corrected-source-checks.json",
+      "status": "A",
+      "bytes": 2635,
+      "sha256": "e2f1fb49634650c05472b2d0b363a1c596f7ad0112309dc22373cdadef57b7d0"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/deployment-budget-retirement-identity.json",
+      "status": "A",
+      "bytes": 121911,
+      "sha256": "4b103468ff4b92e90d47b6e655a0adcc376c13317ba7abf22e1516d055cd63a0"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/deployment-budget-status-aligned.json",
+      "status": "A",
+      "bytes": 121911,
+      "sha256": "a8547f5bd279762387673343218321d2831d2c2caa42a38f9d9d53beed17bc2f"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/deployment-budget.json",
+      "status": "A",
+      "bytes": 121911,
+      "sha256": "7f07474eb65fe5fbdeb35ce2ef300f036ab22bba5be1848e653c416613e36357"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/file-receipts.json",
+      "status": "A",
+      "bytes": 14791,
+      "sha256": "aff650fe3f81f1df697fe999fc2bc6ee9c61353fe09c5bc7000fb3d4ebf02e7b"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/final-part-boundary.json",
+      "status": "A",
+      "bytes": 2739,
+      "sha256": "aadaba6119c9c3ba25fe6844f9b8bb2092fcdbed70f1e16182131cb3dc1321fe"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/hosted-build-retirement-identity.log",
+      "status": "A",
+      "bytes": 1821,
+      "sha256": "1fdccb822e3360a085ee08bdd6c9c0d15e98780394827a918e4e6a1e4b9fa7fe"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/hosted-build-status-aligned.log",
+      "status": "A",
+      "bytes": 1821,
+      "sha256": "85e27af5ac571b1bff62d959cbfb2f38707d5ee19ebb69555a816d882cde3f31"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/hosted-build.log",
+      "status": "A",
+      "bytes": 1821,
+      "sha256": "047c730fbd120691fc3b1be3b7ab0482807924c52cfa4f154b82adf9c9947a6d"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/independent-retirement-correction-review.json",
+      "status": "A",
+      "bytes": 2440,
+      "sha256": "2c4e38c33f3afa82d99f35cbbc1262c0a3c878421390c5130a6df854951c1b34"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/independent-retirement-identity-collision.json",
+      "status": "A",
+      "bytes": 2108,
+      "sha256": "5db114a3deb1d76727c0fa7c8f793d919cca623c24dc82cf71d12cda9d24d2c5"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/independent-review-corrections.json",
+      "status": "A",
+      "bytes": 3763,
+      "sha256": "0576bceb0966eff06a765682e93eab6de113d37f3da228b436e5df0e588168cc"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/legacy-preservation.json",
+      "status": "A",
+      "bytes": 4991,
+      "sha256": "c7027933bfda4c453cda2c2038bcc87d047ea3d5b474ff242e77c9ea269d38ab"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/local-migration-transport-after-journal.json",
+      "status": "A",
+      "bytes": 2392,
+      "sha256": "6c6e49553a90c62191396356dd51c1062d9462a57d90098edf79867336420ce0"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/local-migration-transport.json",
+      "status": "A",
+      "bytes": 2392,
+      "sha256": "6c6e49553a90c62191396356dd51c1062d9462a57d90098edf79867336420ce0"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/migration-journal-append.json",
+      "status": "A",
+      "bytes": 662,
+      "sha256": "37963d13a2c138cf555187f996c82c002694b15acfe4bc6d286a7e3bd5c74cf0"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/migration-transport-and-staging-final.tap",
+      "status": "A",
+      "bytes": 1039,
+      "sha256": "843085f5cde2000dfbbaade6ffb3056e9e1a0d360126fb5445d7452c7440dc75"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/migration-transport-and-staging.tap",
+      "status": "A",
+      "bytes": 6674,
+      "sha256": "36e42d9253f76a526aa5a001d73d406c6bf79ba75d9e8427aa99b050c52a0975"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/migration-transport-retirement-identity.tap",
+      "status": "A",
+      "bytes": 1126,
+      "sha256": "9b3d3efda5ba6ef23be3d10a4a82c3d5a7782177008a4f004d58ab86ac56b4b7"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/migration-transport-status-aligned.tap",
+      "status": "A",
+      "bytes": 1040,
+      "sha256": "e114f77a5e4312e1371e688af8168d03ceccdbc62169cb6b870069404ec0fdda"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/native-d1-batch-limit.log",
+      "status": "A",
+      "bytes": 953,
+      "sha256": "373594ac1c5497bbb3792e5ace684cf0fc784bbcb6f897dd0e20b98be74dbe0b"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/native-d1-catalog-controls.log",
+      "status": "A",
+      "bytes": 1229,
+      "sha256": "ffe51da64a75979ac6dfd5b8d382bd67e9dad6206eaa930808e242f26e017862"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/native-d1-first.log",
+      "status": "A",
+      "bytes": 933,
+      "sha256": "e3703bc0366571dc192bbd4e546366b64e5d5907da4b8793a1df27a37cce3300"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/native-d1-reproduction.mjs",
+      "status": "A",
+      "bytes": 2710,
+      "sha256": "aefe785ece750c4c0addea80bafca62177f0b278f3a51ba1e715c9b5087a7807"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/native-d1-runtime-limit.json",
+      "status": "A",
+      "bytes": 1346,
+      "sha256": "d99f57ca6384789976ff90b0bfa91e2c84c6b4afb51a9ac5c43096d09cab3ac6"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/npm-ci.log",
+      "status": "A",
+      "bytes": 466,
+      "sha256": "350739232c29bc123eb2a578ecf594c754c232612bab082c97038ed11a21e3c4"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/original-migration-journal.json",
+      "status": "A",
+      "bytes": 1586,
+      "sha256": "2874e68460c8310dd3c48b99181d46a73a013e2869e7f7ad6fa8dbb07d5fe229"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/pre-review-status-candidate.json",
+      "status": "A",
+      "bytes": 662,
+      "sha256": "332045bf2f2c75c453e9595cc9704a064e0d4ccfb200eca8b3d2825ccba6e2ae"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/premerge-renew.json",
+      "status": "A",
+      "bytes": 832,
+      "sha256": "9f9c5d9f47b18808327c1a2a1fd98a520055108ffd34ed96b365def1e51feed5"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/previous-actual-merge.json",
+      "status": "A",
+      "bytes": 174,
+      "sha256": "a0a65e665c338b657001868cbd68e87888c65a69e27083e41e50fcc006c69051"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/previous-independent-review.json",
+      "status": "A",
+      "bytes": 12786,
+      "sha256": "bef1480a4f0e06f021c2a3a2ee25ce337a5e2c4ead5e693f0f717117cc9d0f1b"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/previous-queue-request.json",
+      "status": "A",
+      "bytes": 459,
+      "sha256": "90e9efc3d5f036adc64e2aab999aa8e636dd66e2350fa7b2aefeab075cf89720"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/previous-queue-result.json",
+      "status": "A",
+      "bytes": 709,
+      "sha256": "54157e2e684d0ef1c0d6aae943dbd1cc690b3acc13447da378ea2ec56ed54964"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/retirement-identity-controls.tap",
+      "status": "A",
+      "bytes": 4787,
+      "sha256": "7917a6aa644aca9861eebbc0a1dc9d36ac0eea3dd2319d49b22c91b2a9d1b480"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/status-aligned-contract-controls.tap",
+      "status": "A",
+      "bytes": 4786,
+      "sha256": "75e91de9954328e6ac0a52d9a8b531d1b1e6056fc5810be9018aaba25bde2944"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/storage-all-version-controls-corrected.tap",
+      "status": "A",
+      "bytes": 5044,
+      "sha256": "12d48a5707587f367c3475a8726006586fbd9e002171cd7431f91b95287c160c"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/storage-all-version-controls-final.tap",
+      "status": "A",
+      "bytes": 3339,
+      "sha256": "0666d20af2a729f0796a8618aaf9dcf32b7bfc36c695e6d0f6d705b24a36e704"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/storage-all-version-controls.tap",
+      "status": "A",
+      "bytes": 4854,
+      "sha256": "36851c3c1a256d5b37d49930d035cf7ce87414c8c9e01ee990a50e19b6f0c4d8"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/storage-renew.json",
+      "status": "A",
+      "bytes": 832,
+      "sha256": "72727ec3347ad57db9c794b5ad94dadcf7ed33c7d40b9e26aceb35ee005100c0"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/storage-v3-corrected.tap",
+      "status": "A",
+      "bytes": 897,
+      "sha256": "84bf53a36e52bedc0e7a759ec36213545f48215201b9834f8bfb159b4d2968b0"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/storage-v3-first.tap",
+      "status": "A",
+      "bytes": 5883,
+      "sha256": "7062f8d39b147bfedf8e95e9a7b4274f3af7974b107b1e600a2b681089aafe2b"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/storage-v3-guard-controls.tap",
+      "status": "A",
+      "bytes": 1819,
+      "sha256": "5781f4aaa1ab8149e0927793289fa3ecbf1614b9e70c14d960e752cbc4656fa8"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/unit-tests-retirement-identity.tap",
+      "status": "A",
+      "bytes": 77722,
+      "sha256": "01251c2290263bacfdaaecbd86d5018129ef1710d5cf3e63224316963bfb8b26"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/unit-tests-status-aligned.tap",
+      "status": "A",
+      "bytes": 77723,
+      "sha256": "caef6668cf42cc63c3fcd28eb5d746a7a64e0ddf7c4de6d9ea0e758fcbe855fc"
+    },
+    {
+      "path": "data/engineering/observation-storage-20261003-7e91/unit-tests.tap",
+      "status": "A",
+      "bytes": 76559,
+      "sha256": "940ef920660b6ac82282af3351fcf5af63ee075a1c15db1a7875f729ddb0a4ad"
+    },
+    {
+      "path": "docs/TYPED_STORAGE_COMPATIBILITY.md",
+      "status": "A",
+      "bytes": 8558,
+      "sha256": "5a1fa7eb632ea9177f142ba07f7135924ac23dbd32e9de3a416a97f2392e35c9"
+    },
+    {
+      "path": "drizzle/0010_typed_observations.sql",
+      "status": "A",
+      "bytes": 12622,
+      "sha256": "672cb4f723a84ce2958f90f7c5d1fe517d566d6753da520ec3246a00dfe234c1"
+    },
+    {
+      "path": "drizzle/meta/_journal.json",
+      "status": "M",
+      "bytes": 1733,
+      "sha256": "632d8b299ace3f27e088b3d541e13f255f8960282ecf73d53ad0653b9c3dd5b9",
+      "original_sha256": "2874e68460c8310dd3c48b99181d46a73a013e2869e7f7ad6fa8dbb07d5fe229"
+    },
+    {
+      "path": "hosted/storage-export-v3-contract.js",
+      "status": "A",
+      "bytes": 2545,
+      "sha256": "9fe988be6f06ba81d6e92d1fd0b82e7b940f8f90829d072a42e5cd9a0696b821"
+    },
+    {
+      "path": "hosted/storage-export-v3.js",
+      "status": "A",
+      "bytes": 11339,
+      "sha256": "086146fc35b565bdd6e93416c05cd58761b0447d05a08ad53ef19c3f9cbc8a03"
+    },
+    {
+      "path": "hosted/worker.js",
+      "status": "M",
+      "bytes": 14352,
+      "sha256": "3f05015a55ef13e9af3b1052151f9515d754ad9727ce1fd0d8a6fcdf5c6a2969",
+      "original_sha256": "6bbf2bfd14b91d32cf2ae7c4f98cde5c493322fa608d2db2017ba243cb7a732b"
+    },
+    {
+      "path": "postgres/migrations/0003_typed_observations.sql",
+      "status": "A",
+      "bytes": 14790,
+      "sha256": "0c9c1c402c0f1ee707a0083199ea07314233846deb9fddb79723108a0c439041"
+    },
+    {
+      "path": "scripts/export-hosted-storage-v3.mjs",
+      "status": "A",
+      "bytes": 15673,
+      "sha256": "42d79c38cf21bd388b832875ad485b1b848ba32e5365dd355103fd5a510a5f48"
+    },
+    {
+      "path": "scripts/restore-postgres-storage-v3.mjs",
+      "status": "A",
+      "bytes": 20625,
+      "sha256": "51098fe5e9f042dabdabf05cf60e5c25bdeb32b02031dd3e38dfaf490611bd30"
+    },
+    {
+      "path": "test/storage-export-v3.test.mjs",
+      "status": "A",
+      "bytes": 34343,
+      "sha256": "d48c2a2ddca650da63d16860a4d6ac08d8d0047405a7e7cd6b4468d5b88e0b26"
+    }
+  ],
+  "legacy_preservation_pins": [
+    {
+      "path": "drizzle/0000_bizarre_sentry.sql",
+      "bytes": 38954,
+      "sha256": "a7d4945214a37835bc6cbe8c6c0bfe2073d15fbf76fa1c510e6db072b64ba699"
+    },
+    {
+      "path": "drizzle/0001_evidence_retirements.sql",
+      "bytes": 8576,
+      "sha256": "1f29f4af9eb41425dbd932b9d68e1c54406cb99221a02a2a1bc6b6cab2e3846f"
+    },
+    {
+      "path": "drizzle/0002_geographic_reference_releases.sql",
+      "bytes": 14284,
+      "sha256": "fc03e50b1c7053d9ffe89534395bcbb644e3192231122eca51a424fd14753c53"
+    },
+    {
+      "path": "drizzle/0003_unsettled_location_rank.sql",
+      "bytes": 15998,
+      "sha256": "dc249cb326203bee26446fb010e0f2c05d8bd9bcbb918649199382d517e0fa4d"
+    },
+    {
+      "path": "drizzle/0004_population_precision_guard.sql",
+      "bytes": 5020,
+      "sha256": "302660bc2d4d673bab67820d3c54637ca8cd50460ace57e3142fb3c6f40da447"
+    },
+    {
+      "path": "drizzle/0005_population_source_class_guard.sql",
+      "bytes": 5345,
+      "sha256": "44ec5f5a82317b7c430f7d98439e6ce41d04859d46719c36c3e0dc072f102194"
+    },
+    {
+      "path": "drizzle/0006_unresolved_attribute_status_guard.sql",
+      "bytes": 472,
+      "sha256": "e2778adcf77945b294609111ecd21a02ffc177e41463393f07e7d15e50e97475"
+    },
+    {
+      "path": "drizzle/0007_fixed_environment_classifications.sql",
+      "bytes": 4652,
+      "sha256": "c566a87dc05a5ec5a1311019b60cfea54e8708b29ec2df6c8e80057432c4708b"
+    },
+    {
+      "path": "drizzle/0008_temporal_geography.sql",
+      "bytes": 21737,
+      "sha256": "a8cd574333d20891a94afac6a034576681fac2531545b761d4c4e609be452082"
+    },
+    {
+      "path": "drizzle/0009_footprint_versions.sql",
+      "bytes": 19674,
+      "sha256": "014c90d0f7cba3417480cefe3c20a97119237874098bcfb17b4be5120478a7f6"
+    },
+    {
+      "path": "drizzle/meta/0000_snapshot.json",
+      "bytes": 40129,
+      "sha256": "e8fd244d13001d742632e0678dfc72210f5226cad757dfd4316128d5c38f777d"
+    },
+    {
+      "path": "drizzle/meta/0001_snapshot.json",
+      "bytes": 43387,
+      "sha256": "c87009a65f84744b2716ce5e0499f0167d26fb61cd381df3cc64e7895df4bc3f"
+    },
+    {
+      "path": "drizzle/meta/0002_snapshot.json",
+      "bytes": 59498,
+      "sha256": "410a03e184a5169e3d9a34055d5247b610e34e799b48c8f35ea3ac04ee2f68b9"
+    },
+    {
+      "path": "drizzle/meta/0003_snapshot.json",
+      "bytes": 59510,
+      "sha256": "a092e2550c751a59ee02ea724448c126eb570790e99ec899cf071f7f7dc26838"
+    },
+    {
+      "path": "drizzle/meta/0004_snapshot.json",
+      "bytes": 59511,
+      "sha256": "de04bfc01382c7c96844b96acaf38fccc92bd4e63308eceb786cfa87c4c53cae"
+    },
+    {
+      "path": "drizzle/meta/0005_snapshot.json",
+      "bytes": 59511,
+      "sha256": "20e45fc7a7f1656c796744fc50fd46f9d079cb667f3ea7918abea03dd4725eed"
+    },
+    {
+      "path": "drizzle/meta/0006_snapshot.json",
+      "bytes": 59510,
+      "sha256": "80077fbacf604ee38488b3197fbde0ce74ef2f75f370c2cbe4159fa3d6216cae"
+    },
+    {
+      "path": "drizzle/meta/0007_snapshot.json",
+      "bytes": 59511,
+      "sha256": "329921a90f920a9b53551295ab1211d16841bb7b8e700ca4bfa615bb18c37129"
+    },
+    {
+      "path": "postgres/schema.sql",
+      "bytes": 51470,
+      "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618"
+    },
+    {
+      "path": "postgres/migrations/0001_temporal_geography.sql",
+      "bytes": 21800,
+      "sha256": "a4302a6f00b305205b70ed8981f929725c90b48172413ff47738a4a27186f6cd"
+    },
+    {
+      "path": "postgres/migrations/0002_footprint_versions.sql",
+      "bytes": 20748,
+      "sha256": "24e22602715355e48e344649461179d69ed92cf3c0e54812dee4f315fed42f37"
+    },
+    {
+      "path": "hosted/storage-export-v2-contract.js",
+      "bytes": 7783,
+      "sha256": "f670c6e6809192d62fa01959e3277eff96633b4e64293975dbf52b63b8e5d04b"
+    },
+    {
+      "path": "hosted/storage-export-v2.js",
+      "bytes": 11339,
+      "sha256": "a5e17805cf204fd28423064a0b51722cc37ce5baf754935a3526afe8dd9f9267"
+    },
+    {
+      "path": "scripts/export-hosted-storage-v2.mjs",
+      "bytes": 15673,
+      "sha256": "31322f0fda1916410436f772286ea8be50632f8f0d061671f2630b1eedf27ff4"
+    },
+    {
+      "path": "scripts/restore-postgres-storage-v2.mjs",
+      "bytes": 20543,
+      "sha256": "44dd22f2887fd63f6360e7edab747771a14d805d4b213629c93ea8ca13bb1e32"
+    },
+    {
+      "path": "db/schema.ts",
+      "bytes": 15545,
+      "sha256": "60d9666277699bf38f039015a6bfb01b9a36b166ec3c979b9a9d4e430d28df01"
+    },
+    {
+      "path": "src/model.js",
+      "bytes": 2822,
+      "sha256": "6cf64270d9c912b09aa93c60a14d058b4482c52e5ffa31d55fdcef026bea3dcc"
+    }
+  ]
+}

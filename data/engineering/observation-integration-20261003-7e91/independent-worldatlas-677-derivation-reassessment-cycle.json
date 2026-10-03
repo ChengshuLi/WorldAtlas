@@ -1,0 +1,31 @@
+{
+  "scope": "isolated SQLite synthetic fixtures only",
+  "results": [
+    {
+      "probe": "same-batch-two-node-cycle",
+      "accepted": false,
+      "error": "Circular derivation evidence"
+    },
+    {
+      "probe": "retained-example-to-example-without-factual-certificate",
+      "accepted": true,
+      "result": {
+        "version": 1,
+        "ingestion_id": "typed:924fbea7e804698695fb89d67e3792256eaff011676af434dd2065eb1c644055",
+        "duplicate": false,
+        "counts": {
+          "retirements": 0,
+          "observations": 1,
+          "feature_links": 0
+        },
+        "registry_sha256": "cc6aae6c18099d3e776c73ee4144556422ac87b911aa30aa95bef831ca18d2d2",
+        "expected_geography": {
+          "release_id": "synthetic-typed-release",
+          "hierarchy_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "footprints_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "revision": 6
+      }
+    }
+  ]
+}
