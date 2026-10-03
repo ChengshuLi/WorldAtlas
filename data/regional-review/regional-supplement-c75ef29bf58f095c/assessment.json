@@ -1,0 +1,578 @@
+{
+  "version": 1,
+  "issue": 527,
+  "reviewed_on": "2026-10-03",
+  "worker_id": "codex-20261003-greenland-islands-7bc145e0",
+  "claim_id": "232ff578-e446-4a42-bcc4-db4abe5c4d14",
+  "status": "2/2 current v5 reference subjects audited; regional semantic approval and source-coverage limits remain explicit",
+  "scope": {
+    "region_id": "framework:region:subarctic-america:4a2093d6d3b9",
+    "region_name": "Arctic and Subarctic America",
+    "area_id": "framework:area:greenland:0f042de27bac",
+    "area_name": "Greenland",
+    "release": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+      "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+      "frozen_region_geometry_sha256": "30be7bb1e34f0fb1af098606a5bc6155433acd9f31528ea9388bc5b76a959ed8",
+      "frozen_region_member_ids_sha256": "22b0ade38f0f7897c5c9485c605fcd8afa24c099ffedd551d4dfd861a2aea128"
+    },
+    "member_location_ids": [
+      "atlas:island:geonames:3420645",
+      "atlas:island:geonames:3421886"
+    ],
+    "member_location_ids_sha256": "9cc2f848b88160c4f7bcf29cc09f728012bd35a1d12a34e0291f113270d63db1",
+    "assigned_subjects": 2,
+    "assessed_subjects": 2,
+    "owned_area_locations": 2,
+    "currently_in_core_world_index": true,
+    "original_region_packet_context": "#457; exact source evidence ownership is limited to this supplemental packet",
+    "all_issue_subjects_in_current_core_index": true,
+    "current_index_descendant_locations_under_area": 13,
+    "current_repository_descendant_locations_under_area": 13,
+    "current_area_locations": 13
+  },
+  "sources": [
+    {
+      "id": "osm:geofabrik:greenland:2026-10-01",
+      "title": "OpenStreetMap Greenland PBF via Geofabrik",
+      "canonical_url": "https://download.geofabrik.de/north-america/greenland-latest.osm.pbf",
+      "retrieved_on": "2026-10-02",
+      "snapshot_last_modified": "2026-10-01T22:51:14Z",
+      "license": "Open Database License 1.0; © OpenStreetMap contributors and Geofabrik extraction",
+      "retained_original": {
+        "path": "data/macro-improvements/macro-coverage-africa-americas/osm/greenland-latest.osm.pbf",
+        "bytes": 26179440,
+        "sha256": "56044df3c0404228f5440fccbdf7d2b0aa264969ea9e4e30640b35bbf4206f67",
+        "restoration": "The retained PBF is the original 2026-10-01 snapshot. A newer copy can be obtained from the canonical URL but will not reproduce this snapshot. Keep ODbL attribution and comply with its database terms."
+      },
+      "method": "GDAL 3.10.3 OSM driver inspected the two administrative multipolygon relations and settlement points. The retained #503 preparation additionally derives current closed coastline unions and mapped inland-water masks from this pinned PBF.",
+      "uncertainty": "OSM geometry is volunteered map data. The exact current official municipal GIS boundary was not available in the inspected official landing pages. The PBF does not establish sovereignty or historical applicability."
+    },
+    {
+      "id": "geonames:greenland:2026-10-02",
+      "title": "GeoNames Greenland daily gazetteer dump",
+      "canonical_url": "https://download.geonames.org/export/dump/GL.zip",
+      "retrieved_on": "2026-10-02",
+      "source_date": "Daily extract; individual island rows last modified 2022-10-03 (Qeqertarsuaq) and 2020-05-14 (Milne Land).",
+      "license": "Creative Commons Attribution 4.0 (CC BY 4.0), stated in the retained GeoNames readme",
+      "retained_original": {
+        "path": "data/macro-improvements/macro-coverage-africa-americas/geonames-country-dumps.tar.gz; member geonames/GL.zip",
+        "archive_bytes": 26087465,
+        "archive_sha256": "b13fb10841cc6233d807166a2ef9c367ea976a813a1feccb822f95cdcf007f08",
+        "country_zip_bytes": 224853,
+        "country_zip_sha256": "2acb73eb045dabfa2d9d84b9132372a55f51a5fcd8a895777e31fc41036994ae",
+        "restoration": "The exact licensed archive and daily country ZIP bytes are retained. Current country dumps can be fetched from the canonical URL but will differ."
+      },
+      "method": "Matched original tab-separated records by stable GeoNames ID, feature class/code, and source coordinate; separately point-tested every populated-place-class record against the two prepared dry-land geometries.",
+      "uncertainty": "GeoNames provides a gazetteer identity and mapped feature code, not a complete current settlement register, ownership determination, or validated coastline. Its island-row dates are source metadata, not historic intervals.",
+      "attribution": "GeoNames Gazetteer data; CC BY 4.0; https://www.geonames.org"
+    },
+    {
+      "id": "gshhg:2.3.7:greenland-islands",
+      "title": "Global Self-consistent Hierarchical High-resolution Geography (GSHHG) 2.3.7",
+      "canonical_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+      "source_vintage": "2017-06-15",
+      "retrieved_on": "2026-10-02",
+      "license": "LGPL 3.0 or later",
+      "retained_original": {
+        "path": "data/macro-improvements/macro-coverage-africa-americas/selected-gshhg-source-records.bin.gz; source offsets and record proofs are indexed in the same evidence directory",
+        "full_archive_bytes": 118617033,
+        "full_archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+        "restoration": "The full source ZIP is versioned at the canonical URL and can be restored; selected exact native records and original offsets are retained locally. Verify the archive hash before extraction."
+      },
+      "inspected_facts": [
+        "GSHHG source IDs 92 (Disko) and 146 (Milne Land) independently correspond to the modern OSM coastal candidates.",
+        "Intersection is 99.554% of the Disko OSM outer coastline area and 95.438% of the Milne Land OSM outer coastline area."
+      ],
+      "method": "Prior #41 native-record comparison preserved in its report and source-index; percentages compare dated generalized coast datasets and are not accuracy confidence intervals.",
+      "uncertainty": "2017 is a useful independent existence/shape cross-check, not a current cadastral shoreline or complete named-island-family certificate.",
+      "attribution": "University of Hawaii / NOAA GSHHG; LGPL-3.0-or-later"
+    },
+    {
+      "id": "geus:milne-land-topographic:2004",
+      "title": "70 Ø.2 Milne Land. Topographic map, 1:250 000",
+      "canonical_url": "https://doi.org/10.22008/FK2/SV1TEJ",
+      "source_date": "Production date 2004-03-26; Dataverse deposit 2023-12-21; version 1",
+      "license": "No reuse license or terms were returned in the inspected repository metadata; source bytes not retained.",
+      "available_files": [
+        {
+          "name": "T250_Milne_Land_70v2_400dpi.pdf",
+          "bytes": 11785390,
+          "md5": "c94f0fc415cb21d8e388f6b6fd6dc383",
+          "created": "2023-12-21"
+        },
+        {
+          "name": "T250_Milne_Land_70v2_400dpi.tif",
+          "bytes": 257378764,
+          "md5": "38133303459f7abace9f4c77e8cafcf1",
+          "created": "2023-12-21"
+        }
+      ],
+      "restoration": "Resolve the DOI and download only if lawful for the intended use; the dataset abstract states 1:250,000 coverage with coast, rivers, lakes, ice, and 100 m contours.",
+      "method": "Used GEUS survey metadata as an independent authoritative physical-geography reference for the named Milne Land sheet and mapped coast/ice/terrain. The map was not georeferenced against candidate vertices in this packet.",
+      "uncertainty": "The source validates named sheet/landform context, not a one-to-one audit of modern coastal rings or the entire nearby island family."
+    },
+    {
+      "id": "geus:disko-coastal-bluff:2022",
+      "title": "Arctic coastal bluff erosion on Disko Island, Greenland",
+      "canonical_url": "https://doi.org/10.5194/egusphere-egu22-3470",
+      "retrieved_on": "2026-10-03",
+      "source_date": "2022 conference contribution",
+      "license": "No page-specific reuse terms recorded; no article bytes retained.",
+      "restoration": "Resolve DOI or the GEUS publication record https://pub.geus.dk/en/publications/arctic-coastal-bluff-erosion-on-disko-island-greenland/ .",
+      "inspected_fact": "GEUS catalogues an Arctic coastal-erosion study explicitly on Disko Island, corroborating the physical island name and the need to treat coasts as time-sensitive.",
+      "method": "Bibliographic metadata only; this paper was not used as a shoreline geometry source."
+    },
+    {
+      "id": "visitgreenland:qeqertarsuaq:current",
+      "title": "Visit Greenland, Qeqertarsuaq destination information",
+      "canonical_url": "https://visitgreenland.com/destinations/qeqertarsuaq/",
+      "retrieved_on": "2026-10-03",
+      "page_publication_date": "Not exposed in inspected metadata",
+      "retrieved_bytes": 311845,
+      "retrieved_sha256": "f78c853d11e4e4b2b73cee5f4021b42ecf69f29fefc6b4e4fb7fd62ebfe88afe",
+      "license": "No page-specific redistribution terms recorded; page bytes not retained.",
+      "inspected_facts": [
+        "Describes Qeqertarsuaq on Disko and Kangerluk as the only other inhabited location on the island.",
+        "Describes Kangerluk as a small settlement with fewer than 50 residents."
+      ],
+      "restoration": "Fetch the current canonical page; its current factual content may change and will not reproduce this retrieved HTML hash.",
+      "uncertainty": "Tourism information is secondary evidence and does not inventory abandoned sites, permanent residents by census vintage, or dated settlement history."
+    },
+    {
+      "id": "qeqertalik:municipal-site:current",
+      "title": "Kommune Qeqertalik, About the Municipality",
+      "canonical_url": "https://qeqertalik.gl/emner/om_kommunen?sc_lang=da",
+      "retrieved_on": "2026-10-03",
+      "page_publication_date": "Not exposed in inspected metadata",
+      "retrieved_bytes": 34595,
+      "retrieved_sha256": "de73f23f123fed5fbb2192a03bade1610d57b3d17178f9b594e1948cb0bde284",
+      "license": "Unspecified; no HTML retained. Only factual municipal names are recorded.",
+      "inspected_facts": [
+        "Lists Qeqertarsuaq among the municipality's four towns and Kangerluk among its eight settlements."
+      ],
+      "method": "Official current municipality page; it supports administrative/settlement names but does not expose boundary coordinates in the inspected content."
+    },
+    {
+      "id": "sermersooq:municipal-site:current",
+      "title": "Kommuneqarfik Sermersooq, About the Municipality",
+      "canonical_url": "https://da.sermersooq.gl/om-kommuneqarfik-sermersooq",
+      "retrieved_on": "2026-10-03",
+      "page_publication_date": "Not exposed in inspected metadata",
+      "retrieved_bytes": 36204,
+      "retrieved_sha256": "25d5d854c543a49a2038b3584ab4085cd5ee7d8863149ef0168c7cc8d0e9e86e",
+      "license": "Unspecified; no HTML retained.",
+      "inspected_facts": [
+        "Confirms the current municipality identity/name Kommuneqarfik Sermersooq; the landing page inspected does not list Milne Land or establish its boundary membership."
+      ],
+      "method": "Administrative name corroboration only; the exact mapped boundary association is sourced from the current OSM administrative relation and remains subject to a government GIS cross-check."
+    },
+    {
+      "id": "geoboundaries:grl:adm1:2020",
+      "title": "geoBoundaries gbOpen Greenland ADM1 release used by the existing Qeqertalik location",
+      "canonical_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GRL/ADM1/geoBoundaries-GRL-ADM1.geojson",
+      "source_vintage": "2020",
+      "license": "CC BY-SA 3.0 Unported",
+      "retained_original": {
+        "path": "data/macro-improvements/macro-coverage-africa-americas/original-grl-adm1-source.geojson.gz",
+        "bytes": 684956,
+        "sha256": "9dabbe2359d5e88fe867459b6d407f2d3a58b049451605f9bf9a336ca0a10505",
+        "restoration": "Exact original compressed source is retained; canonical commit-pinned URL allows lawful restoration subject to CC BY-SA 3.0 attribution/share-alike terms."
+      },
+      "inspected_fact": "The issue #503 source review records zero coverage/intersection for both Disko and Milne in this pinned original ADM1 source; the existing atlas Qeqertalik ADM1 feature is a source remainder and is not the current whole municipality/island.",
+      "method": "Compared against archived source and the #41/#503 coverage records. This 2020 source is not substituted for the current OSM municipal relation or current municipal authority."
+    }
+  ],
+  "source_geometry_accounting": {
+    "upstream_packet": "data/macro-improvements/three-island-restoration/ (engineering preparation #503; PR #516); immutable original source inputs remain in the #41 directory",
+    "upstream_proposal_sha256": "e665b6375a7dc68671df9eba111fab3941fb8f7fcd6fe01125dd162bb5b0eff7",
+    "upstream_manifest_sha256": "da4c1a839198e504d0912b746b4d7709b6c46d43b753fa1f93510a29204ddee4",
+    "upstream_validation_sha256": "b29f94404e65fb9886f4be6c39f4c0c6e838c4da9ac8cd728470503f4af113ac",
+    "osm_water_source_review_sha256": "30e6460ac12e125011f64ae6390f9c1f9dcd9d19430464804716226d5632b2b0",
+    "upstream_acceptance": "Prior #503 evidence reassembled 362 mapped water/administrative features from the original Greenland PBF, matched all three GeoNames source rows, checked 19,102 archived polygons and recorded no historical transfer. This geography packet independently audits semantics and does not treat the producer checks as regional approval. The producer proposal pins baseline commit 1bbd4bdf9a95d8de9eead6aa8b080196ada51ff4; later main changed the pinned world-index/hierarchy. Its full preparation cannot be reproduced against current main using those old baseline hashes. This packet independently rechecks immutable source bytes, candidate geometry accounting, current OSM parent containment and scope, but does not claim that historical producer run is a current-main validation. PR #516 merged the source-restoration additions; both exact IDs are present in current data/world-index.json. Their regional semantic approval remains open.",
+    "disko": {
+      "location_id": "atlas:island:geonames:3420645",
+      "name": "Qeqertarsuaq (Disko)",
+      "geonames_feature_class_code": "T/ISL",
+      "geonames_row": [
+        "3420645",
+        "Qeqertarsuaq",
+        "Qeqertarsuaq",
+        "Disko,Disko Island,Disko O,Diskoinsel,Diskooya,Diskoøya,Godhavn,Isola di Disko,Kidko Island,Kikertarsuak,Ostrov Disko (Kekertarsuak),Qeqertarssuaq,Qeqertarsuaq,Qeqertarsuaqi saar,Qeqertarsuatsiaq,Остров Диско (Кекертарсуак)",
+        "69.82586",
+        "-53.44012",
+        "T",
+        "ISL",
+        "GL",
+        "",
+        "11839534",
+        "",
+        "",
+        "",
+        "0",
+        "",
+        "1314",
+        "America/Nuuk",
+        "2022-10-03"
+      ],
+      "source_identity": "OSM coastline candidate ID 92 / GeoNames ID 3420645",
+      "source_geometry": {
+        "coast_source_path": "data/macro-improvements/macro-coverage-africa-americas/osm/disko-footprint.wkb.gz",
+        "coast_source_sha256": "a9ab64bd933a7984ffe0ef38615cfff5a849addf075d35dec7f0f7b0e2a276fd",
+        "coast_relation_way_count": 78,
+        "coast_vertices": 16684,
+        "coast_observation_timestamp": "2026-09-16T11:32:01Z",
+        "outer_coast_area_km2": 8537.954401679432,
+        "mapped_inland_water_features": 350,
+        "mapped_water_area_km2": 10.5778628260778,
+        "prepared_dry_land_area_km2": 8527.376538853361,
+        "dry_land_wkb_path": "data/macro-improvements/three-island-restoration/disko-dry-land.wkb.gz",
+        "dry_land_gzip_sha256": "364b54c54dcd8e7e21cc8093d045d2960a6079990b41b7980cc4b8c8a0e6d989",
+        "dry_land_uncompressed_sha256": "f2146818b8713ac7238176f27fa2d66817abb1447f94416cdd3798a8d0edae4b",
+        "polygon_components": 10,
+        "exterior_rings": 10,
+        "interior_rings": 346,
+        "component_interpretation": "One principal Disko landmass plus nine tiny detached dry-land fragments preserved by the source-coast/water-mask operation. Each fragment was accounted for; OSM/GSHHG geometry alone does not identify all nine by named-island identity or establish whether all belong in one named territory. They are not one location per ring.",
+        "nine_fragment_bounding_boxes_lonlat": [
+          [
+            -53.519624,
+            69.25098,
+            -53.519205,
+            69.251152
+          ],
+          [
+            -53.110637,
+            69.329944,
+            -53.109493,
+            69.330155
+          ],
+          [
+            -53.1046,
+            69.329814,
+            -53.104329,
+            69.329864
+          ],
+          [
+            -53.104236,
+            69.329858,
+            -53.103627,
+            69.330056
+          ],
+          [
+            -53.103269,
+            69.33028,
+            -53.102848,
+            69.330478
+          ],
+          [
+            -52.931627,
+            69.979301,
+            -52.931465,
+            69.979337
+          ],
+          [
+            -52.247062,
+            69.542162,
+            -52.246879,
+            69.542188
+          ],
+          [
+            -52.245778,
+            69.542417,
+            -52.245597,
+            69.542509
+          ],
+          [
+            -52.244073,
+            69.544069,
+            -52.243474,
+            69.544292
+          ]
+        ],
+        "coverage_crosscheck": "GSHHG 2.3.7 source ID 92 has 99.554% area overlap with the OSM outer coast candidate; dated comparison is independent shape corroboration, not exact current completeness."
+      },
+      "settlement_review": {
+        "official_current_context": [
+          "Qeqertarsuaq is a municipality-listed town and is the island's principal named town.",
+          "Kangerluk is municipality-listed as a settlement and Visit Greenland calls it the only other inhabited location on Disko."
+        ],
+        "current_osm_places_inside_prepared_dry_land": [
+          {
+            "osm_id": "996562205",
+            "name": "Qeqertarsuaq",
+            "place": "town",
+            "status": "town identity corroborated by official sources",
+            "conflict": "OSM is_in:municipality tag says Qaasuitsup Kommunia, an obsolete municipality; current official municipality is Qeqertalik. OSM population is tagged 793/date 2025 with Wikipedia source, not used as an approved figure."
+          },
+          {
+            "osm_id": "2049649017",
+            "name": "Kangerluk",
+            "place": "village",
+            "status": "settlement identity corroborated by official sources",
+            "conflict": "OSM tag supplies population 4 without a population vintage."
+          },
+          {
+            "osm_id": "14155852267",
+            "name": "Kangerluk",
+            "place": "village",
+            "status": "second mapped point for same named settlement, about 60 m from the first; not evidence for a second settlement/location",
+            "conflict": "OSM feature says source:type=BYGD; use one named locality identity pending local gazetteer reconciliation."
+          },
+          {
+            "osm_id": "2051281220",
+            "name": "Qullissat",
+            "place": "isolated_dwelling",
+            "status": "OSM explicitly tags abandoned=village; GeoNames code PPLQ",
+            "conflict": "Historic/abandoned status does not establish a separate present location or dated historical attributes."
+          },
+          {
+            "osm_id": "12319028603",
+            "name": "Marraat",
+            "place": "isolated_dwelling",
+            "status": "mapped dwelling/locality",
+            "conflict": "Current permanent habitation is not established by the tag or the inspected official pages."
+          },
+          {
+            "osm_id": "13149571506",
+            "name": "Toorniviit",
+            "place": "hamlet",
+            "status": "OSM explicitly tags abandoned=yes",
+            "conflict": "Do not treat as currently inhabited without a dated authoritative local source."
+          }
+        ],
+        "geonames_populated_place_records_inside_land": [
+          {
+            "id": "3419009",
+            "name": "Ujarasussuk",
+            "code": "PPL",
+            "last_modified": "2022-10-03",
+            "status": "present in gazetteer; current habitation not independently confirmed"
+          },
+          {
+            "id": "3419818",
+            "name": "Skansen",
+            "code": "PPL",
+            "last_modified": "2021-10-10",
+            "status": "present in gazetteer; current habitation not independently confirmed"
+          },
+          {
+            "id": "3420388",
+            "name": "Qullissat",
+            "code": "PPLQ",
+            "last_modified": "2025-05-28",
+            "status": "abandoned/quiet populated-place code; OSM also says abandoned village"
+          },
+          {
+            "id": "3420635",
+            "name": "Qeqertarsuaq",
+            "code": "PPL",
+            "last_modified": "2025-03-17",
+            "status": "settlement; distinct from target island row 3420645"
+          },
+          {
+            "id": "3421745",
+            "name": "Napasulissuaq",
+            "code": "PPLQ",
+            "last_modified": "2021-10-10",
+            "status": "abandoned/quiet populated-place code"
+          },
+          {
+            "id": "3422467",
+            "name": "Killuusat",
+            "code": "PPL",
+            "last_modified": "2021-10-10",
+            "status": "present in gazetteer; current habitation not independently confirmed"
+          },
+          {
+            "id": "3423734",
+            "name": "Qullissaaqqat",
+            "code": "PPL",
+            "last_modified": "2021-10-10",
+            "status": "present in gazetteer; current habitation not independently confirmed"
+          },
+          {
+            "id": "3424030",
+            "name": "Diskofjord",
+            "code": "PPL",
+            "last_modified": "2022-12-25",
+            "status": "alternate settlement identity for Kangerluk in OSM, not a separate atlas location"
+          }
+        ],
+        "assessment": "Keep the municipality-recognized Qeqertarsuaq town and Kangerluk settlement as settlement context inside one named-island location; do not split the island by town or merge the town with GeoNames island ID 3420645. Retain abandoned sites and unresolved gazetteer PPL records as evidence only. Population counts and historical habitation are not approved.",
+        "unresolved": "The official current tourist/municipal pages do not reconcile all five non-abandoned GeoNames PPL labels or Marraat's mapped dwelling status. A local, dated settlement gazetteer or municipal dataset is needed before claiming complete current inhabited-place coverage."
+      },
+      "parent_id": "framework:province:qeqertalik:321d544aeeb4",
+      "parent_chain": [
+        {
+          "id": "framework:province:qeqertalik:321d544aeeb4",
+          "name": "Qeqertalik",
+          "role": "Existing named Greenland municipality/province grouping; OSM admin relation 8514395 labels Qeqertalik, admin_level 4, official_name Kommune Qeqertalik, ISO3166-2 GL-QT. Its current relation contains the current island location; the older 2020 geoBoundaries Qeqertalik source location is a remainder that omits Disko."
+        },
+        {
+          "id": "framework:area:greenland:0f042de27bac",
+          "name": "Greenland",
+          "role": "Shared geographic-area grouping, not a political owner. It groups six provinces and 11 current descendant locations; these two proposed island locations would bring the scoped membership inventory to 13."
+        },
+        {
+          "id": "framework:region:subarctic-america:4a2093d6d3b9",
+          "name": "Arctic and Subarctic America",
+          "role": "Approved shared macro destination. Keep frozen outer envelope and current 127-member inventory; this interior evidence does not approve the region."
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "role": "Retain published macro parent; no partition edit proposed."
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "role": "Retain published macro parent; geographic membership is not political ownership."
+        }
+      ],
+      "classification": "Current whole named-island location and Qeqertalik parent are provisionally supported. Detached-component membership and complete current settlement family are insufficiently sourced for regional approval."
+    },
+    "milne_land": {
+      "location_id": "atlas:island:geonames:3421886",
+      "name": "Milne Land",
+      "geonames_feature_class_code": "T/ISL",
+      "geonames_row": [
+        "3421886",
+        "Milne Land",
+        "Milne Land",
+        "Ilimananngip Nunaa,Milna Zeme,Milne Land,Milne Torpagi,Milne Torpağı,Milne-land,Milneland,Milnenmaa,Terra de Milne,Terre de Milne,Zemlja Milna,Ziemia Milne'a,Zjamlja Milna,jzyrh myln land,jzyrt myln land,mi er en de,mirune dao,Земля Милна,Земля Мілна,Зямля Мілна,جزيرة ميلن لاند,جزيره ميلن لاند,ミルネ島,米爾恩地",
+        "70.68333",
+        "-26.75",
+        "T",
+        "ISL",
+        "GL",
+        "",
+        "07",
+        "",
+        "",
+        "",
+        "0",
+        "",
+        "982",
+        "America/Scoresbysund",
+        "2020-05-14"
+      ],
+      "source_identity": "OSM coastline candidate ID 146 / GeoNames ID 3421886",
+      "source_geometry": {
+        "coast_source_path": "data/macro-improvements/macro-coverage-africa-americas/osm/milne-land-footprint.wkb.gz",
+        "coast_source_sha256": "01ba5fbcc04bf8fc73e95fa17a1153095878dd730521ecc3945628e5db7bd959",
+        "coast_relation_way_count": 20,
+        "coast_vertices": 778,
+        "coast_observation_timestamp": "2023-12-07T15:46:26Z",
+        "outer_coast_area_km2": 3766.433394789392,
+        "mapped_inland_water_features": 10,
+        "prepared_dry_land_area_km2": 3748.8985885900865,
+        "dry_land_wkb_path": "data/macro-improvements/three-island-restoration/milne-land-dry-land.wkb.gz",
+        "dry_land_gzip_sha256": "803875a4c7cd6203ac872a262f1c9edec2f0df88bdf668f295bc61f0836ec39d",
+        "dry_land_uncompressed_sha256": "34cd2c6babedd67c733d981cdfd67216d0a6239b9bf99cb346b2cfb97c90f0ea",
+        "polygon_components": 1,
+        "exterior_rings": 1,
+        "interior_rings": 10,
+        "coverage_crosscheck": "GSHHG 2.3.7 source ID 146 has 95.438% area overlap with the OSM outer coast candidate; exact residual and its cause are unresolved."
+      },
+      "settlement_review": {
+        "osm_populated_place_points_inside_prepared_dry_land": [],
+        "geonames_populated_place_points_inside_prepared_dry_land": [],
+        "assessment": "No GeoNames populated-place record and no OSM city/town/village/hamlet/isolated-dwelling point was found within the prepared land in the pinned source snapshots. The GEUS topographic sheet covers the named land and its coasts, water and ice but does not prove no historical or temporary use.",
+        "status": "no current mapped settlement evidence in the inspected sources; historical/seasonal occupation unresolved"
+      },
+      "parent_id": "framework:province:sermersooq:8f8dcd86dde0",
+      "parent_chain": [
+        {
+          "id": "framework:province:sermersooq:8f8dcd86dde0",
+          "name": "Sermersooq",
+          "role": "Existing named Greenland municipality/province grouping. OSM admin relation 8515166 labels Sermersooq, admin_level 4, official_name Kommuneqarfik Sermersooq, ISO3166-2 GL-SM. The full current island location is contained by this current mapped relation; the official municipal landing page itself does not prove the island-level boundary."
+        },
+        {
+          "id": "framework:area:greenland:0f042de27bac",
+          "name": "Greenland",
+          "role": "Shared geographic-area grouping, not a political owner; exact area limits remain open with the other Greenland members."
+        },
+        {
+          "id": "framework:region:subarctic-america:4a2093d6d3b9",
+          "name": "Arctic and Subarctic America",
+          "role": "Approved macro destination inside the unchanged outer envelope; local island membership does not redefine that boundary."
+        },
+        {
+          "id": "framework:subcontinent:northern-america:477e054b32f2",
+          "name": "Northern America",
+          "role": "Retain published macro parent."
+        },
+        {
+          "id": "framework:continent:north-america:1ca27616f338",
+          "name": "North America",
+          "role": "Retain published macro parent; no owner inference."
+        }
+      ],
+      "classification": "Current whole named-island location and Sermersooq parent are provisionally supported by the named island gazetteer, independent GEUS map metadata, GSHHG existence check and complete containment in the current mapped municipal relation. Modern shoreline precision and historical settlement remain open."
+    }
+  },
+  "shared_parent_scope_assessment": {
+    "greenland_area": {
+      "id": "framework:area:greenland:0f042de27bac",
+      "children_provinces": [
+        "Avannaata",
+        "Kujalleq",
+        "Northeast Greenland National Park",
+        "Qeqertalik",
+        "Qeqqata",
+        "Sermersooq"
+      ],
+      "current_nested_locations": 13,
+      "partial_area_review": true,
+      "unowned_member_review": "The exact 13 current descendants include the two issue subjects; the original regional packet #457 and remaining area/province packets retain their own 11 location scopes; no assessment or exception is implied for those 11.",
+      "role_decision": "Greenland is a published geographic grouping above the province-tier regional subdivisions. The hierarchy is coherent for these two islands only as a membership grouping; its full purpose, all other descendants, and envelope are not approved by this partial packet.",
+      "scope_owned_reference_locations": 2,
+      "current_area_locations": 13
+    },
+    "qeqertalik_province": {
+      "id": "framework:province:qeqertalik:321d544aeeb4",
+      "current_location_children": [
+        "gb:GRL:ADM1:42512837B82481266018751",
+        "atlas:island:geonames:3420645"
+      ],
+      "current_adm1_location_status": "The 2020 geoBoundaries municipality feature omits Disko and remains a source-defined remainder. The separate whole-island location is already in the current index as a second province child; preserve both identities and provenance.",
+      "repeated_name_exception": "The province and its existing `Qeqertalik` administrative-remainder location share a name but are not coextensive after the island source is included. Do not merge identities or transfer historical records.",
+      "current_location_children_count": 2
+    },
+    "sermersooq_province": {
+      "id": "framework:province:sermersooq:8f8dcd86dde0",
+      "current_location_children": [
+        "atlas:physical:d2a1ec9da6d55d50dcad",
+        "atlas:physical:7400360ee236a65f61a3",
+        "atlas:island:geonames:3421886"
+      ],
+      "role_decision": "The existing members are source-derived physical regions within the province; Milne Land is a distinct current named-island location outside their retained footprints. Preserve all members and derive any province footprint bottom-up from membership.",
+      "current_location_children_count": 3
+    },
+    "neighboring_consistency": "Both islands lie within the same approved Greenland-to-Arctic/Subarctic America macro route. The current mapped Qeqertalik and Sermersooq municipality relations contain their corresponding prepared island land, while the original 2020 geoBoundaries source misses it. No evidence indicates an inter-region inconsistency; shared boundaries and the rest of the region were not re-audited."
+  },
+  "political_and_historical_separation": {
+    "current_admin_relation_used_as": "Evidence for present administrative parent association only.",
+    "sovereignty_inferred": false,
+    "reference_owner_assigned": false,
+    "historical_attribute_transfer": false,
+    "modern_source_dates_as_historical_intervals": false
+  },
+  "bounded_follow_up_recommendations": [
+    {
+      "owner": "geography and engineering regional integration",
+      "scope": "One joint evidence/integration follow-up for the two Greenland island candidates, after source semantic review and coordination with #457.",
+      "work": "Reconcile Disko's nine detached source fragments and its four non-abandoned GeoNames PPL labels (plus the Diskofjord/Kangerluk alternate-name record) plus Marraat's mapped dwelling status with a dated Greenland local place-name/settlement source; request or locate authoritative current municipal boundary data for Qeqertalik and Sermersooq; review Milne's 4.562% GSHHG/OSM residual. Preserve the current Qeqertalik remainder and island IDs; engineering must retain bottom-up parent footprints when integrating later source corrections.",
+      "limits": "No new location per coastline ring, island fragment, lake, village or old PPL row by quota; no outer-boundary change or historical transfer. Keep unknowns explicit if authoritative source coverage is unavailable."
+    },
+    {
+      "owner": "regional interior audit",
+      "scope": "Continue the existing #457 packet and unowned Greenland-area members; do not treat this partial source packet as all 13 locations or a complete regional certificate.",
+      "work": "Review the other Greenland descendants, complete named-island families and scale consistency, then coordinate any contradictions across affected neighbors."
+    }
+  ],
+  "decision": "Both existing v5 whole-island locations have sourced named-island identity and modern-scale support, and the current mapped municipality relations fully contain each prepared dry-land candidate. Retain one current location per named island with the cited parent chains. Nine tiny detached Disko components, non-current-status settlement names, the older 2020 administrative remainder, source-vintage differences, and whole-family coverage are not fully resolved. No hierarchy, geometry, grid, certificate, live data or historical content change is proposed; this evidence does not approve the region or authorize imports."
+}
