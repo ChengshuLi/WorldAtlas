@@ -216,7 +216,8 @@ export function validateReviewedIdentities({original,current,migration,geometryP
  const expectedGroups=new Map([...original.values()].filter(e=>e.active&&e.kind!=='location').map(e=>[e.id,{id:e.id,name:e.name,parent_id:e.parent_id,kind:e.kind}]));
  const expectedLocations=new Map([...original.values()].filter(e=>e.active&&e.kind==='location').map(e=>[e.id,{id:e.id,name:e.name,parent_id:e.parent_id,kind:'location'}]));
  const expectedUnitRecords=new Map((migration.before_units??[]).map(row=>[row.id,row]));
- const putGroup=row=>{if(row){expectedGroups.set(row.id,{id:row.id,name:row.name,parent_id:row.parent_id,kind:row.level??row.kind});expectedUnitRecords.set(row.id,row);}};
+ const encounteredGroups=new Set([...original.values()].filter(e=>e.kind!=='location').map(e=>e.id));
+ const putGroup=row=>{if(row){expectedGroups.set(row.id,{id:row.id,name:row.name,parent_id:row.parent_id,kind:row.level??row.kind});expectedUnitRecords.set(row.id,row);encounteredGroups.add(row.id);}};
  const removeGroup=id=>{expectedGroups.delete(id);expectedUnitRecords.delete(id);};
  for(const row of migration.group_changes??[]){if(row.after)putGroup(row.after);else removeGroup(row.id);}
  for(const row of migration.changes??[]){const p=row.after_properties;if(p)expectedLocations.set(row.location_id,{id:row.location_id,name:p.name,parent_id:p.parent_id,kind:'location'});}
@@ -244,7 +245,13 @@ export function validateReviewedIdentities({original,current,migration,geometryP
      const restored=next?{...next,metadata:{...next.metadata,child_count:count}}:null;
      if(!Number.isInteger(count)||count!==(previousCounts.get(id)??0)||!Number.isInteger(newCount)||newCount!==(nextCounts.get(id)??0)||contentHash(restored)!==contentHash(row))throw Error(`Creation hierarchy snapshot alters the exact chronological predecessor unit: ${id}`);
     }
-    for(const row of rows)if(!expectedGroups.has(row.id)&&registry.has(row.id))throw Error('Creation hierarchy snapshot revives an archived group without a relationship');
+    for(const row of rows)if(!expectedGroups.has(row.id)){
+     if(encounteredGroups.has(row.id))throw Error('Creation hierarchy snapshot revives an archived group without a relationship');
+     // An immutable registry can already contain this very creation from a
+     // published release. Replaying its chronology does not revive an archive.
+     const registered=registry.get(row.id);
+     if(registered&&(registered.active!==1||registered.kind!==(row.level??row.kind)||registered.name!==row.name||registered.parent_id!==row.parent_id))throw Error('Previously registered creation group differs from its exact original definition');
+    }
    }
    expectedGroups.clear();expectedUnitRecords.clear();for(const row of rows)putGroup(row);
   }

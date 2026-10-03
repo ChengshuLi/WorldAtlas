@@ -3,15 +3,46 @@
 A machine audit cannot certify every historical/geographic judgement. The report
 separates exhaustive structural checks from recorded source-selection decisions.
 """
-import collections,hashlib,json,math,pathlib,re,unicodedata
+import collections,gzip,hashlib,json,math,pathlib,re,tarfile,unicodedata
 from shapely import STRtree
 from shapely.geometry import shape,Point
 ROOT=pathlib.Path(__file__).resolve().parents[1];D=ROOT/'data'
 def read(p):return json.loads(p.read_text())
+def validated_source_creations(features,data):
+ """Accept new source land only through the installed, byte-pinned proof chain."""
+ new={f['id']:f for f in features if f['properties']['metadata'].get('reference_version')!=3}
+ if not new:return set()
+ bundle=data/'macro-improvements/combined-restoration'
+ installed=read(data/'publication-geography-receipt.json')
+ raw=gzip.decompress((bundle/'aggregate-source-receipt.json.gz').read_bytes());receipt=json.loads(raw)
+ assert hashlib.sha256(raw).hexdigest()==installed['sources']['sourceReceipt']['sha256'],'Creation receipt differs from installed proof'
+ assert receipt['geometry_stage_validated'] is True and receipt['historical_claims_transferred'] is False
+ assert receipt['after_footprints_sha256']==installed['after_footprints_sha256']
+ proofs={p['location_id']:p for p in receipt['creation_proofs']}
+ approved={f['id']:f for f in receipt['added_features']}
+ assert len(proofs)==len(receipt['creation_proofs']) and len(approved)==len(receipt['added_features'])
+ assert set(new)==set(proofs)==set(approved)==set(receipt['added_ids']),'Unreceipted source role'
+ index=json.loads(gzip.decompress((bundle/'installation-proof-index.json.gz').read_bytes()))
+ archive=bundle/index['archive']['path'];body=archive.read_bytes()
+ assert index['history_transfer'] is False and len(body)==index['archive']['bytes'] and hashlib.sha256(body).hexdigest()==index['archive']['sha256']
+ with tarfile.open(archive) as sources:
+  for identifier,feature in new.items():
+   assert feature==approved[identifier],f'Created feature differs from reviewed source record: {identifier}'
+   assert feature['properties']['metadata'].get('reference_version') is None,'New source land must not impersonate a legacy version'
+   proof=proofs[identifier];source=proof['source'];member=sources.getmember(source['path'])
+   assert member.isfile() and not pathlib.PurePosixPath(member.name).is_absolute() and '..' not in pathlib.PurePosixPath(member.name).parts
+   raw=sources.extractfile(member).read();assert hashlib.sha256(raw).hexdigest()==source['sha256']
+   document=json.loads(raw);matches=[f for f in document.get('features',[document]) if f.get('id')==source['identity']]
+   assert len(matches)==1 and matches[0]['geometry']==feature['geometry'],'Created footprint differs from exact named source'
+   assert source['license'] and source['attribution'] and source['url'].startswith(('https://','http://'))
+   assert source['supported_from']!=0 and source['supported_to']!=0 and source['supported_from']<source['supported_to']
+   assert proof['identity_review']['status']=='distinct-new-territory'
+ return set(new)
 def area(g):
  pieces=list(g.geoms) if g.geom_type=='MultiPolygon' else [g]
  return sum(p.area*12364*math.cos(math.radians(p.representative_point().y)) for p in pieces)
 fs=[f for p in read(D/'world-index.json')['parts'] for f in read(D/p)['features']];units={u['id']:u for u in read(D/'hierarchy.json')};semantic=read(D/'semantic-report.json');policy=read(D/'location-policy.json');rows=[];issues=[];semantic_warnings=[];owners=collections.defaultdict(list);geoms=[]
+created_source_ids=validated_source_creations(fs,D)
 bad=re.compile(r'unnamed|unknown|unorganized|unorganised|unincorporated|^region\s+\d|^division\s*(?:no\.?\s*)?\d|^\d+$|^\?+$|^N/?A$|Not mapped|\*$|\ufffd',re.I)
 assert len({f['id'] for f in fs})==len(fs)
 for u in units.values():
@@ -26,8 +57,8 @@ for f in fs:
  for level in ['province','area','region','subcontinent','continent']:
   assert parent in units,(f['id'],parent);u=units[parent];assert u['level']==level,(f['id'],level);chain.append(parent);parent=u['parent_id']
  assert parent is None and units[chain[-1]]['name']!='Antarctica'
- assert m.get('source_name') and m.get('source_url') and m.get('reference_version')==3,f['id']
- row={'id':f['id'],'name':p['name'],'owner':p['reference_owner'],'area_km2':round(a,3),'basis':m.get('location_basis',m.get('source_role',m.get('administrative_level'))),'province_id':chain[0]};rows.append(row);owners[p['reference_owner']].append(a)
+ assert (m.get('source_name') and m.get('source_url') and m.get('reference_version')==3) or f['id'] in created_source_ids,f['id']
+ row={'id':f['id'],'name':p['name'],'owner':p.get('reference_owner'),'area_km2':round(a,3),'basis':m.get('location_basis',m.get('source_role',m.get('administrative_level'))),'province_id':chain[0]};rows.append(row);owners[p.get('reference_owner') or 'Unknown reference owner'].append(a)
 # Whole-world overlap check, including every new physical partition and seam.
 tree=STRtree(geoms)
 for i,g in enumerate(geoms):
@@ -37,7 +68,7 @@ for i,g in enumerate(geoms):
 for name,id in [('Hong Kong','atlas:territory:HKG'),('Singapore','atlas:territory:SGP'),('London','atlas:city:GBR-Greater London'),('Mumbai','atlas:city:IND-Mumbai')]:
  f=next((f for f in fs if f['id']==id),None)
  if f is None:issues.append({'id':id,'issue':'Missing coherent city territory'})
- if name in ['Hong Kong','Singapore'] and f and sum(x['properties']['reference_owner']==f['properties']['reference_owner'] for x in fs)!=1:issues.append({'id':id,'issue':'Fragmented compact city territory'})
+ if name in ['Hong Kong','Singapore'] and f and sum(x['properties'].get('reference_owner')==f['properties'].get('reference_owner') for x in fs)!=1:issues.append({'id':id,'issue':'Fragmented compact city territory'})
 for change in semantic['changes']:
  if change['basis']=='Disconnected components of the same named source district':
   names={''.join(c for c in unicodedata.normalize('NFKD',n).casefold() if c.isalnum()) for n in change.get('source_names',[])}
