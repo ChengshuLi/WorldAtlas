@@ -1,0 +1,28 @@
+✔ current manifest is closed and no region can claim invented approvals (1.216663ms)
+✔ v1 worldwide approval remains compatible (0.606814ms)
+✔ regional content claims depend on macro and branch approval, not unfinished worldwide descendants (1.6657ms)
+✔ macro approval and explicit complete region certificates are required (0.406172ms)
+✔ pins and every location target are checked against explicitly selected regions (0.724181ms)
+✔ ambiguous territorial membership fails closed (0.149745ms)
+✔ all name, relationship and media targets are scoped; ancillary or geographic writes are refused (1.017023ms)
+✔ verified raw batches are inspected rather than trusting caller target summaries (0.507645ms)
+✔ corrections require a territorial crosswalk and cannot transfer facts to another location (0.524059ms)
+✔ registration is additive, versioned, immutable and JSON-only; conflicts fail closed (3.657993ms)
+✔ serialization hooks/getters cannot replace module identity or metadata, and never execute (2.502772ms)
+✔ false and literal zero remain sourced; absent, unknown and unresolved are distinct (0.854088ms)
+✔ no year zero, interval extrapolation, lifetime overflow or modern-reference promotion (0.6169ms)
+✔ numeric measurement rejects incompatible units, PPP, cohort, household weighting and uncertainty (1.985242ms)
+✔ entity government, controlled identities and feature links preserve the existing graph (0.576519ms)
+✔ direct/derived/reference/estimate/example precedence, explicit unknown and retirements are deterministic (1.279438ms)
+✔ directly quoted estimates retain estimate labels and the preserved method-based priority (1.483987ms)
+✔ shared pure snapshot seam round-trips all retained source, unit and derivation metadata without mutation (1.32077ms)
+✔ existing eight attributes, legacy values and precedence stay unchanged (0.877242ms)
+✔ retained synthetic transport fixture matches date-pinned expected results and original bytes (2.079704ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79.240933
