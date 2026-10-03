@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "recorded_utc": "2026-10-03",
+  "source_issue": 524,
+  "correction_issue": 567,
+  "question": "Which release baseline is assigned and verified for the Minamitorishima audit?",
+  "conclusion": "The prior audit file recorded a v3 release tuple, and that tuple exactly matches the published v3 entry in the current versioned geographic-release registry. The prior verifier did not inspect/compare release pins, so its output cannot establish which release data it actually used. The current closed issue #524 explicitly assigns the v5 tuple; this follow-up independently verifies v5 from the assigned scope, current release registry, research gate, publication receipt, actual hierarchy bytes, regional handoff and v5 envelope. The prior v3 pins are retained as historical recorded values, not presented as current.",
+  "prior_audit": {
+    "path": "data/regional-review/regional-supplement-cb3a47cc1a89d7b2/audit-v1-original.json",
+    "pre_correction_sha256": "563c4afe00134e5c267d0b75ff6cf407fdc26782f3f61165b2f3df9ba4fd0704",
+    "recorded_baseline_pins": {
+      "release_id": "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+      "release_version": 3,
+      "hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
+      "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+      "membership_sha256": "7f417ad9ba3417737847aab72dfeb718a941adc2c058de24b1596bd7e78543b5",
+      "note": "This packet is a source audit against current repository main; these are immutable published pins, not approvals."
+    },
+    "historical_registry_entry": {
+      "id": "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+      "version": 3,
+      "source_id": "source:atlas:geographic-review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+      "reference_date": "2026-10-02",
+      "hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
+      "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+      "membership_sha256": "7f417ad9ba3417737847aab72dfeb718a941adc2c058de24b1596bd7e78543b5",
+      "location_ids_sha256": "6f97a16ca77189c3521c9a57356537049c5f1b0c5cdeb699e47e9e001e6cc5b4",
+      "changes_sha256": "f23e989e0258b2ce0c6890206b6a3a3610fde73d58807685cb13514c428d9e65",
+      "expected_counts": {
+        "location": 49589,
+        "province": 5132,
+        "area": 478,
+        "region": 81,
+        "subcontinent": 29,
+        "continent": 6
+      },
+      "metadata": {
+        "reference_only": true,
+        "historical_membership_not_asserted": true,
+        "original_registry_preserved": true,
+        "decision_sha256": {
+          "africa.json": "5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7",
+          "asia.json": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807",
+          "europe.json": "c936e3a251bedc827f7861345edbfd15b7da2ca4030966b702ba1c21ed2f0c6f",
+          "north-america.json": "0c66d322180fecc0ec978e98cadfd031cf11f4b24058cd18b6bd1ce4187e07a1",
+          "oceania.json": "48326f9de56a3700b4b7ab33499dcf00bd4258fdfe7b081c3ce97f2d645ace34",
+          "south-america.json": "f3621775ce1d21d873ff16972bbf37639c1b72aa32ea8e880e44a82fa11221f6"
+        },
+        "migration_sha256": "8ded9175b78142d2e56dc5dc3f91ae830049409190bd9dc9a158dd14f1006324",
+        "geometry_proof_sha256": {
+          "geometry-0": {
+            "manifest_sha256": "ae64e938771d28e6cbd9d79e97f83b1893bb43c99c0e22e50145043293cbb4c1",
+            "receipt_sha256": "c53b644a641f85d6bc225997e8f6836afd0a4ae82d46e0a86d5147a3d9255c3e",
+            "before_footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+            "after_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8"
+          }
+        },
+        "metadata_migration_sha256": {
+          "metadata-0": "cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5",
+          "metadata-1": "290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937",
+          "metadata-2": "5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468",
+          "metadata-3": "09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f"
+        },
+        "registered_identity_manifest_sha256": {
+          "163f3329262f2a5db99e07c65b53e31b9a97cdbdaf57ea62ea79e874ea7e9baa": "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a"
+        }
+      }
+    },
+    "historical_interpretation": "The old tuple is a real v3 release. Its presence in the audit is not proof that the previous source checks ran against v3 because that verifier never checked release artifacts.",
+    "superseded_path": "data/regional-review/regional-supplement-cb3a47cc1a89d7b2/audit.json"
+  },
+  "assigned_issue_scope": {
+    "issue_url": "https://github.com/ChengshuLi/WorldAtlas/issues/524",
+    "retrieved_utc": "2026-10-03",
+    "scope_file": "data/regional-review/regional-supplement-cb3a47cc1a89d7b2/issue-524-scope.json",
+    "location_ids": [
+      "atlas:named-land:location:825337016c35d6a8235a"
+    ],
+    "location_count": 1,
+    "member_location_ids_sha256": "8d077e1eea38d68bd31adb564d5392853025839b4653eb58f15435f8a12f598f",
+    "region_id": "framework:region:northwestern-pacific:2357073b3888",
+    "release": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+    },
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "frozen_region_geometry_sha256": "0d5f9ccab2cb822da7cd59746408af0414d294c2bd7016d7e89816fb4fca7897",
+    "frozen_region_member_ids_sha256": "e94e38275e37f0abec6ec867a44f55dac856364825a15533b910a3a7983b6194",
+    "area_scopes": [
+      {
+        "combined_parent_decision": "Regional integration owns original plus supplemental packets; no independent shared-parent edits",
+        "full_current_location_count": 1,
+        "id": "atlas:named-land:area:812ad26d42ad1d6edb86",
+        "member_location_ids": [
+          "atlas:named-land:location:825337016c35d6a8235a"
+        ],
+        "name": "Marcus isolated island",
+        "owned_member_location_count": 1,
+        "partial": false
+      }
+    ],
+    "scope_file_sha256": "b421e3bd2b324c2cb6c303cd17df99eb8741c78450c8adbde8dc145f9fe5667d"
+  },
+  "current_v5": {
+    "release": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "source_id": "source:atlas:geographic-review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "reference_date": "2026-10-01",
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+      "membership_sha256": "9b555a5784795f2e8cef1e0ede7453ca499e8b8f9f3c1620e8d00b5dddc7109e",
+      "location_ids_sha256": "b8eb3ab175f84531156e4f61297aca4205cefe63a660909b0a5db79fed36e8d1",
+      "changes_sha256": "b305ff1c9bcf24b0295ae3f5647523abbde5ed3165621be8eff61b6cdc0174ee",
+      "expected_counts": {
+        "location": 49625,
+        "province": 5138,
+        "area": 480,
+        "region": 81,
+        "subcontinent": 29,
+        "continent": 6
+      },
+      "metadata": {
+        "reference_only": true,
+        "historical_membership_not_asserted": true,
+        "original_registry_preserved": true,
+        "decision_sha256": {
+          "africa.json": "5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7",
+          "asia.json": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807",
+          "europe.json": "c936e3a251bedc827f7861345edbfd15b7da2ca4030966b702ba1c21ed2f0c6f",
+          "north-america.json": "0c66d322180fecc0ec978e98cadfd031cf11f4b24058cd18b6bd1ce4187e07a1",
+          "oceania.json": "48326f9de56a3700b4b7ab33499dcf00bd4258fdfe7b081c3ce97f2d645ace34",
+          "south-america.json": "f3621775ce1d21d873ff16972bbf37639c1b72aa32ea8e880e44a82fa11221f6"
+        },
+        "migration_sha256": "8ded9175b78142d2e56dc5dc3f91ae830049409190bd9dc9a158dd14f1006324",
+        "geometry_proof_sha256": {
+          "geometry-0": {
+            "manifest_sha256": "ae64e938771d28e6cbd9d79e97f83b1893bb43c99c0e22e50145043293cbb4c1",
+            "receipt_sha256": "c53b644a641f85d6bc225997e8f6836afd0a4ae82d46e0a86d5147a3d9255c3e",
+            "before_footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+            "after_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8"
+          },
+          "geometry-1": {
+            "manifest_sha256": "ebab41faa03d9dad97463959870af47ae4f2a9aae45e873934f1a82da21daec3",
+            "receipt_sha256": "30022e81d3363ab8b6b62866255165844bc7b67f2dd83617072e0f3e45c0837a",
+            "before_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+            "after_footprints_sha256": "6fcebdf0f62064fc56af1681d0c1c7ab4755dfa61d49551c0f910eef660fd0d1"
+          },
+          "geometry-2": {
+            "manifest_sha256": "028e882cd2f8e372922ed2a3fa442edb1babc9c49abeee15940728f9f186d27c",
+            "receipt_sha256": "952eda1e94bae652cb6c7f48e606c5102b32f21a4a53451f9307a538fc49d562",
+            "before_footprints_sha256": "6fcebdf0f62064fc56af1681d0c1c7ab4755dfa61d49551c0f910eef660fd0d1",
+            "after_footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338"
+          },
+          "geometry-3": {
+            "manifest_sha256": "c2db31d0e0eecf50148dc00f30032d8bfe59021ea1ff804a7eff784537ae063b",
+            "receipt_sha256": "1f5266158232abf60e88719aed7a693960507e5df6e3d125d7e277bb97609f34",
+            "before_footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338",
+            "after_footprints_sha256": "c806a9aff96b6a7e9e19726b5810e58de3cd0de8e1ac433844fd7aa434708e09"
+          },
+          "geometry-4": {
+            "manifest_sha256": "de04ca036fb210452b6f8a50b075c816a57a46483fb1371248e162e6992bddd0",
+            "receipt_sha256": "01be7e7e383e1ba7be7a1d8292a61e928f6195e3a11ce4a03839cbb96889f58b",
+            "before_footprints_sha256": "c806a9aff96b6a7e9e19726b5810e58de3cd0de8e1ac433844fd7aa434708e09",
+            "after_footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+          }
+        },
+        "metadata_migration_sha256": {
+          "metadata-0": "cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5",
+          "metadata-1": "290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937",
+          "metadata-2": "5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468",
+          "metadata-3": "09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f",
+          "metadata-4": "ddf8546553aaeb32905d6d60fbe3d001876f40b41b0c6f337f55978776c2367f"
+        },
+        "registered_identity_manifest_sha256": {
+          "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd": "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8"
+        }
+      }
+    },
+    "approved_release_in_research_gate": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+    },
+    "release_in_publication_receipt": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+    },
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "gate_path": "data/research-geography-gate.json",
+    "gate_file_sha256": "1fd32582e4b9bac195fa5bfe306b7e9aa706d4b5986db97d689bfe14b7b9e2b4",
+    "publication_receipt_path": "data/validation/macro-publication-v5.json",
+    "publication_receipt_sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+    "verified_hierarchy_path": "data/hierarchy.json",
+    "actual_hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "release_pointer_path": "data/geographic-releases/current-manifest.json",
+    "release_pointer_sha256": "0b7060d963f5c5ecef5ae2bde33b521a3d51bf9490d57ad41eb56cff1554a766",
+    "release_registry_path": "data/geographic-releases/releases-v5-gzip.json.gz",
+    "release_registry_gzip_sha256": "082167093c95839c141e63a8e414016b3f24f755cc471bb380e57158ff5c8b7b",
+    "release_registry_uncompressed_sha256": "959871afb6ccca1f7a4902d3e82f435540efadf3ff3093be7cb484386057cf3d",
+    "regional_handoffs_path": "data/macro-foundation/regional-handoffs.json.gz",
+    "regional_handoffs_gzip_sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1",
+    "region_envelope": {
+      "region_id": "framework:region:northwestern-pacific:2357073b3888",
+      "member_count": 51,
+      "member_location_ids_sha256": "e94e38275e37f0abec6ec867a44f55dac856364825a15533b910a3a7983b6194",
+      "frozen_region_geometry_sha256": "0d5f9ccab2cb822da7cd59746408af0414d294c2bd7016d7e89816fb4fca7897",
+      "envelope_path": "data/macro-foundation/envelopes-v5/5a1ba6045f21260668a89736.wkb.gz",
+      "envelope_gzip_sha256": "8efe615479e2155500ac2e93bbd1cd8637e77451d54807a48c7b3144f05007c8",
+      "uncompressed_geometry_sha256": "0d5f9ccab2cb822da7cd59746408af0414d294c2bd7016d7e89816fb4fca7897",
+      "envelope_metadata_gzip_sha256": "8efe615479e2155500ac2e93bbd1cd8637e77451d54807a48c7b3144f05007c8"
+    }
+  },
+  "current_profile_gap": {
+    "path": "data/macro-foundation/new-location-source-profiles-v4.json.gz",
+    "present": false,
+    "expected_sha256": "cc782e4ad59694f37b29f484ad427e26997f9c077b856f1fdf770335e83fe9da",
+    "related_issue": 554,
+    "note": "Separate source-profile pointer correction; not duplicated here.",
+    "related_issue_url": "https://github.com/ChengshuLi/WorldAtlas/issues/554"
+  },
+  "historical_open_question": "The OSM Bonin/Ogasawara archipelago relation remains unresolved; no interpretation or regional move is made."
+}

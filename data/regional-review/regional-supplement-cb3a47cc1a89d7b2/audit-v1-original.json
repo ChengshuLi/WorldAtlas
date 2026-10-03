@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 1,
   "issue": 524,
   "recorded_on": "2026-10-03",
   "worker": "codex-20261003-marcus-island-7c1c62b3-60ec-41d4-b6f1-4a457e0af901",
@@ -92,30 +92,17 @@
     "requested_follow_up": "Jointly review the retained OSM relation against authoritative physical/naming sources and both regional assessments; decide whether source aggregation is unsuitable for parent inference, represents a physical grouping, or requires another sourced treatment. Preserve the published release until joint assessment; no unilateral boundary or membership edit."
   },
   "baseline_pins": {
-    "release_id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
-    "release_version": 5,
-    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
-    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
-    "membership_sha256": "9b555a5784795f2e8cef1e0ede7453ca499e8b8f9f3c1620e8d00b5dddc7109e",
-    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
-    "classification": "current assigned and independently verified v5 baseline"
+    "release_id": "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+    "release_version": 3,
+    "hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
+    "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+    "membership_sha256": "7f417ad9ba3417737847aab72dfeb718a941adc2c058de24b1596bd7e78543b5",
+    "note": "This packet is a source audit against current repository main; these are immutable published pins, not approvals."
   },
   "source_profile_gap": {
     "path": "data/macro-foundation/new-location-source-profiles-v4.json.gz",
     "present": false,
     "expected_sha256": "cc782e4ad59694f37b29f484ad427e26997f9c077b856f1fdf770335e83fe9da"
   },
-  "no_shared_geometry_hierarchy_certificate_or_live_data_changed": true,
-  "historical_baseline_pins": {
-    "release_id": "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
-    "release_version": 3,
-    "hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
-    "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
-    "membership_sha256": "7f417ad9ba3417737847aab72dfeb718a941adc2c058de24b1596bd7e78543b5",
-    "classification": "historical recorded v3 tuple; matches release-registry version 3; not evidence that prior verifier actually checked v3"
-  },
-  "baseline_pin_reconciliation_path": "data/regional-review/regional-supplement-cb3a47cc1a89d7b2/baseline-reconciliation.json",
-  "current_issue_scope_path": "data/regional-review/regional-supplement-cb3a47cc1a89d7b2/issue-524-scope.json",
-  "baseline_pin_note": "The former verifier did not test the baseline pins it recorded. This follow-up preserves the v3 tuple as historical provenance and verifies the assigned v5 tuple against current issue and release artifacts.",
-  "pre_reconciliation_audit_path": "data/regional-review/regional-supplement-cb3a47cc1a89d7b2/audit-v1-original.json"
+  "no_shared_geometry_hierarchy_certificate_or_live_data_changed": true
 }
