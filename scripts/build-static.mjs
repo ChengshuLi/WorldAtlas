@@ -105,6 +105,8 @@ try {
   for(const file of worldReview.location_parts||[]){await fs.mkdir(path.dirname(`dist/${file}`),{recursive:true});await fs.copyFile(`data/${file}`,`dist/${file}`);}
   for(const file of frameworkReport.change_parts||[])await fs.copyFile(`data/${file}`,`dist/${file}`);
   await fs.copyFile('data/framework-sources/manifest.json','dist/framework-sources.json');
-  for(const file of await fs.readdir('dist',{recursive:true})){const stat=await fs.stat(`dist/${file}`);if(stat.isFile()&&stat.size>25*1024*1024)throw new Error(`Static asset exceeds 25 MiB: ${file}`);}
+  // Hosted packaging reports every violation with full file/category totals
+  // after the Worker and migration transport join the final upload layout.
+  if(process.env.ATLAS_HOSTED_BUILD!=='1')for(const file of await fs.readdir('dist',{recursive:true})){const stat=await fs.stat(`dist/${file}`);if(stat.isFile()&&stat.size>25*1024*1024)throw new Error(`Static asset exceeds 25 MiB: ${file}`);}
   console.log(`Static atlas ready: ${reference.features.length} polygons and ${history.states.length} dated records.`);
 } finally { db.close(); }

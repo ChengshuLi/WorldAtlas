@@ -3,6 +3,7 @@ import {build} from 'esbuild';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
+import {auditDeployment,formatDeploymentBudget} from './deployment-budget.mjs';
 
 const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 process.chdir(root);
@@ -21,12 +22,11 @@ compileHostedMigrations({input:migrationSource,output:'dist/drizzle'});
 await fs.cp('dist/drizzle','dist/server/drizzle',{recursive:true});
 const config={name:'worldatlas-explorer',main:'index.js',compatibility_date:'2026-10-01',assets:{directory:'../client',binding:'ASSETS',run_worker_first:['/api/*']},d1_databases:[{binding:'DB',database_name:'worldatlas-db',migrations_dir:'./drizzle'}],r2_buckets:[{binding:'BUCKET',bucket_name:'worldatlas-media'}]};
 await fs.writeFile('dist/server/wrangler.json',JSON.stringify(config,null,2)+'\n');
-let totalBytes=0;
-for(const file of await fs.readdir('dist',{recursive:true})){
- const stat=await fs.stat(`dist/${file}`);if(!stat.isFile())continue;
- totalBytes+=stat.size;
- if(stat.size>25*1024*1024)throw Error(`Deployment asset exceeds 25 MiB: ${file}`);
-}
-if(totalBytes>256*1024*1024)throw Error(`Deployment package exceeds 256 MiB: ${totalBytes} bytes`);
+// Audit the fresh compiled transport. The publisher audits its staged Site
+// separately after any explicit legacy-D1 cutoff.
+const budget=await auditDeployment({root,layout:'build'});
+await fs.mkdir('.cache',{recursive:true});
+await fs.writeFile('.cache/deployment-budget.json',JSON.stringify(budget,null,2)+'\n');
+console.log(formatDeploymentBudget(budget));
+if(budget.violations.length)throw Error('Deployment reserve gate failed; see .cache/deployment-budget.json and the category/file breakdown above');
 console.log('Hosted atlas ready: Worker API, persistent database declarations, media storage and fixed map assets.');
-console.log(`Deployment files: ${totalBytes} bytes; catalog bootstrap and persistent media are separate.`);
