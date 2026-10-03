@@ -25,14 +25,15 @@
   "import_receipt_paths": [],
   "readback_paths": [],
   "coverage_achieved": [
-    "Evaluated 25 pinned resource JSONs and recorded date bounds, language, period labels, confidence, selected citation link, contributors, source URLs and hashes."
+    "Evaluated 25 pinned resource JSONs and recorded date bounds, language, period labels, confidence, selected citation link, contributors, source URLs and hashes.",
+    "Source manifest is generated research data (25 exact resource hashes and attribution records; 1,183 lines), not executable code or Atlas output."
   ],
   "source_gaps": [
     "Purposive rather than exhaustive sample; selected assertion in some resources lacks a citesAsEvidence link; date endpoint semantics not independently verified; no continuous use inferred."
   ],
   "blockers": [],
   "next_action": "Submit the single source-only PR, wait for exact-head scope check and serialized merge queue, then verify merge, release claim and continue with next ready issue.",
-  "pull_request": null,
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/575",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
