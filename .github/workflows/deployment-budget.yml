@@ -1,0 +1,67 @@
+name: Deployment package budget
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/**'
+      - 'src/**'
+      - 'hosted/**'
+      - 'data/**'
+      - 'drizzle/**'
+      - '.openai/**'
+      - 'package*.json'
+      - 'requirements.txt'
+      - '*.mjs'
+      - 'index.html'
+      - 'public/**'
+      - 'test/deployment-budget.test.mjs'
+      - '.github/workflows/deployment-budget.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/**'
+      - 'src/**'
+      - 'hosted/**'
+      - 'data/**'
+      - 'drizzle/**'
+      - '.openai/**'
+      - 'package*.json'
+      - 'requirements.txt'
+      - '*.mjs'
+      - 'index.html'
+      - 'public/**'
+      - '.github/workflows/deployment-budget.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: npm ci --no-audit --no-fund
+      - run: python -m pip install -r requirements.txt
+      - run: node --test test/deployment-budget.test.mjs
+      - name: Build and enforce archive/file reserves without publishing
+        run: npm run build:hosted
+      - name: Retain exact file and archive accounting
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: deployment-budget
+          path: .cache/deployment-budget.json
+          include-hidden-files: true
+          if-no-files-found: ignore

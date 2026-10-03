@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "package-budget-20261003-7e91",
+  "branch": "engineering/package-budget-20261003-7e91",
+  "base_main_commit": "411ee3c1cec424a7b02e3bd8ffef8690c708629d",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/53",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Exact hosted upload layout/file/category/archive accounting",
+    "4 MiB package and 1 MiB asset reserve gates in build/CI",
+    "Pinned immutable-delivery candidate proposal; no uploads"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-03T08:13:09.480Z",
+  "completed": [
+    "Measured actual POSIX tar/gzip and file inventory with hashes",
+    "Verified archive extraction, reserve failures, source exclusions and staging safety",
+    "Added build and CI gate; existing source/evidence retained"
+  ],
+  "checks": [
+    {
+      "command": "npm run build:hosted",
+      "result": "passed"
+    },
+    {
+      "command": "node --test test/deployment-budget.test.mjs test/stage-site-migrations.test.mjs",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "deployment": {
+    "performed": false,
+    "reason": "Build/CI accounting only; current Site unchanged"
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/deployment-package/package-budget-20261003.json.gz",
+    "data/deployment-package/immutable-candidates-20261003.json.gz",
+    "docs/DEPLOYMENT_PACKAGE_BUDGET.md"
+  ],
+  "blockers": [],
+  "next_action": "Submit focused PR, wait for current CI, renew reservation and merge through serialized queue; release claim after verified merge.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/548",
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "reservation": {
+    "accepted": true,
+    "request_id": "52010fac-87bc-46f9-9dd0-6a5006b71444",
+    "issue_number": 53,
+    "claim": {
+      "comment_id": 5967016213,
+      "version": 1,
+      "active": true,
+      "worker_id": "engineering-night-20261003-7e91f438",
+      "claim_id": "1c2b22ec-64a1-4a90-b022-8334b00d4fd9",
+      "branch": "engineering/package-budget-20261003-7e91",
+      "request_id": "52010fac-87bc-46f9-9dd0-6a5006b71444",
+      "issue_number": 53,
+      "claimed_at": "2026-10-03T08:05:19.427Z",
+      "updated_at": "2026-10-03T08:05:19.427Z",
+      "expires_at": "2026-10-04T08:05:19.427Z",
+      "live_work": false,
+      "mode": "engineering",
+      "max_prs": 1
+    },
+    "replayed": false,
+    "result_source": "github-comment",
+    "result_comment_id": 5967016461,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37108503454"
+  },
+  "reservation_renewal": {
+    "accepted": true,
+    "request_id": "d04c91f6-66a3-4f01-920a-85efc91f0354",
+    "issue_number": 53,
+    "claim": {
+      "comment_id": 5967016213,
+      "version": 1,
+      "active": true,
+      "worker_id": "engineering-night-20261003-7e91f438",
+      "claim_id": "1c2b22ec-64a1-4a90-b022-8334b00d4fd9",
+      "branch": "engineering/package-budget-20261003-7e91",
+      "request_id": "d04c91f6-66a3-4f01-920a-85efc91f0354",
+      "issue_number": 53,
+      "claimed_at": "2026-10-03T08:05:19.427Z",
+      "updated_at": "2026-10-03T08:11:31.846Z",
+      "expires_at": "2026-10-04T08:11:31.846Z",
+      "live_work": false,
+      "mode": "engineering",
+      "max_prs": 1
+    },
+    "replayed": false,
+    "result_source": "github-comment",
+    "result_comment_id": 5967063261,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37108851219"
+  }
+}
