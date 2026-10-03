@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {rasterize,borderKind,borderStyle,viewStride,GRID_ZOOM,GRID_WIDTH} from '../src/pixel-grid.js';
+import {rasterize,borderKind,borderStyle,viewStride,GRID_ZOOM,GRID_WIDTH,projectCell} from '../src/pixel-grid.js';
 const ring=(x1,y1,x2,y2)=>new Float64Array([x1,y1,x2,y1,x2,y2,x1,y2,x1,y1]);
 const item=(index,polygons,bounds)=>({index,polygons,bounds});
 test('pixel ownership is exclusive and adjacent locations tile without a seam',()=>{
@@ -30,7 +30,21 @@ test('province borders are stronger and local borders disappear at distant zoom'
 });
 
 test('Canvas fallback samples near screen resolution without four-pixel blocks',()=>{
- assert.equal(GRID_ZOOM,10);
- assert.equal(GRID_WIDTH,262144);
- for(let zoom=1;zoom<=13;zoom+=.25){const size=2**(zoom-GRID_ZOOM)*viewStride(zoom);assert.ok(size>=1);if(zoom<=7)assert.ok(size<2);}
+ assert.ok(Number.isInteger(GRID_WIDTH));
+ assert.equal(GRID_ZOOM,Math.log2(GRID_WIDTH/256));
+ assert.equal(viewStride(7),8);
+ assert.equal(viewStride(10),1);
+ // Near-power-of-two fixed widths may place samples just below one pixel.
+ for(let zoom=1;zoom<=13;zoom+=.25){const size=2**(zoom-GRID_ZOOM)*viewStride(zoom);assert.ok(size>=.99);if(zoom<=7)assert.ok(size<2.01);}
+});
+
+test('fixed non-power-of-two grid projects the entire world consistently',()=>{
+ assert.notEqual(Math.log2(GRID_WIDTH)%1,0);
+ assert.deepEqual(projectCell(-180,0),[0,GRID_WIDTH/2]);
+ assert.deepEqual(projectCell(180,0),[GRID_WIDTH,GRID_WIDTH/2]);
+ assert.ok(Math.abs(256*2**GRID_ZOOM-GRID_WIDTH)<1e-8);
+ const northwest=projectCell(-180,85.05112878);
+ const southeast=projectCell(180,-85.05112878);
+ assert.ok(Math.abs(northwest[1])<1e-4);
+ assert.ok(Math.abs(southeast[1]-GRID_WIDTH)<1e-4);
 });

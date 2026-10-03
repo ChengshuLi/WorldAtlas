@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import {guard,main} from './apply.mjs';
+const actual={state:'open',body:'old scope',updated_at:'2026-10-03T00:00:00Z',labels:[{name:'status:ready'}]};
+const update={number:1,body:'new scope',before_body_sha256:createHash('sha256').update(actual.body).digest('hex'),before_updated_at:actual.updated_at,before_labels:['status:ready'],labels:['status:ready']};
+test('closed issue remains untouched even when its body differs',()=>assert.equal(guard(update,{...actual,state:'closed'},null),'preserve-closed'));
+test('canonical claim protects a worker without a claim label',()=>assert.equal(guard(update,actual,{active:true}),'preserve-active-claim'));
+test('claim label protects an incomplete comment snapshot',()=>assert.equal(guard(update,{...actual,labels:['status:claimed']},null),'preserve-active-claim'));
+test('late body/date/label edits stop instead of overwriting',()=>{for(const patch of [{body:'worker edit'},{updated_at:'later'},{labels:['status:blocked']}])assert.throws(()=>guard(update,{...actual,...patch},null));});
+test('exact scope is idempotent and a released claim permits body-only update',()=>{assert.equal(guard(update,{...actual,body:update.body},null),'already-matching');assert.equal(guard(update,actual,{active:false}),'apply-body-only');});
+test('missing plan fails before any GitHub access',async()=>assert.rejects(main([]),/plan=FILE/));

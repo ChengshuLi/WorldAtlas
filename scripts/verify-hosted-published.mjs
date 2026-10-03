@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
+import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
 import {environmentClassifications} from '../src/environment-classifications.js';
 const origin=new URL(process.argv[2]??'');
 if(origin.protocol!=='https:'||origin.pathname!=='/'||origin.username||origin.password||origin.search||origin.hash)throw Error('Supply the confirmed HTTPS Site origin');
@@ -11,7 +12,7 @@ async function get(route){const r=await fetch(new URL(route,origin),{headers:{'O
 const classifications=await get('/api/classifications'),classificationCatalog={version:1,unknown:null,attributes:environmentClassifications};
 if(JSON.stringify(classifications)!==JSON.stringify(classificationCatalog))throw Error('Published environmental classification catalog mismatch');
 const classificationCounts=Object.fromEntries(Object.entries(classifications.attributes).map(([attribute,entries])=>[attribute,entries.length]));
-const index=JSON.parse(fs.readFileSync('data/geographic-releases/index.json')),releases=[];
+const index=readGeographicReleaseManifest(),releases=[];
 for(const expected of index.releases){const actual=await get('/api/geography/release?'+new URLSearchParams({release_id:expected.id}));for(const key of ['id','version','footprints_sha256','hierarchy_sha256','membership_sha256','location_ids_sha256','changes_sha256'])if(actual?.[key]!==expected[key])throw Error(`Published release mismatch: ${key}`);if(actual.status!=='published')throw Error('Unpublished release');for(const [key,value]of Object.entries(expected.expected_counts))if(actual.expected_counts[key]!==value)throw Error('Published counts mismatch');releases.push({id:actual.id,version:actual.version,counts:actual.expected_counts,footprints_sha256:actual.footprints_sha256,hierarchy_sha256:actual.hierarchy_sha256});}
 const imports=JSON.parse(fs.readFileSync('data/prepared-evidence/imports/index.json')),expected={names:new Map(),records:new Map()};
 for(const batch of imports.batches){const bytes=fs.readFileSync('data/prepared-evidence/imports/'+batch.path);if(createHash('sha256').update(bytes).digest('hex')!==batch.sha256)throw Error('Prepared import hash changed');const p=JSON.parse(bytes);for(const kind of ['names','records'])for(const row of p[kind]??[])expected[kind].set(row.id,row);}

@@ -24,6 +24,21 @@ function snapshot(value){
 const HEX=/^[a-f0-9]{64}$/;
 const distinct=ids=>Array.isArray(ids)&&ids.every(id=>typeof id==='string'&&id)&&new Set(ids).size===ids.length;
 const reference=row=>({id:row.id,name:row.name,parent_id:row.parent_id,owner:row.owner});
+/** Read immutable predecessor projections without flattening distinct migrations. */
+export function loadProjectionPredecessors({data,projection}){
+ const root=path.dirname(path.resolve(data)),result=[],seen=new Set();let current=projection;
+ while(current.predecessor_files?.['data/macro-foundation/current-membership-projection.json.gz']){
+  const entry=current.predecessor_files['data/macro-foundation/current-membership-projection.json.gz'],file=path.resolve(root,entry.archive_path);
+  if(!file.startsWith(root+path.sep)||entry.compression!=='gzip'||seen.has(entry.original_sha256))throw Error('Unsafe or cyclic projection predecessor archive');
+  const archive=fs.readFileSync(file);if(sha(archive)!==entry.archive_sha256)throw Error('Projection predecessor archive bytes changed');
+  const raw=gunzipSync(archive);if(sha(raw)!==entry.original_sha256)throw Error('Projection predecessor archive bytes changed');
+  const prior=JSON.parse(gunzipSync(raw));
+  if(['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>current.before_pins?.[key]!==prior.current_pins?.[key]))throw Error('Projection predecessor pins do not join the next migration');
+  if(current.geometry_proof?.predecessor_reference_context?.source_projection_sha256&&current.geometry_proof.predecessor_reference_context.source_projection_sha256!==entry.original_sha256)throw Error('Projection predecessor reference archive differs');
+  seen.add(entry.original_sha256);result.push(prior);current=prior;
+ }
+ return result;
+}
 /** Raw source/footprint checks happen before any open projection is emitted. */
 export async function resolveProjectionGeometry({before,after,geometryProofs,sourceReceipt}){
  if(!geometryProofs&&!sourceReceipt)return null;
@@ -75,15 +90,15 @@ export async function prepareMacroReviewProjection({data,before,after,receipts=[
  await validateSemanticFollowup(root);
  const prior=snapshot(before),current=snapshot(after),files=new Map(),geometryProof=await resolveProjectionGeometry({before,after,geometryProofs,sourceReceipt});
  if(!geometryProof&&(!same(prior.rows.map(row=>row.id),current.rows.map(row=>row.id))||footprintHash(before.features)!==footprintHash(after.features)))throw Error('Metadata projection cannot transfer, remove or alter location footprints/history');
- const previousFile=path.join(data,'macro-foundation/current-membership-projection.json.gz'),previous=geometryProof&&fs.existsSync(previousFile)?read(previousFile):null;
- if(previous){if(['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>previous.current_pins?.[key]!==before.proof[key])||!same(previous.locations.map(row=>row.id),prior.rows.map(row=>row.id)))throw Error('Prior projection is not the exact current predecessor');const previousRows=new Map(previous.locations.map(row=>[row.id,row]));if(prior.rows.some(row=>JSON.stringify(reference(row))!==JSON.stringify(reference(previousRows.get(row.id)))))throw Error('Prior projected reference context changed without evidence');geometryProof.predecessor_reference_context={source_projection_sha256:sha(fs.readFileSync(previousFile)),locations:geometryProof.archived_location_references.map(row=>reference(previousRows.get(row.reference.id)))};}
+ const previousFile=path.join(data,'macro-foundation/current-membership-projection.json.gz'),previous=fs.existsSync(previousFile)?read(previousFile):null;
+ if(previous){if(['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>previous.current_pins?.[key]!==before.proof[key])||!same(previous.locations.map(row=>row.id),prior.rows.map(row=>row.id)))throw Error('Prior projection is not the exact current predecessor');const previousRows=new Map(previous.locations.map(row=>[row.id,row]));if(prior.rows.some(row=>JSON.stringify(reference(row))!==JSON.stringify(reference(previousRows.get(row.id)))))throw Error('Prior projected reference context changed without evidence');if(geometryProof)geometryProof.predecessor_reference_context={source_projection_sha256:sha(fs.readFileSync(previousFile)),locations:geometryProof.archived_location_references.map(row=>reference(previousRows.get(row.reference.id)))};}
  const originalWorld=previous?.baseline_files?.['data/world-review.json']?JSON.parse(gunzipSync(fs.readFileSync(path.join(root,previous.baseline_files['data/world-review.json'].archive_path)))):read(path.join(data,'world-review.json')),closure=read(path.join(data,'global-semantic-closure.json.gz'));
  const sourcePaths=new Set(['hierarchy.json','world-index.json','world-review.json','global-semantic-closure.json.gz','location-policy.json','administrative-sources.json','geographic-decision-migration.json.gz','macro-boundary-migration.json.gz','geographic-repair-evidence/migration-receipt.json.gz']);
  const index=read(path.join(data,'world-index.json'));index.parts.forEach(part=>sourcePaths.add(part));Object.keys(closure.input_sha256).forEach(file=>sourcePaths.add(file));
  const ledgers=[];
  for(const continent of ['africa','asia','europe','north-america','oceania','south-america']){const name=`geographic-semantic-followup/${continent}.json.gz`,report=read(path.join(data,name));ledgers.push({path:`data/${name}`,sha256:sha(fs.readFileSync(path.join(data,name)))});[...Object.keys(report.input_sha256??{}),...Object.keys(report.source_evidence?.diagnostics?.additional_input_sha256??{})].forEach(file=>{if(!file.startsWith('scripts/'))sourcePaths.add(file.replace(/^data\//,''));});}
  if(previous)sourcePaths.add('macro-foundation/current-membership-projection.json.gz');
- const {baselineFiles,predecessorFiles}=retainProjectionInputs({data,sourcePaths,files,previousProjection:previous,predecessorKey:geometryProof?before.proof.hierarchy_sha256:null});
+ const {baselineFiles,predecessorFiles}=retainProjectionInputs({data,sourcePaths,files,previousProjection:previous,predecessorKey:previous?sha(fs.readFileSync(previousFile)):null});
  const crosswalks=[...(previous?.crosswalks??[])];for(const file of receipts){const raw=fs.readFileSync(file),receipt=JSON.parse(file.endsWith('.gz')?gunzipSync(raw):raw);if(receipt.reference_only!==true||receipt.historical_claims_transferred!==false||receipt.summary?.geometry_changes!==0)throw Error('Projection requires reference-only immutable-footprint receipts');crosswalks.push({path:path.relative(root,file),sha256:sha(raw),group_changes:receipt.group_changes,relationships:receipt.relationships,retired_units:receipt.retired_units,history_transfer:'none'});}
  const removed=prior.units.filter(row=>!current.groups.has(row.id)),added=current.units.filter(row=>!prior.groups.has(row.id)),retired=new Set(crosswalks.flatMap(row=>row.retired_units??[]).map(row=>row.id)),created=new Set([...crosswalks.flatMap(row=>row.group_changes??[]).filter(row=>row.before===null&&row.after).map(row=>row.id),...(geometryProof?.created_group_ids??[])]);
  if(removed.some(row=>!retired.has(row.id))||added.some(row=>!created.has(row.id)))throw Error('Projection changed group identities lack explicit archive/creation receipts');
@@ -102,21 +117,26 @@ export async function prepareMacroReviewProjection({data,before,after,receipts=[
  files.set('macro-foundation/world-review-projection.json',encode(dashboard));return files;
 }
 
-export function validateMacroReviewProjection({projection,hierarchy,locations,currentPins,baselineHierarchy=null,baselineLocations=null}){
- const geometryProof=validateProjectionGeometry(projection,baselineLocations,locations);
+export function validateMacroReviewProjection({projection,hierarchy,locations,currentPins,baselineHierarchy=null,baselineLocations=null,predecessorProjections=[]}){
+ const predecessor=predecessorProjections[0];
+ if(predecessor){
+  if(['hierarchy_sha256','location_index_sha256','footprints_sha256'].some(key=>projection.before_pins?.[key]!==predecessor.current_pins?.[key]))throw Error('Projection predecessor does not match exact before pins');
+  validateMacroReviewProjection({projection:predecessor,hierarchy:predecessor.groups,locations:predecessor.locations,currentPins:predecessor.current_pins,baselineHierarchy,baselineLocations,predecessorProjections:predecessorProjections.slice(1)});
+ }
+ const predecessorLocations=predecessor?.locations??baselineLocations,geometryProof=validateProjectionGeometry(projection,predecessorLocations,locations);
  if(projection?.version!==1||projection.kind!=='current-membership-projection'||projection.semantic_complete!==false||projection.regional_interiors_approved!==false||projection.historical_claims_transferred!==false||(!geometryProof&&projection.geometry_changes!==0))throw Error('Invalid current membership projection contract');
  for(const key of ['hierarchy_sha256','location_index_sha256','footprints_sha256'])if(projection.current_pins?.[key]!==currentPins[key])throw Error('Current membership projection has stale geographic pins');
  const groups=new Map(hierarchy.map(row=>[row.id,row])),projected=new Map(projection.groups.map(row=>[row.id,row]));
  if(!same(hierarchy.map(row=>row.id),projection.groups.map(row=>row.id))||!same(locations.map(row=>row.id),projection.locations.map(row=>row.id)))throw Error('Current membership projection does not conserve complete identity inventories');
  if(projection.counts?.locations!==locations.length||projection.counts.groups!==hierarchy.length||tiers.some(tier=>projection.counts[tier]!==hierarchy.filter(row=>row.level===tier).length))throw Error('Current projection counts differ from exact inventories');
- if(!geometryProof&&baselineLocations&&!same(locations.map(row=>row.id),baselineLocations.map(row=>row.id)))throw Error('Current projection loses original location identities');
+ if(!geometryProof&&predecessorLocations&&!same(locations.map(row=>row.id),predecessorLocations.map(row=>row.id)))throw Error('Current projection loses original location identities');
  if(baselineHierarchy){
   const before=new Map(baselineHierarchy.map(row=>[row.id,row])),removed=baselineHierarchy.filter(row=>!groups.has(row.id));
   if(!same(removed.map(row=>row.id),projection.archived_predecessors.map(row=>row.id))||projection.archived_predecessors.some(row=>JSON.stringify(row)!==JSON.stringify(before.get(row.id))))throw Error('Current projection altered archived predecessor identities');
-  const retired=new Set(projection.crosswalks.flatMap(row=>row.retired_units??[]).map(row=>row.id)),added=new Set([...projection.crosswalks.flatMap(row=>row.group_changes??[]).filter(row=>row.before===null&&row.after).map(row=>row.id),...(geometryProof?.created_group_ids??[])]);
+  const retired=new Set(projection.crosswalks.flatMap(row=>row.retired_units??[]).map(row=>row.id)),added=new Set([...projection.crosswalks.flatMap(row=>row.group_changes??[]).filter(row=>row.before===null&&row.after).map(row=>row.id),...(geometryProof?.created_group_ids??[]),...predecessorProjections.flatMap(p=>p.geometry_proof?.created_group_ids??[])]);
   if(removed.some(row=>!retired.has(row.id))||hierarchy.some(row=>!before.has(row.id)&&!added.has(row.id)))throw Error('Current projection group changes lack explicit crosswalks');
  }
- if(geometryProof&&baselineHierarchy&&geometryProof.created_group_ids.some(id=>!hierarchy.some(row=>row.id===id)||baselineHierarchy.some(row=>row.id===id)))throw Error('Projection new group source coverage differs from actual identities');
+ if(geometryProof&&(predecessor?.groups??baselineHierarchy)&&geometryProof.created_group_ids.some(id=>!hierarchy.some(row=>row.id===id)||(predecessor?.groups??baselineHierarchy).some(row=>row.id===id)))throw Error('Projection new group source coverage differs from actual identities');
  const byId=new Map(locations.map(row=>[row.id,row])),members=new Map(hierarchy.map(row=>[row.id,[]]));
  for(const row of projection.locations){const actual=byId.get(row.id),expected=chain(actual.parent_id,groups);if(row.name!==actual.name||row.parent_id!==actual.parent_id||row.owner!==actual.owner||JSON.stringify(row.parent_chain)!==JSON.stringify(expected)||row.status!=='open'||row.semantic_status!=='open')throw Error('Current membership projection contains stale or unapproved location facts');for(const parent of expected)members.get(parent).push(row.id);}
  for(const [id,actual] of groups){const row=projected.get(id);if(row.name!==actual.name||row.parent_id!==actual.parent_id||row.level!==actual.level||row.branch_semantic_status!=='open'||!same(row.member_location_ids,members.get(id)))throw Error('Current membership projection has stale group membership or semantic approval');}

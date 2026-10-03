@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import os from 'node:os';import {createHash} from 'node:crypto';import {gzipSync,gunzipSync} from 'node:zlib';
 import {stageLandCreations} from '../scripts/stage-land-creations.mjs';import {footprintHash} from '../scripts/check-prepared.mjs';
-import {validateMacroReviewProjection,resolveProjectionGeometry,retainProjectionInputs} from '../scripts/prepare-macro-review-projection.mjs';
+import {validateMacroReviewProjection,resolveProjectionGeometry,retainProjectionInputs,loadProjectionPredecessors} from '../scripts/prepare-macro-review-projection.mjs';
 const units=[{id:'c',name:'C',level:'continent',parent_id:null},{id:'s',name:'S',level:'subcontinent',parent_id:'c'},{id:'r',name:'R',level:'region',parent_id:'s'},{id:'a',name:'A',level:'area',parent_id:'r'},{id:'p',name:'P',level:'province',parent_id:'a'}];
 const pins={hierarchy_sha256:'a'.repeat(64),location_index_sha256:'b'.repeat(64),footprints_sha256:'c'.repeat(64)};
 function fixture(){
@@ -70,4 +70,32 @@ test('later geometry projection preserves original inspection bytes and namespac
  const entry={archive_path:'data/'+archive,archive_sha256:sha(compressed),original_sha256:sha(original),compression:'gzip'},previous={baseline_files:{'data/world-review.json':entry}},files=new Map(),result=retainProjectionInputs({data:dir,sourcePaths:['world-review.json'],files,previousProjection:previous,predecessorKey:'a'.repeat(64)});
  assert.deepEqual(result.baselineFiles,previous.baseline_files);assert.equal(files.get(archive).equals(compressed),true);assert.equal(result.predecessorFiles['data/world-review.json'].original_sha256,sha(current));assert.equal(gunzipSync(files.get(result.predecessorFiles['data/world-review.json'].archive_path.replace(/^data\//,''))).equals(current),true);
  fs.appendFileSync(dir+'/'+archive,'changed');assert.throws(()=>retainProjectionInputs({data:dir,sourcePaths:[],files:new Map(),previousProjection:previous}),/Prior source inspection bytes changed/);
+});
+
+test('successive source migrations conserve earlier additions and their sourced new groups',async t=>{
+ const f=geometryFixture(t),proof=await resolveProjectionGeometry(f),first=geometryProjection(f,proof),prior=first.projection;
+ const added={id:'next',name:'Next',parent_id:'new:p',owner:null,parent_chain:['new:p','new:a','r','s','c'],status:'open',semantic_status:'open'};
+ const afterPins={...prior.current_pins,footprints_sha256:'e'.repeat(64)},manifest={sha256:'1'.repeat(64),receipt_sha256:'2'.repeat(64),before_footprints_sha256:prior.current_pins.footprints_sha256,after_footprints_sha256:afterPins.footprints_sha256,changed_ids:[],removed_ids:[],added_ids:['next'],history_transfer:false};
+ const assessment={id:'next',status:'source-assessed-open',semantic_status:'open',regional_interior_approved:false,historical_attributes_assessed:false,kind:'source-backed-create',source_manifest_sha256:manifest.sha256,source_receipt_sha256:manifest.receipt_sha256,source_evidence:[{url:'https://example.org/next',source_sha256:'3'.repeat(64)}],creation_proof:{location_id:'next',source:{sha256:'3'.repeat(64)}}};
+ const projection=structuredClone(prior);projection.before_pins=prior.current_pins;projection.current_pins=afterPins;projection.locations.push(added);projection.counts.locations=3;projection.geometry_changes=1;
+ projection.geometry_proof={version:1,method:'ordered-source-backed-geographic-migrations',descriptor_sha256:'4'.repeat(64),source_receipt_sha256:'5'.repeat(64),before_footprints_sha256:manifest.before_footprints_sha256,after_footprints_sha256:manifest.after_footprints_sha256,changed_ids:[],removed_ids:[],added_ids:['next'],created_group_ids:[],manifests:[manifest],archived_location_references:[],metadata_receipts:[],source_assessments:{locations:[assessment],groups:[]},historical_claims_transferred:false,regional_interiors_approved:false};
+ for(const group of projection.groups)if(added.parent_chain.includes(group.id))group.member_location_ids.push('next');
+ const input={...first,projection,hierarchy:projection.groups,locations:projection.locations,currentPins:afterPins};
+ assert.throws(()=>validateMacroReviewProjection(input),/crosswalk loses or invents/);
+ assert.equal(validateMacroReviewProjection({...input,predecessorProjections:[prior]}).validated,true);
+ const bad=structuredClone(prior);bad.current_pins.footprints_sha256='0'.repeat(64);
+ assert.throws(()=>validateMacroReviewProjection({...input,predecessorProjections:[bad]}),/before pins/);
+ const approved=structuredClone(prior);approved.regional_interiors_approved=true;
+ assert.throws(()=>validateMacroReviewProjection({...input,predecessorProjections:[approved]}),/contract/);
+});
+
+test('projection predecessor loading pins both gzip layers and joins exact releases',t=>{
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-projection-chain-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ const prior={current_pins:pins},raw=gzipSync(Buffer.from(JSON.stringify(prior))),archive=gzipSync(raw),file='data/predecessor.json.gz.gz';
+ fs.mkdirSync(root+'/data');fs.writeFileSync(root+'/'+file,archive);
+ const projection={before_pins:pins,predecessor_files:{'data/macro-foundation/current-membership-projection.json.gz':{archive_path:file,archive_sha256:sha(archive),original_sha256:sha(raw),compression:'gzip'}}};
+ assert.deepEqual(loadProjectionPredecessors({data:root+'/data',projection}),[prior]);
+ const broken=structuredClone(projection);broken.before_pins.footprints_sha256='0'.repeat(64);
+ assert.throws(()=>loadProjectionPredecessors({data:root+'/data',projection:broken}),/pins do not join/);
+ fs.appendFileSync(root+'/'+file,'changed');assert.throws(()=>loadProjectionPredecessors({data:root+'/data',projection}),/archive bytes changed/);
 });

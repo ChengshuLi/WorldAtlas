@@ -1,0 +1,35 @@
+# Changed-footprint ownership and environmental preparation — issue 540
+
+This directory retains configuration, exact source checks and preparation summaries. Actual staged ownership/reference assets are installed and published only by the designated root publisher. No historical claim interval is widened; unchanged location records are reused exactly, predecessor derived records are archived, and changed/new locations are recomputed against the existing sources. No additional historical facts are researched or invented by this preparation.
+
+`source-config.json` uses repository-relative paths rather than workspace-specific paths. Cache files are not committed: restore the exact original sources using their existing source inventories and the hashes in `source-proof.json`. The verified inputs include all 67 Cliopatria chunks and its archived executed ownership algorithms, the climate ZIP, four exact extracted rasters (ZIP CRC and size checked), ecoregion geometry, and terrain raster. Both original prepared products pin release-4 footprints `711b3dcf…`; changed products must pin combined release-5 footprints `2ac42eeb…` and 49,625 locations.
+
+The composed integration stage links unchanged parts to immutable original files. The incremental preparers correctly reject links escaping the stage. `materialize.py` copies the explicitly declared parts and hierarchy byte for byte into a self-contained directory, recording source and output part hashes. The canonical composer must preserve original numeric JSON spelling for unchanged geometries: `30.0` becoming `30` causes a false change under the existing raw fingerprint contract. Fix that in composition, never in a derived-only snapshot or by weakening classification. Materialization neither mutates the source nor relaxes source-path validation. `snapshot-proof.json` pins this self-contained copy; the preparers independently verify its complete footprint hash against the aggregate migration receipt.
+
+From the repository root, after replaying the combined integration stage:
+
+```sh
+python3 data/macro-improvements/loose-ends-v5/derived/materialize.py --index /tmp/worldatlas-v5-integrated/creation/world-index.json --output /tmp/worldatlas-v5-derived-after-files --proof /tmp/worldatlas-v5-derived-snapshot-proof.json
+
+python3 scripts/prepare-ownership-incremental.py --before data/world-index.json --after /tmp/worldatlas-v5-derived-after-files/world-index.json --before-boundaries data/geographic-repair-evidence/after-boundaries.json.gz --after-boundaries data/geographic-repair-evidence/after-boundaries.json.gz --receipt /tmp/worldatlas-v5-integrated/aggregate-source-receipt.json --ownership data/ownership-history --source data/cliopatria --output /tmp/worldatlas-v5-ownership
+
+python3 scripts/prepare-reference-incremental.py --before data/world-index.json --after /tmp/worldatlas-v5-derived-after-files/world-index.json --receipt /tmp/worldatlas-v5-integrated/aggregate-source-receipt.json --references data/reference-attributes --sources data/macro-improvements/loose-ends-v5/derived/source-config.json --output /tmp/worldatlas-v5-reference
+```
+
+Use fresh output paths and run the heavy jobs sequentially. Current dated footprint input is the preserved empty non-example boundary set; using it does not erase direct historical evidence. Both preparers validate the aggregate receipt against exact before/after footprint and identity inventories. Failures must be resolved explicitly, never hidden with `--unknown-changed`. Naturally unsupported source coverage still produces explained unknown values.
+
+Executed preparation completed against the repaired canonical composition:
+
+- Ownership reused 49,620 locations and 6,833,855 exact intervals, and scanned all
+  13,378 existing political source polygons for three changed and two new
+  locations. Those five have no supported intervals in this source; zero new
+  ownership intervals is a measured coverage result, not an unknown fallback.
+- Environmental preparation reused 346,327 reference tuples, archived 16 prior
+  changed-footprint tuples, and derived 19 supported tuples, totaling 346,346.
+  Existing source periods and dictionary prefixes were preserved.
+- Tiny Kingman/Gardner footprints lack native climate/terrain sample centers and
+  ecoregion overlap. Manuae and corrected Chagos have less than half their land
+  supported by the existing vegetation source. These fields remain unknown with
+  measured explanations; no source geometry or factual interval is expanded.
+
+`ownership-result.json`, `reference-result.json` and `index.json` pin actual product indexes and result receipts. `preparation-attempts.json` retains the earlier strict validation failures, the canonical fix and successful completion. Actual products await separate publisher installation and live readback.

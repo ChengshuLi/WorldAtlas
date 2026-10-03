@@ -9,7 +9,7 @@ import { gunzipSync } from 'node:zlib';
 import { resolve, relative, dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {footprintHash} from './check-prepared.mjs';
-import {validateMacroReviewProjection} from './prepare-macro-review-projection.mjs';
+import {validateMacroReviewProjection,loadProjectionPredecessors} from './prepare-macro-review-projection.mjs';
 
 export const CONTINENTS = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America'];
 export const LEDGERS = Object.fromEntries(CONTINENTS.map(name => [name, `data/geographic-semantic-followup/${name.toLowerCase().replaceAll(' ', '-')}.json.gz`]));
@@ -337,7 +337,7 @@ export async function validateSemanticFollowup(root, { expectedCounts = { locati
     const currentHierarchyRaw=await readFile(safePath('data/hierarchy.json')),currentIndexRaw=await readFile(safePath('data/world-index.json')),currentHierarchy=JSON.parse(currentHierarchyRaw),currentIndex=JSON.parse(currentIndexRaw),currentFeatures=[];
     for(const part of currentIndex.parts)currentFeatures.push(...JSON.parse(await readFile(safePath(`data/${part}`))).features);
     const currentLocations=currentFeatures.map(feature=>({id:feature.id,name:feature.properties.name,parent_id:feature.properties.parent_id,owner:feature.properties.reference_owner}));
-    const projected=validateMacroReviewProjection({projection:membershipProjection,hierarchy:currentHierarchy,locations:currentLocations,baselineHierarchy:hierarchy,baselineLocations:locations,currentPins:{hierarchy_sha256:hash(currentHierarchyRaw),location_index_sha256:hash(currentIndexRaw),footprints_sha256:footprintHash(currentFeatures)}});
+    const projected=validateMacroReviewProjection({projection:membershipProjection,hierarchy:currentHierarchy,locations:currentLocations,baselineHierarchy:hierarchy,baselineLocations:locations,predecessorProjections:loadProjectionPredecessors({data:resolve(root,'data'),projection:membershipProjection}),currentPins:{hierarchy_sha256:hash(currentHierarchyRaw),location_index_sha256:hash(currentIndexRaw),footprints_sha256:footprintHash(currentFeatures)}});
     for(const receipt of membershipProjection.crosswalks){const raw=await readFile(safePath(receipt.path));requireThat(hash(raw)===receipt.sha256,'Current membership projection receipt bytes changed');}
     result.retained_inspection_counts=result.counts;result.counts={...result.counts,locations:projected.counts.locations,groups:projected.counts.groups};result.current_membership_projection=projected;
     result.limitation+=' Original source inspections were checked against their exact archived baseline; current names/chains are a separately validated metadata projection, not a new inspection.';

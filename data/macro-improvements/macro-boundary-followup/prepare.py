@@ -7,6 +7,7 @@ import hashlib
 import io
 import json
 import pathlib
+import subprocess
 import sys
 import xml.etree.ElementTree as ET
 
@@ -25,16 +26,25 @@ def sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
-def produce():
+def produce(archived_pins=None):
     pins = {}
 
-    def read(path):
+    def pinned_raw(path):
         raw = path.read_bytes()
+        expected = (archived_pins or {}).get(str(path.relative_to(ROOT)))
+        if expected and sha(raw) != expected:
+            index = json.loads(gzip.decompress((ROOT / 'data/macro-improvements/loose-ends-v5/publication/installation-source-proof-index.json.gz').read_bytes()))
+            raw = subprocess.check_output(['git', 'show', f"{index['baseline_commit']}:{path.relative_to(ROOT)}"], cwd=ROOT)
+        assert not expected or sha(raw) == expected, (str(path), 'Archived input hash differs')
+        return raw
+
+    def read(path):
+        raw = pinned_raw(path)
         pins[str(path.relative_to(ROOT))] = sha(raw)
         return json.loads(gzip.decompress(raw) if path.suffix == '.gz' else raw)
 
-    pins[str(pathlib.Path(__file__).resolve().relative_to(ROOT))] = sha(pathlib.Path(__file__).read_bytes())
-    pins['scripts/ellipsoidal_area.py'] = sha((ROOT / 'scripts/ellipsoidal_area.py').read_bytes())
+    pins[str(pathlib.Path(__file__).resolve().relative_to(ROOT))] = sha(pinned_raw(pathlib.Path(__file__).resolve()))
+    pins['scripts/ellipsoidal_area.py'] = sha(pinned_raw(ROOT / 'scripts/ellipsoidal_area.py'))
     reconciliation = read(OLD / 'reconciliation.json')
     archived = read(OLD / 'measurements.json.gz')
     snapshots = {row['location_id']: row for row in read(OLD / 'current-candidates.json.gz')}
@@ -210,18 +220,38 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true', help='Recompute and require byte-identical saved report')
     args = parser.parse_args()
-    report = produce()
+    destination = OWN / 'domain-diagnosis.json.gz'
+    old_report = json.loads(gzip.decompress(destination.read_bytes())) if args.check else None
+    report = produce(old_report['input_sha256'] if old_report else None)
     raw = (json.dumps(report, sort_keys=True, indent=2, ensure_ascii=False) + '\n').encode()
     output = io.BytesIO()
     with gzip.GzipFile(filename='', fileobj=output, mode='wb', mtime=0) as stream:
         stream.write(raw)
     packed = output.getvalue()
-    destination = OWN / 'domain-diagnosis.json.gz'
     if args.check:
         assert destination.read_bytes() == packed, 'Saved diagnosis does not match current pinned inputs'
     else:
         destination.write_bytes(packed)
-    print(json.dumps({'checked': args.check, 'report_sha256': sha(packed), **report['summary']}))
+    # Current publication context is checked separately from the archived v4 result.
+    certificate_raw = (ROOT / 'data/macro-foundation/macro-certificate.json').read_bytes()
+    current = json.loads(certificate_raw)
+    current_hierarchy = sha((ROOT / 'data/hierarchy.json').read_bytes())
+    assert current_hierarchy == current['release']['hierarchy_sha256']
+    if current['release'] != report['current_release']:
+        receipt_raw = gzip.decompress((ROOT / 'data/macro-improvements/loose-ends-v5/publication/aggregate-source-receipt.json.gz').read_bytes())
+        receipt = json.loads(receipt_raw)
+        installed = json.loads((ROOT / 'data/publication-geography-receipt.json').read_bytes())
+        assert sha(receipt_raw) == installed['sources']['sourceReceipt']['sha256']
+        assert receipt['before_footprints_sha256'] == report['current_release']['footprints_sha256']
+        assert receipt['after_footprints_sha256'] == installed['after_footprints_sha256'] == current['release']['footprints_sha256']
+        candidates = {row['location_id'] for row in json.loads(gzip.decompress((OLD / 'current-candidates.json.gz').read_bytes()))}
+        assert receipt['historical_claims_transferred'] is False and not receipt['removed_ids']
+        assert not candidates.intersection(receipt['changed_ids'] + receipt['added_ids'])
+    context = {'release': current['release'], 'status': current['status'],
+               'certificate_sha256': sha(certificate_raw), 'hierarchy_sha256': current_hierarchy,
+               'world_index_sha256': sha((ROOT / 'data/world-index.json').read_bytes())}
+    print(json.dumps({'checked': args.check, 'archived_report_release': report['current_release'],
+                      'current_context': context, 'report_sha256': sha(packed), **report['summary']}))
 
 
 if __name__ == '__main__':
