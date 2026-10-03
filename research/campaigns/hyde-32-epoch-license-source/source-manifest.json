@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "campaign_id": "hyde-32-epoch-license-source",
+  "github_issue": 65,
+  "retrieved_date_utc": "2026-10-03",
+  "selected_source": {
+    "dataset_title": "Anthropogenic land-use estimates for the Holocene; HYDE 3.2",
+    "doi": "10.17026/DANS-25G-GEZ3",
+    "repository": "DANS Data Station Archaeology",
+    "repository_edition": "2.0",
+    "repository_release_date": "2025-06-02T14:41:52Z",
+    "payload_release": "HYDE 3.2.1; author README dated 2017-09-12",
+    "repository_publication_date": "2017-09-29",
+    "coverage_claim": "10,000 BCE–2015 CE in article and release README; issue review window is 3000 BCE–2015 CE",
+    "repository_license": "CC0-1.0",
+    "included_readme_license_notice": "CC BY 3.0 applies to all HYDE data",
+    "license_resolution": "The current dataset-level metadata and the included author's README state different licenses. Both allow reuse; follow CC BY 3.0 attribution pending clarification and preserve the discrepancy."
+  },
+  "reviewed_source_artifact_count": 8,
+  "finding_count": 9,
+  "existing_evidence": {
+    "base_commit": "58a2b1c4dcff999cb1e2398b310b7643a681ec9e",
+    "source_inventory_path": "data/source-inventory.json",
+    "historical_coverage_review_path": "docs/HISTORICAL_COVERAGE_RESEARCH.md",
+    "previous_finding": "Earlier 2026-10-01 review reported an anti-bot challenge at DANS landing/metadata endpoints; dataset terms and files unverified."
+  },
+  "observations": [
+    "1. The DANS DOI record is HYDE 3.2, repository version 2.0 released 2025-06-02, containing named HYDE 3.2.1 payload files; publication dates and version labels are recorded separately.",
+    "2. Current DANS landing/API responses are public; the record lists five files as public/unrestricted. The 5.34 GB baseline ZIP was not downloaded; only the 8,826-byte README was fetched.",
+    "3. Current DANS metadata and DataCite identify dataset CC0-1.0; the included original README states CC BY 3.0 for all data. Keep the discrepancy and use attribution pending clarification.",
+    "4. Source product coverage is reported as 10,000 BCE–2015 CE; steps are 1,000-year BCE, 100-year to 1700 CE, 10-year to 2000, annual 2000–2015. The issue scope remains 3000 BCE–2015 CE; exact snapshot/interval anchor convention is unspecified in the README.",
+    "5. README header template is Arc/Info ASCII grid, 4320x2160, lower-left -180,-90, cellsize 0.0833333 degrees, NoData -9999. No actual raster epoch header/value was inspected.",
+    "6. README distinguishes total/rural/urban counts per cell, population density per square kilometre, and built-up area; article describes modeled allocation from country/subnational demographic sources.",
+    "7. Article says current administrative units are held constant over time and historic sources may be adjusted to them; country aggregates are not historic Atlas location counts or denominators.",
+    "8. Land-use areas and anthromes are modeled land-system outputs, not observed vegetation or proof of habitation; Australia non-used mask applies to agricultural allocation only.",
+    "9. Baseline/lower/upper variants and article uncertainty ranges are model uncertainty products, not calibrated probabilities or direct observations. No estimates were computed here."
+  ],
+  "sources": [
+    {
+      "name": "DANS Data Station dataset landing page",
+      "url": "https://archaeology.datastations.nl/dataset.xhtml?persistentId=doi:10.17026/DANS-25G-GEZ3",
+      "http_status": 200,
+      "response_bytes": 230929,
+      "sha256": "ecd77a3a8658e3a8837e95000cfcd2a46ee6508d9ce86fdcca661fccb3c0480b",
+      "observations": ["published title and DOI", "version and release data", "CC0-1.0 page license", "five public files", "download bundle size label"]
+    },
+    {
+      "name": "DANS Dataverse public dataset metadata API JSON",
+      "url": "https://archaeology.datastations.nl/api/datasets/:persistentId/?persistentId=doi:10.17026/DANS-25G-GEZ3",
+      "http_status": 200,
+      "response_bytes": 17001,
+      "sha256": "9a50f6e8cb13310e518c080d3485771d17415dc0d6f14af1ca9ab1fc462d32d9",
+      "version": "2.0",
+      "license": "CC0-1.0",
+      "files": [
+        {"name": "easy-migration.zip", "bytes": 1400247, "restricted": false},
+        {"name": "HYDE3_2_1-anthromes.zip", "bytes": 141764831, "restricted": false},
+        {"name": "HYDE3_2_1-baseline.zip", "bytes": 5339653974, "restricted": false},
+        {"name": "HYDE3_2_1-general_supplementary.zip", "bytes": 23585889, "restricted": false},
+        {"name": "readme_release_HYDE3.2.1.txt", "bytes": 8826, "restricted": false, "file_id": 5396388}
+      ]
+    },
+    {
+      "name": "DataCite DOI registration JSON",
+      "url": "https://api.datacite.org/dois/10.17026/DANS-25G-GEZ3",
+      "http_status": 200,
+      "response_bytes": 318402,
+      "sha256": "d25a996dc45b7d2360d946f67372d854a3c26edd0568d7123a62bee2973e1d70",
+      "rights": ["open access", "Creative Commons Zero v1.0 Universal"],
+      "dates": {"issued": "2017-09-29", "created": "2017-09-28", "updated": "2025-06-02"},
+      "record_version": "2.0"
+    },
+    {
+      "name": "Klein Goldewijk et al., ESSD article HTML",
+      "doi": "10.5194/essd-9-927-2017",
+      "url": "https://essd.copernicus.org/articles/9/927/2017/",
+      "http_status": 200,
+      "response_bytes": 160212,
+      "sha256": "20281b0ff284e4ad5265dc41ecfd802c15b96c1658fb614388982e16114edea3",
+      "publication_date": "2017-12-01",
+      "license": "CC BY 3.0 for the article; not used as proof of dataset terms"
+    },
+    {
+      "name": "Klein Goldewijk et al., ESSD article PDF",
+      "doi": "10.5194/essd-9-927-2017",
+      "url": "https://essd.copernicus.org/articles/9/927/2017/essd-9-927-2017.pdf",
+      "http_status": 200,
+      "response_bytes": 4276903,
+      "sha256": "57c2f9c48a0802387f90213486443d91f6d2737c3eaf3769c80637ed62d9fc32",
+      "sections": ["population inputs and allocation", "administrative geography", "land-use allocation", "uncertainty"]
+    },
+    {
+      "name": "HYDE 3.2.1 release README",
+      "url": "https://archaeology.datastations.nl/api/access/datafile/5396388",
+      "http_status": 200,
+      "response_bytes": 8826,
+      "sha256": "6513bb386e29c76096a4db6102e121832cf76fe3b2f36425dff333c11a4c514d",
+      "repository_file_sha1": "821309ce6035c68033c6e5b3522982cd515bd111",
+      "file_id": 5396388,
+      "created_date": "2025-03-10",
+      "publication_date": "2017-09-29",
+      "last_update_time": "2025-06-02T14:41:52Z",
+      "readme_release_date": "2017-09-12",
+      "readme_license_notice": "CC BY 3.0 applies to all HYDE data",
+      "retention": "Only the 8,826-byte text README was fetched; restore by public DANS API file ID and compare SHA-256. No raster/archive file was downloaded."
+    }
+  ],
+  "sample_epoch_headers_inspected": 0,
+  "global_data_archives_downloaded": false,
+  "methods": ["GET public landing and metadata endpoints without authentication", "download and hash one small public README text file", "inspect article PDF/HTML; no global raster processing, archive extraction, epoch header or data-value sampling"],
+  "source_gaps": [
+    "No actual baseline/lower/upper raster archive bytes, checksums, or raster headers were downloaded; the current repository exposes the public archive file listing only.",
+    "The README gives timestep spacing and naming but not the snapshot-year versus averaging-interval anchor convention for every file.",
+    "The current repository CC0 selection conflicts with the included author README's CC BY 3.0 statement; attribution is recommended pending clarification."
+  ],
+  "no_private_credentials_used": true,
+  "no_estimates_or_imports": true
+}

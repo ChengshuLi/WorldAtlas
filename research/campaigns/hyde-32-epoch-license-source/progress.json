@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "hyde-32-epoch-license-source",
+  "branch": "research/hyde-32-epoch-license-source",
+  "base_main_commit": "58a2b1c4dcff999cb1e2398b310b7643a681ec9e",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/65",
+  "date_timezone": "UTC",
+  "scope": {
+    "geographies": ["Global product metadata only; no raster processing, geographic decision, or location mapping"],
+    "attributes": ["population, habitation, and land-use source semantics only"],
+    "issue_date_window": "3000 BCE–2015 CE, at documented sparse output steps; no continuous annual series inferred",
+    "product_extent": "HYDE 3.2.1 release documentation states 10,000 BCE–2015 CE; wider than this issue's reviewed window",
+    "sources": ["DANS DOI 10.17026/DANS-25G-GEZ3 current repository edition 2.0", "Klein Goldewijk et al. 2017 ESSD article", "public HYDE 3.2.1 release README", "existing WorldAtlas source inventory and historical coverage review"]
+  },
+  "updated_at_utc": "2026-10-03T09:28:25+00:00",
+  "geographic_release": null,
+  "input_paths": [
+    "data/source-inventory.json",
+    "docs/HISTORICAL_COVERAGE_RESEARCH.md"
+  ],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Previously challenged DANS metadata access now succeeds through public landing/API; all five record files are marked unrestricted.",
+    "Verified current DANS version 2.0 identifies CC0-1.0; separately found included author README's CC BY 3.0 notice and documented conservative attribution pending clarification.",
+    "Recorded the release's irregular BCE/CE output-step schedule, grid header template, population count/density distinctions, modeled allocation and land-use category semantics.",
+    "Downloaded and hashed only the small README; no global archive, raster, epoch header, estimate, or import was created."
+  ],
+  "source_gaps": [
+    "DANS record CC0-1.0 and included author README CC BY 3.0 notices conflict; attribute/cite under CC BY 3.0 practice pending clarification.",
+    "README gives time-step cadence and filename convention but no universal snapshot-versus-averaging-interval anchor semantics.",
+    "No raster archive bytes, sample epoch headers, checksum, or values were downloaded or inspected; current product values and uncertainty have not been independently validated."
+  ],
+  "blockers": [],
+  "next_action": "Submit one bounded source-only PR for issue #65, pass the scope check, use the serialized merge queue for the exact passed head, verify merge, release the claim, and continue with the next ready item.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
