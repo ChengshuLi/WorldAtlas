@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "pleiades-iberia-names-source",
+  "branch": "research/pleiades-iberia-names-source",
+  "base_main_commit": "1a74e140dcb5fe3446873bfe035abec3110c1f7d",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/61",
+  "date_timezone": "UTC",
+  "scope": {
+    "geographies": [
+      "Purposive sample of 25 named Iberian Pleiades place resources; retrieval rectangle only, not a boundary"
+    ],
+    "attributes": [
+      "dated name assertions and source confidence only"
+    ],
+    "supported_window": "Evaluate 500 BCE–500 CE; retain only exact source record bounds and periods",
+    "source_version": "Pleiades datasets v4.1; tag commit b6a6790f71c45e4a4ef60fce296c506f28f458bf"
+  },
+  "updated_at_utc": "2026-10-03T10:40:00Z",
+  "geographic_release": null,
+  "input_paths": [
+    "research/campaigns/pleiades-iberia-names-source/source-manifest.json"
+  ],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Evaluated 25 pinned resource JSONs and recorded date bounds, language, period labels, confidence, selected citation link, contributors, source URLs and hashes."
+  ],
+  "source_gaps": [
+    "Purposive rather than exhaustive sample; selected assertion in some resources lacks a citesAsEvidence link; date endpoint semantics not independently verified; no continuous use inferred."
+  ],
+  "blockers": [],
+  "next_action": "Submit the single source-only PR, wait for exact-head scope check and serialized merge queue, then verify merge, release claim and continue with next ready issue.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
