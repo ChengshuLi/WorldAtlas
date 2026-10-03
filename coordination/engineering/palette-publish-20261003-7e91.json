@@ -9,7 +9,7 @@
   "base_main_commit": "c5fce09842a0af2ae05cf6c611f012b6a71befff",
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/23",
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T18:08:34.142133+00:00",
+  "updated_at_utc": "2026-10-03T18:16:49.656276+00:00",
   "scope": [
     "Second and final permitted PR: coordinated private publication of merged palette implementation, exact production GPU/Canvas/legend/year/reload/unknown acceptance and retained rollback; no factual/geographic/provider change"
   ],
@@ -86,7 +86,8 @@
     "version_number": 24,
     "native_archive_uncompressed_bytes": 262389760,
     "native_archive_content_hash": "sha256:d06648cdc833b47020614be807d912e81904c2ccfc9ddbbc20e8cc4a33ada20d",
-    "native_archive_files": 539
+    "native_archive_files": 539,
+    "verification": "first-attempt-reload-HTTP500; bounded full recheck running"
   },
   "maintenance": {
     "required": false,
@@ -94,7 +95,7 @@
     "reason": null
   },
   "blockers": [],
-  "next_action": "Post issue39 notice, confirm live_work=true, prepare/push exact Site source and audit final package; explicitly private save/deploy, verify actual success and renderer acceptance, then settle live_work=false before final evidence PR and serialized queue.",
+  "next_action": "Full actual Site24 production recheck is running after preserved one-asset HTTP500 reload failure; two direct probes returned exact packaged bytes. Keep live_work=true until verification settles, then confirmed renewal false, final evidence PR, exact-head queue and actual merge/release.",
   "evidence_paths": [
     "data/engineering/palette-publish-20261003-7e91"
   ],
