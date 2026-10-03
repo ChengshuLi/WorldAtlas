@@ -28,4 +28,19 @@ for s in reg['sources']:
  for key in ('retained_metadata',):
   if key in s:
    b=(HERE/s[key]['path']).read_bytes();assert len(b)==s[key]['bytes'] and hashlib.sha256(b).hexdigest()==s[key]['sha256']
-print(json.dumps({'verified':True,'assigned':194,'source_identity_matches':194,'province_cohorts':{p['name']:p['assigned_in_scope'] for p in a['provinces']},'source_registry_entries':len(reg['sources']),'all_location_rows_decisioned':194},ensure_ascii=False,indent=2))
+g=json.loads((HERE/'gshhg-colombia-screen.json').read_text())
+assert g['scope_count']==194 and set(g['per_location'])==set(ids)
+assert all(x['physical_source_screen']==g['per_location'][x['location_id']] for x in rows)
+assert sum(x['representative_point_in_level1_land'] for x in g['per_location'].values())==194
+ret=g['retained'];p=HERE/ret['path'];packed=p.read_bytes();raw=gzip.decompress(packed)
+assert len(packed)==ret['compressed_bytes'] and hashlib.sha256(packed).hexdigest()==ret['compressed_sha256']
+assert len(raw)==ret['uncompressed_bytes'] and hashlib.sha256(raw).hexdigest()==ret['uncompressed_sha256']
+assert len(g['matched_source_records'])==ret['record_count']==2
+neighbors=json.loads((HERE/'neighbor-screen.json').read_text())
+assert set(neighbors['per_location'])==set(ids) and neighbors['assigned_count']==194
+assert all(x['neighbor_edge_screen']==neighbors['per_location'][x['location_id']] for x in rows)
+assert neighbors['source_assigned_internal_neighbor_pair_count']==487
+assert neighbors['current_assigned_internal_neighbor_pair_count']==487
+assert neighbors['assigned_internal_pair_graph_differences']==0
+assert not neighbors['source_pairs_missing_current'] and not neighbors['current_pairs_missing_source']
+print(json.dumps({'verified':True,'assigned':194,'source_identity_matches':194,'province_cohorts':{p['name']:p['assigned_in_scope'] for p in a['provinces']},'source_registry_entries':len(reg['sources']),'gshhg_admin_points_on_land':194,'retained_gshhg_records':len(g['matched_source_records']),'matched_neighbor_pairs':neighbors['source_assigned_internal_neighbor_pair_count'],'neighbor_graph_differences':neighbors['assigned_internal_pair_graph_differences'],'all_location_rows_decisioned':194},ensure_ascii=False,indent=2))

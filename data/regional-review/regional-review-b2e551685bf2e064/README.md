@@ -20,7 +20,7 @@ For parent-name continuity only, the existing hierarchy's 2017 geoBoundaries ADM
 
 The source's 1,122 features are all ADM2; the assigned 194 are each single Polygons with no interior rings or multipart components. Province-size screening uses approximate spherical area only to compare each 2020 municipality with its matched 2017 OSM department polygon. Caquetá's Solano (`gb:COL:ADM2:7082276B1556586451217`) is approximately 46.96% of that department's source area, a notable scale outlier that needs official DANE area comparison and a semantic suitability assessment. This ratio is not proof of an error and is not an EU5 quota. Largest-location shares for Antioquia, Caldas and Sucre are also recorded in the machine inventory.
 
-All four province cohorts are exhaustively enumerated, including their full descendant counts; each parent currently has a DANE-declared municipality source family and a weaker OSM-derived department-name candidate. Their parent identities and complete chains are recorded, but the source-role/footprint and neighboring-purpose decisions remain open. Colombia's area record is partial, so it must be reconciled with the other Colombia packets before integration.
+All four province cohorts are exhaustively enumerated, including their full descendant counts; each parent currently has a DANE-declared municipality source family and a weaker OSM-derived department-name candidate. Their parent identities and complete chains are recorded, but the source-role/footprint and neighboring-purpose decisions remain open. An exact consecutive-segment adjacency screen compares all within-packet pairs in the official-source and current Atlas geometries: both graphs contain 487 pairs and have zero pair-set differences. Fifteen adjacent same-country province groups outside this packet are enumerated per location; the current exact-segment screen found no non-Colombian external feature contact. This is a topology screen only and does not certify all shared border coordinates or cross-region land coverage. Colombia's area record is partial, so it must be reconciled with the other Colombia packets before integration.
 
 Current source and Atlas geometries are summarized for all 194. The packet has not established complete settlement inventories, town roles, coast/island names, hydrology, detached administrative territories, source-to-current edge precision, or neighbor consistency against Ecuador, Brazil, Peru, Panama and Venezuela. No inter-region correction is inferred. If the official-source restoration shows a shared-edge inconsistency, report it to #489 and the affected owner before proposing any change. Geographic identity is recorded separately from present political reference and historical sovereignty.
 
@@ -38,3 +38,23 @@ The build rechecks the raw ADM2 digest, exact 1,122-member source count and uniq
 ## Next bounded research
 
 Restore the DANE DIVIPOLA MGN 2024 service layer metadata and municipality/department rows, obtaining its reuse license; compare all 194 IDs and names to the current official roster, including the three duplicate-name pairs. Retrieve DANE Centros Poblados point features with layer-level license and perform a complete point-to-polygon settlement screen for all 194. Obtain authoritative coastline/island/hydrography and land-component evidence for the coastal municipalities. Investigate Solano's relative scale using DANE 2024 statistics and full-area context. Preserve unknowns and route shared-edge findings to coordinated review. This evidence packet does not certify the regional branch or enable historical imports.
+
+
+## PR 2 physical-land screen
+
+The second tranche screens the full GSHHG 2.3.7 full-resolution level-1 source against the assigned municipality set. All 194 pinned source representative points fall inside a GSHHG physical-land polygon. One level-1 polygon centroid falls in Turbo (`gb:COL:ADM2:7082276B90132082814174`). The script retained two full byte-exact GSHHG records used by those point tests; the source release, archive/member dates, LGPL terms, sizes and hashes are registered in `sources.json`. Per-ID representative-point outcomes and source component/ring details are in `gshhg-colombia-screen.json` and `assessment.json`.
+
+This is a coarse point-in-land check using GSHHG's 2017 global physical shoreline polygons. It does not verify each municipality's complete coastline, boundary agreement, island names, inland water, detached territory or settlements. It is separate from administrative identity and political ownership. The only current-DANE/settlement follow-up is blocked child [#583](https://github.com/ChengshuLi/WorldAtlas/issues/583), which seeks exact 2024 DIVIPOLA and 2013I Centros Poblados source rows, attribution, licenses and a full 194-ID reconciliation.
+
+Reproduce the physical screen before rebuilding the assessment:
+
+```sh
+python3 data/regional-review/regional-review-b2e551685bf2e064/screen_gshhg_colombia.py /path/to/gshhs_f.b
+python3 data/regional-review/regional-review-b2e551685bf2e064/build_assessment.py
+python3 data/regional-review/regional-review-b2e551685bf2e064/verify.py
+```
+
+
+The complete adjacency screen is in `neighbor-screen.json`; reproduce it with `audit_neighbors.py`. It compares exact undirected coordinate segments in both datasets and explicitly records its failure modes. A graph difference would be a review lead, not grounds to move shared geometry in this packet.
+
+The DANE follow-up #583 is blocked until #492 closes and owns only the exact 194-ID current DANE/settlement restoration. The open physical questions remain: GSHHG is a global 2017 source, and the all-location representative-point result cannot identify every named island, disconnected land parcel, hydrographic void or current settlement. No inter-region shared-boundary correction was found in the exact-segment graph screen.

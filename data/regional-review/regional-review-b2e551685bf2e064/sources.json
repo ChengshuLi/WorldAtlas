@@ -93,6 +93,29 @@
         "bytes_uncompressed": 8898990,
         "sha256_uncompressed": "5e058b9e44eb4c83e4a33ea507c636029d08ddc6c93797f6963de99bf3f7cef2"
       }
+    },
+    {
+      "id": "gshhg-2.3.7-physical-land-screen",
+      "title": "Global Self-consistent Hierarchical High-resolution Geography (GSHHG), full-resolution binary release 2.3.7",
+      "publisher": "Wessel and Smith; University of Hawaiʻi SOEST mirror",
+      "release_date": "2017-06-15",
+      "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+      "archive_bytes": 118617033,
+      "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+      "member": "gshhs_f.b",
+      "member_bytes": 95809336,
+      "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+      "license": "LGPLv3 or later; license text retained at data/macro-improvements/macro-coverage-oceania/gshhg-LGPL.txt",
+      "retained_selected_records": {
+        "path": "sources/gshhg-colombia-land-candidates.bin.gz",
+        "record_count": 2,
+        "uncompressed_bytes": 2705280,
+        "uncompressed_sha256": "5b1ef959d3434c3c2d0bab500cd108f53dd1650221f4c67cb5aa48c66a34529d",
+        "compressed_bytes": 1752546,
+        "compressed_sha256": "b68f008aa6c7edba4e6bb349c63ae100295587bb90a4220ded23755ba2d04d07"
+      },
+      "finding": "All 194 pinned source representative points fall inside GSHHG level-1 physical land polygons; one source level-1 polygon centroid falls inside an assigned municipality (Turbo). This is a point screen only, not boundary or completeness proof.",
+      "restore": "Download the pinned ZIP, verify archive SHA-256, extract full-resolution gshhs_f.b, verify member SHA-256, then run screen_gshhg_colombia.py. Exact matched full source records are retained."
     }
   ],
   "scope_inventory": {
