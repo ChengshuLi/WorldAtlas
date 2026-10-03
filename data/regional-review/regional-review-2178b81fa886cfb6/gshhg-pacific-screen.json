@@ -1,0 +1,2185 @@
+{
+  "source": {
+    "title": "GSHHG full-resolution binary, release 2.3.7",
+    "release_date": "2017-06-15",
+    "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+    "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+    "member": "gshhs_f.b",
+    "member_bytes": 95809336,
+    "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "license": "LGPLv3 or later; license retained at data/macro-improvements/macro-coverage-oceania/gshhg-LGPL.txt",
+    "restore": "Download the pinned archive, verify archive SHA-256, extract gshhs_f.b and verify member SHA-256."
+  },
+  "scope_count": 100,
+  "source_level1_record_count": 179832,
+  "source_total_record_count": 188612,
+  "retained": {
+    "path": "sources/gshhg-pacific-land-candidates.bin.gz",
+    "record_count": 79,
+    "uncompressed_bytes": 7111924,
+    "uncompressed_sha256": "a4c364f83f7c9d982b8c3ab7c251105ce59a56d72b743cc77fc5405c7cbc3a6c",
+    "compressed_bytes": 5122132,
+    "compressed_sha256": "6e90ac5c64fd3fe992363fee2870ee582213e6ba51c20049606e934ccb69425a"
+  },
+  "method": {
+    "selection": "For every pinned assigned location, bbox-index full-resolution level-1 physical land records, calculate each candidate ring vertex centroid, and ray-crossing test that point against all bbox-compatible assigned polygons, respecting current holes. Retain complete matched GSHHG records only.",
+    "interpretation": "Two distinct screens are reported: (1) source land-polygon centroid within a current assigned polygon; (2) each pinned source representative point lies within a GSHHG level-1 land polygon. Either point test is screening only; it does not establish whole-boundary agreement, component containment, island identity, named-land completeness, or settlement coverage. A no-hit does not prove omitted land. Physical source is independent of political ownership and current administrative status."
+  },
+  "per_location": {
+    "atlas:physical:5dcc72971bb4b1ede2f5": {
+      "name": "San Bernardino · Mojave desert",
+      "current_polygon_components": 8,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.13096952415546,
+        34.92515
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:9cfc4fc5de3925d6f841": {
+      "name": "San Bernardino · Sonoran desert",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.49260237633665,
+        34.37592
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:d76eb273e99a0f96a575": {
+      "name": "San Bernardino · California montane chaparral and woodlands",
+      "current_polygon_components": 5,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.95675861108805,
+        34.215805
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:dcc393fbc988381d899c": {
+      "name": "San Bernardino · California coastal sage and chaparral",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.35995886402753,
+        34.06752
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B12422674135738": {
+      "name": "Mendocino",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.43967724935732,
+        39.393150000000006
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B13167206159035": {
+      "name": "Douglas",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.75048734887739,
+        47.6922
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B13893996833484": {
+      "name": "Stevens",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.84588923104522,
+        48.38765
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B13974884585376": {
+      "name": "Skamania",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.92778808303987,
+        45.9572
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B14198169594786": {
+      "name": "Lewis",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.38584193548387,
+        46.591899999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B16290955064252": {
+      "name": "Yolo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.85470139664804,
+        38.6228
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B16590015395010": {
+      "name": "Shasta",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.01705964364439,
+        40.733149999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B19833942519787": {
+      "name": "Kern",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.7210055319751,
+        35.307249999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B19973672472498": {
+      "name": "Sutter",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.71341659460208,
+        39.02175
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B20293708991619": {
+      "name": "Fresno",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.63207447278384,
+        36.75725
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B20376291216469": {
+      "name": "Walla Walla",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.50626375471698,
+        46.307249999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B20525606755783": {
+      "name": "Mariposa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.95729099139328,
+        37.540350000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B21025471162959": {
+      "name": "Kittitas",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.66066898226507,
+        47.1678
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B21715725601403": {
+      "name": "Colusa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.2134614964539,
+        39.171350000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B24057696547970": {
+      "name": "Kitsap",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.62890608665448,
+        47.68535
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 3,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B24970459595653": {
+      "name": "Orange",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.7216034219457,
+        33.667699999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B25148462267698": {
+      "name": "Lincoln",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.40048522437456,
+        47.43815
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B25311373219770": {
+      "name": "Snohomish",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.69528530353381,
+        48.03605
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B26488914054819": {
+      "name": "Humboldt",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.90389595323742,
+        40.7139
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B26709103627724": {
+      "name": "Franklin",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.94459403658537,
+        46.45505
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B26881284907235": {
+      "name": "Tuolumne",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.88323425925925,
+        38.0392
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B27137211377014": {
+      "name": "Del Norte",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.90603542632067,
+        41.6969
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B30314962478279": {
+      "name": "Spokane",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.43131399721449,
+        47.63605
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B30851290743950": {
+      "name": "Mason",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.16442816220237,
+        47.33365
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 4,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B31115231658227": {
+      "name": "Modoc",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.72371517762978,
+        41.524100000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B32782252789959": {
+      "name": "San Juan",
+      "current_polygon_components": 4,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.88238116564418,
+        48.565799999999996
+      ],
+      "representative_point_in_level1_land": false,
+      "gshhg_level1_containing_source_ids": [],
+      "level1_centroid_hits": 35,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B32791313624567": {
+      "name": "Yakima",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.64865576502805,
+        46.56635
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B33569460093340": {
+      "name": "Chelan",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.53830554298642,
+        47.9093
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B34460466024259": {
+      "name": "Alameda",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.87020178049671,
+        37.68285
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B35530413742416": {
+      "name": "King",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.87870432692308,
+        47.42765
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 2,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B36348564143669": {
+      "name": "Clallam",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -124.07392560241203,
+        48.1295
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B37240473864365": {
+      "name": "Imperial",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -115.35477728921673,
+        33.0265
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B37417643745911": {
+      "name": "Lake",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.79303508353864,
+        39.12975
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B39454223771984": {
+      "name": "Sonoma",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.86128707865169,
+        38.48465
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B40988222589259": {
+      "name": "Pierce",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.03563049327354,
+        47.0284
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 5,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B41205581888996": {
+      "name": "Madera",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.64077042735042,
+        37.2619
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B41898924582889": {
+      "name": "El Dorado",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.52560822168857,
+        38.7836
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B42525268241117": {
+      "name": "Sierra",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.50952438716655,
+        39.5993
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B42866910888908": {
+      "name": "Trinity",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.142175,
+        40.66905
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B42957866846180": {
+      "name": "Napa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.32422227512042,
+        38.50485
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B43213790326288": {
+      "name": "Cowlitz",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.61485332310838,
+        46.119299999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B43221954300759": {
+      "name": "Solano",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.90060340938967,
+        38.282849999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B44496470224494": {
+      "name": "Tulare",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.82524287365177,
+        36.2609
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B46695716253077": {
+      "name": "San Francisco",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.44522660758781,
+        37.7579
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B46742889788389": {
+      "name": "Thurston",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.87514911111111,
+        46.968450000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B47648516235098": {
+      "name": "San Diego",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.69519264072372,
+        33.02345
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B48044581252464": {
+      "name": "Wahkiakum",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.3431468088453,
+        46.263400000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 1,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B48171180316739": {
+      "name": "Mono",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.03354516927823,
+        38.0908
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B48598289352775": {
+      "name": "Marin",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.73775536687096,
+        38.0568
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 1,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B49571098968478": {
+      "name": "Plumas",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.80564152397261,
+        40.02315
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B51130837096991": {
+      "name": "Santa Barbara",
+      "current_polygon_components": 5,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.03425693459869,
+        34.7433
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 5,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B51466238870881": {
+      "name": "Okanogan",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.74462119090899,
+        48.4741
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B53834689647106": {
+      "name": "Klickitat",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.77280079635946,
+        45.82625
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B5435817984489": {
+      "name": "San Benito",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.02153896708961,
+        36.58365
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B56416092773024": {
+      "name": "Placer",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.74421495833529,
+        39.01405
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B58326499473481": {
+      "name": "Whitman",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.518950747097,
+        46.84325
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B60811948646652": {
+      "name": "Stanislaus",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.97925648117214,
+        37.5578
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B61595109476273": {
+      "name": "Siskiyou",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.54302744956773,
+        41.4929
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B62056349216099": {
+      "name": "Sacramento",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.27318014423076,
+        38.38365
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B62695195222235": {
+      "name": "Riverside",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.02246410180146,
+        33.74595
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B63323326586067": {
+      "name": "Yuba",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.4185196969697,
+        39.2937
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B6642778687362": {
+      "name": "Merced",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.60676346426881,
+        37.200900000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B67037278576088": {
+      "name": "Benton",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.56996044145272,
+        46.278949999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B67227670427960": {
+      "name": "San Luis Obispo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.33740745658443,
+        35.33905
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B67588574079428": {
+      "name": "Alpine",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.84469252203215,
+        38.6352
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B67594083249097": {
+      "name": "Pend Oreille",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.26721486068756,
+        48.513400000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B67805499468895": {
+      "name": "Kings",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.76139632454368,
+        36.159850000000006
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B68447963014117": {
+      "name": "Santa Cruz",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.02613914929617,
+        37.0644
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B7193910850758": {
+      "name": "Adams",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.47067058164214,
+        47.0874
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B72053512524977": {
+      "name": "Nevada",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.00789868188002,
+        39.26845
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B75131784459442": {
+      "name": "San Mateo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.31006122609192,
+        37.4002
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B77111199665921": {
+      "name": "Amador",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.73070302004334,
+        38.4653
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B78495074223375": {
+      "name": "Monterey",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.48587844434307,
+        36.34935
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B79616802808075": {
+      "name": "Asotin",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.1884070471084,
+        46.23415
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B80620838081699": {
+      "name": "Calaveras",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.66209332603938,
+        38.1636
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B81098999696635": {
+      "name": "Island",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.59914726461123,
+        48.1592
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        551
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B81740617288229": {
+      "name": "Ferry",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.52318334619838,
+        48.4226
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B83269960896154": {
+      "name": "Columbia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.9269596296779,
+        46.316599999999994
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B83834618329235": {
+      "name": "Garfield",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.54690525131528,
+        46.3608
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B84556352970709": {
+      "name": "San Joaquin",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.25016096601637,
+        37.8827
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B85210970682519": {
+      "name": "Grays Harbor",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.84315538461539,
+        47.1715
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 3,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B86430023400928": {
+      "name": "Lassen",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.52873453461285,
+        40.445949999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B87301828944684": {
+      "name": "Los Angeles",
+      "current_polygon_components": 3,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.14344469093558,
+        34.2656
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 2,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B88547646561946": {
+      "name": "Butte",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.59024889235747,
+        39.724050000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B89011069533198": {
+      "name": "Clark",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.51618147362596,
+        45.7953
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B89179227732038": {
+      "name": "Jefferson",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.66983908207868,
+        47.82695
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 1,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B89293656609241": {
+      "name": "Inyo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.49970938735177,
+        36.61565
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B9068998137459": {
+      "name": "Whatcom",
+      "current_polygon_components": 6,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.72233790526633,
+        48.81245
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 2,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B90997065310094": {
+      "name": "Santa Clara",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.72812355153707,
+        37.200199999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B91201263130085": {
+      "name": "Ventura",
+      "current_polygon_components": 3,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.10080387485019,
+        34.5403
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 3,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B93114504552564": {
+      "name": "Skagit",
+      "current_polygon_components": 4,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.7634090697357,
+        48.47515
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 8,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B93817319778568": {
+      "name": "Tehama",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.20987181578947,
+        40.12605
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B940291063109": {
+      "name": "Glenn",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.44023957654723,
+        39.592749999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B94422507286019": {
+      "name": "Pacific",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.63385914634146,
+        46.5152
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 2,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B95554273469006": {
+      "name": "Contra Costa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.97809828238499,
+        37.90945
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B96573779490833": {
+      "name": "Grant",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.49214027485436,
+        47.29085
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    }
+  },
+  "matched_source_records": [
+    {
+      "gshhg_id": 2,
+      "land_polygon_centroid_hits": [],
+      "assigned_location_representative_points_inside_land_polygon": [
+        "gb:USA:ADM2:52423323B67588574079428",
+        "gb:USA:ADM2:52423323B26881284907235",
+        "gb:USA:ADM2:52423323B93817319778568",
+        "gb:USA:ADM2:52423323B42866910888908",
+        "gb:USA:ADM2:52423323B5435817984489",
+        "gb:USA:ADM2:52423323B30851290743950",
+        "gb:USA:ADM2:52423323B42525268241117",
+        "gb:USA:ADM2:52423323B41898924582889",
+        "gb:USA:ADM2:52423323B40988222589259",
+        "gb:USA:ADM2:52423323B35530413742416",
+        "gb:USA:ADM2:52423323B78495074223375",
+        "gb:USA:ADM2:52423323B67037278576088",
+        "gb:USA:ADM2:52423323B72053512524977",
+        "gb:USA:ADM2:52423323B21025471162959",
+        "atlas:physical:dcc393fbc988381d899c",
+        "atlas:physical:d76eb273e99a0f96a575",
+        "atlas:physical:5dcc72971bb4b1ede2f5",
+        "atlas:physical:9cfc4fc5de3925d6f841",
+        "gb:USA:ADM2:52423323B77111199665921",
+        "gb:USA:ADM2:52423323B67227670427960",
+        "gb:USA:ADM2:52423323B33569460093340",
+        "gb:USA:ADM2:52423323B16590015395010",
+        "gb:USA:ADM2:52423323B68447963014117",
+        "gb:USA:ADM2:52423323B24057696547970",
+        "gb:USA:ADM2:52423323B81740617288229",
+        "gb:USA:ADM2:52423323B91201263130085",
+        "gb:USA:ADM2:52423323B93114504552564",
+        "gb:USA:ADM2:52423323B56416092773024",
+        "gb:USA:ADM2:52423323B80620838081699",
+        "gb:USA:ADM2:52423323B20525606755783",
+        "gb:USA:ADM2:52423323B89293656609241",
+        "gb:USA:ADM2:52423323B6642778687362",
+        "gb:USA:ADM2:52423323B7193910850758",
+        "gb:USA:ADM2:52423323B87301828944684",
+        "gb:USA:ADM2:52423323B41205581888996",
+        "gb:USA:ADM2:52423323B24970459595653",
+        "gb:USA:ADM2:52423323B940291063109",
+        "gb:USA:ADM2:52423323B13167206159035",
+        "gb:USA:ADM2:52423323B61595109476273",
+        "gb:USA:ADM2:52423323B53834689647106",
+        "gb:USA:ADM2:52423323B32791313624567",
+        "gb:USA:ADM2:52423323B30314962478279",
+        "gb:USA:ADM2:52423323B96573779490833",
+        "gb:USA:ADM2:52423323B36348564143669",
+        "gb:USA:ADM2:52423323B21715725601403",
+        "gb:USA:ADM2:52423323B16290955064252",
+        "gb:USA:ADM2:52423323B67594083249097",
+        "gb:USA:ADM2:52423323B34460466024259",
+        "gb:USA:ADM2:52423323B95554273469006",
+        "gb:USA:ADM2:52423323B60811948646652",
+        "gb:USA:ADM2:52423323B85210970682519",
+        "gb:USA:ADM2:52423323B89179227732038",
+        "gb:USA:ADM2:52423323B20293708991619",
+        "gb:USA:ADM2:52423323B44496470224494",
+        "gb:USA:ADM2:52423323B84556352970709",
+        "gb:USA:ADM2:52423323B25148462267698",
+        "gb:USA:ADM2:52423323B43221954300759",
+        "gb:USA:ADM2:52423323B49571098968478",
+        "gb:USA:ADM2:52423323B42957866846180",
+        "gb:USA:ADM2:52423323B48598289352775",
+        "gb:USA:ADM2:52423323B19973672472498",
+        "gb:USA:ADM2:52423323B88547646561946",
+        "gb:USA:ADM2:52423323B39454223771984",
+        "gb:USA:ADM2:52423323B83269960896154",
+        "gb:USA:ADM2:52423323B37417643745911",
+        "gb:USA:ADM2:52423323B27137211377014",
+        "gb:USA:ADM2:52423323B62056349216099",
+        "gb:USA:ADM2:52423323B14198169594786",
+        "gb:USA:ADM2:52423323B63323326586067",
+        "gb:USA:ADM2:52423323B67805499468895",
+        "gb:USA:ADM2:52423323B12422674135738",
+        "gb:USA:ADM2:52423323B26709103627724",
+        "gb:USA:ADM2:52423323B48171180316739",
+        "gb:USA:ADM2:52423323B25311373219770",
+        "gb:USA:ADM2:52423323B43213790326288",
+        "gb:USA:ADM2:52423323B26488914054819",
+        "gb:USA:ADM2:52423323B51130837096991",
+        "gb:USA:ADM2:52423323B37240473864365",
+        "gb:USA:ADM2:52423323B48044581252464",
+        "gb:USA:ADM2:52423323B47648516235098",
+        "gb:USA:ADM2:52423323B19833942519787",
+        "gb:USA:ADM2:52423323B94422507286019",
+        "gb:USA:ADM2:52423323B62695195222235",
+        "gb:USA:ADM2:52423323B31115231658227",
+        "gb:USA:ADM2:52423323B90997065310094",
+        "gb:USA:ADM2:52423323B89011069533198",
+        "gb:USA:ADM2:52423323B51466238870881",
+        "gb:USA:ADM2:52423323B46742889788389",
+        "gb:USA:ADM2:52423323B9068998137459",
+        "gb:USA:ADM2:52423323B75131784459442",
+        "gb:USA:ADM2:52423323B86430023400928",
+        "gb:USA:ADM2:52423323B46695716253077",
+        "gb:USA:ADM2:52423323B58326499473481",
+        "gb:USA:ADM2:52423323B13974884585376",
+        "gb:USA:ADM2:52423323B79616802808075",
+        "gb:USA:ADM2:52423323B20376291216469",
+        "gb:USA:ADM2:52423323B83834618329235",
+        "gb:USA:ADM2:52423323B13893996833484"
+      ]
+    },
+    {
+      "gshhg_id": 551,
+      "land_polygon_centroid_hits": [],
+      "assigned_location_representative_points_inside_land_polygon": [
+        "gb:USA:ADM2:52423323B81098999696635"
+      ]
+    },
+    {
+      "gshhg_id": 821,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B51130837096991"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 902,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B51130837096991"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 951,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B87301828944684"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1143,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1149,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B87301828944684"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1174,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1531,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B35530413742416"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1714,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1821,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B24057696547970"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2023,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B91201263130085"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2249,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B30851290743950"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2467,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B51130837096991"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3025,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B89179227732038"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3369,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B9068998137459"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3608,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B94422507286019"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3611,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B93114504552564"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3684,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B93114504552564"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3695,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B40988222589259"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3723,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4067,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B40988222589259"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4108,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4232,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B35530413742416"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4805,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B40988222589259"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5036,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5787,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 6481,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7485,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B30851290743950"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 8807,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B9068998137459"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 8971,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 9246,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B93114504552564"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 9500,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B91201263130085"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 10402,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 10727,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B48598289352775"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 11157,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B51130837096991"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 12347,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 13342,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B24057696547970"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 13834,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B93114504552564"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 18325,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B40988222589259"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 18734,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B85210970682519"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 18791,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B30851290743950"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 20131,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 20276,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 20322,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B40988222589259"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 21214,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 21257,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 22767,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B91201263130085"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 23841,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B48044581252464"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 24494,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 24822,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 25665,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B85210970682519"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 28032,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 28953,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B94422507286019"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 30041,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B93114504552564"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 33154,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B30851290743950"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 37931,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 39703,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B85210970682519"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 40713,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 43576,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 45590,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 49048,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B93114504552564"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 53748,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B93114504552564"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 55711,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 57243,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 60450,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B24057696547970"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 63771,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 67150,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 69504,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B51130837096991"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 78807,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 81193,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 94848,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 96690,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 109351,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B93114504552564"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 122023,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 136573,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 145947,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 151359,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 160873,
+      "land_polygon_centroid_hits": [
+        "gb:USA:ADM2:52423323B32782252789959"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    }
+  ],
+  "limitations": [
+    "2017 global shoreline compilation is not an authoritative national island gazetteer, administrative boundary, hydrographic inventory, or settlement source.",
+    "The centroid screen leaves coastlines, tiny islands, enclosed waters and geometry intersections unverified. A complete no-hit location can be an inland feature far from any separately centroided island polygon.",
+    "A candidate matched to an assigned polygon is not evidence of legal ownership or the correctness of its parent chain."
+  ]
+}

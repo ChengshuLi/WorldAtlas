@@ -1,0 +1,40 @@
+{
+  "issue": 487,
+  "method": "BBox-screen every exact assigned current polygon against all current Canadian source-ID features, then compare candidate boundaries in temporary EPSG:5070; count linear shared boundary only (not vertex contact).",
+  "current_scope_count": 100,
+  "canadian_current_features_screened": 33,
+  "bbox_candidate_pair_count": 1,
+  "near_or_touching_pairs": [
+    {
+      "assigned_id": "gb:USA:ADM2:52423323B9068998137459",
+      "assigned_name": "Whatcom",
+      "assigned_source_id": "gb:USA:ADM2",
+      "assigned_vintage": "2018",
+      "assigned_license": "Public Domain",
+      "assigned_original_geometry_sha256": "d527c10c3618d3aad7fc61b90d40a0ea8fdbe1f531b4629755682da90b7b6b26",
+      "neighbor_id": "gb:CAN:ADM3:43193130B1191968375732",
+      "neighbor_name": "Abbotsford",
+      "neighbor_parent_id": "framework:province:british-columbia:83abeaaac0ca",
+      "neighbor_source_id": "gb:CAN:ADM3",
+      "neighbor_source_role": "Named local administrative territory",
+      "neighbor_vintage": "2016",
+      "neighbor_license": "Open Data Commons Open Database License 1.0",
+      "neighbor_original_geometry_sha256": "f1a8d1e88ae36afea2c6a74354b07c67d7730d74e22fd3d3aa16c7f7e4933d80",
+      "neighbor_topology_conflicts": 1,
+      "raw_inputs_valid": {
+        "assigned": true,
+        "neighbor": true
+      },
+      "intersection_geometry_type": "MULTILINESTRING",
+      "shared_line_m": 39105.384,
+      "raw_polygon_overlap_deg2": 0.0,
+      "raw_geometry_distance_degrees": 0.0,
+      "interpretation": "Current county/municipality features share a line in the pinned current geometry; this is not bilateral international-boundary validation or a political ownership claim."
+    }
+  ],
+  "limitations": [
+    "This current-index contact screen is not a comparison of bilateral authoritative international boundary evidence.",
+    "A point contact between different administrative tiers does not establish a shared administrative line, an inconsistency, or a political claim.",
+    "Any future line review should use official bilateral boundary evidence and coordinate both affected scoped packets; no shared geometry was edited."
+  ]
+}
