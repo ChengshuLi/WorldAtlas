@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "outcome": "superseded candidate; reviewer found pure/SQL status/null mismatch",
+  "source_hashes": [
+    {
+      "path": "drizzle/0010_typed_observations.sql",
+      "sha256": "17db2805c81396d2327b0dd5e486185cd90aaaa76b863eb938572fc2fe6b603b"
+    },
+    {
+      "path": "postgres/migrations/0003_typed_observations.sql",
+      "sha256": "763882a257394c4885883a49f2dd9c53aece81ca5dedbcc3c36f488811d574d0"
+    },
+    {
+      "path": "hosted/storage-export-v3-contract.js",
+      "sha256": "b7b25b90c829e77d4453c6acd1f50cc741a44c1065cb2a2e046e828ad67fbe9b"
+    }
+  ],
+  "limits": [
+    "No exact-head acceptance or production operation."
+  ]
+}

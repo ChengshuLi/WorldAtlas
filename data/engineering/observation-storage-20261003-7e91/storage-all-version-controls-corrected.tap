@@ -1,0 +1,63 @@
+✔ v2 inventories all twenty-three tables and pins every reviewed D1/PostgreSQL migration (16.763379ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (2346.057536ms)
+✔ forward owner restoration streams all twenty-three tables, original JSON bytes, deferred receipts and sequence (2214.120059ms)
+✔ v2 detects changing staged publication, missing source guards and unexpected factual tables (1446.958941ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1605.536131ms)
+✔ a deferred cross-table FK failure rolls back all twenty-three tables, guards and sequence (1624.029852ms)
+✔ interrupted v2 capture resumes preserved pages and its v2 cursor cannot be sent to v1 (230.746524ms)
+✔ v3 inventories all twenty-six tables and pins every reviewed D1/PostgreSQL migration (18.992478ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (2161.430106ms)
+✔ forward owner restoration streams all twenty-six tables, original JSON bytes, deferred receipts and sequence (2212.882819ms)
+✔ v3 detects changing staged publication, missing source guards and unexpected factual tables (1487.520463ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1494.528954ms)
+✔ a deferred cross-table FK failure rolls back all twenty-six tables, guards and sequence (1657.672154ms)
+✔ interrupted v3 capture resumes preserved pages and its v3 cursor cannot be sent to v1 (267.345586ms)
+✖ typed storage on actual SQLite/PostgreSQL preserves replays and rejects unsupported evidence or incomplete corrections atomically (1580.473614ms)
+✔ complete export marker works under managed D1 compound-SELECT limits (45.302488ms)
+✔ all fourteen raw tables export exhaustively with original text, rowids and archived evidence (124.874137ms)
+✔ composite keyset cursors page across releases and reject foreign, malformed or injected cursors (63.119214ms)
+✔ markers detect publication and media writes outside ingestion revisions and reject raced pages (76.658882ms)
+✔ oversized retained evidence is reduced through explicit 413 rather than truncated (113.849853ms)
+✔ CLI exporter preserves a partial ledger, resumes hashed pages and proves frozen all-table counts (117.419174ms)
+✔ CLI rejects unfrozen, changed or tampered exports without mixing checkpoints (78.179866ms)
+✔ CLI overlaps bounded independent collections while preserving serial cursors and journals (237.664858ms)
+✔ stalled fetch times out with its forwarded signal and retries the same cursor without rewriting preserved source pages (1650.560588ms)
+✔ a response with stalled JSON bytes is bounded through body consumption and preserves checkpoint receipts (590.017458ms)
+✔ permanent transport stalls stop after four deadlines without logging credentials or creating a false checkpoint (3548.20048ms)
+✔ external cancellation aborts fetch, JSON-body reading and retry backoff without retries or checkpoint changes (149.264035ms)
+✔ malformed JSON and snapshot-conflict HTTP errors remain nonretryable, and unsafe deadline settings fail before fetching (1.366349ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 27
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10997.076268
+
+✖ failing tests:
+
+test at test/storage-export-v3.test.mjs:141:1
+✖ typed storage on actual SQLite/PostgreSQL preserves replays and rejects unsupported evidence or incomplete corrections atomically (1580.473614ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /immutable|different evidence/i. Input:
+  
+  'PostgresAdapterError: PostgreSQL operation rejected (SQLSTATE 23514)'
+  
+      at async TestContext.<anonymous> (file:///workspace/worldatlas-observation-storage-20261003-7e91/test/storage-export-v3.test.mjs:154:4)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: PostgresAdapterError: PostgreSQL operation rejected (SQLSTATE 23514)
+        at safeError (file:///workspace/worldatlas-observation-storage-20261003-7e91/hosted/postgres-adapter.js:98:9)
+        at execute (file:///workspace/worldatlas-observation-storage-20261003-7e91/hosted/postgres-adapter.js:110:22)
+        at async Object.all (file:///workspace/worldatlas-observation-storage-20261003-7e91/hosted/postgres-adapter.js:116:55)
+        at async waitForActual (node:assert:646:5)
+        at async strict.rejects (node:assert:769:25)
+        at async TestContext.<anonymous> (file:///workspace/worldatlas-observation-storage-20261003-7e91/test/storage-export-v3.test.mjs:154:4)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7),
+    expected: /immutable|different evidence/i,
+    operator: 'rejects',
+    diff: 'simple'
+  }

@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "recorded_at_utc": "2026-10-03T20:03:43.853018+00:00",
+  "status": "unavailable",
+  "runtime": "actual local workerd D1",
+  "phase": "install pre-existing forward migration0008",
+  "error": "D1_ERROR: too many terms in compound SELECT: SQLITE_ERROR",
+  "reached_new_typed_migration": false,
+  "complete_native_catalog_verified": false,
+  "native_guard_control_verified": false,
+  "source_migration": {
+    "path": "drizzle/0008_temporal_geography.sql",
+    "bytes": 21737,
+    "sha256": "a8cd574333d20891a94afac6a034576681fac2531545b761d4c4e609be452082"
+  },
+  "observed_log": {
+    "path": "data/engineering/observation-storage-20261003-7e91/native-d1-catalog-controls.log",
+    "bytes": 1229,
+    "sha256": "ffe51da64a75979ac6dfd5b8d382bd67e9dad6206eaa930808e242f26e017862"
+  },
+  "limits": [
+    "Receipt records observed sequential installation failure; it is not a D1 typed-schema pass.",
+    "Production D1 remains explicitly legacy0000\u20130007; no source migration rewritten or deployed.",
+    "Supported current production PostgreSQL and local SQLite/PGlite checks are separate evidence.",
+    "Final optional capabilities must fail closed on an uninstalled or inconsistent typed schema; any native D1 forward compatibility correction requires reviewed bounded follow-up, never rewriting old migration bytes."
+  ]
+}

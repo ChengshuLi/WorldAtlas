@@ -1,0 +1,16 @@
+✔ transport compiler changes exactly the pinned 21 guards and preserves all other raw SQL and metadata (9.709473ms)
+✔ raw and derivative guards have identical original schemas and preserve all 21 conditions and error messages (13.378763ms)
+✔ native workerd D1 reproduces CASE-block truncation and applies the derivative over populated retained claims (4527.421933ms)
+✔ explicit legacy staging retains every original migration and metadata byte and deploys exactly 0000–0007 (37.971328ms)
+✔ default staging keeps the complete derivative and opt-in retries remove old forward files (21.064166ms)
+✔ all forward migration/source/journal hashes are checked before any deployment cutoff (15.885491ms)
+✔ the eight staged migrations have the original eight-migration schema and no forward tables (41.600917ms)
+✔ staging requires explicit valid mode, a separate real checkout and a supported CLI flag (120.04333ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5480.65699
