@@ -53,13 +53,38 @@ with tarfile.open(sys.argv[2]) as archive:
   destination=target/member.name;destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(raw)
 `,path.join(bundle,'installation-proof-index.json.gz'),archive,proof]);
  const receipt=read(path.join(proof,'aggregate-source-receipt.json'));
- assert.equal(sha(bytes(path.join(proof,'aggregate-source-receipt.json'))),read(installedFile).sources.sourceReceipt.sha256);
+ const installedSourceHash=read(installedFile).sources.sourceReceipt.sha256;
  assert.equal(receipt.historical_claims_transferred,false);
  const geometryManifests=[path.join(data,'geographic-repair-evidence/index.json'),path.join(proof,'replacement-migration/index.json'),path.join(proof,'creation-migration/index.json')];
  const metadataMigrations=['macro-boundary-migration.json.gz','macro-foundation/migration-repairs.json.gz','macro-foundation/migration-areas.json.gz','macro-foundation/migration-regions.json.gz'].map(p=>path.join(data,p));
  metadataMigrations.push(path.join(proof,'reference-receipt.json'));
  const identityProofSequence=read(path.join(bundle,'identity-proof-sequence.json'));
  assert.deepEqual(identityProofSequence,{version:1,steps:[{type:'geometry',sha256:sha(bytes(geometryManifests[0]))},...metadataMigrations.map(p=>({type:'metadata',sha256:sha(bytes(p))})),...geometryManifests.slice(1).map(p=>({type:'geometry',sha256:sha(bytes(p))}))]});
+ if(sha(bytes(path.join(proof,'aggregate-source-receipt.json')))!==installedSourceHash){
+  // The current installation extends the retained v4 proof; it does not replace
+  // that archive. Reconstruct the complete v5 chain from both pinned archives.
+  const current=path.join(data,'macro-improvements/loose-ends-v5/publication'),currentIndex=read(path.join(current,'installation-source-proof-index.json.gz'));
+  assert.equal(currentIndex.files.find(row=>row.path==='aggregate-source-receipt.json')?.sha256,installedSourceHash);
+  const currentArchive=path.join(current,currentIndex.archive);assert.equal(sha(bytes(currentArchive)),currentIndex.archive_sha256);
+  const currentProof=path.join(folder,'reviewed-proof-v5');fs.mkdirSync(currentProof);
+  execFileSync('python3',['-c',`
+import gzip,hashlib,json,pathlib,sys,tarfile
+index=json.loads(gzip.decompress(pathlib.Path(sys.argv[1]).read_bytes()));target=pathlib.Path(sys.argv[3]).resolve()
+expected={f['path']:f['sha256'] for f in index['files']};assert len(expected)==len(index['files'])
+with tarfile.open(sys.argv[2]) as archive:
+ members=archive.getmembers();assert len(members)==len(expected) and {m.name for m in members}==set(expected)
+ for member in members:
+  name=pathlib.PurePosixPath(member.name);assert member.isfile() and not name.is_absolute() and '..' not in name.parts
+  raw=archive.extractfile(member).read();assert hashlib.sha256(raw).hexdigest()==expected[member.name]
+  destination=target/member.name;destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(raw)
+`,path.join(current,'installation-source-proof-index.json.gz'),currentArchive,currentProof]);
+  assert.equal(sha(bytes(path.join(currentProof,'aggregate-source-receipt.json'))),installedSourceHash);
+  assert.equal(read(path.join(currentProof,'aggregate-source-receipt.json')).historical_claims_transferred,false);
+  geometryManifests.push(path.join(currentProof,'replacement-migration/index.json'),path.join(currentProof,'creation-migration/index.json'));
+  const sequence=read(path.join(current,'identity-proof-sequence.json.gz'));
+  assert.deepEqual(sequence,{version:1,steps:[...identityProofSequence.steps,...geometryManifests.slice(3).map(p=>({type:'geometry',sha256:sha(bytes(p))}))]});
+  return {geometryManifests,metadataMigrations,identityProofSequence:sequence,reviewedVersion:5};
+ }
  // The isolated fixture begins with the original registry, so every subsequent
  // identity is generated/imported here. Live publication additionally reuses
  // previously registered identities through its immutable release manifests.
@@ -132,12 +157,15 @@ test('both complete geographic reference releases publish against real D1 constr
    for(const s of sourcePayload.sources){assert.equal(s.status,'reference');assert.deepEqual([s.supported_from,s.supported_to],[2026,2027]);assert.equal(s.metadata.historical_membership_not_asserted,true);}
   });
   await t.test('the entire crosswalk accounts exactly for created, retired, renamed and reparented identities',()=>{
+   // A stable identity can have successive geometry corrections. Each pinned
+   // receipt/proposal pair must occur once; endpoint equality alone is not a
+   // duplicate (the retained Chagos ID has distinct v4 and v5 source proofs).
    const delta=changes.get(reviewed.id),seen=new Set(),expected=new Set();assert.equal(delta.length,generated.changes);assert.equal(changes.get(baseline.id).length,0);
    for(const [id,m] of reviewedRows){const old=original.get(id);if(!old)expected.add(`create:${id}`);else if(old.active&&!m.active)expected.add(`deactivate:${id}`);else if(m.active){if(old.name!==m.reference_name)expected.add(`rename:${id}`);if(old.parent_id!==m.parent_id)expected.add(`reparent:${id}`);}}
    for(const id of generated.validated_geometry?.changed_location_ids??[])if(reviewedRows.get(id)?.active)expected.add(`retain:${id}`);
    const geometryPairs=new Set(),splitPairs=new Set(),expectedSplits=new Map();
    for(const file of proofOptions.metadataMigrations??[])for(const relationship of read(file).relationships??[])if(relationship.change_type==='split'&&original.has(relationship.old_entity_id)&&reviewedRows.get(relationship.old_entity_id)?.active===0){const pair=JSON.stringify(['split',relationship.old_entity_id,relationship.new_entity_id]);assert.ok(!expectedSplits.has(pair),'Duplicate declared split pair');expectedSplits.set(pair,{relationship,receipt_sha256:sha(bytes(file))});}
-   for(const c of delta){const endpoint=c.old_entity_id??c.new_entity_id,key=`${['merge','retire','split'].includes(c.change_type)?'deactivate':c.change_type}:${endpoint}`;assert.ok(expected.has(key),key);if(c.evidence.geometry_migration){const pairKey=JSON.stringify([c.change_type,c.old_entity_id,c.new_entity_id]);assert.ok(!geometryPairs.has(pairKey));geometryPairs.add(pairKey);assert.ok(c.evidence.geometry_migration.receipt_sha256);}else if(c.change_type==='split'){const pair=JSON.stringify([c.change_type,c.old_entity_id,c.new_entity_id]),declared=expectedSplits.get(pair);assert.ok(declared,'Split is not in an exact pinned metadata receipt');assert.ok(!splitPairs.has(pair),'Duplicate split successor');splitPairs.add(pair);assert.equal(c.evidence.metadata_relationship?.receipt_sha256,declared.receipt_sha256);assert.deepEqual(c.evidence.metadata_relationship.relationship,declared.relationship);assert.equal(reviewedRows.get(c.old_entity_id).active,0);assert.equal(kindMap.get(c.old_entity_id),kindMap.get(c.new_entity_id));assert.notEqual(c.old_entity_id,c.new_entity_id);}else assert.ok(!seen.has(key));seen.add(key);assert.equal(c.evidence.history_transfer,'none');assert.ok(c.evidence.migration_sha256);if(c.new_entity_id!=null)assert.equal(reviewedRows.get(c.new_entity_id)?.active,1);if(['rename','reparent'].includes(c.change_type)){assert.equal(c.old_entity_id,c.new_entity_id);const old=original.get(endpoint),now=reviewedRows.get(endpoint);assert.deepEqual(c.evidence.before,{name:old.name,parent_id:old.parent_id,active:old.active});assert.deepEqual(c.evidence.after,{name:now.reference_name,parent_id:now.parent_id,active:now.active});}if(c.change_type==='merge'){assert.notEqual(c.old_entity_id,c.new_entity_id);assert.equal(kindMap.get(c.old_entity_id),kindMap.get(c.new_entity_id));assert.equal(reviewedRows.get(c.old_entity_id).active,0);}}
+   for(const c of delta){const endpoint=c.old_entity_id??c.new_entity_id,key=`${['merge','retire','split','replace'].includes(c.change_type)?'deactivate':c.change_type}:${endpoint}`;assert.ok(expected.has(key),key);if(c.evidence.geometry_migration){const pairKey=JSON.stringify([c.change_type,c.old_entity_id,c.new_entity_id,c.evidence.geometry_migration.receipt_sha256,c.evidence.geometry_migration.proposal_id]);assert.ok(!geometryPairs.has(pairKey));geometryPairs.add(pairKey);assert.ok(c.evidence.geometry_migration.receipt_sha256);}else if(c.change_type==='split'){const pair=JSON.stringify([c.change_type,c.old_entity_id,c.new_entity_id]),declared=expectedSplits.get(pair);assert.ok(declared,'Split is not in an exact pinned metadata receipt');assert.ok(!splitPairs.has(pair),'Duplicate split successor');splitPairs.add(pair);assert.equal(c.evidence.metadata_relationship?.receipt_sha256,declared.receipt_sha256);assert.deepEqual(c.evidence.metadata_relationship.relationship,declared.relationship);assert.equal(reviewedRows.get(c.old_entity_id).active,0);assert.equal(kindMap.get(c.old_entity_id),kindMap.get(c.new_entity_id));assert.notEqual(c.old_entity_id,c.new_entity_id);}else assert.ok(!seen.has(key));seen.add(key);assert.equal(c.evidence.history_transfer,'none');assert.ok(c.evidence.migration_sha256);if(c.new_entity_id!=null)assert.equal(reviewedRows.get(c.new_entity_id)?.active,1);if(['rename','reparent'].includes(c.change_type)){assert.equal(c.old_entity_id,c.new_entity_id);const old=original.get(endpoint),now=reviewedRows.get(endpoint);assert.deepEqual(c.evidence.before,{name:old.name,parent_id:old.parent_id,active:old.active});assert.deepEqual(c.evidence.after,{name:now.reference_name,parent_id:now.parent_id,active:now.active});}if(c.change_type==='merge'){assert.notEqual(c.old_entity_id,c.new_entity_id);assert.equal(kindMap.get(c.old_entity_id),kindMap.get(c.new_entity_id));assert.equal(reviewedRows.get(c.old_entity_id).active,0);}}
    assert.deepEqual(seen,expected);assert.deepEqual(splitPairs,new Set(expectedSplits.keys()),'Every declared retired identity split must account for every successor exactly once');assert.equal(hashRows(delta.map(normalizedChange),'id'),reviewed.changes_sha256);
   });
   await t.test('actual streamed finalization verifies every SQL row and publishes both immutable versions',async()=>{
