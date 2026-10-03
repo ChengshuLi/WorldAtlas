@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "issue": 525,
+  "recorded_on": "2026-10-03",
+  "timezone": "America/Los_Angeles",
+  "assessment_scope": {
+    "region_id": "framework:region:south-atlantic-islands:242a7633c849",
+    "location_ids": ["atlas:island:geonames:3370905"],
+    "location_ids_sha256": "0093e42735e4adfc20bec6c8124f008bb475fd423a30416302aa1d46f02e0d27",
+    "release": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+      "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+      "frozen_region_geometry_sha256": "d1b8e1bfccee98ab7add6824f4c947c8928f46ee282b35a4eb4e38c87b0950ee",
+      "frozen_region_member_ids_sha256": "c984bcbce9a42369f472cd1888c3aa16c75c95e57544f77f0ed109cef0e0ad53"
+    }
+  },
+  "location_assessment": {
+    "id": "atlas:island:geonames:3370905",
+    "name": "Inaccessible Island",
+    "status": "insufficient-evidence-for-complete-associated-land",
+    "supported_finding": "One named main island is appropriate as one location; the retained named-island coast comprises the relation's 12 outer ways.",
+    "unresolved_finding": "Five separately closed coastline rings in the same retained OSM map extract lie outside the named-island relation and current location geometry. Their names, role and suitable treatment are not established.",
+    "reference_point_wgs84": [-12.67779, -37.29946],
+    "source_row": {
+      "feature_class": "T",
+      "feature_code": "ISL",
+      "country_code": "SH",
+      "admin1_code": "03",
+      "record_date": "2011-03-17"
+    },
+      "source_geometry": {
+      "current_feature_file_sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+      "osm_relation_id": 9704046,
+      "relation_updated": "2026-05-06T19:24:26Z",
+      "outer_coastline_way_count": 12,
+      "inner_ring_count": 0,
+      "current_published_feature_path": "data/geography/source-restoration-additions.json",
+      "current_published_geometry": "Polygon with one exterior and one interior ring; the interior hole is mapped Skua Pond",
+      "candidate_dry_land_area_km2": 14.505986722428458,
+      "nearby_separate_closed_coastline_ways": [
+        {"way_id": 29308363, "tags": {"natural": "coastline", "place": "islet"}},
+        {"way_id": 29308364, "tags": {"natural": "coastline", "place": "islet"}},
+        {"way_id": 478370353, "tags": {"natural": "coastline"}},
+        {"way_id": 682698552, "tags": {"natural": "coastline", "place": "islet"}},
+        {"way_id": 888027621, "tags": {"natural": "coastline", "place": "islet"}}
+      ],
+      "point_in_polygon_check": "Each closed way's vertex mean is outside the retained candidate land exterior. No area or independent location assignment is inferred from that test."
+    },
+    "settlements_and_remainders": {
+      "permanent_settlement": "No evidence; UNESCO describes the island as uninhabited, and Tristan da Cunha government says it is rarely visited except by conservationists.",
+      "administrative_remainder": "None identified. OSM relation 1974295 is tagged admin_level=4 but that community boundary tag does not establish an atlas tier or political owner.",
+      "ownership": "Not inferred from GeoNames country/admin codes or OSM is_in tags. Current feature reference_owner is null."
+    },
+    "temporal_limit": "Modern source support only; no ancient shoreline, ownership, settlement history or attribute is inferred.",
+    "granularity_note": "A named whole island is one subject irrespective of its source ring count. The nearby islet rings remain unresolved; EU5 scale counts are references, not quotas."
+  },
+  "parent_assessments": [
+    {
+      "id": "framework:province:tristan-da-cunha:33a276e2dcef",
+      "name": "Tristan da Cunha",
+      "status": "insufficient-evidence-for-complete-island-family",
+      "parent_id": "framework:area:tristan-da-cunha:9cc13f608018",
+      "current_child_ids": ["SHN-4865", "atlas:island:geonames:3370905"],
+      "purpose_evidence": "Official Tristan material identifies Inaccessible as an outer island of Tristan da Cunha; the parent is plausibly a whole-island-group geography.",
+      "gap": "Official Gough and Nightingale pages identify additional islands in this group, but no such current location is in the parent inventory."
+    },
+    {
+      "id": "framework:area:tristan-da-cunha:9cc13f608018",
+      "name": "Tristan da Cunha",
+      "status": "insufficient-evidence-for-complete-island-family",
+      "parent_id": "framework:region:south-atlantic-islands:242a7633c849",
+      "current_child_ids": ["framework:province:tristan-da-cunha:33a276e2dcef"],
+      "purpose_evidence": "Retained WGSRPD level-3 geographic reporting identity; the source's botanical groupings do not by themselves certify atlas tier purpose or complete membership.",
+      "exception_candidate": "One area containing one same-named province repeats a sparse-island grouping tier. Bouvet shows a parallel area/province repetition in the same region.",
+      "gap": "Complete island-family membership and the shared parents' semantic roles remain open."
+    }
+  ],
+  "neighboring_consistency": {
+    "same_region_area_siblings": [
+      "framework:area:tristan-da-cunha:9cc13f608018",
+      "framework:area:bouvet-i:6f8a0a0de684"
+    ],
+    "assessment": "The region partitions into the Tristan da Cunha group and Bouvet Island. Both use a same-named province under an island-group area; this supports a candidate sparse-island repeated-tier exception, but does not close either semantic review.",
+    "inter_region_inconsistency_found": false,
+    "boundary_change_proposed": false
+  },
+  "known_family_omissions": [
+    {"name": "Gough Island", "source": "Tristan da Cunha official Gough page; UNESCO Gough and Inaccessible Islands", "current_location_found": false},
+    {"name": "Nightingale Islands", "source": "Tristan da Cunha official Nightingale page", "current_location_found": false},
+    {"name": "Alex / Middle Island", "source": "Tristan da Cunha official Nightingale page", "current_location_found": false},
+    {"name": "Stoltenhoff Island", "source": "Tristan da Cunha official Nightingale page", "current_location_found": false}
+  ],
+  "proposed_follow_up": {
+    "scope": "Bounded complete source/membership audit for the Tristan da Cunha island family and the five nearby Inaccessible coastline rings.",
+    "subjects": ["Gough Island", "Nightingale Islands", "Alex / Middle Island", "Stoltenhoff Island", "OSM coastline ways 29308363, 29308364, 478370353, 682698552, 888027621"],
+    "action": "Verify authoritative source vintage/license/completeness, decide source-defined whole-land grouping at location granularity, propose exact members/crosswalks and request coordinated integration of both shared parents.",
+    "do_not": "Do not infer political ownership, change the shared hierarchy or boundary, or transfer historical attributes."
+  }
+}
