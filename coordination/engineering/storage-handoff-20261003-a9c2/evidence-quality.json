@@ -1,0 +1,295 @@
+{
+  "version": 1,
+  "issue": 56,
+  "lane": "engineering",
+  "worker_id": "engineering-continuous-a9c25e14-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758",
+    "files": [
+      {
+        "path": "data/engineering/provider-capacity-20261003-7e91/capacity-summary.json",
+        "bytes": 2052,
+        "sha256": "f90ab4938a9172ea56293fc2aa3ba824b1b73fdcebfa7b26f5b1518a6d948579",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/research-geography-gate.json",
+        "bytes": 1533,
+        "sha256": "1fd32582e4b9bac195fa5bfe306b7e9aa706d4b5986db97d689bfe14b7b9e2b4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/validation/neon-final-publication.json",
+        "bytes": 5076,
+        "sha256": "25b0fafa29ed931fd30efae45f1e3546a9d5ebb4d33b487c359ed232a29e3fe7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/validation/neon-production-forward-migrations.json",
+        "bytes": 5690,
+        "sha256": "20ae186d96b28a5ab76d57ec5d64dbeb4f037dfd359ad2ac9faedf7e7b94d5d7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/validation/neon-production-storage-migration.json",
+        "bytes": 17822,
+        "sha256": "5e49bc827227c78f3bbf49503cc2a3fae0e17b10c2409bf535bd77f67225e3d6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/ENGINEERING_HANDOFF.md",
+        "bytes": 6515,
+        "sha256": "4401d020f49a6b459b0d288b9dfa4f9c58dfd852ad6d9f5ee05029e3805e8553",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/LONG_TERM_STORAGE_PLAN.md",
+        "bytes": 10333,
+        "sha256": "786d0d80ac48d42e151e2072e5f0b27f2545cfdaafd84372d394a49b870f9df1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/LUNA_START_HERE.md",
+        "bytes": 5377,
+        "sha256": "9436378527a3b6acdae97400cfb26317235c13d686ae44fcfb09b7ffaac53a02",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/NEON_SETUP.md",
+        "bytes": 9980,
+        "sha256": "abe404c9484ff465a1cdcca4cf8bbc86af2755b274505a2836f8ee9ab21e919c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PARALLEL_WORK_PROTOCOL.md",
+        "bytes": 8231,
+        "sha256": "fb26fb85d01212596016665c5c6344fd902be525ad0e21686fd6ce9928cd3e98",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PROVIDER_CAPACITY.md",
+        "bytes": 6365,
+        "sha256": "e0651d6d048fea7cbaeda8a5242228777297ebb0bcb81726495012ddf23ea0a7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/RESEARCH_CAPACITY.md",
+        "bytes": 9428,
+        "sha256": "a984709b735fc6779117a0d4d1126cdf55c0ec5517773889013107990ff14eb8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/STORAGE_EXPORT_V2.md",
+        "bytes": 7411,
+        "sha256": "9ef47f3602c0cd38d4a3496cb2c802ff443b1d63f30787e6bb62b309a92d968c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/STRUCTURAL_VALIDATION.md",
+        "bytes": 13364,
+        "sha256": "01725faab39f9f9452b164460cad0639556567c44a71ae4b4b8c583e0581e75d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 11613,
+        "sha256": "509aa5d36723b782859a325eb988b32ebd7ff8c0c77af3623011c3dc3641fd43",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "hosted/postgres-adapter.js",
+        "bytes": 11816,
+        "sha256": "427f48417ea5008146edfb77fd732ba017286a2484f412329452e135073c9ab0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "hosted/research-catalog.js",
+        "bytes": 9748,
+        "sha256": "3f3c9a518a26677ee2615257cbbe3374509cd3afad703f0aa06fad40d44db453",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "hosted/storage-export-v2-contract.js",
+        "bytes": 7783,
+        "sha256": "f670c6e6809192d62fa01959e3277eff96633b4e64293975dbf52b63b8e5d04b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "hosted/worker.js",
+        "bytes": 13695,
+        "sha256": "6bbf2bfd14b91d32cf2ae7c4f98cde5c493322fa608d2db2017ba243cb7a732b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/export-hosted-storage-v2.mjs",
+        "bytes": 15673,
+        "sha256": "31322f0fda1916410436f772286ea8be50632f8f0d061671f2630b1eedf27ff4",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/storage-handoff-20261003-a9c2.json",
+      "bytes": 2511,
+      "sha256": "999d194f854dd0237cfe9f81a291ac1b36ecd62b2fdaa1b82c8de60cac43252b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-handoff-20261003-a9c2/audit-initial-failure.json",
+      "bytes": 318,
+      "sha256": "04a04a6412c65ebbac9aad0091108cc14e14b6d12833966748696a39843afcce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-handoff-20261003-a9c2/audit.json",
+      "bytes": 3728,
+      "sha256": "924cecd93dda1443f07564fc9a3377267643fa257339c8ffb22a5bf3f1c2f18a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-handoff-20261003-a9c2/audit.mjs",
+      "bytes": 4683,
+      "sha256": "de11cc0bd211f844c37c2bc4d595498023cf3ab25fcd431c197cf0713d28e0ef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-handoff-20261003-a9c2/claim-receipt.json",
+      "bytes": 831,
+      "sha256": "844320836f2ece079a4c1f2378bc73f29a42e26c848f88bdc2558fcd5eb0a705",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "bytes": 6901,
+      "sha256": "59a4fd47f9ca486336b899d0a548163a19061d13e45445f8718d6b66202536e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/LONG_TERM_STORAGE_PLAN.md",
+      "bytes": 11303,
+      "sha256": "fc19de1dfca1b6a6a735536c0ac7ea4236662663a25a346be4f13f8211adf3e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/LUNA_START_HERE.md",
+      "bytes": 5626,
+      "sha256": "4cf65af807e607d3d81d4c1e96f54e3aae22ef04ccd38eacab67e92043fd86ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/NEON_SETUP.md",
+      "bytes": 10834,
+      "sha256": "ad5952ad21c8354fcf51dd2f9165491055aaa4bca68b25580c54e39739c81624",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/RESEARCH_CAPACITY.md",
+      "bytes": 12076,
+      "sha256": "f4818d4e3cc8b65d7960256a3243416b7bc6aa5a04a26f248176460cefc40ebd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/STORAGE_EXPORT_V2.md",
+      "bytes": 8147,
+      "sha256": "b41164adb4582a799c59dd7709cb20809f8584c0e0a73ecc4fb1d13351141d60",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/STRUCTURAL_VALIDATION.md",
+      "bytes": 13675,
+      "sha256": "5fc68e5cfc0889d335e4a91d1ef6261fc9584fc0834e81f8fd548e1bba27767a",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "operational-documentation-audit",
+      "description": "Compare guidance with retained production/capacity receipts and current route/export implementation; check relative links and preservation against immutable baseline. No new live measurement or historical assertion.",
+      "software": "Node 24 and Git",
+      "units": "Whole-file bytes and explicit documentation/contract checks"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node data/engineering/storage-handoff-20261003-a9c2/audit.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/storage-handoff-20261003-a9c2/evidence-quality.json",
+    "git diff --check"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/storage-handoff-20261003-a9c2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-handoff-20261003-a9c2/audit-initial-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-handoff-20261003-a9c2/audit.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-handoff-20261003-a9c2/audit.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-handoff-20261003-a9c2/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "4401d020f49a6b459b0d288b9dfa4f9c58dfd852ad6d9f5ee05029e3805e8553"
+    },
+    {
+      "path": "docs/LONG_TERM_STORAGE_PLAN.md",
+      "status": "modified",
+      "original_sha256": "786d0d80ac48d42e151e2072e5f0b27f2545cfdaafd84372d394a49b870f9df1"
+    },
+    {
+      "path": "docs/LUNA_START_HERE.md",
+      "status": "modified",
+      "original_sha256": "9436378527a3b6acdae97400cfb26317235c13d686ae44fcfb09b7ffaac53a02"
+    },
+    {
+      "path": "docs/NEON_SETUP.md",
+      "status": "modified",
+      "original_sha256": "abe404c9484ff465a1cdcca4cf8bbc86af2755b274505a2836f8ee9ab21e919c"
+    },
+    {
+      "path": "docs/RESEARCH_CAPACITY.md",
+      "status": "modified",
+      "original_sha256": "a984709b735fc6779117a0d4d1126cdf55c0ec5517773889013107990ff14eb8"
+    },
+    {
+      "path": "docs/STORAGE_EXPORT_V2.md",
+      "status": "modified",
+      "original_sha256": "9ef47f3602c0cd38d4a3496cb2c802ff443b1d63f30787e6bb62b309a92d968c"
+    },
+    {
+      "path": "docs/STRUCTURAL_VALIDATION.md",
+      "status": "modified",
+      "original_sha256": "01725faab39f9f9452b164460cad0639556567c44a71ae4b4b8c583e0581e75d"
+    },
+    {
+      "path": "coordination/engineering/storage-handoff-20261003-a9c2/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "validation": []
+}

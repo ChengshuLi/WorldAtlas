@@ -52,7 +52,7 @@ Ownership checks compare source intervals and evidence with bounded century tran
 
 Geographic gates check complete adjacent-tier parents, unique identities, retained archives and sourced migration crosswalks. Whole-location pixel ownership is audited separately from source geometry. Global semantic-review gates require every current identity to have an explicit disposition and prevent an unresolved child from being hidden by a structurally complete parent. Review status and pixel exceptions come from current reports, not a target count.
 
-The fixture checks do not replace native hosting validation. Before publication, run the current migrations against an isolated local D1 environment and exercise the real Worker API, R2 media reads/ranges and rollback behavior. Preserve the exact build/package hash and deployment receipt used for that milestone.
+The fixture checks do not replace validation of the selected production backend. Production uses Neon PostgreSQL and retained R2; the D1 commands below exercise the preserved compatibility path only. For a PostgreSQL-affecting change, use the corresponding isolated PostgreSQL checks and reviewed provider workflow in [NEON_SETUP.md](NEON_SETUP.md), then verify the matching private API, R2 reads/ranges and rollback behavior through the designated publisher. A local D1 pass does not validate Neon grants, schema state or query behavior. Preserve the exact build/package hash and deployment receipt used for that milestone.
 
 An initial native smoke test can use a new, empty persistence directory. After building the hosted bundle, apply its migrations and start the Worker in a separate terminal:
 

@@ -1,0 +1,109 @@
+{
+  "issue": 56,
+  "baseline_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758",
+  "documents": [
+    "docs/ENGINEERING_HANDOFF.md",
+    "docs/LONG_TERM_STORAGE_PLAN.md",
+    "docs/LUNA_START_HERE.md",
+    "docs/NEON_SETUP.md",
+    "docs/RESEARCH_CAPACITY.md",
+    "docs/STORAGE_EXPORT_V2.md",
+    "docs/STRUCTURAL_VALIDATION.md"
+  ],
+  "checks": [
+    {
+      "name": "All relative Markdown destinations in edited documents exist",
+      "outcome": "passed"
+    },
+    {
+      "name": "Production cutover receipt verifies PostgreSQL/R2 and v2 factual export",
+      "outcome": "passed"
+    },
+    {
+      "name": "Capacity implementation distinguishes PostgreSQL measurement and original collection counts",
+      "outcome": "passed"
+    },
+    {
+      "name": "Documented routes and exporter maintenance requirement exist in current source",
+      "outcome": "passed"
+    },
+    {
+      "name": "No obsolete unprovisioned-PostgreSQL or current Site 17 transfer instructions remain in edited documents",
+      "outcome": "passed"
+    }
+  ],
+  "preservation": [
+    {
+      "path": "hosted/worker.js",
+      "sha256": "6bbf2bfd14b91d32cf2ae7c4f98cde5c493322fa608d2db2017ba243cb7a732b",
+      "unchanged": true
+    },
+    {
+      "path": "hosted/research-catalog.js",
+      "sha256": "3f3c9a518a26677ee2615257cbbe3374509cd3afad703f0aa06fad40d44db453",
+      "unchanged": true
+    },
+    {
+      "path": "hosted/postgres-adapter.js",
+      "sha256": "427f48417ea5008146edfb77fd732ba017286a2484f412329452e135073c9ab0",
+      "unchanged": true
+    },
+    {
+      "path": "hosted/storage-export-v2-contract.js",
+      "sha256": "f670c6e6809192d62fa01959e3277eff96633b4e64293975dbf52b63b8e5d04b",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/export-hosted-storage-v2.mjs",
+      "sha256": "31322f0fda1916410436f772286ea8be50632f8f0d061671f2630b1eedf27ff4",
+      "unchanged": true
+    },
+    {
+      "path": "data/validation/neon-final-publication.json",
+      "sha256": "25b0fafa29ed931fd30efae45f1e3546a9d5ebb4d33b487c359ed232a29e3fe7",
+      "unchanged": true
+    },
+    {
+      "path": "data/validation/neon-production-storage-migration.json",
+      "sha256": "5e49bc827227c78f3bbf49503cc2a3fae0e17b10c2409bf535bd77f67225e3d6",
+      "unchanged": true
+    },
+    {
+      "path": "data/validation/neon-production-forward-migrations.json",
+      "sha256": "20ae186d96b28a5ab76d57ec5d64dbeb4f037dfd359ad2ac9faedf7e7b94d5d7",
+      "unchanged": true
+    },
+    {
+      "path": "data/engineering/provider-capacity-20261003-7e91/capacity-summary.json",
+      "sha256": "f90ab4938a9172ea56293fc2aa3ba824b1b73fdcebfa7b26f5b1518a6d948579",
+      "unchanged": true
+    },
+    {
+      "path": "docs/PROVIDER_CAPACITY.md",
+      "sha256": "e0651d6d048fea7cbaeda8a5242228777297ebb0bcb81726495012ddf23ea0a7",
+      "unchanged": true
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "sha256": "509aa5d36723b782859a325eb988b32ebd7ff8c0c77af3623011c3dc3641fd43",
+      "unchanged": true
+    },
+    {
+      "path": "docs/PARALLEL_WORK_PROTOCOL.md",
+      "sha256": "fb26fb85d01212596016665c5c6344fd902be525ad0e21686fd6ce9928cd3e98",
+      "unchanged": true
+    },
+    {
+      "path": "data/research-geography-gate.json",
+      "sha256": "1fd32582e4b9bac195fa5bfe306b7e9aa706d4b5986db97d689bfe14b7b9e2b4",
+      "unchanged": true
+    }
+  ],
+  "live_operations": false,
+  "deployment_required": false,
+  "limits": [
+    "Documentation audit of retained receipts and current source, not a new live service measurement.",
+    "No account-plan authorization, recovery certificate, geographic approval or new import permission.",
+    "Hashes and route inspection do not establish new runtime or historical behavior."
+  ]
+}

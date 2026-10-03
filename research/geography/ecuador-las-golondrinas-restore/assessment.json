@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "issue": 575,
+  "assigned_subject_count": 1,
+  "assigned_subjects": [
+    {
+      "id": "gb:ECU:ADM2:8360857B1829680752404",
+      "name": "Las Golondrinas",
+      "assessment": "partially_resolved_with_explicit_unresolved_findings",
+      "administrative_findings": [
+        {
+          "finding": "2017 statute assigns the zone known as Las Golondrinas to Imbabura Province and Cotacachi canton, effective on publication 2017-05-08.",
+          "sources": ["ecuador-registro-oficial-999-2017"]
+        },
+        {
+          "finding": "2019 Cotacachi ordinance places the area in García Moreno parish, Cotacachi canton, Imbabura province.",
+          "sources": ["cotacachi-ordinance-ro-406-2019"]
+        },
+        {
+          "finding": "A 2026-05-15 judicial venue resolution still describes the recinto in Cotacachi, Imbabura; this is dated corroboration and does not alter a physical boundary.",
+          "sources": ["registro-oficial-285-resolution-063-2026"]
+        },
+        {
+          "finding": "INEC/OCHA 2023 lists EC9001 under Zona No Delimitada, whereas 2024 gazetteer omits the code/name. This is an unresolved cross-vintage administrative data conflict; gazetteer omission does not mean the land disappeared.",
+          "sources": ["inec-ocha-codab-2023", "inec-ocha-gazetteer-2024"]
+        },
+        {
+          "finding": "2019 geoBoundaries role as canton conflicts with the statutory and ordinance role. Recommend engineering review of the Atlas source-role/tier metadata; make no hierarchy mutation in this packet.",
+          "sources": ["ecuador-registro-oficial-999-2017", "cotacachi-ordinance-ro-406-2019", "geoboundaries-ecu-adm2-2019"]
+        }
+      ],
+      "physical_geography_findings": [
+        {
+          "finding": "2019 geometry restoration path is verified and the complete feature is compared with the pinned Atlas geometry. A 9.841% source-area symmetric difference is material but does not adjudicate which boundary is correct.",
+          "sources": ["geoboundaries-ecu-adm2-2019"],
+          "evidence": "geometry-reconciliation.json"
+        },
+        {
+          "finding": "One extremely small (0.136 m²) source geometry component is consistent with a digitizing sliver; it is not a defensible named-island finding.",
+          "sources": ["geoboundaries-ecu-adm2-2019"],
+          "evidence": "geometry-reconciliation.json"
+        },
+        {
+          "finding": "No complete authoritative current physical land, water, coastline, island, or settlement inventory was established. The parent GSHHG centroid screen and local service reports are insufficient to establish completeness.",
+          "sources": ["gshhg-2017-screen-parent-packet", "gobernacion-imbabura-locality-reports"]
+        },
+        {
+          "finding": "Five current indexed geometry contacts were assessed and are recorded with IDs and lengths. No area overlap was observed; source/legal neighbor consistency is unresolved. No cross-region boundary inconsistency was found.",
+          "evidence": "geometry-reconciliation.json"
+        },
+        {
+          "finding": "Current complete parent chain was checked from location through Imbabura, Ecuador, Western South America, Andean South America, South America. Atlas political reference_owner is not treated as physical geography evidence.",
+          "evidence": "geometry-reconciliation.json"
+        }
+      ],
+      "unresolved": [
+        "Current authoritative georeferenced polygon or official location of the complete Las Golondrinas physical area.",
+        "Complete current settlement and named physical-land/island inventories, including disconnected territories and coastal/water treatment.",
+        "Whether the source/current boundary differences correspond to an authoritative later vintage; neighboring shared-edge validity against authoritative source geometries.",
+        "Legislative disposition after the Asamblea Nacional report dated 2026-04-13."
+      ],
+      "bounded_next_action": "Retrieve or formally document unavailability of a lawful current IGM/CONALI georeferenced boundary; reconcile it with the 2017 statutory coordinates, 2019 source feature and five listed contact neighbors. Obtain authoritative current settlement and named land/island inventories, and check subsequent legislative records. Submit any shared-edge proposal only with affected neighbor owners coordinated. Until then retain the current stable subject and parent and make no geometry edit.",
+      "correction_proposals": [
+        "Engineering should review and correct the metadata claim that this exact zone is itself a canton, using the 2017 law and 2019 ordinance as dated administrative evidence.",
+        "Do not alter the location geometry or parent membership on current evidence; present 2019/source and current contours as competing vintages for follow-up.",
+        "Do not infer political ownership from geometry, or geometry from the 2023/2024 administrative roster." 
+      ]
+    }
+  ],
+  "source_date_policy": "Every administrative statement is tied to publication vintage; no undated claim of currentness is made beyond the latest retrieved primary record dated 2026-05-15.",
+  "shared_boundary_policy": "No shared boundary edit proposed. Current-neighbor contacts are diagnostic only.",
+  "regional_scope": "Western South America baseline; no inter-region inconsistency identified."
+}
