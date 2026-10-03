@@ -1,0 +1,33 @@
+✔ continent filters follow location membership for overseas and transcontinental reference owners (1.532349ms)
+✖ all six continent scopes partition every prepared location and reconcile reference profiles (1046.315935ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1113.459401
+
+✖ failing tests:
+
+test at ../worldatlas-baseline-22-7e91/test/coverage-scope.test.mjs:16:1
+✖ all six continent scopes partition every prepared location and reconcile reference profiles (1046.315935ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  49625 !== 49589
+  
+      at TestContext.<anonymous> (file:///workspace/worldatlas-baseline-22-7e91/test/coverage-scope.test.mjs:26:49)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 49625,
+    expected: 49589,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

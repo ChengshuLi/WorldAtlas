@@ -1,0 +1,158 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "year-switch-prod-20261003-7e91",
+  "branch": "engineering/year-switch-prod-20261003-7e91",
+  "base_main_commit": "0319970547edc8b499cb8a258a199aec0448b0ac",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/22",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Production year-switch baseline and opt-in evidence-only map pages"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-03T09:12:00Z",
+  "completed": [
+    "Authenticated private production verification; no audience or data change",
+    "Completed five navigation samples and invalid-year browser check",
+    "Implemented compatible evidence-only paging retaining retirement-only subjects",
+    "Restored publication fixtures to already-published v5 proofs without editing original archives/geography"
+  ],
+  "checks": [
+    {
+      "command": "node --test test/map-snapshots.test.mjs test/postgres-contract.test.mjs",
+      "passed": 21,
+      "failed": 0
+    },
+    {
+      "command": "node --test test/compact-map-client.test.mjs",
+      "passed": 10,
+      "failed": 0
+    },
+    {
+      "command": "npm run build:hosted",
+      "result": "passed"
+    },
+    {
+      "command": "npm test",
+      "passed": 541,
+      "failed": 1,
+      "baseline_failure": "Stale 49589 assertion; fresh unmodified main 6212366 reproduces 49625 actual."
+    },
+    {
+      "command": "node --test test/coverage-scope.test.mjs",
+      "passed": 2,
+      "failed": 0,
+      "repair": "Align existing literal with already published release5 receipt; partition assertions unchanged."
+    },
+    {
+      "command": "node scripts/validate-structure.mjs publication",
+      "result": "passed",
+      "unit_contract_checks": 542,
+      "geographic_checks": 15,
+      "exact_ownership_buckets": 51
+    },
+    {
+      "command": "publication unit/contract phase",
+      "passed": 542,
+      "failed": 0
+    },
+    {
+      "command": "geographic-release-preparation.mjs",
+      "result": "Original archive/source/history/registry-reuse/profile checks passed; final crosswalk rerun passed with distinct pinned receipt/proposal identity."
+    },
+    {
+      "command": "node scripts/validate-prepared.mjs",
+      "result": "passed",
+      "locations": 49625,
+      "ownership_intervals": 6833855,
+      "evidence_records": 1435539,
+      "reference_records": 346346
+    },
+    {
+      "command": "python3 scripts/validate-ownership-runtime.py --source data/ownership-history --runtime data/ownership-runtime",
+      "result": "passed",
+      "buckets": 51,
+      "transport_intervals": 7411411
+    },
+    {
+      "command": "native workerd local D1 0000\u20130007/R2 API and sparse snapshot parity",
+      "result": "passed",
+      "full_entities": 7,
+      "sparse_entities": 2,
+      "retirements": 2,
+      "later_d1_migrations": "0008 exceeds provider compound-select limit; production uses PostgreSQL."
+    }
+  ],
+  "deployment": {
+    "changed": false,
+    "baseline_site_version": 21,
+    "baseline_reference_release": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e"
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/year-switch-prod-20261003-7e91/baseline-coverage.log",
+    "data/engineering/year-switch-prod-20261003-7e91/baseline-geographic.log.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/before-1950.png",
+    "data/engineering/year-switch-prod-20261003-7e91/before-trace.json.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/before.json.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/coverage-repaired.log",
+    "data/engineering/year-switch-prod-20261003-7e91/diagnose-geometry-pairs.mjs",
+    "data/engineering/year-switch-prod-20261003-7e91/full-tests-before-proof-repair.log.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/geographic-crosswalk-final.log.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/geographic-v5-and-registry-reuse.log.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/geometry-pair-diagnostic.json",
+    "data/engineering/year-switch-prod-20261003-7e91/native-api.log.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/native-migrations.log.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/native-sparse.log.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/ownership-validation.log.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/prepared-validation.log.gz",
+    "data/engineering/year-switch-prod-20261003-7e91/publication-final.log.gz"
+  ],
+  "blockers": [],
+  "next_action": "Merge exact current CI head through serialized queue; rotate settled claim to fresh main branch for publication and after-production receipts. Site21 remains unchanged.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/553",
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "reservation": {
+    "worker_id": "engineering-night-20261003-7e91f438",
+    "claim_id": "35a7dbdb-842b-4282-8e21-d073cb7d7ac1",
+    "initial_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37109476435",
+    "live_measurement_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37109555536",
+    "post_baseline_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37110068564",
+    "publication_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37110554563",
+    "merge_preparation_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37111780844"
+  },
+  "private_access": {
+    "resolved": true,
+    "credential_retention": "session memory only; no credential in artifacts",
+    "geography_status": 200,
+    "geography_bytes": 10525834,
+    "geography_sha256": "3465d8f227958342cc6457f50fdf302462ffefb9fe2e6e5625cd12373a3bf7de",
+    "coordination_notice": "https://github.com/ChengshuLi/WorldAtlas/issues/39#issuecomment-5967129879",
+    "verification_receipt": "https://github.com/ChengshuLi/WorldAtlas/issues/22#issuecomment-5967172865"
+  },
+  "evidence_hashes": {
+    "data/engineering/year-switch-prod-20261003-7e91/native-migrations.log.gz": "60f5c7ae14a6a2d1d20b7e1ea8c67bcb3c569224d1d52f327f3101a301245ebe",
+    "data/engineering/year-switch-prod-20261003-7e91/baseline-coverage.log": "e3311645be9d56d1daed03dca0ea97eca15bbbb9c456867ff5bc733ea2bfc49d",
+    "data/engineering/year-switch-prod-20261003-7e91/prepared-validation.log.gz": "d35d6a5a62acbd8ad69b575f16a18b6cc3cf10f4ae481206bd074886ea6a9b42",
+    "data/engineering/year-switch-prod-20261003-7e91/native-sparse.log.gz": "4477b09579a2434588aba47fe9298d9306be5e4a54909add5e3e628fa279c9a8",
+    "data/engineering/year-switch-prod-20261003-7e91/native-api.log.gz": "c4a1e220e24a6b19086e51b4685789b4200c0aa7ff2164a60fc7f51417febe4d",
+    "data/engineering/year-switch-prod-20261003-7e91/before-1950.png": "a69749565e127b7c4ebfd2da807a207311064d17dc84e36808481169fb4693e7",
+    "data/engineering/year-switch-prod-20261003-7e91/geometry-pair-diagnostic.json": "c4c737ddbe1f83767c3aa2be02e597d355c30a78fe7b4a9b9b926ed3aa101188",
+    "data/engineering/year-switch-prod-20261003-7e91/full-tests-before-proof-repair.log.gz": "60609a9d1cd91740c74e6a14041b7ac579ec4596023b74d245efc080514ce823",
+    "data/engineering/year-switch-prod-20261003-7e91/coverage-repaired.log": "e7f702296ae7335cca44a7e62b2137f32d3d13694041f7bb4dc60f1ad247e171",
+    "data/engineering/year-switch-prod-20261003-7e91/geographic-crosswalk-final.log.gz": "a2e6a03678bbf01d33fa4c4237b287f65e749798dedbb2c3f788589eabac6640",
+    "data/engineering/year-switch-prod-20261003-7e91/geographic-v5-and-registry-reuse.log.gz": "5ed2101f19a690f99d8e66be31169c81c3aac6d62bb8a4c65ce60458dc85c5be",
+    "data/engineering/year-switch-prod-20261003-7e91/diagnose-geometry-pairs.mjs": "7126b3dff7cf33fe295f7bacda1ac5ee9aaf88c8ae5397463359eff7631439a0",
+    "data/engineering/year-switch-prod-20261003-7e91/before-trace.json.gz": "e2b5a4bf9ce21ce5d2b43d3852508961f00d3048e512f14050c337adc0ea17ab",
+    "data/engineering/year-switch-prod-20261003-7e91/baseline-geographic.log.gz": "4fcf128a9db4dd7554ad1167fb030cd8eef3e2c59c690ac72eabf5c8cd8379cd",
+    "data/engineering/year-switch-prod-20261003-7e91/before.json.gz": "4aa41e6c97bb706b5349aab193b1503335867da0b65cdbdd5f950318bedc3aee",
+    "data/engineering/year-switch-prod-20261003-7e91/ownership-validation.log.gz": "152b1354c0fe31075e0f1ae9b93fb0f4737119c1a4d30c777ecbfab9f198f207",
+    "data/engineering/year-switch-prod-20261003-7e91/publication-final.log.gz": "615a281e54d56f21a970bd1f29e8439127d0945672198c23d5b4fc13b4441e41"
+  },
+  "validation_repair_notice": "https://github.com/ChengshuLi/WorldAtlas/issues/22#issuecomment-5967251315"
+}

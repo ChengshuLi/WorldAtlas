@@ -16,7 +16,7 @@ function validPage({id='location:A',year=2020,revision=7,next_cursor=null,stamp=
   names:[{id:`name:${id}${stamp}`,entity_id:id,name:`Historical ${id}`,language:'en',role:'preferred',field:'name',value:`Historical ${id}`,name_role:'preferred',valid_from:year,valid_to:year+1,source_id:source.id,is_example:0,metadata:{attested:true}}],
   retirements:[{id:`retirement:${id}${stamp}`,collection:'records',target_id:`prepared:${id}`,source_id:source.id,reason:'Source correction',replacement_id:null,metadata:{review:'retained'}}]};
 }
-function request(url){const parsed=new URL(url,'https://atlas.example');assert.equal(parsed.pathname,'/api/map/snapshot','compact reads must not download independent claim streams');return parsed.searchParams;}
+function request(url){const parsed=new URL(url,'https://atlas.example');assert.equal(parsed.pathname,'/api/map/snapshot','compact reads must not download independent claim streams');assert.equal(parsed.searchParams.get('evidence_only'),'1');return parsed.searchParams;}
 function unavailable(result,{stale=false,authority=false}={}){
  assert.equal(result.stale,stale);assert.equal(result.retirementAuthority,authority);
  for(const key of ['attributes','names','retirements']){assert.equal(result[key].available,false);if(!stale)assert.deepEqual(result[key].records,[]);}

@@ -24,6 +24,7 @@ const numericNamePriority="(n.is_example*100+CASE WHEN s.status='reference' THEN
 const statementRowsLimit=50000,responseBytesLimit=8*1024*1024;
 
 export const mapSnapshotQueries={
+ evidenceEntities:`WITH evidence AS (SELECT location_id id FROM atlas_attribute_records WHERE valid_from<=? AND valid_to>? AND is_example<=? UNION SELECT entity_id id FROM atlas_names WHERE valid_from<=? AND valid_to>? AND is_example<=?) SELECT e.id,e.kind,e.active FROM evidence JOIN atlas_entities e ON e.id=evidence.id WHERE e.kind IN (${kinds}) AND e.active=1 AND e.id>? AND e.is_example<=? AND (e.valid_from IS NULL OR e.valid_from<=?) AND (e.valid_to IS NULL OR e.valid_to>?) ORDER BY e.id LIMIT ?`,
  entities:`SELECT id,kind,active FROM atlas_entities INDEXED BY entities_kind_id WHERE kind IN (${kinds}) AND active=1 AND id>? AND is_example<=? AND (valid_from IS NULL OR valid_from<=?) AND (valid_to IS NULL OR valid_to>?) ORDER BY id LIMIT ?`,
  attributes:`SELECT * FROM (SELECT ${attributeColumns},${boundedMetadata('r',1024,true)},DENSE_RANK() OVER (PARTITION BY r.location_id,r.attribute ORDER BY ${numericAttributePriority}) __priority_rank FROM json_each(?) page CROSS JOIN json_each('${JSON.stringify(locationAttributes)}') attribute CROSS JOIN atlas_attribute_records r INDEXED BY attributes_location_dates ON r.location_id=page.value AND r.attribute=attribute.value JOIN atlas_entities e ON e.id=r.location_id WHERE r.valid_from<=? AND r.valid_to>? AND r.is_example<=? AND e.kind='location' AND e.active=1 AND NOT EXISTS(SELECT 1 FROM atlas_evidence_retirements t WHERE t.collection='records' AND t.target_id=r.id)) WHERE __priority_rank=1 LIMIT ${statementRowsLimit+1}`,
  names:`SELECT * FROM (SELECT ${nameColumns},${boundedMetadata('n',1024)},s.status source_status,DENSE_RANK() OVER (PARTITION BY n.entity_id,n.role ORDER BY ${numericNamePriority}) __priority_rank,ROW_NUMBER() OVER (PARTITION BY n.entity_id,n.role ORDER BY n.id) __alias_order,COUNT(*) OVER (PARTITION BY n.entity_id,n.role) __alias_total FROM json_each(?) page CROSS JOIN atlas_names n INDEXED BY names_entity_dates ON n.entity_id=page.value JOIN atlas_sources s ON s.id=n.source_id WHERE n.valid_from<=? AND n.valid_to>? AND n.is_example<=? AND NOT EXISTS(SELECT 1 FROM atlas_evidence_retirements t WHERE t.collection='names' AND t.target_id=n.id)) WHERE (role='preferred' AND __priority_rank=1) OR (role='alias' AND __alias_order<=?) LIMIT ${statementRowsLimit+1}`,
@@ -37,14 +38,20 @@ export const postgresMapSnapshotQueries=postgresMapQueries(mapSnapshotQueries);
  * caches can therefore merge by claim identity without restoring retired data.
  * Source metadata occurs once per page; evidence remains individually queryable.
  */
-export async function mapSnapshotPage(db,year,{examples=false,cursor='',limit=1000,aliasLimit=5}={}){
+export async function mapSnapshotPage(db,year,{examples=false,cursor='',limit=1000,aliasLimit=5,evidenceOnly=false}={}){
  if(!validYear(year))throw new RecordError('Invalid selected year');
  if(typeof cursor!=='string'||cursor.length>2000||cursor&&!cursor.trim())throw new RecordError('Invalid map cursor');
  if(!Number.isInteger(limit)||limit<1||limit>1000)throw new RecordError('Map entity page limit must be between 1 and 1000');
  if(!Number.isInteger(aliasLimit)||aliasLimit<0||aliasLimit>5)throw new RecordError('Map alias limit must be between 0 and 5');
  const queries=db.dialect==='postgres'?postgresMapSnapshotQueries:mapSnapshotQueries;
  const initial=await revision(db),enabled=Number(Boolean(examples));
- const eligible=await query(db.prepare(queries.entities).bind(cursor,enabled,year,year,limit+1));
+ // Entity geometry/lifetimes come from the pinned geographic release. The map
+ // reader needs identities only for dated claims and their withdrawals. Keep
+ // retired claims in this selector: filtering them out resurrects prepared data.
+ // Default enumeration remains available to existing catalog-style callers.
+ const eligible=await query(evidenceOnly
+  ?db.prepare(queries.evidenceEntities).bind(year,year,enabled,year,year,enabled,cursor,enabled,year,year,limit+1)
+  :db.prepare(queries.entities).bind(cursor,enabled,year,year,limit+1));
  const entities=eligible.slice(0,limit),ids=JSON.stringify(entities.map(entity=>entity.id));
  const [attributes,names,retirements]=entities.length?await Promise.all([
   query(db.prepare(queries.attributes).bind(ids,year,year,enabled)),

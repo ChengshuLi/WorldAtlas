@@ -66,7 +66,7 @@ async function loadHostedSnapshotPages(year,examples,signal){
  const attributes=[],names=[],retirements=[];let cursor='',revision=null,limit=1000;const cursors=new Set();
  try{
  while(true){
-  const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),limit:String(limit)});if(cursor)params.set('cursor',cursor);
+  const params=new URLSearchParams({year:String(year),examples:String(Number(examples)),limit:String(limit),evidence_only:'1'});if(cursor)params.set('cursor',cursor);
   const response=await fetch('/api/map/snapshot?'+params,{signal});
   if(!response.ok){const error=await response.json().catch(()=>({}));if(response.status===409&&error.retryable)throw new ContentRevisionError();if(response.status===413&&error.retryable&&limit>1){limit=Math.max(1,Math.min(limit-1,Number.isInteger(error.suggested_limit)?error.suggested_limit:Math.floor(limit/2)));continue;}throw Error(`Atlas data unavailable (${response.status})`);}
   const page=hydrateMapSnapshotPage(await response.json());

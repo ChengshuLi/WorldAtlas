@@ -1,0 +1,25 @@
+{
+  "pair_count": 61,
+  "repeated_endpoint_groups": 1,
+  "identical_receipt_proposal_pairs": 0,
+  "examples": [
+    [
+      {
+        "old": "IOT+00?",
+        "next": "IOT+00?",
+        "type": "retain",
+        "receipt": "30022e81d3363ab8b6b62866255165844bc7b67f2dd83617072e0f3e45c0837a",
+        "proposal": "IOT+00?",
+        "kind": "source-backed-replace"
+      },
+      {
+        "old": "IOT+00?",
+        "next": "IOT+00?",
+        "type": "retain",
+        "receipt": "1f5266158232abf60e88719aed7a693960507e5df6e3d125d7e277bb97609f34",
+        "proposal": "chagos-dry-land-v5:IOT+00?",
+        "kind": "source-backed-replace"
+      }
+    ]
+  ]
+}
