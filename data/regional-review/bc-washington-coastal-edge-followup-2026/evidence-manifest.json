@@ -1,0 +1,69 @@
+{
+  "issue": 608,
+  "source_retrieved_for_review": "2026-10-03",
+  "source_scope": "18 section-25 samples, indices 50-67; full section screen used as context",
+  "generated_artifact_accounting": {
+    "assessed_sample_count": 18,
+    "json_output_bytes": 14978,
+    "source_archive_bytes_not_retained": 258764,
+    "source_archive_sha256": "eb327459528b87cbc27e55ccc6bfd6982562c75559823a00b6dc50c04abcaab1"
+  },
+  "files": [
+    {
+      "file": "statistics-canada-bc-census-divisions-2021.geojson.gz",
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/statistics-canada-bc-census-divisions-2021.geojson.gz",
+      "bytes": 38880150,
+      "sha256": "8a31cf19ad0694638c88275fec9ff1005970cd8600ca6baed245b8826756e9bf",
+      "class": "existing-retained-source-or-baseline-snapshot"
+    },
+    {
+      "file": "tigerline-2024-washington-counties.geojson.gz",
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/tigerline-2024-washington-counties.geojson.gz",
+      "bytes": 859249,
+      "sha256": "74c2822d327082e2738a8d93d59bc5eadf42590f7fef0941221e61deb36a4034",
+      "class": "existing-retained-source-or-baseline-snapshot"
+    },
+    {
+      "file": "current-scope-and-parents.geojson.gz",
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/current-scope-and-parents.geojson.gz",
+      "bytes": 280642,
+      "sha256": "7ac3154985ef3bf5aae5b978481233e3a73c0ef6b2a753e1c7a15cef4c9302bb",
+      "class": "existing-retained-source-or-baseline-snapshot"
+    },
+    {
+      "file": "current-parent-chains.json.gz",
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/current-parent-chains.json.gz",
+      "bytes": 106481,
+      "sha256": "aa0c1643d376baa9b7478d26886510718d3c0e242782df004e2defd028938290",
+      "class": "existing-retained-source-or-baseline-snapshot"
+    },
+    {
+      "file": "worldatlas-part-27.json",
+      "repository_path": "data/geography/part-27.json",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+      "class": "existing-retained-source-or-baseline-snapshot"
+    },
+    {
+      "file": "worldatlas-part-29.json",
+      "repository_path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+      "class": "existing-retained-source-or-baseline-snapshot"
+    },
+    {
+      "file": "analysis-script",
+      "repository_path": "data/regional-review/bc-washington-coastal-edge-followup-2026/analyze_section25.py",
+      "bytes": 8980,
+      "sha256": "348c534fc6caf8c859301f14ef4105aa5dbc1b12d63fadcc7e0fd08bf765ba17",
+      "class": "derived-analysis"
+    },
+    {
+      "file": "generated-sample-assessment",
+      "repository_path": "data/regional-review/bc-washington-coastal-edge-followup-2026/sample-assessment.json",
+      "bytes": 14978,
+      "sha256": "0f5f8d1a742032c149ce47a8aae01442cc1a5c5dc2e9b6719e11ae2f7080df13",
+      "class": "derived-analysis"
+    }
+  ]
+}
