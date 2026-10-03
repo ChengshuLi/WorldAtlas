@@ -7,14 +7,24 @@
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/64",
   "date_timezone": "UTC",
   "scope": {
-    "geographies": ["One ESA WorldCover 2021 v200 tile intersecting contemporary Kenya; tile and bounded cell examples only"],
-    "attributes": ["source identity, license, date semantics, legend and bounded source-cell examples"],
+    "geographies": [
+      "One ESA WorldCover 2021 v200 tile intersecting contemporary Kenya; tile and bounded cell examples only"
+    ],
+    "attributes": [
+      "source identity, license, date semantics, legend and bounded source-cell examples"
+    ],
     "supported_interval": "2021 calendar year only",
-    "sources": ["ESA WorldCover 2021 v200 access page, manual, validation report and selected S03E036 tile"]
+    "sources": [
+      "ESA WorldCover 2021 v200 access page, manual, validation report and selected S03E036 tile"
+    ]
   },
-  "updated_at_utc": "2026-10-03T09:42:00Z",
+  "updated_at_utc": "2026-10-03T09:45:00Z",
   "geographic_release": null,
-  "input_paths": ["src/environment-classifications.js", "docs/ENVIRONMENT_CLASSIFICATIONS.md", "docs/HISTORICAL_COVERAGE_RESEARCH.md"],
+  "input_paths": [
+    "src/environment-classifications.js",
+    "docs/ENVIRONMENT_CLASSIFICATIONS.md",
+    "docs/HISTORICAL_COVERAGE_RESEARCH.md"
+  ],
   "bundle_paths": [],
   "import_receipt_paths": [],
   "readback_paths": [],
@@ -28,8 +38,8 @@
     "A complete published regional approval certificate, exact permitted subjects and matching release pins are not available; import remains gated."
   ],
   "blockers": [],
-  "next_action": "Run local and CI scope checks, submit one focused PR, wait for exact-head scope acceptance, enter the serialized squash queue, verify merge on fresh origin/main, release claim, then continue with the next eligible issue.",
-  "pull_request": null,
+  "next_action": "Wait for exact PR-head scope check and CI. If main advances, fetch/rebase and rerun checks. Renew the reservation before requesting serialized merge. Verify accepted merge on fresh origin/main, release the issue claim, then continue to the next eligible issue.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/568",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
