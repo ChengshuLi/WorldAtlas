@@ -1,0 +1,1125 @@
+{
+  "version": 1,
+  "issue": 619,
+  "parent_issue": 134,
+  "parent_packet_pr": 617,
+  "parent_packet_merge_commit": "3d2c5cee2fa748a7eff90051088b6998c9c84968",
+  "parent_packet_files": {
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/README.md": {
+      "bytes": 6347,
+      "sha256": "031b0cda38241c06288d77e4d0e4463a453312022dd5b57b3a7e0ac318eb15a0"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/assessment.json": {
+      "bytes": 185118,
+      "sha256": "eadd0a8e7cfad298e18c21a2b85d81e840576919d5e6e67c2bd510e826bc95b5"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/baseline-extract.json": {
+      "bytes": 752357,
+      "sha256": "59bd172c0a32384957bb868935ead3d8f83c4cf025a9dec01a84dd70a4b8b08e"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/build_baseline_extract.py": {
+      "bytes": 3785,
+      "sha256": "13dbd36a130a125dfa066af1f99afb8080c83656ded3ae5f23ad0498fdba8fdf"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/claim-receipt.json": {
+      "bytes": 956,
+      "sha256": "b614a1e212375883dd4783f0a6eb8d86b2af6c49de03879f1abd352530ae9330"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/gshhg-land-screen.json": {
+      "bytes": 553877,
+      "sha256": "b11c961d301b91cba9a2d0bbada38fe92837b2eac9f9ac0ba2e6bd95d4c0c434"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/issue-metadata.json": {
+      "bytes": 23066,
+      "sha256": "b18b8be07f4535fbc38f85ee9e9a193d6aad0fd5b1399923ac62d887475a74d5"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/screen_gshhg_land.py": {
+      "bytes": 3957,
+      "sha256": "393911950795f9bd22a22c5e59dac33e46e1dee609024a48740da1a8f7b5b37c"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/sources-manifest.json": {
+      "bytes": 13900,
+      "sha256": "a1807efc1edd12fd6ccc169ce2ad9b5e6b82ec733ba6ac55310fffc6daa72b7d"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/CITATION-AND-USE-geoBoundaries.txt": {
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/geoBoundaries-TON-ADM1-metaData.json": {
+      "bytes": 852,
+      "sha256": "b838c88c03410c69802cca9b7e80660270c8ddffe9761ea22b2b619f60748056"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/geoBoundaries-TON-ADM1-metaData.txt": {
+      "bytes": 1011,
+      "sha256": "8095b38272065f2cf02b91569d620cb5a89756c4a8c2ab5d498e3d886e2c6624"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/geoBoundaries-TON-ADM1.geojson": {
+      "bytes": 1202782,
+      "sha256": "c879101306e56a83d5efc5cae56b5c92f02d1e3485ea6ac64bd3f94a67b7e24a"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TUV/CITATION-AND-USE-geoBoundaries.txt": {
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TUV/geoBoundaries-TUV-ADM1-metaData.json": {
+      "bytes": 849,
+      "sha256": "ef3474d8b744a6cf19b969f1dc9200ac2c30dd5fedbed6d3d6bd1b21766b9d18"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TUV/geoBoundaries-TUV-ADM1-metaData.txt": {
+      "bytes": 1011,
+      "sha256": "362d40a5b4c099caf9bdd43c0ef0a0674f52f0b95847f6bf508826c5f15c37ce"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TUV/geoBoundaries-TUV-ADM1.geojson": {
+      "bytes": 79396,
+      "sha256": "3c06779be3173360c9a2927729798eacb5533c745e31313f11940041585030aa"
+    },
+    "data/regional-review/regional-review-a5b86fc6ff2463cd/verify_packet.py": {
+      "bytes": 2771,
+      "sha256": "20aae5fb506601dc183276189122a08ca3181210611848d6e470dce0a2f4f093"
+    }
+  },
+  "baseline_commit": {
+    "sha": "dd83dcad2ec486b89844a78e5e137935b101c167",
+    "committed_at": "2026-10-03T15:39:25Z",
+    "subject": "Add Equatorial Micronesia batch 1 geography evidence"
+  },
+  "baseline_extract_sha256": "59bd172c0a32384957bb868935ead3d8f83c4cf025a9dec01a84dd70a4b8b08e",
+  "assessment_sha256": "eadd0a8e7cfad298e18c21a2b85d81e840576919d5e6e67c2bd510e826bc95b5",
+  "preserved_parent_issue_snapshot": {
+    "updated_at": "2026-10-03T15:42:00Z",
+    "sha256": "b18b8be07f4535fbc38f85ee9e9a193d6aad0fd5b1399923ac62d887475a74d5",
+    "issue_number": 134
+  },
+  "issue_scope_pins": {
+    "issue_scope_member_count": 24,
+    "issue_scope_member_sha256": "31fabf9fabf99485135d966b15515e7d7395e8c7ec8b96239d83a89b29547a8b",
+    "region_member_count": 25,
+    "region_only_member_ids": [
+      "atlas:macro-coverage:location:a0457f0d44c94b71f00d"
+    ],
+    "release": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+    },
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "region_envelope_sha256": "a6c79f2b158cd7e5677c4a2dabdba5e80feb387dcf5401e9283d9ed1d25e4700",
+    "region_geometry_sha256": "3e07e8ef96300447086f3a91f061fd1876f6ce634be80efdb86df19ab8a340fd",
+    "region_member_location_ids_sha256": "4f422ca4e6909fe74494f5586318459128bb956521278073f116d57cec8f9a85"
+  },
+  "pinned_baseline_inputs": [
+    {
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "bytes": 11393,
+      "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+    },
+    {
+      "path": "data/geography/part-0.json",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "path": "data/geography/part-1.json",
+      "bytes": 8060108,
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+    },
+    {
+      "path": "data/geography/part-10.json",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    {
+      "path": "data/geography/part-11.json",
+      "bytes": 5131824,
+      "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+    },
+    {
+      "path": "data/geography/part-12.json",
+      "bytes": 4489493,
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+    },
+    {
+      "path": "data/geography/part-13.json",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "path": "data/geography/part-14.json",
+      "bytes": 4355198,
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+    },
+    {
+      "path": "data/geography/part-15.json",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "path": "data/geography/part-16.json",
+      "bytes": 5213846,
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+    },
+    {
+      "path": "data/geography/part-17.json",
+      "bytes": 4945828,
+      "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+    },
+    {
+      "path": "data/geography/part-18.json",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "path": "data/geography/part-19.json",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "path": "data/geography/part-2.json",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "path": "data/geography/part-20.json",
+      "bytes": 6570767,
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "path": "data/geography/part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "path": "data/geography/part-22.json",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "path": "data/geography/part-23.json",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    {
+      "path": "data/geography/part-24.json",
+      "bytes": 4816899,
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "path": "data/geography/part-25.json",
+      "bytes": 4525239,
+      "sha256": "1a26b9a86043db37b502be524c7160e13896ad8231943e228137b764673c5a02"
+    },
+    {
+      "path": "data/geography/part-26.json",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "path": "data/geography/part-27.json",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "path": "data/geography/part-3.json",
+      "bytes": 5153118,
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    {
+      "path": "data/geography/part-30.json",
+      "bytes": 11979437,
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+    },
+    {
+      "path": "data/geography/part-31.json",
+      "bytes": 10086485,
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+    },
+    {
+      "path": "data/geography/part-32.json",
+      "bytes": 10211739,
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+    },
+    {
+      "path": "data/geography/part-33.json",
+      "bytes": 607984,
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+    },
+    {
+      "path": "data/geography/part-4.json",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    {
+      "path": "data/geography/part-5.json",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    },
+    {
+      "path": "data/geography/part-6.json",
+      "bytes": 4607953,
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+    },
+    {
+      "path": "data/geography/part-7.json",
+      "bytes": 4257402,
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+    },
+    {
+      "path": "data/geography/part-8.json",
+      "bytes": 5097739,
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    {
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    {
+      "path": "data/geography/source-restoration-additions.json",
+      "bytes": 1573576,
+      "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10165703,
+      "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2367982,
+      "sha256": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-projection.json.gz",
+      "bytes": 5005075,
+      "sha256": "beb2739a65c67f01a65deab96ebf209a159b257453e156ef590106e1f1c9a348"
+    },
+    {
+      "path": "data/macro-foundation/envelopes-v5/f625f5584e92b6c9e6b0a718.wkb.gz",
+      "bytes": 38282,
+      "sha256": "a6c79f2b158cd7e5677c4a2dabdba5e80feb387dcf5401e9283d9ed1d25e4700"
+    },
+    {
+      "path": "data/macro-foundation/macro-certificate.json",
+      "bytes": 38430,
+      "sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 70253,
+      "sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1"
+    },
+    {
+      "path": "data/research-geography-gate.json",
+      "bytes": 1533,
+      "sha256": "1fd32582e4b9bac195fa5bfe306b7e9aa706d4b5986db97d689bfe14b7b9e2b4"
+    },
+    {
+      "path": "data/semantic-report.json",
+      "bytes": 6091596,
+      "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831"
+    },
+    {
+      "path": "data/validation/macro-publication-v5.json",
+      "bytes": 2826,
+      "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674"
+    },
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    }
+  ],
+  "legacy_baseline_file_rows": [
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "recorded_bytes": 944,
+      "recorded_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "recorded_hash_matches": true
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10165703,
+      "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "recorded_bytes": 10165703,
+      "recorded_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "recorded_hash_matches": true
+    },
+    {
+      "path": "data/semantic-report.json",
+      "bytes": 6091596,
+      "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831",
+      "recorded_bytes": 6091596,
+      "recorded_sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831",
+      "recorded_hash_matches": true
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2367982,
+      "sha256": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae",
+      "recorded_bytes": 2367982,
+      "recorded_sha256": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae",
+      "recorded_hash_matches": true
+    },
+    {
+      "path": "data/macro-foundation/current-membership-projection.json.gz",
+      "bytes": 5005075,
+      "sha256": "beb2739a65c67f01a65deab96ebf209a159b257453e156ef590106e1f1c9a348",
+      "recorded_bytes": 5005075,
+      "recorded_sha256": "beb2739a65c67f01a65deab96ebf209a159b257453e156ef590106e1f1c9a348",
+      "recorded_hash_matches": true
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 70253,
+      "sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1",
+      "recorded_bytes": 70253,
+      "recorded_sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1",
+      "recorded_hash_matches": true
+    },
+    {
+      "path": "data/macro-foundation/macro-certificate.json",
+      "bytes": 38430,
+      "sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+      "recorded_bytes": 38430,
+      "recorded_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+      "recorded_hash_matches": true
+    },
+    {
+      "path": "data/geography/part-0.json",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+      "recorded_bytes": 8539839,
+      "recorded_sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+      "recorded_hash_matches": true
+    }
+  ],
+  "legacy_containing_path_audit": {
+    "recorded_paths": [
+      "data/geography/part-0.json",
+      "data/hierarchy.json",
+      "data/macro-foundation/current-membership-inventory.json.gz",
+      "data/macro-foundation/current-membership-projection.json.gz",
+      "data/macro-foundation/macro-certificate.json",
+      "data/macro-foundation/regional-handoffs.json.gz",
+      "data/semantic-report.json",
+      "data/world-index.json"
+    ],
+    "actual_scoped_containing_paths": [
+      "data/geography/part-23.json",
+      "data/geography/part-24.json",
+      "data/geography/part-28.json"
+    ],
+    "false_containing_path_claim": "data/geography/part-0.json does not contain any of the 24 issue IDs; actual containing files are derived from world-index.json and the exact frozen commit"
+  },
+  "indexed_geography_sources": [
+    {
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "bytes": 11393,
+      "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+    },
+    {
+      "path": "data/geography/part-0.json",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "path": "data/geography/part-1.json",
+      "bytes": 8060108,
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+    },
+    {
+      "path": "data/geography/part-10.json",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    {
+      "path": "data/geography/part-11.json",
+      "bytes": 5131824,
+      "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+    },
+    {
+      "path": "data/geography/part-12.json",
+      "bytes": 4489493,
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+    },
+    {
+      "path": "data/geography/part-13.json",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "path": "data/geography/part-14.json",
+      "bytes": 4355198,
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+    },
+    {
+      "path": "data/geography/part-15.json",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "path": "data/geography/part-16.json",
+      "bytes": 5213846,
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+    },
+    {
+      "path": "data/geography/part-17.json",
+      "bytes": 4945828,
+      "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+    },
+    {
+      "path": "data/geography/part-18.json",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "path": "data/geography/part-19.json",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "path": "data/geography/part-2.json",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "path": "data/geography/part-20.json",
+      "bytes": 6570767,
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "path": "data/geography/part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "path": "data/geography/part-22.json",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "path": "data/geography/part-23.json",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    {
+      "path": "data/geography/part-24.json",
+      "bytes": 4816899,
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "path": "data/geography/part-25.json",
+      "bytes": 4525239,
+      "sha256": "1a26b9a86043db37b502be524c7160e13896ad8231943e228137b764673c5a02"
+    },
+    {
+      "path": "data/geography/part-26.json",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "path": "data/geography/part-27.json",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "path": "data/geography/part-3.json",
+      "bytes": 5153118,
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    {
+      "path": "data/geography/part-30.json",
+      "bytes": 11979437,
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+    },
+    {
+      "path": "data/geography/part-31.json",
+      "bytes": 10086485,
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+    },
+    {
+      "path": "data/geography/part-32.json",
+      "bytes": 10211739,
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+    },
+    {
+      "path": "data/geography/part-33.json",
+      "bytes": 607984,
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+    },
+    {
+      "path": "data/geography/part-4.json",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    {
+      "path": "data/geography/part-5.json",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    },
+    {
+      "path": "data/geography/part-6.json",
+      "bytes": 4607953,
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+    },
+    {
+      "path": "data/geography/part-7.json",
+      "bytes": 4257402,
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+    },
+    {
+      "path": "data/geography/part-8.json",
+      "bytes": 5097739,
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    {
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    {
+      "path": "data/geography/source-restoration-additions.json",
+      "bytes": 1573576,
+      "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+    }
+  ],
+  "containing_files": [
+    {
+      "path": "data/geography/part-23.json",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "feature_ids": [
+        "gb:TON:ADM1:12702645B14713027314985",
+        "gb:TON:ADM1:12702645B14719640472686",
+        "gb:TON:ADM1:12702645B16834523743175",
+        "gb:TON:ADM1:12702645B50986277851262",
+        "gb:TON:ADM1:12702645B6842520552302"
+      ]
+    },
+    {
+      "path": "data/geography/part-24.json",
+      "bytes": 4816899,
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "feature_ids": [
+        "gb:TUV:ADM1:17741764B1294645335794",
+        "gb:TUV:ADM1:17741764B30576374901893",
+        "gb:TUV:ADM1:17741764B36602748519227",
+        "gb:TUV:ADM1:17741764B42950471856320",
+        "gb:TUV:ADM1:17741764B45323499156113",
+        "gb:TUV:ADM1:17741764B49308440506872",
+        "gb:TUV:ADM1:17741764B83632895409465",
+        "gb:TUV:ADM1:17741764B90379454256238"
+      ]
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "feature_ids": [
+        "ASM-4998",
+        "ASM-4999",
+        "ASM-5000",
+        "ASM-5001",
+        "ASM-5002",
+        "WLF-4995",
+        "WLF-4996",
+        "WLF-4997",
+        "atlas:coverage:NZL-5472",
+        "atlas:territory:NIU",
+        "atlas:territory:WSM"
+      ]
+    }
+  ],
+  "location_source_crosswalk": [
+    {
+      "location_id": "ASM-4998",
+      "name": "Eastern",
+      "parent_id": "framework:province:eastern:d7fd8ac945aa",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "23d553bac28d0d860b9f8a2d457e46b3a516e2610f1a93a2a7fdd37bcc392772",
+      "feature_type": "MultiPolygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "ASM-4999",
+      "name": "Manu's",
+      "parent_id": "framework:province:manu-s:2bfa7d96db32",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "fc0b66a83b6bc128bc5f50c4b53153d8929b5b1e4c394273837bc701f3e7f899",
+      "feature_type": "MultiPolygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "ASM-5000",
+      "name": "Rose Atoll",
+      "parent_id": "framework:province:rose-atoll:d2143af2cd95",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "54702d3f2b440d0cd0f6030d2c1816a774ec2ccff66ab636989ba752bbd143f0",
+      "feature_type": "MultiPolygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "ASM-5001",
+      "name": "Swain's Island",
+      "parent_id": "framework:province:swain-s-island:069443c54686",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "3893c0d37d49cded80d48925909b07fd46ab2d5a2ae63e2ff9183f17b317c6d9",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "ASM-5002",
+      "name": "Western",
+      "parent_id": "framework:province:western:6b808b7a2306",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "26d73c1300241949c60df56b2106a3b20043f5bed37059af35d3e9ab9a093f10",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "WLF-4995",
+      "name": "Sigave",
+      "parent_id": "framework:province:sigave:c747f3552e76",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "2ac42bdeaca745d8bafb1050a382816322b448f32e49aea45945bbef7dcaf302",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "WLF-4996",
+      "name": "`Uvea",
+      "parent_id": "framework:province:uvea:eb8025731917",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "d8fbb94e473fe54ffdd044e52e82ac53476627005cc77e6b8e5c734b21e57c24",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "WLF-4997",
+      "name": "Alo",
+      "parent_id": "framework:province:alo:5ab48d886169",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "251a92889d8314aa043589b1f431f2d94b04161086027c9e8181164a4565c0c0",
+      "feature_type": "MultiPolygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "atlas:coverage:NZL-5472",
+      "name": "Tokelau",
+      "parent_id": "framework:province:tokelau:4cc7d2b1e7cf",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "5e108239e9147be1e89c148a13484ab6f3d45c8820c2cb374467bf99e74f8e7e",
+      "feature_type": "MultiPolygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "atlas:territory:NIU",
+      "name": "Niue",
+      "parent_id": "framework:province:niue:41699e810a4a",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "195a1283288f5856b037b5fb8555d77b80e288bb54833fea847901497737cb1e",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "atlas:territory:WSM",
+      "name": "Samoa",
+      "parent_id": "framework:province:samoa:c3e94ef76253",
+      "containing_path": "data/geography/part-28.json",
+      "source_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "source_file_bytes": 6613963,
+      "feature_sha256_canonical_json": "86f93e17423695799e640467439e9ad1a916988bc975c39e6e480d944a7a3cf2",
+      "feature_type": "MultiPolygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TON:ADM1:12702645B14713027314985",
+      "name": "Vava'u",
+      "parent_id": "framework:province:vava-u:2054ce027a75",
+      "containing_path": "data/geography/part-23.json",
+      "source_file_sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "source_file_bytes": 4962410,
+      "feature_sha256_canonical_json": "b4bb1ce08e70772b63cc8666d82f784484d63ff251a542bf08de3e936cd178ec",
+      "feature_type": "MultiPolygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TON:ADM1:12702645B14719640472686",
+      "name": "Ha'apai",
+      "parent_id": "framework:province:ha-apai:e88847494ddc",
+      "containing_path": "data/geography/part-23.json",
+      "source_file_sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "source_file_bytes": 4962410,
+      "feature_sha256_canonical_json": "b7c3badf8d7b3677454853824fd02e069c861bd415d9bf69d110092a6e5fb60e",
+      "feature_type": "MultiPolygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TON:ADM1:12702645B16834523743175",
+      "name": "Niuas",
+      "parent_id": "framework:province:niuas:6e2e18552131",
+      "containing_path": "data/geography/part-23.json",
+      "source_file_sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "source_file_bytes": 4962410,
+      "feature_sha256_canonical_json": "b08ed50e73a97d7703cda8f0774bafb5043b54934e6bd574858902846386cce0",
+      "feature_type": "MultiPolygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TON:ADM1:12702645B50986277851262",
+      "name": "Tongatapu",
+      "parent_id": "framework:province:tongatapu:a388b5003bd7",
+      "containing_path": "data/geography/part-23.json",
+      "source_file_sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "source_file_bytes": 4962410,
+      "feature_sha256_canonical_json": "794f85bde331ca4add8f79d230d40f12553e3832b9a951ff94226905ad82c3c4",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TON:ADM1:12702645B6842520552302",
+      "name": "'Eua",
+      "parent_id": "framework:province:eua:237244c6da44",
+      "containing_path": "data/geography/part-23.json",
+      "source_file_sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "source_file_bytes": 4962410,
+      "feature_sha256_canonical_json": "8053e2f802c31fad0e25b017f03d8e24abb88c2e026e4fc9a37ba6c0b4bb04bf",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B1294645335794",
+      "name": "Niutao",
+      "parent_id": "framework:province:niutao:0e6b35ca7ede",
+      "containing_path": "data/geography/part-24.json",
+      "source_file_sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "source_file_bytes": 4816899,
+      "feature_sha256_canonical_json": "900d9933ffa5ecee2e9c14932eb97fd795237a2d500f650fee0669e5d6d47ae0",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B30576374901893",
+      "name": "Nukufetau",
+      "parent_id": "framework:province:nukufetau:5f8840dd7581",
+      "containing_path": "data/geography/part-24.json",
+      "source_file_sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "source_file_bytes": 4816899,
+      "feature_sha256_canonical_json": "5faeede7e77dc7c00944bba3f5cf32a2dcb6f6852bb7ca7ba4a77d315ef07fe1",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B36602748519227",
+      "name": "Nanumea",
+      "parent_id": "framework:province:nanumea:aca6fdeee786",
+      "containing_path": "data/geography/part-24.json",
+      "source_file_sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "source_file_bytes": 4816899,
+      "feature_sha256_canonical_json": "7cc7f09512d14e3da40ac4a47748a2c69243c05bd75e5c624e25e862479700de",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B42950471856320",
+      "name": "Funafuti",
+      "parent_id": "framework:province:funafuti:bb93df822c1e",
+      "containing_path": "data/geography/part-24.json",
+      "source_file_sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "source_file_bytes": 4816899,
+      "feature_sha256_canonical_json": "360c95dfb17f36c07c95c7b923d46f034397e24441322ec29d9937b1f136d376",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B45323499156113",
+      "name": "Nukulaelae",
+      "parent_id": "framework:province:nukulaelae:95844662e871",
+      "containing_path": "data/geography/part-24.json",
+      "source_file_sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "source_file_bytes": 4816899,
+      "feature_sha256_canonical_json": "187d5a78ce83e3d97b91e7cdde9e60d6b06d6caeb084f6c9b94fa34fa28226a1",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B49308440506872",
+      "name": "Nanumanga",
+      "parent_id": "framework:province:nanumanga:def782189614",
+      "containing_path": "data/geography/part-24.json",
+      "source_file_sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "source_file_bytes": 4816899,
+      "feature_sha256_canonical_json": "ef31e7098b838ff81d4d467879cf0e640020c252e5e4f5b50bb5933853a00bcc",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B83632895409465",
+      "name": "Vaitupu",
+      "parent_id": "framework:province:vaitupu:ca67aef14178",
+      "containing_path": "data/geography/part-24.json",
+      "source_file_sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "source_file_bytes": 4816899,
+      "feature_sha256_canonical_json": "812682e5e960ba83d9e6ffee08113421a03079692c2385519d65996ecb51e8e1",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    },
+    {
+      "location_id": "gb:TUV:ADM1:17741764B90379454256238",
+      "name": "Nui",
+      "parent_id": "framework:province:nui:088ac96b7859",
+      "containing_path": "data/geography/part-24.json",
+      "source_file_sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "source_file_bytes": 4816899,
+      "feature_sha256_canonical_json": "50ecb55c8b4262ce15421fd11b5820dec358387715e67fed0d185895a10aaef5",
+      "feature_type": "Polygon",
+      "legacy_part_property_present": false
+    }
+  ],
+  "complete_parent_chains": {
+    "ASM-4998": [
+      "ASM-4998",
+      "framework:province:eastern:d7fd8ac945aa",
+      "framework:area:samoa:d63b2a1b51c1",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "ASM-4999": [
+      "ASM-4999",
+      "framework:province:manu-s:2bfa7d96db32",
+      "framework:area:samoa:d63b2a1b51c1",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "ASM-5000": [
+      "ASM-5000",
+      "framework:province:rose-atoll:d2143af2cd95",
+      "framework:area:samoa:d63b2a1b51c1",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "ASM-5001": [
+      "ASM-5001",
+      "framework:province:swain-s-island:069443c54686",
+      "framework:area:tokelau-manihiki:770fbc288b00",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "ASM-5002": [
+      "ASM-5002",
+      "framework:province:western:6b808b7a2306",
+      "framework:area:samoa:d63b2a1b51c1",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "WLF-4995": [
+      "WLF-4995",
+      "framework:province:sigave:c747f3552e76",
+      "framework:area:wallis-futuna-is:e4f7505b4b7c",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "WLF-4996": [
+      "WLF-4996",
+      "framework:province:uvea:eb8025731917",
+      "framework:area:wallis-futuna-is:e4f7505b4b7c",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "WLF-4997": [
+      "WLF-4997",
+      "framework:province:alo:5ab48d886169",
+      "framework:area:wallis-futuna-is:e4f7505b4b7c",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "atlas:coverage:NZL-5472": [
+      "atlas:coverage:NZL-5472",
+      "framework:province:tokelau:4cc7d2b1e7cf",
+      "framework:area:tokelau-manihiki:770fbc288b00",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "atlas:territory:NIU": [
+      "atlas:territory:NIU",
+      "framework:province:niue:41699e810a4a",
+      "framework:area:niue:c65e05c54ad0",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "atlas:territory:WSM": [
+      "atlas:territory:WSM",
+      "framework:province:samoa:c3e94ef76253",
+      "framework:area:samoa:d63b2a1b51c1",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TON:ADM1:12702645B14713027314985": [
+      "gb:TON:ADM1:12702645B14713027314985",
+      "framework:province:vava-u:2054ce027a75",
+      "framework:area:tonga:36a6092e6771",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TON:ADM1:12702645B14719640472686": [
+      "gb:TON:ADM1:12702645B14719640472686",
+      "framework:province:ha-apai:e88847494ddc",
+      "framework:area:tonga:36a6092e6771",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TON:ADM1:12702645B16834523743175": [
+      "gb:TON:ADM1:12702645B16834523743175",
+      "framework:province:niuas:6e2e18552131",
+      "framework:area:tonga:36a6092e6771",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TON:ADM1:12702645B50986277851262": [
+      "gb:TON:ADM1:12702645B50986277851262",
+      "framework:province:tongatapu:a388b5003bd7",
+      "framework:area:tonga:36a6092e6771",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TON:ADM1:12702645B6842520552302": [
+      "gb:TON:ADM1:12702645B6842520552302",
+      "framework:province:eua:237244c6da44",
+      "framework:area:tonga:36a6092e6771",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TUV:ADM1:17741764B1294645335794": [
+      "gb:TUV:ADM1:17741764B1294645335794",
+      "framework:province:niutao:0e6b35ca7ede",
+      "framework:area:tuvalu:aa448e049a04",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TUV:ADM1:17741764B30576374901893": [
+      "gb:TUV:ADM1:17741764B30576374901893",
+      "framework:province:nukufetau:5f8840dd7581",
+      "framework:area:tuvalu:aa448e049a04",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TUV:ADM1:17741764B36602748519227": [
+      "gb:TUV:ADM1:17741764B36602748519227",
+      "framework:province:nanumea:aca6fdeee786",
+      "framework:area:tuvalu:aa448e049a04",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TUV:ADM1:17741764B42950471856320": [
+      "gb:TUV:ADM1:17741764B42950471856320",
+      "framework:province:funafuti:bb93df822c1e",
+      "framework:area:tuvalu:aa448e049a04",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TUV:ADM1:17741764B45323499156113": [
+      "gb:TUV:ADM1:17741764B45323499156113",
+      "framework:province:nukulaelae:95844662e871",
+      "framework:area:tuvalu:aa448e049a04",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TUV:ADM1:17741764B49308440506872": [
+      "gb:TUV:ADM1:17741764B49308440506872",
+      "framework:province:nanumanga:def782189614",
+      "framework:area:tuvalu:aa448e049a04",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TUV:ADM1:17741764B83632895409465": [
+      "gb:TUV:ADM1:17741764B83632895409465",
+      "framework:province:vaitupu:ca67aef14178",
+      "framework:area:tuvalu:aa448e049a04",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ],
+    "gb:TUV:ADM1:17741764B90379454256238": [
+      "gb:TUV:ADM1:17741764B90379454256238",
+      "framework:province:nui:088ac96b7859",
+      "framework:area:tuvalu:aa448e049a04",
+      "atlas:macro-review:region:3f0693a087ae4902",
+      "framework:subcontinent:polynesia:c8f106884f04",
+      "framework:continent:oceania:48580dd0c4b4"
+    ]
+  },
+  "checks": {
+    "exact_24_issue_ids": true,
+    "all_24_unique_world_index_sources": true,
+    "inline_baseline_features_match_frozen_source": true,
+    "all_original_recorded_baseline_file_hashes_match": true,
+    "hierarchy_release_certificate_publication_gate_region_envelope_and_membership_pins_match": true,
+    "assessment_and_extract_name_same_frozen_commit": true,
+    "old_baseline_preserved_and_not_refreshed_from_current_main": true
+  }
+}
