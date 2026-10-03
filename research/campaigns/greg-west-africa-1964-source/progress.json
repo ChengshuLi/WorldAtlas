@@ -18,7 +18,7 @@
       "ETH ICR GREG public data page/archive, online appendix, Weidmann et al. 2010 article"
     ]
   },
-  "updated_at_utc": "2026-10-03T09:58:16Z",
+  "updated_at_utc": "2026-10-03T10:00:00Z",
   "geographic_release": null,
   "input_paths": [
     "data/source-inventory.json",
@@ -36,8 +36,8 @@
     "No dataset-specific GREG reuse license/permission or polygon-level observation dates found; no population shares in GREG."
   ],
   "blockers": [],
-  "next_action": "Run local scope and diff checks; submit one focused source-only PR. Wait for exact-head CI and merge queue, verify fresh-main merge, release claim and continue to next eligible issue.",
-  "pull_request": null,
+  "next_action": "Wait for exact-head scope check. If main advances, rebase and rerun all scope checks. Renew the issue claim before queuing the serialized merge. Verify accepted merge on fresh origin/main, release claim, and continue to the next eligible issue.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/571",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
