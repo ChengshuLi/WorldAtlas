@@ -1,0 +1,88 @@
+{
+  "source": "OCHA HDX cod-ps-syc; Seychelles NBS 2019 statistical geography",
+  "regions_assigned": 8,
+  "ADM3_district_rows_in_full_reference": 27,
+  "records": [
+    {
+      "location_id": "gb:SYC:ADM2:34574756B14018612202061",
+      "location_name": "West Mahe",
+      "current_parent_name": "West Mahe",
+      "NBS_reference_region": "West Mahe",
+      "parent_name_matches_reference": true,
+      "NBS_admin1_island": "Mahe",
+      "2019_district_rows_assigned_to_region": 4,
+      "join": "normalized exact"
+    },
+    {
+      "location_id": "gb:SYC:ADM2:34574756B18865708954128",
+      "location_name": "La Digue",
+      "current_parent_name": "La Digue a",
+      "NBS_reference_region": "La Digue",
+      "parent_name_matches_reference": false,
+      "NBS_admin1_island": "La Digue",
+      "2019_district_rows_assigned_to_region": 1,
+      "join": "normalized exact"
+    },
+    {
+      "location_id": "gb:SYC:ADM2:34574756B27990728867894",
+      "location_name": "Central 1 Mahe",
+      "current_parent_name": "Bel Air",
+      "NBS_reference_region": "Central 1 Mahe",
+      "parent_name_matches_reference": false,
+      "NBS_admin1_island": "Mahe",
+      "2019_district_rows_assigned_to_region": 5,
+      "join": "normalized exact"
+    },
+    {
+      "location_id": "gb:SYC:ADM2:34574756B38092183622343",
+      "location_name": "Central 2 Mahe",
+      "current_parent_name": "Central 2 Mahe",
+      "NBS_reference_region": "Central 2 Mahe",
+      "parent_name_matches_reference": true,
+      "NBS_admin1_island": "Mahe",
+      "2019_district_rows_assigned_to_region": 4,
+      "join": "normalized exact"
+    },
+    {
+      "location_id": "gb:SYC:ADM2:34574756B41664711494427",
+      "location_name": "North Mahe",
+      "current_parent_name": "North Mahe",
+      "NBS_reference_region": "North Mahe",
+      "parent_name_matches_reference": true,
+      "NBS_admin1_island": "Mahe",
+      "2019_district_rows_assigned_to_region": 4,
+      "join": "normalized exact"
+    },
+    {
+      "location_id": "gb:SYC:ADM2:34574756B43978553392406",
+      "location_name": "Praslin",
+      "current_parent_name": "Baie Saint",
+      "NBS_reference_region": "Praslin",
+      "parent_name_matches_reference": false,
+      "NBS_admin1_island": "Praslin",
+      "2019_district_rows_assigned_to_region": 2,
+      "join": "normalized exact"
+    },
+    {
+      "location_id": "gb:SYC:ADM2:34574756B49819614716360",
+      "location_name": "East Mahe",
+      "current_parent_name": "East Mahe",
+      "NBS_reference_region": "East Mahe",
+      "parent_name_matches_reference": true,
+      "NBS_admin1_island": "Mahe",
+      "2019_district_rows_assigned_to_region": 6,
+      "join": "normalized exact"
+    },
+    {
+      "location_id": "gb:SYC:ADM2:34574756B54247629098598",
+      "location_name": "Other Islands",
+      "current_parent_name": "Outer Isla",
+      "NBS_reference_region": "Other Islands",
+      "parent_name_matches_reference": false,
+      "NBS_admin1_island": "Other Islands",
+      "2019_district_rows_assigned_to_region": 1,
+      "join": "normalized exact"
+    }
+  ],
+  "method": "Normalized Unicode/punctuation-insensitive exact region-name join; ADM3 source row counts assigned to each ADM2 region. Reference is 2019/2010-derived and is not asserted current in 2026."
+}

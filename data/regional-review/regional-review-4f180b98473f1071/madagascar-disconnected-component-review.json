@@ -1,0 +1,1346 @@
+{
+  "source_COD_AB": "sources/mdg-COD-AB-ADM2-2026-reviewed.geojson.gz",
+  "source_unit_count": 120,
+  "current_assigned_MDG_feature_count": 119,
+  "method": {
+    "projection": "EPSG:6933 equal-area",
+    "candidate_rule": "For each OCHA COD-AB ADM2 polygon component over 0.01 km2, retain component when less than 1% of its area intersects the union of all current 119 scoped Madagascar ADM2 polygons.",
+    "physical_screen": "Scan every source GSHHG 2.3.7 L1 record against all candidate parts. Screen outcomes do not establish legal ownership, source accuracy or physical land absence.",
+    "validity": "Invalid geometries are repaired only on ephemeral comparison copies."
+  },
+  "gshhg_source": {
+    "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+    "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "records_scanned": 188612,
+    "L1_records_scanned": 179832,
+    "retained_matches": 0,
+    "retained_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "retained_gzip_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "retained_gzip_bytes": 20
+  },
+  "candidate_count": 55,
+  "candidate_total_source_area_km2": 64.5883365441835,
+  "candidates_with_L1_intersection": 0,
+  "candidates": [
+    {
+      "source_name": "Sainte Marie",
+      "source_pcode": "MG32302",
+      "source_parent": "Analanjirofo",
+      "component_index": 1,
+      "source_component_area_km2": 2.951844650937162,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 2335.9886479299607,
+      "component_centroid_lonlat": [
+        49.80718480158807,
+        -17.10954979863602
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.80920000000014,
+        -17.097579990277946
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.8297,
+        -17.087399986280744
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Analalava",
+      "source_pcode": "MG42411",
+      "source_parent": "Sofia",
+      "component_index": 2,
+      "source_component_area_km2": 1.4964231844749245,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 5332.659746377292,
+      "component_centroid_lonlat": [
+        47.64466577641292,
+        -14.357472488005184
+      ],
+      "nearest_point_on_component_lonlat": [
+        47.65280527200007,
+        -14.356898922284339
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        47.70555653606623,
+        -14.369762459484058
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Analalava",
+      "source_pcode": "MG42411",
+      "source_parent": "Sofia",
+      "component_index": 4,
+      "source_component_area_km2": 3.163476802377761,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 6611.889230266232,
+      "component_centroid_lonlat": [
+        47.74842214002301,
+        -14.113639599248623
+      ],
+      "nearest_point_on_component_lonlat": [
+        47.76128275500008,
+        -14.1143217704005
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        47.810599999999994,
+        -14.151399987382474
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Analalava",
+      "source_pcode": "MG42411",
+      "source_parent": "Sofia",
+      "component_index": 6,
+      "source_component_area_km2": 1.5102826134880172,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 164.38118550246483,
+      "component_centroid_lonlat": [
+        48.01102770429982,
+        -14.235734748826488
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.02153963199998,
+        -14.233432716342922
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.023160088750195,
+        -14.233022662438422
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Analalava",
+      "source_pcode": "MG42411",
+      "source_parent": "Sofia",
+      "component_index": 7,
+      "source_component_area_km2": 0.6143246361383835,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1245.5097299011184,
+      "component_centroid_lonlat": [
+        48.002706528359504,
+        -14.225805120654272
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.00618297700009,
+        -14.224842502347002
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.01846111359524,
+        -14.221735673370874
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Analalava",
+      "source_pcode": "MG42411",
+      "source_parent": "Sofia",
+      "component_index": 8,
+      "source_component_area_km2": 0.4975568166597915,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 230.18654304958133,
+      "component_centroid_lonlat": [
+        48.01376322352706,
+        -14.22479516886354
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.01632538900014,
+        -14.222630361348095
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.018594549770285,
+        -14.222056180924048
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Maintirano",
+      "source_pcode": "MG44421",
+      "source_parent": "Melaky",
+      "component_index": 1,
+      "source_component_area_km2": 0.8644211946539819,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 18260.06384171207,
+      "component_centroid_lonlat": [
+        43.94038935758121,
+        -18.579387710532544
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.94481876500009,
+        -18.574910149968062
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        44.119499999999995,
+        -18.516899985977247
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Maintirano",
+      "source_pcode": "MG44421",
+      "source_parent": "Melaky",
+      "component_index": 2,
+      "source_component_area_km2": 0.41049096021962156,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 10231.122433994513,
+      "component_centroid_lonlat": [
+        43.93685227826292,
+        -18.412241519146914
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.93946599700001,
+        -18.40741616199513
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        44.045387490394894,
+        -18.40347621576136
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 1,
+      "source_component_area_km2": 2.3118104443638408,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 173.3321710392922,
+      "component_centroid_lonlat": [
+        43.246050846289705,
+        -22.175527871419348
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.25582000100013,
+        -22.177199986863055
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.25760379764552,
+        -22.177373450050535
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 3,
+      "source_component_area_km2": 1.4394183372410914,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1124.7317058550398,
+      "component_centroid_lonlat": [
+        43.191404866192954,
+        -22.063923684614576
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.188088403000044,
+        -22.071070723853666
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.183499999999995,
+        -22.079799985854503
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 4,
+      "source_component_area_km2": 0.4516554392133294,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 954.5106353820381,
+      "component_centroid_lonlat": [
+        43.23259749224512,
+        -22.026574478298144
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.234752496000056,
+        -22.030641892850305
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.24398872704929,
+        -22.033527751062593
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 5,
+      "source_component_area_km2": 0.02926106432797339,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 956.9949872585743,
+      "component_centroid_lonlat": [
+        43.237634697639294,
+        -22.022874060348194
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.23801121900015,
+        -22.023666771849715
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.247271489643175,
+        -22.026560002069925
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 6,
+      "source_component_area_km2": 0.060123851317301524,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1051.9649275993231,
+      "component_centroid_lonlat": [
+        43.23753998142214,
+        -22.019213462782197
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.23884125000018,
+        -22.019667580849372
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.24902048820542,
+        -22.022847843883127
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 7,
+      "source_component_area_km2": 0.017012532402669228,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 936.1419578270962,
+      "component_centroid_lonlat": [
+        43.24175409598904,
+        -22.015010107636613
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.24213176699999,
+        -22.01541273384906
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.251190255294276,
+        -22.01824275853852
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 8,
+      "source_component_area_km2": 0.024849671970533154,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1855.6779354622545,
+      "component_centroid_lonlat": [
+        43.23393363175355,
+        -22.00917615305441
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.234373122000136,
+        -22.010215383848678
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.25232941240651,
+        -22.015825084895337
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 9,
+      "source_component_area_km2": 0.07280346749032916,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1584.28399102089,
+      "component_centroid_lonlat": [
+        43.24118977163669,
+        -21.996910602587597
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.24312603400011,
+        -21.998033798847715
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.258456206809356,
+        -22.002822662370427
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 10,
+      "source_component_area_km2": 0.2892203355011098,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 4656.834393828301,
+      "component_centroid_lonlat": [
+        43.207649696866014,
+        -21.954823743370596
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.21032550500018,
+        -21.95387901284427
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.2573,
+        -21.962899985844956
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 15,
+      "source_component_area_km2": 0.06285783883162316,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1492.678669783452,
+      "component_centroid_lonlat": [
+        43.28988121668955,
+        -21.868043845625785
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.291561674000086,
+        -21.868764769837874
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.303687845745635,
+        -21.876579560895298
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 17,
+      "source_component_area_km2": 0.06285735432837623,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 3537.6148811010057,
+      "component_centroid_lonlat": [
+        43.29393355537104,
+        -21.838049491486817
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.295673928000156,
+        -21.83836386783568
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.332337960333575,
+        -21.838224243285104
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 19,
+      "source_component_area_km2": 0.01057706508732616,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 3046.223492650846,
+      "component_centroid_lonlat": [
+        43.300377818255754,
+        -21.83493128335859
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.30074429000006,
+        -21.834446170835463
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.332315515354765,
+        -21.834325944003456
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 21,
+      "source_component_area_km2": 0.37606006744835374,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 3408.442221734791,
+      "component_centroid_lonlat": [
+        43.29416591828802,
+        -21.82488175556044
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.29698265700017,
+        -21.833144242835388
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.33230793689198,
+        -21.833009721337923
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 22,
+      "source_component_area_km2": 0.027710132585700795,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 255.09213486905708,
+      "component_centroid_lonlat": [
+        43.309856028699166,
+        -21.875216506672988
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.30939738000017,
+        -21.87696072583849
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.30678075653744,
+        -21.87726841099594
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Morombe",
+      "source_pcode": "MG51504",
+      "source_parent": "Atsimo Andrefana",
+      "component_index": 23,
+      "source_component_area_km2": 0.014844887177092089,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 2935.5877549894176,
+      "component_centroid_lonlat": [
+        43.30102334817284,
+        -21.832688805826336
+      ],
+      "nearest_point_on_component_lonlat": [
+        43.30187875100007,
+        -21.832327473835356
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        43.33230334157421,
+        -21.832211615194662
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Belo Sur Tsiribihina",
+      "source_pcode": "MG54510",
+      "source_parent": "Menabe",
+      "component_index": 1,
+      "source_component_area_km2": 2.056538416324188,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 118.43859488939195,
+      "component_centroid_lonlat": [
+        44.4053966460904,
+        -19.731448411324013
+      ],
+      "nearest_point_on_component_lonlat": [
+        44.404017626000154,
+        -19.738695274835973
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        44.40516447818074,
+        -19.739046397373976
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Belo Sur Tsiribihina",
+      "source_pcode": "MG54510",
+      "source_parent": "Menabe",
+      "component_index": 2,
+      "source_component_area_km2": 0.5037992408830457,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 3.0623077374814773,
+      "component_centroid_lonlat": [
+        44.405365387858616,
+        -19.646969854867745
+      ],
+      "nearest_point_on_component_lonlat": [
+        44.40982823200005,
+        -19.651151173842536
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        44.409859960434105,
+        -19.65115054023827
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Belo Sur Tsiribihina",
+      "source_pcode": "MG54510",
+      "source_parent": "Menabe",
+      "component_index": 3,
+      "source_component_area_km2": 0.44509674236362534,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 533.7976962665755,
+      "component_centroid_lonlat": [
+        44.4092723693615,
+        -19.62613567770006
+      ],
+      "nearest_point_on_component_lonlat": [
+        44.41502327900008,
+        -19.619308947845056
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        44.42022219784631,
+        -19.62082553749
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Belo Sur Tsiribihina",
+      "source_pcode": "MG54510",
+      "source_parent": "Menabe",
+      "component_index": 4,
+      "source_component_area_km2": 1.6155520133657713,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 396.2628042187348,
+      "component_centroid_lonlat": [
+        44.409536845202084,
+        -19.616109725704646
+      ],
+      "nearest_point_on_component_lonlat": [
+        44.42388835400004,
+        -19.60311856884634
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        44.42774775274852,
+        -19.604244291735565
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Nosy-Be",
+      "source_pcode": "MG71718",
+      "source_parent": "Diana",
+      "component_index": 1,
+      "source_component_area_km2": 1.3877208596501656,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 283.3679252043518,
+      "component_centroid_lonlat": [
+        48.18215101839318,
+        -13.365396210017268
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.18656447100016,
+        -13.361416099788476
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.189500516706,
+        -13.361361962228525
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Nosy-Be",
+      "source_pcode": "MG71718",
+      "source_parent": "Diana",
+      "component_index": 3,
+      "source_component_area_km2": 0.17634659170951172,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 414.3377390936493,
+      "component_centroid_lonlat": [
+        48.18734505909138,
+        -13.286923096882571
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.19028804600015,
+        -13.287256900828861
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.194234312896384,
+        -13.28857197691632
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Nosy-Be",
+      "source_pcode": "MG71718",
+      "source_parent": "Diana",
+      "component_index": 6,
+      "source_component_area_km2": 0.8198514956566114,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1246.1698081188447,
+      "component_centroid_lonlat": [
+        48.36746220718486,
+        -13.434711061045032
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.36752740100019,
+        -13.44016599474585
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.36017124720241,
+        -13.448415271213886
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambilobe",
+      "source_pcode": "MG71717",
+      "source_parent": "Diana",
+      "component_index": 1,
+      "source_component_area_km2": 0.43184923960570465,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 4062.5621536023414,
+      "component_centroid_lonlat": [
+        48.60154301253864,
+        -12.960872042254243
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.59997711700004,
+        -12.957105379013893
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.586089359655745,
+        -12.926279712266806
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambilobe",
+      "source_pcode": "MG71717",
+      "source_parent": "Diana",
+      "component_index": 3,
+      "source_component_area_km2": 0.7287257921838565,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 2990.0137048855727,
+      "component_centroid_lonlat": [
+        48.57803860483667,
+        -12.839367829666436
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.58177084200009,
+        -12.836430939083419
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.61248201328391,
+        -12.833221401377086
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 2,
+      "source_component_area_km2": 0.9650451185203142,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 949.548545084266,
+      "component_centroid_lonlat": [
+        48.850314626455365,
+        -12.5662962746885
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.84739204100014,
+        -12.561669003245685
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.84235624871024,
+        -12.555121507624767
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 3,
+      "source_component_area_km2": 1.3874690651385435,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 4772.103809439317,
+      "component_centroid_lonlat": [
+        48.6693700242116,
+        -12.451125710925618
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.675462074000095,
+        -12.448488654314085
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.72359999999998,
+        -12.439699988319534
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 4,
+      "source_component_area_km2": 2.104620157135132,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 3535.5272888514633,
+      "component_centroid_lonlat": [
+        48.706341748637456,
+        -12.385889316973836
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.71164081039497,
+        -12.39166669115822
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.7437,
+        -12.405399988340456
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 5,
+      "source_component_area_km2": 0.4662821459762558,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 6353.895757927766,
+      "component_centroid_lonlat": [
+        48.97907719139673,
+        -12.261996643647555
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.97882160500017,
+        -12.265911305426323
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.0181,
+        -12.306799988401073
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 6,
+      "source_component_area_km2": 2.9305762239003834,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 6466.5712518914215,
+      "component_centroid_lonlat": [
+        49.01021087355045,
+        -12.242640208572396
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.00451879900003,
+        -12.256030763432499
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.0181,
+        -12.306799988401073
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 7,
+      "source_component_area_km2": 0.7380549122020759,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 3563.6606168593776,
+      "component_centroid_lonlat": [
+        49.04952399130031,
+        -12.118900919816229
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.053369537000094,
+        -12.11262377952249
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.0876,
+        -12.101899988529327
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 8,
+      "source_component_area_km2": 1.4509301950858589,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1104.4151160975516,
+      "component_centroid_lonlat": [
+        49.36532881217618,
+        -12.133940573787621
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.35355163200012,
+        -12.135924732507705
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.34233808285464,
+        -12.134148996146662
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 9,
+      "source_component_area_km2": 3.071524954871245,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1282.6761152106003,
+      "component_centroid_lonlat": [
+        49.65294570676251,
+        -12.682563182722339
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.63823049600006,
+        -12.684473649172492
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.626736279799246,
+        -12.689648246961639
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 10,
+      "source_component_area_km2": 3.284530478970384,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 242.7416892562171,
+      "component_centroid_lonlat": [
+        49.5851448590568,
+        -12.625354468168894
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.58957353700003,
+        -12.620556771210413
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.59155696650865,
+        -12.61935801064477
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 12,
+      "source_component_area_km2": 2.8293580918942167,
+      "overlap_with_current_MDG_union_percent": 0.00911870041664539,
+      "nearest_current_union_distance_m": 0.0,
+      "component_centroid_lonlat": [
+        49.548487159518444,
+        -12.408262263187863
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.53650611149381,
+        -12.399004213637417
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.53650611149381,
+        -12.399004213637417
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Antsiranana II",
+      "source_pcode": "MG71713",
+      "source_parent": "Diana",
+      "component_index": 13,
+      "source_component_area_km2": 2.6645681756431014,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1899.3348262139784,
+      "component_centroid_lonlat": [
+        49.38466565412324,
+        -12.176179520703323
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.37362153200018,
+        -12.173724387483945
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.35535778609553,
+        -12.179403334767322
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambanja",
+      "source_pcode": "MG71719",
+      "source_parent": "Diana",
+      "component_index": 2,
+      "source_component_area_km2": 3.5562772025241607,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 3169.766839848256,
+      "component_centroid_lonlat": [
+        47.7686637900823,
+        -13.944767656930539
+      ],
+      "nearest_point_on_component_lonlat": [
+        47.77039956200008,
+        -13.956755757478252
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        47.7844,
+        -13.979899987466748
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambanja",
+      "source_pcode": "MG71719",
+      "source_parent": "Diana",
+      "component_index": 3,
+      "source_component_area_km2": 0.56687981983315,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 117.03697618480372,
+      "component_centroid_lonlat": [
+        47.97941189038651,
+        -13.94243602906222
+      ],
+      "nearest_point_on_component_lonlat": [
+        47.979166516000014,
+        -13.936265046488337
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        47.97931907085994,
+        -13.935328048456844
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambanja",
+      "source_pcode": "MG71719",
+      "source_parent": "Diana",
+      "component_index": 5,
+      "source_component_area_km2": 1.4721405315958302,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 6490.462253787372,
+      "component_centroid_lonlat": [
+        47.81841442085599,
+        -13.592384041043903
+      ],
+      "nearest_point_on_component_lonlat": [
+        47.825034005000134,
+        -13.596637907662766
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        47.89046410271615,
+        -13.60878192995041
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambanja",
+      "source_pcode": "MG71719",
+      "source_parent": "Diana",
+      "component_index": 6,
+      "source_component_area_km2": 0.1364908506628194,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1347.416161510646,
+      "component_centroid_lonlat": [
+        48.096820032089866,
+        -13.568975346161746
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.09524152800009,
+        -13.569366613677081
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.08146555652834,
+        -13.571146244962854
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambanja",
+      "source_pcode": "MG71719",
+      "source_parent": "Diana",
+      "component_index": 7,
+      "source_component_area_km2": 1.2639320668321072,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 159.70342227854988,
+      "component_centroid_lonlat": [
+        48.3292901710658,
+        -13.76060341709553
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.339594741999974,
+        -13.757906884578937
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.341128115990884,
+        -13.75839181030326
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambanja",
+      "source_pcode": "MG71719",
+      "source_parent": "Diana",
+      "component_index": 8,
+      "source_component_area_km2": 1.6526808562262227,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 32.542579092426,
+      "component_centroid_lonlat": [
+        48.336374027850624,
+        -13.74973647238196
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.34166677600018,
+        -13.744214347585986
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.341927791016396,
+        -13.744048157811195
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambanja",
+      "source_pcode": "MG71719",
+      "source_parent": "Diana",
+      "component_index": 9,
+      "source_component_area_km2": 1.1640868726984832,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 152.70955433454847,
+      "component_centroid_lonlat": [
+        48.32220884272116,
+        -13.740399336404984
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.32857692599999,
+        -13.736437672589847
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.328357637835,
+        -13.73521820285316
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambanja",
+      "source_pcode": "MG71719",
+      "source_parent": "Diana",
+      "component_index": 10,
+      "source_component_area_km2": 0.6466050656153264,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 747.6530940808818,
+      "component_centroid_lonlat": [
+        48.188927439980446,
+        -13.720529214057716
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.1902672050001,
+        -13.726087771595328
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.18560000000001,
+        -13.730899987592881
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Ambanja",
+      "source_pcode": "MG71719",
+      "source_parent": "Diana",
+      "component_index": 13,
+      "source_component_area_km2": 0.5740782731334219,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 237.8236670614352,
+      "component_centroid_lonlat": [
+        48.439787159675795,
+        -13.53546903017252
+      ],
+      "nearest_point_on_component_lonlat": [
+        48.44035647099997,
+        -13.540181080692559
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        48.4387,
+        -13.541599987691837
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Vohemar",
+      "source_pcode": "MG72716",
+      "source_parent": "Sava",
+      "component_index": 1,
+      "source_component_area_km2": 2.6234702320471155,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 1196.229933984373,
+      "component_centroid_lonlat": [
+        49.77392999555003,
+        -12.76924866951226
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.76440044400016,
+        -12.772311797120839
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.75204667533245,
+        -12.773122041675986
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Vohemar",
+      "source_pcode": "MG72716",
+      "source_parent": "Sava",
+      "component_index": 2,
+      "source_component_area_km2": 1.346471675169553,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 3566.065310603951,
+      "component_centroid_lonlat": [
+        49.83800283069384,
+        -12.849538892488953
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.838958709999986,
+        -12.859258891070187
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.84009999999999,
+        -12.88789998805368
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    },
+    {
+      "source_name": "Vohemar",
+      "source_pcode": "MG72716",
+      "source_parent": "Sava",
+      "component_index": 3,
+      "source_component_area_km2": 2.766899838529029,
+      "overlap_with_current_MDG_union_percent": 0.0,
+      "nearest_current_union_distance_m": 4792.161750185088,
+      "component_centroid_lonlat": [
+        49.84006401736014,
+        -12.811632460009145
+      ],
+      "nearest_point_on_component_lonlat": [
+        49.83540049070141,
+        -12.810847491118766
+      ],
+      "nearest_point_on_current_union_lonlat": [
+        49.78589999999999,
+        -12.807699988100211
+      ],
+      "gshhg_L1_intersecting_record_count": 0,
+      "gshhg_L1_intersection_area_km2": 0.0,
+      "interpretation": "GSHHG L1 is coarse physical screening; component non-detection is not absence proof. Administrative island component must be reconciled to appropriate current source."
+    }
+  ]
+}
