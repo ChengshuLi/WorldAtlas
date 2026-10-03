@@ -54,14 +54,28 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           path: trusted
-          fetch-depth: 0
           persist-credentials: false
+          sparse-checkout: |
+            scripts
+            src
+            .github
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           ref: refs/pull/${{ github.event.pull_request.number }}/head
           path: candidate
+          # Keep commit history for merge-base and every changed path, but
+          # materialize only the modules/config/tests used by scope checks.
           fetch-depth: 0
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts
+            src
+            test
+            .github
+            hosted
+            data/research-geography-gate.json
+            package.json
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'

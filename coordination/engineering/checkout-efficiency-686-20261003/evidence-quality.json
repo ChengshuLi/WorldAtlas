@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "issue": 686,
+  "lane": "engineering",
+  "worker_id": "moderator-checkout-686-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "a22823d8fb81779f7295f7082da966cfb4c8c399",
+    "files": [
+      {
+        "path": ".github/workflows/handoff-scope.yml",
+        "bytes": 4694,
+        "sha256": "09ab368de00ee8a1a6fe2ea872d33d110a24c36aa1c4361ac4416be9c3a346a4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 5272,
+        "sha256": "4cbebe22a32a6e79f15a2b4c8ec43922b3c610bd407608b6db02b938e5412411",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/trusted-workflow-checkouts.test.mjs",
+        "bytes": 2320,
+        "sha256": "503adac89ca700798356a96eb2907820a9c6f634509f646100f38847d5c25017",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/checkout-efficiency-686-20261003/sparse-focused.log",
+      "bytes": 9037,
+      "sha256": "820df37cdf2f2c867e1b0e5e11c181b5a05bf4b5546b78f1c389c34bc35e0248",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/checkout-efficiency-686-20261003/validation.json",
+      "bytes": 781,
+      "sha256": "34450f5562daaf287ecc493aea8cca5998be1f58db0946b3c9a6dd0015744f1e",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "sparse-checkout-preserves-validation",
+      "kind": "code",
+      "description": "Run all focused tests in a sparse input tree without atlas data/dependencies; prove omitted working-tree paths remain included in Git scope validation. Retain required gate/hosted modules; leave full application checkout unchanged.",
+      "software": "Node24, Git sparse checkout, repository integration runner",
+      "units": "test outcomes and file bytes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/handoff-scope.yml",
+      "status": "modified",
+      "original_sha256": "09ab368de00ee8a1a6fe2ea872d33d110a24c36aa1c4361ac4416be9c3a346a4"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "4cbebe22a32a6e79f15a2b4c8ec43922b3c610bd407608b6db02b938e5412411"
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "status": "modified",
+      "original_sha256": "503adac89ca700798356a96eb2907820a9c6f634509f646100f38847d5c25017"
+    },
+    {
+      "path": "coordination/engineering/checkout-efficiency-686-20261003/sparse-focused.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/checkout-efficiency-686-20261003/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/checkout-efficiency-686-20261003/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": []
+}

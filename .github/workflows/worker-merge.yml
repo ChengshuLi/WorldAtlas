@@ -70,10 +70,30 @@ jobs:
     steps:
       # Candidate code runs only in this isolated job, without write credentials,
       # repository secrets, persistent checkout authentication, or OIDC rights.
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Checkout complete candidate for application regression
+        if: needs.prepare.outputs.profile == 'full'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           ref: ${{ needs.prepare.outputs.candidate }}
           persist-credentials: false
+      - name: Checkout only focused-test inputs for evidence regression
+        if: needs.prepare.outputs.profile == 'evidence'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ needs.prepare.outputs.candidate }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts
+            src
+            test
+            .github
+            drizzle
+            hosted
+            data/research-geography-gate.json
+            package.json
+            package-lock.json
+            requirements.txt
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'
