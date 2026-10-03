@@ -1,0 +1,67 @@
+{
+  "issue": 485,
+  "manifest_generated_utc": "2026-10-03",
+  "purpose": "Generated assessment and review-output byte/record accounting, separate from the source/input files in sources-manifest.json. Exact SHA-256 digests are over retained output bytes.",
+  "artifacts": [
+    {
+      "path": "assessment.json",
+      "bytes": 11600442,
+      "text_lines": 252255,
+      "sha256": "2ab2c0610e37d50f020d031538fa5a22aecf4c7389bd64f6ec17b79487b60499",
+      "record_count": 222,
+      "record_units": "assigned location rows"
+    },
+    {
+      "path": "bc-admin-group-geometry-screen.json",
+      "bytes": 26409,
+      "text_lines": 674,
+      "sha256": "beb726bd664becfa0f3d0457080413744aa3a3fbae43366bec26584812c31763",
+      "record_count": 19,
+      "record_units": "administrative groups; source members 376"
+    },
+    {
+      "path": "bc-area-union-screen.json",
+      "bytes": 2608,
+      "text_lines": 58,
+      "sha256": "bc4bffb122300941592dccca0dfa949a20317d73061a8296e6b1b30d81982417",
+      "record_count": 29,
+      "record_units": "2021 Census Division coverage ratios plus one BC union screen"
+    },
+    {
+      "path": "gshhg-scope-screen.json",
+      "bytes": 176129,
+      "text_lines": 5519,
+      "sha256": "a1a946e88c326b567b0d7f01d80d9ab7f525e31e25dfb5a2cb2f08f1804e8c76",
+      "record_count": 222,
+      "record_units": "assigned location land screens"
+    },
+    {
+      "path": "ibc-bc-neighbor-screen.json",
+      "bytes": 11305,
+      "text_lines": 335,
+      "sha256": "b1006b93e81bb5d2e591f6bd624a91813fbea112c8c114d42e53fb8f5db9156b",
+      "record_count": 5,
+      "record_units": "selected IBC section screens"
+    },
+    {
+      "path": "followups.json",
+      "bytes": 2370,
+      "text_lines": 69,
+      "sha256": "e48629325aff4732ee3c9e44b9bcffe762b652319a8aeb0d61c5475aa237f9b7",
+      "record_count": 4,
+      "record_units": "bounded issue follow-ups"
+    }
+  ],
+  "totals": {
+    "artifact_file_count": 6,
+    "generated_artifact_bytes": 11819263,
+    "generated_text_lines": 258910,
+    "assessment_location_rows": 222,
+    "bc_group_source_members": 376,
+    "bc_groups": 19,
+    "ecoregion_location_ids": 38,
+    "ecoregion_source_polygons": 41,
+    "gshhg_scope_rows": 222,
+    "ibc_section_rows": 5
+  }
+}

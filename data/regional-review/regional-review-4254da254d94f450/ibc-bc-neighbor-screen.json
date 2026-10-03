@@ -1,0 +1,335 @@
+{
+  "source": "International Boundary Commission US–Canada boundary shapefile v1.3; metadata date 2018-04-20; source line NAD83 EPSG:4269 temporarily projected to Statistics Canada Lambert EPSG:3347; 2024 TIGER county geometries projected to EPSG:3347 for a same-plane distance screen.",
+  "source_archive_bytes": 258764,
+  "source_archive_sha256": "eb327459528b87cbc27e55ccc6bfd6982562c75559823a00b6dc50c04abcaab1",
+  "source_feature_count": 30,
+  "selected_bc_adjacent_sections": [
+    {
+      "section_num": 24,
+      "section_name": "49th Parallel (Columbia Valley to Similkameen River)",
+      "map_scale": "1:62,500",
+      "length_km": 175.405,
+      "samples_at_1km": 177,
+      "near_current_bc_location_boundary_sample_pct": {
+        "25": 36.15819,
+        "100": 84.74576,
+        "250": 94.35028,
+        "500": 100.0,
+        "1000": 100.0
+      },
+      "candidate_current_boundaries": 3,
+      "candidate_current_boundary_ids": [
+        "atlas:district:CAN-5909:BRC",
+        "atlas:district:CAN-5907:BRC",
+        "gb:CAN:ADM3:43193130B1191968375732"
+      ],
+      "current_bc_boundary_gaps_over_1km": [],
+      "near_statistics_canada_2021_cd_boundary_sample_pct": {
+        "25": 29.9435,
+        "100": 87.57062,
+        "250": 96.61017,
+        "500": 100.0,
+        "1000": 100.0
+      },
+      "candidate_census_division_boundaries": 2,
+      "candidate_census_division_ids": [
+        "5907",
+        "5909"
+      ],
+      "census_division_boundary_gaps_over_1km": [],
+      "near_idaho_montana_2024_county_boundary_sample_pct": {
+        "25": 0.0,
+        "100": 0.0,
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0
+      },
+      "candidate_idaho_montana_county_boundaries": 0,
+      "idaho_montana_boundary_gaps_over_1km": [],
+      "candidate_idaho_montana_county_ids": []
+    },
+    {
+      "section_num": 25,
+      "section_name": "49th Parallel (Pacific to Columbia Valley)",
+      "map_scale": "1:62,500",
+      "length_km": 72.63,
+      "samples_at_1km": 74,
+      "near_current_bc_location_boundary_sample_pct": {
+        "25": 70.27027,
+        "100": 72.97297,
+        "250": 72.97297,
+        "500": 74.32432,
+        "1000": 75.67568
+      },
+      "candidate_current_boundaries": 3,
+      "candidate_current_boundary_ids": [
+        "atlas:district:CAN-5909:BRC",
+        "atlas:district:CAN-5915:BRC",
+        "gb:CAN:ADM3:43193130B1191968375732"
+      ],
+      "current_bc_boundary_gaps_over_1km": [
+        {
+          "start_point_epsg3347": [
+            4026262.1,
+            1968065.8
+          ],
+          "end_point_epsg3347": [
+            4011321.0,
+            1975993.2
+          ],
+          "sample_count": 18,
+          "max_sample_gap_m": 5888.53,
+          "nearest_boundary_examples": [
+            "atlas:district:CAN-5915:BRC"
+          ]
+        }
+      ],
+      "near_statistics_canada_2021_cd_boundary_sample_pct": {
+        "25": 70.27027,
+        "100": 72.97297,
+        "250": 72.97297,
+        "500": 74.32432,
+        "1000": 75.67568
+      },
+      "candidate_census_division_boundaries": 2,
+      "candidate_census_division_ids": [
+        "5909",
+        "5915"
+      ],
+      "census_division_boundary_gaps_over_1km": [
+        {
+          "start_point_epsg3347": [
+            4026262.1,
+            1968065.8
+          ],
+          "end_point_epsg3347": [
+            4011321.0,
+            1975993.2
+          ],
+          "sample_count": 18,
+          "max_sample_gap_m": 5893.34,
+          "nearest_boundary_examples": [
+            "5915"
+          ]
+        }
+      ],
+      "near_washington_2024_county_boundary_sample_pct": {
+        "25": 100.0,
+        "100": 100.0,
+        "250": 100.0,
+        "500": 100.0,
+        "1000": 100.0
+      },
+      "candidate_washington_county_boundaries": 2,
+      "washington_county_boundary_gaps_over_1km": [],
+      "candidate_washington_county_ids": [
+        "53073",
+        "53055"
+      ]
+    },
+    {
+      "section_num": 23,
+      "section_name": "49th Parallel (Similkameen River to West Kootenay River)",
+      "map_scale": "1:62,500",
+      "length_km": 234.283,
+      "samples_at_1km": 236,
+      "near_current_bc_location_boundary_sample_pct": {
+        "25": 55.50847,
+        "100": 89.83051,
+        "250": 100.0,
+        "500": 100.0,
+        "1000": 100.0
+      },
+      "candidate_current_boundaries": 6,
+      "candidate_current_boundary_ids": [
+        "atlas:district:CAN-5905:BRC",
+        "atlas:physical:CAN-206:BRC",
+        "atlas:physical:CAN-213:BRC",
+        "atlas:district:CAN-5903:BRC",
+        "atlas:district:CAN-5907:BRC",
+        "atlas:physical:CAN-205:BRC"
+      ],
+      "current_bc_boundary_gaps_over_1km": [],
+      "near_statistics_canada_2021_cd_boundary_sample_pct": {
+        "25": 83.89831,
+        "100": 95.76271,
+        "250": 100.0,
+        "500": 100.0,
+        "1000": 100.0
+      },
+      "candidate_census_division_boundaries": 3,
+      "candidate_census_division_ids": [
+        "5903",
+        "5905",
+        "5907"
+      ],
+      "census_division_boundary_gaps_over_1km": []
+    },
+    {
+      "section_num": 26,
+      "section_name": "Straits of Georgia and Juan De Fuca",
+      "map_scale": "1:200,000",
+      "length_km": 242.103,
+      "samples_at_1km": 244,
+      "near_current_bc_location_boundary_sample_pct": {
+        "25": 0.40984,
+        "100": 0.40984,
+        "250": 0.40984,
+        "500": 0.40984,
+        "1000": 0.81967
+      },
+      "candidate_current_boundaries": 5,
+      "candidate_current_boundary_ids": [
+        "atlas:district:CAN-5917:BRC",
+        "atlas:district:CAN-5919:BRC",
+        "gb:CAN:ADM3:43193130B3701346337320",
+        "atlas:district:CAN-5915:BRC",
+        "atlas:physical:CAN-194:BRC"
+      ],
+      "current_bc_boundary_gaps_over_1km": [
+        {
+          "start_point_epsg3347": [
+            4004296.0,
+            1979741.0
+          ],
+          "end_point_epsg3347": [
+            3873221.3,
+            1987372.8
+          ],
+          "sample_count": 242,
+          "max_sample_gap_m": 15725.83,
+          "nearest_boundary_examples": [
+            "atlas:district:CAN-5915:BRC",
+            "atlas:district:CAN-5917:BRC",
+            "atlas:district:CAN-5919:BRC",
+            "gb:CAN:ADM3:43193130B3701346337320"
+          ]
+        }
+      ],
+      "near_statistics_canada_2021_cd_boundary_sample_pct": {
+        "25": 0.40984,
+        "100": 0.40984,
+        "250": 0.40984,
+        "500": 1.22951,
+        "1000": 2.04918
+      },
+      "candidate_census_division_boundaries": 3,
+      "candidate_census_division_ids": [
+        "5915",
+        "5917",
+        "5919"
+      ],
+      "census_division_boundary_gaps_over_1km": [
+        {
+          "start_point_epsg3347": [
+            4001662.5,
+            1981154.6
+          ],
+          "end_point_epsg3347": [
+            3873221.3,
+            1987372.8
+          ],
+          "sample_count": 239,
+          "max_sample_gap_m": 14397.46,
+          "nearest_boundary_examples": [
+            "5915",
+            "5917",
+            "5919"
+          ]
+        }
+      ]
+    },
+    {
+      "section_num": 22,
+      "section_name": "49th Parallel (Foothills to West Kootenay River)",
+      "map_scale": "1:62,500",
+      "length_km": 227.654,
+      "samples_at_1km": 229,
+      "near_current_bc_location_boundary_sample_pct": {
+        "25": 52.40175,
+        "100": 78.16594,
+        "250": 78.16594,
+        "500": 78.16594,
+        "1000": 78.60262
+      },
+      "candidate_current_boundaries": 4,
+      "candidate_current_boundary_ids": [
+        "atlas:physical:CAN-214:BRC",
+        "atlas:physical:CAN-213:BRC",
+        "atlas:district:CAN-5903:BRC",
+        "atlas:physical:CAN-205:BRC"
+      ],
+      "current_bc_boundary_gaps_over_1km": [
+        {
+          "start_point_epsg3347": [
+            4655046.6,
+            1692668.2
+          ],
+          "end_point_epsg3347": [
+            4609948.6,
+            1708887.1
+          ],
+          "sample_count": 49,
+          "max_sample_gap_m": 48801.63,
+          "nearest_boundary_examples": [
+            "atlas:physical:CAN-214:BRC"
+          ]
+        }
+      ],
+      "near_statistics_canada_2021_cd_boundary_sample_pct": {
+        "25": 46.28821,
+        "100": 78.16594,
+        "250": 78.16594,
+        "500": 78.16594,
+        "1000": 78.60262
+      },
+      "candidate_census_division_boundaries": 2,
+      "candidate_census_division_ids": [
+        "5901",
+        "5903"
+      ],
+      "census_division_boundary_gaps_over_1km": [
+        {
+          "start_point_epsg3347": [
+            4655046.6,
+            1692668.2
+          ],
+          "end_point_epsg3347": [
+            4609948.6,
+            1708887.1
+          ],
+          "sample_count": 49,
+          "max_sample_gap_m": 48798.88,
+          "nearest_boundary_examples": [
+            "5901"
+          ]
+        }
+      ],
+      "near_idaho_montana_2024_county_boundary_sample_pct": {
+        "25": 100.0,
+        "100": 100.0,
+        "250": 100.0,
+        "500": 100.0,
+        "1000": 100.0
+      },
+      "candidate_idaho_montana_county_boundaries": 5,
+      "idaho_montana_boundary_gaps_over_1km": [],
+      "candidate_idaho_montana_county_ids": [
+        "30029",
+        "16017",
+        "30053",
+        "30035",
+        "16021"
+      ]
+    }
+  ],
+  "method": "Select IBC section numbers 22–26 (49th parallel Columbia/Similkameen/West Kootenay/Southeast BC reaches plus Straits of Georgia/Juan de Fuca). At one-kilometre intervals along each line, compute minimum distance to bbox-near feature boundaries from the complete 61 assigned current BC location geometries and 29 official Statistics Canada 2021 Census Divisions. For land reaches 22/24 also screen all Idaho/Montana 2024 TIGER county boundaries; for section 25 screen 2024 Washington TIGER county boundaries. Report sample fractions within 25/100/250/500/1,000 m. This is a proximity screen; sample discretization and line/feature source scales apply.",
+  "interpretation": "The IBC service is a source cross-check only. It expressly limits use to mapping at its stated scales. Proximity does not determine the international boundary, political ownership or whether a difference is due to map scale, water, vintage, projection or current source geometry. Do not modify shared boundaries.",
+  "limitations": [
+    "IBC web metadata carries ©2015 International Boundary Commission, All Rights Reserved, and says the shapefile is for mapping use only and must not define the boundary. No open redistribution license was identified; the archive is therefore not included in this packet.",
+    "The BC comparison uses boundaries of assigned current locations and 2021 Census Divisions, neither a certified province border; the full shared-boundary union is deliberately not certified by this local screen.",
+    "Current administrative and physical unit boundaries within BC are both screened; sample points near an internal edge can also fall near a feature boundary.",
+    "Only sections 22–26 and selected Idaho/Montana/Washington county source edges are screened here; other neighbors require their own coordinated evidence.",
+    "Any potentially material cross-region mismatch requires coordinated follow-up with affected neighbors, release pins and certificate validation."
+  ]
+}

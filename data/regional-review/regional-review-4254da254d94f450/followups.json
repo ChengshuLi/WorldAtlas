@@ -1,0 +1,69 @@
+{
+  "parent_issue": 485,
+  "regional_integration_parent": 484,
+  "items": [
+    {
+      "issue": 606,
+      "title": "Find settlement sources for six British Columbia physical units",
+      "blocking_issue": 485,
+      "affected_ids": [
+        "atlas:physical:CAN-173:BRC",
+        "atlas:physical:CAN-177:BRC",
+        "atlas:physical:CAN-178:BRC",
+        "atlas:physical:CAN-195:BRC",
+        "atlas:physical:CAN-201:BRC",
+        "atlas:physical:CAN-207:BRC"
+      ],
+      "owned_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/"
+    },
+    {
+      "issue": 607,
+      "title": "Reconcile 376 British Columbia 2016 local-unit crosswalk exceptions",
+      "blocking_issue": 485,
+      "source_member_count": 376,
+      "flag_counts": {
+        "zero_name_match": 20,
+        "multiple_name_match": 5,
+        "best_overlap_below_95_percent": 33,
+        "best_overlap_below_50_percent": 3
+      },
+      "owned_path": "data/regional-review/bc-admin-vintage-crosswalk-followup-2026/"
+    },
+    {
+      "issue": 608,
+      "title": "Coordinate British Columbia–Washington 49th-parallel coastal edge review",
+      "blocking_issue": 485,
+      "boundary_source_section": 25,
+      "owned_path": "data/regional-review/bc-washington-coastal-edge-followup-2026/",
+      "interpretation": "Potential coastal water extent representation difference only; not an established boundary error or ownership finding.",
+      "bc_location_ids": [
+        "atlas:district:CAN-5915:BRC",
+        "gb:CAN:ADM3:43193130B1191968375732"
+      ],
+      "washington_source_geoids": [
+        "53073",
+        "53055"
+      ],
+      "note": "Washington GEOIDs are source IDs, not asserted current WorldAtlas location IDs. Resolve opposite-side member IDs and pins during coordinated follow-up."
+    },
+    {
+      "issue": 609,
+      "title": "Audit British Columbia's ten unrepresented administrative remainders",
+      "blocking_issue": 485,
+      "census_division_codes": [
+        "5901",
+        "5933",
+        "5939",
+        "5941",
+        "5949",
+        "5951",
+        "5953",
+        "5955",
+        "5957",
+        "5959"
+      ],
+      "owned_path": "data/regional-review/bc-administrative-remainders-followup-2026/",
+      "interpretation": "AAFC ecoregion coverage is physical only and does not resolve administrative representation."
+    }
+  ]
+}

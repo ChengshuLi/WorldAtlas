@@ -1,0 +1,5519 @@
+{
+  "source": {
+    "title": "GSHHG full-resolution binary, release 2.3.7",
+    "release_date": "2017-06-15",
+    "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+    "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+    "member": "gshhs_f.b",
+    "member_bytes": 95809336,
+    "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+    "license": "LGPLv3 or later; license retained in sources/gshhg-COPYING.LESSERv3.txt",
+    "restore": "Download the pinned archive, verify archive SHA-256, extract gshhs_f.b and verify member SHA-256."
+  },
+  "scope_count": 222,
+  "source_level1_record_count": 179832,
+  "source_total_record_count": 188612,
+  "retained": {
+    "path": "sources/gshhg-scope-land-candidates.bin.gz",
+    "record_count": 276,
+    "uncompressed_bytes": 7731768,
+    "uncompressed_sha256": "537796292cf10c73cd13616293c9e281d9640a13d9d4a1851786add722efbb9a",
+    "compressed_bytes": 5548558,
+    "compressed_sha256": "a7c594d599d7e478089c3bb4cbede114342c1c6517c3c49e065e4a57964e5a5c"
+  },
+  "method": {
+    "selection": "For every pinned assigned location, bbox-index full-resolution level-1 physical land records, calculate each candidate ring vertex centroid, and ray-crossing test that point against all bbox-compatible assigned polygons, respecting current holes. Retain complete matched GSHHG records only.",
+    "interpretation": "Two distinct screens are reported: (1) source land-polygon centroid within a current assigned polygon; (2) each pinned source representative point lies within a GSHHG level-1 land polygon. Either point test is screening only; it does not establish whole-boundary agreement, component containment, island identity, named-land completeness, or settlement coverage. A no-hit does not prove omitted land. Physical source is independent of political ownership and current administrative status."
+  },
+  "per_location": {
+    "atlas:district:CAN-5903:BRC": {
+      "name": "Central Kootenay",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.47072327521794,
+        50.028
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5905:BRC": {
+      "name": "Kootenay Boundary",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.78013598388463,
+        49.42165
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5907:BRC": {
+      "name": "Okanagan-Similkameen",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.19511458863444,
+        49.45325
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5909:BRC": {
+      "name": "Fraser Valley",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.92992857142858,
+        49.580600000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5915:BRC": {
+      "name": "Greater Vancouver",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.67982015604181,
+        49.29
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 6,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5917:BRC": {
+      "name": "Capital",
+      "current_polygon_components": 10,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.97030772857964,
+        48.516
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        50
+      ],
+      "level1_centroid_hits": 9,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5919:BRC": {
+      "name": "Cowichan Valley",
+      "current_polygon_components": 4,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -124.12695182692308,
+        48.834050000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        50
+      ],
+      "level1_centroid_hits": 4,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5921:BRC": {
+      "name": "Nanaimo",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -124.31402676056338,
+        49.2208
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        50
+      ],
+      "level1_centroid_hits": 1,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5923:BRC": {
+      "name": "Alberni-Clayoquot",
+      "current_polygon_components": 8,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -125.22971109168918,
+        49.156800000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        50
+      ],
+      "level1_centroid_hits": 14,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5924:BRC": {
+      "name": "Strathcona",
+      "current_polygon_components": 19,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -125.76078327117729,
+        49.965450000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        50
+      ],
+      "level1_centroid_hits": 41,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5926:BRC": {
+      "name": "Comox Valley",
+      "current_polygon_components": 3,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -125.20963733333333,
+        49.6634
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        50
+      ],
+      "level1_centroid_hits": 2,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5927:BRC": {
+      "name": "Powell River",
+      "current_polygon_components": 5,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -124.41592712948815,
+        50.3095
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 5,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5929:BRC": {
+      "name": "Sunshine Coast",
+      "current_polygon_components": 8,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.72210227570037,
+        49.875
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 6,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5931:BRC": {
+      "name": "Squamish-Lillooet",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.03126435815203,
+        50.35295
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5935:BRC": {
+      "name": "Central Okanagan",
+      "current_polygon_components": 1,
+      "current_interior_rings": 1,
+      "representative_point": [
+        -119.11783417555134,
+        49.949600000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5937:BRC": {
+      "name": "North Okanagan",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.98200268817203,
+        50.364850000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5943:BRC": {
+      "name": "Mount Waddington",
+      "current_polygon_components": 27,
+      "current_interior_rings": 2,
+      "representative_point": [
+        -126.08411941550926,
+        51.29105
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 53,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5945:BRC": {
+      "name": "Central Coast",
+      "current_polygon_components": 31,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -126.21158310011799,
+        52.235150000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 28,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:district:CAN-5947:BRC": {
+      "name": "Skeena-Queen Charlotte",
+      "current_polygon_components": 47,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -129.73402165421197,
+        54.04365
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 76,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-137:BRC": {
+      "name": "Clear Hills Upland",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.93445498288736,
+        57.121105
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-138:BRC": {
+      "name": "Peace Lowland",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.49197164756066,
+        56.23692
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-143:BRC": {
+      "name": "Western Boreal",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.047895,
+        55.09997
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-145:BRC": {
+      "name": "Western Alberta Upland",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.55580211830869,
+        55.129935
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-173:BRC": {
+      "name": "St. Elias Mountains",
+      "current_polygon_components": 7,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -137.6966772329705,
+        59.589960000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-177:BRC": {
+      "name": "Yukon Southern Lakes",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -132.0420209383289,
+        59.457625
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-178:BRC": {
+      "name": "Pelly Mountains",
+      "current_polygon_components": 4,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -130.2576753845454,
+        59.898365
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-179:BRC": {
+      "name": "Yukon-Stikine Highlands",
+      "current_polygon_components": 4,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -132.6602707112651,
+        58.5405
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-180:BRC": {
+      "name": "Boreal Mountains and Plateaus",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -129.04931707959514,
+        58.181045
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-181:BRC": {
+      "name": "Liard Basin",
+      "current_polygon_components": 4,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -127.59784688579143,
+        59.546215000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-182:BRC": {
+      "name": "Hyland Highland",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -125.50522319334956,
+        59.62386
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-183:BRC": {
+      "name": "Northern Canadian Rocky Mountains",
+      "current_polygon_components": 6,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -125.00386468183817,
+        58.057585
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-185:BRC": {
+      "name": "Northern Coastal Mountains",
+      "current_polygon_components": 6,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -131.68095847919656,
+        57.23565
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 1,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-187:BRC": {
+      "name": "Nass Basin",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -128.9809639732149,
+        55.81275634235236
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-190:BRC": {
+      "name": "Nass Ranges",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -128.49017169600057,
+        54.864123856017535
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-191:BRC": {
+      "name": "Coastal Gap",
+      "current_polygon_components": 31,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -128.0885789384596,
+        53.8296
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 28,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-192:BRC": {
+      "name": "Pacific Ranges",
+      "current_polygon_components": 13,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -125.00858869802727,
+        51.406085000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-193:BRC": {
+      "name": "Western Vancouver Island",
+      "current_polygon_components": 10,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -125.56814396173893,
+        48.94825
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        50
+      ],
+      "level1_centroid_hits": 1,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-194:BRC": {
+      "name": "Eastern Vancouver Island",
+      "current_polygon_components": 5,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.61273125,
+        48.3394
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        50
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-195:BRC": {
+      "name": "Georgia-Puget Basin",
+      "current_polygon_components": 3,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -124.92013571428572,
+        50.1456
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        1203
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-196:BRC": {
+      "name": "Lower Mainland",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.20082738853503,
+        49.22415
+      ],
+      "representative_point_in_level1_land": false,
+      "gshhg_level1_containing_source_ids": [],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-198:BRC": {
+      "name": "Skeena Mountains",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -128.05139080390697,
+        56.075985
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-199:BRC": {
+      "name": "Omineca Mountains",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -125.85680369883974,
+        56.17681
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-200:BRC": {
+      "name": "Central Canadian Rocky Mountains",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.19096609221958,
+        55.447625
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-201:BRC": {
+      "name": "Bulkley Ranges",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -127.35584375480704,
+        54.539561632325544
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-202:BRC": {
+      "name": "Fraser Plateau",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -124.65696703724605,
+        52.9923
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-203:BRC": {
+      "name": "Fraser Basin",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.92067490239523,
+        54.12235
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-204:BRC": {
+      "name": "Chilcotin Ranges",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -124.51565967376044,
+        51.58553
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-205:BRC": {
+      "name": "Columbia Mountains and Highlands",
+      "current_polygon_components": 5,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.54813306010004,
+        51.445159902482445
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-206:BRC": {
+      "name": "Western Continental Ranges",
+      "current_polygon_components": 5,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.01900149058967,
+        51.6731
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-207:BRC": {
+      "name": "Eastern Continental Ranges",
+      "current_polygon_components": 110,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.2494075,
+        54.182990000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-208:BRC": {
+      "name": "Interior Transition Ranges",
+      "current_polygon_components": 7,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.58184512225912,
+        50.476659999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-209:BRC": {
+      "name": "Thompson-Okanagan Plateau",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -120.33349656267423,
+        50.845375000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-213:BRC": {
+      "name": "Southern Rocky Mountain Trench",
+      "current_polygon_components": 3,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.34602819018772,
+        51.55367
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-214:BRC": {
+      "name": "Northern Continental Divide",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.81852764615385,
+        49.79428
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-64:BRC": {
+      "name": "Hay River Lowland",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -122.20090723602732,
+        58.753725
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-65:BRC": {
+      "name": "Northern Alberta Uplands",
+      "current_polygon_components": 3,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -121.22551595072775,
+        59.34126
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "atlas:physical:CAN-66:BRC": {
+      "name": "Muskwa Plateau",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.51993654511543,
+        58.517915
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:CAN:ADM3:43193130B1191968375732": {
+      "name": "Abbotsford",
+      "current_polygon_components": 1,
+      "current_interior_rings": 1,
+      "representative_point": [
+        -122.2702288277276,
+        49.078500000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:CAN:ADM3:43193130B33354061711321": {
+      "name": "Kelowna",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.42296918202766,
+        49.89105000000001
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:CAN:ADM3:43193130B3701346337320": {
+      "name": "Victoria",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.35132272727273,
+        48.42235
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        50
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:CAN:ADM3:43193130B82575924575952": {
+      "name": "Vancouver",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -123.10995,
+        49.2458
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B11002176870348": {
+      "name": "Beaverhead",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.0203793993879,
+        45.1533
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B11139746059105": {
+      "name": "Elmore",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -115.53012866702154,
+        43.48085
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B11224737758851": {
+      "name": "Deer Lodge",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.09689232456141,
+        46.0124
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B11713615071349": {
+      "name": "Daggett",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.6976,
+        40.842299999999994
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B12250244819251": {
+      "name": "Adams",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.54347247448914,
+        44.8515
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B12424842950732": {
+      "name": "Liberty",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.01420001440923,
+        48.39305
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B1252961664996": {
+      "name": "Santa Cruz",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.81217355493735,
+        31.56785
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B14195379184896": {
+      "name": "Bannock",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.1642778020079,
+        42.6408
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B1446869819643": {
+      "name": "Stillwater",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.21311869546737,
+        45.6466
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B15127736824866": {
+      "name": "Bear Lake",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.3155,
+        42.298950000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B15270253892889": {
+      "name": "Davis",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.10747103877614,
+        40.98245
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B15703516824983": {
+      "name": "Valley",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -106.53246191100482,
+        48.349599999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B15747846932953": {
+      "name": "Lyon",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.03273781249462,
+        39.0791
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B15863349555914": {
+      "name": "Glacier",
+      "current_polygon_components": 1,
+      "current_interior_rings": 1,
+      "representative_point": [
+        -112.96301108633094,
+        48.6632
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B16116939849770": {
+      "name": "Fallon",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -104.46548576885002,
+        46.29675
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B17427488996260": {
+      "name": "Benewah",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.68465121212122,
+        47.194900000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B1812504540998": {
+      "name": "Madison",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.6899973586236,
+        43.78215
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B18276050714213": {
+      "name": "Power",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.81819300920598,
+        42.7149
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B18602479279473": {
+      "name": "Kane",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.88103711815631,
+        37.2703
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B18827245636092": {
+      "name": "Iron",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.31386563706563,
+        37.831199999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B18830256049393": {
+      "name": "Wasatch",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.13249792554063,
+        40.2935
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B18852235556590": {
+      "name": "Clark",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -115.24882406209574,
+        35.9202
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B19250472063480": {
+      "name": "Garfield",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.49839864864865,
+        37.8444
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B19841424065600": {
+      "name": "Fremont",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.42031265969163,
+        44.35915
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B19966710463863": {
+      "name": "Sanders",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -115.15682705597789,
+        47.6749
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B20022014337475": {
+      "name": "Piute",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.0919255116959,
+        38.32235
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B21224968054830": {
+      "name": "Cache",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.73301975449175,
+        41.68835
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B21939715817701": {
+      "name": "Minidoka",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.5639752923459,
+        43.0248
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B22879230653922": {
+      "name": "Lewis",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.36294979654733,
+        46.23115
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B25575586370541": {
+      "name": "Broadwater",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.45410985687904,
+        46.290549999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B25623901104866": {
+      "name": "Washington",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.85994429611651,
+        44.5075
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B26002580229088": {
+      "name": "Bonner",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.54314185974444,
+        48.293499999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B26236891190043": {
+      "name": "Bingham",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.29803028836974,
+        43.196349999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B26439828706648": {
+      "name": "Tooele",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.11165461050895,
+        40.482150000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B26965085925840": {
+      "name": "Salt Lake",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.90097355324073,
+        40.6828
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B27264178568267": {
+      "name": "Park",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.50666805737765,
+        45.63015
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B27267193198482": {
+      "name": "Morgan",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.6523886598527,
+        41.07855
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B27983791088415": {
+      "name": "Clark",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.33446604861089,
+        44.2756
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B29288838375907": {
+      "name": "Powell",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.04935013782413,
+        47.0056
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B29603956786477": {
+      "name": "Prairie",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -105.45112528072238,
+        46.8612
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B30797583930625": {
+      "name": "Juab",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.88152492290297,
+        39.624300000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B31038299720868": {
+      "name": "Graham",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.93183461481482,
+        32.96085
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B31857340123738": {
+      "name": "Teton",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.22324489013266,
+        43.7524
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B32656881789588": {
+      "name": "White Pine",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.97782842317778,
+        39.309650000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B34520294903194": {
+      "name": "Sweet Grass",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.89144765777789,
+        45.72655
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B35021459079911": {
+      "name": "Clearwater",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -115.69750353737606,
+        46.58085
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B36690361542904": {
+      "name": "Blaine",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.87833464309276,
+        43.30495
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B36780146179485": {
+      "name": "Mohave",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.99697592727273,
+        35.5942
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B36944168134022": {
+      "name": "Yuma",
+      "current_polygon_components": 2,
+      "current_interior_rings": 3,
+      "representative_point": [
+        -113.94589742277242,
+        32.7513
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B38273154408522": {
+      "name": "Gallatin",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.20562114341723,
+        45.26345
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B38602256292378": {
+      "name": "Meagher",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.82071827161144,
+        46.6382
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B39165499279829": {
+      "name": "Apache",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.44502156495057,
+        35.34415
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B39840445321611": {
+      "name": "Box Elder",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.97478134577877,
+        41.5142
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B41142242539063": {
+      "name": "Yavapai",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.4428,
+        34.692350000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B41419597560614": {
+      "name": "Millard",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.03184755212212,
+        39.180049999999994
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B4145431150884": {
+      "name": "Summit",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.756525,
+        40.907349999999994
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B41781381522782": {
+      "name": "La Paz",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.9322281642007,
+        33.64895
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B41893825317472": {
+      "name": "Big Horn",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -107.39967086792453,
+        45.5957
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B41946106713870": {
+      "name": "Maricopa",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.76847222523963,
+        33.271699999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B42061541752": {
+      "name": "Petroleum",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -108.33396023232268,
+        47.17555
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B42064959468604": {
+      "name": "Twin Falls",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.55342735191638,
+        42.4561
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B42472456256574": {
+      "name": "Elko",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -115.53038969353207,
+        41.10565
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B42659235998259": {
+      "name": "Douglas",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.5939992334576,
+        38.837950000000006
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B43012688186735": {
+      "name": "Storey",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.53704313806725,
+        39.426
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B43348892660501": {
+      "name": "Rosebud",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -106.56536937751004,
+        46.0021
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B43450908870272": {
+      "name": "Chouteau",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.47372300242131,
+        47.8094
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B43555697098429": {
+      "name": "Carbon",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.14385600868727,
+        45.317350000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B43875780318183": {
+      "name": "Richland",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -104.63872116294067,
+        47.74705
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B45551485441937": {
+      "name": "Caribou",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.57803443268206,
+        42.7203
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B45878756747567": {
+      "name": "Cassia",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.64399861910303,
+        42.3738
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B46649756704287": {
+      "name": "Madison",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.9167552826533,
+        45.2192
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B46966183656729": {
+      "name": "Sevier",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.76358269898697,
+        38.80075
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B47296915924454": {
+      "name": "Roosevelt",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -104.9254220967983,
+        48.30415
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B47513182951794": {
+      "name": "Lincoln",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -115.44910763658909,
+        48.382149999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B48025337420710": {
+      "name": "Emery",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.70793132329271,
+        39.10845
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B48637166565981": {
+      "name": "Shoshone",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.00939162468514,
+        47.4932
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B48895226682919": {
+      "name": "San Juan",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.74563964041096,
+        37.7422
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B49252617334437": {
+      "name": "Toole",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.73172515822785,
+        48.74025
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B49385096596015": {
+      "name": "Washington",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.47650017311656,
+        37.3797
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B49943042609192": {
+      "name": "Lewis and Clark",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.53404801788389,
+        47.18745
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B50031109105153": {
+      "name": "Yellowstone",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -108.3608304558011,
+        45.9726
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B50493835773618": {
+      "name": "Esmeralda",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.68281447516786,
+        37.7315
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B51544085831783": {
+      "name": "Granite",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.41791356984362,
+        46.3821
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B51946082922019": {
+      "name": "Gem",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.28505630057803,
+        44.1596
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B52290427367447": {
+      "name": "Pondera",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.44842947717757,
+        48.227000000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B5287094029931": {
+      "name": "Gooding",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.84053260742516,
+        43.05795
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B53339114724210": {
+      "name": "Wheatland",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.8425,
+        46.355199999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B53425480585929": {
+      "name": "Wayne",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.90243552631578,
+        38.3331
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B53719477803884": {
+      "name": "Camas",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.83161821581197,
+        43.51505
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B54665003202260": {
+      "name": "Wibaux",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -104.18641810233993,
+        47.0239
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B55148108607943": {
+      "name": "Rich",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.24065545994517,
+        41.5549
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B55768154384777": {
+      "name": "Latah",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.68462025735076,
+        46.7822
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B55916702614630": {
+      "name": "Bonneville",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.43359069579289,
+        43.34085
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B56021233404886": {
+      "name": "Phillips",
+      "current_polygon_components": 2,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -107.89038962847411,
+        48.2622
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B56251326205746": {
+      "name": "Carson City",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.71901840618496,
+        39.1684
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B56799864768265": {
+      "name": "Franklin",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.84531964285713,
+        42.217650000000006
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B58095875078867": {
+      "name": "Sanpete",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.52407110255231,
+        39.42145
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B59144379329790": {
+      "name": "Payette",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.83600405435747,
+        43.97345
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B59835765201316": {
+      "name": "Nye",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.52993699858119,
+        37.685249999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B59970675911071": {
+      "name": "Judith Basin",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.20060078529514,
+        47.0533
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B60720449434495": {
+      "name": "Grand",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.57439932,
+        38.99315
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B60949778824186": {
+      "name": "Carter",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -104.5129881919595,
+        45.6452
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B61185328632609": {
+      "name": "Oneida",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.54535765739945,
+        42.2577
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B62960071172507": {
+      "name": "Coconino",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.04239945454546,
+        35.667
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B63721358154647": {
+      "name": "Boundary",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.41750141454966,
+        48.76045
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B63965219739114": {
+      "name": "Kootenai",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.685516641482,
+        47.5878
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B64046632400523": {
+      "name": "Hill",
+      "current_polygon_components": 1,
+      "current_interior_rings": 1,
+      "representative_point": [
+        -110.12367221101181,
+        48.5459
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B65093392652388": {
+      "name": "Churchill",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.2907163451435,
+        39.54105
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B6606867099089": {
+      "name": "Custer",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -105.53020201414958,
+        46.397800000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B66213372759254": {
+      "name": "Weber",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.89091087793608,
+        41.2594
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B67078871310068": {
+      "name": "Lake",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.13840963302752,
+        47.58785
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B67185663060942": {
+      "name": "Cascade",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.41689808227653,
+        47.278499999999994
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B68106023304416": {
+      "name": "Canyon",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.65100484335586,
+        43.58475
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B68187533986478": {
+      "name": "Valley",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -115.66159848572755,
+        44.676500000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B69733440300774": {
+      "name": "Garfield",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -107.10412935031482,
+        47.42645
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B70404616629073": {
+      "name": "Ada",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.22451032058703,
+        43.5226
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B70562342190922": {
+      "name": "Utah",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.6927318627451,
+        40.1777
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B70589658228764": {
+      "name": "Duchesne",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.43656253993119,
+        40.371849999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B70783042425825": {
+      "name": "Lincoln",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.9721831065394,
+        37.778099999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B72214422766": {
+      "name": "Mineral",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.38160034843084,
+        38.61945
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B72402136661240": {
+      "name": "Pima",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.77990749807248,
+        31.9693
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B73042281108203": {
+      "name": "McCone",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -105.81221142057177,
+        47.66
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B74460459813607": {
+      "name": "Custer",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.29232777113228,
+        44.22345
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B75729045949325": {
+      "name": "Carbon",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.60179351604278,
+        39.63575
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B77016721752679": {
+      "name": "Sheridan",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -104.5432200902626,
+        48.7803
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B77549973511712": {
+      "name": "Jerome",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.27424171649649,
+        42.70715
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B78038885777810": {
+      "name": "Missoula",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.94483967328728,
+        47.10785
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B78350254169846": {
+      "name": "Fergus",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.35968385717999,
+        47.2495
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B78609580638287": {
+      "name": "Musselshell",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -108.32156648505412,
+        46.423500000000004
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B79770151103522": {
+      "name": "Teton",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.16438434797647,
+        47.793
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B80872944248588": {
+      "name": "Lincoln",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.15444991431019,
+        43.02465
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B81681385267576": {
+      "name": "Mineral",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.86451363636363,
+        47.098
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B82502698650850": {
+      "name": "Cochise",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.74871043890815,
+        32.06045
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B83526967033235": {
+      "name": "Navajo",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.297225,
+        35.34415
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B84985058746573": {
+      "name": "Idaho",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -115.56272893092384,
+        45.8881
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B85659466987849": {
+      "name": "Flathead",
+      "current_polygon_components": 1,
+      "current_interior_rings": 2,
+      "representative_point": [
+        -114.09215336787565,
+        48.299
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B85740056665461": {
+      "name": "Lemhi",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.08975834408149,
+        44.965999999999994
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B8575592965012": {
+      "name": "Ravalli",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -114.13676828304598,
+        46.0564
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B86233996711525": {
+      "name": "Treasure",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -107.23882499999999,
+        46.1643
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B8686536787653": {
+      "name": "Eureka",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.21744328902031,
+        40.0868
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B8727370524595": {
+      "name": "Jefferson",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.15247742382272,
+        46.15115
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B87448243037078": {
+      "name": "Blaine",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -108.96509738243122,
+        48.3441
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B8747070342257": {
+      "name": "Beaver",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.21077763437057,
+        38.36835
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B90728161292494": {
+      "name": "Washoe",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -119.65471592371424,
+        40.6957
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B9303056648092": {
+      "name": "Boise",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -115.77319339707472,
+        43.9714
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B93152505552387": {
+      "name": "Daniels",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -105.52988325652842,
+        48.737
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B93637300431775": {
+      "name": "Golden Valley",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.13246838560886,
+        46.408150000000006
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B93647130667122": {
+      "name": "Greenlee",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.2714753896638,
+        33.14365
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B93932790335790": {
+      "name": "Uintah",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -109.5138773892489,
+        40.01445
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B94206551608777": {
+      "name": "Pershing",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.38100220823739,
+        40.2594
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B94431065830761": {
+      "name": "Jefferson",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.33653279816514,
+        43.8623
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B94471153891164": {
+      "name": "Nez Perce",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.82186115384616,
+        46.24265
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B95126953057941": {
+      "name": "Humboldt",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -118.16174191358635,
+        41.324799999999996
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B95485896454849": {
+      "name": "Dawson",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -104.92161491089394,
+        47.33215
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B9619411594727": {
+      "name": "Silver Bow",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -112.6976402164608,
+        45.8968
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B97666997911945": {
+      "name": "Butte",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -113.08197382454128,
+        43.7592
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B98901658080705": {
+      "name": "Lander",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -117.0579782735871,
+        40.036649999999995
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B98957194819537": {
+      "name": "Owyhee",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -116.24025366150035,
+        42.826449999999994
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B99315051552268": {
+      "name": "Gila",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -110.674725,
+        33.72985
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B99413017913661": {
+      "name": "Powder River",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -105.6092664946786,
+        45.5544
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "gb:USA:ADM2:52423323B99674467123190": {
+      "name": "Pinal",
+      "current_polygon_components": 1,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -111.49176491781336,
+        32.98455
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 0,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    }
+  },
+  "matched_source_records": [
+    {
+      "gshhg_id": 2,
+      "land_polygon_centroid_hits": [],
+      "assigned_location_representative_points_inside_land_polygon": [
+        "gb:CAN:ADM3:43193130B33354061711321",
+        "gb:CAN:ADM3:43193130B1191968375732",
+        "gb:CAN:ADM3:43193130B82575924575952",
+        "gb:USA:ADM2:52423323B19966710463863",
+        "gb:USA:ADM2:52423323B36780146179485",
+        "gb:USA:ADM2:52423323B80872944248588",
+        "gb:USA:ADM2:52423323B20022014337475",
+        "gb:USA:ADM2:52423323B27264178568267",
+        "gb:USA:ADM2:52423323B63721358154647",
+        "gb:USA:ADM2:52423323B41781381522782",
+        "gb:USA:ADM2:52423323B43012688186735",
+        "gb:USA:ADM2:52423323B85659466987849",
+        "gb:USA:ADM2:52423323B21939715817701",
+        "gb:USA:ADM2:52423323B25575586370541",
+        "gb:USA:ADM2:52423323B48895226682919",
+        "gb:USA:ADM2:52423323B62960071172507",
+        "gb:USA:ADM2:52423323B74460459813607",
+        "gb:USA:ADM2:52423323B68187533986478",
+        "gb:USA:ADM2:52423323B85740056665461",
+        "gb:USA:ADM2:52423323B49943042609192",
+        "gb:USA:ADM2:52423323B11002176870348",
+        "gb:USA:ADM2:52423323B4145431150884",
+        "gb:USA:ADM2:52423323B99413017913661",
+        "gb:USA:ADM2:52423323B69733440300774",
+        "gb:USA:ADM2:52423323B8575592965012",
+        "gb:USA:ADM2:52423323B55768154384777",
+        "gb:USA:ADM2:52423323B99315051552268",
+        "gb:USA:ADM2:52423323B27983791088415",
+        "gb:USA:ADM2:52423323B72402136661240",
+        "gb:USA:ADM2:52423323B26002580229088",
+        "gb:USA:ADM2:52423323B42061541752",
+        "gb:USA:ADM2:52423323B15703516824983",
+        "gb:USA:ADM2:52423323B18827245636092",
+        "gb:USA:ADM2:52423323B26236891190043",
+        "gb:USA:ADM2:52423323B70589658228764",
+        "gb:USA:ADM2:52423323B36690361542904",
+        "gb:USA:ADM2:52423323B86233996711525",
+        "gb:USA:ADM2:52423323B15863349555914",
+        "gb:USA:ADM2:52423323B42659235998259",
+        "gb:USA:ADM2:52423323B8686536787653",
+        "gb:USA:ADM2:52423323B49385096596015",
+        "gb:USA:ADM2:52423323B97666997911945",
+        "gb:USA:ADM2:52423323B68106023304416",
+        "gb:USA:ADM2:52423323B46966183656729",
+        "gb:USA:ADM2:52423323B93647130667122",
+        "gb:USA:ADM2:52423323B83526967033235",
+        "gb:USA:ADM2:52423323B29603956786477",
+        "gb:USA:ADM2:52423323B49252617334437",
+        "gb:USA:ADM2:52423323B16116939849770",
+        "gb:USA:ADM2:52423323B15747846932953",
+        "gb:USA:ADM2:52423323B41142242539063",
+        "gb:USA:ADM2:52423323B18852235556590",
+        "gb:USA:ADM2:52423323B90728161292494",
+        "gb:USA:ADM2:52423323B35021459079911",
+        "gb:USA:ADM2:52423323B31857340123738",
+        "gb:USA:ADM2:52423323B58095875078867",
+        "gb:USA:ADM2:52423323B84985058746573",
+        "gb:USA:ADM2:52423323B11224737758851",
+        "gb:USA:ADM2:52423323B51544085831783",
+        "gb:USA:ADM2:52423323B55148108607943",
+        "gb:USA:ADM2:52423323B8747070342257",
+        "gb:USA:ADM2:52423323B61185328632609",
+        "gb:USA:ADM2:52423323B1446869819643",
+        "gb:USA:ADM2:52423323B93932790335790",
+        "gb:USA:ADM2:52423323B94431065830761",
+        "gb:USA:ADM2:52423323B43348892660501",
+        "gb:USA:ADM2:52423323B59970675911071",
+        "gb:USA:ADM2:52423323B36944168134022",
+        "gb:USA:ADM2:52423323B5287094029931",
+        "gb:USA:ADM2:52423323B38602256292378",
+        "gb:USA:ADM2:52423323B18276050714213",
+        "gb:USA:ADM2:52423323B56799864768265",
+        "gb:USA:ADM2:52423323B11713615071349",
+        "gb:USA:ADM2:52423323B99674467123190",
+        "gb:USA:ADM2:52423323B47296915924454",
+        "gb:USA:ADM2:52423323B70562342190922",
+        "gb:USA:ADM2:52423323B78350254169846",
+        "gb:USA:ADM2:52423323B75729045949325",
+        "gb:USA:ADM2:52423323B9619411594727",
+        "gb:USA:ADM2:52423323B77549973511712",
+        "gb:USA:ADM2:52423323B38273154408522",
+        "gb:USA:ADM2:52423323B70404616629073",
+        "gb:USA:ADM2:52423323B42064959468604",
+        "gb:USA:ADM2:52423323B18602479279473",
+        "gb:USA:ADM2:52423323B59144379329790",
+        "gb:USA:ADM2:52423323B14195379184896",
+        "gb:USA:ADM2:52423323B41419597560614",
+        "gb:USA:ADM2:52423323B46649756704287",
+        "gb:USA:ADM2:52423323B67185663060942",
+        "gb:USA:ADM2:52423323B63965219739114",
+        "gb:USA:ADM2:52423323B53719477803884",
+        "gb:USA:ADM2:52423323B52290427367447",
+        "gb:USA:ADM2:52423323B65093392652388",
+        "gb:USA:ADM2:52423323B60949778824186",
+        "gb:USA:ADM2:52423323B12250244819251",
+        "gb:USA:ADM2:52423323B78609580638287",
+        "gb:USA:ADM2:52423323B8727370524595",
+        "gb:USA:ADM2:52423323B29288838375907",
+        "gb:USA:ADM2:52423323B67078871310068",
+        "gb:USA:ADM2:52423323B94471153891164",
+        "gb:USA:ADM2:52423323B87448243037078",
+        "gb:USA:ADM2:52423323B6606867099089",
+        "gb:USA:ADM2:52423323B95126953057941",
+        "gb:USA:ADM2:52423323B79770151103522",
+        "gb:USA:ADM2:52423323B55916702614630",
+        "gb:USA:ADM2:52423323B53339114724210",
+        "gb:USA:ADM2:52423323B19841424065600",
+        "gb:USA:ADM2:52423323B54665003202260",
+        "gb:USA:ADM2:52423323B70783042425825",
+        "gb:USA:ADM2:52423323B64046632400523",
+        "gb:USA:ADM2:52423323B15127736824866",
+        "gb:USA:ADM2:52423323B39165499279829",
+        "gb:USA:ADM2:52423323B22879230653922",
+        "gb:USA:ADM2:52423323B34520294903194",
+        "gb:USA:ADM2:52423323B72214422766",
+        "gb:USA:ADM2:52423323B1252961664996",
+        "gb:USA:ADM2:52423323B15270253892889",
+        "gb:USA:ADM2:52423323B78038885777810",
+        "gb:USA:ADM2:52423323B43875780318183",
+        "gb:USA:ADM2:52423323B45878756747567",
+        "gb:USA:ADM2:52423323B93152505552387",
+        "gb:USA:ADM2:52423323B73042281108203",
+        "gb:USA:ADM2:52423323B19250472063480",
+        "gb:USA:ADM2:52423323B77016721752679",
+        "gb:USA:ADM2:52423323B41893825317472",
+        "gb:USA:ADM2:52423323B17427488996260",
+        "gb:USA:ADM2:52423323B9303056648092",
+        "gb:USA:ADM2:52423323B21224968054830",
+        "gb:USA:ADM2:52423323B93637300431775",
+        "gb:USA:ADM2:52423323B12424842950732",
+        "gb:USA:ADM2:52423323B95485896454849",
+        "gb:USA:ADM2:52423323B82502698650850",
+        "gb:USA:ADM2:52423323B60720449434495",
+        "gb:USA:ADM2:52423323B98901658080705",
+        "gb:USA:ADM2:52423323B26965085925840",
+        "gb:USA:ADM2:52423323B11139746059105",
+        "gb:USA:ADM2:52423323B26439828706648",
+        "gb:USA:ADM2:52423323B81681385267576",
+        "gb:USA:ADM2:52423323B53425480585929",
+        "gb:USA:ADM2:52423323B30797583930625",
+        "gb:USA:ADM2:52423323B56021233404886",
+        "gb:USA:ADM2:52423323B27267193198482",
+        "gb:USA:ADM2:52423323B39840445321611",
+        "gb:USA:ADM2:52423323B98957194819537",
+        "gb:USA:ADM2:52423323B94206551608777",
+        "gb:USA:ADM2:52423323B43555697098429",
+        "gb:USA:ADM2:52423323B59835765201316",
+        "gb:USA:ADM2:52423323B42472456256574",
+        "gb:USA:ADM2:52423323B48637166565981",
+        "gb:USA:ADM2:52423323B43450908870272",
+        "gb:USA:ADM2:52423323B56251326205746",
+        "gb:USA:ADM2:52423323B48025337420710",
+        "gb:USA:ADM2:52423323B45551485441937",
+        "gb:USA:ADM2:52423323B1812504540998",
+        "gb:USA:ADM2:52423323B25623901104866",
+        "gb:USA:ADM2:52423323B41946106713870",
+        "gb:USA:ADM2:52423323B50493835773618",
+        "gb:USA:ADM2:52423323B32656881789588",
+        "gb:USA:ADM2:52423323B66213372759254",
+        "gb:USA:ADM2:52423323B18830256049393",
+        "gb:USA:ADM2:52423323B51946082922019",
+        "gb:USA:ADM2:52423323B50031109105153",
+        "gb:USA:ADM2:52423323B47513182951794",
+        "gb:USA:ADM2:52423323B31038299720868",
+        "atlas:district:CAN-5907:BRC",
+        "atlas:district:CAN-5915:BRC",
+        "atlas:district:CAN-5927:BRC",
+        "atlas:district:CAN-5905:BRC",
+        "atlas:district:CAN-5903:BRC",
+        "atlas:district:CAN-5929:BRC",
+        "atlas:district:CAN-5931:BRC",
+        "atlas:district:CAN-5943:BRC",
+        "atlas:district:CAN-5937:BRC",
+        "atlas:district:CAN-5945:BRC",
+        "atlas:district:CAN-5947:BRC",
+        "atlas:district:CAN-5909:BRC",
+        "atlas:district:CAN-5935:BRC",
+        "atlas:physical:CAN-64:BRC",
+        "atlas:physical:CAN-65:BRC",
+        "atlas:physical:CAN-66:BRC",
+        "atlas:physical:CAN-137:BRC",
+        "atlas:physical:CAN-138:BRC",
+        "atlas:physical:CAN-143:BRC",
+        "atlas:physical:CAN-145:BRC",
+        "atlas:physical:CAN-173:BRC",
+        "atlas:physical:CAN-177:BRC",
+        "atlas:physical:CAN-178:BRC",
+        "atlas:physical:CAN-179:BRC",
+        "atlas:physical:CAN-180:BRC",
+        "atlas:physical:CAN-181:BRC",
+        "atlas:physical:CAN-182:BRC",
+        "atlas:physical:CAN-183:BRC",
+        "atlas:physical:CAN-185:BRC",
+        "atlas:physical:CAN-187:BRC",
+        "atlas:physical:CAN-190:BRC",
+        "atlas:physical:CAN-191:BRC",
+        "atlas:physical:CAN-192:BRC",
+        "atlas:physical:CAN-198:BRC",
+        "atlas:physical:CAN-199:BRC",
+        "atlas:physical:CAN-200:BRC",
+        "atlas:physical:CAN-201:BRC",
+        "atlas:physical:CAN-202:BRC",
+        "atlas:physical:CAN-203:BRC",
+        "atlas:physical:CAN-204:BRC",
+        "atlas:physical:CAN-205:BRC",
+        "atlas:physical:CAN-206:BRC",
+        "atlas:physical:CAN-207:BRC",
+        "atlas:physical:CAN-208:BRC",
+        "atlas:physical:CAN-209:BRC",
+        "atlas:physical:CAN-213:BRC",
+        "atlas:physical:CAN-214:BRC"
+      ]
+    },
+    {
+      "gshhg_id": 50,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": [
+        "gb:CAN:ADM3:43193130B3701346337320",
+        "atlas:district:CAN-5923:BRC",
+        "atlas:district:CAN-5926:BRC",
+        "atlas:district:CAN-5917:BRC",
+        "atlas:district:CAN-5919:BRC",
+        "atlas:district:CAN-5924:BRC",
+        "atlas:district:CAN-5921:BRC",
+        "atlas:physical:CAN-193:BRC",
+        "atlas:physical:CAN-194:BRC"
+      ]
+    },
+    {
+      "gshhg_id": 86,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 179,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 252,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 308,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 361,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 492,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 559,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 594,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 612,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 634,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 692,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 739,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5927:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 773,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 775,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 788,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 851,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 881,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-185:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 921,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 986,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5917:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1014,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1020,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1021,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1049,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1080,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1085,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1117,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1134,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1138,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1158,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1165,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1203,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": [
+        "atlas:physical:CAN-195:BRC"
+      ]
+    },
+    {
+      "gshhg_id": 1205,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1237,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1268,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1321,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1423,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1440,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1465,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5929:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1522,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1538,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1552,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1624,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1669,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1692,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1744,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1805,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1849,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5929:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1887,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5927:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1903,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1943,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1992,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 1997,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5917:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2057,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2059,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2090,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2100,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2152,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5921:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2159,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5926:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2171,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2197,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5915:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2226,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2227,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2242,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2350,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2355,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2356,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2362,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2375,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2582,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2593,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2635,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2689,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2718,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2768,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2789,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2799,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5917:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2868,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 2965,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5926:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3026,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3065,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5917:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3284,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3301,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5919:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3340,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5917:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3365,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3450,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3451,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3774,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3819,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3826,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 3971,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4002,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4069,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4088,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4178,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4190,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4210,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4380,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4551,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4638,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4640,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4642,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4678,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4691,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4698,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4708,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4767,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4783,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 4921,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5046,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5079,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5091,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5133,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5252,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5919:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5412,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5927:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5419,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5472,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5568,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5917:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5640,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5917:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5661,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5699,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5828,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5847,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5919:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 5926,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 6026,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 6060,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5929:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 6082,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5927:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 6273,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5917:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 6349,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 6544,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5929:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 6612,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 6705,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 6899,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7019,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7130,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7205,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5929:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7307,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7367,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7423,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7463,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7473,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7478,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5917:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7555,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7729,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7777,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7812,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7910,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 7927,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5915:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 8134,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 8182,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 8240,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 8446,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 8452,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 8986,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 9228,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 9721,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 16451,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5915:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 25860,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-193:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 26303,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 27409,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 27849,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5915:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 28382,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 30164,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 32503,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 34965,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 35126,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 36534,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 37669,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 39375,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 41723,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 42997,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 46399,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 47052,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 47365,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 49580,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 50607,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 51688,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 51696,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 52447,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 53726,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 56148,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 58416,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5915:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 59313,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 59499,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5915:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 60610,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 60901,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 63073,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 63386,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 65897,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 68984,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 69064,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 69213,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 71480,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 71816,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 72109,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 72721,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 74234,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 74979,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 77005,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 77320,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 77446,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 77547,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 77779,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 79079,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 79904,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 83497,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 83728,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 83822,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5927:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 84131,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 84890,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 85175,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 85491,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 89445,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 89865,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 90037,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 92959,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 93537,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 97187,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 97276,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 97442,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 97578,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 98238,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 99106,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 100937,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 101073,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 101182,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 101328,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 102027,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 104761,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 106175,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 106213,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 107690,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 108351,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 108452,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 111501,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 114415,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 114612,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 116514,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 117010,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5919:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 117420,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 119648,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 121553,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 127765,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 128226,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5929:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 129518,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 130520,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5945:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 131392,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 131638,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 132896,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 134093,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 134593,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 135081,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 135800,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 144691,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 144819,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 145761,
+      "land_polygon_centroid_hits": [
+        "atlas:physical:CAN-191:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 145932,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 145988,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 147399,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 148068,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 152916,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 156428,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 158483,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 159496,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 159823,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 161019,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 166437,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 168591,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 168757,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 168790,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 169012,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 169093,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5947:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 177776,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5923:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 178318,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5924:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    },
+    {
+      "gshhg_id": 178347,
+      "land_polygon_centroid_hits": [
+        "atlas:district:CAN-5943:BRC"
+      ],
+      "assigned_location_representative_points_inside_land_polygon": []
+    }
+  ],
+  "limitations": [
+    "2017 global shoreline compilation is not an authoritative national island gazetteer, administrative boundary, hydrographic inventory, or settlement source.",
+    "The centroid screen leaves coastlines, tiny islands, enclosed waters and geometry intersections unverified. A complete no-hit location can be an inland feature far from any separately centroided island polygon.",
+    "A candidate matched to an assigned polygon is not evidence of legal ownership or the correctness of its parent chain."
+  ]
+}
