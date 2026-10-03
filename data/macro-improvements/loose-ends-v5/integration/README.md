@@ -37,6 +37,8 @@ node --max-old-space-size=4096 data/macro-improvements/loose-ends-v5/integration
 
 Composition and verification are separate so callers can inspect exact scope first. Verification requires a fresh `replacement-migration` and `creation-migration` directory; use a fresh output directory to retry after a failed verification. Never overwrite a predecessor stage.
 
+Edited parts preserve untouched feature JSON text byte-for-byte, including number spellings such as `30.0`; only reviewed replacement features are serialized. This avoids falsely reporting numeric spelling changes as footprint changes in Python preparation. For an already composed temporary stage produced before this preservation fix, the coordinator can run `node integration/compose.mjs --repair-numeric --root <checkout> --stage <temporary-stage>` using the full repository-relative script path. It validates baseline/input/staged hashes and creation link destinations, proves every edited part's canonical footprint and feature meaning unchanged before writing, updates composition part hashes, and records `numeric-spelling-restoration.json`. It never changes the live baseline or source scope; do not run concurrently with a stage reader without coordinator approval.
+
 ## Outputs and independent gates
 
 - `baseline/`, `replacement/`, `creation/`: sequential current v4, combined retained-ID correction, and pure-new-land geography.

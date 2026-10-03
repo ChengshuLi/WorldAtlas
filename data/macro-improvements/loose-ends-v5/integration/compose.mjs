@@ -7,6 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {footprintHash} from '../../../../scripts/check-prepared.mjs';
 import {validateGeometryMigrations} from '../../../../scripts/prepare-geographic-release.mjs';
+import {replaceFeatureSpans} from './raw-feature-spans.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const read = file => JSON.parse(file.endsWith('.gz') ? gunzipSync(fs.readFileSync(file)) : fs.readFileSync(file));
@@ -66,7 +67,11 @@ export function compose({root,output,replacementPatches,replacementManifests,cre
   });
   fs.symlinkSync(source,safe(path.join(output,'baseline'),part));
   const target=safe(path.join(output,'replacement'),part);
-  if(changed) save(target,{type:'FeatureCollection',features:after});else fs.symlinkSync(source,target);
+  if(changed) {
+   const rewritten=replaceFeatureSpans(fs.readFileSync(source,'utf8'),updates);
+   if(rewritten.changed_ids.length!==rows.filter(f=>updates.has(f.id)).length) throw Error('Raw replacement scope mismatch');
+   fs.writeFileSync(target,rewritten.raw);
+  }else fs.symlinkSync(source,target);
   fs.symlinkSync(target,safe(path.join(output,'creation'),part));
   parts.push({path:part,before_sha256:hash(source),after_sha256:hash(target),linked_unchanged:!changed});
  }
@@ -161,8 +166,32 @@ export function verify({root,stage}) {
  save(path.join(stage,'integration-validation.json'),result);return result;
 }
 
+export function repairNumeric({root,stage}) {
+ root=path.resolve(root);stage=path.resolve(stage);
+ if(stage===root||stage.startsWith(root+path.sep)||root.startsWith(stage+path.sep))throw Error('Repair must target an independent stage');
+ const composition=read(path.join(stage,'composition.json')),updates=new Map(),changes=[];
+ for(const input of composition.replacement_inputs){
+  if(hash(input.path)!==input.sha256||hash(input.manifest_path)!==input.manifest_sha256)throw Error('Pinned replacement input changed');
+  for(const feature of read(input.path).existing_location_updates){if(updates.has(feature.id))throw Error('Duplicate replacement scope');updates.set(feature.id,feature);}
+ }
+ for(const row of composition.source_part_preservation){
+  if(row.linked_unchanged)continue;
+  const baseline=safe(path.join(root,'data'),row.path),target=safe(path.join(stage,'replacement'),row.path),creation=safe(path.join(stage,'creation'),row.path);
+  if(hash(baseline)!==row.before_sha256||hash(target)!==row.after_sha256||fs.lstatSync(target).isSymbolicLink()||!fs.lstatSync(creation).isSymbolicLink()||fs.realpathSync(creation)!==fs.realpathSync(target))throw Error('Staged source part/link pins changed');
+  const previous=fs.readFileSync(target,'utf8'),rewritten=replaceFeatureSpans(fs.readFileSync(baseline,'utf8'),updates).raw;
+  const before=JSON.parse(previous),after=JSON.parse(rewritten);
+  if(footprintHash(before.features)!==footprintHash(after.features)||!same(before.features,after.features))throw Error('Numeric restoration changed feature meaning');
+  changes.push({path:row.path,before_sha256:row.after_sha256,after_sha256:sha(rewritten),bytes:Buffer.from(rewritten)});
+ }
+ // Inspect every target before writing any; creation keeps the original link target.
+ for(const change of changes){fs.writeFileSync(safe(path.join(stage,'replacement'),change.path),change.bytes);composition.source_part_preservation.find(r=>r.path===change.path).after_sha256=change.after_sha256;}
+ const receipt={version:1,canonical_geometry_changed:false,source_scope_changed:false,parts:changes.map(({bytes,...row})=>row)};
+ composition.numeric_spelling_restoration=receipt;save(path.join(stage,'composition.json'),composition);save(path.join(stage,'numeric-spelling-restoration.json'),receipt);return receipt;
+}
+
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
  const args=process.argv.slice(2),get=k=>{const i=args.indexOf('--'+k);if(i<0||!args[i+1]) throw Error('Required --'+k);return args[i+1];};
- if(args.includes('--verify')) console.log(JSON.stringify(verify({root:get('root'),stage:get('stage')})));
+ if(args.includes('--repair-numeric')) console.log(JSON.stringify(repairNumeric({root:get('root'),stage:get('stage')})));
+ else if(args.includes('--verify')) console.log(JSON.stringify(verify({root:get('root'),stage:get('stage')})));
  else {const all=k=>args.flatMap((v,i)=>v==='--'+k?[args[i+1]]:[]);console.log(JSON.stringify(compose({root:get('root'),output:get('output'),replacementPatches:all('replacement-patch'),replacementManifests:all('replacement-manifest'),creationPatches:all('creation-patch')})));}
 }

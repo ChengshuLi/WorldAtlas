@@ -1,0 +1,17 @@
+# Immutable factual evidence revalidation — issue 540
+
+The release-5 geographic changes do not touch the territories supporting the existing 3,588 dated-name records or 396 demographic records. The shared revalidation gate checked every subject against release 4: identity, tier, exact geometry, descendant membership, producer/source/record hashes and original supported intervals remain unchanged. Reference parent changes are never promoted to historical administrative membership.
+
+The original producer manifests and record assets remain byte-identical. Only their separate `revalidation.json` receipts were advanced. Prior receipts are retained losslessly in `*-revalidation.json.archive.gz`; the complete aggregate geographic migration receipt is retained here as well. All archives use deterministic gzip and are hash-pinned by `index.json`.
+
+The prepared bundle was regenerated using the validated receipts: **396 records, 3,588 names, six parts**, with release-5 footprint `2ac42eeb…`, hierarchy `03d23534…` and location-index `a62d4a74…`. The existing unfinished `population-ghsl` producer remains pending; no intermediate population data was removed or fabricated. `result.json` records exact pins and executed checks. These checks do not perform private factual imports or establish publication.
+
+Reproduction requires an intact, restored release-4 geography directory containing its exact hierarchy, index and declared parts. The local rollback backup used for this run is not a durable dependency; restore the prior geography from retained release/source archives before replaying elsewhere. From the repository root, before advancing its receipts:
+
+```sh
+node --max-old-space-size=3072 \
+  data/macro-improvements/loose-ends-v5/evidence/revalidate.mjs \
+  /path/to/restored-v4-geography /path/to/aggregate-source-receipt.json
+```
+
+The publisher must serialize this full-geography scan with other heavy preparation jobs. Current evidence products are read from `data/`, not from the prior geometry directory. Already advanced receipts should be restored from their archived predecessor for a fresh reproducibility check; rerunning against the wrong prior geography correctly fails.

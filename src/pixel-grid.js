@@ -1,7 +1,8 @@
 // Stable Web Mercator cells, selected by exhaustive global representation audit.
 // One canonical cell is ~153 m at the equator; navigation never changes it.
-export const GRID_ZOOM=10;
-export const GRID_WIDTH=256*2**GRID_ZOOM;
+// Keep the chosen integer width exact; a fractional zoom exponent may round it.
+export const GRID_WIDTH=262166;
+export const GRID_ZOOM=Math.log2(GRID_WIDTH/256);
 export function projectCell(lon,lat){
   const s=Math.sin(Math.max(-85.05112878,Math.min(85.05112878,lat))*Math.PI/180);
   return [(lon+180)/360*GRID_WIDTH,(.5-Math.log((1+s)/(1-s))/(4*Math.PI))*GRID_WIDTH];
@@ -60,4 +61,7 @@ export function borderStyle(kind,zoom){
 }
 
 // Canvas fallback samples at screen resolution; never forces four-pixel blocks.
-export function viewStride(zoom){return 2**Math.max(0,Math.ceil(GRID_ZOOM-zoom));}
+// Tiny refinements of the fixed grid must not double fallback sampling stride
+// at every integer map zoom. Only this display bucket uses a rounded zoom;
+// geographic projection and camera transforms retain the exact grid size.
+export function viewStride(zoom){return 2**Math.max(0,Math.ceil(Math.round(GRID_ZOOM)-zoom));}

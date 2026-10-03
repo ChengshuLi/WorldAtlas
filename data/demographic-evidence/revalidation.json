@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revalidation_algorithm_sha256": "907bb2143b712a1b28ad12648c127936b836da66dba0aec73df9cd2426c0eeb7",
+  "revalidation_algorithm_sha256": "8d189cfd2bcd720a5cbe0115006920088c4a21a325940e048a9c6ae72f9a8b77",
   "scope": "Revalidation of immutable dated evidence against a revised reference geographic release; no historical membership or claim transfer",
   "historical_membership_assigned": false,
   "records": 396,
@@ -10,9 +10,9 @@
     "location_index_sha256": "030ced5223b9be0e42f686d9cb4697887296c408be44e724ba6810123bec6c97"
   },
   "revalidated_geography": {
-    "footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338",
-    "hierarchy_sha256": "e199013d2db784631f9965b183ce078cd7af5dd37c8e60c3799bf80cf891c071",
-    "location_index_sha256": "61054111da4aa9de039c86246dec6bced0428a99182144cdc6eacdd9d9f83a55"
+    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "location_index_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
   },
   "source_product_files": [
     {
@@ -60,6 +60,10 @@
     {
       "path": "data/macro-improvements/combined-restoration/geometry-proofs.json",
       "sha256": "df04ba0d0bf631a38301d267c766118f66eefb9e24d3e5439616fffc8fedd3ff"
+    },
+    {
+      "path": "data/macro-improvements/loose-ends-v5/evidence/aggregate-source-receipt.json.gz",
+      "sha256": "3eeaf8355b2b6c4ac2ee52d667ec4935d47efa1b6fcdee47735c7fd679d4ceab"
     }
   ],
   "entities": [
@@ -3244,14 +3248,14 @@
     "installer_sha256": "545da835a0a3781dbd4ef69e7e09d2bc5ebbef8072df2d67c817ecc4685d300e"
   },
   "prior_revalidation": {
-    "sha256": "d0d0b8157a3069ff780f94efc7256a77e6f9c7917a208058d207317ec4f2d4fd",
-    "archive_path": "data/reference-migrations/macro-improvements-v4/prior-content/demographic-evidence-revalidation.json.archive.gz",
-    "archive_sha256": "aa4e590bcdb3cea7725cffd0df3488f8b4c6198c0964bf9f39010449e523d46d",
+    "sha256": "e0d890b14a270d514096f140acf10e136e8a9ece877ad6dc0572867e018b6c65",
+    "archive_path": "data/macro-improvements/loose-ends-v5/evidence/demographic-evidence-revalidation.json.archive.gz",
+    "archive_sha256": "e7dada012d557f8a5b5fb7faaab479e20ff47d4a3e0d836818d2c86b6102c981",
     "compression": "gzip",
     "revalidated_geography": {
-      "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
-      "hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
-      "location_index_sha256": "59552ee8d7d8d0848df6e67fbd43a442e3d4769e6784df984556479c0ae55cf0"
+      "footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338",
+      "hierarchy_sha256": "e199013d2db784631f9965b183ce078cd7af5dd37c8e60c3799bf80cf891c071",
+      "location_index_sha256": "61054111da4aa9de039c86246dec6bced0428a99182144cdc6eacdd9d9f83a55"
     }
   }
 }

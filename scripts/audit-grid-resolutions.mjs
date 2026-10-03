@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {spawn,execFileSync} from 'node:child_process';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
-import {createGridIndex,GRID_ZOOM} from '../src/pixel-grid.js';
+import {createGridIndex,GRID_ZOOM,GRID_WIDTH} from '../src/pixel-grid.js';
 import {ownershipRun,packOwnership} from '../src/pixel-ownership.js';
 import {shuffleOwnershipBytes,unshuffleOwnershipBytes,decodeOwnershipVarints} from '../src/ownership-codec.js';
 import {footprintHash} from './check-prepared.mjs';
@@ -12,7 +12,9 @@ import {footprintHash} from './check-prepared.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 process.chdir(root);
 const argument=(key,fallback)=>process.argv.find(x=>x.startsWith(`--${key}=`))?.slice(key.length+3)??fallback;
-const zooms=argument('zooms','7,8,9,10').split(',').map(Number);
+const requestedSize=argument('size',null),fixedSize=requestedSize===null?null:Number(requestedSize);
+if(fixedSize!==null&&(!Number.isInteger(fixedSize)||fixedSize<32768||fixedSize>524288))throw Error('Fixed candidate size must be an integer from 32768 to 524288');
+const zooms=fixedSize!==null?[Math.log2(fixedSize/256)]:argument('zooms','7,8,9,10').split(',').map(Number);
 const cache=path.resolve(argument('cache','.cache/grid-resolution-review'));
 const worldIndex=path.resolve(argument('world-index','data/world-index.json'));
 const reportFile=path.resolve(argument('report','data/grid-resolution-review.json'));
@@ -27,8 +29,8 @@ export function loadFeatures(){
   }
   return result;
 }
-export function indexAt(index,zoom){
-  const factor=2**(zoom-GRID_ZOOM);
+export function indexAt(index,zoom,size=256*2**zoom){
+  const factor=size/GRID_WIDTH;
   if(factor===1)return index;
   return index.map(item=>({...item,bounds:item.bounds.map(x=>x*factor),polygons:item.polygons.map(p=>p.map(r=>Float64Array.from(r,x=>x*factor)))}));
 }
@@ -106,13 +108,14 @@ function verifyBaseline(grid){
 }
 const isMain=process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url);
 if(isMain&&process.argv.includes('--candidate')){
-  const zoom=Number(argument('zoom','7'));if(!Number.isInteger(zoom)||zoom<7||zoom>10)throw Error('Full candidate zoom must be 7..10');
-  const started=performance.now(),features=loadFeatures(),hash=footprintHash(features),base=createGridIndex(features),index=indexAt(base,zoom),size=256*2**zoom;
+  const zoom=fixedSize!==null?Math.log2(fixedSize/256):Number(argument('zoom','7'));if(fixedSize===null&&(!Number.isInteger(zoom)||zoom<7||zoom>10))throw Error('Full candidate zoom must be 7..10, or supply an explicit fixed --size');
+  const size=fixedSize??256*2**zoom;
+  const started=performance.now(),features=loadFeatures(),hash=footprintHash(features),base=createGridIndex(features),index=indexAt(base,zoom,size);
   const grid=compileSparse(index,size),compiled=performance.now(),layout=packedBytes(grid),packed=performance.now();
   const sourceAreas=JSON.parse(fs.readFileSync(path.join(cache,'wgs84-source-areas.json')));if(sourceAreas.footprints_sha256!==hash)throw Error('Source WGS84 areas stale');
   const stats=index.map(item=>{const area=areaOf(item),cells=grid.counts[item.index],error=area?cells/area-1:null;return {id:item.feature.id,name:item.feature.properties.name,owner:item.feature.properties.reference_owner,cells,source_area_cells:Number(area.toFixed(6)),relative_area_error:error===null?null:Number(error.toFixed(6))};});
   const missing=stats.filter(x=>!x.cells),high=stats.filter(x=>x.source_area_cells>=1&&Math.abs(x.relative_area_error)>.25),baseline=zoom===GRID_ZOOM&&!stagedInput?verifyBaseline(grid):{verified:false,reason:'Explicit staged geography; live grid equivalence is intentionally inapplicable.'};
-  const result={zoom,size,footprints_sha256:hash,location_ids:stats.map(x=>x.id),cell_counts:stats.map(x=>x.cells),source_area_cells_zoom7:zoom===GRID_ZOOM?stats.map(x=>x.source_area_cells):undefined,source_wgs84_area_m2:zoom===GRID_ZOOM?stats.map(x=>sourceAreas.areas[x.id]):undefined,grid_wgs84_area_m2:stats.map((x,i)=>Number(grid.wgs84Areas[i+1].toFixed(6))),represented:stats.length-missing.length,missing,high_distortion:high,distortion_threshold:'Absolute projected cell-area error>25%, source projected area at least1cell at this candidate',covered_cells:grid.counts.reduce((a,b)=>a+b,0),zero_cells:size**2-grid.counts.reduce((a,b)=>a+b,0),runs:grid.runs,spans:grid.spans,overlap_cells_including_same_location_components:grid.overlap_cells_including_same_location_components,layout,baseline_equivalence:baseline,timings:{load_and_compile_ms:Math.round(compiled-started),packing_and_gzip_ms:Math.round(packed-compiled),total_ms:Math.round(performance.now()-started)},peak_rss_bytes:process.resourceUsage().maxRSS*1024};
+  const result={zoom,size,footprints_sha256:hash,location_ids:stats.map(x=>x.id),cell_counts:stats.map(x=>x.cells),source_area_cells_zoom7:stats.map(x=>x.source_area_cells),source_area_reference_zoom:zoom,source_wgs84_area_m2:stats.map(x=>sourceAreas.areas[x.id]),grid_wgs84_area_m2:stats.map((x,i)=>Number(grid.wgs84Areas[i+1].toFixed(6))),represented:stats.length-missing.length,missing,high_distortion:high,distortion_threshold:'Absolute projected cell-area error>25%, source projected area at least1cell at this candidate',covered_cells:grid.counts.reduce((a,b)=>a+b,0),zero_cells:size**2-grid.counts.reduce((a,b)=>a+b,0),runs:grid.runs,spans:grid.spans,overlap_cells_including_same_location_components:grid.overlap_cells_including_same_location_components,layout,baseline_equivalence:baseline,timings:{load_and_compile_ms:Math.round(compiled-started),packing_and_gzip_ms:Math.round(packed-compiled),total_ms:Math.round(performance.now()-started)},peak_rss_bytes:process.resourceUsage().maxRSS*1024};
   fs.writeFileSync(path.join(cache,`zoom-${zoom}.json`),JSON.stringify(result));console.log(JSON.stringify({zoom,represented:result.represented,missing:missing.length,high_distortion:high.length,runs:grid.runs,gzip_bytes:layout.gzip_bytes,packed_bytes:layout.packed_bytes,peak_rss_bytes:result.peak_rss_bytes,total_ms:result.timings.total_ms}));
 }else if(isMain){
   if(!process.argv.includes('--aggregate-only')){
@@ -125,10 +128,10 @@ if(isMain&&process.argv.includes('--candidate')){
     }
   }
   for(const zoom of process.argv.includes('--aggregate-only')?[]:zooms){
-    if(!Number.isInteger(zoom)||zoom<7||zoom>10)throw Error('Full candidate zoom must be7..10; higher full worlds need separate resource review');
-    await new Promise((resolve,reject)=>{const child=spawn(process.execPath,['--max-old-space-size=4096',fileURLToPath(import.meta.url),'--candidate',`--zoom=${zoom}`,`--world-index=${worldIndex}`,`--cache=${cache}`,`--report=${reportFile}`],{stdio:'inherit'});child.on('error',reject);child.on('exit',code=>code?reject(Error(`Candidate${zoom}failed:${code}`)):resolve());});
+    if(fixedSize===null&&(!Number.isInteger(zoom)||zoom<7||zoom>10))throw Error('Full candidate zoom must be7..10; higher full worlds need an explicit fixed-size resource review');
+    await new Promise((resolve,reject)=>{const child=spawn(process.execPath,['--max-old-space-size=4096',fileURLToPath(import.meta.url),'--candidate',`--zoom=${zoom}`,...(fixedSize!==null?[`--size=${fixedSize}`]:[]),`--world-index=${worldIndex}`,`--cache=${cache}`,`--report=${reportFile}`],{stdio:'inherit'});child.on('error',reject);child.on('exit',code=>code?reject(Error(`Candidate${zoom}failed:${code}`)):resolve());});
   }
-  const candidates=zooms.map(zoom=>JSON.parse(fs.readFileSync(path.join(cache,`zoom-${zoom}.json`)))),base=candidates.find(x=>x.zoom===7);
+  const candidates=zooms.map(zoom=>JSON.parse(fs.readFileSync(path.join(cache,`zoom-${zoom}.json`)))),base=candidates.find(x=>x.zoom===7)??(fixedSize!==null?candidates[0]:null);
   if(!base)throw Error('Include zoom7 baseline');
   const currentFeatures=loadFeatures(),currentHash=footprintHash(currentFeatures);
   if(candidates.some(c=>c.footprints_sha256!==currentHash||c.cell_counts.length!==base.location_ids.length))throw Error('Cached full candidate grid is stale');
@@ -151,13 +154,14 @@ if(isMain&&process.argv.includes('--candidate')){
     isolated.push({id:missing.id,name:missing.name,owner:missing.owner,checks,first_isolated_hit_zoom:checks.find(x=>x.isolated_component_cell_hits)?.zoom??null});
   }
   const sourceReview=JSON.parse(fs.readFileSync('data/region-semantic-review.json')).pixel_missing_source_comparison??[],changedIds=stagedInput&&fs.existsSync('data/geographic-repair-evidence/migration-receipt.json.gz')?new Set(readJSON('data/geographic-repair-evidence/migration-receipt.json.gz').changed_ids):new Set(),sourceById=new Map(sourceReview.filter(x=>!changedIds.has(x.id)).map(x=>[x.id,x]));
-  const report={version:1,footprints_sha256:base.footprints_sha256,method:'Fixed Web Mercator grid cell centers, even-odd source polygons including holes, smallest stable location-index tie priority; complete world ownership compiled independently once per candidate. Navigation is never involved.',scope:{locations:base.location_ids.length,all_location_ids:base.location_ids,source_area_cells_zoom7:base.source_area_cells_zoom7,source_wgs84_area_m2:base.source_wgs84_area_m2,locations_semantically_approved:'Global semantic approval remains incomplete; all current footprints evaluated, not falsely marked approved'},candidates:candidates.map(({location_ids,source_area_cells_zoom7,source_wgs84_area_m2,...x})=>x),missing_union_isolated_research:isolated.map(x=>({...x,source_comparison:sourceById.get(x.id)??null})),selection:{status:'pending-source-and-device-review',reason:'Candidate results must meet source correctness, disappearing-unit and distortion requirements together. No arbitrary cell reassignment or polygon inflation is permitted. Finer resolution does not repair bad source geometry/masks.'},constraints:{hosting_artifact_limit_bytes:256*1024*1024,hosting_asset_file_limit_bytes:25*1024*1024,shader_world_size:'uniform; stage activation must update renderer canonical GRID_ZOOM consistently',gpu_texture_width:2048,device_texture_sizes_to_assess:[2048,4096,8192,16384],cpu_fallback:'Packed rows/runs sampling is resolution independent; renderer transforms still import fixed GRID_ZOOM and must change consistently before deployment.'},completion:false};
+  const report={version:1,footprints_sha256:base.footprints_sha256,method:'Fixed Web Mercator grid cell centers, even-odd source polygons including holes, smallest stable location-index tie priority; complete world ownership compiled independently once per candidate. Navigation is never involved.',scope:{locations:base.location_ids.length,all_location_ids:base.location_ids,source_area_cells_zoom7:base.source_area_cells_zoom7,source_area_reference_zoom:base.zoom,source_wgs84_area_m2:base.source_wgs84_area_m2,locations_semantically_approved:'Global semantic approval remains incomplete; all current footprints evaluated, not falsely marked approved'},candidates:candidates.map(({location_ids,source_area_cells_zoom7,source_wgs84_area_m2,...x})=>x),missing_union_isolated_research:isolated.map(x=>({...x,source_comparison:sourceById.get(x.id)??null})),selection:{status:'pending-source-and-device-review',reason:'Candidate results must meet source correctness, disappearing-unit and distortion requirements together. No arbitrary cell reassignment or polygon inflation is permitted. Finer resolution does not repair bad source geometry/masks.'},constraints:{hosting_artifact_limit_bytes:256*1024*1024,hosting_asset_file_limit_bytes:25*1024*1024,shader_world_size:'uniform; stage activation must update renderer canonical GRID_ZOOM consistently',gpu_texture_width:2048,device_texture_sizes_to_assess:[2048,4096,8192,16384],cpu_fallback:'Packed rows/runs sampling is resolution independent; renderer transforms still import fixed GRID_ZOOM and must change consistently before deployment.'},completion:false};
   const aggregateErrors=(values,source)=>{const errors=values.map((v,i)=>source[i]?v/source[i]-1:null),above=errors.flatMap((error,i)=>error!==null&&Math.abs(error)>.25?[{id:report.scope.all_location_ids[i],relative_area_error:Number(error.toFixed(9))}]:[]);return {absolute_error_above25_count:above.length,maximum_absolute_relative_error:Math.max(...errors.map(e=>Math.abs(e??0))),records_above25:above};};
   const sumFiles=directory=>fs.existsSync(directory)?fs.readdirSync(directory,{withFileTypes:true}).reduce((n,e)=>n+(e.isDirectory()?sumFiles(path.join(directory,e.name)):e.isFile()?fs.statSync(path.join(directory,e.name)).size:0),0):0;
   const artifactBytes=sumFiles('dist/client')+sumFiles('dist/server')+sumFiles('dist/drizzle')+(fs.existsSync('.openai/hosting.json')?fs.statSync('.openai/hosting.json').size:0);
-  const oldOwnershipBytes=report.candidates.find(c=>c.zoom===7).layout.gzip_bytes;
+  const publishedGrid=readJSON('data/canonical-grid/manifest.json');
+  const oldOwnershipBytes=publishedGrid.parts.reduce((sum,part)=>sum+fs.statSync(path.join('data/canonical-grid',part.path)).size,0);
   for(const candidate of report.candidates){
-    candidate.projected_all_location_distortion=aggregateErrors(candidate.cell_counts,report.scope.source_area_cells_zoom7.map(a=>a*4**(candidate.zoom-7)));
+    candidate.projected_all_location_distortion=aggregateErrors(candidate.cell_counts,report.scope.source_area_cells_zoom7.map(a=>a*(candidate.size/base.size)**2));
     candidate.wgs84_all_location_distortion=aggregateErrors(candidate.grid_wgs84_area_m2,report.scope.source_wgs84_area_m2);
     candidate.estimated_artifact_bytes_replacing_existing_grid=artifactBytes-oldOwnershipBytes+candidate.layout.gzip_bytes;
     candidate.estimated_artifact_limit_headroom_bytes=report.constraints.hosting_artifact_limit_bytes-candidate.estimated_artifact_bytes_replacing_existing_grid;
