@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "read_only": true,
+  "release_id": "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+  "release_sha256": "684a2efa2c5f044cf18c4abdc15c5c9b6aed309438afd504fa16a326957d3fe5",
+  "live_snapshot_revision": 1754,
+  "capacity_receipt_sha256": "fe13685a52eba469b77c927916910207ed0dfaefaab5e3ac0969da4ef25e063e",
+  "stats": {
+    "sources": {
+      "rows": 2,
+      "json_bytes": 4223,
+      "text_bytes": 3979,
+      "evidence_bytes": 4,
+      "inline_tuple_model_bytes": 4088,
+      "tuple_below_2048": 1,
+      "indexes_model_bytes": 0,
+      "heap_model_with_page_packing": 4304,
+      "btree_model_90pct_leaf": 0
+    },
+    "entities": {
+      "rows": 42,
+      "json_bytes": 15782,
+      "text_bytes": 11708,
+      "evidence_bytes": 84,
+      "inline_tuple_model_bytes": 13968,
+      "tuple_below_2048": 42,
+      "indexes_model_bytes": 0,
+      "heap_model_with_page_packing": 14704,
+      "btree_model_90pct_leaf": 0
+    },
+    "memberships": {
+      "rows": 84831,
+      "json_bytes": 91652356,
+      "text_bytes": 89452281,
+      "evidence_bytes": 66815557,
+      "inline_tuple_model_bytes": 93561132,
+      "tuple_below_2048": 84396,
+      "indexes_model_bytes": 39655660,
+      "heap_model_with_page_packing": 98485403,
+      "btree_model_90pct_leaf": 44061845
+    },
+    "changes": {
+      "rows": 768,
+      "json_bytes": 1075024,
+      "text_bytes": 1067202,
+      "evidence_bytes": 784595,
+      "inline_tuple_model_bytes": 1099144,
+      "tuple_below_2048": 622,
+      "indexes_model_bytes": 364104,
+      "heap_model_with_page_packing": 1156994,
+      "btree_model_90pct_leaf": 404560
+    }
+  },
+  "reviewed_payload_bytes": 92935927,
+  "published_baseline_skipped_bytes": 45750980,
+  "published_baseline_skipped_batches": 425,
+  "new_database_rows": {
+    "memberships": 84831,
+    "changes": 768,
+    "geographic_releases": 1,
+    "stable_entities": 42,
+    "sources": 1,
+    "ingestions_up_to": 434
+  },
+  "duplicate_rules": {
+    "published_baseline": "bootstrap validates exact hashes/counts then skips version1 staging and rows",
+    "existing_entity_ids": "Only42 new entity identities are sent; all84,831 full snapshot memberships are genuinely new under new release key, even for old entity IDs",
+    "changes": "New IDs contain new release hash; previous migration change relations get new immutable change rows in release4",
+    "sources": "Retained source replays by stable ID; one review source uses new release hash",
+    "ingestions": "New bounded batch IDs are append-only receipts; completed retries are idempotent; source journal may be new even when one source row already exists"
+  },
+  "configured_database_budget_bytes": 536870912,
+  "observed_database_bytes": 481394688,
+  "configured_headroom_bytes": 55476224,
+  "budget_is_verified_provider_quota": false,
+  "heap_plus_btree_model_bytes": 144127810,
+  "fit_proven": false,
+  "assessment": "Payload is not a physical DB measurement, but it credibly understates rather than proves storage fit: membership text alone exceeds configured headroom, and99.49% of modeled membership tuples fall below normal2KiB TOAST threshold. Do not assume archive/gzip/network compression makes TEXT tables small. Current full snapshot release representation is unlikely to fit512MiB budget.",
+  "assumptions": [
+    "Text storage from postgres/schema.sql; short/ordinary field headers1/4bytes, aligned24byte tuple header+4byte line pointer, activeBIGINT; crude heap packing95% and B-tree leaf fill90%, no WAL/memory/provider accounting",
+    "Model does not claim exact TOAST compression, B-tree suffix truncation/dedup, existing page free space, heap bloat, alignment between individualfields or indexinternalpage overhead",
+    "Membership fields add release_id and remove transport-onlykind before modeling; max84,396/84,831 below2048model rows do not justify assuming TOAST storage",
+    "Source/archive media bodies go to R2, not database; existing preflight148,085,814 registered media bytes are NOT included as binary content in481MB DB. New R2 evidence still adds small metadata/ingestion rows and needs separatehosting limits"
+  ],
+  "safest_gate": [
+    "Re-read existing /api/storage/capacity and /api/storage/v2/export-marker before import. No SQL writes under this assessment.",
+    "Measure physical per-table/TOAST/index stats with authorized existing read-only runtime/admin database path; no new arbitrary-SQL API",
+    "Verify actual Neon project-plan storage capacity before committing to staged imports. The env budget is a guardrail, not providerquota, and changing it alone creates no capacity",
+    "If verified budget/headroom cannot accommodate realistic growth plusmargin, preserve ready offlinecandidate and report publicationblocked; do not write80krows then discoverbudget exhaustion",
+    "No repartitioning/compaction/R2database migration implemented here. Those belong to separately authorized engineering storage work."
+  ],
+  "sql_read_only": [
+    "SELECT pg_database_size(current_database()) AS database_bytes;",
+    "SELECT n.nspname,c.relname,c.reltuples::bigint AS estimated_rows,pg_relation_size(c.oid) AS heap_main_bytes,pg_table_size(c.oid) AS heap_and_toast_bytes,pg_indexes_size(c.oid) AS index_bytes,pg_total_relation_size(c.oid) AS total_bytes FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relname IN ('atlas_geographic_memberships','atlas_geographic_changes','atlas_entities','atlas_ingestions','atlas_sources','atlas_geographic_releases') ORDER BY c.relname;",
+    "SELECT release_id,count(*) AS rows,sum(octet_length(evidence)) AS uncompressed_evidence_bytes,sum(pg_column_size(evidence)) AS evidence_stored_datum_bytes,avg(pg_column_size(evidence)) AS average_evidence_datum_bytes FROM atlas_geographic_memberships GROUP BY release_id ORDER BY release_id;",
+    "SELECT indexname,indexdef FROM pg_indexes WHERE schemaname='public' AND tablename IN ('atlas_geographic_memberships','atlas_geographic_changes');"
+  ]
+}

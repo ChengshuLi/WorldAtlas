@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {gzipSync} from 'node:zlib';
-import {install,validate,hash,safe} from '../scripts/install-reviewed-geography.mjs';import {footprintHash} from '../scripts/check-prepared.mjs';import {packOwnership} from '../src/pixel-ownership.js';import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
+import {install,validate,hash,safe,verifySourceGeometry} from '../scripts/install-reviewed-geography.mjs';import {stageLandCreations} from '../scripts/stage-land-creations.mjs';import {footprintHash} from '../scripts/check-prepared.mjs';import {packOwnership} from '../src/pixel-ownership.js';import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 const put=(file,data)=>{fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,typeof data==='string'?data:JSON.stringify(data));return hash(fs.readFileSync(file));};
 const zip=(file,data)=>{fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,gzipSync(JSON.stringify(data)));return {path:path.basename(file),sha256:hash(fs.readFileSync(file))};};
 function fixture(t){const dir=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-install-'));t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));const data=path.join(dir,'data'),candidate=path.join(dir,'geography'),ownership=path.join(dir,'ownership'),runtime=path.join(dir,'runtime'),references=path.join(dir,'references'),grid=path.join(dir,'grid');for(const d of [data,candidate,ownership,runtime,references,grid])fs.mkdirSync(d);
@@ -43,4 +43,57 @@ test('a genuine unknown-attribute creation installs reversibly without changing 
  const audit=read(o.gridAudit);audit.footprints_sha256=footprints;audit.represented=7;audit.location_ids.push(added.id);audit.cell_counts.push(1);audit.grid_wgs84_area_m2.push(1);audit.covered_cells=7;put(o.gridAudit,audit);const areas=read(o.gridSourceAreas);areas.footprints_sha256=footprints;areas.areas[added.id]=1;put(o.gridSourceAreas,areas);
  const before=snapshot(o.data),dry=install(o);assert.equal(dry.counts_after.location,7);assert.throws(()=>install({...o,expectedValidation:dry.validation_sha256},{apply:true,failAfter:5}),/Injected/);assert.deepEqual(snapshot(o.data),before);
  const actual=install({...o,expectedValidation:dry.validation_sha256},{apply:true});assert.equal(actual.counts_after.location,7);assert.equal(snapshot(o.data)['atlas.sqlite'],before['atlas.sqlite']);assert.equal(snapshot(o.data)['hosted-catalog/index.json'],before['hosted-catalog/index.json']);
+});
+
+function composedFixture(t){
+ const f=fixture(t),units=JSON.parse(fs.readFileSync(f.options.data+'/hierarchy.json')),replacement=path.join(f.dir,'replacement-migration');fs.mkdirSync(replacement);
+ const replacementReceipt={geometry_stage_validated:true,historical_claims_transferred:false,before_footprints_sha256:footprintHash(f.features),after_footprints_sha256:footprintHash(f.after),changed_ids:['loc0'],removed_ids:[],added_ids:[],reused_ids:f.features.slice(1).map(v=>v.id),archives:[{id:'loc0',feature:f.features[0]}],relationships:[{before_ids:['loc0'],after_ids:['loc0'],history_transfer:false}],source_evidence:[{url:'https://example.org/synthetic-replacement',source_sha256:'a'.repeat(64)}]};
+ const receiptHash=put(replacement+'/migration-receipt.json',replacementReceipt),manifest={history_transfer:false,before_footprints_sha256:replacementReceipt.before_footprints_sha256,after_footprints_sha256:replacementReceipt.after_footprints_sha256,files:{'migration-receipt.json':{sha256:receiptHash}}};put(replacement+'/index.json',manifest);
+ const added={type:'Feature',id:'new-island',properties:{id:'new-island',name:'Synthetic island',parent_id:'prov0',reference_owner:null},geometry:{type:'Polygon',coordinates:[[[20,0],[21,0],[21,1],[20,1],[20,0]]]}},next=[...f.after,added],candidate=f.dir+'/creation',source=f.dir+'/source.geojson',proofs=f.dir+'/proofs.json';
+ put(candidate+'/hierarchy.json',units);put(candidate+'/world-index.json',{parts:['geography/part.json']});put(candidate+'/geography/part.json',{features:next});
+ const sourceFeature={...added,id:'source-new-island'};put(source,sourceFeature);
+ put(proofs,[{location_id:added.id,parent_chain:['prov0','area0','region0','sub0','continent0'],source:{path:'source.geojson',sha256:hash(fs.readFileSync(source)),identity:sourceFeature.id,url:'https://example.org/synthetic-island',license:'Synthetic fixture',attribution:'Synthetic test only',supported_from:2026,supported_to:2027},identity_review:{status:'distinct-new-territory',evidence_url:'https://example.org/synthetic-identity',rationale:'Synthetic distinct land'}}]);
+ stageLandCreations({before:f.options.geography,after:candidate,proofs,output:f.dir+'/creation-migration'});
+ const read=p=>JSON.parse(fs.readFileSync(p)),creation=read(f.dir+'/creation-migration/migration-receipt.json'),aggregate={...replacementReceipt,after_footprints_sha256:footprintHash(next),added_ids:[added.id],creation_proofs:creation.creation_proofs.map(p=>({...p,source:{...p.source,path:'creation-migration/'+p.source.path}}))};put(f.options.sourceReceipt,aggregate);
+ const geometryProofs=f.dir+'/geometry-proofs.json',descriptor={version:1,before_footprints_sha256:footprintHash(f.features),after_footprints_sha256:footprintHash(next),manifests:['replacement-migration/index.json','creation-migration/index.json'].map(path=>({path,sha256:hash(fs.readFileSync(f.dir+'/'+path))})),metadata_receipts:[]};put(geometryProofs,descriptor);
+ return {...f,units,next,aggregate,descriptor,current:{features:f.features,ids:new Set(f.features.map(f=>f.id)),units,footprints:footprintHash(f.features)},candidate:{features:next,ids:new Set(next.map(f=>f.id)),units,footprints:footprintHash(next)},opts:{...f.options,geometryProofs},read,refresh(){put(geometryProofs,descriptor);put(f.options.sourceReceipt,aggregate);}};
+}
+test('ordered replacement then pure creation validates exact current ancestry and pinned source bytes',t=>{
+ const f=composedFixture(t),before=snapshot(f.options.data),proof=verifySourceGeometry(f.opts,f.current,f.candidate,f.aggregate);assert.deepEqual([...proof.chain.changedIds],['loc0']);assert.deepEqual([...proof.chain.addedIds],['new-island']);assert.ok(proof.files['creation-migration/sources/0.geojson']);assert.deepEqual(snapshot(f.options.data),before);
+});
+test('composed installer rejects skipped or reordered manifests, changed pins and unmatched creation inventories',t=>{
+ const f=composedFixture(t);
+ for(const kind of ['skip','order','pin','added','changed','proof','source','original','unreceipted-land']){
+  const opts=structuredClone(f.opts),receipt=structuredClone(f.aggregate),next=structuredClone(f.candidate),descriptor=structuredClone(f.descriptor);next.ids=new Set(next.features.map(f=>f.id));
+  if(kind==='skip')descriptor.manifests.shift();if(kind==='order')descriptor.manifests.reverse();if(kind==='pin')descriptor.manifests[1].sha256='0'.repeat(64);if(kind==='added')receipt.added_ids=[];if(kind==='changed')receipt.changed_ids=[];if(kind==='proof')receipt.creation_proofs=[];if(kind==='source')receipt.creation_proofs[0].source.sha256='0'.repeat(64);if(kind==='original')receipt.archives[0].feature.properties.name='Undocumented old identity';if(kind==='unreceipted-land')next.features[1].geometry.coordinates[0][1][0]+=.1;
+  put(opts.geometryProofs,descriptor);assert.throws(()=>verifySourceGeometry(opts,f.current,next,receipt),undefined,kind);
+ }
+ f.refresh();
+});
+test('composed installer rejects child historical transfers and changed source archive bytes',t=>{
+ const f=composedFixture(t),file=f.dir+'/replacement-migration/migration-receipt.json',receipt=f.read(file);receipt.relationships[0].history_transfer=true;put(file,receipt);const manifest=f.read(f.dir+'/replacement-migration/index.json');manifest.files['migration-receipt.json'].sha256=hash(fs.readFileSync(file));put(f.dir+'/replacement-migration/index.json',manifest);f.descriptor.manifests[0].sha256=hash(fs.readFileSync(f.dir+'/replacement-migration/index.json'));f.refresh();assert.throws(()=>verifySourceGeometry(f.opts,f.current,f.candidate,f.aggregate),/transfer/);
+ const g=composedFixture(t);fs.appendFileSync(g.dir+'/creation-migration/sources/0.geojson',' ');assert.throws(()=>verifySourceGeometry(g.opts,g.current,g.candidate,g.aggregate),/archive hash mismatch/);
+});
+test('geometry evidence cannot silently authorize current source-name changes',t=>{
+ const f=composedFixture(t);f.candidate.features[1].properties.name='Unverified renamed location';assert.throws(()=>verifySourceGeometry(f.opts,f.current,f.candidate,f.aggregate),/Unreceipted reference name/);
+});
+
+test('source-name correction requires pinned exact metadata before/after evidence',t=>{
+ const f=composedFixture(t),before=structuredClone(f.current.features[1].properties);f.candidate.features[1].properties.name='Verified reference name';
+ const metadata={reference_only:true,historical_claims_transferred:false,before_units:f.units,retired_units:[],group_changes:[],changed_location_properties:[{location_id:'loc1',before_properties:before,after_properties:structuredClone(f.candidate.features[1].properties)}],relationships:[],source_evidence:[{url:'https://example.org/synthetic-name-source',source_sha256:'c'.repeat(64)}]},file=f.dir+'/reference-receipt.json';
+ const pin=put(file,metadata);f.descriptor.metadata_receipts=[{path:'reference-receipt.json',sha256:pin}];f.refresh();assert.doesNotThrow(()=>verifySourceGeometry(f.opts,f.current,f.candidate,f.aggregate));
+ const proof=verifySourceGeometry(f.opts,f.current,f.candidate,f.aggregate);assert.equal(proof.files['reference-receipt.json'],pin);
+ f.descriptor.metadata_receipts=[];f.refresh();assert.throws(()=>verifySourceGeometry(f.opts,f.current,f.candidate,f.aggregate),/Unreceipted reference name/);
+ metadata.changed_location_properties[0].before_properties.name='Wrong original identity';const altered=put(file,metadata);f.descriptor.metadata_receipts=[{path:'reference-receipt.json',sha256:altered}];f.refresh();assert.throws(()=>verifySourceGeometry(f.opts,f.current,f.candidate,f.aggregate),/Metadata location before\/after evidence/);
+});
+test('installer summary pins geometry proof members and rejects altered evidence after approval',t=>{
+ const f=composedFixture(t),o={...f.options,geometryProofs:f.opts.geometryProofs},receipt=f.read(f.dir+'/replacement-migration/migration-receipt.json');put(o.sourceReceipt,receipt);
+ const descriptor={...f.descriptor,after_footprints_sha256:footprintHash(f.after),manifests:[f.descriptor.manifests[0]]};put(o.geometryProofs,descriptor);
+ const sourceHash=hash(fs.readFileSync(o.sourceReceipt)),owner=f.read(o.ownership+'/index.json');owner.incremental_preparation.migration_receipt_sha256=sourceHash;put(o.ownership+'/index.json',owner);
+ const macro=f.read(o.macroReceipt);macro.source_repair_receipt_sha256=sourceHash;put(o.macroReceipt,macro);
+ const rr=f.read(o.references+'/incremental-receipt.json');rr.migration_receipt_sha256=sourceHash;put(o.references+'/incremental-receipt.json',rr);const reference=f.read(o.references+'/index.json');reference.incremental_preparation.receipt_sha256=hash(fs.readFileSync(o.references+'/incremental-receipt.json'));put(o.references+'/index.json',reference);
+ const runtime=f.read(o.runtime+'/index.json');runtime.source_index_sha256=hash(fs.readFileSync(o.ownership+'/index.json'));put(o.runtime+'/index.json',runtime);
+ const dry=install(o);assert.equal(dry.sources.geometryProofs['replacement-migration/migration-receipt.json'],hash(fs.readFileSync(f.dir+'/replacement-migration/migration-receipt.json')));
+ const manifest=f.read(f.dir+'/replacement-migration/index.json');manifest.additional_inspection='New evidence after approval';put(f.dir+'/replacement-migration/index.json',manifest);descriptor.manifests[0].sha256=hash(fs.readFileSync(f.dir+'/replacement-migration/index.json'));put(o.geometryProofs,descriptor);
+ assert.throws(()=>install({...o,expectedValidation:dry.validation_sha256},{apply:true}),/approved dry-run hash/);
 });

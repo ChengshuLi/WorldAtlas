@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "observed_at_utc": "2026-10-02T23:59:29.792227+00:00",
+  "source_url": "https://neon.tech/pricing",
+  "retrieved_html_sha256": "8642f64971c6ec4c6e7fc48be7884a5e959a4b90bff5e3aad4ee43842164e30b",
+  "source_excerpt": "Major update to our Free Plan: now with 1 GB of Postgres storage per project, 100 projects included",
+  "published_plan": "Free",
+  "published_storage_text": "1 GB of storage per project",
+  "conservative_published_storage_bytes": 1000000000,
+  "project_specific_allowance_readback": false,
+  "previous_configured_application_budget_bytes": 536870912,
+  "proposed_configured_application_budget_bytes": 800000000,
+  "budget_is_provider_quota": false,
+  "estimated_after_release_database_bytes": 625522498,
+  "physical_growth_measured": false,
+  "policy": "Published free allowance supports a conservative800MB planning guard for this release without a paid upgrade; preserve old measured receipt/model and check real storage after bounded staging. Provider account/branch totals remain independently unverified."
+}

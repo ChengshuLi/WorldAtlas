@@ -1,0 +1,52 @@
+{
+  "read_only": true,
+  "snapshot_revision": 1754,
+  "receipt_sha256": "fe13685a52eba469b77c927916910207ed0dfaefaab5e3ac0969da4ef25e063e",
+  "checked_subjects": [
+    "COK-4951",
+    "COK-4956",
+    "COK-4961",
+    "GGY+00?",
+    "IOT+00?",
+    "PCN+00?",
+    "atlas:territory:MLT",
+    "framework:province:aitutaki:41d3c8c18e8e",
+    "framework:province:palmerston:09dad6383ebc",
+    "gb:AUS:ADM2:25037944B17338277063313",
+    "gb:GRC:ADM3:53547021B47933499934509"
+  ],
+  "direct_live_claim_matches": {},
+  "unmatched_subjects": [
+    "COK-4951",
+    "COK-4956",
+    "COK-4961",
+    "GGY+00?",
+    "IOT+00?",
+    "PCN+00?",
+    "atlas:territory:MLT",
+    "framework:province:aitutaki:41d3c8c18e8e",
+    "framework:province:palmerston:09dad6383ebc",
+    "gb:AUS:ADM2:25037944B17338277063313",
+    "gb:GRC:ADM3:53547021B47933499934509"
+  ],
+  "snapshots": [
+    {
+      "sha256": "aebf930586e329ce0eecfd0eac5dd6f6d5334fec7c7d9455ac3396b1a6f2c4f8",
+      "rows": 396,
+      "snapshot_filename": "records.json"
+    },
+    {
+      "sha256": "8f9523ee61e974d0afd93f81707304ce477b343ec4e69d88d0ba66ce97c28b0b",
+      "rows": 3588,
+      "snapshot_filename": "names.json"
+    },
+    {
+      "sha256": "84c2d569224cb19cccbf2cf226d431ef2f4844bac95e6cf271b1d617b5935de1",
+      "rows": 6,
+      "snapshot_filename": "media_links.json"
+    }
+  ],
+  "claims_copied_or_moved": false,
+  "applicability_review": "Every matched existing direct claim needs explicit sourced footprint applicability review; preserve immutable claim and predecessor context. This scan does not authorize transfer or evidence interval extension.",
+  "snapshot_storage": "Authorized read-only publisher session retained originals; hashes certify preflight revision, not current/future live state."
+}
