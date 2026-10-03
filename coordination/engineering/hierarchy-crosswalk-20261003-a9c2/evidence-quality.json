@@ -1052,8 +1052,8 @@
     },
     {
       "path": "data/engineering/hierarchy-crosswalk-20261003-a9c2/reproducibility.json",
-      "bytes": 986,
-      "sha256": "43e6c5b70faf03cb9e1645efbb1a9bc5e20453690c55ccd603be03684cb50fad",
+      "bytes": 1281,
+      "sha256": "ded93ed14b4792693de2955d6cae1a518f6551bbd4f154712005c20fd8bd451c",
       "hash_kind": "file-bytes"
     },
     {
@@ -1075,7 +1075,7 @@
       "kind": "generator",
       "helper_version": "worldatlas-evidence-preparation-v1",
       "description": "Immutable current-release/whole-file verification, frozen local membership and legacy entry-hash proof comparison, separate exact parent/name candidate, full current chains, actual JS footprint digest and unchanged ownership-part hashes. No geographic area measurement, source retrieval or semantic approval.",
-      "software": "Python 3, pinned immutable helper, Node 24 and established footprint/metadata relationship validators",
+      "software": "Python 3.12.14 / zlib 1.3.2; Node v24.19.0; git version 2.52.0; pinned immutable helper and established footprint/metadata validators",
       "units": "Whole-file bytes, canonical geometry-entry hash pairs, identity counts and exact adjacent-tier chains"
     }
   ],
