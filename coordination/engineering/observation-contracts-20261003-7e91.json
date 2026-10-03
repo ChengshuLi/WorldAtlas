@@ -1,0 +1,68 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "observation-contracts-20261003-7e91",
+  "branch": "engineering/observation-contracts-20261003-7e91",
+  "base_main_commit": "d6fb7b7938797dc69e69afef3a2fd1e7f86899cc",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/529",
+  "worker_id": "engineering-night-20261003-7e91f438",
+  "date_timezone": "America/Los_Angeles",
+  "updated_at_utc": "2026-10-03T19:02:52.096233+00:00",
+  "scope": [
+    "First of max3 PRs: additive versioned typed observation/feature-link contracts, controlled registrar, pure shared normalization/resolution seam and legacy preservation tests. No domain map implementations, DDL, live facts or publication."
+  ],
+  "dependencies": [],
+  "completed": [
+    "Previous issue50 actual merge d6fb7b7 and confirmed release preserved in owned receipts",
+    "Fresh isolated branch and confirmed529 claim",
+    "Shared precedence extracted without changing legacy behavior; declarative vocabulary and pure typed contract implemented"
+  ],
+  "checks": [
+    {
+      "command": "focused contract/attribute/unresolved/environment checks after npm ci",
+      "result": "25 passed; newly retained synthetic transport fixture separately passed in9contracttests; full regression suite running"
+    }
+  ],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/observation-contracts-20261003-7e91"
+  ],
+  "blockers": [],
+  "next_action": "Run focused and complete checks, exact-head distinct-worker review, serialized queue, actual merge; then renew onto fresh branch for remaining bounded529 adapters/parity. Issue remains open.",
+  "reservation": {
+    "accepted": true,
+    "request_id": "7f013666-b6f4-4518-a99e-1893d7f79a1d",
+    "issue_number": 529,
+    "claim": {
+      "comment_id": 5972401777,
+      "version": 1,
+      "active": true,
+      "worker_id": "engineering-night-20261003-7e91f438",
+      "claim_id": "9ea71518-3663-4baf-98ef-8cb7c9a8be4c",
+      "branch": "engineering/observation-contracts-20261003-7e91",
+      "request_id": "7f013666-b6f4-4518-a99e-1893d7f79a1d",
+      "issue_number": 529,
+      "claimed_at": "2026-10-03T18:53:45.897Z",
+      "updated_at": "2026-10-03T18:53:45.897Z",
+      "expires_at": "2026-10-04T18:53:45.897Z",
+      "live_work": false,
+      "mode": "engineering",
+      "max_prs": 3
+    },
+    "replayed": false,
+    "result_source": "github-comment",
+    "result_comment_id": 5972402086,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37145897483"
+  },
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "remaining_scope": [
+    "Forward supported adapter storage/import/read/export and optional capabilities",
+    "Actual server/static/prepared/snapshot parity and final module integration handover; max3 totalPRs"
+  ]
+}
