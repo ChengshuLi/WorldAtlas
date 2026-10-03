@@ -1,0 +1,36 @@
+{
+  "method_id": "hierarchy-rebase-generator",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "evidence": "controls.log",
+  "limits": [
+    "Synthetic controls are not factual geography approval"
+  ],
+  "outputs": [
+    [
+      "migration-receipt.json.gz",
+      "a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f",
+      "a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f"
+    ],
+    [
+      "before-hierarchy.json.gz",
+      "5615fe8f84b73921a80bcb2c5a8875bb65baf57a13ee6aa2c0a6bed0272db17a",
+      "5615fe8f84b73921a80bcb2c5a8875bb65baf57a13ee6aa2c0a6bed0272db17a"
+    ],
+    [
+      "crosswalk-audit.json.gz",
+      "27a6667f130c2433342bff99d95423a3c60fa522551af4dce7f2aaf3d58b16ba",
+      "27a6667f130c2433342bff99d95423a3c60fa522551af4dce7f2aaf3d58b16ba"
+    ]
+  ],
+  "run_one_sha256": "eb875e6c03a49e12472763244959b5038d07105eab05fd9641e6ab7799d2deb2",
+  "run_two_sha256": "eb875e6c03a49e12472763244959b5038d07105eab05fd9641e6ab7799d2deb2",
+  "environment": {
+    "python": "3.12.14",
+    "zlib_compile": "1.3.2",
+    "zlib_runtime": "1.3.2",
+    "node": "v24.19.0",
+    "git": "git version 2.52.0",
+    "limit": "Both executed runs used this unchanged runtime; compressed byte identity across other zlib versions is not promised"
+  }
+}

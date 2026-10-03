@@ -1,0 +1,46 @@
+{
+  "baseline_commit": "dbbf8f736699940ec98efa83972f1784a83cb3a0",
+  "changed_chains": [
+    "atlas:territory:LUX",
+    "gb:MCO:ADM1:64170238B96397749018979",
+    "gb:USA:ADM2:52423323B20661288428578"
+  ],
+  "counts": {
+    "after": {
+      "area": 480,
+      "continent": 6,
+      "location": 49625,
+      "province": 5137,
+      "region": 81,
+      "subcontinent": 29
+    },
+    "before": {
+      "area": 480,
+      "continent": 6,
+      "location": 49625,
+      "province": 5138,
+      "region": 81,
+      "subcontinent": 29
+    }
+  },
+  "outputs": [
+    {
+      "bytes": 1847386,
+      "hash_kind": "file-bytes",
+      "path": "migration-receipt.json.gz",
+      "sha256": "a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f"
+    },
+    {
+      "bytes": 1004820,
+      "hash_kind": "file-bytes",
+      "path": "before-hierarchy.json.gz",
+      "sha256": "5615fe8f84b73921a80bcb2c5a8875bb65baf57a13ee6aa2c0a6bed0272db17a"
+    },
+    {
+      "bytes": 8079,
+      "hash_kind": "file-bytes",
+      "path": "crosswalk-audit.json.gz",
+      "sha256": "27a6667f130c2433342bff99d95423a3c60fa522551af4dce7f2aaf3d58b16ba"
+    }
+  ]
+}

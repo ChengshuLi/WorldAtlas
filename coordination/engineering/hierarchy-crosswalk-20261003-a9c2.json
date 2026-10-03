@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "hierarchy-crosswalk-20261003-a9c2",
+  "branch": "engineering/hierarchy-crosswalk-20261003-a9c2",
+  "base_main_commit": "dbbf8f736699940ec98efa83972f1784a83cb3a0",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/6",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Fresh release5 crosswalk and separate candidate for exact frozen Monaco/Luxembourg labels and WV duplicate province merge"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-03T19:51:20.501996+00:00",
+  "completed": [
+    "Actual release5 inventory and immediate source footprint compatibility checked",
+    "Separate candidate preserves 49625 location footprints and all canonical ownership parts, changes three chains and retires one parent without historical transfer",
+    "Two complete generator runs are byte-identical; eight synthetic controls passed; existing metadata relationship validator accepted exact merge"
+  ],
+  "checks": [
+    {
+      "command": "python test/reference-hierarchy-rebase.py",
+      "outcome": "passed"
+    },
+    {
+      "command": "Two fresh rebase-reference-hierarchy.py runs and SHA-256 comparison",
+      "outcome": "passed"
+    },
+    {
+      "command": "Existing validateMetadataRelationships on complete current baseline and rebased receipt",
+      "outcome": "passed"
+    }
+  ],
+  "deployment": {
+    "required": false,
+    "performed": false,
+    "remaining": "Issue acceptance still requires coherent installation and publisher-controlled matching live release"
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": "Offline candidate preparation only"
+  },
+  "evidence_paths": [
+    "data/engineering/hierarchy-crosswalk-20261003-a9c2"
+  ],
+  "blockers": [],
+  "next_action": "Independent source/code/release review of partial candidate proof; merge via serialized queue; use fresh second-part branch for bounded installation/publisher coordination or propose reviewed follow-ups if budget insufficient",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "reservation": {
+    "comment_id": 5972835317,
+    "version": 1,
+    "active": true,
+    "worker_id": "engineering-hierarchy-crosswalk-a9c25e14-20261003",
+    "claim_id": "f176ea85-85a1-41c0-a8db-d0a23aec7416",
+    "branch": "engineering/hierarchy-crosswalk-20261003-a9c2",
+    "request_id": "b5c69a78-fa75-41c0-afb2-acbe12e9a3df",
+    "issue_number": 6,
+    "claimed_at": "2026-10-03T19:44:33.850Z",
+    "updated_at": "2026-10-03T19:44:33.850Z",
+    "expires_at": "2026-10-04T19:44:33.850Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 2
+  }
+}
