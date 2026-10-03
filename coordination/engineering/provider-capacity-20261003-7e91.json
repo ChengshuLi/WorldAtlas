@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "provider-capacity-20261003-7e91",
+  "branch": "engineering/provider-capacity-20261003-7e91",
+  "base_main_commit": "8a22c155c114bf1ce4393a38e26535a74a3d7f32",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/50",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "One permitted PR: read-only provider/capacity facts, diagnostic/operator warnings and dated official/account evidence; no upgrades, provisioning, migrations or publication"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-03T18:29:42.793641+00:00",
+  "completed": [
+    "Confirmed previous issue23 actual squash merge and claim release",
+    "Fresh isolated branch from current main; confirmed issue50 reservation"
+  ],
+  "checks": [],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/provider-capacity-20261003-7e91"
+  ],
+  "blockers": [],
+  "next_action": "Existing read-only neon-verify.yml dispatched on main; confirm exact run/receipt once, inspect current private capacity and separate R2 object evidence, then bounded account/official facts and operator documentation.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "worker_id": "engineering-night-20261003-7e91f438",
+  "reservation": {
+    "accepted": true,
+    "request_id": "21e66e19-9cbe-41ac-938c-e661bf66abb5",
+    "issue_number": 50,
+    "claim": {
+      "comment_id": 5972180853,
+      "version": 1,
+      "active": true,
+      "worker_id": "engineering-night-20261003-7e91f438",
+      "claim_id": "6737f393-7cdb-4186-be3f-793a64c0eb70",
+      "branch": "engineering/provider-capacity-20261003-7e91",
+      "request_id": "21e66e19-9cbe-41ac-938c-e661bf66abb5",
+      "issue_number": 50,
+      "claimed_at": "2026-10-03T18:28:59.184Z",
+      "updated_at": "2026-10-03T18:28:59.184Z",
+      "expires_at": "2026-10-04T18:28:59.184Z",
+      "live_work": false,
+      "mode": "engineering",
+      "max_prs": 1
+    },
+    "replayed": false,
+    "result_source": "github-comment",
+    "result_comment_id": 5972181081,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37144339325"
+  }
+}
