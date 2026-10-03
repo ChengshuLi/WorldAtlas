@@ -7,7 +7,7 @@
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/529",
   "worker_id": "engineering-night-20261003-7e91f438",
   "date_timezone": "America/Los_Angeles",
-  "updated_at_utc": "2026-10-03T19:59:36.953227+00:00",
+  "updated_at_utc": "2026-10-03T20:05:49.594617+00:00",
   "scope": [
     "Second of max3 PRs: reviewed additive forward typed storage and complete versioned raw export/restore with legacy evidence/guards preserved. Final third part reserved for actual new adapter API/import/static/prepared/snapshot parity and handover."
   ],
@@ -20,7 +20,8 @@
     "Actual all-version SQLite/PostgreSQL storage/replay/invalid-evidence/rollback controls28pass0fail0skip",
     "Hosted build reserve gate passed; full regression running",
     "Independent status/null gap corrected with cross-adapter controls;625 candidate regressions passed",
-    "Independent retirement uniqueness collision reproduced; both uniqueness-key guards corrected and41 actual/pure controls passed"
+    "Independent retirement uniqueness collision reproduced; both uniqueness-key guards corrected and41 actual/pure controls passed",
+    "Final corrected-source625 full regressions,41 focused actual/pure controls,9 migration/staging checks and hosted reserve passed;27 old source pins unchanged. Actual local nativeD1 old0008 failure retained, no false supported schema pass."
   ],
   "checks": [
     {
@@ -35,6 +36,44 @@
       "command": "npm run build:hosted",
       "result": "passed",
       "receipt": "deployment-budget.json"
+    },
+    {
+      "command": "node --test storage-export-v3/v2/v1 and typed-observations",
+      "tests": 41,
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "retirement-identity-controls.tap"
+    },
+    {
+      "command": "npm run build:hosted",
+      "result": "passed",
+      "receipt": "deployment-budget-retirement-identity.json"
+    },
+    {
+      "command": "node --test migration-hashes hosted-migration-transport stage-site-migrations",
+      "tests": 9,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "migration-transport-retirement-identity.tap"
+    },
+    {
+      "command": "node data/engineering/observation-storage-20261003-7e91/native-d1-reproduction.mjs fresh-output.json",
+      "result": "unavailable",
+      "phase": "pre-existing0008 forward migration, before new0010",
+      "receipt": "native-d1-runtime-limit.json",
+      "scope": "Actual local workerdD1 error retained; no native fullcatalog/guard pass and no oldSQLrewrite"
+    },
+    {
+      "command": "npm test",
+      "receipt": "unit-tests-retirement-identity.tap",
+      "tests": 625,
+      "pass": 625,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "duration_ms": 327795.646851
     }
   ],
   "deployment": null,
@@ -47,10 +86,10 @@
     "data/engineering/observation-storage-20261003-7e91"
   ],
   "blockers": [],
-  "next_action": "Finish corrected-source hosted build/staging/full regression; retain all candidate findings/results; final whole-file ledger and distinct exact-head review then requiredCI/serializedqueue and actualmerge. Canonical claim active same worker/branch,livefalse. No provider/publication operations.",
+  "next_action": "Final whole-file ledger committed/pushed; distinct exact-head review and requiredCI then serializedqueue, matchingbotresult and actualmerge. If main advances incorporate it and revalidate affected checks. After actual secondpartialmerge, confirmed sameclaim branch rotation to one fresh finalintegrationPR. No provider/site operation here.",
   "reservation": {
     "accepted": true,
-    "request_id": "a3fe9701-83e3-49f8-b7c4-fa31f881a566",
+    "request_id": "fe661fa5-0aec-4254-8b53-165a93551102",
     "issue_number": 529,
     "claim": {
       "comment_id": 5972401777,
@@ -59,24 +98,25 @@
       "worker_id": "engineering-night-20261003-7e91f438",
       "claim_id": "9ea71518-3663-4baf-98ef-8cb7c9a8be4c",
       "branch": "engineering/observation-storage-20261003-7e91",
-      "request_id": "a3fe9701-83e3-49f8-b7c4-fa31f881a566",
+      "request_id": "fe661fa5-0aec-4254-8b53-165a93551102",
       "issue_number": 529,
       "claimed_at": "2026-10-03T18:53:45.897Z",
-      "updated_at": "2026-10-03T19:27:26.649Z",
-      "expires_at": "2026-10-04T19:27:26.649Z",
+      "updated_at": "2026-10-03T20:00:38.505Z",
+      "expires_at": "2026-10-04T20:00:38.505Z",
       "live_work": false,
       "mode": "engineering",
       "max_prs": 3
     },
     "replayed": false,
     "result_source": "github-comment",
-    "result_comment_id": 5972706245,
-    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37147936888"
+    "result_comment_id": 5972956109,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37149954032"
   },
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
   "remaining_scope": [
-    "Complete third bounded API/import/read/static/prepared/snapshot parity and module handover; total hard3PRbudget."
+    "Complete third bounded API/import/read/static/prepared/snapshot parity and module handover; total hard3PRbudget.",
+    "Native D1 forward-schema installation limit requires separately reviewed bounded follow-up if needed; final capability gate must keep uninstalled legacyD1 disabled."
   ],
-  "incorporated_main_commit": "529deb71f911e9a675b49a11d1deaff1d894d1b7"
+  "incorporated_main_commit": "277b8ecbb3199ae3d5fb07bab96353d17a049b1c"
 }
