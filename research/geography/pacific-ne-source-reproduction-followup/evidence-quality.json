@@ -1,0 +1,940 @@
+{
+  "version": 1,
+  "issue": 663,
+  "lane": "geography",
+  "worker_id": "codex-20261003-pacific-ne-source-repro-a1c43dd0-487c-466c-a9b5-b13494e7b1de",
+  "subject_ids": [
+    "ASM-4998",
+    "ASM-4999",
+    "ASM-5000",
+    "ASM-5001",
+    "ASM-5002",
+    "WLF-4995",
+    "WLF-4996",
+    "WLF-4997"
+  ],
+  "subject_ids_sha256": "3e837d2a295aceec180784a1594bc3fad8f37b844597ea2d2a83b07c827bf3ed",
+  "baseline": {
+    "commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+    "files": [
+      {
+        "path": "data/geographic-releases/release-5.json.gz",
+        "bytes": 1904,
+        "sha256": "23e84c82b59b74fa6de65e5e5571f4fdb81399ce8b159f0483a3bc2e4e9dbda9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4132,
+        "uncompressed_sha256": "7eff29856f79896ea3eac06c40ee73d1c46378f5fafe31596ae2e8004e7feb3f"
+      },
+      {
+        "path": "data/geography/macro-loose-ends-v5-additions.json",
+        "bytes": 11393,
+        "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-1.json",
+        "bytes": 8060108,
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-10.json",
+        "bytes": 5144571,
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-12.json",
+        "bytes": 4489493,
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-14.json",
+        "bytes": 4355198,
+        "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "bytes": 4909063,
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-21.json",
+        "bytes": 6737781,
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-24.json",
+        "bytes": 4816899,
+        "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "1a26b9a86043db37b502be524c7160e13896ad8231943e228137b764673c5a02",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-26.json",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-27.json",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-30.json",
+        "bytes": 11979437,
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-31.json",
+        "bytes": 10086485,
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "bytes": 10211739,
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-33.json",
+        "bytes": 607984,
+        "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-4.json",
+        "bytes": 4835479,
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-6.json",
+        "bytes": 4607953,
+        "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-7.json",
+        "bytes": 4257402,
+        "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/source-restoration-additions.json",
+        "bytes": 1573576,
+        "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10165703,
+        "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2367982,
+        "sha256": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 10317900,
+        "uncompressed_sha256": "a093e708a4874bc6013d0fb20d2ed15e862b75fa3988663db133e1995e3b6865"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 70253,
+        "sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 440878,
+        "uncompressed_sha256": "d482e7fadfb95b95769b26717e2dea5993667a91abdbbefddd5de8531f19c302"
+      },
+      {
+        "path": "data/research-geography-gate.json",
+        "bytes": 1533,
+        "sha256": "1fd32582e4b9bac195fa5bfe306b7e9aa706d4b5986db97d689bfe14b7b9e2b4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "geography_part_28": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "hierarchy": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "current_membership": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae",
+      "regional_handoffs": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1",
+      "macro_gate": "1fd32582e4b9bac195fa5bfe306b7e9aa706d4b5986db97d689bfe14b7b9e2b4",
+      "macro_release": "23e84c82b59b74fa6de65e5e5571f4fdb81399ce8b159f0483a3bc2e4e9dbda9"
+    },
+    "pin_files": {
+      "geography_part_28": "data/geography/part-28.json",
+      "hierarchy": "data/hierarchy.json",
+      "world_index": "data/world-index.json",
+      "current_membership": "data/macro-foundation/current-membership-inventory.json.gz",
+      "regional_handoffs": "data/macro-foundation/regional-handoffs.json.gz",
+      "macro_gate": "data/research-geography-gate.json",
+      "macro_release": "data/geographic-releases/release-5.json.gz"
+    },
+    "subject_files": {
+      "ASM-4998": "data/geography/part-28.json",
+      "ASM-4999": "data/geography/part-28.json",
+      "ASM-5000": "data/geography/part-28.json",
+      "ASM-5001": "data/geography/part-28.json",
+      "ASM-5002": "data/geography/part-28.json",
+      "WLF-4995": "data/geography/part-28.json",
+      "WLF-4996": "data/geography/part-28.json",
+      "WLF-4997": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "natural-earth-5-1-1",
+      "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19/10m_cultural",
+      "role": "Pinned cartographic Admin-1 identities and polygons; source policy, names and geometry only, not legal boundaries or ownership",
+      "vintage": "Natural Earth 5.1.1; upstream commit ca96624a56bd078437bca8184e78163e5039ad19 dated 2022-06-02",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth states its vector and raster maps are public domain; retain its README/source attribution and exact upstream commit."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.shp",
+          "bytes": 20998780,
+          "sha256": "c6f5c8b4b1320d9417033762419c6df1eb423989cd880fba78ea0b1e3522cbe4",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.shx",
+          "bytes": 36868,
+          "sha256": "37a9e2bc79ed31d3bdea3cb62d928f77281a1c88d645cd33430231c75dbcf350",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.dbf",
+          "bytes": 15161514,
+          "sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.VERSION.txt",
+          "bytes": 6,
+          "sha256": "f9893302cd3158f3b5aea394dcd2a91574869e9e6ff69e9235b10a3bf8c983fb",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/natural-earth/ne_10m_admin_1_states_provinces.README.html",
+          "bytes": 44181,
+          "sha256": "27d12def2c79a2ff3744abb27a3ba2783334f4dc1ec2dedc3ce3c00c4ea71e25",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Upstream pinned commit, 10m_cultural/ne_10m_admin_1_states_provinces.*; exact local whole-file SHA-256 and sizes in evidence-quality.json and sources.json."
+    },
+    {
+      "id": "us-census-2020-as",
+      "url": "https://www.census.gov/programs-surveys/geography.html",
+      "role": "American Samoa Census county-equivalent, county subdivision and place statistical names/coverage; does not determine jurisdiction, title or land ownership",
+      "vintage": "2020 Census geography; geographic reference date 2020-01-01; GARM PDF host Last-Modified 2023-07-18, TIGER files Last-Modified 2021-02-02",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal government Census geography/public-domain data; source cautions Census statistical boundaries do not determine jurisdiction or title."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/census-as/GARM2020_ST60_AS.pdf",
+          "bytes": 2487049,
+          "sha256": "46cd1acfb0b6f0cbc62a98a82755f8a26d72e861133f97fbac99267e1e03800a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/census-as/tl_2020_60_cousub.zip",
+          "bytes": 31892,
+          "sha256": "8dbd2da4dc77649c061bc665bd05f75661467273c23cce4e17fad7e0f73d0ecf",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/census-as/tl_2020_60_place.zip",
+          "bytes": 80539,
+          "sha256": "6d370059faeb4b3398b43d45de3df66f60e54c09b90ce8e788e91181e7150584",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Exact canonical URLs: https://www2.census.gov/geo/maps/DC2020/GARM20/GARM2020_ST60_AS.pdf ; https://www2.census.gov/geo/tiger/TIGER2020/COUSUB/tl_2020_60_cousub.zip ; https://www2.census.gov/geo/tiger/TIGER2020/PLACE/tl_2020_60_place.zip."
+    },
+    {
+      "id": "american-samoa-code",
+      "url": "https://asbar.org/code-annotated/",
+      "role": "American Samoa Code §§5.0101–5.0102 for stated district and county roles; not a demarcation source",
+      "vintage": "Code history identifies 1962 PL 7-28; current text as presented by American Samoa Bar Association, retrieval date 2026-10-03",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "Page reuse rights not established; original host returned HTTP 403; text was inspected through a text-access proxy. No source text retained."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore https://asbar.org/code-annotated/ and verify sections 5.0101 and 5.0102 against the current local public-law/code originals; earlier direct fetch returned HTTP 403, only proxy text access succeeded.",
+      "limit": "Legal-source fidelity and current codification not verified against the official local original; proxy page/hash captured in source notes only."
+    },
+    {
+      "id": "wf-insee-2018",
+      "url": "https://www.insee.fr/fr/statistiques/5392492",
+      "role": "Official INSEE 2018 circonscriptions, statistical districts and village names/population rows; not legal boundary authority",
+      "vintage": "Population légale 2018; INSEE tables published 2021 (source metadata); workbook downloaded 2026-10-03",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "INSEE reuse terms state public data are reusable under Licence Ouverte/Open Licence 2.0 unless otherwise specified; attribution retained."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/insee-wf/3685976.html",
+          "bytes": 71966,
+          "sha256": "4605da940e037d67175c009068f1a37ff7c0b6631fe6f1cdec320027bb34b8ef",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/insee-wf/3685978.html",
+          "bytes": 72821,
+          "sha256": "7f18f6f25ac828c6253eff2cb1326ed8b655492dd584171ee04e168bfa25cf62",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/insee-wf/3685981.html",
+          "bytes": 75262,
+          "sha256": "af97f11fcbeb909c10138730c3ceb9930cf055053d453a0ec97829d299e5dd81",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/insee-wf/reuse.html",
+          "bytes": 56467,
+          "sha256": "2b904c7415e3b241540640e706a79a2eb1ed3de580c9415efd4614c74740c73d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/insee-wf/wetf-2018.xlsx",
+          "bytes": 9415,
+          "sha256": "258dd10e064082dc1546ca09703e6919e90aed44963138c80a28a2b90e8a88e0",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "INSEE table pages 3685976, 3685978, 3685981 and workbook https://www.insee.fr/fr/statistiques/fichier/5392492/wetf-RP2018-tableaux_pop_legale.xlsx; reuse terms retained as reuse.html."
+    },
+    {
+      "id": "territorial-assembly-wf",
+      "url": "https://www.assembleeterritoriale.wf/assemblee/organisation-politique",
+      "role": "Current territorial description of three customary kingdoms/circonscriptions, Wallis districts and village roster",
+      "vintage": "Live official territorial-assembly web page inspected 2026-10-03; page indicates 1961 statute/2003 status context",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for HTML not established; no page bytes retained. SHA-256 of retrieved response fd995a55312447d91542562488c79c34f37ea30caafbf0b429fc07a4ebf8e60a, 77,559 bytes."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore canonical HTTPS page and verify current content; recorded response size/hash and retrieval date allow recheck.",
+      "limit": "Webpage is not a digitized legal boundary source; no explicit HTML reuse terms."
+    },
+    {
+      "id": "gshhg-2-3-7",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+      "role": "Physical shoreline/land screen for mapped polygon intersections and nearest candidates only",
+      "vintage": "GSHHG 2.3.7, archive release 2017-06-15; archive SHA-256 28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "LGPL terms from release retained as sources/gshhg-LGPL.txt; archive not fully retained, exact gshhs_f.b member SHA-256 af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6, 92 MB."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/gshhg-LGPL.txt",
+          "bytes": 7651,
+          "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/sources/gshhg-local-records.bin.gz",
+          "bytes": 30751,
+          "sha256": "23a82a9c8d32a2b0538a479dfbcb6a5e8a5ed26ebcb981a91e13e3e81efe4294",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 50100,
+          "uncompressed_sha256": "4d2de3ba794fbf439624174af25fe6b2f713cc82b2250bd62a511e8957542b67"
+        }
+      ],
+      "restoration": "Download pinned 2.3.7 archive, verify archive and gshhs_f.b member hashes above, then run screen_gshhg.py with the restored member."
+    },
+    {
+      "id": "legifrance-1961-status-statute",
+      "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000684031/",
+      "role": "Candidate official statute mentioned by the Territorial Assembly; not used for legal conclusions because the page was inaccessible",
+      "vintage": "Law 61-814 of 29 July 1961; 2026-10-03 retrieval returned HTTP 403/CAPTCHA",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "No content accessed; reuse terms and text version unverified."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore the canonical URL and verify the statute against its official text and local promulgation.",
+      "limit": "Access failure is not evidence; no legal conclusion in this packet relies on this page."
+    },
+    {
+      "id": "wgsrpd-level-3",
+      "url": "https://github.com/tdwg/wgsrpd",
+      "role": "Published reference lineage for the geographic area labels; not an administrative hierarchy or current boundary authority",
+      "vintage": "WGSRPD second edition (Brummitt 2001), retained-reference metadata in published baseline",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "No WGSRPD data redistributed; verify upstream terms before retaining original bytes."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Inspect linked TDWG repository and baseline area metadata for cited version/area lineage.",
+      "limit": "Botanical reporting areas do not establish partition boundaries or land membership."
+    },
+    {
+      "id": "un-m49-regions",
+      "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+      "role": "Contextual geographic/statistical convention cited by published baseline area metadata, not a polygon or political ownership authority",
+      "vintage": "UN M49 overview page; retrieval date 2026-10-03",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "No copy retained; verify source reuse terms."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore canonical UN Statistics URL and inspect overview table.",
+      "limit": "Statistical subregion labels do not establish geographic boundaries."
+    },
+    {
+      "id": "worldatlas-issue616-prior-insee-extraction",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/6c6271af6b0dac49b82eaafb2db4de8b9c4611f2/data/regional-review/pacific-natural-earth-source-profiles-20261003",
+      "role": "Pinned prior WorldAtlas extraction used by the preserved #616 legal-role comparison; it is a derived research input, not independent INSEE evidence.",
+      "vintage": "Issue #616 source snapshot at merge commit 6c6271af6b0dac49b82eaafb2db4de8b9c4611f2",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "Internal project-derived evidence; upstream data rights are described by source wf-insee-2018 and no separate license is asserted."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the exact whole-file descriptor from the issue #616 source snapshot commit recorded in source-snapshot-pin.json.",
+      "limit": "Derived prior output; it inherits the cited upstream limits and is not an independent legal or statistical authority.",
+      "files": [
+        {
+          "path": "data/regional-review/pacific-natural-earth-source-profiles-20261003/wallis-futuna-insee-inventory.json",
+          "bytes": 7147,
+          "sha256": "ffc6a3a0278fec76f9773f4c1e23bffaed92d3f47c3ea0278e3ee70f3bf55ee9",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/README.md",
+      "bytes": 4904,
+      "sha256": "09c3bc5659d381c498d9cce4d2dc0f172524ac8681e0e01a17c3383e57d65810",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/claim-663-receipt.json",
+      "bytes": 956,
+      "sha256": "b01e0e02ad956f10a6b0ba95edd9cf4ac0d69dac73242370008a3483cac92460",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/issue-663-snapshot.json",
+      "bytes": 8832,
+      "sha256": "5fd5928ffe83f6e8a808dda0b30eb9d5153cc80894eab76c77aed17c021cf374",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/prepare_manifest.py",
+      "bytes": 11442,
+      "sha256": "b7af3990d10f6b0dbeaa8e8fc4bc2d824715848a1f9409f3bd5dbfdb9409cf98",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/reproduce.py",
+      "bytes": 23289,
+      "sha256": "2221f8acc838dd5a78a2782bb4b7a96c7be4fc728e95a70b48f633236a5f1603",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/scope.json",
+      "bytes": 516,
+      "sha256": "549cf5e4dca08795e0501b795a4ff21f76828fae7221dabfaa815d3449687566",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/administrative-role-review.json",
+      "bytes": 5445,
+      "sha256": "090e61db1cdbc5a1099a675a2fd7ceac4b904e7bc00f59261f0c53dca8b71f3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/american-samoa-census-geometry-comparison.json",
+      "bytes": 6641,
+      "sha256": "a2cbd9a2c806d7c4ec8e4f8efbf8350cfef9b3f43d473b432a915a4431f25126",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/american-samoa-census-inventory.json",
+      "bytes": 32983,
+      "sha256": "25589aacd176f07ec39addcaf51db855204f5d006787cb416b4c5e4f9a8c58b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/issue-scope.json",
+      "bytes": 53052,
+      "sha256": "4a50fce7d2f99fdc4900703ae856da6205cedf28fe085896fcbc4f4f3370d7f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/natural-earth-current-geometry-comparison.json",
+      "bytes": 5071,
+      "sha256": "886f88a36e0349b0cf4520847677de9a6c062c617e250d071847afa004c189ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/natural-earth-source-profiles.json",
+      "bytes": 15906,
+      "sha256": "ccaba3e302b246aaafa24c8c89e2747436b3de6bef855a5a05b41f4683bde61a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/negative-control.json",
+      "bytes": 382,
+      "sha256": "75f63c46c94baaf3b4cd10e0b2822e148b08d2170ce18b6781c8b8aa11e55a72",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/output-comparison.json",
+      "bytes": 4774,
+      "sha256": "78d8b37a87c1d17bb989016db6c5e0fa4f0d8bb8770512426e6540a55de2a90c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/positive-control.json",
+      "bytes": 1002,
+      "sha256": "6147a82df4c17e6b7a3b19c5e312fbdb803df46569d85666c086d2fd87e119c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/reproducibility-control.json",
+      "bytes": 568,
+      "sha256": "4f063fac43a22855947ca3b1c6eae17dd81f072ade54bb2e407b08c43670b2d6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/reproduction-run.json",
+      "bytes": 2634,
+      "sha256": "cb46c3ca928015647f1f223f4ab83bc1d35772ef305c13b5b5f0e2de7f801f37",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/source-snapshot-pin.json",
+      "bytes": 8683,
+      "sha256": "7ab8eee9e175867cac66a91a974cedfc1c057f3b9c79203443423792895fbd46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/wallis-futuna-insee-inventory.json",
+      "bytes": 5215,
+      "sha256": "8dea4c774751c2bbfc90c9a80bc369a8ae5c120c7f9eb2a1385f51b3cd9da169",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "immutable-source-reproduction",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Verify the complete #616 declared Git project baseline and the exact #616 source snapshot, then run the original source-profile generator against immutable bytes with writes redirected to a new vintage. Geometry metrics preserve the original script's EPSG:6933 planar diagnostic method; source/current polygons are not repaired and no administrative or ownership conclusion follows from overlays.",
+      "software": "Python 3.12; pyshp 2.3.1; Shapely 2.1.2; pyproj 3.7.2; openpyxl 3.1.5; shared immutable helper worldatlas-evidence-preparation-v1",
+      "units": "locations, source rows, byte counts, SHA-256 whole-file digests, JSON pointers"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "exact_issue_subjects",
+      "value": 8,
+      "unit": "locations",
+      "vintage": "baseline",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37"
+    },
+    {
+      "id": "regenerated_output_files",
+      "value": 7,
+      "unit": "files",
+      "vintage": "baseline",
+      "input_sha256": "2221f8acc838dd5a78a2782bb4b7a96c7be4fc728e95a70b48f633236a5f1603",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37"
+    },
+    {
+      "id": "pinned_source_snapshot_file_count",
+      "value": 37,
+      "unit": "files",
+      "vintage": "archived",
+      "input_sha256": "7ab8eee9e175867cac66a91a974cedfc1c057f3b9c79203443423792895fbd46",
+      "evaluation_commit": "6c6271af6b0dac49b82eaafb2db4de8b9c4611f2"
+    },
+    {
+      "id": "reproducible_output_files",
+      "value": 7,
+      "unit": "files",
+      "vintage": "baseline",
+      "input_sha256": "2221f8acc838dd5a78a2782bb4b7a96c7be4fc728e95a70b48f633236a5f1603",
+      "evaluation_commit": "f592b3d8b72f40036218803d2c70c733112e4d37"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "exact_issue_subjects",
+      "value": 8,
+      "unit": "locations"
+    },
+    {
+      "metric_id": "regenerated_output_files",
+      "value": 7,
+      "unit": "files"
+    },
+    {
+      "metric_id": "pinned_source_snapshot_file_count",
+      "value": 37,
+      "unit": "files"
+    },
+    {
+      "metric_id": "reproducible_output_files",
+      "value": 7,
+      "unit": "files"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "exact_issue_subjects",
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/positive-control.json",
+      "json_pointer": "/subject_count"
+    },
+    {
+      "metric_id": "regenerated_output_files",
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/reproduction-run.json",
+      "json_pointer": "/output_count"
+    },
+    {
+      "metric_id": "pinned_source_snapshot_file_count",
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/reproduction-run.json",
+      "json_pointer": "/source_snapshot_file_count"
+    },
+    {
+      "metric_id": "reproducible_output_files",
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/reproducibility-control.json",
+      "json_pointer": "/matching_file_count"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The original eight subjects resolve uniquely in every part enumerated by the pinned world index, have complete province-to-continent parent chains in the f592 project baseline, and reproduce through a new isolated vintage.",
+      "status": "supported",
+      "source_ids": [
+        "natural-earth-5-1-1",
+        "worldatlas-issue616-prior-insee-extraction"
+      ]
+    },
+    {
+      "text": "The new-vintage comparison records reproducibility differences between the declared f592 project baseline and the later #616 source snapshot; those byte/JSON differences alone do not establish a corrected administrative or territorial conclusion.",
+      "status": "unresolved",
+      "source_ids": [
+        "natural-earth-5-1-1",
+        "us-census-2020-as",
+        "wf-insee-2018",
+        "american-samoa-code",
+        "territorial-assembly-wf"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/pacific-ne-source-reproduction-followup/reproduce.py --new-vintage 20261003-f592-source-profile-reproduction-v1",
+    "python3 research/geography/pacific-ne-source-reproduction-followup/reproduce.py --check 20261003-f592-source-profile-reproduction-v1",
+    "node scripts/evidence-quality.mjs research/geography/pacific-ne-source-reproduction-followup/evidence-quality.json ."
+  ],
+  "source_snapshot_commit": "6c6271af6b0dac49b82eaafb2db4de8b9c4611f2",
+  "declared_project_baseline": "f592b3d8b72f40036218803d2c70c733112e4d37",
+  "change_receipts": [
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/claim-663-receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/issue-663-snapshot.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/prepare_manifest.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/reproduce.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/scope.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/administrative-role-review.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/american-samoa-census-geometry-comparison.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/american-samoa-census-inventory.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/issue-scope.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/natural-earth-current-geometry-comparison.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/natural-earth-source-profiles.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/output-comparison.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/reproducibility-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/reproduction-run.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/source-snapshot-pin.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/wallis-futuna-insee-inventory.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "immutable-source-reproduction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/positive-control.json"
+    },
+    {
+      "method_id": "immutable-source-reproduction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/negative-control.json"
+    },
+    {
+      "method_id": "immutable-source-reproduction",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/pacific-ne-source-reproduction-followup/vintages/20261003-f592-source-profile-reproduction-v1/reproducibility-control.json"
+    }
+  ]
+}
