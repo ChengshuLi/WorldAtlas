@@ -51,3 +51,27 @@ test('management workflows require explicit manual dispatch and reject push sele
   }
  }finally{fs.rmSync(directory,{recursive:true,force:true});}
 });
+
+
+test('third reviewed forward migration installs typed runtime privileges without changing retained core contracts or replay identity',async()=>{
+ const f=await fixture();
+ try{
+  const options={driver:f.owner,sourceDirectory:f.directory,migrations:forwardMigrationDefinitions.map(definition=>({...definition,sha256:hash(fs.readFileSync(path.join(root,definition.file)))})),baselineTriggerHash:f.baseline.trigger_inventory_sha256,root};
+  const first=await applyPostgresForwardMigrations(options);assert.equal(first.atlas_fact_tables,26);assert.equal(first.storage_export_version,3);assert.equal(first.runtime.tables,26);assert.deepEqual(first.original_collections,f.baseline.collections);
+  assert.equal(Number((await f.owner.query("SELECT count(*) n FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.proname LIKE 'atlas_typed_%' AND has_function_privilege('worldatlas_app',p.oid,'EXECUTE')")).rows[0].n),0);
+  const retry=await applyPostgresForwardMigrations(options);assert.deepEqual(retry.migrations.map(row=>row.status),['already-applied','already-applied','already-applied']);assert.equal((await applyPostgresForwardMigrations({...options,verifyOnly:true})).read_only,true);
+  await f.owner.query('SET ROLE worldatlas_app');
+  try{
+   for(const table of forwardMigrationDefinitions[2].tables){await f.owner.query('SELECT * FROM '+table);for(const query of ['UPDATE '+table+' SET metadata=metadata','DELETE FROM '+table,'TRUNCATE '+table,'ALTER TABLE '+table+' DISABLE TRIGGER ALL'])await assert.rejects(f.owner.query(query));}
+   await assert.rejects(f.owner.query('SELECT * FROM worldatlas_schema_migrations'));await assert.rejects(f.owner.query('SELECT atlas_typed_observations_guard()'));
+  }finally{await f.owner.query('RESET ROLE');}
+  for(const grantee of ['worldatlas_app','PUBLIC']){
+   await f.owner.query('GRANT EXECUTE ON FUNCTION atlas_typed_observations_guard() TO '+grantee);
+   await assert.rejects(applyPostgresForwardMigrations({...options,verifyOnly:true}),/unexpected-typed-function-privileges/);
+   await f.owner.query('REVOKE EXECUTE ON FUNCTION atlas_typed_observations_guard() FROM '+grantee);
+   assert.equal((await applyPostgresForwardMigrations({...options,verifyOnly:true})).status,'verified');
+  }
+  await f.owner.query('ALTER TABLE atlas_typed_retirements DISABLE TRIGGER atlas_typed_retirements_immutable');
+  await assert.rejects(applyPostgresForwardMigrations(options),/registered-forward-contract|guard-disabled/);
+ }finally{await f.close();}
+});

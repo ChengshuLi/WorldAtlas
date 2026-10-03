@@ -1,0 +1,15 @@
+{
+  "scope": "synthetic fetch only, no network/provider",
+  "results": [
+    {
+      "probe": "different decoded metadata",
+      "accepted": false,
+      "error": "Original source metadata JSON identifies different evidence"
+    },
+    {
+      "probe": "matching whitespace original metadata",
+      "accepted": true,
+      "originalBytes": " {\"archive\":\"retained original\"} "
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+✔ v3 inventories all twenty-six tables and pins every reviewed D1/PostgreSQL migration (17.791772ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (1788.049747ms)
+✔ forward owner restoration streams all twenty-six tables, original JSON bytes, deferred receipts and sequence (2120.808908ms)
+✔ v3 detects changing staged publication, missing source guards and unexpected factual tables (1458.084312ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1504.048792ms)
+✔ a deferred cross-table FK failure rolls back all twenty-six tables, guards and sequence (1643.067929ms)
+✔ interrupted v3 capture resumes preserved pages and its v3 cursor cannot be sent to v1 (247.495605ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8880.539751

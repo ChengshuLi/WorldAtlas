@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "storage-handoff-20261003-a9c2",
+  "branch": "engineering/storage-handoff-20261003-a9c2",
+  "base_main_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/56",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Current operational Neon/R2/Sites documentation and fresh-worker route links; preserve dated receipts and import gates"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-03T19:08:35.815371+00:00",
+  "completed": [
+    "Compared documented routes, capacity measurement and maintenance capture with current source",
+    "Corrected unprovisioned-PostgreSQL/D1-only guidance and dated baseline framing",
+    "Verified relative links and unchanged baseline implementation/receipt hashes"
+  ],
+  "checks": [
+    {
+      "command": "node data/engineering/storage-handoff-20261003-a9c2/audit.mjs",
+      "outcome": "passed",
+      "receipt": "data/engineering/storage-handoff-20261003-a9c2/audit.json"
+    },
+    {
+      "command": "git diff --check",
+      "outcome": "passed"
+    }
+  ],
+  "deployment": {
+    "required": false,
+    "performed": false,
+    "reason": "Documentation only; no production operation"
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/storage-handoff-20261003-a9c2/claim-receipt.json",
+    "data/engineering/storage-handoff-20261003-a9c2/audit.json",
+    "coordination/engineering/storage-handoff-20261003-a9c2/evidence-quality.json"
+  ],
+  "blockers": [],
+  "next_action": "Push focused PR; obtain distinct-worker exact-head review; run serialized squash queue and verify actual merge; release confirmed reservation; inspect next eligible item",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "reservation": {
+    "comment_id": 5972532718,
+    "version": 1,
+    "active": true,
+    "worker_id": "engineering-continuous-a9c25e14-20261003",
+    "claim_id": "ce33888a-fa83-4f5d-b42d-83c88ff0ab24",
+    "branch": "engineering/storage-handoff-20261003-a9c2",
+    "request_id": "e70050da-5c69-4597-89de-8364ba55e55a",
+    "issue_number": 56,
+    "claimed_at": "2026-10-03T19:05:30.638Z",
+    "updated_at": "2026-10-03T19:05:30.638Z",
+    "expires_at": "2026-10-04T19:05:30.638Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 1
+  }
+}

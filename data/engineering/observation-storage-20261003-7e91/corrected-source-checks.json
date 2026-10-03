@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "scope": "Completed corrected-source checks; synthetic source semantics and actual isolated SQLite/PostgreSQL execution, not production/geographic/device certification. Native D1 limit separately retained.",
+  "checked_at_utc": "2026-10-03T20:05:49.592213+00:00",
+  "incorporated_main_sha": "277b8ecbb3199ae3d5fb07bab96353d17a049b1c",
+  "checks": [
+    {
+      "command": "npm test",
+      "receipt": "unit-tests-retirement-identity.tap",
+      "tests": 625,
+      "pass": 625,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "duration_ms": 327795.646851
+    },
+    {
+      "command": "node --test v1/v2/v3 storage and typed contracts",
+      "receipt": "retirement-identity-controls.tap",
+      "tests": 41,
+      "pass": 41,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "duration_ms": 16197.566039
+    },
+    {
+      "command": "node --test migration hashes/transport/staging",
+      "receipt": "migration-transport-retirement-identity.tap",
+      "tests": 9,
+      "pass": 9,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "duration_ms": 5471.412297
+    }
+  ],
+  "hosted_build": "deployment-budget-retirement-identity.json",
+  "native_d1_limit": "native-d1-runtime-limit.json",
+  "source_files": [
+    {
+      "path": "drizzle/0010_typed_observations.sql",
+      "bytes": 12622,
+      "sha256": "672cb4f723a84ce2958f90f7c5d1fe517d566d6753da520ec3246a00dfe234c1"
+    },
+    {
+      "path": "postgres/migrations/0003_typed_observations.sql",
+      "bytes": 14790,
+      "sha256": "0c9c1c402c0f1ee707a0083199ea07314233846deb9fddb79723108a0c439041"
+    },
+    {
+      "path": "hosted/storage-export-v3-contract.js",
+      "bytes": 2545,
+      "sha256": "9fe988be6f06ba81d6e92d1fd0b82e7b940f8f90829d072a42e5cd9a0696b821"
+    },
+    {
+      "path": "hosted/storage-export-v3.js",
+      "bytes": 11339,
+      "sha256": "086146fc35b565bdd6e93416c05cd58761b0447d05a08ad53ef19c3f9cbc8a03"
+    },
+    {
+      "path": "scripts/export-hosted-storage-v3.mjs",
+      "bytes": 15673,
+      "sha256": "42d79c38cf21bd388b832875ad485b1b848ba32e5365dd355103fd5a510a5f48"
+    },
+    {
+      "path": "scripts/restore-postgres-storage-v3.mjs",
+      "bytes": 20625,
+      "sha256": "51098fe5e9f042dabdabf05cf60e5c25bdeb32b02031dd3e38dfaf490611bd30"
+    },
+    {
+      "path": "hosted/worker.js",
+      "bytes": 14352,
+      "sha256": "3f05015a55ef13e9af3b1052151f9515d754ad9727ce1fd0d8a6fcdf5c6a2969"
+    },
+    {
+      "path": "test/storage-export-v3.test.mjs",
+      "bytes": 34343,
+      "sha256": "d48c2a2ddca650da63d16860a4d6ac08d8d0047405a7e7cd6b4468d5b88e0b26"
+    }
+  ]
+}

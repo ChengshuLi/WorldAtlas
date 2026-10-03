@@ -1,0 +1,363 @@
+{
+  "source_line": "IBC US–Canada Boundary v1.3, section 25, “49th Parallel (Pacific to Columbia Valley)”, metadata date 2018-04-20",
+  "source_archive": {
+    "canonical_url": "https://www.internationalboundarycommission.org/uploads/shapefile/us-canada-boundary-v1-3.zip",
+    "bytes": 258764,
+    "sha256": "eb327459528b87cbc27e55ccc6bfd6982562c75559823a00b6dc50c04abcaab1",
+    "retained": false,
+    "reason": "IBC page states ©2015 IBC, All Rights Reserved; mapping use only. No open redistribution license identified. Download temporarily, verify size/hash, use for mapping only, do not republish bytes; recheck terms before restoration."
+  },
+  "baseline": {
+    "wna_region_id": "framework:region:western-north-america:d2a1c2775a57",
+    "release": "geographic release 5 / Site 21",
+    "frozen_region_geometry_sha256": "7697f7a1a388f6b3e289ef00795cdb5e86bf9138f89eb97ec8d19bcfa1c131a9",
+    "frozen_region_member_ids_sha256": "3e060c8e712c4955bdb2996d4edf3b9271aaa8d0120501171cc7327e10797aaf",
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "bc_location": "atlas:district:CAN-5915:BRC (Greater Vancouver), StatsCan 2021 Census Division-derived group",
+    "bc_city_candidate": "gb:CAN:ADM3:43193130B1191968375732 (Abbotsford), current assigned member; 23,320.81–40,232.57 m from scoped line points",
+    "washington_current_memberships": [
+      {
+        "id": "gb:USA:ADM2:52423323B9068998137459",
+        "name": "Whatcom",
+        "parent": "framework:province:washington:b01ae89096c9"
+      },
+      {
+        "id": "gb:USA:ADM2:52423323B32782252789959",
+        "name": "San Juan",
+        "parent": "framework:province:washington:b01ae89096c9"
+      }
+    ],
+    "washington_parent_chain": [
+      "framework:province:washington:b01ae89096c9",
+      "framework:area:pacific:31aced66907e",
+      "framework:region:western-north-america:d2a1c2775a57",
+      "framework:subcontinent:northern-america:477e054b32f2",
+      "framework:continent:north-america:1ca27616f338"
+    ],
+    "bc_census_division": "5915 Greater Vancouver, Statistics Canada 2021 Census Divisions",
+    "wa_counties": [
+      {
+        "geoid": "53073",
+        "name": "Whatcom",
+        "source": "2024 TIGER/Line",
+        "ALAND_m2": 5459563210,
+        "AWATER_m2": 1028031788
+      },
+      {
+        "geoid": "53055",
+        "name": "San Juan",
+        "source": "2024 TIGER/Line",
+        "ALAND_m2": 450435997,
+        "AWATER_m2": 1157474748
+      }
+    ]
+  },
+  "bc_boundary_input_accounting": {
+    "assigned_bc_location_count": 61,
+    "usable_area_boundaries": 60,
+    "no_area_boundary_after_temporary_make_valid": [
+      "atlas:physical:CAN-185:BRC"
+    ],
+    "note": "This assigned physical ecoregion feature yields no area boundary after the same temporary projection/validity-repair and polygon-boundary method; it contributes no edge candidate. It is reported explicitly rather than silently counted as a geometric hit."
+  },
+  "method": "Recreate section 25 from the hash-pinned IBC archive. Project line and retained official BC/Census/TIGER geometry to EPSG:3347; sample line at equal intervals no more than 1 km apart (74 points total), corresponding to the inherited #485 screen. Report all 18 consecutive points whose nearest assigned BC location boundary is over 1 km, with nearest boundaries and county polygon containment. Point-on-boundary behavior is reported separately; not interpreted as ownership. The IBC v1.3 line is expressly mapping-only.",
+  "assessment": "18/18 scoped samples are enumerated. Their nearest assigned BC location boundary is Greater Vancouver (CAN-5915); point distances range from 1,011.91 m to 5,888.53 m. Their nearest 2024 TIGER Washington county polygon edge is Whatcom (53073), all within 0.2 m; San Juan is not the nearest county for any. Four samples lie on/near county polygon edges and report no strict polygon containment; the others are contained in Whatcom. This is consistent with, but does not prove, a coast/water footprint representation difference between the BC source group and Washington county representation. Census CD 5915 also lacks a `WATERAREA` attribute in the retained 2021 layer response; source line and boundary vintages/scales differ. The two county `AWATER` values show substantial water area but do not identify which exact surfaces account for this line offset. Insufficient evidence to assign cause or recommend any boundary correction. No legal boundary or political ownership conclusion follows. Coordinate cross-region follow-up with Washington and British Columbia source owners if a future certified boundary/footprint comparison is desired.",
+  "samples": [
+    {
+      "sample": 50,
+      "epsg3347_m": [
+        4026262.1,
+        1968065.8
+      ],
+      "nearest_current_bc_location_boundary_m": 1011.9,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 23320.81,
+      "nearest_2021_statscan_cd_boundary_m": 1027.44,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.195,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 51,
+      "epsg3347_m": [
+        4025383.0,
+        1968531.8
+      ],
+      "nearest_current_bc_location_boundary_m": 1462.23,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 24315.62,
+      "nearest_2021_statscan_cd_boundary_m": 1463.12,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.03,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 52,
+      "epsg3347_m": [
+        4024504.0,
+        1968997.9
+      ],
+      "nearest_current_bc_location_boundary_m": 1875.54,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 25310.43,
+      "nearest_2021_statscan_cd_boundary_m": 1883.5,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.127,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 53,
+      "epsg3347_m": [
+        4023625.1,
+        1969464.1
+      ],
+      "nearest_current_bc_location_boundary_m": 2280.58,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 26305.25,
+      "nearest_2021_statscan_cd_boundary_m": 2283.78,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.095,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 54,
+      "epsg3347_m": [
+        4022746.1,
+        1969930.2
+      ],
+      "nearest_current_bc_location_boundary_m": 2449.09,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 27300.06,
+      "nearest_2021_statscan_cd_boundary_m": 2554.53,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.01,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 55,
+      "epsg3347_m": [
+        4021867.2,
+        1970396.4
+      ],
+      "nearest_current_bc_location_boundary_m": 2484.11,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 28294.87,
+      "nearest_2021_statscan_cd_boundary_m": 2486.57,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.011,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": []
+    },
+    {
+      "sample": 56,
+      "epsg3347_m": [
+        4020988.2,
+        1970862.7
+      ],
+      "nearest_current_bc_location_boundary_m": 2570.36,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 29289.68,
+      "nearest_2021_statscan_cd_boundary_m": 2460.97,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.061,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 57,
+      "epsg3347_m": [
+        4020109.3,
+        1971328.9
+      ],
+      "nearest_current_bc_location_boundary_m": 2664.36,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 30284.49,
+      "nearest_2021_statscan_cd_boundary_m": 2517.76,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.057,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 58,
+      "epsg3347_m": [
+        4019230.4,
+        1971795.2
+      ],
+      "nearest_current_bc_location_boundary_m": 2899.47,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 31279.3,
+      "nearest_2021_statscan_cd_boundary_m": 2860.8,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.092,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 59,
+      "epsg3347_m": [
+        4018351.5,
+        1972261.5
+      ],
+      "nearest_current_bc_location_boundary_m": 3418.36,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 32274.11,
+      "nearest_2021_statscan_cd_boundary_m": 3413.62,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.093,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 60,
+      "epsg3347_m": [
+        4017472.6,
+        1972727.9
+      ],
+      "nearest_current_bc_location_boundary_m": 4116.2,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 33268.92,
+      "nearest_2021_statscan_cd_boundary_m": 4106.63,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.06,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 61,
+      "epsg3347_m": [
+        4016593.8,
+        1973194.3
+      ],
+      "nearest_current_bc_location_boundary_m": 4917.37,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 34263.73,
+      "nearest_2021_statscan_cd_boundary_m": 4879.38,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.041,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 62,
+      "epsg3347_m": [
+        4015715.0,
+        1973660.7
+      ],
+      "nearest_current_bc_location_boundary_m": 5779.07,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 35258.54,
+      "nearest_2021_statscan_cd_boundary_m": 5706.91,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.032,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    },
+    {
+      "sample": 63,
+      "epsg3347_m": [
+        4014836.1,
+        1974127.1
+      ],
+      "nearest_current_bc_location_boundary_m": 5888.53,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 36253.34,
+      "nearest_2021_statscan_cd_boundary_m": 5893.34,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.032,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": []
+    },
+    {
+      "sample": 64,
+      "epsg3347_m": [
+        4013957.3,
+        1974593.6
+      ],
+      "nearest_current_bc_location_boundary_m": 4893.59,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 37248.15,
+      "nearest_2021_statscan_cd_boundary_m": 4898.41,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.052,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": []
+    },
+    {
+      "sample": 65,
+      "epsg3347_m": [
+        4013078.5,
+        1975060.1
+      ],
+      "nearest_current_bc_location_boundary_m": 3898.66,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 38242.96,
+      "nearest_2021_statscan_cd_boundary_m": 3903.47,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.011,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": []
+    },
+    {
+      "sample": 66,
+      "epsg3347_m": [
+        4012199.8,
+        1975526.6
+      ],
+      "nearest_current_bc_location_boundary_m": 2903.73,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 39237.76,
+      "nearest_2021_statscan_cd_boundary_m": 2908.54,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.012,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": []
+    },
+    {
+      "sample": 67,
+      "epsg3347_m": [
+        4011321.0,
+        1975993.2
+      ],
+      "nearest_current_bc_location_boundary_m": 1908.79,
+      "nearest_current_bc_location_id": "atlas:district:CAN-5915:BRC",
+      "abbotsford_current_bc_location_boundary_m": 40232.57,
+      "nearest_2021_statscan_cd_boundary_m": 1913.61,
+      "nearest_2021_statscan_cd_code": "5915",
+      "nearest_2024_tiger_wa_county_boundary_m": 0.034,
+      "nearest_2024_tiger_wa_county_geoid": "53073",
+      "tiger_wa_county_polygons_containing_point": [
+        "53073"
+      ]
+    }
+  ]
+}

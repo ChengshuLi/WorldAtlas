@@ -1,0 +1,17 @@
+✔ stale body, state, candidate bytes and active worker/PR prevent writes (3.172732ms)
+✔ unrelated scope and original prose cannot be overwritten (0.373513ms)
+✔ read-only preflight issues no writes and checks the complete batch before applying (5.667963ms)
+✔ bounded application reads back each correction and is idempotent (3.421858ms)
+✔ failed readback retains partial receipt and stops before remaining writes (2.274688ms)
+✔ unexpected issue scope cannot expand the mutation targets (0.364019ms)
+✔ fresh body recheck prevents overwriting an edit after batch preflight (0.950423ms)
+✔ scope property serialization order does not imply changed release or ownership (0.315786ms)
+✔ a wrong hash label is rejected even when source scope is otherwise unchanged (0.256957ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 83.065763

@@ -1,0 +1,24 @@
+{
+  "fixture_kind": "synthetic-only-not-historical-evidence",
+  "version": 1,
+  "sources": [
+    {"id":"fixture:past-source","status":"historical","supported_from":-3000,"supported_to":2027,"metadata":{"original_source_sha256":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}},
+    {"id":"fixture:modern-source","status":"reference","supported_from":2026,"supported_to":2027}
+  ],
+  "entities": [{"id":"fixture:territory","kind":"location"}],
+  "observations": [
+    {"version":1,"id":"fixture:no-marine","subject_id":"fixture:territory","subject_kind":"location","field_id":"atlas.marine-contact","value":false,"valid_from":-1,"valid_to":1,"source_id":"fixture:past-source","method":"direct","status":"sourced","metadata":{"coverage":"Synthetic complete catalog","footprints_sha256":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}},
+    {"version":1,"id":"fixture:uncertain-water","subject_id":"fixture:territory","subject_kind":"location","field_id":"atlas.river-lake-contact","value":null,"valid_from":1000,"valid_to":1100,"source_id":"fixture:past-source","method":"direct","status":"unresolved","metadata":{"reason":"Synthetic contradictory sources"}},
+    {"version":1,"id":"fixture:zero-literacy","subject_id":"fixture:territory","subject_kind":"location","field_id":"atlas.adult-literacy","value":0,"valid_from":1000,"valid_to":1001,"source_id":"fixture:past-source","method":"direct","status":"sourced","metadata":{"measurement":{"unit":"percent","definition":"Synthetic adult literacy measurement","period":{"from":1000,"to":1001},"cohort":"age-15-plus"},"original_values":[{"value":"0.00","unit":"percent"}],"source_hashes":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]}},
+    {"version":1,"id":"fixture:modern-contact","subject_id":"fixture:territory","subject_kind":"location","field_id":"atlas.marine-contact","value":true,"valid_from":2026,"valid_to":2027,"source_id":"fixture:modern-source","method":"reference","status":"reference","metadata":{"reference_year":2026}}
+  ],
+  "expected": {
+    "-3000": [],
+    "-1": [["atlas.marine-contact",false,"sourced","fixture:no-marine"]],
+    "1": [],
+    "1000": [["atlas.adult-literacy",0,"sourced","fixture:zero-literacy"],["atlas.river-lake-contact",null,"unresolved","fixture:uncertain-water"]],
+    "1050": [["atlas.river-lake-contact",null,"unresolved","fixture:uncertain-water"]],
+    "1100": [],
+    "2026": [["atlas.marine-contact",true,"reference","fixture:modern-contact"]]
+  }
+}

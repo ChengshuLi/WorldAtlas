@@ -1,0 +1,35 @@
+✖ typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL (31.143461ms)
+✖ typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes (19.646458ms)
+✔ legacy or altered installed schemas never advertise typed capabilities (30.723808ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 190.214036
+
+✖ failing tests:
+
+test at test/typed-integration.test.mjs:38:1
+✖ typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL (31.143461ms)
+  Error: Import rejected: FOREIGN KEY constraint failed
+      at importBatch (file:///workspace/worldatlas-observation-integration-20261003-7e91/hosted/records.js:141:15)
+      at async fixture (file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:26:3)
+      at async both (file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:34:83)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    status: 409
+  }
+
+test at test/typed-integration.test.mjs:52:1
+✖ typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes (19.646458ms)
+  Error: Import rejected: FOREIGN KEY constraint failed
+      at importBatch (file:///workspace/worldatlas-observation-integration-20261003-7e91/hosted/records.js:141:15)
+      at async fixture (file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:26:3)
+      at async both (file:///workspace/worldatlas-observation-integration-20261003-7e91/test/typed-integration.test.mjs:34:83)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    status: 409
+  }

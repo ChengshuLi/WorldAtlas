@@ -1,0 +1,95 @@
+{
+  "ingestion_id": "atlas-typed-entity-types-v1",
+  "entity_types": [
+    {
+      "id": "government-class",
+      "name": "government-class",
+      "geographic_level": null,
+      "metadata": {
+        "contract_version": 1,
+        "structural_only": true,
+        "definition": "Controlled primary government vocabulary identity; not an assignment."
+      }
+    },
+    {
+      "id": "language",
+      "name": "language",
+      "geographic_level": null,
+      "metadata": {
+        "contract_version": 1,
+        "structural_only": true,
+        "definition": "Spoken-language identity; does not imply culture, script or dialect."
+      }
+    },
+    {
+      "id": "disease",
+      "name": "disease",
+      "geographic_level": null,
+      "metadata": {
+        "contract_version": 1,
+        "structural_only": true,
+        "definition": "Disease identity independent of its dated outbreaks."
+      }
+    },
+    {
+      "id": "outbreak",
+      "name": "outbreak",
+      "geographic_level": null,
+      "metadata": {
+        "contract_version": 1,
+        "structural_only": true,
+        "definition": "One outbreak identity; multiple outbreaks may affect a location concurrently."
+      }
+    },
+    {
+      "id": "river",
+      "name": "river",
+      "geographic_level": null,
+      "metadata": {
+        "contract_version": 1,
+        "structural_only": true,
+        "definition": "Cataloged river or reach; contact does not establish navigability."
+      }
+    },
+    {
+      "id": "lake",
+      "name": "lake",
+      "geographic_level": null,
+      "metadata": {
+        "contract_version": 1,
+        "structural_only": true,
+        "definition": "Cataloged inland lake, including saline lakes."
+      }
+    },
+    {
+      "id": "marine-shoreline",
+      "name": "marine-shoreline",
+      "geographic_level": null,
+      "metadata": {
+        "contract_version": 1,
+        "structural_only": true,
+        "definition": "Marine shoreline reference feature; distinct from inland lakes."
+      }
+    },
+    {
+      "id": "port",
+      "name": "port",
+      "geographic_level": null,
+      "metadata": {
+        "contract_version": 1,
+        "structural_only": true,
+        "definition": "Port facility identity, independent of settlement rank and coastal contact."
+      }
+    },
+    {
+      "id": "port-function",
+      "name": "port-function",
+      "geographic_level": null,
+      "metadata": {
+        "contract_version": 1,
+        "structural_only": true,
+        "definition": "Reviewed functional service vocabulary; no inferred maritime capability."
+      }
+    }
+  ]
+}

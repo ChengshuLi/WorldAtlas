@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "issue": 594,
+  "baseline_commit": "f004b8b59bd64353826f952e90f6741d42380b6a",
+  "owned_paths": [
+    "data/regional-review/regional-supplement-bolivia-ecoregion-roles-2026/"
+  ],
+  "assigned_ids": [
+    "atlas:physical:13555fd3cb230149ca55",
+    "atlas:physical:3b59e885effd69f1222e",
+    "atlas:physical:75e371c0a1abf3e8ed1c",
+    "atlas:physical:b777739e348ded01aa2a",
+    "atlas:physical:c76d054c56a021341333",
+    "atlas:physical:d0122fb389f7245bd5e8",
+    "atlas:physical:d66136b1837cb5240030",
+    "atlas:physical:e1658818a26c4d0055fa",
+    "atlas:physical:f24b672de863caf54859"
+  ],
+  "assigned_count": 9,
+  "predecessor_adm2_ids": [
+    "80513517B19404624083023",
+    "80513517B10383084964738"
+  ],
+  "mapped_resolve_eco_ids": [
+    476,
+    504,
+    523,
+    529,
+    567,
+    569,
+    584
+  ],
+  "required_assessment": "every assigned exact physical fragment, both predecessor source polygons and all seven mapped RESOLVE feature IDs",
+  "inputs": [
+    {
+      "path": "data/geography/part-2.json",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10165703,
+      "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d"
+    },
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/README.md",
+      "bytes": 10400,
+      "sha256": "c3412184e0f6b54af971b174b2d03b36db0c81d94ddabc1d8980aae60327b334"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/assessment.json",
+      "bytes": 1630496,
+      "sha256": "0830fb100654a23815846f6c555e8821a016ae7270c7ea7a96a8c959d1187761"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/audit_bolivia_derived_portions.py",
+      "bytes": 9964,
+      "sha256": "d44ae7e430ee2cc9de3876ecd72a428b2cbed43510084a46acd93f1517d04203"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/audit_bolivia_neighbors.py",
+      "bytes": 6943,
+      "sha256": "8541767b9e51745047478c805eedba4cb07fd5c78ab7218bdd37194693cb63a2"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/audit_colombia_neighbors.py",
+      "bytes": 5395,
+      "sha256": "6f60f902648b3d4d4c1796d1688b932e21f384aa68664df1cfa19dd5b05018f8"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/build_assessment.py",
+      "bytes": 16314,
+      "sha256": "dad59a55db0d338eaf22de1a2c32ac07a1b9e00b9b06f704e35032fe0255c525"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/derived-portion-audit.json",
+      "bytes": 21751,
+      "sha256": "ba1540376b3decf7a975104dadb2a0a05a21f00c94bdc217af85ccc477a30b16"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/gshhg-colombia-screen.json",
+      "bytes": 132208,
+      "sha256": "124678e6b855ecabf1147859b7fa9322b908f732f954d095c197cb9eec83deed"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/neighbor-screen-bolivia.json",
+      "bytes": 320230,
+      "sha256": "a7a0e90c935e8968eefa78fd9b6a4e7977928918ec0bb7b6c8ee2ea009e205aa"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/neighbor-screen-colombia.json",
+      "bytes": 174110,
+      "sha256": "54b61c41e39e924fb6d4b9ed3c872eecb0992cd857f19e7e922e7865027cd486"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/resolve-query-receipt.json",
+      "bytes": 1099,
+      "sha256": "167ea56d169c3a0790fbd8db6f1ed2997e7dcefbedb7aea02ab43ffcb0891f39"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/scope.json",
+      "bytes": 14448,
+      "sha256": "3bdc55d5c7b514ae9179eafa05b9475d0e3bf6be2077db0a5b0d56c8f1ed1a21"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/screen_gshhg.py",
+      "bytes": 7256,
+      "sha256": "6fc4325792163c8207e9b6cb345e89d2228b6787933d744b63362ccdb93b5d77"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources.json",
+      "bytes": 10904,
+      "sha256": "d67be83709a3d90bdb86b761a8d4e4583d4b4b8569264b0ca4912a6083cf3cea"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/verify.py",
+      "bytes": 5422,
+      "sha256": "67a9f4087b743f61188401534fbc4e614d1b130db0400e09267cfbb25dfd6c42"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/geoboundaries-BOL-ADM2-2015.geojson.gz",
+      "bytes": 8035896,
+      "sha256": "1df8ea802edec3cfe578bb3503437cee969fd8fbc785116ce84439b9a2bd6f96"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/geoboundaries-BOL-ADM2-metadata.json",
+      "bytes": 961,
+      "sha256": "c2812d930bdd2aa54ed0fea4d5917156e8fa612fe411442cba90691b5b9e5e94"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-arcgis-item-metadata.json",
+      "bytes": 8638,
+      "sha256": "5ac94f88d5b6d75e7e5619a05fc0cdcce803906004fbd7648f60cd9dfd3a8b85"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-bolivia-ecoregions-7.geojson.gz",
+      "bytes": 494189,
+      "sha256": "1beba7fa4d223cc776702e5b85d342234d1992016184d8c7fce4e05663e563ae"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-feature-service-metadata.json",
+      "bytes": 3399,
+      "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15"
+    },
+    {
+      "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-layer0-metadata.json",
+      "bytes": 25682,
+      "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3"
+    }
+  ]
+}

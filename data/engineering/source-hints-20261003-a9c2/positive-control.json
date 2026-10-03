@@ -1,0 +1,10 @@
+{
+  "method_id": "instruction-repair-generator",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "evidence": [
+    "planner-control-tests.log",
+    "apply-guard-tests.log",
+    "apply-fresh-read-tests.log"
+  ]
+}

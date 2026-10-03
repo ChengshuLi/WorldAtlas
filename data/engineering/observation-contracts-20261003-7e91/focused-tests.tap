@@ -1,0 +1,33 @@
+✔ attributes resolve independently with direct evidence ahead of spatial derivations and examples (1.839163ms)
+✔ field evidence does not erase an independently supported attribute and examples do not mask modern reference (0.221053ms)
+✔ typed imports reject overlapping field records and preserve stable category IDs (15.187341ms)
+✔ no-year-zero resolution, exclusive interval ends and opt-in examples remain deterministic (0.508587ms)
+✔ compact references preserve supported dates and field provenance (1.148562ms)
+✔ reference territories resolve to their political owner without changing geographic identity (0.193652ms)
+✔ fixed environmental classifications have unique stable identities and cover every existing reference value (1.626262ms)
+✔ classification API exposes the exact fixed vocabulary independently of database content (19.328416ms)
+✔ aliases and stable IDs produce identical whole-location values, colors and category identities (1.261252ms)
+✔ preview, both importers and raw SQL reject environmental typos while retaining explicit unknowns (37.733089ms)
+✔ grandfathered free-form evidence is retained and exact hosted replays stay idempotent without admitting new text (18.320386ms)
+✔ accepted aliases and canonical identities remain source evidence instead of rewriting imported records (24.718604ms)
+✔ registration is additive, versioned, immutable and JSON-only; conflicts fail closed (2.813924ms)
+✔ false and literal zero remain sourced; absent, unknown and unresolved are distinct (1.562396ms)
+✔ no year zero, interval extrapolation, lifetime overflow or modern-reference promotion (0.449488ms)
+✔ numeric measurement rejects incompatible units, PPP, cohort, household weighting and uncertainty (1.004415ms)
+✔ entity government, controlled identities and feature links preserve the existing graph (0.492102ms)
+✔ direct/derived/reference/estimate/example precedence, explicit unknown and retirements are deterministic (0.60385ms)
+✔ shared pure snapshot seam round-trips all retained source, unit and derivation metadata without mutation (0.419953ms)
+✔ existing eight attributes, legacy values and precedence stay unchanged (0.796381ms)
+✔ malformed unresolved evidence resolves to the unknown fill for every attribute, including category IDs (1.681706ms)
+✔ direct unresolved evidence blocks weaker assignments and modern fallback without losing its provenance (1.084445ms)
+✔ API, local import, UI preview and raw SQL reject both unresolved/non-null contract violations (67.182146ms)
+✔ 0006 preserves populated claims, retirements and all existing schema objects while suppressing retained malformed claims (18.11764ms)
+✔ opening a populated legacy local database retains malformed historical claims and applies the new INSERT guard (8.920592ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 228.851833

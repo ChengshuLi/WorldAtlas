@@ -1,0 +1,24 @@
+{"migration":"0000_bizarre_sentry.sql","statements":77}
+{"migration":"0001_evidence_retirements.sql","statements":10}
+{"migration":"0002_geographic_reference_releases.sql","statements":18}
+{"migration":"0003_unsettled_location_rank.sql","statements":21}
+{"migration":"0004_population_precision_guard.sql","statements":2}
+{"migration":"0005_population_source_class_guard.sql","statements":2}
+{"migration":"0006_unresolved_attribute_status_guard.sql","statements":1}
+{"migration":"0007_fixed_environment_classifications.sql","statements":1}
+{"migration":"0008_temporal_geography.sql","statements":17}
+node:internal/process/task_queues:104
+    runMicrotasks();
+    ^
+
+Error: D1_ERROR: too many terms in compound SELECT: SQLITE_ERROR
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///workspace/worldatlas-observation-storage-20261003-7e91/data/engineering/observation-storage-20261003-7e91/native-d1-reproduction.mjs:15:374 {
+  [cause]: Error: too many terms in compound SELECT: SQLITE_ERROR
+      at D1DatabaseSessionAlwaysPrimary._sendOrThrow (cloudflare-internal:d1-api:189:24)
+      at async cloudflare-internal:d1-api:478:19 {
+    [cause]: undefined
+  }
+}
+
+Node.js v24.19.0

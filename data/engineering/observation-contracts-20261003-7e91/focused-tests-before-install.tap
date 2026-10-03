@@ -1,0 +1,53 @@
+✔ attributes resolve independently with direct evidence ahead of spatial derivations and examples (1.80382ms)
+✔ field evidence does not erase an independently supported attribute and examples do not mask modern reference (0.230548ms)
+✔ typed imports reject overlapping field records and preserve stable category IDs (18.337563ms)
+✔ no-year-zero resolution, exclusive interval ends and opt-in examples remain deterministic (0.529819ms)
+✔ compact references preserve supported dates and field provenance (1.189634ms)
+✔ reference territories resolve to their political owner without changing geographic identity (0.225409ms)
+node:internal/modules/package_json_reader:301
+  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+        ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@neondatabase/serverless' imported from /workspace/worldatlas-observation-contracts-20261003-7e91/hosted/postgres-adapter.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:301:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:859:18)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+    at #resolve (node:internal/modules/esm/loader:683:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v24.19.0
+✖ test/environment-classifications.test.mjs (64.276776ms)
+✔ registration is additive, versioned, immutable and JSON-only; conflicts fail closed (3.054756ms)
+✔ false and literal zero remain sourced; absent, unknown and unresolved are distinct (2.045304ms)
+✔ no year zero, interval extrapolation, lifetime overflow or modern-reference promotion (0.472112ms)
+✔ numeric measurement rejects incompatible units, PPP, cohort, household weighting and uncertainty (1.291617ms)
+✔ entity government, controlled identities and feature links preserve the existing graph (0.541016ms)
+✔ direct/derived/reference/estimate/example precedence, explicit unknown and retirements are deterministic (0.615538ms)
+✔ shared pure snapshot seam round-trips all retained source, unit and derivation metadata without mutation (0.425121ms)
+✔ existing eight attributes, legacy values and precedence stay unchanged (0.805284ms)
+✔ malformed unresolved evidence resolves to the unknown fill for every attribute, including category IDs (2.044513ms)
+✔ direct unresolved evidence blocks weaker assignments and modern fallback without losing its provenance (0.818995ms)
+✔ API, local import, UI preview and raw SQL reject both unresolved/non-null contract violations (82.010784ms)
+✔ 0006 preserves populated claims, retirements and all existing schema objects while suppressing retained malformed claims (23.591555ms)
+✔ opening a populated legacy local database retains malformed historical claims and applies the new INSERT guard (9.196428ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 19
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 287.105273
+
+✖ failing tests:
+
+test at test/environment-classifications.test.mjs:1:1
+✖ test/environment-classifications.test.mjs (64.276776ms)
+  'test failed'

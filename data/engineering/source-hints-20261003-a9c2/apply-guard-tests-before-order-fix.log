@@ -1,0 +1,15 @@
+✔ stale body, state, candidate bytes and active worker/PR prevent writes (2.703766ms)
+✔ unrelated scope and original prose cannot be overwritten (0.349437ms)
+✔ read-only preflight issues no writes and checks the complete batch before applying (3.109598ms)
+✔ bounded application reads back each correction and is idempotent (2.386348ms)
+✔ failed readback retains partial receipt and stops before remaining writes (1.461743ms)
+✔ unexpected issue scope cannot expand the mutation targets (0.343127ms)
+✔ fresh body recheck prevents overwriting an edit after batch preflight (0.851313ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 69.772354

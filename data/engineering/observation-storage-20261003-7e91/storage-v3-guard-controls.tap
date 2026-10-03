@@ -1,0 +1,30 @@
+✔ v3 inventories all twenty-six tables and pins every reviewed D1/PostgreSQL migration (17.5133ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (1793.853679ms)
+✔ forward owner restoration streams all twenty-six tables, original JSON bytes, deferred receipts and sequence (2041.227219ms)
+✔ v3 detects changing staged publication, missing source guards and unexpected factual tables (1506.583268ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1440.138348ms)
+✔ a deferred cross-table FK failure rolls back all twenty-six tables, guards and sequence (1526.412743ms)
+✔ interrupted v3 capture resumes preserved pages and its v3 cursor cannot be sent to v1 (235.991025ms)
+✖ typed storage on actual SQLite/PostgreSQL preserves replays and rejects unsupported evidence or incomplete corrections atomically (1592.286427ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 7
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10284.195134
+
+✖ failing tests:
+
+test at test/storage-export-v3.test.mjs:141:1
+✖ typed storage on actual SQLite/PostgreSQL preserves replays and rejects unsupported evidence or incomplete corrections atomically (1592.286427ms)
+  Error: Typed identity already identifies different evidence
+      at Object.run (file:///workspace/worldatlas-observation-storage-20261003-7e91/test/storage-export-v3.test.mjs:24:283)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-observation-storage-20261003-7e91/test/storage-export-v3.test.mjs:154:78)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    code: 'ERR_SQLITE_ERROR',
+    errcode: 1811,
+    errstr: 'constraint failed'
+  }

@@ -1,4 +1,5 @@
 import http from 'node:http';
+import {resolveTypedSnapshot} from './src/typed-snapshot.js';
 import fs from 'node:fs';
 import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
@@ -12,10 +13,12 @@ const catalog=geography(db);
 if(fs.existsSync('data/pixel-audit.json'))catalog.pixelMissing=JSON.parse(fs.readFileSync('data/pixel-audit.json')).missing.map(f=>f.id);
 if(fs.existsSync('data/prepared-evidence/index.json')){const raw=fs.readFileSync('data/prepared-evidence/index.json'),index=JSON.parse(raw);catalog.preparedEvidence={footprints_sha256:index.footprints_sha256,hierarchy_sha256:index.hierarchy_sha256,index_sha256:createHash('sha256').update(raw).digest('hex')};}
 const geo = JSON.stringify(catalog);
+const typedPreparedBytes=fs.readFileSync('data/typed-prepared-v1.json'),typedPrepared=JSON.parse(typedPreparedBytes);
+const typedPreparedDescriptor={version:1,path:'typed-evidence.json',sha256:createHash('sha256').update(typedPreparedBytes).digest('hex'),bytes:typedPreparedBytes.length,scope:'prepared typed evidence; no hosted schema capability assertion'};
 const production = process.argv.includes('--production');
 const vite = production ? null : await (await import('vite')).createServer({ server: { middlewareMode: true, host: '0.0.0.0', hmr: process.env.ATLAS_TEST_MODE === '1' ? false : undefined } });
 const mime = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.svg':'image/svg+xml', '.png':'image/png' };
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://localhost');
   if(req.method==='GET' && /^\/prepared-evidence\/(?:index\.json|part-\d+\.json\.gz)$/.test(url.pathname)){const file=`data${url.pathname}`;if(!fs.existsSync(file)){res.writeHead(404);return res.end('Not found');}res.setHeader('Content-Type',url.pathname.endsWith('.gz')?'application/gzip':'application/json');return fs.createReadStream(file).pipe(res);}
   if(req.method==='GET' && /^\/geographic-decisions\/(?:africa|asia|europe|north-america|south-america|oceania)\.json\.gz$/.test(url.pathname)){const file=`data${url.pathname.slice(0,-3)}`;if(!fs.existsSync(file)){res.writeHead(404);return res.end('Not found');}res.setHeader('Content-Type','application/gzip');return res.end(gzipSync(fs.readFileSync(file)));}
@@ -29,11 +32,14 @@ const server = http.createServer((req, res) => {
   if(req.method==='GET'&&/^\/macro-foundation\/world-review-locations-\d+\.json\.gz$/.test(url.pathname)){const file=`data${url.pathname}`;if(!fs.existsSync(file)){res.writeHead(404);return res.end('Not found');}res.setHeader('Content-Type','application/gzip');return fs.createReadStream(file).pipe(res);}
   if(req.method==='GET' && /^\/world-review-locations-\d+\.json\.gz$/.test(url.pathname)){res.setHeader('Content-Type','application/gzip');return fs.createReadStream(`data${url.pathname}`).pipe(res);}
   if(req.method==='GET' && ['/granularity-report.json','/hierarchy-report.json','/administrative-sources.json','/semantic-report.json','/granularity-audit.json','/coverage-report.json','/location-policy.json','/world-review.json','/source-inventory.json','/pixel-audit.json','/global-refinement-report.json','/regional-membership-report.json','/border-parent-review.json','/attribute-sources.json','/reference-polity-report.json','/settlement-source-report.json'].includes(url.pathname)){res.setHeader('Content-Type','application/json');return fs.createReadStream(`data${url.pathname}`).pipe(res);}
+  if(req.method==='GET'&&url.pathname==='/typed-evidence.json'){res.setHeader('Content-Type','application/json');return res.end(typedPreparedBytes);}
+  if(req.method==='GET'&&url.pathname==='/typed-evidence-manifest.json'){res.setHeader('Content-Type','application/json');return res.end(JSON.stringify(typedPreparedDescriptor));}
   if (url.pathname.startsWith('/api/')) {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Cache-Control', 'no-store');
     if (req.method !== 'GET') { res.writeHead(405); return res.end(JSON.stringify({error:'Method not allowed'})); }
     try {
+      if(url.pathname==='/api/typed/v1/prepared-snapshot')return res.end(JSON.stringify(await resolveTypedSnapshot(typedPrepared,Number(url.searchParams.get('year')),{examples:url.searchParams.get('examples')==='1'})));
       if (url.pathname === '/api/geography') return res.end(geo);
       if (url.pathname === '/api/classifications') return res.end(JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
       if (url.pathname === '/api/snapshot') return res.end(JSON.stringify(snapshot(db, Number(url.searchParams.get('year')), url.searchParams.get('examples') === '1',url.searchParams.get('source_evidence')==='1')));

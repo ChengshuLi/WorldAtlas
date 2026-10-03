@@ -1,0 +1,6 @@
+{
+  "check": "documentation audit",
+  "outcome": "failed",
+  "reason": "Initial restricted execution returned spawnSync git EPERM while reading immutable Git bytes; no preservation result asserted.",
+  "resolution": "Rerun with supported sandbox permissions completed; final audit.json records actual verification."
+}

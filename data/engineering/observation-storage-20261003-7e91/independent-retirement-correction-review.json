@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "issue": 529,
+  "pr_number": 671,
+  "reviewer_worker_id": "review-palette-651-20261003",
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "review_scope": "Corrected uncommitted retirement guard workingtree; not finalexactheadapproval",
+  "outcome": "correction-reassessed-no-blocker",
+  "resolves": "Different-ID same(collection,target_id) conflict-ignore provenance collision",
+  "independent_tests": {
+    "command": "node --test --test-name-pattern='typed storage on actual|pure and actual|standalone owner' test/storage-export-v3.test.mjs",
+    "exit_code": 0,
+    "tests": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "ActualSQLite/PGlite: bothobservations/linkretirement collections, ONCONFLICTDONOTHING/INSERTORIGNORE, exactoriginal replay, conflictingID/source/reason/metadata rejection and unchangedretainedrawrow; pure/SQLstatus/null and journal-limit regressions also pass"
+  },
+  "independent_catalog_reproduction": {
+    "version": 3,
+    "tables": 26,
+    "scope": "Actual isolated SQLite and PostgreSQL full catalog byte hashes. No provider operation, historical/geographic approval or production certificate.",
+    "d1": "e7474b3d88f1d7d4b4c33b8b2581a1d17d59039abc73d8bd076078ab92639616",
+    "postgres": "cd51f2e42fb343cb4994a2c25a08c96d768c5fdeddfe8a56931ad3e7a694b26c"
+  },
+  "updated_catalog_pins_match": true,
+  "source_file_receipts": [
+    {
+      "path": "drizzle/0010_typed_observations.sql",
+      "bytes": 12622,
+      "sha256": "672cb4f723a84ce2958f90f7c5d1fe517d566d6753da520ec3246a00dfe234c1"
+    },
+    {
+      "path": "postgres/migrations/0003_typed_observations.sql",
+      "bytes": 14790,
+      "sha256": "0c9c1c402c0f1ee707a0083199ea07314233846deb9fddb79723108a0c439041"
+    },
+    {
+      "path": "hosted/storage-export-v3-contract.js",
+      "bytes": 2545,
+      "sha256": "9fe988be6f06ba81d6e92d1fd0b82e7b940f8f90829d072a42e5cd9a0696b821"
+    },
+    {
+      "path": "test/storage-export-v3.test.mjs",
+      "bytes": 34343,
+      "sha256": "d48c2a2ddca650da63d16860a4d6ac08d8d0047405a7e7cd6b4468d5b88e0b26"
+    }
+  ],
+  "limits": [
+    "No finalexactheadacceptance until newcommittedhead/ledger requested",
+    "Fullsuite/build not independentlyrerun for thiscorrection",
+    "Isolated synthetic actualSQLite/PGlite only; no provider/data/publisher operations",
+    "No historical/geographic/productionapproval or mandatorymanifestbinding"
+  ]
+}

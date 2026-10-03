@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "scope": "Append one forward migration journal entry; preserve every pre-existing entry and retain original whole journal bytes. No existing SQL/snapshot bytes changed.",
+  "original_sha256": "2874e68460c8310dd3c48b99181d46a73a013e2869e7f7ad6fa8dbb07d5fe229",
+  "new_sha256": "632d8b299ace3f27e088b3d541e13f255f8960282ecf73d53ad0653b9c3dd5b9",
+  "appended_entry": {
+    "idx": 10,
+    "version": "6",
+    "when": 1791056342223,
+    "tag": "0010_typed_observations",
+    "breakpoints": true
+  },
+  "prior_entries_unchanged": true,
+  "original_bytes_path": "data/engineering/observation-storage-20261003-7e91/original-migration-journal.json"
+}

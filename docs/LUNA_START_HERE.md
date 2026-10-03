@@ -9,7 +9,7 @@ Clone `https://github.com/ChengshuLi/WorldAtlas`, branch **main**. This is the d
 Read, in order:
 
 1. `AGENTS.md`.
-2. `docs/HANDOFF_STATUS.md` and `data/validation/neon-final-publication.json` for the actual deployed state and open work.
+2. `docs/HANDOFF_STATUS.md` and `data/validation/neon-final-publication.json` for dated publication/cutover checkpoints; [RESEARCH_CAPACITY.md](RESEARCH_CAPACITY.md) and [PROVIDER_CAPACITY.md](PROVIDER_CAPACITY.md) for current storage guidance. Recheck live release/capabilities and GitHub Issues for current work; Site 18 revision/counts are preserved baseline evidence.
 3. `docs/LUNA_DATA_HANDOFF.md` and `docs/RESEARCH_IMPORT_WORKFLOW.md` for content campaigns.
 4. `docs/ATTRIBUTE_CONTRACT.md` and `docs/ENVIRONMENT_CLASSIFICATIONS.md` before preparing attributes.
 5. `docs/RESEARCH_MEDIA_WORKFLOW.md` when retaining licensed archives or linked media.

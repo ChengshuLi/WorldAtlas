@@ -1,0 +1,62 @@
+✔ v2 inventories all twenty-three tables and pins every reviewed D1/PostgreSQL migration (16.548725ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (2043.742057ms)
+✔ forward owner restoration streams all twenty-three tables, original JSON bytes, deferred receipts and sequence (2029.934138ms)
+✔ v2 detects changing staged publication, missing source guards and unexpected factual tables (1397.633589ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1406.943909ms)
+✔ a deferred cross-table FK failure rolls back all twenty-three tables, guards and sequence (1722.637092ms)
+✔ interrupted v2 capture resumes preserved pages and its v2 cursor cannot be sent to v1 (222.014555ms)
+✔ v3 inventories all twenty-six tables and pins every reviewed D1/PostgreSQL migration (21.186618ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (2261.182171ms)
+✔ forward owner restoration streams all twenty-six tables, original JSON bytes, deferred receipts and sequence (2251.482923ms)
+✔ v3 detects changing staged publication, missing source guards and unexpected factual tables (1487.624035ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1515.48132ms)
+✔ a deferred cross-table FK failure rolls back all twenty-six tables, guards and sequence (1810.310137ms)
+✔ interrupted v3 capture resumes preserved pages and its v3 cursor cannot be sent to v1 (276.964417ms)
+✖ typed storage on actual SQLite/PostgreSQL preserves replays and rejects unsupported evidence or incomplete corrections atomically (1619.248086ms)
+✔ complete export marker works under managed D1 compound-SELECT limits (49.330763ms)
+✔ all fourteen raw tables export exhaustively with original text, rowids and archived evidence (138.808753ms)
+✔ composite keyset cursors page across releases and reject foreign, malformed or injected cursors (92.299294ms)
+✔ markers detect publication and media writes outside ingestion revisions and reject raced pages (67.610909ms)
+✔ oversized retained evidence is reduced through explicit 413 rather than truncated (87.014112ms)
+✔ CLI exporter preserves a partial ledger, resumes hashed pages and proves frozen all-table counts (77.683472ms)
+✔ CLI rejects unfrozen, changed or tampered exports without mixing checkpoints (74.344638ms)
+✔ CLI overlaps bounded independent collections while preserving serial cursors and journals (193.501819ms)
+✔ stalled fetch times out with its forwarded signal and retries the same cursor without rewriting preserved source pages (1184.085572ms)
+✔ a response with stalled JSON bytes is bounded through body consumption and preserves checkpoint receipts (656.851419ms)
+✔ permanent transport stalls stop after four deadlines without logging credentials or creating a false checkpoint (3544.376362ms)
+✔ external cancellation aborts fetch, JSON-body reading and retry backoff without retries or checkpoint changes (159.452544ms)
+✔ malformed JSON and snapshot-conflict HTTP errors remain nonretryable, and unsafe deadline settings fail before fetching (1.228261ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 27
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11368.22863
+
+✖ failing tests:
+
+test at test/storage-export-v3.test.mjs:141:1
+✖ typed storage on actual SQLite/PostgreSQL preserves replays and rejects unsupported evidence or incomplete corrections atomically (1619.248086ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Example sources/i. Input:
+  
+  'Error: Missing typed retirement target/source/replacement'
+  
+      at async TestContext.<anonymous> (file:///workspace/worldatlas-observation-storage-20261003-7e91/test/storage-export-v3.test.mjs:171:4)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Missing typed retirement target/source/replacement
+        at Object.run (file:///workspace/worldatlas-observation-storage-20261003-7e91/test/storage-export-v3.test.mjs:24:283)
+        at file:///workspace/worldatlas-observation-storage-20261003-7e91/test/storage-export-v3.test.mjs:171:239
+        at waitForActual (node:assert:632:21)
+        at strict.rejects (node:assert:769:31)
+        at TestContext.<anonymous> (file:///workspace/worldatlas-observation-storage-20261003-7e91/test/storage-export-v3.test.mjs:171:17)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7),
+    expected: /Example sources/i,
+    operator: 'rejects',
+    diff: 'simple'
+  }

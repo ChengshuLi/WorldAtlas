@@ -1,0 +1,59 @@
+{
+  "date_accessed_utc": "2026-10-03",
+  "sources": [
+    {
+      "title": "Communities - Incorporated and Unincorporated Cities, Boroughs, CDPs, Localities",
+      "provider": "Alaska Department of Commerce, Community, and Economic Development, Division of Community and Regional Affairs (DCCED/DCRA)",
+      "canonical_item": "https://www.arcgis.com/home/item.html?id=95a724c867364ff88def7d3d0b0672f5",
+      "landing_page": "https://alaska-economic-data-dcced.hub.arcgis.com/datasets/DCCED::communities-incorporated-and-unincorporated-cities-boroughs-cdps-localities",
+      "metadata_service": "https://www.arcgis.com/sharing/rest/content/items/95a724c867364ff88def7d3d0b0672f5?f=json",
+      "feature_service": "https://maps.commerce.alaska.gov/server/rest/services/Community_Related/Community_Locations_and_Boundaries/MapServer/0",
+      "metadata_last_modified_utc": "2024-11-12",
+      "service_metadata_accessed_utc": "2026-10-03",
+      "service_metadata_response_bytes": 3803,
+      "service_metadata_response_sha256": "8e948359d4e1e118b78f848cd3053042eba5db11de0c4dfa607847f80a2dae51",
+      "layer_metadata_response_bytes": 7137,
+      "layer_metadata_response_sha256": "e3aa7fea2abf25d817a3c6007a892665e12864fde800ee94dbcf07b4e580b408",
+      "query_response_accessed_utc": "2026-10-03",
+      "query_response_bytes": 415447,
+      "query_response_sha256": "a1c13f271c4a67ab470b99a7adfe5979b2673724fd69a7bde54c61aefa4b5654",
+      "query_record_count": 487,
+      "query_parameters": "where=1=1; envelope xmin=-180,ymin=51,xmax=-129,ymax=72; geometryType=esriGeometryEnvelope; inSR=4326; spatialRel=esriSpatialRelIntersects; outFields=*; returnGeometry=true; outSR=4326; f=geojson; resultRecordCount=2000",
+      "license_and_retention": "Item metadata has no explicit open reuse license. Metadata says CDO data are informational/as-is and accuracy, timeliness, completeness are not warranted. No feature-response bytes are committed; reproducible query and its prior response digest are recorded. Restore by running python3 verify.py from repository root, which fetches the canonical feature service read-only and computes exact intersections.",
+      "known_semantics": "Layer is point data; CommunityAreaTypeID 1 is DCRA Community (local government or unincorporated area meeting CAP participation definition). Type 2 Place of Interest includes various CDPs/localities, seasonal camps, former/vacant places, service/resource sites and other categories. These do not supply a comprehensive current-settlement inventory."
+    },
+    {
+      "title": "Inherited parent assessment and exact project baseline polygons",
+      "provider": "WorldAtlas issue #486 preserved source evidence",
+      "canonical_reference": "https://github.com/ChengshuLi/WorldAtlas/tree/main/data/regional-review/regional-review-93f8f3bee8e205be",
+      "rights": "Existing project-derived review extracts; preserved unchanged and used as baseline, not reissued as source material.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-93f8f3bee8e205be/assessment.json",
+          "bytes": 11210183,
+          "sha256": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5"
+        },
+        {
+          "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+          "bytes": 256548,
+          "sha256": "23f998ab6f874fac86dedeacb20978e391fdd23bf30ce6de8b687e6d57f9d862"
+        },
+        {
+          "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/resolve-15-ecoregions.geojson.gz",
+          "bytes": 9761832,
+          "sha256": "b42d888c27a8adae8ee6ec19db430b3d631e34a123847942cc7a07e2528be3d9"
+        },
+        {
+          "path": "data/regional-review/regional-review-93f8f3bee8e205be/scope.json",
+          "bytes": 13154,
+          "sha256": "98c39e78569de0a4fc9c02f74ca5662a267ad97d5074bb1691e1cc4626c0ed57"
+        },
+        {
+          "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources.json",
+          "bytes": 4699,
+          "sha256": "7a94870f1470d5d7cb6c0883d30fee715021c93959e5f1ecf04930719e83a299"
+        }
+      ]
+    }
+  ]
+}

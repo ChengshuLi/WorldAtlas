@@ -1,4 +1,5 @@
 import path from 'node:path';
+import {resolveTypedSnapshot} from '../src/typed-snapshot.js';
 import fs from 'node:fs/promises';
 import { build } from 'vite';
 import {gzipSync,gunzipSync} from 'node:zlib';
@@ -45,6 +46,10 @@ try {
     boundaries: db.prepare('SELECT * FROM boundaries WHERE location_id IN (SELECT id FROM locations WHERE active=1)').all().map(record => ({ ...record, geometry: JSON.parse(record.geometry) }))
   };
   await build({ base: './', define: { 'import.meta.env.VITE_STATIC_ATLAS': JSON.stringify('true'),'import.meta.env.VITE_HOSTED_DATABASE': JSON.stringify(process.env.ATLAS_HOSTED_BUILD==='1'?'true':'false') } });
+  const typedBytes=await fs.readFile('data/typed-prepared-v1.json');
+  await resolveTypedSnapshot(JSON.parse(typedBytes),2026,{examples:true});
+  await fs.writeFile('dist/typed-evidence.json',typedBytes);
+  await fs.writeFile('dist/typed-evidence-manifest.json',JSON.stringify({version:1,path:'typed-evidence.json',sha256:createHash('sha256').update(typedBytes).digest('hex'),bytes:typedBytes.length,scope:'prepared typed evidence; no hosted schema capability assertion'}));
   // Keep every hosted asset below common static-host file limits.
   const parts=[];
   await fs.mkdir('dist/geography',{recursive:true});

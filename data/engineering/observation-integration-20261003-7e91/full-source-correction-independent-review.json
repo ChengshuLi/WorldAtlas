@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "pr_number": 677,
+  "issue_number": 529,
+  "reviewer_worker_id": "review-palette-651-20261003",
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "candidate_commit": "09f7953019d34ba14c790c39fe03d2deeb9f5487",
+  "review_scope": "Independent three-correction reassessment and substantive finalized integration acceptance source review; final evidence head not yet requested",
+  "outcome": "corrected-source-no-remaining-blocker",
+  "exact_head_acceptance": false,
+  "blocking_findings": [],
+  "resolves": [
+    "Whole-load validated1\u2013120000ms deadline defaults60s; external/preaborted cancellation, stalled fetch/body termination, request signal forwarding, reader cancellation/release and timer/listener cleanup covered.",
+    "Original source metadata decoded/raw equality fails on changed semantic provenance while preserving exact whitespace original bytes.",
+    "Owner verify-only rejects effective application or PUBLIC EXECUTE grants on typed guard functions; clean revoke/replay restores verified state."
+  ],
+  "independent_controls": {
+    "command": "node --test test/typed-integration.test.mjs test/neon-forward-migrations.test.mjs test/typed-client-deadline.test.mjs",
+    "tests": 18,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 20564.854891,
+    "scope": "Actual isolated SQLite/PGlite and Worker/client tests: corrected provenance/cycles/examples, territorial preservation, coherent3stream/client/prepared retirement parity, source pin mismatch/whitespace, transport cancellation and altered owner-role privileges."
+  },
+  "original_probe_reassessment": [
+    "Correct source raw pin with mismatching decoded metadata now rejects; matching original whitespace metadata passes with exact bytes retained.",
+    "Original excessive typed guard function grant remains effective but verify-only now rejects unexpected-typed-function-privileges."
+  ],
+  "acceptance_assessment": [
+    "Controlled module list and immutable retained registry history are explicit; preserved old definitions and unknown digest failure protect stored vintage semantics.",
+    "Additive9structural types do not assign facts or change originalidentity catalog; typed-only import/read/snapshot use bounded rows, exactregistry/source/raw/geography pins and atomic supported journal.",
+    "Prior3derivation findings remain corrected with bounded provenance closure, typed/legacy label preservation and factual-only region scope; supportedunknown/zero/false/reference/estimate/example and BC/AD dates preserved.",
+    "Factual originalterritory metadata is retained. Changed release requires reviewed revalidation, never originalrow repin; real factual approval is still unavailable and paused.",
+    "FullknownV3 catalog validates installed schema/capabilities and labels compatible23table V2projection as incomplete; originalV1/V2contracts and completeV3backup stay authoritative.",
+    "Shared pure resolver and exact-byte prepared archive/manifest support static/Node/hosted parity; opt-in optional module loads leave existing map navigation unchanged.",
+    "Closed owner workflow adds reviewed0003 and26table leastprivilege verification without rewriting immutableSQL/corecontracts. Current productionV2 and oldbaseline attestation mismatch remain explicitly blocked; no production apply/publication inferred.",
+    "Child529 structural baseline can operate without factualresearch. NativeD1forward transport limit needs separately reviewed followup; domainchildren require coordinator readiness. No fourth529PR is authorized."
+  ],
+  "original_proof_transfer": {
+    "rows": 12,
+    "all_original_and_retained_bytes_and_hashes_equal": true
+  },
+  "source_receipts": [
+    {
+      "path": "src/typed-client.js",
+      "bytes": 6863,
+      "sha256": "1d3feaca8daa01a7ae4c1024aeb600955ef4d0466aee39042615922f472c517e"
+    },
+    {
+      "path": "src/typed-snapshot.js",
+      "bytes": 7556,
+      "sha256": "e19062ac4e747636fb983707dbc0c6bfdb9b408bb6dbc064e20abbf9e2bb35ca"
+    },
+    {
+      "path": "src/typed-derivations.js",
+      "bytes": 2134,
+      "sha256": "4d90e7f568573fcb290234325d0a48e82b3f7ab74c95b29448760dcf92591508"
+    },
+    {
+      "path": "src/observation-modules.js",
+      "bytes": 2502,
+      "sha256": "4555be0c82b07668d614d05e766f0b213b3e43694c4e4126ecdf48c3dfe394d2"
+    },
+    {
+      "path": "src/regional-import-gate.js",
+      "bytes": 7292,
+      "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d"
+    },
+    {
+      "path": "hosted/typed-observations.js",
+      "bytes": 19151,
+      "sha256": "437be19f39d001e63625ded8591030e2bf035d47f25df8a3732e3a219d17d738"
+    },
+    {
+      "path": "hosted/storage-export-compat.js",
+      "bytes": 2594,
+      "sha256": "602f26740417b7bb3c4f7b45d9051807763e981c9207afa12e19dd4d32101f3e"
+    },
+    {
+      "path": "scripts/neon-forward-migrations.mjs",
+      "bytes": 35003,
+      "sha256": "505b095ca47bcecd4b2466627c4163a613f52717703d9befd1593b78056e8461"
+    },
+    {
+      "path": "scripts/build-static.mjs",
+      "bytes": 12705,
+      "sha256": "df0171b46e06825caea0181d81caba2ea95bc1ee183fbb088465866e451ac619"
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 7591,
+      "sha256": "4ce374fe2128e13be675e92fa7b7a8e65290304adeaedd89f0b7f0d26b775633"
+    },
+    {
+      "path": "docs/TYPED_MODULE_INTEGRATION.md",
+      "bytes": 11122,
+      "sha256": "76f833e50df31d77f739a482789fed6cb741a4f6c291ac6be72f78eabd38b30d"
+    },
+    {
+      "path": "test/neon-forward-migrations.test.mjs",
+      "bytes": 13573,
+      "sha256": "e12ab9b0dfd73ec9b105c736ffaebbe2687731e2f4a25de2e4207feffc9d9055"
+    },
+    {
+      "path": "test/typed-integration.test.mjs",
+      "bytes": 27708,
+      "sha256": "51fef76505cdd8ad8da36cd97aa43c178a5f23ad52eab92b2c00fd00e506ae98"
+    },
+    {
+      "path": "test/typed-client-deadline.test.mjs",
+      "bytes": 2439,
+      "sha256": "c640a9a2d42b7a1186da54bb81e75ecbf65ff84ea57bfd70f8c6757f10864dfe"
+    }
+  ],
+  "proof_receipts": [
+    {
+      "path": "/tmp/worldatlas-677-finalized-source-correction-controls.log",
+      "bytes": 3267,
+      "sha256": "84f475b0931003d258082b8882761b1e0013427a45b823cf608004f89a6cfe49"
+    },
+    {
+      "path": "/tmp/worldatlas-677-source-context-correction-probe.json",
+      "bytes": 394,
+      "sha256": "c50d2c1c69dbf075719c07a294fa3935a5d9895ef440728c72a315c59240ac85"
+    },
+    {
+      "path": "/tmp/worldatlas-677-function-grant-correction-probe.json",
+      "bytes": 256,
+      "sha256": "be48a3511680226eb7f283f6d5e6b80c7dec27395a41302dce89a16d6d8b847b"
+    }
+  ],
+  "limits": [
+    "No final exact-head acceptance until final whole-fileledger/stable-source regression/CI receipts commit.",
+    "Original older fullregression sourcechanged during execution is not final corrected-source evidence.",
+    "No independent full regression/build rerun in thisbounded review; actualNode/static4year parity receipts inspected separately.",
+    "No provider operation, factualimport, Sitepublication, geographic/historical or physicaldevice approval.",
+    "Report-only legacy policy: no invented mandatorymanifest/hash binding."
+  ]
+}

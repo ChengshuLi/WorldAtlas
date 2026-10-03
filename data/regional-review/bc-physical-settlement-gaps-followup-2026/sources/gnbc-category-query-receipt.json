@@ -1,0 +1,18 @@
+{
+  "source": "Natural Resources Canada / Geographical Names Board of Canada Canadian Geographical Names Database",
+  "service_url": "https://services.arcgis.com/wjcPoefzjpzCgffS/arcgis/rest/services/CanadianGeographicalNames_gdb/FeatureServer/0/query",
+  "retrieved_utc_date": "2026-10-03",
+  "query": {
+    "where": "PROV_TERR = 'British Columbia'",
+    "outFields": "CATEGORY",
+    "returnGeometry": false,
+    "returnDistinctValues": true,
+    "orderByFields": "CATEGORY",
+    "f": "json"
+  },
+  "response": "gnbc-bc-categories-20261003.json",
+  "response_bytes": 964,
+  "response_sha256": "2154265f7faf6bee758a29c3fe66ed77d297790e4f61e938b3af7ab785a2f884",
+  "categories": ["Administrative Area", "Constructed Feature", "Feature Associated with Vegetation", "Ice and Snow Feature", "Populated Place", "Terrain Feature", "Underground Feature", "Volcanic Feature", "Water Feature"],
+  "interpretation": "Populated Place is the official category used by the retained settlement-point query. The category list is not an inventory of every rural settlement and provides no absence proof. Open Government Licence - Canada."
+}
