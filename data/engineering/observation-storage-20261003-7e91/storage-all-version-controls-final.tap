@@ -1,0 +1,36 @@
+✔ v2 inventories all twenty-three tables and pins every reviewed D1/PostgreSQL migration (17.455365ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (2519.794556ms)
+✔ forward owner restoration streams all twenty-three tables, original JSON bytes, deferred receipts and sequence (2180.55266ms)
+✔ v2 detects changing staged publication, missing source guards and unexpected factual tables (1434.624895ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1567.497162ms)
+✔ a deferred cross-table FK failure rolls back all twenty-three tables, guards and sequence (1476.174921ms)
+✔ interrupted v2 capture resumes preserved pages and its v2 cursor cannot be sent to v1 (204.842811ms)
+✔ v3 inventories all twenty-six tables and pins every reviewed D1/PostgreSQL migration (18.642766ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (2466.540508ms)
+✔ forward owner restoration streams all twenty-six tables, original JSON bytes, deferred receipts and sequence (2302.005936ms)
+✔ v3 detects changing staged publication, missing source guards and unexpected factual tables (1532.960114ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1492.367353ms)
+✔ a deferred cross-table FK failure rolls back all twenty-six tables, guards and sequence (1565.355033ms)
+✔ interrupted v3 capture resumes preserved pages and its v3 cursor cannot be sent to v1 (217.671809ms)
+✔ typed storage on actual SQLite/PostgreSQL preserves replays and rejects unsupported evidence or incomplete corrections atomically (1646.006431ms)
+✔ complete export marker works under managed D1 compound-SELECT limits (44.382835ms)
+✔ all fourteen raw tables export exhaustively with original text, rowids and archived evidence (92.664008ms)
+✔ composite keyset cursors page across releases and reject foreign, malformed or injected cursors (63.099402ms)
+✔ markers detect publication and media writes outside ingestion revisions and reject raced pages (46.262549ms)
+✔ oversized retained evidence is reduced through explicit 413 rather than truncated (103.256994ms)
+✔ CLI exporter preserves a partial ledger, resumes hashed pages and proves frozen all-table counts (83.457775ms)
+✔ CLI rejects unfrozen, changed or tampered exports without mixing checkpoints (53.11279ms)
+✔ CLI overlaps bounded independent collections while preserving serial cursors and journals (163.961409ms)
+✔ stalled fetch times out with its forwarded signal and retries the same cursor without rewriting preserved source pages (602.293347ms)
+✔ a response with stalled JSON bytes is bounded through body consumption and preserves checkpoint receipts (662.407713ms)
+✔ permanent transport stalls stop after four deadlines without logging credentials or creating a false checkpoint (3546.154518ms)
+✔ external cancellation aborts fetch, JSON-body reading and retry backoff without retries or checkpoint changes (160.76312ms)
+✔ malformed JSON and snapshot-conflict HTTP errors remain nonretryable, and unsafe deadline settings fail before fetching (1.328393ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11355.755245

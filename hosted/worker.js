@@ -3,6 +3,7 @@ import {mapSnapshotPage} from './map-snapshots.js';
 import {contentDatabase,storageReadOnly} from './content-backend.js';
 import {exportStoragePage,exportStorageMarker} from './storage-export.js';
 import {exportStoragePageV2,exportStorageMarkerV2,storageCatalogV2} from './storage-export-v2.js';
+import {exportStoragePageV3,exportStorageMarkerV3,storageCatalogV3} from './storage-export-v3.js';
 import {catalogPage,entityRelationshipsPage,entityMediaPage,capacityReport} from './research-catalog.js';
 import * as geography from './geographic-releases.js';
 import {importTemporalGeography,temporalGeographySnapshotPage,temporalGeographyEvidence} from './temporal-geography.js';
@@ -33,6 +34,10 @@ export default {
    if(url.pathname==='/api/storage/export-marker'&&request.method==='GET')return json({...await exportStorageMarker(db),read_only:storageReadOnly(env)});
    if(url.pathname==='/api/storage/v2/export-marker'&&request.method==='GET')return json({...await exportStorageMarkerV2(db),read_only:storageReadOnly(env)});
    if(url.pathname==='/api/storage/v2/catalog'&&request.method==='GET')return json(await storageCatalogV2(db));
+   if(url.pathname==='/api/storage/v3/export-marker'&&request.method==='GET')return json({...await exportStorageMarkerV3(db),read_only:storageReadOnly(env)});
+   if(url.pathname==='/api/storage/v3/catalog'&&request.method==='GET')return json(await storageCatalogV3(db));
+   const storageExportV3=/^\/api\/storage\/v3\/export\/([^/]+)$/.exec(url.pathname);
+   if(storageExportV3&&request.method==='GET')return json(await exportStoragePageV3(db,storageExportV3[1],{cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200)}));
    const storageExportV2=/^\/api\/storage\/v2\/export\/([^/]+)$/.exec(url.pathname);
    if(storageExportV2&&request.method==='GET')return json(await exportStoragePageV2(db,storageExportV2[1],{cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200)}));
    const storageExport=/^\/api\/storage\/export\/([^/]+)$/.exec(url.pathname);

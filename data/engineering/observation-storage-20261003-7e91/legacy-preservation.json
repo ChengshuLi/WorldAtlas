@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "base_sha": "05c6de936040d82e0e93cd82a83c2450aeb0b253",
+  "unchanged_files": [
+    {
+      "path": "drizzle/0000_bizarre_sentry.sql",
+      "bytes": 38954,
+      "sha256": "a7d4945214a37835bc6cbe8c6c0bfe2073d15fbf76fa1c510e6db072b64ba699"
+    },
+    {
+      "path": "drizzle/0001_evidence_retirements.sql",
+      "bytes": 8576,
+      "sha256": "1f29f4af9eb41425dbd932b9d68e1c54406cb99221a02a2a1bc6b6cab2e3846f"
+    },
+    {
+      "path": "drizzle/0002_geographic_reference_releases.sql",
+      "bytes": 14284,
+      "sha256": "fc03e50b1c7053d9ffe89534395bcbb644e3192231122eca51a424fd14753c53"
+    },
+    {
+      "path": "drizzle/0003_unsettled_location_rank.sql",
+      "bytes": 15998,
+      "sha256": "dc249cb326203bee26446fb010e0f2c05d8bd9bcbb918649199382d517e0fa4d"
+    },
+    {
+      "path": "drizzle/0004_population_precision_guard.sql",
+      "bytes": 5020,
+      "sha256": "302660bc2d4d673bab67820d3c54637ca8cd50460ace57e3142fb3c6f40da447"
+    },
+    {
+      "path": "drizzle/0005_population_source_class_guard.sql",
+      "bytes": 5345,
+      "sha256": "44ec5f5a82317b7c430f7d98439e6ce41d04859d46719c36c3e0dc072f102194"
+    },
+    {
+      "path": "drizzle/0006_unresolved_attribute_status_guard.sql",
+      "bytes": 472,
+      "sha256": "e2778adcf77945b294609111ecd21a02ffc177e41463393f07e7d15e50e97475"
+    },
+    {
+      "path": "drizzle/0007_fixed_environment_classifications.sql",
+      "bytes": 4652,
+      "sha256": "c566a87dc05a5ec5a1311019b60cfea54e8708b29ec2df6c8e80057432c4708b"
+    },
+    {
+      "path": "drizzle/0008_temporal_geography.sql",
+      "bytes": 21737,
+      "sha256": "a8cd574333d20891a94afac6a034576681fac2531545b761d4c4e609be452082"
+    },
+    {
+      "path": "drizzle/0009_footprint_versions.sql",
+      "bytes": 19674,
+      "sha256": "014c90d0f7cba3417480cefe3c20a97119237874098bcfb17b4be5120478a7f6"
+    },
+    {
+      "path": "drizzle/meta/0000_snapshot.json",
+      "bytes": 40129,
+      "sha256": "e8fd244d13001d742632e0678dfc72210f5226cad757dfd4316128d5c38f777d"
+    },
+    {
+      "path": "drizzle/meta/0001_snapshot.json",
+      "bytes": 43387,
+      "sha256": "c87009a65f84744b2716ce5e0499f0167d26fb61cd381df3cc64e7895df4bc3f"
+    },
+    {
+      "path": "drizzle/meta/0002_snapshot.json",
+      "bytes": 59498,
+      "sha256": "410a03e184a5169e3d9a34055d5247b610e34e799b48c8f35ea3ac04ee2f68b9"
+    },
+    {
+      "path": "drizzle/meta/0003_snapshot.json",
+      "bytes": 59510,
+      "sha256": "a092e2550c751a59ee02ea724448c126eb570790e99ec899cf071f7f7dc26838"
+    },
+    {
+      "path": "drizzle/meta/0004_snapshot.json",
+      "bytes": 59511,
+      "sha256": "de04bfc01382c7c96844b96acaf38fccc92bd4e63308eceb786cfa87c4c53cae"
+    },
+    {
+      "path": "drizzle/meta/0005_snapshot.json",
+      "bytes": 59511,
+      "sha256": "20e45fc7a7f1656c796744fc50fd46f9d079cb667f3ea7918abea03dd4725eed"
+    },
+    {
+      "path": "drizzle/meta/0006_snapshot.json",
+      "bytes": 59510,
+      "sha256": "80077fbacf604ee38488b3197fbde0ce74ef2f75f370c2cbe4159fa3d6216cae"
+    },
+    {
+      "path": "drizzle/meta/0007_snapshot.json",
+      "bytes": 59511,
+      "sha256": "329921a90f920a9b53551295ab1211d16841bb7b8e700ca4bfa615bb18c37129"
+    },
+    {
+      "path": "postgres/schema.sql",
+      "bytes": 51470,
+      "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618"
+    },
+    {
+      "path": "postgres/migrations/0001_temporal_geography.sql",
+      "bytes": 21800,
+      "sha256": "a4302a6f00b305205b70ed8981f929725c90b48172413ff47738a4a27186f6cd"
+    },
+    {
+      "path": "postgres/migrations/0002_footprint_versions.sql",
+      "bytes": 20748,
+      "sha256": "24e22602715355e48e344649461179d69ed92cf3c0e54812dee4f315fed42f37"
+    },
+    {
+      "path": "hosted/storage-export-v2-contract.js",
+      "bytes": 7783,
+      "sha256": "f670c6e6809192d62fa01959e3277eff96633b4e64293975dbf52b63b8e5d04b"
+    },
+    {
+      "path": "hosted/storage-export-v2.js",
+      "bytes": 11339,
+      "sha256": "a5e17805cf204fd28423064a0b51722cc37ce5baf754935a3526afe8dd9f9267"
+    },
+    {
+      "path": "scripts/export-hosted-storage-v2.mjs",
+      "bytes": 15673,
+      "sha256": "31322f0fda1916410436f772286ea8be50632f8f0d061671f2630b1eedf27ff4"
+    },
+    {
+      "path": "scripts/restore-postgres-storage-v2.mjs",
+      "bytes": 20543,
+      "sha256": "44dd22f2887fd63f6360e7edab747771a14d805d4b213629c93ea8ca13bb1e32"
+    },
+    {
+      "path": "db/schema.ts",
+      "bytes": 15545,
+      "sha256": "60d9666277699bf38f039015a6bfb01b9a36b166ec3c979b9a9d4e430d28df01"
+    },
+    {
+      "path": "src/model.js",
+      "bytes": 2822,
+      "sha256": "6cf64270d9c912b09aa93c60a14d058b4482c52e5ffa31d55fdcef026bea3dcc"
+    }
+  ],
+  "research_geography_factual_paths_changed": [],
+  "limits": [
+    "Source preservation and synthetic technical checks; no historical/geographic approval or production operation.",
+    "One forward journal entry appended; previous whole bytes and entries are retained separately."
+  ]
+}

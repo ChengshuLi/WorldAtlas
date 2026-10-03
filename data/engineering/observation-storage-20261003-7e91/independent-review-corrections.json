@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "issue": 529,
+  "reviewer_worker_id": "review-palette-651-20261003",
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "review_scope": "Uncommitted second-part typed storage workingtree",
+  "base_main_commit": "05c6de936040d82e0e93cd82a83c2450aeb0b253",
+  "exact_head_acceptance": false,
+  "manifest_binding": null,
+  "outcome": "changes-requested",
+  "source_file_receipts": [
+    {
+      "path": "drizzle/0010_typed_observations.sql",
+      "bytes": 12280,
+      "sha256": "17db2805c81396d2327b0dd5e486185cd90aaaa76b863eb938572fc2fe6b603b"
+    },
+    {
+      "path": "postgres/migrations/0003_typed_observations.sql",
+      "bytes": 14432,
+      "sha256": "763882a257394c4885883a49f2dd9c53aece81ca5dedbcc3c36f488811d574d0"
+    },
+    {
+      "path": "docs/TYPED_STORAGE_COMPATIBILITY.md",
+      "bytes": 7539,
+      "sha256": "6c352314e2e0084929f2edca7b1920da91e80c3c9ee886babcd05b66c82d864e"
+    }
+  ],
+  "findings": [
+    {
+      "id": "typed-source-status-parity",
+      "files": [
+        "drizzle/0010_typed_observations.sql",
+        "postgres/migrations/0003_typed_observations.sql"
+      ],
+      "line_reference": "SQLite source/status triggers lines25/28; equivalentPG guardpredicates",
+      "proof": "Actual in-memorySQLite using candidate0010: mergednormalize accepts reference-source unknown/null direct within2026support andexample-source unresolved/null is_example1; rawtypedSQL inserts reject sourceclass/methodstatusguards.",
+      "recommendation": "Align bothadapters observations/links to mergedpure status/source semantics without relabeling originaluncertainty; actualpure-vs-SQL positive/negative controls."
+    },
+    {
+      "id": "typed-null-status-parity",
+      "files": [
+        "drizzle/0010_typed_observations.sql",
+        "postgres/migrations/0003_typed_observations.sql"
+      ],
+      "line_reference": "SQLite CHECKline21; equivalentPGtableCHECK",
+      "proof": "Actual in-memorySQLite candidate migration accepts value JSONnull/statussourced; mergednormalizer rejects Null observation requires unknown/unresolved status.",
+      "recommendation": "Require converse null implies unknown/unresolved/disputed/no-majority; preserve literal0/false and test bothadapters."
+    },
+    {
+      "id": "retirement-ingestion-limit",
+      "files": [
+        "docs/TYPED_STORAGE_COMPATIBILITY.md",
+        "drizzle/0010_typed_observations.sql",
+        "postgres/migrations/0003_typed_observations.sql"
+      ],
+      "line_reference": "Docsline15 andatlas_typed_ingestion_complete_guard",
+      "proof": "ActualSQLite retirement naming missingreplacement committed standalone; persistedcount1. Lateratlas_ingestions append rejected Typed replacement claim is missing. Supportedatomicbatch test correctly rollsback, but no universalSQLcommitguarantee.",
+      "recommendation": "Narrow documented guarantee to supportedatomic-ingestion+journal protocol; require eventualadapter alwaysappendjournal atomically. Retain explicitstandaloneSQL limitcontrol unless deferredDBintegrity implemented."
+    }
+  ],
+  "inspection_notes": [
+    "V3rawexport/restore includes26tables and retainsJSONTEXT, owneremptytargetack, transactionalreadback/rollback/sequence andallknowninventorypins",
+    "V1/V2modules unchanged; servicePostgres batches acquire existingingestion advisorylock",
+    "Remaining thirdpart scope mustbe bounded before finalPRbudgetconsumption"
+  ],
+  "limits": [
+    "Workingtree only, no exacthead approval",
+    "SQLite controls independentlyexecuted; correspondingPGdefects identified bysamepredicateinspection, notfreshdirectPGrepro",
+    "No files/claims/GitHubcomments/liveprovider operations modified",
+    "No production/factual/geographic approval or newAPIcompletion implied"
+  ]
+}
