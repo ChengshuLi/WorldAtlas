@@ -117,6 +117,28 @@
       "url": "https://github.com/ChengshuLi/WorldAtlas/pull/565",
       "owner_path": "data/regional-review/regional-review-d2dae235991eaa49/",
       "scope_relation": "Disjoint 89 IDs in sibling #497 plus 228 IDs in #496; the two exact issue ID sets have empty intersection; Peru area members form 89 + 115 = 204."
+    },
+    {
+      "id": "gshhg-2.3.7-all-scope-screen",
+      "title": "Global Self-consistent Hierarchical High-resolution Geography (GSHHG), full-resolution binary release 2.3.7",
+      "publisher": "Paul Wessel and Walter H. F. Smith; University of Hawaiʻi SOEST mirror",
+      "release_date": "2017-06-15",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+      "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+      "member": "gshhs_f.b",
+      "member_bytes": 95809336,
+      "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+      "license": "LGPLv3 or later; license text retained in data/macro-improvements/macro-coverage-oceania/gshhg-LGPL.txt",
+      "attribution": "GSHHG; Wessel and Smith",
+      "screen": "All 228 assigned polygons bbox-screened against level-1 full-resolution land polygon centroids; 25 complete candidate records retained. Per-ID counts in gshhg-scope-screen.json.",
+      "retained_file": {
+        "path": "sources/gshhg-scope-land-candidates.bin.gz",
+        "uncompressed_bytes": 37716,
+        "uncompressed_sha256": "943e785c93ef86c97ad066b571799804d584d3653e8f6d77b84e86dc18622a41",
+        "compressed_bytes": 23029,
+        "compressed_sha256": "b04b7af73ede5feb967a2a9abb23ec844a3c084f1e08aad5a0fc98ee8e263e4e"
+      },
+      "restore": "Download the pinned archive, verify archive SHA-256, extract gshhs_f.b, verify member SHA-256, then run screen_gshhg_scope.py. The retained matched source records are byte-exact full GSHHG records."
     }
   ],
   "inspected_facts": {
