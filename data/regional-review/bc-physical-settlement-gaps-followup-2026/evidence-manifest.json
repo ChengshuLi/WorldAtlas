@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "issue": 606,
+  "scope": "Exactly six BC physical geography IDs enumerated in issue 606",
+  "created_utc_date": "2026-10-03",
+  "worker_id": "codex-20261003-bc-settlement-606-fe05565b-376a-4040-9ef1-0911022c900d",
+  "claim_id": "68a7a8c9-be4e-4035-b26e-94fd49934a7d",
+  "branch": "geography/bc-physical-settlement-606-20261003",
+  "baseline": {
+    "main_commit": "05c6de936040d82e0e93cd82a83c2450aeb0b253",
+    "geographic_release": "release 5 / Site 21",
+    "region_id": "framework:region:western-north-america:d2a1c2775a57",
+    "region_geometry_sha256": "7697f7a1a388f6b3e289ef00795cdb5e86bf9138f89eb97ec8d19bcfa1c131a9",
+    "member_ids_sha256": "3e060c8e712c4955bdb2996d4edf3b9271aaa8d0120501171cc7327e10797aaf",
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "current_location_file": "data/geography/part-29.json",
+    "current_location_file_sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+  },
+  "subject_accounting": {
+    "assigned": 6,
+    "assessed": 6,
+    "population_centre_polygons_screened": 108,
+    "gnbc_populated_place_points_screened": 2228,
+    "bc_legal_municipal_bbox_candidate_features": 25,
+    "exact_municipal_intersections": 0,
+    "positive_csd_polygon_intersections": 18,
+    "population_centre_hits": 0,
+    "gnbc_populated_place_hits": 0
+  },
+  "artifact_accounting": {
+    "generated_assessment_json_bytes": 42091,
+    "generated_assessment_json_sha256": "0dae7b33bb7247039252b57fd392995b521030fb64d22dcd1920db6998609c8c",
+    "assessment_subject_records": 6,
+    "new_retained_source_and_metadata_bytes": 1274777,
+    "restricted_access_geometry_bytes_retained": 0,
+    "restricted_access_first_nation_point_file_retained": false,
+    "original_485_inputs_copied_or_overwritten": false,
+    "external_public_source_census_zip_bytes": 551875,
+    "municipality_wfs_response_bytes": 543188
+  },
+  "reproduction": "audit_six_units.py verifies all listed #485/current-main pins, performs per-subject official-source overlays and writes only settlement-assessment.json. It was executed twice against the identical dated sources and produced byte-identical output SHA-256 0dae7b33bb7247039252b57fd392995b521030fb64d22dcd1920db6998609c8c. GDAL/OGR self-intersection/nested-shell warnings indicate temporary MakeValid screens already disclosed per result; no inputs are mutated.",
+  "baseline_inputs": [
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/assessment.json",
+      "bytes": 11600442,
+      "sha256": "2ab2c0610e37d50f020d031538fa5a22aecf4c7389bd64f6ec17b79487b60499",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/scope.json",
+      "bytes": 19009,
+      "sha256": "eeeba48c2ac959c2304b31f2008251b2dd8b34751d9aab1b9735d825532bf055",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/current-scope-and-parents.geojson.gz",
+      "bytes": 280642,
+      "sha256": "7ac3154985ef3bf5aae5b978481233e3a73c0ef6b2a753e1c7a15cef4c9302bb",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/current-parent-chains.json.gz",
+      "bytes": 106481,
+      "sha256": "aa0c1643d376baa9b7478d26886510718d3c0e242782df004e2defd028938290",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/aafc-bc-scope-ecoregions.geojson.gz",
+      "bytes": 817001,
+      "sha256": "915cdeb7dc028d7ce9a7e563ffecc5653121c2afd132abf24c7bb2ac59f2bb44",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/statistics-canada-bc-census-subdivisions-2021.geojson.gz",
+      "bytes": 42765402,
+      "sha256": "a16ca45708ab0ccd898994e5e792187d5a108741c2ff6f5f9f74e91242206ad4",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/statistics-canada-bc-population-centres-2021.geojson.gz",
+      "bytes": 1339233,
+      "sha256": "511c74952f6a826503cbbee7907c749cceb2dd8ac0d2f8bf009f3f183fb3d86f",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/canadian-geographical-names-populated-places-BC.geojson.gz",
+      "bytes": 157224,
+      "sha256": "6863a835d8c599ec28bc81b587beb59540c7708835212ca9f1e637e3c7d1074b",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/aafc-ecoregions-layer-metadata.json",
+      "bytes": 13366,
+      "sha256": "59cf889bc9ebb717f1994a9b06b731768b25431fcfb3a0a611476a8be0bcba57",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/sources/statistics-canada-census-subdivisions-layer-metadata.json",
+      "bytes": 18285,
+      "sha256": "2d134b376eeebcd8168aa8dc23bd04ab5e845b35e683c1875e40b7526fa189f9",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/regional-review/regional-review-4254da254d94f450/gshhg-scope-screen.json",
+      "bytes": 176129,
+      "sha256": "a1a946e88c326b567b0d7f01d80d9ab7f525e31e25dfb5a2cb2f08f1804e8c76",
+      "retained_in_issue_485_packet": true
+    },
+    {
+      "repository_path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+      "retained_in_current_main": true
+    }
+  ],
+  "packet_artifacts": [
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/README.md",
+      "bytes": 14072,
+      "sha256": "121f28fbf52ce24b117c747e8305c977f8625e45f974a8b755bd8a438a8b4997",
+      "kind": "research-method-or-packet-record"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/audit_six_units.py",
+      "bytes": 13848,
+      "sha256": "3f6e6f5c9008ccebb71b15c422cc74968049bd543f8dfced591c7c6a65c0117e",
+      "kind": "research-method-or-packet-record"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/claim-receipt.json",
+      "bytes": 964,
+      "sha256": "2e5e684d47e113137c61a4a9f515caf49167a67c4151f42934cf576465b6ac84",
+      "kind": "research-method-or-packet-record"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/issue-metadata.json",
+      "bytes": 7341,
+      "sha256": "a51b20956b1e287ba01a92a7bb718ee6e3d5c813c1d86b03a7f079fb7f97b5b7",
+      "kind": "research-method-or-packet-record"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/settlement-assessment.json",
+      "bytes": 42091,
+      "sha256": "0dae7b33bb7247039252b57fd392995b521030fb64d22dcd1920db6998609c8c",
+      "kind": "generated-assessment"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/source-catalog.json",
+      "bytes": 18049,
+      "sha256": "d66651b418043b2fcb3f579d165b7e88849f7f3f35c515eb1662ccb4ea7f78e1",
+      "kind": "research-method-or-packet-record"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-first-nation-community-locations-catalogue-record.json",
+      "bytes": 1540,
+      "sha256": "5191853d3874b269677c9865ce8833361be0a2fa068c67d4f58b1e188670e907",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-first-nation-community-locations-package-20261003.json",
+      "bytes": 34586,
+      "sha256": "48a8831e5e30febdbfe8c36850138cb3fe743a04bebde863d18a97a1be5cc732",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-municipalities-173-bbox-20261003.geojson",
+      "bytes": 147,
+      "sha256": "db246259b2fb2369fd471ad07c1f658fea9eb64739e189962e0fc749b0f14f64",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-municipalities-177-bbox-20261003.geojson",
+      "bytes": 147,
+      "sha256": "e17e2a92035c18f29304cb99396ebb2e6fbb9a5982ed700f16c33c8d3f1c21d0",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-municipalities-178-bbox-20261003.geojson",
+      "bytes": 147,
+      "sha256": "4e5e152b7b62efa0286919a61c22b57e2d044b4052e2a50848c961ce8af43cd5",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-municipalities-195-bbox-20261003.geojson",
+      "bytes": 350923,
+      "sha256": "800890443774e266bac0d4b1fb9b44a14468a2dda80279893bc7b48c9425e3dd",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-municipalities-201-bbox-20261003.geojson",
+      "bytes": 27415,
+      "sha256": "428cdd72ee4d511283815734e56f650701be01296dfb3dde0e0062ed5266c743",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-municipalities-207-bbox-20261003.geojson",
+      "bytes": 164409,
+      "sha256": "1eccfed7e0c1b854f5f10d47130e568ffb5b67009dcbf578543c40ab9cf12d80",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-municipalities-catalogue-package-20261003.json",
+      "bytes": 42836,
+      "sha256": "00550bc37a88aad6884e185853ce24a8a9f3d19d4d3dd7d57d2ed4842face1ea",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-municipalities-wfs-capabilities-20261003.xml",
+      "bytes": 95639,
+      "sha256": "100c8f79867b0bee3cb2a8d57d23d757b36a0a95c844e96f4766d21764560b76",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/bc-municipality-query-receipt.json",
+      "bytes": 2936,
+      "sha256": "d7a1bed3b4904493f759eb0c6b92862b924c1906f50c21df83fd740df3a4f839",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/gnbc-bc-categories-20261003.json",
+      "bytes": 964,
+      "sha256": "2154265f7faf6bee758a29c3fe66ed77d297790e4f61e938b3af7ab785a2f884",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/gnbc-category-query-receipt.json",
+      "bytes": 1125,
+      "sha256": "ef612736e2e1fd3e1bf05705dbe9b1f4907533fe72d9086c1758dba6d0dea93c",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/statcan-2021-census-population-and-dwelling-counts-98-10-0002-01.zip",
+      "bytes": 551875,
+      "sha256": "36ab6c8f3f6b82d70d9dea927cb5cf04f6fbf9b543a7ad543695e6ea70d22876",
+      "kind": "official-source-or-source-metadata"
+    },
+    {
+      "repository_path": "data/regional-review/bc-physical-settlement-gaps-followup-2026/sources/statcan-2021-census-table-download-metadata.json",
+      "bytes": 88,
+      "sha256": "e01bade27b1156965360d1d249638924041fc9cda8860e4a9f034e8ff97ba3e5",
+      "kind": "official-source-or-source-metadata"
+    }
+  ]
+}
