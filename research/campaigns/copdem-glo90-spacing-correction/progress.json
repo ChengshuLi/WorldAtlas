@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "copdem-glo90-spacing-correction",
+  "branch": "research/copdem-glo90-spacing-correction",
+  "base_main_commit": "3d94327fe29662c1facad63338baacf7dcd8def6",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/566",
+  "date_timezone": "UTC",
+  "scope": {
+    "geographies": ["Source documentation correction for one previously evaluated global GLO-90 tile; no boundary or location assignment"],
+    "attributes": ["Correct measured angular grid-spacing wording and preserve source discrepancy"],
+    "sources": ["Earlier Copernicus GLO-90 issue #67 campaign; exact public AWS README and selected COG header"]
+  },
+  "updated_at_utc": "2026-10-03T09:50:00Z",
+  "geographic_release": null,
+  "input_paths": ["research/campaigns/copdem-sahara-20261003-a44eff82017e/source-evaluation.md", "research/campaigns/copdem-sahara-20261003-a44eff82017e/source-manifest.json"],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Rechecked exact public readme response; recorded version limitation, bytes, full response hash and the filename-token statement.",
+    "Fetched an 8192-byte COG header range; GDAL reconfirmed 1200 x 1200 pixels and 0.0008333333333333-degree increments.",
+    "Corrected angular arithmetic to approximately 3 arc-seconds and documented the readme-versus-header discrepancy, preserving original evidence and DSM/acquisition/license context."
+  ],
+  "source_gaps": ["The README does not identify a version; no underlying source-scene/acquisition date is exposed by the selected COG."],
+  "blockers": [],
+  "next_action": "Run local JSON/scope and diff checks; submit the single source-only correction PR. Wait for exact-head validation and serialized merge; verify fresh-main integration, release issue claim and continue to another ready item.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
