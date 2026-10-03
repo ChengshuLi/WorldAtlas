@@ -6,7 +6,7 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "865c93d8966cd9957a436516f43af9729cc266f1",
+    "commit": "51540f0bccd1f0958b44cbd4dea4ad2c1a5157d6",
     "files": [
       {
         "path": "AGENTS.md",
@@ -42,8 +42,8 @@
   "outputs": [
     {
       "path": ".github/evidence-policy.json",
-      "bytes": 218,
-      "sha256": "dddb1b78c6bc92bb679c26991207189945be11af76aa3072aee942372bc80a6e",
+      "bytes": 225,
+      "sha256": "69310e9dfbc92a7bfc954f6374a13dafb47a12ea53e27406cfd89138fc87463b",
       "hash_kind": "file-bytes"
     },
     {
@@ -108,8 +108,8 @@
     },
     {
       "path": ".github/workflows/handoff-scope.yml",
-      "bytes": 4653,
-      "sha256": "90b9ccc8cd711233a2abb3642b62fd13be0f3c901401816c8b2a3413888a45b0",
+      "bytes": 4694,
+      "sha256": "09ab368de00ee8a1a6fe2ea872d33d110a24c36aa1c4361ac4416be9c3a346a4",
       "hash_kind": "file-bytes"
     },
     {
@@ -126,14 +126,32 @@
     },
     {
       "path": "coordination/engineering/premerge-quality-627-activate/workflow-checkout-repair.json",
-      "bytes": 1170,
-      "sha256": "2e4fde3b62b8679e51b4e0c82fbda2cc09b266bab24d708c4a7335bd3e0795d8",
+      "bytes": 1508,
+      "sha256": "16dd523b40291617fbf56aa6eac03e50ccd2fbf220f36b635ee44d6483120238",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/premerge-quality-627-activate/focused-tests-resume.tap",
       "bytes": 6700,
       "sha256": "ccf9dc49ee74662b1b15da87b970ff4d2d4aec0ec58942aec6b2f32edfc4ca7c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/premerge-quality-627-activate/legacy-inventory-resume.json",
+      "bytes": 151422,
+      "sha256": "400a61b1ace4f3e72b18630c2baa9247a4d4e3039c33d587efa0f8633c404836",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/premerge-quality-627-activate/evidence-quality.json",
+      "bytes": 5773,
+      "sha256": "e5ac37a64e46883ee60828b7e6cf65799e2bfa50c210631fc5ec7d564476c6c8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/premerge-quality-627-activate/hosted-report-observation.json",
+      "bytes": 889,
+      "sha256": "5451445bf8e94d27b90cae5a0d2438145c55d4414ec712359fa89d7441cbe1ea",
       "hash_kind": "file-bytes"
     }
   ],
@@ -239,6 +257,14 @@
     },
     {
       "path": "coordination/engineering/premerge-quality-627-activate/evidence-quality-resume.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/premerge-quality-627-activate/legacy-inventory-resume.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/premerge-quality-627-activate/hosted-report-observation.json",
       "status": "added"
     }
   ],

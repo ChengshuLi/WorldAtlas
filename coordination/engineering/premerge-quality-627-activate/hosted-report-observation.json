@@ -1,0 +1,21 @@
+{
+  "run_id": 37155097485,
+  "job_id": 111296758089,
+  "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37155097485/job/111296758089",
+  "inspected": "Actual completed hosted job log, not artifact contents",
+  "evidence_report": {
+    "status": "legacy-or-report-only",
+    "required": false,
+    "legacy": false,
+    "decision": "Reporting rollout: no declared evidence contract",
+    "head_sha": "dd8fa6f79dcc99af97d5de12d6e85511f20a7c1c",
+    "limits": [
+      "No versioned manifest was required or checked; no factual approval"
+    ]
+  },
+  "result": "Successful reporting path with honest no-contract limitation. This does not validate a manifest or geography.",
+  "limits": [
+    "Artifact download forbidden by remote artifact host; not claimed inspected.",
+    "Positive/negative versioned manifests covered locally; legacy rollout path observed on hosted CI."
+  ]
+}

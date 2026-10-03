@@ -13,5 +13,12 @@
     "Hosted main-only workflow repair not yet merged or verified.",
     "Normal merge and reservation workflows cannot bootstrap their own fix. No exception authorized or executed.",
     "Earlier activation evidence remains retained at its original vintage."
-  ]
+  ],
+  "rollout": {
+    "effective_at": "2026-10-04T00:00:00Z",
+    "previous_cutoff": "Proposed only, never published; original receipt retained as archived preparation evidence.",
+    "inventory": "coordination/engineering/premerge-quality-627-activate/legacy-inventory-resume.json",
+    "open_issue_count": 482,
+    "open_pr_count": 5
+  }
 }
