@@ -44,12 +44,19 @@
     "rollback_source_sha": "917c66338166cb60ffe5c28cde75e43ed7ebecd2",
     "rollback_version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_b853dc160a808191ba1c68ec6458739b",
     "primary_sha": "6fcd6a01897978653c7a107ddd2cf12072658e86",
-    "source_sha": "0c8904c40fe0067afd55fa45a6a371a86205ceae",
+    "source_sha": "6caedbedd24a81731c12bae913d267ae277f31b9",
     "archive_sha256": "ec0898a7d80bc62af2250b644c7d04d36534d9381f990694ec85ee4284f48cc4",
     "archive_tar_bytes": 262266880,
     "archive_gzip_bytes": 186318592,
     "headroom_to_reserved_target_bytes": 1974272,
-    "build_geography_sha256": "3465d8f227958342cc6457f50fdf302462ffefb9fe2e6e5625cd12373a3bf7de"
+    "build_geography_sha256": "3465d8f227958342cc6457f50fdf302462ffefb9fe2e6e5625cd12373a3bf7de",
+    "source_git_transport": {
+      "rejected_candidate": "0c8904c40fe0067afd55fa45a6a371a86205ceae",
+      "rejection": "artifacts_git_receive_pack_object_too_large",
+      "preservation": "Primary research and local source copies retained. Existing accepted Site research inventory is byte-identical to source parent 917c663. Only deployment-source Git inventory excludes newly copied research; application/build/migration trees unchanged. No forced remote update.",
+      "new_source_blob_bytes": 34811467,
+      "largest_new_source_blob_bytes": 2483959
+    }
   },
   "evidence_paths": [
     "data/engineering/year-switch-publish-20261003-7e91/site-budget.json.gz",
