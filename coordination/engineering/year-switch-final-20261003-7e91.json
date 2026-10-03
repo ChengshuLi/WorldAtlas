@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "lane": "engineering",
+  "job_id": "year-switch-final-20261003-7e91",
+  "worker_id": "engineering-night-20261003-7e91f438",
+  "branch": "engineering/year-switch-final-20261003-7e91",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/22",
+  "date_timezone": "America/Los_Angeles",
+  "updated_at_utc": "2026-10-03T17:05:00Z",
+  "base_main_commit": "79624f7695fa2e564a465bb9a4fb499af75d97f8",
+  "completed_implementation_prs": [
+    553,
+    618
+  ],
+  "scope": [
+    "Publish already-merged bounded transport and retain final production acceptance evidence"
+  ],
+  "reservation": {
+    "accepted": true,
+    "request_id": "26778542-5a0c-4d51-a1d9-092f30b21b0c",
+    "issue_number": 22,
+    "claim": {
+      "comment_id": 5967005967,
+      "version": 1,
+      "active": true,
+      "worker_id": "engineering-night-20261003-7e91f438",
+      "claim_id": "35a7dbdb-842b-4282-8e21-d073cb7d7ac1",
+      "branch": "engineering/year-switch-final-20261003-7e91",
+      "request_id": "26778542-5a0c-4d51-a1d9-092f30b21b0c",
+      "issue_number": 22,
+      "claimed_at": "2026-10-03T08:22:37.727Z",
+      "updated_at": "2026-10-03T17:04:25.400Z",
+      "expires_at": "2026-10-04T17:04:25.400Z",
+      "live_work": false,
+      "mode": "engineering",
+      "max_prs": 3
+    },
+    "replayed": false,
+    "result_source": "github-comment",
+    "result_comment_id": 5971392808,
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37139154012"
+  },
+  "publication_gate": "data/engineering/year-switch-publish-20261003-7e91/publication-inline-final.log.gz",
+  "checks": {
+    "unit_contract_checks": 551,
+    "geographic_preparation_checks": 15,
+    "exact_ownership_buckets": 51,
+    "complete_publication_gate": "passed",
+    "source_deployment_file_hashes_match_git": 539,
+    "production_historical_suite": "completed",
+    "production_supported_suite": "completed",
+    "complete_map_modes": 14,
+    "selected_profiles": 6,
+    "attributes_per_profile": 8,
+    "hierarchy_tiers": 6,
+    "transport_injected_fault_scenarios": 9,
+    "transport_faults_completed": true,
+    "local_scope_exact_native_head": "passed against fresh origin/main7e0d5c97aeb1f0d98ac035959a2fe7a3cafe99c3",
+    "prior_exact_head_CI": {
+      "head": "6717206905cfa305e2e11e5601ed79772222779d",
+      "scope_run": 37138885334,
+      "package_run": 37138885343,
+      "conclusions": "success; latestreceiptupdate must pass exactnewhead"
+    }
+  },
+  "deployment": {
+    "source_sha": "8aaeb86cdfe9fc49a3ca52c76151989ec994ece1",
+    "source_push": "confirmed",
+    "status": "succeeded",
+    "rollback_version": 22,
+    "rollback_version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_cde99aa08a7481919dc9b60340db619d",
+    "archive_sha256": "3324e7dd10b637be30eed17c711e4d37b691cbc6e79232a3cf129f36a0dc5a61",
+    "archive_tar_bytes": 262266880,
+    "archive_gzip_bytes": 186318601,
+    "headroom_to_reserved_target_bytes": 1974272,
+    "retained_source_migrations": 10,
+    "deployment_legacy_migrations": 8,
+    "source_geography_sha256": "3465d8f227958342cc6457f50fdf302462ffefb9fe2e6e5625cd12373a3bf7de",
+    "version_number": 23,
+    "version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_0656cd2f66a88191b43d0ff43852b85f",
+    "deployment_id": "appgdep_6ac132614ab08191b1dab4d525bdae4c",
+    "native_archive_bytes": 262246400,
+    "native_archive_sha256": "ace56785e9fded579efd29215ff0a397da32bd476155e40d77a2284cb6b25f7d",
+    "environment_revision": 4
+  },
+  "evidence_paths": [
+    "data/engineering/year-switch-final-20261003-7e91/rejected-staging-race.log.gz",
+    "data/engineering/year-switch-final-20261003-7e91/site-budget.json.gz",
+    "data/engineering/year-switch-final-20261003-7e91/site23-evidence-transfer.json",
+    "data/engineering/year-switch-final-20261003-7e91/README.md"
+  ],
+  "evidence_hashes": {
+    "data/engineering/year-switch-final-20261003-7e91/rejected-staging-race.log.gz": "398c6b1bfce9db30e6dca084cc158fca07176226734417d7ad34f2d17ea60f04",
+    "data/engineering/year-switch-final-20261003-7e91/site-budget.json.gz": "cc53fcb265fc898475b17cd8da0467bec6a75bda982cddad8c1952a67c038236",
+    "data/engineering/year-switch-final-20261003-7e91/site23-historical-1950.png": "4d6f5673ace28ea6f7fdd31867b9eca19a77341cf49530f168b07d97d8325eff",
+    "data/engineering/year-switch-final-20261003-7e91/site23-historical-trace.json.gz": "c47919d05e0bda7f6ff1d50738f5953a0660a7811be0bb07d457c428aa03491e",
+    "data/engineering/year-switch-final-20261003-7e91/site23-historical.json.gz": "cd95a708e48bf691a09e0d2af9b15fe514b5dc3b4ad874909e59570579509455",
+    "data/engineering/year-switch-final-20261003-7e91/site23-profiles.json.gz": "57a2b74bb2a84ab712a77ee74ded87542ebb62162c3173c2db0ee506902ecb10",
+    "data/engineering/year-switch-final-20261003-7e91/site23-supported-2020.png": "daf8133ba88754ba3ad846e234a79778b1ec2f46f97984c19c980d64db1e01fc",
+    "data/engineering/year-switch-final-20261003-7e91/site23-supported-trace.json.gz": "2baad994cf766c7cc84a1169380a200a1030816108deb6d314b261e1b21116f9",
+    "data/engineering/year-switch-final-20261003-7e91/site23-supported.json.gz": "8ff45b9c2c7857d27c9da40f45228040d538efeae2e05608dd0e1808e65b55f2",
+    "data/engineering/year-switch-final-20261003-7e91/site23-faults.json.gz": "135c2e7abe1e89cd24c6c8db066c0e8ce528a419dcb15886f8e4a33fb9b7ffaa",
+    "data/engineering/year-switch-final-20261003-7e91/site23-evidence-transfer.json": "ae4f8d2216020cffccdeb174919c60cf079afe82784f7b5d8bd0fd3d47c177e1"
+  },
+  "blockers": [],
+  "next_action": "Recheck exact finalhead CI after this receipt update; markPR630 ready; submitserializedsquashqueue; verifyactualmerge and matchingbotresult; releaseissue22claim; continuefreshreadyissue23. Issue22remainsopen for coordinatorreviewedboundedfollowup because supported3secondtargetunmet.",
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue",
+  "historical_measurement": {
+    "initial_browser_ms": 36324.620283,
+    "navigation_ms": [
+      2912.7,
+      2534.1,
+      2835.2,
+      2686.2,
+      3045.3
+    ],
+    "normal_warm_target_ms": 3000,
+    "ordinary_switches_within_target": 4,
+    "ordinary_switches": 4,
+    "rapid_settlement_ms": 3045.3,
+    "ownership_compilation_and_upload_delta": 0,
+    "page_errors": 0,
+    "unsupported_zero_requests": 0,
+    "provider_wake_measured": false,
+    "physical_mobile": false
+  },
+  "supported_measurement": {
+    "initial_browser_ms": 34713.136612,
+    "navigation_ms": [
+      4165.800000000745,
+      3183.5,
+      4085.10000000149,
+      2554.699999999255,
+      4013.5
+    ],
+    "normal_warm_target_ms": 3000,
+    "ordinary_switches_within_target": 1,
+    "ordinary_switches": 4,
+    "target_met": false,
+    "ownership_compilation_and_upload_delta": 0,
+    "page_errors": 0,
+    "provider_wake_measured": false,
+    "physical_mobile": false
+  },
+  "remaining_scope": [
+    "Populated 2020/2021 normal switches exceed 3000ms target (4166,3184,4085ms); third and final permitted PR must remain partial. Propose bounded follow-up for measured 2.8MiB response/query/decode work.",
+    "Fresh browser asset loading remains 34.7-36.3seconds; provider wake unknown, not attributed."
+  ],
+  "live_operations_settled": true,
+  "canonical_live_work_update": "confirmed false by issue-claims.yml run37139154012, result5971392808",
+  "acceptance_complete": false,
+  "durable_binary_transport": "data/engineering/year-switch-final-20261003-7e91/site23-evidence-transfer.json",
+  "decoded_evidence_paths": [
+    "data/engineering/year-switch-final-20261003-7e91/rejected-staging-race.log.gz",
+    "data/engineering/year-switch-final-20261003-7e91/site-budget.json.gz",
+    "data/engineering/year-switch-final-20261003-7e91/site23-historical-1950.png",
+    "data/engineering/year-switch-final-20261003-7e91/site23-historical-trace.json.gz",
+    "data/engineering/year-switch-final-20261003-7e91/site23-historical.json.gz",
+    "data/engineering/year-switch-final-20261003-7e91/site23-profiles.json.gz",
+    "data/engineering/year-switch-final-20261003-7e91/site23-supported-2020.png",
+    "data/engineering/year-switch-final-20261003-7e91/site23-supported-trace.json.gz",
+    "data/engineering/year-switch-final-20261003-7e91/site23-supported.json.gz",
+    "data/engineering/year-switch-final-20261003-7e91/site23-faults.json.gz"
+  ],
+  "evidence_transfer_commit": "709c2591ecbcff0a5bdf6b063f760a4c08ead98d",
+  "historical_access_interruption": "Transient runtime GitHub HTTP401 recovered17:03UTC; native connector preserved evidence while blocked. Hourly wakeup enabled in samechat; no credentials exposed."
+}
