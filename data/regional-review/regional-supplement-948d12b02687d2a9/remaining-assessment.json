@@ -1,0 +1,1354 @@
+{
+  "issue": 526,
+  "packet_part": 2,
+  "review_date": "2026-10-03",
+  "scope": "All remaining 12 of 20 assigned locations; one assigned area slice is explicitly distinguished from full parent membership.",
+  "methods": {
+    "osm": "Retained OSM API extracts retrieved 2026-10-02; directed coastline ways joined by node endpoints, CCW rings treated as land and CW contained rings as water; report preserves every source way, source version timestamp and land component, topology gaps and areas. Complete closed ring reconstruction does not prove complete modern shoreline.",
+    "gshhg": "GSHHG full resolution 2.3.7 source families and candidate components selected by gazetteer coordinate within declared search envelope; envelope is not boundary, polygons not clipped. Full component inventory, IDs, bounds, vertices and area retained from report.json. Released 2017-06-15; comparison source is historical/generalized and not modern completeness proof.",
+    "units": "Areas are source measurements, not official area determinations; component counts are not island quotas."
+  },
+  "sources": {
+    "osm_report_path": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+    "osm_report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+    "gshhg_report_path": "data/macro-improvements/macro-coverage-oceania/report.json",
+    "gshhg_report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+    "gshhg_extraction_manifest": "data/macro-improvements/macro-coverage-oceania/gshhg-extraction.json",
+    "openstreetmap_license": "ODbL 1.0; attribution OpenStreetMap contributors; raw compressed bytes retained in named paths under macro-coverage-oceania; per-row URL/archive/hash in OSM report. Preserve old vintage, never overwrite.",
+    "gshhg_license": "LGPLv3 or later per extraction manifest; native source archive/member hashes and extraction procedure are in manifest; 2.3.7 released 2017-06-15.",
+    "official_sources": [
+      "Cook Islands OPM Pa Enua Governance, https://www.pmoffice.gov.ck/our-work/pa-enua/, retrieved 2026-10-03, page hash and byte count in README; no reuse license stated; restore from canonical URL and record new hash.",
+      "Cook Islands Statistics Office 2021 Census, https://stats.gov.ck/download/83/census-2021/1497/2021-census-report-with-tables-and-questionnaire.pdf, census enumeration 2021-12-01, retrieved 2026-10-03, hash and byte count in README; no reuse license stated.",
+      "Cook Islands Atiu and Takutea Environment Regulations 2008, https://environment.gov.ck/wp-content/uploads/2023/02/Environment-Atiu-and-Takutea-Regulations-2008.pdf, retrieved 2026-10-03; hash and bytes in README; no open reuse license stated.",
+      "Kiribati Southern Line Islands Marine Protected Area Regulations 2020, https://www.president.gov.ki/images/Gazettes/SLIMPR20.pdf, July 2020, retrieved 2026-10-03; hash and bytes in README; no open reuse license stated.",
+      "Government of Pitcairn Laws Volume I (2017 revised edition), https://www.government.pn/s/Revised-Laws-of-Pitcairn-Henderson-Ducie-and-Oeno-Islands-2017-Rev-Ed-Volume-1.pdf, retrieved 2026-10-03; hash and bytes in README; no reuse license stated."
+    ]
+  },
+  "parent_scopes": {
+    "Northern Cook Islands": {
+      "id": "atlas:macro-review:area:0bf7d87aca905fea",
+      "assigned_count": 2,
+      "full_count": 6,
+      "full_members": [
+        "Manihiki",
+        "Penrhyn/Tongareva",
+        "Pukapuka",
+        "Nassau",
+        "Rakahanga",
+        "Suwarrow"
+      ],
+      "reviewed_assigned": [
+        "Nassau",
+        "Suwarrow"
+      ],
+      "out_of_scope_context_only": [
+        "Manihiki",
+        "Penrhyn/Tongareva",
+        "Pukapuka",
+        "Rakahanga"
+      ],
+      "finding": "Pukapuka/Nassau combined Island Government is supported by OPM; do not infer boundary/ownership from governance name."
+    },
+    "Cook Islands": {
+      "id": "framework:area:cook-is:ef123ee6d88f",
+      "assigned_count": 2,
+      "full_count": 9,
+      "full_members": [
+        "Aitutaki",
+        "Atiu",
+        "Takutea",
+        "Mangaia",
+        "Manuae",
+        "Mauke",
+        "Mitiaro",
+        "Palmerston",
+        "Rarotonga"
+      ],
+      "reviewed_assigned": [
+        "Takutea",
+        "Palmerston"
+      ],
+      "finding": "Label is ambiguous because the northern islands are represented in a separate Northern Cook area; clarify intended southern/central scope with regional integration, do not change membership here."
+    },
+    "Line Islands": {
+      "id": "framework:area:line-is:637147b6194f",
+      "assigned_count": 5,
+      "full_count": 9,
+      "full_members": [
+        "Jarvis Island",
+        "Line Islands ADM1",
+        "Caroline/Millennium",
+        "Flint",
+        "Kingman Reef",
+        "Malden",
+        "Starbuck",
+        "Vostok",
+        "Palmyra Atoll"
+      ],
+      "province_id": "framework:province:line-islands:ce27f8d7a826",
+      "province_assigned_count": 5,
+      "province_full_count": 7,
+      "province_full_members": [
+        "Line Islands ADM1",
+        "Caroline/Millennium",
+        "Flint",
+        "Kingman Reef",
+        "Malden",
+        "Starbuck",
+        "Vostok"
+      ],
+      "reviewed_assigned": [
+        "Starbuck",
+        "Vostok",
+        "Malden",
+        "Flint",
+        "Caroline/Millennium"
+      ],
+      "finding": "Kiribati 2020 statute names Flint, Volstok, Starbuck, Malden and Millenium (Caroline); it does not include Kingman (handled by #544), establish province tier, or resolve the retained Gilbert/Line ADM1 crosswalk (#611). Coordinate #404/#611; no shared parent changes."
+    },
+    "Pitcairn Islands": {
+      "id": "framework:area:pitcairn-is:b2a18f648883",
+      "assigned_count": 3,
+      "full_count": 4,
+      "full_members": [
+        "Pitcairn",
+        "Henderson",
+        "Oeno",
+        "Ducie"
+      ],
+      "province_id": "framework:province:pitcairn-islands:d483df587794",
+      "province_full_count": 4,
+      "province_full_members": [
+        "Pitcairn",
+        "Henderson",
+        "Oeno",
+        "Ducie"
+      ],
+      "reviewed_assigned": [
+        "Pitcairn",
+        "Oeno",
+        "Ducie"
+      ],
+      "finding": "Official laws identify the named four-island group. Area physical/legal group role is supported; an additional coextensive Province tier has no independent civil role evidence in sources reviewed and remains unresolved. Henderson is out of scope and not reassessed."
+    }
+  },
+  "locations": [
+    {
+      "id": "atlas:macro-coverage:location:3940e881f1dbdcf7fc34",
+      "name": "Nassau",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "atlas:macro-review:province:18e627fd9cb17291",
+          "name": "Pukapuka"
+        },
+        {
+          "id": "atlas:macro-review:area:0bf7d87aca905fea",
+          "name": "Northern Cook Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "No independent authoritative evidence found that certifies full modern coastline completeness. Existing OSM and GSHHG records are dated comparison families, not approved geometry; maintain one named island/atoll pending complete source review.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "5843c0b66ae6a5ac2bf09fee2e1e8afdc0fad259d3ddb6b613dc06695c3158e3",
+        "source_identity": "osm:named-land:northern-cook-nassau",
+        "source_raw_sha256": "a1f9221f2788de184ccd75545f6964dc42a74f2bbe10431fa80c591da5f2c064",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-165.5369444,-11.6977778,-165.2769444,-11.4377778",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "Cook Islands 2021 Census: population 92 (enumeration 2021-12-01); a dated census observation, not current population.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Nassau",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-165.5369444,-11.6977778,-165.2769444,-11.4377778",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "a1f9221f2788de184ccd75545f6964dc42a74f2bbe10431fa80c591da5f2c064",
+          "retained_archive": "osm-6421cb384998.xml.gz",
+          "retained_archive_bytes": 26889,
+          "retained_archive_sha256": "cadf24048f8a07b09fa15d26b3fe96351f2d4ead2c17cf665d9c3f3099d5e7bf",
+          "bbox": [
+            -165.53694444444443,
+            -11.697777777777778,
+            -165.27694444444444,
+            -11.437777777777777
+          ],
+          "coastline_way_count": 1,
+          "closed_land_rings": 1,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 1.241091484059009,
+          "absent_current_land_components": 1,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -165.52694444444444,
+            -11.687777777777777,
+            -165.28694444444443,
+            -11.447777777777778
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 1,
+          "source_domain_land_area_km2": 1.280517258308515,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:c02eea88d089c5d447cd",
+      "name": "Suwarrow",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "atlas:macro-coverage:province:0ad43498dd638baa183a",
+          "name": "Suwarrow Atoll"
+        },
+        {
+          "id": "atlas:macro-review:area:0bf7d87aca905fea",
+          "name": "Northern Cook Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "Census lists 0.4 km² (2021 table); OSM 1.3954 km² and GSHHG 1.7282 km². Material mismatch: source definitions, reef/land inclusion, coastline vintage or extraction may differ; no selection can be approved from this evidence.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "325d867f22cd033915d7e6442a33ed87b4db3dad6b7ecaa835fffed9b62be812",
+        "source_identity": "osm:named-land:northern-cook-suwarrow",
+        "source_raw_sha256": "9d3186528b51b7a7d2c28d38b65099bc5f42593553f82f6a35d9843a419af307",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-163.2413889,-13.3991667,-162.9813889,-13.1391667",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "Cook Islands 2021 Census table gives no resident count (dash); NES reports seasonal ranger deployment in 2026. Permanent settlement not established by reviewed sources.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Suwarrow",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-163.2413889,-13.3991667,-162.9813889,-13.1391667",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "9d3186528b51b7a7d2c28d38b65099bc5f42593553f82f6a35d9843a419af307",
+          "retained_archive": "osm-c83a7ed0424b.xml.gz",
+          "retained_archive_bytes": 24502,
+          "retained_archive_sha256": "d8977ec9550989556b6e057dc8eba91850972db33507643a0ea1f6e70d53e6ed",
+          "bbox": [
+            -163.24138888888888,
+            -13.399166666666668,
+            -162.9813888888889,
+            -13.139166666666666
+          ],
+          "coastline_way_count": 29,
+          "closed_land_rings": 29,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 1.3954002239460532,
+          "absent_current_land_components": 29,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 29
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -163.2313888888889,
+            -13.389166666666666,
+            -162.99138888888888,
+            -13.149166666666668
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 20,
+          "source_domain_land_area_km2": 1.728201622922889,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 20
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:7027bd6abf854cc7716f",
+      "name": "Takutea",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "framework:province:atiu:859595940bdf",
+          "name": "Atiu"
+        },
+        {
+          "id": "framework:area:cook-is:ef123ee6d88f",
+          "name": "Cook Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "Takutea regulation defines island separately from surrounding 12-nautical-mile marine waters; do not convert protected marine waters into land footprint.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "5dc39c26e9b45fc48c753fe4754a2d3fd4e241f576558f32c7711f486c9e7d61",
+        "source_identity": "osm:named-land:southern-cook-takutea",
+        "source_raw_sha256": "e0c4f119b7bd69d9abe6b00e40a454c97577884c35a6e80332e8e29789e1d0f7",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-158.4241667,-19.9430556,-158.1641667,-19.6830556",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "No specific census population line was found in reviewed table; do not infer uninhabited from omission. Permanent settlement unresolved.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Takutea",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-158.4241667,-19.9430556,-158.1641667,-19.6830556",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "e0c4f119b7bd69d9abe6b00e40a454c97577884c35a6e80332e8e29789e1d0f7",
+          "retained_archive": "osm-0a283d55978f.xml.gz",
+          "retained_archive_bytes": 9419,
+          "retained_archive_sha256": "f18f3cb9beec68dd0776235938884570ac19efc86335b1e458f5b3056320351d",
+          "bbox": [
+            -158.42416666666665,
+            -19.943055555555553,
+            -158.16416666666666,
+            -19.683055555555555
+          ],
+          "coastline_way_count": 1,
+          "closed_land_rings": 1,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 1.209924016378194,
+          "absent_current_land_components": 1,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -158.41416666666666,
+            -19.933055555555555,
+            -158.17416666666665,
+            -19.693055555555553
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 1,
+          "source_domain_land_area_km2": 1.5811596963259875,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:bcec1e1e5eb00bd49e80",
+      "name": "Palmerston",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "atlas:macro-coverage:province:29932af2f8043947ba8a",
+          "name": "Palmerston Atoll"
+        },
+        {
+          "id": "framework:area:cook-is:ef123ee6d88f",
+          "name": "Cook Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "Census lists 2.1 km² (2021); OSM 2.8919 km² and GSHHG 2.3607 km². Resolve source-definition and coastline differences before choosing land.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "48a403bbb5c259ed2d7cd2b58d85e883e855f840bd22ecba6a597dddc3833120",
+        "source_identity": "osm:named-land:southern-cook-true-palmerston",
+        "source_raw_sha256": "05455af3c9638dd1b19533fc9fea91d4f05ab57113977571abde7ff879001e1c",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-163.296667,-18.18,-163.036667,-17.92",
+        "supported_from": null,
+        "supported_to": null,
+        "source_correction_issue": 502
+      },
+      "settlement_assessment": "Cook Islands 2021 Census: population 25 (enumeration 2021-12-01); dated observation.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Palmerston",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-163.296667,-18.18,-163.036667,-17.92",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "05455af3c9638dd1b19533fc9fea91d4f05ab57113977571abde7ff879001e1c",
+          "retained_archive": "osm-f5f6c9419e6c.xml.gz",
+          "retained_archive_bytes": 40815,
+          "retained_archive_sha256": "ed4c1dfe8515d6ebcd18790b4974e27f15aec6b4ffaad937faa969292b2ff072",
+          "bbox": [
+            -163.29666699999999,
+            -18.18,
+            -163.036667,
+            -17.92
+          ],
+          "coastline_way_count": 34,
+          "closed_land_rings": 34,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 2.8919074789144905,
+          "absent_current_land_components": 34,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 34
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -163.286667,
+            -18.17,
+            -163.04666699999999,
+            -17.93
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 5,
+          "source_domain_land_area_km2": 2.3606600166477123,
+          "status": "represented-geometry-compared; full-modern-shoreline-not-certified",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 5
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:2101427491f47935e872",
+      "name": "Starbuck",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "framework:province:line-islands:ce27f8d7a826",
+          "name": "Line Islands"
+        },
+        {
+          "id": "framework:area:line-is:637147b6194f",
+          "name": "Line Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "No independent authoritative evidence found that certifies full modern coastline completeness. Existing OSM and GSHHG records are dated comparison families, not approved geometry; maintain one named island/atoll pending complete source review.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "1a6c3937c101a7dcdff6135c8f33b8f81692625aeab59e9a3354013f7eef1651",
+        "source_identity": "osm:named-land:southern-line-starbuck",
+        "source_raw_sha256": "79bc0bfc0fabe9d5d25ccec9f838e047083f0a977edd2463d0f2c8644e44d907",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-156.0077778,-5.7716667,-155.7477778,-5.5116667",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "No authoritative current settlement/population finding was located in reviewed official sources; source-coastline or protected-area records are not settlement evidence. Mark unresolved, do not infer uninhabited.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Starbuck",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-156.0077778,-5.7716667,-155.7477778,-5.5116667",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "79bc0bfc0fabe9d5d25ccec9f838e047083f0a977edd2463d0f2c8644e44d907",
+          "retained_archive": "osm-3c6b05d0fb0d.xml.gz",
+          "retained_archive_bytes": 11017,
+          "retained_archive_sha256": "d8ae71fc7838201fa9acd93bf2e2f32fa03f011eb24fea6a29b31562310cb188",
+          "bbox": [
+            -156.00777777777776,
+            -5.7716666666666665,
+            -155.74777777777777,
+            -5.511666666666667
+          ],
+          "coastline_way_count": 1,
+          "closed_land_rings": 1,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 24.840520222936235,
+          "absent_current_land_components": 1,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -155.99777777777777,
+            -5.761666666666667,
+            -155.75777777777776,
+            -5.5216666666666665
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 1,
+          "source_domain_land_area_km2": 22.08490758234495,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:2fa179f5e949ad8feb5f",
+      "name": "Vostok",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "framework:province:line-islands:ce27f8d7a826",
+          "name": "Line Islands"
+        },
+        {
+          "id": "framework:area:line-is:637147b6194f",
+          "name": "Line Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "No independent authoritative evidence found that certifies full modern coastline completeness. Existing OSM and GSHHG records are dated comparison families, not approved geometry; maintain one named island/atoll pending complete source review.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "ae92a3060d5de96dd2fe3df8daaada27a1fa506c55308b557e95923ed889b6ae",
+        "source_identity": "osm:named-land:southern-line-vostok",
+        "source_raw_sha256": "fc8e837710d4758211d851c8e9aa8a83b6de0ddbec4ff172b4357681ea9d3e6d",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-152.4427778,-10.1919444,-152.1827778,-9.9319444",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "No authoritative current settlement/population finding was located in reviewed official sources; source-coastline or protected-area records are not settlement evidence. Mark unresolved, do not infer uninhabited.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Vostok",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-152.4427778,-10.1919444,-152.1827778,-9.9319444",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "fc8e837710d4758211d851c8e9aa8a83b6de0ddbec4ff172b4357681ea9d3e6d",
+          "retained_archive": "osm-af22009722d2.xml.gz",
+          "retained_archive_bytes": 7369,
+          "retained_archive_sha256": "a4f762977caee52fbb9ce65481ff7e374b583312089bd3508f44627c0328d8cf",
+          "bbox": [
+            -152.44277777777776,
+            -10.191944444444445,
+            -152.18277777777777,
+            -9.931944444444444
+          ],
+          "coastline_way_count": 1,
+          "closed_land_rings": 1,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 0.2749731605802942,
+          "absent_current_land_components": 1,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -152.43277777777777,
+            -10.181944444444444,
+            -152.19277777777776,
+            -9.941944444444445
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 1,
+          "source_domain_land_area_km2": 0.34988768713898954,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:3b2cde91249f00b06692",
+      "name": "Malden",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "framework:province:line-islands:ce27f8d7a826",
+          "name": "Line Islands"
+        },
+        {
+          "id": "framework:area:line-is:637147b6194f",
+          "name": "Line Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "No independent authoritative evidence found that certifies full modern coastline completeness. Existing OSM and GSHHG records are dated comparison families, not approved geometry; maintain one named island/atoll pending complete source review.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "467618eeb13f8ed7407fe686d32a948c174c8f37c7387424977e6a9629487d70",
+        "source_identity": "osm:named-land:southern-line-malden",
+        "source_raw_sha256": "f15763b03e47b7e900be0e7c5058832e54edec3e35e7e0a9a2c65374db1204d9",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-155.0633333,-4.1466667,-154.8033333,-3.8866667",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "No authoritative current settlement/population finding was located in reviewed official sources; source-coastline or protected-area records are not settlement evidence. Mark unresolved, do not infer uninhabited.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Malden",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-155.0633333,-4.1466667,-154.8033333,-3.8866667",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "f15763b03e47b7e900be0e7c5058832e54edec3e35e7e0a9a2c65374db1204d9",
+          "retained_archive": "osm-2c8831837636.xml.gz",
+          "retained_archive_bytes": 35271,
+          "retained_archive_sha256": "2dd99191e3d6eb5d98a710e2ceb809f93e8ed1578821305dad2781f22eec5a1c",
+          "bbox": [
+            -155.06333333333333,
+            -4.1466666666666665,
+            -154.80333333333334,
+            -3.8866666666666667
+          ],
+          "coastline_way_count": 1,
+          "closed_land_rings": 1,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 37.13618271273369,
+          "absent_current_land_components": 1,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -155.05333333333334,
+            -4.136666666666667,
+            -154.81333333333333,
+            -3.8966666666666665
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 1,
+          "source_domain_land_area_km2": 34.988970024675154,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:6451efbcf8f38240fbfb",
+      "name": "Flint",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "framework:province:line-islands:ce27f8d7a826",
+          "name": "Line Islands"
+        },
+        {
+          "id": "framework:area:line-is:637147b6194f",
+          "name": "Line Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "No independent authoritative evidence found that certifies full modern coastline completeness. Existing OSM and GSHHG records are dated comparison families, not approved geometry; maintain one named island/atoll pending complete source review.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "b26010558e9e7cc0453377c874fbaf9d95380372171b44563e4ab32980fa2198",
+        "source_identity": "osm:named-land:southern-line-flint",
+        "source_raw_sha256": "0bed17ec1bb7f2c6d84850fcd4fc8ed0c74c1d39ccb87325f9ac5ec58605325c",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-151.9492,-11.56,-151.6892,-11.3",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "No authoritative current settlement/population finding was located in reviewed official sources; source-coastline or protected-area records are not settlement evidence. Mark unresolved, do not infer uninhabited.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Flint",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-151.9492,-11.56,-151.6892,-11.3",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "0bed17ec1bb7f2c6d84850fcd4fc8ed0c74c1d39ccb87325f9ac5ec58605325c",
+          "retained_archive": "osm-4cbbe5b83903.xml.gz",
+          "retained_archive_bytes": 6953,
+          "retained_archive_sha256": "89aa08c4ec4ea7309a2cd5a0abdf6fa3c3eb9e5dd8a5e75ec623ee851087457a",
+          "bbox": [
+            -151.9492,
+            -11.56,
+            -151.6892,
+            -11.299999999999999
+          ],
+          "coastline_way_count": 1,
+          "closed_land_rings": 1,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 2.2558373230405593,
+          "absent_current_land_components": 1,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -151.9392,
+            -11.549999999999999,
+            -151.6992,
+            -11.31
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 1,
+          "source_domain_land_area_km2": 2.5551804234334594,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:f9c0d5074e2f0e30e5cc",
+      "name": "Caroline/Millennium",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "framework:province:line-islands:ce27f8d7a826",
+          "name": "Line Islands"
+        },
+        {
+          "id": "framework:area:line-is:637147b6194f",
+          "name": "Line Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "No independent authoritative evidence found that certifies full modern coastline completeness. Existing OSM and GSHHG records are dated comparison families, not approved geometry; maintain one named island/atoll pending complete source review.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "ef603f9f5aa60c2b791a5212327bbbc3b232ed79e32518e2b8eed14330eb4257",
+        "source_identity": "osm:named-land:southern-line-caroline",
+        "source_raw_sha256": "cb628d9a1fb7e3a3e18f8be180196ded8b12d09931482b05e2bfc740a7f825ae",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-150.3425,-10.085,-150.0825,-9.825",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "No authoritative current settlement/population finding was located in reviewed official sources; source-coastline or protected-area records are not settlement evidence. Mark unresolved, do not infer uninhabited.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Caroline/Millennium",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-150.3425,-10.085,-150.0825,-9.825",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "cb628d9a1fb7e3a3e18f8be180196ded8b12d09931482b05e2bfc740a7f825ae",
+          "retained_archive": "osm-43bd5e9f9e54.xml.gz",
+          "retained_archive_bytes": 41370,
+          "retained_archive_sha256": "a00b2e3b1cb3d15794cf3e3d61fafe86640266d2085e51cdef59d11055f7c243",
+          "bbox": [
+            -150.3425,
+            -10.085,
+            -150.0825,
+            -9.825
+          ],
+          "coastline_way_count": 30,
+          "closed_land_rings": 30,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 5.919771572658219,
+          "absent_current_land_components": 30,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 30
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -150.3325,
+            -10.075,
+            -150.0925,
+            -9.835
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 24,
+          "source_domain_land_area_km2": 5.8043124958954815,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 24
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:749f2fc5f82ad9366ce0",
+      "name": "Pitcairn",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "framework:province:pitcairn-islands:d483df587794",
+          "name": "Pitcairn Islands"
+        },
+        {
+          "id": "framework:area:pitcairn-is:b2a18f648883",
+          "name": "Pitcairn Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "Government island-group page retrieved earlier 2026-10-03 is now unavailable at /the-islands/ (404 on refresh); old retained hash is recorded in README, use Laws Volume I for named group only. Settlement claim relies on official page snapshot and remains date-limited.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "8cb3ef159f4365ace204d756f38f53fa17ac3e3a65042730aa88919f2f0a7ab2",
+        "source_identity": "osm:named-land:pitcairn-archipelago-pitcairn",
+        "source_raw_sha256": "4b5b26f329839e9dcc4600cac0265953fa2e1046704e2b682df2de2be9068213",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-130.2366667,-25.1966667,-129.9766667,-24.9366667",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "Government of Pitcairn page previously stated it is the only inhabited island in the group; source page returned 404 on refresh. Dated claim requires current replacement before import.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Pitcairn",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-130.2366667,-25.1966667,-129.9766667,-24.9366667",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "4b5b26f329839e9dcc4600cac0265953fa2e1046704e2b682df2de2be9068213",
+          "retained_archive": "osm-0f8a1e6a289a.xml.gz",
+          "retained_archive_bytes": 148223,
+          "retained_archive_sha256": "0c3222ca6daf73467f546ddcd553440efdc2fe10386ddaabee8a3aa5f75ef563",
+          "bbox": [
+            -130.23666666666665,
+            -25.196666666666665,
+            -129.97666666666666,
+            -24.936666666666667
+          ],
+          "coastline_way_count": 28,
+          "closed_land_rings": 27,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 4.0528871895369045,
+          "absent_current_land_components": 27,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 27
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -130.22666666666666,
+            -25.186666666666667,
+            -129.98666666666665,
+            -24.946666666666665
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 1,
+          "source_domain_land_area_km2": 4.750612332680655,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 1
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:d6cbe0b3996925b59b66",
+      "name": "Oeno",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "framework:province:pitcairn-islands:d483df587794",
+          "name": "Pitcairn Islands"
+        },
+        {
+          "id": "framework:area:pitcairn-is:b2a18f648883",
+          "name": "Pitcairn Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "OSM 0.6834 km² vs GSHHG 1.6118 km² (4 vs 9 components); verify component identity and historic source generalization; no splitting by polygon count.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "a32ccacf70153d02e637a832dd23808a55c43d8e09478fd0536a513c70f2a04b",
+        "source_identity": "osm:named-land:pitcairn-archipelago-oeno",
+        "source_raw_sha256": "46abf040090e2e5e7ab6fa9e4babf15fd87e8760ca1e67d78b39099223f2895c",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-130.8672222,-24.0566667,-130.6072222,-23.7966667",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "Government page previously described Pitcairn as only inhabited island; page now unavailable, so Oeno status is a dated unresolved source claim.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Oeno",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-130.8672222,-24.0566667,-130.6072222,-23.7966667",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "46abf040090e2e5e7ab6fa9e4babf15fd87e8760ca1e67d78b39099223f2895c",
+          "retained_archive": "osm-3baf13687028.xml.gz",
+          "retained_archive_bytes": 15416,
+          "retained_archive_sha256": "85efa761c819e21313b5429894ad31c1d291ba4ebb08ca34fe257702f551b92f",
+          "bbox": [
+            -130.8672222222222,
+            -24.056666666666665,
+            -130.60722222222222,
+            -23.796666666666667
+          ],
+          "coastline_way_count": 4,
+          "closed_land_rings": 3,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 0.6833802210784055,
+          "absent_current_land_components": 3,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 3
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -130.85722222222222,
+            -24.046666666666667,
+            -130.6172222222222,
+            -23.806666666666665
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 9,
+          "source_domain_land_area_km2": 1.6118158599886652,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 9
+        }
+      }
+    },
+    {
+      "id": "atlas:macro-coverage:location:db077050d5ed3c720982",
+      "name": "Ducie",
+      "classification": "correction-needed for source-confirmed omitted named-land components in current footprint; insufficient-evidence for complete modern coastline extent or component selection",
+      "geographic_role": "One named island/atoll location; multiple coastline rings/components represent islets and lagoon topology within the named territory and do not by themselves justify location splitting.",
+      "reference_owner": "unknown; regional membership is not sovereignty evidence",
+      "historical_claims_transferred": false,
+      "parent_chain": [
+        {
+          "id": "framework:province:pitcairn-islands:d483df587794",
+          "name": "Pitcairn Islands"
+        },
+        {
+          "id": "framework:area:pitcairn-is:b2a18f648883",
+          "name": "Pitcairn Islands"
+        },
+        {
+          "id": "framework:region:south-central-pacific:8347faa810e3",
+          "name": "South-Central Pacific"
+        },
+        {
+          "id": "framework:subcontinent:polynesia:c8f106884f04",
+          "name": "Polynesia"
+        },
+        {
+          "id": "framework:continent:oceania:48580dd0c4b4",
+          "name": "Oceania"
+        }
+      ],
+      "assessment_note": "No independent authoritative evidence found that certifies full modern coastline completeness. Existing OSM and GSHHG records are dated comparison families, not approved geometry; maintain one named island/atoll pending complete source review.",
+      "source_profile_reference": {
+        "path": "data/reference-migrations/macro-improvements-v4/queue-checkpoint/new-location-source-profiles-v4.json.gz",
+        "canonical_sha256": "d562e4954d938957fd618d987a06d0d7081aa48222220d785171284d9dcabefd",
+        "source_identity": "osm:named-land:pitcairn-archipelago-ducie",
+        "source_raw_sha256": "aba87cfa84e52b13b425a3b4527daae2615c9c448bde11fd3d55724a424528ab",
+        "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-124.9163889,-24.7991667,-124.6563889,-24.5391667",
+        "supported_from": 2026,
+        "supported_to": 2027,
+        "source_correction_issue": 501
+      },
+      "settlement_assessment": "Government page previously described Pitcairn as only inhabited island; page now unavailable, so Ducie status is a dated unresolved source claim.",
+      "recommendation": "Record the named natural island/atoll as one assigned location and refer omitted OSM components for a separate engineering correction review. Do not copy source rings directly: independently reconcile current and dated authoritative coastlines first; retain source-family discrepancies and no proposed splitting.",
+      "source_inventory": {
+        "osm": {
+          "report": "data/macro-improvements/macro-coverage-oceania/osm-report.json",
+          "report_sha256": "171047d79ee50883998c516be75cc3b66bf94509f07f8283d510aa74c77c3b83",
+          "route_name": "Ducie",
+          "source_url": "https://api.openstreetmap.org/api/0.6/map?bbox=-124.9163889,-24.7991667,-124.6563889,-24.5391667",
+          "retrieved": "2026-10-02",
+          "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+          "attribution": "OpenStreetMap and contributors",
+          "raw_xml_sha256": "aba87cfa84e52b13b425a3b4527daae2615c9c448bde11fd3d55724a424528ab",
+          "retained_archive": "osm-84b09f68a138.xml.gz",
+          "retained_archive_bytes": 16504,
+          "retained_archive_sha256": "4bf7a321c8411207662b8d0615cad4ea3a4fd6bbce20f60bdf0a5354aeeece93",
+          "bbox": [
+            -124.91638888888889,
+            -24.799166666666665,
+            -124.6563888888889,
+            -24.539166666666667
+          ],
+          "coastline_way_count": 6,
+          "closed_land_rings": 4,
+          "closed_water_rings": 0,
+          "open_chains": [],
+          "missing_node_ways": [],
+          "complete_ring_reconstruction": true,
+          "source_land_area_km2": 0.9088762969713069,
+          "absent_current_land_components": 4,
+          "component_status": "confirmed-whole-named-island-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 4
+        },
+        "gshhg": {
+          "report": "data/macro-improvements/macro-coverage-oceania/report.json",
+          "report_sha256": "47fc5638cbe12f74fe98e9dcec7ed5636228eee0d26342045aaccc48e4c4a9ff",
+          "source_release": "2.3.7 (2017-06-15)",
+          "search_bbox": [
+            -124.9063888888889,
+            -24.789166666666667,
+            -124.66638888888889,
+            -24.549166666666665
+          ],
+          "selection_is_not_boundary": true,
+          "selection_method": "Declared named-island/archipelago search envelope, gazetteer coordinate selects full GSHHG polygons; selection envelope is not approved territory and polygon is not clipped",
+          "whole_domain_test_performed": true,
+          "modern_complete_coverage_certified": false,
+          "source_component_count": 4,
+          "source_domain_land_area_km2": 1.3542892762609469,
+          "status": "confirmed-source-omission",
+          "component_inventory_file": "data/regional-review/regional-supplement-948d12b02687d2a9/component-inventory.jsonl",
+          "component_inventory_count": 4
+        }
+      }
+    }
+  ],
+  "province_assessments": [
+    {
+      "id": "atlas:macro-review:province:18e627fd9cb17291",
+      "name": "Pukapuka",
+      "members": [
+        "Pukapuka",
+        "Nassau"
+      ],
+      "assigned_member": "Nassau",
+      "classification": "justified as a local governance association by the OPM combined Pukapuka/Nassau Island Government; physical boundary and ownership are not inferred"
+    },
+    {
+      "id": "atlas:macro-coverage:province:0ad43498dd638baa183a",
+      "name": "Suwarrow Atoll",
+      "members": [
+        "Suwarrow"
+      ],
+      "assigned_member": "Suwarrow",
+      "classification": "insufficient-evidence for independent province tier; natural atoll/protected park role is sourced, but it is coextensive with one location"
+    },
+    {
+      "id": "framework:province:atiu:859595940bdf",
+      "name": "Atiu",
+      "members": [
+        "Atiu",
+        "Takutea"
+      ],
+      "assigned_member": "Takutea",
+      "classification": "justified as a linked local administrative/management association by 2008 regulation; separate island remains a separate location"
+    },
+    {
+      "id": "atlas:macro-coverage:province:29932af2f8043947ba8a",
+      "name": "Palmerston Atoll",
+      "members": [
+        "Palmerston"
+      ],
+      "assigned_member": "Palmerston",
+      "classification": "justified functional local grouping by its separate Island Government and atoll identity; coextensive with one location"
+    },
+    {
+      "id": "framework:province:line-islands:ce27f8d7a826",
+      "name": "Line Islands",
+      "members": [
+        "Line Islands ADM1",
+        "Caroline/Millennium",
+        "Flint",
+        "Kingman Reef",
+        "Malden",
+        "Starbuck",
+        "Vostok"
+      ],
+      "assigned_members": [
+        "Caroline/Millennium",
+        "Flint",
+        "Malden",
+        "Starbuck",
+        "Vostok"
+      ],
+      "classification": "insufficient-evidence for shared tier and source lineage; #611 crosswalk and #544 Kingman review must coordinate with #404"
+    },
+    {
+      "id": "framework:province:pitcairn-islands:d483df587794",
+      "name": "Pitcairn Islands",
+      "members": [
+        "Pitcairn",
+        "Henderson",
+        "Oeno",
+        "Ducie"
+      ],
+      "assigned_members": [
+        "Pitcairn",
+        "Oeno",
+        "Ducie"
+      ],
+      "classification": "insufficient-evidence for second coextensive province tier; legal group role does not establish a separate province-level role"
+    }
+  ]
+}
