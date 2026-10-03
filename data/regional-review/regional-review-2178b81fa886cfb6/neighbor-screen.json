@@ -1,0 +1,5251 @@
+{
+  "issue": 487,
+  "method": {
+    "basis": "Exact shared boundary-line length in temporary EPSG:5070 projection, with a 1 m threshold; compare every assigned California/Washington county predecessor against all six-state source candidates (California, Washington, Oregon, Nevada, Arizona, Idaho).",
+    "sources": [
+      "geoBoundaries USA ADM2 2018 (Census MAF/TIGER-derived, whole USA source)",
+      "U.S. Census Bureau TIGER/Line county 2024 (CA, WA and four contiguous domestic neighbor states)",
+      "published current Atlas geometry from the pinned scope and main index"
+    ],
+    "caveats": [
+      "An exact current contact is a geometric screening result, not proof of legal line placement.",
+      "The comparison does not imply a boundary change or a political ownership conclusion.",
+      "This audit covers domestic adjacent county features in the six-state comparison. International boundary evidence is handled separately as an explicit unresolved source requirement."
+    ]
+  },
+  "source_scope": {
+    "assigned_predecessor_counties": 97,
+    "six_state_tiger_counties": 209,
+    "assigned_county_current_footprints_missing": []
+  },
+  "assigned_internal_predecessor_edges": {
+    "geoBoundaries_2018": 219,
+    "TIGER_2024": 234,
+    "current_Atlas": 218,
+    "old_2018_missing_current": [
+      {
+        "left": {
+          "state": "California",
+          "name": "Alameda",
+          "tiger_geoid": "06001",
+          "shape_id": "52423323B34460466024259"
+        },
+        "right": {
+          "state": "California",
+          "name": "San Francisco",
+          "tiger_geoid": "06075",
+          "shape_id": "52423323B46695716253077"
+        },
+        "cross_state": false
+      }
+    ],
+    "current_extra_vs_2018": [],
+    "tiger_2024_missing_current": [
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Snohomish",
+          "tiger_geoid": "53061",
+          "shape_id": "52423323B25311373219770"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "King",
+          "tiger_geoid": "53033",
+          "shape_id": "52423323B35530413742416"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Jefferson",
+          "tiger_geoid": "53031",
+          "shape_id": "52423323B89179227732038"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Clallam",
+          "tiger_geoid": "53009",
+          "shape_id": "52423323B36348564143669"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Jefferson",
+          "tiger_geoid": "53031",
+          "shape_id": "52423323B89179227732038"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Whatcom",
+          "tiger_geoid": "53073",
+          "shape_id": "52423323B9068998137459"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Skagit",
+          "tiger_geoid": "53057",
+          "shape_id": "52423323B93114504552564"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Alameda",
+          "tiger_geoid": "06001",
+          "shape_id": "52423323B34460466024259"
+        },
+        "right": {
+          "state": "California",
+          "name": "San Francisco",
+          "tiger_geoid": "06075",
+          "shape_id": "52423323B46695716253077"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Alameda",
+          "tiger_geoid": "06001",
+          "shape_id": "52423323B34460466024259"
+        },
+        "right": {
+          "state": "California",
+          "name": "San Mateo",
+          "tiger_geoid": "06081",
+          "shape_id": "52423323B75131784459442"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Francisco",
+          "tiger_geoid": "06075",
+          "shape_id": "52423323B46695716253077"
+        },
+        "right": {
+          "state": "California",
+          "name": "Marin",
+          "tiger_geoid": "06041",
+          "shape_id": "52423323B48598289352775"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Francisco",
+          "tiger_geoid": "06075",
+          "shape_id": "52423323B46695716253077"
+        },
+        "right": {
+          "state": "California",
+          "name": "Contra Costa",
+          "tiger_geoid": "06013",
+          "shape_id": "52423323B95554273469006"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Marin",
+          "tiger_geoid": "06041",
+          "shape_id": "52423323B48598289352775"
+        },
+        "right": {
+          "state": "California",
+          "name": "Contra Costa",
+          "tiger_geoid": "06013",
+          "shape_id": "52423323B95554273469006"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Jefferson",
+          "tiger_geoid": "53031",
+          "shape_id": "52423323B89179227732038"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Skagit",
+          "tiger_geoid": "53057",
+          "shape_id": "52423323B93114504552564"
+        },
+        "cross_state": false
+      }
+    ],
+    "current_extra_vs_tiger_2024": []
+  },
+  "all_assigned_county_external_contacts": {
+    "geoBoundaries_2018": [
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Hood River",
+          "tiger_geoid": "41027",
+          "shape_id": "52423323B12967168395878"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Skamania",
+          "tiger_geoid": "53059",
+          "shape_id": "52423323B13974884585376"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Hood River",
+          "tiger_geoid": "41027",
+          "shape_id": "52423323B12967168395878"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Skamania",
+          "tiger_geoid": "53059",
+          "shape_id": "52423323B13974884585376"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Multnomah",
+          "tiger_geoid": "41051",
+          "shape_id": "52423323B6223191641885"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Lyon",
+          "tiger_geoid": "32019",
+          "shape_id": "52423323B15747846932953"
+        },
+        "right": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Gilliam",
+          "tiger_geoid": "41021",
+          "shape_id": "52423323B16142622218163"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Benewah",
+          "tiger_geoid": "16009",
+          "shape_id": "52423323B17427488996260"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Spokane",
+          "tiger_geoid": "53063",
+          "shape_id": "52423323B30314962478279"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Benewah",
+          "tiger_geoid": "16009",
+          "shape_id": "52423323B17427488996260"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Whitman",
+          "tiger_geoid": "53075",
+          "shape_id": "52423323B58326499473481"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Clark",
+          "tiger_geoid": "32003",
+          "shape_id": "52423323B18852235556590"
+        },
+        "right": {
+          "state": "California",
+          "name": "San Bernardino",
+          "tiger_geoid": "06071",
+          "shape_id": "52423323B23069932539838"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Clark",
+          "tiger_geoid": "32003",
+          "shape_id": "52423323B18852235556590"
+        },
+        "right": {
+          "state": "California",
+          "name": "Inyo",
+          "tiger_geoid": "06027",
+          "shape_id": "52423323B89293656609241"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Walla Walla",
+          "tiger_geoid": "53071",
+          "shape_id": "52423323B20376291216469"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Umatilla",
+          "tiger_geoid": "41059",
+          "shape_id": "52423323B79537208575775"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Bernardino",
+          "tiger_geoid": "06071",
+          "shape_id": "52423323B23069932539838"
+        },
+        "right": {
+          "state": "Arizona",
+          "name": "Mohave",
+          "tiger_geoid": "04015",
+          "shape_id": "52423323B36780146179485"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Bernardino",
+          "tiger_geoid": "06071",
+          "shape_id": "52423323B23069932539838"
+        },
+        "right": {
+          "state": "Arizona",
+          "name": "La Paz",
+          "tiger_geoid": "04012",
+          "shape_id": "52423323B41781381522782"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Bonner",
+          "tiger_geoid": "16017",
+          "shape_id": "52423323B26002580229088"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Spokane",
+          "tiger_geoid": "53063",
+          "shape_id": "52423323B30314962478279"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Bonner",
+          "tiger_geoid": "16017",
+          "shape_id": "52423323B26002580229088"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Pend Oreille",
+          "tiger_geoid": "53051",
+          "shape_id": "52423323B67594083249097"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Del Norte",
+          "tiger_geoid": "06015",
+          "shape_id": "52423323B27137211377014"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Josephine",
+          "tiger_geoid": "41033",
+          "shape_id": "52423323B30410916636748"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Del Norte",
+          "tiger_geoid": "06015",
+          "shape_id": "52423323B27137211377014"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Curry",
+          "tiger_geoid": "41015",
+          "shape_id": "52423323B63196257632244"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Spokane",
+          "tiger_geoid": "53063",
+          "shape_id": "52423323B30314962478279"
+        },
+        "right": {
+          "state": "Idaho",
+          "name": "Kootenai",
+          "tiger_geoid": "16055",
+          "shape_id": "52423323B63965219739114"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Josephine",
+          "tiger_geoid": "41033",
+          "shape_id": "52423323B30410916636748"
+        },
+        "right": {
+          "state": "California",
+          "name": "Siskiyou",
+          "tiger_geoid": "06093",
+          "shape_id": "52423323B61595109476273"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Modoc",
+          "tiger_geoid": "06049",
+          "shape_id": "52423323B31115231658227"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Lake",
+          "tiger_geoid": "41037",
+          "shape_id": "52423323B45736239843392"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Modoc",
+          "tiger_geoid": "06049",
+          "shape_id": "52423323B31115231658227"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Klamath",
+          "tiger_geoid": "41035",
+          "shape_id": "52423323B65304648918135"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Modoc",
+          "tiger_geoid": "06049",
+          "shape_id": "52423323B31115231658227"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Columbia",
+          "tiger_geoid": "41009",
+          "shape_id": "52423323B32513162677446"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Cowlitz",
+          "tiger_geoid": "53015",
+          "shape_id": "52423323B43213790326288"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Columbia",
+          "tiger_geoid": "41009",
+          "shape_id": "52423323B32513162677446"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Wahkiakum",
+          "tiger_geoid": "53069",
+          "shape_id": "52423323B48044581252464"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Columbia",
+          "tiger_geoid": "41009",
+          "shape_id": "52423323B32513162677446"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Clark",
+          "tiger_geoid": "53011",
+          "shape_id": "52423323B89011069533198"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Arizona",
+          "name": "Yuma",
+          "tiger_geoid": "04027",
+          "shape_id": "52423323B36944168134022"
+        },
+        "right": {
+          "state": "California",
+          "name": "Imperial",
+          "tiger_geoid": "06025",
+          "shape_id": "52423323B37240473864365"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Imperial",
+          "tiger_geoid": "06025",
+          "shape_id": "52423323B37240473864365"
+        },
+        "right": {
+          "state": "Arizona",
+          "name": "La Paz",
+          "tiger_geoid": "04012",
+          "shape_id": "52423323B41781381522782"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Arizona",
+          "name": "La Paz",
+          "tiger_geoid": "04012",
+          "shape_id": "52423323B41781381522782"
+        },
+        "right": {
+          "state": "California",
+          "name": "Riverside",
+          "tiger_geoid": "06065",
+          "shape_id": "52423323B62695195222235"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Clatsop",
+          "tiger_geoid": "41007",
+          "shape_id": "52423323B41854352046463"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Wahkiakum",
+          "tiger_geoid": "53069",
+          "shape_id": "52423323B48044581252464"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "El Dorado",
+          "tiger_geoid": "06017",
+          "shape_id": "52423323B41898924582889"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Sierra",
+          "tiger_geoid": "06091",
+          "shape_id": "52423323B42525268241117"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "right": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "right": {
+          "state": "California",
+          "name": "Placer",
+          "tiger_geoid": "06061",
+          "shape_id": "52423323B56416092773024"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "right": {
+          "state": "California",
+          "name": "Alpine",
+          "tiger_geoid": "06003",
+          "shape_id": "52423323B67588574079428"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Morrow",
+          "tiger_geoid": "41049",
+          "shape_id": "52423323B45995509700090"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Morrow",
+          "tiger_geoid": "41049",
+          "shape_id": "52423323B45995509700090"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Benton",
+          "tiger_geoid": "53005",
+          "shape_id": "52423323B67037278576088"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Esmeralda",
+          "tiger_geoid": "32009",
+          "shape_id": "52423323B50493835773618"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Mineral",
+          "tiger_geoid": "32021",
+          "shape_id": "52423323B72214422766"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Esmeralda",
+          "tiger_geoid": "32009",
+          "shape_id": "52423323B50493835773618"
+        },
+        "right": {
+          "state": "California",
+          "name": "Inyo",
+          "tiger_geoid": "06027",
+          "shape_id": "52423323B89293656609241"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Wallowa",
+          "tiger_geoid": "41063",
+          "shape_id": "52423323B53292465895893"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Asotin",
+          "tiger_geoid": "53003",
+          "shape_id": "52423323B79616802808075"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Wallowa",
+          "tiger_geoid": "41063",
+          "shape_id": "52423323B53292465895893"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Columbia",
+          "tiger_geoid": "53013",
+          "shape_id": "52423323B83269960896154"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Wallowa",
+          "tiger_geoid": "41063",
+          "shape_id": "52423323B53292465895893"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Garfield",
+          "tiger_geoid": "53023",
+          "shape_id": "52423323B83834618329235"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Sherman",
+          "tiger_geoid": "41055",
+          "shape_id": "52423323B77848973852884"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Wasco",
+          "tiger_geoid": "41065",
+          "shape_id": "52423323B81291349676813"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Jackson",
+          "tiger_geoid": "41029",
+          "shape_id": "52423323B54328460480389"
+        },
+        "right": {
+          "state": "California",
+          "name": "Siskiyou",
+          "tiger_geoid": "06093",
+          "shape_id": "52423323B61595109476273"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Latah",
+          "tiger_geoid": "16057",
+          "shape_id": "52423323B55768154384777"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Whitman",
+          "tiger_geoid": "53075",
+          "shape_id": "52423323B58326499473481"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Carson City",
+          "tiger_geoid": "32510",
+          "shape_id": "52423323B56251326205746"
+        },
+        "right": {
+          "state": "California",
+          "name": "Placer",
+          "tiger_geoid": "06061",
+          "shape_id": "52423323B56416092773024"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Placer",
+          "tiger_geoid": "06061",
+          "shape_id": "52423323B56416092773024"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Whitman",
+          "tiger_geoid": "53075",
+          "shape_id": "52423323B58326499473481"
+        },
+        "right": {
+          "state": "Idaho",
+          "name": "Nez Perce",
+          "tiger_geoid": "16069",
+          "shape_id": "52423323B94471153891164"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Nye",
+          "tiger_geoid": "32023",
+          "shape_id": "52423323B59835765201316"
+        },
+        "right": {
+          "state": "California",
+          "name": "Inyo",
+          "tiger_geoid": "06027",
+          "shape_id": "52423323B89293656609241"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Siskiyou",
+          "tiger_geoid": "06093",
+          "shape_id": "52423323B61595109476273"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Klamath",
+          "tiger_geoid": "41035",
+          "shape_id": "52423323B65304648918135"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Multnomah",
+          "tiger_geoid": "41051",
+          "shape_id": "52423323B6223191641885"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Clark",
+          "tiger_geoid": "53011",
+          "shape_id": "52423323B89011069533198"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Boundary",
+          "tiger_geoid": "16021",
+          "shape_id": "52423323B63721358154647"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Pend Oreille",
+          "tiger_geoid": "53051",
+          "shape_id": "52423323B67594083249097"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Benton",
+          "tiger_geoid": "53005",
+          "shape_id": "52423323B67037278576088"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Umatilla",
+          "tiger_geoid": "41059",
+          "shape_id": "52423323B79537208575775"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Nevada",
+          "tiger_geoid": "06057",
+          "shape_id": "52423323B72053512524977"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Umatilla",
+          "tiger_geoid": "41059",
+          "shape_id": "52423323B79537208575775"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Columbia",
+          "tiger_geoid": "53013",
+          "shape_id": "52423323B83269960896154"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Asotin",
+          "tiger_geoid": "53003",
+          "shape_id": "52423323B79616802808075"
+        },
+        "right": {
+          "state": "Idaho",
+          "name": "Nez Perce",
+          "tiger_geoid": "16069",
+          "shape_id": "52423323B94471153891164"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Lassen",
+          "tiger_geoid": "06035",
+          "shape_id": "52423323B86430023400928"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      }
+    ],
+    "TIGER_2024": [
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Hood River",
+          "tiger_geoid": "41027",
+          "shape_id": "52423323B12967168395878"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Skamania",
+          "tiger_geoid": "53059",
+          "shape_id": "52423323B13974884585376"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Hood River",
+          "tiger_geoid": "41027",
+          "shape_id": "52423323B12967168395878"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Skamania",
+          "tiger_geoid": "53059",
+          "shape_id": "52423323B13974884585376"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Multnomah",
+          "tiger_geoid": "41051",
+          "shape_id": "52423323B6223191641885"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Lyon",
+          "tiger_geoid": "32019",
+          "shape_id": "52423323B15747846932953"
+        },
+        "right": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Gilliam",
+          "tiger_geoid": "41021",
+          "shape_id": "52423323B16142622218163"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Benewah",
+          "tiger_geoid": "16009",
+          "shape_id": "52423323B17427488996260"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Spokane",
+          "tiger_geoid": "53063",
+          "shape_id": "52423323B30314962478279"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Benewah",
+          "tiger_geoid": "16009",
+          "shape_id": "52423323B17427488996260"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Whitman",
+          "tiger_geoid": "53075",
+          "shape_id": "52423323B58326499473481"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Clark",
+          "tiger_geoid": "32003",
+          "shape_id": "52423323B18852235556590"
+        },
+        "right": {
+          "state": "California",
+          "name": "San Bernardino",
+          "tiger_geoid": "06071",
+          "shape_id": "52423323B23069932539838"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Clark",
+          "tiger_geoid": "32003",
+          "shape_id": "52423323B18852235556590"
+        },
+        "right": {
+          "state": "California",
+          "name": "Inyo",
+          "tiger_geoid": "06027",
+          "shape_id": "52423323B89293656609241"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Walla Walla",
+          "tiger_geoid": "53071",
+          "shape_id": "52423323B20376291216469"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Umatilla",
+          "tiger_geoid": "41059",
+          "shape_id": "52423323B79537208575775"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Bernardino",
+          "tiger_geoid": "06071",
+          "shape_id": "52423323B23069932539838"
+        },
+        "right": {
+          "state": "Arizona",
+          "name": "Mohave",
+          "tiger_geoid": "04015",
+          "shape_id": "52423323B36780146179485"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Bernardino",
+          "tiger_geoid": "06071",
+          "shape_id": "52423323B23069932539838"
+        },
+        "right": {
+          "state": "Arizona",
+          "name": "La Paz",
+          "tiger_geoid": "04012",
+          "shape_id": "52423323B41781381522782"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Bonner",
+          "tiger_geoid": "16017",
+          "shape_id": "52423323B26002580229088"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Spokane",
+          "tiger_geoid": "53063",
+          "shape_id": "52423323B30314962478279"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Bonner",
+          "tiger_geoid": "16017",
+          "shape_id": "52423323B26002580229088"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Pend Oreille",
+          "tiger_geoid": "53051",
+          "shape_id": "52423323B67594083249097"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Del Norte",
+          "tiger_geoid": "06015",
+          "shape_id": "52423323B27137211377014"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Josephine",
+          "tiger_geoid": "41033",
+          "shape_id": "52423323B30410916636748"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Del Norte",
+          "tiger_geoid": "06015",
+          "shape_id": "52423323B27137211377014"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Curry",
+          "tiger_geoid": "41015",
+          "shape_id": "52423323B63196257632244"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Spokane",
+          "tiger_geoid": "53063",
+          "shape_id": "52423323B30314962478279"
+        },
+        "right": {
+          "state": "Idaho",
+          "name": "Kootenai",
+          "tiger_geoid": "16055",
+          "shape_id": "52423323B63965219739114"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Josephine",
+          "tiger_geoid": "41033",
+          "shape_id": "52423323B30410916636748"
+        },
+        "right": {
+          "state": "California",
+          "name": "Siskiyou",
+          "tiger_geoid": "06093",
+          "shape_id": "52423323B61595109476273"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Modoc",
+          "tiger_geoid": "06049",
+          "shape_id": "52423323B31115231658227"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Lake",
+          "tiger_geoid": "41037",
+          "shape_id": "52423323B45736239843392"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Modoc",
+          "tiger_geoid": "06049",
+          "shape_id": "52423323B31115231658227"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Klamath",
+          "tiger_geoid": "41035",
+          "shape_id": "52423323B65304648918135"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Modoc",
+          "tiger_geoid": "06049",
+          "shape_id": "52423323B31115231658227"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Columbia",
+          "tiger_geoid": "41009",
+          "shape_id": "52423323B32513162677446"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Cowlitz",
+          "tiger_geoid": "53015",
+          "shape_id": "52423323B43213790326288"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Columbia",
+          "tiger_geoid": "41009",
+          "shape_id": "52423323B32513162677446"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Wahkiakum",
+          "tiger_geoid": "53069",
+          "shape_id": "52423323B48044581252464"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Columbia",
+          "tiger_geoid": "41009",
+          "shape_id": "52423323B32513162677446"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Clark",
+          "tiger_geoid": "53011",
+          "shape_id": "52423323B89011069533198"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Arizona",
+          "name": "Yuma",
+          "tiger_geoid": "04027",
+          "shape_id": "52423323B36944168134022"
+        },
+        "right": {
+          "state": "California",
+          "name": "Imperial",
+          "tiger_geoid": "06025",
+          "shape_id": "52423323B37240473864365"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Imperial",
+          "tiger_geoid": "06025",
+          "shape_id": "52423323B37240473864365"
+        },
+        "right": {
+          "state": "Arizona",
+          "name": "La Paz",
+          "tiger_geoid": "04012",
+          "shape_id": "52423323B41781381522782"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Arizona",
+          "name": "La Paz",
+          "tiger_geoid": "04012",
+          "shape_id": "52423323B41781381522782"
+        },
+        "right": {
+          "state": "California",
+          "name": "Riverside",
+          "tiger_geoid": "06065",
+          "shape_id": "52423323B62695195222235"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Clatsop",
+          "tiger_geoid": "41007",
+          "shape_id": "52423323B41854352046463"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Wahkiakum",
+          "tiger_geoid": "53069",
+          "shape_id": "52423323B48044581252464"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Clatsop",
+          "tiger_geoid": "41007",
+          "shape_id": "52423323B41854352046463"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Pacific",
+          "tiger_geoid": "53049",
+          "shape_id": "52423323B94422507286019"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "El Dorado",
+          "tiger_geoid": "06017",
+          "shape_id": "52423323B41898924582889"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Sierra",
+          "tiger_geoid": "06091",
+          "shape_id": "52423323B42525268241117"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "right": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "right": {
+          "state": "California",
+          "name": "Placer",
+          "tiger_geoid": "06061",
+          "shape_id": "52423323B56416092773024"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "right": {
+          "state": "California",
+          "name": "Alpine",
+          "tiger_geoid": "06003",
+          "shape_id": "52423323B67588574079428"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Morrow",
+          "tiger_geoid": "41049",
+          "shape_id": "52423323B45995509700090"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Morrow",
+          "tiger_geoid": "41049",
+          "shape_id": "52423323B45995509700090"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Benton",
+          "tiger_geoid": "53005",
+          "shape_id": "52423323B67037278576088"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Esmeralda",
+          "tiger_geoid": "32009",
+          "shape_id": "52423323B50493835773618"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Mineral",
+          "tiger_geoid": "32021",
+          "shape_id": "52423323B72214422766"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Esmeralda",
+          "tiger_geoid": "32009",
+          "shape_id": "52423323B50493835773618"
+        },
+        "right": {
+          "state": "California",
+          "name": "Inyo",
+          "tiger_geoid": "06027",
+          "shape_id": "52423323B89293656609241"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Wallowa",
+          "tiger_geoid": "41063",
+          "shape_id": "52423323B53292465895893"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Asotin",
+          "tiger_geoid": "53003",
+          "shape_id": "52423323B79616802808075"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Wallowa",
+          "tiger_geoid": "41063",
+          "shape_id": "52423323B53292465895893"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Columbia",
+          "tiger_geoid": "53013",
+          "shape_id": "52423323B83269960896154"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Wallowa",
+          "tiger_geoid": "41063",
+          "shape_id": "52423323B53292465895893"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Garfield",
+          "tiger_geoid": "53023",
+          "shape_id": "52423323B83834618329235"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Sherman",
+          "tiger_geoid": "41055",
+          "shape_id": "52423323B77848973852884"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Wasco",
+          "tiger_geoid": "41065",
+          "shape_id": "52423323B81291349676813"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Jackson",
+          "tiger_geoid": "41029",
+          "shape_id": "52423323B54328460480389"
+        },
+        "right": {
+          "state": "California",
+          "name": "Siskiyou",
+          "tiger_geoid": "06093",
+          "shape_id": "52423323B61595109476273"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Latah",
+          "tiger_geoid": "16057",
+          "shape_id": "52423323B55768154384777"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Whitman",
+          "tiger_geoid": "53075",
+          "shape_id": "52423323B58326499473481"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Carson City",
+          "tiger_geoid": "32510",
+          "shape_id": "52423323B56251326205746"
+        },
+        "right": {
+          "state": "California",
+          "name": "Placer",
+          "tiger_geoid": "06061",
+          "shape_id": "52423323B56416092773024"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Placer",
+          "tiger_geoid": "06061",
+          "shape_id": "52423323B56416092773024"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Whitman",
+          "tiger_geoid": "53075",
+          "shape_id": "52423323B58326499473481"
+        },
+        "right": {
+          "state": "Idaho",
+          "name": "Nez Perce",
+          "tiger_geoid": "16069",
+          "shape_id": "52423323B94471153891164"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Nye",
+          "tiger_geoid": "32023",
+          "shape_id": "52423323B59835765201316"
+        },
+        "right": {
+          "state": "California",
+          "name": "Inyo",
+          "tiger_geoid": "06027",
+          "shape_id": "52423323B89293656609241"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Siskiyou",
+          "tiger_geoid": "06093",
+          "shape_id": "52423323B61595109476273"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Klamath",
+          "tiger_geoid": "41035",
+          "shape_id": "52423323B65304648918135"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Multnomah",
+          "tiger_geoid": "41051",
+          "shape_id": "52423323B6223191641885"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Clark",
+          "tiger_geoid": "53011",
+          "shape_id": "52423323B89011069533198"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Boundary",
+          "tiger_geoid": "16021",
+          "shape_id": "52423323B63721358154647"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Pend Oreille",
+          "tiger_geoid": "53051",
+          "shape_id": "52423323B67594083249097"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Benton",
+          "tiger_geoid": "53005",
+          "shape_id": "52423323B67037278576088"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Umatilla",
+          "tiger_geoid": "41059",
+          "shape_id": "52423323B79537208575775"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Nevada",
+          "tiger_geoid": "06057",
+          "shape_id": "52423323B72053512524977"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Umatilla",
+          "tiger_geoid": "41059",
+          "shape_id": "52423323B79537208575775"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Columbia",
+          "tiger_geoid": "53013",
+          "shape_id": "52423323B83269960896154"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Asotin",
+          "tiger_geoid": "53003",
+          "shape_id": "52423323B79616802808075"
+        },
+        "right": {
+          "state": "Idaho",
+          "name": "Nez Perce",
+          "tiger_geoid": "16069",
+          "shape_id": "52423323B94471153891164"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Lassen",
+          "tiger_geoid": "06035",
+          "shape_id": "52423323B86430023400928"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      }
+    ],
+    "current_Atlas": [
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Hood River",
+          "tiger_geoid": "41027",
+          "shape_id": "52423323B12967168395878"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Skamania",
+          "tiger_geoid": "53059",
+          "shape_id": "52423323B13974884585376"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Hood River",
+          "tiger_geoid": "41027",
+          "shape_id": "52423323B12967168395878"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Skamania",
+          "tiger_geoid": "53059",
+          "shape_id": "52423323B13974884585376"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Multnomah",
+          "tiger_geoid": "41051",
+          "shape_id": "52423323B6223191641885"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Lyon",
+          "tiger_geoid": "32019",
+          "shape_id": "52423323B15747846932953"
+        },
+        "right": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Gilliam",
+          "tiger_geoid": "41021",
+          "shape_id": "52423323B16142622218163"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Benewah",
+          "tiger_geoid": "16009",
+          "shape_id": "52423323B17427488996260"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Spokane",
+          "tiger_geoid": "53063",
+          "shape_id": "52423323B30314962478279"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Benewah",
+          "tiger_geoid": "16009",
+          "shape_id": "52423323B17427488996260"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Whitman",
+          "tiger_geoid": "53075",
+          "shape_id": "52423323B58326499473481"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Clark",
+          "tiger_geoid": "32003",
+          "shape_id": "52423323B18852235556590"
+        },
+        "right": {
+          "state": "California",
+          "name": "San Bernardino",
+          "tiger_geoid": "06071",
+          "shape_id": "52423323B23069932539838"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Clark",
+          "tiger_geoid": "32003",
+          "shape_id": "52423323B18852235556590"
+        },
+        "right": {
+          "state": "California",
+          "name": "Inyo",
+          "tiger_geoid": "06027",
+          "shape_id": "52423323B89293656609241"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Walla Walla",
+          "tiger_geoid": "53071",
+          "shape_id": "52423323B20376291216469"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Umatilla",
+          "tiger_geoid": "41059",
+          "shape_id": "52423323B79537208575775"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Bernardino",
+          "tiger_geoid": "06071",
+          "shape_id": "52423323B23069932539838"
+        },
+        "right": {
+          "state": "Arizona",
+          "name": "Mohave",
+          "tiger_geoid": "04015",
+          "shape_id": "52423323B36780146179485"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Bernardino",
+          "tiger_geoid": "06071",
+          "shape_id": "52423323B23069932539838"
+        },
+        "right": {
+          "state": "Arizona",
+          "name": "La Paz",
+          "tiger_geoid": "04012",
+          "shape_id": "52423323B41781381522782"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Bonner",
+          "tiger_geoid": "16017",
+          "shape_id": "52423323B26002580229088"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Spokane",
+          "tiger_geoid": "53063",
+          "shape_id": "52423323B30314962478279"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Bonner",
+          "tiger_geoid": "16017",
+          "shape_id": "52423323B26002580229088"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Pend Oreille",
+          "tiger_geoid": "53051",
+          "shape_id": "52423323B67594083249097"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Del Norte",
+          "tiger_geoid": "06015",
+          "shape_id": "52423323B27137211377014"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Josephine",
+          "tiger_geoid": "41033",
+          "shape_id": "52423323B30410916636748"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Del Norte",
+          "tiger_geoid": "06015",
+          "shape_id": "52423323B27137211377014"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Curry",
+          "tiger_geoid": "41015",
+          "shape_id": "52423323B63196257632244"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Spokane",
+          "tiger_geoid": "53063",
+          "shape_id": "52423323B30314962478279"
+        },
+        "right": {
+          "state": "Idaho",
+          "name": "Kootenai",
+          "tiger_geoid": "16055",
+          "shape_id": "52423323B63965219739114"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Josephine",
+          "tiger_geoid": "41033",
+          "shape_id": "52423323B30410916636748"
+        },
+        "right": {
+          "state": "California",
+          "name": "Siskiyou",
+          "tiger_geoid": "06093",
+          "shape_id": "52423323B61595109476273"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Modoc",
+          "tiger_geoid": "06049",
+          "shape_id": "52423323B31115231658227"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Lake",
+          "tiger_geoid": "41037",
+          "shape_id": "52423323B45736239843392"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Modoc",
+          "tiger_geoid": "06049",
+          "shape_id": "52423323B31115231658227"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Klamath",
+          "tiger_geoid": "41035",
+          "shape_id": "52423323B65304648918135"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Modoc",
+          "tiger_geoid": "06049",
+          "shape_id": "52423323B31115231658227"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Columbia",
+          "tiger_geoid": "41009",
+          "shape_id": "52423323B32513162677446"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Cowlitz",
+          "tiger_geoid": "53015",
+          "shape_id": "52423323B43213790326288"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Columbia",
+          "tiger_geoid": "41009",
+          "shape_id": "52423323B32513162677446"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Wahkiakum",
+          "tiger_geoid": "53069",
+          "shape_id": "52423323B48044581252464"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Columbia",
+          "tiger_geoid": "41009",
+          "shape_id": "52423323B32513162677446"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Clark",
+          "tiger_geoid": "53011",
+          "shape_id": "52423323B89011069533198"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Arizona",
+          "name": "Yuma",
+          "tiger_geoid": "04027",
+          "shape_id": "52423323B36944168134022"
+        },
+        "right": {
+          "state": "California",
+          "name": "Imperial",
+          "tiger_geoid": "06025",
+          "shape_id": "52423323B37240473864365"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Imperial",
+          "tiger_geoid": "06025",
+          "shape_id": "52423323B37240473864365"
+        },
+        "right": {
+          "state": "Arizona",
+          "name": "La Paz",
+          "tiger_geoid": "04012",
+          "shape_id": "52423323B41781381522782"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Arizona",
+          "name": "La Paz",
+          "tiger_geoid": "04012",
+          "shape_id": "52423323B41781381522782"
+        },
+        "right": {
+          "state": "California",
+          "name": "Riverside",
+          "tiger_geoid": "06065",
+          "shape_id": "52423323B62695195222235"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Clatsop",
+          "tiger_geoid": "41007",
+          "shape_id": "52423323B41854352046463"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Wahkiakum",
+          "tiger_geoid": "53069",
+          "shape_id": "52423323B48044581252464"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "El Dorado",
+          "tiger_geoid": "06017",
+          "shape_id": "52423323B41898924582889"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Sierra",
+          "tiger_geoid": "06091",
+          "shape_id": "52423323B42525268241117"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "right": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "right": {
+          "state": "California",
+          "name": "Placer",
+          "tiger_geoid": "06061",
+          "shape_id": "52423323B56416092773024"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Douglas",
+          "tiger_geoid": "32005",
+          "shape_id": "52423323B42659235998259"
+        },
+        "right": {
+          "state": "California",
+          "name": "Alpine",
+          "tiger_geoid": "06003",
+          "shape_id": "52423323B67588574079428"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Morrow",
+          "tiger_geoid": "41049",
+          "shape_id": "52423323B45995509700090"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Morrow",
+          "tiger_geoid": "41049",
+          "shape_id": "52423323B45995509700090"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Benton",
+          "tiger_geoid": "53005",
+          "shape_id": "52423323B67037278576088"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Esmeralda",
+          "tiger_geoid": "32009",
+          "shape_id": "52423323B50493835773618"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Mono",
+          "tiger_geoid": "06051",
+          "shape_id": "52423323B48171180316739"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Mineral",
+          "tiger_geoid": "32021",
+          "shape_id": "52423323B72214422766"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Esmeralda",
+          "tiger_geoid": "32009",
+          "shape_id": "52423323B50493835773618"
+        },
+        "right": {
+          "state": "California",
+          "name": "Inyo",
+          "tiger_geoid": "06027",
+          "shape_id": "52423323B89293656609241"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Wallowa",
+          "tiger_geoid": "41063",
+          "shape_id": "52423323B53292465895893"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Asotin",
+          "tiger_geoid": "53003",
+          "shape_id": "52423323B79616802808075"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Wallowa",
+          "tiger_geoid": "41063",
+          "shape_id": "52423323B53292465895893"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Columbia",
+          "tiger_geoid": "53013",
+          "shape_id": "52423323B83269960896154"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Wallowa",
+          "tiger_geoid": "41063",
+          "shape_id": "52423323B53292465895893"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Garfield",
+          "tiger_geoid": "53023",
+          "shape_id": "52423323B83834618329235"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Sherman",
+          "tiger_geoid": "41055",
+          "shape_id": "52423323B77848973852884"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Klickitat",
+          "tiger_geoid": "53039",
+          "shape_id": "52423323B53834689647106"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Wasco",
+          "tiger_geoid": "41065",
+          "shape_id": "52423323B81291349676813"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Jackson",
+          "tiger_geoid": "41029",
+          "shape_id": "52423323B54328460480389"
+        },
+        "right": {
+          "state": "California",
+          "name": "Siskiyou",
+          "tiger_geoid": "06093",
+          "shape_id": "52423323B61595109476273"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Latah",
+          "tiger_geoid": "16057",
+          "shape_id": "52423323B55768154384777"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Whitman",
+          "tiger_geoid": "53075",
+          "shape_id": "52423323B58326499473481"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Carson City",
+          "tiger_geoid": "32510",
+          "shape_id": "52423323B56251326205746"
+        },
+        "right": {
+          "state": "California",
+          "name": "Placer",
+          "tiger_geoid": "06061",
+          "shape_id": "52423323B56416092773024"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Placer",
+          "tiger_geoid": "06061",
+          "shape_id": "52423323B56416092773024"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Whitman",
+          "tiger_geoid": "53075",
+          "shape_id": "52423323B58326499473481"
+        },
+        "right": {
+          "state": "Idaho",
+          "name": "Nez Perce",
+          "tiger_geoid": "16069",
+          "shape_id": "52423323B94471153891164"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Nevada",
+          "name": "Nye",
+          "tiger_geoid": "32023",
+          "shape_id": "52423323B59835765201316"
+        },
+        "right": {
+          "state": "California",
+          "name": "Inyo",
+          "tiger_geoid": "06027",
+          "shape_id": "52423323B89293656609241"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Siskiyou",
+          "tiger_geoid": "06093",
+          "shape_id": "52423323B61595109476273"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Klamath",
+          "tiger_geoid": "41035",
+          "shape_id": "52423323B65304648918135"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Multnomah",
+          "tiger_geoid": "41051",
+          "shape_id": "52423323B6223191641885"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Clark",
+          "tiger_geoid": "53011",
+          "shape_id": "52423323B89011069533198"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Idaho",
+          "name": "Boundary",
+          "tiger_geoid": "16021",
+          "shape_id": "52423323B63721358154647"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Pend Oreille",
+          "tiger_geoid": "53051",
+          "shape_id": "52423323B67594083249097"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Benton",
+          "tiger_geoid": "53005",
+          "shape_id": "52423323B67037278576088"
+        },
+        "right": {
+          "state": "Oregon",
+          "name": "Umatilla",
+          "tiger_geoid": "41059",
+          "shape_id": "52423323B79537208575775"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Nevada",
+          "tiger_geoid": "06057",
+          "shape_id": "52423323B72053512524977"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Umatilla",
+          "tiger_geoid": "41059",
+          "shape_id": "52423323B79537208575775"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Columbia",
+          "tiger_geoid": "53013",
+          "shape_id": "52423323B83269960896154"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Asotin",
+          "tiger_geoid": "53003",
+          "shape_id": "52423323B79616802808075"
+        },
+        "right": {
+          "state": "Idaho",
+          "name": "Nez Perce",
+          "tiger_geoid": "16069",
+          "shape_id": "52423323B94471153891164"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Lassen",
+          "tiger_geoid": "06035",
+          "shape_id": "52423323B86430023400928"
+        },
+        "right": {
+          "state": "Nevada",
+          "name": "Washoe",
+          "tiger_geoid": "32031",
+          "shape_id": "52423323B90728161292494"
+        },
+        "cross_state": true
+      }
+    ],
+    "old_2018_pair_graph_difference_count": 1,
+    "missing_current_vs_2018": [
+      {
+        "left": {
+          "state": "California",
+          "name": "Alameda",
+          "tiger_geoid": "06001",
+          "shape_id": "52423323B34460466024259"
+        },
+        "right": {
+          "state": "California",
+          "name": "San Francisco",
+          "tiger_geoid": "06075",
+          "shape_id": "52423323B46695716253077"
+        },
+        "cross_state": false
+      }
+    ],
+    "extra_current_vs_2018": [],
+    "tiger_2024_pair_graph_difference_count": 17,
+    "missing_current_vs_tiger_2024": [
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Snohomish",
+          "tiger_geoid": "53061",
+          "shape_id": "52423323B25311373219770"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "King",
+          "tiger_geoid": "53033",
+          "shape_id": "52423323B35530413742416"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Jefferson",
+          "tiger_geoid": "53031",
+          "shape_id": "52423323B89179227732038"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Clallam",
+          "tiger_geoid": "53009",
+          "shape_id": "52423323B36348564143669"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Jefferson",
+          "tiger_geoid": "53031",
+          "shape_id": "52423323B89179227732038"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Whatcom",
+          "tiger_geoid": "53073",
+          "shape_id": "52423323B9068998137459"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Skagit",
+          "tiger_geoid": "53057",
+          "shape_id": "52423323B93114504552564"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Alameda",
+          "tiger_geoid": "06001",
+          "shape_id": "52423323B34460466024259"
+        },
+        "right": {
+          "state": "California",
+          "name": "San Francisco",
+          "tiger_geoid": "06075",
+          "shape_id": "52423323B46695716253077"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Alameda",
+          "tiger_geoid": "06001",
+          "shape_id": "52423323B34460466024259"
+        },
+        "right": {
+          "state": "California",
+          "name": "San Mateo",
+          "tiger_geoid": "06081",
+          "shape_id": "52423323B75131784459442"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Clatsop",
+          "tiger_geoid": "41007",
+          "shape_id": "52423323B41854352046463"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Pacific",
+          "tiger_geoid": "53049",
+          "shape_id": "52423323B94422507286019"
+        },
+        "cross_state": true
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Francisco",
+          "tiger_geoid": "06075",
+          "shape_id": "52423323B46695716253077"
+        },
+        "right": {
+          "state": "California",
+          "name": "Marin",
+          "tiger_geoid": "06041",
+          "shape_id": "52423323B48598289352775"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Francisco",
+          "tiger_geoid": "06075",
+          "shape_id": "52423323B46695716253077"
+        },
+        "right": {
+          "state": "California",
+          "name": "Contra Costa",
+          "tiger_geoid": "06013",
+          "shape_id": "52423323B95554273469006"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Marin",
+          "tiger_geoid": "06041",
+          "shape_id": "52423323B48598289352775"
+        },
+        "right": {
+          "state": "California",
+          "name": "Contra Costa",
+          "tiger_geoid": "06013",
+          "shape_id": "52423323B95554273469006"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Jefferson",
+          "tiger_geoid": "53031",
+          "shape_id": "52423323B89179227732038"
+        },
+        "cross_state": false
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Skagit",
+          "tiger_geoid": "53057",
+          "shape_id": "52423323B93114504552564"
+        },
+        "cross_state": false
+      }
+    ],
+    "extra_current_vs_tiger_2024": []
+  },
+  "source_vintage_pair_set_differences": {
+    "added_in_TIGER_2024_vs_geoBoundaries_2018": [
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Snohomish",
+          "tiger_geoid": "53061",
+          "shape_id": "52423323B25311373219770"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 5813.591
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 5749.467,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 5813.529
+        }
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "King",
+          "tiger_geoid": "53033",
+          "shape_id": "52423323B35530413742416"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 1348.065
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 44698.2,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 1349.742
+        }
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 5036.356
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 22124.755,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 5311.451
+        }
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Kitsap",
+          "tiger_geoid": "53035",
+          "shape_id": "52423323B24057696547970"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Jefferson",
+          "tiger_geoid": "53031",
+          "shape_id": "52423323B89179227732038"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 1678.302
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 56287.413,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 1675.42
+        }
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Clallam",
+          "tiger_geoid": "53009",
+          "shape_id": "52423323B36348564143669"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 31930.02
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 23277.724,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 33722.496
+        }
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 10806.347
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 12175.357,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 10873.694
+        }
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Jefferson",
+          "tiger_geoid": "53031",
+          "shape_id": "52423323B89179227732038"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 30844.407
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 7059.963,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 31030.663
+        }
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Whatcom",
+          "tiger_geoid": "53073",
+          "shape_id": "52423323B9068998137459"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 5563.37
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 32873.032,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 5573.219
+        }
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "San Juan",
+          "tiger_geoid": "53055",
+          "shape_id": "52423323B32782252789959"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Skagit",
+          "tiger_geoid": "53057",
+          "shape_id": "52423323B93114504552564"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 2678.351
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 28530.618,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 2878.858
+        }
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Alameda",
+          "tiger_geoid": "06001",
+          "shape_id": "52423323B34460466024259"
+        },
+        "right": {
+          "state": "California",
+          "name": "San Mateo",
+          "tiger_geoid": "06081",
+          "shape_id": "52423323B75131784459442"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 1910.927
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 31311.613,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 1910.561
+        }
+      },
+      {
+        "left": {
+          "state": "Oregon",
+          "name": "Clatsop",
+          "tiger_geoid": "41007",
+          "shape_id": "52423323B41854352046463"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Pacific",
+          "tiger_geoid": "53049",
+          "shape_id": "52423323B94422507286019"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 5075.532
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 41324.968,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 5372.349
+        }
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Francisco",
+          "tiger_geoid": "06075",
+          "shape_id": "52423323B46695716253077"
+        },
+        "right": {
+          "state": "California",
+          "name": "Marin",
+          "tiger_geoid": "06041",
+          "shape_id": "52423323B48598289352775"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 1639.001
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 29798.562,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 1843.211
+        }
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "San Francisco",
+          "tiger_geoid": "06075",
+          "shape_id": "52423323B46695716253077"
+        },
+        "right": {
+          "state": "California",
+          "name": "Contra Costa",
+          "tiger_geoid": "06013",
+          "shape_id": "52423323B95554273469006"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 8043.814
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 7256.394,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 11078.431
+        }
+      },
+      {
+        "left": {
+          "state": "California",
+          "name": "Marin",
+          "tiger_geoid": "06041",
+          "shape_id": "52423323B48598289352775"
+        },
+        "right": {
+          "state": "California",
+          "name": "Contra Costa",
+          "tiger_geoid": "06013",
+          "shape_id": "52423323B95554273469006"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 2690.426
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 18885.583,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 2897.69
+        }
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Jefferson",
+          "tiger_geoid": "53031",
+          "shape_id": "52423323B89179227732038"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 4634.244
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 52481.241,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 4634.153
+        }
+      },
+      {
+        "left": {
+          "state": "Washington",
+          "name": "Island",
+          "tiger_geoid": "53029",
+          "shape_id": "52423323B81098999696635"
+        },
+        "right": {
+          "state": "Washington",
+          "name": "Skagit",
+          "tiger_geoid": "53057",
+          "shape_id": "52423323B93114504552564"
+        },
+        "geoboundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 776.368
+        },
+        "tigerline_2024": {
+          "shared_boundary_m": 29630.451,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 0.0
+        },
+        "current_atlas": {
+          "shared_boundary_m": 0.0,
+          "polygon_overlap_km2": 0.0,
+          "polygon_distance_m": 771.011
+        }
+      }
+    ],
+    "present_in_geoBoundaries_2018_missing_TIGER_2024": []
+  },
+  "current_pair_graph_difference_metrics": [
+    {
+      "left": {
+        "state": "Washington",
+        "name": "Kitsap",
+        "tiger_geoid": "53035",
+        "shape_id": "52423323B24057696547970"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Snohomish",
+        "tiger_geoid": "53061",
+        "shape_id": "52423323B25311373219770"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 5813.591
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 5749.467,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 5813.529
+      }
+    },
+    {
+      "left": {
+        "state": "Washington",
+        "name": "Kitsap",
+        "tiger_geoid": "53035",
+        "shape_id": "52423323B24057696547970"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "King",
+        "tiger_geoid": "53033",
+        "shape_id": "52423323B35530413742416"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 1348.065
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 44698.2,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 1349.742
+      }
+    },
+    {
+      "left": {
+        "state": "Washington",
+        "name": "Kitsap",
+        "tiger_geoid": "53035",
+        "shape_id": "52423323B24057696547970"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Island",
+        "tiger_geoid": "53029",
+        "shape_id": "52423323B81098999696635"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 5036.356
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 22124.755,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 5311.451
+      }
+    },
+    {
+      "left": {
+        "state": "Washington",
+        "name": "Kitsap",
+        "tiger_geoid": "53035",
+        "shape_id": "52423323B24057696547970"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Jefferson",
+        "tiger_geoid": "53031",
+        "shape_id": "52423323B89179227732038"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 1678.302
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 56287.413,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 1675.42
+      }
+    },
+    {
+      "left": {
+        "state": "Washington",
+        "name": "San Juan",
+        "tiger_geoid": "53055",
+        "shape_id": "52423323B32782252789959"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Clallam",
+        "tiger_geoid": "53009",
+        "shape_id": "52423323B36348564143669"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 31930.02
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 23277.724,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 33722.496
+      }
+    },
+    {
+      "left": {
+        "state": "Washington",
+        "name": "San Juan",
+        "tiger_geoid": "53055",
+        "shape_id": "52423323B32782252789959"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Island",
+        "tiger_geoid": "53029",
+        "shape_id": "52423323B81098999696635"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 10806.347
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 12175.357,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 10873.694
+      }
+    },
+    {
+      "left": {
+        "state": "Washington",
+        "name": "San Juan",
+        "tiger_geoid": "53055",
+        "shape_id": "52423323B32782252789959"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Jefferson",
+        "tiger_geoid": "53031",
+        "shape_id": "52423323B89179227732038"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 30844.407
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 7059.963,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 31030.663
+      }
+    },
+    {
+      "left": {
+        "state": "Washington",
+        "name": "San Juan",
+        "tiger_geoid": "53055",
+        "shape_id": "52423323B32782252789959"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Whatcom",
+        "tiger_geoid": "53073",
+        "shape_id": "52423323B9068998137459"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 5563.37
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 32873.032,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 5573.219
+      }
+    },
+    {
+      "left": {
+        "state": "Washington",
+        "name": "San Juan",
+        "tiger_geoid": "53055",
+        "shape_id": "52423323B32782252789959"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Skagit",
+        "tiger_geoid": "53057",
+        "shape_id": "52423323B93114504552564"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 2678.351
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 28530.618,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 2878.858
+      }
+    },
+    {
+      "left": {
+        "state": "California",
+        "name": "Alameda",
+        "tiger_geoid": "06001",
+        "shape_id": "52423323B34460466024259"
+      },
+      "right": {
+        "state": "California",
+        "name": "San Francisco",
+        "tiger_geoid": "06075",
+        "shape_id": "52423323B46695716253077"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 357.251,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 21322.488,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 4442.292
+      }
+    },
+    {
+      "left": {
+        "state": "California",
+        "name": "Alameda",
+        "tiger_geoid": "06001",
+        "shape_id": "52423323B34460466024259"
+      },
+      "right": {
+        "state": "California",
+        "name": "San Mateo",
+        "tiger_geoid": "06081",
+        "shape_id": "52423323B75131784459442"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 1910.927
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 31311.613,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 1910.561
+      }
+    },
+    {
+      "left": {
+        "state": "Oregon",
+        "name": "Clatsop",
+        "tiger_geoid": "41007",
+        "shape_id": "52423323B41854352046463"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Pacific",
+        "tiger_geoid": "53049",
+        "shape_id": "52423323B94422507286019"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 5075.532
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 41324.968,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 5372.349
+      }
+    },
+    {
+      "left": {
+        "state": "California",
+        "name": "San Francisco",
+        "tiger_geoid": "06075",
+        "shape_id": "52423323B46695716253077"
+      },
+      "right": {
+        "state": "California",
+        "name": "Marin",
+        "tiger_geoid": "06041",
+        "shape_id": "52423323B48598289352775"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 1639.001
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 29798.562,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 1843.211
+      }
+    },
+    {
+      "left": {
+        "state": "California",
+        "name": "San Francisco",
+        "tiger_geoid": "06075",
+        "shape_id": "52423323B46695716253077"
+      },
+      "right": {
+        "state": "California",
+        "name": "Contra Costa",
+        "tiger_geoid": "06013",
+        "shape_id": "52423323B95554273469006"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 8043.814
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 7256.394,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 11078.431
+      }
+    },
+    {
+      "left": {
+        "state": "California",
+        "name": "Marin",
+        "tiger_geoid": "06041",
+        "shape_id": "52423323B48598289352775"
+      },
+      "right": {
+        "state": "California",
+        "name": "Contra Costa",
+        "tiger_geoid": "06013",
+        "shape_id": "52423323B95554273469006"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 2690.426
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 18885.583,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 2897.69
+      }
+    },
+    {
+      "left": {
+        "state": "Washington",
+        "name": "Island",
+        "tiger_geoid": "53029",
+        "shape_id": "52423323B81098999696635"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Jefferson",
+        "tiger_geoid": "53031",
+        "shape_id": "52423323B89179227732038"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 4634.244
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 52481.241,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 4634.153
+      }
+    },
+    {
+      "left": {
+        "state": "Washington",
+        "name": "Island",
+        "tiger_geoid": "53029",
+        "shape_id": "52423323B81098999696635"
+      },
+      "right": {
+        "state": "Washington",
+        "name": "Skagit",
+        "tiger_geoid": "53057",
+        "shape_id": "52423323B93114504552564"
+      },
+      "geoboundaries_2018": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 776.368
+      },
+      "tigerline_2024": {
+        "shared_boundary_m": 29630.451,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 0.0
+      },
+      "current_atlas": {
+        "shared_boundary_m": 0.0,
+        "polygon_overlap_km2": 0.0,
+        "polygon_distance_m": 771.011
+      }
+    }
+  ],
+  "current_assigned_location_edges": [
+    {
+      "left_id": "atlas:physical:5dcc72971bb4b1ede2f5",
+      "right_id": "atlas:physical:9cfc4fc5de3925d6f841",
+      "shared_boundary_m_screen": 305525.732
+    },
+    {
+      "left_id": "atlas:physical:5dcc72971bb4b1ede2f5",
+      "right_id": "atlas:physical:d76eb273e99a0f96a575",
+      "shared_boundary_m_screen": 147982.513
+    },
+    {
+      "left_id": "atlas:physical:5dcc72971bb4b1ede2f5",
+      "right_id": "gb:USA:ADM2:52423323B19833942519787",
+      "shared_boundary_m_screen": 118710.827
+    },
+    {
+      "left_id": "atlas:physical:5dcc72971bb4b1ede2f5",
+      "right_id": "gb:USA:ADM2:52423323B62695195222235",
+      "shared_boundary_m_screen": 116825.346
+    },
+    {
+      "left_id": "atlas:physical:5dcc72971bb4b1ede2f5",
+      "right_id": "gb:USA:ADM2:52423323B87301828944684",
+      "shared_boundary_m_screen": 36256.423
+    },
+    {
+      "left_id": "atlas:physical:5dcc72971bb4b1ede2f5",
+      "right_id": "gb:USA:ADM2:52423323B89293656609241",
+      "shared_boundary_m_screen": 179542.0
+    },
+    {
+      "left_id": "atlas:physical:9cfc4fc5de3925d6f841",
+      "right_id": "gb:USA:ADM2:52423323B62695195222235",
+      "shared_boundary_m_screen": 85557.392
+    },
+    {
+      "left_id": "atlas:physical:d76eb273e99a0f96a575",
+      "right_id": "atlas:physical:dcc393fbc988381d899c",
+      "shared_boundary_m_screen": 103468.037
+    },
+    {
+      "left_id": "atlas:physical:d76eb273e99a0f96a575",
+      "right_id": "gb:USA:ADM2:52423323B62695195222235",
+      "shared_boundary_m_screen": 3263.472
+    },
+    {
+      "left_id": "atlas:physical:d76eb273e99a0f96a575",
+      "right_id": "gb:USA:ADM2:52423323B87301828944684",
+      "shared_boundary_m_screen": 12101.656
+    },
+    {
+      "left_id": "atlas:physical:dcc393fbc988381d899c",
+      "right_id": "gb:USA:ADM2:52423323B24970459595653",
+      "shared_boundary_m_screen": 13174.439
+    },
+    {
+      "left_id": "atlas:physical:dcc393fbc988381d899c",
+      "right_id": "gb:USA:ADM2:52423323B62695195222235",
+      "shared_boundary_m_screen": 61224.219
+    },
+    {
+      "left_id": "atlas:physical:dcc393fbc988381d899c",
+      "right_id": "gb:USA:ADM2:52423323B87301828944684",
+      "shared_boundary_m_screen": 30958.479
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B12422674135738",
+      "right_id": "gb:USA:ADM2:52423323B26488914054819",
+      "shared_boundary_m_screen": 40575.66
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B12422674135738",
+      "right_id": "gb:USA:ADM2:52423323B37417643745911",
+      "shared_boundary_m_screen": 123119.824
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B12422674135738",
+      "right_id": "gb:USA:ADM2:52423323B39454223771984",
+      "shared_boundary_m_screen": 71032.571
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B12422674135738",
+      "right_id": "gb:USA:ADM2:52423323B42866910888908",
+      "shared_boundary_m_screen": 54476.785
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B12422674135738",
+      "right_id": "gb:USA:ADM2:52423323B93817319778568",
+      "shared_boundary_m_screen": 23837.656
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B12422674135738",
+      "right_id": "gb:USA:ADM2:52423323B940291063109",
+      "shared_boundary_m_screen": 28483.334
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13167206159035",
+      "right_id": "gb:USA:ADM2:52423323B21025471162959",
+      "shared_boundary_m_screen": 9756.542
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13167206159035",
+      "right_id": "gb:USA:ADM2:52423323B33569460093340",
+      "shared_boundary_m_screen": 109863.49
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13167206159035",
+      "right_id": "gb:USA:ADM2:52423323B51466238870881",
+      "shared_boundary_m_screen": 123354.861
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13167206159035",
+      "right_id": "gb:USA:ADM2:52423323B96573779490833",
+      "shared_boundary_m_screen": 154164.532
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13893996833484",
+      "right_id": "gb:USA:ADM2:52423323B25148462267698",
+      "shared_boundary_m_screen": 54923.9
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13893996833484",
+      "right_id": "gb:USA:ADM2:52423323B30314962478279",
+      "shared_boundary_m_screen": 68342.126
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13893996833484",
+      "right_id": "gb:USA:ADM2:52423323B67594083249097",
+      "shared_boundary_m_screen": 134196.911
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13893996833484",
+      "right_id": "gb:USA:ADM2:52423323B81740617288229",
+      "shared_boundary_m_screen": 146463.515
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13974884585376",
+      "right_id": "gb:USA:ADM2:52423323B14198169594786",
+      "shared_boundary_m_screen": 55428.453
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13974884585376",
+      "right_id": "gb:USA:ADM2:52423323B32791313624567",
+      "shared_boundary_m_screen": 38180.383
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13974884585376",
+      "right_id": "gb:USA:ADM2:52423323B43213790326288",
+      "shared_boundary_m_screen": 36824.52
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13974884585376",
+      "right_id": "gb:USA:ADM2:52423323B53834689647106",
+      "shared_boundary_m_screen": 50632.1
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B13974884585376",
+      "right_id": "gb:USA:ADM2:52423323B89011069533198",
+      "shared_boundary_m_screen": 56221.014
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B14198169594786",
+      "right_id": "gb:USA:ADM2:52423323B32791313624567",
+      "shared_boundary_m_screen": 68219.827
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B14198169594786",
+      "right_id": "gb:USA:ADM2:52423323B40988222589259",
+      "shared_boundary_m_screen": 62307.045
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B14198169594786",
+      "right_id": "gb:USA:ADM2:52423323B43213790326288",
+      "shared_boundary_m_screen": 75354.963
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B14198169594786",
+      "right_id": "gb:USA:ADM2:52423323B46742889788389",
+      "shared_boundary_m_screen": 76670.885
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B14198169594786",
+      "right_id": "gb:USA:ADM2:52423323B48044581252464",
+      "shared_boundary_m_screen": 10829.443
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B14198169594786",
+      "right_id": "gb:USA:ADM2:52423323B85210970682519",
+      "shared_boundary_m_screen": 16134.746
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B14198169594786",
+      "right_id": "gb:USA:ADM2:52423323B94422507286019",
+      "shared_boundary_m_screen": 45319.67
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16290955064252",
+      "right_id": "gb:USA:ADM2:52423323B19973672472498",
+      "shared_boundary_m_screen": 43068.615
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16290955064252",
+      "right_id": "gb:USA:ADM2:52423323B21715725601403",
+      "shared_boundary_m_screen": 43349.163
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16290955064252",
+      "right_id": "gb:USA:ADM2:52423323B37417643745911",
+      "shared_boundary_m_screen": 13716.278
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16290955064252",
+      "right_id": "gb:USA:ADM2:52423323B42957866846180",
+      "shared_boundary_m_screen": 52559.877
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16290955064252",
+      "right_id": "gb:USA:ADM2:52423323B43221954300759",
+      "shared_boundary_m_screen": 72306.646
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16290955064252",
+      "right_id": "gb:USA:ADM2:52423323B62056349216099",
+      "shared_boundary_m_screen": 65975.79
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16590015395010",
+      "right_id": "gb:USA:ADM2:52423323B31115231658227",
+      "shared_boundary_m_screen": 9546.302
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16590015395010",
+      "right_id": "gb:USA:ADM2:52423323B42866910888908",
+      "shared_boundary_m_screen": 138260.111
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16590015395010",
+      "right_id": "gb:USA:ADM2:52423323B49571098968478",
+      "shared_boundary_m_screen": 14279.761
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16590015395010",
+      "right_id": "gb:USA:ADM2:52423323B61595109476273",
+      "shared_boundary_m_screen": 87558.048
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16590015395010",
+      "right_id": "gb:USA:ADM2:52423323B86430023400928",
+      "shared_boundary_m_screen": 83814.473
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B16590015395010",
+      "right_id": "gb:USA:ADM2:52423323B93817319778568",
+      "shared_boundary_m_screen": 144666.25
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19833942519787",
+      "right_id": "gb:USA:ADM2:52423323B44496470224494",
+      "shared_boundary_m_screen": 137092.113
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19833942519787",
+      "right_id": "gb:USA:ADM2:52423323B51130837096991",
+      "shared_boundary_m_screen": 2755.279
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19833942519787",
+      "right_id": "gb:USA:ADM2:52423323B67227670427960",
+      "shared_boundary_m_screen": 166072.292
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19833942519787",
+      "right_id": "gb:USA:ADM2:52423323B67805499468895",
+      "shared_boundary_m_screen": 58778.22
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19833942519787",
+      "right_id": "gb:USA:ADM2:52423323B87301828944684",
+      "shared_boundary_m_screen": 112883.075
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19833942519787",
+      "right_id": "gb:USA:ADM2:52423323B89293656609241",
+      "shared_boundary_m_screen": 35014.418
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19833942519787",
+      "right_id": "gb:USA:ADM2:52423323B91201263130085",
+      "shared_boundary_m_screen": 63186.414
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19973672472498",
+      "right_id": "gb:USA:ADM2:52423323B21715725601403",
+      "shared_boundary_m_screen": 55193.289
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19973672472498",
+      "right_id": "gb:USA:ADM2:52423323B56416092773024",
+      "shared_boundary_m_screen": 35267.32
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19973672472498",
+      "right_id": "gb:USA:ADM2:52423323B62056349216099",
+      "shared_boundary_m_screen": 10205.417
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19973672472498",
+      "right_id": "gb:USA:ADM2:52423323B63323326586067",
+      "shared_boundary_m_screen": 61662.364
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B19973672472498",
+      "right_id": "gb:USA:ADM2:52423323B88547646561946",
+      "shared_boundary_m_screen": 25019.518
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20293708991619",
+      "right_id": "gb:USA:ADM2:52423323B41205581888996",
+      "shared_boundary_m_screen": 230550.176
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20293708991619",
+      "right_id": "gb:USA:ADM2:52423323B44496470224494",
+      "shared_boundary_m_screen": 130406.452
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20293708991619",
+      "right_id": "gb:USA:ADM2:52423323B48171180316739",
+      "shared_boundary_m_screen": 30325.988
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20293708991619",
+      "right_id": "gb:USA:ADM2:52423323B5435817984489",
+      "shared_boundary_m_screen": 70426.415
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20293708991619",
+      "right_id": "gb:USA:ADM2:52423323B6642778687362",
+      "shared_boundary_m_screen": 51476.442
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20293708991619",
+      "right_id": "gb:USA:ADM2:52423323B67805499468895",
+      "shared_boundary_m_screen": 108526.668
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20293708991619",
+      "right_id": "gb:USA:ADM2:52423323B78495074223375",
+      "shared_boundary_m_screen": 64561.284
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20293708991619",
+      "right_id": "gb:USA:ADM2:52423323B89293656609241",
+      "shared_boundary_m_screen": 105496.581
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20376291216469",
+      "right_id": "gb:USA:ADM2:52423323B26709103627724",
+      "shared_boundary_m_screen": 91475.95
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20376291216469",
+      "right_id": "gb:USA:ADM2:52423323B67037278576088",
+      "shared_boundary_m_screen": 25523.477
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20376291216469",
+      "right_id": "gb:USA:ADM2:52423323B83269960896154",
+      "shared_boundary_m_screen": 86213.189
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20525606755783",
+      "right_id": "gb:USA:ADM2:52423323B26881284907235",
+      "shared_boundary_m_screen": 139095.093
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20525606755783",
+      "right_id": "gb:USA:ADM2:52423323B41205581888996",
+      "shared_boundary_m_screen": 102287.201
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20525606755783",
+      "right_id": "gb:USA:ADM2:52423323B60811948646652",
+      "shared_boundary_m_screen": 34.74
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B20525606755783",
+      "right_id": "gb:USA:ADM2:52423323B6642778687362",
+      "shared_boundary_m_screen": 61317.082
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B21025471162959",
+      "right_id": "gb:USA:ADM2:52423323B32791313624567",
+      "shared_boundary_m_screen": 137945.316
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B21025471162959",
+      "right_id": "gb:USA:ADM2:52423323B33569460093340",
+      "shared_boundary_m_screen": 98207.118
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B21025471162959",
+      "right_id": "gb:USA:ADM2:52423323B35530413742416",
+      "shared_boundary_m_screen": 93017.163
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B21025471162959",
+      "right_id": "gb:USA:ADM2:52423323B96573779490833",
+      "shared_boundary_m_screen": 57962.316
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B21715725601403",
+      "right_id": "gb:USA:ADM2:52423323B37417643745911",
+      "shared_boundary_m_screen": 86191.78
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B21715725601403",
+      "right_id": "gb:USA:ADM2:52423323B88547646561946",
+      "shared_boundary_m_screen": 9681.602
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B21715725601403",
+      "right_id": "gb:USA:ADM2:52423323B940291063109",
+      "shared_boundary_m_screen": 79265.552
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B24057696547970",
+      "right_id": "gb:USA:ADM2:52423323B30851290743950",
+      "shared_boundary_m_screen": 29240.157
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B24057696547970",
+      "right_id": "gb:USA:ADM2:52423323B40988222589259",
+      "shared_boundary_m_screen": 19371.774
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B24970459595653",
+      "right_id": "gb:USA:ADM2:52423323B47648516235098",
+      "shared_boundary_m_screen": 18463.562
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B24970459595653",
+      "right_id": "gb:USA:ADM2:52423323B62695195222235",
+      "shared_boundary_m_screen": 56643.022
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B24970459595653",
+      "right_id": "gb:USA:ADM2:52423323B87301828944684",
+      "shared_boundary_m_screen": 46370.759
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B25148462267698",
+      "right_id": "gb:USA:ADM2:52423323B30314962478279",
+      "shared_boundary_m_screen": 62477.251
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B25148462267698",
+      "right_id": "gb:USA:ADM2:52423323B51466238870881",
+      "shared_boundary_m_screen": 9399.024
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B25148462267698",
+      "right_id": "gb:USA:ADM2:52423323B58326499473481",
+      "shared_boundary_m_screen": 10449.224
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B25148462267698",
+      "right_id": "gb:USA:ADM2:52423323B7193910850758",
+      "shared_boundary_m_screen": 77542.576
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B25148462267698",
+      "right_id": "gb:USA:ADM2:52423323B81740617288229",
+      "shared_boundary_m_screen": 59432.769
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B25148462267698",
+      "right_id": "gb:USA:ADM2:52423323B96573779490833",
+      "shared_boundary_m_screen": 75283.595
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B25311373219770",
+      "right_id": "gb:USA:ADM2:52423323B33569460093340",
+      "shared_boundary_m_screen": 78420.06
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B25311373219770",
+      "right_id": "gb:USA:ADM2:52423323B35530413742416",
+      "shared_boundary_m_screen": 96627.791
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B25311373219770",
+      "right_id": "gb:USA:ADM2:52423323B81098999696635",
+      "shared_boundary_m_screen": 2731.364
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B25311373219770",
+      "right_id": "gb:USA:ADM2:52423323B93114504552564",
+      "shared_boundary_m_screen": 103163.283
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26488914054819",
+      "right_id": "gb:USA:ADM2:52423323B27137211377014",
+      "shared_boundary_m_screen": 42822.625
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26488914054819",
+      "right_id": "gb:USA:ADM2:52423323B42866910888908",
+      "shared_boundary_m_screen": 152927.861
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26488914054819",
+      "right_id": "gb:USA:ADM2:52423323B61595109476273",
+      "shared_boundary_m_screen": 39722.387
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26709103627724",
+      "right_id": "gb:USA:ADM2:52423323B58326499473481",
+      "shared_boundary_m_screen": 20673.501
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26709103627724",
+      "right_id": "gb:USA:ADM2:52423323B67037278576088",
+      "shared_boundary_m_screen": 71882.933
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26709103627724",
+      "right_id": "gb:USA:ADM2:52423323B7193910850758",
+      "shared_boundary_m_screen": 88919.466
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26709103627724",
+      "right_id": "gb:USA:ADM2:52423323B83269960896154",
+      "shared_boundary_m_screen": 1110.082
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26709103627724",
+      "right_id": "gb:USA:ADM2:52423323B96573779490833",
+      "shared_boundary_m_screen": 13040.983
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26881284907235",
+      "right_id": "gb:USA:ADM2:52423323B41205581888996",
+      "shared_boundary_m_screen": 6187.522
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26881284907235",
+      "right_id": "gb:USA:ADM2:52423323B48171180316739",
+      "shared_boundary_m_screen": 97529.733
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26881284907235",
+      "right_id": "gb:USA:ADM2:52423323B60811948646652",
+      "shared_boundary_m_screen": 32115.986
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26881284907235",
+      "right_id": "gb:USA:ADM2:52423323B67588574079428",
+      "shared_boundary_m_screen": 45172.837
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B26881284907235",
+      "right_id": "gb:USA:ADM2:52423323B80620838081699",
+      "shared_boundary_m_screen": 95351.045
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B27137211377014",
+      "right_id": "gb:USA:ADM2:52423323B61595109476273",
+      "shared_boundary_m_screen": 88307.373
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B30314962478279",
+      "right_id": "gb:USA:ADM2:52423323B58326499473481",
+      "shared_boundary_m_screen": 59635.9
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B30314962478279",
+      "right_id": "gb:USA:ADM2:52423323B67594083249097",
+      "shared_boundary_m_screen": 29723.666
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B30851290743950",
+      "right_id": "gb:USA:ADM2:52423323B40988222589259",
+      "shared_boundary_m_screen": 5549.433
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B30851290743950",
+      "right_id": "gb:USA:ADM2:52423323B46742889788389",
+      "shared_boundary_m_screen": 35228.763
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B30851290743950",
+      "right_id": "gb:USA:ADM2:52423323B85210970682519",
+      "shared_boundary_m_screen": 71049.458
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B30851290743950",
+      "right_id": "gb:USA:ADM2:52423323B89179227732038",
+      "shared_boundary_m_screen": 49512.697
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B31115231658227",
+      "right_id": "gb:USA:ADM2:52423323B61595109476273",
+      "shared_boundary_m_screen": 92452.567
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B31115231658227",
+      "right_id": "gb:USA:ADM2:52423323B86430023400928",
+      "shared_boundary_m_screen": 110850.131
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B32791313624567",
+      "right_id": "gb:USA:ADM2:52423323B35530413742416",
+      "shared_boundary_m_screen": 31.837
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B32791313624567",
+      "right_id": "gb:USA:ADM2:52423323B40988222589259",
+      "shared_boundary_m_screen": 41513.135
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B32791313624567",
+      "right_id": "gb:USA:ADM2:52423323B53834689647106",
+      "shared_boundary_m_screen": 128432.467
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B32791313624567",
+      "right_id": "gb:USA:ADM2:52423323B67037278576088",
+      "shared_boundary_m_screen": 65684.573
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B32791313624567",
+      "right_id": "gb:USA:ADM2:52423323B96573779490833",
+      "shared_boundary_m_screen": 15105.446
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B33569460093340",
+      "right_id": "gb:USA:ADM2:52423323B35530413742416",
+      "shared_boundary_m_screen": 25106.81
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B33569460093340",
+      "right_id": "gb:USA:ADM2:52423323B51466238870881",
+      "shared_boundary_m_screen": 110596.989
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B33569460093340",
+      "right_id": "gb:USA:ADM2:52423323B93114504552564",
+      "shared_boundary_m_screen": 62474.547
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B34460466024259",
+      "right_id": "gb:USA:ADM2:52423323B60811948646652",
+      "shared_boundary_m_screen": 83.186
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B34460466024259",
+      "right_id": "gb:USA:ADM2:52423323B84556352970709",
+      "shared_boundary_m_screen": 42165.024
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B34460466024259",
+      "right_id": "gb:USA:ADM2:52423323B90997065310094",
+      "shared_boundary_m_screen": 52076.149
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B34460466024259",
+      "right_id": "gb:USA:ADM2:52423323B95554273469006",
+      "shared_boundary_m_screen": 79524.511
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B35530413742416",
+      "right_id": "gb:USA:ADM2:52423323B40988222589259",
+      "shared_boundary_m_screen": 95462.177
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B36348564143669",
+      "right_id": "gb:USA:ADM2:52423323B89179227732038",
+      "shared_boundary_m_screen": 150370.08
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B37240473864365",
+      "right_id": "gb:USA:ADM2:52423323B47648516235098",
+      "shared_boundary_m_screen": 92193.37
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B37240473864365",
+      "right_id": "gb:USA:ADM2:52423323B62695195222235",
+      "shared_boundary_m_screen": 134684.045
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B37417643745911",
+      "right_id": "gb:USA:ADM2:52423323B39454223771984",
+      "shared_boundary_m_screen": 28520.07
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B37417643745911",
+      "right_id": "gb:USA:ADM2:52423323B42957866846180",
+      "shared_boundary_m_screen": 36975.224
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B37417643745911",
+      "right_id": "gb:USA:ADM2:52423323B940291063109",
+      "shared_boundary_m_screen": 35079.991
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B39454223771984",
+      "right_id": "gb:USA:ADM2:52423323B42957866846180",
+      "shared_boundary_m_screen": 74595.809
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B39454223771984",
+      "right_id": "gb:USA:ADM2:52423323B43221954300759",
+      "shared_boundary_m_screen": 1748.803
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B39454223771984",
+      "right_id": "gb:USA:ADM2:52423323B48598289352775",
+      "shared_boundary_m_screen": 55806.457
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B40988222589259",
+      "right_id": "gb:USA:ADM2:52423323B46742889788389",
+      "shared_boundary_m_screen": 65351.506
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B41205581888996",
+      "right_id": "gb:USA:ADM2:52423323B48171180316739",
+      "shared_boundary_m_screen": 35407.525
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B41205581888996",
+      "right_id": "gb:USA:ADM2:52423323B6642778687362",
+      "shared_boundary_m_screen": 47811.214
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B41898924582889",
+      "right_id": "gb:USA:ADM2:52423323B56416092773024",
+      "shared_boundary_m_screen": 140514.142
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B41898924582889",
+      "right_id": "gb:USA:ADM2:52423323B62056349216099",
+      "shared_boundary_m_screen": 27491.062
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B41898924582889",
+      "right_id": "gb:USA:ADM2:52423323B67588574079428",
+      "shared_boundary_m_screen": 33992.524
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B41898924582889",
+      "right_id": "gb:USA:ADM2:52423323B77111199665921",
+      "shared_boundary_m_screen": 98301.593
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B42525268241117",
+      "right_id": "gb:USA:ADM2:52423323B49571098968478",
+      "shared_boundary_m_screen": 89480.55
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B42525268241117",
+      "right_id": "gb:USA:ADM2:52423323B63323326586067",
+      "shared_boundary_m_screen": 30433.667
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B42525268241117",
+      "right_id": "gb:USA:ADM2:52423323B72053512524977",
+      "shared_boundary_m_screen": 97336.758
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B42525268241117",
+      "right_id": "gb:USA:ADM2:52423323B86430023400928",
+      "shared_boundary_m_screen": 13136.745
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B42866910888908",
+      "right_id": "gb:USA:ADM2:52423323B61595109476273",
+      "shared_boundary_m_screen": 144660.744
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B42866910888908",
+      "right_id": "gb:USA:ADM2:52423323B93817319778568",
+      "shared_boundary_m_screen": 41557.404
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B42957866846180",
+      "right_id": "gb:USA:ADM2:52423323B43221954300759",
+      "shared_boundary_m_screen": 76901.151
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B43213790326288",
+      "right_id": "gb:USA:ADM2:52423323B48044581252464",
+      "shared_boundary_m_screen": 23643.829
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B43213790326288",
+      "right_id": "gb:USA:ADM2:52423323B89011069533198",
+      "shared_boundary_m_screen": 61909.818
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B43221954300759",
+      "right_id": "gb:USA:ADM2:52423323B62056349216099",
+      "shared_boundary_m_screen": 44830.542
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B43221954300759",
+      "right_id": "gb:USA:ADM2:52423323B95554273469006",
+      "shared_boundary_m_screen": 38786.045
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B44496470224494",
+      "right_id": "gb:USA:ADM2:52423323B67805499468895",
+      "shared_boundary_m_screen": 92129.49
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B44496470224494",
+      "right_id": "gb:USA:ADM2:52423323B89293656609241",
+      "shared_boundary_m_screen": 132071.293
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B46695716253077",
+      "right_id": "gb:USA:ADM2:52423323B75131784459442",
+      "shared_boundary_m_screen": 9693.15
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B46742889788389",
+      "right_id": "gb:USA:ADM2:52423323B85210970682519",
+      "shared_boundary_m_screen": 35592.165
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B47648516235098",
+      "right_id": "gb:USA:ADM2:52423323B62695195222235",
+      "shared_boundary_m_screen": 136354.84
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B48044581252464",
+      "right_id": "gb:USA:ADM2:52423323B94422507286019",
+      "shared_boundary_m_screen": 38962.105
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B48171180316739",
+      "right_id": "gb:USA:ADM2:52423323B67588574079428",
+      "shared_boundary_m_screen": 53207.746
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B48171180316739",
+      "right_id": "gb:USA:ADM2:52423323B89293656609241",
+      "shared_boundary_m_screen": 82558.049
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B49571098968478",
+      "right_id": "gb:USA:ADM2:52423323B63323326586067",
+      "shared_boundary_m_screen": 7419.385
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B49571098968478",
+      "right_id": "gb:USA:ADM2:52423323B86430023400928",
+      "shared_boundary_m_screen": 200676.827
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B49571098968478",
+      "right_id": "gb:USA:ADM2:52423323B88547646561946",
+      "shared_boundary_m_screen": 92882.039
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B49571098968478",
+      "right_id": "gb:USA:ADM2:52423323B93817319778568",
+      "shared_boundary_m_screen": 48864.266
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B51130837096991",
+      "right_id": "gb:USA:ADM2:52423323B67227670427960",
+      "shared_boundary_m_screen": 141482.179
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B51130837096991",
+      "right_id": "gb:USA:ADM2:52423323B91201263130085",
+      "shared_boundary_m_screen": 60286.766
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B51466238870881",
+      "right_id": "gb:USA:ADM2:52423323B81740617288229",
+      "shared_boundary_m_screen": 81158.136
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B51466238870881",
+      "right_id": "gb:USA:ADM2:52423323B9068998137459",
+      "shared_boundary_m_screen": 53297.554
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B51466238870881",
+      "right_id": "gb:USA:ADM2:52423323B93114504552564",
+      "shared_boundary_m_screen": 22229.122
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B51466238870881",
+      "right_id": "gb:USA:ADM2:52423323B96573779490833",
+      "shared_boundary_m_screen": 2153.53
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B53834689647106",
+      "right_id": "gb:USA:ADM2:52423323B67037278576088",
+      "shared_boundary_m_screen": 22758.285
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B5435817984489",
+      "right_id": "gb:USA:ADM2:52423323B6642778687362",
+      "shared_boundary_m_screen": 41195.926
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B5435817984489",
+      "right_id": "gb:USA:ADM2:52423323B68447963014117",
+      "shared_boundary_m_screen": 7037.934
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B5435817984489",
+      "right_id": "gb:USA:ADM2:52423323B78495074223375",
+      "shared_boundary_m_screen": 159484.026
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B5435817984489",
+      "right_id": "gb:USA:ADM2:52423323B90997065310094",
+      "shared_boundary_m_screen": 39765.962
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B56416092773024",
+      "right_id": "gb:USA:ADM2:52423323B62056349216099",
+      "shared_boundary_m_screen": 29695.142
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B56416092773024",
+      "right_id": "gb:USA:ADM2:52423323B63323326586067",
+      "shared_boundary_m_screen": 14476.306
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B56416092773024",
+      "right_id": "gb:USA:ADM2:52423323B72053512524977",
+      "shared_boundary_m_screen": 128826.171
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B58326499473481",
+      "right_id": "gb:USA:ADM2:52423323B7193910850758",
+      "shared_boundary_m_screen": 73838.989
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B58326499473481",
+      "right_id": "gb:USA:ADM2:52423323B79616802808075",
+      "shared_boundary_m_screen": 18899.506
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B58326499473481",
+      "right_id": "gb:USA:ADM2:52423323B83269960896154",
+      "shared_boundary_m_screen": 33261.044
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B58326499473481",
+      "right_id": "gb:USA:ADM2:52423323B83834618329235",
+      "shared_boundary_m_screen": 72263.769
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B60811948646652",
+      "right_id": "gb:USA:ADM2:52423323B6642778687362",
+      "shared_boundary_m_screen": 99316.994
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B60811948646652",
+      "right_id": "gb:USA:ADM2:52423323B80620838081699",
+      "shared_boundary_m_screen": 36402.646
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B60811948646652",
+      "right_id": "gb:USA:ADM2:52423323B84556352970709",
+      "shared_boundary_m_screen": 100112.736
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B60811948646652",
+      "right_id": "gb:USA:ADM2:52423323B90997065310094",
+      "shared_boundary_m_screen": 65940.447
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B62056349216099",
+      "right_id": "gb:USA:ADM2:52423323B77111199665921",
+      "shared_boundary_m_screen": 23314.039
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B62056349216099",
+      "right_id": "gb:USA:ADM2:52423323B84556352970709",
+      "shared_boundary_m_screen": 66449.851
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B62056349216099",
+      "right_id": "gb:USA:ADM2:52423323B95554273469006",
+      "shared_boundary_m_screen": 32733.225
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B63323326586067",
+      "right_id": "gb:USA:ADM2:52423323B72053512524977",
+      "shared_boundary_m_screen": 56849.651
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B63323326586067",
+      "right_id": "gb:USA:ADM2:52423323B88547646561946",
+      "shared_boundary_m_screen": 74657.957
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B6642778687362",
+      "right_id": "gb:USA:ADM2:52423323B90997065310094",
+      "shared_boundary_m_screen": 25461.91
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B67037278576088",
+      "right_id": "gb:USA:ADM2:52423323B96573779490833",
+      "shared_boundary_m_screen": 39882.0
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B67227670427960",
+      "right_id": "gb:USA:ADM2:52423323B67805499468895",
+      "shared_boundary_m_screen": 1773.87
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B67227670427960",
+      "right_id": "gb:USA:ADM2:52423323B78495074223375",
+      "shared_boundary_m_screen": 101447.926
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B67588574079428",
+      "right_id": "gb:USA:ADM2:52423323B77111199665921",
+      "shared_boundary_m_screen": 21621.491
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B67588574079428",
+      "right_id": "gb:USA:ADM2:52423323B80620838081699",
+      "shared_boundary_m_screen": 12754.716
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B67805499468895",
+      "right_id": "gb:USA:ADM2:52423323B78495074223375",
+      "shared_boundary_m_screen": 20375.992
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B68447963014117",
+      "right_id": "gb:USA:ADM2:52423323B75131784459442",
+      "shared_boundary_m_screen": 34732.834
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B68447963014117",
+      "right_id": "gb:USA:ADM2:52423323B78495074223375",
+      "shared_boundary_m_screen": 21184.383
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B68447963014117",
+      "right_id": "gb:USA:ADM2:52423323B90997065310094",
+      "shared_boundary_m_screen": 73341.333
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B7193910850758",
+      "right_id": "gb:USA:ADM2:52423323B96573779490833",
+      "shared_boundary_m_screen": 87663.106
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B75131784459442",
+      "right_id": "gb:USA:ADM2:52423323B90997065310094",
+      "shared_boundary_m_screen": 28943.406
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B77111199665921",
+      "right_id": "gb:USA:ADM2:52423323B80620838081699",
+      "shared_boundary_m_screen": 93911.459
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B77111199665921",
+      "right_id": "gb:USA:ADM2:52423323B84556352970709",
+      "shared_boundary_m_screen": 8830.686
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B79616802808075",
+      "right_id": "gb:USA:ADM2:52423323B83834618329235",
+      "shared_boundary_m_screen": 70989.329
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B80620838081699",
+      "right_id": "gb:USA:ADM2:52423323B84556352970709",
+      "shared_boundary_m_screen": 17761.893
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B83269960896154",
+      "right_id": "gb:USA:ADM2:52423323B83834618329235",
+      "shared_boundary_m_screen": 89772.762
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B84556352970709",
+      "right_id": "gb:USA:ADM2:52423323B95554273469006",
+      "shared_boundary_m_screen": 37174.806
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B85210970682519",
+      "right_id": "gb:USA:ADM2:52423323B89179227732038",
+      "shared_boundary_m_screen": 65963.669
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B85210970682519",
+      "right_id": "gb:USA:ADM2:52423323B94422507286019",
+      "shared_boundary_m_screen": 55761.271
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B87301828944684",
+      "right_id": "gb:USA:ADM2:52423323B91201263130085",
+      "shared_boundary_m_screen": 108334.092
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B88547646561946",
+      "right_id": "gb:USA:ADM2:52423323B93817319778568",
+      "shared_boundary_m_screen": 83434.758
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B88547646561946",
+      "right_id": "gb:USA:ADM2:52423323B940291063109",
+      "shared_boundary_m_screen": 68026.526
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B9068998137459",
+      "right_id": "gb:USA:ADM2:52423323B93114504552564",
+      "shared_boundary_m_screen": 131168.52
+    },
+    {
+      "left_id": "gb:USA:ADM2:52423323B93817319778568",
+      "right_id": "gb:USA:ADM2:52423323B940291063109",
+      "shared_boundary_m_screen": 75632.646
+    }
+  ],
+  "current_location_pair_count": 226,
+  "interpretation": "A difference between named source graph sets identifies an exact comparison lead. It does not justify changing shared county boundaries without source/scale and neighboring-owner review. The four San Bernardino portions are coarsened to their original county only for county-neighbor comparison; their internal ecoregion seams remain in current_assigned_location_edges."
+}

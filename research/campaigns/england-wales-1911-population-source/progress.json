@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "england-wales-1911-population-source",
+  "branch": "research/england-wales-1911-population-source",
+  "base_main_commit": "d64c7c313b9e82ddd45e89092a864b8605d193a8",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/27",
+  "date_timezone": "UTC",
+  "scope": {
+    "geographies": ["England and Wales combined aggregate; table context includes source-era parliamentary, administrative and registration counties; no modern crosswalk"],
+    "attributes": ["area, schedule-count proxy, and population table definition; one combined population total"],
+    "supported_window": "Single census observation, 2 April 1911",
+    "source_version": "Census Office, Census of England and Wales, 1911: Summary Tables, published 1915; Internet Archive scan identifier censusofenglandw1911grea"
+  },
+  "updated_at_utc": "2026-10-03T11:55:00Z",
+  "geographic_release": null,
+  "input_paths": ["source-manifest.json", "source-evaluation.md"],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Checked existing source campaigns; no England and Wales 1911 source evaluation was present. South Africa 1911 is a distinct source and territory.",
+    "Retrieved and hashed the 1915 official summary tables scan, Internet Archive metadata and OCR derivative; visually checked printed table 5 and extracted its combined population row.",
+    "Recorded the census night, schedule-count definition, source-era geographic systems, population count caveat, access/licensing status and unresolved rights questions."
+  ],
+  "source_gaps": [
+    "No subnational rows or other census volumes were transcribed; local administrative systems would require separate review.",
+    "No independent undercount estimate or crosswalk to modern territorial units was established.",
+    "Internet Archive gives no item-specific reuse license or formal public-domain determination."
+  ],
+  "blockers": ["No complete regional approval certificate with exact permitted subjects and matching release pins for imports; this work remains source-only."],
+  "next_action": "Submit one focused source-evaluation PR, verify exact-head checks and serialized squash merge, release issue #27, then continue with the next ready unclaimed history-research issue.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

@@ -1,0 +1,80 @@
+{
+  "campaign_id": "sa-census-1911-cape-source",
+  "github_issue": 57,
+  "retrieved_at_utc": "2026-10-03",
+  "source_edition": {
+    "title": "Census of the Union of South Africa Report. 1911",
+    "issuing_office": "South Africa Census Office",
+    "publisher": "Government Printing and Stationery Office, Pretoria",
+    "publication_date": "1912-1913 (LSE Digital Library catalogue date)",
+    "census_reference": "1911 census; official preliminary-return bibliographic record specifies census taken 7 May 1911",
+    "source_record": "https://digital.library.lse.ac.uk/Documents/Detail/census-of-the-union-of-south-africa-report.-1911/519918",
+    "source_record_item_id": 519918,
+    "library_catalogue_link": "https://librarysearch.lse.ac.uk/permalink/f/1jad15a/44LSE_ALMA_DS21114947940002021",
+    "collection": "South African Censuses",
+    "digitization_extent": "803 page images in the LSE document viewer",
+    "source_page_11_url": "https://digital.library.lse.ac.uk/Documents/Detail/census-of-the-union-of-south-africa-report.-1911/519918?item=519929",
+    "source_page_12_url": "https://digital.library.lse.ac.uk/Documents/Detail/census-of-the-union-of-south-africa-report.-1911/519918?item=519930",
+    "page_11_scan_bytes": 3474588,
+    "page_11_scan_sha256": "6ee4e4b1acac862eb98e10c55b486aa64c1196823728e3fde27349ee793ac168",
+    "page_12_scan_bytes": 3484930,
+    "page_12_scan_sha256": "41f092188323fe245ff90262de2b4349d90e49ebf891445fa8aff954bc931dff",
+    "record_page_bytes": 1138942,
+    "record_page_sha256": "6fc03a9044bc9da23b02d5026d4c3b1cd24524a47f38dd91ddb9ede10a007ac3",
+    "date_corroboration": {
+      "title": "Census, 1911. Preliminary returns of census taken on 7th May, 1911.",
+      "catalogue_record": "https://openlibrary.org/books/OL6190506M/Census_1911.",
+      "catalogue_json": "https://openlibrary.org/books/OL6190506M.json",
+      "record_bytes": 1034,
+      "record_sha256": "244d87c252ca4839fd0790c5fa62f81ba64979849651d3458c7abf589545667b",
+      "note": "This contemporaneous official preliminary-return edition is used only to resolve the observation date; no preliminary-return counts are transcribed here."
+    },
+    "restoration": "Open the LSE source record and select viewer item 519929 (printed pages X-XI) or 519930 (printed pages XII-XIII). The viewer issues time-limited download tokens; regenerate them from the public record page when restoring and verify the downloaded single-page PDF hashes above. The record page HTML hash is a separate catalogue snapshot, not the whole report PDF."
+  },
+  "license_and_attribution": {
+    "source_host_rights_label": "The LSE item metadata labels the scan 'No Known Copyright' and links to its about/terms page.",
+    "license": "No explicit Creative Commons or other reuse license was identified for the scan during this review.",
+    "rights_status": "LSE's 'No Known Copyright' is a rights-status label, not a license grant. The underlying 1912-1913 government publication is old; applicable copyright and scan-reuse terms were not independently adjudicated here.",
+    "attribution_statement": "Cite South Africa Census Office, Census of the Union of South Africa Report. 1911, Part I, Population and Dwellings, and the LSE Digital Library scan.",
+    "caveat": "The Stats SA site was not accessible from this retrieval session (anti-bot interstitial). No unrelated third-party scan was used. Confirm redistribution terms before downstream publication."
+  },
+  "evaluated_tables": [
+    {
+      "part": "Part I—Population and Dwellings",
+      "location": "Printed pages X-XI, LSE viewer item 519929",
+      "table_description": "Opening reconciliation table with preliminary returns, final returns, and increase (number and percent), by Union and Province, shown under All Races, European or White Race, and Other than European or White Race headings.",
+      "unit": "Union or named source-era Province; count unit is persons",
+      "retained_illustrative_row": {
+        "source_geography": "Cape of Good Hope (source row label)",
+        "category": "All Races",
+        "preliminary_1911_returns_persons": "2,563,024",
+        "final_1911_returns_persons": "2,564,965",
+        "published_increase_persons": "1,941",
+        "published_increase_percent": "0.08"
+      }
+    },
+    {
+      "table": "Table I, General Comparison—All Races",
+      "location": "Definition in Part I, printed page XI",
+      "table_description": "Comparative 1911 and 1904 summary for the Union and each Province, classified under European, Bantu, and Mixed/other Coloured race distinctions; no Table I values transcribed in this packet.",
+      "unit": "Union and Province"
+    },
+    {
+      "table": "Schedule B",
+      "location": "Referenced in Part I, printed page XIII as page clxx",
+      "table_description": "Detailed return of population increases and decreases in each district, grouped geographically; not inspected or transcribed, retained here only to distinguish district-level scope from the province aggregate.",
+      "unit": "District (source description; subunit type not resolved by this evaluation)"
+    }
+  ],
+  "methods": {
+    "retrieval": "Fetched the public LSE record page and individual page PDFs for viewer items 519929 and 519930; recorded exact bytes and SHA-256. No whole-report copy was retained.",
+    "inspection": "Rendered page 11 and page 12 scans for visual reading. The image text is legible at high resolution; the viewer exposes no machine transcript for these images (isAvTranscribed=false). Numeric values were read visually from the printed table and checked against the table's stated increase (2,564,965 minus 2,563,024 equals 1,941). No OCR values used.",
+    "territorial_scope": "Only the named source-era Cape of Good Hope province row was transcribed. The report's opening table is province-level, not municipality or settlement-level. It separately points to a district increase/decrease schedule; that schedule is outside this sample. The report also notes geographic boundary changes between earlier comparisons, which are not converted into modern geographies.",
+    "uncertainty": "No source geometry, district membership, municipality/settlement table, census undercount interval, or individual-response record was evaluated. The opening table's preliminary/final difference is a source-published revision, not an uncertainty interval."
+  },
+  "illustrative_rows": {
+    "count": 1,
+    "limit": 25,
+    "note": "One Cape Province all-races reconciliation row is transcribed from the scan. The two race subcategory totals are not copied here."
+  }
+}

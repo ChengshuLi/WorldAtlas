@@ -1,0 +1,61 @@
+{
+  "campaign_id": "japan-1920-population-source",
+  "github_issue": 28,
+  "retrieved_at_utc": "2026-10-03",
+  "source_edition": {
+    "collection_title": "大正９年国勢調査 (Taishō 9 Census)",
+    "publisher": "総務省統計局 (Statistics Bureau of Japan); current historical catalogue served by e-Stat, the Portal Site of Official Statistics of Japan",
+    "official_collection_url": "https://www.e-stat.go.jp/stat-search/files?tclass=000001026563&cycle=0&layout=datalist",
+    "official_table_record_url": "https://www.e-stat.go.jp/stat-search/files?layout=datalist&cycle=0&toukei=00200521&tstat=000001036875&tclass1=000001036876&tclass2val=0&stat_infid=000007900849",
+    "table_title_original": "面積及人口－府県",
+    "table_title_translation": "Area and Population—Prefectures",
+    "table_number": 2,
+    "observation_date_precision": "Year only: e-Stat labels 調査年月 as 1920年. A precise census day was not established from the retained table/catalogue evidence.",
+    "observation_year": 1920,
+    "publication_date": "Original report publication date not established from the inspected table scan. e-Stat lists public/update date 2014-06-10 for this PDF.",
+    "pdf_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000007900849&fileKind=2",
+    "pdf_bytes": 48071,
+    "pdf_sha256": "9f6991f913495eb0378f79eecc6ff44dcbba0a919bc1e6935d06054ed70d1d8e",
+    "pdf_pages": 1,
+    "collection_page_bytes": 249937,
+    "collection_page_sha256": "ad403daef0ed9654ff5785a07652d99593cdac3010ea75c7eb7b0227508b3e14",
+    "restoration": "Retrieve the official table PDF URL and verify 48,071 bytes and SHA-256 above. The source table is a one-page scan. The collection page URL identifies the historical collection and current table catalogue."
+  },
+  "license_and_attribution": {
+    "terms_title": "政府統計の総合窓口（e-Stat）利用規約 (Terms of Use for e-Stat)",
+    "terms_url": "https://www.e-stat.go.jp/terms-of-use",
+    "terms_snapshot_retrieved_utc": "2026-10-03",
+    "terms_snapshot_bytes": 132027,
+    "terms_snapshot_sha256": "b20b14e1740943d1269c3b09e230468ae738dfc058a311c44212eb6828fe799a",
+    "terms_summary": "The terms allow copying, public transmission, translation, adaptation and commercial use with source attribution. Edited or processed content must say it was edited and must not be presented as if produced by the Japanese government. The terms identify compatibility with CC BY 4.0. Third-party rights may still apply; the specific historical PDF has no item-specific license field visible in the inspected record.",
+    "attribution": "Statistics Bureau of Japan, Taishō 9 Census, table 2, via e-Stat. State that the displayed table/example was transcribed from the scan and independently prepared; do not imply government endorsement."
+  },
+  "evaluated_tables": [
+    {
+      "location": "Table 2, one-page PDF scan",
+      "title": "面積及人口－府県 (Area and Population—Prefectures)",
+      "source_geographic_unit": "The table's national row 全国 and source-era 府県 (prefectures). No modern geography crosswalk is included.",
+      "variables": ["area (unit shown in the scan; not transcribed here)", "population total", "men", "women", "women per 100 men", "persons per square ri", "persons per 10,000 of national population"],
+      "count_unit": "Persons for population columns; exact denominator/universe is not defined on this table page.",
+      "illustrative_rows": [
+        {
+          "source_geography": "全国",
+          "population_total": "55,963,053",
+          "men": "28,044,185",
+          "women": "27,918,868",
+          "check": "Men plus women equals printed total. Values manually read from the scanned national row."
+        }
+      ]
+    }
+  ],
+  "additional_collection_definitions_seen": [
+    "Table 3: 人口－府県別市部及郡部 (population by prefecture, city and county divisions)",
+    "Table 4: 人口階級別市町村数及人口－府県 (municipality counts and population by population-size class and prefecture)"
+  ],
+  "methods": {
+    "retrieval": "Downloaded the official e-Stat table PDF and saved the collection HTML and current terms-of-use HTML snapshots; byte lengths and SHA-256 values are recorded.",
+    "inspection": "Rendered the scanned PDF at high resolution and visually reviewed the page. Text extraction returned no usable text; OCR was not used as a numeric authority. One national row was transcribed and checked arithmetically.",
+    "territorial_scope": "The table is organized as a national total plus source-era prefectures. The table's inclusion/territorial notes were not established from this single scanned page; no claim is made about modern Japan's extent or equivalence, nor are individual places mapped to atlas territories.",
+    "uncertainty": "Only the observation year is evidenced in the e-Stat table listing; the exact census day and source population universe are not established here. The scan's numbers are visually legible for the national example, but no independent transcription or coverage/undercount assessment was performed."
+  }
+}

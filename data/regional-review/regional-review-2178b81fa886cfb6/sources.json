@@ -1,0 +1,212 @@
+{
+  "issue": 487,
+  "snapshot_utc": "2026-10-03",
+  "sources": [
+    {
+      "id": "geoboundaries-USA-ADM1-2018",
+      "title": "geoBoundaries gbOpen USA ADM1",
+      "publisher": "U.S. Census Bureau MAF/TIGER (as source-declared by geoBoundaries)",
+      "boundary_vintage": "2018",
+      "metadata_source_update": "Thu Jan 19 07:31:04 2023",
+      "geoboundaries_build_date": "2023-12-12",
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/USA/ADM1/geoBoundaries-USA-ADM1.geojson",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/USA/ADM1/geoBoundaries-USA-ADM1-metaData.json",
+      "source_role": "States (56 source features; California and Washington matched by exact names). Current framework `province` nodes are state-level geographic parents, sourced by `gb:USA:ADM1`.",
+      "license": "Public Domain (source metadata declaration; underlying Census data are federal public data).",
+      "retained_metadata": {
+        "path": "sources/geoboundaries-USA-ADM1-metadata.json",
+        "bytes": 943,
+        "sha256": "7b7f8ad3e6b160b6196ad4c2c9a29a8087c0d61521352ae599d8311d1560b006"
+      },
+      "retained_data": {
+        "path": "sources/geoboundaries-USA-ADM1-2018.geojson.gz",
+        "compressed_bytes": 3992002,
+        "compressed_sha256": "0161ad23641a5f292e65b592a5c2a6823d6c47f32e1688e0cd96513e990c7416",
+        "uncompressed_bytes": 13282737,
+        "uncompressed_sha256": "d4f7426c7ba3c49b958b7219fc1503409bab2948efe5917998101d921d77bcf1"
+      },
+      "restoration": "Fetch the pinned canonical URL; verify the uncompressed SHA-256 and count 56."
+    },
+    {
+      "id": "geoboundaries-USA-ADM2-2018",
+      "title": "geoBoundaries gbOpen USA ADM2",
+      "publisher": "U.S. Census Bureau MAF/TIGER (as source-declared by geoBoundaries)",
+      "boundary_vintage": "2018",
+      "metadata_source_update": "Thu Jan 19 07:31:04 2023",
+      "geoboundaries_build_date": "2023-12-12",
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2-metaData.json",
+      "source_role": "Counties/county equivalents (ADM2, 3,233 whole-USA features). The complete assigned CA/WA roster is 97: California 58 and Washington 39. 96 current county rows match distinct source shapes; San Bernardino is the one predecessor represented by four ecoregion portions.",
+      "license": "Public Domain (geoBoundaries source metadata declaration; Census origin).",
+      "retained_metadata": {
+        "path": "sources/geoboundaries-USA-ADM2-metadata.json",
+        "bytes": 939,
+        "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f"
+      },
+      "retained_data": {
+        "path": "sources/geoboundaries-USA-ADM2-2018.geojson.gz",
+        "compressed_bytes": 3264221,
+        "compressed_sha256": "f42991ac50eb7d6fab5ae50de404e4d198957316aec3035f8018bdd2bca8044a",
+        "uncompressed_bytes": 10500644,
+        "uncompressed_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+      },
+      "restoration": "Fetch the pinned canonical URL; verify the uncompressed SHA-256 and source feature count 3,233."
+    },
+    {
+      "id": "tigerline-USA-COUNTY-2024",
+      "title": "TIGER/Line Shapefiles 2024 — County and Equivalent",
+      "publisher": "U.S. Census Bureau",
+      "source_vintage": "2024 (county layer DBF_DATE_LAST_UPDATE 2024-09-16; archive Last-Modified 2025-06-27)",
+      "canonical_url": "https://www2.census.gov/geo/tiger/TIGER2024/COUNTY/tl_2024_us_county.zip",
+      "national_archive_bytes": 83913260,
+      "national_archive_sha256": "04e668d3502757c837c13444730547cd967f28a2c49aeffb873d1792ab2cb97b",
+      "national_archive_license": "U.S. federal Census geographic data; public-domain use.",
+      "full_archive_retained": false,
+      "retained_selected_neighbor_features": {
+        "path": "sources/tigerline-2024-western-county-neighbors.geojson.gz",
+        "compressed_bytes": 5850604,
+        "compressed_sha256": "b4da7a5c442821e798c71945ba63f5ca279e18e1dca0355e714b495e2c294180",
+        "uncompressed_bytes": 24421108,
+        "uncompressed_sha256": "c3e0207e569b57e73f30c804a4e0c5f973af9189ad94919fd1c57b912591a07d"
+      },
+      "selection": "OGR extraction of counties in STATEFP 04, 06, 16, 32, 41, 53 (Arizona, California, Idaho, Nevada, Oregon, Washington). 209 polygons from the official national TIGER/Line 2024 source, retaining the assigned counties and all plausible contiguous domestic county neighbors.",
+      "assigned_county_roster": "97 complete CA/WA source counties: 58 California plus 39 Washington; every 2018 geoBoundaries source county has a 2024 state/name/GEOID counterpart.",
+      "attributes": "GEOID/STATEFP/COUNTYFP, NAMELSAD, CLASSFP, ALAND and AWATER retained in the selected GeoJSON.",
+      "restoration": "Download canonical national archive, verify 83,913,260 bytes and SHA-256 above, run `ogr2ogr -f GeoJSON <output> /vsizip/<archive>/tl_2024_us_county.shp tl_2024_us_county -where \"STATEFP IN ('04','06','16','32','41','53')\"`, then compare the uncompressed selected subset hash in this registry. Do not treat ALAND/AWATER as a sovereignty determination."
+    },
+    {
+      "id": "tigerline-California-PLACES-2024",
+      "title": "TIGER/Line 2024 Places, California",
+      "publisher": "U.S. Census Bureau",
+      "source_vintage": "2024 (DBF_DATE_LAST_UPDATE 2024-09-13)",
+      "canonical_url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_06_place.zip",
+      "feature_count": 1618,
+      "license": "U.S. federal Census geographic data; public-domain use.",
+      "retained": {
+        "path": "sources/tigerline-2024-ca-places.zip",
+        "bytes": 9792773,
+        "sha256": "81b827124043164a93d442f6dc4c088fd56c319da14195e4a14ab0fb39656a42"
+      },
+      "source_role": "Incorporated places and Census Designated Places; official populated-place polygon screen, not every named settlement."
+    },
+    {
+      "id": "tigerline-Washington-PLACES-2024",
+      "title": "TIGER/Line 2024 Places, Washington",
+      "publisher": "U.S. Census Bureau",
+      "source_vintage": "2024 (DBF_DATE_LAST_UPDATE 2024-09-13)",
+      "canonical_url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_53_place.zip",
+      "feature_count": 639,
+      "license": "U.S. federal Census geographic data; public-domain use.",
+      "retained": {
+        "path": "sources/tigerline-2024-wa-places.zip",
+        "bytes": 2856695,
+        "sha256": "7da61ba276bfdd886ffeb36bf9af37a99a42f8c446e47c684ae48087d86657c6"
+      },
+      "source_role": "Incorporated places and Census Designated Places; official populated-place polygon screen, not every named settlement."
+    },
+    {
+      "id": "resolve-ecoregions-USA-San-Bernardino-2017",
+      "title": "RESOLVE Ecoregions and Biomes, ArcGIS FeatureServer layer 0",
+      "publisher": "RESOLVE, Esri",
+      "item_url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+      "feature_service_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer",
+      "layer_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0",
+      "source_vintage": "2017; layer data last edit 2022-01-27",
+      "license": "CC BY 4.0 (ArcGIS item metadata and feature-level LICENSE field).",
+      "retained_item_metadata": {
+        "path": "sources/resolve-arcgis-item-metadata.json",
+        "bytes": 8638,
+        "sha256": "5ac94f88d5b6d75e7e5619a05fc0cdcce803906004fbd7648f60cd9dfd3a8b85"
+      },
+      "retained_service_metadata": {
+        "path": "sources/resolve-feature-service-metadata.json",
+        "bytes": 3399,
+        "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15"
+      },
+      "retained_layer_metadata": {
+        "path": "sources/resolve-layer0-metadata.json",
+        "bytes": 25682,
+        "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3"
+      },
+      "retained_features": {
+        "path": "sources/resolve-ca-ecoregions-4.geojson.gz",
+        "compressed_bytes": 950355,
+        "compressed_sha256": "9de311610407f2fdf18c522d56d4fca09782bba819d1c5159a355c248e635f11",
+        "uncompressed_bytes": 2682904,
+        "uncompressed_sha256": "5d2361a9b85508ecff1db34528f018fc0fdaddaca1aafc5dc993a303cec9b41c"
+      },
+      "query_receipt": "resolve-query-receipt.json",
+      "source_suitability": "Natural/ecological ecoregions. Suitable physical geography evidence; not administrative county membership or political ownership."
+    },
+    {
+      "id": "GSHHG-full-resolution-2.3.7",
+      "title": "Global Self-consistent Hierarchical High-resolution Geography Database, full-resolution land",
+      "publisher": "Wessel and Smith; University of Hawaiʻi / NOAA repository",
+      "release_date": "2017-06-15",
+      "canonical_archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+      "archive_bytes": 118617033,
+      "archive_sha256": "28600e8f7a08645aab43079326df6504212ec5ccb2b4bcf3b5f4f12ed60e82bc",
+      "binary_member": "gshhs_f.b",
+      "member_bytes": 95809336,
+      "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+      "license": "LGPLv3 or later; complete license text retained as sources/gshhg-LGPL.txt.",
+      "retained_scope_data": {
+        "path": "sources/gshhg-pacific-land-candidates.bin.gz",
+        "compressed_bytes": 5122132,
+        "compressed_sha256": "6e90ac5c64fd3fe992363fee2870ee582213e6ba51c20049606e934ccb69425a",
+        "uncompressed_bytes": 7111924,
+        "uncompressed_sha256": "a4c364f83f7c9d982b8c3ab7c251105ce59a56d72b743cc77fc5405c7cbc3a6c"
+      },
+      "screen_report": "gshhg-pacific-screen.json",
+      "restoration": "Fetch and verify the pinned archive hash, extract `gshhs_f.b`, verify member hash, then run `screen_gshhg.py`. Retained subset contains complete matched GSHHG records only; unmatched global records are restored from the canonical archive.",
+      "license_file": {
+        "path": "sources/gshhg-LGPL.txt",
+        "bytes": 7651,
+        "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+        "retention_note": "Canonical license text retained; line endings normalized from CRLF to LF for repository whitespace checks."
+      }
+    },
+    {
+      "id": "geoboundaries-CAN-ADM3-2016-Abbotsford",
+      "title": "geoBoundaries gbOpen Canada ADM3, Abbotsford feature",
+      "publisher": "Statistics Canada (source-declared geoBoundaries publisher)",
+      "source_vintage": "2016",
+      "geoboundaries_build_date": "2023-12-12",
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/CAN/ADM3/geoBoundaries-CAN-ADM3.geojson",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/CAN/ADM3/geoBoundaries-CAN-ADM3-metaData.json",
+      "full_source_feature_count": 5162,
+      "full_source_bytes": 42649707,
+      "full_source_sha256": "9d292ebf9a09010fc81ee5fa69683b4a8ba1b0d969bb20f6b90ffc587d3f215f",
+      "license": "Open Data Commons Open Database License 1.0",
+      "retained_metadata": {
+        "path": "sources/geoboundaries-CAN-ADM3-metadata.json",
+        "bytes": 964,
+        "sha256": "19e2016e68d7a8a5a0691490f2f5a1df5b85f37cf2087deac6cb770a7fcc43ec"
+      },
+      "retained_feature": {
+        "path": "sources/geoboundaries-CAN-Abbotsford-ADM3-feature.geojson.gz",
+        "shapeID": "43193130B1191968375732",
+        "compressed_bytes": 2207,
+        "compressed_sha256": "b171f897a77518c13e0335da1f1ef71daf11ba1db7f73dc6c7677e39b1f5fc78",
+        "uncompressed_bytes": 5050,
+        "uncompressed_sha256": "198b9fb2fc7cdd2198f23a9805489b3e63cb005a2c0e0ae443cf96b20937eca6",
+        "original_geometry_sha256": "f1a8d1e88ae36afea2c6a74354b07c67d7730d74e22fd3d3aa16c7f7e4933d80"
+      },
+      "source_role": "One named local administrative territory used only to screen a current Whatcom County / Abbotsford contact. The source metadata reports topology_conflicts=1 and notes original source boundaries may differ. This is not bilateral international boundary evidence.",
+      "restoration": "Fetch the pinned complete GeoJSON, verify full source bytes and SHA-256, select exact shapeID above, then verify retained feature checksum."
+    }
+  ],
+  "baseline": {
+    "source": "Published WorldAtlas current main, issue #487 v5 scope; exact IDs and geography release pins are in scope.json and issue-metadata.json.",
+    "region_geometry_sha256": "7697f7a1a388f6b3e289ef00795cdb5e86bf9138f89eb97ec8d19bcfa1c131a9",
+    "member_ids_sha256": "3e060c8e712c4955bdb2996d4edf3b9271aaa8d0120501171cc7327e10797aaf",
+    "region_release": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+    },
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"
+  },
+  "retention_and_methods": "No inaccessible source claims are filled by inference. Full USA 2018 geoBoundaries sources and all CA/WA 2024 Census Places archives are lawfully retained. The national Census TIGER/Line county ZIP is recorded by exact bytes/hash; its reproducible six-state selected features are retained to avoid duplicating the 84 MB national download. The cross-border contact screen additionally retains the exact Abbotsford ADM3 feature from pinned geoBoundaries Canada; its full-layer hash/size and selected-feature hash are recorded. Its topology warning limits use to a candidate contact screen."
+}

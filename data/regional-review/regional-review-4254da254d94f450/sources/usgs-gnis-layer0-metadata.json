@@ -1,0 +1,277 @@
+{
+  "currentVersion": 11.3,
+  "cimVersion": "3.3.0",
+  "id": 0,
+  "name": "Administrative",
+  "type": "Feature Layer",
+  "description": "",
+  "geometryType": "esriGeometryMultipoint",
+  "sourceSpatialReference": {
+    "wkid": 4326,
+    "latestWkid": 4326,
+    "xyTolerance": 8.983152841195215e-09,
+    "zTolerance": 0.002,
+    "mTolerance": 0.001,
+    "falseX": -400,
+    "falseY": -400,
+    "xyUnits": 999999999.9999999,
+    "falseZ": -100000,
+    "zUnits": 1000,
+    "falseM": -100000,
+    "mUnits": 10000
+  },
+  "copyrightText": "",
+  "parentLayer": null,
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "simple",
+      "symbol": {
+        "type": "esriPMS",
+        "url": "f131b6766187eae9fea2a4ff655a3768",
+        "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAcElEQVQYlZ3QMQqDUBCE4Q/iJbxDriLBIq1Vau9hk5AymMITeC0liF4hBCQ8Xp4gGdhilp/d2c3sVPYvWKDEC3cMKfCCNvAVjphjsI6m5zjjEYOHRLRvLwSfuAb+s7JPgTcsOGFCg3Hr6m6tH+3+4xvvNw9LMWsUbgAAAABJRU5ErkJggg==",
+        "contentType": "image/png",
+        "width": 7,
+        "height": 7,
+        "angle": 0,
+        "xoffset": 0,
+        "yoffset": 0
+      }
+    },
+    "scaleSymbols": false,
+    "transparency": 0,
+    "labelingInfo": [
+      {
+        "labelExpression": "[gaz_name]",
+        "labelPlacement": "esriServerPointLabelPlacementAboveRight",
+        "deconflictionStrategy": "dynamic",
+        "removeDuplicates": "none",
+        "stackLabel": false,
+        "useCodedValues": true,
+        "maxScale": 0,
+        "minScale": 10000000,
+        "name": "Default",
+        "priority": 4,
+        "symbol": {
+          "type": "esriTS",
+          "color": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "backgroundColor": null,
+          "borderLineColor": null,
+          "borderLineSize": null,
+          "verticalAlignment": "bottom",
+          "horizontalAlignment": "left",
+          "rightToLeft": false,
+          "angle": 0,
+          "xoffset": 0,
+          "yoffset": 0,
+          "kerning": true,
+          "haloColor": [
+            250,
+            250,
+            250,
+            255
+          ],
+          "haloSize": 0.75,
+          "font": {
+            "family": "Segoe UI Semibold",
+            "size": 10,
+            "style": "normal",
+            "weight": "normal",
+            "decoration": "none"
+          }
+        }
+      }
+    ]
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": -179.09417379999996,
+    "ymin": -14.541606638999951,
+    "xmax": 179.8339094170001,
+    "ymax": 71.40333390800008,
+    "spatialReference": {
+      "wkid": 4326,
+      "latestWkid": 4326,
+      "xyTolerance": 8.983152841195215e-09,
+      "zTolerance": 0.001,
+      "mTolerance": 0.001,
+      "falseX": -400,
+      "falseY": -400,
+      "xyUnits": 11258999068426.24,
+      "falseZ": -100000,
+      "zUnits": 10000,
+      "falseM": -100000,
+      "mUnits": 10000
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeNone",
+  "displayField": "gaz_name",
+  "typeIdField": null,
+  "subtypeFieldName": null,
+  "subtypeField": null,
+  "defaultSubtypeCode": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "shape",
+      "type": "esriFieldTypeGeometry",
+      "alias": "shape",
+      "domain": null
+    },
+    {
+      "name": "gaz_name",
+      "type": "esriFieldTypeString",
+      "alias": "gaz_name",
+      "length": 120,
+      "domain": null
+    },
+    {
+      "name": "gaz_featureclass",
+      "type": "esriFieldTypeString",
+      "alias": "gaz_featureclass",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "state_alpha",
+      "type": "esriFieldTypeString",
+      "alias": "state_alpha",
+      "length": 1073741822,
+      "domain": null
+    },
+    {
+      "name": "county_name",
+      "type": "esriFieldTypeString",
+      "alias": "county_name",
+      "length": 100,
+      "domain": null
+    },
+    {
+      "name": "objectid_1",
+      "type": "esriFieldTypeInteger",
+      "alias": "objectid",
+      "domain": null
+    },
+    {
+      "name": "isunknowncoords",
+      "type": "esriFieldTypeInteger",
+      "alias": "isunknowncoords",
+      "domain": null
+    },
+    {
+      "name": "gaz_id",
+      "type": "esriFieldTypeInteger",
+      "alias": "gaz_id",
+      "domain": null
+    },
+    {
+      "name": "fcode",
+      "type": "esriFieldTypeInteger",
+      "alias": "fcode",
+      "domain": null
+    },
+    {
+      "name": "incounty_id",
+      "type": "esriFieldTypeInteger",
+      "alias": "incounty_id",
+      "domain": null
+    }
+  ],
+  "geometryField": {
+    "name": "shape",
+    "type": "esriFieldTypeGeometry",
+    "alias": "shape"
+  },
+  "indexes": [
+    {
+      "name": "FDO_OBJECTID",
+      "fields": "OBJECTID",
+      "isAscending": true,
+      "isUnique": true,
+      "description": ""
+    },
+    {
+      "name": "FDO_shape",
+      "fields": "shape",
+      "isAscending": true,
+      "isUnique": false,
+      "description": ""
+    }
+  ],
+  "subtypes": [],
+  "relationships": [],
+  "canModifyLayer": true,
+  "canScaleSymbols": false,
+  "hasLabels": true,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 2000,
+  "supportsStatistics": true,
+  "supportsExceedsLimitStatistics": true,
+  "supportsAdvancedQueries": true,
+  "hasZ": true,
+  "supportedQueryFormats": "JSON, geoJSON, PBF",
+  "isDataVersioned": false,
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  },
+  "useStandardizedQueries": true,
+  "supportedSpatialRelationships": [
+    "esriSpatialRelIntersects",
+    "esriSpatialRelContains",
+    "esriSpatialRelCrosses",
+    "esriSpatialRelEnvelopeIntersects",
+    "esriSpatialRelIndexIntersects",
+    "esriSpatialRelOverlaps",
+    "esriSpatialRelTouches",
+    "esriSpatialRelWithin",
+    "esriSpatialRelRelation"
+  ],
+  "advancedQueryCapabilities": {
+    "useStandardizedQueries": true,
+    "supportsStatistics": true,
+    "supportsPercentileStatistics": true,
+    "supportsHavingClause": true,
+    "supportsOrderBy": true,
+    "supportsDistinct": true,
+    "supportsCountDistinct": true,
+    "supportsAdvancedQueryRelated": true,
+    "supportsQueryRelatedPagination": true,
+    "supportsPagination": true,
+    "supportsLod": false,
+    "supportsQueryWithLodSR": false,
+    "supportsTrueCurve": true,
+    "supportsQueryWithDatumTransformation": true,
+    "supportsReturningQueryExtent": true,
+    "supportsQueryWithDistance": true,
+    "supportsSqlExpression": true,
+    "supportsTimeRelation": true,
+    "supportsSqlFormat": false,
+    "supportsQueryAnalytic": false,
+    "supportsCurrentUserQueries": true
+  },
+  "supportsDatumTransformation": true,
+  "dateFieldsTimeReference": null,
+  "preferredTimeReference": null,
+  "datesInUnknownTimezone": false,
+  "hasMetadata": true,
+  "isDataArchived": false,
+  "archivingInfo": {
+    "supportsQueryWithHistoricMoment": false,
+    "startArchivingMoment": -1
+  },
+  "supportsCoordinatesQuantization": true,
+  "supportsDynamicLegends": true
+}

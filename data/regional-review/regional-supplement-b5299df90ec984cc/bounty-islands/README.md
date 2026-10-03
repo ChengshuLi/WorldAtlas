@@ -1,0 +1,35 @@
+# Bounty Islands evidence review — #521
+
+Review date: 2026-10-03. This is an evidence packet only. No shared parent, footprint, geometry, grid, source policy, or live record is changed. It does not approve historical imports or the complete New Zealand region.
+
+## Findings
+
+**Named group role: justified. Exact land-family completeness: insufficient evidence.** The Department of Conservation (DOC) identifies the Bounty Islands as 22 bare granite rocks, divided roughly into Main, Centre, and East groups, with total land mass about 135 ha. This supports one named island-group subject. It does not provide a complete named rock gazetteer or a georeferenced shoreline on the reviewed page.
+
+The exact OSM response named in the issue profile is retained at data/macro-improvements/macro-coverage-oceania/osm-28c1ddf724e1.xml.gz. Its decompressed SHA-256 matches the profile exactly. The extract contains 27/27 closed natural=coastline rings, no missing node references or open chains, all inside the fetch envelope. Every ring is unnamed and is inventoried by way ID, source version/timestamp, area, and bounds in assessment.json. Their reconstructed combined area is 0.501561 km², and the existing repository audit finds all 27 absent from current location footprints.
+
+The independent 2017 GSHHG full-resolution comparison includes 14 polygons totaling 2.769635 km²; all are absent from current footprints. DOC’s approximate 1.35 km² estimate falls between these measurements, but does not establish a mapping between sources. The 27 OSM rings cannot be asserted to be 27 of DOC’s 22 rocks, and the 14 GSHHG polygons are not crosswalked to either family. Differences in source vintage, shoreline generalization, exposed-rock definition, and method remain unquantified.
+
+No permanent settlement is identified by DOC’s geographic description. The source extract contains no named coastline feature or settlement inventory. This finding does not assert that people have never visited or landed on the islands. The extract has no closed water rings; the group is not an atoll and no lagoon component should be inferred. No anonymous administrative remainder, detached political territory, or neighbor was added.
+
+## Tier and parent chain
+
+Current parent chain: Bounty Islands location → Bounty Islands province → New Zealand Outlying Islands area → New Zealand and Southwest Pacific Islands region → Australasia → Oceania. Its location and one-child province have the same intended named-island scope. No source establishes an ordinary local-government/province unit for the rocks; the province is a coextensive geographic wrapper. Similar wrappers appear for sibling outlying groups, but repetition alone does not justify the tier. Keep it unchanged until regional integration either records a consistent geographic-tier exception for all six area members or coordinates a tier simplification.
+
+The shared area scope declares six member territories. The other five current province members are Auckland Islands, Campbell Islands, Antipodes Islands, Kermadec Islands, and The Snares. DOC and UNESCO group five of these (Snares, Bounty, Antipodes, Auckland, Campbell) as New Zealand’s Subantarctic Islands. Kermadec is a more northerly, subtropical group, so “New Zealand Outlying Islands” is broader than the physical subantarctic grouping. This is a whole-parent semantic question for regional integration; this one-member issue leaves all five original sibling packets and parent membership untouched.
+
+No inter-region boundary inconsistency is asserted. The source anchor lies at approximately 47°45′S, 179°03′E; DOC places the group about 700 km east-southeast of New Zealand. The New Zealand outlying-island region membership is a fixed published route and is not a claim about sovereign ownership. No political or historical attributes are inferred from the protected-area, UNESCO, or parent records.
+
+## Canonical evidence and lawful reproduction
+
+- DOC, [Bounty Islands](https://www.doc.govt.nz/parks-and-recreation/places-to-go/southland/places/subantarctic-islands/bounty-islands/), retrieved 2026-10-03. DOC sitemap lastmod was 2026-04-28. The retained page-content hash is recorded in assessment.json; no DOC page bytes are redistributed because the page states no open reuse license. Restore later from the canonical URL and record the new retrieval date/hash. Its 135 ha is an approximate page statement, not a cadastral survey.
+- UNESCO World Heritage Centre, [New Zealand Sub-Antarctic Islands](https://whc.unesco.org/en/list/877/), retrieved 2026-10-03. No page text or image bytes are redistributed. The page supports the five-group subantarctic classification and marine conservation context, not title or WorldAtlas boundaries. Revisit the canonical URL and record a new hash before reuse.
+- OpenStreetMap, [API map extract](https://api.openstreetmap.org/api/0.6/map?bbox=178.97,-47.83,179.13,-47.67), retrieved 2026-10-02. Retained compressed/decompressed bytes and SHA-256 values are in assessment.json. ODbL 1.0 applies, with attribution © OpenStreetMap contributors. The bbox is only a request envelope. To restore, fetch the exact URL and require decompressed SHA-256 9bb048bfe6efb335bffbe08bda484a0283571eb7b6f839e9e0e99268ca8f177c; a changed live result is a new source vintage and must not replace these bytes.
+- GSHHG full resolution 2.3.7, source family released 2017, LGPLv3 or later. The official project is https://www.soest.hawaii.edu/pwessel/gshhg/; the pinned 2.3.7 upstream archive is https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-bin-2.3.7.zip. The byte-exact selected records, compressed and native hashes, archive/member hashes, size, LGPL license and extraction method are recorded in assessment.json and data/macro-improvements/macro-coverage-oceania/gshhg-extraction.json. The full polygon inventory used by the comparison is in assessment.json. Follow the extraction manifest and source README for restoration/reproduction; do not substitute a newer release without treating it as a new comparison.
+- OpenStreetMap, [copyright and license](https://www.openstreetmap.org/copyright), retrieved 2026-10-03, ODbL 1.0 attribution and share-alike terms.
+
+Source identity is osm:named-land:nz-subantarctic-bounty, retrieved as osm-api-2026-10-02; source profile correction follow-up is #501. Source role is a current dry-land reference family, not a historical effective interval or approved geometry policy. The fetch window is not a territory boundary. EU5 counts are not quotas.
+
+## Recommended follow-up
+
+Regional integration should coordinate the full six-member parent and resolve the coextensive province-tier policy consistently. A separate bounded engineering source issue should validate an authoritative modern Bounty coastline/island inventory, crosswalk the 22 DOC rocks against OSM and GSHHG components, and define the shoreline/exposed-rock convention before any footprint integration. Preserve all three source families and the explicit disagreement until then.

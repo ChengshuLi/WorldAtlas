@@ -1,0 +1,144 @@
+{
+  "retrieved_utc": "2026-10-03",
+  "sources": [
+    {
+      "id": "geoboundaries-col-adm2",
+      "title": "geoBoundaries Colombia ADM2 (2020, 1,122 features)",
+      "publisher": "geoBoundaries; boundary source DANE (Departamento Administrativo Nacional de Estadística)",
+      "date": "boundary year 2020; source data update 2023-01-19; build 2023-12-12",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM2/geoBoundaries-COL-ADM2.geojson",
+      "license": "CC BY 4.0; preserve geoBoundaries/DANE attribution",
+      "metadata_file": "sources/geoboundaries-COL-ADM2-metadata.json.gz",
+      "restoration": "Fetch the pinned media.githubusercontent.com URL; the corresponding raw GitHub URL is an LFS pointer. Decompress retained source and verify uncompressed SHA-256."
+    },
+    {
+      "id": "geoboundaries-col-adm1",
+      "title": "geoBoundaries Colombia ADM1 (2017, 33 features; parent context only)",
+      "publisher": "geoBoundaries; source OpenStreetMap / Wambacher",
+      "date": "boundary year 2017; source data update 2023-01-19; build 2023-12-12",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM1/geoBoundaries-COL-ADM1.geojson",
+      "license": "ODbL 1.0 per geoBoundaries metadata",
+      "metadata_file": "sources/geoboundaries-COL-ADM1-metadata.json.gz",
+      "restoration": "Fetch the pinned media endpoint and verify the retained hash. Vintage/source does not settle current department geometry; DANE official DIVIPOLA used for names/counts only."
+    },
+    {
+      "id": "dane-divipola-municipios",
+      "title": "DIVIPOLA—Códigos municipios",
+      "publisher": "DANE, via Datos Abiertos Colombia / Socrata dataset gdxc-w37w",
+      "date": "administrative roster cutoff 2024-12-30; retrieved 2026-10-03",
+      "url": "https://www.datos.gov.co/resource/gdxc-w37w.json?$limit=50000",
+      "metadata_url": "https://www.datos.gov.co/api/views/gdxc-w37w.json",
+      "license": "CC BY-SA 4.0 (dataset metadata)",
+      "restoration": "Fetch API metadata and the complete resource JSON with limit 50000; verify retained compressed and uncompressed hashes."
+    },
+    {
+      "id": "dane-divipola-departamentos",
+      "title": "DIVIPOLA—Códigos departamentos",
+      "publisher": "DANE, via Datos Abiertos Colombia / Socrata dataset vcjz-niiq",
+      "date": "administrative roster cutoff 2024-12-30; retrieved 2026-10-03",
+      "url": "https://www.datos.gov.co/resource/vcjz-niiq.json?$limit=1000",
+      "metadata_url": "https://www.datos.gov.co/api/views/vcjz-niiq.json",
+      "license": "CC BY-SA 4.0 (dataset metadata)",
+      "restoration": "Fetch API metadata and all rows; verify retained hashes."
+    },
+    {
+      "id": "dane-centros-poblados",
+      "title": "DIVIPOLA—Códigos cabeceras / Centros poblados",
+      "publisher": "DANE, via Datos Abiertos Colombia / Socrata dataset xaxy-8nri",
+      "date": "administrative roster cutoff 2024-12-30; retrieved 2026-10-03",
+      "url": "https://www.datos.gov.co/resource/xaxy-8nri.json?$limit=50000",
+      "metadata_url": "https://www.datos.gov.co/api/views/xaxy-8nri.json",
+      "license": "CC BY-SA 4.0 (dataset metadata)",
+      "restoration": "Fetch API metadata and all rows; verify retained hashes. DANE describes CM as cabecera municipal, CP as centro poblado, ANM as área no municipalizada."
+    }
+  ],
+  "retained_files": [
+    {
+      "file": "sources/dane-divipola-centros-poblados-data.json.gz",
+      "compressed_bytes": 188086,
+      "compressed_sha256": "5f1ec3f0e2db4122e63b9c35e0857c6f1190de4f8a6ac0c85e32779f8b4b5067",
+      "uncompressed_bytes": 2181182,
+      "uncompressed_sha256": "d57ba7534c91511aabe3c3ef910abd7f9596670dfaf09f42bee452c7aa0ccbaf",
+      "canonical_url": null
+    },
+    {
+      "file": "sources/dane-divipola-centros-poblados-metadata.json.gz",
+      "compressed_bytes": 3374,
+      "compressed_sha256": "de30cbe4c3bcd5d460ce25030c0c5cc38ae9ba0ca9fb3f35ab3ab2fefc22f108",
+      "uncompressed_bytes": 18244,
+      "uncompressed_sha256": "14a999ede0fbf568521204dfc8cb7d45ed950ece4287db5123be6fdf5aacd382",
+      "canonical_url": null
+    },
+    {
+      "file": "sources/dane-divipola-departamentos-data.json.gz",
+      "compressed_bytes": 1002,
+      "compressed_sha256": "09fe662d72214e191e46b67bc01eabb4cd2d4e4565d8ae86fdae2be16cbd1247",
+      "uncompressed_bytes": 3811,
+      "uncompressed_sha256": "fdd11f714ddb7db01cb8d97b088aa167177ef0462bf35d960b764587246ea9f9",
+      "canonical_url": null
+    },
+    {
+      "file": "sources/dane-divipola-departamentos-metadata.json.gz",
+      "compressed_bytes": 2326,
+      "compressed_sha256": "ea56db47e932f4310d1d17f1eef2e289317b97ce17c1bca1452411346ec31db0",
+      "uncompressed_bytes": 10546,
+      "uncompressed_sha256": "3667559e7b33dde02f16799e15ffbc67cb1d0ba65b2ee05dbe78537c656ed277",
+      "canonical_url": null
+    },
+    {
+      "file": "sources/dane-divipola-municipios-data.json.gz",
+      "compressed_bytes": 23981,
+      "compressed_sha256": "c278288a9de9d0727a14ba54799a146a5784230418a5153c8c0b355c17dd9560",
+      "uncompressed_bytes": 172803,
+      "uncompressed_sha256": "1028ab04c10a08fa860dd89e621de1eb9246710a56102c915f0988ae9e10d63d",
+      "canonical_url": null
+    },
+    {
+      "file": "sources/dane-divipola-municipios-metadata.json.gz",
+      "compressed_bytes": 2831,
+      "compressed_sha256": "7d6e0190e1a98a136c78e3017104f226d3237cd2a430ab0e86ff12ca814744cc",
+      "uncompressed_bytes": 14686,
+      "uncompressed_sha256": "5d68df9d973916fe2867bb68c23bece618a888eec9c682c6f8127dfdc97701c3",
+      "canonical_url": null
+    },
+    {
+      "file": "sources/geoboundaries-COL-ADM1-geojson.json.gz",
+      "compressed_bytes": 2569301,
+      "compressed_sha256": "bd9fea0bb711e999b0b3b7672014a366bc3877651de8e7dc2811695a6b43cfee",
+      "uncompressed_bytes": 8898990,
+      "uncompressed_sha256": "5e058b9e44eb4c83e4a33ea507c636029d08ddc6c93797f6963de99bf3f7cef2",
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM1/geoBoundaries-COL-ADM1.geojson"
+    },
+    {
+      "file": "sources/geoboundaries-COL-ADM1-metadata.json.gz",
+      "compressed_bytes": 437,
+      "compressed_sha256": "79aece1154e46290b88a16771aff810cea9be048599d353fa14ebfa025dd1648",
+      "uncompressed_bytes": 819,
+      "uncompressed_sha256": "a88c4f5ca647e1f491dc718994f90b3cfdea81609fbb9fcf10d48362fbad296b",
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM1/geoBoundaries-COL-ADM1-metaData.json"
+    },
+    {
+      "file": "sources/geoboundaries-COL-ADM2-geojson.json.gz",
+      "compressed_bytes": 65999525,
+      "compressed_sha256": "33a3bfedf3d11d3da9d434072ba3672419e92ba6b655ab56911aee7eb14f6dc5",
+      "uncompressed_bytes": 210605856,
+      "uncompressed_sha256": "fe715854fc3383d2fd39e8692f3df0c60bd12208cb2cd36ef1ec2220ea8972fe",
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM2/geoBoundaries-COL-ADM2.geojson"
+    },
+    {
+      "file": "sources/geoboundaries-COL-ADM2-metadata.json.gz",
+      "compressed_bytes": 510,
+      "compressed_sha256": "395bf4f4fb76fa4e945f7cf2bb79817688cacdde79ac268c33d73b36ec3b8ffb",
+      "uncompressed_bytes": 974,
+      "uncompressed_sha256": "89c779be4b254a019a46f4c37d7ae24dcf41ff48b6d805d8cc9aceadef8165ff",
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/COL/ADM2/geoBoundaries-COL-ADM2-metaData.json"
+    }
+  ],
+  "methods": {
+    "administrative_join": "Compare each source geoBoundaries shape ID with its indexed subject, then link to one unique DANE 2024 municipality by normalized department/name; four documented name variants use explicit within-department aliases and are individually flagged.",
+    "settlement_assessment": "Join every DANE centros poblados row by 5-digit DIVIPOLA municipality code; record CM/CP type counts for every subject. DANE center records do not imply all dispersed or unnamed habitation is inventoried.",
+    "geometry_comparison": "Reprojected current simplified subject geometry and pinned 2020 geoBoundaries geometry to EPSG:6933, compared area and symmetric-difference area with GDAL/OGR; invalid overlays retained as unresolved. No geometry changed.",
+    "hierarchy": "Follow each current parent ID through the published hierarchy to continent; cross-check municipality scope and assigned counts against DANE DIVIPOLA.",
+    "uncertainty": "No legal claims are derived from modern ownership/reference metadata. Area and boundary topology, regional limits and complete physical land/settlement inventory are not certified."
+  }
+}

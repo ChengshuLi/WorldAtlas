@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "campaign_id": "copdem-glo90-spacing-correction",
+  "github_issue": 566,
+  "retrieved_at_utc": "2026-10-03",
+  "supersedes": {
+    "issue": 67,
+    "campaign_id": "copdem-sahara-20261003-a44eff82017e",
+    "preserved_evidence_paths": [
+      "research/campaigns/copdem-sahara-20261003-a44eff82017e/source-evaluation.md",
+      "research/campaigns/copdem-sahara-20261003-a44eff82017e/source-manifest.json"
+    ],
+    "incorrect_text_occurrences": [
+      "source-evaluation.md selected-product paragraph: 30 arc-second spacing",
+      "source-evaluation.md finding 2: 0.0008333333 degrees (30 arc-seconds)",
+      "source-manifest.json AWS README use: GLO-90 30-arc-second spacing"
+    ],
+    "corrected_pixel_spacing": "approximately 3 arc-seconds; the filename token 30 is not the measured physical pixel spacing"
+  },
+  "sources": [
+    {
+      "name": "Copernicus DEM public AWS readme.html",
+      "url": "https://copernicus-dem-30m.s3.amazonaws.com/readme.html",
+      "http_status": 200,
+      "bytes": 8536,
+      "sha256": "922461d55070e3c7e0cf2903ec54190d69e3773da2dc9e776a3f03566cfd56d2",
+      "version": "No explicit edition/version in document; exact response bytes/hash and retrieval date pin this recheck",
+      "exact_relevant_text": "[resolution] - resolution in arc seconds (not meters!), which is 10 for GLO-30, and 30 for GLO-90.",
+      "interpretation": "Readme describes filename token Copernicus_DSM_COG_[resolution]_... as resolution in arc seconds and assigns 30 to GLO-90. This conflicts with selected COG header measurement (about 3 arc-seconds); preserve/document the discrepancy, and do not use the filename token as a substitute for physical grid spacing."
+    },
+    {
+      "name": "Selected Copernicus DEM GLO-90 COG header range",
+      "url": "https://copernicus-dem-90m.s3.amazonaws.com/Copernicus_DSM_COG_30_N25_00_E010_00_DEM/Copernicus_DSM_COG_30_N25_00_E010_00_DEM.tif",
+      "retrieved_bytes": 8192,
+      "request": "Range: bytes=0-8191",
+      "http_status": 206,
+      "sha256": "c6cbabc9864020e8a3a41aa98a1571d64e563e5362f953216a002419e801b83e",
+      "etag": "\"21d34038701c0af27eafe970c8d55679\"",
+      "last_modified": "2022-05-09T12:51:59Z",
+      "method": "GDAL gdalinfo -json -noct on the returned TIFF header bytes; no raster cells read."
+    }
+  ],
+  "header_observations": {
+    "dimensions_pixels": [1200, 1200],
+    "crs": "EPSG:4326",
+    "geotransform": [9.9995833333333337, 0.0008333333333333, 0, 26.0004166666666663, 0, -0.0008333333333333],
+    "angular_increment_degrees": 0.0008333333333333,
+    "arc_seconds_calculation": "0.0008333333333333 × 3600 = 2.99999999988 arc-seconds; independently, 3600 arc-seconds per degree / 1200 pixels per degree = 3 arc-seconds per pixel.",
+    "tile_name_token": "30",
+    "tile_name_token_interpretation": "Distribution filename component; do not restate as the measured physical pixel spacing for this COG."
+  },
+  "retained_original_full_tile_sha256": "d038b51d42a2686c203e1e87ee3866594e9d9905d67326e424ec45103373aafc",
+  "methods": [
+    "Retrieved the exact public README URL and compared full response size/SHA-256 to the earlier source manifest; inspected its filename convention wording.",
+    "Fetched the first 8192 bytes of the already identified public COG using a byte range and ran GDAL header inspection; no full raster or pixel values used.",
+    "Calculated angular grid spacing from the header increment and independently from 3600 arc-seconds per degree divided by 1200 pixels per degree."
+  ],
+  "preserved_context": {
+    "acquisition": "Earlier evidence records product-wide 2011–2015 acquisition frame with older gap-fill sources possible; this tile has no verified acquisition date. Unchanged.",
+    "surface": "Digital Surface Model including structures/vegetation; not a bare-earth DTM. Unchanged.",
+    "license": "COP-DEM-GLO-90-F full/free/open conditions and required notice/disclaimer remain as earlier documented. Unchanged.",
+    "behavior": "Evidence correction only; no installed or published behavior changes."
+  },
+  "no_private_credentials_used": true,
+  "no_raster_values_or_imports": true,
+  "no_geography_schema_or_classification_changes": true
+}

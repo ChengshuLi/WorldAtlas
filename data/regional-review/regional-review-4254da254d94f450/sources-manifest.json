@@ -1,0 +1,213 @@
+{
+  "issue": 485,
+  "manifest_generated_utc": "2026-10-03",
+  "method": "SHA-256 over the exact retained file bytes; gzip digests are over compressed bytes. For downloaded ZIPs, this is the upstream archive byte stream. Uncompressed source-response hashes and derived source IDs/counts are kept in each acquisition receipt/build report.",
+  "files": [
+    {
+      "path": "sources/aafc-bc-scope-ecoregions.geojson.gz",
+      "bytes": 817001,
+      "sha256": "915cdeb7dc028d7ce9a7e563ffecc5653121c2afd132abf24c7bb2ac59f2bb44"
+    },
+    {
+      "path": "sources/aafc-ecoregions-item-metadata.json",
+      "bytes": 6337,
+      "sha256": "dc089505c3858f98774d03574a00f8ca35ad4b6419c450dd0e740bb9f9602b24"
+    },
+    {
+      "path": "sources/aafc-ecoregions-layer-metadata.json",
+      "bytes": 13366,
+      "sha256": "59cf889bc9ebb717f1994a9b06b731768b25431fcfb3a0a611476a8be0bcba57"
+    },
+    {
+      "path": "sources/canadian-geographical-names-item-metadata.json",
+      "bytes": 24022,
+      "sha256": "a553280b4a8d954df435b4684677788d922f71c653ce85ee3f0d330c7ef71930"
+    },
+    {
+      "path": "sources/canadian-geographical-names-layer-metadata.json",
+      "bytes": 22063,
+      "sha256": "49451d5e01d693531498bec2de7d536594f881bf29d9a7966c1df190de1af682"
+    },
+    {
+      "path": "sources/canadian-geographical-names-populated-places-BC.geojson.gz",
+      "bytes": 157224,
+      "sha256": "6863a835d8c599ec28bc81b587beb59540c7708835212ca9f1e637e3c7d1074b"
+    },
+    {
+      "path": "sources/canadian-geographical-names-query-receipt.json",
+      "bytes": 1363,
+      "sha256": "9881c16d018bb854492eaafbf269f74ee380c7d9fcef557ffadd103563feda15"
+    },
+    {
+      "path": "sources/current-parent-chains.json.gz",
+      "bytes": 106481,
+      "sha256": "aa0c1643d376baa9b7478d26886510718d3c0e242782df004e2defd028938290"
+    },
+    {
+      "path": "sources/current-scope-and-parents.geojson.gz",
+      "bytes": 280642,
+      "sha256": "7ac3154985ef3bf5aae5b978481233e3a73c0ef6b2a753e1c7a15cef4c9302bb"
+    },
+    {
+      "path": "sources/geoboundaries-CAN-ADM3-2016.geojson",
+      "bytes": 42649707,
+      "sha256": "9d292ebf9a09010fc81ee5fa69683b4a8ba1b0d969bb20f6b90ffc587d3f215f"
+    },
+    {
+      "path": "sources/geoboundaries-CAN-ADM3-source-metadata.json",
+      "bytes": 2229,
+      "sha256": "08da867c995a28fb3fb07299b394a3674dee8a29aec72e9c37b605cd19186625"
+    },
+    {
+      "path": "sources/geoboundaries-USA-ADM1-assigned-5-states.geojson.gz",
+      "bytes": 107499,
+      "sha256": "a4512876fa2642b33e484e738163656d33271c002afd124f30f9aae476aba039"
+    },
+    {
+      "path": "sources/geoboundaries-USA-ADM1-source-metadata.json",
+      "bytes": 2234,
+      "sha256": "c81ccc0eafc8cd3cdfdf7a2420f6114596035e5d93ffee477a1c1e8121f5cfd7"
+    },
+    {
+      "path": "sources/geoboundaries-USA-ADM2-assigned-5-states.geojson.gz",
+      "bytes": 262680,
+      "sha256": "b3bcd2a71e54b06047a66e092ef34dffa28747ced8e8ccbefc13720d5ec7fc51"
+    },
+    {
+      "path": "sources/geoboundaries-USA-ADM2-source-metadata.json",
+      "bytes": 2230,
+      "sha256": "0d4154762300f30f74c83ddc08bfd52ad7271187ebac7f8ce83692859a463439"
+    },
+    {
+      "path": "sources/gshhg-COPYING.LESSERv3.txt",
+      "bytes": 7651,
+      "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768"
+    },
+    {
+      "path": "sources/gshhg-LICENSE-notice.txt",
+      "bytes": 1351,
+      "sha256": "5514340b2f88d50385056d94ab364a48162fb66e83c468d2e67e09b9617256d2"
+    },
+    {
+      "path": "sources/gshhg-scope-land-candidates.bin.gz",
+      "bytes": 5548558,
+      "sha256": "a7c594d599d7e478089c3bb4cbede114342c1c6517c3c49e065e4a57964e5a5c"
+    },
+    {
+      "path": "sources/statistics-canada-bc-census-divisions-2021.geojson.gz",
+      "bytes": 38880150,
+      "sha256": "8a31cf19ad0694638c88275fec9ff1005970cd8600ca6baed245b8826756e9bf"
+    },
+    {
+      "path": "sources/statistics-canada-bc-census-subdivisions-2021.geojson.gz",
+      "bytes": 42765402,
+      "sha256": "a16ca45708ab0ccd898994e5e792187d5a108741c2ff6f5f9f74e91242206ad4"
+    },
+    {
+      "path": "sources/statistics-canada-bc-population-centres-2021.geojson.gz",
+      "bytes": 1339233,
+      "sha256": "511c74952f6a826503cbbee7907c749cceb2dd8ac0d2f8bf009f3f183fb3d86f"
+    },
+    {
+      "path": "sources/statistics-canada-census-divisions-item-metadata.json",
+      "bytes": 4371,
+      "sha256": "5d38ac185f0de830ff82862eb203234f55eae2ef19d8193cc94beae076401aa8"
+    },
+    {
+      "path": "sources/statistics-canada-census-divisions-layer-metadata.json",
+      "bytes": 14112,
+      "sha256": "1a589d5bf017178d8a420d2b6f8fd2c625577bed40ed8edfb2bbfecc51c19952"
+    },
+    {
+      "path": "sources/statistics-canada-census-subdivisions-item-metadata.json",
+      "bytes": 5542,
+      "sha256": "b25d9ff7ca905fcd9584dbd06bb1cef61460dbfb22ac4fc93743efaec90bd621"
+    },
+    {
+      "path": "sources/statistics-canada-census-subdivisions-layer-metadata.json",
+      "bytes": 18285,
+      "sha256": "2d134b376eeebcd8168aa8dc23bd04ab5e845b35e683c1875e40b7526fa189f9"
+    },
+    {
+      "path": "sources/statistics-canada-population-centres-item-metadata.json",
+      "bytes": 5000,
+      "sha256": "5f807497f12ddafd8ce1da04f99e928ad78b8914fbb8d4293c4c9e40157c3210"
+    },
+    {
+      "path": "sources/statistics-canada-population-centres-layer-metadata.json",
+      "bytes": 12665,
+      "sha256": "de82fb1fbe8d3fcbea8b5b4b08f317d1102d094af24be8999e51ee1099c44233"
+    },
+    {
+      "path": "sources/tigerline-2024-mountain-counties.geojson.gz",
+      "bytes": 4588573,
+      "sha256": "4847e5bdc1b1afb15b2729e350f57643ae41aa86c8814552e6b6cda19e9441f7"
+    },
+    {
+      "path": "sources/tigerline-2024-washington-counties.geojson.gz",
+      "bytes": 859249,
+      "sha256": "74c2822d327082e2738a8d93d59bc5eadf42590f7fef0941221e61deb36a4034"
+    },
+    {
+      "path": "sources/tigerline-shared-origin.json",
+      "bytes": 403,
+      "sha256": "dbfa60a293b3d453df63875501ea0c943875dde78f4efa79f77242af531d05df"
+    },
+    {
+      "path": "sources/tl_2024_04_place.zip",
+      "bytes": 2822728,
+      "sha256": "8f4971b0a3f6e025229befbc2ad9bdb55346463a1067d0cc610072b72860aca1"
+    },
+    {
+      "path": "sources/tl_2024_16_place.zip",
+      "bytes": 1050383,
+      "sha256": "b227cb21271654a28f5c06d981c3d8c215cfa3abaed038911124b5e9905e0cb0"
+    },
+    {
+      "path": "sources/tl_2024_30_place.zip",
+      "bytes": 2260157,
+      "sha256": "0c8c2a84b309f390cf59ee71cf70470eec921ec029162245e6ffd68d72bb416f"
+    },
+    {
+      "path": "sources/tl_2024_32_place.zip",
+      "bytes": 838199,
+      "sha256": "def5ba249c9d3e0697a66205ac822fb9b7de557818f69a749222a9100bdc21bf"
+    },
+    {
+      "path": "sources/tl_2024_49_place.zip",
+      "bytes": 1640516,
+      "sha256": "b1404bfbd5e80d505b270f3e20aa79b4cead51168c0d944e465e60585ddc8de6"
+    },
+    {
+      "path": "sources/usgs-gnis-layer0-metadata.json",
+      "bytes": 7103,
+      "sha256": "d91e5788bcd7500567f38d028dd778aa19458fb3a634d3f1311ddb396e3d520b"
+    },
+    {
+      "path": "sources/usgs-gnis-populated-places-AZ-ID-MT-NV-UT.geojson.gz",
+      "bytes": 390415,
+      "sha256": "2485cccdfc728a6d248b56cf8e5fb64db9f3ab19675e64880a523ae35d3679ff"
+    },
+    {
+      "path": "sources/usgs-gnis-query-receipt.json",
+      "bytes": 4046,
+      "sha256": "5bdaabd0162586f51522b5e8905d2283702a1ba4fe03082fc2158445f464a66e"
+    },
+    {
+      "path": "sources/usgs-gnis-service-metadata.json",
+      "bytes": 11531,
+      "sha256": "d0f8cf4f824bf20414d337258df6df1e9b2e82ed10248020d4bbac187ff46c0a"
+    },
+    {
+      "path": "ibc-source-receipt.json",
+      "bytes": 1342,
+      "sha256": "2ae8d582c6f37ecff618ce7e980e4be603d2337f1a3d27143b25032e81640847",
+      "note": "source restoration metadata; source archive not retained because no open redistribution terms were identified"
+    }
+  ],
+  "totals": {
+    "file_count": 40,
+    "retained_bytes": 147532043,
+    "largest_file_bytes": 42765402
+  }
+}

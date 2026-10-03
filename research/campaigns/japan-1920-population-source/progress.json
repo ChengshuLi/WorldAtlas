@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "japan-1920-population-source",
+  "branch": "research/japan-1920-population-source",
+  "base_main_commit": "7e3d8b24f764f01a0e4735c250746cefdd4dece6",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/28",
+  "date_timezone": "UTC",
+  "scope": {
+    "geographies": ["Japan 1920 census source: national row and source-era prefecture table units; no modern crosswalk"],
+    "attributes": ["population table definitions; national total and sex counts"],
+    "supported_window": "Single observation year 1920; exact day not verified",
+    "source_version": "Official Statistics Bureau of Japan Taishō 9 Census table 2 scan catalogued by e-Stat; digital public/update date 2014-06-10"
+  },
+  "updated_at_utc": "2026-10-03T12:05:00Z",
+  "geographic_release": null,
+  "input_paths": ["source-manifest.json", "source-evaluation.md"],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Checked retained source catalogues and campaigns; no prior Japan 1920 source evaluation was found.",
+    "Recorded the official e-Stat collection, table PDF, current reuse terms, hashes, retrieval method, and one manually verified national row.",
+    "Documented tables 3 and 4 as catalogue discoveries only; exact census day, population universe, territorial scope and full table coverage remain unresolved."
+  ],
+  "source_gaps": [
+    "Exact census day and original publication date not verified.",
+    "No definition of population universe, territorial inclusion note, coverage/undercount estimate, or modern prefecture crosswalk was established from the reviewed page.",
+    "City/county, municipality-class, and remaining census tables are not transcribed or evaluated."
+  ],
+  "blockers": ["No complete approved regional certificate, exact permitted subjects and matching release pins for imports; task remains source-only."],
+  "next_action": "Submit the focused source-evaluation PR, verify exact-head checks and serialized squash merge, release issue #28, then select the next ready unclaimed history-research issue.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

@@ -1,0 +1,33 @@
+{
+  "issue": 487,
+  "service_item": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+  "layer": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0",
+  "method": "GET query, outSR=4326, returnGeometry=true, f=geojson",
+  "where": "ECO_ID IN (422,424,433,435)",
+  "outFields": "FID,ECO_NAME,BIOME_NAME,REALM,ECO_BIOME_,NNH,ECO_ID,LICENSE",
+  "feature_count": 4,
+  "response_bytes": 2682904,
+  "response_sha256": "5d2361a9b85508ecff1db34528f018fc0fdaddaca1aafc5dc993a303cec9b41c",
+  "features": [
+    {
+      "eco_id": 422,
+      "name": "California coastal sage and chaparral",
+      "license": "CC-BY 4.0"
+    },
+    {
+      "eco_id": 424,
+      "name": "California montane chaparral and woodlands",
+      "license": "CC-BY 4.0"
+    },
+    {
+      "eco_id": 433,
+      "name": "Mojave desert",
+      "license": "CC-BY 4.0"
+    },
+    {
+      "eco_id": 435,
+      "name": "Sonoran desert",
+      "license": "CC-BY 4.0"
+    }
+  ]
+}

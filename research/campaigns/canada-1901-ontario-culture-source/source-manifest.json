@@ -1,0 +1,314 @@
+{
+  "campaign_id": "canada-1901-ontario-culture-source",
+  "github_issue": 60,
+  "retrieved_at_utc": "2026-10-03",
+  "source_edition": {
+    "title": "Fourth census of Canada, 1901. Vol. I, Population / Quatrième recensement du Canada, 1901. Vol. I, Population",
+    "creator": "Canada. Census Office / Canada. Bureau du recensement",
+    "publication_year": 1902,
+    "publication_place": "Ottawa",
+    "printer": "S. E. Dawson",
+    "observation": "Population as at midnight on 31 March 1901 (Census Act and volume instructions)",
+    "official_contents_url": null,
+    "scan_repository": "Internet Archive, catalogue collection `statisticscanada`",
+    "catalog_url": "https://archive.org/details/1901981901FV11902engfra",
+    "stable_identifier": "ark:/13960/t6zw2n213",
+    "archive_metadata_url": "https://archive.org/metadata/1901981901FV11902engfra",
+    "archive_metadata_sha256": "cc0e3598dfcffd01eacade5976c59d8387a85ffb81fe9260c3c4b36d24b834b8",
+    "archive_metadata_bytes": 8933,
+    "volume_pdf_url": "https://archive.org/download/1901981901FV11902engfra/StatisticsCanada1901981901FV11902engfra.pdf",
+    "volume_pdf_sha256": "0f1728099995c5cea45ed7632eb9ffce90f93db6b1d3db115fab85ff862fa3d7",
+    "volume_pdf_bytes": 23361800,
+    "text_ocr_url": "https://archive.org/download/1901981901FV11902engfra/StatisticsCanada1901981901FV11902engfra_djvu.txt",
+    "text_ocr_sha256": "57d7b7f2faf97f33e36705133381b5641c43b5a2dadae8c3bb67c2acd71be373",
+    "text_ocr_bytes": 1372793,
+    "restoration": "Download the PDF and OCR from the exact URLs above, then verify their SHA-256 values; OCR is for discovery only and the transcribed sample was visually checked against the PDF scan."
+  },
+  "license_and_access": {
+    "archive_rights_metadata": "No explicit license field or reuse grant in the archive item metadata. Item lists Statistics Canada as contributor and the archive collection includes `statisticscanada`; uploader is Internet Archive.",
+    "underlying_work_status": "The 1902 publication was produced by the federal Census Office. Canadian Copyright Act, R.S.C. 1985 c. C-42, s.12 states Crown-prepared/published works continue through the year of first publication and 50 years after that year; for 1902 that term would have ended 1952-12-31. This is the basis for treating the underlying publication as public domain in Canada, not a separate license grant from the scan host. No scan images are redistributed here. Jurisdiction-specific reuse of the Archive scan was not independently adjudicated.",
+    "law_url": "https://laws-lois.justice.gc.ca/eng/acts/C-42/section-12.html",
+    "retrieved": "2026-10-03"
+  },
+  "evaluated_table": {
+    "number": "XI",
+    "title": "Origins of the People by Sub-districts",
+    "printed_page_range": "284–405",
+    "sampled_printed_page": 336,
+    "table_territory": "1901 Ontario census district 97, Ontario North; source subdistricts a–o on the sampled page",
+    "measure": "Population counts tabulated by origin classification, not population share or territory population measurement",
+    "selected_source_columns": [
+      "English",
+      "Irish",
+      "Scotch",
+      "Other British",
+      "French",
+      "German",
+      "Dutch"
+    ],
+    "omitted_source_columns": [
+      "Scandinavian",
+      "Russian",
+      "Austro-Hungarian",
+      "Italian",
+      "Jewish",
+      "Swiss",
+      "Belgian",
+      "Half-breeds",
+      "Indian",
+      "Chinese and Japanese",
+      "Negro",
+      "Various origins",
+      "Unspecified"
+    ],
+    "source_observation_bounds": "Single census reference moment: midnight 31 March 1901; not a longitudinal interval",
+    "sample_method": "Transcribed 15 contiguous subdistrict rows on printed p.336 from the source scan. Only the first seven origin columns are retained; no values are inferred for columns not retained. Source-order names and labels retained. Visual inspection of scan controls transcription; OCR was used only to locate passages."
+  },
+  "rows": [
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "a",
+      "subdistrict": "Beaverton, Village",
+      "population_by_origin": {
+        "English": "276",
+        "Irish": "108",
+        "Scotch": "408",
+        "Other British": "4",
+        "French": "15",
+        "German": "16",
+        "Dutch": "26"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "b",
+      "subdistrict": "Bracebridge, Town",
+      "population_by_origin": {
+        "English": "985",
+        "Irish": "658",
+        "Scotch": "484",
+        "Other British": "24",
+        "French": "190",
+        "German": "91",
+        "Dutch": "20"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "c",
+      "subdistrict": "Brock",
+      "population_by_origin": {
+        "English": "1,266",
+        "Irish": "1,606",
+        "Scotch": "762",
+        "Other British": "12",
+        "French": "21",
+        "German": "27",
+        "Dutch": "29"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "d",
+      "subdistrict": "Cannington, Village",
+      "population_by_origin": {
+        "English": "433",
+        "Irish": "345",
+        "Scotch": "243",
+        "Other British": ".",
+        "French": "25",
+        "German": "12",
+        "Dutch": "."
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "e",
+      "subdistrict": "Draper",
+      "population_by_origin": {
+        "English": "338",
+        "Irish": "248",
+        "Scotch": "212",
+        "Other British": "2",
+        "French": "16",
+        "German": "151",
+        "Dutch": "1"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "f",
+      "subdistrict": "Macaulay",
+      "population_by_origin": {
+        "English": "369",
+        "Irish": "153",
+        "Scotch": "162",
+        "Other British": "11",
+        "French": "1",
+        "German": "19",
+        "Dutch": "13"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "g",
+      "subdistrict": "Maclean",
+      "population_by_origin": {
+        "English": "238",
+        "Irish": "149",
+        "Scotch": "80",
+        "Other British": ".",
+        "French": "23",
+        "German": "12",
+        "Dutch": "21"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "h",
+      "subdistrict": "Mara",
+      "population_by_origin": {
+        "English": "595",
+        "Irish": "1,335",
+        "Scotch": "892",
+        "Other British": "14",
+        "French": "25",
+        "German": "28",
+        "Dutch": "31"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "i",
+      "subdistrict": "Morrison",
+      "population_by_origin": {
+        "English": "281",
+        "Irish": "311",
+        "Scotch": "166",
+        "Other British": "2",
+        "French": "17",
+        "German": "104",
+        "Dutch": "35"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "j",
+      "subdistrict": "Oakley",
+      "population_by_origin": {
+        "English": "117",
+        "Irish": "106",
+        "Scotch": "62",
+        "Other British": "9",
+        "French": "5",
+        "German": "1",
+        "Dutch": "32"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "k",
+      "subdistrict": "Rama",
+      "population_by_origin": {
+        "English": "296",
+        "Irish": "461",
+        "Scotch": "438",
+        "Other British": "4",
+        "French": "41",
+        "German": "71",
+        "Dutch": "2"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "l",
+      "subdistrict": "Rideout",
+      "population_by_origin": {
+        "English": "58",
+        "Irish": "57",
+        "Scotch": "63",
+        "Other British": ".",
+        "French": "17",
+        "German": "10",
+        "Dutch": "31"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "m",
+      "subdistrict": "Ryde",
+      "population_by_origin": {
+        "English": "196",
+        "Irish": "99",
+        "Scotch": "59",
+        "Other British": ".",
+        "French": "33",
+        "German": "99",
+        "Dutch": "59"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "n",
+      "subdistrict": "Scott",
+      "population_by_origin": {
+        "English": "1,001",
+        "Irish": "565",
+        "Scotch": "431",
+        "Other British": "5",
+        "French": "23",
+        "German": "235",
+        "Dutch": "6"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    },
+    {
+      "district_number": 97,
+      "district": "Ontario, North—Nord",
+      "subdistrict_code": "o",
+      "subdistrict": "Thorah",
+      "population_by_origin": {
+        "English": "483",
+        "Irish": "180",
+        "Scotch": "680",
+        "Other British": "7",
+        "French": "36",
+        "German": "15",
+        "Dutch": "35"
+      },
+      "printed_source_marks": "A literal period in the source is retained as `.` and is not silently converted to numeric zero."
+    }
+  ],
+  "source_interpretation": {
+    "origin_instruction": "§53 says among whites racial or tribal origin is traced through the father, warns against using American/Canadian as racial terms, names Chinese/Japanese/Negro categories, requests Indigenous tribal names, and describes mixed Indigenous/white categories as “breeds”. Preserve historical vocabulary as source evidence; do not adopt it as an Atlas classification.",
+    "language_instructions": "§§65–67 define speaking English/French responses and mother tongue; mother tongue is defined as native language / language of race, not necessarily the language used chiefly. It is a separate schedule field.",
+    "mother_tongue_table_result": "The complete volume I table contents list comparative population, population/dwellings, religion, origins/nationalities, birthplace/immigration. No published mother-tongue aggregate table is listed or found in volume I; text defines the schedule variable only. This pass makes no claim about other volumes or unlocated publications."
+  }
+}

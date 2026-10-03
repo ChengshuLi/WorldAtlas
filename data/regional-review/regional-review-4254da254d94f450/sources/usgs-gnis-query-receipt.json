@@ -1,0 +1,65 @@
+{
+  "source": "USGS National Map Gazetteer GNIS REST",
+  "retrieved_utc": "2026-10-03",
+  "service_url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer",
+  "layer_id": 0,
+  "filter": "state_alpha IN ('AZ','ID','MT','NV','UT') AND gaz_featureclass = 'Populated Place'",
+  "states": [
+    "AZ",
+    "ID",
+    "MT",
+    "NV",
+    "UT"
+  ],
+  "feature_class": "Populated Place",
+  "page_count": 9,
+  "feature_count": 8674,
+  "pages": [
+    {
+      "offset": 0,
+      "count": 1000,
+      "url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AZ%27%2C%27ID%27%2C%27MT%27%2C%27NV%27%2C%27UT%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=0&resultRecordCount=1000&orderByFields=gaz_id"
+    },
+    {
+      "offset": 1000,
+      "count": 1000,
+      "url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AZ%27%2C%27ID%27%2C%27MT%27%2C%27NV%27%2C%27UT%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=1000&resultRecordCount=1000&orderByFields=gaz_id"
+    },
+    {
+      "offset": 2000,
+      "count": 1000,
+      "url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AZ%27%2C%27ID%27%2C%27MT%27%2C%27NV%27%2C%27UT%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=2000&resultRecordCount=1000&orderByFields=gaz_id"
+    },
+    {
+      "offset": 3000,
+      "count": 1000,
+      "url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AZ%27%2C%27ID%27%2C%27MT%27%2C%27NV%27%2C%27UT%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=3000&resultRecordCount=1000&orderByFields=gaz_id"
+    },
+    {
+      "offset": 4000,
+      "count": 1000,
+      "url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AZ%27%2C%27ID%27%2C%27MT%27%2C%27NV%27%2C%27UT%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=4000&resultRecordCount=1000&orderByFields=gaz_id"
+    },
+    {
+      "offset": 5000,
+      "count": 1000,
+      "url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AZ%27%2C%27ID%27%2C%27MT%27%2C%27NV%27%2C%27UT%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=5000&resultRecordCount=1000&orderByFields=gaz_id"
+    },
+    {
+      "offset": 6000,
+      "count": 1000,
+      "url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AZ%27%2C%27ID%27%2C%27MT%27%2C%27NV%27%2C%27UT%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=6000&resultRecordCount=1000&orderByFields=gaz_id"
+    },
+    {
+      "offset": 7000,
+      "count": 1000,
+      "url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AZ%27%2C%27ID%27%2C%27MT%27%2C%27NV%27%2C%27UT%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=7000&resultRecordCount=1000&orderByFields=gaz_id"
+    },
+    {
+      "offset": 8000,
+      "count": 674,
+      "url": "https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0/query?where=state_alpha+IN+%28%27AZ%27%2C%27ID%27%2C%27MT%27%2C%27NV%27%2C%27UT%27%29+AND+gaz_featureclass+%3D+%27Populated+Place%27&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&resultOffset=8000&resultRecordCount=1000&orderByFields=gaz_id"
+    }
+  ],
+  "public_domain": true
+}

@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "lane": "research",
+  "campaign_id": "worldcover-kenya-2021-source",
+  "branch": "research/worldcover-kenya-2021-source",
+  "base_main_commit": "56ec4ab22f118d59c161b3edaedfa190d325a121",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/64",
+  "date_timezone": "UTC",
+  "scope": {
+    "geographies": [
+      "One ESA WorldCover 2021 v200 tile intersecting contemporary Kenya; tile and bounded cell examples only"
+    ],
+    "attributes": [
+      "source identity, license, date semantics, legend and bounded source-cell examples"
+    ],
+    "supported_interval": "2021 calendar year only",
+    "sources": [
+      "ESA WorldCover 2021 v200 access page, manual, validation report and selected S03E036 tile"
+    ]
+  },
+  "updated_at_utc": "2026-10-03T09:45:00Z",
+  "geographic_release": null,
+  "input_paths": [
+    "src/environment-classifications.js",
+    "docs/ENVIRONMENT_CLASSIFICATIONS.md",
+    "docs/HISTORICAL_COVERAGE_RESEARCH.md"
+  ],
+  "bundle_paths": [],
+  "import_receipt_paths": [],
+  "readback_paths": [],
+  "coverage_achieved": [
+    "Selected and fully hashed official S03E036 COG; confirmed footprint, CRS, resolution, encoding, NoData, product dates, license and attribution.",
+    "Recorded official legend and definitions, global/Africa validation summaries, product caveats and exact cell locations/codes for 23 bounded examples.",
+    "Documented only candidate crosswalk semantics; made no location assignments, boundaries, classification changes or imports."
+  ],
+  "source_gaps": [
+    "Validation is not Kenya- or tile-specific; bounded lattice values are not representative and do not provide class proportions.",
+    "A complete published regional approval certificate, exact permitted subjects and matching release pins are not available; import remains gated."
+  ],
+  "blockers": [],
+  "next_action": "Wait for exact PR-head scope check and CI. If main advances, fetch/rebase and rerun checks. Renew the reservation before requesting serialized merge. Verify accepted merge on fresh origin/main, release the issue claim, then continue to the next eligible issue.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/568",
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

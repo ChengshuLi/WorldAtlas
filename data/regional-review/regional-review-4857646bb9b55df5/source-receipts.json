@@ -1,0 +1,81 @@
+{
+  "download_date": "2026-10-03",
+  "references": [
+    {
+      "id": "KIR-2020-census",
+      "title": "Kiribati 2020 Population and Housing Census: General Report and Results",
+      "publisher": "Kiribati National Statistics Office",
+      "date": "July 2021",
+      "url": "https://nso.gov.ki/download/146/2020/1965/kiribati-2020-population-and-housing-census-report.pdf",
+      "downloaded": "2026-10-03",
+      "bytes": 23188330,
+      "sha256": "a4f158ddf3548468825338d9ced5bc8d04dca1f349916748ff204974a0102eed",
+      "retention": "PDF not retained because explicit open-reuse terms were not found in the inspected report/site. Restore from URL; compare SHA-256 and byte count before analysis.",
+      "inspected": "Printed p.11 overview of three island groups and census reporting; printed p.17 Table G-1 census islands/villages."
+    },
+    {
+      "id": "KIR-2022-atlas",
+      "title": "Kiribati Census Atlas 2022",
+      "publisher": "Kiribati National Statistics Office / SPC Statistics for Development Division",
+      "date": "2022 (PDF created 2022-07-25; modified 2022-09-15)",
+      "url": "https://nso.gov.ki/download/117/other-reports/2022/kiribati-census-atlas-2022.pdf",
+      "downloaded": "2026-10-03",
+      "bytes": 8415857,
+      "sha256": "56b0461dd54bbfb6f3ab894fa6b4f9be68f0d1b28a34670b9c67fcc3aa1f464b",
+      "retention": "PDF not retained because explicit open-reuse terms were not found. Restore from URL; verify bytes/hash.",
+      "inspected": "Printed p.11 census settlement context and Table 3; printed p.21 states 32 atolls/reef islands plus raised coral Banaba, three groups, 811 km² official land area and 3,700 km spread; printed p.26 Gilbert island census table. Notes small-island maps use visibility buffers."
+    },
+    {
+      "id": "NRU-2021-census",
+      "title": "Nauru 2021 Population and Housing Census Analytical Report",
+      "publisher": "Nauru Bureau of Statistics",
+      "date": "August 2023; census day 2021-10-30",
+      "page": "https://stats.gov.nr/wpfd_file/nauru-2021-population-and-housing-census-analytical-report/",
+      "url": "https://stats.gov.nr/download/49/2021/359/nauru-2021-population-and-housing-census-analytical-report.pdf",
+      "downloaded": "2026-10-03",
+      "bytes": 10235852,
+      "sha256": "fcbb52f6e46b420c100caa074689b9354959b8a6aec57eebe2de82da1a78847b",
+      "retention": "PDF not retained because explicit open-reuse terms were not found. Restore from URL; verify bytes/hash.",
+      "inspected": "Printed p.16 physical context, 21.1 km², one main island, 14 districts, Banaba 330 km east; printed p.28 charts district population including “Location”. Report narrative notes settlement Location is in Denigomodu next to Aiwo."
+    },
+    {
+      "id": "GSHHG-L1-screen",
+      "title": "Global Self-consistent Hierarchical High-resolution Geography database, GSHHG 2.3.7, full L1 shapefile",
+      "publisher": "Paul Wessel, SOEST / University of Hawaii; release page",
+      "date": "2017-06-15",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip",
+      "downloaded": "2026-10-03",
+      "bytes": 149157845,
+      "sha256": "8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41",
+      "license": "GNU Lesser General Public License (upstream license link); L1 used only as generalized physical land/coastline candidate evidence.",
+      "retention": "Global archive not copied into packet. Download the exact URL, verify size/hash, extract GSHHS_shp/f/GSHHS_f_L1.shp plus matching .shx/.dbf; run screen_gshhg_land.py with shapefile path. Archive README notes mixed source dates and potential misregistration. Antarctica excluded."
+    },
+    {
+      "id": "geoBoundaries-KIR-ADM1",
+      "title": "geoBoundaries gbOpen KIR ADM1 pinned source",
+      "publisher": "geoBoundaries; underlying attribution OpenStreetMap/Wambacher",
+      "date": "boundaryYear 2017; source update 2023-01-19; build 2023-12-12",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KIR/ADM1/geoBoundaries-KIR-ADM1.geojson",
+      "license": "Open Data Commons Open Database License 1.0; preserve attribution/citation notice",
+      "retention": "Exact GeoJSON and source metadata/license notice retained in sources/; check source-manifest.json for hashes/bytes."
+    },
+    {
+      "id": "geoBoundaries-NRU-ADM1",
+      "title": "geoBoundaries gbOpen NRU ADM1 pinned source",
+      "publisher": "geoBoundaries; metadata lists geoBoundaries / FreeMapViewer",
+      "date": "boundaryYear 2005; source update 2023-01-19; build 2023-12-12",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/NRU/ADM1/geoBoundaries-NRU-ADM1.geojson",
+      "license": "Public Domain per archived geoBoundaries metadata",
+      "retention": "Exact ADM1 GeoJSON and metadata retained in sources/; secondary source only, not official district validation."
+    },
+    {
+      "id": "Natural-Earth-current-baseline",
+      "title": "Natural Earth 1:10m Admin 0 countries",
+      "publisher": "Natural Earth",
+      "date": "Underlying current atlas baseline vintage unresolved in issue semantic-report",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+      "license": "Natural Earth public domain (check source release bundled in current baseline for exact vintage/license manifest)",
+      "retention": "Current feature and full parent chain copied to baseline-extract.json; issue metadata identifies retained profile. Not independent 2021 shore/district evidence."
+    }
+  ]
+}
