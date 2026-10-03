@@ -1,0 +1,1243 @@
+{
+  "source": {
+    "product": "GSHHG 2.3.7 high-resolution shapefile land level 1",
+    "resolution": "full/highest",
+    "land_polygon_count_scanned": 179837,
+    "candidate_land_records_in_declared_windows": 243,
+    "candidate_land_records_intersecting_any_assigned_location": 22,
+    "windows": [
+      {
+        "id": "gilbert-nauru",
+        "bbox": [
+          165.0,
+          -5.0,
+          180.0,
+          5.0
+        ]
+      },
+      {
+        "id": "phoenix-neighbor",
+        "bbox": [
+          -180.0,
+          -5.0,
+          -168.0,
+          5.0
+        ]
+      },
+      {
+        "id": "line-neighbor",
+        "bbox": [
+          -162.0,
+          0.0,
+          -155.0,
+          6.0
+        ]
+      }
+    ],
+    "archive_restoration": "See source-receipts.json; extract GSHHS_shp/f/GSHHS_f_L1.shp, .shx, and .dbf from the verified official archive."
+  },
+  "location_stats": {
+    "atlas:territory:NRU": {
+      "current_geometry_km2": 19.84177102,
+      "land_intersection_km2": 14.61327317,
+      "bbox": [
+        166.9112,
+        -0.5543,
+        166.9579,
+        -0.5035
+      ],
+      "parts": 1
+    },
+    "gb:KIR:ADM1:97431129B36644055464690": {
+      "current_geometry_km2": 9.93257604,
+      "land_intersection_km2": 1.66581956,
+      "bbox": [
+        169.5211,
+        -0.8659,
+        173.1599,
+        1.3918
+      ],
+      "parts": 2
+    },
+    "gb:KIR:ADM1:97431129B55805139245338": {
+      "current_geometry_km2": 119.65075728,
+      "land_intersection_km2": 36.92980557,
+      "bbox": [
+        172.8248,
+        -2.6556,
+        176.8434,
+        3.3929
+      ],
+      "parts": 14
+    }
+  },
+  "candidate_land_features_intersecting_assigned_locations": [
+    {
+      "feature_index": 3466,
+      "gshhg_id": "3630",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 22.6330229013,
+      "equal_area_geometry_km2": 22.63302317,
+      "bbox": [
+        166.905306,
+        -0.546278,
+        166.955361,
+        -0.493778
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "ab77d9e784c2a6ac638faba8c843d1203639c8fbd24aac52393dc01a58976b13",
+      "vertices": 87,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "atlas:territory:NRU": 14.61327317
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 0.0,
+        "gb:KIR:ADM1:97431129B36644055464690": 251.33804613,
+        "gb:KIR:ADM1:97431129B55805139245338": 614.64689278
+      },
+      "distance_to_gilbert_area_km": 251.33804613
+    },
+    {
+      "feature_index": 4995,
+      "gshhg_id": "5193",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 12.2424653331,
+      "equal_area_geometry_km2": 12.24246769,
+      "bbox": [
+        172.757056,
+        3.034556,
+        172.912083,
+        3.101222
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "e898d9ab7a87cca17d0372794cbf252ac5a7de0a59f62076286e21e10acf38f7",
+      "vertices": 252,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 1.57022583
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 720.74080673,
+        "gb:KIR:ADM1:97431129B36644055464690": 212.34195385,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 3877,
+      "gshhg_id": "4053",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 18.7432001013,
+      "equal_area_geometry_km2": 18.74319616,
+      "bbox": [
+        172.989556,
+        0.839583,
+        173.07375,
+        1.035417
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "e061cf4389e93a8739b9f493864c1583124284efd63572c76c70b52deba17b81",
+      "vertices": 363,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 3.04934406
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 607.04871175,
+        "gb:KIR:ADM1:97431129B36644055464690": 43.6903212,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 44084,
+      "gshhg_id": "44723",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 0.30448711614,
+      "equal_area_geometry_km2": 0.30448713,
+      "bbox": [
+        173.002083,
+        1.008722,
+        173.006222,
+        1.017111
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "71de97a9f4da210759d166468b4258cd4ada37d84fe2f13a52b2e35ec344ca49",
+      "vertices": 15,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 0.1408097
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 614.68440158,
+        "gb:KIR:ADM1:97431129B36644055464690": 46.00441892,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 6594,
+      "gshhg_id": "6842",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 7.57983431652,
+      "equal_area_geometry_km2": 7.57983583,
+      "bbox": [
+        173.058722,
+        1.353722,
+        173.170417,
+        1.392889
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "e48962b7b885b22e64e1c9cb141f468399150312990a5be2c9d9474f0c3834f4",
+      "vertices": 228,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B36644055464690": 1.60117777
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 635.07672926,
+        "gb:KIR:ADM1:97431129B36644055464690": 0.0,
+        "gb:KIR:ADM1:97431129B55805139245338": 41.61707567
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 8253,
+      "gshhg_id": "8549",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 5.12893307536,
+      "equal_area_geometry_km2": 5.12893312,
+      "bbox": [
+        173.087028,
+        1.387889,
+        173.140417,
+        1.439556
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "88257b189d7f2a991cc3819cbdfbef211b5a8b9b0204bd727f344bf12e5a4aa8",
+      "vertices": 134,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B36644055464690": 0.02273989
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 641.41216246,
+        "gb:KIR:ADM1:97431129B36644055464690": 0.0,
+        "gb:KIR:ADM1:97431129B55805139245338": 47.4060546
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 171918,
+      "gshhg_id": "172587",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 0.0125212701912,
+      "equal_area_geometry_km2": 0.01252127,
+      "bbox": [
+        173.152917,
+        1.363694,
+        173.153722,
+        1.365417
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "6435bbd1a6fde0cc47a8258a0fa28d3f0ce60a3264b3c670456432b896394125",
+      "vertices": 7,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B36644055464690": 0.01252127
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 643.94381104,
+        "gb:KIR:ADM1:97431129B36644055464690": 0.0,
+        "gb:KIR:ADM1:97431129B55805139245338": 44.94272623
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 154801,
+      "gshhg_id": "155470",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 0.0293806297706,
+      "equal_area_geometry_km2": 0.02938063,
+      "bbox": [
+        173.155389,
+        1.370417,
+        173.157111,
+        1.372028
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "9cd1be5be5ba2856a7b9300aaec5305a1bac309d7d8a70ccf7fb737e021db93d",
+      "vertices": 9,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B36644055464690": 0.02938063
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 644.48183773,
+        "gb:KIR:ADM1:97431129B36644055464690": 0.0,
+        "gb:KIR:ADM1:97431129B55805139245338": 45.83206486
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 3942,
+      "gshhg_id": "4121",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 18.1692960103,
+      "equal_area_geometry_km2": 18.16929638,
+      "bbox": [
+        173.256222,
+        1.969583,
+        173.31625,
+        2.066222
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "51676e5d09a03c86623b802b147cb32793f776e139e0cfcd20ef57b2ca10fd49",
+      "vertices": 303,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 0.95176901
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 686.14713532,
+        "gb:KIR:ADM1:97431129B36644055464690": 75.22754762,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 122948,
+      "gshhg_id": "123617",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 0.0537919780161,
+      "equal_area_geometry_km2": 0.053792,
+      "bbox": [
+        173.269556,
+        2.042917,
+        173.27375,
+        2.044528
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "f6b6d483e54a7f4a7c99f647e099378638d0e95c83d784f8e7ec5a6b0bef33aa",
+      "vertices": 10,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 0.053792
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 690.82202009,
+        "gb:KIR:ADM1:97431129B36644055464690": 83.99370471,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 170143,
+      "gshhg_id": "170812",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 0.013239380403,
+      "equal_area_geometry_km2": 0.01323938,
+      "bbox": [
+        173.269583,
+        2.050389,
+        173.27125,
+        2.05125
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "9c1ebb44e4344222a9afcf190d3982481bfa2529692083d3b757b7f8e6b41942",
+      "vertices": 7,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 0.01323938
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 691.27626004,
+        "gb:KIR:ADM1:97431129B36644055464690": 84.93551424,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 91947,
+      "gshhg_id": "92616",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 0.0894946147884,
+      "equal_area_geometry_km2": 0.08949464,
+      "bbox": [
+        173.275444,
+        2.042917,
+        173.282083,
+        2.044583
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "ee21170a2985bf6f55589195ce09d618ad9b5fef544782fb8c59c98a480712c4",
+      "vertices": 11,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 0.05108768
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 691.32288567,
+        "gb:KIR:ADM1:97431129B36644055464690": 84.07978946,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 5091,
+      "gshhg_id": "5294",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 11.8360259141,
+      "equal_area_geometry_km2": 11.83602593,
+      "bbox": [
+        173.372889,
+        0.188722,
+        173.420417,
+        0.22875
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "f04cc7c306fc0d81ae7d4b167ed04ae184df2405c66bd3d7cac2f835897fff54",
+      "vertices": 91,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 0.34543772
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 626.10479659,
+        "gb:KIR:ADM1:97431129B36644055464690": 145.62454008,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 8989,
+      "gshhg_id": "9296",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 4.43520237145,
+      "equal_area_geometry_km2": 4.43520234,
+      "bbox": [
+        173.52375,
+        0.171194,
+        173.55875,
+        0.18625
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "e783df89fbfc25806325cb0750c36bb0f52fd561ccb0c35182e2d51ebcb4e12e",
+      "vertices": 47,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 1.26725023
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 639.63455844,
+        "gb:KIR:ADM1:97431129B36644055464690": 153.93633862,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 31304,
+      "gshhg_id": "31890",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 0.538881390604,
+      "equal_area_geometry_km2": 0.53888139,
+      "bbox": [
+        173.564611,
+        0.182917,
+        173.574556,
+        0.18875
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "02efced416cca3e706f2252d62dab4e7212538705603f6b23762fcea33f3de69",
+      "vertices": 13,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 0.02808049
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 643.64210036,
+        "gb:KIR:ADM1:97431129B36644055464690": 154.39929776,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 3974,
+      "gshhg_id": "4154",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 17.9355677577,
+      "equal_area_geometry_km2": 17.93556731,
+      "bbox": [
+        173.809611,
+        0.407889,
+        173.93125,
+        0.495417
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "2eefb79c9f83fa58f2ec71df037f237d5283efa3200a58fa2e7670987ba6582d",
+      "vertices": 241,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 2.763285
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 672.5442343,
+        "gb:KIR:ADM1:97431129B36644055464690": 127.98008336,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 3266,
+      "gshhg_id": "3425",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 24.8319256896,
+      "equal_area_geometry_km2": 24.83192552,
+      "bbox": [
+        174.649556,
+        -1.229583,
+        174.783722,
+        -1.119611
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "aa2ccd56fa6a08c095cb4d76993d72171e5a98e3f80acd44695e82a73a69c5a5",
+      "vertices": 263,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 1.8016228
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 746.25941314,
+        "gb:KIR:ADM1:97431129B36644055464690": 347.47333991,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 90714,
+      "gshhg_id": "91383",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 0.0912508110639,
+      "equal_area_geometry_km2": 0.09125081,
+      "bbox": [
+        174.748722,
+        -1.198806,
+        174.752111,
+        -1.196306
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "1fabd8e91c0f08f2b5a0cb545d9e2d14b8d9cc636746aec05cb3d8e152f1ac8b",
+      "vertices": 9,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 0.00118107
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 756.72780518,
+        "gb:KIR:ADM1:97431129B36644055464690": 360.23475745,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 8734,
+      "gshhg_id": "9040",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 4.65157797365,
+      "equal_area_geometry_km2": 4.65157797,
+      "bbox": [
+        175.508722,
+        -1.810417,
+        175.54875,
+        -1.772889
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "1ce005acec2b513c0f02be8cf709bacf66162511cc6ff6ff22d4ab534f2af0f9",
+      "vertices": 68,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 0.57718038
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 840.55281631,
+        "gb:KIR:ADM1:97431129B36644055464690": 459.68535366,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 4225,
+      "gshhg_id": "4410",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 16.227754095,
+      "equal_area_geometry_km2": 16.22775488,
+      "bbox": [
+        175.956306,
+        -1.387917,
+        176.035361,
+        -1.28875
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "c2e889512ed6b473c17ac5d4d34f358d8e8df319d8516a326689783373a018dc",
+      "vertices": 273,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 8.8812198
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 874.02266781,
+        "gb:KIR:ADM1:97431129B36644055464690": 432.83079716,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 3629,
+      "gshhg_id": "3797",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 20.890990931,
+      "equal_area_geometry_km2": 20.89099199,
+      "bbox": [
+        176.406222,
+        -1.406278,
+        176.497861,
+        -1.309583
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "486a48fb20c56cfca110167ff6207a0b630fb03f4938bae7185090b0eacf9828",
+      "vertices": 168,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 12.44961319
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 917.31566483,
+        "gb:KIR:ADM1:97431129B36644055464690": 462.92826449,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    },
+    {
+      "feature_index": 6582,
+      "gshhg_id": "6830",
+      "level": 1,
+      "source": "WVS",
+      "parent_id": -1,
+      "sibling_id": -1,
+      "source_area_km2": 7.62332083744,
+      "equal_area_geometry_km2": 7.6233207,
+      "bbox": [
+        176.789583,
+        -2.670472,
+        176.845389,
+        -2.61375
+      ],
+      "window_ids": [
+        "gilbert-nauru"
+      ],
+      "geometry_sha256_wkb": "b8a56eab7c7be8adb164b945f2b86f55b9ade2fa1f8066288a3a9f1f79467458",
+      "vertices": 97,
+      "rings": 1,
+      "parts": 1,
+      "positive_land_overlap_km2_by_location": {
+        "gb:KIR:ADM1:97431129B55805139245338": 2.98466723
+      },
+      "distance_to_location_km": {
+        "atlas:territory:NRU": 985.41628024,
+        "gb:KIR:ADM1:97431129B36644055464690": 616.03006316,
+        "gb:KIR:ADM1:97431129B55805139245338": 0.0
+      },
+      "distance_to_gilbert_area_km": 0.0
+    }
+  ],
+  "nearest_unmatched_candidate_land_by_location": {
+    "atlas:territory:NRU": [
+      {
+        "feature_index": 6415,
+        "gshhg_id": "6661",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 8.00018991975,
+        "equal_area_geometry_km2": 8.00018994,
+        "bbox": [
+          169.523722,
+          -0.904611,
+          169.553778,
+          -0.872083
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "6404b272f47bee1faa5cd06abf5214f11da70e878241c14c897a0229604d1e8e",
+        "vertices": 73,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 251.90160015,
+          "gb:KIR:ADM1:97431129B36644055464690": 0.88727454,
+          "gb:KIR:ADM1:97431129B55805139245338": 396.96661274
+        },
+        "distance_to_gilbert_area_km": 0.88727454
+      },
+      {
+        "feature_index": 131985,
+        "gshhg_id": "132654",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.0463840960741,
+        "equal_area_geometry_km2": 0.0463841,
+        "bbox": [
+          172.972083,
+          0.854583,
+          172.975444,
+          0.857056
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "7c792ade0a65ef7ff66cd93316f850c5ac1211488fd3c87646254077225af7a2",
+        "vertices": 7,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 605.98113354,
+          "gb:KIR:ADM1:97431129B36644055464690": 66.39855401,
+          "gb:KIR:ADM1:97431129B55805139245338": 16.33584563
+        },
+        "distance_to_gilbert_area_km": 16.33584563
+      },
+      {
+        "feature_index": 38167,
+        "gshhg_id": "38792",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.388692732898,
+        "equal_area_geometry_km2": 0.38869274,
+        "bbox": [
+          172.976278,
+          0.838722,
+          172.985389,
+          0.847917
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "2e667bc76da5aeafc39817b8bd59e279c0587f0beb0f15082704dcd8591b9c6d",
+        "vertices": 24,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 606.0037192,
+          "gb:KIR:ADM1:97431129B36644055464690": 67.43957233,
+          "gb:KIR:ADM1:97431129B55805139245338": 17.18517045
+        },
+        "distance_to_gilbert_area_km": 17.18517045
+      },
+      {
+        "feature_index": 163680,
+        "gshhg_id": "164349",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.0214945676846,
+        "equal_area_geometry_km2": 0.02149457,
+        "bbox": [
+          172.973778,
+          0.852056,
+          172.975444,
+          0.853722
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "2d9a33b167be44d41836ca10712439b88910bdd6203b7df3fda84c7757c70b7a",
+        "vertices": 7,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 606.04802225,
+          "gb:KIR:ADM1:97431129B36644055464690": 66.80847204,
+          "gb:KIR:ADM1:97431129B55805139245338": 16.69977319
+        },
+        "distance_to_gilbert_area_km": 16.69977319
+      },
+      {
+        "feature_index": 141541,
+        "gshhg_id": "142210",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.0385363213474,
+        "equal_area_geometry_km2": 0.03853632,
+        "bbox": [
+          172.975444,
+          0.848722,
+          172.977944,
+          0.850389
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "c79329175ebaad4e5925387e9ed66281f08db343532807b6520a1d32458ab7cd",
+        "vertices": 8,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 606.07784042,
+          "gb:KIR:ADM1:97431129B36644055464690": 67.17621111,
+          "gb:KIR:ADM1:97431129B55805139245338": 16.9865047
+        },
+        "distance_to_gilbert_area_km": 16.9865047
+      }
+    ],
+    "gb:KIR:ADM1:97431129B36644055464690": [
+      {
+        "feature_index": 6415,
+        "gshhg_id": "6661",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 8.00018991975,
+        "equal_area_geometry_km2": 8.00018994,
+        "bbox": [
+          169.523722,
+          -0.904611,
+          169.553778,
+          -0.872083
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "6404b272f47bee1faa5cd06abf5214f11da70e878241c14c897a0229604d1e8e",
+        "vertices": 73,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 251.90160015,
+          "gb:KIR:ADM1:97431129B36644055464690": 0.88727454,
+          "gb:KIR:ADM1:97431129B55805139245338": 396.96661274
+        },
+        "distance_to_gilbert_area_km": 0.88727454
+      },
+      {
+        "feature_index": 39561,
+        "gshhg_id": "40192",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.364712837017,
+        "equal_area_geometry_km2": 0.36471245,
+        "bbox": [
+          173.08125,
+          1.436222,
+          173.090417,
+          1.44375
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "8c710f5a48b57702bcb481a9e62c92da6fc7d15fb39420e5ba7f721399933145",
+        "vertices": 14,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 641.10293318,
+          "gb:KIR:ADM1:97431129B36644055464690": 7.604056,
+          "gb:KIR:ADM1:97431129B55805139245338": 52.36017032
+        },
+        "distance_to_gilbert_area_km": 7.604056
+      },
+      {
+        "feature_index": 120347,
+        "gshhg_id": "121016",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.0558183567669,
+        "equal_area_geometry_km2": 0.05581837,
+        "bbox": [
+          173.07625,
+          1.434556,
+          173.080389,
+          1.436222
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "c0059327596ae3b2c390acbea87250b0a00e6dc39a32773095cebcdad09face6",
+        "vertices": 11,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 640.53318521,
+          "gb:KIR:ADM1:97431129B36644055464690": 7.84513179,
+          "gb:KIR:ADM1:97431129B55805139245338": 52.04613571
+        },
+        "distance_to_gilbert_area_km": 7.84513179
+      },
+      {
+        "feature_index": 61517,
+        "gshhg_id": "62181",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.175243286299,
+        "equal_area_geometry_km2": 0.17524327,
+        "bbox": [
+          173.074556,
+          1.43875,
+          173.079583,
+          1.444556
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "4dae4d5e34578c782c0c01db0ff5044286f1888544b7bed48dc293e8255e5bfa",
+        "vertices": 17,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 640.66934063,
+          "gb:KIR:ADM1:97431129B36644055464690": 8.40921085,
+          "gb:KIR:ADM1:97431129B55805139245338": 52.56537349
+        },
+        "distance_to_gilbert_area_km": 8.40921085
+      },
+      {
+        "feature_index": 170402,
+        "gshhg_id": "171071",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.0131010046597,
+        "equal_area_geometry_km2": 0.013101,
+        "bbox": [
+          173.054556,
+          1.352889,
+          173.055417,
+          1.354556
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "440e5f3e32b37aa0913a2663e9e35e4b384b3bd366caa95d9fdb0eaf38576ada",
+        "vertices": 7,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 634.62435801,
+          "gb:KIR:ADM1:97431129B36644055464690": 8.74850023,
+          "gb:KIR:ADM1:97431129B55805139245338": 41.4465597
+        },
+        "distance_to_gilbert_area_km": 8.74850023
+      }
+    ],
+    "gb:KIR:ADM1:97431129B55805139245338": [
+      {
+        "feature_index": 131097,
+        "gshhg_id": "131766",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.0468600919424,
+        "equal_area_geometry_km2": 0.04686009,
+        "bbox": [
+          173.02125,
+          1.003722,
+          173.024583,
+          1.00625
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "ee44c108270efcdd8c3b496a0bd40e0848d42b9d2f0558bec1cba3252fca26cf",
+        "vertices": 11,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 616.30207595,
+          "gb:KIR:ADM1:97431129B36644055464690": 46.84069278,
+          "gb:KIR:ADM1:97431129B55805139245338": 0.07407799
+        },
+        "distance_to_gilbert_area_km": 0.07407799
+      },
+      {
+        "feature_index": 4032,
+        "gshhg_id": "4212",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 17.5820134249,
+        "equal_area_geometry_km2": 17.582013,
+        "bbox": [
+          174.373778,
+          -0.77375,
+          174.479611,
+          -0.583778
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "b91b3f91b25af300449d37082ef1de91af9028feb42581ab64df3a59f20a0270",
+        "vertices": 261,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 715.58845275,
+          "gb:KIR:ADM1:97431129B36644055464690": 274.16983282,
+          "gb:KIR:ADM1:97431129B55805139245338": 0.09123508
+        },
+        "distance_to_gilbert_area_km": 0.09123508
+      },
+      {
+        "feature_index": 18426,
+        "gshhg_id": "18908",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 1.31341428987,
+        "equal_area_geometry_km2": 1.31341427,
+        "bbox": [
+          174.347889,
+          -0.580472,
+          174.372139,
+          -0.570472
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "23a0398db0ea0d20d5d740a0edca277f3f90d931f368c1d336e96dff098f48ec",
+        "vertices": 36,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 713.07556923,
+          "gb:KIR:ADM1:97431129B36644055464690": 271.77759873,
+          "gb:KIR:ADM1:97431129B55805139245338": 0.09586138
+        },
+        "distance_to_gilbert_area_km": 0.09586138
+      },
+      {
+        "feature_index": 66313,
+        "gshhg_id": "66980",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.154374832578,
+        "equal_area_geometry_km2": 0.15437485,
+        "bbox": [
+          174.332083,
+          -0.572917,
+          174.340417,
+          -0.570444
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "b07102d2e52a6c8af386b7b48812cdf0829239c90fb751c7453b1302360e25d2",
+        "vertices": 11,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 711.54719787,
+          "gb:KIR:ADM1:97431129B36644055464690": 270.99479229,
+          "gb:KIR:ADM1:97431129B55805139245338": 0.14610862
+        },
+        "distance_to_gilbert_area_km": 0.14610862
+      },
+      {
+        "feature_index": 119411,
+        "gshhg_id": "120080",
+        "level": 1,
+        "source": "WVS",
+        "parent_id": -1,
+        "sibling_id": -1,
+        "source_area_km2": 0.0564719499469,
+        "equal_area_geometry_km2": 0.05647195,
+        "bbox": [
+          175.541222,
+          -1.816278,
+          175.544611,
+          -1.814611
+        ],
+        "window_ids": [
+          "gilbert-nauru"
+        ],
+        "geometry_sha256_wkb": "040ce47ff9704e4c7823283f20a5d8fd1768aa7a650ae14a08c4a26f4b4ae558",
+        "vertices": 8,
+        "rings": 1,
+        "parts": 1,
+        "positive_land_overlap_km2_by_location": {},
+        "distance_to_location_km": {
+          "atlas:territory:NRU": 844.53194801,
+          "gb:KIR:ADM1:97431129B36644055464690": 465.51155385,
+          "gb:KIR:ADM1:97431129B55805139245338": 0.22486592
+        },
+        "distance_to_gilbert_area_km": 0.22486592
+      }
+    ]
+  },
+  "uncertainty": [
+    "GSHHG L1 is a generalized physical land/coastline source; it is not a legal or administrative boundary.",
+    "The global source may omit or misregister very small reefs/islets and may include generalized rings or lagoons.",
+    "Distance/overlap screens locate candidate land and source coverage differences only; the census atlas notes its small-island maps use visibility buffers."
+  ]
+}
