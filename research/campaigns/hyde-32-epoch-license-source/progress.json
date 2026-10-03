@@ -7,13 +7,22 @@
   "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/65",
   "date_timezone": "UTC",
   "scope": {
-    "geographies": ["Global product metadata only; no raster processing, geographic decision, or location mapping"],
-    "attributes": ["population, habitation, and land-use source semantics only"],
+    "geographies": [
+      "Global product metadata only; no raster processing, geographic decision, or location mapping"
+    ],
+    "attributes": [
+      "population, habitation, and land-use source semantics only"
+    ],
     "issue_date_window": "3000 BCE–2015 CE, at documented sparse output steps; no continuous annual series inferred",
     "product_extent": "HYDE 3.2.1 release documentation states 10,000 BCE–2015 CE; wider than this issue's reviewed window",
-    "sources": ["DANS DOI 10.17026/DANS-25G-GEZ3 current repository edition 2.0", "Klein Goldewijk et al. 2017 ESSD article", "public HYDE 3.2.1 release README", "existing WorldAtlas source inventory and historical coverage review"]
+    "sources": [
+      "DANS DOI 10.17026/DANS-25G-GEZ3 current repository edition 2.0",
+      "Klein Goldewijk et al. 2017 ESSD article",
+      "public HYDE 3.2.1 release README",
+      "existing WorldAtlas source inventory and historical coverage review"
+    ]
   },
-  "updated_at_utc": "2026-10-03T09:28:25+00:00",
+  "updated_at_utc": "2026-10-03T09:29:57.287+00:00",
   "geographic_release": null,
   "input_paths": [
     "data/source-inventory.json",
@@ -34,8 +43,8 @@
     "No raster archive bytes, sample epoch headers, checksum, or values were downloaded or inspected; current product values and uncertainty have not been independently validated."
   ],
   "blockers": [],
-  "next_action": "Submit one bounded source-only PR for issue #65, pass the scope check, use the serialized merge queue for the exact passed head, verify merge, release the claim, and continue with the next ready item.",
-  "pull_request": null,
+  "next_action": "Wait for exact PR-head scope check; fetch/rebase fresh main and revalidate if it advances; renew issue reservation before queueing; request the serialized merge for the exact passed head; verify accepted merge and fresh-main integration; release claim and continue.",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/563",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }
