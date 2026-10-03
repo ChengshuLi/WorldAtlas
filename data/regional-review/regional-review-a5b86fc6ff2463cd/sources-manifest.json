@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "issue": 134,
+  "retrieved": "2026-10-03",
+  "retention_policy": "Retain only source bytes whose published license permits redistribution; otherwise retain canonical URLs, retrieval dates, hashes, inspected pages/tables and executable restoration instructions. Census facts are geography/settlement cross-checks, not political ownership or boundary geometry.",
+  "retained_sources": [
+    {
+      "id": "geoBoundaries-GB-Open-TON-ADM1",
+      "title": "geoBoundaries gbOpen Tonga ADM1",
+      "canonical_url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TON/ADM1/",
+      "vintage": "boundaryYear 2017; sourceDataUpdateDate and buildDate in pinned metadata",
+      "role": "Five named main island divisions: Ha'apai, Niuas, Tongatapu, 'Eua, Vava'u; published source product says ADM1, ODbL 1.0. Original metadata names OpenStreetMap/Wambacher as source contributors; this is not itself government certification.",
+      "license": "Open Data Commons Open Database License 1.0 in source metadata; product citation notice CC BY 4.0 for code/derivative work and requests source-specific citation. See retained citation notice.",
+      "retained_paths": [
+        "sources/TON/geoBoundaries-TON-ADM1.geojson",
+        "sources/TON/geoBoundaries-TON-ADM1-metaData.json",
+        "sources/TON/geoBoundaries-TON-ADM1-metaData.txt",
+        "sources/TON/CITATION-AND-USE-geoBoundaries.txt"
+      ],
+      "files": [
+        {
+          "path": "sources/TON/geoBoundaries-TON-ADM1.geojson",
+          "bytes": 1202782,
+          "sha256": "c879101306e56a83d5efc5cae56b5c92f02d1e3485ea6ac64bd3f94a67b7e24a"
+        },
+        {
+          "path": "sources/TON/geoBoundaries-TON-ADM1-metaData.json",
+          "bytes": 852,
+          "sha256": "b838c88c03410c69802cca9b7e80660270c8ddffe9761ea22b2b619f60748056"
+        },
+        {
+          "path": "sources/TON/geoBoundaries-TON-ADM1-metaData.txt",
+          "bytes": 1011,
+          "sha256": "8095b38272065f2cf02b91569d620cb5a89756c4a8c2ab5d498e3d886e2c6624"
+        },
+        {
+          "path": "sources/TON/CITATION-AND-USE-geoBoundaries.txt",
+          "bytes": 4316,
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+        }
+      ]
+    },
+    {
+      "id": "geoBoundaries-GB-Open-TUV-ADM1",
+      "title": "geoBoundaries gbOpen Tuvalu ADM1",
+      "canonical_url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUV/ADM1/",
+      "vintage": "boundaryYear 2017; sourceDataUpdateDate and buildDate in pinned metadata",
+      "role": "Eight named administrative features Nanumanga, Nanumea, Niutao, Nui, Vaitupu, Nukufetau, Funafuti, Nukulaelae; published source product says ADM1, ODbL 1.0. The official Tuvalu 2022 census enumerates nine islands including Niulakita: unresolved source/island crosswalk.",
+      "license": "Open Data Commons Open Database License 1.0 in source metadata; product citation notice CC BY 4.0 for code/derivative work and requests source-specific citation. See retained citation notice.",
+      "retained_paths": [
+        "sources/TUV/geoBoundaries-TUV-ADM1.geojson",
+        "sources/TUV/geoBoundaries-TUV-ADM1-metaData.json",
+        "sources/TUV/geoBoundaries-TUV-ADM1-metaData.txt",
+        "sources/TUV/CITATION-AND-USE-geoBoundaries.txt"
+      ],
+      "files": [
+        {
+          "path": "sources/TUV/geoBoundaries-TUV-ADM1.geojson",
+          "bytes": 79396,
+          "sha256": "3c06779be3173360c9a2927729798eacb5533c745e31313f11940041585030aa"
+        },
+        {
+          "path": "sources/TUV/geoBoundaries-TUV-ADM1-metaData.json",
+          "bytes": 849,
+          "sha256": "ef3474d8b744a6cf19b969f1dc9200ac2c30dd5fedbed6d3d6bd1b21766b9d18"
+        },
+        {
+          "path": "sources/TUV/geoBoundaries-TUV-ADM1-metaData.txt",
+          "bytes": 1011,
+          "sha256": "362d40a5b4c099caf9bdd43c0ef0a0674f52f0b95847f6bf508826c5f15c37ce"
+        },
+        {
+          "path": "sources/TUV/CITATION-AND-USE-geoBoundaries.txt",
+          "bytes": 4316,
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+        }
+      ]
+    },
+    {
+      "id": "GSHHG-2.3.7",
+      "title": "Global Self-consistent, Hierarchical, High-resolution Geography Database physical land L1",
+      "canonical_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip",
+      "vintage": "release 2.3.7 dated 2017-06-15; mixed source dates per included release notes",
+      "license": "LGPL as distributed with source archive; retain original license notice. Mixed source provenance; archive README warns of possible source misregistration.",
+      "retained_source_bytes": false,
+      "restoration": "Download the exact archive URL, verify SHA-256 8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41 (149157845 bytes), extract GSHHS_shp/f/GSHHS_f_L1.shp and sidecars, then run python screen_gshhg_land.py /path/to/GSHHS_f_L1.shp. The JSON output preserves all candidate intersecting records, shape-WKB hashes and ten nearest unmatched records for every assigned feature. Requires pyshp 2.3.1, pyproj 3.7.2, shapely 2.1.2; projected equal-area comparison EPSG:6933.",
+      "screen_scope": "Two broad Pacific windows include assigned locations and neighboring Fiji/Kiribati/Cook Islands; full L1 records scanned 179837, window candidates 1463, positive overlaps 45. Land only: not administrative boundaries or ownership. Antarctica excluded."
+    },
+    {
+      "id": "Tonga-PHC-2021-Vol1",
+      "title": "Tonga Population and Housing Census 2021, Volume 1",
+      "canonical_url": "https://tongastats.gov.to/download/272/census-report-and-factsheet/7647/census-report-vol1-2021.pdf",
+      "official_landing_page": "https://tongastats.gov.to/census-2/population-census-3/census-report-and-factsheet/",
+      "publication_date": "2022-10-18 (PDF metadata creation date)",
+      "retrieval_date": "2026-10-03",
+      "bytes": 15283448,
+      "sha256": "d78fd27bb4053a7afc431cfcc833109122dda1b57ef92017328870524b2d5edd",
+      "pages": 367,
+      "license": "No explicit reuse license located; do not retain file. Restore from canonical direct URL; page 10 glossary identifies five main island divisions and districts/villages; printed page 20 Table G1 gives division, district and village tabulations.",
+      "geographic_use": "Administrative/settlement taxonomy cross-check only; not boundary geometry, legal demarcation or political ownership determination."
+    },
+    {
+      "id": "Tuvalu-PHC-2022",
+      "title": "Tuvalu Population and Housing Census 2022 Report",
+      "canonical_url": "https://stats.gov.tv/download/85/population-and-housing-census/1836/tuvalu_2022_census_report.pdf",
+      "official_landing_page": "https://stats.gov.tv/news/tuvalu-population-and-housing-census-2022-23/",
+      "publication_date": "2025-03-26 (PDF metadata creation date)",
+      "retrieval_date": "2026-10-03",
+      "bytes": 10674813,
+      "sha256": "2f91a61b3d40d7ca30989daba83b25edfb5e6f7c458fe8c721a5e23c42b59825",
+      "pages": 65,
+      "license": "No explicit reuse license located; do not retain file. Restore from canonical direct URL; printed page 1 names nine islands; page 6 Table 3 and page 7 Table 4 enumerate residents by island including Niulakita.",
+      "geographic_use": "Island enumeration and settlement/population cross-check, not boundary geometry, legal demarcation or political ownership determination."
+    },
+    {
+      "id": "Samoa-PHC-2021",
+      "title": "Samoa Population and Housing Census 2021 Final Report",
+      "canonical_url": "https://sbs.gov.ws/documents/census/2021/Census-2021-Final-Report_221122_051222.pdf",
+      "official_landing_page": "https://www.sbs.gov.ws/census/",
+      "publication_date": "2022-12-04 (PDF metadata creation date)",
+      "retrieval_date": "2026-10-03",
+      "bytes": 2776136,
+      "sha256": "59fd92c6e36f379949915dc2f7d142bd4c54a037497044be6a7befab3de1ddbc",
+      "pages": 93,
+      "license": "No explicit reuse license located; do not retain file. Restore direct URL; printed pp.1,20-22 include 51 political districts and tables by region/district/village; table demonstrates villages on Manono Uta, Faleu and Apolima.",
+      "related_official_source": "https://www.sbs.gov.ws/district-profiles/ (2021 district profiles)",
+      "geographic_use": "Settlement and subnational taxonomy cross-check, not boundary geometry or sovereignty assessment. Current WSM identity is Natural Earth ADM0 and does not independently represent the 51 districts."
+    },
+    {
+      "id": "Tokelau-Government-statistics-and-villages",
+      "title": "Tokelau Government Statistics and Villages official pages",
+      "canonical_url": "https://www.tokelau.org.nz/Stats.html",
+      "related_urls": [
+        "https://www.tokelau.org.nz/About+Our+Government/National+Statistics+Office.html",
+        "https://www.tokelau.org.nz/About+Us/Villages.html",
+        "https://www.tokelau.org.nz/Tokelau+Government/Government+Departments/Office+of+the+Council+for+the+Ongoing+Government+OCOG/Tokelau+National+Statistics+Office/census.html"
+      ],
+      "retrieval_date": "2026-10-03",
+      "license": "No explicit redistribution license located; HTML not retained. Restoration by GET canonical pages.",
+      "observed": "Government identifies a National Statistics Office and a Population and Dwellings Census. Official villages page distinguishes atoll group and village settlements, including Fakaofo (62 islets, two settlements) and Nukunonu (Fale and Motuhaga). This supports named island group and settlement granularity; it does not resolve Swains/Olohega membership in the botanical Tokelau-Manihiki area."
+    },
+    {
+      "id": "ISEE-Wallis-Futuna-2019-census",
+      "title": "ISEE Nouvelle-Calédonie Recensement de la population 2019: principaux résultats",
+      "canonical_url": "https://isee.nc/recensement-de-la-population-2019-principaux-resultats-1",
+      "retrieval_date": "2026-10-03",
+      "license": "No explicit redistribution license located; HTML and linked report not retained.",
+      "observed": "Official statistical result page is reachable, but reviewed material does not define source boundary geometry, full commune/district footprints or island/lagoon semantics. The Natural Earth fallback has no retained policy profile in this issue."
+    },
+    {
+      "id": "Natural-Earth-current-fallbacks",
+      "title": "Natural Earth data product used by current baseline for ADM0/ADM1/territory features",
+      "canonical_url": "https://www.naturalearthdata.com/",
+      "pinned_vector_repository": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+      "license": "Public domain stated by Natural Earth product; exact dataset vintage must be recovered from pinned object/source metadata before source-level endorsement.",
+      "use_limit": "Fine-grained Natural Earth administrative units are cartographic reference geometry; no evidence found here that warrants treating unit labels/polygons as authoritative legal administrative boundaries. Issue metadata explicitly reports missing source-policy profiles ASM and WLF."
+    },
+    {
+      "id": "Niue-statistics-access",
+      "title": "Niue PRISM/Statistics page access attempt",
+      "canonical_url": "https://niue.prism.spc.int/",
+      "retrieval_date": "2026-10-03",
+      "result": "Redirected to https://niuestatistics.nu/ but proxy returned HTTP 403/502; no content retained or facts inferred. Source restoration/verification remains a follow-up.",
+      "status": "unresolved"
+    },
+    {
+      "id": "Kaupule-O-Niutao-Island-Strategy-2021-2024",
+      "title": "Te Lagai Fakalaga Fenua III: Island Strategy Plan for Niutao and Niulakita 2021–2024",
+      "canonical_url": "https://nto.kaupule.gov.tv/wp-content/uploads/2026/04/2021-2024-Island-Strategy-Plan_English.pdf",
+      "publisher": "Kaupule o Niutao official site",
+      "retrieval_date": "2026-10-03",
+      "bytes": 14625789,
+      "sha256": "70b7995046f1766f0b8311e5ba1fe30d9702e821273405e0a364d00cb495b2f9",
+      "license": "No explicit reuse license found; PDF not retained. Restore from canonical URL; full PDF was inspected as source material.",
+      "observed": "Official island-council strategy title expressly covers Niutao and Niulakita for 2021–2024. This corroborates a joint local planning relationship but does not by itself establish statutory council jurisdiction or the legal boundary/extent of either island. It strengthens the source crosswalk question and is not a footprint assignment."
+    }
+  ],
+  "followups": [
+    {
+      "issue": 615,
+      "scope": "Niulakita administrative/physical island representation in current Tuvalu eight-feature 2017 ADM1 source; blocked on #134."
+    },
+    {
+      "issue": 616,
+      "scope": "Original Natural Earth source-policy/profile recovery for exact five ASM and three WLF identities; blocked on #134."
+    }
+  ],
+  "unresolved_scope_crosswalks": [
+    {
+      "area": "Tokelau Archipelago",
+      "ids": [
+        "atlas:coverage:NZL-5472",
+        "atlas:macro-coverage:location:a0457f0d44c94b71f00d",
+        "ASM-5001"
+      ],
+      "finding": "Issue #134 owns Tokelau and Swains only; Nukunonu belongs to another packet. Tokelau Government sources support atoll/settlement detail but cannot resolve the published three-member botanical-area purpose. Integrator must reconcile relevant packet evidence before any shared membership action."
+    },
+    {
+      "area": "Niue",
+      "ids": [
+        "atlas:territory:NIU"
+      ],
+      "finding": "Natural Earth country-level identity; Niue official statistics source inaccessible in this session; territory/source vintage/coastline completeness not independently verified."
+    }
+  ]
+}
