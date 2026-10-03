@@ -1,0 +1,112 @@
+{
+  "probe": "verify-only after excessive new typed trigger-function EXECUTE grant",
+  "scope": "isolated PGlite owner fixture, no provider",
+  "allowed": true,
+  "result": {
+    "accepted": true,
+    "receipt": {
+      "version": 1,
+      "status": "verified",
+      "read_only": true,
+      "core_schema_sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+      "source_manifest_sha256": "d0538e97a3499deb6d9a8ffc51949ed519b4b27d8ef8ea0d16cefeefea654c8b",
+      "source_snapshot_fingerprint": "8a9a8194eb2503677cf303a3dc9d62b64964e4a158cb646025f5f2a5aa4039e4",
+      "source_revision": 1,
+      "migrations": [
+        {
+          "id": "0001_temporal_geography",
+          "sha256": "a4302a6f00b305205b70ed8981f929725c90b48172413ff47738a4a27186f6cd",
+          "status": "already-applied"
+        },
+        {
+          "id": "0002_footprint_versions",
+          "sha256": "24e22602715355e48e344649461179d69ed92cf3c0e54812dee4f315fed42f37",
+          "status": "already-applied"
+        },
+        {
+          "id": "0003_typed_observations",
+          "sha256": "0c9c1c402c0f1ee707a0083199ea07314233846deb9fddb79723108a0c439041",
+          "status": "already-applied"
+        }
+      ],
+      "original_collections": {
+        "sources": {
+          "count": 1,
+          "ordered_rows_sha256": "fdb0c868625e394eb49be90f67c2d5ba0029ad133bfe48ae94f24c8d45bb9a73"
+        },
+        "entity_types": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "entities": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "categories": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "records": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "names": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "relationships": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "media": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "media_links": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "retirements": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "ingestions": {
+          "count": 1,
+          "ordered_rows_sha256": "596889958956ed48005e1f9961b6ab675faa2775115e278619044a968955db2b"
+        },
+        "geographic_releases": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "geographic_memberships": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "geographic_changes": {
+          "count": 0,
+          "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "original_json_bytes_preserved": true,
+      "original_sequence_preserved": true,
+      "base_guards_sha256": "9e87f3db6d965273e2ca6e47e8ffa29f75db183168855d714c92c4179ab39a96",
+      "core_functions_sha256": "dd4b20c23857a14f6159212cc6754675b5fca1444053108bd7cd216a9b316fa9",
+      "runtime": {
+        "version": 2,
+        "status": "verified",
+        "role": "worldatlas_app",
+        "tables": 26,
+        "immutable_facts": true,
+        "footprint_catalog": "SELECT only; owner publishes",
+        "explicit_ingestion_rowid": false,
+        "registry_access": false,
+        "sequence": "USAGE only"
+      },
+      "storage_export_version": 3,
+      "atlas_fact_tables": 26,
+      "registry_table": "worldatlas_schema_migrations",
+      "registry_owner_only": true,
+      "commit_status": "committed"
+    }
+  }
+}

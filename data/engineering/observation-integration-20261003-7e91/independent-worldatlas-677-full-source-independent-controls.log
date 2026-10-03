@@ -1,0 +1,32 @@
+✔ actual PostgreSQL forward DDL preserves every baseline byte and sequence, grants minimum runtime access, and retries idempotently (3603.186633ms)
+✔ forward failure rolls back DDL, registry and grants without changing original bytes (1753.112693ms)
+✔ registered catalog tampering and unreviewed hashes reject instead of silently repairing a database (2513.385944ms)
+✔ missing reviewed rehearsal operation performs no management requests or database mutation (1.64508ms)
+✔ reviewed forward operation requires an actual production baseline and exact ordered files (0.501546ms)
+✔ fresh hash-pinned private Site maintenance attestation rejects stale, writable and mismatched context (2.925241ms)
+✔ management workflows require explicit manual dispatch and reject push selection (106.787822ms)
+✔ third reviewed forward migration installs typed runtime privileges without changing retained core contracts or replay identity (3931.611145ms)
+✔ typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL (3104.925915ms)
+✔ typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes (2583.521872ms)
+✔ legacy or altered installed schemas never advertise typed capabilities (26.263634ms)
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+✔ actual Worker typed routes enforce transport/maintenance and keep atomic corrections, raw source pins and snapshot paging consistent (3196.997141ms)
+✔ legacy23-table projections require the complete known schema and current maintenance clients refuse them as complete backups (4536.068162ms)
+✔ derivation closures reject example promotion, cycles and ambiguous roots while example-only acyclic chains remain available under the paused factual gate (2909.503427ms)
+✔ bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes (3495.212151ms)
+✔ factual typed geography is retained per claim and cannot be silently repinned on import, correction or prepared reads (2633.39814ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 22630.57157

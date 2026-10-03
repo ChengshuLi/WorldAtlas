@@ -1,0 +1,21 @@
+{
+  "probe": "pinned original source JSON with different decoded metadata",
+  "scope": "synthetic fetch only, no network/provider",
+  "result": {
+    "accepted": true,
+    "returnedSource": {
+      "id": "example",
+      "name": "Synthetic source",
+      "url": "https://example.org",
+      "license": "CC0",
+      "vintage": "2026",
+      "supported_from": -100,
+      "supported_to": 2027,
+      "status": "example",
+      "metadata": {
+        "archive": "changed semantic context"
+      },
+      "original_metadata_json": " {\"archive\":\"retained original\"} "
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "pr_number": 677,
+  "issue_number": 529,
+  "reviewer_worker_id": "review-palette-651-20261003",
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "candidate_commit": "527f1dd1f50cf12600e603cc380e555199b418bf",
+  "outcome": "changes-requested-full-source-early-review",
+  "exact_head_acceptance": false,
+  "findings": [
+    {
+      "priority": "P2",
+      "file": "src/typed-client.js",
+      "line": 4,
+      "title": "Typed load has no transport deadline or cancellation",
+      "evidence": "Candidate source awaits fetch and reader.read without any timeout/AbortSignal. Original synthetic hosted body remained pending at50ms with no reader cancellation; prepared unresolved fetch also remained pending. The source has no eventual deadline path. Parent has begun correcting this concurrently; acceptance of those corrections requires separate reassessment.",
+      "requested_fix": "Validated whole-load deadline and caller AbortSignal covering fetch/body and context resolution; abort outstanding request/reader and release lock; actual stalled fetch/body/external cancellation controls."
+    },
+    {
+      "priority": "P2",
+      "file": "src/typed-client.js",
+      "line": 50,
+      "title": "Pinned source raw JSON does not bind returned decoded metadata",
+      "evidence": "Actual synthetic client accepted correct original_metadata_json/pin with different decoded source.metadata and returned changed archive provenance. Server cleanCatalog is correct; client promises context/pin verification but omits this equality.",
+      "requested_fix": "Validate decoded metadata equals parsed original_metadata_json using strict retainedJSON helper while preserving exact original bytes; mismatch-negative and whitespace-positive controls."
+    },
+    {
+      "priority": "P2",
+      "file": "scripts/neon-forward-migrations.mjs",
+      "line": 86,
+      "title": "Owner verify-only accepts altered typed guard function grants",
+      "evidence": "Actual isolated PGlite: after reviewed3migration install, GRANT EXECUTE ON FUNCTION atlas_typed_observations_guard() TO worldatlas_app; effective privilege true. verify-only operation still returned verified/read_only/runtimeverified. Function ACLs are not included in installedContract nor runtime role verifier.",
+      "requested_fix": "Verify typed guard functions effective application EXECUTE and PUBLIC grants remain absent, without rewriting frozen SQL. Actual effective/direct/PUBLIC altered-grant negative control with restore and replay-positive checks."
+    }
+  ],
+  "independent_controls": {
+    "command": "node --test test/typed-integration.test.mjs test/neon-forward-migrations.test.mjs",
+    "tests": 16,
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 22630.57157,
+    "limits": "Working-tree execution while parent started client corrections; owner and API semantics stable. Not exact-head final approval. Existing green groups did not cover new reproduced gaps."
+  },
+  "acceptance_assessment": "Shared registry and typed storage/API/prepared/static seams implement structural child529 scope without live facts. Actual Node HTTP/static parity receipts cover empty archive at-100,-1,1,2026 and year-zero/write rejection; synthetic hosted parity and owner controls exercise populated evidence. Production owner application and Site publication remain separate, explicit current-baseline/source attestation mismatch must stay blocked and needs coordinator-reviewed preservation follow-up. NativeD1 unresolved0008 is not certified. A fourth529PR is not authorized. Corrected code and final receipts/CI/exact-head inventory/review are required before considering closure.",
+  "positive_assessment": [
+    "Prior three derivation findings corrected and separately independently reassessed.",
+    "Factual claim and dependency geography pins preserve original territorial meaning; changed release fails reads/import rather than repinning raw evidence.",
+    "Prepared archive copied exact bytes with SHA256 descriptor; optional clients do not add map-navigation fetches.",
+    "Owner list appends only previously merged0003, preserves immutable source and core inventory; isolated26table role/guard/replay tests pass.",
+    "KnownV3 validated labeled legacy projection and completeV3backup remain separate."
+  ],
+  "source_inventory": [
+    {
+      "path": "src/typed-client.js",
+      "bytes": 5370,
+      "sha256": "7b94cd6dfa9a34baeea97f8e6c61ee0348b60b3d3adcb70cb6364a67b46bc6e1"
+    },
+    {
+      "path": "src/typed-snapshot.js",
+      "bytes": 7556,
+      "sha256": "e19062ac4e747636fb983707dbc0c6bfdb9b408bb6dbc064e20abbf9e2bb35ca"
+    },
+    {
+      "path": "src/typed-derivations.js",
+      "bytes": 2134,
+      "sha256": "4d90e7f568573fcb290234325d0a48e82b3f7ab74c95b29448760dcf92591508"
+    },
+    {
+      "path": "hosted/typed-observations.js",
+      "bytes": 19151,
+      "sha256": "437be19f39d001e63625ded8591030e2bf035d47f25df8a3732e3a219d17d738"
+    },
+    {
+      "path": "scripts/neon-forward-migrations.mjs",
+      "bytes": 34516,
+      "sha256": "56bc8140cd92d5f44da61e9223d4d6d855295b41e8e739bceaa8a07d6dd5d361"
+    },
+    {
+      "path": "scripts/build-static.mjs",
+      "bytes": 12705,
+      "sha256": "df0171b46e06825caea0181d81caba2ea95bc1ee183fbb088465866e451ac619"
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 7591,
+      "sha256": "4ce374fe2128e13be675e92fa7b7a8e65290304adeaedd89f0b7f0d26b775633"
+    },
+    {
+      "path": "docs/TYPED_MODULE_INTEGRATION.md",
+      "bytes": 10975,
+      "sha256": "75bcc20bb4bc00e32a667d54ba4f98f8ccdcf3a712f015855eb7bc33d7532e45"
+    },
+    {
+      "path": "test/neon-forward-migrations.test.mjs",
+      "bytes": 13086,
+      "sha256": "acf8ddbdf56e6b84b2a22781ab3f5dafac044ff51df2a74fe47e50c06dac1583"
+    },
+    {
+      "path": "test/typed-integration.test.mjs",
+      "bytes": 25666,
+      "sha256": "19503a26f0ae67f24fbad01cf53f03178204858a7726b2a669755759d00e6c20"
+    }
+  ],
+  "proof_receipts": [
+    {
+      "path": "/tmp/worldatlas-677-source-context-probe.json",
+      "bytes": 578,
+      "sha256": "f59316fc52abb9029a1a62d8a7693e5a7935ab927c7d70bb30d1b3ff69a3a89a"
+    },
+    {
+      "path": "/tmp/worldatlas-677-function-grant-probe.json",
+      "bytes": 4299,
+      "sha256": "5551d2658c72d0095665440f553c6434d99aec105b8aac144248143261800b92"
+    },
+    {
+      "path": "/tmp/worldatlas-677-function-grant-probe.mjs",
+      "bytes": 4553,
+      "sha256": "c222d9f1ae236f9a46c7546a6a5d0e4ba9acb5a881d63d3371e449e1e7114d2c"
+    },
+    {
+      "path": "/tmp/worldatlas-677-full-source-independent-controls.log",
+      "bytes": 2997,
+      "sha256": "16aa8f3fadad61e0d117cbffd9fea6fd70b4f5224eb236a17aec6fbdd4176ba6"
+    }
+  ],
+  "limits": [
+    "No final exact-head approval or full regression/build independent rerun.",
+    "No edits, claims, posts, provider operations or publication.",
+    "Only synthetic isolated SQLite/PGlite/fetch fixtures, not factual or geographic approval.",
+    "Report-only legacy evidence; no manifest/hash binding invented."
+  ]
+}

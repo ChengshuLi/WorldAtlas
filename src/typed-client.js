@@ -1,17 +1,34 @@
-import {resolveTypedSnapshot,canonicalTypedJSON} from './typed-snapshot.js';
+import {resolveTypedSnapshot,canonicalTypedJSON,retainedTypedJSON} from './typed-snapshot.js';
 import {observationContract,observationDigest} from './observation-modules.js';
 
 const maxBytes=64*1024*1024;
-async function readBytes(response,limit=maxBytes){
+function abortable(promise,signal){
+ if(signal.aborted)return Promise.reject(signal.reason);
+ return new Promise((resolve,reject)=>{
+  const abort=()=>reject(signal.reason);signal.addEventListener('abort',abort,{once:true});
+  Promise.resolve(promise).then(resolve,reject).finally(()=>signal.removeEventListener('abort',abort));
+ });
+}
+async function boundedLoad({signal,timeoutMs=60000},callback){
+ if(!Number.isSafeInteger(timeoutMs)||timeoutMs<1||timeoutMs>120000)throw Error('Invalid typed load deadline');
+ const controller=new AbortController(),abort=()=>controller.abort(signal.reason);
+ if(signal?.aborted)abort();else signal?.addEventListener('abort',abort,{once:true});
+ const timer=setTimeout(()=>controller.abort(new DOMException('Typed evidence load deadline exceeded','TimeoutError')),timeoutMs);
+ try{controller.signal.throwIfAborted();return await abortable(callback(controller.signal),controller.signal);}finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
+}
+async function readBytes(response,limit,signal){
  if(!response.ok)throw Object.assign(Error('Typed evidence request failed'),{status:response.status});
  const reader=response.body.getReader(),chunks=[];let length=0;
- try{for(;;){const {value,done}=await reader.read();if(done)break;length+=value.length;if(length>limit)throw Error('Typed evidence response exceeds its byte budget');chunks.push(value);}}
- finally{await reader.cancel();}
+ try{for(;;){const {value,done}=await abortable(reader.read(),signal);if(done)break;length+=value.length;if(length>limit)throw Error('Typed evidence response exceeds its byte budget');chunks.push(value);}}
+ finally{void reader.cancel().catch(()=>{});reader.releaseLock();}
  const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}return bytes;
 }
-export async function loadPreparedTypedEvidence({url,sha256,year,examples=false,fetcher=fetch}){
+export async function loadPreparedTypedEvidence(options){
+ return boundedLoad(options,signal=>loadPreparedCore({...options,signal}));
+}
+async function loadPreparedCore({url,sha256,year,examples=false,fetcher=fetch,signal}){
  if(!/^[a-f0-9]{64}$/.test(sha256??''))throw Error('Prepared typed evidence requires an exact byte hash');
- const bytes=await readBytes(await fetcher(url,{credentials:'same-origin'}));
+ const bytes=await readBytes(await abortable(fetcher(url,{credentials:'same-origin',signal}),signal),maxBytes,signal);
  const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),byte=>byte.toString(16).padStart(2,'0')).join('');
  if(digest!==sha256)throw Error('Prepared typed evidence bytes differ from the descriptor');
  return resolveTypedSnapshot(JSON.parse(new TextDecoder().decode(bytes)),year,{examples});
@@ -19,7 +36,10 @@ export async function loadPreparedTypedEvidence({url,sha256,year,examples=false,
 
 /** Opt-in domain seam. A changed marker rejects the entire load; callers may
  * start a fresh bounded load, never concatenate snapshots from two revisions. */
-export async function loadHostedTypedEvidence({origin,year,examples=false,limit=100,fetcher=fetch}){
+export async function loadHostedTypedEvidence(options){
+ return boundedLoad(options,signal=>loadHostedCore({...options,signal}));
+}
+async function loadHostedCore({origin,year,examples=false,limit=100,fetcher=fetch,signal}){
  const contract=await observationContract(),collections={observations:[],feature_links:[],retirements:[]};
  const catalogs={sources:new Map(),entities:new Map(),derivation_inputs:new Map()},sourcePins=new Map();
  let fingerprint=null,revision=null,geographyPins=null,bytes=0,pages=0;
@@ -29,7 +49,7 @@ export async function loadHostedTypedEvidence({origin,year,examples=false,limit=
   do{
    if(++pages>3000)throw Error('Typed snapshot exceeds its page budget');
    const url=new URL('/api/typed/v1/snapshot',origin);for(const [key,value]of Object.entries({year,examples:Number(examples),stream,limit,cursor}))url.searchParams.set(key,value);
-   const raw=await readBytes(await fetcher(url,{credentials:'same-origin'}),8*1024*1024);bytes+=raw.length;if(bytes>maxBytes)throw Error('Typed snapshot exceeds its aggregate byte budget');
+   const raw=await readBytes(await abortable(fetcher(url,{credentials:'same-origin',signal}),signal),8*1024*1024,signal);bytes+=raw.length;if(bytes>maxBytes)throw Error('Typed snapshot exceeds its aggregate byte budget');
    const page=JSON.parse(new TextDecoder().decode(raw));
    if(page.version!==1||page.year!==year||page.stream!==stream||page.examples!==Number(examples)||page.registry_sha256!==contract.registry_sha256||!Array.isArray(page.rows)||!Number.isSafeInteger(page.total)||page.total<0||page.total>100000)throw Error('Invalid typed snapshot page');
    if(fingerprint===null){fingerprint=page.fingerprint;revision=page.revision;geographyPins=page.geography_pins;}
@@ -47,7 +67,7 @@ export async function loadHostedTypedEvidence({origin,year,examples=false,limit=
  const sources=[...catalogs.sources.values()];
  const columns=['id','name','url','license','vintage','supported_from','supported_to','status','metadata'];
  if(sourcePins.size!==sources.length)throw Error('Incomplete original source pins');
- for(const source of sources){if(typeof source.original_metadata_json!=='string')throw Error('Missing original source bytes');const raw={...source,metadata:source.original_metadata_json};if(await observationDigest(columns.map(key=>raw[key]))!==sourcePins.get(source.id)?.sha256)throw Error('Typed source bytes differ from their pin');}
+ for(const source of sources){if(typeof source.original_metadata_json!=='string')throw Error('Missing original source bytes');retainedTypedJSON(source.metadata,source.original_metadata_json,'source metadata',{objectRequired:true});const raw={...source,metadata:source.original_metadata_json};if(await observationDigest(columns.map(key=>raw[key]))!==sourcePins.get(source.id)?.sha256)throw Error('Typed source bytes differ from their pin');}
  const resolved=await resolveTypedSnapshot({version:1,registry_sha256:contract.registry_sha256,geography_pins:geographyPins,...collections,sources,entities:[...catalogs.entities.values()],derivation_inputs:[...catalogs.derivation_inputs.values()]},year,{examples});
  return {...resolved,fingerprint,revision};
 }

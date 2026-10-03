@@ -1,0 +1,40 @@
+{
+  "probe": "example-input-to-factual-derived",
+  "scope": "isolated SQLite synthetic approvals only, no provider or actual approval",
+  "outcome": {
+    "accepted": true,
+    "result": {
+      "version": 1,
+      "ingestion_id": "typed:8e39a098cfc199c76cdc826849d54f6da1d52642141192685eeaac5a79b05644",
+      "duplicate": false,
+      "counts": {
+        "retirements": 0,
+        "observations": 1,
+        "feature_links": 0
+      },
+      "registry_sha256": "cc6aae6c18099d3e776c73ee4144556422ac87b911aa30aa95bef831ca18d2d2",
+      "expected_geography": {
+        "release_id": "synthetic-typed-release",
+        "hierarchy_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "footprints_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "revision": 6
+    },
+    "row": {
+      "id": "factual-derived",
+      "subject_id": "location-1",
+      "subject_kind": "location",
+      "field_id": "atlas.marine-contact",
+      "value": "false",
+      "contract_version": 1,
+      "registry_sha256": "cc6aae6c18099d3e776c73ee4144556422ac87b911aa30aa95bef831ca18d2d2",
+      "valid_from": -100,
+      "valid_to": -99,
+      "method": "derived",
+      "status": "derived",
+      "source_id": "historical",
+      "is_example": 0,
+      "metadata": "{\"derivation_input_ids\":[\"example-input\"]}"
+    }
+  }
+}

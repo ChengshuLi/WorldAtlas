@@ -65,6 +65,12 @@ test('third reviewed forward migration installs typed runtime privileges without
    for(const table of forwardMigrationDefinitions[2].tables){await f.owner.query('SELECT * FROM '+table);for(const query of ['UPDATE '+table+' SET metadata=metadata','DELETE FROM '+table,'TRUNCATE '+table,'ALTER TABLE '+table+' DISABLE TRIGGER ALL'])await assert.rejects(f.owner.query(query));}
    await assert.rejects(f.owner.query('SELECT * FROM worldatlas_schema_migrations'));await assert.rejects(f.owner.query('SELECT atlas_typed_observations_guard()'));
   }finally{await f.owner.query('RESET ROLE');}
+  for(const grantee of ['worldatlas_app','PUBLIC']){
+   await f.owner.query('GRANT EXECUTE ON FUNCTION atlas_typed_observations_guard() TO '+grantee);
+   await assert.rejects(applyPostgresForwardMigrations({...options,verifyOnly:true}),/unexpected-typed-function-privileges/);
+   await f.owner.query('REVOKE EXECUTE ON FUNCTION atlas_typed_observations_guard() FROM '+grantee);
+   assert.equal((await applyPostgresForwardMigrations({...options,verifyOnly:true})).status,'verified');
+  }
   await f.owner.query('ALTER TABLE atlas_typed_retirements DISABLE TRIGGER atlas_typed_retirements_immutable');
   await assert.rejects(applyPostgresForwardMigrations(options),/registered-forward-contract|guard-disabled/);
  }finally{await f.close();}

@@ -1,0 +1,34 @@
+✔ actual PostgreSQL forward DDL preserves every baseline byte and sequence, grants minimum runtime access, and retries idempotently (4290.539208ms)
+✔ forward failure rolls back DDL, registry and grants without changing original bytes (1779.367735ms)
+✔ registered catalog tampering and unreviewed hashes reject instead of silently repairing a database (2247.870696ms)
+✔ missing reviewed rehearsal operation performs no management requests or database mutation (1.707523ms)
+✔ reviewed forward operation requires an actual production baseline and exact ordered files (0.507475ms)
+✔ fresh hash-pinned private Site maintenance attestation rejects stale, writable and mismatched context (1.187579ms)
+✔ management workflows require explicit manual dispatch and reject push selection (77.702767ms)
+✔ third reviewed forward migration installs typed runtime privileges without changing retained core contracts or replay identity (3197.98788ms)
+✔ prepared and hosted typed loads terminate stalled fetches and cancel stalled bodies without accepting partial evidence (137.643533ms)
+✔ external cancellation reaches typed transport/read cleanup and completed exact-byte loads clear their deadline (18.34048ms)
+✔ typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL (3610.546664ms)
+✔ typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes (2635.394888ms)
+✔ legacy or altered installed schemas never advertise typed capabilities (24.424611ms)
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+✔ actual Worker typed routes enforce transport/maintenance and keep atomic corrections, raw source pins and snapshot paging consistent (2753.991042ms)
+✔ legacy23-table projections require the complete known schema and current maintenance clients refuse them as complete backups (2854.008588ms)
+✔ derivation closures reject example promotion, cycles and ambiguous roots while example-only acyclic chains remain available under the paused factual gate (2017.976831ms)
+✔ bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes (3640.270623ms)
+✔ factual typed geography is retained per claim and cannot be silently repinned on import, correction or prepared reads (1655.638049ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19330.781564

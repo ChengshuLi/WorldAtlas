@@ -119,5 +119,18 @@
       "Native D1 frozen0008 installation limit retained; typed capability zero on legacy/unverified schemas",
       "No complete regional branches approved; factual import gate paused"
     ]
+  },
+  "second_independent_corrections": {
+    "reviewed_source": "527f1dd1f50cf12600e603cc380e555199b418bf",
+    "report": "data/engineering/observation-integration-20261003-7e91/full-source-early-independent-review.json",
+    "report_sha256": "95fd5af49e97b7fc797ae9b24353bca8bbc4f6c667e670836da21f4701175267",
+    "changes": [
+      "whole-load timeout and caller cancellation with reader cleanup",
+      "decoded versus original source metadata equality with exact raw-byte preservation",
+      "owner verify-only rejects effective application/PUBLIC typed function EXECUTE grants"
+    ],
+    "passed_corrected_groups": 18,
+    "receipt": "data/engineering/observation-integration-20261003-7e91/client-owner-correction-controls.tap",
+    "remaining": "final stable-source full regression, exact receipts/head review, requiredCI/queue/actual merge/release; full earlier regression in progress is candidate evidence only because source changed during execution"
   }
 }
