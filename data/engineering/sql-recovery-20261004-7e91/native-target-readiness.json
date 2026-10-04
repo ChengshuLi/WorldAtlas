@@ -1,0 +1,31 @@
+{
+  "checked_at_utc": "2026-10-04T05:39:09.768Z",
+  "operation": "isolated-native-postgresql-schema-readiness",
+  "status": "verified",
+  "postgres_version": "18.6",
+  "image_digest": "sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873",
+  "network": "none",
+  "root_filesystem": "read-only",
+  "target_data": "bounded768MiBtmpfs",
+  "schema_inputs": [
+    {
+      "path": "postgres/schema.sql",
+      "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618"
+    },
+    {
+      "path": "postgres/migrations/0001_temporal_geography.sql",
+      "sha256": "a4302a6f00b305205b70ed8981f929725c90b48172413ff47738a4a27186f6cd"
+    },
+    {
+      "path": "postgres/migrations/0002_footprint_versions.sql",
+      "sha256": "24e22602715355e48e344649461179d69ed92cf3c0e54812dee4f315fed42f37"
+    }
+  ],
+  "catalog_sha256": "9079e934e313d3f40a0f239664762d0d1053f020bfda4746b14ed56b155729db",
+  "duration_ms": 435,
+  "limitations": [
+    "No current backup captured or restored",
+    "No source/provider connection or mutation",
+    "Ephemeral target data is not retention"
+  ]
+}

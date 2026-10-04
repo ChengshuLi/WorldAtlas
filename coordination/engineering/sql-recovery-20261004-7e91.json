@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "sql-recovery-20261004-7e91",
+  "branch": "engineering/sql-recovery-20261004-7e91",
+  "base_main_commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
+  "github_issue": 51,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "GitHub51 and714 comments",
+  "claim_id": "6280f87c-c2be-425b-b0ae-e1ba35e73c46",
+  "scope": [
+    "Final bounded current factual/owner SQL recovery part; no production overwrite or provider plan change"
+  ],
+  "maintenance": {
+    "active": false,
+    "required": false
+  },
+  "deployment": null,
+  "evidence_paths": [
+    "data/engineering/sql-recovery-20261004-7e91/claim.json",
+    "data/engineering/sql-recovery-20261004-7e91/pr711-merge.jsonl",
+    "data/engineering/sql-recovery-20261004-7e91/native-target-readiness.json",
+    "data/engineering/sql-recovery-20261004-7e91/coordination-request.json"
+  ],
+  "next_action": "Wait for approved source method/window/operator at714/comment5977082523, then match final bounded tooling and actual current native restore proof"
+}
