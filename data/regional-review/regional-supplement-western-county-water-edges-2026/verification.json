@@ -1,0 +1,52 @@
+{
+  "issue": 598,
+  "verified_at_utc": "2026-10-04T09:04:00Z",
+  "reproduction": {
+    "command": "python data/regional-review/regional-supplement-western-county-water-edges-2026/reproduce_pairs.py",
+    "runs": 2,
+    "run_one_findings_sha256": "faeb367256d2eed9b53454a13deeacaeadc65220bdef8c2136f9881160e7b57a",
+    "run_two_findings_sha256": "faeb367256d2eed9b53454a13deeacaeadc65220bdef8c2136f9881160e7b57a",
+    "script_sha256": "feda0e856a185d2d96003af14a9dfd88dc50964bede1dd523e57b151f08a8b93",
+    "result": "passed"
+  },
+  "controls": [
+    {
+      "kind": "positive",
+      "result": "passed",
+      "evidence": "Reproduce script parses and matches all 17 issue-authored 2018/2024/current edge lengths and current polygon gaps to 0.0005 m tolerance."
+    },
+    {
+      "kind": "positive",
+      "result": "passed",
+      "evidence": "All 16 unique assigned GEOIDs map to exactly the 16 issue-assigned location IDs; invalid source polygons fail closed; all retained source hashes/bytes verify."
+    },
+    {
+      "kind": "negative",
+      "result": "passed",
+      "evidence": "Removing one issue pair lead causes the exact-lead-count control to report 16 instead of required 17."
+    },
+    {
+      "kind": "positive",
+      "result": "passed",
+      "evidence": "EPSG:3857 longitude-first control (10 E, 45 N) matches x=1113194.9079 m and y=5621521.4862 m."
+    },
+    {
+      "kind": "negative",
+      "result": "passed",
+      "evidence": "Swapping the control coordinates materially changes both projected axes and is rejected."
+    },
+    {
+      "kind": "negative",
+      "result": "passed",
+      "evidence": "A self-crossing polygon remains invalid; no implicit geometry repair is used."
+    },
+    {
+      "kind": "scientific_suite",
+      "result": "passed",
+      "evidence": "python test/evidence-geography.py: 8 checks passed; python test/ellipsoidal-area.py: analytic rectangle, symmetry, winding, holes, antimeridian, tiny parcels and 300 convergence comparisons passed."
+    }
+  ],
+  "limits": [
+    "Verification confirms reproducibility and stated input identity; it does not establish legal county marine boundaries, territorial ownership, regional approval or import eligibility."
+  ]
+}
