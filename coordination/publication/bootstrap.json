@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "primary_commit": "c5fce09842a0af2ae05cf6c611f012b6a71befff",
+  "source_commit": "2326792cc52fc353264abc33c2ac4e983fb2c3e5",
+  "site": {
+    "project_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db",
+    "version": 24,
+    "deployment_id": "appgdep_6ac14428eaac8191b59b5d3d8f05fb0d"
+  },
+  "release_id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+  "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+  "footprint_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+  "assets_sha256": "d06648cdc833b47020614be807d912e81904c2ccfc9ddbbc20e8cc4a33ada20d",
+  "evidence_urls": [
+    "https://github.com/ChengshuLi/WorldAtlas/blob/f72394a1194d0e0100cf08b7232da3d5be5a63bc/data/engineering/palette-publish-20261003-7e91/build-reuse.json",
+    "https://github.com/ChengshuLi/WorldAtlas/blob/f72394a1194d0e0100cf08b7232da3d5be5a63bc/data/engineering/palette-publish-20261003-7e91/source-package-match.json",
+    "https://github.com/ChengshuLi/WorldAtlas/blob/f72394a1194d0e0100cf08b7232da3d5be5a63bc/data/engineering/palette-publish-20261003-7e91/native-publication.json",
+    "https://github.com/ChengshuLi/WorldAtlas/blob/f72394a1194d0e0100cf08b7232da3d5be5a63bc/data/engineering/palette-publish-20261003-7e91/acceptance-summary.json",
+    "https://github.com/ChengshuLi/WorldAtlas/blob/f72394a1194d0e0100cf08b7232da3d5be5a63bc/data/validation/macro-publication-v5.json",
+    "https://github.com/ChengshuLi/WorldAtlas/issues/714#issuecomment-5976918188"
+  ],
+  "basis": "Retained October3 Site24 publication: listed runtime/build-input Git objects at c5fce098 equal the validated built input587adffc; 539 mirror blobs match packaged archive. Conservative primary boundary includes later evidence-only commits in the next delta.",
+  "observed_at": "2026-10-03T18:20:24.233650Z",
+  "limits": [
+    "Historical reconstruction, not a fresh production read or a new deployment. Publisher must recheck current served/rollback state before live work.",
+    "Only listed packaged/build inputs are established equivalent; source-only evidence and documentation were not deployed.",
+    "Release5 evidence is retained; release6 staging is neither finalized nor served.",
+    "Native tar hash is distinct from local/upload gzip hash."
+  ]
+}

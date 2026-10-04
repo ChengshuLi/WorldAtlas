@@ -106,3 +106,12 @@ test('production-only child is reserved by its publisher, not an ordinary implem
  assert.equal(holder.worker_id,'publisher-worker');
  assert.equal(transitionClaim({issue:operationIssue,comments:[comment(holder)],request:request({worker_id:'publisher-worker',action:'renew',request_id:'ssssssss-ssss-ssss-ssss-ssssssssssss',live_work:true}),now}).claim.live_work,true);
 });
+
+test('production child accepts only original-issue or legacy tracking and designated publisher',()=>{
+ for(const queue of [51,714,22]){
+  const operationIssue=issue({body:'<!-- worldatlas-work:v1\n'+JSON.stringify({...spec,production_operation:{source_issue:51,queue,publisher_worker_id:'publisher-worker'}})+'\n-->'});
+  const attempt=()=>transitionClaim({issue:operationIssue,comments:[],request:request({worker_id:'publisher-worker'}),now});
+  if(queue===22)assert.throws(attempt,/designated publisher/);else assert.equal(attempt().claim.worker_id,'publisher-worker');
+  assert.throws(()=>transitionClaim({issue:operationIssue,comments:[],request:request(),now}),/designated publisher/);
+ }
+});
