@@ -273,7 +273,9 @@ def main():
  for level,source_key in [('area','area_scopes'),('province','province_scopes')]:
   for group in scope[source_key]:
    gid=group['id'];owned=[m for m in members if m['parent_id']==gid] if level=='province' else [m for m in members if m['owner']==group['name']]
-   states=Counter(r['current_parent_label'] for r in assessment if r['id'] in {m['id'] for m in owned})
+   owned_ids={m['id'] for m in owned};group_rows=[r for r in assessment if r['id'] in owned_ids]
+   states=Counter(r['current_parent_label'] for r in group_rows)
+   unresolved_parent_subjects=[r['id'] for r in group_rows if r['parent_assignment_assessment']!='supported']
    if level=='area':
     full=group['full_area_location_count'];owned_n=group['owned_member_location_count']
    else:full=group['full_province_locations'];owned_n=len(owned)
@@ -281,7 +283,11 @@ def main():
     'baseline_full_location_count':full,'owned_location_count':owned_n,'partial_scope':group.get('partial',False),
     'owned_subject_ids':json.dumps([m['id'] for m in owned]),'current_parent_assignments':json.dumps(states,ensure_ascii=False),
     'source_role_and_parent_assessment':'See each subject row; source parent/vintage candidates are not a shared hierarchy edit.',
-    'assessment':'scope inventory cross-reference; no source-count quota or regional approval.'})
+    'assessment_status':'insufficient-evidence',
+    'assessment_reasons':'Scope status is not fully justified: assigned member outcomes remain insufficient because physical land/island and complete settlement coverage are not established; current ADM1/source comparisons are diagnostic only and do not independently establish legal parent purpose or boundary accuracy.',
+    'unresolved_member_parent_subject_ids':json.dumps(unresolved_parent_subjects),
+    'related_followup_issue_ids':json.dumps([749] if (group.get('country') or (owned[0]['owner'] if owned else group['name']))=='Nigeria' else [750] if (group.get('country') or (owned[0]['owner'] if owned else group['name']))=='Senegal' else [751] if (group.get('country') or (owned[0]['owner'] if owned else group['name']))=='Sierra Leone' else []),
+    'assessment':'individual area/province scope outcome cross-referenced to exact assigned subjects; no source-count quota or regional approval.'})
  write_csv('administrative-scope.csv',groups)
 
  # Each current national ADM1 unit is compared by source code to the same-vintage edge-matched layer.
