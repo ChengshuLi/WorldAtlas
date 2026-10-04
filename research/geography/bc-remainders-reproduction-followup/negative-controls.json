@@ -1,0 +1,42 @@
+{
+  "controls": [
+    {
+      "expected": "rejected before output",
+      "id": "changed-parent-assessment",
+      "outcome": "passed"
+    },
+    {
+      "expected": "rejected before output",
+      "id": "changed-acquired-layer",
+      "outcome": "passed"
+    },
+    {
+      "expected": "rejected before output",
+      "id": "missing-input",
+      "outcome": "passed"
+    },
+    {
+      "expected": "rejected without last-write-wins",
+      "id": "conflicting-source-member-map",
+      "outcome": "passed"
+    },
+    {
+      "expected": "rejected without changing sentinel or original outputs",
+      "id": "attempted-overwrite",
+      "outcome": "passed"
+    }
+  ],
+  "kind": "measurement",
+  "method_id": "negative-controls",
+  "original_outputs_after": {
+    "data/regional-review/bc-administrative-remainders-followup-2026/cd-assessments.json": "523200:ca83ecaefdb4e660e4e4a830bdf5016f2ec4ebd79bbd3e419d04be8c786802b3",
+    "data/regional-review/bc-administrative-remainders-followup-2026/csd-crosswalk.csv": "454367:a09b1edd040de9c3f2967b4c567f5c0beb21a33639c92b3af46a15c399df1721"
+  },
+  "original_outputs_before": {
+    "data/regional-review/bc-administrative-remainders-followup-2026/cd-assessments.json": "523200:ca83ecaefdb4e660e4e4a830bdf5016f2ec4ebd79bbd3e419d04be8c786802b3",
+    "data/regional-review/bc-administrative-remainders-followup-2026/csd-crosswalk.csv": "454367:a09b1edd040de9c3f2967b4c567f5c0beb21a33639c92b3af46a15c399df1721"
+  },
+  "outcome": "passed",
+  "retained_originals_changed": false,
+  "version": 1
+}

@@ -1,0 +1,69 @@
+{
+  "cd_roster_rows_with_rejected_ambiguous_candidates": 148,
+  "csv_rows_with_rejected_ambiguous_candidates": 426,
+  "detail_path": "research/geography/bc-remainders-reproduction-followup/mapping-differences.json",
+  "detail_sha256": "c11a3ddfe210c9142d81c68fa21a0d305f5c6c05b2846b4b9f02396993939063",
+  "input_receipt_change": {
+    "bounded_verified_entry_count": 142,
+    "original_entry_count": 6,
+    "reason": "Exact oversized full-source pins remain in input-baseline.json; new calculation consumes immutable bounded derivatives plus lossless full geoBoundaries partitions, not unbounded compressed files."
+  },
+  "kind": "generator",
+  "method_id": "two-run-reproduction",
+  "numeric_and_geometric_results_otherwise_identical": true,
+  "original_csd_identities_preserved": 335,
+  "original_outputs": [
+    {
+      "bytes": 523200,
+      "path": "data/regional-review/bc-administrative-remainders-followup-2026/cd-assessments.json",
+      "sha256": "ca83ecaefdb4e660e4e4a830bdf5016f2ec4ebd79bbd3e419d04be8c786802b3"
+    },
+    {
+      "bytes": 454367,
+      "path": "data/regional-review/bc-administrative-remainders-followup-2026/csd-crosswalk.csv",
+      "sha256": "a09b1edd040de9c3f2967b4c567f5c0beb21a33639c92b3af46a15c399df1721"
+    }
+  ],
+  "original_retained_outputs_changed": false,
+  "outcome": "passed",
+  "two_independent_runs": {
+    "cd-assessments.json": [
+      {
+        "bytes": 435862,
+        "path": "research/geography/bc-remainders-reproduction-followup/vintages/reproduction-run-1/cd-assessments.json",
+        "sha256": "b62798552063bdb8a43d4097c44baa18e906a715ac538b23eeaffb5e39c61c80"
+      },
+      {
+        "bytes": 435862,
+        "path": "research/geography/bc-remainders-reproduction-followup/vintages/reproduction-run-2/cd-assessments.json",
+        "sha256": "b62798552063bdb8a43d4097c44baa18e906a715ac538b23eeaffb5e39c61c80"
+      }
+    ],
+    "csd-crosswalk.csv": [
+      {
+        "bytes": 443307,
+        "path": "research/geography/bc-remainders-reproduction-followup/vintages/reproduction-run-1/csd-crosswalk.csv",
+        "sha256": "27a848465566ac0dc95fb32ddf28292880ecfff6b076e9075bee36ca97cc1f61"
+      },
+      {
+        "bytes": 443307,
+        "path": "research/geography/bc-remainders-reproduction-followup/vintages/reproduction-run-2/csd-crosswalk.csv",
+        "sha256": "27a848465566ac0dc95fb32ddf28292880ecfff6b076e9075bee36ca97cc1f61"
+      }
+    ],
+    "source-mapping-validation.json": [
+      {
+        "bytes": 200027,
+        "path": "research/geography/bc-remainders-reproduction-followup/vintages/reproduction-run-1/source-mapping-validation.json",
+        "sha256": "930eff314dcbf4d1c8eef68a2d8e0a98aa6a32d8f41545fbee1c1b4fbfcd7d01"
+      },
+      {
+        "bytes": 200027,
+        "path": "research/geography/bc-remainders-reproduction-followup/vintages/reproduction-run-2/source-mapping-validation.json",
+        "sha256": "930eff314dcbf4d1c8eef68a2d8e0a98aa6a32d8f41545fbee1c1b4fbfcd7d01"
+      }
+    ]
+  },
+  "two_runs_byte_identical": true,
+  "version": 1
+}
