@@ -1,0 +1,432 @@
+{
+  "version": 1,
+  "issue": 597,
+  "lane": "geography",
+  "worker_id": "codex-20261004-sanbernardino-597-3a054b26-5828-45da-870c-7fbd1d04730e",
+  "subject_ids": [
+    "atlas:physical:5dcc72971bb4b1ede2f5",
+    "atlas:physical:9cfc4fc5de3925d6f841",
+    "atlas:physical:d76eb273e99a0f96a575",
+    "atlas:physical:dcc393fbc988381d899c"
+  ],
+  "subject_ids_sha256": "fdfe3fc50c4a10ef7e773df7e296ea042cdbc5baf6d3a825a636d10f88f6995f",
+  "baseline": {
+    "commit": "fbd3bf4991dbd5a9bf89a79b14e5b4deb6225ff9",
+    "files": [
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/assessment.json",
+        "bytes": 1211599,
+        "sha256": "2820e95a1cc2ecd4e9bbdcebc8fc82fb25800449c65384f8ec67d5a569a8c1d7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/scope.json",
+        "bytes": 6788,
+        "sha256": "3e451fb5630a4df94ae06a9aa1a8660ed06b335d843d7bf5d045317dbbc22982",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/issue-metadata.json",
+        "bytes": 17809,
+        "sha256": "11c207a383561d33751f3907f6bc288825f2ded7cd059feefe1cea3b981eef75",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/derived-portion-audit.json",
+        "bytes": 3013,
+        "sha256": "12a823f70d0a9831df971c69ce3cced5491db0ad0a44f84aebb4d2d882e7651c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources.json",
+        "bytes": 14155,
+        "sha256": "c9defe3ee1e72d01955b62e85072cbe181995e323b0469ed836522a1c15e951e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-ca-ecoregions-4.geojson.gz",
+        "bytes": 950355,
+        "sha256": "9de311610407f2fdf18c522d56d4fca09782bba819d1c5159a355c248e635f11",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2682904,
+        "uncompressed_sha256": "5d2361a9b85508ecff1db34528f018fc0fdaddaca1aafc5dc993a303cec9b41c",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-arcgis-item-metadata.json",
+        "bytes": 8638,
+        "sha256": "5ac94f88d5b6d75e7e5619a05fc0cdcce803906004fbd7648f60cd9dfd3a8b85",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-feature-service-metadata.json",
+        "bytes": 3399,
+        "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-layer0-metadata.json",
+        "bytes": 25682,
+        "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/geoboundaries-USA-ADM2-2018.geojson.gz",
+        "bytes": 3264221,
+        "sha256": "f42991ac50eb7d6fab5ae50de404e4d198957316aec3035f8018bdd2bca8044a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 10500644,
+        "uncompressed_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/geoboundaries-USA-ADM2-metadata.json",
+        "bytes": 939,
+        "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/tigerline-2024-western-county-neighbors.geojson.gz",
+        "bytes": 5850604,
+        "sha256": "b4da7a5c442821e798c71945ba63f5ca279e18e1dca0355e714b495e2c294180",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 24421108,
+        "uncompressed_sha256": "c3e0207e569b57e73f30c804a4e0c5f973af9189ad94919fd1c57b912591a07d",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "parent_assessment_sha256": "2820e95a1cc2ecd4e9bbdcebc8fc82fb25800449c65384f8ec67d5a569a8c1d7",
+      "parent_scope_sha256": "3e451fb5630a4df94ae06a9aa1a8660ed06b335d843d7bf5d045317dbbc22982",
+      "containing_geojson_sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "resolve_features_sha256": "9de311610407f2fdf18c522d56d4fca09782bba819d1c5159a355c248e635f11",
+      "2018_county_source_sha256": "f42991ac50eb7d6fab5ae50de404e4d198957316aec3035f8018bdd2bca8044a",
+      "2024_tiger_subset_sha256": "b4da7a5c442821e798c71945ba63f5ca279e18e1dca0355e714b495e2c294180"
+    },
+    "pin_files": {
+      "parent_assessment_sha256": "data/regional-review/regional-review-2178b81fa886cfb6/assessment.json",
+      "parent_scope_sha256": "data/regional-review/regional-review-2178b81fa886cfb6/scope.json",
+      "containing_geojson_sha256": "data/geography/part-25.json",
+      "resolve_features_sha256": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-ca-ecoregions-4.geojson.gz",
+      "2018_county_source_sha256": "data/regional-review/regional-review-2178b81fa886cfb6/sources/geoboundaries-USA-ADM2-2018.geojson.gz",
+      "2024_tiger_subset_sha256": "data/regional-review/regional-review-2178b81fa886cfb6/sources/tigerline-2024-western-county-neighbors.geojson.gz"
+    },
+    "subject_files": {
+      "atlas:physical:5dcc72971bb4b1ede2f5": "data/geography/part-25.json",
+      "atlas:physical:9cfc4fc5de3925d6f841": "data/geography/part-25.json",
+      "atlas:physical:d76eb273e99a0f96a575": "data/geography/part-25.json",
+      "atlas:physical:dcc393fbc988381d899c": "data/geography/part-25.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "resolve-2017-ecoregions",
+      "url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+      "role": "Primary physical-geography source for the natural/ecological role, exact four ECO_ID values and names.",
+      "vintage": "2017; layer data last edit 2022-01-27; source snapshot 2026-10-03",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0. Attribute RESOLVE and Esri. https://creativecommons.org/licenses/by/4.0/"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-ca-ecoregions-4.geojson.gz",
+          "bytes": 950355,
+          "sha256": "9de311610407f2fdf18c522d56d4fca09782bba819d1c5159a355c248e635f11",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 2682904,
+          "uncompressed_sha256": "5d2361a9b85508ecff1db34528f018fc0fdaddaca1aafc5dc993a303cec9b41c"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-arcgis-item-metadata.json",
+          "bytes": 8638,
+          "sha256": "5ac94f88d5b6d75e7e5619a05fc0cdcce803906004fbd7648f60cd9dfd3a8b85",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-feature-service-metadata.json",
+          "bytes": 3399,
+          "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-layer0-metadata.json",
+          "bytes": 25682,
+          "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "geoboundaries-usa-adm2-2018",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "role": "2018 San Bernardino county predecessor source identity only; not the source role of the ecoregion portion.",
+      "vintage": "2018 boundaries; geoBoundaries build 2023-12-12",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain as declared in pinned geoBoundaries source metadata; Census MAF/TIGER-derived."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/geoboundaries-USA-ADM2-2018.geojson.gz",
+          "bytes": 3264221,
+          "sha256": "f42991ac50eb7d6fab5ae50de404e4d198957316aec3035f8018bdd2bca8044a",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 10500644,
+          "uncompressed_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/geoboundaries-USA-ADM2-metadata.json",
+          "bytes": 939,
+          "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "census-tigerline-2024-counties",
+      "url": "https://www2.census.gov/geo/tiger/TIGER2024/COUNTY/tl_2024_us_county.zip",
+      "role": "2024 GEOID/name/class check for the San Bernardino county-equivalent, kept separate from ecological source identity.",
+      "vintage": "2024; county DBF update 2024-09-16",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal work; public domain. TIGER/Line is statistical geography, not a legal survey."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/tigerline-2024-western-county-neighbors.geojson.gz",
+          "bytes": 5850604,
+          "sha256": "b4da7a5c442821e798c71945ba63f5ca279e18e1dca0355e714b495e2c294180",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 24421108,
+          "uncompressed_sha256": "c3e0207e569b57e73f30c804a4e0c5f973af9189ad94919fd1c57b912591a07d"
+        }
+      ]
+    },
+    {
+      "id": "worldatlas-packet-487",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/487",
+      "role": "Pinned exact subjects, source links, full parent chains, settlement/physical/remainder screens and uncertainty inherited for contextual review.",
+      "vintage": "V5 assessment dated 2026-10-03; ancestor baseline fbd3bf4991dbd5a9bf89a79b14e5b4deb6225ff9",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "unknown",
+        "terms": "Internal repository evidence; no new redistribution claim. Preserve original packet bytes and cite their immutable baseline paths."
+      },
+      "retention": "restoration-only",
+      "restoration": "Read the complete baseline files assessment.json, scope.json, derived-portion-audit.json, sources.json and data/geography/part-25.json at the pinned baseline commit and verify their baseline.files hashes.",
+      "limit": "Inherited geometry, settlement, land/island, administrative remainder and neighboring screens are not independently recomputed by issue #597; see the per-subject explicit limits.",
+      "verification": "verified",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/README.md",
+      "bytes": 4613,
+      "sha256": "b5758413488ea2fac2724eef9be140ea69c3a09066abcfd63e39ae4eabd087e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/build_role_proposal.py",
+      "bytes": 14948,
+      "sha256": "dd1a0308ee3b90b4b7556400ffa59ce31533d6875f98f77d808492021a785180",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/verify_role_proposal.py",
+      "bytes": 5795,
+      "sha256": "515a7cb2816118d8d770a253bc152198c4621e2c1e8726981a508d3a60c8c23d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/proposed-role-corrections.json",
+      "bytes": 47488,
+      "sha256": "fdaa8f41540daae0df48807eba458353c34af539c68f89b4dc1899a83fb9bc47",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/sources-manifest.json",
+      "bytes": 9508,
+      "sha256": "ec84d9eca0b653bd5587f390f45a74f32d2bcf4dd0f007c1ac11d0a69e97db2c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/validation.json",
+      "bytes": 2267,
+      "sha256": "be0e68c62197ac14c716b29f318ad6874b81d0eec45948b719f579544fad29e6",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "role-proposal-build",
+      "kind": "generator",
+      "description": "Read immutable #487 ancestor evidence and retained primary source snapshots; assert four exact ecoregion identities, proposed source roles, unchanged full parent chains and separated county context; emit evidence-only proposals and controls.",
+      "software": "Python 3.12.14 standard library; Git baseline reader",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "units": "assigned subject identities and source-role proposals"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "subject_assessments",
+      "value": 4,
+      "unit": "exact issue subjects assessed",
+      "vintage": "baseline",
+      "input_sha256": "2820e95a1cc2ecd4e9bbdcebc8fc82fb25800449c65384f8ec67d5a569a8c1d7",
+      "evaluation_commit": "fbd3bf4991dbd5a9bf89a79b14e5b4deb6225ff9"
+    },
+    {
+      "id": "source_role_mismatches",
+      "value": 4,
+      "unit": "source-role proposals supported",
+      "vintage": "baseline",
+      "input_sha256": "2820e95a1cc2ecd4e9bbdcebc8fc82fb25800449c65384f8ec67d5a569a8c1d7",
+      "evaluation_commit": "fbd3bf4991dbd5a9bf89a79b14e5b4deb6225ff9"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "subject_assessments",
+      "value": 4,
+      "unit": "exact issue subjects assessed",
+      "text": "All four assigned fragments were assessed against pinned #487 scope and sources."
+    },
+    {
+      "metric_id": "source_role_mismatches",
+      "value": 4,
+      "unit": "source-role proposals supported",
+      "text": "Four ecological ecoregion source-role corrections are proposed."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "subject_assessments",
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/proposed-role-corrections.json",
+      "json_pointer": "/scope/assessed_count"
+    },
+    {
+      "metric_id": "source_role_mismatches",
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/proposed-role-corrections.json",
+      "json_pointer": "/scope/role_mismatch_count"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The four locations have RESOLVE ecological ecoregion source roles; their current Counties source-role labels conflict with the named physical source and should be corrected by engineering integration.",
+      "source_ids": [
+        "resolve-2017-ecoregions",
+        "worldatlas-packet-487"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "The 2018 San Bernardino ADM2 feature and 2024 Census San Bernardino County GEOID 06071 are separate administrative intersection context, not evidence that the four ecoregion fragments are county-government units.",
+      "source_ids": [
+        "geoboundaries-usa-adm2-2018",
+        "census-tigerline-2024-counties"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Inherited geometry, settlement, islands, coastlines, land, administrative remainders and neighboring screens do not establish exact legal remainders or authorize shared-boundary changes; independently scoped follow-up is needed for any such claim.",
+      "source_ids": [
+        "worldatlas-packet-487",
+        "resolve-2017-ecoregions",
+        "geoboundaries-usa-adm2-2018",
+        "census-tigerline-2024-counties"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/build_role_proposal.py",
+    "python data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/verify_role_proposal.py",
+    "node scripts/evidence-quality.mjs data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/evidence-quality.json"
+  ],
+  "validation": [
+    {
+      "method_id": "role-proposal-build",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/validation.json"
+    },
+    {
+      "method_id": "role-proposal-build",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/validation.json"
+    },
+    {
+      "method_id": "role-proposal-build",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/validation.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/build_role_proposal.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/verify_role_proposal.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/proposed-role-corrections.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/sources-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-supplement-san-bernardino-ecoregion-roles-2026/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "generated_data_note": "One small source-role proposal and validation receipt; no shared geography, hierarchy, geometry, canonical grid, certificates, application code or live data changed.",
+  "evidence_issue_limits": [
+    "The four assigned source roles are supported as ecological ecoregion portions; all shared/public metadata changes remain for engineering integration.",
+    "Inherited geometry, settlement and neighbor measurements are frozen #487 screens, not new measurements or approval.",
+    "The physical source describes ecology, not political ownership; the county predecessor is a separate crosswalk context."
+  ]
+}

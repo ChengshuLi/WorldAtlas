@@ -1,0 +1,1112 @@
+{
+  "version": 1,
+  "issue": 597,
+  "baseline_commit": "fbd3bf4991dbd5a9bf89a79b14e5b4deb6225ff9",
+  "assessment_date_utc": "2026-10-03",
+  "scope": {
+    "assigned_subject_ids": [
+      "atlas:physical:5dcc72971bb4b1ede2f5",
+      "atlas:physical:9cfc4fc5de3925d6f841",
+      "atlas:physical:d76eb273e99a0f96a575",
+      "atlas:physical:dcc393fbc988381d899c"
+    ],
+    "assigned_count": 4,
+    "assessed_count": 4,
+    "role_mismatch_count": 4,
+    "all_four_in_parent_scope": true
+  },
+  "source_role_finding": {
+    "supported_role": "Ecological ecoregion portion",
+    "tier": "Named physical region portion (preserved existing administrative_level description)",
+    "reason": "RESOLVE source and all four ECO_ID links identify natural ecological regions; San Bernardino county is a derivation/intersection context only.",
+    "selection_rule": "Select the county × named-ecoregion fragment as physical geography; do not label it a county, transfer its county predecessor to political ownership, or change its stable location identity.",
+    "review_kind": "Source and geometry identity; proposal only"
+  },
+  "administrative_predecessor": {
+    "shape_id": "52423323B23069932539838",
+    "name": "San Bernardino",
+    "2018_level": "ADM2 county",
+    "2024_geoid": "06071",
+    "2024_name": "San Bernardino County",
+    "2024_classfp": "H1",
+    "source_paths": [
+      "data/regional-review/regional-review-2178b81fa886cfb6/sources/geoboundaries-USA-ADM2-2018.geojson.gz",
+      "data/regional-review/regional-review-2178b81fa886cfb6/sources/geoboundaries-USA-ADM2-metadata.json",
+      "data/regional-review/regional-review-2178b81fa886cfb6/sources/tigerline-2024-western-county-neighbors.geojson.gz"
+    ]
+  },
+  "parent_fragment_union_screen": {
+    "predecessor_shape_id": "52423323B23069932539838",
+    "predecessor_area_km2": 52093.103089,
+    "current_four_fragment_union_km2": 52097.094192,
+    "intersection_over_predecessor_pct": 99.980296,
+    "symmetric_difference_km2": 24.520472
+  },
+  "neighbor_consistency": {
+    "finding": "All four assigned subjects retain the same California → Pacific → Western North America parent chain. This source-role correction makes no county adjacency or shared-boundary claim.",
+    "inherited_neighbor_packet": "data/regional-review/regional-review-2178b81fa886cfb6/neighbor-screen.json",
+    "limitation": "Neighbor, water-edge and exact boundary screens are inherited #487 evidence, not remeasured here; no shared boundary or parent footprint is changed."
+  },
+  "subjects": [
+    {
+      "id": "atlas:physical:5dcc72971bb4b1ede2f5",
+      "name": "San Bernardino · Mojave desert",
+      "assessment": "supported source-role correction proposal",
+      "current": {
+        "source_id": "resolve:433",
+        "source_role": "Counties",
+        "administrative_level": "Named physical region portion",
+        "selection_reason": "Named Counties territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "location_basis": "Published geographic subdivision within a source rural district",
+        "source_name": "Named physical region adaptation"
+      },
+      "proposed": {
+        "source_id": "resolve:433",
+        "source_role": "Ecological ecoregion portion",
+        "administrative_level": "Named physical region portion",
+        "selection_reason": "Physical-geography location for the part of RESOLVE 2017 ECO_ID 433 (Mojave desert) associated with the 2018 San Bernardino ADM2 predecessor. The county is the source intersection context, not this location's government, administrative role, or political-ownership claim.",
+        "location_basis": "Published geographic subdivision within a source rural district"
+      },
+      "physical_source": {
+        "publisher_attribution": "RESOLVE, Esri",
+        "dataset": "Biomes and Ecoregions 2017",
+        "source_vintage": "2017",
+        "layer_data_last_edit": "2022-01-27",
+        "eco_id": 433,
+        "eco_name": "Mojave desert",
+        "biome": "Deserts & Xeric Shrublands",
+        "realm": "Nearctic",
+        "feature_license": "CC-BY 4.0",
+        "source_role": "Ecological ecoregion with natural rather than political boundaries",
+        "evidence_quote": "ecoregions draw on natural, rather than political, boundaries",
+        "canonical_item": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+        "canonical_layer": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0"
+      },
+      "administrative_intersection_context": {
+        "predecessor_source": "geoBoundaries USA ADM2, 2018; Census MAF/TIGER-derived",
+        "predecessor_shape_id": "52423323B23069932539838",
+        "predecessor_name": "San Bernardino",
+        "2024_census_geoid": "06071",
+        "2024_census_name": "San Bernardino County",
+        "2024_classfp": "H1",
+        "interpretation": "The county defines the clipped/intersection context only; it does not define this feature as a county."
+      },
+      "preservation": {
+        "parent_chain": [
+          {
+            "id": "atlas:physical:5dcc72971bb4b1ede2f5",
+            "name": "San Bernardino · Mojave desert",
+            "level": "location",
+            "parent_id": "framework:province:california:f695c774b8ba"
+          },
+          {
+            "id": "framework:province:california:f695c774b8ba",
+            "name": "California",
+            "level": "province",
+            "parent_id": "framework:area:pacific:31aced66907e"
+          },
+          {
+            "id": "framework:area:pacific:31aced66907e",
+            "name": "Pacific",
+            "level": "area",
+            "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+          },
+          {
+            "id": "framework:region:western-north-america:d2a1c2775a57",
+            "name": "Western North America",
+            "level": "region",
+            "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+          },
+          {
+            "id": "framework:subcontinent:northern-america:477e054b32f2",
+            "name": "Northern America",
+            "level": "subcontinent",
+            "parent_id": "framework:continent:north-america:1ca27616f338"
+          },
+          {
+            "id": "framework:continent:north-america:1ca27616f338",
+            "name": "North America",
+            "level": "continent",
+            "parent_id": null
+          }
+        ],
+        "existing_source_member_ids": [
+          "gb:USA:ADM2:52423323B23069932539838"
+        ],
+        "original_geometry_sha256_canonical_json": "2121789c5a7b24d046a6f1cd81e57ff4dc1e71568da39388ad62df1e58fb561d",
+        "geometry_action": "preserve unchanged; this evidence packet contains no replacement geometry"
+      },
+      "inherited_scope_screens": {
+        "settlement_screen": {
+          "source": "U.S. Census Bureau TIGER/Line Places 2024; incorporated places and Census Designated Places",
+          "place_feature_count_intersecting_current_footprint": 28,
+          "places": [
+            {
+              "geoid": "0600296",
+              "name": "Adelanto",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0602364",
+              "name": "Apple Valley",
+              "classfp": "C1",
+              "lsad": "43"
+            },
+            {
+              "geoid": "0603512",
+              "name": "Baker",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0604030",
+              "name": "Barstow",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0609780",
+              "name": "California City",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0625114",
+              "name": "Fort Irwin",
+              "classfp": "M2",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0633434",
+              "name": "Hesperia",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0634392",
+              "name": "Homestead Valley",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0637400",
+              "name": "Johannesburg",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0637554",
+              "name": "Joshua Tree",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0641194",
+              "name": "Lenwood",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0644420",
+              "name": "Lucerne Valley",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0649348",
+              "name": "Morongo Valley",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0649684",
+              "name": "Mountain View Acres",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0650734",
+              "name": "Needles",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0652760",
+              "name": "Oak Hills",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0656826",
+              "name": "Phelan",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0657302",
+              "name": "Piñon Hills",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0660704",
+              "name": "Ridgecrest",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0670728",
+              "name": "Searles Valley",
+              "classfp": "U2",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0671964",
+              "name": "Silver Lakes",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0673700",
+              "name": "Spring Valley Lake",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0678050",
+              "name": "Tecopa",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0680515",
+              "name": "Trona",
+              "classfp": "U2",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0680994",
+              "name": "Twentynine Palms",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0682590",
+              "name": "Victorville",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0686720",
+              "name": "Yermo",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0687056",
+              "name": "Yucca Valley",
+              "classfp": "C1",
+              "lsad": "43"
+            }
+          ],
+          "interpretation": "Official and reproducible populated-place screen. Places features do not enumerate every settlement, unincorporated named site, household or seasonal/Indigenous community; missing a place polygon is not evidence of no settlement."
+        },
+        "physical_land_screen": {
+          "name": "San Bernardino · Mojave desert",
+          "current_polygon_components": 8,
+          "current_interior_rings": 0,
+          "representative_point": [
+            -116.13096952415546,
+            34.92515
+          ],
+          "representative_point_in_level1_land": true,
+          "gshhg_level1_containing_source_ids": [
+            2
+          ],
+          "level1_centroid_hits": 0,
+          "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+        },
+        "remainders_islands_disconnected_review": "Source and current polygon component/ring counts are recorded. Census county water/island linework and GSHHG centroids are screening evidence only; they do not certify all coastal/island components, hydrography, federal/tribal jurisdiction, detached land, or complete administrative remainders.",
+        "political_historical_distinction": "County and state identity describes source administrative geography; current sovereignty reference and any historical territorial attribution are separate dated questions. RESOLVE ecoregions describe natural systems and do not establish political ownership.",
+        "decision_basis": "The four physical portions are unambiguously linked to four named RESOLVE ecoregions and a San Bernardino County predecessor, but their declared administrative role and selection rationale are inconsistent with the cited ecology source.",
+        "unresolved": [
+          "Current-to-2018 and current-to-2024 area differences are screening results; resolve large water/coastline or detached-component discrepancies from authoritative county/state boundary evidence before proposing line changes.",
+          "Census Places is a populated-place layer, not a complete settlement inventory.",
+          "GSHHG point and polygon-centroid screens do not certify every island, coastline, lake, detached territory, or physical land component."
+        ],
+        "portion_overlay": {
+          "location_id": "atlas:physical:5dcc72971bb4b1ede2f5",
+          "name": "San Bernardino · Mojave desert",
+          "predecessor_shape_id": "52423323B23069932539838",
+          "eco_id": 433,
+          "eco_name": "Mojave desert",
+          "expected_area_km2": 44227.147168,
+          "current_area_km2": 44235.090422,
+          "current_intersection_over_expected_pct": 99.922501,
+          "symmetric_difference_km2": 76.49467,
+          "raw_inputs_preserved": true,
+          "temporary_projected_makevalid": true
+        }
+      },
+      "source_ids": [
+        "resolve-2017-ecoregions",
+        "geoboundaries-usa-adm2-2018",
+        "census-tigerline-2024-counties",
+        "worldatlas-packet-487"
+      ]
+    },
+    {
+      "id": "atlas:physical:9cfc4fc5de3925d6f841",
+      "name": "San Bernardino · Sonoran desert",
+      "assessment": "supported source-role correction proposal",
+      "current": {
+        "source_id": "resolve:435",
+        "source_role": "Counties",
+        "administrative_level": "Named physical region portion",
+        "selection_reason": "Named Counties territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "location_basis": "Published geographic subdivision within a source rural district",
+        "source_name": "Named physical region adaptation"
+      },
+      "proposed": {
+        "source_id": "resolve:435",
+        "source_role": "Ecological ecoregion portion",
+        "administrative_level": "Named physical region portion",
+        "selection_reason": "Physical-geography location for the part of RESOLVE 2017 ECO_ID 435 (Sonoran desert) associated with the 2018 San Bernardino ADM2 predecessor. The county is the source intersection context, not this location's government, administrative role, or political-ownership claim.",
+        "location_basis": "Published geographic subdivision within a source rural district"
+      },
+      "physical_source": {
+        "publisher_attribution": "RESOLVE, Esri",
+        "dataset": "Biomes and Ecoregions 2017",
+        "source_vintage": "2017",
+        "layer_data_last_edit": "2022-01-27",
+        "eco_id": 435,
+        "eco_name": "Sonoran desert",
+        "biome": "Deserts & Xeric Shrublands",
+        "realm": "Nearctic",
+        "feature_license": "CC-BY 4.0",
+        "source_role": "Ecological ecoregion with natural rather than political boundaries",
+        "evidence_quote": "ecoregions draw on natural, rather than political, boundaries",
+        "canonical_item": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+        "canonical_layer": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0"
+      },
+      "administrative_intersection_context": {
+        "predecessor_source": "geoBoundaries USA ADM2, 2018; Census MAF/TIGER-derived",
+        "predecessor_shape_id": "52423323B23069932539838",
+        "predecessor_name": "San Bernardino",
+        "2024_census_geoid": "06071",
+        "2024_census_name": "San Bernardino County",
+        "2024_classfp": "H1",
+        "interpretation": "The county defines the clipped/intersection context only; it does not define this feature as a county."
+      },
+      "preservation": {
+        "parent_chain": [
+          {
+            "id": "atlas:physical:9cfc4fc5de3925d6f841",
+            "name": "San Bernardino · Sonoran desert",
+            "level": "location",
+            "parent_id": "framework:province:california:f695c774b8ba"
+          },
+          {
+            "id": "framework:province:california:f695c774b8ba",
+            "name": "California",
+            "level": "province",
+            "parent_id": "framework:area:pacific:31aced66907e"
+          },
+          {
+            "id": "framework:area:pacific:31aced66907e",
+            "name": "Pacific",
+            "level": "area",
+            "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+          },
+          {
+            "id": "framework:region:western-north-america:d2a1c2775a57",
+            "name": "Western North America",
+            "level": "region",
+            "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+          },
+          {
+            "id": "framework:subcontinent:northern-america:477e054b32f2",
+            "name": "Northern America",
+            "level": "subcontinent",
+            "parent_id": "framework:continent:north-america:1ca27616f338"
+          },
+          {
+            "id": "framework:continent:north-america:1ca27616f338",
+            "name": "North America",
+            "level": "continent",
+            "parent_id": null
+          }
+        ],
+        "existing_source_member_ids": [
+          "gb:USA:ADM2:52423323B23069932539838"
+        ],
+        "original_geometry_sha256_canonical_json": "a800b6b7bdb52d274f61742c1fab875a0451c47f701fcc6a0e521e1127f07787",
+        "geometry_action": "preserve unchanged; this evidence packet contains no replacement geometry"
+      },
+      "inherited_scope_screens": {
+        "settlement_screen": {
+          "source": "U.S. Census Bureau TIGER/Line Places 2024; incorporated places and Census Designated Places",
+          "place_feature_count_intersecting_current_footprint": 2,
+          "places": [
+            {
+              "geoid": "0606635",
+              "name": "Big River",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0607172",
+              "name": "Bluewater",
+              "classfp": "U1",
+              "lsad": "57"
+            }
+          ],
+          "interpretation": "Official and reproducible populated-place screen. Places features do not enumerate every settlement, unincorporated named site, household or seasonal/Indigenous community; missing a place polygon is not evidence of no settlement."
+        },
+        "physical_land_screen": {
+          "name": "San Bernardino · Sonoran desert",
+          "current_polygon_components": 2,
+          "current_interior_rings": 0,
+          "representative_point": [
+            -114.49260237633665,
+            34.37592
+          ],
+          "representative_point_in_level1_land": true,
+          "gshhg_level1_containing_source_ids": [
+            2
+          ],
+          "level1_centroid_hits": 0,
+          "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+        },
+        "remainders_islands_disconnected_review": "Source and current polygon component/ring counts are recorded. Census county water/island linework and GSHHG centroids are screening evidence only; they do not certify all coastal/island components, hydrography, federal/tribal jurisdiction, detached land, or complete administrative remainders.",
+        "political_historical_distinction": "County and state identity describes source administrative geography; current sovereignty reference and any historical territorial attribution are separate dated questions. RESOLVE ecoregions describe natural systems and do not establish political ownership.",
+        "decision_basis": "The four physical portions are unambiguously linked to four named RESOLVE ecoregions and a San Bernardino County predecessor, but their declared administrative role and selection rationale are inconsistent with the cited ecology source.",
+        "unresolved": [
+          "Current-to-2018 and current-to-2024 area differences are screening results; resolve large water/coastline or detached-component discrepancies from authoritative county/state boundary evidence before proposing line changes.",
+          "Census Places is a populated-place layer, not a complete settlement inventory.",
+          "GSHHG point and polygon-centroid screens do not certify every island, coastline, lake, detached territory, or physical land component."
+        ],
+        "portion_overlay": {
+          "location_id": "atlas:physical:9cfc4fc5de3925d6f841",
+          "name": "San Bernardino · Sonoran desert",
+          "predecessor_shape_id": "52423323B23069932539838",
+          "eco_id": 435,
+          "eco_name": "Sonoran desert",
+          "expected_area_km2": 3938.63357,
+          "current_area_km2": 3932.866629,
+          "current_intersection_over_expected_pct": 99.23154,
+          "symmetric_difference_km2": 54.766714,
+          "raw_inputs_preserved": true,
+          "temporary_projected_makevalid": true
+        }
+      },
+      "source_ids": [
+        "resolve-2017-ecoregions",
+        "geoboundaries-usa-adm2-2018",
+        "census-tigerline-2024-counties",
+        "worldatlas-packet-487"
+      ]
+    },
+    {
+      "id": "atlas:physical:d76eb273e99a0f96a575",
+      "name": "San Bernardino · California montane chaparral and woodlands",
+      "assessment": "supported source-role correction proposal",
+      "current": {
+        "source_id": "resolve:424",
+        "source_role": "Counties",
+        "administrative_level": "Named physical region portion",
+        "selection_reason": "Named Counties territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "location_basis": "Published geographic subdivision within a source rural district",
+        "source_name": "Named physical region adaptation"
+      },
+      "proposed": {
+        "source_id": "resolve:424",
+        "source_role": "Ecological ecoregion portion",
+        "administrative_level": "Named physical region portion",
+        "selection_reason": "Physical-geography location for the part of RESOLVE 2017 ECO_ID 424 (California montane chaparral and woodlands) associated with the 2018 San Bernardino ADM2 predecessor. The county is the source intersection context, not this location's government, administrative role, or political-ownership claim.",
+        "location_basis": "Published geographic subdivision within a source rural district"
+      },
+      "physical_source": {
+        "publisher_attribution": "RESOLVE, Esri",
+        "dataset": "Biomes and Ecoregions 2017",
+        "source_vintage": "2017",
+        "layer_data_last_edit": "2022-01-27",
+        "eco_id": 424,
+        "eco_name": "California montane chaparral and woodlands",
+        "biome": "Mediterranean Forests, Woodlands & Scrub",
+        "realm": "Nearctic",
+        "feature_license": "CC-BY 4.0",
+        "source_role": "Ecological ecoregion with natural rather than political boundaries",
+        "evidence_quote": "ecoregions draw on natural, rather than political, boundaries",
+        "canonical_item": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+        "canonical_layer": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0"
+      },
+      "administrative_intersection_context": {
+        "predecessor_source": "geoBoundaries USA ADM2, 2018; Census MAF/TIGER-derived",
+        "predecessor_shape_id": "52423323B23069932539838",
+        "predecessor_name": "San Bernardino",
+        "2024_census_geoid": "06071",
+        "2024_census_name": "San Bernardino County",
+        "2024_classfp": "H1",
+        "interpretation": "The county defines the clipped/intersection context only; it does not define this feature as a county."
+      },
+      "preservation": {
+        "parent_chain": [
+          {
+            "id": "atlas:physical:d76eb273e99a0f96a575",
+            "name": "San Bernardino · California montane chaparral and woodlands",
+            "level": "location",
+            "parent_id": "framework:province:california:f695c774b8ba"
+          },
+          {
+            "id": "framework:province:california:f695c774b8ba",
+            "name": "California",
+            "level": "province",
+            "parent_id": "framework:area:pacific:31aced66907e"
+          },
+          {
+            "id": "framework:area:pacific:31aced66907e",
+            "name": "Pacific",
+            "level": "area",
+            "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+          },
+          {
+            "id": "framework:region:western-north-america:d2a1c2775a57",
+            "name": "Western North America",
+            "level": "region",
+            "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+          },
+          {
+            "id": "framework:subcontinent:northern-america:477e054b32f2",
+            "name": "Northern America",
+            "level": "subcontinent",
+            "parent_id": "framework:continent:north-america:1ca27616f338"
+          },
+          {
+            "id": "framework:continent:north-america:1ca27616f338",
+            "name": "North America",
+            "level": "continent",
+            "parent_id": null
+          }
+        ],
+        "existing_source_member_ids": [
+          "gb:USA:ADM2:52423323B23069932539838"
+        ],
+        "original_geometry_sha256_canonical_json": "505917c1edaffd5b32ac2cc80b84131afb5fd6d1239d5b87edaa8f8dc90ca04b",
+        "geometry_action": "preserve unchanged; this evidence packet contains no replacement geometry"
+      },
+      "inherited_scope_screens": {
+        "settlement_screen": {
+          "source": "U.S. Census Bureau TIGER/Line Places 2024; incorporated places and Census Designated Places",
+          "place_feature_count_intersecting_current_footprint": 19,
+          "places": [
+            {
+              "geoid": "0603820",
+              "name": "Banning",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0606406",
+              "name": "Big Bear City",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0606434",
+              "name": "Big Bear Lake",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0617162",
+              "name": "Crestline",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0624680",
+              "name": "Fontana",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0633434",
+              "name": "Hesperia",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0633588",
+              "name": "Highland",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0639444",
+              "name": "Lake Arrowhead",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0644644",
+              "name": "Lytle Creek",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0649348",
+              "name": "Morongo Valley",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0652715",
+              "name": "Oak Glen",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0657302",
+              "name": "Piñon Hills",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0659451",
+              "name": "Rancho Cucamonga",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0663316",
+              "name": "Running Springs",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0664462",
+              "name": "San Antonio Heights",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0665000",
+              "name": "San Bernardino",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0686594",
+              "name": "Wrightwood",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0687042",
+              "name": "Yucaipa",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0687056",
+              "name": "Yucca Valley",
+              "classfp": "C1",
+              "lsad": "43"
+            }
+          ],
+          "interpretation": "Official and reproducible populated-place screen. Places features do not enumerate every settlement, unincorporated named site, household or seasonal/Indigenous community; missing a place polygon is not evidence of no settlement."
+        },
+        "physical_land_screen": {
+          "name": "San Bernardino · California montane chaparral and woodlands",
+          "current_polygon_components": 5,
+          "current_interior_rings": 0,
+          "representative_point": [
+            -116.95675861108805,
+            34.215805
+          ],
+          "representative_point_in_level1_land": true,
+          "gshhg_level1_containing_source_ids": [
+            2
+          ],
+          "level1_centroid_hits": 0,
+          "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+        },
+        "remainders_islands_disconnected_review": "Source and current polygon component/ring counts are recorded. Census county water/island linework and GSHHG centroids are screening evidence only; they do not certify all coastal/island components, hydrography, federal/tribal jurisdiction, detached land, or complete administrative remainders.",
+        "political_historical_distinction": "County and state identity describes source administrative geography; current sovereignty reference and any historical territorial attribution are separate dated questions. RESOLVE ecoregions describe natural systems and do not establish political ownership.",
+        "decision_basis": "The four physical portions are unambiguously linked to four named RESOLVE ecoregions and a San Bernardino County predecessor, but their declared administrative role and selection rationale are inconsistent with the cited ecology source.",
+        "unresolved": [
+          "Current-to-2018 and current-to-2024 area differences are screening results; resolve large water/coastline or detached-component discrepancies from authoritative county/state boundary evidence before proposing line changes.",
+          "Census Places is a populated-place layer, not a complete settlement inventory.",
+          "GSHHG point and polygon-centroid screens do not certify every island, coastline, lake, detached territory, or physical land component."
+        ],
+        "portion_overlay": {
+          "location_id": "atlas:physical:d76eb273e99a0f96a575",
+          "name": "San Bernardino · California montane chaparral and woodlands",
+          "predecessor_shape_id": "52423323B23069932539838",
+          "eco_id": 424,
+          "eco_name": "California montane chaparral and woodlands",
+          "expected_area_km2": 2699.372642,
+          "current_area_km2": 2695.708682,
+          "current_intersection_over_expected_pct": 99.278258,
+          "symmetric_difference_km2": 35.301046,
+          "raw_inputs_preserved": true,
+          "temporary_projected_makevalid": true
+        }
+      },
+      "source_ids": [
+        "resolve-2017-ecoregions",
+        "geoboundaries-usa-adm2-2018",
+        "census-tigerline-2024-counties",
+        "worldatlas-packet-487"
+      ]
+    },
+    {
+      "id": "atlas:physical:dcc393fbc988381d899c",
+      "name": "San Bernardino · California coastal sage and chaparral",
+      "assessment": "supported source-role correction proposal",
+      "current": {
+        "source_id": "resolve:422",
+        "source_role": "Counties",
+        "administrative_level": "Named physical region portion",
+        "selection_reason": "Named Counties territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+        "location_basis": "Published geographic subdivision within a source rural district",
+        "source_name": "Named physical region adaptation"
+      },
+      "proposed": {
+        "source_id": "resolve:422",
+        "source_role": "Ecological ecoregion portion",
+        "administrative_level": "Named physical region portion",
+        "selection_reason": "Physical-geography location for the part of RESOLVE 2017 ECO_ID 422 (California coastal sage and chaparral) associated with the 2018 San Bernardino ADM2 predecessor. The county is the source intersection context, not this location's government, administrative role, or political-ownership claim.",
+        "location_basis": "Published geographic subdivision within a source rural district"
+      },
+      "physical_source": {
+        "publisher_attribution": "RESOLVE, Esri",
+        "dataset": "Biomes and Ecoregions 2017",
+        "source_vintage": "2017",
+        "layer_data_last_edit": "2022-01-27",
+        "eco_id": 422,
+        "eco_name": "California coastal sage and chaparral",
+        "biome": "Mediterranean Forests, Woodlands & Scrub",
+        "realm": "Nearctic",
+        "feature_license": "CC-BY 4.0",
+        "source_role": "Ecological ecoregion with natural rather than political boundaries",
+        "evidence_quote": "ecoregions draw on natural, rather than political, boundaries",
+        "canonical_item": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+        "canonical_layer": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0"
+      },
+      "administrative_intersection_context": {
+        "predecessor_source": "geoBoundaries USA ADM2, 2018; Census MAF/TIGER-derived",
+        "predecessor_shape_id": "52423323B23069932539838",
+        "predecessor_name": "San Bernardino",
+        "2024_census_geoid": "06071",
+        "2024_census_name": "San Bernardino County",
+        "2024_classfp": "H1",
+        "interpretation": "The county defines the clipped/intersection context only; it does not define this feature as a county."
+      },
+      "preservation": {
+        "parent_chain": [
+          {
+            "id": "atlas:physical:dcc393fbc988381d899c",
+            "name": "San Bernardino · California coastal sage and chaparral",
+            "level": "location",
+            "parent_id": "framework:province:california:f695c774b8ba"
+          },
+          {
+            "id": "framework:province:california:f695c774b8ba",
+            "name": "California",
+            "level": "province",
+            "parent_id": "framework:area:pacific:31aced66907e"
+          },
+          {
+            "id": "framework:area:pacific:31aced66907e",
+            "name": "Pacific",
+            "level": "area",
+            "parent_id": "framework:region:western-north-america:d2a1c2775a57"
+          },
+          {
+            "id": "framework:region:western-north-america:d2a1c2775a57",
+            "name": "Western North America",
+            "level": "region",
+            "parent_id": "framework:subcontinent:northern-america:477e054b32f2"
+          },
+          {
+            "id": "framework:subcontinent:northern-america:477e054b32f2",
+            "name": "Northern America",
+            "level": "subcontinent",
+            "parent_id": "framework:continent:north-america:1ca27616f338"
+          },
+          {
+            "id": "framework:continent:north-america:1ca27616f338",
+            "name": "North America",
+            "level": "continent",
+            "parent_id": null
+          }
+        ],
+        "existing_source_member_ids": [
+          "gb:USA:ADM2:52423323B23069932539838"
+        ],
+        "original_geometry_sha256_canonical_json": "2a631b87081927c5b9fef4005d31526b94e285d22589c43bcdfd501b03ab3156",
+        "geometry_action": "preserve unchanged; this evidence packet contains no replacement geometry"
+      },
+      "inherited_scope_screens": {
+        "settlement_screen": {
+          "source": "U.S. Census Bureau TIGER/Line Places 2024; incorporated places and Census Designated Places",
+          "place_feature_count_intersecting_current_footprint": 31,
+          "places": [
+            {
+              "geoid": "0607064",
+              "name": "Bloomington",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0608100",
+              "name": "Brea",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0609864",
+              "name": "Calimesa",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0613210",
+              "name": "Chino",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0613214",
+              "name": "Chino Hills",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0613756",
+              "name": "Claremont",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0614890",
+              "name": "Colton",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0616350",
+              "name": "Corona",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0619192",
+              "name": "Diamond Bar",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0621230",
+              "name": "Eastvale",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0624680",
+              "name": "Fontana",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0630658",
+              "name": "Grand Terrace",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0633574",
+              "name": "Highgrove",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0633588",
+              "name": "Highland",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0637692",
+              "name": "Jurupa Valley",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0642370",
+              "name": "Loma Linda",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0646884",
+              "name": "Mentone",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0648788",
+              "name": "Montclair",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0650132",
+              "name": "Muscoy",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0652715",
+              "name": "Oak Glen",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0653896",
+              "name": "Ontario",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0658072",
+              "name": "Pomona",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0659451",
+              "name": "Rancho Cucamonga",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0659962",
+              "name": "Redlands",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0660466",
+              "name": "Rialto",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0662000",
+              "name": "Riverside",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0664462",
+              "name": "San Antonio Heights",
+              "classfp": "U1",
+              "lsad": "57"
+            },
+            {
+              "geoid": "0665000",
+              "name": "San Bernardino",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0681344",
+              "name": "Upland",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0686832",
+              "name": "Yorba Linda",
+              "classfp": "C1",
+              "lsad": "25"
+            },
+            {
+              "geoid": "0687042",
+              "name": "Yucaipa",
+              "classfp": "C1",
+              "lsad": "25"
+            }
+          ],
+          "interpretation": "Official and reproducible populated-place screen. Places features do not enumerate every settlement, unincorporated named site, household or seasonal/Indigenous community; missing a place polygon is not evidence of no settlement."
+        },
+        "physical_land_screen": {
+          "name": "San Bernardino · California coastal sage and chaparral",
+          "current_polygon_components": 1,
+          "current_interior_rings": 0,
+          "representative_point": [
+            -117.35995886402753,
+            34.06752
+          ],
+          "representative_point_in_level1_land": true,
+          "gshhg_level1_containing_source_ids": [
+            2
+          ],
+          "level1_centroid_hits": 0,
+          "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+        },
+        "remainders_islands_disconnected_review": "Source and current polygon component/ring counts are recorded. Census county water/island linework and GSHHG centroids are screening evidence only; they do not certify all coastal/island components, hydrography, federal/tribal jurisdiction, detached land, or complete administrative remainders.",
+        "political_historical_distinction": "County and state identity describes source administrative geography; current sovereignty reference and any historical territorial attribution are separate dated questions. RESOLVE ecoregions describe natural systems and do not establish political ownership.",
+        "decision_basis": "The four physical portions are unambiguously linked to four named RESOLVE ecoregions and a San Bernardino County predecessor, but their declared administrative role and selection rationale are inconsistent with the cited ecology source.",
+        "unresolved": [
+          "Current-to-2018 and current-to-2024 area differences are screening results; resolve large water/coastline or detached-component discrepancies from authoritative county/state boundary evidence before proposing line changes.",
+          "Census Places is a populated-place layer, not a complete settlement inventory.",
+          "GSHHG point and polygon-centroid screens do not certify every island, coastline, lake, detached territory, or physical land component."
+        ],
+        "portion_overlay": {
+          "location_id": "atlas:physical:dcc393fbc988381d899c",
+          "name": "San Bernardino · California coastal sage and chaparral",
+          "predecessor_shape_id": "52423323B23069932539838",
+          "eco_id": 422,
+          "eco_name": "California coastal sage and chaparral",
+          "expected_area_km2": 1227.949708,
+          "current_area_km2": 1233.430132,
+          "current_intersection_over_expected_pct": 99.596482,
+          "symmetric_difference_km2": 15.390413,
+          "raw_inputs_preserved": true,
+          "temporary_projected_makevalid": true
+        }
+      },
+      "source_ids": [
+        "resolve-2017-ecoregions",
+        "geoboundaries-usa-adm2-2018",
+        "census-tigerline-2024-counties",
+        "worldatlas-packet-487"
+      ]
+    }
+  ],
+  "source_provenance": {
+    "resolve_dataset": "Biomes and Ecoregions 2017",
+    "resolve_item_title": "RESOLVE Ecoregions and Biomes",
+    "resolve_item_attribution": "RESOLVE, Esri",
+    "resolve_license": "CC BY 4.0",
+    "resolve_layer_data_last_edit": "2022-01-27",
+    "parent_assessment_sha256": "2820e95a1cc2ecd4e9bbdcebc8fc82fb25800449c65384f8ec67d5a569a8c1d7",
+    "parent_sources_registry_sha256": "c9defe3ee1e72d01955b62e85072cbe181995e323b0469ed836522a1c15e951e"
+  },
+  "metrics": {
+    "subject_count_assessed": 4,
+    "source_role_mismatch_count": 4
+  },
+  "limitations": [
+    "All settlement, physical-land, county-water, island, remainder and neighbor values are inherited #487 screens, not independently recomputed in #597.",
+    "Census Places is not a complete settlement gazetteer; GSHHG representative points and component counts do not certify all land, islands or coastline.",
+    "The inherited four-piece union differs from the 2018 county predecessor by a 24.520472 km² symmetric-difference screen; this does not identify a legal remainder or support moving a shared line.",
+    "RESOLVE ecoregions describe ecological systems, not sovereignty, county government or historical political ownership.",
+    "This is a source-role/rationale proposal for engineering review, not shared hierarchy/geometry approval and not authorization for history imports."
+  ]
+}
