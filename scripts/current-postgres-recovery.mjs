@@ -176,12 +176,20 @@ export function isolatedDatabaseACLSQL(rendered){
  return Buffer.from(body+'\n');
 }
 export function restoreIsolatedDatabaseACL(target,dump,directory){
- const toc=native(['exec','-i',target,'pg_restore','--create','--list'],dump,180000,1024*1024).toString();
+ // pg_restore --list stops after the TOC. A full production dump on stdin can
+ // therefore make spawnSync fail with EPIPE even when pg_restore exits zero.
+ // Retain identical archive bytes in the isolated tmpfs and use seekable input.
+ const archive='/var/lib/postgresql/original-native-backup.dump';
+ const step=(code,args,input)=>{try{return native(args,input,180000,1024*1024);}catch(error){throw Error(code+(error.code==='EPIPE'?'-stdin-closed':error.code==='ENOBUFS'?'-output-limit':'-failed'));}};
+ step('acl-archive-transfer',['exec','-i',target,'sh','-c','cat > '+archive],dump);
+ need(step('acl-archive-readback',['exec',target,'sha256sum',archive]).toString().trim()===sha(dump)+'  '+archive,'isolated-acl-archive-bytes-changed');
+ const toc=step('acl-toc-read',['exec',target,'pg_restore','--create','--list',archive]).toString();
  const file=path.join(directory,'database-acl.list');fs.writeFileSync(file,isolatedDatabaseACLList(toc),{flag:'wx',mode:0o600});
- native(['exec','-i',target,'sh','-c','cat > /var/lib/postgresql/database-acl.list'],fs.readFileSync(file),30000,1024*1024);
- const sql=native(['exec','-i',target,'pg_restore','--create','--use-list=/var/lib/postgresql/database-acl.list','--file=-'],dump,180000,1024*1024);
+ step('acl-list-transfer',['exec','-i',target,'sh','-c','cat > /var/lib/postgresql/database-acl.list'],fs.readFileSync(file));
+ const sql=step('acl-render',['exec',target,'pg_restore','--create','--use-list=/var/lib/postgresql/database-acl.list','--file=-',archive]);
  const aclSQL=isolatedDatabaseACLSQL(sql);
- native(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],aclSQL,180000,1024*1024);
+ step('acl-apply',['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],aclSQL);
+ return {input:'unchanged-isolated-tmpfs-file',archive_bytes:dump.length,archive_sha256:sha(dump),archive_readback_verified:true};
 }
 
 const maxExpandedRestore=1024*1024*1024;
@@ -330,7 +338,7 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   await nativeRestoreToFile(['exec','-i',target,'pg_restore','--file=-'],readback,expanded);
   stage='actual-current-native-restore-header';patchNativeRestoreFile(expanded);
   stage='actual-current-native-restore-apply';
-  await nativeRestoreFromFile(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],expanded);stage='actual-current-native-database-acl';restoreIsolatedDatabaseACL(target,readback,output);targetExec(['psql','-X','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));receipt.isolated_original_checks_revalidated=true;receipt.restore_duration_ms=Date.now()-restoreStarted;receipt.dump.local_readback_verified=true;
+  await nativeRestoreFromFile(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],expanded);stage='actual-current-native-database-acl';receipt.database_acl_recovery=restoreIsolatedDatabaseACL(target,readback,output);targetExec(['psql','-X','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));receipt.isolated_original_checks_revalidated=true;receipt.restore_duration_ms=Date.now()-restoreStarted;receipt.dump.local_readback_verified=true;
   stage='full-source-and-target-readback';const targetQuery=queryJSON(sql=>targetExec(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],'SET ROLE neondb_owner; '+sql),secrets),restored=await readRecoveryInventory(targetQuery),after=await readRecoveryInventory(sourceQuery);assertCurrentInventory(after,window.source_marker);assertRestoredInventory(before,restored,after);
   const finalReservation=await loadRecoveryReservation(window,api);
   validateRecoveryWindow(window,finalReservation.claim,{head:env.GITHUB_SHA,toolSHA,phase:'end',...finalReservation});

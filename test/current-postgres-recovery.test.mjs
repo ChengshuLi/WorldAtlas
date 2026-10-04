@@ -114,3 +114,5 @@ test('database ACL rendering excludes the forced create prelude and rejects unex
  assert.equal(isolatedDatabaseACLSQL(rendered).toString(),'GRANT ALL ON DATABASE neondb TO neon_superuser;\n');
  for(const x of [rendered.replace('GRANT ALL','CREATE DATABASE other;\nGRANT ALL'),rendered.replace('TO neon_superuser','TO other'),rendered.replace('GRANT ALL','\\connect other\nGRANT ALL'),rendered.replace('Type: ACL','Type: TABLE'),rendered.replace('dump complete','incomplete'),rendered+rendered])assert.throws(()=>isolatedDatabaseACLSQL(x));
 });
+
+test('TOC-style early input close reproduces full-size spawnSync EPIPE despite successful child exit',async()=>{const {execFileSync}=await import('node:child_process');assert.throws(()=>execFileSync('head',['-c','10'],{input:Buffer.alloc(22510251),stdio:['pipe','pipe','pipe']}),error=>error.code==='EPIPE'&&error.status===0);});
