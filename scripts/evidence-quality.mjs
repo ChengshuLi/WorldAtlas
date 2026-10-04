@@ -23,6 +23,50 @@ function fileDescriptor(file) {
     Number.isSafeInteger(file.uncompressed_bytes) && file.uncompressed_bytes >= 0, 'Invalid uncompressed descriptor');
 }
 
+/** Identity-only projection from retained prior evidence, never a geometry/source certification. */
+function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
+  const inventory = manifest.baseline.subject_inventory;
+  require(!manifest.baseline.subject_files, 'Subject inventory cannot replace a containing-file claim');
+  require(inventory?.version === 1 && inventory.basis === 'prior-evidence' &&
+    text(inventory.id_prefix) && text(inventory.source_property) &&
+    text(inventory.json_pointer) && inventory.json_pointer.startsWith('/') &&
+    text(inventory.source_id), 'Invalid prior-evidence subject inventory');
+  safeEvidencePath(inventory.path); safeEvidencePath(inventory.registry_path);
+  require(manifest.baseline.files.some(file => file.path === inventory.path), 'Subject inventory references unpinned baseline');
+  require(manifest.outputs.some(file => file.path === inventory.registry_path), 'Subject registry must be a declared candidate output');
+  require(manifest.sources.some(source => source.id === inventory.source_id), 'Subject inventory references unknown source');
+  require(manifest.lane === 'geography' && manifest.stages?.geographic_approval !== 'approved',
+    'Prior evidence cannot certify geography');
+  limits.push(`Subject inventory uses retained prior evidence (${inventory.path}); original source membership and geometry were not independently validated by this inventory check`);
+  if (!readFile) return;
+  const decode = (name, vintage) => {
+    const raw = readFile(name, vintage);
+    return JSON.parse(name.endsWith('.gz') ? gunzipSync(raw, {maxOutputLength: maxFileBytes}) : raw);
+  };
+  let values = decode(inventory.path, manifest.baseline.commit);
+  for (const key of inventory.json_pointer.slice(1).split('/').map(key => key.replaceAll('~1', '/').replaceAll('~0', '~'))) {
+    require(values && Object.hasOwn(values, key), 'Subject inventory pointer does not resolve');
+    values = values[key];
+  }
+  require(Array.isArray(values) && values.every(text) && new Set(values).size === values.length,
+    'Subject inventory needs unique native string IDs');
+  // Exact roster, rather than a permissive subset of an unrelated national inventory.
+  require(subjectsHash(values.map(value => inventory.id_prefix + value)) === manifest.subject_ids_sha256,
+    'Prior evidence subject roster differs from reviewed scope');
+  const registry = decode(inventory.registry_path, 'candidate');
+  require(registry?.type === 'FeatureCollection' && Array.isArray(registry.features) &&
+    registry.features.length === values.length, 'Invalid identity-only subject registry');
+  const nativeIds = new Set(values), seen = new Set();
+  for (const feature of registry.features) {
+    const value = feature?.properties?.source_value, id = inventory.id_prefix + value;
+    require(feature?.type === 'Feature' && nativeIds.has(value) && !seen.has(value) &&
+      feature.id === id && feature.properties.id === id &&
+      feature.properties.source_property === inventory.source_property && feature.geometry === null,
+      'Subject registry differs from prior evidence identity-only projection');
+    seen.add(value);
+  }
+}
+
 /** Reader returns bytes from an immutable baseline or candidate; never executes packet code. */
 export function validateEvidence(manifest, {readFile, expectedIssue, expectedSubjects, expectedPins,
   expectedLane, maxFileBytes = 32 * 1024 * 1024, maxTotalBytes = 256 * 1024 * 1024} = {}) {
@@ -65,7 +109,9 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     checked.push(key);
   }
   for (const file of manifest.baseline.files) inspect(file, manifest.baseline.commit);
-  if (manifest.lane === 'geography') {
+  require(!manifest.baseline.subject_inventory || manifest.lane === 'geography',
+    'Prior-evidence inventory is only supported for geography research');
+  if (manifest.lane === 'geography' && !manifest.baseline.subject_inventory) {
     const mappings = manifest.baseline.subject_files;
     require(mappings && subjectsHash(Object.keys(mappings)) === manifest.subject_ids_sha256,
       'Geography needs exact subject-to-containing-file inventory');
@@ -110,6 +156,7 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
   }
   require(Array.isArray(manifest.outputs), 'Missing output inventory');
   for (const file of manifest.outputs) inspect(file, 'candidate');
+  if (manifest.baseline.subject_inventory) verifySubjectInventory(manifest, readFile, maxFileBytes, limits);
   require(Array.isArray(manifest.methods) && manifest.methods.every(x => text(x.id) && text(x.description) &&
     text(x.software) && text(x.units)), 'Missing method/environment');
   for (const method of manifest.methods) if (method.kind === 'geography') {
