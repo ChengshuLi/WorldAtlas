@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "issue": 654,
+  "lane": "geography",
+  "worker_id": "codex-20261004-sio-baseline-654-0f0c31c8-3cd0-4487-95a6-bf8501aa31cc",
+  "subject_ids": [
+    "atlas:coverage:ATF-5916",
+    "atlas:coverage:ATF-5917",
+    "atlas:coverage:ATF-5918",
+    "atlas:coverage:HMD+00?"
+  ],
+  "subject_ids_sha256": "63f9ec0c6e5f8ccfccd83e3309bc01dde97c7985219bf32beab8580c7c9241b4",
+  "baseline": {
+    "commit": "ff171e1dd1998684d9b3549943d5725817a7aef4",
+    "files": [
+      {
+        "path": "data/geography/macro-loose-ends-v5-additions.json",
+        "bytes": 11393,
+        "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-1.json",
+        "bytes": 8060108,
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-10.json",
+        "bytes": 5144571,
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-12.json",
+        "bytes": 4489493,
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-14.json",
+        "bytes": 4355198,
+        "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "bytes": 4909063,
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-21.json",
+        "bytes": 6737781,
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-24.json",
+        "bytes": 4816899,
+        "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "1a26b9a86043db37b502be524c7160e13896ad8231943e228137b764673c5a02",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-26.json",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-27.json",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-30.json",
+        "bytes": 11979437,
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-31.json",
+        "bytes": 10086485,
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "bytes": 10211739,
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-33.json",
+        "bytes": 607984,
+        "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-4.json",
+        "bytes": 4835479,
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-6.json",
+        "bytes": 4607953,
+        "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-7.json",
+        "bytes": 4257402,
+        "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/geography/source-restoration-additions.json",
+        "bytes": 1573576,
+        "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10165703,
+        "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2367982,
+        "sha256": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-projection.json.gz",
+        "bytes": 5005075,
+        "sha256": "beb2739a65c67f01a65deab96ebf209a159b257453e156ef590106e1f1c9a348",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/macro-foundation/envelopes-v5/ac7c994418c29fd98eaf7b22.wkb.gz",
+        "bytes": 4698,
+        "sha256": "61c147783de250455e52f0364e0c35d899efcbc95bef2550c9314be4ba4a2827",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/macro-foundation/macro-certificate.json",
+        "bytes": 38430,
+        "sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 70253,
+        "sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/semantic-report.json",
+        "bytes": 6091596,
+        "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "role": "immutable baseline input for original four-subject reproduction"
+      }
+    ],
+    "subject_files": {
+      "atlas:coverage:ATF-5916": "data/geography/part-28.json",
+      "atlas:coverage:ATF-5917": "data/geography/part-28.json",
+      "atlas:coverage:ATF-5918": "data/geography/part-28.json",
+      "atlas:coverage:HMD+00?": "data/geography/part-28.json"
+    },
+    "pins": {
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"
+    },
+    "pin_files": {
+      "hierarchy_sha256": "data/hierarchy.json",
+      "macro_certificate_sha256": "data/macro-foundation/macro-certificate.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "sio-original-source-receipt-bundle",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/commit/4909f04e6e035ffc003d237db68323d005ccdb89",
+      "role": "Inherited source-reference and reuse receipt bundle from original #439 packet; recorded canonical citations, source dates, licenses, lawful retention status, hashes and restoration instructions. Not a fresh assessment of geographic source facts.",
+      "vintage": "Original #439 source/review packet snapshot at 4909f04e6e035ffc003d237db68323d005ccdb89",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "unknown",
+        "terms": "This entry identifies repository evidence and makes no claim that the full repository has a blanket reuse license. Individual source reuse terms and uncertainties remain as recorded in the preserved source receipt."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore the original receipt tree with `git show 4909f04e6e035ffc003d237db68323d005ccdb89:data/regional-review/regional-review-2fe7597eb9014901/<path>` for a file listed in the embedded source snapshot manifest. The preserved commit and per-file hashes are recorded at vintages/20261004-pinned-geography-inputs/source-snapshot-manifest.json.",
+      "limit": "Only byte identity and inherited receipt metadata are verified here. Geographic facts, source licenses and earlier source interpretations were not newly verified; consult each recorded canonical reference and its restoration instructions."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/README.md",
+      "bytes": 7107,
+      "sha256": "e45bce9a410de1be39dce5b196b288688d98e16f5a5a5f3a0a097fb27a078baf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/scope.json",
+      "bytes": 2885,
+      "sha256": "7a1fb957624cf3e3d8ab3919adb60b704db5391fa2ee99125564ed4421dd7ec7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/build_packet.py",
+      "bytes": 30795,
+      "sha256": "ab937d885398fb76ec428baf9f41a4b893db8f21bbe1b288be3cb2d8ac5cef15",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/verify_packet.py",
+      "bytes": 3437,
+      "sha256": "86df7392e2b1750f8a7e36278587c2ba4ef8f0a42495374b8aa1a5103f035a5a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/test_negative_cases.py",
+      "bytes": 4607,
+      "sha256": "cdc6aa0c2f33a6d406f436607529ebaa9fdcedcfa1e61899a5df3485f431b624",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/baseline-source-crosswalk.json",
+      "bytes": 32171,
+      "sha256": "0a87e23fc0e591677bb48a42a81c31c87f16b15e35043f0d01a9a81a5838e251",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/negative-control.json",
+      "bytes": 374,
+      "sha256": "656615f2868d107a1cc2599a81b2e30f34ccefc6d007ad9a94b3622306b4772a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/positive-control.json",
+      "bytes": 216,
+      "sha256": "c6f4460fee5517913cafd92625d6e79d544e27ee4081dc8ba22d24cc7d8b2caa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/reproducibility-control.json",
+      "bytes": 264,
+      "sha256": "c78a1d2ee840c8907ee8383c888705756c7d06ebec89132e458e9e5c8309e5bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/reproduction-controls.json",
+      "bytes": 818,
+      "sha256": "a4b5b3b0ef3574442477c0500c25185a0700a6545507310eedc11057e9fbc883",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/source-snapshot-manifest.json",
+      "bytes": 11218,
+      "sha256": "e1eda767e386766c84e040e993cff7801f8738cfdba482a3bd2cfa408bcfde6b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/superseding-notice.json",
+      "bytes": 1355,
+      "sha256": "bda79a253f60dad4922fb7c5d7f9b5d077af13cf66dbbf73fb94cf4751bb6181",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "immutable-sio-baseline-reproduction",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Read ordinary Git blobs at the pinned #439 baseline and source-packet commits, verify the original input pins, four exact subject occurrences, actual containing-file crosswalk, full parent chains, memberships, projections and frozen region context; build deterministic output twice and exclusively create a new named vintage. Negative controls cover altered pins, changed source snapshot, invalid commit, subject inventory defects, wrong containing file and overwrite refusal.",
+      "software": "Python 3; Git object database; shared WorldAtlas immutable evidence helper",
+      "units": "subjects, parent-chain nodes, indexed parts, whole-file bytes and SHA-256"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The inherited four-subject extract and its frozen context can be reproduced from the exact original baseline commit and source packet; the check verifies all indexed world parts, actual containing file, full parent chains, membership/projection rows and required hierarchy, macro-certificate and region-envelope pins.",
+      "source_ids": [
+        "sio-original-source-receipt-bundle"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Original external geographic evidence, source-role judgments, settlement caveats and unresolved island findings are inherited unchanged and were not freshly adjudicated by this reproduction correction.",
+      "source_ids": [
+        "sio-original-source-receipt-bundle"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/southern-indian-ocean-baseline-pins/build_packet.py --check",
+    "python3 research/geography/southern-indian-ocean-baseline-pins/build_packet.py --check --vintage 20261004-pinned-geography-inputs",
+    "python3 research/geography/southern-indian-ocean-baseline-pins/build_packet.py --create --vintage 20261004-pinned-geography-inputs",
+    "python3 research/geography/southern-indian-ocean-baseline-pins/test_negative_cases.py",
+    "python3 research/geography/southern-indian-ocean-baseline-pins/verify_packet.py",
+    "node scripts/evidence-quality.mjs research/geography/southern-indian-ocean-baseline-pins/evidence-quality.json"
+  ],
+  "validation": [
+    {
+      "method_id": "immutable-sio-baseline-reproduction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/positive-control.json"
+    },
+    {
+      "method_id": "immutable-sio-baseline-reproduction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/negative-control.json"
+    },
+    {
+      "method_id": "immutable-sio-baseline-reproduction",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/reproducibility-control.json"
+    }
+  ],
+  "metric_bindings": [],
+  "rendered_tables": [],
+  "change_receipts": [
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/build_packet.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/scope.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/test_negative_cases.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/verify_packet.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/baseline-source-crosswalk.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/reproducibility-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/reproduction-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/source-snapshot-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/southern-indian-ocean-baseline-pins/vintages/20261004-pinned-geography-inputs/superseding-notice.json",
+      "status": "added"
+    }
+  ],
+  "generated_data_note": "Evidence-only immutable reproduction correction. The new packet retains source/reproduction metadata and no external source bytes. The original packet keeps its source extracts and 65 baseline descriptors, including canonical-grid descriptors; this correction reads 44 non-grid/context baseline files to verify reproduction and does not recalculate canonical-grid counts or geographic conclusions."
+}
