@@ -1,0 +1,26 @@
+{
+  "method_id": "crosswalk-packet-validation",
+  "kind": "measurement",
+  "outcome": "passed",
+  "evidence_path": "control-results.json",
+  "assigned_subjects": 376,
+  "unique_2016_csd_uids": 376,
+  "unique_2021_target_uids": 374,
+  "original_flag_counts": {
+    "no_exact_name": 20,
+    "ambiguous_name": 5,
+    "overlap_below_95": 33
+  },
+  "extent_union": 141,
+  "positive_controls": [
+    "complete 376-ID roster and parent chains",
+    "all 33 low-overlap ratios reproduced",
+    "two annexation IDs/event descriptions verified",
+    "all recorded source hashes verified"
+  ],
+  "negative_controls": [
+    "duplicate ID rejected",
+    "broken parent consistency rejected",
+    "incomplete roster rejected"
+  ]
+}

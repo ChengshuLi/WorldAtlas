@@ -1,0 +1,166 @@
+{
+  "assigned_subjects": 376,
+  "original_flag_counts": {
+    "no_exact_2021_name": 20,
+    "multiple_same_name_2021_candidates": 5,
+    "best_overlap_below_95": 33,
+    "best_overlap_below_50": 3,
+    "union_subject_count": 58
+  },
+  "all_376_assessments_have_distinct_2016_csd_uid": true,
+  "all_376_current_2021_candidate_ids_verified_against_official_2021_file": true,
+  "all_376_2016_and_2021_parent_cd_codes_match_inherited_current_parent": true,
+  "crosswalk": {
+    "same_csd_uid_across_2016_2021": 374,
+    "explicit_complete_annexation_successors": 2,
+    "unique_2016_csd_uids": 376,
+    "unique_current_2021_target_csd_uids": 374,
+    "duplicate_targets": {
+      "5909020": [
+        "Skwahla 2 predecessor",
+        "Chilliwack original source unit"
+      ],
+      "5915075": [
+        "Langley 5 predecessor",
+        "Maple Ridge original source unit"
+      ]
+    }
+  },
+  "no_exact_name_case_dispositions": {
+    "complete_annexation_to_existing_2021_csd": 2,
+    "official_table_name_change_same_csd_uid": 10,
+    "same_csd_uid_current_name_change_not_listed_in_table": 1,
+    "source_label_shortened_with_asterisk": 6,
+    "source_text_encoding_mismatch": 1
+  },
+  "ambiguous_same_name_cases": {
+    "count": 5,
+    "resolved_by_2016_official_geometry": true,
+    "cases": [
+      {
+        "source_shape_id": "43193130B33495642174724",
+        "source_name": "Langley",
+        "current_candidates": [
+          {
+            "csduid": "5915001",
+            "csdname": "Langley",
+            "csdtype": "DM"
+          },
+          {
+            "csduid": "5915002",
+            "csdname": "Langley",
+            "csdtype": "CY"
+          }
+        ],
+        "selected_2016_csd_uid": "5915001",
+        "current_csd_uid": "5915001",
+        "source_2016_overlap_pct": 99.932075
+      },
+      {
+        "source_shape_id": "43193130B3536991528911",
+        "source_name": "North Vancouver",
+        "current_candidates": [
+          {
+            "csduid": "5915046",
+            "csdname": "North Vancouver",
+            "csdtype": "DM"
+          },
+          {
+            "csduid": "5915051",
+            "csdname": "North Vancouver",
+            "csdtype": "CY"
+          }
+        ],
+        "selected_2016_csd_uid": "5915046",
+        "current_csd_uid": "5915046",
+        "source_2016_overlap_pct": 99.882841
+      },
+      {
+        "source_shape_id": "43193130B42698646227552",
+        "source_name": "North Vancouver",
+        "current_candidates": [
+          {
+            "csduid": "5915046",
+            "csdname": "North Vancouver",
+            "csdtype": "DM"
+          },
+          {
+            "csduid": "5915051",
+            "csdname": "North Vancouver",
+            "csdtype": "CY"
+          }
+        ],
+        "selected_2016_csd_uid": "5915051",
+        "current_csd_uid": "5915051",
+        "source_2016_overlap_pct": 99.137611
+      },
+      {
+        "source_shape_id": "43193130B51062932449598",
+        "source_name": "Langley",
+        "current_candidates": [
+          {
+            "csduid": "5915001",
+            "csdname": "Langley",
+            "csdtype": "DM"
+          },
+          {
+            "csduid": "5915002",
+            "csdname": "Langley",
+            "csdtype": "CY"
+          }
+        ],
+        "selected_2016_csd_uid": "5915002",
+        "current_csd_uid": "5915002",
+        "source_2016_overlap_pct": 99.338496
+      },
+      {
+        "source_shape_id": "43193130B93614945094540",
+        "source_name": "Esquimalt",
+        "current_candidates": [
+          {
+            "csduid": "5917040",
+            "csdname": "Esquimalt",
+            "csdtype": "DM"
+          },
+          {
+            "csduid": "5917811",
+            "csdname": "Esquimalt",
+            "csdtype": "IRI"
+          }
+        ],
+        "selected_2016_csd_uid": "5917040",
+        "current_csd_uid": "5917040",
+        "source_2016_overlap_pct": 99.388418
+      }
+    ]
+  },
+  "extent_findings": {
+    "geoBoundaries_2016_to_official_2016_source_coverage_below_95": 17,
+    "official_2016_csd_area_covered_by_source_below_95": 134,
+    "either_direction_below_95": 141,
+    "official_2016_csd_area_covered_below_50": 21,
+    "target_coverage_below_95_by_csd_type": {
+      "CY": 12,
+      "DM": 14,
+      "IGD": 2,
+      "IM": 1,
+      "IRI": 43,
+      "RDA": 44,
+      "T": 7,
+      "VL": 11
+    },
+    "source_extent_case_not_in_original_2021_low_overlap_flags": [
+      "43193130B91845847390303"
+    ],
+    "original_low_overlap_cases_remeasured": 33,
+    "recomputed_2021_screen_matches_prior_within_0_002pp": 33,
+    "official_2016_to_2021_footprint_coverage_below_95_either_way": 16,
+    "those_with_related_table_rows": 14,
+    "those_without_related_table_rows": [
+      "43193130B33792912870",
+      "43193130B95000363291297"
+    ],
+    "causal_attribution": "Unresolved. Table 1 reports change codes/population but not polygons/areas and warns that it may not include every change. The 2016 digital boundary product includes coastal water; no land-mask attribution is claimed from these overlap figures."
+  },
+  "scope_limit": "This is a source-vintage administrative crosswalk. It does not reassess settlement completeness, legal/political ownership, boundary authority, land coverage or regional approval."
+}
