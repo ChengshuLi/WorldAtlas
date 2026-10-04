@@ -28,6 +28,16 @@ partition=rows('area-partition-inventory.csv')
 require(len(partition)==774 and len({r['location_id'] for r in partition})==774,'full Nigeria assignment partition incomplete or duplicated')
 require({r['location_id'] for r in partition if r['in_issue_476_scope']=='True'}==set(ids),'assigned partition differs from issue')
 require(len(rows('administrative-scope.csv'))==13,'area plus 12 province scope rows expected')
+followups=json.loads((ROOT/'followup-issues.json').read_text())
+require(set(followups)=={'761','762','763','764'},'four bounded follow-up IDs required')
+require(set(followups['761'])==set(ids) and set(followups['762'])==set(ids),'land and settlement follow-ups must cover exact parent roster')
+require(set(followups['763'])=={r['id'] for r in unresolved},'parent follow-up must cover seven exact unresolved subjects')
+require(len(followups['764'])==1 and followups['764'][0]=='gb:NGA:ADM2:59680162B82021418174103','point follow-up must cover exact Kwali subject')
+for row in rows('administrative-scope.csv'):
+    linked={str(x) for x in json.loads(row['related_followup_issue_ids'])}
+    expected={'761','762'} | ({'763'} if set(json.loads(row['owned_subject_ids'])) & set(followups['763']) else set()) | ({'764'} if set(json.loads(row['owned_subject_ids'])) & set(followups['764']) else set())
+    if row['scope_level']=='area': expected={'761','762','763','764'}
+    require(linked==expected,f"follow-up links mismatch in {row['scope_level']} {row['name']}")
 anomalies=rows('settlement-point-anomalies.csv')
 require(len(anomalies)==1 and anomalies[0]['point_object_id']=='143477','settlement point anomaly inventory changed')
 neighbor=rows('neighbor-edge-screen.csv')
