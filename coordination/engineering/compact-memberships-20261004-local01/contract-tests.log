@@ -1,0 +1,220 @@
+TAP version 13
+# Subtest: compact contract preserves original guards, published byte retries and new service publication
+ok 1 - compact contract preserves original guards, published byte retries and new service publication
+  ---
+  duration_ms: 2427.228375
+  type: 'test'
+  ...
+# Subtest: compact membership rejects invalid parents, source changes, updates and withdrawals
+ok 2 - compact membership rejects invalid parents, source changes, updates and withdrawals
+  ---
+  duration_ms: 1464.583709
+  type: 'test'
+  ...
+# Subtest: compact dictionary preserves distinct raw JSON whitespace, key order and duplicate keys
+ok 3 - compact dictionary preserves distinct raw JSON whitespace, key order and duplicate keys
+  ---
+  duration_ms: 1243.875583
+  type: 'test'
+  ...
+# Subtest: failed copy rolls back its dictionaries, relation switch and original rows
+ok 4 - failed copy rolls back its dictionaries, relation switch and original rows
+  ---
+  duration_ms: 1366.997792
+  type: 'test'
+  ...
+# Subtest: copy parity rejects an extra row and migration refuses unreviewed dependent views
+ok 5 - copy parity rejects an extra row and migration refuses unreviewed dependent views
+  ---
+  duration_ms: 1281.763959
+  type: 'test'
+  ...
+# Subtest: application role can use guarded membership view but cannot touch private dictionaries
+ok 6 - application role can use guarded membership view but cannot touch private dictionaries
+  ---
+  duration_ms: 1429.336708
+  type: 'test'
+  ...
+# Subtest: staging is invisible; publication requires complete pinned membership and preserves original registry
+ok 7 - staging is invisible; publication requires complete pinned membership and preserves original registry
+  ---
+  duration_ms: 107.6665
+  type: 'test'
+  ...
+# Subtest: rename/reparent releases and same-tier merge crosswalk preserve historical evidence and archived releases
+ok 8 - rename/reparent releases and same-tier merge crosswalk preserve historical evidence and archived releases
+  ---
+  duration_ms: 93.857792
+  type: 'test'
+  ...
+# Subtest: manifest counts, complete same-release chains, no-year-zero calendar labels and hashes are real gates
+ok 9 - manifest counts, complete same-release chains, no-year-zero calendar labels and hashes are real gates
+  ---
+  duration_ms: 61.207
+  type: 'test'
+  ...
+# Subtest: bounded atomic staging rejects unknown/nongeographic/example identities and wrong-tier parents
+ok 10 - bounded atomic staging rejects unknown/nongeographic/example identities and wrong-tier parents
+  ---
+  duration_ms: 52.591541
+  type: 'test'
+  ...
+# Subtest: immutable staged contents and ingestion collisions reject atomically; raw SQL blocks cycles and publication bypass
+ok 11 - immutable staged contents and ingestion collisions reject atomically; raw SQL blocks cycles and publication bypass
+  ---
+  duration_ms: 50.204958
+  type: 'test'
+  ...
+# Subtest: crosswalk evidence, tier identity and retired membership must match the published release
+ok 12 - crosswalk evidence, tier identity and retired membership must match the published release
+  ---
+  duration_ms: 77.386125
+  type: 'test'
+  ...
+# Subtest: published pages use indexed keyset queries and older releases remain inspectable
+ok 13 - published pages use indexed keyset queries and older releases remain inspectable
+  ---
+  duration_ms: 58.272167
+  type: 'test'
+  ...
+# Subtest: streamed publication hashing matches exported UTF-8 canonical hashes across page boundaries
+ok 14 - streamed publication hashing matches exported UTF-8 canonical hashes across page boundaries
+  ---
+  duration_ms: 230.730584
+  type: 'test'
+  ...
+# Subtest: source-backed new territory publishes with a null predecessor and no invented historical attributes
+ok 15 - source-backed new territory publishes with a null predecessor and no invented historical attributes
+  ---
+  duration_ms: 41.483875
+  type: 'test'
+  ...
+# Subtest: placeholder translation preserves quoted values, dollar bodies and nested comments exactly
+ok 16 - placeholder translation preserves quoted values, dollar bodies and nested comments exactly
+  ---
+  duration_ms: 8.437167
+  type: 'test'
+  ...
+# Subtest: only reviewed inserts and index hints are adapted; SQLite metadata needs an explicit query
+ok 17 - only reviewed inserts and index hints are adapted; SQLite metadata needs an explicit query
+  ---
+  duration_ms: 0.887667
+  type: 'test'
+  ...
+# Subtest: injected driver returns D1 results with safe numeric dates and unchanged text evidence
+ok 18 - injected driver returns D1 results with safe numeric dates and unchanged text evidence
+  ---
+  duration_ms: 5.65225
+  type: 'test'
+  ...
+# Subtest: batches remain ordered, atomic and ingestion-locked before identity allocation
+ok 19 - batches remain ordered, atomic and ingestion-locked before identity allocation
+  ---
+  duration_ms: 1.431792
+  type: 'test'
+  ...
+# Subtest: publication and guarded imports share a lock before fresh ReadCommitted guard snapshots
+ok 20 - publication and guarded imports share a lock before fresh ReadCommitted guard snapshots
+  ---
+  duration_ms: 0.36
+  type: 'test'
+  ...
+# Subtest: driver failures preserve SQLSTATE while removing credentials, payloads and server details
+ok 21 - driver failures preserve SQLSTATE while removing credentials, payloads and server details
+  ---
+  duration_ms: 6.105875
+  type: 'test'
+  ...
+# Subtest: bounded timeouts cancel network work and preserve uncertain commit status for idempotent retries
+ok 22 - bounded timeouts cancel network work and preserve uncertain commit status for idempotent retries
+  ---
+  duration_ms: 101.861208
+  type: 'test'
+  ...
+# Subtest: Neon HTTP wrapper submits lazy ordered queries as one transaction without exposing its URL
+ok 23 - Neon HTTP wrapper submits lazy ordered queries as one transaction without exposing its URL
+  ---
+  duration_ms: 3.560583
+  type: 'test'
+  ...
+# Subtest: actual PostgreSQL parses translated placeholders, idempotence and rollback without touching immutable evidence text
+ok 24 - actual PostgreSQL parses translated placeholders, idempotence and rollback without touching immutable evidence text
+  ---
+  duration_ms: 1636.755416
+  type: 'test'
+  ...
+# Subtest: PostgreSQL evidence-only map pages retain retirement-only subjects without enumerating empty geography
+ok 25 - PostgreSQL evidence-only map pages retain retirement-only subjects without enumerating empty geography
+  ---
+  duration_ms: 1714.479208
+  type: 'test'
+  ...
+# Subtest: actual PostgreSQL applies all 14 tables and hosted smoke preserves original corrected evidence
+ok 26 - actual PostgreSQL applies all 14 tables and hosted smoke preserves original corrected evidence
+  ---
+  duration_ms: 1207.838792
+  type: 'test'
+  ...
+# Subtest: PostgreSQL claim/name readers preserve JSON bytes, stable identities, half-open dates, nulls and examples
+ok 27 - PostgreSQL claim/name readers preserve JSON bytes, stable identities, half-open dates, nulls and examples
+  ---
+  duration_ms: 1070.029667
+  type: 'test'
+  ...
+# Subtest: PostgreSQL guards reject interval/source/classification/owner contradictions and roll back complete failed batches
+ok 28 - PostgreSQL guards reject interval/source/classification/owner contradictions and roll back complete failed batches
+  ---
+  duration_ms: 1117.729834
+  type: 'test'
+  ...
+# Subtest: PostgreSQL atomic correction retires overlap, retains old bytes and cannot resurrect immutable evidence
+ok 29 - PostgreSQL atomic correction retires overlap, retains old bytes and cannot resurrect immutable evidence
+  ---
+  duration_ms: 1412.556583
+  type: 'test'
+  ...
+# Subtest: PostgreSQL rank/habitation and fixed environment guards match literal-zero proof policy
+ok 30 - PostgreSQL rank/habitation and fixed environment guards match literal-zero proof policy
+  ---
+  duration_ms: 874.54425
+  type: 'test'
+  ...
+# Subtest: PostgreSQL catalogs/graph/media paging and compact map use actual hosted SQL with whole-location parity
+ok 31 - PostgreSQL catalogs/graph/media paging and compact map use actual hosted SQL with whole-location parity
+  ---
+  duration_ms: 825.61
+  type: 'test'
+  ...
+# Subtest: PostgreSQL stages and publishes complete pinned reference geography without mutating registry/evidence
+ok 32 - PostgreSQL stages and publishes complete pinned reference geography without mutating registry/evidence
+  ---
+  duration_ms: 839.582709
+  type: 'test'
+  ...
+# Subtest: actual PostgreSQL and frozen D1 produce identical evidence/source bytes and selected-year service values
+ok 33 - actual PostgreSQL and frozen D1 produce identical evidence/source bytes and selected-year service values
+  ---
+  duration_ms: 891.18125
+  type: 'test'
+  ...
+# Subtest: PostgreSQL compact metadata summaries retain zero-population proof semantics and evidence links
+ok 34 - PostgreSQL compact metadata summaries retain zero-population proof semantics and evidence links
+  ---
+  duration_ms: 975.588833
+  type: 'test'
+  ...
+# Subtest: PostgreSQL geographic transaction guards reject unpublished/stale hashes and retain pinned replay receipts
+ok 35 - PostgreSQL geographic transaction guards reject unpublished/stale hashes and retain pinned replay receipts
+  ---
+  duration_ms: 1089.547542
+  type: 'test'
+  ...
+1..35
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 15028.854792

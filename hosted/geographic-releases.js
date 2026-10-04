@@ -47,7 +47,12 @@ async function normalizeRelease(row){
  text(row.reference_date,'reference date label');const calendarDate=new Date(row.reference_date+'T00:00:00Z');if(!/^\d{4}-\d{2}-\d{2}$/.test(row.reference_date)||Number.isNaN(calendarDate.getTime())||calendarDate.toISOString().slice(0,10)!==row.reference_date)fail('Reference date must be an ISO calendar date, not a historical interval');
  return {id:text(row.id,'release ID'),source_id:text(row.source_id,'release source'),version:row.version,reference_date:row.reference_date,status:'staged',hierarchy_sha256:digest(row.hierarchy_sha256),footprints_sha256:digest(row.footprints_sha256),membership_sha256:digest(row.membership_sha256),location_ids_sha256:digest(row.location_ids_sha256),changes_sha256:digest(row.changes_sha256??await geographicChangesHash([])),expected_counts:expected,metadata:object(row.metadata??{}),published_at:null};
 }
-function insert(db,table,fields,row){return db.prepare(`INSERT INTO ${table}(${fields.join(',')}) VALUES(${fields.map(()=>'?').join(',')}) ON CONFLICT DO NOTHING`).bind(...fields.map(k=>['evidence','metadata','expected_counts'].includes(k)?json(row[k]):row[k]));}
+function insert(db,table,fields,row){
+ // The PostgreSQL membership guard skips byte-identical retries and rejects
+ // conflicts itself, on both the original table and the compact writable view.
+ const conflict=db.dialect==='postgres'&&table==='atlas_geographic_memberships'?'':' ON CONFLICT DO NOTHING';
+ return db.prepare(`INSERT INTO ${table}(${fields.join(',')}) VALUES(${fields.map(()=>'?').join(',')})${conflict}`).bind(...fields.map(k=>['evidence','metadata','expected_counts'].includes(k)?json(row[k]):row[k]));
+}
 export async function geographicRelease(db,id=null,{includeStaged=false}={}){
  if(id!=null)text(id,'release ID');
  return clean(await first(id!=null?db.prepare(`SELECT * FROM atlas_geographic_releases WHERE id=?${includeStaged?'':" AND status='published'"}`).bind(id):db.prepare("SELECT * FROM atlas_geographic_releases WHERE status='published' ORDER BY version DESC LIMIT 1")));
