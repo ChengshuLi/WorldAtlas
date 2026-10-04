@@ -6,18 +6,25 @@ import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 
 export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
 
-// Retained full-run TAP costs identify these database suites as heavy neighbors
-// of model.test.mjs. Keep them on the otherwise lighter worker, while shard 0
-// retains the packaged tests and their required build/browser setup.
+// Archived TAP profiles identify these expensive neighbors. Reserve them away
+// from the packaged build/parity worker; timings are not runtime guarantees.
 export const DATABASE_NEIGHBOR_TESTS = [
   'test/temporal-geography.test.mjs', 'test/postgres-runtime-role.test.mjs',
-  'test/reference-hierarchy-release.test.mjs', 'test/hosted-catalog.test.mjs'
+  'test/reference-hierarchy-release.test.mjs', 'test/hosted-catalog.test.mjs',
+  'test/neon-storage-migration.test.mjs', 'test/postgres-restore.test.mjs',
+  'test/model-semantic-migration.test.mjs'
+];
+export const MIGRATION_WORKER_TESTS = [
+  'test/model.test.mjs', 'test/model-hierarchy-migration.test.mjs',
+  'test/model-topology-migration.test.mjs', 'test/storage-export-v2.test.mjs',
+  'test/map-snapshots.test.mjs', 'test/install-reviewed-geography.test.mjs',
+  'test/land-creations.test.mjs'
 ];
 export function fullRegressionShard(inventory, shard) {
   const placement = new Map([
     ...PACKAGED_ASSET_TESTS.map(name => [name, 0]),
     ...DATABASE_NEIGHBOR_TESTS.map(name => [name, 1]),
-    ['test/model.test.mjs', 2]
+    ...MIGRATION_WORKER_TESTS.map(name => [name, 2])
   ]);
   const reserved = inventory.filter(name => placement.has(name) && placement.get(name) === shard);
   const ordinary = inventory.filter(name => !placement.has(name));
