@@ -6,14 +6,22 @@ import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 
 export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
 
-// Keep measured heavy workloads apart as the discovered inventory grows.
+// Retained full-run TAP costs identify these database suites as heavy neighbors
+// of model.test.mjs. Keep them on the otherwise lighter worker, while shard 0
+// retains the packaged tests and their required build/browser setup.
+export const DATABASE_NEIGHBOR_TESTS = [
+  'test/temporal-geography.test.mjs', 'test/postgres-runtime-role.test.mjs',
+  'test/reference-hierarchy-release.test.mjs', 'test/hosted-catalog.test.mjs'
+];
 export function fullRegressionShard(inventory, shard) {
-  const reserved = [...PACKAGED_ASSET_TESTS, 'test/model.test.mjs'];
-  return [
-    ...(shard === 0 ? PACKAGED_ASSET_TESTS : []),
-    ...(shard === 2 ? ['test/model.test.mjs'] : []),
-    ...inventory.filter(name => !reserved.includes(name)).filter((name, index) => index % 3 === shard)
-  ];
+  const placement = new Map([
+    ...PACKAGED_ASSET_TESTS.map(name => [name, 0]),
+    ...DATABASE_NEIGHBOR_TESTS.map(name => [name, 1]),
+    ['test/model.test.mjs', 2]
+  ]);
+  const reserved = inventory.filter(name => placement.has(name) && placement.get(name) === shard);
+  const ordinary = inventory.filter(name => !placement.has(name));
+  return [...reserved, ...ordinary.filter((name, index) => index % 3 === shard)];
 }
 
 export function integrationTestFiles(profile, shard) {
