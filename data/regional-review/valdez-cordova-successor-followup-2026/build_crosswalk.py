@@ -41,7 +41,7 @@ def main():
             'effective_date': '2019-01-02', 'type': e['Type of Change'].strip(),
             'official_description': e['Description of Change'].strip(), 'source_of_change': e['Source of Change'].strip(),
             'date_submitted': e['Date Submitted'].strip(), 'ansi_code': e['ANSI Code'].strip()})
-    page = (ROOT / 'sources/census-2019-geography-changes.html').read_text(encoding='utf-8')
+    with gzip.open(ROOT / 'sources/census-2019-geography-changes.html.gz', 'rt', encoding='utf-8') as f: page = f.read()
     page_text = html.unescape(re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', page)))
     phrase = 'Alaska has announced the split of 02261 Valdez-Cordova borough into two new census areas, 02063 Chugach and 02066 Copper River.'
     assert phrase in page_text
