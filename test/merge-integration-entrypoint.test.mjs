@@ -119,3 +119,48 @@ test('actual final entry point cleans only its owned ref and retains successful 
     } finally {fs.rmSync(directory,{recursive:true,force:true});}
   }
 });
+
+test('actual fallback prepare cleans its confirmed ref when receipt notification is denied',()=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-prepare-notify-cleanup-'));
+  const sha=c=>c.repeat(40),head=sha('a'),base=sha('b'),candidate=sha('c'),owned=sha('e');
+  fs.mkdirSync(path.join(directory,'.github'));
+  fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
+  fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:head,request_id:'notification-cleanup-test'}}));
+  const issue={number:1,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
+    body:'<!-- worldatlas-work:v1\n'+JSON.stringify({mode:'engineering',max_prs:2,depends_on:[],scope:'code'})+'\n-->'};
+  const pr={number:2,state:'open',draft:false,body:'Closes #1',title:'Repair',changed_files:1,
+    head:{sha:head,ref:'engineering/test',repo:{full_name:'owner/repo'}},base:{ref:'main',sha:base},mergeable:true,merge_commit_sha:candidate};
+  const routes={
+    '/pulls/2':pr,'/issues/1':issue,'/issues/1/timeline':[],
+    '/issues/1/comments':[{id:1,user:{login:'github-actions[bot]'},body:renderClaim({version:1,active:true,worker_id:'worker',claim_id:'nonce',branch:'engineering/test',expires_at:new Date(Date.now()+3600000).toISOString()})}],
+    '/pulls/2/files':[{filename:'src/a.js',status:'modified'}],
+    ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
+    ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
+    ['/git/commits/'+candidate]:{sha:candidate,parents:[{sha:sha('d')},{sha:head}]},
+    ['/git/commits/'+owned]:{sha:owned,tree:{sha:'combined'},parents:[{sha:base},{sha:head}]},
+    ['/git/commits/'+head]:{tree:{sha:'combined'}},
+    '/git/trees/combined':{truncated:false,tree:[{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'}]}
+  };
+  fs.writeFileSync(path.join(directory,'mock.mjs'),`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
+    const originalSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>originalSetTimeout(fn,ms===2000?0:ms,...args);
+    globalThis.fetch=async(url,options)=>{
+      const route=new URL(url).pathname.replace('/repos/owner/repo',''),body=options.body?JSON.parse(options.body):null;
+      if(options.method==='PUT')throw Error('No PR merge authorized');
+      if(route==='/git/refs'&&options.method==='POST'){refs.set(body.ref.replace('refs/heads/',''),body.sha);return Response.json({ref:body.ref},{status:201});}
+      if(route==='/merges'&&options.method==='POST'){if(body.base==='main'||body.base==='engineering/test')throw Error('Protected branch update');refs.set(body.base,'${owned}');return Response.json({sha:'${owned}'},{status:201});}
+      if(route.startsWith('/git/ref/heads/worldatlas-integration/'))return Response.json({object:{sha:refs.get(route.split('/git/ref/heads/')[1])}});
+      if(options.method==='DELETE'){refs.delete(route.split('/git/refs/heads/')[1]);fs.writeFileSync('remaining-refs.json',JSON.stringify([...refs]));return new Response(null,{status:204});}
+      if(route==='/issues/2/comments'&&options.method==='POST')return Response.json({},{status:403});
+      return Response.json(routes[route]??{});
+    };`);
+  try {
+    const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
+      cwd:directory,encoding:'utf8',env:{...process.env,GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_RUN_ID:'1234',
+        GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare',PREPARE_FALLBACK:'true'}});
+    const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
+    assert.notEqual(result.status,0);assert.match(result.stderr,/POST.*HTTP 403/);
+    assert.equal(receipt.accepted,false);assert.equal(receipt.status,'testing');assert.equal(receipt.tested_candidate,owned);
+    assert.match(receipt.notification_error,/HTTP 403/);assert.equal(receipt.candidate_cleanup.status,'deleted');
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[]);
+  } finally {fs.rmSync(directory,{recursive:true,force:true});}
+});

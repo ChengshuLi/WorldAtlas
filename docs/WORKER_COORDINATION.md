@@ -88,7 +88,9 @@ branch at the exact main SHA and asks GitHub to merge the exact reviewed SHA the
 It validates the resulting parents and reviewed tree before tests. This never edits
 main or worker branches and executes no candidate code with write credentials.
 The final job deletes only that exact owned ref at its expected SHA, including on
-test/merge rejection. Failed cleanup is recorded for operator inspection; canceled
+test/merge rejection. Failed cleanup is recorded for operator inspection. Failed preparation notification
+also attempts exact-owned cleanup; an unconfirmed ref creation records its possible
+resource without deleting a collision. Canceled
 jobs may leave an owned ref and require cleanup, never blind deletion or proof of
 merge. Candidate tests still check out immutable SHAs with read-only permissions.
 

@@ -109,7 +109,13 @@ export async function cleanupCandidate(options, reference, expectedSHA) {
 }
 export async function createCandidate(options, state) {
   const reference = preparedBranch(options), {api, repo} = options;
-  await api(`${root(repo)}/git/refs`, 'POST', {ref: `refs/heads/${reference}`, sha: state.base});
+  try { await api(`${root(repo)}/git/refs`, 'POST', {ref: `refs/heads/${reference}`, sha: state.base}); }
+  catch (error) {
+    // A lost response may hide a completed creation. Identify the possible ref,
+    // but never delete a collision or a resource whose creation was unconfirmed.
+    error.candidateCleanup = {status: 'creation-unconfirmed', reference, reason: error.message};
+    throw error;
+  }
   let expectedSHA = state.base;
   try {
     // GitHub merges into OUR disposable branch, never main or the worker branch.

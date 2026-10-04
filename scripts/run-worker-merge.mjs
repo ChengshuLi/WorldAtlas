@@ -45,4 +45,16 @@ fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${result.status} PR #${numbe
 console.log(JSON.stringify(result));
 // Preserve the decision before attempting its remote notification. A comment
 // permission/network failure must not discard the original result or reason.
-await api(`/repos/${repo}/issues/${number}/comments`, 'POST', {body: renderWorkerResult('merge', result)});
+try { await api(`/repos/${repo}/issues/${number}/comments`, 'POST', {body: renderWorkerResult('merge', result)}); }
+catch (error) {
+  result.notification_error = error.message;
+  // Failed preparation notification prevents the downstream final job from
+  // running, so dispose of a confirmed owned candidate here rather than leak it.
+  if (phase === 'prepare' && result.candidate_ref) {
+    try { result.candidate_cleanup = await cleanupCandidate(options, result.candidate_ref, result.tested_candidate); }
+    catch (cleanupError) { result.candidate_cleanup = {status: 'pending', reference: result.candidate_ref, reason: cleanupError.message}; }
+  }
+  fs.writeFileSync('merge-result.json', JSON.stringify(result, null, 2) + '\n');
+  console.log(JSON.stringify(result));
+  throw error;
+}

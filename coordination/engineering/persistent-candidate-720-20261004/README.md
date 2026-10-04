@@ -19,7 +19,9 @@ remain. Only trusted preparation receives contents-write; candidate testing rema
 read-only. The branch is retained during immutable-SHA testing and removed by the
 final job, including rejected tests/merges. Altered refs are retained, not blindly
 deleted. Canceled jobs or cleanup access failures can leave an owned temporary ref;
-receipts identify resources for inspection. This is bounded recovery, not a guarantee
+receipts identify resources for inspection. Failed preparation notification attempts
+cleanup before throwing; unconfirmed creation identifies a possible ref without
+deleting an unknown/preexisting resource. This is bounded recovery, not a guarantee
 that GitHub's automatic previews refresh or that main never advances during tests.
 
 `github-probe.json` records an actual execution of the candidate-creation/cleanup

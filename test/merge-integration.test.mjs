@@ -377,3 +377,11 @@ test('isolated candidate follows the existing final tests/main/head merge guards
   const g=isolatedFixture();g.parentBase=sha('d');const gp=await prepareIntegration(g.options());g.base=sha('d');
   await assert.rejects(g.complete({testedCandidate:gp.candidate,testedBase:gp.base}),/Main advanced/);assert.equal(g.writes.length,0);
 });
+
+test('unconfirmed ref creation identifies the resource without deleting a possible collision',async()=>{
+  const f=isolatedFixture();f.createDenied=true;
+  await assert.rejects(createCandidate(f.options(),{pr:f.pr,base:f.base}),error=>{
+    assert.match(error.message,/HTTP 403/);assert.equal(error.candidateCleanup.status,'creation-unconfirmed');
+    assert.match(error.candidateCleanup.reference,/^worldatlas-integration\/pr-2-/);return true;
+  });assert.equal(f.operations.some(row=>row.method==='DELETE'),false);assert.equal(f.writes.length,0);
+});
