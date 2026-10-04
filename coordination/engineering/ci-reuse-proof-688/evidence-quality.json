@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "issue": 688,
+  "lane": "engineering",
+  "worker_id": "ci-efficiency-688-worker",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "bb0a74e880d319a780ba838fbd6025ad5d37dc3d",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 3451,
+        "sha256": "05d7aebbbe7941e7ee47806f7daae8ede1ec9776266940b19489cd362f8c510e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 3041,
+        "sha256": "9cf4f99b1cd486a429bab298bcd7978072d6350471ee299a99befa545ca77655",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-proof.mjs",
+        "bytes": 3844,
+        "sha256": "49ab7d3b5bf65ddbe83b6e43243983d3a53e86b90e4f69caba794e8dcdb159f5",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/ci-reuse-proof-688/claim-renewal.json",
+      "bytes": 806,
+      "sha256": "fc9dc4550ea7f00c47043b3faeb36c797bacaf9dbea5400f32a8352027fe5efa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-reuse-proof-688/reuse-plan.json",
+      "bytes": 1324,
+      "sha256": "c24a055e15aae3cee33a1ef583170da6c263596fd670109ed6600afba9cf83ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-reuse-proof-688/source-ci-observation.json",
+      "bytes": 9004,
+      "sha256": "331df157d1181c362bd4a238b0bcf7b8dc42e2224c95b7d87ab9a929f01d4cca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-reuse-proof-688/source-regression-summary.log",
+      "bytes": 972,
+      "sha256": "13632eb78dbfa9b3602e9c6489e45d4f75767c400d75f309060c78f9f135ae4a",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "actual-ci-observation",
+      "kind": "code",
+      "description": "Read actual source GitHub run/jobs/log summaries and prepare an owned coordination-only experiment whose actual outcome must come from normal queue bot receipts. Preserve trusted source and all application coverage.",
+      "software": "Node24, Git, GitHub read-only API and gh CLI",
+      "units": "test counts and immutable bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "source-tests",
+      "value": 673,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "13632eb78dbfa9b3602e9c6489e45d4f75767c400d75f309060c78f9f135ae4a",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "source-pass",
+      "value": 673,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "13632eb78dbfa9b3602e9c6489e45d4f75767c400d75f309060c78f9f135ae4a",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "source-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "13632eb78dbfa9b3602e9c6489e45d4f75767c400d75f309060c78f9f135ae4a",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "source-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "13632eb78dbfa9b3602e9c6489e45d4f75767c400d75f309060c78f9f135ae4a",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "source-tests",
+      "path": "coordination/engineering/ci-reuse-proof-688/source-ci-observation.json",
+      "json_pointer": "/regression/tests"
+    },
+    {
+      "metric_id": "source-pass",
+      "path": "coordination/engineering/ci-reuse-proof-688/source-ci-observation.json",
+      "json_pointer": "/regression/pass"
+    },
+    {
+      "metric_id": "source-fail",
+      "path": "coordination/engineering/ci-reuse-proof-688/source-ci-observation.json",
+      "json_pointer": "/regression/fail"
+    },
+    {
+      "metric_id": "source-skipped",
+      "path": "coordination/engineering/ci-reuse-proof-688/source-ci-observation.json",
+      "json_pointer": "/regression/skipped"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "gh run view 37165467753 --log",
+    "node scripts/queue-pr-merge.mjs --pr PROOF_PR --head REVIEWED_HEAD"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/ci-reuse-proof-688/claim-renewal.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-reuse-proof-688/reuse-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-reuse-proof-688/source-ci-observation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-reuse-proof-688/source-regression-summary.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-reuse-proof-688/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
