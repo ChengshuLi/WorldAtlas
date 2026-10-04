@@ -1,0 +1,504 @@
+{
+  "version": 1,
+  "issue": 699,
+  "lane": "engineering",
+  "worker_id": "queue-test-clock-699-agent-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5",
+    "files": [
+      {
+        "path": "test/merge-integration-client.test.mjs",
+        "bytes": 3934,
+        "sha256": "8798b35229da3e56471b1f0b339a1b54ef3a2b5052ca821c299bb748c0371584",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/queue-pr-merge.mjs",
+        "bytes": 3117,
+        "sha256": "2daedba75ce32cbe246bd37156dcfe2ce345810a96c21ade8f970b7ed8f336c9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 3345,
+        "sha256": "8a82efac1ecfe82605061a779c6420bb83e30a3bf0a441757f8fb42d64995d56",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 2279,
+        "sha256": "152d36ba548b95c00a1dc57d1e1c90822ce29d82de4297604f54b7de2a4bbfac",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-proof.mjs",
+        "bytes": 3844,
+        "sha256": "ae1eca0bebcb40b39c2ea2540e79774d1f136ae52ac1fce6fdb4cb838349b67a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 3503,
+        "sha256": "7008cf863c34289821742dee2fb03c3d85d67299a728345d19a7c3dd5fce1471",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 6400,
+        "sha256": "aa99aaee0274fc34110d999898d664754e4cee0910296bc21a8e64b2c7baca34",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/queue-test-clock-699/benchmark-runner.mjs",
+      "bytes": 4784,
+      "sha256": "f1599c293c46f988f20a499cca43183958aa5f02677d9b509a9f76c643107968",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "bytes": 2991,
+      "sha256": "89514a96d0993bbebe31980fa0c82538689f1b04abf2a6cbe3685d945c8a497a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/claim.json",
+      "bytes": 819,
+      "sha256": "5450a3ca227e2a787026210f68f7f34f4981b62b5c1e78cfbb70e426e11cd1e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/client-after-preliminary.log",
+      "bytes": 404,
+      "sha256": "41f346c809648e9b6e7155ed0334b4f6676fb1cef4978a8a8f64885a43777ae2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/client-baseline.log",
+      "bytes": 797,
+      "sha256": "d111016ca57e3bb826371aa9edb594bdff86fd2e91b972bf5e6143a202d8fa02",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/client-before.log",
+      "bytes": 408,
+      "sha256": "b4c06ec7ee2d5667e7af1ab7fa028e93d441e27ceee1cb572061a27f7d8b4232",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/client-clock.log",
+      "bytes": 794,
+      "sha256": "c1197108d5cb2445c98befdffa718d103c3a66fd97e3c1f709e7c738b9f41fc9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/focused-baseline-incomplete-sparse.log",
+      "bytes": 30269,
+      "sha256": "f46cecc8264934b7168250f05350fc5a27419fd51c23c641e7c8998e7f85f34b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/focused-baseline.log",
+      "bytes": 23837,
+      "sha256": "df4d5a7ea219f406f42a0b5b64d14a237524f0d31371c4f64356f230b76e7e79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/focused-clock.log",
+      "bytes": 23825,
+      "sha256": "57783632680040ff2324242518c6da280c08836457782cd20cd66227f59bdcdb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/negative-control.json",
+      "bytes": 382,
+      "sha256": "8f808ed672091f260a42e09e196891c8687e2243e47fe27bf631a35d0783ac68",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/negative-control.log",
+      "bytes": 1554,
+      "sha256": "9a2eb2b5eeddfe82c14ec1818767435e6e3549852f71dc12cf2663578424dfb4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/positive-control.json",
+      "bytes": 622,
+      "sha256": "05aad2c35dc82c25970b783ccf0c3406cf42901de14cd8f80427166b8a9e0319",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "bytes": 4771,
+      "sha256": "f30653d0583c49830f3ae525c0f4b32f5fa544516c2df42df4843ceb5a5dfc6c",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "local-wall-clock",
+      "kind": "measurement",
+      "description": "Execute actual real spawned CLI client tests and entire focused runner before/after using immutable baseline/code checkpoint test bytes; capture local monotonic elapsed wall time and TAP outcomes. Record polling/backoff timers through temporary child-only preload. Reject missing/skipped/failing coverage, inspect intentional wrong-delay negative control, restore bytes and verify unchanged production script. Earlier incomplete sparse setup failure is retained separately and excluded.",
+      "software": "Node v24.19.0, Git, node:test; linux x64",
+      "units": "milliseconds; tests; whole-file bytes and SHA-256"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "local-wall-clock",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/queue-test-clock-699/positive-control.json"
+    },
+    {
+      "method_id": "local-wall-clock",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/queue-test-clock-699/negative-control.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "client-baseline-elapsed_ms",
+      "value": 15327.801372,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "d111016ca57e3bb826371aa9edb594bdff86fd2e91b972bf5e6143a202d8fa02",
+      "evaluation_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5"
+    },
+    {
+      "id": "client-baseline-tests",
+      "value": 3,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "d111016ca57e3bb826371aa9edb594bdff86fd2e91b972bf5e6143a202d8fa02",
+      "evaluation_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5"
+    },
+    {
+      "id": "client-baseline-pass",
+      "value": 3,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "d111016ca57e3bb826371aa9edb594bdff86fd2e91b972bf5e6143a202d8fa02",
+      "evaluation_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5"
+    },
+    {
+      "id": "client-baseline-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "d111016ca57e3bb826371aa9edb594bdff86fd2e91b972bf5e6143a202d8fa02",
+      "evaluation_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5"
+    },
+    {
+      "id": "client-baseline-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "d111016ca57e3bb826371aa9edb594bdff86fd2e91b972bf5e6143a202d8fa02",
+      "evaluation_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5"
+    },
+    {
+      "id": "focused-baseline-elapsed_ms",
+      "value": 16343.435350000002,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "df4d5a7ea219f406f42a0b5b64d14a237524f0d31371c4f64356f230b76e7e79",
+      "evaluation_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5"
+    },
+    {
+      "id": "focused-baseline-tests",
+      "value": 102,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "df4d5a7ea219f406f42a0b5b64d14a237524f0d31371c4f64356f230b76e7e79",
+      "evaluation_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5"
+    },
+    {
+      "id": "focused-baseline-pass",
+      "value": 102,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "df4d5a7ea219f406f42a0b5b64d14a237524f0d31371c4f64356f230b76e7e79",
+      "evaluation_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5"
+    },
+    {
+      "id": "focused-baseline-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "df4d5a7ea219f406f42a0b5b64d14a237524f0d31371c4f64356f230b76e7e79",
+      "evaluation_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5"
+    },
+    {
+      "id": "focused-baseline-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "df4d5a7ea219f406f42a0b5b64d14a237524f0d31371c4f64356f230b76e7e79",
+      "evaluation_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5"
+    },
+    {
+      "id": "client-clock-elapsed_ms",
+      "value": 1124.5514930000027,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "c1197108d5cb2445c98befdffa718d103c3a66fd97e3c1f709e7c738b9f41fc9",
+      "evaluation_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af"
+    },
+    {
+      "id": "client-clock-tests",
+      "value": 3,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "c1197108d5cb2445c98befdffa718d103c3a66fd97e3c1f709e7c738b9f41fc9",
+      "evaluation_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af"
+    },
+    {
+      "id": "client-clock-pass",
+      "value": 3,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "c1197108d5cb2445c98befdffa718d103c3a66fd97e3c1f709e7c738b9f41fc9",
+      "evaluation_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af"
+    },
+    {
+      "id": "client-clock-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "c1197108d5cb2445c98befdffa718d103c3a66fd97e3c1f709e7c738b9f41fc9",
+      "evaluation_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af"
+    },
+    {
+      "id": "client-clock-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "c1197108d5cb2445c98befdffa718d103c3a66fd97e3c1f709e7c738b9f41fc9",
+      "evaluation_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af"
+    },
+    {
+      "id": "focused-clock-elapsed_ms",
+      "value": 1481.3715080000038,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "57783632680040ff2324242518c6da280c08836457782cd20cd66227f59bdcdb",
+      "evaluation_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af"
+    },
+    {
+      "id": "focused-clock-tests",
+      "value": 102,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "57783632680040ff2324242518c6da280c08836457782cd20cd66227f59bdcdb",
+      "evaluation_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af"
+    },
+    {
+      "id": "focused-clock-pass",
+      "value": 102,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "57783632680040ff2324242518c6da280c08836457782cd20cd66227f59bdcdb",
+      "evaluation_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af"
+    },
+    {
+      "id": "focused-clock-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "57783632680040ff2324242518c6da280c08836457782cd20cd66227f59bdcdb",
+      "evaluation_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af"
+    },
+    {
+      "id": "focused-clock-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "57783632680040ff2324242518c6da280c08836457782cd20cd66227f59bdcdb",
+      "evaluation_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "client-baseline-elapsed_ms",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/0/elapsed_ms"
+    },
+    {
+      "metric_id": "client-baseline-tests",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/0/tests"
+    },
+    {
+      "metric_id": "client-baseline-pass",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/0/pass"
+    },
+    {
+      "metric_id": "client-baseline-fail",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/0/fail"
+    },
+    {
+      "metric_id": "client-baseline-skipped",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/0/skipped"
+    },
+    {
+      "metric_id": "focused-baseline-elapsed_ms",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/1/elapsed_ms"
+    },
+    {
+      "metric_id": "focused-baseline-tests",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/1/tests"
+    },
+    {
+      "metric_id": "focused-baseline-pass",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/1/pass"
+    },
+    {
+      "metric_id": "focused-baseline-fail",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/1/fail"
+    },
+    {
+      "metric_id": "focused-baseline-skipped",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/1/skipped"
+    },
+    {
+      "metric_id": "client-clock-elapsed_ms",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/2/elapsed_ms"
+    },
+    {
+      "metric_id": "client-clock-tests",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/2/tests"
+    },
+    {
+      "metric_id": "client-clock-pass",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/2/pass"
+    },
+    {
+      "metric_id": "client-clock-fail",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/2/fail"
+    },
+    {
+      "metric_id": "client-clock-skipped",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/2/skipped"
+    },
+    {
+      "metric_id": "focused-clock-elapsed_ms",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/3/elapsed_ms"
+    },
+    {
+      "metric_id": "focused-clock-tests",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/3/tests"
+    },
+    {
+      "metric_id": "focused-clock-pass",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/3/pass"
+    },
+    {
+      "metric_id": "focused-clock-fail",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/3/fail"
+    },
+    {
+      "metric_id": "focused-clock-skipped",
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "json_pointer": "/records/3/skipped"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node coordination/engineering/queue-test-clock-699/benchmark-runner.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/queue-test-clock-699/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/queue-test-clock-699/benchmark-runner.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/benchmark.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/client-after-preliminary.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/client-baseline.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/client-before.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/client-clock.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/focused-baseline-incomplete-sparse.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/focused-baseline.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/focused-clock.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/negative-control.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "status": "modified",
+      "original_sha256": "8798b35229da3e56471b1f0b339a1b54ef3a2b5052ca821c299bb748c0371584"
+    },
+    {
+      "path": "coordination/engineering/queue-test-clock-699/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

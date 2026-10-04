@@ -1,0 +1,32 @@
+{
+  "method_id": "local-wall-clock",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "scope": "Both actual spawned-CLI test commands and complete focused runner finished with no failures or skipped tests.",
+  "records": [
+    {
+      "id": "client-baseline",
+      "pass": 3,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "id": "focused-baseline",
+      "pass": 102,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "id": "client-clock",
+      "pass": 3,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "id": "focused-clock",
+      "pass": 102,
+      "fail": 0,
+      "skipped": 0
+    }
+  ]
+}

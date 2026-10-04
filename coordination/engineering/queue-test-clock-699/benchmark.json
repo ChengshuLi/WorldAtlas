@@ -1,0 +1,78 @@
+{
+  "node": "v24.19.0",
+  "platform": "linux",
+  "arch": "x64",
+  "baseline_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5",
+  "code_checkpoint": "c0a89e155ad5386736068b9c6cdaf01c5bf104af",
+  "records": [
+    {
+      "id": "client-baseline",
+      "code_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5",
+      "command": "node --test --test-reporter=tap test/merge-integration-client.test.mjs",
+      "env": {},
+      "elapsed_ms": 15327.801372,
+      "status": 0,
+      "tests": 3,
+      "pass": 3,
+      "fail": 0,
+      "skipped": 0,
+      "log_path": "coordination/engineering/queue-test-clock-699/client-baseline.log",
+      "test_sha256": "8798b35229da3e56471b1f0b339a1b54ef3a2b5052ca821c299bb748c0371584"
+    },
+    {
+      "id": "focused-baseline",
+      "code_commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5",
+      "command": "node scripts/run-integration-tests.mjs",
+      "env": {
+        "INTEGRATION_PROFILE": "evidence",
+        "INTEGRATION_SHARD": "0"
+      },
+      "elapsed_ms": 16343.435350000002,
+      "status": 0,
+      "tests": 102,
+      "pass": 102,
+      "fail": 0,
+      "skipped": 0,
+      "log_path": "coordination/engineering/queue-test-clock-699/focused-baseline.log",
+      "test_sha256": "8798b35229da3e56471b1f0b339a1b54ef3a2b5052ca821c299bb748c0371584"
+    },
+    {
+      "id": "client-clock",
+      "code_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af",
+      "command": "node --test --test-reporter=tap test/merge-integration-client.test.mjs",
+      "env": {},
+      "elapsed_ms": 1124.5514930000027,
+      "status": 0,
+      "tests": 3,
+      "pass": 3,
+      "fail": 0,
+      "skipped": 0,
+      "log_path": "coordination/engineering/queue-test-clock-699/client-clock.log",
+      "test_sha256": "f30653d0583c49830f3ae525c0f4b32f5fa544516c2df42df4843ceb5a5dfc6c"
+    },
+    {
+      "id": "focused-clock",
+      "code_commit": "c0a89e155ad5386736068b9c6cdaf01c5bf104af",
+      "command": "node scripts/run-integration-tests.mjs",
+      "env": {
+        "INTEGRATION_PROFILE": "evidence",
+        "INTEGRATION_SHARD": "0"
+      },
+      "elapsed_ms": 1481.3715080000038,
+      "status": 0,
+      "tests": 102,
+      "pass": 102,
+      "fail": 0,
+      "skipped": 0,
+      "log_path": "coordination/engineering/queue-test-clock-699/focused-clock.log",
+      "test_sha256": "f30653d0583c49830f3ae525c0f4b32f5fa544516c2df42df4843ceb5a5dfc6c"
+    }
+  ],
+  "production_queue_sha256": "2daedba75ce32cbe246bd37156dcfe2ce345810a96c21ade8f970b7ed8f336c9",
+  "excluded_setup_attempt": "coordination/engineering/queue-test-clock-699/focused-baseline-incomplete-sparse.log",
+  "limits": [
+    "One local run per command/vintage; elapsed wall time includes startup and depends on machine load.",
+    "Fake GitHub fixtures measure deterministic test savings; no hosted queue throughput or external latency measured.",
+    "An earlier incomplete sparse checkout failed six fixture-access tests; retained separately and excluded from the benchmark."
+  ]
+}
