@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "retrieved_utc": "2026-10-04",
+  "sources": [
+    {
+      "id": "us-census-2019-geography-changes",
+      "title": "2019 Geography Changes",
+      "publisher": "U.S. Census Bureau",
+      "reference_date": "2019 geography; page reviewed 2021-10-28",
+      "canonical_reference": "https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2019/geography-changes.html",
+      "license": "U.S. federal government work; public domain. Preserve Census Bureau attribution.",
+      "license_reference": "https://www.census.gov/about/policies/copyright.html",
+      "role": "Direct event-level statement: Alaska announced Valdez-Cordova (02261) split into new Chugach (02063) and Copper River (02066) Census Areas.",
+      "retained_file": "sources/census-2019-geography-changes.html",
+      "bytes": 357249,
+      "sha256": "8092b2c559de4bd720173fea9356ce24dee0551d1ab015990203f93c53d4c37a",
+      "restoration": "Retrieve the canonical URL above; keep this original response as a new dated source copy. SHA-256 identifies the exact retained retrieval."
+    },
+    {
+      "id": "us-census-alaska-county-change-table-2014-2020",
+      "title": "Alaska County Changes, 2014–2020",
+      "publisher": "U.S. Census Bureau",
+      "reference_date": "Change events through 2020; file updated 2024-09-19; relevant event effective 2019-01-02 and submitted 2019-10-25",
+      "canonical_reference": "https://www2.census.gov/geo/docs/reference/bndrychange/st02_ak_gcn_2014_2020.txt",
+      "license": "U.S. federal government work; public domain. Preserve Census Bureau attribution.",
+      "license_reference": "https://www.census.gov/about/policies/copyright.html",
+      "role": "Structured administrative-change records identify both successors as new entities formed from the split of Valdez-Cordova Census Area (261), with effective date, Census codes and ANSI codes.",
+      "retained_file": "sources/census-ak-county-changes-2014-2020.txt",
+      "bytes": 29077,
+      "sha256": "ac105f77616eee73c2937f2e7f0212a09d903f8398bdc4150113f9a90b5b845c",
+      "restoration": "Download the official plain-text source at the canonical URL above; the table is pipe-delimited. Verify whole-file SHA-256."
+    },
+    {
+      "id": "geoboundaries-us-adm2-2018",
+      "title": "geoBoundaries United States ADM2, 2018 source geometry",
+      "publisher": "U.S. Census Bureau source / geoBoundaries release 9469f09",
+      "reference_date": "2018 boundary vintage; source metadata build 2023-12-12",
+      "canonical_reference": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "license": "Public Domain, as recorded in the pinned geoBoundaries source metadata; Census MAF/TIGER-derived data.",
+      "role": "Exact 2018 predecessor source ID, name, role, and geometry context.",
+      "baseline_file": "data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2.geojson",
+      "baseline_bytes": 10500644,
+      "baseline_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+      "baseline_commit": "276d72e1f316ad58d52c8fea7974a873c2ec9387",
+      "restoration": "Read the exact source bytes at the recorded ancestor commit or restore from the pinned upstream revision. Do not modify the original #486 packet."
+    },
+    {
+      "id": "us-census-tigerline-counties-2024",
+      "title": "2024 TIGER/Line county-equivalent feature subset (17-state parent packet subset)",
+      "publisher": "U.S. Census Bureau",
+      "reference_date": "2024 TIGER/Line vintage; DBF update 2024-09-16",
+      "canonical_reference": "https://www2.census.gov/geo/tiger/TIGER2024/COUNTY/tl_2024_us_county.zip",
+      "license": "U.S. federal government work; public domain. TIGER/Line is Census geography, not a legal land survey.",
+      "license_reference": "https://www.census.gov/about/policies/copyright.html",
+      "role": "Confirm 2024 GEOID/name and county-equivalent class for both successor features; the official change table, not the geometric overlay, establishes the predecessor event.",
+      "baseline_file": "data/regional-review/regional-review-93f8f3bee8e205be/sources/tigerline-2024-western-county-neighbors.geojson.gz",
+      "baseline_bytes": 18497293,
+      "baseline_sha256": "2dc12ec0a6357851340d1d582b3915495c66cc85690c064af8177519e1413a25",
+      "baseline_commit": "276d72e1f316ad58d52c8fea7974a873c2ec9387",
+      "full_source_archive_bytes": 83913260,
+      "full_source_archive_sha256": "04e668d3502757c837c13444730547cd967f28a2c49aeffb873d1792ab2cb97b",
+      "restoration": "The full Census archive is larger than the packet evidence budget and remains omitted; restore from the canonical URL and verify the listed archive hash. The exact queried state-neighbor subset used here is retained in the immutable #486 baseline with its own hash."
+    },
+    {
+      "id": "worldatlas-parent-assessment-486",
+      "title": "Western North America #486 assessment and complete subject context",
+      "publisher": "WorldAtlas geography evidence packet #486",
+      "reference_date": "2026-10-02 assessment, merged 2026-10-03",
+      "canonical_reference": "https://github.com/ChengshuLi/WorldAtlas/issues/486",
+      "license": "Internal repository evidence; original bytes preserved, no new redistribution claim.",
+      "role": "Pinned prior crosswalk ratios, exact location identity, parent chain, settlement screens, physical-land context, uncertainty and neighboring Census candidate features.",
+      "baseline_file": "data/regional-review/regional-review-93f8f3bee8e205be/assessment.json",
+      "baseline_bytes": 11210183,
+      "baseline_sha256": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5",
+      "baseline_commit": "276d72e1f316ad58d52c8fea7974a873c2ec9387",
+      "restoration": "Read the source record directly at the pinned ancestor commit; preserve the entire original #486 packet."
+    }
+  ],
+  "method_summary": "Direct successor identity is taken from the two independent Census Bureau change records. 2024 TIGER confirms current target identifiers/classes. Existing 2018-to-2024 area overlaps are reported only as a separate inherited screen.",
+  "uncertainties": [
+    "The 2019 Census change reports establish two successor Census Areas but do not certify that their 2024 TIGER polygons form a byte-exact partition of the earlier 2018 geoBoundaries polygon.",
+    "The #486 overlay records four tiny ancillary 2024 county-equivalent overlaps; they are not interpreted as additional official successors.",
+    "Census Area identifiers are county-equivalent statistical geography and do not independently adjudicate local political control, municipal government, or historical sovereignty."
+  ]
+}
