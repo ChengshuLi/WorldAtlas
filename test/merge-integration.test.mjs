@@ -294,3 +294,14 @@ test('post-wait main advance retains old expected and new observed base diagnost
     assert.equal(error.candidateDiagnostics.reason,'base-advanced');return true;
   });assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
 });
+
+test('post-convergence head change retains the new head in rejection diagnostics',async()=>{
+  const f=fixture();sequencePR(f,(f,n)=>{f.parentBase=n<3?sha('e'):f.base;if(n===4)f.pr.head.sha=sha('d');});
+  await assert.rejects(prepareIntegration(f.options()),error=>{
+    assert.match(error.message,/head changed/);
+    assert.equal(error.candidateDiagnostics.expected_head,f.head);
+    assert.equal(error.candidateDiagnostics.observed_head,sha('d'));
+    assert.equal(error.candidateDiagnostics.expected_base,sha('b'));
+    assert.equal(error.candidateDiagnostics.reason,'head-changed');assert.equal(error.candidateDiagnostics.attempt,2);return true;
+  });assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
+});

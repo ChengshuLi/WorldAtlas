@@ -110,9 +110,12 @@ async function tree(api, repo, commit, knownObject) {
 
 // All remote authorities and evidence are re-read in both trusted phases. No
 // candidate executable code is imported by this module or given a write token.
-export async function inspectMerge({api, repo, number, expectedHead, policy, evidenceCheck = checkPremergeEvidence}) {
+export async function inspectMerge({api, repo, number, expectedHead, policy, evidenceCheck = checkPremergeEvidence, candidateContext}) {
   const pr = await api(`${root(repo)}/pulls/${number}`);
-  need(pr.head.sha === expectedHead, 'PR head changed; review the new head');
+  if (pr.head.sha !== expectedHead) throw candidateFailure('PR head changed; review the new head',
+    candidateDiagnostics(null, candidateContext?.base ?? pr.base.sha, expectedHead, {
+      candidate: commitID(pr.merge_commit_sha), observed_head: commitID(pr.head.sha), observed_pr_base: commitID(pr.base.sha),
+      attempt: candidateContext?.attempt, reason: 'head-changed', observed_at: new Date().toISOString()}));
   if (pr.merged) return {replayed: true, pr};
   need(pr.state === 'open' && !pr.draft && pr.base.ref === 'main' && pr.head.repo?.full_name === repo,
     'Only open non-draft repository PRs targeting main may merge');
@@ -140,7 +143,12 @@ export async function prepareIntegration(options) {
   const fresh = await currentCandidate(options, state);
   if (fresh.attempts > 1) {
     // Waiting must not extend an expired claim or reuse revoked checks/review.
-    const revalidated = await inspectMerge(options);
+    let revalidated;
+    try { revalidated = await inspectMerge({...options, candidateContext: {base: fresh.base, attempt: fresh.attempts}}); }
+    catch (error) {
+      throw candidateFailure(error.message, error.candidateDiagnostics ?? candidateDiagnostics(fresh.object, fresh.base, state.pr.head.sha,
+        {candidate: commitID(fresh.candidate), attempt: fresh.attempts, reason: 'authority-revalidation-failed', observed_at: new Date().toISOString()}));
+    }
     need(!revalidated.replayed, 'PR merged during candidate refresh; resubmit unchanged head');
     const diagnostics = candidateDiagnostics(fresh.object, fresh.base, state.pr.head.sha, {
       candidate: commitID(fresh.candidate), observed_head: commitID(revalidated.pr.head.sha),
