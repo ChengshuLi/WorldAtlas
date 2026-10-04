@@ -1,0 +1,1526 @@
+{
+  "version": 1,
+  "issue": 694,
+  "lane": "engineering",
+  "worker_id": "parity-hoist-worker-694-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "73cd687bf5386952adae618b1df482b92768106f",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 7304,
+        "sha256": "b73e25e3113ecd3573a1a58acaca50c6d6d2d1da6c577eecdf90787363272e12",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": ".github/evidence-policy.json",
+        "bytes": 225,
+        "sha256": "69310e9dfbc92a7bfc954f6374a13dafb47a12ea53e27406cfd89138fc87463b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "test/prepared-parity.test.mjs",
+        "bytes": 14751,
+        "sha256": "04260524e8288be088233a5a4cc328fd8560b7ffc482c3ebbee91b83b074682c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/parity-hoist-694-20261004/evidence-quality.json",
+        "bytes": 9352,
+        "sha256": "ff1ee83574a5d012e621fe83db850b889aacde9fde2e9bc8ac8b57638284144c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/parity-hoist-694-20261004/loop-validation.json",
+        "bytes": 987,
+        "sha256": "ac8f7086e1956f3836ca0802f8f8c466e36c6771d87c35f2c26723ebcb0735b3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/parity-hoist-694-20261004/validate-loop.mjs",
+        "bytes": 6169,
+        "sha256": "9c13ffeadb6895ef57b3893d36e1cd2096845e8af41447c64cb3b0263905974b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/parity-hoist-694-20261004/baseline-shard0.log.gz",
+        "bytes": 33777,
+        "sha256": "32b371a6b3890eba8329942ecaad7716359c1074eec6a77ef4d26b92b3d081fb",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004.json",
+      "bytes": 1744,
+      "sha256": "5c716ec1f21e1bc459d73a308947741946053990f0981699977fe9dc254a2469",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/README.md",
+      "bytes": 1577,
+      "sha256": "2770a35e72d7dddf0fb94455ee83d7c5768b9f2f18a52d0b352742ad8e803d7d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/baseline-jobs-api.json",
+      "bytes": 12599,
+      "sha256": "3018a05b155ffff2a9a203942520eb71521b9e7d94275dba18362f95ff4fa8cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/baseline-run-api.json",
+      "bytes": 12353,
+      "sha256": "abd110efa6da2df0d31b87c447f1ed7b2ab254f42d2a2bdb9278d5d32cc7dcc1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/baseline-shard1.log",
+      "bytes": 125472,
+      "sha256": "e53c3675e507b4beeaaa3c80f87cc953630a0d605a0279234905fe1a704bb439",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/baseline-shard2.log",
+      "bytes": 141536,
+      "sha256": "a2e4f05b12002961a422963a7354330c6d632639b95a374f3f3f6dce3b3aabe8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/claim-renewal.json",
+      "bytes": 821,
+      "sha256": "3af2f0ed0db108f73e0af0ef03b87aa80debaadbfd98e1408da292263621162e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/final-jobs-api.json",
+      "bytes": 12631,
+      "sha256": "48d01d779f0035d51f40b3b7698117bec4f020afffae012cbbf1b8ccad8400bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/final-run-api.json",
+      "bytes": 12837,
+      "sha256": "0777947b4350cc24693d8db96a174210e1ecddcce771044054d88cb0c5949cc5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/final-shard0.log",
+      "bytes": 161430,
+      "sha256": "0c533e551629393a70b1267790baa8021f704d0e2e2c60dd1cc5aba1519bdd83",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/final-shard1.log",
+      "bytes": 139847,
+      "sha256": "68e5d98a3143bf4362240f939f119cee72a28757eb9ed851c00d53f24c802e21",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/final-shard2.log",
+      "bytes": 137923,
+      "sha256": "9bc53e982b6570e0b32759a3f216aec07c570ace07f2c31514f8a6c8f2e4877d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement-parser.txt",
+      "bytes": 2997,
+      "sha256": "b58487b350eeee81af806e218abbaf194655767db8a25139067e28e773ca9c80",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "bytes": 6511,
+      "sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/negative-control.json",
+      "bytes": 191,
+      "sha256": "2bcb5e52a76c4d740efc54a14263ccc94a3d97fff8d542a1dc9c973633a5acd1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/positive-control.json",
+      "bytes": 597,
+      "sha256": "490bf0f86ff453aa7096cad7ce0f6307e0c28c77db7361a3ef38eff73f39e321",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/source-pr.json",
+      "bytes": 17881,
+      "sha256": "ff30d4ee7be10e5357cb4fc432fa3176dc1459af9cc03b20009af79947206d3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/source-queue.log",
+      "bytes": 3538,
+      "sha256": "afa3fcdf3551ee46f45acd83bad560aeb5198985815a659cff8adc36b5c9b7bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/unchanged-parity-jobs-api.json",
+      "bytes": 12667,
+      "sha256": "a6cfa810476722042d0747a7f0fc0c6a5bb40a86bfe9dc5bf527349658fbdd1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/unchanged-parity-run-api.json",
+      "bytes": 12381,
+      "sha256": "7180ca099dff25c5c27fd55a06bedbf615fa389abbb16c779c53913efd54c5b6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/unchanged-parity-shard0.log",
+      "bytes": 161440,
+      "sha256": "5af1ffebc10ac288153ba139d11e212f8b243d691263768bce135b406e19b4eb",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "full-ci-observation",
+      "kind": "measurement",
+      "description": "Read actual completed full regression API timestamps and decoded TAP logs, extract all three job/test-step durations and successful test counts, compute workflow elapsed without summing parallel jobs, retain unchanged-code parity variability, and validate known ordered/inverted timestamp controls. No new heavy benchmark run.",
+      "software": "Python standard library datetime/json/re and read-only GitHub API/MCP logs; actual hosted Node24 ubuntu-latest",
+      "units": "seconds, milliseconds, tests, immutable file bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "observed-before-workflow-elapsed-seconds",
+      "value": 535,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-critical-shard-seconds",
+      "value": 520,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-job-seconds",
+      "value": 520,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-test-step-seconds",
+      "value": 337,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-tests",
+      "value": 236,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-passed",
+      "value": 236,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-node-test-duration-ms",
+      "value": 337005.315018,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-parity-subtests-0-duration-ms",
+      "value": 2.033826,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-parity-subtests-1-duration-ms",
+      "value": 13396.838288,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-parity-subtests-2-duration-ms",
+      "value": 0.498861,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-parity-subtests-3-duration-ms",
+      "value": 20934.37026,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-0-parity-subtests-4-duration-ms",
+      "value": 181464.376344,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-1-job-seconds",
+      "value": 125,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-1-test-step-seconds",
+      "value": 53,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-1-tests",
+      "value": 216,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-1-passed",
+      "value": 216,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-1-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-1-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-1-node-test-duration-ms",
+      "value": 53162.93397,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-2-job-seconds",
+      "value": 160,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-2-test-step-seconds",
+      "value": 86,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-2-tests",
+      "value": 221,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-2-passed",
+      "value": 221,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-2-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-2-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-shards-2-node-test-duration-ms",
+      "value": 86013.887057,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-tests",
+      "value": 673,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-passed",
+      "value": 673,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-before-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "observed-after-workflow-elapsed-seconds",
+      "value": 463,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-critical-shard-seconds",
+      "value": 448,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-job-seconds",
+      "value": 344,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-test-step-seconds",
+      "value": 170,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-tests",
+      "value": 226,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-passed",
+      "value": 226,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-node-test-duration-ms",
+      "value": 170271.269274,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-parity-subtests-0-duration-ms",
+      "value": 2.344577,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-parity-subtests-1-duration-ms",
+      "value": 12369.607786,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-parity-subtests-2-duration-ms",
+      "value": 1.582918,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-parity-subtests-3-duration-ms",
+      "value": 20722.126656,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-0-parity-subtests-4-duration-ms",
+      "value": 103512.601468,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-1-job-seconds",
+      "value": 158,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-1-test-step-seconds",
+      "value": 75,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-1-tests",
+      "value": 213,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-1-passed",
+      "value": 213,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-1-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-1-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-1-node-test-duration-ms",
+      "value": 75271.033837,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-2-job-seconds",
+      "value": 448,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-2-test-step-seconds",
+      "value": 370,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-2-tests",
+      "value": 246,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-2-passed",
+      "value": 246,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-2-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-2-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-shards-2-node-test-duration-ms",
+      "value": 368949.678137,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-tests",
+      "value": 685,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-passed",
+      "value": 685,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-after-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-unchanged-parity-observation-parity-duration-ms",
+      "value": 111786.042098,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "f44057a61733792493e70dbda8c439eb42a41ec2"
+    },
+    {
+      "id": "observed-comparison-elapsed-seconds-decrease",
+      "value": 72,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-comparison-elapsed-percent-decrease",
+      "value": 13.457943925233645,
+      "unit": "percent",
+      "vintage": "archived",
+      "input_sha256": "b342e5ed05c85173db16f1f55f2750d0adbb0ae571a83a47e829780b2d54ad7d",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "observed-before-workflow-elapsed-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/workflow_elapsed_seconds"
+    },
+    {
+      "metric_id": "observed-before-critical-shard-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/critical_shard_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-job-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/job_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-test-step-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-tests",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/tests"
+    },
+    {
+      "metric_id": "observed-before-shards-0-passed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/passed"
+    },
+    {
+      "metric_id": "observed-before-shards-0-failed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/failed"
+    },
+    {
+      "metric_id": "observed-before-shards-0-skipped",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/skipped"
+    },
+    {
+      "metric_id": "observed-before-shards-0-node-test-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-before-shards-0-parity-subtests-0-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/parity_subtests/0/duration_ms"
+    },
+    {
+      "metric_id": "observed-before-shards-0-parity-subtests-1-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/parity_subtests/1/duration_ms"
+    },
+    {
+      "metric_id": "observed-before-shards-0-parity-subtests-2-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/parity_subtests/2/duration_ms"
+    },
+    {
+      "metric_id": "observed-before-shards-0-parity-subtests-3-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/parity_subtests/3/duration_ms"
+    },
+    {
+      "metric_id": "observed-before-shards-0-parity-subtests-4-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/0/parity_subtests/4/duration_ms"
+    },
+    {
+      "metric_id": "observed-before-shards-1-job-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/1/job_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-1-test-step-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/1/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-1-tests",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/1/tests"
+    },
+    {
+      "metric_id": "observed-before-shards-1-passed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/1/passed"
+    },
+    {
+      "metric_id": "observed-before-shards-1-failed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/1/failed"
+    },
+    {
+      "metric_id": "observed-before-shards-1-skipped",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/1/skipped"
+    },
+    {
+      "metric_id": "observed-before-shards-1-node-test-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/1/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-before-shards-2-job-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/2/job_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-2-test-step-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/2/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-2-tests",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/2/tests"
+    },
+    {
+      "metric_id": "observed-before-shards-2-passed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/2/passed"
+    },
+    {
+      "metric_id": "observed-before-shards-2-failed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/2/failed"
+    },
+    {
+      "metric_id": "observed-before-shards-2-skipped",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/2/skipped"
+    },
+    {
+      "metric_id": "observed-before-shards-2-node-test-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/shards/2/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-before-tests",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/tests"
+    },
+    {
+      "metric_id": "observed-before-passed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/passed"
+    },
+    {
+      "metric_id": "observed-before-failed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/failed"
+    },
+    {
+      "metric_id": "observed-before-skipped",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/before/skipped"
+    },
+    {
+      "metric_id": "observed-after-workflow-elapsed-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/workflow_elapsed_seconds"
+    },
+    {
+      "metric_id": "observed-after-critical-shard-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/critical_shard_seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-job-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/job_seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-test-step-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-tests",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/tests"
+    },
+    {
+      "metric_id": "observed-after-shards-0-passed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/passed"
+    },
+    {
+      "metric_id": "observed-after-shards-0-failed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/failed"
+    },
+    {
+      "metric_id": "observed-after-shards-0-skipped",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/skipped"
+    },
+    {
+      "metric_id": "observed-after-shards-0-node-test-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-after-shards-0-parity-subtests-0-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/parity_subtests/0/duration_ms"
+    },
+    {
+      "metric_id": "observed-after-shards-0-parity-subtests-1-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/parity_subtests/1/duration_ms"
+    },
+    {
+      "metric_id": "observed-after-shards-0-parity-subtests-2-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/parity_subtests/2/duration_ms"
+    },
+    {
+      "metric_id": "observed-after-shards-0-parity-subtests-3-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/parity_subtests/3/duration_ms"
+    },
+    {
+      "metric_id": "observed-after-shards-0-parity-subtests-4-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/0/parity_subtests/4/duration_ms"
+    },
+    {
+      "metric_id": "observed-after-shards-1-job-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/1/job_seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-1-test-step-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/1/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-1-tests",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/1/tests"
+    },
+    {
+      "metric_id": "observed-after-shards-1-passed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/1/passed"
+    },
+    {
+      "metric_id": "observed-after-shards-1-failed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/1/failed"
+    },
+    {
+      "metric_id": "observed-after-shards-1-skipped",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/1/skipped"
+    },
+    {
+      "metric_id": "observed-after-shards-1-node-test-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/1/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-after-shards-2-job-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/2/job_seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-2-test-step-seconds",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/2/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-2-tests",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/2/tests"
+    },
+    {
+      "metric_id": "observed-after-shards-2-passed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/2/passed"
+    },
+    {
+      "metric_id": "observed-after-shards-2-failed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/2/failed"
+    },
+    {
+      "metric_id": "observed-after-shards-2-skipped",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/2/skipped"
+    },
+    {
+      "metric_id": "observed-after-shards-2-node-test-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/shards/2/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-after-tests",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/tests"
+    },
+    {
+      "metric_id": "observed-after-passed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/passed"
+    },
+    {
+      "metric_id": "observed-after-failed",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/failed"
+    },
+    {
+      "metric_id": "observed-after-skipped",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/after/skipped"
+    },
+    {
+      "metric_id": "observed-unchanged-parity-observation-parity-duration-ms",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/unchanged_parity_observation/parity_duration_ms"
+    },
+    {
+      "metric_id": "observed-comparison-elapsed-seconds-decrease",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/comparison/elapsed_seconds_decrease"
+    },
+    {
+      "metric_id": "observed-comparison-elapsed-percent-decrease",
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "json_pointer": "/comparison/elapsed_percent_decrease"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "observed-before-workflow-elapsed-seconds",
+      "value": 535,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-before-critical-shard-seconds",
+      "value": 520,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-job-seconds",
+      "value": 520,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-test-step-seconds",
+      "value": 337,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-tests",
+      "value": 236,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-0-passed",
+      "value": 236,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-0-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-0-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-0-node-test-duration-ms",
+      "value": 337005.315018,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-parity-subtests-0-duration-ms",
+      "value": 2.033826,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-parity-subtests-1-duration-ms",
+      "value": 13396.838288,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-parity-subtests-2-duration-ms",
+      "value": 0.498861,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-parity-subtests-3-duration-ms",
+      "value": 20934.37026,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-parity-subtests-4-duration-ms",
+      "value": 181464.376344,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-before-shards-1-job-seconds",
+      "value": 125,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-1-test-step-seconds",
+      "value": 53,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-1-tests",
+      "value": 216,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-1-passed",
+      "value": 216,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-1-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-1-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-1-node-test-duration-ms",
+      "value": 53162.93397,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-before-shards-2-job-seconds",
+      "value": 160,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-2-test-step-seconds",
+      "value": 86,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-2-tests",
+      "value": 221,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-2-passed",
+      "value": 221,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-2-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-2-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-shards-2-node-test-duration-ms",
+      "value": 86013.887057,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-before-tests",
+      "value": 673,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-passed",
+      "value": 673,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-before-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-workflow-elapsed-seconds",
+      "value": 463,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-after-critical-shard-seconds",
+      "value": 448,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-job-seconds",
+      "value": 344,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-test-step-seconds",
+      "value": 170,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-tests",
+      "value": 226,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-0-passed",
+      "value": 226,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-0-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-0-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-0-node-test-duration-ms",
+      "value": 170271.269274,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-parity-subtests-0-duration-ms",
+      "value": 2.344577,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-parity-subtests-1-duration-ms",
+      "value": 12369.607786,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-parity-subtests-2-duration-ms",
+      "value": 1.582918,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-parity-subtests-3-duration-ms",
+      "value": 20722.126656,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-after-shards-0-parity-subtests-4-duration-ms",
+      "value": 103512.601468,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-after-shards-1-job-seconds",
+      "value": 158,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-1-test-step-seconds",
+      "value": 75,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-1-tests",
+      "value": 213,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-1-passed",
+      "value": 213,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-1-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-1-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-1-node-test-duration-ms",
+      "value": 75271.033837,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-after-shards-2-job-seconds",
+      "value": 448,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-2-test-step-seconds",
+      "value": 370,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-after-shards-2-tests",
+      "value": 246,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-2-passed",
+      "value": 246,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-2-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-2-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-shards-2-node-test-duration-ms",
+      "value": 368949.678137,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-after-tests",
+      "value": 685,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-passed",
+      "value": 685,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-after-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "observed-unchanged-parity-observation-parity-duration-ms",
+      "value": 111786.042098,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "observed-comparison-elapsed-seconds-decrease",
+      "value": 72,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "observed-comparison-elapsed-percent-decrease",
+      "value": 13.457943925233645,
+      "unit": "percent"
+    }
+  ],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "python3 - RUN_API_JSON JOBS_API_JSON SHARD_ZERO_LOG SHARD_ONE_LOG SHARD_TWO_LOG < coordination/engineering/parity-proof-694-20261004/measurement-parser.txt"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/baseline-jobs-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/baseline-run-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/baseline-shard1.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/baseline-shard2.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/claim-renewal.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/final-jobs-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/final-run-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/final-shard0.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/final-shard1.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/final-shard2.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement-parser.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/measurement.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/source-pr.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/source-queue.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/unchanged-parity-jobs-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/unchanged-parity-run-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/unchanged-parity-shard0.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-proof-694-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "full-ci-observation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/parity-proof-694-20261004/positive-control.json"
+    },
+    {
+      "method_id": "full-ci-observation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/parity-proof-694-20261004/negative-control.json"
+    }
+  ]
+}

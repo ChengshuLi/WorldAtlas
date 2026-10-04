@@ -1,0 +1,24 @@
+import json,re,sys,datetime,pathlib
+stamp=lambda value:datetime.datetime.fromisoformat(value.replace('Z','+00:00'))
+def seconds(first,last):
+ start,end=stamp(first),stamp(last)
+ if start.tzinfo is None or end.tzinfo is None or end<start:raise ValueError('Expected timezone-aware ordered timestamps')
+ return int((end-start).total_seconds())
+def measure(run_path,jobs_path,logs):
+ run=json.loads(pathlib.Path(run_path).read_text());jobs=json.loads(pathlib.Path(jobs_path).read_text())['jobs'];shards=[]
+ for shard in range(3):
+  job=next(j for j in jobs if j['name']==f'regression ({shard})');raw=pathlib.Path(logs[shard]).read_bytes();text=raw.decode('utf-8-sig');clean=re.sub(r'^\d{4}-\d\d-\d\dT\S+ ', '',text,flags=re.M)
+  def count(name):
+   found=re.findall(r'^# '+name+r' (\d+)\s*$',clean,re.M)
+   if not found:raise ValueError(f'No {name} count for shard {shard}')
+   return int(found[-1])
+  step=next(s for s in job['steps'] if s['name']=='Complete regression shard');tests=count('tests');passed=count('pass');failed=count('fail');skipped=count('skipped');assert job['conclusion']=='success' and tests==passed and failed==skipped==0
+  selected=[]
+  for name in ['ownership codecs preserve identity, dated labels, competing evidence and the BC/AD edge','actual environmental tables decode exactly at all normal-period boundaries','reference codecs preserve supported precision and do not bridge unsupported intervals','actual prepared historical records match independent compact-table interpretation','static and server exports resolve every active location identically, with examples on and off']:
+   match=re.search(r'^ok \d+ - '+re.escape(name)+r'\n\s*---\n\s*duration_ms: ([\d.]+)',clean,re.M)
+   if match:selected.append({'name':name,'duration_ms':float(match[1])})
+  shards.append({'shard':shard,'job_id':job['id'],'started_at':job['started_at'],'completed_at':job['completed_at'],'job_seconds':seconds(job['started_at'],job['completed_at']),'test_step_seconds':seconds(step['started_at'],step['completed_at']),'tests':tests,'passed':passed,'failed':failed,'skipped':skipped,'node_test_duration_ms':float(re.findall(r'^# duration_ms ([\d.]+)',clean,re.M)[-1]),'parity_subtests':selected})
+ assert run['conclusion']=='success'
+ return {'run_id':run['id'],'head_sha':run['head_sha'],'run_attempt':run['run_attempt'],'url':run['html_url'],'run_started_at':run['run_started_at'],'updated_at':run['updated_at'],'workflow_elapsed_seconds':seconds(run['run_started_at'],run['updated_at']),'elapsed_definition':'run_started_at through updated_at captured after successful completion; includes scheduling/startup; not the sum of parallel jobs','critical_shard_seconds':max(s['job_seconds'] for s in shards),'shards':shards,'tests':sum(s['tests'] for s in shards),'passed':sum(s['passed'] for s in shards),'failed':sum(s['failed'] for s in shards),'skipped':sum(s['skipped'] for s in shards)}
+if __name__=='__main__':
+ print(json.dumps(measure(sys.argv[1],sys.argv[2],sys.argv[3:6]),indent=2))
