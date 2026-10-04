@@ -1,0 +1,62 @@
+{
+  "inspected_at": "2026-10-04",
+  "scope": "public pricing, not verified account charges or provider activation",
+  "sources": [
+    {
+      "provider": "Neon Launch",
+      "url": "https://neon.com/pricing",
+      "storage_usd_per_gb_month": 0.35,
+      "compute_usd_per_cu_hour": 0.106,
+      "history_usd_per_gb_month": 0.2,
+      "monthly_minimum_usd": 0,
+      "billing_scope": "organization; all existing project compute becomes billable on Launch",
+      "source_sha256": "108f59fd361ee67dd2016a8c0aa25b6231c63036d95baca16e18c856eced1e71"
+    },
+    {
+      "provider": "Supabase Free/Pro",
+      "url": "https://supabase.com/pricing",
+      "free_database_mb": 500,
+      "pro_base_monthly_usd": 25,
+      "limit": "Free capacity is smaller than Neon; a hosting migration adds runtime/connection/backup work."
+    },
+    {
+      "provider": "Cloudflare D1 Free",
+      "url": "https://developers.cloudflare.com/d1/platform/limits/",
+      "free_database_mb": 500,
+      "free_account_gb": 5,
+      "limit": "SQLite semantics, per-database cap, query/write quotas and hosted binding availability must be validated."
+    },
+    {
+      "provider": "Turso Free/Developer",
+      "url": "https://turso.tech/pricing?frequency=monthly",
+      "free_storage_gb": 5,
+      "developer_monthly_usd": 5.99,
+      "free_monthly_rows_read": 500000000,
+      "free_monthly_rows_written": 10000000,
+      "limit": "SQLite/libSQL API, new adapter, transaction/trigger/durability and backup validation; not a PostgreSQL connection replacement."
+    }
+  ],
+  "neon_launch_illustrations": [
+    {
+      "cu_hours": 10,
+      "database_gb": 2,
+      "subtotal_usd": 1.76
+    },
+    {
+      "cu_hours": 50,
+      "database_gb": 2,
+      "subtotal_usd": 6.0
+    },
+    {
+      "cu_hours": 100,
+      "database_gb": 2,
+      "subtotal_usd": 11.3
+    },
+    {
+      "cu_hours": 182.5,
+      "database_gb": 2,
+      "subtotal_usd": 20.045
+    }
+  ],
+  "illustration_limits": "Storage plus compute only, excluding retained history, egress, extra branches, other organization projects and taxes. 182.5 CU-hours is continuously awake 0.25 CU for 730 hours, not measured account use. Free compute allowances must not be assumed to carry to Launch."
+}

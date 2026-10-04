@@ -1,0 +1,48 @@
+✔ staging is invisible; publication requires complete pinned membership and preserves original registry (88.338875ms)
+✔ rename/reparent releases and same-tier merge crosswalk preserve historical evidence and archived releases (58.730791ms)
+✔ manifest counts, complete same-release chains, no-year-zero calendar labels and hashes are real gates (49.354584ms)
+✔ bounded atomic staging rejects unknown/nongeographic/example identities and wrong-tier parents (34.718791ms)
+✔ immutable staged contents and ingestion collisions reject atomically; raw SQL blocks cycles and publication bypass (52.404917ms)
+✔ crosswalk evidence, tier identity and retired membership must match the published release (59.709667ms)
+✔ published pages use indexed keyset queries and older releases remain inspectable (32.6115ms)
+✔ streamed publication hashing matches exported UTF-8 canonical hashes across page boundaries (333.063667ms)
+✔ source-backed new territory publishes with a null predecessor and no invented historical attributes (82.619625ms)
+✔ evidence dictionary retains whitespace, key order and duplicate JSON keys byte exactly (0.977084ms)
+✔ digest collision is rejected instead of replacing original evidence (0.270916ms)
+✔ prototype reconstructs every external field and counts all dictionary/index overhead (3777.508291ms)
+✔ identical evidence deduplicates while separate release/entity memberships remain (1459.844542ms)
+✔ duplicate membership rejects atomically and retains earlier immutable rows (1038.511292ms)
+✔ missing key or invalid evidence cannot silently repair original data (1028.896834ms)
+✔ candidate immutable history rejects updates/deletes and detects a conflicting digest payload (1223.944583ms)
+✔ name, active and damaged digest constraints reject invalid prototype writes (1046.627583ms)
+✔ original prototype schema fails closed if the expected index inventory changes (0.365417ms)
+✔ transaction handles are rejected so a caller rollback cannot poison the client dictionary (993.09275ms)
+✔ input inspection preserves source pins and rejects corrupted batches or changed predecessor manifests (7.627916ms)
+✔ placeholder translation preserves quoted values, dollar bodies and nested comments exactly (2.405958ms)
+✔ only reviewed inserts and index hints are adapted; SQLite metadata needs an explicit query (1.18475ms)
+✔ injected driver returns D1 results with safe numeric dates and unchanged text evidence (1.879458ms)
+✔ batches remain ordered, atomic and ingestion-locked before identity allocation (0.918875ms)
+✔ publication and guarded imports share a lock before fresh ReadCommitted guard snapshots (0.346542ms)
+✔ driver failures preserve SQLSTATE while removing credentials, payloads and server details (2.00525ms)
+✔ bounded timeouts cancel network work and preserve uncertain commit status for idempotent retries (121.397625ms)
+✔ Neon HTTP wrapper submits lazy ordered queries as one transaction without exposing its URL (1.664125ms)
+✔ actual PostgreSQL parses translated placeholders, idempotence and rollback without touching immutable evidence text (2328.300416ms)
+✔ PostgreSQL evidence-only map pages retain retirement-only subjects without enumerating empty geography (2078.442041ms)
+✔ actual PostgreSQL applies all 14 tables and hosted smoke preserves original corrected evidence (1187.361458ms)
+✔ PostgreSQL claim/name readers preserve JSON bytes, stable identities, half-open dates, nulls and examples (1254.349542ms)
+✔ PostgreSQL guards reject interval/source/classification/owner contradictions and roll back complete failed batches (1245.35575ms)
+✔ PostgreSQL atomic correction retires overlap, retains old bytes and cannot resurrect immutable evidence (1139.448291ms)
+✔ PostgreSQL rank/habitation and fixed environment guards match literal-zero proof policy (933.461083ms)
+✔ PostgreSQL catalogs/graph/media paging and compact map use actual hosted SQL with whole-location parity (1401.411334ms)
+✔ PostgreSQL stages and publishes complete pinned reference geography without mutating registry/evidence (2174.131875ms)
+✔ actual PostgreSQL and frozen D1 produce identical evidence/source bytes and selected-year service values (2169.927167ms)
+✔ PostgreSQL compact metadata summaries retain zero-population proof semantics and evidence links (1111.493666ms)
+✔ PostgreSQL geographic transaction guards reject unpublished/stale hashes and retain pinned replay receipts (1298.083708ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19582.647041

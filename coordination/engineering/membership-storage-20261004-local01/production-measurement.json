@@ -1,0 +1,848 @@
+{
+  "version": 2,
+  "status": "measured",
+  "read_only": true,
+  "source_commit": "db1c28cdba0919a2104dc6cea3650fdd6171ffc2",
+  "project_id": "weathered-lab-37571695",
+  "production_branch_id": "br-summer-butterfly-ar8qikk5",
+  "endpoint_id": "ep-autumn-silence-arf6frt6",
+  "credentials_logged": false,
+  "management_requests": 4,
+  "observed_at_utc": "2026-10-04T12:00:59.171Z",
+  "database_bytes": 1011466240,
+  "application_relation_bytes": 1002364928,
+  "public_relation_bytes": 1002364928,
+  "other_public_relation_bytes": 0,
+  "outside_public_relation_bytes": 9101312,
+  "other_database_bytes": 9101312,
+  "tables": [
+    {
+      "table_name": "atlas_attribute_records",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 90112,
+      "toast_total_bytes": 1097728,
+      "table_bytes": 1212416,
+      "index_bytes": 155648,
+      "total_bytes": 1368064,
+      "estimated_live_rows": 396,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 24576,
+      "last_analyze": null,
+      "last_autoanalyze": "2026-10-02 06:34:27.948009+00"
+    },
+    {
+      "table_name": "atlas_categories",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 425984,
+      "toast_total_bytes": 8192,
+      "table_bytes": 466944,
+      "index_bytes": 65536,
+      "total_bytes": 532480,
+      "estimated_live_rows": 1457,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 32768,
+      "last_analyze": null,
+      "last_autoanalyze": "2026-10-02 06:34:27.945403+00"
+    },
+    {
+      "table_name": "atlas_entities",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 41058304,
+      "toast_total_bytes": 8192,
+      "table_bytes": 41107456,
+      "index_bytes": 24166400,
+      "total_bytes": 65273856,
+      "estimated_live_rows": 86872,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 40960,
+      "last_analyze": null,
+      "last_autoanalyze": "2026-10-02 06:34:27.936304+00"
+    },
+    {
+      "table_name": "atlas_entity_types",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 8192,
+      "toast_total_bytes": 8192,
+      "table_bytes": 16384,
+      "index_bytes": 16384,
+      "total_bytes": 32768,
+      "estimated_live_rows": 16,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_evidence_retirements",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 16384,
+      "total_bytes": 24576,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_footprint_retirements",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 24576,
+      "total_bytes": 32768,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_footprint_selection_validations",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 16384,
+      "total_bytes": 24576,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_footprint_version_objects",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 8192,
+      "total_bytes": 16384,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_footprint_versions",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 16384,
+      "total_bytes": 24576,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_geographic_changes",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 4268032,
+      "toast_total_bytes": 729088,
+      "table_bytes": 5029888,
+      "index_bytes": 2899968,
+      "total_bytes": 7929856,
+      "estimated_live_rows": 3593,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 32768,
+      "last_analyze": null,
+      "last_autoanalyze": "2026-10-04 07:53:31.762005+00"
+    },
+    {
+      "table_name": "atlas_geographic_existence_records",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 24576,
+      "total_bytes": 32768,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_geographic_footprint_records",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 24576,
+      "total_bytes": 32768,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_geographic_membership_records",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 24576,
+      "total_bytes": 32768,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_geographic_memberships",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 509214720,
+      "toast_total_bytes": 4579328,
+      "table_bytes": 513957888,
+      "index_bytes": 406437888,
+      "total_bytes": 920395776,
+      "estimated_live_rows": 509855,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 163840,
+      "last_analyze": null,
+      "last_autoanalyze": "2026-10-04 07:53:31.636434+00"
+    },
+    {
+      "table_name": "atlas_geographic_releases",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 8192,
+      "toast_total_bytes": 65536,
+      "table_bytes": 73728,
+      "index_bytes": 49152,
+      "total_bytes": 122880,
+      "estimated_live_rows": 6,
+      "estimated_dead_rows": 3,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_ingestions",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 1490944,
+      "toast_total_bytes": 8192,
+      "table_bytes": 1531904,
+      "index_bytes": 753664,
+      "total_bytes": 2285568,
+      "estimated_live_rows": 2699,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 32768,
+      "last_analyze": null,
+      "last_autoanalyze": "2026-10-04 07:51:35.094665+00"
+    },
+    {
+      "table_name": "atlas_media",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 368640,
+      "toast_total_bytes": 8192,
+      "table_bytes": 401408,
+      "index_bytes": 155648,
+      "total_bytes": 557056,
+      "estimated_live_rows": 421,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 24576,
+      "last_analyze": null,
+      "last_autoanalyze": "2026-10-03 02:00:20.191056+00"
+    },
+    {
+      "table_name": "atlas_media_links",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 8192,
+      "toast_total_bytes": 8192,
+      "table_bytes": 16384,
+      "index_bytes": 32768,
+      "total_bytes": 49152,
+      "estimated_live_rows": 6,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_names",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 2588672,
+      "toast_total_bytes": 8192,
+      "table_bytes": 2629632,
+      "index_bytes": 581632,
+      "total_bytes": 3211264,
+      "estimated_live_rows": 3588,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 32768,
+      "last_analyze": null,
+      "last_autoanalyze": "2026-10-02 06:34:27.970429+00"
+    },
+    {
+      "table_name": "atlas_relationships",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 24576,
+      "total_bytes": 32768,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_sources",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 147456,
+      "toast_total_bytes": 24576,
+      "table_bytes": 196608,
+      "index_bytes": 57344,
+      "total_bytes": 253952,
+      "estimated_live_rows": 385,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 24576,
+      "last_analyze": null,
+      "last_autoanalyze": "2026-10-02 06:34:27.623933+00"
+    },
+    {
+      "table_name": "atlas_temporal_geography_retirements",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 32768,
+      "total_bytes": 40960,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "atlas_temporal_geography_validations",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 0,
+      "toast_total_bytes": 8192,
+      "table_bytes": 8192,
+      "index_bytes": 16384,
+      "total_bytes": 24576,
+      "estimated_live_rows": 0,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "worldatlas_schema_migrations",
+      "relation_kind": "r",
+      "known_application_table": true,
+      "heap_main_bytes": 8192,
+      "toast_total_bytes": 8192,
+      "table_bytes": 16384,
+      "index_bytes": 16384,
+      "total_bytes": 32768,
+      "estimated_live_rows": 2,
+      "estimated_dead_rows": 0,
+      "heap_auxiliary_bytes": 0,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    }
+  ],
+  "indexes": [
+    {
+      "table_name": "atlas_attribute_records",
+      "index_name": "atlas_attribute_records_pkey",
+      "index_bytes": 49152,
+      "definition": "CREATE UNIQUE INDEX atlas_attribute_records_pkey ON public.atlas_attribute_records USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_attribute_records",
+      "index_name": "attributes_date_id",
+      "index_bytes": 49152,
+      "definition": "CREATE INDEX attributes_date_id ON public.atlas_attribute_records USING btree (valid_from, valid_to, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_attribute_records",
+      "index_name": "attributes_location_dates",
+      "index_bytes": 57344,
+      "definition": "CREATE INDEX attributes_location_dates ON public.atlas_attribute_records USING btree (location_id, attribute, valid_from, valid_to)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_categories",
+      "index_name": "atlas_categories_pkey",
+      "index_bytes": 65536,
+      "definition": "CREATE UNIQUE INDEX atlas_categories_pkey ON public.atlas_categories USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_entities",
+      "index_name": "atlas_entities_pkey",
+      "index_bytes": 9674752,
+      "definition": "CREATE UNIQUE INDEX atlas_entities_pkey ON public.atlas_entities USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_entities",
+      "index_name": "entities_kind_id",
+      "index_bytes": 12574720,
+      "definition": "CREATE INDEX entities_kind_id ON public.atlas_entities USING btree (kind, active, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_entities",
+      "index_name": "entities_parent",
+      "index_bytes": 1916928,
+      "definition": "CREATE INDEX entities_parent ON public.atlas_entities USING btree (parent_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_entity_types",
+      "index_name": "atlas_entity_types_pkey",
+      "index_bytes": 16384,
+      "definition": "CREATE UNIQUE INDEX atlas_entity_types_pkey ON public.atlas_entity_types USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_evidence_retirements",
+      "index_name": "atlas_evidence_retirements_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_evidence_retirements_pkey ON public.atlas_evidence_retirements USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_evidence_retirements",
+      "index_name": "retirements_target",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX retirements_target ON public.atlas_evidence_retirements USING btree (collection, target_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_footprint_retirements",
+      "index_name": "atlas_footprint_retirements_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_footprint_retirements_pkey ON public.atlas_footprint_retirements USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_footprint_retirements",
+      "index_name": "atlas_footprint_retirements_target_id_key",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_footprint_retirements_target_id_key ON public.atlas_footprint_retirements USING btree (target_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_footprint_retirements",
+      "index_name": "footprint_retirement_validation",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX footprint_retirement_validation ON public.atlas_footprint_retirements USING btree (validation_id, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_footprint_selection_validations",
+      "index_name": "atlas_footprint_selection_validations_ingestion_id_key",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_footprint_selection_validations_ingestion_id_key ON public.atlas_footprint_selection_validations USING btree (ingestion_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_footprint_selection_validations",
+      "index_name": "atlas_footprint_selection_validations_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_footprint_selection_validations_pkey ON public.atlas_footprint_selection_validations USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_footprint_version_objects",
+      "index_name": "atlas_footprint_version_objects_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_footprint_version_objects_pkey ON public.atlas_footprint_version_objects USING btree (version_id, media_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_footprint_versions",
+      "index_name": "atlas_footprint_versions_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_footprint_versions_pkey ON public.atlas_footprint_versions USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_footprint_versions",
+      "index_name": "footprint_version_release",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX footprint_version_release ON public.atlas_footprint_versions USING btree (release_id, status, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_changes",
+      "index_name": "atlas_geographic_changes_pkey",
+      "index_bytes": 811008,
+      "definition": "CREATE UNIQUE INDEX atlas_geographic_changes_pkey ON public.atlas_geographic_changes USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_changes",
+      "index_name": "geographic_changes_old",
+      "index_bytes": 696320,
+      "definition": "CREATE INDEX geographic_changes_old ON public.atlas_geographic_changes USING btree (old_entity_id, release_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_changes",
+      "index_name": "geographic_changes_page",
+      "index_bytes": 1392640,
+      "definition": "CREATE INDEX geographic_changes_page ON public.atlas_geographic_changes USING btree (release_id, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_existence_records",
+      "index_name": "atlas_geographic_existence_records_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_geographic_existence_records_pkey ON public.atlas_geographic_existence_records USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_existence_records",
+      "index_name": "temporal_existence_dates",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX temporal_existence_dates ON public.atlas_geographic_existence_records USING btree (release_id, entity_id, valid_from, valid_to, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_existence_records",
+      "index_name": "temporal_existence_validation",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX temporal_existence_validation ON public.atlas_geographic_existence_records USING btree (validation_id, entity_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_footprint_records",
+      "index_name": "atlas_geographic_footprint_records_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_geographic_footprint_records_pkey ON public.atlas_geographic_footprint_records USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_footprint_records",
+      "index_name": "footprint_selection_dates",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX footprint_selection_dates ON public.atlas_geographic_footprint_records USING btree (release_id, valid_from, valid_to, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_footprint_records",
+      "index_name": "footprint_selection_validation",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX footprint_selection_validation ON public.atlas_geographic_footprint_records USING btree (validation_id, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_membership_records",
+      "index_name": "atlas_geographic_membership_records_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_geographic_membership_records_pkey ON public.atlas_geographic_membership_records USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_membership_records",
+      "index_name": "temporal_memberships_dates",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX temporal_memberships_dates ON public.atlas_geographic_membership_records USING btree (release_id, entity_id, valid_from, valid_to, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_membership_records",
+      "index_name": "temporal_memberships_validation",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX temporal_memberships_validation ON public.atlas_geographic_membership_records USING btree (validation_id, entity_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_memberships",
+      "index_name": "atlas_geographic_memberships_pkey",
+      "index_bytes": 121430016,
+      "definition": "CREATE UNIQUE INDEX atlas_geographic_memberships_pkey ON public.atlas_geographic_memberships USING btree (release_id, entity_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_memberships",
+      "index_name": "geographic_membership_page",
+      "index_bytes": 122675200,
+      "definition": "CREATE INDEX geographic_membership_page ON public.atlas_geographic_memberships USING btree (release_id, active, entity_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_memberships",
+      "index_name": "geographic_membership_parent",
+      "index_bytes": 162332672,
+      "definition": "CREATE INDEX geographic_membership_parent ON public.atlas_geographic_memberships USING btree (release_id, active, parent_id, entity_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_releases",
+      "index_name": "atlas_geographic_releases_pkey",
+      "index_bytes": 16384,
+      "definition": "CREATE UNIQUE INDEX atlas_geographic_releases_pkey ON public.atlas_geographic_releases USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_releases",
+      "index_name": "geographic_releases_published",
+      "index_bytes": 16384,
+      "definition": "CREATE INDEX geographic_releases_published ON public.atlas_geographic_releases USING btree (status, version)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_geographic_releases",
+      "index_name": "geographic_releases_version",
+      "index_bytes": 16384,
+      "definition": "CREATE UNIQUE INDEX geographic_releases_version ON public.atlas_geographic_releases USING btree (version)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_ingestions",
+      "index_name": "atlas_ingestions_pkey",
+      "index_bytes": 663552,
+      "definition": "CREATE UNIQUE INDEX atlas_ingestions_pkey ON public.atlas_ingestions USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_ingestions",
+      "index_name": "atlas_ingestions_rowid_key",
+      "index_bytes": 90112,
+      "definition": "CREATE UNIQUE INDEX atlas_ingestions_rowid_key ON public.atlas_ingestions USING btree (rowid)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_media",
+      "index_name": "atlas_media_object_key_unique",
+      "index_bytes": 73728,
+      "definition": "CREATE UNIQUE INDEX atlas_media_object_key_unique ON public.atlas_media USING btree (object_key)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_media",
+      "index_name": "atlas_media_pkey",
+      "index_bytes": 81920,
+      "definition": "CREATE UNIQUE INDEX atlas_media_pkey ON public.atlas_media USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_media_links",
+      "index_name": "atlas_media_links_pkey",
+      "index_bytes": 16384,
+      "definition": "CREATE UNIQUE INDEX atlas_media_links_pkey ON public.atlas_media_links USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_media_links",
+      "index_name": "media_links_entity",
+      "index_bytes": 16384,
+      "definition": "CREATE INDEX media_links_entity ON public.atlas_media_links USING btree (entity_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_names",
+      "index_name": "atlas_names_pkey",
+      "index_bytes": 294912,
+      "definition": "CREATE UNIQUE INDEX atlas_names_pkey ON public.atlas_names USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_names",
+      "index_name": "names_entity_dates",
+      "index_bytes": 286720,
+      "definition": "CREATE INDEX names_entity_dates ON public.atlas_names USING btree (entity_id, valid_from, valid_to)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_relationships",
+      "index_name": "atlas_relationships_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_relationships_pkey ON public.atlas_relationships USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_relationships",
+      "index_name": "relationships_source_dates",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX relationships_source_dates ON public.atlas_relationships USING btree (source_entity_id, valid_from, valid_to)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_relationships",
+      "index_name": "relationships_target_dates",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX relationships_target_dates ON public.atlas_relationships USING btree (target_entity_id, valid_from, valid_to)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_sources",
+      "index_name": "atlas_sources_pkey",
+      "index_bytes": 57344,
+      "definition": "CREATE UNIQUE INDEX atlas_sources_pkey ON public.atlas_sources USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_temporal_geography_retirements",
+      "index_name": "atlas_temporal_geography_retirements_collection_target_id_key",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_temporal_geography_retirements_collection_target_id_key ON public.atlas_temporal_geography_retirements USING btree (collection, target_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_temporal_geography_retirements",
+      "index_name": "atlas_temporal_geography_retirements_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_temporal_geography_retirements_pkey ON public.atlas_temporal_geography_retirements USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_temporal_geography_retirements",
+      "index_name": "temporal_retirement_release",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX temporal_retirement_release ON public.atlas_temporal_geography_retirements USING btree (release_id, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_temporal_geography_retirements",
+      "index_name": "temporal_retirement_validation",
+      "index_bytes": 8192,
+      "definition": "CREATE INDEX temporal_retirement_validation ON public.atlas_temporal_geography_retirements USING btree (validation_id, collection, target_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_temporal_geography_validations",
+      "index_name": "atlas_temporal_geography_validations_ingestion_id_key",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_temporal_geography_validations_ingestion_id_key ON public.atlas_temporal_geography_validations USING btree (ingestion_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "atlas_temporal_geography_validations",
+      "index_name": "atlas_temporal_geography_validations_pkey",
+      "index_bytes": 8192,
+      "definition": "CREATE UNIQUE INDEX atlas_temporal_geography_validations_pkey ON public.atlas_temporal_geography_validations USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "table_name": "worldatlas_schema_migrations",
+      "index_name": "worldatlas_schema_migrations_pkey",
+      "index_bytes": 16384,
+      "definition": "CREATE UNIQUE INDEX worldatlas_schema_migrations_pkey ON public.worldatlas_schema_migrations USING btree (migration_id)",
+      "valid": true,
+      "ready": true
+    }
+  ],
+  "checks": {
+    "transaction_read_only": true,
+    "expected_sql_identity": true,
+    "migration_registry_present": true,
+    "sql_endpoint_setting_present": true,
+    "timeouts_verified": true,
+    "table_accounting_verified": true
+  },
+  "limitations": [
+    "Catalog live/dead tuple counts are estimates, not COUNT(*) or reclaimable bytes; missing statistics are null.",
+    "pg_database_size is physical database allocation, distinct from Neon logical usage, plan allowance and billing.",
+    "Every public ordinary/partitioned/materialized relation is inventoried. Known application accounting includes atlas_* and worldatlas_schema_migrations; other public relations are reported explicitly without inferring their purpose.",
+    "Other database bytes include other public relations, catalogs and allocation overhead; outside-public bytes exclude all inventoried public relations. Neither residual measures free space.",
+    "Sizes/statistics may change during concurrent activity; catalog/size functions are not a frozen physical snapshot.",
+    "Index main-fork sizes omit auxiliary forks; table index_bytes includes complete attached index storage. TOAST total includes its index.",
+    "No raw facts, wide table scans, ANALYZE, VACUUM, DDL, deletion, provisioning, imports or paid changes."
+  ],
+  "provider": {
+    "branch_logical_size_bytes": 1035476992,
+    "branch_logical_size_limit_mib": 1024,
+    "logical_usage_source": "Neon GET branch logical_size",
+    "billing_usage": {
+      "status": "unavailable",
+      "reason": "Fixed project/branch responses do not establish billing-metered usage or actual charges."
+    }
+  }
+}

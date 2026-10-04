@@ -1,0 +1,18 @@
+✔ evidence dictionary retains whitespace, key order and duplicate JSON keys byte exactly (1.483458ms)
+✔ digest collision is rejected instead of replacing original evidence (0.291708ms)
+✔ prototype reconstructs every external field and counts all dictionary/index overhead (2047.005417ms)
+✔ identical evidence deduplicates while separate release/entity memberships remain (704.632666ms)
+✔ duplicate membership rejects atomically and retains earlier immutable rows (733.116666ms)
+✔ missing key or invalid evidence cannot silently repair original data (783.255625ms)
+✔ candidate immutable history rejects updates/deletes and detects a conflicting digest payload (868.40025ms)
+✔ name, active and damaged digest constraints reject invalid prototype writes (754.130542ms)
+✔ original prototype schema fails closed if the expected index inventory changes (0.334ms)
+✔ transaction handles are rejected so a caller rollback cannot poison the client dictionary (1124.3825ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7179.444458
