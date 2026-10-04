@@ -1,0 +1,88 @@
+{
+  "baseline_commit": "2f6a964d81bed6acd438399689bbb84b4e3abe80",
+  "published_region_scope_baseline_commit": "678d7e8f8686f575e024b593ce4e744a8bb4d79a",
+  "assignment_inventory": {
+    "path": "data/regional-review/regional-review-91fc801eb40ba6f9/area-partition-inventory.csv",
+    "commit": "2f6a964d81bed6acd438399689bbb84b4e3abe80",
+    "sha256": "be742c2dae0197f56fe6c641b3594ab3c426cd0f742bf2e061f36bc234c93ba7",
+    "rows": 774
+  },
+  "upper_chain_reference": {
+    "path": "data/regional-review/regional-review-91fc801eb40ba6f9/baseline-members.json",
+    "commit": "2f6a964d81bed6acd438399689bbb84b4e3abe80",
+    "sha256": "567b0750864e7d49360edf569b1707e262ef9d397d42cffeece6e3746db35f5e",
+    "source_issue": 477
+  },
+  "published_hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+  "issue_scope": {
+    "number": 476,
+    "created_at": "2026-10-02T21:54:18Z",
+    "retrieved_at": "2026-10-04",
+    "path": "issue-scope-original.json",
+    "sha256": "f1aeb0fc537c13848127b64f4201e9f1047fd2d2d2fd604b708c78519784d70a"
+  },
+  "members": 227,
+  "province_scope_counts": [
+    {
+      "id": "framework:province:abuja-federal-capital-territory:24fe5cea0ae1",
+      "name": "Abuja Federal Capital Territory",
+      "locations": 6
+    },
+    {
+      "id": "framework:province:anambra:60457f483104",
+      "name": "Anambra",
+      "locations": 21
+    },
+    {
+      "id": "framework:province:bayelsa:363005de2f54",
+      "name": "Bayelsa",
+      "locations": 8
+    },
+    {
+      "id": "framework:province:delta:c9181c18b197",
+      "name": "Delta",
+      "locations": 25
+    },
+    {
+      "id": "framework:province:edo:837a456ad2ee",
+      "name": "Edo",
+      "locations": 18
+    },
+    {
+      "id": "framework:province:ekiti:1dc223e0cd0e",
+      "name": "Ekiti",
+      "locations": 16
+    },
+    {
+      "id": "framework:province:imo:a94708264d83",
+      "name": "Imo",
+      "locations": 27
+    },
+    {
+      "id": "framework:province:kogi:2143f75eb90a",
+      "name": "Kogi",
+      "locations": 21
+    },
+    {
+      "id": "framework:province:niger:76d278c157e8",
+      "name": "Niger",
+      "locations": 25
+    },
+    {
+      "id": "framework:province:rivers:00c506c91c8a",
+      "name": "Rivers",
+      "locations": 23
+    },
+    {
+      "id": "framework:province:sokoto:38a75936a981",
+      "name": "Sokoto",
+      "locations": 23
+    },
+    {
+      "id": "framework:province:zamfara:f060723678a4",
+      "name": "Zamfara",
+      "locations": 14
+    }
+  ],
+  "interpretation": "The assignment inventory and upper-chain reference are prior evidence available at the fresh PR base; the exact member inventory was derived in the accepted adjacent Nigeria packet from the declared ancestor snapshots. The release pins remain the geographic baseline. These records do not independently establish administrative tier purpose, settlement completeness, physical land completeness or regional approval."
+}

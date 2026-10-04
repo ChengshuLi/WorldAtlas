@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-04",
+  "source_baseline_commit": "678d7e8f8686f575e024b593ce4e744a8bb4d79a",
+  "records": {
+    "national_admin": {
+      "path": "sources/geography-acquisition-original.json",
+      "sha256": "1b34aaffc63136c1ef56f2e5b14fc49f99504d6e217f879a1d438f4890841fc3",
+      "bytes": 107968
+    },
+    "wca_admin": {
+      "path": "sources/wca-acquisition-original.json",
+      "sha256": "afc2540734a85b20f64a0c6f3911b6d9fbac557ac257794cdee3a4389ee6490b",
+      "bytes": 95398
+    },
+    "physical_access": {
+      "path": "sources/physical-source-access-original.json",
+      "sha256": "4522046a2f63fa78d05e67d52fd03c35cf4a8ad3f56a2209c352aad976dcd24c",
+      "bytes": 1449
+    },
+    "context_extract": {
+      "path": "sources/context-extract-original.json",
+      "sha256": "aafcd8a48d61cd6804f052c7d324683a98c8d769370363a9e413593222765e2c",
+      "bytes": 2977
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-NGA-adm2",
+      "provider": "geoBoundaries",
+      "role": "Local Government Areas",
+      "vintage": "2022",
+      "license": "CC BY 4.0",
+      "canonical": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/NGA/ADM2/geoBoundaries-NGA-ADM2.geojson",
+      "retained_path": "data/regional-review/regional-review-0ed7b50d2b74736e/sources/geoboundaries-NGA-adm2-2022.geojson.gz",
+      "provenance_record": "sources/geography-acquisition-original.json",
+      "use": "Assigned-subject role/name/geometry source and source-vintage screen; not legal ownership or tier-purpose proof."
+    },
+    {
+      "id": "cod-ab-nga",
+      "provider": "OCHA HDX COD-AB",
+      "role": "ADM0/ADM1/ADM2 administration and administrative capitals",
+      "vintage": "COD-AB v01; boundary creation/edit 1996-10-01; humanitarian-valid 2019-04-17; reviewed 2025-10-30; resource last modified 2026-04-16",
+      "license": "CC BY-IGO",
+      "canonical": "https://data.humdata.org/api/3/action/package_show?id=cod-ab-nga",
+      "retained_path": "data/regional-review/regional-review-0ed7b50d2b74736e/sources/hdx-cod-ab-nga-admin-boundaries.geojson.zip.gz",
+      "provenance_record": "sources/geography-acquisition-original.json",
+      "use": "Current administrative labels, code and candidate polygon comparisons; ADM3 ward coverage is partial."
+    },
+    {
+      "id": "wca-settlement-points",
+      "provider": "OCHA West and Central Africa Regional Office",
+      "role": "Settlement point observations",
+      "source_date": "2021-12-31",
+      "license": "CC BY",
+      "canonical": "https://data.humdata.org/api/3/action/package_show?id=west-and-central-africa-administrative-boundaries-levels",
+      "resource": "https://data.humdata.org/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/5f34e982-fbba-404b-a64f-31ad3480e157/download/wca_pplp_ocha.zip",
+      "retained_path": "data/regional-review/regional-review-0ed7b50d2b74736e/sources/wca-settlement-points-region-subset.geojson.gz",
+      "provenance_record": "sources/wca-acquisition-original.json",
+      "use": "Point/name/code observations only; not a complete settlement inventory or urban footprint."
+    },
+    {
+      "id": "wca-adm0-adm1-edge-matched",
+      "provider": "OCHA West and Central Africa Regional Office",
+      "role": "Current-version neighboring-country and ADM1 edge screens",
+      "source_dates": "ADM0 2026-04-20; ADM1 2026-04-20",
+      "license": "CC BY",
+      "canonical": "https://data.humdata.org/api/3/action/package_show?id=west-and-central-africa-administrative-boundaries-levels",
+      "retained_paths": [
+        "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/wca-edge-matched-adm0-neighbors.geojson.gz",
+        "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/wca-edge-matched-adm1-neighbors.geojson.gz"
+      ],
+      "provenance_record": "sources/wca-acquisition-original.json",
+      "use": "Same-source shared-edge/cross-source ADM1 screens only; not sovereign boundaries or physical-coastline proof."
+    }
+  ],
+  "not_used_or_unresolved": [
+    {
+      "id": "grid3-nga-settlement-extents-v4_1",
+      "role": "Settlement extents",
+      "license": "CC BY-SA as recorded by retained HDX metadata",
+      "canonical": "https://data.humdata.org/api/3/action/package_show?id=grid3-nga-settlement-extents-v4_1",
+      "record": "data/regional-review/regional-review-0ed7b50d2b74736e/sources/hdx-grid3-nga-settlement-extents-v4_1-package-metadata.json.gz",
+      "limit": "2,136,305,664-byte GeoPackage not retained or analyzed; verify current license/attribution and lawful retrieval before bounded follow-up."
+    },
+    {
+      "id": "nigeria-settlements-villages-towns-cities",
+      "role": "National settlement names/capitals",
+      "license": "Other",
+      "canonical": "https://data.humdata.org/api/3/action/package_show?id=nigeria-settlements-villages-towns-cities",
+      "record": "data/regional-review/regional-review-0ed7b50d2b74736e/sources/hdx-nigeria-settlements-villages-towns-cities-package-metadata.json.gz",
+      "limit": "Catalog metadata only; settlement records not retained or used; license permits no assumed reuse."
+    },
+    {
+      "id": "noaa-gshhg",
+      "role": "Physical land fragments, coastline and named-island screening",
+      "canonical": "https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html",
+      "record": "data/regional-review/regional-review-9d08839e1cdb0c8f/physical-source-access.json",
+      "limit": "Archive hash is known from the completed HTTP stream, but the archive was not retained or analyzed because local storage and shared execution memory were exhausted.",
+      "license": "GNU LGPL; version not named in NOAA/SOEST page",
+      "NOAA_information_page_result": "HTTP 200; points to version 2.3.7 released 2017-06-15.",
+      "NOAA_latest_directory_result": "HTTP 404",
+      "NOAA_readme_result": "HTTP 404",
+      "NOAA_documented_mirror": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+      "archive_url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip",
+      "archive_http": "200",
+      "archive_bytes": 149157845,
+      "archive_last_modified": "2017-06-15T20:40:01Z",
+      "archive_etag": "8e3f7d5-55205ac34aa40",
+      "bytes_retained": false,
+      "sha256": null,
+      "streamed_sha256": "8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41",
+      "stream_method": "Full archive response streamed to sha256sum at 2026-10-04; ZIP member integrity not checked.",
+      "restore_command": "curl -fL https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip -o gshhg-shp-2.3.7.zip && sha256sum gshhg-shp-2.3.7.zip && unzip -t gshhg-shp-2.3.7.zip"
+    }
+  ],
+  "restoration": {
+    "commit": "678d7e8f8686f575e024b593ce4e744a8bb4d79a",
+    "method": "For any retained source, restore the exact gzip/archive bytes with `git show 678d7e8f8686f575e024b593ce4e744a8bb4d79a:<retained_path> > <private-output-path>`; verify the gzip SHA-256 in the copied acquisition record before decompression. The matching uncompressed SHA-256 and size are retained in the same record."
+  },
+  "source_method": "The source archives are retained as original files in their earlier owned packets at the pinned ancestor. This packet links those bytes and copies only the acquisition/access records; it does not rewrite or replace predecessor source material.",
+  "derived_neighbor_inputs": [
+    {
+      "path": "data/regional-review/regional-review-91fc801eb40ba6f9/sources/wca-adm0-region-neighbors.geojson.gz",
+      "baseline_commit": "2f6a964d81bed6acd438399689bbb84b4e3abe80",
+      "gzip_sha256": "612fb8e7e63a61d2f08fc888d5385a60d281d849ea84128abdd9eafbb1ae232d",
+      "gzip_bytes": 1416341,
+      "restored_bytes": 4988817,
+      "restored_sha256": "7fb0a318a2a61e3c8af7cec73ae8bbfb62fb1be340be0b2c542431ae60e38be5",
+      "source_date": "2026-04-20T10:48:18.464749",
+      "source_layer": "adm0",
+      "feature_count": 13,
+      "derived_by": "GDAL 3.10.3 ogr2ogr subset from the retained ancestor original archive; exact command parameters are recorded in context-extract.json",
+      "source_dataset_register_commit": "2f6a964d81bed6acd438399689bbb84b4e3abe80",
+      "inherited_register": "data/regional-review/regional-review-91fc801eb40ba6f9/inherited-wca-register.json",
+      "upstream_original_archive_commit": "e570f16236928fd5c5e359ab96e81399b55ccb26",
+      "upstream_original_archive": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/hdx-wca-wca_admbnda_adm0_edgematched_942026.zip.gz",
+      "upstream_archive_gzip_sha256": "b0f2066bd02de276cbc2ba0f2b00044c17b1aecba859d003bdefcbdc7dded19d",
+      "license": "Creative Commons Attribution International (CC BY)",
+      "use": "Derived read-only input for cross-source ADM1 and common-source neighboring-country edge screens; no boundary transfer or political ownership inference."
+    },
+    {
+      "path": "data/regional-review/regional-review-91fc801eb40ba6f9/sources/wca-adm1-region-neighbors.geojson.gz",
+      "baseline_commit": "2f6a964d81bed6acd438399689bbb84b4e3abe80",
+      "gzip_sha256": "f4b426f31d1ef4d9bc362cbd70c4000aa2f9238cac171861613dde47432861b1",
+      "gzip_bytes": 2971858,
+      "restored_bytes": 10225351,
+      "restored_sha256": "696b31c337b8c61f5b3af262aa372d00d99cc4420e4a110b5c2c75ac378da132",
+      "source_date": "2026-04-20T15:24:08.717222",
+      "source_layer": "adm1",
+      "feature_count": 184,
+      "derived_by": "GDAL 3.10.3 ogr2ogr subset from the retained ancestor original archive; exact command parameters are recorded in context-extract.json",
+      "source_dataset_register_commit": "2f6a964d81bed6acd438399689bbb84b4e3abe80",
+      "inherited_register": "data/regional-review/regional-review-91fc801eb40ba6f9/inherited-wca-register.json",
+      "upstream_original_archive_commit": "e570f16236928fd5c5e359ab96e81399b55ccb26",
+      "upstream_original_archive": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/hdx-wca-wca_admbnda_adm1_edgematched_942026.zip.gz",
+      "upstream_archive_gzip_sha256": "e31849bce58a431e111e2cc578119fc6468a40231981f2956e802ccabb697646",
+      "license": "Creative Commons Attribution International (CC BY)",
+      "use": "Derived read-only input for cross-source ADM1 and common-source neighboring-country edge screens; no boundary transfer or political ownership inference."
+    }
+  ]
+}

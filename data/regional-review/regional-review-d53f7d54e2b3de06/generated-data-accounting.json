@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "issue": 476,
+  "generator": "build_assessment.py",
+  "baseline_commit": "678d7e8f8686f575e024b593ce4e744a8bb4d79a",
+  "generated_table_rows_excluding_headers": 4435,
+  "outputs": [
+    {
+      "path": "assessment.csv",
+      "rows_excluding_header": 227,
+      "bytes": 537258,
+      "sha256": "12e8c0bf2522adacfd07628cb7e2d02e56e200471bab13ce743d2e1ecdb598d9"
+    },
+    {
+      "path": "source-vintage-crosswalk.csv",
+      "rows_excluding_header": 1445,
+      "bytes": 334016,
+      "sha256": "902b1e2a6755053f3715fe42286afc5e1fda209bef61552811afadd519887069"
+    },
+    {
+      "path": "geometry-components.csv",
+      "rows_excluding_header": 476,
+      "bytes": 410172,
+      "sha256": "255a60a722b24099a8924eefe0606aaa7120ef8ce592fba618d141f4132b3167"
+    },
+    {
+      "path": "settlement-point-anomalies.csv",
+      "rows_excluding_header": 1,
+      "bytes": 445,
+      "sha256": "3f7e1e19f7b55f78477a33f0671cc254ca3d6490184d8e1d38920818a36d5dd8"
+    },
+    {
+      "path": "settlement-source-counts.csv",
+      "rows_excluding_header": 228,
+      "bytes": 75463,
+      "sha256": "4aba2444c6250409627bb3da76d01704bac055082010425715167bec7bbaf24b"
+    },
+    {
+      "path": "city-name-spatial-screen.csv",
+      "rows_excluding_header": 227,
+      "bytes": 90335,
+      "sha256": "da29a01f9536ad2b4a5ce7fd46a4835863639130da4fa644ac4589cd261afb0f"
+    },
+    {
+      "path": "current-unit-inventory.csv",
+      "rows_excluding_header": 774,
+      "bytes": 75717,
+      "sha256": "218a1378ff4623dd4d078f38d2c355786a6c9bcf31e5c81c48118642186eb894"
+    },
+    {
+      "path": "administrative-scope.csv",
+      "rows_excluding_header": 13,
+      "bytes": 27975,
+      "sha256": "47b72f9ab54fc94f464796cc47ace7876e3b0af5ab5ef207064f042fda9ad70f"
+    },
+    {
+      "path": "admin1-source-comparison.csv",
+      "rows_excluding_header": 37,
+      "bytes": 5995,
+      "sha256": "fb70879d10ec0958c1fde5ecfcb8728af44f190c02035952cd234df16457505c"
+    },
+    {
+      "path": "neighbor-edge-screen.csv",
+      "rows_excluding_header": 4,
+      "bytes": 776,
+      "sha256": "7eb66211b0f934fd9e35a2f3f4bdf893972b5aafe6edd69dd895b2c12ffd8a4f"
+    },
+    {
+      "path": "province-scale-screen.csv",
+      "rows_excluding_header": 228,
+      "bytes": 61477,
+      "sha256": "203de91207bd9d08b34d15300d2c59545fe4a5cf3be7c0a8f14d8b24d6902bb8"
+    },
+    {
+      "path": "national-source-inventory.csv",
+      "rows_excluding_header": 1,
+      "bytes": 1086,
+      "sha256": "5f49b9a979e8a324bb41fb0fad07fb23fd8fdc1b4a0edc04139aa930f07fe60d"
+    },
+    {
+      "path": "area-partition-inventory.csv",
+      "rows_excluding_header": 774,
+      "bytes": 108775,
+      "sha256": "a7861568286e5ad3ecc863865dfa8632e44f1a48306e646c40dbcb323cdd2275"
+    }
+  ],
+  "source_archives_accounted_separately": "source-references.json; source bytes remain in pinned ancestor packets"
+}

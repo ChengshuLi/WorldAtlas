@@ -1,0 +1,76 @@
+[
+  {
+    "level": "settlement-points",
+    "file": "sources/wca-settlement-points-region-subset.geojson.gz",
+    "feature_count": 93588,
+    "countries": [
+      "Nigeria",
+      "Senegal",
+      "Sierra Leone"
+    ],
+    "restored_bytes": 41169332,
+    "restored_sha256": "d5ba3e733ed11d83f5dd4947c1eaa9843cb424dfd894fedd744ffe43cceea5fc",
+    "gzip_bytes": 2562887,
+    "gzip_sha256": "93b3db78efca9b66c2d8c87c6fe3f90f5c824dfb0fc77332892478239b79c35d",
+    "source_archive": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/hdx-wca-wca_pplp_ocha.zip.gz",
+    "source_archive_gzip_sha256": "793cbfc591980ec84b2130ab824dc07ea29241a1d98b51ec8075962ae2d6cef2",
+    "where": "admin0Name IN ('Nigeria','Senegal','Sierra Leone')",
+    "ogr_version": "GDAL 3.10.3, released 2025/04/01"
+  },
+  {
+    "level": "adm0",
+    "file": "sources/wca-adm0-region-neighbors.geojson.gz",
+    "feature_count": 13,
+    "countries": [
+      "Benin",
+      "Cameroon",
+      "Chad",
+      "Guinea",
+      "Guinea-Bissau",
+      "Liberia",
+      "Mali",
+      "Mauritania",
+      "Niger",
+      "Nigeria",
+      "Senegal",
+      "Sierra Leone",
+      "The Gambia"
+    ],
+    "restored_bytes": 4988817,
+    "restored_sha256": "7fb0a318a2a61e3c8af7cec73ae8bbfb62fb1be340be0b2c542431ae60e38be5",
+    "gzip_bytes": 1416341,
+    "gzip_sha256": "612fb8e7e63a61d2f08fc888d5385a60d281d849ea84128abdd9eafbb1ae232d",
+    "source_archive": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/hdx-wca-wca_admbnda_adm0_edgematched_942026.zip.gz",
+    "source_archive_gzip_sha256": "b0f2066bd02de276cbc2ba0f2b00044c17b1aecba859d003bdefcbdc7dded19d",
+    "where": "adm0_name IN ('Nigeria','Sénégal','Senegal','Sierra Leone','Niger','Benin','Cameroon','Chad','Mauritania','Mali','Guinea','Guinea-Bissau','The Gambia','Gambia','Liberia')",
+    "ogr_version": "GDAL 3.10.3, released 2025/04/01"
+  },
+  {
+    "level": "adm1",
+    "file": "sources/wca-adm1-region-neighbors.geojson.gz",
+    "feature_count": 184,
+    "countries": [
+      "Benin",
+      "Cameroon",
+      "Chad",
+      "Guinea",
+      "Guinea-Bissau",
+      "Liberia",
+      "Mali",
+      "Mauritania",
+      "Niger",
+      "Nigeria",
+      "Senegal",
+      "Sierra Leone",
+      "The Gambia"
+    ],
+    "restored_bytes": 10225351,
+    "restored_sha256": "696b31c337b8c61f5b3af262aa372d00d99cc4420e4a110b5c2c75ac378da132",
+    "gzip_bytes": 2971858,
+    "gzip_sha256": "f4b426f31d1ef4d9bc362cbd70c4000aa2f9238cac171861613dde47432861b1",
+    "source_archive": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/hdx-wca-wca_admbnda_adm1_edgematched_942026.zip.gz",
+    "source_archive_gzip_sha256": "e31849bce58a431e111e2cc578119fc6468a40231981f2956e802ccabb697646",
+    "where": "adm0_name IN ('Nigeria','Sénégal','Senegal','Sierra Leone','Niger','Benin','Cameroon','Chad','Mauritania','Mali','Guinea','Guinea-Bissau','The Gambia','Gambia','Liberia')",
+    "ogr_version": "GDAL 3.10.3, released 2025/04/01"
+  }
+]

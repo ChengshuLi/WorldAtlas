@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "subject": "Nigeria batch 10, 227 assigned locations",
+  "fresh_external_access_recheck_performed": true,
+  "inherited_access_record": {
+    "source_path": "data/regional-review/regional-review-9d08839e1cdb0c8f/physical-source-access.json",
+    "copied_record": "physical-source-access-original.json",
+    "baseline_commit": "678d7e8f8686f575e024b593ce4e744a8bb4d79a"
+  },
+  "limits": [
+    {
+      "source_id": "noaa-gshhg",
+      "role": "physical coastline, land fragments and named-island screening",
+      "canonical_information_page": "https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html",
+      "inherited_result": "The prior official access log records the information page reachable, while its linked latest-data directory and readme returned HTTP 404.",
+      "bytes_retained": false,
+      "sha256": null,
+      "license": "Not independently verified; inspect current NOAA terms/readme after lawful restoration.",
+      "conclusion": "The official and documented mirror path is now verified, but no archive member or land geometry was inspected; physical completeness for these 227 locations remains unresolved.",
+      "next_action": "Restore the exact 2.3.7 archive from the NOAA-documented SOEST mirror, verify the recorded streamed SHA-256 and ZIP member integrity, retain original bytes under the follow-up owned path, then screen all 227 subjects and relevant components against an authoritative named-feature reference.",
+      "recheck_date": "2026-10-04",
+      "official_information_page_result": "HTTP 200; the page links GSHHG 2.3.7, dated 2017-06-15, and states GNU Lesser General Public License without naming a version.",
+      "official_latest_directory_result": "HTTP 404 for https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/",
+      "official_readme_result": "HTTP 404 for https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/readme.txt",
+      "NOAA_documented_mirror": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+      "mirror_archive": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip",
+      "mirror_archive_result": "HTTP 200; Content-Length 149157845; Last-Modified 2017-06-15 20:40:01 UTC; ETag \"8e3f7d5-55205ac34aa40\".",
+      "mirror_license": "The project page says releases since 2.2.2 are under the GNU Lesser General Public License; version is not named on that page.",
+      "retention_limit": "No local original archive retained because /tmp and the workspace overlay are full and the shared execution cgroup is at its memory limit.",
+      "streamed_archive_sha256": "8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41",
+      "archive_sha256_method": "A complete HTTP GET from the documented SOEST URL was streamed through sha256sum on 2026-10-04; response completed but bytes were not written locally. This verifies the observed byte stream hash, not the ZIP central directory or member CRCs.",
+      "restore_command": "curl -fL https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip -o gshhg-shp-2.3.7.zip && sha256sum gshhg-shp-2.3.7.zip && unzip -t gshhg-shp-2.3.7.zip"
+    },
+    {
+      "source_id": "grid3-nga-settlement-extents-v4_1",
+      "role": "settlement footprints",
+      "canonical_catalog": "https://data.humdata.org/api/3/action/package_show?id=grid3-nga-settlement-extents-v4_1",
+      "inherited_result": "Retained package metadata reports a 2,136,305,664-byte GeoPackage; it was not retained or analyzed.",
+      "license": "CC BY-SA as reported by inherited catalog metadata; verify applicable version and attribution at restoration.",
+      "conclusion": "OCHA point and administrative-capital observations are not settlement footprint evidence or a complete place inventory."
+    },
+    {
+      "source_id": "nigeria-settlements-villages-towns-cities",
+      "role": "national settlement names and capitals",
+      "canonical_catalog": "https://data.humdata.org/api/3/action/package_show?id=nigeria-settlements-villages-towns-cities",
+      "inherited_result": "Catalog metadata only; license is reported as Other, and settlement records were not retained or used.",
+      "conclusion": "No settlement completeness claim is made from this dataset."
+    }
+  ]
+}
