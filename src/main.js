@@ -181,7 +181,7 @@ async function loadYear(next) {
     parents=new Map(data.units.map(u=>[u.id,u]));features=new Map(data.features.map(f=>[f.id,f]));
     for(const e of temporal.entities.values())if(e.kind==='settlement'&&features.has(e.parent_id)){const p=features.get(e.parent_id).properties;p.settlement_search=[...(p.settlement_search||[]),...e.search_names];}
     polities=[];
-    states=resolveAttributes(data.features,year,{states:result.states,records:result.attributes||[],temporal,examples:$('#examples').checked,evidenceAvailable:!result.evidenceUnavailable,referenceBaselines:result.referenceBaselines||[]});
+    states=resolveAttributes(data.features,year,{states:result.states,records:result.attributes||[],temporal,examples:$('#examples').checked,evidenceAvailable:!result.evidenceUnavailable,referenceBaselines:result.referenceBaselines||[],referenceContexts:result.referenceContexts});
     const nextBoundaries=new Map(result.boundaries.map(b=>[b.location_id,b]));
     const changed=boundaryFootprintsChanged(boundaries,nextBoundaries)||locationInventoryChanged(previousFeatures,data.features);
     boundaries=nextBoundaries;

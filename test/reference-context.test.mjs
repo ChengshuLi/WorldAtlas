@@ -23,6 +23,20 @@ const baselines=[
 ];
 const at=(year,options={})=>resolveAttributes(features,year,{referenceBaselines:baselines,...options}).get('location');
 
+test('prepared context preserves full output across dates, uncertainty and unavailable evidence',()=>{
+ const referenceContexts=referenceContextByLocation(baselines),before=JSON.stringify(baselines);
+ for(const year of [-1,1,1050,2025,2026])for(const evidenceAvailable of [true,false]){
+  const records=[dated('climate','climate:Af'),dated('topography',null,{status:'disputed'})];
+  const options={referenceBaselines:baselines,records,evidenceAvailable};
+  assert.deepEqual(resolveAttributes(features,year,{...options,referenceContexts}),resolveAttributes(features,year,options));
+ }
+ assert.equal(JSON.stringify(baselines),before);
+ const changed=[...baselines,reference('climate','Af',{id:'new-release-climate',valid_from:2027,valid_to:2028})];
+ const nextContexts=referenceContextByLocation(changed);
+ assert.equal(resolveAttributes(features,1900,{referenceContexts:nextContexts}).get('location').reference_baselines.climate.provenance.id,'new-release-climate');
+ assert.equal(referenceContexts.get('location').climate.provenance.id,'reference:location:climate:2026');
+});
+
 test('environmental context can be displayed without inventing historical field evidence',()=>{
  const original=JSON.stringify(baselines);
  for(const year of [-3000,1000,2025]){

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "phase": "before",
+  "site": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+  "started_at_utc": "2026-10-04T08:07:11.773Z",
+  "read_only": true,
+  "conditions": {
+    "suite": "supported",
+    "transport": "GET-only localhost proxy of actual private production responses; service credential remains server-side",
+    "browser": "headless Chromium on Linux, 1440x1080, no CPU/network throttling",
+    "physical_mobile": false,
+    "cold_definition": "Fresh browser context/asset cache; first in this verification session. Provider idle/wake state is unknown."
+  },
+  "requests": [],
+  "navigation": [],
+  "page_errors": [],
+  "completed": false,
+  "failure": "verification-failed"
+}

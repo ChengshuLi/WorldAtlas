@@ -7,7 +7,7 @@ const temporalPins={release_id:'reference:test',hierarchy_sha256:'a'.repeat(64),
 const temporalPage=(stream,year=2020,revision=7)=>({year,stream,...temporalPins,records:[],withdrawals:[],sources:[],next_cursor:null,revision,capability:{datedMembership:1,datedExistence:1,datedFootprints:0}});
 async function withLoader(run,{enabled=true,geography=false}={}){
  const file=new URL('../src/data-client.js',import.meta.url);
- const source=fs.readFileSync(file,'utf8').replace(/from '(\.\/[^']+)'/g,(_,path)=>`from '${new URL(path,file).href}'`).replace("import.meta.env.VITE_STATIC_ATLAS === 'true'",'true').replace("import.meta.env.VITE_HOSTED_DATABASE === 'true'",'true')+`\n${enabled?'compactMapSupported=true;':''}\n${geography?`datedGeographySupported=true;expectedGeography=${JSON.stringify(temporalPins)};`:''}\nexport {loadHostedMapEvidence};\n// isolated client fixture ${++loaderSerial}`;
+ const source=fs.readFileSync(file,'utf8').replace(/from '(\.\/[^']+)'/g,(_,path)=>`from '${new URL(path,file).href}'`).replace("import.meta.env.VITE_STATIC_ATLAS === 'true'",'true').replace("import.meta.env.VITE_HOSTED_DATABASE === 'true'",'true')+`\n${enabled?'compactMapSupported=true;':''}\n${geography?`datedGeographySupported=true;expectedGeography=${JSON.stringify(temporalPins)};`:''}\nexport {loadHostedMapEvidence,loadReferenceAttributes};\n// isolated client fixture ${++loaderSerial}`;
  const loader=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64')),previous=global.fetch;
  try{return await run(loader);}finally{global.fetch=previous;}
 }
@@ -23,6 +23,25 @@ function unavailable(result,{stale=false,authority=false}={}){
  assert.equal(result.stale,stale);assert.equal(result.retirementAuthority,authority);
  for(const key of ['attributes','names','retirements']){assert.equal(result[key].available,false);if(!stale)assert.deepEqual(result[key].records,[]);}
 }
+
+test('reference presentation context is reused within one loaded generation and rebuilt on reload',async()=>withLoader(async loader=>{
+ let generation=1,reads=0;
+ global.fetch=async url=>{
+  if(url==='./atlas-geography.json')return Response.json({units:[],features:[],preparedEvidence:{index_sha256:String(generation)},contentCapabilities:{}});
+  if(url==='./reference-attributes/index.json'){reads++;return Response.json({version:2,parts:['part.json'],values:[generation===1?'Cfb':'Af'],types:[{attribute:'climate',valid_from:2026,valid_to:2027,method:'reference',status:'reference',source:'Immutable reference',metadata:{generation}}]});}
+  assert.equal(url,'./reference-attributes/part.json');return Response.json([['location:A',[[0,0,1,1]]]]);
+ };
+ const first=await loader.loadReferenceAttributes(2020),next=await loader.loadReferenceAttributes(2021);
+ assert.equal(first.referenceContexts,next.referenceContexts);assert.equal(reads,1);
+ assert.equal(first.referenceContexts.get('location:A').climate.provenance.metadata.generation,1);
+ generation=2;await loader.loadGeography();
+ const changed=await loader.loadReferenceAttributes(2020);
+ assert.notEqual(changed.referenceContexts,first.referenceContexts);assert.equal(reads,2);
+ assert.equal(changed.referenceContexts.get('location:A').climate.provenance.metadata.generation,2);
+ assert.equal(first.referenceContexts.get('location:A').climate.provenance.metadata.generation,1);
+ const controller=new AbortController();controller.abort();
+ await assert.rejects(loader.loadReferenceAttributes(2020,controller.signal),{name:'AbortError'});
+}));
 
 test('older Workers negotiate the sparse limit without masking unrelated bad requests',async()=>withLoader(async loader=>{
  const limits=[];global.fetch=async url=>{const p=request(url),limit=Number(p.get('limit'));limits.push(limit);return limit>1000?Response.json({error:'Map entity page limit must be between 1 and 1000'},{status:400}):Response.json(validPage());};

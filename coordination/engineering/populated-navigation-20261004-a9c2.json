@@ -1,0 +1,96 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "populated-navigation-20261004-a9c2",
+  "branch": "engineering/populated-navigation-20261004-a9c2",
+  "base_main_commit": "f3263796efccac63dd20296130aeb176323d38ea",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/638",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Measure current populated-year query/transport/decode/resolution; optimize measured navigation bottleneck without changing startup/assets/geography/facts"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-04T08:41:38.825980+00:00",
+  "reservation": {
+    "worker_id": "engineering-populated-navigation-a9c25e14-20261004",
+    "claim_id": "84e91602-f6e3-4f72-b657-4ed30f1dcd70",
+    "request_id": "df06abf3-78b6-4e2a-be54-67a2e76db9b1",
+    "accepted": true,
+    "result_comment_id": 5977954467,
+    "run_id": 37187798391,
+    "live_work": false,
+    "max_prs": 2
+  },
+  "completed": [
+    "Fresh confirmed claim and isolated checkout",
+    "Authorized owner-private GET access",
+    "First supported Site24 baseline and complete bounded 2020/2021/1900 raw snapshot capture",
+    "Bounded client candidate: location-indexed resolution and immutable per-generation reference context",
+    "50 relevant controls passed with zero skipped tests",
+    "Complete field equality for all49625locations across six years (297750comparisons)",
+    "First changed-code preview completed five supported selections below3seconds",
+    "Second changed-code preview completed five supported selections below3seconds",
+    "14 map modes, six profiles and nine fault/recovery scenarios completed",
+    "Hosted package completion marker retained with pinned Python PATH"
+  ],
+  "checks": [
+    {
+      "kind": "production-navigation",
+      "receipt": "data/engineering/populated-navigation-20261004-a9c2/site24-supported-before-03.json",
+      "completed": true,
+      "target_fully_met": false,
+      "limitations": [
+        "Provider wake/query phases unmeasured",
+        "Retained trace event limit can truncate trace; subsequent independent CPU sampling added",
+        "Production source is current Site24, not changed candidate code"
+      ]
+    },
+    {
+      "kind": "scalar-output-parity",
+      "receipt": "data/engineering/populated-navigation-20261004-a9c2/resolver-parity-01.json",
+      "completed": true,
+      "limits": [
+        "Offline committed release6 scalar parity, not a structural repin of served5",
+        "Single Node timing samples vary with GC and do not establish hosted latency"
+      ]
+    },
+    {
+      "kind": "candidate-preview",
+      "receipt": "data/engineering/populated-navigation-20261004-a9c2/preview-supported-candidate-01.json",
+      "completed": true,
+      "limits": [
+        "Changed client with current served5 assets/API; no deployed candidate claim",
+        "One profiled run; repetition still underway"
+      ]
+    },
+    {
+      "kind": "repeat-preview-failure",
+      "receipt": "data/engineering/populated-navigation-20261004-a9c2/preview-supported-candidate-02.json",
+      "completed": false,
+      "reason": "Actual served catalog5 returned500; no valid navigation sample",
+      "followup": "One bounded fresh GET returned200; catalog5-access-diagnosis-01.json"
+    }
+  ],
+  "deployment": {
+    "author_deployed": false,
+    "observed_site_version": 24,
+    "site_source_commit": "2326792cc52fc353264abc33c2ac4e983fb2c3e5",
+    "site_version_id": "appgprj_6abdf87277c08191bce4a22b8dfb25db~appgver_12fb5ab6e7c48191a07c4cdad90d82bf",
+    "deployment_id": "appgdep_6ac14428eaac8191b59b5d3d8f05fb0d",
+    "archive_hash": "sha256:d06648cdc833b47020614be807d912e81904c2ccfc9ddbbc20e8cc4a33ada20d"
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": "Ordinary bounded production GET-only reads; no mutation or heavy load"
+  },
+  "evidence_paths": [
+    "data/engineering/populated-navigation-20261004-a9c2/",
+    "coordination/engineering/populated-navigation-20261004-a9c2/claim-receipt.json"
+  ],
+  "blockers": [],
+  "next_action": "Whole-file evidence, focused PR, distinct exact-head review and required CI before serialized merge",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
