@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "issue": 662,
+  "historical": {
+    "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
+    "packet_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+    "geometry_output_sha256": "f452d57ed94112b1e8c0f5e1eac9fc1200dec36302efcd2085dea7e354c140f8",
+    "codab_output_sha256": "2afb4869c843e14ae2e2a257fee52b3302d8ba2702294eb7260dd8bcd1e4017d"
+  },
+  "reproduced": {
+    "geography_baseline_commit": "3d87880a274269b549a847333c35474e065c07f3",
+    "packet_commit": "f592b3d8b72f40036218803d2c70c733112e4d37",
+    "geometry_output_sha256": "4809dc44058100fc453db87f218d656a2267a8f10a00226e34b1d2017a12132e",
+    "codab_output_sha256": "4b6b81a25d317838eae0b3389e6136ae798799913338ad8b1858c7dba2622cf3"
+  },
+  "comparison": {
+    "numeric_tolerance": {
+      "relative": 1e-10,
+      "absolute": 1e-08
+    },
+    "geometry_changed_values_count": 0,
+    "geometry_changed_values": [],
+    "codab_changed_values_count": 0,
+    "codab_changed_values": [],
+    "interpretation": "Only the listed reproduced-value or disposition deltas differ from the immutable historical outputs. An unchanged value confirms reproducibility under corrected input and validity controls; it does not establish regional approval. No metric delta alone establishes that a former measurement was known to be wrong."
+  }
+}
