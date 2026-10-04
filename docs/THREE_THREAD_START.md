@@ -7,6 +7,7 @@ Repository: https://github.com/ChengshuLi/WorldAtlas. Start every new thread fro
 | Thread | Handover document | Copy-ready prompt | Responsibility |
 | --- | --- | --- | --- |
 | Issue creation | [ISSUE_CREATION_HANDOFF.md](ISSUE_CREATION_HANDOFF.md) | [ISSUE_CREATION.txt](prompts/ISSUE_CREATION.txt) | Capture/classify requests and link duplicates/dependencies in GitHub Issues |
+| Post-merge Auditor | [AUDITOR_HANDOFF.md](AUDITOR_HANDOFF.md) | [AUDITOR.txt](prompts/AUDITOR.txt) | Audit exact merged PRs; update #726's four-column table and record evidence on PRs/follow-up issues |
 | Engineering | [ENGINEERING_HANDOFF.md](ENGINEERING_HANDOFF.md) | [ENGINEERING.txt](prompts/ENGINEERING.txt) | Work through engineering issues; code, UI, infrastructure and geographic releases |
 | Geography research | [GEOGRAPHY_HANDOFF.md](GEOGRAPHY_HANDOFF.md) | [GEOGRAPHY.txt](prompts/GEOGRAPHY.txt) | Research boundaries, hierarchy and source suitability; scoped evidence/proposals only |
 | History research | [HISTORY_HANDOFF.md](HISTORY_HANDOFF.md) | [LUNA_HISTORY.txt](prompts/LUNA_HISTORY.txt) | Work through research issues; internet sources, factual content, supported imports and receipts |

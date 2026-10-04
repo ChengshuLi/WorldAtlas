@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "issue": 779,
+  "lane": "engineering",
+  "worker_id": "engineering-auditor-prompt-01a10843-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "2097230f71258464b72b52387e1428dd920392e1",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 7304,
+        "sha256": "b73e25e3113ecd3573a1a58acaca50c6d6d2d1da6c577eecdf90787363272e12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/THREE_THREAD_START.md",
+        "bytes": 8086,
+        "sha256": "3ba04da68cc4e824a30baeefb0c260cd1ea9cd76b223ff642381269574ae4702",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 22238,
+        "sha256": "da17806b86dd14cc358bd0a47aeff58cbc26ef2970683d40571f8da64d23b9f2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/ISSUE_CREATION_HANDOFF.md",
+        "bytes": 4581,
+        "sha256": "3d8bd77b769a6e2e9b2c67d7e47e42aba6205a011753281c5b46fe1327691852",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+        "bytes": 14550,
+        "sha256": "f262c464f3e67f062b653e358e69811db1a3b9d39cec7ad9250cb3efbc306501",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "bytes": 5997,
+      "sha256": "182d5bf992ba0c0f906d8cc67a4ef39f526faa5768610eb463e103356b3884ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/AUDITOR_HANDOFF.md",
+      "bytes": 6052,
+      "sha256": "368def1ccba9c41024c340aeea1533731ac33f1a3e53239025d0dba9a950b511",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/THREE_THREAD_START.md",
+      "bytes": 8291,
+      "sha256": "97bd9aa79b1eaf028f6ff9f0d7e32e16e741060a9e01f6a59b4163fb5f524bcd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/auditor-prompt-20261004/claim.json",
+      "bytes": 831,
+      "sha256": "77249d72037780999a4c8e321ceb09e7fb87ff160ac536ed60028dce286bda11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/auditor-prompt-20261004/validation.txt",
+      "bytes": 558,
+      "sha256": "172971d979d68517b0579f53e3df1dfbe77728a19ebe99b399e0ac61f8339095",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "auditor-documentation-review",
+      "kind": "code",
+      "description": "Inspect documentation acceptance and local entry-point links for the post-merge audit role; runtime and publication behavior unchanged.",
+      "software": "Git immutable file inspection, Python3 local link inspection and Node24 evidence validator",
+      "units": "documentation contracts and local links"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "git diff --check",
+    "node scripts/evidence-quality.mjs coordination/engineering/auditor-prompt-20261004/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "status": "added"
+    },
+    {
+      "path": "docs/AUDITOR_HANDOFF.md",
+      "status": "added"
+    },
+    {
+      "path": "docs/THREE_THREAD_START.md",
+      "status": "modified",
+      "original_sha256": "3ba04da68cc4e824a30baeefb0c260cd1ea9cd76b223ff642381269574ae4702"
+    },
+    {
+      "path": "coordination/engineering/auditor-prompt-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/auditor-prompt-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/auditor-prompt-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
