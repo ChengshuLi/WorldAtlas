@@ -175,10 +175,10 @@ export function isolatedDatabaseACLSQL(rendered){
  need(body==='GRANT ALL ON DATABASE neondb TO neon_superuser;','unexpected-native-database-acl-statements');
  return Buffer.from(body+'\n');
 }
-function restoreIsolatedDatabaseACL(target,dump,directory){
+export function restoreIsolatedDatabaseACL(target,dump,directory){
  const toc=native(['exec','-i',target,'pg_restore','--create','--list'],dump,180000,1024*1024).toString();
  const file=path.join(directory,'database-acl.list');fs.writeFileSync(file,isolatedDatabaseACLList(toc),{flag:'wx',mode:0o600});
- native(['cp',file,target+':/var/lib/postgresql/database-acl.list'],undefined,30000,1024*1024);
+ native(['exec','-i',target,'sh','-c','cat > /var/lib/postgresql/database-acl.list'],fs.readFileSync(file),30000,1024*1024);
  const sql=native(['exec','-i',target,'pg_restore','--create','--use-list=/var/lib/postgresql/database-acl.list','--file=-'],dump,180000,1024*1024);
  const aclSQL=isolatedDatabaseACLSQL(sql);
  native(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],aclSQL,180000,1024*1024);

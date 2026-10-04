@@ -13,6 +13,7 @@ import {exportStorageMarkerV2} from '../hosted/storage-export-v2.js';
 import {exportStorageMarkerV4} from '../hosted/storage-export-v4.js';
 import {compactMembershipCatalog} from '../hosted/membership-storage-profile.js';
 import {verifyCompactMembershipRuntime} from './verify-compact-membership-runtime.mjs';
+import {originalMembershipAPIPlan,verifyApplicationMembershipAPI} from './verify-live-membership-api-functions.mjs';
 import {forwardMigrationDefinitions} from './neon-forward-migrations.mjs';
 import {rehearseCompactMembershipStorage,rehearseCompactMembershipRollback,compactMembershipParity} from './compact-membership-storage.mjs';
 const repo='ChengshuLi/WorldAtlas',branchId='br-summer-butterfly-ar8qikk5',workflow='.github/workflows/compact-membership-production.yml';
@@ -50,13 +51,14 @@ export function validateCompactProductionWindow(window,claim,issue,{head,toolSHA
  need(window.read_only===true&&window.drain_verified===true&&window.site?.project_id==='appgprj_6abdf87277c08191bce4a22b8dfb25db'&&Number.isSafeInteger(window.site.version)&&typeof window.site.deployment_id==='string'&&window.site.deployment_id.startsWith('appgdep_'),'undrained-compact-site');
  need(Number.isSafeInteger(window.backup?.run_id)&&/^[a-f0-9]{64}$/.test(window.backup.dump_sha256??'')&&/^[a-f0-9]{64}$/.test(window.backup.source_fingerprint??'')&&window.backup.private_recipient_decryption_verified===true,'missing-verified-native-backup');
  need(Number.isSafeInteger(window.registry_deployment_id)&&window.registry_deployment_id>0&&typeof window.operation_id==='string'&&window.operation_id.length>=16,'unregistered-compact-operation');
- if(window.phase==='retire')need(window.public_api_parity_verified===true&&window.native_backup_preserved===true,'unverified-compact-retirement');
+ if(window.database_only===true)need(operation.database_only===true&&window.site_deployment_postponed===true&&window.public_api_parity_verified!==true,'unreviewed-database-only-maintenance');
+ if(window.phase==='retire')need(window.native_backup_preserved===true&&(window.public_api_parity_verified===true||window.database_only===true),'unverified-compact-retirement');
  return window;
 }
 const sizeSQL="SELECT pg_database_size(current_database())::bigint database_bytes,(SELECT coalesce(sum(pg_total_relation_size(c.oid)),0)::bigint FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind='r') relation_bytes";
 export async function runCompactMembershipProduction({env=process.env,fetcher=fetch,output='data/validation/compact-membership-production'}={}){
  need(!fs.existsSync(output),'preserve-existing-compact-output');fs.mkdirSync(output,{recursive:true,mode:0o700});
- const receipt={version:1,status:'failed',started_at_utc:new Date().toISOString(),facts_removed:0},file=path.join(output,'receipt.json');let pool,client,stage='authorize',locked=false,ownerGet,ownerEngine;
+ const receipt={version:1,status:'failed',started_at_utc:new Date().toISOString(),facts_removed:0},file=path.join(output,'receipt.json');let pool,client,appPool,appClient,stage='authorize',locked=false,ownerGet,ownerEngine;
  const secrets=[env.NEON_API_KEY,env.GITHUB_TOKEN];const save=()=>{const text=JSON.stringify(receipt,null,2)+'\n';need(!secrets.some(x=>x&&text.includes(x)),'unsafe-compact-receipt');fs.writeFileSync(file,text,{mode:0o600});};
  try{
   need(env.GITHUB_EVENT_NAME==='workflow_dispatch'&&env.GITHUB_REPOSITORY===repo&&env.GITHUB_WORKFLOW_REF===repo+'/'+workflow+'@refs/heads/main'&&/^[1-9]\d*$/.test(env.WINDOW_COMMENT_ID??'')&&env.NEON_PROJECT_ID===expectedNeonProjectId,'trusted-manual-main-required');
@@ -88,6 +90,18 @@ export async function runCompactMembershipProduction({env=process.env,fetcher=fe
   const engine={query:tx.query,transaction:async fn=>{await client.query('BEGIN');try{const value=await fn(tx);await client.query('COMMIT');return value;}catch(error){await client.query('ROLLBACK');throw error;}}};
   ownerEngine=engine;
   const db={dialect:'postgres',prepare:sql=>({all:async()=>({results:(await query(sql)).rows}),first:async()=>(await query(sql)).rows[0]??null})};
+  const appProof=async plan=>{
+   if(!appClient){
+    const appURI=(await get('/connection_uri?'+new URLSearchParams({branch_id:branchId,database_name:'neondb',role_name:'worldatlas_app',pooled:'false'}))).uri;
+    let parsed;try{parsed=new URL(appURI);}catch{throw Error('invalid-application-proof-connection');}
+    need(['postgres:','postgresql:'].includes(parsed.protocol)&&parsed.hostname===endpoints[0].host&&!parsed.port&&!parsed.hash&&decodeURIComponent(parsed.username)==='worldatlas_app'&&decodeURIComponent(parsed.pathname)==='/neondb'&&parsed.password&&parsed.searchParams.get('sslmode')==='require','unexpected-application-proof-connection');
+    secrets.push(appURI,parsed.password,decodeURIComponent(parsed.password));
+    appPool=new Pool({connectionString:appURI,max:1,connectionTimeoutMillis:15000});appPool.on('error',()=>{});appClient=await appPool.connect();
+   }
+   await appClient.query("BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY; SET LOCAL statement_timeout='60s'; SET LOCAL lock_timeout='5s'");
+   try{const proof=await verifyApplicationMembershipAPI((sql,args)=>appClient.query(sql,args),plan);await appClient.query('COMMIT');return proof;}
+   catch(error){await appClient.query('ROLLBACK');throw error;}
+  };
   receipt.before=(await query(sizeSQL)).rows[0];receipt.rows_before=(await query(nativeMembershipDigestSQL())).rows[0];save();
   if(window.phase==='apply'){
    stage='original-preflight';const marker=await exportStorageMarkerV2(db);need(marker.fingerprint===window.backup.source_fingerprint,'original-snapshot-changed-since-backup');
@@ -98,6 +112,7 @@ export async function runCompactMembershipProduction({env=process.env,fetcher=fe
    stage='provider-headroom';let logical;for(let attempt=0;attempt<12;attempt++){const branch=(await get('/branches/'+branchId)).branch;logical=branch.logical_size;need(Number.isSafeInteger(logical)&&logical>=0,'missing-provider-logical-size');if(logical+232*1024**2<=1024**3)break;await new Promise(resolve=>setTimeout(resolve,5000));}
    receipt.provider_before_copy_bytes=logical;need(logical+232*1024**2<=1024**3,'actual-provider-headroom-insufficient');save();
    stage='compact-copy-and-switch';receipt.copy=await rehearseCompactMembershipStorage(engine,{copyOnServer:true,afterSwitch:async tx=>{await verifyCompactMembershipRuntime({query:tx.query},forwardMigrationDefinitions.slice(0,2));const current=await freshReservation();validateCompactProductionWindow(window,current.claim,current.issue,{head:env.GITHUB_SHA,toolSHA:sha(fs.readFileSync(fileURLToPath(import.meta.url))),phase:'end'});}});receipt.runtime=await verifyCompactMembershipRuntime({query:tx.query},forwardMigrationDefinitions.slice(0,2));
+   if(window.database_only===true){stage='actual-application-api-functions';receipt.api_function_parity=await appProof(await originalMembershipAPIPlan(query));}
   }else if(window.phase==='rollback'){
    stage='original-rollback';const kind=(await query("SELECT relkind FROM pg_class WHERE oid='public.atlas_geographic_memberships'::regclass")).rows[0]?.relkind;
    if(kind==='v')receipt.rollback=await rehearseCompactMembershipRollback(engine);else need(kind==='r','unknown-membership-rollback-state');
@@ -105,7 +120,8 @@ export async function runCompactMembershipProduction({env=process.env,fetcher=fe
   }else{
    stage='compact-preflight';const profile=await compactMembershipCatalog(db);need(profile.base_version===2,'unsupported-live-forward-base');receipt.profile=profile.profile;
    if(window.phase==='retire'){
-    need(profile.profile==='retained-original','original-heap-not-retained');stage='full-original-parity-before-retirement';receipt.parity=await engine.transaction(async tx=>{await tx.query('LOCK TABLE atlas_geographic_memberships,worldatlas_membership_rows,worldatlas_memberships_original_v1 IN SHARE ROW EXCLUSIVE MODE');await verifyCompactMembershipRuntime({query:tx.query},forwardMigrationDefinitions.slice(0,2));const current=await freshReservation();validateCompactProductionWindow(window,current.claim,current.issue,{head:env.GITHUB_SHA,toolSHA:sha(fs.readFileSync(fileURLToPath(import.meta.url))),phase:'end'});const value=await compactMembershipParity(tx);await tx.query('DROP TABLE worldatlas_memberships_original_v1');return value;});receipt.original_heap_retired=true;
+    need(profile.profile==='retained-original','original-heap-not-retained');stage='full-original-parity-before-retirement';receipt.parity=await engine.transaction(async tx=>{await tx.query('LOCK TABLE atlas_geographic_memberships,worldatlas_membership_rows,worldatlas_memberships_original_v1 IN SHARE ROW EXCLUSIVE MODE');await verifyCompactMembershipRuntime({query:tx.query},forwardMigrationDefinitions.slice(0,2));const current=await freshReservation();validateCompactProductionWindow(window,current.claim,current.issue,{head:env.GITHUB_SHA,toolSHA:sha(fs.readFileSync(fileURLToPath(import.meta.url))),phase:'end'});const value=await compactMembershipParity(tx);let plan;if(window.database_only===true){plan=await originalMembershipAPIPlan(tx.query);receipt.api_function_parity_before_retirement=await appProof(plan);need(receipt.api_function_parity_before_retirement.status==='verified','unverified-runtime-api-retirement');}
+     await tx.query('DROP TABLE worldatlas_memberships_original_v1');if(plan)receipt.api_function_parity_after_retirement=await appProof(plan);return value;});receipt.original_heap_retired=true;
    }
    if(window.phase!=='rollback')receipt.runtime=await verifyCompactMembershipRuntime({query:tx.query},forwardMigrationDefinitions.slice(0,2));
   }
@@ -123,7 +139,8 @@ export async function runCompactMembershipProduction({env=process.env,fetcher=fe
   }
   receipt.failure_stage=stage;receipt.error_code=/^[a-z0-9-]{1,100}$/.test(error.message)?error.message:'compact-production-operation-failed';}
  finally{
-  if(client){if(locked)try{receipt.lock_released=(await client.query('SELECT pg_advisory_unlock(807245315,1) unlocked')).rows[0].unlocked===true;}catch{receipt.lock_released=false;}client.release();}if(pool)await pool.end();if(locked&&!receipt.lock_released)receipt.status='failed';receipt.completed_at_utc=new Date().toISOString();receipt.limits=['Live Site read-only/drain/API parity and private backup recipient recovery are authenticated publisher attestations; Actions verifies the successful native recovery run and source fingerprint.','Before retirement, rollback requires no new writes; after verified old heap retirement, disaster restoration uses the preserved original native backup in an isolated/provider-approved target.','Provider logical accounting may lag relation changes; failed capacity verification requires a subsequent verify, not deletion of factual rows.'];save();
+  if(appClient)appClient.release();if(appPool)await appPool.end();
+  if(client){if(locked)try{receipt.lock_released=(await client.query('SELECT pg_advisory_unlock(807245315,1) unlocked')).rows[0].unlocked===true;}catch{receipt.lock_released=false;}client.release();}if(pool)await pool.end();if(locked&&!receipt.lock_released)receipt.status='failed';receipt.completed_at_utc=new Date().toISOString();receipt.limits=['Database-only windows verify pinned original API functions through an actual readonly application login, never claim deployed HTTP delivery or restored writes.','Live Site read-only/drain/API parity and private backup recipient recovery are authenticated publisher attestations; Actions verifies the successful native recovery run and source fingerprint.','Before retirement, rollback requires no new writes; after verified old heap retirement, disaster restoration uses the preserved original native backup in an isolated/provider-approved target.','Provider logical accounting may lag relation changes; failed capacity verification requires a subsequent verify, not deletion of factual rows.'];save();
  }
  return receipt;
 }
