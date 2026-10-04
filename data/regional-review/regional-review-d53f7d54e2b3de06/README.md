@@ -27,6 +27,17 @@ Same-source OCHA edge screens find Nigeria–Benin 776.027 km with no measured o
 
 GRID3 Nigeria settlement extents v4.1 is cataloged CC BY-SA but its 2,136,305,664-byte GeoPackage was not retained or analyzed. A national settlement catalog is marked “Other” license; its rows were not used. NOAA's official GSHHG information page and documented SOEST mirror were reachable; the exact 2.3.7 ZIP response (149,157,845 bytes, last modified 2017-06-15) was streamed through SHA-256 (`8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41`) but not retained or inspected; ZIP member integrity was not checked, and the page does not name an LGPL version. Restoration command and observed HTTP results are in `source-references.json`. No physical coastline/island-completeness conclusion is made.
 
+## Bounded follow-ups opened
+
+The following new children are exact-scope, blocked geography work items with `depends_on: [476]`, their own disjoint owned roots, versioned evidence contracts and pins to the merged packet. They are blocked until this parent evidence issue closes. The four assigned follow-up rosters are recorded in `followup-issues.json` and linked to each area/province scope row in `administrative-scope.csv`.
+
+- [#761 physical land and island completeness](https://github.com/ChengshuLi/WorldAtlas/issues/761): all 227 subjects; physical/geometry review.
+- [#762 settlement extent completeness](https://github.com/ChengshuLi/WorldAtlas/issues/762): all 227 subjects; lawful settlement source review.
+- [#763 parent crosswalk adjudication](https://github.com/ChengshuLi/WorldAtlas/issues/763): exact six FCT label-variance IDs and Bassa's two Kogi/Plateau candidates.
+- [#764 OCHA point 143477 crosswalk](https://github.com/ChengshuLi/WorldAtlas/issues/764): the single assigned Kwali subject.
+
+The child issues refine evidence gaps; they do not imply that any subject is geographically missing. Their evidence contracts require manifests and fresh distinct review because they were created after evidence-policy activation.
+
 ## Reproduction and integration boundary
 
 Run `python prepare_inputs.py`, then `python build_assessment.py` from the repository root. The builder verifies source/scope pins and rewrites its generated outputs and `generated-data-accounting.json`. Run `python verify.py` for bounded structural/hash and negative-control checks. Generated table line counts and output hashes are in `generated-data-accounting.json`; source archive bytes are accounted for separately in `source-references.json`.
