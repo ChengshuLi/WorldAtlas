@@ -1,0 +1,1780 @@
+{
+  "issue": 598,
+  "method": {
+    "projection": "EPSG:5070, USA Contiguous Albers Equal Area",
+    "axis_order": "GeoJSON x=longitude, y=latitude; pyproj Transformer always_xy=True",
+    "edge_rule": "shared length of polygon boundary intersection; exact reported lengths, parent graph used >1m screen threshold",
+    "geometry_repair": "none; invalid geometries fail closed",
+    "physical_mask_screen": "Retained GSHHG 2.3.7 level-1 land records in EPSG:4326 transformed with always_xy=True to EPSG:5070; exact line-in-mask length and outside-mask length. Outside the retained land mask is not independently proven water or legal county line.",
+    "software": {
+      "pyproj": "3.7.2",
+      "shapely": "2.1.2",
+      "direct_2018_extract": "pyshp 2.3.1; deterministic sorted-key UTF-8 JSON plus gzip level 9, mtime 0"
+    },
+    "additional_2018_source": "Census TIGER/Line 2018 county subset in NAD83 (EPSG:4269), transformed to EPSG:5070 with always_xy=True; distinct comparison from the geoBoundaries 2018 derivative",
+    "scope": "exactly the issue's 17 named county GEOID pairs; parent packet's 97-county graph totals independently pinned as comparator"
+  },
+  "inputs": {
+    "data/regional-review/regional-review-2178b81fa886cfb6/sources/geoboundaries-USA-ADM2-2018.geojson.gz": {
+      "bytes": 3264221,
+      "sha256": "f42991ac50eb7d6fab5ae50de404e4d198957316aec3035f8018bdd2bca8044a"
+    },
+    "data/regional-review/regional-review-2178b81fa886cfb6/sources/tigerline-2024-western-county-neighbors.geojson.gz": {
+      "bytes": 5850604,
+      "sha256": "b4da7a5c442821e798c71945ba63f5ca279e18e1dca0355e714b495e2c294180"
+    },
+    "data/regional-review/regional-review-2178b81fa886cfb6/neighbor-screen.json": {
+      "bytes": 147883,
+      "sha256": "f7b6895f8ec82917c75b868162917a24d5b580ad06419f84cb10c9b9f9dea9b7"
+    },
+    "data/regional-review/regional-review-2178b81fa886cfb6/scope.json": {
+      "bytes": 6788,
+      "sha256": "3e451fb5630a4df94ae06a9aa1a8660ed06b335d843d7bf5d045317dbbc22982"
+    },
+    "data/regional-review/regional-review-93f8f3bee8e205be/scope.json": {
+      "bytes": 13154,
+      "sha256": "98c39e78569de0a4fc9c02f74ca5662a267ad97d5074bb1691e1cc4626c0ed57"
+    },
+    "data/regional-review/regional-supplement-western-county-water-edges-2026/issue-metadata.json": {
+      "bytes": 8770,
+      "sha256": "8e869abe475ea89d298ff811756c8862601f93a785e8d357559ca2db7d53942a"
+    },
+    "data/world-index.json": {
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    }
+  },
+  "whole_parent_graph_counts": {
+    "2018": 219,
+    "2024": 234,
+    "current": 218,
+    "scope": "97 CA/WA county predecessors; copied parent totals and guarded by assertions in this script; full edge arrays are in the pinned parent neighbor-screen.json"
+  },
+  "subject_count": 16,
+  "subjects": {
+    "53035": {
+      "location_id": "gb:USA:ADM2:52423323B24057696547970",
+      "county": "Kitsap County",
+      "statefp": "53",
+      "tiger_2024_aland_m2": 1023333489,
+      "tiger_2024_awater_m2": 442162371,
+      "pair_indices": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "53061": {
+      "location_id": "gb:USA:ADM2:52423323B25311373219770",
+      "county": "Snohomish County",
+      "statefp": "53",
+      "tiger_2024_aland_m2": 5404047763,
+      "tiger_2024_awater_m2": 282924412,
+      "pair_indices": [
+        1
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "53033": {
+      "location_id": "gb:USA:ADM2:52423323B35530413742416",
+      "county": "King County",
+      "statefp": "53",
+      "tiger_2024_aland_m2": 5479626341,
+      "tiger_2024_awater_m2": 496518946,
+      "pair_indices": [
+        2
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "53029": {
+      "location_id": "gb:USA:ADM2:52423323B81098999696635",
+      "county": "Island County",
+      "statefp": "53",
+      "tiger_2024_aland_m2": 539943912,
+      "tiger_2024_awater_m2": 799920796,
+      "pair_indices": [
+        3,
+        6,
+        16,
+        17
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "53031": {
+      "location_id": "gb:USA:ADM2:52423323B89179227732038",
+      "county": "Jefferson County",
+      "statefp": "53",
+      "tiger_2024_aland_m2": 4671633806,
+      "tiger_2024_awater_m2": 994992501,
+      "pair_indices": [
+        4,
+        7,
+        16
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "53055": {
+      "location_id": "gb:USA:ADM2:52423323B32782252789959",
+      "county": "San Juan County",
+      "statefp": "53",
+      "tiger_2024_aland_m2": 450435997,
+      "tiger_2024_awater_m2": 1157474748,
+      "pair_indices": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "53009": {
+      "location_id": "gb:USA:ADM2:52423323B36348564143669",
+      "county": "Clallam County",
+      "statefp": "53",
+      "tiger_2024_aland_m2": 4503402670,
+      "tiger_2024_awater_m2": 2409320051,
+      "pair_indices": [
+        5
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "53073": {
+      "location_id": "gb:USA:ADM2:52423323B9068998137459",
+      "county": "Whatcom County",
+      "statefp": "53",
+      "tiger_2024_aland_m2": 5459563210,
+      "tiger_2024_awater_m2": 1028031788,
+      "pair_indices": [
+        8
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "53057": {
+      "location_id": "gb:USA:ADM2:52423323B93114504552564",
+      "county": "Skagit County",
+      "statefp": "53",
+      "tiger_2024_aland_m2": 4481277787,
+      "tiger_2024_awater_m2": 483821018,
+      "pair_indices": [
+        9,
+        17
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "06001": {
+      "location_id": "gb:USA:ADM2:52423323B34460466024259",
+      "county": "Alameda County",
+      "statefp": "06",
+      "tiger_2024_aland_m2": 1910010500,
+      "tiger_2024_awater_m2": 216909647,
+      "pair_indices": [
+        10,
+        11
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "06075": {
+      "location_id": "gb:USA:ADM2:52423323B46695716253077",
+      "county": "San Francisco County",
+      "statefp": "06",
+      "tiger_2024_aland_m2": 120913549,
+      "tiger_2024_awater_m2": 479701988,
+      "pair_indices": [
+        10,
+        13,
+        14
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "06081": {
+      "location_id": "gb:USA:ADM2:52423323B75131784459442",
+      "county": "San Mateo County",
+      "statefp": "06",
+      "tiger_2024_aland_m2": 1161921071,
+      "tiger_2024_awater_m2": 757163219,
+      "pair_indices": [
+        11
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "41007": {
+      "location_id": "gb:USA:ADM2:52423323B41854352046463",
+      "county": "Clatsop County",
+      "statefp": "41",
+      "tiger_2024_aland_m2": 2145128705,
+      "tiger_2024_awater_m2": 661372778,
+      "pair_indices": [
+        12
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "53049": {
+      "location_id": "gb:USA:ADM2:52423323B94422507286019",
+      "county": "Pacific County",
+      "statefp": "53",
+      "tiger_2024_aland_m2": 2417424652,
+      "tiger_2024_awater_m2": 759293242,
+      "pair_indices": [
+        12
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "06041": {
+      "location_id": "gb:USA:ADM2:52423323B48598289352775",
+      "county": "Marin County",
+      "statefp": "06",
+      "tiger_2024_aland_m2": 1347158037,
+      "tiger_2024_awater_m2": 797809454,
+      "pair_indices": [
+        13,
+        15
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    },
+    "06013": {
+      "location_id": "gb:USA:ADM2:52423323B95554273469006",
+      "county": "Contra Costa County",
+      "statefp": "06",
+      "tiger_2024_aland_m2": 1856755871,
+      "tiger_2024_awater_m2": 225361409,
+      "pair_indices": [
+        14,
+        15
+      ],
+      "assessment": "Assigned county-equivalent subject assessed in every listed candidate edge. TIGER county-level land/water area and source contacts are recorded; these totals do not identify the material on any individual shared segment. No legal marine line or ownership conclusion is inferred."
+    }
+  },
+  "pair_count": 17,
+  "alameda_san_francisco_source_vintage_resolution": {
+    "geoBoundaries_2018_shared_m": 357.251,
+    "direct_Census_TIGER_2018_shared_m": 21322.488,
+    "Census_TIGER_2024_shared_m": 21322.488,
+    "current_Atlas_shared_m": 0.0,
+    "finding": "Direct official Census 2018 and 2024 county polygons agree at the reported shared-edge length; the 2018 geoBoundaries derivative materially differs. This resolves the apparent vintage-change lead as a source-representation discrepancy in that derivative, not evidence of a 2018-to-2024 county-line change. Current Atlas still has no contact; this does not itself justify a correction because the 2024 edge is water-dominant in the dated physical land-mask screen."
+  },
+  "pair_edge_sets_within_issue_scope": {
+    "geoBoundaries_2018": {
+      "threshold_m_strictly_greater_than": 1.0,
+      "count": 1,
+      "pairs": [
+        [
+          "06001",
+          "06075"
+        ]
+      ],
+      "canonical_json_sha256": "81201a0a9014ed3fcab140c16f20b6b745a5412fb49f985bde027ab8e1338d97"
+    },
+    "Census_TIGER_2018": {
+      "threshold_m_strictly_greater_than": 1.0,
+      "count": 17,
+      "pairs": [
+        [
+          "06001",
+          "06075"
+        ],
+        [
+          "06001",
+          "06081"
+        ],
+        [
+          "06041",
+          "06013"
+        ],
+        [
+          "06075",
+          "06013"
+        ],
+        [
+          "06075",
+          "06041"
+        ],
+        [
+          "41007",
+          "53049"
+        ],
+        [
+          "53029",
+          "53031"
+        ],
+        [
+          "53029",
+          "53057"
+        ],
+        [
+          "53035",
+          "53029"
+        ],
+        [
+          "53035",
+          "53031"
+        ],
+        [
+          "53035",
+          "53033"
+        ],
+        [
+          "53035",
+          "53061"
+        ],
+        [
+          "53055",
+          "53009"
+        ],
+        [
+          "53055",
+          "53029"
+        ],
+        [
+          "53055",
+          "53031"
+        ],
+        [
+          "53055",
+          "53057"
+        ],
+        [
+          "53055",
+          "53073"
+        ]
+      ],
+      "canonical_json_sha256": "b63419f5148eb0eb3d38b33e695cdf19f7c1bf91ceeb6ee2a91d43bb44d667e0"
+    },
+    "TIGER_2024": {
+      "threshold_m_strictly_greater_than": 1.0,
+      "count": 17,
+      "pairs": [
+        [
+          "06001",
+          "06075"
+        ],
+        [
+          "06001",
+          "06081"
+        ],
+        [
+          "06041",
+          "06013"
+        ],
+        [
+          "06075",
+          "06013"
+        ],
+        [
+          "06075",
+          "06041"
+        ],
+        [
+          "41007",
+          "53049"
+        ],
+        [
+          "53029",
+          "53031"
+        ],
+        [
+          "53029",
+          "53057"
+        ],
+        [
+          "53035",
+          "53029"
+        ],
+        [
+          "53035",
+          "53031"
+        ],
+        [
+          "53035",
+          "53033"
+        ],
+        [
+          "53035",
+          "53061"
+        ],
+        [
+          "53055",
+          "53009"
+        ],
+        [
+          "53055",
+          "53029"
+        ],
+        [
+          "53055",
+          "53031"
+        ],
+        [
+          "53055",
+          "53057"
+        ],
+        [
+          "53055",
+          "53073"
+        ]
+      ],
+      "canonical_json_sha256": "b63419f5148eb0eb3d38b33e695cdf19f7c1bf91ceeb6ee2a91d43bb44d667e0"
+    },
+    "current_Atlas": {
+      "threshold_m_strictly_greater_than": 1.0,
+      "count": 0,
+      "pairs": [],
+      "canonical_json_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "pairs": [
+    {
+      "geoids": [
+        "53035",
+        "53061"
+      ],
+      "counties": [
+        "Kitsap County",
+        "Snohomish County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B24057696547970",
+        "gb:USA:ADM2:52423323B25311373219770"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 5813.591
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 5749.467,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 5749.467,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 5813.529
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 1023333489,
+          "AWATER": 442162371,
+          "GEOID": "53035",
+          "NAMELSAD": "Kitsap County"
+        },
+        {
+          "ALAND": 5404047763,
+          "AWATER": 282924412,
+          "GEOID": "53061",
+          "NAMELSAD": "Snohomish County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 5749.467,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 5749.467,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 5749.467,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 5749.467,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "53035",
+        "53033"
+      ],
+      "counties": [
+        "Kitsap County",
+        "King County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B24057696547970",
+        "gb:USA:ADM2:52423323B35530413742416"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 1348.065
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 44698.2,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 44698.2,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 1349.742
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 1023333489,
+          "AWATER": 442162371,
+          "GEOID": "53035",
+          "NAMELSAD": "Kitsap County"
+        },
+        {
+          "ALAND": 5479626341,
+          "AWATER": 496518946,
+          "GEOID": "53033",
+          "NAMELSAD": "King County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 44698.2,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 44698.2,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 44698.2,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 44698.2,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "53035",
+        "53029"
+      ],
+      "counties": [
+        "Kitsap County",
+        "Island County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B24057696547970",
+        "gb:USA:ADM2:52423323B81098999696635"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 5036.356
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 22124.755,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 22124.755,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 5311.451
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 1023333489,
+          "AWATER": 442162371,
+          "GEOID": "53035",
+          "NAMELSAD": "Kitsap County"
+        },
+        {
+          "ALAND": 539943912,
+          "AWATER": 799920796,
+          "GEOID": "53029",
+          "NAMELSAD": "Island County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 22124.755,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 22124.755,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 22124.755,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 22124.755,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "53035",
+        "53031"
+      ],
+      "counties": [
+        "Kitsap County",
+        "Jefferson County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B24057696547970",
+        "gb:USA:ADM2:52423323B89179227732038"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 1678.302
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 56287.413,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 56287.413,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 1675.42
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 1023333489,
+          "AWATER": 442162371,
+          "GEOID": "53035",
+          "NAMELSAD": "Kitsap County"
+        },
+        {
+          "ALAND": 4671633806,
+          "AWATER": 994992501,
+          "GEOID": "53031",
+          "NAMELSAD": "Jefferson County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 56287.413,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 56287.413,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 56287.413,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 56287.413,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "53055",
+        "53009"
+      ],
+      "counties": [
+        "San Juan County",
+        "Clallam County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B32782252789959",
+        "gb:USA:ADM2:52423323B36348564143669"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 31930.02
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 23277.724,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 23277.724,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 33722.496
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 450435997,
+          "AWATER": 1157474748,
+          "GEOID": "53055",
+          "NAMELSAD": "San Juan County"
+        },
+        {
+          "ALAND": 4503402670,
+          "AWATER": 2409320051,
+          "GEOID": "53009",
+          "NAMELSAD": "Clallam County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 23277.724,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 23277.724,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 23277.724,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 23277.724,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "53055",
+        "53029"
+      ],
+      "counties": [
+        "San Juan County",
+        "Island County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B32782252789959",
+        "gb:USA:ADM2:52423323B81098999696635"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 10806.347
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 12175.357,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 12175.357,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 10873.694
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 450435997,
+          "AWATER": 1157474748,
+          "GEOID": "53055",
+          "NAMELSAD": "San Juan County"
+        },
+        {
+          "ALAND": 539943912,
+          "AWATER": 799920796,
+          "GEOID": "53029",
+          "NAMELSAD": "Island County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 12175.357,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 12175.357,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 12175.357,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 12175.357,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "53055",
+        "53031"
+      ],
+      "counties": [
+        "San Juan County",
+        "Jefferson County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B32782252789959",
+        "gb:USA:ADM2:52423323B89179227732038"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 30844.407
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 7059.963,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 7059.963,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 31030.663
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 450435997,
+          "AWATER": 1157474748,
+          "GEOID": "53055",
+          "NAMELSAD": "San Juan County"
+        },
+        {
+          "ALAND": 4671633806,
+          "AWATER": 994992501,
+          "GEOID": "53031",
+          "NAMELSAD": "Jefferson County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 7059.963,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 7059.963,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 7059.963,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 7059.963,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "53055",
+        "53073"
+      ],
+      "counties": [
+        "San Juan County",
+        "Whatcom County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B32782252789959",
+        "gb:USA:ADM2:52423323B9068998137459"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 5563.37
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 32872.987,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 32873.032,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 5573.219
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 450435997,
+          "AWATER": 1157474748,
+          "GEOID": "53055",
+          "NAMELSAD": "San Juan County"
+        },
+        {
+          "ALAND": 5459563210,
+          "AWATER": 1028031788,
+          "GEOID": "53073",
+          "NAMELSAD": "Whatcom County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 32872.987,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 32872.987,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 32873.032,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 32873.032,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "53055",
+        "53057"
+      ],
+      "counties": [
+        "San Juan County",
+        "Skagit County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B32782252789959",
+        "gb:USA:ADM2:52423323B93114504552564"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 2678.351
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 28530.618,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 28530.618,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 2878.858
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 450435997,
+          "AWATER": 1157474748,
+          "GEOID": "53055",
+          "NAMELSAD": "San Juan County"
+        },
+        {
+          "ALAND": 4481277787,
+          "AWATER": 483821018,
+          "GEOID": "53057",
+          "NAMELSAD": "Skagit County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 28530.618,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 28530.618,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 28530.618,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 28530.618,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "06001",
+        "06075"
+      ],
+      "counties": [
+        "Alameda County",
+        "San Francisco County"
+      ],
+      "states": [
+        "06",
+        "06"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B34460466024259",
+        "gb:USA:ADM2:52423323B46695716253077"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 357.251,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 21322.488,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 21322.488,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 4442.292
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 1910010500,
+          "AWATER": 216909647,
+          "GEOID": "06001",
+          "NAMELSAD": "Alameda County"
+        },
+        {
+          "ALAND": 120913549,
+          "AWATER": 479701988,
+          "GEOID": "06075",
+          "NAMELSAD": "San Francisco County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 357.251,
+          "within_retained_GSHHG_level1_land_m": 357.251,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": 1.0
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 21322.488,
+          "within_retained_GSHHG_level1_land_m": 1101.547,
+          "outside_retained_GSHHG_level1_land_mask_m": 20220.94,
+          "mask_coverage_fraction": 0.051661
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 21322.488,
+          "within_retained_GSHHG_level1_land_m": 1101.547,
+          "outside_retained_GSHHG_level1_land_mask_m": 20220.94,
+          "mask_coverage_fraction": 0.051661
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "06001",
+        "06081"
+      ],
+      "counties": [
+        "Alameda County",
+        "San Mateo County"
+      ],
+      "states": [
+        "06",
+        "06"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B34460466024259",
+        "gb:USA:ADM2:52423323B75131784459442"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 1910.927
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 31311.613,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 31311.613,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 1910.561
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 1910010500,
+          "AWATER": 216909647,
+          "GEOID": "06001",
+          "NAMELSAD": "Alameda County"
+        },
+        {
+          "ALAND": 1161921071,
+          "AWATER": 757163219,
+          "GEOID": "06081",
+          "NAMELSAD": "San Mateo County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 31311.613,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 31311.613,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 31311.613,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 31311.613,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "41007",
+        "53049"
+      ],
+      "counties": [
+        "Clatsop County",
+        "Pacific County"
+      ],
+      "states": [
+        "41",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B41854352046463",
+        "gb:USA:ADM2:52423323B94422507286019"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 5075.532
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 41324.968,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 41324.968,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 5372.349
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 2145128705,
+          "AWATER": 661372778,
+          "GEOID": "41007",
+          "NAMELSAD": "Clatsop County"
+        },
+        {
+          "ALAND": 2417424652,
+          "AWATER": 759293242,
+          "GEOID": "53049",
+          "NAMELSAD": "Pacific County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 41324.968,
+          "within_retained_GSHHG_level1_land_m": 560.533,
+          "outside_retained_GSHHG_level1_land_mask_m": 40764.435,
+          "mask_coverage_fraction": 0.013564
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 41324.968,
+          "within_retained_GSHHG_level1_land_m": 560.533,
+          "outside_retained_GSHHG_level1_land_mask_m": 40764.435,
+          "mask_coverage_fraction": 0.013564
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "06075",
+        "06041"
+      ],
+      "counties": [
+        "San Francisco County",
+        "Marin County"
+      ],
+      "states": [
+        "06",
+        "06"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B46695716253077",
+        "gb:USA:ADM2:52423323B48598289352775"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 1639.001
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 29351.783,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 29798.562,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 1843.211
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 120913549,
+          "AWATER": 479701988,
+          "GEOID": "06075",
+          "NAMELSAD": "San Francisco County"
+        },
+        {
+          "ALAND": 1347158037,
+          "AWATER": 797809454,
+          "GEOID": "06041",
+          "NAMELSAD": "Marin County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 29351.783,
+          "within_retained_GSHHG_level1_land_m": 3279.082,
+          "outside_retained_GSHHG_level1_land_mask_m": 26072.701,
+          "mask_coverage_fraction": 0.111717
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 29798.562,
+          "within_retained_GSHHG_level1_land_m": 3589.318,
+          "outside_retained_GSHHG_level1_land_mask_m": 26209.243,
+          "mask_coverage_fraction": 0.120453
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "06075",
+        "06013"
+      ],
+      "counties": [
+        "San Francisco County",
+        "Contra Costa County"
+      ],
+      "states": [
+        "06",
+        "06"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B46695716253077",
+        "gb:USA:ADM2:52423323B95554273469006"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 8043.814
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 7256.394,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 7256.394,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 11078.431
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 120913549,
+          "AWATER": 479701988,
+          "GEOID": "06075",
+          "NAMELSAD": "San Francisco County"
+        },
+        {
+          "ALAND": 1856755871,
+          "AWATER": 225361409,
+          "GEOID": "06013",
+          "NAMELSAD": "Contra Costa County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 7256.394,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 7256.394,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 7256.394,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 7256.394,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "06041",
+        "06013"
+      ],
+      "counties": [
+        "Marin County",
+        "Contra Costa County"
+      ],
+      "states": [
+        "06",
+        "06"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B48598289352775",
+        "gb:USA:ADM2:52423323B95554273469006"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 2690.426
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 18885.583,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 18885.583,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 2897.69
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 1347158037,
+          "AWATER": 797809454,
+          "GEOID": "06041",
+          "NAMELSAD": "Marin County"
+        },
+        {
+          "ALAND": 1856755871,
+          "AWATER": 225361409,
+          "GEOID": "06013",
+          "NAMELSAD": "Contra Costa County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 18885.583,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 18885.583,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 18885.583,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 18885.583,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "53029",
+        "53031"
+      ],
+      "counties": [
+        "Island County",
+        "Jefferson County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B81098999696635",
+        "gb:USA:ADM2:52423323B89179227732038"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 4634.244
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 52481.241,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 52481.241,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 4634.153
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 539943912,
+          "AWATER": 799920796,
+          "GEOID": "53029",
+          "NAMELSAD": "Island County"
+        },
+        {
+          "ALAND": 4671633806,
+          "AWATER": 994992501,
+          "GEOID": "53031",
+          "NAMELSAD": "Jefferson County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 52481.241,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 52481.241,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 52481.241,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 52481.241,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    },
+    {
+      "geoids": [
+        "53029",
+        "53057"
+      ],
+      "counties": [
+        "Island County",
+        "Skagit County"
+      ],
+      "states": [
+        "53",
+        "53"
+      ],
+      "member_location_ids": [
+        "gb:USA:ADM2:52423323B81098999696635",
+        "gb:USA:ADM2:52423323B93114504552564"
+      ],
+      "2018_geoBoundaries": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 776.368
+      },
+      "2018_official_Census_TIGER_Line": {
+        "shared_boundary_m": 29630.451,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "2024_TIGER_Line": {
+        "shared_boundary_m": 29630.451,
+        "overlap_km2": 0.0,
+        "gap_m": 0.0
+      },
+      "current_Atlas": {
+        "shared_boundary_m": 0.0,
+        "overlap_km2": 0.0,
+        "gap_m": 771.011
+      },
+      "2024_attributes": [
+        {
+          "ALAND": 539943912,
+          "AWATER": 799920796,
+          "GEOID": "53029",
+          "NAMELSAD": "Island County"
+        },
+        {
+          "ALAND": 4481277787,
+          "AWATER": 483821018,
+          "GEOID": "53057",
+          "NAMELSAD": "Skagit County"
+        }
+      ],
+      "physical_land_mask_screen": {
+        "geoBoundaries_2018": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        },
+        "official_Census_TIGER_2018": {
+          "shared_boundary_m": 29630.451,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 29630.451,
+          "mask_coverage_fraction": 0.0
+        },
+        "Census_TIGER_2024": {
+          "shared_boundary_m": 29630.451,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 29630.451,
+          "mask_coverage_fraction": 0.0
+        },
+        "current_Atlas": {
+          "shared_boundary_m": 0.0,
+          "within_retained_GSHHG_level1_land_m": 0.0,
+          "outside_retained_GSHHG_level1_land_mask_m": 0.0,
+          "mask_coverage_fraction": null
+        }
+      },
+      "interpretation": "Geometry contact/gap is a screen. ALAND/AWATER are county totals, not edge-specific land/water attribution or a legal marine-boundary determination."
+    }
+  ],
+  "global_limits": [
+    "This reproduction establishes geometric contacts/gaps and the official Census county ALAND/AWATER totals only.",
+    "County totals cannot establish that a particular shared segment lies in water.",
+    "GSHHG 2.3.7 is a dated physical coastline screen only; its retained 79 level-1 candidate records do not constitute a complete hydrographic, inland-water or official legal marine-boundary source. Outside-mask length can include source-scale mismatch, unrepresented land, inland water or true marine water.",
+    "Neither a geometric contact nor a source county water polygon is proof of a legally controlling county marine boundary.",
+    "No federal county-by-county legal marine-boundary line source was identified in the retained parent packet; pair-level land/water attribution is unresolved pending authoritative coastal/county line evidence.",
+    "Clatsop\u2013Pacific is cross-state and requires the #486/#487 owners and regional integrator to assess the shared issue; no independent boundary correction is proposed."
+  ]
+}

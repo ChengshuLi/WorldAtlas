@@ -1,0 +1,18 @@
+# Dated progress checkpoint
+
+## 2026-10-04 09:00 UTC
+
+- Reservation: active on issue #598 for worker `codex-20261004-western-water-598-f14e08ad-a40d-4e54-a1b2-ddb8c81a3aac`, claim `342a4c8c-8c72-4eeb-a5d1-9c4f2f8502b9`, branch `geography/western-county-water-edges-20261004-598`. The GitHub issue API confirms accepted claim; lease expires 2026-10-05 08:39:51 UTC.
+- Scope assessed: 16/16 assigned county-equivalent locations; all 17/17 assigned pair leads. Each location has a source crosswalk and pair-indexed assessment in `findings.json`.
+- Reproduction: all 17 issue-stated pair lengths/gaps reproduce against #487's geoBoundaries 2018, official Census TIGER 2024 and pinned current Atlas geometry. Within these 17 leads, contact counts are 1 / 17 / 0, respectively. The separate official Census TIGER 2018 set has 17 contacts.
+- Alameda–San Francisco: the 2018 Census county source and 2024 TIGER both have a 21,322.488 m contact. The geoBoundaries 2018 derivative has 357.251 m. This resolves the apparent vintage-change lead as a derivative-representation discrepancy; it does not justify changing the current footprint because the administrative contact is mostly outside the retained GSHHG physical land mask.
+- Physical screen: all 17 TIGER 2024 contacts were intersected with the retained 79-record GSHHG level-1 land candidate subset. Fourteen lie fully outside that land mask; three have a small land portion and remain water-dominant. This is physical screening evidence, not proof of legal county marine lines. GSHHG subset completeness and source-scale limits are recorded in `findings.json` and `sources.json`.
+- Clatsop–Pacific: cross-state source edge is 41,324.968 m; 560.533 m intersects the retained physical land mask and 40,764.435 m is outside it. This remains a coordinated joint boundary review with issues #486, #487 and regional integrator #484; no ownership or boundary correction is proposed.
+- Checks already run: two full reproductions produced identical `findings.json` SHA-256 `d44f3b1c31de203c68f11d1adb69d617ecf4fab51e71f613464e58dae46763b4`; positive issue-value/input/source controls, dropped-pair and swapped-axis negative controls pass; repository scientific geometry controls pass (8 geography checks plus the ellipsoidal area/convergence suite). Exact issue metadata/scope and lane check passes. Coordination requests are posted on #486, #487 and #484. Local `gh` still reports HTTP 401 although the connected GitHub issue API works; the reservation and progress are recorded on #598. Continue with lane checks, PR preparation, exact-head review, serialized queue and verified merge; record any remaining authentication blocker precisely.
+
+## Next actions
+
+1. Finish README source-method interpretation and review all 16 subject rows / 17 metrics.
+2. Run deterministic two-run output hash comparison, source hash and issue metadata scope checks, `git diff --check`, lane/scope validation against actual #598 metadata and meaningful positive/negative controls.
+3. Coordination requests for Clatsop–Pacific are posted on #486, #487 and regional integrator #484. Preserve the legal line unresolved until owner review and controlling sources are available.
+4. Commit only this owned packet, publish a focused PR with exactly one issue reference, obtain an independent exact-head evidence review, then use the serialized squash queue and verify merge before releasing the reservation.
