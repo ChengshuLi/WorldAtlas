@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "issue": 600,
+  "parent_packet_issue": 487,
+  "status": "narrative-reconciled",
+  "baseline_commit": "c7dd7ac0bbccd1ec1a3c819dd827bab2e2b9b3b7",
+  "current_geographic_baseline": {
+    "region_release_id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+    "region_release_version": 5,
+    "region_hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "region_footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+    "current_main_world_index_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+    "current_main_hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "assigned_subjects_compared_to_v5": 100,
+    "assigned_features_with_geometry_or_property_difference_from_v5": 0,
+    "current_main_footprints_recomputed": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+  },
+  "preserved_original_files": [
+    {
+      "path": "data/regional-review/regional-review-2178b81fa886cfb6/README.md",
+      "bytes": 10018,
+      "sha256": "1f2a33a035e43256184b82dc68a262cccc046e3a279c39171a57500a4a593c5a"
+    },
+    {
+      "path": "data/regional-review/regional-review-2178b81fa886cfb6/assessment.json",
+      "bytes": 1211599,
+      "sha256": "2820e95a1cc2ecd4e9bbdcebc8fc82fb25800449c65384f8ec67d5a569a8c1d7"
+    },
+    {
+      "path": "data/regional-review/regional-review-2178b81fa886cfb6/build_assessment.py",
+      "bytes": 28139,
+      "sha256": "8938f05f424e6fbc2be2372a6396873281abc6568c98ac0a98db4c31459a6fe1"
+    },
+    {
+      "path": "data/regional-review/regional-review-2178b81fa886cfb6/verify.py",
+      "bytes": 6493,
+      "sha256": "cd0aec16a6c5802660095f1b762da73bba9c3085c98d981b2535c6f1f0fab67e"
+    },
+    {
+      "path": "data/regional-review/regional-review-2178b81fa886cfb6/scope.json",
+      "bytes": 6788,
+      "sha256": "3e451fb5630a4df94ae06a9aa1a8660ed06b335d843d7bf5d045317dbbc22982"
+    },
+    {
+      "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources.json",
+      "bytes": 14155,
+      "sha256": "c9defe3ee1e72d01955b62e85072cbe181995e323b0469ed836522a1c15e951e"
+    }
+  ],
+  "prior_narrative": {
+    "readme_statement": "Washington 2018 ADM2 county union intersection approximately 99.96%; both current state cohort unions approximately 99.95%.",
+    "problem": "The rounded Washington percentages do not match the committed generated assessment, even though source ADM1 area, union areas, symmetric differences and exact percentages are present there."
+  },
+  "reproduced_metrics": {
+    "projection": "EPSG:5070 (NAD83 / Conus Albers), used as an equal-area screening projection by the existing generator",
+    "formula": "intersection_area = (union_area + 2018_ADM1_area - symmetric_difference_area) / 2; percentage = round(intersection_area / 2018_ADM1_area * 100, 6)",
+    "rows": [
+      {
+        "state": "California",
+        "cohort": "2018 ADM2 county union",
+        "intersection_pct": 99.970514,
+        "denominator_2018_adm1_km2": 409880.556195,
+        "union_area_km2": 409873.616938,
+        "symmetric_difference_km2": 234.771407
+      },
+      {
+        "state": "California",
+        "cohort": "current parent cohort union",
+        "intersection_pct": 99.95361,
+        "denominator_2018_adm1_km2": 409880.556195,
+        "union_area_km2": 409877.34826,
+        "symmetric_difference_km2": 377.076883
+      },
+      {
+        "state": "Washington",
+        "cohort": "2018 ADM2 county union",
+        "intersection_pct": 99.929218,
+        "denominator_2018_adm1_km2": 175441.740964,
+        "union_area_km2": 175740.43401,
+        "symmetric_difference_km2": 547.055096
+      },
+      {
+        "state": "Washington",
+        "cohort": "current parent cohort union",
+        "intersection_pct": 99.873452,
+        "denominator_2018_adm1_km2": 175441.740964,
+        "union_area_km2": 175702.062926,
+        "symmetric_difference_km2": 704.357394
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-USA-ADM1-2018",
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/USA/ADM1/geoBoundaries-USA-ADM1.geojson",
+      "publisher_as_declared": "U.S. Census Bureau MAF/TIGER via geoBoundaries",
+      "vintage": "2018; metadata updated 2023-01-19; geoBoundaries build 2023-12-12",
+      "license": "Public domain per source metadata; underlying U.S. Census federal geographic data",
+      "retained_compressed_sha256": "0161ad23641a5f292e65b592a5c2a6823d6c47f32e1688e0cd96513e990c7416",
+      "retained_uncompressed_sha256": "d4f7426c7ba3c49b958b7219fc1503409bab2948efe5917998101d921d77bcf1"
+    },
+    {
+      "id": "geoboundaries-USA-ADM2-2018",
+      "canonical_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "publisher_as_declared": "U.S. Census Bureau MAF/TIGER via geoBoundaries",
+      "vintage": "2018; metadata updated 2023-01-19; geoBoundaries build 2023-12-12",
+      "license": "Public domain per source metadata; underlying Census federal geographic data",
+      "retained_compressed_sha256": "f42991ac50eb7d6fab5ae50de404e4d198957316aec3035f8018bdd2bca8044a",
+      "retained_uncompressed_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+    },
+    {
+      "id": "tigerline-USA-COUNTY-2024",
+      "canonical_url": "https://www2.census.gov/geo/tiger/TIGER2024/COUNTY/tl_2024_us_county.zip",
+      "publisher": "U.S. Census Bureau",
+      "vintage": "2024 county layer, DBF update 2024-09-16; archive Last-Modified 2025-06-27",
+      "license": "U.S. federal Census geographic data; public domain",
+      "national_archive_bytes": 83913260,
+      "national_archive_sha256": "04e668d3502757c837c13444730547cd967f28a2c49aeffb873d1792ab2cb97b",
+      "full_archive_retained": false,
+      "retained_selected_features_compressed_sha256": "b4da7a5c442821e798c71945ba63f5ca279e18e1dca0355e714b495e2c294180",
+      "restoration": "Download the canonical national archive, verify its byte size and SHA-256, run the OGR county filter documented in sources.json, then verify the selected subset hash."
+    }
+  ],
+  "reproduction": {
+    "command": "/usr/bin/python3 data/regional-review/regional-review-2178b81fa886cfb6/build_assessment.py",
+    "run_count": 2,
+    "run_one_assessment_sha256": "51e5ee249c21e3b1415455e1dd31316878df15f3acd4bd6a658531120f483318",
+    "run_two_assessment_sha256": "51e5ee249c21e3b1415455e1dd31316878df15f3acd4bd6a658531120f483318",
+    "run_one_derived_portion_audit_sha256": "12a823f70d0a9831df971c69ce3cced5491db0ad0a44f84aebb4d2d882e7651c",
+    "run_two_derived_portion_audit_sha256": "12a823f70d0a9831df971c69ce3cced5491db0a44f84aebb4d2d882e7651c",
+    "semantic_equal_to_preserved_assessment": true,
+    "serialization_note": "Current assessment metadata was semantically identical to the preserved file; byte order differed only in JSON key ordering inside unchanged parent semantic_review objects because the current hierarchy source serializes those keys differently. The preserved assessment bytes are not rewritten by this correction."
+  },
+  "limits": [
+    "The ratios are projected overlay diagnostics only; they do not prove water jurisdiction, shore/island completeness, federal or tribal parcel status, settlement completeness, or shared-boundary correctness.",
+    "No source bytes, assessment findings, subject IDs, shared geometry, parent membership, hierarchy, release pin, provisional neighbor finding or unresolved source limitation is changed.",
+    "Current parent cohorts are derived from their member locations. No regional approval or import authority follows."
+  ]
+}

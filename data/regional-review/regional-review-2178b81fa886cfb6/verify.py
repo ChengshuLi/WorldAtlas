@@ -2,6 +2,7 @@
 """Fail-closed integrity and scope checks for the #487 evidence packet."""
 import gzip, hashlib, json
 from pathlib import Path
+from verify_parent_overlay import check_narrative, check_correction_record, check_current_baseline
 
 ROOT = Path(__file__).resolve().parent
 
@@ -25,6 +26,11 @@ def verify_record(record, path_key, bytes_key, sha_key):
 def main():
     scope = json.loads((ROOT/'scope.json').read_text())
     packet = json.loads((ROOT/'assessment.json').read_text())
+    correction = json.loads((ROOT/'parent-overlay-correction.json').read_text(encoding='utf-8'))
+    check_correction_record(packet, scope, correction)
+    check_current_baseline(scope, correction)
+    readme = (ROOT/'README.md').read_text(encoding='utf-8')
+    check_narrative(packet, readme)
     assigned = scope['member_location_ids']
     rows = packet['locations']
     row_ids = [r['location_id'] for r in rows]

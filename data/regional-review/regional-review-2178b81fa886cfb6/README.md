@@ -8,7 +8,18 @@ This review follows bottom-up geography: the assigned location memberships are t
 
 The pinned geoBoundaries USA ADM1 (2018) layer has 56 source features; the ADM2 layer has 3,233. State names California and Washington match the current `framework:province` parents. Their parent chains and complete state cohorts are recorded in every row and the `complete_state_parent_cohorts` section of `assessment.json`. California has 58 ADM2 county-equivalents and 58 2024 Census counterparts; its 61 assigned locations include four San Bernardino physical fragments. Washington has 39 source counties, 39 current direct rows and 39 2024 Census counterparts. In total, all 97 source counties in the two complete state cohorts are accounted for by 96 direct current county rows plus four physical pieces of the one San Bernardino predecessor; the source roster audit finds zero unaccounted counties.
 
-The 2018 county union and state ADM1 comparison, plus current parent union metrics, are provided per state in the assessment. The 2018 ADM2 unions intersect the state ADM1 source at 99.97% for California and 99.96% for Washington (reported exact areas and symmetric differences are in the JSON). Current cohort unions intersect at 99.95% in both. These are overlay diagnostics, not proof of water jurisdiction, detached-island completeness, federal or tribal parcel status, nor a basis for changing shared footprints. Parent roll-ups follow their member locations.
+The assessment reports the 2018 county-union and current parent-cohort overlays against each state's 2018 ADM1 source area. The table gives the exact recorded intersection percentage, the 2018 ADM1 denominator, union area and symmetric difference in km². It corrects the earlier rounded Washington narrative, which did not match the generated assessment:
+
+<!-- parent-overlay-metrics:begin -->
+| State | Compared union | Intersection / 2018 ADM1 | 2018 ADM1 denominator (km²) | Union area (km²) | Symmetric difference (km²) |
+| --- | --- | ---: | ---: | ---: | ---: |
+| California | 2018 ADM2 county union | 99.970514% | 409880.556195 | 409873.616938 | 234.771407 |
+| California | current parent cohort union | 99.953610% | 409880.556195 | 409877.348260 | 377.076883 |
+| Washington | 2018 ADM2 county union | 99.929218% | 175441.740964 | 175740.434010 | 547.055096 |
+| Washington | current parent cohort union | 99.873452% | 175441.740964 | 175702.062926 | 704.357394 |
+<!-- parent-overlay-metrics:end -->
+
+The percentages are intersection areas divided by the corresponding 2018 ADM1 source area, as checked from the recorded union areas and symmetric differences. These are overlay diagnostics, not proof of water jurisdiction, detached-island completeness, federal or tribal parcel status, nor a basis for changing shared footprints. Parent roll-ups follow their member locations.
 
 The row-by-row name/shape crosswalk uses the 2018 source shape IDs and exact source names. Census TIGER/Line 2024 provides an independent current-name/GEOID crosswalk (2024 County layer DBF update 2024-09-16). Every assigned source county has one 2024 state/name/GEOID counterpart. Full Census ALAND/AWATER values are retained in the assessment; the current released geometry often follows older land-focused extents and not the 2024 full county-water extents. Water-area inclusion must not be read as a sovereignty conclusion.
 
@@ -43,7 +54,8 @@ python3 data/regional-review/regional-review-2178b81fa886cfb6/screen_gshhg.py /p
 /usr/bin/python3 data/regional-review/regional-review-2178b81fa886cfb6/build_assessment.py
 /usr/bin/python3 data/regional-review/regional-review-2178b81fa886cfb6/audit_neighbors.py
 /usr/bin/python3 data/regional-review/regional-review-2178b81fa886cfb6/audit_canada_neighbors.py
+python3 data/regional-review/regional-review-2178b81fa886cfb6/verify_parent_overlay.py
 python3 data/regional-review/regional-review-2178b81fa886cfb6/verify.py
 ```
 
-The scripts use temporary projected geometry for distance, area and adjacency measurements; original source and Atlas material remains intact. `verify.py` checks scope completeness, row-level accounting, source hashes and core findings. Read `limitations` in the assessment and individual neighbor records before using any derived metric as proposed correction evidence.
+The scripts use temporary projected geometry for distance, area and adjacency measurements; original source and Atlas material remains intact. The focused parent-overlay check binds all four state/cohort rows to the generated assessment, confirms the recorded release/current baseline and rejects a changed metric. `verify.py` runs those checks alongside scope completeness, row-level accounting, source hashes and core findings. `parent-overlay-correction.json` records the original narrative/assessment byte hashes, the two-run current-baseline reproduction, corrected values and source pins. Read `limitations` in the assessment and individual neighbor records before using any derived metric as proposed correction evidence.
