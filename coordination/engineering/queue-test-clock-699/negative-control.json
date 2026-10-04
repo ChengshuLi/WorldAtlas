@@ -1,0 +1,9 @@
+{
+  "method_id": "local-wall-clock",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "scope": "Temporarily asserted 4999ms instead of 5000ms; recorded production poll delay caused exactly one test failure. Candidate bytes restored afterward.",
+  "exit_status": 1,
+  "failed_tests": 1,
+  "evidence_path": "coordination/engineering/queue-test-clock-699/negative-control.log"
+}

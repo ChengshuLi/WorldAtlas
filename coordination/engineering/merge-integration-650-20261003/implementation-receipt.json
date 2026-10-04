@@ -1,0 +1,24 @@
+{
+  "recorded_at": "2026-10-03T21:53:47.705324+00:00",
+  "issue": 650,
+  "base": "5f8bc5893fb055ed89ce84965ae148cc99e95591",
+  "implementation": "Serialized preflight, isolated exact-candidate test job, fresh trusted guarded merge; stable authored head and reviewed scope.",
+  "focused_tests": {
+    "passed": 82,
+    "failed": 0,
+    "command": "node --test test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/trusted-workflow-checkouts.test.mjs"
+  },
+  "platform": {
+    "observed_repo_owner_type": "User",
+    "private": true,
+    "native_queue_documentation": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue",
+    "native_queue_eligibility": "Organization-owned public repositories or qualifying Enterprise Cloud private organization repositories; this repo is not organization-owned."
+  },
+  "limits": [
+    "Local full-suite attempt is not passing: omitted inputs in sparse checkout; full expansion failed with no disk space. Retained log is an unavailable-check record, not evidence of candidate correctness. Hosted full-checkout regression must pass.",
+    "No production mutation, source/factual import, Site deployment or credentials operation.",
+    "All main writers must use the serialized workflow; GitHub merge API has head guard but no atomic base guard. Out-of-band writers require queue drain/coordination.",
+    "Current-base metrics and changed original inputs require fresh evidence and exact-head review; old current measurements are not silently promoted.",
+    "Actual activation proof pending until a subsequent owned PR uses the newly merged workflow. This implementation PR does not close650."
+  ]
+}

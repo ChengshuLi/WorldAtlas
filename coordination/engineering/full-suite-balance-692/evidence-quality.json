@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "issue": 692,
+  "lane": "engineering",
+  "worker_id": "moderator-full-suite-692-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "15cb52b8e6fd26164e306bde1128e66317a0149e",
+    "files": [
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 3041,
+        "sha256": "9cf4f99b1cd486a429bab298bcd7978072d6350471ee299a99befa545ca77655",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 2235,
+        "sha256": "623d2460ee854b58ab5cdab9f07495bf3c3753431471bc91927f3e1803855588",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 16213,
+        "sha256": "6302ae8acf4973b8ac61f51dec0a80d18218e1583943d40e3425f2a4b5d543d6",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 3345,
+      "sha256": "8a82efac1ecfe82605061a779c6420bb83e30a3bf0a441757f8fb42d64995d56",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "bytes": 2279,
+      "sha256": "152d36ba548b95c00a1dc57d1e1c90822ce29d82de4297604f54b7de2a4bbfac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 16389,
+      "sha256": "d1ab05d04493573a58a2ccbd9033529196456e236e4b872bcbfcea8b889edd00",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/full-regression-shards.test.mjs",
+      "bytes": 1914,
+      "sha256": "73724bb167c71ef206d2d8f6725e1732eab69172757ff1e297d9348b5baf9221",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-692/claim.json",
+      "bytes": 819,
+      "sha256": "b7b74499ac627ede63d4744325b59a8d7aab8569bc8db71099fc0779f8dd1418",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-692/local-tests.tap",
+      "bytes": 6041,
+      "sha256": "6a6b7e285c7c575fb319b34f596ab5efc3a107f8faea5346a2f4e7241813cc44",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-692/validation.json",
+      "bytes": 557,
+      "sha256": "e010d22445ee50e923119fba9f994a34d7808620d4d01c974f797dce54b391fe",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "stable-heavy-shards",
+      "kind": "code",
+      "description": "Reserve build-dependent parity and migration workloads on different shards, verify complete inventory and fixed placement under synthetic file insertion, preserve evidence profile and enforce full profile for runner edits.",
+      "software": "Node24 and repository test runner",
+      "units": "test outcomes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "local-tests",
+      "value": 26,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "6a6b7e285c7c575fb319b34f596ab5efc3a107f8faea5346a2f4e7241813cc44",
+      "evaluation_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e"
+    },
+    {
+      "id": "local-pass",
+      "value": 26,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "6a6b7e285c7c575fb319b34f596ab5efc3a107f8faea5346a2f4e7241813cc44",
+      "evaluation_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e"
+    },
+    {
+      "id": "local-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "6a6b7e285c7c575fb319b34f596ab5efc3a107f8faea5346a2f4e7241813cc44",
+      "evaluation_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e"
+    },
+    {
+      "id": "local-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "6a6b7e285c7c575fb319b34f596ab5efc3a107f8faea5346a2f4e7241813cc44",
+      "evaluation_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "local-tests",
+      "path": "coordination/engineering/full-suite-balance-692/validation.json",
+      "json_pointer": "/local_tests/tests"
+    },
+    {
+      "metric_id": "local-pass",
+      "path": "coordination/engineering/full-suite-balance-692/validation.json",
+      "json_pointer": "/local_tests/pass"
+    },
+    {
+      "metric_id": "local-fail",
+      "path": "coordination/engineering/full-suite-balance-692/validation.json",
+      "json_pointer": "/local_tests/fail"
+    },
+    {
+      "metric_id": "local-skipped",
+      "path": "coordination/engineering/full-suite-balance-692/validation.json",
+      "json_pointer": "/local_tests/skipped"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "local-tests",
+      "value": 26,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "local-pass",
+      "value": 26,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "local-fail",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "local-skipped",
+      "value": 0,
+      "unit": "tests"
+    }
+  ],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-reporter=tap test/full-regression-shards.test.mjs test/merge-integration.test.mjs test/integration-proof.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "9cf4f99b1cd486a429bab298bcd7978072d6350471ee299a99befa545ca77655"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "status": "modified",
+      "original_sha256": "623d2460ee854b58ab5cdab9f07495bf3c3753431471bc91927f3e1803855588"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "6302ae8acf4973b8ac61f51dec0a80d18218e1583943d40e3425f2a4b5d543d6"
+    },
+    {
+      "path": "test/full-regression-shards.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-692/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-692/local-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-692/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-692/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

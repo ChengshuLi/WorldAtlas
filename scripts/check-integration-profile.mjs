@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import {githubAPI, githubPages} from './issue-claim-contract.mjs';
+import {integrationProfile} from './integration-profile.mjs';
+const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
+const pr = event.pull_request, repo = process.env.GITHUB_REPOSITORY;
+const api = githubAPI(process.env.GH_TOKEN);
+const files = await githubPages(api, `/repos/${repo}/pulls/${pr.number}/files`);
+if (files.length !== pr.changed_files) throw Error('Incomplete changed-path inventory');
+const profile = integrationProfile(pr.head.ref, files);
+fs.appendFileSync(process.env.GITHUB_OUTPUT, `profile=${profile}\nshards=${JSON.stringify(profile === 'full' ? [0,1,2] : [0])}\n`);

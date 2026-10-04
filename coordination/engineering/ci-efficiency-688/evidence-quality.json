@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "issue": 688,
+  "lane": "engineering",
+  "worker_id": "ci-efficiency-688-worker",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "c215ade107705d1753f1371ad9bf383d514fa689",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 1862,
+        "sha256": "7199e3d714b593e06ec2e6c6a8342e9331c3c0f239db97c4739d59c1d1ea970b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 6012,
+        "sha256": "cfa59f56e21c4ce2eaaea6cc94c4f07717bee96160bd157aa74b876ec447bd58",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 13999,
+        "sha256": "5e84883ffd5aaada648a71463d892ec63f6da593d9309d3afc8cfe8c751188fa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 8993,
+        "sha256": "af417f8f68d520b4761f31ef5feb2404a04a840fbfb8afb57db4cb6122fc65e4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 2604,
+        "sha256": "cee83f95838d631c52a19dec9b84e9de3cd1e23f1dbcf698da8479791705b9fe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-worker-merge.mjs",
+        "bytes": 2788,
+        "sha256": "cc62f288bf5c25791926ee9887d93ed4298a0acc16a736419db9d978a948e61d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration.test.mjs",
+        "bytes": 10824,
+        "sha256": "954090cb65cb6e346fb4b2fd07449dbf3ccc2139bbd0fa3c66601e086ccba036",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 3451,
+      "sha256": "05d7aebbbe7941e7ee47806f7daae8ede1ec9776266940b19489cd362f8c510e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 6348,
+      "sha256": "cd837b8548146f4adc56c69495ce506dc8e22f6e46bd82c7338a9252c6f6ca13",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/claim.json",
+      "bytes": 805,
+      "sha256": "bb4b4ac1603ee5d490d4c2aa1338d56c051218089ea5fd8c409bd5e8d2f4e734",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/targeted-tests.tap",
+      "bytes": 23364,
+      "sha256": "69098df63306130b8da07b916b84d58f7b6487978ae7b63fb992c54bece3d158",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "bytes": 1146,
+      "sha256": "dc6db23c0e94175f0419a94a6eb96664c85b9aedf906fea08879727ade940dc1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 16213,
+      "sha256": "6302ae8acf4973b8ac61f51dec0a80d18218e1583943d40e3425f2a4b5d543d6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-integration-profile.mjs",
+      "bytes": 709,
+      "sha256": "4450b488715da6af41360ea14997f5aa0641d153011ecbc0ca6f5e556254c213",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "bytes": 2235,
+      "sha256": "623d2460ee854b58ab5cdab9f07495bf3c3753431471bc91927f3e1803855588",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "bytes": 3844,
+      "sha256": "49ab7d3b5bf65ddbe83b6e43243983d3a53e86b90e4f69caba794e8dcdb159f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 9161,
+      "sha256": "e42fa9abf5ad72f09fff9462894fde7ea157030f7251555beb4ef76b695eee9e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 3041,
+      "sha256": "9cf4f99b1cd486a429bab298bcd7978072d6350471ee299a99befa545ca77655",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 3094,
+      "sha256": "1cfe0963733ce89e989d57a7f45465337fd9341fcf093f69409a968a42f3b9d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "bytes": 5702,
+      "sha256": "528bccaebb12cd759ad190d9d72304aad0021d35771855c7f9f71749f31c376d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 14011,
+      "sha256": "5df84e5e88a13358817640a471ef9a4c29a416b01155f2af30d8f9fd2b18374d",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "trusted-tree-proof",
+      "kind": "code",
+      "description": "Run complete focused integration inventory and mocked positive/negative GitHub proof controls; preserve actual full regression and final queue authorities.",
+      "software": "Node24, Git, repository integration runner",
+      "units": "test outcomes and immutable file bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "focused-tests",
+      "value": 100,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "69098df63306130b8da07b916b84d58f7b6487978ae7b63fb992c54bece3d158",
+      "evaluation_commit": "c215ade107705d1753f1371ad9bf383d514fa689"
+    },
+    {
+      "id": "focused-passed",
+      "value": 100,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "69098df63306130b8da07b916b84d58f7b6487978ae7b63fb992c54bece3d158",
+      "evaluation_commit": "c215ade107705d1753f1371ad9bf383d514fa689"
+    },
+    {
+      "id": "focused-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "69098df63306130b8da07b916b84d58f7b6487978ae7b63fb992c54bece3d158",
+      "evaluation_commit": "c215ade107705d1753f1371ad9bf383d514fa689"
+    },
+    {
+      "id": "focused-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "69098df63306130b8da07b916b84d58f7b6487978ae7b63fb992c54bece3d158",
+      "evaluation_commit": "c215ade107705d1753f1371ad9bf383d514fa689"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "focused-tests",
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "json_pointer": "/local_tests/tests"
+    },
+    {
+      "metric_id": "focused-passed",
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "json_pointer": "/local_tests/passed"
+    },
+    {
+      "metric_id": "focused-failed",
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "json_pointer": "/local_tests/failed"
+    },
+    {
+      "metric_id": "focused-skipped",
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "json_pointer": "/local_tests/skipped"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "focused-tests",
+      "value": 100,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "focused-passed",
+      "value": 100,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "focused-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "focused-skipped",
+      "value": 0,
+      "unit": "tests"
+    }
+  ],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "7199e3d714b593e06ec2e6c6a8342e9331c3c0f239db97c4739d59c1d1ea970b"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "cfa59f56e21c4ce2eaaea6cc94c4f07717bee96160bd157aa74b876ec447bd58"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/targeted-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "5e84883ffd5aaada648a71463d892ec63f6da593d9309d3afc8cfe8c751188fa"
+    },
+    {
+      "path": "scripts/check-integration-profile.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "original_sha256": "af417f8f68d520b4761f31ef5feb2404a04a840fbfb8afb57db4cb6122fc65e4"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "cee83f95838d631c52a19dec9b84e9de3cd1e23f1dbcf698da8479791705b9fe"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "cc62f288bf5c25791926ee9887d93ed4298a0acc16a736419db9d978a948e61d"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "954090cb65cb6e346fb4b2fd07449dbf3ccc2139bbd0fa3c66601e086ccba036"
+    }
+  ]
+}

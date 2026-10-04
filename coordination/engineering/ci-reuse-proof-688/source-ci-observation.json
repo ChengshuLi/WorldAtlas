@@ -1,0 +1,306 @@
+{
+  "version": 1,
+  "source_pr": 690,
+  "source_merge": "bb0a74e880d319a780ba838fbd6025ad5d37dc3d",
+  "source_tree": "eae72d17b1b8291aa25170d48b431e4792b8fa4e",
+  "run": {
+    "id": 37165467753,
+    "run_attempt": 1,
+    "head_sha": "83887373aebc84bd4ee30a33d1007f8838c68715",
+    "event": "pull_request",
+    "path": ".github/workflows/merge-integration-checks.yml",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37165467753"
+  },
+  "jobs": [
+    {
+      "id": 111327348581,
+      "name": "profile",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run if test -f scripts/check-integration-profile.mjs; then",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 111327378536,
+      "name": "regression (0)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Node dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Python dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser dependencies only for tests that use Playwright",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build hosted assets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete regression shard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 111327378558,
+      "name": "regression (2)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Node dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Python dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser dependencies only for tests that use Playwright",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build hosted assets",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Complete regression shard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 111327378566,
+      "name": "regression (1)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Node dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Python dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser dependencies only for tests that use Playwright",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build hosted assets",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Complete regression shard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "regression": {
+    "tests": 673,
+    "pass": 673,
+    "fail": 0,
+    "skipped": 0
+  },
+  "full_log_sha256": "ae21a2678b6dfc54b96ef629ad5cf02f837687a62460cb4b356df31eb589ad28",
+  "method": "Read GitHub current workflow run/jobs and full logs using read-only API; retain the exact numeric summary lines. Source full coverage is historical evidence, not reusable proof for this new artifact tree.",
+  "limits": [
+    "This snapshot cannot self-certify its own PR regression or merge result. Current trusted queue authorities and the actual future bot receipt govern reuse."
+  ]
+}

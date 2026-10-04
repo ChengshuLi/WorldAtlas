@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "issue": 688,
+  "profile": "evidence",
+  "status": "awaiting-real-normal-queue-proof",
+  "owned_paths": [
+    "coordination/engineering/ci-reuse-proof-688/"
+  ],
+  "acceptance": [
+    "Current approved PR workflow tests this complete authored tree with all 100 focused controls and zero skips",
+    "Candidate parents are exact current main and reviewed head; complete candidate tree equals tested author tree",
+    "Trusted main preparation pins actual successful run ID AND attempt; isolated integration job skips because proof is valid",
+    "Final trusted merge re-reads same successful run/attempt/jobs and all ownership/evidence/review/check/base guards",
+    "Actual matching bot merge receipt reports accepted true and populated proof with the same run ID, attempt, profile and tree",
+    "Record actual result on issue688, then close issue and release canonical claim"
+  ],
+  "limits": [
+    "No same-PR run ID can be committed into these artifacts without changing that tested head; the future GitHub bot receipts supply actual proof.",
+    "Skipped integration indicates proof reuse only; it does not itself establish coverage.",
+    "Normal queue only. The one-time source activation exception is consumed.",
+    "No Site publication, provider changes, imports or geographic approval."
+  ]
+}

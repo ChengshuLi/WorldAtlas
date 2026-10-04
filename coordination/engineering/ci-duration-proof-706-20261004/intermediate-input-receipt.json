@@ -1,0 +1,41 @@
+{
+  "label": "intermediate",
+  "head_sha": "f115d324c7b3a2bcb97a1c276412a72f338f03d3",
+  "workflow_head_sha": "f115d324c7b3a2bcb97a1c276412a72f338f03d3",
+  "tested_commit": null,
+  "job_name_template": "regression ({shard})",
+  "regression_step_name": "Complete regression shard",
+  "required_checkout_step": null,
+  "files": [
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-run-api.json",
+      "bytes": 12847,
+      "sha256": "d1f8ba3395525cd0ccc173d4b5bbfd63e85201b9133a120d47ea46837659e9ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-jobs-api.json",
+      "bytes": 12643,
+      "sha256": "88c54a69f8c9d208e2d808374b2f733a74cd54abb2da68198ef0614fd15c2818",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard0.log",
+      "bytes": 158330,
+      "sha256": "1895ca2e7ae6440f9350b5f10606b55c546ddcbb732908275a57a303f1c5d913",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard1.log",
+      "bytes": 142548,
+      "sha256": "22dec2ac82ece61ba50d2d102153452085c35df9bc7f3a36de63403cd5405aab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard2.log",
+      "bytes": 139474,
+      "sha256": "3972d81494ad412d4e29599c35eaa3bdfec53085b818cbb1ba6f9930ad9cf8b1",
+      "hash_kind": "file-bytes"
+    }
+  ]
+}

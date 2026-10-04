@@ -1,0 +1,181 @@
+{
+  "before": {
+    "run_id": 37165467753,
+    "head_sha": "83887373aebc84bd4ee30a33d1007f8838c68715",
+    "run_attempt": 1,
+    "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37165467753",
+    "run_started_at": "2026-10-04T00:36:33Z",
+    "updated_at": "2026-10-04T00:45:28Z",
+    "workflow_elapsed_seconds": 535,
+    "elapsed_definition": "run_started_at through updated_at captured after successful completion; includes scheduling/startup; not the sum of parallel jobs",
+    "critical_shard_seconds": 520,
+    "shards": [
+      {
+        "shard": 0,
+        "job_id": 111327378536,
+        "started_at": "2026-10-04T00:36:47Z",
+        "completed_at": "2026-10-04T00:45:27Z",
+        "job_seconds": 520,
+        "test_step_seconds": 337,
+        "tests": 236,
+        "passed": 236,
+        "failed": 0,
+        "skipped": 0,
+        "node_test_duration_ms": 337005.315018,
+        "parity_subtests": [
+          {
+            "name": "ownership codecs preserve identity, dated labels, competing evidence and the BC/AD edge",
+            "duration_ms": 2.033826
+          },
+          {
+            "name": "actual environmental tables decode exactly at all normal-period boundaries",
+            "duration_ms": 13396.838288
+          },
+          {
+            "name": "reference codecs preserve supported precision and do not bridge unsupported intervals",
+            "duration_ms": 0.498861
+          },
+          {
+            "name": "actual prepared historical records match independent compact-table interpretation",
+            "duration_ms": 20934.37026
+          },
+          {
+            "name": "static and server exports resolve every active location identically, with examples on and off",
+            "duration_ms": 181464.376344
+          }
+        ]
+      },
+      {
+        "shard": 1,
+        "job_id": 111327378566,
+        "started_at": "2026-10-04T00:36:47Z",
+        "completed_at": "2026-10-04T00:38:52Z",
+        "job_seconds": 125,
+        "test_step_seconds": 53,
+        "tests": 216,
+        "passed": 216,
+        "failed": 0,
+        "skipped": 0,
+        "node_test_duration_ms": 53162.93397,
+        "parity_subtests": []
+      },
+      {
+        "shard": 2,
+        "job_id": 111327378558,
+        "started_at": "2026-10-04T00:36:47Z",
+        "completed_at": "2026-10-04T00:39:27Z",
+        "job_seconds": 160,
+        "test_step_seconds": 86,
+        "tests": 221,
+        "passed": 221,
+        "failed": 0,
+        "skipped": 0,
+        "node_test_duration_ms": 86013.887057,
+        "parity_subtests": []
+      }
+    ],
+    "tests": 673,
+    "passed": 673,
+    "failed": 0,
+    "skipped": 0
+  },
+  "after": {
+    "run_id": 37171154445,
+    "head_sha": "a368cdbdb2e651bd0261515a930bdb480333d72b",
+    "run_attempt": 1,
+    "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37171154445",
+    "run_started_at": "2026-10-04T02:28:24Z",
+    "updated_at": "2026-10-04T02:36:07Z",
+    "workflow_elapsed_seconds": 463,
+    "elapsed_definition": "run_started_at through updated_at captured after successful completion; includes scheduling/startup; not the sum of parallel jobs",
+    "critical_shard_seconds": 448,
+    "shards": [
+      {
+        "shard": 0,
+        "job_id": 111344233618,
+        "started_at": "2026-10-04T02:28:37Z",
+        "completed_at": "2026-10-04T02:34:21Z",
+        "job_seconds": 344,
+        "test_step_seconds": 170,
+        "tests": 226,
+        "passed": 226,
+        "failed": 0,
+        "skipped": 0,
+        "node_test_duration_ms": 170271.269274,
+        "parity_subtests": [
+          {
+            "name": "ownership codecs preserve identity, dated labels, competing evidence and the BC/AD edge",
+            "duration_ms": 2.344577
+          },
+          {
+            "name": "actual environmental tables decode exactly at all normal-period boundaries",
+            "duration_ms": 12369.607786
+          },
+          {
+            "name": "reference codecs preserve supported precision and do not bridge unsupported intervals",
+            "duration_ms": 1.582918
+          },
+          {
+            "name": "actual prepared historical records match independent compact-table interpretation",
+            "duration_ms": 20722.126656
+          },
+          {
+            "name": "static and server exports resolve every active location identically, with examples on and off",
+            "duration_ms": 103512.601468
+          }
+        ]
+      },
+      {
+        "shard": 1,
+        "job_id": 111344233638,
+        "started_at": "2026-10-04T02:28:38Z",
+        "completed_at": "2026-10-04T02:31:16Z",
+        "job_seconds": 158,
+        "test_step_seconds": 75,
+        "tests": 213,
+        "passed": 213,
+        "failed": 0,
+        "skipped": 0,
+        "node_test_duration_ms": 75271.033837,
+        "parity_subtests": []
+      },
+      {
+        "shard": 2,
+        "job_id": 111344233575,
+        "started_at": "2026-10-04T02:28:38Z",
+        "completed_at": "2026-10-04T02:36:06Z",
+        "job_seconds": 448,
+        "test_step_seconds": 370,
+        "tests": 246,
+        "passed": 246,
+        "failed": 0,
+        "skipped": 0,
+        "node_test_duration_ms": 368949.678137,
+        "parity_subtests": []
+      }
+    ],
+    "tests": 685,
+    "passed": 685,
+    "failed": 0,
+    "skipped": 0
+  },
+  "unchanged_parity_observation": {
+    "run_id": 37169659323,
+    "head_sha": "f44057a61733792493e70dbda8c439eb42a41ec2",
+    "job_id": 111339865307,
+    "parity_duration_ms": 111786.042098,
+    "code_status": "Parity source unchanged; source701 includes earlier CI optimizations"
+  },
+  "comparison": {
+    "elapsed_seconds_decrease": 72,
+    "elapsed_percent_decrease": 13.457943925233645
+  },
+  "limits": [
+    "Single actual full workflow observation per revision, same ubuntu-latest/Node24 runner class; not a statistical estimate",
+    "The final run includes preceding CI optimizations and the parity hoist; cannot isolate causality or attribute all observed savings to the hoist",
+    "Unchanged parity source already varied substantially between baseline690 and source701; final shard2 was slower than source701",
+    "All final full tests pass with zero skipped tests; historical baseline test count differs because subsequent focused tests were added",
+    "Isolated parity-file wall time is unavailable; individual subtest durations are actual TAP measurements",
+    "Total elapsed is run_started_at through completed run updated_at, including startup, never summed parallel jobs"
+  ]
+}

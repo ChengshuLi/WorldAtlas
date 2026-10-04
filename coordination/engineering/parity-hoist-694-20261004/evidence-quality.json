@@ -1,0 +1,279 @@
+{
+  "version": 1,
+  "issue": 694,
+  "lane": "engineering",
+  "worker_id": "parity-hoist-worker-694-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "019d341e7d64d01d1d26fd561d83068ae90a20bb",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 7304,
+        "sha256": "b73e25e3113ecd3573a1a58acaca50c6d6d2d1da6c577eecdf90787363272e12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/evidence-policy.json",
+        "bytes": 225,
+        "sha256": "69310e9dfbc92a7bfc954f6374a13dafb47a12ea53e27406cfd89138fc87463b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/prepared-parity.test.mjs",
+        "bytes": 14592,
+        "sha256": "d378d0e602001d885c330002fd68b08622e67384cdca5497a55b4307cee2aa4f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/derived-records.js",
+        "bytes": 1514,
+        "sha256": "cbe63065128772c3e853dddf0882795e364f5ffe243a3a6cd256e814ee7d7935",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/attributes.js",
+        "bytes": 7802,
+        "sha256": "bfe70437bfc9977e42dcb71bdcd41459d8b2cc5020415f6caf20d639bcc4ee00",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/runtime-ownership.js",
+        "bytes": 1198,
+        "sha256": "190f60c6d7402570901424a80b08bb2527f4785a590c7e4e2fd5fd51a82a7979",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/temporal.js",
+        "bytes": 2780,
+        "sha256": "5e62a4a91a1715d5204b46ce8db5ea6347e763fd31c79986465f976265a89481",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "test/prepared-parity.test.mjs",
+      "bytes": 14751,
+      "sha256": "04260524e8288be088233a5a4cc328fd8560b7ffc482c3ebbee91b83b074682c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004.json",
+      "bytes": 1648,
+      "sha256": "08e2614cadfe2fb3c24e657297c7f0a702ff364ea6f3145debd641b6acd205cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/baseline-run.json",
+      "bytes": 6397,
+      "sha256": "29ac8e6784675a28e6dcac056975ca41bf47b0170a2fa20fbe97cce75d14b25d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/baseline-shard0.log.gz",
+      "bytes": 33777,
+      "sha256": "32b371a6b3890eba8329942ecaad7716359c1074eec6a77ef4d26b92b3d081fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/claim.json",
+      "bytes": 821,
+      "sha256": "ed62407c78aaf010464607775c79e2bf367bbe335795d6fd77807172c2310c4c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/loop-validation.json",
+      "bytes": 987,
+      "sha256": "ac8f7086e1956f3836ca0802f8f8c466e36c6771d87c35f2c26723ebcb0735b3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/provenance.json",
+      "bytes": 1507,
+      "sha256": "34861db1c9fe9413985d8d007914c9df5e68677d658cd24ceb500891d8ff3cc9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/validate-loop.mjs",
+      "bytes": 6169,
+      "sha256": "9c13ffeadb6895ef57b3893d36e1cd2096845e8af41447c64cb3b0263905974b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "parity-hoist-source-controls",
+      "kind": "code",
+      "description": "Execute extracted original and updated actual year/examples loops with real ownership, temporal and attribute resolvers on synthetic fixtures; compare assertion sequence and counters, reject corrupt static/server values, confirm inputs remain unchanged. Actual full CI timing is pending.",
+      "software": "Node v24.19.0",
+      "units": "fixture assertions and preparation calls"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "fixture-assertions-preserved",
+      "value": 104,
+      "unit": "fixture calls",
+      "vintage": "archived",
+      "input_sha256": "ac8f7086e1956f3836ca0802f8f8c466e36c6771d87c35f2c26723ebcb0735b3",
+      "evaluation_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e"
+    },
+    {
+      "id": "fixture-modes-preserved",
+      "value": 26,
+      "unit": "fixture calls",
+      "vintage": "archived",
+      "input_sha256": "ac8f7086e1956f3836ca0802f8f8c466e36c6771d87c35f2c26723ebcb0735b3",
+      "evaluation_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e"
+    },
+    {
+      "id": "fixture-static-decodes-before",
+      "value": 26,
+      "unit": "fixture calls",
+      "vintage": "archived",
+      "input_sha256": "ac8f7086e1956f3836ca0802f8f8c466e36c6771d87c35f2c26723ebcb0735b3",
+      "evaluation_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e"
+    },
+    {
+      "id": "fixture-static-decodes-after",
+      "value": 13,
+      "unit": "fixture calls",
+      "vintage": "archived",
+      "input_sha256": "ac8f7086e1956f3836ca0802f8f8c466e36c6771d87c35f2c26723ebcb0735b3",
+      "evaluation_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e"
+    },
+    {
+      "id": "fixture-reference-expansions-before",
+      "value": 26,
+      "unit": "fixture calls",
+      "vintage": "archived",
+      "input_sha256": "ac8f7086e1956f3836ca0802f8f8c466e36c6771d87c35f2c26723ebcb0735b3",
+      "evaluation_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e"
+    },
+    {
+      "id": "fixture-reference-expansions-after",
+      "value": 13,
+      "unit": "fixture calls",
+      "vintage": "archived",
+      "input_sha256": "ac8f7086e1956f3836ca0802f8f8c466e36c6771d87c35f2c26723ebcb0735b3",
+      "evaluation_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "fixture-assertions-preserved",
+      "path": "coordination/engineering/parity-hoist-694-20261004/loop-validation.json",
+      "json_pointer": "/assertions_preserved"
+    },
+    {
+      "metric_id": "fixture-modes-preserved",
+      "path": "coordination/engineering/parity-hoist-694-20261004/loop-validation.json",
+      "json_pointer": "/modes_preserved"
+    },
+    {
+      "metric_id": "fixture-static-decodes-before",
+      "path": "coordination/engineering/parity-hoist-694-20261004/loop-validation.json",
+      "json_pointer": "/baseline/decodeDerived"
+    },
+    {
+      "metric_id": "fixture-static-decodes-after",
+      "path": "coordination/engineering/parity-hoist-694-20261004/loop-validation.json",
+      "json_pointer": "/updated/decodeDerived"
+    },
+    {
+      "metric_id": "fixture-reference-expansions-before",
+      "path": "coordination/engineering/parity-hoist-694-20261004/loop-validation.json",
+      "json_pointer": "/baseline/expectedReferences"
+    },
+    {
+      "metric_id": "fixture-reference-expansions-after",
+      "path": "coordination/engineering/parity-hoist-694-20261004/loop-validation.json",
+      "json_pointer": "/updated/expectedReferences"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "fixture-assertions-preserved",
+      "value": 104,
+      "unit": "fixture calls"
+    },
+    {
+      "metric_id": "fixture-modes-preserved",
+      "value": 26,
+      "unit": "fixture calls"
+    },
+    {
+      "metric_id": "fixture-static-decodes-before",
+      "value": 26,
+      "unit": "fixture calls"
+    },
+    {
+      "metric_id": "fixture-static-decodes-after",
+      "value": 13,
+      "unit": "fixture calls"
+    },
+    {
+      "metric_id": "fixture-reference-expansions-before",
+      "value": 26,
+      "unit": "fixture calls"
+    },
+    {
+      "metric_id": "fixture-reference-expansions-after",
+      "value": 13,
+      "unit": "fixture calls"
+    }
+  ],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --check test/prepared-parity.test.mjs",
+    "node coordination/engineering/parity-hoist-694-20261004/validate-loop.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "test/prepared-parity.test.mjs",
+      "status": "modified",
+      "original_sha256": "d378d0e602001d885c330002fd68b08622e67384cdca5497a55b4307cee2aa4f"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/baseline-run.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/baseline-shard0.log.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/loop-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/provenance.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/validate-loop.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/parity-hoist-694-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

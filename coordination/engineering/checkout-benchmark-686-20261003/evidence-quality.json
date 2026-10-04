@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "issue": 686,
+  "lane": "engineering",
+  "worker_id": "moderator-checkout-686-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "ceb743c213d52d4efc67f36bade61abce7f9acc0",
+    "files": [
+      {
+        "path": ".github/workflows/handoff-scope.yml",
+        "bytes": 5219,
+        "sha256": "f1a862da12996e9524f0974a5c5f085443212c732b676e3fc0d9cf18f31a2e9f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 6012,
+        "sha256": "cfa59f56e21c4ce2eaaea6cc94c4f07717bee96160bd157aa74b876ec447bd58",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 2604,
+        "sha256": "cee83f95838d631c52a19dec9b84e9de3cd1e23f1dbcf698da8479791705b9fe",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/after-scope.json",
+      "bytes": 3049,
+      "sha256": "b61cfb4b894013491d150d2bbaa10c1ac64eb354c9e554bb87d28883ac7a209e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/before-scope.json",
+      "bytes": 3051,
+      "sha256": "c9b4a0ec4a51acb36997f948bf1efe0cd7a847b15866b2adb4975776d3d4d195",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/verification.json",
+      "bytes": 852,
+      "sha256": "c1b619a518a1a016fa9475d4f7c6059d6fb0640b639ac38f9597b1945d84e5fc",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "checkout-benchmark",
+      "kind": "code",
+      "description": "Preserve actual source checks/job timestamps, reviewed source merge and submit this evidence-only packet through normal queue to verify sparse profile and actual timing. No implementation or data change.",
+      "software": "GitHub Actions metadata, repository trusted validators",
+      "units": "whole-file hashes and actual job timestamps"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "scope_before_seconds",
+      "value": 121,
+      "unit": "seconds",
+      "vintage": "baseline",
+      "input_sha256": "c1b619a518a1a016fa9475d4f7c6059d6fb0640b639ac38f9597b1945d84e5fc",
+      "evaluation_commit": "ceb743c213d52d4efc67f36bade61abce7f9acc0"
+    },
+    {
+      "id": "scope_after_seconds",
+      "value": 16,
+      "unit": "seconds",
+      "vintage": "baseline",
+      "input_sha256": "c1b619a518a1a016fa9475d4f7c6059d6fb0640b639ac38f9597b1945d84e5fc",
+      "evaluation_commit": "ceb743c213d52d4efc67f36bade61abce7f9acc0"
+    },
+    {
+      "id": "scope_checkout_before_seconds",
+      "value": 106,
+      "unit": "seconds",
+      "vintage": "baseline",
+      "input_sha256": "c1b619a518a1a016fa9475d4f7c6059d6fb0640b639ac38f9597b1945d84e5fc",
+      "evaluation_commit": "ceb743c213d52d4efc67f36bade61abce7f9acc0"
+    },
+    {
+      "id": "scope_checkout_after_seconds",
+      "value": 5,
+      "unit": "seconds",
+      "vintage": "baseline",
+      "input_sha256": "c1b619a518a1a016fa9475d4f7c6059d6fb0640b639ac38f9597b1945d84e5fc",
+      "evaluation_commit": "ceb743c213d52d4efc67f36bade61abce7f9acc0"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node scripts/queue-pr-merge.mjs --pr BENCHMARK_PR --head EXACT_REVIEWED_HEAD"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/after-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/before-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/verification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "scope_before_seconds",
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/verification.json",
+      "json_pointer": "/scope_before_seconds"
+    },
+    {
+      "metric_id": "scope_after_seconds",
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/verification.json",
+      "json_pointer": "/scope_after_seconds"
+    },
+    {
+      "metric_id": "scope_checkout_before_seconds",
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/verification.json",
+      "json_pointer": "/scope_checkout_before_seconds"
+    },
+    {
+      "metric_id": "scope_checkout_after_seconds",
+      "path": "coordination/engineering/checkout-benchmark-686-20261003/verification.json",
+      "json_pointer": "/scope_checkout_after_seconds"
+    }
+  ]
+}

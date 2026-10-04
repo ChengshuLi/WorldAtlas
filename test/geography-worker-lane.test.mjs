@@ -10,7 +10,7 @@ import {checkLinkedIssue} from '../scripts/check-linked-github-issue.mjs';
 
 const owned=['data/regional-review/regional-review-packet-a/'],now=Date.parse('2026-10-02T22:00:00Z');
 const spec={max_prs:2,depends_on:[],mode:'geography',scope:'Review the exact published packet, retaining source evidence and recommendations only',owned_paths:owned};
-const issue=(scope=spec)=>({number:507,state:'open',labels:['type:geography','kind:work-item','status:ready'],body:`<!-- worldatlas-work:v1\n${JSON.stringify(scope)}\n-->`});
+const issue=(scope=spec)=>({number:507,created_at:'2020-01-01T00:00:00Z',state:'open',labels:['type:geography','kind:work-item','status:ready'],body:`<!-- worldatlas-work:v1\n${JSON.stringify(scope)}\n-->`});
 const request=(extra={})=>({action:'claim',worker_id:'geo-worker',branch:'geography/packet-a',claim_id:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',request_id:'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',...extra});
 const comment=claim=>({id:88,user:{login:'github-actions[bot]'},body:renderClaim(claim)});
 const first=()=>transitionClaim({issue:issue(),comments:[],request:request(),now}).claim;

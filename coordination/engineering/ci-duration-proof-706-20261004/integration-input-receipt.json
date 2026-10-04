@@ -1,0 +1,47 @@
+{
+  "label": "integration",
+  "head_sha": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0",
+  "workflow_head_sha": "d53dcabf992470c43e7419bd700af9c549c74525",
+  "tested_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0",
+  "job_name_template": "integration ({shard})",
+  "regression_step_name": "Test applicable combined-tree invariants without publishing or live imports",
+  "required_checkout_step": "Checkout complete candidate for application regression",
+  "files": [
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-run-api.json",
+      "bytes": 13861,
+      "sha256": "085568ad6219627910a8a3d62679a9325a421ff6d9a567109c69bdd3142adea7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-jobs-api.json",
+      "bytes": 15926,
+      "sha256": "711efbcf357b20fe2b86731e617fdf616e74eeb102e975d5d8c402e6e5c70a22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-shard0.log",
+      "bytes": 148242,
+      "sha256": "70cc43ad0ee89048e79a6bd50caad7b1cd742cfda7135a0052227066399ca720",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-shard1.log",
+      "bytes": 137195,
+      "sha256": "a938cd9a3ff8d9f39dd85b8f3dd378aeeaf8fbe459ef3d007c093eebffaf49db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-shard2.log",
+      "bytes": 154857,
+      "sha256": "3050da162f48ed02e20931b89d9b8f3b03d185f1aab86e4cf5459a4f71f595f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-tested-commit-receipt.json",
+      "bytes": 7738,
+      "sha256": "4c5d5a72831c6d998b20cf2ad04408f6eebdab54675a5b85311e0ff22e743ded",
+      "hash_kind": "file-bytes"
+    }
+  ]
+}

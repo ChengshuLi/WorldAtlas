@@ -160,18 +160,21 @@ test('static and server exports resolve every active location identically, with 
   assert.equal(fingerprint(reference.features.map(f=>({id:f.id,properties:f.properties}))),fingerprint(serverFeatures.map(f=>({id:f.id,properties:f.properties}))), 'Static location catalog matches the database');
   assert.equal(fingerprint(reference.temporal.entities),fingerprint(serverReference.temporal.entities),'Static identity catalog preserves archived entities');
   assert.equal(fingerprint(reference.temporal.history),fingerprint(serverReference.temporal.history),'Static dated identity records match the database');
-  for(const year of years)for(const examples of [false,true]){
-   const server=snapshot(db,year,examples);
+  for(const year of years){
    const selected=runtimeOwnershipBucket(runtime,year);let staticOwners=[];
    if(selected){if(!buckets.has(selected.path)){buckets.set(selected.path,read(path.join(staticRoot,'ownership-runtime',selected.path)));while(buckets.size>2)buckets.delete(buckets.keys().next().value);}const data=runtimeOwnershipData(runtime,buckets.get(selected.path),year);staticOwners=decodeDerived(data.parts,data.index,year);}
-   assert.equal(fingerprint(staticOwners),fingerprint(owners.get(year)),`Actual static temporal transport preserves prepared source values at ${year}`);
-   const exported={states:selectedStates(history.states,year,examples),attributes:[...staticOwners,...expectedReferences(references,year),...(history.attributes||[]).filter(r=>r.valid_from<=year&&r.valid_to>year&&(!r.is_example||examples))]};
-   assert.deepEqual(server.polities,[],'Normal Political mode has no independent source polygon layer');
-   const serverTemporal=resolveTemporal(serverReference,year,examples),staticTemporal=resolveTemporal(reference,year,examples);
-   const resolve=(features,state,temporal)=>[...resolveAttributes(features,year,{states:state.states,records:state.attributes,temporal,examples}).values()];
-   const actual=resolve(serverTemporal.features,server,serverTemporal),expected=resolve(staticTemporal.features,exported,staticTemporal);
-   assert.equal(actual.length,expected.length,`active locations at ${year}/${examples}`);
-   assert.equal(fingerprint(actual),fingerprint(expected),`all resolved fields/provenance at ${year}/${examples}`);
+   const staticOwnerFingerprint=fingerprint(staticOwners),preparedOwnerFingerprint=fingerprint(owners.get(year)),referenceRecords=expectedReferences(references,year);
+   for(const examples of [false,true]){
+    const server=snapshot(db,year,examples);
+    assert.equal(staticOwnerFingerprint,preparedOwnerFingerprint,`Actual static temporal transport preserves prepared source values at ${year}`);
+    const exported={states:selectedStates(history.states,year,examples),attributes:[...staticOwners,...referenceRecords,...(history.attributes||[]).filter(r=>r.valid_from<=year&&r.valid_to>year&&(!r.is_example||examples))]};
+    assert.deepEqual(server.polities,[],'Normal Political mode has no independent source polygon layer');
+    const serverTemporal=resolveTemporal(serverReference,year,examples),staticTemporal=resolveTemporal(reference,year,examples);
+    const resolve=(features,state,temporal)=>[...resolveAttributes(features,year,{states:state.states,records:state.attributes,temporal,examples}).values()];
+    const actual=resolve(serverTemporal.features,server,serverTemporal),expected=resolve(staticTemporal.features,exported,staticTemporal);
+    assert.equal(actual.length,expected.length,`active locations at ${year}/${examples}`);
+    assert.equal(fingerprint(actual),fingerprint(expected),`all resolved fields/provenance at ${year}/${examples}`);
+   }
   }
  }finally{db.close();}
 });

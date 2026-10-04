@@ -17,7 +17,7 @@ function fixture() {
   const issue = {number: 100, created_at: '2026-10-04T00:00:00Z', body: `<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
   const manifest = {version: 1, issue: 100, lane: 'engineering', worker_id: 'author', subject_ids: [], subject_ids_sha256: subjectsHash([]),
     baseline: {commit, files: [desc('baseline.txt', baseline)], pins: {}}, sources: [], outputs: [desc(outputPath, output)],
-    methods: [{id: 'synthetic', description: 'Synthetic ledger', software: 'Node 24', units: 'fraction'}],
+    methods: [{id: 'synthetic', kind: 'code', description: 'Synthetic ledger', software: 'Node 24', units: 'fraction'}],
     metrics: [{id: 'share', value: 0.5, unit: 'fraction', vintage: 'current', input_sha256: sha256(baseline), evaluation_commit: commit}],
     summaries: [{metric_id: 'share', value: 0.5, unit: 'fraction'}], conclusions: [],
     stages: {research: 'complete', implementation: 'implemented', geographic_approval: 'not-requested'}, commands: ['node --test test/premerge-evidence.test.mjs'],
@@ -52,7 +52,7 @@ test('regressions: stale vintage, entry hash, wrong source/path and conflicting 
   const mutations = [f => f.manifest.baseline.files[0].sha256 = 'broken', f => f.manifest.baseline.files[0].hash_kind = 'entry',
     f => f.manifest.metrics[0].evaluation_commit = head, f => f.manifest.summaries[0].value = 0.9,
     f => f.manifest.metric_bindings[0].json_pointer = '/absent', f => f.manifest.metrics[0].value = f.manifest.summaries[0].value = 0.2,
-    f => f.manifest.outputs[0].path = '../secret', f => f.manifest.worker_id = 'different', f => f.manifest.stages.geographic_approval = 'approved'];
+    f => f.manifest.outputs[0].path = '../secret', f => f.manifest.worker_id = 'different', f => f.pr.base.sha = head, f => f.manifest.stages.geographic_approval = 'approved'];
   for (const mutate of mutations) {const f = fixture(); mutate(f); assert.throws(() => validate(f));}
 });
 test('full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence', () => {
@@ -92,6 +92,16 @@ test('generator controls bind actual positive, negative and equal two-run output
   const last = f.manifest.outputs.at(-1), record = JSON.parse(bytes.get(last.path)); record.run_two_sha256 = 'c'.repeat(64);
   bytes.set(last.path, Buffer.from(JSON.stringify(record))); Object.assign(last, desc(last.path, bytes.get(last.path)));
   assert.throws(() => validate(f), /reproducibility/);
+});
+test('Washington-style generated narrative/table mismatch fails against the same numeric ledger', () => {
+  const f = fixture(), path = 'coordination/engineering/synthetic/table.md', raw = Buffer.from('Share | 50.00%\n');
+  f.manifest.outputs.push({...desc(path, raw), role: 'generated-table'});
+  f.files.push({filename: path, status: 'added'}); f.manifest.change_receipts.push({path, status: 'added'});
+  f.manifest.rendered_tables = [{path, rows: [{metric_id: 'share', line: 1, template: 'Share | {value}%', decimals: 2, scale: 100}]}];
+  f.readFile = name => name === path ? raw : name === 'baseline.txt' ? baseline : output;
+  assert.equal(validate(f).change_files_checked, 3);
+  f.manifest.rendered_tables[0].rows[0].template = 'Wrong | {value}%'; assert.throws(() => validate(f), /table differs/);
+  f.manifest.rendered_tables = []; assert.throws(() => validate(f), /ledger-bound/);
 });
 test('reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review', () => {
   for (const mutate of [r => r.reviewer_worker_id = 'author', r => r.head_sha = commit, r => r.evidence_hashes.pop(),
@@ -142,4 +152,12 @@ test('remote decisions reject stale exact-head reviews and a later change reques
     api: remoteFixture(f, [comment(r), {...comment({...r, outcome: 'changes-requested'}), id: 2}]).api}), /unresolved/);
   await assert.rejects(() => checkPremergeEvidence({...f, repo: 'test/repo', policy,
     api: route => route.includes('/compare/') ? Promise.resolve({status: 'diverged'}) : remote.api(route)}), /ancestor/);
+});
+
+test('unchanged authored evidence survives unrelated main advance, while current metrics require refresh', () => {
+  const f = fixture(); f.pr.base.sha = 'c'.repeat(40);
+  f.manifest.metrics[0].vintage = 'baseline';
+  assert.equal(validate(f).change_files_checked, 2);
+  f.manifest.metrics[0].vintage = 'current';
+  assert.throws(() => validate(f), /actual PR-base vintage/);
 });

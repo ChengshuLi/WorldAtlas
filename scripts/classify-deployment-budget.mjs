@@ -1,0 +1,115 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+// These controls neither produce nor enter the deployment archive. New scripts,
+// including this classifier, remain full until their purpose is reviewed here.
+const controls = new Set([
+  'check-handoff-scope', 'check-linked-github-issue', 'check-pr-evidence',
+  'evidence-quality', 'evidence-policy', 'premerge-evidence', 'issue-claim-contract',
+  'issue-lease', 'run-issue-claim', 'worker-result', 'queue-pr-merge',
+  'queue-readiness-audit', 'merge-integration', 'run-worker-merge',
+  'run-integration-tests', 'integration-profile', 'check-integration-profile',
+  'integration-proof',
+].map(name => `scripts/${name}.mjs`));
+const controlTests = new Set([
+  'handoff-scope', 'issue-claims', 'worker-result', 'regional-research-gate',
+  'geography-worker-lane', 'evidence-quality', 'premerge-evidence',
+  'trusted-workflow-checkouts', 'merge-integration', 'merge-integration-client',
+  'merge-integration-entrypoint', 'integration-profile', 'integration-proof',
+].map(name => `test/${name}.test.mjs`));
+const controlWorkflows = new Set([
+  'issue-claims', 'worker-merge', 'handoff-scope', 'queue-readiness-audit',
+  'merge-integration-checks',
+].map(name => `.github/workflows/${name}.yml`));
+
+export function packageIndependentPath(file) {
+  if (typeof file !== 'string' || file.includes('\\') || /[\x00-\x1f\x7f]/.test(file) ||
+      file.split('/').some(part => !part || part === '.' || part === '..')) return false;
+  return controls.has(file) || controlTests.has(file) || controlWorkflows.has(file) ||
+    /^docs\/.+\.(?:md|txt)$/.test(file) || /^[^/]+\.md$/.test(file) ||
+    /^coordination\/engineering\/[a-z0-9][a-z0-9-]{0,63}\/.+\.(?:json|log|md|txt)$/.test(file);
+}
+
+export function classifyBudgetFiles(files) {
+  if (!Array.isArray(files)) throw Error('Missing changed-file inventory');
+  const paths = new Set();
+  for (const file of files) {
+    if (!file || !['added', 'modified', 'removed', 'renamed', 'copied', 'changed', 'unchanged'].includes(file.status) ||
+        typeof file.filename !== 'string' || paths.has(file.filename)) throw Error('Invalid changed-file inventory');
+    paths.add(file.filename);
+    if (['renamed', 'copied'].includes(file.status) && typeof file.previous_filename !== 'string') throw Error('Missing rename source');
+    if (file.previous_filename !== undefined) {
+      if (typeof file.previous_filename !== 'string') throw Error('Invalid rename source');
+      // Include rename/copy origins even when the destination is a receipt.
+      if (!packageIndependentPath(file.previous_filename)) return {full: true, reason: 'Package-relevant original path', paths: [...paths, file.previous_filename]};
+    }
+    if (!packageIndependentPath(file.filename)) return {full: true, reason: 'Unknown or package-relevant path', paths: [...paths]};
+  }
+  return {full: false, reason: 'Only explicit package-independent paths', paths: [...paths]};
+}
+
+const commit = value => /^[a-f0-9]{40}$/.test(value ?? '') && !/^0+$/.test(value);
+
+export async function deploymentBudgetProfile({event, eventName, repository, api}) {
+  try {
+    if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repository ?? '') ||
+        event?.repository?.full_name !== repository) throw Error('Unknown repository');
+    const route = `/repos/${repository}`;
+    let files;
+    if (eventName === 'pull_request') {
+      const pr = event.pull_request;
+      if (!Number.isSafeInteger(pr?.number) || pr.number < 1 || !commit(pr.base?.sha) || !commit(pr.head?.sha)) throw Error('Incomplete PR identity');
+      const actual = await api(`${route}/pulls/${pr.number}`);
+      if (actual.base?.sha !== pr.base.sha || actual.head?.sha !== pr.head.sha ||
+          !Number.isSafeInteger(actual.changed_files) || actual.changed_files < 0) throw Error('PR changed or inventory size unavailable');
+      if (actual.changed_files >= 3000) throw Error('PR file API inventory capped');
+      files = [];
+      for (let page = 1; page <= 100; page++) {
+        const rows = await api(`${route}/pulls/${pr.number}/files?per_page=100&page=${page}`);
+        if (!Array.isArray(rows) || rows.length > 100) throw Error('Invalid PR file page');
+        files.push(...rows);
+        if (rows.length < 100) break;
+        if (page === 100) throw Error('PR inventory capped');
+      }
+      if (files.length !== actual.changed_files) throw Error('Incomplete PR inventory');
+      const settled = await api(`${route}/pulls/${pr.number}`);
+      if (settled.head?.sha !== pr.head.sha || settled.base?.sha !== pr.base.sha ||
+          settled.changed_files !== files.length) throw Error('PR changed during file enumeration');
+    } else if (eventName === 'push') {
+      if (!commit(event.before) || !commit(event.after)) throw Error('Missing push comparison');
+      const comparison = await api(`${route}/compare/${event.before}...${event.after}`);
+      if (comparison.base_commit?.sha !== event.before || !['ahead', 'identical'].includes(comparison.status) ||
+          !Array.isArray(comparison.files) || comparison.files.length >= 300 ||
+          comparison.truncated === true) throw Error('Push comparison unavailable or capped');
+      if (event.after !== event.before && comparison.commits?.at(-1)?.sha !== event.after) throw Error('Push head unavailable in comparison');
+      files = comparison.files;
+    } else throw Error('Unsupported event');
+    return {version: 1, event: eventName, ...classifyBudgetFiles(files)};
+  } catch (error) {
+    return {version: 1, event: eventName, full: true,
+      reason: error instanceof Error ? error.message : 'Inventory lookup failed', paths: [], fallback: true};
+  }
+}
+
+export async function githubBudgetAPI(route, {token = process.env.GH_TOKEN, fetchImpl = fetch} = {}) {
+  if (!token) throw Error('Read-only GitHub token unavailable');
+  const response = await fetchImpl(`https://api.github.com${route}`, {
+    headers: {Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'},
+    signal: AbortSignal.timeout(15000),
+  });
+  if (!response.ok) throw Error(`GitHub inventory HTTP ${response.status}`);
+  return response.json();
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  let result;
+  try {
+    result = await deploymentBudgetProfile({event: JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')),
+      eventName: process.env.GITHUB_EVENT_NAME, repository: process.env.GITHUB_REPOSITORY, api: githubBudgetAPI});
+  } catch { result = {version: 1, full: true, reason: 'Classifier inputs unavailable', paths: [], fallback: true}; }
+  fs.mkdirSync('.cache', {recursive: true});
+  fs.writeFileSync('.cache/deployment-budget-scope.json', JSON.stringify(result, null, 2) + '\n');
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, `full=${result.full}\n`);
+  console.log(JSON.stringify(result));
+}

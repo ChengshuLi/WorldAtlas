@@ -1,0 +1,24 @@
+{
+  "recorded_at": "2026-10-03T21:26:10.900829+00:00",
+  "baseline_commit": "51540f0bccd1f0958b44cbd4dea4ad2c1a5157d6",
+  "incident": "PR677 relocated a shared module to src; trusted sparse checkouts omitted src.",
+  "implementation": "Include src in all four trusted sparse checkout declarations. Keep tokens, trust refs, workflow permissions and all gates unchanged.",
+  "validation": {
+    "command": "node --test test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/trusted-workflow-checkouts.test.mjs",
+    "passed": 69,
+    "failed": 0,
+    "scope": "Four declared sparse trees load trusted helpers; scripts-only negative control fails on actual missing module. No workflow entrypoint executed with a token."
+  },
+  "limits": [
+    "Hosted main-only workflow repair not yet merged or verified.",
+    "Normal merge and reservation workflows cannot bootstrap their own fix. No exception authorized or executed.",
+    "Earlier activation evidence remains retained at its original vintage."
+  ],
+  "rollout": {
+    "effective_at": "2026-10-04T00:00:00Z",
+    "previous_cutoff": "Proposed only, never published; original receipt retained as archived preparation evidence.",
+    "inventory": "coordination/engineering/premerge-quality-627-activate/legacy-inventory-resume.json",
+    "open_issue_count": 482,
+    "open_pr_count": 5
+  }
+}

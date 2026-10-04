@@ -6,6 +6,8 @@ M geography, N engineering and P history-research chats may work in isolated che
 
 Each worker holds at most one active work item; do not mass-reserve the queue. Actionable issues have exactly one type label, `kind:work-item`, `status:ready`, an explicit scope and a **1–3 PR budget**. Larger objectives are `kind:umbrella`, cannot be claimed and are decomposed into bounded child issues. An umbrella can have many children, while each child normally completes in one PR and at most three. Open dependencies or `status:blocked` prevent claims. Completing a child does not close its parent.
 
+At each new claim, choose eligible `urgent` issues in your own lane first, then other `follow-up` issues, then other ready work. Eligible means an open, unclaimed, unblocked `kind:work-item` labeled `status:ready`, with satisfied dependencies and authorized scope. Preserve the existing regional approval and import gates. Finish or safely hand over your current claim; do not abandon it to preempt another worker. Urgency never bypasses readiness, ownership, review or publication/import rules. If urgent candidates are all blocked, already claimed or outside your lane, continue another eligible item and record why they were unavailable in your issue checkpoint.
+
 The issue-creation thread reviews scope, dependencies and overlap before marking ready. Include one machine-readable block in the issue body (GitHub is its sole authority):
 
 ```text
@@ -68,7 +70,15 @@ Each focused PR targets main and has exactly one `Refs #N` for partial work or `
 node scripts/queue-pr-merge.mjs --pr PR-NUMBER --head VERIFIED-HEAD-SHA
 ```
 
-Inspect the exact returned run name/request ID, wait for its completion and read the bot-authored **Merge result** comment on the PR with that request ID. Claims similarly return bot-authored **Reservation result** comments on their issues. Artifact copies remain available for audit, but the clients do not depend on artifact downloads. Queued or successful workflow execution alone is not proof of an accepted merge. The queue serializes integration, rereads the claim, checks the exact head and successful current checks, requires latest main included, and squash-merges with the PR title as commit title. If another merge advanced main, update your branch, rerun affected checks and resubmit. Canceled pending merge requests may be retried; queues are not FIFO.
+Inspect the exact returned run name/request ID, wait for its completion and read the bot-authored **Merge result** comment on the PR with that request ID. Claims similarly return bot-authored **Reservation result** comments on their issues. Artifact copies remain available for audit, but the clients do not depend on artifact downloads. Queued or successful workflow execution alone is not proof of an accepted merge. Candidate preflight and isolated integration tests run in parallel across workers. Only the final authority recheck and squash merge share the short serialized integration slot; tests never hold that slot. The merge uses the PR title. It tests GitHub’s exact current-main plus reviewed-head merge tree without updating the worker branch, and rechecks ownership, evidence/review, check-runs and commit statuses. Reviewed changed-file blobs and modes must remain identical in the combined tree, including removed/renamed paths. Conflicts or changed reviewed bytes require author intervention and fresh substantive review; no automatic conflict resolution is allowed. The client waits for a final bot receipt and verifies the actual merged PR; it retries cancellations or stale merge objects/base advances at most three times with the same authored head. It discovers runs through bounded paginated search, then polls the latched run ID. Queues are not FIFO.
+
+Base-dependent evidence still needs refresh: a metric labeled current must match the actual PR-base vintage, and original-file receipts must match actual base bytes. Disjoint main changes with unchanged scoped inputs can reuse review; fresh global measurements or changes to the reviewed inputs cannot. Preserve the earlier evidence, refresh in a new vintage, and obtain exact-head review when needed. Trusted preflight selects checks by every changed and renamed path. Code, workflow, schema and core-data changes run the complete unit suite across three parallel shards, plus one hosted package build. Isolated geography/history campaign evidence and engineering-owned receipts or Markdown/text docs run the focused ownership/evidence/review/invariant suite, without rebuilding the unchanged application. Both profiles run in isolated read-only jobs without secrets or persistent checkout credentials. They retain the same exact candidate, reviewed-byte, claim and evidence gates; a renamed runtime file cannot evade full regression. Prepare/final jobs execute only fresh trusted main code. Tests are bounded to35minutes, trusted jobs to10minutes each; unfinished heads fail preflight rather than holding the slot for worker action.
+
+The full runner keeps packaged-asset checks on the build job and the expensive local model/migration file on a separate job. Measured database-neighbor suites use the otherwise lighter job; the remaining discovered files retain deterministic assignment. Every file still runs exactly once. Named placement is a scheduling choice, not a runtime guarantee; compare actual complete workflow times rather than summed TAP durations.
+
+Changes to the test runner require the full profile so the actual complete test inventory and scheduling are verified; they are excluded from the coordination-only allowlist.
+
+All integrations must use this queue. GitHub’s merge endpoint guards the PR head, not the base; the final main-read/PUT interval cannot atomically exclude an out-of-band direct merge. Do not integrate directly during a queued run. If a designated exceptional repair is needed, drain/coordinate the queue first. The normal protocol serializes every writer; it does not claim a server-enforced base CAS. GitHub native merge queues are unavailable for this personally owned private repository under the current platform eligibility rules.
 
 After each merge, release a completed issue or renew its claim onto a fresh branch for its remaining bounded part. When three PRs are insufficient, stop extending it and split the remaining scope into reviewed children/follow-ups. Existing closed Issues, source evidence and dates are retained.
 
@@ -83,3 +93,41 @@ Only engineering may approve and publish the partition/branches with retained so
 ## Evidence and independent review
 
 Follow `docs/PREMERGE_EVIDENCE_REVIEW.md` and the authoritative `.github/evidence-policy.json`. New work after activation declares exact subjects/pins and its owned manifest in the issue contract; legacy scopes remain preserved. Prepare versioned whole-file evidence, immutable scientific helper results and honest source/publication limits. Request a distinct worker's substantive review tied to the exact PR head; never self-review under a second worker ID. The queue rechecks evidence and review; green CI alone does not approve geography or authorize imports.
+
+## Applicable regression and exact-tree reuse
+
+The integration profile defaults to `full`. Documentation text and the exact coordination paths in
+`scripts/integration-profile.mjs` and the current worker's owned receipts use the
+focused `evidence` profile. It includes reservation, ownership, regional import
+barriers, evidence/review validation, workflow checkout and integration controls.
+Source-only owned research retains its focused controls. Every changed path and
+rename origin participates; unknown non-text documentation/scripts, application code, storage,
+atlas data, geometry, schema, imports, builds and deployment require full regression.
+The PR profile selector runs trusted base code against GitHub's complete file list;
+a base without the selector runs full regression. Full shards cover every test file
+exactly once, build actual packaged assets and reject skipped tests.
+
+The queue can avoid repeating those tests only when GitHub's successful current
+`merge-integration-checks.yml` run proves the entire candidate Git tree equals the
+reviewed head's tested tree. That approved workflow explicitly checks out the head;
+GitHub's `head_sha` alone cannot establish what a default PR merge-ref checkout tested.
+The workflow and runner/profile blobs must match trusted current main. All expected
+shards and their required completed steps must succeed; skipped jobs establish no
+coverage. Preparation pins the run ID and attempt. The final serialized merge re-reads that run,
+the same successful attempt/jobs and the usual exact-head review, evidence, ownership,
+checks, candidate parents and base guards. An unavailable/untrusted proof causes
+normal isolated tests; a proof revoked after preparation refuses the merge and
+requires resubmission. A rerun after preparation invalidates the proof even if it succeeds. An altered
+workflow/runner first passes ordinary integration.
+
+This is cooperative GitHub Actions evidence, not independent authenticated worker
+identity or a native GitHub merge queue. The existing final base check and guarded
+head merge remain; outside writers must honor the same serialized queue. A green
+run does not certify geographic facts, authorize imports or publish the Site.
+
+The focused `evidence` controls use Node and repository files without installed
+npm packages. Both PR regression and isolated queue regression install npm
+packages only for the `full` profile. Full proof still requires successful Node
+and Python installation, applicable browser setup and the actual hosted build;
+focused proof requires every focused control to execute successfully with zero
+skipped tests. A skipped dependency-install step is not application coverage.

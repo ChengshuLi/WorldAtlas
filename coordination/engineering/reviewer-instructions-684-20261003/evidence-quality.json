@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "issue": 684,
+  "lane": "engineering",
+  "worker_id": "moderator-reviewer-instructions-684-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "d37a9776d554fc80a3e4c0b25ce1317027740277",
+    "files": [
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 4937,
+        "sha256": "79fb67c1a3f995e9571e1a611284703816724bd12c5208e07ed58a259d5dcf8f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/GEOGRAPHY.txt",
+        "bytes": 4489,
+        "sha256": "91bedd06bd4ae6d5ab3407fe3142f0e474efec45e2d9f9782893070fdefaf457",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/LUNA_HISTORY.txt",
+        "bytes": 5334,
+        "sha256": "1f272c428acac902632baae284ea33dd2a13f15b0c640176f4f43f6350313704",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+        "bytes": 9343,
+        "sha256": "b88e29b93275736ffe8c5b42e171759a15fdf93aa810bf715c1bc96d72f83ad6",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 5979,
+      "sha256": "f368d2331a4a12545b140fbda70e8b48cdbec5580856e0e8746f7f93d5c27925",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "bytes": 5531,
+      "sha256": "b20d63ba2d1ede60ab8be56b064c55cb96401d69931162241028df5e3910c457",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "bytes": 6376,
+      "sha256": "0423f38f44d79b129d258d270f49d13862be562eeef5e94e5e079442e46c0219",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 11710,
+      "sha256": "9139cb50befa93614f079670785260f76b3f6959c51d8cdee3802e7fbdf862c2",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "documentation-review",
+      "kind": "code",
+      "description": "Inspect all three lane prompts and shared guide for explicit separate-agent delegation, exact-head source/method review, receipt instructions and honest unavailable-reviewer fallback. Documentation only; no runtime policy change.",
+      "software": "Git and repository evidence validator",
+      "units": "whole-file bytes and SHA-256"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node scripts/evidence-quality.mjs coordination/engineering/reviewer-instructions-684-20261003/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "79fb67c1a3f995e9571e1a611284703816724bd12c5208e07ed58a259d5dcf8f"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "status": "modified",
+      "original_sha256": "91bedd06bd4ae6d5ab3407fe3142f0e474efec45e2d9f9782893070fdefaf457"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "status": "modified",
+      "original_sha256": "1f272c428acac902632baae284ea33dd2a13f15b0c640176f4f43f6350313704"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "status": "modified",
+      "original_sha256": "b88e29b93275736ffe8c5b42e171759a15fdf93aa810bf715c1bc96d72f83ad6"
+    },
+    {
+      "path": "coordination/engineering/reviewer-instructions-684-20261003/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": []
+}

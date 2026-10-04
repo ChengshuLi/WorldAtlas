@@ -1,0 +1,10 @@
+{
+  "recorded_at": "2026-10-03T23:02:34.270435+00:00",
+  "actual_source_head": "9972f8874b01d6222fb71b9513d3055ac0da8b57",
+  "actual_run": 37160076404,
+  "actual_job": 111311519482,
+  "finding": "Adding a unit file changed modulo positions and moved prepared-parity into an unbuilt shard; actual log has one skipped static/server export parity test. Never counted as full validation.",
+  "correction": "Pin compact-ownership and prepared-parity to the single build shard0 independently of sorted inventory changes; distribute remaining files once. Missing actual packaged atlas throws before tests, and shard0 requires static exports.",
+  "tests": "88 focused tests passed, including fixed asset assignment, full unique inventory and negative missing-asset guards. Final hosted regression still required.",
+  "status": "Earlier obsolete full run was canceled to avoid unnecessary work; its actual skipped test is retained. No successful activation claimed."
+}

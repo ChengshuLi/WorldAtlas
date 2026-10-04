@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "parity-proof-694-20261004",
+  "branch": "engineering/parity-proof-694-20261004",
+  "base_main_commit": "73cd687bf5386952adae618b1df482b92768106f",
+  "github_issue": 694,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Retain actual complete CI before/after observations and normal source merge proof; no implementation changes"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-04T02:41:51.702116+00:00",
+  "completed": [
+    "Source PR 696 merged through normal queue reusing exact full source proof",
+    "Final full hosted regression passed with zero skipped tests",
+    "Actual all-shard and workflow elapsed observations retained with runner-variation limits",
+    "Positive known-interval and inverted-timestamp negative controls passed"
+  ],
+  "checks": [
+    "python3 /tmp/parity-694-measure.py with retained raw API and TAP inputs",
+    "Typed positive/negative timestamp controls",
+    "Source exact-head independent implementation review accepted"
+  ],
+  "deployment": "Not requested; unchanged",
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "coordination/engineering/parity-proof-694-20261004/measurement.json",
+    "coordination/engineering/parity-proof-694-20261004/source-queue.log"
+  ],
+  "blockers": [
+    "Independent exact-head proof review and normal queue integration pending"
+  ],
+  "next_action": "Obtain distinct proof review, pass focused evidence/package checks, integrate normal queue, then close issue and release claim",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

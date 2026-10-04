@@ -112,44 +112,9 @@ test('inserts and updates cannot skip hierarchy levels',()=>{
   assert.throws(()=>db.prepare("UPDATE units SET level='area' WHERE id=?").run(province),/immutable/);
 });
 
-test('legacy hierarchy migration preserves historical records and repairs skipped parents',()=>{
-  const legacy=openDatabase(':memory:');
-  try {
-    seedDatabase(legacy);
-    importRecords(legacy,{states:[{location_id:'atlas:city:GBR-Greater London',valid_from:1800,valid_to:1801,owner:'Preserved fixture',source:'Migration regression fixture'}]});
-    const count=legacy.prepare('SELECT count(*) n FROM states').get().n;
-    const region=legacy.prepare("SELECT id FROM units WHERE level='region' AND name='Britain'").get().id;
-    legacy.exec('DROP TRIGGER location_parent_update');
-    legacy.prepare("UPDATE locations SET parent_id=?,metadata=json_remove(metadata,'$.hierarchy_version') WHERE id='atlas:city:GBR-Greater London'").run(region);
-    legacy.exec(fs.readFileSync('data/schema.sql','utf8'));
-    seedDatabase(legacy);
-    const data=geography(legacy);validateHierarchy(data.units,data.features.map(f=>f.properties));
-    assert.equal(legacy.prepare('SELECT count(*) n FROM states').get().n,count);
-    assert.equal(snapshot(legacy,1800).states[0].owner,'Preserved fixture');
-    assert.equal(legacy.prepare("SELECT level FROM units WHERE id=(SELECT parent_id FROM locations WHERE id='atlas:city:GBR-Greater London')").get().level,'province');
-  } finally {legacy.close();}
-});
 
-test('topology migration retires duplicate coverage while preserving its imported history',()=>{
-  const legacy=openDatabase(':memory:');
-  try {
-    seedDatabase(legacy);
-    const removed=JSON.parse(fs.readFileSync('data/topology-report.json','utf8')).retired.find(r=>r.name==='Xianggang');
-    assert.ok(removed);
-    const parent=legacy.prepare("SELECT parent_id FROM locations WHERE id='atlas:territory:HKG' LIMIT 1").get().parent_id;
-    const geometry={type:'Polygon',coordinates:[[[114,22],[115,22],[115,23],[114,22]]]};
-    // Restore an archived source as active to reproduce the legacy duplicate.
-    legacy.prepare('UPDATE locations SET name=?,parent_id=?,geometry=?,active=1 WHERE id=?').run('Xianggang',parent,JSON.stringify(geometry),removed.id);
-    importRecords(legacy,{states:[{location_id:removed.id,valid_from:1900,valid_to:1901,source:'Preserve archived history fixture',owner:'Fixture'}]});
-    seedDatabase(legacy);
-    assert.equal(legacy.prepare('SELECT active FROM locations WHERE id=?').get(removed.id).active,0);
-    assert.equal(legacy.prepare('SELECT count(*) n FROM states WHERE location_id=?').get(removed.id).n,1);
-    assert.deepEqual(JSON.parse(legacy.prepare('SELECT geometry FROM locations WHERE id=?').get(removed.id).geometry),geometry);
-    assert.ok(!geography(legacy).features.some(f=>f.id===removed.id));
-    assert.ok(!snapshot(legacy,1900).states.some(s=>s.location_id===removed.id));
-    seedDatabase(legacy);assert.equal(legacy.prepare('SELECT count(*) n FROM states WHERE location_id=?').get(removed.id).n,1);
-  }finally{legacy.close();}
-});
+
+
 
 
 test('geographic regions cross ownership borders and subdivide large countries',()=>{
@@ -162,24 +127,7 @@ test('geographic regions cross ownership borders and subdivide large countries',
  const report=JSON.parse(fs.readFileSync('data/granularity-report.json'));assert.equal(report.selections.find(x=>x.boundaryISO==='DEU').boundaryType,'ADM3');
 });
 
-test('semantic replacements preserve source history and custom locations without transferring their values',()=>{
- const legacy=openDatabase(':memory:');
- try{
-  seedDatabase(legacy);
-  const london=legacy.prepare("SELECT parent_id FROM locations WHERE id='atlas:city:GBR-Greater London'").get();
-  const geometry={type:'Polygon',coordinates:[[[0,51],[.01,51],[.01,51.01],[0,51]]]};
-  legacy.prepare('UPDATE locations SET name=?,parent_id=?,geometry=?,active=1 WHERE id=?').run('City of London original',london.parent_id,JSON.stringify(geometry),'GBR-4809');
-  importRecords(legacy,{locations:[{id:'custom:preserved',name:'Imported fixture',parent_id:london.parent_id,geometry}],states:[{location_id:'GBR-4809',valid_from:1900,valid_to:1901,population:1234,source:'Source-footprint regression fixture'}]});
-  seedDatabase(legacy);
-  assert.equal(legacy.prepare("SELECT active FROM locations WHERE id='GBR-4809'").get().active,0);
-  assert.equal(legacy.prepare("SELECT active FROM locations WHERE id='custom:preserved'").get().active,1);
-  assert.deepEqual(JSON.parse(legacy.prepare("SELECT geometry FROM locations WHERE id='GBR-4809'").get().geometry),geometry);
-  assert.equal(legacy.prepare("SELECT population FROM states WHERE location_id='GBR-4809' AND valid_from=1900").get().population,1234);
-  assert.equal(legacy.prepare("SELECT count(*) n FROM states WHERE location_id='atlas:city:GBR-Greater London' AND valid_from=1900").get().n,0);
-  seedDatabase(legacy);
-  assert.equal(legacy.prepare("SELECT count(*) n FROM states WHERE location_id='GBR-4809' AND valid_from=1900").get().n,1);
- }finally{legacy.close();}
-});
+
 
 test('non-Latin municipalities remain distinct and city memberships contain all districts',()=>{
  const data=geography(db),byId=new Map(data.features.map(f=>[f.id,f]));

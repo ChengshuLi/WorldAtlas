@@ -1,0 +1,27 @@
+✖ real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum coordinates and high IDs (71.856903ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1476.486039
+
+✖ failing tests:
+
+test at test/compact-ownership.test.mjs:76:1
+✖ real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum coordinates and high IDs (71.856903ms)
+  browserType.launch: Executable doesn't exist at /tmp/worldatlas-650-no-browser/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/worldatlas-quality-650/test/compact-ownership.test.mjs:80:26) {
+    name: 'Error',
+    log: []
+  }

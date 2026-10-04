@@ -1,0 +1,22 @@
+{
+  "method_id": "verbatim-migration-partition",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "bodies": {
+    "test/model-hierarchy-migration.test.mjs": {
+      "test_name": "legacy hierarchy migration preserves historical records and repairs skipped parents",
+      "original_body_sha256": "335cabb72a9c37686020ff59962ec274f6becfd60c0ab9f729f20cf4b42fc93a",
+      "moved_body_sha256": "335cabb72a9c37686020ff59962ec274f6becfd60c0ab9f729f20cf4b42fc93a"
+    },
+    "test/model-topology-migration.test.mjs": {
+      "test_name": "topology migration retires duplicate coverage while preserving its imported history",
+      "original_body_sha256": "cb7dd55cc67c075791af52746d6d98bfa0803fff887b3d8c7f444b92f06603a4",
+      "moved_body_sha256": "cb7dd55cc67c075791af52746d6d98bfa0803fff887b3d8c7f444b92f06603a4"
+    },
+    "test/model-semantic-migration.test.mjs": {
+      "test_name": "semantic replacements preserve source history and custom locations without transferring their values",
+      "original_body_sha256": "57adea719c596ede6a9d959bb0a281fd7ae4fcbc2cddd90cc9c79975b86edca9",
+      "moved_body_sha256": "57adea719c596ede6a9d959bb0a281fd7ae4fcbc2cddd90cc9c79975b86edca9"
+    }
+  }
+}

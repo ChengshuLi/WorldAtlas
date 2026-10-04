@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-10-03T22:32:30.038893+00:00",
+  "hosted_run": 37158334277,
+  "head": "9c2c802a13ec629e7e0dbe12b73ccabee79ce57e",
+  "findings": [
+    "Real WebGL passed in 2993ms. Four staging tests failed because the new regression job lacked its required migration derivative. This is retained as a failed run, not a pass."
+  ],
+  "corrections": [
+    "Prepare the small migration derivative only for shards containing staging tests. Preserve original source SQL.",
+    "Move the single hosted build before shard0 tests so asset-dependent tests use actual packaged assets. No deployment or live import."
+  ],
+  "validation": {
+    "focused_passed": 85,
+    "migration_staging_passed": 5,
+    "new_hosted_verification": "pending"
+  },
+  "before_after_baseline": "7e0d5c97aeb1f0d98ac035959a2fe7a3cafe99c3"
+}

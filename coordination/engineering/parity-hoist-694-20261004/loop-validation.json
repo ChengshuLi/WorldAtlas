@@ -1,0 +1,33 @@
+{
+  "base": "15cb52b8e6fd26164e306bde1128e66317a0149e",
+  "source_file": "test/prepared-parity.test.mjs",
+  "source_sha256": "04260524e8288be088233a5a4cc328fd8560b7ffc482c3ebbee91b83b074682c",
+  "fixture_only": true,
+  "baseline": {
+    "decodeDerived": 26,
+    "expectedReferences": 26,
+    "fingerprint": 104,
+    "snapshot": 26,
+    "resolveTemporal": 52,
+    "resolveAttributes": 52
+  },
+  "updated": {
+    "decodeDerived": 13,
+    "expectedReferences": 13,
+    "fingerprint": 78,
+    "snapshot": 26,
+    "resolveTemporal": 52,
+    "resolveAttributes": 52
+  },
+  "assertions_preserved": 104,
+  "modes_preserved": 26,
+  "inputs_unchanged": true,
+  "negative_controls": [
+    "server corruption rejected with examples false",
+    "server corruption rejected with examples true",
+    "static ownership corruption rejected"
+  ],
+  "limits": [
+    "Synthetic one-location fixture executing extracted actual source loops; not the prepared full atlas and not a performance benchmark"
+  ]
+}
