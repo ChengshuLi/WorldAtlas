@@ -1344,8 +1344,8 @@
   "outputs": [
     {
       "path": "coordination/engineering/startup-20261004-a9c2.json",
-      "bytes": 4455,
-      "sha256": "9105c67b98999da536b6e5456840706d5f5c8e8b3290b64a1569f418aaebb9d8",
+      "bytes": 4660,
+      "sha256": "4e1864e37dcb0d51942cec617a0caa70d973c7011719b2ec6cf3f7e79d9a69cb",
       "hash_kind": "file-bytes"
     },
     {
@@ -1356,8 +1356,8 @@
     },
     {
       "path": "data/engineering/startup-20261004-a9c2/README.md",
-      "bytes": 1965,
-      "sha256": "dfc5d37793b90dc63973f49674b404279cd091243818fb67a64c7aff12fcb5de",
+      "bytes": 4338,
+      "sha256": "a0d39589ce8b037c80bdacbed033636b9edc511d09905ded8e37aef447d60fa1",
       "hash_kind": "file-bytes"
     },
     {
@@ -1791,6 +1791,18 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/engineering/startup-20261004-a9c2/failed-tests-recheck-02.log",
+      "bytes": 14574,
+      "sha256": "495870844ad510324f30b9eb0f25f1bece063286302be89a8d6d77f25d77c5c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-20261004-a9c2/failed-tests-recheck-receipt-02.json",
+      "bytes": 519,
+      "sha256": "a848f4bf9b14d0df6b985cf60d8a194cc6be975b544bc2c1fc87e6bb5c887f55",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "data/engineering/startup-20261004-a9c2/full-tests-01.log",
       "bytes": 150227,
       "sha256": "d647bcba689c9798c5eb4c3f5020386e0997369e74ac21df53d4c4a591e7e08a",
@@ -1898,8 +1910,8 @@
     },
     {
       "path": "data/engineering/startup-20261004-a9c2/prepare-evidence.py",
-      "bytes": 11094,
-      "sha256": "32edd085435dc04000713d624e088984ed69259b8be74f7c25a378f602f8a3d9",
+      "bytes": 11173,
+      "sha256": "af94fe472f8d89dfbddb05aad975936f3d759beaee41c9a36be7dd51cdae929c",
       "hash_kind": "file-bytes"
     },
     {
@@ -3757,6 +3769,14 @@
       "status": "added"
     },
     {
+      "path": "data/engineering/startup-20261004-a9c2/failed-tests-recheck-02.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-20261004-a9c2/failed-tests-recheck-receipt-02.json",
+      "status": "added"
+    },
+    {
       "path": "data/engineering/startup-20261004-a9c2/full-tests-01.log",
       "status": "added"
     },
@@ -5112,6 +5132,26 @@
       "json_pointer": "/skipped"
     },
     {
+      "metric_id": "failed-tests-recheck-receipt-02.json-tests",
+      "path": "data/engineering/startup-20261004-a9c2/failed-tests-recheck-receipt-02.json",
+      "json_pointer": "/tests"
+    },
+    {
+      "metric_id": "failed-tests-recheck-receipt-02.json-passed",
+      "path": "data/engineering/startup-20261004-a9c2/failed-tests-recheck-receipt-02.json",
+      "json_pointer": "/passed"
+    },
+    {
+      "metric_id": "failed-tests-recheck-receipt-02.json-failed",
+      "path": "data/engineering/startup-20261004-a9c2/failed-tests-recheck-receipt-02.json",
+      "json_pointer": "/failed"
+    },
+    {
+      "metric_id": "failed-tests-recheck-receipt-02.json-skipped",
+      "path": "data/engineering/startup-20261004-a9c2/failed-tests-recheck-receipt-02.json",
+      "json_pointer": "/skipped"
+    },
+    {
       "metric_id": "fallback-painted-pixels",
       "path": "data/engineering/startup-20261004-a9c2/candidate-controls-04.json",
       "json_pointer": "/fallback_pixels/painted_pixels"
@@ -5852,6 +5892,38 @@
       "input_sha256": "431ae6f637a8f2f5c25141ad3de1a5ddee316cd00dcd7289b3632a49e5ce8266"
     },
     {
+      "id": "failed-tests-recheck-receipt-02.json-tests",
+      "value": 70,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4a90be3ddcde94afdd71e55058bc13eadb6a2e8b",
+      "input_sha256": "a848f4bf9b14d0df6b985cf60d8a194cc6be975b544bc2c1fc87e6bb5c887f55"
+    },
+    {
+      "id": "failed-tests-recheck-receipt-02.json-passed",
+      "value": 70,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4a90be3ddcde94afdd71e55058bc13eadb6a2e8b",
+      "input_sha256": "a848f4bf9b14d0df6b985cf60d8a194cc6be975b544bc2c1fc87e6bb5c887f55"
+    },
+    {
+      "id": "failed-tests-recheck-receipt-02.json-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4a90be3ddcde94afdd71e55058bc13eadb6a2e8b",
+      "input_sha256": "a848f4bf9b14d0df6b985cf60d8a194cc6be975b544bc2c1fc87e6bb5c887f55"
+    },
+    {
+      "id": "failed-tests-recheck-receipt-02.json-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4a90be3ddcde94afdd71e55058bc13eadb6a2e8b",
+      "input_sha256": "a848f4bf9b14d0df6b985cf60d8a194cc6be975b544bc2c1fc87e6bb5c887f55"
+    },
+    {
       "id": "fallback-painted-pixels",
       "value": 230454,
       "unit": "pixels",
@@ -6325,6 +6397,26 @@
     },
     {
       "metric_id": "scoped-tests-receipt-07.json-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "failed-tests-recheck-receipt-02.json-tests",
+      "value": 70,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "failed-tests-recheck-receipt-02.json-passed",
+      "value": 70,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "failed-tests-recheck-receipt-02.json-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "failed-tests-recheck-receipt-02.json-skipped",
       "value": 0,
       "unit": "tests"
     },

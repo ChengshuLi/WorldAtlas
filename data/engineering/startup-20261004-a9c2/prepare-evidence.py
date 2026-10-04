@@ -74,7 +74,7 @@ for key in ['new_run_bytes','original_input_bytes']:
 name=str(ROOT/'ownership-transport-parity-02.json');r=json.loads(Path(name).read_text())
 metric('unchanged-canonical-run-words',name,'/ownership/pixelMap/runWords',r['ownership']['pixelMap']['runWords'],'words',git('rev-parse','5482569').decode().strip())
 metric('unchanged-canonical-grid-size',name,'/ownership/pixelMap/size',r['ownership']['pixelMap']['size'],'grid size',git('rev-parse','5482569').decode().strip())
-for short,keys in [('scoped-tests-receipt-07.json',['tests','passed','failed','skipped'])]:
+for short,keys in [('scoped-tests-receipt-07.json',['tests','passed','failed','skipped']),('failed-tests-recheck-receipt-02.json',['tests','passed','failed','skipped'])]:
     name=str(ROOT/short);r=json.loads(Path(name).read_text())
     for key in keys: metric(short+'-'+key,name,'/'+key,r[key],'tests',git('rev-parse','4a90be3').decode().strip())
 name=str(ROOT/'candidate-controls-04.json');r=json.loads(Path(name).read_text())
