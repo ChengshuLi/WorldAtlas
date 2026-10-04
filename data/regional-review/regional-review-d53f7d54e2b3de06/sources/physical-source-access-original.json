@@ -1,0 +1,17 @@
+{
+  "subject": "Physical coastline and named-island inventory",
+  "authoritative_product": "NOAA GSHHG (Global Self-consistent, Hierarchical, High-resolution Geography Database)",
+  "canonical_information_page": "https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html",
+  "information_page_result": "HTTP 200; the official page links the GSHHG latest-data path and its readme",
+  "linked_data_path_attempts": [
+    {"url": "https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/", "result": "HTTP 404"},
+    {"url": "https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/readme.txt", "result": "HTTP 404"},
+    {"url": "http://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/", "result": "HTTP 404"}
+  ],
+  "downloaded": false,
+  "retained_bytes": false,
+  "hash": null,
+  "finding": "The official product page is reachable, but its linked download directory did not resolve during this run. No physical shoreline or named-island completeness conclusion is made from the administrative polygons alone.",
+  "bounded_followup": "Restore the official current GSHHG files or an NOAA-documented mirror, screen all 49 assigned locations and their disconnected components, and reconcile named islands/land fragments with national or NGA gazetteer evidence before accepting physical coverage.",
+  "license_status": "Not independently verified for the inaccessible archive; review the NOAA product terms/readme when the source is restored."
+}
