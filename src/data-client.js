@@ -155,12 +155,15 @@ export async function loadGeography() {
   referenceAttributeFootprints=data.reference_release?.footprints_sha256??data.preparedEvidence?.footprints_sha256;
   // Preload one complete pinned bundle; legacy deployments keep their old reads.
   if(staticAtlas&&referenceAttributeBundle)loadReferenceGeneration().catch(()=>{});
-  const [catalog,entities,history]=await Promise.all([
-   data.parts?Promise.all([Promise.all(data.parts.map(part=>readJSON(`./${part}`))).then(parts=>parts.flat()),data.pixelMap?loadOwnershipAssets(data.pixelMap):null]):null,
+  // Queue ownership rows before the catalog fan-out so decoding can overlap it.
+  // Every required stream still completes before this generation is exposed.
+  const [ownership,history,entities,features]=await Promise.all([
+   data.parts&&data.pixelMap?loadOwnershipAssets(data.pixelMap):null,
+   data.temporalHistoryParts?Promise.all(data.temporalHistoryParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null,
    data.entityParts?Promise.all(data.entityParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null,
-   data.temporalHistoryParts?Promise.all(data.temporalHistoryParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null
+   data.parts?Promise.all(data.parts.map(part=>readJSON(`./${part}`))).then(parts=>parts.flat()):null
   ]);
-  if(catalog){[data.features,data.ownership]=catalog;}
+  if(features){data.features=features;data.ownership=ownership;}
   if(entities)data.temporal.entities=entities;
   if(history)data.temporal.history=history;
   validateHierarchy(data.units,data.features.map(f=>f.properties));

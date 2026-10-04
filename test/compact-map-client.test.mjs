@@ -94,6 +94,40 @@ test('complete entity and history reads start before the catalog finishes',async
  assert.deepEqual(result.features,[]);assert.deepEqual(result.temporal,{entities:[],history:[]});
 }));
 
+test('ownership transport starts before catalog fan-out and geography waits for every stream',async()=>withLoader(async loader=>{
+ const rows=Uint32Array.of(0,1,1,0),runs=Uint32Array.of(0,2,7,0);
+ const pixelMap={version:1,size:2,runWords:4,parts:[{kind:'rows',path:'rows',offset:0,words:4},{kind:'runs',path:'runs',offset:0,words:4}]};
+ const calls=[],release=new Map();let complete=false;
+ global.fetch=async url=>{
+  calls.push(url);
+  if(url==='./atlas-geography.json')return Response.json({units:[],parts:['catalog'],pixelMap,entityParts:['entities'],temporalHistoryParts:['history'],temporal:{}});
+  if(url==='./rows')return new Response(Buffer.from(rows.buffer));
+  return new Promise(resolve=>release.set(url,()=>resolve(url==='./runs'?new Response(Buffer.from(runs.buffer)):Response.json([]))));
+ };
+ const pending=loader.loadGeography().then(value=>{complete=true;return value;});
+ await new Promise(setImmediate);
+ assert.ok(calls.indexOf('./rows')<calls.indexOf('./catalog'));
+ assert.ok(calls.includes('./runs'));assert.equal(complete,false);
+ for(const url of ['./entities','./history','./catalog'])release.get(url)();
+ await new Promise(setImmediate);assert.equal(complete,false,'complete metadata cannot expose a map before ownership');
+ release.get('./runs')();const result=await pending;
+ assert.deepEqual(result.ownership.rows,rows);assert.deepEqual(result.ownership.runs,runs);
+ assert.deepEqual(result.features,[]);assert.deepEqual(result.temporal,{entities:[],history:[]});
+}));
+
+test('unavailable bootstrap streams reject instead of returning a partial geography',async()=>{
+ for(const missing of ['catalog','entities','history','rows','runs'])await withLoader(async loader=>{
+  const rows=Uint32Array.of(0,1,1,0),runs=Uint32Array.of(0,2,7,0);
+  global.fetch=async url=>{
+   if(url==='./atlas-geography.json')return Response.json({units:[],parts:['catalog'],entityParts:['entities'],temporalHistoryParts:['history'],temporal:{},pixelMap:{version:1,size:2,runWords:4,parts:[{kind:'rows',path:'rows',offset:0,words:4},{kind:'runs',path:'runs',offset:0,words:4}]}});
+   if(url===`./${missing}`)return new Response('',{status:503});
+   if(url==='./rows'||url==='./runs')return new Response(Buffer.from((url==='./rows'?rows:runs).buffer));
+   return Response.json([]);
+  };
+  await assert.rejects(loader.loadGeography(),/could not load|unavailable/i);
+ });
+});
+
 test('older Workers negotiate the sparse limit without masking unrelated bad requests',async()=>withLoader(async loader=>{
  const limits=[];global.fetch=async url=>{const p=request(url),limit=Number(p.get('limit'));limits.push(limit);return limit>1000?Response.json({error:'Map entity page limit must be between 1 and 1000'},{status:400}):Response.json(validPage());};
  const result=await loader.loadHostedMapEvidence(2020,false);assert.deepEqual(limits,[4096,1000]);assert.equal(result.retirementAuthority,true);
