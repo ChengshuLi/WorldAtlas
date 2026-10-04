@@ -46,7 +46,7 @@ try {
         Object.assign(log,{status:200,response_bytes:bytes.length,total_ms:performance.now()-started,candidate_asset:true});
         res.writeHead(200,{'Content-Type':local.endsWith('.js')?'text/javascript':local.endsWith('.css')?'text/css':'text/html'});return res.end(bytes);
       }
-      const bundled=bundleDirectory&&(url.pathname==='/reference-attributes/startup-bundle.json.gz'?'reference-attributes/startup-bundle.json.gz':url.pathname==='/geography/startup-temporal.json.gz'?'geography/startup-temporal.json.gz':null);
+      const bundled=bundleDirectory&&(url.pathname==='/reference-attributes/startup-bundle.json.gz'?'reference-attributes/startup-bundle.json.gz':url.pathname==='/geography/startup-temporal.json.gz'?'geography/startup-temporal.json.gz':/^\/ownership\/startup-runs-[0-9]+\.bin\.gz$/.test(url.pathname)?url.pathname.slice(1):null);
       if(bundled){
         const bytes=fs.readFileSync(path.join(bundleDirectory,bundled));
         Object.assign(log,{status:200,response_bytes:bytes.length,total_ms:performance.now()-started,candidate_asset:true,candidate_bundle:true});

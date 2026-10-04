@@ -1,0 +1,83 @@
+✔ reference presentation context is reused within one loaded generation and rebuilt on reload (32.965001ms)
+✔ a pinned reference bundle preloads once and preserves legacy dated/reference separation (18.086984ms)
+✔ a rejected old reference generation cannot clear a newer successful generation (3.510853ms)
+✔ complete entity and history reads start before the catalog finishes (9.044243ms)
+✔ older Workers negotiate the sparse limit without masking unrelated bad requests (8.631662ms)
+✔ complete inline temporal streams use the existing pin and revision validator without extra HTTP reads (12.549587ms)
+✔ inline temporal revision or release drift restarts the scalar snapshot rather than repinning it (7.407206ms)
+✔ absent inline temporal pages retain bounded ordinary geography paging (9.250844ms)
+✔ partial inline temporal pages cannot become authoritative or trigger unbounded reads (11.329689ms)
+✔ compact client hydrates two atomic entity pages and retains shared source provenance (11.224159ms)
+✔ oversized second page reduces its limit and retries its cursor without duplicating completed pages (3.45644ms)
+✔ a first-page size retry reaches the reduced request and preserves retirement authority (2.876976ms)
+✔ retryable conflicts and cross-page revision changes restart the complete compact snapshot (3.089096ms)
+✔ three persistently inconsistent attempts produce unavailable evidence without cold-cache authority (2.977018ms)
+✔ warm failures retain claims and withdrawals atomically only for the same year and example setting (4.228945ms)
+✔ malformed compact pages, incorrect years and cursor cycles fail atomically (13.798379ms)
+✔ compact client propagates aborts and passes the signal to its network request (2.114648ms)
+✔ clients without a compact capability keep the original three-stream protocol (2.245345ms)
+✔ the geography capability enables compact reads through the actual manifest loader (2.530274ms)
+✔ ownership assets reconstruct out-of-order compressed chunks and reject truncation (38.736612ms)
+✔ version-pinned ownership digests reject mixed deployments and support host-decoded gzip (8.06722ms)
+✔ bounded concurrent transport retains complete row-before-run reconstruction (7.671259ms)
+✖ startup ownership packaging preserves original GPU words and source files (13.381431ms)
+✖ startup ownership rejects altered, unpinned or unsafe canonical sources (4.656289ms)
+✔ bundle preserves complete records, supported intervals, source context and original bytes (46.780887ms)
+✔ separate bundle runs are byte-identical and cannot overwrite an earlier output (8.694996ms)
+✔ proof rejects mixed footprints, unsafe routes and oversized declarations before any fetch (6.482892ms)
+✔ bad hashes, truncated data and unavailable bundles fail closed (7.64269ms)
+✔ an internally incomplete roster is rejected even with matching transport hashes (4.824182ms)
+✔ packaging refuses unsafe source rosters and mismatched source footprints (2.874653ms)
+✔ prepared context preserves full output across dates, uncertainty and unavailable evidence (5.580923ms)
+✔ environmental context can be displayed without inventing historical field evidence (0.358301ms)
+✔ modern supported records and historical reference context share a category and map color (0.521085ms)
+✔ dated historical observations override modern context until their exclusive interval end (0.480264ms)
+✔ explicit dated uncertainty and unmapped source text cannot be replaced by a baseline (0.275966ms)
+✔ only supported environmental references can supply presentation context (0.458531ms)
+✔ invalidated geography cannot retain environmental context or restore a dated field (0.186271ms)
+✔ reference source dates and environmental caveats survive display unchanged (0.189846ms)
+✔ an evidence outage leaves historical fields unknown while immutable reference context remains available (0.189065ms)
+✔ missing baselines remain unknown and non-environmental fields never acquire environmental context (0.284028ms)
+✔ baseline selection is deterministic and keeps the chosen source interval rather than extending it (0.202405ms)
+✔ compact and legacy context decoding preserve original supported intervals and source metadata (0.473975ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 40
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 229.787156
+
+✖ failing tests:
+
+test at test/package-startup-ownership.test.mjs:31:1
+✖ startup ownership packaging preserves original GPU words and source files (13.381431ms)
+  Error: Invalid ownership manifest
+      at loadOwnershipAssets (file:///tmp/worldatlas-startup712/src/ownership-assets.js:6:275)
+      at packageStartupOwnership (file:///tmp/worldatlas-startup712/scripts/package-startup-ownership.mjs:19:26)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/package-startup-ownership.test.mjs:33:25)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at test/package-startup-ownership.test.mjs:47:1
+✖ startup ownership rejects altered, unpinned or unsafe canonical sources (4.656289ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /input changed/. Input:
+  
+  'Error: Invalid ownership manifest'
+  
+      at async TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/package-startup-ownership.test.mjs:50:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Invalid ownership manifest
+        at loadOwnershipAssets (file:///tmp/worldatlas-startup712/src/ownership-assets.js:6:275)
+        at packageStartupOwnership (file:///tmp/worldatlas-startup712/scripts/package-startup-ownership.mjs:19:26)
+        at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/package-startup-ownership.test.mjs:50:24)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7),
+    expected: /input changed/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

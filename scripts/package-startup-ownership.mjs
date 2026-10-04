@@ -4,7 +4,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
-import {encodeOwnershipVarints, decodeOwnershipVarints} from '../src/ownership-codec.js';
+import {shuffleOwnershipBytes, unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const validHash = value => /^[a-f0-9]{64}$/.test(value ?? '');
@@ -28,10 +28,9 @@ export async function packageStartupOwnership({manifest, source, destination}) {
   await fs.mkdir(path.join(destination, 'ownership'), {recursive: true});
   for (let offset = 0; offset < original.runs.length; offset += WORDS_PER_PART) {
     const words = original.runs.subarray(offset, Math.min(offset + WORDS_PER_PART, original.runs.length));
-    const options = {rows: original.rows, offset, coordinateBits: manifest.coordinateBits};
-    const encoded = encodeOwnershipVarints(words, options);
+    const encoded = shuffleOwnershipBytes(words);
     if (encoded.length > 32 * 1024 * 1024) throw Error('Ownership transport exceeds decoded byte limit');
-    const decoded = decodeOwnershipVarints(encoded, {...options, words: words.length, size: manifest.size});
+    const decoded = unshuffleOwnershipBytes(encoded, words.length);
     const originalBytes = Buffer.from(words.buffer, words.byteOffset, words.byteLength);
     const decodedBytes = Buffer.from(decoded.buffer, decoded.byteOffset, decoded.byteLength);
     if (!originalBytes.equals(decodedBytes)) throw Error('Ownership transport changed canonical GPU words');
@@ -39,7 +38,7 @@ export async function packageStartupOwnership({manifest, source, destination}) {
     if (bytes.length > 8 * 1024 * 1024) throw Error('Ownership transport exceeds compressed byte limit');
     const relative = `ownership/startup-runs-${offset}.bin.gz`;
     await fs.writeFile(path.join(destination, relative), bytes, {flag: 'wx'});
-    parts.push({kind: 'runs', path: relative, offset, words: words.length, encoding: 'row-varint',
+    parts.push({kind: 'runs', path: relative, offset, words: words.length, encoding: 'byte-shuffle',
       sha256: digest(bytes), decoded_sha256: digest(decodedBytes)});
     receipts.push({path: relative, bytes: bytes.length, sha256: digest(bytes),
       uncompressed_bytes: encoded.length, uncompressed_sha256: digest(encoded),

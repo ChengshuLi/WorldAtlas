@@ -1,0 +1,61 @@
+✔ reference presentation context is reused within one loaded generation and rebuilt on reload (38.682242ms)
+✔ a pinned reference bundle preloads once and preserves legacy dated/reference separation (19.507798ms)
+✔ a rejected old reference generation cannot clear a newer successful generation (3.435889ms)
+✔ complete entity and history reads start before the catalog finishes (3.153754ms)
+✔ older Workers negotiate the sparse limit without masking unrelated bad requests (5.558209ms)
+✔ complete inline temporal streams use the existing pin and revision validator without extra HTTP reads (6.100085ms)
+✔ inline temporal revision or release drift restarts the scalar snapshot rather than repinning it (5.335964ms)
+✔ absent inline temporal pages retain bounded ordinary geography paging (4.149745ms)
+✔ partial inline temporal pages cannot become authoritative or trigger unbounded reads (3.137129ms)
+✔ compact client hydrates two atomic entity pages and retains shared source provenance (4.522227ms)
+✔ oversized second page reduces its limit and retries its cursor without duplicating completed pages (3.589832ms)
+✔ a first-page size retry reaches the reduced request and preserves retirement authority (3.191111ms)
+✔ retryable conflicts and cross-page revision changes restart the complete compact snapshot (3.500256ms)
+✔ three persistently inconsistent attempts produce unavailable evidence without cold-cache authority (3.759457ms)
+✔ warm failures retain claims and withdrawals atomically only for the same year and example setting (5.204695ms)
+✔ malformed compact pages, incorrect years and cursor cycles fail atomically (17.411257ms)
+✔ compact client propagates aborts and passes the signal to its network request (2.588271ms)
+✔ clients without a compact capability keep the original three-stream protocol (2.912931ms)
+✔ the geography capability enables compact reads through the actual manifest loader (3.068536ms)
+✔ ownership assets reconstruct out-of-order compressed chunks and reject truncation (44.025176ms)
+✔ version-pinned ownership digests reject mixed deployments and support host-decoded gzip (13.021579ms)
+✔ bounded concurrent transport retains complete row-before-run reconstruction (10.430664ms)
+✖ startup ownership packaging preserves original GPU words and source files (55.813816ms)
+✔ startup ownership rejects altered, unpinned or unsafe canonical sources (9.481753ms)
+✔ bundle preserves complete records, supported intervals, source context and original bytes (48.650843ms)
+✔ separate bundle runs are byte-identical and cannot overwrite an earlier output (7.681329ms)
+✔ proof rejects mixed footprints, unsafe routes and oversized declarations before any fetch (4.560485ms)
+✔ bad hashes, truncated data and unavailable bundles fail closed (5.273028ms)
+✔ an internally incomplete roster is rejected even with matching transport hashes (5.11493ms)
+✔ packaging refuses unsafe source rosters and mismatched source footprints (3.189378ms)
+✔ prepared context preserves full output across dates, uncertainty and unavailable evidence (3.60891ms)
+✔ environmental context can be displayed without inventing historical field evidence (0.446804ms)
+✔ modern supported records and historical reference context share a category and map color (0.364149ms)
+✔ dated historical observations override modern context until their exclusive interval end (0.214153ms)
+✔ explicit dated uncertainty and unmapped source text cannot be replaced by a baseline (0.22522ms)
+✔ only supported environmental references can supply presentation context (0.154243ms)
+✔ invalidated geography cannot retain environmental context or restore a dated field (0.222726ms)
+✔ reference source dates and environmental caveats survive display unchanged (0.191428ms)
+✔ an evidence outage leaves historical fields unknown while immutable reference context remains available (0.193281ms)
+✔ missing baselines remain unknown and non-environmental fields never acquire environmental context (0.230267ms)
+✔ baseline selection is deterministic and keeps the chosen source interval rather than extending it (0.248384ms)
+✔ compact and legacy context decoding preserve original supported intervals and source metadata (0.552924ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 41
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 267.544592
+
+✖ failing tests:
+
+test at test/package-startup-ownership.test.mjs:31:1
+✖ startup ownership packaging preserves original GPU words and source files (55.813816ms)
+  Error: Unreferenced ownership runs
+      at loadOwnershipAssets (file:///tmp/worldatlas-startup712/src/ownership-assets.js:52:52)
+      at async packageStartupOwnership (file:///tmp/worldatlas-startup712/scripts/package-startup-ownership.mjs:19:20)
+      at async TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/package-startup-ownership.test.mjs:33:19)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

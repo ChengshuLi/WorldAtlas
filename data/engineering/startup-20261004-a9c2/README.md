@@ -18,3 +18,5 @@ and individual query phases remain unavailable unless genuinely measured.
 research remain separate. Current main already includes638 client optimization
 and unserved6 structure, while the actual production Site still serves5; preview
 client/data vintages must be labeled separately, never silently repinned.
+
+Latest selected experiment uses the reference bundle and larger byte-shuffle ownership parts. All 57,618,658 run words are unchanged. Candidate04 startup was 11.754s fresh / 10.073s repeat; new parts were local, so this is an optimistic transport experiment and does not prove hosted ten-second acceptance. All samples, including a 3.452s navigation outlier, remain recorded. Temporal03 source and receipts remain in prototypes/temporal-03; rejected varint05 complete bytes are retained by immutable tag evidence-startup712-varint-20261004-a9c2 at 5482569ea17d16dfa972ddb5b436ed16f9b39bb7, with explicit restoration instructions. No source/research files were removed.
