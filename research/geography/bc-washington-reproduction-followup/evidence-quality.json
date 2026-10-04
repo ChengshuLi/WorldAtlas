@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "issue": 660,
+  "lane": "geography",
+  "worker_id": "codex-20261004-bcwa-660-f61d2224-e003-4b49-b228-740689c098da",
+  "subject_ids": [
+    "atlas:district:CAN-5915:BRC",
+    "gb:USA:ADM2:52423323B32782252789959",
+    "gb:USA:ADM2:52423323B9068998137459"
+  ],
+  "subject_ids_sha256": "df0e60469e51710fc77c197960ad6f907646a83e215b8177609536643f2437ca",
+  "baseline": {
+    "commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-27.json",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4254da254d94f450/scope.json",
+        "bytes": 19009,
+        "sha256": "eeeba48c2ac959c2304b31f2008251b2dd8b34751d9aab1b9735d825532bf055",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4254da254d94f450/sources/current-parent-chains.json.gz",
+        "bytes": 106481,
+        "sha256": "aa0c1643d376baa9b7478d26886510718d3c0e242782df004e2defd028938290",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4254da254d94f450/sources/current-scope-and-parents.geojson.gz",
+        "bytes": 280642,
+        "sha256": "7ac3154985ef3bf5aae5b978481233e3a73c0ef6b2a753e1c7a15cef4c9302bb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-4254da254d94f450/sources/tigerline-2024-washington-counties.geojson.gz",
+        "bytes": 859249,
+        "sha256": "74c2822d327082e2738a8d93d59bc5eadf42590f7fef0941221e61deb36a4034",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/bc-washington-coastal-edge-followup-2026/sample-assessment.json",
+        "bytes": 14978,
+        "sha256": "0f5f8d1a742032c149ce47a8aae01442cc1a5c5dc2e9b6719e11ae2f7080df13",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10165703,
+        "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "subject_files": {
+      "atlas:district:CAN-5915:BRC": "data/geography/part-29.json",
+      "gb:USA:ADM2:52423323B32782252789959": "data/geography/part-27.json",
+      "gb:USA:ADM2:52423323B9068998137459": "data/geography/part-27.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "ibc-v1-3-section-25",
+      "url": "https://www.internationalboundarycommission.org/uploads/shapefile/us-canada-boundary-v1-3.zip",
+      "role": "mapping-only source line; not a legal boundary authority",
+      "vintage": "metadata dated 2018-04-20",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "restricted",
+        "terms": "IBC ©2015, All Rights Reserved; mapping use only; must not define boundary. Recheck terms before restoration."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore only from the canonical IBC endpoint if available; verify 258764 bytes and SHA-256 eb327459528b87cbc27e55ccc6bfd6982562c75559823a00b6dc50c04abcaab1, and recheck current terms. Canonical downloads page returned HTTP 404 on 2026-10-04.",
+      "limit": "The inherited coordinates and source-line generation could not be independently reproduced; no archive bytes retained."
+    },
+    {
+      "id": "statistics-canada-cd-2021",
+      "url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+      "role": "2021 Census Division statistical boundaries; inherited source packet input",
+      "vintage": "2021 Census; inherited source packet download date retained in source metadata",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "redistributable",
+        "terms": "Statistics Canada Open Licence; statistical units do not establish political ownership."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Use the preserved gzip at data/regional-review/regional-review-4254da254d94f450/sources/statistics-canada-bc-census-divisions-2021.geojson.gz in pinned baseline a1fd3383e89dea4c4497bf3a6f469494871ad758; 38880150 bytes, SHA-256 8a31cf19ad0694638c88275fec9ff1005970cd8600ca6baed245b8826756e9bf.",
+      "limit": "The preserved input exceeds the validator's 32 MiB candidate-file limit; local runner hash-checks it from the immutable Git baseline. This packet does not recalculate geometry."
+    },
+    {
+      "id": "tigerline-wa-counties-2024",
+      "url": "https://www2.census.gov/geo/tiger/TIGER2024/COUNTY/tl_2024_us_county.zip",
+      "role": "2024 Washington county reference geometry; public-domain source",
+      "vintage": "2024 TIGER/Line",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal government work; public domain."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Use the preserved Washington extract at data/regional-review/regional-review-4254da254d94f450/sources/tigerline-2024-washington-counties.geojson.gz in pinned baseline a1fd3383e89dea4c4497bf3a6f469494871ad758; 859249 bytes, SHA-256 74c2822d327082e2738a8d93d59bc5eadf42590f7fef0941221e61deb36a4034.",
+      "limit": "This packet reconciles inherited rows and does not recalculate county geometry."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
+      "bytes": 3310,
+      "sha256": "baaf73f55fe4251264046e8d9a890cc9a4bf6e81fc7f6cbde932b885794358c8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/verification.json",
+      "bytes": 428,
+      "sha256": "6d923e9d07055a6e880a9584c8bb05cf5fdd92b0f2125a129a44660788c62ef5",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "inherited-sample-ledger-audit",
+      "description": "Pin and validate all 18 inherited sample records (IDs 50–67), then derive the noncontainment count and distance extrema directly from every retained row. Coordinates are inherited projected values; source-line resampling was not performed.",
+      "software": "Python 3 standard library; immutable Git object reader",
+      "units": "sample count; meters",
+      "kind": "geography",
+      "axis_order": "longitude-latitude",
+      "crs": "inherited EPSG:3347 projected sample coordinates; no coordinate transformation in this audit",
+      "area_method": "Not computed",
+      "distance_method": "Read inherited nearest-boundary distances and recompute arithmetic extrema; no geometry operation."
+    }
+  ],
+  "metrics": [
+    {
+      "id": "sample_count",
+      "value": 18,
+      "unit": "samples",
+      "vintage": "archived",
+      "input_sha256": "0f5f8d1a742032c149ce47a8aae01442cc1a5c5dc2e9b6719e11ae2f7080df13",
+      "evaluation_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758"
+    },
+    {
+      "id": "strict_noncontainment_count",
+      "value": 5,
+      "unit": "samples",
+      "vintage": "archived",
+      "input_sha256": "0f5f8d1a742032c149ce47a8aae01442cc1a5c5dc2e9b6719e11ae2f7080df13",
+      "evaluation_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758"
+    },
+    {
+      "id": "minimum_bc_distance",
+      "value": 1011.9,
+      "unit": "m",
+      "vintage": "archived",
+      "input_sha256": "0f5f8d1a742032c149ce47a8aae01442cc1a5c5dc2e9b6719e11ae2f7080df13",
+      "evaluation_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758"
+    },
+    {
+      "id": "maximum_bc_distance",
+      "value": 5888.53,
+      "unit": "m",
+      "vintage": "archived",
+      "input_sha256": "0f5f8d1a742032c149ce47a8aae01442cc1a5c5dc2e9b6719e11ae2f7080df13",
+      "evaluation_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "sample_count",
+      "value": 18,
+      "unit": "samples"
+    },
+    {
+      "metric_id": "strict_noncontainment_count",
+      "value": 5,
+      "unit": "samples"
+    },
+    {
+      "metric_id": "minimum_bc_distance",
+      "value": 1011.9,
+      "unit": "m"
+    },
+    {
+      "metric_id": "maximum_bc_distance",
+      "value": 5888.53,
+      "unit": "m"
+    }
+  ],
+  "metric_bindings": [],
+  "conclusions": [
+    {
+      "text": "The inherited rows show five strict noncontainments and a minimum nearest-BC distance of 1,011.90 m; prior narrative reports four and 1,011.91 m.",
+      "status": "supported",
+      "source_ids": [
+        "tigerline-wa-counties-2024"
+      ]
+    },
+    {
+      "text": "The coastal offset cause and any correction remain unresolved because source-line coordinates were not regenerated and source vintages/scales differ.",
+      "status": "unresolved",
+      "source_ids": [
+        "ibc-v1-3-section-25",
+        "statistics-canada-cd-2021",
+        "tigerline-wa-counties-2024"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/bc-washington-reproduction-followup/reproduce.py",
+    "python3 research/geography/bc-washington-reproduction-followup/verify_packet.py",
+    "node scripts/evidence-quality.mjs research/geography/bc-washington-reproduction-followup/evidence-quality.json ."
+  ]
+}

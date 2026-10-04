@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "baseline_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758",
+  "input": "inherited #657 sample-assessment.json; source-line coordinates not regenerated",
+  "sample_ids": [
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67
+  ],
+  "subjects": [
+    {
+      "id": "atlas:district:CAN-5915:BRC",
+      "source_name": "Greater Vancouver",
+      "parent_chain": [
+        "atlas:district:CAN-5915:BRC",
+        "framework:province:british-columbia:83abeaaac0ca",
+        "framework:area:british-columbia:4ac4bdf4a9b8",
+        "framework:region:western-north-america:d2a1c2775a57",
+        "framework:subcontinent:northern-america:477e054b32f2",
+        "framework:continent:north-america:1ca27616f338"
+      ],
+      "assessment": "Current BC assigned comparison feature; its 18 ledger distances are 1,011.90–5,888.53 m. Source grouping is Statistics Canada CD 5915-derived; not a legal line."
+    },
+    {
+      "id": "gb:USA:ADM2:52423323B9068998137459",
+      "source_name": "Whatcom",
+      "parent_chain": [
+        "gb:USA:ADM2:52423323B9068998137459",
+        "framework:province:washington:b01ae89096c9",
+        "framework:area:pacific:31aced66907e",
+        "framework:region:western-north-america:d2a1c2775a57",
+        "framework:subcontinent:northern-america:477e054b32f2",
+        "framework:continent:north-america:1ca27616f338"
+      ],
+      "assessment": "Current Washington member corresponding to 2024 TIGER Whatcom county GEOID 53073, nearest county in all 18 inherited rows."
+    },
+    {
+      "id": "gb:USA:ADM2:52423323B32782252789959",
+      "source_name": "San Juan",
+      "parent_chain": [
+        "gb:USA:ADM2:52423323B32782252789959",
+        "framework:province:washington:b01ae89096c9",
+        "framework:area:pacific:31aced66907e",
+        "framework:region:western-north-america:d2a1c2775a57",
+        "framework:subcontinent:northern-america:477e054b32f2",
+        "framework:continent:north-america:1ca27616f338"
+      ],
+      "assessment": "Current Washington member corresponding to 2024 TIGER San Juan county GEOID 53055; included as assigned neighbor, not nearest in any inherited sample row."
+    }
+  ],
+  "sample_count": 18,
+  "nearest_bc_location_id_all_samples": "atlas:district:CAN-5915:BRC",
+  "nearest_wa_geoid_all_samples": "53073",
+  "nearest_bc_distance_m": {
+    "minimum": 1011.9,
+    "maximum": 5888.53
+  },
+  "strict_tiger_polygon_noncontainment_sample_ids": [
+    55,
+    63,
+    64,
+    65,
+    66
+  ],
+  "strict_tiger_polygon_noncontainment_count": 5,
+  "legacy_narrative_errors": [
+    {
+      "field": "noncontainment count",
+      "legacy": 4,
+      "ledger": 5
+    },
+    {
+      "field": "minimum BC distance meters",
+      "legacy": 1011.91,
+      "ledger": 1011.9,
+      "display": "1,011.90"
+    }
+  ],
+  "interpretation": "The retained row ledger establishes these arithmetic corrections only. It does not establish why the source line is offset, legal boundary, ownership, or a geometry correction.",
+  "unresolved": "IBC v1.3 line archive was not restored because current canonical page returned HTTP 404 and retained terms permit mapping-only use. Inherited sample coordinates and source-line generation remain unverified."
+}
