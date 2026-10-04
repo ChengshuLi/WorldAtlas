@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Positive and fail-closed controls for the #662 reproduction path."""
 import hashlib
+import json
 import sys
 import unittest
 
@@ -66,13 +67,23 @@ if __name__ == "__main__":
 
     # The manifest binds these exact successful control receipts. Exclusive
     # writes prevent a later run from silently replacing the reviewed vintage.
-    common.write_candidate("validation/positive-control.json", {
+    def record_control(name, receipt):
+        target = common.HERE / name
+        expected = json.dumps(receipt, ensure_ascii=False, indent=2) + "\n"
+        if target.exists():
+            if target.read_text(encoding="utf-8") != expected:
+                raise RuntimeError(f"existing control receipt differs: {name}")
+            print(f"verified existing candidate {name}; no output replaced")
+            return
+        common.write_candidate(name, receipt)
+
+    record_control("validation/positive-control.json", {
         "method_id": "assigned_geometry_overlay",
         "kind": "positive-control",
         "outcome": "passed",
         "cases": ["valid-square-identical-overlay", "exact-zero-symmetric-difference"],
     })
-    common.write_candidate("validation/negative-control.json", {
+    record_control("validation/negative-control.json", {
         "method_id": "assigned_geometry_overlay",
         "kind": "negative-control",
         "outcome": "passed",
