@@ -1,0 +1,75 @@
+{
+  "case_count": 13,
+  "cases": [
+    {
+      "id": "positive-complete-33-subject-crosswalk",
+      "result": "PASS",
+      "subjects": 33
+    },
+    {
+      "id": "positive-all-36-indexed-parts-unique-containment",
+      "parts": 36,
+      "result": "PASS"
+    },
+    {
+      "id": "positive-complete-six-node-parent-chains",
+      "result": "PASS",
+      "subjects": 33
+    },
+    {
+      "features": 15,
+      "id": "positive-resolve-2017-original-vs-live-15-row-attribute-match",
+      "result": "PASS"
+    },
+    {
+      "id": "positive-2018-adm2-predecessor-roster",
+      "predecessors": 7,
+      "result": "PASS"
+    },
+    {
+      "id": "positive-official-tiger-2018-seven-county-equivalents",
+      "result": "PASS",
+      "source_archive_sha256": "85e7430567ec47c399e112a0f2fcc19779fbce79dce86cba6ea159256b77d01b"
+    },
+    {
+      "id": "positive-two-independent-builds-byte-identical",
+      "result": "PASS",
+      "sha256": "c6a58c49029e9f0e381a4f26495731d9e95bfb8eb30c1189de9fcbf7d12b0c54"
+    },
+    {
+      "id": "negative-duplicate-assigned-id-rejected",
+      "rejection": "incomplete/duplicate",
+      "result": "PASS"
+    },
+    {
+      "id": "negative-missing-assigned-id-rejected",
+      "rejection": "incomplete/duplicate",
+      "result": "PASS"
+    },
+    {
+      "id": "negative-changed-github-issue-body-rejected",
+      "rejection": "issue body",
+      "result": "PASS"
+    },
+    {
+      "id": "negative-changed-parent-snapshot-rejected",
+      "rejection": "snapshot/evaluation commits",
+      "result": "PASS"
+    },
+    {
+      "id": "negative-changed-primary-source-response-rejected",
+      "rejection": "ArcGIS query bytes",
+      "result": "PASS"
+    },
+    {
+      "id": "negative-changed-census-extract-rejected",
+      "rejection": "Captured primary-source bytes",
+      "result": "PASS"
+    }
+  ],
+  "issue": 601,
+  "original_source_write_attempts": 0,
+  "result": "PASS",
+  "shared_geography_write_attempts": 0,
+  "version": 1
+}
