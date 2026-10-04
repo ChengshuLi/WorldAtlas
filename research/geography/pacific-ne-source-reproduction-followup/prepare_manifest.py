@@ -131,7 +131,11 @@ def finalize_manifest(manifest):
             paths.append(path.relative_to(ROOT).as_posix())
     paths.sort()
     manifest["outputs"] = [current_descriptor(path) for path in paths]
-    manifest["change_receipts"] = [{"path": path, "status": "added", "previous_path": None} for path in paths]
+    # The manifest is excluded from its own byte descriptors, but the PR's
+    # change inventory still needs a receipt for every changed file.
+    manifest["change_receipts"] = [
+        {"path": path, "status": "added", "previous_path": None} for path in paths
+    ] + [{"path": MANIFEST_PATH, "status": "added", "previous_path": None}]
     controls = {"positive": f"{VINTAGE_DIR}/positive-control.json",
                 "negative": f"{VINTAGE_DIR}/negative-control.json",
                 "reproducibility": f"{VINTAGE_DIR}/reproducibility-control.json"}
