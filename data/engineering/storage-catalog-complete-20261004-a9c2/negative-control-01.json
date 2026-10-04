@@ -1,0 +1,11 @@
+{
+  "method_id": "public-catalog-completeness",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checked_at_utc": "2026-10-04T11:46:04.860Z",
+  "evidence": [
+    "tests-final-01.log",
+    "isolated-catalog-01.json"
+  ],
+  "scope": "Isolated PostgreSQL denies DELETE with SQLSTATE25006 and retains original row; target mismatch, timeout, overflow, unsafe output and credential-bearing exception tests reject. No production mutation probe."
+}
