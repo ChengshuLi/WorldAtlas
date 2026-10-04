@@ -126,7 +126,9 @@ export async function readRecoveryInventory(query,{directory}={}){
  need(privateRegistry?.owner==='neondb_owner'&&!privateRegistry.app_select&&!privateRegistry.app_insert&&!privateRegistry.app_update&&!privateRegistry.app_delete&&!privateRegistry.app_truncate,'owner-registry-exposed');
  const sequence=await query('SELECT last_value,is_called FROM atlas_ingestions_rowid_seq');
  need(sequence.length===1&&Number.isSafeInteger(sequence[0].last_value)&&sequence[0].last_value>=revision,'invalid-ingestion-sequence');
- return {identity,revision,catalog_sha256:sha(JSON.stringify(catalog)),collections:proofs,owner_registry:registry,owner_registry_sha256:sha(JSON.stringify(registry)),permissions,sequence};
+ const database_acl=await query("SELECT datacl::text acl FROM pg_database WHERE datname=current_database()");
+ const default_acls=await query("SELECT pg_get_userbyid(d.defaclrole) role_name,n.nspname schema_name,d.defaclobjtype object_type,d.defaclacl::text acl FROM pg_default_acl d LEFT JOIN pg_namespace n ON n.oid=d.defaclnamespace WHERE n.nspname='public' ORDER BY role_name,object_type");
+ return {database_acl,default_acls,identity,revision,catalog_sha256:sha(JSON.stringify(catalog)),collections:proofs,owner_registry:registry,owner_registry_sha256:sha(JSON.stringify(registry)),permissions,sequence};
 }
 
 // pg_restore clears search_path, but frozen PL/pgSQL helpers resolve public
@@ -149,6 +151,23 @@ export function isolatedRestoreSQL(bytes){
 // Provider role names are inert placeholders only inside the network-none target.
 // Preserve original database/default ACL and owner commands without role membership/passwords.
 export const isolatedRecoveryBootstrapSQL='CREATE ROLE neondb_owner NOLOGIN; CREATE ROLE worldatlas_app NOLOGIN; CREATE ROLE cloud_admin NOLOGIN; CREATE ROLE neon_superuser NOLOGIN; CREATE DATABASE neondb OWNER neondb_owner;';
+
+/** DATABASE ACL entries require pg_restore --create even when the database
+ * itself already exists. Restrict the retained archive TOC to its one ACL entry
+ * so no database creation/drop/reconnection or factual COPY is replayed. */
+export function isolatedDatabaseACLList(toc){
+ const rows=toc.split('\n').filter(line=>/^\d+; \d+ \d+ ACL - DATABASE /.test(line));
+ need(rows.length===1&&/^\d+; \d+ \d+ ACL - DATABASE neondb neondb_owner$/.test(rows[0]),'unexpected-native-database-acl-toc');
+ return rows[0]+'\n';
+}
+function restoreIsolatedDatabaseACL(target,dump,directory){
+ const toc=native(['exec','-i',target,'pg_restore','--list'],dump,180000,1024*1024).toString();
+ const file=path.join(directory,'database-acl.list');fs.writeFileSync(file,isolatedDatabaseACLList(toc),{flag:'wx',mode:0o600});
+ native(['cp',file,target+':/var/lib/postgresql/database-acl.list'],undefined,30000,1024*1024);
+ const sql=native(['exec','-i',target,'pg_restore','--create','--use-list=/var/lib/postgresql/database-acl.list','--file=-'],dump,180000,1024*1024);
+ need(!/\b(?:CREATE|DROP|ALTER) DATABASE\b/.test(sql.toString())&&sql.toString().includes('ON DATABASE neondb'),'unexpected-native-database-acl-output');
+ native(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],sql,180000,1024*1024);
+}
 
 const maxExpandedRestore=1024*1024*1024;
 /** Expand bounded native output onto a private file, without a giant JS Buffer. */
@@ -296,7 +315,7 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   await nativeRestoreToFile(['exec','-i',target,'pg_restore','--file=-'],readback,expanded);
   stage='actual-current-native-restore-header';patchNativeRestoreFile(expanded);
   stage='actual-current-native-restore-apply';
-  await nativeRestoreFromFile(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],expanded);targetExec(['psql','-X','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));receipt.isolated_original_checks_revalidated=true;receipt.restore_duration_ms=Date.now()-restoreStarted;receipt.dump.local_readback_verified=true;
+  await nativeRestoreFromFile(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],expanded);stage='actual-current-native-database-acl';restoreIsolatedDatabaseACL(target,readback,output);targetExec(['psql','-X','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));receipt.isolated_original_checks_revalidated=true;receipt.restore_duration_ms=Date.now()-restoreStarted;receipt.dump.local_readback_verified=true;
   stage='full-source-and-target-readback';const targetQuery=queryJSON(sql=>targetExec(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],'SET ROLE neondb_owner; '+sql),secrets),restored=await readRecoveryInventory(targetQuery),after=await readRecoveryInventory(sourceQuery);assertCurrentInventory(after,window.source_marker);assertRestoredInventory(before,restored,after);
   const finalReservation=await loadRecoveryReservation(window,api);
   validateRecoveryWindow(window,finalReservation.claim,{head:env.GITHUB_SHA,toolSHA,phase:'end',...finalReservation});
