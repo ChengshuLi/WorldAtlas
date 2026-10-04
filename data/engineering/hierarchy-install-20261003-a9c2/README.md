@@ -12,6 +12,16 @@ Use Node24, Python3.12 and the committed requirements in an isolated environment
 atlas_source_root=$(pwd)
 git worktree add --detach /tmp/atlas-correction-baseline 277b8ecbb3199ae3d5fb07bab96353d17a049b1c
 git archive HEAD scripts src | tar -x -C /tmp/atlas-correction-baseline
+python - "$atlas_source_root" /tmp/atlas-correction-baseline <<'PY_RESTORE'
+import json,pathlib,shutil,sys
+source,target=map(pathlib.Path,sys.argv[1:])
+inventory=json.loads((source/'data/engineering/hierarchy-install-20261003-a9c2/generation-code-inventory.json').read_text())
+for item in inventory['files']:
+    if 'original_path' in item:
+        destination=target/item['original_path']
+        destination.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(source/item['path'],destination)
+PY_RESTORE
 cd /tmp/atlas-correction-baseline
 python scripts/rebase-reference-hierarchy.py --request "$atlas_source_root/data/engineering/hierarchy-crosswalk-20261003-a9c2/baseline-request.json" --output /tmp/atlas-correction-crosswalk
 python scripts/verify-hierarchy-install-baseline.py --inventory "$atlas_source_root/data/engineering/hierarchy-install-20261003-a9c2/baseline-inventory.json.gz" --receipt /tmp/atlas-correction-baseline.json
@@ -78,3 +88,7 @@ All three normal queue retries for reviewed5750063 were rejected before integrat
 ## Disjoint main advance and actual PR inventory
 
 Main advanced again with PR666 (df7f37a; the earlier GitHub note naming678 was mistaken). All three queue retries rejected the stale038-base candidate. One controlled close/reopen of the same PR refreshed GitHub's candidate without changing its head/claim/evidence. Our offline evidence readers then revealed a separate bug: a two-endpoint diff counted12 main-only research additions as candidate deletions. They now use GitHub's merge-base PR inventory while still hashing non-added originals from the actual current PR base and requiring the complete actual API file count. A real divergent-Git fixture validates author modification/rename accounting, ignores only main-only changes, and rejects an overlapping main change through the unchanged original-byte guard. Eleven affected controls passed; no new geography generation is claimed. Latestmain is incorporated intact, old manifests/failed receipts remain separately retained, and updated-head review/CI remain required.
+
+## Trusted validator update and frozen producer helper
+
+Main e9aa7c1 adds optional geography-only prior-evidence identity inventories. Its trusted validator remains intact; #6 engineering manifests do not adopt that field. The old evidence-quality hashing helper was also an actual frozen producer input. Its exact bytes now remain under `frozen-generation-helper-before-main-20261004/`, with original_path in the generation inventory. The reconstruction commands restore all archived snapshot modules into the separate original-data producer checkout before executing generators. This preserves the actual two-run source vintage rather than pretending the updated validator was used in old experiments. Current runtime/coordination validation uses trusted main. Candidate894outputs/3307 original-data files are unchanged; no fresh generation/publication claim is made.
