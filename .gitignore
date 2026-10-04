@@ -12,3 +12,6 @@ __pycache__/
 .env
 .env.*
 !.env.example
+
+# Private SQL recovery originals; publish only encrypted delivery/receipts.
+data/validation/current-postgres-recovery/
