@@ -24,3 +24,5 @@ test('rejects envelope fields outside the reviewed contract',()=>{const value=se
 test('rejects weak recipient before encrypting private data',()=>{const weak=generateKeyPairSync('rsa',{modulusLength:2048,publicKeyEncoding:{type:'spki',format:'pem'}});assert.throws(()=>sealRecoveryBackup({bytes,publicKey:weak.publicKey,context}));});
 test('rejects non-native dump bytes',()=>assert.throws(()=>sealRecoveryBackup({bytes:Buffer.from('plain JSON'),publicKey:keys.publicKey,context})));
 test('rejects a different recipient key',()=>{const other=generateKeyPairSync('rsa',{modulusLength:3072,privateKeyEncoding:{type:'pkcs8',format:'pem'}});assert.throws(()=>openRecoveryBackup({...sealed(),privateKey:other.privateKey,expectedContext:context}));});
+
+test('refuses private PEM in the public recipient field',()=>assert.throws(()=>backupRecipientFingerprint(keys.privateKey)));

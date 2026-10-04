@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {generateKeyPairSync,createHash} from 'node:crypto';
-import {validateRecoveryWindow,validatedOwnerConnection,assertRestoredInventory,boundedOwnerJSON,runCurrentPostgresRecovery} from '../scripts/current-postgres-recovery.mjs';
+import {validateRecoveryWindow,validatedOwnerConnection,assertRestoredInventory,boundedOwnerJSON,runCurrentPostgresRecovery,isolatedRestoreSQL,isolatedOriginalChecks} from '../scripts/current-postgres-recovery.mjs';
 import {backupRecipientFingerprint} from '../scripts/recovery-backup-envelope.mjs';
 import {storageExportV2Contract,storageExportV2Collections,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -30,3 +30,8 @@ test('bounded owner API accepts valid object',async()=>assert.deepEqual(await bo
 for(const body of ['[]','null','invalid',JSON.stringify({oversized:'a'.repeat(2*1024*1024)})])test('bounded owner API rejects malformed or oversized response '+body.length,async()=>assert.rejects(()=>boundedOwnerJSON(new Response(body))));
 test('owner API rejects HTTP failures',async()=>assert.rejects(()=>boundedOwnerJSON(new Response('{}',{status:403}))));
 test('untrusted execution fails before any provider access and writes sanitized failure receipt',async()=>{const dir=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-recovery-test-')),output=path.join(dir,'receipt');let calls=0;try{const result=await runCurrentPostgresRecovery({env:{NEON_API_KEY:'fixture-secret'},fetcher:()=>{calls++;throw Error('unexpected network');},output});assert.equal(calls,0);assert.equal(result.status,'failed');assert.equal(result.failure_stage,'authorize');assert.equal(fs.readFileSync(path.join(output,'public-receipts/receipt.json'),'utf8').includes('fixture-secret'),false);await assert.rejects(()=>runCurrentPostgresRecovery({env:{},output}),/preserve-existing/);}finally{fs.rmSync(dir,{recursive:true,force:true});}});
+
+const restoreHeader="-- PostgreSQL database dump\nSELECT pg_catalog.set_config('search_path', '', false);\n-- Name: synthetic; Type: TABLE DATA\nCOPY original FROM stdin;\nSELECT pg_catalog.set_config('search_path', '', false);\n\\.\n";
+test('restore session header adjustment preserves every factual COPY byte',()=>{const source=Buffer.from(restoreHeader),result=isolatedRestoreSQL(source),at=source.indexOf(Buffer.from('\n-- Name: '));assert.deepEqual(result.subarray(result.indexOf(Buffer.from('\n-- Name: '))),source.subarray(at));assert.match(result.toString(),/public,pg_catalog/);});
+test('restore header fails closed on missing or duplicate session setup',()=>{assert.throws(()=>isolatedRestoreSQL(Buffer.from('-- Name: missing')));assert.throws(()=>isolatedRestoreSQL(Buffer.from(restoreHeader.replace('-- PostgreSQL database dump',"SELECT pg_catalog.set_config('search_path', '', false);"))));});
+test('local constraint revalidation requires exact immutable original schema',()=>{const schema=fs.readFileSync('postgres/schema.sql');assert.equal(isolatedOriginalChecks(schema).match(/ADD CONSTRAINT/g).length,4);assert.throws(()=>isolatedOriginalChecks(Buffer.concat([schema,Buffer.from(' ')])));});

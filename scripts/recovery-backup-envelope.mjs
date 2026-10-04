@@ -13,6 +13,7 @@ function checkedContext(context){
 }
 function checkedKey(value,privateKey=false){
  need((typeof value==='string'||Buffer.isBuffer(value))&&Buffer.byteLength(value)<=32768);
+ if(!privateKey)need(/^-----BEGIN PUBLIC KEY-----\r?\n/.test(value.toString())&&!value.toString().includes('PRIVATE KEY'));
  const key=privateKey?createPrivateKey(value):createPublicKey(value);
  need(key.asymmetricKeyType==='rsa'&&key.asymmetricKeyDetails?.modulusLength>=3072&&key.asymmetricKeyDetails.modulusLength<=8192);return key;
 }
