@@ -153,7 +153,7 @@ export function isolatedRestoreSQL(bytes){
 export const isolatedRecoveryBootstrapSQL='CREATE ROLE neondb_owner NOLOGIN; CREATE ROLE worldatlas_app NOLOGIN; CREATE ROLE cloud_admin NOLOGIN; CREATE ROLE neon_superuser NOLOGIN; CREATE DATABASE neondb OWNER neondb_owner;';
 
 /** DATABASE ACL entries require pg_restore --create even when the database
- * itself already exists. Restrict the retained archive TOC to its one ACL entry
+ * itself already exists. --list also hides database ACLs without --create. Restrict the retained archive TOC to its one ACL entry
  * so no database creation/drop/reconnection or factual COPY is replayed. */
 export function isolatedDatabaseACLList(toc){
  const rows=toc.split('\n').filter(line=>/^\d+; \d+ \d+ ACL - DATABASE /.test(line));
@@ -161,7 +161,7 @@ export function isolatedDatabaseACLList(toc){
  return rows[0]+'\n';
 }
 function restoreIsolatedDatabaseACL(target,dump,directory){
- const toc=native(['exec','-i',target,'pg_restore','--list'],dump,180000,1024*1024).toString();
+ const toc=native(['exec','-i',target,'pg_restore','--create','--list'],dump,180000,1024*1024).toString();
  const file=path.join(directory,'database-acl.list');fs.writeFileSync(file,isolatedDatabaseACLList(toc),{flag:'wx',mode:0o600});
  native(['cp',file,target+':/var/lib/postgresql/database-acl.list'],undefined,30000,1024*1024);
  const sql=native(['exec','-i',target,'pg_restore','--create','--use-list=/var/lib/postgresql/database-acl.list','--file=-'],dump,180000,1024*1024);

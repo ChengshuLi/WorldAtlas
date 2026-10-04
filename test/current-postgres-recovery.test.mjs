@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {generateKeyPairSync,createHash} from 'node:crypto';
-import {loadRecoveryReservation,validateRecoveryWindow,validatedOwnerConnection,assertRestoredInventory,boundedOwnerJSON,runCurrentPostgresRecovery,isolatedRestoreSQL,isolatedOriginalChecks} from '../scripts/current-postgres-recovery.mjs';
+import {loadRecoveryReservation,validateRecoveryWindow,validatedOwnerConnection,assertRestoredInventory,boundedOwnerJSON,runCurrentPostgresRecovery,isolatedDatabaseACLList,isolatedRestoreSQL,isolatedOriginalChecks} from '../scripts/current-postgres-recovery.mjs';
 import {backupRecipientFingerprint} from '../scripts/recovery-backup-envelope.mjs';
 import {storageExportV2Contract,storageExportV2Collections,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -102,3 +102,9 @@ test('new recovery window and child may track original issue51, retaining releas
 test('original-issue recovery cannot use unrelated tracking issue',()=>{const w=window();w.queue=22;assert.throws(()=>validate(w),/invalid-publisher-window/);});
 
 test('actual Neon database/default ACLs use same-name isolated target and inert provider roles',()=>{const code=fs.readFileSync('scripts/current-postgres-recovery.mjs','utf8');assert.match(code,/CREATE ROLE cloud_admin NOLOGIN/);assert.match(code,/CREATE ROLE neon_superuser NOLOGIN/);assert.match(code,/CREATE DATABASE neondb OWNER neondb_owner/);assert.match(code,/\['exec','-i',target,'pg_restore','--file=-'\]/);assert.doesNotMatch(code,/'--no-owner','--role'/);});
+
+test('database ACL selection retains exactly the native same-name owner entry',()=>{
+ const row='3991; 0 0 ACL - DATABASE neondb neondb_owner';
+ assert.equal(isolatedDatabaseACLList('; Archive TOC\n3990; 1262 16396 DATABASE - neondb neondb_owner\n'+row+'\n4000; 0 0 ACL public TABLE atlas_sources neondb_owner\n'),row+'\n');
+ for(const toc of ['',row+'\n'+row,row.replace('neondb neondb_owner','other neondb_owner'),row.replace('neondb_owner','postgres'),row+'\n3992; 0 0 ACL - DATABASE other neondb_owner'])assert.throws(()=>isolatedDatabaseACLList(toc),/unexpected-native-database-acl-toc/);
+});

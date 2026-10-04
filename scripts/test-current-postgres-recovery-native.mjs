@@ -34,7 +34,9 @@ try{
  const before=await readRecoveryInventory(query);assert.equal(before.catalog_sha256,storageExportV2Contract.postgres_catalog_sha256);
  const dump=command(['pg_dump','-U','postgres','-d','neondb','--format=custom','--schema=public']);assert.equal(dump.subarray(0,5).toString(),'PGDMP');
  const acl=()=>sql("SELECT datacl::text FROM pg_database WHERE datname='neondb'; SELECT defaclrole::regrole::text,defaclobjtype,defaclacl::text FROM pg_default_acl ORDER BY 1,2;").toString();const originalACL=acl();
- const databaseACLList=isolatedDatabaseACLList(command(['pg_restore','--list'],dump).toString());
+ assert.throws(()=>isolatedDatabaseACLList(command(['pg_restore','--list'],dump).toString()),/unexpected-native-database-acl-toc/);
+ const databaseACLList=isolatedDatabaseACLList(command(['pg_restore','--create','--list'],dump).toString());
+ receipt.database_acl_requires_create_listing=true;
  const after=await readRecoveryInventory(query);
  // A killed native CLI is not evidence that its named container was removed.
  const slow='atlas-sql-timeout-fixture-'+randomUUID();try{cleanup();native(['create','--name',slow,'--network','none','--read-only',recoveryImage,'sleep','30']);assert.throws(()=>execFileSync('docker',['start','-ai',slow],{timeout:250,stdio:'pipe'}));}finally{try{native(['rm','-fv',slow]);}catch{}assert.equal(native(['ps','-a','--filter','name=^/'+slow+'$','--format','{{.ID}}']).toString().trim(),'');}receipt.timed_out_named_client_absence_confirmed=true;
