@@ -1,0 +1,10 @@
+{
+  "method_id": "crosswalk-packet-validation",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": [
+    "duplicate ID rejected",
+    "broken parent consistency rejected",
+    "incomplete roster rejected"
+  ]
+}

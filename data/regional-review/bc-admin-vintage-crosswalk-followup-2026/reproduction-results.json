@@ -1,0 +1,82 @@
+{
+  "method_id": "crosswalk-packet-build",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "evidence_path": "reproduction-results.json",
+  "run_one_sha256": "fc761e45bf8551bec40f88681b2f15156a9e3b6b0a7ba82dceeead7816a15d21",
+  "run_two_sha256": "fc761e45bf8551bec40f88681b2f15156a9e3b6b0a7ba82dceeead7816a15d21",
+  "outputs": [
+    {
+      "path": "crosswalk-2016-source-to-csd-assessment.json",
+      "run_one_sha256": "38c969115501e74095eb3129ab91930bb4a19d4476822ba9ed6c38180dbbf40c",
+      "run_two_sha256": "38c969115501e74095eb3129ab91930bb4a19d4476822ba9ed6c38180dbbf40c",
+      "equal": true
+    },
+    {
+      "path": "exception-findings.json",
+      "run_one_sha256": "534bb335c2f4097af7f7b3dac3a21e8a59f272755447a8ef322430b5348d7976",
+      "run_two_sha256": "534bb335c2f4097af7f7b3dac3a21e8a59f272755447a8ef322430b5348d7976",
+      "equal": true
+    },
+    {
+      "path": "exception-review.csv",
+      "run_one_sha256": "b66be29ddb1ec26ae0be0f14f7af056e457b59151395f1adc4f405525fe9b45a",
+      "run_two_sha256": "b66be29ddb1ec26ae0be0f14f7af056e457b59151395f1adc4f405525fe9b45a",
+      "equal": true
+    },
+    {
+      "path": "geoboundaries-bc-2016-members-part-01-of-04.geojson",
+      "run_one_sha256": "03067825bd4002bc03733cf00eaddd10abb053e7e5dee6b56f4ad89a74ad7aa7",
+      "run_two_sha256": "03067825bd4002bc03733cf00eaddd10abb053e7e5dee6b56f4ad89a74ad7aa7",
+      "equal": true
+    },
+    {
+      "path": "geoboundaries-bc-2016-members-part-02-of-04.geojson",
+      "run_one_sha256": "1b67cdfce96153e1feac13a28d3af66574280edbbee71ce91956a3a4acb07775",
+      "run_two_sha256": "1b67cdfce96153e1feac13a28d3af66574280edbbee71ce91956a3a4acb07775",
+      "equal": true
+    },
+    {
+      "path": "geoboundaries-bc-2016-members-part-03-of-04.geojson",
+      "run_one_sha256": "d21afbcd5150dd8f3cc6927e510d91a9c3512d76eadceafa4e77f42970358b15",
+      "run_two_sha256": "d21afbcd5150dd8f3cc6927e510d91a9c3512d76eadceafa4e77f42970358b15",
+      "equal": true
+    },
+    {
+      "path": "geoboundaries-bc-2016-members-part-04-of-04.geojson",
+      "run_one_sha256": "a0a530fd288a5fdff0cf4ee07b502acc78ea3182dd49b0ee9e18ef8095f9e738",
+      "run_two_sha256": "a0a530fd288a5fdff0cf4ee07b502acc78ea3182dd49b0ee9e18ef8095f9e738",
+      "equal": true
+    },
+    {
+      "path": "results-summary.json",
+      "run_one_sha256": "878c2ca58e98e417bbaeb448990070c394eb59b2f7d061f12231d9ed721c8b37",
+      "run_two_sha256": "878c2ca58e98e417bbaeb448990070c394eb59b2f7d061f12231d9ed721c8b37",
+      "equal": true
+    },
+    {
+      "path": "source-member-roster.json",
+      "run_one_sha256": "9f669e1e0ea046ebe4afc962197e05f8be4ed27740b8aa0c27f48f8bd07f123e",
+      "run_two_sha256": "9f669e1e0ea046ebe4afc962197e05f8be4ed27740b8aa0c27f48f8bd07f123e",
+      "equal": true
+    },
+    {
+      "path": "statistics-canada-2021-csd-identity-extract.json",
+      "run_one_sha256": "04395dee345e632e5ca748f404d56a9fa34b18864aa2de4d56dd8689a6e828bf",
+      "run_two_sha256": "04395dee345e632e5ca748f404d56a9fa34b18864aa2de4d56dd8689a6e828bf",
+      "equal": true
+    },
+    {
+      "path": "statistics-canada-bc-csd-2021-low-overlap-targets.geojson",
+      "run_one_sha256": "627052eccc0438db92cb9a9a271a459e2398af564175e42f100bf5276ce07694",
+      "run_two_sha256": "627052eccc0438db92cb9a9a271a459e2398af564175e42f100bf5276ce07694",
+      "equal": true
+    },
+    {
+      "path": "statistics-canada-british-columbia-census-subdivisions-2016.geojson",
+      "run_one_sha256": "97b93e816ceaa11836e73827d32dff9cd97b1cc2ba369b951d90f3c0c07a686f",
+      "run_two_sha256": "97b93e816ceaa11836e73827d32dff9cd97b1cc2ba369b951d90f3c0c07a686f",
+      "equal": true
+    }
+  ]
+}
