@@ -21,7 +21,7 @@ const maxJSON=128*1024*1024,maxDump=256*1024*1024;
 const native=(args,input,timeout=180000,maxBuffer=maxJSON)=>execFileSync('docker',args,{input,timeout,maxBuffer,stdio:['pipe','pipe','pipe']});
 
 export function validateRecoveryWindow(window,claim,{head,toolSHA,now=Date.now(),phase='start',reservationIssue,sourceClaim,handoffReceipt,dependencies=[]}={}){
- need(window?.version===1&&window.issue===51&&[51,714].includes(window.queue)&&window.operator_worker_id==='engineering-central-publication-20261003','invalid-publisher-window');
+ need(window?.version===1&&window.issue===51&&[51,714].includes(window.queue)&&(window.operator_worker_id==='engineering-central-publication-20261003'||(window.reservation_issue!==undefined&&window.reservation_issue!==51&&/^engineering-[a-z0-9-]{1,80}$/.test(window.operator_worker_id??''))),'invalid-publisher-window');
  need(window.primary_main_commit===head&&window.capture_tool_sha256===toolSHA&&window.method==='readonly-native-pg-dump-and-isolated-restore','unreviewed-window-tool');
  need(backupRecipientFingerprint(window.backup_recipient_public_key)===window.backup_recipient_sha256,'unpinned-private-backup-recipient');
  const time=Date.parse(window.observed_at_utc),expiry=Date.parse(window.expires_at_utc);
@@ -89,6 +89,14 @@ const permissionSQL=`SELECT c.relname object_name,c.relkind object_kind,pg_get_u
  has_table_privilege('worldatlas_app',c.oid,'TRUNCATE') app_truncate,c.relacl::text acl
  FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind='r' ORDER BY c.relname`;
 
+/** Native PostgreSQL JSON scalar spelling is used only for comparison between
+ * the same source and isolated native major. Raw evidence remains TEXT; each
+ * complete row is hashed before the bounded ordered digest aggregation. */
+export function nativeMembershipDigestSQL(){
+ const order='release_id COLLATE \"C\",entity_id COLLATE \"C\"';
+ return `SELECT count(*)::bigint rows,encode(sha256(convert_to(coalesce(string_agg(encode(sha256(convert_to(row_to_json(q)::text,'UTF8')),'hex'),'' ORDER BY ${order}),''),'UTF8')),'hex') ordered_rows_sha256 FROM (${tableReadSQL('geographic_memberships')}) q`;
+}
+
 export async function readRecoveryInventory(query,{directory}={}){
  const names=await query(inventorySQL),expected=[...storageExportV2Collections.map(k=>storageExportV2Definitions[k].table),'worldatlas_schema_migrations'].sort();
  need(same(names.map(r=>r.table_name),expected),'incomplete-owner-and-factual-inventory');
@@ -98,7 +106,14 @@ export async function readRecoveryInventory(query,{directory}={}){
  const proofs={};let revision=0;
  for(const collection of storageExportV2Collections){
   const metrics=(await query(`SELECT count(*) rows,coalesce(sum(octet_length(row_to_json(q)::text)),0) bytes,coalesce(max(octet_length(row_to_json(q)::text)),0) largest FROM (${tableReadSQL(collection)}) q`))[0];
-  need(metrics&&['rows','bytes','largest'].every(k=>Number.isSafeInteger(metrics[k])&&metrics[k]>=0)&&metrics.bytes+metrics.rows*2+2<=maxJSON&&metrics.largest<=8*1024*1024,'measured-source-table-exceeds-bound');
+  need(metrics&&['rows','bytes','largest'].every(k=>Number.isSafeInteger(metrics[k])&&metrics[k]>=0)&&metrics.largest<=8*1024*1024,'measured-source-table-exceeds-bound');
+  if(collection==='geographic_memberships'){
+   need(metrics.rows<=2000000&&metrics.largest<=8*1024*1024,'native-membership-digest-bound');
+   const proof=(await query(nativeMembershipDigestSQL()))[0];
+   need(proof?.rows===metrics.rows&&/^[a-f0-9]{64}$/.test(proof.ordered_rows_sha256??''),'native-membership-digest-invalid');
+   proofs[collection]={count:metrics.rows,ordered_rows_sha256:proof.ordered_rows_sha256,hash_kind:'sha256-pg-json-text-row-digests-c-key-order-v1'};continue;
+  }
+  need(metrics.bytes+metrics.rows*2+2<=maxJSON,'measured-source-table-exceeds-bound');
   const rows=await query(tableReadSQL(collection));
   need(rows.length===metrics.rows,'measured-source-table-changed');
   need(rows.every(row=>same(Object.keys(row),storageExportV2Definitions[collection].columns)),'changed-raw-factual-columns');
@@ -130,6 +145,39 @@ export function isolatedRestoreSQL(bytes){
 // Native dump parsing flattens four original AND-expression trees. Reinstall
 // those exact frozen reviewed CHECK definitions on the disposable target only,
 // revalidating all restored rows; immutable source/catalog pins stay unchanged.
+
+const maxExpandedRestore=1024*1024*1024;
+/** Expand bounded native output onto a private file, without a giant JS Buffer. */
+export async function nativeRestoreToFile(args,input,file){
+ const fd=fs.openSync(file,'wx',0o600);let bytes=0;
+ try{await new Promise((resolve,reject)=>{
+  const child=spawn('docker',args,{stdio:['pipe','pipe','pipe']}),timer=setTimeout(()=>{child.kill('SIGKILL');reject(Error('native-restore-timeout'));},600000);
+  let failure,stderrBytes=0;const fail=code=>{failure??=Error(code);child.kill('SIGKILL');};
+  child.on('error',()=>fail('native-restore-client-failed'));
+  child.stdout.on('data',chunk=>{bytes+=chunk.length;if(bytes>maxExpandedRestore){fail('expanded-native-restore-size-bound');return;}try{fs.writeSync(fd,chunk);}catch{fail('native-restore-disk-write-failed');}});
+  child.stderr.on('data',chunk=>{stderrBytes+=chunk.length;if(stderrBytes>1024*1024)fail('native-restore-stderr-bound');});
+  child.stdin.on('error',()=>fail('native-restore-input-failed'));
+  child.on('close',code=>{clearTimeout(timer);if(failure||code!==0)reject(failure??Error('native-restore-expansion-failed'));else resolve();});child.stdin.end(input);
+ });fs.fsyncSync(fd);need(bytes>0,'empty-native-restore');}finally{fs.closeSync(fd);}
+ return {bytes};
+}
+export function patchNativeRestoreFile(file){
+ const fd=fs.openSync(file,'r'),prefix=Buffer.alloc(16384);let count;try{count=fs.readSync(fd,prefix,0,prefix.length,0);}finally{fs.closeSync(fd);}
+ const bytes=prefix.subarray(0,count),at=bytes.indexOf(Buffer.from('\n-- Name: '));need(at>0,'unsupported-native-restore-header');
+ const patched=isolatedRestoreSQL(bytes),out=file+'.header-patched',target=fs.openSync(out,'wx',0o600),source=fs.openSync(file,'r');
+ try{fs.writeSync(target,patched);let offset=count;const chunk=Buffer.alloc(1024*1024);for(;;){const n=fs.readSync(source,chunk,0,chunk.length,offset);if(!n)break;fs.writeSync(target,chunk.subarray(0,n));offset+=n;}fs.fsyncSync(target);}finally{fs.closeSync(source);fs.closeSync(target);}fs.renameSync(out,file);
+}
+export async function nativeRestoreFromFile(args,file){
+ need(fs.statSync(file).size<=maxExpandedRestore+128,'expanded-native-restore-size-bound');
+ await new Promise((resolve,reject)=>{
+  const child=spawn('docker',args,{stdio:['pipe','pipe','pipe']}),input=fs.createReadStream(file),timer=setTimeout(()=>{child.kill('SIGKILL');reject(Error('native-restore-apply-timeout'));},600000);
+  let failure,bytes=0;const fail=code=>{failure??=Error(code);input.destroy();child.kill('SIGKILL');};
+  child.on('error',()=>fail('native-restore-client-failed'));input.on('error',()=>fail('native-restore-file-failed'));child.stdin.on('error',()=>fail('native-restore-input-failed'));
+  for(const stream of [child.stdout,child.stderr])stream.on('data',chunk=>{bytes+=chunk.length;if(bytes>2*1024*1024)fail('native-restore-output-bound');});
+  child.on('close',code=>{clearTimeout(timer);input.destroy();if(failure||code!==0)reject(failure??Error('native-restore-apply-failed'));else resolve();});input.pipe(child.stdin);
+ });
+}
+
 export function isolatedOriginalChecks(schema){
  need(sha(schema)===storageExportV2Contract.postgres_migrations[0].sha256,'unreviewed-original-constraint-source');
  const pairs=[['atlas_sources','source_dates'],['atlas_entities','entity_dates'],['atlas_attribute_records','attribute_dates'],['atlas_names','name_dates']];
@@ -235,11 +283,14 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   fs.writeFileSync(path.join(publicOutput,'current-public-schema.dump.aesgcm'),sealed.ciphertext,{flag:'wx',mode:0o600});save(path.join(publicOutput,'backup-envelope.json'),sealed.envelope,secrets);
   need(sha(fs.readFileSync(path.join(publicOutput,'current-public-schema.dump.aesgcm')))===sealed.envelope.ciphertext_sha256&&same(JSON.parse(fs.readFileSync(path.join(publicOutput,'backup-envelope.json'),'utf8')),sealed.envelope),'encrypted-backup-disk-readback-failed');
   receipt.encrypted_backup={recipient_sha256:sealed.envelope.recipient_sha256,ciphertext_bytes:sealed.ciphertext.length,ciphertext_sha256:sealed.envelope.ciphertext_sha256,envelope_sha256:sha(fs.readFileSync(path.join(publicOutput,'backup-envelope.json'))),in_memory_aead_roundtrip_verified:true,ciphertext_disk_readback_verified:sha(fs.readFileSync(path.join(publicOutput,'current-public-schema.dump.aesgcm')))===sealed.envelope.ciphertext_sha256,recipient_private_key_recovery_verified:false};save(receiptFile,receipt,secrets);
-  stage='isolated-native-target';target='atlas-recovery-'+randomUUID();native(['run','-d','--name',target,'--network','none','--read-only','--tmpfs','/var/lib/postgresql:rw,size=1g','--tmpfs','/var/run/postgresql:rw,size=16m','--memory','2g','-e','POSTGRES_HOST_AUTH_METHOD=trust',recoveryImage],undefined,60000,1024*1024);
+  stage='isolated-native-target';target='atlas-recovery-'+randomUUID();native(['run','-d','--name',target,'--network','none','--read-only','--tmpfs','/var/lib/postgresql:rw,size=2g','--tmpfs','/var/run/postgresql:rw,size=16m','--memory','4g','-e','POSTGRES_HOST_AUTH_METHOD=trust',recoveryImage],undefined,60000,1024*1024);
   const targetExec=(args,input,maxBuffer=maxJSON)=>native(['exec','-i',target,...args],input,180000,maxBuffer);
   let ready=false;for(let attempt=0;attempt<30;attempt++){try{targetExec(['pg_isready','-U','postgres']);ready=true;break;}catch{await new Promise(resolve=>setTimeout(resolve,1000));}}need(ready,'isolated-target-not-ready');
   targetExec(['psql','-X','-Atq','-U','postgres','-v','ON_ERROR_STOP=1'],"CREATE ROLE neondb_owner NOLOGIN; CREATE ROLE worldatlas_app NOLOGIN; ALTER DATABASE postgres OWNER TO neondb_owner; DROP SCHEMA public;");
-  stage='actual-current-native-restore';const restoreStarted=Date.now(),readback=fs.readFileSync(path.join(output,'current-public-schema.dump'));need(readback.length===receipt.dump.bytes&&sha(readback)===receipt.dump.sha256,'retained-dump-readback-failed');const restoreSQL=isolatedRestoreSQL(targetExec(['pg_restore','--file=-','--no-owner','--role','neondb_owner'],readback,maxDump));targetExec(['psql','-X','-U','postgres','-d','postgres','--single-transaction','-v','ON_ERROR_STOP=1'],restoreSQL);targetExec(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));receipt.isolated_original_checks_revalidated=true;receipt.restore_duration_ms=Date.now()-restoreStarted;receipt.dump.local_readback_verified=true;
+  stage='actual-current-native-restore';const restoreStarted=Date.now(),readback=fs.readFileSync(path.join(output,'current-public-schema.dump'));need(readback.length===receipt.dump.bytes&&sha(readback)===receipt.dump.sha256,'retained-dump-readback-failed');const expanded=path.join(output,'isolated-restore.sql');
+  await nativeRestoreToFile(['exec','-i',target,'pg_restore','--file=-','--no-owner','--role','neondb_owner'],readback,expanded);
+  patchNativeRestoreFile(expanded);
+  await nativeRestoreFromFile(['exec','-i',target,'psql','-X','-U','postgres','-d','postgres','--single-transaction','-v','ON_ERROR_STOP=1'],expanded);targetExec(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));receipt.isolated_original_checks_revalidated=true;receipt.restore_duration_ms=Date.now()-restoreStarted;receipt.dump.local_readback_verified=true;
   stage='full-source-and-target-readback';const targetQuery=queryJSON(sql=>targetExec(['psql','-X','-Atq','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],'SET ROLE neondb_owner; '+sql),secrets),restored=await readRecoveryInventory(targetQuery),after=await readRecoveryInventory(sourceQuery);assertCurrentInventory(after,window.source_marker);assertRestoredInventory(before,restored,after);
   const finalReservation=await loadRecoveryReservation(window,api);
   validateRecoveryWindow(window,finalReservation.claim,{head:env.GITHUB_SHA,toolSHA,phase:'end',...finalReservation});
@@ -249,7 +300,7 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   if(lock){try{lock.close();await releaseProbe();receipt.source_lock_cleanup='database-lock-absence-and-reader-removal-confirmed';}catch{receipt.status='failed';receipt.source_lock_cleanup='unconfirmed';}}
   for(const reader of readers){try{removeOwnedContainer(reader);}catch{receipt.status='failed';(receipt.retained_source_readers??=[]).push(reader);}}
   if(target){try{removeOwnedContainer(target);receipt.isolated_target_cleanup='removed-and-absence-confirmed';}catch{receipt.status='failed';receipt.isolated_target_cleanup='failed';receipt.retained_target_name=target;}}
-  receipt.duration_ms=Date.now()-started;receipt.completed_at_utc=new Date().toISOString();receipt.limitations=['Logical public-schema recovery; not verified provider-managed backup or server-global recovery.','Source role passwords, managed role memberships, provider secrets and private runtime bindings are excluded; restore through unchanged provider/Sites setup and documented private credential handoff.','Isolated roles are NOLOGIN and target database name differs; table owners/ACLs and effective table privileges are compared. Schema/sequence/function/domain/default ACLs are retained in the original dump but not separately compared.','Publisher Site read-only/drain attestation is authenticated by queue author/dispatch actor; Actions does not independently access private Site. Worker IDs are cooperative identities, not separate security principals.','Registered object bytes are the separate414-object proof from PR711; no R2 objects are written.','Publisher must settle maintenance and prove restored writes separately; this tool never changes Site/read-only state.','Artifacts/local copies have limited retention; preserve original dump/rows and receipts before expiry.'];save(receiptFile,receipt,secrets);
+  receipt.duration_ms=Date.now()-started;receipt.completed_at_utc=new Date().toISOString();receipt.limitations=['Logical public-schema recovery; not verified provider-managed backup or server-global recovery.','Source role passwords, managed role memberships, provider secrets and private runtime bindings are excluded; restore through unchanged provider/Sites setup and documented private credential handoff.','Isolated roles are NOLOGIN and target database name differs; table owners/ACLs and effective table privileges are compared. Membership rows use a bounded native ordered row-digest inventory; original raw bytes are retained in the dump, not duplicated as an unbounded client JSON array. Schema/sequence/function/domain/default ACLs are retained in the original dump but not separately compared.','Publisher Site read-only/drain attestation is authenticated by queue author/dispatch actor; Actions does not independently access private Site. Worker IDs are cooperative identities, not separate security principals.','Registered object bytes are the separate414-object proof from PR711; no R2 objects are written.','Publisher must settle maintenance and prove restored writes separately; this tool never changes Site/read-only state.','Artifacts/local copies have limited retention; preserve original dump/rows and receipts before expiry.'];save(receiptFile,receipt,secrets);
  }
  return receipt;
 }

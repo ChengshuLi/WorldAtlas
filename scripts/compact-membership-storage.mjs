@@ -26,7 +26,7 @@ export async function compactMembershipParity(tx,original=legacy){
 
 /** Owns the complete rehearsal transaction, never accepts a transaction handle.
  * Original rows and primary key remain intact for an owner rollback rehearsal. */
-export async function rehearseCompactMembershipStorage(engine,{afterCopy}={}){
+export async function rehearseCompactMembershipStorage(engine,{afterCopy,afterSwitch,copyOnServer=false}={}){
  need(typeof engine.transaction==='function','Rehearsal must own its transaction');
  return engine.transaction(async tx=>{
   await tx.query('SELECT pg_advisory_xact_lock(807245315,1)');
@@ -40,7 +40,19 @@ export async function rehearseCompactMembershipStorage(engine,{afterCopy}={}){
   const functionsBefore=await rows(tx,"SELECT proname,pg_get_functiondef(oid) definition FROM pg_proc WHERE oid IN ('public.atlas_immutable_guard()'::regprocedure,'public.atlas_geography_contract()'::regprocedure) ORDER BY proname");
   await tx.exec(compactMembershipDDL);
   let cursorRelease='',cursorEntity='',copied=0;
-  for(;;){
+  if(copyOnServer){
+   await tx.exec(`DO $bounded_owner_copy$ DECLARE cursor_release text:=''; cursor_entity text:=''; page record; BEGIN
+    LOOP
+     SELECT * INTO page FROM public.worldatlas_membership_copy_next(cursor_release,cursor_entity);
+     IF page.copied<0 OR page.copied>200 THEN RAISE EXCEPTION 'Invalid bounded server copy'; END IF;
+     EXIT WHEN page.copied=0;
+     IF page.last_release=cursor_release AND page.last_entity=cursor_entity THEN RAISE EXCEPTION 'Server copy cursor did not advance'; END IF;
+     cursor_release:=page.last_release; cursor_entity:=page.last_entity;
+    END LOOP;
+   END $bounded_owner_copy$;`);
+   copied=Number((await rows(tx,'SELECT count(*)::text count FROM public.worldatlas_membership_rows'))[0].count);
+   need(Number.isSafeInteger(copied)&&copied>=0,'Unsafe bounded server copy count');
+  }else for(;;){
    const page=(await rows(tx,'SELECT * FROM public.worldatlas_membership_copy_next($1,$2)',[cursorRelease,cursorEntity]))[0];
    need(page&&Number.isInteger(page.copied)&&page.copied>=0&&page.copied<=200,'Invalid bounded owner copy result');
    if(!page.copied)break;
@@ -68,6 +80,7 @@ export async function rehearseCompactMembershipStorage(engine,{afterCopy}={}){
    await tx.query('REVOKE ALL ON public.atlas_geographic_memberships FROM worldatlas_app');
    await tx.query('GRANT SELECT,INSERT ON public.atlas_geographic_memberships TO worldatlas_app');
   }
+  if(afterSwitch)await afterSwitch(tx);
   const functionsAfter=await rows(tx,"SELECT proname,pg_get_functiondef(oid) definition FROM pg_proc WHERE oid IN ('public.atlas_immutable_guard()'::regprocedure,'public.atlas_geography_contract()'::regprocedure) ORDER BY proname");
   need(JSON.stringify(functionsBefore)===JSON.stringify(functionsAfter),'Original guards changed');
   return {version:1,scope:'isolated-contract-rehearsal',copied,parity,ddl_sha256:hash(compactMembershipDDL),

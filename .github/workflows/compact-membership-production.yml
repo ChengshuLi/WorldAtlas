@@ -1,0 +1,45 @@
+name: Compact production geographic membership storage
+run-name: 'compact membership owner window ${{ inputs.window_comment_id }}'
+on:
+  workflow_dispatch:
+    inputs:
+      window_comment_id:
+        description: Fresh reviewed publisher window comment on original issue783; no credentials
+        type: string
+        required: true
+permissions:
+  contents: read
+  issues: read
+  deployments: read
+  actions: read
+concurrency:
+  group: neon-storage-owner-maintenance
+  cancel-in-progress: false
+jobs:
+  maintain:
+    if: github.repository == 'ChengshuLi/WorldAtlas' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - run: npm ci
+      - name: Execute exactly the reviewed bounded maintenance phase
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
+          WINDOW_COMMENT_ID: ${{ inputs.window_comment_id }}
+        run: node scripts/run-compact-membership-production.mjs
+      - name: Preserve sanitized production receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: compact-membership-production-${{ github.run_id }}-${{ github.run_attempt }}
+          path: data/validation/compact-membership-production/receipt.json
+          if-no-files-found: error
+          retention-days: 90
