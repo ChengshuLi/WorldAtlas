@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "baseline_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758",
+  "source_archive": {
+    "url": "https://www.internationalboundarycommission.org/uploads/shapefile/us-canada-boundary-v1-3.zip",
+    "retrieved_at": "2026-10-04",
+    "http_status": 200,
+    "bytes": 258764,
+    "sha256": "eb327459528b87cbc27e55ccc6bfd6982562c75559823a00b6dc50c04abcaab1",
+    "metadata_date": "2018-04-20",
+    "terms": "Mapping purposes only; U.S. metadata says © International Boundary Commission, all rights reserved.",
+    "retained": false
+  },
+  "baseline_input_pins": "all ten declared whole-file byte lengths and SHA-256 values verified from the immutable Git baseline before calculation",
+  "scope": {
+    "frozen_region_members": 222,
+    "british_columbia_members": 61,
+    "usable_bc_area_boundaries": 60,
+    "bc_member_without_area_boundary": "atlas:physical:CAN-185:BRC",
+    "statistics_canada_divisions": 29,
+    "washington_tiger_counties": 39,
+    "assigned_subjects_with_complete_five_tier_parent_chains": 3
+  },
+  "method": {
+    "line_section": 25,
+    "line_crs": "EPSG:4269",
+    "reference_geometry_crs": "EPSG:4326",
+    "analysis_crs": "EPSG:3347",
+    "line_samples": 74,
+    "maximum_sample_spacing_m": 994.933017,
+    "focused_sample_ids": [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67],
+    "inherited_rows_equal_reproduced_rows": true
+  },
+  "runtime_diagnostics": "GDAL emitted self-intersection warnings and one GeometryCollection operation warning during the inherited MakeValid/boundary method. The process completed and reproduced all focused rows exactly; repaired-geometry interpretation remains limited.",
+  "results": {
+    "nearest_bc_location_id_all_rows": "atlas:district:CAN-5915:BRC",
+    "nearest_washington_geoid_all_rows": "53073",
+    "minimum_bc_distance_m": 1011.9,
+    "maximum_bc_distance_m": 5888.53,
+    "strict_noncontainment_sample_ids": [55, 63, 64, 65, 66],
+    "strict_noncontainment_count": 5
+  },
+  "controls": {
+    "positive": "validation/positive-control.json",
+    "negative": "validation/negative-control.json",
+    "two_run_reproducibility": "validation/reproducibility-control.json"
+  },
+  "limits": [
+    "Archive use is mapping-only and the archive is not redistributed.",
+    "Statistics Canada units are statistical evidence, not political ownership; TIGER is cartographic reference evidence.",
+    "The reproduced rows do not explain the offset, prove legal boundaries or ownership, or support a correction.",
+    "Source scales, vintages, and represented land/water surfaces differ; cause remains unresolved."
+  ],
+  "status": "source reproduction complete; cause unresolved; geography unapproved; no boundary correction proposed"
+}
