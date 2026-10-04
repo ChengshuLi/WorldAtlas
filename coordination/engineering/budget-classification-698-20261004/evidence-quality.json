@@ -6,7 +6,7 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5",
+    "commit": "8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388",
     "files": [
       {
         "path": ".github/workflows/deployment-budget.yml",
@@ -69,14 +69,14 @@
     },
     {
       "path": "scripts/classify-deployment-budget.mjs",
-      "bytes": 6930,
-      "sha256": "b9ff14e887a8b57d32ba30f69cbe1da308420985351e4ce7828ca477d276efd9",
+      "bytes": 6939,
+      "sha256": "41428b56818d1349d6a41a69e42d397953d17b86b496203141693f0b3e6c9246",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/deployment-budget-scope.test.mjs",
-      "bytes": 8450,
-      "sha256": "ac8feef9e373bc88f21ee58ed979ec0bf21cd311d7f1faa21445acf3a4bba713",
+      "bytes": 8465,
+      "sha256": "aea3053bd5ec8e0cb2e31163ffa87d0808728d6a6d1a78dce5635182a78c76f7",
       "hash_kind": "file-bytes"
     }
   ],
@@ -84,12 +84,37 @@
     {
       "id": "trusted-budget-classification",
       "kind": "code",
-      "description": "Run positive coordination PR/push controls and negative rename/unknown/runtime/build/dependency/capped/missing/error controls, reproduce original real budget/archive tests in the exact six-file sparse inputs, preserve trusted base/full fallback and unchanged full accounting. Retain original observed hosted metadata; current hosted skip/full proof is pending.",
+      "description": "Run positive coordination PR/push controls and negative rename/unknown/runtime/build/dependency/capped/missing/error controls, reproduce original real budget/archive tests in the exact six-file sparse inputs, preserve trusted base/full fallback and unchanged full accounting. Retain original observed hosted metadata; current hosted skip/full proof is pending. Frozen local test counts are archived at the original published source head; actual current-head hosted checks remain required.",
       "software": "Node24; GitHub Actions read-only job API; existing archive unit tests",
       "units": "test outcomes, whole-file hashes and actual job timestamps"
     }
   ],
-  "metrics": [],
+  "metrics": [
+    {
+      "id": "archived_tests",
+      "value": 10,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "92c58ba3b10c77317d633b02f968c28ef2385a6e3dae9e2c3e1ecfe1c1e541fa",
+      "evaluation_commit": "7304547e1b07f70bb333f316486a9964cf08cfb1"
+    },
+    {
+      "id": "archived_failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "92c58ba3b10c77317d633b02f968c28ef2385a6e3dae9e2c3e1ecfe1c1e541fa",
+      "evaluation_commit": "7304547e1b07f70bb333f316486a9964cf08cfb1"
+    },
+    {
+      "id": "archived_skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "92c58ba3b10c77317d633b02f968c28ef2385a6e3dae9e2c3e1ecfe1c1e541fa",
+      "evaluation_commit": "7304547e1b07f70bb333f316486a9964cf08cfb1"
+    }
+  ],
   "summaries": [],
   "conclusions": [],
   "stages": {
@@ -119,6 +144,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/budget-classification-698-20261004/evidence-quality.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/budget-classification-698-20261004/local-tests.log",
       "status": "added"
     },
@@ -133,11 +162,23 @@
     {
       "path": "test/deployment-budget-scope.test.mjs",
       "status": "added"
-    },
-    {
-      "path": "coordination/engineering/budget-classification-698-20261004/evidence-quality.json",
-      "status": "added"
     }
   ],
-  "metric_bindings": []
+  "metric_bindings": [
+    {
+      "metric_id": "archived_tests",
+      "path": "coordination/engineering/budget-classification-698-20261004/validation.json",
+      "json_pointer": "/tests"
+    },
+    {
+      "metric_id": "archived_failed",
+      "path": "coordination/engineering/budget-classification-698-20261004/validation.json",
+      "json_pointer": "/failed"
+    },
+    {
+      "metric_id": "archived_skipped",
+      "path": "coordination/engineering/budget-classification-698-20261004/validation.json",
+      "json_pointer": "/skipped"
+    }
+  ]
 }

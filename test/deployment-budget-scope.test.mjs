@@ -25,7 +25,7 @@ test('only explicit coordination controls, plain docs and engineering receipts a
     '.openai/hosting.json', 'vite.config.mjs', 'arbitrary-root.js', 'package.json', 'package-lock.json',
     'requirements.txt', 'public/a.txt', 'docs/generated.json', '.github/workflows/deployment-budget.yml',
     '.github/workflows/neon-storage-migration.yml', '.github/workflows/unknown.yml',
-    'coordination/engineering/example/run.mjs', 'docs/../src/main.md']) {
+    'coordination/engineering/example/run.mjs', 'docs/../src/main.md', 'README.md\n']) {
     assert.equal(classifyBudgetFiles([file(name)]).full, true, name);
   }
 });

@@ -24,7 +24,7 @@ const controlWorkflows = new Set([
 ].map(name => `.github/workflows/${name}.yml`));
 
 export function packageIndependentPath(file) {
-  if (typeof file !== 'string' || file.includes('\\') || file.includes('\0') ||
+  if (typeof file !== 'string' || file.includes('\\') || /[\x00-\x1f\x7f]/.test(file) ||
       file.split('/').some(part => !part || part === '.' || part === '..')) return false;
   return controls.has(file) || controlTests.has(file) || controlWorkflows.has(file) ||
     /^docs\/.+\.(?:md|txt)$/.test(file) || /^[^/]+\.md$/.test(file) ||
