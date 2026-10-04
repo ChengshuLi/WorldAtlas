@@ -60,4 +60,22 @@ class ReproductionControls(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    result = unittest.main(exit=False).result
+    if not result.wasSuccessful():
+        raise SystemExit(1)
+
+    # The manifest binds these exact successful control receipts. Exclusive
+    # writes prevent a later run from silently replacing the reviewed vintage.
+    common.write_candidate("validation/positive-control.json", {
+        "method_id": "assigned_geometry_overlay",
+        "kind": "positive-control",
+        "outcome": "passed",
+        "cases": ["valid-square-identical-overlay", "exact-zero-symmetric-difference"],
+    })
+    common.write_candidate("validation/negative-control.json", {
+        "method_id": "assigned_geometry_overlay",
+        "kind": "negative-control",
+        "outcome": "passed",
+        "cases": ["invalid-bowtie-preserves-raw-validity-and-source", "duplicate-subject",
+                  "changed-input-hash", "exclusive-output-overwrite", "check-only-no-write"],
+    })

@@ -144,6 +144,7 @@ def write_candidate(name: str, value) -> None:
         print(f"check-only: validated candidate {name}; no output written")
         return
     target = HERE / name
+    target.parent.mkdir(parents=True, exist_ok=True)
     with target.open("x", encoding="utf-8") as stream:
         json.dump(value, stream, ensure_ascii=False, indent=2)
         stream.write("\n")

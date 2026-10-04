@@ -542,33 +542,9 @@
   ],
   "outputs": [
     {
-      "path": "research/geography/western-indian-ocean-reproduction-followup/input-pins.json",
-      "bytes": 7603,
-      "sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/western-indian-ocean-reproduction-followup/prior-packet-README.md",
-      "bytes": 12549,
-      "sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
-      "hash_kind": "file-bytes"
-    },
-    {
       "path": "research/geography/western-indian-ocean-reproduction-followup/README.md",
       "bytes": 5255,
       "sha256": "3b7fb0e81813b57ac179113a911eb5cf92511c3735edbdc9ebdaa73297c29a9a",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/western-indian-ocean-reproduction-followup/reproduction_common.py",
-      "bytes": 6191,
-      "sha256": "35b240fd930e003d79953db97d5553560f438d63eddcd4cabbac2541b9610159",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "research/geography/western-indian-ocean-reproduction-followup/reproduce-geometry.py",
-      "bytes": 8789,
-      "sha256": "c2ca0a4d665dffb0514c44da1c59e730bb3ed1bb200b4d5a78853fd9a691717d",
       "hash_kind": "file-bytes"
     },
     {
@@ -584,15 +560,15 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/western-indian-ocean-reproduction-followup/test-reproduction-controls.py",
-      "bytes": 2705,
-      "sha256": "5fa75f698ea21a73f5c47ef128a7f3a1f16e6950316d7e0de956a1ed4043d73e",
-      "hash_kind": "file-bytes"
-    },
-    {
       "path": "research/geography/western-indian-ocean-reproduction-followup/geometry-comparison.json",
       "bytes": 135298,
       "sha256": "4809dc44058100fc453db87f218d656a2267a8f10a00226e34b1d2017a12132e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/input-pins.json",
+      "bytes": 7603,
+      "sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
       "hash_kind": "file-bytes"
     },
     {
@@ -605,6 +581,42 @@
       "path": "research/geography/western-indian-ocean-reproduction-followup/metric-comparison.json",
       "bytes": 1329,
       "sha256": "ec2858ba08d619d1e3db9fb853128b4a63125599680d08eea3feb15c4e456ff9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/prior-packet-README.md",
+      "bytes": 12549,
+      "sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/reproduce-geometry.py",
+      "bytes": 8789,
+      "sha256": "c2ca0a4d665dffb0514c44da1c59e730bb3ed1bb200b4d5a78853fd9a691717d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/reproduction_common.py",
+      "bytes": 6244,
+      "sha256": "032f6ef3bde4fa6df82d39f9b528d42213a3d02257c98c780505c0e03808c26a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/test-reproduction-controls.py",
+      "bytes": 3597,
+      "sha256": "ef7c9b7af5a3fbccc588ee395441528d37a92a94f9688fc98b5284ae1f6ea9e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/validation/negative-control.json",
+      "bytes": 285,
+      "sha256": "dfdcbe2dc98ff0faaee4047910bdcea3925823aa1abdfdd2124704b62e18dab2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/validation/positive-control.json",
+      "bytes": 194,
+      "sha256": "9ef6ce66e54d146272f1f72d66b08c3e9cfc642733b9b88842009e901638ca9f",
       "hash_kind": "file-bytes"
     }
   ],
@@ -629,240 +641,136 @@
   ],
   "metrics": [
     {
-      "id": "archived_geometry_comparisons",
-      "value": 139,
-      "unit": "features",
-      "input_sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
-      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "archived"
-    },
-    {
-      "id": "current_geometry_comparisons",
+      "id": "reproduced_geoboundaries_comparisons",
       "value": 139,
       "unit": "features",
       "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
       "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "current"
+      "vintage": "baseline"
     },
     {
-      "id": "archived_geometry_symdiff_over_5_percent",
-      "value": 28,
-      "unit": "features",
-      "input_sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
-      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "archived"
-    },
-    {
-      "id": "current_geometry_symdiff_over_5_percent",
+      "id": "reproduced_geoboundaries_over_5_percent",
       "value": 28,
       "unit": "features",
       "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
       "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "current"
+      "vintage": "baseline"
     },
     {
-      "id": "archived_geometry_max_symdiff_percent",
-      "value": 77.41952077707315,
-      "unit": "percent",
-      "input_sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
-      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "archived"
-    },
-    {
-      "id": "current_geometry_max_symdiff_percent",
+      "id": "reproduced_geoboundaries_max_symdiff_percent",
       "value": 77.41952077707315,
       "unit": "percent",
       "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
       "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "current"
+      "vintage": "baseline"
     },
     {
-      "id": "archived_geometry_invalid_source_count",
-      "value": 0,
-      "unit": "features",
-      "input_sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
-      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "archived"
-    },
-    {
-      "id": "current_geometry_invalid_source_count",
+      "id": "reproduced_invalid_geoboundaries_sources",
       "value": 0,
       "unit": "features",
       "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
       "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "current"
+      "vintage": "baseline"
     },
     {
-      "id": "archived_geometry_invalid_current_count",
-      "value": 0,
-      "unit": "features",
-      "input_sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
-      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "archived"
-    },
-    {
-      "id": "current_geometry_invalid_current_count",
-      "value": 0,
-      "unit": "features",
-      "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
-      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "current"
-    },
-    {
-      "id": "archived_codab_matched_adm2",
-      "value": 119,
-      "unit": "districts",
-      "input_sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
-      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "archived"
-    },
-    {
-      "id": "current_codab_matched_adm2",
-      "value": 119,
-      "unit": "districts",
-      "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
-      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "current"
-    },
-    {
-      "id": "archived_codab_source_adm2",
-      "value": 120,
-      "unit": "districts",
-      "input_sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
-      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "archived"
-    },
-    {
-      "id": "current_codab_source_adm2",
+      "id": "reproduced_codab_adm2_source_count",
       "value": 120,
       "unit": "districts",
       "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
       "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "current"
+      "vintage": "baseline"
     },
     {
-      "id": "archived_codab_source_adm1",
-      "value": 24,
-      "unit": "regions",
-      "input_sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
+      "id": "reproduced_codab_matched_current_adm2",
+      "value": 119,
+      "unit": "districts",
+      "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
       "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "archived"
+      "vintage": "baseline"
     },
     {
-      "id": "current_codab_source_adm1",
+      "id": "reproduced_codab_adm1_source_count",
       "value": 24,
       "unit": "regions",
       "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
       "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "current"
+      "vintage": "baseline"
     },
     {
-      "id": "archived_codab_union_symdiff_percent",
-      "value": 0.14944900171678538,
-      "unit": "percent",
-      "input_sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3",
-      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "archived"
-    },
-    {
-      "id": "current_codab_union_symdiff_percent",
+      "id": "reproduced_codab_union_symdiff_percent",
       "value": 0.14944900171678538,
       "unit": "percent",
       "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
       "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
-      "vintage": "current"
+      "vintage": "baseline"
+    },
+    {
+      "id": "geometry_values_changed_vs_historic",
+      "value": 0,
+      "unit": "values",
+      "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
+      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
+      "vintage": "baseline"
+    },
+    {
+      "id": "codab_values_changed_vs_historic",
+      "value": 0,
+      "unit": "values",
+      "input_sha256": "4d350778cf5ecabb1c340c36d838daba048c67ec17b0483d8fbc7bae98267870",
+      "evaluation_commit": "3d87880a274269b549a847333c35474e065c07f3",
+      "vintage": "baseline"
     }
   ],
   "summaries": [
     {
-      "metric_id": "archived_geometry_comparisons",
+      "metric_id": "reproduced_geoboundaries_comparisons",
       "value": 139,
       "unit": "features"
     },
     {
-      "metric_id": "current_geometry_comparisons",
-      "value": 139,
-      "unit": "features"
-    },
-    {
-      "metric_id": "archived_geometry_symdiff_over_5_percent",
+      "metric_id": "reproduced_geoboundaries_over_5_percent",
       "value": 28,
       "unit": "features"
     },
     {
-      "metric_id": "current_geometry_symdiff_over_5_percent",
-      "value": 28,
-      "unit": "features"
-    },
-    {
-      "metric_id": "archived_geometry_max_symdiff_percent",
+      "metric_id": "reproduced_geoboundaries_max_symdiff_percent",
       "value": 77.41952077707315,
       "unit": "percent"
     },
     {
-      "metric_id": "current_geometry_max_symdiff_percent",
-      "value": 77.41952077707315,
-      "unit": "percent"
-    },
-    {
-      "metric_id": "archived_geometry_invalid_source_count",
+      "metric_id": "reproduced_invalid_geoboundaries_sources",
       "value": 0,
       "unit": "features"
     },
     {
-      "metric_id": "current_geometry_invalid_source_count",
-      "value": 0,
-      "unit": "features"
-    },
-    {
-      "metric_id": "archived_geometry_invalid_current_count",
-      "value": 0,
-      "unit": "features"
-    },
-    {
-      "metric_id": "current_geometry_invalid_current_count",
-      "value": 0,
-      "unit": "features"
-    },
-    {
-      "metric_id": "archived_codab_matched_adm2",
-      "value": 119,
-      "unit": "districts"
-    },
-    {
-      "metric_id": "current_codab_matched_adm2",
-      "value": 119,
-      "unit": "districts"
-    },
-    {
-      "metric_id": "archived_codab_source_adm2",
+      "metric_id": "reproduced_codab_adm2_source_count",
       "value": 120,
       "unit": "districts"
     },
     {
-      "metric_id": "current_codab_source_adm2",
-      "value": 120,
+      "metric_id": "reproduced_codab_matched_current_adm2",
+      "value": 119,
       "unit": "districts"
     },
     {
-      "metric_id": "archived_codab_source_adm1",
+      "metric_id": "reproduced_codab_adm1_source_count",
       "value": 24,
       "unit": "regions"
     },
     {
-      "metric_id": "current_codab_source_adm1",
-      "value": 24,
-      "unit": "regions"
-    },
-    {
-      "metric_id": "archived_codab_union_symdiff_percent",
+      "metric_id": "reproduced_codab_union_symdiff_percent",
       "value": 0.14944900171678538,
       "unit": "percent"
     },
     {
-      "metric_id": "current_codab_union_symdiff_percent",
-      "value": 0.14944900171678538,
-      "unit": "percent"
+      "metric_id": "geometry_values_changed_vs_historic",
+      "value": 0,
+      "unit": "values"
+    },
+    {
+      "metric_id": "codab_values_changed_vs_historic",
+      "value": 0,
+      "unit": "values"
     }
   ],
   "conclusions": [
@@ -925,5 +833,129 @@
     "geometry_metric_deltas": 0,
     "codab_metric_deltas": 0,
     "prior_readme_copy_sha256": "7209377dd269ae1a8d4590ded5775eb8d85d933b6efdec9c3c1036cd6195aab3"
-  }
+  },
+  "metric_bindings": [
+    {
+      "metric_id": "reproduced_geoboundaries_comparisons",
+      "path": "research/geography/western-indian-ocean-reproduction-followup/geometry-comparison.json",
+      "json_pointer": "/geoBoundaries_location_comparisons/count"
+    },
+    {
+      "metric_id": "reproduced_geoboundaries_over_5_percent",
+      "path": "research/geography/western-indian-ocean-reproduction-followup/geometry-comparison.json",
+      "json_pointer": "/geoBoundaries_location_comparisons/summary/count_over_5_percent"
+    },
+    {
+      "metric_id": "reproduced_geoboundaries_max_symdiff_percent",
+      "path": "research/geography/western-indian-ocean-reproduction-followup/geometry-comparison.json",
+      "json_pointer": "/geoBoundaries_location_comparisons/summary/max_symmetric_difference_percent"
+    },
+    {
+      "metric_id": "reproduced_invalid_geoboundaries_sources",
+      "path": "research/geography/western-indian-ocean-reproduction-followup/geometry-comparison.json",
+      "json_pointer": "/geoBoundaries_location_comparisons/summary/invalid_source_count"
+    },
+    {
+      "metric_id": "reproduced_codab_adm2_source_count",
+      "path": "research/geography/western-indian-ocean-reproduction-followup/madagascar-current-COD-AB-review.json",
+      "json_pointer": "/source_adm2_count"
+    },
+    {
+      "metric_id": "reproduced_codab_matched_current_adm2",
+      "path": "research/geography/western-indian-ocean-reproduction-followup/madagascar-current-COD-AB-review.json",
+      "json_pointer": "/current_named_adm2_matches"
+    },
+    {
+      "metric_id": "reproduced_codab_adm1_source_count",
+      "path": "research/geography/western-indian-ocean-reproduction-followup/madagascar-current-COD-AB-review.json",
+      "json_pointer": "/source_adm1_count"
+    },
+    {
+      "metric_id": "reproduced_codab_union_symdiff_percent",
+      "path": "research/geography/western-indian-ocean-reproduction-followup/madagascar-current-COD-AB-review.json",
+      "json_pointer": "/partition_integrity/all_120_ADM2_union_vs_current_119_member_union/symmetric_difference_percent"
+    },
+    {
+      "metric_id": "geometry_values_changed_vs_historic",
+      "path": "research/geography/western-indian-ocean-reproduction-followup/metric-comparison.json",
+      "json_pointer": "/comparison/geometry_changed_values_count"
+    },
+    {
+      "metric_id": "codab_values_changed_vs_historic",
+      "path": "research/geography/western-indian-ocean-reproduction-followup/metric-comparison.json",
+      "json_pointer": "/comparison/codab_changed_values_count"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "assigned_geometry_overlay",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/western-indian-ocean-reproduction-followup/validation/positive-control.json"
+    },
+    {
+      "method_id": "assigned_geometry_overlay",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/western-indian-ocean-reproduction-followup/validation/negative-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/compare-current-codab.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/compare-vintages.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/geometry-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/input-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/madagascar-current-COD-AB-review.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/metric-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/prior-packet-README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/reproduce-geometry.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/reproduction_common.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/test-reproduction-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/validation/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/western-indian-ocean-reproduction-followup/validation/positive-control.json",
+      "status": "added"
+    }
+  ]
 }
