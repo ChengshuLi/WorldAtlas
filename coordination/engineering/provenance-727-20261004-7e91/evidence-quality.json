@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "issue": 727,
+  "lane": "engineering",
+  "worker_id": "engineering-night-20261003-7e91f438",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "b5254801fdd6f8be73c7d49ff203bd4e9fdfcbb2",
+    "files": [
+      {
+        "path": "data/macro-foundation/europe-asia-boundary-decisions.json",
+        "bytes": 312747,
+        "sha256": "f9bfacaf140b6a8a3be6353d2d66f832d40d8e75dd2af0ca5bde4fece8f3bcf6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/macro-foundation/membership-decisions.json",
+        "bytes": 28530,
+        "sha256": "999f3ca84a0eb4b60f300e422503894b31c4474228d6e52259438ada0979a846",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/provenance-727-20261004-7e91.json",
+      "bytes": 1090,
+      "sha256": "395e39cd3732b2a063b33eed552ee971283c2cdb9464073580b6e0bfb194ac17",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/provenance-727-20261004-7e91/README.md",
+      "bytes": 1927,
+      "sha256": "db7c89c24ae8a8a1be68ceb7c03d50e53bf1a2f069e9a0f218f48765db11a7fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/provenance-727-20261004-7e91/negative-control.json",
+      "bytes": 435,
+      "sha256": "068cf06ff8fd078a9e345eab5fb23dcdea03eea353676376a4fc304b094f2418",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/provenance-727-20261004-7e91/positive-control.json",
+      "bytes": 1175,
+      "sha256": "5d0c22bbf9f78de942547809b804fc095b0f60bad2cfae698e4b021ef6c65694",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/macro-foundation/europe-asia-policy-provenance-correction-v1.json",
+      "bytes": 845,
+      "sha256": "44e979cf2667498e3395b471f2332852733eec0bf2314caf96fabcb15def7dde",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/macro_policy_provenance.py",
+      "bytes": 2492,
+      "sha256": "69c8c85a34d8c66275ffbbb894aeb66282354c0d2a6ba6d8136859803d0c78cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/prepare-global-macro-geography.py",
+      "bytes": 17742,
+      "sha256": "adb31ce6f384c59bca33f292c12b4d0edff5eab245d998e41e2cd24ca95a2691",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/macro-policy-provenance.test.mjs",
+      "bytes": 2970,
+      "sha256": "eec9430ce4ec69d883e4fbbaaba8dda934ae35ee5d611fdd4237398b98be2968",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "provenance",
+      "kind": "code",
+      "description": "Exact frozen-file hashes and explicit additive correction, no geographic inference",
+      "software": "Python 3; Node 24 test runner",
+      "units": "whole-file SHA256"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "python3 scripts/macro_policy_provenance.py",
+    "node --test test/macro-policy-provenance.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/provenance-727-20261004-7e91.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/provenance-727-20261004-7e91/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/provenance-727-20261004-7e91/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/provenance-727-20261004-7e91/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/macro-foundation/europe-asia-policy-provenance-correction-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/macro_policy_provenance.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts/prepare-global-macro-geography.py",
+      "status": "modified",
+      "original_sha256": "62fac52d49b6c8bd0840b2d50591cdcd1bda6c9e19713d5a15ae6142dd99c6ed"
+    },
+    {
+      "path": "test/macro-policy-provenance.test.mjs",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": []
+}

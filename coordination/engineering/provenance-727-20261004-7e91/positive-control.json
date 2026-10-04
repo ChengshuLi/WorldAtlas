@@ -1,0 +1,28 @@
+{
+  "method_id": "provenance",
+  "kind": "positive",
+  "outcome": "passed",
+  "result": {
+    "status": "corrected-binding-verified",
+    "policy_sha256": "999f3ca84a0eb4b60f300e422503894b31c4474228d6e52259438ada0979a846",
+    "original_decision_sha256": "f9bfacaf140b6a8a3be6353d2d66f832d40d8e75dd2af0ca5bde4fece8f3bcf6",
+    "correction_sha256": "44e979cf2667498e3395b471f2332852733eec0bf2314caf96fabcb15def7dde",
+    "earlier_vintage_origin": "unknown",
+    "geographic_approval": "not-assessed"
+  },
+  "preservation": [
+    {
+      "path": "data/macro-foundation/europe-asia-boundary-decisions.json",
+      "sha256": "f9bfacaf140b6a8a3be6353d2d66f832d40d8e75dd2af0ca5bde4fece8f3bcf6",
+      "original_commit": "604021bc42c99c6e852785aeb11ab576a04f5e83",
+      "current_matches_original": true
+    },
+    {
+      "path": "data/macro-foundation/membership-decisions.json",
+      "sha256": "999f3ca84a0eb4b60f300e422503894b31c4474228d6e52259438ada0979a846",
+      "original_commit": "604021bc42c99c6e852785aeb11ab576a04f5e83",
+      "current_matches_original": true
+    }
+  ],
+  "limit": "Byte provenance only; earlier recorded hash origin unknown; no geography approval"
+}
