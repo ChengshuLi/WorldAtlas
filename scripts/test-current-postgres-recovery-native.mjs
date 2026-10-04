@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import {execFileSync,spawn} from 'node:child_process';
 import {randomUUID,createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
-import {recoveryImage,readRecoveryInventory,assertRestoredInventory,isolatedRestoreSQL,isolatedOriginalChecks,isolatedRecoveryBootstrapSQL,isolatedDatabaseACLList,isolatedDatabaseACLSQL} from './current-postgres-recovery.mjs';
+import {recoveryImage,readRecoveryInventory,assertRestoredInventory,isolatedRestoreSQL,isolatedOriginalChecks,isolatedRecoveryBootstrapSQL,isolatedDatabaseACLList,isolatedDatabaseACLSQL,restoreIsolatedDatabaseACL} from './current-postgres-recovery.mjs';
 import {storageExportV2Contract} from '../hosted/storage-export-v2-contract.js';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const native=(args,input)=>execFileSync('docker',args,{input,timeout:180000,maxBuffer:16*1024*1024,stdio:['pipe','pipe','pipe']});
@@ -42,7 +42,7 @@ try{
  const slow='atlas-sql-timeout-fixture-'+randomUUID();try{cleanup();native(['create','--name',slow,'--network','none','--read-only',recoveryImage,'sleep','30']);assert.throws(()=>execFileSync('docker',['start','-ai',slow],{timeout:250,stdio:'pipe'}));}finally{try{native(['rm','-fv',slow]);}catch{}assert.equal(native(['ps','-a','--filter','name=^/'+slow+'$','--format','{{.ID}}']).toString().trim(),'');}receipt.timed_out_named_client_absence_confirmed=true;
 cleanup();await start();command(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedRecoveryBootstrapSQL);sql('DROP SCHEMA public;');
  const restoreSQL=isolatedRestoreSQL(command(['pg_restore','--file=-'],dump));command(['psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],restoreSQL);
- command(['sh','-c','cat > /var/lib/postgresql/database-acl.list'],databaseACLList);const databaseACL=command(['pg_restore','--create','--use-list=/var/lib/postgresql/database-acl.list','--file=-'],dump);assert.match(databaseACL.toString(),/CREATE DATABASE neondb/);const aclSQL=isolatedDatabaseACLSQL(databaseACL);assert.doesNotMatch(aclSQL.toString(),/\b(?:CREATE|DROP|ALTER) DATABASE\b|\\connect/);sql(aclSQL);
+ const aclDirectory=fs.mkdtempSync('/tmp/atlas-acl-fixture-');try{restoreIsolatedDatabaseACL(name,dump,aclDirectory);}finally{fs.rmSync(aclDirectory,{recursive:true});}
  sql(isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));const restored=await readRecoveryInventory(query);assertRestoredInventory(before,restored,after);assert.equal(acl(),originalACL);receipt.database_and_provider_default_acls_preserved=true;
  assert.equal((await query('SELECT metadata FROM atlas_attribute_records'))[0].metadata,'{ "original" : "claim" }');assert.equal((await query('SELECT metadata FROM atlas_names'))[0].metadata,'{ "original" : "name" }');assert.equal((await query('SELECT counts FROM atlas_ingestions'))[0].counts,'{ "original" : 1 }');
  sql('SET ROLE neondb_owner; REVOKE SELECT ON atlas_ingestions FROM worldatlas_app;');const corrupted=await readRecoveryInventory(query);assert.throws(()=>assertRestoredInventory(before,corrupted,after));

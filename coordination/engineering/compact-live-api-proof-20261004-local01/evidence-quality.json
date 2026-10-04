@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "issue": 790,
+  "lane": "engineering",
+  "worker_id": "engineering-neon-storage-publisher-20261004-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "712b1a107a1c4a53e0c2a29d66c5d703f3a7698a",
+    "files": [
+      {
+        "path": "postgres/schema.sql",
+        "bytes": 51470,
+        "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 39531,
+        "sha256": "496b79e27cc6bb97e26208614dad5b55c10e74af3a2840fc43c6770c15867c50",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "scripts/test-current-postgres-recovery-native.mjs",
+        "bytes": 9364,
+        "sha256": "24a5ef896b412d69a79bb595fcc2602a19250c3b4b93485d26a2ec10956a7631",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "test/compact-membership-production.test.mjs",
+        "bytes": 7437,
+        "sha256": "e145200bb29ffb149162b1a15a96a4442300e280f1f7c7a17ce6bf0daf1623a6",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "scripts/run-compact-membership-production.mjs",
+        "bytes": 19180,
+        "sha256": "e20dbbab7bcdaede0025f27379721296ff36a72f4bd44c51112eb0d990d429a9",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 245755,
+        "sha256": "47aa40b82e7f6b225a6567d28a0427df39d415dcf86df1d26f6d32ab84fd7a12",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 39567,
+      "sha256": "820375c09f837ca0ea464eaf989a513352ee9de3433127d8c6820a384b7d73e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/test-current-postgres-recovery-native.mjs",
+      "bytes": 9146,
+      "sha256": "6f1523b2687f739a6ac4889b542aed20d3d0cef0e910dc12950be69b2ede3918",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-membership-production.test.mjs",
+      "bytes": 8232,
+      "sha256": "b0ccd5174704c51bf2ffecefc0e36fae9f9edd4b597f887474565ce3e44137ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-compact-membership-production.mjs",
+      "bytes": 21948,
+      "sha256": "83b5f3c53b9e42afd4ba1f944760899d9e8828121b38567bf2fbacebd72de3c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/verify-live-membership-api-functions.mjs",
+      "bytes": 4591,
+      "sha256": "affc2d6dcab9aba7783bca74a60b9bd1188b015e4a79b1f5781672998792996c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/live-membership-api-functions.test.mjs",
+      "bytes": 4141,
+      "sha256": "e886f26081cbd7a662906f7c723ab41921f712d31f73ae05dba5e6dfb21c2dfa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-live-api-proof-20261004-local01/README.md",
+      "bytes": 1928,
+      "sha256": "52eddb4a6987a1c91e2b602bfe8f6292bd735c942800ced7a932cc4312e9e579",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-live-api-proof-20261004-local01/prepare-evidence.mjs",
+      "bytes": 2989,
+      "sha256": "a82c9912f974c12596645c9a9c8192621ec5f23b4bad7f730683db6971dcb88a",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "native-owner-maintenance",
+      "kind": "code",
+      "description": "Shared native ACL-list stdin transport plus explicitly authorized database-only retirement with live original API-function parity through actual read-only application login; no served HTTP delivery or restored-write claim. Actual native recovery and production measurement remain required",
+      "software": "Node24, pinned PostgreSQL18 native container and locked Neon serverless driver",
+      "units": "No new physical benchmark or native production capacity claim before actual execution"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "status": "modified",
+      "original_sha256": "496b79e27cc6bb97e26208614dad5b55c10e74af3a2840fc43c6770c15867c50"
+    },
+    {
+      "path": "scripts/test-current-postgres-recovery-native.mjs",
+      "status": "modified",
+      "original_sha256": "24a5ef896b412d69a79bb595fcc2602a19250c3b4b93485d26a2ec10956a7631"
+    },
+    {
+      "path": "test/compact-membership-production.test.mjs",
+      "status": "modified",
+      "original_sha256": "e145200bb29ffb149162b1a15a96a4442300e280f1f7c7a17ce6bf0daf1623a6"
+    },
+    {
+      "path": "scripts/run-compact-membership-production.mjs",
+      "status": "modified",
+      "original_sha256": "e20dbbab7bcdaede0025f27379721296ff36a72f4bd44c51112eb0d990d429a9"
+    },
+    {
+      "path": "scripts/verify-live-membership-api-functions.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/live-membership-api-functions.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-live-api-proof-20261004-local01/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-live-api-proof-20261004-local01/prepare-evidence.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-live-api-proof-20261004-local01/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test test/current-postgres-recovery.test.mjs test/compact-membership-production.test.mjs test/live-membership-api-functions.test.mjs",
+    "node coordination/engineering/compact-live-api-proof-20261004-local01/prepare-evidence.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/compact-live-api-proof-20261004-local01/evidence-quality.json"
+  ]
+}
