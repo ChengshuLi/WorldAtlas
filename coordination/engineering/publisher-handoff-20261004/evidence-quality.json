@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "issue": 728,
+  "lane": "engineering",
+  "worker_id": "publisher-handoff-root-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "c2464fceb8481d5f1273793dbc3869fcb4262727",
+    "files": [
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 19694,
+        "sha256": "96deb74e712d5122e2ba655beb40f5ecca611ec85064fa745fd58ee5d6510b75",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/ENGINEERING_HANDOFF.md",
+        "bytes": 6901,
+        "sha256": "59a4fd47f9ca486336b899d0a548163a19061d13e45445f8718d6b66202536e7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 6646,
+        "sha256": "6163bb532d32fdc97536fa483e28e9b296f6479e30c36eac1a524046581e80af",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 22042,
+      "sha256": "54846e5feeb484fe8f66f0cc48bae92ee99cb1ec4855508dc593f559b250c5ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "bytes": 8692,
+      "sha256": "12b9b1f35dea0df49b5d2f2828c0dc01d2e93132f37bf7a4424daff0ae4324fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 7903,
+      "sha256": "4c3ee04b8abb450dc8fb268355b7aa1024d63b34670555720546c5048cc51df4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PUBLICATION_HANDOFF.md",
+      "bytes": 7223,
+      "sha256": "f37420270d2954e7aa8a1b0635f6ea753efa15755f67b0b4ba1d415d4efa1d94",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/publisher-handoff-20261004/README.md",
+      "bytes": 562,
+      "sha256": "e6226a5350a3fa8f95cabbbd7776f3b446d2d9093a763310026a12df4a9fa6b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/publisher-handoff-20261004/claim.json",
+      "bytes": 821,
+      "sha256": "17880265fe5c4fdcffbd2f22690441d65cb32d227df57eb007896fac82656ee2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/publisher-handoff-20261004/validation.txt",
+      "bytes": 29592,
+      "sha256": "e946785c7453e98927009f88b0bc4f5fd2a9ae7cf68682aa415d622fba216b0e",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "publisher-handoff",
+      "kind": "code",
+      "description": "Documentation-only separation of implementation/preview acceptance from publisher-owned production operation, preserving enforced SQL safeguards and source history",
+      "software": "GitHub Issues and existing claim/merge clients",
+      "units": "coordination states"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/publisher-handoff-20261004/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "96deb74e712d5122e2ba655beb40f5ecca611ec85064fa745fd58ee5d6510b75"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "59a4fd47f9ca486336b899d0a548163a19061d13e45445f8718d6b66202536e7"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "6163bb532d32fdc97536fa483e28e9b296f6479e30c36eac1a524046581e80af"
+    },
+    {
+      "path": "docs/PUBLICATION_HANDOFF.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/publisher-handoff-20261004/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/publisher-handoff-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/publisher-handoff-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/publisher-handoff-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
