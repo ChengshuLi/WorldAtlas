@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "accepted": false,
+  "reviewed_head": "57500637702c4015ca14615b0e30398772c103d0",
+  "current_main": "038d611ee5c275812d53af044f389e85e0f303f9",
+  "candidate": "2b48b077fc9e70f48305fb894196d4b51962a79c",
+  "actual_candidate_parents": [
+    "c1ed367363e243caf522c0179f09bfa185b6bd42",
+    "57500637702c4015ca14615b0e30398772c103d0"
+  ],
+  "runs": [
+    37179411149,
+    37179439500,
+    37179466246
+  ],
+  "final_result_comment": 5976870023,
+  "reason": "Actual test merge stayed on older base across all three bounded retries; author merges current main intact and obtains new exact-head review and CI. No accepted merge or deployment."
+}

@@ -148,6 +148,11 @@
       "preserved_files": 2941,
       "ownership_buffers": 56,
       "receipt": "data/engineering/hierarchy-install-20261003-a9c2/reproducibility-publisher-integrated.json"
+    },
+    {
+      "check": "serialized merge preparation three bounded retries",
+      "outcome": "not-accepted",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/queue-stale-base-20261004.json"
     }
   ],
   "deployment": {
@@ -169,6 +174,8 @@
   "pull_request": null,
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
-  "incorporated_main_commit": "c1ed367363e243caf522c0179f09bfa185b6bd42",
-  "pushed_source_checkpoint": "0aec48f8649e614b7b1d618e915f4a5081326a83"
+  "incorporated_main_commit": "038d611ee5c275812d53af044f389e85e0f303f9",
+  "pushed_source_checkpoint": "0aec48f8649e614b7b1d618e915f4a5081326a83",
+  "publication_handoff_path": "data/engineering/hierarchy-install-20261003-a9c2/publication-handoff.md",
+  "publication_owner_transfer": "Existing designated publisher remains responsible until ENG main acknowledges on GitHub"
 }
