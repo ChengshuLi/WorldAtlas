@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "startup-20261004-a9c2",
+  "branch": "engineering/startup-20261004-a9c2",
+  "base_main_commit": "c81bdce3f6aee4944d0dbae1c848bf33c365124f",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/712",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Measure and optimize first correct interactive selected-year startup; preserve integrity, stable IDs, provenance and existing navigation behavior"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-04T08:58:26.299815+00:00",
+  "completed": [
+    "Serialized claim confirmed; fresh isolated checkout; previous638safehandoff+release verified"
+  ],
+  "checks": [],
+  "deployment": {
+    "author_deployed": false,
+    "observed_site_version": 24,
+    "access": "owner-private"
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": "Ordinary bounded production GET-only browser paths; no production writes or heavy load"
+  },
+  "evidence_paths": [
+    "data/engineering/startup-20261004-a9c2/",
+    "coordination/engineering/startup-20261004-a9c2/"
+  ],
+  "blockers": [],
+  "next_action": "Retain fresh/repeat initial startup baseline with phase/request/CPU observations before implementing measured bottleneck",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "reservation": {
+    "comment_id": 5978306167,
+    "version": 1,
+    "active": true,
+    "worker_id": "engineering-startup-a9c25e14-20261004",
+    "claim_id": "22b05e8a-f50b-4901-8cd3-b9e71fe4827b",
+    "branch": "engineering/startup-20261004-a9c2",
+    "request_id": "d77c6fdc-1ecb-4b2d-8e2d-25f6b87a4ea4",
+    "issue_number": 712,
+    "claimed_at": "2026-10-04T08:57:19.982Z",
+    "updated_at": "2026-10-04T08:57:19.982Z",
+    "expires_at": "2026-10-05T08:57:19.982Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 3
+  }
+}
