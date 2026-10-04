@@ -1,0 +1,92 @@
+{
+  "baseline_commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+  "baseline_pins": {
+    "data/regional-review/alaska-settlement-gaps-followup-2026/assessment.json": {
+      "bytes": 42632,
+      "sha256": "a2f16b10370ef0ad49c9254374e15ad2cbae38951062d80573ef96967c96e6e5"
+    },
+    "data/regional-review/alaska-settlement-gaps-followup-2026/scope.json": {
+      "bytes": 1171,
+      "sha256": "4dc4dbe69971a67274a240fdc450d043ea97cf075ba9e25448070bd97fc6dc8d"
+    },
+    "data/regional-review/alaska-settlement-gaps-followup-2026/sources.json": {
+      "bytes": 4186,
+      "sha256": "94fda0407be871fd002a0cc21f2c2fc4ec084a6401499eaf35b8c95144dc222f"
+    },
+    "data/regional-review/alaska-settlement-gaps-followup-2026/verify.py": {
+      "bytes": 3833,
+      "sha256": "003f6bf2bf44606eedf7309e5bc729e285c6804b126bdb386e93a6f3241f9e57"
+    },
+    "data/regional-review/regional-review-93f8f3bee8e205be/assessment.json": {
+      "bytes": 11210183,
+      "sha256": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5"
+    },
+    "data/regional-review/regional-review-93f8f3bee8e205be/scope.json": {
+      "bytes": 13154,
+      "sha256": "98c39e78569de0a4fc9c02f74ca5662a267ad97d5074bb1691e1cc4626c0ed57"
+    },
+    "data/regional-review/regional-review-93f8f3bee8e205be/sources.json": {
+      "bytes": 4699,
+      "sha256": "7a94870f1470d5d7cb6c0883d30fee715021c93959e5f1ecf04930719e83a299"
+    },
+    "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz": {
+      "bytes": 256548,
+      "sha256": "23f998ab6f874fac86dedeacb20978e391fdd23bf30ce6de8b687e6d57f9d862"
+    }
+  },
+  "feature_count": 487,
+  "interpretation": "A source point hit is a review lead, not proof that the physical fragment is a settlement. Zero hits do not establish settlement absence; DCRA's inventory is not comprehensive.",
+  "recorded_2026_10_03_content_fingerprint": {
+    "recorded_feature_count": 487,
+    "recorded_response_bytes": 415447,
+    "recorded_response_sha256": "a1c13f271c4a67ab470b99a7adfe5979b2673724fd69a7bde54c61aefa4b5654",
+    "status": "exact-content-match",
+    "temporal_provenance": "The exact original capture time/vintage cannot be independently reconstructed: raw bytes were not retained and the live service reports no historical archive. This fingerprint comparison is against a separately dated current live observation, not an assertion that the observation occurred on the original date."
+  },
+  "retrieval": {
+    "inventory_count": 487,
+    "inventory_response_bytes": 2481,
+    "inventory_response_sha256": "50e8e37e1771df3bd9dfedc05f7068a1253d05c5b0f935f2c166957d34de8df8",
+    "pages": [
+      {
+        "bytes": 415447,
+        "offset": 0,
+        "requested_count": 487,
+        "returned_features": 487,
+        "sha256": "a1c13f271c4a67ab470b99a7adfe5979b2673724fd69a7bde54c61aefa4b5654"
+      }
+    ],
+    "retrieved_at": "2026-10-04T06:23:54.695644+00:00",
+    "single_page_response_bytes": 415447,
+    "single_page_response_sha256": "a1c13f271c4a67ab470b99a7adfe5979b2673724fd69a7bde54c61aefa4b5654"
+  },
+  "service_metadata": {
+    "bytes": 7137,
+    "geometry_type": "esriGeometryPoint",
+    "max_record_count": 2000,
+    "retrieved_at": "2026-10-04T06:23:54.695644+00:00",
+    "sha256": "e3aa7fea2abf25d817a3c6007a892665e12864fde800ee94dbcf07b4e580b408",
+    "supports_pagination": true,
+    "url": "https://maps.commerce.alaska.gov/server/rest/services/Community_Related/Community_Locations_and_Boundaries/MapServer/0"
+  },
+  "subject_hit_counts": {
+    "atlas:physical:15fa62117dba20fdd7a3": 0,
+    "atlas:physical:2e1dd8f380b0a4f65ad9": 0,
+    "atlas:physical:3c48debb2430313aff99": 0,
+    "atlas:physical:674981b93623e9cbe385": 0,
+    "atlas:physical:770135c5de8a7faad962": 0,
+    "atlas:physical:d5c6a8a99d213d352ffc": 0,
+    "atlas:physical:db25f36496f102a4e01b": 0,
+    "atlas:physical:f1337f9008d75f1a400d": 0
+  },
+  "subject_hits": {
+    "atlas:physical:15fa62117dba20fdd7a3": [],
+    "atlas:physical:2e1dd8f380b0a4f65ad9": [],
+    "atlas:physical:3c48debb2430313aff99": [],
+    "atlas:physical:674981b93623e9cbe385": [],
+    "atlas:physical:770135c5de8a7faad962": [],
+    "atlas:physical:d5c6a8a99d213d352ffc": [],
+    "atlas:physical:db25f36496f102a4e01b": [],
+    "atlas:physical:f1337f9008d75f1a400d": []
+  }
+}

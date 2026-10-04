@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "issue": 676,
+  "lane": "geography",
+  "worker_id": "codex-20261004-alaska-empty-response-7b9060f1-09fb-4d20-8085-7f87579e77a0",
+  "subject_ids": [
+    "atlas:physical:15fa62117dba20fdd7a3",
+    "atlas:physical:2e1dd8f380b0a4f65ad9",
+    "atlas:physical:3c48debb2430313aff99",
+    "atlas:physical:674981b93623e9cbe385",
+    "atlas:physical:770135c5de8a7faad962",
+    "atlas:physical:d5c6a8a99d213d352ffc",
+    "atlas:physical:db25f36496f102a4e01b",
+    "atlas:physical:f1337f9008d75f1a400d"
+  ],
+  "subject_ids_sha256": "82f18bde52661de1ba72bef1218d3399fd0e009381d0881c638086f6a334dadc",
+  "baseline": {
+    "commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+    "files": [
+      {
+        "path": "data/regional-review/alaska-settlement-gaps-followup-2026/scope.json",
+        "bytes": 1171,
+        "sha256": "4dc4dbe69971a67274a240fdc450d043ea97cf075ba9e25448070bd97fc6dc8d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/alaska-settlement-gaps-followup-2026/assessment.json",
+        "bytes": 42632,
+        "sha256": "a2f16b10370ef0ad49c9254374e15ad2cbae38951062d80573ef96967c96e6e5",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/alaska-settlement-gaps-followup-2026/sources.json",
+        "bytes": 4186,
+        "sha256": "94fda0407be871fd002a0cc21f2c2fc4ec084a6401499eaf35b8c95144dc222f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/alaska-settlement-gaps-followup-2026/verify.py",
+        "bytes": 3833,
+        "sha256": "003f6bf2bf44606eedf7309e5bc729e285c6804b126bdb386e93a6f3241f9e57",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/assessment.json",
+        "bytes": 11210183,
+        "sha256": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+        "bytes": 256548,
+        "sha256": "23f998ab6f874fac86dedeacb20978e391fdd23bf30ce6de8b687e6d57f9d862",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1150743,
+        "uncompressed_sha256": "5a3c3f17c1a0c8a7ced2f9cbed64c193349d18504b256d90376114bb356b4c3f",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/scope.json",
+        "bytes": 13154,
+        "sha256": "98c39e78569de0a4fc9c02f74ca5662a267ad97d5074bb1691e1cc4626c0ed57",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources.json",
+        "bytes": 4699,
+        "sha256": "7a94870f1470d5d7cb6c0883d30fee715021c93959e5f1ecf04930719e83a299",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "assigned_scope": "4dc4dbe69971a67274a240fdc450d043ea97cf075ba9e25448070bd97fc6dc8d",
+      "child_assessment": "a2f16b10370ef0ad49c9254374e15ad2cbae38951062d80573ef96967c96e6e5",
+      "child_source_receipt": "94fda0407be871fd002a0cc21f2c2fc4ec084a6401499eaf35b8c95144dc222f",
+      "original_verifier": "003f6bf2bf44606eedf7309e5bc729e285c6804b126bdb386e93a6f3241f9e57",
+      "parent_assessment": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5",
+      "parent_polygons": "23f998ab6f874fac86dedeacb20978e391fdd23bf30ce6de8b687e6d57f9d862",
+      "parent_scope": "98c39e78569de0a4fc9c02f74ca5662a267ad97d5074bb1691e1cc4626c0ed57",
+      "parent_source_receipt": "7a94870f1470d5d7cb6c0883d30fee715021c93959e5f1ecf04930719e83a299"
+    },
+    "pin_files": {
+      "assigned_scope": "data/regional-review/alaska-settlement-gaps-followup-2026/scope.json",
+      "child_assessment": "data/regional-review/alaska-settlement-gaps-followup-2026/assessment.json",
+      "child_source_receipt": "data/regional-review/alaska-settlement-gaps-followup-2026/sources.json",
+      "original_verifier": "data/regional-review/alaska-settlement-gaps-followup-2026/verify.py",
+      "parent_assessment": "data/regional-review/regional-review-93f8f3bee8e205be/assessment.json",
+      "parent_polygons": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+      "parent_scope": "data/regional-review/regional-review-93f8f3bee8e205be/scope.json",
+      "parent_source_receipt": "data/regional-review/regional-review-93f8f3bee8e205be/sources.json"
+    },
+    "subject_files": {
+      "atlas:physical:15fa62117dba20fdd7a3": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+      "atlas:physical:2e1dd8f380b0a4f65ad9": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+      "atlas:physical:3c48debb2430313aff99": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+      "atlas:physical:674981b93623e9cbe385": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+      "atlas:physical:770135c5de8a7faad962": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+      "atlas:physical:d5c6a8a99d213d352ffc": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+      "atlas:physical:db25f36496f102a4e01b": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+      "atlas:physical:f1337f9008d75f1a400d": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz"
+    }
+  },
+  "sources": [
+    {
+      "id": "alaska-dcra-communities",
+      "url": "https://www.arcgis.com/home/item.html?id=95a724c867364ff88def7d3d0b0672f5",
+      "role": "Alaska DCRA point inventory used as a settlement-screen lead; source attributes and category semantics checked, not a comprehensive settlement inventory.",
+      "vintage": "Item modified 2024-11-12; fresh live API response retrieved 2026-10-04 UTC / 2026-10-03 America/Los_Angeles. Current response matched the earlier recorded SHA-256, byte count and feature count.",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "unknown",
+        "terms": "ArcGIS item licenseInfo describes CDO data as informational/research, as-is, without an explicit open reuse license. Do not redistribute raw feature responses."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Run research/geography/alaska-settlement-verification-followup/verify.py from the repository root. It fetches layer metadata, obtains returnIdsOnly for where=1=1 and envelope xmin=-180,ymin=51,xmax=-129,ymax=72 in EPSG:4326, then requests complete resultOffset/resultRecordCount GeoJSON pages. It validates inventory equality and computes SHA-256/bytes in memory without retaining raw responses.",
+      "limit": "DCRA layer metadata reports isDataArchived=false and original response bytes were not retained. Current live bytes reproduce the recorded content digest/count but cannot independently establish the original UTC access time or reconstruct a changed historical vintage."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/README.md",
+      "bytes": 10263,
+      "sha256": "b1c7b309b1a650b95cb42d210aa82028386423eb93312e94da9e180be253fcba",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/verify.py",
+      "bytes": 24982,
+      "sha256": "b2d5e7e8248f348ed083a7c23433e1ec0f44f822ce26bf99296450512826deac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/controls/positive.json",
+      "bytes": 341,
+      "sha256": "1a1fc92be92af8a1d1c4b30c141486f4688744aca97ce3b26bf9666e655456e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/controls/negative.json",
+      "bytes": 426,
+      "sha256": "c9cda307f1dbba52779128a07d8c2d333be657f35219ea7d83b3ece29c2e1c46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "bytes": 4317,
+      "sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
+      "bytes": 4317,
+      "sha256": "44e8f9601f7566b26dd8392e2c38cba7bb5becdfc7ff4627e6b121a16987702f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2321PDT.json",
+      "bytes": 4317,
+      "sha256": "5e715761629fbd48dfee973c13b5e84dffa0840c74b6044c5d065962fd79b621",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "bytes": 4317,
+      "sha256": "45b77f6d87a612f3cc48ef0fc1c952d2dd4dcea3eb62fafa79b4dc05fe5e6bc8",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "pinned-input-context",
+      "kind": "code",
+      "description": "Check exact immutable whole-file pins for the #603 child source receipt/scope/assessment/old verifier and consumed #486 parent assessment, polygon source, scope and registry; compare every #486 parent descriptor listed in #603 sources.json; then check exact subject IDs, full parent chains and one valid polygon per subject before network access. The unrelated resolve-15-eoregions byte payload is not consumed by this eight-subject check.",
+      "software": "Python 3, standard library, Git",
+      "units": "identity and whole-file SHA-256/byte count checks"
+    },
+    {
+      "id": "service-inventory-validation",
+      "kind": "source",
+      "description": "Query DCRA point-layer metadata and a complete object-ID inventory; retrieve all records using pagination and reject missing, malformed, partial, transfer-limited or duplicate responses.",
+      "software": "Python 3 urllib, ArcGIS REST API 10.91",
+      "units": "records, bytes, SHA-256"
+    },
+    {
+      "id": "source-inventory-and-intersection",
+      "kind": "geography",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic",
+      "description": "Validate WGS84 longitude/latitude coordinates with shared evidence.geometry.point, then use Shapely/GEOS topological intersects for DCRA points against pinned polygons; no area, distance, population or ownership inference.",
+      "software": "Python 3; Shapely 2.1.2; pyproj shared geometry helper",
+      "units": "point intersections per physical fragment"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "live_inventory_features",
+      "value": 487,
+      "unit": "features",
+      "vintage": "current",
+      "input_sha256": "45b77f6d87a612f3cc48ef0fc1c952d2dd4dcea3eb62fafa79b4dc05fe5e6bc8",
+      "evaluation_commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+      "numerator": 487
+    },
+    {
+      "id": "hits_15fa62117dba20fdd7a3",
+      "value": 0,
+      "unit": "point_hits",
+      "vintage": "current",
+      "input_sha256": "45b77f6d87a612f3cc48ef0fc1c952d2dd4dcea3eb62fafa79b4dc05fe5e6bc8",
+      "evaluation_commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+      "numerator": 0
+    },
+    {
+      "id": "hits_2e1dd8f380b0a4f65ad9",
+      "value": 0,
+      "unit": "point_hits",
+      "vintage": "current",
+      "input_sha256": "45b77f6d87a612f3cc48ef0fc1c952d2dd4dcea3eb62fafa79b4dc05fe5e6bc8",
+      "evaluation_commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+      "numerator": 0
+    },
+    {
+      "id": "hits_3c48debb2430313aff99",
+      "value": 0,
+      "unit": "point_hits",
+      "vintage": "current",
+      "input_sha256": "45b77f6d87a612f3cc48ef0fc1c952d2dd4dcea3eb62fafa79b4dc05fe5e6bc8",
+      "evaluation_commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+      "numerator": 0
+    },
+    {
+      "id": "hits_674981b93623e9cbe385",
+      "value": 0,
+      "unit": "point_hits",
+      "vintage": "current",
+      "input_sha256": "45b77f6d87a612f3cc48ef0fc1c952d2dd4dcea3eb62fafa79b4dc05fe5e6bc8",
+      "evaluation_commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+      "numerator": 0
+    },
+    {
+      "id": "hits_770135c5de8a7faad962",
+      "value": 0,
+      "unit": "point_hits",
+      "vintage": "current",
+      "input_sha256": "45b77f6d87a612f3cc48ef0fc1c952d2dd4dcea3eb62fafa79b4dc05fe5e6bc8",
+      "evaluation_commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+      "numerator": 0
+    },
+    {
+      "id": "hits_d5c6a8a99d213d352ffc",
+      "value": 0,
+      "unit": "point_hits",
+      "vintage": "current",
+      "input_sha256": "45b77f6d87a612f3cc48ef0fc1c952d2dd4dcea3eb62fafa79b4dc05fe5e6bc8",
+      "evaluation_commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+      "numerator": 0
+    },
+    {
+      "id": "hits_db25f36496f102a4e01b",
+      "value": 0,
+      "unit": "point_hits",
+      "vintage": "current",
+      "input_sha256": "45b77f6d87a612f3cc48ef0fc1c952d2dd4dcea3eb62fafa79b4dc05fe5e6bc8",
+      "evaluation_commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+      "numerator": 0
+    },
+    {
+      "id": "hits_f1337f9008d75f1a400d",
+      "value": 0,
+      "unit": "point_hits",
+      "vintage": "current",
+      "input_sha256": "45b77f6d87a612f3cc48ef0fc1c952d2dd4dcea3eb62fafa79b4dc05fe5e6bc8",
+      "evaluation_commit": "be18e2a392ded59f2db9eb962233d49ca8edcc25",
+      "numerator": 0
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "live_inventory_features",
+      "value": 487,
+      "unit": "features"
+    },
+    {
+      "metric_id": "hits_15fa62117dba20fdd7a3",
+      "value": 0,
+      "unit": "point_hits"
+    },
+    {
+      "metric_id": "hits_2e1dd8f380b0a4f65ad9",
+      "value": 0,
+      "unit": "point_hits"
+    },
+    {
+      "metric_id": "hits_3c48debb2430313aff99",
+      "value": 0,
+      "unit": "point_hits"
+    },
+    {
+      "metric_id": "hits_674981b93623e9cbe385",
+      "value": 0,
+      "unit": "point_hits"
+    },
+    {
+      "metric_id": "hits_770135c5de8a7faad962",
+      "value": 0,
+      "unit": "point_hits"
+    },
+    {
+      "metric_id": "hits_d5c6a8a99d213d352ffc",
+      "value": 0,
+      "unit": "point_hits"
+    },
+    {
+      "metric_id": "hits_db25f36496f102a4e01b",
+      "value": 0,
+      "unit": "point_hits"
+    },
+    {
+      "metric_id": "hits_f1337f9008d75f1a400d",
+      "value": 0,
+      "unit": "point_hits"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The separately dated current DCRA response contained 487 complete validated features and reproduced the recorded response byte count and SHA-256. All eight assigned physical fragments had zero intersecting DCRA points in this screen.",
+      "status": "supported",
+      "source_ids": [
+        "alaska-dcra-communities"
+      ]
+    },
+    {
+      "text": "The original response acquisition time and any changed historic vintage cannot be independently reconstructed because the service reports no archive and raw source bytes were not retained.",
+      "status": "unresolved",
+      "source_ids": [
+        "alaska-dcra-communities"
+      ]
+    },
+    {
+      "text": "Zero DCRA point hits do not establish that any assigned fragment lacks settlements; DCRA describes mixed categories and is not a comprehensive current-settlement inventory.",
+      "status": "unresolved",
+      "source_ids": [
+        "alaska-dcra-communities"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/alaska-settlement-verification-followup/verify.py --self-test",
+    "python3 research/geography/alaska-settlement-verification-followup/verify.py",
+    "node scripts/evidence-quality.mjs research/geography/alaska-settlement-verification-followup/evidence-quality.json"
+  ],
+  "validation": [
+    {
+      "method_id": "source-inventory-and-intersection",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/alaska-settlement-verification-followup/controls/positive.json"
+    },
+    {
+      "method_id": "source-inventory-and-intersection",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/alaska-settlement-verification-followup/controls/negative.json"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "live_inventory_features",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "json_pointer": "/feature_count"
+    },
+    {
+      "metric_id": "hits_15fa62117dba20fdd7a3",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "json_pointer": "/subject_hit_counts/atlas:physical:15fa62117dba20fdd7a3"
+    },
+    {
+      "metric_id": "hits_2e1dd8f380b0a4f65ad9",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "json_pointer": "/subject_hit_counts/atlas:physical:2e1dd8f380b0a4f65ad9"
+    },
+    {
+      "metric_id": "hits_3c48debb2430313aff99",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "json_pointer": "/subject_hit_counts/atlas:physical:3c48debb2430313aff99"
+    },
+    {
+      "metric_id": "hits_674981b93623e9cbe385",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "json_pointer": "/subject_hit_counts/atlas:physical:674981b93623e9cbe385"
+    },
+    {
+      "metric_id": "hits_770135c5de8a7faad962",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "json_pointer": "/subject_hit_counts/atlas:physical:770135c5de8a7faad962"
+    },
+    {
+      "metric_id": "hits_d5c6a8a99d213d352ffc",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "json_pointer": "/subject_hit_counts/atlas:physical:d5c6a8a99d213d352ffc"
+    },
+    {
+      "metric_id": "hits_db25f36496f102a4e01b",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "json_pointer": "/subject_hit_counts/atlas:physical:db25f36496f102a4e01b"
+    },
+    {
+      "metric_id": "hits_f1337f9008d75f1a400d",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "json_pointer": "/subject_hit_counts/atlas:physical:f1337f9008d75f1a400d"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/README.md",
+      "rows": [
+        {
+          "metric_id": "hits_15fa62117dba20fdd7a3",
+          "line": 14,
+          "template": "| `atlas:physical:15fa62117dba20fdd7a3` — Yukon-Koyukuk · Beringia upland tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "hits_2e1dd8f380b0a4f65ad9",
+          "line": 15,
+          "template": "| `atlas:physical:2e1dd8f380b0a4f65ad9` — Yukon-Koyukuk · Ogilvie-MacKenzie alpine tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "hits_3c48debb2430313aff99",
+          "line": 16,
+          "template": "| `atlas:physical:3c48debb2430313aff99` — Yukon-Koyukuk · Beringia lowland tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "hits_674981b93623e9cbe385",
+          "line": 17,
+          "template": "| `atlas:physical:674981b93623e9cbe385` — North Slope · Interior Alaska-Yukon lowland taiga | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "hits_770135c5de8a7faad962",
+          "line": 18,
+          "template": "| `atlas:physical:770135c5de8a7faad962` — North Slope · Interior Yukon-Alaska alpine tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "hits_d5c6a8a99d213d352ffc",
+          "line": 19,
+          "template": "| `atlas:physical:d5c6a8a99d213d352ffc` — Nome · Interior Yukon-Alaska alpine tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "hits_db25f36496f102a4e01b",
+          "line": 20,
+          "template": "| `atlas:physical:db25f36496f102a4e01b` — Yukon-Koyukuk · Alaska-St. Elias Range tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "hits_f1337f9008d75f1a400d",
+          "line": 21,
+          "template": "| `atlas:physical:f1337f9008d75f1a400d` — Bethel · Alaska-St. Elias Range tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "decimals": 0
+        }
+      ]
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/verify.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/controls/positive.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/controls/negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2321PDT.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2323PDT.json",
+      "status": "added"
+    }
+  ]
+}
