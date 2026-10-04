@@ -1,0 +1,186 @@
+"""Read raw completed run evidence and generate a proof packet strictly under /tmp.
+Usage: python /tmp/worldatlas-706-proof-helper.py SPEC.json
+SPEC: {"output":"/tmp/...", "durable_prefix":"coordination/engineering/...",
+       "runs":[{"label":"before", "run":"...", "jobs":"...", "logs":["...","...","..."],
+                "job_name_template":"regression ({shard})"}]}
+Writes only /tmp. Missing/incomplete/failed/skipped observations fail closed.
+Generated manifest-fragment.json is a fragment; the root owns the full manifest/receipts.
+"""
+import datetime, gzip, hashlib, json, math, pathlib, re, sys
+
+def sha(raw): return hashlib.sha256(raw).hexdigest()
+def encoded(value): return (json.dumps(value, indent=2, ensure_ascii=False)+'\n').encode()
+def seconds(start,end):
+    a=datetime.datetime.fromisoformat(start.replace('Z','+00:00'))
+    b=datetime.datetime.fromisoformat(end.replace('Z','+00:00'))
+    if a.tzinfo is None or b.tzinfo is None or b<a:
+        raise ValueError('Expected timezone-aware ordered timestamps')
+    return (b-a).total_seconds()
+def read_log(p):
+    raw=pathlib.Path(p).read_bytes()
+    if str(p).endswith('.gz'): raw=gzip.decompress(raw)
+    return raw.decode('utf-8-sig')
+def require(condition,message):
+    if not condition: raise ValueError(message)
+def measure(run,jobs,logs,template='regression ({shard})',step_name='Complete regression shard',checkout_step=None,tested_commit=None):
+    require(run['status']=='completed' and run['conclusion']=='success','Run is not completed successfully')
+    require(re.fullmatch('[0-9a-f]{40}',run['head_sha']) is not None,'Invalid run head')
+    evaluation_commit=tested_commit or run['head_sha']
+    require(re.fullmatch('[0-9a-f]{40}',evaluation_commit) is not None,'Invalid tested commit')
+    result={'run_id':str(run['id']),'head_sha':evaluation_commit,'workflow_head_sha':run['head_sha'],'run_attempt':str(run['run_attempt']),
+        'url':run['html_url'],'run_started_at':run['run_started_at'],'updated_at':run['updated_at'],
+        'workflow_elapsed_seconds':seconds(run['run_started_at'],run['updated_at']),
+        'elapsed_definition':'run_started_at through completed run updated_at; includes scheduling/startup; never the sum of parallel jobs',
+        'shards':[]}
+    require(len(logs)==3,'Need all three shard logs')
+    for i,raw in enumerate(logs):
+        matched=[j for j in jobs['jobs'] if j['name']==template.format(shard=i)]
+        require(len(matched)==1,'Expected exactly one job for shard '+str(i))
+        job=matched[0]
+        require(job['status']=='completed' and job['conclusion']=='success','Incomplete or failed shard')
+        require(str(job.get('run_id',run['id']))==str(run['id']),'Job belongs to different run')
+        clean=re.sub(r'^\d{4}-\d\d-\d\dT\S+ ', '',raw,flags=re.M)
+        configs=[]
+        for line in clean.splitlines():
+            if line.startswith('{"profile":'):
+                try: configs.append(json.loads(line))
+                except json.JSONDecodeError: pass
+        configs=[x for x in configs if x.get('profile')=='full' and x.get('shard')==i]
+        require(len(configs)==1,'Missing unique full-profile inventory')
+        files=configs[0]['files'];require(files and len(files)==len(set(files)),'Empty or repeated shard inventory')
+        counts={}
+        for key in ['tests','pass','fail','skipped']:
+            values=re.findall(r'^# '+key+r' (\d+)\s*$',clean,re.M)
+            require(len(values)==1,'Missing or ambiguous TAP count: '+key)
+            counts[key]=int(values[0])
+        require(counts['tests']>0 and counts['tests']==counts['pass'] and counts['fail']==counts['skipped']==0,'Incomplete passing coverage')
+        durations=re.findall(r'^# duration_ms ([\d.]+)\s*$',clean,re.M)
+        require(len(durations)==1,'Missing or ambiguous TAP wall duration')
+        wall=float(durations[0]);require(math.isfinite(wall) and wall>=0,'Invalid TAP duration')
+        if checkout_step:
+            checked=[s for s in job['steps'] if s['name']==checkout_step]
+            require(len(checked)==1 and checked[0]['conclusion']=='success','Missing successful candidate checkout step')
+        steps=[s for s in job['steps'] if s['name']==step_name]
+        require(len(steps)==1 and steps[0]['conclusion']=='success','Missing successful regression step')
+        step=steps[0]
+        job_seconds=seconds(job['started_at'],job['completed_at'])
+        test_seconds=seconds(step['started_at'],step['completed_at'])
+        require(job_seconds>=test_seconds,'Test step exceeds job interval')
+        require(seconds(job['started_at'],step['started_at'])>=0 and seconds(step['completed_at'],job['completed_at'])>=0,'Test interval outside job')
+        result['shards'].append({'shard':str(i),'job_id':str(job['id']),'started_at':job['started_at'],'completed_at':job['completed_at'],
+            'job_seconds':job_seconds,'test_step_seconds':test_seconds,'node_test_duration_ms':wall,
+            'tests':counts['tests'],'passed':counts['pass'],'failed':counts['fail'],'skipped':counts['skipped'],'files':files})
+    inventory=[p for s in result['shards'] for p in s['files']]
+    require(len(inventory)==len(set(inventory)),'Repeated files across full shards')
+    result['critical_shard_seconds']=max(s['job_seconds'] for s in result['shards'])
+    for key in ['tests','passed','failed','skipped']: result[key]=sum(s[key] for s in result['shards'])
+    return result
+
+def walk_numbers(value,pointer=''):
+    if isinstance(value,bool): return
+    if isinstance(value,(int,float)): yield pointer,value
+    elif isinstance(value,dict):
+        for k,v in value.items(): yield from walk_numbers(v,pointer+'/'+k.replace('~','~0').replace('/','~1'))
+    elif isinstance(value,list):
+        for i,v in enumerate(value): yield from walk_numbers(v,pointer+'/'+str(i))
+
+def main(spec_path):
+    spec=json.loads(pathlib.Path(spec_path).read_text())
+    out=pathlib.Path(spec['output']).resolve()
+    require(out.is_relative_to(pathlib.Path('/tmp')) and out!=pathlib.Path('/tmp'),'Output must be a new directory below /tmp')
+    require(not out.exists(),'Refusing to overwrite an existing packet')
+    prefix=spec['durable_prefix'].rstrip('/')
+    require(prefix.startswith('coordination/engineering/') and '..' not in prefix.split('/'),'Invalid durable prefix')
+    labels=[r['label'] for r in spec['runs']]
+    require(labels and len(labels)==len(set(labels)) and all(re.fullmatch('[a-z][a-z0-9-]*',s) for s in labels),'Invalid/duplicate run labels')
+    # Validate every observation before creating anything.
+    observations={};raws={}
+    for r in spec['runs']:
+        run_raw=pathlib.Path(r['run']).read_bytes();jobs_raw=pathlib.Path(r['jobs']).read_bytes()
+        run=json.loads(run_raw);jobs=json.loads(jobs_raw);logs=[read_log(p) for p in r['logs']]
+        if r.get('job_name_template')=='integration ({shard})':
+            require(r.get('tested_commit') and r.get('tested_commit_receipt'),'Queue observation needs candidate commit and archived receipt')
+            require(r.get('required_checkout_step')=='Checkout complete candidate for application regression','Queue requires complete-candidate checkout')
+            require(r.get('regression_step_name')=='Test applicable combined-tree invariants without publishing or live imports','Queue requires actual combined-tree regression step')
+        observations[r['label']]=measure(run,jobs,logs,r.get('job_name_template','regression ({shard})'),
+            r.get('regression_step_name','Complete regression shard'),r.get('required_checkout_step'),r.get('tested_commit'))
+        if r.get('tested_commit'):
+            require(r.get('tested_commit_receipt'),'An override requires retained candidate receipt')
+            receipt_raw=pathlib.Path(r['tested_commit_receipt']).read_bytes()
+            require(r['tested_commit'].encode() in receipt_raw,'Candidate receipt does not contain tested commit')
+        raws[r['label']]=(run_raw,jobs_raw,logs)
+    out.mkdir()
+    outputs=[]
+    def put(name,raw):
+        (out/name).write_bytes(raw)
+        desc={'path':prefix+'/'+name,'bytes':len(raw),'sha256':sha(raw),'hash_kind':'file-bytes'}
+        outputs.append(desc);return desc
+    observation_inputs={}
+    for label,(run_raw,jobs_raw,logs) in raws.items():
+        descriptors=[put(label+'-run-api.json',run_raw),put(label+'-jobs-api.json',jobs_raw)]
+        for i,log in enumerate(logs):
+            # Preserve actual TAP bytes, including any UTF-8 BOM, in plain logs.
+            # Existing compressed inputs are losslessly decoded; API bytes are untouched.
+            p=spec['runs'][labels.index(label)]['logs'][i];raw=pathlib.Path(p).read_bytes()
+            if str(p).endswith('.gz'): raw=gzip.decompress(raw)
+            descriptors.append(put(label+'-shard'+str(i)+'.log',raw))
+        run_spec=spec['runs'][labels.index(label)]
+        if run_spec.get('tested_commit_receipt'):
+            receipt_path=pathlib.Path(run_spec['tested_commit_receipt'])
+            descriptors.append(put(label+'-tested-commit-receipt'+receipt_path.suffix,receipt_path.read_bytes()))
+        receipt={'label':label,'head_sha':observations[label]['head_sha'],'workflow_head_sha':observations[label]['workflow_head_sha'],
+            'tested_commit':run_spec.get('tested_commit'),'job_name_template':run_spec.get('job_name_template','regression ({shard})'),
+            'regression_step_name':run_spec.get('regression_step_name','Complete regression shard'),
+            'required_checkout_step':run_spec.get('required_checkout_step'),'files':descriptors}
+        observation_inputs[label]=put(label+'-input-receipt.json',encoded(receipt))['sha256']
+    measurement={'observations':observations,'limits':[
+        'Single hosted observation per revision; no statistical estimate or guaranteed future gain.',
+        'TAP wall is Node test-run duration; API test-step/job times include surrounding process overhead.',
+        'Workflow elapsed includes scheduling/startup; parallel job durations are not summed.',
+        'Changed inventories may add scheduling controls; the source move proof separately preserves original test bodies and names.',
+        'Runs from different heads do not isolate causality; hosted CPU, dependency, browser and build costs vary.',
+        'Queue workflow elapsed includes trusted preparation/final authority checks and queue scheduling; compare its shard test/job observations separately, never attribute source-versus-queue whole-workflow differences to test speed.',
+        'head_sha denotes the tested commit; workflow_head_sha retains GitHub workflow provenance. Queue tested-commit overrides require archived bot receipt and successful complete-candidate checkout.'
+    ]}
+    put('measurement.json',encoded(measurement))
+    control_input={'start':'2026-10-04T00:00:00Z','end':'2026-10-04T00:00:30Z'}
+    control_sha=put('control-input.json',encoded(control_input))['sha256']
+    observed=seconds(control_input['start'],control_input['end']);require(observed==30,'Known interval control failed')
+    positive={'method_id':'full-ci-observation','kind':'positive-control','outcome':'passed','expected_seconds':30,'observed_seconds':observed}
+    try: seconds(control_input['end'],control_input['start'])
+    except ValueError as e: negative={'method_id':'full-ci-observation','kind':'negative-control','outcome':'passed','rejected':'reversed timestamps','error':str(e)}
+    else: raise ValueError('Reversed interval control accepted')
+    put('positive-control.json',encoded(positive));put('negative-control.json',encoded(negative))
+    put('measurement-parser.txt',pathlib.Path(__file__).read_bytes())
+    reproduction={'output':'/tmp/worldatlas-706-proof-reproduction','durable_prefix':prefix,'runs':[
+        {'label':r['label'],'run':prefix+'/'+r['label']+'-run-api.json',
+         'jobs':prefix+'/'+r['label']+'-jobs-api.json',
+         'logs':[prefix+'/'+r['label']+'-shard'+str(i)+'.log' for i in range(3)],
+         'job_name_template':r.get('job_name_template','regression ({shard})'),
+         'regression_step_name':r.get('regression_step_name','Complete regression shard'),
+         'required_checkout_step':r.get('required_checkout_step'),
+         'tested_commit':r.get('tested_commit'),
+         **({'tested_commit_receipt':prefix+'/'+r['label']+'-tested-commit-receipt'+pathlib.Path(r['tested_commit_receipt']).suffix} if r.get('tested_commit_receipt') else {})} for r in spec['runs']]}
+    put('reproduction-spec.json',encoded(reproduction))
+    metrics=[];bindings=[]
+    def bind(name,value,unit,path,pointer,input_sha,commit):
+        metric_id='observed-'+name
+        metrics.append({'id':metric_id,'value':value,'unit':unit,'vintage':'archived','input_sha256':input_sha,'evaluation_commit':commit})
+        bindings.append({'metric_id':metric_id,'path':prefix+'/'+path,'json_pointer':pointer})
+    for label,observation in observations.items():
+        for pointer,value in walk_numbers(observation):
+            key=pointer.rsplit('/',1)[-1]
+            unit='milliseconds' if key.endswith('_ms') else 'seconds' if key.endswith('_seconds') else 'tests'
+            require(key.endswith(('_ms','_seconds')) or key in ['tests','passed','failed','skipped'],'Unclassified quantity '+pointer)
+            bind(label+pointer.replace('/','-').replace('_','-'),value,unit,'measurement.json','/observations/'+label+pointer,observation_inputs[label],observation['head_sha'])
+    for pointer,value in walk_numbers(positive):
+        bind('positive-control'+pointer.replace('/','-').replace('_','-'),value,'seconds','positive-control.json',pointer,control_sha,observations[labels[-1]]['head_sha'])
+    # Each result quantity has exactly one binding. Provenance IDs intentionally use strings.
+    require(len(metrics)==len(set(m['id'] for m in metrics)),'Duplicate metric ID')
+    fragment={'outputs':outputs,'methods':[{'id':'full-ci-observation','kind':'measurement','description':'Validate completed successful full-profile jobs, unique shard inventories, TAP counts and durations; derive ordered API intervals; reject missing/failed/skipped coverage and reversed timestamp controls.','software':'Python standard library; actual GitHub-hosted run/job API and Node TAP','units':'seconds, milliseconds, tests, immutable file bytes'}],
+        'metrics':metrics,'metric_bindings':bindings,'summaries':[],
+        'validation':[{'method_id':'full-ci-observation','kind':v['kind'],'outcome':'passed','evidence_path':prefix+'/'+n} for n,v in [('positive-control.json',positive),('negative-control.json',negative)]]}
+    # Fragment is a local assembly aid, not a recursively listed result output.
+    (out/'manifest-fragment.json').write_bytes(encoded(fragment))
+    print(json.dumps({'output':str(out),'runs':list(observations),'metrics':len(metrics),'packet_files':len(outputs),'status':'prepared; root must assemble full manifest and exact-head review'},indent=2))
+if __name__=='__main__': main(sys.argv[1])

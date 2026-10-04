@@ -1,0 +1,63 @@
+{
+  "output": "/tmp/worldatlas-706-proof-reproduction",
+  "durable_prefix": "coordination/engineering/ci-duration-proof-706-20261004",
+  "runs": [
+    {
+      "label": "before",
+      "run": "coordination/engineering/ci-duration-proof-706-20261004/before-run-api.json",
+      "jobs": "coordination/engineering/ci-duration-proof-706-20261004/before-jobs-api.json",
+      "logs": [
+        "coordination/engineering/ci-duration-proof-706-20261004/before-shard0.log",
+        "coordination/engineering/ci-duration-proof-706-20261004/before-shard1.log",
+        "coordination/engineering/ci-duration-proof-706-20261004/before-shard2.log"
+      ],
+      "job_name_template": "regression ({shard})",
+      "regression_step_name": "Complete regression shard",
+      "required_checkout_step": null,
+      "tested_commit": null
+    },
+    {
+      "label": "intermediate",
+      "run": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-run-api.json",
+      "jobs": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-jobs-api.json",
+      "logs": [
+        "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard0.log",
+        "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard1.log",
+        "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard2.log"
+      ],
+      "job_name_template": "regression ({shard})",
+      "regression_step_name": "Complete regression shard",
+      "required_checkout_step": null,
+      "tested_commit": null
+    },
+    {
+      "label": "final-source",
+      "run": "coordination/engineering/ci-duration-proof-706-20261004/final-source-run-api.json",
+      "jobs": "coordination/engineering/ci-duration-proof-706-20261004/final-source-jobs-api.json",
+      "logs": [
+        "coordination/engineering/ci-duration-proof-706-20261004/final-source-shard0.log",
+        "coordination/engineering/ci-duration-proof-706-20261004/final-source-shard1.log",
+        "coordination/engineering/ci-duration-proof-706-20261004/final-source-shard2.log"
+      ],
+      "job_name_template": "regression ({shard})",
+      "regression_step_name": "Complete regression shard",
+      "required_checkout_step": null,
+      "tested_commit": null
+    },
+    {
+      "label": "integration",
+      "run": "coordination/engineering/ci-duration-proof-706-20261004/integration-run-api.json",
+      "jobs": "coordination/engineering/ci-duration-proof-706-20261004/integration-jobs-api.json",
+      "logs": [
+        "coordination/engineering/ci-duration-proof-706-20261004/integration-shard0.log",
+        "coordination/engineering/ci-duration-proof-706-20261004/integration-shard1.log",
+        "coordination/engineering/ci-duration-proof-706-20261004/integration-shard2.log"
+      ],
+      "job_name_template": "integration ({shard})",
+      "regression_step_name": "Test applicable combined-tree invariants without publishing or live imports",
+      "required_checkout_step": "Checkout complete candidate for application regression",
+      "tested_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0",
+      "tested_commit_receipt": "coordination/engineering/ci-duration-proof-706-20261004/integration-tested-commit-receipt.json"
+    }
+  ]
+}

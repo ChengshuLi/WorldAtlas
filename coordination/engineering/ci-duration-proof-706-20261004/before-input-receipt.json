@@ -1,0 +1,41 @@
+{
+  "label": "before",
+  "head_sha": "a368cdbdb2e651bd0261515a930bdb480333d72b",
+  "workflow_head_sha": "a368cdbdb2e651bd0261515a930bdb480333d72b",
+  "tested_commit": null,
+  "job_name_template": "regression ({shard})",
+  "regression_step_name": "Complete regression shard",
+  "required_checkout_step": null,
+  "files": [
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-run-api.json",
+      "bytes": 12837,
+      "sha256": "0777947b4350cc24693d8db96a174210e1ecddcce771044054d88cb0c5949cc5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-jobs-api.json",
+      "bytes": 12631,
+      "sha256": "48d01d779f0035d51f40b3b7698117bec4f020afffae012cbbf1b8ccad8400bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-shard0.log",
+      "bytes": 161430,
+      "sha256": "0c533e551629393a70b1267790baa8021f704d0e2e2c60dd1cc5aba1519bdd83",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-shard1.log",
+      "bytes": 139847,
+      "sha256": "68e5d98a3143bf4362240f939f119cee72a28757eb9ed851c00d53f24c802e21",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-shard2.log",
+      "bytes": 137923,
+      "sha256": "9bc53e982b6570e0b32759a3f216aec07c570ace07f2c31514f8a6c8f2e4877d",
+      "hash_kind": "file-bytes"
+    }
+  ]
+}
