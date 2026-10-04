@@ -1,3 +1,5 @@
+import {integrationProfile} from './integration-profile.mjs';
+import {integrationProof} from './integration-proof.mjs';
 import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
@@ -30,18 +32,7 @@ export function checkReviewedTrees(files, authored, integrated) {
       `Integration changes reviewed bytes at ${name}; update and obtain substantive review`);
   }
 }
-export function integrationProfile(branch, files, reservation) {
-  const names = files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]);
-  if (!names.length) return 'full';
-  if (branch.startsWith('geography/') && Array.isArray(reservation.owned_paths) &&
-      names.every(name => reservation.owned_paths.some(prefix => name.startsWith(prefix)))) return 'evidence';
-  const job = branch.split('/').slice(1).join('/');
-  if (branch.startsWith('research/') && names.every(name => name.startsWith(`research/campaigns/${job}/`))) return 'evidence';
-  if (branch.startsWith('engineering/') && names.every(name =>
-      (name.startsWith('docs/') && /\.(md|txt)$/.test(name)) || name.startsWith(`coordination/engineering/${job}/`) ||
-      name === `coordination/engineering/${job}.json`)) return 'evidence';
-  return 'full';
-}
+export {integrationProfile} from './integration-profile.mjs';
 
 async function tree(api, repo, commit) {
   const object = await api(`${root(repo)}/git/commits/${commit}`);
@@ -89,19 +80,31 @@ export async function prepareIntegration(options) {
   ]);
   checkCandidateParents(integrated.object, state.base, state.pr.head.sha);
   checkReviewedTrees(state.files, authored.entries, integrated.entries);
-  return {...state, candidate, profile: integrationProfile(state.pr.head.ref, state.files, state.reservation)};
+  const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation);
+  let proof = null;
+  try { proof = await integrationProof({...options, head: state.pr.head.sha, profile,
+    baseline: await tree(options.api, options.repo, state.base), authored, candidate: integrated}); } catch { /* unavailable proof requires isolated tests */ }
+  return {...state, candidate, profile, proof};
 }
 export async function completeIntegration(options) {
   need(options.integrationResult === 'success' || options.integrationResult === 'skipped',
     'Integration tests failed or were cancelled; no merge performed');
   const state = await inspectMerge(options);
   if (state.replayed) return {accepted: true, replayed: true, merge_commit: state.pr.merge_commit_sha};
-  need(options.integrationResult === 'success', 'An open PR requires successful isolated integration tests');
+  need(options.integrationResult === 'success' || (options.integrationResult === 'skipped' && options.proofRunId),
+    'An open PR requires successful isolated integration tests or revalidated trusted proof');
   need(state.base === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
   const candidate = await tree(options.api, options.repo, options.testedCandidate);
   checkCandidateParents(candidate.object, state.base, state.pr.head.sha);
   const authored = await tree(options.api, options.repo, state.pr.head.sha);
   checkReviewedTrees(state.files, authored.entries, candidate.entries);
+  let proof = null;
+  if (options.proofRunId) {
+    proof = await integrationProof({...options, runId: options.proofRunId, head: state.pr.head.sha,
+      profile: integrationProfile(state.pr.head.ref, state.files, state.reservation),
+      baseline: await tree(options.api, options.repo, state.base), authored, candidate});
+    need(proof, 'Trusted integration proof is no longer valid; resubmit unchanged head');
+  }
   const currentPR = await options.api(`${root(options.repo)}/pulls/${options.number}`);
   const currentIssue = await options.api(`${root(options.repo)}/issues/${state.issue.number}`);
   need(currentPR.head.sha === state.pr.head.sha && currentPR.body === state.pr.body && currentPR.title === state.pr.title &&
@@ -121,5 +124,5 @@ export async function completeIntegration(options) {
   });
   need(merged.merged, 'GitHub did not merge the PR');
   return {accepted: true, merge_commit: merged.sha, title: state.pr.title, github_issue: state.issue.number,
-    tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence};
+    tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof};
 }

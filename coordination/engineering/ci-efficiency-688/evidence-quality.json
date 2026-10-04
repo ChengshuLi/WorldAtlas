@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "issue": 688,
+  "lane": "engineering",
+  "worker_id": "ci-efficiency-688-worker",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "ceb743c213d52d4efc67f36bade61abce7f9acc0",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 1862,
+        "sha256": "7199e3d714b593e06ec2e6c6a8342e9331c3c0f239db97c4739d59c1d1ea970b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 6012,
+        "sha256": "cfa59f56e21c4ce2eaaea6cc94c4f07717bee96160bd157aa74b876ec447bd58",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 13999,
+        "sha256": "5e84883ffd5aaada648a71463d892ec63f6da593d9309d3afc8cfe8c751188fa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 8993,
+        "sha256": "af417f8f68d520b4761f31ef5feb2404a04a840fbfb8afb57db4cb6122fc65e4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 2604,
+        "sha256": "cee83f95838d631c52a19dec9b84e9de3cd1e23f1dbcf698da8479791705b9fe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-worker-merge.mjs",
+        "bytes": 2788,
+        "sha256": "cc62f288bf5c25791926ee9887d93ed4298a0acc16a736419db9d978a948e61d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration.test.mjs",
+        "bytes": 10824,
+        "sha256": "954090cb65cb6e346fb4b2fd07449dbf3ccc2139bbd0fa3c66601e086ccba036",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 3451,
+      "sha256": "05d7aebbbe7941e7ee47806f7daae8ede1ec9776266940b19489cd362f8c510e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 6212,
+      "sha256": "97f50cf1da4ce6d96b440d01d8027566621dc0d11391e4e39dffd37fcd67230e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/claim.json",
+      "bytes": 805,
+      "sha256": "bb4b4ac1603ee5d490d4c2aa1338d56c051218089ea5fd8c409bd5e8d2f4e734",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/targeted-tests.tap",
+      "bytes": 22877,
+      "sha256": "b5b309b4bb3467c74f17537546a618b10c18554023193585efc1576f6f7f19f4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "bytes": 975,
+      "sha256": "c4bda4c0614b994d0e9b9a6c7cbf5d2260e37dc417badffe0bc1743aa7cd7bde",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 16093,
+      "sha256": "43c3aa34e63cc126a00523ceca4617a4fb3d7a2756eedc6db57d56b14a17f46d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-integration-profile.mjs",
+      "bytes": 709,
+      "sha256": "4450b488715da6af41360ea14997f5aa0641d153011ecbc0ca6f5e556254c213",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "bytes": 2136,
+      "sha256": "34395e465a272e96294cceea3b8c592b582409bdcb761651a456f9a872929b8e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "bytes": 3348,
+      "sha256": "63c4242c118a4d5aa2d6ac9df6becff166cffaab31d857fd4d7003611a823574",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 9124,
+      "sha256": "5ec182094443c85870c44619a77d1f85da5dfda9019478c8040dbe04064ae91e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 3041,
+      "sha256": "9cf4f99b1cd486a429bab298bcd7978072d6350471ee299a99befa545ca77655",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 2939,
+      "sha256": "15af3145f03de4c4fbc0a6b63b94fe1e5d0808fdb7887bb7536faa15e4398c50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "bytes": 4964,
+      "sha256": "c1dab86f9844f5deb27f5d378dd263893c4690f14d0c3ce6d6c8a8337a410054",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 13464,
+      "sha256": "b60165176da4ef4316c469868eb8c9f67b792843a86d8f302d14c02b80b43c30",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "trusted-tree-proof",
+      "kind": "code",
+      "description": "Run complete focused integration inventory and mocked positive/negative GitHub proof controls; preserve actual full regression and final queue authorities.",
+      "software": "Node24, Git, repository integration runner",
+      "units": "test outcomes and immutable file bytes"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "7199e3d714b593e06ec2e6c6a8342e9331c3c0f239db97c4739d59c1d1ea970b"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "cfa59f56e21c4ce2eaaea6cc94c4f07717bee96160bd157aa74b876ec447bd58"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/targeted-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "5e84883ffd5aaada648a71463d892ec63f6da593d9309d3afc8cfe8c751188fa"
+    },
+    {
+      "path": "scripts/check-integration-profile.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "original_sha256": "af417f8f68d520b4761f31ef5feb2404a04a840fbfb8afb57db4cb6122fc65e4"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "cee83f95838d631c52a19dec9b84e9de3cd1e23f1dbcf698da8479791705b9fe"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "cc62f288bf5c25791926ee9887d93ed4298a0acc16a736419db9d978a948e61d"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "954090cb65cb6e346fb4b2fd07449dbf3ccc2139bbd0fa3c66601e086ccba036"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

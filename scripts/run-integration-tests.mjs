@@ -10,7 +10,7 @@ export function integrationTestFiles(profile, shard) {
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
   const focused = ['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
-    'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-client','merge-integration-entrypoint'];
+    'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-client','merge-integration-entrypoint','integration-proof'];
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
   const files = profile === 'full' ? [
     ...(shard === 0 ? PACKAGED_ASSET_TESTS : []),
@@ -35,9 +35,13 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const files = integrationTestFiles(profile, shard);
   prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, shard, files}));
-  const result = spawnSync(process.execPath, ['--test','--test-concurrency=2', ...files], {
-    stdio:'inherit', env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1'}:{})}
+  const result = spawnSync(process.execPath, ['--test','--test-reporter=tap','--test-concurrency=2', ...files], {
+    encoding:'utf8', maxBuffer:64*1024*1024, env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1'}:{})}
   });
+  process.stdout.write(result.stdout ?? '');
+  process.stderr.write(result.stderr ?? '');
+  if (result.status === 0 && !/^# skipped 0$/m.test(result.stdout ?? '')) throw Error('Regression did not establish zero skipped tests');
+  if (result.status === 0 && /^# skipped [1-9]/m.test(result.stdout ?? '')) throw Error('Skipped tests cannot establish regression coverage');
   if (result.error) throw result.error;
   process.exitCode = result.status ?? 1;
 }

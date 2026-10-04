@@ -87,3 +87,33 @@ Only engineering may approve and publish the partition/branches with retained so
 ## Evidence and independent review
 
 Follow `docs/PREMERGE_EVIDENCE_REVIEW.md` and the authoritative `.github/evidence-policy.json`. New work after activation declares exact subjects/pins and its owned manifest in the issue contract; legacy scopes remain preserved. Prepare versioned whole-file evidence, immutable scientific helper results and honest source/publication limits. Request a distinct worker's substantive review tied to the exact PR head; never self-review under a second worker ID. The queue rechecks evidence and review; green CI alone does not approve geography or authorize imports.
+
+## Applicable regression and exact-tree reuse
+
+The integration profile defaults to `full`. Only the exact coordination paths in
+`scripts/integration-profile.mjs` and the current worker's owned receipts use the
+focused `evidence` profile. It includes reservation, ownership, regional import
+barriers, evidence/review validation, workflow checkout and integration controls.
+Source-only owned research retains its focused controls. Every changed path and
+rename origin participates; unknown documents/scripts, application code, storage,
+atlas data, geometry, schema, imports, builds and deployment require full regression.
+The PR profile selector runs trusted base code against GitHub's complete file list;
+a base without the selector runs full regression. Full shards cover every test file
+exactly once, build actual packaged assets and reject skipped tests.
+
+The queue can avoid repeating those tests only when GitHub's successful current
+`merge-integration-checks.yml` run proves the entire candidate Git tree equals the
+reviewed head's tested tree. That approved workflow explicitly checks out the head;
+GitHub's `head_sha` alone cannot establish what a default PR merge-ref checkout tested.
+The workflow and runner/profile blobs must match trusted current main. All expected
+shards and their required completed steps must succeed; skipped jobs establish no
+coverage. Preparation pins the run ID. The final serialized merge re-reads that run,
+its current attempt/jobs and the usual exact-head review, evidence, ownership,
+checks, candidate parents and base guards. An unavailable/untrusted proof causes
+normal isolated tests; a proof revoked after preparation refuses the merge and
+requires resubmission. An altered workflow/runner first passes ordinary integration.
+
+This is cooperative GitHub Actions evidence, not independent authenticated worker
+identity or a native GitHub merge queue. The existing final base check and guarded
+head merge remain; outside writers must honor the same serialized queue. A green
+run does not certify geographic facts, authorize imports or publish the Site.

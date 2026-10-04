@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
+import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile} from '../scripts/merge-integration.mjs';
 
@@ -120,7 +121,7 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
  assert.equal(integrationProfile('research/example',[{filename:'research/campaigns/example/a.json'}],{}),'evidence');
  assert.equal(integrationProfile('research/example',[{filename:'research/example/a.json'}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/WORKER_COORDINATION.md'},{filename:'coordination/engineering/example/receipt.json'}],{}),'evidence');
- for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','.github/workflows/worker-merge.yml'])
+ for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','scripts/build-hosted.mjs'])
    assert.equal(integrationProfile('engineering/example',[{filename}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/a.md',previous_filename:'src/attributes.js'}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'coordination/engineering/other/receipt.json'}],{}),'full');
@@ -140,4 +141,41 @@ test('parallel full-regression shards cover each unit file once and focused prof
  assert.throws(()=>integrationTestFiles('evidence',1),/Invalid/);
  assert.equal(integrationNeedsBrowser('evidence',0),false);
  assert.equal([0,1,2].filter(shard=>integrationNeedsBrowser('full',shard)).length,1);
+});
+
+function addTrustedProof(f) {
+  const original=f.api;
+  const entries = [...f.authored, ...PROOF_PATHS.map(path=>({path,sha:path,type:'blob',mode:'100644'}))];
+  f.authored=entries;
+  const run={id:12,run_attempt:1,head_sha:f.head,event:'pull_request',path:WORKFLOW_PATH,
+    repository:{full_name:f.repo},head_repository:{full_name:f.repo},status:'completed',conclusion:'success',
+    pull_requests:[{number:2,head:{sha:f.head}}]};
+  f.run=run;
+  const api=async(route,method,body)=>{
+    if(route.endsWith('/git/commits/'+f.head) || route.endsWith('/git/commits/'+f.base)) return {tree:{sha:'authored'}};
+    if(route.endsWith('/git/commits/'+f.candidate)) return {tree:{sha:'authored'},parents:[{sha:f.base},{sha:f.head}]};
+    if(route.includes('/git/blobs/')) return {content:Buffer.from(fs.readFileSync('.github/workflows/merge-integration-checks.yml')).toString('base64')};
+    if(route.includes('/actions/workflows/')) return {workflow_runs:[run]};
+    if(route.endsWith('/actions/runs/12')) return run;
+    if(route.includes('/jobs')) return {jobs:[{name:'profile',status:'completed',conclusion:'success'},
+      ...[0,1,2].map(shard=>({name:`regression (${shard})`,status:'completed',conclusion:'success',
+        steps:['Checkout reviewed head','Install Node dependencies','Install Python dependencies','Complete regression shard',
+          ...(shard===0?['Build hosted assets']:[])].map(name=>({name,status:'completed',conclusion:'success'}))}))]};
+    return original(route,method,body);
+  };
+  const options=f.options;f.options=()=>({...options(),api});
+}
+test('prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread',async()=>{
+  const f=fixture();addTrustedProof(f);
+  const prepared=await prepareIntegration(f.options());assert.equal(prepared.proof.run_id,12);
+  const result=await f.complete({integrationResult:'skipped',proofRunId:12});
+  assert.equal(result.proof.run_id,12);assert.equal(f.writes.length,1);
+});
+test('failed proof reread and stale main prevent merge despite prior accepted proof',async()=>{
+  const f=fixture();addTrustedProof(f);assert.ok((await prepareIntegration(f.options())).proof);
+  f.run.conclusion='cancelled';
+  await assert.rejects(f.complete({integrationResult:'skipped',proofRunId:12}),/proof is no longer valid/);
+  assert.equal(f.writes.length,0);
+  const g=fixture();addTrustedProof(g);await prepareIntegration(g.options());g.base=sha('e');
+  await assert.rejects(g.complete({integrationResult:'skipped',proofRunId:12}),/Main advanced/);assert.equal(g.writes.length,0);
 });
