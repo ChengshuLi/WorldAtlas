@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "observed_on_utc": "2026-10-04",
+  "purpose": "Access audit only; failed responses are not treated as geographic evidence.",
+  "attempts": [
+    {
+      "url": "https://cdge.dane.gov.co/api/download/v1/items/bbbfd3b6f3154d3b99d365ed1e063375/geojson?layers=319",
+      "method": "GET",
+      "result": "HTTP 500",
+      "response_body": "{\"errors\":{\"message\":\"Internal Server Error\"},\"meta\":{}}",
+      "returned_feature_bytes": false
+    },
+    {
+      "url": "https://cdge.dane.gov.co/api/download/v1/items/bbbfd3b6f3154d3b99d365ed1e063375/geojson?layers=317",
+      "method": "GET",
+      "result": "HTTP 500",
+      "returned_feature_bytes": false
+    },
+    {
+      "url": "https://cdge.dane.gov.co/api/download/v1/items/bbbfd3b6f3154d3b99d365ed1e063375/geojson?layers=305",
+      "method": "not retried",
+      "result": "Not tested; remaining attempts should wait for material service change."
+    }
+  ],
+  "prior_issue_report": "Issue #587 states earlier DANE ArcGIS layer metadata and row queries returned network-edge HTML. Those same blocked query routes were not retried.",
+  "restoration_request": "Please provide lawful, dated DANE MGN 2024 department (layer 319) and municipality (layer 317) exports with stable DIVIPOLA codes, names, municipality type, geometry, schema/CRS, issue/version date, license/attribution, file hashes and a supported download route or maintainer-supplied export. Also provide layer 305 official rows if June 2026 DIVIPOLA is not the intended/current settlement release."
+}
