@@ -1,0 +1,40 @@
+✔ full original hash, copied bytes, local readback and unchanged source marker; no maintenance or range claims (28.323629ms)
+✔ reject corrupted full bytes with preserved sanitized partial receipt (2.638367ms)
+✔ reject truncated body with preserved sanitized partial receipt (2.355731ms)
+✔ reject oversized body with preserved sanitized partial receipt (2.600139ms)
+✔ reject range response with preserved sanitized partial receipt (2.042388ms)
+✔ reject misleading full content-range with preserved sanitized partial receipt (1.816928ms)
+✔ reject wrong content-length with preserved sanitized partial receipt (1.855116ms)
+✔ reject duplicate media identity with preserved sanitized partial receipt (1.455664ms)
+✔ reject negative byte count with preserved sanitized partial receipt (1.457137ms)
+✔ reject unknown extra factual table with preserved sanitized partial receipt (1.609076ms)
+✔ reject incomplete V2 legacy projection with preserved sanitized partial receipt (0.847838ms)
+✔ reject uncovered footprint object references with preserved sanitized partial receipt (0.930001ms)
+✔ reject changed final source with preserved sanitized partial receipt (2.32925ms)
+✔ reject unsafe credential-bearing origin with preserved sanitized partial receipt (0.279862ms)
+✔ refuse existing target and preserve original artifact (0.553654ms)
+✔ deadline covers stalled response body and retains partial bytes (26.943399ms)
+✔ late fetch cannot create object files after deadline rejection (101.318708ms)
+✔ abort propagates and does not disclose credential (0.876541ms)
+✔ multiple source pages recover distinct original IDs sharing identical immutable object pins (3.009336ms)
+✔ reject repeated cursor (1.571749ms)
+✔ reject incomplete registered count (1.996369ms)
+✔ reject conflicting immutable shared key (1.036112ms)
+✔ declared total and single-object byte ceilings reject before copying (1.799402ms)
+✔ hidden stdin restores terminal and removes listeners on valid hidden JSON (0.999546ms)
+✔ hidden stdin restores terminal and removes listeners on malformed hidden JSON (0.260693ms)
+✔ hidden stdin restores terminal and removes listeners on oversized hidden input (0.139741ms)
+✔ hidden stdin restores terminal and removes listeners on Ctrl-C (0.129586ms)
+✔ hidden stdin restores terminal and removes listeners on Ctrl-D (0.169686ms)
+✔ hidden stdin restores terminal and removes listeners on EOF (0.79591ms)
+✔ recomputed fingerprint cannot hide a different PostgreSQL catalog (1.018675ms)
+✔ source page column and revision mismatch reject before copying (2.030791ms)
+✔ filesystem full error preserves the prior atomic receipt and exact safe code (1.494212ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 268.264024
