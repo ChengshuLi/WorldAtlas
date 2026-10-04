@@ -15,7 +15,7 @@
   ],
   "subject_ids_sha256": "82f18bde52661de1ba72bef1218d3399fd0e009381d0881c638086f6a334dadc",
   "baseline": {
-    "commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+    "commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
     "files": [
       {
         "path": "data/regional-review/alaska-settlement-gaps-followup-2026/scope.json",
@@ -128,15 +128,15 @@
   "outputs": [
     {
       "path": "research/geography/alaska-settlement-verification-followup/README.md",
-      "bytes": 9772,
-      "sha256": "2f26d676f3addc92f1943cdc529fb65378d0bd236159ffa73480550446b88711",
+      "bytes": 9816,
+      "sha256": "e7c227d11168e0fc23693a7610ee9b3501f201de407af29f1359140de701b3d2",
       "hash_kind": "file-bytes",
       "role": "generated-table"
     },
     {
       "path": "research/geography/alaska-settlement-verification-followup/verify.py",
       "bytes": 24982,
-      "sha256": "23f6e63d2eb1dac1d5005c8d88c999b65a0c20a410b9f72fec24a8a12727877c",
+      "sha256": "654202a65521c4fcc120c6b7dcb7580c2acf816f511ce36622d6ae430e9e0fef",
       "hash_kind": "file-bytes"
     },
     {
@@ -155,6 +155,12 @@
       "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
       "bytes": 4317,
       "sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
+      "bytes": 4317,
+      "sha256": "44e8f9601f7566b26dd8392e2c38cba7bb5becdfc7ff4627e6b121a16987702f",
       "hash_kind": "file-bytes"
     }
   ],
@@ -193,7 +199,7 @@
       "unit": "features",
       "vintage": "current",
       "input_sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
-      "evaluation_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+      "evaluation_commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
       "numerator": 487
     },
     {
@@ -202,7 +208,7 @@
       "unit": "point_hits",
       "vintage": "current",
       "input_sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
-      "evaluation_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+      "evaluation_commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
       "numerator": 0
     },
     {
@@ -211,7 +217,7 @@
       "unit": "point_hits",
       "vintage": "current",
       "input_sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
-      "evaluation_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+      "evaluation_commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
       "numerator": 0
     },
     {
@@ -220,7 +226,7 @@
       "unit": "point_hits",
       "vintage": "current",
       "input_sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
-      "evaluation_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+      "evaluation_commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
       "numerator": 0
     },
     {
@@ -229,7 +235,7 @@
       "unit": "point_hits",
       "vintage": "current",
       "input_sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
-      "evaluation_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+      "evaluation_commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
       "numerator": 0
     },
     {
@@ -238,7 +244,7 @@
       "unit": "point_hits",
       "vintage": "current",
       "input_sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
-      "evaluation_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+      "evaluation_commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
       "numerator": 0
     },
     {
@@ -247,7 +253,7 @@
       "unit": "point_hits",
       "vintage": "current",
       "input_sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
-      "evaluation_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+      "evaluation_commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
       "numerator": 0
     },
     {
@@ -256,7 +262,7 @@
       "unit": "point_hits",
       "vintage": "current",
       "input_sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
-      "evaluation_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+      "evaluation_commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
       "numerator": 0
     },
     {
@@ -265,7 +271,7 @@
       "unit": "point_hits",
       "vintage": "current",
       "input_sha256": "5daf7b24ae6bce56ecb0eec1b7142cc809ad2aa7068b7d61d3dcd5f8a4cb0fad",
-      "evaluation_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+      "evaluation_commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
       "numerator": 0
     }
   ],
@@ -366,47 +372,47 @@
   "metric_bindings": [
     {
       "metric_id": "live_inventory_features",
-      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
       "json_pointer": "/feature_count"
     },
     {
       "metric_id": "hits_15fa62117dba20fdd7a3",
-      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
       "json_pointer": "/subject_hit_counts/atlas:physical:15fa62117dba20fdd7a3"
     },
     {
       "metric_id": "hits_2e1dd8f380b0a4f65ad9",
-      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
       "json_pointer": "/subject_hit_counts/atlas:physical:2e1dd8f380b0a4f65ad9"
     },
     {
       "metric_id": "hits_3c48debb2430313aff99",
-      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
       "json_pointer": "/subject_hit_counts/atlas:physical:3c48debb2430313aff99"
     },
     {
       "metric_id": "hits_674981b93623e9cbe385",
-      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
       "json_pointer": "/subject_hit_counts/atlas:physical:674981b93623e9cbe385"
     },
     {
       "metric_id": "hits_770135c5de8a7faad962",
-      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
       "json_pointer": "/subject_hit_counts/atlas:physical:770135c5de8a7faad962"
     },
     {
       "metric_id": "hits_d5c6a8a99d213d352ffc",
-      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
       "json_pointer": "/subject_hit_counts/atlas:physical:d5c6a8a99d213d352ffc"
     },
     {
       "metric_id": "hits_db25f36496f102a4e01b",
-      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
       "json_pointer": "/subject_hit_counts/atlas:physical:db25f36496f102a4e01b"
     },
     {
       "metric_id": "hits_f1337f9008d75f1a400d",
-      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-live.json",
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
       "json_pointer": "/subject_hit_counts/atlas:physical:f1337f9008d75f1a400d"
     }
   ],
@@ -417,49 +423,49 @@
         {
           "metric_id": "hits_15fa62117dba20fdd7a3",
           "line": 14,
-          "template": "| `atlas:physical:15fa62117dba20fdd7a3` — Yukon-Koyukuk · Beringia upland tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "template": "| `atlas:physical:15fa62117dba20fdd7a3` \u2014 Yukon-Koyukuk \u00b7 Beringia upland tundra | Alaska \u2192 Pacific \u2192 Western North America \u2192 Northern America \u2192 North America | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "hits_2e1dd8f380b0a4f65ad9",
           "line": 15,
-          "template": "| `atlas:physical:2e1dd8f380b0a4f65ad9` — Yukon-Koyukuk · Ogilvie-MacKenzie alpine tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "template": "| `atlas:physical:2e1dd8f380b0a4f65ad9` \u2014 Yukon-Koyukuk \u00b7 Ogilvie-MacKenzie alpine tundra | Alaska \u2192 Pacific \u2192 Western North America \u2192 Northern America \u2192 North America | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "hits_3c48debb2430313aff99",
           "line": 16,
-          "template": "| `atlas:physical:3c48debb2430313aff99` — Yukon-Koyukuk · Beringia lowland tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "template": "| `atlas:physical:3c48debb2430313aff99` \u2014 Yukon-Koyukuk \u00b7 Beringia lowland tundra | Alaska \u2192 Pacific \u2192 Western North America \u2192 Northern America \u2192 North America | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "hits_674981b93623e9cbe385",
           "line": 17,
-          "template": "| `atlas:physical:674981b93623e9cbe385` — North Slope · Interior Alaska-Yukon lowland taiga | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "template": "| `atlas:physical:674981b93623e9cbe385` \u2014 North Slope \u00b7 Interior Alaska-Yukon lowland taiga | Alaska \u2192 Pacific \u2192 Western North America \u2192 Northern America \u2192 North America | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "hits_770135c5de8a7faad962",
           "line": 18,
-          "template": "| `atlas:physical:770135c5de8a7faad962` — North Slope · Interior Yukon-Alaska alpine tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "template": "| `atlas:physical:770135c5de8a7faad962` \u2014 North Slope \u00b7 Interior Yukon-Alaska alpine tundra | Alaska \u2192 Pacific \u2192 Western North America \u2192 Northern America \u2192 North America | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "hits_d5c6a8a99d213d352ffc",
           "line": 19,
-          "template": "| `atlas:physical:d5c6a8a99d213d352ffc` — Nome · Interior Yukon-Alaska alpine tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "template": "| `atlas:physical:d5c6a8a99d213d352ffc` \u2014 Nome \u00b7 Interior Yukon-Alaska alpine tundra | Alaska \u2192 Pacific \u2192 Western North America \u2192 Northern America \u2192 North America | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "hits_db25f36496f102a4e01b",
           "line": 20,
-          "template": "| `atlas:physical:db25f36496f102a4e01b` — Yukon-Koyukuk · Alaska-St. Elias Range tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "template": "| `atlas:physical:db25f36496f102a4e01b` \u2014 Yukon-Koyukuk \u00b7 Alaska-St. Elias Range tundra | Alaska \u2192 Pacific \u2192 Western North America \u2192 Northern America \u2192 North America | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "hits_f1337f9008d75f1a400d",
           "line": 21,
-          "template": "| `atlas:physical:f1337f9008d75f1a400d` — Bethel · Alaska-St. Elias Range tundra | Alaska → Pacific → Western North America → Northern America → North America | {value} |",
+          "template": "| `atlas:physical:f1337f9008d75f1a400d` \u2014 Bethel \u00b7 Alaska-St. Elias Range tundra | Alaska \u2192 Pacific \u2192 Western North America \u2192 Northern America \u2192 North America | {value} |",
           "decimals": 0
         }
       ]
@@ -488,6 +494,10 @@
     },
     {
       "path": "research/geography/alaska-settlement-verification-followup/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/alaska-settlement-verification-followup/vintages/2026-10-03-main-refresh-2257PDT.json",
       "status": "added"
     }
   ]

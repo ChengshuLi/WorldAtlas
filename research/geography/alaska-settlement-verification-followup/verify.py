@@ -27,7 +27,7 @@ from evidence.geometry import point as checked_point
 OWNED = ROOT / "research/geography/alaska-settlement-verification-followup"
 CHILD = "data/regional-review/alaska-settlement-gaps-followup-2026"
 PARENT = "data/regional-review/regional-review-93f8f3bee8e205be"
-BASELINE_COMMIT = "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2"
+BASELINE_COMMIT = "16da778105250d33b749ed6e0a9d0141dc1f6f1a"
 SERVICE = "https://maps.commerce.alaska.gov/server/rest/services/Community_Related/Community_Locations_and_Boundaries/MapServer/0"
 EXTENT = {"xmin": -180, "ymin": 51, "xmax": -129, "ymax": 72,
           "spatialReference": {"wkid": 4326}}
