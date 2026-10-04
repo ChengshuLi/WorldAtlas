@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "issue": 709,
+  "lane": "engineering",
+  "worker_id": "urgent-priority-root-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "bfac3aeaf87f5d1cf0be2306a78d85d024ce4a7a",
+    "files": [
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 5979,
+        "sha256": "f368d2331a4a12545b140fbda70e8b48cdbec5580856e0e8746f7f93d5c27925",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/GEOGRAPHY.txt",
+        "bytes": 5531,
+        "sha256": "b20d63ba2d1ede60ab8be56b064c55cb96401d69931162241028df5e3910c457",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/LUNA_HISTORY.txt",
+        "bytes": 6376,
+        "sha256": "0423f38f44d79b129d258d270f49d13862be562eeef5e94e5e079442e46c0219",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 17290,
+        "sha256": "e6a8586658824c05ef8b82efc669a7d51f2815623b7b5260e4c618112ba8255b",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 6646,
+      "sha256": "6163bb532d32fdc97536fa483e28e9b296f6479e30c36eac1a524046581e80af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "bytes": 6198,
+      "sha256": "e7d02e0fa9b471896d50047eefcec8b4d9e2f5acb997975248f3dac9c943e5cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "bytes": 7043,
+      "sha256": "68f979f0a6d7b2d5dbc4efcdfa6b1064a39a31855bb3dc371c0e8188eed0cdd8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 17957,
+      "sha256": "300ba6ac1d4c06c6ab0828424b992a7e2788d98494378d8db9c8cc9b0849a15f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/urgent-worker-priority-20261004/positive-control.json",
+      "bytes": 307,
+      "sha256": "d5adbcc57ee75a395c44444002ee8810d865f7a3b5130224c4f282addf039e90",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/urgent-worker-priority-20261004/claim.json",
+      "bytes": 824,
+      "sha256": "9d5b4cbe19c2d843900cb463722a830f5d8294bcaed990ac11819985b139d230",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/urgent-worker-priority-20261004/negative-control.json",
+      "bytes": 287,
+      "sha256": "e95597cf654c354ac076d4a9f17238c6715c841cf8368630df9b5add57ad7c93",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "priority-doc-consistency",
+      "kind": "code",
+      "description": "Verify identical eligible urgent-first wording across worker roles/shared guidance; remove inserted paragraph and compare original bytes; reject a deliberately mismatched wording copy. This checks documentation, not worker runtime behavior.",
+      "software": "Python3 byte comparison and substantive independent document review",
+      "units": "document bytes and policy wording"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "priority-doc-consistency",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/urgent-worker-priority-20261004/positive-control.json"
+    },
+    {
+      "method_id": "priority-doc-consistency",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/urgent-worker-priority-20261004/negative-control.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "Inspect git diff to verify identical priority paragraph and unchanged surrounding role/claim/gate rules"
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "f368d2331a4a12545b140fbda70e8b48cdbec5580856e0e8746f7f93d5c27925"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "status": "modified",
+      "original_sha256": "b20d63ba2d1ede60ab8be56b064c55cb96401d69931162241028df5e3910c457"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "status": "modified",
+      "original_sha256": "0423f38f44d79b129d258d270f49d13862be562eeef5e94e5e079442e46c0219"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "e6a8586658824c05ef8b82efc669a7d51f2815623b7b5260e4c618112ba8255b"
+    },
+    {
+      "path": "coordination/engineering/urgent-worker-priority-20261004/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/urgent-worker-priority-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/urgent-worker-priority-20261004/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/urgent-worker-priority-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

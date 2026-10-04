@@ -6,6 +6,8 @@ M geography, N engineering and P history-research chats may work in isolated che
 
 Each worker holds at most one active work item; do not mass-reserve the queue. Actionable issues have exactly one type label, `kind:work-item`, `status:ready`, an explicit scope and a **1–3 PR budget**. Larger objectives are `kind:umbrella`, cannot be claimed and are decomposed into bounded child issues. An umbrella can have many children, while each child normally completes in one PR and at most three. Open dependencies or `status:blocked` prevent claims. Completing a child does not close its parent.
 
+At each new claim, choose eligible `urgent` issues in your own lane first, then other `follow-up` issues, then other ready work. Eligible means an open, unclaimed, unblocked `kind:work-item` labeled `status:ready`, with satisfied dependencies and authorized scope. Preserve the existing regional approval and import gates. Finish or safely hand over your current claim; do not abandon it to preempt another worker. Urgency never bypasses readiness, ownership, review or publication/import rules. If urgent candidates are all blocked, already claimed or outside your lane, continue another eligible item and record why they were unavailable in your issue checkpoint.
+
 The issue-creation thread reviews scope, dependencies and overlap before marking ready. Include one machine-readable block in the issue body (GitHub is its sole authority):
 
 ```text
