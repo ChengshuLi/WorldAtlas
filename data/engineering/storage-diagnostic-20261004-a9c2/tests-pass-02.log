@@ -1,0 +1,37 @@
+✔ fixed target, GET-only credential acquisition and sanitized separate size metrics (24.10525ms)
+✔ wrong project fails before SQL (0.750481ms)
+✔ wrong branch fails before SQL (0.561797ms)
+✔ wrong branch name fails before SQL (0.980027ms)
+✔ wrong endpoint project fails before SQL (1.007389ms)
+✔ wrong endpoint branch fails before SQL (0.495437ms)
+✔ duplicate endpoint fails before SQL (1.796888ms)
+✔ foreign connection host fails before SQL (0.53723ms)
+✔ pooled connection fails before SQL (0.711052ms)
+✔ wrong database fails before SQL (0.678232ms)
+✔ wrong role fails before SQL (0.569078ms)
+✔ TLS removed fails before SQL (0.556649ms)
+✔ connection options fails before SQL (0.373763ms)
+✔ read-write transaction prevents measured receipt (0.191939ms)
+✔ wrong SQL role prevents measured receipt (0.076776ms)
+✔ wrong SQL database prevents measured receipt (0.06638ms)
+✔ SQL endpoint mismatch prevents measured receipt (0.057967ms)
+✔ timeouts absent prevents measured receipt (0.054803ms)
+✔ overflow tables prevents measured receipt (0.156846ms)
+✔ duplicate table prevents measured receipt (0.14602ms)
+✔ accounting mismatch prevents measured receipt (0.111539ms)
+✔ unsafe number prevents measured receipt (0.192821ms)
+✔ negative estimate prevents measured receipt (0.082054ms)
+✔ unknown index table prevents measured receipt (0.095364ms)
+✔ oversized definition prevents measured receipt (0.143156ms)
+✔ driver and API raw exceptions never reach saved failure receipts (1.284937ms)
+✔ secret-like catalog definition cannot enter sanitized success receipt (0.813346ms)
+✔ fixed SQL runs against real isolated PostgreSQL catalogs and READ ONLY denies mutation (1559.112111ms)
+✔ actual driver adapter forces server READ ONLY and only the fixed bounded transaction (0.724362ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1706.069683

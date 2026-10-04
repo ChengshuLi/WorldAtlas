@@ -1,0 +1,75 @@
+✔ account proof and configured quotas/compute remain typed, scoped and free of arbitrary private fields (26.956803ms)
+✔ denied organization proof stays unavailable while actual project settings remain verified (1.287892ms)
+✔ missing organization and quota are explicit unknowns, never inferred from public pricing (0.921419ms)
+✔ wrong project and lossy quotas fail before a misleading capacity receipt can be produced (1.342053ms)
+✔ fixed target, GET-only credential acquisition and sanitized separate size metrics (28.017402ms)
+✔ wrong project fails before SQL (0.706055ms)
+✔ wrong branch fails before SQL (0.572013ms)
+✔ wrong branch name fails before SQL (0.750922ms)
+✔ wrong endpoint project fails before SQL (1.06137ms)
+✔ wrong endpoint branch fails before SQL (0.408366ms)
+✔ duplicate endpoint fails before SQL (2.334619ms)
+✔ foreign connection host fails before SQL (1.292859ms)
+✔ pooled connection fails before SQL (0.638282ms)
+✔ wrong database fails before SQL (0.701808ms)
+✔ wrong role fails before SQL (0.518742ms)
+✔ TLS removed fails before SQL (0.642789ms)
+✔ connection options fails before SQL (0.463579ms)
+✔ read-write transaction prevents measured receipt (0.147562ms)
+✔ wrong SQL role prevents measured receipt (0.068514ms)
+✔ wrong SQL database prevents measured receipt (0.06662ms)
+✔ SQL endpoint mismatch prevents measured receipt (0.088984ms)
+✔ timeouts absent prevents measured receipt (0.070636ms)
+✔ overflow tables prevents measured receipt (0.157337ms)
+✔ duplicate table prevents measured receipt (0.140141ms)
+✔ accounting mismatch prevents measured receipt (0.23869ms)
+✔ unsafe number prevents measured receipt (0.246281ms)
+✔ negative estimate prevents measured receipt (0.100681ms)
+✔ unknown index table prevents measured receipt (0.262215ms)
+✔ oversized definition prevents measured receipt (0.136295ms)
+✔ driver and API raw exceptions never reach saved failure receipts (1.538579ms)
+✔ secret-like catalog definition cannot enter sanitized success receipt (1.136153ms)
+✔ bounded management stream refuses oversized input and never connects (2.768343ms)
+✔ absent provider logical usage and tuple statistics remain unavailable (1.044264ms)
+✔ fixed SQL runs against real isolated PostgreSQL catalogs and READ ONLY denies mutation (1946.754655ms)
+✔ actual driver adapter forces server READ ONLY and only the fixed bounded transaction (0.589239ms)
+✔ Neon metadata verification authenticates read-only requests, follows pagination, and omits secret response fields (31.450888ms)
+✔ Neon verifier rejects wrong project configuration and absent credentials without requests (2.240377ms)
+✔ Neon metadata failures never retain raw HTTP/network bodies, mismatched projects, or repeated pagination cursors (3.3903ms)
+✔ PostgreSQL schema splitter retains command bytes while respecting nested comments, quoted identifiers, strings and dollar bodies (1.103944ms)
+✖ isolated Neon verifier applies the exact schema atomically on real PostgreSQL and exercises actual hosted services (2215.218424ms)
+✔ private owner connection failures remain sanitized and cleanup still deletes the validation branch (9.268732ms)
+✔ isolated SQL verifier refuses production IDs and production hosts before any SQL connection (5.827475ms)
+✔ SQL driver errors are sanitized and clean up only the newly created branch (2.026055ms)
+✔ cleanup failures retain the exact validation branch ID and fail the verification receipt (2.086345ms)
+✔ ambiguous creation persists its unique name without guessing a deletion target or SQL connection (1.802787ms)
+✔ read-only metadata helper does not accept a project mismatch supplied by the API (0.508627ms)
+ℹ tests 46
+ℹ suites 0
+ℹ pass 45
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2406.672126
+
+✖ failing tests:
+
+test at test/neon-verification.test.mjs:164:1
+✖ isolated Neon verifier applies the exact schema atomically on real PostgreSQL and exercises actual hosted services (2215.218424ms)
+  AssertionError [ERR_ASSERTION]: {"status":"failed","scope":"new disposable Neon validation branch","checked_at_utc":"2026-10-04T11:15:48.513Z","project_id":"weathered-lab-37571695","production_branch_id":"br-summer-butterfly-ar8qikk5","production_sql_writes":false,"credentials_logged":false,"cleanup_status":"deleted","schema_sha256":"1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618","schema_statements":56,"validation_branch_name":"atlas-sql-check-11111111-2222-4333-8444-555555555555","validation_branch_id":"br-isolated-verification-fixture","postgres_major":18,"database_name":"neondb","role_name":"neondb_owner","schema_tables":["atlas_sources","atlas_entity_types","atlas_entities","atlas_categories","atlas_attribute_records","atlas_names","atlas_relationships","atlas_media","atlas_media_links","atlas_evidence_retirements","atlas_ingestions","atlas_geographic_releases","atlas_geographic_memberships","atlas_geographic_changes"],"schema_complete":true,"failure_stage":"restricted-application-contracts","error_code":"restricted-application-contracts-failed","owner_connection_closed":true,"management_requests":8,"completed_at_utc":"2026-10-04T11:15:48.769Z","limitations":["No production schema, data import, runtime binding or Neon Auth change.","This small isolated service smoke test does not certify production migration or dataset capacity."]}
+  + actual - expected
+  
+  + 'failed'
+  - 'verified'
+  
+      at TestContext.<anonymous> (file:///tmp/worldatlas-storage-diagnostic738/test/neon-verification.test.mjs:205:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'failed',
+    expected: 'verified',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

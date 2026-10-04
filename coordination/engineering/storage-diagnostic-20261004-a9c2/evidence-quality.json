@@ -1,0 +1,380 @@
+{
+  "version": 1,
+  "issue": 738,
+  "lane": "engineering",
+  "worker_id": "engineering-storage-diagnostic-a9c25e14-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "7f67c1118741c0c2dae92c16b895a65ad4d81de3",
+    "files": [
+      {
+        "path": "scripts/verify-neon-project.mjs",
+        "bytes": 7376,
+        "sha256": "2043839debb466c6f16bbb89c9aedccb669d3796e90f5aeea816fd8c087e1b9a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/verify-neon-capacity.mjs",
+        "bytes": 6932,
+        "sha256": "23d0eaac96302cd4bd04d0f4c5a0a6f7b5555ac7bb9fbd6e24adec95c27e5b94",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/verify-neon-sql.mjs",
+        "bytes": 19113,
+        "sha256": "899161d1ddc9c68088aa51884a30cca5ed2440b81a738e2a229adf44a950c4aa",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": ".github/operations/neon-forward-production.json",
+        "bytes": 1834,
+        "sha256": "432b0ee2268764d12e1c0fe1976c859dc2838cd83a4c34d964a92cc02162b5d6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": ".github/workflows/neon-verify.yml",
+        "bytes": 1912,
+        "sha256": "b37cffe23a549010cce13f07f224471f4d57328eeaa22a35ab515ebde678bba2",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "postgres/schema.sql",
+        "bytes": 51470,
+        "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 245755,
+        "sha256": "47aa40b82e7f6b225a6567d28a0427df39d415dcf86df1d26f6d32ab84fd7a12",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/hosted-type-catalog.json",
+        "bytes": 1522,
+        "sha256": "72094b2bc40a1321c605514f9702c351a5e6dcaf251a7d4834f5ff0b2af68a03",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "id": "existing-neon-contract",
+      "url": "https://github.com/ChengshuLi/WorldAtlas",
+      "role": "Existing exact project/production target, pinned driver and unchanged schema; no new geographic/factual source",
+      "vintage": "7f67c1118741c0c2dae92c16b895a65ad4d81de3",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "unknown",
+        "terms": "No new upstream redistribution; existing dependency licenses remain in locked packages."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Checkout the pinned baseline and npm ci on Node24; whole baseline originals, new source/control bytes and logs are hashed. Restore all data/source/research independently from Git, not an inherited database.",
+      "limit": "Repository and synthetic isolated controls do not verify current production credentials, actual branch storage or billing. Isolated source inventory pins uncommitted measured candidate bytes; baseline ancestry is not a clean-tree measurement claim. No primary historical/geographic fact, release approval or production proof is asserted."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "scripts/measure-neon-storage.mjs",
+      "bytes": 12801,
+      "sha256": "550b81b2267c6ec77882b793a2c1f679ea2258f7a7d0a16115d7ed194c85ecdc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/neon-table-storage.test.mjs",
+      "bytes": 9793,
+      "sha256": "1a95af19a47eb1250f574ce87640026586633b58b56e01d24abe9dbda0d592a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/neon-table-storage.yml",
+      "bytes": 1488,
+      "sha256": "9076b03b5c52f4e64bb252bfe0639f8bc74a48624f67ed17134499db8b406cf0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/storage-diagnostic-20261004-a9c2.json",
+      "bytes": 1553,
+      "sha256": "fdbd7dcba534a4c63bcd0f26727f794ce13e2c803bca72cdfb0b618e0db405f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/README.md",
+      "bytes": 4295,
+      "sha256": "8f0b85455f5d0f357da37be83a386d119e621c41813b908c31464195e468154d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/isolated-catalog-01.json",
+      "bytes": 4241,
+      "sha256": "22a82eafe159853d966961f8c4aeea28667251d4fdc149e58028c28e35079222",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/negative-control-01.json",
+      "bytes": 443,
+      "sha256": "43005991074b307674d204835bbda5262d7da657b253bc59a83667c65b3eac8f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/positive-control-01.json",
+      "bytes": 415,
+      "sha256": "2691818f2d8b404c49703d0a676b2ab672837516c9815233958f79c6fd1def2e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/prepare-evidence.py",
+      "bytes": 4546,
+      "sha256": "c4dd81520d9ad76bb870a586df759730434325b60f6552f7ef0357a18fc39f81",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/reservation-01.json",
+      "bytes": 844,
+      "sha256": "3361acb2f3fbaa9bf877a2dfe14037a5ab89a8ed29b21cd411a7c0b269e6ff11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/run-controls.mjs",
+      "bytes": 3631,
+      "sha256": "efbc536d104fb23126237b6b3ef0ec2b5313b9d5cccabd91c7d076fd804668ef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/source-inventory-01.json",
+      "bytes": 869,
+      "sha256": "27a7994ab293ee30bfe8c4be703acca790701c1b1a0857f8b15888fd424bdae6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-failure-01.log",
+      "bytes": 2527,
+      "sha256": "47be6cfeabf6a62f7108d8d7196b8bc14872adb2f7be5a81f29a90c5517b778f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-final-01.log",
+      "bytes": 3839,
+      "sha256": "7b625f8dbcb0a62a449555f73b2262fd442e00ff06262890b85a73fb1c3a49ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-pass-02.log",
+      "bytes": 1944,
+      "sha256": "a35e25a2b804453182f174a1e6ad20a1e991e2789e6327964a835cc3c34d591c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-pass-03.log",
+      "bytes": 2386,
+      "sha256": "f0799778697dcb03e279d0e0b56f7f3e5c54aec7d4077b0ab514d1ebc2622bbc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-receipt-01.json",
+      "bytes": 292,
+      "sha256": "f0078ffd899d0d5f473fcec2af194e87711e298991f9dae3bdaa36ba5be83db9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-sparse-input-failure-01.log",
+      "bytes": 5899,
+      "sha256": "78738fd72aed1f05a1005f1ee25c93c1ad020350e3cd6fbf34cd68788303bbf8",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "fixed-readonly-catalog",
+      "kind": "code",
+      "description": "Fixed main-only bounded catalog reads, exact project/branch/host/SQL identity and enforced READ ONLY/timeouts with sanitized output; real isolated PostgreSQL and mocked management negative controls.",
+      "software": "Node24.19.0, locked Neon driver and PGlite",
+      "units": "bytes and explicitly estimated rows; isolated test counts"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "fixed-readonly-catalog",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/engineering/storage-diagnostic-20261004-a9c2/positive-control-01.json"
+    },
+    {
+      "method_id": "fixed-readonly-catalog",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/engineering/storage-diagnostic-20261004-a9c2/negative-control-01.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "isolated-tests-test_count",
+      "value": 46,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "7f67c1118741c0c2dae92c16b895a65ad4d81de3",
+      "input_sha256": "27a7994ab293ee30bfe8c4be703acca790701c1b1a0857f8b15888fd424bdae6"
+    },
+    {
+      "id": "isolated-tests-pass_count",
+      "value": 46,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "7f67c1118741c0c2dae92c16b895a65ad4d81de3",
+      "input_sha256": "27a7994ab293ee30bfe8c4be703acca790701c1b1a0857f8b15888fd424bdae6"
+    },
+    {
+      "id": "isolated-tests-exit_code",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "7f67c1118741c0c2dae92c16b895a65ad4d81de3",
+      "input_sha256": "27a7994ab293ee30bfe8c4be703acca790701c1b1a0857f8b15888fd424bdae6"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "isolated-tests-test_count",
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-receipt-01.json",
+      "json_pointer": "/test_count"
+    },
+    {
+      "metric_id": "isolated-tests-pass_count",
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-receipt-01.json",
+      "json_pointer": "/pass_count"
+    },
+    {
+      "metric_id": "isolated-tests-exit_code",
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-receipt-01.json",
+      "json_pointer": "/exit_code"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "isolated-tests-test_count",
+      "value": 46,
+      "unit": "count"
+    },
+    {
+      "metric_id": "isolated-tests-pass_count",
+      "value": 46,
+      "unit": "count"
+    },
+    {
+      "metric_id": "isolated-tests-exit_code",
+      "value": 0,
+      "unit": "count"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Tooling is validated against isolated PostgreSQL and synthetic metadata only. Actual production observation and capacity interpretation await reviewed accepted main dispatch; no hypothetical physical reclaim or billing claim.",
+      "status": "unresolved",
+      "source_ids": [
+        "existing-neon-contract"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node data/engineering/storage-diagnostic-20261004-a9c2/run-controls.mjs",
+    "python3 data/engineering/storage-diagnostic-20261004-a9c2/prepare-evidence.py",
+    "node scripts/evidence-quality.mjs coordination/engineering/storage-diagnostic-20261004-a9c2/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "scripts/measure-neon-storage.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/neon-table-storage.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": ".github/workflows/neon-table-storage.yml",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/storage-diagnostic-20261004-a9c2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/isolated-catalog-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/negative-control-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/positive-control-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/prepare-evidence.py",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/reservation-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/run-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/source-inventory-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-failure-01.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-final-01.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-pass-02.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-pass-03.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-receipt-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/storage-diagnostic-20261004-a9c2/tests-sparse-input-failure-01.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/storage-diagnostic-20261004-a9c2/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

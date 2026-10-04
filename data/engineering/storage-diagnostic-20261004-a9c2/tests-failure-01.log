@@ -1,0 +1,55 @@
+✔ fixed target, GET-only credential acquisition and sanitized separate size metrics (24.358441ms)
+✔ wrong project fails before SQL (0.646685ms)
+✔ wrong branch fails before SQL (3.858922ms)
+✔ wrong branch name fails before SQL (0.785594ms)
+✔ wrong endpoint project fails before SQL (1.11429ms)
+✔ wrong endpoint branch fails before SQL (0.407104ms)
+✔ duplicate endpoint fails before SQL (0.559924ms)
+✔ foreign connection host fails before SQL (2.290053ms)
+✔ pooled connection fails before SQL (0.697862ms)
+✔ wrong database fails before SQL (0.764813ms)
+✔ wrong role fails before SQL (0.643069ms)
+✔ TLS removed fails before SQL (0.565081ms)
+✔ connection options fails before SQL (0.367474ms)
+✔ read-write transaction prevents measured receipt (0.188254ms)
+✔ wrong SQL role prevents measured receipt (0.07275ms)
+✔ wrong SQL database prevents measured receipt (0.116706ms)
+✔ SQL endpoint mismatch prevents measured receipt (0.062334ms)
+✔ timeouts absent prevents measured receipt (0.056214ms)
+✔ overflow tables prevents measured receipt (0.155705ms)
+✔ duplicate table prevents measured receipt (0.152991ms)
+✔ accounting mismatch prevents measured receipt (0.117207ms)
+✔ unsafe number prevents measured receipt (0.193431ms)
+✔ negative estimate prevents measured receipt (0.094532ms)
+✔ unknown index table prevents measured receipt (0.071447ms)
+✔ oversized definition prevents measured receipt (0.124358ms)
+✔ driver and API raw exceptions never reach saved failure receipts (1.25382ms)
+✔ secret-like catalog definition cannot enter sanitized success receipt (0.950994ms)
+✖ fixed SQL runs against real isolated PostgreSQL catalogs and READ ONLY denies mutation (1707.953084ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 27
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1868.953979
+
+✖ failing tests:
+
+test at test/neon-table-storage.test.mjs:81:1
+✖ fixed SQL runs against real isolated PostgreSQL catalogs and READ ONLY denies mutation (1707.953084ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  '5s' !== '5000'
+  
+      at TestContext.<anonymous> (file:///tmp/worldatlas-storage-diagnostic738/test/neon-table-storage.test.mjs:85:61)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '5s',
+    expected: '5000',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

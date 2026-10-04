@@ -1,0 +1,189 @@
+{
+  "checked_at_utc": "2026-10-04T11:16:29.942Z",
+  "runtime": "v24.19.0",
+  "environment": "PGlite isolated in-memory PostgreSQL; synthetic fixture, not production",
+  "results": [
+    {
+      "rows": [
+        {
+          "statement_timeout": "5s",
+          "lock_timeout": "1s"
+        }
+      ],
+      "fields": [
+        {
+          "name": "statement_timeout",
+          "dataTypeID": 25
+        },
+        {
+          "name": "lock_timeout",
+          "dataTypeID": 25
+        }
+      ],
+      "command": "SELECT",
+      "affectedRows": 0,
+      "rowCount": 1
+    },
+    {
+      "rows": [
+        {
+          "database_name": "postgres",
+          "role_name": "postgres",
+          "read_only": "on",
+          "statement_timeout": "5s",
+          "lock_timeout": "1s",
+          "endpoint_id": null,
+          "database_bytes": "7610491",
+          "observed_at": "2026-10-04 11:16:29.931+00"
+        }
+      ],
+      "fields": [
+        {
+          "name": "database_name",
+          "dataTypeID": 19
+        },
+        {
+          "name": "role_name",
+          "dataTypeID": 19
+        },
+        {
+          "name": "read_only",
+          "dataTypeID": 25
+        },
+        {
+          "name": "statement_timeout",
+          "dataTypeID": 25
+        },
+        {
+          "name": "lock_timeout",
+          "dataTypeID": 25
+        },
+        {
+          "name": "endpoint_id",
+          "dataTypeID": 25
+        },
+        {
+          "name": "database_bytes",
+          "dataTypeID": 25
+        },
+        {
+          "name": "observed_at",
+          "dataTypeID": 25
+        }
+      ],
+      "command": "SELECT",
+      "affectedRows": 0,
+      "rowCount": 1
+    },
+    {
+      "rows": [
+        {
+          "table_name": "atlas_storage_probe",
+          "relation_kind": "r",
+          "heap_main_bytes": "8192",
+          "toast_total_bytes": "8192",
+          "table_bytes": "16384",
+          "index_bytes": "16384",
+          "total_bytes": "32768",
+          "estimated_live_rows": "0",
+          "estimated_dead_rows": "0",
+          "last_analyze": null,
+          "last_autoanalyze": null
+        }
+      ],
+      "fields": [
+        {
+          "name": "table_name",
+          "dataTypeID": 19
+        },
+        {
+          "name": "relation_kind",
+          "dataTypeID": 18
+        },
+        {
+          "name": "heap_main_bytes",
+          "dataTypeID": 25
+        },
+        {
+          "name": "toast_total_bytes",
+          "dataTypeID": 25
+        },
+        {
+          "name": "table_bytes",
+          "dataTypeID": 25
+        },
+        {
+          "name": "index_bytes",
+          "dataTypeID": 25
+        },
+        {
+          "name": "total_bytes",
+          "dataTypeID": 25
+        },
+        {
+          "name": "estimated_live_rows",
+          "dataTypeID": 25
+        },
+        {
+          "name": "estimated_dead_rows",
+          "dataTypeID": 25
+        },
+        {
+          "name": "last_analyze",
+          "dataTypeID": 25
+        },
+        {
+          "name": "last_autoanalyze",
+          "dataTypeID": 25
+        }
+      ],
+      "command": "SELECT",
+      "affectedRows": 0,
+      "rowCount": 1
+    },
+    {
+      "rows": [
+        {
+          "table_name": "atlas_storage_probe",
+          "index_name": "atlas_storage_probe_pkey",
+          "index_bytes": "16384",
+          "definition": "CREATE UNIQUE INDEX atlas_storage_probe_pkey ON public.atlas_storage_probe USING btree (id)",
+          "valid": true,
+          "ready": true
+        }
+      ],
+      "fields": [
+        {
+          "name": "table_name",
+          "dataTypeID": 19
+        },
+        {
+          "name": "index_name",
+          "dataTypeID": 19
+        },
+        {
+          "name": "index_bytes",
+          "dataTypeID": 25
+        },
+        {
+          "name": "definition",
+          "dataTypeID": 25
+        },
+        {
+          "name": "valid",
+          "dataTypeID": 16
+        },
+        {
+          "name": "ready",
+          "dataTypeID": 16
+        }
+      ],
+      "command": "SELECT",
+      "affectedRows": 0,
+      "rowCount": 1
+    }
+  ],
+  "denied_write_sqlstate": "25006",
+  "rows_preserved": 1,
+  "query_sha256": "dc6568251ea39057495dd71bc0c2598554ad27232268e8b03ce8fa70b32beea4"
+}

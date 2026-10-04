@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "storage-diagnostic-20261004-a9c2",
+  "branch": "engineering/storage-diagnostic-20261004-a9c2",
+  "base_main_commit": "7f67c1118741c0c2dae92c16b895a65ad4d81de3",
+  "github_issue": 738,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Fixed main-only bounded production catalog diagnostic; no mutations/provider changes"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-04T11:17:06.645588+00:00",
+  "completed": [
+    "Implementation and actual isolated PostgreSQL readonly catalog controls",
+    "Exact target/bounds/redaction positive and negative tests"
+  ],
+  "checks": [
+    {
+      "command": "node data/engineering/storage-diagnostic-20261004-a9c2/run-controls.mjs",
+      "status": "passed",
+      "receipt": "data/engineering/storage-diagnostic-20261004-a9c2/tests-receipt-01.json"
+    }
+  ],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/storage-diagnostic-20261004-a9c2/"
+  ],
+  "blockers": [
+    "Actual production measurement awaits independently reviewed, checked, accepted main tool; no secret-bearing dispatch before merge."
+  ],
+  "next_action": "Prepare focused Refs #738 PR, distinct exact-head review and required CI; accepted queue then bounded manual main measurement and sanitized issue evidence.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
