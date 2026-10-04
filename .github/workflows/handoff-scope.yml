@@ -77,6 +77,8 @@ jobs:
             hosted
             data/research-geography-gate.json
             package.json
+            package-lock.json
+            requirements.txt
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'

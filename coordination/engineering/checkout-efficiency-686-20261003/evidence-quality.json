@@ -45,8 +45,8 @@
     },
     {
       "path": ".github/workflows/handoff-scope.yml",
-      "bytes": 5160,
-      "sha256": "4806300b603c0ae853d551c33c4328545878e17e3708d764e24e8dc4affbbee1",
+      "bytes": 5219,
+      "sha256": "f1a862da12996e9524f0974a5c5f085443212c732b676e3fc0d9cf18f31a2e9f",
       "hash_kind": "file-bytes"
     },
     {
@@ -59,6 +59,12 @@
       "path": "test/trusted-workflow-checkouts.test.mjs",
       "bytes": 4202,
       "sha256": "45c374689bc05ae068fb2ac90c97975eb1fb7da3e40466353644b3da1654939d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/checkout-efficiency-686-20261003/sparse-scope.log",
+      "bytes": 6911,
+      "sha256": "fd746e603fc0b378c35d3b966b07abb25f901b8431564c4172381409c1f93b4c",
       "hash_kind": "file-bytes"
     }
   ],
@@ -108,6 +114,10 @@
     },
     {
       "path": "coordination/engineering/checkout-efficiency-686-20261003/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/checkout-efficiency-686-20261003/sparse-scope.log",
       "status": "added"
     }
   ],
