@@ -3,7 +3,7 @@
   "record_kind": "voluntary-legacy-whole-file-change-and-preservation-ledger",
   "issue": 51,
   "author_worker_id": "engineering-night-20261003-7e91f438",
-  "baseline_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+  "baseline_commit": "c1ed367363e243caf522c0179f09bfa185b6bd42",
   "changed_files_excluding_self": [
     {
       "path": "coordination/engineering/storage-recovery-20261004-7e91.json",
@@ -24,46 +24,16 @@
       "sha256": "c98b60c86e2f6e9622e42c02a4613138697e73b6587d01127ab000800ff2e918"
     },
     {
-      "path": "data/engineering/storage-recovery-20261004-7e91/completed-dependencies-cleanup.json",
-      "status": "A",
-      "bytes": 368,
-      "sha256": "2b61c01f9247cab55e267835b2a27046926143ff216cc68fe8d93d426a8bec8d"
-    },
-    {
       "path": "data/engineering/storage-recovery-20261004-7e91/completed-job-housekeeping.json",
       "status": "A",
       "bytes": 1624,
       "sha256": "d54eb1d9c680488a9a6f4fa304dd5b154ca12f6dfdfd94e70fb93801f808f034"
     },
     {
-      "path": "data/engineering/storage-recovery-20261004-7e91/file-ledger-first-reviewed-head.json",
-      "status": "A",
-      "bytes": 11498,
-      "sha256": "1d8600c58545aba5e68568a85e99aaced28fbc512268c97fb05a4f9da2c0e0fc"
-    },
-    {
-      "path": "data/engineering/storage-recovery-20261004-7e91/first-head-bounded-queue.jsonl",
-      "status": "A",
-      "bytes": 815,
-      "sha256": "888d94c2b9a0733b1ea99649a1a80ffdf054b400fc021e1a8caf9647c3990e5f"
-    },
-    {
-      "path": "data/engineering/storage-recovery-20261004-7e91/first-head-premerge-renew.json",
-      "status": "A",
-      "bytes": 827,
-      "sha256": "6fc9535fee6e9a376ed10166d2b0429b62be09add550706c1b895197922b59a7"
-    },
-    {
       "path": "data/engineering/storage-recovery-20261004-7e91/live-read-renew.json",
       "status": "A",
       "bytes": 826,
       "sha256": "8ea2e66e92982dac9f8eb8818ecef4d47489d4964c8fb31cf12cfd4bec033f69"
-    },
-    {
-      "path": "data/engineering/storage-recovery-20261004-7e91/main-incorporation.json",
-      "status": "A",
-      "bytes": 467,
-      "sha256": "329677a72c153b15ab4977b0cf3e7c8ee89c9c6178b3ab5c4d0ddfffa0da30b8"
     },
     {
       "path": "data/engineering/storage-recovery-20261004-7e91/native-target-image-pull.log",
@@ -183,7 +153,7 @@
       "path": "data/engineering/storage-recovery-20261004-7e91/reproduce-file-ledger.mjs",
       "status": "A",
       "bytes": 2346,
-      "sha256": "1fa806ed2f223a82409ac1da08304106d88e5ad4972e406cd93a651ff96a03d9"
+      "sha256": "b960435e6fffdf6cd8d668a57fa14bc30c771016f2f4dcaa89da3a300ba4a2ae"
     },
     {
       "path": "data/engineering/storage-recovery-20261004-7e91/resource-failure-and-correction.json",

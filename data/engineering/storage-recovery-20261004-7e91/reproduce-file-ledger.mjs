@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-const base='c1ed367363e243caf522c0179f09bfa185b6bd42',output='data/engineering/storage-recovery-20261004-7e91/file-ledger.json';
+const base='e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2',output='data/engineering/storage-recovery-20261004-7e91/file-ledger.json';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const rows=execFileSync('git',['diff','--name-status','--no-renames',base],{encoding:'utf8'}).trim().split('\n').filter(Boolean).map(line=>{const [status,file]=line.split('\t');if(file===output)return null;const raw=fs.readFileSync(file);return {path:file,status,bytes:raw.length,sha256:sha(raw),...(status!=='A'?{original_sha256:sha(execFileSync('git',['show',base+':'+file],{maxBuffer:128*1024*1024}))}: {})};}).filter(Boolean);
 const protectedPaths=['postgres/schema.sql','postgres/migrations/0001_temporal_geography.sql','postgres/migrations/0002_footprint_versions.sql',...execFileSync('git',['ls-tree','-r','--name-only',base,'drizzle'],{encoding:'utf8'}).trim().split('\n').filter(p=>/^drizzle\/000[0-9]_.*\.sql$/.test(p)), 'hosted/storage-export-v2-contract.js','hosted/storage-export-v2.js','scripts/export-hosted-storage-v2.mjs','scripts/restore-postgres-storage-v2.mjs','data/hosted-catalog/index.json','data/research-geography-gate.json','data/world-index.json','data/hierarchy.json'];

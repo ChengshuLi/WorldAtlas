@@ -161,3 +161,37 @@ test('unchanged authored evidence survives unrelated main advance, while current
   f.manifest.metrics[0].vintage = 'current';
   assert.throws(() => validate(f), /actual PR-base vintage/);
 });
+
+test('trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines', async () => {
+  const f=fixture(), prefix='research/geography/synthetic/', manifestFile=prefix+'evidence-quality.json', registryFile=prefix+'registry.geojson';
+  const prior=Buffer.from(JSON.stringify({exact_subjects:['5901']}));
+  const registry=Buffer.from(JSON.stringify({type:'FeatureCollection',features:[{type:'Feature',id:'StatCan:5901',geometry:null,
+    properties:{id:'StatCan:5901',source_property:'CDUID',source_value:'5901'}}]}));
+  f.pr.head.ref='geography/synthetic';f.spec.mode='geography';f.spec.owned_paths=[prefix];
+  f.spec.evidence_quality={...f.spec.evidence_quality,manifest_path:manifestFile,subject_ids:['StatCan:5901']};
+  f.issue.body=`<!-- worldatlas-work:v1\n${JSON.stringify(f.spec)}\n-->`;
+  f.reservation={...f.reservation,owned_paths:[prefix]};
+  f.manifest.stages={research:'complete',implementation:'not-proposed',geographic_approval:'unapproved'};
+  f.manifest.lane='geography';f.manifest.subject_ids=['StatCan:5901'];f.manifest.subject_ids_sha256=subjectsHash(['StatCan:5901']);
+  f.manifest.baseline={commit,files:[desc('prior-audit.json',prior)],pins:{},subject_inventory:{version:1,basis:'prior-evidence',
+    path:'prior-audit.json',json_pointer:'/exact_subjects',id_prefix:'StatCan:',source_property:'CDUID',source_id:'source',registry_path:registryFile}};
+  f.manifest.sources=[{id:'source',url:'https://example.org/source',role:'Original census roster',vintage:'2021',retrieved_at:'2026-10-03',
+    license:{status:'unknown',terms:'Not independently inspected'},retention:'restoration-only',verification:'unverified',
+    temporal_status:'reference',restoration:'Restore original archive',limit:'Original source not checked'}];
+  f.manifest.outputs=[desc(registryFile,registry)];f.manifest.metrics=[];f.manifest.summaries=[];f.manifest.metric_bindings=[];
+  f.files=[{filename:registryFile,status:'added'},{filename:manifestFile,status:'added'}];
+  f.manifest.change_receipts=f.files.map(file=>({path:file.filename,status:'added'}));
+  const raw=new Map([[manifestFile,Buffer.from(JSON.stringify(f.manifest))],['prior-audit.json',prior],[registryFile,registry]]);
+  const tree=[...raw].map(([path,bytes])=>({path,type:'blob',mode:'100644',sha:sha256(bytes),size:bytes.length}));
+  const api=async route=>{
+    if(route.includes('/git/commits/'))return {tree:{sha:'tree'}};
+    if(route.includes('/git/trees/'))return {truncated:false,tree};
+    if(route.includes('/git/blobs/')){const row=tree.find(row=>row.sha===route.split('/').pop());return {encoding:'base64',content:raw.get(row.path).toString('base64')};}
+    if(route.includes('/compare/'))return {status:'ahead'};
+    throw Error('Unexpected route');
+  };
+  const r=await checkPremergeEvidence({...f,api,repo:'test/repo',policy});
+  assert.equal(r.status,'limited');assert.equal(r.change_files_checked,2);assert.match(r.limits.join('\n'),/retained prior evidence/);
+  await assert.rejects(()=>checkPremergeEvidence({...f,repo:'test/repo',policy,
+    api:route=>route.includes('/compare/')?Promise.resolve({status:'diverged'}):api(route)}),/not an ancestor/);
+});

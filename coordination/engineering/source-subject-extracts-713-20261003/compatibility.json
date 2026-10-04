@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "method_id": "compatibility",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "actual_subject_count": 10,
+  "original": {
+    "path": "data/regional-review/bc-administrative-remainders-followup-2026/cd-assessments.json",
+    "bytes": 523200,
+    "sha256": "ca83ecaefdb4e660e4e4a830bdf5016f2ec4ebd79bbd3e419d04be8c786802b3",
+    "hash_kind": "file-bytes"
+  },
+  "baseline_commit": "24629e5918a144a1979db80ba7012baea42036e7",
+  "registry": {
+    "path": "coordination/engineering/source-subject-extracts-713-20261003/registry-from-pr678.geojson",
+    "bytes": 1762,
+    "sha256": "d2bb8add37b76c58a603534e3aae9937139bb3c5ec08c08636d4e0993aa95625",
+    "hash_kind": "file-bytes"
+  },
+  "registry_origin": {
+    "pr": 678,
+    "head": "baded97d71982436656b17de34d87172e2642cd7",
+    "path": "research/geography/bc-remainders-reproduction-followup/source-subject-registry.geojson"
+  },
+  "negative_controls_rejected": 4,
+  "result": {
+    "status": "limited",
+    "checked": [
+      "24629e5918a144a1979db80ba7012baea42036e7:data/regional-review/bc-administrative-remainders-followup-2026/cd-assessments.json",
+      "candidate:coordination/engineering/source-subject-extracts-713-20261003/registry-from-pr678.geojson"
+    ],
+    "limits": [
+      "statcan: Original source membership/geometry not independently checked in this probe",
+      "statcan: factual verification incomplete",
+      "Subject inventory uses retained prior evidence (data/regional-review/bc-administrative-remainders-followup-2026/cd-assessments.json); original source membership and geometry were not independently validated by this inventory check"
+    ],
+    "factual_validation": "Requires independent source/method review; hashes do not establish truth"
+  },
+  "limits": [
+    "Identity-only compatibility probe; not a full validation of PR678, original source extraction, geography, review or publication"
+  ]
+}

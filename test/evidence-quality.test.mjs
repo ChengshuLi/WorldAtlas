@@ -70,3 +70,55 @@ test('paths and symlinks cannot escape candidate reader', () => {
     assert.deepEqual(repositoryReader(dir)('real','candidate'),bytes);
   } finally {fs.rmSync(dir,{recursive:true,force:true});}
 });
+
+function inventoryFixture() {
+  const m = fixture();
+  const record = Buffer.from(JSON.stringify({exact_subjects:['5901','5933']}));
+  const registry = Buffer.from(JSON.stringify({type:'FeatureCollection', features:['5901','5933'].map(value => ({
+    type:'Feature', id:`StatisticsCanada:2021:CD:${value}`, geometry:null,
+    properties:{id:`StatisticsCanada:2021:CD:${value}`, source_property:'CDUID', source_value:value}
+  }))}));
+  const d = (path, raw) => ({path, bytes:raw.length, sha256:sha256(raw), hash_kind:'file-bytes'});
+  m.lane='geography'; m.subject_ids=['StatisticsCanada:2021:CD:5901','StatisticsCanada:2021:CD:5933'];
+  m.subject_ids_sha256=subjectsHash(m.subject_ids); m.metrics=[]; m.summaries=[];
+  m.baseline.files=[d('prior-audit.json',record)]; m.baseline.pins={};
+  m.baseline.subject_inventory={version:1,basis:'prior-evidence',path:'prior-audit.json',json_pointer:'/exact_subjects',
+    id_prefix:'StatisticsCanada:2021:CD:',source_property:'CDUID',source_id:'statcan',registry_path:'registry.geojson'};
+  m.outputs=[d('registry.geojson',registry)];
+  m.sources=[{id:'statcan',url:'https://example.org/statcan',role:'census boundaries',vintage:'2021',retrieved_at:'2026-10-03',
+    license:{status:'unknown',terms:'Original archive not checked'},retention:'restoration-only',verification:'unverified',
+    temporal_status:'reference',restoration:'Retrieve original source',limit:'Original large source is not checked'}];
+  return {m,record,registry,readFile:(name,vintage)=>{
+    if(name==='prior-audit.json'&&vintage===commit)return record;
+    if(name==='registry.geojson'&&vintage==='candidate')return registry;
+    throw Error('Wrong immutable source or candidate vintage');
+  }};
+}
+test('new identity registry is checked against retained prior roster without claiming source or geometry approval', () => {
+  const f=inventoryFixture(), r=validateEvidence(f.m,{readFile:f.readFile});
+  assert.equal(r.status,'limited');
+  assert.match(r.limits.join('\n'),/original source membership and geometry were not independently validated/);
+  assert.equal(r.checked.length,2);
+  // Schema-only callers still report the weaker prior-evidence basis, never verified source membership.
+  assert.equal(validateEvidence(f.m).status,'limited');
+});
+test('prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority', () => {
+  const mutations=[m=>m.baseline.subject_inventory.path='registry.geojson',
+    m=>m.baseline.subject_inventory.json_pointer='/missing',
+    m=>m.baseline.subject_inventory.id_prefix='invented:',
+    m=>m.baseline.subject_inventory.source_id='absent',
+    m=>m.baseline.subject_inventory.basis='original-source',
+    m=>m.baseline.subject_files={},m=>m.outputs=[],m=>m.stages.geographic_approval='approved'];
+  for(const mutate of mutations){const f=inventoryFixture();mutate(f.m);assert.throws(()=>validateEvidence(f.m,{readFile:f.readFile}));}
+});
+test('identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes', () => {
+  for(const mutate of [r=>r.features[1]=r.features[0],r=>r.features[0].geometry={type:'Point',coordinates:[0,0]},
+    r=>r.features[0].properties.source_value='9999',r=>r.features[0].properties.source_property='wrong']){
+    const f=inventoryFixture(),r=JSON.parse(f.registry); mutate(r); const bytes=Buffer.from(JSON.stringify(r));
+    f.m.outputs[0].bytes=bytes.length;f.m.outputs[0].sha256=sha256(bytes);
+    assert.throws(()=>validateEvidence(f.m,{readFile:(name,vintage)=>name==='registry.geojson'?bytes:f.readFile(name,vintage)}),/registry/);
+  }
+  const f=inventoryFixture(),raw=Buffer.from(JSON.stringify({exact_subjects:['5901','5901']}));
+  f.m.baseline.files[0].bytes=raw.length;f.m.baseline.files[0].sha256=sha256(raw);
+  assert.throws(()=>validateEvidence(f.m,{readFile:(name,vintage)=>name==='prior-audit.json'?raw:f.readFile(name,vintage)}),/unique/);
+});
