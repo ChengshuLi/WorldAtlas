@@ -1,0 +1,1837 @@
+﻿2026-10-04T00:36:49.1156900Z Current runner version: '2.337.0'
+2026-10-04T00:36:49.1193308Z ##[group]Runner Image Provisioner
+2026-10-04T00:36:49.1194763Z Hosted Compute Agent
+2026-10-04T00:36:49.1196386Z Version: 20260901.588
+2026-10-04T00:36:49.1197592Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-04T00:36:49.1198899Z Build Date: 2026-09-01T19:56:44Z
+2026-10-04T00:36:49.1200253Z Worker ID: {4aadac7e-3023-4d31-a48f-7cc5bf20b58d}
+2026-10-04T00:36:49.1201494Z Azure Region: westus2
+2026-10-04T00:36:49.1202602Z ##[endgroup]
+2026-10-04T00:36:49.1205120Z ##[group]Operating System
+2026-10-04T00:36:49.1206589Z Ubuntu
+2026-10-04T00:36:49.1207708Z 24.04.5
+2026-10-04T00:36:49.1208614Z LTS
+2026-10-04T00:36:49.1209434Z ##[endgroup]
+2026-10-04T00:36:49.1210496Z ##[group]Runner Image
+2026-10-04T00:36:49.1211497Z Image: ubuntu-24.04
+2026-10-04T00:36:49.1212579Z Version: 20260927.320.1
+2026-10-04T00:36:49.1214772Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-04T00:36:49.1218064Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+2026-10-04T00:36:49.1219802Z ##[endgroup]
+2026-10-04T00:36:49.1222120Z ##[group]GITHUB_TOKEN Permissions
+2026-10-04T00:36:49.1224827Z Contents: read
+2026-10-04T00:36:49.1226362Z Metadata: read
+2026-10-04T00:36:49.1227351Z PullRequests: read
+2026-10-04T00:36:49.1228373Z ##[endgroup]
+2026-10-04T00:36:49.1231509Z Secret source: Actions
+2026-10-04T00:36:49.1232973Z Cache mode: write
+2026-10-04T00:36:49.1234222Z Prepare workflow directory
+2026-10-04T00:36:49.1927582Z Prepare all required actions
+2026-10-04T00:36:49.2002643Z Getting action download info
+2026-10-04T00:36:49.6283781Z Download action repository 'actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+2026-10-04T00:36:49.7573381Z Download action repository 'actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38' (SHA:249970729cb0ef3589644e2896645e5dc5ba9c38)
+2026-10-04T00:36:49.8598334Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-04T00:36:50.0579717Z Complete job name: regression (2)
+2026-10-04T00:36:50.1434241Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+2026-10-04T00:36:50.1435342Z with:
+2026-10-04T00:36:50.1436086Z   ref: 83887373aebc84bd4ee30a33d1007f8838c68715
+2026-10-04T00:36:50.1436733Z   persist-credentials: false
+2026-10-04T00:36:50.1437275Z   repository: ChengshuLi/WorldAtlas
+2026-10-04T00:36:50.1441291Z   token: ***
+2026-10-04T00:36:50.1441734Z   ssh-strict: true
+2026-10-04T00:36:50.1442173Z   ssh-user: git
+2026-10-04T00:36:50.1442602Z   clean: true
+2026-10-04T00:36:50.1443052Z   sparse-checkout-cone-mode: true
+2026-10-04T00:36:50.1443592Z   fetch-depth: 1
+2026-10-04T00:36:50.1444030Z   fetch-tags: false
+2026-10-04T00:36:50.1444480Z   show-progress: true
+2026-10-04T00:36:50.1444931Z   lfs: false
+2026-10-04T00:36:50.1445349Z   submodules: false
+2026-10-04T00:36:50.1446368Z   set-safe-directory: true
+2026-10-04T00:36:50.1446903Z   allow-unsafe-pr-checkout: false
+2026-10-04T00:36:50.1447842Z ##[endgroup]
+2026-10-04T00:36:50.2862596Z Syncing repository: ChengshuLi/WorldAtlas
+2026-10-04T00:36:50.2866285Z ##[group]Getting Git version info
+2026-10-04T00:36:50.2891050Z Working directory is '/home/runner/work/WorldAtlas/WorldAtlas'
+2026-10-04T00:36:50.2894667Z [command]/usr/bin/git version
+2026-10-04T00:36:50.2896294Z git version 2.55.0
+2026-10-04T00:36:50.2907011Z ##[endgroup]
+2026-10-04T00:36:50.2916577Z Temporarily overriding HOME='/home/runner/work/_temp/e86797f7-2994-4463-818a-b96bed04b17c' before making global git config changes
+2026-10-04T00:36:50.2919573Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-04T00:36:50.2921761Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas
+2026-10-04T00:36:50.2947477Z Deleting the contents of '/home/runner/work/WorldAtlas/WorldAtlas'
+2026-10-04T00:36:50.2953557Z ##[group]Determining repository object format
+2026-10-04T00:36:50.2979521Z ##[endgroup]
+2026-10-04T00:36:50.2981249Z ##[group]Initializing the repository
+2026-10-04T00:36:50.2983142Z [command]/usr/bin/git init /home/runner/work/WorldAtlas/WorldAtlas
+2026-10-04T00:36:50.3217942Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-04T00:36:50.3220213Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-04T00:36:50.3222961Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-04T00:36:50.3224572Z hint: call:
+2026-10-04T00:36:50.3226329Z hint:
+2026-10-04T00:36:50.3227634Z hint: 	git config --global init.defaultBranch <name>
+2026-10-04T00:36:50.3229652Z hint:
+2026-10-04T00:36:50.3246735Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-04T00:36:50.3290008Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-04T00:36:50.3303604Z hint:
+2026-10-04T00:36:50.3359352Z hint: 	git branch -m <name>
+2026-10-04T00:36:50.3360721Z hint:
+2026-10-04T00:36:50.3410269Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-04T00:36:50.3412294Z Initialized empty Git repository in /home/runner/work/WorldAtlas/WorldAtlas/.git/
+2026-10-04T00:36:50.3415252Z [command]/usr/bin/git remote add origin https://github.com/ChengshuLi/WorldAtlas
+2026-10-04T00:36:50.3427075Z ##[endgroup]
+2026-10-04T00:36:50.3428380Z ##[group]Disabling automatic garbage collection
+2026-10-04T00:36:50.3429463Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-04T00:36:50.3431796Z ##[endgroup]
+2026-10-04T00:36:50.3433022Z ##[group]Setting up auth
+2026-10-04T00:36:50.3433894Z Removing SSH command configuration
+2026-10-04T00:36:50.3435164Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-04T00:36:50.3439280Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-04T00:36:50.4160053Z Removing HTTP extra header
+2026-10-04T00:36:50.4259603Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-04T00:36:50.4265992Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-04T00:36:50.4349039Z Removing includeIf entries pointing to credentials config files
+2026-10-04T00:36:50.4358564Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-04T00:36:50.4404462Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-04T00:36:50.4683464Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-04T00:36:50.4734148Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path /home/runner/work/_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:36:50.4780725Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:36:50.4833191Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:36:50.4884331Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:36:50.4922160Z ##[endgroup]
+2026-10-04T00:36:50.4923812Z ##[group]Fetching the repository
+2026-10-04T00:36:50.4933348Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 83887373aebc84bd4ee30a33d1007f8838c68715
+2026-10-04T00:37:17.6087851Z From https://github.com/ChengshuLi/WorldAtlas
+2026-10-04T00:37:17.6089570Z  * branch            83887373aebc84bd4ee30a33d1007f8838c68715 -> FETCH_HEAD
+2026-10-04T00:37:17.6118887Z [command]/usr/bin/git rev-parse --verify --quiet 83887373aebc84bd4ee30a33d1007f8838c68715^{object}
+2026-10-04T00:37:17.6158200Z 83887373aebc84bd4ee30a33d1007f8838c68715
+2026-10-04T00:37:17.6191486Z ##[endgroup]
+2026-10-04T00:37:17.6192610Z ##[group]Determining the checkout info
+2026-10-04T00:37:17.6193687Z ##[endgroup]
+2026-10-04T00:37:17.6194480Z [command]/usr/bin/git sparse-checkout disable
+2026-10-04T00:37:17.6247587Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-04T00:37:17.6283173Z ##[group]Checking out the ref
+2026-10-04T00:37:17.6288203Z [command]/usr/bin/git checkout --progress --force 83887373aebc84bd4ee30a33d1007f8838c68715
+2026-10-04T00:37:19.1311143Z Updating files:  44% (2863/6448)
+2026-10-04T00:37:19.2219151Z Updating files:  45% (2902/6448)
+2026-10-04T00:37:19.2348362Z Updating files:  46% (2967/6448)
+2026-10-04T00:37:19.2474503Z Updating files:  47% (3031/6448)
+2026-10-04T00:37:19.2616956Z Updating files:  48% (3096/6448)
+2026-10-04T00:37:19.2727190Z Updating files:  49% (3160/6448)
+2026-10-04T00:37:19.2832165Z Updating files:  50% (3224/6448)
+2026-10-04T00:37:19.2963125Z Updating files:  51% (3289/6448)
+2026-10-04T00:37:19.3568724Z Updating files:  52% (3353/6448)
+2026-10-04T00:37:19.3908165Z Updating files:  53% (3418/6448)
+2026-10-04T00:37:19.4336640Z Updating files:  54% (3482/6448)
+2026-10-04T00:37:19.4811697Z Updating files:  55% (3547/6448)
+2026-10-04T00:37:19.5146108Z Updating files:  56% (3611/6448)
+2026-10-04T00:37:19.5598049Z Updating files:  57% (3676/6448)
+2026-10-04T00:37:19.6430551Z Updating files:  58% (3740/6448)
+2026-10-04T00:37:19.6680181Z Updating files:  58% (3797/6448)
+2026-10-04T00:37:19.7648138Z Updating files:  59% (3805/6448)
+2026-10-04T00:37:19.8623010Z Updating files:  60% (3869/6448)
+2026-10-04T00:37:19.9013187Z Updating files:  61% (3934/6448)
+2026-10-04T00:37:19.9428906Z Updating files:  62% (3998/6448)
+2026-10-04T00:37:19.9888093Z Updating files:  63% (4063/6448)
+2026-10-04T00:37:20.0088069Z Updating files:  64% (4127/6448)
+2026-10-04T00:37:20.0410773Z Updating files:  65% (4192/6448)
+2026-10-04T00:37:20.1222686Z Updating files:  66% (4256/6448)
+2026-10-04T00:37:20.2713465Z Updating files:  67% (4321/6448)
+2026-10-04T00:37:20.3408791Z Updating files:  68% (4385/6448)
+2026-10-04T00:37:20.3725735Z Updating files:  69% (4450/6448)
+2026-10-04T00:37:20.3916172Z Updating files:  70% (4514/6448)
+2026-10-04T00:37:20.4409906Z Updating files:  71% (4579/6448)
+2026-10-04T00:37:20.4792370Z Updating files:  72% (4643/6448)
+2026-10-04T00:37:20.6418413Z Updating files:  73% (4708/6448)
+2026-10-04T00:37:20.6577875Z Updating files:  73% (4760/6448)
+2026-10-04T00:37:20.8109669Z Updating files:  74% (4772/6448)
+2026-10-04T00:37:20.8256458Z Updating files:  75% (4836/6448)
+2026-10-04T00:37:20.8774392Z Updating files:  76% (4901/6448)
+2026-10-04T00:37:21.0386839Z Updating files:  77% (4965/6448)
+2026-10-04T00:37:21.3866901Z Updating files:  78% (5030/6448)
+2026-10-04T00:37:21.6458793Z Updating files:  79% (5094/6448)
+2026-10-04T00:37:21.9356769Z Updating files:  80% (5159/6448)
+2026-10-04T00:37:22.6489744Z Updating files:  81% (5223/6448)
+2026-10-04T00:37:22.6861423Z Updating files:  81% (5280/6448)
+2026-10-04T00:37:22.9561014Z Updating files:  82% (5288/6448)
+2026-10-04T00:37:23.4571194Z Updating files:  83% (5352/6448)
+2026-10-04T00:37:23.6485236Z Updating files:  84% (5417/6448)
+2026-10-04T00:37:23.9152602Z Updating files:  84% (5441/6448)
+2026-10-04T00:37:24.4508151Z Updating files:  85% (5481/6448)
+2026-10-04T00:37:24.5127772Z Updating files:  86% (5546/6448)
+2026-10-04T00:37:24.6544919Z Updating files:  87% (5610/6448)
+2026-10-04T00:37:24.8506107Z Updating files:  87% (5627/6448)
+2026-10-04T00:37:24.8556596Z Updating files:  88% (5675/6448)
+2026-10-04T00:37:24.8778314Z Updating files:  89% (5739/6448)
+2026-10-04T00:37:24.9491176Z Updating files:  90% (5804/6448)
+2026-10-04T00:37:24.9550389Z Updating files:  91% (5868/6448)
+2026-10-04T00:37:24.9622763Z Updating files:  92% (5933/6448)
+2026-10-04T00:37:24.9664698Z Updating files:  93% (5997/6448)
+2026-10-04T00:37:24.9717494Z Updating files:  94% (6062/6448)
+2026-10-04T00:37:24.9770379Z Updating files:  95% (6126/6448)
+2026-10-04T00:37:24.9821114Z Updating files:  96% (6191/6448)
+2026-10-04T00:37:24.9866477Z Updating files:  97% (6255/6448)
+2026-10-04T00:37:24.9911149Z Updating files:  98% (6320/6448)
+2026-10-04T00:37:24.9964275Z Updating files:  99% (6384/6448)
+2026-10-04T00:37:24.9966065Z Updating files: 100% (6448/6448)
+2026-10-04T00:37:24.9966862Z Updating files: 100% (6448/6448), done.
+2026-10-04T00:37:25.0979433Z Note: switching to '83887373aebc84bd4ee30a33d1007f8838c68715'.
+2026-10-04T00:37:25.0980327Z 
+2026-10-04T00:37:25.0981000Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-04T00:37:25.0982040Z changes and commit them, and you can discard any commits you make in this
+2026-10-04T00:37:25.0983062Z state without impacting any branches by switching back to a branch.
+2026-10-04T00:37:25.0983731Z 
+2026-10-04T00:37:25.0984221Z If you want to create a new branch to retain commits you create, you may
+2026-10-04T00:37:25.0985162Z do so (now or later) by using -c with the switch command. Example:
+2026-10-04T00:37:25.0986397Z 
+2026-10-04T00:37:25.0992137Z   git switch -c <new-branch-name>
+2026-10-04T00:37:25.0992966Z 
+2026-10-04T00:37:25.0993323Z Or undo this operation with:
+2026-10-04T00:37:25.0993814Z 
+2026-10-04T00:37:25.0994136Z   git switch -
+2026-10-04T00:37:25.0994526Z 
+2026-10-04T00:37:25.0995110Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-04T00:37:25.1002747Z 
+2026-10-04T00:37:25.1003316Z HEAD is now at 8388737 Pin the exact successful CI attempt through final merge
+2026-10-04T00:37:25.1239676Z ##[endgroup]
+2026-10-04T00:37:25.1329276Z [command]/usr/bin/git log -1 --format=%H
+2026-10-04T00:37:25.1347468Z 83887373aebc84bd4ee30a33d1007f8838c68715
+2026-10-04T00:37:25.1367837Z ##[group]Removing auth
+2026-10-04T00:37:25.1372135Z Removing SSH command configuration
+2026-10-04T00:37:25.1373114Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-04T00:37:25.1425721Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-04T00:37:25.1688165Z Removing HTTP extra header
+2026-10-04T00:37:25.1689322Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-04T00:37:25.1733464Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-04T00:37:25.1996636Z Removing includeIf entries pointing to credentials config files
+2026-10-04T00:37:25.2007110Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-04T00:37:25.2040745Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path
+2026-10-04T00:37:25.2041883Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path
+2026-10-04T00:37:25.2043109Z includeif.gitdir:/github/workspace/.git.path
+2026-10-04T00:37:25.2046408Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-04T00:37:25.2066735Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path
+2026-10-04T00:37:25.2116687Z /home/runner/work/_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:37:25.2126996Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path /home/runner/work/_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:37:25.3386724Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path
+2026-10-04T00:37:25.3420408Z /home/runner/work/_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:37:25.3434440Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:37:25.4957635Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-04T00:37:25.5053043Z /github/runner_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:37:25.5067684Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:37:25.8441869Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-04T00:37:25.8459339Z /github/runner_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:37:25.8468322Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config
+2026-10-04T00:37:26.0530064Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-04T00:37:26.0795724Z Removing credentials config '/home/runner/work/_temp/git-credentials-b89cba55-9c23-40a8-86a4-7076399081da.config'
+2026-10-04T00:37:26.5860029Z ##[endgroup]
+2026-10-04T00:37:27.3025760Z ##[group]Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+2026-10-04T00:37:27.3026192Z with:
+2026-10-04T00:37:27.3026414Z   node-version: 24
+2026-10-04T00:37:27.3026633Z   check-latest: false
+2026-10-04T00:37:27.3029452Z   token: ***
+2026-10-04T00:37:27.3029678Z   package-manager-cache: true
+2026-10-04T00:37:27.3029931Z ##[endgroup]
+2026-10-04T00:37:27.7447886Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+2026-10-04T00:37:27.7448945Z ##[group]Environment details
+2026-10-04T00:37:28.2707512Z node: v24.21.0
+2026-10-04T00:37:28.2708527Z npm: 11.19.0
+2026-10-04T00:37:28.2709037Z yarn: 1.22.22
+2026-10-04T00:37:28.2710560Z ##[endgroup]
+2026-10-04T00:37:28.2902795Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-10-04T00:37:28.2903249Z with:
+2026-10-04T00:37:28.2903459Z   python-version: 3.12
+2026-10-04T00:37:28.2903709Z   check-latest: false
+2026-10-04T00:37:28.2906774Z   token: ***
+2026-10-04T00:37:28.2907009Z   update-environment: true
+2026-10-04T00:37:28.2907267Z   allow-prereleases: false
+2026-10-04T00:37:28.2907501Z   freethreaded: false
+2026-10-04T00:37:28.2907721Z ##[endgroup]
+2026-10-04T00:37:28.4372693Z ##[group]Installed versions
+2026-10-04T00:37:28.4479084Z (node:2202) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-04T00:37:28.4480561Z Successfully set up CPython (3.12.14)
+2026-10-04T00:37:28.4496609Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-04T00:37:28.4500616Z ##[endgroup]
+2026-10-04T00:37:28.4699052Z ##[group]Run npm ci --no-audit --no-fund
+2026-10-04T00:37:28.4699655Z [36;1mnpm ci --no-audit --no-fund[0m
+2026-10-04T00:37:28.5141703Z shell: /usr/bin/bash -e {0}
+2026-10-04T00:37:28.5142007Z env:
+2026-10-04T00:37:28.5142308Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:28.5142802Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-04T00:37:28.5143254Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:28.5143661Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:28.5144054Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:28.5144673Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-04T00:37:28.5145006Z ##[endgroup]
+2026-10-04T00:37:31.7232224Z npm warn deprecated geographiclib@1.48.0: This package has been split into geographic-geodesic + geographiclib-dms; use one or both of these instead of geographiclib.  WARNING: there's a potential buffer overrun on this package.  SWITCH TO THE NEW PACKAGES NOW.
+2026-10-04T00:37:32.1412993Z npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.hirok.io
+2026-10-04T00:37:32.1558056Z npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.hirok.io
+2026-10-04T00:37:46.1545347Z 
+2026-10-04T00:37:46.1546480Z added 322 packages in 18s
+2026-10-04T00:37:46.1568603Z npm warn install-scripts 7 packages have install scripts not yet covered by allowScripts:
+2026-10-04T00:37:46.1570119Z npm warn install-scripts   esbuild@0.18.20 (postinstall: node install.js)
+2026-10-04T00:37:46.1573646Z npm warn install-scripts   better-sqlite3@13.0.3 (install: node-gyp rebuild)
+2026-10-04T00:37:46.1580179Z npm warn install-scripts   esbuild@0.25.12 (postinstall: node install.js)
+2026-10-04T00:37:46.1581500Z npm warn install-scripts   esbuild@0.28.2 (postinstall: node install.js)
+2026-10-04T00:37:46.1582942Z npm warn install-scripts   msgpackr-extract@3.0.4 (install: node-gyp-build-optional-packages)
+2026-10-04T00:37:46.1584388Z npm warn install-scripts   workerd@1.20261001.1 (postinstall: node install.js)
+2026-10-04T00:37:46.1585987Z npm warn install-scripts   esbuild@0.28.1 (postinstall: node install.js)
+2026-10-04T00:37:46.1598363Z npm warn install-scripts
+2026-10-04T00:37:46.1599735Z npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+2026-10-04T00:37:46.2268348Z ##[group]Run python -m pip install -r requirements.txt
+2026-10-04T00:37:46.2268818Z [36;1mpython -m pip install -r requirements.txt[0m
+2026-10-04T00:37:46.2353971Z shell: /usr/bin/bash -e {0}
+2026-10-04T00:37:46.2354280Z env:
+2026-10-04T00:37:46.2354574Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:46.2355045Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-04T00:37:46.2355805Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:46.2356234Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:46.2356640Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:46.2357045Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-04T00:37:46.2357378Z ##[endgroup]
+2026-10-04T00:37:48.0072163Z Collecting numpy==2.3.5 (from -r requirements.txt (line 2))
+2026-10-04T00:37:48.0742131Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-10-04T00:37:48.2599411Z Collecting shapely==2.1.2 (from -r requirements.txt (line 3))
+2026-10-04T00:37:48.2672373Z   Downloading shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.8 kB)
+2026-10-04T00:37:48.4130671Z Collecting pyproj==3.7.2 (from -r requirements.txt (line 4))
+2026-10-04T00:37:48.4218607Z   Downloading pyproj-3.7.2-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (31 kB)
+2026-10-04T00:37:48.5704307Z Collecting rasterio==1.4.3 (from -r requirements.txt (line 5))
+2026-10-04T00:37:48.5792724Z   Downloading rasterio-1.4.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.1 kB)
+2026-10-04T00:37:48.8789218Z Collecting scipy==1.17.0 (from -r requirements.txt (line 6))
+2026-10-04T00:37:48.8854256Z   Downloading scipy-1.17.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-10-04T00:37:48.9298383Z Collecting certifi (from pyproj==3.7.2->-r requirements.txt (line 4))
+2026-10-04T00:37:48.9365990Z   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+2026-10-04T00:37:48.9546905Z Collecting affine (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-04T00:37:48.9612935Z   Downloading affine-3.0.1-py3-none-any.whl.metadata (4.5 kB)
+2026-10-04T00:37:48.9804534Z Collecting attrs (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-04T00:37:48.9870764Z   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+2026-10-04T00:37:49.0090801Z Collecting click>=4.0 (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-04T00:37:49.0160602Z   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+2026-10-04T00:37:49.0331612Z Collecting cligj>=0.5 (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-04T00:37:49.0398483Z   Downloading cligj-0.7.2-py3-none-any.whl.metadata (5.0 kB)
+2026-10-04T00:37:49.0554731Z Collecting click-plugins (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-04T00:37:49.0630267Z   Downloading click_plugins-1.1.1.2-py2.py3-none-any.whl.metadata (6.5 kB)
+2026-10-04T00:37:49.0928103Z Collecting pyparsing (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-04T00:37:49.0998139Z   Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+2026-10-04T00:37:49.1154526Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-10-04T00:37:49.4107091Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 60.3 MB/s  0:00:00
+2026-10-04T00:37:49.4175419Z Downloading shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.1 MB)
+2026-10-04T00:37:49.4390225Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 154.6 MB/s  0:00:00
+2026-10-04T00:37:49.4461419Z Downloading pyproj-3.7.2-cp312-cp312-manylinux_2_28_x86_64.whl (9.6 MB)
+2026-10-04T00:37:49.4957254Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.6/9.6 MB 201.9 MB/s  0:00:00
+2026-10-04T00:37:49.5074012Z Downloading rasterio-1.4.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (22.3 MB)
+2026-10-04T00:37:49.6557782Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 22.3/22.3 MB 151.8 MB/s  0:00:00
+2026-10-04T00:37:49.6632845Z Downloading scipy-1.17.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.0 MB)
+2026-10-04T00:37:49.7736085Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.0/35.0 MB 322.0 MB/s  0:00:00
+2026-10-04T00:37:49.7806625Z Downloading click-8.5.0-py3-none-any.whl (125 kB)
+2026-10-04T00:37:49.7894879Z Downloading cligj-0.7.2-py3-none-any.whl (7.1 kB)
+2026-10-04T00:37:49.7996606Z Downloading affine-3.0.1-py3-none-any.whl (10 kB)
+2026-10-04T00:37:49.8080690Z Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+2026-10-04T00:37:49.8171197Z Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+2026-10-04T00:37:49.8260852Z Downloading click_plugins-1.1.1.2-py2.py3-none-any.whl (11 kB)
+2026-10-04T00:37:49.8346627Z Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+2026-10-04T00:37:50.0493017Z Installing collected packages: pyparsing, numpy, click, certifi, attrs, shapely, scipy, pyproj, cligj, click-plugins, affine, rasterio
+2026-10-04T00:37:57.4337130Z 
+2026-10-04T00:37:57.4357474Z Successfully installed affine-3.0.1 attrs-26.1.0 certifi-2026.7.22 click-8.5.0 click-plugins-1.1.1.2 cligj-0.7.2 numpy-2.3.5 pyparsing-3.3.3 pyproj-3.7.2 rasterio-1.4.3 scipy-1.17.0 shapely-2.1.2
+2026-10-04T00:37:57.5253244Z ##[group]Run if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then
+2026-10-04T00:37:57.5255109Z [36;1mif node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then[0m
+2026-10-04T00:37:57.5256439Z [36;1m  npx playwright install --with-deps chromium[0m
+2026-10-04T00:37:57.5256755Z [36;1mfi[0m
+2026-10-04T00:37:57.5320548Z shell: /usr/bin/bash -e {0}
+2026-10-04T00:37:57.5320804Z env:
+2026-10-04T00:37:57.5321077Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:57.5321536Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-04T00:37:57.5322246Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:57.5322639Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:57.5323036Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:57.5323432Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-04T00:37:57.5323767Z   INTEGRATION_PROFILE: full
+2026-10-04T00:37:57.5323998Z   INTEGRATION_SHARD: 2
+2026-10-04T00:37:57.5324211Z ##[endgroup]
+2026-10-04T00:37:57.5845224Z ##[group]Run node scripts/run-integration-tests.mjs
+2026-10-04T00:37:57.5845944Z [36;1mnode scripts/run-integration-tests.mjs[0m
+2026-10-04T00:37:57.5910297Z shell: /usr/bin/bash -e {0}
+2026-10-04T00:37:57.5910620Z env:
+2026-10-04T00:37:57.5910907Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:57.5911358Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-10-04T00:37:57.5911815Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:57.5912216Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:57.5912620Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-10-04T00:37:57.5913018Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-10-04T00:37:57.5913357Z   INTEGRATION_PROFILE: full
+2026-10-04T00:37:57.5913592Z   INTEGRATION_SHARD: 2
+2026-10-04T00:37:57.5913804Z ##[endgroup]
+2026-10-04T00:37:57.6365294Z {"profile":"full","shard":2,"files":["test/category-palette.test.mjs","test/compact-map-client.test.mjs","test/coverage-source-policy.test.mjs","test/environment-classification-db.test.mjs","test/evidence-suppression.test.mjs","test/geographic-bootstrap.test.mjs","test/geographic-releases.test.mjs","test/handoff-scope.test.mjs","test/hosted-migration-transport.test.mjs","test/hosted-temporal-geography.test.mjs","test/install-reviewed-geography.test.mjs","test/land-creations.test.mjs","test/macro-restoration-proofs.test.mjs","test/map-snapshots.test.mjs","test/merge-integration-client.test.mjs","test/migration-hashes.test.mjs","test/neon-forward-migrations.test.mjs","test/oceania-land-restoration.test.mjs","test/palette-intervals.test.mjs","test/pixel-metadata.test.mjs","test/postgres-contract.test.mjs","test/premerge-evidence.test.mjs","test/reference-archive.test.mjs","test/regional-research-gate.test.mjs","test/research-media-upload.test.mjs","test/source-policy-corrections.test.mjs","test/storage-export-v2.test.mjs","test/supplement-source-hints.test.mjs","test/temporal.test.mjs","test/typed-integration.test.mjs","test/unsettled-rank.test.mjs"]}
+2026-10-04T00:39:23.6921955Z TAP version 13
+2026-10-04T00:39:23.6923534Z # Subtest: fixed graph assignment is independent of input ordering and meets a dense categorical control
+2026-10-04T00:39:23.6925371Z ok 1 - fixed graph assignment is independent of input ordering and meets a dense categorical control
+2026-10-04T00:39:23.6947163Z   ---
+2026-10-04T00:39:23.6950719Z   duration_ms: 220.226504
+2026-10-04T00:39:23.6957193Z   type: 'test'
+2026-10-04T00:39:23.6958049Z   ...
+2026-10-04T00:39:23.6959136Z # Subtest: concurrent names sharing the upstream ID get distinct presentation colors without new source IDs
+2026-10-04T00:39:23.6960686Z ok 2 - concurrent names sharing the upstream ID get distinct presentation colors without new source IDs
+2026-10-04T00:39:23.6961691Z   ---
+2026-10-04T00:39:23.6962128Z   duration_ms: 12.914998
+2026-10-04T00:39:23.6962662Z   type: 'test'
+2026-10-04T00:39:23.6963116Z   ...
+2026-10-04T00:39:23.6964026Z # Subtest: unconstrained names of the same identity retain the same preferred color
+2026-10-04T00:39:23.6965240Z ok 3 - unconstrained names of the same identity retain the same preferred color
+2026-10-04T00:39:23.6966461Z   ---
+2026-10-04T00:39:23.6966957Z   duration_ms: 7.318714
+2026-10-04T00:39:23.6967504Z   type: 'test'
+2026-10-04T00:39:23.6976383Z   ...
+2026-10-04T00:39:23.6977027Z # Subtest: invalid or incomplete category graphs are rejected
+2026-10-04T00:39:23.6977870Z ok 4 - invalid or incomplete category graphs are rejected
+2026-10-04T00:39:23.6978862Z   ---
+2026-10-04T00:39:23.6979230Z   duration_ms: 1.082163
+2026-10-04T00:39:23.6979643Z   type: 'test'
+2026-10-04T00:39:23.6979993Z   ...
+2026-10-04T00:39:23.6981020Z # Subtest: the shipped palette passes all pinned historical constraints and matches the audited modern candidate
+2026-10-04T00:39:23.6982641Z ok 5 - the shipped palette passes all pinned historical constraints and matches the audited modern candidate
+2026-10-04T00:39:23.6983876Z   ---
+2026-10-04T00:39:23.6984237Z   duration_ms: 83.55023
+2026-10-04T00:39:23.6984631Z   type: 'test'
+2026-10-04T00:39:23.6984970Z   ...
+2026-10-04T00:39:23.6993351Z # Subtest: older Workers negotiate the sparse limit without masking unrelated bad requests
+2026-10-04T00:39:23.6994604Z ok 6 - older Workers negotiate the sparse limit without masking unrelated bad requests
+2026-10-04T00:39:23.6995327Z   ---
+2026-10-04T00:39:23.6995981Z   duration_ms: 83.497281
+2026-10-04T00:39:23.6996373Z   type: 'test'
+2026-10-04T00:39:23.6996723Z   ...
+2026-10-04T00:39:23.6997745Z # Subtest: complete inline temporal streams use the existing pin and revision validator without extra HTTP reads
+2026-10-04T00:39:23.6999379Z ok 7 - complete inline temporal streams use the existing pin and revision validator without extra HTTP reads
+2026-10-04T00:39:23.7000219Z   ---
+2026-10-04T00:39:23.7000554Z   duration_ms: 19.319763
+2026-10-04T00:39:23.7001035Z   type: 'test'
+2026-10-04T00:39:23.7001341Z   ...
+2026-10-04T00:39:23.7002273Z # Subtest: inline temporal revision or release drift restarts the scalar snapshot rather than repinning it
+2026-10-04T00:39:23.7004369Z ok 8 - inline temporal revision or release drift restarts the scalar snapshot rather than repinning it
+2026-10-04T00:39:23.7005261Z   ---
+2026-10-04T00:39:23.7005886Z   duration_ms: 23.724259
+2026-10-04T00:39:23.7006291Z   type: 'test'
+2026-10-04T00:39:23.7006639Z   ...
+2026-10-04T00:39:23.7007429Z # Subtest: absent inline temporal pages retain bounded ordinary geography paging
+2026-10-04T00:39:23.7008621Z ok 9 - absent inline temporal pages retain bounded ordinary geography paging
+2026-10-04T00:39:23.7009744Z   ---
+2026-10-04T00:39:23.7010118Z   duration_ms: 8.17757
+2026-10-04T00:39:23.7010527Z   type: 'test'
+2026-10-04T00:39:23.7010886Z   ...
+2026-10-04T00:39:23.7011803Z # Subtest: partial inline temporal pages cannot become authoritative or trigger unbounded reads
+2026-10-04T00:39:23.7013188Z ok 10 - partial inline temporal pages cannot become authoritative or trigger unbounded reads
+2026-10-04T00:39:23.7013813Z   ---
+2026-10-04T00:39:23.7014022Z   duration_ms: 5.47122
+2026-10-04T00:39:23.7014268Z   type: 'test'
+2026-10-04T00:39:23.7014465Z   ...
+2026-10-04T00:39:23.7014983Z # Subtest: compact client hydrates two atomic entity pages and retains shared source provenance
+2026-10-04T00:39:23.7016240Z ok 11 - compact client hydrates two atomic entity pages and retains shared source provenance
+2026-10-04T00:39:23.7016945Z   ---
+2026-10-04T00:39:23.7017184Z   duration_ms: 8.733149
+2026-10-04T00:39:23.7017491Z   type: 'test'
+2026-10-04T00:39:23.7017714Z   ...
+2026-10-04T00:39:23.7018278Z # Subtest: oversized second page reduces its limit and retries its cursor without duplicating completed pages
+2026-10-04T00:39:23.7019131Z ok 12 - oversized second page reduces its limit and retries its cursor without duplicating completed pages
+2026-10-04T00:39:23.7019604Z   ---
+2026-10-04T00:39:23.7019801Z   duration_ms: 6.20958
+2026-10-04T00:39:23.7020024Z   type: 'test'
+2026-10-04T00:39:23.7020217Z   ...
+2026-10-04T00:39:23.7020713Z # Subtest: a first-page size retry reaches the reduced request and preserves retirement authority
+2026-10-04T00:39:23.7021450Z ok 13 - a first-page size retry reaches the reduced request and preserves retirement authority
+2026-10-04T00:39:23.7021883Z   ---
+2026-10-04T00:39:23.7022081Z   duration_ms: 6.746615
+2026-10-04T00:39:23.7022298Z   type: 'test'
+2026-10-04T00:39:23.7022485Z   ...
+2026-10-04T00:39:23.7022996Z # Subtest: retryable conflicts and cross-page revision changes restart the complete compact snapshot
+2026-10-04T00:39:23.7024844Z ok 14 - retryable conflicts and cross-page revision changes restart the complete compact snapshot
+2026-10-04T00:39:23.7026693Z   ---
+2026-10-04T00:39:23.7027055Z   duration_ms: 11.440542
+2026-10-04T00:39:23.7027483Z   type: 'test'
+2026-10-04T00:39:23.7027917Z   ...
+2026-10-04T00:39:23.7028989Z # Subtest: three persistently inconsistent attempts produce unavailable evidence without cold-cache authority
+2026-10-04T00:39:23.7030871Z ok 15 - three persistently inconsistent attempts produce unavailable evidence without cold-cache authority
+2026-10-04T00:39:23.7031767Z   ---
+2026-10-04T00:39:23.7032103Z   duration_ms: 7.288639
+2026-10-04T00:39:23.7032480Z   type: 'test'
+2026-10-04T00:39:23.7032812Z   ...
+2026-10-04T00:39:23.7033471Z # Subtest: warm failures retain claims and withdrawals atomically only for the same year and example setting
+2026-10-04T00:39:23.7034319Z ok 16 - warm failures retain claims and withdrawals atomically only for the same year and example setting
+2026-10-04T00:39:23.7034820Z   ---
+2026-10-04T00:39:23.7035024Z   duration_ms: 10.914258
+2026-10-04T00:39:23.7035259Z   type: 'test'
+2026-10-04T00:39:23.7035698Z   ...
+2026-10-04T00:39:23.7036493Z # Subtest: malformed compact pages, incorrect years and cursor cycles fail atomically
+2026-10-04T00:39:23.7037232Z ok 17 - malformed compact pages, incorrect years and cursor cycles fail atomically
+2026-10-04T00:39:23.7037644Z   ---
+2026-10-04T00:39:23.7037846Z   duration_ms: 27.478018
+2026-10-04T00:39:23.7038075Z   type: 'test'
+2026-10-04T00:39:23.7038262Z   ...
+2026-10-04T00:39:23.7038718Z # Subtest: compact client propagates aborts and passes the signal to its network request
+2026-10-04T00:39:23.7039391Z ok 18 - compact client propagates aborts and passes the signal to its network request
+2026-10-04T00:39:23.7039788Z   ---
+2026-10-04T00:39:23.7039976Z   duration_ms: 4.846472
+2026-10-04T00:39:23.7040192Z   type: 'test'
+2026-10-04T00:39:23.7040378Z   ...
+2026-10-04T00:39:23.7040827Z # Subtest: clients without a compact capability keep the original three-stream protocol
+2026-10-04T00:39:23.7041489Z ok 19 - clients without a compact capability keep the original three-stream protocol
+2026-10-04T00:39:23.7041886Z   ---
+2026-10-04T00:39:23.7042073Z   duration_ms: 5.060993
+2026-10-04T00:39:23.7042286Z   type: 'test'
+2026-10-04T00:39:23.7042473Z   ...
+2026-10-04T00:39:23.7042939Z # Subtest: the geography capability enables compact reads through the actual manifest loader
+2026-10-04T00:39:23.7043660Z ok 20 - the geography capability enables compact reads through the actual manifest loader
+2026-10-04T00:39:23.7044084Z   ---
+2026-10-04T00:39:23.7044274Z   duration_ms: 5.130243
+2026-10-04T00:39:23.7044489Z   type: 'test'
+2026-10-04T00:39:23.7044675Z   ...
+2026-10-04T00:39:23.7045158Z # Subtest: bounded source-policy projection is exact, reproducible, and small enough to deploy
+2026-10-04T00:39:23.7046278Z ok 21 - bounded source-policy projection is exact, reproducible, and small enough to deploy
+2026-10-04T00:39:23.7046746Z   ---
+2026-10-04T00:39:23.7046945Z   duration_ms: 133.179445
+2026-10-04T00:39:23.7047174Z   type: 'test'
+2026-10-04T00:39:23.7047365Z   ...
+2026-10-04T00:39:23.7047859Z # Subtest: coverage corrections count selected location identities on every applicable continent
+2026-10-04T00:39:23.7048611Z ok 22 - coverage corrections count selected location identities on every applicable continent
+2026-10-04T00:39:23.7049048Z   ---
+2026-10-04T00:39:23.7049245Z   duration_ms: 267.891095
+2026-10-04T00:39:23.7049476Z   type: 'test'
+2026-10-04T00:39:23.7049669Z   ...
+2026-10-04T00:39:23.7050245Z # Subtest: coverage presents corrected roles with collapsed evidence and explicitly retained earlier descriptions
+2026-10-04T00:39:23.7051139Z ok 23 - coverage presents corrected roles with collapsed evidence and explicitly retained earlier descriptions
+2026-10-04T00:39:23.7051628Z   ---
+2026-10-04T00:39:23.7051820Z   duration_ms: 23.368343
+2026-10-04T00:39:23.7052042Z   type: 'test'
+2026-10-04T00:39:23.7052414Z   ...
+2026-10-04T00:39:23.7052875Z # Subtest: duplicate role IDs and stale policy assumptions cannot silently update coverage
+2026-10-04T00:39:23.7053559Z ok 24 - duplicate role IDs and stale policy assumptions cannot silently update coverage
+2026-10-04T00:39:23.7053963Z   ---
+2026-10-04T00:39:23.7054149Z   duration_ms: 2.554326
+2026-10-04T00:39:23.7054362Z   type: 'test'
+2026-10-04T00:39:23.7054549Z   ...
+2026-10-04T00:39:23.7055140Z # Subtest: fixed environmental database guards reproduce exactly from the shared registry
+2026-10-04T00:39:23.7056182Z ok 25 - fixed environmental database guards reproduce exactly from the shared registry
+2026-10-04T00:39:23.7056604Z   ---
+2026-10-04T00:39:23.7056799Z   duration_ms: 6.604959
+2026-10-04T00:39:23.7057016Z   type: 'test'
+2026-10-04T00:39:23.7057204Z   ...
+2026-10-04T00:39:23.7057736Z # Subtest: all fixed IDs, display labels, explicit legacy aliases and null pass raw local and hosted SQL
+2026-10-04T00:39:23.7058538Z ok 26 - all fixed IDs, display labels, explicit legacy aliases and null pass raw local and hosted SQL
+2026-10-04T00:39:23.7058998Z   ---
+2026-10-04T00:39:23.7059191Z   duration_ms: 492.42745
+2026-10-04T00:39:23.7059411Z   type: 'test'
+2026-10-04T00:39:23.7059600Z   ...
+2026-10-04T00:39:23.7060157Z # Subtest: unlisted environmental values reject every local import and raw snapshot/history/typed insertion
+2026-10-04T00:39:23.7060998Z ok 27 - unlisted environmental values reject every local import and raw snapshot/history/typed insertion
+2026-10-04T00:39:23.7061475Z   ---
+2026-10-04T00:39:23.7061668Z   duration_ms: 48.110977
+2026-10-04T00:39:23.7061888Z   type: 'test'
+2026-10-04T00:39:23.7062079Z   ...
+2026-10-04T00:39:23.7062643Z # Subtest: adding local guards preserves existing unrecognized evidence byte for byte and blocks changed values
+2026-10-04T00:39:23.7063523Z ok 28 - adding local guards preserves existing unrecognized evidence byte for byte and blocks changed values
+2026-10-04T00:39:23.7064011Z   ---
+2026-10-04T00:39:23.7064198Z   duration_ms: 12.829889
+2026-10-04T00:39:23.7064419Z   type: 'test'
+2026-10-04T00:39:23.7064606Z   ...
+2026-10-04T00:39:23.7065165Z # Subtest: hosted migration retains old claim bytes, permits exact retries and still rejects stable-ID collisions
+2026-10-04T00:39:23.7066383Z ok 29 - hosted migration retains old claim bytes, permits exact retries and still rejects stable-ID collisions
+2026-10-04T00:39:23.7066879Z   ---
+2026-10-04T00:39:23.7067074Z   duration_ms: 36.745716
+2026-10-04T00:39:23.7067293Z   type: 'test'
+2026-10-04T00:39:23.7067493Z   ...
+2026-10-04T00:39:23.7068095Z # Subtest: unverified withdrawals suppress every attribute source and modern owner fallback without modifying content
+2026-10-04T00:39:23.7069009Z ok 30 - unverified withdrawals suppress every attribute source and modern owner fallback without modifying content
+2026-10-04T00:39:23.7069508Z   ---
+2026-10-04T00:39:23.7069695Z   duration_ms: 3.248044
+2026-10-04T00:39:23.7069909Z   type: 'test'
+2026-10-04T00:39:23.7070100Z   ...
+2026-10-04T00:39:23.7070553Z # Subtest: bounded import concurrency defaults to six and accepts only one through eight
+2026-10-04T00:39:23.7071233Z ok 31 - bounded import concurrency defaults to six and accepts only one through eight
+2026-10-04T00:39:23.7071635Z   ---
+2026-10-04T00:39:23.7071823Z   duration_ms: 1.827327
+2026-10-04T00:39:23.7072035Z   type: 'test'
+2026-10-04T00:39:23.7072226Z   ...
+2026-10-04T00:39:23.7072665Z # Subtest: stage then finalize publishes atomically without replaying ownership batches
+2026-10-04T00:39:23.7073329Z ok 32 - stage then finalize publishes atomically without replaying ownership batches
+2026-10-04T00:39:23.7073730Z   ---
+2026-10-04T00:39:23.7073925Z   duration_ms: 137.450491
+2026-10-04T00:39:23.7074294Z   type: 'test'
+2026-10-04T00:39:23.7074614Z   ...
+2026-10-04T00:39:23.7075785Z # Subtest: append-only source batches import before newly registered geography and retain the original source bytes
+2026-10-04T00:39:23.7077039Z ok 33 - append-only source batches import before newly registered geography and retain the original source bytes
+2026-10-04T00:39:23.7077841Z   ---
+2026-10-04T00:39:23.7078373Z   duration_ms: 73.883556
+2026-10-04T00:39:23.7078750Z   type: 'test'
+2026-10-04T00:39:23.7079119Z   ...
+2026-10-04T00:39:23.7079767Z # Subtest: interrupted real-D1 staging resumes explicit or hidden staged releases without rewriting history
+2026-10-04T00:39:23.7080683Z ok 34 - interrupted real-D1 staging resumes explicit or hidden staged releases without rewriting history
+2026-10-04T00:39:23.7081313Z   ---
+2026-10-04T00:39:23.7081764Z   duration_ms: 158.748844
+2026-10-04T00:39:23.7082173Z   type: 'test'
+2026-10-04T00:39:23.7096551Z   ...
+2026-10-04T00:39:23.7097500Z # Subtest: a mismatched existing staged or published manifest blocks all geographic staging before writes
+2026-10-04T00:39:23.7098944Z ok 35 - a mismatched existing staged or published manifest blocks all geographic staging before writes
+2026-10-04T00:39:23.7099799Z   ---
+2026-10-04T00:39:23.7100169Z   duration_ms: 105.291251
+2026-10-04T00:39:23.7100614Z   type: 'test'
+2026-10-04T00:39:23.7100972Z   ...
+2026-10-04T00:39:23.7102133Z # Subtest: identical archive bytes upload once with a stable first-sorted name and preserve every receipt alias across retries
+2026-10-04T00:39:23.7103972Z ok 36 - identical archive bytes upload once with a stable first-sorted name and preserve every receipt alias across retries
+2026-10-04T00:39:23.7105038Z   ---
+2026-10-04T00:39:23.7105334Z   duration_ms: 8.012211
+2026-10-04T00:39:23.7105873Z   type: 'test'
+2026-10-04T00:39:23.7106097Z   ...
+2026-10-04T00:39:23.7106697Z # Subtest: staging is invisible; publication requires complete pinned membership and preserves original registry
+2026-10-04T00:39:23.7107601Z ok 37 - staging is invisible; publication requires complete pinned membership and preserves original registry
+2026-10-04T00:39:23.7108115Z   ---
+2026-10-04T00:39:23.7108317Z   duration_ms: 100.046141
+2026-10-04T00:39:23.7108552Z   type: 'test'
+2026-10-04T00:39:23.7108748Z   ...
+2026-10-04T00:39:23.7109342Z # Subtest: rename/reparent releases and same-tier merge crosswalk preserve historical evidence and archived releases
+2026-10-04T00:39:23.7110269Z ok 38 - rename/reparent releases and same-tier merge crosswalk preserve historical evidence and archived releases
+2026-10-04T00:39:23.7110777Z   ---
+2026-10-04T00:39:23.7110973Z   duration_ms: 83.076925
+2026-10-04T00:39:23.7111206Z   type: 'test'
+2026-10-04T00:39:23.7111395Z   ...
+2026-10-04T00:39:23.7111966Z # Subtest: manifest counts, complete same-release chains, no-year-zero calendar labels and hashes are real gates
+2026-10-04T00:39:23.7112824Z ok 39 - manifest counts, complete same-release chains, no-year-zero calendar labels and hashes are real gates
+2026-10-04T00:39:23.7113302Z   ---
+2026-10-04T00:39:23.7113490Z   duration_ms: 81.82311
+2026-10-04T00:39:23.7113707Z   type: 'test'
+2026-10-04T00:39:23.7113892Z   ...
+2026-10-04T00:39:23.7114425Z # Subtest: bounded atomic staging rejects unknown/nongeographic/example identities and wrong-tier parents
+2026-10-04T00:39:23.7115245Z ok 40 - bounded atomic staging rejects unknown/nongeographic/example identities and wrong-tier parents
+2026-10-04T00:39:23.7116137Z   ---
+2026-10-04T00:39:23.7116339Z   duration_ms: 55.662967
+2026-10-04T00:39:23.7116562Z   type: 'test'
+2026-10-04T00:39:23.7116748Z   ...
+2026-10-04T00:39:23.7117368Z # Subtest: immutable staged contents and ingestion collisions reject atomically; raw SQL blocks cycles and publication bypass
+2026-10-04T00:39:23.7118360Z ok 41 - immutable staged contents and ingestion collisions reject atomically; raw SQL blocks cycles and publication bypass
+2026-10-04T00:39:23.7118888Z   ---
+2026-10-04T00:39:23.7119075Z   duration_ms: 48.259895
+2026-10-04T00:39:23.7119291Z   type: 'test'
+2026-10-04T00:39:23.7119474Z   ...
+2026-10-04T00:39:23.7119976Z # Subtest: crosswalk evidence, tier identity and retired membership must match the published release
+2026-10-04T00:39:23.7120743Z ok 42 - crosswalk evidence, tier identity and retired membership must match the published release
+2026-10-04T00:39:23.7121395Z   ---
+2026-10-04T00:39:23.7121586Z   duration_ms: 92.004388
+2026-10-04T00:39:23.7121804Z   type: 'test'
+2026-10-04T00:39:23.7121988Z   ...
+2026-10-04T00:39:23.7122465Z # Subtest: published pages use indexed keyset queries and older releases remain inspectable
+2026-10-04T00:39:23.7123183Z ok 43 - published pages use indexed keyset queries and older releases remain inspectable
+2026-10-04T00:39:23.7123598Z   ---
+2026-10-04T00:39:23.7123790Z   duration_ms: 62.153222
+2026-10-04T00:39:23.7124133Z   type: 'test'
+2026-10-04T00:39:23.7124325Z   ...
+2026-10-04T00:39:23.7124877Z # Subtest: streamed publication hashing matches exported UTF-8 canonical hashes across page boundaries
+2026-10-04T00:39:23.7125956Z ok 44 - streamed publication hashing matches exported UTF-8 canonical hashes across page boundaries
+2026-10-04T00:39:23.7126427Z   ---
+2026-10-04T00:39:23.7126622Z   duration_ms: 364.215282
+2026-10-04T00:39:23.7126845Z   type: 'test'
+2026-10-04T00:39:23.7127030Z   ...
+2026-10-04T00:39:23.7127598Z # Subtest: source-backed new territory publishes with a null predecessor and no invented historical attributes
+2026-10-04T00:39:23.7128485Z ok 45 - source-backed new territory publishes with a null predecessor and no invented historical attributes
+2026-10-04T00:39:23.7128964Z   ---
+2026-10-04T00:39:23.7129151Z   duration_ms: 86.460331
+2026-10-04T00:39:23.7129368Z   type: 'test'
+2026-10-04T00:39:23.7129557Z   ...
+2026-10-04T00:39:23.7129823Z # Subtest: lane IDs must be explicit and safe
+2026-10-04T00:39:23.7130188Z ok 46 - lane IDs must be explicit and safe
+2026-10-04T00:39:23.7130453Z   ---
+2026-10-04T00:39:23.7130639Z   duration_ms: 4.828378
+2026-10-04T00:39:23.7130852Z   type: 'test'
+2026-10-04T00:39:23.7131034Z   ...
+2026-10-04T00:39:23.7131505Z # Subtest: research owns only campaign files, excluding shared handovers and other campaigns
+2026-10-04T00:39:23.7132209Z ok 47 - research owns only campaign files, excluding shared handovers and other campaigns
+2026-10-04T00:39:23.7132620Z   ---
+2026-10-04T00:39:23.7132815Z   duration_ms: 0.633716
+2026-10-04T00:39:23.7133029Z   type: 'test'
+2026-10-04T00:39:23.7133224Z   ...
+2026-10-04T00:39:23.7133613Z # Subtest: engineering preserves research and other engineering progress
+2026-10-04T00:39:23.7134170Z ok 48 - engineering preserves research and other engineering progress
+2026-10-04T00:39:23.7134518Z   ---
+2026-10-04T00:39:23.7134708Z   duration_ms: 0.344685
+2026-10-04T00:39:23.7134920Z   type: 'test'
+2026-10-04T00:39:23.7135107Z   ...
+2026-10-04T00:39:23.7135835Z # Subtest: partial and final PRs link one issue without needing a document tracker ID
+2026-10-04T00:39:23.7136521Z ok 49 - partial and final PRs link one issue without needing a document tracker ID
+2026-10-04T00:39:23.7136909Z   ---
+2026-10-04T00:39:23.7137095Z   duration_ms: 0.996373
+2026-10-04T00:39:23.7137307Z   type: 'test'
+2026-10-04T00:39:23.7137498Z   ...
+2026-10-04T00:39:23.7137929Z # Subtest: PR policy rejects ambiguous issue links and accidental additional closures
+2026-10-04T00:39:23.7138568Z ok 50 - PR policy rejects ambiguous issue links and accidental additional closures
+2026-10-04T00:39:23.7138957Z   ---
+2026-10-04T00:39:23.7139143Z   duration_ms: 0.508642
+2026-10-04T00:39:23.7139355Z   type: 'test'
+2026-10-04T00:39:23.7139544Z   ...
+2026-10-04T00:39:23.7139944Z # Subtest: GitHub issue type agrees with its lane and references an open issue
+2026-10-04T00:39:23.7140532Z ok 51 - GitHub issue type agrees with its lane and references an open issue
+2026-10-04T00:39:23.7140900Z   ---
+2026-10-04T00:39:23.7141088Z   duration_ms: 0.508321
+2026-10-04T00:39:23.7141299Z   type: 'test'
+2026-10-04T00:39:23.7141493Z   ...
+2026-10-04T00:39:23.7141905Z # Subtest: real git diff checks rename source paths, not only allowed destinations
+2026-10-04T00:39:23.7142512Z ok 52 - real git diff checks rename source paths, not only allowed destinations
+2026-10-04T00:39:23.7142879Z   ---
+2026-10-04T00:39:23.7143067Z   duration_ms: 82.206265
+2026-10-04T00:39:23.7143287Z   type: 'test'
+2026-10-04T00:39:23.7143478Z   ...
+2026-10-04T00:39:23.7144094Z # Subtest: another lane advancing work is not mistaken for this branch changing its files
+2026-10-04T00:39:23.7144759Z ok 53 - another lane advancing work is not mistaken for this branch changing its files
+2026-10-04T00:39:23.7145152Z   ---
+2026-10-04T00:39:23.7145343Z   duration_ms: 114.703701
+2026-10-04T00:39:23.7145846Z   type: 'test'
+2026-10-04T00:39:23.7146049Z   ...
+2026-10-04T00:39:23.7146746Z # Subtest: remote issue validation reads only the event repository and requires successful labeled issue metadata
+2026-10-04T00:39:23.7147617Z ok 54 - remote issue validation reads only the event repository and requires successful labeled issue metadata
+2026-10-04T00:39:23.7148099Z   ---
+2026-10-04T00:39:23.7148285Z   duration_ms: 26.381427
+2026-10-04T00:39:23.7148509Z   type: 'test'
+2026-10-04T00:39:23.7148690Z   ...
+2026-10-04T00:39:23.7149235Z # Subtest: transport compiler changes exactly the pinned 21 guards and preserves all other raw SQL and metadata
+2026-10-04T00:39:23.7150099Z ok 55 - transport compiler changes exactly the pinned 21 guards and preserves all other raw SQL and metadata
+2026-10-04T00:39:23.7150579Z   ---
+2026-10-04T00:39:23.7150765Z   duration_ms: 26.700764
+2026-10-04T00:39:23.7150988Z   type: 'test'
+2026-10-04T00:39:23.7151175Z   ...
+2026-10-04T00:39:23.7151756Z # Subtest: raw and derivative guards have identical original schemas and preserve all 21 conditions and error messages
+2026-10-04T00:39:23.7152661Z ok 56 - raw and derivative guards have identical original schemas and preserve all 21 conditions and error messages
+2026-10-04T00:39:23.7153153Z   ---
+2026-10-04T00:39:23.7153337Z   duration_ms: 36.571591
+2026-10-04T00:39:23.7153557Z   type: 'test'
+2026-10-04T00:39:23.7153740Z   ...
+2026-10-04T00:39:23.7154332Z # Subtest: native workerd D1 reproduces CASE-block truncation and applies the derivative over populated retained claims
+2026-10-04T00:39:23.7155246Z ok 57 - native workerd D1 reproduces CASE-block truncation and applies the derivative over populated retained claims
+2026-10-04T00:39:23.7156407Z   ---
+2026-10-04T00:39:23.7156614Z   duration_ms: 2437.32342
+2026-10-04T00:39:23.7156842Z   type: 'test'
+2026-10-04T00:39:23.7157032Z   ...
+2026-10-04T00:39:23.7157558Z # Subtest: dated parent bridge preserves stable identity, source support and effective complete chains
+2026-10-04T00:39:23.7158353Z ok 58 - dated parent bridge preserves stable identity, source support and effective complete chains
+2026-10-04T00:39:23.7158804Z   ---
+2026-10-04T00:39:23.7159005Z   duration_ms: 6.050763
+2026-10-04T00:39:23.7159221Z   type: 'test'
+2026-10-04T00:39:23.7159408Z   ...
+2026-10-04T00:39:23.7160030Z # Subtest: explicit unknown membership keeps the reference chain and original uncertainty rather than adopting a weaker claim
+2026-10-04T00:39:23.7161007Z ok 59 - explicit unknown membership keeps the reference chain and original uncertainty rather than adopting a weaker claim
+2026-10-04T00:39:23.7161528Z   ---
+2026-10-04T00:39:23.7161711Z   duration_ms: 0.618056
+2026-10-04T00:39:23.7161920Z   type: 'test'
+2026-10-04T00:39:23.7162113Z   ...
+2026-10-04T00:39:23.7162738Z # Subtest: existence exclusions survive adaptation, including sourced unknown and BC/AD reference exclusions without year zero
+2026-10-04T00:39:23.7163706Z ok 60 - existence exclusions survive adaptation, including sourced unknown and BC/AD reference exclusions without year zero
+2026-10-04T00:39:23.7164229Z   ---
+2026-10-04T00:39:23.7164412Z   duration_ms: 0.873823
+2026-10-04T00:39:23.7164621Z   type: 'test'
+2026-10-04T00:39:23.7164811Z   ...
+2026-10-04T00:39:23.7165387Z # Subtest: bridge rejects wrong release, unsupported source/year, examples, withdrawn winners and unvetted footprints
+2026-10-04T00:39:23.7166516Z ok 61 - bridge rejects wrong release, unsupported source/year, examples, withdrawn winners and unvetted footprints
+2026-10-04T00:39:23.7167009Z   ---
+2026-10-04T00:39:23.7167193Z   duration_ms: 1.672006
+2026-10-04T00:39:23.7167403Z   type: 'test'
+2026-10-04T00:39:23.7167594Z   ...
+2026-10-04T00:39:23.7168166Z # Subtest: joined-source snapshots hydrate exact JSON text metadata without requiring a duplicate source dictionary
+2026-10-04T00:39:23.7169208Z ok 62 - joined-source snapshots hydrate exact JSON text metadata without requiring a duplicate source dictionary
+2026-10-04T00:39:23.7169702Z   ---
+2026-10-04T00:39:23.7169884Z   duration_ms: 1.148998
+2026-10-04T00:39:23.7170096Z   type: 'test'
+2026-10-04T00:39:23.7170285Z   ...
+2026-10-04T00:39:23.7171091Z # Subtest: shared temporal parent/existence resolution matches direct/derived/reference/example precedence independently of language and IDs
+2026-10-04T00:39:23.7172208Z ok 63 - shared temporal parent/existence resolution matches direct/derived/reference/example precedence independently of language and IDs
+2026-10-04T00:39:23.7172797Z   ---
+2026-10-04T00:39:23.7172980Z   duration_ms: 2.628635
+2026-10-04T00:39:23.7173195Z   type: 'test'
+2026-10-04T00:39:23.7173376Z   ...
+2026-10-04T00:39:23.7174024Z # Subtest: complete hosted snapshot authority removes withdrawn legacy IDs and overridden fields without reviving excluded entities
+2026-10-04T00:39:23.7175042Z ok 64 - complete hosted snapshot authority removes withdrawn legacy IDs and overridden fields without reviving excluded entities
+2026-10-04T00:39:23.7175724Z   ---
+2026-10-04T00:39:23.7175924Z   duration_ms: 1.149058
+2026-10-04T00:39:23.7176137Z   type: 'test'
+2026-10-04T00:39:23.7176324Z   ...
+2026-10-04T00:39:23.7177023Z # Subtest: bounded production pages hydrate source-deduplicated winners and generate histories/exclusions without a full reference registry
+2026-10-04T00:39:23.7178117Z ok 65 - bounded production pages hydrate source-deduplicated winners and generate histories/exclusions without a full reference registry
+2026-10-04T00:39:23.7178697Z   ---
+2026-10-04T00:39:23.7178889Z   duration_ms: 1.109695
+2026-10-04T00:39:23.7179096Z   type: 'test'
+2026-10-04T00:39:23.7179276Z   ...
+2026-10-04T00:39:23.7179952Z # Subtest: bounded withdrawals remain authoritative independently of selected-year claims; malformed stream/context cannot become history
+2026-10-04T00:39:23.7181024Z ok 66 - bounded withdrawals remain authoritative independently of selected-year claims; malformed stream/context cannot become history
+2026-10-04T00:39:23.7181600Z   ---
+2026-10-04T00:39:23.7181784Z   duration_ms: 1.324397
+2026-10-04T00:39:23.7181992Z   type: 'test'
+2026-10-04T00:39:23.7182174Z   ...
+2026-10-04T00:39:23.7182732Z # Subtest: source IDs are ordinary stable identities even when their spelling matches JavaScript object properties
+2026-10-04T00:39:23.7183606Z ok 67 - source IDs are ordinary stable identities even when their spelling matches JavaScript object properties
+2026-10-04T00:39:23.7184096Z   ---
+2026-10-04T00:39:23.7184282Z   duration_ms: 0.574484
+2026-10-04T00:39:23.7184491Z   type: 'test'
+2026-10-04T00:39:23.7184674Z   ...
+2026-10-04T00:39:23.7185078Z # Subtest: dry run validates a whole generation without changing any live bytes
+2026-10-04T00:39:23.7185798Z ok 68 - dry run validates a whole generation without changing any live bytes
+2026-10-04T00:39:23.7186174Z   ---
+2026-10-04T00:39:23.7186363Z   duration_ms: 51.321071
+2026-10-04T00:39:23.7186582Z   type: 'test'
+2026-10-04T00:39:23.7186765Z   ...
+2026-10-04T00:39:23.7187252Z # Subtest: apply requires the exact dry-run hash and preserves database/catalog/history originals
+2026-10-04T00:39:23.7187986Z ok 69 - apply requires the exact dry-run hash and preserves database/catalog/history originals
+2026-10-04T00:39:23.7188421Z   ---
+2026-10-04T00:39:23.7188603Z   duration_ms: 64.22165
+2026-10-04T00:39:23.7188821Z   type: 'test'
+2026-10-04T00:39:23.7189007Z   ...
+2026-10-04T00:39:23.7189417Z # Subtest: failure during the multi-path commit restores every original live byte
+2026-10-04T00:39:23.7190033Z ok 70 - failure during the multi-path commit restores every original live byte
+2026-10-04T00:39:23.7190403Z   ---
+2026-10-04T00:39:23.7190598Z   duration_ms: 33.756998
+2026-10-04T00:39:23.7190827Z   type: 'test'
+2026-10-04T00:39:23.7191021Z   ...
+2026-10-04T00:39:23.7191574Z # Subtest: stale runtime, prepared source hashes, province membership and grid counts fail before activation
+2026-10-04T00:39:23.7192557Z ok 71 - stale runtime, prepared source hashes, province membership and grid counts fail before activation
+2026-10-04T00:39:23.7193030Z   ---
+2026-10-04T00:39:23.7193222Z   duration_ms: 63.291691
+2026-10-04T00:39:23.7193447Z   type: 'test'
+2026-10-04T00:39:23.7193638Z   ...
+2026-10-04T00:39:23.7194037Z # Subtest: approved hashes prevent changes between inspection and activation
+2026-10-04T00:39:23.7194743Z ok 72 - approved hashes prevent changes between inspection and activation
+2026-10-04T00:39:23.7195109Z   ---
+2026-10-04T00:39:23.7195299Z   duration_ms: 16.72945
+2026-10-04T00:39:23.7195643Z   type: 'test'
+2026-10-04T00:39:23.7195837Z   ...
+2026-10-04T00:39:23.7196327Z # Subtest: unexpected predecessor files or changed historical payload block approved activation
+2026-10-04T00:39:23.7197067Z ok 73 - unexpected predecessor files or changed historical payload block approved activation
+2026-10-04T00:39:23.7197502Z   ---
+2026-10-04T00:39:23.7197690Z   duration_ms: 38.481202
+2026-10-04T00:39:23.7197906Z   type: 'test'
+2026-10-04T00:39:23.7198092Z   ...
+2026-10-04T00:39:23.7198490Z # Subtest: path traversal and staging symlinks cannot replace unrelated files
+2026-10-04T00:39:23.7199077Z ok 74 - path traversal and staging symlinks cannot replace unrelated files
+2026-10-04T00:39:23.7199440Z   ---
+2026-10-04T00:39:23.7199628Z   duration_ms: 9.515158
+2026-10-04T00:39:23.7199847Z   type: 'test'
+2026-10-04T00:39:23.7200038Z   ...
+2026-10-04T00:39:23.7200520Z # Subtest: duplicate geographic identities and empty groups cannot pass as a complete hierarchy
+2026-10-04T00:39:23.7201254Z ok 75 - duplicate geographic identities and empty groups cannot pass as a complete hierarchy
+2026-10-04T00:39:23.7201682Z   ---
+2026-10-04T00:39:23.7201869Z   duration_ms: 7.350574
+2026-10-04T00:39:23.7202113Z   type: 'test'
+2026-10-04T00:39:23.7202301Z   ...
+2026-10-04T00:39:23.7202827Z # Subtest: a genuine unknown-attribute creation installs reversibly without changing original history
+2026-10-04T00:39:23.7203618Z ok 76 - a genuine unknown-attribute creation installs reversibly without changing original history
+2026-10-04T00:39:23.7204067Z   ---
+2026-10-04T00:39:23.7204261Z   duration_ms: 904.838302
+2026-10-04T00:39:23.7204480Z   type: 'test'
+2026-10-04T00:39:23.7204668Z   ...
+2026-10-04T00:39:23.7205206Z # Subtest: ordered replacement then pure creation validates exact current ancestry and pinned source bytes
+2026-10-04T00:39:23.7206167Z ok 77 - ordered replacement then pure creation validates exact current ancestry and pinned source bytes
+2026-10-04T00:39:23.7206636Z   ---
+2026-10-04T00:39:23.7206823Z   duration_ms: 749.369371
+2026-10-04T00:39:23.7207040Z   type: 'test'
+2026-10-04T00:39:23.7207225Z   ...
+2026-10-04T00:39:23.7207811Z # Subtest: composed installer rejects skipped or reordered manifests, changed pins and unmatched creation inventories
+2026-10-04T00:39:23.7208714Z ok 78 - composed installer rejects skipped or reordered manifests, changed pins and unmatched creation inventories
+2026-10-04T00:39:23.7209223Z   ---
+2026-10-04T00:39:23.7209408Z   duration_ms: 2098.87038
+2026-10-04T00:39:23.7209623Z   type: 'test'
+2026-10-04T00:39:23.7209814Z   ...
+2026-10-04T00:39:23.7210300Z # Subtest: composed installer rejects child historical transfers and changed source archive bytes
+2026-10-04T00:39:23.7211041Z ok 79 - composed installer rejects child historical transfers and changed source archive bytes
+2026-10-04T00:39:23.7211475Z   ---
+2026-10-04T00:39:23.7211668Z   duration_ms: 1082.867648
+2026-10-04T00:39:23.7211892Z   type: 'test'
+2026-10-04T00:39:23.7212083Z   ...
+2026-10-04T00:39:23.7212504Z # Subtest: geometry evidence cannot silently authorize current source-name changes
+2026-10-04T00:39:23.7213130Z ok 80 - geometry evidence cannot silently authorize current source-name changes
+2026-10-04T00:39:23.7213513Z   ---
+2026-10-04T00:39:23.7213703Z   duration_ms: 785.414025
+2026-10-04T00:39:23.7213919Z   type: 'test'
+2026-10-04T00:39:23.7214251Z   ...
+2026-10-04T00:39:23.7214693Z # Subtest: source-name correction requires pinned exact metadata before/after evidence
+2026-10-04T00:39:23.7215357Z ok 81 - source-name correction requires pinned exact metadata before/after evidence
+2026-10-04T00:39:23.7215884Z   ---
+2026-10-04T00:39:23.7216073Z   duration_ms: 1437.280598
+2026-10-04T00:39:23.7216301Z   type: 'test'
+2026-10-04T00:39:23.7216492Z   ...
+2026-10-04T00:39:23.7217116Z # Subtest: installer summary pins geometry proof members and rejects altered evidence after approval
+2026-10-04T00:39:23.7217889Z ok 82 - installer summary pins geometry proof members and rejects altered evidence after approval
+2026-10-04T00:39:23.7218331Z   ---
+2026-10-04T00:39:23.7218520Z   duration_ms: 499.303168
+2026-10-04T00:39:23.7218742Z   type: 'test'
+2026-10-04T00:39:23.7218930Z   ...
+2026-10-04T00:39:23.7219178Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7219825Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7220561Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7221023Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7221666Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 108, in validate
+2026-10-04T00:39:23.7222388Z #     raise ValueError('Creation overlaps existing or competing land: ' + other)
+2026-10-04T00:39:23.7222956Z # ValueError: Creation overlaps existing or competing land: original
+2026-10-04T00:39:23.7223379Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7223989Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7224699Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7225150Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7225905Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 108, in validate
+2026-10-04T00:39:23.7226626Z #     raise ValueError('Creation overlaps existing or competing land: ' + other)
+2026-10-04T00:39:23.7227185Z # ValueError: Creation overlaps existing or competing land: original
+2026-10-04T00:39:23.7227602Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7228247Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7228958Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7229404Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7230029Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 91, in validate
+2026-10-04T00:39:23.7230762Z #     raise ValueError('Ambiguous existing name requires explicit identity review')
+2026-10-04T00:39:23.7231350Z # ValueError: Ambiguous existing name requires explicit identity review
+2026-10-04T00:39:23.7231783Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7232395Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7233095Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7233550Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7234178Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 36, in validate
+2026-10-04T00:39:23.7234935Z #     raise ValueError('Creation requires source identity, URL, license and attribution')
+2026-10-04T00:39:23.7235700Z # ValueError: Creation requires source identity, URL, license and attribution
+2026-10-04T00:39:23.7236151Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7236760Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7237476Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7238075Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7238705Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 46, in validate
+2026-10-04T00:39:23.7239321Z #     raise ValueError('Creation source bytes changed')
+2026-10-04T00:39:23.7239703Z # ValueError: Creation source bytes changed
+2026-10-04T00:39:23.7240048Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7240778Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7241489Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7241944Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7242567Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 39, in validate
+2026-10-04T00:39:23.7243191Z #     raise ValueError('Invalid source support interval')
+2026-10-04T00:39:23.7243597Z # ValueError: Invalid source support interval
+2026-10-04T00:39:23.7243943Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7244559Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7245258Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7245850Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7246484Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 81, in validate
+2026-10-04T00:39:23.7247191Z #     raise ValueError('Created land differs from the exact source geometry')
+2026-10-04T00:39:23.7247737Z # ValueError: Created land differs from the exact source geometry
+2026-10-04T00:39:23.7248140Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7248758Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7249472Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7249922Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7250545Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 101, in validate
+2026-10-04T00:39:23.7251239Z #     raise ValueError('Creation parent chain differs from reviewed proof')
+2026-10-04T00:39:23.7251773Z # ValueError: Creation parent chain differs from reviewed proof
+2026-10-04T00:39:23.7252174Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7252782Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7253485Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7253932Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7254552Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 86, in validate
+2026-10-04T00:39:23.7255271Z #     raise ValueError('Source identity rename must not masquerade as new land')
+2026-10-04T00:39:23.7255950Z # ValueError: Source identity rename must not masquerade as new land
+2026-10-04T00:39:23.7256367Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7256978Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7257683Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7258137Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7258756Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 88, in validate
+2026-10-04T00:39:23.7259440Z #     raise ValueError('Existing source identity cannot be created again')
+2026-10-04T00:39:23.7259953Z # ValueError: Existing source identity cannot be created again
+2026-10-04T00:39:23.7260346Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7261154Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7261856Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7262308Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7262929Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 71, in validate
+2026-10-04T00:39:23.7263623Z #     rings(matches[0]['geometry']['coordinates'])
+2026-10-04T00:39:23.7264268Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 70, in rings
+2026-10-04T00:39:23.7264755Z #     rings(row)
+2026-10-04T00:39:23.7265299Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 67, in rings
+2026-10-04T00:39:23.7266100Z #     raise ValueError('Source polygon rings must be explicitly closed')
+2026-10-04T00:39:23.7266605Z # ValueError: Source polygon rings must be explicitly closed
+2026-10-04T00:39:23.7267259Z # Subtest: pure source-backed creation has a null predecessor and retains every original geometry
+2026-10-04T00:39:23.7268014Z ok 83 - pure source-backed creation has a null predecessor and retains every original geometry
+2026-10-04T00:39:23.7268454Z   ---
+2026-10-04T00:39:23.7268656Z   duration_ms: 725.245872
+2026-10-04T00:39:23.7268886Z   type: 'test'
+2026-10-04T00:39:23.7269079Z   ...
+2026-10-04T00:39:23.7269584Z # Subtest: latitude and antimeridian creation uses actual narrow land, not a world-width polygon
+2026-10-04T00:39:23.7270320Z ok 84 - latitude and antimeridian creation uses actual narrow land, not a world-width polygon
+2026-10-04T00:39:23.7270752Z   ---
+2026-10-04T00:39:23.7270942Z   duration_ms: 492.106052
+2026-10-04T00:39:23.7271163Z   type: 'test'
+2026-10-04T00:39:23.7271351Z   ...
+2026-10-04T00:39:23.7271833Z # Subtest: reject existing identity, duplicate land and competing overlap without writing output
+2026-10-04T00:39:23.7272571Z ok 85 - reject existing identity, duplicate land and competing overlap without writing output
+2026-10-04T00:39:23.7272996Z   ---
+2026-10-04T00:39:23.7273183Z   duration_ms: 727.205101
+2026-10-04T00:39:23.7273399Z   type: 'test'
+2026-10-04T00:39:23.7273589Z   ...
+2026-10-04T00:39:23.7274131Z # Subtest: reject unsupported source, altered geometry, invalid coordinates, chain gaps and disguised rename
+2026-10-04T00:39:23.7274967Z ok 86 - reject unsupported source, altered geometry, invalid coordinates, chain gaps and disguised rename
+2026-10-04T00:39:23.7275548Z   ---
+2026-10-04T00:39:23.7275761Z   duration_ms: 1944.104248
+2026-10-04T00:39:23.7275993Z   type: 'test'
+2026-10-04T00:39:23.7276186Z   ...
+2026-10-04T00:39:23.7276618Z # Subtest: a creation receipt cannot transfer history or add an unaccounted identity
+2026-10-04T00:39:23.7277258Z ok 87 - a creation receipt cannot transfer history or add an unaccounted identity
+2026-10-04T00:39:23.7277642Z   ---
+2026-10-04T00:39:23.7277829Z   duration_ms: 479.884234
+2026-10-04T00:39:23.7278054Z   type: 'test'
+2026-10-04T00:39:23.7278244Z   ...
+2026-10-04T00:39:23.7278488Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7279121Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7279841Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7280303Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7280941Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 62, in validate
+2026-10-04T00:39:23.7281560Z #     coordinates(matches[0]['geometry']['coordinates'])
+2026-10-04T00:39:23.7282237Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 61, in coordinates
+2026-10-04T00:39:23.7282767Z #     coordinates(row)
+2026-10-04T00:39:23.7283354Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 61, in coordinates
+2026-10-04T00:39:23.7284027Z #     coordinates(row)
+2026-10-04T00:39:23.7284609Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 58, in coordinates
+2026-10-04T00:39:23.7285306Z #     raise ValueError('Invalid longitude/latitude source coordinates')
+2026-10-04T00:39:23.7285987Z # ValueError: Invalid longitude/latitude source coordinates
+2026-10-04T00:39:23.7286384Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7287124Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7287860Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7288315Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7288944Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 54, in validate
+2026-10-04T00:39:23.7289674Z #     raise ValueError('Invalid raw source geometry must not be silently repaired')
+2026-10-04T00:39:23.7290270Z # ValueError: Invalid raw source geometry must not be silently repaired
+2026-10-04T00:39:23.7290706Z # Traceback (most recent call last):
+2026-10-04T00:39:23.7291321Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 114, in <module>
+2026-10-04T00:39:23.7292026Z #     print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+2026-10-04T00:39:23.7292477Z #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-04T00:39:23.7293108Z #   File "/home/runner/work/WorldAtlas/WorldAtlas/scripts/validate-land-creations.py", line 108, in validate
+2026-10-04T00:39:23.7293827Z #     raise ValueError('Creation overlaps existing or competing land: ' + other)
+2026-10-04T00:39:23.7294392Z # ValueError: Creation overlaps existing or competing land: competing
+2026-10-04T00:39:23.7295030Z # Subtest: staged source creation compiles and publishes identical static/hosted crosswalks
+2026-10-04T00:39:23.7295855Z ok 88 - staged source creation compiles and publishes identical static/hosted crosswalks
+2026-10-04T00:39:23.7296274Z   ---
+2026-10-04T00:39:23.7296478Z   duration_ms: 856.616718
+2026-10-04T00:39:23.7296700Z   type: 'test'
+2026-10-04T00:39:23.7296890Z   ...
+2026-10-04T00:39:23.7297369Z # Subtest: invalid source coordinates, competing new land and old group mutations are rejected
+2026-10-04T00:39:23.7298082Z ok 89 - invalid source coordinates, competing new land and old group mutations are rejected
+2026-10-04T00:39:23.7298505Z   ---
+2026-10-04T00:39:23.7298699Z   duration_ms: 625.921595
+2026-10-04T00:39:23.7298921Z   type: 'test'
+2026-10-04T00:39:23.7299106Z   ...
+2026-10-04T00:39:23.7299577Z # Subtest: retained replacements archive all six exact originals without predecessor transfer
+2026-10-04T00:39:23.7300281Z ok 90 - retained replacements archive all six exact originals without predecessor transfer
+2026-10-04T00:39:23.7300698Z   ---
+2026-10-04T00:39:23.7300886Z   duration_ms: 19.012337
+2026-10-04T00:39:23.7301102Z   type: 'test'
+2026-10-04T00:39:23.7301290Z   ...
+2026-10-04T00:39:23.7301589Z # Subtest: an unrelated old feature mutation is rejected
+2026-10-04T00:39:23.7302011Z ok 91 - an unrelated old feature mutation is rejected
+2026-10-04T00:39:23.7302298Z   ---
+2026-10-04T00:39:23.7302488Z   duration_ms: 1.044623
+2026-10-04T00:39:23.7302701Z   type: 'test'
+2026-10-04T00:39:23.7302885Z   ...
+2026-10-04T00:39:23.7303285Z # Subtest: exact changed feature archives cannot substitute modified originals
+2026-10-04T00:39:23.7303883Z ok 92 - exact changed feature archives cannot substitute modified originals
+2026-10-04T00:39:23.7304249Z   ---
+2026-10-04T00:39:23.7304439Z   duration_ms: 0.461403
+2026-10-04T00:39:23.7304651Z   type: 'test'
+2026-10-04T00:39:23.7304839Z   ...
+2026-10-04T00:39:23.7305176Z # Subtest: duplicate or replaced stable identities are rejected
+2026-10-04T00:39:23.7305772Z ok 93 - duplicate or replaced stable identities are rejected
+2026-10-04T00:39:23.7306083Z   ---
+2026-10-04T00:39:23.7306271Z   duration_ms: 0.609189
+2026-10-04T00:39:23.7306611Z   type: 'test'
+2026-10-04T00:39:23.7306796Z   ...
+2026-10-04T00:39:23.7307270Z # Subtest: source proof cannot authorize historical transfer or missing independent validation
+2026-10-04T00:39:23.7307987Z ok 94 - source proof cannot authorize historical transfer or missing independent validation
+2026-10-04T00:39:23.7308415Z   ---
+2026-10-04T00:39:23.7308601Z   duration_ms: 0.41701
+2026-10-04T00:39:23.7308811Z   type: 'test'
+2026-10-04T00:39:23.7308995Z   ...
+2026-10-04T00:39:23.7309533Z # Subtest: bounded replacement subprocess writes the same exact validated receipt
+2026-10-04T00:39:23.7310158Z ok 95 - bounded replacement subprocess writes the same exact validated receipt
+2026-10-04T00:39:23.7310538Z   ---
+2026-10-04T00:39:23.7310724Z   duration_ms: 94.394786
+2026-10-04T00:39:23.7310941Z   type: 'test'
+2026-10-04T00:39:23.7311126Z   ...
+2026-10-04T00:39:23.7311664Z # Subtest: evidence-only pages omit empty identities but retain withdrawal-only subjects and complete claims
+2026-10-04T00:39:23.7312503Z ok 96 - evidence-only pages omit empty identities but retain withdrawal-only subjects and complete claims
+2026-10-04T00:39:23.7312976Z   ---
+2026-10-04T00:39:23.7313163Z   duration_ms: 138.498921
+2026-10-04T00:39:23.7313386Z   type: 'test'
+2026-10-04T00:39:23.7313574Z   ...
+2026-10-04T00:39:23.7314159Z # Subtest: entity pages return exactly shared whole-location winners, source dictionaries and all-tier preferred names
+2026-10-04T00:39:23.7315083Z ok 97 - entity pages return exactly shared whole-location winners, source dictionaries and all-tier preferred names
+2026-10-04T00:39:23.7315723Z   ---
+2026-10-04T00:39:23.7315916Z   duration_ms: 70.465638
+2026-10-04T00:39:23.7316135Z   type: 'test'
+2026-10-04T00:39:23.7316322Z   ...
+2026-10-04T00:39:23.7316910Z # Subtest: entity cursor pages never split an attribute set and preserve aliases, examples, lifetimes and end sentinels
+2026-10-04T00:39:23.7317813Z ok 98 - entity cursor pages never split an attribute set and preserve aliases, examples, lifetimes and end sentinels
+2026-10-04T00:39:23.7318319Z   ---
+2026-10-04T00:39:23.7318505Z   duration_ms: 61.509484
+2026-10-04T00:39:23.7318722Z   type: 'test'
+2026-10-04T00:39:23.7318906Z   ...
+2026-10-04T00:39:23.7319416Z # Subtest: inactive archived identities stay inspectable without inflating fixed-geography map pages
+2026-10-04T00:39:23.7320201Z ok 99 - inactive archived identities stay inspectable without inflating fixed-geography map pages
+2026-10-04T00:39:23.7320648Z   ---
+2026-10-04T00:39:23.7320840Z   duration_ms: 96.185105
+2026-10-04T00:39:23.7321069Z   type: 'test'
+2026-10-04T00:39:23.7321264Z   ...
+2026-10-04T00:39:23.7321824Z # Subtest: page withdrawals suppress prepared fallback claims for attributes and names with no wrong truncation
+2026-10-04T00:39:23.7322694Z ok 100 - page withdrawals suppress prepared fallback claims for attributes and names with no wrong truncation
+2026-10-04T00:39:23.7323178Z   ---
+2026-10-04T00:39:23.7323366Z   duration_ms: 52.69914
+2026-10-04T00:39:23.7323579Z   type: 'test'
+2026-10-04T00:39:23.7323769Z   ...
+2026-10-04T00:39:23.7324325Z # Subtest: metadata summarization preserves all no-inhabitants proof semantics and points to original evidence
+2026-10-04T00:39:23.7325189Z ok 101 - metadata summarization preserves all no-inhabitants proof semantics and points to original evidence
+2026-10-04T00:39:23.7325791Z   ---
+2026-10-04T00:39:23.7325979Z   duration_ms: 48.092416
+2026-10-04T00:39:23.7326195Z   type: 'test'
+2026-10-04T00:39:23.7326381Z   ...
+2026-10-04T00:39:23.7326835Z # Subtest: mid-page writes reject the entire map page with a retryable revision conflict
+2026-10-04T00:39:23.7327497Z ok 102 - mid-page writes reject the entire map page with a retryable revision conflict
+2026-10-04T00:39:23.7327927Z   ---
+2026-10-04T00:39:23.7328115Z   duration_ms: 42.508487
+2026-10-04T00:39:23.7328331Z   type: 'test'
+2026-10-04T00:39:23.7328517Z   ...
+2026-10-04T00:39:23.7328987Z # Subtest: priority ties use the shared UTF-16 identity order instead of SQLite UTF-8 collation
+2026-10-04T00:39:23.7329836Z ok 103 - priority ties use the shared UTF-16 identity order instead of SQLite UTF-8 collation
+2026-10-04T00:39:23.7330251Z   ---
+2026-10-04T00:39:23.7330439Z   duration_ms: 48.362054
+2026-10-04T00:39:23.7330654Z   type: 'test'
+2026-10-04T00:39:23.7330843Z   ...
+2026-10-04T00:39:23.7331389Z # Subtest: the shared browser format rejects incomplete, duplicated, mismatched and unscoped response pages
+2026-10-04T00:39:23.7332320Z ok 104 - the shared browser format rejects incomplete, duplicated, mismatched and unscoped response pages
+2026-10-04T00:39:23.7332791Z   ---
+2026-10-04T00:39:23.7332977Z   duration_ms: 43.470816
+2026-10-04T00:39:23.7333194Z   type: 'test'
+2026-10-04T00:39:23.7333379Z   ...
+2026-10-04T00:39:23.7334241Z # {"fixture":"1000-locations-9000-attributes","queries":7,"page_bytes":2393036,"elapsed_ms":199.57,"attribute_index":"attributes_location_dates","name_index":"names_entity_dates"}
+2026-10-04T00:39:23.7335279Z # Subtest: 1000 locations and 9000 attributes use seven bounded indexed queries instead of claim pages
+2026-10-04T00:39:23.7336187Z ok 105 - 1000 locations and 9000 attributes use seven bounded indexed queries instead of claim pages
+2026-10-04T00:39:23.7336633Z   ---
+2026-10-04T00:39:23.7336823Z   duration_ms: 6823.538444
+2026-10-04T00:39:23.7337057Z   type: 'test'
+2026-10-04T00:39:23.7337242Z   ...
+2026-10-04T00:39:23.7337716Z # Subtest: client discovers later pages and polls latched ID when the run leaves recent results
+2026-10-04T00:39:23.7338439Z ok 106 - client discovers later pages and polls latched ID when the run leaves recent results
+2026-10-04T00:39:23.7338860Z   ---
+2026-10-04T00:39:23.7339053Z   duration_ms: 5407.611195
+2026-10-04T00:39:23.7339275Z   type: 'test'
+2026-10-04T00:39:23.7339459Z   ...
+2026-10-04T00:39:23.7339863Z # Subtest: cancelled pending request is retried without changing authored head
+2026-10-04T00:39:23.7340460Z ok 107 - cancelled pending request is retried without changing authored head
+2026-10-04T00:39:23.7340829Z   ---
+2026-10-04T00:39:23.7341030Z   duration_ms: 5210.280842
+2026-10-04T00:39:23.7341252Z   type: 'test'
+2026-10-04T00:39:23.7341439Z   ...
+2026-10-04T00:39:23.7341885Z # Subtest: main advance retries unchanged head but failed integration ends without retry
+2026-10-04T00:39:23.7342547Z ok 108 - main advance retries unchanged head but failed integration ends without retry
+2026-10-04T00:39:23.7342945Z   ---
+2026-10-04T00:39:23.7343135Z   duration_ms: 3937.068184
+2026-10-04T00:39:23.7343354Z   type: 'test'
+2026-10-04T00:39:23.7343544Z   ...
+2026-10-04T00:39:23.7343950Z # Subtest: frozen migration SQL and snapshots retain their published identities
+2026-10-04T00:39:23.7344549Z ok 109 - frozen migration SQL and snapshots retain their published identities
+2026-10-04T00:39:23.7344920Z   ---
+2026-10-04T00:39:23.7345115Z   duration_ms: 7.932655
+2026-10-04T00:39:23.7345328Z   type: 'test'
+2026-10-04T00:39:23.7345632Z   ...
+2026-10-04T00:39:23.7346329Z # Subtest: actual PostgreSQL forward DDL preserves every baseline byte and sequence, grants minimum runtime access, and retries idempotently
+2026-10-04T00:39:23.7347419Z ok 110 - actual PostgreSQL forward DDL preserves every baseline byte and sequence, grants minimum runtime access, and retries idempotently
+2026-10-04T00:39:23.7348002Z   ---
+2026-10-04T00:39:23.7348189Z   duration_ms: 4422.661709
+2026-10-04T00:39:23.7348409Z   type: 'test'
+2026-10-04T00:39:23.7348593Z   ...
+2026-10-04T00:39:23.7349062Z # Subtest: forward failure rolls back DDL, registry and grants without changing original bytes
+2026-10-04T00:39:23.7349761Z ok 111 - forward failure rolls back DDL, registry and grants without changing original bytes
+2026-10-04T00:39:23.7350178Z   ---
+2026-10-04T00:39:23.7350366Z   duration_ms: 1942.266681
+2026-10-04T00:39:23.7350588Z   type: 'test'
+2026-10-04T00:39:23.7350777Z   ...
+2026-10-04T00:39:23.7351318Z # Subtest: registered catalog tampering and unreviewed hashes reject instead of silently repairing a database
+2026-10-04T00:39:23.7352168Z ok 112 - registered catalog tampering and unreviewed hashes reject instead of silently repairing a database
+2026-10-04T00:39:23.7352779Z   ---
+2026-10-04T00:39:23.7352964Z   duration_ms: 3098.562665
+2026-10-04T00:39:23.7353184Z   type: 'test'
+2026-10-04T00:39:23.7353369Z   ...
+2026-10-04T00:39:23.7353872Z # Subtest: missing reviewed rehearsal operation performs no management requests or database mutation
+2026-10-04T00:39:23.7354643Z ok 113 - missing reviewed rehearsal operation performs no management requests or database mutation
+2026-10-04T00:39:23.7355205Z   ---
+2026-10-04T00:39:23.7355396Z   duration_ms: 3.753247
+2026-10-04T00:39:23.7355739Z   type: 'test'
+2026-10-04T00:39:23.7355930Z   ...
+2026-10-04T00:39:23.7356425Z # Subtest: reviewed forward operation requires an actual production baseline and exact ordered files
+2026-10-04T00:39:23.7357192Z ok 114 - reviewed forward operation requires an actual production baseline and exact ordered files
+2026-10-04T00:39:23.7357632Z   ---
+2026-10-04T00:39:23.7357816Z   duration_ms: 0.985432
+2026-10-04T00:39:23.7358039Z   type: 'test'
+2026-10-04T00:39:23.7358226Z   ...
+2026-10-04T00:39:23.7358788Z # Subtest: fresh hash-pinned private Site maintenance attestation rejects stale, writable and mismatched context
+2026-10-04T00:39:23.7359661Z ok 115 - fresh hash-pinned private Site maintenance attestation rejects stale, writable and mismatched context
+2026-10-04T00:39:23.7360147Z   ---
+2026-10-04T00:39:23.7360332Z   duration_ms: 279.990745
+2026-10-04T00:39:23.7360550Z   type: 'test'
+2026-10-04T00:39:23.7360738Z   ...
+2026-10-04T00:39:23.7361200Z # Subtest: management workflows require explicit manual dispatch and reject push selection
+2026-10-04T00:39:23.7361897Z ok 116 - management workflows require explicit manual dispatch and reject push selection
+2026-10-04T00:39:23.7362310Z   ---
+2026-10-04T00:39:23.7362495Z   duration_ms: 178.499547
+2026-10-04T00:39:23.7362714Z   type: 'test'
+2026-10-04T00:39:23.7362898Z   ...
+2026-10-04T00:39:23.7363565Z # Subtest: third reviewed forward migration installs typed runtime privileges without changing retained core contracts or replay identity
+2026-10-04T00:39:23.7364651Z ok 117 - third reviewed forward migration installs typed runtime privileges without changing retained core contracts or replay identity
+2026-10-04T00:39:23.7365226Z   ---
+2026-10-04T00:39:23.7365413Z   duration_ms: 6891.974782
+2026-10-04T00:39:23.7366040Z   type: 'test'
+2026-10-04T00:39:23.7366330Z   ...
+2026-10-04T00:39:23.7367009Z # Subtest: canonical screen reports actual source-land cells for a compact territorial polygon
+2026-10-04T00:39:23.7367761Z ok 118 - canonical screen reports actual source-land cells for a compact territorial polygon
+2026-10-04T00:39:23.7368190Z   ---
+2026-10-04T00:39:23.7368378Z   duration_ms: 2.342961
+2026-10-04T00:39:23.7368595Z   type: 'test'
+2026-10-04T00:39:23.7368781Z   ...
+2026-10-04T00:39:23.7369256Z # Subtest: a genuine polygon smaller than a cell remains unrepresented without assigning water
+2026-10-04T00:39:23.7369956Z ok 119 - a genuine polygon smaller than a cell remains unrepresented without assigning water
+2026-10-04T00:39:23.7370381Z   ---
+2026-10-04T00:39:23.7370571Z   duration_ms: 1.111057
+2026-10-04T00:39:23.7370784Z   type: 'test'
+2026-10-04T00:39:23.7370972Z   ...
+2026-10-04T00:39:23.7371403Z # Subtest: archived original dry land blocks a purported new identity on that land
+2026-10-04T00:39:23.7372036Z ok 120 - archived original dry land blocks a purported new identity on that land
+2026-10-04T00:39:23.7372419Z   ---
+2026-10-04T00:39:23.7372605Z   duration_ms: 289.694973
+2026-10-04T00:39:23.7372831Z   type: 'test'
+2026-10-04T00:39:23.7373021Z   ...
+2026-10-04T00:39:23.7373501Z # Subtest: an exact-name homonym on different land does not transfer or reuse archived identity
+2026-10-04T00:39:23.7374214Z ok 121 - an exact-name homonym on different land does not transfer or reuse archived identity
+2026-10-04T00:39:23.7374633Z   ---
+2026-10-04T00:39:23.7374823Z   duration_ms: 285.01713
+2026-10-04T00:39:23.7375194Z   type: 'test'
+2026-10-04T00:39:23.7375638Z   ...
+2026-10-04T00:39:23.7376551Z # Subtest: changed archive bytes fail before considering identity absence
+2026-10-04T00:39:23.7377263Z ok 122 - changed archive bytes fail before considering identity absence
+2026-10-04T00:39:23.7377770Z   ---
+2026-10-04T00:39:23.7378077Z   duration_ms: 254.210613
+2026-10-04T00:39:23.7378423Z   type: 'test'
+2026-10-04T00:39:23.7378776Z   ...
+2026-10-04T00:39:23.7379353Z # Subtest: candidate preparation refuses an existing output instead of overwriting evidence
+2026-10-04T00:39:23.7380377Z ok 123 - candidate preparation refuses an existing output instead of overwriting evidence
+2026-10-04T00:39:23.7380926Z   ---
+2026-10-04T00:39:23.7394515Z   duration_ms: 2.077294
+2026-10-04T00:39:23.7394970Z   type: 'test'
+2026-10-04T00:39:23.7395203Z   ...
+2026-10-04T00:39:23.7395880Z # Subtest: contrast constraints use actual half-open interval overlap, never range envelopes
+2026-10-04T00:39:23.7396654Z ok 124 - contrast constraints use actual half-open interval overlap, never range envelopes
+2026-10-04T00:39:23.7397113Z   ---
+2026-10-04T00:39:23.7397314Z   duration_ms: 72.504377
+2026-10-04T00:39:23.7397541Z   type: 'test'
+2026-10-04T00:39:23.7397727Z   ...
+2026-10-04T00:39:23.7398327Z # Subtest: dated membership changes province lookup and picking records while retaining exact grid cells and geometry
+2026-10-04T00:39:23.7399247Z ok 125 - dated membership changes province lookup and picking records while retaining exact grid cells and geometry
+2026-10-04T00:39:23.7399748Z   ---
+2026-10-04T00:39:23.7399940Z   duration_ms: 5.269492
+2026-10-04T00:39:23.7400155Z   type: 'test'
+2026-10-04T00:39:23.7400341Z   ...
+2026-10-04T00:39:23.7400971Z # Subtest: metadata refresh accepts reordered identities and atomically rejects replacements, missing and duplicate locations
+2026-10-04T00:39:23.7401962Z ok 126 - metadata refresh accepts reordered identities and atomically rejects replacements, missing and duplicate locations
+2026-10-04T00:39:23.7402495Z   ---
+2026-10-04T00:39:23.7402680Z   duration_ms: 1.92514
+2026-10-04T00:39:23.7402899Z   type: 'test'
+2026-10-04T00:39:23.7403081Z   ...
+2026-10-04T00:39:23.7403634Z # Subtest: boundary geometry cache ignores source/date/provenance changes but detects actual dated footprints
+2026-10-04T00:39:23.7404510Z ok 127 - boundary geometry cache ignores source/date/provenance changes but detects actual dated footprints
+2026-10-04T00:39:23.7404994Z   ---
+2026-10-04T00:39:23.7405182Z   duration_ms: 0.530763
+2026-10-04T00:39:23.7405393Z   type: 'test'
+2026-10-04T00:39:23.7405714Z   ...
+2026-10-04T00:39:23.7406302Z # Subtest: PostgreSQL evidence-only map pages retain retirement-only subjects without enumerating empty geography
+2026-10-04T00:39:23.7407192Z ok 128 - PostgreSQL evidence-only map pages retain retirement-only subjects without enumerating empty geography
+2026-10-04T00:39:23.7407682Z   ---
+2026-10-04T00:39:23.7407866Z   duration_ms: 4729.490717
+2026-10-04T00:39:23.7408085Z   type: 'test'
+2026-10-04T00:39:23.7408266Z   ...
+2026-10-04T00:39:23.7408787Z # Subtest: actual PostgreSQL applies all 14 tables and hosted smoke preserves original corrected evidence
+2026-10-04T00:39:23.7409591Z ok 129 - actual PostgreSQL applies all 14 tables and hosted smoke preserves original corrected evidence
+2026-10-04T00:39:23.7410043Z   ---
+2026-10-04T00:39:23.7410227Z   duration_ms: 2793.264132
+2026-10-04T00:39:23.7410442Z   type: 'test'
+2026-10-04T00:39:23.7410624Z   ...
+2026-10-04T00:39:23.7411206Z # Subtest: PostgreSQL claim/name readers preserve JSON bytes, stable identities, half-open dates, nulls and examples
+2026-10-04T00:39:23.7412103Z ok 130 - PostgreSQL claim/name readers preserve JSON bytes, stable identities, half-open dates, nulls and examples
+2026-10-04T00:39:23.7412597Z   ---
+2026-10-04T00:39:23.7412779Z   duration_ms: 2569.710386
+2026-10-04T00:39:23.7412995Z   type: 'test'
+2026-10-04T00:39:23.7413180Z   ...
+2026-10-04T00:39:23.7413810Z # Subtest: PostgreSQL guards reject interval/source/classification/owner contradictions and roll back complete failed batches
+2026-10-04T00:39:23.7414804Z ok 131 - PostgreSQL guards reject interval/source/classification/owner contradictions and roll back complete failed batches
+2026-10-04T00:39:23.7415690Z   ---
+2026-10-04T00:39:23.7415883Z   duration_ms: 2813.074123
+2026-10-04T00:39:23.7416116Z   type: 'test'
+2026-10-04T00:39:23.7416305Z   ...
+2026-10-04T00:39:23.7416878Z # Subtest: PostgreSQL atomic correction retires overlap, retains old bytes and cannot resurrect immutable evidence
+2026-10-04T00:39:23.7417884Z ok 132 - PostgreSQL atomic correction retires overlap, retains old bytes and cannot resurrect immutable evidence
+2026-10-04T00:39:23.7418377Z   ---
+2026-10-04T00:39:23.7418566Z   duration_ms: 2719.764618
+2026-10-04T00:39:23.7418790Z   type: 'test'
+2026-10-04T00:39:23.7418969Z   ...
+2026-10-04T00:39:23.7419467Z # Subtest: PostgreSQL rank/habitation and fixed environment guards match literal-zero proof policy
+2026-10-04T00:39:23.7420231Z ok 133 - PostgreSQL rank/habitation and fixed environment guards match literal-zero proof policy
+2026-10-04T00:39:23.7420669Z   ---
+2026-10-04T00:39:23.7420866Z   duration_ms: 2435.945313
+2026-10-04T00:39:23.7421089Z   type: 'test'
+2026-10-04T00:39:23.7421269Z   ...
+2026-10-04T00:39:23.7421835Z # Subtest: PostgreSQL catalogs/graph/media paging and compact map use actual hosted SQL with whole-location parity
+2026-10-04T00:39:23.7422738Z ok 134 - PostgreSQL catalogs/graph/media paging and compact map use actual hosted SQL with whole-location parity
+2026-10-04T00:39:23.7423240Z   ---
+2026-10-04T00:39:23.7423430Z   duration_ms: 2671.401189
+2026-10-04T00:39:23.7423660Z   type: 'test'
+2026-10-04T00:39:23.7423843Z   ...
+2026-10-04T00:39:23.7424405Z # Subtest: PostgreSQL stages and publishes complete pinned reference geography without mutating registry/evidence
+2026-10-04T00:39:23.7425281Z ok 135 - PostgreSQL stages and publishes complete pinned reference geography without mutating registry/evidence
+2026-10-04T00:39:23.7426140Z   ---
+2026-10-04T00:39:23.7426341Z   duration_ms: 3725.452266
+2026-10-04T00:39:23.7426563Z   type: 'test'
+2026-10-04T00:39:23.7426754Z   ...
+2026-10-04T00:39:23.7427330Z # Subtest: actual PostgreSQL and frozen D1 produce identical evidence/source bytes and selected-year service values
+2026-10-04T00:39:23.7428244Z ok 136 - actual PostgreSQL and frozen D1 produce identical evidence/source bytes and selected-year service values
+2026-10-04T00:39:23.7428733Z   ---
+2026-10-04T00:39:23.7428924Z   duration_ms: 2968.972376
+2026-10-04T00:39:23.7429144Z   type: 'test'
+2026-10-04T00:39:23.7429326Z   ...
+2026-10-04T00:39:23.7429877Z # Subtest: PostgreSQL compact metadata summaries retain zero-population proof semantics and evidence links
+2026-10-04T00:39:23.7430707Z ok 137 - PostgreSQL compact metadata summaries retain zero-population proof semantics and evidence links
+2026-10-04T00:39:23.7431178Z   ---
+2026-10-04T00:39:23.7431360Z   duration_ms: 2697.671271
+2026-10-04T00:39:23.7431576Z   type: 'test'
+2026-10-04T00:39:23.7431757Z   ...
+2026-10-04T00:39:23.7432341Z # Subtest: PostgreSQL geographic transaction guards reject unpublished/stale hashes and retain pinned replay receipts
+2026-10-04T00:39:23.7433262Z ok 138 - PostgreSQL geographic transaction guards reject unpublished/stale hashes and retain pinned replay receipts
+2026-10-04T00:39:23.7433773Z   ---
+2026-10-04T00:39:23.7433954Z   duration_ms: 2929.643165
+2026-10-04T00:39:23.7434168Z   type: 'test'
+2026-10-04T00:39:23.7434352Z   ...
+2026-10-04T00:39:23.7434890Z # Subtest: new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption
+2026-10-04T00:39:23.7435879Z ok 139 - new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption
+2026-10-04T00:39:23.7436374Z   ---
+2026-10-04T00:39:23.7436561Z   duration_ms: 4.501467
+2026-10-04T00:39:23.7436775Z   type: 'test'
+2026-10-04T00:39:23.7436959Z   ...
+2026-10-04T00:39:23.7437436Z # Subtest: positive real-format ledger validates actual files and binds an independent review
+2026-10-04T00:39:23.7438161Z ok 140 - positive real-format ledger validates actual files and binds an independent review
+2026-10-04T00:39:23.7438741Z   ---
+2026-10-04T00:39:23.7438925Z   duration_ms: 3.710477
+2026-10-04T00:39:23.7439141Z   type: 'test'
+2026-10-04T00:39:23.7439323Z   ...
+2026-10-04T00:39:23.7439848Z # Subtest: regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail
+2026-10-04T00:39:23.7440660Z ok 141 - regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail
+2026-10-04T00:39:23.7441113Z   ---
+2026-10-04T00:39:23.7441407Z   duration_ms: 3.045584
+2026-10-04T00:39:23.7441628Z   type: 'test'
+2026-10-04T00:39:23.7441813Z   ...
+2026-10-04T00:39:23.7442399Z # Subtest: full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence
+2026-10-04T00:39:23.7443325Z ok 142 - full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence
+2026-10-04T00:39:23.7443833Z   ---
+2026-10-04T00:39:23.7444015Z   duration_ms: 1.479516
+2026-10-04T00:39:23.7444229Z   type: 'test'
+2026-10-04T00:39:23.7444472Z   ...
+2026-10-04T00:39:23.7445025Z # Subtest: coordinate/helper policies require positive and negative controls; generators need reproducibility
+2026-10-04T00:39:23.7446012Z ok 143 - coordinate/helper policies require positive and negative controls; generators need reproducibility
+2026-10-04T00:39:23.7446488Z   ---
+2026-10-04T00:39:23.7446672Z   duration_ms: 2.664762
+2026-10-04T00:39:23.7446881Z   type: 'test'
+2026-10-04T00:39:23.7447062Z   ...
+2026-10-04T00:39:23.7447535Z # Subtest: generator controls bind actual positive, negative and equal two-run output bytes
+2026-10-04T00:39:23.7448235Z ok 144 - generator controls bind actual positive, negative and equal two-run output bytes
+2026-10-04T00:39:23.7448645Z   ---
+2026-10-04T00:39:23.7448825Z   duration_ms: 3.755151
+2026-10-04T00:39:23.7449031Z   type: 'test'
+2026-10-04T00:39:23.7449211Z   ...
+2026-10-04T00:39:23.7449724Z # Subtest: Washington-style generated narrative/table mismatch fails against the same numeric ledger
+2026-10-04T00:39:23.7450510Z ok 145 - Washington-style generated narrative/table mismatch fails against the same numeric ledger
+2026-10-04T00:39:23.7450952Z   ---
+2026-10-04T00:39:23.7451137Z   duration_ms: 1.029976
+2026-10-04T00:39:23.7451345Z   type: 'test'
+2026-10-04T00:39:23.7451538Z   ...
+2026-10-04T00:39:23.7452071Z # Subtest: reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review
+2026-10-04T00:39:23.7452904Z ok 146 - reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review
+2026-10-04T00:39:23.7453376Z   ---
+2026-10-04T00:39:23.7453555Z   duration_ms: 3.909659
+2026-10-04T00:39:23.7453762Z   type: 'test'
+2026-10-04T00:39:23.7453951Z   ...
+2026-10-04T00:39:23.7454426Z # Subtest: mock remote queue checks exact blobs/head/independent receipt with read-only requests
+2026-10-04T00:39:23.7455149Z ok 147 - mock remote queue checks exact blobs/head/independent receipt with read-only requests
+2026-10-04T00:39:23.7455699Z   ---
+2026-10-04T00:39:23.7455888Z   duration_ms: 10.571144
+2026-10-04T00:39:23.7456109Z   type: 'test'
+2026-10-04T00:39:23.7456289Z   ...
+2026-10-04T00:39:23.7456650Z # Subtest: incomplete remote trees cannot become a passed byte check
+2026-10-04T00:39:23.7457172Z ok 148 - incomplete remote trees cannot become a passed byte check
+2026-10-04T00:39:23.7457499Z   ---
+2026-10-04T00:39:23.7457680Z   duration_ms: 1.006742
+2026-10-04T00:39:23.7457891Z   type: 'test'
+2026-10-04T00:39:23.7458069Z   ...
+2026-10-04T00:39:23.7458504Z # Subtest: remote decisions reject stale exact-head reviews and a later change request
+2026-10-04T00:39:23.7459154Z ok 149 - remote decisions reject stale exact-head reviews and a later change request
+2026-10-04T00:39:23.7459546Z   ---
+2026-10-04T00:39:23.7459724Z   duration_ms: 6.250977
+2026-10-04T00:39:23.7459934Z   type: 'test'
+2026-10-04T00:39:23.7460108Z   ...
+2026-10-04T00:39:23.7460645Z # Subtest: unchanged authored evidence survives unrelated main advance, while current metrics require refresh
+2026-10-04T00:39:23.7461608Z ok 150 - unchanged authored evidence survives unrelated main advance, while current metrics require refresh
+2026-10-04T00:39:23.7462079Z   ---
+2026-10-04T00:39:23.7462257Z   duration_ms: 0.546432
+2026-10-04T00:39:23.7462469Z   type: 'test'
+2026-10-04T00:39:23.7462645Z   ...
+2026-10-04T00:39:23.7463196Z # Subtest: reference restoration preserves archived IDs, source context and exact original records idempotently
+2026-10-04T00:39:23.7464163Z ok 151 - reference restoration preserves archived IDs, source context and exact original records idempotently
+2026-10-04T00:39:23.7464645Z   ---
+2026-10-04T00:39:23.7464832Z   duration_ms: 17.675756
+2026-10-04T00:39:23.7465045Z   type: 'test'
+2026-10-04T00:39:23.7465224Z   ...
+2026-10-04T00:39:23.7466091Z # Subtest: existing active territory names, geometry, parents and owner context are never overwritten
+2026-10-04T00:39:23.7466905Z ok 152 - existing active territory names, geometry, parents and owner context are never overwritten
+2026-10-04T00:39:23.7467374Z   ---
+2026-10-04T00:39:23.7467566Z   duration_ms: 11.342637
+2026-10-04T00:39:23.7467779Z   type: 'test'
+2026-10-04T00:39:23.7467960Z   ...
+2026-10-04T00:39:23.7468445Z # Subtest: original record ID conflicts fail explicitly and restoration rolls back broken archives
+2026-10-04T00:39:23.7469201Z ok 153 - original record ID conflicts fail explicitly and restoration rolls back broken archives
+2026-10-04T00:39:23.7469632Z   ---
+2026-10-04T00:39:23.7469733Z   duration_ms: 10.379025
+2026-10-04T00:39:23.7469821Z   type: 'test'
+2026-10-04T00:39:23.7469896Z   ...
+2026-10-04T00:39:23.7470318Z # Subtest: the published source archive restores every original record into a fresh reference database
+2026-10-04T00:39:23.7470713Z ok 154 - the published source archive restores every original record into a fresh reference database
+2026-10-04T00:39:23.7470786Z   ---
+2026-10-04T00:39:23.7470880Z   duration_ms: 11229.31585
+2026-10-04T00:39:23.7470966Z   type: 'test'
+2026-10-04T00:39:23.7471044Z   ...
+2026-10-04T00:39:23.7471363Z # Subtest: current manifest is closed and no region can claim invented approvals
+2026-10-04T00:39:23.7471660Z ok 155 - current manifest is closed and no region can claim invented approvals
+2026-10-04T00:39:23.7471742Z   ---
+2026-10-04T00:39:23.7471835Z   duration_ms: 3.422368
+2026-10-04T00:39:23.7471915Z   type: 'test'
+2026-10-04T00:39:23.7471997Z   ...
+2026-10-04T00:39:23.7472197Z # Subtest: v1 worldwide approval remains compatible
+2026-10-04T00:39:23.7472387Z ok 156 - v1 worldwide approval remains compatible
+2026-10-04T00:39:23.7472466Z   ---
+2026-10-04T00:39:23.7472559Z   duration_ms: 1.315289
+2026-10-04T00:39:23.7472639Z   type: 'test'
+2026-10-04T00:39:23.7472717Z   ...
+2026-10-04T00:39:23.7473154Z # Subtest: regional content claims depend on macro and branch approval, not unfinished worldwide descendants
+2026-10-04T00:39:23.7473579Z ok 157 - regional content claims depend on macro and branch approval, not unfinished worldwide descendants
+2026-10-04T00:39:23.7473662Z   ---
+2026-10-04T00:39:23.7473748Z   duration_ms: 3.070441
+2026-10-04T00:39:23.7473833Z   type: 'test'
+2026-10-04T00:39:23.7473912Z   ...
+2026-10-04T00:39:23.7474223Z # Subtest: macro approval and explicit complete region certificates are required
+2026-10-04T00:39:23.7474521Z ok 158 - macro approval and explicit complete region certificates are required
+2026-10-04T00:39:23.7474601Z   ---
+2026-10-04T00:39:23.7474687Z   duration_ms: 1.019817
+2026-10-04T00:39:23.7474771Z   type: 'test'
+2026-10-04T00:39:23.7474848Z   ...
+2026-10-04T00:39:23.7475201Z # Subtest: pins and every location target are checked against explicitly selected regions
+2026-10-04T00:39:23.7475688Z ok 159 - pins and every location target are checked against explicitly selected regions
+2026-10-04T00:39:23.7475767Z   ---
+2026-10-04T00:39:23.7475860Z   duration_ms: 1.633153
+2026-10-04T00:39:23.7475945Z   type: 'test'
+2026-10-04T00:39:23.7476021Z   ...
+2026-10-04T00:39:23.7476246Z # Subtest: ambiguous territorial membership fails closed
+2026-10-04T00:39:23.7476604Z ok 160 - ambiguous territorial membership fails closed
+2026-10-04T00:39:23.7476680Z   ---
+2026-10-04T00:39:23.7476771Z   duration_ms: 0.301152
+2026-10-04T00:39:23.7476850Z   type: 'test'
+2026-10-04T00:39:23.7476928Z   ...
+2026-10-04T00:39:23.7477359Z # Subtest: all name, relationship and media targets are scoped; ancillary or geographic writes are refused
+2026-10-04T00:39:23.7477761Z ok 161 - all name, relationship and media targets are scoped; ancillary or geographic writes are refused
+2026-10-04T00:39:23.7477944Z   ---
+2026-10-04T00:39:23.7478042Z   duration_ms: 1.00013
+2026-10-04T00:39:23.7478121Z   type: 'test'
+2026-10-04T00:39:23.7478199Z   ...
+2026-10-04T00:39:23.7478554Z # Subtest: verified raw batches are inspected rather than trusting caller target summaries
+2026-10-04T00:39:23.7478882Z ok 162 - verified raw batches are inspected rather than trusting caller target summaries
+2026-10-04T00:39:23.7478962Z   ---
+2026-10-04T00:39:23.7479053Z   duration_ms: 2.75471
+2026-10-04T00:39:23.7479137Z   type: 'test'
+2026-10-04T00:39:23.7479219Z   ...
+2026-10-04T00:39:23.7479621Z # Subtest: corrections require a territorial crosswalk and cannot transfer facts to another location
+2026-10-04T00:39:23.7480012Z ok 163 - corrections require a territorial crosswalk and cannot transfer facts to another location
+2026-10-04T00:39:23.7480090Z   ---
+2026-10-04T00:39:23.7480177Z   duration_ms: 1.462965
+2026-10-04T00:39:23.7480263Z   type: 'test'
+2026-10-04T00:39:23.7480340Z   ...
+2026-10-04T00:39:23.7480726Z # Subtest: media campaign dry run validates original bytes and rights without network or receipts
+2026-10-04T00:39:23.7481101Z ok 164 - media campaign dry run validates original bytes and rights without network or receipts
+2026-10-04T00:39:23.7481181Z   ---
+2026-10-04T00:39:23.7481272Z   duration_ms: 150.308045
+2026-10-04T00:39:23.7481356Z   type: 'test'
+2026-10-04T00:39:23.7481429Z   ...
+2026-10-04T00:39:23.7481957Z # Subtest: actual Worker and registerMedia roundtrip retains provenance, immutable R2 bytes and resumable receipt hashes
+2026-10-04T00:39:23.7482453Z ok 165 - actual Worker and registerMedia roundtrip retains provenance, immutable R2 bytes and resumable receipt hashes
+2026-10-04T00:39:23.7482527Z   ---
+2026-10-04T00:39:23.7482626Z   duration_ms: 137.191582
+2026-10-04T00:39:23.7482716Z   type: 'test'
+2026-10-04T00:39:23.7482789Z   ...
+2026-10-04T00:39:23.7483178Z # Subtest: lost upload response rereads committed identity and full bytes without a second POST
+2026-10-04T00:39:23.7483548Z ok 166 - lost upload response rereads committed identity and full bytes without a second POST
+2026-10-04T00:39:23.7483622Z   ---
+2026-10-04T00:39:23.7483716Z   duration_ms: 46.06196
+2026-10-04T00:39:23.7483803Z   type: 'test'
+2026-10-04T00:39:23.7483876Z   ...
+2026-10-04T00:39:23.7484261Z # Subtest: failed campaign preserves verified objects and safely resumes only missing identities
+2026-10-04T00:39:23.7484632Z ok 167 - failed campaign preserves verified objects and safely resumes only missing identities
+2026-10-04T00:39:23.7484713Z   ---
+2026-10-04T00:39:23.7484808Z   duration_ms: 71.840478
+2026-10-04T00:39:23.7484886Z   type: 'test'
+2026-10-04T00:39:23.7484965Z   ...
+2026-10-04T00:39:23.7485556Z # Subtest: source mismatches, changed claims and changed local or remote bytes stop before replacing originals
+2026-10-04T00:39:23.7486029Z ok 168 - source mismatches, changed claims and changed local or remote bytes stop before replacing originals
+2026-10-04T00:39:23.7486127Z   ---
+2026-10-04T00:39:23.7486232Z   duration_ms: 66.24343
+2026-10-04T00:39:23.7486311Z   type: 'test'
+2026-10-04T00:39:23.7486392Z   ...
+2026-10-04T00:39:23.7486834Z # Subtest: tampered checkpoints, duplicate content identities and missing source dependencies are rejected
+2026-10-04T00:39:23.7487255Z ok 169 - tampered checkpoints, duplicate content identities and missing source dependencies are rejected
+2026-10-04T00:39:23.7487333Z   ---
+2026-10-04T00:39:23.7487422Z   duration_ms: 60.367938
+2026-10-04T00:39:23.7487506Z   type: 'test'
+2026-10-04T00:39:23.7487705Z   ...
+2026-10-04T00:39:23.7488105Z # Subtest: redirects never forward the private credential and untrusted API errors are not persisted
+2026-10-04T00:39:23.7488497Z ok 170 - redirects never forward the private credential and untrusted API errors are not persisted
+2026-10-04T00:39:23.7488576Z   ---
+2026-10-04T00:39:23.7488664Z   duration_ms: 46.771968
+2026-10-04T00:39:23.7488748Z   type: 'test'
+2026-10-04T00:39:23.7488825Z   ...
+2026-10-04T00:39:23.7489259Z # Subtest: encoded URL bounds and escaped local paths are enforced before any upload
+2026-10-04T00:39:23.7489577Z ok 171 - encoded URL bounds and escaped local paths are enforced before any upload
+2026-10-04T00:39:23.7489651Z   ---
+2026-10-04T00:39:23.7489743Z   duration_ms: 44.301789
+2026-10-04T00:39:23.7489827Z   type: 'test'
+2026-10-04T00:39:23.7489901Z   ...
+2026-10-04T00:39:23.7490279Z # Subtest: a truncated successful POST receipt is resolved by direct immutable metadata reread
+2026-10-04T00:39:23.7490638Z ok 172 - a truncated successful POST receipt is resolved by direct immutable metadata reread
+2026-10-04T00:39:23.7490716Z   ---
+2026-10-04T00:39:23.7490808Z   duration_ms: 44.137663
+2026-10-04T00:39:23.7490892Z   type: 'test'
+2026-10-04T00:39:23.7490965Z   ...
+2026-10-04T00:39:23.7491406Z # Subtest: optional registered source archives are checked by stable ID and digest before linking provenance
+2026-10-04T00:39:23.7491823Z ok 173 - optional registered source archives are checked by stable ID and digest before linking provenance
+2026-10-04T00:39:23.7491906Z   ---
+2026-10-04T00:39:23.7491997Z   duration_ms: 58.608772
+2026-10-04T00:39:23.7492077Z   type: 'test'
+2026-10-04T00:39:23.7492156Z   ...
+2026-10-04T00:39:23.7492591Z # Subtest: older services without provenance capability stop before creating immutable incomplete metadata
+2026-10-04T00:39:23.7493004Z ok 174 - older services without provenance capability stop before creating immutable incomplete metadata
+2026-10-04T00:39:23.7493084Z   ---
+2026-10-04T00:39:23.7493175Z   duration_ms: 41.100804
+2026-10-04T00:39:23.7493260Z   type: 'test'
+2026-10-04T00:39:23.7493338Z   ...
+2026-10-04T00:39:23.7493796Z # Subtest: sourced policy overlay changes exactly the three proven roles without mutating original source policy
+2026-10-04T00:39:23.7494234Z ok 175 - sourced policy overlay changes exactly the three proven roles without mutating original source policy
+2026-10-04T00:39:23.7494313Z   ---
+2026-10-04T00:39:23.7494399Z   duration_ms: 6.745471
+2026-10-04T00:39:23.7494483Z   type: 'test'
+2026-10-04T00:39:23.7494565Z   ...
+2026-10-04T00:39:23.7494959Z # Subtest: unrelated original-policy edits and duplicate correction identities require new review
+2026-10-04T00:39:23.7495338Z ok 176 - unrelated original-policy edits and duplicate correction identities require new review
+2026-10-04T00:39:23.7495542Z   ---
+2026-10-04T00:39:23.7495637Z   duration_ms: 23.283732
+2026-10-04T00:39:23.7495723Z   type: 'test'
+2026-10-04T00:39:23.7495801Z   ...
+2026-10-04T00:39:23.7496242Z # Subtest: every crosswalked location exposes its individually supported role and unchanged source vintage
+2026-10-04T00:39:23.7496669Z ok 177 - every crosswalked location exposes its individually supported role and unchanged source vintage
+2026-10-04T00:39:23.7496749Z   ---
+2026-10-04T00:39:23.7496836Z   duration_ms: 4.655064
+2026-10-04T00:39:23.7496921Z   type: 'test'
+2026-10-04T00:39:23.7496995Z   ...
+2026-10-04T00:39:23.7497379Z # Subtest: Monaco and Luxembourg remain explicit stable-ID proposals with no hierarchy mutation
+2026-10-04T00:39:23.7497756Z ok 178 - Monaco and Luxembourg remain explicit stable-ID proposals with no hierarchy mutation
+2026-10-04T00:39:23.7497832Z   ---
+2026-10-04T00:39:23.7497925Z   duration_ms: 101.696979
+2026-10-04T00:39:23.7498011Z   type: 'test'
+2026-10-04T00:39:23.7498083Z   ...
+2026-10-04T00:39:23.7498474Z # Subtest: v2 inventories all twenty-three tables and pins every reviewed D1/PostgreSQL migration
+2026-10-04T00:39:23.7498842Z ok 179 - v2 inventories all twenty-three tables and pins every reviewed D1/PostgreSQL migration
+2026-10-04T00:39:23.7499039Z   ---
+2026-10-04T00:39:23.7499132Z   duration_ms: 32.15544
+2026-10-04T00:39:23.7499213Z   type: 'test'
+2026-10-04T00:39:23.7499292Z   ...
+2026-10-04T00:39:23.7499724Z # Subtest: empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore
+2026-10-04T00:39:23.7500134Z ok 180 - empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore
+2026-10-04T00:39:23.7500213Z   ---
+2026-10-04T00:39:23.7500409Z   duration_ms: 5214.793669
+2026-10-04T00:39:23.7500491Z   type: 'test'
+2026-10-04T00:39:23.7500570Z   ...
+2026-10-04T00:39:23.7501073Z # Subtest: forward owner restoration streams all twenty-three tables, original JSON bytes, deferred receipts and sequence
+2026-10-04T00:39:23.7501560Z ok 181 - forward owner restoration streams all twenty-three tables, original JSON bytes, deferred receipts and sequence
+2026-10-04T00:39:23.7501641Z   ---
+2026-10-04T00:39:23.7501734Z   duration_ms: 4938.866554
+2026-10-04T00:39:23.7501818Z   type: 'test'
+2026-10-04T00:39:23.7501896Z   ...
+2026-10-04T00:39:23.7502308Z # Subtest: v2 detects changing staged publication, missing source guards and unexpected factual tables
+2026-10-04T00:39:23.7502705Z ok 182 - v2 detects changing staged publication, missing source guards and unexpected factual tables
+2026-10-04T00:39:23.7502784Z   ---
+2026-10-04T00:39:23.7502872Z   duration_ms: 3186.345341
+2026-10-04T00:39:23.7502956Z   type: 'test'
+2026-10-04T00:39:23.7503033Z   ...
+2026-10-04T00:39:23.7503417Z # Subtest: a missing target guard or source migration/raw-row proof fails before any target writes
+2026-10-04T00:39:23.7503794Z ok 183 - a missing target guard or source migration/raw-row proof fails before any target writes
+2026-10-04T00:39:23.7503872Z   ---
+2026-10-04T00:39:23.7503961Z   duration_ms: 4263.56395
+2026-10-04T00:39:23.7504045Z   type: 'test'
+2026-10-04T00:39:23.7504119Z   ...
+2026-10-04T00:39:23.7504520Z # Subtest: a deferred cross-table FK failure rolls back all twenty-three tables, guards and sequence
+2026-10-04T00:39:23.7504903Z ok 184 - a deferred cross-table FK failure rolls back all twenty-three tables, guards and sequence
+2026-10-04T00:39:23.7504977Z   ---
+2026-10-04T00:39:23.7505072Z   duration_ms: 3466.854661
+2026-10-04T00:39:23.7505155Z   type: 'test'
+2026-10-04T00:39:23.7505228Z   ...
+2026-10-04T00:39:23.7505738Z # Subtest: interrupted v2 capture resumes preserved pages and its v2 cursor cannot be sent to v1
+2026-10-04T00:39:23.7506115Z ok 185 - interrupted v2 capture resumes preserved pages and its v2 cursor cannot be sent to v1
+2026-10-04T00:39:23.7506189Z   ---
+2026-10-04T00:39:23.7506283Z   duration_ms: 528.693456
+2026-10-04T00:39:23.7506375Z   type: 'test'
+2026-10-04T00:39:23.7506449Z   ...
+2026-10-04T00:39:23.7506772Z # Subtest: stale body, state, candidate bytes and active worker/PR prevent writes
+2026-10-04T00:39:23.7507068Z ok 186 - stale body, state, candidate bytes and active worker/PR prevent writes
+2026-10-04T00:39:23.7507148Z   ---
+2026-10-04T00:39:23.7507240Z   duration_ms: 4.576036
+2026-10-04T00:39:23.7507324Z   type: 'test'
+2026-10-04T00:39:23.7507401Z   ...
+2026-10-04T00:39:23.7507666Z # Subtest: unrelated scope and original prose cannot be overwritten
+2026-10-04T00:39:23.7507913Z ok 187 - unrelated scope and original prose cannot be overwritten
+2026-10-04T00:39:23.7507992Z   ---
+2026-10-04T00:39:23.7508082Z   duration_ms: 0.836594
+2026-10-04T00:39:23.7508161Z   type: 'test'
+2026-10-04T00:39:23.7508240Z   ...
+2026-10-04T00:39:23.7508612Z # Subtest: read-only preflight issues no writes and checks the complete batch before applying
+2026-10-04T00:39:23.7508967Z ok 188 - read-only preflight issues no writes and checks the complete batch before applying
+2026-10-04T00:39:23.7509047Z   ---
+2026-10-04T00:39:23.7509134Z   duration_ms: 9.571075
+2026-10-04T00:39:23.7509218Z   type: 'test'
+2026-10-04T00:39:23.7509295Z   ...
+2026-10-04T00:39:23.7509589Z # Subtest: bounded application reads back each correction and is idempotent
+2026-10-04T00:39:23.7509873Z ok 189 - bounded application reads back each correction and is idempotent
+2026-10-04T00:39:23.7510083Z   ---
+2026-10-04T00:39:23.7510170Z   duration_ms: 9.128277
+2026-10-04T00:39:23.7510254Z   type: 'test'
+2026-10-04T00:39:23.7510327Z   ...
+2026-10-04T00:39:23.7510663Z # Subtest: failed readback retains partial receipt and stops before remaining writes
+2026-10-04T00:39:23.7510984Z ok 190 - failed readback retains partial receipt and stops before remaining writes
+2026-10-04T00:39:23.7511057Z   ---
+2026-10-04T00:39:23.7511255Z   duration_ms: 3.733821
+2026-10-04T00:39:23.7511342Z   type: 'test'
+2026-10-04T00:39:23.7511415Z   ...
+2026-10-04T00:39:23.7511683Z # Subtest: unexpected issue scope cannot expand the mutation targets
+2026-10-04T00:39:23.7511936Z ok 191 - unexpected issue scope cannot expand the mutation targets
+2026-10-04T00:39:23.7512010Z   ---
+2026-10-04T00:39:23.7512100Z   duration_ms: 0.687365
+2026-10-04T00:39:23.7512182Z   type: 'test'
+2026-10-04T00:39:23.7512259Z   ...
+2026-10-04T00:39:23.7512575Z # Subtest: fresh body recheck prevents overwriting an edit after batch preflight
+2026-10-04T00:39:23.7512874Z ok 192 - fresh body recheck prevents overwriting an edit after batch preflight
+2026-10-04T00:39:23.7512953Z   ---
+2026-10-04T00:39:23.7513043Z   duration_ms: 2.553724
+2026-10-04T00:39:23.7513121Z   type: 'test'
+2026-10-04T00:39:23.7513198Z   ...
+2026-10-04T00:39:23.7513560Z # Subtest: scope property serialization order does not imply changed release or ownership
+2026-10-04T00:39:23.7513897Z ok 193 - scope property serialization order does not imply changed release or ownership
+2026-10-04T00:39:23.7513976Z   ---
+2026-10-04T00:39:23.7514063Z   duration_ms: 0.471281
+2026-10-04T00:39:23.7514149Z   type: 'test'
+2026-10-04T00:39:23.7514229Z   ...
+2026-10-04T00:39:23.7514555Z # Subtest: a wrong hash label is rejected even when source scope is otherwise unchanged
+2026-10-04T00:39:23.7514871Z ok 194 - a wrong hash label is rejected even when source scope is otherwise unchanged
+2026-10-04T00:39:23.7514950Z   ---
+2026-10-04T00:39:23.7515039Z   duration_ms: 0.499804
+2026-10-04T00:39:23.7515122Z   type: 'test'
+2026-10-04T00:39:23.7515201Z   ...
+2026-10-04T00:39:23.7515788Z # Subtest: direct dated names precede reference attestations in any language, with stable ties and examples last
+2026-10-04T00:39:23.7516242Z ok 195 - direct dated names precede reference attestations in any language, with stable ties and examples last
+2026-10-04T00:39:23.7516321Z   ---
+2026-10-04T00:39:23.7516407Z   duration_ms: 8.777721
+2026-10-04T00:39:23.7516495Z   type: 'test'
+2026-10-04T00:39:23.7516571Z   ...
+2026-10-04T00:39:23.7516942Z # Subtest: unknown historical name and habitation do not imply an absent or rural settlement
+2026-10-04T00:39:23.7517291Z ok 196 - unknown historical name and habitation do not imply an absent or rural settlement
+2026-10-04T00:39:23.7517365Z   ---
+2026-10-04T00:39:23.7517460Z   duration_ms: 10.233653
+2026-10-04T00:39:23.7517545Z   type: 'test'
+2026-10-04T00:39:23.7517619Z   ...
+2026-10-04T00:39:23.7518054Z # Subtest: dated names at every level retain stable identity; aliases remain searchable outside their dates
+2026-10-04T00:39:23.7518470Z ok 197 - dated names at every level retain stable identity; aliases remain searchable outside their dates
+2026-10-04T00:39:23.7518545Z   ---
+2026-10-04T00:39:23.7518637Z   duration_ms: 28.236271
+2026-10-04T00:39:23.7518716Z   type: 'test'
+2026-10-04T00:39:23.7518795Z   ...
+2026-10-04T00:39:23.7519146Z # Subtest: dated membership changes the hierarchy used by map colors and province borders
+2026-10-04T00:39:23.7519479Z ok 198 - dated membership changes the hierarchy used by map colors and province borders
+2026-10-04T00:39:23.7519560Z   ---
+2026-10-04T00:39:23.7519651Z   duration_ms: 14.619433
+2026-10-04T00:39:23.7519730Z   type: 'test'
+2026-10-04T00:39:23.7519810Z   ...
+2026-10-04T00:39:23.7520276Z # Subtest: settlement attributes and existence are separate from a location and successor links keep distinct IDs
+2026-10-04T00:39:23.7520723Z ok 199 - settlement attributes and existence are separate from a location and successor links keep distinct IDs
+2026-10-04T00:39:23.7520983Z   ---
+2026-10-04T00:39:23.7521076Z   duration_ms: 23.74792
+2026-10-04T00:39:23.7521159Z   type: 'test'
+2026-10-04T00:39:23.7521237Z   ...
+2026-10-04T00:39:23.7521572Z # Subtest: explicit uninhabited differs from unknown, and sourced states beat examples
+2026-10-04T00:39:23.7521895Z ok 200 - explicit uninhabited differs from unknown, and sourced states beat examples
+2026-10-04T00:39:23.7521973Z   ---
+2026-10-04T00:39:23.7522165Z   duration_ms: 13.264329
+2026-10-04T00:39:23.7522252Z   type: 'test'
+2026-10-04T00:39:23.7522330Z   ...
+2026-10-04T00:39:23.7522704Z # Subtest: broken dated parent chains, invalid dates and interval overlaps roll back atomically
+2026-10-04T00:39:23.7523063Z ok 201 - broken dated parent chains, invalid dates and interval overlaps roll back atomically
+2026-10-04T00:39:23.7523142Z   ---
+2026-10-04T00:39:23.7523229Z   duration_ms: 14.91768
+2026-10-04T00:39:23.7523312Z   type: 'test'
+2026-10-04T00:39:23.7523389Z   ...
+2026-10-04T00:39:23.7523714Z # Subtest: future historical graph entities do not enter geographic grouping tiers
+2026-10-04T00:39:23.7524023Z ok 202 - future historical graph entities do not enter geographic grouping tiers
+2026-10-04T00:39:23.7524097Z   ---
+2026-10-04T00:39:23.7524189Z   duration_ms: 3.667988
+2026-10-04T00:39:23.7524272Z   type: 'test'
+2026-10-04T00:39:23.7524347Z   ...
+2026-10-04T00:39:23.7524916Z # Subtest: typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL
+2026-10-04T00:39:23.7525574Z ok 203 - typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL
+2026-10-04T00:39:23.7525654Z   ---
+2026-10-04T00:39:23.7525750Z   duration_ms: 6065.358802
+2026-10-04T00:39:23.7525835Z   type: 'test'
+2026-10-04T00:39:23.7525909Z   ...
+2026-10-04T00:39:23.7526604Z # Subtest: typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes
+2026-10-04T00:39:23.7527285Z ok 204 - typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes
+2026-10-04T00:39:23.7527361Z   ---
+2026-10-04T00:39:23.7527455Z   duration_ms: 4586.880066
+2026-10-04T00:39:23.7527534Z   type: 'test'
+2026-10-04T00:39:23.7527612Z   ...
+2026-10-04T00:39:23.7527974Z # Subtest: legacy or altered installed schemas never advertise typed capabilities
+2026-10-04T00:39:23.7528274Z ok 205 - legacy or altered installed schemas never advertise typed capabilities
+2026-10-04T00:39:23.7528354Z   ---
+2026-10-04T00:39:23.7528446Z   duration_ms: 32.453014
+2026-10-04T00:39:23.7528527Z   type: 'test'
+2026-10-04T00:39:23.7528605Z   ...
+2026-10-04T00:39:23.7528984Z # Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+2026-10-04T00:39:23.7529440Z # Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+2026-10-04T00:39:23.7529790Z # Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+2026-10-04T00:39:23.7530103Z # Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+2026-10-04T00:39:23.7530468Z # Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+2026-10-04T00:39:23.7530921Z # Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+2026-10-04T00:39:23.7531263Z # Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+2026-10-04T00:39:23.7531567Z # Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+2026-10-04T00:39:23.7532179Z # Subtest: actual Worker typed routes enforce transport/maintenance and keep atomic corrections, raw source pins and snapshot paging consistent
+2026-10-04T00:39:23.7532768Z ok 206 - actual Worker typed routes enforce transport/maintenance and keep atomic corrections, raw source pins and snapshot paging consistent
+2026-10-04T00:39:23.7532965Z   ---
+2026-10-04T00:39:23.7533059Z   duration_ms: 2562.289974
+2026-10-04T00:39:23.7533138Z   type: 'test'
+2026-10-04T00:39:23.7533218Z   ...
+2026-10-04T00:39:23.7533789Z # Subtest: legacy23-table projections require the complete known schema and current maintenance clients refuse them as complete backups
+2026-10-04T00:39:23.7534438Z ok 207 - legacy23-table projections require the complete known schema and current maintenance clients refuse them as complete backups
+2026-10-04T00:39:23.7534519Z   ---
+2026-10-04T00:39:23.7534613Z   duration_ms: 2793.671482
+2026-10-04T00:39:23.7534693Z   type: 'test'
+2026-10-04T00:39:23.7534770Z   ...
+2026-10-04T00:39:23.7535781Z # Subtest: derivation closures reject example promotion, cycles and ambiguous roots while example-only acyclic chains remain available under the paused factual gate
+2026-10-04T00:39:23.7536644Z ok 208 - derivation closures reject example promotion, cycles and ambiguous roots while example-only acyclic chains remain available under the paused factual gate
+2026-10-04T00:39:23.7536737Z   ---
+2026-10-04T00:39:23.7536837Z   duration_ms: 2488.930979
+2026-10-04T00:39:23.7536917Z   type: 'test'
+2026-10-04T00:39:23.7536998Z   ...
+2026-10-04T00:39:23.7537669Z # Subtest: bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes
+2026-10-04T00:39:23.7538313Z ok 209 - bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes
+2026-10-04T00:39:23.7538393Z   ---
+2026-10-04T00:39:23.7538482Z   duration_ms: 4455.93805
+2026-10-04T00:39:23.7538569Z   type: 'test'
+2026-10-04T00:39:23.7538646Z   ...
+2026-10-04T00:39:23.7539171Z # Subtest: factual typed geography is retained per claim and cannot be silently repinned on import, correction or prepared reads
+2026-10-04T00:39:23.7539688Z ok 210 - factual typed geography is retained per claim and cannot be silently repinned on import, correction or prepared reads
+2026-10-04T00:39:23.7539767Z   ---
+2026-10-04T00:39:23.7539855Z   duration_ms: 1986.571191
+2026-10-04T00:39:23.7539939Z   type: 'test'
+2026-10-04T00:39:23.7540017Z   ...
+2026-10-04T00:39:23.7540510Z # Subtest: explicit no-inhabitant evidence produces unsettled with its supported interval and source record provenance
+2026-10-04T00:39:23.7540992Z ok 211 - explicit no-inhabitant evidence produces unsettled with its supported interval and source record provenance
+2026-10-04T00:39:23.7541072Z   ---
+2026-10-04T00:39:23.7541159Z   duration_ms: 3.451423
+2026-10-04T00:39:23.7541243Z   type: 'test'
+2026-10-04T00:39:23.7541317Z   ...
+2026-10-04T00:39:23.7541696Z # Subtest: unknown, reference, modeled, rounded and untyped legacy zeros never imply unsettled
+2026-10-04T00:39:23.7542059Z ok 212 - unknown, reference, modeled, rounded and untyped legacy zeros never imply unsettled
+2026-10-04T00:39:23.7542136Z   ---
+2026-10-04T00:39:23.7542228Z   duration_ms: 1.208649
+2026-10-04T00:39:23.7542312Z   type: 'test'
+2026-10-04T00:39:23.7542386Z   ...
+2026-10-04T00:39:23.7542800Z # Subtest: settlement contradictions obey cross-field precedence and tied evidence remains disputed
+2026-10-04T00:39:23.7543193Z ok 213 - settlement contradictions obey cross-field precedence and tied evidence remains disputed
+2026-10-04T00:39:23.7543267Z   ---
+2026-10-04T00:39:23.7543359Z   duration_ms: 1.850409
+2026-10-04T00:39:23.7543446Z   type: 'test'
+2026-10-04T00:39:23.7543519Z   ...
+2026-10-04T00:39:23.7544088Z # Subtest: local imports accept canonical unsettled, reject both orders of direct contradictions and retain unknown/model-zero behavior
+2026-10-04T00:39:23.7544630Z ok 214 - local imports accept canonical unsettled, reject both orders of direct contradictions and retain unknown/model-zero behavior
+2026-10-04T00:39:23.7544710Z   ---
+2026-10-04T00:39:23.7544805Z   duration_ms: 29.500274
+2026-10-04T00:39:23.7544884Z   type: 'test'
+2026-10-04T00:39:23.7545108Z   ...
+2026-10-04T00:39:23.7545622Z # Subtest: hosted imports and shared resolver agree; corrections exclude retired negative claims
+2026-10-04T00:39:23.7545998Z ok 215 - hosted imports and shared resolver agree; corrections exclude retired negative claims
+2026-10-04T00:39:23.7546079Z   ---
+2026-10-04T00:39:23.7546174Z   duration_ms: 139.919844
+2026-10-04T00:39:23.7546254Z   type: 'test'
+2026-10-04T00:39:23.7546334Z   ...
+2026-10-04T00:39:23.7546836Z # Subtest: 0003 migration preserves all old claim fields, retirement pointers, indexes and triggers
+2026-10-04T00:39:23.7547212Z ok 216 - 0003 migration preserves all old claim fields, retirement pointers, indexes and triggers
+2026-10-04T00:39:23.7547292Z   ---
+2026-10-04T00:39:23.7547379Z   duration_ms: 32.950855
+2026-10-04T00:39:23.7547463Z   type: 'test'
+2026-10-04T00:39:23.7547541Z   ...
+2026-10-04T00:39:23.7548016Z # Subtest: existing local enum migration preserves snapshots/history and enables new rank without touching geometry
+2026-10-04T00:39:23.7548479Z ok 217 - existing local enum migration preserves snapshots/history and enables new rank without touching geometry
+2026-10-04T00:39:23.7548558Z   ---
+2026-10-04T00:39:23.7548646Z   duration_ms: 148.186509
+2026-10-04T00:39:23.7548730Z   type: 'test'
+2026-10-04T00:39:23.7548807Z   ...
+2026-10-04T00:39:23.7549211Z # Subtest: precision flags prevent false habitation conflicts in both local and hosted import orders
+2026-10-04T00:39:23.7549607Z ok 218 - precision flags prevent false habitation conflicts in both local and hosted import orders
+2026-10-04T00:39:23.7549685Z   ---
+2026-10-04T00:39:23.7549774Z   duration_ms: 289.627347
+2026-10-04T00:39:23.7549857Z   type: 'test'
+2026-10-04T00:39:23.7549931Z   ...
+2026-10-04T00:39:23.7550313Z # Subtest: 0004 precision migration preserves claims, retirements, indexes and all other triggers
+2026-10-04T00:39:23.7550682Z ok 219 - 0004 precision migration preserves claims, retirements, indexes and all other triggers
+2026-10-04T00:39:23.7550761Z   ---
+2026-10-04T00:39:23.7550852Z   duration_ms: 36.16842
+2026-10-04T00:39:23.7550940Z   type: 'test'
+2026-10-04T00:39:23.7551012Z   ...
+2026-10-04T00:39:23.7551388Z # Subtest: source classes protect literal-zero evidence and example opt-in at the SQL boundary
+2026-10-04T00:39:23.7551745Z ok 220 - source classes protect literal-zero evidence and example opt-in at the SQL boundary
+2026-10-04T00:39:23.7551821Z   ---
+2026-10-04T00:39:23.7551912Z   duration_ms: 91.80533
+2026-10-04T00:39:23.7551994Z   type: 'test'
+2026-10-04T00:39:23.7552072Z   ...
+2026-10-04T00:39:23.7552600Z # Subtest: 0005 source-class migration preserves claims and retirement-aware contracts while matching example-zero resolution
+2026-10-04T00:39:23.7553106Z ok 221 - 0005 source-class migration preserves claims and retirement-aware contracts while matching example-zero resolution
+2026-10-04T00:39:23.7553188Z   ---
+2026-10-04T00:39:23.7553282Z   duration_ms: 37.752823
+2026-10-04T00:39:23.7553362Z   type: 'test'
+2026-10-04T00:39:23.7553443Z   ...
+2026-10-04T00:39:23.7553525Z 1..221
+2026-10-04T00:39:23.7553604Z # tests 221
+2026-10-04T00:39:23.7553686Z # suites 0
+2026-10-04T00:39:23.7553765Z # pass 221
+2026-10-04T00:39:23.7553845Z # fail 0
+2026-10-04T00:39:23.7553930Z # cancelled 0
+2026-10-04T00:39:23.7554009Z # skipped 0
+2026-10-04T00:39:23.7554090Z # todo 0
+2026-10-04T00:39:23.7554204Z # duration_ms 86013.887057
+2026-10-04T00:39:23.7637614Z Post job cleanup.
+2026-10-04T00:39:24.0510220Z (node:3147) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-04T00:39:24.0512041Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-04T00:39:24.0867828Z Post job cleanup.
+2026-10-04T00:39:24.3205238Z Post job cleanup.
+2026-10-04T00:39:24.4393127Z [command]/usr/bin/git version
+2026-10-04T00:39:24.4472721Z git version 2.55.0
+2026-10-04T00:39:24.4558366Z Temporarily overriding HOME='/home/runner/work/_temp/b400cb54-7e04-4811-9836-b0eb05a73eeb' before making global git config changes
+2026-10-04T00:39:24.4560619Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-04T00:39:24.4565419Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas
+2026-10-04T00:39:24.4649879Z Removing SSH command configuration
+2026-10-04T00:39:24.4671828Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-04T00:39:24.4723092Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-04T00:39:24.5047874Z Removing HTTP extra header
+2026-10-04T00:39:24.5049742Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-04T00:39:24.5108361Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-04T00:39:24.5866689Z Removing includeIf entries pointing to credentials config files
+2026-10-04T00:39:24.5886967Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-04T00:39:24.5996998Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-04T00:39:24.6742365Z Cleaning up orphan processes
+2026-10-04T00:39:24.7071004Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
