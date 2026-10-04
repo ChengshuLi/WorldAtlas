@@ -4,25 +4,30 @@
 Inputs are downloaded to /tmp by the README restoration commands. Output is
 confined to this owned packet. No baseline files are written.
 """
-import csv, gzip, hashlib, json, math, pathlib, re, sys, unicodedata
+import csv, gzip, hashlib, json, math, pathlib, re, sys, unicodedata, subprocess
+import release_pin_audit
 
 ROOT = pathlib.Path(__file__).resolve().parents[3]
 HERE = pathlib.Path(__file__).resolve().parent
 SCOPE = json.loads((HERE / "scope.json").read_text())
 IDS = set(SCOPE["member_location_ids"])
+def pinned(path):
+    return subprocess.check_output(["git", "show", f"{release_pin_audit.V5_COMMIT}:data/{path}"], cwd=ROOT)
+
+world_index = json.loads(pinned("world-index.json"))
 features = {}
-for filename in json.loads((ROOT / "data/world-index.json").read_text())["parts"]:
-    part = json.loads((ROOT / "data" / filename).read_text())
+for filename in world_index["parts"]:
+    part = json.loads(pinned(filename))
     for f in part["features"]:
         if f["properties"]["id"] in IDS:
             features[f["properties"]["id"]] = f
 if set(features) != IDS:
     raise SystemExit(f"world-index mismatch: missing={sorted(IDS-set(features))}; extra={sorted(set(features)-IDS)}")
 
-hierarchy = {x["id"]: x for x in json.loads((ROOT / "data/hierarchy.json").read_text())}
+hierarchy = {x["id"]: x for x in json.loads(pinned("hierarchy.json"))}
 all_locations = {}
-for filename in json.loads((ROOT / "data/world-index.json").read_text())["parts"]:
-    part = json.loads((ROOT / "data" / filename).read_text())
+for filename in world_index["parts"]:
+    part = json.loads(pinned(filename))
     all_locations.update({f["properties"]["id"]:f["properties"] for f in part["features"]})
 
 source_specs = {
@@ -173,7 +178,7 @@ for pid in sorted(parent_ids):
 
 assessment={
  "issue":496,"snapshot_date":"2026-10-03","region_id":"framework:region:western-south-america:7fe9d26228d5",
- "release_pins":{"release":"geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e","hierarchy_sha256":"03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab383f28549d","footprints_sha256":"2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286","macro_certificate_sha256":"979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e","region_geometry_sha256":SCOPE["frozen_region_geometry_sha256"],"region_member_ids_sha256":SCOPE["frozen_region_member_ids_sha256"]},
+ "release_pins":{"release":"geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e","hierarchy_sha256":"03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d","footprints_sha256":"2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286","macro_certificate_sha256":"979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e","region_geometry_sha256":SCOPE["frozen_region_geometry_sha256"],"region_member_ids_sha256":SCOPE["frozen_region_member_ids_sha256"]},
  "scope":{"member_count":len(IDS),"scope_sha256":hashlib.sha256("\n".join(sorted(IDS)).encode()).hexdigest(),"areas":SCOPE["area_scopes"],"source_counts":counts,"not_a_published_partition":True},
  "sources":source_specs,
  "source_role_notes":{"Ecuador":"Pinned geoBoundaries metadata identifies INEC and OCHA ROLAC as producers, canonical ADM2 role Cantons, 2019 vintage, source data updated 2023-01-19, CC BY 3.0 IGO, declared unit count 224. The downloaded feature file has 223 shapes. Official INEC/OCHA 2023 tabular data has 224 ADM2 rows and 2023 assignment fields; the latest 2024 COD-AB gazetteer has 223 rows. Every assigned ID has a matched source/official candidate except the separately classified remainder Las Golondrinas has no row in the newer gazetteer. The official 2023 table places Las Golondrinas (EC9001) under Zona No Delimitada, whereas the Atlas parent is Imbabura; 2024 has no ADM2 row for it. The evidence supports a source-role and effective-date conflict, not a unilateral parent edit. The two Bolívar homonyms are disambiguated by the pinned Carchi parent and code EC0402. Manga del Cura is in sibling #495 and also absent from the pinned 2019 shape collection despite its metadata count.","Peru":"Pinned geoBoundaries metadata identifies Peru's Instituto Geográfico Nacional and OCHA ROLAC as producers, canonical ADM2 role Provinces, 2020 vintage, source data updated 2023-01-19, CC BY 3.0 IGO, declared unit count 196. Download contains 196 features and all 115 assigned IDs. Every distinct location name matches the official INEI Bulletin 26 (2020) roster of 196 provinces current at 2019-12-31; three upstream strings are mojibake, while INEI independently confirms Atlas spellings. `Lima`/MML and `Callao` special parent chains remain role/extent questions; no physical or settlement completeness conclusion follows from the administrative match. The complete Peru-area partition and Loreto ecological-fragment issue are detailed in merged PR #565."},
@@ -187,4 +192,8 @@ assessment={
  "follow_up":"PR 2 extends independent physical-land screening over all assigned IDs and records blocked child issue #575 for dated source restoration for Las Golondrinas. Settlement, authoritative island inventory and boundary topology remain unresolved; preserve those gaps and do not close #496 until each assigned subject has sourced support or a bounded follow-up."
 }
 (HERE/"assessment.json").write_text(json.dumps(assessment,ensure_ascii=False,indent=2)+"\n")
+release_pin_audit.load_v5_context(ROOT, SCOPE, assessment)
+release_pin_audit.v5_world_inventory(ROOT, SCOPE, assessment)
+if release_pin_audit.v5_footprints_sha256(ROOT)["sha256"] != assessment["release_pins"]["footprints_sha256"]:
+    raise SystemExit("canonical Node footprint hash differs from the assigned V5 catalog")
 print(json.dumps({"locations":len(decisions),"parents":len(parents),"source_counts":counts,"decision_summary":assessment["decision_summary"]},indent=2))
