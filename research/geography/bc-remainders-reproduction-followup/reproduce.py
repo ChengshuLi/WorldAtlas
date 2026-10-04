@@ -85,17 +85,6 @@ def load_input_baseline() -> dict:
     return record
 
 
-def derived_baseline_commit() -> str:
-    # The immutable derivative baseline is the first issue-packet commit. Read
-    # its identifier from the evidence manifest so rebasing the packet does not
-    # leave a dangling pre-rebase commit SHA in this reproduction tool.
-    manifest = json.loads((OWNED / "evidence-quality.json").read_text(encoding="utf-8"))
-    commit = manifest.get("baseline", {}).get("commit")
-    if not isinstance(commit, str) or len(commit) != 40 or any(c not in "0123456789abcdef" for c in commit):
-        raise ValueError("Evidence manifest has no valid immutable derivative baseline commit")
-    return commit
-
-
 def verify_original_inputs(record: dict) -> None:
     for entry in record["files"]:
         verify_file(REPO, entry, ORIGINAL_COMMIT)
@@ -124,14 +113,19 @@ def derived_descriptors(record: dict) -> list[dict]:
 
 
 def verify_derived_inputs(record: dict) -> None:
-    # Shared immutable preparation helper validates every bounded derivative
-    # against commit A; custom streaming pins above cover the >32 MiB originals.
-    sys.path.insert(0, str(REPO / "scripts"))
-    from evidence.immutable import Baseline
-    derived_commit = derived_baseline_commit()
-    Baseline(REPO, derived_commit, derived_descriptors(record))
+    # These issue-local derivatives are candidate evidence, not part of the
+    # ancestor baseline. Check their retained bytes against their own inventory
+    # and the manifest's candidate-output descriptors.
+    manifest = json.loads((OWNED / "evidence-quality.json").read_text(encoding="utf-8"))
+    candidates = {row["path"]: row for row in manifest.get("outputs", [])}
+    for source in manifest.get("sources", []):
+        candidates.update({row["path"]: row for row in source.get("files", [])})
     for row in record["bounded_derived_inputs"]:
-        verify_file(REPO, {**row, "path": OWNED.relative_to(REPO).as_posix() + "/" + row["path"]}, derived_commit)
+        path = OWNED.relative_to(REPO).as_posix() + "/" + row["path"]
+        candidate = candidates.get(path)
+        if not candidate or candidate.get("bytes") != row["bytes"] or candidate.get("sha256") != row["sha256"]:
+            raise ValueError(f"Candidate input is absent from or disagrees with the evidence manifest: {row['path']}")
+        verify_file(REPO, {**row, "path": path})
 
 
 def verify_complete_geoboundaries() -> dict:
