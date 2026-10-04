@@ -6,7 +6,7 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "15cb52b8e6fd26164e306bde1128e66317a0149e",
+    "commit": "e97c0e83d7637b316f2ae38339930cf2978c9ab8",
     "files": [
       {
         "path": ".github/workflows/merge-integration-checks.yml",
@@ -22,8 +22,8 @@
       },
       {
         "path": "docs/WORKER_COORDINATION.md",
-        "bytes": 16213,
-        "sha256": "6302ae8acf4973b8ac61f51dec0a80d18218e1583943d40e3425f2a4b5d543d6",
+        "bytes": 16389,
+        "sha256": "d1ab05d04493573a58a2ccbd9033529196456e236e4b872bcbfcea8b889edd00",
         "hash_kind": "file-bytes"
       },
       {
@@ -56,24 +56,6 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "docs/WORKER_COORDINATION.md",
-      "bytes": 16685,
-      "sha256": "aa3834dc5b0c7c694a87ea3e328762752b91ae60636c8c01280baaa41468135e",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "scripts/integration-proof.mjs",
-      "bytes": 3844,
-      "sha256": "ae1eca0bebcb40b39c2ea2540e79774d1f136ae52ac1fce6fdb4cb838349b67a",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "test/integration-proof.test.mjs",
-      "bytes": 6673,
-      "sha256": "abb055b17c4b3837dc183f6ea3a0c942625c2c98ac418e292ff69cf3186a8697",
-      "hash_kind": "file-bytes"
-    },
-    {
       "path": "coordination/engineering/focused-deps-695/claim.json",
       "bytes": 803,
       "sha256": "59aacba08c4844d17a3a65ac5f0f5c0dcf8b9ca4aea35ed999d605e87e7fc741",
@@ -101,6 +83,24 @@
       "path": "coordination/engineering/focused-deps-695/validation.json",
       "bytes": 1338,
       "sha256": "6291459275fb0fdcfa48ba1666888b09c5e824b26cd1c3a7fa8948cc51798693",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 16861,
+      "sha256": "d54ab6bcdf59835555a84a716b28ef9d5455c9c40409ec9207bafb23a14a8783",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "bytes": 3844,
+      "sha256": "ae1eca0bebcb40b39c2ea2540e79774d1f136ae52ac1fce6fdb4cb838349b67a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "bytes": 6673,
+      "sha256": "abb055b17c4b3837dc183f6ea3a0c942625c2c98ac418e292ff69cf3186a8697",
       "hash_kind": "file-bytes"
     }
   ],
@@ -217,21 +217,6 @@
       "original_sha256": "cd837b8548146f4adc56c69495ce506dc8e22f6e46bd82c7338a9252c6f6ca13"
     },
     {
-      "path": "docs/WORKER_COORDINATION.md",
-      "status": "modified",
-      "original_sha256": "6302ae8acf4973b8ac61f51dec0a80d18218e1583943d40e3425f2a4b5d543d6"
-    },
-    {
-      "path": "scripts/integration-proof.mjs",
-      "status": "modified",
-      "original_sha256": "49ab7d3b5bf65ddbe83b6e43243983d3a53e86b90e4f69caba794e8dcdb159f5"
-    },
-    {
-      "path": "test/integration-proof.test.mjs",
-      "status": "modified",
-      "original_sha256": "528bccaebb12cd759ad190d9d72304aad0021d35771855c7f9f71749f31c376d"
-    },
-    {
       "path": "coordination/engineering/focused-deps-695/claim.json",
       "status": "added"
     },
@@ -244,6 +229,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/focused-deps-695/evidence-quality.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/focused-deps-695/install-baseline.json",
       "status": "added"
     },
@@ -252,8 +241,19 @@
       "status": "added"
     },
     {
-      "path": "coordination/engineering/focused-deps-695/evidence-quality.json",
-      "status": "added"
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "d1ab05d04493573a58a2ccbd9033529196456e236e4b872bcbfcea8b889edd00"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "status": "modified",
+      "original_sha256": "49ab7d3b5bf65ddbe83b6e43243983d3a53e86b90e4f69caba794e8dcdb159f5"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "status": "modified",
+      "original_sha256": "528bccaebb12cd759ad190d9d72304aad0021d35771855c7f9f71749f31c376d"
     }
   ]
 }
