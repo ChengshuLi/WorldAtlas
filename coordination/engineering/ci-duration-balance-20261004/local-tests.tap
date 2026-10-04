@@ -1,0 +1,190 @@
+TAP version 13
+# Subtest: every real full-suite file runs once, with heavy migration tests separate from packaged parity
+ok 1 - every real full-suite file runs once, with heavy migration tests separate from packaged parity
+  ---
+  duration_ms: 3.54064
+  type: 'test'
+  ...
+# Subtest: inserting a new filename cannot move reserved heavy workloads or omit any discovered file
+ok 2 - inserting a new filename cannot move reserved heavy workloads or omit any discovered file
+  ---
+  duration_ms: 0.373143
+  type: 'test'
+  ...
+# Subtest: a partial or future inventory never invents a reserved test or omits an unknown file
+ok 3 - a partial or future inventory never invents a reserved test or omits an unknown file
+  ---
+  duration_ms: 0.259501
+  type: 'test'
+  ...
+# Subtest: duplicate inventory entries are rejected by the exhaustive coverage control
+ok 4 - duplicate inventory entries are rejected by the exhaustive coverage control
+  ---
+  duration_ms: 0.877273
+  type: 'test'
+  ...
+# Subtest: test-runner edits and renames require actual full-suite validation
+ok 5 - test-runner edits and renames require actual full-suite validation
+  ---
+  duration_ms: 0.35778
+  type: 'test'
+  ...
+# Subtest: successful full and focused workflows prove exact tree and pinned current attempt
+ok 6 - successful full and focused workflows prove exact tree and pinned current attempt
+  ---
+  duration_ms: 2.615605
+  type: 'test'
+  ...
+# Subtest: head metadata without explicit reviewed-head checkout never proves tested tree
+ok 7 - head metadata without explicit reviewed-head checkout never proves tested tree
+  ---
+  duration_ms: 0.306292
+  type: 'test'
+  ...
+# Subtest: different complete tree or modified approved workflow/runner always falls back
+ok 8 - different complete tree or modified approved workflow/runner always falls back
+  ---
+  duration_ms: 0.341455
+  type: 'test'
+  ...
+# Subtest: wrong head/event/repository/PR/path and incomplete or failed run cannot prove coverage
+ok 9 - wrong head/event/repository/PR/path and incomplete or failed run cannot prove coverage
+  ---
+  duration_ms: 1.669417
+  type: 'test'
+  ...
+# Subtest: missing/extra shard and skipped or incomplete required steps never count as successful coverage
+ok 10 - missing/extra shard and skipped or incomplete required steps never count as successful coverage
+  ---
+  duration_ms: 0.827468
+  type: 'test'
+  ...
+# Subtest: final pinned run reread rejects revoked proof
+ok 11 - final pinned run reread rejects revoked proof
+  ---
+  duration_ms: 0.361285
+  type: 'test'
+  ...
+# Subtest: explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact
+ok 12 - explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact
+  ---
+  duration_ms: 0.562208
+  type: 'test'
+  ...
+# Subtest: final proof pins attempt and refuses a later successful rerun or missing/invalid attempt
+ok 13 - final proof pins attempt and refuses a later successful rerun or missing/invalid attempt
+  ---
+  duration_ms: 0.350298
+  type: 'test'
+  ...
+# Subtest: focused proof accepts complete controls without installing Node dependencies
+ok 14 - focused proof accepts complete controls without installing Node dependencies
+  ---
+  duration_ms: 0.345751
+  type: 'test'
+  ...
+# Subtest: full proof refuses missing, failed, cancelled or skipped Node installation in any shard
+ok 15 - full proof refuses missing, failed, cancelled or skipped Node installation in any shard
+  ---
+  duration_ms: 4.193574
+  type: 'test'
+  ...
+# Subtest: only staging-test shards prepare the immutable migration derivative
+ok 16 - only staging-test shards prepare the immutable migration derivative
+  ---
+  duration_ms: 8.35498
+  type: 'test'
+  ...
+# Subtest: two reviewed PRs sharing a base integrate serially without changing authored head
+ok 17 - two reviewed PRs sharing a base integrate serially without changing authored head
+  ---
+  duration_ms: 7.623407
+  type: 'test'
+  ...
+# Subtest: conflicts and non-conflicting changes to reviewed bytes require intervention
+ok 18 - conflicts and non-conflicting changes to reviewed bytes require intervention
+  ---
+  duration_ms: 0.878906
+  type: 'test'
+  ...
+# Subtest: stale merge object and truncated inventories fail closed
+ok 19 - stale merge object and truncated inventories fail closed
+  ---
+  duration_ms: 0.648017
+  type: 'test'
+  ...
+# Subtest: stale head or review and expired ownership prohibit integration
+ok 20 - stale head or review and expired ownership prohibit integration
+  ---
+  duration_ms: 0.828049
+  type: 'test'
+  ...
+# Subtest: failed or skipped candidate tests never merge an open PR
+ok 21 - failed or skipped candidate tests never merge an open PR
+  ---
+  duration_ms: 0.434515
+  type: 'test'
+  ...
+# Subtest: base advances before or during final validation are retryable without branch updates
+ok 22 - base advances before or during final validation are retryable without branch updates
+  ---
+  duration_ms: 1.336556
+  type: 'test'
+  ...
+# Subtest: latest failed or pending check replaces old success
+ok 23 - latest failed or pending check replaces old success
+  ---
+  duration_ms: 0.180221
+  type: 'test'
+  ...
+# Subtest: workflow separates untrusted candidate tests from write credentials and serializes the lifecycle
+ok 24 - workflow separates untrusted candidate tests from write credentials and serializes the lifecycle
+  ---
+  duration_ms: 1.052207
+  type: 'test'
+  ...
+# Subtest: commit status changing during final review prevents the merge
+ok 25 - commit status changing during final review prevents the merge
+  ---
+  duration_ms: 0.789741
+  type: 'test'
+  ...
+# Subtest: trusted profile uses focused invariants only for isolated evidence and docs
+ok 26 - trusted profile uses focused invariants only for isolated evidence and docs
+  ---
+  duration_ms: 0.274263
+  type: 'test'
+  ...
+# Subtest: parallel full-regression shards cover each unit file once and focused profile retains core gates
+ok 27 - parallel full-regression shards cover each unit file once and focused profile retains core gates
+  ---
+  duration_ms: 5.988751
+  type: 'test'
+  ...
+# Subtest: prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread
+ok 28 - prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread
+  ---
+  duration_ms: 2.310805
+  type: 'test'
+  ...
+# Subtest: failed proof reread and stale main prevent merge despite prior accepted proof
+ok 29 - failed proof reread and stale main prevent merge despite prior accepted proof
+  ---
+  duration_ms: 1.235963
+  type: 'test'
+  ...
+# Subtest: successful rerun after preparation invalidates the pinned attempt and refuses merge
+ok 30 - successful rerun after preparation invalidates the pinned attempt and refuses merge
+  ---
+  duration_ms: 0.651643
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 108.239669

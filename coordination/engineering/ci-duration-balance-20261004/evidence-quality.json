@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "issue": 706,
+  "lane": "engineering",
+  "worker_id": "ci-duration-balance-root-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "d53dcabf992470c43e7419bd700af9c549c74525",
+    "files": [
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 3345,
+        "sha256": "8a82efac1ecfe82605061a779c6420bb83e30a3bf0a441757f8fb42d64995d56",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/full-regression-shards.test.mjs",
+        "bytes": 1914,
+        "sha256": "73724bb167c71ef206d2d8f6725e1732eab69172757ff1e297d9348b5baf9221",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 16861,
+        "sha256": "d54ab6bcdf59835555a84a716b28ef9d5455c9c40409ec9207bafb23a14a8783",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/parity-proof-694-20261004/final-jobs-api.json",
+        "bytes": 12631,
+        "sha256": "48d01d779f0035d51f40b3b7698117bec4f020afffae012cbbf1b8ccad8400bc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/parity-proof-694-20261004/final-shard0.log",
+        "bytes": 161430,
+        "sha256": "0c533e551629393a70b1267790baa8021f704d0e2e2c60dd1cc5aba1519bdd83",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/parity-proof-694-20261004/final-shard1.log",
+        "bytes": 139847,
+        "sha256": "68e5d98a3143bf4362240f939f119cee72a28757eb9ed851c00d53f24c802e21",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/parity-proof-694-20261004/final-shard2.log",
+        "bytes": 137923,
+        "sha256": "9bc53e982b6570e0b32759a3f216aec07c570ace07f2c31514f8a6c8f2e4877d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 3831,
+      "sha256": "5e8f3ada489d75f4c077d37cfbfdedb66d24ae538c0ba72e7f63b9a27b9bb684",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/full-regression-shards.test.mjs",
+      "bytes": 2649,
+      "sha256": "09a0dce1304bb34076923230af69d7536887e4589409b7fb4f8912dc8328fdb9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 17290,
+      "sha256": "e6a8586658824c05ef8b82efc669a7d51f2815623b7b5260e4c618112ba8255b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/positive-control.json",
+      "bytes": 214,
+      "sha256": "aeaaee7c5f10868ff3bf4f4b727b9ec28f6459058a2381a54eea5b85f6def560",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/local-tests.tap",
+      "bytes": 6972,
+      "sha256": "d402067101f63bc05d3d08b5ce59c03c7f643604e23be4c7fa22eca595610034",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/claim.json",
+      "bytes": 825,
+      "sha256": "17c3a7307ab573773f5aeb58d83c0da7e19134d468e5b910691e1a4aa0be743c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/negative-control.json",
+      "bytes": 214,
+      "sha256": "59763406849325433fbb066c7bce9f768800e827729cf4ad11a5d5b19e2bce50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/README.md",
+      "bytes": 1636,
+      "sha256": "72d31d7805d226f30b4ea7d8b0425a8f850c1a3b2fedf80af3140475a14d40b5",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "measured-neighbor-isolation",
+      "kind": "code",
+      "description": "Reserve archived expensive database neighbors on the lighter worker while preserving exact discovered inventory and packaged build requirements; no test-body change. Historical cost evidence does not predict total wall runtime.",
+      "software": "Node24 GitHub Actions Ubuntu, existing concurrency unchanged",
+      "units": "complete file inventory"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "measured-neighbor-isolation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/ci-duration-balance-20261004/positive-control.json"
+    },
+    {
+      "method_id": "measured-neighbor-isolation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/ci-duration-balance-20261004/negative-control.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-reporter=tap test/full-regression-shards.test.mjs test/merge-integration.test.mjs test/integration-proof.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "8a82efac1ecfe82605061a779c6420bb83e30a3bf0a441757f8fb42d64995d56"
+    },
+    {
+      "path": "test/full-regression-shards.test.mjs",
+      "status": "modified",
+      "original_sha256": "73724bb167c71ef206d2d8f6725e1732eab69172757ff1e297d9348b5baf9221"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "d54ab6bcdf59835555a84a716b28ef9d5455c9c40409ec9207bafb23a14a8783"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/local-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
