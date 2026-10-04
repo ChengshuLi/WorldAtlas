@@ -159,7 +159,7 @@ function addTrustedProof(f) {
     if(route.endsWith('/actions/runs/12')) return run;
     if(route.includes('/jobs')) return {jobs:[{name:'profile',status:'completed',conclusion:'success'},
       ...[0,1,2].map(shard=>({name:`regression (${shard})`,status:'completed',conclusion:'success',
-        steps:['Checkout reviewed head','Install Node dependencies','Install Python dependencies','Complete regression shard',
+        steps:['Checkout reviewed head','Install Node dependencies','Install browser dependencies only for tests that use Playwright','Install Python dependencies','Complete regression shard',
           ...(shard===0?['Build hosted assets']:[])].map(name=>({name,status:'completed',conclusion:'success'}))}))]};
     return original(route,method,body);
   };

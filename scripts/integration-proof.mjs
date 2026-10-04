@@ -34,7 +34,7 @@ export async function integrationProof({api, repo, number, head, profile, baseli
     if (regression.length !== expected.length) continue;
     if (!expected.every(shard => {
       const job = regression.find(job => job.name === `regression (${shard})`);
-      const required = ['Checkout reviewed head', 'Install Node dependencies', 'Complete regression shard',
+      const required = ['Checkout reviewed head', 'Install Node dependencies', 'Install browser dependencies only for tests that use Playwright', 'Complete regression shard',
         ...(profile === 'full' ? ['Install Python dependencies', ...(shard === 0 ? ['Build hosted assets'] : [])] : [])];
       return job?.status === 'completed' && job.conclusion === 'success' &&
         required.every(name => job.steps?.some(step => step.name === name && step.status === 'completed' && step.conclusion === 'success'));

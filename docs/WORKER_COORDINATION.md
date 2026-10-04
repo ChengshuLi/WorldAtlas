@@ -90,12 +90,12 @@ Follow `docs/PREMERGE_EVIDENCE_REVIEW.md` and the authoritative `.github/evidenc
 
 ## Applicable regression and exact-tree reuse
 
-The integration profile defaults to `full`. Only the exact coordination paths in
+The integration profile defaults to `full`. Documentation text and the exact coordination paths in
 `scripts/integration-profile.mjs` and the current worker's owned receipts use the
 focused `evidence` profile. It includes reservation, ownership, regional import
 barriers, evidence/review validation, workflow checkout and integration controls.
 Source-only owned research retains its focused controls. Every changed path and
-rename origin participates; unknown documents/scripts, application code, storage,
+rename origin participates; unknown non-text documentation/scripts, application code, storage,
 atlas data, geometry, schema, imports, builds and deployment require full regression.
 The PR profile selector runs trusted base code against GitHub's complete file list;
 a base without the selector runs full regression. Full shards cover every test file

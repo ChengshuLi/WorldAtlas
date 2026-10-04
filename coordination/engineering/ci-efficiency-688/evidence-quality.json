@@ -6,7 +6,7 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "ceb743c213d52d4efc67f36bade61abce7f9acc0",
+    "commit": "c215ade107705d1753f1371ad9bf383d514fa689",
     "files": [
       {
         "path": ".github/workflows/merge-integration-checks.yml",
@@ -75,8 +75,8 @@
     },
     {
       "path": "coordination/engineering/ci-efficiency-688/targeted-tests.tap",
-      "bytes": 22877,
-      "sha256": "b5b309b4bb3467c74f17537546a618b10c18554023193585efc1576f6f7f19f4",
+      "bytes": 22873,
+      "sha256": "f5915a12627fcb389aaa2b2ae93c10a5e8721d6fdc34cb2bc8f696131dce16d5",
       "hash_kind": "file-bytes"
     },
     {
@@ -87,8 +87,8 @@
     },
     {
       "path": "docs/WORKER_COORDINATION.md",
-      "bytes": 16093,
-      "sha256": "43c3aa34e63cc126a00523ceca4617a4fb3d7a2756eedc6db57d56b14a17f46d",
+      "bytes": 16124,
+      "sha256": "2161f0072014bad28ed3b97f5ca8a128fb4eec5fb6acb07541ea815f27f41e41",
       "hash_kind": "file-bytes"
     },
     {
@@ -99,14 +99,14 @@
     },
     {
       "path": "scripts/integration-profile.mjs",
-      "bytes": 2136,
-      "sha256": "34395e465a272e96294cceea3b8c592b582409bdcb761651a456f9a872929b8e",
+      "bytes": 2235,
+      "sha256": "623d2460ee854b58ab5cdab9f07495bf3c3753431471bc91927f3e1803855588",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/integration-proof.mjs",
-      "bytes": 3348,
-      "sha256": "63c4242c118a4d5aa2d6ac9df6becff166cffaab31d857fd4d7003611a823574",
+      "bytes": 3415,
+      "sha256": "eabdb8afc845548f5f9d8419c2225bb6bd6f906c77a2c2a5a8e477ab8a25a97c",
       "hash_kind": "file-bytes"
     },
     {
@@ -129,14 +129,14 @@
     },
     {
       "path": "test/integration-proof.test.mjs",
-      "bytes": 4964,
-      "sha256": "c1dab86f9844f5deb27f5d378dd263893c4690f14d0c3ce6d6c8a8337a410054",
+      "bytes": 5193,
+      "sha256": "d1276dca6d1e287e7e697fbb13c4c5f9b6010c5be494bddfc42570af3e634c23",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/merge-integration.test.mjs",
-      "bytes": 13464,
-      "sha256": "b60165176da4ef4316c469868eb8c9f67b792843a86d8f302d14c02b80b43c30",
+      "bytes": 13530,
+      "sha256": "7e13911c9a3ab047938045fa80acc35f8755dd69b5d5d0827c3e0b91b689ee40",
       "hash_kind": "file-bytes"
     }
   ],
@@ -174,6 +174,10 @@
     },
     {
       "path": "coordination/engineering/ci-efficiency-688/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-efficiency-688/evidence-quality.json",
       "status": "added"
     },
     {
@@ -224,10 +228,6 @@
       "path": "test/merge-integration.test.mjs",
       "status": "modified",
       "original_sha256": "954090cb65cb6e346fb4b2fd07449dbf3ccc2139bbd0fa3c66601e086ccba036"
-    },
-    {
-      "path": "coordination/engineering/ci-efficiency-688/evidence-quality.json",
-      "status": "added"
     }
   ]
 }

@@ -11,7 +11,7 @@ function fixture(profile = 'full') {
     status:'completed',conclusion:'success',pull_requests:[{number:2,head:{sha:'head'}}]};
   const jobs = [{name:'profile',status:'completed',conclusion:'success'},
     ...(profile === 'full' ? [0,1,2] : [0]).map(shard=>({name:`regression (${shard})`,status:'completed',conclusion:'success',
-      steps:['Checkout reviewed head','Install Node dependencies','Complete regression shard',
+      steps:['Checkout reviewed head','Install Node dependencies','Install browser dependencies only for tests that use Playwright','Complete regression shard',
         ...(profile==='full'?['Install Python dependencies',...(shard===0?['Build hosted assets']:[])]:[])].map(name=>({name,status:'completed',conclusion:'success'}))}))];
   const f = {run,jobs,workflow:'ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets'};
   f.options = {repo:'owner/repo',number:2,head:'head',profile,baseline:tree,authored:structuredClone(tree),candidate:structuredClone(tree),api:async route=>{
@@ -53,7 +53,8 @@ test('wrong head/event/repository/PR/path and incomplete or failed run cannot pr
 test('missing/extra shard and skipped or incomplete required steps never count as successful coverage', async()=>{
   for(const mutate of [f=>f.jobs.pop(), f=>f.jobs.push({...f.jobs[1],name:'regression (3)'}),
     f=>f.jobs[1].conclusion='skipped', f=>f.jobs[1].steps.pop(),
-    f=>f.jobs[1].steps.at(-1).conclusion='skipped', f=>f.jobs[2].steps.at(-1).status='in_progress',
+    f=>f.jobs[1].steps.at(-1).conclusion='skipped',
+    f=>f.jobs[1].steps.find(step=>step.name.includes('browser')).conclusion='skipped', f=>f.jobs[2].steps.at(-1).status='in_progress',
     f=>f.jobs[0].conclusion='failure']) {
     const f=fixture();mutate(f);assert.equal(await integrationProof(f.options),null);
   }
@@ -65,10 +66,11 @@ test('final pinned run reread rejects revoked proof', async()=>{
 test('explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact',()=>{
   for(const filename of COORDINATION_PATHS) assert.equal(integrationProfile('engineering/job',[{filename}]),'evidence',filename);
   for(const filename of ['src/attributes.js','hosted/a.mjs','drizzle/0001.sql','data/hierarchy.json',
-    'scripts/import.mjs','scripts/build-hosted.mjs','docs/STRUCTURAL_VALIDATION.md','docs/unknown.md',
+    'scripts/import.mjs','scripts/build-hosted.mjs','docs/unknown.json',
     '.github/workflows/deploy.yml','test/application.test.mjs']) {
     assert.equal(integrationProfile('engineering/job',[{filename}]),'full',filename);
     assert.equal(integrationProfile('engineering/job',[{filename:'docs/WORKER_COORDINATION.md',previous_filename:filename}]),'full',filename);
   }
+  assert.equal(integrationProfile('engineering/job',[{filename:'docs/prompts/reviewer.md'}]),'evidence');
   assert.equal(integrationProfile('engineering/job',[]),'full');
 });
