@@ -1,0 +1,69 @@
+{
+  "verified_at_utc": "2026-10-04T10:46:24.616Z",
+  "read_only": true,
+  "site": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+  "positive": {
+    "compilations": "0",
+    "compileMs": "0",
+    "precompiled": "true",
+    "gridZoom": "10.00012107070595",
+    "renderer": "webgl2",
+    "rendered": "true",
+    "locationBorders": "false",
+    "provinceBorders": "true",
+    "cellCount": "797146",
+    "renderMs": "64",
+    "worker": "true",
+    "frame": "-17409.4609375/18689.568359374884/2/1174/679",
+    "uploads": "15",
+    "ownershipUploads": "2",
+    "cellPixels": "0.003905922201963641",
+    "stride": "1"
+  },
+  "controls": [
+    {
+      "name": "reference-corruption",
+      "status": 200,
+      "readback": {
+        "loading": "Could not load this year. Submit the year again to retry.",
+        "error": "Map unavailable. Check the server connection and retry.",
+        "rendered": "true",
+        "loading_hidden": false
+      },
+      "outcome": "passed"
+    },
+    {
+      "name": "ownership-unavailable",
+      "status": 404,
+      "readback": {
+        "loading": "Atlas could not load. Check the server and reload the page.",
+        "error": "",
+        "rendered": null,
+        "loading_hidden": false
+      },
+      "outcome": "passed"
+    }
+  ],
+  "fallback": {
+    "gridZoom": "10.00012107070595",
+    "rendered": "true",
+    "locationBorders": "false",
+    "provinceBorders": "true",
+    "cellCount": "786236",
+    "renderMs": "161",
+    "worker": "true",
+    "compilations": "0",
+    "compileMs": "0",
+    "frame": "-17664/20480/1177/668/256",
+    "ownershipUploads": "0"
+  },
+  "fallback_pixels": {
+    "context": true,
+    "width": 1177,
+    "height": 668,
+    "painted_pixels": 230454
+  },
+  "page_errors": [],
+  "performance_proof": false,
+  "transport_limit": "New reference and ownership blobs local; actual pinned production root and remaining data GET-only. Full selected content; no hosted latency claim."
+}

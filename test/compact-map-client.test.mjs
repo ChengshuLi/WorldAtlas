@@ -9,7 +9,7 @@ const temporalPins={release_id:'reference:test',hierarchy_sha256:'a'.repeat(64),
 const temporalPage=(stream,year=2020,revision=7)=>({year,stream,...temporalPins,records:[],withdrawals:[],sources:[],next_cursor:null,revision,capability:{datedMembership:1,datedExistence:1,datedFootprints:0}});
 async function withLoader(run,{enabled=true,geography=false}={}){
  const file=new URL('../src/data-client.js',import.meta.url);
- const source=fs.readFileSync(file,'utf8').replace(/from '(\.\/[^']+)'/g,(_,path)=>`from '${new URL(path,file).href}'`).replace("import.meta.env.VITE_STATIC_ATLAS === 'true'",'true').replace("import.meta.env.VITE_HOSTED_DATABASE === 'true'",'true')+`\n${enabled?'compactMapSupported=true;':''}\n${geography?`datedGeographySupported=true;expectedGeography=${JSON.stringify(temporalPins)};`:''}\nexport {loadHostedMapEvidence,loadReferenceAttributes,loadSelectedHostedMap,loadPreparedEvidence};\n// isolated client fixture ${++loaderSerial}`;
+ const source=fs.readFileSync(file,'utf8').replace(/from '(\.\/[^']+)'/g,(_,path)=>`from '${new URL(path,file).href}'`).replace("import.meta.env.VITE_STATIC_ATLAS === 'true'",'true').replace("import.meta.env.VITE_HOSTED_DATABASE === 'true'",'true')+`\n${enabled?'compactMapSupported=true;':''}\n${geography?`datedGeographySupported=true;expectedGeography=${JSON.stringify(temporalPins)};`:''}\nexport {loadHostedMapEvidence,loadReferenceAttributes,loadSelectedHostedMap,loadPreparedEvidence,loadHistory};\n// isolated client fixture ${++loaderSerial}`;
  const loader=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64')),previous=global.fetch;
  try{return await run(loader);}finally{global.fetch=previous;}
 }
@@ -236,6 +236,49 @@ test('a superseded geography root cannot restart the previous initial selection'
  const old=loader.loadGeography({year:2020,examples:false});await new Promise(setImmediate);
  await loader.loadGeography({year:2021,examples:false});finishOld();await assert.rejects(old,{name:'AbortError'});
  assert.equal((await loader.loadSelectedHostedMap(2021,false)).retirementAuthority,true);assert.equal(reads,1);
+}));
+
+test('history reloads with geography and an old failure cannot clear the current immutable read',async()=>withLoader(async loader=>{
+ let reads=0,failOld;
+ const current={states:[],boundaries:[],attributes:[]};
+ global.fetch=async url=>{
+  if(url==='./atlas-geography.json')return Response.json({units:[],features:[]});
+  assert.equal(url,'./atlas-history.json.gz');reads++;
+  if(reads===1)return new Promise(resolve=>{failOld=()=>resolve(new Response('',{status:503}));});
+  return Response.json(current);
+ };
+ await loader.loadGeography();const old=loader.loadHistory();
+ await loader.loadGeography();assert.deepEqual(await loader.loadHistory(),current);
+ failOld();await assert.rejects(old,/unavailable/);
+ assert.deepEqual(await loader.loadHistory(),current);assert.equal(reads,2);
+}));
+
+test('a pending complete snapshot cannot return across a geography reload',async()=>withLoader(async loader=>{
+ let finishHistory;
+ const index={version:1,parts:[],sources:[],hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
+ global.fetch=async url=>{
+  if(url==='./atlas-geography.json')return Response.json({units:[],features:[],preparedEvidence:index,contentCapabilities:{mapSnapshots:1}});
+  if(url==='./prepared-evidence/index.json')return Response.json(index);
+  if(url==='./reference-attributes/index.json')return Response.json({version:2,parts:[],types:[],values:[]});
+  if(url==='./ownership-runtime/index.json')return Response.json({version:1,encoding:'ownership-v2-century',shared:{version:2},buckets:[]});
+  if(url==='./atlas-history.json.gz')return new Promise(resolve=>{finishHistory=()=>resolve(Response.json({states:[],boundaries:[],attributes:[]}));});
+  request(url);return Response.json(validPage());
+ };
+ await loader.loadGeography();const pending=loader.loadSnapshot(2020,false);await new Promise(setImmediate);
+ await loader.loadGeography();finishHistory();await assert.rejects(pending,{name:'AbortError'});
+}));
+
+test('ordinary pending hosted evidence cannot repopulate the cache after a geography reload',async()=>withLoader(async loader=>{
+ let reads=0,finishOld;
+ global.fetch=async url=>{
+  if(url==='./atlas-geography.json')return Response.json({units:[],features:[],contentCapabilities:{mapSnapshots:1}});
+  request(url);reads++;
+  if(reads===1)return new Promise(resolve=>{finishOld=()=>resolve(Response.json(validPage()));});
+  return new Response('',{status:503});
+ };
+ await loader.loadGeography();const old=loader.loadHostedMapEvidence(2020,false);
+ await loader.loadGeography();finishOld();await assert.rejects(old,{name:'AbortError'});
+ unavailable(await loader.loadHostedMapEvidence(2020,false));
 }));
 
 test('complete inline temporal streams use the existing pin and revision validator without extra HTTP reads',async()=>withLoader(async loader=>{

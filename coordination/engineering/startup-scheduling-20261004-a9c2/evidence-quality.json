@@ -1,0 +1,4180 @@
+{
+  "version": 1,
+  "issue": 712,
+  "lane": "engineering",
+  "worker_id": "engineering-startup-a9c25e14-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+    "files": [
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/atlas-geography.json",
+        "bytes": 10513689,
+        "sha256": "58492a4856858f1ec29beb28e44d094faf9259a9391553f1811512c8674cc5fd",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-0.bin.gz",
+        "bytes": 3854520,
+        "sha256": "fb80840bcd7d5792afbd328b666934a54beb44469cdae3cda0a0c788a6790bf4",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "1adf24b8280917a5156ca9e140b0a71a9cd93210db1fea9077f746a3761f6cb3"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-12582912.bin.gz",
+        "bytes": 3479274,
+        "sha256": "2bc5d3d4a8e89b81915526f9f66401a27ed947a27b18680ef80f493b5ca528d4",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "ca77d778801249c79568a54f184f8dca8c7b4107553a9b0f42d71da3fa160d09"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-16777216.bin.gz",
+        "bytes": 3289431,
+        "sha256": "74ff49a22ff4f9b940ec1c8adcb756eab4df05088fe19fd37759c59493fcaaa3",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "7f44525d328cd9a89987c884f6a077e9d61ccf9cf95ccc4088aabb9b1eb7c278"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-20971520.bin.gz",
+        "bytes": 3147379,
+        "sha256": "8873d9cf2de6f569d870a00ed1a315c0884c613d046dded0dbac6a00e5b07c4c",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "0e581381094f220b34dd53a0b3fda3183073ca1c24a1b7c16b4021bb1b2f844e"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-25165824.bin.gz",
+        "bytes": 3272946,
+        "sha256": "12933e8d8849339fe9beb94a32e980ce7ed9b8c51cfd41aaca007048c0987532",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "cb95b495fe67691cdbd348ae550a8faff3f0a02d56cb7e04697d3074beff1a84"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-29360128.bin.gz",
+        "bytes": 3296517,
+        "sha256": "6b2e3c4b034ee7fc36d0af7872e06335626d8999a53b69f4efbabf97bfeda857",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "2318b989707e6fdeea95be78e84ca6311cc85edd88d21bc6aa8dbdc413b196d8"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-33554432.bin.gz",
+        "bytes": 3522008,
+        "sha256": "b4cce0a5fe00420e8b3ea7e7e36aa51d8e0ba98754ff4c947e7b6e3f98b3c69a",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "082dc2031c2e5570e2dbbd576d9a6d0742d88205eed040cd841933a5183a9384"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-37748736.bin.gz",
+        "bytes": 3497810,
+        "sha256": "5bbbc82ca9e55ee6dedf45b0fe017870ead9fbca249ce51501a27c4bbd64d4d9",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "2719f2dacf20b01eb4aa4eedfd2c84fe216b2606b86cb6765c0181f686663fc3"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-4194304.bin.gz",
+        "bytes": 3428822,
+        "sha256": "d0bfe241823d52728d6e0ee00e45f915da6f10027753e56c3cee1d75713c4fc1",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "0b2db4ade1494b23e5668f6836973ea346a7da8233b493129b123c7078e9de24"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-41943040.bin.gz",
+        "bytes": 3535117,
+        "sha256": "e80b9fc5d36b4f9a2c81ad7ed88898d0d514c8b23a6b3221b554a091f7f29e0b",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "50ec447cfccdcbc597018d6790dd357db61ea12fb424f592c1a1ac40d00d5c54"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-46137344.bin.gz",
+        "bytes": 3557170,
+        "sha256": "c8b9cc17324e8f0b9749ce4b06c1941bf75d703305d4c2a520ec99376f9a2dc3",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "45c1f450818fd8a21b527dfd39781ed70ca22930385ce29611614f5cd95b62f1"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-50331648.bin.gz",
+        "bytes": 3397881,
+        "sha256": "db9863873eac0994ea72a4182e2fadcac3d3bf7a5b94790a36c6c8376ad2fc56",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "22f5985427824f8d910fbda76e42962ea0163310a0cf151120d53ad21dccc211"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-54525952.bin.gz",
+        "bytes": 2461208,
+        "sha256": "34490682a1b03397b22c7d293d0df1b93d373e72087f05ee1bebefc2ee1f47fc",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 12370824,
+        "uncompressed_sha256": "ed3d0dc58c3abf13e2474c3d7928f481f98e9f3bd42f0b2df5a6b9b17400b621"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/ownership/startup-runs-8388608.bin.gz",
+        "bytes": 3423665,
+        "sha256": "76aab155b2235f8f925b2a68a0156240b4cb66a6fb3dd4ea1f8d954abaad785f",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "5c599a3124f1446a4dbb849e2b1975d2b62993139ca1e4919d0432c1faf3ea18"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/preview-root-proof.json",
+        "bytes": 314,
+        "sha256": "d791229b0c96335023def28b3168cf00565686aa425360cd3883431c857a03ab",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/candidate-package-06/reference-attributes/startup-bundle.json.gz",
+        "bytes": 2017473,
+        "sha256": "1ad52407021fd0a4e559ced456004140e1edcbd3e224cf1273f67500546eb231",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 9657342,
+        "uncompressed_sha256": "7a84c398b8e495539f3639768630894f765ec71bed56209273f5e556e80efc2b"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/ownership-transport-parity-02.json",
+        "bytes": 43479,
+        "sha256": "2c0aacddf10a1c18a29971c76a5e3f82c07843e217b79c0862f8317f962b4be6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/reference-bundle-parity-01.json",
+        "bytes": 28560,
+        "sha256": "da8d948c2f3f0dd32d15b4693d759071d287541a0cda470e0e4e6b784eda7296",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/served5-reference-inputs/atlas-geography.json",
+        "bytes": 10525834,
+        "sha256": "3465d8f227958342cc6457f50fdf302462ffefb9fe2e6e5625cd12373a3bf7de",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/engineering/startup-20261004-a9c2/served5-reference-parity-01.json",
+        "bytes": 18859,
+        "sha256": "cfde8374a59bf5f1e95ba63d053bdb70bfe0be5e52149076830af2a37ae6292b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geographic-releases/index.json",
+        "bytes": 225846,
+        "sha256": "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/prepared-evidence/index.json",
+        "bytes": 14739,
+        "sha256": "830b3e483a2fd910b795a964520631c0e417cc80f7c5fcc3b3399abbccc958b2",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "src/data-client.js",
+        "bytes": 16339,
+        "sha256": "48991698db84296f24e6ada75e4e8f04993b1fdd9ff7da980d20c3e1c63d60d2",
+        "hash_kind": "file-bytes",
+        "role": "implementation-baseline"
+      },
+      {
+        "path": "src/main.js",
+        "bytes": 35340,
+        "sha256": "87f7ed5e8b6b51e5555bc9762c80de5423926a818cc27d1da7ff536a8fe68091",
+        "hash_kind": "file-bytes",
+        "role": "implementation-baseline"
+      },
+      {
+        "path": "test/compact-map-client.test.mjs",
+        "bytes": 20182,
+        "sha256": "66d1644c3d70fbb77393408c34ad5919271d4988c3466259548b36588341dc56",
+        "hash_kind": "file-bytes",
+        "role": "implementation-baseline"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "id": "retained-startup-inputs",
+      "url": "https://github.com/ChengshuLi/WorldAtlas",
+      "role": "Prior accepted complete transport plus unchanged source/static inputs; no new factual assertion",
+      "vintage": "Main1179243875790e1600f0d4a4e1dd508ac9ab5bfe; served Site24 release5 separate from offline6",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "unknown",
+        "terms": "Existing upstream reuse terms not independently reapproved"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Checkout baseline and candidate-package-06 from prior merged startup evidence; all raw files and original root are whole-byte pinned. Actual compiled vintages/source maps retained with restoration receipt, not inherited caches. Preserve all source/research/predecessor objects.",
+      "limit": "Hashes and previous review do not establish original primary-source authenticity, geographic approval, historical-import permission, production object retention or served acceptance. Preview payloads local; backend actual served5; offline source6 remains distinct. Physical phone/provider wake/query phases unverified. Measurements have uncommitted source inventories and complete compiled sourcemap vintages; ancestry is not a clean-tree claim."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/startup-scheduling-20261004-a9c2.json",
+      "bytes": 1523,
+      "sha256": "b5afa74b1b880b227fb47ae88a170e211940a54bf4d1859a8f3584e15092a3ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/README.md",
+      "bytes": 4368,
+      "sha256": "8310c526a7b0cf9a4c70fdfee62bca3b966c179bebfd443088f1a892b077e449",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-01.log",
+      "bytes": 950,
+      "sha256": "4c8ade347d42e07f750203da7dbd57533a5fcd1f00e5ab0336d7b8f40f248825",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-02.log",
+      "bytes": 950,
+      "sha256": "89a55b07beb7f18439532bd85af3a5c1749e9b8ac8da12903d990119b043861f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-03.log",
+      "bytes": 950,
+      "sha256": "5b9e7d4ba4af2397d501683af001557638e65d90aa774aa06c6e44bdcfbea435",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-04.log",
+      "bytes": 950,
+      "sha256": "aa080ca4d2c8503de647cd3cb6e321dc08251d3fdec20305a8f305e88800c02f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-06.log",
+      "bytes": 950,
+      "sha256": "aeb5272179858eaf34ad4692cdf83472938957b9dc9a011d67f065676569740d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-07.log",
+      "bytes": 950,
+      "sha256": "988b56c5046d5db5086ad5b503aa17791c61fa571f766e716bc031d3a2072f82",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-before-01.log",
+      "bytes": 956,
+      "sha256": "9f4f2f5de7e2e36b101e1d05e926c45289b54f749997596a10223974e20dc20f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-controls-04.json",
+      "bytes": 1956,
+      "sha256": "2aa6ee438c71181c6426db51f46eb707df4b92b0c20b87f6173b8188a7504209",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-controls-07.json",
+      "bytes": 1956,
+      "sha256": "80ffb6998494bac3e6d2b501421be6d73a3566aae9cd9a2b02b1d132e640642d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-modes-04.json",
+      "bytes": 11876,
+      "sha256": "3fe1e3dc58f8258f24e0b75293ae6579892f4d2d4c5b888bbfd9832c072a7945",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-modes-07.json",
+      "bytes": 11876,
+      "sha256": "a86ff6dcb2b0981fdb8de5e26e0dd8735bab305d8d2aeab8b3411588d9b9898a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-01.json",
+      "bytes": 4632,
+      "sha256": "d6976d3f1cc117020ea19635b7339fae6719de9f72dc23dfb354e88bcf8ceddb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-02.json",
+      "bytes": 2569,
+      "sha256": "fa747bd3dd8588571c916c6c21fd6f51a4627438173a821f8796c072c280edc7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-03.json",
+      "bytes": 2654,
+      "sha256": "fd38201789c9ebcd6ce31553c73515e2b5af1bd2dbf979ad142f8fe90c7e5328",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-04.json",
+      "bytes": 2619,
+      "sha256": "2a5e59fe24b8bd9760ff584e0e1c10ea8556d17a9c7b9b0cbdf5eef7520037fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-06.json",
+      "bytes": 2671,
+      "sha256": "2c5fdf95c09517f971a090e57072d828ab7e1c2503ff6a0589d501f47b21cdcb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-07.json",
+      "bytes": 2700,
+      "sha256": "2d5f4a08b4d5585a298e0a4b74f8900c773e18c85c1ed6beafefda00addfe394",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-restoration-01.json",
+      "bytes": 15276,
+      "sha256": "6f4a5e53f45f44a91a63a81442a2ebfd8fcd288c882e2ff0faa6c2b60db4b55f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/index-Cb8GUTKn.js",
+      "bytes": 356782,
+      "sha256": "850cc80e81b0c9d5a1879bd6a45234b6f9514ca79f56702548ae5e07c43c7f34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/index-Cb8GUTKn.js.map",
+      "bytes": 1138850,
+      "sha256": "10b5fe9fe8ffbf85bcbf54533b0fe6a21c1ea9564054816aaced53c6ae165f09",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/index-bXIaIiI7.css",
+      "bytes": 31403,
+      "sha256": "f57c2d3ba92874734ee9da5c9dc4417d6615ebb05105729334b6f3f1c5b09f0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "bytes": 2386,
+      "sha256": "7317e3f8c351c9bba9e071f0243bc40379acec3697e1849a71b56135d46a9d1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "bytes": 11122,
+      "sha256": "020c03656f0799f0820f64614df3ade0a38fd4392076eddea460af69c88284bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/pixel-worker-DTOGFbAn.js",
+      "bytes": 2637,
+      "sha256": "14ffe5c076d3f6ef812b37682aae1e87b64f451eee394689a6f28456bb7746ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/pixel-worker-DTOGFbAn.js.map",
+      "bytes": 12572,
+      "sha256": "5b34656899bd6f661f468f72a274599f10855a4fd886a3d942943afd57cc01e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/index.html",
+      "bytes": 460,
+      "sha256": "eb1e74d281849a82f4e95deff683e17fe7a3b4ad184c8836b5d4dcc399beea90",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/index-DkCL8RD9.js",
+      "bytes": 357467,
+      "sha256": "499dea707b1a491e7f9c95155d7879517e70a819100d0d1bf6adee89a351b7c8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/index-DkCL8RD9.js.map",
+      "bytes": 1141489,
+      "sha256": "f2050b907ed946548f6c15a24c4ebed80d262396f261b721d8f610a48f0f61a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/index-bXIaIiI7.css",
+      "bytes": 31403,
+      "sha256": "f57c2d3ba92874734ee9da5c9dc4417d6615ebb05105729334b6f3f1c5b09f0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "bytes": 2386,
+      "sha256": "7317e3f8c351c9bba9e071f0243bc40379acec3697e1849a71b56135d46a9d1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "bytes": 11122,
+      "sha256": "020c03656f0799f0820f64614df3ade0a38fd4392076eddea460af69c88284bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/pixel-worker-DTOGFbAn.js",
+      "bytes": 2637,
+      "sha256": "14ffe5c076d3f6ef812b37682aae1e87b64f451eee394689a6f28456bb7746ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/pixel-worker-DTOGFbAn.js.map",
+      "bytes": 12572,
+      "sha256": "5b34656899bd6f661f468f72a274599f10855a4fd886a3d942943afd57cc01e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/index.html",
+      "bytes": 460,
+      "sha256": "c9d13ea387f49ba33c01c383719d3ac26ca2e458b072911b133a3020daa73b29",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/index-DrpskyOU.js",
+      "bytes": 357801,
+      "sha256": "8e12a588f1fa0d0493e3432e39b5dda03b9267f0395c70f5459ae9dd94cb9cc3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/index-DrpskyOU.js.map",
+      "bytes": 1142944,
+      "sha256": "a97f35b11ee24433ca629eed81e30c990e27dcfa0e924fffb84d86f429c2afa8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/index-bXIaIiI7.css",
+      "bytes": 31403,
+      "sha256": "f57c2d3ba92874734ee9da5c9dc4417d6615ebb05105729334b6f3f1c5b09f0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "bytes": 2386,
+      "sha256": "7317e3f8c351c9bba9e071f0243bc40379acec3697e1849a71b56135d46a9d1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "bytes": 11122,
+      "sha256": "020c03656f0799f0820f64614df3ade0a38fd4392076eddea460af69c88284bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/pixel-worker-DTOGFbAn.js",
+      "bytes": 2637,
+      "sha256": "14ffe5c076d3f6ef812b37682aae1e87b64f451eee394689a6f28456bb7746ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/pixel-worker-DTOGFbAn.js.map",
+      "bytes": 12572,
+      "sha256": "5b34656899bd6f661f468f72a274599f10855a4fd886a3d942943afd57cc01e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/index.html",
+      "bytes": 460,
+      "sha256": "cf10a52ee03c5b88535a3b3b0264cfa91af87ffe8d2ba622783e48bb91b61e15",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/index-Ck5OdNP1.js",
+      "bytes": 357794,
+      "sha256": "94f8cbdf87ecdc6a2ec39afe966365ec56ff622795b9c8b87728a22ce016fdae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/index-Ck5OdNP1.js.map",
+      "bytes": 1142895,
+      "sha256": "31a8319aacff9682976d44be464de8a34e6d7e1ddac7981615a90cb7558b01eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/index-bXIaIiI7.css",
+      "bytes": 31403,
+      "sha256": "f57c2d3ba92874734ee9da5c9dc4417d6615ebb05105729334b6f3f1c5b09f0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "bytes": 2386,
+      "sha256": "7317e3f8c351c9bba9e071f0243bc40379acec3697e1849a71b56135d46a9d1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "bytes": 11122,
+      "sha256": "020c03656f0799f0820f64614df3ade0a38fd4392076eddea460af69c88284bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/pixel-worker-DTOGFbAn.js",
+      "bytes": 2637,
+      "sha256": "14ffe5c076d3f6ef812b37682aae1e87b64f451eee394689a6f28456bb7746ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/pixel-worker-DTOGFbAn.js.map",
+      "bytes": 12572,
+      "sha256": "5b34656899bd6f661f468f72a274599f10855a4fd886a3d942943afd57cc01e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/index.html",
+      "bytes": 460,
+      "sha256": "264c107a79e50e315c9d14baa795a2d04ddd9ff307500b349ea2703260783e82",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/index-DTIG0CDQ.js",
+      "bytes": 357913,
+      "sha256": "6fb1bb19a1b1f8dc19b3d69f82d2581b519bfa5cd69a1c5ee36921a534908910",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/index-DTIG0CDQ.js.map",
+      "bytes": 1143261,
+      "sha256": "c93912a2dc44d42cfe6395588af64bf85c703ac755af4248d236ccd7c1d1e043",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/index-bXIaIiI7.css",
+      "bytes": 31403,
+      "sha256": "f57c2d3ba92874734ee9da5c9dc4417d6615ebb05105729334b6f3f1c5b09f0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "bytes": 2386,
+      "sha256": "7317e3f8c351c9bba9e071f0243bc40379acec3697e1849a71b56135d46a9d1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "bytes": 11122,
+      "sha256": "020c03656f0799f0820f64614df3ade0a38fd4392076eddea460af69c88284bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/pixel-worker-DTOGFbAn.js",
+      "bytes": 2637,
+      "sha256": "14ffe5c076d3f6ef812b37682aae1e87b64f451eee394689a6f28456bb7746ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/pixel-worker-DTOGFbAn.js.map",
+      "bytes": 12572,
+      "sha256": "5b34656899bd6f661f468f72a274599f10855a4fd886a3d942943afd57cc01e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/index.html",
+      "bytes": 460,
+      "sha256": "e9f23d45ffad3ef9699023413a8ec5373b9778799c7b646bae48824d6bd507be",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/index-CzDlJTni.js",
+      "bytes": 358161,
+      "sha256": "ea71fe5460fcbd31d547edfe56d4e39d0c8664fa5920726d33b326d84e632ccb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/index-CzDlJTni.js.map",
+      "bytes": 1143781,
+      "sha256": "e173b9567552c68b92bb36627709476261153c2eae9218ca93d2d3695c84abae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/index-bXIaIiI7.css",
+      "bytes": 31403,
+      "sha256": "f57c2d3ba92874734ee9da5c9dc4417d6615ebb05105729334b6f3f1c5b09f0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "bytes": 2386,
+      "sha256": "7317e3f8c351c9bba9e071f0243bc40379acec3697e1849a71b56135d46a9d1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "bytes": 11122,
+      "sha256": "020c03656f0799f0820f64614df3ade0a38fd4392076eddea460af69c88284bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/pixel-worker-DTOGFbAn.js",
+      "bytes": 2637,
+      "sha256": "14ffe5c076d3f6ef812b37682aae1e87b64f451eee394689a6f28456bb7746ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/pixel-worker-DTOGFbAn.js.map",
+      "bytes": 12572,
+      "sha256": "5b34656899bd6f661f468f72a274599f10855a4fd886a3d942943afd57cc01e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/index.html",
+      "bytes": 460,
+      "sha256": "eb294337b103bd029b9eabdc4d1c6f3de1b35c4ada82db9b33bfec2a8cc76c25",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/index-D9kai2Kb.js",
+      "bytes": 356786,
+      "sha256": "e9969b7eaefd649545f489f893634e375fe87f93bce3bf78cfff4f936965f56d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/index-D9kai2Kb.js.map",
+      "bytes": 1138676,
+      "sha256": "fa36c55597482d559226a9a2aaf16e26d45d0d78ef00412e76d17ec60f104b2d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/index-bXIaIiI7.css",
+      "bytes": 31403,
+      "sha256": "f57c2d3ba92874734ee9da5c9dc4417d6615ebb05105729334b6f3f1c5b09f0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "bytes": 2386,
+      "sha256": "7317e3f8c351c9bba9e071f0243bc40379acec3697e1849a71b56135d46a9d1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "bytes": 11122,
+      "sha256": "020c03656f0799f0820f64614df3ade0a38fd4392076eddea460af69c88284bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/pixel-worker-DTOGFbAn.js",
+      "bytes": 2637,
+      "sha256": "14ffe5c076d3f6ef812b37682aae1e87b64f451eee394689a6f28456bb7746ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/pixel-worker-DTOGFbAn.js.map",
+      "bytes": 12572,
+      "sha256": "5b34656899bd6f661f468f72a274599f10855a4fd886a3d942943afd57cc01e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/index.html",
+      "bytes": 460,
+      "sha256": "31bf552f043d77534a33ffb2e7523decde7bf4d9bf05e2cb346906f0fa81e26f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-01.log",
+      "bytes": 2947,
+      "sha256": "5ee733aa085b484f8364849b68318e9faa07aaa6345c0505cc96a10cc9945124",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-02.log",
+      "bytes": 3148,
+      "sha256": "f8acd1c3a8771756273b058eab0d42e1d0b49d417a69f802b2a99bc05be3ed50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-03.log",
+      "bytes": 3145,
+      "sha256": "1de93bbb3ed272b9052486bbb286cbbb6b9944bfc0a8faff76c9050335ceda14",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-04.log",
+      "bytes": 3551,
+      "sha256": "b02f8c66851a2d208cbc780b56b3e6d992aeedaf6c60ba2333b73998a7c2e78f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-05.log",
+      "bytes": 3554,
+      "sha256": "36fae76a9e67568d8c150c8a792c8324665102c4dd0aa531f0a88371af8ec4be",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-06.log",
+      "bytes": 3839,
+      "sha256": "027c8be80e98ee66cded94e4a76ec7567d211d599db4cedc8e9f3d558b9836a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-07.log",
+      "bytes": 6254,
+      "sha256": "06a6c89b1460220a944a2474d9c58bd6269bd624602aefecb1493455ad3fd4e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-08.log",
+      "bytes": 6442,
+      "sha256": "95b03176d3afd53ea225e46da82d6d6b1cfb60f6ff3fb7164c0519f894bc5c36",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-09.log",
+      "bytes": 6553,
+      "sha256": "b20e26e4994ad47db353f37719c1e328473dc12b29222913440e54c46a3d5cba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/issue-metadata-current.json",
+      "bytes": 11361,
+      "sha256": "db453dbb008713083ea8d31b21fee86c2ad9d2dbeb454555bf4b9c93f68c1c92",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01-2020.png",
+      "bytes": 191555,
+      "sha256": "11c2e4670f0ba6ce0482871d172b1d9952ccccda27ffb5d3e9c30608add7690b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01-profile.json.gz",
+      "bytes": 38388,
+      "sha256": "1f2a8204311d59759207f978edf93e940acc4018beb29d39c3489999712fb582",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 229313,
+      "uncompressed_sha256": "7ea63b8008d1e1fa960fd500b9b4f081f41f28508ce4ccba2da30f28ed937931"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01-trace.json.gz",
+      "bytes": 526485,
+      "sha256": "b93b7df40fbca9f9e9b51241612c1714d253ee7ce6b2c7fd9737d58c5362f288",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 9673793,
+      "uncompressed_sha256": "04e58753aeb13c2d9b2ff66ae118f042d6fc17b6e10a9c18432618302f59bf9b"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "bytes": 75462,
+      "sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02-2020.png",
+      "bytes": 191555,
+      "sha256": "11c2e4670f0ba6ce0482871d172b1d9952ccccda27ffb5d3e9c30608add7690b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02-profile.json.gz",
+      "bytes": 36678,
+      "sha256": "2e8ad00ebd278953fdaeb3e0ca9b0598b7ca7bc0ab3845ebc516a3503facd144",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 216644,
+      "uncompressed_sha256": "2385a48a5516ecaa0222ca45da5c67dee84d3151688948b1a89a2426b3d8b578"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02-trace.json.gz",
+      "bytes": 617184,
+      "sha256": "ec89d6760bb35682ab41890fbb4fdd2933c644c42958962e4cfa081553b87849",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 12236099,
+      "uncompressed_sha256": "3c37063e1b177f9a7896901a49bed1ba1ae49542eb21c475b9117655a8c66bef"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "bytes": 75459,
+      "sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/negative-control-07.json",
+      "bytes": 711,
+      "sha256": "e76b1f0fdf9f9c30aaf5f9b518a05cfe0d7b42a89d9b183b61221d10ff8808d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/negative-control.json",
+      "bytes": 676,
+      "sha256": "404c8e9674323fd2651c75f3c2445fbd1ae6a8a63ddeca6628ba902bfbfde87d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/positive-control-07.json",
+      "bytes": 705,
+      "sha256": "ed27fb44c118a0615469f91f2fa76ae7ff399ae10c0e3aa1b523d605e57fdcb3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/positive-control.json",
+      "bytes": 665,
+      "sha256": "f89e91f6db80adc896d3c373fc99867e95e37eaa6a478445f2c39fec5c20581c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/prepare-evidence.py",
+      "bytes": 9260,
+      "sha256": "170d6c4c9e1795071729f66bbaf304e357e176255b19009dc4798a4857ae41f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/preview-modes.mjs",
+      "bytes": 7494,
+      "sha256": "f81b6cc9d7c77aaee9f136966a3d564393ceb59d7361804676316c60d6b7d69d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/reservation-01.json",
+      "bytes": 833,
+      "sha256": "ac9a065aacc25550e44be6d82390a78d45492c6115897c928248a742f42b2622",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/reservation-current.json",
+      "bytes": 509,
+      "sha256": "bcbaa30f433014bc1625e92792eb0bd819271b064d1831d307c58feecc1e5424",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01-2020.png",
+      "bytes": 191555,
+      "sha256": "11c2e4670f0ba6ce0482871d172b1d9952ccccda27ffb5d3e9c30608add7690b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01-profile.json.gz",
+      "bytes": 38706,
+      "sha256": "a2742dfc1370b1a7bf2ae227ce074f562d5381a32d9bcdcc5670efa3baed282a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 228758,
+      "uncompressed_sha256": "8df9043296e412121e35d190cd40745b532e3ad1300e9ec39ec808997cbae3ae"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01-trace.json.gz",
+      "bytes": 449215,
+      "sha256": "7154dc9019ef89fc080d119e2a86a59c39c601d13f468516a1c87a6f5d4f6ded",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7622433,
+      "uncompressed_sha256": "9124d68bc1582561450f9e4db9b1e39c5b278aa1d3c02bb46bf3c7b47b76baac"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "bytes": 75527,
+      "sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02-2020.png",
+      "bytes": 191555,
+      "sha256": "11c2e4670f0ba6ce0482871d172b1d9952ccccda27ffb5d3e9c30608add7690b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02-profile.json.gz",
+      "bytes": 37181,
+      "sha256": "e778efcaf9f406b126b9e88d1c069cef014649fa0b62577585090bf1ffea035c",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 222340,
+      "uncompressed_sha256": "fc9926b730382fb1f94fa01610581e3b37f50db89b0d579a4788718c4ca60451"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02-trace.json.gz",
+      "bytes": 476232,
+      "sha256": "e7b673a64c3a3f9f864eb8d8349644758feca02ab1f69214bb74d1dab5f8a401",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8495576,
+      "uncompressed_sha256": "9dc80c154e4fab50ee58f09d31945a624e64b41ceab13d2156775683ae8686f1"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "bytes": 75442,
+      "sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03-2020.png",
+      "bytes": 191555,
+      "sha256": "11c2e4670f0ba6ce0482871d172b1d9952ccccda27ffb5d3e9c30608add7690b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03-profile.json.gz",
+      "bytes": 35599,
+      "sha256": "acca39ac854233f6f3fd2de5b4297ea56f827d3e3e71656dbe9619fbf4524e13",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 208883,
+      "uncompressed_sha256": "0b0bc75b9b1cf190b5be4ab26daecfdebdbf8f1fb41351cad0c9d449ef818158"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03-trace.json.gz",
+      "bytes": 477710,
+      "sha256": "83c125395116e7c5dde1909550d1db0cad474551053adfc5b2adf2cd4e0cc323",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8723189,
+      "uncompressed_sha256": "daf6712f83c3ce4b4f20e26776f4fbb806ec70b16bb789a9bc8a14325bf8f50c"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "bytes": 75411,
+      "sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04-2020.png",
+      "bytes": 191556,
+      "sha256": "188271a97d7a9e9b16ab8dbb1dc3ee29d416d72269fa7c16536141344ddeaa71",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04-profile.json.gz",
+      "bytes": 38382,
+      "sha256": "8e4f07115fdf4c5edb5bfbddf8b0ccdb0d7889ca99f46dc9a9e43a54aaa049db",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 220075,
+      "uncompressed_sha256": "6e2ae035486f4b8f419de5315a0276a5364fb8d28d59302497181515ae60b109"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04-trace.json.gz",
+      "bytes": 513554,
+      "sha256": "fcb291010247636c1b411ea047a1577210315aecb654a4fc4d3689f617c340a5",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 9389215,
+      "uncompressed_sha256": "0f276a622b735c7cd0256b34e5c28b1fb5db9646c673f3edac869b05e70f2291"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "bytes": 75467,
+      "sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05-2020.png",
+      "bytes": 191555,
+      "sha256": "11c2e4670f0ba6ce0482871d172b1d9952ccccda27ffb5d3e9c30608add7690b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05-profile.json.gz",
+      "bytes": 37764,
+      "sha256": "809438d2f62c913df6fe61bab8dd6e656b2abaa43d38ad715acea0164e2a0bc5",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 224263,
+      "uncompressed_sha256": "026dbcf7256b2d0a28e58ed8be1165b722c479b50f5929aa572611185f56e98e"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05-trace.json.gz",
+      "bytes": 429402,
+      "sha256": "64476533e1c51c068506ff08037fd9401008cc4bfe3f5fcbb5351ad46ea4ae68",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7075651,
+      "uncompressed_sha256": "0771cfe596c47e2f87d8e0ec4c692f6b26c3ba262fbae51e49c4b07501eedd1e"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "bytes": 75526,
+      "sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06-2020.png",
+      "bytes": 191555,
+      "sha256": "11c2e4670f0ba6ce0482871d172b1d9952ccccda27ffb5d3e9c30608add7690b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06-profile.json.gz",
+      "bytes": 36193,
+      "sha256": "b6bc7c79b7cec41d31d1399c050951d950df6b43f83426f93b9ec9a563e1d384",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 217138,
+      "uncompressed_sha256": "d964fb1c08813f7e7107ec407a3a8aacce89c38e5710815bf14296604b922cca"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06-trace.json.gz",
+      "bytes": 736523,
+      "sha256": "65900e5183e7c1c74da5950c03d3b04a6b729e5e4e91ad4218e468f6649dcd33",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 15324912,
+      "uncompressed_sha256": "ca655e0e58a9ac68fbefb095afeac742e782cf5276bf80a3b4ab7a47b6751405"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "bytes": 75564,
+      "sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07-2020.png",
+      "bytes": 191555,
+      "sha256": "11c2e4670f0ba6ce0482871d172b1d9952ccccda27ffb5d3e9c30608add7690b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07-profile.json.gz",
+      "bytes": 36387,
+      "sha256": "baeb175323fd4d6d7304cbd0ce6db0a384115d65c887195a51ef090302fc95f7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 217026,
+      "uncompressed_sha256": "61ed214c9a375faf8ae03178048f07fd26b793e7b76e11d27e927edf73eba2b0"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07-trace.json.gz",
+      "bytes": 575331,
+      "sha256": "15dcf0a304c723b89615af3185893baefc391ebc6610110db935d32f8cba56b2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11123440,
+      "uncompressed_sha256": "6d9f6e3fc3e28c5e033ca26d9f50e38113338cf1c949016d4a4d0371bf2973a6"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "bytes": 75477,
+      "sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-07.json",
+      "bytes": 598,
+      "sha256": "be7c638bc92a1a58f65d4d1b27f1af051badb43d1ef488a6300aa2001ad2ce0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-08.json",
+      "bytes": 503,
+      "sha256": "0b43890a5e239da9b0c70480fe6331bb11e691bdf3c029591310b8a7132b53ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-09.json",
+      "bytes": 489,
+      "sha256": "ffabea0feaceb0bb0c98b90ecc07ea6f7f54045fec0204ed507db6441e9d2cca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/startup-benchmark.mjs",
+      "bytes": 14656,
+      "sha256": "5590996209c09c7a5adcc5454a2d966ab93c3c8f2d5a6c3066cba86200da6fd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/startup-controls.mjs",
+      "bytes": 6621,
+      "sha256": "8be016b43f9a5f600791dacf181ed54df60e5a92ce3c9a832ddb44d846ff4533",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/validate-premerge.mjs",
+      "bytes": 1734,
+      "sha256": "ffd026fc7ba3575b993e23eed20d50171f9d86f098c91b6435b175a9a5bde4e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/data-client.js",
+      "bytes": 19347,
+      "sha256": "1ab9135906f1ef0c03ee12dac4bec9ddf5474188b308ba9877dc79b1bd6eff2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/main.js",
+      "bytes": 35390,
+      "sha256": "2b95a6e0c5d8132aae88a5ae89c5492b7b2d1e82529f24eb8234ee9fe03edf6e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-map-client.test.mjs",
+      "bytes": 32678,
+      "sha256": "28f4aac5de23b08a57c439f93ebe5ccc757a7e2d30d30a09f3fe401605cefe2b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/startup-scheduling-20261004-a9c2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/startup-scheduling-20261004-a9c2/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-01.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-02.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-03.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-04.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-06.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-after-07.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/build-before-01.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-controls-04.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-controls-07.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-modes-04.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-modes-07.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-02.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-03.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-04.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-06.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/code-inventory-07.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-restoration-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/index-Cb8GUTKn.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/index-Cb8GUTKn.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/index-bXIaIiI7.css",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/pixel-worker-DTOGFbAn.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/assets/pixel-worker-DTOGFbAn.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-01/index.html",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/index-DkCL8RD9.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/index-DkCL8RD9.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/index-bXIaIiI7.css",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/pixel-worker-DTOGFbAn.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/assets/pixel-worker-DTOGFbAn.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-02/index.html",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/index-DrpskyOU.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/index-DrpskyOU.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/index-bXIaIiI7.css",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/pixel-worker-DTOGFbAn.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/assets/pixel-worker-DTOGFbAn.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-03/index.html",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/index-Ck5OdNP1.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/index-Ck5OdNP1.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/index-bXIaIiI7.css",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/pixel-worker-DTOGFbAn.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/assets/pixel-worker-DTOGFbAn.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-04/index.html",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/index-DTIG0CDQ.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/index-DTIG0CDQ.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/index-bXIaIiI7.css",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/pixel-worker-DTOGFbAn.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/assets/pixel-worker-DTOGFbAn.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-06/index.html",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/index-CzDlJTni.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/index-CzDlJTni.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/index-bXIaIiI7.css",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/pixel-worker-DTOGFbAn.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/assets/pixel-worker-DTOGFbAn.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/after-07/index.html",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/index-D9kai2Kb.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/index-D9kai2Kb.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/index-bXIaIiI7.css",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/pixel-gpu-worker-DOOaZKfq.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/pixel-worker-DTOGFbAn.js",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/assets/pixel-worker-DTOGFbAn.js.map",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/compiled-vintages/before-01/index.html",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-01.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-02.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-03.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-04.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-05.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-06.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-07.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-08.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/focused-tests-09.log",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/issue-metadata-current.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01-2020.png",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01-profile.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02-2020.png",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02-profile.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/negative-control-07.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/positive-control-07.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/prepare-evidence.py",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/preview-modes.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/reservation-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/reservation-current.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01-2020.png",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01-profile.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02-2020.png",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02-profile.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03-2020.png",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03-profile.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04-2020.png",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04-profile.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05-2020.png",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05-profile.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06-2020.png",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06-profile.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07-2020.png",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07-profile.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-07.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-08.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-09.json",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/startup-benchmark.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/startup-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/validate-premerge.mjs",
+      "status": "added"
+    },
+    {
+      "path": "src/data-client.js",
+      "status": "modified",
+      "original_sha256": "48991698db84296f24e6ada75e4e8f04993b1fdd9ff7da980d20c3e1c63d60d2"
+    },
+    {
+      "path": "src/main.js",
+      "status": "modified",
+      "original_sha256": "87f7ed5e8b6b51e5555bc9762c80de5423926a818cc27d1da7ff536a8fe68091"
+    },
+    {
+      "path": "test/compact-map-client.test.mjs",
+      "status": "modified",
+      "original_sha256": "66d1644c3d70fbb77393408c34ad5919271d4988c3466259548b36588341dc56"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "merged745-before-01-initial",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/initial/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-01-initial-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/initial/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "merged745-before-01-initial-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/initial/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "merged745-before-01-initial-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/initial/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "merged745-before-01-repeat",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/repeat/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-01-repeat-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/repeat/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "merged745-before-01-repeat-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/repeat/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "merged745-before-01-repeat-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/repeat/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "merged745-before-01-navigation-0",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/navigation/0/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-01-navigation-1",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/navigation/1/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-01-navigation-2",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/navigation/2/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-01-navigation-3",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/navigation/3/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-01-navigation-4",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-01.json",
+      "json_pointer": "/navigation/4/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-02-initial",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/initial/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-02-initial-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/initial/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "merged745-before-02-initial-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/initial/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "merged745-before-02-initial-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/initial/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "merged745-before-02-repeat",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/repeat/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-02-repeat-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/repeat/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "merged745-before-02-repeat-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/repeat/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "merged745-before-02-repeat-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/repeat/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "merged745-before-02-navigation-0",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/navigation/0/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-02-navigation-1",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/navigation/1/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-02-navigation-2",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/navigation/2/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-02-navigation-3",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/navigation/3/elapsed_ms"
+    },
+    {
+      "metric_id": "merged745-before-02-navigation-4",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/merged745-before-02.json",
+      "json_pointer": "/navigation/4/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-01-initial",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/initial/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-01-initial-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/initial/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-01-initial-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/initial/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-01-initial-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/initial/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-01-repeat",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/repeat/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-01-repeat-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/repeat/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-01-repeat-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/repeat/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-01-repeat-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/repeat/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-01-navigation-0",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/navigation/0/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-01-navigation-1",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/navigation/1/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-01-navigation-2",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/navigation/2/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-01-navigation-3",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/navigation/3/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-01-navigation-4",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-01.json",
+      "json_pointer": "/navigation/4/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-02-initial",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/initial/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-02-initial-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/initial/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-02-initial-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/initial/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-02-initial-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/initial/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-02-repeat",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/repeat/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-02-repeat-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/repeat/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-02-repeat-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/repeat/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-02-repeat-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/repeat/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-02-navigation-0",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/navigation/0/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-02-navigation-1",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/navigation/1/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-02-navigation-2",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/navigation/2/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-02-navigation-3",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/navigation/3/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-02-navigation-4",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-02.json",
+      "json_pointer": "/navigation/4/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-03-initial",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/initial/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-03-initial-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/initial/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-03-initial-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/initial/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-03-initial-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/initial/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-03-repeat",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/repeat/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-03-repeat-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/repeat/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-03-repeat-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/repeat/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-03-repeat-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/repeat/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-03-navigation-0",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/navigation/0/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-03-navigation-1",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/navigation/1/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-03-navigation-2",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/navigation/2/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-03-navigation-3",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/navigation/3/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-03-navigation-4",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-03.json",
+      "json_pointer": "/navigation/4/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-04-initial",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/initial/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-04-initial-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/initial/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-04-initial-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/initial/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-04-initial-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/initial/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-04-repeat",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/repeat/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-04-repeat-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/repeat/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-04-repeat-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/repeat/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-04-repeat-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/repeat/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-04-navigation-0",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/navigation/0/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-04-navigation-1",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/navigation/1/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-04-navigation-2",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/navigation/2/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-04-navigation-3",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/navigation/3/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-04-navigation-4",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-04.json",
+      "json_pointer": "/navigation/4/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-05-initial",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/initial/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-05-initial-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/initial/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-05-initial-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/initial/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-05-initial-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/initial/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-05-repeat",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/repeat/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-05-repeat-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/repeat/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-05-repeat-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/repeat/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-05-repeat-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/repeat/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-05-navigation-0",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/navigation/0/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-05-navigation-1",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/navigation/1/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-05-navigation-2",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/navigation/2/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-05-navigation-3",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/navigation/3/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-05-navigation-4",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+      "json_pointer": "/navigation/4/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-06-initial",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/initial/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-06-initial-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/initial/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-06-initial-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/initial/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-06-initial-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/initial/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-06-repeat",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/repeat/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-06-repeat-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/repeat/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-06-repeat-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/repeat/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-06-repeat-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/repeat/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-06-navigation-0",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/navigation/0/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-06-navigation-1",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/navigation/1/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-06-navigation-2",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/navigation/2/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-06-navigation-3",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/navigation/3/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-06-navigation-4",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-06.json",
+      "json_pointer": "/navigation/4/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-07-initial",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/initial/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-07-initial-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/initial/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-07-initial-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/initial/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-07-initial-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/initial/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-07-repeat",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/repeat/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-07-repeat-TaskDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/repeat/metrics/TaskDuration"
+    },
+    {
+      "metric_id": "scheduling-after-07-repeat-ScriptDuration",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/repeat/metrics/ScriptDuration"
+    },
+    {
+      "metric_id": "scheduling-after-07-repeat-JSHeapUsedSize",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/repeat/metrics/JSHeapUsedSize"
+    },
+    {
+      "metric_id": "scheduling-after-07-navigation-0",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/navigation/0/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-07-navigation-1",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/navigation/1/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-07-navigation-2",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/navigation/2/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-07-navigation-3",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/navigation/3/elapsed_ms"
+    },
+    {
+      "metric_id": "scheduling-after-07-navigation-4",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+      "json_pointer": "/navigation/4/elapsed_ms"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-07.json-tests",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-07.json",
+      "json_pointer": "/tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-07.json-passed",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-07.json",
+      "json_pointer": "/passed"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-07.json-failed",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-07.json",
+      "json_pointer": "/failed"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-07.json-skipped",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-07.json",
+      "json_pointer": "/skipped"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-08.json-tests",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-08.json",
+      "json_pointer": "/tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-08.json-passed",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-08.json",
+      "json_pointer": "/passed"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-08.json-failed",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-08.json",
+      "json_pointer": "/failed"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-08.json-skipped",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-08.json",
+      "json_pointer": "/skipped"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-09.json-tests",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-09.json",
+      "json_pointer": "/tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-09.json-passed",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-09.json",
+      "json_pointer": "/passed"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-09.json-failed",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-09.json",
+      "json_pointer": "/failed"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-09.json-skipped",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/scoped-tests-receipt-09.json",
+      "json_pointer": "/skipped"
+    },
+    {
+      "metric_id": "candidate-modes-07.json-profiles",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-modes-07.json",
+      "json_pointer": "/profiles"
+    },
+    {
+      "metric_id": "candidate-modes-07.json-year",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-modes-07.json",
+      "json_pointer": "/year"
+    },
+    {
+      "metric_id": "candidate-modes-07.json-navigation_ownership_compilations",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-modes-07.json",
+      "json_pointer": "/navigation_ownership_compilations"
+    },
+    {
+      "metric_id": "candidate-modes-07.json-navigation_ownership_uploads",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-modes-07.json",
+      "json_pointer": "/navigation_ownership_uploads"
+    },
+    {
+      "metric_id": "final-canvas2d-painted-pixels",
+      "path": "data/engineering/startup-scheduling-20261004-a9c2/candidate-controls-07.json",
+      "json_pointer": "/fallback_pixels/painted_pixels"
+    }
+  ],
+  "rendered_tables": [],
+  "methods": [
+    {
+      "id": "pinned-startup-pipeline",
+      "kind": "code",
+      "description": "Start ownership rows before catalog, and one-shot exact initial evidence/history/hash-pinned index while complete geography loads. Preserve all stream completion, temporal/revision/withdrawal gates, cancellation and generation isolation; no renderer, geometry, facts or source changes.",
+      "software": "Node24.19.0",
+      "units": "Complete inputs and exact selection"
+    },
+    {
+      "id": "complete-startup-measurement",
+      "kind": "measurement",
+      "description": "Navigation to loader hidden plus complete selected-year canvas; all fresh/repeat samples, traces, outliers and failures retained. Actual original production root is verified before pinned local complete transports. No equivalent hosted or physical-device target claim.",
+      "software": "Playwright Chromium153.0.8010.12 Linux1440x1080, no CPU/network throttle; Node24.19.0 GET-only private proxy",
+      "units": "milliseconds"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "merged745-before-01-initial",
+      "value": 12268.289433999998,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-initial-TaskDuration",
+      "value": 4.751486,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-initial-ScriptDuration",
+      "value": 0.137447,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-initial-JSHeapUsedSize",
+      "value": 377822784,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-repeat",
+      "value": 11642.421987999998,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-repeat-TaskDuration",
+      "value": 4.598328,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-repeat-ScriptDuration",
+      "value": 0.107464,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-repeat-JSHeapUsedSize",
+      "value": 680303604,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-navigation-0",
+      "value": 3121.5,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-navigation-1",
+      "value": 2365.89999999851,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-navigation-2",
+      "value": 2434.3000000044703,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-navigation-3",
+      "value": 1612.5,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-01-navigation-4",
+      "value": 2849.5,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "8dae858bcd0c6d8dfd7b020f57d8969968247ae03806cab67c19a3b8592d9741"
+    },
+    {
+      "id": "merged745-before-02-initial",
+      "value": 11035.537064,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-initial-TaskDuration",
+      "value": 4.906406,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-initial-ScriptDuration",
+      "value": 0.131693,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-initial-JSHeapUsedSize",
+      "value": 377796300,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-repeat",
+      "value": 10403.566775000003,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-repeat-TaskDuration",
+      "value": 4.724103,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-repeat-ScriptDuration",
+      "value": 0.117853,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-repeat-JSHeapUsedSize",
+      "value": 682175376,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-navigation-0",
+      "value": 2573.10000000149,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-navigation-1",
+      "value": 2094.10000000149,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-navigation-2",
+      "value": 2867.8000000044703,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-navigation-3",
+      "value": 1926.1999999955297,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "merged745-before-02-navigation-4",
+      "value": 2732.39999999851,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "c08bb6198d4b0a36e0a904cf907a810f1129dd1352f494bbfdb487e24a653010"
+    },
+    {
+      "id": "scheduling-after-01-initial",
+      "value": 11059.584633000002,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-initial-TaskDuration",
+      "value": 4.805052,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-initial-ScriptDuration",
+      "value": 0.1459,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-initial-JSHeapUsedSize",
+      "value": 379395276,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-repeat",
+      "value": 10965.298394999998,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-repeat-TaskDuration",
+      "value": 4.612812,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-repeat-ScriptDuration",
+      "value": 0.107272,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-repeat-JSHeapUsedSize",
+      "value": 700516824,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-navigation-0",
+      "value": 2405.3000000044703,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-navigation-1",
+      "value": 1917.7000000029802,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-navigation-2",
+      "value": 4286,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-navigation-3",
+      "value": 2456.2000000029802,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-01-navigation-4",
+      "value": 2714,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+      "input_sha256": "9671b48349908fa0e4319becf43c2806597969fb05793f39c8ed7edeb94bc5d1"
+    },
+    {
+      "id": "scheduling-after-02-initial",
+      "value": 10506.425379,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-initial-TaskDuration",
+      "value": 4.551416,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-initial-ScriptDuration",
+      "value": 0.124477,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-initial-JSHeapUsedSize",
+      "value": 376497660,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-repeat",
+      "value": 10023.606876,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-repeat-TaskDuration",
+      "value": 4.633644,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-repeat-ScriptDuration",
+      "value": 0.186156,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-repeat-JSHeapUsedSize",
+      "value": 330838776,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-navigation-0",
+      "value": 2781.5,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-navigation-1",
+      "value": 2333.2999999970198,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-navigation-2",
+      "value": 2600.7999999970198,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-navigation-3",
+      "value": 2218.39999999851,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-02-navigation-4",
+      "value": 3983.5999999940395,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "cf35eefb529f49e3b7de823fbc0368390d587adc1d71b9881ca2f59596602f22"
+    },
+    {
+      "id": "scheduling-after-03-initial",
+      "value": 10714.839383999999,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-initial-TaskDuration",
+      "value": 4.992711,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-initial-ScriptDuration",
+      "value": 0.136341,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-initial-JSHeapUsedSize",
+      "value": 308477196,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-repeat",
+      "value": 9783.755263000003,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-repeat-TaskDuration",
+      "value": 4.625492,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-repeat-ScriptDuration",
+      "value": 0.146954,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-repeat-JSHeapUsedSize",
+      "value": 696443504,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-navigation-0",
+      "value": 3084.89999999851,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-navigation-1",
+      "value": 1916.5,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-navigation-2",
+      "value": 2665.6999999955297,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-navigation-3",
+      "value": 1915,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-03-navigation-4",
+      "value": 2601.8000000044703,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "a1b08987190084d2c9cb32bc4acfe46797348cf050865eac44bdcad2cc7662c8"
+    },
+    {
+      "id": "scheduling-after-04-initial",
+      "value": 10690.921257999998,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-initial-TaskDuration",
+      "value": 4.937824,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-initial-ScriptDuration",
+      "value": 0.145354,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-initial-JSHeapUsedSize",
+      "value": 380883696,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-repeat",
+      "value": 10198.155718999998,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-repeat-TaskDuration",
+      "value": 5.094986,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-repeat-ScriptDuration",
+      "value": 0.131553,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-repeat-JSHeapUsedSize",
+      "value": 342142224,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-navigation-0",
+      "value": 2546.8000000044703,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-navigation-1",
+      "value": 3044.1999999955297,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-navigation-2",
+      "value": 2770.89999999851,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-navigation-3",
+      "value": 1714.3000000044703,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-04-navigation-4",
+      "value": 3068.8000000044703,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "3522cc72fe2d91447c72c4a07734d87a32ad34abb868af05698dc8dc4e7a250b"
+    },
+    {
+      "id": "scheduling-after-05-initial",
+      "value": 10120.293985,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-initial-TaskDuration",
+      "value": 4.761214,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-initial-ScriptDuration",
+      "value": 0.134328,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-initial-JSHeapUsedSize",
+      "value": 374060636,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-repeat",
+      "value": 10798.96456,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-repeat-TaskDuration",
+      "value": 4.608319,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-repeat-ScriptDuration",
+      "value": 0.109335,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-repeat-JSHeapUsedSize",
+      "value": 680986112,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-navigation-0",
+      "value": 2672.10000000149,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-navigation-1",
+      "value": 3186.10000000149,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-navigation-2",
+      "value": 2386.1999999955297,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-navigation-3",
+      "value": 2234.5,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-05-navigation-4",
+      "value": 2700,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "879b5d04547a381903eaf86ddfc07a96c6edb101",
+      "input_sha256": "77988cf2b58fdd4e39f102309783e06bad39181ba6e3ee2bc21b199a65b2b9bd"
+    },
+    {
+      "id": "scheduling-after-06-initial",
+      "value": 10825.185263,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-initial-TaskDuration",
+      "value": 4.876933,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-initial-ScriptDuration",
+      "value": 0.136444,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-initial-JSHeapUsedSize",
+      "value": 378248640,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-repeat",
+      "value": 10315.725034,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-repeat-TaskDuration",
+      "value": 4.818018,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-repeat-ScriptDuration",
+      "value": 0.1107,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-repeat-JSHeapUsedSize",
+      "value": 682095444,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-navigation-0",
+      "value": 2879.6999999955297,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-navigation-1",
+      "value": 1841.2000000029802,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-navigation-2",
+      "value": 2201.3000000044703,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-navigation-3",
+      "value": 2751.3000000044703,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-06-navigation-4",
+      "value": 2503.8000000044703,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "42b51215166053dc99717e31b35dc7bea0d83228a575dbb458a9f508cd3aebac"
+    },
+    {
+      "id": "scheduling-after-07-initial",
+      "value": 9820.020368999998,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-initial-TaskDuration",
+      "value": 4.663814,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-initial-ScriptDuration",
+      "value": 0.137683,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-initial-JSHeapUsedSize",
+      "value": 384360860,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-repeat",
+      "value": 10659.882052,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-repeat-TaskDuration",
+      "value": 4.745122,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-repeat-ScriptDuration",
+      "value": 0.124025,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-repeat-JSHeapUsedSize",
+      "value": 679667760,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-navigation-0",
+      "value": 2332.39999999851,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-navigation-1",
+      "value": 2116.10000000149,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-navigation-2",
+      "value": 2967,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-navigation-3",
+      "value": 1985.6000000014901,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scheduling-after-07-navigation-4",
+      "value": 2598.60000000149,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "025918bd7c248fe1c431e914e7af94bbd873806716bc1e4bc160767e462f5da8"
+    },
+    {
+      "id": "scoped-tests-receipt-07.json-tests",
+      "value": 57,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "be7c638bc92a1a58f65d4d1b27f1af051badb43d1ef488a6300aa2001ad2ce0c"
+    },
+    {
+      "id": "scoped-tests-receipt-07.json-passed",
+      "value": 57,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "be7c638bc92a1a58f65d4d1b27f1af051badb43d1ef488a6300aa2001ad2ce0c"
+    },
+    {
+      "id": "scoped-tests-receipt-07.json-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "be7c638bc92a1a58f65d4d1b27f1af051badb43d1ef488a6300aa2001ad2ce0c"
+    },
+    {
+      "id": "scoped-tests-receipt-07.json-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "be7c638bc92a1a58f65d4d1b27f1af051badb43d1ef488a6300aa2001ad2ce0c"
+    },
+    {
+      "id": "scoped-tests-receipt-08.json-tests",
+      "value": 59,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "0b43890a5e239da9b0c70480fe6331bb11e691bdf3c029591310b8a7132b53ce"
+    },
+    {
+      "id": "scoped-tests-receipt-08.json-passed",
+      "value": 59,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "0b43890a5e239da9b0c70480fe6331bb11e691bdf3c029591310b8a7132b53ce"
+    },
+    {
+      "id": "scoped-tests-receipt-08.json-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "0b43890a5e239da9b0c70480fe6331bb11e691bdf3c029591310b8a7132b53ce"
+    },
+    {
+      "id": "scoped-tests-receipt-08.json-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "0b43890a5e239da9b0c70480fe6331bb11e691bdf3c029591310b8a7132b53ce"
+    },
+    {
+      "id": "scoped-tests-receipt-09.json-tests",
+      "value": 60,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "ffabea0feaceb0bb0c98b90ecc07ea6f7f54045fec0204ed507db6441e9d2cca"
+    },
+    {
+      "id": "scoped-tests-receipt-09.json-passed",
+      "value": 60,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "ffabea0feaceb0bb0c98b90ecc07ea6f7f54045fec0204ed507db6441e9d2cca"
+    },
+    {
+      "id": "scoped-tests-receipt-09.json-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "ffabea0feaceb0bb0c98b90ecc07ea6f7f54045fec0204ed507db6441e9d2cca"
+    },
+    {
+      "id": "scoped-tests-receipt-09.json-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "ffabea0feaceb0bb0c98b90ecc07ea6f7f54045fec0204ed507db6441e9d2cca"
+    },
+    {
+      "id": "candidate-modes-07.json-profiles",
+      "value": 6,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "a86ff6dcb2b0981fdb8de5e26e0dd8735bab305d8d2aeab8b3411588d9b9898a"
+    },
+    {
+      "id": "candidate-modes-07.json-year",
+      "value": 1800,
+      "unit": "selected year",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "a86ff6dcb2b0981fdb8de5e26e0dd8735bab305d8d2aeab8b3411588d9b9898a"
+    },
+    {
+      "id": "candidate-modes-07.json-navigation_ownership_compilations",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "a86ff6dcb2b0981fdb8de5e26e0dd8735bab305d8d2aeab8b3411588d9b9898a"
+    },
+    {
+      "id": "candidate-modes-07.json-navigation_ownership_uploads",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "a86ff6dcb2b0981fdb8de5e26e0dd8735bab305d8d2aeab8b3411588d9b9898a"
+    },
+    {
+      "id": "final-canvas2d-painted-pixels",
+      "value": 230454,
+      "unit": "pixels",
+      "vintage": "archived",
+      "evaluation_commit": "4d3e66cf429b1ef481d1fd46aad85befaec2ee4b",
+      "input_sha256": "80ffb6998494bac3e6d2b501421be6d73a3566aae9cd9a2b02b1d132e640642d"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "merged745-before-01-initial",
+      "value": 12268.289433999998,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-01-initial-TaskDuration",
+      "value": 4.751486,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "merged745-before-01-initial-ScriptDuration",
+      "value": 0.137447,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "merged745-before-01-initial-JSHeapUsedSize",
+      "value": 377822784,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "merged745-before-01-repeat",
+      "value": 11642.421987999998,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-01-repeat-TaskDuration",
+      "value": 4.598328,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "merged745-before-01-repeat-ScriptDuration",
+      "value": 0.107464,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "merged745-before-01-repeat-JSHeapUsedSize",
+      "value": 680303604,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "merged745-before-01-navigation-0",
+      "value": 3121.5,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-01-navigation-1",
+      "value": 2365.89999999851,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-01-navigation-2",
+      "value": 2434.3000000044703,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-01-navigation-3",
+      "value": 1612.5,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-01-navigation-4",
+      "value": 2849.5,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-02-initial",
+      "value": 11035.537064,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-02-initial-TaskDuration",
+      "value": 4.906406,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "merged745-before-02-initial-ScriptDuration",
+      "value": 0.131693,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "merged745-before-02-initial-JSHeapUsedSize",
+      "value": 377796300,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "merged745-before-02-repeat",
+      "value": 10403.566775000003,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-02-repeat-TaskDuration",
+      "value": 4.724103,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "merged745-before-02-repeat-ScriptDuration",
+      "value": 0.117853,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "merged745-before-02-repeat-JSHeapUsedSize",
+      "value": 682175376,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "merged745-before-02-navigation-0",
+      "value": 2573.10000000149,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-02-navigation-1",
+      "value": 2094.10000000149,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-02-navigation-2",
+      "value": 2867.8000000044703,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-02-navigation-3",
+      "value": 1926.1999999955297,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "merged745-before-02-navigation-4",
+      "value": 2732.39999999851,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-initial",
+      "value": 11059.584633000002,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-initial-TaskDuration",
+      "value": 4.805052,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-initial-ScriptDuration",
+      "value": 0.1459,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-initial-JSHeapUsedSize",
+      "value": 379395276,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-01-repeat",
+      "value": 10965.298394999998,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-repeat-TaskDuration",
+      "value": 4.612812,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-repeat-ScriptDuration",
+      "value": 0.107272,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-repeat-JSHeapUsedSize",
+      "value": 700516824,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-01-navigation-0",
+      "value": 2405.3000000044703,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-navigation-1",
+      "value": 1917.7000000029802,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-navigation-2",
+      "value": 4286,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-navigation-3",
+      "value": 2456.2000000029802,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-01-navigation-4",
+      "value": 2714,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-initial",
+      "value": 10506.425379,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-initial-TaskDuration",
+      "value": 4.551416,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-initial-ScriptDuration",
+      "value": 0.124477,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-initial-JSHeapUsedSize",
+      "value": 376497660,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-02-repeat",
+      "value": 10023.606876,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-repeat-TaskDuration",
+      "value": 4.633644,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-repeat-ScriptDuration",
+      "value": 0.186156,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-repeat-JSHeapUsedSize",
+      "value": 330838776,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-02-navigation-0",
+      "value": 2781.5,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-navigation-1",
+      "value": 2333.2999999970198,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-navigation-2",
+      "value": 2600.7999999970198,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-navigation-3",
+      "value": 2218.39999999851,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-02-navigation-4",
+      "value": 3983.5999999940395,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-initial",
+      "value": 10714.839383999999,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-initial-TaskDuration",
+      "value": 4.992711,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-initial-ScriptDuration",
+      "value": 0.136341,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-initial-JSHeapUsedSize",
+      "value": 308477196,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-03-repeat",
+      "value": 9783.755263000003,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-repeat-TaskDuration",
+      "value": 4.625492,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-repeat-ScriptDuration",
+      "value": 0.146954,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-repeat-JSHeapUsedSize",
+      "value": 696443504,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-03-navigation-0",
+      "value": 3084.89999999851,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-navigation-1",
+      "value": 1916.5,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-navigation-2",
+      "value": 2665.6999999955297,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-navigation-3",
+      "value": 1915,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-03-navigation-4",
+      "value": 2601.8000000044703,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-initial",
+      "value": 10690.921257999998,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-initial-TaskDuration",
+      "value": 4.937824,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-initial-ScriptDuration",
+      "value": 0.145354,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-initial-JSHeapUsedSize",
+      "value": 380883696,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-04-repeat",
+      "value": 10198.155718999998,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-repeat-TaskDuration",
+      "value": 5.094986,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-repeat-ScriptDuration",
+      "value": 0.131553,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-repeat-JSHeapUsedSize",
+      "value": 342142224,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-04-navigation-0",
+      "value": 2546.8000000044703,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-navigation-1",
+      "value": 3044.1999999955297,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-navigation-2",
+      "value": 2770.89999999851,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-navigation-3",
+      "value": 1714.3000000044703,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-04-navigation-4",
+      "value": 3068.8000000044703,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-initial",
+      "value": 10120.293985,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-initial-TaskDuration",
+      "value": 4.761214,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-initial-ScriptDuration",
+      "value": 0.134328,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-initial-JSHeapUsedSize",
+      "value": 374060636,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-05-repeat",
+      "value": 10798.96456,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-repeat-TaskDuration",
+      "value": 4.608319,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-repeat-ScriptDuration",
+      "value": 0.109335,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-repeat-JSHeapUsedSize",
+      "value": 680986112,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-05-navigation-0",
+      "value": 2672.10000000149,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-navigation-1",
+      "value": 3186.10000000149,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-navigation-2",
+      "value": 2386.1999999955297,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-navigation-3",
+      "value": 2234.5,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-05-navigation-4",
+      "value": 2700,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-initial",
+      "value": 10825.185263,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-initial-TaskDuration",
+      "value": 4.876933,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-initial-ScriptDuration",
+      "value": 0.136444,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-initial-JSHeapUsedSize",
+      "value": 378248640,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-06-repeat",
+      "value": 10315.725034,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-repeat-TaskDuration",
+      "value": 4.818018,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-repeat-ScriptDuration",
+      "value": 0.1107,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-repeat-JSHeapUsedSize",
+      "value": 682095444,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-06-navigation-0",
+      "value": 2879.6999999955297,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-navigation-1",
+      "value": 1841.2000000029802,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-navigation-2",
+      "value": 2201.3000000044703,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-navigation-3",
+      "value": 2751.3000000044703,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-06-navigation-4",
+      "value": 2503.8000000044703,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-initial",
+      "value": 9820.020368999998,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-initial-TaskDuration",
+      "value": 4.663814,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-initial-ScriptDuration",
+      "value": 0.137683,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-initial-JSHeapUsedSize",
+      "value": 384360860,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-07-repeat",
+      "value": 10659.882052,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-repeat-TaskDuration",
+      "value": 4.745122,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-repeat-ScriptDuration",
+      "value": 0.124025,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-repeat-JSHeapUsedSize",
+      "value": 679667760,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "scheduling-after-07-navigation-0",
+      "value": 2332.39999999851,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-navigation-1",
+      "value": 2116.10000000149,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-navigation-2",
+      "value": 2967,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-navigation-3",
+      "value": 1985.6000000014901,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scheduling-after-07-navigation-4",
+      "value": 2598.60000000149,
+      "unit": "milliseconds"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-07.json-tests",
+      "value": 57,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-07.json-passed",
+      "value": 57,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-07.json-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-07.json-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-08.json-tests",
+      "value": 59,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-08.json-passed",
+      "value": 59,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-08.json-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-08.json-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-09.json-tests",
+      "value": 60,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-09.json-passed",
+      "value": 60,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-09.json-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "scoped-tests-receipt-09.json-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "candidate-modes-07.json-profiles",
+      "value": 6,
+      "unit": "count"
+    },
+    {
+      "metric_id": "candidate-modes-07.json-year",
+      "value": 1800,
+      "unit": "selected year"
+    },
+    {
+      "metric_id": "candidate-modes-07.json-navigation_ownership_compilations",
+      "value": 0,
+      "unit": "count"
+    },
+    {
+      "metric_id": "candidate-modes-07.json-navigation_ownership_uploads",
+      "value": 0,
+      "unit": "count"
+    },
+    {
+      "metric_id": "final-canvas2d-painted-pixels",
+      "value": 230454,
+      "unit": "pixels"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "complete-startup-measurement",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/engineering/startup-scheduling-20261004-a9c2/positive-control-07.json"
+    },
+    {
+      "method_id": "complete-startup-measurement",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/engineering/startup-scheduling-20261004-a9c2/negative-control-07.json"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Scheduling experiments remain bounded partial implementation. Every measured sample/outlier is retained; fresh ten-second and actual served acceptance remain unmet/unverified. Complete-map timing includes Preparing and Loading, never an early canvas or hidden loader substitute.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-startup-inputs"
+      ]
+    },
+    {
+      "text": "No publication, geographic approval, factual import, schema/provider change or issue closure. Publisher owns coherent source/static/server/release/claim/archive/rollback checks.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-startup-inputs"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/compact-map-client.test.mjs test/ownership-assets.test.mjs test/reference-bundle.test.mjs test/hosted-temporal-client.test.mjs test/hosted-temporal-geography.test.mjs",
+    "Compile declared VITE_STATIC_ATLAS/VITE_HOSTED_DATABASE frontend and use exact retained candidate06 whole-root proof with owned benchmark/modes/controls; credential only hidden stdin",
+    "python3 data/engineering/startup-scheduling-20261004-a9c2/prepare-evidence.py",
+    "node scripts/evidence-quality.mjs coordination/engineering/startup-scheduling-20261004-a9c2/evidence-quality.json"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "method_id": "complete-startup-measurement",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "evidence_path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-05.json",
+  "observed_at_utc": "2026-10-04T10:44:06.374Z",
+  "observations": {
+    "required_complete_map": true,
+    "early_canvas_with_loader_rejected_as_finish": true,
+    "final_year": "2,026 AD",
+    "elapsed_ms": 10120.293985
+  },
+  "limits": [
+    "Indexes completed actual raw browser observation, not a new run",
+    "Complete-map local-transport experiment; initial10.120s still misses10s; no equivalent hosted/phone/provider-wake certificate"
+  ]
+}

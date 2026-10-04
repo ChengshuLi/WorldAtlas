@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "tests": 57,
+  "passed": 57,
+  "failed": 0,
+  "skipped": 0,
+  "scope": "Actual focused client/ownership/reference/hosted temporal tests; not full regression. Includes positive complete-load, unavailable streams, initial pair one-shot, cancel/reload, proof retry/old-generation controls.",
+  "command": "node --test test/compact-map-client.test.mjs test/ownership-assets.test.mjs test/reference-bundle.test.mjs test/hosted-temporal-client.test.mjs test/hosted-temporal-geography.test.mjs",
+  "raw_log_sha256": "06a6c89b1460220a944a2474d9c58bd6269bd624602aefecb1493455ad3fd4e5"
+}

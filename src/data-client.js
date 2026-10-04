@@ -39,7 +39,10 @@ async function loadPreparedEvidence(year,examples,signal){
  return selectPreparedEvidence(index,parts,year,{examples,expected:proof});
 }
 function loadHistory(){
- historyRequest ||= readJSON('./atlas-history.json.gz').catch(error=>{historyRequest=null;throw error;});
+ if(!historyRequest){
+  const request=readJSON('./atlas-history.json.gz').catch(error=>{if(historyRequest===request)historyRequest=null;throw error;});
+  historyRequest=request;
+ }
  return historyRequest;
 }
 function loadReferenceGeneration(){
@@ -115,11 +118,14 @@ async function temporalAPIGet(url,{signal}={}){
  return payload;
 }
 async function loadHostedMapEvidence(year,examples,signal){
+ const generation=geographyGeneration;
  for(let attempt=0;attempt<3;attempt++){
+  if(generation!==geographyGeneration)throw new DOMException('Evidence geography superseded','AbortError');
   signal?.throwIfAborted();
   try{
    const pages=hostedDatabase&&compactMapSupported?await loadHostedSnapshotPages(year,examples,signal):await Promise.all(['/api/attributes','/api/names','/api/retirements'].map(endpoint=>loadHostedRecords(endpoint,year,examples,signal)));
    signal?.throwIfAborted();
+   if(generation!==geographyGeneration)throw new DOMException('Evidence geography superseded','AbortError');
    if(pages.some(p=>!p.available))return unavailableHostedMap(year,examples);
    const versions=new Set(pages.filter(p=>p.revision!=null).map(p=>p.revision));
    if(versions.size>1)throw new ContentRevisionError();
@@ -132,6 +138,7 @@ async function loadHostedMapEvidence(year,examples,signal){
    }
    const value={attributes:pages[0],names:pages[1],retirements:pages[2],temporalGeography,retirementAuthority:true};
    signal?.throwIfAborted();
+   if(generation!==geographyGeneration)throw new DOMException('Evidence geography superseded','AbortError');
    if(hostedDatabase)lastCompleteHostedMap={key:`${year}:${Number(examples)}`,value};
    return value;
   }catch(error){
@@ -168,6 +175,7 @@ export async function loadGeography(initialSelection) {
   lastCompleteHostedMap=null;
   // Reference presentation context belongs to this loaded asset generation.
   referenceAttributeRequest=null;
+  historyRequest=null;
   preparedEvidenceIndexRequest=null;preparedEvidenceRequests=new Map();
   const data=await readJSON(staticAtlas ? './atlas-geography.json' : '/api/geography');
   if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
@@ -226,9 +234,11 @@ async function loadSelectedHostedMap(year,examples,signal){
 export async function loadSnapshot(year, examples, signal) {
   if (!validYear(year)) throw new Error('Invalid year');
   if (!staticAtlas) return readJSON(`/api/snapshot?year=${year}&examples=${Number(examples)}`, signal);
+  const generation=geographyGeneration;
   // The immutable export is shared across requests; cancel the selection, not its download.
   const [history,derived,references,hostedMap,evidence] = await Promise.all([loadHistory(),loadOwnershipHistory(year,signal),loadReferenceAttributes(year,signal),loadSelectedHostedMap(year,examples,signal),loadPreparedEvidence(year,examples,signal)]);
   signal?.throwIfAborted();
+  if(generation!==geographyGeneration)throw new DOMException('Snapshot geography superseded','AbortError');
   const {attributes:hosted,names:temporal_history,retirements}=hostedMap;
   const evidenceUnavailable=hostedDatabase&&!hostedMap.retirementAuthority;
   const merged=evidenceUnavailable?{records:[],names:[]}:mergePreparedEvidence(hosted.records,temporal_history.records,evidence,{retirements:retirements.records});
