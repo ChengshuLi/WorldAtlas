@@ -1,5 +1,6 @@
 {
   "issue": 598,
+  "baseline_commit": "c7dd7ac0bbccd1ec1a3c819dd827bab2e2b9b3b7",
   "method": {
     "projection": "EPSG:5070, USA Contiguous Albers Equal Area",
     "axis_order": "GeoJSON x=longitude, y=latitude; pyproj Transformer always_xy=True",
@@ -22,6 +23,10 @@
     "data/regional-review/regional-review-2178b81fa886cfb6/sources/tigerline-2024-western-county-neighbors.geojson.gz": {
       "bytes": 5850604,
       "sha256": "b4da7a5c442821e798c71945ba63f5ca279e18e1dca0355e714b495e2c294180"
+    },
+    "data/regional-review/regional-supplement-western-county-water-edges-2026/scope.json": {
+      "bytes": 2360,
+      "sha256": "0613aaed690be4574b88bcb0902108b82e682bb51c03821597ef751c00b26559"
     },
     "data/regional-review/regional-review-2178b81fa886cfb6/neighbor-screen.json": {
       "bytes": 147883,

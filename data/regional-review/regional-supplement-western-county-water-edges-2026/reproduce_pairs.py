@@ -227,6 +227,7 @@ for label, field in (("geoBoundaries_2018", "2018_geoBoundaries"), ("Census_TIGE
     edge_sets[label] = {"threshold_m_strictly_greater_than": 1.0, "count": len(edges), "pairs": edges, "canonical_json_sha256": hashlib.sha256(payload).hexdigest()}
 findings = {
     "issue": 598,
+    "baseline_commit": SCOPE["base_commit"],
     "method": {
         "projection": "EPSG:5070, USA Contiguous Albers Equal Area",
         "axis_order": "GeoJSON x=longitude, y=latitude; pyproj Transformer always_xy=True",
@@ -240,6 +241,7 @@ findings = {
     "inputs": {str(p.relative_to(ROOT)): {"bytes": p.stat().st_size, "sha256": sha(p)} for p in [
         SRC / "geoboundaries-USA-ADM2-2018.geojson.gz",
         SRC / "tigerline-2024-western-county-neighbors.geojson.gz",
+        HERE / "scope.json",
         PARENT / "neighbor-screen.json",
         PARENT / "scope.json",
         ROOT / "data/regional-review/regional-review-93f8f3bee8e205be/scope.json",
