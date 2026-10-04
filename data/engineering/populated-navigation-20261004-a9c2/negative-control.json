@@ -1,0 +1,16 @@
+{
+  "method_id": "navigation-measurement",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "basis": "read-only assertions over retained actual experiment receipts",
+  "receipts": [
+    {
+      "path": "data/engineering/populated-navigation-20261004-a9c2/preview-faults-01.json",
+      "sha256": "fe114e33d7749863a92d046c9c2f1623a69e06860d4ae2863f2b7259bb6cc5ba"
+    }
+  ],
+  "limitations": [
+    "Candidate frontend preview, not deployed candidate",
+    "Negative faults injected only in local transport"
+  ]
+}

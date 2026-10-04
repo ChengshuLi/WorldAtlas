@@ -78,3 +78,22 @@ Single Node timing samples can vary with allocation/GC and are not hosted latenc
 
 Publication goes through ENG main and714 after reviewed accepted merge.
 The two-PR issue budget and actual three-second production acceptance remain.
+
+## Completed validation and retained limits
+
+Two completed profiled candidate runs retained all ten selections below three
+seconds. The failed second attempt returned a catalog5 HTTP500 before any usable
+navigation sample; the fresh readback and subsequent successful run are separate
+receipts. Baseline repeat outliers remain retained. These are preview results,
+not actual deployed production acceptance. Provider query/wake phases remain
+unmeasured, and the timeline may reach its event cap.
+
+The mode receipt covers fourteen modes and six continent profiles; the fault
+receipt covers nine locally injected scenarios including revision restart,
+same-year complete-cache outage, other-year fail-closed and unsupported years.
+Scalar parity compares every field for all locations across six dates.
+The scoped test log has fifty passing tests. The hosted package completion log
+is retained; its first attempt lacked system Shapely, while the second uses the
+pinned Python environment on PATH. Its exited process status was not retained
+on resumed observation, so the receipt records the actual completion marker.
+No Site deployment or production mutation was performed.

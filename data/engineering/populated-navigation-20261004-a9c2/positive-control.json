@@ -1,0 +1,20 @@
+{
+  "method_id": "navigation-measurement",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "basis": "read-only assertions over retained actual experiment receipts",
+  "receipts": [
+    {
+      "path": "data/engineering/populated-navigation-20261004-a9c2/preview-supported-candidate-01.json",
+      "sha256": "1ab401c32843ac06d953c771ec8b3921a03e17bcef278bccf13f117445936b39"
+    },
+    {
+      "path": "data/engineering/populated-navigation-20261004-a9c2/preview-supported-candidate-03.json",
+      "sha256": "12f6c4cac6c9e84da5b984390e4459c9c8af95ce3f7e2560690d2c491d359be0"
+    }
+  ],
+  "limitations": [
+    "Candidate frontend preview, not deployed candidate",
+    "Negative faults injected only in local transport"
+  ]
+}

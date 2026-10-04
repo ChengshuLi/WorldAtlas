@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "command": "ATLAS_PYTHON=/workspace/worldatlas-hierarchy-install/.venv/bin/python npm run build:hosted",
+  "outcome": "failed",
+  "failure": "scripts/check-prepared.mjs invokes python3 directly; system Python lacked shapely",
+  "invocation_exit_code": 1,
+  "candidate_implementation_failure_claimed": false,
+  "production_deployed": false,
+  "next_action": "Prepend the existing pinned virtual environment bin directory to PATH for the build; retain this failed vintage"
+}

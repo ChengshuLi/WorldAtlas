@@ -10,7 +10,7 @@
     "Measure current populated-year query/transport/decode/resolution; optimize measured navigation bottleneck without changing startup/assets/geography/facts"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-04T08:30:36.501818+00:00",
+  "updated_at_utc": "2026-10-04T08:41:38.825980+00:00",
   "reservation": {
     "worker_id": "engineering-populated-navigation-a9c25e14-20261004",
     "claim_id": "84e91602-f6e3-4f72-b657-4ed30f1dcd70",
@@ -28,7 +28,10 @@
     "Bounded client candidate: location-indexed resolution and immutable per-generation reference context",
     "50 relevant controls passed with zero skipped tests",
     "Complete field equality for all49625locations across six years (297750comparisons)",
-    "First changed-code preview completed five supported selections below3seconds"
+    "First changed-code preview completed five supported selections below3seconds",
+    "Second changed-code preview completed five supported selections below3seconds",
+    "14 map modes, six profiles and nine fault/recovery scenarios completed",
+    "Hosted package completion marker retained with pinned Python PATH"
   ],
   "checks": [
     {
@@ -86,7 +89,7 @@
     "coordination/engineering/populated-navigation-20261004-a9c2/claim-receipt.json"
   ],
   "blockers": [],
-  "next_action": "Finish interleaved repeated preview, complete mode/fault checks, full package validation, whole-file evidence and exact-head independent review before serialized merge.",
+  "next_action": "Whole-file evidence, focused PR, distinct exact-head review and required CI before serialized merge",
   "pull_request": null,
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
