@@ -1,0 +1,37 @@
+✔ compact V4 preserves every raw collection and restricted runtime over frozen V2 (9004.652084ms)
+✔ compact V4 preserves every raw collection and restricted runtime over frozen V3 (6743.312875ms)
+✔ compact profile rejects changed lookup/guard/index/ACL contracts and extra private tables (2218.032625ms)
+✔ bulk owner copy preserves duplicate JSON keys and rolls back missing keys/duplicate identities (1993.414583ms)
+✔ V4 bounded export and logical restore retain exact original fields in an independent empty base target (10233.944084ms)
+✔ compact typed imports and paged snapshots preserve zero, false, retries and maintenance guards (1983.953584ms)
+✔ V4 export resumes durable pages after interruption and adapts to bounded 413 responses (3672.241875ms)
+✔ compact contract preserves original guards, published byte retries and new service publication (5297.956791ms)
+✔ compact membership rejects invalid parents, source changes, updates and withdrawals (1318.996167ms)
+✔ compact dictionary preserves distinct raw JSON whitespace, key order and duplicate keys (1025.777709ms)
+✔ failed copy rolls back its dictionaries, relation switch and original rows (1006.717458ms)
+✔ copy parity rejects an extra row and migration refuses unreviewed dependent views (2010.079917ms)
+✔ application role can use guarded membership view but cannot touch private dictionaries (1135.729791ms)
+✔ typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL (1916.183625ms)
+✔ typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes (1795.25575ms)
+✔ legacy or altered installed schemas never advertise typed capabilities (28.295625ms)
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+✔ actual Worker typed routes enforce transport/maintenance and keep atomic corrections, raw source pins and snapshot paging consistent (1829.779667ms)
+✔ legacy23-table projections require the complete known schema and current maintenance clients refuse them as complete backups (3183.833792ms)
+✔ derivation closures reject example promotion, cycles and ambiguous roots while example-only acyclic chains remain available under the paused factual gate (3969.595042ms)
+✔ bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes (6312.619917ms)
+✔ factual typed geography is retained per claim and cannot be silently repinned on import, correction or prepared reads (1644.431375ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 36011.137292

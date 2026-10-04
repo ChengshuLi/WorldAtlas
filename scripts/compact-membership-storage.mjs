@@ -41,11 +41,12 @@ export async function rehearseCompactMembershipStorage(engine,{afterCopy}={}){
   await tx.exec(compactMembershipDDL);
   let cursorRelease='',cursorEntity='',copied=0;
   for(;;){
-   const batch=await rows(tx,`SELECT ${fields.join(',')} FROM public.atlas_geographic_memberships
-    WHERE (release_id,entity_id)>($1 COLLATE "C",$2 COLLATE "C") ORDER BY release_id,entity_id LIMIT 200`,[cursorRelease,cursorEntity]);
-   if(!batch.length)break;
-   for(const row of batch)await tx.query('SELECT public.worldatlas_membership_save($1,$2,$3,$4,$5,$6,$7)',fields.map(k=>row[k]));
-   copied+=batch.length;cursorRelease=batch.at(-1).release_id;cursorEntity=batch.at(-1).entity_id;
+   const page=(await rows(tx,'SELECT * FROM public.worldatlas_membership_copy_next($1,$2)',[cursorRelease,cursorEntity]))[0];
+   need(page&&Number.isInteger(page.copied)&&page.copied>=0&&page.copied<=200,'Invalid bounded owner copy result');
+   if(!page.copied)break;
+   need(page.last_release!==cursorRelease||page.last_entity!==cursorEntity,'Owner copy cursor did not advance');
+   copied+=page.copied;cursorRelease=page.last_release;cursorEntity=page.last_entity;
+
   }
   if(afterCopy)await afterCopy(tx);
   const parity=await compactMembershipParity(tx,'atlas_geographic_memberships');
@@ -63,7 +64,7 @@ export async function rehearseCompactMembershipStorage(engine,{afterCopy}={}){
   if(app.length){
    for(const name of [...compactMembershipObjects,legacy,'worldatlas_membership_projection'])await tx.query(`REVOKE ALL ON public.${name} FROM worldatlas_app`);
    for(const name of compactMembershipObjects.filter(x=>x!=='worldatlas_membership_rows'))await tx.query(`REVOKE ALL ON SEQUENCE public.${name}_key_seq FROM worldatlas_app,PUBLIC`);
-   await tx.query('REVOKE ALL ON FUNCTION public.worldatlas_membership_save(text,text,text,text,integer,text,text),public.worldatlas_membership_insert(),public.worldatlas_membership_append_only() FROM worldatlas_app');
+   await tx.query('REVOKE ALL ON FUNCTION public.worldatlas_membership_save(text,text,text,text,integer,text,text),public.worldatlas_membership_insert(),public.worldatlas_membership_append_only(),public.worldatlas_membership_copy_batch(json),public.worldatlas_membership_copy_next(text,text) FROM worldatlas_app');
    await tx.query('REVOKE ALL ON public.atlas_geographic_memberships FROM worldatlas_app');
    await tx.query('GRANT SELECT,INSERT ON public.atlas_geographic_memberships TO worldatlas_app');
   }
@@ -85,7 +86,7 @@ export async function rehearseCompactMembershipRollback(engine){
   await tx.query(`ALTER TABLE public.${legacy} RENAME TO atlas_geographic_memberships`);
   await tx.query('DROP VIEW public.worldatlas_membership_projection');
   for(const name of [...compactMembershipObjects].reverse())await tx.query(`DROP TABLE public.${name}`);
-  await tx.query('DROP FUNCTION public.worldatlas_membership_insert(),public.worldatlas_membership_save(text,text,text,text,integer,text,text),public.worldatlas_membership_append_only()');
+  await tx.query('DROP FUNCTION public.worldatlas_membership_insert(),public.worldatlas_membership_save(text,text,text,text,integer,text,text),public.worldatlas_membership_append_only(),public.worldatlas_membership_copy_batch(json),public.worldatlas_membership_copy_next(text,text)');
   if((await rows(tx,"SELECT 1 FROM pg_roles WHERE rolname='worldatlas_app'")).length)await tx.query('GRANT SELECT,INSERT ON public.atlas_geographic_memberships TO worldatlas_app');
   return {version:1,scope:'isolated-contract-rollback',parity,original_physical_rows_restored:true};
  });

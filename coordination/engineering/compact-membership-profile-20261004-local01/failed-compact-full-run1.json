@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "scope": "isolated-full-size-compatible-membership-storage",
+  "complete": false,
+  "input_inventory_sha256": "76e2927b8e6008c4995019a65df945b29072ad9d01fe75b2c8c08943e8739cfa",
+  "frozen_result_sha256": "9c29e40fbf33b4f3d6049a453643c50993d1c7ee041c11c65e1aa12df2f265a6",
+  "ddl_sha256": "01d554a15f719eb3fb451f1a72fa52ca423cf0df138268c226f33bd073470b0f",
+  "copier_sha256": "fa43ad7cbd633ecc8f29213c2572da6b540c681db24d864357b30c757f8766df",
+  "script_sha256": "3b1b71c1370fa4210b64e8db1f0282c11956b32215fbe4cded5e149b75d5db06",
+  "node": "v24.19.0",
+  "limits": [
+    "All 508,777 raw prepared memberships over six retained releases; synthetic shared registry descriptions and empty other fact collections, not a production export/backup or served release proof.",
+    "Original/final core plus V2 forward schemas, original guards, actual compact DDL, runtime roles and strict new export catalogs are installed. Loading fixture membership rows disables only their USER guards in the isolated target, then restores them before migration.",
+    "Actual relation sizes and sampled local allocated bytes; not provider logical billing, guaranteed peak, native remote concurrency or a backup.",
+    "Original physical rows remain until byte-exact parity and successful no-new-writes rollback. The final footprint measurement discards only the verified disposable original fixture heap."
+  ]
+}

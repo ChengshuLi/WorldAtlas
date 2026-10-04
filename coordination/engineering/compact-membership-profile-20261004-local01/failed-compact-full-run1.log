@@ -1,0 +1,15 @@
+file:///Users/chengshuli/world-atlas-workspace/WorldAtlas-membership-storage/hosted/postgres-adapter.js:14
+const invalid=message=>{throw new PostgresAdapterError(message,{status:400});};
+                              ^
+
+PostgresAdapterError: PostgreSQL driver must support queries and atomic transactions
+    at invalid (file:///Users/chengshuli/world-atlas-workspace/WorldAtlas-membership-storage/hosted/postgres-adapter.js:14:31)
+    at createPostgresDatabase (file:///Users/chengshuli/world-atlas-workspace/WorldAtlas-membership-storage/hosted/postgres-adapter.js:103:87)
+    at benchmarkCompactMembershipProfile (file:///Users/chengshuli/world-atlas-workspace/WorldAtlas-membership-storage/scripts/benchmark-compact-membership-profile.mjs:28:103)
+    at file:///Users/chengshuli/world-atlas-workspace/WorldAtlas-membership-storage/scripts/benchmark-compact-membership-profile.mjs:61:158 {
+  code: null,
+  sqlstate: null,
+  status: 400
+}
+
+Node.js v24.19.0
