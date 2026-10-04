@@ -160,13 +160,28 @@ export function isolatedDatabaseACLList(toc){
  need(rows.length===1&&/^\d+; \d+ \d+ ACL - DATABASE neondb neondb_owner$/.test(rows[0]),'unexpected-native-database-acl-toc');
  return rows[0]+'\n';
 }
+/** --create renders a database prelude even with an ACL-only list. Only the
+ * unique expected ACL object's unchanged bytes may execute on the existing target. */
+export function isolatedDatabaseACLSQL(rendered){
+ const text=Buffer.isBuffer(rendered)?rendered.toString():rendered;
+ const header='-- Name: DATABASE neondb; Type: ACL; Schema: -; Owner: neondb_owner\n--\n\n';
+ const objects=[...text.matchAll(/^-- Name: .*$/gm)];
+ need(objects.length===2&&objects[0][0]==='-- Name: neondb; Type: DATABASE; Schema: -; Owner: neondb_owner'&&objects[1][0]===header.split('\n')[0],'unexpected-native-database-acl-objects');
+ const start=text.indexOf(header);need(start>=0&&text.indexOf(header,start+header.length)===-1,'unexpected-native-database-acl-header');
+ const end=text.indexOf('\n\n\n--\n-- PostgreSQL database dump complete\n--',start+header.length);need(end>=0,'unexpected-native-database-acl-footer');
+ const body=text.slice(start+header.length,end);
+ // Current Neon and its native fixture have this exact retained database ACL.
+ // Fail closed if a future provider archive requires a broader reviewed shape.
+ need(body==='GRANT ALL ON DATABASE neondb TO neon_superuser;','unexpected-native-database-acl-statements');
+ return Buffer.from(body+'\n');
+}
 function restoreIsolatedDatabaseACL(target,dump,directory){
  const toc=native(['exec','-i',target,'pg_restore','--create','--list'],dump,180000,1024*1024).toString();
  const file=path.join(directory,'database-acl.list');fs.writeFileSync(file,isolatedDatabaseACLList(toc),{flag:'wx',mode:0o600});
  native(['cp',file,target+':/var/lib/postgresql/database-acl.list'],undefined,30000,1024*1024);
  const sql=native(['exec','-i',target,'pg_restore','--create','--use-list=/var/lib/postgresql/database-acl.list','--file=-'],dump,180000,1024*1024);
- need(!/\b(?:CREATE|DROP|ALTER) DATABASE\b/.test(sql.toString())&&sql.toString().includes('ON DATABASE neondb'),'unexpected-native-database-acl-output');
- native(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],sql,180000,1024*1024);
+ const aclSQL=isolatedDatabaseACLSQL(sql);
+ native(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],aclSQL,180000,1024*1024);
 }
 
 const maxExpandedRestore=1024*1024*1024;
