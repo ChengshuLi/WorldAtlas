@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "issue": 654,
+  "issue_url": "https://github.com/ChengshuLi/WorldAtlas/issues/654",
+  "issue_body_sha256": "9a7cd7b09163b336bfea667f1d3b02d771db6fc13737f3ed65c5e67f6bde2926",
+  "issue_updated_at": "2026-10-03T19:02:07Z",
+  "retrieved_at": "2026-10-04T06:45:46Z",
+  "contract": {
+    "max_prs": 2,
+    "depends_on": [
+      439
+    ],
+    "mode": "geography",
+    "owned_paths": [
+      "research/geography/southern-indian-ocean-baseline-pins/"
+    ],
+    "scope": "Superseding immutable reproduction correction for the four exact issue439 subjects; retain original packet and source evidence, no shared geography or imports",
+    "evidence_quality": {
+      "version": 1,
+      "manifest_path": "research/geography/southern-indian-ocean-baseline-pins/evidence-quality.json",
+      "subject_ids": [
+        "atlas:coverage:ATF-5916",
+        "atlas:coverage:ATF-5917",
+        "atlas:coverage:ATF-5918",
+        "atlas:coverage:HMD+00?"
+      ],
+      "pins": {
+        "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+        "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"
+      },
+      "review_kind": "release"
+    }
+  },
+  "subject_ids": [
+    "atlas:coverage:ATF-5916",
+    "atlas:coverage:ATF-5917",
+    "atlas:coverage:ATF-5918",
+    "atlas:coverage:HMD+00?"
+  ],
+  "acceptance": "- Read actual ordinary baseline blobs from the recorded commit, not current main; verify assigned hierarchy, macro, world-index, containing-file and frozen-scope pins before any output.\n- Preserve old extracts, assessments, source files/hashes and all four stable IDs. Record a superseding notice and actual containing-file crosswalk; never infer filenames from absent properties.\n- Refuse overwrite and write deterministic new vintages only. A changed baseline/source must fail before output creation. Reuse the shared immutable preparation helpers where applicable; document any reviewed exception.\n- Bind each derived result to its actual evaluated vintage. Source screens based on older footprints remain archived/baseline evidence until separately recomputed; do not label them current.\n- Test exact-output reproduction twice, changed input/pin/commit rejection, and overwrite refusal. Retain actual control results and a versioned manifest; obtain distinct-worker exact-head implementation/release/source review with honest limits.\n- No hierarchy/footprint/grid/UI/schema/certificate/live edits, regional approval or historical imports. Source restoration and island/routing questions remain with #635/#636 and their integrator.",
+  "original_review_issue": 439,
+  "original_packet": "data/regional-review/regional-review-2fe7597eb9014901/",
+  "original_packet_commit": "4909f04e6e035ffc003d237db68323d005ccdb89",
+  "baseline_commit": "ff171e1dd1998684d9b3549943d5725817a7aef4"
+}
