@@ -1,0 +1,383 @@
+{
+  "version": 1,
+  "issue": 602,
+  "lane": "geography",
+  "worker_id": "codex-20261004-valdez-602-a5c95930-07ec-446e-9f07-a8d5e8d73494",
+  "subject_ids": [
+    "gb:USA:ADM2:52423323B16539688175930"
+  ],
+  "subject_ids_sha256": "40da5eedcd52208413e0af722f53ba0c8d1b27cb89ebe520f3c6b5c590e7ad20",
+  "baseline": {
+    "commit": "c2464fceb8481d5f1273793dbc3869fcb4262727",
+    "files": [
+      {
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/assessment.json",
+        "bytes": 11210183,
+        "sha256": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+        "bytes": 256548,
+        "sha256": "23f998ab6f874fac86dedeacb20978e391fdd23bf30ce6de8b687e6d57f9d862",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-parent-chains.json.gz",
+        "bytes": 290330,
+        "sha256": "0d682f33d98ddfcee1546bf15bcd9e470bce8efed877834c10dc5c6a34936ffb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2.geojson",
+        "bytes": 10500644,
+        "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2-metadata.json",
+        "bytes": 939,
+        "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/tigerline-2024-western-county-neighbors.geojson.gz",
+        "bytes": 18497293,
+        "sha256": "2dc12ec0a6357851340d1d582b3915495c66cc85690c064af8177519e1413a25",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "parent_assessment_sha256": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5",
+      "2018_geoBoundaries_source_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+      "2024_TIGER_subset_sha256": "2dc12ec0a6357851340d1d582b3915495c66cc85690c064af8177519e1413a25",
+      "parent_chain_sha256": "0d682f33d98ddfcee1546bf15bcd9e470bce8efed877834c10dc5c6a34936ffb"
+    },
+    "pin_files": {
+      "parent_assessment_sha256": "data/regional-review/regional-review-93f8f3bee8e205be/assessment.json",
+      "2018_geoBoundaries_source_sha256": "data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2.geojson",
+      "2024_TIGER_subset_sha256": "data/regional-review/regional-review-93f8f3bee8e205be/sources/tigerline-2024-western-county-neighbors.geojson.gz",
+      "parent_chain_sha256": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-parent-chains.json.gz"
+    },
+    "subject_files": {
+      "gb:USA:ADM2:52423323B16539688175930": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz"
+    }
+  },
+  "sources": [
+    {
+      "id": "us-census-2019-geography-changes",
+      "url": "https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2019/geography-changes.html",
+      "role": "Direct Census Bureau narrative record of the Valdez-Cordova split and successor Census Area codes.",
+      "vintage": "2019 geography; page reviewed 2021-10-28",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal work; public domain; retain U.S. Census Bureau attribution. https://www.census.gov/about/policies/copyright.html"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2019,
+        "to": 2020
+      },
+      "files": [
+        {
+          "path": "data/regional-review/valdez-cordova-successor-followup-2026/sources/census-2019-geography-changes.html.gz",
+          "bytes": 36097,
+          "sha256": "c992033fa302fcf4636f4e949128741a7abf79eddb7ee1fb9135c3819bbe3bb5",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 357249,
+          "uncompressed_sha256": "8092b2c559de4bd720173fea9356ce24dee0551d1ab015990203f93c53d4c37a"
+        }
+      ]
+    },
+    {
+      "id": "us-census-alaska-change-table",
+      "url": "https://www2.census.gov/geo/docs/reference/bndrychange/st02_ak_gcn_2014_2020.txt",
+      "role": "Structured official Alaska change rows for the two successor county-equivalent entities, their predecessor, effective date and ANSI codes.",
+      "vintage": "2014\u20132020 change table; last modified 2024-09-19",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal work; public domain; retain U.S. Census Bureau attribution. https://www.census.gov/about/policies/copyright.html"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2019,
+        "to": 2020
+      },
+      "files": [
+        {
+          "path": "data/regional-review/valdez-cordova-successor-followup-2026/sources/census-ak-county-changes-2014-2020.txt.gz",
+          "bytes": 3273,
+          "sha256": "548ea58b0ba50407ee2265e3a680b15ab95a136aeb53e319cefd735a74f73b46",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 29077,
+          "uncompressed_sha256": "ac105f77616eee73c2937f2e7f0212a09d903f8398bdc4150113f9a90b5b845c"
+        }
+      ]
+    },
+    {
+      "id": "geoboundaries-2018-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "role": "Original source geometry and shapeID/name/ADM role for the 2018 Valdez-Cordova predecessor.",
+      "vintage": "2018; pinned release revision 9469f09",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain according to pinned geoBoundaries metadata; Census MAF/TIGER-derived source."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read the original source and metadata bytes at the pinned baseline paths data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2.geojson and data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2-metadata.json in commit c2464fceb8481d5f1273793dbc3869fcb4262727; both files are separately pinned and hash-checked in baseline.files. No duplicate original geometry is introduced.",
+      "limit": "The original 2018 source remains retained at the ancestor baseline rather than being duplicated as a new candidate source file."
+    },
+    {
+      "id": "us-census-tigerline-2024-county-subset",
+      "url": "https://www2.census.gov/geo/tiger/TIGER2024/COUNTY/tl_2024_us_county.zip",
+      "role": "Retained 2024 county-equivalent GEOID, name, class and boundary candidates for current successor identity. Full national archive was not copied; the exact multi-state subset is retained in the pinned ancestor.",
+      "vintage": "2024 TIGER/Line; DBF update 2024-09-16",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal work; public domain. Census geography is not a legal land survey."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/tigerline-2024-western-county-neighbors.geojson.gz",
+          "bytes": 18497293,
+          "sha256": "2dc12ec0a6357851340d1d582b3915495c66cc85690c064af8177519e1413a25",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ],
+      "restoration": "For the full national source, download the canonical URL and verify 83,913,260 bytes and SHA-256 04e668d3502757c837c13444730547cd967f28a2c49aeffb873d1792ab2cb97b. This packet reads the already retained subset at its baseline path."
+    },
+    {
+      "id": "worldatlas-parent-evidence-486",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/486",
+      "role": "Prior assessment and reproducible geometry/settlement/parent-chain results cited as inherited context, not as the official Census event source.",
+      "vintage": "Assessment snapshot 2026-10-02; source packet merged at commit 276d72e1f316ad58d52c8fea7974a873c2ec9387",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository-produced prior evidence; underlying source licenses remain as documented by the parent packet."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Read data/regional-review/regional-review-93f8f3bee8e205be/assessment.json, data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz, and data/regional-review/regional-review-93f8f3bee8e205be/sources/current-parent-chains.json.gz at baseline commit 276d72e1f316ad58d52c8fea7974a873c2ec9387.",
+      "limit": "This inherited project overlay/semantic assessment is not independently recomputed as part of issue #602; its own source and geometry limits remain in force."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/README.md",
+      "bytes": 3603,
+      "sha256": "3f9047766a173f371933f83486dd29952e18ee89627ba1411909f094186f7905",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/build_crosswalk.py",
+      "bytes": 9798,
+      "sha256": "4c8e2256115eeee5b3804929bc4c29f094a4ade2457605511500a922d1b668ac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/verify_crosswalk.py",
+      "bytes": 5408,
+      "sha256": "e432a67ed95df1c54a28d261a1fd360ac7c42b22043a567977d2267c24663b2c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/successor-crosswalk.json",
+      "bytes": 9360,
+      "sha256": "dca5614afacb4f3ef27b7b018576c9c0049613d40a11977e4e11b005f5c0f5c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/sources-manifest.json",
+      "bytes": 7240,
+      "sha256": "2a3db081d772e50f2849f23a428523eeb315070825485e7bcf87a61c6675348f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/validation.json",
+      "bytes": 1651,
+      "sha256": "503359b93b3dd435eda58a7d5df30f30aeb1e9edc9142c16ece5477308c84427",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "crosswalk-build",
+      "kind": "generator",
+      "description": "Parse the two retained official U.S. Census change records; bind each successor to 2024 TIGER GEOID/name/class; preserve the prior 2018 shape identity and prior geometric screen separately; emit one-to-many predecessor/successor JSON. No geometry is edited or rebuilt.",
+      "software": "Python 3.12 standard library",
+      "units": "source IDs, county-equivalent records, source-area overlap percentages",
+      "helper_version": "worldatlas-evidence-preparation-v1"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "direct_successor_count",
+      "value": 2,
+      "unit": "2024 Census county-equivalent IDs",
+      "input_sha256": "548ea58b0ba50407ee2265e3a680b15ab95a136aeb53e319cefd735a74f73b46",
+      "evaluation_commit": "c2464fceb8481d5f1273793dbc3869fcb4262727",
+      "vintage": "current"
+    },
+    {
+      "id": "archived_source_overlap_successor_pair",
+      "value": 99.947342,
+      "unit": "percent of 2018 source shape",
+      "input_sha256": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5",
+      "evaluation_commit": "276d72e1f316ad58d52c8fea7974a873c2ec9387",
+      "vintage": "archived"
+    },
+    {
+      "id": "archived_source_overlap_other_counties",
+      "value": 0.040571,
+      "unit": "percent of 2018 source shape",
+      "input_sha256": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5",
+      "evaluation_commit": "276d72e1f316ad58d52c8fea7974a873c2ec9387",
+      "vintage": "archived"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "direct_successor_count",
+      "value": 2,
+      "unit": "2024 Census county-equivalent IDs"
+    },
+    {
+      "metric_id": "archived_source_overlap_successor_pair",
+      "value": 99.947342,
+      "unit": "percent of 2018 source shape"
+    },
+    {
+      "metric_id": "archived_source_overlap_other_counties",
+      "value": 0.040571,
+      "unit": "percent of 2018 source shape"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "direct_successor_count",
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/successor-crosswalk.json",
+      "json_pointer": "/metrics/direct_successor_count"
+    },
+    {
+      "metric_id": "archived_source_overlap_successor_pair",
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/successor-crosswalk.json",
+      "json_pointer": "/metrics/source_overlap_pct_to_official_successor_pair"
+    },
+    {
+      "metric_id": "archived_source_overlap_other_counties",
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/successor-crosswalk.json",
+      "json_pointer": "/metrics/source_overlap_pct_to_other_2024_county_equivalents"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The official Census Bureau records support a one-to-many 2019 Census geography split of Valdez-Cordova Census Area (02261) into Chugach (02063) and Copper River (02066), effective 2019-01-02.",
+      "source_ids": [
+        "us-census-2019-geography-changes",
+        "us-census-alaska-change-table"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "2024 TIGER/Line retains both exact successor GEOIDs, names and county-equivalent H5 classifications.",
+      "source_ids": [
+        "us-census-tigerline-2024-county-subset"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "The retained #486 overlay leaves 0.040571% of the 2018 source footprint as tiny overlaps with Anchorage, Southeast Fairbanks, Matanuska-Susitna and Yakutat; the Census lineage record does not make these source-version edge differences an exact polygon partition.",
+      "source_ids": [
+        "worldatlas-parent-evidence-486",
+        "geoboundaries-2018-adm2",
+        "us-census-tigerline-2024-county-subset"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "These federal statistical county-equivalent records do not decide local political control, municipal government, sovereignty or complete historical territory. The inherited settlement and land screens are incomplete by their own stated limits.",
+      "source_ids": [
+        "us-census-2019-geography-changes",
+        "us-census-tigerline-2024-county-subset",
+        "worldatlas-parent-evidence-486"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python data/regional-review/valdez-cordova-successor-followup-2026/build_crosswalk.py",
+    "python data/regional-review/valdez-cordova-successor-followup-2026/verify_crosswalk.py"
+  ],
+  "validation": [
+    {
+      "method_id": "crosswalk-build",
+      "kind": "generator",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/valdez-cordova-successor-followup-2026/validation.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/build_crosswalk.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/verify_crosswalk.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/successor-crosswalk.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/sources-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/sources/census-2019-geography-changes.html.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/valdez-cordova-successor-followup-2026/sources/census-ak-county-changes-2014-2020.txt.gz",
+      "status": "added"
+    }
+  ],
+  "generated_data_note": "Outputs are one small crosswalk JSON and validation receipt. No geography, hierarchy, live data, certificates or canonical geometry were generated or changed.",
+  "evidence_issue_limits": [
+    "The official Census Bureau event records establish statistical successor IDs; they do not decide political ownership or certify a byte-exact polygon partition.",
+    "The inherited 2018-to-2024 overlap results are archived #486 results, not recalculated by this packet.",
+    "The full national TIGER archive remains a restoration reference; the retained parent-packet subset is pinned and used."
+  ]
+}

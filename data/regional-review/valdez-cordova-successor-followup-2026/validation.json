@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "method_id": "crosswalk-build",
+  "kind": "generator",
+  "outcome": "passed",
+  "run_one_sha256": "dca5614afacb4f3ef27b7b018576c9c0049613d40a11977e4e11b005f5c0f5c9",
+  "run_two_sha256": "dca5614afacb4f3ef27b7b018576c9c0049613d40a11977e4e11b005f5c0f5c9",
+  "positive_control": {
+    "description": "Both federal 2019 change sources identify the exact Valdez-Cordova predecessor and the two distinct new entities; each matches a 2024 TIGER GEOID/name/H5 record.",
+    "outcome": "passed"
+  },
+  "negative_controls": {
+    "wrong_successor_code_rejected": true,
+    "duplicate_successor_rejected": true,
+    "one_to_one_alias_rejected": true
+  },
+  "checks": {
+    "baseline_subject_count": 1,
+    "successors": [
+      "02063",
+      "02066"
+    ],
+    "effective_date": "2019-01-02",
+    "parent_chain_nodes": 6,
+    "place_polygon_hits": 28,
+    "GNIS_populated_place_hits": 46,
+    "historical_geometry_ratio_pct_to_successor_pair": 99.947342,
+    "historical_geometry_ratio_pct_to_other_counties": 0.040571
+  },
+  "inputs": {
+    "census_page_gzip_sha256": "c992033fa302fcf4636f4e949128741a7abf79eddb7ee1fb9135c3819bbe3bb5",
+    "change_table_gzip_sha256": "548ea58b0ba50407ee2265e3a680b15ab95a136aeb53e319cefd735a74f73b46",
+    "successor_crosswalk_sha256": "dca5614afacb4f3ef27b7b018576c9c0049613d40a11977e4e11b005f5c0f5c9"
+  },
+  "environment": {
+    "python": "3.12.14"
+  },
+  "limitations": [
+    "These checks establish agreement among the retained official event records, Census successor identifiers, and inherited identity/screen data. They do not prove complete historical legal boundaries or political control."
+  ]
+}

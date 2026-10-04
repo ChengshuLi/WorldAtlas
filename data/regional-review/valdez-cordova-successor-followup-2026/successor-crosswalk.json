@@ -1,0 +1,216 @@
+{
+  "version": 1,
+  "subject": {
+    "id": "gb:USA:ADM2:52423323B16539688175930",
+    "name": "Valdez-Cordova",
+    "source_vintage": 2018,
+    "source_identity": {
+      "source_shape_id": "52423323B16539688175930",
+      "source_name": "Valdez-Cordova",
+      "source_tier": "ADM2",
+      "source_vintage": "2018",
+      "source_provider": "United States Census Bureau, MAF/TIGER Database",
+      "source_role": "Counties",
+      "license": "Public Domain",
+      "pinned_source_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+      "source_path_at_baseline": "data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2.geojson"
+    },
+    "baseline_parent_chain": [
+      {
+        "id": "gb:USA:ADM2:52423323B16539688175930",
+        "name": "Valdez-Cordova",
+        "level": null
+      },
+      {
+        "id": "framework:province:alaska:4057e2fddbc5",
+        "name": "Alaska",
+        "level": "province"
+      },
+      {
+        "id": "framework:area:pacific:31aced66907e",
+        "name": "Pacific",
+        "level": "area"
+      },
+      {
+        "id": "framework:region:western-north-america:d2a1c2775a57",
+        "name": "Western North America",
+        "level": "region"
+      },
+      {
+        "id": "framework:subcontinent:northern-america:477e054b32f2",
+        "name": "Northern America",
+        "level": "subcontinent"
+      },
+      {
+        "id": "framework:continent:north-america:1ca27616f338",
+        "name": "North America",
+        "level": "continent"
+      }
+    ]
+  },
+  "official_successor_event": {
+    "source_census_page": "https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2019/geography-changes.html",
+    "quoted_event": "Alaska has announced the split of 02261 Valdez-Cordova borough into two new census areas, 02063 Chugach and 02066 Copper River.",
+    "source_change_table": "https://www2.census.gov/geo/docs/reference/bndrychange/st02_ak_gcn_2014_2020.txt",
+    "predecessor": {
+      "name": "Valdez-Cordova Census Area",
+      "geoid": "02261",
+      "vintage": 2018
+    },
+    "event": "split",
+    "effective_date": "2019-01-02",
+    "successors": [
+      {
+        "name": "Chugach Census Area",
+        "state_fips": "02",
+        "county_fips": "063",
+        "geoid": "02063",
+        "effective_date": "2019-01-02",
+        "type": "New Entity",
+        "official_description": "Chugach Census Area (063) form from split of Valdez-Cordova Census Area (261).",
+        "source_of_change": "2019 BAS",
+        "date_submitted": "10-25-2019",
+        "ansi_code": "02804400"
+      },
+      {
+        "name": "Copper River Census Area",
+        "state_fips": "02",
+        "county_fips": "066",
+        "geoid": "02066",
+        "effective_date": "2019-01-02",
+        "type": "New Entity",
+        "official_description": "Copper River Census Area (066) formed from split of Valdez-Cordova Census Area (261).",
+        "source_of_change": "2019 BAS",
+        "date_submitted": "10-25-2019",
+        "ansi_code": "02804401"
+      }
+    ],
+    "interpretation": "The Census Bureau directly records these two new Census Areas as formed from the split of former Valdez-Cordova Census Area. They are 2024 county-equivalent statistical geographies (TIGER CLASSFP H5); this is not a claim that either is a municipal government or a political-ownership ruling."
+  },
+  "2024_tiger_identity_check": {
+    "source_path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/tigerline-2024-western-county-neighbors.geojson.gz",
+    "target_features": [
+      {
+        "geoid": "02063",
+        "name": "Chugach",
+        "namelsad": "Chugach Census Area",
+        "classfp": "H5",
+        "aland_m2": 24800146118,
+        "awater_m2": 14536309310,
+        "identity_source": "2024 TIGER/Line county-equivalent candidate; not itself the transition authority"
+      },
+      {
+        "geoid": "02066",
+        "name": "Copper River",
+        "namelsad": "Copper River Census Area",
+        "classfp": "H5",
+        "aland_m2": 63834809642,
+        "awater_m2": 1218949180,
+        "identity_source": "2024 TIGER/Line county-equivalent candidate; not itself the transition authority"
+      }
+    ]
+  },
+  "inherited_geometry_screen": {
+    "baseline_assessment": "data/regional-review/regional-review-93f8f3bee8e205be/assessment.json",
+    "method": "The original #486 source-vintage screen intersects the pinned 2018 geoBoundaries polygon with 2024 TIGER county-equivalent polygons in EPSG:3338. Values are a source-area screening ratio, not the Census transition record and not a boundary adjudication.",
+    "source_overlap_pct_by_2024_geoid": {
+      "02020": 0.008398,
+      "02240": 0.016628,
+      "02170": 0.013937,
+      "02282": 0.001608,
+      "02066": 70.588114,
+      "02063": 29.359228
+    },
+    "ancillary_neighbor_candidates": [
+      {
+        "geoid": "02020",
+        "name": "Anchorage",
+        "namelsad": "Anchorage Municipality",
+        "source_overlap_pct": 0.008398
+      },
+      {
+        "geoid": "02240",
+        "name": "Southeast Fairbanks",
+        "namelsad": "Southeast Fairbanks Census Area",
+        "source_overlap_pct": 0.016628
+      },
+      {
+        "geoid": "02170",
+        "name": "Matanuska-Susitna",
+        "namelsad": "Matanuska-Susitna Borough",
+        "source_overlap_pct": 0.013937
+      },
+      {
+        "geoid": "02282",
+        "name": "Yakutat",
+        "namelsad": "Yakutat City and Borough",
+        "source_overlap_pct": 0.001608
+      }
+    ],
+    "combined_overlap_pct_to_official_successor_pair": 99.947342,
+    "overlap_pct_to_other_2024_county_equivalents": 0.040571,
+    "interpretation": "The two officially named successor candidates cover 99.947342% of the 2018 source shape in this retained overlay screen; minor overlap to four other county-equivalents remains a vintage/edge lead, not proof of additional successor identity."
+  },
+  "location_review_context": {
+    "baseline_decision": "justified",
+    "baseline_decision_basis": "The exact 2018 geoBoundaries ADM2 shapeID and named unit are traced for this row; 2024 Census crosswalk, complete source/state cohort, parent chain and row-level settlement/physical screens are recorded. This does not certify a complete contemporary legal boundary or all local settlements.",
+    "settlement_screen": {
+      "source": "U.S. Census Bureau TIGER/Line Places 2024; incorporated places and Census Designated Places",
+      "2024_place_polygon_intersections": 28,
+      "GNIS_populated_place_hits": 46,
+      "named_examples_from_pinned_screen": [
+        "Chenega",
+        "Chisana",
+        "Chitina",
+        "Cordova",
+        "Copper Center",
+        "Glennallen",
+        "Valdez",
+        "Whittier"
+      ],
+      "limitation": "These are inherited screening hits only; they do not certify current settlement completeness or assign political ownership."
+    },
+    "physical_land_screen": {
+      "name": "Valdez-Cordova",
+      "current_polygon_components": 9,
+      "current_interior_rings": 0,
+      "representative_point": [
+        -143.97236658114176,
+        61.644000000000005
+      ],
+      "representative_point_in_level1_land": true,
+      "gshhg_level1_containing_source_ids": [
+        2
+      ],
+      "level1_centroid_hits": 275,
+      "decision": "screen_only; named land, full extent, coastline and settlement completeness unresolved"
+    },
+    "unresolved_baseline_questions": [
+      "County names and administrative-status changes between the 2018 geoBoundaries source and 2024 Census vintage require explicit source-era crosswalk; 2024 polygon overlays are not legal rulings.",
+      "Census Places does not enumerate every named settlement; review named inhabited communities where a row has a sparse/zero place-polygon screen.",
+      "GSHHG only screens land component relationships; complete coastline/island/hydrographic coverage is unproven.",
+      "Large land/water shared-edge differences are source-vintage comparison leads and need fit-for-purpose authority, not unilateral line edits."
+    ]
+  },
+  "proposed_treatment": {
+    "status": "evidence-backed crosswalk proposal",
+    "record": "Preserve the 2018 geoBoundaries ID and geometry as a distinct historical source identity; add a versioned one-to-many crosswalk to Census GEOIDs 02063 and 02066 with effective date 2019-01-02 and citations to the direct Census change records.",
+    "limits": [
+      "Do not rename the 2018 feature as either single successor.",
+      "Do not assert that successor polygons are exact, complete, disjoint replacements for the 2018 source shape; retained overlay differences remain visible.",
+      "Do not edit shared membership/geometry or transfer dated attributes; engineering decides if/when a versioned crosswalk is integrated.",
+      "The Census change record establishes statistical county-equivalent lineage. It does not determine sovereign ownership or local political control."
+    ]
+  },
+  "metrics": {
+    "direct_successor_count": 2,
+    "source_overlap_pct_to_official_successor_pair": 99.947342,
+    "source_overlap_pct_to_other_2024_county_equivalents": 0.040571
+  },
+  "source_checks": {
+    "official_change_events": 2,
+    "target_tiger_features": 2,
+    "retained_parent_feature_found": true,
+    "assessment_subject_count": 1
+  }
+}
