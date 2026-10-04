@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "tests": 59,
+  "passed": 59,
+  "failed": 0,
+  "skipped": 0,
+  "command": "node --test test/compact-map-client.test.mjs test/ownership-assets.test.mjs test/reference-bundle.test.mjs test/hosted-temporal-client.test.mjs test/hosted-temporal-geography.test.mjs",
+  "raw_log_sha256": "95b03176d3afd53ea225e46da82d6d6b1cfb60f6ff3fb7164c0519f894bc5c36",
+  "scope": "Actual59 focused tests, including old history failure/new cache and complete snapshot supersession; not full regression"
+}

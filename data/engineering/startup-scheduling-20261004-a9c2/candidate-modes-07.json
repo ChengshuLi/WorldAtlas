@@ -1,0 +1,434 @@
+{
+  "verified_at_utc": "2026-10-04T10:50:34.163Z",
+  "site": "https://worldatlas-explorer.chengshu-li-2013.chatgpt.site",
+  "read_only": true,
+  "candidate_preview": true,
+  "proxy": "Candidate frontend and new complete reference/ownership transport local; pinned original root and remaining GET-only data actual production",
+  "performance_proof": false,
+  "continents": [
+    "Asia",
+    "Europe",
+    "North America",
+    "South America",
+    "Africa",
+    "Oceania"
+  ],
+  "profiles": 6,
+  "profile_readbacks": [
+    {
+      "year": 2026,
+      "id": "atlas:territory:HKG",
+      "continent": "Asia",
+      "values": [
+        "ChinaReference",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "SlopeReference",
+        "Tropical & Subtropical Moist Broadleaf ForestsReference",
+        "Cwa dry-winter humid subtropicalReference"
+      ],
+      "name_context": "Present-day reference: Hong Kong"
+    },
+    {
+      "year": 2026,
+      "id": "atlas:city:GBR-Greater London",
+      "continent": "Europe",
+      "values": [
+        "United KingdomReference",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "FlatlandReference",
+        "Temperate Broadleaf & Mixed ForestsReference",
+        "Cfb oceanicReference"
+      ],
+      "name_context": "Present-day reference: London"
+    },
+    {
+      "year": 2026,
+      "id": "atlas:city:USA-New-York-City",
+      "continent": "North America",
+      "values": [
+        "United States of AmericaReference",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "FlatlandReference",
+        "Temperate Broadleaf & Mixed ForestsReference",
+        "Cfa humid subtropicalReference"
+      ],
+      "name_context": "Present-day reference: New York City"
+    },
+    {
+      "year": 2026,
+      "id": "gb:BRA:ADM2:56859067B92864763247255",
+      "continent": "South America",
+      "values": [
+        "BrazilReference",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "ValleyReference",
+        "Tropical & Subtropical Moist Broadleaf ForestsReference",
+        "Cfa humid subtropicalReference"
+      ],
+      "name_context": "Present-day reference: São Paulo"
+    },
+    {
+      "year": 2026,
+      "id": "atlas:city:EGY-1533",
+      "continent": "Africa",
+      "values": [
+        "EgyptReference",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "FlatlandReference",
+        "Deserts & Xeric ShrublandsReference",
+        "BWh hot desertReference"
+      ],
+      "name_context": "Present-day reference: Cairo"
+    },
+    {
+      "year": 2026,
+      "id": "gb:AUS:ADM2:25037944B74771981745191",
+      "continent": "Oceania",
+      "values": [
+        "AustraliaReference",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "Unknown",
+        "FlatlandReference",
+        "Temperate Broadleaf & Mixed ForestsReference",
+        "Cfb oceanicReference"
+      ],
+      "name_context": "Present-day reference: Melbourne"
+    }
+  ],
+  "mode_readbacks": [
+    {
+      "mode": "owner",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "54",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "54",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "population",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "40",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "57",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "culture",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "33",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "60",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "religion",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "36",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "63",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "rank",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "35",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "66",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "topography",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "72",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "69",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "vegetation",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "61",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "72",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "climate",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "53",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "75",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "location",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "169",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "78",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "province",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "115",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "81",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "area",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "137",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "84",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "region",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "105",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "87",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "subcontinent",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "116",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "90",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    },
+    {
+      "mode": "continent",
+      "canvas": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "797146",
+        "renderMs": "101",
+        "worker": "true",
+        "frame": "236564.10158348083/160827.12101650238/13/1174/679",
+        "uploads": "93",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      }
+    }
+  ],
+  "modes": [
+    "owner",
+    "population",
+    "culture",
+    "religion",
+    "rank",
+    "topography",
+    "vegetation",
+    "climate",
+    "location",
+    "province",
+    "area",
+    "region",
+    "subcontinent",
+    "continent"
+  ],
+  "attributes_per_profile": 8,
+  "hierarchy_tiers": 6,
+  "year": 1800,
+  "navigation_ownership_compilations": 0,
+  "navigation_ownership_uploads": 0,
+  "page_errors": [],
+  "physical_mobile_test": false
+}

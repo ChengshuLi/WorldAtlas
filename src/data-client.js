@@ -20,14 +20,30 @@ const ownershipRequests=new Map();
 let ownershipIndexRequest;
 let referenceAttributeRequest;
 let referenceAttributeBundle,referenceAttributeFootprints;
+let initialHostedMapRequest;
+let geographyGeneration=0;
 let preparedEvidenceIndexRequest,preparedEvidenceProof;
-const preparedEvidenceRequests=new Map();
+let preparedEvidenceRequests=new Map();
+function loadPreparedEvidenceIndex(){
+ if(!preparedEvidenceIndexRequest){
+  const proof=preparedEvidenceProof;
+  const request=fetch('./prepared-evidence/index.json').then(async response=>{if(!response.ok)throw Error(`Atlas evidence unavailable (${response.status})`);return verifyPreparedEvidenceIndexBytes(await response.arrayBuffer(),proof);}).catch(error=>{if(preparedEvidenceIndexRequest===request)preparedEvidenceIndexRequest=null;throw error;});
+  preparedEvidenceIndexRequest=request;
+ }
+ return preparedEvidenceIndexRequest;
+}
 async function loadPreparedEvidence(year,examples,signal){
- preparedEvidenceIndexRequest ||= fetch('./prepared-evidence/index.json').then(async response=>{if(!response.ok)throw Error(`Atlas evidence unavailable (${response.status})`);return verifyPreparedEvidenceIndexBytes(await response.arrayBuffer(),preparedEvidenceProof);}).catch(error=>{preparedEvidenceIndexRequest=null;throw error;});
- const index=await preparedEvidenceIndexRequest;signal?.throwIfAborted();const selected=preparedEvidencePartsAt(index,year);
- const parts=await Promise.all(selected.map(async part=>{if(!preparedEvidenceRequests.has(part.path))preparedEvidenceRequests.set(part.path,readJSON(`./prepared-evidence/${part.path}`).then(async rows=>{await verifyPreparedEvidencePart(part,rows);return rows;}).catch(error=>{preparedEvidenceRequests.delete(part.path);throw error;}));return {path:part.path,rows:await preparedEvidenceRequests.get(part.path)};}));
- const active=new Set(selected.map(p=>p.path));for(const key of preparedEvidenceRequests.keys())if(!active.has(key))preparedEvidenceRequests.delete(key);signal?.throwIfAborted();
- return selectPreparedEvidence(index,parts,year,{examples,expected:preparedEvidenceProof});
+ const requests=preparedEvidenceRequests,proof=preparedEvidenceProof,index=await loadPreparedEvidenceIndex();signal?.throwIfAborted();const selected=preparedEvidencePartsAt(index,year);
+ const parts=await Promise.all(selected.map(async part=>{if(!requests.has(part.path))requests.set(part.path,readJSON(`./prepared-evidence/${part.path}`).then(async rows=>{await verifyPreparedEvidencePart(part,rows);return rows;}).catch(error=>{requests.delete(part.path);throw error;}));return {path:part.path,rows:await requests.get(part.path)};}));
+ const active=new Set(selected.map(p=>p.path));for(const key of requests.keys())if(!active.has(key))requests.delete(key);signal?.throwIfAborted();
+ return selectPreparedEvidence(index,parts,year,{examples,expected:proof});
+}
+function loadHistory(){
+ if(!historyRequest){
+  const request=readJSON('./atlas-history.json.gz').catch(error=>{if(historyRequest===request)historyRequest=null;throw error;});
+  historyRequest=request;
+ }
+ return historyRequest;
 }
 function loadReferenceGeneration(){
  if(!referenceAttributeRequest){
@@ -102,10 +118,14 @@ async function temporalAPIGet(url,{signal}={}){
  return payload;
 }
 async function loadHostedMapEvidence(year,examples,signal){
+ const generation=geographyGeneration;
  for(let attempt=0;attempt<3;attempt++){
+  if(generation!==geographyGeneration)throw new DOMException('Evidence geography superseded','AbortError');
   signal?.throwIfAborted();
   try{
    const pages=hostedDatabase&&compactMapSupported?await loadHostedSnapshotPages(year,examples,signal):await Promise.all(['/api/attributes','/api/names','/api/retirements'].map(endpoint=>loadHostedRecords(endpoint,year,examples,signal)));
+   signal?.throwIfAborted();
+   if(generation!==geographyGeneration)throw new DOMException('Evidence geography superseded','AbortError');
    if(pages.some(p=>!p.available))return unavailableHostedMap(year,examples);
    const versions=new Set(pages.filter(p=>p.revision!=null).map(p=>p.revision));
    if(versions.size>1)throw new ContentRevisionError();
@@ -117,6 +137,8 @@ async function loadHostedMapEvidence(year,examples,signal){
     catch(error){if(error.name==='AbortError'||signal?.aborted||error.retryable)throw error;return unavailableHostedMap(year,examples);}
    }
    const value={attributes:pages[0],names:pages[1],retirements:pages[2],temporalGeography,retirementAuthority:true};
+   signal?.throwIfAborted();
+   if(generation!==geographyGeneration)throw new DOMException('Evidence geography superseded','AbortError');
    if(hostedDatabase)lastCompleteHostedMap={key:`${year}:${Number(examples)}`,value};
    return value;
   }catch(error){
@@ -147,40 +169,76 @@ export function selectRecords(records, year, examples) {
   return [...selected.values()];
 }
 
-export async function loadGeography() {
+export async function loadGeography(initialSelection) {
+  const generation=++geographyGeneration;
+  initialHostedMapRequest?.controller.abort();initialHostedMapRequest=null;
+  lastCompleteHostedMap=null;
   // Reference presentation context belongs to this loaded asset generation.
   referenceAttributeRequest=null;
+  historyRequest=null;
+  preparedEvidenceIndexRequest=null;preparedEvidenceRequests=new Map();
   const data=await readJSON(staticAtlas ? './atlas-geography.json' : '/api/geography');
+  if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
   referenceAttributeBundle=data.referenceAttributes??null;
   referenceAttributeFootprints=data.reference_release?.footprints_sha256??data.preparedEvidence?.footprints_sha256;
-  // Preload one complete pinned bundle; legacy deployments keep their old reads.
-  if(staticAtlas&&referenceAttributeBundle)loadReferenceGeneration().catch(()=>{});
-  const [catalog,entities,history]=await Promise.all([
-   data.parts?Promise.all([Promise.all(data.parts.map(part=>readJSON(`./${part}`))).then(parts=>parts.flat()),data.pixelMap?loadOwnershipAssets(data.pixelMap):null]):null,
-   data.entityParts?Promise.all(data.entityParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null,
-   data.temporalHistoryParts?Promise.all(data.temporalHistoryParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null
-  ]);
-  if(catalog){[data.features,data.ownership]=catalog;}
-  if(entities)data.temporal.entities=entities;
-  if(history)data.temporal.history=history;
-  validateHierarchy(data.units,data.features.map(f=>f.properties));
   preparedEvidenceProof=data.preparedEvidence;
   compactMapSupported=data.contentCapabilities?.mapSnapshots===1;
   datedGeographySupported=data.contentCapabilities?.datedGeography===1;
   expectedGeography=data.reference_release?{release_id:data.reference_release.id,hierarchy_sha256:data.reference_release.hierarchy_sha256,footprints_sha256:data.reference_release.footprints_sha256}:null;
   if(datedGeographySupported&&!expectedGeography)throw Error('Dated geography requires a pinned reference release');
+  // Preload one complete pinned bundle; legacy deployments keep their old reads.
+  if(staticAtlas&&referenceAttributeBundle)loadReferenceGeneration().catch(()=>{});
+  // Queue ownership rows before the catalog fan-out so decoding can overlap it.
+  // Every required stream still completes before this generation is exposed.
+  const ownershipInput=data.parts&&data.pixelMap?loadOwnershipAssets(data.pixelMap):null;
+  // Fetch one pinned initial evidence selection while complete geography loads.
+  // It is consumed only for that same year/examples pair, never another visit.
+  let speculative;
+  if(staticAtlas&&hostedDatabase&&validYear(initialSelection?.year)&&typeof initialSelection.examples==='boolean'){
+   const {year,examples}=initialSelection,controller=new AbortController();
+   const request=loadHostedMapEvidence(year,examples,controller.signal);
+   request.catch(()=>{});
+   speculative={year,examples,controller,request};initialHostedMapRequest=speculative;
+   loadHistory().catch(()=>{});
+   if(preparedEvidenceProof)loadPreparedEvidenceIndex().catch(()=>{});
+  }
+  const inputs=Promise.all([
+   ownershipInput,
+   data.temporalHistoryParts?Promise.all(data.temporalHistoryParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null,
+   data.entityParts?Promise.all(data.entityParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null,
+   data.parts?Promise.all(data.parts.map(part=>readJSON(`./${part}`))).then(parts=>parts.flat()):null
+  ]);
+  let ownership,history,entities,features;
+  try{
+   [ownership,history,entities,features]=await inputs;
+   if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
+   if(features){data.features=features;data.ownership=ownership;}
+   if(entities)data.temporal.entities=entities;
+   if(history)data.temporal.history=history;
+   validateHierarchy(data.units,data.features.map(f=>f.properties));
+  }catch(error){speculative?.controller.abort();if(initialHostedMapRequest===speculative)initialHostedMapRequest=null;throw error;}
   referenceTemporalHistory=data.temporal?.history??[];
-  lastCompleteHostedMap=null;
   return data;
+}
+
+async function loadSelectedHostedMap(year,examples,signal){
+ const pending=initialHostedMapRequest;initialHostedMapRequest=null;
+ if(!pending)return loadHostedMapEvidence(year,examples,signal);
+ if(pending.year!==year||pending.examples!==examples){pending.controller.abort();return loadHostedMapEvidence(year,examples,signal);}
+ const cancel=()=>pending.controller.abort();
+ if(signal?.aborted)cancel();else signal?.addEventListener('abort',cancel,{once:true});
+ try{const value=await pending.request;signal?.throwIfAborted();return value;}
+ finally{signal?.removeEventListener('abort',cancel);}
 }
 
 export async function loadSnapshot(year, examples, signal) {
   if (!validYear(year)) throw new Error('Invalid year');
   if (!staticAtlas) return readJSON(`/api/snapshot?year=${year}&examples=${Number(examples)}`, signal);
+  const generation=geographyGeneration;
   // The immutable export is shared across requests; cancel the selection, not its download.
-  historyRequest ||= readJSON('./atlas-history.json.gz').catch(error => { historyRequest = null; throw error; });
-  const [history,derived,references,hostedMap,evidence] = await Promise.all([historyRequest,loadOwnershipHistory(year,signal),loadReferenceAttributes(year,signal),loadHostedMapEvidence(year,examples,signal),loadPreparedEvidence(year,examples,signal)]);
+  const [history,derived,references,hostedMap,evidence] = await Promise.all([loadHistory(),loadOwnershipHistory(year,signal),loadReferenceAttributes(year,signal),loadSelectedHostedMap(year,examples,signal),loadPreparedEvidence(year,examples,signal)]);
   signal?.throwIfAborted();
+  if(generation!==geographyGeneration)throw new DOMException('Snapshot geography superseded','AbortError');
   const {attributes:hosted,names:temporal_history,retirements}=hostedMap;
   const evidenceUnavailable=hostedDatabase&&!hostedMap.retirementAuthority;
   const merged=evidenceUnavailable?{records:[],names:[]}:mergePreparedEvidence(hosted.records,temporal_history.records,evidence,{retirements:retirements.records});

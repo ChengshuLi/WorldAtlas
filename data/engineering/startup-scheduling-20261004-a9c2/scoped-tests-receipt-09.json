@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "tests": 60,
+  "passed": 60,
+  "failed": 0,
+  "skipped": 0,
+  "command": "node --test test/compact-map-client.test.mjs test/ownership-assets.test.mjs test/reference-bundle.test.mjs test/hosted-temporal-client.test.mjs test/hosted-temporal-geography.test.mjs",
+  "raw_log_sha256": "b20e26e4994ad47db353f37719c1e328473dc12b29222913440e54c46a3d5cba",
+  "scope": "Actual60 focused tests including ordinary pending hosted old-generation invalidation; not full regression"
+}

@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "startup-scheduling-20261004-a9c2",
+  "branch": "engineering/startup-scheduling-20261004-a9c2",
+  "base_main_commit": "1179243875790e1600f0d4a4e1dd508ac9ab5bfe",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/712",
+  "worker_id": "engineering-startup-a9c25e14-20261004",
+  "claim_id": "22b05e8a-f50b-4901-8cd3-b9e71fe4827b",
+  "scope": [
+    "First correct selected-year complete-map critical path scheduling; original inputs, caches, identity and visible failures unchanged"
+  ],
+  "live_work": false,
+  "author_deployed": false,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "GitHub issue712",
+  "next_action": "Finalize actual negative/GPU fallback checks; complete whole-file gate; distinct exact-head review and required CI; accepted normalqueue/actualmerge before publisher handoff. No author deployment or closure.",
+  "updated_at_utc": "2026-10-04T10:51:54.832954Z",
+  "completed": [
+    "Accepted prior745merge and publisher handoff recorded",
+    "Fresh branch/reservation rotation confirmed",
+    "60 focused checks pass/0skip with raw logs",
+    "Whole actual compiled/source-map vintages retained; uncommitted source ancestry explicitly pinned",
+    "Complete fresh/repeat/navigation traces retained for every candidate, including target misses/outliers",
+    "Final-source six-continent profiles/all14modes/historical1800 and zero navigation ownership recompilation/upload verified"
+  ],
+  "blockers": []
+}

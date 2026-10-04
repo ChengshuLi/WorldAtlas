@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "method_id": "complete-startup-measurement",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "evidence_path": "data/engineering/startup-scheduling-20261004-a9c2/scheduling-after-07.json",
+  "observed_at_utc": "2026-10-04T10:49:19.732Z",
+  "observations": {
+    "previous_year": "2,020 AD",
+    "visible_year": "2,020 AD",
+    "error": "Enter a year from 3000 BC to 2026 AD. There is no year zero.",
+    "new_requests": 0
+  },
+  "limits": [
+    "Indexes completed actual raw browser observation, not a new run",
+    "New transports local; latest9.820s fresh/10.660s repeat; other samples retain fresh/repeat target misses. No equivalent hosted/phone/provider-wake certification"
+  ]
+}

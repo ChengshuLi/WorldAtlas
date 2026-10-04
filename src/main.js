@@ -212,7 +212,7 @@ $('#search').oninput = event => {
 };
 async function start() {
   try {
-    data=await loadGeography();referenceData=data; $('#framework-status').textContent=`Framework research in progress: ${data.units.filter(u=>u.metadata?.review_reasons?.length).length.toLocaleString()} geographic groups have open review notes. Complete parent chains do not mean every grouping is semantically verified.`; parents=new Map(data.units.map(u=>[u.id,u])); features=new Map(data.features.map(f=>[f.id,f]));
+    data=await loadGeography({year:desiredYear,examples:$('#examples').checked});referenceData=data; $('#framework-status').textContent=`Framework research in progress: ${data.units.filter(u=>u.metadata?.review_reasons?.length).length.toLocaleString()} geographic groups have open review notes. Complete parent chains do not mean every grouping is semantically verified.`; parents=new Map(data.units.map(u=>[u.id,u])); features=new Map(data.features.map(f=>[f.id,f]));
     rebuildGeometry(); await loadYear(desiredYear);
   } catch { $('#loading').textContent='Atlas could not load. Check the server and reload the page.'; }
 }
