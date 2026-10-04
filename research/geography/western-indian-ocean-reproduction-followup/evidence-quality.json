@@ -626,7 +626,7 @@
       "description": "Reproduce historical administrative geometry comparisons from immutable source and scope pins. Capture raw geometry validity before repair; repairs apply only to temporary clones and unsupported outputs fail closed.",
       "software": "Python 3.12; Shapely 2.1.2; pyproj 3.7.2",
       "units": "square kilometres and percent",
-      "kind": "geography",
+      "kind": "measurement",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326 input projected to EPSG:6933",
       "area_method": "Equal-area EPSG:6933; symmetric difference divided by union area.",
@@ -636,7 +636,8 @@
       "id": "immutable_inputs_and_safe_outputs",
       "description": "SHA-256 pin every source from its declared commit; verify exact subject roster, baseline containing parts and full partition duplicate scan; use check-only and exclusive output creation.",
       "software": "Python 3.12 standard library; Git 2.x",
-      "units": "SHA-256 digests and exact subject IDs"
+      "units": "SHA-256 digests and exact subject IDs",
+      "kind": "code"
     }
   ],
   "metrics": [
