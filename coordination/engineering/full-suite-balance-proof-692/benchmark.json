@@ -1,0 +1,72 @@
+{
+  "observations": [
+    {
+      "stage": "baseline",
+      "evaluated_commit": "83887373aebc84bd4ee30a33d1007f8838c68715",
+      "run_id": 37165467753,
+      "job_ids": [
+        111327378536,
+        111327378566,
+        111327378558
+      ],
+      "shard_job_seconds": [
+        520,
+        125,
+        160
+      ],
+      "critical_job_seconds": 520,
+      "tests": 673,
+      "pass": 673,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "stage": "source",
+      "evaluated_commit": "617e514d5765c32fb26f38df44968774f092c5c0",
+      "run_id": 37167079503,
+      "job_ids": [
+        111332154832,
+        111332154849,
+        111332154859
+      ],
+      "shard_job_seconds": [
+        521,
+        173,
+        415
+      ],
+      "critical_job_seconds": 521,
+      "tests": 676,
+      "pass": 676,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "stage": "candidate",
+      "evaluated_commit": "e11f16fe27d9088af925be7509eab52847c58593",
+      "run_id": 37167746270,
+      "job_ids": [
+        111334206964,
+        111334207042,
+        111334206954
+      ],
+      "shard_job_seconds": [
+        506,
+        172,
+        277
+      ],
+      "critical_job_seconds": 506,
+      "tests": 676,
+      "pass": 676,
+      "fail": 0,
+      "skipped": 0
+    }
+  ],
+  "assessment": "Stable scheduling is implemented and complete regression coverage passes. These observations do not demonstrate a meaningful hosted full-suite speed improvement: baseline 520 seconds, source 521 seconds, candidate 506 seconds. Treat small differences as runner variance, not a reliable gain. Parity optimization #694 remains separate work.",
+  "limits": [
+    "Only one source observation and one merge-candidate observation; no statistical performance claim.",
+    "Whole regression-job durations include checkout, dependencies, build and cleanup, not just Node test time.",
+    "Separate package CI and queue/runner waiting are outside these numbers.",
+    "Log summaries are extracted from actual connected GitHub logs; complete original logs remain at their API job URLs and can expire.",
+    "No application tests, assertions, skip detection, dependency requirements, historical records or geographic data were removed."
+  ]
+}

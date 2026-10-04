@@ -1,0 +1,440 @@
+{
+  "version": 1,
+  "issue": 692,
+  "lane": "engineering",
+  "worker_id": "moderator-full-suite-692-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "e97c0e83d7637b316f2ae38339930cf2978c9ab8",
+    "files": [
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 3345,
+        "sha256": "8a82efac1ecfe82605061a779c6420bb83e30a3bf0a441757f8fb42d64995d56",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/README.md",
+      "bytes": 1594,
+      "sha256": "02a213ea7cdec65e9531c9522747400ec6cc265b65f0d0ef2bf3786f9f2d2cc5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/baseline-jobs.json",
+      "bytes": 12599,
+      "sha256": "3018a05b155ffff2a9a203942520eb71521b9e7d94275dba18362f95ff4fa8cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "bytes": 2228,
+      "sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/candidate-jobs.json",
+      "bytes": 15926,
+      "sha256": "929f20cac803e704669da7f3f6f9449f148a00c6633a4687a76397a086ef5353",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/claim.json",
+      "bytes": 825,
+      "sha256": "c585b803e90b5ea1cc9c4e2c158ebeaebaf1b78b98c79f562aa99328ddebc3ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/log-summaries.json",
+      "bytes": 4231,
+      "sha256": "0163916bb552599794cb3af04f5cf8729d4fafbc07a541449d3ef43a866dc783",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/negative-control.json",
+      "bytes": 134,
+      "sha256": "c1ff85b39f47b7f77d2752fb305062a8b5795555f32c5566e529eb1bfb018cc1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/positive-control.json",
+      "bytes": 151,
+      "sha256": "f7076cda85421976d9327f7d55e88d75f581ac9c904a24de0af203436b474bac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/source-jobs.json",
+      "bytes": 12619,
+      "sha256": "182f40205b87ead65561052fba142888b341337d2f1303f9206183b2daf300a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/source-merge.jsonl",
+      "bytes": 2479,
+      "sha256": "d532ff4175bd86f9c9b6ce259fc89cb1ba46f95ace6016212d0abe39fc039b41",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "hosted-job-clock",
+      "kind": "measurement",
+      "description": "Read exact UTC start/end timestamps from actual GitHub job API metadata and extract zero-skip TAP totals from connected logs; no performance significance inferred from single observations.",
+      "software": "GitHub Actions job API and Python datetime",
+      "units": "seconds and test outcomes"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "hosted-job-clock",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/full-suite-balance-proof-692/positive-control.json"
+    },
+    {
+      "method_id": "hosted-job-clock",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/full-suite-balance-proof-692/negative-control.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "baseline-critical_job_seconds",
+      "value": 520,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "baseline-tests",
+      "value": 673,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "baseline-pass",
+      "value": 673,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "baseline-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "baseline-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "83887373aebc84bd4ee30a33d1007f8838c68715"
+    },
+    {
+      "id": "source-critical_job_seconds",
+      "value": 521,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "617e514d5765c32fb26f38df44968774f092c5c0"
+    },
+    {
+      "id": "source-tests",
+      "value": 676,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "617e514d5765c32fb26f38df44968774f092c5c0"
+    },
+    {
+      "id": "source-pass",
+      "value": 676,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "617e514d5765c32fb26f38df44968774f092c5c0"
+    },
+    {
+      "id": "source-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "617e514d5765c32fb26f38df44968774f092c5c0"
+    },
+    {
+      "id": "source-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "617e514d5765c32fb26f38df44968774f092c5c0"
+    },
+    {
+      "id": "candidate-critical_job_seconds",
+      "value": 506,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "e11f16fe27d9088af925be7509eab52847c58593"
+    },
+    {
+      "id": "candidate-tests",
+      "value": 676,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "e11f16fe27d9088af925be7509eab52847c58593"
+    },
+    {
+      "id": "candidate-pass",
+      "value": 676,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "e11f16fe27d9088af925be7509eab52847c58593"
+    },
+    {
+      "id": "candidate-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "e11f16fe27d9088af925be7509eab52847c58593"
+    },
+    {
+      "id": "candidate-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "1797b5e8765f6a28f956cfaf98153b253f9fc5a913044e28d16c299f5d929ee6",
+      "evaluation_commit": "e11f16fe27d9088af925be7509eab52847c58593"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "baseline-critical_job_seconds",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/0/critical_job_seconds"
+    },
+    {
+      "metric_id": "baseline-tests",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/0/tests"
+    },
+    {
+      "metric_id": "baseline-pass",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/0/pass"
+    },
+    {
+      "metric_id": "baseline-fail",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/0/fail"
+    },
+    {
+      "metric_id": "baseline-skipped",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/0/skipped"
+    },
+    {
+      "metric_id": "source-critical_job_seconds",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/1/critical_job_seconds"
+    },
+    {
+      "metric_id": "source-tests",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/1/tests"
+    },
+    {
+      "metric_id": "source-pass",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/1/pass"
+    },
+    {
+      "metric_id": "source-fail",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/1/fail"
+    },
+    {
+      "metric_id": "source-skipped",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/1/skipped"
+    },
+    {
+      "metric_id": "candidate-critical_job_seconds",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/2/critical_job_seconds"
+    },
+    {
+      "metric_id": "candidate-tests",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/2/tests"
+    },
+    {
+      "metric_id": "candidate-pass",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/2/pass"
+    },
+    {
+      "metric_id": "candidate-fail",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/2/fail"
+    },
+    {
+      "metric_id": "candidate-skipped",
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "json_pointer": "/observations/2/skipped"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "baseline-critical_job_seconds",
+      "value": 520,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "baseline-tests",
+      "value": 673,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "baseline-pass",
+      "value": 673,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "baseline-fail",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "baseline-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "source-critical_job_seconds",
+      "value": 521,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "source-tests",
+      "value": 676,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "source-pass",
+      "value": 676,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "source-fail",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "source-skipped",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "candidate-critical_job_seconds",
+      "value": 506,
+      "unit": "seconds"
+    },
+    {
+      "metric_id": "candidate-tests",
+      "value": 676,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "candidate-pass",
+      "value": 676,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "candidate-fail",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "candidate-skipped",
+      "value": 0,
+      "unit": "tests"
+    }
+  ],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "gh api repos/ChengshuLi/WorldAtlas/actions/runs/37165467753/jobs --paginate",
+    "gh api repos/ChengshuLi/WorldAtlas/actions/runs/37167079503/jobs --paginate",
+    "gh api repos/ChengshuLi/WorldAtlas/actions/runs/37167746270/jobs --paginate",
+    "Read complete job logs with connected github_fetch_workflow_job_logs; compare retained exact summary lines and UTC job intervals."
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/baseline-jobs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/benchmark.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/candidate-jobs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/log-summaries.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/source-jobs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/source-merge.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/full-suite-balance-proof-692/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
