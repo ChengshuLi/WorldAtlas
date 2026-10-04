@@ -16,11 +16,13 @@ try {
   if (phase === 'prepare') {
     const state = await prepareIntegration(options);
     result = {...result, status: state.replayed ? 'already-merged' : 'testing',
-      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile};
+      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, proof: state.proof};
     // Only validated hexadecimal IDs are exposed to the isolated candidate job.
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `candidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.profile === 'full' ? [0,1,2] : [0])}\n`);
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `proof_attempt=${state.proof?.run_attempt ?? ''}\nproof_run=${state.proof?.run_id ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.profile === 'full' ? [0,1,2] : [0])}\n`);
   } else {
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
+      proofRunAttempt: process.env.PROOF_RUN_ATTEMPT ? Number(process.env.PROOF_RUN_ATTEMPT) : undefined,
+      proofRunId: process.env.PROOF_RUN_ID ? Number(process.env.PROOF_RUN_ID) : undefined,
       testedBase: process.env.TESTED_BASE, testedCandidate: process.env.TESTED_CANDIDATE});
     result = {...result, ...completed, status: 'merged'};
   }

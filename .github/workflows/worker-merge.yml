@@ -25,6 +25,7 @@ jobs:
       # receipt on a pull request. Only trusted main code receives this token.
       pull-requests: write
       issues: write
+      actions: read
       checks: read
       statuses: read
     outputs:
@@ -32,6 +33,8 @@ jobs:
       base: ${{ steps.prepare.outputs.base }}
       profile: ${{ steps.prepare.outputs.profile }}
       shards: ${{ steps.prepare.outputs.shards }}
+      proof_attempt: ${{ steps.prepare.outputs.proof_attempt }}
+      proof_run: ${{ steps.prepare.outputs.proof_run }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -58,7 +61,7 @@ jobs:
           retention-days: 30
   integration:
     needs: prepare
-    if: needs.prepare.outputs.candidate != ''
+    if: needs.prepare.outputs.candidate != '' && needs.prepare.outputs.proof_run == ''
     runs-on: ubuntu-latest
     timeout-minutes: 35
     strategy:
@@ -131,6 +134,7 @@ jobs:
       contents: write
       pull-requests: write
       issues: write
+      actions: read
       checks: read
       statuses: read
     steps:
@@ -152,6 +156,8 @@ jobs:
           MERGE_PHASE: merge
           TESTED_BASE: ${{ needs.prepare.outputs.base }}
           TESTED_CANDIDATE: ${{ needs.prepare.outputs.candidate }}
+          PROOF_RUN_ATTEMPT: ${{ needs.prepare.outputs.proof_attempt }}
+          PROOF_RUN_ID: ${{ needs.prepare.outputs.proof_run }}
           INTEGRATION_RESULT: ${{ needs.integration.result }}
         run: node scripts/run-worker-merge.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
