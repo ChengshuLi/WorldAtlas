@@ -9,7 +9,7 @@ const sha=x=>createHash('sha256').update(x).digest('hex');
 const native=(args,input)=>execFileSync('docker',args,{input,timeout:180000,maxBuffer:16*1024*1024,stdio:['pipe','pipe','pipe']});
 let name;const receipt={version:1,fixture_only:true,production_access:false,image:recoveryImage,status:'failed'};
 const cleanup=()=>{if(name){native(['rm','-fv',name]);assert.equal(native(['ps','-a','--filter','name=^/'+name+'$','--format','{{.ID}}']).toString().trim(),'');name=null;}};
-async function start(){name='atlas-sql-fixture-'+randomUUID();native(['run','-d','--name',name,'--network','none','--read-only','--tmpfs','/var/lib/postgresql:rw,size=256m','--tmpfs','/var/run/postgresql:rw,size=16m','--memory','1g','-e','POSTGRES_HOST_AUTH_METHOD=trust',recoveryImage]);for(let i=0;i<30;i++){try{native(['exec',name,'pg_isready','-U','postgres']);return;}catch{await new Promise(r=>setTimeout(r,1000));}}throw Error('fixture not ready');}
+async function start(){name='atlas-sql-fixture-'+randomUUID();native(['run','-d','--name',name,'--network','none','--read-only','--tmpfs','/var/lib/postgresql:rw,size=256m','--tmpfs','/var/run/postgresql:rw,size=16m','--memory','1g','-e','POSTGRES_HOST_AUTH_METHOD=trust',recoveryImage]);for(let i=0;i<30;i++){try{native(['exec',name,'pg_isready','-h','127.0.0.1','-U','postgres']);return;}catch{await new Promise(r=>setTimeout(r,1000));}}throw Error('fixture not ready');}
 const command=(args,input)=>native(['exec','-i',name,...args],input);
 const sql=value=>command(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],value);
 const query=async value=>JSON.parse(sql('SET ROLE neondb_owner; SELECT coalesce(json_agg(row_to_json(q)),\'[]\'::json) FROM ('+value+') q;').toString());
