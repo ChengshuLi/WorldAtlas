@@ -125,9 +125,21 @@
   ],
   "outputs": [
     {
+      "path": "research/geography/bc-washington-reproduction-followup/README.md",
+      "bytes": 4373,
+      "sha256": "0d335508008c757742ce5a4d01684765f49db533cdd69fb258373b21280648d3",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
       "bytes": 3310,
       "sha256": "baaf73f55fe4251264046e8d9a890cc9a4bf6e81fc7f6cbde932b885794358c8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/reproduce.py",
+      "bytes": 10622,
+      "sha256": "fffc248a620c831174af6763d94451515933b8b2a8b0a042152769fd502a3793",
       "hash_kind": "file-bytes"
     },
     {
@@ -135,19 +147,39 @@
       "bytes": 428,
       "sha256": "6d923e9d07055a6e880a9584c8bb05cf5fdd92b0f2125a129a44660788c62ef5",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/verify_packet.py",
+      "bytes": 3133,
+      "sha256": "8beeecbaf3910a30ebf55dfcda9c55481972c825bcbb907cc50e490d4cdd1e5f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/validation/positive-control.json",
+      "bytes": 249,
+      "sha256": "b0a29375625d19528fdf2bd4c42a36a1fc2bfd22aa9491856d17c5b97d9ed66e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/validation/negative-control.json",
+      "bytes": 234,
+      "sha256": "eea9461583f22da3a8113ce12ca1d0d23ae95d5e62124ce566310d7117acca7f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/validation/reproducibility-control.json",
+      "bytes": 279,
+      "sha256": "97e225c34de66d3584d9a982f8436a772bb19be13f5a42fcd7b26f3600cbb2d8",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
       "id": "inherited-sample-ledger-audit",
-      "description": "Pin and validate all 18 inherited sample records (IDs 50–67), then derive the noncontainment count and distance extrema directly from every retained row. Coordinates are inherited projected values; source-line resampling was not performed.",
+      "description": "Pin and validate all 18 inherited sample records (IDs 50–67), then derive the noncontainment count and distance extrema directly from every retained row. Coordinates are inherited projected values; source-line resampling and geometry operations were not performed.",
       "software": "Python 3 standard library; immutable Git object reader",
       "units": "sample count; meters",
-      "kind": "geography",
-      "axis_order": "longitude-latitude",
-      "crs": "inherited EPSG:3347 projected sample coordinates; no coordinate transformation in this audit",
-      "area_method": "Not computed",
-      "distance_method": "Read inherited nearest-boundary distances and recompute arithmetic extrema; no geometry operation."
+      "kind": "source"
     }
   ],
   "metrics": [
@@ -206,7 +238,28 @@
       "unit": "m"
     }
   ],
-  "metric_bindings": [],
+  "metric_bindings": [
+    {
+      "metric_id": "sample_count",
+      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
+      "json_pointer": "/sample_count"
+    },
+    {
+      "metric_id": "strict_noncontainment_count",
+      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
+      "json_pointer": "/strict_tiger_polygon_noncontainment_count"
+    },
+    {
+      "metric_id": "minimum_bc_distance",
+      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
+      "json_pointer": "/nearest_bc_distance_m/minimum"
+    },
+    {
+      "metric_id": "maximum_bc_distance",
+      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
+      "json_pointer": "/nearest_bc_distance_m/maximum"
+    }
+  ],
   "conclusions": [
     {
       "text": "The inherited rows show five strict noncontainments and a minimum nearest-BC distance of 1,011.90 m; prior narrative reports four and 1,011.91 m.",
@@ -234,5 +287,63 @@
     "python3 research/geography/bc-washington-reproduction-followup/reproduce.py",
     "python3 research/geography/bc-washington-reproduction-followup/verify_packet.py",
     "node scripts/evidence-quality.mjs research/geography/bc-washington-reproduction-followup/evidence-quality.json ."
+  ],
+  "validation": [
+    {
+      "method_id": "inherited-sample-ledger-audit",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/bc-washington-reproduction-followup/validation/positive-control.json"
+    },
+    {
+      "method_id": "inherited-sample-ledger-audit",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/bc-washington-reproduction-followup/validation/negative-control.json"
+    },
+    {
+      "method_id": "inherited-sample-ledger-audit",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/bc-washington-reproduction-followup/validation/reproducibility-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/verification.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/verify_packet.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/validation/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/validation/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/validation/reproducibility-control.json",
+      "status": "added"
+    }
   ]
 }

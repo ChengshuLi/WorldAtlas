@@ -40,6 +40,16 @@ def main():
         "original_packet": "not modified; input comes from immutable Git baseline blobs",
     }
     (ROOT / "verification.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    method_id = "inherited-sample-ledger-audit"
+    controls = {
+        "positive-control.json": {"method_id": method_id, "kind": "positive-control", "outcome": "passed", "sample_count": receipts[0]["samples"], "strict_noncontainment_count": receipts[0]["uncontained"], "output_sha256": receipts[0]["sha256"]},
+        "negative-control.json": {"method_id": method_id, "kind": "negative-control", "outcome": "passed", "changed_baseline_pin_rejected_before_output_change": True, "existing_vintage_exclusive_create_refused_without_change": True},
+        "reproducibility-control.json": {"method_id": method_id, "kind": "reproducibility", "outcome": "passed", "run_one_sha256": receipts[0]["sha256"], "run_two_sha256": receipts[1]["sha256"]},
+    }
+    validation_dir = ROOT / "validation"
+    validation_dir.mkdir(exist_ok=True)
+    for filename, evidence in controls.items():
+        (validation_dir / filename).write_text(json.dumps(evidence, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report))
 
 if __name__ == "__main__":
