@@ -1,0 +1,23 @@
+{
+  "source": "Togo OCHA settlement catalog (Other license), analysis-only temporary XLSX",
+  "restoration": "sources/acquisition.json: Togo settlement package `togo-settlements`, resource `tgo_settlement_20210420.dbf.xlsx`; license must be reviewed before any copy is retained",
+  "source_file_bytes": 400572,
+  "source_file_sha256": "14dfbb508605c7c6c8937a9197c505f683f0f73be74c3c1c673aba1c03ffb0a7",
+  "source_rows": 5338,
+  "source_date": "2021-04-20 in resource name; catalog resource last modified 2021-04-27",
+  "comparison_input": "Retained OCHA WCA CC BY settlement subset, Togo rows, with GeoJSON point geometry, featureNam, and admin2Pcod",
+  "comparison_method": "Unicode NFKD ASCII lowercase alphanumeric name normalization + exact admin2 pcode; where repeated source workbook rows shared a name/code, compare to the nearest WGS84 coordinate candidate using the GeoJSON geometry as longitude/latitude and workbook LONG/LAT",
+  "wca_togo_rows": 5394,
+  "wca_rows_matching_workbook_name_and_pcode": 5276,
+  "wca_rows_without_matching_workbook_name_and_pcode": 118,
+  "matched_rows_with_multiple_workbook_candidates": 316,
+  "nearest_coordinate_pairs_within_10_m": 5273,
+  "nearest_coordinate_pair_max_distance_km": 13.033,
+  "attribute_axis_finding": "All WCA point records have GeoJSON geometry X/Y equal to the catalog LAT/LONG property fields in reverse label order (within 1e-6 degrees); the geometry agrees with the separate Togo workbook LONG/LAT values for 5273 of 5276 name+code matches within 10 m. Use GeoJSON point geometry; do not interpret the regional LAT/LONG property names conventionally.",
+  "limits": [
+    "The separate OCHA country workbook is cataloged with license `Other` and was not retained; this coordinate screen is an analysis summary, not a redistributable source snapshot.",
+    "Repeated names/code candidates make the nearest-coordinate comparison non-unique for 316 features.",
+    "The 118 unmatched names/code rows and three matched points beyond 10 m need source/vintage review; they are not automatically corrected.",
+    "This proves neither complete settlement coverage nor administrative ownership."
+  ]
+}

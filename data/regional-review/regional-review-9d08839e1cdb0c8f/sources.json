@@ -1,0 +1,427 @@
+{
+  "packet": "regional-review:9d08839e1cdb0c8f",
+  "issue": 479,
+  "source_register": "sources/acquisition.json",
+  "sources": [
+    {
+      "provider": "geoBoundaries",
+      "country": "SLE",
+      "dataset_id": null,
+      "title": null,
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "metadata_modified": null,
+      "canonical_metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/SLE/ADM2/",
+      "entry_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLE/ADM2/geoBoundaries-SLE-ADM2.geojson",
+      "resolved_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SLE/ADM2/geoBoundaries-SLE-ADM2.geojson",
+      "role": "Districts",
+      "represented_vintage": "2017",
+      "source_attribution": "Government of Sierra Leone, OCHA ROWCA",
+      "file": {
+        "file": "sources/geoboundaries-SLE-adm2-2017.geojson.gz",
+        "gzip_sha256": "932d006d85de4eaf1cf0eb31ec19d52aa353398fc8ae6a793017b795a50fe690",
+        "gzip_bytes": 287529,
+        "restored_bytes": 936499,
+        "restored_sha256": "6775f31e6e80c9ec36fc9e853bb2c40a83198b4c90e972a300768c7a0aed3ba9"
+      },
+      "metadata_file": {
+        "file": "sources/geoboundaries-SLE-adm2-current-api-metadata.json.gz",
+        "gzip_sha256": "3bb0c1e1a6858bb1246cb4359da2932b135387fb5e295f1549e86f99d6539d39",
+        "gzip_bytes": 722,
+        "restored_bytes": 1803,
+        "restored_sha256": "d386ac779d773189dc97b523d1c3933f58465bcc9b53837f380c901e34f8ed0f"
+      }
+    },
+    {
+      "provider": "geoBoundaries",
+      "country": "TGO",
+      "dataset_id": null,
+      "title": null,
+      "license": "Creative Commons Attribution-ShareAlike 2.0",
+      "metadata_modified": null,
+      "canonical_metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/TGO/ADM2/",
+      "entry_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TGO/ADM2/geoBoundaries-TGO-ADM2.geojson",
+      "resolved_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TGO/ADM2/geoBoundaries-TGO-ADM2.geojson",
+      "role": "Prefectures",
+      "represented_vintage": "2017",
+      "source_attribution": "OpenStreetMap, Wambacher",
+      "file": {
+        "file": "sources/geoboundaries-TGO-adm2-2017.geojson.gz",
+        "gzip_sha256": "301444b83625b9bc2796ef267d980489a7178b0e5d834819621619494df11508",
+        "gzip_bytes": 95824,
+        "restored_bytes": 376562,
+        "restored_sha256": "f4e6ca4ba89a1d783c12a14335e99b28d34f23f6cff8c8dbbe52adecee9b9bff"
+      },
+      "metadata_file": {
+        "file": "sources/geoboundaries-TGO-adm2-current-api-metadata.json.gz",
+        "gzip_sha256": "03db75c6ceff800161aa092b4071c106ebe4512729a167350b3311f71acd282e",
+        "gzip_bytes": 690,
+        "restored_bytes": 1685,
+        "restored_sha256": "b67c11ff5b39f1fa3b7fcddd11cf3b159b3924ffaf4ea02d9632de0fa9a01200"
+      }
+    },
+    {
+      "provider": "OCHA HDX Common Operational Dataset",
+      "country": "SLE",
+      "dataset_id": "cod-ab-sle",
+      "title": "Sierra Leone - Subnational Administrative Boundaries",
+      "license": "Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO)",
+      "metadata_modified": "2026-08-14T06:39:57.565873",
+      "canonical_metadata_url": "https://data.humdata.org/api/3/action/package_show?id=cod-ab-sle",
+      "notes": "Sierra Leone administrative level 0-4 boundaries (COD-AB) dataset version 02.  \n  \nThis dataset is structured into 4 levels:  \n- Admin 1: 5   \n- Admin 2: 16   \n- Admin 3: 167   \n- Admin 4: 1316   \n  \n  \nDates associated with this dataset:  \n- 30 October 2025: dataset reviewed for accuracy and completeness  \n- 15 December 2023: valid for use by the humanitarian community  \n- 16 August 2017: last edit to the dataset before publishing  \n- 16 August 2017: boundaries created by the source  \n  \nContributed by [OCHA West and Central Africa (ROWCA)](https://data.humdata.org/organization/ocha-rowca).  \nQuality assured, configured, and published by [OCHA Field Information Services (FIS)](https://data.humdata.org/organization/ocha-fiss) and [HDX](https://data.humdata.org/organization/hdx).  \n  \nPart of the dataset: [Global Subnational Administrative Boundaries](https://data.humdata.org/dataset/cod-ab-global)",
+      "metadata_file": {
+        "file": "sources/hdx-cod-ab-sle-package-metadata.json.gz",
+        "gzip_sha256": "03d7e67edfe309147a6dc21ae81adc7c9cb5372c54451524c4f6b51a290bf328",
+        "gzip_bytes": 4332,
+        "restored_bytes": 40949,
+        "restored_sha256": "670790f3f57690954dac673698e6771577f3b068ca011869b31a9a068c3d3b2d"
+      },
+      "geojson_resource": {
+        "url": "https://data.humdata.org/dataset/a4816317-a913-4619-b1e9-d89e21c056b4/resource/dfd53f5f-9846-4f14-bda7-953d3c767279/download/sle_admin_boundaries.geojson.zip",
+        "resource_id": "dfd53f5f-9846-4f14-bda7-953d3c767279",
+        "name": "sle_admin_boundaries.geojson.zip",
+        "file": {
+          "file": "sources/hdx-cod-ab-sle-geojson.zip.gz",
+          "gzip_sha256": "371e8434e9d007803f84c185cfd47f4af4adc120eda0414d96f333bd2a6512a0",
+          "gzip_bytes": 11241882,
+          "restored_bytes": 11239523,
+          "restored_sha256": "33f5a966603937437ae39463b1196901ddccc3a10275bb25b7eda75878487816"
+        }
+      }
+    },
+    {
+      "provider": "OCHA HDX Common Operational Dataset",
+      "country": "TGO",
+      "dataset_id": "cod-ab-tgo",
+      "title": "Togo - Subnational Administrative Boundaries",
+      "license": "Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO)",
+      "metadata_modified": "2026-08-14T06:40:21.517404",
+      "canonical_metadata_url": "https://data.humdata.org/api/3/action/package_show?id=cod-ab-tgo",
+      "notes": "Togo administrative level 0-3 boundaries (COD-AB) dataset version 02.  \n  \nThis dataset is structured into 3 levels:  \n- Admin 1: 5 Region  \n- Admin 2: 40 Prefecture  \n- Admin 3: 373   \n  \n  \nDates associated with this dataset:  \n- 30 October 2025: dataset reviewed for accuracy and completeness  \n- 07 January 2021: valid for use by the humanitarian community  \n- 12 January 2020: last edit to the dataset before publishing  \n- 12 January 2020: boundaries created by the source  \n  \nContributed by [OCHA West and Central Africa (ROWCA)](https://data.humdata.org/organization/ocha-rowca).  \nQuality assured, configured, and published by [OCHA Field Information Services (FIS)](https://data.humdata.org/organization/ocha-fiss) and [HDX](https://data.humdata.org/organization/hdx).  \n  \nPart of the dataset: [Global Subnational Administrative Boundaries](https://data.humdata.org/dataset/cod-ab-global)",
+      "metadata_file": {
+        "file": "sources/hdx-cod-ab-tgo-package-metadata.json.gz",
+        "gzip_sha256": "8220cef8fc83f5fc1a7188d10fb38d9645e3deab67875a0e54f357d7eaff1fbf",
+        "gzip_bytes": 4327,
+        "restored_bytes": 42779,
+        "restored_sha256": "c3ccb2edfad7725d823a5dd1620426bd53f683772877a1c33b64a975d8d7c9dd"
+      },
+      "geojson_resource": {
+        "url": "https://data.humdata.org/dataset/e6439952-e487-4682-8251-e9688aac60e1/resource/e08c2ae7-411b-4d83-a61e-2350ba93c924/download/tgo_admin_boundaries.geojson.zip",
+        "resource_id": "e08c2ae7-411b-4d83-a61e-2350ba93c924",
+        "name": "tgo_admin_boundaries.geojson.zip",
+        "file": {
+          "file": "sources/hdx-cod-ab-tgo-geojson.zip.gz",
+          "gzip_sha256": "e432246378b238311230f9f93d4c9816d619168a5e31c8986b1edc0be03608e5",
+          "gzip_bytes": 1838534,
+          "restored_bytes": 1838422,
+          "restored_sha256": "271c75f6bafea603160a2317b23153bc6d013468886ebf1221af4bf6919dbfa2"
+        }
+      }
+    },
+    {
+      "provider": "OCHA HDX Common Operational Dataset settlements catalog",
+      "country": "SLE",
+      "dataset_id": "sierra-leone-settlements",
+      "title": "Sierra Leone settlements",
+      "license": "Other",
+      "metadata_modified": "2025-08-26T12:02:22.165716",
+      "canonical_metadata_url": "https://data.humdata.org/api/3/action/package_show?id=sierra-leone-settlements",
+      "notes": "Settlements COD datasets for Sierra Leone  endorsed by RO on july 2016 (original source NGA); see metadata for description of cleaning and processing performed by ITOS on March 2017.\r\nCapitals (national, province, district and chiefdom)\r\nThe dataset represents all the location (towns and villages) of Sierra leone. Scale: 1/1,000,000 \r\nLast update March 2017",
+      "metadata_file": {
+        "file": "sources/hdx-sierra-leone-settlements-package-metadata.json.gz",
+        "gzip_sha256": "95c316e204aca97adb695a82f0823d10e2835ee54bbadbf3c163ff5588c04080",
+        "gzip_bytes": 2859,
+        "restored_bytes": 9379,
+        "restored_sha256": "5afddb2218f606a4d3dfb66fae8747d720c2cde048d9fda353c7f02b3688b534"
+      },
+      "resources_for_restoration": [
+        {
+          "alt_url": "https://data.humdata.org/dataset/20f6a388-49d3-4e78-a50d-e1ca0c52a3bf/resource/44dbab63-244f-4c65-8268-c71f0fe8ff0a/download/",
+          "cache_last_updated": null,
+          "cache_url": null,
+          "created": "2017-03-13T10:04:56.233649",
+          "datastore_active": false,
+          "description": "Settlements COD datasets for Sierra Leone developped by RO on 2016 cleaned and processed by ITOS on 2017",
+          "download_url": "https://data.humdata.org/dataset/20f6a388-49d3-4e78-a50d-e1ca0c52a3bf/resource/44dbab63-244f-4c65-8268-c71f0fe8ff0a/download/sle_pplp_nga_20170523.zip",
+          "format": "SHP",
+          "hash": "",
+          "hdx_rel_url": "/dataset/20f6a388-49d3-4e78-a50d-e1ca0c52a3bf/resource/44dbab63-244f-4c65-8268-c71f0fe8ff0a/download/sle_pplp_nga_20170523.zip",
+          "id": "44dbab63-244f-4c65-8268-c71f0fe8ff0a",
+          "last_modified": "2017-06-13T09:10:10.613426",
+          "metadata_modified": "2025-02-25T20:25:32.410045",
+          "microdata": false,
+          "mimetype": null,
+          "mimetype_inner": null,
+          "name": "sle_pplp_nga_20170523.zip",
+          "originalHash": "1530095876",
+          "p_coded": true,
+          "package_id": "20f6a388-49d3-4e78-a50d-e1ca0c52a3bf",
+          "position": 0,
+          "resource_type": "file.upload",
+          "shape_info": "{\"state\": \"success\", \"error_class\": \"None\", \"layer_fields\": [{\"field_name\": \"ogc_fid\", \"data_type\": \"integer\"}, {\"field_name\": \"objectid\", \"data_type\": \"numeric\"}, {\"field_name\": \"featurenam\", \"data_type\": \"character varying\"}, {\"field_name\": \"pcode\", \"data_type\": \"character varying\"}, {\"field_name\": \"featureref\", \"data_type\": \"character varying\"}, {\"field_name\": \"featurealt\", \"data_type\": \"character varying\"}, {\"field_name\": \"featurea_1\", \"data_type\": \"character varying\"}, {\"field_name\": \"popplacecl\", \"data_type\": \"numeric\"}, {\"field_name\": \"popplace_1\", \"data_type\": \"character varying\"}, {\"field_name\": \"admin4name\", \"data_type\": \"character varying\"}, {\"field_name\": \"admin4pcod\", \"data_type\": \"character varying\"}, {\"field_name\": \"admin3name\", \"data_type\": \"character varying\"}, {\"field_name\": \"admin3pcod\", \"data_type\": \"character varying\"}, {\"field_name\": \"admin2name\", \"data_type\": \"character varying\"}, {\"field_name\": \"admin2pcod\", \"data_type\": \"character varying\"}, {\"field_name\": \"admin1name\", \"data_type\": \"character varying\"}, {\"field_name\": \"admin1pcod\", \"data_type\": \"character varying\"}, {\"field_name\": \"admin0name\", \"data_type\": \"character varying\"}, {\"field_name\": \"admin0pcod\", \"data_type\": \"character varying\"}, {\"field_name\": \"date\", \"data_type\": \"date\"}, {\"field_name\": \"validon\", \"data_type\": \"date\"}, {\"field_name\": \"validto\", \"data_type\": \"date\"}, {\"field_name\": \"wkb_geometry\", \"data_type\": \"USER-DEFINED\"}], \"layer_id\": \"pre_44dbab63_244f_4c65_8268_c71f0fe8ff0a\", \"message\": \"Import successful\", \"error_type\": \"None\", \"bounding_box\": \"BOX(-13.3 6.93333300000006,-10.2805559999999 9.98333300000007)\"}",
+          "size": 794596,
+          "state": "active",
+          "tracking_summary[recent]": "0",
+          "tracking_summary[total]": "0",
+          "url": "https://data.humdata.org/dataset/20f6a388-49d3-4e78-a50d-e1ca0c52a3bf/resource/44dbab63-244f-4c65-8268-c71f0fe8ff0a/download/sle_pplp_nga_20170523.zip",
+          "url_type": "upload"
+        },
+        {
+          "alt_url": "https://data.humdata.org/dataset/20f6a388-49d3-4e78-a50d-e1ca0c52a3bf/resource/ac5df09c-3ed2-4dc4-97dd-59bc65616b92/download/",
+          "cache_last_updated": null,
+          "cache_url": null,
+          "created": "2017-06-13T09:10:03.229039",
+          "datastore_active": false,
+          "description": "The XLSX file represents all locations (towns and villages) of Sierra Leone (9560)",
+          "download_url": "https://data.humdata.org/dataset/20f6a388-49d3-4e78-a50d-e1ca0c52a3bf/resource/ac5df09c-3ed2-4dc4-97dd-59bc65616b92/download/sle_populatedplaces_tabulardata.xlsx",
+          "format": "XLSX",
+          "hash": "",
+          "hdx_rel_url": "/dataset/20f6a388-49d3-4e78-a50d-e1ca0c52a3bf/resource/ac5df09c-3ed2-4dc4-97dd-59bc65616b92/download/sle_populatedplaces_tabulardata.xlsx",
+          "id": "ac5df09c-3ed2-4dc4-97dd-59bc65616b92",
+          "last_modified": "2017-06-13T09:10:10.613426",
+          "metadata_modified": "2025-02-25T20:25:34.226864",
+          "microdata": false,
+          "mimetype": null,
+          "mimetype_inner": null,
+          "name": "SLE_PopulatedPlaces_TabularData.xlsx",
+          "originalHash": "97196323",
+          "p_coded": true,
+          "package_id": "20f6a388-49d3-4e78-a50d-e1ca0c52a3bf",
+          "position": 1,
+          "resource_type": "file.upload",
+          "size": 964454,
+          "state": "active",
+          "url": "https://data.humdata.org/dataset/20f6a388-49d3-4e78-a50d-e1ca0c52a3bf/resource/ac5df09c-3ed2-4dc4-97dd-59bc65616b92/download/sle_populatedplaces_tabulardata.xlsx",
+          "url_type": "upload"
+        },
+        {
+          "broken_link": true,
+          "cache_last_updated": null,
+          "cache_url": null,
+          "created": "2017-06-13T09:10:05.843549",
+          "datastore_active": false,
+          "description": "This map service contains OCHA Common Operational Datasets for Sierra Leone: Populated Palces or settlements. The service is available as ESRI Map, ESRI Feature, WMS, and KML Services. ",
+          "download_url": "https://codgis.itos.uga.edu/arcgis/rest/services/COD_External/SLE_EN/MapServer/4",
+          "format": "Geoservice",
+          "hash": "",
+          "hdx_rel_url": "https://codgis.itos.uga.edu/arcgis/rest/services/COD_External/SLE_EN/MapServer/4",
+          "id": "925e37ca-864d-4589-9625-7bc9cfd8083d",
+          "last_modified": "2019-09-12T22:01:05.245653",
+          "metadata_modified": "2025-08-26T12:02:22.181562",
+          "microdata": false,
+          "mimetype": null,
+          "mimetype_inner": null,
+          "name": "Sierra Leone Map Server Populated Places",
+          "originalHash": "97196323",
+          "package_id": "20f6a388-49d3-4e78-a50d-e1ca0c52a3bf",
+          "position": 2,
+          "resource_type": "api",
+          "size": null,
+          "state": "active",
+          "url": "https://codgis.itos.uga.edu/arcgis/rest/services/COD_External/SLE_EN/MapServer/4",
+          "url_type": "api"
+        }
+      ],
+      "bytes_retained": false,
+      "reason": "Catalog license is `Other`; redistribution terms are unspecified. Restore only after reviewing the current catalog license and conditions.",
+      "analysis_only_download": null
+    },
+    {
+      "provider": "OCHA HDX Common Operational Dataset settlements catalog",
+      "country": "TGO",
+      "dataset_id": "togo-settlements",
+      "title": "Togo - Settlements",
+      "license": "Other",
+      "metadata_modified": "2025-04-29T12:29:18.518057",
+      "canonical_metadata_url": "https://data.humdata.org/api/3/action/package_show?id=togo-settlements",
+      "notes": "Settlements with administrative Class(eg: 1=Country capital, 2=Region capital, 3=Prefecture capital, 4=commune…)\r\n\r\n",
+      "metadata_file": {
+        "file": "sources/hdx-togo-settlements-package-metadata.json.gz",
+        "gzip_sha256": "7a92713b9b416ba80aa9cdf17a6c258aef192a2f9ca1e08bb30c82c4dc4f42af",
+        "gzip_bytes": 2794,
+        "restored_bytes": 10334,
+        "restored_sha256": "656eaa7a7c4d0ff680449a09210c1cb2627793f6e9286d614103f011cad9c994"
+      },
+      "resources_for_restoration": [
+        {
+          "alt_url": "https://data.humdata.org/dataset/cf4cd937-05d2-414b-aa68-8f3ad76412d4/resource/d6f7dcc5-16a6-41ad-8509-91ab66a63c89/download/",
+          "cache_last_updated": null,
+          "cache_url": null,
+          "created": "2015-09-01T10:39:28.498642",
+          "dataset_preview_enabled": true,
+          "datastore_active": false,
+          "description": "Settlements COD datasets for Togo",
+          "download_url": "https://data.humdata.org/dataset/cf4cd937-05d2-414b-aa68-8f3ad76412d4/resource/d6f7dcc5-16a6-41ad-8509-91ab66a63c89/download/tgo_plpp_1m_nga_20210420.zip",
+          "format": "SHP",
+          "hash": "",
+          "hdx_rel_url": "/dataset/cf4cd937-05d2-414b-aa68-8f3ad76412d4/resource/d6f7dcc5-16a6-41ad-8509-91ab66a63c89/download/tgo_plpp_1m_nga_20210420.zip",
+          "id": "d6f7dcc5-16a6-41ad-8509-91ab66a63c89",
+          "last_modified": "2021-04-27T09:51:54.876656",
+          "metadata_modified": "2025-02-25T18:31:52.809634",
+          "microdata": false,
+          "mimetype": "application/x-zip-compressed",
+          "mimetype_inner": null,
+          "name": "tgo_plpp_1m_nga_20210420.zip",
+          "originalHash": "1585670341",
+          "p_coded": true,
+          "package_id": "cf4cd937-05d2-414b-aa68-8f3ad76412d4",
+          "position": 0,
+          "resource_type": "file.upload",
+          "resource_uploader": "ditaanggraeni",
+          "shape_info": "[{\"error_class\": \"None\", \"layer_id\": \"pre_d6f7dcc5_16a6_41ad_8509_91ab66a63c89\", \"error_type\": \"None\", \"state\": \"success\", \"bounding_box\": \"BOX(-0.0500030619934 6.12028072197,1.81666458119 11.1038910523)\", \"message\": \"Import successful\"}, {\"error_class\": \"None\", \"layer_id\": \"None\", \"error_type\": \"None\", \"state\": \"processing\", \"timestamp\": \"2019-05-15T13:25:28.945442\", \"message\": \"The processing of the geo-preview has started\"}, {\"error_class\": \"None\", \"layer_fields\": [{\"field_name\": \"ogc_fid\", \"data_type\": \"integer\"}, {\"field_name\": \"lat\", \"data_type\": \"character varying\"}, {\"field_name\": \"long\", \"data_type\": \"character varying\"}, {\"field_name\": \"cntry_name\", \"data_type\": \"character varying\"}, {\"field_name\": \"cntry_code\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm1_name\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm1_code\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm2_name\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm2_code\", \"data_type\": \"character varying\"}, {\"field_name\": \"name\", \"data_type\": \"character varying\"}, {\"field_name\": \"pcode\", \"data_type\": \"character varying\"}, {\"field_name\": \"rowcacode1\", \"data_type\": \"character varying\"}, {\"field_name\": \"rowcacode2\", \"data_type\": \"character varying\"}, {\"field_name\": \"rowcacode4\", \"data_type\": \"character varying\"}, {\"field_name\": \"hrname\", \"data_type\": \"character varying\"}, {\"field_name\": \"hrpcode\", \"data_type\": \"character varying\"}, {\"field_name\": \"hrparent\", \"data_type\": \"character varying\"}, {\"field_name\": \"class\", \"data_type\": \"character varying\"}, {\"field_name\": \"descriptio\", \"data_type\": \"character varying\"}, {\"field_name\": \"wkb_geometry\", \"data_type\": \"USER-DEFINED\"}], \"layer_id\": \"pre_d6f7dcc5_16a6_41ad_8509_91ab66a63c89\", \"error_type\": \"None\", \"state\": \"success\", \"bounding_box\": \"BOX(-0.0500030619934 6.12028072197,1.81666458119 11.1038910523)\", \"timestamp\": \"2019-05-15T13:25:34.853843\", \"message\": \"Import successful\"}, {\"error_class\": \"None\", \"layer_id\": \"None\", \"error_type\": \"None\", \"state\": \"processing\", \"timestamp\": \"2021-04-27T09:51:54.554750\", \"message\": \"The processing of the geo-preview has started\"}, {\"error_class\": \"FetchLayerMetadataException\", \"layer_id\": \"pre_d6f7dcc5_16a6_41ad_8509_91ab66a63c89\", \"error_type\": \"None\", \"state\": \"failure\", \"timestamp\": \"2021-04-27T09:52:02.662987\", \"message\": \"Bounding box was not retrieved \", \"type\": \"fetch-bounding-box-problem\"}, {\"error_class\": \"None\", \"layer_fields\": [{\"field_name\": \"ogc_fid\", \"data_type\": \"integer\"}, {\"field_name\": \"lat\", \"data_type\": \"character varying\"}, {\"field_name\": \"long\", \"data_type\": \"character varying\"}, {\"field_name\": \"name\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm3_fr\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm3_pcode\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm2_fr\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm2_pcode\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm1_fr\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm1_pcode\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm0_fr\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm0_pcode\", \"data_type\": \"character varying\"}, {\"field_name\": \"date\", \"data_type\": \"date\"}, {\"field_name\": \"validon\", \"data_type\": \"date\"}, {\"field_name\": \"validto\", \"data_type\": \"date\"}, {\"field_name\": \"popplaceci\", \"data_type\": \"numeric\"}, {\"field_name\": \"popplace1\", \"data_type\": \"character varying\"}, {\"field_name\": \"wkb_geometry\", \"data_type\": \"USER-DEFINED\"}], \"layer_id\": \"pre_d6f7dcc5_16a6_41ad_8509_91ab66a63c89\", \"error_type\": \"None\", \"bounding_box\": \"BOX(-0.0500030619999843 6.12028072200001,1.78333368000005 11.103891052)\", \"state\": \"success\", \"timestamp\": \"2021-04-27T09:52:08.496505\", \"message\": \"Import successful\"}]",
+          "size": 230044,
+          "state": "active",
+          "url": "https://data.humdata.org/dataset/cf4cd937-05d2-414b-aa68-8f3ad76412d4/resource/d6f7dcc5-16a6-41ad-8509-91ab66a63c89/download/tgo_plpp_1m_nga_20210420.zip",
+          "url_type": "upload"
+        },
+        {
+          "alt_url": "https://data.humdata.org/dataset/cf4cd937-05d2-414b-aa68-8f3ad76412d4/resource/c9b49954-ce23-483a-b9cf-1ad046066e92/download/",
+          "cache_last_updated": null,
+          "cache_url": null,
+          "created": "2015-09-01T10:39:33.973877",
+          "dataset_preview_enabled": false,
+          "datastore_active": false,
+          "description": "Excel file",
+          "download_url": "https://data.humdata.org/dataset/cf4cd937-05d2-414b-aa68-8f3ad76412d4/resource/c9b49954-ce23-483a-b9cf-1ad046066e92/download/tgo_settlement_20210420.dbf.xlsx",
+          "format": "XLSX",
+          "hash": "",
+          "hdx_rel_url": "/dataset/cf4cd937-05d2-414b-aa68-8f3ad76412d4/resource/c9b49954-ce23-483a-b9cf-1ad046066e92/download/tgo_settlement_20210420.dbf.xlsx",
+          "id": "c9b49954-ce23-483a-b9cf-1ad046066e92",
+          "last_modified": "2021-04-27T09:51:58.879974",
+          "metadata_modified": "2025-02-25T18:31:53.296122",
+          "microdata": false,
+          "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "mimetype_inner": null,
+          "name": "tgo_settlement_20210420.dbf.xlsx",
+          "originalHash": "-1949698389",
+          "p_coded": true,
+          "package_id": "cf4cd937-05d2-414b-aa68-8f3ad76412d4",
+          "pii_predict_score": 0.21324993211972107,
+          "pii_report_flag": "FINDINGS",
+          "pii_report_id": "/resources/c9b49954-ce23-483a-b9cf-1ad046066e92/pii.2021-04-27T09-52-02.main.json",
+          "pii_timestamp": "2021-04-27T09:52:34.594000",
+          "position": 1,
+          "resource_type": "file.upload",
+          "size": 400572,
+          "state": "active",
+          "url": "https://data.humdata.org/dataset/cf4cd937-05d2-414b-aa68-8f3ad76412d4/resource/c9b49954-ce23-483a-b9cf-1ad046066e92/download/tgo_settlement_20210420.dbf.xlsx",
+          "url_type": "upload"
+        }
+      ],
+      "bytes_retained": false,
+      "reason": "Catalog license is `Other`; redistribution terms are unspecified. Restore only after reviewing the current catalog license and conditions.",
+      "analysis_only_download": {
+        "resource_name": "tgo_settlement_20210420.dbf.xlsx",
+        "url": "https://data.humdata.org/dataset/cf4cd937-05d2-414b-aa68-8f3ad76412d4/resource/c9b49954-ce23-483a-b9cf-1ad046066e92/download/tgo_settlement_20210420.dbf.xlsx",
+        "last_modified": "2021-04-27T09:51:58.879974",
+        "license_status": "Other",
+        "retained": false,
+        "restored_bytes": 400572,
+        "restored_sha256": "14dfbb508605c7c6c8937a9197c505f683f0f73be74c3c1c673aba1c03ffb0a7",
+        "reason": "Catalog license is Other; bytes were inspected temporarily for coordinate cross-checking but not retained in the public packet."
+      }
+    },
+    {
+      "provider": "OCHA West and Central Africa Regional Office",
+      "country": null,
+      "dataset_id": "west-and-central-africa-administrative-boundaries-levels",
+      "title": "West and Central Africa - Administrative Boundaries (Levels 0–2) and Settlements",
+      "license": "Creative Commons Attribution International (CC BY)",
+      "metadata_modified": "2026-04-21T12:12:21.745377",
+      "canonical_metadata_url": "https://data.humdata.org/api/3/action/package_show?id=west-and-central-africa-administrative-boundaries-levels",
+      "notes": "Administrative boundaries for West and Central Africa (levels 0–2).\r\nSettlements in West and Central Africa, including administrative capitals.",
+      "metadata_file": {
+        "file": "sources/hdx-wca-cod-package-metadata.json.gz",
+        "gzip_sha256": "31c7293e527e8d81d04d0574b93ae78ac3bae6e173c547ce3063f50f0aa0aa1c",
+        "gzip_bytes": 6847,
+        "restored_bytes": 71556,
+        "restored_sha256": "4822ddc996db7785db18c4071f58eee5522fdf4f72c848fe1bc04a336f92dc09"
+      },
+      "retained_resources": [
+        {
+          "name": "wca_admbnda_adm0_edgematched_942026.zip",
+          "url": "https://data.humdata.org/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/4b1dc257-9e4f-4b58-8a5f-cbae28a0124f/download/wca_admbnda_adm0_edgematched_942026.zip",
+          "file": {
+            "file": "sources/hdx-wca-wca_admbnda_adm0_edgematched_942026.zip.gz",
+            "gzip_sha256": "b0f2066bd02de276cbc2ba0f2b00044c17b1aecba859d003bdefcbdc7dded19d",
+            "gzip_bytes": 6275204,
+            "restored_bytes": 6290552,
+            "restored_sha256": "eff2611f0750e04b830596908bad71a344fed7d8775d6021e8d9db97459306c4"
+          }
+        },
+        {
+          "name": "wca_admbnda_adm1_edgematched_942026.zip",
+          "url": "https://data.humdata.org/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/d676326e-481d-4576-828d-4c17e4f7bac6/download/wca_admbnda_adm1_edgematched_942026.zip",
+          "file": {
+            "file": "sources/hdx-wca-wca_admbnda_adm1_edgematched_942026.zip.gz",
+            "gzip_sha256": "e31849bce58a431e111e2cc578119fc6468a40231981f2956e802ccabb697646",
+            "gzip_bytes": 15726450,
+            "restored_bytes": 15758995,
+            "restored_sha256": "4d60dafb1868d2bfccc65eac5e24d7bee22bdc2915e27c48e2d3fd66ca3388d0"
+          }
+        },
+        {
+          "name": "wca_pplp_ocha.zip",
+          "url": "https://data.humdata.org/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/5f34e982-fbba-404b-a64f-31ad3480e157/download/wca_pplp_ocha.zip",
+          "file": {
+            "file": "sources/hdx-wca-wca_pplp_ocha.zip.gz",
+            "gzip_sha256": "793cbfc591980ec84b2130ab824dc07ea29241a1d98b51ec8075962ae2d6cef2",
+            "gzip_bytes": 15958365,
+            "restored_bytes": 19076332,
+            "restored_sha256": "66141b3dfe3c17c58ad7182ffa5230442935c58abe47cc636311a7f96ff5048f"
+          }
+        }
+      ],
+      "not_retained_resources": {
+        "admin2": {
+          "alt_url": "https://data.humdata.org/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/a62fbf64-e54f-4daa-ac1e-6be03552960f/download/",
+          "cache_last_updated": null,
+          "cache_url": null,
+          "created": "2026-04-20T15:24:45.234698",
+          "dataset_preview_enabled": false,
+          "datastore_active": false,
+          "description": "West and Central Africa admin2 boundaries with edge matched",
+          "download_url": "https://data.humdata.org/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/a62fbf64-e54f-4daa-ac1e-6be03552960f/download/wca_admbnda_adm2_edgematched_942026.zip",
+          "format": "SHP",
+          "hash": "",
+          "hdx_rel_url": "/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/a62fbf64-e54f-4daa-ac1e-6be03552960f/download/wca_admbnda_adm2_edgematched_942026.zip",
+          "id": "a62fbf64-e54f-4daa-ac1e-6be03552960f",
+          "last_modified": "2026-04-20T15:24:44.902077",
+          "metadata_modified": "2026-04-20T15:41:47.049432",
+          "microdata": false,
+          "mimetype": "application/x-zip-compressed",
+          "mimetype_inner": null,
+          "name": "wca_admbnda_adm2_edgematched_942026.zip",
+          "originalHash": "8750915",
+          "package_id": "b20cd345-93fb-43bd-9c6e-7bc7d87b63eb",
+          "pii": "false",
+          "position": 6,
+          "resource_type": "file.upload",
+          "shape_info": "[{\"state\": \"processing\", \"message\": \"The processing of the geo-preview has started\", \"layer_id\": \"None\", \"error_type\": \"None\", \"error_class\": \"None\", \"timestamp\": \"2026-04-20T15:24:44.599880\"}, {\"state\": \"success\", \"message\": \"Import successful\", \"layer_id\": \"pre_a62fbf64_e54f_4daa_ac1e_6be03552960f\", \"error_type\": \"None\", \"error_class\": \"None\", \"bounding_box\": \"BOX(-25.361187689959877 -13.45599817227776,31.30522057217172 27.289754250058763)\", \"layer_fields\": [{\"field_name\": \"ogc_fid\", \"data_type\": \"integer\"}, {\"field_name\": \"id\", \"data_type\": \"numeric\"}, {\"field_name\": \"adm2_name\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm2_name1\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm2_name2\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm2_name3\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm2_pcode\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm1_name\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm1_name1\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm1_name2\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm1_name3\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm1_pcode\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm0_name\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm0_name1\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm0_name2\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm0_name3\", \"data_type\": \"character varying\"}, {\"field_name\": \"adm0_pcode\", \"data_type\": \"character varying\"}, {\"field_name\": \"valid_on\", \"data_type\": \"date\"}, {\"field_name\": \"valid_to\", \"data_type\": \"date\"}, {\"field_name\": \"area_sqkm\", \"data_type\": \"character varying\"}, {\"field_name\": \"version\", \"data_type\": \"character varying\"}, {\"field_name\": \"lang\", \"data_type\": \"character varying\"}, {\"field_name\": \"lang1\", \"data_type\": \"character varying\"}, {\"field_name\": \"lang2\", \"data_type\": \"character varying\"}, {\"field_name\": \"lang3\", \"data_type\": \"character varying\"}, {\"field_name\": \"center_lat\", \"data_type\": \"character varying\"}, {\"field_name\": \"center_lon\", \"data_type\": \"character varying\"}, {\"field_name\": \"source\", \"data_type\": \"character varying\"}, {\"field_name\": \"area_sqkm2\", \"data_type\": \"character varying\"}, {\"field_name\": \"wkb_geometry\", \"data_type\": \"USER-DEFINED\"}], \"timestamp\": \"2026-04-20T15:24:58.789117\"}]",
+          "size": 27094403,
+          "state": "active",
+          "url": "https://data.humdata.org/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/a62fbf64-e54f-4daa-ac1e-6be03552960f/download/wca_admbnda_adm2_edgematched_942026.zip",
+          "url_type": "upload"
+        },
+        "reason": "The regional ADM2 archive has no scoped features-only transfer method in this packet and would add over 26 MB of broad data. Current country COD-AB sources and the licensed WCA point source are retained; official catalog restoration routes are recorded."
+      }
+    }
+  ],
+  "retained_derived_inputs": [
+    {
+      "file": "sources/wca-sle-tgo-settlements-subset.geojson.gz",
+      "sha256_gzip": "e01825b3104c939023d7b33b48bd64b261f268957ee06109f3c2158ed388d78d",
+      "purpose": "OCHA WCA settlement point feature filter (two countries)"
+    },
+    {
+      "file": "sources/wca-edge-matched-adm0-neighbors.geojson.gz",
+      "sha256_gzip": "15d647b95da3c3f0b88c18d26848d88cc1f377afaa68f453ae0aae74f3b30435",
+      "purpose": "Six-country national edge-match review subset"
+    },
+    {
+      "file": "sources/wca-edge-matched-adm1-neighbors.geojson.gz",
+      "sha256_gzip": "91794fa251b2300238bb9bb78551f2dd50beb015459b3628c7ed1cec679febb1",
+      "purpose": "Six-country admin1 context subset"
+    }
+  ],
+  "physical_source_access_record": "physical-source-access.json"
+}

@@ -1,0 +1,69 @@
+{
+  "scope": "Evidence proposals for issue #479 only; no changes to shared boundaries, hierarchy, geometry, canonical grid, or live data.",
+  "recommendations": [
+    {
+      "topic": "Sierra Leone admin1 parent reconciliation",
+      "affected_issue_479_ids": [
+        "gb:SLE:ADM2:65957751B7874629800584",
+        "gb:SLE:ADM2:65957751B90762568654783"
+      ],
+      "affected_names": [
+        "Kambia",
+        "Port Loko"
+      ],
+      "evidence": "The atlas parent is Northern; current OCHA COD-AB v02 (valid 2023-12-15) assigns both districts to North Western. The current national source defines five admin1 regions, while the baseline area/prefecture grouping reflects older province/region names.",
+      "proposed_action": "Retain the location IDs and request a coordinated parent-role decision: if the province tier is intended to reflect current regional divisions, move Kambia and Port Loko under a separately sourced North Western parent after the complete Sierra Leone crosswalk is integrated. If the tier preserves historical province units, explicitly date and source that purpose instead. Coordinate with #478, which owns Sierra Leone's two Western Area IDs; do not repin or edit the parent locally."
+    },
+    {
+      "topic": "Sierra Leone source-vintage and settlement reconciliation",
+      "affected_issue_479_ids": [
+        "gb:SLE:ADM2:65957751B29483301504535",
+        "gb:SLE:ADM2:65957751B98964407864499",
+        "gb:SLE:ADM2:65957751B90762568654783"
+      ],
+      "affected_names": [
+        "Bombali",
+        "Koinadugu",
+        "Port Loko"
+      ],
+      "evidence": "Current OCHA COD-AB adds Fabala and Karene to the 14-unit 2017 inventory. Positive-area overlay crosswalks show Fabala overlaps old Koinadugu and Karene overlaps old Bombali and Port Loko. The 2021 OCHA WCA settlement point source records 593 of the 13,371 points grouped by the 49 current COD-AB codes outside their same-code current polygon; 344 Koinadugu-code points fall in Fabala and 328 separately coded Falaba points fall in Koinadugu in the full-country screen.",
+      "proposed_action": "Create a bounded source/settlement crosswalk follow-up covering the complete Sierra Leone legacy inventory (12 IDs here plus the two Western Area IDs owned by #478), the two new current districts, and the named point mismatches. Keep all source vintages and point assignments separate until verified."
+    },
+    {
+      "topic": "Togo 2017 OSM to current official COD-AB crosswalk",
+      "affected_issue_479_ids": [
+        "All 37 Togo member IDs in scope.json"
+      ],
+      "affected_names": [
+        "All assigned Togo prefectures; especially Golfe, Oti, Kpendjal, and Lome Commune"
+      ],
+      "evidence": "The pinned 2017 geoBoundaries Togo layer cites OpenStreetMap/Wambacher; current OCHA COD-AB v02 (valid 2021-01-07) has 40 ADM2 units rather than 37, including Agoe-Nyive, Naki-Ouest, and Oti-Sud. The complete positive-area overlay table preserves 253 old/current intersections. Two explicit name aliases are retained. OCHA metadata calls the 40 units prefectures, but the source names Lome Commune as a commune.",
+      "proposed_action": "Create a bounded current-source crosswalk for all 37 pinned Togo IDs, recording old-to-current footprints, all three new current units as external context, and the exceptional Lomé commune role. Do not infer new atlas IDs or transfer member footprints in this packet."
+    },
+    {
+      "topic": "Physical land, islands, and named fragments",
+      "affected_issue_479_ids": [
+        "All 49 member IDs in scope.json"
+      ],
+      "evidence": "All 181 disconnected current-source polygon components are enumerated. Bonthe alone has 83 components; OCHA settlement points fall within some fragments, but no authoritative named-island inventory was obtained. NOAA's product information page was reachable while its linked GSHHG download route returned HTTP 404.",
+      "proposed_action": "Restore an official NOAA coastline source and authoritative/traceable island gazetteer, reconcile each component and island candidate, and explicitly assess omitted land. The current component count is a screen, not proof of island completeness."
+    },
+    {
+      "topic": "Lomé commune statutory role and metropolitan continuity",
+      "affected_issue_479_ids": [
+        "gb:TGO:ADM2:65957751B64330283108396"
+      ],
+      "affected_names": [
+        "Lome Commune",
+        "Golfe",
+        "Agoe-Nyive"
+      ],
+      "evidence": "OCHA COD-AB v02 (valid 2021-01-07) names Lome Commune as an ADM2 commune while package notes summarize all 40 ADM2 units as prefectures. The current source assigns Lome Commune, Golfe and Agoe-Nyive to Maritime; they have respectively 1, 2 and 1 polygon components and 137, 121 and 156 WCA settlement points by current code. Their shared boundaries are inventoried in city-role-screen.json. No authoritative continuous-city/metropolitan footprint source was established.",
+      "proposed_action": "Obtain a statutory administrative-role source and a traceable urban extent or gazetteer before deciding whether Lomé Commune is properly treated as a commune/prefecture member and how the city/metro settlement is distributed across adjacent ADM2 units. Do not infer an urban footprint from names, administrative adjacency or settlement-point counts; Agoe-Nyive remains external context."
+    }
+  ],
+  "neighboring_consistency": {
+    "result": "The OCHA WCA 2026 edge-matched ADM0 source represents shared edges with Guinea and Liberia for Sierra Leone and Ghana and Benin for Togo with zero areal overlap. This is one-source country-level consistency evidence, not a sovereignty finding or proof that all adjacent regional boundaries are approved.",
+    "coordinated_boundary_request": "None identified from this same-source screen. Any later cross-region or macro-envelope inconsistency must be referred jointly to affected neighbors and the macro owner."
+  }
+}

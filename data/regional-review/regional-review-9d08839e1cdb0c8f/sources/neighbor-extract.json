@@ -1,0 +1,36 @@
+{
+  "0": {
+    "file": "sources/wca-edge-matched-adm0-neighbors.geojson.gz",
+    "features": 6,
+    "countries": [
+      "Benin",
+      "Ghana",
+      "Guinea",
+      "Liberia",
+      "Sierra Leone",
+      "Togo"
+    ],
+    "sha256": "4bb51cbd3c0d2a5aa4f3e3416aba50ea858ba7bbde8590910d20562163fea12f",
+    "gzip_sha256": "15d647b95da3c3f0b88c18d26848d88cc1f377afaa68f453ae0aae74f3b30435",
+    "ogr_version": "GDAL 3.10.3, released 2025/04/01",
+    "source_archive_sha256": "b0f2066bd02de276cbc2ba0f2b00044c17b1aecba859d003bdefcbdc7dded19d",
+    "filter": "adm0_name IN ('Sierra Leone','Togo','Guinea','Liberia','Ghana','Benin')"
+  },
+  "1": {
+    "file": "sources/wca-edge-matched-adm1-neighbors.geojson.gz",
+    "features": 61,
+    "countries": [
+      "Benin",
+      "Ghana",
+      "Guinea",
+      "Liberia",
+      "Sierra Leone",
+      "Togo"
+    ],
+    "sha256": "0cf1e7ffaf8ccdfd467eb030a03d73c0da15ba647b0274f732e17df173ef990e",
+    "gzip_sha256": "91794fa251b2300238bb9bb78551f2dd50beb015459b3628c7ed1cec679febb1",
+    "ogr_version": "GDAL 3.10.3, released 2025/04/01",
+    "source_archive_sha256": "e31849bce58a431e111e2cc578119fc6468a40231981f2956e802ccabb697646",
+    "filter": "adm0_name IN ('Sierra Leone','Togo','Guinea','Liberia','Ghana','Benin')"
+  }
+}
