@@ -1,0 +1,40 @@
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+import http from 'node:http';
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {chromium} from '@playwright/test';
+const previewDirectory=process.argv[4],bundleDirectory=process.argv[5];
+const origin=new URL(process.argv[2]??''),output=process.argv[3];if(origin.protocol!=='https:'||origin.pathname!=='/'||origin.username||origin.password||origin.search||origin.hash||!output||!process.stdin.isTTY)throw Error('Supply Site and receipt with hidden terminal input');
+process.stdin.setRawMode(true);console.log('Ready for private browser credential on hidden stdin.');
+const token=await new Promise(resolve=>{let value='';process.stdin.on('data',chunk=>{value+=chunk.toString();if(!/[\r\n]/.test(value))return;process.stdin.pause();process.stdin.setRawMode(false);resolve(JSON.parse(value.trim()).token);});});
+// Local GET-only transport lets headless Chromium use the session's authorized
+// Node proxy/TLS configuration. It never exposes the credential to the browser.
+const server=http.createServer(async(req,res)=>{try{if(req.method!=='GET'||req.url.startsWith('//')){res.writeHead(405);return res.end();}const url=new URL(req.url,origin);if(url.origin!==origin.origin)throw Error('Unsupported route');const local=previewDirectory&&(url.pathname==='/'?'index.html':/^\/assets\/[a-zA-Z0-9._-]+$/.test(url.pathname)?url.pathname.slice(1):null);
+      if(local&&fs.existsSync(path.join(previewDirectory,local))){const bytes=fs.readFileSync(path.join(previewDirectory,local));res.writeHead(200,{'Content-Type':local.endsWith('.js')?'text/javascript':local.endsWith('.css')?'text/css':'text/html'});return res.end(bytes);}
+const bundled=bundleDirectory&&(url.pathname==='/reference-attributes/startup-bundle.json.gz'?'reference-attributes/startup-bundle.json.gz':/^\/ownership\/startup-runs-[0-9]+\.bin\.gz$/.test(url.pathname)?url.pathname.slice(1):null);
+if(bundled){const bytes=fs.readFileSync(path.join(bundleDirectory,bundled));res.writeHead(200,{'Content-Type':'application/gzip'});return res.end(bytes);}
+const remote=await fetch(url,{headers:{'OAI-Sites-Authorization':'Bearer '+token},redirect:'error',signal:AbortSignal.timeout(60000)}),headers={};for(const key of ['content-type','cache-control','etag','last-modified'])if(remote.headers.has(key))headers[key]=remote.headers.get(key);let bytes=Buffer.from(await remote.arrayBuffer());
+if(bundleDirectory&&url.pathname==='/atlas-geography.json'){
+ const proof=JSON.parse(fs.readFileSync(path.join(bundleDirectory,'preview-root-proof.json')));
+ if(remote.status!==200||createHash('sha256').update(bytes).digest('hex')!==proof.original_sha256)throw Error('Actual root changed');
+ bytes=fs.readFileSync(path.join(bundleDirectory,'atlas-geography.json'));
+ if(createHash('sha256').update(bytes).digest('hex')!==proof.candidate_sha256)throw Error('Candidate root changed');
+ delete headers.etag;delete headers['last-modified'];
+}
+res.writeHead(remote.status,headers);res.end(bytes);}catch{if(!res.headersSent)res.writeHead(502);res.end('Verification transport unavailable');}});
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));let browser;const profileReadbacks=[],modeReadbacks=[];
+try{
+ browser=await chromium.launch();const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://127.0.0.1:'+server.address().port);await page.locator('#loading').waitFor({state:'hidden',timeout:120000});await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:120000});assert.equal(await page.locator('#year-error').textContent(),'');
+ const profiles=[['Hong Kong','atlas:territory:HKG','Asia'],['London','atlas:city:GBR-Greater London','Europe'],['New York City','atlas:city:USA-New-York-City','North America'],['São Paulo','gb:BRA:ADM2:56859067B92864763247255','South America'],['Cairo','atlas:city:EGY-1533','Africa'],['Melbourne','gb:AUS:ADM2:25037944B74771981745191','Oceania']];
+ for(const [query,id,continent] of profiles){await page.locator('#search').fill(query);await page.locator(`[data-result="${id}"]`).click();assert.equal(await page.locator('.profile-attributes dd').count(),8);assert.equal(await page.locator('.breadcrumbs [data-unit]').count(),6);assert.match(await page.locator('.breadcrumbs').textContent(),new RegExp(continent));assert.match(await page.locator('.profile-name-context').textContent(),/Present-day reference:/);profileReadbacks.push({year:2026,id,continent,values:await page.locator('.profile-attributes dd').allTextContents(),name_context:await page.locator('.profile-name-context').textContent()});await page.locator('#close-details').click();}
+ const modes=await page.locator('[data-mode]').evaluateAll(nodes=>nodes.map(n=>n.dataset.mode));for(const mode of modes){const old=await page.locator('.atlas-pixel-canvas').evaluate(c=>Number(c.dataset.uploads));await page.locator(`[data-mode="${mode}"]`).click();await page.waitForFunction(old=>Number(document.querySelector('.atlas-pixel-canvas').dataset.uploads)>old,old);modeReadbacks.push({mode,canvas:await page.locator('.atlas-pixel-canvas').evaluate(c=>({...c.dataset}))});}assert.equal(modes.length,14);assert.equal(await page.locator('#borders').count(),0);
+ const before=await page.locator('.atlas-pixel-canvas').evaluate(c=>({...c.dataset}));await page.locator('#zoom-out').click();await page.waitForFunction(old=>document.querySelector('.atlas-pixel-canvas').dataset.frame!==old,before.frame);await page.setViewportSize({width:1200,height:900});await page.waitForTimeout(200);const after=await page.locator('.atlas-pixel-canvas').evaluate(c=>({...c.dataset}));assert.equal(after.compilations,before.compilations);assert.equal(after.ownershipUploads,before.ownershipUploads);
+ console.log('Six-continent profiles, fourteen modes and navigation passed. Loading historical snapshot.');
+ await page.locator('#year-input').fill('1800');await page.locator('#year-form button').click();
+ try{await page.waitForFunction(()=>document.querySelector('#map-year').textContent==='1,800 AD',null,{timeout:180000});await page.locator('#loading').waitFor({state:'hidden',timeout:180000});}
+ catch(error){console.log(JSON.stringify(await page.evaluate(()=>({year:document.querySelector('#map-year')?.textContent,loading:document.querySelector('#loading')?.textContent,error:document.querySelector('#year-error')?.textContent}))));throw error;}
+ assert.equal(await page.locator('#year-error').textContent(),'');assert.deepEqual(errors,[]);
+ fs.writeFileSync(output,JSON.stringify({verified_at_utc:new Date().toISOString(),site:origin.origin,read_only:true,candidate_preview:Boolean(previewDirectory),proxy:'Candidate frontend and new complete reference/ownership transport local; pinned original root and remaining GET-only data actual production',performance_proof:false,continents:profiles.map(p=>p[2]),profiles:profiles.length,profile_readbacks:profileReadbacks,mode_readbacks:modeReadbacks,modes,attributes_per_profile:8,hierarchy_tiers:6,year:1800,navigation_ownership_compilations:0,navigation_ownership_uploads:0,page_errors:errors,physical_mobile_test:false},null,2)+'\n');console.log(JSON.stringify({verified:true,continents:6,profiles:6,modes:14,year:1800,navigation_recompilations:0,navigation_ownership_uploads:0}));
+}finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}

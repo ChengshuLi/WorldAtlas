@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "method_id": "complete-startup-measurement",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "evidence_path": "data/engineering/startup-20261004-a9c2/candidate-startup-04.json",
+  "observed_at_utc": "2026-10-04T09:54:52.025Z",
+  "limits": [
+    "Actual complete preview; new parts local, provider wake/query timings unknown, no equivalent hosted ten-second acceptance",
+    "This typed receipt indexes completed raw browser observations; it is not a new browser run"
+  ],
+  "observations": {
+    "previous_year": "2,020 AD",
+    "visible_year": "2,020 AD",
+    "error": "Enter a year from 3000 BC to 2026 AD. There is no year zero.",
+    "new_requests": 0
+  }
+}

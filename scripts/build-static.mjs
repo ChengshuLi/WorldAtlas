@@ -61,7 +61,10 @@ try {
   }
   await fs.mkdir('dist/ownership',{recursive:true});
   const pixelMap=fixedGrid?Object.fromEntries(['version','coordinateBits','size','runWords','parts'].map(key=>[key,fixedGrid[key]])):{version:ownership.version??1,coordinateBits:ownership.coordinateBits,size:ownership.size,runWords:ownership.runs.length,parts:[]};
-  if(fixedGrid)for(const part of fixedGrid.parts){const bytes=await fs.readFile(`data/canonical-grid/${part.path}`);if(createHash('sha256').update(bytes).digest('hex')!==part.sha256)throw Error(`Precompiled ownership hash mismatch: ${part.path}`);await fs.writeFile(`dist/${part.path}`,bytes);}
+  // Original canonical files remain in data and prior published vintages. The
+  // deployment includes only the transport referenced by its new manifest;
+  // this build must never prune retained objects from the publisher's storage.
+  if(fixedGrid)for(const part of fixedGrid.parts){const bytes=await fs.readFile(`data/canonical-grid/${part.path}`);if(createHash('sha256').update(bytes).digest('hex')!==part.sha256)throw Error(`Precompiled ownership hash mismatch: ${part.path}`);if(fixedGrid.version!==2||part.kind==='rows')await fs.writeFile(`dist/${part.path}`,bytes);}
   else for(const kind of ['rows','runs'])for(let offset=0;offset<ownership[kind].length;offset+=1048576){
     const words=ownership[kind].slice(offset,offset+1048576),path=`ownership/${kind}-${offset}.bin.gz`;
     await fs.writeFile(`dist/${path}`,gzipSync(shuffleOwnershipBytes(words),{level:9}));pixelMap.parts.push({kind,offset,words:words.length,path,encoding:'byte-shuffle'});
@@ -82,7 +85,8 @@ try {
   await fs.writeFile('dist/environment-classifications.json',JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
   await packageOwnershipHistory({source:'data/ownership-history',destination:'dist/ownership-history',hosted:process.env.ATLAS_HOSTED_BUILD==='1'});
   await fs.cp('data/ownership-runtime','dist/ownership-runtime',{recursive:true});
-  await fs.cp('data/reference-attributes','dist/reference-attributes',{recursive:true});
+  // Complete original reference rows/index are pinned inside the new bundle.
+  // Originals remain in data and prior published vintages; never prune them.
   await fs.mkdir('dist/prepared-evidence',{recursive:true});
   await fs.copyFile('data/prepared-evidence/index.json','dist/prepared-evidence/index.json');
   for(const part of preparedEvidence.parts)await fs.copyFile(`data/prepared-evidence/${part.path}`,`dist/prepared-evidence/${part.path}`);
