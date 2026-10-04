@@ -27,10 +27,12 @@
       "license": "U.S. federal government work; public domain. Preserve Census Bureau attribution.",
       "license_reference": "https://www.census.gov/about/policies/copyright.html",
       "role": "Structured administrative-change records identify both successors as new entities formed from the split of Valdez-Cordova Census Area (261), with effective date, Census codes and ANSI codes.",
-      "retained_file": "sources/census-ak-county-changes-2014-2020.txt",
-      "bytes": 29077,
-      "sha256": "ac105f77616eee73c2937f2e7f0212a09d903f8398bdc4150113f9a90b5b845c",
-      "restoration": "Download the official plain-text source at the canonical URL above; the table is pipe-delimited. Verify whole-file SHA-256."
+      "retained_file": "sources/census-ak-county-changes-2014-2020.txt.gz",
+      "bytes": 3273,
+      "sha256": "548ea58b0ba50407ee2265e3a680b15ab95a136aeb53e319cefd735a74f73b46",
+      "uncompressed_bytes": 29077,
+      "uncompressed_sha256": "ac105f77616eee73c2937f2e7f0212a09d903f8398bdc4150113f9a90b5b845c",
+      "restoration": "Decompress the retained gzip to restore the exact original pipe-delimited plain-text source bytes and verify the uncompressed SHA-256, or retrieve the canonical URL above and compare it."
     },
     {
       "id": "geoboundaries-us-adm2-2018",

@@ -28,8 +28,7 @@ def main():
     metadata_path = 'data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2-metadata.json'
     metadata = json.loads(subprocess.check_output(['git','show',f'{BASE_COMMIT}:{metadata_path}']))
     overlays = state['2018_source_to_2024_tiger_crosswalk']['52423323B16539688175930']
-    text_path = ROOT / 'sources/census-ak-county-changes-2014-2020.txt'
-    with text_path.open(encoding='utf-8-sig', newline='') as f:
+    with gzip.open(ROOT / 'sources/census-ak-county-changes-2014-2020.txt.gz', 'rt', encoding='utf-8-sig', newline='') as f:
         events = list(csv.DictReader(f, delimiter='|'))
     direct = []
     for code, expected_name in [('063','Chugach Census Area'),('066','Copper River Census Area')]:

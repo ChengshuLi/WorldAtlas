@@ -28,7 +28,7 @@ def main():
     page_text=html.unescape(re.sub(r'\s+',' ',re.sub(r'<[^>]+>',' ',page)))
     quote='Alaska has announced the split of 02261 Valdez-Cordova borough into two new census areas, 02063 Chugach and 02066 Copper River.'
     assert quote in page_text and packet['official_successor_event']['quoted_event']==quote
-    with (ROOT/'sources/census-ak-county-changes-2014-2020.txt').open(encoding='utf-8-sig',newline='') as f:
+    with gzip.open(ROOT/'sources/census-ak-county-changes-2014-2020.txt.gz','rt',encoding='utf-8-sig',newline='') as f:
         events=list(csv.DictReader(f,delimiter='|'))
     selected=[]
     for code,name in [('063','Chugach Census Area'),('066','Copper River Census Area')]:
@@ -65,7 +65,7 @@ def main():
         'place_polygon_hits':28,'GNIS_populated_place_hits':46,'historical_geometry_ratio_pct_to_successor_pair':99.947342,
         'historical_geometry_ratio_pct_to_other_counties':0.040571},
       'inputs':{'census_page_gzip_sha256':sha(ROOT/'sources/census-2019-geography-changes.html.gz'),
-        'change_table_sha256':sha(ROOT/'sources/census-ak-county-changes-2014-2020.txt'),
+        'change_table_gzip_sha256':sha(ROOT/'sources/census-ak-county-changes-2014-2020.txt.gz'),
         'successor_crosswalk_sha256':sha(ROOT/'successor-crosswalk.json')},
       'environment':{'python':platform.python_version()},
       'limitations':['These checks establish agreement among the retained official event records, Census successor identifiers, and inherited identity/screen data. They do not prove complete historical legal boundaries or political control.']}
