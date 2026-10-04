@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "issue": 579,
+  "parent_packet_issue": 496,
+  "status": "corrected-and-revalidated",
+  "pr_base_commit": "b5254801fdd6f8be73c7d49ff203bd4e9fdfcbb2",
+  "original_assessment": {
+    "path": "data/regional-review/regional-review-a1f74bfb55fcb8c1/assessment.json",
+    "bytes": 5318026,
+    "sha256": "e3ead3235c197056ba5fdfaa6fce40fd12ea562ff710240aa78b70df2307e4d2",
+    "git_blob": "a98de18314f6af597379265714e97f8eb56a6ef9"
+  },
+  "original_generator": {
+    "path": "data/regional-review/regional-review-a1f74bfb55fcb8c1/build_assessment.py",
+    "bytes": 24202,
+    "sha256": "e652ab3a45aafe908f4cfa35a8d3bce27ad21b18214ea1f8d1ba7f1f6a8f226f",
+    "git_blob": "ef294e60a241b9463316529398ec08661388d497"
+  },
+  "correction": {
+    "field": "assessment.release_pins.hierarchy_sha256",
+    "previous_value": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab383f28549d",
+    "previous_hex_characters": 61,
+    "corrected_value": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "corrected_hex_characters": 64,
+    "method": "SHA-256 over the raw data/hierarchy.json bytes at the immutable assigned V5 release commit; independently matched to the V5 release catalog, V5 envelope index, retained compressed predecessor inspection archive, and every assigned subject's V5 parent chain."
+  },
+  "assigned_v5_baseline": {
+    "commit": "277b8ecbb3199ae3d5fb07bab96353d17a049b1c",
+    "release_id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+    "release_version": 5,
+    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "region_geometry_sha256": "d9a352b5dd66765ca5469161b9eaecebe7534659bc5b5874ad881bae8b668d04",
+    "region_member_ids_sha256": "8d731d2ee48c6c347d74cc6c8cd660444c4796851df8cda4a9a437c6a1ff217c",
+    "original_scope_release_id": "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+    "original_scope_release_version": 3,
+    "original_scope_hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
+    "original_scope_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+    "scope_ids_sha256": "9417f24b6534a3fcf6485ce6cf1b75f0f232fb21c0966edb3dbc97c09297dfbb",
+    "assigned_locations": 228,
+    "assigned_provinces": 30,
+    "assigned_areas": 3,
+    "reconstructed_region_locations": 1667
+  },
+  "source_method": {
+    "authority": "Immutable Git tree for assigned geography release v5, including gzip release catalog, hierarchy, macro certificate, envelope index, regional handoff and archived v3 hierarchy/envelope index.",
+    "source_date": "2026-10-02 release reference date; source artifacts are pinned by commit and full byte hashes.",
+    "license": "Repository-retained WorldAtlas release artifacts; no external source bytes copied or relicensed by this correction.",
+    "restoration": "Fetch commit 277b8ecbb3199ae3d5fb07bab96353d17a049b1c and use git show COMMIT:path. The issue scope and original V3 hierarchy archive/index are retained at the PR-base commit.",
+    "limits": [
+      "Release pin correctness and exact issue-scope parent-chain reproduction are checked; this does not independently validate the source facts originally assessed in #496.",
+      "All 228 existing decisions and their unresolved settlement, disconnected-land, administrative-role, topology and neighbor findings are preserved.",
+      "No shared hierarchy, geometry, regional boundary, political ownership or historical attribute is changed or approved."
+    ]
+  }
+}
