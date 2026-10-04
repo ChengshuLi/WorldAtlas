@@ -1,0 +1,716 @@
+classify	Set up job	﻿2026-10-04T01:59:31.2544969Z Current runner version: '2.337.0'
+classify	Set up job	2026-10-04T01:59:31.2571029Z ##[group]Runner Image Provisioner
+classify	Set up job	2026-10-04T01:59:31.2571948Z Hosted Compute Agent
+classify	Set up job	2026-10-04T01:59:31.2572546Z Version: 20260901.588
+classify	Set up job	2026-10-04T01:59:31.2573285Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+classify	Set up job	2026-10-04T01:59:31.2574133Z Build Date: 2026-09-01T19:56:44Z
+classify	Set up job	2026-10-04T01:59:31.2574901Z Worker ID: {1fc8340d-313a-48ff-857c-ecce95b408c8}
+classify	Set up job	2026-10-04T01:59:31.2575700Z Azure Region: westus
+classify	Set up job	2026-10-04T01:59:31.2576270Z ##[endgroup]
+classify	Set up job	2026-10-04T01:59:31.2578583Z ##[group]Operating System
+classify	Set up job	2026-10-04T01:59:31.2579363Z Ubuntu
+classify	Set up job	2026-10-04T01:59:31.2579983Z 24.04.5
+classify	Set up job	2026-10-04T01:59:31.2580529Z LTS
+classify	Set up job	2026-10-04T01:59:31.2581051Z ##[endgroup]
+classify	Set up job	2026-10-04T01:59:31.2581673Z ##[group]Runner Image
+classify	Set up job	2026-10-04T01:59:31.2582411Z Image: ubuntu-24.04
+classify	Set up job	2026-10-04T01:59:31.2583053Z Version: 20260927.320.1
+classify	Set up job	2026-10-04T01:59:31.2584151Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+classify	Set up job	2026-10-04T01:59:31.2585967Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+classify	Set up job	2026-10-04T01:59:31.2587076Z ##[endgroup]
+classify	Set up job	2026-10-04T01:59:31.2588648Z ##[group]GITHUB_TOKEN Permissions
+classify	Set up job	2026-10-04T01:59:31.2590895Z Contents: read
+classify	Set up job	2026-10-04T01:59:31.2591670Z Metadata: read
+classify	Set up job	2026-10-04T01:59:31.2592375Z PullRequests: read
+classify	Set up job	2026-10-04T01:59:31.2593001Z ##[endgroup]
+classify	Set up job	2026-10-04T01:59:31.2595134Z Secret source: Actions
+classify	Set up job	2026-10-04T01:59:31.2596150Z Cache mode: write
+classify	Set up job	2026-10-04T01:59:31.2596921Z Prepare workflow directory
+classify	Set up job	2026-10-04T01:59:31.2945467Z Prepare all required actions
+classify	Set up job	2026-10-04T01:59:31.3017430Z Getting action download info
+classify	Set up job	2026-10-04T01:59:31.6659195Z Download action repository 'actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+classify	Set up job	2026-10-04T01:59:31.7954121Z Download action repository 'actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38' (SHA:249970729cb0ef3589644e2896645e5dc5ba9c38)
+classify	Set up job	2026-10-04T01:59:31.8978366Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+classify	Set up job	2026-10-04T01:59:32.1131923Z Complete job name: classify
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	﻿2026-10-04T01:59:32.1937412Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1939076Z with:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1939624Z   ref: 8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1940248Z   path: trusted
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1940723Z   persist-credentials: false
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1941268Z   sparse-checkout-cone-mode: false
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1942013Z   sparse-checkout: scripts/classify-deployment-budget.mjs
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	package.json
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1942807Z   repository: ChengshuLi/WorldAtlas
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1946692Z   token: ***
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1947144Z   ssh-strict: true
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1947597Z   ssh-user: git
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1948442Z   clean: true
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1948897Z   fetch-depth: 1
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1949338Z   fetch-tags: false
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1949819Z   show-progress: true
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1950281Z   lfs: false
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1950708Z   submodules: false
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1951184Z   set-safe-directory: true
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1951712Z   allow-unsafe-pr-checkout: false
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.1952611Z ##[endgroup]
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3283674Z Syncing repository: ChengshuLi/WorldAtlas
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3290803Z ##[group]Getting Git version info
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3292781Z Working directory is '/home/runner/work/WorldAtlas/WorldAtlas/trusted'
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3296413Z [command]/usr/bin/git version
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3387514Z git version 2.55.0
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3393425Z ##[endgroup]
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3435969Z Temporarily overriding HOME='/home/runner/work/_temp/85606a0c-303b-4ce7-882a-d3d3acda2d04' before making global git config changes
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3439139Z Adding repository directory to the temporary git global config as a safe directory
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3442084Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas/trusted
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3521766Z ##[group]Determining repository object format
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3523665Z ##[endgroup]
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3525460Z ##[group]Initializing the repository
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3527090Z [command]/usr/bin/git init /home/runner/work/WorldAtlas/WorldAtlas/trusted
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3710546Z hint: Using 'master' as the name for the initial branch. This default branch name
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3713290Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3716718Z hint: to use in all of your new repositories, which will suppress this warning,
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3718263Z hint: call:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3719036Z hint:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3719943Z hint: 	git config --global init.defaultBranch <name>
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3720993Z hint:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3722118Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3723945Z hint: 'development'. The just-created branch can be renamed via this command:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3725320Z hint:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3726001Z hint: 	git branch -m <name>
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3726781Z hint:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3728316Z hint: Disable this message with "git config set advice.defaultBranchName false"
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3730295Z Initialized empty Git repository in /home/runner/work/WorldAtlas/WorldAtlas/trusted/.git/
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3733689Z [command]/usr/bin/git remote add origin https://github.com/ChengshuLi/WorldAtlas
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.3885145Z ##[endgroup]
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.4974333Z ##[group]Disabling automatic garbage collection
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.4980506Z [command]/usr/bin/git config --local gc.auto 0
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.4984335Z ##[endgroup]
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.4986105Z ##[group]Setting up auth
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.4987289Z Removing SSH command configuration
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.4989211Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.4993843Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.4998618Z Removing HTTP extra header
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5000922Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5005988Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5181760Z Removing includeIf entries pointing to credentials config files
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5188957Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5227372Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5478295Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5525645Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git.path /home/runner/work/_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5565097Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5615059Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/trusted/.git.path /github/runner_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5663046Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/trusted/.git/worktrees/*.path /github/runner_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5697331Z ##[endgroup]
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5699489Z ##[group]Fetching the repository
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.5709261Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --filter=blob:none --depth=1 origin 8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.9939233Z From https://github.com/ChengshuLi/WorldAtlas
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.9958999Z  * branch            8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388 -> FETCH_HEAD
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:32.9994382Z [command]/usr/bin/git rev-parse --verify --quiet 8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388^{object}
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0005006Z 8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0009589Z ##[endgroup]
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0011267Z ##[group]Determining the checkout info
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0013094Z ##[endgroup]
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0014786Z ##[group]Setting up sparse checkout
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0032566Z [command]/usr/bin/git config core.sparseCheckout true
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0078623Z [command]/usr/bin/git rev-parse --git-path info/sparse-checkout
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0107622Z .git/info/sparse-checkout
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0117461Z ##[endgroup]
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0120845Z ##[group]Checking out the ref
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.0123713Z [command]/usr/bin/git checkout --progress --force 8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5483819Z Note: switching to '8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388'.
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5485451Z 
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5493609Z You are in 'detached HEAD' state. You can look around, make experimental
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5495994Z changes and commit them, and you can discard any commits you make in this
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5498431Z state without impacting any branches by switching back to a branch.
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5499803Z 
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5500766Z If you want to create a new branch to retain commits you create, you may
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5502862Z do so (now or later) by using -c with the switch command. Example:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5504651Z 
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5505434Z   git switch -c <new-branch-name>
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5506463Z 
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5507127Z Or undo this operation with:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5508366Z 
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5508984Z   git switch -
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5510124Z 
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5511146Z Turn off this advice by setting config variable advice.detachedHead to false
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5512426Z 
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5513443Z HEAD is now at 8e7ace3 Measure focused npm omission and exercise trusted queue proof
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5520768Z ##[endgroup]
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5558279Z [command]/usr/bin/git log -1 --format=%H
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5590429Z 8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5614403Z ##[group]Removing auth
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5618408Z Removing SSH command configuration
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5620721Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5662501Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5924013Z Removing HTTP extra header
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5927390Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.5971849Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6218631Z Removing includeIf entries pointing to credentials config files
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6222148Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6256819Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git.path
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6260153Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git/worktrees/*.path
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6381221Z includeif.gitdir:/github/workspace/trusted/.git.path
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6391487Z includeif.gitdir:/github/workspace/trusted/.git/worktrees/*.path
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6406698Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git.path
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6410795Z /home/runner/work/_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6420270Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git.path /home/runner/work/_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6429138Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git/worktrees/*.path
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6432899Z /home/runner/work/_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6442204Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/trusted/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6476893Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/trusted/.git.path
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6523826Z /github/runner_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6551707Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/trusted/.git.path /github/runner_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6612148Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/trusted/.git/worktrees/*.path
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6633069Z /github/runner_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6644752Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/trusted/.git/worktrees/*.path /github/runner_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6685268Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6930525Z Removing credentials config '/home/runner/work/_temp/git-credentials-11c0f7e3-1d73-4454-b409-8d0d080ede18.config'
+classify	Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:33.6943158Z ##[endgroup]
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	﻿2026-10-04T01:59:33.7264901Z ##[group]Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:33.7266081Z with:
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:33.7266861Z   node-version: 24
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:33.7267698Z   check-latest: false
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:33.7272392Z   token: ***
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:33.7273239Z   package-manager-cache: true
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:33.7274122Z ##[endgroup]
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:33.8845567Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:33.8848959Z ##[group]Environment details
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:34.4709687Z node: v24.21.0
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:34.4729068Z npm: 11.19.0
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:34.4730928Z yarn: 1.22.22
+classify	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T01:59:34.4750277Z ##[endgroup]
+classify	Classify complete changed paths with trusted base code	﻿2026-10-04T01:59:34.4956023Z ##[group]Run if test -f trusted/scripts/classify-deployment-budget.mjs && node trusted/scripts/classify-deployment-budget.mjs; then
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.4958918Z [36;1mif test -f trusted/scripts/classify-deployment-budget.mjs && node trusted/scripts/classify-deployment-budget.mjs; then[0m
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.4960550Z [36;1m  :[0m
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.4961191Z [36;1melse[0m
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.4961915Z [36;1m  echo 'full=true' >> "$GITHUB_OUTPUT"[0m
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.4962839Z [36;1m  mkdir -p .cache[0m
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.4964429Z [36;1m  echo '{"version":1,"full":true,"fallback":true,"reason":"Trusted classifier unavailable or failed"}' > .cache/deployment-budget-scope.json[0m
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.4966109Z [36;1mfi[0m
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.5261979Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.5263042Z env:
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.5269047Z   GH_TOKEN: ***
+classify	Classify complete changed paths with trusted base code	2026-10-04T01:59:34.5269786Z ##[endgroup]
+classify	Retain applicability decision	﻿2026-10-04T01:59:34.5542842Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+classify	Retain applicability decision	2026-10-04T01:59:34.5544356Z with:
+classify	Retain applicability decision	2026-10-04T01:59:34.5545042Z   name: deployment-budget-scope
+classify	Retain applicability decision	2026-10-04T01:59:34.5545931Z   path: .cache/deployment-budget-scope.json
+classify	Retain applicability decision	2026-10-04T01:59:34.5546881Z   include-hidden-files: true
+classify	Retain applicability decision	2026-10-04T01:59:34.5547695Z   if-no-files-found: warn
+classify	Retain applicability decision	2026-10-04T01:59:34.5548842Z   compression-level: 6
+classify	Retain applicability decision	2026-10-04T01:59:34.5549622Z   overwrite: false
+classify	Retain applicability decision	2026-10-04T01:59:34.5550330Z ##[endgroup]
+classify	Retain applicability decision	2026-10-04T01:59:34.7669254Z (node:2215) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+classify	Retain applicability decision	2026-10-04T01:59:34.7676846Z (Use `node --trace-deprecation ...` to show where the warning was created)
+classify	Retain applicability decision	2026-10-04T01:59:34.7797170Z With the provided path, there will be 1 file uploaded
+classify	Retain applicability decision	2026-10-04T01:59:34.7825016Z Artifact name is valid!
+classify	Retain applicability decision	2026-10-04T01:59:34.7849037Z Root directory input is valid!
+classify	Retain applicability decision	2026-10-04T01:59:35.1739718Z Beginning upload of artifact content to blob storage
+classify	Retain applicability decision	2026-10-04T01:59:35.1956000Z (node:2215) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+classify	Retain applicability decision	2026-10-04T01:59:35.4542254Z Uploaded bytes 252
+classify	Retain applicability decision	2026-10-04T01:59:35.5293790Z Finished uploading artifact content to blob storage!
+classify	Retain applicability decision	2026-10-04T01:59:35.5308944Z SHA256 digest of uploaded artifact zip is bd4fb8b238c0d4fa1e091cbcacc88a5d49b99f09c409656bc32fe7a71bcbcdf1
+classify	Retain applicability decision	2026-10-04T01:59:35.5312657Z Finalizing artifact upload
+classify	Retain applicability decision	2026-10-04T01:59:35.8476698Z Artifact deployment-budget-scope.zip successfully finalized. Artifact ID 11290063836
+classify	Retain applicability decision	2026-10-04T01:59:35.8479310Z Artifact deployment-budget-scope has been successfully uploaded! Final size is 252 bytes. Artifact ID is 11290063836
+classify	Retain applicability decision	2026-10-04T01:59:35.8489608Z Artifact download URL: https://github.com/ChengshuLi/WorldAtlas/actions/runs/37169659224/artifacts/11290063836
+classify	Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	﻿2026-10-04T01:59:35.8679114Z Post job cleanup.
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	﻿2026-10-04T01:59:36.0252603Z Post job cleanup.
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1315232Z [command]/usr/bin/git version
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1388179Z git version 2.55.0
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1455651Z Temporarily overriding HOME='/home/runner/work/_temp/87e30c27-dd00-425f-8aef-20c9b017a6ec' before making global git config changes
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1462235Z Adding repository directory to the temporary git global config as a safe directory
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1464041Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas/trusted
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1516994Z Removing SSH command configuration
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1518519Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1564213Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1900502Z Removing HTTP extra header
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1901883Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.1988385Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.2365448Z Removing includeIf entries pointing to credentials config files
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.2367012Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+classify	Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803	2026-10-04T01:59:36.2449631Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+classify	Complete job	﻿2026-10-04T01:59:36.2986641Z Evaluate and set job outputs
+classify	Complete job	2026-10-04T01:59:36.2992403Z Set output 'full'
+classify	Complete job	2026-10-04T01:59:36.2994338Z Cleaning up orphan processes
+classify	Complete job	2026-10-04T01:59:36.3254871Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+package	Set up job	﻿2026-10-04T01:59:43.5363572Z Current runner version: '2.337.0'
+package	Set up job	2026-10-04T01:59:43.5404499Z ##[group]Runner Image Provisioner
+package	Set up job	2026-10-04T01:59:43.5405916Z Hosted Compute Agent
+package	Set up job	2026-10-04T01:59:43.5406866Z Version: 20260901.588
+package	Set up job	2026-10-04T01:59:43.5408377Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+package	Set up job	2026-10-04T01:59:43.5409700Z Build Date: 2026-09-01T19:56:44Z
+package	Set up job	2026-10-04T01:59:43.5410919Z Worker ID: {2f15e0e5-c13b-498c-b5c2-3f78334a8c0c}
+package	Set up job	2026-10-04T01:59:43.5412117Z Azure Region: centralus
+package	Set up job	2026-10-04T01:59:43.5413066Z ##[endgroup]
+package	Set up job	2026-10-04T01:59:43.5415474Z ##[group]Operating System
+package	Set up job	2026-10-04T01:59:43.5416623Z Ubuntu
+package	Set up job	2026-10-04T01:59:43.5417778Z 24.04.5
+package	Set up job	2026-10-04T01:59:43.5418666Z LTS
+package	Set up job	2026-10-04T01:59:43.5419518Z ##[endgroup]
+package	Set up job	2026-10-04T01:59:43.5420514Z ##[group]Runner Image
+package	Set up job	2026-10-04T01:59:43.5421609Z Image: ubuntu-24.04
+package	Set up job	2026-10-04T01:59:43.5422527Z Version: 20260927.320.1
+package	Set up job	2026-10-04T01:59:43.5424511Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+package	Set up job	2026-10-04T01:59:43.5427943Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+package	Set up job	2026-10-04T01:59:43.5429761Z ##[endgroup]
+package	Set up job	2026-10-04T01:59:43.5431739Z ##[group]GITHUB_TOKEN Permissions
+package	Set up job	2026-10-04T01:59:43.5434759Z Contents: read
+package	Set up job	2026-10-04T01:59:43.5435698Z Metadata: read
+package	Set up job	2026-10-04T01:59:43.5436876Z ##[endgroup]
+package	Set up job	2026-10-04T01:59:43.5439765Z Secret source: Actions
+package	Set up job	2026-10-04T01:59:43.5440960Z Cache mode: write
+package	Set up job	2026-10-04T01:59:43.5442078Z Prepare workflow directory
+package	Set up job	2026-10-04T01:59:43.5859815Z Prepare all required actions
+package	Set up job	2026-10-04T01:59:43.5929554Z Getting action download info
+package	Set up job	2026-10-04T01:59:43.8716477Z Download action repository 'actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+package	Set up job	2026-10-04T01:59:43.9862047Z Download action repository 'actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38' (SHA:249970729cb0ef3589644e2896645e5dc5ba9c38)
+package	Set up job	2026-10-04T01:59:44.1369408Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+package	Set up job	2026-10-04T01:59:44.2262339Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+package	Set up job	2026-10-04T01:59:44.4621924Z Complete job name: package
+package	Checkout complete package inputs	﻿2026-10-04T01:59:44.5528839Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+package	Checkout complete package inputs	2026-10-04T01:59:44.5531425Z with:
+package	Checkout complete package inputs	2026-10-04T01:59:44.5532198Z   persist-credentials: false
+package	Checkout complete package inputs	2026-10-04T01:59:44.5533106Z   repository: ChengshuLi/WorldAtlas
+package	Checkout complete package inputs	2026-10-04T01:59:44.5540434Z   token: ***
+package	Checkout complete package inputs	2026-10-04T01:59:44.5541267Z   ssh-strict: true
+package	Checkout complete package inputs	2026-10-04T01:59:44.5542043Z   ssh-user: git
+package	Checkout complete package inputs	2026-10-04T01:59:44.5542764Z   clean: true
+package	Checkout complete package inputs	2026-10-04T01:59:44.5543526Z   sparse-checkout-cone-mode: true
+package	Checkout complete package inputs	2026-10-04T01:59:44.5544420Z   fetch-depth: 1
+package	Checkout complete package inputs	2026-10-04T01:59:44.5545121Z   fetch-tags: false
+package	Checkout complete package inputs	2026-10-04T01:59:44.5545833Z   show-progress: true
+package	Checkout complete package inputs	2026-10-04T01:59:44.5546562Z   lfs: false
+package	Checkout complete package inputs	2026-10-04T01:59:44.5547553Z   submodules: false
+package	Checkout complete package inputs	2026-10-04T01:59:44.5548321Z   set-safe-directory: true
+package	Checkout complete package inputs	2026-10-04T01:59:44.5549152Z   allow-unsafe-pr-checkout: false
+package	Checkout complete package inputs	2026-10-04T01:59:44.5550379Z ##[endgroup]
+package	Checkout complete package inputs	2026-10-04T01:59:44.7430945Z Syncing repository: ChengshuLi/WorldAtlas
+package	Checkout complete package inputs	2026-10-04T01:59:44.7480873Z ##[group]Getting Git version info
+package	Checkout complete package inputs	2026-10-04T01:59:44.7482383Z Working directory is '/home/runner/work/WorldAtlas/WorldAtlas'
+package	Checkout complete package inputs	2026-10-04T01:59:44.7491093Z [command]/usr/bin/git version
+package	Checkout complete package inputs	2026-10-04T01:59:44.7528708Z git version 2.55.0
+package	Checkout complete package inputs	2026-10-04T01:59:44.7534194Z ##[endgroup]
+package	Checkout complete package inputs	2026-10-04T01:59:44.7567447Z Temporarily overriding HOME='/home/runner/work/_temp/74d8080b-bb9d-4b54-a7d8-76c1e96713aa' before making global git config changes
+package	Checkout complete package inputs	2026-10-04T01:59:44.7588488Z Adding repository directory to the temporary git global config as a safe directory
+package	Checkout complete package inputs	2026-10-04T01:59:44.7706702Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas
+package	Checkout complete package inputs	2026-10-04T01:59:44.7713203Z Deleting the contents of '/home/runner/work/WorldAtlas/WorldAtlas'
+package	Checkout complete package inputs	2026-10-04T01:59:44.7715556Z ##[group]Determining repository object format
+package	Checkout complete package inputs	2026-10-04T01:59:44.7720153Z ##[endgroup]
+package	Checkout complete package inputs	2026-10-04T01:59:44.7729991Z ##[group]Initializing the repository
+package	Checkout complete package inputs	2026-10-04T01:59:44.7731294Z [command]/usr/bin/git init /home/runner/work/WorldAtlas/WorldAtlas
+package	Checkout complete package inputs	2026-10-04T01:59:44.7732795Z hint: Using 'master' as the name for the initial branch. This default branch name
+package	Checkout complete package inputs	2026-10-04T01:59:44.7734487Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+package	Checkout complete package inputs	2026-10-04T01:59:44.7736043Z hint: to use in all of your new repositories, which will suppress this warning,
+package	Checkout complete package inputs	2026-10-04T01:59:44.7737579Z hint: call:
+package	Checkout complete package inputs	2026-10-04T01:59:44.7738222Z hint:
+package	Checkout complete package inputs	2026-10-04T01:59:44.7739045Z hint: 	git config --global init.defaultBranch <name>
+package	Checkout complete package inputs	2026-10-04T01:59:44.7740038Z hint:
+package	Checkout complete package inputs	2026-10-04T01:59:44.7741128Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+package	Checkout complete package inputs	2026-10-04T01:59:44.7742684Z hint: 'development'. The just-created branch can be renamed via this command:
+package	Checkout complete package inputs	2026-10-04T01:59:44.7743932Z hint:
+package	Checkout complete package inputs	2026-10-04T01:59:44.7744590Z hint: 	git branch -m <name>
+package	Checkout complete package inputs	2026-10-04T01:59:44.7745357Z hint:
+package	Checkout complete package inputs	2026-10-04T01:59:44.7746408Z hint: Disable this message with "git config set advice.defaultBranchName false"
+package	Checkout complete package inputs	2026-10-04T01:59:44.7748299Z Initialized empty Git repository in /home/runner/work/WorldAtlas/WorldAtlas/.git/
+package	Checkout complete package inputs	2026-10-04T01:59:44.7750912Z [command]/usr/bin/git remote add origin https://github.com/ChengshuLi/WorldAtlas
+package	Checkout complete package inputs	2026-10-04T01:59:44.7758337Z ##[endgroup]
+package	Checkout complete package inputs	2026-10-04T01:59:44.7759672Z ##[group]Disabling automatic garbage collection
+package	Checkout complete package inputs	2026-10-04T01:59:44.7760725Z [command]/usr/bin/git config --local gc.auto 0
+package	Checkout complete package inputs	2026-10-04T01:59:44.7762916Z ##[endgroup]
+package	Checkout complete package inputs	2026-10-04T01:59:44.7764129Z ##[group]Setting up auth
+package	Checkout complete package inputs	2026-10-04T01:59:44.7764976Z Removing SSH command configuration
+package	Checkout complete package inputs	2026-10-04T01:59:44.7766177Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+package	Checkout complete package inputs	2026-10-04T01:59:44.7769876Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+package	Checkout complete package inputs	2026-10-04T01:59:44.8634278Z Removing HTTP extra header
+package	Checkout complete package inputs	2026-10-04T01:59:44.8636185Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+package	Checkout complete package inputs	2026-10-04T01:59:44.8641306Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+package	Checkout complete package inputs	2026-10-04T01:59:44.8733277Z Removing includeIf entries pointing to credentials config files
+package	Checkout complete package inputs	2026-10-04T01:59:44.8740251Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+package	Checkout complete package inputs	2026-10-04T01:59:44.8798845Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+package	Checkout complete package inputs	2026-10-04T01:59:44.9063778Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+package	Checkout complete package inputs	2026-10-04T01:59:44.9264111Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path /home/runner/work/_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T01:59:44.9270286Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T01:59:44.9276158Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T01:59:44.9325410Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T01:59:44.9367775Z ##[endgroup]
+package	Checkout complete package inputs	2026-10-04T01:59:44.9369883Z ##[group]Fetching the repository
+package	Checkout complete package inputs	2026-10-04T01:59:44.9378665Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +348bb961728267a2d0ed56e2e1a0754273e7fa2a:refs/remotes/pull/701/merge
+package	Checkout complete package inputs	2026-10-04T02:00:12.4866274Z From https://github.com/ChengshuLi/WorldAtlas
+package	Checkout complete package inputs	2026-10-04T02:00:12.4886355Z  * [new ref]         348bb961728267a2d0ed56e2e1a0754273e7fa2a -> pull/701/merge
+package	Checkout complete package inputs	2026-10-04T02:00:12.4928480Z ##[endgroup]
+package	Checkout complete package inputs	2026-10-04T02:00:12.4929301Z ##[group]Determining the checkout info
+package	Checkout complete package inputs	2026-10-04T02:00:12.4930107Z ##[endgroup]
+package	Checkout complete package inputs	2026-10-04T02:00:12.4930598Z [command]/usr/bin/git sparse-checkout disable
+package	Checkout complete package inputs	2026-10-04T02:00:12.4989597Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+package	Checkout complete package inputs	2026-10-04T02:00:12.5009442Z ##[group]Checking out the ref
+package	Checkout complete package inputs	2026-10-04T02:00:12.5012361Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/701/merge
+package	Checkout complete package inputs	2026-10-04T02:00:13.7691485Z Updating files:  44% (2912/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.2026880Z Updating files:  45% (2927/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.2181571Z Updating files:  46% (2992/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.2309386Z Updating files:  47% (3057/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.2427912Z Updating files:  48% (3122/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.2563765Z Updating files:  49% (3187/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.2691936Z Updating files:  50% (3252/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.2821031Z Updating files:  51% (3318/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.3410090Z Updating files:  52% (3383/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.3728069Z Updating files:  53% (3448/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.4241344Z Updating files:  54% (3513/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.4638473Z Updating files:  55% (3578/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.5075614Z Updating files:  56% (3643/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.5125980Z Updating files:  57% (3708/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.5549875Z Updating files:  57% (3717/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.6354191Z Updating files:  58% (3773/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.7432217Z Updating files:  59% (3838/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.8485534Z Updating files:  60% (3903/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.9100342Z Updating files:  61% (3968/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:14.9673574Z Updating files:  62% (4033/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.0123637Z Updating files:  63% (4098/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.0398175Z Updating files:  64% (4163/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.0634412Z Updating files:  65% (4228/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.1128668Z Updating files:  66% (4293/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.2964361Z Updating files:  67% (4358/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.3977292Z Updating files:  68% (4423/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.4304997Z Updating files:  69% (4488/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.4479737Z Updating files:  70% (4553/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.4631564Z Updating files:  71% (4618/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.5125587Z Updating files:  72% (4683/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.5249853Z Updating files:  72% (4730/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.6697647Z Updating files:  73% (4748/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.8499614Z Updating files:  74% (4813/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.8779424Z Updating files:  75% (4878/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:15.9109158Z Updating files:  76% (4944/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:16.0096169Z Updating files:  77% (5009/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:16.3762416Z Updating files:  78% (5074/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:16.5480113Z Updating files:  79% (5139/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:16.5750003Z Updating files:  79% (5186/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:16.7953893Z Updating files:  80% (5204/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:17.5163957Z Updating files:  81% (5269/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:17.5354258Z Updating files:  81% (5331/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:17.8190393Z Updating files:  82% (5334/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:18.2928192Z Updating files:  83% (5399/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:18.5433555Z Updating files:  84% (5464/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:18.7808945Z Updating files:  84% (5494/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.3279921Z Updating files:  85% (5529/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.3661830Z Updating files:  86% (5594/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.5344316Z Updating files:  87% (5659/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.8179241Z Updating files:  87% (5679/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.8215155Z Updating files:  88% (5724/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.8393968Z Updating files:  89% (5789/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9355984Z Updating files:  90% (5854/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9413990Z Updating files:  91% (5919/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9477653Z Updating files:  92% (5984/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9529671Z Updating files:  93% (6049/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9591181Z Updating files:  94% (6114/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9651054Z Updating files:  95% (6179/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9702515Z Updating files:  96% (6244/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9747784Z Updating files:  97% (6309/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9793519Z Updating files:  98% (6374/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9845726Z Updating files:  99% (6439/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9847464Z Updating files: 100% (6504/6504)
+package	Checkout complete package inputs	2026-10-04T02:00:19.9848282Z Updating files: 100% (6504/6504), done.
+package	Checkout complete package inputs	2026-10-04T02:00:20.3652805Z Note: switching to 'refs/remotes/pull/701/merge'.
+package	Checkout complete package inputs	2026-10-04T02:00:20.3673165Z 
+package	Checkout complete package inputs	2026-10-04T02:00:20.3704798Z You are in 'detached HEAD' state. You can look around, make experimental
+package	Checkout complete package inputs	2026-10-04T02:00:20.3717961Z changes and commit them, and you can discard any commits you make in this
+package	Checkout complete package inputs	2026-10-04T02:00:20.3737622Z state without impacting any branches by switching back to a branch.
+package	Checkout complete package inputs	2026-10-04T02:00:20.3757889Z 
+package	Checkout complete package inputs	2026-10-04T02:00:20.3777689Z If you want to create a new branch to retain commits you create, you may
+package	Checkout complete package inputs	2026-10-04T02:00:20.3778693Z do so (now or later) by using -c with the switch command. Example:
+package	Checkout complete package inputs	2026-10-04T02:00:20.3797178Z 
+package	Checkout complete package inputs	2026-10-04T02:00:20.3817392Z   git switch -c <new-branch-name>
+package	Checkout complete package inputs	2026-10-04T02:00:20.3827129Z 
+package	Checkout complete package inputs	2026-10-04T02:00:20.3837465Z Or undo this operation with:
+package	Checkout complete package inputs	2026-10-04T02:00:20.3857214Z 
+package	Checkout complete package inputs	2026-10-04T02:00:20.3877426Z   git switch -
+package	Checkout complete package inputs	2026-10-04T02:00:20.3877797Z 
+package	Checkout complete package inputs	2026-10-04T02:00:20.3897603Z Turn off this advice by setting config variable advice.detachedHead to false
+package	Checkout complete package inputs	2026-10-04T02:00:20.3917177Z 
+package	Checkout complete package inputs	2026-10-04T02:00:20.3937788Z HEAD is now at 348bb96 Merge f44057a61733792493e70dbda8c439eb42a41ec2 into 8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388
+package	Checkout complete package inputs	2026-10-04T02:00:20.4068232Z ##[endgroup]
+package	Checkout complete package inputs	2026-10-04T02:00:20.4162378Z [command]/usr/bin/git log -1 --format=%H
+package	Checkout complete package inputs	2026-10-04T02:00:20.4226156Z 348bb961728267a2d0ed56e2e1a0754273e7fa2a
+package	Checkout complete package inputs	2026-10-04T02:00:20.4283646Z ##[group]Removing auth
+package	Checkout complete package inputs	2026-10-04T02:00:20.4291227Z Removing SSH command configuration
+package	Checkout complete package inputs	2026-10-04T02:00:20.4299028Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+package	Checkout complete package inputs	2026-10-04T02:00:20.4358317Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+package	Checkout complete package inputs	2026-10-04T02:00:20.4810885Z Removing HTTP extra header
+package	Checkout complete package inputs	2026-10-04T02:00:20.4835122Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+package	Checkout complete package inputs	2026-10-04T02:00:20.4913916Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+package	Checkout complete package inputs	2026-10-04T02:00:20.5308047Z Removing includeIf entries pointing to credentials config files
+package	Checkout complete package inputs	2026-10-04T02:00:20.5318021Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+package	Checkout complete package inputs	2026-10-04T02:00:20.5337605Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path
+package	Checkout complete package inputs	2026-10-04T02:00:20.5370504Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path
+package	Checkout complete package inputs	2026-10-04T02:00:20.5387651Z includeif.gitdir:/github/workspace/.git.path
+package	Checkout complete package inputs	2026-10-04T02:00:20.5397905Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+package	Checkout complete package inputs	2026-10-04T02:00:20.5419738Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path
+package	Checkout complete package inputs	2026-10-04T02:00:20.5421175Z /home/runner/work/_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T02:00:20.5423825Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path /home/runner/work/_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T02:00:20.5684659Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path
+package	Checkout complete package inputs	2026-10-04T02:00:20.5722975Z /home/runner/work/_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T02:00:20.5739473Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T02:00:20.6660521Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+package	Checkout complete package inputs	2026-10-04T02:00:20.6694402Z /github/runner_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T02:00:20.6706458Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T02:00:20.7279232Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+package	Checkout complete package inputs	2026-10-04T02:00:20.7304405Z /github/runner_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T02:00:20.7322334Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config
+package	Checkout complete package inputs	2026-10-04T02:00:20.8705275Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+package	Checkout complete package inputs	2026-10-04T02:00:20.8973955Z Removing credentials config '/home/runner/work/_temp/git-credentials-1258756a-61b8-4748-a04d-97bfce3b08e1.config'
+package	Checkout complete package inputs	2026-10-04T02:00:20.9633337Z ##[endgroup]
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	﻿2026-10-04T02:00:21.6316072Z ##[group]Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:21.6316495Z with:
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:21.6316741Z   node-version: 24
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:21.6317284Z   cache: npm
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:21.6317585Z   check-latest: false
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:21.6319985Z   token: ***
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:21.6320229Z   package-manager-cache: true
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:21.6320520Z ##[endgroup]
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:22.4175097Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:22.4177454Z ##[group]Environment details
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:23.9253863Z node: v24.21.0
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:23.9254586Z npm: 11.19.0
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:23.9255094Z yarn: 1.22.22
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:23.9256612Z ##[endgroup]
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:23.9275490Z [command]/opt/hostedtoolcache/node/24.21.0/x64/bin/npm config get cache
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:24.0405683Z /home/runner/.npm
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:24.1885184Z Cache hit for: node-cache-Linux-x64-npm-ed10982d43b7691a65e5cc142c9533321156fe1886508a61aaa82df7a67525af
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:25.3558169Z Received 121634816 of 144571651 (84.1%), 115.7 MBs/sec
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:25.5835477Z Received 144571651 of 144571651 (100.0%), 111.7 MBs/sec
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:25.5841848Z Cache Size: ~138 MB (144571651 B)
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:25.5873316Z [command]/usr/bin/tar -xf /home/runner/work/_temp/b0d34335-0238-492c-ac76-f65b90321601/cache.tzst -P -C /home/runner/work/WorldAtlas/WorldAtlas --use-compress-program unzstd
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:25.9205533Z Cache restored successfully
+package	Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:00:25.9278897Z Cache restored from key: node-cache-Linux-x64-npm-ed10982d43b7691a65e5cc142c9533321156fe1886508a61aaa82df7a67525af
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-10-04T02:00:25.9550571Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:25.9551021Z with:
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:25.9551260Z   python-version: 3.12
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:25.9551507Z   cache: pip
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:25.9551731Z   check-latest: false
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:25.9554111Z   token: ***
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:25.9554356Z   update-environment: true
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:25.9554624Z   allow-prereleases: false
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:25.9554874Z   freethreaded: false
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:25.9555122Z ##[endgroup]
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:26.0985218Z ##[group]Installed versions
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:26.1076353Z (node:2238) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:26.1078351Z Successfully set up CPython (3.12.14)
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:26.1079552Z (Use `node --trace-deprecation ...` to show where the warning was created)
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:26.1080718Z ##[endgroup]
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:26.6268215Z [command]/opt/hostedtoolcache/Python/3.12.14/x64/bin/pip cache dir
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:26.9510899Z /home/runner/.cache/pip
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:27.1053703Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.14-pip-a34b8f577379f1491bca8a5e2668aaeeb45cc2ce8213f8a8bad5985f1de9f6b3
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:27.1178503Z (node:2238) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:28.1534240Z Received 87733829 of 87733829 (100.0%), 90.6 MBs/sec
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:28.1535272Z Cache Size: ~84 MB (87733829 B)
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:28.1738211Z [command]/usr/bin/tar -xf /home/runner/work/_temp/09b25901-f72f-4a2d-9ff5-93ad189da8a1/cache.tzst -P -C /home/runner/work/WorldAtlas/WorldAtlas --use-compress-program unzstd
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:28.3362025Z Cache restored successfully
+package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:00:28.3411941Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.14-pip-a34b8f577379f1491bca8a5e2668aaeeb45cc2ce8213f8a8bad5985f1de9f6b3
+package	Run npm ci --no-audit --no-fund	﻿2026-10-04T02:00:28.3626314Z ##[group]Run npm ci --no-audit --no-fund
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:28.3626750Z [36;1mnpm ci --no-audit --no-fund[0m
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:28.3868482Z shell: /usr/bin/bash -e {0}
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:28.3868805Z env:
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:28.3869126Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:28.3869644Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:28.3870116Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:28.3870553Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:28.3870968Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:28.3871402Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:28.3871762Z ##[endgroup]
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:32.8607554Z npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.hirok.io
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:32.9269160Z npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.hirok.io
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:33.0950010Z npm warn deprecated geographiclib@1.48.0: This package has been split into geographic-geodesic + geographiclib-dms; use one or both of these instead of geographiclib.  WARNING: there's a potential buffer overrun on this package.  SWITCH TO THE NEW PACKAGES NOW.
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9767476Z 
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9793659Z npm warn install-scripts 7 packages have install scripts not yet covered by allowScripts:
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9794594Z added 322 packages in 12s
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9798200Z npm warn install-scripts   esbuild@0.18.20 (postinstall: node install.js)
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9799486Z npm warn install-scripts   better-sqlite3@13.0.3 (install: node-gyp rebuild)
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9800663Z npm warn install-scripts   esbuild@0.25.12 (postinstall: node install.js)
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9801729Z npm warn install-scripts   esbuild@0.28.2 (postinstall: node install.js)
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9802956Z npm warn install-scripts   msgpackr-extract@3.0.4 (install: node-gyp-build-optional-packages)
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9804267Z npm warn install-scripts   workerd@1.20261001.1 (postinstall: node install.js)
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9807642Z npm warn install-scripts   esbuild@0.28.1 (postinstall: node install.js)
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9817538Z npm warn install-scripts
+package	Run npm ci --no-audit --no-fund	2026-10-04T02:00:39.9836448Z npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+package	Run python -m pip install -r requirements.txt	﻿2026-10-04T02:00:40.1639345Z ##[group]Run python -m pip install -r requirements.txt
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:40.1639869Z [36;1mpython -m pip install -r requirements.txt[0m
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:40.1717608Z shell: /usr/bin/bash -e {0}
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:40.1717922Z env:
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:40.1718233Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:40.1718719Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:40.1719175Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:40.1719586Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:40.1720002Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:40.1720413Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:40.1720772Z ##[endgroup]
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.0040403Z Collecting numpy==2.3.5 (from -r requirements.txt (line 2))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.0058106Z   Using cached numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.0979465Z Collecting shapely==2.1.2 (from -r requirements.txt (line 3))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.0994585Z   Using cached shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.8 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.1635085Z Collecting pyproj==3.7.2 (from -r requirements.txt (line 4))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.1649734Z   Using cached pyproj-3.7.2-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (31 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.2494137Z Collecting rasterio==1.4.3 (from -r requirements.txt (line 5))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.2511467Z   Using cached rasterio-1.4.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.1 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.3652107Z Collecting scipy==1.17.0 (from -r requirements.txt (line 6))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.3667515Z   Using cached scipy-1.17.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4033482Z Collecting certifi (from pyproj==3.7.2->-r requirements.txt (line 4))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4046614Z   Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4228181Z Collecting affine (from rasterio==1.4.3->-r requirements.txt (line 5))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4229148Z   Using cached affine-3.0.1-py3-none-any.whl.metadata (4.5 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4409885Z Collecting attrs (from rasterio==1.4.3->-r requirements.txt (line 5))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4423002Z   Using cached attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4633245Z Collecting click>=4.0 (from rasterio==1.4.3->-r requirements.txt (line 5))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4646189Z   Using cached click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4799079Z Collecting cligj>=0.5 (from rasterio==1.4.3->-r requirements.txt (line 5))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4812092Z   Using cached cligj-0.7.2-py3-none-any.whl.metadata (5.0 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4970225Z Collecting click-plugins (from rasterio==1.4.3->-r requirements.txt (line 5))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.4982984Z   Using cached click_plugins-1.1.1.2-py2.py3-none-any.whl.metadata (6.5 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5249669Z Collecting pyparsing (from rasterio==1.4.3->-r requirements.txt (line 5))
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5264022Z   Using cached pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5337887Z Using cached numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5407683Z Using cached shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.1 MB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5430564Z Using cached pyproj-3.7.2-cp312-cp312-manylinux_2_28_x86_64.whl (9.6 MB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5475780Z Using cached rasterio-1.4.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (22.3 MB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5566828Z Using cached scipy-1.17.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.0 MB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5711118Z Using cached click-8.5.0-py3-none-any.whl (125 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5723224Z Using cached cligj-0.7.2-py3-none-any.whl (7.1 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5735204Z Using cached affine-3.0.1-py3-none-any.whl (10 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5748858Z Using cached attrs-26.1.0-py3-none-any.whl (67 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5761408Z Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5774059Z Using cached click_plugins-1.1.1.2-py2.py3-none-any.whl (11 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.5786059Z Using cached pyparsing-3.3.3-py3-none-any.whl (126 kB)
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:41.7815799Z Installing collected packages: pyparsing, numpy, click, certifi, attrs, shapely, scipy, pyproj, cligj, click-plugins, affine, rasterio
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:49.2201301Z 
+package	Run python -m pip install -r requirements.txt	2026-10-04T02:00:49.2220321Z Successfully installed affine-3.0.1 attrs-26.1.0 certifi-2026.7.22 click-8.5.0 click-plugins-1.1.1.2 cligj-0.7.2 numpy-2.3.5 pyparsing-3.3.3 pyproj-3.7.2 rasterio-1.4.3 scipy-1.17.0 shapely-2.1.2
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	﻿2026-10-04T02:00:49.2979852Z ##[group]Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.2981171Z [36;1mnode --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs[0m
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.3059382Z shell: /usr/bin/bash -e {0}
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.3059700Z env:
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.3060011Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.3060525Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.3061004Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.3061427Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.3061845Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.3062248Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.3062598Z ##[endgroup]
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.5939642Z ✔ only explicit coordination controls, plain docs and engineering receipts avoid a package build (2.222969ms)
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.5959381Z ✔ renamed or copied runtime origins cannot hide behind documentation or receipt destinations (0.552682ms)
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.5975279Z ✔ PR inventory exhausts pages and catches a relevant path on a later page (1.047057ms)
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.5988667Z ✔ PR missing pages, changed heads, unavailable lookup and malformed inventories default full (0.708558ms)
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.5990243Z ✔ push before/after comparison includes rename origins and fails full for missing or capped inventories (0.893847ms)
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.5991089Z ✔ API failures use bounded authenticated read-only requests (0.55787ms)
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.5992289Z ✔ workflow keeps trusted bootstrap fallback, narrow focused inputs and mandatory real archive unit checks (182.877951ms)
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7069308Z ✔ exact upload archive accounting includes transport/config and preserves excluded sources (50.43702ms)
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7071896Z ✔ reserve breaches fail before hard limits and diagnostics name large files/categories (0.715177ms)
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7276533Z ✔ staged Site inventory agrees with actual archive and rejects redundant transport/linked inputs (21.263238ms)
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7354743Z ℹ tests 10
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7355437Z ℹ suites 0
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7358342Z ℹ pass 10
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7359219Z ℹ fail 0
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7359867Z ℹ cancelled 0
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7360459Z ℹ skipped 0
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7361016Z ℹ todo 0
+package	Run node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs	2026-10-04T02:00:49.7361684Z ℹ duration_ms 388.614253
+package	Build and enforce archive/file reserves without publishing	﻿2026-10-04T02:00:49.7468987Z ##[group]Run npm run build:hosted
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.7469546Z [36;1mnpm run build:hosted[0m
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.7568108Z shell: /usr/bin/bash -e {0}
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.7568435Z env:
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.7568771Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.7569272Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.7569751Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.7570166Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.7570581Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.7571004Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.7571352Z ##[endgroup]
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.8745260Z 
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.8746013Z > world-atlas@0.1.0 build:hosted
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.8747614Z > node scripts/build-hosted.mjs
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:00:49.8748239Z 
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:58.0153015Z [36mvite v7.3.6 [32mbuilding client environment for production...[36m[39m
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:58.0619548Z transforming...
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:59.2297804Z [32m✓[39m 40 modules transformed.
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:59.3658470Z rendering chunks...
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:59.3740620Z computing gzip size...
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:59.3874628Z [2mdist/[22m[32mindex.html                           [39m[1m[2m  0.46 kB[22m[1m[22m[2m │ gzip:   0.30 kB[22m
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:59.3880286Z [2mdist/[22m[2massets/[22m[32mpixel-gpu-worker-DOOaZKfq.js  [39m[1m[2m  2.33 kB[22m[1m[22m
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:59.3882173Z [2mdist/[22m[2massets/[22m[32mpixel-worker-DTOGFbAn.js      [39m[1m[2m  2.59 kB[22m[1m[22m
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:59.3884180Z [2mdist/[22m[2massets/[22m[35mindex-bXIaIiI7.css            [39m[1m[2m 31.40 kB[22m[1m[22m[2m │ gzip:  10.62 kB[22m
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:59.3886349Z [2mdist/[22m[2massets/[22m[36mindex-BHcfV7ll.js             [39m[1m[2m354.34 kB[22m[1m[22m[2m │ gzip: 107.80 kB[22m
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:01:59.3888236Z [32m✓ built in 1.35s[39m
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:19.0074468Z Static atlas ready: 49625 polygons and 4 dated records.
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9418779Z Deployment: 262127864 file bytes; tar 262574080 bytes; gzip 186388974 bytes.
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9483680Z Package reserve: 4194304 bytes; asset reserve: 1048576 bytes (1 MiB = 1048576 bytes).
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9497968Z Categories:
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9500289Z   hosting-config: 95 bytes (1 files)
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9502631Z   review-and-reference: 105380903 bytes (82 files)
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9507420Z   application: 391126 bytes (5 files)
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9509451Z   prepared-evidence: 2442574 bytes (89 files)
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9510395Z   geography: 39967574 bytes (88 files)
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9521884Z   ownership: 112363748 bytes (238 files)
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9522814Z   migration-transport: 1198772 bytes (42 files)
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9523651Z   worker: 383072 bytes (2 files)
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9524311Z Largest files:
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9525002Z   dist/client/pixel-audit.json: 14261738 bytes
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9525992Z   dist/client/geographic-migration-archive.json.gz: 10765139 bytes
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9527124Z   dist/client/atlas-geography.json: 10525834 bytes
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9528019Z   dist/client/granularity-audit.json: 10364271 bytes
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9529013Z   dist/client/ownership-history/candidate-recovery.json: 8663175 bytes
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9530093Z   dist/client/global-semantic-closure.json.gz: 8647580 bytes
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9530986Z   dist/client/world-review.json: 7716794 bytes
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9531882Z   dist/client/semantic-report.json: 6091596 bytes
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9532960Z   dist/client/ownership-history/location-identity-map.json.gz: 5087769 bytes
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9534123Z   dist/client/geographic-migration-review.json.gz: 3674892 bytes
+package	Build and enforce archive/file reserves without publishing	2026-10-04T02:02:27.9535633Z Hosted atlas ready: Worker API, persistent database declarations, media storage and fixed map assets.
+package	Retain exact file and archive accounting	﻿2026-10-04T02:02:28.2101113Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2101577Z with:
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2101810Z   name: deployment-budget
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2102092Z   path: .cache/deployment-budget.json
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2102425Z   include-hidden-files: true
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2102698Z   if-no-files-found: ignore
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2102962Z   compression-level: 6
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2103210Z   overwrite: false
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2103435Z env:
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2103716Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2104165Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2104610Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2105013Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2105416Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2106032Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.2106429Z ##[endgroup]
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.4886746Z (node:2536) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.4888637Z (Use `node --trace-deprecation ...` to show where the warning was created)
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.4970799Z With the provided path, there will be 1 file uploaded
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.5050331Z Artifact name is valid!
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.5053793Z Root directory input is valid!
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.7925184Z Beginning upload of artifact content to blob storage
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.8227992Z (node:2536) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+package	Retain exact file and archive accounting	2026-10-04T02:02:28.9767673Z Uploaded bytes 27250
+package	Retain exact file and archive accounting	2026-10-04T02:02:29.0164945Z Finished uploading artifact content to blob storage!
+package	Retain exact file and archive accounting	2026-10-04T02:02:29.0166695Z SHA256 digest of uploaded artifact zip is d7966611d17d15b6568e5e64ebfa44f4eb9fb00f6736102fb3b1c4500485d54f
+package	Retain exact file and archive accounting	2026-10-04T02:02:29.0168729Z Finalizing artifact upload
+package	Retain exact file and archive accounting	2026-10-04T02:02:29.2355779Z Artifact deployment-budget.zip successfully finalized. Artifact ID 11290878165
+package	Retain exact file and archive accounting	2026-10-04T02:02:29.2357744Z Artifact deployment-budget has been successfully uploaded! Final size is 27250 bytes. Artifact ID is 11290878165
+package	Retain exact file and archive accounting	2026-10-04T02:02:29.2364486Z Artifact download URL: https://github.com/ChengshuLi/WorldAtlas/actions/runs/37169659224/artifacts/11290878165
+package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-10-04T02:02:29.2567958Z Post job cleanup.
+package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:02:29.3873407Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.12.14-pip-a34b8f577379f1491bca8a5e2668aaeeb45cc2ce8213f8a8bad5985f1de9f6b3, not saving cache.
+package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:02:29.3876017Z (node:2549) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-04T02:02:29.3879183Z (Use `node --trace-deprecation ...` to show where the warning was created)
+package	Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	﻿2026-10-04T02:02:29.4011909Z Post job cleanup.
+package	Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38	2026-10-04T02:02:29.5584173Z Cache hit occurred on the primary key node-cache-Linux-x64-npm-ed10982d43b7691a65e5cc142c9533321156fe1886508a61aaa82df7a67525af, not saving cache.
+package	Post Checkout complete package inputs	﻿2026-10-04T02:02:29.5771414Z Post job cleanup.
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.6894762Z [command]/usr/bin/git version
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.7008241Z git version 2.55.0
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.7054124Z Temporarily overriding HOME='/home/runner/work/_temp/894a6531-b346-4922-8442-36f4f53a0a96' before making global git config changes
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.7055862Z Adding repository directory to the temporary git global config as a safe directory
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.7060544Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.7131678Z Removing SSH command configuration
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.7150138Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.7187164Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.7634408Z Removing HTTP extra header
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.7635698Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.7719740Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.8098069Z Removing includeIf entries pointing to credentials config files
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.8138349Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+package	Post Checkout complete package inputs	2026-10-04T02:02:29.8187366Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+package	Complete job	﻿2026-10-04T02:02:29.8800871Z Cleaning up orphan processes
+package	Complete job	2026-10-04T02:02:29.9177777Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,0 +1,42 @@
+import json, re
+from pathlib import Path
+from datetime import datetime
+D=Path(__file__).parent
+def duration(start,end):
+ a,b=(datetime.fromisoformat(s.replace('Z','+00:00')) for s in (start,end))
+ if a.tzinfo is None or b.tzinfo is None or b<a: raise ValueError('Expected timezone-aware ordered timestamps')
+ return (b-a).total_seconds()
+def write(name,value): (D/name).write_text(json.dumps(value,indent=2)+'\n')
+cases=[]
+for n in [0,9,147,171]:
+ end='2026-10-04T00:%02d:%02dZ'%(n//60,n%60)
+ actual=duration('2026-10-04T00:00:00Z',end);assert actual==n
+ cases.append({'expected_seconds':n,'actual_seconds':actual})
+write('positive-control.json',{'method_id':'hosted-budget-observation','kind':'positive-control','outcome':'passed','cases':cases})
+try:duration('2026-10-04T00:00:09Z','2026-10-04T00:00:00Z')
+except ValueError as e:write('negative-control.json',{'method_id':'hosted-budget-observation','kind':'negative-control','outcome':'passed','inverted_timestamps_rejected':True,'error':str(e)})
+else:raise AssertionError('Invalid duration accepted')
+samples={}
+for name in ['before-package','full-package','fast-package','fast-classify']:
+ j=json.loads((D/(name+'.json')).read_text());assert j['conclusion']=='success'
+ samples[name]={'job_id':j['id'],'head_sha':j['head_sha'],'started_at':j['started_at'],'completed_at':j['completed_at'],'seconds':duration(j['started_at'],j['completed_at'])}
+for name in ['full-package','fast-package']:
+ text=(D/(name+'.log')).read_text();counts={}
+ for key in ['tests','pass','fail','skipped']:
+  found=re.findall(r'ℹ '+key+r' (\d+)\s*$',text,re.M);assert len(found)==1,(name,key,found);counts[key]=int(found[0])
+ assert counts=={'tests':10,'pass':10,'fail':0,'skipped':0};samples[name]['counts']=counts
+ j=json.loads((D/(name+'.json')).read_text());steps={x['name']:x['conclusion'] for x in j['steps']}
+ full=name=='full-package'
+ for part in ['npm ci','pip install','Build and enforce','setup-python']:
+  selected=[v for k,v in steps.items() if part in k and not k.startswith('Post ')];assert selected==['success' if full else 'skipped'],(part,selected)
+ assert steps['Checkout complete package inputs']==('success' if full else 'skipped')
+ assert steps['Checkout only Node budget unit inputs']==('skipped' if full else 'success')
+ samples[name]['full_build_preserved' if full else 'install_and_build_skipped']=True
+text=(D/'fast-package.log').read_text();decisions=[json.loads(line.split('Z ',1)[1]) for line in text.splitlines() if '\tClassify complete changed paths with trusted base code\t' in line and 'Z {"version":1,"event"' in line]
+assert len(decisions)==1 and decisions[0]['full'] is False
+write('fast-decision.json',decisions[0])
+assert json.loads((D/'fast-scope.json').read_text())==decisions[0]
+assert json.loads((D/'full-scope.json').read_text())['full'] is True
+accounting=json.loads((D/'full-accounting.json').read_text()); assert not accounting['violations']
+write('measurement.json',{'samples':samples,'workflow_observation':{'run_id':37170353766,'run_started_at':'2026-10-04T02:12:48Z','updated_at':'2026-10-04T02:13:15Z','observed_elapsed_seconds':27},'limits':['Single observations on different runners; timestamps have second precision. Package-job timing excludes classifier and scheduling; workflow updated_at is an API observation, not exact runner CPU time.','Actual source accounting and applicability artifacts were downloaded via the connected GitHub API; this packet does not remeasure a package on the focused path.','Final owned-proof queue and main push are pending at packet publication.']})
+print('measurement controls and hosted assertions passed')

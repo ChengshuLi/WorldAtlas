@@ -1,0 +1,57 @@
+{
+  "samples": {
+    "before-package": {
+      "job_id": 111334071262,
+      "head_sha": "99de9b26d52ae5d3bdc501fe668493e85a4ada34",
+      "started_at": "2026-10-04T01:20:39Z",
+      "completed_at": "2026-10-04T01:23:06Z",
+      "seconds": 147.0
+    },
+    "full-package": {
+      "job_id": 111339870719,
+      "head_sha": "f44057a61733792493e70dbda8c439eb42a41ec2",
+      "started_at": "2026-10-04T01:59:41Z",
+      "completed_at": "2026-10-04T02:02:32Z",
+      "seconds": 171.0,
+      "counts": {
+        "tests": 10,
+        "pass": 10,
+        "fail": 0,
+        "skipped": 0
+      },
+      "full_build_preserved": true
+    },
+    "fast-package": {
+      "job_id": 111341934405,
+      "head_sha": "c663b9f455be9d276360f10a1c8247cf6b61b88e",
+      "started_at": "2026-10-04T02:13:05Z",
+      "completed_at": "2026-10-04T02:13:14Z",
+      "seconds": 9.0,
+      "counts": {
+        "tests": 10,
+        "pass": 10,
+        "fail": 0,
+        "skipped": 0
+      },
+      "install_and_build_skipped": true
+    },
+    "fast-classify": {
+      "job_id": 111341901093,
+      "head_sha": "c663b9f455be9d276360f10a1c8247cf6b61b88e",
+      "started_at": "2026-10-04T02:12:51Z",
+      "completed_at": "2026-10-04T02:13:01Z",
+      "seconds": 10.0
+    }
+  },
+  "workflow_observation": {
+    "run_id": 37170353766,
+    "run_started_at": "2026-10-04T02:12:48Z",
+    "updated_at": "2026-10-04T02:13:15Z",
+    "observed_elapsed_seconds": 27
+  },
+  "limits": [
+    "Single observations on different runners; timestamps have second precision. Package-job timing excludes classifier and scheduling; workflow updated_at is an API observation, not exact runner CPU time.",
+    "Actual source accounting and applicability artifacts were downloaded via the connected GitHub API; this packet does not remeasure a package on the focused path.",
+    "Final owned-proof queue and main push are pending at packet publication."
+  ]
+}
