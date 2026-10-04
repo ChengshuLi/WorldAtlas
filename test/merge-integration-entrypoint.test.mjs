@@ -40,7 +40,8 @@ test('trusted preparation has PR comment permission while candidate tests remain
   assert.match(candidate,/permissions:\n      contents: read/);assert.doesNotMatch(candidate,/pull-requests: write|issues: write|GH_TOKEN|secrets\./);
 });
 
-test('actual entry point saves candidate diagnostics even when notification fails',()=>{
+test('actual entry point saves stale/head/conflict/base diagnostics even when notification fails',()=>{
+ for(const kind of ['stale','head','conflict','base']) {
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-merge-diagnostics-'));
   const sha=c=>c.repeat(40),head=sha('a'),base=sha('b'),candidate=sha('c');
   fs.mkdirSync(path.join(directory,'.github'));
@@ -60,8 +61,14 @@ test('actual entry point saves candidate diagnostics even when notification fail
   };
   fs.writeFileSync(path.join(directory,'mock.mjs'),`const routes=${JSON.stringify(routes)};
     const realSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>realSetTimeout(fn,ms===2000?0:ms,...args);
+    let prReads=0,baseReads=0;
     globalThis.fetch=async(url,options)=>{
       const route=new URL(url).pathname.replace('/repos/owner/repo','');
+      if(route==='/pulls/2'&&++prReads===2) {
+        if('${kind}'==='head')routes[route].head.sha='d'.repeat(40);
+        if('${kind}'==='conflict')routes[route].mergeable=false;
+      }
+      if(route==='/git/ref/heads/main'&&++baseReads===2&&'${kind}'==='base')routes[route].object.sha='d'.repeat(40);
       return new Response(JSON.stringify(options.method==='POST'?{}:routes[route]??{}),{status:options.method==='POST'?403:200,headers:{'Content-Type':'application/json'}});
     };`);
   try {
@@ -70,10 +77,15 @@ test('actual entry point saves candidate diagnostics even when notification fail
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
     assert.notEqual(result.status,0);assert.match(result.stderr,/HTTP 403/);
-    assert.equal(receipt.retryable,true);assert.equal(receipt.candidate_diagnostics.attempt,6);
-    assert.equal(receipt.candidate_diagnostics.expected_base,base);
+    assert.equal(receipt.retryable,kind==='stale'||kind==='base');
+    assert.equal(receipt.candidate_diagnostics.attempt,kind==='stale'?6:1);
+    assert.equal(receipt.candidate_diagnostics.expected_base,kind==='base'?sha('d'):base);
+    assert.equal(receipt.candidate_diagnostics.expected_head,head);
     assert.equal(receipt.candidate_diagnostics.candidate,candidate);
-    assert.deepEqual(receipt.candidate_diagnostics.actual_parents,[sha('e'),head]);
-    assert.match(fs.readFileSync(path.join(directory,'summary'),'utf8'),/bounded refresh/);
+    assert.equal(receipt.candidate_diagnostics.reason,{stale:'stale-candidate',head:'head-changed',conflict:'conflict',base:'base-advanced'}[kind]);
+    assert.ok(receipt.candidate_diagnostics.observed_at);
+    if(kind==='stale')assert.deepEqual(receipt.candidate_diagnostics.actual_parents,[sha('e'),head]);
+    assert.match(fs.readFileSync(path.join(directory,'summary'),'utf8'),/stale|head changed|conflict|base advanced/);
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
+ }
 });

@@ -239,7 +239,13 @@ test('head/body changes and conflicts during refresh fail without integration or
       if(n===1)f.pr.merge_commit_sha=null;
       if(n===3) {if(field==='head')f.pr.head.sha=sha('e');else if(field==='body')f.pr.body='Refs #1';else f.pr.mergeable=false;}
     });
-    await assert.rejects(prepareIntegration(f.options()),/head changed|scope\/body changed|conflict/);
+    await assert.rejects(prepareIntegration(f.options()),error=>{
+      assert.match(error.message,/head changed|scope\/body changed|conflict/);
+      assert.equal(error.candidateDiagnostics.expected_head,f.head);
+      assert.equal(error.candidateDiagnostics.observed_head,field==='head'?sha('e'):f.head);
+      assert.equal(error.candidateDiagnostics.reason,{head:'head-changed',body:'pr-scope-changed',conflict:'conflict'}[field]);
+      assert.equal(error.candidateDiagnostics.attempt,2);assert.ok(error.candidateDiagnostics.observed_at);return true;
+    });
     assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
   }
 });
@@ -277,4 +283,14 @@ test('only candidate-object 404 is refreshable; access failures stop immediately
   const g=fixture(),gapi=g.api;
   g.api=async(route,...rest)=>{if(route.endsWith('/git/commits/'+g.candidate))throw Error('GitHub GET failed (HTTP 403)');return gapi(route,...rest);};
   await assert.rejects(prepareIntegration(g.options()),/HTTP 403/);assert.equal(g.writes.length,0);
+});
+
+test('post-wait main advance retains old expected and new observed base diagnostics',async()=>{
+  const f=fixture();sequencePR(f,(f,n)=>{f.parentBase=n<3?sha('e'):f.base;if(n===4)f.base=sha('d');});
+  await assert.rejects(prepareIntegration(f.options()),error=>{
+    assert.match(error.message,/base advanced during refresh validation/);
+    assert.equal(error.candidateDiagnostics.expected_base,sha('b'));
+    assert.equal(error.candidateDiagnostics.observed_base,sha('d'));
+    assert.equal(error.candidateDiagnostics.reason,'base-advanced');return true;
+  });assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
 });

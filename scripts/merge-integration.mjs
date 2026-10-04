@@ -55,17 +55,22 @@ export async function currentCandidate(options, state) {
   let diagnostics;
   for (let attempt = 1; attempt <= 6; attempt++) {
     const pr = await api(`${root(repo)}/pulls/${number}`);
-    unchangedPR(pr, state.pr);
+    const observation = {
+      candidate: commitID(pr.merge_commit_sha), observed_pr_base: commitID(pr.base.sha), observed_head: commitID(pr.head.sha),
+      inspected_pr_base: commitID(state.pr.base.sha), attempt, observed_at: new Date(now()).toISOString(), elapsed_ms: now() - started};
+    try { unchangedPR(pr, state.pr); }
+    catch (error) { throw candidateFailure(error.message, candidateDiagnostics(null, state.base, state.pr.head.sha,
+      {...observation, reason: pr.head.sha !== state.pr.head.sha ? 'head-changed' : 'pr-scope-changed'})); }
     const base = (await api(`${root(repo)}/git/ref/heads/main`)).object.sha;
     diagnostics = candidateDiagnostics(null, base, state.pr.head.sha, {
-      candidate: commitID(pr.merge_commit_sha), observed_pr_base: commitID(pr.base.sha),
-      attempt, observed_at: new Date(now()).toISOString(), elapsed_ms: now() - started});
+      ...observation});
     if (base !== state.base || pr.base.sha !== state.pr.base.sha) {
       throw candidateFailure('Main or PR evidence base advanced during preparation; resubmit unchanged head',
         {...diagnostics, reason: 'base-advanced', inspected_base: commitID(state.base),
           inspected_pr_base: commitID(state.pr.base.sha)});
     }
-    need(pr.mergeable !== false, 'Integration conflict; author intervention required');
+    if (pr.mergeable === false) throw candidateFailure('Integration conflict; author intervention required',
+      {...diagnostics, reason: 'conflict'});
     if (commitID(pr.merge_commit_sha)) {
       let object;
       try { object = await api(`${root(repo)}/git/commits/${pr.merge_commit_sha}`); }
@@ -137,12 +142,19 @@ export async function prepareIntegration(options) {
     // Waiting must not extend an expired claim or reuse revoked checks/review.
     const revalidated = await inspectMerge(options);
     need(!revalidated.replayed, 'PR merged during candidate refresh; resubmit unchanged head');
-    unchangedPR(revalidated.pr, state.pr);
-    need(revalidated.issue.body === state.issue.body &&
-      revalidated.reservation.claim_id === state.reservation.claim_id,
-      'Issue contract or ownership changed during candidate refresh');
-    need(revalidated.base === fresh.base && revalidated.pr.base.sha === state.pr.base.sha,
-      'Main or PR evidence base advanced during refresh validation; resubmit unchanged head');
+    const diagnostics = candidateDiagnostics(fresh.object, fresh.base, state.pr.head.sha, {
+      candidate: commitID(fresh.candidate), observed_head: commitID(revalidated.pr.head.sha),
+      observed_base: commitID(revalidated.base), observed_pr_base: commitID(revalidated.pr.base.sha),
+      inspected_pr_base: commitID(state.pr.base.sha), attempt: fresh.attempts, observed_at: new Date().toISOString()});
+    try { unchangedPR(revalidated.pr, state.pr); }
+    catch (error) { throw candidateFailure(error.message, {...diagnostics, reason: 'pr-scope-changed'}); }
+    if (revalidated.issue.body !== state.issue.body || revalidated.reservation.claim_id !== state.reservation.claim_id) {
+      throw candidateFailure('Issue contract or ownership changed during candidate refresh', {...diagnostics, reason: 'authority-changed'});
+    }
+    if (revalidated.base !== fresh.base || revalidated.pr.base.sha !== state.pr.base.sha) {
+      throw candidateFailure('Main or PR evidence base advanced during refresh validation; resubmit unchanged head',
+        {...diagnostics, reason: 'base-advanced'});
+    }
     Object.assign(state, revalidated);
   }
   const candidate = fresh.candidate;

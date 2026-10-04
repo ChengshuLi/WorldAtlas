@@ -3,699 +3,705 @@ TAP version 13
 # Subtest: verifies bytes without claiming factual correctness
 ok 1 - verifies bytes without claiming factual correctness
   ---
-  duration_ms: 1.922511
+  duration_ms: 1.82648
   type: 'test'
   ...
 # Subtest: schema-only validation reports unverified bytes
 ok 2 - schema-only validation reports unverified bytes
   ---
-  duration_ms: 0.276017
+  duration_ms: 0.212752
   type: 'test'
   ...
 # Subtest: known broken pins, stale baseline, entry hashes and contradictory summaries fail
 ok 3 - known broken pins, stale baseline, entry hashes and contradictory summaries fail
   ---
-  duration_ms: 1.413613
+  duration_ms: 1.543583
   type: 'test'
   ...
 # Subtest: source access/license limits remain explicit; no unsafe retention
 ok 4 - source access/license limits remain explicit; no unsafe retention
   ---
-  duration_ms: 0.441877
+  duration_ms: 0.504813
   type: 'test'
   ...
 # Subtest: research cannot grant approval; supported conclusions need known sources
 ok 5 - research cannot grant approval; supported conclusions need known sources
   ---
-  duration_ms: 0.329347
+  duration_ms: 0.326984
   type: 'test'
   ...
 # Subtest: containing-file inventory verifies actual subject IDs, not optional properties.part
 ok 6 - containing-file inventory verifies actual subject IDs, not optional properties.part
   ---
-  duration_ms: 0.446183
+  duration_ms: 0.471122
   type: 'test'
   ...
 # Subtest: compressed vs uncompressed hashes and decompression budgets are checked
 ok 7 - compressed vs uncompressed hashes and decompression budgets are checked
   ---
-  duration_ms: 1.493334
+  duration_ms: 1.364081
   type: 'test'
   ...
 # Subtest: paths and symlinks cannot escape candidate reader
 ok 8 - paths and symlinks cannot escape candidate reader
   ---
-  duration_ms: 1.293242
+  duration_ms: 1.491734
   type: 'test'
   ...
 # Subtest: new identity registry is checked against retained prior roster without claiming source or geometry approval
 ok 9 - new identity registry is checked against retained prior roster without claiming source or geometry approval
   ---
-  duration_ms: 0.796722
+  duration_ms: 0.796574
   type: 'test'
   ...
 # Subtest: prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority
 ok 10 - prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority
   ---
-  duration_ms: 1.30551
+  duration_ms: 1.035766
   type: 'test'
   ...
 # Subtest: identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes
 ok 11 - identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes
   ---
-  duration_ms: 0.941141
+  duration_ms: 1.017618
   type: 'test'
   ...
 # Subtest: geography has its own branch and exactly one matching type
 ok 12 - geography has its own branch and exactly one matching type
   ---
-  duration_ms: 2.142432
+  duration_ms: 1.81962
   type: 'test'
   ...
 # Subtest: declared geography ownership is finite, safe and limited to source evidence namespaces
 ok 13 - declared geography ownership is finite, safe and limited to source evidence namespaces
   ---
-  duration_ms: 0.41774
+  duration_ms: 0.341587
   type: 'test'
   ...
 # Subtest: geography cannot edit core, history, another packet or an undeclared proposal directory
 ok 14 - geography cannot edit core, history, another packet or an undeclared proposal directory
   ---
-  duration_ms: 0.402116
+  duration_ms: 0.352803
   type: 'test'
   ...
 # Subtest: engineering consumes but preserves geography evidence while existing lanes still work
 ok 15 - engineering consumes but preserves geography evidence while existing lanes still work
   ---
-  duration_ms: 0.250879
+  duration_ms: 0.221845
   type: 'test'
   ...
 # Subtest: geography claims retain exact ownership through renewal and rotation, without content approval
 ok 16 - geography claims retain exact ownership through renewal and rotation, without content approval
   ---
-  duration_ms: 1.479282
+  duration_ms: 1.393576
   type: 'test'
   ...
 # Subtest: claims and PRs refuse issue ownership expansion and incompatible modes
 ok 17 - claims and PRs refuse issue ownership expansion and incompatible modes
   ---
-  duration_ms: 0.690091
+  duration_ms: 0.652366
   type: 'test'
   ...
 # Subtest: actual linked GitHub issue supplies geography ownership, not a PR-controlled declaration
 ok 18 - actual linked GitHub issue supplies geography ownership, not a PR-controlled declaration
   ---
-  duration_ms: 1.559293
+  duration_ms: 3.152749
   type: 'test'
   ...
 # Subtest: real geography Git scope checks renamed source paths, symlinks and issue-backed CLI ownership
 ok 19 - real geography Git scope checks renamed source paths, symlinks and issue-backed CLI ownership
   ---
-  duration_ms: 129.431285
+  duration_ms: 171.687439
   type: 'test'
   ...
 # Subtest: lane IDs must be explicit and safe
 ok 20 - lane IDs must be explicit and safe
   ---
-  duration_ms: 2.271979
+  duration_ms: 2.677115
   type: 'test'
   ...
 # Subtest: research owns only campaign files, excluding shared handovers and other campaigns
 ok 21 - research owns only campaign files, excluding shared handovers and other campaigns
   ---
-  duration_ms: 0.422818
+  duration_ms: 0.352482
   type: 'test'
   ...
 # Subtest: engineering preserves research and other engineering progress
 ok 22 - engineering preserves research and other engineering progress
   ---
-  duration_ms: 0.172219
+  duration_ms: 0.264099
   type: 'test'
   ...
 # Subtest: partial and final PRs link one issue without needing a document tracker ID
 ok 23 - partial and final PRs link one issue without needing a document tracker ID
   ---
-  duration_ms: 0.549669
+  duration_ms: 0.619537
   type: 'test'
   ...
 # Subtest: PR policy rejects ambiguous issue links and accidental additional closures
 ok 24 - PR policy rejects ambiguous issue links and accidental additional closures
   ---
-  duration_ms: 0.23881
+  duration_ms: 0.4965
   type: 'test'
   ...
 # Subtest: GitHub issue type agrees with its lane and references an open issue
 ok 25 - GitHub issue type agrees with its lane and references an open issue
   ---
-  duration_ms: 0.346924
+  duration_ms: 0.263719
   type: 'test'
   ...
 # Subtest: real git diff checks rename source paths, not only allowed destinations
 ok 26 - real git diff checks rename source paths, not only allowed destinations
   ---
-  duration_ms: 29.363947
+  duration_ms: 36.488218
   type: 'test'
   ...
 # Subtest: another lane advancing work is not mistaken for this branch changing its files
 ok 27 - another lane advancing work is not mistaken for this branch changing its files
   ---
-  duration_ms: 42.46114
+  duration_ms: 58.868818
   type: 'test'
   ...
 # Subtest: remote issue validation reads only the event repository and requires successful labeled issue metadata
 ok 28 - remote issue validation reads only the event repository and requires successful labeled issue metadata
   ---
-  duration_ms: 14.479591
+  duration_ms: 12.225955
   type: 'test'
   ...
 # Subtest: successful full and focused workflows prove exact tree and pinned current attempt
 ok 29 - successful full and focused workflows prove exact tree and pinned current attempt
   ---
-  duration_ms: 2.611421
+  duration_ms: 2.32287
   type: 'test'
   ...
 # Subtest: head metadata without explicit reviewed-head checkout never proves tested tree
 ok 30 - head metadata without explicit reviewed-head checkout never proves tested tree
   ---
-  duration_ms: 0.369708
+  duration_ms: 0.294295
   type: 'test'
   ...
 # Subtest: different complete tree or modified approved workflow/runner always falls back
 ok 31 - different complete tree or modified approved workflow/runner always falls back
   ---
-  duration_ms: 0.35785
+  duration_ms: 0.348316
   type: 'test'
   ...
 # Subtest: wrong head/event/repository/PR/path and incomplete or failed run cannot prove coverage
 ok 32 - wrong head/event/repository/PR/path and incomplete or failed run cannot prove coverage
   ---
-  duration_ms: 1.379592
+  duration_ms: 4.926334
   type: 'test'
   ...
 # Subtest: missing/extra shard and skipped or incomplete required steps never count as successful coverage
 ok 33 - missing/extra shard and skipped or incomplete required steps never count as successful coverage
   ---
-  duration_ms: 1.085838
+  duration_ms: 0.956885
   type: 'test'
   ...
 # Subtest: final pinned run reread rejects revoked proof
 ok 34 - final pinned run reread rejects revoked proof
   ---
-  duration_ms: 0.293543
+  duration_ms: 0.387516
   type: 'test'
   ...
 # Subtest: explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact
 ok 35 - explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact
   ---
-  duration_ms: 0.460795
+  duration_ms: 0.664695
   type: 'test'
   ...
 # Subtest: final proof pins attempt and refuses a later successful rerun or missing/invalid attempt
 ok 36 - final proof pins attempt and refuses a later successful rerun or missing/invalid attempt
   ---
-  duration_ms: 0.385081
+  duration_ms: 0.421477
   type: 'test'
   ...
 # Subtest: focused proof accepts complete controls without installing Node dependencies
 ok 37 - focused proof accepts complete controls without installing Node dependencies
   ---
-  duration_ms: 0.270788
+  duration_ms: 0.314976
   type: 'test'
   ...
 # Subtest: full proof refuses missing, failed, cancelled or skipped Node installation in any shard
 ok 38 - full proof refuses missing, failed, cancelled or skipped Node installation in any shard
   ---
-  duration_ms: 0.749661
+  duration_ms: 1.087523
   type: 'test'
   ...
 # Subtest: serialized contenders on one issue have exactly one holder even under the same GitHub account
 ok 39 - serialized contenders on one issue have exactly one holder even under the same GitHub account
   ---
-  duration_ms: 2.470458
+  duration_ms: 3.195048
   type: 'test'
   ...
 # Subtest: renewal and release require the actual worker plus ownership nonce
 ok 40 - renewal and release require the actual worker plus ownership nonce
   ---
-  duration_ms: 0.616471
+  duration_ms: 0.541458
   type: 'test'
   ...
 # Subtest: an idempotent lost-response retry retains original ownership
 ok 41 - an idempotent lost-response retry retains original ownership
   ---
-  duration_ms: 0.254363
+  duration_ms: 0.253022
   type: 'test'
   ...
 # Subtest: renewal, rotation and reassignment retain one canonical comment ID
 ok 42 - renewal, rotation and reassignment retain one canonical comment ID
   ---
-  duration_ms: 0.422908
+  duration_ms: 0.371581
   type: 'test'
   ...
 # Subtest: umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed
 ok 43 - umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed
   ---
-  duration_ms: 0.394645
+  duration_ms: 0.444452
   type: 'test'
   ...
 # Subtest: expired reservations cannot silently discard branches or active PR/live operations
 ok 44 - expired reservations cannot silently discard branches or active PR/live operations
   ---
-  duration_ms: 0.52346
+  duration_ms: 1.430873
   type: 'test'
   ...
 # Subtest: multiple PRs retain ownership and rotate branches only after previous work completes
 ok 45 - multiple PRs retain ownership and rotate branches only after previous work completes
   ---
-  duration_ms: 1.057887
+  duration_ms: 0.391462
   type: 'test'
   ...
 # Subtest: canonical comments cannot be impersonated or ambiguous
 ok 46 - canonical comments cannot be impersonated or ambiguous
   ---
-  duration_ms: 0.226311
+  duration_ms: 0.276188
   type: 'test'
   ...
 # Subtest: PR validation uses current exact-branch ownership and rejects expired or blocked claims
 ok 47 - PR validation uses current exact-branch ownership and rejects expired or blocked claims
   ---
-  duration_ms: 0.491962
+  duration_ms: 0.72156
   type: 'test'
   ...
 # Subtest: location-content claims wait for worldwide approval while source-only work can start
 ok 48 - location-content claims wait for worldwide approval while source-only work can start
   ---
-  duration_ms: 48.680089
+  duration_ms: 44.338912
   type: 'test'
   ...
 # Subtest: the PR budget cannot be bypassed by claiming another part indefinitely
 ok 49 - the PR budget cannot be bypassed by claiming another part indefinitely
   ---
-  duration_ms: 0.314494
+  duration_ms: 0.331361
   type: 'test'
   ...
 # Subtest: pagination inspects later pages rather than assuming only the first page exists
 ok 50 - pagination inspects later pages rather than assuming only the first page exists
   ---
-  duration_ms: 0.216437
+  duration_ms: 0.226232
   type: 'test'
   ...
 # Subtest: claim lock keys use canonical issue numbers so aliases cannot acquire independent locks
 ok 51 - claim lock keys use canonical issue numbers so aliases cannot acquire independent locks
   ---
-  duration_ms: 0.294824
+  duration_ms: 0.31074
   type: 'test'
   ...
 # Subtest: approved research is bound to all three geographic pins and ordinary bot audit text is not authority
 ok 52 - approved research is bound to all three geographic pins and ordinary bot audit text is not authority
   ---
-  duration_ms: 0.422237
+  duration_ms: 0.448227
   type: 'test'
   ...
 # Subtest: client discovers later pages and polls latched ID when the run leaves recent results
 ok 53 - client discovers later pages and polls latched ID when the run leaves recent results
   ---
-  duration_ms: 292.169256
+  duration_ms: 322.300903
   type: 'test'
   ...
 # Subtest: cancelled pending request is retried without changing authored head
 ok 54 - cancelled pending request is retried without changing authored head
   ---
-  duration_ms: 327.407056
+  duration_ms: 351.972481
   type: 'test'
   ...
 # Subtest: main advance retries unchanged head but failed integration ends without retry
 ok 55 - main advance retries unchanged head but failed integration ends without retry
   ---
-  duration_ms: 529.121767
+  duration_ms: 533.456222
   type: 'test'
   ...
 # Subtest: actual trusted entry point preserves the original rejection before a denied comment
 ok 56 - actual trusted entry point preserves the original rejection before a denied comment
   ---
-  duration_ms: 76.255952
+  duration_ms: 85.866774
   type: 'test'
   ...
 # Subtest: actual trusted entry point retains its preparation receipt before successful notification
 ok 57 - actual trusted entry point retains its preparation receipt before successful notification
   ---
-  duration_ms: 69.46196
+  duration_ms: 73.332143
   type: 'test'
   ...
 # Subtest: trusted preparation has PR comment permission while candidate tests remain read-only
 ok 58 - trusted preparation has PR comment permission while candidate tests remain read-only
   ---
-  duration_ms: 0.361796
+  duration_ms: 0.332182
   type: 'test'
   ...
-# Subtest: actual entry point saves candidate diagnostics even when notification fails
-ok 59 - actual entry point saves candidate diagnostics even when notification fails
+# Subtest: actual entry point saves stale/head/conflict/base diagnostics even when notification fails
+ok 59 - actual entry point saves stale/head/conflict/base diagnostics even when notification fails
   ---
-  duration_ms: 91.584289
+  duration_ms: 336.152775
   type: 'test'
   ...
 # Subtest: only staging-test shards prepare the immutable migration derivative
 ok 60 - only staging-test shards prepare the immutable migration derivative
   ---
-  duration_ms: 6.352139
+  duration_ms: 6.681707
   type: 'test'
   ...
 # Subtest: two reviewed PRs sharing a base integrate serially without changing authored head
 ok 61 - two reviewed PRs sharing a base integrate serially without changing authored head
   ---
-  duration_ms: 4.764255
+  duration_ms: 4.934437
   type: 'test'
   ...
 # Subtest: conflicts and non-conflicting changes to reviewed bytes require intervention
 ok 62 - conflicts and non-conflicting changes to reviewed bytes require intervention
   ---
-  duration_ms: 1.01453
+  duration_ms: 0.996246
   type: 'test'
   ...
 # Subtest: stale merge object and truncated inventories fail closed
 ok 63 - stale merge object and truncated inventories fail closed
   ---
-  duration_ms: 0.923373
+  duration_ms: 1.035635
   type: 'test'
   ...
 # Subtest: stale head or review and expired ownership prohibit integration
 ok 64 - stale head or review and expired ownership prohibit integration
   ---
-  duration_ms: 1.28646
+  duration_ms: 0.673968
   type: 'test'
   ...
 # Subtest: failed or skipped candidate tests never merge an open PR
 ok 65 - failed or skipped candidate tests never merge an open PR
   ---
-  duration_ms: 0.513094
+  duration_ms: 1.189497
   type: 'test'
   ...
 # Subtest: base advances before or during final validation are retryable without branch updates
 ok 66 - base advances before or during final validation are retryable without branch updates
   ---
-  duration_ms: 0.665874
+  duration_ms: 0.795351
   type: 'test'
   ...
 # Subtest: latest failed or pending check replaces old success
 ok 67 - latest failed or pending check replaces old success
   ---
-  duration_ms: 0.226301
+  duration_ms: 0.23145
   type: 'test'
   ...
 # Subtest: workflow separates untrusted candidate tests from write credentials and serializes the lifecycle
 ok 68 - workflow separates untrusted candidate tests from write credentials and serializes the lifecycle
   ---
-  duration_ms: 0.574186
+  duration_ms: 0.65534
   type: 'test'
   ...
 # Subtest: commit status changing during final review prevents the merge
 ok 69 - commit status changing during final review prevents the merge
   ---
-  duration_ms: 0.468987
+  duration_ms: 0.617674
   type: 'test'
   ...
 # Subtest: trusted profile uses focused invariants only for isolated evidence and docs
 ok 70 - trusted profile uses focused invariants only for isolated evidence and docs
   ---
-  duration_ms: 0.336798
+  duration_ms: 0.315988
   type: 'test'
   ...
 # Subtest: parallel full-regression shards cover each unit file once and focused profile retains core gates
 ok 71 - parallel full-regression shards cover each unit file once and focused profile retains core gates
   ---
-  duration_ms: 5.190158
+  duration_ms: 5.950552
   type: 'test'
   ...
 # Subtest: prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread
 ok 72 - prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread
   ---
-  duration_ms: 1.766805
+  duration_ms: 1.749003
   type: 'test'
   ...
 # Subtest: failed proof reread and stale main prevent merge despite prior accepted proof
 ok 73 - failed proof reread and stale main prevent merge despite prior accepted proof
   ---
-  duration_ms: 1.02087
+  duration_ms: 1.132592
   type: 'test'
   ...
 # Subtest: successful rerun after preparation invalidates the pinned attempt and refuses merge
 ok 74 - successful rerun after preparation invalidates the pinned attempt and refuses merge
   ---
-  duration_ms: 0.587085
+  duration_ms: 0.721741
   type: 'test'
   ...
 # Subtest: late candidate fetch replaces initial stale metadata without branch writes
 ok 75 - late candidate fetch replaces initial stale metadata without branch writes
   ---
-  duration_ms: 0.426363
+  duration_ms: 0.35743
   type: 'test'
   ...
 # Subtest: stale parents and unavailable candidates converge with revalidated authority
 ok 76 - stale parents and unavailable candidates converge with revalidated authority
   ---
-  duration_ms: 0.799115
+  duration_ms: 0.832418
   type: 'test'
   ...
 # Subtest: permanently stale candidates are bounded and retain exact IDs before tree work
 ok 77 - permanently stale candidates are bounded and retain exact IDs before tree work
   ---
-  duration_ms: 0.588217
+  duration_ms: 0.591924
   type: 'test'
   ...
 # Subtest: candidate polling stops at its deadline even before exhausting attempts
 ok 78 - candidate polling stops at its deadline even before exhausting attempts
   ---
-  duration_ms: 0.335686
+  duration_ms: 0.293443
   type: 'test'
   ...
 # Subtest: head/body changes and conflicts during refresh fail without integration or writes
 ok 79 - head/body changes and conflicts during refresh fail without integration or writes
   ---
-  duration_ms: 0.650621
+  duration_ms: 0.84704
   type: 'test'
   ...
 # Subtest: main and evidence vintage advances are not silently adopted while refreshing
 ok 80 - main and evidence vintage advances are not silently adopted while refreshing
   ---
-  duration_ms: 0.481025
+  duration_ms: 0.444411
   type: 'test'
   ...
 # Subtest: claim/check/review and issue authority is rechecked after waiting
 ok 81 - claim/check/review and issue authority is rechecked after waiting
   ---
-  duration_ms: 1.720104
+  duration_ms: 1.993372
   type: 'test'
   ...
 # Subtest: only candidate-object 404 is refreshable; access failures stop immediately
 ok 82 - only candidate-object 404 is refreshable; access failures stop immediately
   ---
-  duration_ms: 0.751684
+  duration_ms: 0.716372
+  type: 'test'
+  ...
+# Subtest: post-wait main advance retains old expected and new observed base diagnostics
+ok 83 - post-wait main advance retains old expected and new observed base diagnostics
+  ---
+  duration_ms: 0.405222
   type: 'test'
   ...
 # Subtest: new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption
-ok 83 - new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption
+ok 84 - new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption
   ---
-  duration_ms: 3.246876
+  duration_ms: 1.889825
   type: 'test'
   ...
 # Subtest: positive real-format ledger validates actual files and binds an independent review
-ok 84 - positive real-format ledger validates actual files and binds an independent review
+ok 85 - positive real-format ledger validates actual files and binds an independent review
   ---
-  duration_ms: 3.245064
+  duration_ms: 1.863086
   type: 'test'
   ...
 # Subtest: regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail
-ok 85 - regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail
+ok 86 - regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail
   ---
-  duration_ms: 1.482826
+  duration_ms: 1.704876
   type: 'test'
   ...
 # Subtest: full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence
-ok 86 - full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence
+ok 87 - full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence
   ---
-  duration_ms: 0.898185
+  duration_ms: 0.717755
   type: 'test'
   ...
 # Subtest: coordinate/helper policies require positive and negative controls; generators need reproducibility
-ok 87 - coordinate/helper policies require positive and negative controls; generators need reproducibility
+ok 88 - coordinate/helper policies require positive and negative controls; generators need reproducibility
   ---
-  duration_ms: 0.818174
+  duration_ms: 0.789894
   type: 'test'
   ...
 # Subtest: generator controls bind actual positive, negative and equal two-run output bytes
-ok 88 - generator controls bind actual positive, negative and equal two-run output bytes
+ok 89 - generator controls bind actual positive, negative and equal two-run output bytes
   ---
-  duration_ms: 0.877874
+  duration_ms: 1.102867
   type: 'test'
   ...
 # Subtest: Washington-style generated narrative/table mismatch fails against the same numeric ledger
-ok 89 - Washington-style generated narrative/table mismatch fails against the same numeric ledger
+ok 90 - Washington-style generated narrative/table mismatch fails against the same numeric ledger
   ---
-  duration_ms: 0.82223
+  duration_ms: 0.520406
   type: 'test'
   ...
 # Subtest: reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review
-ok 90 - reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review
+ok 91 - reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review
   ---
-  duration_ms: 1.952324
+  duration_ms: 0.749973
   type: 'test'
   ...
 # Subtest: mock remote queue checks exact blobs/head/independent receipt with read-only requests
-ok 91 - mock remote queue checks exact blobs/head/independent receipt with read-only requests
+ok 92 - mock remote queue checks exact blobs/head/independent receipt with read-only requests
   ---
-  duration_ms: 5.513986
+  duration_ms: 3.042437
   type: 'test'
   ...
 # Subtest: incomplete remote trees cannot become a passed byte check
-ok 92 - incomplete remote trees cannot become a passed byte check
+ok 93 - incomplete remote trees cannot become a passed byte check
   ---
-  duration_ms: 1.04121
+  duration_ms: 0.646637
   type: 'test'
   ...
 # Subtest: remote decisions reject stale exact-head reviews and a later change request
-ok 93 - remote decisions reject stale exact-head reviews and a later change request
+ok 94 - remote decisions reject stale exact-head reviews and a later change request
   ---
-  duration_ms: 4.059692
+  duration_ms: 1.680961
   type: 'test'
   ...
 # Subtest: unchanged authored evidence survives unrelated main advance, while current metrics require refresh
-ok 94 - unchanged authored evidence survives unrelated main advance, while current metrics require refresh
+ok 95 - unchanged authored evidence survives unrelated main advance, while current metrics require refresh
   ---
-  duration_ms: 0.524271
+  duration_ms: 0.302167
   type: 'test'
   ...
 # Subtest: trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines
-ok 95 - trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines
+ok 96 - trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines
   ---
-  duration_ms: 2.759302
+  duration_ms: 1.702673
   type: 'test'
   ...
 # Subtest: current manifest is closed and no region can claim invented approvals
-ok 96 - current manifest is closed and no region can claim invented approvals
+ok 97 - current manifest is closed and no region can claim invented approvals
   ---
-  duration_ms: 1.701226
+  duration_ms: 1.706699
   type: 'test'
   ...
 # Subtest: v1 worldwide approval remains compatible
-ok 97 - v1 worldwide approval remains compatible
+ok 98 - v1 worldwide approval remains compatible
   ---
-  duration_ms: 0.619915
+  duration_ms: 0.855042
   type: 'test'
   ...
 # Subtest: regional content claims depend on macro and branch approval, not unfinished worldwide descendants
-ok 98 - regional content claims depend on macro and branch approval, not unfinished worldwide descendants
+ok 99 - regional content claims depend on macro and branch approval, not unfinished worldwide descendants
   ---
-  duration_ms: 1.599342
+  duration_ms: 2.221337
   type: 'test'
   ...
 # Subtest: macro approval and explicit complete region certificates are required
-ok 99 - macro approval and explicit complete region certificates are required
+ok 100 - macro approval and explicit complete region certificates are required
   ---
-  duration_ms: 0.554857
+  duration_ms: 0.557532
   type: 'test'
   ...
 # Subtest: pins and every location target are checked against explicitly selected regions
-ok 100 - pins and every location target are checked against explicitly selected regions
+ok 101 - pins and every location target are checked against explicitly selected regions
   ---
-  duration_ms: 0.722039
+  duration_ms: 1.07231
   type: 'test'
   ...
 # Subtest: ambiguous territorial membership fails closed
-ok 101 - ambiguous territorial membership fails closed
+ok 102 - ambiguous territorial membership fails closed
   ---
-  duration_ms: 0.156766
+  duration_ms: 0.306313
   type: 'test'
   ...
 # Subtest: all name, relationship and media targets are scoped; ancillary or geographic writes are refused
-ok 102 - all name, relationship and media targets are scoped; ancillary or geographic writes are refused
+ok 103 - all name, relationship and media targets are scoped; ancillary or geographic writes are refused
   ---
-  duration_ms: 1.358769
+  duration_ms: 0.616161
   type: 'test'
   ...
 # Subtest: verified raw batches are inspected rather than trusting caller target summaries
-ok 103 - verified raw batches are inspected rather than trusting caller target summaries
+ok 104 - verified raw batches are inspected rather than trusting caller target summaries
   ---
-  duration_ms: 0.487084
+  duration_ms: 0.642381
   type: 'test'
   ...
 # Subtest: corrections require a territorial crosswalk and cannot transfer facts to another location
-ok 104 - corrections require a territorial crosswalk and cannot transfer facts to another location
+ok 105 - corrections require a territorial crosswalk and cannot transfer facts to another location
   ---
-  duration_ms: 0.560636
+  duration_ms: 0.799208
   type: 'test'
   ...
 # Subtest: issue-claims.yml: actual sparse declarations include trusted module dependencies
-ok 105 - issue-claims.yml: actual sparse declarations include trusted module dependencies
+ok 106 - issue-claims.yml: actual sparse declarations include trusted module dependencies
   ---
-  duration_ms: 73.932505
+  duration_ms: 45.681195
   type: 'test'
   ...
 # Subtest: worker-merge.yml: actual sparse declarations include trusted module dependencies
-ok 106 - worker-merge.yml: actual sparse declarations include trusted module dependencies
+ok 107 - worker-merge.yml: actual sparse declarations include trusted module dependencies
   ---
-  duration_ms: 167.47671
+  duration_ms: 142.169394
   type: 'test'
   ...
 # Subtest: handoff-scope.yml: actual sparse declarations include trusted module dependencies
-ok 107 - handoff-scope.yml: actual sparse declarations include trusted module dependencies
+ok 108 - handoff-scope.yml: actual sparse declarations include trusted module dependencies
   ---
-  duration_ms: 172.537668
+  duration_ms: 159.083669
   type: 'test'
   ...
 # Subtest: queue-readiness-audit.yml: actual sparse declarations include trusted module dependencies
-ok 108 - queue-readiness-audit.yml: actual sparse declarations include trusted module dependencies
+ok 109 - queue-readiness-audit.yml: actual sparse declarations include trusted module dependencies
   ---
-  duration_ms: 47.334105
+  duration_ms: 57.144081
   type: 'test'
   ...
 # Subtest: negative control: old scripts-only tree cannot load relocated regional gate
-ok 109 - negative control: old scripts-only tree cannot load relocated regional gate
+ok 110 - negative control: old scripts-only tree cannot load relocated regional gate
   ---
-  duration_ms: 42.809352
+  duration_ms: 39.28926
   type: 'test'
   ...
 # Subtest: sparse candidate still detects changes and rename sources outside the working tree
-ok 110 - sparse candidate still detects changes and rename sources outside the working tree
+ok 111 - sparse candidate still detects changes and rename sources outside the working tree
   ---
-  duration_ms: 56.163837
+  duration_ms: 49.613632
   type: 'test'
   ...
 # Subtest: results are bound to the bot, request and issue, including denial
-ok 111 - results are bound to the bot, request and issue, including denial
+ok 112 - results are bound to the bot, request and issue, including denial
   ---
-  duration_ms: 0.99441
+  duration_ms: 1.107374
   type: 'test'
   ...
 # Subtest: latest matching response wins, unrelated or malformed comments cannot confer ownership
-ok 112 - latest matching response wins, unrelated or malformed comments cannot confer ownership
+ok 113 - latest matching response wins, unrelated or malformed comments cannot confer ownership
   ---
-  duration_ms: 0.175204
+  duration_ms: 0.183777
   type: 'test'
   ...
 # Subtest: positive confirmations require current exact canonical ownership, not stale success
-ok 113 - positive confirmations require current exact canonical ownership, not stale success
+ok 114 - positive confirmations require current exact canonical ownership, not stale success
   ---
-  duration_ms: 0.822831
+  duration_ms: 0.764155
   type: 'test'
   ...
 # Subtest: bootstrap fallback requires exact request and releases require inactive state
-ok 114 - bootstrap fallback requires exact request and releases require inactive state
+ok 115 - bootstrap fallback requires exact request and releases require inactive state
   ---
-  duration_ms: 0.403028
+  duration_ms: 0.311861
   type: 'test'
   ...
 # Subtest: merge responses retain exact PR binding and embedded HTML cannot break the marker
-ok 115 - merge responses retain exact PR binding and embedded HTML cannot break the marker
+ok 116 - merge responses retain exact PR binding and embedded HTML cannot break the marker
   ---
-  duration_ms: 0.214203
+  duration_ms: 0.217068
   type: 'test'
   ...
-1..115
-# tests 115
+1..116
+# tests 116
 # suites 0
-# pass 115
+# pass 116
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 1537.179521
+# duration_ms 1729.383324
