@@ -70,6 +70,71 @@ BEGIN
 END $$;
 REVOKE ALL ON FUNCTION public.worldatlas_membership_save(text,text,text,text,integer,text,text) FROM PUBLIC;
 
+-- Bounded owner-only copy; one round trip per page, never one per record.
+-- Evidence remains a TEXT value inside the transport JSON, including spelling.
+CREATE FUNCTION public.worldatlas_membership_copy_batch(payload json) RETURNS integer
+ LANGUAGE plpgsql SET search_path=pg_catalog,public AS $$
+DECLARE copied integer;
+BEGIN
+ IF json_typeof(payload)<>'array' OR json_array_length(payload)>200 OR octet_length(payload::text)>8388608 THEN
+  RAISE EXCEPTION USING ERRCODE='22023',MESSAGE='Owner membership copy exceeds bounded page';
+ END IF;
+ INSERT INTO public.worldatlas_membership_release_keys(id)
+  SELECT DISTINCT x.release_id FROM json_to_recordset(payload) x(release_id text) ON CONFLICT DO NOTHING;
+ INSERT INTO public.worldatlas_membership_entity_keys(id)
+  SELECT x.entity_id FROM json_to_recordset(payload) x(entity_id text)
+  UNION SELECT x.parent_id FROM json_to_recordset(payload) x(parent_id text) WHERE x.parent_id IS NOT NULL
+  ON CONFLICT DO NOTHING;
+ INSERT INTO public.worldatlas_membership_source_keys(id)
+  SELECT DISTINCT x.source_id FROM json_to_recordset(payload) x(source_id text) ON CONFLICT DO NOTHING;
+ INSERT INTO public.worldatlas_membership_evidence(digest,raw)
+  SELECT DISTINCT sha256(convert_to(x.evidence,'UTF8')),x.evidence FROM json_to_recordset(payload) x(evidence text)
+  ON CONFLICT DO NOTHING;
+ IF EXISTS(SELECT 1 FROM json_to_recordset(payload) x(evidence text)
+  JOIN public.worldatlas_membership_evidence e ON e.digest=sha256(convert_to(x.evidence,'UTF8'))
+  WHERE e.raw IS DISTINCT FROM x.evidence COLLATE "C") THEN
+  RAISE EXCEPTION USING ERRCODE='23514',MESSAGE='Evidence digest collision or changed original bytes';
+ END IF;
+ INSERT INTO public.worldatlas_membership_rows
+ SELECT r.key,e.key,p.key,x.reference_name,x.active,s.key,v.key
+ FROM json_to_recordset(payload) x(release_id text,entity_id text,parent_id text,reference_name text,active integer,source_id text,evidence text)
+ JOIN public.worldatlas_membership_release_keys r ON r.id=x.release_id
+ JOIN public.worldatlas_membership_entity_keys e ON e.id=x.entity_id
+ LEFT JOIN public.worldatlas_membership_entity_keys p ON p.id=x.parent_id
+ JOIN public.worldatlas_membership_source_keys s ON s.id=x.source_id
+ JOIN public.worldatlas_membership_evidence v ON v.digest=sha256(convert_to(x.evidence,'UTF8'));
+ GET DIAGNOSTICS copied=ROW_COUNT;
+ IF copied<>json_array_length(payload) THEN RAISE EXCEPTION USING ERRCODE='23514',MESSAGE='Incomplete owner membership copy'; END IF;
+ RETURN copied;
+END $$;
+REVOKE ALL ON FUNCTION public.worldatlas_membership_copy_batch(json) FROM PUBLIC;
+
+-- Server-side page reader avoids sending all evidence to the client and back.
+CREATE FUNCTION public.worldatlas_membership_copy_next(after_release text,after_entity text)
+ RETURNS TABLE(copied integer,last_release text,last_entity text)
+ LANGUAGE plpgsql SET search_path=pg_catalog,public AS $$
+DECLARE payload json; page_count integer;
+BEGIN
+ IF (SELECT relkind FROM pg_class WHERE oid='public.atlas_geographic_memberships'::regclass)<>'r' THEN
+  RAISE EXCEPTION USING ERRCODE='23514',MESSAGE='Original physical membership source required';
+ END IF;
+ WITH candidates AS MATERIALIZED(SELECT release_id,entity_id,parent_id,reference_name,active,source_id,evidence
+  FROM public.atlas_geographic_memberships WHERE (release_id,entity_id)>(after_release COLLATE "C",after_entity COLLATE "C")
+  ORDER BY release_id,entity_id LIMIT 200),
+ bounded AS(SELECT *,sum(256+6*(octet_length(release_id)::bigint+octet_length(entity_id)+coalesce(octet_length(parent_id),0)+coalesce(octet_length(reference_name),0)+octet_length(source_id)+octet_length(evidence)))
+  OVER(ORDER BY release_id,entity_id) budget FROM candidates),
+ page AS(SELECT release_id,entity_id,parent_id,reference_name,active,source_id,evidence FROM bounded WHERE budget<=8388608)
+ SELECT json_agg(row_to_json(page) ORDER BY release_id,entity_id),
+  (SELECT count(*)::integer FROM candidates),
+  (SELECT release_id FROM page ORDER BY release_id DESC,entity_id DESC LIMIT 1),
+  (SELECT entity_id FROM page ORDER BY release_id DESC,entity_id DESC LIMIT 1)
+ INTO payload,page_count,last_release,last_entity FROM page;
+ IF page_count>0 AND payload IS NULL THEN RAISE EXCEPTION USING ERRCODE='22023',MESSAGE='Original membership row exceeds bounded copy'; END IF;
+ copied:=CASE WHEN payload IS NULL THEN 0 ELSE public.worldatlas_membership_copy_batch(payload) END;
+ RETURN NEXT;
+END $$;
+REVOKE ALL ON FUNCTION public.worldatlas_membership_copy_next(text,text) FROM PUBLIC;
+
 CREATE FUNCTION public.worldatlas_membership_insert() RETURNS trigger
  LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog,public AS $$
 BEGIN

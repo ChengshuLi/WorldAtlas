@@ -1,5 +1,6 @@
+import {membershipStorageKind} from './membership-storage-profile.js';
 import {RecordError} from './records.js';
-import {storageCatalogV3,exportStorageMarkerV3} from './storage-export-v3.js';
+import {typedStorageCatalog as storageCatalogV3,typedStorageMarker as exportStorageMarkerV3} from './typed-storage-compat.js';
 import {storageExportV3Definitions as storage} from './storage-export-v3-contract.js';
 import {assertJSONData} from '../src/json-contract.js';
 import {observationContract,observationDigest,registryForDigest} from '../src/observation-modules.js';
@@ -34,7 +35,7 @@ export async function typedSourcePins(sources){
 }
 export async function typedCapabilities(db){
  const contract=await observationContract();
- try{await storageCatalogV3(db);return {version:1,typed_observations:1,typed_feature_links:1,storage_export:3,registry_sha256:contract.registry_sha256,supported_registry_sha256:contract.supported_registry_sha256};}
+ try{await storageCatalogV3(db);return {version:1,typed_observations:1,typed_feature_links:1,storage_export:(await membershipStorageKind(db))==='compact'?4:3,registry_sha256:contract.registry_sha256,supported_registry_sha256:contract.supported_registry_sha256};}
  catch(error){if(error.status!==503&&!/no such table|does not exist|schema|guards/i.test(error.message))throw error;return {version:1,typed_observations:0,typed_feature_links:0,storage_export:0,reason:'typed-schema-uninstalled-or-unverified',registry_sha256:contract.registry_sha256};}
 }
 export async function typedRegistry(db){await storageCatalogV3(db);const contract=await observationContract();return {version:1,registry_sha256:contract.registry_sha256,registry:contract.registry,supported_registry_sha256:contract.supported_registry_sha256};}

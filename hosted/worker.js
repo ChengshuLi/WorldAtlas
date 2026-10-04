@@ -10,6 +10,7 @@ import {importTemporalGeography,temporalGeographySnapshotPage,temporalGeographyE
 import {validYear} from '../src/model.js';
 import {environmentClassifications} from '../src/environment-classifications.js';
 import {typedCapabilities,typedRegistry,typedSnapshotPage,importTypedBatch} from './typed-observations.js';
+import {storageCatalogV4,exportStorageMarkerV4,exportStoragePageV4} from './storage-export-v4.js';
 import {legacyStorageMarker,legacyStoragePage,legacyStorageCatalog} from './storage-export-compat.js';
 
 const json=(value,status=200,headers={})=>Response.json(value,{status,headers:{'Cache-Control':'no-store',...headers}});
@@ -39,6 +40,10 @@ export default {
     const value=await legacyStorageCatalog(db);
     return value.legacy_projection?json(value.catalog,200,{'X-Atlas-Storage-Scope':'legacy-v2-projection','X-Atlas-Complete-Export-Version':'3'}):json(value);
    }
+   if(url.pathname==='/api/storage/v4/export-marker'&&request.method==='GET')return json({...await exportStorageMarkerV4(db),read_only:storageReadOnly(env)});
+   if(url.pathname==='/api/storage/v4/catalog'&&request.method==='GET')return json(await storageCatalogV4(db));
+   const storageExportV4=/^\/api\/storage\/v4\/export\/([^/]+)$/.exec(url.pathname);
+   if(storageExportV4&&request.method==='GET')return json(await exportStoragePageV4(db,storageExportV4[1],{cursor:url.searchParams.get('cursor')??'',limit:Number(url.searchParams.get('limit')||200)}));
    if(url.pathname==='/api/storage/v3/export-marker'&&request.method==='GET')return json({...await exportStorageMarkerV3(db),read_only:storageReadOnly(env)});
    if(url.pathname==='/api/storage/v3/catalog'&&request.method==='GET')return json(await storageCatalogV3(db));
    const storageExportV3=/^\/api\/storage\/v3\/export\/([^/]+)$/.exec(url.pathname);
