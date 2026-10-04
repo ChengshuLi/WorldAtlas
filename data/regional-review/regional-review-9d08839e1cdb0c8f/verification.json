@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "issue": 479,
+  "subjects_assessed": 49,
+  "area_and_province_groups_assessed": 10,
+  "admin1_cross_source_units_compared": 10,
+  "city_role_screen_features": 3,
+  "source_original_files_hash_checked": 14,
+  "deterministic_outputs": [
+    "assessment.json",
+    "assessment.csv",
+    "admin-groups.csv",
+    "admin1-source-comparison.csv",
+    "geometry-components.csv",
+    "settlement-point-anomalies.csv",
+    "source-vintage-crosswalk.csv",
+    "city-role-screen.json"
+  ],
+  "settlement_rows": 13371,
+  "settlement_geometry_outliers": 593,
+  "disconnected_components": 181,
+  "source_vintage_overlap_pairs": 253,
+  "neighbor_edges_screened": 4,
+  "limitations": "This verifies source integrity and reproducible evidence artifacts only; no geography, region, political ownership, or historical import is approved."
+}

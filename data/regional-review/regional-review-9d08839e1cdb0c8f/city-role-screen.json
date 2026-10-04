@@ -1,0 +1,61 @@
+{
+  "assessment": "Role and continuity screen only; no official continuous Lomé city/metropolitan footprint source was established.",
+  "features": [
+    {
+      "name": "Lome Commune",
+      "pcode": "TG0305",
+      "parent": "Maritime",
+      "source_role": "commune",
+      "area_km2": 104.57055,
+      "polygon_components": 1,
+      "WCA_settlement_points_by_current_code": 137,
+      "point_names_matching_Lome_casefold": 1,
+      "source": "OCHA HDX COD-AB v02 Togo ADM2 (valid 2021-01-07) and OCHA WCA settlement layer (last_modif vintage recorded in source register)."
+    },
+    {
+      "name": "Golfe",
+      "pcode": "TG0303",
+      "parent": "Maritime",
+      "source_role": "prefecture",
+      "area_km2": 136.16724517,
+      "polygon_components": 2,
+      "WCA_settlement_points_by_current_code": 121,
+      "point_names_matching_Lome_casefold": 0,
+      "source": "OCHA HDX COD-AB v02 Togo ADM2 (valid 2021-01-07) and OCHA WCA settlement layer (last_modif vintage recorded in source register)."
+    },
+    {
+      "name": "Agoe-Nyive",
+      "pcode": "TG0309",
+      "parent": "Maritime",
+      "source_role": "prefecture",
+      "area_km2": 167.06618259,
+      "polygon_components": 1,
+      "WCA_settlement_points_by_current_code": 156,
+      "point_names_matching_Lome_casefold": 0,
+      "source": "OCHA HDX COD-AB v02 Togo ADM2 (valid 2021-01-07) and OCHA WCA settlement layer (last_modif vintage recorded in source register)."
+    }
+  ],
+  "shared_boundaries": [
+    {
+      "feature_a": "Lome Commune",
+      "feature_b": "Golfe",
+      "shared_boundary_km": 21.272
+    },
+    {
+      "feature_a": "Lome Commune",
+      "feature_b": "Agoe-Nyive",
+      "shared_boundary_km": 5.236
+    },
+    {
+      "feature_a": "Golfe",
+      "feature_b": "Agoe-Nyive",
+      "shared_boundary_km": 23.407
+    }
+  ],
+  "finding": "Lome Commune is one ADM2 polygon component and is named as a commune; Golfe has two components and Agoe-Nyive one. All three are assigned to Maritime by COD-AB and share boundaries in the source. WCA settlement points document named places, not an urban extent. The distribution and continuity of the Lomé metropolitan settlement across adjacent ADM2 units remains unresolved.",
+  "limits": [
+    "OCHA dataset notes summarize all 40 ADM2 units as prefectures, while this feature is named Lome Commune; statutory role is unresolved.",
+    "A single administrative polygon component does not establish urban continuity or completeness.",
+    "Agoe-Nyive is current-source external context, not a new atlas member."
+  ]
+}
