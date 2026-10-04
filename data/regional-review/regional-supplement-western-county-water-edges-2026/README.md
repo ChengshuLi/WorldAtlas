@@ -20,6 +20,10 @@ The geoBoundaries 2018 derivative has a 357.251 m contact; direct official Censu
 
 This is the sole cross-state lead. The 2024 edge is 41,324.968 m; 2018 and current have no contact, with current gap 5,372.349 m. It is assigned jointly across the Oregon and Washington parent packets. This packet does not treat source overlap/contact as proof of state or county political ownership. The retained GSHHG screen places 560.533 m inside land and 40,764.435 m outside the land mask, so the contact is strongly water-dominant at this source scale. A coordinated review with #486, #487 and the regional integrator is still required; absent authoritative joint marine/coastal boundary evidence, retain the legal line as unresolved and make no unilateral shared-boundary proposal.
 
+## Change accounting
+
+The generated `findings.json` contains 1,780 lines for 17 pair-by-source measurements, four explicit pair-contact sets and hashes, and the complete 16-subject ledger. Other text/code/manifests total about 517 lines; the retained Census 2018 subset is 255,129 compressed bytes. This is one coherent evidence packet, and the generated measurements are separated from the methods and interpretation below.
+
 ## Sources, dates, licenses, retained bytes
 
 The machine-readable source record is `sources.json`. It records canonical URLs, date/vintage, lawful retained files and byte hashes, and restoration steps. It intentionally references immutable bytes already retained under #487 instead of copying or altering another worker's files:
