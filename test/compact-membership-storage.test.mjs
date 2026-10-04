@@ -27,7 +27,9 @@ test('compact contract preserves original guards, published byte retries and new
  const receipt=await rehearseCompactMembershipStorage(f.engine);assert.equal(receipt.copied,36);assert.equal(receipt.parity.exact,true);
  assert.deepEqual((await f.engine.query('SELECT * FROM atlas_geographic_memberships ORDER BY release_id,entity_id')).rows,original);
  const retry=await f.engine.query(rawInsert,Object.values(original[0]));assert.equal(retry.affectedRows,0);
+ assert.equal((await f.engine.query(rawInsert+' ON CONFLICT DO NOTHING',Object.values(original[0]))).affectedRows,0);
  await assert.rejects(f.engine.query(rawInsert,Object.values({...original[0],evidence:'{ "test_only": true }'})),/collision/);
+ await assert.rejects(f.engine.query(rawInsert+' ON CONFLICT DO NOTHING',Object.values({...original[0],evidence:'{ "test_only": true }'})),/collision/);
  const second=await f.release('second',2);await stageGeographicRelease(f.db,{release:second,memberships:f.members});await finalizeGeographicRelease(f.db,second.id);
  assert.equal((await geographicMembershipPage(f.db,{parentId:'0:province'})).records[0].entity_id,'0:location');
  assert.equal((await f.engine.query('SELECT count(*)::int n FROM worldatlas_membership_evidence')).rows[0].n,1);
@@ -90,7 +92,7 @@ test('application role can use guarded membership view but cannot touch private 
   assert.equal((await f.engine.query(rawInsert,Object.values(prior))).affectedRows,0);
   await assert.rejects(f.engine.query('SELECT * FROM worldatlas_memberships_original_v1'),/permission denied/);
   await assert.rejects(f.engine.query("SELECT worldatlas_membership_save('first','0:continent',NULL,NULL,1,'ref','{}')"),/permission denied/);
-  await f.engine.query(rawInsert,['second','0:continent',null,null,1,'ref','{}']);
+  await f.engine.query(rawInsert+' ON CONFLICT DO NOTHING',['second','0:continent',null,null,1,'ref','{}']);
   await assert.rejects(f.engine.query(rawInsert,['second','1:location','1:continent',null,1,'ref','{}']),/adjacent-tier/);
  }finally{await f.engine.exec('RESET ROLE');}
 }));

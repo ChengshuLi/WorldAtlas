@@ -6,10 +6,15 @@ identity/geography guard functions. Private integer maps and shared raw evidence
 back a guarded public view. Original physical rows remain intact in a private
 relation during the isolated rehearsal; rollback refuses to discard new rows.
 
-The service writer omits the redundant conflict clause only for PostgreSQL
-memberships. The original guard still rejects changed rows and skips exact
-retries, including after publication. D1 and other insert helpers retain their
-existing SQL. Frozen deployed schema and migrations are unchanged.
+The service writer stays unchanged. Its existing conflict clause works with the
+guarded view: the original guard rejects changed rows and skips exact retries,
+including after publication. The isolated rehearsal takes the shared advisory
+lock and an explicit table lock. Frozen deployed schema and migrations stay
+unchanged. PostgreSQL/PGlite tests do not model concurrent remote sessions.
+
+The initial head's complete test log and evidence manifest are retained. That
+head unnecessarily changed the writer; a direct PostgreSQL probe confirmed the
+original SQL works, so the final contract tests cover it without the change.
 
 Tests exercise actual PGlite PostgreSQL, original and compact service publication,
 byte-distinct JSON spellings, invalid parents and sources, append-only behavior,

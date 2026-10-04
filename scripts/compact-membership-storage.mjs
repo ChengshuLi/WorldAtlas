@@ -30,6 +30,7 @@ export async function rehearseCompactMembershipStorage(engine,{afterCopy}={}){
  need(typeof engine.transaction==='function','Rehearsal must own its transaction');
  return engine.transaction(async tx=>{
   await tx.query('SELECT pg_advisory_xact_lock(807245315,1)');
+  await tx.query('LOCK TABLE public.atlas_geographic_memberships IN SHARE ROW EXCLUSIVE MODE');
   const owner=(await rows(tx,"SELECT current_user role,current_schema() schema,current_setting('server_encoding') encoding"))[0];
   need(owner.schema==='public'&&owner.encoding==='UTF8','Reviewed public UTF8 schema required');
   const relation=(await rows(tx,"SELECT relkind,pg_get_userbyid(relowner) owner FROM pg_class WHERE oid='public.atlas_geographic_memberships'::regclass"))[0];
@@ -78,6 +79,7 @@ export async function rehearseCompactMembershipStorage(engine,{afterCopy}={}){
 export async function rehearseCompactMembershipRollback(engine){
  return engine.transaction(async tx=>{
   await tx.query('SELECT pg_advisory_xact_lock(807245315,1)');
+  await tx.query('LOCK TABLE public.atlas_geographic_memberships,public.worldatlas_membership_rows IN SHARE ROW EXCLUSIVE MODE');
   const parity=await compactMembershipParity(tx);
   await tx.query('DROP VIEW public.atlas_geographic_memberships');
   await tx.query(`ALTER TABLE public.${legacy} RENAME TO atlas_geographic_memberships`);

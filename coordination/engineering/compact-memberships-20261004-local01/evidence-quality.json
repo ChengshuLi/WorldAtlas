@@ -26,7 +26,8 @@
         "path": "hosted/geographic-releases.js",
         "bytes": 17288,
         "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701",
-        "hash_kind": "file-bytes"
+        "hash_kind": "file-bytes",
+        "role": "original-source"
       },
       {
         "path": "hosted/postgres-adapter.js",
@@ -77,12 +78,6 @@
   "sources": [],
   "outputs": [
     {
-      "path": "hosted/geographic-releases.js",
-      "bytes": 17546,
-      "sha256": "94223b67eb81bba50e9e8b077575d3496277ab42e9756a6df40da4be92f48a10",
-      "hash_kind": "file-bytes"
-    },
-    {
       "path": "postgres/membership-storage-v1.sql",
       "bytes": 6307,
       "sha256": "cd0150628ac624f4825bfa8eb5f02bbd54838ce5da9cb7d60b5d3ad2c2395c23",
@@ -90,20 +85,20 @@
     },
     {
       "path": "scripts/compact-membership-storage.mjs",
-      "bytes": 8040,
-      "sha256": "8a1cabb86a911fc3e7d4154cce2527dc296dff0fabfacada6c3a9df6cb2fcece",
+      "bytes": 8266,
+      "sha256": "441f7e7445584add5d95b538d515da317a85508a49e205018fd84f9548bf0258",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/compact-membership-storage.test.mjs",
-      "bytes": 9661,
-      "sha256": "ff7edec003fd9d8efc7f9fd89dc284558ec8747efeb4981d6375411271834dc3",
+      "bytes": 9958,
+      "sha256": "ac5fe8eaeff6ec523b29d02ea89d675c750e445b7e7e539f7c5c172e326331b8",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/compact-memberships-20261004-local01/README.md",
-      "bytes": 1815,
-      "sha256": "3332db7fc5ac233cab6185777ae7b9ea1f169a2d3f711a31080305720012cf20",
+      "bytes": 2143,
+      "sha256": "30a7b5f245906ef2a215839d688ad573bafae87316d62153993521cce2bb05ff",
       "hash_kind": "file-bytes"
     },
     {
@@ -113,21 +108,35 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/compact-memberships-20261004-local01/contract-tests.log",
+      "path": "coordination/engineering/compact-memberships-20261004-local01/contract-tests-initial-head.log",
       "bytes": 9311,
       "sha256": "fd5a124e80ab13159f4fc09d5110c9befe895787b9b8e4c02e6ca2562225ed5e",
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/contract-tests.log",
+      "bytes": 9314,
+      "sha256": "c5d445b776d2324f55e4c61f9a8e894dc63de9555affdb951a03deb2858098ad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/initial-head-evidence.json.gz",
+      "bytes": 2217,
+      "sha256": "fb6f5bb8445a7166957dc483adb16760f3a231cf3b3094ebd72b4d2594a5d892",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 9773,
+      "uncompressed_sha256": "87cdcbd8b6b76fad222717fc3dcfc4520affd2b4b4b77fa2a7b4c0e0933104e1"
+    },
+    {
       "path": "coordination/engineering/compact-memberships-20261004-local01/prepare-evidence.mjs",
-      "bytes": 4525,
-      "sha256": "36e7d6c8007f18992716bd86db861781b6c2b4dda4634b49db21c6a3e06ac903",
+      "bytes": 4455,
+      "sha256": "476192881b951df3af92366f7e6b16dd5a519df72f653ff7f343a453d39b7fb3",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/compact-memberships-20261004-local01/test-results.json",
       "bytes": 1219,
-      "sha256": "20adef07338e22464ca00e4d2347056a049a3c5b1da38497a1afcbfcc4bba515",
+      "sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964",
       "hash_kind": "file-bytes"
     }
   ],
@@ -147,7 +156,7 @@
       "unit": "count",
       "vintage": "baseline",
       "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
-      "input_sha256": "20adef07338e22464ca00e4d2347056a049a3c5b1da38497a1afcbfcc4bba515"
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
     },
     {
       "id": "test-pass",
@@ -155,7 +164,7 @@
       "unit": "count",
       "vintage": "baseline",
       "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
-      "input_sha256": "20adef07338e22464ca00e4d2347056a049a3c5b1da38497a1afcbfcc4bba515"
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
     },
     {
       "id": "test-fail",
@@ -163,7 +172,7 @@
       "unit": "count",
       "vintage": "baseline",
       "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
-      "input_sha256": "20adef07338e22464ca00e4d2347056a049a3c5b1da38497a1afcbfcc4bba515"
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
     },
     {
       "id": "test-cancelled",
@@ -171,7 +180,7 @@
       "unit": "count",
       "vintage": "baseline",
       "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
-      "input_sha256": "20adef07338e22464ca00e4d2347056a049a3c5b1da38497a1afcbfcc4bba515"
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
     },
     {
       "id": "test-skipped",
@@ -179,7 +188,7 @@
       "unit": "count",
       "vintage": "baseline",
       "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
-      "input_sha256": "20adef07338e22464ca00e4d2347056a049a3c5b1da38497a1afcbfcc4bba515"
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
     },
     {
       "id": "test-todo",
@@ -187,7 +196,7 @@
       "unit": "count",
       "vintage": "baseline",
       "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
-      "input_sha256": "20adef07338e22464ca00e4d2347056a049a3c5b1da38497a1afcbfcc4bba515"
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
     }
   ],
   "metric_bindings": [
@@ -231,11 +240,6 @@
   },
   "change_receipts": [
     {
-      "path": "hosted/geographic-releases.js",
-      "status": "modified",
-      "original_sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701"
-    },
-    {
       "path": "postgres/membership-storage-v1.sql",
       "status": "added"
     },
@@ -256,7 +260,15 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/contract-tests-initial-head.log",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/compact-memberships-20261004-local01/contract-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/initial-head-evidence.json.gz",
       "status": "added"
     },
     {
