@@ -1,0 +1,43 @@
+{
+  "assembled_utc": "2026-10-04",
+  "fresh_external_access_recheck_performed": false,
+  "subject": "Nigeria settlement and physical land coverage",
+  "findings": [
+    {
+      "source_id": "noaa-gshhg",
+      "role": "physical coastline, land fragments, and named island screening",
+      "canonical_information_page": "https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html",
+      "inherited_access_record": {
+        "commit": "e570f16",
+        "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/physical-source-access.json"
+      },
+      "recorded_access_results": {
+        "information_page": "HTTP 200; official page links the latest-data path and readme",
+        "https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/": "HTTP 404",
+        "https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/readme.txt": "HTTP 404",
+        "http://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/": "HTTP 404"
+      },
+      "bytes_retained": false,
+      "sha256": null,
+      "license": "Not independently verified for the inaccessible archive; inspect current NOAA terms/readme after lawful restoration.",
+      "conclusion": "No conclusion about full physical land, disconnected fragments, or named islands is made from administrative polygons alone.",
+      "bounded_follow_up": "Restore the current NOAA product or NOAA-documented mirror, preserve source bytes and hash/license metadata, screen all 210 assigned Nigerian subjects and relevant disconnected components, then reconcile named islands and land fragments with authoritative gazetteer evidence."
+    },
+    {
+      "source_id": "grid3-nga-settlement-extents-v4_1",
+      "role": "settlement extents",
+      "canonical_catalog": "https://data.humdata.org/api/3/action/package_show?id=grid3-nga-settlement-extents-v4_1",
+      "catalog_metadata": "Retained in hdx-grid3-nga-settlement-extents-v4_1-package-metadata.json.gz and described in acquisition.json.",
+      "recorded_limit": "The current package describes a 2,136,305,664-byte GeoPackage, which was not retained. Metadata and the canonical restoration route are retained; this is not a complete settlement-footprint input for the present packet.",
+      "license": "CC BY-SA as reported by the retained catalog metadata; verify applicable version and attribution terms at restoration.",
+      "conclusion": "No completeness claim is made from WCA settlement points or capital points."
+    },
+    {
+      "source_id": "nigeria-settlements-villages-towns-cities",
+      "role": "national settlement names and capitals",
+      "canonical_catalog": "https://data.humdata.org/api/3/action/package_show?id=nigeria-settlements-villages-towns-cities",
+      "recorded_limit": "The retained catalog labels the data license 'Other'; only package metadata is retained. The settlement records were not redistributed or used.",
+      "conclusion": "National settlement rows require a lawful access and reuse determination before they can support this assessment."
+    }
+  ]
+}
