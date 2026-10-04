@@ -120,3 +120,10 @@ This is cooperative GitHub Actions evidence, not independent authenticated worke
 identity or a native GitHub merge queue. The existing final base check and guarded
 head merge remain; outside writers must honor the same serialized queue. A green
 run does not certify geographic facts, authorize imports or publish the Site.
+
+The focused `evidence` controls use Node and repository files without installed
+npm packages. Both PR regression and isolated queue regression install npm
+packages only for the `full` profile. Full proof still requires successful Node
+and Python installation, applicable browser setup and the actual hosted build;
+focused proof requires every focused control to execute successfully with zero
+skipped tests. A skipped dependency-install step is not application coverage.

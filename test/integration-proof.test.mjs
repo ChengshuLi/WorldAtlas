@@ -11,8 +11,8 @@ function fixture(profile = 'full') {
     status:'completed',conclusion:'success',pull_requests:[{number:2,head:{sha:'head'}}]};
   const jobs = [{name:'profile',status:'completed',conclusion:'success'},
     ...(profile === 'full' ? [0,1,2] : [0]).map(shard=>({name:`regression (${shard})`,status:'completed',conclusion:'success',
-      steps:['Checkout reviewed head','Install Node dependencies','Install browser dependencies only for tests that use Playwright','Complete regression shard',
-        ...(profile==='full'?['Install Python dependencies',...(shard===0?['Build hosted assets']:[])]:[])].map(name=>({name,status:'completed',conclusion:'success'}))}))];
+      steps:['Checkout reviewed head','Install browser dependencies only for tests that use Playwright','Complete regression shard',
+        ...(profile==='full'?['Install Node dependencies','Install Python dependencies',...(shard===0?['Build hosted assets']:[])]:[])].map(name=>({name,status:'completed',conclusion:'success'}))}))];
   const f = {run,jobs,workflow:'ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets'};
   f.options = {repo:'owner/repo',number:2,head:'head',profile,baseline:tree,authored:structuredClone(tree),candidate:structuredClone(tree),api:async route=>{
     if(route.includes('/git/blobs/')) return {content:Buffer.from(f.workflow).toString('base64')};
@@ -81,4 +81,20 @@ test('final proof pins attempt and refuses a later successful rerun or missing/i
   assert.equal(await integrationProof({...f.options,runId:12,runAttempt:proof.run_attempt}),null);
   for(const runAttempt of [undefined,0,-1,1.5,'1',NaN])
     assert.equal(await integrationProof({...fixture().options,runId:12,runAttempt}),null);
+});
+
+test('focused proof accepts complete controls without installing Node dependencies', async()=>{
+  const f=fixture('evidence');
+  assert.ok(!f.jobs[1].steps.some(step=>step.name==='Install Node dependencies'));
+  assert.ok(await integrationProof(f.options));
+  f.jobs[1].steps.push({name:'Install Node dependencies',status:'completed',conclusion:'skipped'});
+  assert.ok(await integrationProof(f.options));
+});
+test('full proof refuses missing, failed, cancelled or skipped Node installation in any shard', async()=>{
+  for(const shard of [0,1,2]) for(const conclusion of ['missing','failure','cancelled','skipped']) {
+    const f=fixture();const job=f.jobs.find(job=>job.name===`regression (${shard})`);
+    if(conclusion==='missing') job.steps=job.steps.filter(step=>step.name!=='Install Node dependencies');
+    else job.steps.find(step=>step.name==='Install Node dependencies').conclusion=conclusion;
+    assert.equal(await integrationProof(f.options),null);
+  }
 });
