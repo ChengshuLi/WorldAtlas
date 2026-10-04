@@ -30,6 +30,52 @@ Start with `coordination/templates/evidence-v1.json`, replace placeholders, and 
 
 The gate checks hashes, files, subjects, supported vintages, method policy, change accounting and result bindings. Ordinary input/decompressed files are bounded to 32 MiB, declared bytes to 256 MiB and descriptors to 512; remote Git trees must be complete. Larger datasets need reviewed partitioning rather than disabled checks. A premerge manifest cannot certify a deployment or geographic approval. Initial research may be complete with unresolved facts; it cannot close a correction that remains unresolved.
 
+### Identity-only source subjects already recorded in prior evidence
+
+For a geography reproduction packet scoped to native source IDs, a new registry must not
+be called an ancestor baseline. The ordinary `baseline.subject_files` path still requires
+the actual subjects in pinned baseline GeoJSON. An alternative is a **limited prior-evidence
+inventory**, where an existing ancestor-main record already lists the exact native roster:
+
+```json
+"subject_inventory": {
+  "version": 1,
+  "basis": "prior-evidence",
+  "path": "data/regional-review/EXISTING-PACKET/cd-assessments.json",
+  "json_pointer": "/exact_subjects",
+  "id_prefix": "StatisticsCanada:2021:CD:",
+  "source_property": "CDUID",
+  "source_id": "statcan-2021-census-geography",
+  "registry_path": "research/geography/OWNED-PACKET/source-subject-registry.geojson"
+}
+```
+
+This field belongs inside `baseline`, instead of `subject_files`. Pin the original record
+in `baseline.files` at a truthful ancestor commit; cite `source_id` in the source inventory.
+The pointer must resolve to unique native string IDs whose prefixed roster exactly equals
+the issue's subjects. List the new registry as a candidate output. Its features must be
+identity-only (`geometry: null`), with the exact prefixed `id`, matching `properties.id`,
+`source_value`, and `source_property`. Invented/duplicate subjects, mixed authority paths,
+unlisted inputs/outputs and geometric registries fail. Normal hashes, byte limits, change
+receipts, result-vintage checks, ancestry and independent review remain required.
+
+The checker always reports a limitation: this verifies agreement with **retained prior
+evidence**, not independent membership or geometry in the original source. A reviewer must
+retain that limit and verify the prior record's source role/vintage; this option must not
+be described as certified source extraction or regional approval. Do not use it to silently
+replace an original-source geometry claim. Oversized originals remain lawful restoration
+or independently reviewed partitioning work; no size limit is widened here.
+
+For PR #678 / issue #667, the pre-existing record is
+`data/regional-review/bc-administrative-remainders-followup-2026/cd-assessments.json`
+at `24629e5918a144a1979db80ba7012baea42036e7`, with native IDs under `/exact_subjects`.
+The GEO owner must retain all original evidence, move newly created copies/extracts/registry
+out of `baseline.files` into candidate source/output descriptors, bind baseline pins only
+to real files at the ancestor, and refresh affected metric vintages/bindings honestly.
+If the actual reviewed metric inputs differ from the chosen ancestor, retain those results
+as archived with their true evaluation commit; do not merely relabel them current. Then run
+the trusted hosted gate and obtain a fresh exact-head review including its new limits.
+
 Local self-check:
 
 ```sh
