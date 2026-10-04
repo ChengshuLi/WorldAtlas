@@ -1,0 +1,961 @@
+{
+  "source_issue": 491,
+  "baseline_commit": "73be9d0801a3cab46a0e24a7b030bb8204d79a71",
+  "source_scope_path": "data/regional-review/regional-review-58ad57d566ac2b50/scope.json",
+  "source_assessment_path": "data/regional-review/regional-review-58ad57d566ac2b50/assessment.json",
+  "source_scope_sha256": "554b93f5251fa9d9c33f7fb7f2d809bea7325d26b0732b65c5e35dc15c7b014b",
+  "source_assessment_sha256": "2d29c89c1540af53f70443788ca899d947b8ac4c2f006f66274afbd64f8aa176",
+  "member_ids_sha256": "6032775e1f381a259382697c034ab51f61dcc1bbdc8ef90d51bb3bbb36c0037d",
+  "subjects": [
+    {
+      "location_id": "gb:COL:ADM2:7082276B10918286355",
+      "source_name": "Neiva",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B12261061715125",
+      "source_name": "Cereté",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B12408702465478",
+      "source_name": "Orito",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B1259376417396",
+      "source_name": "Dosquebradas",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B12628358742837",
+      "source_name": "Los Córdobas",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B12666092596275",
+      "source_name": "Palestina",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B13648445071260",
+      "source_name": "San Antero",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B1381167873192",
+      "source_name": "El Águila",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B15347498266609",
+      "source_name": "Puracé (Coconuco)",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B15762794727081",
+      "source_name": "Tierralta",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B16171151514761",
+      "source_name": "La Victoria",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B16460113853729",
+      "source_name": "Andalucía",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B17294841242383",
+      "source_name": "Suárez",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B17617494286143",
+      "source_name": "Teruel",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B17720170478465",
+      "source_name": "Puerto Libertador",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B1809548619611",
+      "source_name": "Dagua",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B19709317443254",
+      "source_name": "Bolívar",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B2042357516453",
+      "source_name": "Paicol",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B21026196123050",
+      "source_name": "Tello",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B22050163903058",
+      "source_name": "Altamira",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B22277763183107",
+      "source_name": "Pijao",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B22377249652696",
+      "source_name": "Timbío",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B22807037286061",
+      "source_name": "Pueblo Rico",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B2298083414171",
+      "source_name": "Piamonte",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B24911475844532",
+      "source_name": "San Francisco",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B25468013916959",
+      "source_name": "San Miguel (La Dorada)",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B27401481263527",
+      "source_name": "Yotoco",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B27593936754080",
+      "source_name": "Nátaga",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B28031700236172",
+      "source_name": "Quimbaya",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B28574289150765",
+      "source_name": "Candelaria",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B29582947964512",
+      "source_name": "Suaza",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B30491480162439",
+      "source_name": "Montería",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B30849628494153",
+      "source_name": "Florencia",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B31327332190978",
+      "source_name": "Palermo",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B31723879079802",
+      "source_name": "Aipe",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B32366816455434",
+      "source_name": "San Pedro",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B32711967571175",
+      "source_name": "La Cumbre",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B3276683190429",
+      "source_name": "Puerto Escondido",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B33285563238152",
+      "source_name": "Pradera",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B333930671770",
+      "source_name": "Guapi",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B33539636068872",
+      "source_name": "López",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B33798425293322",
+      "source_name": "Riofrío",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B344609225912",
+      "source_name": "El Tambo",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B34643153596427",
+      "source_name": "Jamundí",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B34877429512170",
+      "source_name": "Sahagún",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B35662466924312",
+      "source_name": "Purísima",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B36183297139579",
+      "source_name": "San Bernardo Del Viento",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B36252942932690",
+      "source_name": "Alcalá",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B37156056726077",
+      "source_name": "Ulloa",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B37195114642514",
+      "source_name": "Salento",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B37197913893650",
+      "source_name": "Cotorra",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B37421860048311",
+      "source_name": "Yumbo",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B37489805673697",
+      "source_name": "Montenegro",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B37596185991621",
+      "source_name": "Armenia",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B37830397780712",
+      "source_name": "Toro",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B37877063835041",
+      "source_name": "Córdoba",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B3788770543565",
+      "source_name": "Corinto",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B38703124782657",
+      "source_name": "Villagarzón",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B38814266492224",
+      "source_name": "El Dovio",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B40300003971845",
+      "source_name": "Algeciras",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B40499260653390",
+      "source_name": "Morales",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B42477107224042",
+      "source_name": "Buenavista",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B42533804398270",
+      "source_name": "Puerto Asís",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B42793488331490",
+      "source_name": "Inza",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B43348198009946",
+      "source_name": "Versalles",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B43653558961889",
+      "source_name": "Mercaderes",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B45851614752586",
+      "source_name": "San Carlos",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B46133695651434",
+      "source_name": "Patía",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B4639527364844",
+      "source_name": "Puerto Leguízamo",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B46612550724020",
+      "source_name": "El Cerrito",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B47350774570245",
+      "source_name": "Argelia",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B47374862925181",
+      "source_name": "Guachené",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B47769001538338",
+      "source_name": "Sucre",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B47892047719845",
+      "source_name": "Buenos Aires",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B48600116890158",
+      "source_name": "Ayapel",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B48757885087630",
+      "source_name": "Marsella",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B48843599795866",
+      "source_name": "Montelíbano",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B49685507148696",
+      "source_name": "Páez",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B49686436836196",
+      "source_name": "Palmira",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B50002192579952",
+      "source_name": "La Argentina",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B51071963604741",
+      "source_name": "Piendamó",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B51151260265899",
+      "source_name": "Trujillo",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B512677824118",
+      "source_name": "Yaguará",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B51677864129735",
+      "source_name": "Vijes",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B51797720548410",
+      "source_name": "La Tebaida",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B53054479905694",
+      "source_name": "Sevilla",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B53441696517759",
+      "source_name": "La Sierra",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B53672126014760",
+      "source_name": "Bolívar",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B53955243236004",
+      "source_name": "Oporapa",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B54028982815343",
+      "source_name": "Génova",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B54316712133185",
+      "source_name": "Tuluá",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B54402931041417",
+      "source_name": "Santander De Quilichao",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B54436910707179",
+      "source_name": "Cajibío",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B54920381077672",
+      "source_name": "Timbiquí",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B55620946871412",
+      "source_name": "Gigante",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B55716898367144",
+      "source_name": "Zarzal",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B5619967708975",
+      "source_name": "Chinú",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B56423369756647",
+      "source_name": "Caldono",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B56557214099866",
+      "source_name": "Pereira",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B56868740164332",
+      "source_name": "Mocoa",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B59383263331081",
+      "source_name": "Silvia",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B59907465773306",
+      "source_name": "Filandia",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B59987699383018",
+      "source_name": "La Plata",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B60306197316687",
+      "source_name": "Padilla",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B60614758896668",
+      "source_name": "Hobo",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B6069538576370",
+      "source_name": "Santiago",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B60713931967074",
+      "source_name": "Pitalito",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B61077651934720",
+      "source_name": "Tesalia",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B61573549340712",
+      "source_name": "Villa Rica",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B61798378462298",
+      "source_name": "Cali",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B62857285064431",
+      "source_name": "Roldanillo",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B63113141901274",
+      "source_name": "Agrado",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B64022238164064",
+      "source_name": "Tuchin",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B64224569928745",
+      "source_name": "Miranda",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B64544196905368",
+      "source_name": "Puerto Caicedo",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B64894766259605",
+      "source_name": "Bugalagrande",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B65287171655445",
+      "source_name": "Santa Rosa",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B65356767722018",
+      "source_name": "Cartago",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B65922719732159",
+      "source_name": "Villavieja",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B66968724645536",
+      "source_name": "Caicedonia",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B67113151062555",
+      "source_name": "Valencia",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B67782051899776",
+      "source_name": "Chimá",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B6796098252529",
+      "source_name": "La Celia",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B6986127045268",
+      "source_name": "Acevedo",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B70785210683383",
+      "source_name": "Obando",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B70920947673933",
+      "source_name": "Rosas",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B71281345129005",
+      "source_name": "La Virginia",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B71793235558462",
+      "source_name": "Saladoblanco",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B7209337263297",
+      "source_name": "Balboa",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B7280150646528",
+      "source_name": "Guática",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B72857503251060",
+      "source_name": "Florida",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B74381710029853",
+      "source_name": "Guadalupe",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B74568314469162",
+      "source_name": "Santa María",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B7472768394533",
+      "source_name": "Pital",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B75435633270321",
+      "source_name": "Ansermanuevo",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B75993550725955",
+      "source_name": "Argelia",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B76225783159695",
+      "source_name": "Isnos",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B76767712756641",
+      "source_name": "Pueblo Nuevo",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B77383139939829",
+      "source_name": "San Andres De Sotavento",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B77686816472796",
+      "source_name": "La Unión",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B78082705771395",
+      "source_name": "Colombia",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B79425124325602",
+      "source_name": "Campoalegre",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B80590541322952",
+      "source_name": "Planeta Rica",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B81179954496146",
+      "source_name": "Quinchia",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B81203589950086",
+      "source_name": "San Pelayo",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B81769369413646",
+      "source_name": "Tarqui",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B82326475607220",
+      "source_name": "Buenaventura",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B82675854286902",
+      "source_name": "Canalete",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B82824229693572",
+      "source_name": "Rivera",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B83235998403741",
+      "source_name": "Santa Rosa De Cabal",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B83850714200687",
+      "source_name": "San Sebastian",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B84035448775523",
+      "source_name": "Jambaló",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B84090204325710",
+      "source_name": "La Apartada",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B84273930819596",
+      "source_name": "Moñitos",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B84511387855625",
+      "source_name": "Garzón",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B85477944676343",
+      "source_name": "Puerto Guzmán",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B86132048215988",
+      "source_name": "Circasia",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B86170920101397",
+      "source_name": "Sotará (Paispamba)",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B86237155674580",
+      "source_name": "Ginebra",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B86437588749871",
+      "source_name": "Popayán",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B86469624898936",
+      "source_name": "Puerto Tejada",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B87047054998240",
+      "source_name": "Sibundoy",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B87448620862857",
+      "source_name": "Mistrató",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B8755035279913",
+      "source_name": "Timaná",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B89105760254188",
+      "source_name": "Buga",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B89146120642235",
+      "source_name": "San José De Uré",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B89331867807141",
+      "source_name": "La Vega",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B90066028966732",
+      "source_name": "Calarca",
+      "atlas_department": "Quindío"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B90107957997642",
+      "source_name": "Cienaga De Oro",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B90578297769705",
+      "source_name": "Lorica",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B90942286802218",
+      "source_name": "Almaguer",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B90998600886333",
+      "source_name": "El Cairo",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B91777379467178",
+      "source_name": "Guacarí",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B91973001860083",
+      "source_name": "Baraya",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B92483962355634",
+      "source_name": "Belén De Umbría",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B93831290188836",
+      "source_name": "Íquira",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B94395141643556",
+      "source_name": "Calima",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B94822224819710",
+      "source_name": "Apía",
+      "atlas_department": "Risaralda"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B94855321058702",
+      "source_name": "Totoró",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B96393406171347",
+      "source_name": "Buenavista",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B97277797661378",
+      "source_name": "Momil",
+      "atlas_department": "Córdoba"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B97476971281230",
+      "source_name": "Valle Del Guamuez",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B97721102897015",
+      "source_name": "Restrepo",
+      "atlas_department": "Valle del Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B97741553625130",
+      "source_name": "San Agustín",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B98035381809124",
+      "source_name": "Caloto",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B98056345530252",
+      "source_name": "Toribío",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B98098551259160",
+      "source_name": "Colón",
+      "atlas_department": "Putumayo"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B98120491021397",
+      "source_name": "Balboa",
+      "atlas_department": "Cauca"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B98315935443",
+      "source_name": "Elías",
+      "atlas_department": "Huila"
+    },
+    {
+      "location_id": "gb:COL:ADM2:7082276B9908924507903",
+      "source_name": "Santuario",
+      "atlas_department": "Risaralda"
+    }
+  ]
+}

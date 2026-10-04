@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "retrieved_on": "2026-10-04",
+  "jurisdiction": "Colombia",
+  "sources": [
+    {
+      "id": "dane-divipola-municipalities-jun-2026",
+      "authority": "DANE Geoportal",
+      "title": "Codificación de la División Político Administrativa de Colombia - DIVIPOLA junio 2026; Municipios",
+      "vintage": "June 2026 as printed in worksheet",
+      "role": "Current administrative code/name/type and locality-coordinate reference for assigned municipality crosswalk. Tabular localization data; not administrative polygon geometry.",
+      "canonical_download": "https://geoportal.dane.gov.co/descargas/divipola/DIVIPOLA_Municipios.xlsx",
+      "catalog_record": "https://www.datos.gov.co/dataset/Municipio/ekir-745k",
+      "license": "CC BY 4.0 under DANE Geoportal license policy for DANE-produced georeferenced information; catalog Common Core License field is blank.",
+      "attribution": "Departamento Administrativo Nacional de Estadística - DANE: www.dane.gov.co",
+      "retained_path": "sources/DIVIPOLA_Municipios.xlsx"
+    },
+    {
+      "id": "dane-divipola-centros-poblados-jun-2026",
+      "authority": "DANE Geoportal",
+      "title": "Codificación de la División Político Administrativa de Colombia - DIVIPOLA junio 2026; Cabeceras municipales y centros poblados",
+      "vintage": "June 2026 as printed in worksheet",
+      "role": "Official named municipal-seat (CM) and populated-center (CP) records and listed longitude/latitude, joined by five-digit DANE municipality code. These points do not describe built-up footprints or all rural settlement.",
+      "canonical_download": "https://geoportal.dane.gov.co/descargas/divipola/DIVIPOLA_CentrosPoblados.xlsx",
+      "catalog_record": "https://www.datos.gov.co/dataset/Centros-Poblados/rb56-9fdv",
+      "license": "CC BY 4.0 under DANE Geoportal license policy for DANE-produced georeferenced information; catalog Common Core License field is blank.",
+      "attribution": "Departamento Administrativo Nacional de Estadística - DANE: www.dane.gov.co",
+      "retained_path": "sources/DIVIPOLA_CentrosPoblados.xlsx"
+    },
+    {
+      "id": "dane-georeferenced-data-license-policy",
+      "authority": "DANE Geoportal",
+      "title": "Licencia y condiciones de uso",
+      "canonical_reference": "https://geoportal.dane.gov.co/acerca-del-geoportal/licencia-y-condiciones-de-uso/",
+      "license": "CC BY 4.0; DANE states georeferenced information it produces is available for download/use under Creative Commons and provides the attribution recorded above.",
+      "retained_path": "sources/dane-geoportal-license.html.gz",
+      "uncompressed_sha256": "7908232ee8464eda559be3f9f1113fedafb065caf696aa308b85425140360d35",
+      "uncompressed_bytes": 21073
+    },
+    {
+      "id": "dane-mgn-2024-department-layer-metadata",
+      "authority": "DANE via Datos Abiertos Colombia and ArcGIS Online metadata",
+      "title": "Departamento; DIVIPOLA according to MGN 2024",
+      "vintage": "MGN/DIVIPOLA 2024; metadata retrieved 2026-10-04",
+      "service_layer_id": 319,
+      "role": "Official department polygon-layer metadata. Popup fields name the department code/name, version year, creation year and administrative act. Feature rows/geometry not obtained.",
+      "catalog_record": "https://www.datos.gov.co/dataset/Departamento/cs3h-r9em",
+      "service": "https://portalgis.dane.gov.co/mparcgis/rest/services/Divipola/Serv_DIVIPOLA_MGN_2024/MapServer/319",
+      "license": "ArcGIS item and catalog license fields are blank; DANE Geoportal license policy above applies to DANE-produced georeferenced information.",
+      "retained_metadata": [
+        "sources/datos-gov-mgn-departments-metadata.json",
+        "sources/arcgis-divipola-mgn-2024-item.json",
+        "sources/arcgis-divipola-mgn-2024-item-data.json"
+      ],
+      "catalog_record_dates": {
+        "issued": "2026-02-12T14:58:08Z",
+        "last_update": "2026-09-24T15:37:31Z",
+        "origin": "Datos Abiertos Colombia federated metadata Common Core fields"
+      }
+    },
+    {
+      "id": "dane-mgn-2024-municipality-layer-metadata",
+      "authority": "DANE via Datos Abiertos Colombia and ArcGIS Online metadata",
+      "title": "Municipio; DIVIPOLA according to MGN 2024",
+      "vintage": "MGN/DIVIPOLA 2024; metadata retrieved 2026-10-04",
+      "service_layer_id": 317,
+      "role": "Official municipality polygon-layer metadata. Popup fields name department/municipality codes, municipality type, area, version year, department/municipality names and creation resolution. Feature rows/geometry not obtained.",
+      "catalog_record": "https://www.datos.gov.co/dataset/Municipio/ekir-745k",
+      "service": "https://portalgis.dane.gov.co/mparcgis/rest/services/Divipola/Serv_DIVIPOLA_MGN_2024/MapServer/317",
+      "license": "ArcGIS item and catalog license fields are blank; DANE Geoportal license policy above applies to DANE-produced georeferenced information.",
+      "retained_metadata": [
+        "sources/datos-gov-municipality-metadata.json",
+        "sources/arcgis-divipola-mgn-2024-item.json",
+        "sources/arcgis-divipola-mgn-2024-item-data.json"
+      ],
+      "catalog_record_dates": {
+        "issued": "2026-02-12T14:58:08Z",
+        "last_update": "2026-09-24T15:37:31Z",
+        "origin": "Datos Abiertos Colombia federated metadata Common Core fields"
+      }
+    },
+    {
+      "id": "dane-mgn-2024-settlement-layer-metadata",
+      "authority": "DANE via Datos Abiertos Colombia and ArcGIS Online metadata",
+      "title": "Centros Poblados; MGN 2024 layer for municipal seats and populated centers",
+      "vintage": "MGN/DIVIPOLA 2024; metadata retrieved 2026-10-04",
+      "service_layer_id": 305,
+      "role": "Official settlement-layer metadata with department, municipality, urban-zone/settlement codes/names, area, altitude and version fields. Feature rows/geometry not obtained.",
+      "catalog_record": "https://www.datos.gov.co/dataset/Centros-Poblados/rb56-9fdv",
+      "service": "https://portalgis.dane.gov.co/mparcgis/rest/services/Divipola/Serv_DIVIPOLA_MGN_2024/MapServer/305",
+      "license": "ArcGIS item and catalog license fields are blank; DANE Geoportal license policy above applies to DANE-produced georeferenced information.",
+      "retained_metadata": [
+        "sources/datos-gov-centros-poblados-metadata.json",
+        "sources/arcgis-divipola-mgn-2024-item.json",
+        "sources/arcgis-divipola-mgn-2024-item-data.json"
+      ],
+      "catalog_record_dates": {
+        "issued": "2026-02-12T14:58:08Z",
+        "last_update": "2026-09-24T15:37:31Z",
+        "origin": "Datos Abiertos Colombia federated metadata Common Core fields"
+      }
+    },
+    {
+      "id": "dane-divipola-centros-poblados-2013i-legacy-service",
+      "authority": "DANE ArcGIS metadata lead cited in parent packet and issue #587",
+      "title": "Centros Poblados Divipola 2013I",
+      "vintage": "2013I; historical point-service lead only, not used as current inventory",
+      "role": "Historical service metadata lead retained to distinguish earlier source claims from June 2026 DIVIPOLA records. No feature rows downloaded or used.",
+      "service": "https://portalgis.dane.gov.co/mparcgis/rest/services/Divipola/Serv_PuntosCentrosPoblados2013I/MapServer",
+      "license": "Item license is blank; DANE Geoportal CC BY 4.0 policy applies to its DANE-produced georeferenced information.",
+      "retained_metadata": [
+        "sources/arcgis-centros-poblados-2013I-item.json"
+      ]
+    }
+  ],
+  "retained_files": [
+    {
+      "path": "sources/DIVIPOLA_CentrosPoblados.xlsx",
+      "bytes": 1039763,
+      "sha256": "4a5a3918140fe43c54392a24d86f153183c90a30c459e25ddaec3e21db96fbe5",
+      "role": "Original downloaded dataset, source terms page, or unmodified catalog/service metadata response."
+    },
+    {
+      "path": "sources/DIVIPOLA_Municipios.xlsx",
+      "bytes": 299758,
+      "sha256": "cfcf906ce39bc50d8413ae060969e93c446ba8da6785b6247621de719321506b",
+      "role": "Original downloaded dataset, source terms page, or unmodified catalog/service metadata response."
+    },
+    {
+      "path": "sources/arcgis-centros-poblados-2013I-item.json",
+      "bytes": 1308,
+      "sha256": "54d87a47d370212fd4203d0e7b7f4f93d01b699467a217bb7708c2252b02ea07",
+      "role": "Original downloaded dataset, source terms page, or unmodified catalog/service metadata response."
+    },
+    {
+      "path": "sources/arcgis-divipola-mgn-2024-item-data.json",
+      "bytes": 7063,
+      "sha256": "3e77ed4043bfd9e00d22c23bfcc6d16d586420721c601f624f70184745c146c1",
+      "role": "Original downloaded dataset, source terms page, or unmodified catalog/service metadata response."
+    },
+    {
+      "path": "sources/arcgis-divipola-mgn-2024-item.json",
+      "bytes": 1453,
+      "sha256": "5b669347c9d3bdcec8485c6a4924554389107f14bdc7bc43ab3b2bcbd4d30653",
+      "role": "Original downloaded dataset, source terms page, or unmodified catalog/service metadata response."
+    },
+    {
+      "path": "sources/dane-geoportal-license.html.gz",
+      "bytes": 4488,
+      "sha256": "b4d0ac554b83b2f140f98faf66acaab5d984b7d0f3387ddc26710097718bed04",
+      "role": "Original downloaded dataset, source terms page, or unmodified catalog/service metadata response.",
+      "content_encoding": "gzip",
+      "uncompressed_bytes": 21073,
+      "uncompressed_sha256": "7908232ee8464eda559be3f9f1113fedafb065caf696aa308b85425140360d35"
+    },
+    {
+      "path": "sources/datos-gov-centros-poblados-metadata.json",
+      "bytes": 6240,
+      "sha256": "f9c67fee7893a74cf74304ea7f2f1b9404691443ef6d0eda056308f0d7a622dd",
+      "role": "Original downloaded dataset, source terms page, or unmodified catalog/service metadata response."
+    },
+    {
+      "path": "sources/datos-gov-mgn-departments-metadata.json",
+      "bytes": 6232,
+      "sha256": "06d81c3a95681a7176d2bc01afeac21b4d257afaa1fd670d9e61a1ebf77e678e",
+      "role": "Original downloaded dataset, source terms page, or unmodified catalog/service metadata response."
+    },
+    {
+      "path": "sources/datos-gov-municipality-metadata.json",
+      "bytes": 6226,
+      "sha256": "e4f987310480074a2868134604ce17c362428e79a3f6a2811aef78e0518eccd1",
+      "role": "Original downloaded dataset, source terms page, or unmodified catalog/service metadata response."
+    }
+  ],
+  "derived_inputs": [
+    {
+      "path": "subject-inputs.json",
+      "bytes": 27750,
+      "sha256": "530d32c146a17e05314c915249eaae61cf4caa4f61c27c4c4f5a292c36436833",
+      "basis": "Extracted exact location IDs/source names/Atlas department parents from the pinned #491 scope and assessment snapshots at baseline commit 73be9d0801a3cab46a0e24a7b030bb8204d79a71; source blobs named and hashed in the snapshot."
+    }
+  ]
+}
