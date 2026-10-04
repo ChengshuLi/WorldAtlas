@@ -1,0 +1,292 @@
+{
+  "version": 1,
+  "issue": 783,
+  "lane": "engineering",
+  "worker_id": "engineering-compact-memberships-20261004-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
+    "files": [
+      {
+        "path": "postgres/schema.sql",
+        "bytes": 51470,
+        "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "postgres/runtime-role.sql",
+        "bytes": 6900,
+        "sha256": "78198903a3a9f4174cfe198bcdb6560b54c057e869dd5bf576ea84c92713e61a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "hosted/geographic-releases.js",
+        "bytes": 17288,
+        "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "hosted/postgres-adapter.js",
+        "bytes": 11816,
+        "sha256": "427f48417ea5008146edfb77fd732ba017286a2484f412329452e135073c9ab0",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "hosted/storage-export-v2-contract.js",
+        "bytes": 7783,
+        "sha256": "f670c6e6809192d62fa01959e3277eff96633b4e64293975dbf52b63b8e5d04b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "hosted/storage-export-v3-contract.js",
+        "bytes": 2545,
+        "sha256": "9fe988be6f06ba81d6e92d1fd0b82e7b940f8f90829d072a42e5cd9a0696b821",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/verify-postgres-schema.mjs",
+        "bytes": 6163,
+        "sha256": "3fbf8757a0712e794c55aafc06bad826c76cdbee533c8011f8bc1151137ed1a3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 31085,
+        "sha256": "c090de880981452fde8c6dfd4c36cde236887034e8fb8cb6da7e67dc13a02db6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 245755,
+        "sha256": "47aa40b82e7f6b225a6567d28a0427df39d415dcf86df1d26f6d32ab84fd7a12",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "postgres/membership-storage-v1.sql",
+      "bytes": 6307,
+      "sha256": "cd0150628ac624f4825bfa8eb5f02bbd54838ce5da9cb7d60b5d3ad2c2395c23",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/compact-membership-storage.mjs",
+      "bytes": 8266,
+      "sha256": "441f7e7445584add5d95b538d515da317a85508a49e205018fd84f9548bf0258",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-membership-storage.test.mjs",
+      "bytes": 9958,
+      "sha256": "ac5fe8eaeff6ec523b29d02ea89d675c750e445b7e7e539f7c5c172e326331b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/README.md",
+      "bytes": 2143,
+      "sha256": "30a7b5f245906ef2a215839d688ad573bafae87316d62153993521cce2bb05ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/claim.json",
+      "bytes": 848,
+      "sha256": "75e5d2bd8a49ee440ed13d984ee2dab038d3d276feb7a93f047541e00be2b095",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/contract-tests-initial-head.log",
+      "bytes": 9311,
+      "sha256": "fd5a124e80ab13159f4fc09d5110c9befe895787b9b8e4c02e6ca2562225ed5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/contract-tests.log",
+      "bytes": 9314,
+      "sha256": "c5d445b776d2324f55e4c61f9a8e894dc63de9555affdb951a03deb2858098ad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/initial-head-evidence.json.gz",
+      "bytes": 2217,
+      "sha256": "fb6f5bb8445a7166957dc483adb16760f3a231cf3b3094ebd72b4d2594a5d892",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 9773,
+      "uncompressed_sha256": "87cdcbd8b6b76fad222717fc3dcfc4520affd2b4b4b77fa2a7b4c0e0933104e1"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/prepare-evidence.mjs",
+      "bytes": 4455,
+      "sha256": "476192881b951df3af92366f7e6b16dd5a519df72f653ff7f343a453d39b7fb3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/test-results.json",
+      "bytes": 1219,
+      "sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "guarded-contract",
+      "kind": "code",
+      "description": "Actual isolated original-schema PostgreSQL/PGlite fixtures; full row parity, original guards, new/retried service publication, raw JSON spelling, invalid parent/source/withdrawal, failed/corrupt copy, rollback and adverse default ACL controls.",
+      "software": "Node24 and locked PGlite0.5.8",
+      "units": "test count"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "test-tests",
+      "value": 35,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
+    },
+    {
+      "id": "test-pass",
+      "value": 35,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
+    },
+    {
+      "id": "test-fail",
+      "value": 0,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
+    },
+    {
+      "id": "test-cancelled",
+      "value": 0,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
+    },
+    {
+      "id": "test-skipped",
+      "value": 0,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
+    },
+    {
+      "id": "test-todo",
+      "value": 0,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "a4e8292889f47ddab76ff1676583780d1b19aa2e",
+      "input_sha256": "50343643ff120377074fa084ed50e1d334735a2568e3e98419747a437ea1e964"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "test-tests",
+      "path": "coordination/engineering/compact-memberships-20261004-local01/test-results.json",
+      "json_pointer": "/counts/tests"
+    },
+    {
+      "metric_id": "test-pass",
+      "path": "coordination/engineering/compact-memberships-20261004-local01/test-results.json",
+      "json_pointer": "/counts/pass"
+    },
+    {
+      "metric_id": "test-fail",
+      "path": "coordination/engineering/compact-memberships-20261004-local01/test-results.json",
+      "json_pointer": "/counts/fail"
+    },
+    {
+      "metric_id": "test-cancelled",
+      "path": "coordination/engineering/compact-memberships-20261004-local01/test-results.json",
+      "json_pointer": "/counts/cancelled"
+    },
+    {
+      "metric_id": "test-skipped",
+      "path": "coordination/engineering/compact-memberships-20261004-local01/test-results.json",
+      "json_pointer": "/counts/skipped"
+    },
+    {
+      "metric_id": "test-todo",
+      "path": "coordination/engineering/compact-memberships-20261004-local01/test-results.json",
+      "json_pointer": "/counts/todo"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "postgres/membership-storage-v1.sql",
+      "status": "added"
+    },
+    {
+      "path": "scripts/compact-membership-storage.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/compact-membership-storage.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/contract-tests-initial-head.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/contract-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/initial-head-evidence.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/prepare-evidence.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/test-results.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-memberships-20261004-local01/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test --test-concurrency=2 --test-reporter=tap test/compact-membership-storage.test.mjs test/postgres-contract.test.mjs test/postgres-adapter.test.mjs test/geographic-releases.test.mjs > coordination/engineering/compact-memberships-20261004-local01/contract-tests.log",
+    "node coordination/engineering/compact-memberships-20261004-local01/prepare-evidence.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/compact-memberships-20261004-local01/evidence-quality.json"
+  ]
+}

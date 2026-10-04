@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "scope": "local-pglite-contract-tests",
+  "counts": {
+    "tests": 35,
+    "pass": 35,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "compact_tests": [
+    "compact contract preserves original guards, published byte retries and new service publication",
+    "compact membership rejects invalid parents, source changes, updates and withdrawals",
+    "compact dictionary preserves distinct raw JSON whitespace, key order and duplicate keys",
+    "failed copy rolls back its dictionaries, relation switch and original rows",
+    "copy parity rejects an extra row and migration refuses unreviewed dependent views",
+    "application role can use guarded membership view but cannot touch private dictionaries"
+  ],
+  "test_log_sha256": "c5d445b776d2324f55e4c61f9a8e894dc63de9555affdb951a03deb2858098ad",
+  "production_capacity_verified": false,
+  "private_backup_verified": false,
+  "limitations": [
+    "Small synthetic fixtures only; the full compatible production-size contract is not measured in this PR.",
+    "Production migration, current backup, role/schema/export/recovery inventories, capacity/reclamation and publisher delivery remain subsequent issue parts."
+  ]
+}
