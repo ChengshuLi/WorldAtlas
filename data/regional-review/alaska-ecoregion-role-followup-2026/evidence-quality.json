@@ -1,0 +1,402 @@
+{
+  "version": 1,
+  "issue": 601,
+  "lane": "geography",
+  "worker_id": "codex-20261004-alaska-role-601-1adb16ba-fc1c-46b7-a19c-0fe669566d21",
+  "subject_ids": [
+    "atlas:physical:01966024a7da3c19f62b",
+    "atlas:physical:15fa62117dba20fdd7a3",
+    "atlas:physical:218217a5b20e23dcec50",
+    "atlas:physical:22cb0a21ab98ecb33809",
+    "atlas:physical:25b5834fd3f21fb17b9a",
+    "atlas:physical:2a15134ff18942dc8e5e",
+    "atlas:physical:2e1dd8f380b0a4f65ad9",
+    "atlas:physical:2f923807ee2e7a196fdd",
+    "atlas:physical:3639e504cb9593df3737",
+    "atlas:physical:3af069dde7d7422e67c9",
+    "atlas:physical:3c48debb2430313aff99",
+    "atlas:physical:571531998dfb978a4ee6",
+    "atlas:physical:674981b93623e9cbe385",
+    "atlas:physical:6cb687d7a04121e902a0",
+    "atlas:physical:6efac055720ebe84d7c2",
+    "atlas:physical:770135c5de8a7faad962",
+    "atlas:physical:7a3686ecb4862bbc058a",
+    "atlas:physical:98f79f92ac0b4db09f3f",
+    "atlas:physical:9c6c92a5fe5a23f97fc8",
+    "atlas:physical:9dd0102f5623fa0a1ab3",
+    "atlas:physical:a20d41a6587ce2e2996b",
+    "atlas:physical:b7de8e58e5cc44ff1158",
+    "atlas:physical:d446e47b49b86d32fbec",
+    "atlas:physical:d4a1d6c7b20fa99253b3",
+    "atlas:physical:d5c6a8a99d213d352ffc",
+    "atlas:physical:d8f364efaa1f6727c81b",
+    "atlas:physical:d9f5e39be0a5795475a6",
+    "atlas:physical:db25f36496f102a4e01b",
+    "atlas:physical:e3f360bb06f756837beb",
+    "atlas:physical:e9be3f60d36adefe1c29",
+    "atlas:physical:ea653894a88b26872815",
+    "atlas:physical:f1337f9008d75f1a400d",
+    "atlas:physical:f813543f0b28e8f7e3a5"
+  ],
+  "subject_ids_sha256": "fec124ec4e708f31e2935e96704923ced1d30b32b9872cb0d13647efefebfecb",
+  "baseline": {
+    "commit": "276d72e1f316ad58d52c8fea7974a873c2ec9387",
+    "files": [
+      {
+        "bytes": 4525239,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-25.json",
+        "sha256": "1a26b9a86043db37b502be524c7160e13896ad8231943e228137b764673c5a02"
+      },
+      {
+        "bytes": 4608983,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-26.json",
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+      },
+      {
+        "bytes": 10165703,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d"
+      },
+      {
+        "bytes": 11210183,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/assessment.json",
+        "sha256": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5"
+      },
+      {
+        "bytes": 24589,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/derived-portion-audit.json",
+        "sha256": "4709d54e7fefc443f2c541d270d1dc4a3d32b4a79816c50d999285e757565dde"
+      },
+      {
+        "bytes": 13154,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/scope.json",
+        "sha256": "98c39e78569de0a4fc9c02f74ca5662a267ad97d5074bb1691e1cc4626c0ed57"
+      },
+      {
+        "bytes": 4699,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources.json",
+        "sha256": "7a94870f1470d5d7cb6c0883d30fee715021c93959e5f1ecf04930719e83a299"
+      },
+      {
+        "bytes": 290330,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-parent-chains.json.gz",
+        "sha256": "0d682f33d98ddfcee1546bf15bcd9e470bce8efed877834c10dc5c6a34936ffb"
+      },
+      {
+        "bytes": 256548,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-scope-and-parents.geojson.gz",
+        "sha256": "23f998ab6f874fac86dedeacb20978e391fdd23bf30ce6de8b687e6d57f9d862"
+      },
+      {
+        "bytes": 939,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2-metadata.json",
+        "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f"
+      },
+      {
+        "bytes": 10500644,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2.geojson",
+        "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+      },
+      {
+        "bytes": 9761832,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/resolve-15-ecoregions.geojson.gz",
+        "sha256": "b42d888c27a8adae8ee6ec19db430b3d631e34a123847942cc7a07e2528be3d9"
+      },
+      {
+        "bytes": 9588,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/resolve-item-metadata.json",
+        "sha256": "da808a582f2a0dad3829a3e10450f7d23abf9ce972180dc99302df35348f4647"
+      },
+      {
+        "bytes": 35521,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/resolve-layer-metadata.json",
+        "sha256": "1007f74580fa096d1368ed03a009aec573186ffef3953fd178c57b228da610ae"
+      },
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      }
+    ],
+    "pins": {
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hierarchy": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "parent_scope": "98c39e78569de0a4fc9c02f74ca5662a267ad97d5074bb1691e1cc4626c0ed57",
+      "parent_assessment": "69400c56a34725f82b6a75edea0213dff2855eb5e9d8469681bb7a394884e2d5",
+      "derived_portion_audit": "4709d54e7fefc443f2c541d270d1dc4a3d32b4a79816c50d999285e757565dde",
+      "parent_source_registry": "7a94870f1470d5d7cb6c0883d30fee715021c93959e5f1ecf04930719e83a299",
+      "parent_chains": "0d682f33d98ddfcee1546bf15bcd9e470bce8efed877834c10dc5c6a34936ffb",
+      "geoboundaries_adm2_2018": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+      "resolve_2017_feature_archive": "b42d888c27a8adae8ee6ec19db430b3d631e34a123847942cc7a07e2528be3d9"
+    },
+    "pin_files": {
+      "world_index": "data/world-index.json",
+      "hierarchy": "data/hierarchy.json",
+      "parent_scope": "data/regional-review/regional-review-93f8f3bee8e205be/scope.json",
+      "parent_assessment": "data/regional-review/regional-review-93f8f3bee8e205be/assessment.json",
+      "derived_portion_audit": "data/regional-review/regional-review-93f8f3bee8e205be/derived-portion-audit.json",
+      "parent_source_registry": "data/regional-review/regional-review-93f8f3bee8e205be/sources.json",
+      "parent_chains": "data/regional-review/regional-review-93f8f3bee8e205be/sources/current-parent-chains.json.gz",
+      "geoboundaries_adm2_2018": "data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2.geojson",
+      "resolve_2017_feature_archive": "data/regional-review/regional-review-93f8f3bee8e205be/sources/resolve-15-ecoregions.geojson.gz"
+    },
+    "subject_files": {
+      "atlas:physical:01966024a7da3c19f62b": "data/geography/part-25.json",
+      "atlas:physical:15fa62117dba20fdd7a3": "data/geography/part-25.json",
+      "atlas:physical:218217a5b20e23dcec50": "data/geography/part-25.json",
+      "atlas:physical:22cb0a21ab98ecb33809": "data/geography/part-25.json",
+      "atlas:physical:25b5834fd3f21fb17b9a": "data/geography/part-25.json",
+      "atlas:physical:2a15134ff18942dc8e5e": "data/geography/part-26.json",
+      "atlas:physical:2e1dd8f380b0a4f65ad9": "data/geography/part-25.json",
+      "atlas:physical:2f923807ee2e7a196fdd": "data/geography/part-25.json",
+      "atlas:physical:3639e504cb9593df3737": "data/geography/part-25.json",
+      "atlas:physical:3af069dde7d7422e67c9": "data/geography/part-25.json",
+      "atlas:physical:3c48debb2430313aff99": "data/geography/part-25.json",
+      "atlas:physical:571531998dfb978a4ee6": "data/geography/part-25.json",
+      "atlas:physical:674981b93623e9cbe385": "data/geography/part-25.json",
+      "atlas:physical:6cb687d7a04121e902a0": "data/geography/part-25.json",
+      "atlas:physical:6efac055720ebe84d7c2": "data/geography/part-26.json",
+      "atlas:physical:770135c5de8a7faad962": "data/geography/part-25.json",
+      "atlas:physical:7a3686ecb4862bbc058a": "data/geography/part-25.json",
+      "atlas:physical:98f79f92ac0b4db09f3f": "data/geography/part-25.json",
+      "atlas:physical:9c6c92a5fe5a23f97fc8": "data/geography/part-25.json",
+      "atlas:physical:9dd0102f5623fa0a1ab3": "data/geography/part-25.json",
+      "atlas:physical:a20d41a6587ce2e2996b": "data/geography/part-26.json",
+      "atlas:physical:b7de8e58e5cc44ff1158": "data/geography/part-25.json",
+      "atlas:physical:d446e47b49b86d32fbec": "data/geography/part-25.json",
+      "atlas:physical:d4a1d6c7b20fa99253b3": "data/geography/part-26.json",
+      "atlas:physical:d5c6a8a99d213d352ffc": "data/geography/part-25.json",
+      "atlas:physical:d8f364efaa1f6727c81b": "data/geography/part-25.json",
+      "atlas:physical:d9f5e39be0a5795475a6": "data/geography/part-26.json",
+      "atlas:physical:db25f36496f102a4e01b": "data/geography/part-25.json",
+      "atlas:physical:e3f360bb06f756837beb": "data/geography/part-25.json",
+      "atlas:physical:e9be3f60d36adefe1c29": "data/geography/part-25.json",
+      "atlas:physical:ea653894a88b26872815": "data/geography/part-25.json",
+      "atlas:physical:f1337f9008d75f1a400d": "data/geography/part-25.json",
+      "atlas:physical:f813543f0b28e8f7e3a5": "data/geography/part-25.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "resolve-ecoregions-2017",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef?f=json",
+      "role": "Source for the natural RESOLVE 2017 ecoregion identity, names, biome and realm attributes used by all 33 physical fragments. The official ArcGIS item identifies RESOLVE and Esri; this layer defines ecological units, not political or administrative boundaries.",
+      "vintage": "RESOLVE Ecoregions and Biomes 2017; layer data last edit 2022-01-27; item metadata modified 2026-05-28.",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "redistributable",
+        "terms": "ArcGIS item explicitly declares Creative Commons Attribution 4.0 International (CC BY 4.0), with attribution to RESOLVE and Esri; per-feature LICENSE values are retained."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/resolve-15-ecoregions.geojson.gz",
+          "bytes": 9761832,
+          "sha256": "b42d888c27a8adae8ee6ec19db430b3d631e34a123847942cc7a07e2528be3d9",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/alaska-ecoregion-role-followup-2026/sources/resolve-current-item.json",
+          "bytes": 8638,
+          "sha256": "531bfbaf2bcecfa83808135bc8cba1ddf57ab0d482fb265f95ccd65bddf5ceae",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/alaska-ecoregion-role-followup-2026/sources/resolve-current-layer.json",
+          "bytes": 25682,
+          "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/alaska-ecoregion-role-followup-2026/sources/resolve-alaska-eco-attributes-20261004.json",
+          "bytes": 3912,
+          "sha256": "8baab6f616a508c778d1dd65b72605c4cea83649b8a51c7799f94ad60535408b",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "temporal_status": "reference",
+      "limit": "Official live service and original archive match for all 15 selected Eco_IDs and five attributes. Ecological classes do not establish administrative membership, political ownership, settlement completeness, tier suitability or legal boundaries."
+    },
+    {
+      "id": "geoboundaries-usa-adm2-2018",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/USA/ADM2/",
+      "role": "Historical USA ADM2 source features for the seven county predecessor identities recorded for the 33 assigned fragments. Retained metadata identifies U.S. Census Bureau MAF/TIGER as upstream source and the 2018 ADM2 layer canonical type Counties.",
+      "vintage": "USA ADM2 2018; source-data update 2023-01-19; build 2023-12-12; exact original source packet snapshot at 276d72e1f316ad58d52c8fea7974a873c2ec9387.",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "The retained geoBoundaries metadata declares Public Domain and identifies U.S. Census Bureau MAF/TIGER; this packet preserves that metadata and does not independently adjudicate derivative licensing."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2.geojson",
+          "bytes": 10500644,
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2-metadata.json",
+          "bytes": 939,
+          "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "temporal_status": "reference",
+      "limit": "Historical generalized source geometry/IDs are lineage evidence only, not present legal status, legal survey or current county roster."
+    },
+    {
+      "id": "census-tiger-2018-county",
+      "url": "https://www2.census.gov/geo/tiger/TIGER2018/COUNTY/tl_2018_us_county.zip",
+      "role": "Official 2018 TIGER/Line County DBF attributes for the seven Alaska administrative predecessors; selected by exact NAME crosswalk to pinned geoBoundaries shapeNames, identifying three Borough and four Census Area units.",
+      "vintage": "TIGER/Line 2018 County; Last-Modified 2018-09-18; retrieved and archive SHA-256 checked 2026-10-04T08:14:10.888669+00:00.",
+      "retrieved_at": "2026-10-04",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. Census Bureau TIGER/Line geographic source; U.S. federal source material is Public Domain. Census geography is not a legal land survey."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Download the exact national archive at https://www2.census.gov/geo/tiger/TIGER2018/COUNTY/tl_2018_us_county.zip; verify 79,219,478 bytes and SHA-256 85e7430567ec47c399e112a0f2fcc19779fbce79dce86cba6ea159256b77d01b before extracting tl_2018_us_county.dbf. The seven selected attribute rows are retained at data/regional-review/alaska-ecoregion-role-followup-2026/sources/census-tiger-2018-seven-alaska-counties.json.",
+      "limit": "The 79 MB national archive is omitted. The packet retains seven relevant attribute records and the complete archive byte/hash/restoration receipt. Census rows were selected by STATEFP=02 plus exact NAME equality to the seven pinned geoBoundaries shapeNames; no Census geometry was loaded or compared, and geoBoundaries shapeID is not a Census GEOID.",
+      "temporal_status": "reference",
+      "source_archive_bytes": 79219478,
+      "source_archive_sha256": "85e7430567ec47c399e112a0f2fcc19779fbce79dce86cba6ea159256b77d01b",
+      "selected_attribute_extract": "data/regional-review/alaska-ecoregion-role-followup-2026/sources/census-tiger-2018-seven-alaska-counties.json"
+    },
+    {
+      "id": "preserved-issue486-role-and-parent-evidence",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/276d72e1f316ad58d52c8fea7974a873c2ec9387/data/regional-review/regional-review-93f8f3bee8e205be",
+      "role": "Exact prior #486 scope, assessment, ecoregion/predecessor audit, source registry and complete parent-chain extract used to identify inherited metadata and verify all assigned chains.",
+      "vintage": "Frozen original #486 source packet commit 276d72e1f316ad58d52c8fea7974a873c2ec9387; geographic evaluation baseline 0ea5b92969a37e404daded7a5c1d8931bd74b19c.",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "Composite prior packet with source-specific reuse terms recorded in its original README and sources.json; no blanket license is asserted."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use git show 276d72e1f316ad58d52c8fea7974a873c2ec9387:<path> under data/regional-review/regional-review-93f8f3bee8e205be/. Whole-file hashes used here are listed in assessment.json.",
+      "limit": "Prior assessment is inherited evidence, not an independent source of geographic truth. Its original geometry overlays are not recomputed here.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/alaska-ecoregion-role-followup-2026/README.md",
+      "bytes": 6966,
+      "sha256": "73a5cc7743d89e804c855fc7839713aa01ec59dae63916cbe564380b83c8fbf4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/alaska-ecoregion-role-followup-2026/scope.json",
+      "bytes": 6176,
+      "sha256": "9ad5d7c869240256c788800fd97f9b054286282d7e2451e120cf1836f458584a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/alaska-ecoregion-role-followup-2026/assessment.json",
+      "bytes": 151499,
+      "sha256": "c6a58c49029e9f0e381a4f26495731d9e95bfb8eb30c1189de9fcbf7d12b0c54",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/alaska-ecoregion-role-followup-2026/build_assessment.py",
+      "bytes": 22059,
+      "sha256": "ab755d33c7837708b0a26667832cd4bcd608153bc23aa148899f6dd7de6007a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/alaska-ecoregion-role-followup-2026/test_role_evidence.py",
+      "bytes": 4196,
+      "sha256": "750ca96937c63c44c29cb96b0b05e1d33e6a7de38e25d96291aecc573e3ef2cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/alaska-ecoregion-role-followup-2026/negative-control-results.json",
+      "bytes": 1974,
+      "sha256": "5d4970ddaa17d1671a45ab73bfb41532b8c0143284a47ae9e12ffaa7c31921bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/alaska-ecoregion-role-followup-2026/verify_assessment.py",
+      "bytes": 2888,
+      "sha256": "18b3ddcdf1d3a40f0ac69411a6138fdb93df20bd1392ba730621f8ce1daa18a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/alaska-ecoregion-role-followup-2026/sources/census-tiger-2018-seven-alaska-counties.json",
+      "bytes": 2886,
+      "sha256": "295de4b0a52718ef947218cbdda0dc48dabf147f573af60458308fee3b778bdf",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "immutable-source-role-crosswalk",
+      "description": "Scan all 36 world-indexed parts at the original geographic evaluation commit and assert all 33 assigned IDs occur exactly once; compare subjects, roles, predecessor IDs and complete six-node parent chains to immutable #486 evidence; check all seven 2018 geoBoundaries ADM2 predecessor records against the retained 2018 Census TIGER DBF rows selected by STATEFP=02 and exact NAME crosswalk to pinned shapeNames; query all 15 relevant RESOLVE Eco_ID attributes from the official ArcGIS service and compare to retained source data. No Census geometry, geometry measurement or boundary correction is performed.",
+      "software": "Python 3.12 standard library; Git immutable-object access; pyshp 2.3.1 for the official TIGER DBF; Node.js 24 evidence-quality validator.",
+      "units": "33 physical location IDs; 7 2018 administrative predecessors; 15 RESOLVE Eco_ID source features; 36 indexed parts; bytes and SHA-256."
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "All 33 assigned physical fragments use RESOLVE 2017 Eco_IDs and map to seven exact 2018 geoBoundaries ADM2 predecessors. The matching official Census TIGER/Line records identify those predecessors as three Borough and four Census Area units. Every subject preserves its current Alaska → Pacific → Western North America → Northern America → North America parent chain.",
+      "status": "supported",
+      "source_ids": [
+        "resolve-ecoregions-2017",
+        "geoboundaries-usa-adm2-2018",
+        "census-tiger-2018-county",
+        "preserved-issue486-role-and-parent-evidence"
+      ]
+    },
+    {
+      "text": "For all 33 subjects, current source_role=Counties and the county-tier selection rationale misstate the RESOLVE ecological partition as an administrative unit. The 2018 county predecessor and Alaska ADM1 parent are separately recoverable from source IDs; correct role and rationale while preserving those lineage links.",
+      "status": "supported",
+      "source_ids": [
+        "resolve-ecoregions-2017",
+        "geoboundaries-usa-adm2-2018",
+        "census-tiger-2018-county",
+        "preserved-issue486-role-and-parent-evidence"
+      ]
+    },
+    {
+      "text": "The exact normalized non-administrative role value and whether ecological portions belong as published location subjects are engineering/regional integration decisions. This recommendation does not recalculate footprints, approve the region or authorize imports.",
+      "status": "unresolved",
+      "source_ids": [
+        "resolve-ecoregions-2017",
+        "preserved-issue486-role-and-parent-evidence"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/alaska-ecoregion-role-followup-2026/build_assessment.py --check",
+    "python3 data/regional-review/alaska-ecoregion-role-followup-2026/test_role_evidence.py",
+    "python3 data/regional-review/alaska-ecoregion-role-followup-2026/verify_assessment.py",
+    "node scripts/evidence-quality.mjs data/regional-review/alaska-ecoregion-role-followup-2026/evidence-quality.json"
+  ]
+}

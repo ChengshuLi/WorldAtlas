@@ -1,0 +1,106 @@
+{
+  "source_archive": {
+    "url": "https://www2.census.gov/geo/tiger/TIGER2018/COUNTY/tl_2018_us_county.zip",
+    "retrieved_at": "2026-10-04T08:14:10.888669+00:00",
+    "last_modified": "Tue, 18 Sep 2018 02:48:13 GMT",
+    "http_status": 200,
+    "bytes": 79219478,
+    "sha256": "85e7430567ec47c399e112a0f2fcc19779fbce79dce86cba6ea159256b77d01b",
+    "retention": "national archive not kept in this packet; official restoration URL and exact retrieval hash are recorded"
+  },
+  "selection": {
+    "method": "From the official 2018 TIGER/Line County DBF, select Alaska records where STATEFP=02 and NAME exactly equals one of the seven pinned geoBoundaries-USA-ADM2 predecessor shapeName values; require one unique record per name. No FIPS codes were used to choose records, and no geometry was loaded or compared.",
+    "dbf_member": "tl_2018_us_county.dbf",
+    "feature_count": 7,
+    "matched_names": [
+      "Bethel",
+      "Lake and Peninsula",
+      "Matanuska-Susitna",
+      "Nome",
+      "North Slope",
+      "Southeast Fairbanks",
+      "Yukon-Koyukuk"
+    ],
+    "unique_hits_per_name": {
+      "Bethel": 1,
+      "Lake and Peninsula": 1,
+      "Matanuska-Susitna": 1,
+      "Nome": 1,
+      "North Slope": 1,
+      "Southeast Fairbanks": 1,
+      "Yukon-Koyukuk": 1
+    }
+  },
+  "rows": [
+    {
+      "STATEFP": "02",
+      "COUNTYFP": "050",
+      "GEOID": "02050",
+      "NAME": "Bethel",
+      "NAMELSAD": "Bethel Census Area",
+      "LSAD": "05",
+      "CLASSFP": "H5",
+      "FUNCSTAT": "S"
+    },
+    {
+      "STATEFP": "02",
+      "COUNTYFP": "164",
+      "GEOID": "02164",
+      "NAME": "Lake and Peninsula",
+      "NAMELSAD": "Lake and Peninsula Borough",
+      "LSAD": "04",
+      "CLASSFP": "H1",
+      "FUNCSTAT": "A"
+    },
+    {
+      "STATEFP": "02",
+      "COUNTYFP": "170",
+      "GEOID": "02170",
+      "NAME": "Matanuska-Susitna",
+      "NAMELSAD": "Matanuska-Susitna Borough",
+      "LSAD": "04",
+      "CLASSFP": "H1",
+      "FUNCSTAT": "A"
+    },
+    {
+      "STATEFP": "02",
+      "COUNTYFP": "180",
+      "GEOID": "02180",
+      "NAME": "Nome",
+      "NAMELSAD": "Nome Census Area",
+      "LSAD": "05",
+      "CLASSFP": "H5",
+      "FUNCSTAT": "S"
+    },
+    {
+      "STATEFP": "02",
+      "COUNTYFP": "185",
+      "GEOID": "02185",
+      "NAME": "North Slope",
+      "NAMELSAD": "North Slope Borough",
+      "LSAD": "04",
+      "CLASSFP": "H1",
+      "FUNCSTAT": "A"
+    },
+    {
+      "STATEFP": "02",
+      "COUNTYFP": "240",
+      "GEOID": "02240",
+      "NAME": "Southeast Fairbanks",
+      "NAMELSAD": "Southeast Fairbanks Census Area",
+      "LSAD": "05",
+      "CLASSFP": "H5",
+      "FUNCSTAT": "S"
+    },
+    {
+      "STATEFP": "02",
+      "COUNTYFP": "290",
+      "GEOID": "02290",
+      "NAME": "Yukon-Koyukuk",
+      "NAMELSAD": "Yukon-Koyukuk Census Area",
+      "LSAD": "05",
+      "CLASSFP": "H5",
+      "FUNCSTAT": "S"
+    }
+  ]
+}

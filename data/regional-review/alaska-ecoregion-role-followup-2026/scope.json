@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "issue": 601,
+  "issue_url": "https://github.com/ChengshuLi/WorldAtlas/issues/601",
+  "issue_title": "Review source roles for 33 Alaska ecoregion fragments",
+  "issue_body": "Parent: #486. This is a bounded, source-only follow-up from the Western North America interior batch 2 audit. It is blocked until #486 is merged and remains under regional integration #484.\n\nAudit finding: all 33 assigned Alaska physical fragments in #486 derive from RESOLVE ecoregion features, but their retained metadata says `source_role=Counties` and source selection rationale references counties. See parent packet `data/regional-review/regional-review-93f8f3bee8e205be/derived-portion-audit.json` and `assessment.json`. The 33 exact fragment IDs and Eco_IDs are listed there. Seven underlying geoBoundaries USA ADM2 2018 county predecessors each split into RESOLVE ecological pieces. RESOLVE item 37ea320eebb647c6838c23f72abae5ef2 is licensed CC BY 4.0; its 2017 ecoregion classification is not administrative geography.\n\nDeliver a source/role correction recommendation for these 33 IDs, documenting source lineage, role/tier/license and preserved parent membership. Do not edit shared hierarchy or geometry; location membership determines parent footprints. Create evidence and coordinate integration with #484.\n\n<!-- worldatlas-work:v1\n{\"max_prs\":1,\"depends_on\":[486],\"scope\":\"Bounded role/provenance review for exactly 33 Alaska RESOLVE ecoregion fragment IDs itemized in #486 evidence; recommendations only\",\"mode\":\"geography\",\"owned_paths\":[\"data/regional-review/alaska-ecoregion-role-followup-2026/\"]}\n-->\n",
+  "issue_body_sha256": "cb486d53c887a2ae74c399e177c40741e8f1a66f05c034ce21fe0061d2ea0356",
+  "issue_updated_at": "2026-10-04T07:54:39Z",
+  "retrieved_at": "2026-10-04T07:54:39Z",
+  "contract": {
+    "max_prs": 1,
+    "depends_on": [
+      486
+    ],
+    "mode": "geography",
+    "owned_paths": [
+      "data/regional-review/alaska-ecoregion-role-followup-2026/"
+    ],
+    "scope": "Bounded role/provenance review for exactly 33 Alaska RESOLVE ecoregion fragment IDs itemized in #486 evidence; recommendations only"
+  },
+  "subjects_count": 33,
+  "subject_ids": [
+    "atlas:physical:01966024a7da3c19f62b",
+    "atlas:physical:15fa62117dba20fdd7a3",
+    "atlas:physical:218217a5b20e23dcec50",
+    "atlas:physical:22cb0a21ab98ecb33809",
+    "atlas:physical:25b5834fd3f21fb17b9a",
+    "atlas:physical:2a15134ff18942dc8e5e",
+    "atlas:physical:2e1dd8f380b0a4f65ad9",
+    "atlas:physical:2f923807ee2e7a196fdd",
+    "atlas:physical:3639e504cb9593df3737",
+    "atlas:physical:3af069dde7d7422e67c9",
+    "atlas:physical:3c48debb2430313aff99",
+    "atlas:physical:571531998dfb978a4ee6",
+    "atlas:physical:674981b93623e9cbe385",
+    "atlas:physical:6cb687d7a04121e902a0",
+    "atlas:physical:6efac055720ebe84d7c2",
+    "atlas:physical:770135c5de8a7faad962",
+    "atlas:physical:7a3686ecb4862bbc058a",
+    "atlas:physical:98f79f92ac0b4db09f3f",
+    "atlas:physical:9c6c92a5fe5a23f97fc8",
+    "atlas:physical:9dd0102f5623fa0a1ab3",
+    "atlas:physical:a20d41a6587ce2e2996b",
+    "atlas:physical:b7de8e58e5cc44ff1158",
+    "atlas:physical:d446e47b49b86d32fbec",
+    "atlas:physical:d4a1d6c7b20fa99253b3",
+    "atlas:physical:d5c6a8a99d213d352ffc",
+    "atlas:physical:d8f364efaa1f6727c81b",
+    "atlas:physical:d9f5e39be0a5795475a6",
+    "atlas:physical:db25f36496f102a4e01b",
+    "atlas:physical:e3f360bb06f756837beb",
+    "atlas:physical:e9be3f60d36adefe1c29",
+    "atlas:physical:ea653894a88b26872815",
+    "atlas:physical:f1337f9008d75f1a400d",
+    "atlas:physical:f813543f0b28e8f7e3a5"
+  ],
+  "subject_ids_sha256": "fec124ec4e708f31e2935e96704923ced1d30b32b9872cb0d13647efefebfecb",
+  "parent_packet_path": "data/regional-review/regional-review-93f8f3bee8e205be/",
+  "parent_source_snapshot_commit": "276d72e1f316ad58d52c8fea7974a873c2ec9387",
+  "parent_evaluation_baseline_commit": "0ea5b92969a37e404daded7a5c1d8931bd74b19c",
+  "current_main_base": "fbd3bf4991dbd5a9bf89a79b14e5b4deb6225ff9",
+  "worker_id": "codex-20261004-alaska-role-601-1adb16ba-fc1c-46b7-a19c-0fe669566d21",
+  "claim_id": "ddf02844-a805-4424-96e0-a36eb9bff5af",
+  "claim_request_id": "2fc918d0-62cc-416f-a36b-3e1a5bddca2a",
+  "branch": "geography/alaska-ecoregion-role-20261004-601b",
+  "claim_confirmed_at": "2026-10-04T07:51:59.860Z",
+  "new_source_capture": {
+    "resolve-alaska-eco-attributes-20261004.json": {
+      "bytes": 3912,
+      "sha256": "8baab6f616a508c778d1dd65b72605c4cea83649b8a51c7799f94ad60535408b",
+      "retrieved_at": "2026-10-04T07:57:47Z"
+    },
+    "resolve-current-item.json": {
+      "bytes": 8638,
+      "sha256": "531bfbaf2bcecfa83808135bc8cba1ddf57ab0d482fb265f95ccd65bddf5ceae",
+      "retrieved_at": "2026-10-04T07:57:47Z"
+    },
+    "resolve-current-layer.json": {
+      "bytes": 25682,
+      "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3",
+      "retrieved_at": "2026-10-04T07:57:47Z"
+    },
+    "census-tiger-2018-seven-alaska-counties.json": {
+      "bytes": 2886,
+      "sha256": "295de4b0a52718ef947218cbdda0dc48dabf147f573af60458308fee3b778bdf",
+      "retrieved_at": "2026-10-04T08:14:10.888669+00:00"
+    }
+  },
+  "official_query_sha256": "8baab6f616a508c778d1dd65b72605c4cea83649b8a51c7799f94ad60535408b",
+  "census_source_archive": {
+    "url": "https://www2.census.gov/geo/tiger/TIGER2018/COUNTY/tl_2018_us_county.zip",
+    "http_status": 200,
+    "retrieved_at": "2026-10-04T08:14:10.888669+00:00",
+    "last_modified": "Tue, 18 Sep 2018 02:48:13 GMT",
+    "bytes": 79219478,
+    "sha256": "85e7430567ec47c399e112a0f2fcc19779fbce79dce86cba6ea159256b77d01b",
+    "retention": "national archive not kept in this packet; official restoration URL and exact retrieval hash are recorded"
+  },
+  "claim_branch_rotation": {
+    "from": "geography/alaska-ecoregion-role-20261004-601",
+    "to": "geography/alaska-ecoregion-role-20261004-601b",
+    "request_id": "b116d8ca-46e5-4773-9560-83cd056f008e",
+    "confirmed_at": "2026-10-04T08:20:41.320Z",
+    "lease_expires_at": "2026-10-05T08:20:41.320Z",
+    "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37188591521"
+  }
+}
