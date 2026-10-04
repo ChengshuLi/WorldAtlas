@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "snapshot_utc": "2026-10-03",
+  "prepared_utc": "2026-10-04",
+  "baseline_commit": "fbd3bf4991dbd5a9bf89a79b14e5b4deb6225ff9",
+  "sources": [
+    {
+      "id": "resolve-2017-ecoregions",
+      "title": "RESOLVE Ecoregions and Biomes, 2017, ArcGIS FeatureServer layer 0",
+      "publisher": "RESOLVE; Esri hosting/attribution",
+      "canonical_item": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+      "canonical_layer": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0",
+      "reference_vintage": "2017 ecoregion release; layer data last edit 2022-01-27",
+      "license": "CC BY 4.0; attribute RESOLVE and Esri. Item metadata names RESOLVE, Esri and links the license; each retained source feature has LICENSE=CC-BY 4.0.",
+      "role_in_assessment": "Authoritative physical-geography identity: four exact ECO_ID/name/biome/realm features and ecological rather than political source purpose.",
+      "baseline_retained_files": [
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-ca-ecoregions-4.geojson.gz",
+          "bytes": 950355,
+          "sha256": "9de311610407f2fdf18c522d56d4fca09782bba819d1c5159a355c248e635f11",
+          "uncompressed_bytes": 2682904,
+          "uncompressed_sha256": "5d2361a9b85508ecff1db34528f018fc0fdaddaca1aafc5dc993a303cec9b41c"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-arcgis-item-metadata.json",
+          "bytes": 8638,
+          "sha256": "5ac94f88d5b6d75e7e5619a05fc0cdcce803906004fbd7648f60cd9dfd3a8b85"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-feature-service-metadata.json",
+          "bytes": 3399,
+          "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/resolve-layer0-metadata.json",
+          "bytes": 25682,
+          "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3"
+        }
+      ],
+      "restoration": "At the pinned baseline commit, use the exact four-feature extract, item/service/layer metadata and resolve-query-receipt.json in issue #487. For a fresh source copy, use the canonical item/layer and the receipt's query for ECO_IDs 422, 424, 433 and 435; verify the feature and uncompressed hashes above and confirm CC BY 4.0 attribution before reuse."
+    },
+    {
+      "id": "geoboundaries-usa-adm2-2018",
+      "title": "geoBoundaries gbOpen USA ADM2, release 9469f09",
+      "publisher": "U.S. Census Bureau MAF/TIGER source as declared by geoBoundaries",
+      "canonical_reference": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "metadata_reference": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2-metaData.json",
+      "reference_vintage": "2018 boundaries; source metadata update 2023-01-19; geoBoundaries build 2023-12-12",
+      "license": "Public Domain as recorded in pinned geoBoundaries source metadata; Census MAF/TIGER-derived. Preserve source attribution.",
+      "role_in_assessment": "Confirms that source feature 52423323B23069932539838 is San Bernardino ADM2 and supplies the predecessor context for the ecoregion intersections.",
+      "baseline_retained_files": [
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/geoboundaries-USA-ADM2-2018.geojson.gz",
+          "bytes": 3264221,
+          "sha256": "f42991ac50eb7d6fab5ae50de404e4d198957316aec3035f8018bdd2bca8044a",
+          "uncompressed_bytes": 10500644,
+          "uncompressed_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/geoboundaries-USA-ADM2-metadata.json",
+          "bytes": 939,
+          "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f"
+        }
+      ],
+      "restoration": "The exact compressed geometry and metadata remain unmodified at the pinned ancestor path. Decompress and verify the uncompressed SHA-256 above, or retrieve the pinned 9469f09 URLs and compare whole-file hashes."
+    },
+    {
+      "id": "census-tigerline-2024-counties",
+      "title": "U.S. Census Bureau TIGER/Line 2024 County and Equivalent",
+      "publisher": "U.S. Census Bureau",
+      "canonical_reference": "https://www2.census.gov/geo/tiger/TIGER2024/COUNTY/tl_2024_us_county.zip",
+      "reference_vintage": "2024 county geography; DBF updated 2024-09-16; national archive Last-Modified 2025-06-27",
+      "license": "U.S. federal geographic work; public domain. TIGER/Line is statistical geography, not a legal survey or ownership ruling.",
+      "role_in_assessment": "Independent confirmation of 2024 GEOID 06071, San Bernardino County name and county-equivalent CLASSFP H1.",
+      "baseline_retained_subset": {
+        "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources/tigerline-2024-western-county-neighbors.geojson.gz",
+        "bytes": 5850604,
+        "sha256": "b4da7a5c442821e798c71945ba63f5ca279e18e1dca0355e714b495e2c294180",
+        "uncompressed_bytes": 24421108,
+        "uncompressed_sha256": "c3e0207e569b57e73f30c804a4e0c5f973af9189ad94919fd1c57b912591a07d",
+        "selection": "209 county features from Arizona, California, Idaho, Nevada, Oregon and Washington; includes GEOID 06071."
+      },
+      "full_source_archive": {
+        "bytes": 83913260,
+        "sha256": "04e668d3502757c837c13444730547cd967f28a2c49aeffb873d1792ab2cb97b"
+      },
+      "restoration": "The parent packet retains the exact six-state selected feature subset and its hashes. The full national archive is not duplicated; retrieve it from the canonical URL, verify its hash above, and reproduce the parent OGR selection for STATEFP 04, 06, 16, 32, 41 and 53. Do not use ALAND/AWATER to infer political control."
+    },
+    {
+      "id": "worldatlas-packet-487",
+      "title": "Western North America / Pacific batch 3 assessment, issue #487",
+      "publisher": "WorldAtlas geography evidence packet #487",
+      "canonical_reference": "https://github.com/ChengshuLi/WorldAtlas/issues/487",
+      "reference_vintage": "V5 scope; assessment and source snapshot 2026-10-03; pinned ancestor commit fbd3bf4991dbd5a9bf89a79b14e5b4deb6225ff9",
+      "license": "Internal repository evidence; no new redistribution claim.",
+      "role_in_assessment": "Exact assigned IDs, full parent chains, current feature attributes, settlement/physical screens, geometry diagnostics and explicit uncertainty.",
+      "baseline_retained_files": [
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/assessment.json",
+          "bytes": 1211599,
+          "sha256": "2820e95a1cc2ecd4e9bbdcebc8fc82fb25800449c65384f8ec67d5a569a8c1d7"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/scope.json",
+          "bytes": 6788,
+          "sha256": "3e451fb5630a4df94ae06a9aa1a8660ed06b335d843d7bf5d045317dbbc22982"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/issue-metadata.json",
+          "bytes": 17809,
+          "sha256": "11c207a383561d33751f3907f6bc288825f2ded7cd059feefe1cea3b981eef75"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/derived-portion-audit.json",
+          "bytes": 3013,
+          "sha256": "12a823f70d0a9831df971c69ce3cced5491db0ad0a44f84aebb4d2d882e7651c"
+        },
+        {
+          "path": "data/regional-review/regional-review-2178b81fa886cfb6/sources.json",
+          "bytes": 14155,
+          "sha256": "c9defe3ee1e72d01955b62e85072cbe181995e323b0469ed836522a1c15e951e"
+        },
+        {
+          "path": "data/geography/part-25.json",
+          "bytes": 4525239,
+          "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+        }
+      ],
+      "restoration": "Read the unchanged parent packet and current containing GeoJSON at the pinned ancestor paths and hashes above. These project assessment results are carried forward as archived screens, not represented as independent measurements in issue #597."
+    }
+  ],
+  "method_summary": "Read exact issue subjects from the #487 pinned scope, match each stable atlas ID to the current containing GeoJSON and its source-member ID, match all four ECO_ID/name/license records in the retained RESOLVE extract, and confirm the San Bernardino ADM2 and 2024 county-equivalent identity separately. Recommend source-role/rationale text only; do not edit or regenerate geometry.",
+  "uncertainties": [
+    "The role classification is supported by RESOLVE's ecological/natural-boundary description. The inherited 2018/current and 2024 overlays are only screens and are not remeasured or converted into exact legal boundary claims here.",
+    "Census Places and GSHHG data remain incomplete screens for unincorporated settlements, detached land, islands, coastline and full county remainders.",
+    "County identity, ecological ecoregion membership and historical/political ownership are separate attributes; this proposal makes no sovereignty or government claim."
+  ]
+}

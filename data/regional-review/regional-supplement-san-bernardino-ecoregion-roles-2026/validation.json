@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "method_id": "role-proposal-build",
+  "kind": "generator",
+  "outcome": "passed",
+  "run_one_sha256": "fdaa8f41540daae0df48807eba458353c34af539c68f89b4dc1899a83fb9bc47",
+  "run_two_sha256": "fdaa8f41540daae0df48807eba458353c34af539c68f89b4dc1899a83fb9bc47",
+  "positive_control": {
+    "description": "All four exact IDs match the pinned parent rows, matching RESOLVE ECO_ID/name and the separated county predecessor identity.",
+    "outcome": "passed"
+  },
+  "negative_controls": {
+    "wrong_ecoregion_id_rejected": true,
+    "administrative_county_role_rejected": true,
+    "changed_geometry_fingerprint_rejected": true,
+    "duplicate_or_overcomplete_roster_rejected": true
+  },
+  "checks": {
+    "assigned_subjects": 4,
+    "assessed_subjects": 4,
+    "corrected_source_role_proposals": 4,
+    "full_parent_chain_nodes_each": 6,
+    "parent_county_geoid": "06071"
+  },
+  "inputs": {
+    "parent_assessment_sha256": "2820e95a1cc2ecd4e9bbdcebc8fc82fb25800449c65384f8ec67d5a569a8c1d7",
+    "parent_scope_sha256": "3e451fb5630a4df94ae06a9aa1a8660ed06b335d843d7bf5d045317dbbc22982",
+    "containing_geojson_sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+    "resolve_source_gzip_sha256": "9de311610407f2fdf18c522d56d4fca09782bba819d1c5159a355c248e635f11",
+    "proposal_sha256": "fdaa8f41540daae0df48807eba458353c34af539c68f89b4dc1899a83fb9bc47"
+  },
+  "environment": {
+    "python": "3.12.14"
+  },
+  "limitations": [
+    "All settlement, physical-land, county-water, island, remainder and neighbor values are inherited #487 screens, not independently recomputed in #597.",
+    "Census Places is not a complete settlement gazetteer; GSHHG representative points and component counts do not certify all land, islands or coastline.",
+    "The inherited four-piece union differs from the 2018 county predecessor by a 24.520472 km² symmetric-difference screen; this does not identify a legal remainder or support moving a shared line.",
+    "RESOLVE ecoregions describe ecological systems, not sovereignty, county government or historical political ownership.",
+    "This is a source-role/rationale proposal for engineering review, not shared hierarchy/geometry approval and not authorization for history imports."
+  ]
+}
