@@ -68,11 +68,12 @@ assert all(r['assessment_status'] in ('insufficient-evidence','correction-needed
 assert len(csv_rows(ROOT/'administrative-scope.csv')) == 10
 scope_rows=csv_rows(ROOT/'administrative-scope.csv')
 area_scope=next(r for r in scope_rows if r['scope_level']=='area')
-assert json.loads(area_scope['related_followup_issue_ids']) == [755,756,757]
+assert json.loads(area_scope['related_followup_issue_ids']) == [755,756,757,759]
 province_followups={r['name']:json.loads(r['related_followup_issue_ids']) for r in scope_rows if r['scope_level']=='province'}
-assert province_followups['Nasarawa'] == [755,757]
-assert province_followups['Kaduna'] == [755,756]
-assert province_followups['Cross River'] == [755,756]
+assert province_followups['Nasarawa'] == [755,757,759]
+assert province_followups['Kaduna'] == [755,756,759]
+assert province_followups['Cross River'] == [755,756,759]
+assert all(755 in followups and 759 in followups for followups in province_followups.values())
 city_rows = csv_rows(ROOT/'city-name-spatial-screen.csv')
 assert city_rows and all(('does not define an urban' in r['interpretation'] or 'does not establish urban' in r['interpretation']) for r in city_rows)
 part = read_json(ROOT/'sibling-area-partition.json')

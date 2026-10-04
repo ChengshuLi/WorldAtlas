@@ -398,6 +398,7 @@ def main():
  # Every province and area is represented; partial country scopes include explicit external-owned remainder counts.
  followup_subjects={
   755:set(ids),
+  759:set(ids),
   756:{'gb:NGA:ADM2:59680162B79502957035648','gb:NGA:ADM2:59680162B54666922464494',
    'gb:NGA:ADM2:59680162B21692666530817','gb:NGA:ADM2:59680162B79526209894783',
    'gb:NGA:ADM2:59680162B19433829654146','gb:NGA:ADM2:59680162B37931278966472'},
