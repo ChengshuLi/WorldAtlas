@@ -1,0 +1,1862 @@
+{
+  "version": 1,
+  "issue": 706,
+  "lane": "engineering",
+  "worker_id": "ci-duration-balance-root-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "2953950c66af974cc3cc78f0f4733844d14058de",
+    "files": [
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 4200,
+        "sha256": "cbcae6e5b9fbea0050a9fc3a82b6bb429b450d7d45a9b5b9dcbf01093e383a2f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/model.test.mjs",
+        "bytes": 11135,
+        "sha256": "924bc934c8dfacf3aa5359f356c6de504eaf16a41ab44851cbc008b46f2277f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/model-hierarchy-migration.test.mjs",
+        "bytes": 1536,
+        "sha256": "d2197c50f7a2da5cf17b71c71acbd33bbd54a2d524cfb1c907232be2e1a17241",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/model-topology-migration.test.mjs",
+        "bytes": 1783,
+        "sha256": "da82ab60b101a789f71ebec05de6849c0ec283f56b49464a9461302e99deb9a6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/model-semantic-migration.test.mjs",
+        "bytes": 1815,
+        "sha256": "975c728b127b7a5e9d59849e40ee7a435591628f63b008a338ee96ca57f7d9a5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/ci-duration-balance-20261004/evidence-quality.json",
+        "bytes": 9541,
+        "sha256": "a64dbf20553be22b0896b15669b4a02c7a819751ee336036476bc5a7fcbee172",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/parity-proof-694-20261004/final-run-api.json",
+        "bytes": 12837,
+        "sha256": "0777947b4350cc24693d8db96a174210e1ecddcce771044054d88cb0c5949cc5",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-run-api.json",
+      "bytes": 12837,
+      "sha256": "0777947b4350cc24693d8db96a174210e1ecddcce771044054d88cb0c5949cc5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-jobs-api.json",
+      "bytes": 12631,
+      "sha256": "48d01d779f0035d51f40b3b7698117bec4f020afffae012cbbf1b8ccad8400bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-shard0.log",
+      "bytes": 161430,
+      "sha256": "0c533e551629393a70b1267790baa8021f704d0e2e2c60dd1cc5aba1519bdd83",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-shard1.log",
+      "bytes": 139847,
+      "sha256": "68e5d98a3143bf4362240f939f119cee72a28757eb9ed851c00d53f24c802e21",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-shard2.log",
+      "bytes": 137923,
+      "sha256": "9bc53e982b6570e0b32759a3f216aec07c570ace07f2c31514f8a6c8f2e4877d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-input-receipt.json",
+      "bytes": 1545,
+      "sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-run-api.json",
+      "bytes": 12847,
+      "sha256": "d1f8ba3395525cd0ccc173d4b5bbfd63e85201b9133a120d47ea46837659e9ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-jobs-api.json",
+      "bytes": 12643,
+      "sha256": "88c54a69f8c9d208e2d808374b2f733a74cd54abb2da68198ef0614fd15c2818",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard0.log",
+      "bytes": 158330,
+      "sha256": "1895ca2e7ae6440f9350b5f10606b55c546ddcbb732908275a57a303f1c5d913",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard1.log",
+      "bytes": 142548,
+      "sha256": "22dec2ac82ece61ba50d2d102153452085c35df9bc7f3a36de63403cd5405aab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard2.log",
+      "bytes": 139474,
+      "sha256": "3972d81494ad412d4e29599c35eaa3bdfec53085b818cbb1ba6f9930ad9cf8b1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-input-receipt.json",
+      "bytes": 1581,
+      "sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-run-api.json",
+      "bytes": 12869,
+      "sha256": "7fa84fac98bbedf1dbe2897901e8ac6378749957863c262dc0abb7826333ec9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-jobs-api.json",
+      "bytes": 12643,
+      "sha256": "066ac34904f352949a8a6363fb434d4b0557b322228e1caa60591365eb914b1c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-shard0.log",
+      "bytes": 148251,
+      "sha256": "f25991226650a17c8da3256fa3d2fd9d5baf51c84d7ca9967f5e0da258438ca8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-shard1.log",
+      "bytes": 137215,
+      "sha256": "5ae266f15e5c4eb9622bdb68164d4f077e51f4402ad7c1eae912a410bf774662",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-shard2.log",
+      "bytes": 154455,
+      "sha256": "f4eee820ef9b4edc465c24eb376634bf590aca74b9585aba57c5e7103c89d82e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-input-receipt.json",
+      "bytes": 1581,
+      "sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-run-api.json",
+      "bytes": 13861,
+      "sha256": "085568ad6219627910a8a3d62679a9325a421ff6d9a567109c69bdd3142adea7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-jobs-api.json",
+      "bytes": 15926,
+      "sha256": "711efbcf357b20fe2b86731e617fdf616e74eeb102e975d5d8c402e6e5c70a22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-shard0.log",
+      "bytes": 148242,
+      "sha256": "70cc43ad0ee89048e79a6bd50caad7b1cd742cfda7135a0052227066399ca720",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-shard1.log",
+      "bytes": 137195,
+      "sha256": "a938cd9a3ff8d9f39dd85b8f3dd378aeeaf8fbe459ef3d007c093eebffaf49db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-shard2.log",
+      "bytes": 154857,
+      "sha256": "3050da162f48ed02e20931b89d9b8f3b03d185f1aab86e4cf5459a4f71f595f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-tested-commit-receipt.json",
+      "bytes": 7738,
+      "sha256": "4c5d5a72831c6d998b20cf2ad04408f6eebdab54675a5b85311e0ff22e743ded",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-input-receipt.json",
+      "bytes": 1978,
+      "sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "bytes": 28475,
+      "sha256": "660271bdcebc208c2ea8f70efd577a62b2780d1e31fe17cf6c6a16084d266983",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/control-input.json",
+      "bytes": 71,
+      "sha256": "e5a0e635c1dd5187368513040a2b57c4a34f82b7ae29497096922cd313d50d7e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/positive-control.json",
+      "bytes": 148,
+      "sha256": "ef29188cf5148fb1d33f2811c170d60e5086749f955401485e404548e84e8a88",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/negative-control.json",
+      "bytes": 188,
+      "sha256": "f23178f5422b997c5177fa562a365039334e42d02f8373cd984fbf4497bc20c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement-parser.txt",
+      "bytes": 14967,
+      "sha256": "3e11bcc1e114bd962abb7821dd7529c46d2c34f9ac3f8da13f916429ec4856a4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/reproduction-spec.json",
+      "bytes": 3240,
+      "sha256": "a9e4623b0896566dd6506d3682fd2c66f4307516e8ee72631c01340679e52f88",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/claim.json",
+      "bytes": 827,
+      "sha256": "a3f13e9d7d51abd613b42c9a20ad991d79037f4b6c8e6c42d709933b5a76efbe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/README.md",
+      "bytes": 2059,
+      "sha256": "67ddc85f1a4d6399bd4a8af843c755f5b3d85c530ceb061222cbdf4fc2983f07",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "full-ci-observation",
+      "kind": "measurement",
+      "description": "Validate completed successful full-profile jobs, unique shard inventories, TAP counts and durations; derive ordered API intervals; reject missing/failed/skipped coverage and reversed timestamp controls.",
+      "software": "Python standard library; actual GitHub-hosted run/job API and Node TAP",
+      "units": "seconds, milliseconds, tests, immutable file bytes"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "full-ci-observation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/ci-duration-proof-706-20261004/positive-control.json"
+    },
+    {
+      "method_id": "full-ci-observation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/ci-duration-proof-706-20261004/negative-control.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "observed-before-workflow-elapsed-seconds",
+      "value": 463.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-0-job-seconds",
+      "value": 344.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-0-test-step-seconds",
+      "value": 170.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-0-node-test-duration-ms",
+      "value": 170271.269274,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-0-tests",
+      "value": 226,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-0-passed",
+      "value": 226,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-0-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-0-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-1-job-seconds",
+      "value": 158.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-1-test-step-seconds",
+      "value": 75.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-1-node-test-duration-ms",
+      "value": 75271.033837,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-1-tests",
+      "value": 213,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-1-passed",
+      "value": 213,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-1-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-1-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-2-job-seconds",
+      "value": 448.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-2-test-step-seconds",
+      "value": 370.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-2-node-test-duration-ms",
+      "value": 368949.678137,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-2-tests",
+      "value": 246,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-2-passed",
+      "value": 246,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-2-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-shards-2-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-critical-shard-seconds",
+      "value": 448.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-tests",
+      "value": 685,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-passed",
+      "value": 685,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-before-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ae09df6674374102bdef1569a499dd5e9125e2a1e7880bafbc75b0d29f90a0cd",
+      "evaluation_commit": "a368cdbdb2e651bd0261515a930bdb480333d72b"
+    },
+    {
+      "id": "observed-intermediate-workflow-elapsed-seconds",
+      "value": 497.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-0-job-seconds",
+      "value": 482.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-0-test-step-seconds",
+      "value": 251.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-0-node-test-duration-ms",
+      "value": 251050.776419,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-0-tests",
+      "value": 195,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-0-passed",
+      "value": 195,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-0-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-0-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-1-job-seconds",
+      "value": 162.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-1-test-step-seconds",
+      "value": 86.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-1-node-test-duration-ms",
+      "value": 85749.232894,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-1-tests",
+      "value": 246,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-1-passed",
+      "value": 246,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-1-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-1-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-2-job-seconds",
+      "value": 367.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-2-test-step-seconds",
+      "value": 264.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-2-node-test-duration-ms",
+      "value": 264300.19624,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-2-tests",
+      "value": 246,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-2-passed",
+      "value": 246,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-2-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-shards-2-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-critical-shard-seconds",
+      "value": 482.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-tests",
+      "value": 687,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-passed",
+      "value": 687,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-intermediate-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "3a1ec36c65759197c8a2be0eabc44f9b3f5fb354915ae9d337e374cd4223037b",
+      "evaluation_commit": "f115d324c7b3a2bcb97a1c276412a72f338f03d3"
+    },
+    {
+      "id": "observed-final-source-workflow-elapsed-seconds",
+      "value": 454.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-0-job-seconds",
+      "value": 438.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-0-test-step-seconds",
+      "value": 245.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-0-node-test-duration-ms",
+      "value": 244307.758104,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-0-tests",
+      "value": 199,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-0-passed",
+      "value": 199,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-0-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-0-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-1-job-seconds",
+      "value": 319.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-1-test-step-seconds",
+      "value": 229.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-1-node-test-duration-ms",
+      "value": 228442.680101,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-1-tests",
+      "value": 235,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-1-passed",
+      "value": 235,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-1-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-1-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-2-job-seconds",
+      "value": 272.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-2-test-step-seconds",
+      "value": 192.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-2-node-test-duration-ms",
+      "value": 191526.136129,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-2-tests",
+      "value": 253,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-2-passed",
+      "value": 253,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-2-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-shards-2-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-critical-shard-seconds",
+      "value": 438.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-tests",
+      "value": 687,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-passed",
+      "value": 687,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-final-source-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "44e5a7ae7be4967a37fc5ed50fb370b4fbdde454299f9141a25f363eb34e7f02",
+      "evaluation_commit": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1"
+    },
+    {
+      "id": "observed-integration-workflow-elapsed-seconds",
+      "value": 499.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-0-job-seconds",
+      "value": 447.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-0-test-step-seconds",
+      "value": 250.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-0-node-test-duration-ms",
+      "value": 249579.320244,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-0-tests",
+      "value": 199,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-0-passed",
+      "value": 199,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-0-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-0-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-1-job-seconds",
+      "value": 297.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-1-test-step-seconds",
+      "value": 227.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-1-node-test-duration-ms",
+      "value": 226087.01375,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-1-tests",
+      "value": 235,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-1-passed",
+      "value": 235,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-1-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-1-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-2-job-seconds",
+      "value": 322.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-2-test-step-seconds",
+      "value": 195.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-2-node-test-duration-ms",
+      "value": 195737.810969,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-2-tests",
+      "value": 253,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-2-passed",
+      "value": 253,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-2-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-shards-2-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-critical-shard-seconds",
+      "value": 447.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-tests",
+      "value": 687,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-passed",
+      "value": 687,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-integration-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "744598c6c955fba01e617d1fff34295f81c31a39ac14dff7b319c05b4989cb5d",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-positive-control-expected-seconds",
+      "value": 30,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "e5a0e635c1dd5187368513040a2b57c4a34f82b7ae29497096922cd313d50d7e",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    },
+    {
+      "id": "observed-positive-control-observed-seconds",
+      "value": 30.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "e5a0e635c1dd5187368513040a2b57c4a34f82b7ae29497096922cd313d50d7e",
+      "evaluation_commit": "a9ce5974f55a606f2af00e592d5ba51cd4dee4a0"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "observed-before-workflow-elapsed-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/workflow_elapsed_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/0/job_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/0/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-0-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/0/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-before-shards-0-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/0/tests"
+    },
+    {
+      "metric_id": "observed-before-shards-0-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/0/passed"
+    },
+    {
+      "metric_id": "observed-before-shards-0-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/0/failed"
+    },
+    {
+      "metric_id": "observed-before-shards-0-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/0/skipped"
+    },
+    {
+      "metric_id": "observed-before-shards-1-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/1/job_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-1-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/1/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-1-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/1/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-before-shards-1-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/1/tests"
+    },
+    {
+      "metric_id": "observed-before-shards-1-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/1/passed"
+    },
+    {
+      "metric_id": "observed-before-shards-1-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/1/failed"
+    },
+    {
+      "metric_id": "observed-before-shards-1-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/1/skipped"
+    },
+    {
+      "metric_id": "observed-before-shards-2-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/2/job_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-2-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/2/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-before-shards-2-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/2/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-before-shards-2-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/2/tests"
+    },
+    {
+      "metric_id": "observed-before-shards-2-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/2/passed"
+    },
+    {
+      "metric_id": "observed-before-shards-2-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/2/failed"
+    },
+    {
+      "metric_id": "observed-before-shards-2-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/shards/2/skipped"
+    },
+    {
+      "metric_id": "observed-before-critical-shard-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/critical_shard_seconds"
+    },
+    {
+      "metric_id": "observed-before-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/tests"
+    },
+    {
+      "metric_id": "observed-before-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/passed"
+    },
+    {
+      "metric_id": "observed-before-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/failed"
+    },
+    {
+      "metric_id": "observed-before-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/before/skipped"
+    },
+    {
+      "metric_id": "observed-intermediate-workflow-elapsed-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/workflow_elapsed_seconds"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-0-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/0/job_seconds"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-0-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/0/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-0-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/0/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-0-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/0/tests"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-0-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/0/passed"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-0-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/0/failed"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-0-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/0/skipped"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-1-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/1/job_seconds"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-1-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/1/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-1-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/1/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-1-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/1/tests"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-1-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/1/passed"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-1-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/1/failed"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-1-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/1/skipped"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-2-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/2/job_seconds"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-2-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/2/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-2-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/2/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-2-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/2/tests"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-2-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/2/passed"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-2-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/2/failed"
+    },
+    {
+      "metric_id": "observed-intermediate-shards-2-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/shards/2/skipped"
+    },
+    {
+      "metric_id": "observed-intermediate-critical-shard-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/critical_shard_seconds"
+    },
+    {
+      "metric_id": "observed-intermediate-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/tests"
+    },
+    {
+      "metric_id": "observed-intermediate-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/passed"
+    },
+    {
+      "metric_id": "observed-intermediate-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/failed"
+    },
+    {
+      "metric_id": "observed-intermediate-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/intermediate/skipped"
+    },
+    {
+      "metric_id": "observed-final-source-workflow-elapsed-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/workflow_elapsed_seconds"
+    },
+    {
+      "metric_id": "observed-final-source-shards-0-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/0/job_seconds"
+    },
+    {
+      "metric_id": "observed-final-source-shards-0-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/0/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-final-source-shards-0-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/0/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-final-source-shards-0-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/0/tests"
+    },
+    {
+      "metric_id": "observed-final-source-shards-0-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/0/passed"
+    },
+    {
+      "metric_id": "observed-final-source-shards-0-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/0/failed"
+    },
+    {
+      "metric_id": "observed-final-source-shards-0-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/0/skipped"
+    },
+    {
+      "metric_id": "observed-final-source-shards-1-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/1/job_seconds"
+    },
+    {
+      "metric_id": "observed-final-source-shards-1-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/1/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-final-source-shards-1-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/1/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-final-source-shards-1-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/1/tests"
+    },
+    {
+      "metric_id": "observed-final-source-shards-1-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/1/passed"
+    },
+    {
+      "metric_id": "observed-final-source-shards-1-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/1/failed"
+    },
+    {
+      "metric_id": "observed-final-source-shards-1-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/1/skipped"
+    },
+    {
+      "metric_id": "observed-final-source-shards-2-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/2/job_seconds"
+    },
+    {
+      "metric_id": "observed-final-source-shards-2-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/2/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-final-source-shards-2-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/2/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-final-source-shards-2-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/2/tests"
+    },
+    {
+      "metric_id": "observed-final-source-shards-2-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/2/passed"
+    },
+    {
+      "metric_id": "observed-final-source-shards-2-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/2/failed"
+    },
+    {
+      "metric_id": "observed-final-source-shards-2-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/shards/2/skipped"
+    },
+    {
+      "metric_id": "observed-final-source-critical-shard-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/critical_shard_seconds"
+    },
+    {
+      "metric_id": "observed-final-source-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/tests"
+    },
+    {
+      "metric_id": "observed-final-source-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/passed"
+    },
+    {
+      "metric_id": "observed-final-source-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/failed"
+    },
+    {
+      "metric_id": "observed-final-source-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/final-source/skipped"
+    },
+    {
+      "metric_id": "observed-integration-workflow-elapsed-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/workflow_elapsed_seconds"
+    },
+    {
+      "metric_id": "observed-integration-shards-0-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/0/job_seconds"
+    },
+    {
+      "metric_id": "observed-integration-shards-0-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/0/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-integration-shards-0-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/0/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-integration-shards-0-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/0/tests"
+    },
+    {
+      "metric_id": "observed-integration-shards-0-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/0/passed"
+    },
+    {
+      "metric_id": "observed-integration-shards-0-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/0/failed"
+    },
+    {
+      "metric_id": "observed-integration-shards-0-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/0/skipped"
+    },
+    {
+      "metric_id": "observed-integration-shards-1-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/1/job_seconds"
+    },
+    {
+      "metric_id": "observed-integration-shards-1-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/1/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-integration-shards-1-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/1/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-integration-shards-1-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/1/tests"
+    },
+    {
+      "metric_id": "observed-integration-shards-1-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/1/passed"
+    },
+    {
+      "metric_id": "observed-integration-shards-1-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/1/failed"
+    },
+    {
+      "metric_id": "observed-integration-shards-1-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/1/skipped"
+    },
+    {
+      "metric_id": "observed-integration-shards-2-job-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/2/job_seconds"
+    },
+    {
+      "metric_id": "observed-integration-shards-2-test-step-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/2/test_step_seconds"
+    },
+    {
+      "metric_id": "observed-integration-shards-2-node-test-duration-ms",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/2/node_test_duration_ms"
+    },
+    {
+      "metric_id": "observed-integration-shards-2-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/2/tests"
+    },
+    {
+      "metric_id": "observed-integration-shards-2-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/2/passed"
+    },
+    {
+      "metric_id": "observed-integration-shards-2-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/2/failed"
+    },
+    {
+      "metric_id": "observed-integration-shards-2-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/shards/2/skipped"
+    },
+    {
+      "metric_id": "observed-integration-critical-shard-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/critical_shard_seconds"
+    },
+    {
+      "metric_id": "observed-integration-tests",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/tests"
+    },
+    {
+      "metric_id": "observed-integration-passed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/passed"
+    },
+    {
+      "metric_id": "observed-integration-failed",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/failed"
+    },
+    {
+      "metric_id": "observed-integration-skipped",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "json_pointer": "/observations/integration/skipped"
+    },
+    {
+      "metric_id": "observed-positive-control-expected-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/positive-control.json",
+      "json_pointer": "/expected_seconds"
+    },
+    {
+      "metric_id": "observed-positive-control-observed-seconds",
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/positive-control.json",
+      "json_pointer": "/observed_seconds"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "python3 coordination/engineering/ci-duration-proof-706-20261004/measurement-parser.txt coordination/engineering/ci-duration-proof-706-20261004/reproduction-spec.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-run-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-jobs-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-shard0.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-shard1.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-shard2.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/before-input-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-run-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-jobs-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard0.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard1.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-shard2.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/intermediate-input-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-run-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-jobs-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-shard0.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-shard1.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-shard2.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/final-source-input-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-run-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-jobs-api.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-shard0.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-shard1.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-shard2.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-tested-commit-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/integration-input-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/control-input.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/measurement-parser.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/reproduction-spec.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-proof-706-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
