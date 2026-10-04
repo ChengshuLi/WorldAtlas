@@ -1,0 +1,9 @@
+{
+  "attempt": 1,
+  "outcome": "failed-before-seed",
+  "error": "unrecognized configuration parameter lc_collate",
+  "code_sha256": "9292579af8f28d3888ee4fad989b647a2fb9d4bd1669c8f6ec6713e4315c8683",
+  "isolated_target": "/tmp/worldatlas-membership-benchmark-20261004-local01",
+  "production_access": false,
+  "correction": "Read collation from pg_database rather than removed setting; retry in a new isolated directory."
+}

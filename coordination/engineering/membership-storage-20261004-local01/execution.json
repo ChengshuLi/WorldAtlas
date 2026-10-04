@@ -1,0 +1,30 @@
+{
+  "baseline_commit": "f72394a1194d0e0100cf08b7232da3d5be5a63bc",
+  "final_source_sha256": "13d786079c0bb68ea2165ffac39f291f05f9366be62fc6356ef8e188201437c3",
+  "final_tests_sha256": "2e0d8f0d2627eefc8149a89cb9d41b1c6711aa052e0e6afcb1cf7079a972332a",
+  "final_result_sha256": "9c29e40fbf33b4f3d6049a453643c50993d1c7ee041c11c65e1aa12df2f265a6",
+  "final_input_sha256": "76e2927b8e6008c4995019a65df945b29072ad9d01fe75b2c8c08943e8739cfa",
+  "final_command": "node scripts/benchmark-membership-storage.mjs data/geographic-releases coordination/engineering/membership-storage-20261004-local01 /tmp/worldatlas-membership-benchmark-20261004-local01-final4",
+  "attempts": [
+    {
+      "id": 2,
+      "source_sha256": "dcae99fc7a442ccb6fde0f336ad1e58ad0d5b6602d89b9e7d0a5671e209bab00",
+      "result_path": "coordination/engineering/membership-storage-20261004-local01/run2-result.json.gz",
+      "limits": "Earlier transaction helper and 18 query probes."
+    },
+    {
+      "id": 3,
+      "source_sha256": "81ca4d46e702764031517978bfb86ea04c7ea27837d406ca70f927700e54da6a",
+      "result_path": "coordination/engineering/membership-storage-20261004-local01/run3-result.json.gz",
+      "limits": "Source vintage reconstructed by reversing only the retained subsequent predecessor-inventory patch; 30 query probes, original-index prefix checked but intermediate extension chain not yet inventoried."
+    },
+    {
+      "id": 4,
+      "source_sha256": "13d786079c0bb68ea2165ffac39f291f05f9366be62fc6356ef8e188201437c3",
+      "result_path": "coordination/engineering/membership-storage-20261004-local01/result.json",
+      "limits": "Final actual invocation includes all source/extension pins and 30 query probes."
+    }
+  ],
+  "storage_repeated_exactly": true,
+  "production_changed": false
+}

@@ -1,0 +1,1813 @@
+{
+  "version": 1,
+  "scope": "offline-prepared-membership-subsystem",
+  "observed_at": "2026-10-04T20:35:25.643Z",
+  "input_inventory_sha256": "76e2927b8e6008c4995019a65df945b29072ad9d01fe75b2c8c08943e8739cfa",
+  "schema_sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "physical_memory_bytes": 8589934592,
+    "pglite_version": "0.5.8",
+    "disk_budget_bytes": 8589934592
+  },
+  "targets": {
+    "original": {
+      "ddl_sha256": "476e2c6c0524a6ad837056ee4df540423536a99abfdbbca7c277209f8df89b64",
+      "progress": [
+        {
+          "rows": 200,
+          "allocated_bytes": 69558272,
+          "rss_bytes": 778878976
+        },
+        {
+          "rows": 10000,
+          "allocated_bytes": 101744640,
+          "rss_bytes": 669466624
+        },
+        {
+          "rows": 20000,
+          "allocated_bytes": 136347648,
+          "rss_bytes": 476774400
+        },
+        {
+          "rows": 30000,
+          "allocated_bytes": 166756352,
+          "rss_bytes": 459341824
+        },
+        {
+          "rows": 40000,
+          "allocated_bytes": 198213632,
+          "rss_bytes": 399360000
+        },
+        {
+          "rows": 50000,
+          "allocated_bytes": 229670912,
+          "rss_bytes": 431947776
+        },
+        {
+          "rows": 60000,
+          "allocated_bytes": 259039232,
+          "rss_bytes": 377487360
+        },
+        {
+          "rows": 70000,
+          "allocated_bytes": 289447936,
+          "rss_bytes": 404127744
+        },
+        {
+          "rows": 80000,
+          "allocated_bytes": 320905216,
+          "rss_bytes": 390234112
+        },
+        {
+          "rows": 84933,
+          "allocated_bytes": 344039424,
+          "rss_bytes": 327286784
+        },
+        {
+          "rows": 90133,
+          "allocated_bytes": 354541568,
+          "rss_bytes": 394199040
+        },
+        {
+          "rows": 100133,
+          "allocated_bytes": 407052288,
+          "rss_bytes": 419463168
+        },
+        {
+          "rows": 110133,
+          "allocated_bytes": 451100672,
+          "rss_bytes": 395821056
+        },
+        {
+          "rows": 120133,
+          "allocated_bytes": 476266496,
+          "rss_bytes": 409812992
+        },
+        {
+          "rows": 130133,
+          "allocated_bytes": 517160960,
+          "rss_bytes": 447184896
+        },
+        {
+          "rows": 140133,
+          "allocated_bytes": 542326784,
+          "rss_bytes": 492716032
+        },
+        {
+          "rows": 150133,
+          "allocated_bytes": 584278016,
+          "rss_bytes": 412172288
+        },
+        {
+          "rows": 160133,
+          "allocated_bytes": 608395264,
+          "rss_bytes": 415825920
+        },
+        {
+          "rows": 169691,
+          "allocated_bytes": 649289728,
+          "rss_bytes": 335691776
+        },
+        {
+          "rows": 170091,
+          "allocated_bytes": 649289728,
+          "rss_bytes": 332546048
+        },
+        {
+          "rows": 180091,
+          "allocated_bytes": 692674560,
+          "rss_bytes": 413990912
+        },
+        {
+          "rows": 190091,
+          "allocated_bytes": 737771520,
+          "rss_bytes": 408158208
+        },
+        {
+          "rows": 200091,
+          "allocated_bytes": 778665984,
+          "rss_bytes": 284475392
+        },
+        {
+          "rows": 210091,
+          "allocated_bytes": 803831808,
+          "rss_bytes": 128761856
+        },
+        {
+          "rows": 220091,
+          "allocated_bytes": 875143168,
+          "rss_bytes": 326238208
+        },
+        {
+          "rows": 230091,
+          "allocated_bytes": 897163264,
+          "rss_bytes": 364969984
+        },
+        {
+          "rows": 240091,
+          "allocated_bytes": 951689216,
+          "rss_bytes": 440221696
+        },
+        {
+          "rows": 250091,
+          "allocated_bytes": 986357760,
+          "rss_bytes": 470286336
+        },
+        {
+          "rows": 254480,
+          "allocated_bytes": 1004249088,
+          "rss_bytes": 480378880
+        },
+        {
+          "rows": 260080,
+          "allocated_bytes": 1023598592,
+          "rss_bytes": 465829888
+        },
+        {
+          "rows": 270080,
+          "allocated_bytes": 1078190080,
+          "rss_bytes": 436125696
+        },
+        {
+          "rows": 280080,
+          "allocated_bytes": 1131667456,
+          "rss_bytes": 386088960
+        },
+        {
+          "rows": 290080,
+          "allocated_bytes": 1165221888,
+          "rss_bytes": 390086656
+        },
+        {
+          "rows": 300080,
+          "allocated_bytes": 1215553536,
+          "rss_bytes": 82919424
+        },
+        {
+          "rows": 310080,
+          "allocated_bytes": 1249107968,
+          "rss_bytes": 316391424
+        },
+        {
+          "rows": 320080,
+          "allocated_bytes": 1299439616,
+          "rss_bytes": 382025728
+        },
+        {
+          "rows": 330080,
+          "allocated_bytes": 1332994048,
+          "rss_bytes": 420347904
+        },
+        {
+          "rows": 339311,
+          "allocated_bytes": 1366556672,
+          "rss_bytes": 405438464
+        },
+        {
+          "rows": 340111,
+          "allocated_bytes": 1366556672,
+          "rss_bytes": 415432704
+        },
+        {
+          "rows": 350111,
+          "allocated_bytes": 1417945088,
+          "rss_bytes": 430276608
+        },
+        {
+          "rows": 360111,
+          "allocated_bytes": 1468276736,
+          "rss_bytes": 433635328
+        },
+        {
+          "rows": 370111,
+          "allocated_bytes": 1501831168,
+          "rss_bytes": 467927040
+        },
+        {
+          "rows": 380111,
+          "allocated_bytes": 1568940032,
+          "rss_bytes": 469794816
+        },
+        {
+          "rows": 390111,
+          "allocated_bytes": 1585717248,
+          "rss_bytes": 488079360
+        },
+        {
+          "rows": 400111,
+          "allocated_bytes": 1619271680,
+          "rss_bytes": 477904896
+        },
+        {
+          "rows": 410111,
+          "allocated_bytes": 1669603328,
+          "rss_bytes": 490536960
+        },
+        {
+          "rows": 420111,
+          "allocated_bytes": 1703157760,
+          "rss_bytes": 468893696
+        },
+        {
+          "rows": 424144,
+          "allocated_bytes": 1719934976,
+          "rss_bytes": 391708672
+        },
+        {
+          "rows": 430144,
+          "allocated_bytes": 1754554368,
+          "rss_bytes": 469762048
+        },
+        {
+          "rows": 440144,
+          "allocated_bytes": 1821663232,
+          "rss_bytes": 524173312
+        },
+        {
+          "rows": 450144,
+          "allocated_bytes": 1855283200,
+          "rss_bytes": 490995712
+        },
+        {
+          "rows": 460144,
+          "allocated_bytes": 1888837632,
+          "rss_bytes": 306184192
+        },
+        {
+          "rows": 470144,
+          "allocated_bytes": 1922392064,
+          "rss_bytes": 299876352
+        },
+        {
+          "rows": 480144,
+          "allocated_bytes": 1989566464,
+          "rss_bytes": 315998208
+        },
+        {
+          "rows": 490144,
+          "allocated_bytes": 2039898112,
+          "rss_bytes": 295550976
+        },
+        {
+          "rows": 500144,
+          "allocated_bytes": 2073452544,
+          "rss_bytes": 320995328
+        },
+        {
+          "rows": 508777,
+          "allocated_bytes": 2108055552,
+          "rss_bytes": 383909888
+        }
+      ],
+      "peak_sampled_rss_bytes": 780058624,
+      "peak_sampled_allocated_bytes": 2108055552,
+      "settings": {
+        "version": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+        "block_size": "8192",
+        "encoding": "UTF8",
+        "collate": "C",
+        "toast_compression": "pglz"
+      },
+      "ingest_ms": 55325.994542,
+      "rows": 508777,
+      "distinct_evidence": null,
+      "storage": {
+        "relations": [
+          {
+            "relation": "atlas_entities",
+            "heap_main_bytes": 6823936,
+            "toast_bytes": 8192,
+            "table_bytes": 6856704,
+            "index_bytes": 5398528,
+            "total_bytes": 12255232
+          },
+          {
+            "relation": "atlas_geographic_memberships",
+            "heap_main_bytes": 509624320,
+            "toast_bytes": 4505600,
+            "table_bytes": 514277376,
+            "index_bytes": 429899776,
+            "total_bytes": 944177152
+          },
+          {
+            "relation": "atlas_geographic_releases",
+            "heap_main_bytes": 8192,
+            "toast_bytes": 8192,
+            "table_bytes": 16384,
+            "index_bytes": 16384,
+            "total_bytes": 32768
+          },
+          {
+            "relation": "atlas_sources",
+            "heap_main_bytes": 8192,
+            "toast_bytes": 8192,
+            "table_bytes": 16384,
+            "index_bytes": 16384,
+            "total_bytes": 32768
+          }
+        ],
+        "indexes": [
+          {
+            "relation": "atlas_entities",
+            "name": "atlas_entities_pkey",
+            "bytes": 5398528,
+            "definition": "CREATE UNIQUE INDEX atlas_entities_pkey ON public.atlas_entities USING btree (id)"
+          },
+          {
+            "relation": "atlas_geographic_memberships",
+            "name": "atlas_geographic_memberships_pkey",
+            "bytes": 144048128,
+            "definition": "CREATE UNIQUE INDEX atlas_geographic_memberships_pkey ON public.atlas_geographic_memberships USING btree (release_id, entity_id)"
+          },
+          {
+            "relation": "atlas_geographic_memberships",
+            "name": "geographic_membership_page",
+            "bytes": 123822080,
+            "definition": "CREATE INDEX geographic_membership_page ON public.atlas_geographic_memberships USING btree (release_id, active, entity_id)"
+          },
+          {
+            "relation": "atlas_geographic_memberships",
+            "name": "geographic_membership_parent",
+            "bytes": 162029568,
+            "definition": "CREATE INDEX geographic_membership_parent ON public.atlas_geographic_memberships USING btree (release_id, active, parent_id, entity_id)"
+          },
+          {
+            "relation": "atlas_geographic_releases",
+            "name": "atlas_geographic_releases_pkey",
+            "bytes": 16384,
+            "definition": "CREATE UNIQUE INDEX atlas_geographic_releases_pkey ON public.atlas_geographic_releases USING btree (id)"
+          },
+          {
+            "relation": "atlas_sources",
+            "name": "atlas_sources_pkey",
+            "bytes": 16384,
+            "definition": "CREATE UNIQUE INDEX atlas_sources_pkey ON public.atlas_sources USING btree (id)"
+          }
+        ],
+        "total_relation_bytes": 956497920
+      },
+      "releases": [
+        {
+          "version": 1,
+          "rows": 84733,
+          "membership_sha256": "3bbbe026a2fa7aad69251e44ebf09653b1e57c9cf3c1641f8e32cc0cea61d6ce",
+          "raw_rows_sha256": "79fbbd4bdaf7c1507b3efab498ee9ef5b3320124e6ccbe35759cf7658c03c82c"
+        },
+        {
+          "version": 2,
+          "rows": 84758,
+          "membership_sha256": "0a507c960b36e8ce0301334c28422eb941a6f212c78d719969034820a382bb63",
+          "raw_rows_sha256": "0c5f94c51beb03c88e65c3fde3ff20d8a591e7ed39f41828723296d794e574e6"
+        },
+        {
+          "version": 3,
+          "rows": 84789,
+          "membership_sha256": "7f417ad9ba3417737847aab72dfeb718a941adc2c058de24b1596bd7e78543b5",
+          "raw_rows_sha256": "8ec074702b05e53ac9c68da2f6ea81e78871ecf658c8098b5e033cb6d61b6388"
+        },
+        {
+          "version": 4,
+          "rows": 84831,
+          "membership_sha256": "6941bda620dd83356fdc1e7b6f251b959ddfac03a5845d86b022a23f090121f6",
+          "raw_rows_sha256": "fc7179d22352db1b5bece05c0c444cf840040409e8bbe6ac8a3542a2554afa01"
+        },
+        {
+          "version": 5,
+          "rows": 84833,
+          "membership_sha256": "9b555a5784795f2e8cef1e0ede7453ca499e8b8f9f3c1620e8d00b5dddc7109e",
+          "raw_rows_sha256": "76caa903f912ef994869b2b703622ede66ad9c1819217eb31659dcbfdd3772af"
+        },
+        {
+          "version": 6,
+          "rows": 84833,
+          "membership_sha256": "c4bd494715d8b33bc80732f40edde80c602a0ddcb5f1b5d33012c9735290ce9e",
+          "raw_rows_sha256": "a92f1644df960f4e6f3d889a094973a3119234a01968730336a814b8520fd78f"
+        }
+      ],
+      "queries": [
+        {
+          "version": 1,
+          "kind": "page",
+          "args": [
+            "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            1.9780420000024606,
+            1.4301669999986188,
+            1.4966659999918193
+          ],
+          "result_sha256": "52fb2992bab2bfaab858ae619900679545634ab109856ad5ec98dfb81068a1cc"
+        },
+        {
+          "version": 1,
+          "kind": "parent",
+          "args": [
+            "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            1.146667000008165,
+            0.28208299999823794,
+            0.2621669999934966
+          ],
+          "result_sha256": "aa226d2a7fcf2af2fc3c204b1faa6e2028a06ee5f4705817a19efdd65522bc9d"
+        },
+        {
+          "version": 1,
+          "kind": "identity",
+          "args": [
+            "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.586790999994264,
+            0.20499999998719431,
+            0.19670899999618996
+          ],
+          "result_sha256": "aa226d2a7fcf2af2fc3c204b1faa6e2028a06ee5f4705817a19efdd65522bc9d"
+        },
+        {
+          "version": 1,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+            "gb:CMR:ADM3:9386221B29102509952712"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            1.8965420000022277,
+            1.3913750000065193,
+            1.4888340000034077
+          ],
+          "result_sha256": "e4c7c8a09bec686a592b519767de0df814d1fdc7f7411852136b39bac0cc61b9"
+        },
+        {
+          "version": 1,
+          "kind": "largest-parent",
+          "args": [
+            "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            3.166000000011991,
+            1.4499999999970896,
+            1.392416000002413
+          ],
+          "result_sha256": "750445cf6e8782c74b72a69031f1f654beed5d77e8fdf76dee5b437f92224a92"
+        },
+        {
+          "version": 2,
+          "kind": "page",
+          "args": [
+            "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            1.837958999996772,
+            1.6852499999949941,
+            1.8202080000046408
+          ],
+          "result_sha256": "df904cf2b31f4946976798353f7a60bc8ca24d9657d1df1d626f8abb6e8c9015"
+        },
+        {
+          "version": 2,
+          "kind": "parent",
+          "args": [
+            "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.8444170000002487,
+            0.2938330000033602,
+            0.2721250000031432
+          ],
+          "result_sha256": "de13e146d8059fe10b6643a6e3a97462d6a4a7ea14eb6122535069c719767bbf"
+        },
+        {
+          "version": 2,
+          "kind": "identity",
+          "args": [
+            "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.7116669999959413,
+            0.23208299999532755,
+            0.22604200000932906
+          ],
+          "result_sha256": "de13e146d8059fe10b6643a6e3a97462d6a4a7ea14eb6122535069c719767bbf"
+        },
+        {
+          "version": 2,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+            "gb:CMR:ADM3:9386221B60959306764795"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            2.2860409999993863,
+            1.670125000004191,
+            1.6175829999992857
+          ],
+          "result_sha256": "23a249ac88aa886da9d912561a796bb7286eb9aede3187b6639320cdd66b4897"
+        },
+        {
+          "version": 2,
+          "kind": "largest-parent",
+          "args": [
+            "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            3.423125000001164,
+            1.7862910000112606,
+            1.5193750000034925
+          ],
+          "result_sha256": "5875b29043b81eda5119480f649b2500768b6875be8af8bd2ea7d5773af95d82"
+        },
+        {
+          "version": 3,
+          "kind": "page",
+          "args": [
+            "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            1.8566250000003492,
+            1.7154580000060378,
+            1.6265419999981532
+          ],
+          "result_sha256": "8aaca672a751804aec0f5374bc26b5d5c3d4edf88570235d83c900a2e3472175"
+        },
+        {
+          "version": 3,
+          "kind": "parent",
+          "args": [
+            "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.7112080000079004,
+            0.32941700000083074,
+            0.2722499999945285
+          ],
+          "result_sha256": "c817bd1dc2caa248ddefabd16bd81784f333bb0908f46f2a7eefde567348e074"
+        },
+        {
+          "version": 3,
+          "kind": "identity",
+          "args": [
+            "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.4117079999996349,
+            0.21862499999406282,
+            0.21795799999381416
+          ],
+          "result_sha256": "c817bd1dc2caa248ddefabd16bd81784f333bb0908f46f2a7eefde567348e074"
+        },
+        {
+          "version": 3,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+            "gb:CMR:ADM3:9386221B5549911640036"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            1.7445000000006985,
+            1.565333999998984,
+            1.6711250000080327
+          ],
+          "result_sha256": "8164aba2bfbacfb07e29d2648f1e0a055db8221bd83ec635f45a9cd456042527"
+        },
+        {
+          "version": 3,
+          "kind": "largest-parent",
+          "args": [
+            "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            3.411833000005572,
+            1.6085419999872101,
+            1.6393749999988358
+          ],
+          "result_sha256": "dedd0a781f2d29f7c8dbc0950b399d848e26fcb9b0b99a05e4631e2cc0c755f6"
+        },
+        {
+          "version": 4,
+          "kind": "page",
+          "args": [
+            "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            3.157667000006768,
+            1.8494159999972908,
+            1.800374999991618
+          ],
+          "result_sha256": "835fbd5b281b381e9576e4e006e123e5505fd250b7b589aa6e7655b1ed851c19"
+        },
+        {
+          "version": 4,
+          "kind": "parent",
+          "args": [
+            "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            1.1009590000030585,
+            0.41662499999802094,
+            0.3436249999940628
+          ],
+          "result_sha256": "515d5175f335c218fe2a24ece51d31eaf10e7f5279151f196d57a5153ef301b9"
+        },
+        {
+          "version": 4,
+          "kind": "identity",
+          "args": [
+            "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.728333000006387,
+            0.290791999999783,
+            0.2589999999909196
+          ],
+          "result_sha256": "515d5175f335c218fe2a24ece51d31eaf10e7f5279151f196d57a5153ef301b9"
+        },
+        {
+          "version": 4,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+            "gb:CMR:ADM3:9386221B47273112743331"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            2.3112090000067838,
+            1.6702499999955762,
+            1.5889580000075512
+          ],
+          "result_sha256": "747a7697ceac433def18fb96aebe1f479d373cadd0b96ee422cda3f5c791a37f"
+        },
+        {
+          "version": 4,
+          "kind": "largest-parent",
+          "args": [
+            "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            3.2010409999929834,
+            1.6185830000031274,
+            1.6258749999979045
+          ],
+          "result_sha256": "df4bc9806d39d6e43cc1dd5e9396c89160ed198fd288c7d547683084873417b2"
+        },
+        {
+          "version": 5,
+          "kind": "page",
+          "args": [
+            "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            4.380707999996957,
+            2.0335829999967245,
+            1.7397920000075828
+          ],
+          "result_sha256": "0ff84bc718bafbb87b08791b1de721c284aaeb13393d0a991699438400034a08"
+        },
+        {
+          "version": 5,
+          "kind": "parent",
+          "args": [
+            "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.8734160000021802,
+            0.2837499999877764,
+            0.2654999999940628
+          ],
+          "result_sha256": "5b95afba7d46494dd07910c92cbd1f5a11960390ea60ef3076a47f4b892322a5"
+        },
+        {
+          "version": 5,
+          "kind": "identity",
+          "args": [
+            "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.6192499999888241,
+            0.23629200000141282,
+            0.22599999999511056
+          ],
+          "result_sha256": "5b95afba7d46494dd07910c92cbd1f5a11960390ea60ef3076a47f4b892322a5"
+        },
+        {
+          "version": 5,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+            "gb:CMR:ADM3:9386221B46316017991506"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            6.53016700000444,
+            1.8248750000057044,
+            2.0754159999924013
+          ],
+          "result_sha256": "fb4a6de3216a621c2ca6ba9226cf7f17b60104bcffcc1b7dd0c9dd215bb687b4"
+        },
+        {
+          "version": 5,
+          "kind": "largest-parent",
+          "args": [
+            "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            9.996750000005704,
+            2.037125000002561,
+            1.6993749999965075
+          ],
+          "result_sha256": "a7334c660042d0d2d0091653c8322d3dc0900b9c7c0b29e06a3115b008a0cad4"
+        },
+        {
+          "version": 6,
+          "kind": "page",
+          "args": [
+            "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            4.230416999998852,
+            2.61699999999837,
+            2.7375000000029104
+          ],
+          "result_sha256": "51231901174b4b3314cf7da3042fcffb1b3b614a0f527de6db651227ec63a511"
+        },
+        {
+          "version": 6,
+          "kind": "parent",
+          "args": [
+            "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.9524160000000848,
+            0.3189169999968726,
+            0.2983340000064345
+          ],
+          "result_sha256": "fb7b9481af234629515d2b6bc0f466c53e265a60decd0ed82e61549f119dbb50"
+        },
+        {
+          "version": 6,
+          "kind": "identity",
+          "args": [
+            "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.7404170000081649,
+            0.3080409999965923,
+            0.26020799999241717
+          ],
+          "result_sha256": "fb7b9481af234629515d2b6bc0f466c53e265a60decd0ed82e61549f119dbb50"
+        },
+        {
+          "version": 6,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+            "gb:CMR:ADM3:9386221B4723313213024"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            2.241959000006318,
+            2.897207999994862,
+            2.7480000000068685
+          ],
+          "result_sha256": "154124f4644e0d4af77a4eb3b369d529edbbfce66d6c62ee8061e5340c529645"
+        },
+        {
+          "version": 6,
+          "kind": "largest-parent",
+          "args": [
+            "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            6.167291000005207,
+            2.281791000001249,
+            2.05945800000336
+          ],
+          "result_sha256": "fa4e63ddc3a79dd32770399a231e22d2795fb785a564ce9eb092a80ca2d3f2bf"
+        }
+      ],
+      "closed_target_allocated_bytes": 2091372544
+    },
+    "candidate": {
+      "ddl_sha256": "d1d189c196de861ff5ca6d5a1b1a00a4115733e53b971ab0f037cc54f1ce0212",
+      "progress": [
+        {
+          "rows": 200,
+          "allocated_bytes": 2163134464,
+          "rss_bytes": 440991744
+        },
+        {
+          "rows": 10000,
+          "allocated_bytes": 2181689344,
+          "rss_bytes": 383041536
+        },
+        {
+          "rows": 20000,
+          "allocated_bytes": 2184343552,
+          "rss_bytes": 303693824
+        },
+        {
+          "rows": 30000,
+          "allocated_bytes": 2187071488,
+          "rss_bytes": 274022400
+        },
+        {
+          "rows": 40000,
+          "allocated_bytes": 2188333056,
+          "rss_bytes": 244465664
+        },
+        {
+          "rows": 50000,
+          "allocated_bytes": 2208337920,
+          "rss_bytes": 190087168
+        },
+        {
+          "rows": 60000,
+          "allocated_bytes": 2208419840,
+          "rss_bytes": 139821056
+        },
+        {
+          "rows": 70000,
+          "allocated_bytes": 2211565568,
+          "rss_bytes": 112623616
+        },
+        {
+          "rows": 80000,
+          "allocated_bytes": 2212614144,
+          "rss_bytes": 200228864
+        },
+        {
+          "rows": 84933,
+          "allocated_bytes": 2212900864,
+          "rss_bytes": 241795072
+        },
+        {
+          "rows": 90133,
+          "allocated_bytes": 2237394944,
+          "rss_bytes": 313032704
+        },
+        {
+          "rows": 100133,
+          "allocated_bytes": 2241867776,
+          "rss_bytes": 312016896
+        },
+        {
+          "rows": 110133,
+          "allocated_bytes": 2261987328,
+          "rss_bytes": 291487744
+        },
+        {
+          "rows": 120133,
+          "allocated_bytes": 2262052864,
+          "rss_bytes": 281575424
+        },
+        {
+          "rows": 130133,
+          "allocated_bytes": 2265329664,
+          "rss_bytes": 281460736
+        },
+        {
+          "rows": 140133,
+          "allocated_bytes": 2286301184,
+          "rss_bytes": 279461888
+        },
+        {
+          "rows": 150133,
+          "allocated_bytes": 2286301184,
+          "rss_bytes": 271286272
+        },
+        {
+          "rows": 160133,
+          "allocated_bytes": 2290495488,
+          "rss_bytes": 222478336
+        },
+        {
+          "rows": 169691,
+          "allocated_bytes": 2290626560,
+          "rss_bytes": 251625472
+        },
+        {
+          "rows": 170091,
+          "allocated_bytes": 2291675136,
+          "rss_bytes": 252985344
+        },
+        {
+          "rows": 180091,
+          "allocated_bytes": 2320183296,
+          "rss_bytes": 312852480
+        },
+        {
+          "rows": 190091,
+          "allocated_bytes": 2340106240,
+          "rss_bytes": 294584320
+        },
+        {
+          "rows": 200091,
+          "allocated_bytes": 2342203392,
+          "rss_bytes": 295354368
+        },
+        {
+          "rows": 210091,
+          "allocated_bytes": 2343251968,
+          "rss_bytes": 285343744
+        },
+        {
+          "rows": 220091,
+          "allocated_bytes": 2347511808,
+          "rss_bytes": 287014912
+        },
+        {
+          "rows": 230091,
+          "allocated_bytes": 2365337600,
+          "rss_bytes": 259407872
+        },
+        {
+          "rows": 240091,
+          "allocated_bytes": 2367434752,
+          "rss_bytes": 248545280
+        },
+        {
+          "rows": 250091,
+          "allocated_bytes": 2369531904,
+          "rss_bytes": 274464768
+        },
+        {
+          "rows": 254480,
+          "allocated_bytes": 2371629056,
+          "rss_bytes": 285261824
+        },
+        {
+          "rows": 260080,
+          "allocated_bytes": 2395942912,
+          "rss_bytes": 333037568
+        },
+        {
+          "rows": 270080,
+          "allocated_bytes": 2402299904,
+          "rss_bytes": 316325888
+        },
+        {
+          "rows": 280080,
+          "allocated_bytes": 2421248000,
+          "rss_bytes": 297140224
+        },
+        {
+          "rows": 290080,
+          "allocated_bytes": 2423345152,
+          "rss_bytes": 285589504
+        },
+        {
+          "rows": 300080,
+          "allocated_bytes": 2424393728,
+          "rss_bytes": 306266112
+        },
+        {
+          "rows": 310080,
+          "allocated_bytes": 2444316672,
+          "rss_bytes": 217366528
+        },
+        {
+          "rows": 320080,
+          "allocated_bytes": 2447593472,
+          "rss_bytes": 272957440
+        },
+        {
+          "rows": 330080,
+          "allocated_bytes": 2449690624,
+          "rss_bytes": 285261824
+        },
+        {
+          "rows": 339311,
+          "allocated_bytes": 2467516416,
+          "rss_bytes": 300204032
+        },
+        {
+          "rows": 340111,
+          "allocated_bytes": 2467516416,
+          "rss_bytes": 299466752
+        },
+        {
+          "rows": 350111,
+          "allocated_bytes": 2470662144,
+          "rss_bytes": 294715392
+        },
+        {
+          "rows": 360111,
+          "allocated_bytes": 2472759296,
+          "rss_bytes": 298876928
+        },
+        {
+          "rows": 370111,
+          "allocated_bytes": 2472759296,
+          "rss_bytes": 307838976
+        },
+        {
+          "rows": 380111,
+          "allocated_bytes": 2492682240,
+          "rss_bytes": 174637056
+        },
+        {
+          "rows": 390111,
+          "allocated_bytes": 2493730816,
+          "rss_bytes": 258654208
+        },
+        {
+          "rows": 400111,
+          "allocated_bytes": 2494779392,
+          "rss_bytes": 256081920
+        },
+        {
+          "rows": 410111,
+          "allocated_bytes": 2497925120,
+          "rss_bytes": 262307840
+        },
+        {
+          "rows": 420111,
+          "allocated_bytes": 2516865024,
+          "rss_bytes": 70123520
+        },
+        {
+          "rows": 424144,
+          "allocated_bytes": 2516930560,
+          "rss_bytes": 177160192
+        },
+        {
+          "rows": 430144,
+          "allocated_bytes": 2525663232,
+          "rss_bytes": 313884672
+        },
+        {
+          "rows": 440144,
+          "allocated_bytes": 2547748864,
+          "rss_bytes": 194625536
+        },
+        {
+          "rows": 450144,
+          "allocated_bytes": 2550960128,
+          "rss_bytes": 287096832
+        },
+        {
+          "rows": 460144,
+          "allocated_bytes": 2552008704,
+          "rss_bytes": 296747008
+        },
+        {
+          "rows": 470144,
+          "allocated_bytes": 2572980224,
+          "rss_bytes": 285425664
+        },
+        {
+          "rows": 480144,
+          "allocated_bytes": 2576125952,
+          "rss_bytes": 245334016
+        },
+        {
+          "rows": 490144,
+          "allocated_bytes": 2578223104,
+          "rss_bytes": 286851072
+        },
+        {
+          "rows": 500144,
+          "allocated_bytes": 2596122624,
+          "rss_bytes": 161595392
+        },
+        {
+          "rows": 508777,
+          "allocated_bytes": 2599333888,
+          "rss_bytes": 272007168
+        }
+      ],
+      "peak_sampled_rss_bytes": 440532992,
+      "peak_sampled_allocated_bytes": 2599333888,
+      "settings": {
+        "version": "PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+        "block_size": "8192",
+        "encoding": "UTF8",
+        "collate": "C",
+        "toast_compression": "pglz"
+      },
+      "ingest_ms": 37224.582582999996,
+      "rows": 508777,
+      "distinct_evidence": 44505,
+      "storage": {
+        "relations": [
+          {
+            "relation": "entity_keys",
+            "heap_main_bytes": 7315456,
+            "toast_bytes": 8192,
+            "table_bytes": 7348224,
+            "index_bytes": 7315456,
+            "total_bytes": 14663680
+          },
+          {
+            "relation": "evidence_values",
+            "heap_main_bytes": 51904512,
+            "toast_bytes": 868352,
+            "table_bytes": 52805632,
+            "index_bytes": 6668288,
+            "total_bytes": 59473920
+          },
+          {
+            "relation": "membership_values",
+            "heap_main_bytes": 34553856,
+            "toast_bytes": 8192,
+            "table_bytes": 34594816,
+            "index_bytes": 53600256,
+            "total_bytes": 88195072
+          },
+          {
+            "relation": "release_keys",
+            "heap_main_bytes": 8192,
+            "toast_bytes": 8192,
+            "table_bytes": 16384,
+            "index_bytes": 32768,
+            "total_bytes": 49152
+          },
+          {
+            "relation": "source_keys",
+            "heap_main_bytes": 8192,
+            "toast_bytes": 8192,
+            "table_bytes": 16384,
+            "index_bytes": 32768,
+            "total_bytes": 49152
+          }
+        ],
+        "indexes": [
+          {
+            "relation": "entity_keys",
+            "name": "entity_keys_id_key",
+            "bytes": 5398528,
+            "definition": "CREATE UNIQUE INDEX entity_keys_id_key ON public.entity_keys USING btree (id)"
+          },
+          {
+            "relation": "entity_keys",
+            "name": "entity_keys_pkey",
+            "bytes": 1916928,
+            "definition": "CREATE UNIQUE INDEX entity_keys_pkey ON public.entity_keys USING btree (key)"
+          },
+          {
+            "relation": "evidence_values",
+            "name": "evidence_values_pkey",
+            "bytes": 1015808,
+            "definition": "CREATE UNIQUE INDEX evidence_values_pkey ON public.evidence_values USING btree (key)"
+          },
+          {
+            "relation": "evidence_values",
+            "name": "evidence_values_sha256_key",
+            "bytes": 5652480,
+            "definition": "CREATE UNIQUE INDEX evidence_values_sha256_key ON public.evidence_values USING btree (sha256)"
+          },
+          {
+            "relation": "membership_values",
+            "name": "membership_page",
+            "bytes": 17047552,
+            "definition": "CREATE INDEX membership_page ON public.membership_values USING btree (release_key, active, entity_key)"
+          },
+          {
+            "relation": "membership_values",
+            "name": "membership_parent",
+            "bytes": 24567808,
+            "definition": "CREATE INDEX membership_parent ON public.membership_values USING btree (release_key, active, parent_key, entity_key)"
+          },
+          {
+            "relation": "membership_values",
+            "name": "membership_values_pkey",
+            "bytes": 11984896,
+            "definition": "CREATE UNIQUE INDEX membership_values_pkey ON public.membership_values USING btree (release_key, entity_key)"
+          },
+          {
+            "relation": "release_keys",
+            "name": "release_keys_id_key",
+            "bytes": 16384,
+            "definition": "CREATE UNIQUE INDEX release_keys_id_key ON public.release_keys USING btree (id)"
+          },
+          {
+            "relation": "release_keys",
+            "name": "release_keys_pkey",
+            "bytes": 16384,
+            "definition": "CREATE UNIQUE INDEX release_keys_pkey ON public.release_keys USING btree (key)"
+          },
+          {
+            "relation": "source_keys",
+            "name": "source_keys_id_key",
+            "bytes": 16384,
+            "definition": "CREATE UNIQUE INDEX source_keys_id_key ON public.source_keys USING btree (id)"
+          },
+          {
+            "relation": "source_keys",
+            "name": "source_keys_pkey",
+            "bytes": 16384,
+            "definition": "CREATE UNIQUE INDEX source_keys_pkey ON public.source_keys USING btree (key)"
+          }
+        ],
+        "total_relation_bytes": 162430976
+      },
+      "releases": [
+        {
+          "version": 1,
+          "rows": 84733,
+          "membership_sha256": "3bbbe026a2fa7aad69251e44ebf09653b1e57c9cf3c1641f8e32cc0cea61d6ce",
+          "raw_rows_sha256": "79fbbd4bdaf7c1507b3efab498ee9ef5b3320124e6ccbe35759cf7658c03c82c"
+        },
+        {
+          "version": 2,
+          "rows": 84758,
+          "membership_sha256": "0a507c960b36e8ce0301334c28422eb941a6f212c78d719969034820a382bb63",
+          "raw_rows_sha256": "0c5f94c51beb03c88e65c3fde3ff20d8a591e7ed39f41828723296d794e574e6"
+        },
+        {
+          "version": 3,
+          "rows": 84789,
+          "membership_sha256": "7f417ad9ba3417737847aab72dfeb718a941adc2c058de24b1596bd7e78543b5",
+          "raw_rows_sha256": "8ec074702b05e53ac9c68da2f6ea81e78871ecf658c8098b5e033cb6d61b6388"
+        },
+        {
+          "version": 4,
+          "rows": 84831,
+          "membership_sha256": "6941bda620dd83356fdc1e7b6f251b959ddfac03a5845d86b022a23f090121f6",
+          "raw_rows_sha256": "fc7179d22352db1b5bece05c0c444cf840040409e8bbe6ac8a3542a2554afa01"
+        },
+        {
+          "version": 5,
+          "rows": 84833,
+          "membership_sha256": "9b555a5784795f2e8cef1e0ede7453ca499e8b8f9f3c1620e8d00b5dddc7109e",
+          "raw_rows_sha256": "76caa903f912ef994869b2b703622ede66ad9c1819217eb31659dcbfdd3772af"
+        },
+        {
+          "version": 6,
+          "rows": 84833,
+          "membership_sha256": "c4bd494715d8b33bc80732f40edde80c602a0ddcb5f1b5d33012c9735290ce9e",
+          "raw_rows_sha256": "a92f1644df960f4e6f3d889a094973a3119234a01968730336a814b8520fd78f"
+        }
+      ],
+      "queries": [
+        {
+          "version": 1,
+          "kind": "page",
+          "args": [
+            "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            7.145500000013271,
+            7.439790999982506,
+            6.9728330000070855
+          ],
+          "result_sha256": "52fb2992bab2bfaab858ae619900679545634ab109856ad5ec98dfb81068a1cc"
+        },
+        {
+          "version": 1,
+          "kind": "parent",
+          "args": [
+            "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            2.7315829999861307,
+            1.776624999998603,
+            1.6159159999806434
+          ],
+          "result_sha256": "aa226d2a7fcf2af2fc3c204b1faa6e2028a06ee5f4705817a19efdd65522bc9d"
+        },
+        {
+          "version": 1,
+          "kind": "identity",
+          "args": [
+            "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.8876659999950789,
+            0.8716249999997672,
+            0.837333999981638
+          ],
+          "result_sha256": "aa226d2a7fcf2af2fc3c204b1faa6e2028a06ee5f4705817a19efdd65522bc9d"
+        },
+        {
+          "version": 1,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+            "gb:CMR:ADM3:9386221B29102509952712"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            5.600500000000466,
+            6.271333000011509,
+            5.792042000015499
+          ],
+          "result_sha256": "e4c7c8a09bec686a592b519767de0df814d1fdc7f7411852136b39bac0cc61b9"
+        },
+        {
+          "version": 1,
+          "kind": "largest-parent",
+          "args": [
+            "geography:baseline:9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            5.975791000004392,
+            5.508334000012837,
+            5.258457999996608
+          ],
+          "result_sha256": "750445cf6e8782c74b72a69031f1f654beed5d77e8fdf76dee5b437f92224a92"
+        },
+        {
+          "version": 2,
+          "kind": "page",
+          "args": [
+            "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            8.294415999989724,
+            7.56908299998031,
+            8.020415999984834
+          ],
+          "result_sha256": "df904cf2b31f4946976798353f7a60bc8ca24d9657d1df1d626f8abb6e8c9015"
+        },
+        {
+          "version": 2,
+          "kind": "parent",
+          "args": [
+            "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            3.0674160000053234,
+            1.7259999999951106,
+            1.6536659999983385
+          ],
+          "result_sha256": "de13e146d8059fe10b6643a6e3a97462d6a4a7ea14eb6122535069c719767bbf"
+        },
+        {
+          "version": 2,
+          "kind": "identity",
+          "args": [
+            "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.8555840000044554,
+            0.82112499998766,
+            0.8736670000071172
+          ],
+          "result_sha256": "de13e146d8059fe10b6643a6e3a97462d6a4a7ea14eb6122535069c719767bbf"
+        },
+        {
+          "version": 2,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+            "gb:CMR:ADM3:9386221B60959306764795"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            6.27324999999837,
+            5.819541999982903,
+            5.8723339999851305
+          ],
+          "result_sha256": "23a249ac88aa886da9d912561a796bb7286eb9aede3187b6639320cdd66b4897"
+        },
+        {
+          "version": 2,
+          "kind": "largest-parent",
+          "args": [
+            "geography:review:44acd708dd8aae06e3643b252faf91c04c49b54bb93b705a8c4662ec8568755a",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            6.102708000020357,
+            4.87462499999674,
+            4.974458000011509
+          ],
+          "result_sha256": "5875b29043b81eda5119480f649b2500768b6875be8af8bd2ea7d5773af95d82"
+        },
+        {
+          "version": 3,
+          "kind": "page",
+          "args": [
+            "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            8.6019999999844,
+            7.470583999995142,
+            7.854416000016499
+          ],
+          "result_sha256": "8aaca672a751804aec0f5374bc26b5d5c3d4edf88570235d83c900a2e3472175"
+        },
+        {
+          "version": 3,
+          "kind": "parent",
+          "args": [
+            "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            2.2658749999827705,
+            1.726250000006985,
+            1.6089999999967404
+          ],
+          "result_sha256": "c817bd1dc2caa248ddefabd16bd81784f333bb0908f46f2a7eefde567348e074"
+        },
+        {
+          "version": 3,
+          "kind": "identity",
+          "args": [
+            "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.8550000000104774,
+            0.821750000002794,
+            0.8070000000006985
+          ],
+          "result_sha256": "c817bd1dc2caa248ddefabd16bd81784f333bb0908f46f2a7eefde567348e074"
+        },
+        {
+          "version": 3,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+            "gb:CMR:ADM3:9386221B5549911640036"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            6.065707999980077,
+            5.822749999992084,
+            5.492166999989422
+          ],
+          "result_sha256": "8164aba2bfbacfb07e29d2648f1e0a055db8221bd83ec635f45a9cd456042527"
+        },
+        {
+          "version": 3,
+          "kind": "largest-parent",
+          "args": [
+            "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            5.866165999992518,
+            5.2720830000180285,
+            5.010708000016166
+          ],
+          "result_sha256": "dedd0a781f2d29f7c8dbc0950b399d848e26fcb9b0b99a05e4631e2cc0c755f6"
+        },
+        {
+          "version": 4,
+          "kind": "page",
+          "args": [
+            "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            7.543917000002693,
+            7.085499999986496,
+            7.93304099998204
+          ],
+          "result_sha256": "835fbd5b281b381e9576e4e006e123e5505fd250b7b589aa6e7655b1ed851c19"
+        },
+        {
+          "version": 4,
+          "kind": "parent",
+          "args": [
+            "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            3.0939589999907184,
+            1.8167909999901894,
+            1.6532090000109747
+          ],
+          "result_sha256": "515d5175f335c218fe2a24ece51d31eaf10e7f5279151f196d57a5153ef301b9"
+        },
+        {
+          "version": 4,
+          "kind": "identity",
+          "args": [
+            "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.8693330000096466,
+            0.8929169999901205,
+            0.9167500000039581
+          ],
+          "result_sha256": "515d5175f335c218fe2a24ece51d31eaf10e7f5279151f196d57a5153ef301b9"
+        },
+        {
+          "version": 4,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+            "gb:CMR:ADM3:9386221B47273112743331"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            5.785999999992782,
+            5.6955829999933485,
+            6.234708000003593
+          ],
+          "result_sha256": "747a7697ceac433def18fb96aebe1f479d373cadd0b96ee422cda3f5c791a37f"
+        },
+        {
+          "version": 4,
+          "kind": "largest-parent",
+          "args": [
+            "geography:review:d7db5972b2370dd6109538e85011e05fd0396f093a09d30bf68cce371da98ecc",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            6.0136660000134725,
+            5.516291999985697,
+            5.82304099999601
+          ],
+          "result_sha256": "df4bc9806d39d6e43cc1dd5e9396c89160ed198fd288c7d547683084873417b2"
+        },
+        {
+          "version": 5,
+          "kind": "page",
+          "args": [
+            "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            8.027667000016663,
+            7.552125000016531,
+            7.866083000000799
+          ],
+          "result_sha256": "0ff84bc718bafbb87b08791b1de721c284aaeb13393d0a991699438400034a08"
+        },
+        {
+          "version": 5,
+          "kind": "parent",
+          "args": [
+            "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            2.1850419999973383,
+            1.667749999993248,
+            1.6660419999971054
+          ],
+          "result_sha256": "5b95afba7d46494dd07910c92cbd1f5a11960390ea60ef3076a47f4b892322a5"
+        },
+        {
+          "version": 5,
+          "kind": "identity",
+          "args": [
+            "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            0.8610000000044238,
+            0.8592499999795109,
+            0.8417919999919832
+          ],
+          "result_sha256": "5b95afba7d46494dd07910c92cbd1f5a11960390ea60ef3076a47f4b892322a5"
+        },
+        {
+          "version": 5,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+            "gb:CMR:ADM3:9386221B46316017991506"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            5.918333999987226,
+            5.889499999990221,
+            6.300874999986263
+          ],
+          "result_sha256": "fb4a6de3216a621c2ca6ba9226cf7f17b60104bcffcc1b7dd0c9dd215bb687b4"
+        },
+        {
+          "version": 5,
+          "kind": "largest-parent",
+          "args": [
+            "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            5.2412919999915175,
+            5.169332999998005,
+            5.71416699999827
+          ],
+          "result_sha256": "a7334c660042d0d2d0091653c8322d3dc0900b9c7c0b29e06a3115b008a0cad4"
+        },
+        {
+          "version": 6,
+          "kind": "page",
+          "args": [
+            "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+            ""
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            7.824708000000101,
+            7.690833000000566,
+            7.59970799999428
+          ],
+          "result_sha256": "51231901174b4b3314cf7da3042fcffb1b3b614a0f527de6db651227ec63a511"
+        },
+        {
+          "version": 6,
+          "kind": "parent",
+          "args": [
+            "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+            "framework:province:aruba:062a8eed8a63"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            1.9498330000205897,
+            1.6896249999990687,
+            1.6078750000160653
+          ],
+          "result_sha256": "fb7b9481af234629515d2b6bc0f466c53e265a60decd0ed82e61549f119dbb50"
+        },
+        {
+          "version": 6,
+          "kind": "identity",
+          "args": [
+            "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+            "ABW-5150"
+          ],
+          "rows": 1,
+          "elapsed_ms": [
+            1.0659579999919515,
+            0.9749160000064876,
+            0.8775420000019949
+          ],
+          "result_sha256": "fb7b9481af234629515d2b6bc0f466c53e265a60decd0ed82e61549f119dbb50"
+        },
+        {
+          "version": 6,
+          "kind": "midpoint-page",
+          "args": [
+            "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+            "gb:CMR:ADM3:9386221B4723313213024"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            5.845541999995476,
+            5.634874999988824,
+            6.974791999993613
+          ],
+          "result_sha256": "154124f4644e0d4af77a4eb3b369d529edbbfce66d6c62ee8061e5340c529645"
+        },
+        {
+          "version": 6,
+          "kind": "largest-parent",
+          "args": [
+            "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+            "framework:province:oaxaca:80c95a787c72"
+          ],
+          "rows": 200,
+          "elapsed_ms": [
+            5.131542000017362,
+            5.129041000007419,
+            5.33054200001061
+          ],
+          "result_sha256": "fa4e63ddc3a79dd32770399a231e22d2795fb785a564ce9eb092a80ca2d3f2bf"
+        }
+      ],
+      "closed_target_allocated_bytes": 508055552
+    }
+  },
+  "limits": [
+    "Immutable prepared releases only; no private production export, deployed status or geography approval claimed.",
+    "All retained extension manifests have verified release/batch predecessor prefixes. This verifies prepared provenance retention, not independent scientific validation of the original external source archives.",
+    "Original file bytes/hashes are retained in Git. Evidence strings use exactly the service canonical encoding of prepared objects; arbitrary production raw strings require a separate export.",
+    "Independent local disk-backed PGlite/PostgreSQL targets, not production Neon or an authorized production backup.",
+    "Original membership DDL, constraints and three indexes copied from the frozen schema; shared registries reduced to identity/kind columns. Full application data/triggers are outside this benchmark.",
+    "All prototype tables and dictionary/index overhead counted. Relation bytes are actual; target allocated bytes include local WAL/temporary files and are sampled, not a guaranteed peak.",
+    "Sampled allocated-byte peaks are for the aggregate work directory, including the closed original target during candidate execution. RSS is the shared sequential Node process, with possible retained WASM memory; neither measures independent candidate memory.",
+    "Post-load ANALYZE is local only. Three repeated bounded query timings include local cache/JIT effects, not provider network/cold-start performance.",
+    "This creates no production schema/adapter/migration. Measured local savings are not reclaimable production bytes; production export/parity, peak-space/rollback planning and publisher delivery remain required."
+  ],
+  "parity": {
+    "complete": true,
+    "rows": 508777,
+    "releases": 6,
+    "query_cases": 30
+  },
+  "savings": {
+    "original_relation_bytes": 956497920,
+    "candidate_relation_bytes": 162430976,
+    "measured_local_reduction_bytes": 794066944
+  }
+}

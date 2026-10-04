@@ -1,0 +1,16 @@
+{
+  "method_id": "storage-measurement",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "complete_rows_verified": 508777,
+  "complete_releases_verified": 6,
+  "query_probes_verified": 30,
+  "test_cases_passed": 40,
+  "failures": 0,
+  "skipped": 0,
+  "evidence": [
+    "result.json",
+    "regression-tests.log"
+  ],
+  "limits": "Tests include meaningful corruption, collision, rollback, invalid ID/field and changed predecessor controls; no production migration or provider performance claimed."
+}
