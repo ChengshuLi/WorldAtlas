@@ -30,13 +30,13 @@ export const storageQueries=Object.freeze([
     s.last_analyze::text AS last_analyze,s.last_autoanalyze::text AS last_autoanalyze
     FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
     LEFT JOIN pg_stat_all_tables s ON s.relid=c.oid
-    WHERE n.nspname='public' AND c.relname LIKE 'atlas\\_%' ESCAPE '\\' AND c.relkind IN ('r','p','m')
+    WHERE n.nspname='public' AND c.relkind IN ('r','p','m')
     ORDER BY c.relname LIMIT 513`,
   `SELECT t.relname AS table_name,i.relname AS index_name,pg_relation_size(i.oid)::text AS index_bytes,
     pg_get_indexdef(i.oid) AS definition,x.indisvalid AS valid,x.indisready AS ready
     FROM pg_index x JOIN pg_class i ON i.oid=x.indexrelid JOIN pg_class t ON t.oid=x.indrelid
     JOIN pg_namespace n ON n.oid=t.relnamespace
-    WHERE n.nspname='public' AND t.relname LIKE 'atlas\\_%' ESCAPE '\\' AND t.relkind IN ('r','p','m')
+    WHERE n.nspname='public' AND t.relkind IN ('r','p','m')
     ORDER BY t.relname,i.relname LIMIT 4097`
 ]);
 
@@ -53,12 +53,12 @@ export function validateStorageResults(results,{endpointId}={}) {
   need(tableRows.length>0&&tableRows.length<=512&&indexRows.length<=4096,'catalog-inventory-limit');
   const names=new Set();
   const tables=tableRows.map(row=>{
-    const name=identifier(row.table_name);need(name.startsWith('atlas_')&&!names.has(name)&&['r','p','m'].includes(row.relation_kind),'table-inventory-mismatch');names.add(name);
+    const name=identifier(row.table_name);need(!names.has(name)&&['r','p','m'].includes(row.relation_kind),'table-inventory-mismatch');names.add(name);
     const sizes=Object.fromEntries(['heap_main_bytes','toast_total_bytes','table_bytes','index_bytes','total_bytes'].map(k=>[k,number(row[k])]));
     for(const k of ['estimated_live_rows','estimated_dead_rows'])sizes[k]=row[k]==null?null:number(row[k]);
     need(sizes.total_bytes===sizes.table_bytes+sizes.index_bytes&&sizes.table_bytes>=sizes.heap_main_bytes+sizes.toast_total_bytes,'table-accounting-mismatch');
     const timestamps={};for(const k of ['last_analyze','last_autoanalyze']){need(row[k]==null||typeof row[k]==='string'&&row[k].length<100&&Number.isFinite(Date.parse(row[k])),'invalid-statistics-time');timestamps[k]=row[k]??null;}
-    return {table_name:name,relation_kind:row.relation_kind,...sizes,heap_auxiliary_bytes:sizes.table_bytes-sizes.heap_main_bytes-sizes.toast_total_bytes,...timestamps};
+    return {table_name:name,relation_kind:row.relation_kind,known_application_table:name.startsWith('atlas_')||name==='worldatlas_schema_migrations',...sizes,heap_auxiliary_bytes:sizes.table_bytes-sizes.heap_main_bytes-sizes.toast_total_bytes,...timestamps};
   });
   const indexNames=new Set();
   const indexes=indexRows.map(row=>{
@@ -67,14 +67,19 @@ export function validateStorageResults(results,{endpointId}={}) {
     need(typeof row.valid==='boolean'&&typeof row.ready==='boolean','invalid-index-state');
     return {table_name:table,index_name:name,index_bytes:number(row.index_bytes),definition:row.definition,valid:row.valid,ready:row.ready};
   });
-  const databaseBytes=number(id.database_bytes),applicationBytes=tables.reduce((n,t)=>n+t.total_bytes,0);
-  need(Number.isSafeInteger(applicationBytes)&&applicationBytes<=databaseBytes,'database-accounting-mismatch');
+  const databaseBytes=number(id.database_bytes),publicBytes=tables.reduce((n,t)=>n+t.total_bytes,0);
+  const applicationBytes=tables.filter(t=>t.known_application_table).reduce((n,t)=>n+t.total_bytes,0);
+  need(Number.isSafeInteger(publicBytes)&&publicBytes<=databaseBytes,'database-accounting-mismatch');
   return {observed_at_utc:new Date(id.observed_at).toISOString(),database_bytes:databaseBytes,application_relation_bytes:applicationBytes,
+    public_relation_bytes:publicBytes,other_public_relation_bytes:publicBytes-applicationBytes,
+    outside_public_relation_bytes:databaseBytes-publicBytes,
     other_database_bytes:databaseBytes-applicationBytes,tables,indexes,checks:{transaction_read_only:true,expected_sql_identity:true,
+      migration_registry_present:names.has('worldatlas_schema_migrations'),
       sql_endpoint_setting_present:!!id.endpoint_id,timeouts_verified:true,table_accounting_verified:true},
     limitations:['Catalog live/dead tuple counts are estimates, not COUNT(*) or reclaimable bytes; missing statistics are null.',
       'pg_database_size is physical database allocation, distinct from Neon logical usage, plan allowance and billing.',
-      'Other database bytes include non-application relations, catalogs and allocation overhead; this is not a free-space measurement.',
+      'Every public ordinary/partitioned/materialized relation is inventoried. Known application accounting includes atlas_* and worldatlas_schema_migrations; other public relations are reported explicitly without inferring their purpose.',
+      'Other database bytes include other public relations, catalogs and allocation overhead; outside-public bytes exclude all inventoried public relations. Neither residual measures free space.',
       'Sizes/statistics may change during concurrent activity; catalog/size functions are not a frozen physical snapshot.',
       'Index main-fork sizes omit auxiliary forks; table index_bytes includes complete attached index storage. TOAST total includes its index.',
       'No raw facts, wide table scans, ANALYZE, VACUUM, DDL, deletion, provisioning, imports or paid changes.']};
@@ -116,7 +121,7 @@ export async function measureNeonStorage({env=process.env,fetchImpl=fetch,driver
   const observation=validateStorageResults(results,{endpointId:endpoint.id});
   const optionalNumber=value=>value==null?null:number(value);
   need(env.GITHUB_SHA==null||/^[0-9a-f]{40}$/.test(env.GITHUB_SHA),'invalid-source-commit');
-  const receipt={version:1,status:'measured',read_only:true,source_commit:env.GITHUB_SHA??null,project_id:storageTarget.project,production_branch_id:storageTarget.branch,
+  const receipt={version:2,status:'measured',read_only:true,source_commit:env.GITHUB_SHA??null,project_id:storageTarget.project,production_branch_id:storageTarget.branch,
     endpoint_id:endpoint.id,credentials_logged:false,management_requests:requestCount,...observation,
     provider:{branch_logical_size_bytes:optionalNumber(branch.logical_size),branch_logical_size_limit_mib:optionalNumber(project.branch_logical_size_limit),
       logical_usage_source:branch.logical_size==null?'unavailable':'Neon GET branch logical_size',

@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "storage-catalog-complete-20261004-a9c2",
+  "branch": "engineering/storage-catalog-complete-20261004-a9c2",
+  "base_main_commit": "678d7e8f8686f575e024b593ce4e744a8bb4d79a",
+  "github_issue": 738,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Complete bounded public-table/index metadata and distinguish known application/owner registry/other public accounting"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-04T11:45:32.054262+00:00",
+  "completed": [
+    "Original actual production read preserved with exact stdout SHA9bef7434c14a36282e9e0965373c77f1c6ec633335b5b6105332098453b9829c",
+    "Public catalog/owner registry classification and isolated controls;47tests passed"
+  ],
+  "checks": [
+    {
+      "command": "node data/engineering/storage-catalog-complete-20261004-a9c2/run-controls.mjs",
+      "status": "passed",
+      "receipt": "data/engineering/storage-catalog-complete-20261004-a9c2/tests-receipt-01.json"
+    }
+  ],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/storage-catalog-complete-20261004-a9c2/"
+  ],
+  "blockers": [
+    "Complete new production inventory awaits second reviewed accepted main tool; no dispatch before independent review/CI/queue."
+  ],
+  "next_action": "Second/final allowed implementation PR Refs #738; after accepted merge bounded live-read, record complete actual result and settle/release with acceptance verified.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

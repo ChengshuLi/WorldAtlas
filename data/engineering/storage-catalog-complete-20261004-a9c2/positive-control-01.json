@@ -1,0 +1,11 @@
+{
+  "method_id": "public-catalog-completeness",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "checked_at_utc": "2026-10-04T11:46:04.860Z",
+  "evidence": [
+    "tests-final-01.log",
+    "isolated-catalog-01.json"
+  ],
+  "scope": "Actual fixed catalog SQL executed on isolated PostgreSQL with read-only transaction and complete public table/index inventory including owner registry and explicitly unclassified public fixture. Mocked exact production binding/driver controls also pass."
+}

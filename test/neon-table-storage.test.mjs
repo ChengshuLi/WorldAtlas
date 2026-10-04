@@ -90,16 +90,26 @@ test('absent provider logical usage and tuple statistics remain unavailable',asy
 });
 test('fixed SQL runs against real isolated PostgreSQL catalogs and READ ONLY denies mutation',async()=>{
   const db=new PGlite();try{
-    await db.exec('CREATE TABLE atlas_storage_test(id text PRIMARY KEY,value text); CREATE TABLE unrelated_test(id integer); INSERT INTO atlas_storage_test VALUES(\'one\',repeat(\'x\',20000));');
+    await db.exec('CREATE TABLE atlas_storage_test(id text PRIMARY KEY,value text); CREATE TABLE worldatlas_schema_migrations(id text PRIMARY KEY); CREATE TABLE unrelated_test(id integer); INSERT INTO atlas_storage_test VALUES(\'one\',repeat(\'x\',20000));');
     await db.exec('BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY');
     const settings=await db.query(storageQueries[0]);assert.equal(settings.rows[0].statement_timeout,'5s');
     const identity=await db.query(storageQueries[1]);assert.equal(identity.rows[0].read_only,'on');assert.ok(Number(identity.rows[0].database_bytes)>0);
     const tables=await db.query(storageQueries[2]),indexes=await db.query(storageQueries[3]);
-    assert.deepEqual(tables.rows.map(r=>r.table_name),['atlas_storage_test']);assert.equal(indexes.rows.length,1);assert.equal(indexes.rows[0].index_name,'atlas_storage_test_pkey');
+    assert.deepEqual(tables.rows.map(r=>r.table_name),['atlas_storage_test','unrelated_test','worldatlas_schema_migrations']);assert.equal(indexes.rows.length,2);assert.equal(indexes.rows[0].index_name,'atlas_storage_test_pkey');
     const t=tables.rows[0];assert.equal(Number(t.table_bytes)+Number(t.index_bytes),Number(t.total_bytes));assert.ok(Number(t.toast_total_bytes)>=0);
     await assert.rejects(()=>db.query('INSERT INTO atlas_storage_test VALUES(\'forbidden\',\'x\')'),e=>e.code==='25006');
     await db.exec('ROLLBACK');assert.equal((await db.query('SELECT count(*)::int AS count FROM atlas_storage_test')).rows[0].count,1);
   }finally{await db.close();}
+});
+test('complete public catalog includes owner registry and accounts unknown public relations separately',()=>{
+  const r=fixture(),table=r[2].rows[0],index=r[3].rows[0];
+  r[2].rows.push({...table,table_name:'worldatlas_schema_migrations'},{...table,table_name:'unclassified_public_table'});
+  r[3].rows.push({...index,table_name:'worldatlas_schema_migrations',index_name:'worldatlas_schema_migrations_pkey'});
+  const result=validateStorageResults(r,{endpointId:endpoint.id});
+  assert.equal(result.public_relation_bytes,3*24576);assert.equal(result.application_relation_bytes,2*24576);assert.equal(result.other_public_relation_bytes,24576);
+  assert.equal(result.outside_public_relation_bytes,163840-3*24576);assert.equal(result.other_database_bytes,163840-2*24576);
+  assert.equal(result.checks.migration_registry_present,true);assert.equal(result.tables[1].known_application_table,true);assert.equal(result.tables[2].known_application_table,false);
+  assert.equal(validateStorageResults(fixture(),{endpointId:endpoint.id}).checks.migration_registry_present,false);
 });
 test('actual driver adapter forces server READ ONLY and only the fixed bounded transaction',async()=>{
   let called=false;
