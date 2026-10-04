@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "voluntary_legacy_issue_ledger": true,
+  "issue": 51,
+  "base_commit": "ee17e3255c619a8f2f95c33a9454aeec7954199f",
+  "self_excluded": "data/engineering/sql-recovery-20261004-7e91/whole-file-ledger-refreshed.json",
+  "changed_whole_files": [
+    {
+      "path": ".github/workflows/current-postgres-recovery.yml",
+      "bytes": 1871,
+      "sha256": "74424f982980cb94ba0da4fd609a2bf3b1b824e776c631d334654f2fdc20dc29"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 282,
+      "sha256": "2b241b5e56f65ac0a9c75486d4919d187ff1537d381dc2e7acb1c0da65b9e7c3"
+    },
+    {
+      "path": "coordination/engineering/sql-recovery-20261004-7e91.json",
+      "bytes": 1079,
+      "sha256": "cf8a74d90381f3c5272e54e7deea41f7f8f16cc6d2a0078d0419a06502f03a93"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/README.md",
+      "bytes": 3497,
+      "sha256": "f107a5bd0e4dc82777194fb3d158b74021fb7a3ed6b128c9ff9479c7f56c440b"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/TOOLING_CHECKPOINT.md",
+      "bytes": 3482,
+      "sha256": "a908b88b4a0d76f2b93cd954633d073e5689c8d029c580e662bb2caa015363d0"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/claim.json",
+      "bytes": 823,
+      "sha256": "efe923d1dfccfbc39f33de37da25c574163d5aea39b4dee283d0e36dbbd777de"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/coordination-request.json",
+      "bytes": 651,
+      "sha256": "f372915b1d22089cb88e6afac9766baf52b350d03b200c6f866cf7082597dfa3"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/local-controls-final.txt",
+      "bytes": 4461,
+      "sha256": "baa6a3a677101ff58ad0569c67924cfb19ce65cee9769db5fd5676631a556d8b"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/local-controls-reviewed.txt",
+      "bytes": 4462,
+      "sha256": "d05750b3517954d296801681cf105baaf7a48f19a2ac06ca4a49623ba378e5d5"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/local-controls.txt",
+      "bytes": 4137,
+      "sha256": "9b5b2f525a0998b1b0ebb79d9cd1d2f38cf2c0c90bebf61b8292c6dc15b5478a"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/native-fixture-relational-verified.json",
+      "bytes": 4173,
+      "sha256": "770d34f1e9718c063f2171504569ec76216ea1551b39deba76ba9646e3aea7b0"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/native-fixture-verified.json",
+      "bytes": 4173,
+      "sha256": "f860a8bc9827b5c8f624c26718fe471ec91572762d416f4f8d238e0257237394"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/native-target-readiness.json",
+      "bytes": 1108,
+      "sha256": "e2a10328da81ce6391c481bf666e47cce0c79bb3a4f6724c9ea111bb6bd985ab"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/pr711-merge.jsonl",
+      "bytes": 1130,
+      "sha256": "0ac8b11048c0dd3873ef68694b912fb7dc39142cf06be8e563951d029de7f573"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/queue-first-head.jsonl",
+      "bytes": 1405,
+      "sha256": "95e20746c7ca1a61808fc9a423bee0b8137758e65a9a1dc48dfb45cb138b1488"
+    },
+    {
+      "path": "data/engineering/sql-recovery-20261004-7e91/whole-file-ledger.json",
+      "bytes": 6120,
+      "sha256": "25e2cfa83f5d63123fc291949a7a511c0da525d73b3038f8dd321d08678854e5"
+    },
+    {
+      "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
+      "bytes": 7542,
+      "sha256": "3863f1c2471d416c9622ce308862486bd8ed2cdfa66cf0a42bba7264b9369bb7"
+    },
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 27309,
+      "sha256": "9240764ca460a1393172bd45de5899ed7baeb689ad65cb0c2cd66b551a11e760"
+    },
+    {
+      "path": "scripts/recovery-backup-envelope.mjs",
+      "bytes": 7201,
+      "sha256": "5dac56840cb0cc1760648299a6193f49d9bbff240caa264f8ccb12d223ad5e19"
+    },
+    {
+      "path": "scripts/test-current-postgres-recovery-native.mjs",
+      "bytes": 8029,
+      "sha256": "1bf230891c7efa2a181fed1ed7c7ca7a2a9b8d203101715ecc44e09f001265a5"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "bytes": 8073,
+      "sha256": "2be88a8407b6603404514589f61280d71943ffad45238b9d4b87015fef3e56c5"
+    },
+    {
+      "path": "test/recovery-backup-envelope.test.mjs",
+      "bytes": 3537,
+      "sha256": "0523e653f303987fbcfebd7b2e23194fd2a700ff4ac294e09500ce54d3b19c64"
+    }
+  ],
+  "protected_original_files": [
+    {
+      "path": "postgres/schema.sql",
+      "bytes": 51470,
+      "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618"
+    },
+    {
+      "path": "postgres/migrations/0001_temporal_geography.sql",
+      "bytes": 21800,
+      "sha256": "a4302a6f00b305205b70ed8981f929725c90b48172413ff47738a4a27186f6cd"
+    },
+    {
+      "path": "postgres/migrations/0002_footprint_versions.sql",
+      "bytes": 20748,
+      "sha256": "24e22602715355e48e344649461179d69ed92cf3c0e54812dee4f315fed42f37"
+    },
+    {
+      "path": "hosted/storage-export-v2.js",
+      "bytes": 11339,
+      "sha256": "a5e17805cf204fd28423064a0b51722cc37ce5baf754935a3526afe8dd9f9267"
+    },
+    {
+      "path": "hosted/storage-export-v2-contract.js",
+      "bytes": 7783,
+      "sha256": "f670c6e6809192d62fa01959e3277eff96633b4e64293975dbf52b63b8e5d04b"
+    },
+    {
+      "path": "scripts/neon-forward-migrations.mjs",
+      "bytes": 35003,
+      "sha256": "505b095ca47bcecd4b2466627c4163a613f52717703d9befd1593b78056e8461"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 10007,
+      "sha256": "6030e2d0eb3ce26b6d762f425c0c1684cb22996d4df4d1ad726c3e517e1432db"
+    },
+    {
+      "path": "scripts/verify-neon-project.mjs",
+      "bytes": 7376,
+      "sha256": "2043839debb466c6f16bbb89c9aedccb669d3796e90f5aeea816fd8c087e1b9a"
+    },
+    {
+      "path": "scripts/restore-postgres-storage-v2.mjs",
+      "bytes": 20543,
+      "sha256": "44dd22f2887fd63f6360e7edab747771a14d805d4b213629c93ea8ca13bb1e32"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/object-recovery-complete.json",
+      "bytes": 1317374,
+      "sha256": "3c4473a941e91a9deb1f500514911b8f2b523aa0565dc0c7c2485228780abf1c"
+    }
+  ],
+  "prior_ledger": "data/engineering/sql-recovery-20261004-7e91/whole-file-ledger.json",
+  "reason": "First reviewed head exhausted three bounded stale-preview queue requests; incorporated concurrent main without changing recovery source or protected inputs",
+  "limits": [
+    "Local synthetic fixture only; actual current production SQL recovery unverified",
+    "Recipient private-key recovery unverified; bounded archive256MiB/render256MiB/table128MiB/row8MiB",
+    "No provider-managed/offsite retention, Site publication or geography approval certified"
+  ]
+}

@@ -1,0 +1,45 @@
+name: Verify current PostgreSQL backup and isolated restore
+run-name: 'current SQL recovery window ${{ inputs.window_comment_id }}'
+on:
+  workflow_dispatch:
+    inputs:
+      window_comment_id:
+        description: Fresh reviewed publisher window comment on issue714; no credentials
+        type: string
+        required: true
+permissions:
+  contents: read
+  issues: read
+concurrency:
+  group: neon-storage-owner-maintenance
+  cancel-in-progress: false
+jobs:
+  recover:
+    if: github.repository == 'ChengshuLi/WorldAtlas' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Capture original public schema and verify isolated native restoration
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
+          WINDOW_COMMENT_ID: ${{ inputs.window_comment_id }}
+        run: node scripts/current-postgres-recovery.mjs
+      - name: Retain originals and sanitized failed or verified receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: current-postgres-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          # The repository is public. Never upload plaintext dumps/raw rows or
+          # private source inventories; the backup uses the publisher's pinned
+          # public recipient key, with the private key kept outside Git.
+          path: data/validation/current-postgres-recovery/public-receipts/
+          if-no-files-found: error
+          retention-days: 90
