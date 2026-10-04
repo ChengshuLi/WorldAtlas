@@ -1,0 +1,5 @@
+# Publisher-owned recovery handoff — issue732
+
+The implementation worker safely releases after a durable handoff; a scoped publisher-owned child carries production-only acceptance. SQL recovery reads canonical source and publisher reservations plus the child contract at start and final readback. Existing legacy operation behavior, read-only/drain, encryption, identity/source preservation, source locking and isolated restore remain. A generic claim guard prevents ordinary implementers from reserving publisher-only acceptance children.
+
+Validation:103 local recovery/encryption/reservation controls pass,0fail,0skip. Fixtures cover released implementer + live publisher, expired-active source rejection, changed scope/dependency at final readback, invalid child and identity, fresh API rereads and ordinary claim behavior. No production access, backup, deployment, migration or credentials were used. Hosted full regression is required before normal queue merge. The manifest certifies whole-file bindings only; distinct review checks the contract and controls. Existing in-progress legacy operations are not transferred by this PR.

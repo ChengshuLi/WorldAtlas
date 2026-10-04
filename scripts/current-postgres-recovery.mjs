@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {storageExportV2Contract,storageExportV2Definitions,storageExportV2Collections,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
 import {storageCatalogV2} from '../hosted/storage-export-v2.js';
 import {storageRowsHashV2Ordered} from './restore-postgres-storage-v2.mjs';
-import {readClaim,githubPages,githubAPI} from './issue-claim-contract.mjs';
+import {readClaim,workSpec,githubPages,githubAPI} from './issue-claim-contract.mjs';
 import {expectedNeonProjectId,verifyNeonProject} from './verify-neon-project.mjs';
 import {backupRecipientFingerprint,sealRecoveryBackup} from './recovery-backup-envelope.mjs';
 
@@ -20,13 +20,27 @@ const ident=name=>'"'+name.replaceAll('"','""')+'"';
 const maxJSON=128*1024*1024,maxDump=256*1024*1024;
 const native=(args,input,timeout=180000,maxBuffer=maxJSON)=>execFileSync('docker',args,{input,timeout,maxBuffer,stdio:['pipe','pipe','pipe']});
 
-export function validateRecoveryWindow(window,claim,{head,toolSHA,now=Date.now(),phase='start'}={}){
+export function validateRecoveryWindow(window,claim,{head,toolSHA,now=Date.now(),phase='start',reservationIssue,sourceClaim,handoffReceipt,dependencies=[]}={}){
  need(window?.version===1&&window.issue===51&&window.queue===714&&window.operator_worker_id==='engineering-central-publication-20261003','invalid-publisher-window');
  need(window.primary_main_commit===head&&window.capture_tool_sha256===toolSHA&&window.method==='readonly-native-pg-dump-and-isolated-restore','unreviewed-window-tool');
  need(backupRecipientFingerprint(window.backup_recipient_public_key)===window.backup_recipient_sha256,'unpinned-private-backup-recipient');
  const time=Date.parse(window.observed_at_utc),expiry=Date.parse(window.expires_at_utc);
  need(Number.isFinite(time)&&time<=now&&(phase==='end'||now-time<=10*60000)&&expiry>now&&expiry-time<=30*60000,'stale-publisher-window');
- need(claim?.active&&claim.live_work===true&&claim.issue_number===51&&claim.claim_id===window.claim_id&&claim.worker_id===window.holder_worker_id&&claim.branch===window.claim_branch&&Date.parse(claim.expires_at)>now,'unconfirmed-live-reservation');
+ const reservationNumber=window.reservation_issue===undefined?51:window.reservation_issue;
+ need(Number.isSafeInteger(reservationNumber)&&reservationNumber>0,'invalid-operation-reservation-issue');
+ need(claim?.active&&claim.live_work===true&&claim.issue_number===reservationNumber&&claim.claim_id===window.claim_id&&claim.worker_id===window.holder_worker_id&&claim.branch===window.claim_branch&&Date.parse(claim.expires_at)>now,'unconfirmed-live-reservation');
+ if(reservationNumber!==51){
+  // The original worker explicitly releases its implementation reservation;
+  // expiry or a false live flag alone is not a completed handoff.
+  need(sourceClaim?.issue_number===51&&sourceClaim.active===false&&sourceClaim.live_work===false&&Number.isFinite(Date.parse(sourceClaim.released_at))&&Date.parse(sourceClaim.released_at)<=now,'original-implementation-not-released');
+  const labels=(reservationIssue?.labels??[]).map(label=>typeof label==='string'?label:label.name);
+  need(reservationIssue?.number===reservationNumber&&reservationIssue.state==='open'&&labels.includes('type:engineering')&&!labels.some(label=>['type:geography','type:history-research','status:blocked','kind:umbrella'].includes(label))&&labels.includes('kind:work-item')&&labels.includes('status:ready'),'unreviewed-operation-issue');
+  const spec=workSpec(reservationIssue.body),operation=spec.production_operation;
+  need(spec.depends_on.every(number=>dependencies.some(issue=>issue.number===number&&issue.state==='closed')),'operation-dependency-not-complete');
+  need(spec.mode==='engineering'&&operation?.source_issue===51&&operation.queue===714&&operation.publisher_worker_id===window.operator_worker_id&&claim.worker_id===window.operator_worker_id&&claim.mode==='engineering','operation-not-publisher-owned');
+  need(/^[a-f0-9]{64}$/.test(window.reservation_scope_sha256??'')&&sha(JSON.stringify(spec))===window.reservation_scope_sha256,'changed-operation-scope');
+  need(/^https:\/\/github\.com\/ChengshuLi\/WorldAtlas\/issues\/(51|714)#issuecomment-[1-9]\d*$/.test(operation.handoff_receipt_url??'')&&handoffReceipt?.html_url===operation.handoff_receipt_url&&handoffReceipt.user?.type==='User'&&['OWNER','MEMBER','COLLABORATOR'].includes(handoffReceipt.author_association)&&String(handoffReceipt.body??'').trim().length>0,'missing-authorized-implementation-handoff');
+ }
  need(window.site?.project_id==='appgprj_6abdf87277c08191bce4a22b8dfb25db'&&Number.isSafeInteger(window.site.version)&&window.site.version>0&&typeof window.site.deployment_id==='string'&&window.site.deployment_id.startsWith('appgdep_'),'unpinned-site-window');
  need(window.read_only===true&&window.drain_verified===true&&window.restore_writes_operator===window.operator_worker_id&&typeof window.rollback_receipt_url==='string'&&window.rollback_receipt_url.startsWith('https://github.com/ChengshuLi/WorldAtlas/'),'unsettled-maintenance-window');
  const marker=window.source_marker;
@@ -35,6 +49,22 @@ export function validateRecoveryWindow(window,claim,{head,toolSHA,now=Date.now()
  need(same(Object.keys(marker.counts??{}).sort(),[...storageExportV2Collections].sort())&&storageExportV2Collections.every(k=>Number.isSafeInteger(marker.counts[k])&&marker.counts[k]>=0),'incomplete-source-counts');
  need(marker.catalog_sha256===storageExportV2Contract.postgres_catalog_sha256&&sha(JSON.stringify(v2MarkerIdentity(marker)))===marker.fingerprint,'invalid-source-marker');
  return window;
+}
+
+/** Load fresh canonical reservations and the bounded publisher operation scope.
+ * Repeated after capture; no provider/credential access occurs here. */
+export async function loadRecoveryReservation(window,api){
+ const sourceClaim=readClaim(await githubPages(api,'/repos/'+repo+'/issues/51/comments'));
+ if(window.reservation_issue===undefined||window.reservation_issue===51)return {claim:sourceClaim};
+ need(Number.isSafeInteger(window.reservation_issue)&&window.reservation_issue>0,'invalid-operation-reservation-issue');
+ const reservationIssue=await api('/repos/'+repo+'/issues/'+window.reservation_issue);
+ const spec=workSpec(reservationIssue.body),operation=spec.production_operation;
+ const dependencies=await Promise.all(spec.depends_on.map(number=>api('/repos/'+repo+'/issues/'+number)));
+ const match=/^https:\/\/github\.com\/ChengshuLi\/WorldAtlas\/issues\/(51|714)#issuecomment-([1-9]\d*)$/.exec(operation?.handoff_receipt_url??'');
+ need(match,'missing-authorized-implementation-handoff');
+ const handoffReceipt=await api('/repos/'+repo+'/issues/comments/'+match[2]);
+ const claim=readClaim(await githubPages(api,'/repos/'+repo+'/issues/'+window.reservation_issue+'/comments'));
+ return {claim,sourceClaim,reservationIssue,handoffReceipt,dependencies};
 }
 
 export function validatedOwnerConnection(value,host){
@@ -179,12 +209,13 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
  try{
   need(env.GITHUB_EVENT_NAME==='workflow_dispatch'&&env.GITHUB_REPOSITORY===repo&&env.GITHUB_WORKFLOW_REF===repo+'/'+recoveryWorkflow+'@refs/heads/main'&&/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')&&/^[1-9]\d*$/.test(env.WINDOW_COMMENT_ID??'')&&env.NEON_PROJECT_ID===expectedNeonProjectId,'trusted-main-manual-context-required');
   secrets.push(env.NEON_API_KEY,env.GITHUB_TOKEN);const api=githubAPI(env.GITHUB_TOKEN);
-  const comments=await githubPages(api,'/repos/'+repo+'/issues/51/comments'),claim=readClaim(comments),comment=await api('/repos/'+repo+'/issues/comments/'+env.WINDOW_COMMENT_ID);
+  const comment=await api('/repos/'+repo+'/issues/comments/'+env.WINDOW_COMMENT_ID);
   need(comment.html_url?.startsWith('https://github.com/'+repo+'/issues/714#')&&comment.user?.type==='User'&&['OWNER','MEMBER','COLLABORATOR'].includes(comment.author_association)&&comment.user.login===env.GITHUB_ACTOR,'authorized-publisher-queue-window-required');
   const matches=[...String(comment.body).matchAll(/<!-- worldatlas-recovery-window:v1\n([\s\S]*?)\n-->/g)];need(matches.length===1,'unique-publisher-window-required');
-  const toolSHA=sha(fs.readFileSync(fileURLToPath(import.meta.url))),window=validateRecoveryWindow(JSON.parse(matches[0][1]),claim,{head:env.GITHUB_SHA,toolSHA});
+  const toolSHA=sha(fs.readFileSync(fileURLToPath(import.meta.url))),requestedWindow=JSON.parse(matches[0][1]),reservation=await loadRecoveryReservation(requestedWindow,api),{claim}=reservation;
+  const window=validateRecoveryWindow(requestedWindow,claim,{head:env.GITHUB_SHA,toolSHA,...reservation});
   need(window.operator_github_login===comment.user.login,'publisher-author-binding-required');
-  receipt.window_comment_id=comment.id;receipt.claim_id=claim.claim_id;receipt.source_marker=window.source_marker;receipt.site=window.site;receipt.github={head:env.GITHUB_SHA,run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT};save(receiptFile,receipt,secrets);
+  receipt.window_comment_id=comment.id;receipt.claim_id=claim.claim_id;receipt.reservation_issue=claim.issue_number;receipt.source_marker=window.source_marker;receipt.site=window.site;receipt.github={head:env.GITHUB_SHA,run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT};save(receiptFile,receipt,secrets);
   stage='verify-production-metadata';receipt.project=await verifyNeonProject({apiKey:env.NEON_API_KEY,projectId:expectedNeonProjectId,fetchImpl:fetcher});
   need(receipt.project.branch.id===branchId&&receipt.project.project.configured_postgres_major===18,'production-branch-or-major-changed');
   const get=async suffix=>boundedOwnerJSON(await fetcher('https://console.neon.tech/api/v2/projects/'+expectedNeonProjectId+suffix,{headers:{Authorization:'Bearer '+env.NEON_API_KEY},redirect:'error',signal:AbortSignal.timeout(15000)}));
@@ -209,7 +240,8 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   targetExec(['psql','-X','-Atq','-U','postgres','-v','ON_ERROR_STOP=1'],"CREATE ROLE neondb_owner NOLOGIN; CREATE ROLE worldatlas_app NOLOGIN; ALTER DATABASE postgres OWNER TO neondb_owner; DROP SCHEMA public;");
   stage='actual-current-native-restore';const restoreStarted=Date.now(),readback=fs.readFileSync(path.join(output,'current-public-schema.dump'));need(readback.length===receipt.dump.bytes&&sha(readback)===receipt.dump.sha256,'retained-dump-readback-failed');const restoreSQL=isolatedRestoreSQL(targetExec(['pg_restore','--file=-','--no-owner','--role','neondb_owner'],readback,maxDump));targetExec(['psql','-X','-U','postgres','-d','postgres','--single-transaction','-v','ON_ERROR_STOP=1'],restoreSQL);targetExec(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));receipt.isolated_original_checks_revalidated=true;receipt.restore_duration_ms=Date.now()-restoreStarted;receipt.dump.local_readback_verified=true;
   stage='full-source-and-target-readback';const targetQuery=queryJSON(sql=>targetExec(['psql','-X','-Atq','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],'SET ROLE neondb_owner; '+sql),secrets),restored=await readRecoveryInventory(targetQuery),after=await readRecoveryInventory(sourceQuery);assertCurrentInventory(after,window.source_marker);assertRestoredInventory(before,restored,after);
-  validateRecoveryWindow(window,readClaim(await githubPages(api,'/repos/'+repo+'/issues/51/comments')),{head:env.GITHUB_SHA,toolSHA,phase:'end'});
+  const finalReservation=await loadRecoveryReservation(window,api);
+  validateRecoveryWindow(window,finalReservation.claim,{head:env.GITHUB_SHA,toolSHA,phase:'end',...finalReservation});
   save(path.join(output,'restored-inventory.json'),restored,secrets);save(path.join(output,'after-inventory.json'),after,secrets);receipt.status='verified';receipt.collections=before.collections;receipt.owner_registry_sha256=before.owner_registry_sha256;receipt.catalog_sha256=before.catalog_sha256;receipt.owner_registry_private=true;
  }catch{receipt.status='failed';receipt.failure_stage=stage;receipt.error_code='bounded-current-recovery-'+stage+'-failed';}
  finally{

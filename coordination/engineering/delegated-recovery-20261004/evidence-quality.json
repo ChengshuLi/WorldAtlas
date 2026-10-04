@@ -1,0 +1,254 @@
+{
+  "version": 1,
+  "issue": 732,
+  "lane": "engineering",
+  "worker_id": "publisher-recovery-root-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "f3263796efccac63dd20296130aeb176323d38ea",
+    "files": [
+      {
+        "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
+        "bytes": 7542,
+        "sha256": "3863f1c2471d416c9622ce308862486bd8ed2cdfa66cf0a42bba7264b9369bb7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PUBLICATION_HANDOFF.md",
+        "bytes": 7223,
+        "sha256": "f37420270d2954e7aa8a1b0635f6ea753efa15755f67b0b4ba1d415d4efa1d94",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/THREE_THREAD_START.md",
+        "bytes": 7640,
+        "sha256": "8fbabcc11d744543f95abd07e4f317eed2e19fb93a4f5be7a02a3b748a75a743",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 22042,
+        "sha256": "54846e5feeb484fe8f66f0cc48bae92ee99cb1ec4855508dc593f559b250c5ce",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 7903,
+        "sha256": "4c3ee04b8abb450dc8fb268355b7aa1024d63b34670555720546c5048cc51df4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ISSUE_CREATION.txt",
+        "bytes": 3597,
+        "sha256": "02bd6d705f2e0480198deedb212df7e8e0c3cce06fb10903e979c010305973de",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 27309,
+        "sha256": "9240764ca460a1393172bd45de5899ed7baeb689ad65cb0c2cd66b551a11e760",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 10007,
+        "sha256": "6030e2d0eb3ce26b6d762f425c0c1684cb22996d4df4d1ad726c3e517e1432db",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/current-postgres-recovery.test.mjs",
+        "bytes": 8073,
+        "sha256": "2be88a8407b6603404514589f61280d71943ffad45238b9d4b87015fef3e56c5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/issue-claims.test.mjs",
+        "bytes": 9945,
+        "sha256": "1d0dc6b0e579f9e43a0f0ceccfdf1da05fb72ddea8ca85e4ad46791f47e30bcc",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
+      "bytes": 10676,
+      "sha256": "c360f1883bf0eb3e655a7b886cc569964274f4b7420bbfe6d4c3c970e2601fb0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PUBLICATION_HANDOFF.md",
+      "bytes": 7330,
+      "sha256": "0f34cbef77589f30f7ee66ed4c79d1d747dc22a4baec29c0aa51c69dc13988d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/THREE_THREAD_START.md",
+      "bytes": 8086,
+      "sha256": "3ba04da68cc4e824a30baeefb0c260cd1ea9cd76b223ff642381269574ae4702",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 22238,
+      "sha256": "da17806b86dd14cc358bd0a47aeff58cbc26ef2970683d40571f8da64d23b9f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 8459,
+      "sha256": "a9ee231e875fd9453e687069631e06ea0399ae28b6a2cb17d40c5073cdb51d40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ISSUE_CREATION.txt",
+      "bytes": 4450,
+      "sha256": "6496b59fee409d5c96136e178fbb0c3e4180c4cc125e7888f86922b041e7c9e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 30878,
+      "sha256": "1242e24227d3a0cfb871e362e9999cf967c49d9bd2dfb476ffd3abc43af9c752",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 10357,
+      "sha256": "d28383ba29f9df054c658afde4474ac6d72bd85688a7ad216ec11a4bb33773e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "bytes": 14012,
+      "sha256": "9a19a5240a82060a42d922e65ceb8e2d24911a66aa52445af0f90bc269c3aafe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "bytes": 10761,
+      "sha256": "5443477bc90866902974c5f1e437bcf1d0da2fa8efa552178293a18a91990a89",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "bytes": 2244,
+      "sha256": "8d5cde4197ee5e407d9bef2aecaab66e535067258c3b96af6aaad72cc304e187",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/delegated-recovery-20261004/README.md",
+      "bytes": 1139,
+      "sha256": "49367ae54486e71221e9da93ce003e128f44179b020a415c28579d4beea67053",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/delegated-recovery-20261004/claim.json",
+      "bytes": 823,
+      "sha256": "d15cedefcab31a2976fa49a635f1e7882592526d97c52a0660abdd2de301bad3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/delegated-recovery-20261004/validation.txt",
+      "bytes": 7806,
+      "sha256": "f7a9bb33c8b804c3669208c3baefbf9643943e9706581ec4e8047fdac4d20cfb",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "publisher-reservation-controls",
+      "kind": "code",
+      "description": "Additive delegated reservation validation with fresh start/end issue state; preserve original recovery/claim semantics and real-source protections",
+      "software": "Node24 native test runner and existing GitHub cooperative reservation workflow",
+      "units": "authorization and preservation states"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/current-postgres-recovery.test.mjs test/recovery-backup-envelope.test.mjs test/issue-claims.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
+      "status": "modified",
+      "original_sha256": "3863f1c2471d416c9622ce308862486bd8ed2cdfa66cf0a42bba7264b9369bb7"
+    },
+    {
+      "path": "docs/PUBLICATION_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "f37420270d2954e7aa8a1b0635f6ea753efa15755f67b0b4ba1d415d4efa1d94"
+    },
+    {
+      "path": "docs/THREE_THREAD_START.md",
+      "status": "modified",
+      "original_sha256": "8fbabcc11d744543f95abd07e4f317eed2e19fb93a4f5be7a02a3b748a75a743"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "54846e5feeb484fe8f66f0cc48bae92ee99cb1ec4855508dc593f559b250c5ce"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "4c3ee04b8abb450dc8fb268355b7aa1024d63b34670555720546c5048cc51df4"
+    },
+    {
+      "path": "docs/prompts/ISSUE_CREATION.txt",
+      "status": "modified",
+      "original_sha256": "02bd6d705f2e0480198deedb212df7e8e0c3cce06fb10903e979c010305973de"
+    },
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "status": "modified",
+      "original_sha256": "9240764ca460a1393172bd45de5899ed7baeb689ad65cb0c2cd66b551a11e760"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "status": "modified",
+      "original_sha256": "6030e2d0eb3ce26b6d762f425c0c1684cb22996d4df4d1ad726c3e517e1432db"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "status": "modified",
+      "original_sha256": "2be88a8407b6603404514589f61280d71943ffad45238b9d4b87015fef3e56c5"
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "status": "modified",
+      "original_sha256": "1d0dc6b0e579f9e43a0f0ceccfdf1da05fb72ddea8ca85e4ad46791f47e30bcc"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/delegated-recovery-20261004/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/delegated-recovery-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/delegated-recovery-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/delegated-recovery-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
