@@ -4,7 +4,7 @@ This is issue #51's current-source recovery protocol. The earlier retained-objec
 
 The manual workflow `.github/workflows/current-postgres-recovery.yml` runs only trusted main, shares the `neon-storage-owner-maintenance` concurrency group, and needs existing Actions `NEON_API_KEY` and `NEON_PROJECT_ID`. It obtains the existing owner connection internally. Passwords travel through hidden stdin to named, read-only native clients. Neither the connection URI nor passwords belong in arguments, logs, Git or comments. This protocol does not rotate credentials, deploy Sites, run provider DDL, rerun baseline imports or change audience.
 
-Before dispatch, ENG main reviews the exact main commit and script SHA256, verifies the current deployed Site/release pins, prepares rollback, establishes and drains read-only maintenance, and agrees with ENG0 on the canonical #51 claim/live flag and operator. A fresh #714 comment authored by the dispatching repository owner/member/collaborator contains exactly one machine window marker:
+Before dispatch, ENG main reviews the exact main commit and script SHA256, verifies the current deployed Site/release pins, prepares rollback, establishes and drains read-only maintenance, and records a publisher-owned operation after the implementation handoff. The legacy canonical #51 claim path remains supported for an already agreed operation; new delegated work uses the publisher-owned child described below. A fresh #714 comment authored by the dispatching repository owner/member/collaborator contains exactly one machine window marker:
 
     <!-- worldatlas-recovery-window:v1
     { ... reviewed window fields ... }
@@ -22,7 +22,7 @@ The PUBLIC repository artifact uploads only `public-receipts/`: sanitized receip
 
 Recipient recovery uses `node scripts/recovery-backup-envelope.mjs decrypt ENVELOPE CIPHERTEXT PRIVATE_KEY EXPECTED_CONTEXT NEW_OUTPUT`. Private key and new output must be outside any Git checkout. The output is exclusive mode0600; hashes, context, recipient and AEAD authentication must pass. Record a sanitized recipient acknowledgment with artifact byte/hash pins, without the private key or plaintext content. In-memory encryption verification does not prove recipient recovery. Verify the retained backup through this recipient step before claiming recoverable delivery.
 
-A successful current-source restore receipt proves the stated public-schema/row/table-ACL scope. It does not prove provider physical recovery, server globals, password or role-membership recovery, long-term retention, historical geography approval or physical mobile acceptance. Existing credential/binding setup remains governed by publisher handoff. ENG main separately settles maintenance, restores writes if appropriate, verifies final release pins, and records the window outcome on #714/#51. Only then settle the live flag/release the claim when actual issue acceptance is met; otherwise preserve remaining scope as bounded follow-up proposals within the issue's two-PR budget.
+A successful current-source restore receipt proves the stated public-schema/row/table-ACL scope. It does not prove provider physical recovery, server globals, password or role-membership recovery, long-term retention, historical geography approval or physical mobile acceptance. Existing credential/binding setup remains governed by publisher handoff. ENG main separately settles maintenance, restores writes if appropriate, verifies final release pins, and records the window outcome on #714/#51. Only then settle the publisher operation and its own live flag/release its operation claim when actual acceptance is met; otherwise preserve remaining scope as bounded follow-up proposals within the issue's two-PR budget.
 
 Local checks: `node --test test/current-postgres-recovery.test.mjs test/recovery-backup-envelope.test.mjs`. The explicitly synthetic native fixture is `node scripts/test-current-postgres-recovery-native.mjs`; it uses only disposable network-none containers and no provider credentials. Its receipt must be labeled fixture-only.
 
@@ -31,3 +31,24 @@ Native archive compatibility has two explicit target-only adjustments. `pg_resto
 Named source containers are created to completion before starting the secret-bearing read-only client. The lock is checked immediately before/after dumping and its database-level absence checked after release. Native fixture controls cover real session-lock termination, timed-out pre-created clients and independently confirmed container absence. A partial timed-out container creation remains a failure requiring cleanup confirmation; never infer operation settlement solely from a killed CLI.
 
 Scale is explicitly bounded: native archive256MiB, rendered restore SQL256MiB, any full-table JSON inventory128MiB, any measured source row8MiB, owner API response2MiB and native command180seconds. Source table encoded sizes are measured before materialization. Exceeding any bound fails recovery; no production-scale performance or memory guarantee follows from the207549-byte synthetic fixture. If current production exceeds a bound, preserve the failed stage and propose a reviewed streaming/partitioned follow-up rather than silently raising limits. Ciphertext and parsed envelope disk readback must match before any verified receipt.
+
+## Delegated handoff: the implementer does not wait
+
+Use the general [PUBLICATION_HANDOFF.md](PUBLICATION_HANDOFF.md) workflow. The implementer posts one durable reviewed/merged handoff on #714 or #51 and safely releases its canonical #51 claim with `live_work=false`; keep actual production recovery acceptance open. The publisher performs the remaining operation, while the implementer may claim its next eligible issue. Never release an unsettled holder-run operation or infer release from lease expiry.
+
+The publisher uses a bounded `type:engineering`, `kind:work-item`, `status:ready` production-only child, with this additional field in its ordinary `worldatlas-work:v1` contract:
+
+```json
+"production_operation": {
+  "source_issue": 51,
+  "queue": 714,
+  "publisher_worker_id": "engineering-central-publication-20261003",
+  "handoff_receipt_url": "https://github.com/ChengshuLi/WorldAtlas/issues/714#issuecomment-ACTUAL_ID"
+}
+```
+
+Create this acceptance child through normal issue triage; preserve #51's remaining criteria and prior two-PR history. Do not claim #51 under a different identity or bypass its exhausted implementation budget. The child uses normal claim/renew/release commands: only the publisher toggles its own `live_work` flag. No implementation-worker flag relay or future appointment is required. Once another publisher operation is settled and eligibility is fresh, begin immediately; the existing maximum thirty-minute recovery expiry is a timeout, not a waiting period. If capture cannot fit it, record that limit rather than weakening expiry silently.
+
+The fresh recovery window retains all fields above and additionally sets `reservation_issue` to the child number and `reservation_scope_sha256` to SHA256 of `JSON.stringify(workSpec(child.body))` using `scripts/issue-claim-contract.mjs`. Its `claim_id`, `holder_worker_id` and `claim_branch` refer to the publisher's canonical child claim, and holder must equal `operator_worker_id`. The workflow rereads the released original claim, open/ready child and exact contract, satisfied dependencies, authorized existing handoff comment and publisher's active unexpired live reservation at start and final readback. Reopened dependencies, a new active #51 claim, blocked/closed child, changed scope or expired reservation fail. `reservation_issue` omitted or51 keeps the legacy original-claim behavior; do not switch an in-progress legacy operation midway.
+
+The handoff comment and publisher worker IDs remain cooperative GitHub evidence, not separate authenticated chat identities. The publisher still independently checks substantive request/review/rollback and all unresolved queue operations; the tool does not certify a comment's factual claims. No live operation is authorized merely by creating a child. All source-read-only, drain, exact pins, encrypted recipient backup, isolated restore, lock/cleanup, served-state and issue-closure requirements remain.

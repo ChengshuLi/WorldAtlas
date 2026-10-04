@@ -98,3 +98,11 @@ test('approved research is bound to all three geographic pins and ordinary bot a
  const ordinary={id:102,user:{login:'github-actions[bot]'},body:'Worker coordination: reason mentions worldatlas-claim:v1'};
  assert.equal(readClaim([comment(first()),ordinary]).worker_id,'thread-a');
 });
+
+test('production-only child is reserved by its publisher, not an ordinary implementer',()=>{
+ const operationIssue=issue({body:'<!-- worldatlas-work:v1\n'+JSON.stringify({...spec,production_operation:{source_issue:51,queue:714,publisher_worker_id:'publisher-worker'}})+'\n-->'});
+ assert.throws(()=>transitionClaim({issue:operationIssue,comments:[],request:request(),now}),/designated publisher/);
+ const holder=transitionClaim({issue:operationIssue,comments:[],request:request({worker_id:'publisher-worker'}),now}).claim;
+ assert.equal(holder.worker_id,'publisher-worker');
+ assert.equal(transitionClaim({issue:operationIssue,comments:[comment(holder)],request:request({worker_id:'publisher-worker',action:'renew',request_id:'ssssssss-ssss-ssss-ssss-ssssssssssss',live_work:true}),now}).claim.live_work,true);
+});
