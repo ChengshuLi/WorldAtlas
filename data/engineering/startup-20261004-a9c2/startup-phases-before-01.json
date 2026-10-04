@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "method": "grouped exact request start/end observations and actual DOM transitions",
+  "input_path": "data/engineering/startup-20261004-a9c2/site24-startup-before-01.json",
+  "phases": {
+    "initial": {
+      "elapsed_ms": 27551.435524,
+      "states": [
+        {
+          "at_ms": 625.6000000014901,
+          "loading_text": null,
+          "loading_hidden": null,
+          "year": null,
+          "rendered": null
+        },
+        {
+          "at_ms": 1785.1000000014901,
+          "loading_text": "Preparing your atlas\u2026",
+          "loading_hidden": false,
+          "year": "2026 AD",
+          "rendered": null
+        },
+        {
+          "at_ms": 17542.90000000596,
+          "loading_text": "Loading 2,026 AD\u2026",
+          "loading_hidden": false,
+          "year": "2026 AD",
+          "rendered": null
+        },
+        {
+          "at_ms": 17922,
+          "loading_text": "Loading 2,026 AD\u2026",
+          "loading_hidden": false,
+          "year": "2026 AD",
+          "rendered": "true"
+        },
+        {
+          "at_ms": 27307.60000000149,
+          "loading_text": "Loading 2,026 AD\u2026",
+          "loading_hidden": true,
+          "year": "2,026 AD",
+          "rendered": "true"
+        }
+      ],
+      "groups": {
+        "frontend": {
+          "requests": 4,
+          "response_bytes": 388545,
+          "first_start_from_request_ms": 0.0,
+          "last_end_from_request_ms": 17655.506271000002,
+          "limit": "Overlapping group spans, never sum as elapsed critical path; no individual provider query/wake measurement"
+        },
+        "geography": {
+          "requests": 55,
+          "response_bytes": 20012846,
+          "first_start_from_request_ms": 1787.400431,
+          "last_end_from_request_ms": 17151.65301,
+          "limit": "Overlapping group spans, never sum as elapsed critical path; no individual provider query/wake measurement"
+        },
+        "ownership-assets": {
+          "requests": 56,
+          "response_bytes": 47608435,
+          "first_start_from_request_ms": 5930.299260000001,
+          "last_end_from_request_ms": 14800.230586000001,
+          "limit": "Overlapping group spans, never sum as elapsed critical path; no individual provider query/wake measurement"
+        },
+        "initial-scalar-history": {
+          "requests": 4,
+          "response_bytes": 794522,
+          "first_start_from_request_ms": 17543.522507,
+          "last_end_from_request_ms": 19571.14758,
+          "limit": "Overlapping group spans, never sum as elapsed critical path; no individual provider query/wake measurement"
+        },
+        "reference": {
+          "requests": 72,
+          "response_bytes": 2149602,
+          "first_start_from_request_ms": 17544.196443,
+          "last_end_from_request_ms": 26039.275821000003,
+          "limit": "Overlapping group spans, never sum as elapsed critical path; no individual provider query/wake measurement"
+        }
+      }
+    },
+    "repeat": {
+      "elapsed_ms": 27331.349253,
+      "states": [
+        {
+          "at_ms": 1025,
+          "loading_text": null,
+          "loading_hidden": null,
+          "year": null,
+          "rendered": null
+        },
+        {
+          "at_ms": 2273.5,
+          "loading_text": "Preparing your atlas\u2026",
+          "loading_hidden": false,
+          "year": "2026 AD",
+          "rendered": null
+        },
+        {
+          "at_ms": 17974.90000000596,
+          "loading_text": "Loading 2,026 AD\u2026",
+          "loading_hidden": false,
+          "year": "2026 AD",
+          "rendered": null
+        },
+        {
+          "at_ms": 18054.30000000447,
+          "loading_text": "Loading 2,026 AD\u2026",
+          "loading_hidden": false,
+          "year": "2026 AD",
+          "rendered": "true"
+        },
+        {
+          "at_ms": 27051.60000000149,
+          "loading_text": "Loading 2,026 AD\u2026",
+          "loading_hidden": true,
+          "year": "2,026 AD",
+          "rendered": "true"
+        }
+      ],
+      "groups": {
+        "frontend": {
+          "requests": 4,
+          "response_bytes": 388545,
+          "first_start_from_request_ms": 0.0,
+          "last_end_from_request_ms": 18219.623298000002,
+          "limit": "Overlapping group spans, never sum as elapsed critical path; no individual provider query/wake measurement"
+        },
+        "geography": {
+          "requests": 55,
+          "response_bytes": 20012846,
+          "first_start_from_request_ms": 2273.345473999998,
+          "last_end_from_request_ms": 17706.179621,
+          "limit": "Overlapping group spans, never sum as elapsed critical path; no individual provider query/wake measurement"
+        },
+        "ownership-assets": {
+          "requests": 56,
+          "response_bytes": 47608435,
+          "first_start_from_request_ms": 6207.2450750000025,
+          "last_end_from_request_ms": 14760.374146999999,
+          "limit": "Overlapping group spans, never sum as elapsed critical path; no individual provider query/wake measurement"
+        },
+        "initial-scalar-history": {
+          "requests": 4,
+          "response_bytes": 794522,
+          "first_start_from_request_ms": 17973.895422999998,
+          "last_end_from_request_ms": 19111.563946,
+          "limit": "Overlapping group spans, never sum as elapsed critical path; no individual provider query/wake measurement"
+        },
+        "reference": {
+          "requests": 72,
+          "response_bytes": 2149602,
+          "first_start_from_request_ms": 17974.712214999996,
+          "last_end_from_request_ms": 25722.747589000002,
+          "limit": "Overlapping group spans, never sum as elapsed critical path; no individual provider query/wake measurement"
+        }
+      }
+    }
+  },
+  "interpretation": "Actual first map rendered around18s, but selected-year loader remains visible until~27s; no early-completion claim"
+}
