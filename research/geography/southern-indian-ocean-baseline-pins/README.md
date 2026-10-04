@@ -12,7 +12,7 @@ The original packet preserves 65 baseline file descriptors, including canonical-
 
 ## Original sources and reuse limits
 
-The original packet records source URLs, dates, licenses, lawful retention status, hashes and restoration instructions. This correction embeds those source records unchanged in `vintages/20261004-pinned-geography-inputs-geography-inputs/source-snapshot-manifest.json`; it performs no new external retrieval and adds no raw geographic source bytes.
+The original packet records source URLs, dates, licenses, lawful retention status, hashes and restoration instructions. This correction embeds those source records unchanged in `vintages/20261004-pinned-geography-inputs/source-snapshot-manifest.json`; it performs no new external retrieval and adds no raw geographic source bytes.
 
 | Source | Recorded vintage/access | Recorded reuse and limit |
 | --- | --- | --- |
@@ -42,7 +42,7 @@ The default is read-only. The check independently builds the full receipt twice 
 python3 research/geography/southern-indian-ocean-baseline-pins/build_packet.py --create --vintage 20261004-pinned-geography-inputs
 ```
 
-Creation uses the shared exclusive-write helper and refuses any existing target. Re-running `--check --vintage` verifies the saved files without overwriting them. The actual generated summaries and positive, negative and reproducibility controls are retained under `vintages/20261004-pinned-geography-inputs-geography-inputs/`.
+Creation uses the shared exclusive-write helper and refuses any existing target. Re-running `--check --vintage` verifies the saved files without overwriting them. The actual generated summaries and positive, negative and reproducibility controls are retained under `vintages/20261004-pinned-geography-inputs/`.
 
 ## Interpretation
 
