@@ -256,9 +256,21 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/compact-membership-profile-20261004-local01/negative-control.json",
+      "bytes": 625,
+      "sha256": "01657665fd9bdae6fdceea53345f407f365ee2873063081fb6d8388b7095074b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-membership-profile-20261004-local01/positive-control.json",
+      "bytes": 583,
+      "sha256": "1c6be0e8dce7103bfda9668e8f8c135b65c6e12c9346cb53280e6a9c0312047b",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/compact-membership-profile-20261004-local01/prepare-evidence.mjs",
-      "bytes": 5500,
-      "sha256": "7f3a2be301a0f0cdfed85a442b7c279bde2b2666d20ab161d58f9e220b5d782b",
+      "bytes": 6974,
+      "sha256": "355edb36ad4745c26c8f1c13c643c1763623bfce1dca2d02693fd44e8b15bf58",
       "hash_kind": "file-bytes"
     },
     {
@@ -275,6 +287,27 @@
       "description": "Actual original-schema PostgreSQL/PGlite full prepared membership parity, no-new-writes rollback, strict compact public/private catalog pins, restricted runtime, raw export and independent logical restore; negative ACL/owner/foreign-key/view controls, durable interrupted export and typed import/snapshot tests. Synthetic registries; no live provider or native backup proof.",
       "software": "Node24 and locked PGlite0.5.8",
       "units": "bytes, rows, milliseconds, test count; metadata numeric fields are catalog enums"
+    },
+    {
+      "id": "full-size-storage",
+      "kind": "measurement",
+      "description": "Bounded isolated original/compact relation and allocation sizes, full raw parity and pinned public query timings over the complete prepared membership inventory; rollback and rejection controls retain their hashed receipts.",
+      "software": "Node24 and locked PGlite0.5.8",
+      "units": "bytes, rows, milliseconds"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "full-size-storage",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/compact-membership-profile-20261004-local01/positive-control.json"
+    },
+    {
+      "method_id": "full-size-storage",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/compact-membership-profile-20261004-local01/negative-control.json"
     }
   ],
   "metrics": [
@@ -11213,6 +11246,30 @@
       "vintage": "baseline",
       "evaluation_commit": "c32de3f062369494cabe455e36556db258977cd4",
       "input_sha256": "2020534305e36a0d90f0a2bb796b1afb274c5ac7cc705cd4fef1c3f0c9a115f5"
+    },
+    {
+      "id": "positive-control-json-version",
+      "value": 1,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "c32de3f062369494cabe455e36556db258977cd4",
+      "input_sha256": "1c6be0e8dce7103bfda9668e8f8c135b65c6e12c9346cb53280e6a9c0312047b"
+    },
+    {
+      "id": "positive-control-json-pinned_queries",
+      "value": 30,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "c32de3f062369494cabe455e36556db258977cd4",
+      "input_sha256": "1c6be0e8dce7103bfda9668e8f8c135b65c6e12c9346cb53280e6a9c0312047b"
+    },
+    {
+      "id": "negative-control-json-version",
+      "value": 1,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "c32de3f062369494cabe455e36556db258977cd4",
+      "input_sha256": "01657665fd9bdae6fdceea53345f407f365ee2873063081fb6d8388b7095074b"
     }
   ],
   "metric_bindings": [
@@ -18050,6 +18107,21 @@
       "metric_id": "test-results-json-counts-todo",
       "path": "coordination/engineering/compact-membership-profile-20261004-local01/test-results.json",
       "json_pointer": "/counts/todo"
+    },
+    {
+      "metric_id": "positive-control-json-version",
+      "path": "coordination/engineering/compact-membership-profile-20261004-local01/positive-control.json",
+      "json_pointer": "/version"
+    },
+    {
+      "metric_id": "positive-control-json-pinned_queries",
+      "path": "coordination/engineering/compact-membership-profile-20261004-local01/positive-control.json",
+      "json_pointer": "/pinned_queries"
+    },
+    {
+      "metric_id": "negative-control-json-version",
+      "path": "coordination/engineering/compact-membership-profile-20261004-local01/negative-control.json",
+      "json_pointer": "/version"
     }
   ],
   "summaries": [],
@@ -18170,6 +18242,14 @@
     },
     {
       "path": "coordination/engineering/compact-membership-profile-20261004-local01/full-size.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-membership-profile-20261004-local01/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-membership-profile-20261004-local01/positive-control.json",
       "status": "added"
     },
     {

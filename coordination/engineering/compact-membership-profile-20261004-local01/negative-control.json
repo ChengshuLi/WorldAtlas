@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "outcome": "passed",
+  "test_log_sha256": "a93f3644399bbc694eaeb7923fd04023409c6be6b40f77dd2241dfb297d9bfcb",
+  "controls": [
+    "changed public projection rejected",
+    "disabled internal foreign key rejected",
+    "private table and column ACL grants rejected",
+    "other-owner helpers and sequences rejected",
+    "missing FK and duplicate membership copy rolls back",
+    "tampered durable export part rejected"
+  ],
+  "measured_storage_corruption": "Full-size migration verifies full EXCEPT ALL parity and digest validity before switching; no corrupted full-size production fixture is claimed."
+}
