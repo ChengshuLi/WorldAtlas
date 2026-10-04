@@ -1,7 +1,9 @@
 # Nigeria interior batch 11: source evidence and proposed follow-up
 
-**Issue:** [#477](https://github.com/ChengshuLi/WorldAtlas/issues/477)  
-**Reservation:** worker `codex-20261004-westafrica-477-f8d97563-ba4b-42ae-bc4b-f2d065c6e95d`, claim `9e6c35f6-86a2-4d0c-9efd-0db3fa986956`.  
+**Issue:** [#477](https://github.com/ChengshuLi/WorldAtlas/issues/477)
+
+**Reservation:** worker `codex-20261004-westafrica-477-f8d97563-ba4b-42ae-bc4b-f2d065c6e95d`, claim `9e6c35f6-86a2-4d0c-9efd-0db3fa986956`.
+
 **Baseline:** published regional membership and complete parent chains at `678d7e8f8686f575e024b593ce4e744a8bb4d79a`. The acquisition inputs were inherited from the earlier West Africa packet at that commit; the frozen snapshot hashes and scope pins are in `scope.json`. They are ancestor evidence, not current-main snapshot claims.
 
 ## Scope and result
