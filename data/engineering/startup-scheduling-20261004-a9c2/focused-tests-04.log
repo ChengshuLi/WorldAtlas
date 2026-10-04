@@ -1,0 +1,42 @@
+✔ reference presentation context is reused within one loaded generation and rebuilt on reload (44.30488ms)
+✔ a pinned reference bundle preloads once and preserves legacy dated/reference separation (24.977568ms)
+✔ a rejected old reference generation cannot clear a newer successful generation (4.396428ms)
+✔ complete entity and history reads start before the catalog finishes (7.750103ms)
+✔ ownership transport starts before catalog fan-out and geography waits for every stream (8.802725ms)
+✔ unavailable bootstrap streams reject instead of returning a partial geography (19.382999ms)
+✔ older Workers negotiate the sparse limit without masking unrelated bad requests (5.190524ms)
+✔ initial hosted evidence starts during geography and is consumed only once for its selection (5.827485ms)
+✔ changing the initial year or examples cancels speculation and fetches the requested pair (7.140544ms)
+✔ a canceled initial selection does not poison a later retry (3.454498ms)
+✔ reloading geography discards old speculative evidence even when transport ignores cancellation (4.830442ms)
+✔ complete inline temporal streams use the existing pin and revision validator without extra HTTP reads (4.931965ms)
+✔ inline temporal revision or release drift restarts the scalar snapshot rather than repinning it (6.254073ms)
+✔ absent inline temporal pages retain bounded ordinary geography paging (2.935224ms)
+✔ partial inline temporal pages cannot become authoritative or trigger unbounded reads (2.611016ms)
+✔ compact client hydrates two atomic entity pages and retains shared source provenance (2.660301ms)
+✔ oversized second page reduces its limit and retries its cursor without duplicating completed pages (3.092292ms)
+✔ a first-page size retry reaches the reduced request and preserves retirement authority (4.072009ms)
+✔ retryable conflicts and cross-page revision changes restart the complete compact snapshot (3.392785ms)
+✔ three persistently inconsistent attempts produce unavailable evidence without cold-cache authority (3.10434ms)
+✔ warm failures retain claims and withdrawals atomically only for the same year and example setting (3.48202ms)
+✔ malformed compact pages, incorrect years and cursor cycles fail atomically (16.310868ms)
+✔ compact client propagates aborts and passes the signal to its network request (3.054004ms)
+✔ clients without a compact capability keep the original three-stream protocol (2.661722ms)
+✔ the geography capability enables compact reads through the actual manifest loader (3.416511ms)
+✔ ownership assets reconstruct out-of-order compressed chunks and reject truncation (48.898534ms)
+✔ version-pinned ownership digests reject mixed deployments and support host-decoded gzip (9.937831ms)
+✔ bounded concurrent transport retains complete row-before-run reconstruction (8.463408ms)
+✔ bundle preserves complete records, supported intervals, source context and original bytes (56.201658ms)
+✔ separate bundle runs are byte-identical and cannot overwrite an earlier output (10.091423ms)
+✔ proof rejects mixed footprints, unsafe routes and oversized declarations before any fetch (6.129926ms)
+✔ bad hashes, truncated data and unavailable bundles fail closed (16.958213ms)
+✔ an internally incomplete roster is rejected even with matching transport hashes (5.871477ms)
+✔ packaging refuses unsafe source rosters and mismatched source footprints (6.407363ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 300.360298
