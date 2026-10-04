@@ -54,12 +54,24 @@
       "bytes": 324,
       "sha256": "a422ecb283fa2b5c11ea748f99f0aa048a248af46572f0aa4e71ad8b3db23c14",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/positive-duration-control.json",
+      "bytes": 602,
+      "sha256": "df20ba630da0bd14a7e1d8bc1872931fa21f84ad0cc2462f75a56e908903bef7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/negative-duration-control.json",
+      "bytes": 280,
+      "sha256": "e7f5ef9f9de1a85e47972188010d006e21a172a65f24142b29f44a670a49e235",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
       "id": "focused-hosted-observation",
-      "kind": "code",
+      "kind": "measurement",
       "description": "Read actual hosted source job timestamps/log summaries and exercise a second owned evidence-only PR through the normal trusted queue; await its actual matching accepted bot receipt.",
       "software": "Node24, Git, read-only GitHub API",
       "units": "seconds, test outcomes, immutable bytes"
@@ -269,6 +281,28 @@
     {
       "path": "coordination/engineering/focused-deps-proof-695/evidence-quality.json",
       "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/positive-duration-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/negative-duration-control.json",
+      "status": "added"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "focused-hosted-observation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/focused-deps-proof-695/positive-duration-control.json"
+    },
+    {
+      "method_id": "focused-hosted-observation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/focused-deps-proof-695/negative-duration-control.json"
     }
   ]
 }
