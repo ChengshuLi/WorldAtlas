@@ -9,6 +9,15 @@ import json
 import pathlib
 import re
 import subprocess
+import importlib.util
+
+# Historical consumers load this script via importlib rather than adding scripts/
+# to sys.path. Resolve the sibling helper from this file in both entry modes.
+_PROVENANCE_SPEC = importlib.util.spec_from_file_location(
+    "macro_policy_provenance", pathlib.Path(__file__).with_name("macro_policy_provenance.py"))
+_PROVENANCE_MODULE = importlib.util.module_from_spec(_PROVENANCE_SPEC)
+_PROVENANCE_SPEC.loader.exec_module(_PROVENANCE_MODULE)
+verify_policy_provenance = _PROVENANCE_MODULE.verify
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 TIERS = ['location', 'province', 'area', 'region', 'subcontinent', 'continent']
@@ -240,6 +249,11 @@ def save_stage(directory, index, parts, units, features):
 
 def prepare(data, policy_path, output, receipts):
     policy = read(policy_path)
+    # Validate the frozen decision citation before any candidate output is written.
+    if 'data/macro-foundation/europe-asia-boundary-decisions.json' in policy.get('decision_files', []):
+        provenance = verify_policy_provenance(data.parent)
+        if sha(policy_path) != provenance['policy_sha256']:
+            raise ValueError('Supplied policy differs from corrected frozen reference')
     if output == data or data in output.parents:
         raise ValueError('Candidate output must be outside live data')
     index = read(data / 'world-index.json')

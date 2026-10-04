@@ -1,0 +1,9 @@
+# Europe–Asia frozen policy provenance correction
+
+Issue #727; additive byte-binding correction only. Both original frozen files remain unchanged. The original decision cites policy hash `dbbd7870d4dcd039a84b851defdce8110da08cc96f132d7d6c9e87d4406b1803`; actual original/current policy bytes hash to `999f3ca84a0eb4b60f300e422503894b31c4474228d6e52259438ada0979a846`.
+
+The corrected reference is explicit in `data/macro-foundation/europe-asia-policy-provenance-correction-v1.json`, with original commit/path/whole-file hashes and original JSON pointer preserved. `scripts/macro_policy_provenance.py` checks both unchanged originals and the exact supported correction. The original macro preparation consumer invokes it before reading geography or writing outputs, and rejects a different supplied policy. Run `python3 scripts/macro_policy_provenance.py` and `node --test test/macro-policy-provenance.test.mjs`.
+
+Reachable `git log --all -- data/macro-foundation/membership-decisions.json` contains only introduction commit604021bc42c99c6e852785aeb11ab576a04f5e83. Its exact policy bytes match current bytes. The originally recorded hash occurs in the frozen decision, but no earlier policy vintage was found in that reachable path history. Its origin is **unknown**; this limited search cannot rule out unpublished work, unreachable objects or external archives. No invented earlier vintage is asserted.
+
+This does not regenerate geography or rerun the historical preparation against current data. Existing historical preparation receipts remain original-script evidence, not receipts for the new validator. No deployment, import, semantic boundary approval or regional certificate is required or claimed. Core identity/hierarchy/release data and original factual/source/archive bytes are untouched. Future changes to these frozen inputs require separately reviewed versioned correction rather than bypassing this validator.

@@ -1,0 +1,16 @@
+{
+  "method_id": "provenance",
+  "kind": "negative",
+  "outcome": "passed",
+  "command": "node --test test/macro-policy-provenance.test.mjs",
+  "controls": [
+    "absent correction",
+    "wrong corrected hash",
+    "wrong corrected path",
+    "wrong original commit",
+    "changed policy bytes",
+    "changed decision bytes",
+    "wrong recorded citation"
+  ],
+  "limits": "Disposable cloned inputs only; no geographic measurements"
+}
