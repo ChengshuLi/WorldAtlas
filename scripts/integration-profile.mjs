@@ -7,7 +7,8 @@ export const COORDINATION_PATHS = new Set([
   'scripts/evidence-quality.mjs', 'scripts/evidence-policy.mjs', 'scripts/premerge-evidence.mjs',
   'scripts/check-pr-evidence.mjs', 'scripts/merge-integration.mjs', 'scripts/integration-proof.mjs',
   'scripts/integration-profile.mjs', 'scripts/check-integration-profile.mjs',
-  'scripts/run-integration-tests.mjs', 'scripts/run-worker-merge.mjs', 'scripts/queue-pr-merge.mjs',
+  // Test-runner changes require full regression to validate the real inventory.
+  'scripts/run-worker-merge.mjs', 'scripts/queue-pr-merge.mjs',
   '.github/workflows/handoff-scope.yml',
   '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
   '.github/evidence-policy.json',
