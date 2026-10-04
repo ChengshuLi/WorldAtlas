@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       window_comment_id:
-        description: Fresh reviewed publisher window comment on issue714; no credentials
+        description: Fresh reviewed publisher window comment on original issue51 (legacy714 accepted); no credentials
         type: string
         required: true
 permissions:

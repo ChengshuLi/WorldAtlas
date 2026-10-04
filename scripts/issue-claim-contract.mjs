@@ -48,7 +48,7 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,g
  validateIssueMetadata(branch,issue);
  const spec=workSpec(issue.body);
  checkLaneMode(branch,spec);
- if(spec.production_operation&&(spec.mode!=='engineering'||!Number.isSafeInteger(spec.production_operation.source_issue)||spec.production_operation.source_issue<1||spec.production_operation.queue!==714||spec.production_operation.publisher_worker_id!==worker_id))throw Error('Production-only child reservations belong to their designated publisher');
+ if(spec.production_operation&&(spec.mode!=='engineering'||!Number.isSafeInteger(spec.production_operation.source_issue)||spec.production_operation.source_issue<1||![714,spec.production_operation.source_issue].includes(spec.production_operation.queue)||spec.production_operation.publisher_worker_id!==worker_id))throw Error('Production-only child reservations belong to their designated publisher');
  if(spec.mode==='geography'&&request.live_work)throw Error('Geography workers stage evidence only and cannot reserve live operations');
  if(current?.active&&own&&spec.mode==='geography'&&JSON.stringify(current.owned_paths)!==JSON.stringify(spec.owned_paths))throw Error('Geography ownership changed; preserve the work and coordinate release/reclaim before expanding scope');
  if(labels.includes('kind:umbrella')||!labels.includes('kind:work-item')||!labels.includes('status:ready')||labels.includes('status:blocked'))throw Error('Only reviewed ready work items may be claimed; split umbrellas or resolve blockers first');

@@ -1,0 +1,381 @@
+{
+  "version": 1,
+  "issue": 766,
+  "lane": "engineering",
+  "worker_id": "engineering-publisher-main-01a10843-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "f72394a1194d0e0100cf08b7232da3d5be5a63bc",
+    "files": [
+      {
+        "path": ".github/pull_request_template.md",
+        "bytes": 638,
+        "sha256": "764e02a560d40877cf8fb9f0d7fbbf83d545e4777a6d35bfa4f84d0e4199f2ab",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/current-postgres-recovery.yml",
+        "bytes": 1871,
+        "sha256": "74424f982980cb94ba0da4fd609a2bf3b1b824e776c631d334654f2fdc20dc29",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "AGENTS.md",
+        "bytes": 7304,
+        "sha256": "b73e25e3113ecd3573a1a58acaca50c6d6d2d1da6c577eecdf90787363272e12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
+        "bytes": 10676,
+        "sha256": "c360f1883bf0eb3e655a7b886cc569964274f4b7420bbfe6d4c3c970e2601fb0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/ENGINEERING_HANDOFF.md",
+        "bytes": 8692,
+        "sha256": "12b9b1f35dea0df49b5d2f2828c0dc01d2e93132f37bf7a4424daff0ae4324fd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PUBLICATION_HANDOFF.md",
+        "bytes": 7330,
+        "sha256": "0f34cbef77589f30f7ee66ed4c79d1d747dc22a4baec29c0aa51c69dc13988d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/THREE_THREAD_START.md",
+        "bytes": 8291,
+        "sha256": "97bd9aa79b1eaf028f6ff9f0d7e32e16e741060a9e01f6a59b4163fb5f524bcd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 22238,
+        "sha256": "da17806b86dd14cc358bd0a47aeff58cbc26ef2970683d40571f8da64d23b9f2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 8459,
+        "sha256": "a9ee231e875fd9453e687069631e06ea0399ae28b6a2cb17d40c5073cdb51d40",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ISSUE_CREATION.txt",
+        "bytes": 4450,
+        "sha256": "6496b59fee409d5c96136e178fbb0c3e4180c4cc125e7888f86922b041e7c9e0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/PUBLISHER.txt",
+        "bytes": 2244,
+        "sha256": "8d5cde4197ee5e407d9bef2aecaab66e535067258c3b96af6aaad72cc304e187",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 30878,
+        "sha256": "1242e24227d3a0cfb871e362e9999cf967c49d9bd2dfb476ffd3abc43af9c752",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 10357,
+        "sha256": "d28383ba29f9df054c658afde4474ac6d72bd85688a7ad216ec11a4bb33773e5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/current-postgres-recovery.test.mjs",
+        "bytes": 14012,
+        "sha256": "9a19a5240a82060a42d922e65ceb8e2d24911a66aa52445af0f90bc269c3aafe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/issue-claims.test.mjs",
+        "bytes": 10761,
+        "sha256": "5443477bc90866902974c5f1e437bcf1d0da2fa8efa552178293a18a91990a89",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/engineering/palette-publish-20261003-7e91/build-reuse.json",
+        "bytes": 1487,
+        "sha256": "ef03742be905550d8c4462c00a35c89b3cc4fc082d1d0a8fe32054b1ab612547",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/engineering/palette-publish-20261003-7e91/source-package-match.json",
+        "bytes": 263,
+        "sha256": "bf7803327f02c1921c015ae7572d22d44a1c61fceca798b9ff11268f72f5c448",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/engineering/palette-publish-20261003-7e91/native-publication.json",
+        "bytes": 1277,
+        "sha256": "72c6de171fb851092cef1062b167194103a3230b417c9072e33942cf4f8aea01",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/engineering/palette-publish-20261003-7e91/acceptance-summary.json",
+        "bytes": 7813,
+        "sha256": "47498c0dfc5b9119fc3886fbdce23d6f0f429ebb9c599b72c15a8f8d81b40396",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/validation/macro-publication-v5.json",
+        "bytes": 2826,
+        "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/pull_request_template.md",
+      "bytes": 949,
+      "sha256": "42f67139dd70274c9c715cfb66d4120c7ab3d6e94f512908039db9522df41a76",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/current-postgres-recovery.yml",
+      "bytes": 1900,
+      "sha256": "f894ccf0f6ab1e0c58e6c75629e9e0c199b2526688b670d6594563e05c9f5df8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 7588,
+      "sha256": "c040391c07d9bec1b90e764e6481b2e8fb70cea4da2c4d14b8071843ce441b4a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/publisher-main-20261004/claim.json",
+      "bytes": 831,
+      "sha256": "9990970f4db11f79afae33ca8551e39238ff99b3edd737d0e5e1fa3d3de563b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/publisher-main-20261004/validation.txt",
+      "bytes": 723,
+      "sha256": "9d6db7b2dd13b127a061ec3a51f18babfadb86c512437173163e3d82076cdd42",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/publication/bootstrap.json",
+      "bytes": 2345,
+      "sha256": "2a0d06c9a3c6e81ab7ab928569b34695704dc39026126b5eb5397bebceb1dcf1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
+      "bytes": 11208,
+      "sha256": "d53c7ae838792d85dbada9c83c364795443b189240d15ab52906c83230e06e7d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "bytes": 8776,
+      "sha256": "bbe5b02184ba618d701263500e1100979db050717c05c3f708141dbf5a5b2c07",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PUBLICATION_HANDOFF.md",
+      "bytes": 12006,
+      "sha256": "1d24fab230fa1a8e73d59aef23d93866af31015894f02fe55e48fe40f153b168",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/THREE_THREAD_START.md",
+      "bytes": 8516,
+      "sha256": "808a48f77992d507fedce5290294f2553afd8dd1afbf1d2ce6a85fc84380c95c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 22347,
+      "sha256": "94bdae4d911b5a6e840c7561003ddc00c4ab5437071ff4c71a1559b9bfa9ebaa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 8713,
+      "sha256": "dd6490f423a3d3fbbe3d17a09e9d7ba2a138b019dae99d560915e2d4bb077360",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ISSUE_CREATION.txt",
+      "bytes": 4490,
+      "sha256": "94ab3953914fbb84ec569ad6942ccc61251b690d2bcc47bbec4310e23cf34d61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "bytes": 3919,
+      "sha256": "da3c2e8ab4886677efc476b3c7a3a19a7df05a5a88d393ebc0d392d900bd29a4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 31085,
+      "sha256": "c090de880981452fde8c6dfd4c36cde236887034e8fb8cb6da7e67dc13a02db6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 10407,
+      "sha256": "3ea8f8b74b540de23e50cc339eabc868e5b727f2197bfdf5e477a55d7b94df74",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/publication-plan.mjs",
+      "bytes": 11778,
+      "sha256": "182e58c26c26ec9a6a487d49b534aa7f6d5cf338c6712c2d31be53cb7e083593",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "bytes": 14855,
+      "sha256": "a97854801abafb49159ad47f27e002ae397338a4efabd8914f398eeb0d16e27a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "bytes": 11460,
+      "sha256": "913b79308618fe57c3f707eb115648983eb8f8ff32ade60f07c6718b398c4243",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/publication-plan.test.mjs",
+      "bytes": 9993,
+      "sha256": "446324ee970ab8ea025a2cdb801f5262bf83f47f53e15b3a8d8bc68b6988890c",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "publication-discovery-and-tracking",
+      "kind": "code",
+      "description": "Read-only immutable GitHub inventory and coherent operation/delivery/issue-outcome contracts; original-issue recovery address compatibility with legacy safety checks.",
+      "software": "Node24, Git, GitHub REST API through gh",
+      "units": "exact commits, identities, paginated records and explicit outcome states"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/publication-plan.test.mjs test/current-postgres-recovery.test.mjs test/issue-claims.test.mjs",
+    "node scripts/publication-plan.mjs",
+    "git diff --check"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/pull_request_template.md",
+      "status": "modified",
+      "original_sha256": "764e02a560d40877cf8fb9f0d7fbbf83d545e4777a6d35bfa4f84d0e4199f2ab"
+    },
+    {
+      "path": ".github/workflows/current-postgres-recovery.yml",
+      "status": "modified",
+      "original_sha256": "74424f982980cb94ba0da4fd609a2bf3b1b824e776c631d334654f2fdc20dc29"
+    },
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "original_sha256": "b73e25e3113ecd3573a1a58acaca50c6d6d2d1da6c577eecdf90787363272e12"
+    },
+    {
+      "path": "coordination/engineering/publisher-main-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/publisher-main-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/publication/bootstrap.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
+      "status": "modified",
+      "original_sha256": "c360f1883bf0eb3e655a7b886cc569964274f4b7420bbfe6d4c3c970e2601fb0"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "12b9b1f35dea0df49b5d2f2828c0dc01d2e93132f37bf7a4424daff0ae4324fd"
+    },
+    {
+      "path": "docs/PUBLICATION_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "0f34cbef77589f30f7ee66ed4c79d1d747dc22a4baec29c0aa51c69dc13988d1"
+    },
+    {
+      "path": "docs/THREE_THREAD_START.md",
+      "status": "modified",
+      "original_sha256": "97bd9aa79b1eaf028f6ff9f0d7e32e16e741060a9e01f6a59b4163fb5f524bcd"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "da17806b86dd14cc358bd0a47aeff58cbc26ef2970683d40571f8da64d23b9f2"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "a9ee231e875fd9453e687069631e06ea0399ae28b6a2cb17d40c5073cdb51d40"
+    },
+    {
+      "path": "docs/prompts/ISSUE_CREATION.txt",
+      "status": "modified",
+      "original_sha256": "6496b59fee409d5c96136e178fbb0c3e4180c4cc125e7888f86922b041e7c9e0"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "status": "modified",
+      "original_sha256": "8d5cde4197ee5e407d9bef2aecaab66e535067258c3b96af6aaad72cc304e187"
+    },
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "status": "modified",
+      "original_sha256": "1242e24227d3a0cfb871e362e9999cf967c49d9bd2dfb476ffd3abc43af9c752"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "status": "modified",
+      "original_sha256": "d28383ba29f9df054c658afde4474ac6d72bd85688a7ad216ec11a4bb33773e5"
+    },
+    {
+      "path": "scripts/publication-plan.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "status": "modified",
+      "original_sha256": "9a19a5240a82060a42d922e65ceb8e2d24911a66aa52445af0f90bc269c3aafe"
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "status": "modified",
+      "original_sha256": "5443477bc90866902974c5f1e437bcf1d0da2fa8efa552178293a18a91990a89"
+    },
+    {
+      "path": "test/publication-plan.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/publisher-main-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

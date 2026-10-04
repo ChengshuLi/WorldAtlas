@@ -90,3 +90,13 @@ const restoreHeader="-- PostgreSQL database dump\nSELECT pg_catalog.set_config('
 test('restore session header adjustment preserves every factual COPY byte',()=>{const source=Buffer.from(restoreHeader),result=isolatedRestoreSQL(source),at=source.indexOf(Buffer.from('\n-- Name: '));assert.deepEqual(result.subarray(result.indexOf(Buffer.from('\n-- Name: '))),source.subarray(at));assert.match(result.toString(),/public,pg_catalog/);});
 test('restore header fails closed on missing or duplicate session setup',()=>{assert.throws(()=>isolatedRestoreSQL(Buffer.from('-- Name: missing')));assert.throws(()=>isolatedRestoreSQL(Buffer.from(restoreHeader.replace('-- PostgreSQL database dump',"SELECT pg_catalog.set_config('search_path', '', false);"))));});
 test('local constraint revalidation requires exact immutable original schema',()=>{const schema=fs.readFileSync('postgres/schema.sql');assert.equal(isolatedOriginalChecks(schema).match(/ADD CONSTRAINT/g).length,4);assert.throws(()=>isolatedOriginalChecks(Buffer.concat([schema,Buffer.from(' ')])));});
+
+test('new recovery window and child may track original issue51, retaining released-source and scope guards',()=>{
+ const d=delegated();d.w.queue=51;d.spec.production_operation.queue=51;
+ d.spec.production_operation.handoff_receipt_url='https://github.com/ChengshuLi/WorldAtlas/issues/51#issuecomment-123';
+ d.context.handoffReceipt.html_url=d.spec.production_operation.handoff_receipt_url;
+ d.context.reservationIssue.body='<!-- worldatlas-work:v1\n'+JSON.stringify(d.spec)+'\n-->';
+ d.w.reservation_scope_sha256=sha(JSON.stringify(d.spec));assert.doesNotThrow(()=>validateDelegated(d));
+ d.w.queue=714;assert.throws(()=>validateDelegated(d),/operation-not-publisher-owned/);
+});
+test('original-issue recovery cannot use unrelated tracking issue',()=>{const w=window();w.queue=22;assert.throws(()=>validate(w),/invalid-publisher-window/);});
