@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "parity-hoist-694-20261004",
+  "branch": "engineering/parity-hoist-694-20261004",
+  "base_main_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e",
+  "github_issue": 694,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Per-year preparation hoist in exhaustive parity test; all existing assertions and both examples modes remain"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-04T01:15:37.259215+00:00",
+  "completed": [
+    "Implemented bounded source hoist",
+    "Actual-source synthetic positive and negative controls passed"
+  ],
+  "checks": [
+    "node --check test/prepared-parity.test.mjs",
+    "node coordination/engineering/parity-hoist-694-20261004/validate-loop.mjs",
+    "git diff --check"
+  ],
+  "deployment": "Not requested; unchanged",
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "coordination/engineering/parity-hoist-694-20261004/loop-validation.json",
+    "coordination/engineering/parity-hoist-694-20261004/provenance.json"
+  ],
+  "blockers": [
+    "Actual full hosted CI/timing and independent exact-head review pending",
+    "Normal queue integration waits for issue 692 initial benchmark/integration"
+  ],
+  "next_action": "Open source PR, retain actual hosted CI logs, request exact-head independent review, then coordinate normal queue",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
