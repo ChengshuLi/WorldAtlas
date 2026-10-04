@@ -2,6 +2,7 @@ import {hydrateMapSnapshotPage} from './map-snapshot-format.js';
 import {loadHostedTemporalGeography} from './hosted-temporal-client.js';
 import {mergeHostedTemporalHistory} from './hosted-temporal-geography.js';
 import {decodeReferences,decodeReferenceContext} from './reference-records.js';
+import {referenceContextByLocation} from './reference-context.js';
 import {preparedEvidencePartsAt,selectPreparedEvidence,verifyPreparedEvidencePart,verifyPreparedEvidenceIndexBytes,mergePreparedEvidence} from './prepared-evidence.js';
 import {decodeDerived} from './derived-records.js';
 import {runtimeOwnershipBucket,runtimeOwnershipData} from './runtime-ownership.js';
@@ -27,8 +28,8 @@ async function loadPreparedEvidence(year,examples,signal){
  return selectPreparedEvidence(index,parts,year,{examples,expected:preparedEvidenceProof});
 }
 async function loadReferenceAttributes(year,signal){
- referenceAttributeRequest ||= readJSON("./reference-attributes/index.json").then(async index=>{const parts=await Promise.all(index.parts.map(p=>readJSON(`./reference-attributes/${p}`)));return {index,parts,referenceBaselines:decodeReferenceContext(parts,index)};}).catch(error=>{referenceAttributeRequest=null;throw error;});
- const {index,parts,referenceBaselines}=await referenceAttributeRequest;signal?.throwIfAborted();return {records:decodeReferences(parts,index,year),referenceBaselines};
+ referenceAttributeRequest ||= readJSON("./reference-attributes/index.json").then(async index=>{const parts=await Promise.all(index.parts.map(p=>readJSON(`./reference-attributes/${p}`)));const referenceBaselines=decodeReferenceContext(parts,index);return {index,parts,referenceBaselines,referenceContexts:referenceContextByLocation(referenceBaselines)};}).catch(error=>{referenceAttributeRequest=null;throw error;});
+ const {index,parts,referenceBaselines,referenceContexts}=await referenceAttributeRequest;signal?.throwIfAborted();return {records:decodeReferences(parts,index,year),referenceBaselines,referenceContexts};
 }
 
 async function loadOwnershipHistory(year,signal){
@@ -136,6 +137,8 @@ export function selectRecords(records, year, examples) {
 }
 
 export async function loadGeography() {
+  // Reference presentation context belongs to this loaded asset generation.
+  referenceAttributeRequest=null;
   const data=await readJSON(staticAtlas ? './atlas-geography.json' : '/api/geography');
   if(data.parts){const [features,ownership]=await Promise.all([Promise.all(data.parts.map(part=>readJSON(`./${part}`))).then(parts=>parts.flat()),data.pixelMap?loadOwnershipAssets(data.pixelMap):null]);data.features=features;data.ownership=ownership;}
   if(data.entityParts)data.temporal.entities=(await Promise.all(data.entityParts.map(p=>readJSON(`./${p}`)))).flat();
@@ -162,7 +165,7 @@ export async function loadSnapshot(year, examples, signal) {
   const evidenceUnavailable=hostedDatabase&&!hostedMap.retirementAuthority;
   const merged=evidenceUnavailable?{records:[],names:[]}:mergePreparedEvidence(hosted.records,temporal_history.records,evidence,{retirements:retirements.records});
   const temporalHistory=hostedMap.temporalGeography?mergeHostedTemporalHistory([...referenceTemporalHistory,...merged.names],hostedMap.temporalGeography.combinedSnapshot,{complete:true,year,examples,expectedGeography}):merged.names;
-  return { year,evidenceUnavailable,referenceBaselines:references.referenceBaselines, temporal_history:temporalHistory, temporalHistoryComplete:Boolean(hostedMap.temporalGeography), storage:hostedDatabase?{available:hosted.available&&temporal_history.available&&retirements.available,stale:Boolean(hostedMap.stale),cached_revision:hostedMap.cached_revision??null,...(!hosted.available?{reason:hostedMap.stale?'Historical database unavailable. Showing the last complete cached content snapshot for this year; it may be outdated. Select the year again to retry.':hostedMap.unstable?'Historical content changed during loading. Dated values are unavailable until a consistent snapshot can be read. Select the year again to retry.':'Historical database unavailable. Dated values are unavailable because withdrawals could not be verified. Geography remains browsable. Select the year again to retry.'}:{})}:null, states:evidenceUnavailable?[]:selectRecords(history.states, year, examples), boundaries: selectRecords(history.boundaries, year, examples), attributes:evidenceUnavailable?[]:mergePreparedEvidence([...merged.records,...(history.attributes||[]).filter(r=>r.valid_from<=year&&r.valid_to>year&&(!r.is_example||examples))],[],{records:[...derived,...references.records],names:[]},{retirements:retirements.records}).records,polities:[] };
+  return { year,evidenceUnavailable,referenceBaselines:references.referenceBaselines, referenceContexts:references.referenceContexts, temporal_history:temporalHistory, temporalHistoryComplete:Boolean(hostedMap.temporalGeography), storage:hostedDatabase?{available:hosted.available&&temporal_history.available&&retirements.available,stale:Boolean(hostedMap.stale),cached_revision:hostedMap.cached_revision??null,...(!hosted.available?{reason:hostedMap.stale?'Historical database unavailable. Showing the last complete cached content snapshot for this year; it may be outdated. Select the year again to retry.':hostedMap.unstable?'Historical content changed during loading. Dated values are unavailable until a consistent snapshot can be read. Select the year again to retry.':'Historical database unavailable. Dated values are unavailable because withdrawals could not be verified. Geography remains browsable. Select the year again to retry.'}:{})}:null, states:evidenceUnavailable?[]:selectRecords(history.states, year, examples), boundaries: selectRecords(history.boundaries, year, examples), attributes:evidenceUnavailable?[]:mergePreparedEvidence([...merged.records,...(history.attributes||[]).filter(r=>r.valid_from<=year&&r.valid_to>year&&(!r.is_example||examples))],[],{records:[...derived,...references.records],names:[]},{retirements:retirements.records}).records,polities:[] };
 }
 
 export async function ensureGeometry(data,signal){

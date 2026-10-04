@@ -1,0 +1,658 @@
+{
+  "version": 1,
+  "scope": "complete scalar resolver output parity on committed atlas IDs/reference/ownership inputs, plus retained actual scalar snapshot claims; not geographical approval or production timing",
+  "baseline_commit": "f3263796efccac63dd20296130aeb176323d38ea",
+  "baseline_attributes_sha256": "bfe70437bfc9977e42dcb71bdcd41459d8b2cc5020415f6caf20d639bcc4ee00",
+  "candidate_attributes_sha256": "3b46c712e461c67338a28cb6d8bf90bddb1b07f7084f5f3bc26d7b04b1954ec8",
+  "source_inputs": [
+    {
+      "path": "data/reference-attributes/index.json",
+      "bytes": 36427,
+      "sha256": "6b9c18759b6043e07a663abcde6fd28376834916f610d0534af70e50b804c87d"
+    },
+    {
+      "path": "data/reference-attributes/compact-0.json.gz",
+      "bytes": 52304,
+      "sha256": "3d023a4c06ac892b698a9a2ee8230bdf516f9357e25d1b08b4bde4793f068d7a"
+    },
+    {
+      "path": "data/reference-attributes/compact-1.json.gz",
+      "bytes": 42408,
+      "sha256": "65634ae11a8303597573904e34b16d45489246c74ab53bd8934d37f34b64b996"
+    },
+    {
+      "path": "data/reference-attributes/compact-2.json.gz",
+      "bytes": 47474,
+      "sha256": "274fc870d0ff6a9af2fe8d496d716dedf9f0eb326940143a73000538a6dd1e09"
+    },
+    {
+      "path": "data/reference-attributes/compact-3.json.gz",
+      "bytes": 44890,
+      "sha256": "423f23ede0fea7669e23f3b2f887e72bc2bec9ca48f4aa838f4aa0300f6c8311"
+    },
+    {
+      "path": "data/reference-attributes/compact-4.json.gz",
+      "bytes": 36902,
+      "sha256": "9e0b341ad1562b37c982a572d316f3ac1b1c0b8a94a07a07af30bcafd7f8393f"
+    },
+    {
+      "path": "data/reference-attributes/compact-5.json.gz",
+      "bytes": 49468,
+      "sha256": "fa0f15fbac547b883f675570f0bbe82de37fceac0cc76a7713fc15b5e4e87fe3"
+    },
+    {
+      "path": "data/reference-attributes/compact-6.json.gz",
+      "bytes": 41401,
+      "sha256": "04066a1d908658482ed7a75086a039e85c50ca9a19c26cb5791c1c6ec7306dfa"
+    },
+    {
+      "path": "data/reference-attributes/compact-7.json.gz",
+      "bytes": 37822,
+      "sha256": "86decf42e4f9022d05145a227d515eae1d8315ff9df342100e806f347615a2fc"
+    },
+    {
+      "path": "data/reference-attributes/compact-8.json.gz",
+      "bytes": 48498,
+      "sha256": "85915c47408d7bcee856821515f14bd2692deb82c929a00f57802a0f62f0a314"
+    },
+    {
+      "path": "data/reference-attributes/compact-9.json.gz",
+      "bytes": 47043,
+      "sha256": "33ccc3fe98fbe57f9de5266302edc72049da7a4ddf8545e2b1d229cc7a077384"
+    },
+    {
+      "path": "data/reference-attributes/compact-10.json.gz",
+      "bytes": 48732,
+      "sha256": "d896f3dd81cecc83a12b5d3ed44063d6872ca3bf11718ebb8a6d552283f6c067"
+    },
+    {
+      "path": "data/reference-attributes/compact-11.json.gz",
+      "bytes": 47618,
+      "sha256": "736f6b16a0c175b00418c257becd57348967019b4ee24cc7b274c2f377537b45"
+    },
+    {
+      "path": "data/reference-attributes/compact-12.json.gz",
+      "bytes": 49595,
+      "sha256": "32a641942d64e27dab72587a3e44ca6ae7929c3df16933e0765c151bb0bfcacf"
+    },
+    {
+      "path": "data/reference-attributes/compact-13.json.gz",
+      "bytes": 49970,
+      "sha256": "fc6158b53a8e6e92a054a3882689c9498858f36073be8b87de0ba6f59f0a1cf2"
+    },
+    {
+      "path": "data/reference-attributes/compact-14.json.gz",
+      "bytes": 54081,
+      "sha256": "957096607d517a5037cbf808e1b3409357550465eb8d34f530da0c88789dacb5"
+    },
+    {
+      "path": "data/reference-attributes/compact-15.json.gz",
+      "bytes": 51441,
+      "sha256": "f119bde0fa86b1af2ddfda604b09d5c6e3a396e3a90a66fedc2cf74deae19b7a"
+    },
+    {
+      "path": "data/reference-attributes/compact-16.json.gz",
+      "bytes": 36619,
+      "sha256": "358780dc62f901994538f92652f44212fa84bf4e986c2fbb8aac46d052d20cb1"
+    },
+    {
+      "path": "data/reference-attributes/compact-17.json.gz",
+      "bytes": 50218,
+      "sha256": "e1e4743c225abf03397ead47fbaebb5ed1d1a5b247b6f46122a30306c0ebdc31"
+    },
+    {
+      "path": "data/reference-attributes/compact-18.json.gz",
+      "bytes": 46722,
+      "sha256": "b0ee9fa9d5b337140d3afd9978bec709046ba60555e84a9efe9547f1c9d23af6"
+    },
+    {
+      "path": "data/reference-attributes/compact-19.json.gz",
+      "bytes": 40448,
+      "sha256": "9c11cc1818d60c9577b6fde8a148e2d8857a2c7f47ae469dd9ec77430b7fecdd"
+    },
+    {
+      "path": "data/reference-attributes/compact-20.json.gz",
+      "bytes": 36584,
+      "sha256": "1eb1540f67866889a4c189ab8097e388b36846bac507d7e7ef5d4b48aa97416a"
+    },
+    {
+      "path": "data/reference-attributes/compact-21.json.gz",
+      "bytes": 38184,
+      "sha256": "d7d192c1078578c27913c3e6d2be1583030884b7214173c5f8dd20fc7f599c84"
+    },
+    {
+      "path": "data/reference-attributes/compact-22.json.gz",
+      "bytes": 39273,
+      "sha256": "2ebcc4eccfdc5d59345e55c2969606c4a84ca2b25b58d02df70e3c7799f7e75a"
+    },
+    {
+      "path": "data/reference-attributes/compact-23.json.gz",
+      "bytes": 39347,
+      "sha256": "27b298ff58fac13afadf1130a2fa02135af5ccd3ba3f63ac93b7a62635a4bb3c"
+    },
+    {
+      "path": "data/reference-attributes/compact-24.json.gz",
+      "bytes": 53220,
+      "sha256": "35bd34007a3da56979539376729e3784edcd3410a4291833079c62e2e3c8938b"
+    },
+    {
+      "path": "data/reference-attributes/compact-25.json.gz",
+      "bytes": 34657,
+      "sha256": "c65715cf1b6ded86e07a5ddc15a60665f271a41f127bbfbf7690919893dcb7a0"
+    },
+    {
+      "path": "data/reference-attributes/compact-26.json.gz",
+      "bytes": 40624,
+      "sha256": "70c7b480a269ebf09af85ed20cfcaae28dec1f5b439f83c53ca3864ac611b5b7"
+    },
+    {
+      "path": "data/reference-attributes/compact-27.json.gz",
+      "bytes": 43833,
+      "sha256": "3b7217b1a5356c632714d6c21391d43255b106f92a70badebfaddd061e060b65"
+    },
+    {
+      "path": "data/reference-attributes/compact-28.json.gz",
+      "bytes": 49432,
+      "sha256": "8f6f5421ac007a34146a1feabb3aa7dc399d62561ef6d4d263d3160240a7918a"
+    },
+    {
+      "path": "data/reference-attributes/compact-29.json.gz",
+      "bytes": 47020,
+      "sha256": "c07422a627f0d0e863be64f1bc155f454323209ba028b74a23e544a9b83fb08f"
+    },
+    {
+      "path": "data/reference-attributes/compact-30.json.gz",
+      "bytes": 35721,
+      "sha256": "7fadf480b305f3c4593212fdbf47786b419daaa1c19055d2356449f474dae965"
+    },
+    {
+      "path": "data/reference-attributes/compact-31.json.gz",
+      "bytes": 30037,
+      "sha256": "7952a14a7fef31bfa37312d73c7635c9394417bec165bdb4ca08f839e006e46c"
+    },
+    {
+      "path": "data/reference-attributes/compact-32.json.gz",
+      "bytes": 29397,
+      "sha256": "d05be7f91336ff492acf67dd9e441d358c39a3e377787e45172e343209119bf8"
+    },
+    {
+      "path": "data/reference-attributes/compact-33.json.gz",
+      "bytes": 436,
+      "sha256": "55b18352621677fda5d2756c60f5d18cd29081214b07570d158d0dc65d68dbe1"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-0.json.gz",
+      "bytes": 21742,
+      "sha256": "5e359b2ea86dbf7e9184eb1c25d3ec396753d452b720eb27ab205a2ab200fbda"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-1.json.gz",
+      "bytes": 22268,
+      "sha256": "7b0c46fae23ab2f38c422fe15c68e7fa286aa2cee7ba5d0c5f8d146d53d904c4"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-2.json.gz",
+      "bytes": 21272,
+      "sha256": "9dc279aa6ce2e60b7f0ade8c3870ab34a187f289b7d57dca6e69494516e181e1"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-3.json.gz",
+      "bytes": 20169,
+      "sha256": "1392d2fd98d5744b98a10c2f92cfc88c87becf63c39f52f02ad615e8943e22cb"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-4.json.gz",
+      "bytes": 20550,
+      "sha256": "0ae68d5f5d59dd1e4eb437a3825375f7886b40000a7765f217435aba1391357d"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-5.json.gz",
+      "bytes": 20439,
+      "sha256": "573f12f6237990bf3e1535bf1f6517bb578bf7b67a8a33f9433f0554c871b2f2"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-6.json.gz",
+      "bytes": 20755,
+      "sha256": "4dee430fceb9f17d90f5e17b3ebb5107d31aa8a97aef85f84b13d5f51c7bbec3"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-7.json.gz",
+      "bytes": 20514,
+      "sha256": "02097ab2a88cd8dfd9eec7fd93642ad48e0ac00c95a077bee2f312356cd53164"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-8.json.gz",
+      "bytes": 20702,
+      "sha256": "1be53886d0a5c741596cdcc40f1062739f055967b58ecf1cc3bd04d34effe2c3"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-9.json.gz",
+      "bytes": 21074,
+      "sha256": "48802a3006eb9cacd2ade93a18a25916a4b48bb0de67dfa51511a2051b555098"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-10.json.gz",
+      "bytes": 20523,
+      "sha256": "fb3a87caaec63af39fd247e8fff6b0a064a69621eb8d85180d44f59784e4137f"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-11.json.gz",
+      "bytes": 20415,
+      "sha256": "76130ec8f85654a5bd971021b24520bd4e55c93bde6717c96efb63c4331c7779"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-12.json.gz",
+      "bytes": 20496,
+      "sha256": "e0c4784170ff9afb46ca537c0d457dee5a561277a3b444f5723f67f23291e782"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-13.json.gz",
+      "bytes": 21256,
+      "sha256": "cc10c22c13f5c602d32ad5d2caf1e872d7df7e41d27b7793257d0068a44e292a"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-14.json.gz",
+      "bytes": 20051,
+      "sha256": "c717c51aef1cd3e0e7b2a1e5da43f29091884ac05f672195703324195b5b6a6a"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-15.json.gz",
+      "bytes": 20328,
+      "sha256": "893053ff0dc9bb3726b031a31aac88c38f2e5fa025afe69f67f680d344b60e4a"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-16.json.gz",
+      "bytes": 20736,
+      "sha256": "7d6af1bffc20fbbbba6ab738cda9a8c26a1e80229928ac8c2cfe2ff96c2c871c"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-17.json.gz",
+      "bytes": 20399,
+      "sha256": "8698dfd79b44ad4e36bb66d04078b6be808bc2fd36051fab879a609697acbc84"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-18.json.gz",
+      "bytes": 20297,
+      "sha256": "301e8fde52dc6d1a59228c7f7d7ccc7e951a127833b954268bf8b420ded89153"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-19.json.gz",
+      "bytes": 20717,
+      "sha256": "8980a9294640713b63380e58228a34e25506965a63868ab481ed4e0f6734e4dd"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-20.json.gz",
+      "bytes": 21002,
+      "sha256": "8adce63f744e122a38913b1b1c4d1189062eec00bf6276232af19f1d50e067c3"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-21.json.gz",
+      "bytes": 21060,
+      "sha256": "50ca082298b312a0ee16728b02dd02690508b490af08dd368e1eb3d6064c10c9"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-22.json.gz",
+      "bytes": 20748,
+      "sha256": "276797dd735deecb628ac1c3f9864d2219940dc9826bf3b09920de9c9ddbc3ff"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-23.json.gz",
+      "bytes": 20509,
+      "sha256": "24c7339bc09e096d7088781431cacc15049b03ba08179de2ff8bfb34439d6109"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-24.json.gz",
+      "bytes": 20317,
+      "sha256": "da69a36029546fa5b521f21f68ea67851a5ca3614eea9ffce7560e19f9b1f5ab"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-25.json.gz",
+      "bytes": 20754,
+      "sha256": "3bd660ff000014528ebf0e8d5c657ff6a57c3350a4aaa3369e4f3b4357f0ab77"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-26.json.gz",
+      "bytes": 20380,
+      "sha256": "ddad77da3ef8545eda8bef0a0446b07e5f5eb275a97e984517913a7678d51335"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-27.json.gz",
+      "bytes": 20409,
+      "sha256": "8a4fbd935990130a35d38b2e3313e275fbb5381400979bf347c544d616b7a00f"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-28.json.gz",
+      "bytes": 18966,
+      "sha256": "fc8aed464d4952c82d8d16e538af3a60ddecf797b8f1f5a3b2ebae7db6183ce4"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-29.json.gz",
+      "bytes": 15702,
+      "sha256": "8f8e19bd508bc7311fef78bce3623b0e98c5c7f597ab2659f60be03e0d8d065b"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-30.json.gz",
+      "bytes": 15774,
+      "sha256": "46cb6b9b8bc677553a9f60c70b233a3747dc8ce3cf3c0b1c9fc6ad3fe6482354"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-31.json.gz",
+      "bytes": 18883,
+      "sha256": "21a36aeec4f12ccb8e6a326dc53a4a77fa9e1ebafef61f439226b4d4caef40cb"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-32.json.gz",
+      "bytes": 18823,
+      "sha256": "0d5f7b59e5337ff829ebd1b19100a871ce05357f8c55e1384c1f55901ccf5843"
+    },
+    {
+      "path": "data/reference-attributes/topography-reference-part-33.json.gz",
+      "bytes": 1115,
+      "sha256": "9793b93e35cb3c199d105049c93da066a37eb8fe7e533c14242076b87386c5bd"
+    },
+    {
+      "path": "data/reference-attributes/incremental-delta-0.json.gz",
+      "bytes": 1193,
+      "sha256": "e061aeba80b60b707cbe2da9fc6b631c22f0e32e5ab5f231a8ee4aa4744f3962"
+    },
+    {
+      "path": "data/reference-attributes/incremental-f44affea3bf822e7-delta-0.json.gz",
+      "bytes": 1267,
+      "sha256": "60704c6ffbb0f3f874609abf0b1a4960dd7d3906f0e1df1992bfb68b3ff11e18"
+    },
+    {
+      "path": "data/reference-attributes/incremental-e08d67bc39bde0e1-delta-0.json.gz",
+      "bytes": 151,
+      "sha256": "a0cbd7c09f4486e9263ced9b1685cf1575f5472393e853ff7f858315f2f5553c"
+    },
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "path": "data/geography/part-0.json",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "path": "data/geography/part-1.json",
+      "bytes": 8060108,
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+    },
+    {
+      "path": "data/geography/part-2.json",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "path": "data/geography/part-3.json",
+      "bytes": 5153118,
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    {
+      "path": "data/geography/part-4.json",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    {
+      "path": "data/geography/part-5.json",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    },
+    {
+      "path": "data/geography/part-6.json",
+      "bytes": 4607953,
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+    },
+    {
+      "path": "data/geography/part-7.json",
+      "bytes": 4257402,
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+    },
+    {
+      "path": "data/geography/part-8.json",
+      "bytes": 5097739,
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    {
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    {
+      "path": "data/geography/part-10.json",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    {
+      "path": "data/geography/part-11.json",
+      "bytes": 5131824,
+      "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+    },
+    {
+      "path": "data/geography/part-12.json",
+      "bytes": 4489493,
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+    },
+    {
+      "path": "data/geography/part-13.json",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "path": "data/geography/part-14.json",
+      "bytes": 4355198,
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+    },
+    {
+      "path": "data/geography/part-15.json",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "path": "data/geography/part-16.json",
+      "bytes": 5213846,
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+    },
+    {
+      "path": "data/geography/part-17.json",
+      "bytes": 4945828,
+      "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+    },
+    {
+      "path": "data/geography/part-18.json",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "path": "data/geography/part-19.json",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "path": "data/geography/part-20.json",
+      "bytes": 6570767,
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "path": "data/geography/part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "path": "data/geography/part-22.json",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "path": "data/geography/part-23.json",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    {
+      "path": "data/geography/part-24.json",
+      "bytes": 4816899,
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "path": "data/geography/part-25.json",
+      "bytes": 4525239,
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    {
+      "path": "data/geography/part-26.json",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "path": "data/geography/part-27.json",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "path": "data/geography/part-30.json",
+      "bytes": 11979437,
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+    },
+    {
+      "path": "data/geography/part-31.json",
+      "bytes": 10086485,
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+    },
+    {
+      "path": "data/geography/part-32.json",
+      "bytes": 10211739,
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+    },
+    {
+      "path": "data/geography/part-33.json",
+      "bytes": 607984,
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+    },
+    {
+      "path": "data/geography/source-restoration-additions.json",
+      "bytes": 1573576,
+      "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+    },
+    {
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "bytes": 11393,
+      "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+    },
+    {
+      "path": "data/ownership-runtime/index.json",
+      "bytes": 778228,
+      "sha256": "c44ed2e75247bd11a143b6385e61d576588e0b00502f68345a1c648f0c0e1631"
+    },
+    {
+      "path": "data/engineering/populated-navigation-20261004-a9c2/snapshot-before-20261004/snapshot-2020.json",
+      "bytes": 2864137,
+      "sha256": "1fbeeac726c0aaeb95a33ac3e33ca2b22bca5b9072062f53010133a6fb8ed5b9"
+    },
+    {
+      "path": "data/ownership-runtime/century-2001-ad.json.gz",
+      "bytes": 765665,
+      "sha256": "280be43bf612313107a1d50e0e591f10289b3aee4fecff4636d31d294baf7376"
+    },
+    {
+      "path": "data/engineering/populated-navigation-20261004-a9c2/snapshot-before-20261004/snapshot-2021.json",
+      "bytes": 779218,
+      "sha256": "64c2f1ca3c217d4c12088a6136d5b7f92cb56c9d773b31b5968239e9805e520f"
+    },
+    {
+      "path": "data/engineering/populated-navigation-20261004-a9c2/snapshot-before-20261004/snapshot-1900.json",
+      "bytes": 1100,
+      "sha256": "f24f1e4cc027126c4a8df203eb0e15dd305ade6b0b2131df257c53dd31f0cc4f"
+    },
+    {
+      "path": "data/ownership-runtime/century-1801-ad.json.gz",
+      "bytes": 3001168,
+      "sha256": "ff3141cadb5515780136f1951bd1c18b460ad9e235b74dfd2c988bf31ff2118e"
+    },
+    {
+      "path": "data/ownership-runtime/century-100-bc.json.gz",
+      "bytes": 559770,
+      "sha256": "7b2838585ba0ea516d8fb3a7dbc7a7a7569e843132d10b3d912355b36ed176f6"
+    },
+    {
+      "path": "data/ownership-runtime/century-1-ad.json.gz",
+      "bytes": 416986,
+      "sha256": "47f03660d19c5637113465fed6256e0fb0096bc7b4b666aa0e7fec90a066ec47"
+    }
+  ],
+  "results": [
+    {
+      "year": 2020,
+      "locations": 49625,
+      "before_ms": 538.1174020000003,
+      "candidate_ms": 255.96997599999986,
+      "before_sha256": "0c0aa187631d77be9cdc9cc1b9d4ac887cdc594b04dde44bd519c45729d7e227",
+      "candidate_sha256": "0c0aa187631d77be9cdc9cc1b9d4ac887cdc594b04dde44bd519c45729d7e227",
+      "outcome": "passed",
+      "scalar_snapshot_revision": 3051
+    },
+    {
+      "year": 2021,
+      "locations": 49625,
+      "before_ms": 405.57798300000013,
+      "candidate_ms": 190.26375999999982,
+      "before_sha256": "0df2e690929d7f770c69c9ee5cb2d90d2de8d939b708b1614dc7e9ce07a3705f",
+      "candidate_sha256": "0df2e690929d7f770c69c9ee5cb2d90d2de8d939b708b1614dc7e9ce07a3705f",
+      "outcome": "passed",
+      "scalar_snapshot_revision": 3051
+    },
+    {
+      "year": 1900,
+      "locations": 49625,
+      "before_ms": 416.64449500000046,
+      "candidate_ms": 447.43693800000074,
+      "before_sha256": "17664ff6cbdda4227c8c1c5d705f1437963509104774a88dae2c9c94c4f1c44d",
+      "candidate_sha256": "17664ff6cbdda4227c8c1c5d705f1437963509104774a88dae2c9c94c4f1c44d",
+      "outcome": "passed",
+      "scalar_snapshot_revision": 3051
+    },
+    {
+      "year": 2026,
+      "locations": 49625,
+      "before_ms": 794.7246839999989,
+      "candidate_ms": 343.3183420000005,
+      "before_sha256": "7863d37bc9ed7ceedb1b08a5d9f785174588078d32f9fbbc7c7df2e46d63850e",
+      "candidate_sha256": "7863d37bc9ed7ceedb1b08a5d9f785174588078d32f9fbbc7c7df2e46d63850e",
+      "outcome": "passed",
+      "scalar_snapshot_revision": null
+    },
+    {
+      "year": -1,
+      "locations": 49625,
+      "before_ms": 355.94627000000037,
+      "candidate_ms": 170.6705469999979,
+      "before_sha256": "a6b7062ed6e29e8beaa51ee531f48185c934ceb2ab19741bedd1bff66f53687f",
+      "candidate_sha256": "a6b7062ed6e29e8beaa51ee531f48185c934ceb2ab19741bedd1bff66f53687f",
+      "outcome": "passed",
+      "scalar_snapshot_revision": null
+    },
+    {
+      "year": 1,
+      "locations": 49625,
+      "before_ms": 331.43808499999795,
+      "candidate_ms": 168.4453530000028,
+      "before_sha256": "a852944a88123e2b3126fff9ec205195de5f56d5f7d8694bda5f46369e4828aa",
+      "candidate_sha256": "a852944a88123e2b3126fff9ec205195de5f56d5f7d8694bda5f46369e4828aa",
+      "outcome": "passed",
+      "scalar_snapshot_revision": null
+    }
+  ],
+  "outcome": "passed",
+  "publication_verified": false
+}
