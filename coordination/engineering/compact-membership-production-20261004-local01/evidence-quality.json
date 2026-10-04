@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "issue": 783,
+  "lane": "engineering",
+  "worker_id": "engineering-compact-memberships-20261004-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "0b48433c170957f3e7fd6acb7aa3a15d80c8419f",
+    "files": [
+      {
+        "path": "postgres/schema.sql",
+        "bytes": 51470,
+        "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 31085,
+        "sha256": "c090de880981452fde8c6dfd4c36cde236887034e8fb8cb6da7e67dc13a02db6",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "scripts/compact-membership-storage.mjs",
+        "bytes": 8435,
+        "sha256": "fa43ad7cbd633ecc8f29213c2572da6b540c681db24d864357b30c757f8766df",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "postgres/membership-storage-v1.sql",
+        "bytes": 10819,
+        "sha256": "01d554a15f719eb3fb451f1a72fa52ca423cf0df138268c226f33bd073470b0f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "hosted/membership-storage-pins.js",
+        "bytes": 1020,
+        "sha256": "c8322be84592c4b2c16d3bc7fcb89eaedac6a3edfb028110353a5cef5ee06e2a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 245755,
+        "sha256": "47aa40b82e7f6b225a6567d28a0427df39d415dcf86df1d26f6d32ab84fd7a12",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 35723,
+      "sha256": "cb8ffe48dee31a77f82ff4ff3013761c54ad1b92a1db4d570be5016211375e57",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/compact-membership-storage.mjs",
+      "bytes": 9350,
+      "sha256": "4ce43a16c639fe2e14176de73542f200dd57fe9b364f4601cdcc5da3d2c0e475",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-compact-membership-production.mjs",
+      "bytes": 19180,
+      "sha256": "e20dbbab7bcdaede0025f27379721296ff36a72f4bd44c51112eb0d990d429a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/compact-membership-production.yml",
+      "bytes": 1682,
+      "sha256": "86e4570c8218300cb0bdbab5ea8882e8abd0e16088f86d06fae47f5cc5650b4f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-membership-production.test.mjs",
+      "bytes": 7437,
+      "sha256": "e145200bb29ffb149162b1a15a96a4442300e280f1f7c7a17ce6bf0daf1623a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-membership-production-20261004-local01/README.md",
+      "bytes": 5199,
+      "sha256": "fd8f0cef5361b3a824ff5ee23d91593abbf24dfe9b88a7ac040610231e5ed267",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-membership-production-20261004-local01/prepare-evidence.mjs",
+      "bytes": 2954,
+      "sha256": "ce1fb83aea6a13c0f2e02438d57963033945cf88e8d8c07021b2f0cb32c45526",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "native-owner-maintenance",
+      "kind": "code",
+      "description": "Main-only reviewed owner windows, unchanged-source native recovery, streamed bounded original SQL restore, explicit publisher identity on reviewed children, shared advisory serialization and phased compact maintenance. Existing full-size copy/parity proof is retained on PR787; this PR adds server-side dispatch of the same bounded copier and native/live paths. Production proof requires actual successful manual workflows and served receipts.",
+      "software": "Node24, pinned PostgreSQL18 native container and locked Neon serverless driver",
+      "units": "No new physical benchmark or native production capacity claim before actual execution"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "status": "modified",
+      "original_sha256": "c090de880981452fde8c6dfd4c36cde236887034e8fb8cb6da7e67dc13a02db6"
+    },
+    {
+      "path": "scripts/compact-membership-storage.mjs",
+      "status": "modified",
+      "original_sha256": "fa43ad7cbd633ecc8f29213c2572da6b540c681db24d864357b30c757f8766df"
+    },
+    {
+      "path": "scripts/run-compact-membership-production.mjs",
+      "status": "added"
+    },
+    {
+      "path": ".github/workflows/compact-membership-production.yml",
+      "status": "added"
+    },
+    {
+      "path": "test/compact-membership-production.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-membership-production-20261004-local01/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-membership-production-20261004-local01/prepare-evidence.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-membership-production-20261004-local01/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test test/current-postgres-recovery.test.mjs test/compact-membership-production.test.mjs test/compact-membership-storage.test.mjs",
+    "node coordination/engineering/compact-membership-production-20261004-local01/prepare-evidence.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/compact-membership-production-20261004-local01/evidence-quality.json"
+  ]
+}
