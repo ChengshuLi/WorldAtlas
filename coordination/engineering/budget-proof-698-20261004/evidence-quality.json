@@ -45,38 +45,405 @@
   "outputs": [
     {
       "path": "coordination/engineering/budget-proof-698-20261004/README.md",
-      "bytes": 719,
-      "sha256": "2567bbe565f236faf9ce27dabfe772161d6c4767eb38945ab710b2ed391dd8d3",
+      "bytes": 1849,
+      "sha256": "d5b599ab21ba93df41d7b72f7a6477523b5a9a6f759e479a244355d91a07b456",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/before-package.json",
+      "bytes": 3402,
+      "sha256": "c67143179920ea1efaa8515c33cfb5c04e8f8d5975253baf28b51c04cdd56ae9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-classify.json",
+      "bytes": 2432,
+      "sha256": "40061b1047a248065bd96fb706447500c06c969885f26181d432b194892c0d52",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-decision.json",
+      "bytes": 283,
+      "sha256": "2566997e758dd6f3bb369274c4639e4a3ca0e0aee4d0562bdfdb1b8dcc42f7ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-package.json",
+      "bytes": 3543,
+      "sha256": "59d61d869fe48df2a630d86c62113a0ee1d7181863c4f775d926591244618732",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-package.log",
+      "bytes": 67903,
+      "sha256": "1036d58e7a2000fef2362688fb3f4f179ef6eaeb81731d0700dc717c308fd4a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-run.json",
+      "bytes": 12824,
+      "sha256": "4917f8796492b0ae7629bd522ebd19c88dd1872950c30305ddfb152903e54602",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-scope.json",
+      "bytes": 283,
+      "sha256": "2566997e758dd6f3bb369274c4639e4a3ca0e0aee4d0562bdfdb1b8dcc42f7ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-accounting.json",
+      "bytes": 122334,
+      "sha256": "962a93e8d54a8a849b0a7780b0984464a7da8cb289ae6afa9e655703d6d7c8c8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-classify.json",
+      "bytes": 2441,
+      "sha256": "744216b7c8689325b259f8740cfd59e2d0075302504ebfdfe09d601e9c4d44c0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-package.json",
+      "bytes": 3759,
+      "sha256": "399e5ef77930d5bb78f2f80d6c3c6ac5f40fbe375c3cd31ada155a0123a17c62",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-package.log",
+      "bytes": 100872,
+      "sha256": "ed94343c604e2e7480942cc0f6ac23341ee1cd8d6c5465ba90bc904bf937c89c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-run.json",
+      "bytes": 12863,
+      "sha256": "9066d56354cdeac38996b661fa6f919ff4d000dc861da5b54bcd2a0d987bae8c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-scope.json",
+      "bytes": 94,
+      "sha256": "3e9aa2b0ea5467f2361c46220b312b51135d9ac8a825440034fb330653fcca58",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement-controls.txt",
+      "bytes": 3631,
+      "sha256": "b06af7716a74d857e2659a75d42c2a91a6b56dbd938b4c24720a34cc820a5200",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "bytes": 1908,
+      "sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/negative-control.json",
+      "bytes": 197,
+      "sha256": "c511093e0d061aee55024bc4e0c044990867b2c68572fd16ed8d961a2aa88dd8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/positive-control.json",
+      "bytes": 405,
+      "sha256": "abe06d290bb3d98dc6040dddd3b9b0f19d4596e84a2bb3ac1c99c2b5dec34f87",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/source-queue.json",
+      "bytes": 7099,
+      "sha256": "65d336b2222e1a9f9cbba0e38deea9473196915d785a4c9ebc9fed0b1c100406",
       "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
-      "id": "prepare-hosted-budget-proof",
-      "kind": "code",
-      "description": "Submit only engineering-owned receipt paths to observe the real trusted classifier and retain the observed positive/negative measurement evidence before final review. Current skip measurement is pending.",
-      "software": "GitHub Actions metadata, trusted classifier and Node24 budget unit suite",
-      "units": "whole-file hashes and actual job applicability"
+      "id": "hosted-budget-observation",
+      "kind": "measurement",
+      "description": "Read actual hosted job timestamps and log counts, assert preserved full build and skipped focused installs, then recompute positive and negative duration controls. Final normalqueue and mainpush remain pending.",
+      "software": "Python datetime/json/re, read-only GitHub API and hosted Node24",
+      "units": "seconds, tests, immutable bytes"
     }
   ],
-  "metrics": [],
+  "metrics": [
+    {
+      "id": "before-package-seconds",
+      "value": 147.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "99de9b26d52ae5d3bdc501fe668493e85a4ada34"
+    },
+    {
+      "id": "full-package-seconds",
+      "value": 171.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "f44057a61733792493e70dbda8c439eb42a41ec2"
+    },
+    {
+      "id": "full-package-tests",
+      "value": 10,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "f44057a61733792493e70dbda8c439eb42a41ec2"
+    },
+    {
+      "id": "full-package-pass",
+      "value": 10,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "f44057a61733792493e70dbda8c439eb42a41ec2"
+    },
+    {
+      "id": "full-package-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "f44057a61733792493e70dbda8c439eb42a41ec2"
+    },
+    {
+      "id": "full-package-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "f44057a61733792493e70dbda8c439eb42a41ec2"
+    },
+    {
+      "id": "fast-package-seconds",
+      "value": 9.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "c663b9f455be9d276360f10a1c8247cf6b61b88e"
+    },
+    {
+      "id": "fast-package-tests",
+      "value": 10,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "c663b9f455be9d276360f10a1c8247cf6b61b88e"
+    },
+    {
+      "id": "fast-package-pass",
+      "value": 10,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "c663b9f455be9d276360f10a1c8247cf6b61b88e"
+    },
+    {
+      "id": "fast-package-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "c663b9f455be9d276360f10a1c8247cf6b61b88e"
+    },
+    {
+      "id": "fast-package-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "c663b9f455be9d276360f10a1c8247cf6b61b88e"
+    },
+    {
+      "id": "fast-classify-seconds",
+      "value": 10.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "c663b9f455be9d276360f10a1c8247cf6b61b88e"
+    },
+    {
+      "id": "fast-workflow-observed-elapsed",
+      "value": 27,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "4399ba8eee76c6bff3872b802140a9517b99d74add6f2b7f741a3ce709ab3f4b",
+      "evaluation_commit": "c663b9f455be9d276360f10a1c8247cf6b61b88e"
+    }
+  ],
   "summaries": [],
   "conclusions": [],
   "stages": {
-    "research": "partial",
+    "research": "complete",
     "implementation": "implemented",
     "geographic_approval": "not-requested"
   },
-  "commands": [],
+  "commands": [
+    "python coordination/engineering/budget-proof-698-20261004/measurement-controls.txt"
+  ],
   "change_receipts": [
     {
       "path": "coordination/engineering/budget-proof-698-20261004/README.md",
       "status": "added"
     },
     {
+      "path": "coordination/engineering/budget-proof-698-20261004/before-package.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/budget-proof-698-20261004/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-classify.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-decision.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-package.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-package.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-run.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/fast-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-accounting.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-classify.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-package.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-package.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-run.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/full-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement-controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-proof-698-20261004/source-queue.json",
       "status": "added"
     }
   ],
-  "metric_bindings": []
+  "metric_bindings": [
+    {
+      "metric_id": "before-package-seconds",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/before-package/seconds"
+    },
+    {
+      "metric_id": "full-package-seconds",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/full-package/seconds"
+    },
+    {
+      "metric_id": "full-package-tests",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/full-package/counts/tests"
+    },
+    {
+      "metric_id": "full-package-pass",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/full-package/counts/pass"
+    },
+    {
+      "metric_id": "full-package-fail",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/full-package/counts/fail"
+    },
+    {
+      "metric_id": "full-package-skipped",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/full-package/counts/skipped"
+    },
+    {
+      "metric_id": "fast-package-seconds",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/fast-package/seconds"
+    },
+    {
+      "metric_id": "fast-package-tests",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/fast-package/counts/tests"
+    },
+    {
+      "metric_id": "fast-package-pass",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/fast-package/counts/pass"
+    },
+    {
+      "metric_id": "fast-package-fail",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/fast-package/counts/fail"
+    },
+    {
+      "metric_id": "fast-package-skipped",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/fast-package/counts/skipped"
+    },
+    {
+      "metric_id": "fast-classify-seconds",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/samples/fast-classify/seconds"
+    },
+    {
+      "metric_id": "fast-workflow-observed-elapsed",
+      "path": "coordination/engineering/budget-proof-698-20261004/measurement.json",
+      "json_pointer": "/workflow_observation/observed_elapsed_seconds"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "hosted-budget-observation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/budget-proof-698-20261004/positive-control.json"
+    },
+    {
+      "method_id": "hosted-budget-observation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/budget-proof-698-20261004/negative-control.json"
+    }
+  ]
 }

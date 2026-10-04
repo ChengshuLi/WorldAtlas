@@ -1,5 +1,9 @@
-# Hosted package applicability proof
+# Hosted deployment-budget applicability proof (#698)
 
-This engineering-owned receipt packet exercises the coordination-only path using the classifier already merged through the normal queue. The source full package path passed its real build, archive/reserve accounting and mandatory Node unit controls.
+Source PR701 merged normally at 783a9ad8da59f0781f5907db4825ee9cc1163384; its accepted queue receipt retained here records reuse of successful full integration run37169659323. Only owned engineering receipts change in this proof.
 
-This initial packet has no current skip measurement. Actual hosted coordination classification, narrow checkout, mandatory units and skipped install/build stages will be inspected and retained in immutable raw metadata and measured positive/negative controls before final review. Its own final queue and main-push receipts must be inspected before closing the issue. No application, workflow, data or policy changes are included.
+Actual package baseline job111334071262 took147 seconds. Source full package job111339870719 took171 seconds and retained complete checkout, Node/Python installs, actual build, archive and reserve checks. Owned-proof headc663b9f455be9d276360f10a1c8247cf6b61b88e ran trusted base classification false in10 seconds and narrow package job111341934405 in9 seconds. The observed deployment workflow elapsed27 seconds including scheduling. Both source and focused package jobs passed10 budget/archive tests with zero failures or skips; original real archive/accounting/reserve assertions remain mandatory.
+
+Raw GitHub API metadata and full logs are retained. Execute `python coordination/engineering/budget-proof-698-20261004/measurement-controls.txt` to recompute observations and exercise positive duration and inverted-timestamp rejection controls. Numeric bindings reference frozen archived observations, not this future final head. These single observations on different runners are not a performance guarantee. Package duration excludes classifier/scheduling. Accounting and applicability artifacts were recovered through the connected GitHub API after the CLI artifact download returned HTTP403. Original accounting JSON is preserved and the control checks no violations. The exact printed focused decision is extracted from its retained log.
+
+The final proof queue and actual merged-main push remain pending. Durable actual queue/main-push observations will be added to issue698 after normal merge. No code, data, policy, site or provider changes are included.
