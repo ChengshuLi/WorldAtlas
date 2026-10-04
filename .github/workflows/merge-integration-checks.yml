@@ -73,6 +73,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install Node dependencies
+        if: needs.profile.outputs.profile == 'full'
         run: npm ci --no-audit --no-fund
       - name: Install Python dependencies
         if: needs.profile.outputs.profile == 'full'

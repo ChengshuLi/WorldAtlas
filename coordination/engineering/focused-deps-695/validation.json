@@ -1,0 +1,25 @@
+{
+  "issue": 695,
+  "execution_commit": "9c45497d12d76f472d76b280632b25d1431a0016",
+  "profile": "evidence",
+  "tests": {
+    "total": 102,
+    "passed": 102,
+    "failed": 0,
+    "skipped": 0
+  },
+  "environment": "Clean non-cone sparse checkout, no node_modules in this directory or any ancestor; NODE_PATH explicitly unset. No npm installation performed.",
+  "controls": [
+    "Focused complete proof with no Node-install step accepted",
+    "Focused complete proof with intentionally skipped install step accepted; skipped install is not application coverage",
+    "Full missing/failed/cancelled/skipped Node installation in every shard refuses proof",
+    "Existing head/tree/run/attempt/approved-workflow/shard/step/browser/build/authority controls preserved"
+  ],
+  "limits": [
+    "Local controls use synthetic GitHub API fixtures and never mutate production merge state.",
+    "Local test metrics are archived at the immutable code-only execution commit; later main updates do not recast them as current hosted proof.",
+    "Actual new hosted focused timing and normal queue results remain pending; source uses Refs695.",
+    "Do not merge before issue692 initial full benchmark and normal integration.",
+    "No application dependency removal, geographic approval, live import, deployment or provider/credential changes."
+  ]
+}
