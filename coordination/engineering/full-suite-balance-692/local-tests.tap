@@ -1,0 +1,166 @@
+TAP version 13
+# Subtest: every real full-suite file runs once, with heavy migration tests separate from packaged parity
+ok 1 - every real full-suite file runs once, with heavy migration tests separate from packaged parity
+  ---
+  duration_ms: 3.209957
+  type: 'test'
+  ...
+# Subtest: inserting a new filename cannot move reserved heavy workloads or omit any discovered file
+ok 2 - inserting a new filename cannot move reserved heavy workloads or omit any discovered file
+  ---
+  duration_ms: 0.352713
+  type: 'test'
+  ...
+# Subtest: test-runner edits and renames require actual full-suite validation
+ok 3 - test-runner edits and renames require actual full-suite validation
+  ---
+  duration_ms: 0.293393
+  type: 'test'
+  ...
+# Subtest: successful full and focused workflows prove exact tree and pinned current attempt
+ok 4 - successful full and focused workflows prove exact tree and pinned current attempt
+  ---
+  duration_ms: 4.279181
+  type: 'test'
+  ...
+# Subtest: head metadata without explicit reviewed-head checkout never proves tested tree
+ok 5 - head metadata without explicit reviewed-head checkout never proves tested tree
+  ---
+  duration_ms: 0.322497
+  type: 'test'
+  ...
+# Subtest: different complete tree or modified approved workflow/runner always falls back
+ok 6 - different complete tree or modified approved workflow/runner always falls back
+  ---
+  duration_ms: 0.348976
+  type: 'test'
+  ...
+# Subtest: wrong head/event/repository/PR/path and incomplete or failed run cannot prove coverage
+ok 7 - wrong head/event/repository/PR/path and incomplete or failed run cannot prove coverage
+  ---
+  duration_ms: 1.481577
+  type: 'test'
+  ...
+# Subtest: missing/extra shard and skipped or incomplete required steps never count as successful coverage
+ok 8 - missing/extra shard and skipped or incomplete required steps never count as successful coverage
+  ---
+  duration_ms: 1.221545
+  type: 'test'
+  ...
+# Subtest: final pinned run reread rejects revoked proof
+ok 9 - final pinned run reread rejects revoked proof
+  ---
+  duration_ms: 0.350178
+  type: 'test'
+  ...
+# Subtest: explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact
+ok 10 - explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact
+  ---
+  duration_ms: 0.495778
+  type: 'test'
+  ...
+# Subtest: final proof pins attempt and refuses a later successful rerun or missing/invalid attempt
+ok 11 - final proof pins attempt and refuses a later successful rerun or missing/invalid attempt
+  ---
+  duration_ms: 0.4835
+  type: 'test'
+  ...
+# Subtest: only staging-test shards prepare the immutable migration derivative
+ok 12 - only staging-test shards prepare the immutable migration derivative
+  ---
+  duration_ms: 6.779027
+  type: 'test'
+  ...
+# Subtest: two reviewed PRs sharing a base integrate serially without changing authored head
+ok 13 - two reviewed PRs sharing a base integrate serially without changing authored head
+  ---
+  duration_ms: 4.253813
+  type: 'test'
+  ...
+# Subtest: conflicts and non-conflicting changes to reviewed bytes require intervention
+ok 14 - conflicts and non-conflicting changes to reviewed bytes require intervention
+  ---
+  duration_ms: 0.853268
+  type: 'test'
+  ...
+# Subtest: stale merge object and truncated inventories fail closed
+ok 15 - stale merge object and truncated inventories fail closed
+  ---
+  duration_ms: 0.985348
+  type: 'test'
+  ...
+# Subtest: stale head or review and expired ownership prohibit integration
+ok 16 - stale head or review and expired ownership prohibit integration
+  ---
+  duration_ms: 0.629621
+  type: 'test'
+  ...
+# Subtest: failed or skipped candidate tests never merge an open PR
+ok 17 - failed or skipped candidate tests never merge an open PR
+  ---
+  duration_ms: 0.475508
+  type: 'test'
+  ...
+# Subtest: base advances before or during final validation are retryable without branch updates
+ok 18 - base advances before or during final validation are retryable without branch updates
+  ---
+  duration_ms: 0.652746
+  type: 'test'
+  ...
+# Subtest: latest failed or pending check replaces old success
+ok 19 - latest failed or pending check replaces old success
+  ---
+  duration_ms: 0.190528
+  type: 'test'
+  ...
+# Subtest: workflow separates untrusted candidate tests from write credentials and serializes the lifecycle
+ok 20 - workflow separates untrusted candidate tests from write credentials and serializes the lifecycle
+  ---
+  duration_ms: 0.468327
+  type: 'test'
+  ...
+# Subtest: commit status changing during final review prevents the merge
+ok 21 - commit status changing during final review prevents the merge
+  ---
+  duration_ms: 0.620016
+  type: 'test'
+  ...
+# Subtest: trusted profile uses focused invariants only for isolated evidence and docs
+ok 22 - trusted profile uses focused invariants only for isolated evidence and docs
+  ---
+  duration_ms: 0.289467
+  type: 'test'
+  ...
+# Subtest: parallel full-regression shards cover each unit file once and focused profile retains core gates
+ok 23 - parallel full-regression shards cover each unit file once and focused profile retains core gates
+  ---
+  duration_ms: 4.028343
+  type: 'test'
+  ...
+# Subtest: prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread
+ok 24 - prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread
+  ---
+  duration_ms: 1.731855
+  type: 'test'
+  ...
+# Subtest: failed proof reread and stale main prevent merge despite prior accepted proof
+ok 25 - failed proof reread and stale main prevent merge despite prior accepted proof
+  ---
+  duration_ms: 1.593877
+  type: 'test'
+  ...
+# Subtest: successful rerun after preparation invalidates the pinned attempt and refuses merge
+ok 26 - successful rerun after preparation invalidates the pinned attempt and refuses merge
+  ---
+  duration_ms: 0.836723
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 108.564913

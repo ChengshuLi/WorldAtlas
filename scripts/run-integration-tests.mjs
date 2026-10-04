@@ -6,16 +6,24 @@ import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 
 export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
 
+// Keep measured heavy workloads apart as the discovered inventory grows.
+export function fullRegressionShard(inventory, shard) {
+  const reserved = [...PACKAGED_ASSET_TESTS, 'test/model.test.mjs'];
+  return [
+    ...(shard === 0 ? PACKAGED_ASSET_TESTS : []),
+    ...(shard === 2 ? ['test/model.test.mjs'] : []),
+    ...inventory.filter(name => !reserved.includes(name)).filter((name, index) => index % 3 === shard)
+  ];
+}
+
 export function integrationTestFiles(profile, shard) {
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
   const focused = ['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-client','merge-integration-entrypoint','integration-proof'];
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
-  const files = profile === 'full' ? [
-    ...(shard === 0 ? PACKAGED_ASSET_TESTS : []),
-    ...inventory.filter(name=>!PACKAGED_ASSET_TESTS.includes(name)).filter((name,index)=>index%3===shard)
-  ] : focused.map(name => `test/${name}.test.mjs`);
+  const files = profile === 'full' ? fullRegressionShard(inventory, shard)
+    : focused.map(name => `test/${name}.test.mjs`);
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
 }
