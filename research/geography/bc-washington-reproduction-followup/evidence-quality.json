@@ -2,7 +2,7 @@
   "version": 1,
   "issue": 660,
   "lane": "geography",
-  "worker_id": "codex-20261004-bcwa-660-f61d2224-e003-4b49-b228-740689c098da",
+  "worker_id": "codex-20261004-bc-wa-repro-660-b150279b-856a-4df0-91bc-03774a36b2c0",
   "subject_ids": [
     "atlas:district:CAN-5915:BRC",
     "gb:USA:ADM2:52423323B32782252789959",
@@ -77,18 +77,18 @@
     {
       "id": "ibc-v1-3-section-25",
       "url": "https://www.internationalboundarycommission.org/uploads/shapefile/us-canada-boundary-v1-3.zip",
-      "role": "mapping-only source line; not a legal boundary authority",
+      "role": "IBC US–Canada Boundary v1.3 section 25 mapping-only source line; not a legal boundary authority",
       "vintage": "metadata dated 2018-04-20",
       "retrieved_at": "2026-10-04",
       "license": {
         "status": "restricted",
-        "terms": "IBC ©2015, All Rights Reserved; mapping use only; must not define boundary. Recheck terms before restoration."
+        "terms": "Bundled metadata says mapping purposes only; U.S. metadata states © International Boundary Commission, all rights reserved. No archive bytes are retained or redistributed."
       },
       "retention": "restoration-only",
-      "verification": "unverified",
+      "verification": "verified",
       "temporal_status": "reference",
-      "restoration": "Restore only from the canonical IBC endpoint if available; verify 258764 bytes and SHA-256 eb327459528b87cbc27e55ccc6bfd6982562c75559823a00b6dc50c04abcaab1, and recheck current terms. Canonical downloads page returned HTTP 404 on 2026-10-04.",
-      "limit": "The inherited coordinates and source-line generation could not be independently reproduced; no archive bytes retained."
+      "restoration": "Official direct archive endpoint returned HTTP 200 on 2026-10-04; downloaded bytes were 258764 with SHA-256 eb327459528b87cbc27e55ccc6bfd6982562c75559823a00b6dc50c04abcaab1. Recheck current terms and the full-file size/hash before each temporary use. The downloads index returned 404, but the direct archive endpoint worked.",
+      "limit": "Source-backed reproduction matched all 18 inherited rows exactly; mapping-only scale and source vintages do not resolve the offset cause or support ownership/boundary conclusions."
     },
     {
       "id": "statistics-canada-cd-2021",
@@ -104,7 +104,7 @@
       "verification": "verified",
       "temporal_status": "reference",
       "restoration": "Use the preserved gzip at data/regional-review/regional-review-4254da254d94f450/sources/statistics-canada-bc-census-divisions-2021.geojson.gz in pinned baseline a1fd3383e89dea4c4497bf3a6f469494871ad758; 38880150 bytes, SHA-256 8a31cf19ad0694638c88275fec9ff1005970cd8600ca6baed245b8826756e9bf.",
-      "limit": "The preserved input exceeds the validator's 32 MiB candidate-file limit; local runner hash-checks it from the immutable Git baseline. This packet does not recalculate geometry."
+      "limit": "All 29 BC divisions were used in the reproduced nearest-boundary calculations; the immutable 38,880,150-byte input is hash checked from Git because it exceeds the evidence validator 32 MiB ordinary-file limit. Statistical units are not political ownership evidence."
     },
     {
       "id": "tigerline-wa-counties-2024",
@@ -120,14 +120,14 @@
       "verification": "verified",
       "temporal_status": "reference",
       "restoration": "Use the preserved Washington extract at data/regional-review/regional-review-4254da254d94f450/sources/tigerline-2024-washington-counties.geojson.gz in pinned baseline a1fd3383e89dea4c4497bf3a6f469494871ad758; 859249 bytes, SHA-256 74c2822d327082e2738a8d93d59bc5eadf42590f7fef0941221e61deb36a4034.",
-      "limit": "This packet reconciles inherited rows and does not recalculate county geometry."
+      "limit": "All 39 Washington counties were used in the reproduced nearest-boundary and strict containment calculations. These cartographic units do not establish political ownership."
     }
   ],
   "outputs": [
     {
       "path": "research/geography/bc-washington-reproduction-followup/README.md",
-      "bytes": 4373,
-      "sha256": "0d335508008c757742ce5a4d01684765f49db533cdd69fb258373b21280648d3",
+      "bytes": 5419,
+      "sha256": "1e4ecaa67b918aba6aae176f540b335f06e60d9ac9594f65f8c5f39ca48b813b",
       "hash_kind": "file-bytes"
     },
     {
@@ -143,6 +143,24 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "research/geography/bc-washington-reproduction-followup/validation/negative-control.json",
+      "bytes": 234,
+      "sha256": "eea9461583f22da3a8113ce12ca1d0d23ae95d5e62124ce566310d7117acca7f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/validation/positive-control.json",
+      "bytes": 249,
+      "sha256": "b0a29375625d19528fdf2bd4c42a36a1fc2bfd22aa9491856d17c5b97d9ed66e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/validation/reproducibility-control.json",
+      "bytes": 279,
+      "sha256": "97e225c34de66d3584d9a982f8436a772bb19be13f5a42fcd7b26f3600cbb2d8",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "research/geography/bc-washington-reproduction-followup/verification.json",
       "bytes": 428,
       "sha256": "6d923e9d07055a6e880a9584c8bb05cf5fdd92b0f2125a129a44660788c62ef5",
@@ -155,21 +173,51 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/bc-washington-reproduction-followup/validation/positive-control.json",
-      "bytes": 249,
-      "sha256": "b0a29375625d19528fdf2bd4c42a36a1fc2bfd22aa9491856d17c5b97d9ed66e",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/README.md",
+      "bytes": 4714,
+      "sha256": "8c618e5461308311a935dba0e87f12b6f13aec9ba09477aeed403fb1d49b12ee",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/bc-washington-reproduction-followup/validation/negative-control.json",
-      "bytes": 234,
-      "sha256": "eea9461583f22da3a8113ce12ca1d0d23ae95d5e62124ce566310d7117acca7f",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/reproduce.py",
+      "bytes": 15138,
+      "sha256": "a0d1991b384eb9d86e26df5d3b55f9021808797de2990b810e0b336b762d72d2",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/bc-washington-reproduction-followup/validation/reproducibility-control.json",
-      "bytes": 279,
-      "sha256": "97e225c34de66d3584d9a982f8436a772bb19be13f5a42fcd7b26f3600cbb2d8",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/reproduced-assessment.json",
+      "bytes": 15961,
+      "sha256": "2e37ecb543ff50be12b0ae7e2171bc7f675776a105e40ceed448d57d9762ccf4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/validation/negative-control.json",
+      "bytes": 283,
+      "sha256": "f749d5dfdda0f298ad43a2b4ccc05efc7e047ed0fd29ba3736bf1cb4e410f162",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/validation/positive-control.json",
+      "bytes": 285,
+      "sha256": "b13f27168fa779cdfb0c7401eee5641a5fbe25ae15680a282cfb25955b73c4c6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/validation/reproducibility-control.json",
+      "bytes": 350,
+      "sha256": "0fc287a431d5fbd1d0ae1b955c3949bdd6de4e2f93258baef6c3d1da7d4a61e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/verification.json",
+      "bytes": 2464,
+      "sha256": "8448e0e2557b60ce040ba63f9dc9e37c8be004931a062d24b25804a5e38f3694",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/verify_restoration.py",
+      "bytes": 4427,
+      "sha256": "a2d97490f41be06aebe5f048bb0bc3ee764e7665d22a335dbde8ae0904908b93",
       "hash_kind": "file-bytes"
     }
   ],
@@ -180,6 +228,14 @@
       "software": "Python 3 standard library; immutable Git object reader",
       "units": "sample count; meters",
       "kind": "source"
+    },
+    {
+      "id": "ibc-section25-pinned-reproduction",
+      "description": "Verify the official archive byte pin and all immutable source/scope/subject input whole-file hashes before calculating; reproduce the 74-point <=1 km line screen and all 18 assigned rows; require exact equality with the immutable inherited ledger.",
+      "software": "GDAL/OGR Python bindings; Python 3 standard library",
+      "units": "meters; sample count",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1"
     }
   ],
   "metrics": [
@@ -187,7 +243,7 @@
       "id": "sample_count",
       "value": 18,
       "unit": "samples",
-      "vintage": "archived",
+      "vintage": "current",
       "input_sha256": "0f5f8d1a742032c149ce47a8aae01442cc1a5c5dc2e9b6719e11ae2f7080df13",
       "evaluation_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758"
     },
@@ -195,7 +251,7 @@
       "id": "strict_noncontainment_count",
       "value": 5,
       "unit": "samples",
-      "vintage": "archived",
+      "vintage": "current",
       "input_sha256": "0f5f8d1a742032c149ce47a8aae01442cc1a5c5dc2e9b6719e11ae2f7080df13",
       "evaluation_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758"
     },
@@ -203,7 +259,7 @@
       "id": "minimum_bc_distance",
       "value": 1011.9,
       "unit": "m",
-      "vintage": "archived",
+      "vintage": "current",
       "input_sha256": "0f5f8d1a742032c149ce47a8aae01442cc1a5c5dc2e9b6719e11ae2f7080df13",
       "evaluation_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758"
     },
@@ -211,7 +267,7 @@
       "id": "maximum_bc_distance",
       "value": 5888.53,
       "unit": "m",
-      "vintage": "archived",
+      "vintage": "current",
       "input_sha256": "0f5f8d1a742032c149ce47a8aae01442cc1a5c5dc2e9b6719e11ae2f7080df13",
       "evaluation_commit": "a1fd3383e89dea4c4497bf3a6f469494871ad758"
     }
@@ -241,35 +297,37 @@
   "metric_bindings": [
     {
       "metric_id": "sample_count",
-      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/reproduced-assessment.json",
       "json_pointer": "/sample_count"
     },
     {
       "metric_id": "strict_noncontainment_count",
-      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/reproduced-assessment.json",
       "json_pointer": "/strict_tiger_polygon_noncontainment_count"
     },
     {
       "metric_id": "minimum_bc_distance",
-      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/reproduced-assessment.json",
       "json_pointer": "/nearest_bc_distance_m/minimum"
     },
     {
       "metric_id": "maximum_bc_distance",
-      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/reproduced-assessment.json",
       "json_pointer": "/nearest_bc_distance_m/maximum"
     }
   ],
   "conclusions": [
     {
-      "text": "The inherited rows show five strict noncontainments and a minimum nearest-BC distance of 1,011.90 m; prior narrative reports four and 1,011.91 m.",
+      "text": "The official IBC section 25 archive and every pinned input reproduce all 18 inherited rows exactly; five rows (55, 63–66) have no strict county-polygon containment and the nearest-BC distances range from 1,011.90 m to 5,888.53 m.",
       "status": "supported",
       "source_ids": [
+        "ibc-v1-3-section-25",
+        "statistics-canada-cd-2021",
         "tigerline-wa-counties-2024"
       ]
     },
     {
-      "text": "The coastal offset cause and any correction remain unresolved because source-line coordinates were not regenerated and source vintages/scales differ.",
+      "text": "The source-vintage/scale differences do not identify why the line is offset, establish legal boundaries or ownership, or justify a boundary correction.",
       "status": "unresolved",
       "source_ids": [
         "ibc-v1-3-section-25",
@@ -284,7 +342,8 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "python3 research/geography/bc-washington-reproduction-followup/reproduce.py",
+    "/usr/bin/python3 research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/reproduce.py --archive /temporary/path/us-canada-boundary-v1-3.zip",
+    "/usr/bin/python3 research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/verify_restoration.py --archive /temporary/path/us-canada-boundary-v1-3.zip",
     "python3 research/geography/bc-washington-reproduction-followup/verify_packet.py",
     "node scripts/evidence-quality.mjs research/geography/bc-washington-reproduction-followup/evidence-quality.json ."
   ],
@@ -306,43 +365,67 @@
       "kind": "reproducibility",
       "outcome": "passed",
       "evidence_path": "research/geography/bc-washington-reproduction-followup/validation/reproducibility-control.json"
+    },
+    {
+      "method_id": "ibc-section25-pinned-reproduction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/validation/positive-control.json"
+    },
+    {
+      "method_id": "ibc-section25-pinned-reproduction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/validation/negative-control.json"
+    },
+    {
+      "method_id": "ibc-section25-pinned-reproduction",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/validation/reproducibility-control.json"
     }
   ],
   "change_receipts": [
     {
       "path": "research/geography/bc-washington-reproduction-followup/README.md",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/bc-washington-reproduction-followup/assessment.json",
-      "status": "added"
+      "status": "modified",
+      "original_sha256": "0d335508008c757742ce5a4d01684765f49db533cdd69fb258373b21280648d3"
     },
     {
       "path": "research/geography/bc-washington-reproduction-followup/evidence-quality.json",
+      "status": "modified",
+      "original_sha256": "e632bab906e8f47b6a273e3bc7f8c2799312851ddc3f7ba831e3dce1421b1f3f"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/README.md",
       "status": "added"
     },
     {
-      "path": "research/geography/bc-washington-reproduction-followup/reproduce.py",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/reproduce.py",
       "status": "added"
     },
     {
-      "path": "research/geography/bc-washington-reproduction-followup/verification.json",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/reproduced-assessment.json",
       "status": "added"
     },
     {
-      "path": "research/geography/bc-washington-reproduction-followup/verify_packet.py",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/verify_restoration.py",
       "status": "added"
     },
     {
-      "path": "research/geography/bc-washington-reproduction-followup/validation/positive-control.json",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/verification.json",
       "status": "added"
     },
     {
-      "path": "research/geography/bc-washington-reproduction-followup/validation/negative-control.json",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/validation/positive-control.json",
       "status": "added"
     },
     {
-      "path": "research/geography/bc-washington-reproduction-followup/validation/reproducibility-control.json",
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/validation/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/validation/reproducibility-control.json",
       "status": "added"
     }
   ]
