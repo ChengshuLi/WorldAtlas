@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "issue": 706,
+  "lane": "engineering",
+  "worker_id": "ci-duration-balance-root-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "d53dcabf992470c43e7419bd700af9c549c74525",
+    "files": [
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 3345,
+        "sha256": "8a82efac1ecfe82605061a779c6420bb83e30a3bf0a441757f8fb42d64995d56",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/full-regression-shards.test.mjs",
+        "bytes": 1914,
+        "sha256": "73724bb167c71ef206d2d8f6725e1732eab69172757ff1e297d9348b5baf9221",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 16861,
+        "sha256": "d54ab6bcdf59835555a84a716b28ef9d5455c9c40409ec9207bafb23a14a8783",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/model.test.mjs",
+        "bytes": 15638,
+        "sha256": "785015bf54e6da05c6c6bcb0c597018480417aa3966ac63139ce1d3062d6713c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/parity-proof-694-20261004/final-jobs-api.json",
+        "bytes": 12631,
+        "sha256": "48d01d779f0035d51f40b3b7698117bec4f020afffae012cbbf1b8ccad8400bc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/parity-proof-694-20261004/final-shard0.log",
+        "bytes": 161430,
+        "sha256": "0c533e551629393a70b1267790baa8021f704d0e2e2c60dd1cc5aba1519bdd83",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/parity-proof-694-20261004/final-shard1.log",
+        "bytes": 139847,
+        "sha256": "68e5d98a3143bf4362240f939f119cee72a28757eb9ed851c00d53f24c802e21",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/parity-proof-694-20261004/final-shard2.log",
+        "bytes": 137923,
+        "sha256": "9bc53e982b6570e0b32759a3f216aec07c570ace07f2c31514f8a6c8f2e4877d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 4200,
+      "sha256": "cbcae6e5b9fbea0050a9fc3a82b6bb429b450d7d45a9b5b9dcbf01093e383a2f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/full-regression-shards.test.mjs",
+      "bytes": 2701,
+      "sha256": "d9231d1ea050d6695cba4bfe439104dfdbe76687c012eda9ee1490944372b49f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 17290,
+      "sha256": "e6a8586658824c05ef8b82efc669a7d51f2815623b7b5260e4c618112ba8255b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/model.test.mjs",
+      "bytes": 11135,
+      "sha256": "924bc934c8dfacf3aa5359f356c6de504eaf16a41ab44851cbc008b46f2277f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/model-hierarchy-migration.test.mjs",
+      "bytes": 1536,
+      "sha256": "d2197c50f7a2da5cf17b71c71acbd33bbd54a2d524cfb1c907232be2e1a17241",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/model-topology-migration.test.mjs",
+      "bytes": 1783,
+      "sha256": "da82ab60b101a789f71ebec05de6849c0ec283f56b49464a9461302e99deb9a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/model-semantic-migration.test.mjs",
+      "bytes": 1815,
+      "sha256": "975c728b127b7a5e9d59849e40ee7a435591628f63b008a338ee96ca57f7d9a5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/positive-control.json",
+      "bytes": 214,
+      "sha256": "aeaaee7c5f10868ff3bf4f4b727b9ec28f6459058a2381a54eea5b85f6def560",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/partition-positive.json",
+      "bytes": 1198,
+      "sha256": "eb267ba54ffb530b5c450a4df48a66aa5a70a56ba0425530a3cda01d8e047bc8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/local-tests.tap",
+      "bytes": 6974,
+      "sha256": "99aff81d01d6f1d63a9add401b75e622790405b884eafcc44e0d9c9ea26c72a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/partition-negative.json",
+      "bytes": 323,
+      "sha256": "098843ffc19a4b977de6d2d578b6a73068be72606b00808b4566904f78894666",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/claim.json",
+      "bytes": 825,
+      "sha256": "17c3a7307ab573773f5aeb58d83c0da7e19134d468e5b910691e1a4aa0be743c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/negative-control.json",
+      "bytes": 214,
+      "sha256": "59763406849325433fbb066c7bce9f768800e827729cf4ad11a5d5b19e2bce50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/README.md",
+      "bytes": 2104,
+      "sha256": "85d99a6ca12d8d03527abcceddcf258a820dd3d4b4da0424076f6e258f96cb76",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "measured-neighbor-isolation",
+      "kind": "code",
+      "description": "Reserve measured expensive database suites away from packaged/build worker; preserve all discovered files and existing concurrency. Scheduling is not a guaranteed time bound.",
+      "software": "Node24, existing GitHub Actions Ubuntu workers",
+      "units": "complete inventory"
+    },
+    {
+      "id": "verbatim-migration-partition",
+      "kind": "code",
+      "description": "Compare exact declaration body bytes against pinned original model, ensure each original name moved once; reject deliberately changed body digest. No seed/assertion/cleanup body modifications.",
+      "software": "Python3 SHA256 and Node24 syntax/inventory controls",
+      "units": "verbatim declaration bodies"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "measured-neighbor-isolation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/ci-duration-balance-20261004/positive-control.json"
+    },
+    {
+      "method_id": "measured-neighbor-isolation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/ci-duration-balance-20261004/negative-control.json"
+    },
+    {
+      "method_id": "verbatim-migration-partition",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/ci-duration-balance-20261004/partition-positive.json"
+    },
+    {
+      "method_id": "verbatim-migration-partition",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/ci-duration-balance-20261004/partition-negative.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-reporter=tap test/full-regression-shards.test.mjs test/merge-integration.test.mjs test/integration-proof.test.mjs",
+    "Compare exact moved declaration-body SHA256 against immutable original test/model.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "8a82efac1ecfe82605061a779c6420bb83e30a3bf0a441757f8fb42d64995d56"
+    },
+    {
+      "path": "test/full-regression-shards.test.mjs",
+      "status": "modified",
+      "original_sha256": "73724bb167c71ef206d2d8f6725e1732eab69172757ff1e297d9348b5baf9221"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "d54ab6bcdf59835555a84a716b28ef9d5455c9c40409ec9207bafb23a14a8783"
+    },
+    {
+      "path": "test/model.test.mjs",
+      "status": "modified",
+      "original_sha256": "785015bf54e6da05c6c6bcb0c597018480417aa3966ac63139ce1d3062d6713c"
+    },
+    {
+      "path": "test/model-hierarchy-migration.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/model-topology-migration.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/model-semantic-migration.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/partition-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/local-tests.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/partition-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-duration-balance-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
