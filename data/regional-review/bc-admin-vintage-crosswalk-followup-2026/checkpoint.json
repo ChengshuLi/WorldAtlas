@@ -1,0 +1,26 @@
+{
+  "as_of_utc": "2026-10-04T07:27:39Z",
+  "issue": 607,
+  "worker_id": "codex-20261004-bc-crosswalk-607-496b3520-a665-401c-a35a-a54bb7b4593d",
+  "claim_id": "8203d536-911b-422e-b6a4-b4a47d379e10",
+  "claim_branch": "geography/bc-admin-vintage-crosswalk-20261004-607-0589ac8b",
+  "branch_base_commit": "8ab19033d736fac28c38166183c3783a1ed095ff",
+  "owned_path": "data/regional-review/bc-admin-vintage-crosswalk-followup-2026/",
+  "prior_evidence_commit": "39188aadf6efdae60357d9d4a1bbb62ffd981003",
+  "progress": {
+    "assigned_member_count": 376,
+    "triage_flagged_count": 58,
+    "assessed_count": 58,
+    "assessed_flag_classes": {"no_normalized_name_match": 20, "multiple_name_matches": 5, "best_overlay_below_95_pct": 33},
+    "direct_source_feature_successor_links_established": 0,
+    "direct_source_feature_successor_links_unresolved": 58,
+    "official_2021_to_2016_db_correspondence": {"british_columbia_db_pairs": 55139, "unique_csd_prefix_pairs": 2595, "relation_flag_counts": {"1": 47731, "2": 3182, "3": 2196, "4": 2030}},
+    "reproduction": "build_crosswalk.py was run twice with byte-identical generated assessment and registry; verify_crosswalk.py passed exact 58-ID coverage and correspondence-table checks."
+  },
+  "blocker": "Current evidence-quality validator requires an exact geography subject roster via one JSON-pointer array in prior evidence, or a containing baseline GeoJSON whose feature id/properties.id exactly match each subject. The 376 geoBoundaries shapeIDs and 58 flagged members are nested across per-parent member objects in #485 assessment.json; original GeoJSON stores shapeID (not feature.id/properties.id). The new single-pointer prior-evidence inventory cannot truthfully flatten/filter that nested baseline roster, and a candidate registry cannot be mislabeled as ancestor evidence. No policy-valid manifest has been produced, so no PR or review/merge has been requested.",
+  "next_actions": [
+    "Preserve this packet and issue checkpoint; request a bounded trusted-checker capability for exact rosters formed from multiple retained prior-evidence native-ID arrays or source_property-based identity extraction, without changing geography schemas or original evidence.",
+    "After that capability is merged, reserve anew from current main, refresh the branch, construct exact 376-member roster and current metrics, rerun hosted checks, obtain exact-head independent source/geometry review, and use the normal queue."
+  ],
+  "limits": ["All 58 triage rows are accounted for, but direct identity between each geoBoundaries ADM3 feature and official 2016/2021 Census Subdivision lineage remains unresolved; overlay and name candidates are not legal successor proof.", "No shared geography, boundary, parent membership, source membership, app/schema, or live data was changed."]
+}

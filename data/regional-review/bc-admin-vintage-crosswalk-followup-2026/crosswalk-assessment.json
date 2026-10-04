@@ -1,0 +1,1778 @@
+{
+  "version": 1,
+  "scope": {
+    "assigned_source_members": 376,
+    "flagged_subjects": 58,
+    "flag_counts": {
+      "no_normalized_name_match": 20,
+      "multiple_normalized_name_matches": 5,
+      "best_overlap_below_95_pct": 33
+    },
+    "subjects_sha256": "cba49d5c0f7695f7c4e85e3901bd446a382c7d4c7d9333997dad0c430e7b6978"
+  },
+  "source_vintages": {
+    "geoBoundaries_CAN_ADM3": 2016,
+    "Statistics_Canada_Census_Subdivision": 2021,
+    "Statistics_Canada_DB_correspondence_current": 2021,
+    "Statistics_Canada_DB_correspondence_previous": 2016
+  },
+  "methods": {
+    "screen_source": "Pinned #485 exhaustive overlay/name screen in assessment.json. Reused as screening evidence only.",
+    "transition_source": "Statistics Canada 2021 correspondence file DB_ID maps DBUID2021 to DBUID2016 and carries DBRELFLAG. Derive candidate CSDUIDs from each 10-digit DBUID first seven digits, aggregate ID-pair counts by target CSDUID and relation flag. Counts are dissemination-block record counts, not area or population weights.",
+    "normalization": "Exactly as #485 assessment script; see source file path and pinned baseline. Source spelling is preserved.",
+    "interpretation": "A candidate 2021 name/overlay is not a direct source lineage. Official DB correspondence joins statistical 2016/2021 subdivisions and cannot by itself establish geoBoundaries feature identity, political ownership, or legal boundary changes."
+  },
+  "records": [
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B12141514689015",
+      "source_shape_id": "43193130B12141514689015",
+      "source_name_2016": "Chekwelp 26",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5929:BRC",
+        "census_division_uid": "5929"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 85.34826
+      },
+      "candidate_2021_csd": {
+        "csduid": "5929801",
+        "name": "Chekwelp 26"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B12591205224049",
+      "source_shape_id": "43193130B12591205224049",
+      "source_name_2016": "Lillooet 1",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5931:BRC",
+        "census_division_uid": "5931"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 90.567576
+      },
+      "candidate_2021_csd": {
+        "csduid": "5931821",
+        "name": "Lillooet 1"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B13342100698107",
+      "source_shape_id": "43193130B13342100698107",
+      "source_name_2016": "Quinsam 12",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5924:BRC",
+        "census_division_uid": "5924"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 85.541799
+      },
+      "candidate_2021_csd": {
+        "csduid": "5924812",
+        "name": "Quinsam 12"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B13542881351841",
+      "source_shape_id": "43193130B13542881351841",
+      "source_name_2016": "Okanagan-Similkameen D",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5907:BRC",
+        "census_division_uid": "5907"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 62.969935
+      },
+      "candidate_2021_csd": {
+        "csduid": "5907047",
+        "name": "Okanagan-Similkameen D"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B14290774659145",
+      "source_shape_id": "43193130B14290774659145",
+      "source_name_2016": "Tsinstikeptum 10",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5935:BRC",
+        "census_division_uid": "5935"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 93.841046
+      },
+      "candidate_2021_csd": {
+        "csduid": "5935803",
+        "name": "Tsinstikeptum 10"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B15572795013048",
+      "source_shape_id": "43193130B15572795013048",
+      "source_name_2016": "Quatsino Subdivision 18",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5943:BRC",
+        "census_division_uid": "5943"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 93.031456
+      },
+      "candidate_2021_csd": {
+        "csduid": "5943816",
+        "name": "Quatsino Subdivision 18"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B15668502554992",
+      "source_shape_id": "43193130B15668502554992",
+      "source_name_2016": "Central Okanagan J",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5935:BRC",
+        "census_division_uid": "5935"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.925969
+      },
+      "candidate_2021_csd": {
+        "csduid": "5935020",
+        "name": "Central Okanagan West"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5935020"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 90,
+          "2": 2,
+          "3": 2
+        },
+        "total_db_pairs": 94,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix all point to one 2016 CSDUID; this corroborates statistical-area continuity only, not source-feature identity."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B18247956425391",
+      "source_shape_id": "43193130B18247956425391",
+      "source_name_2016": "Nequatque",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5931:BRC",
+        "census_division_uid": "5931"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 86.416938
+      },
+      "candidate_2021_csd": {
+        "csduid": "5931844",
+        "name": "Nequatque"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B18597637340243",
+      "source_shape_id": "43193130B18597637340243",
+      "source_name_2016": "Powell River D",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5927:BRC",
+        "census_division_uid": "5927"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.631642
+      },
+      "candidate_2021_csd": {
+        "csduid": "5927018",
+        "name": "qathet D"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B1928624142040",
+      "source_shape_id": "43193130B1928624142040",
+      "source_name_2016": "Fort Rupert 1",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5943:BRC",
+        "census_division_uid": "5943"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 90.561313
+      },
+      "candidate_2021_csd": {
+        "csduid": "5943804",
+        "name": "Fort Rupert 1"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B20950269413446",
+      "source_shape_id": "43193130B20950269413446",
+      "source_name_2016": "Tsussie 6",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5919:BRC",
+        "census_division_uid": "5919"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 94.59106
+      },
+      "candidate_2021_csd": {
+        "csduid": "5919803",
+        "name": "Tsussie 6"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B26995962418717",
+      "source_shape_id": "43193130B26995962418717",
+      "source_name_2016": "Pentledge 2",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5926:BRC",
+        "census_division_uid": "5926"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 94.150958
+      },
+      "candidate_2021_csd": {
+        "csduid": "5926802",
+        "name": "Pentledge 2"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B2772485207319",
+      "source_shape_id": "43193130B2772485207319",
+      "source_name_2016": "Powell River A",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5927:BRC",
+        "census_division_uid": "5927"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.929562
+      },
+      "candidate_2021_csd": {
+        "csduid": "5927010",
+        "name": "qathet A"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B29432146532932",
+      "source_shape_id": "43193130B29432146532932",
+      "source_name_2016": "Skeena-Queen Charlotte E",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5947:BRC",
+        "census_division_uid": "5947"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.24272
+      },
+      "candidate_2021_csd": {
+        "csduid": "5947032",
+        "name": "North Coast E"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B33495642174724",
+      "source_shape_id": "43193130B33495642174724",
+      "source_name_2016": "Langley",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 2,
+        "best_overlay_pct_of_2016_shape": 99.931973
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915001",
+        "name": "Langley"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5915001"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 52,
+          "2": 3,
+          "4": 3
+        },
+        "total_db_pairs": 58,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix all point to one 2016 CSDUID; this corroborates statistical-area continuity only, not source-feature identity."
+      },
+      "assessment": {
+        "disposition": "ambiguous-name-candidates; spatial candidate only",
+        "basis": "Multiple same-name 2021 CSDs in same Census Division; retained best-overlap UID ranks a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B33792912870",
+      "source_shape_id": "43193130B33792912870",
+      "source_name_2016": "Richmond",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 85.778332
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915015",
+        "name": "Richmond"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5915015"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 15,
+          "3": 2
+        },
+        "total_db_pairs": 17,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix all point to one 2016 CSDUID; this corroborates statistical-area continuity only, not source-feature identity."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B35087153660221",
+      "source_shape_id": "43193130B35087153660221",
+      "source_name_2016": "Seton Lake 5",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5931:BRC",
+        "census_division_uid": "5931"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 34.101121
+      },
+      "candidate_2021_csd": {
+        "csduid": "5931824",
+        "name": "Seton Lake 5"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B3536991528911",
+      "source_shape_id": "43193130B3536991528911",
+      "source_name_2016": "North Vancouver",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 2,
+        "best_overlay_pct_of_2016_shape": 99.614016
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915046",
+        "name": "North Vancouver"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5915046"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 31
+        },
+        "total_db_pairs": 31,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix all point to one 2016 CSDUID; this corroborates statistical-area continuity only, not source-feature identity."
+      },
+      "assessment": {
+        "disposition": "ambiguous-name-candidates; spatial candidate only",
+        "basis": "Multiple same-name 2021 CSDs in same Census Division; retained best-overlap UID ranks a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B35886579594118",
+      "source_shape_id": "43193130B35886579594118",
+      "source_name_2016": "Skwahla 2",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5909:BRC",
+        "census_division_uid": "5909"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 100.0
+      },
+      "candidate_2021_csd": {
+        "csduid": "5909020",
+        "name": "Chilliwack"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B37541401945135",
+      "source_shape_id": "43193130B37541401945135",
+      "source_name_2016": "Comox Valley C (Puntledge - B*",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5926:BRC",
+        "census_division_uid": "5926"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.920305
+      },
+      "candidate_2021_csd": {
+        "csduid": "5926024",
+        "name": "Comox Valley C (Puntledge - Black Creek)"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B38263156934804",
+      "source_shape_id": "43193130B38263156934804",
+      "source_name_2016": "Thomas Point 5",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5943:BRC",
+        "census_division_uid": "5943"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 80.175607
+      },
+      "candidate_2021_csd": {
+        "csduid": "5943817",
+        "name": "Thomas Point 5"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B41462517735660",
+      "source_shape_id": "43193130B41462517735660",
+      "source_name_2016": "Kootenay Boundary D / Rural G*",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5905:BRC",
+        "census_division_uid": "5905"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.972002
+      },
+      "candidate_2021_csd": {
+        "csduid": "5905052",
+        "name": "Kootenay Boundary D / Rural Grand Forks"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B42422825466963",
+      "source_shape_id": "43193130B42422825466963",
+      "source_name_2016": "Powell River E",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5927:BRC",
+        "census_division_uid": "5927"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 98.103244
+      },
+      "candidate_2021_csd": {
+        "csduid": "5927020",
+        "name": "qathet E"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B42684500783199",
+      "source_shape_id": "43193130B42684500783199",
+      "source_name_2016": "Kootenay Boundary B / Lower C*",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5905:BRC",
+        "census_division_uid": "5905"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.95685
+      },
+      "candidate_2021_csd": {
+        "csduid": "5905030",
+        "name": "Kootenay Boundary B / Lower Columbia-Old-Glory"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B42698646227552",
+      "source_shape_id": "43193130B42698646227552",
+      "source_name_2016": "North Vancouver",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 2,
+        "best_overlay_pct_of_2016_shape": 98.139427
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915051",
+        "name": "North Vancouver"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5915051"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 58
+        },
+        "total_db_pairs": 58,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix all point to one 2016 CSDUID; this corroborates statistical-area continuity only, not source-feature identity."
+      },
+      "assessment": {
+        "disposition": "ambiguous-name-candidates; spatial candidate only",
+        "basis": "Multiple same-name 2021 CSDs in same Census Division; retained best-overlap UID ranks a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B42952333232399",
+      "source_shape_id": "43193130B42952333232399",
+      "source_name_2016": "Tin Wis 11",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5923:BRC",
+        "census_division_uid": "5923"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 84.516234
+      },
+      "candidate_2021_csd": {
+        "csduid": "5923825",
+        "name": "Tin Wis 11"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B51062932449598",
+      "source_shape_id": "43193130B51062932449598",
+      "source_name_2016": "Langley",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 2,
+        "best_overlay_pct_of_2016_shape": 99.338497
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915002",
+        "name": "Langley"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5915002"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 45
+        },
+        "total_db_pairs": 45,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix all point to one 2016 CSDUID; this corroborates statistical-area continuity only, not source-feature identity."
+      },
+      "assessment": {
+        "disposition": "ambiguous-name-candidates; spatial candidate only",
+        "basis": "Multiple same-name 2021 CSDs in same Census Division; retained best-overlap UID ranks a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B51102265154077",
+      "source_shape_id": "43193130B51102265154077",
+      "source_name_2016": "Kil-pah-las 3",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5919:BRC",
+        "census_division_uid": "5919"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 92.267688
+      },
+      "candidate_2021_csd": {
+        "csduid": "5919808",
+        "name": "Kil-pah-las 3"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B51121353420267",
+      "source_shape_id": "43193130B51121353420267",
+      "source_name_2016": "Powell River B",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5927:BRC",
+        "census_division_uid": "5927"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.929011
+      },
+      "candidate_2021_csd": {
+        "csduid": "5927012",
+        "name": "qathet B"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B57448521707098",
+      "source_shape_id": "43193130B57448521707098",
+      "source_name_2016": "Strathcona D (Oyster Bay - Bu*",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5924:BRC",
+        "census_division_uid": "5924"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.783111
+      },
+      "candidate_2021_csd": {
+        "csduid": "5924042",
+        "name": "Strathcona D (Oyster Bay - Buttle Lake)"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5924022",
+          "5924042"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 46,
+          "2": 10,
+          "3": 9,
+          "4": 10
+        },
+        "total_db_pairs": 75,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix point to multiple 2016 CSDUIDs; the statistical successor is many-to-many at this candidate and remains unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B59620495937513",
+      "source_shape_id": "43193130B59620495937513",
+      "source_name_2016": "Skweahm 10",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5909:BRC",
+        "census_division_uid": "5909"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 94.031617
+      },
+      "candidate_2021_csd": {
+        "csduid": "5909881",
+        "name": "Skweahm 10"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B67619845912536",
+      "source_shape_id": "43193130B67619845912536",
+      "source_name_2016": "Skeena-Queen Charlotte C",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5947:BRC",
+        "census_division_uid": "5947"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 98.365694
+      },
+      "candidate_2021_csd": {
+        "csduid": "5947021",
+        "name": "North Coast C"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B6769578185820",
+      "source_shape_id": "43193130B6769578185820",
+      "source_name_2016": "Seymour Creek 2",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 88.146538
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915811",
+        "name": "Seymour Creek 2"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B6936154177536",
+      "source_shape_id": "43193130B6936154177536",
+      "source_name_2016": "Douglas 8",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5909:BRC",
+        "census_division_uid": "5909"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 74.947553
+      },
+      "candidate_2021_csd": {
+        "csduid": "5909842",
+        "name": "Douglas 8"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B70051524273903",
+      "source_shape_id": "43193130B70051524273903",
+      "source_name_2016": "Greater Vancouver A",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.93332
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915020",
+        "name": "Metro Vancouver A"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5915020"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 79
+        },
+        "total_db_pairs": 79,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix all point to one 2016 CSDUID; this corroborates statistical-area continuity only, not source-feature identity."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B70598927626158",
+      "source_shape_id": "43193130B70598927626158",
+      "source_name_2016": "Kippase 2",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5943:BRC",
+        "census_division_uid": "5943"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 91.916871
+      },
+      "candidate_2021_csd": {
+        "csduid": "5943815",
+        "name": "Kippase 2"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B71777413441135",
+      "source_shape_id": "43193130B71777413441135",
+      "source_name_2016": "Homalco 9",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5924:BRC",
+        "census_division_uid": "5924"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 45.815761
+      },
+      "candidate_2021_csd": {
+        "csduid": "5924840",
+        "name": "Homalco 9"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B74589218000783",
+      "source_shape_id": "43193130B74589218000783",
+      "source_name_2016": "Q'alatkÃº7em",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5909:BRC",
+        "census_division_uid": "5909"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 98.551678
+      },
+      "candidate_2021_csd": {
+        "csduid": "5909875",
+        "name": "Q'alatkú7em"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B74957897296367",
+      "source_shape_id": "43193130B74957897296367",
+      "source_name_2016": "Esowista 3",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5923:BRC",
+        "census_division_uid": "5923"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 91.399457
+      },
+      "candidate_2021_csd": {
+        "csduid": "5923823",
+        "name": "Esowista 3"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B75129139790615",
+      "source_shape_id": "43193130B75129139790615",
+      "source_name_2016": "Skeena-Queen Charlotte D",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5947:BRC",
+        "census_division_uid": "5947"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.785196
+      },
+      "candidate_2021_csd": {
+        "csduid": "5947027",
+        "name": "North Coast D"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B80621580105703",
+      "source_shape_id": "43193130B80621580105703",
+      "source_name_2016": "Klehkoot 2",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5923:BRC",
+        "census_division_uid": "5923"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 94.519195
+      },
+      "candidate_2021_csd": {
+        "csduid": "5923822",
+        "name": "Klehkoot 2"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B81295403287390",
+      "source_shape_id": "43193130B81295403287390",
+      "source_name_2016": "Nanaimo Town 1",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5921:BRC",
+        "census_division_uid": "5921"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 93.623653
+      },
+      "candidate_2021_csd": {
+        "csduid": "5921804",
+        "name": "Nanaimo Town 1"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B85027406099042",
+      "source_shape_id": "43193130B85027406099042",
+      "source_name_2016": "Yuquot 1",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5924:BRC",
+        "census_division_uid": "5924"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 94.30359
+      },
+      "candidate_2021_csd": {
+        "csduid": "5924814",
+        "name": "Yuquot 1"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B86291824675233",
+      "source_shape_id": "43193130B86291824675233",
+      "source_name_2016": "Slosh 1",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5931:BRC",
+        "census_division_uid": "5931"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 88.29931
+      },
+      "candidate_2021_csd": {
+        "csduid": "5931831",
+        "name": "Slosh 1"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B92702532338216",
+      "source_shape_id": "43193130B92702532338216",
+      "source_name_2016": "Langley 5",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 100.0
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915075",
+        "name": "Maple Ridge"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5915075"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 53,
+          "4": 3
+        },
+        "total_db_pairs": 56,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix all point to one 2016 CSDUID; this corroborates statistical-area continuity only, not source-feature identity."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B93000956745319",
+      "source_shape_id": "43193130B93000956745319",
+      "source_name_2016": "Kootenay Boundary C / Christi*",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5905:BRC",
+        "census_division_uid": "5905"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.967461
+      },
+      "candidate_2021_csd": {
+        "csduid": "5905050",
+        "name": "Kootenay Boundary C / Christina Lake"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B93489942578002",
+      "source_shape_id": "43193130B93489942578002",
+      "source_name_2016": "Powell River C",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5927:BRC",
+        "census_division_uid": "5927"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.908089
+      },
+      "candidate_2021_csd": {
+        "csduid": "5927016",
+        "name": "qathet C"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B93614945094540",
+      "source_shape_id": "43193130B93614945094540",
+      "source_name_2016": "Esquimalt",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5917:BRC",
+        "census_division_uid": "5917"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 2,
+        "best_overlay_pct_of_2016_shape": 95.800628
+      },
+      "candidate_2021_csd": {
+        "csduid": "5917040",
+        "name": "Esquimalt"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5917040"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 32,
+          "3": 2
+        },
+        "total_db_pairs": 34,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix all point to one 2016 CSDUID; this corroborates statistical-area continuity only, not source-feature identity."
+      },
+      "assessment": {
+        "disposition": "ambiguous-name-candidates; spatial candidate only",
+        "basis": "Multiple same-name 2021 CSDs in same Census Division; retained best-overlap UID ranks a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B95000363291297",
+      "source_shape_id": "43193130B95000363291297",
+      "source_name_2016": "Mission 1",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 94.002772
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915807",
+        "name": "Mission 1"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B95007972695894",
+      "source_shape_id": "43193130B95007972695894",
+      "source_name_2016": "Stawamus 24",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5931:BRC",
+        "census_division_uid": "5931"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 93.571293
+      },
+      "candidate_2021_csd": {
+        "csduid": "5931807",
+        "name": "Stawamus 24"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B95302560466471",
+      "source_shape_id": "43193130B95302560466471",
+      "source_name_2016": "Skwali 3",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5909:BRC",
+        "census_division_uid": "5909"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 94.977735
+      },
+      "candidate_2021_csd": {
+        "csduid": "5909825",
+        "name": "Skwali 3"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B95482261790988",
+      "source_shape_id": "43193130B95482261790988",
+      "source_name_2016": "Skeena-Queen Charlotte A",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5947:BRC",
+        "census_division_uid": "5947"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 97.741975
+      },
+      "candidate_2021_csd": {
+        "csduid": "5947016",
+        "name": "North Coast A"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B95651081318383",
+      "source_shape_id": "43193130B95651081318383",
+      "source_name_2016": "Kootenay Boundary E / West Bo*",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5905:BRC",
+        "census_division_uid": "5905"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 0,
+        "best_overlay_pct_of_2016_shape": 99.984604
+      },
+      "candidate_2021_csd": {
+        "csduid": "5905054",
+        "name": "Kootenay Boundary E / West Boundary"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "no-name-match; spatial candidate only",
+        "basis": "No normalized name match in same Census Division; retained best-overlap UID is a candidate only and does not resolve source identity.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B95822942987880",
+      "source_shape_id": "43193130B95822942987880",
+      "source_name_2016": "Clakamucus 2",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5923:BRC",
+        "census_division_uid": "5923"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 94.890784
+      },
+      "candidate_2021_csd": {
+        "csduid": "5923804",
+        "name": "Clakamucus 2"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B96239326387532",
+      "source_shape_id": "43193130B96239326387532",
+      "source_name_2016": "Oclucje 7",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5924:BRC",
+        "census_division_uid": "5924"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 91.710177
+      },
+      "candidate_2021_csd": {
+        "csduid": "5924833",
+        "name": "Oclucje 7"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B97464514276511",
+      "source_shape_id": "43193130B97464514276511",
+      "source_name_2016": "Delta",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 94.645435
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915011",
+        "name": "Delta"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [
+          "5915011"
+        ],
+        "db_pair_counts_by_relation_flag": {
+          "1": 61
+        },
+        "total_db_pairs": 61,
+        "interpretation": "The official DB correspondence rows for the candidate 2021 CSD prefix all point to one 2016 CSDUID; this corroborates statistical-area continuity only, not source-feature identity."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B9756217679681",
+      "source_shape_id": "43193130B9756217679681",
+      "source_name_2016": "Waiwakum 14",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5931:BRC",
+        "census_division_uid": "5931"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 94.030536
+      },
+      "candidate_2021_csd": {
+        "csduid": "5931808",
+        "name": "Waiwakum 14"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    },
+    {
+      "source_id": "geoBoundaries:CAN:ADM3:43193130B98354556834582",
+      "source_shape_id": "43193130B98354556834582",
+      "source_name_2016": "Coquitlam 1",
+      "parent_context": {
+        "atlas_group_id": "atlas:district:CAN-5915:BRC",
+        "census_division_uid": "5915"
+      },
+      "screen_flags": {
+        "normalized_name_matches_2021_csd_within_cd": 1,
+        "best_overlay_pct_of_2016_shape": 45.479007
+      },
+      "candidate_2021_csd": {
+        "csduid": "5915805",
+        "name": "Coquitlam 1"
+      },
+      "official_2021_db_correspondence": {
+        "previous_2016_csd_uids": [],
+        "db_pair_counts_by_relation_flag": {},
+        "total_db_pairs": 0,
+        "interpretation": "No British Columbia DB correspondence rows were found for the candidate UID; successor linkage unresolved."
+      },
+      "assessment": {
+        "disposition": "unique-name-candidate; geometry exception unresolved",
+        "basis": "One normalized name match in same 2021 Census Division; official 2021 UID is candidate. The <95% overlay is unresolved and does not prove boundary change.",
+        "unresolved": true,
+        "successor_mapping_status": "candidate; direct source-feature-to-StatCan-2016 CSD link is not established by this inventory"
+      }
+    }
+  ],
+  "summary": {
+    "records_assessed": 58,
+    "unique_name_candidate_with_geometry_exception": 33,
+    "multiple_name_ambiguous": 5,
+    "no_name_spatial_only": 20,
+    "unresolved_direct_feature_successor_links": 58,
+    "open_fact": "Official 2016 CSD geospatial/code reconciliation to each geoBoundaries ADM3 feature has not been established by this packet; no row is labeled a proven legal successor."
+  },
+  "limitations": [
+    "This packet exhaustively accounts for the 58 triage-flagged source IDs. The other 318 of the assigned 376-member cohort remain as screened in #485 and were not re-adjudicated here.",
+    "The official correspondence file is dissemination-block ID correspondence; prefix derivation uses Statistics Canada identifier structure. DB-pair counts do not measure land area or imply one-to-one administrative succession.",
+    "The 2016 geoBoundaries identifiers are not Statistics Canada CSDUIDs. Name and overlay candidates cannot certify an identity mapping or infer Indigenous/municipal political ownership.",
+    "The #485 2021 geometry screen and source snapshots remain immutable in their original packet; no copy or modification is made here."
+  ]
+}

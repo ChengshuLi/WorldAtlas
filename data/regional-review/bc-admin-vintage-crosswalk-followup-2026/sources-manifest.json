@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "retrieved_utc": "2026-10-04",
+  "sources": [
+    {
+      "id": "statcan-2021-correspondence-db-id",
+      "title": "2021 Census Correspondence File: Dissemination Blocks (DB_ID)",
+      "publisher": "Statistics Canada",
+      "reference_date": "2021 Census geography; product page issued 2021-11-17, modified 2022-09-28",
+      "canonical_reference": "https://www12.statcan.gc.ca/census-recensement/2021/geo/aip-pia/correspondence-correspondance/index2021-eng.cfm",
+      "download_url": "https://www12.statcan.gc.ca/census-recensement/2021/geo/aip-pia/correspondence-correspondance/files-fichiers/2021_92-156-X_DB_ID.zip",
+      "guide": "https://www150.statcan.gc.ca/n1/en/catalogue/92-156-G2021001",
+      "license": "Statistics Canada data reuse terms; Open Government Licence – Canada applies to federal data unless a product-specific restriction is stated. Attribution retained.",
+      "license_reference": "https://www.statcan.gc.ca/en/reference/terms-conditions/general",
+      "role": "official 2021-to-2016 dissemination-block identity correspondence; DBRELFLAG relationship codes retained as provided",
+      "retained_file": "sources/2021_92-156-X_DB_ID.zip",
+      "bytes": 5536099,
+      "sha256": "b818450d23e18fc3a0b749d4e0226826ccefd2fa59d526a3e427e4bb923613fd",
+      "restoration": "Download the URL above; verify the whole ZIP SHA-256 before extraction. ZIP contains 2021_92-156-X_DB_ID/2021_92-156-X_DB_ID.csv. Do not replace this retained vintage in place."
+    },
+    {
+      "id": "geoboundaries-can-adm3-2016-baseline",
+      "title": "geoBoundaries Canada ADM3 source snapshot",
+      "publisher": "geoBoundaries, pinned upstream revision 9469f09",
+      "reference_date": "2016 source vintage; upstream revision 9469f09",
+      "canonical_reference": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAN/ADM3/geoBoundaries-CAN-ADM3.geojson",
+      "license": "Open Data Commons Open Database License 1.0 (as retained by #485 source metadata)",
+      "license_reference": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "role": "2016 source features and names; original bytes retained in #485 packet",
+      "retained_file": "data/regional-review/regional-review-4254da254d94f450/sources/geoboundaries-CAN-ADM3-2016.geojson",
+      "retained_in": "baseline commit 39188aadf6efdae60357d9d4a1bbb62ffd981003",
+      "bytes": 42649707,
+      "sha256": "9d292ebf9a09010fc81ee5fa69683b4a8ba1b0d969bb20f6b90ffc587d3f215f",
+      "restoration": "Read the original file at the pinned baseline commit; do not copy, edit, or replace the #485 source. Upstream URL above is a lawful restoration route."
+    },
+    {
+      "id": "statcan-2021-csd-boundaries-baseline",
+      "title": "Statistics Canada 2021 Census Subdivision boundaries (retained through Esri Canada public feature service)",
+      "publisher": "Statistics Canada; public distribution item owned by Esri Canada Content",
+      "reference_date": "2021 census vintage; item modified 2026-08-11 (retained metadata timestamp)",
+      "canonical_reference": "https://www.arcgis.com/home/item.html?id=594124f0380d42b7a4b450574dd9630c",
+      "service_url": "https://services.arcgis.com/wjcPoefzjpzCgffS/arcgis/rest/services/CensusSubdivision/FeatureServer/0",
+      "license": "Statistics Canada attribution and reuse terms recorded on the public item; see item license statement and Statistics Canada terms.",
+      "role": "current-name and overlay candidate screen only; source features and official identifiers retained in #485",
+      "retained_file": "data/regional-review/regional-review-4254da254d94f450/sources/statistics-canada-bc-census-subdivisions-2021.geojson.gz",
+      "retained_in": "baseline commit 39188aadf6efdae60357d9d4a1bbb62ffd981003",
+      "bytes": 42765402,
+      "sha256": "a16ca45708ab0ccd898994e5e792187d5a108741c2ff6f5f9f74e91242206ad4",
+      "restoration": "Read the retained #485 bytes at the pinned baseline commit; otherwise query the service URL and preserve a new dated retrieval with its own receipt and hash."
+    }
+  ],
+  "limitations": [
+    "The official correspondence is at dissemination-block identity granularity. CSDUIDs are derived from the first seven digits of DBUIDs under Statistics Canada identifier structure; DB row counts are not area weights.",
+    "The packet does not retain or claim a direct Statistics Canada 2016 CSD feature-to-geoBoundaries feature key. Direct geoBoundaries successor identity remains unresolved where name/overlay screening is ambiguous or the overlap is below threshold.",
+    "No political ownership, Indigenous governance, municipal legal authority, or legal boundary change is inferred from name or geometric overlap."
+  ]
+}
