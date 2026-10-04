@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "issue": 605,
+  "method_id": "issue486-immutable-baseline-deterministic-compression",
+  "baseline_commit": "0ea5b92969a37e404daded7a5c1d8931bd74b19c",
+  "source_snapshot_commit": "276d72e1f316ad58d52c8fea7974a873c2ec9387",
+  "subject_count": 211,
+  "cases": [
+    {
+      "case": "unknown evaluation commit",
+      "result": "rejected"
+    },
+    {
+      "case": "changed whole-file baseline descriptor",
+      "result": "rejected"
+    },
+    {
+      "case": "changed captured GitHub issue body",
+      "result": "rejected"
+    },
+    {
+      "case": "changed original source snapshot commit",
+      "result": "rejected"
+    },
+    {
+      "case": "changed original scope whole-file pin",
+      "result": "rejected"
+    },
+    {
+      "case": "duplicate assigned subject",
+      "result": "rejected"
+    },
+    {
+      "case": "missing assigned subject",
+      "result": "rejected"
+    },
+    {
+      "case": "changed retained Census/TIGER source hash",
+      "result": "rejected"
+    },
+    {
+      "case": "fixed gzip mtime, empty filename and fixed OS header",
+      "result": "passed"
+    },
+    {
+      "case": "two independent complete builds byte-identical",
+      "result": "passed"
+    },
+    {
+      "case": "changed pin rejected before output directory",
+      "result": "rejected"
+    },
+    {
+      "case": "exclusive overwrite refusal preserves existing bytes",
+      "result": "passed"
+    }
+  ],
+  "changed_pin_created_no_output": true,
+  "existing_output_preserved": true,
+  "original_packet_write_attempts": 0,
+  "result": "PASS"
+}
