@@ -100,3 +100,5 @@ test('new recovery window and child may track original issue51, retaining releas
  d.w.queue=714;assert.throws(()=>validateDelegated(d),/operation-not-publisher-owned/);
 });
 test('original-issue recovery cannot use unrelated tracking issue',()=>{const w=window();w.queue=22;assert.throws(()=>validate(w),/invalid-publisher-window/);});
+
+test('actual Neon database/default ACLs use same-name isolated target and inert provider roles',()=>{const code=fs.readFileSync('scripts/current-postgres-recovery.mjs','utf8');assert.match(code,/CREATE ROLE cloud_admin NOLOGIN/);assert.match(code,/CREATE ROLE neon_superuser NOLOGIN/);assert.match(code,/CREATE DATABASE neondb OWNER neondb_owner/);assert.match(code,/\['exec','-i',target,'pg_restore','--file=-'\]/);assert.doesNotMatch(code,/'--no-owner','--role'/);});

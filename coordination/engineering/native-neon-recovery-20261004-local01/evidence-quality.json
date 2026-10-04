@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "issue": 789,
+  "lane": "engineering",
+  "worker_id": "engineering-neon-storage-publisher-20261004-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "8ce50c464fa944d154e861cc732d20b3f832bdbb",
+    "files": [
+      {
+        "path": "postgres/schema.sql",
+        "bytes": 51470,
+        "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 35723,
+        "sha256": "cb8ffe48dee31a77f82ff4ff3013761c54ad1b92a1db4d570be5016211375e57",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "scripts/test-current-postgres-recovery-native.mjs",
+        "bytes": 8029,
+        "sha256": "1bf230891c7efa2a181fed1ed7c7ca7a2a9b8d203101715ecc44e09f001265a5",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "test/current-postgres-recovery.test.mjs",
+        "bytes": 14855,
+        "sha256": "a97854801abafb49159ad47f27e002ae397338a4efabd8914f398eeb0d16e27a",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 245755,
+        "sha256": "47aa40b82e7f6b225a6567d28a0427df39d415dcf86df1d26f6d32ab84fd7a12",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 36442,
+      "sha256": "a253469de89f78a472fc79d3cb427439c4e94a2d9a4c10e820d1f14fd96350f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/test-current-postgres-recovery-native.mjs",
+      "bytes": 8579,
+      "sha256": "213d522ce4c16cb627ad4b725aa2e0c07642c51ecb2f6a7bb7b304b3ca306012",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "bytes": 15326,
+      "sha256": "49df1e41ee15372fc2db1bfb9fa08ad13243153565a850347e8f912a900939e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/native-recovery-fixture.yml",
+      "bytes": 803,
+      "sha256": "290f52ad0c5952fe8b10173e199cc545182f6b6bbcb059ccbd9ab7fcba357fc1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-neon-recovery-20261004-local01/README.md",
+      "bytes": 1149,
+      "sha256": "9b6eab1964b693e6be4d8e6124baee24732dc6458e40c165de6e12639bfa58fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-neon-recovery-20261004-local01/prepare-evidence.mjs",
+      "bytes": 2710,
+      "sha256": "684027e5ba31acbee1e097a7e586cdb26e225e0614018267ff20a0315a8fb59f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "native-owner-maintenance",
+      "kind": "code",
+      "description": "Restore retained native owner/database/default ACL statements in same-name isolated neondb using inert NOLOGIN provider roles and isolated superuser; unchanged production source. Native fixture covers actual database/default ACL shape. No verified production restore or capacity claim before actual rerun",
+      "software": "Node24, pinned PostgreSQL18 native container and locked Neon serverless driver",
+      "units": "No new physical benchmark or native production capacity claim before actual execution"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "status": "modified",
+      "original_sha256": "cb8ffe48dee31a77f82ff4ff3013761c54ad1b92a1db4d570be5016211375e57"
+    },
+    {
+      "path": "scripts/test-current-postgres-recovery-native.mjs",
+      "status": "modified",
+      "original_sha256": "1bf230891c7efa2a181fed1ed7c7ca7a2a9b8d203101715ecc44e09f001265a5"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "status": "modified",
+      "original_sha256": "a97854801abafb49159ad47f27e002ae397338a4efabd8914f398eeb0d16e27a"
+    },
+    {
+      "path": ".github/workflows/native-recovery-fixture.yml",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-neon-recovery-20261004-local01/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-neon-recovery-20261004-local01/prepare-evidence.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-neon-recovery-20261004-local01/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test test/current-postgres-recovery.test.mjs",
+    "node coordination/engineering/native-neon-recovery-20261004-local01/prepare-evidence.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/native-neon-recovery-20261004-local01/evidence-quality.json"
+  ]
+}

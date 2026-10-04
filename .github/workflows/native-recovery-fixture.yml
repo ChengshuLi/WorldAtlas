@@ -1,0 +1,27 @@
+name: Native recovery ACL fixture
+on:
+  pull_request:
+    paths:
+      - scripts/current-postgres-recovery.mjs
+      - scripts/test-current-postgres-recovery-native.mjs
+      - .github/workflows/native-recovery-fixture.yml
+permissions:
+  contents: read
+jobs:
+  native-recovery-acl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            hosted
+            src
+            postgres
+            data/observation-registry-history
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - run: node scripts/test-current-postgres-recovery-native.mjs

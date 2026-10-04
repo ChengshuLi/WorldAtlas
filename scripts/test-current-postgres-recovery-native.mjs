@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import {execFileSync,spawn} from 'node:child_process';
 import {randomUUID,createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
-import {recoveryImage,readRecoveryInventory,assertRestoredInventory,isolatedRestoreSQL,isolatedOriginalChecks} from './current-postgres-recovery.mjs';
+import {recoveryImage,readRecoveryInventory,assertRestoredInventory,isolatedRestoreSQL,isolatedOriginalChecks,isolatedRecoveryBootstrapSQL} from './current-postgres-recovery.mjs';
 import {storageExportV2Contract} from '../hosted/storage-export-v2-contract.js';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const native=(args,input)=>execFileSync('docker',args,{input,timeout:180000,maxBuffer:16*1024*1024,stdio:['pipe','pipe','pipe']});
@@ -11,10 +11,11 @@ let name;const receipt={version:1,fixture_only:true,production_access:false,imag
 const cleanup=()=>{if(name){native(['rm','-fv',name]);assert.equal(native(['ps','-a','--filter','name=^/'+name+'$','--format','{{.ID}}']).toString().trim(),'');name=null;}};
 async function start(){name='atlas-sql-fixture-'+randomUUID();native(['run','-d','--name',name,'--network','none','--read-only','--tmpfs','/var/lib/postgresql:rw,size=256m','--tmpfs','/var/run/postgresql:rw,size=16m','--memory','1g','-e','POSTGRES_HOST_AUTH_METHOD=trust',recoveryImage]);for(let i=0;i<30;i++){try{native(['exec',name,'pg_isready','-U','postgres']);return;}catch{await new Promise(r=>setTimeout(r,1000));}}throw Error('fixture not ready');}
 const command=(args,input)=>native(['exec','-i',name,...args],input);
-const sql=value=>command(['psql','-X','-Atq','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],value);
+const sql=value=>command(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],value);
 const query=async value=>JSON.parse(sql('SET ROLE neondb_owner; SELECT coalesce(json_agg(row_to_json(q)),\'[]\'::json) FROM ('+value+') q;').toString());
 try{
- await start();sql('CREATE ROLE neondb_owner NOLOGIN; CREATE ROLE worldatlas_app NOLOGIN; ALTER DATABASE postgres OWNER TO neondb_owner;');
+ await start();command(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedRecoveryBootstrapSQL);
+ sql('GRANT ALL ON DATABASE neondb TO neon_superuser; ALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON TABLES TO neon_superuser WITH GRANT OPTION; ALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON SEQUENCES TO neon_superuser WITH GRANT OPTION;');
  for(const file of ['postgres/schema.sql','postgres/migrations/0001_temporal_geography.sql','postgres/migrations/0002_footprint_versions.sql'])sql('SET ROLE neondb_owner; '+fs.readFileSync(file,'utf8'));
  const registryModule=fs.readFileSync('scripts/neon-forward-migrations.mjs','utf8'),registry=registryModule.match(/const registrySQL=`([\s\S]*?)`;/)[1];sql('SET ROLE neondb_owner; '+registry);
  sql(`SET ROLE neondb_owner; INSERT INTO worldatlas_schema_migrations VALUES('synthetic-fixture',repeat('a',64),repeat('b',64),repeat('c',64),repeat('d',64),repeat('e',64),123456789);
@@ -31,16 +32,17 @@ try{
  assert.equal(locked.locked,true);assert.equal((await query(`SELECT exists(SELECT 1 FROM pg_locks WHERE pid=${locked.pid} AND locktype='advisory' AND classid=807245315 AND objid=1 AND granted) held`))[0].held,true);
  sql(`SELECT pg_terminate_backend(${locked.pid});`);locker.stdin.destroy();assert.equal((await query(`SELECT exists(SELECT 1 FROM pg_locks WHERE pid=${locked.pid} AND locktype='advisory' AND classid=807245315 AND objid=1 AND granted) held`))[0].held,false);receipt.session_lock_loss_and_release_detected=true;
  const before=await readRecoveryInventory(query);assert.equal(before.catalog_sha256,storageExportV2Contract.postgres_catalog_sha256);
- const dump=command(['pg_dump','-U','postgres','-d','postgres','--format=custom','--schema=public','--no-owner']);assert.equal(dump.subarray(0,5).toString(),'PGDMP');
+ const dump=command(['pg_dump','-U','postgres','-d','neondb','--format=custom','--schema=public']);assert.equal(dump.subarray(0,5).toString(),'PGDMP');
+ const acl=()=>sql("SELECT datacl::text FROM pg_database WHERE datname='neondb'; SELECT defaclrole::regrole::text,defaclobjtype,defaclacl::text FROM pg_default_acl ORDER BY 1,2;").toString();const originalACL=acl();
  const after=await readRecoveryInventory(query);
  // A killed native CLI is not evidence that its named container was removed.
  const slow='atlas-sql-timeout-fixture-'+randomUUID();try{cleanup();native(['create','--name',slow,'--network','none','--read-only',recoveryImage,'sleep','30']);assert.throws(()=>execFileSync('docker',['start','-ai',slow],{timeout:250,stdio:'pipe'}));}finally{try{native(['rm','-fv',slow]);}catch{}assert.equal(native(['ps','-a','--filter','name=^/'+slow+'$','--format','{{.ID}}']).toString().trim(),'');}receipt.timed_out_named_client_absence_confirmed=true;
-cleanup();await start();sql('CREATE ROLE neondb_owner NOLOGIN; CREATE ROLE worldatlas_app NOLOGIN; ALTER DATABASE postgres OWNER TO neondb_owner; DROP SCHEMA public;');
- const restoreSQL=isolatedRestoreSQL(command(['pg_restore','--file=-','--no-owner','--role','neondb_owner'],dump));command(['psql','-X','-U','postgres','-d','postgres','--single-transaction','-v','ON_ERROR_STOP=1'],restoreSQL);
- sql(isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));const restored=await readRecoveryInventory(query);assertRestoredInventory(before,restored,after);
+cleanup();await start();command(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedRecoveryBootstrapSQL);sql('DROP SCHEMA public;');
+ const restoreSQL=isolatedRestoreSQL(command(['pg_restore','--file=-'],dump));command(['psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],restoreSQL);
+ sql(isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));const restored=await readRecoveryInventory(query);assertRestoredInventory(before,restored,after);assert.equal(acl(),originalACL);receipt.database_and_provider_default_acls_preserved=true;
  assert.equal((await query('SELECT metadata FROM atlas_attribute_records'))[0].metadata,'{ "original" : "claim" }');assert.equal((await query('SELECT metadata FROM atlas_names'))[0].metadata,'{ "original" : "name" }');assert.equal((await query('SELECT counts FROM atlas_ingestions'))[0].counts,'{ "original" : 1 }');
  sql('SET ROLE neondb_owner; REVOKE SELECT ON atlas_ingestions FROM worldatlas_app;');const corrupted=await readRecoveryInventory(query);assert.throws(()=>assertRestoredInventory(before,corrupted,after));
  // A fresh target must reject a truncated native archive, not certify a partial restore.
- cleanup();await start();sql('CREATE ROLE neondb_owner NOLOGIN; CREATE ROLE worldatlas_app NOLOGIN; DROP SCHEMA public;');assert.throws(()=>command(['pg_restore','-U','postgres','-d','postgres','--no-owner','--role','neondb_owner','--single-transaction','--exit-on-error'],dump.subarray(0,Math.floor(dump.length/2))));
+ cleanup();await start();command(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedRecoveryBootstrapSQL);sql('DROP SCHEMA public;');assert.throws(()=>command(['pg_restore','-U','postgres','-d','neondb','--single-transaction','--exit-on-error'],dump.subarray(0,Math.floor(dump.length/2))));
  Object.assign(receipt,{status:'passed',catalog_sha256:before.catalog_sha256,dump:{bytes:dump.length,sha256:sha(dump)},collections:before.collections,owner_registry_sha256:before.owner_registry_sha256,raw_text_preserved:true,table_acl_corruption_rejected:true,truncated_archive_rejected:true});
 }finally{cleanup();receipt.isolated_targets_removed=true;console.log(JSON.stringify(receipt,null,2));}
