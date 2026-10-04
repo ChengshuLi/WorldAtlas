@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "issue": 713,
+  "lane": "engineering",
+  "worker_id": "source-subject-extracts-root-20261003",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "038d611ee5c275812d53af044f389e85e0f303f9",
+    "files": [
+      {
+        "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+        "bytes": 11710,
+        "sha256": "9139cb50befa93614f079670785260f76b3f6959c51d8cdee3802e7fbdf862c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 11284,
+        "sha256": "6d73eb392a3b3abc3e0a878c3f5e1144feb63e64c085f1ad1015550cb368c309",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/evidence-quality.test.mjs",
+        "bytes": 5759,
+        "sha256": "3744913566c1047e94ae72ecdc51a6943420a3c37c386e5d18ecc94eb187f639",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/premerge-evidence.test.mjs",
+        "bytes": 13694,
+        "sha256": "ee18a36c8b61029e49b9aa90b995004200c129b1d0d130963ba179c3b09c922b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/bc-administrative-remainders-followup-2026/cd-assessments.json",
+        "bytes": 523200,
+        "sha256": "ca83ecaefdb4e660e4e4a830bdf5016f2ec4ebd79bbd3e419d04be8c786802b3",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [
+    {
+      "id": "prior-609-audit",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/24629e5918a144a1979db80ba7012baea42036e7/data/regional-review/bc-administrative-remainders-followup-2026/cd-assessments.json",
+      "role": "Prior retained native census-division subject inventory; mechanical compatibility only",
+      "vintage": "2021 census source, prior audit commit 24629e5918a144a1979db80ba7012baea42036e7",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "unknown",
+        "terms": "Original source licensing not independently evaluated by this engineering probe"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Original source acquisition and evidence remain in prior audit packet; full large inputs need reviewed restoration/partitioning",
+      "limit": "Probe checks retained prior evidence identities; original source membership and geometry are not independently validated"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/claim.json",
+      "bytes": 837,
+      "sha256": "3685f555d5c72b5adf52a10b272195686fa2e1bf42967b757c3b9f2d35983c51",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/compatibility.json",
+      "bytes": 1914,
+      "sha256": "1a823149169d3dc39ef5d6102f597cd3fe305c03fb4fe7b9e829a22582b816af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/registry-from-pr678.geojson",
+      "bytes": 1762,
+      "sha256": "d2bb8add37b76c58a603534e3aae9937139bb3c5ec08c08636d4e0993aa95625",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/validation.txt",
+      "bytes": 3342,
+      "sha256": "0bd959030eb76a53d46c125a79829059f13ec35a118c145b2998d60ed45f93b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/verify-compatibility.mjs",
+      "bytes": 3736,
+      "sha256": "da2ecb6f6f686bc12fd813bb3594cc1b45e46168535b321e50af370bfaffb7ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 14550,
+      "sha256": "f262c464f3e67f062b653e358e69811db1a3b9d39cec7ad9250cb3efbc306501",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 14753,
+      "sha256": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/evidence-quality.test.mjs",
+      "bytes": 9677,
+      "sha256": "11faea09b86bd194a852a674c482b52db8e8a840e7bf2cb589e26470fc1975e4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "bytes": 16873,
+      "sha256": "c1ae7dbcaa2d1fb87ff8b8813fa775657b621998aa4705d87712e69cee82f837",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "identity-inventory",
+      "kind": "code",
+      "description": "Add exact prior-evidence subject roster projection with explicit permanent verification limits; retain strict ancestor, hashes, byte bounds and source/geometry separation",
+      "software": "Node 24",
+      "units": "identity records"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs test/evidence-policy.test.mjs test/geography-worker-lane.test.mjs",
+    "node coordination/engineering/source-subject-extracts-713-20261003/verify-compatibility.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/source-subject-extracts-713-20261003/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "status": "modified",
+      "original_sha256": "9139cb50befa93614f079670785260f76b3f6959c51d8cdee3802e7fbdf862c2"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "status": "modified",
+      "original_sha256": "6d73eb392a3b3abc3e0a878c3f5e1144feb63e64c085f1ad1015550cb368c309"
+    },
+    {
+      "path": "test/evidence-quality.test.mjs",
+      "status": "modified",
+      "original_sha256": "3744913566c1047e94ae72ecdc51a6943420a3c37c386e5d18ecc94eb187f639"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "status": "modified",
+      "original_sha256": "ee18a36c8b61029e49b9aa90b995004200c129b1d0d130963ba179c3b09c922b"
+    },
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/registry-from-pr678.geojson",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/verify-compatibility.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/compatibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/source-subject-extracts-713-20261003/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
