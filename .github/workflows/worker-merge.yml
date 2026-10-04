@@ -20,7 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: read
+      # Trusted preparation can create/delete only its disposable candidate branch.
+      contents: write
       # GitHub requires PR write permission to post the durable preparation
       # receipt on a pull request. Only trusted main code receives this token.
       pull-requests: write
@@ -30,6 +31,7 @@ jobs:
       statuses: read
     outputs:
       candidate: ${{ steps.prepare.outputs.candidate }}
+      candidate_ref: ${{ steps.prepare.outputs.candidate_ref }}
       base: ${{ steps.prepare.outputs.base }}
       profile: ${{ steps.prepare.outputs.profile }}
       shards: ${{ steps.prepare.outputs.shards }}
@@ -51,6 +53,7 @@ jobs:
         name: Validate ready reviewed head and pin current integration candidate
         env:
           GH_TOKEN: ${{ github.token }}
+          PREPARE_FALLBACK: 'true'
           MERGE_PHASE: prepare
         run: node scripts/run-worker-merge.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -155,6 +158,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           MERGE_PHASE: merge
+          CANDIDATE_REF: ${{ needs.prepare.outputs.candidate_ref }}
           TESTED_BASE: ${{ needs.prepare.outputs.base }}
           TESTED_CANDIDATE: ${{ needs.prepare.outputs.candidate }}
           PROOF_RUN_ATTEMPT: ${{ needs.prepare.outputs.proof_attempt }}

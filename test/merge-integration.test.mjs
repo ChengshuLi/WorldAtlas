@@ -6,7 +6,7 @@ import path from 'node:path';
 import {integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
 import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
-import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile} from '../scripts/merge-integration.mjs';
+import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, createCandidate, cleanupCandidate} from '../scripts/merge-integration.mjs';
 
 const sha = letter => letter.repeat(40);
 test('only staging-test shards prepare the immutable migration derivative', () => {
@@ -304,4 +304,76 @@ test('post-convergence head change retains the new head in rejection diagnostics
     assert.equal(error.candidateDiagnostics.expected_base,sha('b'));
     assert.equal(error.candidateDiagnostics.reason,'head-changed');assert.equal(error.candidateDiagnostics.attempt,2);return true;
   });assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
+});
+
+function isolatedFixture() {
+  const f=fixture(),api=f.api;f.operations=[];f.refs=new Map();f.synthetic=sha('e');
+  f.api=async(route,method='GET',body)=>{
+    f.operations.push({route,method,body});
+    if(route===`/repos/${f.repo}/git/refs`&&method==='POST') {
+      assert.equal(body.sha,f.base);assert.match(body.ref,/^refs\/heads\/worldatlas-integration\/pr-2-/);
+      if(f.createDenied)throw Error('GitHub POST failed (HTTP 403)');
+      f.refs.set(body.ref.replace('refs/heads/',''),body.sha);return {ref:body.ref};
+    }
+    if(route===`/repos/${f.repo}/merges`&&method==='POST') {
+      assert.notEqual(body.base,'main');assert.notEqual(body.base,f.pr.head.ref);assert.equal(body.head,f.head);
+      if(f.mergeConflict)throw Error('GitHub POST failed (HTTP 409)');
+      f.refs.set(body.base,f.synthetic);return {sha:f.synthetic};
+    }
+    if(/\/git\/refs?\/heads\/worldatlas-integration\//.test(route)) {
+      const ref=route.split(/\/git\/refs?\/heads\//)[1];
+      if(method==='DELETE') {if(f.deleteDenied)throw Error('GitHub DELETE failed (HTTP 403)');f.refs.delete(ref);return null;}
+      return {object:{sha:f.refChanged?sha('f'):f.refs.get(ref)}};
+    }
+    if(route.endsWith('/git/commits/'+f.synthetic))return {sha:f.synthetic,tree:{sha:'integrated'},parents:[{sha:f.wrongSyntheticParent?sha('d'):f.base},{sha:f.head}]};
+    return api(route,method,body);
+  };
+  const options=f.options;f.options=()=>({...options(),prepareFallback:true,integrationRequestId:'isolated-candidate-test-request'});
+  return f;
+}
+test('persistent automatic lag falls back to exact owned candidate without editing authored branches',async()=>{
+  const f=isolatedFixture();f.parentBase=sha('d');
+  const result=await prepareIntegration(f.options());
+  assert.equal(result.candidate,f.synthetic);assert.equal(result.candidate_refresh_attempts,6);
+  assert.equal(f.refs.get(result.candidate_ref),f.synthetic);assert.equal(result.pr.head.sha,f.head);
+  assert.equal(f.writes.length,0);
+  assert.equal((await cleanupCandidate(f.options(),result.candidate_ref,f.synthetic)).status,'deleted');
+  assert.equal(f.refs.size,0);
+});
+test('isolated conflict or wrong parents is rejected and only the owned ref is deleted',async()=>{
+  for(const field of ['mergeConflict','wrongSyntheticParent']) {
+    const f=isolatedFixture();f[field]=true;
+    await assert.rejects(createCandidate(f.options(),{pr:f.pr,base:f.base}),/conflict|exact current main/);
+    assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
+  }
+});
+test('fallback retains reviewed-byte and post-wait authority guards and cleans rejected candidates',async()=>{
+  const f=isolatedFixture();f.parentBase=sha('d');f.integrated[0].sha='unreviewed';
+  await assert.rejects(prepareIntegration(f.options()),/changes reviewed bytes/);
+  assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
+  const g=isolatedFixture();g.parentBase=sha('d');g.staleReview=true;
+  await assert.rejects(prepareIntegration(g.options()),/exact-head review/);
+  assert.equal(g.operations.some(row=>row.method==='POST'),false);
+});
+test('cleanup refuses another request, main/worker refs and changed owned refs',async()=>{
+  const f=isolatedFixture();const created=await createCandidate(f.options(),{pr:f.pr,base:f.base});
+  for(const ref of ['main',f.pr.head.ref,created.reference+'-other'])await assert.rejects(cleanupCandidate(f.options(),ref,f.synthetic),/unowned/);
+  f.refChanged=true;await assert.rejects(cleanupCandidate(f.options(),created.reference,f.synthetic),/reference changed/);
+  assert.equal(f.refs.size,1);assert.equal(f.operations.some(row=>row.method==='DELETE'),false);
+});
+test('failed cleanup retains its exact resource for inspection without hiding rejection',async()=>{
+  const f=isolatedFixture();f.parentBase=sha('d');f.integrated[0].sha='unreviewed';f.deleteDenied=true;
+  await assert.rejects(prepareIntegration(f.options()),error=>{
+    assert.match(error.message,/changes reviewed bytes/);assert.equal(error.candidateCleanup.status,'pending');
+    assert.match(error.candidateCleanup.reference,/^worldatlas-integration\/pr-2-/);return true;
+  });assert.equal(f.writes.length,0);
+});
+
+test('isolated candidate follows the existing final tests/main/head merge guards',async()=>{
+  const f=isolatedFixture();f.parentBase=sha('d');const prepared=await prepareIntegration(f.options());
+  await f.complete({testedCandidate:prepared.candidate,testedBase:prepared.base});
+  assert.equal(f.writes[0].sha,f.head);assert.equal(f.writes[0].merge_method,'squash');
+  await cleanupCandidate(f.options(),prepared.candidate_ref,prepared.candidate);assert.equal(f.refs.size,0);
+  const g=isolatedFixture();g.parentBase=sha('d');const gp=await prepareIntegration(g.options());g.base=sha('d');
+  await assert.rejects(g.complete({testedCandidate:gp.candidate,testedBase:gp.base}),/Main advanced/);assert.equal(g.writes.length,0);
 });

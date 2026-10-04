@@ -89,3 +89,33 @@ test('actual entry point saves stale/head/conflict/base diagnostics even when no
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
  }
 });
+
+test('actual final entry point cleans only its owned ref and retains successful merge on cleanup failure',()=>{
+  for(const kind of ['deleted','denied','unowned']) {
+    const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-owned-cleanup-'));
+    fs.mkdirSync(path.join(directory,'.github'));
+    fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
+    const request='cleanup-entrypoint-request',reference=`worldatlas-integration/pr-2-${request}-1234`;
+    fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:'a'.repeat(40),request_id:request}}));
+    fs.writeFileSync(path.join(directory,'mock.mjs'),`globalThis.fetch=async(url,options)=>{
+      const route=new URL(url).pathname;
+      if(options.method==='PUT')throw Error('Unexpected new merge');
+      if(options.method==='DELETE') {
+        if(route!=='/repos/owner/repo/git/refs/heads/${reference}')throw Error('Unowned deletion');
+        return '${kind}'==='denied'?new Response('{}',{status:403}):new Response(null,{status:204});
+      }
+      return new Response(JSON.stringify(route.endsWith('/pulls/2')?{merged:true,head:{sha:'a'.repeat(40)},merge_commit_sha:'b'.repeat(40)}:
+        route.includes('/git/ref/heads/')?{object:{sha:'b'.repeat(40)}}:{}),{status:200,headers:{'Content-Type':'application/json'}});
+    };`);
+    try {
+      const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
+        cwd:directory,encoding:'utf8',env:{...process.env,GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
+          GITHUB_RUN_ID:'1234',GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),
+          MERGE_PHASE:'merge',INTEGRATION_RESULT:'success',TESTED_CANDIDATE:'b'.repeat(40),CANDIDATE_REF:kind==='unowned'?'main':reference}});
+      const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
+      assert.equal(result.status,0,result.stderr);assert.equal(receipt.accepted,true);assert.equal(receipt.status,'merged');
+      assert.equal(receipt.candidate_cleanup.status,kind==='deleted'?'deleted':'pending');
+      if(kind==='unowned')assert.match(receipt.candidate_cleanup.reason,/unowned/);
+    } finally {fs.rmSync(directory,{recursive:true,force:true});}
+  }
+});
