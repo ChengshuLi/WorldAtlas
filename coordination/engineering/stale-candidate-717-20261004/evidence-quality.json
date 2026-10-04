@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "issue": 717,
+  "lane": "engineering",
+  "worker_id": "stale-candidate-root-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "16da778105250d33b749ed6e0a9d0141dc1f6f1a",
+    "files": [
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 17957,
+        "sha256": "300ba6ac1d4c06c6ab0828424b992a7e2788d98494378d8db9c8cc9b0849a15f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 9161,
+        "sha256": "e42fa9abf5ad72f09fff9462894fde7ea157030f7251555beb4ef76b695eee9e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-worker-merge.mjs",
+        "bytes": 3094,
+        "sha256": "1cfe0963733ce89e989d57a7f45465337fd9341fcf093f69409a968a42f3b9d7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration-entrypoint.test.mjs",
+        "bytes": 3007,
+        "sha256": "42147257046a42ac5c9db72750a32b49f636213fa808dc012b44d4b6be4a6ba0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration.test.mjs",
+        "bytes": 14011,
+        "sha256": "5df84e5e88a13358817640a471ef9a4c29a416b01155f2af30d8f9fd2b18374d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 18835,
+      "sha256": "a79c2b945c60213a04a07b5e3dcdd9ecd481b5bcb17663d5c6b4d89c5401a1e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 13326,
+      "sha256": "78e0d25541f902dab56cc043a8cd53a176f74328f46d2a34a7dddb2af2132715",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 3249,
+      "sha256": "0273cd0f1e1dc32e8e70c5bf25a77ea805b891bb5821878a325f6ec1a4963481",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "bytes": 6444,
+      "sha256": "51472c5bdd2a28888ed1166b862141be52369c5630cacd5ead8176a811564da8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 19213,
+      "sha256": "6284fbf2fdc7a53afc9be7672586afabd0f047da486592baee0a4cf5948eab7e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/stale-candidate-717-20261004/claim.json",
+      "bytes": 821,
+      "sha256": "0269a860c72dc3fa43af954fb8d45a654dd24388f032245d8c0318ceb89fe2b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/stale-candidate-717-20261004/validation.txt",
+      "bytes": 26937,
+      "sha256": "2cee0f0ef79ebff27abe02c2bf0a27052a082a3e4dc3e2188910b4846dcc5288",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "candidate-freshness",
+      "kind": "code",
+      "description": "Late candidate fetch, bounded parent-only polling, post-wait authority revalidation and sanitized receipt diagnostics; preserve exact tested trees and final serialization",
+      "software": "Node 24",
+      "units": "commit identities"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/stale-candidate-717-20261004/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "300ba6ac1d4c06c6ab0828424b992a7e2788d98494378d8db9c8cc9b0849a15f"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "original_sha256": "e42fa9abf5ad72f09fff9462894fde7ea157030f7251555beb4ef76b695eee9e"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "1cfe0963733ce89e989d57a7f45465337fd9341fcf093f69409a968a42f3b9d7"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "status": "modified",
+      "original_sha256": "42147257046a42ac5c9db72750a32b49f636213fa808dc012b44d4b6be4a6ba0"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "5df84e5e88a13358817640a471ef9a4c29a416b01155f2af30d8f9fd2b18374d"
+    },
+    {
+      "path": "coordination/engineering/stale-candidate-717-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/stale-candidate-717-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/stale-candidate-717-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

@@ -16,7 +16,7 @@ try {
   if (phase === 'prepare') {
     const state = await prepareIntegration(options);
     result = {...result, status: state.replayed ? 'already-merged' : 'testing',
-      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, proof: state.proof};
+      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, proof: state.proof, candidate_refresh_attempts: state.candidate_refresh_attempts};
     // Only validated hexadecimal IDs are exposed to the isolated candidate job.
     fs.appendFileSync(process.env.GITHUB_OUTPUT, `proof_attempt=${state.proof?.run_attempt ?? ''}\nproof_run=${state.proof?.run_id ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.profile === 'full' ? [0,1,2] : [0])}\n`);
   } else {
@@ -28,6 +28,7 @@ try {
   }
 } catch (error) {
   result.reason = error.message;
+  if (error.candidateDiagnostics) result.candidate_diagnostics = error.candidateDiagnostics;
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';
   result.retryable = /resubmit unchanged head/.test(error.message);
   if (phase === 'prepare') process.exitCode = 1;
