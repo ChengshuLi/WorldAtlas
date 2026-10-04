@@ -1,0 +1,65 @@
+{
+  "inherited_from_ancestor_packet": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/acquisition.json",
+  "ancestor_packet_baseline_commit": "e570f16236928fd5c5e359ab96e81399b55ccb26",
+  "provider": "OCHA West and Central Africa Regional Office",
+  "dataset_id": "west-and-central-africa-administrative-boundaries-levels",
+  "catalog_metadata_url": "https://data.humdata.org/api/3/action/package_show?id=west-and-central-africa-administrative-boundaries-levels",
+  "metadata_modified": "2026-04-21T12:12:21.745377",
+  "license": "Creative Commons Attribution International (CC BY)",
+  "source_dates": {
+    "admin0_resource_last_modified": "2026-04-20T10:48:18.464749",
+    "admin1_resource_last_modified": "2026-04-20T15:24:08.717222",
+    "settlement_resource_last_modified": "2021-12-31T12:39:34.025796"
+  },
+  "source_layer_vintages": "WCA edge-matched ADM0/ADM1 archives named 942026; point layer is the older OCHA WCA place resource. Catalog metadata modification is not the date of every feature.",
+  "subsets": [
+    {
+      "level": "settlement-points",
+      "original_archive": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/hdx-wca-wca_pplp_ocha.zip.gz",
+      "original_archive_gzip_sha256": "793cbfc591980ec84b2130ab824dc07ea29241a1d98b51ec8075962ae2d6cef2",
+      "resource_url": "https://data.humdata.org/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/5f34e982-fbba-404b-a64f-31ad3480e157/download/wca_pplp_ocha.zip",
+      "resource_name": "wca_pplp_ocha.zip",
+      "resource_last_modified": "2021-12-31T12:39:34.025796",
+      "subset_file": "sources/wca-settlement-points-region-subset.geojson.gz",
+      "feature_count": 93588,
+      "filter": "admin0Name IN ('Nigeria','Senegal','Sierra Leone')",
+      "restored_bytes": 41169332,
+      "restored_sha256": "d5ba3e733ed11d83f5dd4947c1eaa9843cb424dfd894fedd744ffe43cceea5fc",
+      "gzip_bytes": 2562887,
+      "gzip_sha256": "93b3db78efca9b66c2d8c87c6fe3f90f5c824dfb0fc77332892478239b79c35d",
+      "method": "GDAL 3.10.3 ogr2ogr subset from the retained ancestor original archive; exact command parameters are recorded in context-extract.json"
+    },
+    {
+      "level": "adm0",
+      "original_archive": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/hdx-wca-wca_admbnda_adm0_edgematched_942026.zip.gz",
+      "original_archive_gzip_sha256": "b0f2066bd02de276cbc2ba0f2b00044c17b1aecba859d003bdefcbdc7dded19d",
+      "resource_url": "https://data.humdata.org/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/4b1dc257-9e4f-4b58-8a5f-cbae28a0124f/download/wca_admbnda_adm0_edgematched_942026.zip",
+      "resource_name": "wca_admbnda_adm0_edgematched_942026.zip",
+      "resource_last_modified": "2026-04-20T10:48:18.464749",
+      "subset_file": "sources/wca-adm0-region-neighbors.geojson.gz",
+      "feature_count": 13,
+      "filter": "adm0_name IN ('Nigeria','Sénégal','Senegal','Sierra Leone','Niger','Benin','Cameroon','Chad','Mauritania','Mali','Guinea','Guinea-Bissau','The Gambia','Gambia','Liberia')",
+      "restored_bytes": 4988817,
+      "restored_sha256": "7fb0a318a2a61e3c8af7cec73ae8bbfb62fb1be340be0b2c542431ae60e38be5",
+      "gzip_bytes": 1416341,
+      "gzip_sha256": "612fb8e7e63a61d2f08fc888d5385a60d281d849ea84128abdd9eafbb1ae232d",
+      "method": "GDAL 3.10.3 ogr2ogr subset from the retained ancestor original archive; exact command parameters are recorded in context-extract.json"
+    },
+    {
+      "level": "adm1",
+      "original_archive": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/hdx-wca-wca_admbnda_adm1_edgematched_942026.zip.gz",
+      "original_archive_gzip_sha256": "e31849bce58a431e111e2cc578119fc6468a40231981f2956e802ccabb697646",
+      "resource_url": "https://data.humdata.org/dataset/b20cd345-93fb-43bd-9c6e-7bc7d87b63eb/resource/d676326e-481d-4576-828d-4c17e4f7bac6/download/wca_admbnda_adm1_edgematched_942026.zip",
+      "resource_name": "wca_admbnda_adm1_edgematched_942026.zip",
+      "resource_last_modified": "2026-04-20T15:24:08.717222",
+      "subset_file": "sources/wca-adm1-region-neighbors.geojson.gz",
+      "feature_count": 184,
+      "filter": "adm0_name IN ('Nigeria','Sénégal','Senegal','Sierra Leone','Niger','Benin','Cameroon','Chad','Mauritania','Mali','Guinea','Guinea-Bissau','The Gambia','Gambia','Liberia')",
+      "restored_bytes": 10225351,
+      "restored_sha256": "696b31c337b8c61f5b3af262aa372d00d99cc4420e4a110b5c2c75ac378da132",
+      "gzip_bytes": 2971858,
+      "gzip_sha256": "f4b426f31d1ef4d9bc362cbd70c4000aa2f9238cac171861613dde47432861b1",
+      "method": "GDAL 3.10.3 ogr2ogr subset from the retained ancestor original archive; exact command parameters are recorded in context-extract.json"
+    }
+  ]
+}

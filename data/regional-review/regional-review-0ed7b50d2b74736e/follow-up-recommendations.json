@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "parent_packet_issue": 478,
+  "region_integration_issue": 466,
+  "assessment_commit": "e570f16236928fd5c5e359ab96e81399b55ccb26",
+  "children_created": true,
+  "children_are_ready": false,
+  "items": [
+    {
+      "issue": 749,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/749",
+      "country": "Nigeria",
+      "subject_count": 179,
+      "owned_path": "data/regional-review/regional-review-478-nigeria-followup/",
+      "reason": "Resolve the WCA versus COD-AB ADM2 code vintage crosswalk for settlement points, source the ambiguous duplicated-name candidates Obi and Bassa, and obtain a lawful current settlement/physical-land completeness source or explicit bounded restoration method.",
+      "dependency": 478
+    },
+    {
+      "issue": 750,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/750",
+      "country": "Senegal",
+      "subject_count": 45,
+      "owned_path": "data/regional-review/regional-review-478-senegal-followup/",
+      "reason": "Source the official 45-to-46 department crosswalk including Keur Massar (SN0105, COD-AB valid_on 2024-05-20), and find a lawful current settlement/physical-land evidence path after the GRID3 route returned HTTP 403.",
+      "dependency": 478
+    },
+    {
+      "issue": 751,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/751",
+      "country": "Sierra Leone",
+      "subject_count": 2,
+      "owned_path": "data/regional-review/regional-review-478-sierra-leone-followup/",
+      "reason": "Review Western Area Rural and Urban roles and full extent with the #479 packet's other twelve Sierra Leone subjects; Western Area Rural is a source-scale candidate at 88.16% of its ADM1 parent. The Sierra Leone settlement catalog license is Other.",
+      "related_completed_issue": 479,
+      "related_merged_pr": 746,
+      "dependency": 478
+    }
+  ],
+  "limits": [
+    "All three children are unready until #478 closes and issue triage reviews their source scope, exact ownership, dependency and evidence contract.",
+    "No follow-up proposes a hierarchy, shared boundary, source-member or physical-footprint change before authoritative evidence.",
+    "No inter-region inconsistency was established in the same-source neighbor-edge screen; if later evidence establishes one, create one coordinated neighbor task before integration."
+  ]
+}

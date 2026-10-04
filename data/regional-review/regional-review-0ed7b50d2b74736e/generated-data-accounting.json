@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "issue": 478,
+  "generator": "build_assessment.py",
+  "baseline_commit": "e570f16236928fd5c5e359ab96e81399b55ccb26",
+  "generated_table_rows_excluding_headers": 5513,
+  "outputs": [
+    {
+      "path": "assessment.csv",
+      "rows_excluding_header": 226,
+      "bytes": 403595,
+      "sha256": "dfba56cfac79b95e4b573b59064753520fd6342c236ad581a8aaa94ad4af16f0"
+    },
+    {
+      "path": "source-vintage-crosswalk.csv",
+      "rows_excluding_header": 1340,
+      "bytes": 308010,
+      "sha256": "399682e3dde8d5bc15bdcb50671f5c6205790de04b3e472d63618103e13ab1f1"
+    },
+    {
+      "path": "geometry-components.csv",
+      "rows_excluding_header": 258,
+      "bytes": 792798,
+      "sha256": "6dc4593b752734981022893697a3cd8412df4b56548be34c523187557dcf011e"
+    },
+    {
+      "path": "settlement-point-anomalies.csv",
+      "rows_excluding_header": 504,
+      "bytes": 111982,
+      "sha256": "7083fa9fd45293e406d7bd9dfffff66e153aafe071a1fa3a3f9b8649983ac0dd"
+    },
+    {
+      "path": "settlement-source-counts.csv",
+      "rows_excluding_header": 228,
+      "bytes": 73858,
+      "sha256": "db45b5f3f126dfbf3d2fe16ba0363a79466966fcbb1f38bb97b22fa1a3705ec4"
+    },
+    {
+      "path": "city-name-spatial-screen.csv",
+      "rows_excluding_header": 1796,
+      "bytes": 289419,
+      "sha256": "32f701dfb17025f1c2b2f978abe6ba3eb92cae016eacc254f560197bab500b0e"
+    },
+    {
+      "path": "current-unit-inventory.csv",
+      "rows_excluding_header": 836,
+      "bytes": 80388,
+      "sha256": "458648f365d00b42c3c6ece7c6c79bc86f7b299698368aeb971ab0e3d9daa1af"
+    },
+    {
+      "path": "administrative-scope.csv",
+      "rows_excluding_header": 27,
+      "bytes": 36628,
+      "sha256": "7d678a869f4afcb3dad307b3e04e8f22054138d62839c483e595e26206cc6fbe"
+    },
+    {
+      "path": "admin1-source-comparison.csv",
+      "rows_excluding_header": 56,
+      "bytes": 9061,
+      "sha256": "80e14793796269810567a551c09d5cc18424919c8319bb068b3837cf620807a1"
+    },
+    {
+      "path": "neighbor-edge-screen.csv",
+      "rows_excluding_header": 11,
+      "bytes": 2036,
+      "sha256": "edd84bdd465c8e2f6cf70baea282ac5812c47c10e11b9b72d9279f98791fcfa3"
+    },
+    {
+      "path": "province-scale-screen.csv",
+      "rows_excluding_header": 228,
+      "bytes": 60948,
+      "sha256": "8dcf3c3fd53bbc37e33363a64faa691962d98cd409c16e0256d522fab6720870"
+    },
+    {
+      "path": "national-source-inventory.csv",
+      "rows_excluding_header": 3,
+      "bytes": 1502,
+      "sha256": "09ce005eb1fa98a8edf33080e69bad05c7e51cb2c4414298ba9ea7221b01dcfc"
+    }
+  ],
+  "source_archives_accounted_separately": "sources/acquisition.json, context-extract.json, senegal-settlement-extract.json, sources/inherited-wca-register.json"
+}
