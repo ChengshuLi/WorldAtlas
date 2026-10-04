@@ -100,7 +100,7 @@ export async function completeIntegration(options) {
   checkReviewedTrees(state.files, authored.entries, candidate.entries);
   let proof = null;
   if (options.proofRunId) {
-    proof = await integrationProof({...options, runId: options.proofRunId, head: state.pr.head.sha,
+    proof = await integrationProof({...options, runId: options.proofRunId, runAttempt: options.proofRunAttempt, head: state.pr.head.sha,
       profile: integrationProfile(state.pr.head.ref, state.files, state.reservation),
       baseline: await tree(options.api, options.repo, state.base), authored, candidate});
     need(proof, 'Trusted integration proof is no longer valid; resubmit unchanged head');

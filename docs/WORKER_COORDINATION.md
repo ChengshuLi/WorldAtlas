@@ -107,11 +107,12 @@ reviewed head's tested tree. That approved workflow explicitly checks out the he
 GitHub's `head_sha` alone cannot establish what a default PR merge-ref checkout tested.
 The workflow and runner/profile blobs must match trusted current main. All expected
 shards and their required completed steps must succeed; skipped jobs establish no
-coverage. Preparation pins the run ID. The final serialized merge re-reads that run,
-its current attempt/jobs and the usual exact-head review, evidence, ownership,
+coverage. Preparation pins the run ID and attempt. The final serialized merge re-reads that run,
+the same successful attempt/jobs and the usual exact-head review, evidence, ownership,
 checks, candidate parents and base guards. An unavailable/untrusted proof causes
 normal isolated tests; a proof revoked after preparation refuses the merge and
-requires resubmission. An altered workflow/runner first passes ordinary integration.
+requires resubmission. A rerun after preparation invalidates the proof even if it succeeds. An altered
+workflow/runner first passes ordinary integration.
 
 This is cooperative GitHub Actions evidence, not independent authenticated worker
 identity or a native GitHub merge queue. The existing final base check and guarded

@@ -33,6 +33,7 @@ jobs:
       base: ${{ steps.prepare.outputs.base }}
       profile: ${{ steps.prepare.outputs.profile }}
       shards: ${{ steps.prepare.outputs.shards }}
+      proof_attempt: ${{ steps.prepare.outputs.proof_attempt }}
       proof_run: ${{ steps.prepare.outputs.proof_run }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -155,6 +156,7 @@ jobs:
           MERGE_PHASE: merge
           TESTED_BASE: ${{ needs.prepare.outputs.base }}
           TESTED_CANDIDATE: ${{ needs.prepare.outputs.candidate }}
+          PROOF_RUN_ATTEMPT: ${{ needs.prepare.outputs.proof_attempt }}
           PROOF_RUN_ID: ${{ needs.prepare.outputs.proof_run }}
           INTEGRATION_RESULT: ${{ needs.integration.result }}
         run: node scripts/run-worker-merge.mjs

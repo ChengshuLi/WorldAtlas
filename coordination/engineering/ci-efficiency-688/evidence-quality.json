@@ -63,8 +63,8 @@
     },
     {
       "path": ".github/workflows/worker-merge.yml",
-      "bytes": 6212,
-      "sha256": "97f50cf1da4ce6d96b440d01d8027566621dc0d11391e4e39dffd37fcd67230e",
+      "bytes": 6348,
+      "sha256": "cd837b8548146f4adc56c69495ce506dc8e22f6e46bd82c7338a9252c6f6ca13",
       "hash_kind": "file-bytes"
     },
     {
@@ -75,20 +75,20 @@
     },
     {
       "path": "coordination/engineering/ci-efficiency-688/targeted-tests.tap",
-      "bytes": 22873,
-      "sha256": "f5915a12627fcb389aaa2b2ae93c10a5e8721d6fdc34cb2bc8f696131dce16d5",
+      "bytes": 23364,
+      "sha256": "69098df63306130b8da07b916b84d58f7b6487978ae7b63fb992c54bece3d158",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/ci-efficiency-688/validation.json",
-      "bytes": 975,
-      "sha256": "c4bda4c0614b994d0e9b9a6c7cbf5d2260e37dc417badffe0bc1743aa7cd7bde",
+      "bytes": 1146,
+      "sha256": "dc6db23c0e94175f0419a94a6eb96664c85b9aedf906fea08879727ade940dc1",
       "hash_kind": "file-bytes"
     },
     {
       "path": "docs/WORKER_COORDINATION.md",
-      "bytes": 16124,
-      "sha256": "2161f0072014bad28ed3b97f5ca8a128fb4eec5fb6acb07541ea815f27f41e41",
+      "bytes": 16213,
+      "sha256": "6302ae8acf4973b8ac61f51dec0a80d18218e1583943d40e3425f2a4b5d543d6",
       "hash_kind": "file-bytes"
     },
     {
@@ -105,14 +105,14 @@
     },
     {
       "path": "scripts/integration-proof.mjs",
-      "bytes": 3415,
-      "sha256": "eabdb8afc845548f5f9d8419c2225bb6bd6f906c77a2c2a5a8e477ab8a25a97c",
+      "bytes": 3844,
+      "sha256": "49ab7d3b5bf65ddbe83b6e43243983d3a53e86b90e4f69caba794e8dcdb159f5",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/merge-integration.mjs",
-      "bytes": 9124,
-      "sha256": "5ec182094443c85870c44619a77d1f85da5dfda9019478c8040dbe04064ae91e",
+      "bytes": 9161,
+      "sha256": "e42fa9abf5ad72f09fff9462894fde7ea157030f7251555beb4ef76b695eee9e",
       "hash_kind": "file-bytes"
     },
     {
@@ -123,20 +123,20 @@
     },
     {
       "path": "scripts/run-worker-merge.mjs",
-      "bytes": 2939,
-      "sha256": "15af3145f03de4c4fbc0a6b63b94fe1e5d0808fdb7887bb7536faa15e4398c50",
+      "bytes": 3094,
+      "sha256": "1cfe0963733ce89e989d57a7f45465337fd9341fcf093f69409a968a42f3b9d7",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/integration-proof.test.mjs",
-      "bytes": 5193,
-      "sha256": "d1276dca6d1e287e7e697fbb13c4c5f9b6010c5be494bddfc42570af3e634c23",
+      "bytes": 5702,
+      "sha256": "528bccaebb12cd759ad190d9d72304aad0021d35771855c7f9f71749f31c376d",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/merge-integration.test.mjs",
-      "bytes": 13530,
-      "sha256": "7e13911c9a3ab047938045fa80acc35f8755dd69b5d5d0827c3e0b91b689ee40",
+      "bytes": 14011,
+      "sha256": "5df84e5e88a13358817640a471ef9a4c29a416b01155f2af30d8f9fd2b18374d",
       "hash_kind": "file-bytes"
     }
   ],
@@ -149,9 +149,84 @@
       "units": "test outcomes and immutable file bytes"
     }
   ],
-  "metrics": [],
-  "metric_bindings": [],
-  "summaries": [],
+  "metrics": [
+    {
+      "id": "focused-tests",
+      "value": 100,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "69098df63306130b8da07b916b84d58f7b6487978ae7b63fb992c54bece3d158",
+      "evaluation_commit": "c215ade107705d1753f1371ad9bf383d514fa689"
+    },
+    {
+      "id": "focused-passed",
+      "value": 100,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "69098df63306130b8da07b916b84d58f7b6487978ae7b63fb992c54bece3d158",
+      "evaluation_commit": "c215ade107705d1753f1371ad9bf383d514fa689"
+    },
+    {
+      "id": "focused-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "69098df63306130b8da07b916b84d58f7b6487978ae7b63fb992c54bece3d158",
+      "evaluation_commit": "c215ade107705d1753f1371ad9bf383d514fa689"
+    },
+    {
+      "id": "focused-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "current",
+      "input_sha256": "69098df63306130b8da07b916b84d58f7b6487978ae7b63fb992c54bece3d158",
+      "evaluation_commit": "c215ade107705d1753f1371ad9bf383d514fa689"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "focused-tests",
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "json_pointer": "/local_tests/tests"
+    },
+    {
+      "metric_id": "focused-passed",
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "json_pointer": "/local_tests/passed"
+    },
+    {
+      "metric_id": "focused-failed",
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "json_pointer": "/local_tests/failed"
+    },
+    {
+      "metric_id": "focused-skipped",
+      "path": "coordination/engineering/ci-efficiency-688/validation.json",
+      "json_pointer": "/local_tests/skipped"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "focused-tests",
+      "value": 100,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "focused-passed",
+      "value": 100,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "focused-failed",
+      "value": 0,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "focused-skipped",
+      "value": 0,
+      "unit": "tests"
+    }
+  ],
   "conclusions": [],
   "stages": {
     "research": "complete",

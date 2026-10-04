@@ -168,14 +168,21 @@ function addTrustedProof(f) {
 test('prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread',async()=>{
   const f=fixture();addTrustedProof(f);
   const prepared=await prepareIntegration(f.options());assert.equal(prepared.proof.run_id,12);
-  const result=await f.complete({integrationResult:'skipped',proofRunId:12});
+  const result=await f.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1});
   assert.equal(result.proof.run_id,12);assert.equal(f.writes.length,1);
 });
 test('failed proof reread and stale main prevent merge despite prior accepted proof',async()=>{
   const f=fixture();addTrustedProof(f);assert.ok((await prepareIntegration(f.options())).proof);
   f.run.conclusion='cancelled';
-  await assert.rejects(f.complete({integrationResult:'skipped',proofRunId:12}),/proof is no longer valid/);
+  await assert.rejects(f.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1}),/proof is no longer valid/);
   assert.equal(f.writes.length,0);
   const g=fixture();addTrustedProof(g);await prepareIntegration(g.options());g.base=sha('e');
-  await assert.rejects(g.complete({integrationResult:'skipped',proofRunId:12}),/Main advanced/);assert.equal(g.writes.length,0);
+  await assert.rejects(g.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1}),/Main advanced/);assert.equal(g.writes.length,0);
+});
+
+test('successful rerun after preparation invalidates the pinned attempt and refuses merge',async()=>{
+  const f=fixture();addTrustedProof(f);const prepared=await prepareIntegration(f.options());
+  assert.equal(prepared.proof.run_attempt,1);f.run.run_attempt=2;
+  await assert.rejects(f.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1}),/proof is no longer valid/);
+  assert.equal(f.writes.length,0);
 });

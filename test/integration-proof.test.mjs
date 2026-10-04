@@ -28,7 +28,7 @@ test('successful full and focused workflows prove exact tree and pinned current 
     const f=fixture(profile);
     const proof=await integrationProof(f.options);
     assert.deepEqual(proof,{run_id:12,run_attempt:1,tree:'exact-complete-tree',profile});
-    assert.deepEqual(await integrationProof({...f.options,runId:12}),proof);
+    assert.deepEqual(await integrationProof({...f.options,runId:12,runAttempt:1}),proof);
   }
 });
 test('head metadata without explicit reviewed-head checkout never proves tested tree', async()=>{
@@ -61,7 +61,7 @@ test('missing/extra shard and skipped or incomplete required steps never count a
 });
 test('final pinned run reread rejects revoked proof', async()=>{
   const f=fixture();assert.ok(await integrationProof(f.options));f.run.conclusion='cancelled';
-  assert.equal(await integrationProof({...f.options,runId:12}),null);
+  assert.equal(await integrationProof({...f.options,runId:12,runAttempt:1}),null);
 });
 test('explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact',()=>{
   for(const filename of COORDINATION_PATHS) assert.equal(integrationProfile('engineering/job',[{filename}]),'evidence',filename);
@@ -73,4 +73,12 @@ test('explicit coordination allowlist defaults full for unknown/application/data
   }
   assert.equal(integrationProfile('engineering/job',[{filename:'docs/prompts/reviewer.md'}]),'evidence');
   assert.equal(integrationProfile('engineering/job',[]),'full');
+});
+
+test('final proof pins attempt and refuses a later successful rerun or missing/invalid attempt', async()=>{
+  const f=fixture();const proof=await integrationProof(f.options);assert.equal(proof.run_attempt,1);
+  f.run.run_attempt=2;
+  assert.equal(await integrationProof({...f.options,runId:12,runAttempt:proof.run_attempt}),null);
+  for(const runAttempt of [undefined,0,-1,1.5,'1',NaN])
+    assert.equal(await integrationProof({...fixture().options,runId:12,runAttempt}),null);
 });

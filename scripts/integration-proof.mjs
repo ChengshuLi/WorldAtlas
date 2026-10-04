@@ -9,7 +9,10 @@ const prefix = repo => `/repos/${repo}`;
 // immutable blobs to main and the entire tested tree to the candidate connects
 // GitHub's run metadata to the bytes actually executed, rather than treating a
 // PR merge-ref run's head_sha as evidence that it tested the authored head.
-export async function integrationProof({api, repo, number, head, profile, baseline, authored, candidate, runId}) {
+export async function integrationProof({api, repo, number, head, profile, baseline, authored, candidate, runId, runAttempt}) {
+  if (runId !== undefined && (!Number.isSafeInteger(runId) || runId < 1 ||
+      !Number.isSafeInteger(runAttempt) || runAttempt < 1)) return null;
+  if (runAttempt !== undefined && runId === undefined) return null;
   if (authored.object.tree.sha !== candidate.object.tree.sha) return null;
   for (const path of PROOF_PATHS) {
     const approved = baseline.entries.get(path), tested = authored.entries.get(path);
@@ -24,7 +27,8 @@ export async function integrationProof({api, repo, number, head, profile, baseli
     (await api(`${prefix(repo)}/actions/workflows/merge-integration-checks.yml/runs?head_sha=${head}&event=pull_request&per_page=100`)).workflow_runs;
   if (!Array.isArray(runs)) return null;
   for (const run of runs) {
-    if (run.head_sha !== head || run.event !== 'pull_request' || run.path !== WORKFLOW_PATH ||
+    if (!Number.isSafeInteger(run.id) || run.id < 1 || !Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1 ||
+        (runId !== undefined && (run.id !== runId || run.run_attempt !== runAttempt)) || run.head_sha !== head || run.event !== 'pull_request' || run.path !== WORKFLOW_PATH ||
         run.repository?.full_name !== repo || run.head_repository?.full_name !== repo ||
         run.status !== 'completed' || run.conclusion !== 'success' ||
         !run.pull_requests?.some(pr => pr.number === number && pr.head?.sha === head)) continue;

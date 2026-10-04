@@ -1,7 +1,27 @@
 {
   "issue": 688,
   "profile": "evidence",
-  "local_tests": {"tests": 98, "passed": 98, "failed": 0, "skipped": 0},
-  "controls": ["Exact full-tree trusted run accepted", "Head metadata with implicit merge checkout refused", "Workflow and runner modifications fall back", "Wrong run provenance refused", "Missing/failed/skipped shards and required steps refused", "Pinned proof revoked after preparation refuses final merge", "Application/data/schema/import/deployment/unknown and renamed source paths require full"],
-  "limits": ["Local tests use mocked GitHub authorities and do not perform production merge mutations", "Source activation requires actual hosted full regression with existing queue; no reuse for changed approved workflow/runner", "Real end-to-end reuse remains a second owned proof PR after activation", "Cooperative final base guard is not a native GitHub merge queue and external writers must honor it", "No geographic approval, import or deployment"]
+  "local_tests": {
+    "tests": 100,
+    "passed": 100,
+    "failed": 0,
+    "skipped": 0
+  },
+  "controls": [
+    "Exact full-tree trusted run accepted",
+    "Head metadata with implicit merge checkout refused",
+    "Workflow and runner modifications fall back",
+    "Wrong run provenance refused",
+    "Missing/failed/skipped shards and required steps refused",
+    "Pinned proof revoked after preparation refuses final merge",
+    "Application/data/schema/import/deployment/unknown and renamed source paths require full",
+    "Pinned run attempt rejects even a successful later rerun and missing/invalid attempts"
+  ],
+  "limits": [
+    "Local tests use mocked GitHub authorities and do not perform production merge mutations",
+    "Source activation requires actual hosted full regression with existing queue; no reuse for changed approved workflow/runner",
+    "Real end-to-end reuse remains a second owned proof PR after activation",
+    "Cooperative final base guard is not a native GitHub merge queue and external writers must honor it",
+    "No geographic approval, import or deployment"
+  ]
 }
