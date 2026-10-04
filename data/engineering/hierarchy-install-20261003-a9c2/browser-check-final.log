@@ -1,0 +1,15 @@
+node:fs:622
+  return binding.open(
+                 ^
+
+Error: EEXIST: file already exists, open '/workspace/worldatlas-hierarchy-install/data/engineering/hierarchy-install-20261003-a9c2/browser-check.json'
+    at Object.openSync (node:fs:622:18)
+    at Object.writeFileSync (node:fs:2497:35)
+    at file:///workspace/worldatlas-hierarchy-install/data/engineering/hierarchy-install-20261003-a9c2/browser-check.mjs:43:5 {
+  errno: -17,
+  code: 'EEXIST',
+  syscall: 'open',
+  path: '/workspace/worldatlas-hierarchy-install/data/engineering/hierarchy-install-20261003-a9c2/browser-check.json'
+}
+
+Node.js v24.19.0

@@ -1,0 +1,62 @@
+✔ legacy index remains unchanged; verified extension resolves new release (3.957005ms)
+✔ pointer rejects traversal, wrong digest and changed predecessor bytes (1.763869ms)
+✔ extension rejects altered predecessor release or batch metadata (1.12087ms)
+✔ extension rejects duplicate identities, decreasing versions and repeated batch paths (1.456727ms)
+✔ manifest pointers cannot load symbolic links (0.645593ms)
+✔ compressed transport retains exact JSON bytes and rejects transport or payload tampering (0.350479ms)
+✔ staging is invisible; publication requires complete pinned membership and preserves original registry (49.863955ms)
+✔ rename/reparent releases and same-tier merge crosswalk preserve historical evidence and archived releases (48.505968ms)
+✔ manifest counts, complete same-release chains, no-year-zero calendar labels and hashes are real gates (44.021892ms)
+✔ bounded atomic staging rejects unknown/nongeographic/example identities and wrong-tier parents (26.70455ms)
+✔ immutable staged contents and ingestion collisions reject atomically; raw SQL blocks cycles and publication bypass (24.35632ms)
+✔ crosswalk evidence, tier identity and retired membership must match the published release (40.520219ms)
+✔ published pages use indexed keyset queries and older releases remain inspectable (26.892202ms)
+✔ streamed publication hashing matches exported UTF-8 canonical hashes across page boundaries (161.577019ms)
+✔ source-backed new territory publishes with a null predecessor and no invented historical attributes (44.390624ms)
+✔ both sparse streams complete under fixed pins/revision before legacy history becomes authoritative (5.006588ms)
+✔ a source-free year makes exactly two bounded requests and retains caller-owned unrelated history (0.913187ms)
+✔ identical affected rows and sources across pages deduplicate without granting conflicting claims authority (3.611435ms)
+✔ permanent withdrawals apply independently and cross-stream active/withdrawn contradictions reject completion (2.236828ms)
+✔ expected scalar revision never silently repins or locally retries a partial snapshot (1.071615ms)
+✔ unanchored standalone reads retry both streams within the bounded attempt budget (1.587403ms)
+✔ abort/cancellation preserves its reason and no completed or partial result escapes (2.018083ms)
+✔ retryable oversized pages reduce only that stream limit and keep the same cursor/revision (0.893847ms)
+✔ rows, cursors, response/aggregate budgets and malformed source/capability reject authority (5.042872ms)
+✔ explicit unknown parents and BC/AD boundaries retain source evidence and reference context (0.8624ms)
+✔ prepared and hosted typed loads terminate stalled fetches and cancel stalled bodies without accepting partial evidence (125.863582ms)
+✔ external cancellation reaches typed transport/read cleanup and completed exact-byte loads clear their deadline (13.763109ms)
+✔ typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL (3275.03756ms)
+✔ typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes (2405.256565ms)
+✔ legacy or altered installed schemas never advertise typed capabilities (24.3772ms)
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+✔ actual Worker typed routes enforce transport/maintenance and keep atomic corrections, raw source pins and snapshot paging consistent (2149.327956ms)
+✔ legacy23-table projections require the complete known schema and current maintenance clients refuse them as complete backups (2332.050489ms)
+✔ derivation closures reject example promotion, cycles and ambiguous roots while example-only acyclic chains remain available under the paused factual gate (2328.352684ms)
+✔ bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes (4695.606212ms)
+✔ factual typed geography is retained per claim and cannot be silently repinned on import, correction or prepared reads (3077.971136ms)
+✔ registration is additive, versioned, immutable and JSON-only; conflicts fail closed (6.231655ms)
+✔ serialization hooks/getters cannot replace module identity or metadata, and never execute (2.935265ms)
+✔ false and literal zero remain sourced; absent, unknown and unresolved are distinct (1.225588ms)
+✔ no year zero, interval extrapolation, lifetime overflow or modern-reference promotion (0.731162ms)
+✔ numeric measurement rejects incompatible units, PPP, cohort, household weighting and uncertainty (3.058431ms)
+✔ entity government, controlled identities and feature links preserve the existing graph (0.838044ms)
+✔ direct/derived/reference/estimate/example precedence, explicit unknown and retirements are deterministic (1.244867ms)
+✔ directly quoted estimates retain estimate labels and the preserved method-based priority (0.320493ms)
+✔ shared pure snapshot seam round-trips all retained source, unit and derivation metadata without mutation (1.08144ms)
+✔ existing eight attributes, legacy values and precedence stay unchanged (0.955671ms)
+✔ retained synthetic transport fixture matches date-pinned expected results and original bytes (2.233758ms)
+ℹ tests 46
+ℹ suites 0
+ℹ pass 46
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20783.871952

@@ -11,7 +11,7 @@
   },
   "revalidated_geography": {
     "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
-    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
     "location_index_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
   },
   "source_product_files": [
@@ -60,7 +60,8 @@
     {
       "path": "data/macro-improvements/loose-ends-v5/evidence/aggregate-source-receipt.json.gz",
       "sha256": "3eeaf8355b2b6c4ac2ee52d667ec4935d47efa1b6fcdee47735c7fd679d4ceab"
-    }
+    },
+    {"path":"data/engineering/hierarchy-crosswalk-20261003-a9c2/migration-receipt.json.gz","sha256":"a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f"}
   ],
   "entities": [
     {
@@ -28776,18 +28777,18 @@
   ],
   "projection": {
     "method": "Previous immutable-footprint proof composed with exact current-to-candidate membership/footprint equality",
-    "previous_revalidation_sha256": "ebf0cab4fd044840bee36dd39b16b5ec22b4b1d7d5c44cd8042ee3dd47f67b32",
-    "installer_sha256": "545da835a0a3781dbd4ef69e7e09d2bc5ebbef8072df2d67c817ecc4685d300e"
+    "previous_revalidation_sha256": "ba1a0acdb97165e7875916ea6adb93eefeb25246cc73b42bc81b528408fe0175",
+    "installer_sha256": "e2cc8b49a8d26bc00585952f5cac191b7061423f26e1e69706b83e2d19d135d2"
   },
   "prior_revalidation": {
-    "sha256": "36ecd40fcdddf45cf667508a02437fffe76551f4be05105df30f9b77ab082b18",
-    "archive_path": "data/macro-improvements/loose-ends-v5/evidence/dated-reference-names-revalidation.json.archive.gz",
-    "archive_sha256": "48d3340162be3e4e029f9d3241ff5b0072beabc5bba0c29913e876f3677ab70a",
+    "sha256": "ba1a0acdb97165e7875916ea6adb93eefeb25246cc73b42bc81b528408fe0175",
+    "archive_path": "data/reference-migrations/global-macro-reference-v6/before/dated-reference-names/revalidation.json.archive.gz",
+    "archive_sha256": "0f0b6e27890d9c7152e34060fdb5a20d58a5ad8219da6c3e602b1e2b298eafe6",
     "compression": "gzip",
     "revalidated_geography": {
-      "footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338",
-      "hierarchy_sha256": "e199013d2db784631f9965b183ce078cd7af5dd37c8e60c3799bf80cf891c071",
-      "location_index_sha256": "61054111da4aa9de039c86246dec6bced0428a99182144cdc6eacdd9d9f83a55"
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "location_index_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
     }
   }
 }

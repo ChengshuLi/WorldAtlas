@@ -1,0 +1,1343 @@
+
+> world-atlas@0.1.0 test
+> node --test --test-concurrency=2 test/*.test.mjs
+
+✔ attributes resolve independently with direct evidence ahead of spatial derivations and examples (1.973876ms)
+✔ field evidence does not erase an independently supported attribute and examples do not mask modern reference (0.243167ms)
+✔ typed imports reject overlapping field records and preserve stable category IDs (19.883505ms)
+✔ no-year-zero resolution, exclusive interval ends and opt-in examples remain deterministic (0.519624ms)
+✔ compact references preserve supported dates and field provenance (1.280871ms)
+✔ reference territories resolve to their political owner without changing geographic identity (0.199701ms)
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 35, in <module>
+    try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 32, in <module>
+    print(boundary_hash(rows,args.index.resolve()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 32, in <module>
+    print(boundary_hash(rows,args.index.resolve()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+✖ dated non-example footprint fingerprints change with geometry/date and ignore examples (49.558787ms)
+✖ boundary fingerprints verify the archived executed canonical algorithm (60.803946ms)
+✖ changed footprints invalidate cached values while direct evidence can still resolve the location (50.186439ms)
+✔ fixed graph assignment is independent of input ordering and meets a dense categorical control (78.610125ms)
+✔ concurrent names sharing the upstream ID get distinct presentation colors without new source IDs (5.564489ms)
+✔ unconstrained names of the same identity retain the same preferred color (2.893732ms)
+✔ invalid or incomplete category graphs are rejected (0.555357ms)
+✔ the shipped palette passes all pinned historical constraints and matches the audited modern candidate (35.774372ms)
+✔ map and legend presentation keys preserve source identities and distinguish concurrent names (0.716069ms)
+✔ shared named modes distinguish display groups; fixed classifications and hierarchy use stable IDs (0.671753ms)
+✔ published OKLab reference controls include white, black and red (1.073848ms)
+✔ full-severity models preserve achromatic controls and reduce red/green separation (0.685544ms)
+✔ generated HSL colors decode consistently and malformed colors are rejected (1.583847ms)
+✔ source-name display distinction preserves entity identity without ambiguous concatenation (0.356327ms)
+✔ older Workers negotiate the sparse limit without masking unrelated bad requests (37.230598ms)
+✔ complete inline temporal streams use the existing pin and revision validator without extra HTTP reads (6.437405ms)
+✔ inline temporal revision or release drift restarts the scalar snapshot rather than repinning it (4.561367ms)
+✔ absent inline temporal pages retain bounded ordinary geography paging (3.253365ms)
+✔ partial inline temporal pages cannot become authoritative or trigger unbounded reads (3.288238ms)
+✔ compact client hydrates two atomic entity pages and retains shared source provenance (2.858409ms)
+✔ oversized second page reduces its limit and retries its cursor without duplicating completed pages (3.248708ms)
+✔ a first-page size retry reaches the reduced request and preserves retirement authority (2.759089ms)
+✔ retryable conflicts and cross-page revision changes restart the complete compact snapshot (3.285113ms)
+✔ three persistently inconsistent attempts produce unavailable evidence without cold-cache authority (3.809824ms)
+✔ warm failures retain claims and withdrawals atomically only for the same year and example setting (3.341929ms)
+✔ malformed compact pages, incorrect years and cursor cycles fail atomically (14.087517ms)
+✔ compact client propagates aborts and passes the signal to its network request (2.490294ms)
+✔ clients without a compact capability keep the original three-stream protocol (2.205475ms)
+✔ the geography capability enables compact reads through the actual manifest loader (2.496604ms)
+✔ every published canonical run survives compact packing, including its boundary cells and gaps (0.732694ms)
+✔ compact full coordinate range, split high owner bits, seam cells and owner capacity are exact (124.991122ms)
+✔ v1 and v2 asset loaders preserve gzip/raw words, split row chunks and reject ambiguous manifests (56.811297ms)
+✔ shuffled and row-local varint transports reconstruct every packed bit across chunk and empty-row boundaries (192.169537ms)
+✖ real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum coordinates and high IDs (82.895841ms)
+
+Interrupted while running:
+
+⚠ test/compact-ownership.test.mjs (test/compact-ownership.test.mjs:1:1)
+⚠ test/content-backend.test.mjs (test/content-backend.test.mjs:1:1)
+⚠ test/coverage-scope.test.mjs (test/coverage-scope.test.mjs:1:1)
+⚠ test/coverage-source-policy.test.mjs (test/coverage-source-policy.test.mjs:1:1)
+⚠ test/credential-envelope.test.mjs (test/credential-envelope.test.mjs:1:1)
+⚠ test/deployment-budget.test.mjs (test/deployment-budget.test.mjs:1:1)
+⚠ test/environment-classification-db.test.mjs (test/environment-classification-db.test.mjs:1:1)
+⚠ test/environment-classifications.test.mjs (test/environment-classifications.test.mjs:1:1)
+⚠ test/evidence-partitions.test.mjs (test/evidence-partitions.test.mjs:1:1)
+⚠ test/evidence-quality.test.mjs (test/evidence-quality.test.mjs:1:1)
+⚠ test/evidence-revalidation-chain.test.mjs (test/evidence-revalidation-chain.test.mjs:1:1)
+⚠ test/evidence-suppression.test.mjs (test/evidence-suppression.test.mjs:1:1)
+⚠ test/footprint-versions.test.mjs (test/footprint-versions.test.mjs:1:1)
+⚠ test/geographic-archive.test.mjs (test/geographic-archive.test.mjs:1:1)
+⚠ test/geographic-bootstrap.test.mjs (test/geographic-bootstrap.test.mjs:1:1)
+⚠ test/geographic-proof-chronology.test.mjs (test/geographic-proof-chronology.test.mjs:1:1)
+⚠ test/geographic-release-manifest.test.mjs (test/geographic-release-manifest.test.mjs:1:1)
+⚠ test/geographic-releases.test.mjs (test/geographic-releases.test.mjs:1:1)
+⚠ test/geography-import-pin-verifier.test.mjs (test/geography-import-pin-verifier.test.mjs:1:1)
+⚠ test/geography-worker-lane.test.mjs (test/geography-worker-lane.test.mjs:1:1)
+⚠ test/handoff-scope.test.mjs (test/handoff-scope.test.mjs:1:1)
+⚠ test/hosted-catalog.test.mjs (test/hosted-catalog.test.mjs:1:1)
+⚠ test/hosted-evidence-availability.test.mjs (test/hosted-evidence-availability.test.mjs:1:1)
+⚠ test/hosted-migration-transport.test.mjs (test/hosted-migration-transport.test.mjs:1:1)
+⚠ test/hosted-records.test.mjs (test/hosted-records.test.mjs:1:1)
+⚠ test/hosted-temporal-client.test.mjs (test/hosted-temporal-client.test.mjs:1:1)
+⚠ test/hosted-temporal-geography.test.mjs (test/hosted-temporal-geography.test.mjs:1:1)
+⚠ test/import-records.test.mjs (test/import-records.test.mjs:1:1)
+⚠ test/install-macro-reference.test.mjs (test/install-macro-reference.test.mjs:1:1)
+⚠ test/install-reviewed-geography.test.mjs (test/install-reviewed-geography.test.mjs:1:1)
+⚠ test/issue-claims.test.mjs (test/issue-claims.test.mjs:1:1)
+⚠ test/land-creations.test.mjs (test/land-creations.test.mjs:1:1)
+⚠ test/macro-foundation-contract.test.mjs (test/macro-foundation-contract.test.mjs:1:1)
+⚠ test/macro-reference-split.test.mjs (test/macro-reference-split.test.mjs:1:1)
+⚠ test/macro-restoration-proofs.test.mjs (test/macro-restoration-proofs.test.mjs:1:1)
+⚠ test/macro-review-projection.test.mjs (test/macro-review-projection.test.mjs:1:1)
+⚠ test/map-color-neighbors.test.mjs (test/map-color-neighbors.test.mjs:1:1)
+⚠ test/map-snapshots.test.mjs (test/map-snapshots.test.mjs:1:1)
+⚠ test/marcus-restoration.test.mjs (test/marcus-restoration.test.mjs:1:1)
+⚠ test/media-provenance.test.mjs (test/media-provenance.test.mjs:1:1)
+⚠ test/migration-hashes.test.mjs (test/migration-hashes.test.mjs:1:1)
+⚠ test/model.test.mjs (test/model.test.mjs:1:1)
+✖ test/compact-ownership.test.mjs (179325.302743ms)
+✔ backend cutover is explicit and cannot expose credentials or silently return D1 (1.006147ms)
+✔ transfer maintenance blocks every API mutation before touching a database or object bucket (26.422734ms)
+✔ PostgreSQL diagnostics and raw export routes use the selected backend and retain honest quota status (1889.182091ms)
+✔ continent filters follow location membership for overseas and transcontinental reference owners (1.564298ms)
+✔ all six continent scopes partition every prepared location and reconcile reference profiles (1204.747758ms)
+✔ bounded source-policy projection is exact, reproducible, and small enough to deploy (56.36948ms)
+✔ coverage corrections count selected location identities on every applicable continent (163.398303ms)
+✔ coverage presents corrected roles with collapsed evidence and explicitly retained earlier descriptions (18.119386ms)
+✔ duplicate role IDs and stale policy assumptions cannot silently update coverage (1.345218ms)
+✔ standard envelope roundtrip uses fresh randomness, authenticated context and no plaintext fields (10.122531ms)
+✔ tampered ciphertext, authentication tag, IV, wrapped key and recipient are rejected (8.282907ms)
+✔ malformed or oversized envelopes, unapproved algorithms and invalid intervals fail closed (1.88368ms)
+✔ owner credentials, other endpoints, missing TLS and non-RSA keys cannot be transported (1.270676ms)
+✖ private delivery writes owner-only outside-Git file and refuses wrong digest, unsafe permissions, symlinks and overwrite (1.713514ms)
+✖ CLI encryption/decryption returns metadata only and failures never print plaintext or key material (78.403268ms)
+✔ exact upload archive accounting includes transport/config and preserves excluded sources (48.24357ms)
+✔ reserve breaches fail before hard limits and diagnostics name large files/categories (0.68338ms)
+✔ staged Site inventory agrees with actual archive and rejects redundant transport/linked inputs (21.0872ms)
+✔ fixed environmental database guards reproduce exactly from the shared registry (1.882208ms)
+✔ all fixed IDs, display labels, explicit legacy aliases and null pass raw local and hosted SQL (250.700976ms)
+✔ unlisted environmental values reject every local import and raw snapshot/history/typed insertion (23.486918ms)
+✔ adding local guards preserves existing unrecognized evidence byte for byte and blocks changed values (5.50566ms)
+✔ hosted migration retains old claim bytes, permits exact retries and still rejects stable-ID collisions (18.711468ms)
+✔ fixed environmental classifications have unique stable identities and cover every existing reference value (2.203852ms)
+✔ classification API exposes the exact fixed vocabulary independently of database content (25.506483ms)
+✔ aliases and stable IDs produce identical whole-location values, colors and category identities (1.45264ms)
+✔ preview, both importers and raw SQL reject environmental typos while retaining explicit unknowns (35.81242ms)
+✔ grandfathered free-form evidence is retained and exact hosted replays stay idempotent without admitting new text (17.75038ms)
+✔ accepted aliases and canonical identities remain source evidence instead of rewriting imported records (22.65276ms)
+✔ bounded root and child evidence verify complete changed-file union and baseline inventory (4.274053ms)
+✔ changed child manifest and absent/unassigned changed files reject (1.978793ms)
+✔ root hash cycles, duplicate assignments and changed context reject (0.951014ms)
+✔ partial baseline inventory cannot replace actual byte verification (0.853387ms)
+✔ trusted per-partition descriptor and individual byte budgets are not raised (7.86689ms)
+✔ verifies bytes without claiming factual correctness (2.445327ms)
+✔ schema-only validation reports unverified bytes (0.171388ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (1.24034ms)
+✔ source access/license limits remain explicit; no unsafe retention (0.532493ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.375106ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.470537ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (5.663678ms)
+✔ paths and symlinks cannot escape candidate reader (1.33341ms)
+✔ exact predecessor bytes retain original claims and append migration chronology (2.709225ms)
+✔ damaged archive, raw digest, current projection and previous geography reject (1.594324ms)
+✔ replaced migration history and changed proof bytes reject (0.503479ms)
+✔ claim, source inventory, count and territorial transfer reject (1.397737ms)
+✔ escaping, absolute paths and unknown archive compression reject (0.440534ms)
+✔ legacy detached terminal hash is recorded as a limit without inventing an archive (0.230908ms)
+✔ unverified withdrawals suppress every attribute source and modern owner fallback without modifying content (1.668335ms)
+✔ maintainer gate publishes complete signed, byte-verified products on both databases (2198.909631ms)
+✔ forged signatures, altered R2 bytes and incomplete inventories cannot publish (1541.582812ms)
+✔ selection corrections are source bounded, sealed, retirement-aware and preserve original bytes (1497.990348ms)
+✔ manifest and streamed object limits reject arbitrary classifications, duplicate IDs and registry byte tampering (1409.363154ms)
+✔ obsolete known evidence is removed before precedence while explicit unknown and sourced continuity remain eligible (0.876582ms)
+✔ even a trusted signed receipt cannot publish overlapping grid runs or wrong decoded bytes (1653.173713ms)
+✔ a reference correction retains exact claim bytes, original coordinates and the complete original chain (10.685369ms)
+✔ all receipted predecessor identities restore without overwriting active geography or transferring evidence (495.000431ms)
+✔ bounded import concurrency defaults to six and accepts only one through eight (1.079156ms)
+✔ stage then finalize publishes atomically without replaying ownership batches (61.208064ms)
+✔ append-only source batches import before newly registered geography and retain the original source bytes (37.053641ms)
+✔ interrupted real-D1 staging resumes explicit or hidden staged releases without rewriting history (79.292308ms)
+✔ a mismatched existing staged or published manifest blocks all geographic staging before writes (59.888485ms)
+✔ identical archive bytes upload once with a stable first-sorted name and preserve every receipt alias across retries (2.072744ms)
+✔ four retained metadata predecessors replay before a late creation and a future second addition (5.415324ms)
+✔ mixed creation and metadata chronology must be explicit (1.049272ms)
+✔ a creation snapshot cannot advance a previous metadata identity or alter its full source record (6.965381ms)
+✔ skipped, duplicate, reordered and mutated sequence pins fail (2.66663ms)
+✔ metadata archive tampering still fails at its chronological predecessor (0.869661ms)
+✔ legacy noncreation order remains stable and an unused new group is rejected (2.475903ms)
+✔ derived child counts must equal actual before and after immediate memberships (3.010679ms)
+✔ legacy index remains unchanged; verified extension resolves new release (4.180963ms)
+✔ pointer rejects traversal, wrong digest and changed predecessor bytes (1.686332ms)
+✔ extension rejects altered predecessor release or batch metadata (1.141251ms)
+✔ extension rejects duplicate identities, decreasing versions and repeated batch paths (1.476556ms)
+✔ manifest pointers cannot load symbolic links (0.61654ms)
+✔ compressed transport retains exact JSON bytes and rejects transport or payload tampering (0.412112ms)
+✔ staging is invisible; publication requires complete pinned membership and preserves original registry (45.517991ms)
+✔ rename/reparent releases and same-tier merge crosswalk preserve historical evidence and archived releases (41.312291ms)
+✔ manifest counts, complete same-release chains, no-year-zero calendar labels and hashes are real gates (41.337749ms)
+✔ bounded atomic staging rejects unknown/nongeographic/example identities and wrong-tier parents (24.923995ms)
+✔ immutable staged contents and ingestion collisions reject atomically; raw SQL blocks cycles and publication bypass (22.336314ms)
+✔ crosswalk evidence, tier identity and retired membership must match the published release (40.499255ms)
+✔ published pages use indexed keyset queries and older releases remain inspectable (28.247024ms)
+✔ streamed publication hashing matches exported UTF-8 canonical hashes across page boundaries (145.625008ms)
+✔ source-backed new territory publishes with a null predecessor and no invented historical attributes (43.017651ms)
+✔ live geography concurrency verifier refuses production, shared sessions and missing interactive drivers before writes (1.535875ms)
+✔ geography has its own branch and exactly one matching type (1.796739ms)
+✔ declared geography ownership is finite, safe and limited to source evidence namespaces (0.345101ms)
+✔ geography cannot edit core, history, another packet or an undeclared proposal directory (0.614437ms)
+✔ engineering consumes but preserves geography evidence while existing lanes still work (0.234804ms)
+✔ geography claims retain exact ownership through renewal and rotation, without content approval (1.496817ms)
+✔ claims and PRs refuse issue ownership expansion and incompatible modes (0.651201ms)
+✔ actual linked GitHub issue supplies geography ownership, not a PR-controlled declaration (1.754605ms)
+✔ real geography Git scope checks renamed source paths, symlinks and issue-backed CLI ownership (141.355851ms)
+✔ lane IDs must be explicit and safe (2.276542ms)
+✔ research owns only campaign files, excluding shared handovers and other campaigns (0.296838ms)
+✔ engineering preserves research and other engineering progress (0.15966ms)
+✔ partial and final PRs link one issue without needing a document tracker ID (0.545933ms)
+✔ PR policy rejects ambiguous issue links and accidental additional closures (0.285922ms)
+✔ GitHub issue type agrees with its lane and references an open issue (0.220963ms)
+✔ real git diff checks rename source paths, not only allowed destinations (30.520542ms)
+✔ another lane advancing work is not mistaken for this branch changing its files (43.214459ms)
+✔ remote issue validation reads only the event repository and requires successful labeled issue metadata (11.745618ms)
+✔ hosted catalog keeps active ancestor closure and categories as undated identities without ancient source coverage (42.623056ms)
+{"catalog_batches_imported":438,"entities":85315,"categories":1446,"sources":374,"active_units":5810,"archived_units":10259}
+✔ every generated hosted catalog batch imports through the actual service and generated D1 constraints (12985.951182ms)
+✔ a failed evidence stream cannot mix live claims with an absent retirement snapshot (50.904322ms)
+✔ dated geography shares scalar revision and complete same-year cache authority (14.138556ms)
+✔ transport compiler changes exactly the pinned 21 guards and preserves all other raw SQL and metadata (9.812083ms)
+✔ raw and derivative guards have identical original schemas and preserve all 21 conditions and error messages (11.895914ms)
+✔ native workerd D1 reproduces CASE-block truncation and applies the derivative over populated retained claims (4292.946751ms)
+✔ geographic pin guards the write transaction and retains exact original replay context (54.11368ms)
+✔ publication between preflight and batch rejects stale pins atomically, staged/malformed pins never authorize writes (42.113949ms)
+✔ unknown pinned commit outcome stays retryable and never claims a rollback (27.924038ms)
+✔ profile titles prefer direct dated evidence over English reference attestations and opt-in examples (20.926027ms)
+✔ hosted imports preserve whole-location raw values, precedence evidence and exact intervals (20.056816ms)
+✔ stable ID collisions roll back the entire batch and identical evidence stays idempotent (19.615202ms)
+✔ all tiers and nongeographic graph entities obey parent contracts (19.214467ms)
+✔ source intervals, category identity, typed scalars and habitation contradictions reject imports (23.006915ms)
+✔ raw SQL protects typed records, Unicode blank evidence, no-year-zero and retained identity (19.165664ms)
+✔ dated names and graph claims are sourced, pageable and never silently become ancient names (21.734596ms)
+✔ examples remain opt-in and bounded attribute pages preserve every location record (24.222207ms)
+✔ media metadata is immutable and content-addressed with retained sourced links (17.624501ms)
+✔ raw SQL rejects half-dated graph and media links (18.55997ms)
+✔ dated graph assertions cannot exceed known endpoint lifetimes (22.928196ms)
+✔ category IDs are shared graph identities and fictional entities remain opt-in (19.941443ms)
+✔ example media on real locations stays opt-in regardless of link source (17.805703ms)
+✔ reference and estimate source classes cannot masquerade as direct evidence (23.452527ms)
+✔ sourced corrections supersede attributes atomically while preserving old evidence (19.492526ms)
+✔ dated name corrections and habitation withdrawal update every reader and conflict check (20.491462ms)
+✔ withdrawn relationships and media links disappear from profiles but remain inspectable (25.002333ms)
+✔ failed replacements roll back retirements and the ingestion ledger together (18.999523ms)
+✔ raw SQL keeps retirement provenance sourced, immutable, unique and atomically finalized (20.369068ms)
+✔ supersession chains remain traceable and cannot form cycles (24.311372ms)
+✔ evidence history keeps fictional claims opt-in after retirement (17.433072ms)
+✔ map name paging excludes future graph names while default queries retain them (17.715457ms)
+✔ both sparse streams complete under fixed pins/revision before legacy history becomes authoritative (4.447775ms)
+✔ a source-free year makes exactly two bounded requests and retains caller-owned unrelated history (0.488457ms)
+✔ identical affected rows and sources across pages deduplicate without granting conflicting claims authority (3.339044ms)
+✔ permanent withdrawals apply independently and cross-stream active/withdrawn contradictions reject completion (1.022342ms)
+✔ expected scalar revision never silently repins or locally retries a partial snapshot (1.040769ms)
+✔ unanchored standalone reads retry both streams within the bounded attempt budget (0.951926ms)
+✔ abort/cancellation preserves its reason and no completed or partial result escapes (0.43767ms)
+✔ retryable oversized pages reduce only that stream limit and keep the same cursor/revision (0.901148ms)
+✔ rows, cursors, response/aggregate budgets and malformed source/capability reject authority (5.109724ms)
+✔ explicit unknown parents and BC/AD boundaries retain source evidence and reference context (0.97523ms)
+✔ dated parent bridge preserves stable identity, source support and effective complete chains (2.384144ms)
+✔ explicit unknown membership keeps the reference chain and original uncertainty rather than adopting a weaker claim (0.310378ms)
+✔ existence exclusions survive adaptation, including sourced unknown and BC/AD reference exclusions without year zero (0.355716ms)
+✔ bridge rejects wrong release, unsupported source/year, examples, withdrawn winners and unvetted footprints (0.893788ms)
+✔ joined-source snapshots hydrate exact JSON text metadata without requiring a duplicate source dictionary (0.535307ms)
+✔ shared temporal parent/existence resolution matches direct/derived/reference/example precedence independently of language and IDs (0.39187ms)
+✔ complete hosted snapshot authority removes withdrawn legacy IDs and overridden fields without reviving excluded entities (1.351017ms)
+✔ bounded production pages hydrate source-deduplicated winners and generate histories/exclusions without a full reference registry (0.586514ms)
+✔ bounded withdrawals remain authoritative independently of selected-year claims; malformed stream/context cannot become history (0.462677ms)
+✔ source IDs are ordinary stable identities even when their spelling matches JavaScript object properties (0.29798ms)
+✔ import preview rejects invalid dates, scalar values and unsupported source intervals before upload (1.916018ms)
+✔ import preview enforces whole-batch row and UTF-8 byte bounds (14.61966ms)
+✔ import submission preserves evidence and reports database rejection without treating it as saved (44.815592ms)
+✔ source-backed corrections preview withdrawal and replacement while retaining source evidence (0.416087ms)
+✔ JSON projection retains original nested formatting and appends bounded one-line entries (2.246236ms)
+✔ JSON projection handles changed array rows, escaped strings, empty containers and removals (0.432732ms)
+✔ province projection changes only province metadata and retains canonical cell/index bounds (1.229834ms)
+✔ append-only release retains original generations and drops regenerated baseline (5.199598ms)
+✔ evidence composes unchanged territory while preserving original supported facts (1.132597ms)
+✔ apply rejects unapproved hash and rolls back partial metadata transaction (1.41974ms)
+✔ immutable bytes changing after preparation block application (0.465562ms)
+✔ successful metadata install records a committed journal and retains rollback originals (0.70346ms)
+✔ compressed release append preserves prior descriptors and checks compressed/payload bytes (356.875143ms)
+✔ reference-only metadata mode validates exact archived group and source-backed parent merge (4.02604ms)
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+✔ dry run validates a whole generation without changing any live bytes (17.503688ms)
+✔ apply requires the exact dry-run hash and preserves database/catalog/history originals (25.806004ms)
+✔ failure during the multi-path commit restores every original live byte (7.002327ms)
+✔ stale runtime, prepared source hashes, province membership and grid counts fail before activation (12.873628ms)
+✔ approved hashes prevent changes between inspection and activation (5.627694ms)
+✔ unexpected predecessor files or changed historical payload block approved activation (9.539151ms)
+✔ path traversal and staging symlinks cannot replace unrelated files (2.699439ms)
+✔ duplicate geographic identities and empty groups cannot pass as a complete hierarchy (2.033826ms)
+✖ a genuine unknown-attribute creation installs reversibly without changing original history (31.071583ms)
+✖ ordered replacement then pure creation validates exact current ancestry and pinned source bytes (29.106259ms)
+✖ composed installer rejects skipped or reordered manifests, changed pins and unmatched creation inventories (29.647386ms)
+✖ composed installer rejects child historical transfers and changed source archive bytes (33.990483ms)
+✖ geometry evidence cannot silently authorize current source-name changes (29.137347ms)
+✖ source-name correction requires pinned exact metadata before/after evidence (27.318785ms)
+✖ installer summary pins geometry proof members and rejects altered evidence after approval (32.061555ms)
+✔ serialized contenders on one issue have exactly one holder even under the same GitHub account (2.446949ms)
+✔ renewal and release require the actual worker plus ownership nonce (0.487675ms)
+✔ an idempotent lost-response retry retains original ownership (0.322246ms)
+✔ renewal, rotation and reassignment retain one canonical comment ID (0.413534ms)
+✔ umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed (0.394455ms)
+✔ expired reservations cannot silently discard branches or active PR/live operations (0.485773ms)
+✔ multiple PRs retain ownership and rotate branches only after previous work completes (1.317326ms)
+✔ canonical comments cannot be impersonated or ambiguous (0.247033ms)
+✔ PR validation uses current exact-branch ownership and rejects expired or blocked claims (0.565843ms)
+✔ location-content claims wait for worldwide approval while source-only work can start (46.562867ms)
+✔ the PR budget cannot be bypassed by claiming another part indefinitely (0.394385ms)
+✔ pagination inspects later pages rather than assuming only the first page exists (0.307413ms)
+✔ claim lock keys use canonical issue numbers so aliases cannot acquire independent locks (0.435947ms)
+✔ approved research is bound to all three geographic pins and ordinary bot audit text is not authority (0.366933ms)
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+✖ pure source-backed creation has a null predecessor and retains every original geometry (46.25962ms)
+✖ latitude and antimeridian creation uses actual narrow land, not a world-width polygon (24.9145ms)
+✔ reject existing identity, duplicate land and competing overlap without writing output (87.280671ms)
+✔ reject unsupported source, altered geometry, invalid coordinates, chain gaps and disguised rename (228.377575ms)
+✖ a creation receipt cannot transfer history or add an unaccounted identity (30.752031ms)
+✖ staged source creation compiles and publishes identical static/hosted crosswalks (36.350842ms)
+✔ invalid source coordinates, competing new land and old group mutations are rejected (85.3425ms)
+✔ macro partition checks separate member coherence from source completeness and descendant approval (40.457323ms)
+✔ a structural pass cannot invent semantic approval or permit regional interiors (5.092488ms)
+✔ each current macro identity and adjacent-tier parent must have exact decision and envelope coverage (1.647614ms)
+✔ member and footprint hashes detect cross-region reassignment and geometry edits (0.638102ms)
+✔ only inspected successful sources with URLs and reproducible hashes support boundary decisions (1.042952ms)
+✔ named missing islands receive explicit routing without imaginary geometry (1.416105ms)
+✔ supplemental boundary sources receive the same inspection and pin requirements as retained ledgers (0.911995ms)
+✔ partial named-land evidence preserves existing geometry while explicitly withholding completeness (0.854699ms)
+✔ large source collections retain a bounded reference to the exact archived receipt (3.140814ms)
+✔ same-tier reference split preserves exact archived originals and disjoint descendant members (2.504015ms)
+✔ split successors require unique explicit new-group deltas and a complete crosswalk (3.470322ms)
+✔ split endpoints cannot change tier, containing parent, registry identity or source/history proof (3.325904ms)
+✔ a same-count swap of unrelated territory fails exact split-member conservation (0.753876ms)
+✔ explicit local-group retirement retains every descendant and exact full archive (1.924942ms)
+✔ preparation emits every split pair and retains new identities, predecessor and original baseline (26.202783ms)
+✔ explicit reference creation can extract a location while retaining its original populated groups (2.683636ms)
+✔ sourced creations and explicit local-group retirements can share a conserving receipt (0.615948ms)
+✔ release creation crosswalks retain source relationship evidence without null-old retirement collisions (6.293818ms)
+✔ retained replacements archive all six exact originals without predecessor transfer (12.931095ms)
+✔ an unrelated old feature mutation is rejected (0.741228ms)
+✔ exact changed feature archives cannot substitute modified originals (0.279001ms)
+✔ duplicate or replaced stable identities are rejected (0.3248ms)
+✔ source proof cannot authorize historical transfer or missing independent validation (0.276086ms)
+✔ bounded replacement subprocess writes the same exact validated receipt (83.95664ms)
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+✔ current projection preserves identities and keeps source inspection separate from semantic approval (2.111503ms)
+✔ source-backed projection cannot change timeline facts or invent geographic review completion (0.439532ms)
+✔ current pins and exact counts must describe the actual geography (0.259131ms)
+✔ complete current chains cannot be reordered or silently assigned different parents (0.44445ms)
+✔ every retired or created parent has exact original archive and explicit crosswalk (0.275306ms)
+✔ location conservation and exact parent descendant membership remain exhaustive (0.341384ms)
+✖ source-backed projection resolves exact replacements and creations while all semantic branches remain open (38.697018ms)
+✖ projection preparation rejects altered source pins, wrong order and invented historical transfers (31.185004ms)
+✖ projection validator exhausts added identities, retained archives and new source-assessed groups (35.470083ms)
+✔ later geometry projection preserves original inspection bytes and namespaces current predecessor snapshots (3.46244ms)
+✖ successive source migrations conserve earlier additions and their sourced new groups (30.335763ms)
+✔ projection predecessor loading pins both gzip layers and joins exact releases (1.680123ms)
+✔ raster presentation graph includes true horizontal and vertical shared cells (1.948999ms)
+✔ ocean gaps and diagonal corners do not become territorial adjacency (0.422987ms)
+✔ date-line screen wrap is included and same-owner contact is ignored (1.154771ms)
+✔ malformed packed rows fail closed instead of emitting an incomplete graph (0.581136ms)
+✔ evidence-only pages omit empty identities but retain withdrawal-only subjects and complete claims (70.008132ms)
+✔ entity pages return exactly shared whole-location winners, source dictionaries and all-tier preferred names (38.050634ms)
+✔ entity cursor pages never split an attribute set and preserve aliases, examples, lifetimes and end sentinels (33.707377ms)
+✔ inactive archived identities stay inspectable without inflating fixed-geography map pages (27.815053ms)
+✔ page withdrawals suppress prepared fallback claims for attributes and names with no wrong truncation (30.59856ms)
+✔ metadata summarization preserves all no-inhabitants proof semantics and points to original evidence (29.903952ms)
+✔ mid-page writes reject the entire map page with a retryable revision conflict (22.554442ms)
+✔ priority ties use the shared UTF-16 identity order instead of SQLite UTF-8 collation (26.38044ms)
+✔ the shared browser format rejects incomplete, duplicated, mismatched and unscoped response pages (24.765455ms)
+{"fixture":"1000-locations-9000-attributes","queries":7,"page_bytes":2393036,"elapsed_ms":177.51,"attribute_index":"attributes_location_dates","name_index":"names_entity_dates"}
+✔ 1000 locations and 9000 attributes use seven bounded indexed queries instead of claim pages (7053.664897ms)
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/workspace/worldatlas-hierarchy-install/data/macro-improvements/marcus-restoration/prepare.py", line 4, in <module>
+    from shapely import from_wkb,union_all
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+ModuleNotFoundError: No module named 'shapely'
+✔ finite Marcus routing is independent of sovereignty and retains provisional lower-tier roles (0.786356ms)
+✔ reject asymmetric Japan exclusion, alternate macro routing and invented readiness (0.692975ms)
+✖ original water-masked Marcus land reconstructs from exact OSM bytes (43.866811ms)
+✖ removing the source water hole or changing the coastline is rejected (39.944459ms)
+Atlas request failed /api/media/upload Media ID already identifies a different immutable object
+✔ media bytes and sourced provenance survive upload, metadata-only reads and identical retries (139.504603ms)
+✔ invalid or oversized provenance and maintenance never write source objects (52.182458ms)
+✔ frozen migration SQL and snapshots retain their published identities (11.111161ms)
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 32, in <module>
+    print(boundary_hash(rows,args.index.resolve()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 32, in <module>
+    print(boundary_hash(rows,args.index.resolve()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+✖ test/model.test.mjs (133531.178441ms)
+✖ test/neon-capacity.test.mjs
+✖ test/neon-forward-migrations.test.mjs
+✖ test/neon-storage-migration.test.mjs
+✖ test/neon-verification.test.mjs
+✖ test/oceania-land-restoration.test.mjs
+✖ test/ownership-assets.test.mjs
+✖ test/ownership-delivery.test.mjs
+✖ test/palette-intervals.test.mjs
+✖ test/parent-indexes.test.mjs
+✖ test/pixel-grid.test.mjs
+✖ test/pixel-metadata.test.mjs
+✖ test/pixel-ownership.test.mjs
+✖ test/postgres-adapter.test.mjs
+✖ test/postgres-contract.test.mjs
+✖ test/postgres-restore.test.mjs
+✖ test/postgres-runtime-role.test.mjs
+✖ test/premerge-evidence.test.mjs
+✖ test/prepared-evidence.test.mjs
+✖ test/prepared-parity.test.mjs
+✖ test/queue-readiness-audit.test.mjs
+✖ test/reference-archive.test.mjs
+✖ test/reference-context.test.mjs
+✖ test/reference-hierarchy-release.test.mjs
+✖ test/regional-research-gate.test.mjs
+✖ test/research-bundle.test.mjs
+✖ test/research-catalog.test.mjs
+✖ test/research-media-upload.test.mjs
+✖ test/runtime-ownership.test.mjs
+✖ test/semantic-followup.test.mjs
+✖ test/source-policy-corrections.test.mjs
+✖ test/stage-site-migrations.test.mjs
+✖ test/storage-checkpoint.test.mjs
+✖ test/storage-export-v2.test.mjs
+✖ test/storage-export-v3.test.mjs
+✖ test/storage-export.test.mjs
+✖ test/supplement-source-hints.test.mjs
+✖ test/temporal-geography-worker.test.mjs
+✖ test/temporal-geography.test.mjs
+✖ test/temporal.test.mjs
+✖ test/typed-observations.test.mjs
+✖ test/unresolved-attributes.test.mjs
+✖ test/unsettled-rank.test.mjs
+✖ test/worker-result.test.mjs
+ℹ tests 347
+ℹ suites 0
+ℹ pass 279
+ℹ fail 23
+ℹ cancelled 45
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 179678.373564
+
+✖ failing tests:
+
+test at test/boundary-version-hash.test.mjs:13:1
+✖ dated non-example footprint fingerprints change with geometry/date and ignore examples (49.558787ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py --database /tmp/atlas-footprint-version-oi6IN0/boundaries.sqlite
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 35, in <module>
+      try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at digest (file:///workspace/worldatlas-hierarchy-install/test/boundary-version-hash.test.mjs:17:20)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/boundary-version-hash.test.mjs:18:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    status: 1,
+    signal: null,
+    output: [ null, '', `Traceback (most recent call last):\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 35, in <module>\n    try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n` ],
+    pid: 40931,
+    stdout: '',
+    stderr: `Traceback (most recent call last):\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 35, in <module>\n    try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n`
+  }
+
+test at test/boundary-version-hash.test.mjs:29:1
+✖ boundary fingerprints verify the archived executed canonical algorithm (60.803946ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py --index /tmp/atlas-footprint-algorithm-1N4yQ7/index.json --stdin
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 32, in <module>
+      print(boundary_hash(rows,args.index.resolve()))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/boundary-version-hash.test.mjs:34:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12) {
+    status: 1,
+    signal: null,
+    output: [ null, '', `Traceback (most recent call last):\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n` ],
+    pid: 40939,
+    stdout: '',
+    stderr: `Traceback (most recent call last):\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n`
+  }
+
+test at test/boundary-version-hash.test.mjs:39:1
+✖ changed footprints invalidate cached values while direct evidence can still resolve the location (50.186439ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py --stdin
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 32, in <module>
+      print(boundary_hash(rows,args.index.resolve()))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at preparedBoundariesMatch (file:///workspace/worldatlas-hierarchy-install/derived.mjs:16:27)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/boundary-version-hash.test.mjs:44:15)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    status: 1,
+    signal: null,
+    output: [ null, '', `Traceback (most recent call last):\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n` ],
+    pid: 40942,
+    stdout: '',
+    stderr: `Traceback (most recent call last):\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/worldatlas-hierarchy-install/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n`
+  }
+
+test at test/compact-ownership.test.mjs:76:1
+✖ real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum coordinates and high IDs (82.895841ms)
+  browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/worldatlas-hierarchy-install/test/compact-ownership.test.mjs:78:31) {
+    name: 'Error',
+    log: []
+  }
+
+test at test/compact-ownership.test.mjs:1:1
+✖ test/compact-ownership.test.mjs (179325.302743ms)
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/credential-envelope.test.mjs:33:1
+✖ private delivery writes owner-only outside-Git file and refuses wrong digest, unsafe permissions, symlinks and overwrite (1.713514ms)
+  Error: Credential envelope validation or private delivery failed
+      at fail (file:///workspace/worldatlas-hierarchy-install/scripts/credential-envelope.mjs:11:23)
+      at outsideGit (file:///workspace/worldatlas-hierarchy-install/scripts/credential-envelope.mjs:66:53)
+      at readPrivateKey (file:///workspace/worldatlas-hierarchy-install/scripts/credential-envelope.mjs:69:2)
+      at deliverCredentialFile (file:///workspace/worldatlas-hierarchy-install/scripts/credential-envelope.mjs:85:12)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/credential-envelope.test.mjs:38:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at test/credential-envelope.test.mjs:41:1
+✖ CLI encryption/decryption returns metadata only and failures never print plaintext or key material (78.403268ms)
+  AssertionError [ERR_ASSERTION]: {"status":"failed","error_code":"credential-envelope-delivery-rejected","credential_logged":false,"private_key_logged":false}
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/credential-envelope.test.mjs:45:218)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/install-reviewed-geography.test.mjs:32:1
+✖ a genuine unknown-attribute creation installs reversibly without changing original history (31.071583ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at verifySourceGeometry (file:///workspace/worldatlas-hierarchy-install/scripts/install-reviewed-geography.mjs:27:4)
+      at verifyPrepared (file:///workspace/worldatlas-hierarchy-install/scripts/install-reviewed-geography.mjs:62:23)
+      at validate (file:///workspace/worldatlas-hierarchy-install/scripts/install-reviewed-geography.mjs:84:73)
+      at install (file:///workspace/worldatlas-hierarchy-install/scripts/install-reviewed-geography.mjs:86:83)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:44:36)
+      at Test.runInAsyncScope (node:async_hooks:227:14) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42012,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:61:1
+✖ ordered replacement then pure creation validates exact current ancestry and pinned source bytes (29.106259ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:62:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42013,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:64:1
+✖ composed installer rejects skipped or reordered manifests, changed pins and unmatched creation inventories (29.647386ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:65:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42014,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:73:1
+✖ composed installer rejects child historical transfers and changed source archive bytes (33.990483ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:74:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42015,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:77:1
+✖ geometry evidence cannot silently authorize current source-name changes (29.137347ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:78:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42016,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:81:1
+✖ source-name correction requires pinned exact metadata before/after evidence (27.318785ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:82:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42017,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:89:1
+✖ installer summary pins geometry proof members and rejects altered evidence after approval (32.061555ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/install-reviewed-geography.test.mjs:90:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42018,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/land-creations.test.mjs:16:1
+✖ pure source-backed creation has a null predecessor and retains every original geometry (46.25962ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/land-creations.test.mjs:16:196)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42040,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/land-creations.test.mjs:21:1
+✖ latitude and antimeridian creation uses actual narrow land, not a world-width polygon (24.9145ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/land-creations.test.mjs:21:239)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42041,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/land-creations.test.mjs:24:1
+✖ a creation receipt cannot transfer history or add an unaccounted identity (30.752031ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/land-creations.test.mjs:24:105)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42053,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/land-creations.test.mjs:26:1
+✖ staged source creation compiles and publishes identical static/hosted crosswalks (36.350842ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/land-creations.test.mjs:33:95)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42054,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/macro-review-projection.test.mjs:54:1
+✖ source-backed projection resolves exact replacements and creations while all semantic branches remain open (38.697018ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at geometryFixture (file:///workspace/worldatlas-hierarchy-install/test/macro-review-projection.test.mjs:43:533)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/macro-review-projection.test.mjs:55:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42097,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/macro-review-projection.test.mjs:57:1
+✖ projection preparation rejects altered source pins, wrong order and invented historical transfers (31.185004ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at geometryFixture (file:///workspace/worldatlas-hierarchy-install/test/macro-review-projection.test.mjs:43:533)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/macro-review-projection.test.mjs:58:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42098,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/macro-review-projection.test.mjs:61:1
+✖ projection validator exhausts added identities, retained archives and new source-assessed groups (35.470083ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at geometryFixture (file:///workspace/worldatlas-hierarchy-install/test/macro-review-projection.test.mjs:43:533)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/macro-review-projection.test.mjs:62:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42099,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/macro-review-projection.test.mjs:75:1
+✖ successive source migrations conserve earlier additions and their sourced new groups (30.335763ms)
+  Error: Command failed: python3 /workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/workspace/worldatlas-hierarchy-install/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-land-creations.mjs:18:2)
+      at geometryFixture (file:///workspace/worldatlas-hierarchy-install/test/macro-review-projection.test.mjs:43:533)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/macro-review-projection.test.mjs:76:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes> ],
+    pid: 42100,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 77 6f 72 6b 73 70 ... 180 more bytes>
+  }
+
+test at test/marcus-restoration.test.mjs:8:1
+✖ original water-masked Marcus land reconstructs from exact OSM bytes (43.866811ms)
+  Error: Command failed: python3 -c import importlib.util,json,pathlib; f=pathlib.Path("/workspace/worldatlas-hierarchy-install/data/macro-improvements/marcus-restoration/prepare.py"); s=importlib.util.spec_from_file_location('marcus',f); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); p=m.read(f.parent/'proposal.json'); dry,coast,water=m.reconstruct(p); assert len(dry.interiors)==1 and water.area>0 and coast.difference(water).equals(dry)
+  Traceback (most recent call last):
+    File "<string>", line 1, in <module>
+    File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+    File "/workspace/worldatlas-hierarchy-install/data/macro-improvements/marcus-restoration/prepare.py", line 4, in <module>
+      from shapely import from_wkb,union_all
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/marcus-restoration.test.mjs:10:2)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 3c 73 74 72 69 6e 67 ... 391 more bytes> ],
+    pid: 42133,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 3c 73 74 72 69 6e 67 ... 391 more bytes>
+  }
+
+test at test/marcus-restoration.test.mjs:12:1
+✖ removing the source water hole or changing the coastline is rejected (39.944459ms)
+  Error: Command failed: python3 -c import importlib.util,json,pathlib,gzip,hashlib
+  from shapely import from_wkb,to_wkb
+  from shapely.geometry import Polygon
+  f=pathlib.Path("/workspace/worldatlas-hierarchy-install/data/macro-improvements/marcus-restoration/prepare.py"); s=importlib.util.spec_from_file_location('marcus',f);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);p=m.read(f.parent/'proposal.json');m.HERE=pathlib.Path("/tmp/marcus-water-negative-x0DvDw")
+  raw=(f.parent/'original-map.osm.xml.gz').read_bytes();(m.HERE/'original-map.osm.xml.gz').write_bytes(raw)
+  dry=from_wkb(gzip.decompress((f.parent/'dry-land.wkb.gz').read_bytes()))
+  for kind in ['drop-water','move-land']:
+   g=Polygon(dry.exterior) if kind=='drop-water' else __import__('shapely.affinity',fromlist=['translate']).translate(dry,xoff=.001)
+   b=to_wkb(g);(m.HERE/'dry-land.wkb.gz').write_bytes(gzip.compress(b));p['source_geometry']['wkb_sha256']=hashlib.sha256(b).hexdigest()
+   try:m.reconstruct(p)
+   except ValueError as e:assert 'reconstruction' in str(e)
+   else:raise AssertionError('Altered source land was accepted')
+  
+  Traceback (most recent call last):
+    File "<string>", line 2, in <module>
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/marcus-restoration.test.mjs:15:2)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 3c 73 74 72 69 6e 67 ... 71 more bytes> ],
+    pid: 42135,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 3c 73 74 72 69 6e 67 ... 71 more bytes>
+  }
+
+test at test/model.test.mjs:1:1
+✖ test/model.test.mjs (133531.178441ms)
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/neon-capacity.test.mjs:1:1
+✖ test/neon-capacity.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/neon-forward-migrations.test.mjs:1:1
+✖ test/neon-forward-migrations.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/neon-storage-migration.test.mjs:1:1
+✖ test/neon-storage-migration.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/neon-verification.test.mjs:1:1
+✖ test/neon-verification.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/oceania-land-restoration.test.mjs:1:1
+✖ test/oceania-land-restoration.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/ownership-assets.test.mjs:1:1
+✖ test/ownership-assets.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/ownership-delivery.test.mjs:1:1
+✖ test/ownership-delivery.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/palette-intervals.test.mjs:1:1
+✖ test/palette-intervals.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/parent-indexes.test.mjs:1:1
+✖ test/parent-indexes.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/pixel-grid.test.mjs:1:1
+✖ test/pixel-grid.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/pixel-metadata.test.mjs:1:1
+✖ test/pixel-metadata.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/pixel-ownership.test.mjs:1:1
+✖ test/pixel-ownership.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/postgres-adapter.test.mjs:1:1
+✖ test/postgres-adapter.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/postgres-contract.test.mjs:1:1
+✖ test/postgres-contract.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/postgres-restore.test.mjs:1:1
+✖ test/postgres-restore.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/postgres-runtime-role.test.mjs:1:1
+✖ test/postgres-runtime-role.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/premerge-evidence.test.mjs:1:1
+✖ test/premerge-evidence.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/prepared-evidence.test.mjs:1:1
+✖ test/prepared-evidence.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/prepared-parity.test.mjs:1:1
+✖ test/prepared-parity.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/queue-readiness-audit.test.mjs:1:1
+✖ test/queue-readiness-audit.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/reference-archive.test.mjs:1:1
+✖ test/reference-archive.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/reference-context.test.mjs:1:1
+✖ test/reference-context.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/reference-hierarchy-release.test.mjs:1:1
+✖ test/reference-hierarchy-release.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/regional-research-gate.test.mjs:1:1
+✖ test/regional-research-gate.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/research-bundle.test.mjs:1:1
+✖ test/research-bundle.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/research-catalog.test.mjs:1:1
+✖ test/research-catalog.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/research-media-upload.test.mjs:1:1
+✖ test/research-media-upload.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/runtime-ownership.test.mjs:1:1
+✖ test/runtime-ownership.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/semantic-followup.test.mjs:1:1
+✖ test/semantic-followup.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/source-policy-corrections.test.mjs:1:1
+✖ test/source-policy-corrections.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/stage-site-migrations.test.mjs:1:1
+✖ test/stage-site-migrations.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/storage-checkpoint.test.mjs:1:1
+✖ test/storage-checkpoint.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/storage-export-v2.test.mjs:1:1
+✖ test/storage-export-v2.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/storage-export-v3.test.mjs:1:1
+✖ test/storage-export-v3.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/storage-export.test.mjs:1:1
+✖ test/storage-export.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/supplement-source-hints.test.mjs:1:1
+✖ test/supplement-source-hints.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/temporal-geography-worker.test.mjs:1:1
+✖ test/temporal-geography-worker.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/temporal-geography.test.mjs:1:1
+✖ test/temporal-geography.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/temporal.test.mjs:1:1
+✖ test/temporal.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/typed-observations.test.mjs:1:1
+✖ test/typed-observations.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/unresolved-attributes.test.mjs:1:1
+✖ test/unresolved-attributes.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/unsettled-rank.test.mjs:1:1
+✖ test/unsettled-rank.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at test/worker-result.test.mjs:1:1
+✖ test/worker-result.test.mjs
+  'Promise resolution is still pending but the event loop has already resolved'

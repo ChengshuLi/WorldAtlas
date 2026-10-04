@@ -1,0 +1,45 @@
+✔ bounded root and child evidence verify complete changed-file union and baseline inventory (3.600328ms)
+✖ changed child manifest and absent/unassigned changed files reject (1.338127ms)
+✔ root hash cycles, duplicate assignments and changed context reject (1.010603ms)
+✔ partial baseline inventory cannot replace actual byte verification (0.852886ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 72.124762
+
+✖ failing tests:
+
+test at test/evidence-partitions.test.mjs:26:1
+✖ changed child manifest and absent/unassigned changed files reject (1.338127ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /manifest bytes changed/. Input:
+  
+  'Error: Input bytes mismatch: candidate:coordination/engineering/partition-test/child.json'
+  
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/evidence-partitions.test.mjs:27:74)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Input bytes mismatch: candidate:coordination/engineering/partition-test/child.json
+        at require (file:///workspace/worldatlas-hierarchy-install/scripts/evidence-quality.mjs:10:51)
+        at inspect (file:///workspace/worldatlas-hierarchy-install/scripts/evidence-quality.mjs:58:5)
+        at validateEvidence (file:///workspace/worldatlas-hierarchy-install/scripts/evidence-quality.mjs:112:40)
+        at validatePremergeManifest (file:///workspace/worldatlas-hierarchy-install/scripts/premerge-evidence.mjs:21:18)
+        at validateEvidencePartitions (file:///workspace/worldatlas-hierarchy-install/scripts/validate-evidence-partitions.mjs:31:16)
+        at file:///workspace/worldatlas-hierarchy-install/test/evidence-partitions.test.mjs:27:85
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/evidence-partitions.test.mjs:27:74)
+        at Test.runInAsyncScope (node:async_hooks:227:14),
+    expected: /manifest bytes changed/,
+    operator: 'throws',
+    diff: 'simple'
+  }

@@ -5,6 +5,7 @@ import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {footprintHash} from './check-prepared.mjs';
+import {readGeographicReleaseManifest,decodeGeographicReleaseBatch} from './read-geographic-release-manifest.mjs';
 import {geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
 
 const tiers=['continent','subcontinent','region','area','province','location'];
@@ -295,7 +296,24 @@ export async function prepareGeographicRelease({data='data',geographyData=data,o
   for(const entity of JSON.parse(bytes).entities)if(tiers.includes(entity.kind))original.set(entity.id,entity);
  }
  const registry=new Map(original),registryPins={};
- for(const file of registryManifests){const absolute=path.resolve(file),manifest=read(absolute),base=path.dirname(absolute);registryPins[sha(fs.readFileSync(absolute))]=manifest.releases?.at(-1)?.id??null;for(const part of manifest.batches.filter(p=>p.kind==='entities'||p.route==='/api/records/import')){const raw=fs.readFileSync(safeProofFile(base,part.path));if(sha(raw)!==part.sha256)throw Error('Registered identity manifest hash mismatch');for(const e of JSON.parse(raw).entities??[])if(tiers.includes(e.kind)){if(registry.has(e.id)&&json(canonical(registry.get(e.id)))!==json(canonical(e)))throw Error('Immutable registered identity definition changed');registry.set(e.id,e);}}}
+ for(const file of registryManifests){
+  const absolute=path.resolve(file),base=path.dirname(absolute);
+  const manifest=path.basename(absolute)==='index.json'?readGeographicReleaseManifest(base):read(absolute);
+  registryPins[sha(fs.readFileSync(absolute))]=manifest.releases?.at(-1)?.id??null;
+  const pointer=path.join(base,'current-manifest.json');
+  if(path.basename(absolute)==='index.json'&&fs.existsSync(pointer)){
+   const extension=read(pointer);
+   registryPins[sha(fs.readFileSync(pointer))]=manifest.releases.at(-1).id;
+   registryPins[extension.sha256]=manifest.releases.at(-1).id;
+  }
+  for(const part of manifest.batches.filter(p=>p.kind==='entities'||p.route==='/api/records/import')){
+   const raw=decodeGeographicReleaseBatch(fs.readFileSync(safeProofFile(base,part.path)),part);
+   for(const e of JSON.parse(raw).entities??[])if(tiers.includes(e.kind)){
+    if(registry.has(e.id)&&json(canonical(registry.get(e.id)))!==json(canonical(e)))throw Error('Immutable registered identity definition changed');
+    registry.set(e.id,e);
+   }
+  }
+ }
  const units=read(`${geographyData}/hierarchy.json`),features=read(`${geographyData}/world-index.json`).parts.flatMap(p=>read(`${geographyData}/${p}`).features);
  const migration=read(`${data}/geographic-decision-migration.json.gz`),current=new Map(units.map(u=>[u.id,{...u,kind:u.level}]));
  for(const f of features)current.set(f.id,{id:f.id,kind:'location',name:f.properties.name,parent_id:f.properties.parent_id,metadata:f.properties.metadata});

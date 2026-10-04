@@ -1,0 +1,12 @@
+file:///workspace/worldatlas-hierarchy-regeneration/scripts/prepare-macro-review-projection.mjs:158
+   if(JSON.stringify(current.get(row.id).source_assessment)!==JSON.stringify(row.source_assessment))throw Error('Projection dropped or rewrote retained source assessment');
+                                                                                                          ^
+
+Error: Projection dropped or rewrote retained source assessment
+    at validateMacroReviewProjection (file:///workspace/worldatlas-hierarchy-regeneration/scripts/prepare-macro-review-projection.mjs:158:107)
+    at validateSemanticFollowup (file:///workspace/worldatlas-hierarchy-regeneration/scripts/validate-semantic-followup.mjs:340:21)
+    at async prepareMacroReviewProjection (file:///workspace/worldatlas-hierarchy-regeneration/scripts/prepare-macro-review-projection.mjs:116:2)
+    at async prepareInstall (file:///workspace/worldatlas-hierarchy-regeneration/scripts/install-macro-reference.mjs:157:20)
+    at async file:///workspace/worldatlas-hierarchy-regeneration/scripts/prepare-hierarchy-correction-install.mjs:19:16
+
+Node.js v24.19.0
