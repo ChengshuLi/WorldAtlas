@@ -133,9 +133,10 @@ def finalize_manifest(manifest):
     manifest["outputs"] = [current_descriptor(path) for path in paths]
     # The manifest is excluded from its own byte descriptors, but the PR's
     # change inventory still needs a receipt for every changed file.
+    # GitHub omits previous_filename for additions, so omit previous_path too.
     manifest["change_receipts"] = [
-        {"path": path, "status": "added", "previous_path": None} for path in paths
-    ] + [{"path": MANIFEST_PATH, "status": "added", "previous_path": None}]
+        {"path": path, "status": "added"} for path in paths
+    ] + [{"path": MANIFEST_PATH, "status": "added"}]
     controls = {"positive": f"{VINTAGE_DIR}/positive-control.json",
                 "negative": f"{VINTAGE_DIR}/negative-control.json",
                 "reproducibility": f"{VINTAGE_DIR}/reproducibility-control.json"}
