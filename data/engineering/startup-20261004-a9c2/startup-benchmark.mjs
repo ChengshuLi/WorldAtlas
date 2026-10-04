@@ -26,7 +26,7 @@ const token = await new Promise((resolve, reject) => {
 const previewDirectory=process.argv[6], bundleDirectory=process.argv[7];
 const requests = [], errors = [], navigation = [], trace = [];
 let browser, server;
-const receipt = {version: 1, phase, site: origin.origin, started_at_utc: new Date().toISOString(), read_only: true, candidate_preview: Boolean(previewDirectory), reference_bundle_preview:Boolean(bundleDirectory), bundle_transport_limit:bundleDirectory?'New bundle is served locally; this is a code/complete-content preview and lower-bound transport experiment, not equivalent hosted performance or a production ten-second proof. Original root still traverses actual production transport.':null,
+const receipt = {version: 1, phase, site: origin.origin, started_at_utc: new Date().toISOString(), read_only: true, candidate_preview: Boolean(previewDirectory), reference_bundle_preview:Boolean(bundleDirectory), bundle_transport_limit:bundleDirectory?'New bundles are served locally; this is a code/complete-content preview and lower-bound transport experiment, not equivalent hosted performance or a production ten-second proof. Original root still traverses actual production transport.':null,
   conditions: {suite, transport: 'GET-only localhost proxy of actual private production responses; service credential remains server-side',
     browser: 'headless Chromium on Linux, 1440x1080, no CPU/network throttling', physical_mobile: false,
     cold_definition: 'Fresh browser context/asset cache; first in this verification session. Provider idle/wake state is unknown.'},
@@ -46,7 +46,7 @@ try {
         Object.assign(log,{status:200,response_bytes:bytes.length,total_ms:performance.now()-started,candidate_asset:true});
         res.writeHead(200,{'Content-Type':local.endsWith('.js')?'text/javascript':local.endsWith('.css')?'text/css':'text/html'});return res.end(bytes);
       }
-      const bundled=bundleDirectory&&(url.pathname==='/reference-attributes/startup-bundle.json.gz'?'reference-attributes/startup-bundle.json.gz':null);
+      const bundled=bundleDirectory&&(url.pathname==='/reference-attributes/startup-bundle.json.gz'?'reference-attributes/startup-bundle.json.gz':url.pathname==='/geography/startup-temporal.json.gz'?'geography/startup-temporal.json.gz':null);
       if(bundled){
         const bytes=fs.readFileSync(path.join(bundleDirectory,bundled));
         Object.assign(log,{status:200,response_bytes:bytes.length,total_ms:performance.now()-started,candidate_asset:true,candidate_bundle:true});

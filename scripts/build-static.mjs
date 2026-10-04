@@ -9,6 +9,7 @@ import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {prepareEvidenceBundle} from './prepare-evidence-bundle.mjs';
 import {packageOwnershipHistory} from './package-ownership-history.mjs';
 import {packageReferenceBundle} from './package-reference-bundle.mjs';
+import {packageStartupOwnership} from './package-startup-ownership.mjs';
 import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
 import { createHash } from 'node:crypto';
 const audit=JSON.parse(await fs.readFile('data/granularity-audit.json','utf8'));
@@ -65,6 +66,7 @@ try {
     const words=ownership[kind].slice(offset,offset+1048576),path=`ownership/${kind}-${offset}.bin.gz`;
     await fs.writeFile(`dist/${path}`,gzipSync(shuffleOwnershipBytes(words),{level:9}));pixelMap.parts.push({kind,offset,words:words.length,path,encoding:'byte-shuffle'});
   }
+  if(fixedGrid?.version===2){const transport=await packageStartupOwnership({manifest:fixedGrid,source:'data/canonical-grid',destination:'dist'});pixelMap.parts=transport.pixelMap.parts;}
   const catalog=gridIndex.map(({feature,index,bounds})=>({...feature,geometry:null,pixelIndex:index,gridBounds:bounds}));
   const catalogParts=[];
   for(let i=0;i<catalog.length;i+=1500){const path=`geography/catalog-${i/1500}.json.gz`;catalogParts.push(path);await fs.writeFile(`dist/${path}`,gzipSync(JSON.stringify(catalog.slice(i,i+1500)),{level:9}));}
