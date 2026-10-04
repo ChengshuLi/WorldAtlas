@@ -25,6 +25,15 @@ test('every crosswalked location exposes its individually supported role and unc
  assert.throws(()=>correctedLocationSourceRole('same',{location_annotations:[{location_id:'same'},{location_id:'same'}]}),/Duplicate/);
 });
 
-test('Monaco and Luxembourg remain explicit stable-ID proposals with no hierarchy mutation',()=>{
- const units=new Map(JSON.parse(fs.readFileSync(new URL('../data/hierarchy.json',import.meta.url))).map(unit=>[unit.id,unit]));for(const proposal of bundle.area_label_proposals){assert.deepEqual(units.get(proposal.entity_id),proposal.before_group);assert.equal(proposal.status,'proposed-not-installed');assert.equal(proposal.member_location_ids.length,1);assert.equal(proposal.identity_changed,false);assert.equal(proposal.parent_changed,false);assert.equal(proposal.geometry_changed,false);assert.equal(proposal.granularity_exception_approved,false);}
+test('installed label corrections preserve frozen proposals and bind exact reference-only before/after records',()=>{
+ const units=new Map(JSON.parse(fs.readFileSync(new URL('../data/hierarchy.json',import.meta.url))).map(unit=>[unit.id,unit]));
+ const receipt=JSON.parse(gunzipSync(fs.readFileSync(new URL('../data/engineering/hierarchy-crosswalk-20261003-a9c2/migration-receipt.json.gz',import.meta.url))));
+ assert.equal(receipt.reference_only,true);assert.equal(receipt.historical_claims_transferred,false);assert.equal(receipt.summary.geometry_changes,0);
+ for(const proposal of bundle.area_label_proposals){
+  const change=receipt.group_changes.find(row=>row.id===proposal.entity_id);
+  assert.deepEqual(change.before,proposal.before_group);assert.deepEqual(units.get(proposal.entity_id),change.after);
+  assert.equal(change.after.id,change.before.id);assert.equal(change.after.parent_id,change.before.parent_id);
+  assert.equal(change.after.name,proposal.proposed_patch.name);assert.equal(change.after.metadata.reference_hierarchy_correction.semantic_approval,false);
+  assert.equal(proposal.status,'proposed-not-installed');assert.equal(proposal.member_location_ids.length,1);assert.equal(proposal.identity_changed,false);assert.equal(proposal.parent_changed,false);assert.equal(proposal.geometry_changed,false);assert.equal(proposal.granularity_exception_approved,false);
+ }
 });

@@ -2,9 +2,29 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import path from 'node:path';import os from 'node:os';import {createHash} from 'node:crypto';import {gzipSync,gunzipSync} from 'node:zlib';
 import {stageLandCreations} from '../scripts/stage-land-creations.mjs';import {footprintHash} from '../scripts/check-prepared.mjs';
-import {validateMacroReviewProjection,resolveProjectionGeometry,retainProjectionInputs,loadProjectionPredecessors} from '../scripts/prepare-macro-review-projection.mjs';
+import {validateMacroReviewProjection,resolveProjectionGeometry,retainProjectionInputs,loadProjectionPredecessors,inheritProjectionAssessments,projectAdditionalOwnerProfiles,validatePriorDashboardPins} from '../scripts/prepare-macro-review-projection.mjs';
 const units=[{id:'c',name:'C',level:'continent',parent_id:null},{id:'s',name:'S',level:'subcontinent',parent_id:'c'},{id:'r',name:'R',level:'region',parent_id:'s'},{id:'a',name:'A',level:'area',parent_id:'r'},{id:'p',name:'P',level:'province',parent_id:'a'}];
 const pins={hierarchy_sha256:'a'.repeat(64),location_index_sha256:'b'.repeat(64),footprints_sha256:'c'.repeat(64)};
+test('owner-profile reuse rejects stale hierarchy, catalog and footprint pins',()=>{
+ const dashboard={current_pins:{...pins}};assert.doesNotThrow(()=>validatePriorDashboardPins(dashboard,pins));
+ for(const key of Object.keys(pins))assert.throws(()=>validatePriorDashboardPins({current_pins:{...pins,[key]:'d'.repeat(64)}},pins),/exact predecessor/);
+ assert.throws(()=>validatePriorDashboardPins({},pins),/exact predecessor/);
+});
+test('metadata-only projection retains source-backed unknown-owner coverage without approving it',()=>{
+ const assessment={id:'island',regional_interior_approved:false,historical_attributes_assessed:false,source_evidence:[{source_sha256:'d'.repeat(64)}]};
+ const previous={locations:[{id:'island',owner:null,source_assessment:assessment}],groups:[]};
+ const current={rows:[{id:'island',owner:null,continent:'Oceania',parent_chain:['new:p','c']}],projectedGroups:[]};
+ inheritProjectionAssessments({previous,current});
+ const profiles=projectAdditionalOwnerProfiles([{owner:'Owner'}],current.rows);
+ assert.equal(profiles.length,1);assert.equal(profiles[0].owner,null);assert.equal(profiles[0].locations,1);
+ assert.deepEqual(profiles[0].source_assessment_entries,[assessment]);assert.equal(profiles[0].regional_interiors_approved,false);
+ assert.deepEqual(profiles[0].open_group_ids,['new:p','c']);
+ const changed=structuredClone(current);changed.rows[0].owner='Invented';assert.throws(()=>inheritProjectionAssessments({previous,current:changed}),/new owner/);
+ const missing=structuredClone(current);delete missing.rows[0].source_assessment;assert.throws(()=>projectAdditionalOwnerProfiles([],missing.rows),/lacks retained/);
+ const approved=structuredClone(current);approved.rows[0].source_assessment.regional_interior_approved=true;assert.throws(()=>projectAdditionalOwnerProfiles([],approved.rows),/lacks retained/);
+ const legacy={owner:undefined,regional_interiors_approved:false,source_assessment_entries:[],source_assessment_context:'Retained older source-era profile'};
+ assert.equal(projectAdditionalOwnerProfiles([],[{id:'older',owner:undefined,continent:'Europe',parent_chain:['p','c']}],[legacy])[0].source_assessment_context,legacy.source_assessment_context);
+});
 function fixture(){
  const hierarchy=units.map(row=>row.id==='r'?{...row,id:'new:r',name:'New R'}:row.id==='a'?{...row,parent_id:'new:r'}:{...row}),locations=[{id:'l',name:'L',parent_id:'p',owner:'Owner'}];
  const projection={version:1,kind:'current-membership-projection',semantic_complete:false,regional_interiors_approved:false,historical_claims_transferred:false,geometry_changes:0,current_pins:{...pins},counts:{locations:1,groups:5,continent:1,subcontinent:1,region:1,area:1,province:1},locations:[{...locations[0],parent_chain:['p','a','new:r','s','c'],status:'open',semantic_status:'open'}],groups:hierarchy.map(row=>({...row,member_location_ids:['l'],branch_semantic_status:'open'})),archived_predecessors:[{...units[2]}],crosswalks:[{retired_units:[{...units[2]}],group_changes:[{id:'r',before:{...units[2]},after:null},{id:'new:r',before:null,after:{...hierarchy[2]}}]}]};
@@ -74,15 +94,17 @@ test('later geometry projection preserves original inspection bytes and namespac
 
 test('successive source migrations conserve earlier additions and their sourced new groups',async t=>{
  const f=geometryFixture(t),proof=await resolveProjectionGeometry(f),first=geometryProjection(f,proof),prior=first.projection;
+ prior.locations[0].source_assessment=proof.source_assessments.locations.find(row=>row.id==='l');
  const added={id:'next',name:'Next',parent_id:'new:p',owner:null,parent_chain:['new:p','new:a','r','s','c'],status:'open',semantic_status:'open'};
  const afterPins={...prior.current_pins,footprints_sha256:'e'.repeat(64)},manifest={sha256:'1'.repeat(64),receipt_sha256:'2'.repeat(64),before_footprints_sha256:prior.current_pins.footprints_sha256,after_footprints_sha256:afterPins.footprints_sha256,changed_ids:[],removed_ids:[],added_ids:['next'],history_transfer:false};
  const assessment={id:'next',status:'source-assessed-open',semantic_status:'open',regional_interior_approved:false,historical_attributes_assessed:false,kind:'source-backed-create',source_manifest_sha256:manifest.sha256,source_receipt_sha256:manifest.receipt_sha256,source_evidence:[{url:'https://example.org/next',source_sha256:'3'.repeat(64)}],creation_proof:{location_id:'next',source:{sha256:'3'.repeat(64)}}};
- const projection=structuredClone(prior);projection.before_pins=prior.current_pins;projection.current_pins=afterPins;projection.locations.push(added);projection.counts.locations=3;projection.geometry_changes=1;
+ const projection=structuredClone(prior);projection.retained_source_assessments=true;projection.before_pins=prior.current_pins;projection.current_pins=afterPins;projection.locations.push(added);projection.counts.locations=3;projection.geometry_changes=1;
  projection.geometry_proof={version:1,method:'ordered-source-backed-geographic-migrations',descriptor_sha256:'4'.repeat(64),source_receipt_sha256:'5'.repeat(64),before_footprints_sha256:manifest.before_footprints_sha256,after_footprints_sha256:manifest.after_footprints_sha256,changed_ids:[],removed_ids:[],added_ids:['next'],created_group_ids:[],manifests:[manifest],archived_location_references:[],metadata_receipts:[],source_assessments:{locations:[assessment],groups:[]},historical_claims_transferred:false,regional_interiors_approved:false};
  for(const group of projection.groups)if(added.parent_chain.includes(group.id))group.member_location_ids.push('next');
  const input={...first,projection,hierarchy:projection.groups,locations:projection.locations,currentPins:afterPins};
  assert.throws(()=>validateMacroReviewProjection(input),/crosswalk loses or invents/);
  assert.equal(validateMacroReviewProjection({...input,predecessorProjections:[prior]}).validated,true);
+ for(const kind of ['drop','rewrite']){const broken=structuredClone(input);if(kind==='drop')delete broken.projection.locations[0].source_assessment;else broken.projection.locations[0].source_assessment.source_evidence=[];assert.throws(()=>validateMacroReviewProjection({...broken,predecessorProjections:[prior]}),/retained source assessment/);}
  const bad=structuredClone(prior);bad.current_pins.footprints_sha256='0'.repeat(64);
  assert.throws(()=>validateMacroReviewProjection({...input,predecessorProjections:[bad]}),/before pins/);
  const approved=structuredClone(prior);approved.regional_interiors_approved=true;

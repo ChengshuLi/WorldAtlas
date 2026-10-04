@@ -1,0 +1,188 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "hierarchy-install-20261003-a9c2",
+  "branch": "engineering/hierarchy-install-20261003-a9c2",
+  "base_main_commit": "277b8ecbb3199ae3d5fb07bab96353d17a049b1c",
+  "github_issue": 6,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Offline coherent metadata installation and append-only correction release preserving original identity/geometry/grid/evidence bytes",
+    "Publisher-reviewed fresh served-release check and matching release/static/server handoff"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-04T04:52:27.190375+00:00",
+  "completed": [
+    "Partial PR673 actually merged; first of two permitted PRs",
+    "Confirmed reservation rotated without live operations",
+    "Fresh crosswalk reconstructed against immutable original baseline",
+    "Existing full identity chronology replay passed; candidate release6 is offline/unpublished",
+    "Both dated-evidence producer predecessor chains composed with exact archived bytes and complete prior migration lists",
+    "Metadata-only macro compatibility stages116 unchanged identities/members/footprints and preserves116 exact envelope buffers; candidate publication false",
+    "All3307 original inputs matched immutable277b8ec baseline through10 bounded partitions",
+    "Concurrent actual529/PR671 merge af5ed573 incorporated intact",
+    "Initial complete 893-file generation reproduced twice byte-for-byte; all2941 protected payloads and56 ownership buffers checked",
+    "Local isolated checkout apply verified; exhaustive prepared evidence and local static browser checks passed; production publication unverified",
+    "Hosted and static packaging passed; migration staging controls passed after hosted packaging",
+    "Independent review hardens complete baseline/candidate preservation and executed-index binding; source-assessment inheritance regression fixed with meaningful controls",
+    "All894 local candidate output hashes match fresh publisher-integrated generation1cd3329cc68bb3914b59416c2854e75d4082892e7a2c6491738e6808e308bd0b",
+    "Pending macro certificate database-readback flag fixedfalse with meaningful rejection control; original published flag retained only archived",
+    "Actual45 scoped controls/38 negative-preservation scenarios passed after publisher integration",
+    "Actual46 typed-runtime/release tests passed after main51540f0",
+    "Corrected pinned-Python hosted packaging and fresh local browser passed;546 package output whole-file hashes recorded",
+    "Both full publisher-integrated generations completed; all894 raw output bytes matched,2941 original payloads and56 ownership buffers verified; final validation1cd3329cc68bb3914b59416c2854e75d4082892e7a2c6491738e6808e308bd0b",
+    "Actual accepted canonical renewal result5976707817/run37178178336; current-main integration preserved all other jobs and frozen generator outputs; old evidence/script/control vintages retained",
+    "New trusted identity-inventory validator retained; exact frozen producer helper archived with explicit original-path reconstruction, no relabeled experiment"
+  ],
+  "checks": [
+    {
+      "check": "release replay initial attempt",
+      "outcome": "failed",
+      "reason": "Initial adapter used different hierarchy field names than the retained receipt; corrected before retry"
+    },
+    {
+      "check": "release replay second attempt",
+      "outcome": "failed",
+      "reason": "Full historical geometry replay requires committed Python dependencies; shapely absent in fresh checkout. Installing requirements into isolated ignored venv; no validation gate bypassed."
+    },
+    {
+      "check": "current scoped controls",
+      "outcome": "passed",
+      "tests": 16,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/controls-current.log"
+    },
+    {
+      "check": "immutable baseline input verification",
+      "outcome": "passed",
+      "files": 3307,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/baseline-verification.json"
+    },
+    {
+      "check": "initial post-install broad suite",
+      "outcome": "failed",
+      "tests": 638,
+      "passed": 630,
+      "failed": 8,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/post-install-regressions.log",
+      "reason": "One generated coverage-profile regression; one test assumed uninstalled frozen proposals; four tests lacked dist/drizzle during concurrent static build; two credential controls reject managed /tmp/.git marker. No credential safeguard weakened."
+    },
+    {
+      "check": "exhaustive prepared evidence",
+      "outcome": "passed",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/prepared-validation.log"
+    },
+    {
+      "check": "local actual inspector/static browser",
+      "outcome": "passed",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/browser-check.json",
+      "live_publication": false,
+      "physical_device_verified": false
+    },
+    {
+      "check": "review-hardening controls",
+      "outcome": "passed",
+      "tests": 19,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/review-hardening-controls.log"
+    },
+    {
+      "check": "migration staging after packaging",
+      "outcome": "passed",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/migration-staging-packaged.log"
+    },
+    {
+      "check": "corrected broad suite before publisher integration",
+      "outcome": "failed-with-two-reproduced-environment-limitations",
+      "tests": 640,
+      "passed": 638,
+      "failed": 2,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/post-install-regressions-final.log",
+      "limit": "Credential controls reject managed /tmp/.git marker; unchanged baseline reproduces same failures; protections retained."
+    },
+    {
+      "check": "reviewed-final second regeneration",
+      "outcome": "failed",
+      "reason": "ENOSPC temporary filesystem; partial inventory and all prior reports preserved before removing only explicit own regenerable stages",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/regeneration-disk-cleanup.json"
+    },
+    {
+      "check": "publisher-integrated scoped controls",
+      "outcome": "passed",
+      "tests": 45,
+      "negative_preservation_scenarios": 38,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/controls-publisher-integrated.log"
+    },
+    {
+      "check": "publisher-integrated typed-runtime/release suite",
+      "outcome": "passed",
+      "tests": 46,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/typed-runtime-publisher-integrated.log"
+    },
+    {
+      "check": "publisher-integrated packaging initial invocation",
+      "outcome": "failed",
+      "reason": "System Python lacked Shapely because this invocation omitted isolated environment PATH; corrected command completed",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/hosted-build-publisher-integrated.log"
+    },
+    {
+      "check": "publisher-integrated hosted packaging",
+      "outcome": "passed",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/hosted-build-publisher-integrated-corrected.log"
+    },
+    {
+      "check": "publisher-integrated actual local Chromium",
+      "outcome": "passed",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/browser-check-publisher-integrated.json",
+      "live_publication": false,
+      "physical_device_verified": false
+    },
+    {
+      "check": "serialized reservation renewal",
+      "outcome": "failed",
+      "run_id": 37154493208,
+      "reason": "Trusted main workflow sparse checkout omits src/regional-import-gate.js introduced by PR677; canonical reservation remains active/unchanged. Reported to publisher and627, no bypass/repeated retry.",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/reservation-renewal-before-second-pr-failed.json"
+    },
+    {
+      "check": "complete publisher-integrated two-run reproducibility",
+      "outcome": "passed",
+      "written_files": 894,
+      "preserved_files": 2941,
+      "ownership_buffers": 56,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/reproducibility-publisher-integrated.json"
+    },
+    {
+      "check": "serialized merge preparation three bounded retries",
+      "outcome": "not-accepted",
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/queue-stale-base-20261004.json"
+    },
+    {
+      "check": "disjoint-main PR inventory and original-byte rejection",
+      "outcome": "passed",
+      "tests": 11,
+      "receipt": "data/engineering/hierarchy-install-20261003-a9c2/disjoint-base-controls.log"
+    }
+  ],
+  "deployment": {
+    "published": false,
+    "live_work": false
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "data/engineering/hierarchy-install-20261003-a9c2/reservation-renewal.json"
+  ],
+  "blockers": [
+    "Publisher-controlled matching live release/Site/static-server/claims/archive verification pending; no live operation begun"
+  ],
+  "next_action": "Refresh voluntary bounded evidence accounting and exact-head independent review, pass current CI, submit normal serialized queue and verify actual accepted merge; preserve issueopen until publisher acceptance.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "incorporated_main_commit": "e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2",
+  "pushed_source_checkpoint": "0aec48f8649e614b7b1d618e915f4a5081326a83",
+  "publication_handoff_path": "data/engineering/hierarchy-install-20261003-a9c2/publication-handoff.md",
+  "publication_owner_transfer": "Existing designated publisher remains responsible until ENG main acknowledges on GitHub"
+}

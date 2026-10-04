@@ -1,0 +1,112 @@
+✖ explicit legacy staging retains every original migration and metadata byte and deploys exactly 0000–0007 (3.63528ms)
+✖ default staging keeps the complete derivative and opt-in retries remove old forward files (0.7562ms)
+✔ all forward migration/source/journal hashes are checked before any deployment cutoff (12.180308ms)
+✖ the eight staged migrations have the original eight-migration schema and no forward tables (0.594766ms)
+✖ staging requires explicit valid mode, a separate real checkout and a supported CLI flag (74.131023ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 1
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 148.862886
+
+✖ failing tests:
+
+test at test/stage-site-migrations.test.mjs:20:1
+✖ explicit legacy staging retains every original migration and metadata byte and deploys exactly 0000–0007 (3.63528ms)
+  Error: ENOENT: no such file or directory, scandir '/workspace/worldatlas-hierarchy-install/dist/drizzle'
+      at read (node:fs:1536:35)
+      at readdirSyncRecursive (node:fs:1554:5)
+      at Object.readdirSync (node:fs:1628:12)
+      at snapshot (file:///workspace/worldatlas-hierarchy-install/test/stage-site-migrations.test.mjs:17:48)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/stage-site-migrations.test.mjs:21:64)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'scandir',
+    path: '/workspace/worldatlas-hierarchy-install/dist/drizzle'
+  }
+
+test at test/stage-site-migrations.test.mjs:51:1
+✖ default staging keeps the complete derivative and opt-in retries remove old forward files (0.7562ms)
+  Error: ENOENT: no such file or directory, open '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+      at Object.openSync (node:fs:622:18)
+      at Object.readFileSync (node:fs:488:35)
+      at validateSiteMigrationInputs (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:7:30)
+      at stageSiteMigrations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:27:70)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/stage-site-migrations.test.mjs:53:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+  }
+
+test at test/stage-site-migrations.test.mjs:90:1
+✖ the eight staged migrations have the original eight-migration schema and no forward tables (0.594766ms)
+  Error: ENOENT: no such file or directory, open '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+      at Object.openSync (node:fs:622:18)
+      at Object.readFileSync (node:fs:488:35)
+      at validateSiteMigrationInputs (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:7:30)
+      at stageSiteMigrations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:27:70)
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/stage-site-migrations.test.mjs:93:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+  }
+
+test at test/stage-site-migrations.test.mjs:106:1
+✖ staging requires explicit valid mode, a separate real checkout and a supported CLI flag (74.131023ms)
+  AssertionError [ERR_ASSERTION]: node:fs:622
+    return binding.open(
+                   ^
+  
+  Error: ENOENT: no such file or directory, open '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+      at Object.openSync (node:fs:622:18)
+      at Object.readFileSync (node:fs:488:35)
+      at validateSiteMigrationInputs (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:7:30)
+      at stageSiteMigrations (file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:27:70)
+      at file:///workspace/worldatlas-hierarchy-install/scripts/stage-site-migrations.mjs:52:374
+      at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+      at async node:internal/modules/esm/loader:643:26
+      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/worldatlas-hierarchy-install/dist/drizzle/transport-receipt.json'
+  }
+  
+  Node.js v24.19.0
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/worldatlas-hierarchy-install/test/stage-site-migrations.test.mjs:116:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

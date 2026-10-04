@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {gridProjection,appendRelease,composeEvidence,applyInstall,safe,patchJSONText} from '../scripts/install-macro-reference.mjs';
+import {gridProjection,appendRelease,composeEvidence,applyInstall,safe,patchJSONText,validateMetadataStages} from '../scripts/install-macro-reference.mjs';
 import {preparedEvidenceJSON} from '../src/prepared-evidence.js';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const fixture=()=>{const geometry={type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]},feature={id:'London',geometry,properties:{id:'London',name:'London',parent_id:'p'}};const proof={footprints_sha256:'a'.repeat(64),hierarchy_sha256:'b'.repeat(64),location_index_sha256:'c'.repeat(64)};const before={locations:new Map([['London',feature]]),units:[{id:'p',level:'province'}],groups:new Map(),members:new Map(),proof};const after={...before,proof:{...proof,hierarchy_sha256:'d'.repeat(64)},units:[{id:'q',level:'province'}],locations:new Map([['London',{...feature,properties:{...feature.properties,parent_id:'q'}}]])};return {before,after,geometry};};
@@ -61,4 +61,34 @@ test('successful metadata install records a committed journal and retains rollba
   const result=applyInstall({data,stage,report,validation_sha256:'checked'},{expectedValidation:'checked'}),journal=JSON.parse(fs.readFileSync(path.join(result.rollback_archive,'journal.json')));
   assert.equal(journal.state,'committed');assert.deepEqual(journal.installed,['metadata.json']);assert.equal(fs.readFileSync(path.join(data,'metadata.json'),'utf8'),'replacement');assert.equal(fs.readFileSync(path.join(result.rollback_archive,'metadata.json'),'utf8'),'original');assert.equal(fs.existsSync(path.join(data,'.macro-reference-install.lock')),false);
  }finally{fs.rmSync(base,{recursive:true,force:true});}
+});
+
+
+test('compressed release append preserves prior descriptors and checks compressed/payload bytes',()=>{
+ const release={id:'six',version:6,source_id:'source:six'},old={releases:[{id:'five',version:5}],batches:[{path:'old.json.gz',sha256:'immutable',payload_sha256:'immutable-raw',encoding:'gzip'}],new_entities:44,total_memberships:10,changes:20,sources_batches:['old.json.gz']};
+ const payloads=new Map([['sources.json',Buffer.from(JSON.stringify({sources:[{id:'baseline'},{id:'source:six'}]}))],['release-6.json',Buffer.from(JSON.stringify({release}))]]);
+ const next={releases:[release],batches:[...payloads].map(([name,raw])=>({path:name,sha256:sha(raw),route:'/api/geography/stage'})),new_entities:0,total_memberships:30,changes:3};
+ const before=structuredClone(old),result=appendRelease(old,next,name=>payloads.get(name),{compressed:true});
+ assert.deepEqual(old,before);assert.deepEqual(result.index.batches[0],old.batches[0]);assert.equal(result.index.new_entities,44);
+ for(const batch of result.index.batches.slice(1)){const packed=result.files.get(batch.path);assert.equal(sha(packed),batch.sha256);assert.equal(sha(gunzipSync(packed)),batch.payload_sha256);assert.equal(packed[9],255);assert.equal(batch.encoding,'gzip');}
+ assert.deepEqual(result.index.sources_batches,['old.json.gz','sources-6.json.gz']);
+ assert.throws(()=>appendRelease({...old,batches:[...old.batches,{path:'release-6.json.gz'}]},next,name=>payloads.get(name),{compressed:true}),/overwrite/);
+ payloads.set('release-6.json',Buffer.from('changed'));assert.throws(()=>appendRelease(old,next,name=>payloads.get(name),{compressed:true}),/hash mismatch/);
+});
+
+test('reference-only metadata mode validates exact archived group and source-backed parent merge',()=>{
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-reference-stage-'));
+ try{
+  const units=[{id:'c',name:'C',level:'continent',parent_id:null},{id:'s',name:'S',level:'subcontinent',parent_id:'c'},{id:'r',name:'R',level:'region',parent_id:'s'},{id:'a',name:'A',level:'area',parent_id:'r'},{id:'old',name:'P',level:'province',parent_id:'a'},{id:'kept',name:'P',level:'province',parent_id:'a'}];
+  const features=['one','two'].map((id,i)=>({id,properties:{id,name:id,parent_id:i?'kept':'old'},geometry:{type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]}}));
+  const before={units,groups:new Map(units.map(row=>[row.id,row])),features,locations:new Map(features.map(row=>[row.id,row])),proof:{hierarchy_sha256:'before',footprints_sha256:'footprints'}};
+  const afterFeatures=structuredClone(features);afterFeatures[0].properties.parent_id='kept';
+  const afterUnits=units.filter(row=>row.id!=='old');const after={units:afterUnits,groups:new Map(afterUnits.map(row=>[row.id,row])),features:afterFeatures,locations:new Map(afterFeatures.map(row=>[row.id,row])),proof:{hierarchy_sha256:'after',footprints_sha256:'footprints'}};
+  const receipt={before_sha256:'before',after_sha256:'after',footprints_sha256_before:'footprints',footprints_sha256_after:'footprints',reference_only:true,historical_claims_transferred:false,summary:{geometry_changes:0},before_units:units,retired_units:[units[4]],group_changes:[{id:'old',before:units[4],after:null}],changed_location_properties:[{location_id:'one',before_properties:features[0].properties,after_properties:afterFeatures[0].properties}],relationships:[{old_entity_id:'old',new_entity_id:'kept',change_type:'merge',reference_only:true,history_transfer:'none'}],source_evidence:[{url:'https://example.org/retained',source_sha256:'a'.repeat(64)}]};
+  const file=path.join(directory,'receipt.json'),save=value=>fs.writeFileSync(file,JSON.stringify(value));save(receipt);
+  validateMetadataStages(before,after,[file],{mode:'reference-correction'});
+  for(const mutate of [x=>x.before_sha256='stale',x=>x.historical_claims_transferred=true,x=>x.relationships=[],x=>x.before_units[4].name='invented',x=>x.source_evidence=[]]){const bad=structuredClone(receipt);mutate(bad);save(bad);assert.throws(()=>validateMetadataStages(before,after,[file],{mode:'reference-correction'}),/Stale|retired parent|before identities|source URLs/);}
+  save(receipt);afterFeatures[0].properties.name='changed';assert.throws(()=>validateMetadataStages(before,after,[file],{mode:'reference-correction'}),/Non-parent/);
+  assert.throws(()=>validateMetadataStages(before,after,[],{mode:'reference-correction'}),/Exactly one/);
+ }finally{fs.rmSync(directory,{recursive:true,force:true});}
 });

@@ -1,0 +1,13 @@
+✔ explicit legacy staging retains every original migration and metadata byte and deploys exactly 0000–0007 (23.253073ms)
+✔ default staging keeps the complete derivative and opt-in retries remove old forward files (15.820228ms)
+✔ all forward migration/source/journal hashes are checked before any deployment cutoff (9.821876ms)
+✔ the eight staged migrations have the original eight-migration schema and no forward tables (24.858263ms)
+✔ staging requires explicit valid mode, a separate real checkout and a supported CLI flag (77.811238ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 216.145142
