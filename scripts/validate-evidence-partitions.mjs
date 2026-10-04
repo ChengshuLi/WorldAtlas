@@ -9,6 +9,13 @@ import {gunzipSync} from 'node:zlib';
 import {sha256,safeEvidencePath} from './evidence-quality.mjs';
 import {validatePremergeManifest} from './premerge-evidence.mjs';
 const need=(ok,message)=>{if(!ok)throw Error(message);};
+export function readGitPRFiles(base,head,{cwd=process.cwd()}={}){
+ // GitHub reviews changes since the merge base, not main-only additions.
+ // Original-byte receipts still read the actual current PR base below.
+ const raw=execFileSync('git',['diff','--name-status','-z','--find-renames',`${base}...${head}`],{cwd,encoding:'utf8',maxBuffer:8*1024*1024}).split('\0'),files=[];
+ for(let i=0;i<raw.length&&raw[i];){const status=raw[i++],first=raw[i++];files.push(status.startsWith('R')?{filename:raw[i++],previous_filename:first,status:'renamed'}:{filename:first,status:{A:'added',M:'modified',D:'removed'}[status]});}
+ return files;
+}
 export function validateEvidencePartitions(index,{readFile,files,branch,workerId,issueNumber}){
  need(index.version===1&&index.issue===issueNumber&&index.worker_id===workerId&&index.queue_enforces_aggregate===false,'Wrong aggregate context');
  need(Array.isArray(index.partitions)&&index.partitions.length>0&&new Set(index.partitions.map(row=>row.path)).size===index.partitions.length,'Duplicate or missing partitions');
@@ -69,9 +76,7 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
  const relative=path.relative(root,path.resolve(file));
  const index=JSON.parse(blob(relative,headCommit));
  need(relative===index.index_path,'Executed index path differs from declared index');
- const raw=execFileSync('git',['diff','--name-status','-z','--find-renames',baseCommit,headCommit],{encoding:'utf8',maxBuffer:4*1024*1024}).split('\0');
- const files=[];
- for(let i=0;i<raw.length&&raw[i];){const status=raw[i++],first=raw[i++];if(status.startsWith('R'))files.push({filename:raw[i++],previous_filename:first,status:'renamed'});else files.push({filename:first,status:{A:'added',M:'modified',D:'removed'}[status]});}
+ const files=readGitPRFiles(baseCommit,headCommit);
  const result=validateEvidencePartitions(index,{readFile:(name,vintage)=>blob(name,vintage==='candidate'?headCommit:vintage==='base'?baseCommit:vintage),files,branch:execFileSync('git',['branch','--show-current'],{encoding:'utf8'}).trim(),workerId:index.worker_id,issueNumber:index.issue});
  console.log(JSON.stringify({...result,base_commit:baseCommit,head_commit:headCommit},null,2));
 }

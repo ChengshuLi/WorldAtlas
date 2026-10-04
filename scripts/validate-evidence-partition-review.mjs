@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {sha256,safeEvidencePath,validateEvidence} from './evidence-quality.mjs';
 import {validateReviewReceipt} from './premerge-evidence.mjs';
-import {validateEvidencePartitions} from './validate-evidence-partitions.mjs';
+import {validateEvidencePartitions,readGitPRFiles} from './validate-evidence-partitions.mjs';
 import {githubPages} from './issue-claim-contract.mjs';
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 const qualified=comment=>['OWNER','MEMBER','COLLABORATOR'].includes(comment.author_association);
@@ -48,8 +48,7 @@ const read=(name,vintage)=>{
 };
 const indexRaw=read(indexPath,'candidate'),index=JSON.parse(indexRaw);
 need(indexPath===index.index_path,'Executed index path differs');
-const changes=execFileSync('git',['diff','--name-status','-z','--find-renames',base,head],{encoding:'utf8',maxBuffer:8*1024*1024}).split('\0'),files=[];
-for(let i=0;i<changes.length&&changes[i];){const status=changes[i++],first=changes[i++];files.push(status.startsWith('R')?{filename:changes[i++],previous_filename:first,status:'renamed'}:{filename:first,status:{A:'added',M:'modified',D:'removed'}[status]});}
+const files=readGitPRFiles(base,head);
 need(files.length===pr.changed_files,'Incomplete actual PR file inventory');
 const bytes=validateEvidencePartitions(index,{readFile:read,files,branch:pr.head.ref,workerId:index.worker_id,issueNumber:index.issue});
 const comments=await githubPages(async route=>gh(route),`/repos/${repo}/issues/${number}/comments`);

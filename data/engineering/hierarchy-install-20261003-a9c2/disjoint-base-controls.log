@@ -1,0 +1,21 @@
+Switched to a new branch 'author'
+Switched to branch 'main'
+✔ PR evidence inventory preserves author renames and excludes a disjoint main advance (85.142631ms)
+✔ aggregate selection requires actual qualified latest current-head reviewer comment (0.668398ms)
+✔ unresolved current-head changes-requested review blocks, superseded and outsider comments do not (0.240503ms)
+✔ subordinate review binds actual body, URL, author, exact head and same worker (0.760997ms)
+✔ every subordinate manifest must have exactly one actual review binding (0.291029ms)
+✔ bounded root and child evidence verify complete changed-file union and baseline inventory (4.510859ms)
+✔ changed child manifest and absent/unassigned changed files reject (2.161528ms)
+✔ root hash cycles, duplicate assignments and changed context reject (1.103824ms)
+✔ partial baseline inventory cannot replace actual byte verification (0.997394ms)
+✔ empty inventory, alternate executed index and omitted preservation bytes reject (1.608805ms)
+✔ trusted per-partition descriptor and individual byte budgets are not raised (6.118344ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 159.77682
