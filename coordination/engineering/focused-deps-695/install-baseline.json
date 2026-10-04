@@ -1,0 +1,31 @@
+{
+  "run_id": 37166172110,
+  "run_attempt": 1,
+  "job_id": 111329423605,
+  "head_sha": "e907a116d62c3a63668cb58772397b70a3c7c6cb",
+  "status": "completed",
+  "conclusion": "success",
+  "steps": [
+    {
+      "name": "Install Node dependencies",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 6,
+      "started_at": "2026-10-04T00:50:46Z",
+      "completed_at": "2026-10-04T00:51:04Z"
+    },
+    {
+      "name": "Complete regression shard",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 10,
+      "started_at": "2026-10-04T00:51:04Z",
+      "completed_at": "2026-10-04T00:51:19Z"
+    }
+  ],
+  "seconds": {
+    "npm_install": 18.0,
+    "focused_tests": 15.0
+  },
+  "limit": "Historical baseline from actual PR691 GitHub job timestamps; final source/proof hosted timing remains pending."
+}

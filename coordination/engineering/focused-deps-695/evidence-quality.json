@@ -1,0 +1,259 @@
+{
+  "version": 1,
+  "issue": 695,
+  "lane": "engineering",
+  "worker_id": "focused-deps-695-worker",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "15cb52b8e6fd26164e306bde1128e66317a0149e",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 3451,
+        "sha256": "05d7aebbbe7941e7ee47806f7daae8ede1ec9776266940b19489cd362f8c510e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 6348,
+        "sha256": "cd837b8548146f4adc56c69495ce506dc8e22f6e46bd82c7338a9252c6f6ca13",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 16213,
+        "sha256": "6302ae8acf4973b8ac61f51dec0a80d18218e1583943d40e3425f2a4b5d543d6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-proof.mjs",
+        "bytes": 3844,
+        "sha256": "49ab7d3b5bf65ddbe83b6e43243983d3a53e86b90e4f69caba794e8dcdb159f5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/integration-proof.test.mjs",
+        "bytes": 5702,
+        "sha256": "528bccaebb12cd759ad190d9d72304aad0021d35771855c7f9f71749f31c376d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 3503,
+      "sha256": "7008cf863c34289821742dee2fb03c3d85d67299a728345d19a7c3dd5fce1471",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 6400,
+      "sha256": "aa99aaee0274fc34110d999898d664754e4cee0910296bc21a8e64b2c7baca34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 16685,
+      "sha256": "aa3834dc5b0c7c694a87ea3e328762752b91ae60636c8c01280baaa41468135e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "bytes": 3844,
+      "sha256": "ae1eca0bebcb40b39c2ea2540e79774d1f136ae52ac1fce6fdb4cb838349b67a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "bytes": 6673,
+      "sha256": "abb055b17c4b3837dc183f6ea3a0c942625c2c98ac418e292ff69cf3186a8697",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/claim.json",
+      "bytes": 803,
+      "sha256": "59aacba08c4844d17a3a65ac5f0f5c0dcf8b9ca4aea35ed999d605e87e7fc741",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/clean-environment.json",
+      "bytes": 119,
+      "sha256": "548deebe8cfd3f811b9854f38fe653baa059b14b258556c9b1e8a44d327e3244",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/clean-focused.tap",
+      "bytes": 23826,
+      "sha256": "ceba771e89eb874715df51127152a30279d7e3fb569ecc7aa423d125b0418749",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/install-baseline.json",
+      "bytes": 846,
+      "sha256": "0c8a716f2f36f20169daed58259daf2b2414ad598fefd00b028ef6dc62f31e38",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/validation.json",
+      "bytes": 1338,
+      "sha256": "6291459275fb0fdcfa48ba1666888b09c5e824b26cd1c3a7fa8948cc51798693",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "focused-no-install",
+      "kind": "code",
+      "description": "Execute every focused control against immutable code-only checkpoint in a clean sparse checkout without installed packages; inspect actual historical GitHub job timestamps; preserve full installation and all proof authorities.",
+      "software": "Node24, Git, read-only GitHub API",
+      "units": "test outcomes, seconds, immutable bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "clean-total",
+      "value": 102,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ceba771e89eb874715df51127152a30279d7e3fb569ecc7aa423d125b0418749",
+      "evaluation_commit": "9c45497d12d76f472d76b280632b25d1431a0016"
+    },
+    {
+      "id": "clean-passed",
+      "value": 102,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ceba771e89eb874715df51127152a30279d7e3fb569ecc7aa423d125b0418749",
+      "evaluation_commit": "9c45497d12d76f472d76b280632b25d1431a0016"
+    },
+    {
+      "id": "clean-failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ceba771e89eb874715df51127152a30279d7e3fb569ecc7aa423d125b0418749",
+      "evaluation_commit": "9c45497d12d76f472d76b280632b25d1431a0016"
+    },
+    {
+      "id": "clean-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "ceba771e89eb874715df51127152a30279d7e3fb569ecc7aa423d125b0418749",
+      "evaluation_commit": "9c45497d12d76f472d76b280632b25d1431a0016"
+    },
+    {
+      "id": "baseline-npm_install",
+      "value": 18.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "0c8a716f2f36f20169daed58259daf2b2414ad598fefd00b028ef6dc62f31e38",
+      "evaluation_commit": "e907a116d62c3a63668cb58772397b70a3c7c6cb"
+    },
+    {
+      "id": "baseline-focused_tests",
+      "value": 15.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "0c8a716f2f36f20169daed58259daf2b2414ad598fefd00b028ef6dc62f31e38",
+      "evaluation_commit": "e907a116d62c3a63668cb58772397b70a3c7c6cb"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "clean-total",
+      "path": "coordination/engineering/focused-deps-695/validation.json",
+      "json_pointer": "/tests/total"
+    },
+    {
+      "metric_id": "clean-passed",
+      "path": "coordination/engineering/focused-deps-695/validation.json",
+      "json_pointer": "/tests/passed"
+    },
+    {
+      "metric_id": "clean-failed",
+      "path": "coordination/engineering/focused-deps-695/validation.json",
+      "json_pointer": "/tests/failed"
+    },
+    {
+      "metric_id": "clean-skipped",
+      "path": "coordination/engineering/focused-deps-695/validation.json",
+      "json_pointer": "/tests/skipped"
+    },
+    {
+      "metric_id": "baseline-npm_install",
+      "path": "coordination/engineering/focused-deps-695/install-baseline.json",
+      "json_pointer": "/seconds/npm_install"
+    },
+    {
+      "metric_id": "baseline-focused_tests",
+      "path": "coordination/engineering/focused-deps-695/install-baseline.json",
+      "json_pointer": "/seconds/focused_tests"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "env -u NODE_PATH INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "05d7aebbbe7941e7ee47806f7daae8ede1ec9776266940b19489cd362f8c510e"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "cd837b8548146f4adc56c69495ce506dc8e22f6e46bd82c7338a9252c6f6ca13"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "6302ae8acf4973b8ac61f51dec0a80d18218e1583943d40e3425f2a4b5d543d6"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "status": "modified",
+      "original_sha256": "49ab7d3b5bf65ddbe83b6e43243983d3a53e86b90e4f69caba794e8dcdb159f5"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "status": "modified",
+      "original_sha256": "528bccaebb12cd759ad190d9d72304aad0021d35771855c7f9f71749f31c376d"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/clean-environment.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/clean-focused.tap",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/install-baseline.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-695/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
