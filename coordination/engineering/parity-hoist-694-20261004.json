@@ -3,17 +3,18 @@
   "lane": "engineering",
   "job_id": "parity-hoist-694-20261004",
   "branch": "engineering/parity-hoist-694-20261004",
-  "base_main_commit": "15cb52b8e6fd26164e306bde1128e66317a0149e",
+  "base_main_commit": "019d341e7d64d01d1d26fd561d83068ae90a20bb",
   "github_issue": 694,
   "date_timezone": "America/Los_Angeles",
   "scope": [
     "Per-year preparation hoist in exhaustive parity test; all existing assertions and both examples modes remain"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-04T01:15:37.259215+00:00",
+  "updated_at_utc": "2026-10-04T02:28:09.096616+00:00",
   "completed": [
     "Implemented bounded source hoist",
-    "Actual-source synthetic positive and negative controls passed"
+    "Actual-source synthetic positive and negative controls passed",
+    "Rebased source onto approved final CI workflow/runner baseline"
   ],
   "checks": [
     "node --check test/prepared-parity.test.mjs",
@@ -31,11 +32,10 @@
     "coordination/engineering/parity-hoist-694-20261004/provenance.json"
   ],
   "blockers": [
-    "Actual full hosted CI/timing and independent exact-head review pending",
-    "Normal queue integration waits for issue 692 initial benchmark/integration"
+    "Actual full hosted CI/timing and renewed exact-head independent review pending"
   ],
-  "next_action": "Open source PR, retain actual hosted CI logs, request exact-head independent review, then coordinate normal queue",
-  "pull_request": null,
+  "next_action": "Run final exact-head full source CI, obtain implementation review, integrate through normal queue, then retain actual benchmark evidence in fresh owned proof PR",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/696",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }

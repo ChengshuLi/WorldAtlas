@@ -6,10 +6,18 @@
   "log_retention": "Byte-exact UTF-8 decoded MCP structured content, compressed losslessly for retention",
   "runner_class": "ubuntu-latest / Ubuntu 24.04 hosted runner",
   "baseline_status": "historical source run; not an isolated matched before/after parity benchmark",
-  "current_full_atlas_run": "Pending source PR CI",
+  "current_full_atlas_run": "Pending final source PR CI after approved runner/workflow changes",
   "limits": [
     "No local prepared atlas, database or hosted assets; no local full-suite or performance pass claimed",
-    "Actual same-runner-class test durations must be retained after CI; queue waits for issue 692 benchmark/integration",
-    "No dataset, source evidence, server resolver, deployment or fixture database changes"
-  ]
+    "No dataset, source evidence, server resolver, deployment or fixture database changes",
+    "Source CI and normal queue use the approved final workflow/runner; no extra heavy benchmark run",
+    "Timing proof will use actual shard job seconds and workflow run_started_at through updated_at; job sums are not total elapsed"
+  ],
+  "final_source_base_sha": "019d341e7d64d01d1d26fd561d83068ae90a20bb",
+  "fixture_control_vintage": "Archived frozen comparison at 15cb52; reproduced locally on final base with unchanged outputs",
+  "superseded_source_runs": [
+    37167477291,
+    37167690943
+  ],
+  "single_run_caveat": "Unchanged parity code ran 111786ms in source701 versus 181464ms in baseline690. Runner variation prevents attributing all before/after improvements to the hoist."
 }
