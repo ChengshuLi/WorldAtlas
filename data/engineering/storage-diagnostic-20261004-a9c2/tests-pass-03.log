@@ -1,0 +1,41 @@
+✔ account proof and configured quotas/compute remain typed, scoped and free of arbitrary private fields (29.44538ms)
+✔ denied organization proof stays unavailable while actual project settings remain verified (1.140849ms)
+✔ missing organization and quota are explicit unknowns, never inferred from public pricing (0.925786ms)
+✔ wrong project and lossy quotas fail before a misleading capacity receipt can be produced (1.209884ms)
+✔ fixed target, GET-only credential acquisition and sanitized separate size metrics (26.320829ms)
+✔ wrong project fails before SQL (0.772785ms)
+✔ wrong branch fails before SQL (3.848191ms)
+✔ wrong branch name fails before SQL (0.691453ms)
+✔ wrong endpoint project fails before SQL (0.956132ms)
+✔ wrong endpoint branch fails before SQL (0.404851ms)
+✔ duplicate endpoint fails before SQL (1.632091ms)
+✔ foreign connection host fails before SQL (0.613765ms)
+✔ pooled connection fails before SQL (0.710572ms)
+✔ wrong database fails before SQL (0.912366ms)
+✔ wrong role fails before SQL (0.596339ms)
+✔ TLS removed fails before SQL (0.690831ms)
+✔ connection options fails before SQL (0.387875ms)
+✔ read-write transaction prevents measured receipt (0.169475ms)
+✔ wrong SQL role prevents measured receipt (0.067732ms)
+✔ wrong SQL database prevents measured receipt (0.135464ms)
+✔ SQL endpoint mismatch prevents measured receipt (0.062905ms)
+✔ timeouts absent prevents measured receipt (0.057596ms)
+✔ overflow tables prevents measured receipt (0.162835ms)
+✔ duplicate table prevents measured receipt (0.132409ms)
+✔ accounting mismatch prevents measured receipt (0.137357ms)
+✔ unsafe number prevents measured receipt (0.312401ms)
+✔ negative estimate prevents measured receipt (0.176346ms)
+✔ unknown index table prevents measured receipt (0.084017ms)
+✔ oversized definition prevents measured receipt (0.166531ms)
+✔ driver and API raw exceptions never reach saved failure receipts (1.356364ms)
+✔ secret-like catalog definition cannot enter sanitized success receipt (0.785624ms)
+✔ fixed SQL runs against real isolated PostgreSQL catalogs and READ ONLY denies mutation (1617.255336ms)
+✔ actual driver adapter forces server READ ONLY and only the fixed bounded transaction (0.465081ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1771.242279
