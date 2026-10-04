@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "issue": 698,
+  "lane": "engineering",
+  "worker_id": "budget-classification-698-worker-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "8e7ace3b69d60c9f791eee5ca6c0bf28a39e6388",
+    "files": [
+      {
+        "path": ".github/workflows/deployment-budget.yml",
+        "bytes": 1817,
+        "sha256": "130e4f479cf0fb4da0b01ac7f8b65207e95b8b9f6ddbcc7fb981310c19df5488",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/deployment-budget.mjs",
+        "bytes": 12026,
+        "sha256": "c6e6464812cf24b50a8f63c449c4dc914db9004bd17f2f3f9bf688d0844bf65f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/deployment-budget.test.mjs",
+        "bytes": 5264,
+        "sha256": "d5601aa15fa9a9946c64aba0e718ad1ba9b19e878769649c4585a24ec874eeb5",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "bytes": 4499,
+      "sha256": "cc506645581714b2d413da767a89908584e422710cbb194953b661f2e2c5fe28",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/README.md",
+      "bytes": 1603,
+      "sha256": "3e3574569789f44b708aec69cfd7807602911b90852f4474211ea00b41cf6c02",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/before-package.json",
+      "bytes": 3402,
+      "sha256": "c67143179920ea1efaa8515c33cfb5c04e8f8d5975253baf28b51c04cdd56ae9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/claim.json",
+      "bytes": 839,
+      "sha256": "d6a82ffb97b746ec4f22979b0bef0e1c3d3d107a2d6bf2ef4d38911ebf449d87",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/local-tests.log",
+      "bytes": 1170,
+      "sha256": "9ae94ac70888c4064665fc3dd2bd0b3172d2933d055c924f459c1d78d0e81113",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/validation.json",
+      "bytes": 1004,
+      "sha256": "92c58ba3b10c77317d633b02f968c28ef2385a6e3dae9e2c3e1ecfe1c1e541fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "bytes": 6939,
+      "sha256": "41428b56818d1349d6a41a69e42d397953d17b86b496203141693f0b3e6c9246",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "bytes": 8465,
+      "sha256": "aea3053bd5ec8e0cb2e31163ffa87d0808728d6a6d1a78dce5635182a78c76f7",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "trusted-budget-classification",
+      "kind": "code",
+      "description": "Run positive coordination PR/push controls and negative rename/unknown/runtime/build/dependency/capped/missing/error controls, reproduce original real budget/archive tests in the exact six-file sparse inputs, preserve trusted base/full fallback and unchanged full accounting. Retain original observed hosted metadata; current hosted skip/full proof is pending. Frozen local test counts are archived at the original published source head; actual current-head hosted checks remain required.",
+      "software": "Node24; GitHub Actions read-only job API; existing archive unit tests",
+      "units": "test outcomes, whole-file hashes and actual job timestamps"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "archived_tests",
+      "value": 10,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "92c58ba3b10c77317d633b02f968c28ef2385a6e3dae9e2c3e1ecfe1c1e541fa",
+      "evaluation_commit": "7304547e1b07f70bb333f316486a9964cf08cfb1"
+    },
+    {
+      "id": "archived_failed",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "92c58ba3b10c77317d633b02f968c28ef2385a6e3dae9e2c3e1ecfe1c1e541fa",
+      "evaluation_commit": "7304547e1b07f70bb333f316486a9964cf08cfb1"
+    },
+    {
+      "id": "archived_skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "92c58ba3b10c77317d633b02f968c28ef2385a6e3dae9e2c3e1ecfe1c1e541fa",
+      "evaluation_commit": "7304547e1b07f70bb333f316486a9964cf08cfb1"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "status": "modified",
+      "original_sha256": "130e4f479cf0fb4da0b01ac7f8b65207e95b8b9f6ddbcc7fb981310c19df5488"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/before-package.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/local-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/budget-classification-698-20261004/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "archived_tests",
+      "path": "coordination/engineering/budget-classification-698-20261004/validation.json",
+      "json_pointer": "/tests"
+    },
+    {
+      "metric_id": "archived_failed",
+      "path": "coordination/engineering/budget-classification-698-20261004/validation.json",
+      "json_pointer": "/failed"
+    },
+    {
+      "metric_id": "archived_skipped",
+      "path": "coordination/engineering/budget-classification-698-20261004/validation.json",
+      "json_pointer": "/skipped"
+    }
+  ]
+}
