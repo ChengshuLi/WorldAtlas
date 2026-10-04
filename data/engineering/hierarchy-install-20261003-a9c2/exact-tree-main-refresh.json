@@ -1,0 +1,1128 @@
+{
+  "checks": [
+    {
+      "bytes": 12313,
+      "path": "scripts/administrative.py",
+      "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+    },
+    {
+      "bytes": 13530,
+      "path": "scripts/apply-geographic-decisions.py",
+      "sha256": "c5d1c7a1b118742f116d7bc647bc6974942901348a046b77c865f434d9bd1eab"
+    },
+    {
+      "bytes": 13261,
+      "path": "scripts/apply-macro-boundary-decisions.py",
+      "sha256": "f0958efa03c5416038e5c8fc234b8d6e37407359c615650bd9cc5d680e539a85"
+    },
+    {
+      "bytes": 22347,
+      "path": "scripts/apply-macro-review.py",
+      "sha256": "28f07b0005b2ae2a390cd8e013c45a5000ab29824bfa832718e77f09a147d803"
+    },
+    {
+      "bytes": 22456,
+      "path": "scripts/apply-source-territory-repairs.py",
+      "sha256": "246982c22b29a62dd0481bfb81e743ab8c4ece722850ff94d05c67dce6aa499c"
+    },
+    {
+      "bytes": 6372,
+      "path": "scripts/apply-supplement-source-hints.mjs",
+      "sha256": "aba206ba49a7ef2a2082c1f75dab9e966769c1dbb623a37d7b4afa086b6b4a8d"
+    },
+    {
+      "bytes": 7898,
+      "path": "scripts/assess-geographic-release-capacity.py",
+      "sha256": "46db71382c7df6923cae3f35eee9e949536485fe5755c6591d029ac7b57e3640"
+    },
+    {
+      "bytes": 1189,
+      "path": "scripts/attribute-sources.py",
+      "sha256": "24f85736723fcf98770c8f18662b0abaa4ad3e25ac280e3dbc3f374279d12838"
+    },
+    {
+      "bytes": 46779,
+      "path": "scripts/audit-africa-semantic-followup.py",
+      "sha256": "3d95adf42a2065f1cedfa45c9ea34cf93d7163a77a65d2e87eea072812ba9abc"
+    },
+    {
+      "bytes": 51609,
+      "path": "scripts/audit-americas-semantic-followup.py",
+      "sha256": "5c77fd4e06cfa60c4ecf04f6efca26b8244e277f024a4eb6ce382947bcc3821e"
+    },
+    {
+      "bytes": 40427,
+      "path": "scripts/audit-asia-oceania-semantic-followup.py",
+      "sha256": "d9a4e76aaf904056256b09f0bc7a63f5d758eb89d46e97bfd2d4213b5b7b6fe5"
+    },
+    {
+      "bytes": 7116,
+      "path": "scripts/audit-category-palette.mjs",
+      "sha256": "983213ad3dd42fd6110f106a434739aefb94d9c3a14ae47d210ccb343e589b7e"
+    },
+    {
+      "bytes": 36680,
+      "path": "scripts/audit-europe-semantic-followup.py",
+      "sha256": "870c3532a491bb4b2f1246d596f1f08355c35fad17c31a1f1305cafa269b70ed"
+    },
+    {
+      "bytes": 22255,
+      "path": "scripts/audit-geographic-migrations.py",
+      "sha256": "87d0105b73191d5f00c60565f144d1b508a1efc81d6f2808f7f2bcc539111672"
+    },
+    {
+      "bytes": 11943,
+      "path": "scripts/audit-granularity.py",
+      "sha256": "841e0abb21acc4c97afd1c7708ff73b9c8698e98a64e83f3999fac3d3aebcd76"
+    },
+    {
+      "bytes": 24443,
+      "path": "scripts/audit-grid-resolutions.mjs",
+      "sha256": "c0f595cb3ae1777d34f06620b8ecdb33e9e429c8933948b024eef1f41a3200c5"
+    },
+    {
+      "bytes": 5585,
+      "path": "scripts/audit-macro-boundaries.py",
+      "sha256": "df9b89cfaaa6629d4fb3bc80017af4140a6d92cdbe9b1581eb8c98b6e3afda88"
+    },
+    {
+      "bytes": 5883,
+      "path": "scripts/audit-palette-all-times.py",
+      "sha256": "c2efafbcc5458f3495fe7e8c4178772c2c4089dc0789502bf6b9f5d033408456"
+    },
+    {
+      "bytes": 5068,
+      "path": "scripts/audit-palette-inputs.py",
+      "sha256": "7f6d513243e66dc6223c2ac96f3e18404e52bbde41197aa0375b4984f0c792d2"
+    },
+    {
+      "bytes": 2136,
+      "path": "scripts/audit-palette-raster.mjs",
+      "sha256": "1f8e8a8dd174caf74104b3cf7290de8aa2b497ec8e1c98ff55e866ed7e731212"
+    },
+    {
+      "bytes": 2067,
+      "path": "scripts/audit-pixels.mjs",
+      "sha256": "a816c26afb82f7d5000648c32ee3fae5910762dfe2de31966bac53d812d1896e"
+    },
+    {
+      "bytes": 4307,
+      "path": "scripts/audit-shared-category-modes.mjs",
+      "sha256": "d69b58c1ce005c4ac2a32536530c8d7d95073a3ce3d7a91468ddde04c06efc4f"
+    },
+    {
+      "bytes": 31285,
+      "path": "scripts/audit-source-territory-splits.py",
+      "sha256": "612333e7c4b82043f89994054b0be66328c071819cc7de8044d3730797366a17"
+    },
+    {
+      "bytes": 9410,
+      "path": "scripts/benchmark-live-year-switch.mjs",
+      "sha256": "f8d1d695a9b122002d6aaa48d5d3bf99a0a17a0bb93aea1e83bc2012b71c9207"
+    },
+    {
+      "bytes": 9576,
+      "path": "scripts/bootstrap-geographic-release.mjs",
+      "sha256": "065a64d6d3fa20dfdc36832414cf89e868d93c5551915b3331709f0385a07cc9"
+    },
+    {
+      "bytes": 5263,
+      "path": "scripts/bootstrap-hosted.mjs",
+      "sha256": "d2338f1164937ae2408d830f54020766b7582d179b0f371d5d44c95e0c98d282"
+    },
+    {
+      "bytes": 4686,
+      "path": "scripts/bootstrap-prepared-evidence.mjs",
+      "sha256": "3db152e9305315032b13bdd038c71b9f20c621e58dd51bbb02dc504e2f5938d4"
+    },
+    {
+      "bytes": 2344,
+      "path": "scripts/boundary-version-hash.py",
+      "sha256": "9fc84b52b008ebd2b5c34f23f555c39f5ec1180f0d2d619fbaa671f1e6696dbd"
+    },
+    {
+      "bytes": 3914,
+      "path": "scripts/build-category-palette.mjs",
+      "sha256": "5c270bf01cbdf569ce0f2714ad21a27f554e7ea28773f91637c297273649ec30"
+    },
+    {
+      "bytes": 11673,
+      "path": "scripts/build-global-macro-policy.py",
+      "sha256": "d7f488dd112003d483fae89fe7cf70ffdb277f528a743dcae65a2db2f97efc9f"
+    },
+    {
+      "bytes": 2414,
+      "path": "scripts/build-hosted.mjs",
+      "sha256": "6d6a9b38d3a96ca759606ef44e91240aee25db8534a238eeb18c17d1f41371db"
+    },
+    {
+      "bytes": 12705,
+      "path": "scripts/build-static.mjs",
+      "sha256": "df0171b46e06825caea0181d81caba2ea95bc1ee183fbb088465866e451ac619"
+    },
+    {
+      "bytes": 6972,
+      "path": "scripts/check-handoff-scope.mjs",
+      "sha256": "c4f838076f63ad82c09d4e4a202f70e17e8495fe92938668aa6746f78c4083cb"
+    },
+    {
+      "bytes": 2466,
+      "path": "scripts/check-linked-github-issue.mjs",
+      "sha256": "434206e68fbb9fc7f8a436b62b6818169a768e1c066a14282fb0261e40273454"
+    },
+    {
+      "bytes": 10959,
+      "path": "scripts/check-macro-foundation.mjs",
+      "sha256": "24d368ab9fa2c3ff00a68cd9a873ef2ae8a6ae4e5611b5a5fc781fbb1cf713d8"
+    },
+    {
+      "bytes": 5094,
+      "path": "scripts/check-oceania-land-restoration.mjs",
+      "sha256": "b04b57357463f33d2de736e776238f3d253b08727d7bde23af85b7e06c3b0258"
+    },
+    {
+      "bytes": 1514,
+      "path": "scripts/check-pr-evidence.mjs",
+      "sha256": "ae699bc1c626d6514cde4b2a6c076550daf6fb19debe39f1d52cd12209a2db60"
+    },
+    {
+      "bytes": 3133,
+      "path": "scripts/check-prepared.mjs",
+      "sha256": "66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242"
+    },
+    {
+      "bytes": 1159,
+      "path": "scripts/clean-local-source.py",
+      "sha256": "bf40ef23ebfc1b786625d7ed0ea4ad81f6f249bdf0ed22dff03010d8701dc953"
+    },
+    {
+      "bytes": 2213,
+      "path": "scripts/compact-ownership.py",
+      "sha256": "6a56f868e9eb23f44c5c9339f4e5b5bfa3b23ab43642a658c9b08380ceb318ba"
+    },
+    {
+      "bytes": 1722,
+      "path": "scripts/compact-reference-attributes.py",
+      "sha256": "7cd10edea45a95de73b87d99b7ad5dad1da60b324828c5fd64a2f212f4ae0587"
+    },
+    {
+      "bytes": 5107,
+      "path": "scripts/compile-environment-classification-guards.mjs",
+      "sha256": "d98d1cc9bb8096e8856b115c586d34a863c87ca41af8d60f90e2261dce7f44f5"
+    },
+    {
+      "bytes": 3623,
+      "path": "scripts/compile-hosted-migrations.mjs",
+      "sha256": "9dde285ef025b87581e2c83dbc3e43fea8b3ce61ebfdfc68d16dd64154584f4b"
+    },
+    {
+      "bytes": 4341,
+      "path": "scripts/complete-city-cores.py",
+      "sha256": "8b7683fd762a5787dcfece5c8d7c2dd078a2274d958d0104a205d1b96c80ce7c"
+    },
+    {
+      "bytes": 7222,
+      "path": "scripts/complete-coverage.py",
+      "sha256": "40e1a2c2945bb1b03d74e21db0285c6bb81dd95d2e1a6fc8e0a9d253f6dbb5f5"
+    },
+    {
+      "bytes": 9754,
+      "path": "scripts/complete-hierarchy.py",
+      "sha256": "10feb1732fef87da87847a5bbba757c76aac207ba96a76e4403cd66f529c6f2d"
+    },
+    {
+      "bytes": 3277,
+      "path": "scripts/complete-ownership-candidates.py",
+      "sha256": "bd2ec03428a07b3ba1dfab121a6f702ec7e6c73d65245e98c5b757c7d29dee94"
+    },
+    {
+      "bytes": 4370,
+      "path": "scripts/complete-taiwan-cities.py",
+      "sha256": "9cc449b2b730e301ac88741e1149d15d22c594365ae3644d3b5745e3367ef3c7"
+    },
+    {
+      "bytes": 4505,
+      "path": "scripts/compose-macro-install-proof.py",
+      "sha256": "8ac556b82dc6e593bcabaf8a71de71d0bd5a8d1ef516aa882c4fe55218b8135a"
+    },
+    {
+      "bytes": 13393,
+      "path": "scripts/compose-macro-restoration.py",
+      "sha256": "668252221242b5d9822fbf7ab57d757dd9eb1d1254b49dc5d4104f554dad847b"
+    },
+    {
+      "bytes": 6301,
+      "path": "scripts/consolidate-fragments.py",
+      "sha256": "9af8ce77f93c712c21878f48297427230706f03433b57ae31255879eea69ea36"
+    },
+    {
+      "bytes": 12177,
+      "path": "scripts/credential-envelope.mjs",
+      "sha256": "9b5257009a1ff60d0150c1d9827b70aa36302790416273a42d6c18901c964761"
+    },
+    {
+      "bytes": 12026,
+      "path": "scripts/deployment-budget.mjs",
+      "sha256": "c6e6464812cf24b50a8f63c449c4dc914db9004bd17f2f3f9bf688d0844bf65f"
+    },
+    {
+      "bytes": 1953,
+      "path": "scripts/ellipsoidal_area.py",
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    },
+    {
+      "bytes": 725,
+      "path": "scripts/evidence/encode-json.mjs",
+      "sha256": "a1d7a70c9c3759f9269ea35c5fb0ed12377de52cf0993e0be3183efe1747f73a"
+    },
+    {
+      "bytes": 5264,
+      "path": "scripts/evidence/geometry.py",
+      "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305"
+    },
+    {
+      "bytes": 7090,
+      "path": "scripts/evidence/immutable.py",
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    },
+    {
+      "bytes": 1898,
+      "path": "scripts/evidence/prepare.py",
+      "sha256": "56690c891d3ca3f4961bbe880d9f70ffba939c70311898c690a24cb5313119fc"
+    },
+    {
+      "bytes": 2095,
+      "path": "data/engineering/hierarchy-install-20261003-a9c2/frozen-code-before-main-20261004/scripts/evidence-policy.mjs",
+      "sha256": "56bc34722ad26e056d23fbc8c5ddfe7b04c45d01f0f29c5ef8fbef85e7f8a5d6"
+    },
+    {
+      "bytes": 11284,
+      "path": "data/engineering/hierarchy-install-20261003-a9c2/frozen-generation-helper-before-main-20261004/scripts/evidence-quality.mjs",
+      "sha256": "6d73eb392a3b3abc3e0a878c3f5e1144feb63e64c085f1ad1015550cb368c309"
+    },
+    {
+      "bytes": 15822,
+      "path": "scripts/export-hosted-storage-v2.mjs",
+      "sha256": "7d55f1c62bb505aa00c45b4581acda8e5df271458db1ab9fddf81e6a02617772"
+    },
+    {
+      "bytes": 15673,
+      "path": "scripts/export-hosted-storage-v3.mjs",
+      "sha256": "42d79c38cf21bd388b832875ad485b1b848ba32e5365dd355103fd5a510a5f48"
+    },
+    {
+      "bytes": 14734,
+      "path": "scripts/export-hosted-storage.mjs",
+      "sha256": "02af690647cd286e66430e9820a28e271c6fe9f978a9083e94bc310565a7e5e0"
+    },
+    {
+      "bytes": 1924,
+      "path": "scripts/external-source-quality.py",
+      "sha256": "35f7e09e58e558213492492c920b707eec437ea52df88af777c4e281f47fd57b"
+    },
+    {
+      "bytes": 5626,
+      "path": "scripts/finalize-geography.py",
+      "sha256": "6e0ed4c701c38c1aa753c28504076962d71f03265cef755f095087a4819ea224"
+    },
+    {
+      "bytes": 434,
+      "path": "scripts/framework-sources.py",
+      "sha256": "e3c370fb112c5360d88f6866f63cfe5c340b0448fe560eb7fff2f9995f3db35b"
+    },
+    {
+      "bytes": 7804,
+      "path": "scripts/geographic-regions.py",
+      "sha256": "627fb2759f10cbcfb64a29b773b689fcd8787e0edd602e350896d9ceaa738e10"
+    },
+    {
+      "bytes": 11979,
+      "path": "scripts/import-research-bundle.mjs",
+      "sha256": "308005912c3b6139573fe999986bcb39865bfbbab96d8c7634627de4fa67188c"
+    },
+    {
+      "bytes": 531,
+      "path": "scripts/import.mjs",
+      "sha256": "fc7cb7537980f062e466b3e96cfcabbb489ea0df4ce34410506ce7e499de0da0"
+    },
+    {
+      "bytes": 2625,
+      "path": "scripts/install-category-palette.mjs",
+      "sha256": "feccd07b1eaeca7c3e8fafac2d2efdcdc22514ee6e49fdccc363cace1aa0092c"
+    },
+    {
+      "bytes": 28196,
+      "path": "scripts/install-macro-reference.mjs",
+      "sha256": "e2cc8b49a8d26bc00585952f5cac191b7061423f26e1e69706b83e2d19d135d2"
+    },
+    {
+      "bytes": 30214,
+      "path": "scripts/install-reviewed-geography.mjs",
+      "sha256": "43e324e5c95c84e694298d4f19b228e073ec2b7365b1b4289ce030cbef859104"
+    },
+    {
+      "bytes": 2720,
+      "path": "scripts/inventory-evidence-rollout.mjs",
+      "sha256": "7dc2374d02639f544a5d7924390622bf6a5bb8d4965775f2b48e61fcb32d08a0"
+    },
+    {
+      "bytes": 10007,
+      "path": "scripts/issue-claim-contract.mjs",
+      "sha256": "6030e2d0eb3ce26b6d762f425c0c1684cb22996d4df4d1ad726c3e517e1432db"
+    },
+    {
+      "bytes": 3304,
+      "path": "scripts/issue-lease.mjs",
+      "sha256": "581a7e76984cf656742e8689478a4b7d43a595c4469d686b25050ad6b3f3e42e"
+    },
+    {
+      "bytes": 3114,
+      "path": "scripts/majority.py",
+      "sha256": "59046aa90ee824e1a132ba58c831f46bab46e3ac21eba46e77aa80f38802c405"
+    },
+    {
+      "bytes": 2568,
+      "path": "scripts/map-color-neighbors.mjs",
+      "sha256": "ce91d6e5c6ec5a91f77cc054d23d11d9bc030c0808b25763fef740ca7df17f42"
+    },
+    {
+      "bytes": 2193,
+      "path": "scripts/merge-reference-attributes.py",
+      "sha256": "fbc92a78a92c45bf516962a5c65c8c80817820a95dd15f06766c33b2ffb92be5"
+    },
+    {
+      "bytes": 35003,
+      "path": "scripts/neon-forward-migrations.mjs",
+      "sha256": "505b095ca47bcecd4b2466627c4163a613f52717703d9befd1593b78056e8461"
+    },
+    {
+      "bytes": 31018,
+      "path": "scripts/neon-storage-migration.mjs",
+      "sha256": "4f7bb3c9ef6045823082cc41d391edcee22887f9319f992c1891b3c18d614181"
+    },
+    {
+      "bytes": 1332,
+      "path": "scripts/normalize-reference-attributes.py",
+      "sha256": "76b75ec3e261e66ae38e29519f239cfb36d0fbe9cc2add7a113e297ea25fc70f"
+    },
+    {
+      "bytes": 4357,
+      "path": "scripts/package-ownership-history.mjs",
+      "sha256": "0b92bd379e625b49bd9c7f2eb61bac70b8742f090019af902bc9c3edb181f928"
+    },
+    {
+      "bytes": 14228,
+      "path": "data/engineering/hierarchy-install-20261003-a9c2/frozen-code-before-main-20261004/scripts/premerge-evidence.mjs",
+      "sha256": "30332d09be788462ad189a14d69d610fd57fa9e265aa2b1bb9fbf138ecc1409e"
+    },
+    {
+      "bytes": 11563,
+      "path": "scripts/prepare-dated-reference-names.py",
+      "sha256": "c5eeb81fc0fc8973612e3929fdc1a1a0cbbd43ffca40b61feb406f8dd09c4b7e"
+    },
+    {
+      "bytes": 17660,
+      "path": "scripts/prepare-demographic-evidence.py",
+      "sha256": "408a44694ffececfd9996a2d344c9507e7907c61fce9125a296bfbc038687994"
+    },
+    {
+      "bytes": 17234,
+      "path": "scripts/prepare-europe-source-policy-corrections.py",
+      "sha256": "55a41654f3a465fcd7f6979fb926d7258ba58577c657700672d18f16748e5582"
+    },
+    {
+      "bytes": 11808,
+      "path": "scripts/prepare-evidence-bundle.mjs",
+      "sha256": "1cc653304831b72fd484c4099f89f4fdcb2c9e5459aec34c85627cdc6c83d4ed"
+    },
+    {
+      "bytes": 46477,
+      "path": "scripts/prepare-geographic-release.mjs",
+      "sha256": "f9e765e7c6e40c66bf1a7c491135a602d67bc7255954703c39dac00133eca750"
+    },
+    {
+      "bytes": 29830,
+      "path": "scripts/prepare-ghsl-population.py",
+      "sha256": "09ac82f76e490e6695d3cf56b49eb1cb8b0e10f6060905ef426889ef5ef243cb"
+    },
+    {
+      "bytes": 17276,
+      "path": "scripts/prepare-global-macro-geography.py",
+      "sha256": "62fac52d49b6c8bd0840b2d50591cdcd1bda6c9e19713d5a15ae6142dd99c6ed"
+    },
+    {
+      "bytes": 1769,
+      "path": "scripts/prepare-hierarchy-correction-install.mjs",
+      "sha256": "e2da4fcc536f6dc0e9a5f993c0253af6aba60f7bf795bc96aefb610dc4b79413"
+    },
+    {
+      "bytes": 6034,
+      "path": "scripts/prepare-hierarchy-correction-release.mjs",
+      "sha256": "23edde7bce2bd14d0561cd8a7ed688c20814008ee2676b26acbaba86d8fa7e10"
+    },
+    {
+      "bytes": 3169,
+      "path": "scripts/prepare-history.mjs",
+      "sha256": "42834bbc0ad5f50daa7bf176fecbda389931a5b95acca67c0d87cc07d796c1a6"
+    },
+    {
+      "bytes": 5380,
+      "path": "scripts/prepare-hosted-catalog.mjs",
+      "sha256": "a22f5c7e34304976caa09c1da19ef549e6240739c24fef54c86081cda23a9e36"
+    },
+    {
+      "bytes": 31678,
+      "path": "scripts/prepare-macro-boundary-decisions.py",
+      "sha256": "0ce46061fa9732970010ba3b103de2bad92f5a81bcc52c321b489ad989056bc4"
+    },
+    {
+      "bytes": 10457,
+      "path": "scripts/prepare-macro-envelopes.py",
+      "sha256": "75860e8734a0b27d59f66d50b2aa32cb196a48ff02079cecd1b9a2c2176de9b0"
+    },
+    {
+      "bytes": 7001,
+      "path": "scripts/prepare-macro-restoration-proofs.mjs",
+      "sha256": "e708f18ee6744228eb21c37dc003af053cfc02322bd1e695ddbb8b5ae42d856d"
+    },
+    {
+      "bytes": 32863,
+      "path": "scripts/prepare-macro-review-projection.mjs",
+      "sha256": "dec5cab8b99bbc9f9fa600cec6ba5808d1a57bf5df74295e9c3cf2b35e4ac9e9"
+    },
+    {
+      "bytes": 11517,
+      "path": "scripts/prepare-namibia-source-annotations.py",
+      "sha256": "252de61a36360b4187838c1f09f97fa81957c30f2d422e96b9cbc833da5611b8"
+    },
+    {
+      "bytes": 13716,
+      "path": "scripts/prepare-oceania-land-restoration.mjs",
+      "sha256": "525b1a3aaff662795b5841d9e75cdcf833709ce75b67da0b1689bb76530b4d45"
+    },
+    {
+      "bytes": 27611,
+      "path": "scripts/prepare-ownership-incremental.py",
+      "sha256": "b33afcb77b20715f8d095a23625d93a472c3a5fb5863f668cab7516b80ee88c5"
+    },
+    {
+      "bytes": 7405,
+      "path": "scripts/prepare-ownership-runtime.py",
+      "sha256": "e4a701e6983740c661552d5a483cbf2bfc9e7d7b41a40e5c055e6a7608c166bb"
+    },
+    {
+      "bytes": 10453,
+      "path": "scripts/prepare-ownership.py",
+      "sha256": "46fa8af5dff2ecd45a7c40648a586250a62499f5531c95da6f35e0c0ceeb6be6"
+    },
+    {
+      "bytes": 7337,
+      "path": "scripts/prepare-reference-attributes.py",
+      "sha256": "c8c6d07ef35fba885aee82cdd94cc843391cceb93cf8b33b28ff81276ad0bbf0"
+    },
+    {
+      "bytes": 19491,
+      "path": "scripts/prepare-reference-hierarchy-corrections.py",
+      "sha256": "4ac76d5d409eb12188a922e98f17faff7f9ef4e065b2b115a2fb79716946473c"
+    },
+    {
+      "bytes": 19226,
+      "path": "scripts/prepare-reference-incremental.py",
+      "sha256": "6ce34552eb53fa952d17c999149caa7c3079f259a51e6d05b248c6b49a8dc7db"
+    },
+    {
+      "bytes": 11715,
+      "path": "scripts/prepare-reference-macro-binding.mjs",
+      "sha256": "815003fcce780a1216bd7964063d70956af8cfe3dee8be7500c005af83156f33"
+    },
+    {
+      "bytes": 17234,
+      "path": "scripts/prepare-research-bundle.mjs",
+      "sha256": "354a4a2eee87b159fe90a0e02f638ba8b8eb478289818aceb3fe54419d67619b"
+    },
+    {
+      "bytes": 2317,
+      "path": "scripts/prepare-settlements.py",
+      "sha256": "a743c6e68009dd20ee56f4940da475908373e02eb64e7eabde18ee816df97bb4"
+    },
+    {
+      "bytes": 3930,
+      "path": "scripts/prepare-source-policy-summary.py",
+      "sha256": "ed17280b05fa3cbcdab3c535c6b0c3fb3d1aad9690c40fd5364282e13a78e6f7"
+    },
+    {
+      "bytes": 9103,
+      "path": "scripts/prepare-topography.py",
+      "sha256": "7ede54bcab629331d125439dcfc661dc5d5229e8a9441a59d4ecbfa1cdd45553"
+    },
+    {
+      "bytes": 4376,
+      "path": "scripts/prepare.mjs",
+      "sha256": "3a934b9236b2c8dd70b8aafed61c1b5528663366e4fc5df127a5841b501c0bfd"
+    },
+    {
+      "bytes": 10337,
+      "path": "scripts/provision-postgres-runtime-role.mjs",
+      "sha256": "c6347c49f82286c77ae9edb3cc069d5c133ecefb48312ca361c5f62af55cd329"
+    },
+    {
+      "bytes": 1193,
+      "path": "data/engineering/hierarchy-install-20261003-a9c2/frozen-code-before-main-20261004/scripts/queue-pr-merge.mjs",
+      "sha256": "a266d4052f77d5566120e681d474cd67e203148dc303ef75c7722757aad44652"
+    },
+    {
+      "bytes": 9771,
+      "path": "scripts/queue-readiness-audit.mjs",
+      "sha256": "0a20df35a83d10bbf24bc2c8b5dcd07d5196ae212e517061e218abcfc766a58a"
+    },
+    {
+      "bytes": 3978,
+      "path": "scripts/read-geographic-release-manifest.mjs",
+      "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486"
+    },
+    {
+      "bytes": 14820,
+      "path": "scripts/rebase-reference-hierarchy.py",
+      "sha256": "c6d70eed483cdefd623f83f3823759b66279d9592268df39195df08b814dba4c"
+    },
+    {
+      "bytes": 16322,
+      "path": "scripts/rebuild-framework.py",
+      "sha256": "203b95f04ecd52d101c15e8e961050bb87a1bbe8e10ef0cc7f73a6b0950b33f5"
+    },
+    {
+      "bytes": 14208,
+      "path": "scripts/recheck-vegetation.py",
+      "sha256": "de561a964ed228032b0643280eef18ca7f29b811765a3ba5178865572f6c0f55"
+    },
+    {
+      "bytes": 5299,
+      "path": "scripts/recompute-ownership-areas.py",
+      "sha256": "3f061cd76be4cd52a603de4b67feb7d977d16f40d16d62f13263039a1c8ef8d0"
+    },
+    {
+      "bytes": 4837,
+      "path": "scripts/reconcile-border-parents.py",
+      "sha256": "924593286235a70766cdea123bb1909a8775aa56e2016f3d2ba3de768ebe830e"
+    },
+    {
+      "bytes": 7866,
+      "path": "scripts/reconcile-regional-membership.py",
+      "sha256": "b85206e4036b745b1160df996be5d682a77062ec684712b4dabe1c2fb7916677"
+    },
+    {
+      "bytes": 8419,
+      "path": "scripts/reconcile-topology.py",
+      "sha256": "1739883a9ada57e346f12c009beb4c14091429e810ec7cc77f8b01e8bd3ae763"
+    },
+    {
+      "bytes": 6536,
+      "path": "scripts/recover-ownership-candidates.py",
+      "sha256": "e2da92847d7956fdd26b26a900ad31a8e88d113458365612a70a3b279caca675"
+    },
+    {
+      "bytes": 2555,
+      "path": "scripts/reference-polities.py",
+      "sha256": "b833689df87ad85a5b5d7b7be057452f171878c395e599a551f89b74eb2477d2"
+    },
+    {
+      "bytes": 10261,
+      "path": "scripts/refine-global-locations.py",
+      "sha256": "c2cb774a02440bdad43a43555f12954305696112569ed46f177cb5e8ec6e5e73"
+    },
+    {
+      "bytes": 4971,
+      "path": "scripts/refine-italy-framework.py",
+      "sha256": "cea33626cb4227b48423545584da06abccd5dcc7ae0e76aaedf69cd7916aef42"
+    },
+    {
+      "bytes": 10034,
+      "path": "scripts/refine-ownership-threshold.py",
+      "sha256": "d92a0f0cf803c3543e28825df438be589980b444c8c2ea69f014da3d465e9a20"
+    },
+    {
+      "bytes": 7440,
+      "path": "scripts/refine-remote.py",
+      "sha256": "6a6a5258328aa1153d567d9a98b90339421700d491f36fbdca216d3e0cbc2726"
+    },
+    {
+      "bytes": 4136,
+      "path": "scripts/refresh-angola.py",
+      "sha256": "e8e6821608727150396b9e90407310ce28628eb702821e4e0c052fe37d7863ae"
+    },
+    {
+      "bytes": 1265,
+      "path": "scripts/repair-geometries.py",
+      "sha256": "dcd76fa5d2745eb5ae914e8eb90bd34fbd3d09df5dd1aa2024df7b235dcdd027"
+    },
+    {
+      "bytes": 8273,
+      "path": "scripts/repair-supplement-source-hints.py",
+      "sha256": "0722dec7c8faa6abb490eb47660d67c0f44ca47ff8368cf247ad1d9ba4e13812"
+    },
+    {
+      "bytes": 335,
+      "path": "scripts/research-import-gate.mjs",
+      "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905"
+    },
+    {
+      "bytes": 3206,
+      "path": "scripts/restore-geographic-repair-stage.py",
+      "sha256": "b2c147e953a2b84a3dc51071243fb2d29f444a8abd81c04ed88d22000760b144"
+    },
+    {
+      "bytes": 20543,
+      "path": "scripts/restore-postgres-storage-v2.mjs",
+      "sha256": "44dd22f2887fd63f6360e7edab747771a14d805d4b213629c93ea8ca13bb1e32"
+    },
+    {
+      "bytes": 20625,
+      "path": "scripts/restore-postgres-storage-v3.mjs",
+      "sha256": "51098fe5e9f042dabdabf05cf60e5c25bdeb32b02031dd3e38dfaf490611bd30"
+    },
+    {
+      "bytes": 18230,
+      "path": "scripts/restore-postgres-storage.mjs",
+      "sha256": "386fbdce043766d50c3025283904188e580f428a25aa3334c529c608a985c0dc"
+    },
+    {
+      "bytes": 8771,
+      "path": "scripts/restore-reviewed-geography.py",
+      "sha256": "c1f79ef00c58d57da97b0b25e465a7aa0d12cffbc3fa87b6edd5889838f5af1b"
+    },
+    {
+      "bytes": 8035,
+      "path": "scripts/revalidate-prepared-evidence.mjs",
+      "sha256": "8d189cfd2bcd720a5cbe0115006920088c4a21a325940e048a9c6ae72f9a8b77"
+    },
+    {
+      "bytes": 4317,
+      "path": "scripts/review-framework.py",
+      "sha256": "1aabb78195ed6d7a3d202ef6e9075ad943f76c390a6d0af912a555e308d0bc24"
+    },
+    {
+      "bytes": 22907,
+      "path": "scripts/review-global-semantic-closure.py",
+      "sha256": "8ec2d6b38733c24c7fbd0c0a4d744d546acdbf5bd82845256ff325d79fd54ca5"
+    },
+    {
+      "bytes": 18789,
+      "path": "scripts/review-granularity-global.py",
+      "sha256": "f227f6dfeb4337df1f3711cb1a68ed48dfe8a1054256c407698954e8f616b1cc"
+    },
+    {
+      "bytes": 12889,
+      "path": "scripts/review-namibia-source.py",
+      "sha256": "d0d90dd232595788423efbdf0b33f405a6d78000fd7be389b42554f4f77c53eb"
+    },
+    {
+      "bytes": 13920,
+      "path": "scripts/review-world.py",
+      "sha256": "6c2ad1096f8190d8a39550fc407456e2594d5b3e31b79a5133eb16b893aca0b4"
+    },
+    {
+      "bytes": 3827,
+      "path": "scripts/run-issue-claim.mjs",
+      "sha256": "60a3fe737da086a103595961e0bed97d5c014397746d440948234d348c4700a5"
+    },
+    {
+      "bytes": 5859,
+      "path": "data/engineering/hierarchy-install-20261003-a9c2/frozen-code-before-main-20261004/scripts/run-worker-merge.mjs",
+      "sha256": "a460048affe0dc90407a5cb13a69d250fddc791fb7ee5ed9ae06fc3e2d28158b"
+    },
+    {
+      "bytes": 36266,
+      "path": "scripts/semantic-locations.py",
+      "sha256": "ac18022fa1c881bdbedc590f150a501ad23d52ba86cb47c5a005643012f1ad1a"
+    },
+    {
+      "bytes": 1183,
+      "path": "scripts/semantic-sources.py",
+      "sha256": "7bb5f8ad5954502a8d6f7e5cb4bf0daffc05c853d0bce9ecca18514932d99a2a"
+    },
+    {
+      "bytes": 1952,
+      "path": "scripts/source_policy_corrections.py",
+      "sha256": "8a2c82f075d3d3b65d3233607524aae4539815e9b38f77f490c3c6b312dabffc"
+    },
+    {
+      "bytes": 4088,
+      "path": "scripts/stage-canonical-grid.mjs",
+      "sha256": "9ddb37b4555a4f0519e0c1e1dc534522d23ead7bf033678a579c493aed848d20"
+    },
+    {
+      "bytes": 5239,
+      "path": "scripts/stage-land-creations.mjs",
+      "sha256": "0053c5e090dccc5c65d43d14881087a8e52ce51385abf7a23e6c98aa45f654f6"
+    },
+    {
+      "bytes": 29865,
+      "path": "scripts/stage-namibia-repair.py",
+      "sha256": "fcd211566d5e5c007c6e04ea6b427c30cd74a507a96f4bdcb586ede3cca3e328"
+    },
+    {
+      "bytes": 6622,
+      "path": "scripts/stage-site-migrations.mjs",
+      "sha256": "5f03c736cdcfdbcd1591ab2d3f244fb45f9fe3218f4fd99e91422d356f68ba45"
+    },
+    {
+      "bytes": 794,
+      "path": "scripts/stamp-prepared.mjs",
+      "sha256": "88075b363124d42bf9b6aa01994dd3fc6d05617b43c0f997c007990c6adb0bcc"
+    },
+    {
+      "bytes": 16517,
+      "path": "scripts/storage-checkpoint.mjs",
+      "sha256": "d006c51ca9074af056c0c95e369868104fb27a07c3e96ab461370674c1291f8c"
+    },
+    {
+      "bytes": 18669,
+      "path": "scripts/upload-research-media.mjs",
+      "sha256": "033ebc17bd0e832f79e7481b4f4697b45c7b7cd2d7c8c6a99a55b415116793c3"
+    },
+    {
+      "bytes": 3361,
+      "path": "scripts/validate-evidence-revalidation-chain.mjs",
+      "sha256": "fe1ad3a39339b674b647b9ad30a3e21cf0a2224b0062c400ec64011c3233fca7"
+    },
+    {
+      "bytes": 6560,
+      "path": "scripts/validate-land-creations.py",
+      "sha256": "664ee9e093d5b6fa8785e8e661772855d69f1b90b57e12188f0bf6ca6eafa4be"
+    },
+    {
+      "bytes": 5641,
+      "path": "scripts/validate-macro-restoration.py",
+      "sha256": "3aa80f0486baac710c1659a69bef42c1df4d7213b21bb0a7ad8105ffd8611ae0"
+    },
+    {
+      "bytes": 1550,
+      "path": "scripts/validate-oceania-land-restoration.py",
+      "sha256": "131d1d8757e1923cac8c94b270dc65e2b8dea5ff3f9e762c33801054bcae2426"
+    },
+    {
+      "bytes": 5101,
+      "path": "scripts/validate-ownership-runtime.py",
+      "sha256": "118b907d2aec2edc4333987da91f4830e31bf377390ed1a89c67e913ee7b74e1"
+    },
+    {
+      "bytes": 5391,
+      "path": "scripts/validate-prepared.mjs",
+      "sha256": "13cdf9d255f62b37f29eba330b7089b132b6c863fdd6fb4f36bb59458a78911c"
+    },
+    {
+      "bytes": 34422,
+      "path": "scripts/validate-semantic-followup.mjs",
+      "sha256": "6fe84c3287112697f905259d7f16b6cfd51e6dceeea143262a48e3fbbfda3e64"
+    },
+    {
+      "bytes": 2224,
+      "path": "scripts/validate-structure.mjs",
+      "sha256": "80f266fc7ed55a5f2c8963c9a4c0c6619f15606f10190b380323ba7087282372"
+    },
+    {
+      "bytes": 7951,
+      "path": "scripts/verify-category-browser.mjs",
+      "sha256": "79f9ae02b2cd24e794e232b0c8b66e1d3a9f3220dabc64cfb85a55e8f0dd2a86"
+    },
+    {
+      "bytes": 9680,
+      "path": "scripts/verify-geography-import-pin.mjs",
+      "sha256": "7ea41cb41df26fa5be73f7d745ed42ba50f8d5c93f9294377c1d7844da0ebc3c"
+    },
+    {
+      "bytes": 2083,
+      "path": "scripts/verify-hierarchy-install-baseline.py",
+      "sha256": "8892bda91cbfc26065fe1ee1fed1676d8fd52893db41f56c04bc997f3cc3571c"
+    },
+    {
+      "bytes": 7201,
+      "path": "scripts/verify-hosted-local.mjs",
+      "sha256": "56a02bacdaf6ed1e3814a56d6689e98feb0e8d1207c84e6c06938a569673802d"
+    },
+    {
+      "bytes": 6049,
+      "path": "scripts/verify-hosted-published.mjs",
+      "sha256": "303f78e224c732a36d8711a6fc25042e5532abcdc203027929586d93e9f1ac03"
+    },
+    {
+      "bytes": 5933,
+      "path": "scripts/verify-live-capacity.mjs",
+      "sha256": "6f67e815eea8d1007f79c2d19c5b4c48e6e71bd7cf98a5e2a23e61907ce529eb"
+    },
+    {
+      "bytes": 5845,
+      "path": "scripts/verify-live-neon-browser.mjs",
+      "sha256": "fe4d6a2a65b16058bc4a40d75cccb7df2e8451212b0c70b79642b86b83c31845"
+    },
+    {
+      "bytes": 8163,
+      "path": "scripts/verify-live-palette.mjs",
+      "sha256": "6be6448540310074de1888c241ee9775466d90d6053a232a22846d090bc2d24b"
+    },
+    {
+      "bytes": 7169,
+      "path": "scripts/verify-live-year-switch-faults.mjs",
+      "sha256": "facb6d75c9d771512d59bd4124793ebd83f959fe8c79057fcc0921c5ce8d8a6c"
+    },
+    {
+      "bytes": 5294,
+      "path": "scripts/verify-macro-envelopes.py",
+      "sha256": "db6d5763b66a40534c2b0ae113357453c03d29834a09ed448b47f8896f5de593"
+    },
+    {
+      "bytes": 6932,
+      "path": "scripts/verify-neon-capacity.mjs",
+      "sha256": "23d0eaac96302cd4bd04d0f4c5a0a6f7b5555ac7bb9fbd6e24adec95c27e5b94"
+    },
+    {
+      "bytes": 7376,
+      "path": "scripts/verify-neon-project.mjs",
+      "sha256": "2043839debb466c6f16bbb89c9aedccb669d3796e90f5aeea816fd8c087e1b9a"
+    },
+    {
+      "bytes": 3797,
+      "path": "scripts/verify-neon-site.mjs",
+      "sha256": "b3ae62f633f38d73b80536ae16158870d3d02804b7c6877a39027e88e2a0c7f0"
+    },
+    {
+      "bytes": 19113,
+      "path": "scripts/verify-neon-sql.mjs",
+      "sha256": "899161d1ddc9c68088aa51884a30cca5ed2440b81a738e2a229adf44a950c4aa"
+    },
+    {
+      "bytes": 6163,
+      "path": "scripts/verify-postgres-schema.mjs",
+      "sha256": "3fbf8757a0712e794c55aafc06bad826c76cdbee533c8011f8bc1151137ed1a3"
+    },
+    {
+      "bytes": 3011,
+      "path": "scripts/verify-research-service.mjs",
+      "sha256": "5114a1e8c9108cc04880ee85ea211da9a67719ebdfdb65d6958742104194f7c5"
+    },
+    {
+      "bytes": 2228,
+      "path": "scripts/worker-result.mjs",
+      "sha256": "4e4a416ba0492dd841617cf14b390d0900bcc0ef427076b209827ca6d67f2215"
+    },
+    {
+      "bytes": 7802,
+      "path": "src/attributes.js",
+      "sha256": "bfe70437bfc9977e42dcb71bdcd41459d8b2cc5020415f6caf20d639bcc4ee00"
+    },
+    {
+      "bytes": 82979,
+      "path": "src/category-palette.js",
+      "sha256": "c449f2087075c9e03a25a26449154ac874c54a3285cf0d3df068c8cf6afd43b2"
+    },
+    {
+      "bytes": 497,
+      "path": "src/category-presentation.js",
+      "sha256": "6314e187b76683e7a281e028cd77bbd5a6a2d585baa1d09c47b3b54649b7da7b"
+    },
+    {
+      "bytes": 2835,
+      "path": "src/color-perception.js",
+      "sha256": "744b7177543a53315341cffa3227937e50575a4260cc0957c91f680ba276907a"
+    },
+    {
+      "bytes": 1309,
+      "path": "src/coverage-scope.js",
+      "sha256": "3fa2b6eaf17dbfa4ee8cab454517163764749e8606c90857d01305d1eea3a450"
+    },
+    {
+      "bytes": 16734,
+      "path": "src/coverage.js",
+      "sha256": "63d718c896bd2f3d97757244731d75c414449afbded224164c511f88351581e1"
+    },
+    {
+      "bytes": 15088,
+      "path": "src/data-client.js",
+      "sha256": "24d5b6b109a513c6188e8ae79a4fa3acf02815217dd246d7e8dc9a9b731a435e"
+    },
+    {
+      "bytes": 1514,
+      "path": "src/derived-records.js",
+      "sha256": "cbe63065128772c3e853dddf0882795e364f5ffe243a3a6cd256e814ee7d7935"
+    },
+    {
+      "bytes": 5340,
+      "path": "src/environment-classifications.js",
+      "sha256": "d589aa3aa91831f0d1d2b5a21e161270ba44e86ef90dea23110a761510074970"
+    },
+    {
+      "bytes": 441,
+      "path": "src/evidence-priority.js",
+      "sha256": "9e98e8c403d3a8068d286dbac160dc6126331d91958b7801b55ad9ecefa2244c"
+    },
+    {
+      "bytes": 622,
+      "path": "src/geometry.js",
+      "sha256": "acaa6ada5a4f9569d74870efe3799ba39ff861c7e7bfc26a1fedf7ab4723beb1"
+    },
+    {
+      "bytes": 606,
+      "path": "src/hierarchy.js",
+      "sha256": "ed44925555b30f8724b403f453d26575d0777c027b9160f559107a0a8f5126cb"
+    },
+    {
+      "bytes": 9129,
+      "path": "src/hosted-temporal-client.js",
+      "sha256": "95b4df340f72e3d8691c1903ec9c89a6261096e5b69be623ed4e38dfd824204b"
+    },
+    {
+      "bytes": 14295,
+      "path": "src/hosted-temporal-geography.js",
+      "sha256": "d98f8a73368753d345cda95a6b866d647e67c8b071d18c5cd78f876ac84694f4"
+    },
+    {
+      "bytes": 12266,
+      "path": "src/import-records.js",
+      "sha256": "636821c66c71c415f6659d51fa93dbb7eefcfd21a911eb059dfba1ceb9f5d194"
+    },
+    {
+      "bytes": 1974,
+      "path": "src/json-contract.js",
+      "sha256": "b29783ac8f9937d82f43a30ee6b18b910f60c2da57e2cd0d59b81d86a7d212f2"
+    },
+    {
+      "bytes": 35297,
+      "path": "src/main.js",
+      "sha256": "2b99479fa89769b1b15229ec754296adc463c6e12816fad6c9e864727c89f0ff"
+    },
+    {
+      "bytes": 4737,
+      "path": "src/map-snapshot-format.js",
+      "sha256": "2f29f4ffc874c2ade56ed7b53a581aa97ca6753351f65f0dd62c4512d69c50ab"
+    },
+    {
+      "bytes": 2822,
+      "path": "src/model.js",
+      "sha256": "6cf64270d9c912b09aa93c60a14d058b4482c52e5ffa31d55fdcef026bea3dcc"
+    },
+    {
+      "bytes": 2502,
+      "path": "src/observation-modules.js",
+      "sha256": "4555be0c82b07668d614d05e766f0b213b3e43694c4e4126ecdf48c3dfe394d2"
+    },
+    {
+      "bytes": 8380,
+      "path": "src/observation-registry.js",
+      "sha256": "9718be6c2668e7889d418c45475f179046ebed318bf7fd2a7c776a832e21a80b"
+    },
+    {
+      "bytes": 3938,
+      "path": "src/ownership-assets.js",
+      "sha256": "aa1edfa3632bd873fc986215e02e142ad32665171849fe75f445d3fb0ece22e9"
+    },
+    {
+      "bytes": 2948,
+      "path": "src/ownership-codec.js",
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "bytes": 7947,
+      "path": "src/pixel-canvas-layer.js",
+      "sha256": "6259dd17dd3aca832671305f901cbb76ab686445f37c0cdbb166e0469384d62b"
+    },
+    {
+      "bytes": 395,
+      "path": "src/pixel-gpu-worker.js",
+      "sha256": "2779ed2b94635270fdd025cfba1e2b53fb2412ead99008d00f22b8710543b9f6"
+    },
+    {
+      "bytes": 8141,
+      "path": "src/pixel-gpu.js",
+      "sha256": "868dc35f51b0f0cfc04d7a0a7b1ad65a0f38c26fcebeac2b6c2f66503ef23b8a"
+    },
+    {
+      "bytes": 3617,
+      "path": "src/pixel-grid.js",
+      "sha256": "320cc48796d5d3aaf07bb096441346abbe44ed4fab66df08ee003620ce5870a9"
+    },
+    {
+      "bytes": 7037,
+      "path": "src/pixel-layer.js",
+      "sha256": "678816a084838c6783d090906c3b33f8c051cb41fee7ad4a06789ba38fa67666"
+    },
+    {
+      "bytes": 1865,
+      "path": "src/pixel-metadata.js",
+      "sha256": "7fb6041b5ef9dd8f862d19f34d8a75adae726bc23d4790cb7ae580560589547f"
+    },
+    {
+      "bytes": 6134,
+      "path": "src/pixel-ownership.js",
+      "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f"
+    },
+    {
+      "bytes": 862,
+      "path": "src/pixel-worker.js",
+      "sha256": "dd4eff4cbed8a6dca3009347dbfe505c6c89649ccb5c76e22c1cf98921c94eff"
+    },
+    {
+      "bytes": 7572,
+      "path": "src/prepared-evidence.js",
+      "sha256": "12ad4e797603270958b9997a743a0a4531d65caf73f39e8a8055a33d38774e21"
+    },
+    {
+      "bytes": 1885,
+      "path": "src/reference-context.js",
+      "sha256": "977ea774cdaf55894ad31adf4b7b2f5edaff717b60634f5d933b855476dbde7d"
+    },
+    {
+      "bytes": 906,
+      "path": "src/reference-records.js",
+      "sha256": "1e2348d1447d33c8f65bafc1e37147d8e8346d4c765793ccd30ea13e8929e478"
+    },
+    {
+      "bytes": 7292,
+      "path": "src/regional-import-gate.js",
+      "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d"
+    },
+    {
+      "bytes": 1198,
+      "path": "src/runtime-ownership.js",
+      "sha256": "190f60c6d7402570901424a80b08bb2527f4785a590c7e4e2fd5fd51a82a7979"
+    },
+    {
+      "bytes": 5550,
+      "path": "src/source-policy-corrections.js",
+      "sha256": "002c182666cc6a76e093cd946e67a3983a3d7dc07d50e654933299439e7d23c0"
+    },
+    {
+      "bytes": 2780,
+      "path": "src/temporal.js",
+      "sha256": "5e62a4a91a1715d5204b46ce8db5ea6347e763fd31c79986465f976265a89481"
+    },
+    {
+      "bytes": 6863,
+      "path": "src/typed-client.js",
+      "sha256": "1d3feaca8daa01a7ae4c1024aeb600955ef4d0466aee39042615922f472c517e"
+    },
+    {
+      "bytes": 2134,
+      "path": "src/typed-derivations.js",
+      "sha256": "4d90e7f568573fcb290234325d0a48e82b3f7ab74c95b29448760dcf92591508"
+    },
+    {
+      "bytes": 11955,
+      "path": "src/typed-observations.js",
+      "sha256": "6a01bbb7d06884cf1e2610b3d38be000be907d3b4d826b5f6977461a26e50153"
+    },
+    {
+      "bytes": 7556,
+      "path": "src/typed-snapshot.js",
+      "sha256": "e19062ac4e747636fb983707dbc0c6bfdb9b408bb6dbc064e20abbf9e2bb35ca"
+    }
+  ],
+  "frozen_generation_code_verified": 223,
+  "generation_executed": false,
+  "incorporated_main": "ee17e3255c619a8f2f95c33a9454aeec7954199f",
+  "limits": [
+    "This verifies exact frozen code receipts after incorporating main, not a new generation, source inspection or served verification."
+  ],
+  "previous_authored_head": "0d971ad8f9b565f4703aae40e5cfbfdf0dc65e62",
+  "published": false,
+  "version": 1
+}

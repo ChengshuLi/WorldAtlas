@@ -1,0 +1,695 @@
+{
+  "version": 1,
+  "issue": 675,
+  "lane": "geography",
+  "worker_id": "codex-20261004-bolivia-675-7ed19418-0877-4c48-bb0e-73ecf5cc33c2",
+  "subject_ids": [
+    "atlas:physical:13555fd3cb230149ca55",
+    "atlas:physical:3b59e885effd69f1222e",
+    "atlas:physical:75e371c0a1abf3e8ed1c",
+    "atlas:physical:b777739e348ded01aa2a",
+    "atlas:physical:c76d054c56a021341333",
+    "atlas:physical:d0122fb389f7245bd5e8",
+    "atlas:physical:d66136b1837cb5240030",
+    "atlas:physical:e1658818a26c4d0055fa",
+    "atlas:physical:f24b672de863caf54859"
+  ],
+  "subject_ids_sha256": "d108207395ca4b005524a1ea9b4da6df06ee030b82d696f04a64e7ba9643178e",
+  "baseline": {
+    "commit": "df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10165703,
+        "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-supplement-bolivia-ecoregion-roles-2026/scope.json",
+        "bytes": 6020,
+        "sha256": "9b8c75a8e4525021ce6128da5733806a24bca6e176bc54ebfad25a22e2721873",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-supplement-bolivia-ecoregion-roles-2026/derived-portion-audit.json",
+        "bytes": 18226,
+        "sha256": "780681119d4904e27d6412627de52780e3523ad1fc89825523b731ed263c5b25",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-supplement-bolivia-ecoregion-roles-2026/reproduce-overlay.py",
+        "bytes": 10621,
+        "sha256": "aa3aab7034ab10a5bbdccbfc991c0ee9595edfab58197d6a215458d44900376d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources.json",
+        "bytes": 10904,
+        "sha256": "d67be83709a3d90bdb86b761a8d4e4583d4b4b8569264b0ca4912a6083cf3cea",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2d6fa291e9384c2f/assessment.json",
+        "bytes": 1630496,
+        "sha256": "0830fb100654a23815846f6c555e8821a016ae7270c7ea7a96a8c959d1187761",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/geoboundaries-BOL-ADM2-2015.geojson.gz",
+        "bytes": 8035896,
+        "sha256": "1df8ea802edec3cfe578bb3503437cee969fd8fbc785116ce84439b9a2bd6f96",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 22473600,
+        "uncompressed_sha256": "33a11ff32d935ad24f2e412a09ff383cbab2c63daff6b21de905dd3953ccac8c",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-bolivia-ecoregions-7.geojson.gz",
+        "bytes": 494189,
+        "sha256": "1beba7fa4d223cc776702e5b85d342234d1992016184d8c7fce4e05663e563ae",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1188735,
+        "uncompressed_sha256": "295be58007007f355f0a4a2c56cc64961c54390452e56ef82f808c27d905e10d",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/geoboundaries-BOL-ADM2-metadata.json",
+        "bytes": 961,
+        "sha256": "c2812d930bdd2aa54ed0fea4d5917156e8fa612fe411442cba90691b5b9e5e94",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-arcgis-item-metadata.json",
+        "bytes": 8638,
+        "sha256": "5ac94f88d5b6d75e7e5619a05fc0cdcce803906004fbd7648f60cd9dfd3a8b85",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-feature-service-metadata.json",
+        "bytes": 3399,
+        "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-layer0-metadata.json",
+        "bytes": 25682,
+        "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hierarchy": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "issue_594_scope": "9b8c75a8e4525021ce6128da5733806a24bca6e176bc54ebfad25a22e2721873",
+      "retained_result": "780681119d4904e27d6412627de52780e3523ad1fc89825523b731ed263c5b25",
+      "source_registry": "d67be83709a3d90bdb86b761a8d4e4583d4b4b8569264b0ca4912a6083cf3cea",
+      "parent_assessment": "0830fb100654a23815846f6c555e8821a016ae7270c7ea7a96a8c959d1187761"
+    },
+    "pin_files": {
+      "world_index": "data/world-index.json",
+      "hierarchy": "data/hierarchy.json",
+      "issue_594_scope": "data/regional-review/regional-supplement-bolivia-ecoregion-roles-2026/scope.json",
+      "retained_result": "data/regional-review/regional-supplement-bolivia-ecoregion-roles-2026/derived-portion-audit.json",
+      "source_registry": "data/regional-review/regional-review-2d6fa291e9384c2f/sources.json",
+      "parent_assessment": "data/regional-review/regional-review-2d6fa291e9384c2f/assessment.json"
+    },
+    "subject_files": {
+      "atlas:physical:13555fd3cb230149ca55": "data/geography/part-2.json",
+      "atlas:physical:3b59e885effd69f1222e": "data/geography/part-2.json",
+      "atlas:physical:75e371c0a1abf3e8ed1c": "data/geography/part-2.json",
+      "atlas:physical:b777739e348ded01aa2a": "data/geography/part-2.json",
+      "atlas:physical:c76d054c56a021341333": "data/geography/part-2.json",
+      "atlas:physical:d0122fb389f7245bd5e8": "data/geography/part-2.json",
+      "atlas:physical:d66136b1837cb5240030": "data/geography/part-2.json",
+      "atlas:physical:e1658818a26c4d0055fa": "data/geography/part-2.json",
+      "atlas:physical:f24b672de863caf54859": "data/geography/part-2.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-bol-adm2-2015",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/BOL/ADM2/geoBoundaries-BOL-ADM2.geojson",
+      "role": "Complete retained predecessor administrative polygons for Cordillera and Velasco; geoBoundaries metadata attributes data to GeoBolivia and calls the layer ADM2/Province.",
+      "vintage": "2015 boundaries; source update 2023-01-19; build 2023-12-12.",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "Source metadata states Public Domain and quotes GeoBolivia “free use and access to information”. The official catalog record returned HTTP 403 in the prior source research, so upstream terms are reported as declared by retained metadata."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/geoboundaries-BOL-ADM2-2015.geojson.gz",
+          "bytes": 8035896,
+          "sha256": "1df8ea802edec3cfe578bb3503437cee969fd8fbc785116ce84439b9a2bd6f96",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 22473600,
+          "uncompressed_sha256": "33a11ff32d935ad24f2e412a09ff383cbab2c63daff6b21de905dd3953ccac8c"
+        },
+        {
+          "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/geoboundaries-BOL-ADM2-metadata.json",
+          "bytes": 961,
+          "sha256": "c2812d930bdd2aa54ed0fea4d5917156e8fa612fe411442cba90691b5b9e5e94",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "description": "Canonical bytes and source metadata are preserved under parent issue #490. This reproduction checks raw bytes, source IDs and derived measurements; it does not independently establish present-day province boundaries or official catalog provenance.",
+      "limit": "The inherited retained bytes and metadata are hash-verified, but the official GeoBolivia catalog endpoint returned HTTP 403 in the earlier source investigation; the upstream record and current administrative status were not independently re-fetched or established in this reproduction."
+    },
+    {
+      "id": "resolve-ecoregions-2017",
+      "url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0",
+      "role": "Seven complete global ecological polygons keyed by ECO_ID; natural/ecological boundaries, not political or administrative units.",
+      "vintage": "RESOLVE 2017; layer edit 2022-01-27; retained query retrieved 2026-10-03.",
+      "retrieved_at": "2026-10-03",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0, declared in ArcGIS item metadata and returned feature LICENSE fields; retain attribution to RESOLVE/Esri."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-bolivia-ecoregions-7.geojson.gz",
+          "bytes": 494189,
+          "sha256": "1beba7fa4d223cc776702e5b85d342234d1992016184d8c7fce4e05663e563ae",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 1188735,
+          "uncompressed_sha256": "295be58007007f355f0a4a2c56cc64961c54390452e56ef82f808c27d905e10d"
+        },
+        {
+          "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-arcgis-item-metadata.json",
+          "bytes": 8638,
+          "sha256": "5ac94f88d5b6d75e7e5619a05fc0cdcce803906004fbd7648f60cd9dfd3a8b85",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-feature-service-metadata.json",
+          "bytes": 3399,
+          "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-2d6fa291e9384c2f/sources/resolve-layer0-metadata.json",
+          "bytes": 25682,
+          "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "description": "The exact inherited query and response hash are recorded in the original parent packet. The response contains the seven mapped ECO_IDs. It is only a physical/ecological overlay input; it cannot establish an administrative role.",
+      "limit": "The retained response and metadata match their recorded hashes and expose the seven ECO_IDs, but this repair did not independently re-query the ArcGIS service or re-evaluate the ecological source conclusions."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/README.md",
+      "bytes": 5549,
+      "sha256": "c69fb695329a2109a3e567303a1fb23169cc61e6bcd0172b1ee8838d5389f4e4",
+      "hash_kind": "file-bytes",
+      "role": "source-documentation"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/build_packet.py",
+      "bytes": 32862,
+      "sha256": "72037e1b6928475131f4896f4049dea345226293573d51a731fd0cda628faa0e",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-code"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/test_negative_cases.py",
+      "bytes": 5138,
+      "sha256": "8b80e682348fd5ddbfd418c97aa7a2ddea117254c17c3f2ffe7e26f568e9e89b",
+      "hash_kind": "file-bytes",
+      "role": "validation-code"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/verify_packet.py",
+      "bytes": 2481,
+      "sha256": "ccdc675acdce98d45756392277f64f2c7b54e5032961fd3e8e7a677def36919a",
+      "hash_kind": "file-bytes",
+      "role": "verification-code"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/baseline-scan-inventory.json",
+      "bytes": 25663,
+      "sha256": "e9521976111d3b9f8cd82aff374d836a66f21c3482042043842b7bcc144df6ce",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json",
+      "bytes": 17946,
+      "sha256": "891a76b2558debb27bec3fc88427f146f868cf739e9ef7908dce0e84c4e9fc26",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/negative-control.json",
+      "bytes": 620,
+      "sha256": "ed7044260b4d4788eeb0be890e24655d57f3e9aa6726c73e680686f605b8d93b",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/positive-control.json",
+      "bytes": 243,
+      "sha256": "0050794a02ab304ed886a9e39b076073913bc8b31c3099c2f2c2c600105c632a",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/reproducibility-control.json",
+      "bytes": 378,
+      "sha256": "eccc1d55e7ccb114a246117e45d3cb0172457b13d0b4709a32f82df55e064931",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/reproduction-comparison.json",
+      "bytes": 961,
+      "sha256": "b5e2e995f516d569633247da42fb0c3da5f7808411f5d880e466650966f163d9",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    }
+  ],
+  "methods": [
+    {
+      "id": "pinned-bolivia-overlay",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Read source and geography inputs only from one exact Git commit. Scan all world-index parts and require each of nine subject IDs exactly once; require each of two predecessor and seven ecological IDs once. Reproject a temporary assembled GeoJSON to EPSG:6933; run strict one-row/one-field-per-alias SQLite OGR queries for nine areas, two parent unions and all 36 potential pairs. NULL, malformed, absent, duplicate or nonfinite SQL metrics fail closed. Preserve original sources/results.",
+      "software": "Python 3.12.14; GDAL/OGR 3.10.3; shared immutable helper worldatlas-evidence-preparation-v1.",
+      "units": "Area and symmetric difference: km² in EPSG:6933 planar equal-area coordinates; edge contact lengths: metres in EPSG:6933; fractions dimensionless."
+    }
+  ],
+  "metrics": [
+    {"id":"bolivia-overlay:/current_exact_neighbor_pair_count","value":9,"unit":"count","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_count","value":9,"unit":"count","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pair_count","value":36,"unit":"count","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/0/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/0/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/1/current_exact_edge_m","value":72105.8795815528,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/1/expected_source_intersection_edge_m","value":75678.2539043376,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/2/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/2/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/3/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/3/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/4/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/4/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/5/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/5/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/6/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/6/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/7/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/7/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/8/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/8/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/9/current_exact_edge_m","value":671977.305520365,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/9/expected_source_intersection_edge_m","value":747164.906179053,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/10/current_exact_edge_m","value":353059.9585306,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/10/expected_source_intersection_edge_m","value":366982.807068242,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/11/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/11/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/12/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/12/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/13/current_exact_edge_m","value":796069.612848424,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/13/expected_source_intersection_edge_m","value":839491.156756628,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/14/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/14/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/15/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/15/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/16/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/16/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/17/current_exact_edge_m","value":68032.1330750268,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/17/expected_source_intersection_edge_m","value":73000.8233378783,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/18/current_exact_edge_m","value":25380.2357533215,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/18/expected_source_intersection_edge_m","value":26995.768923517,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/19/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/19/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/20/current_exact_edge_m","value":212004.387073464,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/20/expected_source_intersection_edge_m","value":227387.94816774,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/21/current_exact_edge_m","value":126839.326655943,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/21/expected_source_intersection_edge_m","value":142048.694572167,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/22/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/22/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/23/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/23/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/24/current_exact_edge_m","value":7036.22759632729,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/24/expected_source_intersection_edge_m","value":15523.1550412534,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/25/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/25/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/26/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/26/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/27/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/27/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/28/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/28/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/29/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/29/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/30/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/30/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/31/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/31/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/32/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/32/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/33/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/33/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/34/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/34/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/35/current_exact_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragment_pairs/35/expected_source_intersection_edge_m","value":0.0,"unit":"m","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/0/current_area_inside_expected_fraction","value":0.9739533092028004,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/0/current_area_km2_equal_area","value":322.504533078043,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/0/expected_area_covered_by_current_fraction","value":0.9873510530592463,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/0/expected_intersection_area_km2_equal_area","value":318.128345790518,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/0/overlap_area_km2_equal_area","value":314.104357224264,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/0/symmetric_difference_area_km2_equal_area","value":12.42416442003298,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/1/current_area_inside_expected_fraction","value":0.9967333620361241,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/1/current_area_km2_equal_area","value":50121.3517557148,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/1/expected_area_covered_by_current_fraction","value":0.9968507348495446,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/1/expected_intersection_area_km2_equal_area","value":50115.450286355,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/1/overlap_area_km2_equal_area","value":49957.6234452688,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/1/symmetric_difference_area_km2_equal_area","value":321.5551515322004,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/2/current_area_inside_expected_fraction","value":0.999292322315196,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/2/current_area_km2_equal_area","value":80954.6125539603,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/2/expected_area_covered_by_current_fraction","value":0.9955300993961841,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/2/expected_intersection_area_km2_equal_area","value":81260.5493598238,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/2/overlap_area_km2_equal_area","value":80897.3227811739,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/2/symmetric_difference_area_km2_equal_area","value":420.5163514362939,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/3/current_area_inside_expected_fraction","value":0.9903698388565491,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/3/current_area_km2_equal_area","value":4933.82745264259,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/3/expected_area_covered_by_current_fraction","value":0.9881448850528771,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/3/expected_intersection_area_km2_equal_area","value":4944.93669211088,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/3/overlap_area_km2_equal_area","value":4886.31389921966,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/3/symmetric_difference_area_km2_equal_area","value":106.1363463141497,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/4/current_area_inside_expected_fraction","value":0.9950785278733199,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/4/current_area_km2_equal_area","value":6000.93441109907,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/4/expected_area_covered_by_current_fraction","value":0.9920442509971124,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/4/expected_intersection_area_km2_equal_area","value":6019.28893157629,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/4/overlap_area_km2_equal_area","value":5971.40097966081,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/4/symmetric_difference_area_km2_equal_area","value":77.42138335373966,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/5/current_area_inside_expected_fraction","value":0.9914448125372222,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/5/current_area_km2_equal_area","value":811.857926447801,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/5/expected_area_covered_by_current_fraction","value":0.9983017793989037,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/5/expected_intersection_area_km2_equal_area","value":806.281573672593,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/5/overlap_area_km2_equal_area","value":804.912329693898,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/5/symmetric_difference_area_km2_equal_area","value":8.314840732598213,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/6/current_area_inside_expected_fraction","value":0.9788162413431092,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/6/current_area_km2_equal_area","value":48.2926616116505,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/6/expected_area_covered_by_current_fraction","value":0.9329976705996742,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/6/expected_intersection_area_km2_equal_area","value":50.6642653167487,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/6/overlap_area_km2_equal_area","value":47.2696415231704,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/6/symmetric_difference_area_km2_equal_area","value":4.4176438820584,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/7/current_area_inside_expected_fraction","value":0.994173690608774,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/7/current_area_km2_equal_area","value":7560.00659289243,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/7/expected_area_covered_by_current_fraction","value":0.9827128698796792,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/7/expected_intersection_area_km2_equal_area","value":7648.17464576684,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/7/overlap_area_km2_equal_area","value":7515.95965548253,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/7/symmetric_difference_area_km2_equal_area","value":176.26192769420777,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/8/current_area_inside_expected_fraction","value":0.9837584441858932,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/8/current_area_km2_equal_area","value":1030.36766079176,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/8/expected_area_covered_by_current_fraction","value":0.979130825564808,"unit":"1","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/8/expected_intersection_area_km2_equal_area","value":1035.2374375868,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/8/overlap_area_km2_equal_area","value":1013.63288691996,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/fragments/8/symmetric_difference_area_km2_equal_area","value":38.33932453863986,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/0/metrics_equal_area_km2/admin_vs_selected_ecoregion_union_symmetric_difference","value":7.9967034736228e-12,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/0/metrics_equal_area_km2/current_portion_union_area","value":83167.635335173,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/0/metrics_equal_area_km2/source_admin_area","value":83470.8609821906,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/0/metrics_equal_area_km2/source_admin_area_covered_by_selected_ecoregions","value":83470.8609821907,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/0/metrics_equal_area_km2/source_admin_vs_current_portion_union_symmetric_difference","value":393.562620590245,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/0/portion_count","value":5,"unit":"count","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/1/metrics_equal_area_km2/admin_vs_selected_ecoregion_union_symmetric_difference","value":4.91395269186512e-12,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/1/metrics_equal_area_km2/current_portion_union_area","value":68616.11990919,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/1/metrics_equal_area_km2/source_admin_area","value":68727.8505558089,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/1/metrics_equal_area_km2/source_admin_area_covered_by_selected_ecoregions","value":68727.8505558088,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/1/metrics_equal_area_km2/source_admin_vs_current_portion_union_symmetric_difference","value":200.774033037763,"unit":"km²","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/parent_unions/1/portion_count","value":4,"unit":"count","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"},
+    {"id":"bolivia-overlay:/source_expected_neighbor_pair_count","value":9,"unit":"count","vintage":"baseline","input_sha256":"93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf","evaluation_commit":"df7f37ac91f6c3897ad4d23cfb166bc308a1c5ef"}
+  ],
+  "metric_bindings": [
+    {"metric_id":"bolivia-overlay:/current_exact_neighbor_pair_count","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/current_exact_neighbor_pair_count"},
+    {"metric_id":"bolivia-overlay:/fragment_count","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_count"},
+    {"metric_id":"bolivia-overlay:/fragment_pair_count","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pair_count"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/0/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/0/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/0/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/0/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/1/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/1/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/1/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/1/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/2/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/2/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/2/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/2/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/3/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/3/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/3/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/3/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/4/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/4/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/4/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/4/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/5/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/5/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/5/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/5/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/6/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/6/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/6/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/6/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/7/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/7/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/7/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/7/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/8/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/8/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/8/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/8/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/9/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/9/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/9/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/9/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/10/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/10/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/10/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/10/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/11/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/11/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/11/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/11/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/12/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/12/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/12/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/12/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/13/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/13/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/13/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/13/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/14/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/14/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/14/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/14/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/15/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/15/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/15/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/15/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/16/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/16/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/16/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/16/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/17/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/17/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/17/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/17/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/18/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/18/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/18/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/18/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/19/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/19/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/19/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/19/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/20/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/20/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/20/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/20/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/21/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/21/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/21/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/21/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/22/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/22/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/22/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/22/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/23/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/23/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/23/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/23/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/24/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/24/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/24/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/24/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/25/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/25/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/25/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/25/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/26/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/26/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/26/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/26/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/27/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/27/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/27/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/27/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/28/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/28/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/28/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/28/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/29/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/29/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/29/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/29/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/30/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/30/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/30/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/30/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/31/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/31/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/31/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/31/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/32/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/32/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/32/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/32/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/33/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/33/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/33/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/33/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/34/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/34/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/34/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/34/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/35/current_exact_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/35/current_exact_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragment_pairs/35/expected_source_intersection_edge_m","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragment_pairs/35/expected_source_intersection_edge_m"},
+    {"metric_id":"bolivia-overlay:/fragments/0/current_area_inside_expected_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/0/current_area_inside_expected_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/0/current_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/0/current_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/0/expected_area_covered_by_current_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/0/expected_area_covered_by_current_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/0/expected_intersection_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/0/expected_intersection_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/0/overlap_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/0/overlap_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/0/symmetric_difference_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/0/symmetric_difference_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/1/current_area_inside_expected_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/1/current_area_inside_expected_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/1/current_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/1/current_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/1/expected_area_covered_by_current_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/1/expected_area_covered_by_current_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/1/expected_intersection_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/1/expected_intersection_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/1/overlap_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/1/overlap_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/1/symmetric_difference_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/1/symmetric_difference_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/2/current_area_inside_expected_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/2/current_area_inside_expected_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/2/current_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/2/current_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/2/expected_area_covered_by_current_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/2/expected_area_covered_by_current_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/2/expected_intersection_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/2/expected_intersection_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/2/overlap_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/2/overlap_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/2/symmetric_difference_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/2/symmetric_difference_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/3/current_area_inside_expected_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/3/current_area_inside_expected_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/3/current_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/3/current_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/3/expected_area_covered_by_current_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/3/expected_area_covered_by_current_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/3/expected_intersection_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/3/expected_intersection_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/3/overlap_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/3/overlap_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/3/symmetric_difference_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/3/symmetric_difference_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/4/current_area_inside_expected_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/4/current_area_inside_expected_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/4/current_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/4/current_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/4/expected_area_covered_by_current_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/4/expected_area_covered_by_current_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/4/expected_intersection_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/4/expected_intersection_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/4/overlap_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/4/overlap_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/4/symmetric_difference_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/4/symmetric_difference_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/5/current_area_inside_expected_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/5/current_area_inside_expected_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/5/current_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/5/current_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/5/expected_area_covered_by_current_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/5/expected_area_covered_by_current_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/5/expected_intersection_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/5/expected_intersection_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/5/overlap_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/5/overlap_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/5/symmetric_difference_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/5/symmetric_difference_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/6/current_area_inside_expected_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/6/current_area_inside_expected_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/6/current_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/6/current_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/6/expected_area_covered_by_current_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/6/expected_area_covered_by_current_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/6/expected_intersection_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/6/expected_intersection_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/6/overlap_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/6/overlap_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/6/symmetric_difference_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/6/symmetric_difference_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/7/current_area_inside_expected_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/7/current_area_inside_expected_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/7/current_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/7/current_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/7/expected_area_covered_by_current_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/7/expected_area_covered_by_current_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/7/expected_intersection_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/7/expected_intersection_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/7/overlap_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/7/overlap_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/7/symmetric_difference_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/7/symmetric_difference_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/8/current_area_inside_expected_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/8/current_area_inside_expected_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/8/current_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/8/current_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/8/expected_area_covered_by_current_fraction","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/8/expected_area_covered_by_current_fraction"},
+    {"metric_id":"bolivia-overlay:/fragments/8/expected_intersection_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/8/expected_intersection_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/8/overlap_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/8/overlap_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/fragments/8/symmetric_difference_area_km2_equal_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/fragments/8/symmetric_difference_area_km2_equal_area"},
+    {"metric_id":"bolivia-overlay:/parent_unions/0/metrics_equal_area_km2/admin_vs_selected_ecoregion_union_symmetric_difference","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/0/metrics_equal_area_km2/admin_vs_selected_ecoregion_union_symmetric_difference"},
+    {"metric_id":"bolivia-overlay:/parent_unions/0/metrics_equal_area_km2/current_portion_union_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/0/metrics_equal_area_km2/current_portion_union_area"},
+    {"metric_id":"bolivia-overlay:/parent_unions/0/metrics_equal_area_km2/source_admin_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/0/metrics_equal_area_km2/source_admin_area"},
+    {"metric_id":"bolivia-overlay:/parent_unions/0/metrics_equal_area_km2/source_admin_area_covered_by_selected_ecoregions","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/0/metrics_equal_area_km2/source_admin_area_covered_by_selected_ecoregions"},
+    {"metric_id":"bolivia-overlay:/parent_unions/0/metrics_equal_area_km2/source_admin_vs_current_portion_union_symmetric_difference","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/0/metrics_equal_area_km2/source_admin_vs_current_portion_union_symmetric_difference"},
+    {"metric_id":"bolivia-overlay:/parent_unions/0/portion_count","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/0/portion_count"},
+    {"metric_id":"bolivia-overlay:/parent_unions/1/metrics_equal_area_km2/admin_vs_selected_ecoregion_union_symmetric_difference","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/1/metrics_equal_area_km2/admin_vs_selected_ecoregion_union_symmetric_difference"},
+    {"metric_id":"bolivia-overlay:/parent_unions/1/metrics_equal_area_km2/current_portion_union_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/1/metrics_equal_area_km2/current_portion_union_area"},
+    {"metric_id":"bolivia-overlay:/parent_unions/1/metrics_equal_area_km2/source_admin_area","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/1/metrics_equal_area_km2/source_admin_area"},
+    {"metric_id":"bolivia-overlay:/parent_unions/1/metrics_equal_area_km2/source_admin_area_covered_by_selected_ecoregions","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/1/metrics_equal_area_km2/source_admin_area_covered_by_selected_ecoregions"},
+    {"metric_id":"bolivia-overlay:/parent_unions/1/metrics_equal_area_km2/source_admin_vs_current_portion_union_symmetric_difference","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/1/metrics_equal_area_km2/source_admin_vs_current_portion_union_symmetric_difference"},
+    {"metric_id":"bolivia-overlay:/parent_unions/1/portion_count","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/parent_unions/1/portion_count"},
+    {"metric_id":"bolivia-overlay:/source_expected_neighbor_pair_count","path":"research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json","json_pointer":"/source_expected_neighbor_pair_count"}
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "This packet reproduces the pinned overlay calculation over all nine assigned fragments, two predecessor provinces, seven mapped RESOLVE ECO_ID features, and 36 fragment pairs; every generated metric is compared to the preserved #594 output with differences retained as explicit JSON pointers.",
+      "source_ids": [
+        "geoboundaries-bol-adm2-2015",
+        "resolve-ecoregions-2017"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "A successful geometric reproduction does not verify current Bolivian legal boundaries, administrative semantics, settlements, islands or named-land completeness. Those pre-existing unresolved findings and their follow-up issues remain unchanged.",
+      "source_ids": [
+        "geoboundaries-bol-adm2-2015",
+        "resolve-ecoregions-2017"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python research/geography/bolivia-portion-reproduction-followup/build_packet.py --check --vintage 20261004-validated",
+    "python research/geography/bolivia-portion-reproduction-followup/test_negative_cases.py",
+    "python research/geography/bolivia-portion-reproduction-followup/verify_packet.py",
+    "node scripts/evidence-quality.mjs research/geography/bolivia-portion-reproduction-followup/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/build_packet.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/test_negative_cases.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/verify_packet.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/baseline-scan-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/derived-portion-audit.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/reproducibility-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/reproduction-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bolivia-portion-reproduction-followup/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "rendered_tables": [],
+  "generated_data_note": "Evidence-only reproducibility repair. Original #594 files/source bytes are read from exact immutable Git blobs and are not modified or copied. Generated result, scan proof and controls live only under this issue-owned research path. This packet does not change geography or approve a region.",
+  "validation": [
+    {
+      "method_id": "pinned-bolivia-overlay",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/positive-control.json"
+    },
+    {
+      "method_id": "pinned-bolivia-overlay",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/negative-control.json"
+    },
+    {
+      "method_id": "pinned-bolivia-overlay",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/bolivia-portion-reproduction-followup/vintages/20261004-validated/reproducibility-control.json"
+    }
+  ]
+}

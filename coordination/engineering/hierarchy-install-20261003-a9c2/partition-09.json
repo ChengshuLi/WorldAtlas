@@ -1,1 +1,1561 @@
-{"baseline":{"commit":"277b8ecbb3199ae3d5fb07bab96353d17a049b1c","files":[{"bytes":10165703,"hash_kind":"file-bytes","path":"data/hierarchy.json","sha256":"03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d"},{"bytes":133794,"hash_kind":"file-bytes","path":"data/hosted-catalog/batch-98.json","sha256":"2e9ecb25cf974b8bb3530ceb1f252d46e745813e405aa428f832d9d2fd504d2d"},{"bytes":133794,"hash_kind":"file-bytes","path":"data/hosted-catalog/batch-99.json","sha256":"2fe3b3239e155c6ff2252024974796edd7e67b6291644d3274567d6d3dedd8f7"},{"bytes":76218,"hash_kind":"file-bytes","path":"data/hosted-catalog/index.json","sha256":"ade11c54ae041f48c305b79223bb5b230db608b2bb0ee1e8a74edd1bc54f6d2b"},{"bytes":1164931,"hash_kind":"file-bytes","path":"data/macro-boundary-migration.json.gz","sha256":"cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5"},{"bytes":839301,"hash_kind":"file-bytes","path":"data/macro-corrections.json","sha256":"da5b8611a06c4d36b7f0fe8b1d54ed34eb3ca7493476ab8233a7e0e75c06f7b3"},{"bytes":634030,"hash_kind":"file-bytes","path":"data/macro-foundation/approved-boundary-decisions.json","sha256":"84a7e8ba1714a66c4fee5453caacbe4d9329f511ce378b8231434f9e2542d268"},{"bytes":2367982,"hash_kind":"file-bytes","path":"data/macro-foundation/current-membership-inventory.json.gz","sha256":"78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae"},{"bytes":5005075,"hash_kind":"file-bytes","path":"data/macro-foundation/current-membership-projection.json.gz","sha256":"beb2739a65c67f01a65deab96ebf209a159b257453e156ef590106e1f1c9a348"},{"bytes":90057,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/01515a7bb57939f47891fd11.wkb.gz","sha256":"326a4827a22336e7d37e2f7142258f4eec9944d7bc807e394c099ea4ddd6e485"},{"bytes":11180,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/047e5f618d454a9134a645e2.wkb.gz","sha256":"fd8d0c3baf4421855f6b3c826bb4e71d325b0e146c50c253675f667c5f462cc8"},{"bytes":22993,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/0ada3a251bb4853e69e4066d.wkb.gz","sha256":"f85fda313685a4b9eb3273cad5ebbb614e01791e3fdf9c65990106c0b5fe3ec5"},{"bytes":55129,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/0b1913e49b43173137a71762.wkb.gz","sha256":"888e4b030678a49a0c65ed6cc7ec9a98c41e142f4d9cf93d0563e37319feba0f"},{"bytes":51995,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/0b6598d23d078da75ae011ff.wkb.gz","sha256":"2062a36cfbc7c44a2b1e43d2984a7164755ee7b98a1794aee3ec203d368cfb0d"},{"bytes":247745,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/0cba666c096279ca7202548e.wkb.gz","sha256":"a2249f1562ab5308a7725aef3f63848eb0e27c24ad92661de69d4a4cd91961d0"},{"bytes":55421,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/0dc8a6b22819f88c54353db3.wkb.gz","sha256":"71f79f9aaa16ce4adf6f3e5cbb73869ff4fde0088233f83a528efc1130dfc287"},{"bytes":556082,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/0dc973ed57111c8ece4ec330.wkb.gz","sha256":"17026c250aa85be246d21e9be50d890201b167b0c1812bbee15b799a9d466742"},{"bytes":84112,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/1043ed94b3b91b9caac2444d.wkb.gz","sha256":"41ad556d12928ad8d3531314f3305592c64642e648340d02989b7d7077f43f55"},{"bytes":4698,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/12ee162909247557465d1bd6.wkb.gz","sha256":"61c147783de250455e52f0364e0c35d899efcbc95bef2550c9314be4ba4a2827"},{"bytes":225264,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/13953164c6fc006f9594d6bb.wkb.gz","sha256":"f2e29b7e0920299cc10e64b665500227a4f436e69a00a83e4eda80e6e121f343"},{"bytes":136259,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/160cb18e127e95fc0a028b02.wkb.gz","sha256":"38f10f25b4cb6f666693a6c7f91a6f492bb15f20b40eb20cce3bb1dd35dd000b"},{"bytes":150775,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/1794fd062e08234e50eaa135.wkb.gz","sha256":"dbf6d59a9e39ed3237a2e557f636ee62a345c64e6f590c6b54d413d25e825992"},{"bytes":77870,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/1a4cfa70ff1500cb75d41eb2.wkb.gz","sha256":"cb16576de0a2545a92f03c249293c2b868e197fc0b4a77b50fb8c3dad8d02e03"},{"bytes":589071,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/1c414518417b2d0cc7269115.wkb.gz","sha256":"692a1f97db55cd78037ba60cb5b16ebb03480a8aa66b121f1355e382c7812486"},{"bytes":44248,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/1f6761ef9746adcef4e18926.wkb.gz","sha256":"c89881abd46bf78f5b7a7d61439152b567038889a69d7e841cb6376c63ee133c"},{"bytes":17186,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/20998712dd43db26cdeb12d7.wkb.gz","sha256":"e9b3af401a31436bc7702257841dc73288a9e49f1326c4b5898369fcd20f5110"},{"bytes":65324,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/299d1d6003d2632407ec3027.wkb.gz","sha256":"0f42e59b029f2094ecf8444fa6f932692252209fcce7a6754f9147702b9b2678"},{"bytes":34943,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/2d9058038127a0dce5ace9e6.wkb.gz","sha256":"189d04adbf0983c08c0ca099a4fc5032c83e69f778d21ab9939169ddfafee77f"},{"bytes":21765,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/2dc04f392a0f55331817cb40.wkb.gz","sha256":"6f7d535252394e8a62b294459dda7019f1306aecf24467e5cd5969117c2079e7"},{"bytes":7536,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/30d999bee51d7c7e19182580.wkb.gz","sha256":"883516639b017c4a2859416bfb12064d047ac143859502a5ae7a19c7e1fc7b82"},{"bytes":47238,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/319b05b6c13f6741cae5e25a.wkb.gz","sha256":"441247b9ac08b266de4a24c3fbfc6d86478f4f4202e2faf91c44cef9553f5229"},{"bytes":104092,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/381a8664cf6c8ec2fcf4d170.wkb.gz","sha256":"94b49b0912104ee4531e9009b3b1fc3782c11bf8f73b59bd915465d1bdf07c09"},{"bytes":6684,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/3bef582de67fab1f51799c70.wkb.gz","sha256":"fced028e179b3ae54212079597c32f5e9997ed62844c9cdf656dc330998847b8"},{"bytes":69386,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/3c33c8740b2ad85225739103.wkb.gz","sha256":"75bade8e156fe70f64cc9e798ba4b3155fce6ae89d0d58eaf567492685382177"},{"bytes":57781,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/3d5a979404af5e6cf61b19d4.wkb.gz","sha256":"5c5ad2ea2702013bfb643ee5d8e52ffb506afbbcc88c9505c99ed74aac4f53b1"},{"bytes":20365,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/3e48571ac2d8ec4d8939ce5e.wkb.gz","sha256":"3a4ddf712af3cb4447911a5d480794fa3f0699d875c3bac1b2373a06ee1055a8"},{"bytes":10861,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/40f51f89fa60130ba3eb4132.wkb.gz","sha256":"ba9c0d75b89ace26fd98b87f769ef2f6ea4f72fc3a1f468c9f1baf57baef2d40"},{"bytes":676598,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/41289b81cd5873df1fb616d5.wkb.gz","sha256":"6a1c73e33aa43e570ec7e3ba517984b28d76fe7e095812af613a2d3443145788"},{"bytes":120402,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/426ff72b59d308b8ce3547bf.wkb.gz","sha256":"58fe26de04e1c9ea736b8404592b68cc58a5d0f9627bc0bb31373aad7189e1d4"},{"bytes":117064,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/427d8c9037e41d5dbb2e73a5.wkb.gz","sha256":"da33233d0046880a5dfb84b8edda851042164e22aae95be832cb5fda27b54d22"},{"bytes":29773,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/4509dd8058b4f3e2b78da7eb.wkb.gz","sha256":"9c00ef283c3c2f7c28a4051e54a876dda87bf17708d60f1a116023113cea6e8a"},{"bytes":30239,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/45a293a514e96c4f021498d0.wkb.gz","sha256":"048aea89e5724ad6c07477e463db6d7c9d2643e71ab5b3e9e533b5c30de900e8"},{"bytes":92258,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/4619106aaf2c594147858c86.wkb.gz","sha256":"01451adbe6bee33de9d7795828c9560022e258bd3104c178ccb9a76fd01f3ccd"},{"bytes":38782,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/474b804c5f1435d6077fe0ae.wkb.gz","sha256":"e7bd6129e08bf5e4a4aff3b211eb3b7c44d4d4c780dc928628e0530e7e258e6e"},{"bytes":189589,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/4961c886a97db85cac1b5076.wkb.gz","sha256":"9d5430f443d6e158ecfc065cd2a049e31d892f10ca10f2fd00eaf2758ca57703"},{"bytes":62709,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/4c064be46173963a6545f319.wkb.gz","sha256":"935d8dcc73f4166ce9487ac0cb412d0f5364cedcc2233e0807fc911c9a0f80c0"},{"bytes":67502,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/4d8d735e28b4b885e9b98f76.wkb.gz","sha256":"a0b08db9be02da61f63c6b3202938d1a5fc5750216f101b172b7122c0008913c"},{"bytes":364124,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/4dd980653ec2a431513a5c56.wkb.gz","sha256":"930ced09f7ed976a831247264018d3a6e39dd6ecd214ea02259129a38fdcb8df"},{"bytes":224787,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/51385e346eb2b854638740a1.wkb.gz","sha256":"c150b55e51715e53027771bb8efda76acddf3ec0c9f738d387e817bc83fbc145"},{"bytes":51506,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/542bb7aff5081eb1f0581f15.wkb.gz","sha256":"69adc78bd426471f3d014a3e822ab5d17fa372c1fb8d81190a9eb55c09515eee"},{"bytes":112813,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/5681a04cd0060526771e1ef2.wkb.gz","sha256":"dd19c3731c96800b821beb11fb81344be2074e87ea9d391a4cf99bdd50c422b6"},{"bytes":92989,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/5a0a431e80ad7826c4c213f1.wkb.gz","sha256":"c379328f6c5cdde87ae70dd073a2f9a9ca92a4085fa04bfb74fa8d2f7ac569ba"},{"bytes":11129,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/5a1ba6045f21260668a89736.wkb.gz","sha256":"8efe615479e2155500ac2e93bbd1cd8637e77451d54807a48c7b3144f05007c8"},{"bytes":36276,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/5b65a9b6d5a656a8edebd71a.wkb.gz","sha256":"1b1742e0dc020b8c597e362daf15eeb0e20f807fdd81103e7040c06db7e77907"},{"bytes":287780,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/5ef9a2d385d68f51e1222ab2.wkb.gz","sha256":"1a5cdae69fa52abf531db08c17fc2b064604004a3da431a3789078dc730d5188"},{"bytes":456,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/6245e9f0e430d9ff6ca96872.wkb.gz","sha256":"f4520154060f5738e40c3f1909bc5ebe4462c674595a07799c39cefd5c7abd96"},{"bytes":20365,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/6254dd247738fab52d097f82.wkb.gz","sha256":"3a4ddf712af3cb4447911a5d480794fa3f0699d875c3bac1b2373a06ee1055a8"},{"bytes":27848,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/62c18906e512e9a7631855f2.wkb.gz","sha256":"c25340d6aafd0880ddb00f36c185ec8694e9180b1b1e6a71a57f40d39b88d127"},{"bytes":12501,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/636eeede1bceed2d999e5be2.wkb.gz","sha256":"48ee6586195ac7ecc8d100ee74eaa2612d533c4fa2f13b1ec9f7df8fe9df8c9a"},{"bytes":192881,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/644f02ce388e5080fb79e218.wkb.gz","sha256":"4bf66d752494b2f58bffedfeae92729bc4205c8bfa26f27ecaa14db2b59d7a2e"},{"bytes":152149,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/67ab243b46aa814a4c5a997e.wkb.gz","sha256":"a32d2437729f7a01302a5c14926e7077051d559699f8a83f890918e4666d12de"},{"bytes":56996,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/6887855012f6a825eab6c2cb.wkb.gz","sha256":"93a567026f6c1a1fa126e1d4ddf50bae453a775ca8a63611fa5d3d603e2f48e0"},{"bytes":69386,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/6a540b3b59792cb9337a9611.wkb.gz","sha256":"75bade8e156fe70f64cc9e798ba4b3155fce6ae89d0d58eaf567492685382177"},{"bytes":101224,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/719a3513ebb87543145a527a.wkb.gz","sha256":"3d44e4db07b91e387e007386bb7fbc6e4defa558730b4d4f852fdb69348d0a97"},{"bytes":109064,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/7333d57f427d8a9a4a12ac18.wkb.gz","sha256":"e74a7f4bf762f8816172c4b77801c646a94ef1b3995571f80adf80df76749605"},{"bytes":230590,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/751f9e25f5054c56330b8b00.wkb.gz","sha256":"5c92f3b182d13f5cadac781c9a059d16c68be546a04c3ca1f952a1920f815b74"},{"bytes":526712,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/75c9546622c485509f033f90.wkb.gz","sha256":"81503c05623b0429524af4dd8666e11949f4cef7f193b462c61ab5d821158aed"},{"bytes":44766,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/76626be49b0d504492c34242.wkb.gz","sha256":"9d3bc0c615009ccc102f5340975a7d21b5c25a8179159585e3c3e808dc568126"},{"bytes":29317,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/7dd8abdc943fe9f05c8d00f2.wkb.gz","sha256":"d63cdff5398ed42db3f6b122a9899e539a433508b375cdf721f88e9afa719005"},{"bytes":24107,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/7fcc4b2844c8e3f3673f4fdd.wkb.gz","sha256":"6c60e461b70199934f0ffff627f044a65eb0e494efc17cc9034b1701c252e7cf"},{"bytes":188474,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/82d6c327f14a1fa46889cebd.wkb.gz","sha256":"8053b8aad69581bb93b439a7b31e6099308cdab3f975a88e074589f79dbc9820"},{"bytes":1020753,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/84b6c76cc3f412d3f9d39048.wkb.gz","sha256":"7c314737e94269a0210bb9def2dad83dd5c770a049e36eca4b2b6c3105ef4eea"},{"bytes":7055,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/86928143b9dcaee8e244c250.wkb.gz","sha256":"3729440e76e4b7fc03dd2e2fc5b361ca6c2dd1be470ac792266a2966ac8beff8"},{"bytes":120402,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/8c068e69d72772d0ca4ca9cd.wkb.gz","sha256":"58fe26de04e1c9ea736b8404592b68cc58a5d0f9627bc0bb31373aad7189e1d4"},{"bytes":38734,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/8de96da8e80b52f1d2a28a15.wkb.gz","sha256":"9f85f6e32625442090b369cfd2106c5f02c2701de5a5c5718f3106d8e0d5a859"},{"bytes":102398,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/90feaf0eb943748d063b3dcd.wkb.gz","sha256":"3db5d1e3b688b0415a8b603d6386f911753d2909ad5d890b3de414a99d14df21"},{"bytes":13310,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/918fa6e31c849f59443db8d7.wkb.gz","sha256":"1823e237a41348b84b1dd97cfd39e319550e8557ebbbc514e3cf6a6c7ca9ac5c"},{"bytes":58638,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/91b201752251c50e4f442c66.wkb.gz","sha256":"2a6821f5ab99939289b17f13087899c74b28fa904d48508918694af782375e59"},{"bytes":15704,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/95a7347a5eec17da6d51a754.wkb.gz","sha256":"0408bc95c643a9df6ea8af8d3e13a868b60397f9e8cb22d15cce2e0270cc7e2d"},{"bytes":22564,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/96bf159c9e9165db5cf2d87b.wkb.gz","sha256":"ae37bcd61fa492000a17cc81123578b0c31bc017fe6b30b6ff1ceac4af0b3bf4"},{"bytes":136259,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/974cc743db5d5c1aaa01441f.wkb.gz","sha256":"38f10f25b4cb6f666693a6c7f91a6f492bb15f20b40eb20cce3bb1dd35dd000b"},{"bytes":29154,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/9b93ca66446c91da9775479c.wkb.gz","sha256":"46131f6b637a353cfd8751226d8e57a176a798a978498b316456dccfaa5b9e11"},{"bytes":252835,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/9d844e80b525b93707203796.wkb.gz","sha256":"eeb01c6a863aee093e5094603de5cf42ceaf2d3ed53082a07abb1c0744933191"},{"bytes":29223,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/9dd0e201340f2b60ed727822.wkb.gz","sha256":"d1219ed7daad90c32128f6ff52185dc4ed4d86442d189a53c82b658844f9b1f0"},{"bytes":1407715,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/9f5302e899072611aac20193.wkb.gz","sha256":"06ccdd89fdc8a9c4541d9326a4f42de5dc3716bc2492d99716dde60c0addb948"},{"bytes":300026,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/a0f907b09214eecf722ce7ca.wkb.gz","sha256":"6f3d33d48895a46aa0abebbfe0e3c63c9b0deba0e4a096f9b965684f48281ee2"},{"bytes":12336,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/a4db81c23eb1220bbf539360.wkb.gz","sha256":"3201b99b983ff50dc324c8ad9e253217cd57d606c62bd21d192eff821a9d2255"},{"bytes":67304,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/a62b727de2e842a50cf647bc.wkb.gz","sha256":"2d542a7a242cc623a8efde962828dc4b499128f3ceee040fb17100ffe63e9dd4"},{"bytes":29362,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/a7a964d6d528f93b0b1f9a43.wkb.gz","sha256":"c43cb5bf300a014880d5cb815018eb71008aac7aea9974b380c9569f620649be"},{"bytes":295021,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/ab28cd86bae533f0226739a4.wkb.gz","sha256":"bef34ef1f5543ddc395e63880e818591fbc8aeacb690c3106b0c6c712f94df66"},{"bytes":180600,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/ab452d725a14b24b49de331d.wkb.gz","sha256":"aa3997957fd4bdf70efe2dc977e83777421d3eec1d52dfc3ff7f74f700bb9f9c"},{"bytes":293267,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/abb0e6d6c8617464a0fde92f.wkb.gz","sha256":"cfc7389862f7591df265fb04e4f390732c6e2f36b2b1b8b2afad45ba8f21c016"},{"bytes":4698,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/ac7c994418c29fd98eaf7b22.wkb.gz","sha256":"61c147783de250455e52f0364e0c35d899efcbc95bef2550c9314be4ba4a2827"},{"bytes":26007,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/acfec2d6272448a220c38096.wkb.gz","sha256":"62ac4037071b0e9c5bac1f84f43cc2583d692674888b1a03d9069ad663f1949b"},{"bytes":132399,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/b5f25df45b570ffc553e6915.wkb.gz","sha256":"37c4a4711a62f69b8b6bd18b2cc7f739b36c1f849bb192b04ecf1092d9ca6797"},{"bytes":6409,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/b7e8d863d3b6adfbcb927dbc.wkb.gz","sha256":"f39863887d25e01d3af0a40c0d25a9f6380cae6fcba92fe77b91c23cbe306fe1"},{"bytes":215943,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/bc0e01cf2441e3f92d51cb77.wkb.gz","sha256":"34ea9d9d2fb5041d2a55bd1fc75496c32e78895850b515703bfaa3798428be92"},{"bytes":202809,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/bfa3e6abd7a02d38ef79fcd4.wkb.gz","sha256":"e77905b00e801a89657116d708df0a72f7239f009fab5524b97436d466d7e09f"},{"bytes":245680,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/bff0c0f546ae714a8e799fb0.wkb.gz","sha256":"14cc2d5c19efefc69993138978389980bac7e742419c7240fb614e814d2fd017"},{"bytes":202766,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/c34c32c0967b3773bafebfc8.wkb.gz","sha256":"3e7babcc3f707f2b2cd261e898f7b9f7547e86295cb5e670845bfa637b44ee59"},{"bytes":76140,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/ca938522370ada2f4eaca2d7.wkb.gz","sha256":"4009d6e64e4e90d16c97ac879c8accff75b1828b3099da53df1d4f7bc161810e"},{"bytes":37983,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/cca4d5c359f6a653b9299298.wkb.gz","sha256":"8d219a459ab1cc50c0df042af1b8588ae6671acd3de32856fe46801915d81805"},{"bytes":159146,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/ccc2c8b461b0258ecd0a344c.wkb.gz","sha256":"cf15d5ef8a69c2ea0da8a3e61b198e665771f3cd1925c119ba5a68aec5238a7b"},{"bytes":211145,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/cf99b415a8625b8537b183b6.wkb.gz","sha256":"e55891b85333e615e99d2caf23b1e2ee20a82be1c397e39d48ac70cc1682f8af"},{"bytes":49316,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/d21e7ce362218285ee16bad7.wkb.gz","sha256":"e4a424ecc37f49259bafae07deb04bfd86b9fa31d7f6e1bcf439ba7206a55b05"},{"bytes":180600,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/d22db6e1f4c00514378a5e42.wkb.gz","sha256":"aa3997957fd4bdf70efe2dc977e83777421d3eec1d52dfc3ff7f74f700bb9f9c"},{"bytes":814090,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/d369f7bdfabc967b2b3a38e0.wkb.gz","sha256":"bb4ca22f2be286b0ca5cc416ea16f50a2ec73150098f04422e39b06901a0e8dc"},{"bytes":1570020,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/de1dc455985d3dbf178f2f73.wkb.gz","sha256":"6e585e46eb958772997f0dc7cb9efe7d4f1ef0452c9d94a572086f4863def3d5"},{"bytes":35189,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/e0e0275941368e1df5d4c8a1.wkb.gz","sha256":"7234347fcc365edd60640aba756cfb003c3c6b3a462269c989a0f2147c3b4771"},{"bytes":20663,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/e30d0f20ec95d9c5dcb03d05.wkb.gz","sha256":"a7693ce34c1b029be01a7544245dc7bf7e586bf5bc7d71edebeced8d6f0d2c35"},{"bytes":39730,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/e33744a6cdce105ffa60cf1f.wkb.gz","sha256":"ec8e1461e1463772515e6eddfd8809474240f7883a81637182e7a61129932d92"},{"bytes":55756,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/e4fe147df4fbbdfea95fb35b.wkb.gz","sha256":"9c39edf4050d44b9419b33a1f061a460d26aeb821ffde71b26c67238bdb58f03"},{"bytes":323266,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/e60bfe5fc3cf3a709e174072.wkb.gz","sha256":"613ea2e16ab3fd0811b9726b485a14653197ffc6bae8acf2ef11d780ef95e5af"},{"bytes":117765,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/e6696c43542aadb565523c7f.wkb.gz","sha256":"6d1d223955d861f574845c48fb8b3970b5149b7635f31a6e5cd0b9b3a3b64443"},{"bytes":117064,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/e94821815f86eedc7151f620.wkb.gz","sha256":"da33233d0046880a5dfb84b8edda851042164e22aae95be832cb5fda27b54d22"},{"bytes":1688,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/eba468342f42eb16b622758d.wkb.gz","sha256":"3bf8182c48fe7a7bf412e26f49b0909b1a20108cf48db3e213de60463f8f20e0"},{"bytes":23879,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/ec319f7c8391385a2fcbd84f.wkb.gz","sha256":"0854f1fb4882e37e1fa4c38f12196ee6a489e2e6d05c7024e0afd3958ab28372"},{"bytes":1550919,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/ed29a7ead30c3407af31e5d3.wkb.gz","sha256":"4a6df8bd3d22644e5594bb02708603a6ce052c349b04b33f2f27c31e691be6c5"},{"bytes":98129,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/ef7b5d03e3eee94aed429c92.wkb.gz","sha256":"80783ead8ed78999b13fcf2d8fa7a4475e65b0159b2098ed35cbe32a0f00e5a6"},{"bytes":80476,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/envelope-index.json","sha256":"36b9ff669ef5d4a29eb459b7147dcf441fbf571dd7091972369b90569a50d366"},{"bytes":81362,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/f1a9ed09567c1cbe4887bec3.wkb.gz","sha256":"ffbfe49623dea77b4d0b97e98a83e04d4285259e8311b68562901b086537cd85"},{"bytes":107951,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/f54326c4353c94a73dd4d177.wkb.gz","sha256":"815bee0758423b7f18e876431e8eaf2f2346b92e5454fbc235d69ee2ea293330"},{"bytes":38282,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/f625f5584e92b6c9e6b0a718.wkb.gz","sha256":"a6c79f2b158cd7e5677c4a2dabdba5e80feb387dcf5401e9283d9ed1d25e4700"},{"bytes":30989,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/f79c8bad46c32b4e711c692e.wkb.gz","sha256":"ab5414fa8cdd5fbffcd3514c981861b7059d0bf40f92e3d0164193224d38e4da"},{"bytes":145229,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/fcbcdc6eeea3e57390f49921.wkb.gz","sha256":"49db9f2db4297468b2cdc2ffeaf9663ae1777a47137f5a5d673eec922c6e1372"},{"bytes":57781,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/fefe4c4a408db5e787bfdaf0.wkb.gz","sha256":"5c5ad2ea2702013bfb643ee5d8e52ffb506afbbcc88c9505c99ed74aac4f53b1"},{"bytes":738,"hash_kind":"file-bytes","path":"data/macro-foundation/envelopes-v5/independent-verification.json","sha256":"793ff1ef774bace9d72f0ca247bfe5dc4154c49a958544fb45b3c5b6ad039c33"},{"bytes":38430,"hash_kind":"file-bytes","path":"data/macro-foundation/macro-certificate.json","sha256":"979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"},{"bytes":1038680,"hash_kind":"file-bytes","path":"data/macro-foundation/migration-areas.json.gz","sha256":"5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468"},{"bytes":1288372,"hash_kind":"file-bytes","path":"data/macro-foundation/migration-regions.json.gz","sha256":"09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f"},{"bytes":1380517,"hash_kind":"file-bytes","path":"data/macro-foundation/migration-repairs.json.gz","sha256":"290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937"},{"bytes":70253,"hash_kind":"file-bytes","path":"data/macro-foundation/regional-handoffs.json.gz","sha256":"08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1"},{"bytes":88275,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/administrative-sources.json.gz","sha256":"009f30e16f2dbd81a1b4531b812637c7866afdea511f8843b213f211443c651e"},{"bytes":5955,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/coverage-report.json.gz","sha256":"9c793684f650e4ea2cbb6b427f51334f6f454a641c10c763b926a837a658599e"},{"bytes":1873475,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geographic-decision-migration.json.gz.gz","sha256":"d7ff560170ffa5de42e6633b30bfccfc00a18c891d68d1cc687ffcb01671752f"},{"bytes":429711,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geographic-decisions/africa.json.gz","sha256":"f067db3deb86c1b2e4a8439ab4ad675897545a4ddcae19b102a33a6284816a29"},{"bytes":926385,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geographic-decisions/asia.json.gz","sha256":"ccee8a61c8e2c62864c0c01b305e67a050d61b010192db9bce2af09ceebb36b4"},{"bytes":634668,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geographic-decisions/europe.json.gz","sha256":"7f60003c72784b65b58f2203e480d452198da5f0d05f53f5808adabf185dc457"},{"bytes":894293,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geographic-decisions/north-america.json.gz","sha256":"76a7949ec42394de13a4f3c69ea8feb1eaf8ff72b1471f6ff3fffdb3aff765c2"},{"bytes":209115,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geographic-decisions/oceania.json.gz","sha256":"5be4e666cdf4a94ea99d856fa98c0993b020e96be19dea3a6be79babf633cfb3"},{"bytes":239746,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geographic-decisions/south-america.json.gz","sha256":"7117701cfa8b1c3eb73d8106664100fae4f42bf2338b9fd1f1b269b0c1e14778"},{"bytes":10767982,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geographic-migration-archive.json.gz.gz","sha256":"68150c978d7f9891ddc69084c2074d3ba373f61ee3b45af4ce06f46e8c46460d"},{"bytes":554130,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geographic-repair-evidence/migration-receipt.json.gz.gz","sha256":"5d911a29ca37473632da37464adb8842e362d8a6d7c9faf6ced06ca0942276b3"},{"bytes":1736544,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-0.json.gz","sha256":"3fb6eff6ff2c53a09ed804ba385fdbc5d3858eb2efa223788354eb8aeaa1d690"},{"bytes":1419831,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-1.json.gz","sha256":"8177314b1b7dab1794597cb60970dba57b7dba41b86d7578edf6936c028472ab"},{"bytes":702510,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-10.json.gz","sha256":"3f243dd9b6cb06d370261a30fcb0646445f05126fa67fbf1b62d2403e67d2885"},{"bytes":741108,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-11.json.gz","sha256":"52d0e7e2bdb0deadb1c13d4e851a058e3d2f1966bbf2cb3a5c2581fa7581fc49"},{"bytes":490145,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-12.json.gz","sha256":"924d57919793c8897bc79e959572aaff2bbddd892bb3e3a7ef2c5f906e7408c9"},{"bytes":859894,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-13.json.gz","sha256":"483695dd4fb36235486ffb9b88b549c50f6a735106eb69eb8a19ae796eded5ef"},{"bytes":418430,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-14.json.gz","sha256":"96e25f3937f39cb60c7b65e4961795c50cfac4729fcf692645b455e57442bcfd"},{"bytes":735398,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-15.json.gz","sha256":"b33026f19d28ad5b802c53638c5f29bf4656d95f98b97ad4e37150a6188d7cc0"},{"bytes":757171,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-16.json.gz","sha256":"29cafde588ed9ceb700953d9d5b33eabe4ff439a9bb7920b196be594cbd53f6a"},{"bytes":633603,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-17.json.gz","sha256":"7a142d98e0574433bd53f16a705068b5483bf23df6b8d0f025c5408dc4d5cee5"},{"bytes":682284,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-18.json.gz","sha256":"930ef56f946351228f38df34e354e911c5895babe3bbf7c944fe2deb7fbd37c4"},{"bytes":518401,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-19.json.gz","sha256":"f76714d0161007eeed8be41637fbce3c17cf75434e1c18af98ab8a9171e88374"},{"bytes":1056028,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-2.json.gz","sha256":"c71858aa481e93ca6ea73f6c9c391857a2104fd4f5f901012ada90bf346b2f59"},{"bytes":1305613,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-20.json.gz","sha256":"2c8e3049e13f3daad40dbb60e2b1db7cd4d4fd4db972c6551b74360c00e9a88f"},{"bytes":1353599,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-21.json.gz","sha256":"d3f9e4f51ecb422756d8a22f241dd8e9887c13416b9c0e45ffd4926aa9c1e200"},{"bytes":571831,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-22.json.gz","sha256":"6903e41ab108ab9b4c254fa2a364444dcf358abcaedaaf5e4d2954ff6a32cee0"},{"bytes":685039,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-23.json.gz","sha256":"1fa5ac63b461ae76d8f7c15423016fb90ec1d8de268373b16d99d62ee27c32e2"},{"bytes":620143,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-24.json.gz","sha256":"4298f27bfcfd06f25767a224c45fbcd300a4d2eb8b7c3e5f5d9fb6347e2530c9"},{"bytes":535127,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-25.json.gz","sha256":"3cec777cba1460e18126aa6bba1a1e9dc28e11dd6987c8b1a846affdd5f2a967"},{"bytes":600665,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-26.json.gz","sha256":"c4fca920e097302f805565c0c4f896fd6155253c5fa0177c42c5a85ba543cb7b"},{"bytes":664865,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-27.json.gz","sha256":"c9c7ba48dea1642e77901c68ccbdcb6a2274ced3196ce16dea6c87ada91bc161"},{"bytes":1017626,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-28.json.gz","sha256":"88247fdd5b9f3d9a366740aa09495b183da6f08eb8a51e1bdb5fce2d6007b1f2"},{"bytes":3353589,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-29.json.gz","sha256":"10dae020b8ad3cedbec7d2ef172bb9e17aba7e2c31219bb03f1c29f5e652f336"},{"bytes":737242,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-3.json.gz","sha256":"40b0ea3424a3926c975d76fdd12a79318eb4d8ecee69726b08098a260302db79"},{"bytes":3395647,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-30.json.gz","sha256":"b3bb68c997ffa30d30aaf03e47414334c49fb6bc7179348a1359753c8eee4cf2"},{"bytes":3245133,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-31.json.gz","sha256":"3e37d5db5cab60bd6340d59a97cbe19068172137a7ac774e5895af6e8c2e1ae8"},{"bytes":3293251,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-32.json.gz","sha256":"030528332895b96e674aa6a6c3e367409fd519c01d44b05ef03f79ce7e3a8230"},{"bytes":197148,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-33.json.gz","sha256":"f6275d1680e84d0a75cc2b487afaeb268d597418c69c57c8042681afc03b23ee"},{"bytes":639932,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-4.json.gz","sha256":"a556d5902fd30fd33f3eac05120d3fd48c8020ee58acb0847573fd7ce84be4c5"},{"bytes":747191,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-5.json.gz","sha256":"a2658693370fba432722322dd711f1c84d7fd999c67cd54b4d54e9350046acfa"},{"bytes":519997,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-6.json.gz","sha256":"71c759cdb7629964442d377d5c36e8093a6950b6f198300a897fced9a8a278c6"},{"bytes":432270,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-7.json.gz","sha256":"a1021774ad43be54f9e9c770592f22b8488154f0a4068da4839857470d964c9c"},{"bytes":718905,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-8.json.gz","sha256":"53fc43108151ef00e617a14401b6b7d622c588a0e24628be0f22fa62fc097047"},{"bytes":948867,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/geography/part-9.json.gz","sha256":"91ef23b9362a44ead24f76fd00a348ab97602a727102f391e0d0c68a2effbc5a"},{"bytes":160640,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/global-refinement-report.json.gz","sha256":"97bb2e25183203fd00b803700c8fb49c6b1d44c2aa50fd4132177ca93d0d744e"},{"bytes":8589122,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/global-semantic-closure.json.gz.gz","sha256":"18108683b643faf7ed0eace41b8c5ff7ece0ab7a1da743ed2b83dd5889edb1f0"},{"bytes":843,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/global-sources/IND-ADM3-metadata.json.gz","sha256":"0203aebd56cb4c6767e7cc02d866466e24c0bed4e489561564737e6fad5d4e87"},{"bytes":13798502,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/global-sources/IND-ADM3.geojson.gz.gz","sha256":"391526fcff36129e0498150f8f01a9f544f65569cfd94dcf933445a90a9b82c1"},{"bytes":485686,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/granularity-review-evidence.json.gz","sha256":"4af0ea61007b9e7d5451e7dd02495c9dc4ae6d2275af482b11c3c190e18704fd"},{"bytes":556710,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/hierarchy.json.gz","sha256":"2ace63bbb1531e9b3237fc1241c5b85e11652e794c6d3327e1ab14b5daed967e"},{"bytes":5409,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/location-policy.json.gz","sha256":"6e48d8174a01eae95700292ac27c4e607642c5db3769275a70c798e178b4d2c9"},{"bytes":1104829,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/macro-boundary-decisions.json.gz","sha256":"640d643a3fb9d13db5fada59eaaec2b37eded4b3e42743480d954fe62983480e"},{"bytes":1143574,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/macro-boundary-migration.json.gz.gz","sha256":"48f89dedb5da2c65fd71082367abf384c25b7c47fceb8bcd1955f9504851e537"},{"bytes":36653,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/namibia-source-quality-annotations.json.gz","sha256":"c3d4464168e671c15ebdc3ee5e2bb6d7650c2b1924077b2d82dca1e64df3ccd6"},{"bytes":96366,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/namibia-source-review.json.gz.gz","sha256":"2c8dfbe28813bc1d98be1e21b9fde69cf5e76b6c829dde1ed9677e8fb9b1932d"},{"bytes":2679084,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/pixel-audit.json.gz","sha256":"d253e60df5e65210a02d23baac955dd0cd8571924f88d6c90492eebd29659554"},{"bytes":28862,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/coastal-concordance-receipt.json.gz.gz","sha256":"e7c3d2271171c2e4dded680aa9cde09a9fd08bf1b076ddf447ca3b1e97ce486e"},{"bytes":3241,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/manifest.json.gz","sha256":"71ac7d75f7d1ed5992893f6a983e839773f6ec2423baee33017bebbc8b3788ec"},{"bytes":72095,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/migration-receipt.json.gz.gz","sha256":"3b60311c09add96e039a86f16a71760161adc17f263e47a01fecea7026e2be81"},{"bytes":3570430,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/natural-earth-land.geojson.gz.gz","sha256":"2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68"},{"bytes":1058045,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/semantic-report.json.gz","sha256":"89c63e0f28b93574551c16211bbad1bdac9da9fb34bfbdac70026f1eb425c177"},{"bytes":1856,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/semantic-sources.json.gz","sha256":"e24a863eff91b7cb2916400b2d76e3ad37f12f5f4c2894f0306a5e6506165df4"},{"bytes":144,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/world-index.json.gz","sha256":"8cd86d2b6d64fd5dd31c4fe394d000a1287a2ec5032fb1733a858895e191322f"},{"bytes":824361,"hash_kind":"file-bytes","path":"data/macro-foundation/retained-inspections/world-review.json.gz","sha256":"41f494b222f12eab9329ba0e4a8c16cf61ce9d39a4cadd86af49ef9cc0339e7a"},{"bytes":2110,"hash_kind":"file-bytes","path":"data/macro-foundation/review-index.json","sha256":"237d877207c62867b2600279c62930e6b305346677807cd6a6e950c614e6301b"},{"bytes":38603,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-0.json.gz","sha256":"85f026beb8921304e02a1bdb69a5b22bbc791b5f15645b4c8afd5922e225bd00"},{"bytes":37793,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-1.json.gz","sha256":"7d827ff1f3d48036851c8ad40b72c04814fbdb91522d66c6983ccc54482c141f"},{"bytes":36278,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-10.json.gz","sha256":"2fa78c20771a0fd7eb8b8930fef8dd5ab63f232d9d3448cc5da9b70a59f30bcd"},{"bytes":35752,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-11.json.gz","sha256":"2d66ef4e0809e6c6cf5522f53c192de1ae86552b9a8021757a1b472462027df0"},{"bytes":30457,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-12.json.gz","sha256":"ca2e35b7fcef4d22cfbdd383b0978d48fe98408dcdd0bebfcf3694751db0d452"},{"bytes":41191,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-13.json.gz","sha256":"e9c7b2fdf145c77afc8f3bdce8d1d2713c63c995b515ba135c88ceebfcf7b8e0"},{"bytes":32925,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-14.json.gz","sha256":"66e353a33276d2d9014296f3552f2da07ed01725fe0ce8387cb4d57318a9fe6e"},{"bytes":36025,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-15.json.gz","sha256":"794c7a18628630cb90d790f3da8443e577a37a429cbbe91bf5accd0f8600ecae"},{"bytes":37084,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-16.json.gz","sha256":"eb0c0b291c7449aac166cb0e23ed9dd2b4ccae6297dffcb1dfbc9989ac687a84"},{"bytes":35925,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-17.json.gz","sha256":"8aef6f74c66131540f88003903209d53eb1a1bec403d2e214b3c2c8c89380ca8"},{"bytes":41056,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-18.json.gz","sha256":"b6355dbec8a0bfb862fd759ef7566d33449f97e0ba81834fdfb389cb30fc14fd"},{"bytes":39707,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-19.json.gz","sha256":"00f036d1546384230edde42e268a9eb55ebc257414cd634c7b6474ad09184e03"},{"bytes":44475,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-2.json.gz","sha256":"3560062a53bc8ccecfcbc74d090cd8c64381b698950b3f2aae7a9365e05c7043"},{"bytes":50664,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-20.json.gz","sha256":"e699c9cc39848858b3c0d553d234b2e8353bcb15d4225367b65a774dde5765b4"},{"bytes":50407,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-21.json.gz","sha256":"4330a88dfb5899c2e00d592e6731e03d7c351ccaf9c77d6866ddd577331f0c16"},{"bytes":38071,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-22.json.gz","sha256":"a31ca5da3791f15a2edce1527fc13e6119583410107dda3571d4e97191c8d08a"},{"bytes":43253,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-23.json.gz","sha256":"6f2c3a2fb3d611cf6da32f05168b2a5f4dea8f44a5daad956f1682c11c794f50"},{"bytes":44111,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-24.json.gz","sha256":"c1ee208cead318c3cfafd6cba149703e9029b7014dec5aebc2b24a83fe2949d8"},{"bytes":39701,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-25.json.gz","sha256":"bd14849b90a012b2f6779eec5ffe53e0db215f68990c96fd944787ba53658ab0"},{"bytes":41479,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-26.json.gz","sha256":"f3e761cbacbeec530d289d955e018e5993156af3ac05edc985a7d1e8e74a36b2"},{"bytes":40205,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-27.json.gz","sha256":"f6aa2faed29fe617de1dd7d2de9ef34bd995465fd6764c462f9b81fd6aca0409"},{"bytes":48367,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-28.json.gz","sha256":"20747e7b992c88920918aa5f589f841edcc1007d270c46af5a4122247028a215"},{"bytes":42079,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-29.json.gz","sha256":"0d92e1af6b8ec2708d0642a27fb409446fd7f4f7f2ab703603d0e09de91bc9f5"},{"bytes":35861,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-3.json.gz","sha256":"76dc4e01be806585442e5706f6c45eadb402f588790922a1d6cec1bc28915707"},{"bytes":40307,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-30.json.gz","sha256":"0dcf574e08637c2e500f88187fea7efc20ce19a4885a0c9f271420d1a21cb2f7"},{"bytes":45255,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-31.json.gz","sha256":"ab57d060ae24825b581f70e839851eeef70e73f2833aaf4df12cbf986803fee5"},{"bytes":45825,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-32.json.gz","sha256":"3627dea486c9b1d7bd1e4cebc492d6efe4392498ba67be4b029f325235d4ffd5"},{"bytes":6342,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-33.json.gz","sha256":"a53bc08472686b02612ac3c2313e26fa82667e644a861916d66e07c45dfc57d5"},{"bytes":38700,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-4.json.gz","sha256":"e3f9c15278f88c47e9106924fb3f20e05fc28a92760c46c13b35448b9ef4e50e"},{"bytes":36676,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-5.json.gz","sha256":"cfd3fe065557d62f7075b6d2c5ce9203894500641a9fe9d1f5445228c6e4f810"},{"bytes":36853,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-6.json.gz","sha256":"b7d34bfb646186ecaf767b2627c3ce9fbb94080234a2b1204e448ae0f23d7328"},{"bytes":34439,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-7.json.gz","sha256":"504822f9b1623d343ae3d8e9fc8897ed14f725dc2f15f6ddbe95f1142c6946ed"},{"bytes":39907,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-8.json.gz","sha256":"45f865ecb51b70bfab978f4f01c02cb1fbdb2155cd6d84c2143d33a1bdf089b6"},{"bytes":39845,"hash_kind":"file-bytes","path":"data/macro-foundation/world-review-locations-9.json.gz","sha256":"b262cea2579288cc3e9815703567e05edbfe3d8b6ed3df6a36a5b6779dc5a10a"}],"pin_files":{"hierarchy":"data/hierarchy.json"},"pins":{"hierarchy":"03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d"}},"change_receipts":[{"path":"coordination/engineering/hierarchy-install-20261003-a9c2/partition-09.json","status":"added"}],"commands":["node scripts/validate-evidence-partitions.mjs coordination/engineering/hierarchy-install-20261003-a9c2/partitions.json e9aa7c1da6ae6c2aec1c1580f4b0265110d6f6f2 HEAD"],"conclusions":[],"issue":6,"lane":"engineering","methods":[{"description":"Immutable original data and exact candidate/preservation file bytes; no fresh source inspection or geometry measurement","id":"whole-file-partition-accounting","kind":"code","software":"Node24, Git2.52; trusted existing premerge whole-file validator","units":"whole-file bytes and exact changed-file inventories"}],"metric_bindings":[],"metrics":[],"outputs":[],"sources":[{"id":"monaco-frozen-support","license":{"status":"unknown","terms":"No new verification of primary-source redistribution terms"},"limit":"Full primary bytes were not newly retrieved or verified; matching archived receipt is not new source approval","restoration":"Use canonical URL and original SHA-256 c23e34be7ab80def14f1c157ec7e278ffd3da9d648fc6d36500021dd18573f47; retained receipt and extracts are in the immutable source-proof archive","retention":"restoration-only","retrieved_at":"Unknown original inspection date; frozen receipt reused","role":"Reuse of frozen proposal inspection and taxonomy support; no new primary-source inspection","temporal_status":"reference","url":"https://www.monacostatistics.mc/Population-and-employment/Population","verification":"unverified","vintage":"Unknown reference-page vintage"},{"id":"luxembourg-frozen-support","license":{"status":"unknown","terms":"No new verification of primary-source redistribution terms"},"limit":"Full primary bytes were not newly retrieved or verified; matching archived receipt is not new source approval","restoration":"Use canonical URL and original SHA-256 14722ec89f2db5a61cb931af3ca1201bbe09f8a24f8b866864308711bf083b49; retained receipt and extracts are in the immutable source-proof archive","retention":"restoration-only","retrieved_at":"Unknown original inspection date; frozen receipt reused","role":"Reuse of frozen proposal inspection and taxonomy support; no new primary-source inspection","temporal_status":"reference","url":"https://gisco-services.ec.europa.eu/distribution/v2/nuts/geojson/NUTS_LB_2024_4326.geojson","verification":"unverified","vintage":"GISCO 2024 labels"},{"id":"west_virginia-frozen-support","license":{"status":"unknown","terms":"No new verification of primary-source redistribution terms"},"limit":"Full primary bytes were not newly retrieved or verified; matching archived receipt is not new source approval","restoration":"Use canonical URL and original SHA-256 4c90d0f805779923b5958ab13d0c1e9b99fe4932b786bfcf75dd739bb2dcb4ea; retained receipt and extracts are in the immutable source-proof archive","retention":"restoration-only","retrieved_at":"Unknown original inspection date; frozen receipt reused","role":"Reuse of frozen proposal inspection and taxonomy support; no new primary-source inspection","temporal_status":"reference","url":"https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_counties_national.zip","verification":"unverified","vintage":"US Census 2025 county Gazetteer"}],"stages":{"geographic_approval":"not-requested","implementation":"implemented","research":"partial"},"subject_ids":["atlas:territory:LUX","framework:area:belgium:3a14f80912de","framework:area:france:a85924a668ef","framework:area:south-atlantic:383dc695ee31","framework:continent:europe:d247cf0382c8","framework:continent:north-america:1ca27616f338","framework:province:luxembourg:18736e14a46e","framework:province:monaco:3f032987f814","framework:province:west-virginia:4c9dc6438fb1","framework:province:west-virginia:8d71dccb3165","framework:region:france:5800d29ad327","framework:region:low-countries:ef8aac563ed4","framework:region:southeastern-north-america:8606d9313330","framework:subcontinent:northern-america:477e054b32f2","framework:subcontinent:western-europe:78359a068737","gb:MCO:ADM1:64170238B96397749018979","gb:USA:ADM2:52423323B11034045930208","gb:USA:ADM2:52423323B11679801882970","gb:USA:ADM2:52423323B12346389629957","gb:USA:ADM2:52423323B15878537434027","gb:USA:ADM2:52423323B20153460814432","gb:USA:ADM2:52423323B20661288428578","gb:USA:ADM2:52423323B25764117522336","gb:USA:ADM2:52423323B25945038003590","gb:USA:ADM2:52423323B26366836110936","gb:USA:ADM2:52423323B33103452466662","gb:USA:ADM2:52423323B33897242247324","gb:USA:ADM2:52423323B34331419978033","gb:USA:ADM2:52423323B38725266060317","gb:USA:ADM2:52423323B3909693217248","gb:USA:ADM2:52423323B40948344382012","gb:USA:ADM2:52423323B41320472934354","gb:USA:ADM2:52423323B42604268610019","gb:USA:ADM2:52423323B4598026966549","gb:USA:ADM2:52423323B46125568158444","gb:USA:ADM2:52423323B50280132213265","gb:USA:ADM2:52423323B52249566061450","gb:USA:ADM2:52423323B52467721983842","gb:USA:ADM2:52423323B54631605576846","gb:USA:ADM2:52423323B5491062021633","gb:USA:ADM2:52423323B57227044271889","gb:USA:ADM2:52423323B57461301326035","gb:USA:ADM2:52423323B57989185183638","gb:USA:ADM2:52423323B5856421301049","gb:USA:ADM2:52423323B58976878899916","gb:USA:ADM2:52423323B60388203244476","gb:USA:ADM2:52423323B60686531636314","gb:USA:ADM2:52423323B6396533628849","gb:USA:ADM2:52423323B65894657308494","gb:USA:ADM2:52423323B68405193247376","gb:USA:ADM2:52423323B68684722164969","gb:USA:ADM2:52423323B69040166298082","gb:USA:ADM2:52423323B75568598191549","gb:USA:ADM2:52423323B75939807173919","gb:USA:ADM2:52423323B7608652803448","gb:USA:ADM2:52423323B76840765500257","gb:USA:ADM2:52423323B78270191990376","gb:USA:ADM2:52423323B80125448855540","gb:USA:ADM2:52423323B8286082646213","gb:USA:ADM2:52423323B84161084981084","gb:USA:ADM2:52423323B8788265291879","gb:USA:ADM2:52423323B88049032816505","gb:USA:ADM2:52423323B8866433924767","gb:USA:ADM2:52423323B92436746543107","gb:USA:ADM2:52423323B92810723022210","gb:USA:ADM2:52423323B93118909799031","gb:USA:ADM2:52423323B9322907823760","gb:USA:ADM2:52423323B93736628655391","gb:USA:ADM2:52423323B94363624376264","gb:USA:ADM2:52423323B94765650307580","gb:USA:ADM2:52423323B98686556304420"],"subject_ids_sha256":"403b4f2eee7d4e37d6d148e718b9d8fa736912da53aaf816804b4e167680a0e0","summaries":[],"version":1,"worker_id":"engineering-hierarchy-crosswalk-a9c25e14-20261003"}
+{
+  "baseline": {
+    "commit": "277b8ecbb3199ae3d5fb07bab96353d17a049b1c",
+    "files": [
+      {
+        "bytes": 10165703,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d"
+      },
+      {
+        "bytes": 133794,
+        "hash_kind": "file-bytes",
+        "path": "data/hosted-catalog/batch-98.json",
+        "sha256": "2e9ecb25cf974b8bb3530ceb1f252d46e745813e405aa428f832d9d2fd504d2d"
+      },
+      {
+        "bytes": 133794,
+        "hash_kind": "file-bytes",
+        "path": "data/hosted-catalog/batch-99.json",
+        "sha256": "2fe3b3239e155c6ff2252024974796edd7e67b6291644d3274567d6d3dedd8f7"
+      },
+      {
+        "bytes": 76218,
+        "hash_kind": "file-bytes",
+        "path": "data/hosted-catalog/index.json",
+        "sha256": "ade11c54ae041f48c305b79223bb5b230db608b2bb0ee1e8a74edd1bc54f6d2b"
+      },
+      {
+        "bytes": 1164931,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-boundary-migration.json.gz",
+        "sha256": "cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5"
+      },
+      {
+        "bytes": 839301,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-corrections.json",
+        "sha256": "da5b8611a06c4d36b7f0fe8b1d54ed34eb3ca7493476ab8233a7e0e75c06f7b3"
+      },
+      {
+        "bytes": 634030,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/approved-boundary-decisions.json",
+        "sha256": "84a7e8ba1714a66c4fee5453caacbe4d9329f511ce378b8231434f9e2542d268"
+      },
+      {
+        "bytes": 2367982,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "sha256": "78e14342a055602a8d42218faab755ab361a0a23b7a2447b403902f66de8e9ae"
+      },
+      {
+        "bytes": 5005075,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/current-membership-projection.json.gz",
+        "sha256": "beb2739a65c67f01a65deab96ebf209a159b257453e156ef590106e1f1c9a348"
+      },
+      {
+        "bytes": 90057,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/01515a7bb57939f47891fd11.wkb.gz",
+        "sha256": "326a4827a22336e7d37e2f7142258f4eec9944d7bc807e394c099ea4ddd6e485"
+      },
+      {
+        "bytes": 11180,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/047e5f618d454a9134a645e2.wkb.gz",
+        "sha256": "fd8d0c3baf4421855f6b3c826bb4e71d325b0e146c50c253675f667c5f462cc8"
+      },
+      {
+        "bytes": 22993,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/0ada3a251bb4853e69e4066d.wkb.gz",
+        "sha256": "f85fda313685a4b9eb3273cad5ebbb614e01791e3fdf9c65990106c0b5fe3ec5"
+      },
+      {
+        "bytes": 55129,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/0b1913e49b43173137a71762.wkb.gz",
+        "sha256": "888e4b030678a49a0c65ed6cc7ec9a98c41e142f4d9cf93d0563e37319feba0f"
+      },
+      {
+        "bytes": 51995,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/0b6598d23d078da75ae011ff.wkb.gz",
+        "sha256": "2062a36cfbc7c44a2b1e43d2984a7164755ee7b98a1794aee3ec203d368cfb0d"
+      },
+      {
+        "bytes": 247745,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/0cba666c096279ca7202548e.wkb.gz",
+        "sha256": "a2249f1562ab5308a7725aef3f63848eb0e27c24ad92661de69d4a4cd91961d0"
+      },
+      {
+        "bytes": 55421,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/0dc8a6b22819f88c54353db3.wkb.gz",
+        "sha256": "71f79f9aaa16ce4adf6f3e5cbb73869ff4fde0088233f83a528efc1130dfc287"
+      },
+      {
+        "bytes": 556082,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/0dc973ed57111c8ece4ec330.wkb.gz",
+        "sha256": "17026c250aa85be246d21e9be50d890201b167b0c1812bbee15b799a9d466742"
+      },
+      {
+        "bytes": 84112,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/1043ed94b3b91b9caac2444d.wkb.gz",
+        "sha256": "41ad556d12928ad8d3531314f3305592c64642e648340d02989b7d7077f43f55"
+      },
+      {
+        "bytes": 4698,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/12ee162909247557465d1bd6.wkb.gz",
+        "sha256": "61c147783de250455e52f0364e0c35d899efcbc95bef2550c9314be4ba4a2827"
+      },
+      {
+        "bytes": 225264,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/13953164c6fc006f9594d6bb.wkb.gz",
+        "sha256": "f2e29b7e0920299cc10e64b665500227a4f436e69a00a83e4eda80e6e121f343"
+      },
+      {
+        "bytes": 136259,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/160cb18e127e95fc0a028b02.wkb.gz",
+        "sha256": "38f10f25b4cb6f666693a6c7f91a6f492bb15f20b40eb20cce3bb1dd35dd000b"
+      },
+      {
+        "bytes": 150775,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/1794fd062e08234e50eaa135.wkb.gz",
+        "sha256": "dbf6d59a9e39ed3237a2e557f636ee62a345c64e6f590c6b54d413d25e825992"
+      },
+      {
+        "bytes": 77870,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/1a4cfa70ff1500cb75d41eb2.wkb.gz",
+        "sha256": "cb16576de0a2545a92f03c249293c2b868e197fc0b4a77b50fb8c3dad8d02e03"
+      },
+      {
+        "bytes": 589071,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/1c414518417b2d0cc7269115.wkb.gz",
+        "sha256": "692a1f97db55cd78037ba60cb5b16ebb03480a8aa66b121f1355e382c7812486"
+      },
+      {
+        "bytes": 44248,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/1f6761ef9746adcef4e18926.wkb.gz",
+        "sha256": "c89881abd46bf78f5b7a7d61439152b567038889a69d7e841cb6376c63ee133c"
+      },
+      {
+        "bytes": 17186,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/20998712dd43db26cdeb12d7.wkb.gz",
+        "sha256": "e9b3af401a31436bc7702257841dc73288a9e49f1326c4b5898369fcd20f5110"
+      },
+      {
+        "bytes": 65324,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/299d1d6003d2632407ec3027.wkb.gz",
+        "sha256": "0f42e59b029f2094ecf8444fa6f932692252209fcce7a6754f9147702b9b2678"
+      },
+      {
+        "bytes": 34943,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/2d9058038127a0dce5ace9e6.wkb.gz",
+        "sha256": "189d04adbf0983c08c0ca099a4fc5032c83e69f778d21ab9939169ddfafee77f"
+      },
+      {
+        "bytes": 21765,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/2dc04f392a0f55331817cb40.wkb.gz",
+        "sha256": "6f7d535252394e8a62b294459dda7019f1306aecf24467e5cd5969117c2079e7"
+      },
+      {
+        "bytes": 7536,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/30d999bee51d7c7e19182580.wkb.gz",
+        "sha256": "883516639b017c4a2859416bfb12064d047ac143859502a5ae7a19c7e1fc7b82"
+      },
+      {
+        "bytes": 47238,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/319b05b6c13f6741cae5e25a.wkb.gz",
+        "sha256": "441247b9ac08b266de4a24c3fbfc6d86478f4f4202e2faf91c44cef9553f5229"
+      },
+      {
+        "bytes": 104092,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/381a8664cf6c8ec2fcf4d170.wkb.gz",
+        "sha256": "94b49b0912104ee4531e9009b3b1fc3782c11bf8f73b59bd915465d1bdf07c09"
+      },
+      {
+        "bytes": 6684,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/3bef582de67fab1f51799c70.wkb.gz",
+        "sha256": "fced028e179b3ae54212079597c32f5e9997ed62844c9cdf656dc330998847b8"
+      },
+      {
+        "bytes": 69386,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/3c33c8740b2ad85225739103.wkb.gz",
+        "sha256": "75bade8e156fe70f64cc9e798ba4b3155fce6ae89d0d58eaf567492685382177"
+      },
+      {
+        "bytes": 57781,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/3d5a979404af5e6cf61b19d4.wkb.gz",
+        "sha256": "5c5ad2ea2702013bfb643ee5d8e52ffb506afbbcc88c9505c99ed74aac4f53b1"
+      },
+      {
+        "bytes": 20365,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/3e48571ac2d8ec4d8939ce5e.wkb.gz",
+        "sha256": "3a4ddf712af3cb4447911a5d480794fa3f0699d875c3bac1b2373a06ee1055a8"
+      },
+      {
+        "bytes": 10861,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/40f51f89fa60130ba3eb4132.wkb.gz",
+        "sha256": "ba9c0d75b89ace26fd98b87f769ef2f6ea4f72fc3a1f468c9f1baf57baef2d40"
+      },
+      {
+        "bytes": 676598,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/41289b81cd5873df1fb616d5.wkb.gz",
+        "sha256": "6a1c73e33aa43e570ec7e3ba517984b28d76fe7e095812af613a2d3443145788"
+      },
+      {
+        "bytes": 120402,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/426ff72b59d308b8ce3547bf.wkb.gz",
+        "sha256": "58fe26de04e1c9ea736b8404592b68cc58a5d0f9627bc0bb31373aad7189e1d4"
+      },
+      {
+        "bytes": 117064,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/427d8c9037e41d5dbb2e73a5.wkb.gz",
+        "sha256": "da33233d0046880a5dfb84b8edda851042164e22aae95be832cb5fda27b54d22"
+      },
+      {
+        "bytes": 29773,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/4509dd8058b4f3e2b78da7eb.wkb.gz",
+        "sha256": "9c00ef283c3c2f7c28a4051e54a876dda87bf17708d60f1a116023113cea6e8a"
+      },
+      {
+        "bytes": 30239,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/45a293a514e96c4f021498d0.wkb.gz",
+        "sha256": "048aea89e5724ad6c07477e463db6d7c9d2643e71ab5b3e9e533b5c30de900e8"
+      },
+      {
+        "bytes": 92258,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/4619106aaf2c594147858c86.wkb.gz",
+        "sha256": "01451adbe6bee33de9d7795828c9560022e258bd3104c178ccb9a76fd01f3ccd"
+      },
+      {
+        "bytes": 38782,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/474b804c5f1435d6077fe0ae.wkb.gz",
+        "sha256": "e7bd6129e08bf5e4a4aff3b211eb3b7c44d4d4c780dc928628e0530e7e258e6e"
+      },
+      {
+        "bytes": 189589,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/4961c886a97db85cac1b5076.wkb.gz",
+        "sha256": "9d5430f443d6e158ecfc065cd2a049e31d892f10ca10f2fd00eaf2758ca57703"
+      },
+      {
+        "bytes": 62709,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/4c064be46173963a6545f319.wkb.gz",
+        "sha256": "935d8dcc73f4166ce9487ac0cb412d0f5364cedcc2233e0807fc911c9a0f80c0"
+      },
+      {
+        "bytes": 67502,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/4d8d735e28b4b885e9b98f76.wkb.gz",
+        "sha256": "a0b08db9be02da61f63c6b3202938d1a5fc5750216f101b172b7122c0008913c"
+      },
+      {
+        "bytes": 364124,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/4dd980653ec2a431513a5c56.wkb.gz",
+        "sha256": "930ced09f7ed976a831247264018d3a6e39dd6ecd214ea02259129a38fdcb8df"
+      },
+      {
+        "bytes": 224787,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/51385e346eb2b854638740a1.wkb.gz",
+        "sha256": "c150b55e51715e53027771bb8efda76acddf3ec0c9f738d387e817bc83fbc145"
+      },
+      {
+        "bytes": 51506,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/542bb7aff5081eb1f0581f15.wkb.gz",
+        "sha256": "69adc78bd426471f3d014a3e822ab5d17fa372c1fb8d81190a9eb55c09515eee"
+      },
+      {
+        "bytes": 112813,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/5681a04cd0060526771e1ef2.wkb.gz",
+        "sha256": "dd19c3731c96800b821beb11fb81344be2074e87ea9d391a4cf99bdd50c422b6"
+      },
+      {
+        "bytes": 92989,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/5a0a431e80ad7826c4c213f1.wkb.gz",
+        "sha256": "c379328f6c5cdde87ae70dd073a2f9a9ca92a4085fa04bfb74fa8d2f7ac569ba"
+      },
+      {
+        "bytes": 11129,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/5a1ba6045f21260668a89736.wkb.gz",
+        "sha256": "8efe615479e2155500ac2e93bbd1cd8637e77451d54807a48c7b3144f05007c8"
+      },
+      {
+        "bytes": 36276,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/5b65a9b6d5a656a8edebd71a.wkb.gz",
+        "sha256": "1b1742e0dc020b8c597e362daf15eeb0e20f807fdd81103e7040c06db7e77907"
+      },
+      {
+        "bytes": 287780,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/5ef9a2d385d68f51e1222ab2.wkb.gz",
+        "sha256": "1a5cdae69fa52abf531db08c17fc2b064604004a3da431a3789078dc730d5188"
+      },
+      {
+        "bytes": 456,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/6245e9f0e430d9ff6ca96872.wkb.gz",
+        "sha256": "f4520154060f5738e40c3f1909bc5ebe4462c674595a07799c39cefd5c7abd96"
+      },
+      {
+        "bytes": 20365,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/6254dd247738fab52d097f82.wkb.gz",
+        "sha256": "3a4ddf712af3cb4447911a5d480794fa3f0699d875c3bac1b2373a06ee1055a8"
+      },
+      {
+        "bytes": 27848,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/62c18906e512e9a7631855f2.wkb.gz",
+        "sha256": "c25340d6aafd0880ddb00f36c185ec8694e9180b1b1e6a71a57f40d39b88d127"
+      },
+      {
+        "bytes": 12501,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/636eeede1bceed2d999e5be2.wkb.gz",
+        "sha256": "48ee6586195ac7ecc8d100ee74eaa2612d533c4fa2f13b1ec9f7df8fe9df8c9a"
+      },
+      {
+        "bytes": 192881,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/644f02ce388e5080fb79e218.wkb.gz",
+        "sha256": "4bf66d752494b2f58bffedfeae92729bc4205c8bfa26f27ecaa14db2b59d7a2e"
+      },
+      {
+        "bytes": 152149,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/67ab243b46aa814a4c5a997e.wkb.gz",
+        "sha256": "a32d2437729f7a01302a5c14926e7077051d559699f8a83f890918e4666d12de"
+      },
+      {
+        "bytes": 56996,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/6887855012f6a825eab6c2cb.wkb.gz",
+        "sha256": "93a567026f6c1a1fa126e1d4ddf50bae453a775ca8a63611fa5d3d603e2f48e0"
+      },
+      {
+        "bytes": 69386,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/6a540b3b59792cb9337a9611.wkb.gz",
+        "sha256": "75bade8e156fe70f64cc9e798ba4b3155fce6ae89d0d58eaf567492685382177"
+      },
+      {
+        "bytes": 101224,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/719a3513ebb87543145a527a.wkb.gz",
+        "sha256": "3d44e4db07b91e387e007386bb7fbc6e4defa558730b4d4f852fdb69348d0a97"
+      },
+      {
+        "bytes": 109064,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/7333d57f427d8a9a4a12ac18.wkb.gz",
+        "sha256": "e74a7f4bf762f8816172c4b77801c646a94ef1b3995571f80adf80df76749605"
+      },
+      {
+        "bytes": 230590,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/751f9e25f5054c56330b8b00.wkb.gz",
+        "sha256": "5c92f3b182d13f5cadac781c9a059d16c68be546a04c3ca1f952a1920f815b74"
+      },
+      {
+        "bytes": 526712,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/75c9546622c485509f033f90.wkb.gz",
+        "sha256": "81503c05623b0429524af4dd8666e11949f4cef7f193b462c61ab5d821158aed"
+      },
+      {
+        "bytes": 44766,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/76626be49b0d504492c34242.wkb.gz",
+        "sha256": "9d3bc0c615009ccc102f5340975a7d21b5c25a8179159585e3c3e808dc568126"
+      },
+      {
+        "bytes": 29317,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/7dd8abdc943fe9f05c8d00f2.wkb.gz",
+        "sha256": "d63cdff5398ed42db3f6b122a9899e539a433508b375cdf721f88e9afa719005"
+      },
+      {
+        "bytes": 24107,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/7fcc4b2844c8e3f3673f4fdd.wkb.gz",
+        "sha256": "6c60e461b70199934f0ffff627f044a65eb0e494efc17cc9034b1701c252e7cf"
+      },
+      {
+        "bytes": 188474,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/82d6c327f14a1fa46889cebd.wkb.gz",
+        "sha256": "8053b8aad69581bb93b439a7b31e6099308cdab3f975a88e074589f79dbc9820"
+      },
+      {
+        "bytes": 1020753,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/84b6c76cc3f412d3f9d39048.wkb.gz",
+        "sha256": "7c314737e94269a0210bb9def2dad83dd5c770a049e36eca4b2b6c3105ef4eea"
+      },
+      {
+        "bytes": 7055,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/86928143b9dcaee8e244c250.wkb.gz",
+        "sha256": "3729440e76e4b7fc03dd2e2fc5b361ca6c2dd1be470ac792266a2966ac8beff8"
+      },
+      {
+        "bytes": 120402,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/8c068e69d72772d0ca4ca9cd.wkb.gz",
+        "sha256": "58fe26de04e1c9ea736b8404592b68cc58a5d0f9627bc0bb31373aad7189e1d4"
+      },
+      {
+        "bytes": 38734,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/8de96da8e80b52f1d2a28a15.wkb.gz",
+        "sha256": "9f85f6e32625442090b369cfd2106c5f02c2701de5a5c5718f3106d8e0d5a859"
+      },
+      {
+        "bytes": 102398,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/90feaf0eb943748d063b3dcd.wkb.gz",
+        "sha256": "3db5d1e3b688b0415a8b603d6386f911753d2909ad5d890b3de414a99d14df21"
+      },
+      {
+        "bytes": 13310,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/918fa6e31c849f59443db8d7.wkb.gz",
+        "sha256": "1823e237a41348b84b1dd97cfd39e319550e8557ebbbc514e3cf6a6c7ca9ac5c"
+      },
+      {
+        "bytes": 58638,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/91b201752251c50e4f442c66.wkb.gz",
+        "sha256": "2a6821f5ab99939289b17f13087899c74b28fa904d48508918694af782375e59"
+      },
+      {
+        "bytes": 15704,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/95a7347a5eec17da6d51a754.wkb.gz",
+        "sha256": "0408bc95c643a9df6ea8af8d3e13a868b60397f9e8cb22d15cce2e0270cc7e2d"
+      },
+      {
+        "bytes": 22564,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/96bf159c9e9165db5cf2d87b.wkb.gz",
+        "sha256": "ae37bcd61fa492000a17cc81123578b0c31bc017fe6b30b6ff1ceac4af0b3bf4"
+      },
+      {
+        "bytes": 136259,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/974cc743db5d5c1aaa01441f.wkb.gz",
+        "sha256": "38f10f25b4cb6f666693a6c7f91a6f492bb15f20b40eb20cce3bb1dd35dd000b"
+      },
+      {
+        "bytes": 29154,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/9b93ca66446c91da9775479c.wkb.gz",
+        "sha256": "46131f6b637a353cfd8751226d8e57a176a798a978498b316456dccfaa5b9e11"
+      },
+      {
+        "bytes": 252835,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/9d844e80b525b93707203796.wkb.gz",
+        "sha256": "eeb01c6a863aee093e5094603de5cf42ceaf2d3ed53082a07abb1c0744933191"
+      },
+      {
+        "bytes": 29223,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/9dd0e201340f2b60ed727822.wkb.gz",
+        "sha256": "d1219ed7daad90c32128f6ff52185dc4ed4d86442d189a53c82b658844f9b1f0"
+      },
+      {
+        "bytes": 1407715,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/9f5302e899072611aac20193.wkb.gz",
+        "sha256": "06ccdd89fdc8a9c4541d9326a4f42de5dc3716bc2492d99716dde60c0addb948"
+      },
+      {
+        "bytes": 300026,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/a0f907b09214eecf722ce7ca.wkb.gz",
+        "sha256": "6f3d33d48895a46aa0abebbfe0e3c63c9b0deba0e4a096f9b965684f48281ee2"
+      },
+      {
+        "bytes": 12336,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/a4db81c23eb1220bbf539360.wkb.gz",
+        "sha256": "3201b99b983ff50dc324c8ad9e253217cd57d606c62bd21d192eff821a9d2255"
+      },
+      {
+        "bytes": 67304,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/a62b727de2e842a50cf647bc.wkb.gz",
+        "sha256": "2d542a7a242cc623a8efde962828dc4b499128f3ceee040fb17100ffe63e9dd4"
+      },
+      {
+        "bytes": 29362,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/a7a964d6d528f93b0b1f9a43.wkb.gz",
+        "sha256": "c43cb5bf300a014880d5cb815018eb71008aac7aea9974b380c9569f620649be"
+      },
+      {
+        "bytes": 295021,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/ab28cd86bae533f0226739a4.wkb.gz",
+        "sha256": "bef34ef1f5543ddc395e63880e818591fbc8aeacb690c3106b0c6c712f94df66"
+      },
+      {
+        "bytes": 180600,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/ab452d725a14b24b49de331d.wkb.gz",
+        "sha256": "aa3997957fd4bdf70efe2dc977e83777421d3eec1d52dfc3ff7f74f700bb9f9c"
+      },
+      {
+        "bytes": 293267,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/abb0e6d6c8617464a0fde92f.wkb.gz",
+        "sha256": "cfc7389862f7591df265fb04e4f390732c6e2f36b2b1b8b2afad45ba8f21c016"
+      },
+      {
+        "bytes": 4698,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/ac7c994418c29fd98eaf7b22.wkb.gz",
+        "sha256": "61c147783de250455e52f0364e0c35d899efcbc95bef2550c9314be4ba4a2827"
+      },
+      {
+        "bytes": 26007,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/acfec2d6272448a220c38096.wkb.gz",
+        "sha256": "62ac4037071b0e9c5bac1f84f43cc2583d692674888b1a03d9069ad663f1949b"
+      },
+      {
+        "bytes": 132399,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/b5f25df45b570ffc553e6915.wkb.gz",
+        "sha256": "37c4a4711a62f69b8b6bd18b2cc7f739b36c1f849bb192b04ecf1092d9ca6797"
+      },
+      {
+        "bytes": 6409,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/b7e8d863d3b6adfbcb927dbc.wkb.gz",
+        "sha256": "f39863887d25e01d3af0a40c0d25a9f6380cae6fcba92fe77b91c23cbe306fe1"
+      },
+      {
+        "bytes": 215943,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/bc0e01cf2441e3f92d51cb77.wkb.gz",
+        "sha256": "34ea9d9d2fb5041d2a55bd1fc75496c32e78895850b515703bfaa3798428be92"
+      },
+      {
+        "bytes": 202809,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/bfa3e6abd7a02d38ef79fcd4.wkb.gz",
+        "sha256": "e77905b00e801a89657116d708df0a72f7239f009fab5524b97436d466d7e09f"
+      },
+      {
+        "bytes": 245680,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/bff0c0f546ae714a8e799fb0.wkb.gz",
+        "sha256": "14cc2d5c19efefc69993138978389980bac7e742419c7240fb614e814d2fd017"
+      },
+      {
+        "bytes": 202766,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/c34c32c0967b3773bafebfc8.wkb.gz",
+        "sha256": "3e7babcc3f707f2b2cd261e898f7b9f7547e86295cb5e670845bfa637b44ee59"
+      },
+      {
+        "bytes": 76140,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/ca938522370ada2f4eaca2d7.wkb.gz",
+        "sha256": "4009d6e64e4e90d16c97ac879c8accff75b1828b3099da53df1d4f7bc161810e"
+      },
+      {
+        "bytes": 37983,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/cca4d5c359f6a653b9299298.wkb.gz",
+        "sha256": "8d219a459ab1cc50c0df042af1b8588ae6671acd3de32856fe46801915d81805"
+      },
+      {
+        "bytes": 159146,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/ccc2c8b461b0258ecd0a344c.wkb.gz",
+        "sha256": "cf15d5ef8a69c2ea0da8a3e61b198e665771f3cd1925c119ba5a68aec5238a7b"
+      },
+      {
+        "bytes": 211145,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/cf99b415a8625b8537b183b6.wkb.gz",
+        "sha256": "e55891b85333e615e99d2caf23b1e2ee20a82be1c397e39d48ac70cc1682f8af"
+      },
+      {
+        "bytes": 49316,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/d21e7ce362218285ee16bad7.wkb.gz",
+        "sha256": "e4a424ecc37f49259bafae07deb04bfd86b9fa31d7f6e1bcf439ba7206a55b05"
+      },
+      {
+        "bytes": 180600,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/d22db6e1f4c00514378a5e42.wkb.gz",
+        "sha256": "aa3997957fd4bdf70efe2dc977e83777421d3eec1d52dfc3ff7f74f700bb9f9c"
+      },
+      {
+        "bytes": 814090,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/d369f7bdfabc967b2b3a38e0.wkb.gz",
+        "sha256": "bb4ca22f2be286b0ca5cc416ea16f50a2ec73150098f04422e39b06901a0e8dc"
+      },
+      {
+        "bytes": 1570020,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/de1dc455985d3dbf178f2f73.wkb.gz",
+        "sha256": "6e585e46eb958772997f0dc7cb9efe7d4f1ef0452c9d94a572086f4863def3d5"
+      },
+      {
+        "bytes": 35189,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/e0e0275941368e1df5d4c8a1.wkb.gz",
+        "sha256": "7234347fcc365edd60640aba756cfb003c3c6b3a462269c989a0f2147c3b4771"
+      },
+      {
+        "bytes": 20663,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/e30d0f20ec95d9c5dcb03d05.wkb.gz",
+        "sha256": "a7693ce34c1b029be01a7544245dc7bf7e586bf5bc7d71edebeced8d6f0d2c35"
+      },
+      {
+        "bytes": 39730,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/e33744a6cdce105ffa60cf1f.wkb.gz",
+        "sha256": "ec8e1461e1463772515e6eddfd8809474240f7883a81637182e7a61129932d92"
+      },
+      {
+        "bytes": 55756,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/e4fe147df4fbbdfea95fb35b.wkb.gz",
+        "sha256": "9c39edf4050d44b9419b33a1f061a460d26aeb821ffde71b26c67238bdb58f03"
+      },
+      {
+        "bytes": 323266,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/e60bfe5fc3cf3a709e174072.wkb.gz",
+        "sha256": "613ea2e16ab3fd0811b9726b485a14653197ffc6bae8acf2ef11d780ef95e5af"
+      },
+      {
+        "bytes": 117765,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/e6696c43542aadb565523c7f.wkb.gz",
+        "sha256": "6d1d223955d861f574845c48fb8b3970b5149b7635f31a6e5cd0b9b3a3b64443"
+      },
+      {
+        "bytes": 117064,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/e94821815f86eedc7151f620.wkb.gz",
+        "sha256": "da33233d0046880a5dfb84b8edda851042164e22aae95be832cb5fda27b54d22"
+      },
+      {
+        "bytes": 1688,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/eba468342f42eb16b622758d.wkb.gz",
+        "sha256": "3bf8182c48fe7a7bf412e26f49b0909b1a20108cf48db3e213de60463f8f20e0"
+      },
+      {
+        "bytes": 23879,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/ec319f7c8391385a2fcbd84f.wkb.gz",
+        "sha256": "0854f1fb4882e37e1fa4c38f12196ee6a489e2e6d05c7024e0afd3958ab28372"
+      },
+      {
+        "bytes": 1550919,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/ed29a7ead30c3407af31e5d3.wkb.gz",
+        "sha256": "4a6df8bd3d22644e5594bb02708603a6ce052c349b04b33f2f27c31e691be6c5"
+      },
+      {
+        "bytes": 98129,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/ef7b5d03e3eee94aed429c92.wkb.gz",
+        "sha256": "80783ead8ed78999b13fcf2d8fa7a4475e65b0159b2098ed35cbe32a0f00e5a6"
+      },
+      {
+        "bytes": 80476,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/envelope-index.json",
+        "sha256": "36b9ff669ef5d4a29eb459b7147dcf441fbf571dd7091972369b90569a50d366"
+      },
+      {
+        "bytes": 81362,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/f1a9ed09567c1cbe4887bec3.wkb.gz",
+        "sha256": "ffbfe49623dea77b4d0b97e98a83e04d4285259e8311b68562901b086537cd85"
+      },
+      {
+        "bytes": 107951,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/f54326c4353c94a73dd4d177.wkb.gz",
+        "sha256": "815bee0758423b7f18e876431e8eaf2f2346b92e5454fbc235d69ee2ea293330"
+      },
+      {
+        "bytes": 38282,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/f625f5584e92b6c9e6b0a718.wkb.gz",
+        "sha256": "a6c79f2b158cd7e5677c4a2dabdba5e80feb387dcf5401e9283d9ed1d25e4700"
+      },
+      {
+        "bytes": 30989,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/f79c8bad46c32b4e711c692e.wkb.gz",
+        "sha256": "ab5414fa8cdd5fbffcd3514c981861b7059d0bf40f92e3d0164193224d38e4da"
+      },
+      {
+        "bytes": 145229,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/fcbcdc6eeea3e57390f49921.wkb.gz",
+        "sha256": "49db9f2db4297468b2cdc2ffeaf9663ae1777a47137f5a5d673eec922c6e1372"
+      },
+      {
+        "bytes": 57781,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/fefe4c4a408db5e787bfdaf0.wkb.gz",
+        "sha256": "5c5ad2ea2702013bfb643ee5d8e52ffb506afbbcc88c9505c99ed74aac4f53b1"
+      },
+      {
+        "bytes": 738,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/envelopes-v5/independent-verification.json",
+        "sha256": "793ff1ef774bace9d72f0ca247bfe5dc4154c49a958544fb45b3c5b6ad039c33"
+      },
+      {
+        "bytes": 38430,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/macro-certificate.json",
+        "sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"
+      },
+      {
+        "bytes": 1038680,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/migration-areas.json.gz",
+        "sha256": "5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468"
+      },
+      {
+        "bytes": 1288372,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/migration-regions.json.gz",
+        "sha256": "09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f"
+      },
+      {
+        "bytes": 1380517,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/migration-repairs.json.gz",
+        "sha256": "290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937"
+      },
+      {
+        "bytes": 70253,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "sha256": "08477afccb35574f05f487ef50b724e9826fb55f0a6adb94679aa79798f4bff1"
+      },
+      {
+        "bytes": 88275,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/administrative-sources.json.gz",
+        "sha256": "009f30e16f2dbd81a1b4531b812637c7866afdea511f8843b213f211443c651e"
+      },
+      {
+        "bytes": 5955,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/coverage-report.json.gz",
+        "sha256": "9c793684f650e4ea2cbb6b427f51334f6f454a641c10c763b926a837a658599e"
+      },
+      {
+        "bytes": 1873475,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geographic-decision-migration.json.gz.gz",
+        "sha256": "d7ff560170ffa5de42e6633b30bfccfc00a18c891d68d1cc687ffcb01671752f"
+      },
+      {
+        "bytes": 429711,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geographic-decisions/africa.json.gz",
+        "sha256": "f067db3deb86c1b2e4a8439ab4ad675897545a4ddcae19b102a33a6284816a29"
+      },
+      {
+        "bytes": 926385,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geographic-decisions/asia.json.gz",
+        "sha256": "ccee8a61c8e2c62864c0c01b305e67a050d61b010192db9bce2af09ceebb36b4"
+      },
+      {
+        "bytes": 634668,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geographic-decisions/europe.json.gz",
+        "sha256": "7f60003c72784b65b58f2203e480d452198da5f0d05f53f5808adabf185dc457"
+      },
+      {
+        "bytes": 894293,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geographic-decisions/north-america.json.gz",
+        "sha256": "76a7949ec42394de13a4f3c69ea8feb1eaf8ff72b1471f6ff3fffdb3aff765c2"
+      },
+      {
+        "bytes": 209115,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geographic-decisions/oceania.json.gz",
+        "sha256": "5be4e666cdf4a94ea99d856fa98c0993b020e96be19dea3a6be79babf633cfb3"
+      },
+      {
+        "bytes": 239746,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geographic-decisions/south-america.json.gz",
+        "sha256": "7117701cfa8b1c3eb73d8106664100fae4f42bf2338b9fd1f1b269b0c1e14778"
+      },
+      {
+        "bytes": 10767982,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geographic-migration-archive.json.gz.gz",
+        "sha256": "68150c978d7f9891ddc69084c2074d3ba373f61ee3b45af4ce06f46e8c46460d"
+      },
+      {
+        "bytes": 554130,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geographic-repair-evidence/migration-receipt.json.gz.gz",
+        "sha256": "5d911a29ca37473632da37464adb8842e362d8a6d7c9faf6ced06ca0942276b3"
+      },
+      {
+        "bytes": 1736544,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-0.json.gz",
+        "sha256": "3fb6eff6ff2c53a09ed804ba385fdbc5d3858eb2efa223788354eb8aeaa1d690"
+      },
+      {
+        "bytes": 1419831,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-1.json.gz",
+        "sha256": "8177314b1b7dab1794597cb60970dba57b7dba41b86d7578edf6936c028472ab"
+      },
+      {
+        "bytes": 702510,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-10.json.gz",
+        "sha256": "3f243dd9b6cb06d370261a30fcb0646445f05126fa67fbf1b62d2403e67d2885"
+      },
+      {
+        "bytes": 741108,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-11.json.gz",
+        "sha256": "52d0e7e2bdb0deadb1c13d4e851a058e3d2f1966bbf2cb3a5c2581fa7581fc49"
+      },
+      {
+        "bytes": 490145,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-12.json.gz",
+        "sha256": "924d57919793c8897bc79e959572aaff2bbddd892bb3e3a7ef2c5f906e7408c9"
+      },
+      {
+        "bytes": 859894,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-13.json.gz",
+        "sha256": "483695dd4fb36235486ffb9b88b549c50f6a735106eb69eb8a19ae796eded5ef"
+      },
+      {
+        "bytes": 418430,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-14.json.gz",
+        "sha256": "96e25f3937f39cb60c7b65e4961795c50cfac4729fcf692645b455e57442bcfd"
+      },
+      {
+        "bytes": 735398,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-15.json.gz",
+        "sha256": "b33026f19d28ad5b802c53638c5f29bf4656d95f98b97ad4e37150a6188d7cc0"
+      },
+      {
+        "bytes": 757171,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-16.json.gz",
+        "sha256": "29cafde588ed9ceb700953d9d5b33eabe4ff439a9bb7920b196be594cbd53f6a"
+      },
+      {
+        "bytes": 633603,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-17.json.gz",
+        "sha256": "7a142d98e0574433bd53f16a705068b5483bf23df6b8d0f025c5408dc4d5cee5"
+      },
+      {
+        "bytes": 682284,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-18.json.gz",
+        "sha256": "930ef56f946351228f38df34e354e911c5895babe3bbf7c944fe2deb7fbd37c4"
+      },
+      {
+        "bytes": 518401,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-19.json.gz",
+        "sha256": "f76714d0161007eeed8be41637fbce3c17cf75434e1c18af98ab8a9171e88374"
+      },
+      {
+        "bytes": 1056028,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-2.json.gz",
+        "sha256": "c71858aa481e93ca6ea73f6c9c391857a2104fd4f5f901012ada90bf346b2f59"
+      },
+      {
+        "bytes": 1305613,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-20.json.gz",
+        "sha256": "2c8e3049e13f3daad40dbb60e2b1db7cd4d4fd4db972c6551b74360c00e9a88f"
+      },
+      {
+        "bytes": 1353599,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-21.json.gz",
+        "sha256": "d3f9e4f51ecb422756d8a22f241dd8e9887c13416b9c0e45ffd4926aa9c1e200"
+      },
+      {
+        "bytes": 571831,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-22.json.gz",
+        "sha256": "6903e41ab108ab9b4c254fa2a364444dcf358abcaedaaf5e4d2954ff6a32cee0"
+      },
+      {
+        "bytes": 685039,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-23.json.gz",
+        "sha256": "1fa5ac63b461ae76d8f7c15423016fb90ec1d8de268373b16d99d62ee27c32e2"
+      },
+      {
+        "bytes": 620143,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-24.json.gz",
+        "sha256": "4298f27bfcfd06f25767a224c45fbcd300a4d2eb8b7c3e5f5d9fb6347e2530c9"
+      },
+      {
+        "bytes": 535127,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-25.json.gz",
+        "sha256": "3cec777cba1460e18126aa6bba1a1e9dc28e11dd6987c8b1a846affdd5f2a967"
+      },
+      {
+        "bytes": 600665,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-26.json.gz",
+        "sha256": "c4fca920e097302f805565c0c4f896fd6155253c5fa0177c42c5a85ba543cb7b"
+      },
+      {
+        "bytes": 664865,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-27.json.gz",
+        "sha256": "c9c7ba48dea1642e77901c68ccbdcb6a2274ced3196ce16dea6c87ada91bc161"
+      },
+      {
+        "bytes": 1017626,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-28.json.gz",
+        "sha256": "88247fdd5b9f3d9a366740aa09495b183da6f08eb8a51e1bdb5fce2d6007b1f2"
+      },
+      {
+        "bytes": 3353589,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-29.json.gz",
+        "sha256": "10dae020b8ad3cedbec7d2ef172bb9e17aba7e2c31219bb03f1c29f5e652f336"
+      },
+      {
+        "bytes": 737242,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-3.json.gz",
+        "sha256": "40b0ea3424a3926c975d76fdd12a79318eb4d8ecee69726b08098a260302db79"
+      },
+      {
+        "bytes": 3395647,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-30.json.gz",
+        "sha256": "b3bb68c997ffa30d30aaf03e47414334c49fb6bc7179348a1359753c8eee4cf2"
+      },
+      {
+        "bytes": 3245133,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-31.json.gz",
+        "sha256": "3e37d5db5cab60bd6340d59a97cbe19068172137a7ac774e5895af6e8c2e1ae8"
+      },
+      {
+        "bytes": 3293251,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-32.json.gz",
+        "sha256": "030528332895b96e674aa6a6c3e367409fd519c01d44b05ef03f79ce7e3a8230"
+      },
+      {
+        "bytes": 197148,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-33.json.gz",
+        "sha256": "f6275d1680e84d0a75cc2b487afaeb268d597418c69c57c8042681afc03b23ee"
+      },
+      {
+        "bytes": 639932,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-4.json.gz",
+        "sha256": "a556d5902fd30fd33f3eac05120d3fd48c8020ee58acb0847573fd7ce84be4c5"
+      },
+      {
+        "bytes": 747191,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-5.json.gz",
+        "sha256": "a2658693370fba432722322dd711f1c84d7fd999c67cd54b4d54e9350046acfa"
+      },
+      {
+        "bytes": 519997,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-6.json.gz",
+        "sha256": "71c759cdb7629964442d377d5c36e8093a6950b6f198300a897fced9a8a278c6"
+      },
+      {
+        "bytes": 432270,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-7.json.gz",
+        "sha256": "a1021774ad43be54f9e9c770592f22b8488154f0a4068da4839857470d964c9c"
+      },
+      {
+        "bytes": 718905,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-8.json.gz",
+        "sha256": "53fc43108151ef00e617a14401b6b7d622c588a0e24628be0f22fa62fc097047"
+      },
+      {
+        "bytes": 948867,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/geography/part-9.json.gz",
+        "sha256": "91ef23b9362a44ead24f76fd00a348ab97602a727102f391e0d0c68a2effbc5a"
+      },
+      {
+        "bytes": 160640,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/global-refinement-report.json.gz",
+        "sha256": "97bb2e25183203fd00b803700c8fb49c6b1d44c2aa50fd4132177ca93d0d744e"
+      },
+      {
+        "bytes": 8589122,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/global-semantic-closure.json.gz.gz",
+        "sha256": "18108683b643faf7ed0eace41b8c5ff7ece0ab7a1da743ed2b83dd5889edb1f0"
+      },
+      {
+        "bytes": 843,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/global-sources/IND-ADM3-metadata.json.gz",
+        "sha256": "0203aebd56cb4c6767e7cc02d866466e24c0bed4e489561564737e6fad5d4e87"
+      },
+      {
+        "bytes": 13798502,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/global-sources/IND-ADM3.geojson.gz.gz",
+        "sha256": "391526fcff36129e0498150f8f01a9f544f65569cfd94dcf933445a90a9b82c1"
+      },
+      {
+        "bytes": 485686,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/granularity-review-evidence.json.gz",
+        "sha256": "4af0ea61007b9e7d5451e7dd02495c9dc4ae6d2275af482b11c3c190e18704fd"
+      },
+      {
+        "bytes": 556710,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/hierarchy.json.gz",
+        "sha256": "2ace63bbb1531e9b3237fc1241c5b85e11652e794c6d3327e1ab14b5daed967e"
+      },
+      {
+        "bytes": 5409,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/location-policy.json.gz",
+        "sha256": "6e48d8174a01eae95700292ac27c4e607642c5db3769275a70c798e178b4d2c9"
+      },
+      {
+        "bytes": 1104829,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/macro-boundary-decisions.json.gz",
+        "sha256": "640d643a3fb9d13db5fada59eaaec2b37eded4b3e42743480d954fe62983480e"
+      },
+      {
+        "bytes": 1143574,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/macro-boundary-migration.json.gz.gz",
+        "sha256": "48f89dedb5da2c65fd71082367abf384c25b7c47fceb8bcd1955f9504851e537"
+      },
+      {
+        "bytes": 36653,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/namibia-source-quality-annotations.json.gz",
+        "sha256": "c3d4464168e671c15ebdc3ee5e2bb6d7650c2b1924077b2d82dca1e64df3ccd6"
+      },
+      {
+        "bytes": 96366,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/namibia-source-review.json.gz.gz",
+        "sha256": "2c8dfbe28813bc1d98be1e21b9fde69cf5e76b6c829dde1ed9677e8fb9b1932d"
+      },
+      {
+        "bytes": 2679084,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/pixel-audit.json.gz",
+        "sha256": "d253e60df5e65210a02d23baac955dd0cd8571924f88d6c90492eebd29659554"
+      },
+      {
+        "bytes": 28862,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/coastal-concordance-receipt.json.gz.gz",
+        "sha256": "e7c3d2271171c2e4dded680aa9cde09a9fd08bf1b076ddf447ca3b1e97ce486e"
+      },
+      {
+        "bytes": 3241,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/manifest.json.gz",
+        "sha256": "71ac7d75f7d1ed5992893f6a983e839773f6ec2423baee33017bebbc8b3788ec"
+      },
+      {
+        "bytes": 72095,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/migration-receipt.json.gz.gz",
+        "sha256": "3b60311c09add96e039a86f16a71760161adc17f263e47a01fecea7026e2be81"
+      },
+      {
+        "bytes": 3570430,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/natural-earth-land.geojson.gz.gz",
+        "sha256": "2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68"
+      },
+      {
+        "bytes": 1058045,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/semantic-report.json.gz",
+        "sha256": "89c63e0f28b93574551c16211bbad1bdac9da9fb34bfbdac70026f1eb425c177"
+      },
+      {
+        "bytes": 1856,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/semantic-sources.json.gz",
+        "sha256": "e24a863eff91b7cb2916400b2d76e3ad37f12f5f4c2894f0306a5e6506165df4"
+      },
+      {
+        "bytes": 144,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/world-index.json.gz",
+        "sha256": "8cd86d2b6d64fd5dd31c4fe394d000a1287a2ec5032fb1733a858895e191322f"
+      },
+      {
+        "bytes": 824361,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/retained-inspections/world-review.json.gz",
+        "sha256": "41f494b222f12eab9329ba0e4a8c16cf61ce9d39a4cadd86af49ef9cc0339e7a"
+      },
+      {
+        "bytes": 2110,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/review-index.json",
+        "sha256": "237d877207c62867b2600279c62930e6b305346677807cd6a6e950c614e6301b"
+      },
+      {
+        "bytes": 38603,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-0.json.gz",
+        "sha256": "85f026beb8921304e02a1bdb69a5b22bbc791b5f15645b4c8afd5922e225bd00"
+      },
+      {
+        "bytes": 37793,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-1.json.gz",
+        "sha256": "7d827ff1f3d48036851c8ad40b72c04814fbdb91522d66c6983ccc54482c141f"
+      },
+      {
+        "bytes": 36278,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-10.json.gz",
+        "sha256": "2fa78c20771a0fd7eb8b8930fef8dd5ab63f232d9d3448cc5da9b70a59f30bcd"
+      },
+      {
+        "bytes": 35752,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-11.json.gz",
+        "sha256": "2d66ef4e0809e6c6cf5522f53c192de1ae86552b9a8021757a1b472462027df0"
+      },
+      {
+        "bytes": 30457,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-12.json.gz",
+        "sha256": "ca2e35b7fcef4d22cfbdd383b0978d48fe98408dcdd0bebfcf3694751db0d452"
+      },
+      {
+        "bytes": 41191,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-13.json.gz",
+        "sha256": "e9c7b2fdf145c77afc8f3bdce8d1d2713c63c995b515ba135c88ceebfcf7b8e0"
+      },
+      {
+        "bytes": 32925,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-14.json.gz",
+        "sha256": "66e353a33276d2d9014296f3552f2da07ed01725fe0ce8387cb4d57318a9fe6e"
+      },
+      {
+        "bytes": 36025,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-15.json.gz",
+        "sha256": "794c7a18628630cb90d790f3da8443e577a37a429cbbe91bf5accd0f8600ecae"
+      },
+      {
+        "bytes": 37084,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-16.json.gz",
+        "sha256": "eb0c0b291c7449aac166cb0e23ed9dd2b4ccae6297dffcb1dfbc9989ac687a84"
+      },
+      {
+        "bytes": 35925,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-17.json.gz",
+        "sha256": "8aef6f74c66131540f88003903209d53eb1a1bec403d2e214b3c2c8c89380ca8"
+      },
+      {
+        "bytes": 41056,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-18.json.gz",
+        "sha256": "b6355dbec8a0bfb862fd759ef7566d33449f97e0ba81834fdfb389cb30fc14fd"
+      },
+      {
+        "bytes": 39707,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-19.json.gz",
+        "sha256": "00f036d1546384230edde42e268a9eb55ebc257414cd634c7b6474ad09184e03"
+      },
+      {
+        "bytes": 44475,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-2.json.gz",
+        "sha256": "3560062a53bc8ccecfcbc74d090cd8c64381b698950b3f2aae7a9365e05c7043"
+      },
+      {
+        "bytes": 50664,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-20.json.gz",
+        "sha256": "e699c9cc39848858b3c0d553d234b2e8353bcb15d4225367b65a774dde5765b4"
+      },
+      {
+        "bytes": 50407,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-21.json.gz",
+        "sha256": "4330a88dfb5899c2e00d592e6731e03d7c351ccaf9c77d6866ddd577331f0c16"
+      },
+      {
+        "bytes": 38071,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-22.json.gz",
+        "sha256": "a31ca5da3791f15a2edce1527fc13e6119583410107dda3571d4e97191c8d08a"
+      },
+      {
+        "bytes": 43253,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-23.json.gz",
+        "sha256": "6f2c3a2fb3d611cf6da32f05168b2a5f4dea8f44a5daad956f1682c11c794f50"
+      },
+      {
+        "bytes": 44111,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-24.json.gz",
+        "sha256": "c1ee208cead318c3cfafd6cba149703e9029b7014dec5aebc2b24a83fe2949d8"
+      },
+      {
+        "bytes": 39701,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-25.json.gz",
+        "sha256": "bd14849b90a012b2f6779eec5ffe53e0db215f68990c96fd944787ba53658ab0"
+      },
+      {
+        "bytes": 41479,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-26.json.gz",
+        "sha256": "f3e761cbacbeec530d289d955e018e5993156af3ac05edc985a7d1e8e74a36b2"
+      },
+      {
+        "bytes": 40205,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-27.json.gz",
+        "sha256": "f6aa2faed29fe617de1dd7d2de9ef34bd995465fd6764c462f9b81fd6aca0409"
+      },
+      {
+        "bytes": 48367,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-28.json.gz",
+        "sha256": "20747e7b992c88920918aa5f589f841edcc1007d270c46af5a4122247028a215"
+      },
+      {
+        "bytes": 42079,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-29.json.gz",
+        "sha256": "0d92e1af6b8ec2708d0642a27fb409446fd7f4f7f2ab703603d0e09de91bc9f5"
+      },
+      {
+        "bytes": 35861,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-3.json.gz",
+        "sha256": "76dc4e01be806585442e5706f6c45eadb402f588790922a1d6cec1bc28915707"
+      },
+      {
+        "bytes": 40307,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-30.json.gz",
+        "sha256": "0dcf574e08637c2e500f88187fea7efc20ce19a4885a0c9f271420d1a21cb2f7"
+      },
+      {
+        "bytes": 45255,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-31.json.gz",
+        "sha256": "ab57d060ae24825b581f70e839851eeef70e73f2833aaf4df12cbf986803fee5"
+      },
+      {
+        "bytes": 45825,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-32.json.gz",
+        "sha256": "3627dea486c9b1d7bd1e4cebc492d6efe4392498ba67be4b029f325235d4ffd5"
+      },
+      {
+        "bytes": 6342,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-33.json.gz",
+        "sha256": "a53bc08472686b02612ac3c2313e26fa82667e644a861916d66e07c45dfc57d5"
+      },
+      {
+        "bytes": 38700,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-4.json.gz",
+        "sha256": "e3f9c15278f88c47e9106924fb3f20e05fc28a92760c46c13b35448b9ef4e50e"
+      },
+      {
+        "bytes": 36676,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-5.json.gz",
+        "sha256": "cfd3fe065557d62f7075b6d2c5ce9203894500641a9fe9d1f5445228c6e4f810"
+      },
+      {
+        "bytes": 36853,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-6.json.gz",
+        "sha256": "b7d34bfb646186ecaf767b2627c3ce9fbb94080234a2b1204e448ae0f23d7328"
+      },
+      {
+        "bytes": 34439,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-7.json.gz",
+        "sha256": "504822f9b1623d343ae3d8e9fc8897ed14f725dc2f15f6ddbe95f1142c6946ed"
+      },
+      {
+        "bytes": 39907,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-8.json.gz",
+        "sha256": "45f865ecb51b70bfab978f4f01c02cb1fbdb2155cd6d84c2143d33a1bdf089b6"
+      },
+      {
+        "bytes": 39845,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/world-review-locations-9.json.gz",
+        "sha256": "b262cea2579288cc3e9815703567e05edbfe3d8b6ed3df6a36a5b6779dc5a10a"
+      }
+    ],
+    "pin_files": {
+      "hierarchy": "data/hierarchy.json"
+    },
+    "pins": {
+      "hierarchy": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/hierarchy-install-20261003-a9c2/partition-09.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node scripts/validate-evidence-partitions.mjs coordination/engineering/hierarchy-install-20261003-a9c2/partitions.json ee17e3255c619a8f2f95c33a9454aeec7954199f HEAD"
+  ],
+  "conclusions": [],
+  "issue": 6,
+  "lane": "engineering",
+  "methods": [
+    {
+      "description": "Immutable original data and exact candidate/preservation file bytes; no fresh source inspection or geometry measurement",
+      "id": "whole-file-partition-accounting",
+      "kind": "code",
+      "software": "Node24, Git2.52; trusted existing premerge whole-file validator",
+      "units": "whole-file bytes and exact changed-file inventories"
+    }
+  ],
+  "metric_bindings": [],
+  "metrics": [],
+  "outputs": [],
+  "sources": [
+    {
+      "id": "monaco-frozen-support",
+      "license": {
+        "status": "unknown",
+        "terms": "No new verification of primary-source redistribution terms"
+      },
+      "limit": "Full primary bytes were not newly retrieved or verified; matching archived receipt is not new source approval",
+      "restoration": "Use canonical URL and original SHA-256 c23e34be7ab80def14f1c157ec7e278ffd3da9d648fc6d36500021dd18573f47; retained receipt and extracts are in the immutable source-proof archive",
+      "retention": "restoration-only",
+      "retrieved_at": "Unknown original inspection date; frozen receipt reused",
+      "role": "Reuse of frozen proposal inspection and taxonomy support; no new primary-source inspection",
+      "temporal_status": "reference",
+      "url": "https://www.monacostatistics.mc/Population-and-employment/Population",
+      "verification": "unverified",
+      "vintage": "Unknown reference-page vintage"
+    },
+    {
+      "id": "luxembourg-frozen-support",
+      "license": {
+        "status": "unknown",
+        "terms": "No new verification of primary-source redistribution terms"
+      },
+      "limit": "Full primary bytes were not newly retrieved or verified; matching archived receipt is not new source approval",
+      "restoration": "Use canonical URL and original SHA-256 14722ec89f2db5a61cb931af3ca1201bbe09f8a24f8b866864308711bf083b49; retained receipt and extracts are in the immutable source-proof archive",
+      "retention": "restoration-only",
+      "retrieved_at": "Unknown original inspection date; frozen receipt reused",
+      "role": "Reuse of frozen proposal inspection and taxonomy support; no new primary-source inspection",
+      "temporal_status": "reference",
+      "url": "https://gisco-services.ec.europa.eu/distribution/v2/nuts/geojson/NUTS_LB_2024_4326.geojson",
+      "verification": "unverified",
+      "vintage": "GISCO 2024 labels"
+    },
+    {
+      "id": "west_virginia-frozen-support",
+      "license": {
+        "status": "unknown",
+        "terms": "No new verification of primary-source redistribution terms"
+      },
+      "limit": "Full primary bytes were not newly retrieved or verified; matching archived receipt is not new source approval",
+      "restoration": "Use canonical URL and original SHA-256 4c90d0f805779923b5958ab13d0c1e9b99fe4932b786bfcf75dd739bb2dcb4ea; retained receipt and extracts are in the immutable source-proof archive",
+      "retention": "restoration-only",
+      "retrieved_at": "Unknown original inspection date; frozen receipt reused",
+      "role": "Reuse of frozen proposal inspection and taxonomy support; no new primary-source inspection",
+      "temporal_status": "reference",
+      "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_counties_national.zip",
+      "verification": "unverified",
+      "vintage": "US Census 2025 county Gazetteer"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "not-requested",
+    "implementation": "implemented",
+    "research": "partial"
+  },
+  "subject_ids": [
+    "atlas:territory:LUX",
+    "framework:area:belgium:3a14f80912de",
+    "framework:area:france:a85924a668ef",
+    "framework:area:south-atlantic:383dc695ee31",
+    "framework:continent:europe:d247cf0382c8",
+    "framework:continent:north-america:1ca27616f338",
+    "framework:province:luxembourg:18736e14a46e",
+    "framework:province:monaco:3f032987f814",
+    "framework:province:west-virginia:4c9dc6438fb1",
+    "framework:province:west-virginia:8d71dccb3165",
+    "framework:region:france:5800d29ad327",
+    "framework:region:low-countries:ef8aac563ed4",
+    "framework:region:southeastern-north-america:8606d9313330",
+    "framework:subcontinent:northern-america:477e054b32f2",
+    "framework:subcontinent:western-europe:78359a068737",
+    "gb:MCO:ADM1:64170238B96397749018979",
+    "gb:USA:ADM2:52423323B11034045930208",
+    "gb:USA:ADM2:52423323B11679801882970",
+    "gb:USA:ADM2:52423323B12346389629957",
+    "gb:USA:ADM2:52423323B15878537434027",
+    "gb:USA:ADM2:52423323B20153460814432",
+    "gb:USA:ADM2:52423323B20661288428578",
+    "gb:USA:ADM2:52423323B25764117522336",
+    "gb:USA:ADM2:52423323B25945038003590",
+    "gb:USA:ADM2:52423323B26366836110936",
+    "gb:USA:ADM2:52423323B33103452466662",
+    "gb:USA:ADM2:52423323B33897242247324",
+    "gb:USA:ADM2:52423323B34331419978033",
+    "gb:USA:ADM2:52423323B38725266060317",
+    "gb:USA:ADM2:52423323B3909693217248",
+    "gb:USA:ADM2:52423323B40948344382012",
+    "gb:USA:ADM2:52423323B41320472934354",
+    "gb:USA:ADM2:52423323B42604268610019",
+    "gb:USA:ADM2:52423323B4598026966549",
+    "gb:USA:ADM2:52423323B46125568158444",
+    "gb:USA:ADM2:52423323B50280132213265",
+    "gb:USA:ADM2:52423323B52249566061450",
+    "gb:USA:ADM2:52423323B52467721983842",
+    "gb:USA:ADM2:52423323B54631605576846",
+    "gb:USA:ADM2:52423323B5491062021633",
+    "gb:USA:ADM2:52423323B57227044271889",
+    "gb:USA:ADM2:52423323B57461301326035",
+    "gb:USA:ADM2:52423323B57989185183638",
+    "gb:USA:ADM2:52423323B5856421301049",
+    "gb:USA:ADM2:52423323B58976878899916",
+    "gb:USA:ADM2:52423323B60388203244476",
+    "gb:USA:ADM2:52423323B60686531636314",
+    "gb:USA:ADM2:52423323B6396533628849",
+    "gb:USA:ADM2:52423323B65894657308494",
+    "gb:USA:ADM2:52423323B68405193247376",
+    "gb:USA:ADM2:52423323B68684722164969",
+    "gb:USA:ADM2:52423323B69040166298082",
+    "gb:USA:ADM2:52423323B75568598191549",
+    "gb:USA:ADM2:52423323B75939807173919",
+    "gb:USA:ADM2:52423323B7608652803448",
+    "gb:USA:ADM2:52423323B76840765500257",
+    "gb:USA:ADM2:52423323B78270191990376",
+    "gb:USA:ADM2:52423323B80125448855540",
+    "gb:USA:ADM2:52423323B8286082646213",
+    "gb:USA:ADM2:52423323B84161084981084",
+    "gb:USA:ADM2:52423323B8788265291879",
+    "gb:USA:ADM2:52423323B88049032816505",
+    "gb:USA:ADM2:52423323B8866433924767",
+    "gb:USA:ADM2:52423323B92436746543107",
+    "gb:USA:ADM2:52423323B92810723022210",
+    "gb:USA:ADM2:52423323B93118909799031",
+    "gb:USA:ADM2:52423323B9322907823760",
+    "gb:USA:ADM2:52423323B93736628655391",
+    "gb:USA:ADM2:52423323B94363624376264",
+    "gb:USA:ADM2:52423323B94765650307580",
+    "gb:USA:ADM2:52423323B98686556304420"
+  ],
+  "subject_ids_sha256": "403b4f2eee7d4e37d6d148e718b9d8fa736912da53aaf816804b4e167680a0e0",
+  "summaries": [],
+  "version": 1,
+  "worker_id": "engineering-hierarchy-crosswalk-a9c25e14-20261003"
+}

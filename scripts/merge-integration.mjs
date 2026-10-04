@@ -21,9 +21,76 @@ export function checkCurrentChecks(checks, {evidenceRequired = false} = {}) {
     'Current checks are pending or failed; submit only ready PRs');
 }
 
+const commitID = value => /^[a-f0-9]{40}$/.test(value ?? '') ? value : null;
+function candidateFailure(message, details) {
+  const error = Error(message);
+  error.candidateDiagnostics = details;
+  return error;
+}
+function candidateDiagnostics(commit, base, head, extra = {}) {
+  return {expected_base: commitID(base), expected_head: commitID(head),
+    candidate: commitID(commit?.sha), actual_parents: (commit?.parents ?? []).map(row => commitID(row.sha)), ...extra};
+}
 export function checkCandidateParents(commit, base, head) {
-  need(commit.parents?.length === 2 && commit.parents[0].sha === base && commit.parents[1].sha === head,
-    'Integration candidate is not the exact current main plus reviewed head; resubmit unchanged head');
+  if (commit.parents?.length !== 2 || commit.parents[0].sha !== base || commit.parents[1].sha !== head) {
+    throw candidateFailure('Integration candidate is not the exact current main plus reviewed head; resubmit unchanged head',
+      candidateDiagnostics(commit, base, head));
+  }
+}
+function unchangedPR(fresh, original) {
+  need(fresh.head.sha === original.head.sha, 'PR head changed; review the new head');
+  need(fresh.state === 'open' && !fresh.draft && fresh.base.ref === 'main' &&
+    fresh.head.ref === original.head.ref && fresh.head.repo?.full_name === original.head.repo?.full_name &&
+    fresh.body === original.body && fresh.title === original.title && fresh.changed_files === original.changed_files,
+    'PR scope/body changed during candidate preparation; revalidate before resubmission');
+}
+// GitHub generates merge refs asynchronously. Poll only their availability and
+// parents, not trees or tests. A real base/evidence vintage change needs a new
+// preflight; it must not be silently absorbed into the existing evidence review.
+export async function currentCandidate(options, state) {
+  const {api, repo, number} = options;
+  const sleep = options.candidateSleep ?? (ms => new Promise(resolve => setTimeout(resolve, ms)));
+  const now = options.candidateNow ?? Date.now;
+  const started = now();
+  let diagnostics;
+  for (let attempt = 1; attempt <= 6; attempt++) {
+    const pr = await api(`${root(repo)}/pulls/${number}`);
+    const observation = {
+      candidate: commitID(pr.merge_commit_sha), observed_pr_base: commitID(pr.base.sha), observed_head: commitID(pr.head.sha),
+      inspected_pr_base: commitID(state.pr.base.sha), attempt, observed_at: new Date(now()).toISOString(), elapsed_ms: now() - started};
+    try { unchangedPR(pr, state.pr); }
+    catch (error) { throw candidateFailure(error.message, candidateDiagnostics(null, state.base, state.pr.head.sha,
+      {...observation, reason: pr.head.sha !== state.pr.head.sha ? 'head-changed' : 'pr-scope-changed'})); }
+    const base = (await api(`${root(repo)}/git/ref/heads/main`)).object.sha;
+    diagnostics = candidateDiagnostics(null, base, state.pr.head.sha, {
+      ...observation});
+    if (base !== state.base || pr.base.sha !== state.pr.base.sha) {
+      throw candidateFailure('Main or PR evidence base advanced during preparation; resubmit unchanged head',
+        {...diagnostics, reason: 'base-advanced', inspected_base: commitID(state.base),
+          inspected_pr_base: commitID(state.pr.base.sha)});
+    }
+    if (pr.mergeable === false) throw candidateFailure('Integration conflict; author intervention required',
+      {...diagnostics, reason: 'conflict'});
+    if (commitID(pr.merge_commit_sha)) {
+      let object;
+      try { object = await api(`${root(repo)}/git/commits/${pr.merge_commit_sha}`); }
+      catch (error) {
+        // A referenced asynchronous commit may not yet be readable. Never
+        // disguise authentication, rate-limit, transport or server failures.
+        if (!/\(HTTP 404\)$/.test(error.message)) throw error;
+      }
+      if (object) {
+        diagnostics = candidateDiagnostics(object, base, state.pr.head.sha, {
+          ...diagnostics, actual_parents: (object.parents ?? []).map(row => commitID(row.sha)), reason: 'stale-candidate'});
+        if (object.parents?.length === 2 && object.parents[0].sha === base && object.parents[1].sha === state.pr.head.sha) {
+          return {pr, base, candidate: pr.merge_commit_sha, object, attempts: attempt};
+        }
+      } else diagnostics.reason = 'candidate-unavailable';
+    } else diagnostics.reason = 'candidate-unavailable';
+    if (attempt === 6 || now() - started >= 30000) break;
+    await sleep(2000);
+  }
+  throw candidateFailure('Integration candidate remained stale or unavailable after bounded refresh; resubmit unchanged head', diagnostics);
 }
 export function checkReviewedTrees(files, authored, integrated) {
   for (const name of new Set(files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]))) {
@@ -34,8 +101,8 @@ export function checkReviewedTrees(files, authored, integrated) {
 }
 export {integrationProfile} from './integration-profile.mjs';
 
-async function tree(api, repo, commit) {
-  const object = await api(`${root(repo)}/git/commits/${commit}`);
+async function tree(api, repo, commit, knownObject) {
+  const object = knownObject ?? await api(`${root(repo)}/git/commits/${commit}`);
   const value = await api(`${root(repo)}/git/trees/${object.tree.sha}?recursive=1`);
   need(!value.truncated && Array.isArray(value.tree), 'Incomplete integration tree; cannot verify reviewed scope');
   return {object, entries: new Map(value.tree.map(row => [row.path, row]))};
@@ -43,9 +110,12 @@ async function tree(api, repo, commit) {
 
 // All remote authorities and evidence are re-read in both trusted phases. No
 // candidate executable code is imported by this module or given a write token.
-export async function inspectMerge({api, repo, number, expectedHead, policy, evidenceCheck = checkPremergeEvidence}) {
+export async function inspectMerge({api, repo, number, expectedHead, policy, evidenceCheck = checkPremergeEvidence, candidateContext}) {
   const pr = await api(`${root(repo)}/pulls/${number}`);
-  need(pr.head.sha === expectedHead, 'PR head changed; review the new head');
+  if (pr.head.sha !== expectedHead) throw candidateFailure('PR head changed; review the new head',
+    candidateDiagnostics(null, candidateContext?.base ?? pr.base.sha, expectedHead, {
+      candidate: commitID(pr.merge_commit_sha), observed_head: commitID(pr.head.sha), observed_pr_base: commitID(pr.base.sha),
+      attempt: candidateContext?.attempt, reason: 'head-changed', observed_at: new Date().toISOString()}));
   if (pr.merged) return {replayed: true, pr};
   need(pr.state === 'open' && !pr.draft && pr.base.ref === 'main' && pr.head.repo?.full_name === repo,
     'Only open non-draft repository PRs targeting main may merge');
@@ -70,21 +140,42 @@ export async function inspectMerge({api, repo, number, expectedHead, policy, evi
 export async function prepareIntegration(options) {
   const state = await inspectMerge(options);
   if (state.replayed) return state;
-  // GitHub builds the test merge without changing the worker's branch. A stale
-  // or unavailable merge object is not interpreted as a successful integration.
-  need(state.pr.mergeable !== false, 'Integration conflict; author intervention required');
-  const candidate = state.pr.merge_commit_sha;
-  need(/^[a-f0-9]{40}$/.test(candidate ?? ''), 'Integration candidate unavailable; resubmit unchanged head');
+  const fresh = await currentCandidate(options, state);
+  if (fresh.attempts > 1) {
+    // Waiting must not extend an expired claim or reuse revoked checks/review.
+    let revalidated;
+    try { revalidated = await inspectMerge({...options, candidateContext: {base: fresh.base, attempt: fresh.attempts}}); }
+    catch (error) {
+      throw candidateFailure(error.message, error.candidateDiagnostics ?? candidateDiagnostics(fresh.object, fresh.base, state.pr.head.sha,
+        {candidate: commitID(fresh.candidate), attempt: fresh.attempts, reason: 'authority-revalidation-failed', observed_at: new Date().toISOString()}));
+    }
+    need(!revalidated.replayed, 'PR merged during candidate refresh; resubmit unchanged head');
+    const diagnostics = candidateDiagnostics(fresh.object, fresh.base, state.pr.head.sha, {
+      candidate: commitID(fresh.candidate), observed_head: commitID(revalidated.pr.head.sha),
+      observed_base: commitID(revalidated.base), observed_pr_base: commitID(revalidated.pr.base.sha),
+      inspected_pr_base: commitID(state.pr.base.sha), attempt: fresh.attempts, observed_at: new Date().toISOString()});
+    try { unchangedPR(revalidated.pr, state.pr); }
+    catch (error) { throw candidateFailure(error.message, {...diagnostics, reason: 'pr-scope-changed'}); }
+    if (revalidated.issue.body !== state.issue.body || revalidated.reservation.claim_id !== state.reservation.claim_id) {
+      throw candidateFailure('Issue contract or ownership changed during candidate refresh', {...diagnostics, reason: 'authority-changed'});
+    }
+    if (revalidated.base !== fresh.base || revalidated.pr.base.sha !== state.pr.base.sha) {
+      throw candidateFailure('Main or PR evidence base advanced during refresh validation; resubmit unchanged head',
+        {...diagnostics, reason: 'base-advanced'});
+    }
+    Object.assign(state, revalidated);
+  }
+  const candidate = fresh.candidate;
   const [authored, integrated] = await Promise.all([
-    tree(options.api, options.repo, state.pr.head.sha), tree(options.api, options.repo, candidate)
+    tree(options.api, options.repo, state.pr.head.sha), tree(options.api, options.repo, candidate, fresh.object)
   ]);
-  checkCandidateParents(integrated.object, state.base, state.pr.head.sha);
+  checkCandidateParents(integrated.object, fresh.base, state.pr.head.sha);
   checkReviewedTrees(state.files, authored.entries, integrated.entries);
   const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation);
   let proof = null;
   try { proof = await integrationProof({...options, head: state.pr.head.sha, profile,
     baseline: await tree(options.api, options.repo, state.base), authored, candidate: integrated}); } catch { /* unavailable proof requires isolated tests */ }
-  return {...state, candidate, profile, proof};
+  return {...state, candidate, profile, proof, candidate_refresh_attempts: fresh.attempts};
 }
 export async function completeIntegration(options) {
   need(options.integrationResult === 'success' || options.integrationResult === 'skipped',

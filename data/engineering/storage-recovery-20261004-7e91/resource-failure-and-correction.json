@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "observed_at_utc": "2026-10-04T05:07:28.216062+00:00",
+  "first_attempt": "object-recovery-first-failed.json",
+  "first_verified_objects": 209,
+  "first_verified_bytes": 135910733,
+  "underlying_error_code_captured_by_first_tool": false,
+  "observations": [
+    "Concurrent native PostgreSQL image pull used remaining disk under Docker vfs; df reported zero available bytes",
+    "Failed object response was HTTP200 with zero body bytes recorded before filesystem capture failed",
+    "Only newly downloaded postgres:18-bookworm image digest3725f4e2499eef5134592b3b4ab79a543ed7f8e533b05b5b637af926630f6650 removed after confirming no container referenced it",
+    "Partial original object bytes and raw failed receipt retained; no production mutation",
+    "Current runtime has no injected owner secrets; GitHub secrets/variable metadata inspection returns403, which does not establish absence of runner-bound secrets"
+  ],
+  "corrective_controls": [
+    "Atomic fsync/rename receipt writes retain previous receipt if ENOSPC occurs",
+    "Safe explicit filesystem failure code captured without exception text",
+    "Preflight requires full object total plus64MiB local reserve",
+    "Known PostgreSQL catalog pin and exact source page columns/revision enforced",
+    "All32positive/negativecontrols pass; second fresh-directory attempt begun without concurrent image pull"
+  ],
+  "limits": [
+    "First failure root cause is supported by contemporaneous disk/image observations; underlying first exception code was not serialized",
+    "No completed SQL source capture or native PostgreSQL recovery",
+    "Image pull succeeded, but no isolated PostgreSQL target started; image removed safely to restore disk capacity"
+  ]
+}

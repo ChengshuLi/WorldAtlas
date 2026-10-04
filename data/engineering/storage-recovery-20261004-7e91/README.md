@@ -1,0 +1,15 @@
+# First bounded registered-object recovery part
+
+Worker `engineering-night-20261003-7e91f438` owns issue51 claim6280f87c-c2be-425b-b0ae-e1ba35e73c46, accepted through normal workflow37178218955/result5976712632. Fresh branch engineering/storage-recovery-20261004-7e91 began atc1ed367. Previous529release is authoritatively accepted and retained; original completed source/evidence remains on main.
+
+Source readiness: direct Node fetch failed before HTTP response; the original probe and failed receipt remain. Runtime networking requires its configured proxy. A separate proxy-enabled probe succeeds for private PostgreSQL V2 marker/capacity: revision2620,414registered media objects/236228730bytes, writable source. This is not a SQL snapshot. The existing bypass stays in session memory and hidden stdin; no rotation or audience change.
+
+Initial meaningful controls:18pass,zero failures/skips. Proposed first partial implementation copies every registered object's complete original bytes into a fresh isolated local target, verifies full hashes and local readback and unchanged source marker. Actual full-byte capture/review/integration are not yet complete. SQL/owner/nativePostgreSQL recovery remains a separate final budgeted part; no provider-managed backup, geographic or mobile certificate is claimed. Preserve failed and successful vintages separately.
+
+Only this owned checkout was made sparse to omit duplicate research/evidence files without changing Git contents. Six ignored regenerable database/package paths from the completed observation-integration checkout were removed after clean/ignored checks; the housekeeping receipt identifies their paths/bytes. No other worker artifact or original source was removed.
+
+Actual result: second isolated copy verified all414 registered objects,236228730 bytes,419 GETs in416950ms; complete source hashes and independent local readback. Distinct reviewer independently rehashed every retained file. First209-object partial copy and original failed receipt remain; concurrent image pulling exhausted local disk, corrected by removing only the unused job-owned image. Final33 meaningful controls pass with zero failures/skips. Original probe runner vintages are preserved; the repeat handover runner reuses the tested hidden-input helper.
+
+Canonical renewal70cd0247-7d3e-4b15-8848-461db4e85ccf/run37179343646/result5976855662 confirms active claim with live_work=false. No copy/probe process remains. Raw copies in the two job-owned .cache destinations remain outside Git; no offsite retention guarantee or SQL/owner-registry recovery is asserted.
+
+ENG0 publisher handover: https://github.com/ChengshuLi/WorldAtlas/issues/714#issuecomment-5976918188 . Current Site24/source2326792 serves matching API/static release5 pins; fresh complete static read10525834 bytes SHA3465d8f227958342cc6457f50fdf302462ffefb9fe2e6e5625cd12373a3bf7de. Handover awaits ENG main working private access and explicit acceptance. ENG0 retains this claim/ordinary engineering; propose ENG main perform remaining coordinated live work. No new deployment/DDL/import, credential rotation or audience change.
