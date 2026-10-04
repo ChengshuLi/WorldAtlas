@@ -9,7 +9,15 @@ import json
 import pathlib
 import re
 import subprocess
-from macro_policy_provenance import verify as verify_policy_provenance
+import importlib.util
+
+# Historical consumers load this script via importlib rather than adding scripts/
+# to sys.path. Resolve the sibling helper from this file in both entry modes.
+_PROVENANCE_SPEC = importlib.util.spec_from_file_location(
+    "macro_policy_provenance", pathlib.Path(__file__).with_name("macro_policy_provenance.py"))
+_PROVENANCE_MODULE = importlib.util.module_from_spec(_PROVENANCE_SPEC)
+_PROVENANCE_SPEC.loader.exec_module(_PROVENANCE_MODULE)
+verify_policy_provenance = _PROVENANCE_MODULE.verify
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 TIERS = ['location', 'province', 'area', 'region', 'subcontinent', 'continent']
