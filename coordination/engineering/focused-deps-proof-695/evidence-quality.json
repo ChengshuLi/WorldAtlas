@@ -1,0 +1,274 @@
+{
+  "version": 1,
+  "issue": 695,
+  "lane": "engineering",
+  "worker_id": "focused-deps-695-worker",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 3503,
+        "sha256": "7008cf863c34289821742dee2fb03c3d85d67299a728345d19a7c3dd5fce1471",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 6400,
+        "sha256": "aa99aaee0274fc34110d999898d664754e4cee0910296bc21a8e64b2c7baca34",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-proof.mjs",
+        "bytes": 3844,
+        "sha256": "ae1eca0bebcb40b39c2ea2540e79774d1f136ae52ac1fce6fdb4cb838349b67a",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/claim-renewal.json",
+      "bytes": 809,
+      "sha256": "a6678463dd66694533161af44d8f51c887026b94ad6adcafde107ed3a9052dad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "bytes": 3707,
+      "sha256": "9aa7309a05b92c16b0cc24df6a3771670ceeba6c25ea45af46bc28d235861097",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/reuse-plan.json",
+      "bytes": 1123,
+      "sha256": "8117fe903b3a0f28f90176496a7d16d064b358ba61f49fc880268ef42c964df6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/source-focused-summary.log",
+      "bytes": 324,
+      "sha256": "a422ecb283fa2b5c11ea748f99f0aa048a248af46572f0aa4e71ad8b3db23c14",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "focused-hosted-observation",
+      "kind": "code",
+      "description": "Read actual hosted source job timestamps/log summaries and exercise a second owned evidence-only PR through the normal trusted queue; await its actual matching accepted bot receipt.",
+      "software": "Node24, Git, read-only GitHub API",
+      "units": "seconds, test outcomes, immutable bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "before-job_total",
+      "value": 42.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "9aa7309a05b92c16b0cc24df6a3771670ceeba6c25ea45af46bc28d235861097",
+      "evaluation_commit": "e907a116d62c3a63668cb58772397b70a3c7c6cb"
+    },
+    {
+      "id": "before-npm_install",
+      "value": 18.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "9aa7309a05b92c16b0cc24df6a3771670ceeba6c25ea45af46bc28d235861097",
+      "evaluation_commit": "e907a116d62c3a63668cb58772397b70a3c7c6cb"
+    },
+    {
+      "id": "before-focused_tests",
+      "value": 15.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "9aa7309a05b92c16b0cc24df6a3771670ceeba6c25ea45af46bc28d235861097",
+      "evaluation_commit": "e907a116d62c3a63668cb58772397b70a3c7c6cb"
+    },
+    {
+      "id": "first_after-job_total",
+      "value": 25.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "9aa7309a05b92c16b0cc24df6a3771670ceeba6c25ea45af46bc28d235861097",
+      "evaluation_commit": "99de9b26d52ae5d3bdc501fe668493e85a4ada34"
+    },
+    {
+      "id": "first_after-npm_install",
+      "value": 0.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "9aa7309a05b92c16b0cc24df6a3771670ceeba6c25ea45af46bc28d235861097",
+      "evaluation_commit": "99de9b26d52ae5d3bdc501fe668493e85a4ada34"
+    },
+    {
+      "id": "first_after-focused_tests",
+      "value": 13.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "9aa7309a05b92c16b0cc24df6a3771670ceeba6c25ea45af46bc28d235861097",
+      "evaluation_commit": "99de9b26d52ae5d3bdc501fe668493e85a4ada34"
+    },
+    {
+      "id": "final_after-job_total",
+      "value": 27.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "9aa7309a05b92c16b0cc24df6a3771670ceeba6c25ea45af46bc28d235861097",
+      "evaluation_commit": "97717781292a78a06dc1a912358db51c2bc310e9"
+    },
+    {
+      "id": "final_after-npm_install",
+      "value": 0.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "9aa7309a05b92c16b0cc24df6a3771670ceeba6c25ea45af46bc28d235861097",
+      "evaluation_commit": "97717781292a78a06dc1a912358db51c2bc310e9"
+    },
+    {
+      "id": "final_after-focused_tests",
+      "value": 17.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "9aa7309a05b92c16b0cc24df6a3771670ceeba6c25ea45af46bc28d235861097",
+      "evaluation_commit": "97717781292a78a06dc1a912358db51c2bc310e9"
+    },
+    {
+      "id": "source-tests",
+      "value": 102,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "a422ecb283fa2b5c11ea748f99f0aa048a248af46572f0aa4e71ad8b3db23c14",
+      "evaluation_commit": "97717781292a78a06dc1a912358db51c2bc310e9"
+    },
+    {
+      "id": "source-pass",
+      "value": 102,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "a422ecb283fa2b5c11ea748f99f0aa048a248af46572f0aa4e71ad8b3db23c14",
+      "evaluation_commit": "97717781292a78a06dc1a912358db51c2bc310e9"
+    },
+    {
+      "id": "source-fail",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "a422ecb283fa2b5c11ea748f99f0aa048a248af46572f0aa4e71ad8b3db23c14",
+      "evaluation_commit": "97717781292a78a06dc1a912358db51c2bc310e9"
+    },
+    {
+      "id": "source-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "input_sha256": "a422ecb283fa2b5c11ea748f99f0aa048a248af46572f0aa4e71ad8b3db23c14",
+      "evaluation_commit": "97717781292a78a06dc1a912358db51c2bc310e9"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "before-job_total",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/samples/before/seconds/job_total"
+    },
+    {
+      "metric_id": "before-npm_install",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/samples/before/seconds/npm_install"
+    },
+    {
+      "metric_id": "before-focused_tests",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/samples/before/seconds/focused_tests"
+    },
+    {
+      "metric_id": "first_after-job_total",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/samples/first_after/seconds/job_total"
+    },
+    {
+      "metric_id": "first_after-npm_install",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/samples/first_after/seconds/npm_install"
+    },
+    {
+      "metric_id": "first_after-focused_tests",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/samples/first_after/seconds/focused_tests"
+    },
+    {
+      "metric_id": "final_after-job_total",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/samples/final_after/seconds/job_total"
+    },
+    {
+      "metric_id": "final_after-npm_install",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/samples/final_after/seconds/npm_install"
+    },
+    {
+      "metric_id": "final_after-focused_tests",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/samples/final_after/seconds/focused_tests"
+    },
+    {
+      "metric_id": "source-tests",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/final_source_tests/tests"
+    },
+    {
+      "metric_id": "source-pass",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/final_source_tests/pass"
+    },
+    {
+      "metric_id": "source-fail",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/final_source_tests/fail"
+    },
+    {
+      "metric_id": "source-skipped",
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "json_pointer": "/final_source_tests/skipped"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "gh run view 37168505118 --log",
+    "node scripts/queue-pr-merge.mjs --pr PROOF_PR --head REVIEWED_HEAD"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/claim-renewal.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/focused-timings.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/reuse-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/source-focused-summary.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/focused-deps-proof-695/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

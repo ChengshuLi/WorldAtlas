@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "issue": 695,
+  "profile": "evidence",
+  "status": "awaiting-real-normal-queue-proof",
+  "acceptance": [
+    "Current approved workflow executes every focused control with zero test skips while npm installation is intentionally skipped",
+    "All full missing/failed/cancelled/skipped Node-install controls remain successful",
+    "Candidate complete tree equals current reviewed tested head; trusted prepare and final merge revalidate same actual successful run ID and attempt",
+    "Normal queue skips isolated integration only because valid exact-tree proof establishes coverage; matching final bot receipt accepts merge",
+    "After that actual receipt is verified, record completion, close695 and release actual claim"
+  ],
+  "limits": [
+    "The future proof run ID cannot be committed without changing that tested head; current GitHub bot receipts supply actual outcome.",
+    "Full profile continues to install dependencies and require all existing application/build/browser/Python steps.",
+    "Normal queue only; no exceptional merge, deployment, import or provider/credential changes."
+  ]
+}

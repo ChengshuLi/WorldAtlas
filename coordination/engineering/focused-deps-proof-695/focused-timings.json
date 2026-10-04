@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "source_pr": 697,
+  "source_merge": "66aa35ba8998846abc1f3f5a9b197a85ad9505e5",
+  "samples": {
+    "before": {
+      "run_id": 37166172110,
+      "run_attempt": 1,
+      "head_sha": "e907a116d62c3a63668cb58772397b70a3c7c6cb",
+      "job_id": 111329423605,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-04T00:50:40Z",
+      "completed_at": "2026-10-04T00:51:22Z",
+      "seconds": {
+        "job_total": 42.0,
+        "npm_install": 18.0,
+        "focused_tests": 15.0
+      },
+      "steps": [
+        {
+          "name": "Install Node dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-04T00:50:46Z",
+          "completed_at": "2026-10-04T00:51:04Z"
+        },
+        {
+          "name": "Complete regression shard",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-04T00:51:04Z",
+          "completed_at": "2026-10-04T00:51:19Z"
+        }
+      ]
+    },
+    "first_after": {
+      "run_id": 37167718106,
+      "run_attempt": 1,
+      "head_sha": "99de9b26d52ae5d3bdc501fe668493e85a4ada34",
+      "job_id": 111334098520,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-04T01:20:49Z",
+      "completed_at": "2026-10-04T01:21:14Z",
+      "seconds": {
+        "job_total": 25.0,
+        "npm_install": 0.0,
+        "focused_tests": 13.0
+      },
+      "steps": [
+        {
+          "name": "Install Node dependencies",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6,
+          "started_at": "2026-10-04T01:20:58Z",
+          "completed_at": "2026-10-04T01:20:58Z"
+        },
+        {
+          "name": "Complete regression shard",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-04T01:20:59Z",
+          "completed_at": "2026-10-04T01:21:12Z"
+        }
+      ]
+    },
+    "final_after": {
+      "run_id": 37168505118,
+      "run_attempt": 1,
+      "head_sha": "97717781292a78a06dc1a912358db51c2bc310e9",
+      "job_id": 111336449983,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-04T01:36:15Z",
+      "completed_at": "2026-10-04T01:36:42Z",
+      "seconds": {
+        "job_total": 27.0,
+        "npm_install": 0.0,
+        "focused_tests": 17.0
+      },
+      "steps": [
+        {
+          "name": "Install Node dependencies",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6,
+          "started_at": "2026-10-04T01:36:22Z",
+          "completed_at": "2026-10-04T01:36:22Z"
+        },
+        {
+          "name": "Complete regression shard",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-04T01:36:22Z",
+          "completed_at": "2026-10-04T01:36:39Z"
+        }
+      ]
+    }
+  },
+  "final_source_tests": {
+    "tests": 102,
+    "pass": 102,
+    "fail": 0,
+    "skipped": 0
+  },
+  "method": "Read actual GitHub job/step timestamps and final source test log. Before npm install18s; first/final source npm install explicitly skipped0s. Complete focused tests passed; full-install refusal controls remain included.",
+  "limits": [
+    "Single hosted samples; observed job42s ->25s/27s is not a guaranteed speedup. Two extra proof controls and runner-load variation affect test timings.",
+    "These are archived source observations. The new proof PR and normal queue outcome are still pending; skipped install never establishes application coverage."
+  ]
+}
