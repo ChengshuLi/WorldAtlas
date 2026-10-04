@@ -3,6 +3,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import {gzipSync} from 'node:zlib';
+import {createHash} from 'node:crypto';
 import {performance} from 'node:perf_hooks';
 import {chromium} from '@playwright/test';
 import {formatYear} from '../../../src/model.js';
@@ -22,10 +23,10 @@ const token = await new Promise((resolve, reject) => {
     catch { reject(Error('Invalid hidden verification input')); }
   });
 });
-const previewDirectory=process.argv[6];
+const previewDirectory=process.argv[6], bundleDirectory=process.argv[7];
 const requests = [], errors = [], navigation = [], trace = [];
 let browser, server;
-const receipt = {version: 1, phase, site: origin.origin, started_at_utc: new Date().toISOString(), read_only: true, candidate_preview: Boolean(previewDirectory),
+const receipt = {version: 1, phase, site: origin.origin, started_at_utc: new Date().toISOString(), read_only: true, candidate_preview: Boolean(previewDirectory), reference_bundle_preview:Boolean(bundleDirectory), bundle_transport_limit:bundleDirectory?'New bundle is served locally; this is a code/complete-content preview and lower-bound transport experiment, not equivalent hosted performance or a production ten-second proof. Original root still traverses actual production transport.':null,
   conditions: {suite, transport: 'GET-only localhost proxy of actual private production responses; service credential remains server-side',
     browser: 'headless Chromium on Linux, 1440x1080, no CPU/network throttling', physical_mobile: false,
     cold_definition: 'Fresh browser context/asset cache; first in this verification session. Provider idle/wake state is unknown.'},
@@ -45,14 +46,28 @@ try {
         Object.assign(log,{status:200,response_bytes:bytes.length,total_ms:performance.now()-started,candidate_asset:true});
         res.writeHead(200,{'Content-Type':local.endsWith('.js')?'text/javascript':local.endsWith('.css')?'text/css':'text/html'});return res.end(bytes);
       }
+      const bundled=bundleDirectory&&(url.pathname==='/reference-attributes/startup-bundle.json.gz'?'reference-attributes/startup-bundle.json.gz':null);
+      if(bundled){
+        const bytes=fs.readFileSync(path.join(bundleDirectory,bundled));
+        Object.assign(log,{status:200,response_bytes:bytes.length,total_ms:performance.now()-started,candidate_asset:true,candidate_bundle:true});
+        if(bundled==='atlas-geography.json'){const geo=JSON.parse(bytes);receipt.reference_release=geo.reference_release;receipt.capabilities=geo.contentCapabilities;}
+        res.writeHead(200,{'Content-Type':bundled.endsWith('.gz')?'application/gzip':'application/json'});return res.end(bytes);
+      }
       const remote = await fetch(url, {headers: {'OAI-Sites-Authorization': 'Bearer ' + token}, redirect: 'error', signal: AbortSignal.timeout(120000)});
       log.headers_ms = performance.now() - started;
-      const bytes = Buffer.from(await remote.arrayBuffer());
+      let bytes = Buffer.from(await remote.arrayBuffer());
+      if(bundleDirectory&&url.pathname==='/atlas-geography.json'){
+        const proof=JSON.parse(fs.readFileSync(path.join(bundleDirectory,'preview-root-proof.json')));
+        if(remote.status!==200||createHash('sha256').update(bytes).digest('hex')!==proof.original_sha256)throw Error('Actual root changed from the pinned preview input');
+        const candidate=fs.readFileSync(path.join(bundleDirectory,'atlas-geography.json'));
+        if(createHash('sha256').update(candidate).digest('hex')!==proof.candidate_sha256)throw Error('Preview root changed');
+        log.upstream_response_bytes=bytes.length;bytes=candidate;log.candidate_root_descriptor=true;
+      }
       Object.assign(log, {status: remote.status, response_bytes: bytes.length, total_ms: performance.now() - started});
       // Never copy dispatch credentials, cookies, or private response headers to
       // Chromium/traces. Only headers needed to serve the response are allowed.
       const headers = {};
-      for (const key of ['content-type', 'cache-control', 'etag', 'last-modified']) if (remote.headers.has(key)) headers[key] = remote.headers.get(key);
+      for (const key of ['content-type', 'cache-control', 'etag', 'last-modified']) if (remote.headers.has(key)&&!(log.candidate_root_descriptor&&['etag','last-modified'].includes(key))) headers[key] = remote.headers.get(key);
       if (url.pathname === '/atlas-geography.json') {
         const geo = JSON.parse(bytes); receipt.reference_release = geo.reference_release; receipt.capabilities = geo.contentCapabilities;
       }

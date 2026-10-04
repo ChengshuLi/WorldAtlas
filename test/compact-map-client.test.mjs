@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {gzipSync} from 'node:zlib';
 
 let loaderSerial=0;
 const temporalPins={release_id:'reference:test',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
@@ -41,6 +43,55 @@ test('reference presentation context is reused within one loaded generation and 
  assert.equal(first.referenceContexts.get('location:A').climate.provenance.metadata.generation,1);
  const controller=new AbortController();controller.abort();
  await assert.rejects(loader.loadReferenceAttributes(2020,controller.signal),{name:'AbortError'});
+}));
+
+test('a pinned reference bundle preloads once and preserves legacy dated/reference separation',async()=>withLoader(async loader=>{
+ const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
+ const index={version:2,footprints_sha256:temporalPins.footprints_sha256,parts:['original.json.gz'],values:['Cfb'],types:[{attribute:'climate',valid_from:2026,valid_to:2027,method:'reference',status:'reference',source:'Original reference',metadata:{normal_period:'1991-2020'}}]};
+ const indexHash=digest(Buffer.from(JSON.stringify(index)));
+ const raw=Buffer.from(JSON.stringify({version:1,index_sha256:indexHash,index,parts:[[['location:A',[[0,0,1,1]]]]]})),bytes=gzipSync(raw);
+ const proof={version:1,path:'reference-attributes/startup-bundle.json.gz',bytes:bytes.length,sha256:digest(bytes),decoded_bytes:raw.length,decoded_sha256:digest(raw),index_sha256:indexHash,footprints_sha256:temporalPins.footprints_sha256,part_count:1};
+ const calls=[];global.fetch=async url=>{
+  calls.push(url);
+  if(url==='./atlas-geography.json')return Response.json({units:[],features:[],reference_release:{id:temporalPins.release_id,...temporalPins},referenceAttributes:proof});
+  assert.equal(url,'./reference-attributes/startup-bundle.json.gz');return new Response(bytes);
+ };
+ await loader.loadGeography();
+ const historical=await loader.loadReferenceAttributes(2020),current=await loader.loadReferenceAttributes(2026);
+ assert.deepEqual(historical.records,[]);assert.equal(historical.referenceContexts.get('location:A').climate.provenance.metadata.normal_period,'1991-2020');
+ assert.equal(current.records[0].value,'Cfb');assert.equal(current.referenceContexts,historical.referenceContexts);
+ assert.deepEqual(calls,['./atlas-geography.json','./reference-attributes/startup-bundle.json.gz']);
+}));
+
+test('a rejected old reference generation cannot clear a newer successful generation',async()=>withLoader(async loader=>{
+ let rejectOld,reads=0;
+ global.fetch=async url=>{
+  if(url==='./atlas-geography.json')return Response.json({units:[],features:[]});
+  if(url==='./reference-attributes/index.json'){
+   reads++;if(reads===1)return new Promise((resolve,reject)=>{rejectOld=reject;});
+   return Response.json({version:1,parts:['current.json']});
+  }
+  assert.equal(url,'./reference-attributes/current.json');return Response.json([]);
+ };
+ const failed=assert.rejects(loader.loadReferenceAttributes(2020),/old-generation-unavailable/);
+ await loader.loadGeography();const current=await loader.loadReferenceAttributes(2020);
+ rejectOld(Error('old-generation-unavailable'));await failed;
+ const repeated=await loader.loadReferenceAttributes(2021);
+ assert.equal(reads,2);assert.equal(repeated.referenceContexts,current.referenceContexts);
+}));
+
+test('complete entity and history reads start before the catalog finishes',async()=>withLoader(async loader=>{
+ let finishCatalog;const calls=[];
+ global.fetch=async url=>{
+  calls.push(url);
+  if(url==='./atlas-geography.json')return Response.json({units:[],parts:['catalog.json'],entityParts:['entities.json'],temporalHistoryParts:['history.json'],temporal:{}});
+  if(url==='./catalog.json')return new Promise(resolve=>{finishCatalog=()=>resolve(Response.json([]));});
+  assert.ok(['./entities.json','./history.json'].includes(url));return Response.json([]);
+ };
+ const pending=loader.loadGeography();await new Promise(setImmediate);
+ assert.deepEqual(new Set(calls),new Set(['./atlas-geography.json','./catalog.json','./entities.json','./history.json']));
+ finishCatalog();const result=await pending;
+ assert.deepEqual(result.features,[]);assert.deepEqual(result.temporal,{entities:[],history:[]});
 }));
 
 test('older Workers negotiate the sparse limit without masking unrelated bad requests',async()=>withLoader(async loader=>{

@@ -18,3 +18,20 @@ test('version-pinned ownership digests reject mixed deployments and support host
  await assert.rejects(loadOwnershipAssets(manifest,async url=>new Response(gzipSync(url.endsWith('runs')?mixed:files.rows))),/checksum/);
  await assert.rejects(loadOwnershipAssets(manifest,async url=>new Response(url.endsWith('runs')?mixed:files.rows)),/checksum/);
 });
+
+test('bounded concurrent transport retains complete row-before-run reconstruction',async()=>{
+ const rows=Uint32Array.of(0,8,8,8),runs=Uint32Array.from({length:64},(_,i)=>i);
+ const manifest={version:1,size:2,runWords:runs.length,parts:[{kind:'rows',path:'rows',offset:0,words:4},
+  ...Array.from({length:16},(_,i)=>({kind:'runs',path:'run-'+i,offset:i*4,words:4}))]};
+ let active=0,maximum=0,rowsFinished=false;const completed=new Set();
+ const result=await loadOwnershipAssets(manifest,async url=>{
+  active++;maximum=Math.max(maximum,active);
+  if(url!=='./rows')assert.equal(rowsFinished,true);
+  await new Promise(resolve=>setTimeout(resolve,2));
+  const name=url.slice(2),bytes=name==='rows'?rows:runs.slice(Number(name.slice(4))*4,Number(name.slice(4))*4+4);
+  if(name==='rows')rowsFinished=true;
+  completed.add(name);active--;return new Response(Buffer.from(bytes.buffer));
+ });
+ assert.ok(maximum>1&&maximum<=8);assert.equal(completed.size,17);
+ assert.deepEqual(result.rows,rows);assert.deepEqual(result.runs,runs);
+});

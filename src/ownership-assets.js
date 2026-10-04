@@ -35,7 +35,7 @@ export async function loadOwnershipAssets(manifest,fetcher=fetch){
     await verify(new Uint8Array(words.buffer,words.byteOffset,words.byteLength),part.decoded_sha256);
     output[part.kind].set(words,part.offset);
   };
-  const loadParts=async parts=>{let next=0;await Promise.all(Array.from({length:Math.min(4,parts.length)},async()=>{while(next<parts.length)await loadPart(parts[next++]);}));};
+  const loadParts=async parts=>{let next=0;await Promise.all(Array.from({length:Math.min(8,parts.length)},async()=>{while(next<parts.length)await loadPart(parts[next++]);}));};
   // Row-local delta streams depend on the complete immutable row table.
   await loadParts(manifest.parts.filter(part=>part.kind==='rows'));
   await loadParts(manifest.parts.filter(part=>part.kind==='runs'));
