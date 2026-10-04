@@ -1,0 +1,26 @@
+✔ full original hash, copied bytes, local readback and unchanged source marker; no maintenance or range claims (34.852257ms)
+✔ reject corrupted full bytes with preserved sanitized partial receipt (3.044959ms)
+✔ reject truncated body with preserved sanitized partial receipt (2.42247ms)
+✔ reject oversized body with preserved sanitized partial receipt (2.391734ms)
+✔ reject range response with preserved sanitized partial receipt (2.463031ms)
+✔ reject misleading full content-range with preserved sanitized partial receipt (1.588815ms)
+✔ reject wrong content-length with preserved sanitized partial receipt (1.683176ms)
+✔ reject duplicate media identity with preserved sanitized partial receipt (1.478668ms)
+✔ reject negative byte count with preserved sanitized partial receipt (1.627202ms)
+✔ reject unknown extra factual table with preserved sanitized partial receipt (1.269924ms)
+✔ reject incomplete V2 legacy projection with preserved sanitized partial receipt (0.844833ms)
+✔ reject uncovered footprint object references with preserved sanitized partial receipt (1.487542ms)
+✔ reject changed final source with preserved sanitized partial receipt (2.675151ms)
+✔ reject unsafe credential-bearing origin with preserved sanitized partial receipt (0.380333ms)
+✔ refuse existing target and preserve original artifact (0.573234ms)
+✔ deadline covers stalled response body and retains partial bytes (26.876352ms)
+✔ late fetch cannot create object files after deadline rejection (103.57709ms)
+✔ abort propagates and does not disclose credential (0.936551ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 307.406076
