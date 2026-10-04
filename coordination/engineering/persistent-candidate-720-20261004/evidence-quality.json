@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "issue": 720,
+  "lane": "engineering",
+  "worker_id": "persistent-candidate-root-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "9afd09e93154a3be951fd38908398ab36011dfbb",
+    "files": [
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 6400,
+        "sha256": "aa99aaee0274fc34110d999898d664754e4cee0910296bc21a8e64b2c7baca34",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 18835,
+        "sha256": "a79c2b945c60213a04a07b5e3dcdd9ecd481b5bcb17663d5c6b4d89c5401a1e9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 15207,
+        "sha256": "e4d81b76a3125e381c91c724eacd78dd3c15ae40c52c263d42637bb3ca0ec7e8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-worker-merge.mjs",
+        "bytes": 3249,
+        "sha256": "0273cd0f1e1dc32e8e70c5bf25a77ea805b891bb5821878a325f6ec1a4963481",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration-entrypoint.test.mjs",
+        "bytes": 7244,
+        "sha256": "1f2d85b474c10c881af68866077a9fb26f72dfbcfdd9d24d823784f9e45cd77f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration.test.mjs",
+        "bytes": 21029,
+        "sha256": "8cea7cddf475ce943e9f86541694fc5c73af51dc652e40054fd6c8e45c1661a2",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 6652,
+      "sha256": "26dce37d9dd4ab7d2c4af377ba9876ced0c29d1615fe719b49099da54a4d9b5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 19694,
+      "sha256": "96deb74e712d5122e2ba655beb40f5ecca611ec85064fa745fd58ee5d6510b75",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 19391,
+      "sha256": "706f9b05ce67bb87b087ce03f63703804bdf645a7f1504a9c4fed5a30c6843bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 4589,
+      "sha256": "46edf43d897b8ea2fda500705c6758e32ad56b1bf8c439e016979d7c2cbc8a88",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "bytes": 14246,
+      "sha256": "2f787aa92e1734712479dcf6bc808623aa1af33334cd1ce434951147a3663a07",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 26502,
+      "sha256": "07aa94340838e2e49ada7052a6ac319c9e873d9a5258895b99f456f83e957c20",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/persistent-candidate-720-20261004/README.md",
+      "bytes": 2512,
+      "sha256": "0a97ac2e6d2a2426415499cbc054c64f2a81c3587f5fe17276dad9513cbbfe04",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/persistent-candidate-720-20261004/claim.json",
+      "bytes": 831,
+      "sha256": "493f0e07b5f353db2d9192b847b0cfbd2aecb6406226b95e38b56f8d637e6b90",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/persistent-candidate-720-20261004/github-probe.json",
+      "bytes": 837,
+      "sha256": "c7fb72b93e4e50984834101ddcd30408baed7a94712d874ee7dfe542f23415ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/persistent-candidate-720-20261004/validation.txt",
+      "bytes": 29597,
+      "sha256": "32ca1d88d7c4f0d541f077d83ec741e3b74cba6334145648b881a0dfbc89eff3",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "isolated-candidate",
+      "kind": "code",
+      "description": "Supported exact-SHA GitHub merge into owned disposable branch after automatic preview polling fails; explicit parent/review/authority validation and guarded cleanup",
+      "software": "Node24/GitHub Git database and branch merge APIs",
+      "units": "commit identities"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/persistent-candidate-720-20261004/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "aa99aaee0274fc34110d999898d664754e4cee0910296bc21a8e64b2c7baca34"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "a79c2b945c60213a04a07b5e3dcdd9ecd481b5bcb17663d5c6b4d89c5401a1e9"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "original_sha256": "e4d81b76a3125e381c91c724eacd78dd3c15ae40c52c263d42637bb3ca0ec7e8"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "0273cd0f1e1dc32e8e70c5bf25a77ea805b891bb5821878a325f6ec1a4963481"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "status": "modified",
+      "original_sha256": "1f2d85b474c10c881af68866077a9fb26f72dfbcfdd9d24d823784f9e45cd77f"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "8cea7cddf475ce943e9f86541694fc5c73af51dc652e40054fd6c8e45c1661a2"
+    },
+    {
+      "path": "coordination/engineering/persistent-candidate-720-20261004/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/persistent-candidate-720-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/persistent-candidate-720-20261004/github-probe.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/persistent-candidate-720-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/persistent-candidate-720-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

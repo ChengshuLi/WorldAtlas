@@ -82,7 +82,17 @@ vintage validation. Rejections retain expected/actual commit IDs, observation ti
 and attempt count. Worker commands and branch ownership do not change; no automatic
 rebases or conflict resolutions occur. This reduces stale-preview retries, not the
 need to validate a genuinely changed integration base. Testing remains parallel,
-and only final merging is serialized.
+and only final merging is serialized. If the automatic preview stays stale, trusted
+preparation creates an owned disposable `worldatlas-integration/pr-N-REQUEST-RUN`
+branch at the exact main SHA and asks GitHub to merge the exact reviewed SHA there.
+It validates the resulting parents and reviewed tree before tests. This never edits
+main or worker branches and executes no candidate code with write credentials.
+The final job deletes only that exact owned ref at its expected SHA, including on
+test/merge rejection. Failed cleanup is recorded for operator inspection. Failed preparation notification
+also attempts exact-owned cleanup; an unconfirmed ref creation records its possible
+resource without deleting a collision. Canceled
+jobs may leave an owned ref and require cleanup, never blind deletion or proof of
+merge. Candidate tests still check out immutable SHAs with read-only permissions.
 
 Base-dependent evidence still needs refresh: a metric labeled current must match the actual PR-base vintage, and original-file receipts must match actual base bytes. Disjoint main changes with unchanged scoped inputs can reuse review; fresh global measurements or changes to the reviewed inputs cannot. Preserve the earlier evidence, refresh in a new vintage, and obtain exact-head review when needed. Trusted preflight selects checks by every changed and renamed path. Code, workflow, schema and core-data changes run the complete unit suite across three parallel shards, plus one hosted package build. Isolated geography/history campaign evidence and engineering-owned receipts or Markdown/text docs run the focused ownership/evidence/review/invariant suite, without rebuilding the unchanged application. Both profiles run in isolated read-only jobs without secrets or persistent checkout credentials. They retain the same exact candidate, reviewed-byte, claim and evidence gates; a renamed runtime file cannot evade full regression. Prepare/final jobs execute only fresh trusted main code. Tests are bounded to35minutes, trusted jobs to10minutes each; unfinished heads fail preflight rather than holding the slot for worker action.
 
