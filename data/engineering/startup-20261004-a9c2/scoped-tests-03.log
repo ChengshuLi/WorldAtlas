@@ -1,0 +1,48 @@
+✔ reference presentation context is reused within one loaded generation and rebuilt on reload (32.055272ms)
+✔ a pinned reference bundle preloads once and preserves legacy dated/reference separation (18.755743ms)
+✔ a rejected old reference generation cannot clear a newer successful generation (4.104287ms)
+✔ complete entity and history reads start before the catalog finishes (4.6432ms)
+✔ older Workers negotiate the sparse limit without masking unrelated bad requests (5.551429ms)
+✔ complete inline temporal streams use the existing pin and revision validator without extra HTTP reads (6.183671ms)
+✔ inline temporal revision or release drift restarts the scalar snapshot rather than repinning it (6.127967ms)
+✔ absent inline temporal pages retain bounded ordinary geography paging (4.085639ms)
+✔ partial inline temporal pages cannot become authoritative or trigger unbounded reads (3.59531ms)
+✔ compact client hydrates two atomic entity pages and retains shared source provenance (7.386544ms)
+✔ oversized second page reduces its limit and retries its cursor without duplicating completed pages (3.087355ms)
+✔ a first-page size retry reaches the reduced request and preserves retirement authority (3.257491ms)
+✔ retryable conflicts and cross-page revision changes restart the complete compact snapshot (3.56912ms)
+✔ three persistently inconsistent attempts produce unavailable evidence without cold-cache authority (3.810724ms)
+✔ warm failures retain claims and withdrawals atomically only for the same year and example setting (5.212878ms)
+✔ malformed compact pages, incorrect years and cursor cycles fail atomically (17.084784ms)
+✔ compact client propagates aborts and passes the signal to its network request (2.472096ms)
+✔ clients without a compact capability keep the original three-stream protocol (2.412707ms)
+✔ the geography capability enables compact reads through the actual manifest loader (2.607311ms)
+✔ ownership assets reconstruct out-of-order compressed chunks and reject truncation (36.488294ms)
+✔ version-pinned ownership digests reject mixed deployments and support host-decoded gzip (8.281694ms)
+✔ bounded concurrent transport retains complete row-before-run reconstruction (7.894261ms)
+✔ bundle preserves complete records, supported intervals, source context and original bytes (45.506439ms)
+✔ separate bundle runs are byte-identical and cannot overwrite an earlier output (10.152845ms)
+✔ proof rejects mixed footprints, unsafe routes and oversized declarations before any fetch (8.311379ms)
+✔ bad hashes, truncated data and unavailable bundles fail closed (5.650889ms)
+✔ an internally incomplete roster is rejected even with matching transport hashes (4.698843ms)
+✔ packaging refuses unsafe source rosters and mismatched source footprints (5.024495ms)
+✔ prepared context preserves full output across dates, uncertainty and unavailable evidence (3.503521ms)
+✔ environmental context can be displayed without inventing historical field evidence (0.404399ms)
+✔ modern supported records and historical reference context share a category and map color (0.377119ms)
+✔ dated historical observations override modern context until their exclusive interval end (0.172029ms)
+✔ explicit dated uncertainty and unmapped source text cannot be replaced by a baseline (0.246321ms)
+✔ only supported environmental references can supply presentation context (0.15259ms)
+✔ invalidated geography cannot retain environmental context or restore a dated field (0.253642ms)
+✔ reference source dates and environmental caveats survive display unchanged (0.168935ms)
+✔ an evidence outage leaves historical fields unknown while immutable reference context remains available (0.309196ms)
+✔ missing baselines remain unknown and non-environmental fields never acquire environmental context (0.207863ms)
+✔ baseline selection is deterministic and keeps the chosen source interval rather than extending it (0.227483ms)
+✔ compact and legacy context decoding preserve original supported intervals and source metadata (0.548377ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 205.061651

@@ -8,6 +8,8 @@ import {compileOwnership,packOwnership} from '../src/pixel-ownership.js';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {prepareEvidenceBundle} from './prepare-evidence-bundle.mjs';
 import {packageOwnershipHistory} from './package-ownership-history.mjs';
+import {packageReferenceBundle} from './package-reference-bundle.mjs';
+import {packageStartupOwnership} from './package-startup-ownership.mjs';
 import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
 import { createHash } from 'node:crypto';
 const audit=JSON.parse(await fs.readFile('data/granularity-audit.json','utf8'));
@@ -59,11 +61,15 @@ try {
   }
   await fs.mkdir('dist/ownership',{recursive:true});
   const pixelMap=fixedGrid?Object.fromEntries(['version','coordinateBits','size','runWords','parts'].map(key=>[key,fixedGrid[key]])):{version:ownership.version??1,coordinateBits:ownership.coordinateBits,size:ownership.size,runWords:ownership.runs.length,parts:[]};
-  if(fixedGrid)for(const part of fixedGrid.parts){const bytes=await fs.readFile(`data/canonical-grid/${part.path}`);if(createHash('sha256').update(bytes).digest('hex')!==part.sha256)throw Error(`Precompiled ownership hash mismatch: ${part.path}`);await fs.writeFile(`dist/${part.path}`,bytes);}
+  // Original canonical files remain in data and prior published vintages. The
+  // deployment includes only the transport referenced by its new manifest;
+  // this build must never prune retained objects from the publisher's storage.
+  if(fixedGrid)for(const part of fixedGrid.parts){const bytes=await fs.readFile(`data/canonical-grid/${part.path}`);if(createHash('sha256').update(bytes).digest('hex')!==part.sha256)throw Error(`Precompiled ownership hash mismatch: ${part.path}`);if(fixedGrid.version!==2||part.kind==='rows')await fs.writeFile(`dist/${part.path}`,bytes);}
   else for(const kind of ['rows','runs'])for(let offset=0;offset<ownership[kind].length;offset+=1048576){
     const words=ownership[kind].slice(offset,offset+1048576),path=`ownership/${kind}-${offset}.bin.gz`;
     await fs.writeFile(`dist/${path}`,gzipSync(shuffleOwnershipBytes(words),{level:9}));pixelMap.parts.push({kind,offset,words:words.length,path,encoding:'byte-shuffle'});
   }
+  if(fixedGrid?.version===2){const transport=await packageStartupOwnership({manifest:fixedGrid,source:'data/canonical-grid',destination:'dist'});pixelMap.parts=transport.pixelMap.parts;}
   const catalog=gridIndex.map(({feature,index,bounds})=>({...feature,geometry:null,pixelIndex:index,gridBounds:bounds}));
   const catalogParts=[];
   for(let i=0;i<catalog.length;i+=1500){const path=`geography/catalog-${i/1500}.json.gz`;catalogParts.push(path);await fs.writeFile(`dist/${path}`,gzipSync(JSON.stringify(catalog.slice(i,i+1500)),{level:9}));}
@@ -73,12 +79,14 @@ try {
   for(let i=0;i<reference.temporal.history.length;i+=5000){const path=`geography/history-${i/5000}.json.gz`;temporalHistoryParts.push(path);await fs.writeFile(`dist/${path}`,gzipSync(JSON.stringify(reference.temporal.history.slice(i,i+5000))));}
   const geographicRelease=readGeographicReleaseManifest('data/geographic-releases').releases.at(-1);
   if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
-  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
+  const referenceBundle=await packageReferenceBundle({source:'data/reference-attributes',destination:'dist/reference-attributes',expectedFootprints:geographicRelease.footprints_sha256});
+  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
   await fs.writeFile('dist/environment-classifications.json',JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
   await packageOwnershipHistory({source:'data/ownership-history',destination:'dist/ownership-history',hosted:process.env.ATLAS_HOSTED_BUILD==='1'});
   await fs.cp('data/ownership-runtime','dist/ownership-runtime',{recursive:true});
-  await fs.cp('data/reference-attributes','dist/reference-attributes',{recursive:true});
+  // Complete original reference rows/index are pinned inside the new bundle.
+  // Originals remain in data and prior published vintages; never prune them.
   await fs.mkdir('dist/prepared-evidence',{recursive:true});
   await fs.copyFile('data/prepared-evidence/index.json','dist/prepared-evidence/index.json');
   for(const part of preparedEvidence.parts)await fs.copyFile(`data/prepared-evidence/${part.path}`,`dist/prepared-evidence/${part.path}`);

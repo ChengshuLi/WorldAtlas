@@ -27,6 +27,19 @@ function fingerprint(rows){
  return hash.digest('hex');
 }
 function prepared(directory,kind){
+ if(kind==='reference'&&!fs.existsSync(path.join(directory,'index.json'))){
+  const atlas=read(path.join(directory,'..','atlas-geography.json')),descriptor=atlas.referenceAttributes;
+  assert.equal(descriptor.version,1);
+  const bytes=fs.readFileSync(path.join(directory,'..',descriptor.path));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),descriptor.sha256);
+  const raw=gunzipSync(bytes);
+  assert.equal(createHash('sha256').update(raw).digest('hex'),descriptor.decoded_sha256);
+  const bundle=JSON.parse(raw),original=prepared(path.join(root,'data/reference-attributes'),'reference');
+  assert.equal(bundle.index_sha256,descriptor.index_sha256);
+  assert.deepEqual(bundle.index,original.index);
+  assert.deepEqual(bundle.parts,original.parts);
+  return {index:bundle.index,parts:bundle.parts};
+ }
  const index=read(path.join(directory,'index.json'));
  const parts=index.parts.map(p=>read(path.join(directory,typeof p==='string'?p:p.path)));
  if(kind==='owner'&&index.evidence_parts)index.evidence=index.evidence_parts.flatMap(p=>read(path.join(directory,p.path)));

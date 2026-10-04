@@ -3,6 +3,7 @@ import {loadHostedTemporalGeography} from './hosted-temporal-client.js';
 import {mergeHostedTemporalHistory} from './hosted-temporal-geography.js';
 import {decodeReferences,decodeReferenceContext} from './reference-records.js';
 import {referenceContextByLocation} from './reference-context.js';
+import {loadReferenceBundle} from './reference-bundle.js';
 import {preparedEvidencePartsAt,selectPreparedEvidence,verifyPreparedEvidencePart,verifyPreparedEvidenceIndexBytes,mergePreparedEvidence} from './prepared-evidence.js';
 import {decodeDerived} from './derived-records.js';
 import {runtimeOwnershipBucket,runtimeOwnershipData} from './runtime-ownership.js';
@@ -18,6 +19,7 @@ let datedGeographySupported=false,expectedGeography,referenceTemporalHistory=[];
 const ownershipRequests=new Map();
 let ownershipIndexRequest;
 let referenceAttributeRequest;
+let referenceAttributeBundle,referenceAttributeFootprints;
 let preparedEvidenceIndexRequest,preparedEvidenceProof;
 const preparedEvidenceRequests=new Map();
 async function loadPreparedEvidence(year,examples,signal){
@@ -27,9 +29,18 @@ async function loadPreparedEvidence(year,examples,signal){
  const active=new Set(selected.map(p=>p.path));for(const key of preparedEvidenceRequests.keys())if(!active.has(key))preparedEvidenceRequests.delete(key);signal?.throwIfAborted();
  return selectPreparedEvidence(index,parts,year,{examples,expected:preparedEvidenceProof});
 }
+function loadReferenceGeneration(){
+ if(!referenceAttributeRequest){
+  const proof=referenceAttributeBundle,footprints=referenceAttributeFootprints;
+  const request=(proof?loadReferenceBundle(proof,footprints):readJSON('./reference-attributes/index.json').then(async index=>({index,parts:await Promise.all(index.parts.map(p=>readJSON(`./reference-attributes/${p}`)))})))
+   .then(({index,parts})=>{const referenceBaselines=decodeReferenceContext(parts,index);return {index,parts,referenceBaselines,referenceContexts:referenceContextByLocation(referenceBaselines)};})
+   .catch(error=>{if(referenceAttributeRequest===request)referenceAttributeRequest=null;throw error;});
+  referenceAttributeRequest=request;
+ }
+ return referenceAttributeRequest;
+}
 async function loadReferenceAttributes(year,signal){
- referenceAttributeRequest ||= readJSON("./reference-attributes/index.json").then(async index=>{const parts=await Promise.all(index.parts.map(p=>readJSON(`./reference-attributes/${p}`)));const referenceBaselines=decodeReferenceContext(parts,index);return {index,parts,referenceBaselines,referenceContexts:referenceContextByLocation(referenceBaselines)};}).catch(error=>{referenceAttributeRequest=null;throw error;});
- const {index,parts,referenceBaselines,referenceContexts}=await referenceAttributeRequest;signal?.throwIfAborted();return {records:decodeReferences(parts,index,year),referenceBaselines,referenceContexts};
+ const {index,parts,referenceBaselines,referenceContexts}=await loadReferenceGeneration();signal?.throwIfAborted();return {records:decodeReferences(parts,index,year),referenceBaselines,referenceContexts};
 }
 
 async function loadOwnershipHistory(year,signal){
@@ -140,9 +151,18 @@ export async function loadGeography() {
   // Reference presentation context belongs to this loaded asset generation.
   referenceAttributeRequest=null;
   const data=await readJSON(staticAtlas ? './atlas-geography.json' : '/api/geography');
-  if(data.parts){const [features,ownership]=await Promise.all([Promise.all(data.parts.map(part=>readJSON(`./${part}`))).then(parts=>parts.flat()),data.pixelMap?loadOwnershipAssets(data.pixelMap):null]);data.features=features;data.ownership=ownership;}
-  if(data.entityParts)data.temporal.entities=(await Promise.all(data.entityParts.map(p=>readJSON(`./${p}`)))).flat();
-  if(data.temporalHistoryParts)data.temporal.history=(await Promise.all(data.temporalHistoryParts.map(p=>readJSON(`./${p}`)))).flat();
+  referenceAttributeBundle=data.referenceAttributes??null;
+  referenceAttributeFootprints=data.reference_release?.footprints_sha256??data.preparedEvidence?.footprints_sha256;
+  // Preload one complete pinned bundle; legacy deployments keep their old reads.
+  if(staticAtlas&&referenceAttributeBundle)loadReferenceGeneration().catch(()=>{});
+  const [catalog,entities,history]=await Promise.all([
+   data.parts?Promise.all([Promise.all(data.parts.map(part=>readJSON(`./${part}`))).then(parts=>parts.flat()),data.pixelMap?loadOwnershipAssets(data.pixelMap):null]):null,
+   data.entityParts?Promise.all(data.entityParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null,
+   data.temporalHistoryParts?Promise.all(data.temporalHistoryParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null
+  ]);
+  if(catalog){[data.features,data.ownership]=catalog;}
+  if(entities)data.temporal.entities=entities;
+  if(history)data.temporal.history=history;
   validateHierarchy(data.units,data.features.map(f=>f.properties));
   preparedEvidenceProof=data.preparedEvidence;
   compactMapSupported=data.contentCapabilities?.mapSnapshots===1;

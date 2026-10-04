@@ -1,0 +1,186 @@
+✔ dated non-example footprint fingerprints change with geometry/date and ignore examples (770.325673ms)
+✔ boundary fingerprints verify the archived executed canonical algorithm (223.172583ms)
+✔ changed footprints invalidate cached values while direct evidence can still resolve the location (117.298367ms)
+✔ dry run validates a whole generation without changing any live bytes (18.769436ms)
+✔ apply requires the exact dry-run hash and preserves database/catalog/history originals (14.79858ms)
+✔ failure during the multi-path commit restores every original live byte (6.269772ms)
+✔ stale runtime, prepared source hashes, province membership and grid counts fail before activation (13.440553ms)
+✔ approved hashes prevent changes between inspection and activation (7.375239ms)
+✔ unexpected predecessor files or changed historical payload block approved activation (9.224576ms)
+✔ path traversal and staging symlinks cannot replace unrelated files (2.768244ms)
+✔ duplicate geographic identities and empty groups cannot pass as a complete hierarchy (2.204664ms)
+✔ a genuine unknown-attribute creation installs reversibly without changing original history (294.916132ms)
+✔ ordered replacement then pure creation validates exact current ancestry and pinned source bytes (292.600492ms)
+✔ composed installer rejects skipped or reordered manifests, changed pins and unmatched creation inventories (762.823834ms)
+✔ composed installer rejects child historical transfers and changed source archive bytes (433.795275ms)
+✔ geometry evidence cannot silently authorize current source-name changes (316.842368ms)
+✔ source-name correction requires pinned exact metadata before/after evidence (671.315137ms)
+✔ installer summary pins geometry proof members and rejects altered evidence after approval (200.511108ms)
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 108, in validate
+    raise ValueError('Creation overlaps existing or competing land: ' + other)
+ValueError: Creation overlaps existing or competing land: original
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 108, in validate
+    raise ValueError('Creation overlaps existing or competing land: ' + other)
+ValueError: Creation overlaps existing or competing land: original
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 91, in validate
+    raise ValueError('Ambiguous existing name requires explicit identity review')
+ValueError: Ambiguous existing name requires explicit identity review
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 36, in validate
+    raise ValueError('Creation requires source identity, URL, license and attribution')
+ValueError: Creation requires source identity, URL, license and attribution
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 46, in validate
+    raise ValueError('Creation source bytes changed')
+ValueError: Creation source bytes changed
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 39, in validate
+    raise ValueError('Invalid source support interval')
+ValueError: Invalid source support interval
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 81, in validate
+    raise ValueError('Created land differs from the exact source geometry')
+ValueError: Created land differs from the exact source geometry
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 101, in validate
+    raise ValueError('Creation parent chain differs from reviewed proof')
+ValueError: Creation parent chain differs from reviewed proof
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 86, in validate
+    raise ValueError('Source identity rename must not masquerade as new land')
+ValueError: Source identity rename must not masquerade as new land
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 88, in validate
+    raise ValueError('Existing source identity cannot be created again')
+ValueError: Existing source identity cannot be created again
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 71, in validate
+    rings(matches[0]['geometry']['coordinates'])
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 70, in rings
+    rings(row)
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 67, in rings
+    raise ValueError('Source polygon rings must be explicitly closed')
+ValueError: Source polygon rings must be explicitly closed
+✔ pure source-backed creation has a null predecessor and retains every original geometry (318.717365ms)
+✔ latitude and antimeridian creation uses actual narrow land, not a world-width polygon (219.25093ms)
+✔ reject existing identity, duplicate land and competing overlap without writing output (320.665525ms)
+✔ reject unsupported source, altered geometry, invalid coordinates, chain gaps and disguised rename (803.384072ms)
+✔ a creation receipt cannot transfer history or add an unaccounted identity (190.289781ms)
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 62, in validate
+    coordinates(matches[0]['geometry']['coordinates'])
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 61, in coordinates
+    coordinates(row)
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 61, in coordinates
+    coordinates(row)
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 58, in coordinates
+    raise ValueError('Invalid longitude/latitude source coordinates')
+ValueError: Invalid longitude/latitude source coordinates
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 54, in validate
+    raise ValueError('Invalid raw source geometry must not be silently repaired')
+ValueError: Invalid raw source geometry must not be silently repaired
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 114, in <module>
+    print(json.dumps(validate(json.load(sys.stdin)), separators=(',', ':')))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 108, in validate
+    raise ValueError('Creation overlaps existing or competing land: ' + other)
+ValueError: Creation overlaps existing or competing land: competing
+✔ staged source creation compiles and publishes identical static/hosted crosswalks (352.844148ms)
+✔ invalid source coordinates, competing new land and old group mutations are rejected (307.675982ms)
+✔ owner-profile reuse rejects stale hierarchy, catalog and footprint pins (1.332008ms)
+✔ metadata-only projection retains source-backed unknown-owner coverage without approving it (1.092797ms)
+✔ current projection preserves identities and keeps source inspection separate from semantic approval (0.830562ms)
+✔ source-backed projection cannot change timeline facts or invent geographic review completion (0.332622ms)
+✔ current pins and exact counts must describe the actual geography (0.239091ms)
+✔ complete current chains cannot be reordered or silently assigned different parents (0.422768ms)
+✔ every retired or created parent has exact original archive and explicit crosswalk (0.268906ms)
+✔ location conservation and exact parent descendant membership remain exhaustive (0.304169ms)
+✔ source-backed projection resolves exact replacements and creations while all semantic branches remain open (314.314511ms)
+✔ projection preparation rejects altered source pins, wrong order and invented historical transfers (205.751661ms)
+✔ projection validator exhausts added identities, retained archives and new source-assessed groups (278.164511ms)
+✔ later geometry projection preserves original inspection bytes and namespaces current predecessor snapshots (1.966024ms)
+✔ successive source migrations conserve earlier additions and their sourced new groups (292.738243ms)
+✔ projection predecessor loading pins both gzip layers and joins exact releases (1.350886ms)
+✔ finite Marcus routing is independent of sovereignty and retains provisional lower-tier roles (0.953708ms)
+✔ reject asymmetric Japan exclusion, alternate macro routing and invented readiness (0.624982ms)
+✔ original water-masked Marcus land reconstructs from exact OSM bytes (110.616766ms)
+✔ removing the source water hole or changing the coastline is rejected (126.535465ms)
+✔ legacy hierarchy migration preserves historical records and repairs skipped parents (48582.553294ms)
+✔ topology migration retires duplicate coverage while preserving its imported history (60147.631695ms)
+✔ new source land retains unknown owners and its original source metadata (1387.042958ms)
+✔ year parsing supports BC/BCE/AD/CE and rejects invalid or out-of-range dates (1.4857ms)
+✔ every location has exactly all six hierarchy levels (1660.862887ms)
+✔ seed is idempotent and missing history stays missing (13982.969639ms)
+✔ example intervals are opt-in and end-exclusive, including ownership changes (2486.399155ms)
+✔ atomic imports reject overlapping records, invalid populations, ranks, and parents (375.253992ms)
+✔ real records take precedence over examples, with no population interpolation (919.904686ms)
+✔ boundary versions require polygons and sources, and resolve by date (1456.837395ms)
+✔ unknown, zero population, and category colors have stable, distinct semantics (1728.539407ms)
+✔ historical political records are dated, sourced, and do not extend into 2025 (1485.864106ms)
+✔ both Huidong counties have complete, distinct geographical parents (1577.365105ms)
+✔ inserts and updates cannot skip hierarchy levels (1.149313ms)
+✔ geographic regions cross ownership borders and subdivide large countries (1694.274207ms)
+✔ non-Latin municipalities remain distinct and city memberships contain all districts (1522.009047ms)
+✔ canonical screen reports actual source-land cells for a compact territorial polygon (1.242533ms)
+✔ a genuine polygon smaller than a cell remains unrepresented without assigning water (0.584601ms)
+✔ archived original dry land blocks a purported new identity on that land (94.147068ms)
+✔ an exact-name homonym on different land does not transfer or reuse archived identity (102.978176ms)
+✔ changed archive bytes fail before considering identity absence (93.532637ms)
+✔ candidate preparation refuses an existing output instead of overwriting evidence (1.523146ms)
+✔ ownership codecs preserve identity, dated labels, competing evidence and the BC/AD edge (2.119585ms)
+✔ actual environmental tables decode exactly at all normal-period boundaries (10416.119214ms)
+✔ reference codecs preserve supported precision and do not bridge unsupported intervals (0.386994ms)
+✔ actual prepared historical records match independent compact-table interpretation (14928.845117ms)
+✔ static and server exports resolve every active location identically, with examples on and off (105095.358224ms)
+ℹ tests 70
+ℹ suites 0
+ℹ pass 70
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 310395.304608

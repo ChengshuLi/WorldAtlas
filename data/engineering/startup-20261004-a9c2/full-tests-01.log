@@ -1,0 +1,1811 @@
+
+> world-atlas@0.1.0 test
+> node --test --test-concurrency=2 test/*.test.mjs
+
+✔ attributes resolve independently with direct evidence ahead of spatial derivations and examples (2.256322ms)
+✔ field evidence does not erase an independently supported attribute and examples do not mask modern reference (0.201544ms)
+✔ typed imports reject overlapping field records and preserve stable category IDs (16.227351ms)
+✔ no-year-zero resolution, exclusive interval ends and opt-in examples remain deterministic (0.559593ms)
+✔ compact references preserve supported dates and field provenance (1.105055ms)
+✔ reference territories resolve to their political owner without changing geographic identity (0.213873ms)
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 35, in <module>
+    try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>
+    print(boundary_hash(rows,args.index.resolve()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>
+    print(boundary_hash(rows,args.index.resolve()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+✖ dated non-example footprint fingerprints change with geometry/date and ignore examples (41.932131ms)
+✖ boundary fingerprints verify the archived executed canonical algorithm (51.372522ms)
+✖ changed footprints invalidate cached values while direct evidence can still resolve the location (61.403523ms)
+✔ fixed graph assignment is independent of input ordering and meets a dense categorical control (89.920992ms)
+✔ concurrent names sharing the upstream ID get distinct presentation colors without new source IDs (10.158764ms)
+✔ unconstrained names of the same identity retain the same preferred color (4.102144ms)
+✔ invalid or incomplete category graphs are rejected (0.795409ms)
+✔ the shipped palette passes all pinned historical constraints and matches the audited modern candidate (40.75022ms)
+✔ map and legend presentation keys preserve source identities and distinguish concurrent names (0.819386ms)
+✔ shared named modes distinguish display groups; fixed classifications and hierarchy use stable IDs (0.657461ms)
+✔ published OKLab reference controls include white, black and red (1.042492ms)
+✔ full-severity models preserve achromatic controls and reduce red/green separation (0.626855ms)
+✔ generated HSL colors decode consistently and malformed colors are rejected (1.936409ms)
+✔ source-name display distinction preserves entity identity without ambiguous concatenation (0.255365ms)
+✔ reference presentation context is reused within one loaded generation and rebuilt on reload (30.449872ms)
+✔ a pinned reference bundle preloads once and preserves legacy dated/reference separation (21.339388ms)
+✔ a rejected old reference generation cannot clear a newer successful generation (4.488536ms)
+✔ complete entity and history reads start before the catalog finishes (3.691624ms)
+✔ older Workers negotiate the sparse limit without masking unrelated bad requests (5.023042ms)
+✔ complete inline temporal streams use the existing pin and revision validator without extra HTTP reads (6.120627ms)
+✔ inline temporal revision or release drift restarts the scalar snapshot rather than repinning it (4.743621ms)
+✔ absent inline temporal pages retain bounded ordinary geography paging (3.50275ms)
+✔ partial inline temporal pages cannot become authoritative or trigger unbounded reads (4.138689ms)
+✔ compact client hydrates two atomic entity pages and retains shared source provenance (10.139996ms)
+✔ oversized second page reduces its limit and retries its cursor without duplicating completed pages (3.398793ms)
+✔ a first-page size retry reaches the reduced request and preserves retirement authority (2.804167ms)
+✔ retryable conflicts and cross-page revision changes restart the complete compact snapshot (3.58224ms)
+✔ three persistently inconsistent attempts produce unavailable evidence without cold-cache authority (3.937546ms)
+✔ warm failures retain claims and withdrawals atomically only for the same year and example setting (4.683951ms)
+✔ malformed compact pages, incorrect years and cursor cycles fail atomically (15.116918ms)
+✔ compact client propagates aborts and passes the signal to its network request (2.393668ms)
+✔ clients without a compact capability keep the original three-stream protocol (2.5209ms)
+✔ the geography capability enables compact reads through the actual manifest loader (2.885851ms)
+{"baselineRuns":28809329,"boundaryAndGapCells":115237316,"legacyBytes":463046592,"compactBytes":232571960}
+✔ every published canonical run survives compact packing, including its boundary cells and gaps (26902.312508ms)
+✔ compact full coordinate range, split high owner bits, seam cells and owner capacity are exact (102.630151ms)
+✔ v1 and v2 asset loaders preserve gzip/raw words, split row chunks and reject ambiguous manifests (31.093483ms)
+✔ shuffled and row-local varint transports reconstruct every packed bit across chunk and empty-row boundaries (291.57649ms)
+{"results":[{"version":1,"mismatches":0,"error":0},{"version":2,"mismatches":0,"error":0}],"high":{"pixel":[193,71,29,255],"error":0,"size":262144,"maxTextureSize":8192,"navigationOwnershipUploads":0}}
+✔ real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum coordinates and high IDs (1696.141281ms)
+✔ backend cutover is explicit and cannot expose credentials or silently return D1 (1.252759ms)
+✔ transfer maintenance blocks every API mutation before touching a database or object bucket (25.440951ms)
+✔ PostgreSQL diagnostics and raw export routes use the selected backend and retain honest quota status (3253.857467ms)
+✔ continent filters follow location membership for overseas and transcontinental reference owners (2.34813ms)
+✔ all six continent scopes partition every prepared location and reconcile reference profiles (1423.867808ms)
+✔ bounded source-policy projection is exact, reproducible, and small enough to deploy (71.182715ms)
+✔ coverage corrections count selected location identities on every applicable continent (170.681515ms)
+✔ coverage presents corrected roles with collapsed evidence and explicitly retained earlier descriptions (12.085228ms)
+✔ duplicate role IDs and stale policy assumptions cannot silently update coverage (1.391077ms)
+✔ standard envelope roundtrip uses fresh randomness, authenticated context and no plaintext fields (10.309091ms)
+✔ tampered ciphertext, authentication tag, IV, wrapped key and recipient are rejected (8.839805ms)
+✔ malformed or oversized envelopes, unapproved algorithms and invalid intervals fail closed (1.981557ms)
+✔ owner credentials, other endpoints, missing TLS and non-RSA keys cannot be transported (1.189483ms)
+✔ private delivery writes owner-only outside-Git file and refuses wrong digest, unsafe permissions, symlinks and overwrite (7.417962ms)
+✔ CLI encryption/decryption returns metadata only and failures never print plaintext or key material (123.496467ms)
+✔ accepts only pinned live publisher read window (3.769773ms)
+✔ rejects writable source (0.746656ms)
+✔ rejects legacy projection (0.529538ms)
+✔ rejects wrong main (0.368796ms)
+✔ rejects wrong tool (0.337979ms)
+✔ rejects wrong publisher (0.426713ms)
+✔ rejects undrained requests (0.43183ms)
+✔ rejects unpinned recipient (0.517881ms)
+✔ rejects missing count (0.668848ms)
+✔ rejects changed fingerprint (0.618432ms)
+✔ rejects expired window (0.406042ms)
+✔ rejects old observation (0.445061ms)
+✔ rejects future observation (0.613875ms)
+✔ rejects unbounded window (0.39153ms)
+✔ rejects canonical claim active mismatch (0.344269ms)
+✔ rejects canonical claim live_work mismatch (0.336417ms)
+✔ rejects canonical claim issue_number mismatch (0.274995ms)
+✔ rejects canonical claim claim_id mismatch (0.27203ms)
+✔ rejects canonical claim worker_id mismatch (0.380634ms)
+✔ rejects canonical claim branch mismatch (0.280403ms)
+✔ rejects canonical claim expires_at mismatch (0.540264ms)
+✔ end validation permits elapsed capture time within original window (0.516138ms)
+✔ released implementer can move on while publisher holds its own recovery child (1.263715ms)
+✔ delegated recovery rejects active source claim even without live work (0.726495ms)
+✔ delegated recovery rejects expired active source claim (0.420935ms)
+✔ delegated recovery rejects unsettled source live flag (0.474806ms)
+✔ delegated recovery rejects missing original release (0.432733ms)
+✔ delegated recovery rejects future original release (0.350248ms)
+✔ delegated recovery rejects different source issue (0.591181ms)
+✔ delegated recovery rejects implementation holder retained on operation (0.528567ms)
+✔ delegated recovery rejects non-engineering operation holder (0.403478ms)
+✔ delegated recovery rejects blocked operation (0.36469ms)
+✔ delegated recovery rejects closed operation (0.357188ms)
+✔ delegated recovery rejects unscoped operation (0.368856ms)
+✔ delegated recovery rejects missing ready label (0.443598ms)
+✔ delegated recovery rejects wrong child issue (0.423899ms)
+✔ delegated recovery rejects changed scope pin (0.38462ms)
+✔ delegated recovery rejects unauthorized handoff (0.421145ms)
+✔ delegated recovery rejects different handoff comment (0.421876ms)
+✔ delegated recovery rejects unconfirmed publisher live reservation (0.315876ms)
+✔ delegated recovery rejects expired publisher reservation (0.469538ms)
+✔ delegated recovery rejects invalid reservation number (0.362947ms)
+✔ delegated recovery rejects operation source_issue (0.419893ms)
+✔ delegated recovery rejects operation queue (0.315846ms)
+✔ delegated recovery rejects operation publisher_worker_id (0.302556ms)
+✔ delegated operation dependencies must still be complete (0.858294ms)
+✔ final readback rejects a newly reserved source and a changed operation scope (0.86206ms)
+✔ fresh start/end reservation reads fetch child and original instead of cached author claim (1.263334ms)
+✔ owner secret parsed without including connection URI in result (0.854327ms)
+✔ rejects unsafe owner endpoint or identity postgresql://worldatlas_app:redacted@ep-fixture.us-east-2.aws.neon.tech/neondb?sslmode=require (0.135404ms)
+✔ rejects unsafe owner endpoint or identity postgresql://neondb_owner:redacted@ep-fixture.us-east-2.aws.neon.tech/other?sslmode=require (0.102444ms)
+✔ rejects unsafe owner endpoint or identity postgresql://neondb_owner:redacted@ep-fixture.us-east-2.aws.neon.tech/neondb?sslmode=disable (0.071218ms)
+✔ rejects unsafe owner endpoint or identity postgresql://neondb_owner:bad%0Asecret@ep-fixture.us-east-2.aws.neon.tech/neondb?sslmode=require (0.084027ms)
+✔ rejects unsafe owner endpoint or identity postgresql://neondb_owner:redacted@ep-other.us-east-2.aws.neon.tech/neondb?sslmode=require (0.049695ms)
+✔ rejects unsafe owner endpoint or identity postgresql://neondb_owner:redacted@ep-fixture.us-east-2.aws.neon.tech/neondb?sslmode=require#fragment (0.153331ms)
+✔ isolated database identity can differ while original bytes and state remain exact (0.250067ms)
+✔ detects restored collections corruption (0.226351ms)
+✔ detects restored owner_registry corruption (0.129936ms)
+✔ detects restored permissions corruption (0.336788ms)
+✔ detects restored sequence corruption (0.094483ms)
+✔ detects source change during backup (0.096175ms)
+✔ bounded owner API accepts valid object (21.009731ms)
+✔ bounded owner API rejects malformed or oversized response 2 (0.495547ms)
+✔ bounded owner API rejects malformed or oversized response 4 (0.201523ms)
+✔ bounded owner API rejects malformed or oversized response 7 (0.180132ms)
+✔ bounded owner API rejects malformed or oversized response 2097168 (2.688674ms)
+✔ owner API rejects HTTP failures (0.260462ms)
+✔ untrusted execution fails before any provider access and writes sanitized failure receipt (2.048058ms)
+✔ restore session header adjustment preserves every factual COPY byte (0.737412ms)
+✔ restore header fails closed on missing or duplicate session setup (0.228625ms)
+✔ local constraint revalidation requires exact immutable original schema (1.221041ms)
+✔ only explicit coordination controls, plain docs and engineering receipts avoid a package build (4.575503ms)
+✔ renamed or copied runtime origins cannot hide behind documentation or receipt destinations (0.585864ms)
+✔ PR inventory exhausts pages and catches a relevant path on a later page (0.852905ms)
+✔ PR missing pages, changed heads, unavailable lookup and malformed inventories default full (5.400251ms)
+✔ push before/after comparison includes rename origins and fails full for missing or capped inventories (1.896449ms)
+✔ API failures use bounded authenticated read-only requests (2.060687ms)
+✔ workflow keeps trusted bootstrap fallback, narrow focused inputs and mandatory real archive unit checks (178.464493ms)
+✔ exact upload archive accounting includes transport/config and preserves excluded sources (46.400257ms)
+✔ reserve breaches fail before hard limits and diagnostics name large files/categories (0.611401ms)
+✔ staged Site inventory agrees with actual archive and rejects redundant transport/linked inputs (13.925773ms)
+✔ fixed environmental database guards reproduce exactly from the shared registry (1.862598ms)
+✔ all fixed IDs, display labels, explicit legacy aliases and null pass raw local and hosted SQL (246.88505ms)
+✔ unlisted environmental values reject every local import and raw snapshot/history/typed insertion (25.250024ms)
+✔ adding local guards preserves existing unrecognized evidence byte for byte and blocks changed values (6.090111ms)
+✔ hosted migration retains old claim bytes, permits exact retries and still rejects stable-ID collisions (18.130992ms)
+✔ fixed environmental classifications have unique stable identities and cover every existing reference value (1.642806ms)
+✔ classification API exposes the exact fixed vocabulary independently of database content (20.667976ms)
+✔ aliases and stable IDs produce identical whole-location values, colors and category identities (1.540262ms)
+✔ preview, both importers and raw SQL reject environmental typos while retaining explicit unknowns (38.284923ms)
+✔ grandfathered free-form evidence is retained and exact hosted replays stay idempotent without admitting new text (19.711154ms)
+✔ accepted aliases and canonical identities remain source evidence instead of rewriting imported records (24.240751ms)
+Switched to a new branch 'author'
+Switched to branch 'main'
+✔ PR evidence inventory preserves author renames and excludes a disjoint main advance (112.47361ms)
+✔ aggregate selection requires actual qualified latest current-head reviewer comment (11.197099ms)
+✔ unresolved current-head changes-requested review blocks, superseded and outsider comments do not (0.27859ms)
+✔ subordinate review binds actual body, URL, author, exact head and same worker (5.172127ms)
+✔ every subordinate manifest must have exactly one actual review binding (0.27897ms)
+✔ bounded root and child evidence verify complete changed-file union and baseline inventory (4.80307ms)
+✔ changed child manifest and absent/unassigned changed files reject (2.543895ms)
+✔ root hash cycles, duplicate assignments and changed context reject (1.124845ms)
+✔ partial baseline inventory cannot replace actual byte verification (1.606963ms)
+✔ empty inventory, alternate executed index and omitted preservation bytes reject (1.667764ms)
+✔ trusted per-partition descriptor and individual byte budgets are not raised (6.402962ms)
+✔ verifies bytes without claiming factual correctness (1.802537ms)
+✔ schema-only validation reports unverified bytes (0.237869ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (2.125594ms)
+✔ source access/license limits remain explicit; no unsafe retention (0.432793ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.301475ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (0.426934ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (1.827425ms)
+✔ paths and symlinks cannot escape candidate reader (1.502626ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (0.803982ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (1.172317ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (1.049813ms)
+✔ exact predecessor bytes retain original claims and append migration chronology (3.120354ms)
+✔ damaged archive, raw digest, current projection and previous geography reject (1.85674ms)
+✔ replaced migration history and changed proof bytes reject (0.673114ms)
+✔ claim, source inventory, count and territorial transfer reject (1.505149ms)
+✔ escaping, absolute paths and unknown archive compression reject (0.527575ms)
+✔ legacy detached terminal hash is recorded as a limit without inventing an archive (0.258029ms)
+✔ unverified withdrawals suppress every attribute source and modern owner fallback without modifying content (1.67839ms)
+✔ maintainer gate publishes complete signed, byte-verified products on both databases (3131.291705ms)
+✔ forged signatures, altered R2 bytes and incomplete inventories cannot publish (4462.015025ms)
+✔ selection corrections are source bounded, sealed, retirement-aware and preserve original bytes (2774.85674ms)
+✔ manifest and streamed object limits reject arbitrary classifications, duplicate IDs and registry byte tampering (1736.149109ms)
+✔ obsolete known evidence is removed before precedence while explicit unknown and sourced continuity remain eligible (0.950223ms)
+✔ even a trusted signed receipt cannot publish overlapping grid runs or wrong decoded bytes (1623.797876ms)
+✔ every real full-suite file runs once, with heavy migration tests separate from packaged parity (3.307526ms)
+✔ inserting a new filename cannot move reserved heavy workloads or omit any discovered file (0.516408ms)
+✔ a partial or future inventory never invents a reserved test or omits an unknown file (0.245971ms)
+✔ duplicate inventory entries are rejected by the exhaustive coverage control (0.883072ms)
+✔ test-runner edits and renames require actual full-suite validation (0.360834ms)
+✔ a reference correction retains exact claim bytes, original coordinates and the complete original chain (7.240966ms)
+✔ all receipted predecessor identities restore without overwriting active geography or transferring evidence (433.928127ms)
+✔ bounded import concurrency defaults to six and accepts only one through eight (1.017874ms)
+✔ stage then finalize publishes atomically without replaying ownership batches (63.926903ms)
+✔ append-only source batches import before newly registered geography and retain the original source bytes (43.867292ms)
+✔ interrupted real-D1 staging resumes explicit or hidden staged releases without rewriting history (166.935143ms)
+✔ a mismatched existing staged or published manifest blocks all geographic staging before writes (87.491688ms)
+✔ identical archive bytes upload once with a stable first-sorted name and preserve every receipt alias across retries (2.014818ms)
+✔ four retained metadata predecessors replay before a late creation and a future second addition (5.457678ms)
+✔ mixed creation and metadata chronology must be explicit (1.053378ms)
+✔ a creation snapshot cannot advance a previous metadata identity or alter its full source record (3.416802ms)
+✔ skipped, duplicate, reordered and mutated sequence pins fail (2.674272ms)
+✔ metadata archive tampering still fails at its chronological predecessor (0.847938ms)
+✔ legacy noncreation order remains stable and an unused new group is rejected (1.476125ms)
+✔ derived child counts must equal actual before and after immediate memberships (2.563384ms)
+✔ legacy index remains unchanged; verified extension resolves new release (3.700068ms)
+✔ pointer rejects traversal, wrong digest and changed predecessor bytes (1.570417ms)
+✔ extension rejects altered predecessor release or batch metadata (1.175632ms)
+✔ extension rejects duplicate identities, decreasing versions and repeated batch paths (1.39997ms)
+✔ manifest pointers cannot load symbolic links (0.564942ms)
+✔ compressed transport retains exact JSON bytes and rejects transport or payload tampering (0.35786ms)
+✔ staging is invisible; publication requires complete pinned membership and preserves original registry (144.569957ms)
+✔ rename/reparent releases and same-tier merge crosswalk preserve historical evidence and archived releases (57.719455ms)
+✔ manifest counts, complete same-release chains, no-year-zero calendar labels and hashes are real gates (50.325728ms)
+✔ bounded atomic staging rejects unknown/nongeographic/example identities and wrong-tier parents (41.351259ms)
+✔ immutable staged contents and ingestion collisions reject atomically; raw SQL blocks cycles and publication bypass (36.152402ms)
+✔ crosswalk evidence, tier identity and retired membership must match the published release (63.408852ms)
+✔ published pages use indexed keyset queries and older releases remain inspectable (34.988757ms)
+✔ streamed publication hashing matches exported UTF-8 canonical hashes across page boundaries (192.006749ms)
+✔ source-backed new territory publishes with a null predecessor and no invented historical attributes (71.999143ms)
+✔ live geography concurrency verifier refuses production, shared sessions and missing interactive drivers before writes (1.495494ms)
+✔ geography has its own branch and exactly one matching type (1.672792ms)
+✔ declared geography ownership is finite, safe and limited to source evidence namespaces (0.337148ms)
+✔ geography cannot edit core, history, another packet or an undeclared proposal directory (0.419602ms)
+✔ engineering consumes but preserves geography evidence while existing lanes still work (0.200742ms)
+✔ geography claims retain exact ownership through renewal and rotation, without content approval (1.4462ms)
+✔ claims and PRs refuse issue ownership expansion and incompatible modes (0.641136ms)
+✔ actual linked GitHub issue supplies geography ownership, not a PR-controlled declaration (1.747754ms)
+✔ real geography Git scope checks renamed source paths, symlinks and issue-backed CLI ownership (218.483035ms)
+✔ lane IDs must be explicit and safe (2.532597ms)
+✔ research owns only campaign files, excluding shared handovers and other campaigns (0.306231ms)
+✔ engineering preserves research and other engineering progress (0.206932ms)
+✔ partial and final PRs link one issue without needing a document tracker ID (0.540365ms)
+✔ PR policy rejects ambiguous issue links and accidental additional closures (0.25892ms)
+✔ GitHub issue type agrees with its lane and references an open issue (0.23194ms)
+✔ real git diff checks rename source paths, not only allowed destinations (35.791304ms)
+✔ another lane advancing work is not mistaken for this branch changing its files (110.276308ms)
+✔ remote issue validation reads only the event repository and requires successful labeled issue metadata (9.829418ms)
+✔ hosted catalog keeps active ancestor closure and categories as undated identities without ancient source coverage (42.915053ms)
+{"catalog_batches_imported":438,"entities":85315,"categories":1446,"sources":374,"active_units":5810,"archived_units":10259}
+✔ every generated hosted catalog batch imports through the actual service and generated D1 constraints (14375.674917ms)
+✔ a failed evidence stream cannot mix live claims with an absent retirement snapshot (41.188361ms)
+✔ dated geography shares scalar revision and complete same-year cache authority (11.398593ms)
+✔ transport compiler changes exactly the pinned 21 guards and preserves all other raw SQL and metadata (9.060128ms)
+✔ raw and derivative guards have identical original schemas and preserve all 21 conditions and error messages (11.754089ms)
+✔ native workerd D1 reproduces CASE-block truncation and applies the derivative over populated retained claims (4298.254787ms)
+✔ geographic pin guards the write transaction and retains exact original replay context (50.460708ms)
+✔ publication between preflight and batch rejects stale pins atomically, staged/malformed pins never authorize writes (36.645372ms)
+✔ unknown pinned commit outcome stays retryable and never claims a rollback (27.307305ms)
+✔ profile titles prefer direct dated evidence over English reference attestations and opt-in examples (21.117504ms)
+✔ hosted imports preserve whole-location raw values, precedence evidence and exact intervals (18.621161ms)
+✔ stable ID collisions roll back the entire batch and identical evidence stays idempotent (19.272562ms)
+✔ all tiers and nongeographic graph entities obey parent contracts (21.017774ms)
+✔ source intervals, category identity, typed scalars and habitation contradictions reject imports (22.021221ms)
+✔ raw SQL protects typed records, Unicode blank evidence, no-year-zero and retained identity (18.762875ms)
+✔ dated names and graph claims are sourced, pageable and never silently become ancient names (23.723963ms)
+✔ examples remain opt-in and bounded attribute pages preserve every location record (22.988901ms)
+✔ media metadata is immutable and content-addressed with retained sourced links (27.143108ms)
+✔ raw SQL rejects half-dated graph and media links (20.260673ms)
+✔ dated graph assertions cannot exceed known endpoint lifetimes (19.870954ms)
+✔ category IDs are shared graph identities and fictional entities remain opt-in (26.419947ms)
+✔ example media on real locations stays opt-in regardless of link source (27.235497ms)
+✔ reference and estimate source classes cannot masquerade as direct evidence (27.891015ms)
+✔ sourced corrections supersede attributes atomically while preserving old evidence (25.447461ms)
+✔ dated name corrections and habitation withdrawal update every reader and conflict check (24.45203ms)
+✔ withdrawn relationships and media links disappear from profiles but remain inspectable (21.803914ms)
+✔ failed replacements roll back retirements and the ingestion ledger together (24.318119ms)
+✔ raw SQL keeps retirement provenance sourced, immutable, unique and atomically finalized (19.80806ms)
+✔ supersession chains remain traceable and cannot form cycles (22.735493ms)
+✔ evidence history keeps fictional claims opt-in after retirement (21.860634ms)
+✔ map name paging excludes future graph names while default queries retain them (19.214456ms)
+✔ both sparse streams complete under fixed pins/revision before legacy history becomes authoritative (5.641194ms)
+✔ a source-free year makes exactly two bounded requests and retains caller-owned unrelated history (0.542017ms)
+✔ identical affected rows and sources across pages deduplicate without granting conflicting claims authority (6.754473ms)
+✔ permanent withdrawals apply independently and cross-stream active/withdrawn contradictions reject completion (1.00194ms)
+✔ expected scalar revision never silently repins or locally retries a partial snapshot (0.998545ms)
+✔ unanchored standalone reads retry both streams within the bounded attempt budget (1.016973ms)
+✔ abort/cancellation preserves its reason and no completed or partial result escapes (0.507145ms)
+✔ retryable oversized pages reduce only that stream limit and keep the same cursor/revision (0.675438ms)
+✔ rows, cursors, response/aggregate budgets and malformed source/capability reject authority (1.692091ms)
+✔ explicit unknown parents and BC/AD boundaries retain source evidence and reference context (1.012406ms)
+✔ dated parent bridge preserves stable identity, source support and effective complete chains (2.887393ms)
+✔ explicit unknown membership keeps the reference chain and original uncertainty rather than adopting a weaker claim (0.289286ms)
+✔ existence exclusions survive adaptation, including sourced unknown and BC/AD reference exclusions without year zero (0.489097ms)
+✔ bridge rejects wrong release, unsupported source/year, examples, withdrawn winners and unvetted footprints (4.09987ms)
+✔ joined-source snapshots hydrate exact JSON text metadata without requiring a duplicate source dictionary (0.577901ms)
+✔ shared temporal parent/existence resolution matches direct/derived/reference/example precedence independently of language and IDs (0.402346ms)
+✔ complete hosted snapshot authority removes withdrawn legacy IDs and overridden fields without reviving excluded entities (1.47296ms)
+✔ bounded production pages hydrate source-deduplicated winners and generate histories/exclusions without a full reference registry (0.574856ms)
+✔ bounded withdrawals remain authoritative independently of selected-year claims; malformed stream/context cannot become history (0.561757ms)
+✔ source IDs are ordinary stable identities even when their spelling matches JavaScript object properties (0.352131ms)
+✔ import preview rejects invalid dates, scalar values and unsupported source intervals before upload (1.797289ms)
+✔ import preview enforces whole-batch row and UTF-8 byte bounds (4.708198ms)
+✔ import submission preserves evidence and reports database rejection without treating it as saved (20.394004ms)
+✔ source-backed corrections preview withdrawal and replacement while retaining source evidence (0.448095ms)
+✔ JSON projection retains original nested formatting and appends bounded one-line entries (2.150281ms)
+✔ JSON projection handles changed array rows, escaped strings, empty containers and removals (0.488256ms)
+✔ province projection changes only province metadata and retains canonical cell/index bounds (1.413651ms)
+✔ append-only release retains original generations and drops regenerated baseline (1.092697ms)
+✔ evidence composes unchanged territory while preserving original supported facts (1.055822ms)
+✔ apply rejects unapproved hash and rolls back partial metadata transaction (1.435144ms)
+✔ immutable bytes changing after preparation block application (0.633635ms)
+✔ successful metadata install records a committed journal and retains rollback originals (0.605122ms)
+✔ compressed release append preserves prior descriptors and checks compressed/payload bytes (358.976076ms)
+✔ reference-only metadata mode validates exact archived group and source-backed parent merge (4.222986ms)
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+✔ dry run validates a whole generation without changing any live bytes (18.978851ms)
+✔ apply requires the exact dry-run hash and preserves database/catalog/history originals (12.633535ms)
+✔ failure during the multi-path commit restores every original live byte (6.18925ms)
+✔ stale runtime, prepared source hashes, province membership and grid counts fail before activation (13.005435ms)
+✔ approved hashes prevent changes between inspection and activation (4.214233ms)
+✔ unexpected predecessor files or changed historical payload block approved activation (8.48445ms)
+✔ path traversal and staging symlinks cannot replace unrelated files (2.554691ms)
+✔ duplicate geographic identities and empty groups cannot pass as a complete hierarchy (2.371064ms)
+✖ a genuine unknown-attribute creation installs reversibly without changing original history (38.907353ms)
+✖ ordered replacement then pure creation validates exact current ancestry and pinned source bytes (29.198096ms)
+✖ composed installer rejects skipped or reordered manifests, changed pins and unmatched creation inventories (29.032767ms)
+✖ composed installer rejects child historical transfers and changed source archive bytes (31.465404ms)
+✖ geometry evidence cannot silently authorize current source-name changes (27.740509ms)
+✖ source-name correction requires pinned exact metadata before/after evidence (32.077586ms)
+✖ installer summary pins geometry proof members and rejects altered evidence after approval (29.739622ms)
+✔ successful full and focused workflows prove exact tree and pinned current attempt (2.303543ms)
+✔ head metadata without explicit reviewed-head checkout never proves tested tree (0.274794ms)
+✔ different complete tree or modified approved workflow/runner always falls back (0.449949ms)
+✔ wrong head/event/repository/PR/path and incomplete or failed run cannot prove coverage (1.708876ms)
+✔ missing/extra shard and skipped or incomplete required steps never count as successful coverage (0.737892ms)
+✔ final pinned run reread rejects revoked proof (0.381645ms)
+✔ explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact (0.488406ms)
+✔ final proof pins attempt and refuses a later successful rerun or missing/invalid attempt (0.461896ms)
+✔ focused proof accepts complete controls without installing Node dependencies (0.257058ms)
+✔ full proof refuses missing, failed, cancelled or skipped Node installation in any shard (0.773426ms)
+✔ serialized contenders on one issue have exactly one holder even under the same GitHub account (2.533139ms)
+✔ renewal and release require the actual worker plus ownership nonce (0.533164ms)
+✔ an idempotent lost-response retry retains original ownership (0.514656ms)
+✔ renewal, rotation and reassignment retain one canonical comment ID (0.395146ms)
+✔ umbrella, blocked, oversized and unresolved dependency scopes cannot be claimed (0.522358ms)
+✔ expired reservations cannot silently discard branches or active PR/live operations (1.616807ms)
+✔ multiple PRs retain ownership and rotate branches only after previous work completes (8.313773ms)
+✔ canonical comments cannot be impersonated or ambiguous (0.281504ms)
+✔ PR validation uses current exact-branch ownership and rejects expired or blocked claims (0.567295ms)
+✔ location-content claims wait for worldwide approval while source-only work can start (108.655978ms)
+✔ the PR budget cannot be bypassed by claiming another part indefinitely (0.360424ms)
+✔ pagination inspects later pages rather than assuming only the first page exists (0.29851ms)
+✔ claim lock keys use canonical issue numbers so aliases cannot acquire independent locks (3.733588ms)
+✔ approved research is bound to all three geographic pins and ordinary bot audit text is not authority (0.561737ms)
+✔ production-only child is reserved by its publisher, not an ordinary implementer (0.301184ms)
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+✖ pure source-backed creation has a null predecessor and retains every original geometry (77.020298ms)
+✖ latitude and antimeridian creation uses actual narrow land, not a world-width polygon (86.834998ms)
+✔ reject existing identity, duplicate land and competing overlap without writing output (214.823294ms)
+✔ reject unsupported source, altered geometry, invalid coordinates, chain gaps and disguised rename (562.330258ms)
+✖ a creation receipt cannot transfer history or add an unaccounted identity (83.096006ms)
+✖ staged source creation compiles and publishes identical static/hosted crosswalks (106.624745ms)
+✔ invalid source coordinates, competing new land and old group mutations are rejected (219.727237ms)
+✔ macro partition checks separate member coherence from source completeness and descendant approval (25.682366ms)
+✔ a structural pass cannot invent semantic approval or permit regional interiors (1.832332ms)
+✔ each current macro identity and adjacent-tier parent must have exact decision and envelope coverage (1.493251ms)
+✔ member and footprint hashes detect cross-region reassignment and geometry edits (0.737031ms)
+✔ only inspected successful sources with URLs and reproducible hashes support boundary decisions (6.344915ms)
+✔ named missing islands receive explicit routing without imaginary geometry (1.653302ms)
+✔ supplemental boundary sources receive the same inspection and pin requirements as retained ledgers (1.323905ms)
+✔ partial named-land evidence preserves existing geometry while explicitly withholding completeness (4.155614ms)
+✔ large source collections retain a bounded reference to the exact archived receipt (2.478747ms)
+✔ same-tier reference split preserves exact archived originals and disjoint descendant members (6.073375ms)
+✔ split successors require unique explicit new-group deltas and a complete crosswalk (5.575666ms)
+✔ split endpoints cannot change tier, containing parent, registry identity or source/history proof (6.378746ms)
+✔ a same-count swap of unrelated territory fails exact split-member conservation (0.779094ms)
+✔ explicit local-group retirement retains every descendant and exact full archive (2.210713ms)
+✔ preparation emits every split pair and retains new identities, predecessor and original baseline (57.853453ms)
+✔ explicit reference creation can extract a location while retaining its original populated groups (11.541769ms)
+✔ sourced creations and explicit local-group retirements can share a conserving receipt (0.635608ms)
+✔ release creation crosswalks retain source relationship evidence without null-old retirement collisions (10.353117ms)
+✔ retained replacements archive all six exact originals without predecessor transfer (12.958124ms)
+✔ an unrelated old feature mutation is rejected (5.716628ms)
+✔ exact changed feature archives cannot substitute modified originals (0.389457ms)
+✔ duplicate or replaced stable identities are rejected (0.26552ms)
+✔ source proof cannot authorize historical transfer or missing independent validation (0.189967ms)
+✔ bounded replacement subprocess writes the same exact validated receipt (115.435839ms)
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+    from shapely import STRtree, normalize
+ModuleNotFoundError: No module named 'shapely'
+✔ owner-profile reuse rejects stale hierarchy, catalog and footprint pins (1.469154ms)
+✔ metadata-only projection retains source-backed unknown-owner coverage without approving it (1.310385ms)
+✔ current projection preserves identities and keeps source inspection separate from semantic approval (0.866907ms)
+✔ source-backed projection cannot change timeline facts or invent geographic review completion (0.253923ms)
+✔ current pins and exact counts must describe the actual geography (4.772033ms)
+✔ complete current chains cannot be reordered or silently assigned different parents (0.468276ms)
+✔ every retired or created parent has exact original archive and explicit crosswalk (0.245991ms)
+✔ location conservation and exact parent descendant membership remain exhaustive (2.942095ms)
+✖ source-backed projection resolves exact replacements and creations while all semantic branches remain open (33.856999ms)
+✖ projection preparation rejects altered source pins, wrong order and invented historical transfers (45.512369ms)
+✖ projection validator exhausts added identities, retained archives and new source-assessed groups (36.468416ms)
+✔ later geometry projection preserves original inspection bytes and namespaces current predecessor snapshots (2.304054ms)
+✖ successive source migrations conserve earlier additions and their sourced new groups (24.409787ms)
+✔ projection predecessor loading pins both gzip layers and joins exact releases (2.065844ms)
+✔ raster presentation graph includes true horizontal and vertical shared cells (6.738238ms)
+✔ ocean gaps and diagonal corners do not become territorial adjacency (0.479984ms)
+✔ date-line screen wrap is included and same-owner contact is ignored (6.181158ms)
+✔ malformed packed rows fail closed instead of emitting an incomplete graph (0.653605ms)
+✔ evidence-only pages omit empty identities but retain withdrawal-only subjects and complete claims (48.580925ms)
+✔ entity pages return exactly shared whole-location winners, source dictionaries and all-tier preferred names (30.781102ms)
+✔ entity cursor pages never split an attribute set and preserve aliases, examples, lifetimes and end sentinels (29.655405ms)
+✔ inactive archived identities stay inspectable without inflating fixed-geography map pages (20.009995ms)
+✔ page withdrawals suppress prepared fallback claims for attributes and names with no wrong truncation (22.944488ms)
+✔ metadata summarization preserves all no-inhabitants proof semantics and points to original evidence (22.211324ms)
+✔ mid-page writes reject the entire map page with a retryable revision conflict (19.100674ms)
+✔ priority ties use the shared UTF-16 identity order instead of SQLite UTF-8 collation (21.868837ms)
+✔ the shared browser format rejects incomplete, duplicated, mismatched and unscoped response pages (19.752997ms)
+{"fixture":"1000-locations-9000-attributes","queries":7,"page_bytes":2393036,"elapsed_ms":204.72,"attribute_index":"attributes_location_dates","name_index":"names_entity_dates"}
+✔ 1000 locations and 9000 attributes use seven bounded indexed queries instead of claim pages (5910.188134ms)
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/tmp/worldatlas-startup712/data/macro-improvements/marcus-restoration/prepare.py", line 4, in <module>
+    from shapely import from_wkb,union_all
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+ModuleNotFoundError: No module named 'shapely'
+✔ finite Marcus routing is independent of sovereignty and retains provisional lower-tier roles (0.932485ms)
+✔ reject asymmetric Japan exclusion, alternate macro routing and invented readiness (0.900467ms)
+✖ original water-masked Marcus land reconstructs from exact OSM bytes (36.236486ms)
+✖ removing the source water hole or changing the coastline is rejected (25.648314ms)
+Atlas request failed /api/media/upload Media ID already identifies a different immutable object
+✔ media bytes and sourced provenance survive upload, metadata-only reads and identical retries (46.383037ms)
+✔ invalid or oversized provenance and maintenance never write source objects (16.11896ms)
+✔ client discovers later pages and polls latched ID when the run leaves recent results (288.104334ms)
+✔ cancelled pending request is retried without changing authored head (460.828165ms)
+✔ main advance retries unchanged head but failed integration ends without retry (710.637539ms)
+✔ actual trusted entry point preserves the original rejection before a denied comment (64.380829ms)
+✔ actual trusted entry point retains its preparation receipt before successful notification (64.607785ms)
+✔ trusted preparation has PR comment permission while candidate tests remain read-only (0.369116ms)
+✔ actual entry point saves stale/head/conflict/base diagnostics even when notification fails (419.539055ms)
+✔ actual final entry point cleans only its owned ref and retains successful merge on cleanup failure (242.190505ms)
+✔ actual fallback prepare cleans its confirmed ref when receipt notification is denied (79.107188ms)
+✔ only staging-test shards prepare the immutable migration derivative (6.500079ms)
+✔ two reviewed PRs sharing a base integrate serially without changing authored head (5.414353ms)
+✔ conflicts and non-conflicting changes to reviewed bytes require intervention (0.910693ms)
+✔ stale merge object and truncated inventories fail closed (0.979377ms)
+✔ stale head or review and expired ownership prohibit integration (1.592972ms)
+✔ failed or skipped candidate tests never merge an open PR (0.638663ms)
+✔ base advances before or during final validation are retryable without branch updates (0.724021ms)
+✔ latest failed or pending check replaces old success (0.328595ms)
+✔ workflow separates untrusted candidate tests from write credentials and serializes the lifecycle (0.445381ms)
+✔ commit status changing during final review prevents the merge (0.691122ms)
+✔ trusted profile uses focused invariants only for isolated evidence and docs (0.306683ms)
+✔ parallel full-regression shards cover each unit file once and focused profile retains core gates (4.968049ms)
+✔ prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread (1.598349ms)
+✔ failed proof reread and stale main prevent merge despite prior accepted proof (1.099929ms)
+✔ successful rerun after preparation invalidates the pinned attempt and refuses merge (0.728999ms)
+✔ late candidate fetch replaces initial stale metadata without branch writes (0.361946ms)
+✔ stale parents and unavailable candidates converge with revalidated authority (0.845664ms)
+✔ permanently stale candidates are bounded and retain exact IDs before tree work (0.670611ms)
+✔ candidate polling stops at its deadline even before exhausting attempts (0.369096ms)
+✔ head/body changes and conflicts during refresh fail without integration or writes (0.996643ms)
+✔ main and evidence vintage advances are not silently adopted while refreshing (1.075041ms)
+✔ claim/check/review and issue authority is rechecked after waiting (1.584218ms)
+✔ only candidate-object 404 is refreshable; access failures stop immediately (0.922171ms)
+✔ post-wait main advance retains old expected and new observed base diagnostics (0.390979ms)
+✔ post-convergence head change retains the new head in rejection diagnostics (3.702401ms)
+✔ persistent automatic lag falls back to exact owned candidate without editing authored branches (1.503407ms)
+✔ isolated conflict or wrong parents is rejected and only the owned ref is deleted (0.357259ms)
+✔ fallback retains reviewed-byte and post-wait authority guards and cleans rejected candidates (1.055671ms)
+✔ cleanup refuses another request, main/worker refs and changed owned refs (0.259011ms)
+✔ failed cleanup retains its exact resource for inspection without hiding rejection (1.467963ms)
+✔ isolated candidate follows the existing final tests/main/head merge guards (1.675216ms)
+✔ unconfirmed ref creation identifies the resource without deleting a possible collision (0.21903ms)
+✔ frozen migration SQL and snapshots retain their published identities (8.082965ms)
+✖ test/model-hierarchy-migration.test.mjs (39668.832999ms)
+✔ semantic replacements preserve source history and custom locations without transferring their values (62146.913188ms)
+✖ test/model-topology-migration.test.mjs (56163.248264ms)
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>
+    print(boundary_hash(rows,args.index.resolve()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+Traceback (most recent call last):
+  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>
+    print(boundary_hash(rows,args.index.resolve()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+✔ new source land retains unknown owners and its original source metadata (1607.030401ms)
+✔ year parsing supports BC/BCE/AD/CE and rejects invalid or out-of-range dates (1.541794ms)
+✔ every location has exactly all six hierarchy levels (1888.231031ms)
+✔ seed is idempotent and missing history stays missing (15370.241546ms)
+✔ example intervals are opt-in and end-exclusive, including ownership changes (2766.18027ms)
+✔ atomic imports reject overlapping records, invalid populations, ranks, and parents (369.17151ms)
+✔ real records take precedence over examples, with no population interpolation (1008.743697ms)
+✖ boundary versions require polygons and sources, and resolve by date (467.634634ms)
+✔ unknown, zero population, and category colors have stable, distinct semantics (1754.963393ms)
+✖ historical political records are dated, sourced, and do not extend into 2025 (177.100059ms)
+✔ both Huidong counties have complete, distinct geographical parents (1916.338528ms)
+✔ inserts and updates cannot skip hierarchy levels (1.246098ms)
+✔ geographic regions cross ownership borders and subdivide large countries (1659.543046ms)
+✔ non-Latin municipalities remain distinct and city memberships contain all districts (1896.913334ms)
+✔ account proof and configured quotas/compute remain typed, scoped and free of arbitrary private fields (26.815675ms)
+✔ denied organization proof stays unavailable while actual project settings remain verified (1.161461ms)
+✔ missing organization and quota are explicit unknowns, never inferred from public pricing (0.93503ms)
+✔ wrong project and lossy quotas fail before a misleading capacity receipt can be produced (1.18106ms)
+✔ actual PostgreSQL forward DDL preserves every baseline byte and sequence, grants minimum runtime access, and retries idempotently (2575.517339ms)
+✔ forward failure rolls back DDL, registry and grants without changing original bytes (1712.723123ms)
+✔ registered catalog tampering and unreviewed hashes reject instead of silently repairing a database (1892.156579ms)
+✔ missing reviewed rehearsal operation performs no management requests or database mutation (1.853334ms)
+✔ reviewed forward operation requires an actual production baseline and exact ordered files (0.468266ms)
+✔ fresh hash-pinned private Site maintenance attestation rejects stale, writable and mismatched context (1.145848ms)
+✔ management workflows require explicit manual dispatch and reject push selection (117.87081ms)
+✔ third reviewed forward migration installs typed runtime privileges without changing retained core contracts or replay identity (2849.761766ms)
+✔ full rehearsal restores every original table byte, authenticates restricted read-only services, and deletes only its child (2376.784538ms)
+✔ production requires authenticated successful rehearsal artifact, restores once, and delivers only encrypted app credential (3680.138451ms)
+✔ missing or tampered reviewed checkpoints and missing production acknowledgement cause zero network/DB calls (54.814503ms)
+✔ production branch IDs and mismatched endpoint hosts are refused before connection or production deletion (2532.955367ms)
+✔ rehearsal failed cleanup preserves the exact child ID without claiming validated production handoff (1711.137798ms)
+✔ artifact reader accepts one bounded receipt without extracting paths and rejects malformed archive bytes (2.133857ms)
+✔ authorized direct production preserves exhaustive verification and refuses a second installation (1708.213435ms)
+✔ Neon metadata verification authenticates read-only requests, follows pagination, and omits secret response fields (22.65303ms)
+✔ Neon verifier rejects wrong project configuration and absent credentials without requests (2.02317ms)
+✔ Neon metadata failures never retain raw HTTP/network bodies, mismatched projects, or repeated pagination cursors (2.722093ms)
+✔ PostgreSQL schema splitter retains command bytes while respecting nested comments, quoted identifiers, strings and dollar bodies (0.81559ms)
+✔ isolated Neon verifier applies the exact schema atomically on real PostgreSQL and exercises actual hosted services (2151.75344ms)
+✔ private owner connection failures remain sanitized and cleanup still deletes the validation branch (6.082359ms)
+✔ isolated SQL verifier refuses production IDs and production hosts before any SQL connection (12.60989ms)
+✔ SQL driver errors are sanitized and clean up only the newly created branch (3.268116ms)
+✔ cleanup failures retain the exact validation branch ID and fail the verification receipt (3.460947ms)
+✔ ambiguous creation persists its unique name without guessing a deletion target or SQL connection (2.683666ms)
+✔ read-only metadata helper does not accept a project mismatch supplied by the API (0.726706ms)
+✔ canonical screen reports actual source-land cells for a compact territorial polygon (1.844701ms)
+✔ a genuine polygon smaller than a cell remains unrepresented without assigning water (0.944744ms)
+✖ archived original dry land blocks a purported new identity on that land (32.54388ms)
+✖ an exact-name homonym on different land does not transfer or reuse archived identity (27.944026ms)
+✖ changed archive bytes fail before considering identity absence (27.719137ms)
+✔ candidate preparation refuses an existing output instead of overwriting evidence (1.838051ms)
+✔ ownership assets reconstruct out-of-order compressed chunks and reject truncation (55.049383ms)
+✔ version-pinned ownership digests reject mixed deployments and support host-decoded gzip (9.153038ms)
+✔ bounded concurrent transport retains complete row-before-run reconstruction (9.1945ms)
+✔ hosted omission accounts for all prior bytes and preserves every current/source file exactly (26.016861ms)
+✔ portable static export retains the full tree without a delivery manifest (11.517783ms)
+✔ existing pinned archive tampering fails before packaging (5.039537ms)
+✔ verification rejects unlisted excluded files, altered retained bytes and deployed tampering (21.393982ms)
+✔ symbolic links cannot silently omit archive content (7.028245ms)
+✔ startup ownership packaging preserves original GPU words and source files (66.26191ms)
+✔ startup ownership rejects altered, unpinned or unsafe canonical sources (3.871246ms)
+✔ contrast constraints use actual half-open interval overlap, never range envelopes (37.028075ms)
+✔ parent lookups and unused-unit foreign-key checks use local parent indexes (4.061833ms)
+✔ opening a populated pre-index database installs parent indexes without rewriting geography or evidence (14.50048ms)
+✔ pixel ownership is exclusive and adjacent locations tile without a seam (1.337356ms)
+✔ holes, water and defensive overlap handling have one integer ID per cell (0.237288ms)
+✔ panning and lower-detail views sample the same canonical geographic cells (0.848439ms)
+✔ province borders are stronger and local borders disappear at distant zoom (0.207002ms)
+✔ Canvas fallback samples near screen resolution without four-pixel blocks (0.203787ms)
+✔ fixed non-power-of-two grid projects the entire world consistently (0.214132ms)
+✔ dated membership changes province lookup and picking records while retaining exact grid cells and geometry (2.477335ms)
+✔ metadata refresh accepts reordered identities and atomically rejects replacements, missing and duplicate locations (0.906397ms)
+✔ boundary geometry cache ignores source/date/provenance changes but detects actual dated footprints (0.273673ms)
+✔ compiled ownership preserves holes, shared edges, overlaps and water at every detail level (7.811456ms)
+✔ ownership survives geometry disposal and alternating zoom/pan views (1.338228ms)
+✔ GPU row tables and picking retain every canonical cell, including tiny features (1.325458ms)
+✔ prepacked browser fallback samples the same canonical grid (1.665361ms)
+✔ placeholder translation preserves quoted values, dollar bodies and nested comments exactly (2.707863ms)
+✔ only reviewed inserts and index hints are adapted; SQLite metadata needs an explicit query (0.609478ms)
+✔ injected driver returns D1 results with safe numeric dates and unchanged text evidence (1.818821ms)
+✔ batches remain ordered, atomic and ingestion-locked before identity allocation (0.704882ms)
+✔ publication and guarded imports share a lock before fresh ReadCommitted guard snapshots (0.622188ms)
+✔ driver failures preserve SQLSTATE while removing credentials, payloads and server details (1.325588ms)
+✔ bounded timeouts cancel network work and preserve uncertain commit status for idempotent retries (100.653707ms)
+✔ Neon HTTP wrapper submits lazy ordered queries as one transaction without exposing its URL (1.287371ms)
+✔ actual PostgreSQL parses translated placeholders, idempotence and rollback without touching immutable evidence text (1591.262594ms)
+✔ PostgreSQL evidence-only map pages retain retirement-only subjects without enumerating empty geography (1870.335928ms)
+✔ actual PostgreSQL applies all 14 tables and hosted smoke preserves original corrected evidence (1360.905687ms)
+✔ PostgreSQL claim/name readers preserve JSON bytes, stable identities, half-open dates, nulls and examples (1406.621335ms)
+✔ PostgreSQL guards reject interval/source/classification/owner contradictions and roll back complete failed batches (1345.644901ms)
+✔ PostgreSQL atomic correction retires overlap, retains old bytes and cannot resurrect immutable evidence (1547.942778ms)
+✔ PostgreSQL rank/habitation and fixed environment guards match literal-zero proof policy (1692.203359ms)
+✔ PostgreSQL catalogs/graph/media paging and compact map use actual hosted SQL with whole-location parity (1376.85338ms)
+✔ PostgreSQL stages and publishes complete pinned reference geography without mutating registry/evidence (1531.316765ms)
+✔ actual PostgreSQL and frozen D1 produce identical evidence/source bytes and selected-year service values (1350.43866ms)
+✔ PostgreSQL compact metadata summaries retain zero-population proof semantics and evidence links (1347.021328ms)
+✔ PostgreSQL geographic transaction guards reject unpublished/stale hashes and retain pinned replay receipts (1432.371088ms)
+✔ verified owner restore copies all fourteen original tables, legacy bytes, archives, examples, releases and rowids (2334.210455ms)
+✔ nonempty target refuses restoration without replacing evidence or disabled guards (1405.267825ms)
+✔ insert failure rolls back every copied table and USER-trigger state with no unsafe partial resume (1519.212418ms)
+✔ read-back verification failure rolls back source rows and prevents sequence advancement (1434.483758ms)
+✔ tampered source parts and unacknowledged owner restore make no target writes (1332.094211ms)
+✔ sequence-reset failure rolls back transactional RESTART and preserves all original guards (1390.530573ms)
+✔ lost commit acknowledgement requires read-only verification before any retry (1379.771664ms)
+✔ raw row digests preserve original text and obey D1 binary key order (0.679534ms)
+✔ actual restricted LOGIN runs hosted imports, corrections, idempotent retries and selected-year readers (1903.33825ms)
+✔ runtime role cannot mutate facts, suppress guards, restore revisions or escalate privileges (1486.908624ms)
+✔ restricted publication updates only validated status and publication columns (1495.188485ms)
+✔ idempotent maintenance preserves existing password and explicit rotation safely changes it (1703.555726ms)
+✔ existing inherited, privileged, owning or broadly granted role is rejected without silent downgrade (12859.535774ms)
+✔ weak credentials and inherited PUBLIC schema CREATE prevent reopening without weakening PUBLIC permissions (1290.45118ms)
+✔ non-superuser schema owner retains only automatic ADMIN-without-INHERIT-or-SET role management (1636.571558ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.868447ms)
+✔ positive real-format ledger validates actual files and binds an independent review (1.801336ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (1.237085ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (0.526394ms)
+✔ coordinate/helper policies require positive and negative controls; generators need reproducibility (0.646004ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (0.750531ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (0.514596ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (0.800486ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (2.564696ms)
+✔ incomplete remote trees cannot become a passed byte check (0.446263ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (10.302541ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.324239ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (1.577077ms)
+✔ browser/server adapters agree, use only matching source intervals, and preserve complete provenance (25.59172ms)
+✔ source bounds, producer byte hashes, current identity and geography proof failures block publication (3.510391ms)
+✔ prepared producers reject free-form environmental text even when hashes and source dates match (5.110614ms)
+✔ both runtime paths reject stale manifests and tampered prepared assets (4.445832ms)
+✔ duplicate input identities are rejected and hosted duplicates retain imported evidence without dropping prepared metadata (3.598555ms)
+✔ bounded persistent batches import through actual hosted schema/service and are idempotent (51.493277ms)
+✔ prepared reference attestations retain direct historical name priority and aliases do not become preferred (2.894944ms)
+✔ retirement pages prevent every prepared fallback from resurrecting withdrawn names or attributes (71.370842ms)
+✔ hosted duplicate enrichment keeps prepared provenance while preserving the imported claim (33.790821ms)
+✔ completed real name and census products import persistently and resolve identically without gap filling (9224.591232ms)
+✔ public manifest byte pin protects source provenance as well as record parts (3.285533ms)
+✔ record APIs reject pages whose ingestion revision changed during the read (41.616066ms)
+✔ client retries complete map reads for mixed revisions, caps retries and obeys cancellation (12.33847ms)
+✔ reference migrations revalidate immutable claims only when every corresponding footprint stays identical (4.747567ms)
+✔ chained reference revalidation preserves original evidence and pins the prior receipt archive (5.693132ms)
+✔ ownership codecs preserve identity, dated labels, competing evidence and the BC/AD edge (1.951382ms)
+✔ actual environmental tables decode exactly at all normal-period boundaries (10376.237036ms)
+✔ reference codecs preserve supported precision and do not bridge unsupported intervals (0.452081ms)
+✔ actual prepared historical records match independent compact-table interpretation (16708.9987ms)
+✖ static and server exports resolve every active location identically, with examples on and off (5236.892259ms)
+✔ missing readiness is a review candidate, not permission (3.215728ms)
+✔ explicit source access blockers survive closed dependencies; prose needs review (0.573354ms)
+✔ unknown lane, invalid prefixes, umbrellas and import approval are separate (0.324198ms)
+✔ same-account workers retain distinct canonical leases and live work constraints (0.516749ms)
+✔ all issue pages and duplicate ownership; checkpoints deduplicate by state (19.861341ms)
+✔ failed reads preserve checkpoint and never report false resolutions (0.589499ms)
+✔ private backup round trips exact bytes with pinned recipient and no plaintext envelope (7.593698ms)
+✔ fresh randomness prevents identical backup ciphertext (1.130855ms)
+✔ rejects replay under a different primary_main_commit (0.740847ms)
+✔ rejects replay under a different run_id (0.64316ms)
+✔ rejects replay under a different window_comment_id (0.487815ms)
+✔ rejects replay under a different source_fingerprint (0.441936ms)
+✔ rejects corrupted tag (2.375441ms)
+✔ rejects corrupted iv (2.152515ms)
+✔ rejects corrupted wrapped_key (2.039394ms)
+✔ ciphertext integrity survives attacker replacing the unauthenticated ciphertext digest (2.333668ms)
+✔ rejects truncated ciphertext (0.630861ms)
+✔ rejects unauthenticated original byte hash (2.186056ms)
+✔ rejects envelope fields outside the reviewed contract (0.467385ms)
+✔ rejects weak recipient before encrypting private data (37.940546ms)
+✔ rejects non-native dump bytes (0.188774ms)
+✔ rejects a different recipient key (241.600086ms)
+✔ refuses private PEM in the public recipient field (0.221454ms)
+✔ reference restoration preserves archived IDs, source context and exact original records idempotently (9.062221ms)
+✔ existing active territory names, geometry, parents and owner context are never overwritten (4.645012ms)
+✔ original record ID conflicts fail explicitly and restoration rolls back broken archives (4.526824ms)
+✔ the published source archive restores every original record into a fresh reference database (5097.523504ms)
+✔ bundle preserves complete records, supported intervals, source context and original bytes (39.05782ms)
+✔ separate bundle runs are byte-identical and cannot overwrite an earlier output (7.537593ms)
+✔ proof rejects mixed footprints, unsafe routes and oversized declarations before any fetch (2.861534ms)
+✔ bad hashes, truncated data and unavailable bundles fail closed (5.113819ms)
+✔ an internally incomplete roster is rejected even with matching transport hashes (3.731997ms)
+✔ packaging refuses unsafe source rosters and mismatched source footprints (2.925921ms)
+✔ prepared context preserves full output across dates, uncertainty and unavailable evidence (3.573788ms)
+✔ environmental context can be displayed without inventing historical field evidence (0.341315ms)
+✔ modern supported records and historical reference context share a category and map color (0.358811ms)
+✔ dated historical observations override modern context until their exclusive interval end (0.17196ms)
+✔ explicit dated uncertainty and unmapped source text cannot be replaced by a baseline (0.347003ms)
+✔ only supported environmental references can supply presentation context (0.23241ms)
+✔ invalidated geography cannot retain environmental context or restore a dated field (0.249546ms)
+✔ reference source dates and environmental caveats survive display unchanged (0.163627ms)
+✔ an evidence outage leaves historical fields unknown while immutable reference context remains available (0.238941ms)
+✔ missing baselines remain unknown and non-environmental fields never acquire environmental context (0.262456ms)
+✔ baseline selection is deterministic and keeps the chosen source interval rather than extending it (0.164988ms)
+✔ compact and legacy context decoding preserve original supported intervals and source metadata (0.447715ms)
+✔ explicit metadata parent merge conserves full descendant identities and exact relationship provenance (2.794592ms)
+✔ receipts without the opt-in relationship field preserve the legacy preparation contract (0.4704ms)
+✔ missing, duplicate, extra and unretired merge endpoints cannot masquerade as complete crosswalks (1.897951ms)
+✔ same-tier registered identities and adjacent parent conservation are required (1.204576ms)
+✔ a same-count swap of unrelated territories fails exact descendant-footprint conservation (0.486614ms)
+✔ complete original unit records, explicit source proof and zero historical transfer are required (1.548294ms)
+✔ the complete real candidate validates all 49,589 locations and the 55-county source-backed merge (1723.914469ms)
+✔ full candidate release preparation emits the explicit merge, archived predecessor and exact unchanged baseline (13074.081292ms)
+✔ candidate certificate cannot inherit successful readback or publication from its predecessor (0.897833ms)
+✔ current manifest is closed and no region can claim invented approvals (1.203063ms)
+✔ v1 worldwide approval remains compatible (0.639094ms)
+✔ regional content claims depend on macro and branch approval, not unfinished worldwide descendants (1.632922ms)
+✔ macro approval and explicit complete region certificates are required (0.456598ms)
+✔ pins and every location target are checked against explicitly selected regions (0.703491ms)
+✔ ambiguous territorial membership fails closed (0.222155ms)
+✔ all name, relationship and media targets are scoped; ancillary or geographic writes are refused (1.146839ms)
+✔ verified raw batches are inspected rather than trusting caller target summaries (0.452833ms)
+✔ corrections require a territorial crosswalk and cannot transfer facts to another location (0.531501ms)
+✔ research compiler produces deterministic bounded batches and preserves exact input/source bytes (761.11971ms)
+✔ compiler rejects unsupported classifications, unsupported dates, source classes, cycles and geographic writes (1.143374ms)
+✔ parent entities precede child entities and atomic correction groups stay together at batch boundaries (90.131463ms)
+✔ dry-run rejects tampering and performs zero network requests (2.63314ms)
+✔ import refuses mismatched geography before writes and rejects unsafe origins (19.560908ms)
+✔ partial successful receipts survive failure, resumable retry skips committed batches and never logs credentials (479.108587ms)
+✔ network/transient failures retry an identical ingestion within a bounded budget (2.196962ms)
+✔ compiled content imports against actual frozen hosted SQL and preserves corrected evidence immutably (35.025951ms)
+✔ targets first introduced by a campaign commit before its retirement transaction (21.842458ms)
+✔ shared replacements stay atomic and chained corrections respect target availability (0.768559ms)
+✔ each research batch carries its geographic pin and a conflict preserves prior receipts (190.682184ms)
+✔ unpinned server receipts are rejected and legacy receipts are preserved while newly pinned transactions verify them (3.776763ms)
+✔ temporal campaigns retain ordinary source dependencies and route atomic sourced geography corrections separately (1.681085ms)
+✔ temporal compiler bounds sources/dates/classification and rejects reference mutations/unvetted footprints (1.142172ms)
+✔ temporal bundle manifests validate endpoint identity, pinned receipts and resume independently of ordinary imports (3.329119ms)
+✔ discovery preserves identity/source metadata and pages every result with bounded filters (136.912416ms)
+✔ relationship pages exhaust both directions beyond profile truncation with date/example/withdrawal filtering (65.887164ms)
+✔ media link pages preserve every active link and omit withdrawn, pending and unsupported-year links (59.975213ms)
+✔ capacity reports measured bytes and declared budgets without claiming a managed quota or prepared assets (24.345912ms)
+✔ catalog and graph reads reject revision changes instead of publishing inconsistent pages (22.125584ms)
+✔ media campaign dry run validates original bytes and rights without network or receipts (82.847163ms)
+✔ actual Worker and registerMedia roundtrip retains provenance, immutable R2 bytes and resumable receipt hashes (68.837903ms)
+✔ lost upload response rereads committed identity and full bytes without a second POST (22.210442ms)
+✔ failed campaign preserves verified objects and safely resumes only missing identities (25.490607ms)
+✔ source mismatches, changed claims and changed local or remote bytes stop before replacing originals (23.74819ms)
+✔ tampered checkpoints, duplicate content identities and missing source dependencies are rejected (21.163305ms)
+✔ redirects never forward the private credential and untrusted API errors are not persisted (21.925774ms)
+✔ encoded URL bounds and escaped local paths are enforced before any upload (17.261251ms)
+✔ a truncated successful POST receipt is resolved by direct immutable metadata reread (18.031833ms)
+✔ optional registered source archives are checked by stable ID and digest before linking provenance (22.835804ms)
+✔ older services without provenance capability stop before creating immutable incomplete metadata (17.769287ms)
+✔ full original hash, copied bytes, local readback and unchanged source marker; no maintenance or range claims (33.542916ms)
+✔ reject corrupted full bytes with preserved sanitized partial receipt (3.113344ms)
+✔ reject truncated body with preserved sanitized partial receipt (6.671618ms)
+✔ reject oversized body with preserved sanitized partial receipt (2.789675ms)
+✔ reject range response with preserved sanitized partial receipt (1.81774ms)
+✔ reject misleading full content-range with preserved sanitized partial receipt (1.577738ms)
+✔ reject wrong content-length with preserved sanitized partial receipt (1.62525ms)
+✔ reject duplicate media identity with preserved sanitized partial receipt (1.635425ms)
+✔ reject negative byte count with preserved sanitized partial receipt (1.578695ms)
+✔ reject unknown extra factual table with preserved sanitized partial receipt (1.866273ms)
+✔ reject incomplete V2 legacy projection with preserved sanitized partial receipt (0.826706ms)
+✔ reject uncovered footprint object references with preserved sanitized partial receipt (1.011945ms)
+✔ reject changed final source with preserved sanitized partial receipt (2.63344ms)
+✔ reject unsafe credential-bearing origin with preserved sanitized partial receipt (0.653605ms)
+✔ refuse existing target and preserve original artifact (0.6306ms)
+✔ deadline covers stalled response body and retains partial bytes (29.576877ms)
+✔ late fetch cannot create object files after deadline rejection (103.8671ms)
+✔ abort propagates and does not disclose credential (1.660739ms)
+✔ multiple source pages recover distinct original IDs sharing identical immutable object pins (9.255933ms)
+✔ reject repeated cursor (1.666012ms)
+✔ reject incomplete registered count (2.688293ms)
+✔ reject conflicting immutable shared key (1.065626ms)
+✔ declared total and single-object byte ceilings reject before copying (1.998663ms)
+✔ hidden stdin restores terminal and removes listeners on valid hidden JSON (0.726536ms)
+✔ hidden stdin restores terminal and removes listeners on malformed hidden JSON (0.21947ms)
+✔ hidden stdin restores terminal and removes listeners on oversized hidden input (0.14605ms)
+✔ hidden stdin restores terminal and removes listeners on Ctrl-C (0.195414ms)
+✔ hidden stdin restores terminal and removes listeners on Ctrl-D (0.230337ms)
+✔ hidden stdin restores terminal and removes listeners on EOF (1.048009ms)
+✔ recomputed fingerprint cannot hide a different PostgreSQL catalog (0.932906ms)
+✔ source page column and revision mismatch reject before copying (2.108088ms)
+✔ filesystem full error preserves the prior atomic receipt and exact safe code (1.562515ms)
+✔ receipt write ENOSPC leaves preceding valid atomic receipt and original copied bytes intact (1.995899ms)
+✔ century transport preserves exact intervals, dated identities and contested provenance with deterministic assets (171.864735ms)
+✔ six schema variants partition all IDs and preserve explicit semantic openness (5.211847ms)
+✔ raw hashing preserves float lexemes, signed zero, exponent precision and Unicode policy (0.812795ms)
+✔ duplicate reports, stale polygons and incomplete parent chains fail (1.595896ms)
+✔ parent membership cannot overlap, omit a child or claim unsupported approval (2.407729ms)
+✔ owner labels and source policy identities are exhaustively crosswalked (1.971161ms)
+✔ removed/new IDs require archival receipts and migration is never inferred (3.51532ms)
+✔ fresh-clone reader verifies every file pin without Python or cache access (28.374025ms)
+✔ changed source bytes or missing continent ledger reject the read-only snapshot (31.434567ms)
+✔ a renamed complete ledger cannot leak into website deployment assets (35.120414ms)
+✔ source-parent measurements require current footprint context and actual members (47.305012ms)
+✔ sourced policy overlay changes exactly the three proven roles without mutating original source policy (3.817244ms)
+✔ unrelated original-policy edits and duplicate correction identities require new review (12.640571ms)
+✔ every crosswalked location exposes its individually supported role and unchanged source vintage (2.092485ms)
+✔ installed label corrections preserve frozen proposals and bind exact reference-only before/after records (129.192152ms)
+✔ explicit legacy staging retains every original migration and metadata byte and deploys exactly 0000–0007 (25.608685ms)
+✔ default staging keeps the complete derivative and opt-in retries remove old forward files (17.038346ms)
+✔ all forward migration/source/journal hashes are checked before any deployment cutoff (10.454119ms)
+✔ the eight staged migrations have the original eight-migration schema and no forward tables (25.334822ms)
+✔ staging requires explicit valid mode, a separate real checkout and a supported CLI flag (95.020824ms)
+✔ checkpoint packing deterministically preserves all fourteen exported tables and every original byte (191.359495ms)
+✔ checkpoint rejects compressed tampering, original hashes and unsafe paths without publishing partial output (81.912763ms)
+✔ a recomputed gzip hash cannot bypass the independent decompression bound (83.449109ms)
+✔ symlinked checkpoint parts and changed source exports are rejected without replacing evidence (92.564131ms)
+✔ existing destinations are immutable and ordinary restore validates source hashes before any database call (81.178988ms)
+✔ verified existing destinations reject checkpoint identity-summary tampering (109.112697ms)
+✔ v2 inventories all twenty-three tables and pins every reviewed D1/PostgreSQL migration (16.359062ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (2277.250242ms)
+✔ forward owner restoration streams all twenty-three tables, original JSON bytes, deferred receipts and sequence (2880.352869ms)
+✔ v2 detects changing staged publication, missing source guards and unexpected factual tables (1933.805799ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1581.443104ms)
+✔ a deferred cross-table FK failure rolls back all twenty-three tables, guards and sequence (1682.409242ms)
+✔ interrupted v2 capture resumes preserved pages and its v2 cursor cannot be sent to v1 (223.409867ms)
+✔ v3 inventories all twenty-six tables and pins every reviewed D1/PostgreSQL migration (24.851133ms)
+✔ empty forward migrations preserve every v1 marker/page byte and existing fourteen-table restore (2598.40966ms)
+✔ forward owner restoration streams all twenty-six tables, original JSON bytes, deferred receipts and sequence (3025.797651ms)
+✔ v3 detects changing staged publication, missing source guards and unexpected factual tables (1716.779378ms)
+✔ a missing target guard or source migration/raw-row proof fails before any target writes (1710.212694ms)
+✔ a deferred cross-table FK failure rolls back all twenty-six tables, guards and sequence (1803.183471ms)
+✔ interrupted v3 capture resumes preserved pages and its v3 cursor cannot be sent to v1 (267.114389ms)
+✔ typed storage on actual SQLite/PostgreSQL preserves replays and rejects unsupported evidence or incomplete corrections atomically (1891.594386ms)
+✔ pure and actual SQLite/PostgreSQL contracts retain supported uncertainty/example labels, zero/false, and reject known-status null (1827.953201ms)
+✔ standalone owner SQL without its ingestion journal is explicitly outside the atomic correction guarantee (1901.835583ms)
+✔ complete export marker works under managed D1 compound-SELECT limits (44.222604ms)
+✔ all fourteen raw tables export exhaustively with original text, rowids and archived evidence (129.848824ms)
+✔ composite keyset cursors page across releases and reject foreign, malformed or injected cursors (66.575348ms)
+✔ markers detect publication and media writes outside ingestion revisions and reject raced pages (38.458844ms)
+✔ oversized retained evidence is reduced through explicit 413 rather than truncated (92.092144ms)
+✔ CLI exporter preserves a partial ledger, resumes hashed pages and proves frozen all-table counts (111.575783ms)
+✔ CLI rejects unfrozen, changed or tampered exports without mixing checkpoints (55.795158ms)
+✔ CLI overlaps bounded independent collections while preserving serial cursors and journals (165.87075ms)
+✔ stalled fetch times out with its forwarded signal and retries the same cursor without rewriting preserved source pages (590.529688ms)
+✔ a response with stalled JSON bytes is bounded through body consumption and preserves checkpoint receipts (577.397361ms)
+✔ permanent transport stalls stop after four deadlines without logging credentials or creating a false checkpoint (3545.264705ms)
+✔ external cancellation aborts fetch, JSON-body reading and retry backoff without retries or checkpoint changes (157.924884ms)
+✔ malformed JSON and snapshot-conflict HTTP errors remain nonretryable, and unsafe deadline settings fail before fetching (1.737319ms)
+✔ stale body, state, candidate bytes and active worker/PR prevent writes (3.794009ms)
+✔ unrelated scope and original prose cannot be overwritten (0.588227ms)
+✔ read-only preflight issues no writes and checks the complete batch before applying (11.532164ms)
+✔ bounded application reads back each correction and is idempotent (4.909ms)
+✔ failed readback retains partial receipt and stops before remaining writes (3.120935ms)
+✔ unexpected issue scope cannot expand the mutation targets (0.528326ms)
+✔ fresh body recheck prevents overwriting an edit after batch preflight (1.759572ms)
+✔ scope property serialization order does not imply changed release or ownership (0.382947ms)
+✔ a wrong hash label is rejected even when source scope is otherwise unchanged (0.427825ms)
+Atlas request failed /api/geography/temporal/import Ingestion ID identifies another input
+✔ Worker dated geography routes, revision, evidence and retry work on actual sqlite (106.222609ms)
+Atlas request failed /api/geography/temporal/import Cross-origin writes are not permitted
+Atlas request failed /api/geography/temporal/import Expected property name or '}' in JSON at position 1 (line 1 column 2)
+Atlas request failed /api/geography/temporal/import Request exceeds the supported upload size
+Atlas request failed /api/geography/temporal/import Dated geography import rejected; no partial changes may be used
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Invalid temporal snapshot stream
+✔ Worker dated geography rejects unsafe writes without changing scalar/media routes on actual sqlite (45.436665ms)
+Atlas request failed /api/geography/temporal/import Ingestion ID identifies another input
+✔ Worker dated geography routes, revision, evidence and retry work on actual postgres (2355.57136ms)
+Atlas request failed /api/geography/temporal/import Cross-origin writes are not permitted
+Atlas request failed /api/geography/temporal/import Expected property name or '}' in JSON at position 1 (line 1 column 2)
+Atlas request failed /api/geography/temporal/import Request exceeds the supported upload size
+Atlas request failed /api/geography/temporal/import Dated geography import rejected; no partial changes may be used
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Year must be between 3000 BC and 2026 AD, excluding zero
+Atlas request failed /api/geography/temporal/snapshot Invalid temporal snapshot stream
+✔ Worker dated geography rejects unsafe writes without changing scalar/media routes on actual postgres (1646.83257ms)
+✔ opt-in inline temporal pages retain exact standalone claims, permanent withdrawals, source and release pins (2496.722493ms)
+✔ a revision change between scalar and inline temporal reads rejects the complete response (1549.795144ms)
+✔ incomplete bounded temporal streams stay on the ordinary paging protocol (3820.83179ms)
+✔ inline geography never widens the total scalar response byte limit (5714.700461ms)
+✔ complete reference chains remain labeled fallback; BC/AD, exclusive end and province-level changes resolve identically (1559.877959ms)
+✔ SQL source, tier, equal-precedence overlap, release and example guards reject atomic invalid imports (1626.217598ms)
+✔ ancestor absence rejects disconnected descendants but permits atomic reparenting or existence suppression (1737.237826ms)
+✔ all overlapping ancestor transitions are validated, including interior absence outside child endpoints (1597.904666ms)
+✔ explicit unknown blocks weaker and opt-in examples while maintaining the complete reference chain (1427.798952ms)
+✔ atomic corrections preserve original JSON text, withdrawals, stable retries and missing-replacement rollback (1528.236659ms)
+✔ SQL independently prevents forged validation, dangling receipts and appending to a sealed receipt (1560.695273ms)
+✔ known identity lifetimes cannot be resurrected or widened by a dated claim (1559.809933ms)
+✔ paged claims retain exclusions, provenance, release and one shared revision (1389.077875ms)
+✔ bounded production pages skip the reference registry in source-free years and return only winners with deduplicated sources (1466.968898ms)
+✔ permanent withdrawal pages retain claims outside the selected year and share the pinned revision (1446.158643ms)
+✔ legacy source metadata is byte-preflighted before materialization and oversized pages fail with a bounded retry suggestion (1703.446238ms)
+✔ raw SQL cannot store fractional years or alter retained temporal facts and receipts (1462.287183ms)
+✔ actual hosted winner and withdrawal streams hydrate the browser resolver without full registry reads (1518.125076ms)
+✔ direct dated names precede reference attestations in any language, with stable ties and examples last (4.291379ms)
+✔ unknown historical name and habitation do not imply an absent or rural settlement (5.844761ms)
+✔ dated names at every level retain stable identity; aliases remain searchable outside their dates (13.517968ms)
+✔ dated membership changes the hierarchy used by map colors and province borders (7.811927ms)
+✔ settlement attributes and existence are separate from a location and successor links keep distinct IDs (12.926427ms)
+✔ explicit uninhabited differs from unknown, and sourced states beat examples (8.028617ms)
+✔ broken dated parent chains, invalid dates and interval overlaps roll back atomically (9.702917ms)
+✔ future historical graph entities do not enter geographic grouping tiers (1.979464ms)
+✔ issue-claims.yml: actual sparse declarations include trusted module dependencies (59.041894ms)
+✔ worker-merge.yml: actual sparse declarations include trusted module dependencies (165.443939ms)
+✔ handoff-scope.yml: actual sparse declarations include trusted module dependencies (152.842471ms)
+✔ queue-readiness-audit.yml: actual sparse declarations include trusted module dependencies (47.313584ms)
+✔ negative control: old scripts-only tree cannot load relocated regional gate (40.540163ms)
+✔ sparse candidate still detects changes and rename sources outside the working tree (60.967757ms)
+✔ prepared and hosted typed loads terminate stalled fetches and cancel stalled bodies without accepting partial evidence (123.939716ms)
+✔ external cancellation reaches typed transport/read cleanup and completed exact-byte loads clear their deadline (13.807855ms)
+✔ typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL (2212.521177ms)
+✔ typed API rejects missing approval, bad source/registry/raw pins, unsupported labels and missing correction/derivation identities without partial writes (2389.11522ms)
+✔ legacy or altered installed schemas never advertise typed capabilities (30.980623ms)
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+Atlas request failed /api/typed/v1/import Typed import rejected; no partial batch may be used
+Atlas request failed /api/typed/v1/import Typed correction cannot transfer evidence between subjects or fields
+Atlas request failed /api/typed/v1/snapshot Typed snapshot changed; restart all streams
+Atlas request failed /api/typed/v1/import Cross-origin writes are not permitted
+✔ actual Worker typed routes enforce transport/maintenance and keep atomic corrections, raw source pins and snapshot paging consistent (2263.354279ms)
+✔ legacy23-table projections require the complete known schema and current maintenance clients refuse them as complete backups (2381.111551ms)
+✔ derivation closures reject example promotion, cycles and ambiguous roots while example-only acyclic chains remain available under the paused factual gate (2299.765087ms)
+✔ bounded hosted client and exact-byte prepared/static resolver agree on all retained values and fail closed on mixed snapshots and corrupted bytes (4354.369147ms)
+✔ factual typed geography is retained per claim and cannot be silently repinned on import, correction or prepared reads (1860.537497ms)
+✔ registration is additive, versioned, immutable and JSON-only; conflicts fail closed (4.644973ms)
+✔ serialization hooks/getters cannot replace module identity or metadata, and never execute (2.449052ms)
+✔ false and literal zero remain sourced; absent, unknown and unresolved are distinct (0.8492ms)
+✔ no year zero, interval extrapolation, lifetime overflow or modern-reference promotion (0.604642ms)
+✔ numeric measurement rejects incompatible units, PPP, cohort, household weighting and uncertainty (2.685528ms)
+✔ entity government, controlled identities and feature links preserve the existing graph (0.622799ms)
+✔ direct/derived/reference/estimate/example precedence, explicit unknown and retirements are deterministic (1.047749ms)
+✔ directly quoted estimates retain estimate labels and the preserved method-based priority (0.263187ms)
+✔ shared pure snapshot seam round-trips all retained source, unit and derivation metadata without mutation (0.616469ms)
+✔ existing eight attributes, legacy values and precedence stay unchanged (0.939155ms)
+✔ retained synthetic transport fixture matches date-pinned expected results and original bytes (2.011772ms)
+✔ malformed unresolved evidence resolves to the unknown fill for every attribute, including category IDs (1.749337ms)
+✔ direct unresolved evidence blocks weaker assignments and modern fallback without losing its provenance (0.926998ms)
+✔ API, local import, UI preview and raw SQL reject both unresolved/non-null contract violations (71.905307ms)
+✔ 0006 preserves populated claims, retirements and all existing schema objects while suppressing retained malformed claims (18.122499ms)
+✔ opening a populated legacy local database retains malformed historical claims and applies the new INSERT guard (8.380313ms)
+✔ explicit no-inhabitant evidence produces unsettled with its supported interval and source record provenance (1.902768ms)
+✔ unknown, reference, modeled, rounded and untyped legacy zeros never imply unsettled (1.041119ms)
+✔ settlement contradictions obey cross-field precedence and tied evidence remains disputed (0.973648ms)
+✔ local imports accept canonical unsettled, reject both orders of direct contradictions and retain unknown/model-zero behavior (13.741515ms)
+✔ hosted imports and shared resolver agree; corrections exclude retired negative claims (59.685025ms)
+✔ 0003 migration preserves all old claim fields, retirement pointers, indexes and triggers (15.270109ms)
+✔ existing local enum migration preserves snapshots/history and enables new rank without touching geometry (17.289674ms)
+✔ precision flags prevent false habitation conflicts in both local and hosted import orders (152.733883ms)
+✔ 0004 precision migration preserves claims, retirements, indexes and all other triggers (17.548264ms)
+✔ source classes protect literal-zero evidence and example opt-in at the SQL boundary (41.378857ms)
+✔ 0005 source-class migration preserves claims and retirement-aware contracts while matching example-zero resolution (25.560382ms)
+✔ results are bound to the bot, request and issue, including denial (1.129673ms)
+✔ latest matching response wins, unrelated or malformed comments cannot confer ownership (0.220122ms)
+✔ positive confirmations require current exact canonical ownership, not stale success (1.786553ms)
+✔ bootstrap fallback requires exact request and releases require inactive state (0.348345ms)
+✔ merge responses retain exact PR binding and embedded HTML cannot break the marker (0.211168ms)
+ℹ tests 869
+ℹ suites 0
+ℹ pass 841
+ℹ fail 28
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 280088.966323
+
+✖ failing tests:
+
+test at test/boundary-version-hash.test.mjs:13:1
+✖ dated non-example footprint fingerprints change with geometry/date and ignore examples (41.932131ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/boundary-version-hash.py --database /tmp/atlas-footprint-version-8Cx6gF/boundaries.sqlite
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 35, in <module>
+      try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at digest (file:///tmp/worldatlas-startup712/test/boundary-version-hash.test.mjs:17:20)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/boundary-version-hash.test.mjs:18:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    status: 1,
+    signal: null,
+    output: [ null, '', `Traceback (most recent call last):\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 35, in <module>\n    try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n` ],
+    pid: 760613,
+    stdout: '',
+    stderr: `Traceback (most recent call last):\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 35, in <module>\n    try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n`
+  }
+
+test at test/boundary-version-hash.test.mjs:29:1
+✖ boundary fingerprints verify the archived executed canonical algorithm (51.372522ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/boundary-version-hash.py --index /tmp/atlas-footprint-algorithm-HpT5Y1/index.json --stdin
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>
+      print(boundary_hash(rows,args.index.resolve()))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/boundary-version-hash.test.mjs:34:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12) {
+    status: 1,
+    signal: null,
+    output: [ null, '', `Traceback (most recent call last):\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n` ],
+    pid: 760621,
+    stdout: '',
+    stderr: `Traceback (most recent call last):\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n`
+  }
+
+test at test/boundary-version-hash.test.mjs:39:1
+✖ changed footprints invalidate cached values while direct evidence can still resolve the location (61.403523ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/boundary-version-hash.py --stdin
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>
+      print(boundary_hash(rows,args.index.resolve()))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at preparedBoundariesMatch (file:///tmp/worldatlas-startup712/derived.mjs:16:27)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/boundary-version-hash.test.mjs:44:15)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    status: 1,
+    signal: null,
+    output: [ null, '', `Traceback (most recent call last):\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n` ],
+    pid: 760622,
+    stdout: '',
+    stderr: `Traceback (most recent call last):\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n`
+  }
+
+test at test/install-reviewed-geography.test.mjs:32:1
+✖ a genuine unknown-attribute creation installs reversibly without changing original history (38.907353ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at verifySourceGeometry (file:///tmp/worldatlas-startup712/scripts/install-reviewed-geography.mjs:27:4)
+      at verifyPrepared (file:///tmp/worldatlas-startup712/scripts/install-reviewed-geography.mjs:62:23)
+      at validate (file:///tmp/worldatlas-startup712/scripts/install-reviewed-geography.mjs:84:73)
+      at install (file:///tmp/worldatlas-startup712/scripts/install-reviewed-geography.mjs:86:83)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:44:36)
+      at Test.runInAsyncScope (node:async_hooks:227:14) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761296,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:61:1
+✖ ordered replacement then pure creation validates exact current ancestry and pinned source bytes (29.198096ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:62:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761297,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:64:1
+✖ composed installer rejects skipped or reordered manifests, changed pins and unmatched creation inventories (29.032767ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:65:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761298,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:73:1
+✖ composed installer rejects child historical transfers and changed source archive bytes (31.465404ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:74:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761299,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:77:1
+✖ geometry evidence cannot silently authorize current source-name changes (27.740509ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:78:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761300,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:81:1
+✖ source-name correction requires pinned exact metadata before/after evidence (32.077586ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:82:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761301,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/install-reviewed-geography.test.mjs:89:1
+✖ installer summary pins geometry proof members and rejects altered evidence after approval (29.739622ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at composedFixture (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:56:2)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/install-reviewed-geography.test.mjs:90:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761302,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/land-creations.test.mjs:16:1
+✖ pure source-backed creation has a null predecessor and retains every original geometry (77.020298ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/land-creations.test.mjs:16:196)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761338,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/land-creations.test.mjs:21:1
+✖ latitude and antimeridian creation uses actual narrow land, not a world-width polygon (86.834998ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/land-creations.test.mjs:21:239)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761339,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/land-creations.test.mjs:24:1
+✖ a creation receipt cannot transfer history or add an unaccounted identity (83.096006ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/land-creations.test.mjs:24:105)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761351,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/land-creations.test.mjs:26:1
+✖ staged source creation compiles and publishes identical static/hosted crosswalks (106.624745ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/land-creations.test.mjs:33:95)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761352,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/macro-review-projection.test.mjs:74:1
+✖ source-backed projection resolves exact replacements and creations while all semantic branches remain open (33.856999ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at geometryFixture (file:///tmp/worldatlas-startup712/test/macro-review-projection.test.mjs:63:533)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/macro-review-projection.test.mjs:75:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761395,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/macro-review-projection.test.mjs:77:1
+✖ projection preparation rejects altered source pins, wrong order and invented historical transfers (45.512369ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at geometryFixture (file:///tmp/worldatlas-startup712/test/macro-review-projection.test.mjs:63:533)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/macro-review-projection.test.mjs:78:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761402,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/macro-review-projection.test.mjs:81:1
+✖ projection validator exhausts added identities, retained archives and new source-assessed groups (36.468416ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at geometryFixture (file:///tmp/worldatlas-startup712/test/macro-review-projection.test.mjs:63:533)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/macro-review-projection.test.mjs:82:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761404,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/macro-review-projection.test.mjs:95:1
+✖ successive source migrations conserve earlier additions and their sourced new groups (24.409787ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-land-creations.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-land-creations.py", line 5, in <module>
+      from shapely import STRtree, normalize
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at stageLandCreations (file:///tmp/worldatlas-startup712/scripts/stage-land-creations.mjs:18:2)
+      at geometryFixture (file:///tmp/worldatlas-startup712/test/macro-review-projection.test.mjs:63:533)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/macro-review-projection.test.mjs:96:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes> ],
+    pid: 761411,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 167 more bytes>
+  }
+
+test at test/marcus-restoration.test.mjs:8:1
+✖ original water-masked Marcus land reconstructs from exact OSM bytes (36.236486ms)
+  Error: Command failed: python3 -c import importlib.util,json,pathlib; f=pathlib.Path("/tmp/worldatlas-startup712/data/macro-improvements/marcus-restoration/prepare.py"); s=importlib.util.spec_from_file_location('marcus',f); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); p=m.read(f.parent/'proposal.json'); dry,coast,water=m.reconstruct(p); assert len(dry.interiors)==1 and water.area>0 and coast.difference(water).equals(dry)
+  Traceback (most recent call last):
+    File "<string>", line 1, in <module>
+    File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+    File "/tmp/worldatlas-startup712/data/macro-improvements/marcus-restoration/prepare.py", line 4, in <module>
+      from shapely import from_wkb,union_all
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/marcus-restoration.test.mjs:10:2)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 3c 73 74 72 69 6e 67 ... 378 more bytes> ],
+    pid: 761424,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 3c 73 74 72 69 6e 67 ... 378 more bytes>
+  }
+
+test at test/marcus-restoration.test.mjs:12:1
+✖ removing the source water hole or changing the coastline is rejected (25.648314ms)
+  Error: Command failed: python3 -c import importlib.util,json,pathlib,gzip,hashlib
+  from shapely import from_wkb,to_wkb
+  from shapely.geometry import Polygon
+  f=pathlib.Path("/tmp/worldatlas-startup712/data/macro-improvements/marcus-restoration/prepare.py"); s=importlib.util.spec_from_file_location('marcus',f);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);p=m.read(f.parent/'proposal.json');m.HERE=pathlib.Path("/tmp/marcus-water-negative-h3H0HH")
+  raw=(f.parent/'original-map.osm.xml.gz').read_bytes();(m.HERE/'original-map.osm.xml.gz').write_bytes(raw)
+  dry=from_wkb(gzip.decompress((f.parent/'dry-land.wkb.gz').read_bytes()))
+  for kind in ['drop-water','move-land']:
+   g=Polygon(dry.exterior) if kind=='drop-water' else __import__('shapely.affinity',fromlist=['translate']).translate(dry,xoff=.001)
+   b=to_wkb(g);(m.HERE/'dry-land.wkb.gz').write_bytes(gzip.compress(b));p['source_geometry']['wkb_sha256']=hashlib.sha256(b).hexdigest()
+   try:m.reconstruct(p)
+   except ValueError as e:assert 'reconstruction' in str(e)
+   else:raise AssertionError('Altered source land was accepted')
+  
+  Traceback (most recent call last):
+    File "<string>", line 2, in <module>
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/marcus-restoration.test.mjs:15:2)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 3c 73 74 72 69 6e 67 ... 71 more bytes> ],
+    pid: 761425,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 3c 73 74 72 69 6e 67 ... 71 more bytes>
+  }
+
+test at test/model-hierarchy-migration.test.mjs:1:1
+✖ test/model-hierarchy-migration.test.mjs (39668.832999ms)
+  'test failed'
+
+test at test/model-topology-migration.test.mjs:1:1
+✖ test/model-topology-migration.test.mjs (56163.248264ms)
+  'test failed'
+
+test at test/model.test.mjs:75:1
+✖ boundary versions require polygons and sources, and resolve by date (467.634634ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/boundary-version-hash.py --stdin
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>
+      print(boundary_hash(rows,args.index.resolve()))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at preparedBoundariesMatch (file:///tmp/worldatlas-startup712/derived.mjs:16:27)
+      at snapshot (file:///tmp/worldatlas-startup712/database.mjs:139:106)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/model.test.mjs:79:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    status: 1,
+    signal: null,
+    output: [ null, '', `Traceback (most recent call last):\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n` ],
+    pid: 762149,
+    stdout: '',
+    stderr: `Traceback (most recent call last):\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n`
+  }
+
+test at test/model.test.mjs:91:1
+✖ historical political records are dated, sourced, and do not extend into 2025 (177.100059ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/boundary-version-hash.py --stdin
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>
+      print(boundary_hash(rows,args.index.resolve()))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at preparedBoundariesMatch (file:///tmp/worldatlas-startup712/derived.mjs:16:27)
+      at snapshot (file:///tmp/worldatlas-startup712/database.mjs:139:106)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/model.test.mjs:92:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    status: 1,
+    signal: null,
+    output: [ null, '', `Traceback (most recent call last):\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n` ],
+    pid: 762161,
+    stdout: '',
+    stderr: `Traceback (most recent call last):\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 32, in <module>\n    print(boundary_hash(rows,args.index.resolve()))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/tmp/worldatlas-startup712/scripts/boundary-version-hash.py", line 21, in boundary_hash\n    from shapely.geometry import shape\nModuleNotFoundError: No module named 'shapely'\n`
+  }
+
+test at test/oceania-land-restoration.test.mjs:17:1
+✖ archived original dry land blocks a purported new identity on that land (32.54388ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-oceania-land-restoration.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-oceania-land-restoration.py", line 5, in <module>
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/oceania-land-restoration.test.mjs:17:155)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-oceania-land-restoration.py
+    Traceback (most recent call last):
+      File "/tmp/worldatlas-startup712/scripts/validate-oceania-land-restoration.py", line 5, in <module>
+        from shapely.geometry import shape
+    ModuleNotFoundError: No module named 'shapely'
+    
+        at genericNodeError (node:internal/errors:985:15)
+        at wrappedFn (node:internal/errors:539:14)
+        at checkExecSyncError (node:child_process:942:11)
+        at execFileSync (node:child_process:978:15)
+        at checkArchive (file:///tmp/worldatlas-startup712/test/oceania-land-restoration.test.mjs:14:50)
+        at file:///tmp/worldatlas-startup712/test/oceania-land-restoration.test.mjs:17:166
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/oceania-land-restoration.test.mjs:17:155)
+        at Test.runInAsyncScope (node:async_hooks:227:14),
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/oceania-land-restoration.test.mjs:18:1
+✖ an exact-name homonym on different land does not transfer or reuse archived identity (27.944026ms)
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-oceania-land-restoration.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-oceania-land-restoration.py", line 5, in <module>
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at genericNodeError (node:internal/errors:985:15)
+      at wrappedFn (node:internal/errors:539:14)
+      at checkExecSyncError (node:child_process:942:11)
+      at execFileSync (node:child_process:978:15)
+      at checkArchive (file:///tmp/worldatlas-startup712/test/oceania-land-restoration.test.mjs:14:50)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/oceania-land-restoration.test.mjs:18:171)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19) {
+    status: 1,
+    signal: null,
+    output: [ null, <Buffer >, <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 173 more bytes> ],
+    pid: 762065,
+    stdout: <Buffer >,
+    stderr: <Buffer 54 72 61 63 65 62 61 63 6b 20 28 6d 6f 73 74 20 72 65 63 65 6e 74 20 63 61 6c 6c 20 6c 61 73 74 29 3a 0a 20 20 46 69 6c 65 20 22 2f 74 6d 70 2f 77 6f ... 173 more bytes>
+  }
+
+test at test/oceania-land-restoration.test.mjs:19:1
+✖ changed archive bytes fail before considering identity absence (27.719137ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-oceania-land-restoration.py
+  Traceback (most recent call last):
+    File "/tmp/worldatlas-startup712/scripts/validate-oceania-land-restoration.py", line 5, in <module>
+      from shapely.geometry import shape
+  ModuleNotFoundError: No module named 'shapely'
+  
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/oceania-land-restoration.test.mjs:19:203)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Command failed: python3 /tmp/worldatlas-startup712/scripts/validate-oceania-land-restoration.py
+    Traceback (most recent call last):
+      File "/tmp/worldatlas-startup712/scripts/validate-oceania-land-restoration.py", line 5, in <module>
+        from shapely.geometry import shape
+    ModuleNotFoundError: No module named 'shapely'
+    
+        at genericNodeError (node:internal/errors:985:15)
+        at wrappedFn (node:internal/errors:539:14)
+        at checkExecSyncError (node:child_process:942:11)
+        at execFileSync (node:child_process:978:15)
+        at checkArchive (file:///tmp/worldatlas-startup712/test/oceania-land-restoration.test.mjs:14:50)
+        at file:///tmp/worldatlas-startup712/test/oceania-land-restoration.test.mjs:19:214
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/oceania-land-restoration.test.mjs:19:203)
+        at Test.runInAsyncScope (node:async_hooks:227:14),
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/prepared-parity.test.mjs:145:1
+✖ static and server exports resolve every active location identically, with examples on and off (5236.892259ms)
+  Error: ENOENT: no such file or directory, open '/tmp/worldatlas-startup712/dist/client/reference-attributes/index.json'
+      at Object.readFileSync (node:fs:484:20)
+      at read (file:///tmp/worldatlas-startup712/test/prepared-parity.test.mjs:18:87)
+      at prepared (file:///tmp/worldatlas-startup712/test/prepared-parity.test.mjs:30:14)
+      at TestContext.<anonymous> (file:///tmp/worldatlas-startup712/test/prepared-parity.test.mjs:150:162)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/tmp/worldatlas-startup712/dist/client/reference-attributes/index.json'
+  }

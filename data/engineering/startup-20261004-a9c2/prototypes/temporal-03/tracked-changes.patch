@@ -1,0 +1,110 @@
+diff --git a/scripts/build-static.mjs b/scripts/build-static.mjs
+index a7e87cf..e3ba66a 100644
+--- a/scripts/build-static.mjs
++++ b/scripts/build-static.mjs
+@@ -9,6 +9,7 @@ import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
+ import {prepareEvidenceBundle} from './prepare-evidence-bundle.mjs';
+ import {packageOwnershipHistory} from './package-ownership-history.mjs';
+ import {packageReferenceBundle} from './package-reference-bundle.mjs';
++import {packageTemporalBundle} from './package-temporal-bundle.mjs';
+ import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
+ import { createHash } from 'node:crypto';
+ const audit=JSON.parse(await fs.readFile('data/granularity-audit.json','utf8'));
+@@ -75,7 +76,8 @@ try {
+   const geographicRelease=readGeographicReleaseManifest('data/geographic-releases').releases.at(-1);
+   if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
+   const referenceBundle=await packageReferenceBundle({source:'data/reference-attributes',destination:'dist/reference-attributes',expectedFootprints:geographicRelease.footprints_sha256});
+-  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
++  const temporalBundle=await packageTemporalBundle({entities:reference.temporal.entities,history:reference.temporal.history,footprints:geographicRelease.footprints_sha256,hierarchy:geographicRelease.hierarchy_sha256,destination:'dist/geography'});
++  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({referenceAttributes:referenceBundle.descriptor,temporalBundle,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
+   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
+   await fs.writeFile('dist/environment-classifications.json',JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
+   await packageOwnershipHistory({source:'data/ownership-history',destination:'dist/ownership-history',hosted:process.env.ATLAS_HOSTED_BUILD==='1'});
+diff --git a/src/data-client.js b/src/data-client.js
+index 5c6503e..ca71bad 100644
+--- a/src/data-client.js
++++ b/src/data-client.js
+@@ -4,6 +4,7 @@ import {mergeHostedTemporalHistory} from './hosted-temporal-geography.js';
+ import {decodeReferences,decodeReferenceContext} from './reference-records.js';
+ import {referenceContextByLocation} from './reference-context.js';
+ import {loadReferenceBundle} from './reference-bundle.js';
++import {loadTemporalBundle} from './temporal-bundle.js';
+ import {preparedEvidencePartsAt,selectPreparedEvidence,verifyPreparedEvidencePart,verifyPreparedEvidenceIndexBytes,mergePreparedEvidence} from './prepared-evidence.js';
+ import {decodeDerived} from './derived-records.js';
+ import {runtimeOwnershipBucket,runtimeOwnershipData} from './runtime-ownership.js';
+@@ -155,10 +156,11 @@ export async function loadGeography() {
+   referenceAttributeFootprints=data.reference_release?.footprints_sha256??data.preparedEvidence?.footprints_sha256;
+   // Preload one complete pinned bundle; legacy deployments keep their old reads.
+   if(staticAtlas&&referenceAttributeBundle)loadReferenceGeneration().catch(()=>{});
++  const temporalBundle=data.temporalBundle?loadTemporalBundle(data.temporalBundle,data.reference_release):null;
+   const [catalog,entities,history]=await Promise.all([
+    data.parts?Promise.all([Promise.all(data.parts.map(part=>readJSON(`./${part}`))).then(parts=>parts.flat()),data.pixelMap?loadOwnershipAssets(data.pixelMap):null]):null,
+-   data.entityParts?Promise.all(data.entityParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null,
+-   data.temporalHistoryParts?Promise.all(data.temporalHistoryParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null
++   temporalBundle?temporalBundle.then(bundle=>bundle.entities):data.entityParts?Promise.all(data.entityParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null,
++   temporalBundle?temporalBundle.then(bundle=>bundle.history):data.temporalHistoryParts?Promise.all(data.temporalHistoryParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null
+   ]);
+   if(catalog){[data.features,data.ownership]=catalog;}
+   if(entities)data.temporal.entities=entities;
+diff --git a/src/reference-bundle.js b/src/reference-bundle.js
+index 6855bd8..e11b3ce 100644
+--- a/src/reference-bundle.js
++++ b/src/reference-bundle.js
+@@ -22,13 +22,13 @@ async function boundedBytes(stream, maximum) {
+   return bytes;
+ }
+ 
+-export async function loadReferenceBundle(proof, footprints, fetcher = fetch) {
+-  if (proof?.version !== 1 || proof.path !== 'reference-attributes/startup-bundle.json.gz' ||
++export async function loadPinnedTransport(proof, footprints, pathname, fetcher = fetch, hierarchy) {
++  if (proof?.version !== 1 || proof.path !== pathname ||
+       !hash(footprints) || proof.footprints_sha256 !== footprints ||
+-      ![proof.sha256, proof.decoded_sha256, proof.index_sha256].every(hash) ||
++      (hierarchy !== undefined && (!hash(hierarchy) || proof.hierarchy_sha256 !== hierarchy)) ||
++      ![proof.sha256, proof.decoded_sha256].every(hash) ||
+       !Number.isSafeInteger(proof.bytes) || proof.bytes < 1 || proof.bytes > MAX_COMPRESSED ||
+-      !Number.isSafeInteger(proof.decoded_bytes) || proof.decoded_bytes < 1 || proof.decoded_bytes > MAX_DECODED ||
+-      !Number.isSafeInteger(proof.part_count) || proof.part_count < 1 || proof.part_count > 256) {
++      !Number.isSafeInteger(proof.decoded_bytes) || proof.decoded_bytes < 1 || proof.decoded_bytes > MAX_DECODED) {
+     throw Error('Invalid reference bundle proof');
+   }
+   const response = await fetcher('./' + proof.path);
+@@ -39,7 +39,12 @@ export async function loadReferenceBundle(proof, footprints, fetcher = fetch) {
+   if (compressed && (bytes.length !== proof.bytes || await digest(bytes) !== proof.sha256)) throw Error('Reference bundle checksum mismatch');
+   const raw = compressed ? await boundedBytes(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip')), proof.decoded_bytes) : bytes;
+   if (raw.length !== proof.decoded_bytes || await digest(raw) !== proof.decoded_sha256) throw Error('Reference bundle decoded checksum mismatch');
+-  const bundle = JSON.parse(new TextDecoder().decode(raw));
++  return JSON.parse(new TextDecoder().decode(raw));
++}
++
++export async function loadReferenceBundle(proof, footprints, fetcher = fetch) {
++  if (!hash(proof?.index_sha256) || !Number.isSafeInteger(proof.part_count) || proof.part_count < 1 || proof.part_count > 256) throw Error('Invalid reference bundle proof');
++  const bundle = await loadPinnedTransport(proof, footprints, 'reference-attributes/startup-bundle.json.gz', fetcher);
+   if (bundle.version !== 1 || bundle.index_sha256 !== proof.index_sha256 ||
+       bundle.index?.footprints_sha256 !== footprints || ![1, 2].includes(bundle.index?.version) ||
+       !Array.isArray(bundle.index.parts) || bundle.index.parts.length !== proof.part_count ||
+diff --git a/test/compact-map-client.test.mjs b/test/compact-map-client.test.mjs
+index b4b77ce..d47cbc0 100644
+--- a/test/compact-map-client.test.mjs
++++ b/test/compact-map-client.test.mjs
+@@ -94,6 +94,20 @@ test('complete entity and history reads start before the catalog finishes',async
+  assert.deepEqual(result.features,[]);assert.deepEqual(result.temporal,{entities:[],history:[]});
+ }));
+ 
++test('a temporal bundle retains every entity/history field without reading legacy parts',async()=>withLoader(async loader=>{
++ const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
++ const entities=[{id:'original:entity',parent_id:'original:parent',attributes:{source:'Original reference'}}],history=[{id:'original:history',entity_id:'original:entity',source:'Original history',valid_from:-1,valid_to:1}];
++ const raw=Buffer.from(JSON.stringify({version:1,...temporalPins,entities,history})),bytes=gzipSync(raw);
++ const proof={version:1,path:'geography/startup-temporal.json.gz',bytes:bytes.length,sha256:digest(bytes),decoded_bytes:raw.length,decoded_sha256:digest(raw),footprints_sha256:temporalPins.footprints_sha256,hierarchy_sha256:temporalPins.hierarchy_sha256,entities:1,history:1};
++ const calls=[];global.fetch=async url=>{
++  calls.push(url);
++  if(url==='./atlas-geography.json')return Response.json({units:[],features:[],temporal:{links:['original-link']},reference_release:{id:temporalPins.release_id,...temporalPins},temporalBundle:proof,entityParts:['legacy-entities.json'],temporalHistoryParts:['legacy-history.json']});
++  assert.equal(url,'./geography/startup-temporal.json.gz');return new Response(bytes);
++ };
++ const result=await loader.loadGeography();assert.deepEqual(result.temporal,{links:['original-link'],entities,history});
++ assert.deepEqual(calls,['./atlas-geography.json','./geography/startup-temporal.json.gz']);
++}));
++
+ test('older Workers negotiate the sparse limit without masking unrelated bad requests',async()=>withLoader(async loader=>{
+  const limits=[];global.fetch=async url=>{const p=request(url),limit=Number(p.get('limit'));limits.push(limit);return limit>1000?Response.json({error:'Map entity page limit must be between 1 and 1000'},{status:400}):Response.json(validPage());};
+  const result=await loader.loadHostedMapEvidence(2020,false);assert.deepEqual(limits,[4096,1000]);assert.equal(result.retirementAuthority,true);

@@ -1,0 +1,72 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "startup-20261004-a9c2",
+  "branch": "engineering/startup-20261004-a9c2",
+  "base_main_commit": "c81bdce3f6aee4944d0dbae1c848bf33c365124f",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/712",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Measure and optimize first correct interactive selected-year startup; preserve integrity, stable IDs, provenance and existing navigation behavior"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-04T10:12:04.635438+00:00",
+  "completed": [
+    "Serialized claim confirmed; fresh isolated checkout; previous638safehandoff+release verified",
+    "Currentserved5 fresh/repeat complete startup27.551/27.331seconds",
+    "Currentmergedmainfrontendpreview with actualserved5 fresh/repeat27.306/26.815seconds;638alreadyincluded",
+    "Measured72reference requests occupy~8seconds after geography; original request spans and loader transitions retained",
+    "Whole actualserved5 reference index+71parts exactly equal current committedreference bytes",
+    "Lossless pinned reference bundle preserves complete original rows/context; two independent packages byte-identical; originalgeo root fields unchanged",
+    "Bundled-reference+parallel-bootstrap preview17.115/16.847s fresh/repeat, newbundlelocal lowerbound nothostedtargetproof",
+    "Bounded8ownership-transfer preview14.672/15.684s fresh/repeat; still misses10s; rapid3.119soutlier retained",
+    "40 targeted controls pass/0skip including generation-race, complete bootstrap, checksums, bounded8row-before-run reconstruction",
+    "Temporal bundle preview14.434/14.801s retained; removed unneeded temporal implementation, preserved complete prototype/source receipts",
+    "Varint prototype63.141MB vs original47.608MB rejected; complete artifact remains on immutable pushed evidence-startup712-varint-20261004-a9c2 tag5482569ea17d16dfa972ddb5b436ed16f9b39bb7",
+    "Selected byte-shuffle14runparts47.164MB; every57618658canonical run word unchanged",
+    "Complete startup preview11.754/10.073s; ownership/reference parts local, not hosted10s acceptance; navigation3.452s outlier retained",
+    "42 focused tests passed; earlier invalid fixture failures retained with corrections",
+    "Candidate04 six-continent profiles/all14modes/historical1800 unchanged ownership navigation passed",
+    "Browser controls04 confirmed corrupted-reference visible failure, missing-ownership no map and Canvas2D actual230454paintedpixels; interim harness-failure and memory-crash vintages retained",
+    "Hosted package02 actualexit0,262164480tarbytes within264241152reservedtarget; complete original references bundled and canonical files preserved repository/prior publication",
+    "Full initial local regression841pass/28fail: missing Python Shapely, two heavy test failures, obsolete standalone-reference static-test assumption; all stdout retained, affected files rechecking pinnedPython/concurrency1",
+    "New independent static parity reads pinned bundle and verifies every index/part against retained original before complete exported-field checks",
+    "All70affected regression tests passed/0fail/0skip with pinnedPython/concurrency1, including full13-year static/server parity exampleson/off; original841pass/28fail rawrun retained"
+  ],
+  "checks": [],
+  "deployment": {
+    "author_deployed": false,
+    "observed_site_version": 24,
+    "access": "owner-private"
+  },
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": "Ordinary bounded production GET-only browser paths; no production writes or heavy load"
+  },
+  "evidence_paths": [
+    "data/engineering/startup-20261004-a9c2/",
+    "coordination/engineering/startup-20261004-a9c2/"
+  ],
+  "blockers": [],
+  "next_action": "Submit first bounded PR for distinct exact-head review and required CI; accepted serialized merge required before fresh next-part implementation; no served10sacceptance",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here",
+  "reservation": {
+    "comment_id": 5978306167,
+    "version": 1,
+    "active": true,
+    "worker_id": "engineering-startup-a9c25e14-20261004",
+    "claim_id": "22b05e8a-f50b-4901-8cd3-b9e71fe4827b",
+    "branch": "engineering/startup-20261004-a9c2",
+    "request_id": "d77c6fdc-1ecb-4b2d-8e2d-25f6b87a4ea4",
+    "issue_number": 712,
+    "claimed_at": "2026-10-04T08:57:19.982Z",
+    "updated_at": "2026-10-04T08:57:19.982Z",
+    "expires_at": "2026-10-05T08:57:19.982Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 3
+  }
+}

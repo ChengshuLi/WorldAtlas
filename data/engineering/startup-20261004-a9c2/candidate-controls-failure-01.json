@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "observed_at_utc": "2026-10-04T09:58:07.951930+00:00",
+  "outcome": "failed",
+  "scenario": "reference-corruption",
+  "error": "AssertionError: expected rendered canvas not true; actual true",
+  "limit": "First harness wrongly assumed initial ownership canvas cannot render before reference snapshot failure. Usable completion still requires loader hidden and selected-year snapshot; corrected control checks visible loading error and unavailable snapshot. No successful negative-control claim from this failure."
+}
