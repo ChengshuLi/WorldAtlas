@@ -88,7 +88,7 @@
       "verification": "verified",
       "temporal_status": "reference",
       "restoration": "Official direct archive endpoint returned HTTP 200 on 2026-10-04; downloaded bytes were 258764 with SHA-256 eb327459528b87cbc27e55ccc6bfd6982562c75559823a00b6dc50c04abcaab1. Recheck current terms and the full-file size/hash before each temporary use. The downloads index returned 404, but the direct archive endpoint worked.",
-      "limit": "Source-backed reproduction matched all 18 inherited rows exactly; mapping-only scale and source vintages do not resolve the offset cause or support ownership/boundary conclusions."
+      "limit": "Source-backed reproduction matched all 18 inherited rows exactly, but GDAL emitted self-intersection and GeometryCollection-operation warnings during the inherited MakeValid/boundary method; repaired-geometry interpretation remains limited. Mapping-only scale and source-vintage differences do not resolve the offset cause or support ownership/boundary conclusions."
     },
     {
       "id": "statistics-canada-cd-2021",
@@ -174,8 +174,8 @@
     },
     {
       "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/README.md",
-      "bytes": 4714,
-      "sha256": "8c618e5461308311a935dba0e87f12b6f13aec9ba09477aeed403fb1d49b12ee",
+      "bytes": 4957,
+      "sha256": "d7ac106f754a9c7b63391f84a51356be75b47f626bd72ce0d8b66523990c4efb",
       "hash_kind": "file-bytes"
     },
     {
@@ -210,8 +210,8 @@
     },
     {
       "path": "research/geography/bc-washington-reproduction-followup/vintages/ibc-restored-20261004/verification.json",
-      "bytes": 2464,
-      "sha256": "8448e0e2557b60ce040ba63f9dc9e37c8be004931a062d24b25804a5e38f3694",
+      "bytes": 2738,
+      "sha256": "8771173cdd43ae397d3877a3d20f37a32b68667284d276b2ca9af73a59db6ce7",
       "hash_kind": "file-bytes"
     },
     {
