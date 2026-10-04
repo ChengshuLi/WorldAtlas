@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "record_kind": "voluntary-legacy-whole-file-change-and-preservation-ledger",
+  "issue": 51,
+  "author_worker_id": "engineering-night-20261003-7e91f438",
+  "baseline_commit": "c1ed367363e243caf522c0179f09bfa185b6bd42",
+  "changed_files_excluding_self": [
+    {
+      "path": "coordination/engineering/storage-recovery-20261004-7e91.json",
+      "status": "A",
+      "bytes": 2125,
+      "sha256": "b192cbe15856c6eddc72413a4acf8095174645703506261c3abab089871e937a"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/README.md",
+      "status": "A",
+      "bytes": 3135,
+      "sha256": "99aa01958f6477f08efe75d8a1127f24be5533f7199b485b078b07fc1195e899"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/claim.json",
+      "status": "A",
+      "bytes": 827,
+      "sha256": "c98b60c86e2f6e9622e42c02a4613138697e73b6587d01127ab000800ff2e918"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/completed-job-housekeeping.json",
+      "status": "A",
+      "bytes": 1624,
+      "sha256": "d54eb1d9c680488a9a6f4fa304dd5b154ca12f6dfdfd94e70fb93801f808f034"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/live-read-renew.json",
+      "status": "A",
+      "bytes": 826,
+      "sha256": "8ea2e66e92982dac9f8eb8818ecef4d47489d4964c8fb31cf12cfd4bec033f69"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/native-target-image-pull.log",
+      "status": "A",
+      "bytes": 1951,
+      "sha256": "93a8e163c24eb6da0799307120c121688efeae112c9aaa381ebfcab30e986be9"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/neon-metadata-workflow-status.json",
+      "status": "A",
+      "bytes": 1346,
+      "sha256": "1625628a4141b4173d47f464f5b9fbece6e9189e7133742abc03eb7c0b3251b0"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/object-recovery-complete.json",
+      "status": "A",
+      "bytes": 1317374,
+      "sha256": "3c4473a941e91a9deb1f500514911b8f2b523aa0565dc0c7c2485228780abf1c"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/object-recovery-controls-expanded.tap",
+      "status": "A",
+      "bytes": 2562,
+      "sha256": "6b53670a904ee3a88017fb143700496a23953c2bd16d20eafa984c9b4c166754"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/object-recovery-controls-final.tap",
+      "status": "A",
+      "bytes": 2932,
+      "sha256": "ad46c82215542871c9d4b13e6feb7896421c05457d185e1e3d5adc9762b412ec"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/object-recovery-controls-first.tap",
+      "status": "A",
+      "bytes": 1703,
+      "sha256": "b530c951c6f7d0a2487b4b8d48a7903c39a189024432ff135b3f76e22c2b1f47"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/object-recovery-controls-hardened.tap",
+      "status": "A",
+      "bytes": 2823,
+      "sha256": "1fba1da4510c0b4d9e8b2ee4af31f30e52e25e67bf58817b2e273918d7d58c14"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/object-recovery-first-failed.json",
+      "status": "A",
+      "bytes": 405506,
+      "sha256": "02939eaf8bfb2f9f32420fa2ee82682eecde3bbff4338ab3a93024cee9e1784f"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/previous-claim-release.json",
+      "status": "A",
+      "bytes": 884,
+      "sha256": "173f9f388ae8964793aedc9453f67150ebbbb9e571f560f777600d5109ff1b8c"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/private-source-readiness-with-proxy.json",
+      "status": "A",
+      "bytes": 18007,
+      "sha256": "f33669a3c9f3aa8bfe05054198dcb48b7987bca718df50cebae3cdd114d36b92"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/private-source-readiness.json",
+      "status": "A",
+      "bytes": 467,
+      "sha256": "f1cb36ab29a58e6c8cc1b3ff29ded8039ec8b1f7193551f30124edd8275cb1dd"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/probe-private-source-with-proxy.mjs",
+      "status": "A",
+      "bytes": 2398,
+      "sha256": "d00aef6b0ad425e81473894b4790f68796e1f5076ac56fdd150f0bd17cd1d19e"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/probe-private-source.mjs",
+      "status": "A",
+      "bytes": 2387,
+      "sha256": "d541c54f6e1f1dab4ae738bc0d35fed3f157a2756c681bb0b6e80469c443b95f"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/probe-publisher-handover-pins-complete.mjs",
+      "status": "A",
+      "bytes": 2733,
+      "sha256": "e64bdbc834a4a160706d688801d35a4fc3b71feee19f0a17d3f63a553e6c2607"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/probe-publisher-handover-pins-repeat.mjs",
+      "status": "A",
+      "bytes": 2316,
+      "sha256": "8da59b10cbff6303be398fc541910531a5e7c15584dfe4923ba211502aa295a6"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/probe-publisher-handover-pins.mjs",
+      "status": "A",
+      "bytes": 2400,
+      "sha256": "911c8e067eac6237f95b9598a47748767066b17ff6d6c1efbfc5ef4517c6e645"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/publisher-handover-served-pins-complete.json",
+      "status": "A",
+      "bytes": 11359,
+      "sha256": "63c029369beb652afa5648472c3ee7152942f4e77f74231be878b9ce84a719ee"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/publisher-handover-served-pins.json",
+      "status": "A",
+      "bytes": 5819,
+      "sha256": "41d03f0554238c52545f0b1b0088513fa7e356dafa6bc5dd4545a1f6602de6a3"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/read-settled-renew.json",
+      "status": "A",
+      "bytes": 827,
+      "sha256": "d97ce5c8b7c0b40bcb936bb361c0f74949e7abd2cf37a7ce07641891cd25c756"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/reproduce-file-ledger.mjs",
+      "status": "A",
+      "bytes": 2346,
+      "sha256": "b960435e6fffdf6cd8d668a57fa14bc30c771016f2f4dcaa89da3a300ba4a2ae"
+    },
+    {
+      "path": "data/engineering/storage-recovery-20261004-7e91/resource-failure-and-correction.json",
+      "status": "A",
+      "bytes": 1744,
+      "sha256": "832355e02c712e5df8c2eafbf134ccc3f0955f1709340f09c1fd4ef3d77c4702"
+    },
+    {
+      "path": "docs/RETAINED_OBJECT_RECOVERY.md",
+      "status": "A",
+      "bytes": 3390,
+      "sha256": "773a3e68e02f7baad15bdd32120137e37bf47db96dde4195bbbb7c4b8bb255d4"
+    },
+    {
+      "path": "scripts/verify-retained-object-recovery.mjs",
+      "status": "A",
+      "bytes": 12518,
+      "sha256": "b188f55215ff721e6108260c0d719f806ab37237f4999994a2bea4180812922f"
+    },
+    {
+      "path": "test/retained-object-recovery.test.mjs",
+      "status": "A",
+      "bytes": 11350,
+      "sha256": "8e6612e65637ff98b7f823a1d1437fb69dcb4ddee207d226726e58c5b64689d8"
+    }
+  ],
+  "protected_originals": [
+    {
+      "path": "postgres/schema.sql",
+      "bytes": 51470,
+      "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+      "preserved": true
+    },
+    {
+      "path": "postgres/migrations/0001_temporal_geography.sql",
+      "bytes": 21800,
+      "sha256": "a4302a6f00b305205b70ed8981f929725c90b48172413ff47738a4a27186f6cd",
+      "preserved": true
+    },
+    {
+      "path": "postgres/migrations/0002_footprint_versions.sql",
+      "bytes": 20748,
+      "sha256": "24e22602715355e48e344649461179d69ed92cf3c0e54812dee4f315fed42f37",
+      "preserved": true
+    },
+    {
+      "path": "drizzle/0000_bizarre_sentry.sql",
+      "bytes": 38954,
+      "sha256": "a7d4945214a37835bc6cbe8c6c0bfe2073d15fbf76fa1c510e6db072b64ba699",
+      "preserved": true
+    },
+    {
+      "path": "drizzle/0001_evidence_retirements.sql",
+      "bytes": 8576,
+      "sha256": "1f29f4af9eb41425dbd932b9d68e1c54406cb99221a02a2a1bc6b6cab2e3846f",
+      "preserved": true
+    },
+    {
+      "path": "drizzle/0002_geographic_reference_releases.sql",
+      "bytes": 14284,
+      "sha256": "fc03e50b1c7053d9ffe89534395bcbb644e3192231122eca51a424fd14753c53",
+      "preserved": true
+    },
+    {
+      "path": "drizzle/0003_unsettled_location_rank.sql",
+      "bytes": 15998,
+      "sha256": "dc249cb326203bee26446fb010e0f2c05d8bd9bcbb918649199382d517e0fa4d",
+      "preserved": true
+    },
+    {
+      "path": "drizzle/0004_population_precision_guard.sql",
+      "bytes": 5020,
+      "sha256": "302660bc2d4d673bab67820d3c54637ca8cd50460ace57e3142fb3c6f40da447",
+      "preserved": true
+    },
+    {
+      "path": "drizzle/0005_population_source_class_guard.sql",
+      "bytes": 5345,
+      "sha256": "44ec5f5a82317b7c430f7d98439e6ce41d04859d46719c36c3e0dc072f102194",
+      "preserved": true
+    },
+    {
+      "path": "drizzle/0006_unresolved_attribute_status_guard.sql",
+      "bytes": 472,
+      "sha256": "e2778adcf77945b294609111ecd21a02ffc177e41463393f07e7d15e50e97475",
+      "preserved": true
+    },
+    {
+      "path": "drizzle/0007_fixed_environment_classifications.sql",
+      "bytes": 4652,
+      "sha256": "c566a87dc05a5ec5a1311019b60cfea54e8708b29ec2df6c8e80057432c4708b",
+      "preserved": true
+    },
+    {
+      "path": "drizzle/0008_temporal_geography.sql",
+      "bytes": 21737,
+      "sha256": "a8cd574333d20891a94afac6a034576681fac2531545b761d4c4e609be452082",
+      "preserved": true
+    },
+    {
+      "path": "drizzle/0009_footprint_versions.sql",
+      "bytes": 19674,
+      "sha256": "014c90d0f7cba3417480cefe3c20a97119237874098bcfb17b4be5120478a7f6",
+      "preserved": true
+    },
+    {
+      "path": "hosted/storage-export-v2-contract.js",
+      "bytes": 7783,
+      "sha256": "f670c6e6809192d62fa01959e3277eff96633b4e64293975dbf52b63b8e5d04b",
+      "preserved": true
+    },
+    {
+      "path": "hosted/storage-export-v2.js",
+      "bytes": 11339,
+      "sha256": "a5e17805cf204fd28423064a0b51722cc37ce5baf754935a3526afe8dd9f9267",
+      "preserved": true
+    },
+    {
+      "path": "scripts/export-hosted-storage-v2.mjs",
+      "bytes": 15822,
+      "sha256": "7d55f1c62bb505aa00c45b4581acda8e5df271458db1ab9fddf81e6a02617772",
+      "preserved": true
+    },
+    {
+      "path": "scripts/restore-postgres-storage-v2.mjs",
+      "bytes": 20543,
+      "sha256": "44dd22f2887fd63f6360e7edab747771a14d805d4b213629c93ea8ca13bb1e32",
+      "preserved": true
+    },
+    {
+      "path": "data/hosted-catalog/index.json",
+      "bytes": 76218,
+      "sha256": "ade11c54ae041f48c305b79223bb5b230db608b2bb0ee1e8a74edd1bc54f6d2b",
+      "preserved": true
+    },
+    {
+      "path": "data/research-geography-gate.json",
+      "bytes": 1533,
+      "sha256": "1fd32582e4b9bac195fa5bfe306b7e9aa706d4b5986db97d689bfe14b7b9e2b4",
+      "preserved": true
+    },
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "preserved": true
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10165703,
+      "sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "preserved": true
+    }
+  ],
+  "self_exclusion": "data/engineering/storage-recovery-20261004-7e91/file-ledger.json",
+  "limits": [
+    "Not an issue-declared enforced evidence_quality manifest.",
+    "Full cache object bytes remain outside Git; actual full source/recovery proof must be verified separately.",
+    "No provider-managed backup, SQL/owner restore, geography or publication certificate."
+  ]
+}

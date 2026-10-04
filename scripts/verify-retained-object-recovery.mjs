@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
-import {storageExportV2Collections,storageExportV2Contract,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
+import {storageExportV2Collections,storageExportV2Columns,storageExportV2Contract,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const requireValue=(ok,message)=>{if(!ok)throw Error(message);};
 const equivalent=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
@@ -14,6 +14,7 @@ function exactBytes(value){
 function marker(value){
  requireValue(value?.version===2&&value.backend==='postgres'&&Number.isSafeInteger(value.revision)&&value.revision>=0,'Expected current PostgreSQL V2 marker');
  requireValue(!value.legacy_projection&&equivalent(value.contract,storageExportV2Contract),'Complete known V2 contract required');
+ requireValue(value.catalog_sha256===storageExportV2Contract.postgres_catalog_sha256&&/^[a-f0-9]{64}$/.test(value.geographic_releases_sha256??'')&&/^[a-f0-9]{64}$/.test(value.footprint_versions_sha256??''),'Original PostgreSQL catalog and release pins required');
  requireValue(equivalent(Object.keys(value.counts??{}).sort(),[...storageExportV2Collections].sort())&&storageExportV2Collections.every(k=>Number.isSafeInteger(value.counts[k])&&value.counts[k]>=0),'Complete counts required');
  requireValue(/^[a-f0-9]{64}$/.test(value.fingerprint??'')&&hash(JSON.stringify(v2MarkerIdentity(value)))===value.fingerprint,'Marker fingerprint mismatch');
  return value;
@@ -33,7 +34,7 @@ export async function verifyRetainedObjectRecovery({origin,token,directory,fetch
   'Recovered bytes are local isolated files; no external disaster-retention guarantee is inferred.',
   'Published footprint object references require separate inventory coverage if present.'
  ]};let phase='marker-before';
- function save(){const raw=JSON.stringify(receipt,null,2)+'\n';requireValue(!raw.includes(token),'Unsafe receipt');fs.writeFileSync(path.join(directory,'receipt.json'),raw,{mode:0o600});}
+ function save(){const raw=JSON.stringify(receipt,null,2)+'\n';requireValue(!raw.includes(token),'Unsafe receipt');const temporary=path.join(directory,'receipt.json.next');const fd=fs.openSync(temporary,'w',0o600);try{fs.writeFileSync(fd,raw);fs.fsyncSync(fd);}finally{fs.closeSync(fd);}fs.renameSync(temporary,path.join(directory,'receipt.json'));}
  async function transfer(route,{expected,output}={}){
   signal?.throwIfAborted();const deadline=new AbortController(),requestSignal=signal?AbortSignal.any([signal,deadline.signal]):deadline.signal;
   const timer=setTimeout(()=>deadline.abort(new DOMException('Recovery request deadline','TimeoutError')),requestTimeoutMs);
@@ -63,20 +64,20 @@ export async function verifyRetainedObjectRecovery({origin,token,directory,fetch
   for(let pageNumber=0;pageNumber<=maxObjects;pageNumber++){
    const q=new URLSearchParams({limit:'200'});if(cursor)q.set('cursor',cursor);
    const page=await transfer('/api/storage/v2/export/media?'+q);
-   requireValue(page?.collection==='media'&&Array.isArray(page.records)&&page.records.length<=200&&marker(page.snapshot_marker).fingerprint===receipt.before_marker.fingerprint,'Mixed media snapshot');
+   requireValue(page?.collection==='media'&&Array.isArray(page.records)&&page.records.length<=200&&equivalent(page.columns,storageExportV2Columns.media)&&page.revision===receipt.before_marker.revision&&marker(page.snapshot_marker).fingerprint===receipt.before_marker.fingerprint,'Mixed media snapshot');
    for(const row of page.records){
     requireValue(typeof row.id==='string'&&row.id&&row.id.length<=512&&!ids.has(row.id),'Invalid or duplicate media identity');ids.add(row.id);
     requireValue(typeof row.object_key==='string'&&row.object_key&&row.object_key.length<=1024&&/^[a-f0-9]{64}$/.test(row.sha256??''),'Invalid immutable object pin');
     const bytes=exactBytes(row.bytes);requireValue(bytes<=maxObjectBytes,'Object exceeds reviewed byte budget');
     const pin={sha256:row.sha256,bytes};if(keys.has(row.object_key))requireValue(equivalent(keys.get(row.object_key),pin),'Conflicting shared object key');else keys.set(row.object_key,pin);
-    inventory.push({id:row.id,object_key:row.object_key,...pin,source_id:row.source_id,status:row.status});requireValue(inventory.length<=maxObjects,'Object inventory budget exceeded');
+    inventory.push({id:row.id,object_key:row.object_key,...pin,source_id:row.source_id,status:row.status,original_media_record:row});requireValue(inventory.length<=maxObjects,'Object inventory budget exceeded');
    }
    cursor=page.next_cursor;requireValue(cursor===null||typeof cursor==='string'&&cursor&&!cursors.has(cursor),'Invalid or repeated cursor');
    if(cursor===null)break;cursors.add(cursor);
   }
   requireValue(cursor===null&&inventory.length===receipt.before_marker.counts.media,'Incomplete registered object inventory');
   const total=inventory.reduce((sum,row)=>sum+row.bytes,0);requireValue(Number.isSafeInteger(total)&&total<=maxTotalBytes,'Total recovery byte budget exceeded');
-  receipt.inventory=inventory;receipt.expected_registered_bytes=total;save();fs.mkdirSync(path.join(directory,'objects'),{mode:0o700});phase='full-object-copy';
+  receipt.inventory=inventory;receipt.expected_registered_bytes=total;const capacity=fs.statfsSync(directory,{bigint:true});receipt.available_local_bytes_before_copy=String(capacity.bavail*capacity.bsize);requireValue(capacity.bavail*capacity.bsize>=BigInt(total)+64n*1024n*1024n,'Insufficient isolated recovery disk capacity');save();fs.mkdirSync(path.join(directory,'objects'),{mode:0o700});phase='full-object-copy';
   for(const row of inventory){
    const relative='objects/'+hash(Buffer.from(row.id))+'.bin',file=path.join(directory,relative),item={...row,path:relative,status:'partial'};receipt.objects.push(item);
    const begin=performance.now(),read=await transfer('/api/media/'+encodeURIComponent(row.id),{expected:row,output:file});
@@ -86,12 +87,31 @@ export async function verifyRetainedObjectRecovery({origin,token,directory,fetch
   phase='marker-after';receipt.after_marker=marker(await transfer('/api/storage/v2/export-marker'));
   requireValue(receipt.after_marker.fingerprint===receipt.before_marker.fingerprint,'Source changed during recovery');
   receipt.status='verified';receipt.registered_objects=inventory.length;receipt.recovered_bytes=total;receipt.duration_ms=Math.round(performance.now()-started);receipt.finished_at_utc=new Date().toISOString();save();return receipt;
- }catch{receipt.status='failed';receipt.phase=phase;receipt.failure='Bounded request, immutable pin, inventory or local readback failed; preserve partial bytes and receipts';receipt.duration_ms=Math.round(performance.now()-started);save();throw Error('Retained object recovery failed; sanitized receipt and partial bytes preserved');}
+ }catch(error){receipt.status='failed';receipt.phase=phase;receipt.failure_code=['ENOSPC','EACCES','EIO','ENOENT'].includes(error?.code)?error.code:error?.name==='TimeoutError'?'TIMEOUT':'VERIFICATION_OR_TRANSPORT';receipt.failure='Bounded request, immutable pin, inventory or local readback failed; preserve partial bytes and receipts';receipt.duration_ms=Math.round(performance.now()-started);try{save();}catch{/* Preserve the preceding atomic receipt and any failed temporary bytes. */}throw Error('Retained object recovery failed; sanitized receipt and partial bytes preserved');}
+}
+export function readHiddenPrivateToken(input=process.stdin){
+ requireValue(input.isTTY&&typeof input.setRawMode==='function','Use hidden private credential stdin');
+ input.setRawMode(true);
+ return new Promise((resolve,reject)=>{
+  let value='',finished=false;
+  const finish=(error,token)=>{if(finished)return;finished=true;input.removeListener('data',data);input.removeListener('end',end);input.removeListener('error',failure);input.pause();input.setRawMode(false);value='';error?reject(error):resolve(token);};
+  const end=()=>finish(Error('Hidden input ended before credential'));
+  const failure=()=>finish(Error('Hidden input unavailable'));
+  const data=chunk=>{
+   if(chunk.includes(3)||chunk.includes(4))return finish(Error('Hidden input cancelled'));
+   value+=chunk.toString();if(value.length>8192)return finish(Error('Hidden input too large'));
+   if(!/[\r\n]/.test(value))return;
+   try{const token=JSON.parse(value.trim()).token;requireValue(typeof token==='string'&&token&&!/[\r\n]/.test(token),'Invalid hidden credential');finish(null,token);}catch{finish(Error('Invalid hidden credential'));}
+  };
+  input.on('data',data);input.once('end',end);input.once('error',failure);
+ });
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
- const [origin,directory]=process.argv.slice(2);if(!process.stdin.isTTY)throw Error('Use hidden private credential stdin');
- process.stdin.setRawMode(true);console.log('Ready for private recovery credential JSON on hidden stdin.');let input='';
- const token=await new Promise((resolve,reject)=>process.stdin.on('data',chunk=>{input+=chunk.toString();if(input.length>8192)return reject(Error('Input too large'));if(!/[\r\n]/.test(input))return;process.stdin.pause();process.stdin.setRawMode(false);try{const t=JSON.parse(input.trim()).token;input='';resolve(t);}catch{reject(Error('Invalid hidden input'));}}));
- try{const r=await verifyRetainedObjectRecovery({origin,token,directory,onProgress:({completed,total})=>{if(completed%25===0)console.log(`Verified ${completed}/${total} retained objects`);}});console.log(JSON.stringify({status:r.status,registered_objects:r.registered_objects,recovered_bytes:r.recovered_bytes,duration_ms:r.duration_ms}));}
- catch{console.error('Recovery failed; sanitized receipts retained');process.exitCode=1;}finally{process.exit(process.exitCode??0);}
+ const [origin,directory]=process.argv.slice(2);
+ try{
+  console.log('Ready for private recovery credential JSON on hidden stdin.');const token=await readHiddenPrivateToken();
+  const r=await verifyRetainedObjectRecovery({origin,token,directory,onProgress:({completed,total})=>{if(completed%25===0)console.log(`Verified ${completed}/${total} retained objects`);}});
+  console.log(JSON.stringify({status:r.status,registered_objects:r.registered_objects,recovered_bytes:r.recovered_bytes,duration_ms:r.duration_ms}));
+ }catch{console.error('Recovery cancelled or failed; any sanitized receipts are retained');process.exitCode=1;}
+ finally{process.exit(process.exitCode??0);}
 }
