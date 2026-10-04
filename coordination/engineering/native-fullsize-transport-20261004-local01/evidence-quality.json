@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "issue": 794,
+  "lane": "engineering",
+  "worker_id": "engineering-neon-storage-publisher-20261004-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+    "files": [
+      {
+        "path": "postgres/schema.sql",
+        "bytes": 51470,
+        "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 39567,
+        "sha256": "820375c09f837ca0ea464eaf989a513352ee9de3433127d8c6820a384b7d73e2",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "scripts/test-current-postgres-recovery-native.mjs",
+        "bytes": 9146,
+        "sha256": "6f1523b2687f739a6ac4889b542aed20d3d0cef0e910dc12950be69b2ede3918",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "test/current-postgres-recovery.test.mjs",
+        "bytes": 16905,
+        "sha256": "35938c557e5a1bc664eab19e305038537e84f33b541d0553369ea0869ffe0bd5",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 245755,
+        "sha256": "47aa40b82e7f6b225a6567d28a0427df39d415dcf86df1d26f6d32ab84fd7a12",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 40453,
+      "sha256": "6da5563948de3b7139449f132d19d263c289d3625a715965a1e21f003e06cf5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/test-current-postgres-recovery-native.mjs",
+      "bytes": 10378,
+      "sha256": "41034d3fd018f7eb02217c878c55de1673bf057a2b26c6fb1ae09ead7248423a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "bytes": 17236,
+      "sha256": "b5b801f70d727afe9145c8c4bd46a5a7cbb540717cd593248ba1bac5705f8da6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-fullsize-transport-20261004-local01/README.md",
+      "bytes": 1109,
+      "sha256": "17ccfa9a669c8cd7b7c3063bc73c57a7874ac81f4445afe254d229a41db06dd4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-fullsize-transport-20261004-local01/prepare-evidence.mjs",
+      "bytes": 2651,
+      "sha256": "ac580753ceded8c07ec67f1aa551163bdd5bc159b6f1cbe5df064d7586b52afb",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "native-owner-maintenance",
+      "kind": "code",
+      "description": "Keep unchanged native archive in isolated seekable tmpfs file with exact SHA readback, sanitize native command stages and reproduce full-size TOC transport; exact source/restore ACL and factual parity remains required. No source SQL writes or production recovery claim before actual rerun",
+      "software": "Node24, pinned PostgreSQL18 native container and locked Neon serverless driver",
+      "units": "No new physical benchmark or native production capacity claim before actual execution"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "status": "modified",
+      "original_sha256": "820375c09f837ca0ea464eaf989a513352ee9de3433127d8c6820a384b7d73e2"
+    },
+    {
+      "path": "scripts/test-current-postgres-recovery-native.mjs",
+      "status": "modified",
+      "original_sha256": "6f1523b2687f739a6ac4889b542aed20d3d0cef0e910dc12950be69b2ede3918"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "status": "modified",
+      "original_sha256": "35938c557e5a1bc664eab19e305038537e84f33b541d0553369ea0869ffe0bd5"
+    },
+    {
+      "path": "coordination/engineering/native-fullsize-transport-20261004-local01/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-fullsize-transport-20261004-local01/prepare-evidence.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-fullsize-transport-20261004-local01/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test test/current-postgres-recovery.test.mjs",
+    "node coordination/engineering/native-fullsize-transport-20261004-local01/prepare-evidence.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/native-fullsize-transport-20261004-local01/evidence-quality.json"
+  ]
+}

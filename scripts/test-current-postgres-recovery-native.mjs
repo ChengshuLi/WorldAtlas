@@ -1,12 +1,12 @@
 // Explicit local synthetic fixture. Never connects to a provider or uses secrets.
 import fs from 'node:fs';
 import {execFileSync,spawn} from 'node:child_process';
-import {randomUUID,createHash} from 'node:crypto';
+import {randomUUID,randomBytes,createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {recoveryImage,readRecoveryInventory,assertRestoredInventory,isolatedRestoreSQL,isolatedOriginalChecks,isolatedRecoveryBootstrapSQL,isolatedDatabaseACLList,isolatedDatabaseACLSQL,restoreIsolatedDatabaseACL} from './current-postgres-recovery.mjs';
 import {storageExportV2Contract} from '../hosted/storage-export-v2-contract.js';
 const sha=x=>createHash('sha256').update(x).digest('hex');
-const native=(args,input)=>execFileSync('docker',args,{input,timeout:180000,maxBuffer:16*1024*1024,stdio:['pipe','pipe','pipe']});
+const native=(args,input)=>execFileSync('docker',args,{input,timeout:180000,maxBuffer:64*1024*1024,stdio:['pipe','pipe','pipe']});
 let name;const receipt={version:1,fixture_only:true,production_access:false,image:recoveryImage,status:'failed'};
 const cleanup=()=>{if(name){native(['rm','-fv',name]);assert.equal(native(['ps','-a','--filter','name=^/'+name+'$','--format','{{.ID}}']).toString().trim(),'');name=null;}};
 async function start(){name='atlas-sql-fixture-'+randomUUID();native(['run','-d','--name',name,'--network','none','--read-only','--tmpfs','/var/lib/postgresql:rw,size=256m','--tmpfs','/var/run/postgresql:rw,size=16m','--memory','1g','-e','POSTGRES_HOST_AUTH_METHOD=trust',recoveryImage]);for(let i=0;i<30;i++){try{native(['exec',name,'pg_isready','-h','127.0.0.1','-U','postgres']);return;}catch{await new Promise(r=>setTimeout(r,1000));}}throw Error('fixture not ready');}
@@ -25,6 +25,10 @@ try{
  sql(`SET ROLE neondb_owner; INSERT INTO atlas_sources(id,name,license,vintage,supported_from,supported_to,status,metadata) VALUES('fixture-source','Synthetic fixture only','test-only','synthetic',1,20,'example','{ "original" : "source" }');`);
  const tiers=['continent','subcontinent','region','area','province','location'];for(let i=0;i<tiers.length;i++)sql(`SET ROLE neondb_owner; INSERT INTO atlas_entity_types(id,name,geographic_level) VALUES('${tiers[i]}','Synthetic ${tiers[i]}',${5-i}); INSERT INTO atlas_entities(id,kind,name,parent_id,valid_from,valid_to,source_id,is_example,metadata) VALUES('fixture-${tiers[i]}','${tiers[i]}','Synthetic ${tiers[i]}',${i?"'fixture-"+tiers[i-1]+"'":'NULL'},1,10,'fixture-source',1,'{ "original" : "identity" }');`);
  sql(`SET ROLE neondb_owner; INSERT INTO atlas_attribute_records(id,location_id,attribute,value,valid_from,valid_to,method,status,source_id,is_example,metadata) VALUES('fixture-record','fixture-location','population','10',1,10,'estimate','example','fixture-source',1,'{ "original" : "claim" }'); INSERT INTO atlas_names(id,entity_id,name,valid_from,valid_to,source_id,is_example,metadata) VALUES('fixture-name','fixture-location','Synthetic original name',1,10,'fixture-source',1,'{ "original" : "name" }');`);
+ // Match the actual archive size with incompressible synthetic source metadata.
+ // Never include real data or credentials; COPY consumes the complete stdin.
+ const noise=Array.from({length:5200},(_,i)=>['transport-fixture:'+String(i).padStart(5,'0'),'Synthetic transport source','test-only','synthetic',1,20,'example',JSON.stringify({test_only:true,noise:randomBytes(4500).toString('base64')})].join('\t')).join('\n');
+ sql('SET ROLE neondb_owner; COPY atlas_sources(id,name,license,vintage,supported_from,supported_to,status,metadata) FROM STDIN;\n'+noise+'\n\\.\n');
  // Demonstrate real session-lock loss and database-level release detection.
  const locker=spawn('docker',['exec','-i',name,'psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],{stdio:['pipe','pipe','pipe']});
  locker.stdin.on('error',()=>{});locker.stderr.on('data',()=>{});
@@ -32,17 +36,19 @@ try{
  assert.equal(locked.locked,true);assert.equal((await query(`SELECT exists(SELECT 1 FROM pg_locks WHERE pid=${locked.pid} AND locktype='advisory' AND classid=807245315 AND objid=1 AND granted) held`))[0].held,true);
  sql(`SELECT pg_terminate_backend(${locked.pid});`);locker.stdin.destroy();assert.equal((await query(`SELECT exists(SELECT 1 FROM pg_locks WHERE pid=${locked.pid} AND locktype='advisory' AND classid=807245315 AND objid=1 AND granted) held`))[0].held,false);receipt.session_lock_loss_and_release_detected=true;
  const before=await readRecoveryInventory(query);assert.equal(before.catalog_sha256,storageExportV2Contract.postgres_catalog_sha256);
- const dump=command(['pg_dump','-U','postgres','-d','neondb','--format=custom','--schema=public']);assert.equal(dump.subarray(0,5).toString(),'PGDMP');
+ const dump=command(['pg_dump','-U','postgres','-d','neondb','--format=custom','--schema=public']);assert.equal(dump.subarray(0,5).toString(),'PGDMP');assert.ok(dump.length>=22*1024**2);receipt.production_sized_archive_transport=true;
+ try{command(['pg_restore','--create','--list'],dump);receipt.large_toc_stdin_probe={status:'completed'};}catch(error){receipt.large_toc_stdin_probe={status:'failed',code:['EPIPE','ENOBUFS'].includes(error.code)?error.code:'native-command-failed',exit_status:Number.isInteger(error.status)?error.status:null};}
  const acl=()=>sql("SELECT datacl::text FROM pg_database WHERE datname='neondb'; SELECT defaclrole::regrole::text,defaclobjtype,defaclacl::text FROM pg_default_acl ORDER BY 1,2;").toString();const originalACL=acl();
- assert.throws(()=>isolatedDatabaseACLList(command(['pg_restore','--list'],dump).toString()),/unexpected-native-database-acl-toc/);
- const databaseACLList=isolatedDatabaseACLList(command(['pg_restore','--create','--list'],dump).toString());
+ command(['sh','-c','cat > /var/lib/postgresql/fixture-original.dump'],dump);
+ assert.throws(()=>isolatedDatabaseACLList(command(['pg_restore','--list','/var/lib/postgresql/fixture-original.dump']).toString()),/unexpected-native-database-acl-toc/);
+ const databaseACLList=isolatedDatabaseACLList(command(['pg_restore','--create','--list','/var/lib/postgresql/fixture-original.dump']).toString());
  receipt.database_acl_requires_create_listing=true;
  const after=await readRecoveryInventory(query);
  // A killed native CLI is not evidence that its named container was removed.
  const slow='atlas-sql-timeout-fixture-'+randomUUID();try{cleanup();native(['create','--name',slow,'--network','none','--read-only',recoveryImage,'sleep','30']);assert.throws(()=>execFileSync('docker',['start','-ai',slow],{timeout:250,stdio:'pipe'}));}finally{try{native(['rm','-fv',slow]);}catch{}assert.equal(native(['ps','-a','--filter','name=^/'+slow+'$','--format','{{.ID}}']).toString().trim(),'');}receipt.timed_out_named_client_absence_confirmed=true;
 cleanup();await start();command(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedRecoveryBootstrapSQL);sql('DROP SCHEMA public;');
  const restoreSQL=isolatedRestoreSQL(command(['pg_restore','--file=-'],dump));command(['psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],restoreSQL);
- const aclDirectory=fs.mkdtempSync('/tmp/atlas-acl-fixture-');try{restoreIsolatedDatabaseACL(name,dump,aclDirectory);}finally{fs.rmSync(aclDirectory,{recursive:true});}
+ const aclDirectory=fs.mkdtempSync('/tmp/atlas-acl-fixture-');try{receipt.database_acl_recovery=restoreIsolatedDatabaseACL(name,dump,aclDirectory);assert.equal(receipt.database_acl_recovery.archive_sha256,sha(dump));}finally{fs.rmSync(aclDirectory,{recursive:true});}
  sql(isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));const restored=await readRecoveryInventory(query);assertRestoredInventory(before,restored,after);assert.equal(acl(),originalACL);receipt.database_and_provider_default_acls_preserved=true;
  assert.equal((await query('SELECT metadata FROM atlas_attribute_records'))[0].metadata,'{ "original" : "claim" }');assert.equal((await query('SELECT metadata FROM atlas_names'))[0].metadata,'{ "original" : "name" }');assert.equal((await query('SELECT counts FROM atlas_ingestions'))[0].counts,'{ "original" : 1 }');
  sql('SET ROLE neondb_owner; REVOKE SELECT ON atlas_ingestions FROM worldatlas_app;');const corrupted=await readRecoveryInventory(query);assert.throws(()=>assertRestoredInventory(before,corrupted,after));
