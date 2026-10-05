@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "issue": 828,
+  "lane": "engineering",
+  "worker_id": "engineering-research-ci-main-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "6585bc6dff10cc8e1fd6827e1907913bc332c474",
+    "files": [
+      {
+        "path": ".github/workflows/deployment-budget.yml",
+        "bytes": 4499,
+        "sha256": "cc506645581714b2d413da767a89908584e422710cbb194953b661f2e2c5fe28",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 23242,
+        "sha256": "c56bd371e61c4a75f51ce4b735b3acf6b12a49832097b73d3694ed2a2f25f868",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/classify-deployment-budget.mjs",
+        "bytes": 6939,
+        "sha256": "41428b56818d1349d6a41a69e42d397953d17b86b496203141693f0b3e6c9246",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/deployment-budget-scope.test.mjs",
+        "bytes": 8465,
+        "sha256": "aea3053bd5ec8e0cb2e31163ffa87d0808728d6a6d1a78dce5635182a78c76f7",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "bytes": 4186,
+      "sha256": "13a61934dda1face51746199f8b87c37fd02851e22e03ccfdfa5f2057afd571f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/claim.json",
+      "bytes": 836,
+      "sha256": "81c8591720c394ca6d312e7a392fb3ebec96f57d7ac47ce51a44155668b0a683",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/negative-control.json",
+      "bytes": 401,
+      "sha256": "6355ed7e1caa866d124c8cc4820ae30a810d54cb6161ca8386677898f4506ad1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/positive-control.json",
+      "bytes": 376,
+      "sha256": "de4e888fb942e4afee2f7e49d1a7e20e2bf060e25a79d0a2ea3d42d9be0cd9b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/reader-graph.md",
+      "bytes": 1324,
+      "sha256": "99a681974cfb054edbc8763372ed6b8fe1b2ff58dfcd1e27973375ae61ea0895",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/real-pr-823-profile.json",
+      "bytes": 3345,
+      "sha256": "38f1c87a001740ea772a1deaa4c09aa383a495a34f5e3213b6e8802bbf897a53",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/real-pr-840-profile.json",
+      "bytes": 1528,
+      "sha256": "8c4fa0d14a2ab9ebec9cb271df00a2f6011432ff573442cc9afa71961479fa3e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/validation.txt",
+      "bytes": 674,
+      "sha256": "206553cfb9b1d25cafd882e827c8b1125114ab0b994fbd07fd9faedf606e5c83",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 23915,
+      "sha256": "5dd00f742c9fe090090891e0198de6d7883745b33e9b6a3f7770726a6d4ccc9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "bytes": 7961,
+      "sha256": "e8d0f10149792116dbcbabd39afbed41ae80884d2ccd6b62854044a4ec827db4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/package-research-inputs.mjs",
+      "bytes": 17110,
+      "sha256": "b433e682c37d041ca5f5e1b7c8dd6a32ae8f0f69c605caf494371617b586f071",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "bytes": 18424,
+      "sha256": "a1aa6b29cfbc9e983342ead70e719d0c794c9efef97440da4840d5e90d3261e1",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "package-input-applicability",
+      "kind": "code",
+      "description": "Complete PR/push inventory against pinned reachable readers and immutable manifest dependencies. Both research lanes, URI/traversal/annotation publication inputs, rename origins, resolver metadata and conservative failure controls. Real read-only geography API probes.",
+      "software": "Node24; Git immutable blobs; read-only GitHub API; GNU tar1.35",
+      "units": "package applicability"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs",
+    "Read-only actual GitHub PR823 and840 immutable classifier probes",
+    "node scripts/evidence-quality.mjs coordination/engineering/research-ci-package-inputs-20261004/evidence-quality.json",
+    "git diff --check"
+  ],
+  "validation": [
+    {
+      "method_id": "package-input-applicability",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/research-ci-package-inputs-20261004/positive-control.json"
+    },
+    {
+      "method_id": "package-input-applicability",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/research-ci-package-inputs-20261004/negative-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "status": "modified",
+      "original_sha256": "cc506645581714b2d413da767a89908584e422710cbb194953b661f2e2c5fe28"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/reader-graph.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/real-pr-823-profile.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/real-pr-840-profile.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-package-inputs-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "c56bd371e61c4a75f51ce4b735b3acf6b12a49832097b73d3694ed2a2f25f868"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "status": "modified",
+      "original_sha256": "41428b56818d1349d6a41a69e42d397953d17b86b496203141693f0b3e6c9246"
+    },
+    {
+      "path": "scripts/package-research-inputs.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "status": "modified",
+      "original_sha256": "aea3053bd5ec8e0cb2e31163ffa87d0808728d6a6d1a78dce5635182a78c76f7"
+    }
+  ]
+}
