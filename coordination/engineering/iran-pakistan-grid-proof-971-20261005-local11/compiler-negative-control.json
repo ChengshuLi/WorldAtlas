@@ -1,0 +1,13 @@
+{
+  "method_id": "bounded-application-compilation",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": [
+    "rounded wrong grid size rejected",
+    "missing exact neighbor owner index rejected",
+    "missing unchanged or changed neighbor rejected",
+    "stale stored geometry bounds rejected",
+    "oversized domain rejected rather than dense world allocation",
+    "new source overlap detected independently of deterministic owner tie rule"
+  ]
+}

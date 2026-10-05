@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "actual CLI wrong registry hash rejected before generation",
+    "actual CLI existing directory refused and report bytes preserved",
+    "actual CLI altered original component hash rejected from immutable negative-control commit"
+  ],
+  "errors": [
+    "ValueError: Registry pin differs from command",
+    "ValueError: Refuse to overwrite existing output directory",
+    "ValueError: Baseline input hash/size mismatch: coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-000.json.gz"
+  ],
+  "kind": "negative-control",
+  "method_id": "immutable-world-stage",
+  "negative_control_commit": "98836a37c9df835bd1c9ca4a8714b758bafbbd2a",
+  "outcome": "passed"
+}

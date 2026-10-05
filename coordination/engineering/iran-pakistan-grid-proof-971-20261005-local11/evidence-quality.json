@@ -1,0 +1,1348 @@
+{
+  "baseline": {
+    "commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+    "files": [
+      {
+        "bytes": 3642057,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-000.json.gz",
+        "sha256": "115179a2e6ddda1a74e41d088c97643a56479deaaa0cb880b93a07fcd731e76f"
+      },
+      {
+        "bytes": 64337,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/inputs.json",
+        "sha256": "ae609d1312be34a15d34f2c5b7915292a568465acab729f44036f8d4400d338d"
+      },
+      {
+        "bytes": 6043,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/README.md",
+        "sha256": "5f30cee32c6016940882b61b8b9856c981db6ff3ca75978e872145e29e4decec"
+      },
+      {
+        "bytes": 669860,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/candidate-v3/report.json",
+        "sha256": "4a2c0642b40ea0eda7cdfd97f76fb23197bff01940f87bea4cae4f0010c48c5a"
+      },
+      {
+        "bytes": 43196,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/evidence-quality.json",
+        "sha256": "cf39bec9aea9e8bb9a5cd69cc66883ed36aef2dc3063799f51f4a9793d9e93e2"
+      },
+      {
+        "bytes": 10559,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/inputs.json",
+        "sha256": "40ac69b7d8d0e2438028c13055502f172f7a1fba4173a41e947aeaa5d4b22980"
+      },
+      {
+        "bytes": 2663523,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/bounds.json.gz",
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+      },
+      {
+        "bytes": 271171,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/manifest.json",
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+      },
+      {
+        "bytes": 206,
+        "hash_kind": "file-bytes",
+        "path": "data/geographic-releases/current-manifest.json",
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81"
+      },
+      {
+        "bytes": 225846,
+        "hash_kind": "file-bytes",
+        "path": "data/geographic-releases/index.json",
+        "sha256": "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd"
+      },
+      {
+        "bytes": 169082,
+        "hash_kind": "file-bytes",
+        "path": "data/geographic-releases/releases-v6-gzip.json.gz",
+        "sha256": "96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16"
+      },
+      {
+        "bytes": 11393,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/macro-loose-ends-v5-additions.json",
+        "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+      },
+      {
+        "bytes": 8539839,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-0.json",
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+      },
+      {
+        "bytes": 8060108,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-1.json",
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+      },
+      {
+        "bytes": 5144571,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-10.json",
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      {
+        "bytes": 5131824,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-11.json",
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+      },
+      {
+        "bytes": 4489493,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-12.json",
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+      },
+      {
+        "bytes": 5709487,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-13.json",
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+      },
+      {
+        "bytes": 4355198,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-14.json",
+        "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+      },
+      {
+        "bytes": 5180426,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-15.json",
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+      },
+      {
+        "bytes": 5213846,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-16.json",
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+      },
+      {
+        "bytes": 4945828,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-17.json",
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+      },
+      {
+        "bytes": 4909063,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-18.json",
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+      },
+      {
+        "bytes": 4583022,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-19.json",
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+      },
+      {
+        "bytes": 6259307,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-2.json",
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+      },
+      {
+        "bytes": 6570767,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-20.json",
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+      },
+      {
+        "bytes": 6737781,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-21.json",
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+      },
+      {
+        "bytes": 4746385,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-22.json",
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      {
+        "bytes": 4962410,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-23.json",
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+      },
+      {
+        "bytes": 4816899,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-24.json",
+        "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+      },
+      {
+        "bytes": 4525239,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-25.json",
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+      },
+      {
+        "bytes": 4608983,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-26.json",
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+      },
+      {
+        "bytes": 4863162,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-27.json",
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+      },
+      {
+        "bytes": 6613963,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-28.json",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "bytes": 12932167,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-29.json",
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+      },
+      {
+        "bytes": 5153118,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-3.json",
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+      },
+      {
+        "bytes": 11979437,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-30.json",
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+      },
+      {
+        "bytes": 10086485,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-31.json",
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+      },
+      {
+        "bytes": 10211739,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-32.json",
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+      },
+      {
+        "bytes": 607984,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-33.json",
+        "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+      },
+      {
+        "bytes": 4835479,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-4.json",
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+      },
+      {
+        "bytes": 5226173,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-5.json",
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+      },
+      {
+        "bytes": 4607953,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-6.json",
+        "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+      },
+      {
+        "bytes": 4257402,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-7.json",
+        "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+      },
+      {
+        "bytes": 5097739,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-8.json",
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+      },
+      {
+        "bytes": 5729632,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-9.json",
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+      },
+      {
+        "bytes": 1573576,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/source-restoration-additions.json",
+        "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 1387,
+        "hash_kind": "file-bytes",
+        "path": "package.json",
+        "sha256": "96481c8339f7ea60cfdfe91b8a42a4bf9d60ef108b3b1d9ffe2de780db1fa443"
+      },
+      {
+        "bytes": 146,
+        "hash_kind": "file-bytes",
+        "path": "requirements.txt",
+        "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9"
+      },
+      {
+        "bytes": 13813,
+        "hash_kind": "file-bytes",
+        "path": "scripts/check-geographic-regression.py",
+        "sha256": "84e58e6ce2b81dca64d4cc4e25e98d899325345447d3bd5ce8306d1474bf8d9e"
+      },
+      {
+        "bytes": 1953,
+        "hash_kind": "file-bytes",
+        "path": "scripts/ellipsoidal_area.py",
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+      },
+      {
+        "bytes": 5264,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/geometry.py",
+        "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305"
+      },
+      {
+        "bytes": 7090,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/immutable.py",
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+      },
+      {
+        "bytes": 10751,
+        "hash_kind": "file-bytes",
+        "path": "scripts/geographic_grid.py",
+        "sha256": "74b3f06feedf9c10d1626e11378f1ec4ab92b283e05d1ffd510e90f8c2df7fdf"
+      },
+      {
+        "bytes": 2948,
+        "hash_kind": "file-bytes",
+        "path": "src/ownership-codec.js",
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+      },
+      {
+        "bytes": 3617,
+        "hash_kind": "file-bytes",
+        "path": "src/pixel-grid.js",
+        "sha256": "320cc48796d5d3aaf07bb096441346abbe44ed4fab66df08ee003620ce5870a9"
+      },
+      {
+        "bytes": 6134,
+        "hash_kind": "file-bytes",
+        "path": "src/pixel-ownership.js",
+        "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f"
+      }
+    ],
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json"
+    },
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "subject_files": {
+      "gb:IRN:ADM2:26516999B17111396986996": "data/geography/part-11.json",
+      "gb:PAK:ADM2:60131773B78019453337506": "data/geography/part-17.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compile.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-cli-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/compiled.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/staged-neighbors.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-generator-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-generator-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-reproducibility.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/reproduce.py --repo . --commit 922044bb7dd047b276422f896c900601f45203bb --registry '{\"path\":\"coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/inputs.json\",\"bytes\":13104,\"sha256\":\"81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14\",\"hash_kind\":\"file-bytes\"}' --registry-sha256 81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14 --out .cache/your-unused-world-stage",
+    "node coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compile.mjs --repo . --commit c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36 --registry '{\"path\":\"coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/inputs.json\",\"bytes\":13104,\"sha256\":\"81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14\",\"hash_kind\":\"file-bytes\"}' --registry-sha256 81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14 --staged '{\"path\":\"coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/staged-neighbors.json\",\"bytes\":152156,\"sha256\":\"8cde9abc927bd3477dd60dc024332307d46206a3b26d1373d53d3b91ba0908db\",\"hash_kind\":\"file-bytes\"}' --out .cache/your-unused-compiled-report.json",
+    "node coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/controls.mjs",
+    "python test/geographic-regression.py"
+  ],
+  "conclusions": [],
+  "issue": 971,
+  "lane": "engineering",
+  "limits": [
+    "Offline integration verification; approved geography, source authority and physical classification remain unresolved. All baseline world shapes are inspected; bounded pixel domain covers full changed shapes plus halo, not the entire world. Original encoded canonical ownership partitions are not consumed in this packet; reconstructed baseline/candidate application compilation is compared, and encoded baseline verification needs a separate bounded follow-up.",
+    "Full-world geographic detector finds nine positive new overlap fragments; candidate remains blocked without area waiver.",
+    "Both baseline projections and Pakistan candidate projection retain earlier invalidity. Actual half-open rendering behavior does not repair or approve geographic shapes.",
+    "No source authority/date/crosswalk/physical-water approval, history transfer, core edit, release, provider/database changes or deployment.",
+    "Original encoded canonical partitions are excluded from this packet and remain an explicit separate verification obligation.",
+    "Raw source-coordinate area values are native planar topology diagnostics, not WGS84 physical land area or administrative ownership."
+  ],
+  "methods": [
+    {
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "description": "Pinned existing full-world detector and no-threshold lost/new overlap topology; retained source-coordinate area flags are not physical land area.",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "id": "full-world-geography-regression",
+      "kind": "geography",
+      "software": "Python3.12;Shapely2.1.2;pyproj3.7.2;NumPy2.3.5;unchanged pinned shared helpers",
+      "units": "native-coordinate square-degree flags and subject/finding counts; no physical area classification"
+    },
+    {
+      "description": "Pinned whole-world inputs; exclusive output directory; two full stage runs produce identical geometry/staged-neighbor bytes.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "immutable-world-stage",
+      "kind": "generator",
+      "software": "Python3.12;Shapely2.1.2;pyproj3.7.2;Git;shared evidence.immutable",
+      "units": "source/member counts and deterministic whole-file hashes"
+    },
+    {
+      "description": "Actual pinned application even-odd rasterizer, compiler, integer packing, byte-shuffle/gzip decoding, sampling and picking for every full-shape rectangle cell; exact neighbor inventory/indices/bounds, independent multiplicity, complete RLE changes.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "bounded-application-compilation",
+      "kind": "generator",
+      "software": "Node24;unchanged pinned pixel-grid/pixel-ownership/ownership-codec;gzip",
+      "units": "integer cell counts and full-width owner/run/byte identity"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/world_subject_count",
+      "metric_id": "world_subject_count",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/changed_subject_count",
+      "metric_id": "changed_subject_count",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/pixel_domain_subject_count",
+      "metric_id": "pixel_domain_subject_count",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/regression/regressions",
+      "metric_id": "geographic-regressions",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/regression/findings/features/0/properties/source_geometry_area_square_degrees",
+      "metric_id": "native-overlap-flag-0",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/regression/findings/features/1/properties/source_geometry_area_square_degrees",
+      "metric_id": "native-overlap-flag-1",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/regression/findings/features/2/properties/source_geometry_area_square_degrees",
+      "metric_id": "native-overlap-flag-2",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/regression/findings/features/3/properties/source_geometry_area_square_degrees",
+      "metric_id": "native-overlap-flag-3",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/regression/findings/features/4/properties/source_geometry_area_square_degrees",
+      "metric_id": "native-overlap-flag-4",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/regression/findings/features/5/properties/source_geometry_area_square_degrees",
+      "metric_id": "native-overlap-flag-5",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/regression/findings/features/6/properties/source_geometry_area_square_degrees",
+      "metric_id": "native-overlap-flag-6",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/regression/findings/features/7/properties/source_geometry_area_square_degrees",
+      "metric_id": "native-overlap-flag-7",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/regression/findings/features/8/properties/source_geometry_area_square_degrees",
+      "metric_id": "native-overlap-flag-8",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json"
+    },
+    {
+      "json_pointer": "/baseline/counts/component_cells",
+      "metric_id": "baseline-component_cells",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/baseline/counts/component_uncovered",
+      "metric_id": "baseline-component_uncovered",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/baseline/counts/component_single",
+      "metric_id": "baseline-component_single",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/baseline/counts/component_multiple",
+      "metric_id": "baseline-component_multiple",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/baseline/counts/full_bbox_cells",
+      "metric_id": "baseline-full_bbox_cells",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/baseline/counts/full_bbox_uncovered",
+      "metric_id": "baseline-full_bbox_uncovered",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/baseline/counts/full_bbox_multiple",
+      "metric_id": "baseline-full_bbox_multiple",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/baseline/counts/raster_compiler_mismatch",
+      "metric_id": "baseline-raster_compiler_mismatch",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/baseline/counts/packed_sample_mismatch",
+      "metric_id": "baseline-packed_sample_mismatch",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/baseline/counts/packed_pick_mismatch",
+      "metric_id": "baseline-packed_pick_mismatch",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/candidate/counts/component_cells",
+      "metric_id": "candidate-component_cells",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/candidate/counts/component_uncovered",
+      "metric_id": "candidate-component_uncovered",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/candidate/counts/component_single",
+      "metric_id": "candidate-component_single",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/candidate/counts/component_multiple",
+      "metric_id": "candidate-component_multiple",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/candidate/counts/full_bbox_cells",
+      "metric_id": "candidate-full_bbox_cells",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/candidate/counts/full_bbox_uncovered",
+      "metric_id": "candidate-full_bbox_uncovered",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/candidate/counts/full_bbox_multiple",
+      "metric_id": "candidate-full_bbox_multiple",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/candidate/counts/raster_compiler_mismatch",
+      "metric_id": "candidate-raster_compiler_mismatch",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/candidate/counts/packed_sample_mismatch",
+      "metric_id": "candidate-packed_sample_mismatch",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/candidate/counts/packed_pick_mismatch",
+      "metric_id": "candidate-packed_pick_mismatch",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/change_counts/changed_cells",
+      "metric_id": "changed_cells",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/change_counts/inside_component_mask",
+      "metric_id": "inside_component_mask",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/change_counts/outside_component_mask",
+      "metric_id": "outside_component_mask",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/change_counts/lost_previously_owned_cells",
+      "metric_id": "lost_previously_owned_cells",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    },
+    {
+      "json_pointer": "/change_counts/new_multiple_cells",
+      "metric_id": "new_multiple_cells",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "world_subject_count",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "count",
+      "value": 49625,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "changed_subject_count",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "count",
+      "value": 2,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "pixel_domain_subject_count",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "count",
+      "value": 11,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "geographic-regressions",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "count",
+      "value": 9,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "native-overlap-flag-0",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "source-coordinate-degrees2",
+      "value": 8.272462576064399e-17,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "native-overlap-flag-1",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "source-coordinate-degrees2",
+      "value": 9.530609581713474e-20,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "native-overlap-flag-2",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "source-coordinate-degrees2",
+      "value": 1.8559947712219814e-19,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "native-overlap-flag-3",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "source-coordinate-degrees2",
+      "value": 5.353248226647178e-18,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "native-overlap-flag-4",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "source-coordinate-degrees2",
+      "value": 1.4701103832545637e-17,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "native-overlap-flag-5",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "source-coordinate-degrees2",
+      "value": 2.2992974051014e-18,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "native-overlap-flag-6",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "source-coordinate-degrees2",
+      "value": 3.8557227721266496e-20,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "native-overlap-flag-7",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "source-coordinate-degrees2",
+      "value": 5.48571292994142e-19,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "922044bb7dd047b276422f896c900601f45203bb",
+      "id": "native-overlap-flag-8",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "source-coordinate-degrees2",
+      "value": 3.742615077443126e-18,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "baseline-component_cells",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 954,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "baseline-component_uncovered",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 953,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "baseline-component_single",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 1,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "baseline-component_multiple",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "baseline-full_bbox_cells",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 4257008,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "baseline-full_bbox_uncovered",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 20655,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "baseline-full_bbox_multiple",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "baseline-raster_compiler_mismatch",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "baseline-packed_sample_mismatch",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "baseline-packed_pick_mismatch",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "candidate-component_cells",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 954,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "candidate-component_uncovered",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "candidate-component_single",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 954,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "candidate-component_multiple",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "candidate-full_bbox_cells",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 4257008,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "candidate-full_bbox_uncovered",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 19702,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "candidate-full_bbox_multiple",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "candidate-raster_compiler_mismatch",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "candidate-packed_sample_mismatch",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "candidate-packed_pick_mismatch",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "changed_cells",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 953,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "inside_component_mask",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 953,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "outside_component_mask",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "lost_previously_owned_cells",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "c78600b6e5aa7bf8c3706ea9efe4fe5bc70c3f36",
+      "id": "new_multiple_cells",
+      "input_sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14",
+      "scope": "Pinned offline full-world or bounded application verification. Geographic regressions, projection/source/physical uncertainty and encoded baseline remain unresolved.",
+      "unit": "cells",
+      "value": 0,
+      "vintage": "archived"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 3982,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/README.md",
+      "role": "implementation-or-audit-output",
+      "sha256": "c2370770aa3b26982651e5ab2f4aa55e9ef9dbb79677a01ded126d7d1d9b22db"
+    },
+    {
+      "bytes": 9108,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compile.mjs",
+      "role": "implementation-or-audit-output",
+      "sha256": "0c9b3569f99ea87e4b8b97228763a15b8e7c842a809265dffbb59de652b74b3a"
+    },
+    {
+      "bytes": 256,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-cli-negative-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "6607d6115326e04eb2f9c27768947429784f5572357251aa48109cc75ee2371c"
+    },
+    {
+      "bytes": 463,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-negative-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "b57008725b0dae40c05bc9499fabe6bfb7d270bc7402f794d7f3d31d31eee404"
+    },
+    {
+      "bytes": 1141,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-positive-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "c65691b9188069572f72b71feb1445ad3c188179840ddef103a32bb082425718"
+    },
+    {
+      "bytes": 348,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-reproducibility.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "03a8caf9457720f5479e7792a5b784ec71d0edfd9fbbf5c4e98ec35e622aa7ee"
+    },
+    {
+      "bytes": 3278,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/controls.mjs",
+      "role": "implementation-or-audit-output",
+      "sha256": "cdc15a44a5f2539de937678064c175ff8f9aa1b5a67a07afe6851d6184e020d9"
+    },
+    {
+      "bytes": 13104,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/inputs.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "81acceeb3a7bbc2bc8e1101651d912e18cc65f8fee6471ad880f26d4e2d01a14"
+    },
+    {
+      "bytes": 6667,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/reproduce.py",
+      "role": "implementation-or-audit-output",
+      "sha256": "c7ca67f3428c5b9ddec0da0ec13d302d5e1405d4052b89f1262448ac0186f4cf"
+    },
+    {
+      "bytes": 10637,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/compiled.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "713566ebd4323af0ca6061f0738509d98aae9ee428b708596481b8fb02416fc9"
+    },
+    {
+      "bytes": 152156,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/staged-neighbors.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "8cde9abc927bd3477dd60dc024332307d46206a3b26d1373d53d3b91ba0908db"
+    },
+    {
+      "bytes": 293083,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/world-regression.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "ae065be1cce3c457fda3a900f1c13045879ca050bae28a298be8fd44f4d665aa"
+    },
+    {
+      "bytes": 10637,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "6719f0c4e1b91d1734abf3fd9777790e4397de6a0af35a738af7891b0177c84a"
+    },
+    {
+      "bytes": 717,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-generator-negative-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "8510d4c09ee72f6dfa7ef3b82f5df36e5462e3d5eb1caa670a1495c04b6496dc"
+    },
+    {
+      "bytes": 328,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-generator-positive-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "d13c15e31d31695a4d310f075d5f4ffe1d1e8f34abd51e84ed4a1bd66121b933"
+    },
+    {
+      "bytes": 534,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-negative-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "49f6be912e2da63fe7af5799c71bfac5bcca060d45b2e94270f64899e9742356"
+    },
+    {
+      "bytes": 534,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-positive-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "d935ba03d7e5694ad55e879179484050dced062def0cf0260fbde5bde29ae98d"
+    },
+    {
+      "bytes": 351,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-reproducibility.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "e1f7f1c296c8f4a695e1a025d815dfbc42090fc353a5ce9dda0c99fb70dff44c"
+    }
+  ],
+  "rendered_tables": [],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 545,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full-receipt.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "9380679cf9037eb6f522499218ad32c4457b77b3ea104765ce8aaca63d2b0f4b"
+        },
+        {
+          "bytes": 894050,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "abf435a64b61fd7f678f149adee6468d99e14edc769ec6e8e43d464ec6ed579d"
+        }
+      ],
+      "id": "osm-saravan-relation-6555069",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution. Authority, historical date and mixed-source installation unapproved."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "current-original-administrative-api-reference-and-retrieval-receipt",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/6555069/full.json",
+      "verification": "unverified",
+      "vintage": "2026-10-05 retrieval; original per-element versions/timestamps retained independently"
+    },
+    {
+      "files": [
+        {
+          "bytes": 383,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239441239-relations-receipt.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "6cdb39e6c89c2ac787baf8b5b24d52955bd3bb9b8014f702c8959065e9ce6e20"
+        },
+        {
+          "bytes": 96398,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239441239-relations.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "7e7c08b25918ad750468365a9fa45b07e2d961931daa600180fe6e1a7f588908"
+        }
+      ],
+      "id": "osm-way-239441239",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution. Authority, historical date and mixed-source installation unapproved."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "current-original-administrative-api-reference-and-retrieval-receipt",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/way/239441239/relations.json",
+      "verification": "unverified",
+      "vintage": "2026-10-05 retrieval; original per-element versions/timestamps retained independently"
+    },
+    {
+      "files": [
+        {
+          "bytes": 383,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239453665-relations-receipt.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "de2eb36653926ba83930e6ce82b93fbec4c5565f5c081a528d91a1a28a641d7f"
+        },
+        {
+          "bytes": 96398,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239453665-relations.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "bbd63239e335cb4795076ffe70a4a0f5994b3eb1f2439fe2dd517e3392312db3"
+        }
+      ],
+      "id": "osm-way-239453665",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution. Authority, historical date and mixed-source installation unapproved."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "current-original-administrative-api-reference-and-retrieval-receipt",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/way/239453665/relations.json",
+      "verification": "unverified",
+      "vintage": "2026-10-05 retrieval; original per-element versions/timestamps retained independently"
+    },
+    {
+      "files": [
+        {
+          "bytes": 346713,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be"
+        },
+        {
+          "bytes": 741,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full-receipt.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "4c27c75a41998b9244995e55be8e95e186e57696fa655a9f5dcb3ae4cfe02c6f"
+        }
+      ],
+      "id": "osm-panjgur-ancestor-source",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "pinned-ancestor-original-source",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/3229274/full.json",
+      "verification": "unverified",
+      "vintage": "Prior packet original retrieval with per-element versions/timestamps"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "proposed",
+    "research": "partial"
+  },
+  "subject_ids": [
+    "gb:IRN:ADM2:26516999B17111396986996",
+    "gb:PAK:ADM2:60131773B78019453337506"
+  ],
+  "subject_ids_sha256": "0c405b5930054180f3bf0244d221b947ac40e5924412bffaa25c893517f7ca16",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "full-world-geography-regression",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "full-world-geography-regression",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-generator-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "immutable-world-stage",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-generator-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "immutable-world-stage",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/world-reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "immutable-world-stage",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "bounded-application-compilation",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "bounded-application-compilation",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compiler-reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "bounded-application-compilation",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "engineering-coverage-gaps-907-20261005-local01"
+}
