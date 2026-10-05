@@ -1,0 +1,383 @@
+{
+  "drc_salb_2018_2024": {
+    "version": 1,
+    "retrieved_utc": "2026-10-05T05:06:33.834309+00:00",
+    "source": "SALB Data, United Nations; validated by Institut Géographique du Congo (IGC)",
+    "source_page": "https://salb.un.org/en/data/cod",
+    "page_temporal_validity": "2018-05-30 through latest update 2024-06-13",
+    "service_layer": "BNDA_COD_2018-05-30_lastupdate",
+    "service_layer_url": "https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_COD/FeatureServer/5?f=pjson",
+    "service_layer_http_status": 200,
+    "service_layer_response_bytes": 12068,
+    "service_layer_response_sha256": "17d367f5d728ab06b689cefec6b2c48d42ca547c32d9aeeaa9f1feeef6ea661a",
+    "query_url": "https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_COD/FeatureServer/5/query?where=1%3D1&outFields=*&returnGeometry=false&f=json",
+    "query_http_status": 200,
+    "query_response_bytes": 75065,
+    "query_response_sha256": "83e22dfccb38947df6a9e322675b39ff7dd72f45340bf295f06392a18f1cab77",
+    "feature_count": 219,
+    "returned_geometry": false,
+    "scope_subject_count": 20,
+    "unique_candidate_count": 16,
+    "multiple_candidate_count": 4,
+    "no_candidate_count": 0,
+    "selected_subjects": [
+      {
+        "location_id": "gb:COD:ADM2:63176286B18264844623742",
+        "baseline_name": "Kenge",
+        "atlas_parent_slug": "kwango",
+        "salb_candidates": [
+          {
+            "adm2nm": "Kenge",
+            "adm2cd": "COD021006",
+            "adm1nm": "Kwango",
+            "adm1cd": "COD021",
+            "label_type": "unmarked"
+          },
+          {
+            "adm2nm": "Kenge (City)",
+            "adm2cd": "COD021007",
+            "adm1nm": "Kwango",
+            "adm1cd": "COD021",
+            "label_type": "city-labeled"
+          }
+        ],
+        "match_status": "multiple current units with same parent; city/territory code unresolved",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B22382339186814",
+        "baseline_name": "Inkisi",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Inkisi (City)",
+            "adm2cd": "COD002031",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "city-labeled"
+          }
+        ],
+        "match_status": "unique named and parent candidate; source uses explicit city label",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B29097498682851",
+        "baseline_name": "Songololo",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Songololo",
+            "adm2cd": "COD002037",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B31425721317411",
+        "baseline_name": "Bangu",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Bangu (City)",
+            "adm2cd": "COD002030",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "city-labeled"
+          }
+        ],
+        "match_status": "unique named and parent candidate; source uses explicit city label",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B37251946319002",
+        "baseline_name": "Kahemba",
+        "atlas_parent_slug": "kwango",
+        "salb_candidates": [
+          {
+            "adm2nm": "Kahemba",
+            "adm2cd": "COD021009",
+            "adm1nm": "Kwango",
+            "adm1cd": "COD021",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B40063645047483",
+        "baseline_name": "Luozi",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Luozi",
+            "adm2cd": "COD002013",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B47015384768636",
+        "baseline_name": "Tshela",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Tshela",
+            "adm2cd": "COD002038",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "unmarked"
+          },
+          {
+            "adm2nm": "Tshela (City)",
+            "adm2cd": "COD002039",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "city-labeled"
+          }
+        ],
+        "match_status": "multiple current units with same parent; city/territory code unresolved",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B47421332346835",
+        "baseline_name": "Popokabaka",
+        "atlas_parent_slug": "kwango",
+        "salb_candidates": [
+          {
+            "adm2nm": "Popokabaka",
+            "adm2cd": "COD021008",
+            "adm1nm": "Kwango",
+            "adm1cd": "COD021",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B538038850114",
+        "baseline_name": "Boma",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Boma (City)",
+            "adm2cd": "COD002002",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "city-labeled"
+          }
+        ],
+        "match_status": "unique named and parent candidate; source uses explicit city label",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B65126745094635",
+        "baseline_name": "Lukula",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Lukula",
+            "adm2cd": "COD002024",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B69853523616594",
+        "baseline_name": "Seke-Banza",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Seke-Banza",
+            "adm2cd": "COD002019",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B7026545207042",
+        "baseline_name": "Matadi",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Matadi (City)",
+            "adm2cd": "COD002005",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "city-labeled"
+          }
+        ],
+        "match_status": "unique named and parent candidate; source uses explicit city label",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B79360907689545",
+        "baseline_name": "Kinshasa",
+        "atlas_parent_slug": "kinshasa",
+        "salb_candidates": [
+          {
+            "adm2nm": "Kinshasa",
+            "adm2cd": "COD007008",
+            "adm1nm": "Kinshasa",
+            "adm1cd": "COD007",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B82592558575614",
+        "baseline_name": "Mbanza-Ngungu",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Mbanza-Ngungu",
+            "adm2cd": "COD002033",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "unmarked"
+          },
+          {
+            "adm2nm": "Mbanza-Ngungu (City)",
+            "adm2cd": "COD002034",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "city-labeled"
+          }
+        ],
+        "match_status": "multiple current units with same parent; city/territory code unresolved",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B8336769847246",
+        "baseline_name": "Madimba",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Madimba",
+            "adm2cd": "COD002032",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B83971453832478",
+        "baseline_name": "Kimvula",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Kimvula",
+            "adm2cd": "COD002010",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B88277060419996",
+        "baseline_name": "Moanda",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Muanda",
+            "adm2cd": "COD002035",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "unmarked"
+          },
+          {
+            "adm2nm": "Muanda (City)",
+            "adm2cd": "COD002036",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "city-labeled"
+          }
+        ],
+        "match_status": "multiple current units with same parent; city/territory code unresolved",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B93121803325272",
+        "baseline_name": "Feshi",
+        "atlas_parent_slug": "kwango",
+        "salb_candidates": [
+          {
+            "adm2nm": "Feshi",
+            "adm2cd": "COD021001",
+            "adm1nm": "Kwango",
+            "adm1cd": "COD021",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B94968684087840",
+        "baseline_name": "Kasongo-Lunda",
+        "atlas_parent_slug": "kwango",
+        "salb_candidates": [
+          {
+            "adm2nm": "Kasongo-Lunda",
+            "adm2cd": "COD021010",
+            "adm1nm": "Kwango",
+            "adm1cd": "COD021",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      },
+      {
+        "location_id": "gb:COD:ADM2:63176286B98008703469616",
+        "baseline_name": "Kasangulu",
+        "atlas_parent_slug": "kongo-central",
+        "salb_candidates": [
+          {
+            "adm2nm": "Kasangulu",
+            "adm2cd": "COD002023",
+            "adm1nm": "Kongo Central",
+            "adm1cd": "COD002",
+            "label_type": "unmarked"
+          }
+        ],
+        "match_status": "unique normalized name and parent candidate",
+        "name_rule": "NFKD accent/punctuation normalization; terminal '(City)' ignored for candidate discovery; explicit one-off alias Moanda→Muanda."
+      }
+    ],
+    "terms_of_use": {
+      "url": "https://salb.un.org/sites/default/files/wysiwyg_uploads/docs_uploads/TermsOfUseSALB2021.pdf",
+      "http_status": 200,
+      "response_bytes": 116142,
+      "response_sha256": "aaac013743486c9f4be986e236fdba6b3a4ac0ff00921cecc171c42778544381",
+      "restrictions": "Non-commercial use only; copyright retained by UN; no geometry/content changes without contributor consent; derived products credit United Nations and named contributor."
+    },
+    "method": "Name and Atlas parent string candidate screen only. The 2019 OCHA source has no matching SALB code; no source ID, geometries, or boundaries were compared. Moanda/Muanda is ambiguous between two same-parent current units.",
+    "limits": "SALB geometry was not requested or retained. This non-commercial comparator is not a source for live production geometry or a completeness certificate."
+  }
+}
