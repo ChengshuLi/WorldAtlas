@@ -86,12 +86,6 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/cloudflare-public-822/README.md",
-      "bytes": 1316,
-      "sha256": "8b23c5d2aad418aca3275119dbaf6d9ab66bcb1060765fd46b2df3696c0747f9",
-      "hash_kind": "file-bytes"
-    },
-    {
       "path": "coordination/engineering/cloudflare-public-822/negative-control.json",
       "bytes": 225,
       "sha256": "0617e85ce2c34f0e150dd8eb342648a4e7e12d2af701b468883e658975f65b0c",
@@ -101,6 +95,24 @@
       "path": "coordination/engineering/cloudflare-public-822/temporal-hydration.json",
       "bytes": 515,
       "sha256": "f16689a70fb28b4a48b98580e2aa280e96049f55395af9abde3803d789cc62eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/README.md",
+      "bytes": 1893,
+      "sha256": "23dd1dfafa0fd82ccabe46e981e9fb4585e4e59430a35c8d78614c21551cbc8d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/captured-temporal-diagnosis.json",
+      "bytes": 2085,
+      "sha256": "1d20a810408f7264997b0ca5fef988ed427f8aaed2f60341856c26c6e8e3c7e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/replay-temporal-diagnosis.mjs",
+      "bytes": 1068,
+      "sha256": "2b518b5bef0461f89b2e69216f7811be6e88709c93c7a524f7f95de0a265af7b",
       "hash_kind": "file-bytes"
     }
   ],
@@ -123,7 +135,8 @@
   },
   "commands": [
     "node --test test/cloudflare-access.test.mjs test/content-backend.test.mjs",
-    "node node_modules/wrangler/bin/wrangler.js deploy --dry-run --config dist/cloudflare/wrangler.json"
+    "node node_modules/wrangler/bin/wrangler.js deploy --dry-run --config dist/cloudflare/wrangler.json",
+    "node coordination/engineering/cloudflare-public-822/replay-temporal-diagnosis.mjs"
   ],
   "change_receipts": [
     {
@@ -176,6 +189,14 @@
     },
     {
       "path": "coordination/engineering/cloudflare-public-822/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/captured-temporal-diagnosis.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/replay-temporal-diagnosis.mjs",
       "status": "added"
     }
   ],
