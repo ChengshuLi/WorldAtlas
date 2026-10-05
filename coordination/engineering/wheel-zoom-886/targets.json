@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "chosen_after": "Initial native-wheel baseline and software/native GPU trials, before final candidate acceptance runs",
+  "conditions": "macOS arm64 Apple M1, isolated Chromium 153, ANGLE Metal, 1440x1080 DPR1, no artificial CPU/network throttle, warmed camera samples",
+  "targets": {
+    "first_observed_transform_max_ms": 34,
+    "raf_p95_max_ms": 20,
+    "full_range_notches_max_each_direction": 8,
+    "ownership_compilation_delta": 0,
+    "ownership_upload_delta": 0,
+    "camera_asset_requests": 0,
+    "pointer_anchor_fixture_max_pixels": 1
+  },
+  "limits": [
+    "First observed CSS transform/draw is a browser proxy, not physical input-to-photon latency.",
+    "Synthetic trusted wheel input does not certify every physical wheel/trackpad or universal 60FPS.",
+    "Retain SwiftShader frame-target misses; native GPU figures do not erase them.",
+    "Canvas fallback is checked separately; its CPU repaint costs may miss the native-GPU frame target.",
+    "These targets concern local candidate and subsequent actual-host acceptance, not historical/geographic completeness."
+  ]
+}

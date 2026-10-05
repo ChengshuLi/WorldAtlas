@@ -1,0 +1,98 @@
+{
+  "method_id": "wheel-observation",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "inputs": [
+    {
+      "frames": [
+        0,
+        16,
+        32,
+        100
+      ],
+      "events": [
+        {
+          "time": 20
+        }
+      ],
+      "transforms": [
+        {
+          "time": 0,
+          "transform": "identity",
+          "pane": "identity",
+          "frame": "old"
+        },
+        {
+          "time": 16,
+          "transform": "identity",
+          "pane": "identity",
+          "frame": "old"
+        },
+        {
+          "time": 32,
+          "transform": "identity",
+          "pane": "identity",
+          "frame": "old"
+        },
+        {
+          "time": 100,
+          "transform": "identity",
+          "pane": "identity",
+          "frame": "old"
+        }
+      ]
+    },
+    {
+      "frames": [
+        0,
+        16,
+        32,
+        48
+      ],
+      "events": [],
+      "transforms": [
+        {
+          "time": 0,
+          "transform": "identity",
+          "pane": "identity",
+          "frame": "old"
+        },
+        {
+          "time": 16,
+          "transform": "identity",
+          "pane": "identity",
+          "frame": "old"
+        },
+        {
+          "time": 32,
+          "transform": "scaled",
+          "pane": "identity",
+          "frame": "old"
+        },
+        {
+          "time": 48,
+          "transform": "identity",
+          "pane": "identity",
+          "frame": "old"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "first_observed_transform_ms": null,
+      "raf_p50_ms": 16,
+      "raf_p95_ms": 68,
+      "frames_over_34ms": 1,
+      "frames": 3
+    },
+    {
+      "first_observed_transform_ms": null,
+      "raf_p50_ms": 16,
+      "raf_p95_ms": 16,
+      "frames_over_34ms": 0,
+      "frames": 3
+    }
+  ],
+  "limit": "Synthetic timing-control vectors validate the arithmetic/detection method; they do not certify input-to-photon latency or physical devices."
+}

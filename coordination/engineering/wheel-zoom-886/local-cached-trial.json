@@ -1,0 +1,4991 @@
+{
+  "version": 1,
+  "site": "http://127.0.0.1:3886",
+  "started_at": "2026-10-05T05:48:58.417Z",
+  "conditions": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpus": [
+      "Apple M1",
+      "Apple M1",
+      "Apple M1",
+      "Apple M1",
+      "Apple M1",
+      "Apple M1",
+      "Apple M1",
+      "Apple M1"
+    ],
+    "viewport": {
+      "width": 1440,
+      "height": 1080
+    },
+    "device_scale_factor": 1,
+    "browser": "isolated Playwright headless Chromium; fresh context, no user profile",
+    "input": "synthetic trusted Playwright mouse.wheel; synthetic dispatch for deltaMode controls, no physical device certificate",
+    "network": "no artificial throttle; public host direct GET; localhost variant retains same public APIs/static data",
+    "cache": "cold context startup, warmed assets during sequential wheel samples; provider cache/wake unknown",
+    "browser_version": "153.0.8010.12"
+  },
+  "errors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:3886/",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/assets/index-C3pmC4rP.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/assets/index-RMoktkso.js",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Caslon+Display&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/librecaslondisplay/v18/TuGOUUFxWphYQ6YI6q9Xp61FQzxDRKmzr1lWfxlPCz4c.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K6z9mXg.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/atlas-geography.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/atlas-history.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/prepared-evidence/index.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/history-1.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/reference-attributes/startup-bundle.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/rows-0.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/history-0.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-0.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-2.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-3.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-4.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-5.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-1.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-6.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-7.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-8.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-9.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-10.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-11.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-13.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-12.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-14.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-15.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-16.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/entities-17.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-2.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-1.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-0.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-3.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-5.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/api/map/snapshot?year=2026&examples=0&limit=4096&evidence_only=1&include_temporal=1",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-4.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-7.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-9.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-8.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-6.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-11.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-10.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-12.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-13.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-14.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-15.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-18.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-16.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-19.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-20.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-17.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-21.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-23.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-24.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-22.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-25.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-26.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-27.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-28.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-29.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-31.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-32.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-30.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/geography/catalog-33.json.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-4194304.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-0.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-8388608.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-12582912.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-16777216.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-20971520.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-33554432.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-29360128.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-37748736.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-25165824.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-41943040.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-50331648.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-46137344.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership/startup-runs-54525952.bin.gz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/ownership-runtime/index.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3886/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "status": 200
+    }
+  ],
+  "samples": [
+    {
+      "label": "notched-in-1",
+      "spacing_ms": 60,
+      "deltas": [
+        -120,
+        -120,
+        -120,
+        -120,
+        -120,
+        -120,
+        -120,
+        -120
+      ],
+      "pointer": {
+        "x": 970.4,
+        "y": 475.25
+      },
+      "before": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "false",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "0.004461410123711337",
+        "stride": "1"
+      },
+      "after": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "159013.21880054474/96329.33360099792/13/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      },
+      "first_observed_transform_ms": 15.199999998509156,
+      "raf_p50_ms": 16.69999999999891,
+      "raf_p95_ms": 16.799999999999272,
+      "frames_over_34ms": 1,
+      "frames": 66,
+      "long_tasks": [
+        {
+          "start": 10307.700000001118,
+          "duration": 84
+        }
+      ],
+      "ownership_compilation_delta": 0,
+      "ownership_upload_delta": 0,
+      "new_requests": [],
+      "raw": {
+        "draws": [
+          10308.10000000149
+        ],
+        "longTasks": [
+          {
+            "start": 10307.700000001118,
+            "duration": 84
+          }
+        ],
+        "events": [
+          {
+            "time": 9408.10000000149,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 9491.400000000373,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 9574.700000001118,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 9658,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 9741.10000000149,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 9824.5,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 9924.10000000149,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 10008,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          }
+        ],
+        "frames": [
+          9389.9,
+          9406.6,
+          9423.3,
+          9439.9,
+          9456.5,
+          9473.3,
+          9489.9,
+          9506.6,
+          9523.2,
+          9539.9,
+          9556.6,
+          9573.2,
+          9589.9,
+          9606.6,
+          9623.2,
+          9639.9,
+          9656.6,
+          9673.2,
+          9689.9,
+          9706.5,
+          9723.3,
+          9739.9,
+          9756.6,
+          9773.3,
+          9789.9,
+          9806.5,
+          9823.2,
+          9839.8,
+          9856.6,
+          9873.2,
+          9889.9,
+          9906.5,
+          9923.2,
+          9939.9,
+          9956.6,
+          9973.2,
+          9989.8,
+          10006.5,
+          10023.2,
+          10039.9,
+          10056.5,
+          10073.2,
+          10089.8,
+          10106.6,
+          10123.2,
+          10139.9,
+          10156.6,
+          10173.2,
+          10189.8,
+          10206.5,
+          10223.2,
+          10239.9,
+          10256.5,
+          10273.2,
+          10289.9,
+          10306.6,
+          10389.8,
+          10406.5,
+          10423.2,
+          10439.9,
+          10456.5,
+          10473.2,
+          10489.9,
+          10506.5,
+          10523.2,
+          10539.9,
+          10556.5
+        ],
+        "transforms": [
+          {
+            "time": 9389.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9406.6,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9423.3,
+            "transform": "matrix(0.963066, 0, 0, 0.963066, 26, 11)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9439.9,
+            "transform": "matrix(1.34498, 0, 0, 1.34498, -243, -103)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9456.5,
+            "transform": "matrix(1.69164, 0, 0, 1.69164, -487, -206)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9473.3,
+            "transform": "matrix(1.98233, 0, 0, 1.98233, -691, -293)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9489.9,
+            "transform": "matrix(2.21448, 0, 0, 2.21448, -855, -363)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9506.6,
+            "transform": "matrix(3.29123, 0, 0, 3.29123, -1612, -685)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9523.2,
+            "transform": "matrix(4.33458, 0, 0, 4.33458, -2347, -996)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9539.9,
+            "transform": "matrix(5.23663, 0, 0, 5.23663, -2982, -1266)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9556.6,
+            "transform": "matrix(5.97186, 0, 0, 5.97186, -3499, -1486)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9573.2,
+            "transform": "matrix(6.53849, 0, 0, 6.53849, -3898, -1655)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9589.9,
+            "transform": "matrix(9.58973, 0, 0, 9.58973, -6045, -2568)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9606.6,
+            "transform": "matrix(12.514, 0, 0, 12.514, -8103, -3442)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9623.2,
+            "transform": "matrix(15.0365, 0, 0, 15.0365, -9879, -4195)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9639.9,
+            "transform": "matrix(17.057, 0, 0, 17.057, -11301, -4800)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9656.6,
+            "transform": "matrix(18.6189, 0, 0, 18.6189, -12400, -5267)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9673.2,
+            "transform": "matrix(27.3024, 0, 0, 27.3024, -18512, -7862)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9689.9,
+            "transform": "matrix(35.509, 0, 0, 35.509, -24288, -10316)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9706.5,
+            "transform": "matrix(42.6244, 0, 0, 42.6244, -29296, -12443)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9723.3,
+            "transform": "matrix(48.3186, 0, 0, 48.3186, -33303, -14145)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9739.9,
+            "transform": "matrix(52.7407, 0, 0, 52.7407, -36416, -15467)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9756.6,
+            "transform": "matrix(77.1562, 0, 0, 77.1562, -53599, -22766)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9773.3,
+            "transform": "matrix(100.506, 0, 0, 100.506, -70034, -29746)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9789.9,
+            "transform": "matrix(120.619, 0, 0, 120.619, -84189, -35758)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9806.5,
+            "transform": "matrix(136.712, 0, 0, 136.712, -95516, -40569)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9823.2,
+            "transform": "matrix(149.08, 0, 0, 149.08, -104221, -44266)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9839.8,
+            "transform": "matrix(218.55, 0, 0, 218.55, -153115, -65032)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9856.6,
+            "transform": "matrix(284.189, 0, 0, 284.189, -199313, -84654)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9873.2,
+            "transform": "matrix(341.4, 0, 0, 341.4, -239579, -101756)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9889.9,
+            "transform": "matrix(386.866, 0, 0, 386.866, -271578, -115348)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9906.5,
+            "transform": "matrix(421.983, 0, 0, 421.983, -296294, -125844)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9923.2,
+            "transform": "matrix(447.92, 0, 0, 447.92, -314549, -133598)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9939.9,
+            "transform": "matrix(644.463, 0, 0, 644.463, -452879, -192351)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9956.6,
+            "transform": "matrix(828.344, 0, 0, 828.344, -582298, -247319)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9973.2,
+            "transform": "matrix(984.977, 0, 0, 984.977, -692538, -294141)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 9989.8,
+            "transform": "matrix(1109.34, 0, 0, 1109.34, -780068, -331317)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10006.5,
+            "transform": "matrix(1204.41, 0, 0, 1204.41, -846978, -359737)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10023.2,
+            "transform": "matrix(1362.54, 0, 0, 1362.54, -958275, -407008)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10039.9,
+            "transform": "matrix(1483.6, 0, 0, 1483.6, -1.04347e+06, -443194)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10056.5,
+            "transform": "matrix(1573.33, 0, 0, 1573.33, -1.10663e+06, -470019)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10073.2,
+            "transform": "matrix(1638.07, 0, 0, 1638.07, -1.15219e+06, -489370)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10089.8,
+            "transform": "matrix(1684.61, 0, 0, 1684.61, -1.18495e+06, -503285)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10106.6,
+            "transform": "matrix(1717.33, 0, 0, 1717.33, -1.20798e+06, -513066)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10123.2,
+            "transform": "matrix(1740.56, 0, 0, 1740.56, -1.22433e+06, -520010)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10139.9,
+            "transform": "matrix(1756.57, 0, 0, 1756.57, -1.2356e+06, -524796)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10156.6,
+            "transform": "matrix(1767.79, 0, 0, 1767.79, -1.24349e+06, -528149)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10173.2,
+            "transform": "matrix(1775.57, 0, 0, 1775.57, -1.24897e+06, -530475)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10189.8,
+            "transform": "matrix(1780.93, 0, 0, 1780.93, -1.25274e+06, -532077)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10206.5,
+            "transform": "matrix(1784.65, 0, 0, 1784.65, -1.25536e+06, -533187)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10223.2,
+            "transform": "matrix(1787.23, 0, 0, 1787.23, -1.25718e+06, -533961)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10239.9,
+            "transform": "matrix(1789.02, 0, 0, 1789.02, -1.25844e+06, -534495)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10256.5,
+            "transform": "matrix(1790.25, 0, 0, 1790.25, -1.25930e+06, -534865)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10273.2,
+            "transform": "matrix(1791.1, 0, 0, 1791.1, -1.2599e+06, -535118)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10289.9,
+            "transform": "matrix(1791.69, 0, 0, 1791.69, -1.26032e+06, -535294)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10306.6,
+            "transform": "matrix(1793, 0, 0, 1793, -1.26124e+06, -535686)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.1918365627695278/1174/680"
+          },
+          {
+            "time": 10389.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          },
+          {
+            "time": 10406.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          },
+          {
+            "time": 10423.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          },
+          {
+            "time": 10439.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          },
+          {
+            "time": 10456.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          },
+          {
+            "time": 10473.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          },
+          {
+            "time": 10489.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          },
+          {
+            "time": 10506.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          },
+          {
+            "time": 10523.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          },
+          {
+            "time": 10539.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          },
+          {
+            "time": 10556.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159013.21880054474/96329.33360099792/13/1174/680"
+          }
+        ],
+        "running": false,
+        "started": 9386.800000000745
+      }
+    },
+    {
+      "label": "notched-in-2",
+      "spacing_ms": 60,
+      "deltas": [
+        -120,
+        -120,
+        -120,
+        -120,
+        -120,
+        -120,
+        -120,
+        -120
+      ],
+      "pointer": {
+        "x": 970.4,
+        "y": 475.25
+      },
+      "before": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "false",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "0.00446141012371134",
+        "stride": "1"
+      },
+      "after": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "159033.22047901154/96388.33855247498/13/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      },
+      "first_observed_transform_ms": 15.39999999925567,
+      "raf_p50_ms": 16.69999999999891,
+      "raf_p95_ms": 16.80000000000109,
+      "frames_over_34ms": 1,
+      "frames": 65,
+      "long_tasks": [
+        {
+          "start": 12041,
+          "duration": 87
+        }
+      ],
+      "ownership_compilation_delta": 0,
+      "ownership_upload_delta": 0,
+      "new_requests": [],
+      "raw": {
+        "draws": [
+          12041.200000001118
+        ],
+        "longTasks": [
+          {
+            "start": 12041,
+            "duration": 87
+          }
+        ],
+        "events": [
+          {
+            "time": 11157.800000000745,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 11241.300000000745,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 11324.60000000149,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 11407.900000000373,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 11491.300000000745,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 11573.900000000373,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 11657.900000000373,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 11741.10000000149,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          }
+        ],
+        "frames": [
+          11139.8,
+          11156.5,
+          11173.2,
+          11189.8,
+          11206.5,
+          11223.2,
+          11239.9,
+          11256.5,
+          11273.2,
+          11289.8,
+          11306.5,
+          11323.1,
+          11339.8,
+          11356.4,
+          11373.1,
+          11389.8,
+          11406.5,
+          11423.2,
+          11439.8,
+          11456.4,
+          11473.2,
+          11489.8,
+          11506.5,
+          11523.2,
+          11539.8,
+          11556.5,
+          11573.1,
+          11589.8,
+          11606.5,
+          11623.2,
+          11639.8,
+          11656.5,
+          11673.1,
+          11689.8,
+          11706.5,
+          11723.1,
+          11739.8,
+          11756.4,
+          11773.2,
+          11789.8,
+          11806.5,
+          11823.1,
+          11839.8,
+          11856.5,
+          11873.1,
+          11889.8,
+          11906.4,
+          11923.2,
+          11939.8,
+          11956.5,
+          11973.1,
+          11989.8,
+          12006.5,
+          12023.1,
+          12039.8,
+          12123.2,
+          12139.8,
+          12156.5,
+          12173.1,
+          12189.8,
+          12206.4,
+          12223.1,
+          12239.8,
+          12256.4,
+          12273.1,
+          12289.8
+        ],
+        "transforms": [
+          {
+            "time": 11139.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11156.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11173.2,
+            "transform": "matrix(0.965372, 0, 0, 0.965372, 25, 10)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11189.8,
+            "transform": "matrix(1.3472, 0, 0, 1.3472, -245, -104)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11206.5,
+            "transform": "matrix(1.69357, 0, 0, 1.69357, -488, -207)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11223.2,
+            "transform": "matrix(1.98546, 0, 0, 1.98546, -694, -295)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11239.9,
+            "transform": "matrix(2.21569, 0, 0, 2.21569, -856, -364)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11256.5,
+            "transform": "matrix(3.29896, 0, 0, 3.29896, -1618, -688)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11273.2,
+            "transform": "matrix(4.33571, 0, 0, 4.33571, -2348, -998)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11289.8,
+            "transform": "matrix(5.24249, 0, 0, 5.24249, -2987, -1269)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11306.5,
+            "transform": "matrix(5.9726, 0, 0, 5.9726, -3500, -1488)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11323.1,
+            "transform": "matrix(6.53905, 0, 0, 6.53905, -3899, -1657)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11339.8,
+            "transform": "matrix(9.5903, 0, 0, 9.5903, -6046, -2571)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11356.4,
+            "transform": "matrix(12.5145, 0, 0, 12.5145, -8105, -3446)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11373.1,
+            "transform": "matrix(15.0233, 0, 0, 15.0233, -9871, -4196)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11389.8,
+            "transform": "matrix(17.0573, 0, 0, 17.0573, -11303, -4804)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11406.5,
+            "transform": "matrix(18.6191, 0, 0, 18.6191, -12402, -5272)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11423.2,
+            "transform": "matrix(27.3027, 0, 0, 27.3027, -18515, -7870)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11439.8,
+            "transform": "matrix(35.5557, 0, 0, 35.5557, -24325, -10339)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11456.4,
+            "transform": "matrix(42.6246, 0, 0, 42.6246, -29300, -12454)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11473.2,
+            "transform": "matrix(48.3188, 0, 0, 48.3188, -33308, -14158)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11489.8,
+            "transform": "matrix(52.7408, 0, 0, 52.7408, -36421, -15481)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11506.5,
+            "transform": "matrix(77.1563, 0, 0, 77.1563, -53607, -22787)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11523.2,
+            "transform": "matrix(100.506, 0, 0, 100.506, -70043, -29773)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11539.8,
+            "transform": "matrix(120.619, 0, 0, 120.619, -84200, -35790)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11556.5,
+            "transform": "matrix(136.712, 0, 0, 136.712, -95529, -40605)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11573.1,
+            "transform": "matrix(149.144, 0, 0, 149.144, -104279, -44324)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11589.8,
+            "transform": "matrix(218.201, 0, 0, 218.201, -152889, -64986)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11606.5,
+            "transform": "matrix(284.248, 0, 0, 284.248, -199380, -84747)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11623.2,
+            "transform": "matrix(341.14, 0, 0, 341.14, -239426, -101769)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11639.8,
+            "transform": "matrix(386.904, 0, 0, 386.904, -271640, -115461)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11656.5,
+            "transform": "matrix(421.83, 0, 0, 421.83, -296224, -125910)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11673.1,
+            "transform": "matrix(618.322, 0, 0, 618.322, -434536, -184700)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11689.8,
+            "transform": "matrix(803.962, 0, 0, 803.962, -565209, -240242)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11706.5,
+            "transform": "matrix(964.881, 0, 0, 964.881, -678481, -288389)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11723.1,
+            "transform": "matrix(1094.32, 0, 0, 1094.32, -769595, -327117)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11739.8,
+            "transform": "matrix(1193.11, 0, 0, 1193.11, -839131, -356673)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11756.4,
+            "transform": "matrix(1353.71, 0, 0, 1353.71, -952179, -404723)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11773.2,
+            "transform": "matrix(1476.32, 0, 0, 1476.32, -1.03848e+06, -441407)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11789.8,
+            "transform": "matrix(1568.47, 0, 0, 1568.47, -1.10335e+06, -468979)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11806.5,
+            "transform": "matrix(1634.56, 0, 0, 1634.56, -1.14987e+06, -488753)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11823.1,
+            "transform": "matrix(1682.13, 0, 0, 1682.13, -1.18335e+06, -502985)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11839.8,
+            "transform": "matrix(1715.58, 0, 0, 1715.58, -1.2069e+06, -512993)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11856.5,
+            "transform": "matrix(1739.22, 0, 0, 1739.22, -1.22354e+06, -520066)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11873.1,
+            "transform": "matrix(1755.72, 0, 0, 1755.72, -1.23516e+06, -525003)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11889.8,
+            "transform": "matrix(1767.14, 0, 0, 1767.14, -1.24319e+06, -528420)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11906.4,
+            "transform": "matrix(1775.12, 0, 0, 1775.12, -1.24881e+06, -530807)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11923.2,
+            "transform": "matrix(1780.62, 0, 0, 1780.62, -1.25268e+06, -532452)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11939.8,
+            "transform": "matrix(1784.47, 0, 0, 1784.47, -1.25539e+06, -533604)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11956.5,
+            "transform": "matrix(1787.1, 0, 0, 1787.1, -1.25724e+06, -534390)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11973.1,
+            "transform": "matrix(1788.93, 0, 0, 1788.93, -1.25853e+06, -534938)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 11989.8,
+            "transform": "matrix(1790.18, 0, 0, 1790.18, -1.25942e+06, -535314)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12006.5,
+            "transform": "matrix(1791.06, 0, 0, 1791.06, -1.26003e+06, -535575)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12023.1,
+            "transform": "matrix(1791.66, 0, 0, 1791.66, -1.26046e+06, -535756)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12039.8,
+            "transform": "matrix(1793, 0, 0, 1793, -1.2614e+06, -536158)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12123.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          },
+          {
+            "time": 12139.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          },
+          {
+            "time": 12156.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          },
+          {
+            "time": 12173.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          },
+          {
+            "time": 12189.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          },
+          {
+            "time": 12206.4,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          },
+          {
+            "time": 12223.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          },
+          {
+            "time": 12239.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          },
+          {
+            "time": 12256.4,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          },
+          {
+            "time": 12273.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          },
+          {
+            "time": 12289.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159033.22047901154/96388.33855247498/13/1174/680"
+          }
+        ],
+        "running": false,
+        "started": 11132.60000000149
+      }
+    },
+    {
+      "label": "notched-in-3",
+      "spacing_ms": 60,
+      "deltas": [
+        -120,
+        -120,
+        -120,
+        -120,
+        -120,
+        -120,
+        -120,
+        -120
+      ],
+      "pointer": {
+        "x": 970.4,
+        "y": 475.25
+      },
+      "before": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "false",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "0.00446141012371134",
+        "stride": "1"
+      },
+      "after": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "true",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "159028.7201013565/96380.21287059784/13/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "7.999328669621537",
+        "stride": "1"
+      },
+      "first_observed_transform_ms": 15.099999999627471,
+      "raf_p50_ms": 16.69999999999891,
+      "raf_p95_ms": 16.700000000000728,
+      "frames_over_34ms": 1,
+      "frames": 66,
+      "long_tasks": [
+        {
+          "start": 13774.200000001118,
+          "duration": 73
+        }
+      ],
+      "ownership_compilation_delta": 0,
+      "ownership_upload_delta": 0,
+      "new_requests": [],
+      "raw": {
+        "draws": [
+          13774.5
+        ],
+        "longTasks": [
+          {
+            "start": 13774.200000001118,
+            "duration": 73
+          }
+        ],
+        "events": [
+          {
+            "time": 12891.400000000373,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 12974.300000000745,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 13057.700000001118,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 13141.300000000745,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 13224.5,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 13307.800000000745,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 13391.200000001118,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 13474.5,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          }
+        ],
+        "frames": [
+          12873.1,
+          12889.7,
+          12906.5,
+          12923.1,
+          12939.8,
+          12956.5,
+          12973.1,
+          12989.8,
+          13006.4,
+          13023.1,
+          13039.7,
+          13056.4,
+          13073.1,
+          13089.7,
+          13106.4,
+          13123.1,
+          13139.8,
+          13156.4,
+          13173.1,
+          13189.8,
+          13206.5,
+          13223,
+          13239.7,
+          13256.4,
+          13273.1,
+          13289.8,
+          13306.4,
+          13323.1,
+          13339.7,
+          13356.4,
+          13373.1,
+          13389.8,
+          13406.4,
+          13423.1,
+          13439.7,
+          13456.4,
+          13473.1,
+          13489.7,
+          13506.4,
+          13523.1,
+          13539.7,
+          13556.4,
+          13573.1,
+          13589.8,
+          13606.4,
+          13623.1,
+          13639.8,
+          13656.4,
+          13673.1,
+          13689.7,
+          13706.4,
+          13723.1,
+          13739.7,
+          13756.4,
+          13773.1,
+          13839.8,
+          13856.4,
+          13873,
+          13889.7,
+          13906.4,
+          13923.1,
+          13939.7,
+          13956.4,
+          13973,
+          13989.7,
+          14006.4,
+          14023.1
+        ],
+        "transforms": [
+          {
+            "time": 12873.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12889.7,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12906.5,
+            "transform": "matrix(0.958456, 0, 0, 0.958456, 29, 13)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12923.1,
+            "transform": "matrix(1.34276, 0, 0, 1.34276, -241, -102)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12939.8,
+            "transform": "matrix(1.68971, 0, 0, 1.68971, -486, -207)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12956.5,
+            "transform": "matrix(1.98233, 0, 0, 1.98233, -691, -293)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12973.1,
+            "transform": "matrix(2.21328, 0, 0, 2.21328, -854, -363)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 12989.8,
+            "transform": "matrix(3.28999, 0, 0, 3.28999, -1611, -685)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13006.4,
+            "transform": "matrix(4.33346, 0, 0, 4.33346, -2346, -997)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13023.1,
+            "transform": "matrix(5.23569, 0, 0, 5.23569, -2981, -1267)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13039.7,
+            "transform": "matrix(5.97112, 0, 0, 5.97112, -3498, -1487)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13056.4,
+            "transform": "matrix(6.535, 0, 0, 6.535, -3896, -1656)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13073.1,
+            "transform": "matrix(9.60448, 0, 0, 9.60448, -6056, -2574)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13089.7,
+            "transform": "matrix(12.5273, 0, 0, 12.5273, -8114, -3449)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13106.4,
+            "transform": "matrix(15.0339, 0, 0, 15.0339, -9878, -4199)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13123.1,
+            "transform": "matrix(17.0656, 0, 0, 17.0656, -11308, -4806)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13139.8,
+            "transform": "matrix(18.6254, 0, 0, 18.6254, -12406, -5273)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13156.4,
+            "transform": "matrix(27.309, 0, 0, 27.309, -18518, -7871)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13173.1,
+            "transform": "matrix(35.5149, 0, 0, 35.5149, -24295, -10326)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13189.8,
+            "transform": "matrix(42.6293, 0, 0, 42.6293, -29302, -12455)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13206.5,
+            "transform": "matrix(48.3526, 0, 0, 48.3526, -33331, -14167)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13223,
+            "transform": "matrix(52.7436, 0, 0, 52.7436, -36422, -15480)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13239.7,
+            "transform": "matrix(77.0129, 0, 0, 77.0129, -53504, -22740)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13256.4,
+            "transform": "matrix(100.377, 0, 0, 100.377, -69951, -29730)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13273.1,
+            "transform": "matrix(120.512, 0, 0, 120.512, -84123, -35753)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13289.8,
+            "transform": "matrix(136.714, 0, 0, 136.714, -95527, -40599)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13306.4,
+            "transform": "matrix(149.145, 0, 0, 149.145, -104277, -44319)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13323.1,
+            "transform": "matrix(218.202, 0, 0, 218.202, -152886, -64977)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13339.7,
+            "transform": "matrix(284.249, 0, 0, 284.249, -199375, -84736)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13356.4,
+            "transform": "matrix(340.833, 0, 0, 340.833, -239204, -101664)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13373.1,
+            "transform": "matrix(386.664, 0, 0, 386.664, -271463, -115374)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13389.8,
+            "transform": "matrix(421.83, 0, 0, 421.83, -296216, -125895)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13406.4,
+            "transform": "matrix(618.323, 0, 0, 618.323, -434524, -184678)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13423.1,
+            "transform": "matrix(803.963, 0, 0, 803.963, -565193, -240214)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13439.7,
+            "transform": "matrix(964.881, 0, 0, 964.881, -678462, -288354)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13456.4,
+            "transform": "matrix(1093.64, 0, 0, 1093.64, -769093, -326873)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13473.1,
+            "transform": "matrix(1193.11, 0, 0, 1193.11, -839107, -356630)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13489.7,
+            "transform": "matrix(1353.71, 0, 0, 1353.71, -952151, -404674)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13506.4,
+            "transform": "matrix(1476.32, 0, 0, 1476.32, -1.03845e+06, -441354)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13523.1,
+            "transform": "matrix(1568, 0, 0, 1568, -1.10299e+06, -468783)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13539.7,
+            "transform": "matrix(1634.56, 0, 0, 1634.56, -1.14984e+06, -488694)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13556.4,
+            "transform": "matrix(1681.89, 0, 0, 1681.89, -1.18315e+06, -502852)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13573.1,
+            "transform": "matrix(1715.58, 0, 0, 1715.58, -1.20687e+06, -512931)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13589.8,
+            "transform": "matrix(1739.22, 0, 0, 1739.22, -1.22351e+06, -520003)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13606.4,
+            "transform": "matrix(1755.72, 0, 0, 1755.72, -1.23512e+06, -524940)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13623.1,
+            "transform": "matrix(1767.14, 0, 0, 1767.14, -1.24316e+06, -528356)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13639.8,
+            "transform": "matrix(1775.12, 0, 0, 1775.12, -1.24877e+06, -530743)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13656.4,
+            "transform": "matrix(1780.64, 0, 0, 1780.64, -1.25266e+06, -532396)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13673.1,
+            "transform": "matrix(1784.45, 0, 0, 1784.45, -1.25534e+06, -533534)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13689.7,
+            "transform": "matrix(1787.1, 0, 0, 1787.1, -1.25721e+06, -534326)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13706.4,
+            "transform": "matrix(1788.92, 0, 0, 1788.92, -1.25849e+06, -534871)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13723.1,
+            "transform": "matrix(1790.18, 0, 0, 1790.18, -1.25938e+06, -535250)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13739.7,
+            "transform": "matrix(1791.06, 0, 0, 1791.06, -1.26e+06, -535511)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13756.4,
+            "transform": "matrix(1791.66, 0, 0, 1791.66, -1.26042e+06, -535691)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13773.1,
+            "transform": "matrix(1793, 0, 0, 1793, -1.26136e+06, -536093)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 13839.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 13856.4,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 13873,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 13889.7,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 13906.4,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 13923.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 13939.7,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 13956.4,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 13973,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 13989.7,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 14006.4,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          },
+          {
+            "time": 14023.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "159028.7201013565/96380.21287059784/13/1174/680"
+          }
+        ],
+        "running": false,
+        "started": 12861.400000000373
+      }
+    },
+    {
+      "label": "high-resolution",
+      "spacing_ms": 8,
+      "deltas": [
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "pointer": {
+        "x": 970.4,
+        "y": 475.25
+      },
+      "before": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "false",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "0.00446141012371134",
+        "stride": "1"
+      },
+      "after": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "false",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "0.10095018726818002",
+        "stride": "1"
+      },
+      "first_observed_transform_ms": 15.39999999925567,
+      "raf_p50_ms": 16.69999999999891,
+      "raf_p95_ms": 16.799999999999272,
+      "frames_over_34ms": 1,
+      "frames": 145,
+      "long_tasks": [
+        {
+          "start": 16823.60000000149,
+          "duration": 93
+        }
+      ],
+      "ownership_compilation_delta": 0,
+      "ownership_upload_delta": 0,
+      "new_requests": [],
+      "raw": {
+        "draws": [
+          16823.900000000373
+        ],
+        "longTasks": [
+          {
+            "start": 16823.60000000149,
+            "duration": 93
+          }
+        ],
+        "events": [
+          {
+            "time": 14624.300000000745,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14657.200000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14691.200000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14724.5,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14757.800000000745,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14791,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14824.5,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14857.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14890.10000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14924.300000000745,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14957.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 14991,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15024.400000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15057.10000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15091.10000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15124.400000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15157.800000000745,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15191.10000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15224.400000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15257.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15291.10000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15324.400000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15357.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15391.10000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15424.10000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15457.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15491.10000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15524.400000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15557.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15591,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15624.400000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15657.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15691.10000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15724.400000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15756.900000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15791.10000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15824.300000000745,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15857.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15890.60000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15924.400000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15957.60000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 15991,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16024,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16057.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16090.900000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16124.300000000745,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16157.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16191,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16224.400000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16257.60000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16290.900000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16324.200000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16357.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16391,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16424.300000000745,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16457.700000001118,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16491,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16524.400000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16557.60000000149,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 16590.900000000373,
+            "deltaY": -6,
+            "deltaMode": 0,
+            "trusted": true
+          }
+        ],
+        "frames": [
+          14606.4,
+          14623,
+          14639.7,
+          14656.4,
+          14673,
+          14689.7,
+          14706.3,
+          14723.1,
+          14739.7,
+          14756.3,
+          14773,
+          14789.7,
+          14806.4,
+          14823,
+          14839.7,
+          14856.4,
+          14873,
+          14889.7,
+          14906.3,
+          14923,
+          14939.6,
+          14956.4,
+          14973,
+          14989.7,
+          15006.3,
+          15023,
+          15039.7,
+          15056.4,
+          15073.1,
+          15089.7,
+          15106.3,
+          15123,
+          15139.6,
+          15156.4,
+          15173.1,
+          15189.7,
+          15206.3,
+          15223,
+          15239.7,
+          15256.3,
+          15273,
+          15289.7,
+          15306.4,
+          15323,
+          15339.6,
+          15356.3,
+          15373,
+          15389.6,
+          15406.4,
+          15423,
+          15439.7,
+          15456.4,
+          15473,
+          15489.6,
+          15506.4,
+          15523,
+          15539.7,
+          15556.3,
+          15573,
+          15589.7,
+          15606.3,
+          15623,
+          15639.7,
+          15656.3,
+          15673,
+          15689.6,
+          15706.3,
+          15723,
+          15739.7,
+          15756.3,
+          15773,
+          15789.7,
+          15806.3,
+          15823,
+          15839.7,
+          15856.3,
+          15872.9,
+          15889.6,
+          15906.3,
+          15923,
+          15939.6,
+          15956.3,
+          15973,
+          15989.6,
+          16006.3,
+          16023,
+          16039.6,
+          16056.3,
+          16073,
+          16089.6,
+          16106.3,
+          16122.9,
+          16139.7,
+          16156.3,
+          16173,
+          16189.7,
+          16206.3,
+          16223,
+          16239.6,
+          16256.3,
+          16272.9,
+          16289.6,
+          16306.3,
+          16323,
+          16339.6,
+          16356.3,
+          16373,
+          16389.6,
+          16406.3,
+          16423,
+          16439.6,
+          16456.3,
+          16473,
+          16489.6,
+          16506.3,
+          16523,
+          16539.6,
+          16556.3,
+          16572.9,
+          16589.6,
+          16606.3,
+          16622.9,
+          16639.7,
+          16656.2,
+          16672.9,
+          16689.6,
+          16706.3,
+          16722.9,
+          16739.6,
+          16756.3,
+          16772.9,
+          16789.6,
+          16806.3,
+          16823,
+          16906.2,
+          16923,
+          16939.7,
+          16956.3,
+          16973,
+          16989.6,
+          17006.3,
+          17022.9,
+          17039.6,
+          17056.3,
+          17072.9,
+          17089.6
+        ],
+        "transforms": [
+          {
+            "time": 14606.4,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14623,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14639.7,
+            "transform": "matrix(0.998359, 0, 0, 0.998359, 1, 1)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14656.4,
+            "transform": "matrix(1.0151, 0, 0, 1.0151, -11, -4)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14673,
+            "transform": "matrix(1.04349, 0, 0, 1.04349, -31, -12)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14689.7,
+            "transform": "matrix(1.06345, 0, 0, 1.06345, -45, -19)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14706.3,
+            "transform": "matrix(1.09504, 0, 0, 1.09504, -66, -29)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14723.1,
+            "transform": "matrix(1.11728, 0, 0, 1.11728, -82, -35)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14739.7,
+            "transform": "matrix(1.15158, 0, 0, 1.15158, -106, -45)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14756.3,
+            "transform": "matrix(1.17556, 0, 0, 1.17556, -123, -52)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14773,
+            "transform": "matrix(1.21171, 0, 0, 1.21171, -149, -63)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14789.7,
+            "transform": "matrix(1.23749, 0, 0, 1.23749, -167, -71)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14806.4,
+            "transform": "matrix(1.27599, 0, 0, 1.27599, -193, -83)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14823,
+            "transform": "matrix(1.30326, 0, 0, 1.30326, -213, -90)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14839.7,
+            "transform": "matrix(1.34369, 0, 0, 1.34369, -242, -102)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14856.4,
+            "transform": "matrix(1.37252, 0, 0, 1.37252, -262, -111)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14873,
+            "transform": "matrix(1.41541, 0, 0, 1.41541, -292, -124)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14889.7,
+            "transform": "matrix(1.44562, 0, 0, 1.44562, -313, -133)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14906.3,
+            "transform": "matrix(1.49084, 0, 0, 1.49084, -345, -146)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14923,
+            "transform": "matrix(1.52269, 0, 0, 1.52269, -368, -156)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14939.6,
+            "transform": "matrix(1.57034, 0, 0, 1.57034, -402, -169)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14956.4,
+            "transform": "matrix(1.60391, 0, 0, 1.60391, -425, -180)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14973,
+            "transform": "matrix(1.65436, 0, 0, 1.65436, -461, -195)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 14989.7,
+            "transform": "matrix(1.68966, 0, 0, 1.68966, -486, -206)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15006.3,
+            "transform": "matrix(1.74249, 0, 0, 1.74249, -524, -222)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15023,
+            "transform": "matrix(1.77971, 0, 0, 1.77971, -549, -233)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15039.7,
+            "transform": "matrix(1.83539, 0, 0, 1.83539, -589, -250)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15056.4,
+            "transform": "matrix(1.87482, 0, 0, 1.87482, -617, -261)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15073.1,
+            "transform": "matrix(1.93343, 0, 0, 1.93343, -658, -279)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15089.7,
+            "transform": "matrix(1.97494, 0, 0, 1.97494, -687, -291)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15106.3,
+            "transform": "matrix(2.03635, 0, 0, 2.03635, -731, -309)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15123,
+            "transform": "matrix(2.07992, 0, 0, 2.07992, -762, -323)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15139.6,
+            "transform": "matrix(2.14505, 0, 0, 2.14505, -807, -342)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15156.4,
+            "transform": "matrix(2.19094, 0, 0, 2.19094, -840, -356)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15173.1,
+            "transform": "matrix(2.25987, 0, 0, 2.25987, -888, -377)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15189.7,
+            "transform": "matrix(2.30835, 0, 0, 2.30835, -922, -391)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15206.3,
+            "transform": "matrix(2.38009, 0, 0, 2.38009, -973, -412)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15223,
+            "transform": "matrix(2.43101, 0, 0, 2.43101, -1008, -428)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15239.7,
+            "transform": "matrix(2.50711, 0, 0, 2.50711, -1062, -451)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15256.3,
+            "transform": "matrix(2.56101, 0, 0, 2.56101, -1100, -467)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15273,
+            "transform": "matrix(2.64069, 0, 0, 2.64069, -1156, -490)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15289.7,
+            "transform": "matrix(2.69752, 0, 0, 2.69752, -1196, -508)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15306.4,
+            "transform": "matrix(2.78192, 0, 0, 2.78192, -1255, -533)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15323,
+            "transform": "matrix(2.84169, 0, 0, 2.84169, -1297, -551)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15339.6,
+            "transform": "matrix(2.93009, 0, 0, 2.93009, -1359, -577)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15356.3,
+            "transform": "matrix(2.99281, 0, 0, 2.99281, -1403, -596)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15373,
+            "transform": "matrix(3.08654, 0, 0, 3.08654, -1469, -624)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15389.6,
+            "transform": "matrix(3.15292, 0, 0, 3.15292, -1516, -644)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15406.4,
+            "transform": "matrix(3.25103, 0, 0, 3.25103, -1585, -673)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15423,
+            "transform": "matrix(3.32136, 0, 0, 3.32136, -1635, -694)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15439.7,
+            "transform": "matrix(3.42466, 0, 0, 3.42466, -1707, -724)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15456.4,
+            "transform": "matrix(3.49833, 0, 0, 3.49833, -1760, -747)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15473,
+            "transform": "matrix(3.60776, 0, 0, 3.60776, -1837, -779)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15489.6,
+            "transform": "matrix(3.68487, 0, 0, 3.68487, -1892, -802)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15506.4,
+            "transform": "matrix(3.7996, 0, 0, 3.7996, -1973, -836)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15523,
+            "transform": "matrix(3.88184, 0, 0, 3.88184, -2031, -861)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15539.7,
+            "transform": "matrix(4.00259, 0, 0, 4.00259, -2116, -898)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15556.3,
+            "transform": "matrix(4.08872, 0, 0, 4.08872, -2176, -923)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15573,
+            "transform": "matrix(4.21599, 0, 0, 4.21599, -2266, -962)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15589.7,
+            "transform": "matrix(4.30677, 0, 0, 4.30677, -2330, -989)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15606.3,
+            "transform": "matrix(4.44155, 0, 0, 4.44155, -2425, -1029)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15623,
+            "transform": "matrix(4.53651, 0, 0, 4.53651, -2492, -1058)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15639.7,
+            "transform": "matrix(4.67851, 0, 0, 4.67851, -2592, -1100)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15656.3,
+            "transform": "matrix(4.77906, 0, 0, 4.77906, -2662, -1130)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15673,
+            "transform": "matrix(4.92774, 0, 0, 4.92774, -2767, -1174)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15689.6,
+            "transform": "matrix(5.03378, 0, 0, 5.03378, -2842, -1207)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15706.3,
+            "transform": "matrix(5.19048, 0, 0, 5.19048, -2952, -1253)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15723,
+            "transform": "matrix(5.30224, 0, 0, 5.30224, -3031, -1286)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15739.7,
+            "transform": "matrix(5.46818, 0, 0, 5.46818, -3148, -1336)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15756.3,
+            "transform": "matrix(5.58569, 0, 0, 5.58569, -3230, -1371)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15773,
+            "transform": "matrix(5.75945, 0, 0, 5.75945, -3352, -1424)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15789.7,
+            "transform": "matrix(5.88338, 0, 0, 5.88338, -3440, -1460)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15806.3,
+            "transform": "matrix(6.06745, 0, 0, 6.06745, -3570, -1515)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15823,
+            "transform": "matrix(6.19715, 0, 0, 6.19715, -3661, -1554)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15839.7,
+            "transform": "matrix(6.39109, 0, 0, 6.39109, -3798, -1612)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15856.3,
+            "transform": "matrix(6.52843, 0, 0, 6.52843, -3894, -1653)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15872.9,
+            "transform": "matrix(6.73152, 0, 0, 6.73152, -4037, -1713)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15889.6,
+            "transform": "matrix(6.87564, 0, 0, 6.87564, -4139, -1756)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15906.3,
+            "transform": "matrix(7.09098, 0, 0, 7.09098, -4290, -1821)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15923,
+            "transform": "matrix(7.24348, 0, 0, 7.24348, -4398, -1866)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15939.6,
+            "transform": "matrix(7.47004, 0, 0, 7.47004, -4557, -1933)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15956.3,
+            "transform": "matrix(7.62968, 0, 0, 7.62968, -4669, -1982)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15973,
+            "transform": "matrix(7.86842, 0, 0, 7.86842, -4838, -2053)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 15989.6,
+            "transform": "matrix(8.03748, 0, 0, 8.03748, -4957, -2103)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16006.3,
+            "transform": "matrix(8.28751, 0, 0, 8.28751, -5133, -2177)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16023,
+            "transform": "matrix(8.46583, 0, 0, 8.46583, -5258, -2231)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16039.6,
+            "transform": "matrix(8.73068, 0, 0, 8.73068, -5445, -2310)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16056.3,
+            "transform": "matrix(8.91729, 0, 0, 8.91729, -5576, -2366)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16073,
+            "transform": "matrix(9.19636, 0, 0, 9.19636, -5773, -2449)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16089.6,
+            "transform": "matrix(9.39398, 0, 0, 9.39398, -5913, -2508)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16106.3,
+            "transform": "matrix(9.68622, 0, 0, 9.68622, -6119, -2596)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16122.9,
+            "transform": "matrix(9.89464, 0, 0, 9.89464, -6266, -2658)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16139.7,
+            "transform": "matrix(10.2026, 0, 0, 10.2026, -6483, -2749)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16156.3,
+            "transform": "matrix(10.4234, 0, 0, 10.4234, -6638, -2816)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16173,
+            "transform": "matrix(10.7476, 0, 0, 10.7476, -6867, -2912)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16189.7,
+            "transform": "matrix(10.9789, 0, 0, 10.9789, -7030, -2982)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16206.3,
+            "transform": "matrix(11.3223, 0, 0, 11.3223, -7272, -3085)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16223,
+            "transform": "matrix(11.5643, 0, 0, 11.5643, -7443, -3157)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16239.6,
+            "transform": "matrix(11.9262, 0, 0, 11.9262, -7697, -3266)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16256.3,
+            "transform": "matrix(12.1812, 0, 0, 12.1812, -7877, -3341)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16272.9,
+            "transform": "matrix(12.5625, 0, 0, 12.5625, -8146, -3455)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16289.6,
+            "transform": "matrix(12.8311, 0, 0, 12.8311, -8335, -3535)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16306.3,
+            "transform": "matrix(13.2328, 0, 0, 13.2328, -8618, -3656)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16323,
+            "transform": "matrix(13.5172, 0, 0, 13.5172, -8818, -3740)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16339.6,
+            "transform": "matrix(13.9398, 0, 0, 13.9398, -9115, -3867)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16356.3,
+            "transform": "matrix(14.2377, 0, 0, 14.2377, -9326, -3956)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16373,
+            "transform": "matrix(14.6831, 0, 0, 14.6831, -9639, -4089)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16389.6,
+            "transform": "matrix(14.9986, 0, 0, 14.9986, -9862, -4183)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16406.3,
+            "transform": "matrix(15.4651, 0, 0, 15.4651, -10190, -4323)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16423,
+            "transform": "matrix(15.7978, 0, 0, 15.7978, -10425, -4422)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16439.6,
+            "transform": "matrix(16.2921, 0, 0, 16.2921, -10773, -4570)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16456.3,
+            "transform": "matrix(16.6403, 0, 0, 16.6403, -11019, -4674)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16473,
+            "transform": "matrix(17.161, 0, 0, 17.161, -11386, -4830)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16489.6,
+            "transform": "matrix(17.5298, 0, 0, 17.5298, -11646, -4940)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16506.3,
+            "transform": "matrix(18.0751, 0, 0, 18.0751, -12030, -5102)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16523,
+            "transform": "matrix(18.4641, 0, 0, 18.4641, -12304, -5219)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16539.6,
+            "transform": "matrix(19.0417, 0, 0, 19.0417, -12711, -5392)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16556.3,
+            "transform": "matrix(19.4487, 0, 0, 19.4487, -12998, -5513)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16572.9,
+            "transform": "matrix(20.0574, 0, 0, 20.0574, -13427, -5695)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16589.6,
+            "transform": "matrix(20.4862, 0, 0, 20.4862, -13729, -5823)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16606.3,
+            "transform": "matrix(21.1275, 0, 0, 21.1275, -14181, -6015)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16622.9,
+            "transform": "matrix(21.5815, 0, 0, 21.5815, -14501, -6151)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16639.7,
+            "transform": "matrix(21.8989, 0, 0, 21.8989, -14725, -6245)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16656.2,
+            "transform": "matrix(22.1233, 0, 0, 22.1233, -14882, -6313)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16672.9,
+            "transform": "matrix(22.2769, 0, 0, 22.2769, -14990, -6359)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16689.6,
+            "transform": "matrix(22.385, 0, 0, 22.385, -15067, -6391)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16706.3,
+            "transform": "matrix(22.4599, 0, 0, 22.4599, -15119, -6413)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16722.9,
+            "transform": "matrix(22.5117, 0, 0, 22.5117, -15156, -6429)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16739.6,
+            "transform": "matrix(22.5473, 0, 0, 22.5473, -15181, -6439)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16756.3,
+            "transform": "matrix(22.5721, 0, 0, 22.5721, -15199, -6447)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16772.9,
+            "transform": "matrix(22.5892, 0, 0, 22.5892, -15210, -6452)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16789.6,
+            "transform": "matrix(22.601, 0, 0, 22.601, -15219, -6455)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16806.3,
+            "transform": "matrix(22.6092, 0, 0, 22.6092, -15224, -6458)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16823,
+            "transform": "matrix(22.6274, 0, 0, 22.6274, -15237, -6463)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 16906.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 16923,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 16939.7,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 16956.3,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 16973,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 16989.6,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 17006.3,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 17022.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 17039.6,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 17056.3,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 17072.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          },
+          {
+            "time": 17089.6,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "152283.02607463952/93382.68957299333/6.691836562769539/1174/680"
+          }
+        ],
+        "running": false,
+        "started": 14591.300000000745
+      }
+    },
+    {
+      "label": "rapid-reversal",
+      "spacing_ms": 25,
+      "deltas": [
+        -120,
+        -120,
+        -120,
+        -120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "pointer": {
+        "x": 970.4,
+        "y": 475.25
+      },
+      "before": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "false",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "0.00446141012371134",
+        "stride": "1"
+      },
+      "after": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "false",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "-88119.77933422283/5.5840384649563646e-8/1.455585858210151/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "0.0026781728436347236",
+        "stride": "1"
+      },
+      "first_observed_transform_ms": 15.399999998880958,
+      "raf_p50_ms": 16.69999999999709,
+      "raf_p95_ms": 16.700000000000728,
+      "frames_over_34ms": 1,
+      "frames": 51,
+      "long_tasks": [
+        {
+          "start": 18374.300000000745,
+          "duration": 54
+        }
+      ],
+      "ownership_compilation_delta": 0,
+      "ownership_upload_delta": 0,
+      "new_requests": [],
+      "raw": {
+        "draws": [
+          18374.800000000745
+        ],
+        "longTasks": [
+          {
+            "start": 18374.300000000745,
+            "duration": 54
+          }
+        ],
+        "events": [
+          {
+            "time": 17674.200000001118,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 17724.300000000745,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 17774.400000000373,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 17824.300000000745,
+            "deltaY": -120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 17874.200000001118,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 17924.200000001118,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 17974.300000000745,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 18024.300000000745,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          }
+        ],
+        "frames": [
+          17656.2,
+          17672.9,
+          17689.6,
+          17706.3,
+          17722.9,
+          17739.6,
+          17756.2,
+          17772.9,
+          17789.6,
+          17806.2,
+          17822.9,
+          17839.6,
+          17856.2,
+          17872.9,
+          17889.6,
+          17906.2,
+          17922.9,
+          17939.6,
+          17956.2,
+          17972.9,
+          17989.6,
+          18006.2,
+          18022.9,
+          18039.5,
+          18056.2,
+          18072.9,
+          18089.6,
+          18106.2,
+          18122.9,
+          18139.6,
+          18156.2,
+          18172.8,
+          18189.6,
+          18206.2,
+          18222.9,
+          18239.6,
+          18256.2,
+          18272.9,
+          18289.5,
+          18306.2,
+          18322.9,
+          18339.6,
+          18356.3,
+          18372.9,
+          18422.9,
+          18439.5,
+          18456.2,
+          18472.8,
+          18489.5,
+          18506.2,
+          18522.9,
+          18539.5
+        ],
+        "transforms": [
+          {
+            "time": 17656.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17672.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17689.6,
+            "transform": "matrix(0.969985, 0, 0, 0.969985, 21, 9)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17706.3,
+            "transform": "matrix(1.35164, 0, 0, 1.35164, -248, -105)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17722.9,
+            "transform": "matrix(1.69936, 0, 0, 1.69936, -493, -209)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17739.6,
+            "transform": "matrix(2.74059, 0, 0, 2.74059, -1227, -521)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17756.2,
+            "transform": "matrix(3.82019, 0, 0, 3.82019, -1986, -844)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17772.9,
+            "transform": "matrix(4.7986, 0, 0, 4.7986, -2675, -1136)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17789.6,
+            "transform": "matrix(7.76118, 0, 0, 7.76118, -4761, -2022)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17806.2,
+            "transform": "matrix(10.8144, 0, 0, 10.8144, -6911, -2936)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17822.9,
+            "transform": "matrix(13.5805, 0, 0, 13.5805, -8860, -3763)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17839.6,
+            "transform": "matrix(21.9609, 0, 0, 21.9609, -14761, -6269)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17856.2,
+            "transform": "matrix(30.5964, 0, 0, 30.5964, -20842, -8853)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17872.9,
+            "transform": "matrix(38.419, 0, 0, 38.419, -26351, -11192)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17889.6,
+            "transform": "matrix(27.8325, 0, 0, 27.8325, -18896, -8026)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17906.2,
+            "transform": "matrix(22.2824, 0, 0, 22.2824, -14987, -6366)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17922.9,
+            "transform": "matrix(19.127, 0, 0, 19.127, -12765, -5422)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17939.6,
+            "transform": "matrix(12.4614, 0, 0, 12.4614, -8071, -3429)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17956.2,
+            "transform": "matrix(9.27214, 0, 0, 9.27214, -5825, -2474)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17972.9,
+            "transform": "matrix(7.56894, 0, 0, 7.56894, -4626, -1965)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 17989.6,
+            "transform": "matrix(4.76196, 0, 0, 4.76196, -2649, -1125)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18006.2,
+            "transform": "matrix(3.45883, 0, 0, 3.45883, -1731, -736)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18022.9,
+            "transform": "matrix(2.77714, 0, 0, 2.77714, -1251, -532)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18039.5,
+            "transform": "matrix(1.72725, 0, 0, 1.72725, -512, -218)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18056.2,
+            "transform": "matrix(1.24669, 0, 0, 1.24669, -174, -74)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18072.9,
+            "transform": "matrix(0.993931, 0, 0, 0.993931, 4, 1)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18089.6,
+            "transform": "matrix(0.850085, 0, 0, 0.850085, 95, 44)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18106.2,
+            "transform": "matrix(0.763163, 0, 0, 0.763163, 146, 71)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18122.9,
+            "transform": "matrix(0.70869, 0, 0, 0.70869, 177, 87)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18139.6,
+            "transform": "matrix(0.673141, 0, 0, 0.673141, 198, 87)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18156.2,
+            "transform": "matrix(0.649659, 0, 0, 0.649659, 211, 84)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18172.8,
+            "transform": "matrix(0.634013, 0, 0, 0.634013, 220, 82)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18189.6,
+            "transform": "matrix(0.623414, 0, 0, 0.623414, 226, 82)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18206.2,
+            "transform": "matrix(0.616118, 0, 0, 0.616118, 231, 81)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18222.9,
+            "transform": "matrix(0.611193, 0, 0, 0.611193, 234, 79)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18239.6,
+            "transform": "matrix(0.607794, 0, 0, 0.607794, 235, 79)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18256.2,
+            "transform": "matrix(0.60546, 0, 0, 0.60546, 237, 78)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18272.9,
+            "transform": "matrix(0.603863, 0, 0, 0.603863, 238, 78)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18289.5,
+            "transform": "matrix(0.602755, 0, 0, 0.602755, 238, 79)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18306.2,
+            "transform": "matrix(0.601996, 0, 0, 0.601996, 239, 79)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18322.9,
+            "transform": "matrix(0.601469, 0, 0, 0.601469, 239, 78)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18339.6,
+            "transform": "matrix(0.601105, 0, 0, 0.601105, 240, 78)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18356.3,
+            "transform": "matrix(0.600855, 0, 0, 0.600855, 240, 78)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18372.9,
+            "transform": "matrix(0.600297, 0, 0, 0.600297, 240, 79)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 18422.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-88119.77933422283/5.5840384649563646e-8/1.455585858210151/1174/680"
+          },
+          {
+            "time": 18439.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-88119.77933422283/5.5840384649563646e-8/1.455585858210151/1174/680"
+          },
+          {
+            "time": 18456.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-88119.77933422283/5.5840384649563646e-8/1.455585858210151/1174/680"
+          },
+          {
+            "time": 18472.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-88119.77933422283/5.5840384649563646e-8/1.455585858210151/1174/680"
+          },
+          {
+            "time": 18489.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-88119.77933422283/5.5840384649563646e-8/1.455585858210151/1174/680"
+          },
+          {
+            "time": 18506.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-88119.77933422283/5.5840384649563646e-8/1.455585858210151/1174/680"
+          },
+          {
+            "time": 18522.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-88119.77933422283/5.5840384649563646e-8/1.455585858210151/1174/680"
+          },
+          {
+            "time": 18539.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-88119.77933422283/5.5840384649563646e-8/1.455585858210151/1174/680"
+          }
+        ],
+        "running": false,
+        "started": 17654.700000001118
+      }
+    },
+    {
+      "label": "notched-out",
+      "spacing_ms": 60,
+      "deltas": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "pointer": {
+        "x": 970.4,
+        "y": 475.25
+      },
+      "before": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "false",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "0.00446141012371134",
+        "stride": "1"
+      },
+      "after": {
+        "compilations": "0",
+        "compileMs": "0",
+        "precompiled": "true",
+        "gridZoom": "10.00012107070595",
+        "renderer": "webgl2",
+        "rendered": "true",
+        "locationBorders": "false",
+        "provinceBorders": "true",
+        "cellCount": "798320",
+        "renderMs": "0",
+        "worker": "true",
+        "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680",
+        "uploads": "15",
+        "ownershipUploads": "2",
+        "cellPixels": "0.0019529611009818206",
+        "stride": "1"
+      },
+      "first_observed_transform_ms": 15.39999999925567,
+      "raf_p50_ms": 16.700000000000728,
+      "raf_p95_ms": 16.700000000000728,
+      "frames_over_34ms": 0,
+      "frames": 70,
+      "long_tasks": [],
+      "ownership_compilation_delta": 0,
+      "ownership_upload_delta": 0,
+      "new_requests": [],
+      "raw": {
+        "draws": [
+          19490.400000000373,
+          19574.10000000149,
+          19657.5,
+          19740.800000000745
+        ],
+        "longTasks": [],
+        "events": [
+          {
+            "time": 19140.800000000745,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 19224.200000001118,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 19307.10000000149,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 19389.900000000373,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 19473.300000000745,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 19557.300000000745,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 19640.5,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          },
+          {
+            "time": 19724.10000000149,
+            "deltaY": 120,
+            "deltaMode": 0,
+            "trusted": true
+          }
+        ],
+        "frames": [
+          19106.2,
+          19122.8,
+          19139.5,
+          19156.2,
+          19172.8,
+          19189.5,
+          19206.2,
+          19222.8,
+          19239.5,
+          19256.2,
+          19272.8,
+          19289.5,
+          19306.2,
+          19322.8,
+          19339.5,
+          19356.2,
+          19372.8,
+          19389.6,
+          19406.1,
+          19422.8,
+          19439.5,
+          19456.2,
+          19472.8,
+          19489.5,
+          19506.2,
+          19522.8,
+          19539.5,
+          19556.1,
+          19572.8,
+          19589.5,
+          19606.2,
+          19622.9,
+          19639.5,
+          19656.2,
+          19672.8,
+          19689.5,
+          19706.2,
+          19722.8,
+          19739.5,
+          19756.2,
+          19772.8,
+          19789.4,
+          19806.1,
+          19822.9,
+          19839.5,
+          19856.2,
+          19872.9,
+          19889.5,
+          19906.1,
+          19922.8,
+          19939.4,
+          19956.1,
+          19972.8,
+          19989.5,
+          20006.2,
+          20022.8,
+          20039.5,
+          20056.2,
+          20072.9,
+          20089.5,
+          20106.2,
+          20122.9,
+          20139.5,
+          20156.2,
+          20172.8,
+          20189.5,
+          20206.2,
+          20222.8,
+          20239.5,
+          20256.1,
+          20272.8
+        ],
+        "transforms": [
+          {
+            "time": 19106.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19122.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19139.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19156.2,
+            "transform": "matrix(1.02451, 0, 0, 1.02451, -17, -8)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19172.8,
+            "transform": "matrix(0.787087, 0, 0, 0.787087, 132, 64)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19189.5,
+            "transform": "matrix(0.656776, 0, 0, 0.656776, 207, 86)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19206.2,
+            "transform": "matrix(0.579149, 0, 0, 0.579149, 251, 77)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19222.8,
+            "transform": "matrix(0.531007, 0, 0, 0.531007, 279, 100)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19239.5,
+            "transform": "matrix(0.500292, 0, 0, 0.500292, 297, 114)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19256.2,
+            "transform": "matrix(0.48, 0, 0, 0.48, 309, 122)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19272.8,
+            "transform": "matrix(0.466481, 0, 0, 0.466481, 317, 128)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19289.5,
+            "transform": "matrix(0.45742, 0, 0, 0.45742, 322, 132)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19306.2,
+            "transform": "matrix(0.451228, 0, 0, 0.451228, 326, 135)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19322.8,
+            "transform": "matrix(0.447004, 0, 0, 0.447004, 330, 137)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19339.5,
+            "transform": "matrix(0.444127, 0, 0, 0.444127, 330, 139)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19356.2,
+            "transform": "matrix(0.442138, 0, 0, 0.442138, 332, 139)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19372.8,
+            "transform": "matrix(0.440772, 0, 0, 0.440772, 332, 140)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19389.6,
+            "transform": "matrix(0.439836, 0, 0, 0.439836, 333, 141)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19406.1,
+            "transform": "matrix(0.439183, 0, 0, 0.439183, 334, 141)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19422.8,
+            "transform": "matrix(0.438741, 0, 0, 0.438741, 334, 141)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19439.5,
+            "transform": "matrix(0.438432, 0, 0, 0.438432, 334, 141)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19456.2,
+            "transform": "matrix(0.438219, 0, 0, 0.438219, 334, 141)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19472.8,
+            "transform": "matrix(0.438072, 0, 0, 0.438072, 334, 141)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19489.5,
+            "transform": "matrix(0.437745, 0, 0, 0.437745, 334, 141)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680"
+          },
+          {
+            "time": 19506.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19522.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19539.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19556.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19572.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 84)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19589.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19606.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19622.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19639.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19656.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 84)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19672.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19689.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19706.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19722.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19739.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 84)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19756.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19772.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19789.4,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19806.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19822.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19839.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19856.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19872.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19889.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19906.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19922.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19939.4,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19956.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19972.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 19989.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20006.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20022.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20039.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20056.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20072.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20089.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20106.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20122.9,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20139.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20156.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20172.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20189.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20206.2,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20222.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20239.5,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20256.1,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          },
+          {
+            "time": 20272.8,
+            "transform": "matrix(1, 0, 0, 1, 0, 0)",
+            "pane": "matrix(1, 0, 0, 1, 0, 0)",
+            "frame": "-169486.22265625/5.5840384649563646e-8/1/1174/680"
+          }
+        ],
+        "running": false,
+        "started": 19106.10000000149
+      }
+    }
+  ],
+  "limits": [
+    "rAF intervals and first observed canvas CSS transform/draw measure browser work, not photon latency or physical scroll-device feel",
+    "EU5 comparison measures frame/long-task behavior under same synthetic input; no claims about its data/implementation",
+    "No universal hardware/FPS or mobile certificate"
+  ],
+  "initial_ms": 8275,
+  "initial": {
+    "canvas": [
+      {
+        "className": "atlas-pixel-canvas leaflet-layer leaflet-zoom-animated",
+        "width": 1174,
+        "height": 680,
+        "dataset": {
+          "compilations": "0",
+          "compileMs": "0",
+          "precompiled": "true",
+          "gridZoom": "10.00012107070595",
+          "renderer": "webgl2",
+          "rendered": "true",
+          "locationBorders": "false",
+          "provinceBorders": "true",
+          "cellCount": "798320",
+          "renderMs": "47",
+          "worker": "true",
+          "frame": "1344.866271789583/29362.913600739415/2.191836562769528/1174/680",
+          "uploads": "15",
+          "ownershipUploads": "2",
+          "cellPixels": "0.00446141012371134",
+          "stride": "1"
+        }
+      }
+    ],
+    "scripts": [
+      "http://127.0.0.1:3886/assets/index-RMoktkso.js"
+    ]
+  },
+  "asset_sha256": "e6dad491a14f1e7d989d002fcef20fec47ec28baf46c64d51679264226d7c9a5",
+  "reference_release": {
+    "changes_sha256": "c1f549ca3d479bd6f18e5ad025833cb810caab32380fb9e30117b565e0d823d6",
+    "expected_counts": {
+      "area": 480,
+      "continent": 6,
+      "location": 49625,
+      "province": 5137,
+      "region": 81,
+      "subcontinent": 29
+    },
+    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "id": "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+    "location_ids_sha256": "b8eb3ab175f84531156e4f61297aca4205cefe63a660909b0a5db79fed36e8d1",
+    "membership_sha256": "c4bd494715d8b33bc80732f40edde80c602a0ddcb5f1b5d33012c9735290ce9e",
+    "metadata": {
+      "decision_sha256": {
+        "africa.json": "5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7",
+        "asia.json": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807",
+        "europe.json": "c936e3a251bedc827f7861345edbfd15b7da2ca4030966b702ba1c21ed2f0c6f",
+        "north-america.json": "0c66d322180fecc0ec978e98cadfd031cf11f4b24058cd18b6bd1ce4187e07a1",
+        "oceania.json": "48326f9de56a3700b4b7ab33499dcf00bd4258fdfe7b081c3ce97f2d645ace34",
+        "south-america.json": "f3621775ce1d21d873ff16972bbf37639c1b72aa32ea8e880e44a82fa11221f6"
+      },
+      "geometry_proof_sha256": {
+        "geometry-0": {
+          "after_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+          "before_footprints_sha256": "1c8c1584520d7360375c8ac79f12fe840dd8a47efb10f3d05c8517689667dd58",
+          "manifest_sha256": "ae64e938771d28e6cbd9d79e97f83b1893bb43c99c0e22e50145043293cbb4c1",
+          "receipt_sha256": "c53b644a641f85d6bc225997e8f6836afd0a4ae82d46e0a86d5147a3d9255c3e"
+        },
+        "geometry-1": {
+          "after_footprints_sha256": "6fcebdf0f62064fc56af1681d0c1c7ab4755dfa61d49551c0f910eef660fd0d1",
+          "before_footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+          "manifest_sha256": "ebab41faa03d9dad97463959870af47ae4f2a9aae45e873934f1a82da21daec3",
+          "receipt_sha256": "30022e81d3363ab8b6b62866255165844bc7b67f2dd83617072e0f3e45c0837a"
+        },
+        "geometry-2": {
+          "after_footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338",
+          "before_footprints_sha256": "6fcebdf0f62064fc56af1681d0c1c7ab4755dfa61d49551c0f910eef660fd0d1",
+          "manifest_sha256": "028e882cd2f8e372922ed2a3fa442edb1babc9c49abeee15940728f9f186d27c",
+          "receipt_sha256": "952eda1e94bae652cb6c7f48e606c5102b32f21a4a53451f9307a538fc49d562"
+        },
+        "geometry-3": {
+          "after_footprints_sha256": "c806a9aff96b6a7e9e19726b5810e58de3cd0de8e1ac433844fd7aa434708e09",
+          "before_footprints_sha256": "711b3dcfbed97cc3b72d0602fde1999cd50768ba5d8363d0a4571ef47ed6e338",
+          "manifest_sha256": "c2db31d0e0eecf50148dc00f30032d8bfe59021ea1ff804a7eff784537ae063b",
+          "receipt_sha256": "1f5266158232abf60e88719aed7a693960507e5df6e3d125d7e277bb97609f34"
+        },
+        "geometry-4": {
+          "after_footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+          "before_footprints_sha256": "c806a9aff96b6a7e9e19726b5810e58de3cd0de8e1ac433844fd7aa434708e09",
+          "manifest_sha256": "de04ca036fb210452b6f8a50b075c816a57a46483fb1371248e162e6992bddd0",
+          "receipt_sha256": "01be7e7e383e1ba7be7a1d8292a61e928f6195e3a11ce4a03839cbb96889f58b"
+        }
+      },
+      "historical_membership_not_asserted": true,
+      "metadata_migration_sha256": {
+        "metadata-0": "cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5",
+        "metadata-1": "290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937",
+        "metadata-2": "5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468",
+        "metadata-3": "09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f",
+        "metadata-4": "ddf8546553aaeb32905d6d60fbe3d001876f40b41b0c6f337f55978776c2367f",
+        "metadata-5": "a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f"
+      },
+      "migration_sha256": "8ded9175b78142d2e56dc5dc3f91ae830049409190bd9dc9a158dd14f1006324",
+      "original_registry_preserved": true,
+      "reference_only": true,
+      "registered_identity_manifest_sha256": {
+        "082167093c95839c141e63a8e414016b3f24f755cc471bb380e57158ff5c8b7b": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+        "0b7060d963f5c5ecef5ae2bde33b521a3d51bf9490d57ad41eb56cff1554a766": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+        "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e"
+      }
+    },
+    "reference_date": "2026-10-03",
+    "source_id": "source:atlas:geographic-review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+    "version": 6
+  },
+  "gpu": {
+    "devices": [
+      {
+        "vendorId": 65535,
+        "deviceId": 65535,
+        "vendorString": "Google Inc. (Google)",
+        "deviceString": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+        "driverVendor": "SwANGLE",
+        "driverVersion": "5.0.0"
+      }
+    ],
+    "auxAttributes": {
+      "amdSwitchable": false,
+      "canSupportThreadedTextureMailbox": false,
+      "directRenderingVersion": "",
+      "displayType": "ANGLE_SWIFTSHADER",
+      "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_copy_texture_3d GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_image GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_object_flags GL_ANGLE_memory_size GL_ANGLE_multi_draw GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_read_only_depth_stencil_feedback_loops GL_ANGLE_relaxed_vertex_attribute_type GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_robust_fragment_shader_output GL_ANGLE_robust_resource_initialization GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_texture_usage GL_ANGLE_translated_shader_source GL_ANGLE_vulkan_image GL_ANGLE_yuv_internal_format GL_APPLE_clip_distance GL_ARM_rgba8 GL_ARM_shader_framebuffer_fetch GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_compressed_texture GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_EGL_image_array GL_EXT_EGL_image_external_wrap_modes GL_EXT_EGL_image_storage GL_EXT_base_instance GL_EXT_blend_minmax GL_EXT_buffer_storage GL_EXT_clear_texture GL_EXT_clip_control GL_EXT_clip_cull_distance GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_copy_image GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_memory_object GL_EXT_memory_object_fd GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_read_format_bgra GL_EXT_robustness GL_EXT_sRGB GL_EXT_sRGB_write_control GL_EXT_semaphore GL_EXT_separate_shader_objects GL_EXT_shader_framebuffer_fetch GL_EXT_shader_framebuffer_fetch_non_coherent GL_EXT_shader_non_constant_global_initializers GL_EXT_shader_texture_lod GL_EXT_shadow_samplers GL_EXT_texture_border_clamp GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_lod_bias GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_sRGB_decode GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_EXT_texture_type_2_10_10_10_REV GL_EXT_unpack_subimage GL_KHR_blend_equation_advanced GL_KHR_debug GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_KHR_texture_compression_astc_ldr GL_NV_fence GL_NV_framebuffer_blit GL_NV_pack_subimage GL_NV_pixel_buffer_object GL_NV_polygon_mode GL_NV_read_depth GL_NV_read_depth_stencil GL_NV_read_stencil GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_EGL_image_external_essl3 GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_compressed_paletted_texture GL_OES_copy_image GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_depth_texture_cube_map GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_shading GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_border_clamp GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_texture_storage_multisample_2d_array GL_OES_vertex_array_object GL_OES_vertex_half_float GL_OES_vertex_type_10_10_10_2 GL_OVR_multiview GL_OVR_multiview2 GL_QCOM_texture_lod_bias ",
+      "glImplementationParts": "(gl=egl-angle,angle=swiftshader)",
+      "glRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+      "glResetNotificationStrategy": 33362,
+      "glVendor": "Google Inc. (Google)",
+      "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28646 git hash: a6bc9eff8444)",
+      "glWsExtensions": "",
+      "glWsVendor": "",
+      "glWsVersion": "",
+      "inProcessGpu": false,
+      "initializationTime": 0.020985,
+      "isAsan": false,
+      "isClangCoverage": false,
+      "jpegDecodeAcceleratorSupported": false,
+      "maxMsaaSamples": "4",
+      "optimus": false,
+      "passthroughCmdDecoder": true,
+      "pixelShaderVersion": "3.00",
+      "processCrashCount": 0,
+      "sandboxed": false,
+      "skiaBackendType": "None",
+      "subpixelFontRendering": true,
+      "targetCpuBits": 64,
+      "vertexShaderVersion": "3.00",
+      "visibilityCallbackCallCount": 0
+    },
+    "featureStatus": {
+      "2d_canvas": "unavailable_software",
+      "direct_rendering_display_compositor": "disabled_off_ok",
+      "gpu_compositing": "disabled_software",
+      "multiple_raster_threads": "enabled_on",
+      "opengl": "disabled_off",
+      "rasterization": "disabled_software",
+      "raw_draw": "disabled_off_ok",
+      "skia_graphite": "disabled_off",
+      "trees_in_viz": "disabled_off",
+      "video_decode": "disabled_software",
+      "video_encode": "disabled_software",
+      "webgl": "unavailable_software",
+      "webgpu": "unavailable_software",
+      "webnn": "unavailable_software"
+    },
+    "driverBugWorkarounds": [],
+    "videoDecoding": [],
+    "videoEncoding": []
+  },
+  "completed": true,
+  "completed_at": "2026-10-05T05:49:19.101Z"
+}

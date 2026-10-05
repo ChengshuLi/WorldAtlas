@@ -20,15 +20,27 @@ export class PixelCanvasLayer extends L.Layer {
   onAdd(map){
     this.map=map;this.canvas=L.DomUtil.create('canvas','atlas-pixel-canvas leaflet-layer leaflet-zoom-animated');this.canvas.setAttribute('aria-label','Pixel world map');
     this.canvas.dataset.gridZoom=String(GRID_ZOOM);map.getPane('overlayPane').append(this.canvas);
-    this.canvas.style.pointerEvents='none';map.on('moveend resize',this.redraw,this);map.on('zoomanim',this.animateZoom,this);map.on('mousemove',this.hover,this);map.on('click',this.click,this);
+    this.canvas.style.pointerEvents='none';map.on('move',this.moveCamera,this);map.on('moveend resize',this.redraw,this);map.on('zoomanim',this.animateZoom,this);map.on('mousemove',this.hover,this);map.on('click',this.click,this);
     this.tooltip=L.tooltip({sticky:true});this.redraw();
   }
-  onRemove(map){cancelAnimationFrame(this.pending);map.off('moveend resize',this.redraw,this);map.off('zoomanim',this.animateZoom,this);map.off('mousemove',this.hover,this);map.off('click',this.click,this);this.tooltip.remove();this.canvas.remove();this.worker.terminate();this.map=null;this.jobs.clear();}
+  onRemove(map){cancelAnimationFrame(this.pending);map.off('move',this.moveCamera,this);map.off('moveend resize',this.redraw,this);map.off('zoomanim',this.animateZoom,this);map.off('mousemove',this.hover,this);map.off('click',this.click,this);this.tooltip.remove();this.canvas.remove();this.worker.terminate();this.map=null;this.jobs.clear();}
   animateZoom(event){
     if(!this.origin)return;
     const scale=this.map.getZoomScale(event.zoom,this.drawZoom);
     const position=this.map._latLngToNewLayerPoint(this.origin,event.zoom,event.center);
     L.DomUtil.setTransform(this.canvas,position,scale);
+  }
+  moveCamera(){
+    // Move the cached image during the gesture; do CPU sampling once it settles.
+    ++this.sequence;
+    cancelAnimationFrame(this.pending);
+    if(this.origin)L.DomUtil.setTransform(this.canvas,this.map.latLngToLayerPoint(this.origin),this.map.getZoomScale(this.map.getZoom(),this.drawZoom));
+    // Zooming out exposes new areas. Sample them occasionally, with one job in
+    // flight, instead of either leaving them blank or repainting every frame.
+    if(this.origin&&this.map.getZoom()<this.drawZoom&&!this.cameraDraw&&performance.now()-(this.lastCameraDraw||0)>150){
+      this.lastCameraDraw=performance.now();
+      this.cameraDraw=this.draw().finally(()=>{this.cameraDraw=null;});
+    }
   }
   setStyle(){this.redraw();}
   updateMetadata(features){this.provinceIds=updateLocationMetadata(this.index,features);}
