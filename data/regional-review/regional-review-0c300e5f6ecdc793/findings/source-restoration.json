@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "retrieval_date": "2026-10-05",
+  "policy": "Full snapshots with no explicit reuse permission are not redistributed. These source observations are recorded by URL, retrieval date, exact fetched-byte SHA-256, size, facts used, and restore/verify steps. The hashes identify fetched snapshots; they do not imply the present live page still returns identical bytes.",
+  "sources": [
+    {
+      "source_url": "https://www.canakkale.gov.tr/sehitler-diyari-canakkale",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "e03c878b505da3fbde4e76566e2a7f484501472dc6857d7e98048c5732ac6a5a",
+      "observed_bytes": 451858,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Official province district roster; facts used to establish 12 districts and the inclusion of Bozcaada and Gökçeada.",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://www.canakkale.gov.tr/sehitler-diyari-canakkale\" -o /tmp/canakkale-governor-district-list.html.restored",
+        "Run shasum -a 256 /tmp/canakkale-governor-district-list.html.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    },
+    {
+      "source_url": "https://goturkiye.com/bluevoyage/istanbul",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "3ecb080494227aed0b6bb4ac477eeff766020c4af4cd41f332cda0f74bee9819",
+      "observed_bytes": 286251,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Official tourism page; facts used that Istanbul spans two continents.",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://goturkiye.com/bluevoyage/istanbul\" -o /tmp/goturkiye-istanbul.html.restored",
+        "Run shasum -a 256 /tmp/goturkiye-istanbul.html.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    },
+    {
+      "source_url": "https://goturkiye.com/thrace/thrace-goturkiye",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "c3b76b3b03c4f99e455ce525c252a0cb6895a57190a7a6829f811e110fa07b43",
+      "observed_bytes": 186103,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Official tourism page; facts used for the three-province Thrace convention.",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://goturkiye.com/thrace/thrace-goturkiye\" -o /tmp/goturkiye-thrace.html.restored",
+        "Run shasum -a 256 /tmp/goturkiye-thrace.html.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    },
+    {
+      "source_url": "https://www.gov.si/en/topics/history-of-slovenia/",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "ec6544de88d6c65cf67f2d9c27e8c752f46216bcac469c89093cd0fc28783785",
+      "observed_bytes": 64233,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Official history page; facts used for socialist Yugoslavia and 1991 independence dates.",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://www.gov.si/en/topics/history-of-slovenia/\" -o /tmp/govsi-history-slovenia.html.restored",
+        "Run shasum -a 256 /tmp/govsi-history-slovenia.html.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    },
+    {
+      "source_url": "https://www.gov.si/drzavni-organi/upravne-enote/murska-sobota/o-upravni-enoti-murska-sobota/obcine-in-naselja-upravne-enote-murska-sobota/",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "d103ebede3e4d2599003a457de990e48523b06b12b9e2c3ab625e6f2b31148fb",
+      "observed_bytes": 40706,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Official municipal bilingual name and settlement membership.",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://www.gov.si/drzavni-organi/upravne-enote/murska-sobota/o-upravni-enoti-murska-sobota/obcine-in-naselja-upravne-enote-murska-sobota/\" -o /tmp/govsi-hodos.html.restored",
+        "Run shasum -a 256 /tmp/govsi-hodos.html.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    },
+    {
+      "source_url": "https://www.harita.gov.tr/urun/turkiye-mulki-idare-sinirlari/232",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "39b9672d97c293c95545ec5af6364e578497a2843134838315845c82559ae252",
+      "observed_bytes": 191741,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Official product page; facts used for HGM terms, vintage and boundary-status disclaimer. The linked archive bytes are retained separately under its stated noncommercial redistribution permission.",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://www.harita.gov.tr/urun/turkiye-mulki-idare-sinirlari/232\" -o /tmp/hgm-mulki-idare-product-page.html.restored",
+        "Run shasum -a 256 /tmp/hgm-mulki-idare-product-page.html.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    },
+    {
+      "source_url": "https://cevre.ibb.istanbul/wp-content/uploads/2021/12/actionplan.pdf",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "06654e0eb7b7f25675b0631a92655e82791774b21610d82361213732a2cf78d5",
+      "observed_bytes": 1041663,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Municipal strategy; fact used that Istanbul spans two continents.",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://cevre.ibb.istanbul/wp-content/uploads/2021/12/actionplan.pdf\" -o /tmp/ibb-istanbul-air-quality-strategy.pdf.restored",
+        "Run shasum -a 256 /tmp/ibb-istanbul-air-quality-strategy.pdf.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    },
+    {
+      "source_url": "https://icisleri.gov.tr/kurumlar/icisleri.gov.tr/IcSite/illeridaresi/Bilgiler2/%C4%B0l%20ve%20%C4%B0l%C3%A7e%20Kurulu%C5%9F%20Tarihleri%202018.pdf",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "444121af93c5f77a87d92776cf533c6045ee571e02ff1c819f7ae18e41eccc80",
+      "observed_bytes": 1417858,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Official 2018 foundation-date tables; names used for province/district cross-checks (PDF pages 24, 30, 53, 78).",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://icisleri.gov.tr/kurumlar/icisleri.gov.tr/IcSite/illeridaresi/Bilgiler2/%C4%B0l%20ve%20%C4%B0l%C3%A7e%20Kurulu%C5%9F%20Tarihleri%202018.pdf\" -o /tmp/interior-ministry-district-foundation-2018.pdf.restored",
+        "Run shasum -a 256 /tmp/interior-ministry-district-foundation-2018.pdf.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    },
+    {
+      "source_url": "https://www.icisleri.gov.tr/valilikler",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "ba613819113046367ad3bdcf2c5ff9735ae5b3590d9fbd83a9a80c1f1e5768a9",
+      "observed_bytes": 509506,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Official current directory; facts used for 81-province / 921-vs-922 district-count discrepancy.",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://www.icisleri.gov.tr/valilikler\" -o /tmp/interior-ministry-valilikler.html.restored",
+        "Run shasum -a 256 /tmp/interior-ministry-valilikler.html.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    },
+    {
+      "source_url": "https://www.stat.si/obcine/sl/Region/Index/1",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "508d660a527ae7f3f6144c89249cecd3123a69e2c2fefe592124c5ecbeb86b7d",
+      "observed_bytes": 27477,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Official statistical-region page; facts used for Hodoš/Hodos placement in Pomurska and current municipality-count context.",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://www.stat.si/obcine/sl/Region/Index/1\" -o /tmp/surs-pomurska-region.html.restored",
+        "Run shasum -a 256 /tmp/surs-pomurska-region.html.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    },
+    {
+      "source_url": "https://www.ktb.gov.tr/EN-99760/regions.html",
+      "retrieved_on": "2026-10-05",
+      "observed_sha256": "bef41dd1f9bd65dfc9c6d656a31130b7ae3e76e65852f8095cc334480b88c52c",
+      "observed_bytes": 69107,
+      "snapshot_retained": false,
+      "reuse_license": "No explicit reuse license was stated in the captured source; full copy omitted from repository.",
+      "fact_used": "Official ministry regional descriptions; fact used that Thrace is the European side, bounded from Anatolia by the straits/Marmara/Dardanelles description.",
+      "restoration_instructions": [
+        "Fetch the exact URL with curl -L --fail --silent --show-error \"https://www.ktb.gov.tr/EN-99760/regions.html\" -o /tmp/tourism-ministry-regions.html.restored",
+        "Run shasum -a 256 /tmp/tourism-ministry-regions.html.restored and compare to observed_sha256. If live source changed, preserve the new retrieval date/hash separately; do not replace the 2026-10-05 observed hash."
+      ]
+    }
+  ]
+}

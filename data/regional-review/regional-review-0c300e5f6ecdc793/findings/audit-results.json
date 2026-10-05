@@ -1,0 +1,97 @@
+{
+  "issue": 424,
+  "expected_scope_locations": 33,
+  "assessed_locations": 33,
+  "scope_member_ids_sha256_pinned": "2eac2fa78a8c3e64abfedfefa0b4f4dbb012af9a3b78ccc451fd051c59d5fad2",
+  "scope_member_ids_sorted_newline_sha256": "2eac2fa78a8c3e64abfedfefa0b4f4dbb012af9a3b78ccc451fd051c59d5fad2",
+  "scope_ids_unique": true,
+  "current_parent_counts": {
+    "Istanbul": 1,
+    "Hodoj": 1,
+    "Tekirdağ": 11,
+    "Edirne": 9,
+    "Kırklareli": 8,
+    "Çanakkale": 3
+  },
+  "source_feature_counts": {
+    "TUR_ADM2": 973,
+    "SVN_ADM2": 213,
+    "HGM_2026_unlabelled_lines": 2499
+  },
+  "hgm_2026_dbf_fields": [
+    "OBJECTID",
+    "Shape_Leng",
+    "Shape_Le_1",
+    "Detay_Adi"
+  ],
+  "hgm_2026_detail_labels": [
+    "İLÇE_SINIRI"
+  ],
+  "source_matching": {
+    "Turkey_scoped_features": 31,
+    "Slovenia_scoped_features": 1,
+    "natural_earth_istanbul_province_record": 1,
+    "atlas_istanbul_replaced_features": 32
+  },
+  "geometry_component_counts": {
+    "1": 31,
+    "2": 2
+  },
+  "source_vs_atlas_geometry_type_pairs": {
+    "MultiPolygon -> MultiPolygon": 1,
+    "MultiPolygon -> Polygon": 1,
+    "Polygon -> MultiPolygon": 1,
+    "Polygon -> Polygon": 30
+  },
+  "source_vs_atlas_component_discrepancies": [
+    {
+      "location_id": "gb:TUR:ADM2:54988432B13184104417142",
+      "name": "Meriç",
+      "source_geometry_parts": 1,
+      "atlas_geometry_parts": 2,
+      "source_components": "[{\"bounds\":[26.3029776,41.0262408,26.5793214,41.3289957],\"exterior_vertices\":529}]",
+      "atlas_components": "[{\"bounds\":[26.3105,41.0262,26.5793,41.3283],\"exterior_vertices\":75},{\"bounds\":[26.46623217,41.2999,26.4674,41.30087707],\"exterior_vertices\":4}]"
+    },
+    {
+      "location_id": "gb:TUR:ADM2:54988432B17351022548299",
+      "name": "Marmaraereğlisi",
+      "source_geometry_parts": 2,
+      "atlas_geometry_parts": 1,
+      "source_components": "[{\"bounds\":[27.7292635,40.962308,28.0134334,41.118927],\"exterior_vertices\":1140},{\"bounds\":[27.8967183,40.9608326,27.8968915,40.9609227],\"exterior_vertices\":7}]",
+      "atlas_components": "[{\"bounds\":[27.7293,40.9641,28.0134,41.1189],\"exterior_vertices\":27}]"
+    }
+  ],
+  "invalid_geometry_count": 0,
+  "source_hashes": {
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/geoboundaries-9469f09/geoBoundaries-SVN-ADM2-metaData.json": "ae1647ee586ac5460522c087c911c2c9a3176adc9a76c3b926b07fece7e1d2d1",
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/geoboundaries-9469f09/geoBoundaries-SVN-ADM2.geojson": "b5e2bb260cd78a05e16a457d85cc3fce83b9ad7f65cbefc7feae6f4b836a97fe",
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/geoboundaries-9469f09/geoBoundaries-TUR-ADM2-metaData.json": "ace87195676281a6b58bc822a275646b71dbdca42ca4b7445bc928730596fdc7",
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/geoboundaries-9469f09/geoBoundaries-TUR-ADM2.geojson": "8e7594ab12d916e3b93f920475a300c364dfb94a0e40bfa6d55f43aff0c7fd97",
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/hgm-2026/hgm-2026-district-boundary-lines.cpg": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/hgm-2026/hgm-2026-district-boundary-lines.dbf": "081fd7246c539bb6f2ae3998a7d0d5783a299e41e479b34afbd5b74c20390190",
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/hgm-2026/hgm-2026-district-boundary-lines.prj": "fbad5bd92a9712a313edff28e8eacce865a9c0b222778a08779d0eb8cedb34ad",
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/hgm-2026/hgm-2026-district-boundary-lines.shp": "8029341c0bed921cea62eea1b57e7b07934f4ddafe4619fa1a3982b586c85a05",
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/hgm-2026/hgm-2026-district-boundary-lines.shx": "1f8c560577f4d0f5bc58faa50cb5098475eecdc4c29608c7dde222064f1a0a62",
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/hgm-turkiye-mulki-idare-sinirlari-2026.rar": "da8efe4dcbe47e5e8a8a34068e1e729832420634b519fab62303b86254471284",
+    "data/regional-review/regional-review-0c300e5f6ecdc793/sources/natural-earth-ca96624/ne_10m_admin_1_states_provinces.geojson.gz": "20777a70803489a26b57194f4626797a84784c2ee66b3f56da3d6ea72fc4849c"
+  },
+  "source_restoration_observed_sha256": {
+    "https://www.canakkale.gov.tr/sehitler-diyari-canakkale": "e03c878b505da3fbde4e76566e2a7f484501472dc6857d7e98048c5732ac6a5a",
+    "https://goturkiye.com/bluevoyage/istanbul": "3ecb080494227aed0b6bb4ac477eeff766020c4af4cd41f332cda0f74bee9819",
+    "https://goturkiye.com/thrace/thrace-goturkiye": "c3b76b3b03c4f99e455ce525c252a0cb6895a57190a7a6829f811e110fa07b43",
+    "https://www.gov.si/en/topics/history-of-slovenia/": "ec6544de88d6c65cf67f2d9c27e8c752f46216bcac469c89093cd0fc28783785",
+    "https://www.gov.si/drzavni-organi/upravne-enote/murska-sobota/o-upravni-enoti-murska-sobota/obcine-in-naselja-upravne-enote-murska-sobota/": "d103ebede3e4d2599003a457de990e48523b06b12b9e2c3ab625e6f2b31148fb",
+    "https://www.harita.gov.tr/urun/turkiye-mulki-idare-sinirlari/232": "39b9672d97c293c95545ec5af6364e578497a2843134838315845c82559ae252",
+    "https://cevre.ibb.istanbul/wp-content/uploads/2021/12/actionplan.pdf": "06654e0eb7b7f25675b0631a92655e82791774b21610d82361213732a2cf78d5",
+    "https://icisleri.gov.tr/kurumlar/icisleri.gov.tr/IcSite/illeridaresi/Bilgiler2/%C4%B0l%20ve%20%C4%B0l%C3%A7e%20Kurulu%C5%9F%20Tarihleri%202018.pdf": "444121af93c5f77a87d92776cf533c6045ee571e02ff1c819f7ae18e41eccc80",
+    "https://www.icisleri.gov.tr/valilikler": "ba613819113046367ad3bdcf2c5ff9735ae5b3590d9fbd83a9a80c1f1e5768a9",
+    "https://www.stat.si/obcine/sl/Region/Index/1": "508d660a527ae7f3f6144c89249cecd3123a69e2c2fefe592124c5ecbeb86b7d",
+    "https://www.ktb.gov.tr/EN-99760/regions.html": "bef41dd1f9bd65dfc9c6d656a31130b7ae3e76e65852f8095cc334480b88c52c"
+  },
+  "reference_input_hashes": {
+    "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "data/semantic-report.json": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831",
+    "data/macro-foundation/europe-asia-boundary-decisions.json": "f9bfacaf140b6a8a3be6353d2d66f832d40d8e75dd2af0ca5bde4fece8f3bcf6"
+  },
+  "audit_errors": []
+}
