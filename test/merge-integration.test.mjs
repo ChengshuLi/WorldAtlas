@@ -6,7 +6,7 @@ import path from 'node:path';
 import {integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
 import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
-import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, createCandidate, cleanupCandidate} from '../scripts/merge-integration.mjs';
+import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
 const sha = letter => letter.repeat(40);
 test('only staging-test shards prepare the immutable migration derivative', () => {
@@ -384,4 +384,92 @@ test('unconfirmed ref creation identifies the resource without deleting a possib
     assert.match(error.message,/HTTP 403/);assert.equal(error.candidateCleanup.status,'creation-unconfirmed');
     assert.match(error.candidateCleanup.reference,/^worldatlas-integration\/pr-2-/);return true;
   });assert.equal(f.operations.some(row=>row.method==='DELETE'),false);assert.equal(f.writes.length,0);
+});
+
+function headCleanupFixture() {
+  const f = {repo:'owner/repo', number:2, expectedHead:sha('a'), deletes:[], reads:[]};
+  f.pr = {number:2,merged:true,state:'closed',merge_commit_sha:sha('b'),
+    head:{sha:f.expectedHead,ref:'engineering/finished',repo:{full_name:f.repo}}};
+  f.branch = {protected:false,commit:{sha:f.expectedHead}};
+  f.open = []; f.defaultBranch='main';
+  f.api = async (route, method='GET') => {
+    f.reads.push({route,method});
+    if (f.failAt && route.includes(f.failAt)) throw Error('API denied (HTTP 403)');
+    if (method==='DELETE') {
+      if(f.deleteDenied)throw Error('Deletion denied (HTTP 403)');
+      f.deletes.push(route); return null;
+    }
+    if (route===`/repos/${f.repo}/pulls/2`) return structuredClone(f.pr);
+    if (route===`/repos/${f.repo}`) return {default_branch:f.defaultBranch};
+    if (route.includes('/branches/')) {
+      if(f.absent)throw Error('Branch absent (HTTP 404)');
+      return structuredClone(f.branch);
+    }
+    if (route.includes('/pulls?state=open')) {
+      const page=Number(new URL('https://api.github.test'+route).searchParams.get('page'));
+      if(f.badInventory)return {};
+      return f.pages ? f.pages[page-1]??[] : structuredClone(f.open);
+    }
+    if(route.includes('/git/ref/heads/')) {
+      if(f.refAbsent)throw Error('Ref absent (HTTP 404)');
+      return {object:{sha:f.lastSHA??f.expectedHead}};
+    }
+    throw Error('Unexpected cleanup API '+route);
+  };
+  return f;
+}
+test('merged head cleanup deletes only confirmed unchanged same-repository unused worker heads',async()=>{
+  const f=headCleanupFixture();const result=await cleanupMergedHead(f);
+  assert.equal(result.status,'deleted');assert.equal(result.expected_head,f.expectedHead);
+  assert.deepEqual(f.deletes,['/repos/owner/repo/git/refs/heads/engineering%2Ffinished']);
+  assert.match(f.reads.at(-2).route,/\/git\/ref\/heads\//);
+  for(const setting of ['absent','refAbsent']) {
+    const f=headCleanupFixture();f[setting]=true;
+    assert.equal((await cleanupMergedHead(f)).status,'absent');assert.equal(f.deletes.length,0);
+  }
+});
+test('unmerged, wrong head, fork, default, protected, advanced and shared heads are retained',async()=>{
+  const mutations=[
+    f=>{f.pr.merged=false;}, f=>{f.pr.state='open';}, f=>{f.pr.merge_commit_sha=null;},
+    f=>{f.pr.head.sha=sha('d');}, f=>{f.pr.head.repo.full_name='fork/repo';},
+    f=>{f.pr.head.repo=null;}, f=>{f.pr.head.ref='main';},
+    f=>{f.defaultBranch=f.pr.head.ref;}, f=>{f.branch.protected=true;},
+    f=>{delete f.branch.protected;}, f=>{f.branch.commit.sha=sha('d');},
+    f=>{f.lastSHA=sha('d');}, f=>{f.open=[{number:3,state:'open',head:structuredClone(f.pr.head)}];},
+    f=>{f.pr.head.ref='engineering/../main';}, f=>{f.pr.head.ref='worldatlas-integration/other';}
+  ];
+  for(const mutate of mutations) {
+    const f=headCleanupFixture();mutate(f);const result=await cleanupMergedHead(f);
+    assert.equal(result.status,'retained',result.reason);assert.equal(f.deletes.length,0);
+  }
+});
+test('head cleanup checks paginated open PRs and fails conservatively on unknown identities or API failures',async()=>{
+  const f=headCleanupFixture();f.pages=[Array.from({length:100},(_,i)=>({number:i+10,state:'open',head:{ref:'engineering/other-'+i,repo:{full_name:f.repo}}})),
+    [{number:999,state:'open',head:structuredClone(f.pr.head)}]];
+  assert.equal((await cleanupMergedHead(f)).status,'retained');assert.equal(f.deletes.length,0);
+  assert.ok(f.reads.some(row=>row.route.endsWith('page=2')));
+  for(const mutate of [f=>{f.badInventory=true;},f=>{f.open=[{number:3,state:'open'}];},
+    f=>{f.failAt='/branches/';},f=>{f.deleteDenied=true;},f=>{f.defaultBranch=null;}]) {
+    const f=headCleanupFixture();mutate(f);const result=await cleanupMergedHead(f);
+    assert.equal(result.status,'pending');assert.equal(f.deletes.length,0);assert.ok(result.reason);
+  }
+  const fork=headCleanupFixture();fork.open=[{number:3,state:'open',head:{ref:fork.pr.head.ref,repo:{full_name:'fork/repo'}}}];
+  assert.equal((await cleanupMergedHead(fork)).status,'deleted');
+});
+test('successful integration records cleanup separately, including deletion failure and replay',async()=>{
+  for(const deleteDenied of [false,true]) {
+    const f=fixture(),cleanup=headCleanupFixture(),normal=f.api;
+    cleanup.pr.head.ref=f.pr.head.ref;cleanup.deleteDenied=deleteDenied;
+    f.api=async(route,method='GET',body)=>{
+      if(method==='PUT') {const result=await normal(route,method,body);f.pr.merged=true;f.pr.state='closed';f.pr.merge_commit_sha=result.sha;return result;}
+      if(f.pr.merged && (route.endsWith('/pulls/2')||route==='/repos/owner/repo'||route.includes('/branches/')||route.includes('/pulls?state=open')||route.includes('/git/ref/heads/engineering')||method==='DELETE'))return cleanup.api(route,method,body);
+      return normal(route,method,body);
+    };
+    const result=await f.complete();assert.equal(result.accepted,true);assert.equal(result.merge_commit,sha('f'));
+    assert.equal(result.head_cleanup.status,deleteDenied?'pending':'deleted');
+    assert.equal(f.writes.length,1);
+  }
+  const f=fixture(),cleanup=headCleanupFixture();f.pr.merged=true;f.pr.state='closed';f.pr.merge_commit_sha=sha('b');
+  f.api=cleanup.api;
+  const result=await f.complete();assert.equal(result.accepted,true);assert.equal(result.replayed,true);assert.equal(result.head_cleanup.status,'deleted');
 });

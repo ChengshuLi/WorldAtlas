@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "issue": 894,
+  "lane": "engineering",
+  "worker_id": "engineering-branch-cleanup-main-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "sources": [],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "baseline": {
+    "commit": "fe0d788bbc437371e9c895cced95857a243000a1",
+    "files": [
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 23915,
+        "sha256": "5dd00f742c9fe090090891e0198de6d7883745b33e9b6a3f7770726a6d4ccc9b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 19391,
+        "sha256": "706f9b05ce67bb87b087ce03f63703804bdf645a7f1504a9c4fed5a30c6843bd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration.test.mjs",
+        "bytes": 26502,
+        "sha256": "07aa94340838e2e49ada7052a6ac319c9e873d9a5258895b99f456f83e957c20",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "outputs": [
+    {
+      "path": "coordination/engineering/merged-head-cleanup-20261004/claim.json",
+      "bytes": 832,
+      "sha256": "f1a9fe921fc999f6b7f8998c52299216fd57d3d08056f269c33358dc83d3245e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-20261004/negative-control.json",
+      "bytes": 351,
+      "sha256": "2ff3938716400aba7b7eedc66af28d1e87ed604cf2d0366c5438f8ec5b93249a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-20261004/positive-control.json",
+      "bytes": 296,
+      "sha256": "869ee6f1aeffa71c8a6adb09205049bebe02445d224560130bee81eb029fbf8e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-20261004/validation.txt",
+      "bytes": 461,
+      "sha256": "f08ad6d486f609fe3d018149657f24eb2785202ff457bfb5350d882e5dab5080",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 24874,
+      "sha256": "9bb755803f137c2df11fa7e59a605fcca0414c8a5f40a9aecf954bb6e7d96e2f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 22503,
+      "sha256": "ce0d9c72abad6f628cb79aad25558382a12ae945671094e3b433b8fac2d102d6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 31918,
+      "sha256": "9b9cb14ed5b68e2577051ac3e7bc7243f994911d3ef7ba22439d1150a2092109",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/merged-head-cleanup-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-20261004/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-20261004/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-20261004/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "5dd00f742c9fe090090891e0198de6d7883745b33e9b6a3f7770726a6d4ccc9b"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "original_sha256": "706f9b05ce67bb87b087ce03f63703804bdf645a7f1504a9c4fed5a30c6843bd"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "07aa94340838e2e49ada7052a6ac319c9e873d9a5258895b99f456f83e957c20"
+    }
+  ],
+  "methods": [
+    {
+      "id": "merged-head-cleanup",
+      "kind": "code",
+      "description": "Guarded postmerge remote lane-head deletion with distinct merge/cleanup outcomes, complete open-PR inventory, final ref check, negative controls and documented non-atomic delete limits.",
+      "software": "Node24; GitHub REST; GNUtar1.35 for unchanged package tests",
+      "units": "branch cleanup decision"
+    }
+  ],
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/merged-head-cleanup-20261004/evidence-quality.json",
+    "git diff --check"
+  ],
+  "validation": [
+    {
+      "method_id": "merged-head-cleanup",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/merged-head-cleanup-20261004/positive-control.json"
+    },
+    {
+      "method_id": "merged-head-cleanup",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/merged-head-cleanup-20261004/negative-control.json"
+    }
+  ]
+}
