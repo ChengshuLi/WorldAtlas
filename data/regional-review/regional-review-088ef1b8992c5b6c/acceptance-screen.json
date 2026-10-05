@@ -1,0 +1,87 @@
+{
+  "concerns": [
+    {
+      "follow_up": "Acquire dated official city/urban extents for any claimed locality in a future bounded source review.",
+      "id": "fragmented-city-territories",
+      "screen": "No authoritative city/urban extent source is pinned for the 221 IDs; an administrative name or component count cannot determine a fragmented city territory.",
+      "status": "unresolved"
+    },
+    {
+      "candidates": [
+        {
+          "id": "gb:BFA:ADM3:42667915B654622178706",
+          "name": "Tibga",
+          "parent_comparator": "Komonjdjari",
+          "share_of_comparator_area": 0.5667249634689968,
+          "source_area_km2": 2893.7313317887274
+        },
+        {
+          "id": "gb:BFA:ADM3:42667915B74250788783894",
+          "name": "Boromo",
+          "parent_comparator": "Kompienga",
+          "share_of_comparator_area": 0.7166588658116021,
+          "source_area_km2": 4977.611440273605
+        }
+      ],
+      "follow_up_issue": 854,
+      "id": "province-sized-locations",
+      "limit": "BFA ADM2 is 2017; comparator geometry and an area ratio do not determine current commune identity.",
+      "screen": "Compared each of 221 source polygons to its largest-overlap pinned ADM2 comparator using WGS84 ellipsoidal area. A >=0.50 comparator-area share is a review trigger only, not a legal-size threshold.",
+      "status": "flagged-candidates"
+    },
+    {
+      "id": "anonymous-administrative-remainders",
+      "limit": "A name-only token scan cannot detect unnamed remainder polygons or omissions.",
+      "matching_ids": [],
+      "screen": "Searched all 221 repaired native source names for remainder/rest-of/other/unspecified/unknown labels.",
+      "status": "name-screen-complete"
+    },
+    {
+      "atlas_multipart_ids": [
+        "gb:BFA:ADM3:42667915B53965762210970",
+        "gb:BFA:ADM3:42667915B74250788783894",
+        "gb:BFA:ADM3:42667915B81305484262798"
+      ],
+      "id": "disconnected-territories",
+      "limit": "Multipart status alone does not establish islands, enclaves, continuity or legal correctness.",
+      "screen": "Per-row Atlas and native-source polygon component counts are in derived-analysis.json.",
+      "source_multipart_count": 0,
+      "status": "component-screen-complete"
+    },
+    {
+      "id": "omitted-islands-and-territorial-completeness",
+      "limit": "Issue/source counts cannot establish omissions or completeness.",
+      "screen": "Both area scopes are partial (204/351 BFA; 17/510 CIV by issue pins). No complete current authoritative national roster and insular territory audit exists in this packet.",
+      "status": "unresolved"
+    },
+    {
+      "id": "repeated-administrative-tiers",
+      "limit": "No current BFA code/role crosswalk is established; CIV's official current reference source does not provide statutory shapeID continuity.",
+      "screen": "BFA 2007 ADM3 metadata has blank canonical level; CIV 2021 ADM3 collection label Departments conflicts with CNTIG/OCHA admin3=sub-prefecture and admin2=department. Per-location parent and role data are recorded in derived-analysis.json.",
+      "status": "role-conflict-identified"
+    },
+    {
+      "id": "oversized-groups",
+      "limit": "Counts are workload metadata and do not validate region size, omitted neighbors or boundary fit.",
+      "screen": "All 28 province/group scopes list exact owned count, full comparator count, partial flag and row-level parent evidence in derived-analysis.json.",
+      "status": "scope-count-screen-complete"
+    },
+    {
+      "id": "weak-parent-relationships",
+      "limit": "BFA overlays use 2017 comparators; CIV Atlas region parents intentionally bypass direct department parentage.",
+      "screen": "Largest-area ADM2 overlay names match the Atlas parent label for all 221. All 17 Cavally members also match official CNTIG/OCHA admin1 region and have individually recorded admin2 department; all BFA current code parents remain unresolved.",
+      "status": "mixed-evidence"
+    },
+    {
+      "id": "inconsistent-neighboring-units",
+      "limit": "No source count, overlay or shape similarity establishes current legal lineage, cross-country tier equivalence or whole-area boundary completeness.",
+      "screen": "Per-ID names, source geometry overlap, source parent overlay, and multipart counts are recorded. CIV current CNTIG/OCHA geometry IoU is computed per row; BFA source vintage is 2007.",
+      "status": "cross-source-screen-complete-with-unresolved-lineage"
+    }
+  ],
+  "individual_row_assessments_path": "data/regional-review/regional-review-088ef1b8992c5b6c/derived-analysis.json",
+  "issue": 468,
+  "scope_count": 221,
+  "scope_ids_sha256": "4056ca6855e360ac9f523cfbb0a2f1f77a041514198f28ae4b6df3454a198059",
+  "version": 1
+}
