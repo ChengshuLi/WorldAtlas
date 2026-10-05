@@ -1,0 +1,12 @@
+{
+  "method_id": "local-storage-guard",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "checks": [
+    "Sparse required directory and individual file available",
+    "Fresh work and exact detached review independent",
+    "Clean release preserves Git commit",
+    "Slot reused with fresh ownership token",
+    "Real sparse allocation/release"
+  ]
+}

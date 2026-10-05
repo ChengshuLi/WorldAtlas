@@ -15,6 +15,10 @@ Geographic structure lives in `data/world-index.json`, its parts and `data/hiera
 
 The primary handoff branch is `main` in `ChengshuLi/WorldAtlas`; `work` retains the initial development history. The Site source repository is a separate deployment mirror. Do not assume a new thread can access `.cache`, SQLite databases or another thread's workspace. Durable research/checkpoints and resume instructions must reach the primary repository through their issue PRs; credentials and local dependency/cache directories must not be committed.
 
+## Local storage
+
+Read [LOCAL_WORKSPACES.md](docs/LOCAL_WORKSPACES.md) before allocating local author/reviewer checkouts. Use the shared `scripts/local-workspace.mjs` allocator, sparse scopes and storage checks; release completed slots after preserving work. Fresh branches must not accumulate full dataset copies.
+
 ## Working in this repository
 
 - Keep changes focused on the requested work.

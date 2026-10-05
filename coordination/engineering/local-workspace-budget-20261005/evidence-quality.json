@@ -1,0 +1,291 @@
+{
+  "version": 1,
+  "issue": 904,
+  "lane": "engineering",
+  "worker_id": "engineering-local-storage-main-20261005",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 7588,
+        "sha256": "c040391c07d9bec1b90e764e6481b2e8fb70cea4da2c4d14b8071843ce441b4a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PARALLEL_WORK_PROTOCOL.md",
+        "bytes": 8231,
+        "sha256": "fb26fb85d01212596016665c5c6344fd902be525ad0e21686fd6ce9928cd3e98",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+        "bytes": 14550,
+        "sha256": "f262c464f3e67f062b653e358e69811db1a3b9d39cec7ad9250cb3efbc306501",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 24974,
+        "sha256": "b47d944918335c984ddce7132481dfb0f226adf8004010c2b2fe90cec64b9e7d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/AUDITOR.txt",
+        "bytes": 5997,
+        "sha256": "182d5bf992ba0c0f906d8cc67a4ef39f526faa5768610eb463e103356b3884ce",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 8713,
+        "sha256": "dd6490f423a3d3fbbe3d17a09e9d7ba2a138b019dae99d560915e2d4bb077360",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/GEOGRAPHY.txt",
+        "bytes": 6198,
+        "sha256": "e7d02e0fa9b471896d50047eefcec8b4d9e2f5acb997975248f3dac9c943e5cc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/LUNA_HISTORY.txt",
+        "bytes": 7043,
+        "sha256": "68f979f0a6d7b2d5dbc4efcdfa6b1064a39a31855bb3dc371c0e8188eed0cdd8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/PUBLISHER.txt",
+        "bytes": 3919,
+        "sha256": "da3c2e8ab4886677efc476b3c7a3a19a7df05a5a88d393ebc0d392d900bd29a4",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 7904,
+      "sha256": "25c68ea54dd61dd7a1116d624393d198acbd6b6339dff01a644b15f54abd03b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/claim.json",
+      "bytes": 834,
+      "sha256": "76274aa4dc8bd988eb4f86741fa2d05a78154f88e15a18837fd87537628950a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/negative-control.json",
+      "bytes": 392,
+      "sha256": "5544890aa0bb0c3fd82974fa2b755a6f72e5237084cc1a5edb999e94555b8a91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/positive-control.json",
+      "bytes": 357,
+      "sha256": "bed4af51be4679b1d3caec7f432505c43843bafd7f0411d5575cd0498c6518d3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/sparse-smoke.json",
+      "bytes": 230,
+      "sha256": "7a200822795766703e7796e15e88a2c463ebe6e6d02c18a6890e8b3c6a46bde0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/validation.txt",
+      "bytes": 400,
+      "sha256": "e421cf60a6760238e8becc0fd0faa4f94f50f1b9389ce78174294501e1bf5bf6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/LOCAL_WORKSPACES.md",
+      "bytes": 6873,
+      "sha256": "a2dd27f2101d94f824eaa57f6aab5f439ec576d1e5ad7964e0444f4a65276f62",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PARALLEL_WORK_PROTOCOL.md",
+      "bytes": 8635,
+      "sha256": "7389d613140686529899528d9ffb441deafac930654d64fc15416b1a4b2dc91e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 15510,
+      "sha256": "7f3ea5ed2f80f009942213dc1f25d20b7a22924f952229e11545571af6a9ae4b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 25378,
+      "sha256": "c6ce3287ad451b7f93d677eee73d3330f9952c57c94cc6a61a11248a506a5e0b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "bytes": 6767,
+      "sha256": "3efe7297e3234203689ab9a73d4cc8d52d4b30a909c849d94fd5d495513a1c75",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 9483,
+      "sha256": "babf9a6b106007c7decb96c2a4e22513a8c5ef600803e9e66d978c1834670690",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "bytes": 6968,
+      "sha256": "d43a5af12ffea4d703ee97fc8a6ec4e999ad812a9a325f2d62c48df81fd3d68e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "bytes": 7813,
+      "sha256": "b7623baf1bb2729b665c920c338085e7a0fc72209091dbb59b8d9fcc7469d1bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "bytes": 4689,
+      "sha256": "2615c8926da9e0ebd14d28af4f789fa2e77217abb2ba1071c0ccea5498ebb47b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/local-workspace.mjs",
+      "bytes": 11411,
+      "sha256": "25aeacbe601ca80fe4942679074c8c9c86002f4ea23c2abaa1d2f91000fac775",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/local-workspace.test.mjs",
+      "bytes": 8596,
+      "sha256": "a91ddd55ea331879da3849de528ab1cf9c7dc26f0ef9df0f2b07574771ecf16f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "local-storage-guard",
+      "kind": "code",
+      "description": "Local Git fixture and real-repository controls for bounded isolated allocation, sparse scope, ownership, preservation and fail-closed release",
+      "software": "Node24, Git, du; no added dependencies",
+      "units": "bytes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/local-workspace.test.mjs",
+    "node scripts/local-workspace.mjs report"
+  ],
+  "validation": [
+    {
+      "method_id": "local-storage-guard",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/local-workspace-budget-20261005/positive-control.json"
+    },
+    {
+      "method_id": "local-storage-guard",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/local-workspace-budget-20261005/negative-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "original_sha256": "c040391c07d9bec1b90e764e6481b2e8fb70cea4da2c4d14b8071843ce441b4a"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/sparse-smoke.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "docs/LOCAL_WORKSPACES.md",
+      "status": "added"
+    },
+    {
+      "path": "docs/PARALLEL_WORK_PROTOCOL.md",
+      "status": "modified",
+      "original_sha256": "fb26fb85d01212596016665c5c6344fd902be525ad0e21686fd6ce9928cd3e98"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "status": "modified",
+      "original_sha256": "f262c464f3e67f062b653e358e69811db1a3b9d39cec7ad9250cb3efbc306501"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "b47d944918335c984ddce7132481dfb0f226adf8004010c2b2fe90cec64b9e7d"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "status": "modified",
+      "original_sha256": "182d5bf992ba0c0f906d8cc67a4ef39f526faa5768610eb463e103356b3884ce"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "dd6490f423a3d3fbbe3d17a09e9d7ba2a138b019dae99d560915e2d4bb077360"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "status": "modified",
+      "original_sha256": "e7d02e0fa9b471896d50047eefcec8b4d9e2f5acb997975248f3dac9c943e5cc"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "status": "modified",
+      "original_sha256": "68f979f0a6d7b2d5dbc4efcdfa6b1064a39a31855bb3dc371c0e8188eed0cdd8"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "status": "modified",
+      "original_sha256": "da3c2e8ab4886677efc476b3c7a3a19a7df05a5a88d393ebc0d392d900bd29a4"
+    },
+    {
+      "path": "scripts/local-workspace.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/local-workspace.test.mjs",
+      "status": "added"
+    }
+  ]
+}
