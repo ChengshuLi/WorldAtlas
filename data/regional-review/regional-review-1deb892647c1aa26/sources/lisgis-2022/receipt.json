@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "retrievals": [
+    {
+      "id": "open-data-license-datasets",
+      "url": "https://lisgis.gov.lr/api/open-data-license/datasets",
+      "retrieved_at_utc": "2026-10-05T00:44:02.365265+00:00",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 515945,
+      "sha256": "e7d19393a7f75ccd18b80181df7c2f0db6e9a129997fd36a4049c649cb6bcfed",
+      "path": "data/regional-review/regional-review-1deb892647c1aa26/sources/lisgis-2022/open-data-license-datasets.json",
+      "top_level_keys": [
+        "datasets"
+      ],
+      "source": null
+    },
+    {
+      "id": "district-boundaries",
+      "url": "https://lisgis.gov.lr/api/visualizations/datasets/geo-districts/2022",
+      "retrieved_at_utc": "2026-10-05T00:44:04.747487+00:00",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 10671308,
+      "sha256": "dde2422c08af1943b7a02efd41a5247254df369a8e8c162a39821eca7f4ec01d",
+      "path": "data/regional-review/regional-review-1deb892647c1aa26/sources/lisgis-2022/district-boundaries.json",
+      "top_level_keys": [
+        "type",
+        "source",
+        "generated_at",
+        "id",
+        "level",
+        "coordinate_reference_system",
+        "features",
+        "description",
+        "period"
+      ],
+      "source": {
+        "organization": "Liberia Institute of Statistics and Geo-Information Services",
+        "dataset": "LISGIS 2022 Population and Housing Census administrative GIS shapefiles",
+        "archive_path": "archive/lisgis-census-2022-gis/",
+        "archive_manifest": "archive/lisgis-census-2022-gis/manifest.json",
+        "source_files": [
+          {
+            "file": "clan2022_pop.cpg",
+            "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+          },
+          {
+            "file": "clan2022_pop.dbf",
+            "sha256": "df77b32809b29c70689736c5c777c20cc74b08fd4943687fd3a705e62fbb674f"
+          },
+          {
+            "file": "clan2022_pop.prj",
+            "sha256": "211c8fe5b7ab6d0e2e621081afc333a888905f824af9240da965029b40978e1b"
+          },
+          {
+            "file": "clan2022_pop.sbn",
+            "sha256": "433f14cba5ef9d5fdaf0e25500b0cc674beb0bf02af83cf6f8eae11aa6ae95f3"
+          },
+          {
+            "file": "clan2022_pop.sbx",
+            "sha256": "775e50da03d999ffd4a5a4aee5999c4f914a02689db91d6f0b623fde5326e669"
+          },
+          {
+            "file": "clan2022_pop.shp",
+            "sha256": "a800d0ef930f9ae31123a969640a2726e1ef40ef801765f66017fc257bb7f5cb"
+          },
+          {
+            "file": "clan2022_pop.shp.xml",
+            "sha256": "e839100f2a5a43f6eb9e6b4eed7e33666980655fa3e671ec47ccc02ce609059d"
+          },
+          {
+            "file": "clan2022_pop.shx",
+            "sha256": "9fea4ab421fbe29364520e1cbd2c9325e96043fd75e3758f56d8ee43d1483832"
+          },
+          {
+            "file": "county2022_pop.cpg",
+            "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+          },
+          {
+            "file": "county2022_pop.dbf",
+            "sha256": "a18434004057ad1be92a3b36b7b9f8eafd5a16ad53e9875c0563c2f0fad91ee5"
+          },
+          {
+            "file": "county2022_pop.prj",
+            "sha256": "211c8fe5b7ab6d0e2e621081afc333a888905f824af9240da965029b40978e1b"
+          },
+          {
+            "file": "county2022_pop.sbn",
+            "sha256": "52da42bb79a50cbeacc94261edb65cd830e2c9a147fd42ee01700c7d66d718e3"
+          },
+          {
+            "file": "county2022_pop.sbx",
+            "sha256": "5fc27da27f9b9d7b02696e911bf33466f919e9476d876cb95c089f767d825edb"
+          },
+          {
+            "file": "county2022_pop.shp",
+            "sha256": "5f6bc89fdcc3f933f009e568cd87f827e3365ca97be8a1f62646af5428f6890a"
+          },
+          {
+            "file": "county2022_pop.shp.xml",
+            "sha256": "caf1817b17c5db92151ab1d1fb52537b18b53531b31af632a8bdb46efc003ea3"
+          },
+          {
+            "file": "county2022_pop.shx",
+            "sha256": "f8c4e2dbb3ecacd9ef0ec2902582e07e958fe811559cd0020edda78991a264e5"
+          },
+          {
+            "file": "district2022_pop.cpg",
+            "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+          },
+          {
+            "file": "district2022_pop.dbf",
+            "sha256": "521eafa1ac71c7eaaedb68f71e3322366760539d298a0426f004909dfd5466ef"
+          },
+          {
+            "file": "district2022_pop.prj",
+            "sha256": "211c8fe5b7ab6d0e2e621081afc333a888905f824af9240da965029b40978e1b"
+          },
+          {
+            "file": "district2022_pop.sbn",
+            "sha256": "f5905dc105fb5d17b8ed627e5beb37e998acf3e69e9ab877f3203087398d751f"
+          },
+          {
+            "file": "district2022_pop.sbx",
+            "sha256": "45a10d6eec918cfc07ebd7e34ef00510d96ebbd2bf812acb7fff4d6bc34d45ff"
+          },
+          {
+            "file": "district2022_pop.shp",
+            "sha256": "8cc50c02dde5fcd3d7f971cb1b56bac4667acb911852e2ae60f4e8438c068829"
+          },
+          {
+            "file": "district2022_pop.shp.xml",
+            "sha256": "9064c5551be68d1b16a1f743b4f27121d7c91c18fff10316c5a705aefc45f38a"
+          },
+          {
+            "file": "district2022_pop.shx",
+            "sha256": "a6c2392ee542b46015040942f6097a154ffce91ed2b68e69bea442ec88c510ef"
+          }
+        ],
+        "source_crs": "WGS_1984_UTM_Zone_29N (EPSG:32629)",
+        "reprojected_to": "EPSG:4326",
+        "geometry_processing": "GDAL reprojection from EPSG:32629 to EPSG:4326; Mapshaper polygon normalization only"
+      }
+    },
+    {
+      "id": "county-boundaries",
+      "url": "https://lisgis.gov.lr/api/visualizations/datasets/geo-counties/2022",
+      "retrieved_at_utc": "2026-10-05T00:44:06.578645+00:00",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 3210101,
+      "sha256": "4f0df64d1a19d8a5a4ac48d4d87a1c034b3a9dd5f228fdd372e3a430d44e5cd5",
+      "path": "data/regional-review/regional-review-1deb892647c1aa26/sources/lisgis-2022/county-boundaries.json",
+      "top_level_keys": [
+        "type",
+        "source",
+        "generated_at",
+        "id",
+        "level",
+        "coordinate_reference_system",
+        "features",
+        "description",
+        "period"
+      ],
+      "source": {
+        "organization": "Liberia Institute of Statistics and Geo-Information Services",
+        "dataset": "LISGIS 2022 Population and Housing Census administrative GIS shapefiles",
+        "archive_path": "archive/lisgis-census-2022-gis/",
+        "archive_manifest": "archive/lisgis-census-2022-gis/manifest.json",
+        "source_files": [
+          {
+            "file": "clan2022_pop.cpg",
+            "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+          },
+          {
+            "file": "clan2022_pop.dbf",
+            "sha256": "df77b32809b29c70689736c5c777c20cc74b08fd4943687fd3a705e62fbb674f"
+          },
+          {
+            "file": "clan2022_pop.prj",
+            "sha256": "211c8fe5b7ab6d0e2e621081afc333a888905f824af9240da965029b40978e1b"
+          },
+          {
+            "file": "clan2022_pop.sbn",
+            "sha256": "433f14cba5ef9d5fdaf0e25500b0cc674beb0bf02af83cf6f8eae11aa6ae95f3"
+          },
+          {
+            "file": "clan2022_pop.sbx",
+            "sha256": "775e50da03d999ffd4a5a4aee5999c4f914a02689db91d6f0b623fde5326e669"
+          },
+          {
+            "file": "clan2022_pop.shp",
+            "sha256": "a800d0ef930f9ae31123a969640a2726e1ef40ef801765f66017fc257bb7f5cb"
+          },
+          {
+            "file": "clan2022_pop.shp.xml",
+            "sha256": "e839100f2a5a43f6eb9e6b4eed7e33666980655fa3e671ec47ccc02ce609059d"
+          },
+          {
+            "file": "clan2022_pop.shx",
+            "sha256": "9fea4ab421fbe29364520e1cbd2c9325e96043fd75e3758f56d8ee43d1483832"
+          },
+          {
+            "file": "county2022_pop.cpg",
+            "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+          },
+          {
+            "file": "county2022_pop.dbf",
+            "sha256": "a18434004057ad1be92a3b36b7b9f8eafd5a16ad53e9875c0563c2f0fad91ee5"
+          },
+          {
+            "file": "county2022_pop.prj",
+            "sha256": "211c8fe5b7ab6d0e2e621081afc333a888905f824af9240da965029b40978e1b"
+          },
+          {
+            "file": "county2022_pop.sbn",
+            "sha256": "52da42bb79a50cbeacc94261edb65cd830e2c9a147fd42ee01700c7d66d718e3"
+          },
+          {
+            "file": "county2022_pop.sbx",
+            "sha256": "5fc27da27f9b9d7b02696e911bf33466f919e9476d876cb95c089f767d825edb"
+          },
+          {
+            "file": "county2022_pop.shp",
+            "sha256": "5f6bc89fdcc3f933f009e568cd87f827e3365ca97be8a1f62646af5428f6890a"
+          },
+          {
+            "file": "county2022_pop.shp.xml",
+            "sha256": "caf1817b17c5db92151ab1d1fb52537b18b53531b31af632a8bdb46efc003ea3"
+          },
+          {
+            "file": "county2022_pop.shx",
+            "sha256": "f8c4e2dbb3ecacd9ef0ec2902582e07e958fe811559cd0020edda78991a264e5"
+          },
+          {
+            "file": "district2022_pop.cpg",
+            "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+          },
+          {
+            "file": "district2022_pop.dbf",
+            "sha256": "521eafa1ac71c7eaaedb68f71e3322366760539d298a0426f004909dfd5466ef"
+          },
+          {
+            "file": "district2022_pop.prj",
+            "sha256": "211c8fe5b7ab6d0e2e621081afc333a888905f824af9240da965029b40978e1b"
+          },
+          {
+            "file": "district2022_pop.sbn",
+            "sha256": "f5905dc105fb5d17b8ed627e5beb37e998acf3e69e9ab877f3203087398d751f"
+          },
+          {
+            "file": "district2022_pop.sbx",
+            "sha256": "45a10d6eec918cfc07ebd7e34ef00510d96ebbd2bf812acb7fff4d6bc34d45ff"
+          },
+          {
+            "file": "district2022_pop.shp",
+            "sha256": "8cc50c02dde5fcd3d7f971cb1b56bac4667acb911852e2ae60f4e8438c068829"
+          },
+          {
+            "file": "district2022_pop.shp.xml",
+            "sha256": "9064c5551be68d1b16a1f743b4f27121d7c91c18fff10316c5a705aefc45f38a"
+          },
+          {
+            "file": "district2022_pop.shx",
+            "sha256": "a6c2392ee542b46015040942f6097a154ffce91ed2b68e69bea442ec88c510ef"
+          }
+        ],
+        "source_crs": "WGS_1984_UTM_Zone_29N (EPSG:32629)",
+        "reprojected_to": "EPSG:4326",
+        "geometry_processing": "GDAL reprojection from EPSG:32629 to EPSG:4326; Mapshaper polygon normalization only"
+      }
+    }
+  ]
+}
