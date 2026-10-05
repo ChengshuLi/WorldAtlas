@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "retrieval_date_utc": "2026-10-05",
+  "retrieval_method": "HTTPS via official SORS links; strict TLS verification against locally trusted macOS CA bundle; page-referer required for asset server",
+  "sources": [
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-cities-municipalities-2017.xls",
+      "url": "https://www.stat.gov.rs/media/2695/opstine-gradovi-2017.xls",
+      "role": "2017 dated list of cities and municipalities, official SORS archive",
+      "retrieved_at_utc": "2026-10-05",
+      "bytes": 61952,
+      "sha256": "75a7236c08c13b43bebc12a797456de74bfa9e1dd6f352a821efbce271cd4d62",
+      "license": "SORS website terms permit saving, reproducing, distributing, sharing and commercial/non-commercial use unless otherwise specified; cite SORS as original source and clearly mark changes."
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-cities-municipalities-current-2026-10-05.xlsx",
+      "url": "https://www.stat.gov.rs/media/412350/sifarnikgradovi-opstine-tekucestanje.xlsx",
+      "role": "Current-state SORS cities/municipalities code list retrieved 2026-10-05",
+      "retrieved_at_utc": "2026-10-05",
+      "bytes": 18810,
+      "sha256": "3a7790a65c77a537da848a66c71ba1495c5e0bdfe1021587979a551dcb7ebafa",
+      "license": "SORS website terms permit saving, reproducing, distributing, sharing and commercial/non-commercial use unless otherwise specified; cite SORS as original source and clearly mark changes."
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-administrative-areas-regions-2017.pdf",
+      "url": "https://www.stat.gov.rs/media/2720/oblasti-regioni_2017.pdf",
+      "role": "2017 SORS map of municipalities/cities by administrative areas and regions, with RGA cartographic base",
+      "retrieved_at_utc": "2026-10-05",
+      "bytes": 2299801,
+      "sha256": "7f204523f91cf586c5a073b834e8220e027b014b25b2d9b74167e8a1599a458e",
+      "license": "SORS website terms permit saving, reproducing, distributing, sharing and commercial/non-commercial use unless otherwise specified; cite SORS as original source and clearly mark changes."
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/geoBoundaries-SRB-ADM2-2017.geojson",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SRB/ADM2/geoBoundaries-SRB-ADM2.geojson",
+      "role": "Exact original 145-feature geoBoundaries SRB ADM2 GeoJSON used by #422; inspect source name/shape IDs and preserve the prior evidence crosswalk",
+      "source_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at_utc": "2026-10-05",
+      "bytes": 1653192,
+      "sha256": "f94ba868818e4f87dd24bc97aeaf37732cc23f6744facd1010cd91d2349fc884",
+      "boundary_year_metadata": "2017",
+      "source_data_update_date_metadata": "Thu Jan 19 07:31:04 2023",
+      "build_date_metadata": "Dec 12, 2023",
+      "license": "Per retained source metadata: Open Data Commons Open Database License 1.0, license source https://www.openstreetmap.org/copyright. The retained geoBoundaries citation notice also requires attribution to geoBoundaries and citation of individual boundary sources; see source/gb/SRB-ADM2-CITATION-AND-USE-geoBoundaries.txt and upstream source metadata."
+    }
+  ]
+}
