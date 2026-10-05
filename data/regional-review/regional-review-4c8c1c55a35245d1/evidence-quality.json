@@ -236,27 +236,15 @@
     "commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f",
     "files": [
       {
-        "path": "data/hierarchy.json",
-        "bytes": 10164089,
-        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
         "hash_kind": "file-bytes"
       },
       {
-        "path": "data/geographic-decisions/africa.json",
-        "bytes": 3755777,
-        "sha256": "5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7",
-        "hash_kind": "file-bytes"
-      },
-      {
-        "path": "data/world-index.json",
-        "bytes": 944,
-        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
-        "hash_kind": "file-bytes"
-      },
-      {
-        "path": "data/administrative-sources.json",
-        "bytes": 661416,
-        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "path": "data/location-policy.json",
+        "bytes": 69433,
+        "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
         "hash_kind": "file-bytes"
       },
       {
@@ -266,9 +254,15 @@
         "hash_kind": "file-bytes"
       },
       {
-        "path": "data/geography/part-5.json",
-        "bytes": 5226173,
-        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
         "hash_kind": "file-bytes"
       },
       {
@@ -278,9 +272,15 @@
         "hash_kind": "file-bytes"
       },
       {
-        "path": "data/location-policy.json",
-        "bytes": 69433,
-        "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-decisions/africa.json",
+        "bytes": 3755777,
+        "sha256": "5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7",
         "hash_kind": "file-bytes"
       }
     ],
@@ -531,12 +531,12 @@
     {
       "id": "gb:CAF:ADM3",
       "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CAF/ADM3",
-      "role": "geoBoundaries metadata labels the source ACTED/OCHA and ADM3 Municipalities; evaluated as municipality candidates",
+      "role": "geoBoundaries metadata calls the ADM3 layer Municipalities and identifies ACTED/OCHA; evaluated as commune/municipality candidates",
       "vintage": "2018 represented; immutable release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "redistributable",
-        "terms": "CC BY 3.0 IGO per pinned source metadata; retain attribution to geoBoundaries and ACTED/OCHA"
+        "terms": "CC BY 3.0 IGO per pinned metadata; retain geoBoundaries and ACTED/OCHA attribution"
       },
       "retention": "retained",
       "verification": "verified",
@@ -559,12 +559,12 @@
     {
       "id": "gb:CMR:ADM3",
       "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CMR/ADM3",
-      "role": "geoBoundaries metadata reports OpenStreetMap/Wambacher and blank canonical-boundary role; evaluated as subdivision candidates",
+      "role": "geoBoundaries metadata reports OpenStreetMap/Wambacher and leaves the canonical-boundary role blank; evaluated as local subdivision candidates",
       "vintage": "2017 represented; immutable release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "redistributable",
-        "terms": "ODbL 1.0 per pinned source metadata; attribution to OSM/Wambacher and geoBoundaries; downstream database obligations require review"
+        "terms": "ODbL 1.0 per pinned metadata; attribute OSM/Wambacher and geoBoundaries; assess downstream database obligations"
       },
       "retention": "retained",
       "verification": "verified",
@@ -587,18 +587,18 @@
     {
       "id": "official:CMR:MINAT",
       "url": "https://minat.gov.cm/presentation/services-locaux/",
-      "role": "Ministry of Territorial Administration count and tier explanation",
+      "role": "Ministry of Territorial Administration tier/count explanation",
       "vintage": "Accessed 2026-10-05 UTC",
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "unknown",
-        "terms": "No reuse terms identified; cited for review only."
+        "terms": "No reuse terms identified; cited for research only."
       },
       "retention": "restoration-only",
-      "restoration": "Open sections LES DÉPARTEMENTS and LES ARRONDISSEMENTS; recapture dated citation if page changes.",
-      "limit": "Hierarchy/counts only; no feature crosswalk or boundary polygons.",
       "verification": "verified",
-      "temporal_status": "reference"
+      "temporal_status": "reference",
+      "restoration": "Open sections LES DÉPARTEMENTS and LES ARRONDISSEMENTS; retain dated citations if updated.",
+      "limit": "Hierarchy/counts only; no feature crosswalk or boundary polygons."
     },
     {
       "id": "official:CMR:INS-ECAM5",
@@ -608,29 +608,29 @@
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "unknown",
-        "terms": "No reuse terms identified; cited for review only."
+        "terms": "No reuse terms identified; cited for research only."
       },
       "retention": "restoration-only",
-      "restoration": "Retrieve PDF; require SHA-256 6687f529f5e8e46d2d310fb0b5ba583f2d7db4d8f74e4dcc74550ecc328e7339; inspect pages 3-10.",
-      "limit": "Reuse terms not identified; statistical 2021 list is not current boundary geometry; contains a duplicate scoped code.",
       "verification": "verified",
-      "temporal_status": "reference"
+      "temporal_status": "reference",
+      "restoration": "Retrieve the PDF and require SHA-256 6687f529f5e8e46d2d310fb0b5ba583f2d7db4d8f74e4dcc74550ecc328e7339; inspect pp. 3–10.",
+      "limit": "Reuse terms not identified; 2021 statistical list is not current boundary geometry and duplicates one scoped code."
     },
     {
       "id": "official:CAF:Justice",
       "url": "https://justice.gouv.cf/actualites/190/bruxelles-discours-du-ministre-detat-charge-de-la-justice-garde-des-sceaux-dr-arnaud",
-      "role": "Ministry of Justice statement on laws 21.001 and 23.004 and current count",
-      "vintage": "Accessed 2026-10-05 UTC; laws dated 2021 and 2023",
+      "role": "Ministry of Justice statement on laws 21.001/2021, 23.004/2023 and current counts",
+      "vintage": "Accessed 2026-10-05 UTC",
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "unknown",
-        "terms": "No reuse terms identified; cited for review only."
+        "terms": "No reuse terms identified; cited for research only."
       },
       "retention": "restoration-only",
-      "restoration": "Open linked Ministry page and verify the paragraph naming both laws and functioning subdivisions.",
-      "limit": "No list of scoped historical units or boundary geometry; reuse terms unstated.",
       "verification": "verified",
-      "temporal_status": "reference"
+      "temporal_status": "reference",
+      "restoration": "Open the Ministry page and inspect the paragraph naming laws and functioning subdivisions.",
+      "limit": "No list of scoped historical units or boundary geometry; reuse terms unstated."
     },
     {
       "id": "official:CAF:Government",
@@ -640,13 +640,13 @@
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "unknown",
-        "terms": "No reuse terms identified; cited for review only."
+        "terms": "No reuse terms identified; cited for research only."
       },
       "retention": "restoration-only",
-      "restoration": "Open page and inspect Organisation administrative; establish page date before relying on counts.",
-      "limit": "Undated and conflicts with later Justice Ministry prefecture count; no crosswalk/geometries.",
       "verification": "verified",
-      "temporal_status": "reference"
+      "temporal_status": "reference",
+      "restoration": "Open page and inspect Organisation administrative; establish the page date before relying on counts.",
+      "limit": "Undated, counts conflict with later Justice Ministry prefecture count; no crosswalk/geometries."
     },
     {
       "id": "legal:CAF:Constitution",
@@ -656,32 +656,26 @@
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "unknown",
-        "terms": "No reuse terms identified; cited for review only."
+        "terms": "No reuse terms identified; cited for research only."
       },
       "retention": "restoration-only",
-      "restoration": "Inspect Article 102 and compare applicability to 2021/2023 laws.",
-      "limit": "Older constitutional text; not a current unit list; reuse terms unstated.",
       "verification": "verified",
-      "temporal_status": "reference"
+      "temporal_status": "reference",
+      "restoration": "Inspect Article 102 and compare applicability to 2021/2023 laws.",
+      "limit": "Older constitutional text; not a current unit list; reuse terms unstated."
     }
   ],
   "outputs": [
     {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/README.md",
-      "bytes": 6360,
-      "sha256": "3292e53c9fb84dc9b6cae6da2a5ea8e325cd3b01fc55ba12560f2c84c467537c",
+      "bytes": 6848,
+      "sha256": "7d276001ec3f91ca059efb45a96755fa4e895c14cc4ecc2fbd5dd92f8ddbbd48",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/issue-scope.json",
-      "bytes": 23938,
-      "sha256": "db9b70ef30aaf2c3d9be76d8988121005700c46f057a2161ef8f785ac38de749",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-inventory.json",
-      "bytes": 9841,
-      "sha256": "ee3690b2f43c8dc0cc5c55768b8d11aa821ae22760cf2dd9b193a22e8225a655",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/area-assessments.json",
+      "bytes": 9576,
+      "sha256": "0eb963a068360da3a97307d7af731cdc7d45ed5855690947bc3d85c048c7de76",
       "hash_kind": "file-bytes"
     },
     {
@@ -691,21 +685,33 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/follow-up-recommendations.json",
+      "bytes": 2849,
+      "sha256": "9b06500df8ff23eeaa2da7195b89b1b351b553e8c5230d37f35c449fde66fb49",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/geometry-negative-control.json",
+      "bytes": 374,
+      "sha256": "bbd46e8505c476bcde5c098d61c2c942c716eccfe8dbef20ca445b7c1b4b3f2f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/geometry-positive-control.json",
+      "bytes": 329,
+      "sha256": "97cba8ddf789b629a1d5334b175b9dde227296727a27d7c9139dff701a32d69c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/issue-scope.json",
+      "bytes": 23938,
+      "sha256": "db9b70ef30aaf2c3d9be76d8988121005700c46f057a2161ef8f785ac38de749",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/location-assessments.json",
-      "bytes": 236058,
-      "sha256": "5c66d4bbcd59d33cc8ea197db785c239abb86ebb93c9f3eac88d82cb714f30f9",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/province-assessments.json",
-      "bytes": 46490,
-      "sha256": "dc5e84de357b9ab2589d5e765957fb2004b94364b6851f5700988f649727e96b",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/area-assessments.json",
-      "bytes": 11828,
-      "sha256": "3c0297c1d5adc9c16eab66b743b0a94773cacbc945b8b5ec03554adb2e41aebd",
+      "bytes": 197469,
+      "sha256": "e2cbbb483dcea29f2f91d4aa974ab0dd2822f1b1b916dc3d75d12ff2e8e46d15",
       "hash_kind": "file-bytes"
     },
     {
@@ -715,41 +721,81 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/packet-generator-negative-control.json",
+      "bytes": 151,
+      "sha256": "e99f105e374a277597a9e22b0aab08bf75e1233aa75d20b0d75e0fb71e100122",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/packet-generator-positive-control.json",
+      "bytes": 156,
+      "sha256": "0126dcf29f3e35504c4b92b994b310e1c74c8e61a520666913a71ba96d23bd92",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/province-assessments.json",
+      "bytes": 36859,
+      "sha256": "f70b1152c54925abcbbb2693e0365919ffd67c1df81098b59c4ffb0d15da4420",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/reproduce.py",
+      "bytes": 18412,
+      "sha256": "d6bf4e12fd83f3afdf9bc7c86cb1ae5b87be19197484fa48ecc57007ac36d5a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/reproducibility.json",
+      "bytes": 1263,
+      "sha256": "b4e585b5bef905359f5ed43417c006fb0fd87af6143bc267106df3b9bea68fb0",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-geometry-screen.csv",
       "bytes": 49185,
       "sha256": "324e373aa4a762399e81c11c52926f70fc7258b5e78b082be49d18aeba292d9e",
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-inventory.json",
+      "bytes": 9841,
+      "sha256": "ee3690b2f43c8dc0cc5c55768b8d11aa821ae22760cf2dd9b193a22e8225a655",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
-      "bytes": 1340,
-      "sha256": "7e31945ae33b38a23a29a6ced2ea6b4661e80c4cf1faa564bb53cee90b1fdc23",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/follow-up-recommendations.json",
-      "bytes": 2849,
-      "sha256": "9b06500df8ff23eeaa2da7195b89b1b351b553e8c5230d37f35c449fde66fb49",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/reproduce.py",
-      "bytes": 15435,
-      "sha256": "eaddd577bc0e8f22748de4bcc9c922b3cffd07000f229fd98382450a3ecade46",
+      "bytes": 1119,
+      "sha256": "bcc68eb87a02d2dcbe083d358bde49d5ff4364cb2a4e006b2f82e2fde892546f",
       "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
-      "id": "geometry-v1",
+      "id": "source-role-crosswalk",
+      "kind": "source",
+      "description": "Match each exact source ID/name to the pinned upstream feature and compare the CMR source/name/Atlas-parent rows with the retained 2021 official statistical nomenclature. Record count/hierarchy statements and crosswalk mismatch limits, not current legal polygon correctness.",
+      "software": "Python 3.12.14 standard library",
+      "units": "features and source-name/parent rows"
+    },
+    {
+      "id": "geometry-screen",
       "kind": "geography",
-      "description": "Identity and raw-name comparison; reversible UTF-8 bytes decoded from Latin-1; polygon canonicalization and symmetric difference; WGS84 ellipsoidal land area. Values are diagnostic, not boundary adjudication.",
+      "description": "Canonicalize raw source and baseline Atlas polygons with shared v1 method; compare ellipsoidal land areas and symmetric-difference areas. Inspect multipart/component count and relative area. Diagnostic lineage screens only; no legal boundary inference.",
       "software": "Python 3.12.14; shared scripts/evidence/geometry.py v1; pyproj 3.7.2; Shapely 2.1.2; NumPy 2.3.5",
-      "units": "feature count; square metres; percent",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "units": "features; square metres; percent",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326",
-      "area_method": "Shared geometry.py v1 ellipsoidal land_area_m2 on WGS84 with polygon canonical_land normalization",
-      "distance_method": "Not measured; no distance threshold used"
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic"
+    },
+    {
+      "id": "packet-generator",
+      "kind": "generator",
+      "description": "Read immutable baseline subjects and retained sources; deterministically materialize per-location, parent, area and diagnostic outputs using shared canonical JSON serialization.",
+      "software": "Python 3.12.14; scripts/evidence/immutable.py canonical_json; reproduce.py",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "units": "subjects, groups, bytes and diagnostic metrics"
     }
   ],
   "metrics": [
@@ -762,7 +808,7 @@
       "evaluation_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f"
     },
     {
-      "id": "CAF_exact_names",
+      "id": "CAF_exact_source_names",
       "value": 92,
       "unit": "features",
       "vintage": "baseline",
@@ -778,7 +824,7 @@
       "evaluation_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f"
     },
     {
-      "id": "CMR_exact_names",
+      "id": "CMR_exact_source_names",
       "value": 101,
       "unit": "features",
       "vintage": "baseline",
@@ -810,20 +856,106 @@
       "evaluation_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f"
     },
     {
-      "id": "CMR_geometry_area_delta_over_5pct",
+      "id": "CMR_geometry_delta_over_5_percent",
       "value": 4,
       "unit": "features",
       "vintage": "baseline",
-      "input_sha256": "9d0ff998057c3afe7f3a6334d71e9d7c353c64fe6e7c35b01fe14d804c97f04b",
+      "input_sha256": "324e373aa4a762399e81c11c52926f70fc7258b5e78b082be49d18aeba292d9e",
       "evaluation_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f"
     },
     {
-      "id": "all_source_atlas_geometry_exact",
-      "value": 0,
-      "unit": "geometries",
+      "id": "CMR_multipart_source_features",
+      "value": 1,
+      "unit": "features",
       "vintage": "baseline",
       "input_sha256": "324e373aa4a762399e81c11c52926f70fc7258b5e78b082be49d18aeba292d9e",
       "evaluation_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f"
+    },
+    {
+      "id": "CMR_multipart_atlas_features",
+      "value": 6,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "324e373aa4a762399e81c11c52926f70fc7258b5e78b082be49d18aeba292d9e",
+      "evaluation_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f"
+    },
+    {
+      "id": "CMR_component_count_changed",
+      "value": 5,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "324e373aa4a762399e81c11c52926f70fc7258b5e78b082be49d18aeba292d9e",
+      "evaluation_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f"
+    },
+    {
+      "id": "source_atlas_geometry_exact",
+      "value": 0,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "324e373aa4a762399e81c11c52926f70fc7258b5e78b082be49d18aeba292d9e",
+      "evaluation_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "CAF_scoped_source_ids",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/countries/CAF/features"
+    },
+    {
+      "metric_id": "CAF_exact_source_names",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/countries/CAF/source_names_exact"
+    },
+    {
+      "metric_id": "CMR_scoped_source_ids",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/countries/CMR/features"
+    },
+    {
+      "metric_id": "CMR_exact_source_names",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/countries/CMR/source_names_exact"
+    },
+    {
+      "metric_id": "CMR_reversible_name_repairs",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/countries/CMR/source_names_encoding_repaired"
+    },
+    {
+      "metric_id": "CMR_official_name_parent_matches",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/official_name_parent_matches"
+    },
+    {
+      "metric_id": "CMR_official_name_parent_unmatched",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/official_name_parent_unmatched"
+    },
+    {
+      "metric_id": "CMR_geometry_delta_over_5_percent",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/geometry_delta_over_5_percent"
+    },
+    {
+      "metric_id": "CMR_multipart_source_features",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/multipart_source_features"
+    },
+    {
+      "metric_id": "CMR_multipart_atlas_features",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/multipart_atlas_features"
+    },
+    {
+      "metric_id": "CMR_component_count_changed",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/source_atlas_component_count_changed"
+    },
+    {
+      "metric_id": "source_atlas_geometry_exact",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/source_atlas_geometry_exact"
     }
   ],
   "summaries": [
@@ -833,7 +965,7 @@
       "unit": "features"
     },
     {
-      "metric_id": "CAF_exact_names",
+      "metric_id": "CAF_exact_source_names",
       "value": 92,
       "unit": "features"
     },
@@ -843,7 +975,7 @@
       "unit": "features"
     },
     {
-      "metric_id": "CMR_exact_names",
+      "metric_id": "CMR_exact_source_names",
       "value": 101,
       "unit": "features"
     },
@@ -863,19 +995,34 @@
       "unit": "rows"
     },
     {
-      "metric_id": "CMR_geometry_area_delta_over_5pct",
+      "metric_id": "CMR_geometry_delta_over_5_percent",
       "value": 4,
       "unit": "features"
     },
     {
-      "metric_id": "all_source_atlas_geometry_exact",
+      "metric_id": "CMR_multipart_source_features",
+      "value": 1,
+      "unit": "features"
+    },
+    {
+      "metric_id": "CMR_multipart_atlas_features",
+      "value": 6,
+      "unit": "features"
+    },
+    {
+      "metric_id": "CMR_component_count_changed",
+      "value": 5,
+      "unit": "features"
+    },
+    {
+      "metric_id": "source_atlas_geometry_exact",
       "value": 0,
-      "unit": "geometries"
+      "unit": "features"
     }
   ],
   "conclusions": [
     {
-      "text": "All issue-scoped source IDs/names were found; source layer roles and current legal identities remain distinct questions.",
+      "text": "All exact issue-scoped source IDs were found and the two retained sources support distinct but still unverified current legal roles.",
       "status": "supported",
       "source_ids": [
         "gb:CAF:ADM3",
@@ -891,7 +1038,7 @@
       ]
     },
     {
-      "text": "The exact current legal boundary and full-area completeness of scoped Cameroon and CAR units are unverified.",
+      "text": "The current legal boundary, complete national coverage, disconnected/island/city-fragment treatment and full parent fit remain unresolved for both scoped countries.",
       "status": "unresolved",
       "source_ids": [
         "gb:CAF:ADM3",
@@ -901,7 +1048,7 @@
       ]
     },
     {
-      "text": "Historical cache hash meaning and source-to-Atlas geometry preparation lineage are unresolved.",
+      "text": "Historical cache hash meaning and source-to-Atlas geometry preparation lineage remain unresolved.",
       "status": "unresolved",
       "source_ids": [
         "gb:CAF:ADM3",
@@ -916,12 +1063,157 @@
   },
   "commands": [
     "PYTHONPATH=scripts python3 data/regional-review/regional-review-4c8c1c55a35245d1/reproduce.py",
+    "Run the reproduce.py command a second time and compare the whole-file hash bundle recorded in reproducibility.json.",
     "node scripts/evidence-quality.mjs data/regional-review/regional-review-4c8c1c55a35245d1/evidence-quality.json"
   ],
   "limits": [
     "Official PDF cited but not redistributed because reuse terms were not identified.",
     "No current authoritative boundary polygons were obtained.",
-    "Issue vintage pins were retained in issue-scope.json; baseline pins bind separately to exact files at the fresh commit.",
-    "Evidence-quality hash validation does not establish factual truth or geographic correctness."
+    "Issue-vintage pins are preserved in issue-scope.json; evidence baseline pins bind separately to actual files at the research baseline commit.",
+    "Hashes and controls verify reproducibility/scope and method behavior, not factual correctness or geographic approval."
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/area-assessments.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/findings.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/follow-up-recommendations.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/geometry-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/geometry-positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/issue-scope.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/location-assessments.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/official-cmr-parent-crosswalk.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/packet-generator-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/packet-generator-positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/province-assessments.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/reproduce.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/reproducibility.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-geometry-screen.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-inventory.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/sources/geoBoundaries-CAF-ADM3.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/sources/geoBoundaries-CMR-ADM3.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/sources/geoboundaries-CAF-ADM3-metadata.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/sources/geoboundaries-CMR-ADM3-metadata.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "geometry-screen",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-4c8c1c55a35245d1/geometry-positive-control.json"
+    },
+    {
+      "method_id": "geometry-screen",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-4c8c1c55a35245d1/geometry-negative-control.json"
+    },
+    {
+      "method_id": "packet-generator",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-4c8c1c55a35245d1/packet-generator-positive-control.json"
+    },
+    {
+      "method_id": "packet-generator",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-4c8c1c55a35245d1/packet-generator-negative-control.json"
+    },
+    {
+      "method_id": "packet-generator",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-4c8c1c55a35245d1/reproducibility.json"
+    }
   ]
 }

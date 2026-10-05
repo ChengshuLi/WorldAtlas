@@ -25,7 +25,8 @@ def read_json_at(path: str):
     return json.loads(raw_at(path))
 
 def write_json(path: str, value):
-    (HERE / path).write_text(json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+    from evidence.immutable import canonical_json
+    (HERE / path).write_bytes(canonical_json(value))
 
 def name_key(value: str) -> str:
     folded = unicodedata.normalize("NFKD", value).casefold()
@@ -241,6 +242,26 @@ def main():
     assert len(location_rows) == len(wanted) == 226
     assert len(province_rows) == len(scope["province_scopes"])
     assert len(area_rows) == len(scope["area_scopes"])
+
+    # Generator controls: accept the exact recorded roster and reject a roster
+    # that omits a real subject. This validates the mechanism, not geography.
+    def validate_roster(actual, expected):
+        if len(actual) != len(set(actual)) or set(actual) != set(expected):
+            raise ValueError("subject roster is not an exact unique match")
+    validate_roster(sorted(raw_sources), wanted)
+    generator_positive = {"version": 1, "method_id": "packet-generator", "kind": "positive-control", "outcome": "passed",
+        "subjects": len(location_rows), "provinces": len(province_rows), "areas": len(area_rows),
+        "all_subjects_found": len(raw_sources) == len(wanted)}
+    negative_rejected = False
+    try:
+        validate_roster(sorted(raw_sources)[1:], wanted)
+    except ValueError:
+        negative_rejected = True
+    assert negative_rejected
+    generator_negative = {"version": 1, "method_id": "packet-generator", "kind": "negative-control", "outcome": "passed",
+        "control": "reject incomplete subject roster", "rejected": negative_rejected}
+    write_json("packet-generator-positive-control.json", generator_positive)
+    write_json("packet-generator-negative-control.json", generator_negative)
     write_json("location-assessments.json", {"assessment_status": "initial review; not regional certification", "locations": location_rows})
     write_json("province-assessments.json", {"provinces": province_rows})
     write_json("area-assessments.json", {"areas": area_rows})
@@ -279,6 +300,27 @@ def main():
         "limit": "These checks do not prove legal boundaries, official completeness, adjacency, or land coverage.",
     }
     write_json("source-screen-results.json", measured)
+
+    # Positive control: identical geometry has no symmetric difference and a
+    # finite positive WGS84 area. Negative control: observed Zina polygons are
+    # materially different; this is a screen trigger, not proof which is legal.
+    control_id = "gb:CAF:ADM3:52401652B11380714258081"
+    control_geom = canonical_land(shape(raw_sources[control_id]["geometry"]))
+    positive = symmetric_difference(control_geom, control_geom)
+    positive_control = {"version": 1, "method_id": "geometry-screen", "kind": "positive-control", "outcome": "passed",
+        "feature_id": control_id, "control": "identical normalized polygon pair has zero symmetric-difference area",
+        "expected_symmetric_difference_m2": 0.0, "observed_symmetric_difference_m2": 0.0 if positive.is_empty else geometry_area(positive),
+        "land_area_m2": round(geometry_area(control_geom), 3)}
+    assert positive.is_empty and positive_control["land_area_m2"] > 0
+    negative_id = "gb:CMR:ADM3:9386221B59068819347143"  # Zina
+    negative_row = next(x for x in geom_rows if x["location_id"] == negative_id)
+    negative_control = {"version": 1, "method_id": "geometry-screen", "kind": "negative-control", "outcome": "passed",
+        "feature_id": negative_id, "control": "known observed source/Atlas pair exceeds the 10% diagnostic symmetric-difference threshold",
+        "threshold_percent": 10.0, "observed_percent": negative_row["symmetric_difference_pct_of_larger"],
+        "interpretation": "lineage review trigger only; not a legal boundary error test"}
+    assert negative_control["observed_percent"] > negative_control["threshold_percent"]
+    write_json("geometry-positive-control.json", positive_control)
+    write_json("geometry-negative-control.json", negative_control)
     print(json.dumps(measured, ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":
