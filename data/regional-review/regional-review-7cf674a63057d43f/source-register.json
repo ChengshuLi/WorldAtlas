@@ -1,0 +1,190 @@
+{
+  "review_date": "2026-10-05",
+  "issue": 443,
+  "retained_sources": [
+    {
+      "id": "issue-443-api-snapshot",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/443",
+      "retrieved_on": "2026-10-05",
+      "path": "source/issue-443-api-snapshot.json",
+      "sha256": "1336f94a586137856691f3831c3a0287a6591ba912f49e2314c51fd52a53a293",
+      "bytes": 25752,
+      "license": "Repository issue metadata; retained as the exact scope contract and API response used for this packet."
+    },
+    {
+      "id": "geoboundaries-arg-adm1-2006",
+      "canonical_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ARG/ADM1/geoBoundaries-ARG-ADM1.geojson",
+      "github_contents_api_url": "https://api.github.com/repos/wmgeolab/geoBoundaries/contents/releaseData/gbOpen/ARG/ADM1/geoBoundaries-ARG-ADM1.geojson?ref=9469f09",
+      "lfs_download_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/ARG/ADM1/geoBoundaries-ARG-ADM1.geojson",
+      "retrieved_on": "2026-10-05",
+      "upstream_commit": "9469f09",
+      "github_blob_sha": "36f9928b436d49cae2c60db4d4dbd600b1875a0e",
+      "upstream_reported_bytes": 201505,
+      "lfs_oid_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
+      "lfs_pointer_path": "source/geoBoundaries-ARG-ADM1/geoBoundaries-ARG-ADM1.geojson.lfs-pointer.txt",
+      "lfs_pointer_sha256": "39d96c042d8ed79688443778720eb63d209f404b513754084b58f0dd923b9338",
+      "sha256_uncompressed": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
+      "retained_path": "source/geoBoundaries-ARG-ADM1/geoBoundaries-ARG-ADM1.geojson",
+      "license": "CC BY 2.5 Generic, as declared in the matching retained metadata JSON.",
+      "metadata": {
+        "retained_path": "source/geoBoundaries-ARG-ADM1/geoBoundaries-ARG-ADM1-metaData.json",
+        "sha256": "328f5cbf32c674fc4d8a58553909e501634ee46edcc5044cfa076783d3e6feed",
+        "bytes": 810,
+        "published_boundary_year": 2006,
+        "source_data_update_date": "2023-01-19",
+        "build_date": "2023-12-12",
+        "declared_source": "geoBoundaries, Wikimedia",
+        "declared_canonical_role": "Province",
+        "declared_admin_unit_count": 23,
+        "license": "Creative Commons Attribution 2.5 Generic"
+      },
+      "conflicts": {
+        "repository_administrative_sources_expected_sha256": "7cc9b00ba139e57f59611993d96d07eb84d955ed5bd6bd6f1dcb864e1baf549c",
+        "restored_feature_count": 23,
+        "restored_unique_shape_id_count": 23,
+        "national_georef_api_result": {
+          "url": "https://apis.datos.gob.ar/georef/api/provincias?max=100&campos=id,nombre&aplanar=true",
+          "retrieved_on": "2026-10-05",
+          "response_sha256": "d6a47fd439a347b4a2da5689b6cde68a3dc3de776d2c33ad32a58d58d82ca944",
+          "response_bytes": 969,
+          "retained_path": "source/Georef/argentina-provinces.json",
+          "retained_sha256": "d6a47fd439a347b4a2da5689b6cde68a3dc3de776d2c33ad32a58d58d82ca944",
+          "jurisdiction_count": 24,
+          "license": "No separate API response license was verified; the small factual name/code response and live restoration URL are retained for source audit. No geometry or derived boundary is redistributed from this API.",
+          "differences": "The current official API lists 24 jurisdictions (23 provinces plus CABA), including Entre Ríos and La Rioja. The 2006 source has 23 features, includes CABA and a feature named La Roja, but no Entre Ríos feature. Tierra del Fuego has an abbreviated source label."
+        }
+      }
+    },
+    {
+      "id": "geoboundaries-arg-adm2-2020",
+      "canonical_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson",
+      "github_contents_api_url": "https://api.github.com/repos/wmgeolab/geoBoundaries/contents/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson?ref=9469f09",
+      "lfs_download_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson",
+      "retrieved_on": "2026-10-05",
+      "upstream_commit": "9469f09",
+      "github_blob_sha": "5f227ef80bcea39f76583bb48869cb461cee0796",
+      "upstream_reported_bytes": 69702323,
+      "lfs_oid_sha256": "f35dae5a257302dea5bd1549ae135baf82e7ee7491918854c3db9bbdec890177",
+      "lfs_pointer_path": "source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.lfs-pointer.txt",
+      "lfs_pointer_sha256": "80e8dc71e89e75f581089fc16270943b559235dfcaf6c49174b0935fc5febc68",
+      "sha256_uncompressed": "f35dae5a257302dea5bd1549ae135baf82e7ee7491918854c3db9bbdec890177",
+      "retained_path": "source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz",
+      "retained_archive_sha256": "aaf34413713c3b75175d04b6b7cafa4910ebdca762d2637a6547024466e3e07e",
+      "restore": "gzip -cd source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz > geoBoundaries-ARG-ADM2.geojson; then sha256sum the restored file.",
+      "license": "CC BY 3.0 IGO, as declared in the matching retained metadata JSON. Attribute geoBoundaries and its named source agencies when redistributing.",
+      "metadata": {
+        "retained_path": "source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2-metaData.json",
+        "sha256": "17452b82df4498c1b29a4489bd78709cef922b453579b1a47010dfd2524a7ce2",
+        "bytes": 958,
+        "published_boundary_year": 2020,
+        "source_data_update_date": "2023-01-19",
+        "build_date": "2023-12-12",
+        "declared_source": "Instituto Geografico Nacional and UNHCR, OCHA ROLAC",
+        "declared_canonical_role": "departments",
+        "declared_admin_unit_count": 526,
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)"
+      },
+      "conflicts": {
+        "repository_administrative_sources_expected_sha256": "cedee8710e49d9017327fc1d4b2dc536e95a82317dc94c3bac8d9404af6bf771",
+        "repository_register_feature_count": 526,
+        "restored_feature_count": 525,
+        "restored_unique_shape_id_count": 525,
+        "scope_matches": "214 of 214 scoped gb:ARG:ADM2 IDs and exact feature names match. This does not resolve countrywide completeness or identify a missing feature."
+      }
+    },
+    {
+      "id": "ign-interdepartmental-boundaries-metadata-2017",
+      "url": "https://www.ign.gob.ar/archivos/sig250/metadatos/limite_interdepartamental_partido.pdf",
+      "dataset_advertised_download": "https://www.ign.gob.ar/descargas/geodatos/limite_interdepartamental_partido_geojson.zip",
+      "retrieved_on": "2026-10-05",
+      "metadata_pdf_path": "source/IGN-2017/limite_interdepartamental_partido-metadata.pdf",
+      "metadata_pdf_sha256": "95f001ec9e874b05b36187daac158d2285b7aa816b7b99d25c4ff9c5517ae16a",
+      "download_attempt": {
+        "date": "2026-10-05",
+        "url": "https://www.ign.gob.ar/descargas/geodatos/limite_interdepartamental_partido_geojson.zip",
+        "http_result": 404,
+        "retained_archive": false
+      },
+      "metadata_facts": "Version/update December 2017; scale 1:100,000; national second-order political-administrative arcs; Buenos Aires partidos, CABA comunas, other provinces departments; source lineage is IGN cartographic antecedents plus provincial agencies; metadata permits use and derivatives under Creative Commons Attribution.",
+      "boundary_vintage_limit": "The 2017 metadata is not proof of current legal status, and the advertised boundary archive could not be retrieved."
+    },
+    {
+      "id": "indec-departamentos-2022-published-layer-metadata",
+      "url": "https://geonode.indec.gob.ar/layers/geonode_data%3Ageonode%3Adepartamentos",
+      "retrieved_on": "2026-10-05",
+      "retrieved_representation_sha256": "463efacd815db4a39c07e7e84ebbb997413cbb68cc195b01faece387e876e13f",
+      "license": "Published metadata says license Not Specified. No page copy or boundary geometry redistributed; use the URL to restore the metadata page.",
+      "role_and_limits": "Describes exhaustive national second-order political-administrative units; uses partidos in Buenos Aires, departments in other provinces and comunas in CABA; cites 2022 statistical cartography; states provincial statistical-office boundary bases and warns non-statistical uses are the user's responsibility."
+    },
+    {
+      "id": "caba-law-1777-consolidated",
+      "url": "https://boletinoficial.buenosaires.gob.ar/normativaba/norma/77544",
+      "retrieved_on": "2026-10-05",
+      "retrieved_representation_sha256": "bdbd3ce1b26eb065f0f3d75533ddd27adc6c8ca9e693365ec4c82d7a6d5345da",
+      "fact_used": "Consolidated Law 1777 text lists Communes 1 through 15 and their constituent neighborhoods.",
+      "license": "No page reuse license was asserted in this review; the legal fact is paraphrased and the page is restored from its official URL.",
+      "restoration": "HTTP GET the URL; compare returned bytes with the recorded retrieval hash only as a historical snapshot since the consolidated statute can change."
+    },
+    {
+      "id": "argentina-georef-comunas-caba",
+      "url": "https://www.argentina.gob.ar/georef/comunas-de-caba",
+      "retrieved_on": "2026-10-05",
+      "retrieved_representation_sha256": "b04abeb7b022e588662fb0d5e14eac710d2126c59d5299150540d6ef3428c304",
+      "fact_used": "Official Georef page lists 15 CABA communes and identifies their INDEC codes.",
+      "license": "No page reuse license was asserted in this review; facts are paraphrased and the page is restored from its official URL.",
+      "restoration": "HTTP GET the URL; page content is mutable, and compare returned bytes with the recorded retrieval hash only for the retrieval snapshot."
+    },
+    {
+      "id": "cofema-official-regions",
+      "url": "https://www.argentina.gob.ar/jefatura/turismo-y-ambiente/ambiente/articulacion-ambiental/regiones",
+      "retrieved_on": "2026-10-05",
+      "retrieved_representation_sha256": "3bc86e839a625f5b092b98c4d1cab73dd37e479796a0c17b72099ca3beae7b07",
+      "fact_used": "COFEMA's current official grouping lists NOA as Catamarca, Jujuy, Salta, Santiago del Estero and Tucumán; Cuyo as Mendoza, San Juan, La Rioja and San Luis.",
+      "license": "No page reuse license was asserted in this review; regional facts are paraphrased and the page is restored from its official URL.",
+      "restoration": "HTTP GET the URL; regional policy definitions can be revised and serve this specific governance framework."
+    },
+    {
+      "id": "argentina-2024-viticulture-noroeste",
+      "url": "https://www.argentina.gob.ar/noticias/informe-de-region-noroeste",
+      "retrieved_on": "2026-10-05",
+      "retrieved_representation_sha256": "8047ccb34c8db8d9fcbba0bb7ed571229886e6bdc067ac9c63c64c7e4a2b53ed",
+      "fact_used": "The 2024 official viticulture regional report uses Noroeste for La Rioja, Catamarca, Salta, Tucumán and Jujuy; this is a sector-specific grouping and excludes Santiago del Estero.",
+      "license": "No page reuse license was asserted in this review; report facts are paraphrased and the page is restored from its official URL.",
+      "restoration": "HTTP GET the URL; report wording and coverage are dated to the 2024 viticulture series."
+    },
+    {
+      "id": "argentina-2026-gustar-noa",
+      "url": "https://www.argentina.gob.ar/noticias/gustar-edicion-region-noa-2026",
+      "retrieved_on": "2026-10-05",
+      "retrieved_representation_sha256": "12f862ae412a78c8935b567ba33e05f724d4976a9fa5738ff32d6683aa7db3cc",
+      "fact_used": "A 2026 official food-and-tourism event describes six NOA provinces, including La Rioja with Catamarca, Jujuy, Salta, Santiago del Estero and Tucumán.",
+      "license": "No page reuse license was asserted in this review; the event fact is paraphrased and the page is restored from its official URL.",
+      "restoration": "HTTP GET the URL; this reports event participation and its contemporary regional framing, not a statutory boundary."
+    },
+    {
+      "id": "natural-earth-admin1-arg-5493-2022-06-02",
+      "canonical_source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "release_page": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+      "terms_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "upstream_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "commit_date": "2022-06-02T07:25:00Z",
+      "github_blob_sha": "4a8438f98ac7dfec7dc1739b1eaf91398ad33f22",
+      "retrieved_on": "2026-10-05",
+      "retained_path": "source/NaturalEarth-ca96624/ne_10m_admin_1_states_provinces.geojson.gz",
+      "sha256_uncompressed": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+      "uncompressed_bytes": 40726851,
+      "retained_archive_sha256": "20777a70803489a26b57194f4626797a84784c2ee66b3f56da3d6ea72fc4849c",
+      "license": "Public domain per Natural Earth terms of use.",
+      "restore": "gzip -cd source/NaturalEarth-ca96624/ne_10m_admin_1_states_provinces.geojson.gz > ne_10m_admin_1_states_provinces.geojson; verify SHA256 against sha256_uncompressed.",
+      "selected_feature": {
+        "adm1_code": "ARG-5493",
+        "name": "Ciudad de Buenos Aires",
+        "admin": "Argentina",
+        "type_en": "Federal District",
+        "gn_name": "Ciudad Autonoma de Buenos Aires"
+      },
+      "scope_limit": "The exact pinned source contains a Federal District feature but the Atlas city ring has different vertex count and bbox. Its use as the source of the Atlas geometry is not established."
+    }
+  ],
+  "reproduction": "From repository root run python3 data/regional-review/regional-review-7cf674a63057d43f/reproduce.py. The script decompresses retained sources in memory, verifies their exact SHA256 values and rewrites findings under this owned directory."
+}
