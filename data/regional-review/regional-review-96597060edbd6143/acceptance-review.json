@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "issue": 74,
+  "reviewed_at": "2026-10-05T04:26:00Z",
+  "author_worker_id": "geo-6a004c72-1e42-4f14-9f2c-55c0a638e1d0-74-turkey",
+  "fresh_main_commit": "1454584dbaf9a290fa88f941c6dd3cc92cf26d1d",
+  "previous_pr": {
+    "number": 853,
+    "head_sha": "ccab101277b922018ae5293add992ec2d58f481a",
+    "merge_commit": "f92b1774aedcaaaf72ac0fe4cc45857dd641d7d1",
+    "merged": true,
+    "scope": "Refs #74"
+  },
+  "scope": {
+    "path": "data/regional-review/regional-review-96597060edbd6143/scope.json",
+    "sha256": "4aa4c622f95dfffac97359e4443a7b330dbc9bd554d73fed6e792fc1f6e772c9",
+    "member_ids_sha256": "c192f338b815c029ea0c8338cbf153686a11bfd5e102d733272417f290ae85eb",
+    "location_count": 229,
+    "complete_province_groups": 23,
+    "area_count": 911,
+    "owned_area_count": 229,
+    "partial_area": true
+  },
+  "reproduction": {
+    "script": "data/regional-review/regional-review-96597060edbd6143/reproduce.py",
+    "output": "data/regional-review/regional-review-96597060edbd6143/district-assessments.json",
+    "output_sha256": "ce7be5a2bf47cd33f0de7737a8d99a3dd068d601b63b3ac9805a382f3e6a344f",
+    "exact_scope_subjects": 229,
+    "classification_counts": {
+      "justified": 0,
+      "correction-needed": 0,
+      "insufficient-evidence": 229
+    },
+    "source_feature_count": 973,
+    "source_metadata_declared_count": 999,
+    "metadata_count_difference": 26,
+    "meaning": "The generator reproduces a row-by-row evidence assessment. The counts, source matches and geometry screens do not establish legal district status, completeness, parentage or boundary correctness."
+  },
+  "acceptance_review": [
+    {
+      "criterion": "Document every scoped location and province and classify each individually.",
+      "outcome": "met-with-limits",
+      "evidence": ["district-assessments.json:/findings", "scope.json:/member_location_ids", "SOURCES.md"],
+      "finding": "All 229 exact IDs are represented once, across 23 complete scoped province groups. Each has an individual row and is classified insufficient-evidence; none is represented as justified or as a proven correction.",
+      "limit": "Insufficient-evidence is the row outcome because a same-vintage authoritative roster and legal boundary crosswalk were not obtained."
+    },
+    {
+      "criterion": "Research source role, vintage, completeness, license, semantic tier and traceable citations.",
+      "outcome": "met-with-limits",
+      "evidence": ["SOURCES.md", "source-receipts.json", "evidence-quality.json:/sources", "district-assessments.json:/source_metadata"],
+      "finding": "The assessed layer is geoBoundaries TUR ADM2, whose metadata role is Districts; it is OSM-derived, boundaryYear 2021, updated 2023-01-19 and built 2023-12-12. The metadata states ODbL 1.0 with OpenStreetMap attribution. The retained 973-feature layer is compared with its 999-unit metadata declaration. Official sources were inspected for administrative hierarchy, reference-date/count context, and source authority limits.",
+      "limit": "This layer is not an authoritative legal roster. TurkStat's 2021 count convention, Law 5442's general hierarchy, the current Interior Ministry directory, and HGM's explicitly indicative current boundary product do not supply the exact 229-row 2021 roster or boundary crosswalk. Raw official pages/PDFs were not retained where reuse terms were unstated; exact prior retrieval hashes and restoration URLs remain in source-receipts.json."
+    },
+    {
+      "criterion": "Review unusual forms, disconnected areas, omissions, repeated tiers, weak parents and neighboring granularity.",
+      "outcome": "met-with-limits",
+      "evidence": ["district-assessments.json:/findings", "district-assessments.json:/counts", "SOURCES.md"],
+      "finding": "The assessment records per-row name, parent membership, component counts and source/Atlas overlap, plus same-vintage ADM1 overlap screens. It records 15 possible merkez names, 14 remainder/centre markers, 8 nationally repeated names, one source multipart/Atlas singlepart case, one IoU below 0.90, two inherited multipart flags and four inherited weak-parent flags.",
+      "limit": "These are screening diagnostics. Without a complete official roster and lawful boundary evidence, possible omitted islands, central-district conventions, exact parentage and boundary anomalies remain unresolved rather than being cleared by structural checks."
+    },
+    {
+      "criterion": "Cover the owned area purpose and give sourced recommendations, unresolved gaps and bounded follow-ups.",
+      "outcome": "met-with-limits",
+      "evidence": ["SOURCES.md", "source-receipts.json", "district-assessments.json:/limits", "issues/852, 817, and 827"],
+      "finding": "The issue owns 229 of the 911 Turkey-area units. No source-supported correction is established. The packet hands the exact 229-unit official-roster crosswalk to #852, the 973-versus-999 release discrepancy to #817, and records #827 as a separately scoped 226-unit roster reconciliation. These remain separate research work; issue links do not imply their results.",
+      "limit": "No legal or geographic uncertainty is closed by this packet."
+    },
+    {
+      "criterion": "Preserve fixed outer scope, IDs, release pins and avoid geography/record changes.",
+      "outcome": "met",
+      "evidence": ["scope.json", "issue-contract.json", "evidence-quality.json:/baseline", "PR #853"],
+      "finding": "The original issue scope, v5 macro release pins, exact member IDs and baseline records are retained. PR #853 changed only files in the declared owned path; no hierarchy, footprint, source archive, production record or release was changed.",
+      "limit": "This is packet-level preservation and makes no regional approval or import claim."
+    }
+  ],
+  "source_limits_rechecked": [
+    {
+      "source": "https://www.tuik.gov.tr/media/announcements/istatistiklerle_turkiye_2021.pdf",
+      "retrieved_at": "2026-10-05",
+      "use": "Official national count and central-district count convention only; not a row roster or geometry."
+    },
+    {
+      "source": "https://www.icisleri.gov.tr/valilikler",
+      "retrieved_at": "2026-10-05",
+      "use": "Current Ministry directory states 81 provinces and 922 district governorships; current-vintage corroboration only."
+    },
+    {
+      "source": "https://www.harita.gov.tr/haber/ulkemize-ait-il-ve-ilce-sinirlari-ile-il-ve-ilce-yerlesim-noktalarini-iceren-vektor-verilerle-il-ve-ilce-yuz-olcumleri-bilgileri-internet-sitemizin-indirilebilir-veriler-dosyalar-kisminda-ucretsiz-olarak-kullanima-sunulmustur/195",
+      "retrieved_at": "2026-10-05",
+      "use": "HGM notice explicitly describes the released vector boundaries as indicative/display material without official status; not legal boundary evidence."
+    }
+  ],
+  "packet_disposition": "The declared read-only evidence-packet acceptance is satisfied with explicit unresolved source and geography findings. The 229 row statuses remain insufficient-evidence. This disposition does not certify Turkey or the Anatolia and Eastern Mediterranean region, approve boundaries, authorize imports, or close follow-up research issues.",
+  "follow_up_status_checked": {
+    "852": "open, blocked; exact 229-unit official 2021 roster/crosswalk",
+    "817": "open, blocked; nationwide geoBoundaries metadata-versus-feature discrepancy",
+    "827": "open, blocked; separate 226-unit roster reconciliation"
+  }
+}
