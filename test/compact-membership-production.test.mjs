@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {createHash} from 'node:crypto';
 import {createLocalPostgres} from '../scripts/verify-postgres-schema.mjs';
 import {nativeMembershipDigestSQL,patchNativeRestoreFile} from '../scripts/current-postgres-recovery.mjs';
-import {validateCompactProductionWindow,runCompactMembershipProduction,checkOriginalMembershipIndexes,restoreOriginalMembershipIndexes} from '../scripts/run-compact-membership-production.mjs';
+import {validateCompactProductionWindow,runCompactMembershipProduction,checkOriginalMembershipIndexes,restoreOriginalMembershipIndexes,commitMembershipRetirement} from '../scripts/run-compact-membership-production.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const now=Date.parse('2026-10-04T23:00:00Z'),head='a'.repeat(40),toolSHA='b'.repeat(64),spec={mode:'engineering',depends_on:[],max_prs:1,scope:'Bounded authorized compact production operation',production_operation:{source_issue:783,publisher_worker_id:'engineering-neon-storage-publisher-20261004-local01'}};
 const issue={number:900,state:'open',body:'<!-- worldatlas-work:v1\n'+JSON.stringify(spec)+'\n-->'};
@@ -27,4 +27,30 @@ test('server copy and precommit runtime hook keep the original intact on failed 
   assert.equal((await f.engine.query("SELECT to_regclass('worldatlas_membership_rows') value")).rows[0].value,null);
   const r=await rehearseCompactMembershipStorage(f.engine,{copyOnServer:true});assert.equal(r.copied,0);assert.equal(r.parity.exact,true);
  }finally{await f.close();}
+});
+
+
+test('retirement app proof runs after owner commit and retains committed state on later failure',async()=>{
+ for(const failure of [null,'prepare','before-drop','drop','before-commit','after']){
+  const events=[];let committed=false;
+  const fail=point=>{events.push(point);if(failure===point)throw Error(point);};
+  const engine={transaction:async fn=>{events.push('begin');try{const value=await fn({query:async sql=>{if(sql.startsWith('DROP'))fail('drop');else events.push('lock');}});events.push('commit');return value;}catch(error){events.push('rollback');throw error;}}};
+  const run=()=>commitMembershipRetirement(engine,{
+   prepare:async()=>{fail('prepare');events.push('before-api');return {exact:true};},
+   authorize:async point=>fail(point),onCommitted:parity=>{assert.deepEqual(parity,{exact:true});committed=true;events.push('committed-receipt');},
+   afterCommit:async()=>{assert.equal(events.at(-1),'committed-receipt');assert.equal(committed,true);fail('after');}
+  });
+  if(failure)await assert.rejects(run(),new RegExp(failure));else assert.deepEqual(await run(),{exact:true});
+  assert.equal(committed,failure===null||failure==='after');
+  if(committed){assert.ok(events.indexOf('commit')<events.indexOf('after'));assert.ok(!events.includes('rollback'));}
+  else{assert.ok(events.includes('rollback'));assert.ok(!events.includes('after'));}
+ }
+});
+
+
+test('unconfirmed owner commit never reports committed retirement or starts final application proof',async()=>{
+ let notified=false,proved=false;
+ const engine={transaction:async fn=>{await fn({query:async()=>{}});throw Error('commit transport unavailable');}};
+ await assert.rejects(commitMembershipRetirement(engine,{prepare:async()=>({exact:true}),authorize:async()=>{},onCommitted:()=>{notified=true;},afterCommit:async()=>{proved=true;}}),/commit transport/);
+ assert.equal(notified,false);assert.equal(proved,false);
 });

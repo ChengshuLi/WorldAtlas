@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "issue": 808,
+  "lane": "engineering",
+  "worker_id": "engineering-neon-storage-publisher-20261004-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "ee1b368bcaeb1fb114e3a5d0d9d3a2e06d633fa7",
+    "files": [
+      {
+        "path": "postgres/schema.sql",
+        "bytes": 51470,
+        "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/run-compact-membership-production.mjs",
+        "bytes": 21948,
+        "sha256": "83b5f3c53b9e42afd4ba1f944760899d9e8828121b38567bf2fbacebd72de3c1",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "scripts/verify-live-membership-api-functions.mjs",
+        "bytes": 4591,
+        "sha256": "affc2d6dcab9aba7783bca74a60b9bd1188b015e4a79b1f5781672998792996c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "test/compact-membership-production.test.mjs",
+        "bytes": 8232,
+        "sha256": "b0ccd5174704c51bf2ffecefc0e36fae9f9edd4b597f887474565ce3e44137ba",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 246133,
+        "sha256": "38279076ceffe227ac3e77678916d5f223bd0fb086c0036a4fe0c8905d110394",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/run-compact-membership-production.mjs",
+      "bytes": 23149,
+      "sha256": "eab805278951a735b347a9fd6e3249fdd87bdefb8916447be8b626795eec8e73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-membership-production.test.mjs",
+      "bytes": 10157,
+      "sha256": "39b762ad3a043b945b78de7b32a64db73e76f746982754c49aa511648732ba0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-retirement-lock-20261004-local01/README.md",
+      "bytes": 1960,
+      "sha256": "179c4441a6df156c2cc28580eac71eafa1305968a1ecfd4c590fe38c33241bbb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-retirement-lock-20261004-local01/native-controls.json",
+      "bytes": 432,
+      "sha256": "12dbd48016ca965bd5934d7c68c311377ff9ba1c65a0a4aff2f67ec5b314216a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-retirement-lock-20261004-local01/prepare-evidence.mjs",
+      "bytes": 2741,
+      "sha256": "42fa469c678b12f9b2e87974b546202e9e0a64871f3bf3b8882e65fec4c0d8f7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-retirement-lock-20261004-local01/reproduce-native-lock.mjs",
+      "bytes": 2673,
+      "sha256": "1a803483d5935d29ea6df2a286af044f988a78bde9074cfd710a0e1d6bf16f62",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retirement-commit-order",
+      "kind": "code",
+      "description": "Keep full original raw parity/API before-drop proof and reservation guards before DROP/COMMIT; persist committed retirement and run actual separate-login final API proof after COMMIT, while maintenance advisory lock remains held. Native two-session FK lock control and ordering/failure tests. No factual/hosting/write changes",
+      "software": "Node24, PostgreSQL18.6 local Unix-socket synthetic cluster and locked Neon serverless driver",
+      "units": "Lock-order and error controls only; no new production storage metric"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "retirement-commit-order",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/compact-retirement-lock-20261004-local01/native-controls.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "scripts/run-compact-membership-production.mjs",
+      "status": "modified",
+      "original_sha256": "83b5f3c53b9e42afd4ba1f944760899d9e8828121b38567bf2fbacebd72de3c1"
+    },
+    {
+      "path": "test/compact-membership-production.test.mjs",
+      "status": "modified",
+      "original_sha256": "b0ccd5174704c51bf2ffecefc0e36fae9f9edd4b597f887474565ce3e44137ba"
+    },
+    {
+      "path": "coordination/engineering/compact-retirement-lock-20261004-local01/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-retirement-lock-20261004-local01/native-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-retirement-lock-20261004-local01/prepare-evidence.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-retirement-lock-20261004-local01/reproduce-native-lock.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-retirement-lock-20261004-local01/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test test/compact-membership-production.test.mjs",
+    "node coordination/engineering/compact-retirement-lock-20261004-local01/prepare-evidence.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/compact-retirement-lock-20261004-local01/evidence-quality.json"
+  ]
+}
