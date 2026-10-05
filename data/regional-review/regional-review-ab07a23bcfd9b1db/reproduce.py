@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 OWN = Path(__file__).resolve().parent
 SOURCES = OWN / "sources"
+BASELINE_COMMIT = subprocess.check_output(["git", "merge-base", "origin/main", "HEAD"], cwd=ROOT, text=True).strip()
 
 
 def sha256(data: bytes) -> str:
@@ -40,6 +41,16 @@ def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def read_baseline_json(relative_path: str):
+    raw = subprocess.check_output(["git", "show", f"{BASELINE_COMMIT}:{relative_path}"], cwd=ROOT)
+    return json.loads(raw)
+
+
+def baseline_file_digest(relative_path: str) -> dict:
+    raw = subprocess.check_output(["git", "show", f"{BASELINE_COMMIT}:{relative_path}"], cwd=ROOT)
+    return {"path": relative_path, "bytes": len(raw), "sha256": sha256(raw)}
+
+
 scope = read_json(OWN / "issue-scope.json")
 cohort_snapshot = read_json(OWN / "cohort-partition.json")
 ids = scope["member_location_ids"]
@@ -51,7 +62,9 @@ baseline = {}
 baseline_file_for_id = {}
 all_civ_baseline_ids = set()
 for path in sorted((ROOT / "data/geography").glob("part-*.json")):
-    data = read_json(path)
+    relative = str(path.relative_to(ROOT))
+    raw = subprocess.check_output(["git", "show", f"{BASELINE_COMMIT}:{relative}"], cwd=ROOT)
+    data = json.loads(raw)
     for feature in data["features"]:
         feature_id = feature.get("id") or feature.get("properties", {}).get("id")
         if feature_id and feature_id.startswith("gb:CIV:ADM3:"):
@@ -59,7 +72,7 @@ for path in sorted((ROOT / "data/geography").glob("part-*.json")):
         if feature_id in ids:
             assert feature_id not in baseline
             baseline[feature_id] = feature
-            baseline_file_for_id[feature_id] = path
+            baseline_file_for_id[feature_id] = relative
 assert set(baseline) == set(ids), f"baseline roster missing={set(ids)-set(baseline)} extra={set(baseline)-set(ids)}"
 atlas_civ_ids = all_civ_baseline_ids
 own_civ_ids = {feature_id for feature_id in ids if feature_id.startswith("gb:CIV:ADM3:")}
@@ -226,9 +239,9 @@ acceptance_screen = {
 source_paths = sorted(SOURCES.glob("*"))
 source_inventory = [file_digest(p) for p in source_paths]
 baseline_paths = sorted(set(baseline_file_for_id.values()))
-baseline_inventory = [file_digest(p) for p in baseline_paths]
+baseline_inventory = [baseline_file_digest(p) for p in baseline_paths]
 for row in rows:
-    row["baseline_file"] = str(baseline_file_for_id[row["location_id"]].relative_to(ROOT))
+    row["baseline_file"] = baseline_file_for_id[row["location_id"]]
 
 out_assessments = OWN / "location-assessments.json"
 out_assessments.write_text(json.dumps({"version": 1, "issue": 469, "scope_ids_sha256": scope["member_location_ids_sha256"], "assessed_count": len(rows), "assessments": rows}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -240,7 +253,7 @@ summary = {
     "version": 1,
     "issue": 469,
     "retrieved_at_utc": "2026-10-05",
-    "base_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
+    "base_commit": BASELINE_COMMIT,
     "issue_scope": {"count": len(ids), "member_location_ids_sha256": scope["member_location_ids_sha256"], "all_ids_in_baseline": True},
     "baseline_files": baseline_inventory,
     "pinned_sources": {
