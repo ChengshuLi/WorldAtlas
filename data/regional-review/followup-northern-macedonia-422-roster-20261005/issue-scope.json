@@ -1,0 +1,78 @@
+{
+  "number": 995,
+  "title": "Reconcile North Macedonia’s 84-to-80 municipality roster for #422",
+  "state": "open",
+  "labels": [
+    {
+      "id": 12514963633,
+      "node_id": "LA_kwDOU2GYiM8AAAAC6fMwsQ",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/labels/kind:work-item",
+      "name": "kind:work-item",
+      "color": "0e8a16",
+      "default": false,
+      "description": "Bounded actionable scope, normally 1–3 PRs",
+      "archived_at": null,
+      "archived_by": null
+    },
+    {
+      "id": 12514963807,
+      "node_id": "LA_kwDOU2GYiM8AAAAC6fMxXw",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/labels/status:ready",
+      "name": "status:ready",
+      "color": "0e8a16",
+      "default": false,
+      "description": "Reviewed scope and dependencies ready for a worker claim",
+      "archived_at": null,
+      "archived_by": null
+    },
+    {
+      "id": 12514963985,
+      "node_id": "LA_kwDOU2GYiM8AAAAC6fMyEQ",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/labels/status:claimed",
+      "name": "status:claimed",
+      "color": "fbca04",
+      "default": false,
+      "description": "Reserved by a named worker lease recorded in issue comments",
+      "archived_at": null,
+      "archived_by": null
+    },
+    {
+      "id": 12517762283,
+      "node_id": "LA_kwDOU2GYiM8AAAAC6h3k6w",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/labels/type:geography",
+      "name": "type:geography",
+      "color": "8250df",
+      "default": false,
+      "description": "Geographic source research, hierarchy/boundary evidence and proposals; no live mutations",
+      "archived_at": null,
+      "archived_by": null
+    },
+    {
+      "id": 12529070596,
+      "node_id": "LA_kwDOU2GYiM8AAAAC6spyBA",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/labels/follow-up",
+      "name": "follow-up",
+      "color": "ededed",
+      "default": false,
+      "description": null,
+      "archived_at": null,
+      "archived_by": null
+    },
+    {
+      "id": 12545816659,
+      "node_id": "LA_kwDOU2GYiM8AAAAC68n4Uw",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/labels/priority:follow-up",
+      "name": "priority:follow-up",
+      "color": "ededed",
+      "default": false,
+      "description": null,
+      "archived_at": null,
+      "archived_by": null
+    }
+  ],
+  "body": "Raised/recorded: 2026-10-05 (America/Los_Angeles). Bounded follow-up from [#422](https://github.com/ChengshuLi/WorldAtlas/issues/422) and its evidence PR [#994](https://github.com/ChengshuLi/WorldAtlas/pull/994). Findings are provisional until the packet merges.\n\n## Goal\n\nResolve the 84-feature 2016 geoBoundaries MKD ADM2 collection against the State Statistical Office’s 80-unit current NTES level-4 roster and the official spatial-units register. Establish exact obsolete/merged unit crosswalks, date/vintage meaning, and whether any province-parent naming/role proposal is warranted for the eight listed parents. Do not infer corrections from counts alone; compare sourced units/geometry, retain source/licence evidence, and hand any shared hierarchy/source-catalog edit to engineering.\n\n## Exact scope\n\nAtlas location IDs (pinned):\n```json\n{\n  \"subject_ids\": [\n    \"gb:MKD:ADM2:65306769B11113266730381\",\n    \"gb:MKD:ADM2:65306769B11231402107621\",\n    \"gb:MKD:ADM2:65306769B13037945767817\",\n    \"gb:MKD:ADM2:65306769B1402835444879\",\n    \"gb:MKD:ADM2:65306769B16547433729319\",\n    \"gb:MKD:ADM2:65306769B16932285740052\",\n    \"gb:MKD:ADM2:65306769B17532316382540\",\n    \"gb:MKD:ADM2:65306769B19811324233496\",\n    \"gb:MKD:ADM2:65306769B20870628535314\",\n    \"gb:MKD:ADM2:65306769B21440943325425\",\n    \"gb:MKD:ADM2:65306769B24962411373352\",\n    \"gb:MKD:ADM2:65306769B25269203277023\",\n    \"gb:MKD:ADM2:65306769B28760853140319\",\n    \"gb:MKD:ADM2:65306769B29228652763838\",\n    \"gb:MKD:ADM2:65306769B30499724495111\",\n    \"gb:MKD:ADM2:65306769B3097110342626\",\n    \"gb:MKD:ADM2:65306769B31253280068655\",\n    \"gb:MKD:ADM2:65306769B31528709538806\",\n    \"gb:MKD:ADM2:65306769B32864383387565\",\n    \"gb:MKD:ADM2:65306769B34923793156893\",\n    \"gb:MKD:ADM2:65306769B35230400843522\",\n    \"gb:MKD:ADM2:65306769B37555850097023\",\n    \"gb:MKD:ADM2:65306769B37694813292745\",\n    \"gb:MKD:ADM2:65306769B38681121769962\",\n    \"gb:MKD:ADM2:65306769B39088451231406\",\n    \"gb:MKD:ADM2:65306769B40750666784819\",\n    \"gb:MKD:ADM2:65306769B41644037603367\",\n    \"gb:MKD:ADM2:65306769B43786994605209\",\n    \"gb:MKD:ADM2:65306769B44883072269450\",\n    \"gb:MKD:ADM2:65306769B4612015917677\",\n    \"gb:MKD:ADM2:65306769B48294308075018\",\n    \"gb:MKD:ADM2:65306769B48467279151544\",\n    \"gb:MKD:ADM2:65306769B50594974244279\",\n    \"gb:MKD:ADM2:65306769B51033238442002\",\n    \"gb:MKD:ADM2:65306769B51513115302581\",\n    \"gb:MKD:ADM2:65306769B52717367250393\",\n    \"gb:MKD:ADM2:65306769B54195317631303\",\n    \"gb:MKD:ADM2:65306769B55292490733903\",\n    \"gb:MKD:ADM2:65306769B55307449205038\",\n    \"gb:MKD:ADM2:65306769B55321164164480\",\n    \"gb:MKD:ADM2:65306769B57074060571114\",\n    \"gb:MKD:ADM2:65306769B57665907630306\",\n    \"gb:MKD:ADM2:65306769B57810703972123\",\n    \"gb:MKD:ADM2:65306769B58175225548943\",\n    \"gb:MKD:ADM2:65306769B59831193355348\",\n    \"gb:MKD:ADM2:65306769B60147523647729\",\n    \"gb:MKD:ADM2:65306769B60953626693828\",\n    \"gb:MKD:ADM2:65306769B61721229469178\",\n    \"gb:MKD:ADM2:65306769B63258214258120\",\n    \"gb:MKD:ADM2:65306769B638558710054\",\n    \"gb:MKD:ADM2:65306769B68285102273894\",\n    \"gb:MKD:ADM2:65306769B69057078753294\",\n    \"gb:MKD:ADM2:65306769B7034673009325\",\n    \"gb:MKD:ADM2:65306769B70601166108403\",\n    \"gb:MKD:ADM2:65306769B7192425425597\",\n    \"gb:MKD:ADM2:65306769B72053820604170\",\n    \"gb:MKD:ADM2:65306769B74199760072032\",\n    \"gb:MKD:ADM2:65306769B7593203088025\",\n    \"gb:MKD:ADM2:65306769B77105819408507\",\n    \"gb:MKD:ADM2:65306769B78023528365293\",\n    \"gb:MKD:ADM2:65306769B79358437937603\",\n    \"gb:MKD:ADM2:65306769B81455536397038\",\n    \"gb:MKD:ADM2:65306769B82299046319271\",\n    \"gb:MKD:ADM2:65306769B82420997238505\",\n    \"gb:MKD:ADM2:65306769B82535052466784\",\n    \"gb:MKD:ADM2:65306769B84975747896428\",\n    \"gb:MKD:ADM2:65306769B86752814527149\",\n    \"gb:MKD:ADM2:65306769B87468718843329\",\n    \"gb:MKD:ADM2:65306769B90097726978799\",\n    \"gb:MKD:ADM2:65306769B91068225618475\",\n    \"gb:MKD:ADM2:65306769B91405117981087\",\n    \"gb:MKD:ADM2:65306769B92481103020830\",\n    \"gb:MKD:ADM2:65306769B92913941164091\",\n    \"gb:MKD:ADM2:65306769B94389460478239\",\n    \"gb:MKD:ADM2:65306769B9482621128818\",\n    \"gb:MKD:ADM2:65306769B95040273905804\",\n    \"gb:MKD:ADM2:65306769B95473368394754\",\n    \"gb:MKD:ADM2:65306769B96120860372222\",\n    \"gb:MKD:ADM2:65306769B9612885815739\",\n    \"gb:MKD:ADM2:65306769B96152204239158\",\n    \"gb:MKD:ADM2:65306769B96419265045604\",\n    \"gb:MKD:ADM2:65306769B97994960223658\",\n    \"gb:MKD:ADM2:65306769B98629679609772\",\n    \"gb:MKD:ADM2:65306769B99207835594431\"\n  ],\n  \"subject_count\": 84,\n  \"parent_issue\": 422\n}\n```\n\nAtlas province parent IDs (reference only):\n```json\n[\n  \"framework:province:east:93d71c19983e\",\n  \"framework:province:northeast:ae810c24404c\",\n  \"framework:province:pelagonia:4091f04e8c10\",\n  \"framework:province:polog:76d403f17558\",\n  \"framework:province:skopje:d4d0d12ba0f8\",\n  \"framework:province:southeast:133e6267a43b\",\n  \"framework:province:southwest:683e6a222125\",\n  \"framework:province:vardar:178ce5206540\"\n]\n```\n\nSee the scoped per-subject evidence, exact upstream inputs, source hashes and citations in `data/regional-review/regional-review-3c4fe25a21fa428d/` after PR #994 merges. Current findings and unresolved limits are summarized in its `REVIEW.md`.\n\n## Acceptance\n\n- Research every exact subject and its relevant parent relationship using authoritative dated sources.\n- Retain lawful original source bytes or explicit retrieval/restoration instructions; record URLs, retrieval dates, vintages, hashes, completeness and license limits.\n- Reproduce exact ID crosswalks and methods; report unsupported/uncertain cases honestly.\n- Provide evidence-backed, ID-preserving correction/source-restoration recommendations and explicit engineering handoffs.\n- Do not edit shared geography, publish, import, or certify the area/region.\n\nDo not claim legal boundary accuracy from counts, aggregate area, topology or source labels alone. Preserve old evidence and Atlas IDs. This is source-only geography research and authorizes no boundary mutation, regional approval or historical import.\n\n<!-- worldatlas-work:v1\n{\"max_prs\":1,\"depends_on\":[422],\"scope\":\"Resolve the 84-feature 2016 geoBoundaries MKD ADM2 collection against the State Statistical Office\\u2019s 80-unit current NTES level-4 roster and the official spatial-units register. Establish exact obsolete/merged unit crosswalks, date/vintage meaning, and whether any province-parent naming/role proposal is warranted for the eight listed parents. Do not infer corrections from counts alone; compare sourced units/geometry, retain source/licence evidence, and hand any shared hierarchy/source-catalog edit to engineering. Exact Atlas location IDs below; no expansion. Blocked until #422 and PR #994 are merged, then recheck all current pins.\",\"mode\":\"geography\",\"owned_paths\":[\"data/regional-review/followup-northern-macedonia-422-roster-20261005/\"],\"evidence_quality\":{\"version\":1,\"manifest_path\":\"data/regional-review/followup-northern-macedonia-422-roster-20261005/evidence-quality.json\",\"subject_ids\":[\"gb:MKD:ADM2:65306769B11113266730381\",\"gb:MKD:ADM2:65306769B11231402107621\",\"gb:MKD:ADM2:65306769B13037945767817\",\"gb:MKD:ADM2:65306769B1402835444879\",\"gb:MKD:ADM2:65306769B16547433729319\",\"gb:MKD:ADM2:65306769B16932285740052\",\"gb:MKD:ADM2:65306769B17532316382540\",\"gb:MKD:ADM2:65306769B19811324233496\",\"gb:MKD:ADM2:65306769B20870628535314\",\"gb:MKD:ADM2:65306769B21440943325425\",\"gb:MKD:ADM2:65306769B24962411373352\",\"gb:MKD:ADM2:65306769B25269203277023\",\"gb:MKD:ADM2:65306769B28760853140319\",\"gb:MKD:ADM2:65306769B29228652763838\",\"gb:MKD:ADM2:65306769B30499724495111\",\"gb:MKD:ADM2:65306769B3097110342626\",\"gb:MKD:ADM2:65306769B31253280068655\",\"gb:MKD:ADM2:65306769B31528709538806\",\"gb:MKD:ADM2:65306769B32864383387565\",\"gb:MKD:ADM2:65306769B34923793156893\",\"gb:MKD:ADM2:65306769B35230400843522\",\"gb:MKD:ADM2:65306769B37555850097023\",\"gb:MKD:ADM2:65306769B37694813292745\",\"gb:MKD:ADM2:65306769B38681121769962\",\"gb:MKD:ADM2:65306769B39088451231406\",\"gb:MKD:ADM2:65306769B40750666784819\",\"gb:MKD:ADM2:65306769B41644037603367\",\"gb:MKD:ADM2:65306769B43786994605209\",\"gb:MKD:ADM2:65306769B44883072269450\",\"gb:MKD:ADM2:65306769B4612015917677\",\"gb:MKD:ADM2:65306769B48294308075018\",\"gb:MKD:ADM2:65306769B48467279151544\",\"gb:MKD:ADM2:65306769B50594974244279\",\"gb:MKD:ADM2:65306769B51033238442002\",\"gb:MKD:ADM2:65306769B51513115302581\",\"gb:MKD:ADM2:65306769B52717367250393\",\"gb:MKD:ADM2:65306769B54195317631303\",\"gb:MKD:ADM2:65306769B55292490733903\",\"gb:MKD:ADM2:65306769B55307449205038\",\"gb:MKD:ADM2:65306769B55321164164480\",\"gb:MKD:ADM2:65306769B57074060571114\",\"gb:MKD:ADM2:65306769B57665907630306\",\"gb:MKD:ADM2:65306769B57810703972123\",\"gb:MKD:ADM2:65306769B58175225548943\",\"gb:MKD:ADM2:65306769B59831193355348\",\"gb:MKD:ADM2:65306769B60147523647729\",\"gb:MKD:ADM2:65306769B60953626693828\",\"gb:MKD:ADM2:65306769B61721229469178\",\"gb:MKD:ADM2:65306769B63258214258120\",\"gb:MKD:ADM2:65306769B638558710054\",\"gb:MKD:ADM2:65306769B68285102273894\",\"gb:MKD:ADM2:65306769B69057078753294\",\"gb:MKD:ADM2:65306769B7034673009325\",\"gb:MKD:ADM2:65306769B70601166108403\",\"gb:MKD:ADM2:65306769B7192425425597\",\"gb:MKD:ADM2:65306769B72053820604170\",\"gb:MKD:ADM2:65306769B74199760072032\",\"gb:MKD:ADM2:65306769B7593203088025\",\"gb:MKD:ADM2:65306769B77105819408507\",\"gb:MKD:ADM2:65306769B78023528365293\",\"gb:MKD:ADM2:65306769B79358437937603\",\"gb:MKD:ADM2:65306769B81455536397038\",\"gb:MKD:ADM2:65306769B82299046319271\",\"gb:MKD:ADM2:65306769B82420997238505\",\"gb:MKD:ADM2:65306769B82535052466784\",\"gb:MKD:ADM2:65306769B84975747896428\",\"gb:MKD:ADM2:65306769B86752814527149\",\"gb:MKD:ADM2:65306769B87468718843329\",\"gb:MKD:ADM2:65306769B90097726978799\",\"gb:MKD:ADM2:65306769B91068225618475\",\"gb:MKD:ADM2:65306769B91405117981087\",\"gb:MKD:ADM2:65306769B92481103020830\",\"gb:MKD:ADM2:65306769B92913941164091\",\"gb:MKD:ADM2:65306769B94389460478239\",\"gb:MKD:ADM2:65306769B9482621128818\",\"gb:MKD:ADM2:65306769B95040273905804\",\"gb:MKD:ADM2:65306769B95473368394754\",\"gb:MKD:ADM2:65306769B96120860372222\",\"gb:MKD:ADM2:65306769B9612885815739\",\"gb:MKD:ADM2:65306769B96152204239158\",\"gb:MKD:ADM2:65306769B96419265045604\",\"gb:MKD:ADM2:65306769B97994960223658\",\"gb:MKD:ADM2:65306769B98629679609772\",\"gb:MKD:ADM2:65306769B99207835594431\"],\"pins\":{\"data/world-index.json\":\"a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03\",\"data/hierarchy.json\":\"568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b\",\"data/geographic-releases/current-manifest.json\":\"85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81\",\"data/administrative-sources.json\":\"ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633\",\"data/macro-foundation/current-membership-inventory.json.gz\":\"db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab\",\"data/macro-foundation/review-index.json\":\"31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf\",\"data/macro-foundation/regional-handoffs.json.gz\":\"29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a\",\"data/macro-foundation/macro-certificate.json\":\"f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b\",\"data/macro-foundation/approved-boundary-decisions.json\":\"b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18\"},\"review_kind\":\"source\"}}\n-->\n",
+  "created_at": "2026-10-05T16:55:57Z",
+  "updated_at": "2026-10-05T17:49:56Z",
+  "html_url": "https://github.com/ChengshuLi/WorldAtlas/issues/995",
+  "retrieved_at_utc": "2026-10-05"
+}
