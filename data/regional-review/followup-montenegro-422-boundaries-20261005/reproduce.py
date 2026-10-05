@@ -32,6 +32,12 @@ def norm(name: str) -> str:
     value = re.sub(r'\b(municipality|capital|metropolis)\b', ' ', value)
     return re.sub(r'[^a-z0-9]+', '', value)
 
+def official_match(source_name: str, lookup: dict[str, tuple[str, int]]) -> tuple[str, int]:
+    key = norm(source_name)
+    if key not in lookup:
+        raise ValueError(f'No exact normalized official municipality name: {source_name}')
+    return lookup[key]
+
 def run() -> dict:
     issue = json.loads((PACKET / 'source/issue-996-api-response.json').read_bytes())
     assert issue['number'] == 996 and issue['state'] == 'open'
@@ -96,10 +102,8 @@ def run() -> dict:
         assert assessment['source_sha256'] == '9674292fbc0a50c68c6584a2ae23fae768e76cc796bdb7e3e009c0197aec6ae3'
         assert area['source_sha256'] == assessment['source_sha256']
         assert assessment['source_feature_name'] == f['properties']['shapeName']
-        key = norm(assessment['source_feature_name'])
-        assert key in name17, f'No exact 2017 MONSTAT roster crosswalk: {assessment["source_feature_name"]}'
-        reported_name, reported17 = name17[key]
-        reported18_name, reported18 = name18[key]
+        reported_name, reported17 = official_match(assessment['source_feature_name'], name17)
+        reported18_name, reported18 = official_match(assessment['source_feature_name'], name18)
         parent_id = p['parent_id']
         assert parent_id in hierarchy and hierarchy[parent_id]['level'] == 'province'
         parent_children.setdefault(parent_id, []).append(identity)
@@ -187,20 +191,32 @@ def main():
     assert first == second, 'same-input source comparison did not reproduce byte-identically'
     path = PACKET / 'comparison.json'
     path.write_text(first, encoding='utf-8')
-    controls = [
-        ('positive-control', 'All exact issue subjects occur exactly once in the pinned containing geometry file and map to one retained source feature and one exact normalized official roster name.'),
-        ('negative-control', 'The exact-name guard refuses unmatched source names; no fuzzy or nearest-name fallback is enabled.')
-    ]
-    for kind, detail in controls:
-        control_row = {'method_id': 'source-crosswalk-and-area-comparison', 'kind': kind, 'outcome': 'passed', 'detail': detail}
-        (PACKET / f'{kind}.json').write_text(json.dumps(control_row, ensure_ascii=False, sort_keys=True, indent=2) + '\n')
+    positive_detail = f"{len(first_data['subjects'])} exact issue subjects passed the pinned containing-file, source-shape and official-name crosswalk assertions."
+    assert len(first_data['subjects']) == 23
+    (PACKET / 'positive-control.json').write_text(json.dumps({
+        'method_id': 'source-crosswalk-and-area-comparison', 'kind': 'positive-control',
+        'outcome': 'passed', 'detail': positive_detail
+    }, ensure_ascii=False, sort_keys=True, indent=2) + '\n')
+    official17 = json.loads((PACKET / 'source/official-municipal-areas-2017.json').read_text())
+    lookup17 = {norm(name): (name, value) for name, value in official17['areas_km2'].items()}
+    impossible_name = 'Not a Municipality in Montenegro'
+    try:
+        official_match(impossible_name, lookup17)
+    except ValueError as error:
+        negative_detail = f"Rejected synthetic unmatched input {impossible_name!r}: {error}"
+    else:
+        raise AssertionError('negative control failed: unmatched name was accepted')
+    (PACKET / 'negative-control.json').write_text(json.dumps({
+        'method_id': 'source-crosswalk-and-area-comparison', 'kind': 'negative-control',
+        'outcome': 'passed', 'input': impossible_name, 'detail': negative_detail
+    }, ensure_ascii=False, sort_keys=True, indent=2) + '\n')
     result = {
         'method_id': 'source-crosswalk-and-area-comparison', 'kind': 'reproducibility',
         'outcome': 'passed', 'run_one_sha256': hashlib.sha256(first.encode()).hexdigest(),
         'run_two_sha256': hashlib.sha256(second.encode()).hexdigest(),
         'runs': 2, 'baseline_commit': BASELINE,
         'positive_control': '23 exact issue subjects each found once in the pinned world index, matched to a pinned original source feature and one 2017 official municipality-area table row.',
-        'negative_control': 'The unmatched-name guard raises before writing results if an exact normalized municipality name is absent; no fuzzy/nearest-name fallback is enabled.',
+        'negative_control': 'The reproducer submitted a synthetic unmatched name to official_match and verified it raises ValueError before recording a passed negative control.',
         'scope_and_pin_controls': 'All nine issue pins hash from the immutable baseline commit; every subject is confirmed in its actual world-index containing part.'
     }
     control = PACKET / 'reproduction-control.json'

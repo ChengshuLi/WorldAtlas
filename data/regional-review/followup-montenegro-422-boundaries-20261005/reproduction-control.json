@@ -7,6 +7,6 @@
   "runs": 2,
   "baseline_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
   "positive_control": "23 exact issue subjects each found once in the pinned world index, matched to a pinned original source feature and one 2017 official municipality-area table row.",
-  "negative_control": "The unmatched-name guard raises before writing results if an exact normalized municipality name is absent; no fuzzy/nearest-name fallback is enabled.",
+  "negative_control": "The reproducer submitted a synthetic unmatched name to official_match and verified it raises ValueError before recording a passed negative control.",
   "scope_and_pin_controls": "All nine issue pins hash from the immutable baseline commit; every subject is confirmed in its actual world-index containing part."
 }
