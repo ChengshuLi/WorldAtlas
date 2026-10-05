@@ -364,7 +364,13 @@
       "unit": "subjects",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680"
+      ]
     },
     {
       "id": "salb_features",
@@ -372,7 +378,13 @@
       "unit": "features",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "salb_regional_sectors",
@@ -380,7 +392,13 @@
       "unit": "sectors",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "salb_autonomous_sector",
@@ -388,7 +406,13 @@
       "unit": "sectors",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "screen_review_required",
@@ -396,7 +420,15 @@
       "unit": "rows",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "screen_consistent",
@@ -404,7 +436,15 @@
       "unit": "rows",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "nc4_count_gap",
@@ -412,7 +452,15 @@
       "unit": "sectors",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "salb-data",
+        "unfccc-nc4"
+      ],
+      "source_input_sha256s": [
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28",
+        "4481f2a8346c7b71d6ffb5e7b6badc504ac4271c61982ea82d9ed2306b12a694"
+      ]
     },
     {
       "id": "crosswalk_13655514B11561761851968_old_area_covered_by_top_pct",
@@ -420,7 +468,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B11561761851968_salb_top_area_covered_by_old_pct",
@@ -428,7 +484,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B12793543239296_old_area_covered_by_top_pct",
@@ -436,7 +500,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B12793543239296_salb_top_area_covered_by_old_pct",
@@ -444,7 +516,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B15077734082289_old_area_covered_by_top_pct",
@@ -452,7 +532,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B15077734082289_salb_top_area_covered_by_old_pct",
@@ -460,7 +548,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B15408487636665_old_area_covered_by_top_pct",
@@ -468,7 +564,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B15408487636665_salb_top_area_covered_by_old_pct",
@@ -476,7 +580,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B16168252486838_old_area_covered_by_top_pct",
@@ -484,7 +596,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B16168252486838_salb_top_area_covered_by_old_pct",
@@ -492,7 +612,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B168355566476_old_area_covered_by_top_pct",
@@ -500,7 +628,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B168355566476_salb_top_area_covered_by_old_pct",
@@ -508,7 +644,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B24413703823033_old_area_covered_by_top_pct",
@@ -516,7 +660,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B24413703823033_salb_top_area_covered_by_old_pct",
@@ -524,7 +676,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B30693048438959_old_area_covered_by_top_pct",
@@ -532,7 +692,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B30693048438959_salb_top_area_covered_by_old_pct",
@@ -540,7 +708,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B31772276876031_old_area_covered_by_top_pct",
@@ -548,7 +724,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B31772276876031_salb_top_area_covered_by_old_pct",
@@ -556,7 +740,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B37452641895852_old_area_covered_by_top_pct",
@@ -564,7 +756,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B37452641895852_salb_top_area_covered_by_old_pct",
@@ -572,7 +772,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B37576476310465_old_area_covered_by_top_pct",
@@ -580,7 +788,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B37576476310465_salb_top_area_covered_by_old_pct",
@@ -588,7 +804,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B38974563194217_old_area_covered_by_top_pct",
@@ -596,7 +820,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B38974563194217_salb_top_area_covered_by_old_pct",
@@ -604,7 +836,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B4319146558278_old_area_covered_by_top_pct",
@@ -612,7 +852,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B4319146558278_salb_top_area_covered_by_old_pct",
@@ -620,7 +868,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B44985576134462_old_area_covered_by_top_pct",
@@ -628,7 +884,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B44985576134462_salb_top_area_covered_by_old_pct",
@@ -636,7 +900,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B47112439721810_old_area_covered_by_top_pct",
@@ -644,7 +916,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B47112439721810_salb_top_area_covered_by_old_pct",
@@ -652,7 +932,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B47480576799194_old_area_covered_by_top_pct",
@@ -660,7 +948,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B47480576799194_salb_top_area_covered_by_old_pct",
@@ -668,7 +964,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B48763126228848_old_area_covered_by_top_pct",
@@ -676,7 +980,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B48763126228848_salb_top_area_covered_by_old_pct",
@@ -684,7 +996,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B49812801634354_old_area_covered_by_top_pct",
@@ -692,7 +1012,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B49812801634354_salb_top_area_covered_by_old_pct",
@@ -700,7 +1028,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B51179315853055_old_area_covered_by_top_pct",
@@ -708,7 +1044,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B51179315853055_salb_top_area_covered_by_old_pct",
@@ -716,7 +1060,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B53615250576563_old_area_covered_by_top_pct",
@@ -724,7 +1076,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B53615250576563_salb_top_area_covered_by_old_pct",
@@ -732,7 +1092,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B57644193184055_old_area_covered_by_top_pct",
@@ -740,7 +1108,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B57644193184055_salb_top_area_covered_by_old_pct",
@@ -748,7 +1124,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B57740331915335_old_area_covered_by_top_pct",
@@ -756,7 +1140,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B57740331915335_salb_top_area_covered_by_old_pct",
@@ -764,7 +1156,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B59106895169358_old_area_covered_by_top_pct",
@@ -772,7 +1172,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B59106895169358_salb_top_area_covered_by_old_pct",
@@ -780,7 +1188,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B65296626482863_old_area_covered_by_top_pct",
@@ -788,7 +1204,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B65296626482863_salb_top_area_covered_by_old_pct",
@@ -796,7 +1220,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B65471558325414_old_area_covered_by_top_pct",
@@ -804,7 +1236,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B65471558325414_salb_top_area_covered_by_old_pct",
@@ -812,7 +1252,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B65726406107890_old_area_covered_by_top_pct",
@@ -820,7 +1268,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B65726406107890_salb_top_area_covered_by_old_pct",
@@ -828,7 +1284,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B65757043009502_old_area_covered_by_top_pct",
@@ -836,7 +1300,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B65757043009502_salb_top_area_covered_by_old_pct",
@@ -844,7 +1316,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B66751603958816_old_area_covered_by_top_pct",
@@ -852,7 +1332,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B66751603958816_salb_top_area_covered_by_old_pct",
@@ -860,7 +1348,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B71925291750028_old_area_covered_by_top_pct",
@@ -868,7 +1364,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B71925291750028_salb_top_area_covered_by_old_pct",
@@ -876,7 +1380,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B76388735674013_old_area_covered_by_top_pct",
@@ -884,7 +1396,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B76388735674013_salb_top_area_covered_by_old_pct",
@@ -892,7 +1412,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B77006902429960_old_area_covered_by_top_pct",
@@ -900,7 +1428,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B77006902429960_salb_top_area_covered_by_old_pct",
@@ -908,7 +1444,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B8216177448850_old_area_covered_by_top_pct",
@@ -916,7 +1460,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B8216177448850_salb_top_area_covered_by_old_pct",
@@ -924,7 +1476,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B91246233663569_old_area_covered_by_top_pct",
@@ -932,7 +1492,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B91246233663569_salb_top_area_covered_by_old_pct",
@@ -940,7 +1508,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B91994517778696_old_area_covered_by_top_pct",
@@ -948,7 +1524,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B91994517778696_salb_top_area_covered_by_old_pct",
@@ -956,7 +1540,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B9524670555472_old_area_covered_by_top_pct",
@@ -964,7 +1556,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B9524670555472_salb_top_area_covered_by_old_pct",
@@ -972,7 +1572,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B95678269815128_old_area_covered_by_top_pct",
@@ -980,7 +1588,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B95678269815128_salb_top_area_covered_by_old_pct",
@@ -988,7 +1604,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B97576906537580_old_area_covered_by_top_pct",
@@ -996,7 +1620,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B97576906537580_salb_top_area_covered_by_old_pct",
@@ -1004,7 +1636,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B98496568253651_old_area_covered_by_top_pct",
@@ -1012,7 +1652,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B98496568253651_salb_top_area_covered_by_old_pct",
@@ -1020,7 +1668,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B99052541590952_old_area_covered_by_top_pct",
@@ -1028,7 +1684,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     },
     {
       "id": "crosswalk_13655514B99052541590952_salb_top_area_covered_by_old_pct",
@@ -1036,7 +1700,15 @@
       "unit": "percent",
       "vintage": "current",
       "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
-      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b"
+      "evaluation_commit": "31f04cc0e550ed3121c19b863094a8fca2fcc92b",
+      "input_source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ],
+      "source_input_sha256s": [
+        "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
+      ]
     }
   ],
   "metric_bindings": [
@@ -2968,5 +3640,6 @@
         }
       ]
     }
-  ]
+  ],
+  "metric_input_policy_limit": "The required schema field input_sha256 is validated only against repository file descriptors and cannot directly point to a restricted restoration-only source. For each metric, source_input_sha256s and input_source_ids record every actual upstream source hash. The singular input_sha256 remains a repository validation anchor, not a complete upstream-source list where the two differ; reviewers must use source_input_sha256s for full provenance."
 }
