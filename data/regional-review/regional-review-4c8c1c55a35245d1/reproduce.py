@@ -237,7 +237,7 @@ def main():
             "member_ids": sorted(members),
             "classification": "correction_needed" if correction_members else "insufficient_evidence",
             "correction_needed_member_ids": sorted(correction_members),
-            "reason": "Source-to-2021-official name/parent reconciliation is required for listed members; the group purpose and current boundaries remain unverified." if correction_members else "Packet grouping is a reference parent label; source-to-current official parent boundaries and neighboring purpose need full crosswalk.",
+            "reason": ("CAF member identity/parent reconciliation is required for the listed duplicate-name records; group purpose and current boundaries remain unverified." if correction_members and all(x.startswith("gb:CAF:") for x in correction_members) else "Source-to-2021 official name/parent reconciliation is required for listed Cameroon members; group purpose and current boundaries remain unverified." if correction_members and all(x.startswith("gb:CMR:") for x in correction_members) else "Listed member identity/parent reconciliation is required; group purpose and current boundaries remain unverified.") if correction_members else "Packet grouping is a reference parent label; source-to-current official parent boundaries and neighboring purpose need full crosswalk.",
         })
         assert len(members) <= p["full_province_locations"]
         if not p["partial"]: assert len(members) == p["full_province_locations"]
