@@ -274,8 +274,8 @@
     },
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/reproduce.py",
-      "bytes": 12479,
-      "sha256": "f6f3ab3eaf151cc2e1f7a2035fc2e97dae18e810062a1ae2a6dd203705f41f62",
+      "bytes": 12641,
+      "sha256": "fd029217760828f5802bff8dfaee84cb0d6bb471474315cbc42ac8c39d5df421",
       "hash_kind": "file-bytes",
       "role": "reproduction-code"
     },
@@ -323,8 +323,8 @@
     },
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary-metrics.csv",
-      "bytes": 6596,
-      "sha256": "80a41b67b5202f989a3e5500c48bc8d61edafd9dbc0d67093452bbc56bb7e63e",
+      "bytes": 6605,
+      "sha256": "fa53ba8d4a49a3c51b1ce04ee00ebec4eb09900cc2941bc2fffb8d666e014aa8",
       "hash_kind": "file-bytes",
       "role": "generated-table"
     }
@@ -2459,43 +2459,43 @@
         {
           "metric_id": "old_subjects_2017",
           "line": 2,
-          "template": "old_subjects_2017,{value},subjects",
+          "template": "old_geoboundaries_subject_count,{value},subjects",
           "decimals": 0
         },
         {
           "metric_id": "salb_features",
           "line": 3,
-          "template": "salb_features,{value},features",
+          "template": "salb_adm2_count,{value},features",
           "decimals": 0
         },
         {
           "metric_id": "salb_regional_sectors",
           "line": 4,
-          "template": "salb_regional_sectors,{value},sectors",
+          "template": "salb_regional_sector_count,{value},sectors",
           "decimals": 0
         },
         {
           "metric_id": "salb_autonomous_sector",
           "line": 5,
-          "template": "salb_autonomous_sector,{value},sectors",
+          "template": "salb_autonomous_sector_count,{value},sectors",
           "decimals": 0
         },
         {
           "metric_id": "screen_review_required",
           "line": 6,
-          "template": "screen_review_required,{value},rows",
+          "template": "atlas_parent_vs_overlap_candidate_review_rows,{value},rows",
           "decimals": 0
         },
         {
           "metric_id": "screen_consistent",
           "line": 7,
-          "template": "screen_consistent,{value},rows",
+          "template": "atlas_parent_vs_overlap_candidate_consistent_rows,{value},rows",
           "decimals": 0
         },
         {
           "metric_id": "nc4_count_gap",
           "line": 8,
-          "template": "nc4_count_gap,{value},sectors",
+          "template": "salb_regional_sector_difference_vs_2025_nc4,{value},sectors",
           "decimals": 0
         },
         {

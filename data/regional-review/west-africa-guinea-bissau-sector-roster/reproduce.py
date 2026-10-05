@@ -159,7 +159,9 @@ def main():
     with open(metrics_path, "w", newline="", encoding="utf-8") as stream:
         writer = csv.writer(stream, lineterminator="\n")
         writer.writerow(["metric_id", "value", "unit"])
-        writer.writerows(metrics)
+        for metric_id, value, unit in metrics:
+            rendered_value = f"{value:.4f}" if unit == "percent" else str(int(value))
+            writer.writerow([metric_id, rendered_value, unit])
     print(f"SALB sha256={digest}; old geoBoundaries sha256={old_digest}; rows={len(rows)}; outputs={args.output},{args.roster_output},{summary_path},{metrics_path}")
 
 
