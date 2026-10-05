@@ -6,9 +6,10 @@ whole-file SHA-256 pins for every input part and the hierarchy/grid/release file
 and verifies the current release pointer against the actual retained file.
 Uncommitted checkout changes cannot replace its inputs.
 
-The detector is the first part of #920. **It is not yet wired into the PR or merge
-queue as an enforced gate.** Source review, hierarchy/crosswalk/certificate checks,
-derived-product validation and publication remain separate requirements.
+The low-level detector and trusted workflow enforcement are separate components
+of #920. The enforcement wrapper is described below. Source review,
+hierarchy/crosswalk/certificate checks, derived-product validation and publication
+remain separate requirements; source-backed exception adjudication is unfinished.
 
 ```sh
 python scripts/check-geographic-regression.py \
