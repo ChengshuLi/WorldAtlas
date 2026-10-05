@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "stp-ine-current-country-administration",
+      "title": "Sobre o País",
+      "publisher": "Instituto Nacional de Estatística de São Tomé e Príncipe (INE)",
+      "url": "https://ine.st/index.php/o-pais/sobre-o-pais",
+      "retrieved_utc": "2026-10-05T04:44Z",
+      "bytes": 42269,
+      "sha256": "4c2a4d6fd78180287846ea104ccdc3b46beecc6b39ad7e4e650752f889547903",
+      "original_bytes_retained": false,
+      "rights": "No reuse license identified; restoration-only. No page body redistributed.",
+      "inspected_fact": "INE says the 21 November 1980 Administrative Division Law defined seven districts (six on São Tomé and one on Príncipe) with district municipal chambers; it also states that Príncipe currently has autonomous-region status. This is current page content inspected 2026-10-05; the specific legal text itself was not independently retrieved."
+    },
+    {
+      "id": "gabon-interior-administrative-list",
+      "title": "Découpage Administratif",
+      "publisher": "Gabon Ministry of Interior, Security and Decentralization",
+      "url": "https://www.interieur.gouv.ga/decoupage-administratif",
+      "page_publication_date": "2018-01-06",
+      "retrieved_utc": "2026-10-05",
+      "retrieval_method": "Official page rendered by the web search/open service; direct HTTP retrieval from this worker environment timed out.",
+      "original_bytes_retained": false,
+      "original_sha256": null,
+      "rights": "No reuse license identified; no page body redistributed.",
+      "inspected_facts": [
+        "The page table is headed Province, chef-lieu, departments, districts, governor.",
+        "Haut-Ogooué lists eleven departments, and all eleven source features scoped here are in that official listing after lossless accent/punctuation normalization.",
+        "Ogooué-Ivindo lists Ivindo, Zadié, Mvoung and Lopé, matching the four scoped source units after diacritic/punctuation normalization.",
+        "Ogooué-Lolo lists Lolo Bouénguidi, Mulundu, Lombo Bouénguidi and Offoué Onoyé. The scoped source label Mouloundou does not normalize to Mulundu and remains an unresolved alias/name discrepancy; the other three scoped labels are supported by spelling variants.",
+        "The page contains an eight-department listing for Ngounié while a separate Ministry territorial-count table reports nine. Because those public summaries conflict and their dates/vintages differ from the 2018 source geometry, this packet does not infer nationwide completeness from the counts."
+      ],
+      "source_hash_limit": "No byte-exact hash is available for the rendered official HTML because its origin server timed out on direct retrieval. Restoration URL and specific source page/date are preserved; do not treat the web rendering as retained original bytes."
+    },
+    {
+      "id": "gabon-interior-territorial-counts",
+      "title": "Découpage Territorial",
+      "publisher": "Gabon Ministry of Interior, Security and Decentralization",
+      "url": "https://interieur.gouv.ga/decoupage-territorial/",
+      "page_publication_date": "2018-01-06",
+      "source_cited_by_page": "DGAT, May 2016",
+      "retrieved_utc": "2026-10-05",
+      "retrieval_method": "Official page rendered by the web search/open service; direct HTTP retrieval from this worker environment timed out.",
+      "original_bytes_retained": false,
+      "original_sha256": null,
+      "rights": "No reuse license identified; no page body redistributed.",
+      "inspected_facts": [
+        "The table reports 9 provinces and 48 departments; counts for the three relevant provinces are Haut-Ogooué 11, Ogooué-Ivindo 4 and Ogooué-Lolo 4.",
+        "It names Law No. 14/96 of 15 April 1996 as the territorial reorganization basis.",
+        "The official aggregate's 48 departments differs from the 49 features in geoBoundaries GAB ADM2. It is a 2016 count versus 2018-representative source data and does not identify which national unit explains the difference."
+      ]
+    },
+    {
+      "id": "stp-ine-2012-census-report",
+      "title": "Estrutura da População — RGPH 2012",
+      "publisher": "Instituto Nacional de Estatística de São Tomé e Príncipe (INE)",
+      "url": "https://www.ine.st/phocadownload/userupload/Documentos/Recenseamentos/2012/Relat%C3%B3rio%20tem%C3%A1ticos%20%20Recenseamento%20%202012/2_ESTRUTURA%20DA%20POPULA%C3%87%C3%83O%20Recenseamento%202012.pdf",
+      "source_vintage": "2012 census, published 2014",
+      "retrieved_utc": "2026-10-05T04:39Z",
+      "bytes": 1372911,
+      "sha256": "c6c702c97c40fbd96981d95a36dc9bc5885897b857f536638499852560ccf461",
+      "original_bytes_retained": false,
+      "rights": "No reuse license identified; restoration-only. Temporary downloaded bytes were inspected then omitted from the repository.",
+      "inspected_pages": [
+        {"page": 15, "fact": "Administrative organization lists six São Tomé districts (Água Grande, Mé-Zóchi, Cantagalo, Caué, Lembá, Lobata) and an autonomous region (Ilha do Príncipe); the report says Príncipe has held autonomous-region status since 1996. It distinguishes district municipalities from the regional government."},
+        {"page": 15, "fact": "The report describes the country as an archipelago with the two main islands, and separately notes other small islands. This cautions against inferring national land/islet completeness from the two-feature ADM1 source."}
+      ]
+    },
+    {
+      "id": "stp-ine-2017-statistical-yearbook",
+      "title": "São Tomé e Príncipe em Números 2017 / São Tomé et Príncipe en Chifres 2017",
+      "publisher": "Instituto Nacional de Estatística de São Tomé e Príncipe (INE)",
+      "url": "https://www.ine.st/phocadownload/userupload/Documentos/STPemNumeros/STPemNumeros%20%202017.pdf",
+      "source_vintage": "2017 statistical series",
+      "retrieved_utc": "2026-10-05T04:39Z",
+      "bytes": 1543236,
+      "sha256": "6ee33a488f878bccfb15052739f43f026b2f03dd4b6a96b32a48936c0eb280a1",
+      "original_bytes_retained": false,
+      "rights": "No reuse license identified; restoration-only. Temporary downloaded bytes were inspected then omitted from the repository.",
+      "inspected_pages": [
+        {"page": 5, "fact": "The official 2017 territory table distinguishes São Tomé area and the Região Autónoma do Príncipe (R.A.P.); it lists the six district areas and Príncipe separately."}
+      ]
+    }
+  ],
+  "license_limit": "The two retained STP source files are ODbL 1.0. This packet preserves attribution and records the database obligation; downstream redistribution/derivative use needs license-specific review. The official INE PDFs are not redistributed because their reuse terms were not identified."
+}
