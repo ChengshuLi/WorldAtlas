@@ -245,7 +245,7 @@ def main() -> None:
         "parent_id": parents[city_id][0],
         "parent_name": parents[city_id][1],
         "source_collection": "Natural Earth 10m Admin 1; local extraction version unpinned",
-        "territorial_role_finding": "Croatian law recognizes Grad Zagreb as a distinct territorial and administrative unit; source identity matches its name",
+        "territorial_role_finding": "Croatian law recognizes Grad Zagreb as a distinct territorial and administrative unit; the existing Atlas record names Grad Zagreb, but Natural Earth source lineage and identity remain unverified",
         "roster_comparison_basis": "not applicable: separate city/county-equivalent unit",
         "inherited_parent_county_dzs_2021_roster_match": "not applicable",
         "overall_assessment": "insufficient-evidence",
