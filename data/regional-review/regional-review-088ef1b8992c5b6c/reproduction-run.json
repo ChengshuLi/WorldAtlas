@@ -56,5 +56,6 @@
     ]
   },
   "evaluation_commit": "1454584dbaf9a290fa88f941c6dd3cc92cf26d1d",
-  "evaluation_note": "The exact scoped Atlas roster remains pinned to baseline_commit 80fb0e7; the shared CNTIG input and derived official-layer measurements are evaluated against PR base 1454584, where the input exists."
+  "evaluation_note": "The exact scoped Atlas roster remains pinned to baseline_commit 80fb0e7. The shared CNTIG input and derived official-layer metrics were reproducibly evaluated at main commit 1454584, when it was current; they are retained as archived measurements because main subsequently advanced. The input bytes remain pinned by SHA-256.",
+  "evaluation_status": "archived after main advanced beyond the measurement commit"
 }
