@@ -1,0 +1,155 @@
+{
+  "baseline_commit": "b8c0eadc86cf2992719393e7c90858a2b58fcff5",
+  "baseline_input_hashes": {
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "world_index_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+  },
+  "component_review": {
+    "current_valid_multipart_count": 3,
+    "current_valid_multipart_rows": [
+      {
+        "components": 20,
+        "id": "gb:ARG:ADM2:61730980B24175536898784",
+        "name": "Patagones"
+      },
+      {
+        "components": 2,
+        "id": "gb:ARG:ADM2:61730980B35724148843083",
+        "name": "La Plata"
+      },
+      {
+        "components": 8,
+        "id": "gb:ARG:ADM2:61730980B37602961907031",
+        "name": "Tigre"
+      }
+    ],
+    "limit": "Multipart component counts flag geometry for named-island/fragment review only. They do not identify legal islands or prove every component is complete.",
+    "source_multipart_count": 5,
+    "source_multipart_rows": [
+      {
+        "components": 20,
+        "id": "gb:ARG:ADM2:61730980B24175536898784",
+        "name": "Patagones"
+      },
+      {
+        "components": 30,
+        "id": "gb:ARG:ADM2:61730980B31085500015034",
+        "name": "San Fernando"
+      },
+      {
+        "components": 2,
+        "id": "gb:ARG:ADM2:61730980B35724148843083",
+        "name": "La Plata"
+      },
+      {
+        "components": 8,
+        "id": "gb:ARG:ADM2:61730980B37602961907031",
+        "name": "Tigre"
+      },
+      {
+        "components": 46,
+        "id": "gb:ARG:ADM2:61730980B44606052944654",
+        "name": "Villarino"
+      }
+    ]
+  },
+  "current_source": {
+    "feature_count": 529,
+    "file_bytes": 3634462,
+    "sha256": "5bdf36f66a5fd93d00b93b5cb28c1d71a0212848325612e84d3fbf5764870e87"
+  },
+  "current_source_roster": {
+    "blank_code_feature_count": 3,
+    "blank_code_feature_names": [
+      "Chascomús",
+      "Lezama",
+      "Tolhuin"
+    ],
+    "unique_nonblank_indec_codes": 526
+  },
+  "geometry_results": {
+    "invalid_or_missing_pair_count": 14,
+    "iou_lt_0_95_count": 0,
+    "iou_max": 0.999990949,
+    "iou_median": 0.998568019,
+    "iou_min": 0.986187837,
+    "valid_pair_count": 227
+  },
+  "individual_assessment_counts": {
+    "correction-needed": 36,
+    "insufficient-evidence": 205
+  },
+  "issue": 442,
+  "issue_scope_location_count": 241,
+  "method": {
+    "candidate_partition": "Match normalized source name against the national roster; report whether current INDEC province code agrees with the frozen immediate atlas parent; independently compare the six frozen province parents with the pinned TDWG Level 4 AGE/AGS roster. Ambiguous names remain unjoined.",
+    "geometry_crs": "EPSG:6933 (WGS 84 / NSIDC EASE-Grid 2.0 Global, equal-area projection); GeoJSON axes interpreted longitude, latitude.",
+    "geometry_method": "2020 geoBoundaries versus dated IGN 2026-10-05 generalized-source IoU. Repeated normalized names are disambiguated only when exactly one candidate has IoU >= 0.95. Invalid source geometries are preserved and not silently repaired.",
+    "limitations": [
+      "IGN's service does not state layer vintage or reuse license.",
+      "IGN geometry was requested with 0.001-degree maximum offset and five-decimal precision.",
+      "Planar IoU is only a source-representation triage signal and does not adjudicate legal boundary, coastline, cadastral, or disconnected-land completeness.",
+      "A name and INDEC code match does not prove the atlas's parent or geographic area is correct."
+    ],
+    "name_normalization": "Unicode NFKD, casefold, remove diacritics and non-alphanumeric characters; strip initial Departamento/Partido/Dpto./Depto. label. Explicit aliases: Ezeiza/José M. Ezeiza; Coronel de Marina L. Rosales/Coronel de Marina Leonardo Rosales; Bolívar/San Carlos de Bolívar; Constitución/Villa Constitución.",
+    "software": "Python 3.12; NumPy 2.3.5; Shapely 2.1.2; pyproj 3.7.2; requirements.txt"
+  },
+  "negative_controls": [
+    {
+      "candidate_count": 0,
+      "id": "gb:ARG:ADM2:61730980B10302759212435",
+      "wrong_province_code": "14"
+    }
+  ],
+  "original_source": {
+    "feature_count": 525,
+    "file_bytes": 69702323,
+    "sha256": "f35dae5a257302dea5bd1549ae135baf82e7ee7491918854c3db9bbdec890177"
+  },
+  "positive_controls": [
+    {
+      "current_indec_code": "22028",
+      "id": "gb:ARG:ADM2:61730980B10302759212435",
+      "match_status": "matched-name-and-parent-code"
+    }
+  ],
+  "scope_count": 241,
+  "scope_subject_sha256": "63f3030ff6c3903e9578994651bf1a316c689d2568d263ed4813dd7171423ee6",
+  "source_join_status_counts": {
+    "ambiguous": 3,
+    "matched-name-and-parent-code": 215,
+    "matched-name-parent-code-mismatch": 17,
+    "unmatched": 6
+  },
+  "version": 2,
+  "wgsrpd_area_membership": {
+    "cross_area_conflict_count": 19,
+    "cross_area_conflict_subject_ids": [
+      "gb:ARG:ADM2:61730980B15935899611470",
+      "gb:ARG:ADM2:61730980B18182396698532",
+      "gb:ARG:ADM2:61730980B23902943966550",
+      "gb:ARG:ADM2:61730980B38020683731034",
+      "gb:ARG:ADM2:61730980B41711157234352",
+      "gb:ARG:ADM2:61730980B46237487976912",
+      "gb:ARG:ADM2:61730980B4652577007654",
+      "gb:ARG:ADM2:61730980B49644503791094",
+      "gb:ARG:ADM2:61730980B50411515207012",
+      "gb:ARG:ADM2:61730980B52273662212744",
+      "gb:ARG:ADM2:61730980B61800814165729",
+      "gb:ARG:ADM2:61730980B62800099035851",
+      "gb:ARG:ADM2:61730980B6439123039884",
+      "gb:ARG:ADM2:61730980B65517483181137",
+      "gb:ARG:ADM2:61730980B672443386534",
+      "gb:ARG:ADM2:61730980B68223475909099",
+      "gb:ARG:ADM2:61730980B70528593712709",
+      "gb:ARG:ADM2:61730980B94012431772813",
+      "gb:ARG:ADM2:61730980B95993881972660"
+    ],
+    "level3_table_sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
+    "level3_target": "AGE",
+    "limit": "AGE/AGS codes describe WGSRPD botanical membership, not a current administrative boundary. Exact area reassignment remains coordinated integration work under #441.",
+    "pinned_level4_table_sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
+    "table_repository_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54",
+    "target_area_level4_count": 9
+  }
+}

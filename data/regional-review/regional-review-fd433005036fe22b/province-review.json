@@ -1,0 +1,214 @@
+{
+  "issue": 442,
+  "assessment_date": "2026-10-05",
+  "interpretation": "Each listed parent corresponds to an Argentine province and the scoped children are intended as complete issue-owned provincial rosters. INDEC defines provinces as first-level jurisdictions and departments/partidos as exhaustive second-level divisions. The parent semantic tier is supported in principle; the exact child roster and parent geometry remain insufficient-evidence where recorded discrepancies exist. No parent is certified by this packet.",
+  "source": "INDEC Marco Geoestadístico Nacional (2025-10); IGN ANIDA layer 270 captured 2026-10-05; see source-inventory.json",
+  "province_scopes": [
+    {
+      "id": "framework:province:buenos-aires:df466c06286c",
+      "name": "Buenos Aires",
+      "issue_scoped_children": 139,
+      "identity_parent_code_matches": 121,
+      "parent_code_mismatches": 16,
+      "ambiguous_names": 2,
+      "unmatched_names": 0,
+      "classification": "insufficient-evidence",
+      "finding": "Sixteen rows map to current province code 30 (Entre Ríos); one name (San Fernando) is ambiguous between Buenos Aires and Chaco; the IGN Buenos Aires province polygon is invalid. Resolve scope and boundary provenance before certification."
+    },
+    {
+      "id": "framework:province:cordoba:beae6ba6b36e",
+      "name": "Córdoba",
+      "issue_scoped_children": 27,
+      "identity_parent_code_matches": 26,
+      "parent_code_mismatches": 1,
+      "ambiguous_names": 0,
+      "unmatched_names": 0,
+      "classification": "insufficient-evidence",
+      "finding": "Rivadavia matches current province code 86 (Salta), not Córdoba. Confirm exact source and correct parent through an authorized follow-up."
+    },
+    {
+      "id": "framework:province:chaco:87e685fd273c",
+      "name": "Chaco",
+      "issue_scoped_children": 25,
+      "identity_parent_code_matches": 22,
+      "parent_code_mismatches": 0,
+      "ambiguous_names": 0,
+      "unmatched_names": 3,
+      "classification": "insufficient-evidence",
+      "finding": "1ro. de Mayo, General Donovan, and Mayor Luis J. Fontana do not occur in the captured IGN layer roster under these names. Current source vintage and alternate jurisdiction/code evidence are required."
+    },
+    {
+      "id": "framework:province:formosa:6ec8d4a4a329",
+      "name": "Formosa",
+      "issue_scoped_children": 9,
+      "identity_parent_code_matches": 7,
+      "parent_code_mismatches": 0,
+      "ambiguous_names": 0,
+      "unmatched_names": 2,
+      "classification": "insufficient-evidence",
+      "finding": "Matacos and Ramón Lista do not occur in the captured IGN layer roster under these names. Current source vintage and alternate jurisdiction/code evidence are required."
+    },
+    {
+      "id": "framework:province:la-pampa:d10ea068ae3a",
+      "name": "La Pampa",
+      "issue_scoped_children": 22,
+      "identity_parent_code_matches": 22,
+      "parent_code_mismatches": 0,
+      "ambiguous_names": 0,
+      "unmatched_names": 0,
+      "classification": "insufficient-evidence",
+      "finding": "Names and current province codes align for all 22 rows; 2020 source-to-current representation still does not establish lawful boundaries, source completeness, or the province footprint. Preserve as a cross-check only."
+    },
+    {
+      "id": "framework:province:santa-fe:1f6b7cf8fad3",
+      "name": "Santa Fe",
+      "issue_scoped_children": 19,
+      "identity_parent_code_matches": 17,
+      "parent_code_mismatches": 0,
+      "ambiguous_names": 1,
+      "unmatched_names": 1,
+      "classification": "insufficient-evidence",
+      "finding": "San Javier remains ambiguous across three provincial candidates; General López is unmatched in the captured IGN roster, which contains Melicué instead. One matched scoped current polygon (Vera) is invalid. Confirm census/statistical source vintage and provincial change history. Separately, all 19 issue-scoped Santa Fe IDs are assigned to the AGE regional area even though the pinned WGSRPD Level 4 table places Santa Fe under Argentina South (AGS); resolve area membership with #441 and #444 before certification."
+    }
+  ],
+  "multipart_component_review": {
+    "source_count": 5,
+    "source_rows": [
+      {
+        "name": "Patagones",
+        "parent": "Buenos Aires",
+        "components": 20,
+        "current_components": 20,
+        "current_geometry_valid": true
+      },
+      {
+        "name": "San Fernando",
+        "parent": "Buenos Aires",
+        "components": 30,
+        "current_components": null,
+        "current_geometry_valid": null,
+        "identity_status": "ambiguous between Buenos Aires and Chaco"
+      },
+      {
+        "name": "La Plata",
+        "parent": "Buenos Aires",
+        "components": 2,
+        "current_components": 2,
+        "current_geometry_valid": true
+      },
+      {
+        "name": "Tigre",
+        "parent": "Buenos Aires",
+        "components": 8,
+        "current_components": 8,
+        "current_geometry_valid": true
+      },
+      {
+        "name": "Villarino",
+        "parent": "Buenos Aires",
+        "components": 46,
+        "current_components": 46,
+        "current_geometry_valid": false
+      }
+    ],
+    "interpretation": "These multipart features require named-island and boundary completeness review. Component counts alone do not establish legal or physical island completeness."
+  },
+  "aggregate": {
+    "scoped_children": 241,
+    "matches_agreeing_with_frozen_parent_code": 215,
+    "confirmed_current_parent_code_conflicts": 17,
+    "ambiguous_name_matches": 3,
+    "unmatched_names": 6,
+    "invalid_matched_current_geometries": 5,
+    "current_roster_blank_code_features_countrywide": [
+      "Chascomús",
+      "Lezama",
+      "Tolhuin"
+    ],
+    "invalid_current_parent_geometries_in_six_scope": [
+      "Buenos Aires"
+    ],
+    "cross_area_membership_conflicts": 19,
+    "individual_correction_needed": 36,
+    "individual_insufficient_evidence": 205
+  },
+  "current_ign_layer_feature_counts_for_six_provinces": {
+    "retrieval_date": "2026-10-05",
+    "source_vintage_and_reuse_terms": "not stated in consulted layer metadata",
+    "Buenos Aires (06)": {
+      "features": 135,
+      "nonblank_INDEC_codes": 133,
+      "blank_code_features": [
+        "Lezama",
+        "Chascomús"
+      ]
+    },
+    "Córdoba (14)": {
+      "features": 26,
+      "nonblank_INDEC_codes": 26
+    },
+    "Chaco (22)": {
+      "features": 25,
+      "nonblank_INDEC_codes": 25
+    },
+    "Formosa (34)": {
+      "features": 9,
+      "nonblank_INDEC_codes": 9
+    },
+    "La Pampa (42)": {
+      "features": 22,
+      "nonblank_INDEC_codes": 22
+    },
+    "Santa Fe (82)": {
+      "features": 19,
+      "nonblank_INDEC_codes": 19
+    },
+    "interpretation": "These current-service feature counts are comparison data, not an assertion of legal completeness; they differ from the pinned issue inventories and need a dated licensed source crosswalk."
+  },
+  "neighbor_granularity": {
+    "administrative_level": "ADM2/departments/partidos are second-order political-administrative units per source metadata and INDEC. Local governments are a distinct third-order administrative tier, sometimes cross-department or non-exhaustive.",
+    "general_geographic_tier": "The subject IDs are sensible location-level candidates as ADM2, but each row remains insufficient-evidence until local/source ownership and geometry are reconciled. They must not be promoted or treated as a general political region solely because they are ADM2."
+  },
+  "area_integration_handoff": {
+    "wgsrpd_unit": "AGE — Argentina Northeast, Level 3",
+    "level3_table_sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
+    "level4_table_sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
+    "standard_level4_count": 9,
+    "standard_level4_codes": [
+      "AGE-BA",
+      "AGE-CH",
+      "AGE-CN",
+      "AGE-CO",
+      "AGE-DF",
+      "AGE-ER",
+      "AGE-FO",
+      "AGE-LP",
+      "AGE-MI"
+    ],
+    "frozen_hierarchy_direct_child_count": 11,
+    "cross_area_conflict_count": 19,
+    "cross_area_subject_ids_sha256": "6a4a86d57f22be5c5cab70f5480ecf59f83290e503d44a15c34b39732763436a",
+    "cross_area_subject_ids": [
+      "gb:ARG:ADM2:61730980B15935899611470",
+      "gb:ARG:ADM2:61730980B18182396698532",
+      "gb:ARG:ADM2:61730980B23902943966550",
+      "gb:ARG:ADM2:61730980B38020683731034",
+      "gb:ARG:ADM2:61730980B41711157234352",
+      "gb:ARG:ADM2:61730980B46237487976912",
+      "gb:ARG:ADM2:61730980B4652577007654",
+      "gb:ARG:ADM2:61730980B49644503791094",
+      "gb:ARG:ADM2:61730980B50411515207012",
+      "gb:ARG:ADM2:61730980B52273662212744",
+      "gb:ARG:ADM2:61730980B61800814165729",
+      "gb:ARG:ADM2:61730980B62800099035851",
+      "gb:ARG:ADM2:61730980B6439123039884",
+      "gb:ARG:ADM2:61730980B65517483181137",
+      "gb:ARG:ADM2:61730980B672443386534",
+      "gb:ARG:ADM2:61730980B68223475909099",
+      "gb:ARG:ADM2:61730980B70528593712709",
+      "gb:ARG:ADM2:61730980B94012431772813",
+      "gb:ARG:ADM2:61730980B95993881972660"
+    ],
+    "difference": "The pinned Level 4 table lists nine AGE units, includes Entre Ríos, and assigns Santa Fe to AGS (Argentina South). The frozen hierarchy has 11 direct children, duplicate Buenos Aires and Buenos Aires City identities, includes Santa Fe, and has no Entre Ríos child. Integration must resolve exact IDs and neighboring area membership; this packet makes no unilateral parent edit."
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "issue": 442,
+  "retrieval_date": "2026-10-05",
+  "baseline": {
+    "commit": "b8c0eadc86cf2992719393e7c90858a2b58fcff5",
+    "release_id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+    "release_version": 5,
+    "hierarchy_sha256_issue_pin": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "footprints_sha256_issue_pin": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+    "macro_certificate_sha256_issue_pin": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "frozen_region_geometry_sha256_issue_pin": "b6d1cc0a41110da332ecca2a4f08519f1d97e7810757d84189cd44642e048798",
+    "frozen_region_member_ids_sha256_issue_pin": "4447e260a67aeb468ab19584e45868fc3470dc4c0e989bdac21aa99589502e9c",
+    "world_index_sha256_at_baseline": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+    "hierarchy_json_sha256_at_baseline": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "administrative_sources_json_sha256_at_baseline": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+  },
+  "sources": [
+    {
+      "id": "gb:ARG:ADM2",
+      "title": "geoBoundaries Argentina ADM2 GeoJSON, pinned release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson",
+      "metadata_url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2-metaData.json",
+      "retrieved_metadata_bytes": 958,
+      "retrieved_metadata_sha256": "17452b82df4498c1b29a4489bd78709cef922b453579b1a47010dfd2524a7ce2",
+      "role": "ADM2 departments/partidos; polygon identity and comparison reference, not a legal adjudication",
+      "represented_vintage": "2020",
+      "source_data_update_date": "2023-01-19",
+      "build_date": "2023-12-12",
+      "stated_upstream_sources": ["Instituto Geografico Nacional", "UNHCR, OCHA ROLAC"],
+      "license": "CC BY 3.0 IGO",
+      "metadata_adm_unit_count": 526,
+      "retrieved_feature_count": 525,
+      "retrieved_file_bytes": 69702323,
+      "retrieved_file_sha256": "f35dae5a257302dea5bd1549ae135baf82e7ee7491918854c3db9bbdec890177",
+      "repository_administrative_sources_sha256_field": "cedee8710e49d9017327fc1d4b2dc536e95a82317dc94c3bac8d9404af6bf771",
+      "hash_discrepancy": "The source-inventory metadata sha256 field does not equal the retrieved file SHA-256. The pinned Git tree uses Git LFS; the returned media payload hashes to f35dae5a... and has 525 features while metadata says 526. Preserve both claims; do not silently substitute one for the other.",
+      "lawful_restoration": "Retrieve the exact pinned path at the commit above through Git LFS/media (e.g. https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson), then require 69,702,323 bytes and SHA-256 f35dae5a257302dea5bd1549ae135baf82e7ee7491918854c3db9bbdec890177 before use. The full original is not redistributed in this packet; CC BY 3.0 IGO attribution must accompany any later lawful reuse."
+    },
+    {
+      "id": "IGN-ANIDA-270",
+      "title": "IGN Argentina ANIDA, organizational political geography, layer 270 Departamentos",
+      "url": "https://ide.ign.gob.ar/geoservicios/rest/services/ANIDA/org_politica/MapServer/270",
+      "role": "Current-service comparator for Argentine second-level political-administrative units",
+      "retrieval_date": "2026-10-05",
+      "service_metadata_url": "https://ide.ign.gob.ar/geoservicios/rest/services/ANIDA/org_politica/MapServer/270?f=pjson",
+      "service_metadata_sha256": "0a71231c113a0811512f86ef72268d0c3e30b8767d8c99f41a631488d6f999bf",
+      "layer_source_vintage": null,
+      "license_or_reuse_terms": null,
+      "capture_request": "Query layer 270 with where=1=1, outFields=*, returnGeometry=true, outSR=4326, maxAllowableOffset=0.001, geometryPrecision=5, f=geojson.",
+      "capture_feature_count": 529,
+      "capture_file_bytes": 3634462,
+      "capture_sha256": "5bdf36f66a5fd93d00b93b5cb28c1d71a0212848325612e84d3fbf5764870e87",
+      "capture_roster": "526 unique nonblank CODINDEC values and three blank-code features (Chascomús, Lezama, Tolhuin). Five scoped matched features have invalid geometries; no repair was applied.",
+      "use_limit": "Metadata does not declare source vintage or reuse license. Private capture used for comparison only and omitted from the committed packet. Obtain reuse terms and source vintage before redistribution or production use."
+    },
+    {
+      "id": "IGN-ANIDA-169",
+      "title": "IGN Argentina ANIDA, organizational political geography, layer 169 Provincias",
+      "url": "https://ide.ign.gob.ar/geoservicios/rest/services/ANIDA/org_politica/MapServer/169",
+      "role": "Second-level parent boundary comparison; 24 province/jurisdiction polygons",
+      "retrieval_date": "2026-10-05",
+      "layer_source_vintage": null,
+      "license_or_reuse_terms": null,
+      "capture_parameters": "where=1=1, outFields=*, returnGeometry=true, outSR=4326, maxAllowableOffset=0.001, geometryPrecision=5, f=geojson",
+      "capture_feature_count": 24,
+      "capture_file_bytes": 1856031,
+      "capture_sha256": "1c1c3f9ed985f7b99c7feb3443503032306c8d7f722da7b34f4f5c8fc39a2bb6",
+      "service_metadata_sha256": "dfd8e4f0282c7805fbed67ae3bb1e582e2c73503d1655cd716cf845acb838195",
+      "geometry_quality": "The Buenos Aires parent polygon among the six scoped provinces is invalid under GEOS validity checks. No repair or overlay claim is made.",
+      "use_limit": "Private capture used to inspect source role and validity only, omitted from committed packet; reuse terms and vintage remain unknown."
+    },
+    {
+      "id": "INDEC-MGN-2025",
+      "title": "INDEC Marco Geoestadístico Nacional, October 2025",
+      "url": "https://www.indec.gob.ar/ftp/cuadros/geoestadistica/marco_geoestadistico_nacional.pdf",
+      "role": "Official description of Argentina geographic/statistical tiers and coverage",
+      "publication_vintage": "2025-10",
+      "retrieval_date": "2026-10-05",
+      "license": "No license statement located in the consulted document",
+      "findings": ["Provinces/CABA are first-level jurisdictions.", "Departments/partidos are second-level political-administrative areas described as exhaustive within each jurisdiction.", "Local governments are third-level and may cross departments or fail to cover an entire province."]
+    },
+    {
+      "id": "IGN-units-territoriales-visor",
+      "title": "IGN Argentina, Nuevo Visor de Unidades Territoriales de la República Argentina",
+      "url": "https://www.ign.gob.ar/content/nuevo-visor-de-unidades-territoriales-de-la-rep%C3%BAblica-argentina",
+      "role": "Official institutional explanation of national territorial cartography and the legal/source limits for some represented boundaries",
+      "retrieval_date": "2026-10-05",
+      "license": "No reuse license recorded in the consulted page",
+      "findings": ["IGN describes official cartography as based on inputs from competent authorities.", "It warns that some legal limits lack an instrument defining them or are described too vaguely to represent precisely."]
+    },
+    {
+      "id": "INDEC-GeoNode-departments",
+      "title": "INDEC GeoNode Departamentos layer metadata",
+      "url": "https://geonode.indec.gob.ar/layers/geonode_data:geonode:departamentos",
+      "role": "Official description of census/statistical department map layer construction and intended use",
+      "publication_date": "2025-08-25",
+      "retrieval_date": "2026-10-05",
+      "license": "Not Specified",
+      "caveat": "Represents limits used by each provincial statistical office; census cartography is made for statistical purposes. INDEC requests source attribution and places use beyond that purpose on the user."
+    },
+    {
+      "id": "TDWG-WGSRPD-2001",
+      "title": "Brummitt, World Geographic Scheme for Recording Plant Distributions, Edition 2",
+      "url": "https://www.tdwg.org/standards/wgsrpd/",
+      "primary_document": "https://github.com/tdwg/wgsrpd/blob/master/109-488-1-ED/2nd%20Edition/SecondEdGeog.htm",
+      "vintage": "2001-08",
+      "role": "Authoritative semantic description of botanical geographic Level 3 and political Level 4 units",
+      "license": "No reuse license recorded in the consulted page",
+      "findings": ["Level 3 is a botanical-country scale that can disregard purely political boundaries.", "Level 4 basic recording units recognize political integrity.", "WGSRPD identifies AGE Argentina Northeast Level 3 and Argentina Buenos Aires, Córdoba, Chaco, Corrientes, Distrito Federal, Entre Ríos, Formosa, La Pampa, Misiones, and Santa Fe as its Level 4 units."]
+    }
+  ]
+}
