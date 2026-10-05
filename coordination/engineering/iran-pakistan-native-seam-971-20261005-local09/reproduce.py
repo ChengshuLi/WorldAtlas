@@ -196,6 +196,8 @@ def compare(repo, commit, registry):
                               'native_vs_current_component_difference': measured_geometry(component.intersection(native[country].difference(current[country])))}
     osm, osm_info = assemble_osm_boundary(json.loads(sources.read(registry['osm_file'])), 3229274)
     parts = partition(component, native['IRN'], native['PAK'])
+    partition_union = union_all([shape(p['geometry']) for p in parts.values()])
+    osm_joint = union_all([native['IRN'], osm])
     area = measured_geometry(component)
     measured = [p['area_m2'] for p in parts.values()]
     return {'version': VERSION, 'baseline_commit': registry['baseline_commit'], 'evaluation_commit': commit,
@@ -203,11 +205,16 @@ def compare(repo, commit, registry):
             'original_component_properties': component_feature['properties'], 'component': area,
             'anchor': list(ANCHOR), 'countries': countries, 'native_source_partition': parts,
             'partition_area_sum_m2': sum(measured) if all(a is not None for a in measured) else None,
-            'partition_union_equals_component': union_all([shape(p['geometry']) for p in parts.values()]).equals(component),
+            'partition_union_equals_component': partition_union.equals(component),
+            'partition_coverage_residual': measured_geometry(component.difference(partition_union)),
+            'partition_excess_residual': measured_geometry(partition_union.difference(component)),
             'osm_candidate': {'assembly': osm_info, 'geometry_sha256': sha256(canonical_json(mapping(osm))),
                               'anchor_covers': osm.covers(anchor), 'covers_full_component': osm.covers(component),
                               'component_intersection': measured_geometry(component.intersection(osm)),
-                              'component_not_covered': measured_geometry(component.difference(osm))},
+                              'component_not_covered': measured_geometry(component.difference(osm)),
+                              'joint_with_IRN_native_uncovered': measured_geometry(component.difference(osm_joint)),
+                              'joint_with_IRN_native_overlap': measured_geometry(component.intersection(native['IRN']).intersection(osm)),
+                              'joint_vintages_approved': False},
             'method': METHOD, 'software': {'shapely': shapely.__version__},
             'physical_classification': 'unknown', 'administrative_assignment': None,
             'limits': registry['limits']}
