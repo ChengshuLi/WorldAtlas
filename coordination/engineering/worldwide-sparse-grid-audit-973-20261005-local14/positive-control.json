@@ -1,0 +1,15 @@
+{
+  "checks": [
+    {
+      "command": "node --test test/audit-grid-intervals.test.mjs",
+      "exit_code": 0,
+      "tests_passed": 10
+    }
+  ],
+  "kind": "positive-control",
+  "limits": [
+    "Controls establish representation/argument invariants, not global geographic truth or source authority."
+  ],
+  "method_id": "sparse-canonical-row-comparison",
+  "outcome": "passed"
+}

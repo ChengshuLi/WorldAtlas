@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {polygonIntervals,compareRow,coverageRow} from '../scripts/audit-grid-intervals.mjs';
-import {rasterize} from '../src/pixel-grid.js';
+import {rasterize,createGridIndex,GRID_WIDTH} from '../src/pixel-grid.js';
 import {compileOwnership} from '../src/pixel-ownership.js';
 const ring=points=>Float64Array.from(points.flat());
 const square=(x,y,w)=>ring([[x,y],[x+w,y],[x+w,y+w],[x,y+w],[x,y]]);
@@ -76,4 +76,35 @@ test('malformed native rows and coordinates fail instead of silently leaving unc
   assert.throws(()=>polygonIntervals([item(1,[[ring([[0,0],[1,0],[1,1],[0,NaN],[0,0]])]])],
     {size:8,rowStart:0,rowEnd:8}),/Nonfinite/);
   assert.throws(()=>polygonIntervals([],{size:10000,rowStart:0,rowEnd:5000}),/bounded/);
+});
+
+test('split dateline geometry stays at both edges of the actual world grid',()=>{
+  const feature={id:'dateline-fixture',geometry:{type:'MultiPolygon',coordinates:[
+    [[[179.9,-.1],[180,-.1],[180,.1],[179.9,.1],[179.9,-.1]]],
+    [[[-180,-.1],[-179.9,-.1],[-179.9,.1],[-180,.1],[-180,-.1]]]
+  ]}};
+  const index=createGridIndex([feature]),start=GRID_WIDTH/2-1;
+  const sparse=polygonIntervals(index,{size:GRID_WIDTH,rowStart:start,rowEnd:start+2});
+  const actual=rasterize(index,{x:0,y:start,width:GRID_WIDTH,height:2});
+  for(let y=start;y<start+2;y++){
+    const row=expand(coverageRow(sparse.rows.get(y)??[],GRID_WIDTH),GRID_WIDTH,s=>s.owners[0]??0);
+    assert.deepEqual(row,actual.slice((y-start)*GRID_WIDTH,(y-start+1)*GRID_WIDTH));
+    assert.equal(row[0],1);assert.equal(row.at(-1),1);assert.equal(row[GRID_WIDTH/2],0);
+  }
+});
+
+test('using unprojected longitude/latitude is detected as a representation mismatch',()=>{
+  const feature={id:'projection-fixture',geometry:{type:'Polygon',coordinates:[
+    [[0,-.1],[.1,-.1],[.1,.1],[0,.1],[0,-.1]]]
+  }};
+  const start=GRID_WIDTH/2,index=createGridIndex([feature]);
+  const actual=rasterize(index,{x:0,y:start,width:GRID_WIDTH,height:1});
+  const native=[];
+  for(let a=0;a<actual.length;){
+    let b=a+1;while(b<actual.length&&actual[b]===actual[a])b++;
+    if(actual[a])native.push(a,b,actual[a]);a=b;
+  }
+  const wrong=[item(1,[[ring(feature.geometry.coordinates[0])]])];
+  const sparse=polygonIntervals(wrong,{size:GRID_WIDTH,rowStart:start,rowEnd:start+1});
+  assert.ok(compareRow(sparse.rows.get(start)??[],native,GRID_WIDTH).counts.native_outside_projected>0);
 });

@@ -1,0 +1,52 @@
+{
+  "checks": [
+    {
+      "arguments": [
+        "--commit",
+        "bad",
+        "--row-start",
+        "0",
+        "--row-end",
+        "1",
+        "--out",
+        ".cache/worldwide-audit-973/must-not-exist.json.gz"
+      ],
+      "exit_code": 1,
+      "expected_error": "Invalid immutable audit domain or existing output"
+    },
+    {
+      "arguments": [
+        "--commit",
+        "5b72dc3adf48b089c3319b18c3a447468196176a",
+        "--row-start",
+        "0",
+        "--row-end",
+        "4097",
+        "--out",
+        ".cache/worldwide-audit-973/must-not-exist.json.gz"
+      ],
+      "exit_code": 1,
+      "expected_error": "Invalid immutable audit domain or existing output"
+    },
+    {
+      "arguments": [
+        "--commit",
+        "5b72dc3adf48b089c3319b18c3a447468196176a",
+        "--row-start",
+        "0",
+        "--row-end",
+        "1",
+        "--out",
+        ".cache/worldwide-audit-973/full-v1/rows-0-4096.json.gz"
+      ],
+      "exit_code": 1,
+      "expected_error": "Invalid immutable audit domain or existing output"
+    }
+  ],
+  "kind": "negative-control",
+  "limits": [
+    "Controls establish representation/argument invariants, not global geographic truth or source authority."
+  ],
+  "method_id": "sparse-canonical-row-comparison",
+  "outcome": "passed"
+}

@@ -1,0 +1,18 @@
+✔ sparse intervals match actual rasterizer and compiler, preserving deterministic first-owner priority (3.585209ms)
+✔ finds a grid-only gap anywhere in an interval, without a component sample (0.149125ms)
+✔ holes and separate islands retain zero-covered cells (0.147667ms)
+✔ half-open centre ties and clipping use the application arithmetic (0.179959ms)
+✔ duplicate polygons belonging to one owner are not cross-owner overlap (0.070834ms)
+✔ outside coverage and foreign ownership remain distinct (0.065958ms)
+✔ partitioned rows produce the same sparse intervals as a complete small domain (0.096916ms)
+✔ malformed native rows and coordinates fail instead of silently leaving unchecked cells (0.753ms)
+✔ split dateline geometry stays at both edges of the actual world grid (1.14ms)
+✔ using unprojected longitude/latitude is detected as a representation mismatch (9.239917ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 85.652042
