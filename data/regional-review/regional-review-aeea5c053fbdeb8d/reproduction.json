@@ -1,5 +1,5 @@
 {
-  "script_sha256": "246a603f27f40a1953e6281b8607cfb5a6cecb1edd535504cb93c2093eb30947",
+  "script_sha256": "8f4bd5daf9497e4f811ce98c64bd39f2de89dae7fd3ffcd6553e3963bbc485e5",
   "inputs": {
     "scope": "d5e59efc04a0486851440d7cefd8e449932bb257de9f6b0741594cec3a49a4e9",
     "source_inventory": "cf52bbca312d39fff17b9a23221ddf2bb28bc0d24c712e4b164b01a347406c62",
@@ -20,9 +20,10 @@
   "checks": [
     "unique 64-ID issue scope",
     "complete one-to-one scope-to-ADM2 native ID resolution",
+    "exact per-ID Atlas/source feature name equality",
     "unique full ADM1/ADM2 source IDs",
     "source SHA-256 pins",
-    "all province memberships partition 64 scoped IDs",
+    "province membership IDs form a unique exact partition of all 64 issue IDs",
     "negative fabricated ID rejection",
     "duplicate scope ID rejection"
   ]

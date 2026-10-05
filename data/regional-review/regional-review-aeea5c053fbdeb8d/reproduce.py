@@ -57,6 +57,7 @@ def main():
         unit = by_id[native_id]
         feature = f2[native_id]
         props = feature["properties"]
+        assert unit["name"] == props.get("shapeName"), f"Atlas/source name mismatch for {native_id}"
         geom = feature["geometry"] or {}
         coords = geom.get("coordinates")
         polys = coords if geom.get("type") == "MultiPolygon" else [coords] if geom.get("type") == "Polygon" else []
@@ -80,6 +81,9 @@ def main():
         provinces.append({"id": unit["id"], "name": unit["name"], "member_count": len(members), "pinned_full_province_count": len(unit["member_location_ids"]), "member_ids": members, "matching_source_adm1_names": [f["properties"]["shapeName"] for f in source1["features"] if f["properties"]["shapeName"].casefold() == unit["name"].casefold()], "current_official_portal_name_observed": recommended, "name_assessment": "correction-needed" if recommended != unit["name"] else "justified", "territorial_parent_assessment": "insufficient-evidence", "note": "Source ADM1 reproduces Atlas spelling and membership counts but is the 2020 vintage. The current official portal uses updated English spellings for three divisions. This naming recommendation does not confirm any district-to-division assignment or boundary."})
     assert len(provinces) == 8 and sum(x["member_count"] for x in provinces) == 64
     assert all(x["member_count"] == x["pinned_full_province_count"] for x in provinces)
+    flattened_province_members = [member_id for province in provinces for member_id in province["member_ids"]]
+    assert len(flattened_province_members) == len(set(flattened_province_members)) == 64, "province members must be unique"
+    assert set(flattened_province_members) == set(ids), "province groups must partition the exact issue roster"
     dump("location-assessments.json", {"assessment_scope": "administrative identity and tier support only; not boundary correctness", "counts": dict(Counter(x["assessment"] for x in locs)), "rows": locs})
     dump("province-assessments.json", {"rows": sorted(provinces, key=lambda x: x["id"])})
     dump("source-geometry-screen.json", {"limitations": ["Counts and bounds are not geometric validity, topology, overlap, island completeness or legal boundary verification.", "No geometry was changed or repaired."], "feature_count": len(geometry), "multipart_count": sum(x["geometry_type"] == "MultiPolygon" for x in geometry), "rows": geometry})
@@ -97,7 +101,7 @@ def main():
     ]})
     area = scope["area_scopes"][0]
     dump("area-assessment.json", {"id": area["id"], "name": area["name"], "scoped_count": len(ids), "full_count": area["full_area_location_count"], "status": "insufficient-evidence", "purpose": "Bangladesh is a national reporting container for 64 administrative district locations; the administrative roster corroborates the national grouping, but there is no independent evidence here for a physical, cultural or otherwise nonpolitical definition of this area or for the exact outer envelope.", "findings": ["Review is complete only for the issue-owned Bangladesh scope.", "Countrywide roster completeness by administrative count/name is supported, not coastline/island completeness or boundary precision."]})
-    dump("reproduction.json", {"script_sha256": sha(ROOT / "reproduce.py"), "inputs": {"scope": sha(ROOT / "scope.json"), "source_inventory": sha(ROOT / "source-inventory.json"), "adm2": sha(SRC / "BGD-ADM2/geoBoundaries-BGD-ADM2.geojson"), "adm1": sha(SRC / "BGD-ADM1/geoBoundaries-BGD-ADM1.geojson")}, "outputs": {p.name: sha(p) for p in [ROOT / "baseline-unit-inventory.json", ROOT / "location-assessments.json", ROOT / "province-assessments.json", ROOT / "source-geometry-screen.json", ROOT / "scope-risk-screen.json", ROOT / "area-assessment.json"]}, "source_roster_ids": len(f2), "issue_ids": len(ids), "province_count": len(provinces), "checks": ["unique 64-ID issue scope", "complete one-to-one scope-to-ADM2 native ID resolution", "unique full ADM1/ADM2 source IDs", "source SHA-256 pins", "all province memberships partition 64 scoped IDs", "negative fabricated ID rejection", "duplicate scope ID rejection"]})
+    dump("reproduction.json", {"script_sha256": sha(ROOT / "reproduce.py"), "inputs": {"scope": sha(ROOT / "scope.json"), "source_inventory": sha(ROOT / "source-inventory.json"), "adm2": sha(SRC / "BGD-ADM2/geoBoundaries-BGD-ADM2.geojson"), "adm1": sha(SRC / "BGD-ADM1/geoBoundaries-BGD-ADM1.geojson")}, "outputs": {p.name: sha(p) for p in [ROOT / "baseline-unit-inventory.json", ROOT / "location-assessments.json", ROOT / "province-assessments.json", ROOT / "source-geometry-screen.json", ROOT / "scope-risk-screen.json", ROOT / "area-assessment.json"]}, "source_roster_ids": len(f2), "issue_ids": len(ids), "province_count": len(provinces), "checks": ["unique 64-ID issue scope", "complete one-to-one scope-to-ADM2 native ID resolution", "exact per-ID Atlas/source feature name equality", "unique full ADM1/ADM2 source IDs", "source SHA-256 pins", "province membership IDs form a unique exact partition of all 64 issue IDs", "negative fabricated ID rejection", "duplicate scope ID rejection"]})
 
 
 if __name__ == "__main__":
