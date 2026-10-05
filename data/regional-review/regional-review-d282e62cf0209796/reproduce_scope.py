@@ -149,7 +149,13 @@ def main():
             stride = max(1, (len(source_points) + 24) // 25)
             sampled_points = source_points[::stride][:25]
             inside_vertex_count = sum(in_geometry(tuple(point), official_record["geometry"], official_bounds[id(official_record)]) for point in sampled_points)
-        role_ok = meta.get("source_role") == "Municipality" and meta.get("reference_year") == "2017"
+        upstream_meta = source_meta[collection]
+        role_ok = (
+            meta.get("source_role") == "Municipality"
+            and meta.get("reference_year") == "2017"
+            and upstream_meta.get("boundaryCanonical") == "municipality"
+            and upstream_meta.get("boundaryYear") == "2017"
+        )
         source_ok = source_feature.get("properties", {}).get("shapeID") == meta.get("original_id")
         atlas_name = atlas.get("properties", {}).get("name") or ""
         official_name = official_record.get("properties", {}).get("NAZIV") if official_record else None
@@ -169,8 +175,10 @@ def main():
             "source_shape_id": shape_id,
             "source_shape_name": source_feature["properties"].get("shapeName"),
             "source_identity_match": source_ok,
-            "source_role": meta.get("source_role"),
-            "source_year": meta.get("reference_year"),
+            "atlas_reference_source_role": meta.get("source_role"),
+            "atlas_reference_year": meta.get("reference_year"),
+            "geoboundaries_canonical_role": upstream_meta.get("boundaryCanonical"),
+            "geoboundaries_boundary_year": upstream_meta.get("boundaryYear"),
             "source_license": meta.get("license"),
             "source_data_update_date": source_meta[collection].get("sourceDataUpdateDate"),
             "source_build_date": source_meta[collection].get("buildDate"),
