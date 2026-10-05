@@ -1,0 +1,860 @@
+{
+  "version": 1,
+  "issue": 998,
+  "lane": "geography",
+  "worker_id": "worldatlas-geography-431-20261005-r1-7fca",
+  "subject_ids": [
+    "gb:SRB:ADM2:33768554B10160460607146",
+    "gb:SRB:ADM2:33768554B12428724398946",
+    "gb:SRB:ADM2:33768554B14511556571933",
+    "gb:SRB:ADM2:33768554B16264003137685",
+    "gb:SRB:ADM2:33768554B19549852726842",
+    "gb:SRB:ADM2:33768554B20162620577895",
+    "gb:SRB:ADM2:33768554B22744832971391",
+    "gb:SRB:ADM2:33768554B2427629133533",
+    "gb:SRB:ADM2:33768554B2461690928713",
+    "gb:SRB:ADM2:33768554B26564609586994",
+    "gb:SRB:ADM2:33768554B2801395808219",
+    "gb:SRB:ADM2:33768554B29640802603871",
+    "gb:SRB:ADM2:33768554B30156858636960",
+    "gb:SRB:ADM2:33768554B30214389398873",
+    "gb:SRB:ADM2:33768554B30367363697498",
+    "gb:SRB:ADM2:33768554B31297475894420",
+    "gb:SRB:ADM2:33768554B31807143962847",
+    "gb:SRB:ADM2:33768554B32598240068320",
+    "gb:SRB:ADM2:33768554B34313425027148",
+    "gb:SRB:ADM2:33768554B35362959093640",
+    "gb:SRB:ADM2:33768554B35751177110345",
+    "gb:SRB:ADM2:33768554B36402620726863",
+    "gb:SRB:ADM2:33768554B38714138759615",
+    "gb:SRB:ADM2:33768554B38793524178099",
+    "gb:SRB:ADM2:33768554B3910526108635",
+    "gb:SRB:ADM2:33768554B40132449237012",
+    "gb:SRB:ADM2:33768554B43066107137298",
+    "gb:SRB:ADM2:33768554B43402816549287",
+    "gb:SRB:ADM2:33768554B44050731344699",
+    "gb:SRB:ADM2:33768554B46379077813039",
+    "gb:SRB:ADM2:33768554B47565099292540",
+    "gb:SRB:ADM2:33768554B4815616166969",
+    "gb:SRB:ADM2:33768554B4908200120747",
+    "gb:SRB:ADM2:33768554B50618232762371",
+    "gb:SRB:ADM2:33768554B52561884803031",
+    "gb:SRB:ADM2:33768554B55144919365086",
+    "gb:SRB:ADM2:33768554B55544577522793",
+    "gb:SRB:ADM2:33768554B57522103876306",
+    "gb:SRB:ADM2:33768554B58912719399379",
+    "gb:SRB:ADM2:33768554B61504617151000",
+    "gb:SRB:ADM2:33768554B62233458661830",
+    "gb:SRB:ADM2:33768554B62558339807618",
+    "gb:SRB:ADM2:33768554B65536018440282",
+    "gb:SRB:ADM2:33768554B67461606414450",
+    "gb:SRB:ADM2:33768554B67532749475512",
+    "gb:SRB:ADM2:33768554B67609645322980",
+    "gb:SRB:ADM2:33768554B68779491772878",
+    "gb:SRB:ADM2:33768554B69909028114435",
+    "gb:SRB:ADM2:33768554B69938925483879",
+    "gb:SRB:ADM2:33768554B7076914953551",
+    "gb:SRB:ADM2:33768554B71368513809483",
+    "gb:SRB:ADM2:33768554B72006170555355",
+    "gb:SRB:ADM2:33768554B72526506910259",
+    "gb:SRB:ADM2:33768554B72683964051923",
+    "gb:SRB:ADM2:33768554B7380018804564",
+    "gb:SRB:ADM2:33768554B73963894217242",
+    "gb:SRB:ADM2:33768554B73967989073228",
+    "gb:SRB:ADM2:33768554B74154887624592",
+    "gb:SRB:ADM2:33768554B77168572394837",
+    "gb:SRB:ADM2:33768554B78547290846704",
+    "gb:SRB:ADM2:33768554B80281741460558",
+    "gb:SRB:ADM2:33768554B82450600870758",
+    "gb:SRB:ADM2:33768554B83467045170377",
+    "gb:SRB:ADM2:33768554B85835523578034",
+    "gb:SRB:ADM2:33768554B8621955300335",
+    "gb:SRB:ADM2:33768554B88612851859598",
+    "gb:SRB:ADM2:33768554B90877625574513",
+    "gb:SRB:ADM2:33768554B92005817925863",
+    "gb:SRB:ADM2:33768554B945733705725",
+    "gb:SRB:ADM2:33768554B95152369677167",
+    "gb:SRB:ADM2:33768554B95567802729919",
+    "gb:SRB:ADM2:33768554B96096334130003",
+    "gb:SRB:ADM2:33768554B97110351738071",
+    "gb:SRB:ADM2:33768554B9744610672445",
+    "gb:SRB:ADM2:33768554B97531165240554",
+    "gb:SRB:ADM2:33768554B97959209858878",
+    "gb:SRB:ADM2:33768554B98536505599429",
+    "gb:SRB:ADM2:33768554B98925662705896"
+  ],
+  "subject_ids_sha256": "2703ef360a3e7b6a45c0cef972fdb26952743f58e164f462a3585777c7388e16",
+  "baseline": {
+    "commit": "c944e017796005726150abef19763db9ffd07154",
+    "files": [
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes",
+        "role": "pinned baseline input"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes",
+        "role": "pinned baseline input"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes",
+        "role": "pinned baseline containing file for exact scoped Atlas subject IDs"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes",
+        "role": "pinned baseline input"
+      },
+      {
+        "path": "data/macro-foundation/approved-boundary-decisions.json",
+        "bytes": 634171,
+        "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+        "hash_kind": "file-bytes",
+        "role": "pinned baseline input"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2404397,
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+        "hash_kind": "file-bytes",
+        "role": "pinned baseline input"
+      },
+      {
+        "path": "data/macro-foundation/macro-certificate.json",
+        "bytes": 38959,
+        "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+        "hash_kind": "file-bytes",
+        "role": "pinned baseline input"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 71286,
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+        "hash_kind": "file-bytes",
+        "role": "pinned baseline input"
+      },
+      {
+        "path": "data/macro-foundation/review-index.json",
+        "bytes": 2383,
+        "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+        "hash_kind": "file-bytes",
+        "role": "pinned baseline input"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/asset-manifest.json",
+        "bytes": 7459,
+        "sha256": "39c0bf2f5f437298a31eade91ca783e0e92c892860c033f7497a31f30c9a996e",
+        "hash_kind": "file-bytes",
+        "role": "prior evidence/input"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/SRB-ADM2-CITATION-AND-USE-geoBoundaries.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes",
+        "role": "prior evidence/input"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/SRB-ADM2-geoBoundaries-SRB-ADM2-metaData.json",
+        "bytes": 851,
+        "sha256": "65d65d75249a6b766fc5e7bc0d856d1cca9ea67d04b53db1a151678891c11312",
+        "hash_kind": "file-bytes",
+        "role": "prior evidence/input"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json",
+        "bytes": 6787,
+        "sha256": "fded0febc8ef8d934b1f7358755b3102ec8043cc027a88ad8106dec8247b7f56",
+        "hash_kind": "file-bytes",
+        "role": "prior evidence/input"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/subject-assessments.json",
+        "bytes": 361842,
+        "sha256": "9ca1665ab634d7ffa2c25230bb73509e4b3166dd4d00aab805502ddae0dc2ae5",
+        "hash_kind": "file-bytes",
+        "role": "prior evidence/input"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "role": "pinned baseline input"
+      }
+    ],
+    "pins": {
+      "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/geographic-releases/current-manifest.json": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "data/macro-foundation/current-membership-inventory.json.gz": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "data/macro-foundation/review-index.json": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+      "data/macro-foundation/regional-handoffs.json.gz": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "data/macro-foundation/macro-certificate.json": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "data/macro-foundation/approved-boundary-decisions.json": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18"
+    },
+    "pin_files": {
+      "data/world-index.json": "data/world-index.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/geographic-releases/current-manifest.json": "data/geographic-releases/current-manifest.json",
+      "data/administrative-sources.json": "data/administrative-sources.json",
+      "data/macro-foundation/current-membership-inventory.json.gz": "data/macro-foundation/current-membership-inventory.json.gz",
+      "data/macro-foundation/review-index.json": "data/macro-foundation/review-index.json",
+      "data/macro-foundation/regional-handoffs.json.gz": "data/macro-foundation/regional-handoffs.json.gz",
+      "data/macro-foundation/macro-certificate.json": "data/macro-foundation/macro-certificate.json",
+      "data/macro-foundation/approved-boundary-decisions.json": "data/macro-foundation/approved-boundary-decisions.json"
+    },
+    "subject_files": {
+      "gb:SRB:ADM2:33768554B10160460607146": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B12428724398946": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B14511556571933": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B16264003137685": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B19549852726842": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B20162620577895": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B22744832971391": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B2427629133533": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B2461690928713": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B26564609586994": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B2801395808219": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B29640802603871": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B30156858636960": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B30214389398873": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B30367363697498": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B31297475894420": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B31807143962847": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B32598240068320": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B34313425027148": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B35362959093640": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B35751177110345": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B36402620726863": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B38714138759615": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B38793524178099": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B3910526108635": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B40132449237012": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B43066107137298": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B43402816549287": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B44050731344699": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B46379077813039": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B47565099292540": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B4815616166969": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B4908200120747": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B50618232762371": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B52561884803031": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B55144919365086": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B55544577522793": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B57522103876306": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B58912719399379": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B61504617151000": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B62233458661830": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B62558339807618": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B65536018440282": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B67461606414450": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B67532749475512": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B67609645322980": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B68779491772878": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B69909028114435": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B69938925483879": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B7076914953551": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B71368513809483": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B72006170555355": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B72526506910259": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B72683964051923": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B7380018804564": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B73963894217242": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B73967989073228": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B74154887624592": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B77168572394837": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B78547290846704": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B80281741460558": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B82450600870758": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B83467045170377": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B85835523578034": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B8621955300335": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B88612851859598": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B90877625574513": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B92005817925863": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B945733705725": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B95152369677167": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B95567802729919": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B96096334130003": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B97110351738071": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B9744610672445": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B97531165240554": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B97959209858878": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B98536505599429": "data/geography/part-22.json",
+      "gb:SRB:ADM2:33768554B98925662705896": "data/geography/part-22.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-srb-adm2",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SRB/ADM2/geoBoundaries-SRB-ADM2.geojson",
+      "role": "Original 145-feature SRB ADM2 source; verified all exact 78 scoped IDs/names against this byte-retained layer",
+      "vintage": "Metadata boundaryYear 2017; sourceDataUpdateDate 2023-01-19; buildDate 2023-12-12",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Retained layer metadata states Open Data Commons Open Database License 1.0 and OSM copyright source. Retained geoBoundaries citation notice requires geoBoundaries attribution and citations of individual data sources; source metadata identifies OpenStreetMap and Wambacher."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "files": [
+        {
+          "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/geoBoundaries-SRB-ADM2-2017.geojson",
+          "bytes": 1653192,
+          "sha256": "f94ba868818e4f87dd24bc97aeaf37732cc23f6744facd1010cd91d2349fc884",
+          "hash_kind": "file-bytes",
+          "role": "retained original source bytes"
+        }
+      ],
+      "limit": "Boundary-year metadata conflicts in meaning with 2023 source-update/build fields; no official geometry comparison proves effective date, legal accuracy, parent boundaries or full source completeness."
+    },
+    {
+      "id": "sors-cities-2017",
+      "url": "https://www.stat.gov.rs/media/2695/opstine-gradovi-2017.xls",
+      "role": "Official SORS list of cities/municipalities by administrative district, explicitly marked state 31.12.2017; city and local-unit codes/names",
+      "vintage": "As at 2017-12-31",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "SORS terms allow saving, reproduction, distribution, sharing, and commercial/noncommercial use unless stated otherwise, with changes clearly indicated and SORS cited as original source."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      },
+      "files": [
+        {
+          "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-cities-municipalities-2017.xls",
+          "bytes": 61952,
+          "sha256": "75a7236c08c13b43bebc12a797456de74bfa9e1dd6f352a821efbce271cd4d62",
+          "hash_kind": "file-bytes",
+          "role": "retained original source bytes"
+        }
+      ],
+      "limit": "Tabular code/name/parent relationships only; local-unit type is combined in workbook header and no boundary geometries are present."
+    },
+    {
+      "id": "sors-cities-current",
+      "url": "https://www.stat.gov.rs/media/412350/sifarnikgradovi-opstine-tekucestanje.xlsx",
+      "role": "Official current-state city/municipality code list with explicit type and city-municipality fields",
+      "vintage": "Current-state file downloaded on 2026-10-05; file itself has no explicit reference date",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "SORS terms allow saving, reproduction, distribution, sharing, and commercial/noncommercial use unless stated otherwise, with changes clearly indicated and SORS cited as original source."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-cities-municipalities-current-2026-10-05.xlsx",
+          "bytes": 18810,
+          "sha256": "3a7790a65c77a537da848a66c71ba1495c5e0bdfe1021587979a551dcb7ebafa",
+          "hash_kind": "file-bytes",
+          "role": "retained original source bytes"
+        }
+      ],
+      "limit": "Current-state tabular register only; no polygons or explicit effective date in workbook."
+    },
+    {
+      "id": "sors-map-2017",
+      "url": "https://www.stat.gov.rs/media/2720/oblasti-regioni_2017.pdf",
+      "role": "SORS 2017 administrative-areas/regions map; graphic base attributed to RGA",
+      "vintage": "2017 publication; map marked as at 2018-01-01",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "SORS general terms permit reproduction with source attribution and marked changes, unless an asset-specific exception applies."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      },
+      "files": [
+        {
+          "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-administrative-areas-regions-2017.pdf",
+          "bytes": 2299801,
+          "sha256": "7f204523f91cf586c5a073b834e8220e027b014b25b2d9b74167e8a1599a458e",
+          "hash_kind": "file-bytes",
+          "role": "retained original source bytes"
+        }
+      ],
+      "limit": "Cartographic map, not a boundary feature dataset or a substitute for the register polygons."
+    },
+    {
+      "id": "sors-spatial-register",
+      "url": "https://www.stat.gov.rs/en-us/oblasti/registar-prostornih-jedinica-i-gis/",
+      "role": "Official description of public spatial-units register types and RGA maintenance/data origin",
+      "vintage": "Current page, last retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Web description cited as official institutional metadata; no boundary data are redistributed from this page."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Visit the official SORS Register of Spatial Units and GIS page; confirm the register description and current change notice.",
+      "limit": "Page describes the register but does not expose the dated RGA polygon extract used in this work.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "sors-administrative-division",
+      "url": "https://www.stat.gov.rs/en-us/oblasti/registar-prostornih-jedinica-i-gis/administrativno-teritorijalna-podela-i-nstj-nivoi-1-2-3/",
+      "role": "Official SORS current statistical administrative division counts by NSTJ region",
+      "vintage": "Current page retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Web table cited as institutional source; retained workbook is separate evidence."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the SORS Administrative territorial division and NSTJ levels 1, 2, 3 page and confirm the current table.",
+      "limit": "Aggregate counts and statistical groupings do not verify source polygons, legal status or territorial completeness.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "rgz-administrative-units-register",
+      "url": "https://www.rgz.gov.rs/administrative-units-register",
+      "role": "Official RGA description of register type/name/code/parent/polygon fields",
+      "vintage": "Current page retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No boundary data or reuse license were obtained from this page."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Visit the RGZ Administrative Units Register page or make an official request to RGA for dated 2017 and current register extracts, data dictionary, effective dates, CRS, geometry, and reuse terms.",
+      "limit": "Register contents, dated version, data access, and polygon reuse terms remain to be acquired; no feature-level join was possible.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "sors-reuse-terms",
+      "url": "https://www.stat.gov.rs/en-us/copyright/",
+      "role": "Official SORS website-file reuse terms and attribution requirement",
+      "vintage": "Current page retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "This source is the licensing statement; it does not by itself establish reuse rights for RGA or third-party inputs."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Visit the official SORS copyright/terms page and check for asset-specific exceptions.",
+      "limit": "SORS holds copyright in site content and exceptions may apply; terms here do not grant RGA polygon reuse.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "sors-kosovo-statistical-method",
+      "url": "https://publikacije.stat.gov.rs/G2019/pdfE/G201913046.pdf",
+      "role": "Official SORS methodology caveat on district grouping, separate city reporting, and Kosovo statistical data coverage",
+      "vintage": "2019 publication",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Citation-only publication reference; retained SORS data source terms do not establish PDF redistribution rights."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Retrieve the cited publication from the official SORS Publications repository and inspect its methodological explanation.",
+      "limit": "Statistical data-availability statement does not establish territorial status, governance, or legal boundaries.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2019,
+        "to": 2020
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/REVIEW.md",
+      "bytes": 10677,
+      "sha256": "de03d62f74f88e544128801de7b5c2b7768ed7f849cc92cf9160da3737b89fdf",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/reproduce.py",
+      "bytes": 17459,
+      "sha256": "8bae1e4eeb500613a59d5b505d9794f7b0b95285f884cad9fe6d789f874bd8a6",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source-issue-998.json",
+      "bytes": 16456,
+      "sha256": "14ee2b74b7553e94a4a6280d3133ede8be7006cc2585df547b11486663d3bcab",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source/baseline-inputs.json",
+      "bytes": 5151,
+      "sha256": "28190b710815d10e4f56b7837b66cd8faa62dae1025f5059d17ce0648d342a3a",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source/claim-receipt.json",
+      "bytes": 5748,
+      "sha256": "22a5744e24f45aed81df6a2a0b73b302a385329ca03c7cd6128b62a77332ed28",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source/issue-scope.json",
+      "bytes": 5989,
+      "sha256": "62087e1b184aa1cd6afd84c379e1c3cb2a2449fbe5e74d151192164911b49da0",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/parent-completeness.csv",
+      "bytes": 2220,
+      "sha256": "ae335ad61055051f35ff56098dc7631b46c4b58994f98c6b498d98053750ded0",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/parent-completeness.json",
+      "bytes": 10658,
+      "sha256": "788186b712ee49effc7fa9c7ea46faebbc07212506c8e9231d85b7b2be66c636",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/parent-summary.json",
+      "bytes": 5499,
+      "sha256": "f2be5d3cec2834159dc6bdc06af17f1916c4dac188c0ebf1630d78bd4afaf358",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/reproduction-summary.json",
+      "bytes": 345,
+      "sha256": "ab692f5847991d3df55b7777964641cc8147c1e7d6a9910673c413b8f75fa347",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/scoped-city-urban-municipalities.csv",
+      "bytes": 5140,
+      "sha256": "03423935ae3c810aa6b2e6f98e44f6459b4d83fba5c1a0e12cadc79e705d9df1",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/sors-2017-roster-normalized.csv",
+      "bytes": 29508,
+      "sha256": "0690c7732fc3ee73fad9c3438c7a60e707837ab51bc724559842c9e362420524",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/sors-current-roster-normalized.csv",
+      "bytes": 18126,
+      "sha256": "92286089f3d21d2d9ab7cf93c2e68f37c374cd8aadf4a21763cbbcc69d00d6c4",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/subject-crosswalk.csv",
+      "bytes": 58129,
+      "sha256": "a5a01d678c51cf273aa5afd8194d10c1b103176f8fe30ac50d0ccc9e69ec2751",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-retrieval.json",
+      "bytes": 3495,
+      "sha256": "0fbef22728b0c1b9d8051c17ab2de37d0c005d71189c86416b5af642a6e55ca7",
+      "hash_kind": "file-bytes",
+      "role": "analysis, reproducibility or handoff output"
+    }
+  ],
+  "methods": [
+    {
+      "id": "exact-source-and-register-crosswalk",
+      "kind": "code",
+      "description": "Match issue-scoped Atlas IDs and original source names against the byte-retained original 145-feature layer, the SORS 2017 registration list and current-state SORS roster. Normalize Serbian Cyrillic/Latin names, preserve source codes and compare parent/type relationships. Independently count distinct current primary registration codes per each of the exact 13 parents and test set equality.",
+      "software": "Python 3.8.5; pandas 1.1.3; xlrd 1.2.0; openpyxl 3.0.5; reproduce.py",
+      "units": "feature IDs, names, official registration codes/types, district/city parent codes and exact roster membership sets"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "unique_2017_name_matches",
+      "value": 78,
+      "unit": "subjects",
+      "vintage": "archived",
+      "input_sha256": "75a7236c08c13b43bebc12a797456de74bfa9e1dd6f352a821efbce271cd4d62",
+      "evaluation_commit": "c944e017796005726150abef19763db9ffd07154"
+    },
+    {
+      "id": "unique_current_name_matches",
+      "value": 78,
+      "unit": "subjects",
+      "vintage": "current",
+      "input_sha256": "3a7790a65c77a537da848a66c71ba1495c5e0bdfe1021587979a551dcb7ebafa",
+      "evaluation_commit": "c944e017796005726150abef19763db9ffd07154"
+    },
+    {
+      "id": "current_parent_rosters_exact",
+      "value": 13,
+      "unit": "parent partitions",
+      "vintage": "current",
+      "input_sha256": "3a7790a65c77a537da848a66c71ba1495c5e0bdfe1021587979a551dcb7ebafa",
+      "evaluation_commit": "c944e017796005726150abef19763db9ffd07154"
+    },
+    {
+      "id": "scoped_subjects",
+      "value": 78,
+      "unit": "subjects",
+      "vintage": "archived",
+      "input_sha256": "f94ba868818e4f87dd24bc97aeaf37732cc23f6744facd1010cd91d2349fc884",
+      "evaluation_commit": "c944e017796005726150abef19763db9ffd07154"
+    },
+    {
+      "id": "scoped_city_municipality_rows",
+      "value": 19,
+      "unit": "urban-municipality register rows",
+      "vintage": "current",
+      "input_sha256": "3a7790a65c77a537da848a66c71ba1495c5e0bdfe1021587979a551dcb7ebafa",
+      "evaluation_commit": "c944e017796005726150abef19763db9ffd07154"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "unique_2017_name_matches",
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/reproduction-summary.json",
+      "json_pointer": "/unique_2017_name_matches"
+    },
+    {
+      "metric_id": "unique_current_name_matches",
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/reproduction-summary.json",
+      "json_pointer": "/unique_current_name_matches"
+    },
+    {
+      "metric_id": "current_parent_rosters_exact",
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/reproduction-summary.json",
+      "json_pointer": "/parent_rosters_exactly_covered"
+    },
+    {
+      "metric_id": "scoped_subjects",
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/reproduction-summary.json",
+      "json_pointer": "/subjects"
+    },
+    {
+      "metric_id": "scoped_city_municipality_rows",
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/reproduction-summary.json",
+      "json_pointer": "/scoped_urban_municipality_rows"
+    }
+  ],
+  "rendered_tables": [],
+  "summaries": [
+    {
+      "metric_id": "unique_2017_name_matches",
+      "value": 78,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "unique_current_name_matches",
+      "value": 78,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "current_parent_rosters_exact",
+      "value": 13,
+      "unit": "parent partitions"
+    },
+    {
+      "metric_id": "scoped_subjects",
+      "value": 78,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "scoped_city_municipality_rows",
+      "value": 19,
+      "unit": "urban-municipality register rows"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Every one of the 78 scoped source IDs/name labels occurs exactly once in the retained 145-feature geoBoundaries file and has a unique 2017/current SORS name/code and parent roster match; current explicit type agrees with all Atlas City/Municipality labels. This is a candidate register crosswalk, not polygon identity.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-srb-adm2",
+        "sors-cities-2017",
+        "sors-cities-current"
+      ]
+    },
+    {
+      "text": "All current primary city/municipality codes in each of the exact 12 selected administrative districts and the City of Belgrade equal the 78 scoped Atlas codes (13/13 partitions).",
+      "status": "supported",
+      "source_ids": [
+        "sors-cities-current",
+        "sors-administrative-division"
+      ]
+    },
+    {
+      "text": "The current SORS roster exposes 19 urban-municipality child rows under scoped city features Belgrade and Užice; they are not separate #998 subjects and have no Atlas-feature join in this packet.",
+      "status": "supported",
+      "source_ids": [
+        "sors-cities-current"
+      ]
+    },
+    {
+      "text": "The official RGA polygon register and dated version are needed to verify legal geometry, effective date, source-feature identity, exact parent polygons, and boundary completeness; these were not obtained.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-srb-adm2",
+        "rgz-administrative-units-register",
+        "sors-spatial-register"
+      ]
+    },
+    {
+      "text": "The 2017 source metadata labels boundaryYear 2017 but records 2023 source-update and build dates; effective/legal boundary vintage remains unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-srb-adm2"
+      ]
+    },
+    {
+      "text": "SORS lists 29 Kosovo-and-Metohija-region primary codes, outside this issue scope, while its statistical methodology reports that certain Kosovo data have not been available since 1999. These facts do not resolve territorial status, governance, or legal boundary meaning.",
+      "status": "supported",
+      "source_ids": [
+        "sors-administrative-division",
+        "sors-kosovo-statistical-method",
+        "rgz-administrative-units-register"
+      ]
+    },
+    {
+      "text": "Belgrade appears as an official city code (79014) but Atlas models it as a one-child province parent; a hierarchy owner should review the parent role without changing the existing member ID in this research packet.",
+      "status": "supported",
+      "source_ids": [
+        "sors-cities-current",
+        "rgz-administrative-units-register"
+      ]
+    },
+    {
+      "text": "SORS states its file reuse terms permit redistribution with changed data clearly marked and SORS cited; no RGA polygon reuse license was acquired.",
+      "status": "supported",
+      "source_ids": [
+        "sors-reuse-terms",
+        "rgz-administrative-units-register"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/followup-serbia-422-admin-crosswalk-20261005/reproduce.py",
+    "node scripts/evidence-quality.mjs data/regional-review/followup-serbia-422-admin-crosswalk-20261005/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/REVIEW.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source-issue-998.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source/baseline-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source/issue-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/parent-completeness.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/parent-completeness.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/parent-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/reproduction-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/scoped-city-urban-municipalities.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/sors-2017-roster-normalized.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/sors-current-roster-normalized.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/subject-crosswalk.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/geoBoundaries-SRB-ADM2-2017.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-administrative-areas-regions-2017.pdf",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-cities-municipalities-2017.xls",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-cities-municipalities-current-2026-10-05.xlsx",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-retrieval.json",
+      "status": "added"
+    }
+  ]
+}

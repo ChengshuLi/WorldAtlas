@@ -1,0 +1,121 @@
+{
+  "commit": "c944e017796005726150abef19763db9ffd07154",
+  "files": [
+    {
+      "path": "data/administrative-sources.json",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "hash_kind": "file-bytes",
+      "role": "pinned baseline input"
+    },
+    {
+      "path": "data/geographic-releases/current-manifest.json",
+      "bytes": 206,
+      "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "hash_kind": "file-bytes",
+      "role": "pinned baseline input"
+    },
+    {
+      "path": "data/geography/part-22.json",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "hash_kind": "file-bytes",
+      "role": "pinned baseline containing file for exact scoped Atlas subject IDs"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "hash_kind": "file-bytes",
+      "role": "pinned baseline input"
+    },
+    {
+      "path": "data/macro-foundation/approved-boundary-decisions.json",
+      "bytes": 634171,
+      "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+      "hash_kind": "file-bytes",
+      "role": "pinned baseline input"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2404397,
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "hash_kind": "file-bytes",
+      "role": "pinned baseline input"
+    },
+    {
+      "path": "data/macro-foundation/macro-certificate.json",
+      "bytes": 38959,
+      "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "hash_kind": "file-bytes",
+      "role": "pinned baseline input"
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 71286,
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "hash_kind": "file-bytes",
+      "role": "pinned baseline input"
+    },
+    {
+      "path": "data/macro-foundation/review-index.json",
+      "bytes": 2383,
+      "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+      "hash_kind": "file-bytes",
+      "role": "pinned baseline input"
+    },
+    {
+      "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/asset-manifest.json",
+      "bytes": 7459,
+      "sha256": "39c0bf2f5f437298a31eade91ca783e0e92c892860c033f7497a31f30c9a996e",
+      "hash_kind": "file-bytes",
+      "role": "prior evidence/input"
+    },
+    {
+      "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/SRB-ADM2-CITATION-AND-USE-geoBoundaries.txt",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "hash_kind": "file-bytes",
+      "role": "prior evidence/input"
+    },
+    {
+      "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/SRB-ADM2-geoBoundaries-SRB-ADM2-metaData.json",
+      "bytes": 851,
+      "sha256": "65d65d75249a6b766fc5e7bc0d856d1cca9ea67d04b53db1a151678891c11312",
+      "hash_kind": "file-bytes",
+      "role": "prior evidence/input"
+    },
+    {
+      "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json",
+      "bytes": 6787,
+      "sha256": "fded0febc8ef8d934b1f7358755b3102ec8043cc027a88ad8106dec8247b7f56",
+      "hash_kind": "file-bytes",
+      "role": "prior evidence/input"
+    },
+    {
+      "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/subject-assessments.json",
+      "bytes": 361842,
+      "sha256": "9ca1665ab634d7ffa2c25230bb73509e4b3166dd4d00aab805502ddae0dc2ae5",
+      "hash_kind": "file-bytes",
+      "role": "prior evidence/input"
+    },
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes",
+      "role": "pinned baseline input"
+    }
+  ],
+  "issue_pins": {
+    "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+    "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "data/geographic-releases/current-manifest.json": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+    "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+    "data/macro-foundation/current-membership-inventory.json.gz": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+    "data/macro-foundation/review-index.json": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+    "data/macro-foundation/regional-handoffs.json.gz": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+    "data/macro-foundation/macro-certificate.json": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+    "data/macro-foundation/approved-boundary-decisions.json": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18"
+  }
+}
