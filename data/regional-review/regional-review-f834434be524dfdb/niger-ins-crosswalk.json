@@ -4,7 +4,8 @@
     "title": "INS Niger Projections démographiques 2012–2026",
     "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/",
     "sha256": "a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7",
-    "extracted_rows": 266
+    "extracted_rows": 266,
+    "retrieval_note": "Historical captured body hash remains a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7. Both the original route and /projections/ canonical route were re-probed on 2026-10-04 and returned non-table landing bodies with different hashes; recovery of the exact historical capture is needed to rerun the HTML extraction."
   },
   "method": "Python standard-library HTMLParser extracts three source columns. Normalize Unicode accents/punctuation and join source feature name plus Atlas parent slug to INS commune and department; apply explicit spelling and special-city arrondissement aliases. Duplicate names use the parent label.",
   "summary": {

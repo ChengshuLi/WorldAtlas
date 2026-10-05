@@ -773,9 +773,9 @@
         "terms": "Official page contains census-derived statistical rows; no explicit redistribution terms reviewed."
       },
       "retention": "restoration-only",
-      "verification": "verified",
-      "restoration": "Fetch the exact URL; verify SHA256 a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7 before parsing.",
-      "limit": "Statistical census roster is not a current legal gazetteer or independently checked boundary source.",
+      "verification": "unverified",
+      "restoration": "The historical captured body has SHA256 a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7. Both tested official routes currently return non-table bodies; recover the historical capture from the reviewer private cache or another lawful archive and verify that SHA before parsing.",
+      "limit": "Historical source capture and crosswalk were substantively reviewed, but the exact HTML cannot currently be restored from the official endpoint. Census/statistical reference is not a current legal gazetteer or boundary source.",
       "temporal_status": "reference"
     },
     {
@@ -991,19 +991,40 @@
           "hash_kind": "file-bytes"
         }
       ]
+    },
+    {
+      "id": "mauritania-sngm-strategy-2022",
+      "url": "https://dgat.interieur.gov.mr/sites/default/files/2025-06/SNGM%20ET%20PA%202021%2020230_0_0.pdf",
+      "role": "Official dated Mauritania strategy/action-plan snapshot reporting 61 Moughataas",
+      "vintage": "2021–2023 strategy; document dated 2022-01-25; page 6",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "unknown",
+        "terms": "Official strategy PDF; redistribution terms not reviewed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact PDF URL into a private cache and verify SHA256 5fac5c780589b421a806e7e87e487c46839d0a2029c118772d2cce111fa10cb8 (1132514 bytes). The evidence is the dated count on page 6.",
+      "limit": "Reports 61 Moughataas in a dated 2022 snapshot; later DGAT page attributes 63 to RGPH 2024. This count pair does not establish the exact legal roster transition or full current boundary completeness.",
+      "temporal_status": "historical",
+      "files": [],
+      "supported_interval": {
+        "from": 2021,
+        "to": 2023
+      }
     }
   ],
   "outputs": [
     {
       "path": "data/regional-review/regional-review-f834434be524dfdb/README.md",
-      "bytes": 9061,
-      "sha256": "15944bf5c9c5d2587fc198d75b88428c0b37839553a83c1d730d429c60e004a4",
+      "bytes": 9951,
+      "sha256": "bd3d83eb7aa4d855e9c060ff2fc2655e2e752a62eb88f7599bcaae21bcfc9086",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-f834434be524dfdb/assessment.json",
-      "bytes": 483459,
-      "sha256": "c897a8b214aa3addcbfe7181de6fe57636dcc0fadce01bf8480546aaff8ebec7",
+      "bytes": 483836,
+      "sha256": "e7b5d628ff7949216eb270760eee9665e842ce052ca8d75be41c3a6f107070ae",
       "hash_kind": "file-bytes"
     },
     {
@@ -1050,8 +1071,8 @@
     },
     {
       "path": "data/regional-review/regional-review-f834434be524dfdb/niger-ins-crosswalk.json",
-      "bytes": 93394,
-      "sha256": "2c487eefb97989892d385c84890c892761e23c68cc0ef3fb14a56bd872d186b0",
+      "bytes": 93752,
+      "sha256": "59ac0651ac43d91e1efd06664c5990ae31ee930495a78268ee960e4a7c73c059",
       "hash_kind": "file-bytes"
     },
     {
@@ -1074,8 +1095,8 @@
     },
     {
       "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_niger_ins_crosswalk.py",
-      "bytes": 6867,
-      "sha256": "afc150453a945b44da4d53196e5f2e8427ec3cfc73b2717f7f9154aa0c5ca34d",
+      "bytes": 7078,
+      "sha256": "7300c66f4e869197b0ea8eb706bc3bb5be724c2c527cdc35a0524816d9b9a48b",
       "hash_kind": "file-bytes"
     },
     {
@@ -1092,8 +1113,8 @@
     },
     {
       "path": "data/regional-review/regional-review-f834434be524dfdb/sources.json",
-      "bytes": 8497,
-      "sha256": "fb2a083421f177ac6715a777253a9e7643a59c357d6bbee5f1da2d24f251e4af",
+      "bytes": 11125,
+      "sha256": "5b39139605645035c166c4b731126535e6caf4bc41f7e1a2bed778923f7016f8",
       "hash_kind": "file-bytes"
     },
     {
@@ -1204,7 +1225,7 @@
       "unit": "subjects",
       "vintage": "baseline",
       "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
-      "input_sha256": "2c487eefb97989892d385c84890c892761e23c68cc0ef3fb14a56bd872d186b0"
+      "input_sha256": "59ac0651ac43d91e1efd06664c5990ae31ee930495a78268ee960e4a7c73c059"
     },
     {
       "id": "niger-ins-official-spelling-or-role-alias-confirmed",
@@ -1212,7 +1233,7 @@
       "unit": "subjects",
       "vintage": "baseline",
       "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
-      "input_sha256": "2c487eefb97989892d385c84890c892761e23c68cc0ef3fb14a56bd872d186b0"
+      "input_sha256": "59ac0651ac43d91e1efd06664c5990ae31ee930495a78268ee960e4a7c73c059"
     },
     {
       "id": "niger-ins-official-name-candidate-parent-unresolved",
@@ -1220,7 +1241,7 @@
       "unit": "subjects",
       "vintage": "baseline",
       "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
-      "input_sha256": "2c487eefb97989892d385c84890c892761e23c68cc0ef3fb14a56bd872d186b0"
+      "input_sha256": "59ac0651ac43d91e1efd06664c5990ae31ee930495a78268ee960e4a7c73c059"
     },
     {
       "id": "niger-parent-max-overlap-ge-0p9999",
@@ -1292,7 +1313,7 @@
       "unit": "subjects",
       "vintage": "baseline",
       "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
-      "input_sha256": "fb2a083421f177ac6715a777253a9e7643a59c357d6bbee5f1da2d24f251e4af"
+      "input_sha256": "5b39139605645035c166c4b731126535e6caf4bc41f7e1a2bed778923f7016f8"
     }
   ],
   "metric_bindings": [
@@ -1437,12 +1458,13 @@
       ]
     },
     {
-      "text": "The 2020 Mauritania source lacks the six Moughataa units named in the 2021 government notice; exact statutory geometry is not retained.",
+      "text": "The 2020 Mauritania source lacks the six Moughataa units named in a 2021 government notice; official snapshots report 61 units in a document dated 2022 and 63 in DGAT’s later RGPH 2024 summary, leaving the current roster transition unresolved.",
       "status": "supported",
       "source_ids": [
         "mauritania-dgat-current",
         "mauritania-six-moughataas-2021",
-        "mauritania-geoboundaries-adm2"
+        "mauritania-geoboundaries-adm2",
+        "mauritania-sngm-strategy-2022"
       ]
     },
     {

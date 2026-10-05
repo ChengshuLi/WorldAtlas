@@ -6,13 +6,33 @@
   },
   "niger_ins_2012": {
     "title": "INS Niger, Projections démographiques du Niger 2012–2026",
-    "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html",
+    "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/",
     "retrieved": "2026-10-04 America/Los_Angeles",
-    "local_evidence": "not committed; downloaded body retained in private review cache",
-    "bytes": null,
+    "local_evidence": "The exact retrieved body was captured to the reviewer private source cache; the evidence packet retains the extracted scoped crosswalk and the body SHA, not the full HTML.",
+    "bytes": 64074,
     "sha256": "a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7",
     "claims_used": "Census 4 (2012) base; reference organized by region, department and commune; 266 rows; four special city departments contain arrondissement-level entries.",
-    "limit": "Census/statistical reference, not current legal gazetteer; exact row-by-row boundary role/crosswalk still unresolved."
+    "limit": "A body matching the historical source hash was captured and reviewed, but is no longer restorable from either currently tested public route. The scoped row crosswalk is retained; full rerun needs recovery of the historical body. Statistical labels are not a current legal gazetteer or independent boundary source.",
+    "canonical_route": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/projections/",
+    "restoration": "The 2026-10-04 captured 64074-byte HTML body is identified by SHA256 a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7. The original and canonical routes were re-probed on 2026-10-04 and returned HTTP 200 but non-table landing bodies (respectively SHA256 8afe4c8eb0173ffb23685ed401c7b1e6442b2b2bb790f719b5194d8d7dd96fec and ee97a333234e421384a0fe740145ae0c965443d80312cd941225c05b2b1c5dcb). Recover the captured historical body from the private review cache or another source before rerunning; the current routes do not restore the expected hash.",
+    "current_probe": [
+      {
+        "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/",
+        "retrieved": "2026-10-04 America/Los_Angeles",
+        "http_status": 200,
+        "bytes": 215768,
+        "sha256": "8afe4c8eb0173ffb23685ed401c7b1e6442b2b2bb790f719b5194d8d7dd96fec",
+        "contains_projection_table": false
+      },
+      {
+        "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/projections/",
+        "retrieved": "2026-10-04 America/Los_Angeles",
+        "http_status": 200,
+        "bytes": 215768,
+        "sha256": "ee97a333234e421384a0fe740145ae0c965443d80312cd941225c05b2b1c5dcb",
+        "contains_projection_table": false
+      }
+    ]
   },
   "niger_geoboundaries_adm3": {
     "source_id": "NER-ADM3-39565319",
@@ -195,5 +215,16 @@
     "retrieved": "2026-10-04 America/Los_Angeles",
     "sha256": "3f6888d82c43a597b590780d5b70aebcae65b1a119d686495a53e22f383e065f",
     "limit": "SVG contains duplicate labels and paths whose data-name values are numeric placeholders; not used as a complete 63-unit register or geometry source."
+  },
+  "mauritania_sngm_2021_2023": {
+    "title": "Mauritania SNGM / Plan d’Action 2021–2023 strategy document",
+    "url": "https://dgat.interieur.gov.mr/sites/default/files/2025-06/SNGM%20ET%20PA%202021%2020230_0_0.pdf",
+    "document_date": "2022-01-25",
+    "retrieved": "2026-10-04 America/Los_Angeles",
+    "bytes": 1132514,
+    "sha256": "5fac5c780589b421a806e7e87e487c46839d0a2029c118772d2cce111fa10cb8",
+    "page": 6,
+    "claim_used": "Reports 15 Wilayas, 61 Moughataas and 218 communes in a dated 2021–2023 strategy/action-plan snapshot.",
+    "limit": "This is an earlier dated official snapshot than DGAT’s current page attributing 63 Moughataas to RGPH 2024. It does not provide a complete legal register or reconcile the count change; the hosting path /2025-06/ is not the document date. Exact decrees and current polygons remain outstanding."
   }
 }
