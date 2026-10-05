@@ -12,7 +12,7 @@ python3.12 -m venv .venv-geography
 ./.venv-geography/bin/python data/regional-review/coastal-reference-check-428/reproduce.py
 ```
 
-The program writes `runs/eight-county-comparison.json`, from the retained source bytes. Its equal-area overlays use EPSG:6933 and longitude/latitude source coordinates, matching the #428 comparison method. Source geometries are not edited. Invalid TIGER geometries remain invalid in the source and are passed to `make_valid` only in memory for overlap triage. A shared `worldatlas-evidence-geometry-v1` longitude/latitude axis-order control is run and recorded; the shared land-only area helper is not applied to the Census water-inclusive county polygons.
+The program writes `runs/eight-county-comparison.json`, from the retained source bytes. Its equal-area overlays use EPSG:6933 and longitude/latitude source coordinates, matching the #428 comparison method. Source geometries are not edited. Invalid TIGER geometries remain invalid in the source and are passed to `make_valid` only in memory for overlap triage. A shared `worldatlas-evidence-geometry-v1` longitude/latitude axis-order control is run and recorded; the shared land-only area helper is not applied to the Census water-inclusive county polygons. Positive and negative measurement controls are retained in `runs/positive-control.json` and `runs/negative-control.json`: unchanged coastal source geometries must yield IoU 1, and an intentionally swapped lon/lat control must differ from the correct EPSG:6933 coordinate by over 1,000 km.
 
 Validate issue pins, exact eight subject IDs, baseline bytes, source receipts, and output hashes with Node.js 24:
 

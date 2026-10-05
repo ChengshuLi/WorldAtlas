@@ -469,8 +469,8 @@
   "outputs": [
     {
       "path": "data/regional-review/coastal-reference-check-428/REPRODUCTION.md",
-      "bytes": 3996,
-      "sha256": "23b859ac11c34049e730f340f08cd35bc475fb3d2230bd713d7d7a81484b870b",
+      "bytes": 4285,
+      "sha256": "1f07ff396b0c2725d9b31270810ad69beb04b8758315d74dd467602aba4889f6",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
@@ -497,8 +497,8 @@
     },
     {
       "path": "data/regional-review/coastal-reference-check-428/reproduce.py",
-      "bytes": 5902,
-      "sha256": "051b7989766516308da6adcbd4bfba7c4c08eeb1a886baf474d55ef4de97fe9d",
+      "bytes": 7292,
+      "sha256": "8b5b56a3098c53893f6c43d27928a9cd46731d2c09c711b2c312673c1c7dba2f",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
@@ -564,18 +564,32 @@
       "sha256": "5d85d2f734ab0d2bbd81d4e6727f45c331ef50c417fecb014140278768a89d80",
       "hash_kind": "file-bytes",
       "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/runs/positive-control.json",
+      "bytes": 338,
+      "sha256": "dbd213cac843e68602918f702bb2d2851d759aa943fa64b0dd8b2bd28b79637d",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/runs/negative-control.json",
+      "bytes": 449,
+      "sha256": "1bdd6b1c790e9ea10fb262efe191b8fdb19492e2cc1f30e367d89815b7564a1e",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
     }
   ],
   "methods": [
     {
       "id": "census-eight-county-equal-area-screen",
-      "kind": "geography",
-      "description": "Compare each unchanged original Atlas and TIGER polygon pair after EPSG:6933 transformation; EPSG:4326 input longitude/latitude; only temporary in-memory Shapely make_valid clones for invalid TIGER comparator; shared helper v1 lon/lat control also run.",
-      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; NumPy 2.3.5; worldatlas-evidence-geometry-v1 axis control",
-      "units": "Equal-area IoU dimensionless; polygon-difference/projected area km2; source AREALAND/AREAWATER in m2",
+      "kind": "measurement",
+      "description": "Measure each unchanged original Atlas and TIGER polygon pair with equal-area EPSG:6933 planar overlays. Only temporary in-memory Shapely make_valid clones are used for invalid TIGER comparators; the shared helper v1 lon/lat transform control is recorded separately. This statistical measurement does not establish legal boundaries.",
+      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; NumPy 2.3.5; pyproj Transformer always_xy",
+      "units": "Equal-area IoU dimensionless; projected area km2; source AREALAND/AREAWATER attributes in m2",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326 input / EPSG:6933 equal-area calculation",
-      "area_method": "Planar equal-area overlay for same-vintage comparative diagnostics; area attributes are source-published values; water convention is unresolved",
+      "area_method": "EPSG:6933 equal-area planar polygon overlay for comparative diagnostics; source area attributes retained as published; water convention unresolved",
       "distance_method": "Not measured"
     }
   ],
@@ -1140,6 +1154,14 @@
     {
       "path": "data/regional-review/coastal-reference-check-428/source/georgia-law/statutory-excerpts.md",
       "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/runs/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/runs/negative-control.json",
+      "status": "added"
     }
   ],
   "validation": [
@@ -1159,6 +1181,18 @@
       "evidence_path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/retrieval.json",
       "kind": "source",
       "method_id": "all-retained-georgia-change-notes-hashed",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/coastal-reference-check-428/runs/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "census-eight-county-equal-area-screen",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/coastal-reference-check-428/runs/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "census-eight-county-equal-area-screen",
       "outcome": "passed"
     }
   ],

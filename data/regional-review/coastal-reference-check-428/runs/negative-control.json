@@ -1,0 +1,15 @@
+{
+  "method_id": "census-eight-county-equal-area-screen",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "description": "Deliberately swapped the known lon/lat control coordinates before EPSG:6933 transformation; the result must differ from correct order by more than 1,000,000 m.",
+  "correct_xy_m": [
+    964862.802509,
+    5180102.328839
+  ],
+  "swapped_xy_m": [
+    4341882.61129,
+    1269436.743538
+  ],
+  "separation_m": 5166968.948
+}
