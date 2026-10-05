@@ -745,6 +745,11 @@
       "status": "added"
     },
     {
+      "original_sha256": "a90e40bee0d21d155000b9598a750c75bb6684ac40db6345ce720cd502bd017a",
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified"
+    },
+    {
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/README.md",
       "status": "added"
     },
@@ -766,6 +771,10 @@
     },
     {
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/overlap-location-context.json",
       "status": "added"
     },
     {
@@ -1043,7 +1052,7 @@
   ],
   "commands": [
     "node --test test/audit-grid-intervals.test.mjs",
-    "Use a managed sparse detached review slot at execution bootstrap 51937ce1a6f259bb3df62edd94e866a24d717e0f; original baseline 5b72dc3adf48b089c3319b18c3a447468196176a; run all half-open row partitions through scripts/audit-canonical-rows.mjs twice into fresh owned outputs. See README.md and reproducibility.json."
+    "Use a managed sparse detached review slot at execution bootstrap 060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411; original baseline 5b72dc3adf48b089c3319b18c3a447468196176a; run all half-open row partitions through scripts/audit-canonical-rows.mjs twice into fresh owned outputs. See README.md and reproducibility.json."
   ],
   "conclusions": [
     {
@@ -1065,11 +1074,11 @@
   "lane": "engineering",
   "methods": [
     {
-      "description": "Complete immutable original encoded-grid integrity/roster verification and sparse projected row comparison using unchanged application edge/first-owner conventions. All 65 row partitions checked twice with whole-byte equality; retain all overlaps, ties and projected-bound differences. No footprint repair, owner inference or physical-area measurement.",
+      "description": "Complete immutable original encoded-grid integrity/roster verification and sparse projected row comparison using unchanged application edge/first-owner conventions. All 65 row partitions checked twice with whole-byte equality; retain all overlaps, sparse boundary diagnostics (nonunique edge/vertex centre incidences) and projected-bound differences. Every overlapping owner index binds to its unchanged prepared stable location/source metadata; not current/native factual authority. No footprint repair, owner inference or physical-area measurement.",
       "helper_version": "worldatlas-evidence-preparation-v1",
       "id": "sparse-canonical-row-comparison",
       "kind": "generator",
-      "software": "Node24.19.0; Git; byte-exact application pixel-grid/ownership/assets/codec; execution bootstrap 51937ce1a6f259bb3df62edd94e866a24d717e0f; Darwin arm64 recorded in products.",
+      "software": "Node24.19.0; Git; byte-exact application pixel-grid/ownership/assets/codec; execution bootstrap 060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411; Darwin arm64 recorded in products.",
       "units": "integer cell, row, owner, run and partition counts; whole-file and decoded byte SHA256"
     }
   ],
@@ -1143,142 +1152,170 @@
       "json_pointer": "/projection_bounds_differences",
       "metric_id": "projection_bounds_differences",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/global-report-v1.json"
+    },
+    {
+      "json_pointer": "/boundary_diagnostic_records",
+      "metric_id": "boundary_diagnostic_records",
+      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/global-report-v1.json"
+    },
+    {
+      "json_pointer": "/boundary_centre_incidences",
+      "metric_id": "boundary_centre_incidences",
+      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/global-report-v1.json"
     }
   ],
   "metrics": [
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "checked_cells",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 68731011556,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "unchecked_cells",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 0,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "checked_rows",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 262166,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "world_locations",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 49625,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "native_partitions",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 56,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "native_runs",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 28809329,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "raster_only_gap",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 0,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "native_outside_projected",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 0,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "foreign_owner",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 0,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "multiple_projected_owners",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 1801,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "first_owner_difference",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 0,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "overlap_owner_sets",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 192,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "finding_records",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 1732,
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "51937ce1a6f259bb3df62edd94e866a24d717e0f",
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
       "id": "projection_bounds_differences",
-      "input_sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
       "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
       "unit": "count",
       "value": 715,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
+      "id": "boundary_diagnostic_records",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
+      "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
+      "unit": "count",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "060c51d04caca6bf38d8d11dbb4fdc3cc3c3a411",
+      "id": "boundary_centre_incidences",
+      "input_sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed",
+      "scope": "Complete pinned original framework under actual application projected cell-centre/first-owner model. No geographic/source authority, physical-water approval or deployment.",
+      "unit": "count",
+      "value": 0,
       "vintage": "archived"
     }
   ],
   "outputs": [
     {
-      "bytes": 5958,
+      "bytes": 6777,
       "hash_kind": "file-bytes",
       "path": "scripts/audit-grid-intervals.mjs",
-      "sha256": "c7cd9a5a5153cf1c9f9c0b27a4332e4f70329e38ae4f3f220fb53c00ed57af29"
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
     },
     {
       "bytes": 8656,
@@ -1293,448 +1330,460 @@
       "sha256": "749908f7baf559ba1460e9841aae791b1283a740cc95772241aeafc338f22f75"
     },
     {
-      "bytes": 5497,
+      "bytes": 6959,
       "hash_kind": "file-bytes",
       "path": "test/audit-grid-intervals.test.mjs",
-      "sha256": "791e8f9ac77d3a5c572fbbaa4c4151dcf93f43a99735ec47e60724d1f881104c"
+      "sha256": "ec98797778254ed05b957157bf70dda3f49e1a29b902612884b138bc9684e87e"
     },
     {
-      "bytes": 4801,
+      "bytes": 37273,
+      "hash_kind": "file-bytes",
+      "path": "test/merge-integration.test.mjs",
+      "sha256": "8d55b72519453a5a28b77d689a735c662ef8d5563b7591a593b2ece101ac1837"
+    },
+    {
+      "bytes": 7265,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/README.md",
-      "sha256": "9c81793f1ff124ff41ff596cbe1b4cc2737211b37d188f67e65ed03d2ea9a3a2"
+      "sha256": "c3dbaeda7de9abb999386156809348d8dfaeb6fb1bccfa8a994fd7c1cf14e1cb"
     },
     {
-      "bytes": 1010,
+      "bytes": 12304,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/controls-test-output.txt",
-      "sha256": "99b46865083c9128834afbdb0142e8632aa12dcfd23d4f5ed45bb5be3ebfea07"
+      "sha256": "7f01a6068a8633318eeacf4384bd80dd1f02450ecb3b232495326dfa1df3c0f0"
     },
     {
-      "bytes": 57168,
+      "bytes": 57713,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/global-report-v1.json",
-      "sha256": "16b804658e910edd49198d8f24a8d621445f3444be8150fd53e8e6b2665210d9"
+      "sha256": "117aaeb6aa29e486e367d03742b56245b5d5cbdd97e5d87cc05a308042dc4528"
     },
     {
       "bytes": 18410,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/inputs.json",
-      "sha256": "c12fa1db5e084c3f1d55a281b3fb95a5c065425742e288bc9fae7a703b40697e"
+      "sha256": "e2c15fe5ad6d126ce84700d9a5eb1eae548db8c9ea2e4dd32ac3261b7c4ce8ed"
     },
     {
-      "bytes": 27172,
+      "bytes": 27218,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/local-resource-observations-v1.json",
-      "sha256": "0955ae41dc33f6c7d7037fc4be3d8df6114ad8cf53c6b087212fb77834557436"
+      "sha256": "2334c49675037c2804da296b9e96f97734504d7b9bd2495c3c41daca1fde19d8"
     },
     {
-      "bytes": 1304,
+      "bytes": 1273,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/negative-control.json",
-      "sha256": "1b182d11ecca768d351e74e380a238dc54fbdb6b227e3573cd09c8b9ebcec131"
+      "sha256": "4b06c4e06dad0d8502693e7207a82907b7ad0898f63f00149726f74dc4372629"
     },
     {
-      "bytes": 380,
+      "bytes": 317125,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/overlap-location-context.json",
+      "sha256": "352e2930621e877643f55c2c6ec92ab868a64b59e2f6a2f421a3a94feaf78387"
+    },
+    {
+      "bytes": 504,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/positive-control.json",
-      "sha256": "c1dd77e21c7257f3ea3d9551305b3d4f60de95a2eb75f4815a4b1c6207bf3f70"
+      "sha256": "d13fb07478d38f52adf442c4a24f86b0fbf82af7314e999b9d52deb5093b9caa"
     },
     {
-      "bytes": 12899,
+      "bytes": 12896,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/reproducibility.json",
-      "sha256": "da104ced334c7c9ab947e3c65a99edc61c16eb628e6a5c3c946c7970dd95c646"
+      "sha256": "0bfc14bcec97efdd7527acf40c157b564288ef1391d225e87e86ca58dc15e842"
     },
     {
-      "bytes": 46023,
+      "bytes": 46024,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-0-4096.json.gz",
-      "sha256": "c42a922869735ceeb0a6a0be10eab1443ca1085b342c1de35133d5a5a8573712"
+      "sha256": "a56181c2d20265340d0b3674411a5e3506e8a1bf8839e4749e87f355d623a5b0"
     },
     {
-      "bytes": 50004,
+      "bytes": 50005,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-102400-106496.json.gz",
-      "sha256": "21858a8e4a74009ec9e42c966fcd1ab8cc03836dac0923e9c5db3475f3592b8a"
+      "sha256": "e78255d3342d1f50690cce5cf4c0e8042a5c3576e08c48990e1e35b8a63d9272"
     },
     {
-      "bytes": 46944,
+      "bytes": 46949,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-106496-110592.json.gz",
-      "sha256": "0f49787a0d806ec82dd4b94f356ba07cebaa03fad1f1965a23ec1ff842674210"
+      "sha256": "b8669e073e4e5a613f4e229f937fa676ad6f700e373350feb81b56a28a2874ab"
     },
     {
       "bytes": 46637,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-110592-114688.json.gz",
-      "sha256": "1b6ef667640ae251a91c03a6cb0bcfbabf5fae7f46180f3d8af8fe9998ce0ed1"
+      "sha256": "4203fe4fa552c61147530a8ac48ef2317289a4c4dd0c3edc763493a3ec3c53bd"
     },
     {
-      "bytes": 49346,
+      "bytes": 49347,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-114688-118784.json.gz",
-      "sha256": "3b39ee4bd445d870acafb4d80fee65a925c27efc0d4d4569dffcd7842477d6ee"
+      "sha256": "66eed70fb580efbd8369d79341907b20f7dcf9b57f792400d6aef066d7e17294"
     },
     {
       "bytes": 46576,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-118784-122880.json.gz",
-      "sha256": "e92dc793b49a62d1288a1d84712a0c73238e7dbaa333be2ce26920e52b7acaf2"
+      "sha256": "6705efb0c29e2e2ffc472088ad5e9f19ac2a25484d75435fc343c19ea7991821"
     },
     {
       "bytes": 46045,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-12288-16384.json.gz",
-      "sha256": "f8100849373e041b140c7c1d421b892c0a982f0fe4860bb099cf6e2c1ec36ce9"
+      "sha256": "6afbae06853d86b7fb7b88e1c34d04d95222438bc8e4e6b15c876b907796e958"
     },
     {
-      "bytes": 47387,
+      "bytes": 47392,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-122880-126976.json.gz",
-      "sha256": "0b5e7bd5c33d073a2e9d8c671224ef92808246e7510df236d213f44438a5dbac"
+      "sha256": "898dd5ec730eb2e2bb4bc9781afff240e3da90f7e8d595c17159000d59d0dc80"
     },
     {
-      "bytes": 46307,
+      "bytes": 46306,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-126976-131072.json.gz",
-      "sha256": "60097a7214487da069733a6ef76d348f2555543d321b6da0ec8edd447cf80924"
+      "sha256": "aaecffc7cbcf7cbc2ab24b1e93b57a8f9ef9e2df77762972cb1cd5f09f862f68"
     },
     {
       "bytes": 46237,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-131072-135168.json.gz",
-      "sha256": "9ee12e044d06751f83b22322a21c32f16e55cfe6e0e84b6a8ed91b60128100e8"
+      "sha256": "23cadb16648048b911a0bc9e8ba9f84350e4942406ce62e62bee96420d522e69"
     },
     {
-      "bytes": 46136,
+      "bytes": 46137,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-135168-139264.json.gz",
-      "sha256": "02fa230db68156b13b6202f173feed0bb6964e3962c20036216b46a12a15e5fe"
+      "sha256": "5ff61e97112ef49f2865d52deafa8acd226d6c19a0082e81562208e7c14cecde"
     },
     {
       "bytes": 46201,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-139264-143360.json.gz",
-      "sha256": "a8ebe9d75496f72b0e9954962e12ec48d10a53ab287b143f3631eddeb376ec86"
+      "sha256": "4a111c26eaf88cb2fe7636c350dba9b36366081d75b9618c3fd35143f2a840ab"
     },
     {
-      "bytes": 46442,
+      "bytes": 46443,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-143360-147456.json.gz",
-      "sha256": "97426c313a9605826eeb980c3f437580ec71c30a9c0a74e1762f2c7f46c358c9"
+      "sha256": "045bb05746bc346ffc00cf23440d3831bd2bfb640d38ce852c0d42e4652c430b"
     },
     {
       "bytes": 46364,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-147456-151552.json.gz",
-      "sha256": "472b09d22ce60b3f7e6d22e716864fa29e24f90d8aff58114547bc848d5c0ca6"
+      "sha256": "3586ff7ccb7d143c4046837bce9f8efb5eb566c55e21aef45d9c62eed81ed1cc"
     },
     {
       "bytes": 46330,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-151552-155648.json.gz",
-      "sha256": "b028cbb82e0bc4aead81e08d3c6cd3566a04f9e7e12299e0f8219c1531447d9a"
+      "sha256": "c259d3651eaea04c4970a4e0b3d476d4398e6b85027525f7556f164483e2d185"
     },
     {
-      "bytes": 46151,
+      "bytes": 46153,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-155648-159744.json.gz",
-      "sha256": "9b5a14171297eb3b7960b8059159b8e0d6482415a4abe891d9f7644947b331da"
+      "sha256": "532b3cbdcdd364b930e94f44d656fbc1c1e58a65e1a387c4365d88bace1a82ea"
     },
     {
-      "bytes": 46057,
+      "bytes": 46058,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-159744-163840.json.gz",
-      "sha256": "ea4a80db956fbca9179470a09c6988588e026c48b9757d361f714fe01d46b812"
+      "sha256": "6e830706bd8084763b552b62ae7531d928ffd2c722f7ca7abae17b52aebc9343"
     },
     {
-      "bytes": 46046,
+      "bytes": 46045,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-16384-20480.json.gz",
-      "sha256": "34496dc9d59244557b0d17d9cc41cf59964101e72ef5e04c09e5db633677f1cc"
+      "sha256": "9405ffcba640ebb99530b1e1202c312a653764f4af515513d973f5cace59a4a0"
     },
     {
-      "bytes": 46060,
+      "bytes": 46059,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-163840-167936.json.gz",
-      "sha256": "4a7f895eb5f40c51fc337df8109461581b43b66371bb8e7392cce101f44b4a1e"
+      "sha256": "258940b74a0b85b342ef61a6cd4d519e48cdc94251074ae8317b342acb7f129b"
     },
     {
       "bytes": 46057,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-167936-172032.json.gz",
-      "sha256": "02fc8caad9947061ffb2cd7715972732454c2a00a5b30d5b4c4967b11ce2a2f3"
-    },
-    {
-      "bytes": 46053,
-      "hash_kind": "file-bytes",
-      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-172032-176128.json.gz",
-      "sha256": "179e97e88f09d2baaeaeaef406d2c9608d168f8447eac21b8815bcfe2defaadc"
+      "sha256": "57ce5e6f2b24edd0ca79c9c158b2dbf8447f2651ddb7ecbc57b62c0400cb6cc1"
     },
     {
       "bytes": 46052,
       "hash_kind": "file-bytes",
-      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-176128-180224.json.gz",
-      "sha256": "8236d7553a7366df04a63147acffaf52d17d7c9ba9cc598479af57e851e51e21"
+      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-172032-176128.json.gz",
+      "sha256": "c2bfac1f3f733960ab3275804f42fd9c252e1a328e3a5873299fd4434efd7dce"
     },
     {
-      "bytes": 46044,
+      "bytes": 46053,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-176128-180224.json.gz",
+      "sha256": "12ac764f1ffe35a4b5b21cc955aa5f508ef14a9112a84f21de2f4500b31d1775"
+    },
+    {
+      "bytes": 46043,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-180224-184320.json.gz",
-      "sha256": "918a4ce1578faba28ac06c0607f7b11fce3eb8761244f8dd12a711ca9486ff25"
+      "sha256": "bc00aa8c62bf9866e4c506ca2763e23affc2a87f5b8d7b78514485f2b395b682"
     },
     {
-      "bytes": 46039,
+      "bytes": 46040,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-184320-188416.json.gz",
-      "sha256": "abc307ef1ed54d8ebc34ce5e222a908698e7abe872959078b4e9103440e2e557"
+      "sha256": "a785b974983774b23fb4dc258f513b5a9cb1deeb7b68590937382daffd8b47fb"
     },
     {
       "bytes": 46034,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-188416-192512.json.gz",
-      "sha256": "7cdd34a0a293d7394c1a354cdcb2e245a55b01e11a7ad46c7b652632c6a6df34"
+      "sha256": "5c5892371178472ecf690642315c21e7cd89b748e92c7f34fcc3d43623d62953"
     },
     {
       "bytes": 46032,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-192512-196608.json.gz",
-      "sha256": "dfee6a158cd106b3756a78f95f23078aa74d1148e0edeb0722342e72bfe23cd8"
+      "sha256": "8eeff0baa49c6408e07e8a0c090646201bb62a2570f2e22af891fdc2ee98b383"
     },
     {
-      "bytes": 46036,
+      "bytes": 46034,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-196608-200704.json.gz",
-      "sha256": "6e99804f3147cbd042929903aea8ab944e365eb59b72833615f6316693e61440"
+      "sha256": "cb82b007a5066ea23cc0a7c219563c31b59d03d24c69d7a8832b8e9ee3bc98a8"
     },
     {
       "bytes": 46030,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-200704-204800.json.gz",
-      "sha256": "1740512853bc63063179ed65c9895de5c6c6d43304a1d55a1ace226eac0a5c09"
+      "sha256": "da5a40c75503eef89e9794a25e0178992dcfa2ff4273d8bcaf84c250f324b217"
     },
     {
-      "bytes": 46048,
+      "bytes": 46050,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-20480-24576.json.gz",
-      "sha256": "a6636a87ffd036d9b1639e1d01341a16eb867c9054a7ae56652a5d07da81ccfb"
+      "sha256": "6e7670a4af08041fed117236f26b3ee8765a94dc8436ab016210ff2a10bd57b7"
     },
     {
-      "bytes": 46031,
+      "bytes": 46032,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-204800-208896.json.gz",
-      "sha256": "9138836acc8a3ebf7d7ab821e5b3efa8c943b8e1777026be269361c64909ce53"
+      "sha256": "ffdec7fa0544de672b5401536f10b03963ea314068417a2ce65a224914b6ed1d"
     },
     {
-      "bytes": 46030,
+      "bytes": 46032,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-208896-212992.json.gz",
-      "sha256": "68d739914f0eb6a0e3bdef98520e6d133dee28e7f2e101d9823ef4910c5956db"
+      "sha256": "3a2f6b720c9b4a4d329972f0c0216d7d6fe455ad61e654d3e5b4d041d3b72f02"
     },
     {
       "bytes": 46033,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-212992-217088.json.gz",
-      "sha256": "da2bc198689f6f03d77366662124cb6360eeb29b137125e10c4357079706d09e"
+      "sha256": "d029e2841643f7dd0eb679bcdc17ab85966f49f12aeeb11835feb898f5f70329"
     },
     {
-      "bytes": 46034,
+      "bytes": 46036,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-217088-221184.json.gz",
-      "sha256": "1494928108a81a1aa0d1403b39d1e29fbf64b8f59b5d0426ca47361146273ed9"
+      "sha256": "93b7059e779bb11a4111d60273d874cebb1bc182edcff4c067be58cf7e94117b"
     },
     {
-      "bytes": 46031,
+      "bytes": 46033,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-221184-225280.json.gz",
-      "sha256": "245ac26d815c67715a97701454744106c536c48aa7a1473711335fd91c2818eb"
+      "sha256": "b4ceef221f8bd710d672a1fd65d2a04e6e5e732f01214d04f064c6269347bbbc"
     },
     {
       "bytes": 46032,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-225280-229376.json.gz",
-      "sha256": "5754ec28a3f1ff40a2aa45dfffce2d993d8e9b2064476434069f09179b7d0474"
+      "sha256": "691e400bb2667d9276c22fe0a72edf64275dda9396fd0f8b289782f07616a51a"
     },
     {
       "bytes": 46033,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-229376-233472.json.gz",
-      "sha256": "e20b42abd7ad0e1baf8e82b3174200e901e99017fa19c2bbd4207e3c6c9fff29"
+      "sha256": "a047c42814d0d3428cd885377ee77ebd1469d37b0740458a14a90bd764e9b22c"
     },
     {
       "bytes": 46032,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-233472-237568.json.gz",
-      "sha256": "105f19956afd4812e78f69081240ceafde69025a0f49fc23698391cbe449255d"
+      "sha256": "d9446d661f58b3bf53860df55f0f9ed60393d7866f56d66b419ebb1ec0d44ec5"
     },
     {
-      "bytes": 46033,
+      "bytes": 46034,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-237568-241664.json.gz",
-      "sha256": "4d9289c4bfc5becbde2348656af3711a0ba98d199246643be300db242c8cd80d"
+      "sha256": "4a2d5300262a94c81eb332a8f8977927b750fdda4660f42825d52e4bed18d34e"
     },
     {
       "bytes": 46031,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-241664-245760.json.gz",
-      "sha256": "aa009e739fde7a6d65adfb00bfd92cd8aa8a7d7b37d63cdbf316572a935d8bb5"
+      "sha256": "1b67615cc84627b74a0f2265e343c440c6f5ede803612ea4828b5fb234351333"
     },
     {
-      "bytes": 46235,
+      "bytes": 46236,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-24576-28672.json.gz",
-      "sha256": "e283af9c097b4fe6631fc3a93615aefb127d12214486453c2ce2df82ac9cad61"
-    },
-    {
-      "bytes": 46032,
-      "hash_kind": "file-bytes",
-      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-245760-249856.json.gz",
-      "sha256": "a7708f6c6e7b43280d43c0ca4f319b37df7ddd2606f82743664f7b158719f485"
+      "sha256": "976f3d0b047c2e75380e04aea20a1fde44abd8f3ccb3c9e678193ac448a08b80"
     },
     {
       "bytes": 46034,
       "hash_kind": "file-bytes",
-      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-249856-253952.json.gz",
-      "sha256": "b337d90ab5ae8f9c685af9c96bff3b13b3cfbdb087c863837c10e36969e3ebed"
+      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-245760-249856.json.gz",
+      "sha256": "c79f1d113ff2f1c19e25f0ab336cdc7fe184c56f059695f460d7b3f12d9f2ce4"
     },
     {
-      "bytes": 46032,
+      "bytes": 46033,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-249856-253952.json.gz",
+      "sha256": "39738c085a20cc7bb11d0a66b3353019dbc02ec48ed8166b347d1a5f76ead6bb"
+    },
+    {
+      "bytes": 46034,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-253952-258048.json.gz",
-      "sha256": "d5f6095861ea48cffa85b9cbc358aecdae64a8fb5770735a6e3a190352988e3a"
+      "sha256": "adcb5e47bc4d03488a345a357ae4984dd3386a6d656f783b7c7d96c64d9b1de0"
     },
     {
-      "bytes": 46032,
+      "bytes": 46033,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-258048-262144.json.gz",
-      "sha256": "2000cbe30446a961e9743a9338186cc8593feee1b3a51e9f7091568ec94ed354"
+      "sha256": "0dc6671b302583dcdd7b29a7b83669313730373d09a0e454c2439770e05bf380"
     },
     {
-      "bytes": 46024,
+      "bytes": 46027,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-262144-262166.json.gz",
-      "sha256": "226992fa0a8650ee495b61f3cf63484c927efee29a5aec19b4f1b4e93fb39cac"
+      "sha256": "c1793d8b6f3daafc82c90f1b78cba63daa704729b1ea9589c8e72f1850d3a974"
     },
     {
-      "bytes": 46519,
+      "bytes": 46521,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-28672-32768.json.gz",
-      "sha256": "7322b269c8942df9e725ab58d9769ec5b1bf24578cd4191ce2f508b88497ebd3"
+      "sha256": "9d737463aa8979a64723b9b909482580b07db96c123d2bd92e00d0e01f8399cf"
     },
     {
-      "bytes": 48425,
+      "bytes": 48427,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-32768-36864.json.gz",
-      "sha256": "ff1e7c8d3231dd7051550663ec3080e77f6fa33025fcab2bbf1b1931e395bef4"
+      "sha256": "d10c1dba293e2b6831dff6fe458bfa301acfb137e7319f0e8d879e04b68bfde7"
     },
     {
-      "bytes": 46485,
+      "bytes": 46487,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-36864-40960.json.gz",
-      "sha256": "81edc883e56faf1a274bc40cef9b1edc4705e187f80d295b96ec247151a02ca2"
+      "sha256": "6d5a9c5378bb45250ad799bddab61b93c25a22deb7176b4cadc88810fc601d74"
     },
     {
-      "bytes": 46026,
+      "bytes": 46027,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-4096-8192.json.gz",
-      "sha256": "936741faa52f7f3efe044b55b0319885de63fbeba479c11e78cbce5e9845ef02"
+      "sha256": "bfe2aaac3a34ef6c535794a86c73ce268f32585484067fa92e5fdeff1e5b4560"
     },
     {
       "bytes": 46100,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-40960-45056.json.gz",
-      "sha256": "cdb92d1550e261e816323bcb262e5ec6f45872c35f85a66614bcf1ee9416672c"
+      "sha256": "83c56b952976ac635935990826c4e1f6a2862627c38e5bfdb55160c94e6f1a22"
     },
     {
       "bytes": 46052,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-45056-49152.json.gz",
-      "sha256": "f5575ba8a16e1f3a9c20f224b0a850cc4f75fc191ceff3e21f99c8d2325ae27b"
+      "sha256": "90b3850417f7084d0367d3f36a7c77284cc3dcc32d6cff06b79a2be751176a64"
     },
     {
-      "bytes": 46056,
+      "bytes": 46054,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-49152-53248.json.gz",
-      "sha256": "278c53cb1b19f0aa19f35fd15fbf1ca420b6f0ad5d29a2c7d201c8628333ebe4"
+      "sha256": "d1b0a9cbc7398303de44364d15a14c52e3de2cd6be2eaf06219c2411e21ad422"
     },
     {
-      "bytes": 46129,
+      "bytes": 46130,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-53248-57344.json.gz",
-      "sha256": "3d394d1913bcf8943f55303248ad7b9c07b07230fedb14a95cfbe3cbd3ca8060"
+      "sha256": "2fa80c61a5c0c361100fd53493617d3461ba72996fa2ebd6becd55518a651c36"
     },
     {
       "bytes": 47738,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-57344-61440.json.gz",
-      "sha256": "f65cf2c6b4a1e8e54b87f0f1dcbc5f8424516a73212dc57e1b4e86ca6fd69410"
+      "sha256": "25c99e6cf62dc02cf8c1ad0440dd6b25771f7bf186bd74d25501426f259f0237"
     },
     {
-      "bytes": 46809,
+      "bytes": 46811,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-61440-65536.json.gz",
-      "sha256": "8ce8d14169ae0316306e696cd468354055a9573d91064492d6c67f3e9dfb99c9"
+      "sha256": "7da588d3f6d108d0d418b35b6dd8798d13685f6707a41a2a242dad7c50637d8d"
     },
     {
-      "bytes": 46233,
+      "bytes": 46232,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-65536-69632.json.gz",
-      "sha256": "04129717f81e5b875b6a4fac7875ee7d9d08fce37be5a511e312cebcc82eebd9"
+      "sha256": "54228c27a8a89cc27fde265af2d5ff822b685095d6897b35c66fb908e3ba4880"
     },
     {
-      "bytes": 46290,
+      "bytes": 46291,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-69632-73728.json.gz",
-      "sha256": "3026bb05a7a2dd8dea82b11108405878ad44b2451ba6abb9a1e0b19784bc00af"
+      "sha256": "5f1466fd318a93643d8815b740e70653e3ca1cc4f9ae862220f6229f22cb64d5"
     },
     {
-      "bytes": 46748,
+      "bytes": 46751,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-73728-77824.json.gz",
-      "sha256": "1908b8623c6544d3bc06471507861eb3db3519f77911ac78cf9155c043269208"
+      "sha256": "d66b205102c9c523b6d66929a2aeb00d456532a8dcfa145fd44d78a9bc78cad6"
     },
     {
-      "bytes": 46256,
+      "bytes": 46257,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-77824-81920.json.gz",
-      "sha256": "78a5dcfdd2ca44e3f4f2ab636564d6de0a7dbc2c6d509ebfabaa7563e6582781"
+      "sha256": "2017a78a63f48d390f38f46c25e9d0130707194fd1beabaff764144d93b25275"
     },
     {
-      "bytes": 46044,
+      "bytes": 46042,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-8192-12288.json.gz",
-      "sha256": "ad3d4be835aca49f48af756c3a961bf71463bbcd98fb8fc0a36f51e9a884c658"
+      "sha256": "2a514b838aec3c84eee84ba32805058f002cbbc9f00fb51caada8b710c8b0df1"
     },
     {
       "bytes": 46575,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-81920-86016.json.gz",
-      "sha256": "1054661a95d52c293a25a7ba59f5c4414925a4934f781e45b9e1e360f8dd9a9e"
+      "sha256": "a7f3c10aadc0489608ac86d1d64e1fd3038230c77849b07c4705c5d6aa5dd031"
     },
     {
-      "bytes": 46928,
+      "bytes": 46931,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-86016-90112.json.gz",
-      "sha256": "611ba61bf062bce68cf63ce593785cf6cc79e42943b5a8bd170c329fa888c4c7"
+      "sha256": "ad9441b420474e44fd40bbb3308826ea865843a465210f321528f3159a5d9a35"
     },
     {
-      "bytes": 47217,
+      "bytes": 47219,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-90112-94208.json.gz",
-      "sha256": "194f61a530338e50d2b88024b4aa8dcb115bb6e0764f80edcbfd35e58057df2b"
+      "sha256": "0baa7344437508e9da8c9fc840da279225055ebcbaaab5940e3b8e65dc53da44"
     },
     {
-      "bytes": 46954,
+      "bytes": 46956,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-94208-98304.json.gz",
-      "sha256": "2a327792448cfbf99e880aa5f50038a935b2b3a6e7270565e3752a0d57e2170f"
+      "sha256": "b19bce08171333c298ec614884a51cae3c984b6a6dcc6df11b19ff34d8957859"
     },
     {
-      "bytes": 46324,
+      "bytes": 46325,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/worldwide-sparse-grid-audit-973-20261005-local14/results-v1/rows-98304-102400.json.gz",
-      "sha256": "db90506a095fda742accb365aadb8f3908286fadc7d4cebe7fd9dc761b3aca94"
+      "sha256": "e620fc44bf9bf092f939f8f0cf66e279e0aec072d9911d91599720b34599868f"
     }
   ],
   "sources": [

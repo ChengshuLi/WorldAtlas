@@ -144,7 +144,14 @@ test('parallel full-regression shards cover each unit file once and focused prof
  for(const name of ['premerge-evidence','regional-research-gate','handoff-scope','merge-integration'])assert.ok(focused.includes(`test/${name}.test.mjs`));
  assert.throws(()=>integrationTestFiles('evidence',1),/Invalid/);
  assert.equal(integrationNeedsBrowser('evidence',0),false);
- assert.equal([0,1,2].filter(shard=>integrationNeedsBrowser('full',shard)).length,1);
+ // New test files can move browser tests across modulo-distributed shards.
+ // Each shard must request the browser precisely when its actual files need it.
+ for(const shard of [0,1,2]){
+   const needsBrowser=integrationTestFiles('full',shard).some(name=>
+     /['"](?:@playwright\/test|playwright)['"]/.test(fs.readFileSync(name,'utf8')));
+   assert.equal(integrationNeedsBrowser('full',shard),needsBrowser);
+ }
+ assert.ok([0,1,2].some(shard=>integrationNeedsBrowser('full',shard)));
 });
 
 function addTrustedProof(f) {
