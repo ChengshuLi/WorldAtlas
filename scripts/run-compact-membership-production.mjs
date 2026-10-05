@@ -31,7 +31,7 @@ export async function commitMembershipRetirement(engine,{prepare,authorize,onCom
   await authorize('before-commit');
   return value;
  });
- onCommitted(); // Persist that DROP committed, even if the later proof fails.
+ onCommitted(parity); // Persist that DROP committed, even if the later proof fails.
  await afterCommit();
  return parity;
 }
@@ -154,8 +154,9 @@ export async function runCompactMembershipProduction({env=process.env,fetcher=fe
      authorize:async point=>{
       stage='retirement-'+point;
       const current=await freshReservation();validateCompactProductionWindow(window,current.claim,current.issue,{head:env.GITHUB_SHA,toolSHA:sha(fs.readFileSync(fileURLToPath(import.meta.url))),phase:'end'});
+      if(point==='before-drop'){receipt.retirement_drop_started=true;receipt.retirement_outcome='unconfirmed';save();}
      },
-     onCommitted:()=>{receipt.original_heap_retired=true;stage='application-api-after-retirement-commit';save();},
+     onCommitted:parity=>{receipt.parity=parity;receipt.original_heap_retired=true;receipt.retirement_outcome='committed';stage='application-api-after-retirement-commit';save();},
      afterCommit:async()=>{if(plan)receipt.api_function_parity_after_retirement=await appProof(plan);}
     });
    }
@@ -173,6 +174,7 @@ export async function runCompactMembershipProduction({env=process.env,fetcher=fe
     else receipt.original_index_recovery={status:'compact-switch-committed; use verified explicit rollback before retirement'};
    }catch{receipt.original_index_recovery={status:'unsettled; original facts retained, measured index restoration or apply retry required'};}
   }
+  if(receipt.phase==='retire'&&receipt.retirement_drop_started&&receipt.original_heap_retired!==true)receipt.retirement_outcome='unconfirmed; read-only catalog verification required';
   receipt.failure_stage=stage;if(/^[0-9A-Z]{5}$/.test(error.code??''))receipt.sqlstate=error.code;receipt.error_code=/^[a-z0-9-]{1,100}$/.test(error.message)?error.message:'compact-production-operation-failed';}
  finally{
   if(appClient)appClient.release();if(appPool)await appPool.end();

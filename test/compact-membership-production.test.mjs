@@ -37,7 +37,7 @@ test('retirement app proof runs after owner commit and retains committed state o
   const engine={transaction:async fn=>{events.push('begin');try{const value=await fn({query:async sql=>{if(sql.startsWith('DROP'))fail('drop');else events.push('lock');}});events.push('commit');return value;}catch(error){events.push('rollback');throw error;}}};
   const run=()=>commitMembershipRetirement(engine,{
    prepare:async()=>{fail('prepare');events.push('before-api');return {exact:true};},
-   authorize:async point=>fail(point),onCommitted:()=>{committed=true;events.push('committed-receipt');},
+   authorize:async point=>fail(point),onCommitted:parity=>{assert.deepEqual(parity,{exact:true});committed=true;events.push('committed-receipt');},
    afterCommit:async()=>{assert.equal(events.at(-1),'committed-receipt');assert.equal(committed,true);fail('after');}
   });
   if(failure)await assert.rejects(run(),new RegExp(failure));else assert.deepEqual(await run(),{exact:true});
@@ -45,4 +45,12 @@ test('retirement app proof runs after owner commit and retains committed state o
   if(committed){assert.ok(events.indexOf('commit')<events.indexOf('after'));assert.ok(!events.includes('rollback'));}
   else{assert.ok(events.includes('rollback'));assert.ok(!events.includes('after'));}
  }
+});
+
+
+test('unconfirmed owner commit never reports committed retirement or starts final application proof',async()=>{
+ let notified=false,proved=false;
+ const engine={transaction:async fn=>{await fn({query:async()=>{}});throw Error('commit transport unavailable');}};
+ await assert.rejects(commitMembershipRetirement(engine,{prepare:async()=>({exact:true}),authorize:async()=>{},onCommitted:()=>{notified=true;},afterCommit:async()=>{proved=true;}}),/commit transport/);
+ assert.equal(notified,false);assert.equal(proved,false);
 });
