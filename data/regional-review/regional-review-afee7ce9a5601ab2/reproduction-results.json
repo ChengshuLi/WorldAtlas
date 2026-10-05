@@ -1,0 +1,39 @@
+{
+  "area_row_counts": {
+    "Argentina South": 1,
+    "Paraguay": 195,
+    "Uruguay": 19
+  },
+  "baseline_commit": "702a55f8e03a2442a153eb1176919feaf84eb115",
+  "distinct_parents": 32,
+  "issue": 446,
+  "limitations": [
+    "Name and source-ID crosswalk does not prove boundary correctness.",
+    "Paraguay original must be restored from the pinned URL; it exceeds the 32 MiB retention cap.",
+    "Uruguay current comparison validates names and feature roles only; no full polygon overlay or boundary certification.",
+    "Southern Patagonian Ice Field boundary is not treated as sovereign or administrative evidence."
+  ],
+  "negative_control_duplicate_scope_rejected": true,
+  "owned_paths": [
+    "data/regional-review/regional-review-afee7ce9a5601ab2/"
+  ],
+  "paraguay_distinct_aggregates": 2,
+  "paraguay_native_baseline_count": 241,
+  "paraguay_scoped_input_source_records": 196,
+  "paraguay_scoped_multipart_members": 2,
+  "paraguay_source_features": 247,
+  "paraguay_source_ids_unique": 247,
+  "paraguay_source_members_via_aggregates": 6,
+  "paraguay_source_records_mapped_once": 247,
+  "scope_baseline_matches": 215,
+  "scope_expected": 215,
+  "scope_unique": 215,
+  "uruguay_2017_source_count": 19,
+  "uruguay_current_contested_extras": [
+    "Rincón de Maneco",
+    "Isla Brasileña"
+  ],
+  "uruguay_current_department_named_feature_count": 19,
+  "uruguay_current_official_features": 21,
+  "uruguay_department_names_matching": 19
+}

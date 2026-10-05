@@ -1,0 +1,102 @@
+{
+  "retrieved_date": "2026-10-05",
+  "sources": [
+    {
+      "source_id": "gb:PRY:ADM2",
+      "title": "geoBoundaries gbOpen PRY ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/f549eab25a258603ea32c9dc6cb11b7657796478/releaseData/gbOpen/PRY/ADM2/geoBoundaries-PRY-ADM2.geojson",
+      "retrieved": "2026-10-05",
+      "sha256": "d42bd1f910070bf805e32dc46708230c91f58902a3c8792eda60928b22362858",
+      "bytes": 45589273,
+      "retained": false,
+      "license": "CC BY 4.0, as pinned in subject metadata",
+      "reason_not_retained": "45,589,273 bytes exceeds the 32 MiB per-file evidence retention ceiling",
+      "restore": "curl -L --fail --silent --show-error 'https://github.com/wmgeolab/geoBoundaries/raw/f549eab25a258603ea32c9dc6cb11b7657796478/releaseData/gbOpen/PRY/ADM2/geoBoundaries-PRY-ADM2.geojson' -o data/regional-review/regional-review-afee7ce9a5601ab2/pry-source-temporary.geojson; verify SHA-256 d42bd1f910070bf805e32dc46708230c91f58902a3c8792eda60928b22362858. Do not normalize or recompress."
+    },
+    {
+      "source_id": "gb:URY:ADM1",
+      "title": "geoBoundaries gbOpen URY ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/URY/ADM1/geoBoundaries-URY-ADM1.geojson",
+      "retrieved": "2026-10-05",
+      "sha256": "9f4887205e7b359af2ef1e4f484ad071d2dc0d12d068f1d7b6c1cc6c2624d1cf",
+      "bytes": 3632079,
+      "retained": true,
+      "retained_path": "ury-gb-2017.geojson",
+      "license": "Open Data Commons Open Database License 1.0 (ODbL 1.0) as pinned in subject metadata"
+    },
+    {
+      "source_id": "uruguay-igm-current",
+      "title": "Uruguay IGM departmental boundary layer (downloaded GeoJSON response)",
+      "url": "https://sit.mvot.gub.uy/arcgis/rest/services/07_EXTERNO/LIMITES_ADMINISTRATIVOS/MapServer/3/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson",
+      "retrieved": "2026-10-05",
+      "sha256": "3cfa19c6be9d12bd159b236e15839f958656fdbe66ef19e38379cb54c141b3a7",
+      "bytes": 16950115,
+      "retained": true,
+      "retained_path": "ury-igm-current.geojson",
+      "license": "Official metadata permits free use with citation to IGM, AGESIC and IDE; the service credits IGM"
+    },
+    {
+      "source_id": "uruguay-department-metadata",
+      "title": "Uruguay official metadata for Departamentos",
+      "url": "https://www.ambiente.gub.uy/metadatos/index.php/metadata/md_iframe/55",
+      "retrieved": "2026-10-05",
+      "sha256": "610ad10f7c2552affdcf04d440ba267d233f1898c995c34eae637a2460aa46b2",
+      "bytes": 5334,
+      "retained": false,
+      "restore": "Fetch the exact URL; page reports data update 2024-09-18, metadata update 2026-07-15, free use with IGM/AGESIC/IDE attribution."
+    },
+    {
+      "source_id": "paraguay-ine-2022-cartografia-page",
+      "title": "INE Paraguay Cartografía Digital 2022",
+      "url": "https://www.ine.gov.py/microdatos/cartografia-digital-2022.php",
+      "retrieved": "2026-10-05",
+      "sha256": "275e4ed8adb77fc218f473c48098cea299601e9365a3cdb2173de62b260c5b5a",
+      "bytes": 46826,
+      "retained": false,
+      "restore": "Fetch exact page. It describes DPA boundaries as merely referential/statistical and lists departmental, district and locality layers."
+    },
+    {
+      "source_id": "paraguay-ine-2022-district-count",
+      "title": "INE Paraguay 2022 management report",
+      "url": "https://www.ine.gov.py/pdfjs/web/Memoria%20de%20gestion%20INE%202022.pdf",
+      "retrieved": "2026-10-05",
+      "sha256": "77c960d89c18eb8b8d3d9359d6a7e9ba7636f51016db8dd2b75a53f91b5145b4",
+      "bytes": 6022351,
+      "retained": false,
+      "restore": "Fetch exact URL. Report says 2022 cartographic update covered 263 districts."
+    },
+    {
+      "source_id": "argentina-chile-1998-boundary-agreement",
+      "title": "Agreement to specify the boundary route from Monte Fitz Roy to Cerro Daudet, official treaty text",
+      "url": "https://tratados.cancilleria.gob.ar/tratado_archivo.php?caso=pdf&id=kqSrmw%3D%3D&tipo=kg%3D%3D&tratados_id=kqOkmJo%3D",
+      "retrieved": "2026-10-05",
+      "sha256": "c29a05138447ea20153b95be7c267618ed05edd85c334275efd70dbac8ae2239",
+      "bytes": 191319,
+      "retained": false,
+      "restore": "Fetch the exact treaty URL; official PDF describes the route and vertices between Fitz Roy and Daudet."
+    },
+    {
+      "source_id": "argentina-cancilleria-2018-glaciers",
+      "title": "Argentina Cancillería 2018 statement on glacier inventory and demarcation",
+      "url": "https://cancilleria.gob.ar/es/actualidad/noticias/inventario-nacional-de-glaciares-en-la-zona-de-hielos-continentales",
+      "retrieved": "2026-10-05",
+      "sha256": "46d1d85d57d259b4242a58996769b5f18ed29346c2a5e7c11badba60509a29e5",
+      "bytes": 43866,
+      "retained": false,
+      "restore": "Fetch the exact URL; statement says official glacier inventory used pre-1998 cartography and does not prejudice pending binational demarcation."
+    },
+    {
+      "source_id": "natural-earth-source-reference",
+      "title": "Natural Earth source label attached to country-SPI baseline feature",
+      "url": "https://www.naturalearthdata.com/",
+      "retrieved": "2026-10-05 baseline checkout review",
+      "sha256": "285e80dadd61de9903bf3070b7a594e4009034d8b67adc304111328da53468ce",
+      "bytes": null,
+      "retained": true,
+      "license": "Public domain according to feature metadata",
+      "source_vintage": "Undated modern reference",
+      "restore": "Restore the exact pinned baseline blob and feature metadata. No more specific Natural Earth dataset release, source feature ID or direct geometry file is present in the current subject metadata; original source restoration remains unresolved.",
+      "baseline_artifact": "data/geography/part-28.json, exact blob pin in baseline-files.json; subject property original_geometry_sha256 records the hash."
+    }
+  ]
+}
