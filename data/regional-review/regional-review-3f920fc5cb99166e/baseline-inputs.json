@@ -1,0 +1,123 @@
+{
+  "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+  "files": [
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2404397,
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 10317725,
+      "uncompressed_sha256": "52348f585df4fa12b598ffa61ddd1f764497f421e16ed2dc412a0cead820c4e3"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-GRC-ADM3.geojson.gz",
+      "bytes": 519962,
+      "sha256": "c0c518f1b87a09b52776accff437a4aae5c82061cc0127342305f777b56ac7b2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1732871,
+      "uncompressed_sha256": "15c68b18cbf96f3c3c5021df38353b2d407adb2d1dc06c7165ee158da81fb3f6",
+      "role": "original-source"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-GRC-ADM3-metaData.json",
+      "bytes": 889,
+      "sha256": "0c0956d301dd1e04cb2586e27237e91d4509c9ecdb3471210989315cda013d2d",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "data/administrative-sources.json",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/geographic-releases/current-manifest.json",
+      "bytes": 206,
+      "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/macro-foundation/macro-certificate.json",
+      "bytes": 38959,
+      "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 71286,
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 440969,
+      "uncompressed_sha256": "25dd00067eee73913e2d2c1c46599008eb8b40f46ca2925b98786f054e5571d8"
+    },
+    {
+      "path": "data/macro-foundation/review-index.json",
+      "bytes": 2383,
+      "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/macro-foundation/approved-boundary-decisions.json",
+      "bytes": 634171,
+      "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "pins": {
+    "world-index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+    "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "scope-membership": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+    "source-grc-adm3": "c0c518f1b87a09b52776accff437a4aae5c82061cc0127342305f777b56ac7b2",
+    "source-grc-adm3-metadata": "0c0956d301dd1e04cb2586e27237e91d4509c9ecdb3471210989315cda013d2d",
+    "administrative-sources": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+    "geographic-current-release": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+    "macro-certificate": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+    "regional-handoffs": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+    "macro-review-index": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+    "approved-boundary-decisions": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18"
+  },
+  "pin_files": {
+    "world-index": "data/world-index.json",
+    "hierarchy": "data/hierarchy.json",
+    "scope-membership": "data/macro-foundation/current-membership-inventory.json.gz",
+    "source-grc-adm3": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-GRC-ADM3.geojson.gz",
+    "source-grc-adm3-metadata": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-GRC-ADM3-metaData.json",
+    "administrative-sources": "data/administrative-sources.json",
+    "geographic-current-release": "data/geographic-releases/current-manifest.json",
+    "macro-certificate": "data/macro-foundation/macro-certificate.json",
+    "regional-handoffs": "data/macro-foundation/regional-handoffs.json.gz",
+    "macro-review-index": "data/macro-foundation/review-index.json",
+    "approved-boundary-decisions": "data/macro-foundation/approved-boundary-decisions.json"
+  }
+}

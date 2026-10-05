@@ -1,0 +1,162 @@
+{
+  "packet": "regional-review:3f920fc5cb99166e",
+  "issue": 421,
+  "as_of": "2026-10-05",
+  "research_stage": "complete for exact 230-member source/semantic screen; current legal boundary and completeness gaps remain",
+  "geographic_approval": "unapproved",
+  "counts": {
+    "members": 230,
+    "areas": 3,
+    "parents": 17,
+    "location_outcomes": {
+      "correction-needed": 5,
+      "insufficient-evidence": 225
+    },
+    "parent_outcomes": {
+      "correction-needed": 8,
+      "insufficient-evidence": 9
+    },
+    "area_outcomes": {
+      "insufficient-evidence": 3
+    }
+  },
+  "findings": [
+    {
+      "id": "F-GRC-VINTAGE-COMPLETENESS",
+      "affected_source": "gb:GRC:ADM3",
+      "affected_subject_count": 226,
+      "classification": "insufficient-evidence",
+      "evidence": [
+        "S1",
+        "S3",
+        "S8",
+        "S9"
+      ],
+      "result": "Every scoped ID maps to a source feature by exact shapeID/name in the 326-feature 2010 layer. The current Ministry source reports 332 municipalities, and Law 4600/2019 documents municipal splits; the six-feature count difference is not localized by this packet.",
+      "limit": "No current authoritative boundary archive/coded 332-unit inventory and no exact 2010-to-current per-ID legal crosswalk were established. A count, ELSTAT census overlap, name or IoU does not prove a current identity/boundary.",
+      "handoff": "Restore an authoritative current legal boundary and municipality-register source with license and exact hashes; reconcile all scoped identities against Law 4600/2019 and neighboring/current administrative units. Preserve every existing Atlas ID and vintage."
+    },
+    {
+      "id": "F-ATHOS-ROLE",
+      "affected_subjects": [
+        "gb:GRC:ADM3:53547021B80449020436996",
+        "framework:province:agion-oros:d7b00e3c954f"
+      ],
+      "classification": "correction-needed",
+      "evidence": [
+        "S1",
+        "S2",
+        "S3",
+        "S7"
+      ],
+      "result": "Source row is named Mount Anthos and is labelled Municipality under a one-child Agion Oros parent. Article 105 describes the region of Aghion Oros as a self-governed part of Greece, not an ordinary municipality.",
+      "limit": "The text establishes special territorial role but does not prove exact polygon/ID crosswalk or exact statutory outer geometry.",
+      "handoff": "Geography/engineering should decide how the special territory is represented and whether the current location/parent tiers duplicate one another. Preserve ID; no unilateral label/parent/footprint edit."
+    },
+    {
+      "id": "F-XKX-ASSET-ROLE-COUNT",
+      "affected_source": "gb:XKX:ADM1",
+      "affected_subjects": [
+        "gb:XKX:ADM1:2360587B11570115914955",
+        "gb:XKX:ADM1:2360587B15813948402025",
+        "gb:XKX:ADM1:2360587B89959345704230",
+        "gb:XKX:ADM1:2360587B9056373484571"
+      ],
+      "classification": "correction-needed",
+      "evidence": [
+        "S4",
+        "S5",
+        "S6"
+      ],
+      "result": "Exact immutable release ZIP has seven features named District of …; exact same-release metadata says `Municipalities` and 48 ADM units. KAS reports 38 municipalities. Atlas child and parent repeat each district name and each parent is single-child.",
+      "limit": "The archive has a demonstrable metadata/feature disagreement; the 2010 law record needs exact annex review. This review does not establish a current district authority, municipal boundary, municipal identity mapping or political status.",
+      "handoff": "Continue whole-source lineage/license resolution in #999, then use authoritative municipal/legal maps to adjudicate these four exact Atlas records and same-name parents. Preserve IDs; no promotion, merge or boundary mutation from the ADM code."
+    },
+    {
+      "id": "F-GRC-WEAK-ONE-CHILD-PARENTS",
+      "affected_subjects": [
+        "gb:GRC:ADM3:53547021B31670610652055",
+        "gb:GRC:ADM3:53547021B47495045685041",
+        "gb:GRC:ADM3:53547021B84513117359577",
+        "framework:province:poros:dc2c201d378c",
+        "framework:province:ydra:e88d77299c93",
+        "framework:province:elafonisos:7eb34f1f2d9b"
+      ],
+      "classification": "correction-needed for the three parent groupings; child location evidence remains insufficient-evidence",
+      "evidence": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "result": "The three one-child same-name parent nodes have no pinned parent shapeID. Existing hierarchy review records fallback source-parent overlaps only 37.06%/3.21% for Poros, 25.35% for Ydra, and 46.85% for Elafonisos, with explicit weak/incompatible parent-geometry flags.",
+      "limit": "The fallback ratios are not authoritative municipal parent assignments; coastal/marine clipping and correct regional territory still need a primary boundary source.",
+      "handoff": "Replace or justify each parent group only after a dated official administrative-region boundary and exact island/municipality source is restored; do not change IDs or infer the region solely from a point/majority intersection."
+    },
+    {
+      "id": "F-GREEK-REGION-PARENT-PURPOSE",
+      "affected_parent_count": 13,
+      "classification": "insufficient-evidence except explicit one-child fallback/special-status rows above",
+      "evidence": [
+        "S2",
+        "S3"
+      ],
+      "result": "Most Greek parent shape IDs/names map to the 14-feature, 2016 GRC ADM2 parent source. Raw metadata has no canonical tier label; the Hellenic Ministry describes 13 Regions as second-level local authorities and municipalities as first-level, without hierarchical control between levels. The Attikis workload has 64 of its 64 parent members.",
+      "limit": "Spatial grouping and names do not establish legal parent-child control. East Macedonia and Thrace is only a candidate name match because this baseline lacks a stored parent shapeID. Several regional child/parent extents differ in the pinned baseline diagnostics.",
+      "handoff": "Retain the source-era distinction and have regional integration document the intended geographic-area role, the authoritative Region boundary, and each municipality assignment."
+    },
+    {
+      "id": "F-ISLAND-CITY-NEIGHBOR-SCREEN",
+      "affected_subject_count": 230,
+      "classification": "insufficient-evidence",
+      "evidence": [
+        "S1",
+        "S2",
+        "S3",
+        "S8"
+      ],
+      "result": "The EPSG:6933 screen finds 22 multipart Atlas shapes, 35 of 227 scoped native Greek 2010 source features without a same-layer shared land edge, and 90 baseline/source IoUs below 0.95. Oraiokastro combines two native source features. The source has no unnamed feature among scoped rows. Neighbor packet #422 separately recorded a 2019 State Statistical Office roster crosswalk for 80 North Macedonia municipalities against 84 legacy polygons, but did not establish the legal epoch/current boundary geometry.",
+      "limit": "Natural island separation explains some no-edge cases but does not prove island inventory completeness. The threshold is descriptive, not an acceptance threshold. #422's 2016 HDX/RIMWGE geometry and 2019 roster do not supply an authoritative current Greece/Kosovo-adjacent boundary comparison. No legal current boundary, city-fragment inventory, or independent settlement/island catalog was obtained for these exact subjects.",
+      "handoff": "Use the merged #422 neighbor packet as a source-era roster lead only; do not infer the present Greek/Kosovo boundary or transfer any IDs from it. Restore licensed official municipality/settlement/island evidence. Screen exact multi-components and the named city areas against that authority; do not infer missing or correct geography from neighbor count, shape size or IoU."
+    },
+    {
+      "id": "F-AREA-PURPOSE",
+      "affected_areas": [
+        "framework:area:greece:e5489fc04cd7",
+        "framework:area:kriti:88da4b529aa4",
+        "framework:area:yugoslavia:cff5e9ba6c8e"
+      ],
+      "classification": "insufficient-evidence",
+      "evidence": [
+        "S1",
+        "S2",
+        "S4"
+      ],
+      "result": "Pinned area metadata says these are retained WGSRPD level 3 geographic/botanical-country groupings, while the issue tasks review portions of one published Southeastern Europe region. Exact workload areas are Greece 201/281, Kriti 25/25, and Yugoslavia 4/1169.",
+      "limit": "This packet owns only the exact workload subsets; regional integration owns combined area purpose/boundary and region-wide certification.",
+      "handoff": "Carry this packet's individual location/parent findings into integration with other Southeastern Europe packets; do not interpret `Yugoslavia` as a current sovereign-territory determination."
+    }
+  ],
+  "followups": [
+    {
+      "issue": 999,
+      "relation": "shared seven-feature Kosovo source restore; this packet exact four Atlas IDs are owned by child #1008 after #999 establishes the shared asset lineage/count/license evidence"
+    },
+    {
+      "issue": 1007,
+      "relation": "blocked exact four-ID Greek role/parent follow-up: Mount Anthos / Agion Oros and the Poros, Ydra and Elafonisos weak single-child fallback parent rows"
+    },
+    {
+      "issue": 1006,
+      "relation": "blocked exact 306-Atlas-ID Greece 2010-to-current municipality roster/crosswalk follow-up from #420 and #421; #420/PR #1004 is complete; excludes the separate 19 IDs owned by #819; its merged Hellenic Data Service catalog record pins SHA256 db4f5afc615bc5302544538c5f04d98647bc0c03a4bcbf335bfe96dfe3a378aa and records HTTP 404 for the linked candidate boundary ZIP"
+    },
+    {
+      "issue": 1008,
+      "relation": "blocked exact four-ID batch 6 Kosovo district-to-current-municipality and same-name parent adjudication follow-up; depends on shared source restoration #999"
+    }
+  ],
+  "excluded_actions": [
+    "No hierarchy/geometry/ID/live-data edits",
+    "No publication or region approval",
+    "No historical import or sovereignty adjudication"
+  ]
+}

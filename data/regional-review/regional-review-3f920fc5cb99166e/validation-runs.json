@@ -1,0 +1,58 @@
+{
+  "as_of": "2026-10-05",
+  "python_environment": {
+    "python": "3.12.14",
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2",
+    "geos": "3.13.1",
+    "proj": "9.5.1"
+  },
+  "node": "24.19.0",
+  "runs": [
+    {
+      "command": "python3.12 data/regional-review/regional-review-3f920fc5cb99166e/reproduce.py",
+      "exit_code": 0,
+      "stdout": "{\n  \"issue\": 421,\n  \"scoped_locations\": 230,\n  \"province_parents\": 17,\n  \"outcomes\": {\n    \"insufficient-evidence\": 225,\n    \"correction-needed\": 5\n  },\n  \"source_counts\": {\n    \"gb:GRC:ADM3\": 226,\n    \"gb:XKX:ADM1\": 4\n  },\n  \"GRC_source_features\": 326,\n  \"XKX_asset_features\": 7,\n  \"area_counts\": {\n    \"Greece\": [\n      201,\n      281\n    ],\n    \"Kriti\": [\n      25,\n      25\n    ],\n    \"Yugoslavia\": [\n      4,\n      1169\n    ]\n  },\n  \"assessment_sha256\": \"f6ee194f5270f08762fbdfacd8a14e641414ce1ee2a8a3fb391d4d1fa2f6fe3b\",\n  \"province_scope_sha256\": \"e25d6bbd6d387c5d56f67cf39638ccd002986bdabb5ba64dfd6b0d5341ce728d\",\n  \"area_scope_sha256\": \"209f53e38a133b922bb83bd3f604b9e807257179a880f3eee7a30b93c24ff145\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": "PYTHONPATH=scripts python3.12 data/regional-review/regional-review-3f920fc5cb99166e/geometry_screen.py",
+      "exit_code": 0,
+      "stdout": "{\n  \"locations\": 230,\n  \"scope_grc_source_features\": 227,\n  \"multipart_atlas_locations\": 22,\n  \"iou_below_0_95\": 90,\n  \"neighbor_summary\": {\n    \"method\": \"EPSG:6933 equal-area transforms; make_valid only for diagnostics; STRtree exact layer pair screens.\",\n    \"grc_source_feature_count\": 326,\n    \"scoped_grc_source_feature_count\": 227,\n    \"scoped_source_features_with_shared_edge_over_0_1m\": 192,\n    \"scoped_source_features_without_shared_edge_over_0_1m\": 35,\n    \"scoped_features_in_pairs_with_overlap_over_1000m2\": 0,\n    \"source_pairs_total_overlap_over_1000m2\": 0,\n    \"scope_ids_with_no_same_layer_edge\": [\n      {\n        \"shapeID\": \"53547021B11217134811414\",\n        \"shapeName\": \"Astypalaia\"\n      },\n      {\n        \"shapeID\": \"53547021B11646633463152\",\n        \"shapeName\": \"Agistri\"\n      },\n      {\n        \"shapeID\": \"53547021B14587890141063\",\n        \"shapeName\": \"Andros\"\n      },\n      {\n        \"shapeID\": \"53547021B1587257754392\",\n        \"shapeName\": \"Antiparos\"\n      },\n      {\n        \"shapeID\": \"53547021B20655569007044\",\n        \"shapeName\": \"Sikinos\"\n      },\n      {\n        \"shapeID\": \"53547021B2109852565692\",\n        \"shapeName\": \"Anafi\"\n      },\n      {\n        \"shapeID\": \"53547021B2228776915974\",\n        \"shapeName\": \"Aegina\"\n      },\n      {\n        \"shapeID\": \"53547021B27848080443845\",\n        \"shapeName\": \"Lemnos\"\n      },\n      {\n        \"shapeID\": \"53547021B29376854507726\",\n        \"shapeName\": \"Agios Efstratios\"\n      },\n      {\n        \"shapeID\": \"53547021B31952026636048\",\n        \"shapeName\": \"Amorgos\"\n      },\n      {\n        \"shapeID\": \"53547021B40993190034895\",\n        \"shapeName\": \"Kythira\"\n      },\n      {\n        \"shapeID\": \"53547021B41286573070339\",\n        \"shapeName\": \"Santorini\"\n      },\n      {\n        \"shapeID\": \"53547021B47495045685041\",\n        \"shapeName\": \"Ydra\"\n      },\n      {\n        \"shapeID\": \"53547021B50922238140388\",\n        \"shapeName\": \"Kithnos\"\n      },\n      {\n        \"shapeID\": \"53547021B52309910958375\",\n        \"shapeName\": \"Kimolos\"\n      },\n      {\n        \"shapeID\": \"53547021B54920470672520\",\n        \"shapeName\": \"Gavdos\"\n      },\n      {\n        \"shapeID\": \"53547021B57678197221990\",\n        \"shapeName\": \"Milos\"\n      },\n      {\n        \"shapeID\": \"53547021B58981703500850\",\n        \"shapeName\": \"Sifnos\"\n      },\n      {\n        \"shapeID\": \"53547021B65975063640854\",\n        \"shapeName\": \"Folegandros\"\n      },\n      {\n        \"shapeID\": \"53547021B66684372134379\",\n        \"shapeName\": \"Skyros\"\n      },\n      {\n        \"shapeID\": \"53547021B68771809691865\",\n        \"shapeName\": \"Kea\"\n      },\n      {\n        \"shapeID\": \"53547021B69726865703456\",\n        \"shapeName\": \"Kasos\"\n      },\n      {\n        \"shapeID\": \"53547021B73687817516293\",\n        \"shapeName\": \"Karpathos\"\n      },\n      {\n        \"shapeID\": \"53547021B73817444221742\",\n        \"shapeName\": \"Syros\"\n      },\n      {\n        \"shapeID\": \"53547021B73836708319898\",\n        \"shapeName\": \"Tinos\"\n      },\n      {\n        \"shapeID\": \"53547021B7637934364384\",\n        \"shapeName\": \"Mikonos\"\n      },\n      {\n        \"shapeID\": \"53547021B79003090223986\",\n        \"shapeName\": \"Salamina\"\n      },\n      {\n        \"shapeID\": \"53547021B84513117359577\",\n        \"shapeName\": \"Elafonisos\"\n      },\n      {\n        \"shapeID\": \"53547021B87111517925303\",\n        \"shapeName\": \"Iiton\"\n      },\n      {\n        \"shapeID\": \"53547021B90088686662999\",\n        \"shapeName\": \"Paros\"\n      },\n      {\n        \"shapeID\": \"53547021B9100129164717\",\n        \"shapeName\": \"Samothrakis\"\n      },\n      {\n        \"shapeID\": \"53547021B91453036712640\",\n        \"shapeName\": \"Naxos and Lesser Cyclades\"\n      },\n      {\n        \"shapeID\": \"53547021B93700344623224\",\n        \"shapeName\": \"Serifos\"\n      },\n      {\n        \"shapeID\": \"53547021B94603646495013\",\n        \"shapeName\": \"Thassou\"\n      },\n      {\n        \"shapeID\": \"53547021B99660133623789\",\n        \"shapeName\": \"Spetses\"\n      }\n    ],\n    \"controls\": {\n      \"positive_control\": {\n        \"method_id\": \"epsg6933-source-comparison\",\n        \"kind\": \"positive-control\",\n        \"outcome\": \"passed\",\n        \"expectation\": \"identical synthetic squares have IoU exactly 1\",\n        \"observed_iou\": 1.0\n      },\n      \"negative_control\": {\n        \"method_id\": \"epsg6933-source-comparison\",\n        \"kind\": \"negative-control\",\n        \"outcome\": \"passed\",\n        \"expectation\": \"disjoint synthetic squares have IoU exactly 0\",\n        \"observed_iou\": 0.0\n      },\n      \"axis_order_control\": {\n        \"input_longitude_latitude\": [\n          10,\n          45\n        ],\n        \"target_crs\": \"EPSG:3857\",\n        \"x_m\": 1113194.9079327357,\n        \"y_m\": 5621521.486192066,\n        \"outcome\": \"passed\"\n      }\n    },\n    \"limits\": [\n      \"Coastlines and islands naturally have no same-layer land neighbor.\",\n      \"No-edge/overlap results do not establish coverage, legal boundaries, omitted islands, or correct parent assignments.\",\n      \"The selected source inventory itself is stale for present-day completeness; these are 2010 geometry screens only.\"\n    ]\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": "PYTHONPATH=scripts python3.12 test/evidence-geography.py",
+      "exit_code": 0,
+      "stdout": "........\n----------------------------------------------------------------------\nRan 8 tests in 5.498s\n\nOK\n",
+      "stderr": ""
+    },
+    {
+      "command": "PYTHONPATH=scripts python3.12 test/ellipsoidal-area.py",
+      "exit_code": 0,
+      "stdout": "{'checks': 'WGS84 analytic rectangles, symmetry, ring direction, holes, antimeridian, tiny parcels and 300 convergence comparisons passed', 'max_16_vs_32_relative_drift': 4.440892098500626e-16, 'max_dense_geodesic_relative_drift': 3.930832104259707e-09}\n",
+      "stderr": ""
+    },
+    {
+      "command": "node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs (Node 24)",
+      "exit_code": 0,
+      "stdout": "\u2714 verifies bytes without claiming factual correctness (1.347583ms)\n\u2714 schema-only validation reports unverified bytes (0.112459ms)\n\u2714 known broken pins, stale baseline, entry hashes and contradictory summaries fail (0.768375ms)\n\u2714 source access/license limits remain explicit; no unsafe retention (0.245875ms)\n\u2714 research cannot grant approval; supported conclusions need known sources (0.14575ms)\n\u2714 containing-file inventory verifies actual subject IDs, not optional properties.part (0.283875ms)\n\u2714 compressed vs uncompressed hashes and decompression budgets are checked (0.8265ms)\n\u2714 paths and symlinks cannot escape candidate reader (2.381708ms)\n\u2714 new identity registry is checked against retained prior roster without claiming source or geometry approval (0.455042ms)\n\u2714 prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (0.614958ms)\n\u2714 identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (0.489375ms)\n\u2714 new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.295208ms)\n\u2714 positive real-format ledger validates actual files and binds an independent review (1.248709ms)\n\u2714 regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (0.777958ms)\n\u2714 full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (0.3295ms)\n\u2714 coordinate/helper policies require positive and negative controls; generators need reproducibility (0.335458ms)\n\u2714 generator controls bind actual positive, negative and equal two-run output bytes (0.373709ms)\n\u2714 Washington-style generated narrative/table mismatch fails against the same numeric ledger (0.293708ms)\n\u2714 reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (0.585333ms)\n\u2714 mock remote queue checks exact blobs/head/independent receipt with read-only requests (2.707708ms)\n\u2714 incomplete remote trees cannot become a passed byte check (0.285875ms)\n\u2714 remote decisions reject stale exact-head reviews and a later change request (0.694542ms)\n\u2714 unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.183084ms)\n\u2714 trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (1.041083ms)\n\u2139 tests 24\n\u2139 suites 0\n\u2139 pass 24\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 78.475917\n",
+      "stderr": ""
+    },
+    {
+      "command": "node scripts/local-workspace.mjs check (Node 24, before dependency installation)",
+      "exit_code": 0,
+      "stdout": "Passed: freeBytes=70720077824; checkoutBytes=32894705664; limits={'minimumFree': 10737418240, 'maximumCheckouts': 53687091200}",
+      "stderr": ""
+    }
+  ],
+  "reproducibility": {
+    "method_id": "exact-roster-generator",
+    "run_one_sha256": "e7397c465b576f7b09b892f77b6b9dd6784c282755af12af232e91eba572728d",
+    "run_two_sha256": "e7397c465b576f7b09b892f77b6b9dd6784c282755af12af232e91eba572728d",
+    "equal": true
+  },
+  "limits": [
+    "Tests verify software controls and packet mechanics; none establishes legal boundaries, license compatibility, island completeness, parent correctness or regional approval."
+  ]
+}
