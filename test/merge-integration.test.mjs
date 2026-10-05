@@ -435,7 +435,8 @@ test('unmerged, wrong head, fork, default, protected, advanced and shared heads 
     f=>{f.pr.head.repo=null;}, f=>{f.pr.head.ref='main';},
     f=>{f.defaultBranch=f.pr.head.ref;}, f=>{f.branch.protected=true;},
     f=>{delete f.branch.protected;}, f=>{f.branch.commit.sha=sha('d');},
-    f=>{f.lastSHA=sha('d');}, f=>{f.open=[{number:3,state:'open',head:structuredClone(f.pr.head)}];},
+    f=>{f.lastSHA=sha('d');}, f=>{f.open=[{number:3,state:'open',base:{ref:'main',repo:{full_name:f.repo}},head:structuredClone(f.pr.head)}];},
+    f=>{f.open=[{number:3,state:'open',base:structuredClone(f.pr.head),head:{ref:'engineering/other',repo:{full_name:f.repo}}}];},
     f=>{f.pr.head.ref='engineering/../main';}, f=>{f.pr.head.ref='worldatlas-integration/other';}
   ];
   for(const mutate of mutations) {
@@ -444,16 +445,18 @@ test('unmerged, wrong head, fork, default, protected, advanced and shared heads 
   }
 });
 test('head cleanup checks paginated open PRs and fails conservatively on unknown identities or API failures',async()=>{
-  const f=headCleanupFixture();f.pages=[Array.from({length:100},(_,i)=>({number:i+10,state:'open',head:{ref:'engineering/other-'+i,repo:{full_name:f.repo}}})),
-    [{number:999,state:'open',head:structuredClone(f.pr.head)}]];
+  const f=headCleanupFixture();f.pages=[Array.from({length:100},(_,i)=>({number:i+10,state:'open',base:{ref:'main',repo:{full_name:f.repo}},head:{ref:'engineering/other-'+i,repo:{full_name:f.repo}}})),
+    [{number:999,state:'open',base:{ref:'main',repo:{full_name:f.repo}},head:structuredClone(f.pr.head)}]];
   assert.equal((await cleanupMergedHead(f)).status,'retained');assert.equal(f.deletes.length,0);
   assert.ok(f.reads.some(row=>row.route.endsWith('page=2')));
+  f.pages[1][0].head.ref='engineering/another';f.pages[1][0].base=structuredClone(f.pr.head);
+  assert.equal((await cleanupMergedHead(f)).status,'retained');assert.equal(f.deletes.length,0);
   for(const mutate of [f=>{f.badInventory=true;},f=>{f.open=[{number:3,state:'open'}];},
     f=>{f.failAt='/branches/';},f=>{f.deleteDenied=true;},f=>{f.defaultBranch=null;}]) {
     const f=headCleanupFixture();mutate(f);const result=await cleanupMergedHead(f);
     assert.equal(result.status,'pending');assert.equal(f.deletes.length,0);assert.ok(result.reason);
   }
-  const fork=headCleanupFixture();fork.open=[{number:3,state:'open',head:{ref:fork.pr.head.ref,repo:{full_name:'fork/repo'}}}];
+  const fork=headCleanupFixture();fork.open=[{number:3,state:'open',base:{ref:'main',repo:{full_name:fork.repo}},head:{ref:fork.pr.head.ref,repo:{full_name:'fork/repo'}}}];
   assert.equal((await cleanupMergedHead(fork)).status,'deleted');
 });
 test('successful integration records cleanup separately, including deletion failure and replay',async()=>{

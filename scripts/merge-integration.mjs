@@ -135,9 +135,11 @@ export async function cleanupMergedHead({api, repo, number, expectedHead}) {
     if (branch.commit?.sha !== expectedHead) return retained('Branch advanced beyond the merged PR head');
     const open = await githubPages(api, `${root(repo)}/pulls?state=open`);
     need(open.every(row => Number.isSafeInteger(row.number) && row.state === 'open' &&
-      typeof row.head?.ref === 'string' && typeof row.head.repo?.full_name === 'string'), 'Incomplete open PR identities');
-    if (open.some(row => row.head.repo.full_name === repo && row.head.ref === reference))
-      return retained('Another open PR uses this head branch');
+      typeof row.head?.ref === 'string' && typeof row.head.repo?.full_name === 'string' &&
+      typeof row.base?.ref === 'string' && typeof row.base.repo?.full_name === 'string'), 'Incomplete open PR identities');
+    if (open.some(row => (row.head.repo.full_name === repo && row.head.ref === reference) ||
+      (row.base.repo.full_name === repo && row.base.ref === reference)))
+      return retained('Another open PR uses this branch as head or base');
     let current;
     try { current = await api(`${root(repo)}/git/ref/heads/${encoded}`); }
     catch (error) { if (/\(HTTP 404\)$/.test(error.message)) return {status: 'absent', reference}; throw error; }
