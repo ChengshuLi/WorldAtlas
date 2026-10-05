@@ -1,0 +1,27 @@
+{
+  "method": "Feature count and scoped ID/name equality against pinned release collections. These are source accounting checks, not geographic validation.",
+  "adm3": {
+    "metadata_declared_count": 6836,
+    "actual_retained_geojson_features": 6822,
+    "difference": 14,
+    "scoped_subjects": 204,
+    "scoped_id_matches": 204
+  },
+  "adm2": {
+    "metadata_declared_count": 736,
+    "actual_retained_geojson_features": 735,
+    "difference": 1,
+    "scoped_subjects": 26,
+    "scoped_id_matches": 26
+  },
+  "scoped_geometry_screen": {
+    "rows": 230,
+    "source_multigeometries": 21,
+    "purpose": "Flag geometries for manual reference comparison only. No topology, area, city fragmentation, coast/island or omission conclusions are made from source format."
+  },
+  "explicit_limits": [
+    "Count agreement does not prove completeness.",
+    "Scoped shapeID/name identity does not prove current legal identity, parent or geographic truth.",
+    "The source geometry screen reports representation types and bbox only; it is not an authoritative boundary comparison."
+  ]
+}

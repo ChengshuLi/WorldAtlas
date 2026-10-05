@@ -1,0 +1,75 @@
+{
+  "retrieval_date_utc": "2026-10-05",
+  "sources": [
+    {
+      "path": "sources/geoBoundaries-IND-ADM2-2021.geojson",
+      "description": "Pinned simplified ADM2 polygons from geoBoundaries commit 9469f09; original download bytes retained.",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2.geojson",
+      "license_as_reported": "Open Data Commons Open Database License 1.0",
+      "sha256": "8bef6929fd65432e7dc775e7c44473e84efff064ebddbfd6b834e6291546db40",
+      "bytes": 48317735,
+      "retrieved_utc": "2026-10-05",
+      "restoration": "Retrieve the pinned URL above and verify SHA-256 before use; if provider moves the file, restore from geoBoundaries commit 9469f09 with the same path and record changed bytes/hash rather than silently substituting another vintage.",
+      "attribution": "geoBoundaries / Pathways Data Pvt Ltd / Local Government Directory, Government of India; ODbL 1.0 as reported in pinned release metadata."
+    },
+    {
+      "path": "sources/geoBoundaries-IND-ADM2-2021-metadata.json",
+      "description": "Provider metadata for the ADM2 feature collection.",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2-metaData.json",
+      "license_as_reported": "Open Data Commons Open Database License 1.0",
+      "sha256": "656a9800da6c69a02bae980349eb44ac83ab3a452e894fc782230fa22cdd1a2c",
+      "bytes": 889,
+      "retrieved_utc": "2026-10-05",
+      "restoration": "Retrieve the pinned URL above and verify SHA-256 before use; if provider moves the file, restore from geoBoundaries commit 9469f09 with the same path and record changed bytes/hash rather than silently substituting another vintage."
+    },
+    {
+      "path": "sources/geoBoundaries-IND-ADM3-2018-retained.geojson.gz",
+      "description": "Retained original compressed source collection; decompressible with gzip.",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+      "license_as_reported": "Open Data Commons Open Database License 1.0",
+      "sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301",
+      "bytes": 13794274,
+      "retrieved_utc": "2026-10-05",
+      "restoration": "Retrieve the pinned URL above and verify SHA-256 before use; if provider moves the file, restore from geoBoundaries commit 9469f09 with the same path and record changed bytes/hash rather than silently substituting another vintage.",
+      "attribution": "geoBoundaries / Pathways Data Pvt Ltd / Local Government Directory, Government of India; ODbL 1.0 as reported in pinned release metadata."
+    },
+    {
+      "path": "sources/geoBoundaries-IND-ADM3-2018-retained-metadata.json",
+      "description": "Retained original provider metadata.",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3-metaData.json",
+      "license_as_reported": "Open Data Commons Open Database License 1.0",
+      "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+      "bytes": 2206,
+      "retrieved_utc": "2026-10-05",
+      "restoration": "Retrieve the pinned URL above and verify SHA-256 before use; if provider moves the file, restore from geoBoundaries commit 9469f09 with the same path and record changed bytes/hash rather than silently substituting another vintage."
+    }
+  ],
+  "citations": [
+    {
+      "url": "https://censusindia.gov.in/nada/index.php/catalog/11345",
+      "title": "Census of India 2011, Madhya Pradesh PCA REL",
+      "use": "Government statistical record labels district and sub-district tier and enumerates 2011-era subdistricts; temporal cross-check only, not current map/boundary authority."
+    },
+    {
+      "url": "https://erojgar.cg.gov.in/LandingSite/en/Dist_Recruitments.aspx",
+      "title": "Chhattisgarh Employment Department — Districts",
+      "use": "Official current page states 33 districts and 5 divisions and lists the district recruitment portal; count/context check, not geospatial boundary evidence."
+    },
+    {
+      "url": "https://tribal.cg.gov.in/en/preliminary-information",
+      "title": "Chhattisgarh Department of Tribal and Scheduled Caste — Preliminary Information",
+      "use": "Official state source records 5 districts created on 17 April 2022 and says total is 33; confirms 2021 snapshot predates these changes."
+    },
+    {
+      "url": "https://lgdirectory.gov.in/demo/downloadDirectory.do",
+      "title": "Local Government Directory, Ministry of Panchayati Raj",
+      "use": "Government directory exposes downloadable state district/sub-district lists; requires interactive form and terms/version capture. Restoration instructions only; no bytes retained."
+    },
+    {
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "title": "Open Data Commons Open Database License (ODbL) v1.0",
+      "use": "License text for the declared geoBoundaries ODbL databases; preserve attribution and observe applicable share-alike/notice requirements for derivative database reuse."
+    }
+  ],
+  "not_retained_reasons": "Government pages were consulted as current administrative roster/count cross-checks, not copied. Census/geoBoundaries source licenses and original source files are retained separately. Current legal orders and authoritative current boundary files have not yet been acquired."
+}
