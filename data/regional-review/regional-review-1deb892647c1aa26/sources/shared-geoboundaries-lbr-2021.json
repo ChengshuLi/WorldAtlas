@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "purpose": "Reuse the exact LBR source files already restored and merged under issue #473; this packet stores hashes and paths without duplicating the geometry bytes.",
+  "items": [
+    {
+      "level": "ADM1",
+      "reused_from_issue": 473,
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-lbr-adm1-2021.geojson.gz",
+      "bytes_gzip": 255948,
+      "sha256_gzip": "2f51f5aef36f9349b44074e44168e5e0e12eef509474f15f53e14abb18e9991d",
+      "bytes_original": 782473,
+      "sha256_original": "6a9a96a0ee1320c77d192f2d776dd1441f41b0b39d055ffb40f30bdee780b5dc",
+      "source_release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "source_id": "gb:LBR:ADM1",
+      "license": "CC BY 3.0 IGO",
+      "retrieved_at": "2026-10-04 (date retained by issue #473; time of day not recorded)"
+    },
+    {
+      "level": "ADM2",
+      "reused_from_issue": 473,
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-lbr-adm2-2021.geojson.gz",
+      "bytes_gzip": 507453,
+      "sha256_gzip": "810dc4f1a89bff9219ada61b8176f320adf4d6cfe1a73f2eec2bce8054935f70",
+      "bytes_original": 1581894,
+      "sha256_original": "227164d68a0971723b869c781dbf738508348d503d3604c53ff4554999a9cfb5",
+      "source_release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "source_id": "gb:LBR:ADM2",
+      "license": "CC BY 3.0 IGO",
+      "retrieved_at": "2026-10-04 (date retained by issue #473; time of day not recorded)"
+    }
+  ]
+}

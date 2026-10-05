@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "retrievals": [
+    {
+      "id": "ghana-gss-2021-phc-manual",
+      "url": "https://census2020.statsghana.gov.gh/gssmain/fileUpload/pressrelease/2021%20PHC_Field%20Officers%20Manual_05.05.2021.pdf",
+      "claim": "Official 2021 Population and Housing Census field manual distinguishes the 16 administrative regions and 260 MMDAs from 271 census statistical districts; districts are nested within regions.",
+      "source_vintage": "2021 PHC manual; describes 2019 post-region-change administrative state",
+      "retrieved_at_utc": "2026-10-05T00:45:55.786315+00:00",
+      "final_url": "https://census2020.statsghana.gov.gh/gssmain/fileUpload/pressrelease/2021%20PHC_Field%20Officers%20Manual_05.05.2021.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "response_bytes": 16320351,
+      "response_sha256": "06bb5ffc8cfeb59df612a10432209de82ddd8988d4e2fbb8c75e359dc2968560"
+    },
+    {
+      "id": "guinea-government-presentation",
+      "url": "https://gouvernement.gov.gn/presentation/",
+      "claim": "Government of Guinea describes seven administrative regions plus the special Conakry zone, 33 prefectures, 344 sub-prefectures, and municipal/village tiers.",
+      "source_vintage": "Page content's own vintage is unstated; text references 2021-2025 national health digital strategy",
+      "retrieved_at_utc": "2026-10-05T00:45:56.370918+00:00",
+      "error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "guinea-bissau-unfccc-nc4",
+      "url": "https://unfccc.int/sites/default/files/resource/GNB_NC4_English_FINAL_16112025_JLT.pdf",
+      "claim": "Guinea-Bissau's 2025 national communication says the country has eight regions and one autonomous sector; its text reports 36 sectors under the regions.",
+      "source_vintage": "National Communication 4, 2025 (file name dates final 2025-11-16)",
+      "retrieved_at_utc": "2026-10-05T00:45:58.583586+00:00",
+      "final_url": "https://unfccc.int/sites/default/files/resource/GNB_NC4_English_FINAL_16112025_JLT.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "response_bytes": 6182709,
+      "response_sha256": "4481f2a8346c7b71d6ffb5e7b6badc504ac4271c61982ea82d9ed2306b12a694"
+    },
+    {
+      "id": "guinea-bissau-uk-toponymic-factfile",
+      "url": "https://assets.publishing.service.gov.uk/media/65f31c5efa1851001a011765/Guinea-Bissau_toponymic_factfile.pdf",
+      "claim": "The UK Permanent Committee on Geographical Names 2024 factfile reports eight regions and one autonomous sector, with 39 sectors at ADM2, citing the national Direcção Geral de Geografia e Cadastro via UN SALB.",
+      "source_vintage": "Factfile copyright year 2024; exact publication day not established",
+      "retrieved_at_utc": "2026-10-05T00:46:00.149045+00:00",
+      "final_url": "https://assets.publishing.service.gov.uk/media/65f31c5efa1851001a011765/Guinea-Bissau_toponymic_factfile.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "response_bytes": 399888,
+      "response_sha256": "2ba9d5a71da25fc8c173da80be134381e91001c0873518bfa50d4c040df54dbf"
+    },
+    {
+      "id": "liberia-lisgis-open-data-license",
+      "url": "https://lisgis.gov.lr/open-data-license",
+      "claim": "LISGIS states that its statistical data are published under CC BY 4.0; the covered dataset catalog separately assigns CC BY 4.0 to 2022 district/county boundaries.",
+      "source_vintage": "Current page accessed 2026-10-05; exact page revision date unknown",
+      "retrieved_at_utc": "2026-10-05T00:46:00.485578+00:00",
+      "final_url": "https://lisgis.gov.lr/open-data-license",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "response_bytes": 2414,
+      "response_sha256": "05a638d8e270dba318a1ee1e7beeec75eae6293fe01b768b5573839c534b0f62"
+    },
+    {
+      "id": "liberia-lisgis-2022-districts",
+      "url": "https://lisgis.gov.lr/api/visualizations/datasets/geo-districts/2022",
+      "claim": "Primary LISGIS 2022 census administrative GIS district layer; response describes full-resolution boundary data and embeds original archive file hashes and processing CRS.",
+      "source_vintage": "LISGIS 2022 Population and Housing Census cartography; no observation period",
+      "retrieved_at_utc": "2026-10-05T00:46:02.725347+00:00",
+      "final_url": "https://lisgis.gov.lr/api/visualizations/datasets/geo-districts/2022",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "response_bytes": 10671308,
+      "response_sha256": "dde2422c08af1943b7a02efd41a5247254df369a8e8c162a39821eca7f4ec01d"
+    },
+    {
+      "id": "liberia-lisgis-2022-counties",
+      "url": "https://lisgis.gov.lr/api/visualizations/datasets/geo-counties/2022",
+      "claim": "Primary LISGIS 2022 census county layer with 15 county polygons, parent context for the 160 district rows.",
+      "source_vintage": "LISGIS 2022 Population and Housing Census cartography; no observation period",
+      "retrieved_at_utc": "2026-10-05T00:46:04.104657+00:00",
+      "final_url": "https://lisgis.gov.lr/api/visualizations/datasets/geo-counties/2022",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "response_bytes": 3210101,
+      "response_sha256": "4f0df64d1a19d8a5a4ac48d4d87a1c034b3a9dd5f228fdd372e3a430d44e5cd5"
+    }
+  ]
+}
