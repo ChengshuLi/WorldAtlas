@@ -16,7 +16,7 @@ Original OpenStreetMap sources are ODbL 1.0, attributed to OpenStreetMap and con
 
 ## Reproduce offline
 
-Use the committed requirements with Python 3.12. Fetch the proposal PR head to restore evaluation bootstrap `e8fa7a89e5e12236a3b787718c0e1e4b49833991` if needed. `inputs.json` names the immutable baseline and every full source file. All required originals are committed, including the prior Panjgur response; no API, browser or provider connection is needed. Use a fresh output filename. The exact command and registry descriptor are recorded in `evidence-quality.json`.
+Use the committed requirements with Python 3.12. Fetch `refs/pull/987/head` to restore evaluation bootstrap `e8fa7a89e5e12236a3b787718c0e1e4b49833991` if needed. `inputs.json` names the immutable baseline and every full source file. All required originals are committed, including the prior Panjgur response; no API, browser or provider connection is needed. Use a fresh output filename. The exact command and registry descriptor are recorded in `evidence-quality.json`.
 
 Run `python coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/controls.py` and `python test/evidence-geography.py`. Controls include contradictory/incomplete source partitions, holes, tiny additions, changed shared node/way versions, separation preserving all lower-dimensional remnants, known cell-centre coverage and invalid-projection refusal. Generator receipts record actual wrong-registry, wrong-source and overwrite rejections and two byte-identical full reproductions.
 
