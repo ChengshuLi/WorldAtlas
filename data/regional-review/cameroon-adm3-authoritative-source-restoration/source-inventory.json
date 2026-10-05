@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-05",
+  "subject_scope": {
+    "issue": 897,
+    "count": 226,
+    "ids_path": "issue-subject-ids.json",
+    "ids_sha256": "300c7c1355f9449f4167858c07619f0af1d69c4e92d15050c156c572d1f97412"
+  },
+  "sources": [
+    {
+      "id": "ocha-cod-ab-cmr",
+      "url": "https://data.humdata.org/dataset/cod-ab-cmr",
+      "api_url": "https://data.humdata.org/api/3/action/package_show?id=cod-ab-cmr",
+      "role": "OCHA Common Operational Dataset – Administrative Boundaries; source attributed to Institut National de Cartographie (INC), operational quality review and publication by OCHA/HDX",
+      "vintage": "declared dataset coverage 2019-01-04 through 2025-10-30; package metadata retrieved 2026-10-05 marks is_fresh=true/update_status=fresh, annual update frequency, due 2026-10-30; source boundaries created/last edited 1987-08-22",
+      "retrieved_at": "2026-10-05",
+      "dataset_id": "b13f08ef-92ee-4446-9b0a-e219f5c25415",
+      "resource_id": "2248ac6d-9675-47de-90d3-1e7ce6e601b1",
+      "source_version": "v01",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO) 3.0; retain attribution to source INC and OCHA/HDX. Metadata license URL http://creativecommons.org/licenses/by/3.0/igo/legalcode."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/cameroon-adm3-authoritative-source-restoration/source/hdx-cod-ab-cmr-metadata.json",
+          "bytes": 54770,
+          "sha256": "85e63d023e0b2d217fb68bea145a90c38e05fbe669949ce7e050d52dcb14e157",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/cameroon-adm3-authoritative-source-restoration/source/cmr_admin_boundaries.geojson.zip",
+          "bytes": 11029950,
+          "sha256": "f24a75c41ee2e107448ff1d2b8769ee970dad376d20cd7093da0c9106814ab5a",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ],
+      "restoration": "The retained exact package_show response identifies dataset UUID, resource UUID, resource URL, version and CC BY-IGO 3.0 license. Fetch metadata at api_url and the metadata result resource URL; compare byte hashes to retained files. ZIP member cmr_admin3_em.geojson is edge-matched ADM3; cmr_admin2.geojson and cmr_admin1.geojson provide adjacent tiers.",
+      "limit": "OCHA describes CODs as authoritative for humanitarian operations and decision-making; this does not establish legal cadastral or national boundary authority. HDX marked the package fresh at 2026-10-05 retrieval with annual update frequency and due date 2026-10-30, but declared dataset coverage ends 2025-10-30 and the source boundaries were created/last edited in 1987. Use as the latest published lawful operational reference located at retrieval and as a comparison, not legal boundary proof or evidence that boundary coordinates were refreshed after 1987."
+    },
+    {
+      "id": "inc-wri-arrondissements-layer",
+      "url": "https://gis.forest-atlas.org/server/rest/services/cmr/open_data_fr/MapServer/148",
+      "role": "INC-attributed arrondissement polygon comparison layer hosted by WRI/Cameroon Forest Atlas",
+      "vintage": "layer metadata retrieved 2026-10-05; record last-edit dates 2020-06-22 (351 features) and 2020-07-09 (9 features)",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Layer-level copyright identifies Institut National de Cartographie and CC-BY 4.0; attribute INC and WRI/Cameroon Forest Atlas."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/cameroon-adm3-authoritative-source-restoration/source/layer-metadata.json",
+          "bytes": 6008,
+          "sha256": "0a3d47e80a2ccc77898f8a6d1609b930a0cf9c7e72d71b9f4895c79d495463af",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/cameroon-adm3-authoritative-source-restoration/source/arrondissements.geojson",
+          "bytes": 5895278,
+          "sha256": "760a5998f6d6cecb094ab7e02252ae1e7f2f8c9f4b9d16e601247a3b5e0165c9",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ],
+      "restoration": "Use the layer URL with query parameters where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson. Retained metadata and complete returned GeoJSON have exact hashes.",
+      "limit": "Metadata explicitly says this global view does not correspond to official boundaries and lacks a legal validation process; derived from INC 1:200,000 topographic maps. Metadata description says 359 arrondissements while returned feature count is 360; every code_arr is null. It is a comparison source, not legal authority."
+    },
+    {
+      "id": "un-salb-cmr",
+      "url": "https://salb.un.org/en/data/cmr",
+      "role": "UN Second Administrative Level Boundaries (SALB) country record and validated boundary inventory",
+      "vintage": "polygon validity recorded through 2024-08-07; inspected 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "restricted",
+        "terms": "SALB terms restrict use to non-commercial and prohibit unapproved geometry changes; consult current official terms before use."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open the Cameroon country page and inspect release metadata and terms; no SALB geometry retained or redistributed.",
+      "limit": "The validated Cameroon polygons are ADM2, not ADM3; license does not support unrestricted derivative/republication."
+    },
+    {
+      "id": "minat-south-roster",
+      "url": "https://minat.gov.cm/presentation/carte-des-regions/sud/",
+      "role": "Cameroon Ministry of Territorial Administration (MINAT) South Region department and arrondissement roster",
+      "vintage": "current page inspected 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit open redistribution license verified; cite the official page and do not redistribute its page assets."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore from the official MINAT South Region page URL and record the retrieval date.",
+      "limit": "Text roster supports named parent assignments (including Ebolowa II under Mvila) but does not provide individual georeferenced ADM3 boundaries or an all-country extract."
+    },
+    {
+      "id": "minddevel-mfoundi",
+      "url": "https://www.minddevel.gov.cm/mfoundi/",
+      "role": "Cameroon Ministry of Decentralization and Local Development (MINDDEVEL) Mfoundi commune mayoral-order roster",
+      "vintage": "page inspected 2026-10-05; mayoral orders for Yaoundé I–VII listed",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit open redistribution license verified; cite the official page and do not redistribute its page assets."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore from the official MINDDEVEL Mfoundi page URL and record retrieval date.",
+      "limit": "Supports Mfoundi affiliation of Yaoundé I, II, V and VII, not legal boundary geometry."
+    },
+    {
+      "id": "pm-decrees-eb-II",
+      "url": "https://www.spm.gov.cm/site/sites/default/files/decret_2026_00600_en.pdf",
+      "role": "Prime Minister official decree listing Ebolowa II among Mvila communes; corroboration for current parent roster",
+      "vintage": "2026 decree; inspected 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit open redistribution license verified; restoration instructions only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore official PDF from the cited Prime Minister URL; compare with 2023 decree https://www.spm.gov.cm/site/sites/default/files/decree_2023_06002.pdf.",
+      "limit": "Supports administrative parent roster, not georeferenced arrondissement boundaries."
+    },
+    {
+      "id": "ocha-cod-definition",
+      "url": "https://knowledge.base.unocha.org/wiki/spaces/imtoolbox/pages/42045911/Common%2BOperational%2BDatasets%2BCODs",
+      "role": "OCHA definition of Common Operational Datasets as authoritative reference datasets for humanitarian operations/decision-making accepted in country or region",
+      "vintage": "guidance page inspected 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit redistribution license checked; restoration instructions only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore guidance at the canonical OCHA knowledge-base page.",
+      "limit": "The authority is scoped to humanitarian operations and does not establish national legal boundary authority."
+    },
+    {
+      "id": "inc-mandate",
+      "url": "https://minresi.gov.cm/institut-national-de-cartographie/",
+      "role": "MINRESI description of Institut National de Cartographie mapping and administrative delimitation mandate",
+      "vintage": "page inspected 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit open redistribution license verified; restoration instructions only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore official INC mandate page at the MINRESI site.",
+      "limit": "Mandate evidence does not supply a current georeferenced national ADM3 dataset."
+    }
+  ],
+  "results": {
+    "ocha_admin_levels": {
+      "ADM1": 10,
+      "ADM2": 58,
+      "ADM3": 360
+    },
+    "ocha_scope_exact_normalized_name_and_parent_matches": 157,
+    "ocha_scope_unique_spatial_candidates_with_runner_up_margin_ge_0_10": 226,
+    "ocha_scope_candidate_iou_ge_0_95": 217,
+    "ocha_scope_below_iou_0_95": 9,
+    "historical_label_encoding_differences": 36,
+    "such_differences_with_direct_normalized_ocha_join": 19,
+    "spatial_candidate_parent_label_mismatches": 11,
+    "inc_wri_arrondissement_features": 360,
+    "inc_wri_scope_exact_normalized_name_parent_matches": 154
+  },
+  "interpretation": "See review.md and candidate-crosswalk.json for per-subject observations and limitations. Spatial candidates are not legal identity proof; name/parent differences are not silently corrected."
+}
