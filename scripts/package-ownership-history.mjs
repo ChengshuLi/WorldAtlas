@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {gzipSync,gunzipSync} from 'node:zlib';
 
 const compare=(a,b)=>a<b?-1:a>b?1:0;
 const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -32,24 +33,38 @@ async function validatePriorPins(source,files){
 
 export async function verifyOwnershipDelivery({source,destination,manifest}){
  const sourceFiles=await inventory(source);
- const expected=[...manifest.current_files,...manifest.archives.map(file=>({path:file.path,sha256:file.sha256,bytes:file.bytes}))].sort((a,b)=>compare(a.path,b.path));
+ const transports=manifest.transports??[],encodedPaths=new Set(transports.map(row=>row.deployment.path));
+ const expected=[...manifest.current_files.filter(file=>!encodedPaths.has(file.path)),...transports.map(row=>row.source),...manifest.archives.map(file=>({path:file.path,sha256:file.sha256,bytes:file.bytes}))].sort((a,b)=>compare(a.path,b.path));
  if(JSON.stringify(sourceFiles)!==JSON.stringify(expected))throw Error('Ownership delivery source inventory or hash changed');
  const deployed=(await inventory(destination)).filter(file=>file.path!==manifestName);
  if(JSON.stringify(deployed)!==JSON.stringify(manifest.current_files))throw Error('Ownership delivery deployed inventory or hash changed');
+ for(const row of transports){
+  if(row.encoding!=='gzip'||row.source.path!=='candidate-recovery.json'||row.deployment.path!==row.source.path+'.gz'||row.source.bytes>32*1024*1024)throw Error('Invalid ownership receipt transport');
+  const raw=gunzipSync(await fs.readFile(path.join(destination,row.deployment.path)),{maxOutputLength:row.source.bytes});
+  if(raw.length!==row.source.bytes||digest(raw)!==row.source.sha256)throw Error('Ownership receipt decoded bytes changed');
+ }
  const emitted=JSON.parse(await fs.readFile(path.join(destination,manifestName),'utf8'));
  if(JSON.stringify(emitted)!==JSON.stringify(manifest))throw Error('Ownership archive delivery manifest changed');
 }
 
-export async function packageOwnershipHistory({source,destination,hosted=false,repositoryPath='data/ownership-history'}){
+export async function packageOwnershipHistory({source,destination,hosted=false,compactReceipts=false,repositoryPath='data/ownership-history'}){
  // The portable export keeps the original archive tree and has no new manifest.
  if(!hosted){await fs.cp(source,destination,{recursive:true});return null;}
  const files=await inventory(source);await validatePriorPins(source,files);
  if(files.some(file=>file.path===manifestName))throw Error('Source ownership tree contains a reserved delivery manifest');
- const current_files=files.filter(file=>!prior(file.path));
+ const transports=[],encoded=new Map(),current_files=[];
+ for(const file of files.filter(file=>!prior(file.path))){
+  if(!compactReceipts||file.path!=='candidate-recovery.json'){current_files.push(file);continue;}
+  if(file.bytes>32*1024*1024||files.some(other=>other.path===file.path+'.gz'))throw Error('Ownership receipt transport budget or path collision');
+  const bytes=gzipSync(await fs.readFile(path.join(source,file.path)),{level:9});
+  const deployment={path:file.path+'.gz',sha256:digest(bytes),bytes:bytes.length};
+  encoded.set(deployment.path,bytes);current_files.push(deployment);transports.push({source:file,deployment,encoding:'gzip'});
+ }
+ current_files.sort((a,b)=>compare(a.path,b.path));
  const archives=files.filter(file=>prior(file.path)).map(file=>({...file,repository_path:`${repositoryPath}/${file.path}`,content_addressed_path:`ownership-history/sha256/${file.sha256}`}));
- const manifest={version:1,delivery_status:'repository-retained',note:'Prior lineage archives remain in the source repository. They are omitted only from hosted client assets; this manifest does not assert an object-storage upload.',excluded_directory:'prior-archives',repository_path:repositoryPath,current_files,archives,archived_bytes:archives.reduce((sum,file)=>sum+file.bytes,0)};
+ const manifest={version:transports.length?2:1,...(transports.length?{transports}:{}),delivery_status:'repository-retained',note:'Prior lineage archives remain in the source repository. They are omitted only from hosted client assets; this manifest does not assert an object-storage upload.',excluded_directory:'prior-archives',repository_path:repositoryPath,current_files,archives,archived_bytes:archives.reduce((sum,file)=>sum+file.bytes,0)};
  await fs.mkdir(destination,{recursive:true});
- for(const file of current_files){await fs.mkdir(path.dirname(path.join(destination,file.path)),{recursive:true});await fs.copyFile(path.join(source,file.path),path.join(destination,file.path));}
+ for(const file of current_files){await fs.mkdir(path.dirname(path.join(destination,file.path)),{recursive:true});if(encoded.has(file.path))await fs.writeFile(path.join(destination,file.path),encoded.get(file.path));else await fs.copyFile(path.join(source,file.path),path.join(destination,file.path));}
  await fs.writeFile(path.join(destination,manifestName),JSON.stringify(manifest,null,2)+'\n');
  // Account for every excluded file, including dotfiles, and reject changed bytes.
  await verifyOwnershipDelivery({source,destination,manifest});return manifest;

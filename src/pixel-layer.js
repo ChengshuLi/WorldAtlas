@@ -1,6 +1,7 @@
 import L from 'leaflet';
 import {GRID_ZOOM,createGridIndex} from './pixel-grid.js';
 import {pickOwnership} from './pixel-ownership.js';
+import {coverageExplanation,coverageText,coverageContent} from './coverage-classification.js';
 import {PixelGPU} from './pixel-gpu.js';
 import {PixelCanvasLayer} from './pixel-canvas-layer.js';
 import {updateLocationMetadata} from './pixel-metadata.js';
@@ -32,10 +33,12 @@ export class PixelLayer extends L.Layer {
     };
     if(options.ownership){this.grids.locations=options.ownership;this.gpu.ownership('location',options.ownership);this.canvas.dataset.compilations='0';this.canvas.dataset.compileMs='0';this.canvas.dataset.precompiled='true';}
     else this.sendIndex('locations',this.index);
+    if(options.coverage)this.gpu.coverage(options.coverage.grid);
     this.canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();this.lost=true;});
     this.canvas.addEventListener('webglcontextrestored',()=>{
       this.gpu=new PixelGPU(this.canvas);this.lost=false;
       for(const [type,grid] of Object.entries(this.grids))this.gpu.ownership(type==='locations'?'location':'political',grid);
+      if(this.options.coverage)this.gpu.coverage(this.options.coverage.grid);
       this.styleDirty=true;this.redraw();
     });
   }
@@ -95,9 +98,10 @@ export class PixelLayer extends L.Layer {
     L.DomUtil.setTransform(this.canvas,this.map.containerPointToLayerPoint([0,0]),1);
     const origin=this.map.project(this.origin,GRID_ZOOM);
     this.gpu.draw({origin,scale,zoom,dpr,localBorders:this.options.locationBorders(),selected:this.ids.get(this.options.selected())||0,hasPolitical:!!this.grids.political});
-    Object.assign(this.canvas.dataset,{rendered:'true',locationBorders:String(zoom>=7&&this.options.locationBorders()),provinceBorders:'true',cellCount:String(width*height),renderMs:String(Math.round(performance.now()-started)),worker:'true',frame:[origin.x,origin.y,zoom,width,height].join('/'),uploads:String(this.gpu.uploads),ownershipUploads:String(this.gpu.ownershipUploads),cellPixels:String(scale),stride:'1'});
+    Object.assign(this.canvas.dataset,{rendered:'true',locationBorders:String(zoom>=7&&this.options.locationBorders()),provinceBorders:'true',cellCount:String(width*height),renderMs:String(Math.round(performance.now()-started)),worker:'true',frame:[origin.x,origin.y,zoom,width,height].join('/'),uploads:String(this.gpu.uploads),coverageUploads:String(this.gpu.coverageUploads),ownershipUploads:String(this.gpu.ownershipUploads),cellPixels:String(scale),stride:'1'});
   }
   pick(latlng){const p=this.map.project(latlng,GRID_ZOOM);return this.index[pickOwnership(this.grids.locations,p.x,p.y)-1]?.feature||null;}
-  hover(event){const f=this.pick(event.latlng);if(!f){this.tooltip.remove();return;}const text=document.createElement('span');text.textContent=this.options.label?.(f)||f.properties.name;this.tooltip.setContent(text).setLatLng(event.latlng).addTo(this.map);}
-  click(event){const f=this.pick(event.latlng);if(f)this.options.select(f.id);}
+  coverageInfo(latlng){return coverageExplanation(this.options.coverage,this.map.project(latlng,GRID_ZOOM),latlng);}
+  hover(event){const f=this.pick(event.latlng);const text=document.createElement('span');text.textContent=f?(this.options.label?.(f)||f.properties.name):coverageText(this.coverageInfo(event.latlng));this.tooltip.setContent(text).setLatLng(event.latlng).addTo(this.map);}
+  click(event){const f=this.pick(event.latlng);if(f){this.map.closePopup();this.options.select(f.id);}else L.popup().setLatLng(event.latlng).setContent(coverageContent(this.coverageInfo(event.latlng))).openOn(this.map);}
 }

@@ -5,11 +5,11 @@ const fragment=`#version 300 es
 precision highp float;
 precision highp int;
 precision highp usampler2D;
-uniform usampler2D locationRows,locationRuns,politicalRows,politicalRuns,metadata;
+uniform usampler2D locationRows,locationRuns,politicalRows,politicalRuns,coverageRows,coverageRuns,metadata;
 uniform sampler2D colors,politicalColors;
 uniform vec2 origin,viewport;
 uniform float scale,dpr,zoom;
-uniform bool hasPolitical,localBorders;
+uniform bool hasPolitical,hasCoverage,localBorders;
 uniform uint selected;
 uniform uint locationWorldSize,politicalWorldSize,locationCoordinateBits,politicalCoordinateBits;
 uniform bool locationCompact,politicalCompact;
@@ -48,7 +48,12 @@ void main(){
   vec2 screen=vec2(gl_FragCoord.x,viewport.y-gl_FragCoord.y)/dpr;
   vec2 p=origin+screen/scale;
   uint id=lookup(locationRows,locationRuns,p,locationCompact,locationCoordinateBits,locationWorldSize);
-  // Distant water needs no outside half-stroke or further ownership lookups.
+  uint physical=id==0u&&hasCoverage?lookup(coverageRows,coverageRuns,p,true,locationCoordinateBits,locationWorldSize):0u;
+  if(id==0u&&physical==1u){
+    float stripe=mod(floor(screen.x)+floor(screen.y),8.);
+    outColor=vec4(stripe<2.?vec3(170.,79.,36.)/255.:vec3(247.,223.,179.)/255.,1.);return;
+  }
+  // Distant unassigned cells need no outside half-stroke.
   if(id==0u&&scale<1.){outColor=vec4(0.);return;}
   uint pid=hasPolitical?lookup(politicalRows,politicalRuns,p,politicalCompact,politicalCoordinateBits,politicalWorldSize):0u;
   vec4 color=id==0u?vec4(0.):texelFetch(colors,texel(id,colors),0);
@@ -79,8 +84,8 @@ export class PixelGPU{
     const program=this.program=gl.createProgram();const shaders=[shader(gl.VERTEX_SHADER,vertex),shader(gl.FRAGMENT_SHADER,fragment)];
     shaders.forEach(s=>gl.attachShader(program,s));gl.linkProgram(program);shaders.forEach(s=>gl.deleteShader(s));
     if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));
-    gl.useProgram(program);this.textures=new Map();this.uploads=0;this.ownershipUploads=0;this.ownershipLayouts={};
-    ['locationRows','locationRuns','politicalRows','politicalRuns','metadata','colors','politicalColors'].forEach((name,i)=>{
+    gl.useProgram(program);this.textures=new Map();this.uploads=0;this.ownershipUploads=0;this.coverageUploads=0;this.hasCoverage=false;this.ownershipLayouts={};
+    ['locationRows','locationRuns','politicalRows','politicalRuns','metadata','colors','politicalColors','coverageRows','coverageRuns'].forEach((name,i)=>{
       this.textures.set(name,{unit:i,texture:gl.createTexture()});gl.uniform1i(gl.getUniformLocation(program,name),i);
       this.upload(name,name.includes('Colors')||name==='colors'?new Uint8Array(4):new Uint32Array(4),4);
     });
@@ -108,10 +113,12 @@ export class PixelGPU{
     gl.uniform1i(gl.getUniformLocation(this.program,name+'Compact'),grid.version===2);
   }
   ownership(name,grid){this.upload(name+'Rows',grid.rows,2);this.upload(name+'Runs',grid.runs);this.ownershipUploads+=2;this.layout(name,grid);}
+  coverage(grid){this.upload('coverageRows',grid.rows,2);this.upload('coverageRuns',grid.runs);this.coverageUploads+=2;this.hasCoverage=true;}
   draw({origin,scale,zoom,localBorders,selected,hasPolitical,dpr}){
     const gl=this.gl,u=name=>gl.getUniformLocation(this.program,name);gl.viewport(0,0,gl.canvas.width,gl.canvas.height);
     gl.uniform2f(u('origin'),origin.x,origin.y);gl.uniform2f(u('viewport'),gl.canvas.width,gl.canvas.height);
     gl.uniform1f(u('scale'),scale);gl.uniform1f(u('zoom'),zoom);gl.uniform1f(u('dpr'),dpr);
+    gl.uniform1i(u('hasCoverage'),this.hasCoverage);
     gl.uniform1i(u('localBorders'),localBorders);gl.uniform1i(u('hasPolitical'),hasPolitical);gl.uniform1ui(u('selected'),selected);
     gl.drawArrays(gl.TRIANGLES,0,3);
   }
