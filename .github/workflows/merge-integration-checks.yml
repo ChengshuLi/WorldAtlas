@@ -39,6 +39,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: read
+      issues: read
     steps:
       # Trusted baseline code reads candidate blobs; candidate code never runs.
       - name: Checkout trusted geographic checker
@@ -61,6 +62,8 @@ jobs:
       - name: Check proposed geography with trusted baseline code
         env:
           GH_TOKEN: ${{ github.token }}
+          GEOGRAPHY_PR_NUMBER: ${{ github.event.pull_request.number }}
+          GEOGRAPHY_REVIEWED_HEAD: ${{ github.event.pull_request.head.sha }}
           GEOGRAPHY_BASELINE: ${{ github.event.pull_request.base.sha }}
           GEOGRAPHY_CANDIDATE: ${{ github.event.pull_request.head.sha }}
         run: |
@@ -96,7 +99,7 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: proposed-geography-${{ github.event.pull_request.number }}
+          name: proposed-geography-${{ github.event.pull_request.number }}-${{ github.run_attempt }}
           path: geography-check.json
           retention-days: 30
   regression:

@@ -47,7 +47,7 @@ test('bootstrap job explicitly grants only the read permissions its API calls re
  function allowed(text) {
   const job=text.match(/\n  geography:\n([\s\S]*?)(?=\n  [a-z][a-z-]*:|$)/)?.[1];
   const permissions=job?.match(/    permissions:\n([\s\S]*?)    steps:/)?.[1];
-  return permissions?.trim()==='contents: read\n      pull-requests: read';
+  return permissions?.trim()==='contents: read\n      pull-requests: read\n      issues: read';
  }
  assert.equal(allowed(yaml),true);
  assert.equal(allowed(yaml.replace('      pull-requests: read\n','')),false);

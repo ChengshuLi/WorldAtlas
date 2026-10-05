@@ -1,3 +1,4 @@
+import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
 import {integrationProfile} from './integration-profile.mjs';
 import {integrationProof} from './integration-proof.mjs';
 import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
@@ -310,6 +311,18 @@ export async function completeIntegration(options) {
   need(options.integrationResult === 'success' || (options.integrationResult === 'skipped' && options.proofRunId),
     'An open PR requires successful isolated integration tests or revalidated trusted proof');
   need(state.base === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
+  need(typeof options.geographyReportLoader === 'function', 'Missing trusted geography report loader');
+  const geography = await options.geographyReportLoader();
+  need(geography?.version === 1 && geography.method_id === 'worldatlas-trusted-geography-check-v1' &&
+    geography.baseline_commit === state.base && geography.trusted_code_commit === state.base &&
+    geography.candidate_commit === options.testedCandidate && geography.candidate_code_executed === false &&
+    geography.published === false && geography.source_approval === false && geography.gate_status === 'passed',
+    'Geographic report does not bind exact trusted combined check');
+  const ordinaryPass = ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
+  const waterPass = geography.status === 'regressions-found' &&
+    geography.adjudication?.status === 'all-findings-supported-and-reviewed' &&
+    geography.adjudication.unresolved_findings === 0;
+  need(ordinaryPass || waterPass, 'Combined geographic findings remain unresolved');
   const candidate = await tree(options.api, options.repo, options.testedCandidate);
   checkCandidateParents(candidate.object, state.base, state.pr.head.sha);
   const authored = await tree(options.api, options.repo, state.pr.head.sha);
@@ -333,6 +346,15 @@ export async function completeIntegration(options) {
     {evidenceRequired: options.policy.mode === 'enforce-new' && evidenceRequirement(currentIssue, workSpec(currentIssue.body), options.policy, currentPR.head.ref).required});
   const freshStatuses = await options.api(`${root(options.repo)}/commits/${state.pr.head.sha}/status`);
   need(!freshStatuses.statuses?.length || freshStatuses.state === 'success', 'Commit statuses changed during final review');
+  if (waterPass) {
+    const approval = await collectGeographicApproval({api: options.api, repo: options.repo,
+      number: options.number, expectedHead: state.pr.head.sha, policy: options.policy});
+    need(approval.status === 'reviewed' && approval.authority_sha256 === geography.adjudication.authority_sha256 &&
+      bindingHash(approval.review) === bindingHash(geography.adjudication.review) &&
+      JSON.stringify(approval.dossiers.flatMap(row => row.decision.finding_sha256s).sort()) ===
+        JSON.stringify(geography.adjudication.finding_sha256s),
+      'Geographic source decision changed after combined check; rerun unchanged head');
+  }
   need((await options.api(`${root(options.repo)}/git/ref/heads/main`)).object.sha === state.base,
     'Main advanced during final review; resubmit unchanged head');
   const merged = await options.api(`${root(options.repo)}/pulls/${options.number}/merge`, 'PUT', {
@@ -340,7 +362,8 @@ export async function completeIntegration(options) {
   });
   need(merged.merged, 'GitHub did not merge the PR');
   return {accepted: true, merge_commit: merged.sha, title: state.pr.title, github_issue: state.issue.number,
-    geography: {status: 'passed', trusted_code_commit: state.base, candidate_commit: options.testedCandidate},
+    geography: {status: 'passed', trusted_code_commit: state.base, candidate_commit: options.testedCandidate,
+      report_sha256: options.geographyReportHash, adjudication: geography.adjudication ?? null},
     tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof,
     head_cleanup: await cleanupMergedHead(options)};
 }
