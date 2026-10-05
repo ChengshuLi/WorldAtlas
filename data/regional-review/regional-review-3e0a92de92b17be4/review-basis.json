@@ -1,0 +1,121 @@
+{
+  "kind": "legacy-geography-review-basis",
+  "issue": 418,
+  "issue_created": "2026-10-02",
+  "pr": 1035,
+  "review_scope": "Read-only source/semantic review of exactly 206 pinned issue subjects; not regional approval or boundary certification.",
+  "issue_contract_note": "The issue predates evidence_quality activation and retains its original acceptance contract; this review basis supports independent review but is not an evidence-quality-v1 manifest.",
+  "original_packet_baseline_commit": "d59efc0fd9855c34aa28480cb649085fd3f9b131",
+  "current_pr_base_commit": "90f04d30cf773b5be538bc3d85d4d9051768deef",
+  "exact_scope_file": "scope-from-issue.json",
+  "exact_scope_sha256": "798511927b4a336685ac007c8dfe41ca5eb460e22c17ad4174800f3a98ccdb2f",
+  "changed_files": [
+    {
+      "path": "dgu-administrative-units-feed.xml",
+      "sha256": "1231571f5a59464dbccda7eafaed3099131d899b4ebf142fde55a43a852bdff7",
+      "bytes": 2149
+    },
+    {
+      "path": "findings.md",
+      "sha256": "66a524b813044121a3c9fad2c21eabb402cbb1418659c525e29c873d30ee9c69",
+      "bytes": 16541
+    },
+    {
+      "path": "issue-418-api-snapshot.json",
+      "sha256": "58e2d18e850b2405f70ba9b5761761d6a209f4dcf1b6cf4a61ed322a0c634fa2",
+      "bytes": 23545
+    },
+    {
+      "path": "issue-418-comments-snapshot.json",
+      "sha256": "6ba9f454d89b6e77219dea3384df5300230476010a1284dc86542d35a44b0079",
+      "bytes": 16114
+    },
+    {
+      "path": "reproduce-source-review.py",
+      "sha256": "4796a01575fdddeb7bf8cd011a89f3722734054e29768e095cbc5a412b0d28a4",
+      "bytes": 13851
+    },
+    {
+      "path": "reproduction.json",
+      "sha256": "d71aa6c7ee19f2049e5767cb35d14cd985489894f79743712cc83f5fb49a47ed",
+      "bytes": 3598
+    },
+    {
+      "path": "scope-from-issue.json",
+      "sha256": "798511927b4a336685ac007c8dfe41ca5eb460e22c17ad4174800f3a98ccdb2f",
+      "bytes": 13117
+    },
+    {
+      "path": "subject-review.csv",
+      "sha256": "0eb0e193076ddb1a6777d624bed3173fe1f0cc7cd138063dbf0a8214bca60827",
+      "bytes": 102021
+    }
+  ],
+  "pinned_baseline_inputs": [
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+    },
+    {
+      "path": "data/administrative-sources.json",
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "path": "data/semantic-report.json",
+      "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    }
+  ],
+  "cross_packet_evidence": [
+    {
+      "issue": 419,
+      "merged_commit": "90f04d30cf773b5be538bc3d85d4d9051768deef",
+      "scope": "224 Croatia ADM2 IDs; disjoint from this issue exact scope",
+      "DZS_extract_path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-detail-extract.csv",
+      "DZS_extract_sha256": "225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c",
+      "DZS_extract_license": "Croatian Open License; attribution required",
+      "geoBoundaries_full_source_sha256": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e",
+      "geoBoundaries_metadata_sha256": "e2b5d837084f3a2360a16b51e198d35799903c4b99687dd547f1b73a11847790",
+      "limit": "Representative year is 2021 while source update/build dates are 2023; source license conflict remains unresolved; DZS roster was grouped by inherited Atlas parent county and does not independently verify parents or boundaries."
+    }
+  ],
+  "external_sources": [
+    {
+      "id": "geoboundaries-HRV-ADM2-simplified",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/HRV/ADM2",
+      "sha256": "bfcda6087b26678f026c2a1ac5c4fe903bd67ad24a7c9761519f7929b3915d16",
+      "retrieved": "2026-10-05",
+      "redistributed": false,
+      "limit": "Atlas metadata CC BY-SA 2.0 conflicts with source metadata and OSM official ODbL data notice; license unresolved."
+    },
+    {
+      "id": "DZS-2021-population-by-towns-municipalities",
+      "url": "https://podaci.dzs.hr/media/td3jvrbu/popis_2021-stanovnistvo_po_gradovima_opcinama.xlsx",
+      "sha256": "c2b1cff240a19b5bfbf6dcb5e919a264284dfa444a326adae5517bf39b6d7d42",
+      "retrieved": "2026-10-05",
+      "license": "Croatian Open License; attribution required",
+      "redistributed": false,
+      "limit": "Full workbook omitted; exact URL/hash retained and lawful 555-row derivative is on current main in #419 packet."
+    },
+    {
+      "id": "DGU-INSPIRE-AU-feed",
+      "url": "https://geoportal.dgu.hr/services/atom/au/xml",
+      "sha256": "1231571f5a59464dbccda7eafaed3099131d899b4ebf142fde55a43a852bdff7",
+      "retrieved": "2026-10-05",
+      "redistributed": true,
+      "limit": "Feed marks linked polygons as access-restricted under INSPIRE Article 13(1)(e); no polygons downloaded."
+    }
+  ],
+  "reproduction": "reproduce-source-review.py verifies input hashes, exact issue ID set, direct parents and source IDs; parses the DZS workbook; then writes subject-review.csv and reproduction.json.",
+  "result_limits": [
+    "No Croatia polygon boundary is certified.",
+    "185 name/type matches are conditional on county inferred from existing Atlas parent alias; parent assignment is not independently verified by the source.",
+    "Nineteen island labels require authoritative physical-island and legal-host attribution.",
+    "Eleven DZS roster units are absent from this packet scope only, not proven absent from the whole atlas.",
+    "Grad Zagreb Natural Earth source vintage and extraction remain unpinned.",
+    "Yugoslavia area parent is a historical grouping; combined parent decision belongs to regional integration."
+  ]
+}
