@@ -75,7 +75,7 @@
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "redistributable",
-        "terms": "MIT; original Leaflet LICENSE retained without modification"
+        "terms": "BSD 2-Clause; original Leaflet LICENSE retained without modification"
       },
       "retention": "retained",
       "verification": "verified",
@@ -119,6 +119,12 @@
       "path": "coordination/engineering/wheel-zoom-886/baseline-app.js",
       "bytes": 358237,
       "sha256": "1a21dccf6c3336e71c25f7266548d640c98ce535ca4d26bf2f4b150970b388ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886/build-derivatives-custody.json",
+      "bytes": 5166,
+      "sha256": "834ad9d80b990c3c4dbb29fdfe7cf9134f5ebefd214fede897bd47dec68228c4",
       "hash_kind": "file-bytes"
     },
     {
@@ -393,8 +399,8 @@
     },
     {
       "path": "coordination/engineering/wheel-zoom-886/source-pins.json",
-      "bytes": 7131,
-      "sha256": "b968ee479b365f3108db3af207ebd029518ba9349bddcfb8e05b0cc09366c5ea",
+      "bytes": 7347,
+      "sha256": "04dce21347cac8898eafa6e54c3bb0b43ad55fc98421d384fc3d174fb9a5ea65",
       "hash_kind": "file-bytes"
     },
     {
@@ -414,60 +420,6 @@
       "bytes": 484,
       "sha256": "c53f3bab066acbf3c1963a66c531916a14b9ee47ae77194df9cadfeaf0f089cc",
       "hash_kind": "file-bytes"
-    },
-    {
-      "path": "data/prepared-evidence/index.json",
-      "bytes": 14739,
-      "sha256": "1120f5bb68d3eb853b2ea0c4aedabaa7a8798936deb5df939045a3939bac24b9",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "data/prepared-evidence/part-0.json.gz",
-      "bytes": 51449,
-      "sha256": "22fd93c21298b4c952fec997312206772dacb2d7a909ff65c335ecbdf7c4ba6d",
-      "hash_kind": "file-bytes",
-      "uncompressed_bytes": 753063,
-      "uncompressed_sha256": "439f7a2909e30978d86b291362459114454890f4616dd8fcb24c436f0cb0c5e7"
-    },
-    {
-      "path": "data/prepared-evidence/part-1.json.gz",
-      "bytes": 52520,
-      "sha256": "cc44b22d320da44694af035400292a135e6816d45568aaba959e500962e0cc4c",
-      "hash_kind": "file-bytes",
-      "uncompressed_bytes": 752824,
-      "uncompressed_sha256": "dd97ffa55de4a07d05f74658f89392b14087e5d0135865001f39d64b1bb3d4fe"
-    },
-    {
-      "path": "data/prepared-evidence/part-2.json.gz",
-      "bytes": 52517,
-      "sha256": "3f2e4cf2c28b4691c5b29903e53f9ba6781e39db8f32b66407c21dbf499ab16a",
-      "hash_kind": "file-bytes",
-      "uncompressed_bytes": 752829,
-      "uncompressed_sha256": "60a779ef180c287b61384603a3965481e3e2113924fe59b5be2bb6659859148a"
-    },
-    {
-      "path": "data/prepared-evidence/part-3.json.gz",
-      "bytes": 8622,
-      "sha256": "d2c2e384d97e75bc863000135d7d8cfabf618f11f39983cf2d0678828f47aa0b",
-      "hash_kind": "file-bytes",
-      "uncompressed_bytes": 115217,
-      "uncompressed_sha256": "92b778f028751230e9ccc482bea36b943550e79b9ce9875de0eb921d7cdd8d3b"
-    },
-    {
-      "path": "data/prepared-evidence/part-4.json.gz",
-      "bytes": 24856,
-      "sha256": "a7d9b6527c722808370eec8ed60bd3db43e6c21b27d999b98d0f2e0d4d7cddf3",
-      "hash_kind": "file-bytes",
-      "uncompressed_bytes": 431133,
-      "uncompressed_sha256": "9399b1788a6687caa6594b123c252f375e1121cce0794fac4ce46c7332d31e3c"
-    },
-    {
-      "path": "data/prepared-evidence/part-5.json.gz",
-      "bytes": 59268,
-      "sha256": "a180805ffd1e2bbf6fec61ae8cc531b8afbb6226c7ad74f046edb2e3326b352e",
-      "hash_kind": "file-bytes",
-      "uncompressed_bytes": 990666,
-      "uncompressed_sha256": "4774dab94bcf7146664caa8ed8475e4a3f8f7fe6d629e1f1eb9508612ead8c9b"
     },
     {
       "path": "scripts/benchmark-wheel-zoom.mjs",
@@ -7587,6 +7539,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/wheel-zoom-886/build-derivatives-custody.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/wheel-zoom-886/claim.json",
       "status": "added"
     },
@@ -7773,41 +7729,6 @@
     {
       "path": "coordination/engineering/wheel-zoom-886/wheel-unit.log",
       "status": "added"
-    },
-    {
-      "path": "data/prepared-evidence/index.json",
-      "status": "modified",
-      "original_sha256": "830b3e483a2fd910b795a964520631c0e417cc80f7c5fcc3b3399abbccc958b2"
-    },
-    {
-      "path": "data/prepared-evidence/part-0.json.gz",
-      "status": "modified",
-      "original_sha256": "d0dbfeb553ead31eca9e563094a476c83abf3cd80bf68c8f0f4e85f6b0138c20"
-    },
-    {
-      "path": "data/prepared-evidence/part-1.json.gz",
-      "status": "modified",
-      "original_sha256": "e57ff9ebc1ae33005d1433b6bb204a50bce7217114de54f4a8a6e317da500ab4"
-    },
-    {
-      "path": "data/prepared-evidence/part-2.json.gz",
-      "status": "modified",
-      "original_sha256": "6c59ec87e762b491f0bfc51ec05594676c2e70e974fa33b450689c094a1f2a2f"
-    },
-    {
-      "path": "data/prepared-evidence/part-3.json.gz",
-      "status": "modified",
-      "original_sha256": "aded1102369c485ddfd06b243653559a068811f7c8fedfc57ac382adbe7530ec"
-    },
-    {
-      "path": "data/prepared-evidence/part-4.json.gz",
-      "status": "modified",
-      "original_sha256": "af67e9ce0ebb98270531ae020d6d86ef04c259f9f11b6bd324c92b1dfa117c3f"
-    },
-    {
-      "path": "data/prepared-evidence/part-5.json.gz",
-      "status": "modified",
-      "original_sha256": "4bc86c2b23b735a06080d810690fcbaf34c9bc2e26fc4ae50276bea04eb51f9b"
     },
     {
       "path": "scripts/benchmark-wheel-zoom.mjs",

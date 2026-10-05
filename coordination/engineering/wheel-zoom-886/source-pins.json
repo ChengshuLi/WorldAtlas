@@ -97,15 +97,18 @@
   "candidate_builds": [
     {
       "path": "assets/index-BcK14qcy.js",
-      "sha256": "8a29f9df7b97cfc171dbcf14914d0761ef58a4094631b6a1467c1f4f3e805cf3"
+      "sha256": "8a29f9df7b97cfc171dbcf14914d0761ef58a4094631b6a1467c1f4f3e805cf3",
+      "source_commit": "fbf2b42047be0fc7e397411a9e5fb9991bcf822b"
     },
     {
       "path": "assets/index-C3pmC4rP.css",
-      "sha256": "3719753e6385f4d59f7271b56c6b439d40905c4777bc202cb05b17796ce1db39"
+      "sha256": "3719753e6385f4d59f7271b56c6b439d40905c4777bc202cb05b17796ce1db39",
+      "source_commit": "fbf2b42047be0fc7e397411a9e5fb9991bcf822b"
     }
   ],
   "limits": [
     "Candidate full-range performance observed immediately before the negative-timestamp clamp; freeze original observations rather than relabel source bytes. Final published acceptance must run on the exact delivered head.",
     "Source and lockfile bytes between original lane base daf637f and current base e063b721 are identical; only backend exporter and owned evidence advanced."
-  ]
+  ],
+  "measured_candidate_source_commit": "fbf2b42047be0fc7e397411a9e5fb9991bcf822b"
 }
