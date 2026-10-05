@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "issue": 849,
+  "lane": "engineering",
+  "worker_id": "engineering-publisher-cache-20261004-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "1232d03d2d9a5e1118c0d5239092c879a9539990",
+    "files": [
+      {
+        "path": "src/data-client.js",
+        "bytes": 19347,
+        "sha256": "1ab9135906f1ef0c03ee12dac4bec9ddf5474188b308ba9877dc79b1bd6eff2b",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "test/compact-map-client.test.mjs",
+        "bytes": 32678,
+        "sha256": "28f4aac5de23b08a57c439f93ebe5ccc757a7e2d30d30a09f3fe401605cefe2b",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "src/data-client.js",
+      "bytes": 19612,
+      "sha256": "fbfc9a83a3373b3323a1c03f836e7676f0535d4cfdfd524d5cfd8be9c610afb0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-map-client.test.mjs",
+      "bytes": 35988,
+      "sha256": "fd7cca5980765619afc98f39d7a2fdde728415860f17b91720d1228cd6934fe8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ownership-generation-20261004-local01/controls.json",
+      "bytes": 641,
+      "sha256": "6d4469dc1c0532a4290da5292dbff3d92bc0d94ce3bfbad6d6de03ed55fc3eb9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ownership-generation-20261004-local01/README.md",
+      "bytes": 821,
+      "sha256": "c642a78e38de40a714af9357346369d78ff58b9ad36213656179221c7e44bc2e",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "ownership-generation-cache",
+      "kind": "code",
+      "description": "Generation-specific ownership index/bucket cache with promise-identity cleanup; immutable fixture controls preserve nearby reuse and reject old generation cleanup.",
+      "software": "Node24 with native fetch mocks",
+      "units": "Code correctness controls; no live performance metrics"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "ownership-generation-cache",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/ownership-generation-20261004-local01/controls.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "src/data-client.js",
+      "status": "modified",
+      "original_sha256": "1ab9135906f1ef0c03ee12dac4bec9ddf5474188b308ba9877dc79b1bd6eff2b"
+    },
+    {
+      "path": "test/compact-map-client.test.mjs",
+      "status": "modified",
+      "original_sha256": "28f4aac5de23b08a57c439f93ebe5ccc757a7e2d30d30a09f3fe401605cefe2b"
+    },
+    {
+      "path": "coordination/engineering/ownership-generation-20261004-local01/controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ownership-generation-20261004-local01/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ownership-generation-20261004-local01/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test --test-timeout=30000 test/compact-map-client.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/ownership-generation-20261004-local01/evidence-quality.json"
+  ]
+}

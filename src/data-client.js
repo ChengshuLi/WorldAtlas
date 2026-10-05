@@ -16,7 +16,7 @@ const hostedDatabase = import.meta.env.VITE_HOSTED_DATABASE === 'true';
 let historyRequest;
 let compactMapSupported=false;
 let datedGeographySupported=false,expectedGeography,referenceTemporalHistory=[];
-const ownershipRequests=new Map();
+let ownershipRequests=new Map();
 let ownershipIndexRequest;
 let referenceAttributeRequest;
 let referenceAttributeBundle,referenceAttributeFootprints;
@@ -60,15 +60,21 @@ async function loadReferenceAttributes(year,signal){
 }
 
 async function loadOwnershipHistory(year,signal){
- ownershipIndexRequest ||= readJSON('./ownership-runtime/index.json').catch(error=>{ownershipIndexRequest=null;throw error;});
+ // Capture this generation before awaiting its index; later loads get a new map.
+ const requests=ownershipRequests;
+ if(!ownershipIndexRequest){
+  const request=readJSON('./ownership-runtime/index.json').catch(error=>{if(ownershipIndexRequest===request)ownershipIndexRequest=null;throw error;});
+  ownershipIndexRequest=request;
+ }
  const index=await ownershipIndexRequest;signal?.throwIfAborted();
  const selected=runtimeOwnershipBucket(index,year);if(!selected)return [];
- if(!ownershipRequests.has(selected.path)){
-  ownershipRequests.set(selected.path,readJSON(`./ownership-runtime/${selected.path}`).then(bucket=>runtimeOwnershipData(index,bucket,year)).catch(error=>{ownershipRequests.delete(selected.path);throw error;}));
+ if(!requests.has(selected.path)){
+  const request=readJSON(`./ownership-runtime/${selected.path}`).then(bucket=>runtimeOwnershipData(index,bucket,year)).catch(error=>{if(requests.get(selected.path)===request)requests.delete(selected.path);throw error;});
+  requests.set(selected.path,request);
   // Keep navigation between nearby dates cheap without retaining the entire history.
-  while(ownershipRequests.size>2)ownershipRequests.delete(ownershipRequests.keys().next().value);
+  while(requests.size>2)requests.delete(requests.keys().next().value);
  }
- const data=await ownershipRequests.get(selected.path);signal?.throwIfAborted();
+ const data=await requests.get(selected.path);signal?.throwIfAborted();
  return decodeDerived(data.parts,data.index,year);
 }
 
@@ -175,6 +181,7 @@ export async function loadGeography(initialSelection) {
   lastCompleteHostedMap=null;
   // Reference presentation context belongs to this loaded asset generation.
   referenceAttributeRequest=null;
+  ownershipIndexRequest=null;ownershipRequests=new Map();
   historyRequest=null;
   preparedEvidenceIndexRequest=null;preparedEvidenceRequests=new Map();
   const data=await readJSON(staticAtlas ? './atlas-geography.json' : '/api/geography');
