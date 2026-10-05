@@ -59,7 +59,10 @@ function fixture() {
   f.options = () => ({api:f.api,repo,number:2,expectedHead:head,policy:{version:1,mode:'enforce-new',activation_time:'2100-01-01T00:00:00Z'},
     candidateSleep:async()=>{},
     evidenceCheck:async()=>{f.evidenceReads=(f.evidenceReads??0)+1;if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};}});
-  f.complete = extra => completeIntegration({...f.options(),integrationResult:'success',geographyResult:'success',testedBase:base,testedCandidate:candidate,...extra});
+  f.complete = extra => completeIntegration({...f.options(),integrationResult:'success',geographyResult:'success',testedBase:base,testedCandidate:candidate,
+    geographyReportLoader:async()=>({version:1,method_id:'worldatlas-trusted-geography-check-v1',
+      baseline_commit:f.base,trusted_code_commit:f.base,candidate_commit:extra?.testedCandidate??candidate,candidate_code_executed:false,
+      published:false,source_approval:false,gate_status:'passed',status:'not-applicable'}),...extra});
   return f;
 }
 
@@ -499,5 +502,40 @@ test('fresh geography success is required even when application proof is reusabl
 });
 test('fresh geography success is recorded against exact combined commits',async()=>{
  const f=fixture();const result=await f.complete();
- assert.deepEqual(result.geography,{status:'passed',trusted_code_commit:f.base,candidate_commit:f.candidate});
+ assert.deepEqual(result.geography,{status:'passed',trusted_code_commit:f.base,candidate_commit:f.candidate,report_sha256:undefined,adjudication:null});
+});
+
+
+test('green geography job cannot merge without its authenticated exact-combined report', async()=>{
+ for (const delta of [{geographyReportLoader:undefined},
+   {geographyReportLoader:async()=>({version:1,gate_status:'passed'})},
+   {geographyReportLoader:async()=>{throw Error('Report archive bytes differ from trusted geography job digest');}}]) {
+  const f=fixture(); await assert.rejects(f.complete(delta)); assert.equal(f.writes.length,0);
+ }
+});
+test('raw unresolved findings cannot be relabeled as a successful geography check',async()=>{
+ const f=fixture(); await assert.rejects(f.complete({geographyReportLoader:async()=>({
+  version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:f.base,
+  trusted_code_commit:f.base,candidate_commit:f.candidate,candidate_code_executed:false,
+  published:false,source_approval:false,gate_status:'passed',status:'regressions-found',regressions:1
+ })}),/findings remain unresolved/); assert.equal(f.writes.length,0);
+});
+
+test('trusted geography outputs bind attempted artifact digest through the privileged merge job',()=>{
+ const workflow=fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
+ const geography=workflow.match(/\n  geography:\n([\s\S]*?)(?=\n  integration:)/)[1];
+ assert.match(geography,/report_sha256: \$\{\{ steps\.check\.outputs\.report_sha256 \}\}/);
+ assert.match(geography,/artifact_name: \$\{\{ steps\.check\.outputs\.artifact_name \}\}/);
+ assert.match(geography,/id: check/);
+ assert.match(geography,/GEOGRAPHY_PR_NUMBER: \$\{\{ inputs\.pr_number \}\}/);
+ assert.match(geography,/GEOGRAPHY_REVIEWED_HEAD: \$\{\{ inputs\.expected_head \}\}/);
+ assert.match(geography,/GEOGRAPHY_ARTIFACT_NAME: geography-\$\{\{ inputs\.request_id \}\}-\$\{\{ github\.run_attempt \}\}/);
+ assert.match(geography,/echo "artifact_name=\$GEOGRAPHY_ARTIFACT_NAME" >> "\$GITHUB_OUTPUT"/);
+ assert.match(workflow,/GEOGRAPHY_REPORT_SHA256: \$\{\{ needs\.geography\.outputs\.report_sha256 \}\}/);
+ assert.match(workflow,/GEOGRAPHY_ARTIFACT_NAME: \$\{\{ needs\.geography\.outputs\.artifact_name \}\}/);
+ const runner=fs.readFileSync('scripts/run-worker-merge.mjs','utf8');
+ assert.match(runner,/geographyReportLoader: \(\) => loadGeographicReport/);
+ assert.match(runner,/runId: process\.env\.GITHUB_RUN_ID/);
+ assert.match(runner,/expectedHash: process\.env\.GEOGRAPHY_REPORT_SHA256/);
+ assert.doesNotMatch(workflow,/actions\/download-artifact/,'privileged job must not extract an unverified archive');
 });

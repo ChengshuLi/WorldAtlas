@@ -74,7 +74,7 @@ def verify_trusted_checkout(repo, baseline):
     # A byte-correct geometry.py is insufficient if an untracked evidence.py,
     # package initializer, extension module or cached bytecode can shadow it.
     expected = {}
-    for row in git(repo, 'ls-tree', '-r', '-z', baseline, '--', 'scripts').decode().split('\0'):
+    for row in git(repo, 'ls-tree', '-r', '-z', baseline, '--', 'scripts', 'src').decode().split('\0'):
         if not row:
             continue
         fields, name = row.split('\t', 1)
@@ -82,28 +82,36 @@ def verify_trusted_checkout(repo, baseline):
             raise ValueError('Trusted scripts must be ordinary committed files')
         expected[name] = fields.split()[2]
     actual = {}
-    for target in (repo / 'scripts').rglob('*'):
-        if target.is_symlink():
+    for namespace in ['scripts', 'src']:
+        if (repo / namespace).is_symlink():
             raise ValueError('Trusted scripts namespace cannot contain symlinks')
-        if target.is_file():
-            actual[str(target.relative_to(repo))] = target
+        for target in (repo / namespace).rglob('*'):
+            if target.is_symlink():
+                raise ValueError('Trusted scripts namespace cannot contain symlinks')
+            if target.is_file():
+                actual[str(target.relative_to(repo))] = target
     if set(actual) != set(expected):
         raise ValueError('Untracked or missing file in trusted scripts namespace')
     for name, target in actual.items():
         if target.read_bytes() != git(repo, 'cat-file', 'blob', expected[name]):
             raise ValueError('Checker differs from immutable trusted baseline: ' + name)
-    if (repo / 'requirements.txt').is_symlink() or (repo / 'requirements.txt').read_bytes() != read(repo, baseline, 'requirements.txt'):
-        raise ValueError('Trusted dependency requirements differ from baseline')
+    for name in ['requirements.txt', 'package.json', '.github/evidence-policy.json']:
+        target = repo / name
+        if any(path.is_symlink() for path in [target, *target.parents]) or not target.is_file() or target.read_bytes() != read(repo, baseline, name):
+            raise ValueError('Trusted dependency metadata or evidence policy differs from baseline')
+        expected[name] = entry(repo, baseline, name)['git_blob_oid']
+    return hashlib.sha256((json.dumps(expected, sort_keys=True, separators=(',', ':')) + '\n').encode()).hexdigest()
 
 
 def inspect(repo, baseline, candidate):
     immutable_sha(baseline)
     immutable_sha(candidate)
-    verify_trusted_checkout(repo, baseline)
+    trusted_inventory = verify_trusted_checkout(repo, baseline)
     before, after = inventory(repo, baseline), inventory(repo, candidate)
     report = {'version': 1, 'method_id': 'worldatlas-trusted-geography-check-v1',
               'baseline_commit': baseline, 'candidate_commit': candidate,
-              'trusted_code_commit': baseline, 'candidate_code_executed': False,
+              'trusted_code_commit': baseline, 'trusted_code_inventory_sha256': trusted_inventory,
+              'candidate_code_executed': False,
               'baseline_input_inventory': before, 'candidate_input_inventory': after,
               'published': False, 'source_approval': False}
     if before == after:
@@ -119,8 +127,39 @@ def inspect(repo, baseline, candidate):
     result = detector.inspect(repo, baseline, candidate)
     return {**report, 'status': result['status'], 'regressions': result['regressions'],
             'differential_report': result,
-            'limits': ['No automatic water exception or repair. Source-backed intentional loss needs separate exact-geometry adjudication.',
+            'limits': ['No automatic repair. Water-loss acceptance requires retained original physical sources, full-shape support and separate exact-head independent review.',
                        'Existing release, identity, regional certificate and historical import checks remain required.']}
+
+
+def apply_adjudications(repo, candidate, report):
+    # No proposed local envelope is accepted. Only baseline Node code can read
+    # actual GitHub authority, using a read-only workflow token and exact head.
+    if report['status'] != 'regressions-found':
+        return report
+    report['adjudication'] = {'status': 'blocked'}
+    try:
+        number, head = os.environ.get('GEOGRAPHY_PR_NUMBER'), os.environ.get('GEOGRAPHY_REVIEWED_HEAD')
+        if not isinstance(number, str) or not re.fullmatch('[1-9][0-9]*', number):
+            raise ValueError('Missing trusted PR context for source-backed adjudication')
+        immutable_sha(head)
+        env = dict(os.environ)
+        for name in ['NODE_OPTIONS', 'NODE_PATH']:
+            env.pop(name, None)
+        # stdout contains bounded base64 original dossier bytes, never executable
+        # candidate code. The child enforces 48 MiB transport; timeout is finite.
+        result = subprocess.run(['node', str(repo / 'scripts/check-geographic-adjudications.mjs'),
+                                 '--pr', number, '--head', head], cwd=repo, env=env,
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=300)
+        if result.returncode or len(result.stdout) > 48 * 1024 * 1024:
+            raise ValueError('Trusted GitHub source-decision validation failed; rerun after exact-head independent review')
+        envelope = json.loads(result.stdout)
+        from geographic_adjudication import adjudicate
+        report['adjudication'] = adjudicate(report, envelope, lambda name: read(repo, candidate, name))
+    except Exception as error:  # Preserve raw findings on every failed adjudication.
+        report['adjudication'] = {'status': 'blocked', 'reason': str(error)[:1024]}
+        if getattr(error, 'unsupported_geometry', None) is not None:
+            report['adjudication']['unsupported_geometry'] = error.unsupported_geometry
+    return report
 
 
 def fetch_candidate(repo, candidate):
@@ -154,7 +193,10 @@ def main():
     verify_trusted_checkout(repo, args.baseline)
     if args.fetch:
         fetch_candidate(repo, args.candidate)
-    result = inspect(repo, args.baseline, args.candidate)
+    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate))
+    passed = result['status'] in ['not-applicable', 'no-footprint-change', 'no-new-regression'] or (
+        result.get('adjudication', {}).get('status') == 'all-findings-supported-and-reviewed')
+    result['gate_status'] = 'passed' if passed else 'blocked'
     raw = (json.dumps(result, sort_keys=True, separators=(',', ':'), allow_nan=False) + '\n').encode()
     if len(raw) > MAX_BYTES:
         raise ValueError('Geography check output exceeds bounded report size')
@@ -162,9 +204,13 @@ def main():
         raise ValueError('Symlink report path forbidden')
     with args.out.open('xb') as stream:
         stream.write(raw)
+    digest = hashlib.sha256(raw).hexdigest()
+    if os.environ.get('GITHUB_OUTPUT'):
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
+            stream.write('report_sha256=' + digest + '\n')
     print(json.dumps({'status': result['status'], 'regressions': result['regressions'],
                       'report_bytes': len(raw), 'report_sha256': hashlib.sha256(raw).hexdigest()}))
-    return 0 if result['status'] in ['not-applicable', 'no-footprint-change', 'no-new-regression'] else 1
+    return 0 if passed else 1
 
 
 if __name__ == '__main__':

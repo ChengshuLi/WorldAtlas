@@ -1,3 +1,4 @@
+import {loadGeographicReport} from './geographic-report-artifact.mjs';
 import fs from 'node:fs';
 import {renderWorkerResult} from './worker-result.mjs';
 import {githubAPI} from './issue-claim-contract.mjs';
@@ -24,6 +25,10 @@ try {
   } else {
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
       geographyResult: process.env.GEOGRAPHY_RESULT,
+      geographyReportHash: process.env.GEOGRAPHY_REPORT_SHA256,
+      geographyReportLoader: () => loadGeographicReport({api, repo, runId: process.env.GITHUB_RUN_ID,
+        artifactName: process.env.GEOGRAPHY_ARTIFACT_NAME, expectedHash: process.env.GEOGRAPHY_REPORT_SHA256,
+        token: process.env.GH_TOKEN}),
       proofRunAttempt: process.env.PROOF_RUN_ATTEMPT ? Number(process.env.PROOF_RUN_ATTEMPT) : undefined,
       proofRunId: process.env.PROOF_RUN_ID ? Number(process.env.PROOF_RUN_ID) : undefined,
       testedBase: process.env.TESTED_BASE, testedCandidate: process.env.TESTED_CANDIDATE});

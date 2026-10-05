@@ -1,0 +1,2500 @@
+{
+  "version": 1,
+  "issue": 920,
+  "lane": "engineering",
+  "worker_id": "engineering-coverage-gaps-907-20261005-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "b5e9d4931e84115ee63d3cf723321987cb5aeee5",
+    "files": [
+      {
+        "path": ".github/evidence-policy.json",
+        "bytes": 225,
+        "sha256": "69310e9dfbc92a7bfc954f6374a13dafb47a12ea53e27406cfd89138fc87463b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 7051,
+        "sha256": "3887405cef4e461e726c9963ba7c8850bb59b0d3adf483ba1a0c3aaa83c9d030",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 8101,
+        "sha256": "6e386caa917810901fe52f5e391748bb2525dad7959207ddac9ff874a7d8e6ba",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz",
+        "bytes": 1565161,
+        "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "package.json",
+        "bytes": 1387,
+        "sha256": "96481c8339f7ea60cfdfe91b8a42a4bf9d60ef108b3b1d9ffe2de780db1fa443",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "requirements.txt",
+        "bytes": 146,
+        "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/administrative.py",
+        "bytes": 12313,
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/apply-geographic-decisions.py",
+        "bytes": 13530,
+        "sha256": "c5d1c7a1b118742f116d7bc647bc6974942901348a046b77c865f434d9bd1eab",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/apply-hierarchy-correction-stage.mjs",
+        "bytes": 2364,
+        "sha256": "26b25171216c47bbd3224f99e1467474b8f6e1ae7da5be300ef2c99372e71888",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/apply-macro-boundary-decisions.py",
+        "bytes": 13261,
+        "sha256": "f0958efa03c5416038e5c8fc234b8d6e37407359c615650bd9cc5d680e539a85",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/apply-macro-review.py",
+        "bytes": 22347,
+        "sha256": "28f07b0005b2ae2a390cd8e013c45a5000ab29824bfa832718e77f09a147d803",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/apply-source-territory-repairs.py",
+        "bytes": 22456,
+        "sha256": "246982c22b29a62dd0481bfb81e743ab8c4ece722850ff94d05c67dce6aa499c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/apply-supplement-source-hints.mjs",
+        "bytes": 6372,
+        "sha256": "aba206ba49a7ef2a2082c1f75dab9e966769c1dbb623a37d7b4afa086b6b4a8d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/assess-geographic-release-capacity.py",
+        "bytes": 7898,
+        "sha256": "46db71382c7df6923cae3f35eee9e949536485fe5755c6591d029ac7b57e3640",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/attribute-sources.py",
+        "bytes": 1189,
+        "sha256": "24f85736723fcf98770c8f18662b0abaa4ad3e25ac280e3dbc3f374279d12838",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-africa-semantic-followup.py",
+        "bytes": 46779,
+        "sha256": "3d95adf42a2065f1cedfa45c9ea34cf93d7163a77a65d2e87eea072812ba9abc",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-americas-semantic-followup.py",
+        "bytes": 51609,
+        "sha256": "5c77fd4e06cfa60c4ecf04f6efca26b8244e277f024a4eb6ce382947bcc3821e",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-asia-oceania-semantic-followup.py",
+        "bytes": 40427,
+        "sha256": "d9a4e76aaf904056256b09f0bc7a63f5d758eb89d46e97bfd2d4213b5b7b6fe5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-category-palette.mjs",
+        "bytes": 7116,
+        "sha256": "983213ad3dd42fd6110f106a434739aefb94d9c3a14ae47d210ccb343e589b7e",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-europe-semantic-followup.py",
+        "bytes": 36680,
+        "sha256": "870c3532a491bb4b2f1246d596f1f08355c35fad17c31a1f1305cafa269b70ed",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-geographic-gaps.py",
+        "bytes": 13954,
+        "sha256": "94a00cd246aa7b2ec375d459c46c5a046603b67932ac9dc24011c9f1091d51ee",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-geographic-migrations.py",
+        "bytes": 22255,
+        "sha256": "87d0105b73191d5f00c60565f144d1b508a1efc81d6f2808f7f2bcc539111672",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-granularity.py",
+        "bytes": 11943,
+        "sha256": "841e0abb21acc4c97afd1c7708ff73b9c8698e98a64e83f3999fac3d3aebcd76",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-grid-resolutions.mjs",
+        "bytes": 24443,
+        "sha256": "c0f595cb3ae1777d34f06620b8ecdb33e9e429c8933948b024eef1f41a3200c5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-macro-boundaries.py",
+        "bytes": 5585,
+        "sha256": "df9b89cfaaa6629d4fb3bc80017af4140a6d92cdbe9b1581eb8c98b6e3afda88",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-palette-all-times.py",
+        "bytes": 5883,
+        "sha256": "c2efafbcc5458f3495fe7e8c4178772c2c4089dc0789502bf6b9f5d033408456",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-palette-inputs.py",
+        "bytes": 5068,
+        "sha256": "7f6d513243e66dc6223c2ac96f3e18404e52bbde41197aa0375b4984f0c792d2",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-palette-raster.mjs",
+        "bytes": 2136,
+        "sha256": "1f8e8a8dd174caf74104b3cf7290de8aa2b497ec8e1c98ff55e866ed7e731212",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-pixels.mjs",
+        "bytes": 2067,
+        "sha256": "a816c26afb82f7d5000648c32ee3fae5910762dfe2de31966bac53d812d1896e",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-shared-category-modes.mjs",
+        "bytes": 4307,
+        "sha256": "d69b58c1ce005c4ac2a32536530c8d7d95073a3ce3d7a91468ddde04c06efc4f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/audit-source-territory-splits.py",
+        "bytes": 31285,
+        "sha256": "612333e7c4b82043f89994054b0be66328c071819cc7de8044d3730797366a17",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/benchmark-compact-membership-profile.mjs",
+        "bytes": 8870,
+        "sha256": "80aed78d8877a56bf14f94b99bbcb1246add1337e3b08dc2fbf56671c8b36c0b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/benchmark-live-year-switch.mjs",
+        "bytes": 9410,
+        "sha256": "f8d1d695a9b122002d6aaa48d5d3bf99a0a17a0bb93aea1e83bc2012b71c9207",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/benchmark-membership-storage.mjs",
+        "bytes": 24414,
+        "sha256": "13d786079c0bb68ea2165ffac39f291f05f9366be62fc6356ef8e188201437c3",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/benchmark-wheel-zoom.mjs",
+        "bytes": 7906,
+        "sha256": "576072d674d8be7aa79dd64f95a648ce234833d74dbc29a4210521cb74363ea4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/bootstrap-geographic-release.mjs",
+        "bytes": 9576,
+        "sha256": "065a64d6d3fa20dfdc36832414cf89e868d93c5551915b3331709f0385a07cc9",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/bootstrap-hosted.mjs",
+        "bytes": 5263,
+        "sha256": "d2338f1164937ae2408d830f54020766b7582d179b0f371d5d44c95e0c98d282",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/bootstrap-prepared-evidence.mjs",
+        "bytes": 4686,
+        "sha256": "3db152e9305315032b13bdd038c71b9f20c621e58dd51bbb02dc504e2f5938d4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/boundary-version-hash.py",
+        "bytes": 2344,
+        "sha256": "9fc84b52b008ebd2b5c34f23f555c39f5ec1180f0d2d619fbaa671f1e6696dbd",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/build-category-palette.mjs",
+        "bytes": 3914,
+        "sha256": "5c270bf01cbdf569ce0f2714ad21a27f554e7ea28773f91637c297273649ec30",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/build-cloudflare.mjs",
+        "bytes": 1930,
+        "sha256": "020ddc2b8463e2ce4bddf4c4ee9e8e58d5026f4ad35608884330a94363b6abcc",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/build-global-macro-policy.py",
+        "bytes": 11673,
+        "sha256": "d7f488dd112003d483fae89fe7cf70ffdb277f528a743dcae65a2db2f97efc9f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/build-hosted.mjs",
+        "bytes": 2414,
+        "sha256": "6d6a9b38d3a96ca759606ef44e91240aee25db8534a238eeb18c17d1f41371db",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/build-static.mjs",
+        "bytes": 14609,
+        "sha256": "d68c27fb2730425ff10c1c703bac8628205a30d5494703b2a3117fd6b6f3282d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/check-geographic-regression.py",
+        "bytes": 13813,
+        "sha256": "84e58e6ce2b81dca64d4cc4e25e98d899325345447d3bd5ce8306d1474bf8d9e",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/check-handoff-scope.mjs",
+        "bytes": 6972,
+        "sha256": "c4f838076f63ad82c09d4e4a202f70e17e8495fe92938668aa6746f78c4083cb",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/check-hierarchy-install-controls.mjs",
+        "bytes": 2210,
+        "sha256": "4f0368dafa3a2c489d2db5984bbdb2e14af1cdd0a632b3b7a78839b95e781739",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/check-integration-profile.mjs",
+        "bytes": 2796,
+        "sha256": "f42347e8e517b4054cb61d8344547ff4ca7a33c9570c59eecf140e84b2708bdd",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/check-linked-github-issue.mjs",
+        "bytes": 2466,
+        "sha256": "434206e68fbb9fc7f8a436b62b6818169a768e1c066a14282fb0261e40273454",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/check-macro-foundation.mjs",
+        "bytes": 10959,
+        "sha256": "24d368ab9fa2c3ff00a68cd9a873ef2ae8a6ae4e5611b5a5fc781fbb1cf713d8",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/check-oceania-land-restoration.mjs",
+        "bytes": 5094,
+        "sha256": "b04b57357463f33d2de736e776238f3d253b08727d7bde23af85b7e06c3b0258",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/check-pr-evidence.mjs",
+        "bytes": 1514,
+        "sha256": "ae699bc1c626d6514cde4b2a6c076550daf6fb19debe39f1d52cd12209a2db60",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/check-prepared.mjs",
+        "bytes": 3133,
+        "sha256": "66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/check-wheel-measurement.mjs",
+        "bytes": 1465,
+        "sha256": "9ee378072e894f04c365d312cf1e31fffb9fa13ca7d4f5033ec60dad64c3b914",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/classify-deployment-budget.mjs",
+        "bytes": 7961,
+        "sha256": "e8d0f10149792116dbcbabd39afbed41ae80884d2ccd6b62854044a4ec827db4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/clean-local-source.py",
+        "bytes": 1159,
+        "sha256": "bf40ef23ebfc1b786625d7ed0ea4ad81f6f249bdf0ed22dff03010d8701dc953",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/compact-membership-storage.mjs",
+        "bytes": 9350,
+        "sha256": "4ce43a16c639fe2e14176de73542f200dd57fe9b364f4601cdcc5da3d2c0e475",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/compact-ownership.py",
+        "bytes": 2213,
+        "sha256": "6a56f868e9eb23f44c5c9339f4e5b5bfa3b23ab43642a658c9b08380ceb318ba",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/compact-recovery-profile.mjs",
+        "bytes": 8849,
+        "sha256": "fdb179807cf3ced1fe9fcaca4f83a0fd1016118b00785f3ba91f54c1713d3b37",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/compact-reference-attributes.py",
+        "bytes": 1722,
+        "sha256": "7cd10edea45a95de73b87d99b7ad5dad1da60b324828c5fd64a2f212f4ae0587",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/compile-environment-classification-guards.mjs",
+        "bytes": 5107,
+        "sha256": "d98d1cc9bb8096e8856b115c586d34a863c87ca41af8d60f90e2261dce7f44f5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/compile-hosted-migrations.mjs",
+        "bytes": 3623,
+        "sha256": "9dde285ef025b87581e2c83dbc3e43fea8b3ce61ebfdfc68d16dd64154584f4b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/complete-city-cores.py",
+        "bytes": 4341,
+        "sha256": "8b7683fd762a5787dcfece5c8d7c2dd078a2274d958d0104a205d1b96c80ce7c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/complete-coverage.py",
+        "bytes": 7222,
+        "sha256": "40e1a2c2945bb1b03d74e21db0285c6bb81dd95d2e1a6fc8e0a9d253f6dbb5f5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/complete-hierarchy.py",
+        "bytes": 9754,
+        "sha256": "10feb1732fef87da87847a5bbba757c76aac207ba96a76e4403cd66f529c6f2d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/complete-ownership-candidates.py",
+        "bytes": 3277,
+        "sha256": "bd2ec03428a07b3ba1dfab121a6f702ec7e6c73d65245e98c5b757c7d29dee94",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/complete-taiwan-cities.py",
+        "bytes": 4370,
+        "sha256": "9cc449b2b730e301ac88741e1149d15d22c594365ae3644d3b5745e3367ef3c7",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/compose-macro-install-proof.py",
+        "bytes": 4505,
+        "sha256": "8ac556b82dc6e593bcabaf8a71de71d0bd5a8d1ef516aa882c4fe55218b8135a",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/compose-macro-restoration.py",
+        "bytes": 13393,
+        "sha256": "668252221242b5d9822fbf7ab57d757dd9eb1d1254b49dc5d4104f554dad847b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/consolidate-fragments.py",
+        "bytes": 6301,
+        "sha256": "9af8ce77f93c712c21878f48297427230706f03433b57ae31255879eea69ea36",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/credential-envelope.mjs",
+        "bytes": 12177,
+        "sha256": "9b5257009a1ff60d0150c1d9827b70aa36302790416273a42d6c18901c964761",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 49049,
+        "sha256": "fd9676268ab07a53a30a2738259d50e8b5b3bdb5492f5491bfd620b0f21696cb",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/deployment-budget.mjs",
+        "bytes": 12026,
+        "sha256": "c6e6464812cf24b50a8f63c449c4dc914db9004bd17f2f3f9bf688d0844bf65f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/ellipsoidal_area.py",
+        "bytes": 1953,
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/evidence-policy.mjs",
+        "bytes": 2126,
+        "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 14753,
+        "sha256": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/evidence/encode-json.mjs",
+        "bytes": 725,
+        "sha256": "a1d7a70c9c3759f9269ea35c5fb0ed12377de52cf0993e0be3183efe1747f73a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/evidence/geometry.py",
+        "bytes": 5264,
+        "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 7090,
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/evidence/prepare.py",
+        "bytes": 1898,
+        "sha256": "56690c891d3ca3f4961bbe880d9f70ffba939c70311898c690a24cb5313119fc",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/export-hosted-storage-v2.mjs",
+        "bytes": 15822,
+        "sha256": "7d55f1c62bb505aa00c45b4581acda8e5df271458db1ab9fddf81e6a02617772",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/export-hosted-storage-v3.mjs",
+        "bytes": 15673,
+        "sha256": "42d79c38cf21bd388b832875ad485b1b848ba32e5365dd355103fd5a510a5f48",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/export-hosted-storage-v4.mjs",
+        "bytes": 15991,
+        "sha256": "6d7ba3058096d78742f2d3fba3c5f527b81dd58838d39774b53473db5a63f68f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/export-hosted-storage.mjs",
+        "bytes": 14734,
+        "sha256": "02af690647cd286e66430e9820a28e271c6fe9f978a9083e94bc310565a7e5e0",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/external-source-quality.py",
+        "bytes": 1924,
+        "sha256": "35f7e09e58e558213492492c920b707eec437ea52df88af777c4e281f47fd57b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/finalize-geography.py",
+        "bytes": 5626,
+        "sha256": "6e0ed4c701c38c1aa753c28504076962d71f03265cef755f095087a4819ea224",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/framework-sources.py",
+        "bytes": 434,
+        "sha256": "e3c370fb112c5360d88f6866f63cfe5c340b0448fe560eb7fff2f9995f3db35b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/geographic-regions.py",
+        "bytes": 7804,
+        "sha256": "627fb2759f10cbcfb64a29b773b689fcd8787e0edd602e350896d9ceaa738e10",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/import-research-bundle.mjs",
+        "bytes": 11979,
+        "sha256": "308005912c3b6139573fe999986bcb39865bfbbab96d8c7634627de4fa67188c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/import.mjs",
+        "bytes": 531,
+        "sha256": "fc7cb7537980f062e466b3e96cfcabbb489ea0df4ce34410506ce7e499de0da0",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/install-category-palette.mjs",
+        "bytes": 2625,
+        "sha256": "feccd07b1eaeca7c3e8fafac2d2efdcdc22514ee6e49fdccc363cace1aa0092c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/install-macro-reference.mjs",
+        "bytes": 28196,
+        "sha256": "e2cc8b49a8d26bc00585952f5cac191b7061423f26e1e69706b83e2d19d135d2",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/install-reviewed-geography.mjs",
+        "bytes": 30214,
+        "sha256": "43e324e5c95c84e694298d4f19b228e073ec2b7365b1b4289ce030cbef859104",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 2448,
+        "sha256": "934eb9f1d10d57deedf34cf8f739e7f78ee7d91896420aa1f96b532b3e31ce62",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/integration-proof.mjs",
+        "bytes": 3844,
+        "sha256": "ae1eca0bebcb40b39c2ea2540e79774d1f136ae52ac1fce6fdb4cb838349b67a",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/inventory-evidence-rollout.mjs",
+        "bytes": 2720,
+        "sha256": "7dc2374d02639f544a5d7924390622bf6a5bb8d4965775f2b48e61fcb32d08a0",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 10407,
+        "sha256": "3ea8f8b74b540de23e50cc339eabc868e5b727f2197bfdf5e477a55d7b94df74",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/issue-lease.mjs",
+        "bytes": 3304,
+        "sha256": "581a7e76984cf656742e8689478a4b7d43a595c4469d686b25050ad6b3f3e42e",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/local-workspace.mjs",
+        "bytes": 13238,
+        "sha256": "1d95aa9ff4aa12c0f62f3496dbf022499f3cef770200ff476e3e1a777cdf96cb",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/macro_policy_provenance.py",
+        "bytes": 2492,
+        "sha256": "69c8c85a34d8c66275ffbbb894aeb66282354c0d2a6ba6d8136859803d0c78cf",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/majority.py",
+        "bytes": 3114,
+        "sha256": "59046aa90ee824e1a132ba58c831f46bab46e3ac21eba46e77aa80f38802c405",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/map-color-neighbors.mjs",
+        "bytes": 2568,
+        "sha256": "ce91d6e5c6ec5a91f77cc054d23d11d9bc030c0808b25763fef740ca7df17f42",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/measure-neon-storage.mjs",
+        "bytes": 13399,
+        "sha256": "5a9b2f994ba1424a66ff9848ba86941a14ea0a270154f0a13486ebb3ae200b7d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 23549,
+        "sha256": "3847783084b4db9e1a71bb634eced7c82b6181f3a9e64084da748fc724aab888",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/merge-reference-attributes.py",
+        "bytes": 2193,
+        "sha256": "fbc92a78a92c45bf516962a5c65c8c80817820a95dd15f06766c33b2ffb92be5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/neon-forward-migrations.mjs",
+        "bytes": 35003,
+        "sha256": "505b095ca47bcecd4b2466627c4163a613f52717703d9befd1593b78056e8461",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/neon-storage-migration.mjs",
+        "bytes": 31018,
+        "sha256": "4f7bb3c9ef6045823082cc41d391edcee22887f9319f992c1891b3c18d614181",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/normalize-reference-attributes.py",
+        "bytes": 1332,
+        "sha256": "76b75ec3e261e66ae38e29519f239cfb36d0fbe9cc2add7a113e297ea25fc70f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/package-ownership-history.mjs",
+        "bytes": 5904,
+        "sha256": "e1c93bc99d5003d6b9a08e00cebef4faab12dd1351077ed098876450227a0fb1",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/package-reference-bundle.mjs",
+        "bytes": 2555,
+        "sha256": "731167e950bac138f00d3a2090e45e1e5eb860f3cc1832737496aaba4feee96f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/package-research-inputs.mjs",
+        "bytes": 17116,
+        "sha256": "d13313766bcdbeb8de2d3d5f909d6ad3a21e52b320f1ee8ec258afd6e234ef40",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/package-startup-ownership.mjs",
+        "bytes": 3844,
+        "sha256": "ce43f372da285d810f59a89eee8a9bae44ffeba84e676122af8adc33069bfa99",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 15641,
+        "sha256": "16dd92136c3966bece9f78b5acfe21b51f04c4325e5b1e16e84ce27dba7d3e4c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-compact-membership-pins.mjs",
+        "bytes": 1720,
+        "sha256": "dc6274eb5d6e4d4e5a226eb205390db2ce0c9beffcffa26b365c663d1289ecb7",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-coverage-classification.py",
+        "bytes": 11340,
+        "sha256": "7765ae6476dca636690143c0db2b98ecfea3106a7f1a1bc0b5d92261eecbe1e3",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-dated-reference-names.py",
+        "bytes": 11563,
+        "sha256": "c5eeb81fc0fc8973612e3929fdc1a1a0cbbd43ffca40b61feb406f8dd09c4b7e",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-demographic-evidence.py",
+        "bytes": 17660,
+        "sha256": "408a44694ffececfd9996a2d344c9507e7907c61fce9125a296bfbc038687994",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-europe-source-policy-corrections.py",
+        "bytes": 17234,
+        "sha256": "55a41654f3a465fcd7f6979fb926d7258ba58577c657700672d18f16748e5582",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-evidence-bundle.mjs",
+        "bytes": 11808,
+        "sha256": "1cc653304831b72fd484c4099f89f4fdcb2c9e5459aec34c85627cdc6c83d4ed",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-geographic-release.mjs",
+        "bytes": 46477,
+        "sha256": "f9e765e7c6e40c66bf1a7c491135a602d67bc7255954703c39dac00133eca750",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-ghsl-population.py",
+        "bytes": 29830,
+        "sha256": "09ac82f76e490e6695d3cf56b49eb1cb8b0e10f6060905ef426889ef5ef243cb",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-global-macro-geography.py",
+        "bytes": 18188,
+        "sha256": "ef433f02ada35b7ee4e826d5ede6d711de5d5fc5bda2cb45ebbb2baf738a6377",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-hierarchy-correction-install.mjs",
+        "bytes": 1769,
+        "sha256": "e2da4fcc536f6dc0e9a5f993c0253af6aba60f7bf795bc96aefb610dc4b79413",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-hierarchy-correction-release.mjs",
+        "bytes": 6034,
+        "sha256": "23edde7bce2bd14d0561cd8a7ed688c20814008ee2676b26acbaba86d8fa7e10",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-hierarchy-install-evidence.mjs",
+        "bytes": 7809,
+        "sha256": "d1a1d06756762dee25c9f34dbdf1453906fde04a1da52fb77ccee423e746c57c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-history.mjs",
+        "bytes": 3169,
+        "sha256": "42834bbc0ad5f50daa7bf176fecbda389931a5b95acca67c0d87cc07d796c1a6",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-hosted-catalog.mjs",
+        "bytes": 5380,
+        "sha256": "a22f5c7e34304976caa09c1da19ef549e6240739c24fef54c86081cda23a9e36",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-macro-boundary-decisions.py",
+        "bytes": 31678,
+        "sha256": "0ce46061fa9732970010ba3b103de2bad92f5a81bcc52c321b489ad989056bc4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-macro-envelopes.py",
+        "bytes": 10457,
+        "sha256": "75860e8734a0b27d59f66d50b2aa32cb196a48ff02079cecd1b9a2c2176de9b0",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-macro-restoration-proofs.mjs",
+        "bytes": 7001,
+        "sha256": "e708f18ee6744228eb21c37dc003af053cfc02322bd1e695ddbb8b5ae42d856d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-macro-review-projection.mjs",
+        "bytes": 32863,
+        "sha256": "dec5cab8b99bbc9f9fa600cec6ba5808d1a57bf5df74295e9c3cf2b35e4ac9e9",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-namibia-source-annotations.py",
+        "bytes": 11517,
+        "sha256": "252de61a36360b4187838c1f09f97fa81957c30f2d422e96b9cbc833da5611b8",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-oceania-land-restoration.mjs",
+        "bytes": 13716,
+        "sha256": "525b1a3aaff662795b5841d9e75cdcf833709ce75b67da0b1689bb76530b4d45",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-ownership-incremental.py",
+        "bytes": 27611,
+        "sha256": "b33afcb77b20715f8d095a23625d93a472c3a5fb5863f668cab7516b80ee88c5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-ownership-runtime.py",
+        "bytes": 7405,
+        "sha256": "e4a701e6983740c661552d5a483cbf2bfc9e7d7b41a40e5c055e6a7608c166bb",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-ownership.py",
+        "bytes": 10453,
+        "sha256": "46fa8af5dff2ecd45a7c40648a586250a62499f5531c95da6f35e0c0ceeb6be6",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-reference-attributes.py",
+        "bytes": 7337,
+        "sha256": "c8c6d07ef35fba885aee82cdd94cc843391cceb93cf8b33b28ff81276ad0bbf0",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-reference-hierarchy-corrections.py",
+        "bytes": 19491,
+        "sha256": "4ac76d5d409eb12188a922e98f17faff7f9ef4e065b2b115a2fb79716946473c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-reference-incremental.py",
+        "bytes": 19226,
+        "sha256": "6ce34552eb53fa952d17c999149caa7c3079f259a51e6d05b248c6b49a8dc7db",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-reference-macro-binding.mjs",
+        "bytes": 11715,
+        "sha256": "815003fcce780a1216bd7964063d70956af8cfe3dee8be7500c005af83156f33",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-research-bundle.mjs",
+        "bytes": 17234,
+        "sha256": "354a4a2eee87b159fe90a0e02f638ba8b8eb478289818aceb3fe54419d67619b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-settlements.py",
+        "bytes": 2317,
+        "sha256": "a743c6e68009dd20ee56f4940da475908373e02eb64e7eabde18ee816df97bb4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-source-policy-summary.py",
+        "bytes": 3930,
+        "sha256": "ed17280b05fa3cbcdab3c535c6b0c3fb3d1aad9690c40fd5364282e13a78e6f7",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare-topography.py",
+        "bytes": 9103,
+        "sha256": "7ede54bcab629331d125439dcfc661dc5d5229e8a9441a59d4ecbfa1cdd45553",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/prepare.mjs",
+        "bytes": 4376,
+        "sha256": "3a934b9236b2c8dd70b8aafed61c1b5528663366e4fc5df127a5841b501c0bfd",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/preview-wheel-zoom.mjs",
+        "bytes": 1356,
+        "sha256": "7f3275fb19e700d79165879b679ea649fc279ac813f6e80fce4949a1e143e9c4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/provision-postgres-runtime-role.mjs",
+        "bytes": 10337,
+        "sha256": "c6347c49f82286c77ae9edb3cc069d5c133ecefb48312ca361c5f62af55cd329",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/publication-plan.mjs",
+        "bytes": 11778,
+        "sha256": "182e58c26c26ec9a6a487d49b534aa7f6d5cf338c6712c2d31be53cb7e083593",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/queue-pr-merge.mjs",
+        "bytes": 3271,
+        "sha256": "5aaef3641e262332a8d21484e8bc2682c740205af8ad1e0c72878a4cd1a50178",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/queue-readiness-audit.mjs",
+        "bytes": 9771,
+        "sha256": "0a20df35a83d10bbf24bc2c8b5dcd07d5196ae212e517061e218abcfc766a58a",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/read-geographic-release-manifest.mjs",
+        "bytes": 3978,
+        "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/rebase-reference-hierarchy.py",
+        "bytes": 14820,
+        "sha256": "c6d70eed483cdefd623f83f3823759b66279d9592268df39195df08b814dba4c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/rebuild-framework.py",
+        "bytes": 16322,
+        "sha256": "203b95f04ecd52d101c15e8e961050bb87a1bbe8e10ef0cc7f73a6b0950b33f5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/recheck-vegetation.py",
+        "bytes": 14208,
+        "sha256": "de561a964ed228032b0643280eef18ca7f29b811765a3ba5178865572f6c0f55",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/recompute-ownership-areas.py",
+        "bytes": 5299,
+        "sha256": "3f061cd76be4cd52a603de4b67feb7d977d16f40d16d62f13263039a1c8ef8d0",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/reconcile-border-parents.py",
+        "bytes": 4837,
+        "sha256": "924593286235a70766cdea123bb1909a8775aa56e2016f3d2ba3de768ebe830e",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/reconcile-regional-membership.py",
+        "bytes": 7866,
+        "sha256": "b85206e4036b745b1160df996be5d682a77062ec684712b4dabe1c2fb7916677",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/reconcile-topology.py",
+        "bytes": 8419,
+        "sha256": "1739883a9ada57e346f12c009beb4c14091429e810ec7cc77f8b01e8bd3ae763",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/recover-ownership-candidates.py",
+        "bytes": 6536,
+        "sha256": "e2da92847d7956fdd26b26a900ad31a8e88d113458365612a70a3b279caca675",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/recovery-backup-envelope.mjs",
+        "bytes": 7201,
+        "sha256": "5dac56840cb0cc1760648299a6193f49d9bbff240caa264f8ccb12d223ad5e19",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/reference-polities.py",
+        "bytes": 2555,
+        "sha256": "b833689df87ad85a5b5d7b7be057452f171878c395e599a551f89b74eb2477d2",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/refine-global-locations.py",
+        "bytes": 10261,
+        "sha256": "c2cb774a02440bdad43a43555f12954305696112569ed46f177cb5e8ec6e5e73",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/refine-italy-framework.py",
+        "bytes": 4971,
+        "sha256": "cea33626cb4227b48423545584da06abccd5dcc7ae0e76aaedf69cd7916aef42",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/refine-ownership-threshold.py",
+        "bytes": 10034,
+        "sha256": "d92a0f0cf803c3543e28825df438be589980b444c8c2ea69f014da3d465e9a20",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/refine-remote.py",
+        "bytes": 7440,
+        "sha256": "6a6a5258328aa1153d567d9a98b90339421700d491f36fbdca216d3e0cbc2726",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/refresh-angola.py",
+        "bytes": 4136,
+        "sha256": "e8e6821608727150396b9e90407310ce28628eb702821e4e0c052fe37d7863ae",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/repair-geometries.py",
+        "bytes": 1265,
+        "sha256": "dcd76fa5d2745eb5ae914e8eb90bd34fbd3d09df5dd1aa2024df7b235dcdd027",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/repair-supplement-source-hints.py",
+        "bytes": 8273,
+        "sha256": "0722dec7c8faa6abb490eb47660d67c0f44ca47ff8368cf247ad1d9ba4e13812",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/requirements.txt",
+        "bytes": 58,
+        "sha256": "a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/research-import-gate.mjs",
+        "bytes": 335,
+        "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/restore-geographic-repair-stage.py",
+        "bytes": 3206,
+        "sha256": "b2c147e953a2b84a3dc51071243fb2d29f444a8abd81c04ed88d22000760b144",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/restore-postgres-storage-v2.mjs",
+        "bytes": 20543,
+        "sha256": "44dd22f2887fd63f6360e7edab747771a14d805d4b213629c93ea8ca13bb1e32",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/restore-postgres-storage-v3.mjs",
+        "bytes": 20625,
+        "sha256": "51098fe5e9f042dabdabf05cf60e5c25bdeb32b02031dd3e38dfaf490611bd30",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/restore-postgres-storage-v4.mjs",
+        "bytes": 21406,
+        "sha256": "87869e497b357d3dd753700b119aa25c8540704b340b2b9538e8324293f4f1af",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/restore-postgres-storage.mjs",
+        "bytes": 18230,
+        "sha256": "386fbdce043766d50c3025283904188e580f428a25aa3334c529c608a985c0dc",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/restore-reviewed-geography.py",
+        "bytes": 8771,
+        "sha256": "c1f79ef00c58d57da97b0b25e465a7aa0d12cffbc3fa87b6edd5889838f5af1b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/revalidate-prepared-evidence.mjs",
+        "bytes": 8035,
+        "sha256": "8d189cfd2bcd720a5cbe0115006920088c4a21a325940e048a9c6ae72f9a8b77",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/review-framework.py",
+        "bytes": 4317,
+        "sha256": "1aabb78195ed6d7a3d202ef6e9075ad943f76c390a6d0af912a555e308d0bc24",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/review-global-semantic-closure.py",
+        "bytes": 22907,
+        "sha256": "8ec2d6b38733c24c7fbd0c0a4d744d546acdbf5bd82845256ff325d79fd54ca5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/review-granularity-global.py",
+        "bytes": 18789,
+        "sha256": "f227f6dfeb4337df1f3711cb1a68ed48dfe8a1054256c407698954e8f616b1cc",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/review-namibia-source.py",
+        "bytes": 12889,
+        "sha256": "d0d90dd232595788423efbdf0b33f405a6d78000fd7be389b42554f4f77c53eb",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/review-world.py",
+        "bytes": 13920,
+        "sha256": "6c2ad1096f8190d8a39550fc407456e2594d5b3e31b79a5133eb16b893aca0b4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/run-compact-membership-production.mjs",
+        "bytes": 23149,
+        "sha256": "eab805278951a735b347a9fd6e3249fdd87bdefb8916447be8b626795eec8e73",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/run-geographic-check.py",
+        "bytes": 8761,
+        "sha256": "0590d591664fc0593405bcfa37dcdaa234cc6ab9a6389390110356f5dd18b1c9",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 4200,
+        "sha256": "cbcae6e5b9fbea0050a9fc3a82b6bb429b450d7d45a9b5b9dcbf01093e383a2f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/run-issue-claim.mjs",
+        "bytes": 3827,
+        "sha256": "60a3fe737da086a103595961e0bed97d5c014397746d440948234d348c4700a5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/run-worker-merge.mjs",
+        "bytes": 4642,
+        "sha256": "7b9dbd89cf78b016cc6fa75c217f03fa7fc82fb65b5da9dc5ba6c7e0981570d8",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/semantic-locations.py",
+        "bytes": 36266,
+        "sha256": "ac18022fa1c881bdbedc590f150a501ad23d52ba86cb47c5a005643012f1ad1a",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/semantic-sources.py",
+        "bytes": 1183,
+        "sha256": "7bb5f8ad5954502a8d6f7e5cb4bf0daffc05c853d0bce9ecca18514932d99a2a",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/source_policy_corrections.py",
+        "bytes": 1952,
+        "sha256": "8a2c82f075d3d3b65d3233607524aae4539815e9b38f77f490c3c6b312dabffc",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/stage-canonical-grid.mjs",
+        "bytes": 4088,
+        "sha256": "9ddb37b4555a4f0519e0c1e1dc534522d23ead7bf033678a579c493aed848d20",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/stage-land-creations.mjs",
+        "bytes": 5239,
+        "sha256": "0053c5e090dccc5c65d43d14881087a8e52ce51385abf7a23e6c98aa45f654f6",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/stage-namibia-repair.py",
+        "bytes": 29865,
+        "sha256": "fcd211566d5e5c007c6e04ea6b427c30cd74a507a96f4bdcb586ede3cca3e328",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/stage-site-migrations.mjs",
+        "bytes": 6622,
+        "sha256": "5f03c736cdcfdbcd1591ab2d3f244fb45f9fe3218f4fd99e91422d356f68ba45",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/stamp-prepared.mjs",
+        "bytes": 794,
+        "sha256": "88075b363124d42bf9b6aa01994dd3fc6d05617b43c0f997c007990c6adb0bcc",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/storage-checkpoint.mjs",
+        "bytes": 16517,
+        "sha256": "d006c51ca9074af056c0c95e369868104fb27a07c3e96ab461370674c1291f8c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/test-current-postgres-recovery-native.mjs",
+        "bytes": 18512,
+        "sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/upload-research-media.mjs",
+        "bytes": 18669,
+        "sha256": "033ebc17bd0e832f79e7481b4f4697b45c7b7cd2d7c8c6a99a55b415116793c3",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/validate-evidence-partition-review.mjs",
+        "bytes": 6948,
+        "sha256": "5b0cd81c9cfc86299707a8132a076bd5deb754f03bd5038a06f13b8fe167168d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/validate-evidence-partitions.mjs",
+        "bytes": 7355,
+        "sha256": "4c5c6dc61c7e8fb76acb2949697d23d4931b4599b00a399aede75bf75854520b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/validate-evidence-revalidation-chain.mjs",
+        "bytes": 3361,
+        "sha256": "fe1ad3a39339b674b647b9ad30a3e21cf0a2224b0062c400ec64011c3233fca7",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/validate-land-creations.py",
+        "bytes": 6560,
+        "sha256": "664ee9e093d5b6fa8785e8e661772855d69f1b90b57e12188f0bf6ca6eafa4be",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/validate-macro-restoration.py",
+        "bytes": 5641,
+        "sha256": "3aa80f0486baac710c1659a69bef42c1df4d7213b21bb0a7ad8105ffd8611ae0",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/validate-oceania-land-restoration.py",
+        "bytes": 1550,
+        "sha256": "131d1d8757e1923cac8c94b270dc65e2b8dea5ff3f9e762c33801054bcae2426",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/validate-ownership-runtime.py",
+        "bytes": 5101,
+        "sha256": "118b907d2aec2edc4333987da91f4830e31bf377390ed1a89c67e913ee7b74e1",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/validate-prepared.mjs",
+        "bytes": 5391,
+        "sha256": "13cdf9d255f62b37f29eba330b7089b132b6c863fdd6fb4f36bb59458a78911c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/validate-semantic-followup.mjs",
+        "bytes": 34422,
+        "sha256": "6fe84c3287112697f905259d7f16b6cfd51e6dceeea143262a48e3fbbfda3e64",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/validate-structure.mjs",
+        "bytes": 2224,
+        "sha256": "80f266fc7ed55a5f2c8963c9a4c0c6619f15606f10190b380323ba7087282372",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-category-browser.mjs",
+        "bytes": 7951,
+        "sha256": "79f9ae02b2cd24e794e232b0c8b66e1d3a9f3220dabc64cfb85a55e8f0dd2a86",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-compact-membership-runtime.mjs",
+        "bytes": 966,
+        "sha256": "f39ebccdd967140e5148d4ffe1190ed5c854999d5a1fff0be26efd0ea863e0c4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-geography-import-pin.mjs",
+        "bytes": 9680,
+        "sha256": "7ea41cb41df26fa5be73f7d745ed42ba50f8d5c93f9294377c1d7844da0ebc3c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-hierarchy-install-baseline.py",
+        "bytes": 2083,
+        "sha256": "8892bda91cbfc26065fe1ee1fed1676d8fd52893db41f56c04bc997f3cc3571c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-hierarchy-install-generation.mjs",
+        "bytes": 2307,
+        "sha256": "ec67a6d62c14c9bd552193d467f055dba4776d06718a0abb222807c68e0d57d5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-hosted-local.mjs",
+        "bytes": 7201,
+        "sha256": "56a02bacdaf6ed1e3814a56d6689e98feb0e8d1207c84e6c06938a569673802d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-hosted-published.mjs",
+        "bytes": 6049,
+        "sha256": "303f78e224c732a36d8711a6fc25042e5532abcdc203027929586d93e9f1ac03",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-live-capacity.mjs",
+        "bytes": 5933,
+        "sha256": "6f67e815eea8d1007f79c2d19c5b4c48e6e71bd7cf98a5e2a23e61907ce529eb",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-live-membership-api-functions.mjs",
+        "bytes": 4591,
+        "sha256": "affc2d6dcab9aba7783bca74a60b9bd1188b015e4a79b1f5781672998792996c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-live-neon-browser.mjs",
+        "bytes": 5845,
+        "sha256": "fe4d6a2a65b16058bc4a40d75cccb7df2e8451212b0c70b79642b86b83c31845",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-live-palette.mjs",
+        "bytes": 8163,
+        "sha256": "6be6448540310074de1888c241ee9775466d90d6053a232a22846d090bc2d24b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-live-year-switch-faults.mjs",
+        "bytes": 7169,
+        "sha256": "facb6d75c9d771512d59bd4124793ebd83f959fe8c79057fcc0921c5ce8d8a6c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-macro-envelopes.py",
+        "bytes": 5294,
+        "sha256": "db6d5763b66a40534c2b0ae113357453c03d29834a09ed448b47f8896f5de593",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-neon-capacity.mjs",
+        "bytes": 6932,
+        "sha256": "23d0eaac96302cd4bd04d0f4c5a0a6f7b5555ac7bb9fbd6e24adec95c27e5b94",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-neon-project.mjs",
+        "bytes": 7376,
+        "sha256": "2043839debb466c6f16bbb89c9aedccb669d3796e90f5aeea816fd8c087e1b9a",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-neon-site.mjs",
+        "bytes": 3797,
+        "sha256": "b3ae62f633f38d73b80536ae16158870d3d02804b7c6877a39027e88e2a0c7f0",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-neon-sql.mjs",
+        "bytes": 19113,
+        "sha256": "899161d1ddc9c68088aa51884a30cca5ed2440b81a738e2a229adf44a950c4aa",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-postgres-schema.mjs",
+        "bytes": 6163,
+        "sha256": "3fbf8757a0712e794c55aafc06bad826c76cdbee533c8011f8bc1151137ed1a3",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-research-service.mjs",
+        "bytes": 3011,
+        "sha256": "5114a1e8c9108cc04880ee85ea211da9a67719ebdfdb65d6958742104194f7c5",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-retained-object-recovery.mjs",
+        "bytes": 12518,
+        "sha256": "b188f55215ff721e6108260c0d719f806ab37237f4999994a2bea4180812922f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/verify-wheel-app.mjs",
+        "bytes": 4389,
+        "sha256": "a2ee6c209b3c38ff67cc91947d965cc1bead4147901a06a0b17bad09d9654ec3",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/wheel-measurement.mjs",
+        "bytes": 721,
+        "sha256": "764f1c3001e81a1ea2bf8013b85f0e3a01b19cbf49f7474589bc30d6d6bf0508",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "scripts/worker-result.mjs",
+        "bytes": 2228,
+        "sha256": "4e4a416ba0492dd841617cf14b390d0900bcc0ef427076b209827ca6d67f2215",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/attributes.js",
+        "bytes": 7868,
+        "sha256": "3b46c712e461c67338a28cb6d8bf90bddb1b07f7084f5f3bc26d7b04b1954ec8",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/category-palette.js",
+        "bytes": 82979,
+        "sha256": "c449f2087075c9e03a25a26449154ac874c54a3285cf0d3df068c8cf6afd43b2",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/category-presentation.js",
+        "bytes": 497,
+        "sha256": "6314e187b76683e7a281e028cd77bbd5a6a2d585baa1d09c47b3b54649b7da7b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/color-perception.js",
+        "bytes": 2835,
+        "sha256": "744b7177543a53315341cffa3227937e50575a4260cc0957c91f680ba276907a",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/coverage-classification.js",
+        "bytes": 7378,
+        "sha256": "469e64633f322c0610193f284ece49aea0671384a635a708fa27d69d1047b4c4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/coverage-scope.js",
+        "bytes": 1309,
+        "sha256": "3fa2b6eaf17dbfa4ee8cab454517163764749e8606c90857d01305d1eea3a450",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/coverage.js",
+        "bytes": 16734,
+        "sha256": "63d718c896bd2f3d97757244731d75c414449afbded224164c511f88351581e1",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/data-client.js",
+        "bytes": 20071,
+        "sha256": "716d308799c95012ffe066f402100c22fa056f91e858e5214d55bd04fee1f252",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/derived-records.js",
+        "bytes": 1514,
+        "sha256": "cbe63065128772c3e853dddf0882795e364f5ffe243a3a6cd256e814ee7d7935",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/environment-classifications.js",
+        "bytes": 5340,
+        "sha256": "d589aa3aa91831f0d1d2b5a21e161270ba44e86ef90dea23110a761510074970",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/evidence-priority.js",
+        "bytes": 441,
+        "sha256": "9e98e8c403d3a8068d286dbac160dc6126331d91958b7801b55ad9ecefa2244c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/geometry.js",
+        "bytes": 622,
+        "sha256": "acaa6ada5a4f9569d74870efe3799ba39ff861c7e7bfc26a1fedf7ab4723beb1",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/hierarchy.js",
+        "bytes": 606,
+        "sha256": "ed44925555b30f8724b403f453d26575d0777c027b9160f559107a0a8f5126cb",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/hosted-temporal-client.js",
+        "bytes": 9129,
+        "sha256": "95b4df340f72e3d8691c1903ec9c89a6261096e5b69be623ed4e38dfd824204b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/hosted-temporal-geography.js",
+        "bytes": 14295,
+        "sha256": "d98f8a73368753d345cda95a6b866d647e67c8b071d18c5cd78f876ac84694f4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/import-records.js",
+        "bytes": 12266,
+        "sha256": "636821c66c71c415f6659d51fa93dbb7eefcfd21a911eb059dfba1ceb9f5d194",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/json-contract.js",
+        "bytes": 1974,
+        "sha256": "b29783ac8f9937d82f43a30ee6b18b910f60c2da57e2cd0d59b81d86a7d212f2",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/main.js",
+        "bytes": 36020,
+        "sha256": "415cc50275e953a30877bae6394572942fc033bb98dfc7fb9902bd128f3a43f1",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/map-snapshot-format.js",
+        "bytes": 4737,
+        "sha256": "2f29f4ffc874c2ade56ed7b53a581aa97ca6753351f65f0dd62c4512d69c50ab",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/model.js",
+        "bytes": 2822,
+        "sha256": "6cf64270d9c912b09aa93c60a14d058b4482c52e5ffa31d55fdcef026bea3dcc",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/observation-modules.js",
+        "bytes": 2502,
+        "sha256": "4555be0c82b07668d614d05e766f0b213b3e43694c4e4126ecdf48c3dfe394d2",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/observation-registry.js",
+        "bytes": 8380,
+        "sha256": "9718be6c2668e7889d418c45475f179046ebed318bf7fd2a7c776a832e21a80b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/ownership-assets.js",
+        "bytes": 4148,
+        "sha256": "b14470b088208ac66d6ed564b063100c1e58d4d191d441b5e7c5d031eed5864c",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/ownership-codec.js",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/pixel-canvas-layer.js",
+        "bytes": 10640,
+        "sha256": "d48d145ed727c25060a9e6ce2782c59328c9e7cae562888f59efed828a7d647f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/pixel-gpu-worker.js",
+        "bytes": 395,
+        "sha256": "2779ed2b94635270fdd025cfba1e2b53fb2412ead99008d00f22b8710543b9f6",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/pixel-gpu.js",
+        "bytes": 8734,
+        "sha256": "3c1bac4ee42f3962cf6dc1b69b6ce0f0f1b4315618fb52447865a348d9a118f2",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/pixel-grid.js",
+        "bytes": 3617,
+        "sha256": "320cc48796d5d3aaf07bb096441346abbe44ed4fab66df08ee003620ce5870a9",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/pixel-layer.js",
+        "bytes": 7864,
+        "sha256": "ebc4b9bcae59ed0393b9329949836e61d8eb627b511f93630a89e579cdfa7d2b",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/pixel-metadata.js",
+        "bytes": 1865,
+        "sha256": "7fb6041b5ef9dd8f862d19f34d8a75adae726bc23d4790cb7ae580560589547f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/pixel-ownership.js",
+        "bytes": 6134,
+        "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/pixel-worker.js",
+        "bytes": 1047,
+        "sha256": "473717f97835b0fbd2d73320785319f019076c197f22aad71cac002c8c27d158",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/prepared-evidence.js",
+        "bytes": 7572,
+        "sha256": "12ad4e797603270958b9997a743a0a4531d65caf73f39e8a8055a33d38774e21",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/reference-bundle.js",
+        "bytes": 3052,
+        "sha256": "b3148ddf76b9dbd1ee930cfa07aca85dcf1c378d7e5cdec67d4461597709e56d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/reference-context.js",
+        "bytes": 1885,
+        "sha256": "977ea774cdaf55894ad31adf4b7b2f5edaff717b60634f5d933b855476dbde7d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/reference-records.js",
+        "bytes": 906,
+        "sha256": "1e2348d1447d33c8f65bafc1e37147d8e8346d4c765793ccd30ea13e8929e478",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/regional-import-gate.js",
+        "bytes": 7292,
+        "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/runtime-ownership.js",
+        "bytes": 1198,
+        "sha256": "190f60c6d7402570901424a80b08bb2527f4785a590c7e4e2fd5fd51a82a7979",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/source-policy-corrections.js",
+        "bytes": 5550,
+        "sha256": "002c182666cc6a76e093cd946e67a3983a3d7dc07d50e654933299439e7d23c0",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/style.css",
+        "bytes": 16086,
+        "sha256": "521732f6c73f093310ba72dada0398d8993efbe0f8ac03e6dd9ef5944ba98687",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/temporal.js",
+        "bytes": 2780,
+        "sha256": "5e62a4a91a1715d5204b46ce8db5ea6347e763fd31c79986465f976265a89481",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/typed-client.js",
+        "bytes": 6863,
+        "sha256": "1d3feaca8daa01a7ae4c1024aeb600955ef4d0466aee39042615922f472c517e",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/typed-derivations.js",
+        "bytes": 2134,
+        "sha256": "4d90e7f568573fcb290234325d0a48e82b3f7ab74c95b29448760dcf92591508",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/typed-observations.js",
+        "bytes": 11955,
+        "sha256": "6a01bbb7d06884cf1e2610b3d38be000be907d3b4d826b5f6977461a26e50153",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/typed-snapshot.js",
+        "bytes": 7556,
+        "sha256": "e19062ac4e747636fb983707dbc0c6bfdb9b408bb6dbc064e20abbf9e2bb35ca",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "src/wheel-zoom.js",
+        "bytes": 3116,
+        "sha256": "65d8fb02a6beb04a9e917d962f240bca48daa2872a8417260dd5d1c04a247f19",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "test/geography-bootstrap.test.mjs",
+        "bytes": 3793,
+        "sha256": "822b0600da49688fbee895a8f302ae5140fe0dd0ba8b31d08c8d6dca76fa02ba",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "test/merge-integration.test.mjs",
+        "bytes": 34026,
+        "sha256": "d70c6800f4e97145d02fab99bbd99dd6cbb5e653ffd869364de789593e209fba",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "test/trusted-geography-check.py",
+        "bytes": 16785,
+        "sha256": "3dc9ece7dd43edc7eb16e2cfa7ef5a3750d6da8c0cf303fbcbb5cf6a2a332b75",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      },
+      {
+        "path": "test/trusted-geography-check.test.mjs",
+        "bytes": 520,
+        "sha256": "815de42eed792be8e79226e85d6c821e8bee4638855b61a951255d5bb3186dc4",
+        "hash_kind": "file-bytes",
+        "role": "trusted-baseline-code"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "id": "retained-ne-native-lakes",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_lakes.geojson",
+      "role": "physical-surface-water",
+      "vintage": "Coarse modern Natural Earth 1:10m lakes; pinned upstream ca96624a56bd078437bca8184e78163e5039ad19",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth public domain"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "Original bytes were already retained in baseline. Valid native Lake Superior supports synthetic controls only; not fine river, narrow border, historical shoreline or actual source adjudication approval. Invalid native lake features are rejected, never repaired for support.",
+      "files": [
+        {
+          "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz",
+          "bytes": 1565161,
+          "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 5043554,
+          "uncompressed_sha256": "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 7244,
+      "sha256": "e970aaf6eb797b298892707a938a237e40977c63962e8fa840588dcf2cf411b8",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 8906,
+      "sha256": "1c8ba8c5497367b11708adfb96187acef5d27233e56f11e7b5f5d98e2faaed90",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/authority-controls.json",
+      "bytes": 3181,
+      "sha256": "7121d69ea681b97073cf23686b09ab36cf33ee00060efc3c7ac1949df18291fe",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/authority-negative-control.json",
+      "bytes": 2613,
+      "sha256": "ea321cd6bcda4181a443d49ac8590120dd420c3c4a77f1be47fa647140c10e1f",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/authority-positive-control.json",
+      "bytes": 1934,
+      "sha256": "e1e71fdd3ceaa947f08d6b304efc31e00736e5ec37670d64d5454081a8242a83",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/cli-controls/negative-control.json",
+      "bytes": 2109,
+      "sha256": "af5c3f2130fded0f4eef4e461e7bede17fcff0c0ca3c2c70d5f30c2112bf75f9",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/cli-controls/positive-control.json",
+      "bytes": 1519,
+      "sha256": "69ad5c7bdc31a4df15be7dd537abf8c2f73f32b780428a25356040b1fc6c8c58",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/cli-controls/results.json",
+      "bytes": 2222,
+      "sha256": "6f0aea93b54853144abcb06f905618d8951699aec3dce9f6b80237dd97f94fc0",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/controls/negative-control.json",
+      "bytes": 2966,
+      "sha256": "9f30657cbdbb694cc803920644f5bcbb52e3f78becd4bcd44f8a118735c1f5c3",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/controls/positive-control.json",
+      "bytes": 2002,
+      "sha256": "d4dd65ead0f411a9bd28b36969e8803ccdba92523f964d723ff64f8fe6c805a2",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/controls/results.json",
+      "bytes": 2522,
+      "sha256": "6c301865661348b751e6fb917b3d614aa03deb1bd9cea710883d1833de9ca123",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/reproducibility.json",
+      "bytes": 386,
+      "sha256": "29a8c4ba3746e4f1232def3db6b4cd58c52d2d89a710ad32c06080bec9f78c30",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_GAP_ADJUDICATION.md",
+      "bytes": 5699,
+      "sha256": "3f6fb625185ae9907d94f7c29f5257cd7a7205a3f7b28ff51eae8534a5a84f3d",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "scripts/check-geographic-adjudications.mjs",
+      "bytes": 1374,
+      "sha256": "c1047ff3b45572ef4a668ab41360201b98e4eedff6f6553940b0c75a89f7da86",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "scripts/geographic-adjudication-api.mjs",
+      "bytes": 12270,
+      "sha256": "49866b00bd4646f3978be31fc70233002cc973d767562191c276302f5e7f27ca",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "scripts/geographic-report-artifact.mjs",
+      "bytes": 7011,
+      "sha256": "949732c85dbf8ffb06b19c2a76abaacfca26e4120da3940bf16f7b76ef531cfb",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "scripts/geographic_adjudication.py",
+      "bytes": 11758,
+      "sha256": "f5347aa32b4d0caf137b8d2f7308bf9946fbd857776c8516812255223d1f5ada",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 25436,
+      "sha256": "85b881e02a7d9dca3538982423a14ca04e093241f5de7728c95f9c1c70d93c2b",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "bytes": 11788,
+      "sha256": "ed9ac2ba3ee15f966a6d1aa1a8f9af8d965ef66b6d6156d5a897aa9af684e7d6",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 5028,
+      "sha256": "3de24f87fdd7af8aa0b6638619833d9837ac07861b54b9d1d46ce2baa3b57e88",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "bytes": 15809,
+      "sha256": "faeded9906f336684f50efb44cdfdfaed11f6f211b9ea22ee9914a8d7c9bb833",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "test/geographic-adjudication-pipeline.py",
+      "bytes": 5750,
+      "sha256": "e2e8f7dccc034a9cab3bf6a63e05e9a6b76ed91fbcd541d33869732938ad5d46",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "test/geographic-adjudication.py",
+      "bytes": 14660,
+      "sha256": "3fa9ee9cdc71d3c16d42944b1ddd7c61471415fa4cbb779d02d6342eb9347ccd",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "test/geographic-adjudication.test.mjs",
+      "bytes": 518,
+      "sha256": "595b7a052fe29023679a0f8cc43d8b4cbc58fffc3ab589616218f8df1a3a848b",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "test/geographic-report-artifact.test.mjs",
+      "bytes": 6230,
+      "sha256": "7d3c27335996fd390a8d1876661f7808fb6d4f36eec182e255796c749e685a6f",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "test/geography-bootstrap.test.mjs",
+      "bytes": 3813,
+      "sha256": "22e199bf859162191cca3167e047eb6b5deea8e7c09bb8bbb6d999683fde6633",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 36874,
+      "sha256": "a90e40bee0d21d155000b9598a750c75bb6684ac40db6345ce720cd502bd017a",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "test/trusted-geography-check.py",
+      "bytes": 18903,
+      "sha256": "e4f3471312831e4bb0dc9d1386a56d4254bd7ee1fa21527b4ecacf9b87d59238",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    },
+    {
+      "path": "test/trusted-geography-check.test.mjs",
+      "bytes": 520,
+      "sha256": "fe224301b737a43a115d5681adf4371dceb2a8117d8510733c47a8453bcc7f82",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-control-output"
+    }
+  ],
+  "methods": [
+    {
+      "id": "scoped-water-adjudication",
+      "kind": "geography",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic",
+      "description": "Exact actual detector-loss feature/context bindings and unmodified native physical-water polygon union full-shape covers predicate, without buffers, MakeValid, centroid waivers or ownership inference. Retained real lake controls exercise synthetic proposals only; native water does not automatically resolve target vintage/resolution suitability. Diagnostics are coordinates, not claimed area measurements.",
+      "software": "Python3.12; Shapely2.1.2/GEOS3.13.1; unchanged shared helpers",
+      "units": "test counts; original longitude-latitude diagnostic geometry"
+    },
+    {
+      "id": "geographic-authority-and-report-transport",
+      "kind": "code",
+      "description": "Actual common evidence/claim/review validators on controlled read-only GitHub responses, real Git/CLI/native source bridge, ZIP record/stream size/digest checks, and actual final-merge authority revalidation with withdrawal/replacement controls.",
+      "software": "Node24,Python3.12,Git; no archive extraction",
+      "units": "tests"
+    },
+    {
+      "id": "trusted-geography-check",
+      "kind": "code",
+      "description": "Actual immutable Git/CLI controls of complete scripts/src and package/policy verification, bounded original input reads, source-only applicability, source namespace tampering, partial shallow fetch and concurrent-neighbor detection. These controlled repositories do not certify hosted execution or factual source suitability.",
+      "software": "Python3.12,Git; isolated bytecode-free trusted process",
+      "units": "tests"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "native_water_controls",
+      "value": 14,
+      "unit": "tests",
+      "vintage": "baseline",
+      "evaluation_commit": "b5e9d4931e84115ee63d3cf723321987cb5aeee5",
+      "input_sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "scope": "Candidate implementation controls using original unchanged baseline shared helpers. Synthetic proposals/authority transport; not baseline map-gap counts or geographic approval."
+    },
+    {
+      "id": "authority_transport_controls",
+      "value": 29,
+      "unit": "tests",
+      "vintage": "baseline",
+      "evaluation_commit": "b5e9d4931e84115ee63d3cf723321987cb5aeee5",
+      "input_sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "scope": "Candidate implementation controls using original unchanged baseline shared helpers. Synthetic proposals/authority transport; not baseline map-gap counts or geographic approval."
+    },
+    {
+      "id": "trusted_cli_controls",
+      "value": 17,
+      "unit": "tests",
+      "vintage": "baseline",
+      "evaluation_commit": "b5e9d4931e84115ee63d3cf723321987cb5aeee5",
+      "input_sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "scope": "Candidate implementation controls using original unchanged baseline shared helpers. Synthetic proposals/authority transport; not baseline map-gap counts or geographic approval."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "native_water_controls",
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/controls/results.json",
+      "json_pointer": "/tests"
+    },
+    {
+      "metric_id": "authority_transport_controls",
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/authority-controls.json",
+      "json_pointer": "/tests"
+    },
+    {
+      "metric_id": "trusted_cli_controls",
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/cli-controls/results.json",
+      "json_pointer": "/tests"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "native_water_controls",
+      "value": 14,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "authority_transport_controls",
+      "value": 29,
+      "unit": "tests"
+    },
+    {
+      "metric_id": "trusted_cli_controls",
+      "value": 17,
+      "unit": "tests"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Scoped preventive code and controlled evidence. Hosted execution/readback still requires actual PR/queue results; no real gap repairs, global hydrology approval, provider changes or publication. Global component/water/grid follow-on remains #946.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-ne-native-lakes"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "python -I -B test/geographic-adjudication.py --receipts NEW_DIRECTORY",
+    "PYTHON=DEPENDENCY_PYTHON node --test test/geographic-adjudication-api.test.mjs test/geographic-report-artifact.test.mjs",
+    "python -I -B scripts/run-geographic-check.py --baseline IMMUTABLE_BASE --candidate IMMUTABLE_CANDIDATE --fetch --out NEW_REPORT.json"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "3887405cef4e461e726c9963ba7c8850bb59b0d3adf483ba1a0c3aaa83c9d030"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "6e386caa917810901fe52f5e391748bb2525dad7959207ddac9ff874a7d8e6ba"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/authority-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/authority-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/authority-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/cli-controls/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/cli-controls/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/cli-controls/results.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/controls/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/controls/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/controls/results.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-adjudication-920-20261005-local05/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_GAP_ADJUDICATION.md",
+      "status": "added"
+    },
+    {
+      "path": "scripts/check-geographic-adjudications.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/geographic-adjudication-api.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/geographic-report-artifact.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/geographic_adjudication.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "original_sha256": "3847783084b4db9e1a71bb634eced7c82b6181f3a9e64084da748fc724aab888"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "status": "modified",
+      "original_sha256": "0590d591664fc0593405bcfa37dcdaa234cc6ab9a6389390110356f5dd18b1c9"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "7b9dbd89cf78b016cc6fa75c217f03fa7fc82fb65b5da9dc5ba6c7e0981570d8"
+    },
+    {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-adjudication-pipeline.py",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-adjudication.py",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-adjudication.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-report-artifact.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/geography-bootstrap.test.mjs",
+      "status": "modified",
+      "original_sha256": "822b0600da49688fbee895a8f302ae5140fe0dd0ba8b31d08c8d6dca76fa02ba"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "d70c6800f4e97145d02fab99bbd99dd6cbb5e653ffd869364de789593e209fba"
+    },
+    {
+      "path": "test/trusted-geography-check.py",
+      "status": "modified",
+      "original_sha256": "3dc9ece7dd43edc7eb16e2cfa7ef5a3750d6da8c0cf303fbcbb5cf6a2a332b75"
+    },
+    {
+      "path": "test/trusted-geography-check.test.mjs",
+      "status": "modified",
+      "original_sha256": "815de42eed792be8e79226e85d6c821e8bee4638855b61a951255d5bb3186dc4"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "scoped-water-adjudication",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/geographic-adjudication-920-20261005-local05/controls/positive-control.json"
+    },
+    {
+      "method_id": "scoped-water-adjudication",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/geographic-adjudication-920-20261005-local05/controls/negative-control.json"
+    },
+    {
+      "method_id": "scoped-water-adjudication",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/geographic-adjudication-920-20261005-local05/reproducibility.json"
+    },
+    {
+      "method_id": "geographic-authority-and-report-transport",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/geographic-adjudication-920-20261005-local05/authority-positive-control.json"
+    },
+    {
+      "method_id": "geographic-authority-and-report-transport",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/geographic-adjudication-920-20261005-local05/authority-negative-control.json"
+    },
+    {
+      "method_id": "trusted-geography-check",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/geographic-adjudication-920-20261005-local05/cli-controls/positive-control.json"
+    },
+    {
+      "method_id": "trusted-geography-check",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/geographic-adjudication-920-20261005-local05/cli-controls/negative-control.json"
+    }
+  ]
+}
