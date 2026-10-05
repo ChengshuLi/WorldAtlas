@@ -1,0 +1,11 @@
+{
+  "check_count": 3,
+  "checks": [
+    "actual CLI wrong registry pin rejected before output",
+    "actual CLI existing output refused and original preserved",
+    "wrong original native source pin rejected before measurement"
+  ],
+  "kind": "negative-control",
+  "method_id": "immutable-native-source-reproduction",
+  "outcome": "passed"
+}

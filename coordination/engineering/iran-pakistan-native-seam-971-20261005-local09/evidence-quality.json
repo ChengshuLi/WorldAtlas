@@ -1,0 +1,908 @@
+{
+  "baseline": {
+    "commit": "bfa1c56ef72c1bc3a9d1fcf8263d073a966bf46f",
+    "files": [
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 271171,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/manifest.json",
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+      },
+      {
+        "bytes": 206,
+        "hash_kind": "file-bytes",
+        "path": "data/geographic-releases/current-manifest.json",
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81"
+      },
+      {
+        "bytes": 169082,
+        "hash_kind": "file-bytes",
+        "path": "data/geographic-releases/releases-v6-gzip.json.gz",
+        "sha256": "96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16"
+      },
+      {
+        "bytes": 5131824,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-11.json",
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+      },
+      {
+        "bytes": 4945828,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-17.json",
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+      },
+      {
+        "bytes": 3642057,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-000.json.gz",
+        "sha256": "115179a2e6ddda1a74e41d088c97643a56479deaaa0cb880b93a07fcd731e76f"
+      },
+      {
+        "bytes": 26701,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/report.json",
+        "sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478"
+      },
+      {
+        "bytes": 16811,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json",
+        "sha256": "a30d6007324b63699a587100ccd4484dcabea54ddd75c8a92fd831c629410794"
+      },
+      {
+        "bytes": 38613,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json",
+        "sha256": "ba7a4b190683f8436109b6159359727a2300053ac42a96dcdd53ebef7f092b20"
+      },
+      {
+        "bytes": 42234,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/coordinated-followups.json",
+        "sha256": "f4a4a0d61aa0c3adca06cd372eb3e6284959cf7a3d809d73ab4c0cb8b33686ca"
+      },
+      {
+        "bytes": 25462,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-115.json",
+        "sha256": "4a6d0d7fa00b5d9d18c6569f715702d8bb6b70036ef7a9d2c05dc33b08d78913"
+      },
+      {
+        "bytes": 29218,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-121.json",
+        "sha256": "e839964d70375d9b4612dfab6ac9d787664e7ac069799483f2d4461573e214e9"
+      },
+      {
+        "bytes": 7090,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/immutable.py",
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+      },
+      {
+        "bytes": 5264,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/geometry.py",
+        "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305"
+      },
+      {
+        "bytes": 1953,
+        "hash_kind": "file-bytes",
+        "path": "scripts/ellipsoidal_area.py",
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+      },
+      {
+        "bytes": 4376,
+        "hash_kind": "file-bytes",
+        "path": "scripts/prepare.mjs",
+        "sha256": "3a934b9236b2c8dd70b8aafed61c1b5528663366e4fc5df127a5841b501c0bfd"
+      },
+      {
+        "bytes": 8419,
+        "hash_kind": "file-bytes",
+        "path": "scripts/reconcile-topology.py",
+        "sha256": "1739883a9ada57e346f12c009beb4c14091429e810ec7cc77f8b01e8bd3ae763"
+      },
+      {
+        "bytes": 146,
+        "hash_kind": "file-bytes",
+        "path": "requirements.txt",
+        "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9"
+      }
+    ],
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json"
+    },
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "subject_files": {
+      "gb:IRN:ADM2:26516999B17111396986996": "data/geography/part-11.json",
+      "gb:PAK:ADM2:60131773B78019453337506": "data/geography/part-17.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/generator-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/generator-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/generator-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-CITATION-AND-USE-geoBoundaries.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-geoBoundaries-IRN-ADM2-metaData.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-original-lfs-pointer.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-CITATION-AND-USE-geoBoundaries.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-geoBoundaries-PAK-ADM2-metaData.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-original-lfs-pointer.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-current-anchor-admin-post-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-current-anchor-admin-post-response.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/scout-retrievals.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/scout-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v1/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/shared-helper-control.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproduce.py --repo . --commit a10c45aceb27be8d35ec06419c25c5d7cbfa2632 --registry '{\"path\":\"coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/inputs.json\",\"bytes\":10424,\"sha256\":\"bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247\",\"hash_kind\":\"file-bytes\"}' --registry-sha256 bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247 --out .cache/your-unused-native-border-report.json",
+    "python coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/controls.py",
+    "python test/evidence-geography.py"
+  ],
+  "conclusions": [],
+  "issue": 971,
+  "lane": "engineering",
+  "limits": [
+    "Retained component is a diagnostic coverage candidate, not confirmed dry land.",
+    "Native geoBoundaries source years differ: IRN 2017, PAK 2019; snapshot build dates are not coordinate observation dates.",
+    "Current OSM snapshot has separately versioned ways/nodes; no common-date source equivalence or geographic authority approval.",
+    "Exact source-member crosswalk and source coverage comparisons do not assign territory or approve a repair.",
+    "Dated water pilot encoding, registration, sampling and observation limits remain unchanged; physical classification unknown.",
+    "Current native-coordinate polygon differences include preparation/vintage differences; no attribution to a specific preparation stage without replay.",
+    "No changes to core geography, identities, history, release, certificates, provider, live database or deployment.",
+    "Exact floating overlay partition union differs topologically from the original component; both complete difference geometries are retained, including lower-dimensional/numerical remnants. No area cutoff is applied.",
+    "The current OSM candidate and older IRN source leave small positive uncovered and overlap residuals; no snapping, fill, repair approval or joint source-vintage approval is implied."
+  ],
+  "methods": [
+    {
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "description": "Exact original native/current full-component intersections and complete source bbox scan; identity-based OSM way assembly; retained low-dimensional and positive-area overlay residuals; no snapping, MakeValid or assignment.",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "id": "native-border-comparison",
+      "kind": "geography",
+      "software": "Python3.12;Shapely2.1.2;pyproj3.7.2;NumPy2.3.5;unchanged pinned shared helpers",
+      "units": "m2 and native-coordinate topology flags; no territorial or physical classification"
+    },
+    {
+      "description": "Immutable whole-file pins, deterministic original-source/native-member comparison and exact two-run output bytes; exclusive new-output writes.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "immutable-native-source-reproduction",
+      "kind": "generator",
+      "software": "Python3.12;Shapely2.1.2;pyproj3.7.2;Git;shared evidence.immutable",
+      "units": "source/member counts and deterministic whole-file hashes"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/component/area_m2",
+      "metric_id": "component-area",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/native_source_partition/IRN_native_only/area_m2",
+      "metric_id": "area-IRN_native_only",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/native_source_partition/PAK_native_only/area_m2",
+      "metric_id": "area-PAK_native_only",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/native_source_partition/both_native_overlap/area_m2",
+      "metric_id": "area-both_native_overlap",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/native_source_partition/neither_native/area_m2",
+      "metric_id": "area-neither_native",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/osm_candidate/component_intersection/area_m2",
+      "metric_id": "osm-component_intersection",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/osm_candidate/component_not_covered/area_m2",
+      "metric_id": "osm-component_not_covered",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/osm_candidate/joint_with_IRN_native_uncovered/area_m2",
+      "metric_id": "osm-joint_with_IRN_native_uncovered",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/osm_candidate/joint_with_IRN_native_overlap/area_m2",
+      "metric_id": "osm-joint_with_IRN_native_overlap",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/countries/IRN/feature_count",
+      "metric_id": "IRN-source-feature-count",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/countries/PAK/feature_count",
+      "metric_id": "PAK-source-feature-count",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/osm_candidate/assembly/boundary_way_count",
+      "metric_id": "osm-boundary-way-count",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/osm_candidate/assembly/boundary_node_count",
+      "metric_id": "osm-boundary-node-count",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/osm_candidate/assembly/outer_ring_count",
+      "metric_id": "osm-outer-ring-count",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/osm_candidate/assembly/inner_ring_count",
+      "metric_id": "osm-inner-ring-count",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/partition_area_sum_m2",
+      "metric_id": "partition-area-sum",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/partition_coverage_residual/area_m2",
+      "metric_id": "partition-coverage-residual-area",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    },
+    {
+      "json_pointer": "/partition_excess_residual/area_m2",
+      "metric_id": "partition-excess-residual-area",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "component-area",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Exact retained full diagnostic component at pinned input bootstrap and baseline; source coverage geometry, physical/administrative classification unknown.",
+      "unit": "m2",
+      "value": 17527564.637313824,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "area-IRN_native_only",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Exact retained full diagnostic component at pinned input bootstrap and baseline; source coverage geometry, physical/administrative classification unknown.",
+      "unit": "m2",
+      "value": 264623.9626840139,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "area-PAK_native_only",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Exact retained full diagnostic component at pinned input bootstrap and baseline; source coverage geometry, physical/administrative classification unknown.",
+      "unit": "m2",
+      "value": 5157.2948746120455,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "area-both_native_overlap",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Exact retained full diagnostic component at pinned input bootstrap and baseline; source coverage geometry, physical/administrative classification unknown.",
+      "unit": "m2",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "area-neither_native",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Exact retained full diagnostic component at pinned input bootstrap and baseline; source coverage geometry, physical/administrative classification unknown.",
+      "unit": "m2",
+      "value": 17257783.37975681,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "osm-component_intersection",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Exact retained full diagnostic component at pinned input bootstrap and baseline; source coverage geometry, physical/administrative classification unknown.",
+      "unit": "m2",
+      "value": 17262940.673515957,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "osm-component_not_covered",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Exact retained full diagnostic component at pinned input bootstrap and baseline; source coverage geometry, physical/administrative classification unknown.",
+      "unit": "m2",
+      "value": 264623.9637953796,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "osm-joint_with_IRN_native_uncovered",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Exact retained full diagnostic component at pinned input bootstrap and baseline; source coverage geometry, physical/administrative classification unknown.",
+      "unit": "m2",
+      "value": 0.05562634068946311,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "osm-joint_with_IRN_native_overlap",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Exact retained full diagnostic component at pinned input bootstrap and baseline; source coverage geometry, physical/administrative classification unknown.",
+      "unit": "m2",
+      "value": 0.054514746645851465,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "IRN-source-feature-count",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Pinned diagnostic, not source authority/geographic approval.",
+      "unit": "count",
+      "value": 432,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "PAK-source-feature-count",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Pinned diagnostic, not source authority/geographic approval.",
+      "unit": "count",
+      "value": 126,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "osm-boundary-way-count",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Pinned diagnostic, not source authority/geographic approval.",
+      "unit": "count",
+      "value": 18,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "osm-boundary-node-count",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Pinned diagnostic, not source authority/geographic approval.",
+      "unit": "count",
+      "value": 1881,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "osm-outer-ring-count",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Pinned diagnostic, not source authority/geographic approval.",
+      "unit": "count",
+      "value": 1,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "osm-inner-ring-count",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Pinned diagnostic, not source authority/geographic approval.",
+      "unit": "count",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "partition-area-sum",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Pinned diagnostic, not source authority/geographic approval.",
+      "unit": "m2",
+      "value": 17527564.637315433,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "partition-coverage-residual-area",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Pinned diagnostic, not source authority/geographic approval.",
+      "unit": "m2",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a10c45aceb27be8d35ec06419c25c5d7cbfa2632",
+      "id": "partition-excess-residual-area",
+      "input_sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247",
+      "scope": "Pinned diagnostic, not source authority/geographic approval.",
+      "unit": "m2",
+      "value": 0,
+      "vintage": "archived"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 5482,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/README.md",
+      "role": "generated-table",
+      "sha256": "016f9f0f47a7fded18a94ebf1030d97c5e8e9812d3484ba72eb3b6b07544a835"
+    },
+    {
+      "bytes": 4390,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/controls.py",
+      "role": "implementation-or-audit-output",
+      "sha256": "0a8a8f18c097f0674a10d0313400acb068fe90d6d85bcba4d5ba0347f52c4f85"
+    },
+    {
+      "bytes": 342,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/generator-negative-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "589bf88216b6714155fccc77353cac06d5169c8162c10cce06a42987890b2a9d"
+    },
+    {
+      "bytes": 807,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/generator-positive-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "caa77cc3d10b6412990cfed390de03eee270263bf256f657b645872ccc96eb54"
+    },
+    {
+      "bytes": 372,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/generator-reproducibility.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "00f9dd40745159ae3895ddcee4069bd0b00bb19232c4a92ee935c7f2a548319c"
+    },
+    {
+      "bytes": 10424,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/inputs.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "bae7688eea26ef7e96f129526ad1ee5b3a401d25bcf8dbb8a01a606fb2056247"
+    },
+    {
+      "bytes": 330,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/negative-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "a8e8ec705ec9b064d14c51edb2e48d2c7c6d01b65c6ca66274e1ead903354698"
+    },
+    {
+      "bytes": 2393,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/receipts.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "333321d22555c48287901c561db9f761ec0b5b81226379b21aea62f2d4ebf21f"
+    },
+    {
+      "bytes": 1406,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/scout-retrievals.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "f5ccb5b02825991bd225786b6ccf6f6e7c01a788968c71ac4f314cb3b7bf38ba"
+    },
+    {
+      "bytes": 303,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/scout-scope.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "72f5c01576f4c499e40cd43af0f4e1f1faa1c867bd32708fa1ab3bce60cdb05a"
+    },
+    {
+      "bytes": 731,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/positive-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "49c16ebdf00e5d80a5fb7e21f28e82d2d1608549f2e2576722788ee58ec9edb8"
+    },
+    {
+      "bytes": 13067,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproduce.py",
+      "role": "implementation-or-audit-output",
+      "sha256": "74e0030da2ec1f3bb45f66772c736f018d6e035754f00ab14a09ec0be979f5c2"
+    },
+    {
+      "bytes": 360,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproducibility.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "acb4beba6634af722269b8580dd8da082e8f34ec03e1ffae8e7cdacb4355c2aa"
+    },
+    {
+      "bytes": 204047,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v1/report.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "0df13a511097f31bab1a09e9f6d4ba4311219d4fc8c72cde933e61169338c3db"
+    },
+    {
+      "bytes": 236816,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/results-v2/report.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "86789ccf64134d5e38c9ec2fcca89627c544b63017dd12397af3a3e5b8a1f0fb"
+    },
+    {
+      "bytes": 299,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/shared-helper-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "28ca1599ed4e68785edaad25bb16a68825e49620c3781c7d851ef08a257a13d5"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/README.md",
+      "rows": [
+        {
+          "decimals": 6,
+          "line": 15,
+          "metric_id": "component-area",
+          "template": "| Full retained component | {value} |"
+        },
+        {
+          "decimals": 6,
+          "line": 16,
+          "metric_id": "area-IRN_native_only",
+          "template": "| Covered only by original IRN member | {value} |"
+        },
+        {
+          "decimals": 6,
+          "line": 17,
+          "metric_id": "area-PAK_native_only",
+          "template": "| Covered only by original PAK member | {value} |"
+        },
+        {
+          "decimals": 6,
+          "line": 18,
+          "metric_id": "area-both_native_overlap",
+          "template": "| Covered by both original members | {value} |"
+        },
+        {
+          "decimals": 6,
+          "line": 19,
+          "metric_id": "area-neither_native",
+          "template": "| Covered by neither original member | {value} |"
+        },
+        {
+          "decimals": 6,
+          "line": 20,
+          "metric_id": "osm-component_intersection",
+          "template": "| Covered by current OSM Panjgur candidate | {value} |"
+        },
+        {
+          "decimals": 6,
+          "line": 21,
+          "metric_id": "osm-component_not_covered",
+          "template": "| Outside current OSM Panjgur candidate | {value} |"
+        },
+        {
+          "decimals": 6,
+          "line": 22,
+          "metric_id": "osm-joint_with_IRN_native_uncovered",
+          "template": "| Outside OSM Panjgur plus older IRN member | {value} |"
+        },
+        {
+          "decimals": 6,
+          "line": 23,
+          "metric_id": "osm-joint_with_IRN_native_overlap",
+          "template": "| Overlap of OSM Panjgur and older IRN member | {value} |"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 16649405,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+          "role": "newly-retained-original-source",
+          "sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a"
+        },
+        {
+          "bytes": 864,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-geoBoundaries-IRN-ADM2-metaData.json",
+          "role": "newly-retained-original-source",
+          "sha256": "02f1671f06a4a1e62834fb45105622008d6aa3127189ad7440774d00d6602301"
+        },
+        {
+          "bytes": 4316,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-CITATION-AND-USE-geoBoundaries.txt",
+          "role": "newly-retained-original-source",
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+        },
+        {
+          "bytes": 133,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-original-lfs-pointer.txt",
+          "role": "newly-retained-original-source",
+          "sha256": "b6628169366bebe8b8e6fc643073c0706a43033e4f251d3f648ca116342e1206"
+        }
+      ],
+      "id": "geoBoundaries-IRN-ADM2-original",
+      "license": {
+        "status": "redistributable",
+        "terms": "Country metadata ODbL 1.0; OpenStreetMap/Wambacher attribution; geoBoundaries derivative-work/code CC BY 4.0 citation notice."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "whole-original-administrative-reference-and-metadata",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IRN/ADM2",
+      "verification": "unverified",
+      "vintage": "Provider boundary year 2017; pinned provider commit 9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "files": [
+        {
+          "bytes": 1082661,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+          "role": "newly-retained-original-source",
+          "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c"
+        },
+        {
+          "bytes": 801,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-geoBoundaries-PAK-ADM2-metaData.json",
+          "role": "newly-retained-original-source",
+          "sha256": "2d5077f656aae8202338520cc02f594e243eb425efbb44e4f32fca7d41868d88"
+        },
+        {
+          "bytes": 4316,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-CITATION-AND-USE-geoBoundaries.txt",
+          "role": "newly-retained-original-source",
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+        },
+        {
+          "bytes": 132,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-original-lfs-pointer.txt",
+          "role": "newly-retained-original-source",
+          "sha256": "a459290c3cf4a81239d325c6d6526a347719020a0df846b8a47c15a281907b06"
+        }
+      ],
+      "id": "geoBoundaries-PAK-ADM2-original",
+      "license": {
+        "status": "redistributable",
+        "terms": "Country metadata Public Domain; GeoBoundaries/Wikipedia attribution; geoBoundaries derivative-work/code CC BY 4.0 citation notice."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "whole-original-administrative-reference-and-metadata",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PAK/ADM2",
+      "verification": "unverified",
+      "vintage": "Provider boundary year 2019; pinned provider commit 9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "files": [
+        {
+          "bytes": 346713,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+          "role": "newly-retained-original-api-source",
+          "sha256": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be"
+        },
+        {
+          "bytes": 741,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full-receipt.json",
+          "role": "newly-retained-original-api-source",
+          "sha256": "4c27c75a41998b9244995e55be8e95e186e57696fa655a9f5dcb3ae4cfe02c6f"
+        },
+        {
+          "bytes": 11624,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-current-anchor-admin-post-response.json",
+          "role": "newly-retained-original-api-source",
+          "sha256": "08121f8c214debee07924486849167ece649408d46a3d74096067b36358ff162"
+        },
+        {
+          "bytes": 745,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-current-anchor-admin-post-receipt.json",
+          "role": "newly-retained-original-api-source",
+          "sha256": "b7ee776e3bf48434fa7afb49e4b158b1ed6a2076428a6461889a13fd6cd67d87"
+        }
+      ],
+      "id": "osm-current-panjgur-candidate",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution. Source reuse/authority and cross-vintage integration not approved."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "current-whole-administrative-boundary-api-candidate-and-separate-point-lookup",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/3229274/full.json",
+      "verification": "unverified",
+      "vintage": "2026-10-05 retrieved snapshot; element/Overpass base dates independently retained"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "proposed",
+    "research": "partial"
+  },
+  "subject_ids": [
+    "gb:IRN:ADM2:26516999B17111396986996",
+    "gb:PAK:ADM2:60131773B78019453337506"
+  ],
+  "subject_ids_sha256": "0c405b5930054180f3bf0244d221b947ac40e5924412bffaa25c893517f7ca16",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "native-border-comparison",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "native-border-comparison",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/generator-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "immutable-native-source-reproduction",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/generator-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "immutable-native-source-reproduction",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/generator-reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "immutable-native-source-reproduction",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "engineering-coverage-gaps-907-20261005-local01"
+}

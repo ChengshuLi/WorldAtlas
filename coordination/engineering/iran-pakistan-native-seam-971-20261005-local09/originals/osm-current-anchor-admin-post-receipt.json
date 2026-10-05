@@ -1,0 +1,14 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "query": "[out:json][timeout:25];is_in(26.8032,63.207727681);area._[\"boundary\"=\"administrative\"];out tags;",
+  "bytes": 11624,
+  "sha256": "08121f8c214debee07924486849167ece649408d46a3d74096067b36358ff162",
+  "retrieved_utc": "2026-10-05T14:29:29.834756+00:00",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-05T14:28:06Z",
+    "timestamp_areas_base": "2026-10-04T19:59:06Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "scope": "Unreviewed present-day area point query only; extraction completeness, source authority/date and full geometry unverified",
+  "administrative_assignment": null
+}
