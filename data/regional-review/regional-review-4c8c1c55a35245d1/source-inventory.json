@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "packet": "regional-review:4c8c1c55a35245d1",
+  "retrieved_at_utc_date": "2026-10-05",
+  "baseline_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f",
+  "sources": [
+    {
+      "id": "gb:CAF:ADM3",
+      "role": "geoBoundaries metadata says Municipalities; source ACTED/OCHA Central African Republic; evaluated as 2018 commune/municipality candidates",
+      "vintage": "2018 represented; immutable geoBoundaries release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CAF/ADM3/geoBoundaries-CAF-ADM3.geojson",
+      "metadata_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CAF/ADM3/geoBoundaries-CAF-ADM3-metaData.json",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO), as reported in pinned source metadata; retain geoBoundaries and ACTED/OCHA attribution",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/igo/",
+      "source_bytes": {"path": "sources/geoBoundaries-CAF-ADM3.geojson", "bytes": 2032593, "sha256": "276a9a13b7bdb852f77121c1881f19adcbe28a22d23fe913934fee031a8219a4"},
+      "metadata_bytes": {"path": "sources/geoboundaries-CAF-ADM3-metadata.json", "bytes": 1146, "sha256": "a054e0e78f6a2b5f72cdaac9f1ff36decded187345d3d4b9af57237179fa6285"},
+      "full_source_feature_count": 175,
+      "scoped_feature_count": 92,
+      "retention": "Original source file copied without modification from the separately owned #462 evidence packet at baseline commit bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f; its source-register independently records this same immutable URL, 2,032,593-byte length and SHA-256. The prior packet is untouched.",
+      "retrieved_at": "2026-10-05 UTC (America/Los_Angeles 2026-10-04)",
+      "restoration": "Fetch the exact URL above at immutable geoBoundaries commit 9469f09592ced973a3448cf66b6100b741b64c0d and require the recorded whole-file SHA-256 and byte length before reuse.",
+      "limits": ["Source names/IDs and vintage are not proof of current municipal law, full national completeness, current parent identity, or boundary accuracy."]
+    },
+    {
+      "id": "gb:CMR:ADM3",
+      "role": "geoBoundaries metadata reports OpenStreetMap/Wambacher and leaves boundaryCanonical blank; candidate local subdivision/commune-related territories",
+      "vintage": "2017 represented; immutable geoBoundaries release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CMR/ADM3/geoBoundaries-CMR-ADM3.geojson",
+      "metadata_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CMR/ADM3/geoBoundaries-CMR-ADM3-metaData.json",
+      "license": "Open Data Commons Open Database License 1.0, as reported in pinned source metadata; attribution to OpenStreetMap/Wambacher and geoBoundaries; derivative database reuse needs an ODbL review",
+      "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "source_bytes": {"path": "sources/geoBoundaries-CMR-ADM3.geojson", "bytes": 5121028, "sha256": "9d0ff998057c3afe7f3a6334d71e9d7c353c64fe6e7c35b01fe14d804c97f04b"},
+      "metadata_bytes": {"path": "sources/geoboundaries-CMR-ADM3-metadata.json", "bytes": 516, "sha256": "84fa6e5cf34f72119a5e217e046974a03cf3a7ff091bbaa3bfc8d3aa6a3782b7"},
+      "full_source_feature_count": 360,
+      "scoped_feature_count": 134,
+      "retention": "Original source bytes downloaded from the pinned immutable geoBoundaries commit during this packet.",
+      "retrieved_at": "2026-10-05 UTC (America/Los_Angeles 2026-10-04)",
+      "restoration": "Fetch the exact URL above at immutable geoBoundaries commit 9469f09592ced973a3448cf66b6100b741b64c0d and require the recorded whole-file SHA-256 and byte length before reuse.",
+      "limits": ["The source metadata canonical-role field is empty. OSM/Wambacher geometry and the 2017 source vintage do not establish which current administrative/legal unit or boundary each feature represents."]
+    },
+    {
+      "id": "official:CMR:MINAT-services",
+      "role": "Ministry of Territorial Administration explanation of administrative circuits and responsibility levels",
+      "vintage": "Current page accessed 2026-10-05 UTC",
+      "url": "https://minat.gov.cm/presentation/services-locaux/",
+      "license": "Not stated; source page not retained",
+      "retention": "restoration-only",
+      "restoration": "Open the official MINAT page and inspect the sections LES DÉPARTEMENTS and LES ARRONDISSEMENTS; retain a dated citation if it changes.",
+      "verification": "Verified page text: 10 regions, 58 departments, 360 arrondissements, and departments subdivided into arrondissements.",
+      "limits": "Count/role hierarchy only; no named scoped boundary geometries or feature crosswalk."
+    },
+    {
+      "id": "official:CMR:INS-ECAM5-nomenclature",
+      "role": "National Institute of Statistics ECAM 5 official administrative nomenclature and code explanation",
+      "vintage": "2021 nomenclature; retrieved 2026-10-05 UTC",
+      "url": "https://nada.stat.cm/index.php/catalog/189/download/1759",
+      "license": "No reuse terms identified; PDF bytes were used locally for inspection but not retained in this packet",
+      "retention": "restoration-only",
+      "restoration": "Retrieve the exact PDF URL, SHA-256 6687f529f5e8e46d2d310fb0b5ba583f2d7db4d8f74e4dcc74550ecc328e7339, and inspect pp. 3-10 (administrative unit counts, six-digit codes, names and division/subdivision hierarchy). Do not substitute another edition without a new evidence vintage.",
+      "verification": "The text says 10 regions, 58 divisions and 360 councils whose boundaries correspond to 360 subdivisions; it describes codes as region/division/subdivision and says subordinate codes contain the superior-unit code. The extracted scoped name/parent crosswalk is retained as a clearly labeled review result, not the original document.",
+      "limits": "One duplicate code 010101 is printed for Ngaoundéré I and Bélel in the scoped rows. A 2021 statistical nomenclature is not a current boundary dataset or proof that OSM feature edges are exact legal limits."
+    },
+    {
+      "id": "official:CAF:Justice-2025-administrative-structure",
+      "role": "Central African Republic Ministry of Justice statement citing 2021 and 2023 territorial laws and current functioning subdivisions",
+      "vintage": "Official page accessed 2026-10-05 UTC; laws dated 2021-01-21 and 2023-01-28",
+      "url": "https://justice.gouv.cf/actualites/190/bruxelles-discours-du-ministre-detat-charge-de-la-justice-garde-des-sceaux-dr-arnaud",
+      "license": "Not stated; page not retained",
+      "retention": "restoration-only",
+      "restoration": "Open the Ministry page and inspect the paragraph naming Loi 21.001, Loi 23.004 and current functional counts.",
+      "verification": "The statement reports 7 regions, 20 prefectures, 72 sub-prefectures and 175 communes functioning after the 2021 administrative-circumscription law and 2023 territorial-limits law.",
+      "limits": "It supplies no list of scoped 2018 communes or their current boundaries."
+    },
+    {
+      "id": "official:CAF:Government-portal-structure",
+      "role": "Central African Republic Government portal administrative-organization summary",
+      "vintage": "Page accessed 2026-10-05 UTC; page does not state the date of its count",
+      "url": "https://www.gouvernement.cf/article/56/la-republique-centrafricaine",
+      "license": "Not stated; page not retained",
+      "retention": "restoration-only",
+      "restoration": "Open the official government portal and inspect Organisation administrative.",
+      "verification": "Page reports 7 regions, 16 prefectures, 72 sub-prefectures and 175 communes, conflicting with the later Justice Ministry page's 20 prefectures.",
+      "limits": "Undated page; not suitable as current boundary or legal crosswalk authority."
+    },
+    {
+      "id": "legal:CAF:Constitution-2004-Art102",
+      "role": "WIPO Lex reproduction of the Central African Republic Constitution Article 102 defining territorial collectivities",
+      "vintage": "2004 Constitution, accessed 2026-10-05 UTC",
+      "url": "https://www.wipo.int/wipolex/en/legislation/details/7437",
+      "license": "Not stated; page not retained",
+      "retention": "restoration-only",
+      "restoration": "Inspect Article 102 on the linked WIPO Lex page; confirm applicability against later laws before legal use.",
+      "verification": "Article 102 says territorial collectivities are regions and communes and are created/modified by law.",
+      "limits": "Predates 2021/2023 administrative laws and does not define current 2018 source crosswalks."
+    }
+  ],
+  "recorded_legacy_source_cache_digests": [
+    {"baseline_file": "data/geographic-decisions/africa.json", "prior_cache_path": ".cache/geoboundaries/CAF-ADM3.json", "recorded_sha256": "e368afac2f5c1ac7503a181e3e62541df88167cf9072a84c5453ffea999ee88a", "status": "original cache bytes absent from current baseline; not byte-comparable"},
+    {"baseline_file": "data/geographic-decisions/africa.json", "prior_cache_path": ".cache/geoboundaries/CMR-ADM3.json", "recorded_sha256": "a1b0654593efcb2b00ef9053b1a9fbe6b829f3fec6b8d2a85a48066ae1f3abdf", "status": "original cache bytes absent from current baseline; not byte-comparable"}
+  ],
+  "method_limit": "Whole-file SHA-256 of acquired pinned-release bytes is recorded separately from historical inspection-cache digests; similar IDs/names do not prove byte identity or how the Atlas geometry was derived/generalized."
+}

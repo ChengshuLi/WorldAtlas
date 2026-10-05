@@ -1,0 +1,44 @@
+{
+  "followups": [
+    {
+      "engineering_handoff": "No file/ID/boundary edits from source review alone. If the official source establishes a parent/geometry correction, preserve source and current evidence and exact stable IDs, predecessor and identity crosswalks; engineering handles the coordinated migration/release and shared parent review.",
+      "exact_subject_ids_source": "issue-scope.json IDs beginning gb:CMR:ADM3:",
+      "issue_number": 898,
+      "observed_tasks": [
+        "resolve 20 nonmatching/ambiguous 2021 official name-parent crosswalk rows",
+        "review duplicate printed code 010101",
+        "trace source cache digest to immutable release bytes",
+        "review four >5% current/source area-difference flags against authoritative current boundaries"
+      ],
+      "scope_limit": "These 134 IDs only; #460 owns the other 226 Cameroon IDs. The #465 integration combines them.",
+      "slug": "cameroon-2017-subdivision-crosswalk",
+      "subject_count": 134,
+      "title": "Crosswalk scoped Cameroon subdivision identities, parents, and 2017 boundary lineage",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/898"
+    },
+    {
+      "engineering_handoff": "No corrections are asserted until current legal unit identities and boundaries are sourced. Keep all original geometries and IDs; engineering owns any implementation, parent migration, release-pin refresh and integration.",
+      "exact_subject_ids_source": "issue-scope.json IDs beginning gb:CAF:ADM3:",
+      "issue_number": 899,
+      "observed_tasks": [
+        "obtain laws 21.001 and 23.004 and current official unit/parent inventory",
+        "resolve the 92 source feature IDs against current names, communes, parents and available official boundaries",
+        "reconcile current government count-page disagreement",
+        "resolve duplicate scoped CAF name Nola across Atlas parents Nola and Mbaïki for IDs gb:CAF:ADM3:52401652B27659488729720 and gb:CAF:ADM3:52401652B63841913442805"
+      ],
+      "scope_limit": "These 92 IDs only; #462 owns the other 83 CAF IDs, and its #877 handoff is limited to six Bangui boundary-vintage subjects.",
+      "slug": "central-african-republic-2018-commune-crosswalk",
+      "subject_count": 92,
+      "title": "Crosswalk scoped Central African Republic communes to the 2021/2023 territorial laws",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/899"
+    }
+  ],
+  "no_claims": [
+    "No location is approved for historical imports.",
+    "No region interior or national boundary is certified.",
+    "The 2018/2017 source snapshots are not asserted to represent present legal boundaries."
+  ],
+  "parent_issue": 461,
+  "required_dependency_action": "Issue-creation/integration owner must include #898 and #899 in blocked #465 dependencies and verify completion or explicit approved exceptions; initial packet closure does not certify region.",
+  "status": "two exact-scope follow-ups created; both blocked on #461 completion and issue-scope review"
+}
