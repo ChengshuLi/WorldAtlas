@@ -205,6 +205,7 @@ test('unavailable, capped, malformed, symlinked or hash-mismatched package depen
     async () => ({truncated: true, tree: fixture.tree}),
     async () => ({truncated: false, tree: []}),
     ...['vite.config.mjs', 'postcss.config.js', 'tsconfig.json', 'hosted/package.json', 'src/nested/package.json', 'src/nested/tsconfig.json', 'src/.postcssrc', 'public/new-asset.json', 'data/ownership-history/algorithms/exact/ellipsoidal_area.so'].map(file => async () => ({truncated: false, tree: [...fixture.tree, {path: file, type: 'blob', mode: '100644', sha: 'f'.repeat(40), size: 0}]})),
+    ...['100644','120000','160000'].map(mode => async () => ({truncated:false,tree:[...fixture.tree,{path:'public',type:mode==='160000'?'commit':'blob',mode,sha:'f'.repeat(40),size:0}]})),
     ...['120000', '160000'].map(mode => async () => ({truncated: false, tree: [...fixture.tree, {path: 'data/typed-prepared-v1.json', type: mode === '120000' ? 'blob' : 'commit', mode, sha: 'f'.repeat(40), size: 0}]})),
     inputFixture({'data/ownership-history/index.json': {parts: [{path: 'file:../external.json'}]}}).api,
     inputFixture({'data/ownership-history/index.json': {parts: [{path: ' FILE:../external.json '}]}}).api,

@@ -151,7 +151,7 @@ export async function packageResearchInputs({route, base, api}) {
     if (sourcePath && entry.type !== 'tree' && (entry.type !== 'blob' || !['100644', '100755'].includes(entry.mode))) throw Error('Nonordinary source input tree entry');
     if (entry.path.startsWith('data/') && (entry.type !== 'tree' && (entry.type !== 'blob' || !['100644', '100755'].includes(entry.mode)))) throw Error('Nonordinary data input tree entry');
     if (/^(?:vite\.config\.(?:js|mjs|cjs|ts|mts|cts)|postcss\.config\.[^/]+|\.postcssrc[^/]*|tsconfig[^/]*\.json)$/.test(entry.path) && !Object.hasOwn(BUILD_MODULE_PINS, entry.path)) throw Error('Unreviewed build configuration');
-    if (entry.type !== 'tree' && (/^public\//.test(entry.path) || (/^data\/ownership-history\/.+\.py$/.test(entry.path) || entry.path.startsWith('data/ownership-history/algorithms/'))) && !Object.hasOwn(BUILD_MODULE_PINS, entry.path)) throw Error(`Unreviewed package source: ${entry.path}`);
+    if (entry.type !== 'tree' && (/^public(?:\/|$)/.test(entry.path) || (/^data\/ownership-history\/.+\.py$/.test(entry.path) || entry.path.startsWith('data/ownership-history/algorithms/'))) && !Object.hasOwn(BUILD_MODULE_PINS, entry.path)) throw Error(`Unreviewed package source: ${entry.path}`);
   }
   for (const [file, sha] of Object.entries(BUILD_MODULE_PINS)) {
     const entry = entries.get(file);
