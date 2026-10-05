@@ -1,0 +1,9 @@
+{
+  "actual_command": "python test/geographic-regression.py",
+  "kind": "negative-control",
+  "method_id": "full-world-geography-regression",
+  "outcome": "passed",
+  "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 5.483s\n\nOK\n",
+  "scope": "Actual shared controls include known valid joint moves, losses/new overlaps, tiny positive geometry, unchanged cases, dateline/invalid inputs and immutable snapshot checks; not source authority.",
+  "tests_run": 20
+}

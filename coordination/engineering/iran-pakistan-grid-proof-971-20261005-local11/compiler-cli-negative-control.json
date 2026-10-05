@@ -1,0 +1,10 @@
+{
+  "method_id": "bounded-application-compilation",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": [
+    "wrong-registry: Registry pin differs",
+    "wrong-staged: Immutable input hash/size mismatch",
+    "existing output rejected"
+  ]
+}
