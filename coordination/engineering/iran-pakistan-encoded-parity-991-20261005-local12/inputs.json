@@ -1,0 +1,421 @@
+{
+  "version": 1,
+  "baseline_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+  "baseline_files": [
+    {
+      "path": "data/canonical-grid/manifest.json",
+      "bytes": 271171,
+      "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/bounds.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/province-membership.bin.gz",
+      "bytes": 67912,
+      "sha256": "01f42b69ca969090d10c42d6a1311215a19ce436b0f3e720f7f873f4a18f90da",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/geographic-releases/current-manifest.json",
+      "bytes": 206,
+      "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/geographic-releases/releases-v6-gzip.json.gz",
+      "bytes": 169082,
+      "sha256": "96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/rows-0.bin.gz",
+      "bytes": 306617,
+      "sha256": "ccb40c24a466f76dbae209241add4e51590aff13dedc6ac88d269dff603222b7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-0.bin.gz",
+      "bytes": 984227,
+      "sha256": "78dd8e523ab5f809d27424d858684254c3b6140a9ae166e3199d972c75490579",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-1048576.bin.gz",
+      "bytes": 999685,
+      "sha256": "f57e081df7b66707e668d6fd63c9348475f1d0f1e8cdb485a9c7b47c1f85841d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-2097152.bin.gz",
+      "bytes": 967449,
+      "sha256": "783cb6cb1530d6c47fdff996a6a953888ff679db032782ce942a520789985a74",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-3145728.bin.gz",
+      "bytes": 903450,
+      "sha256": "6484550d934140fbc9c206d6c2120886893025e1d971525469df48ff86e974cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-4194304.bin.gz",
+      "bytes": 868320,
+      "sha256": "c359170f0f0e70f8a3942e42ebe3a0057913448465c50522437b4bfd9b94a7ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-5242880.bin.gz",
+      "bytes": 868736,
+      "sha256": "0041e97fd61b7be67f603be6f1297ae226251920c7d7d5486c01f94fa7cea8ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-6291456.bin.gz",
+      "bytes": 851907,
+      "sha256": "0511351709091ccf9239249c2c6a45f22bb8040267606d25d7bf1e4b72b36a4c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-7340032.bin.gz",
+      "bytes": 847603,
+      "sha256": "707859a809ab0a1f0bb1a49e9f49af5d303b9c980c15f4102cd9f2181cc5f91b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-8388608.bin.gz",
+      "bytes": 851567,
+      "sha256": "6ae021f663b920eec520af96d203b8b3e6e42a354c71e4df3c6436b366fdfb9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-9437184.bin.gz",
+      "bytes": 850870,
+      "sha256": "23798a543d527f09a91dc6318a6371c0933f4a3fde9bff328d81c88677a6b09b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-10485760.bin.gz",
+      "bytes": 855366,
+      "sha256": "5ce7b4a4fb25b17bc8407c0f501675a2919042c9df8197d6cd6e098f48fa3042",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-11534336.bin.gz",
+      "bytes": 874057,
+      "sha256": "c1c29cc0afbd4e9621d89fa0ea9489d6222dadfbc7237090c568fcefa6e3be7a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-12582912.bin.gz",
+      "bytes": 878373,
+      "sha256": "74b6ab70904adae95bbdf2d25ffc8b8c1bff2591e7381881985f6fde605df14c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-13631488.bin.gz",
+      "bytes": 867334,
+      "sha256": "c00f4ba975f4a0b9a6cc06da3345104a1d83165ccd622c7ef3395f7b8ab0b684",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-14680064.bin.gz",
+      "bytes": 868010,
+      "sha256": "fcbee22b54a016710b2846e50282a50b3a2e38e647e0df3090ad0d118747be33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-15728640.bin.gz",
+      "bytes": 876800,
+      "sha256": "17ee1610de5d5e517312174857d87b0b7d05852a0bdaeb866232038f76490e0e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-16777216.bin.gz",
+      "bytes": 846142,
+      "sha256": "91bdc5ba507bfdd9e60a0389ab44c265de370e29a11eae3c037080a1cbb62e0e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-17825792.bin.gz",
+      "bytes": 826976,
+      "sha256": "14e6fdc962d7955651a03cb2e0b669045579869ece72833d2a428f4d8f606c18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-18874368.bin.gz",
+      "bytes": 816574,
+      "sha256": "7178ec92fc7f75ccd2a64f9c7623f1b2a9a16f903f923bcfb15e5287aba682cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-19922944.bin.gz",
+      "bytes": 813015,
+      "sha256": "c83af421c188448e7047e4b9515115e4c9af6ed25fc180d58bbb8f716da59220",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-20971520.bin.gz",
+      "bytes": 792509,
+      "sha256": "80f9c5e6b3aff320055e0127b053b4ff83255cc3e9bc14b59df248ae5bd6e5b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-22020096.bin.gz",
+      "bytes": 789933,
+      "sha256": "3053349f2e7d42d4e188213c88aefb798de5859acdcc3b614adbbafb50e42e38",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-23068672.bin.gz",
+      "bytes": 788537,
+      "sha256": "381d5cb5cedeb1c64d5a1a070b14a6e3b6f119e294c3f3d881accadb878f7108",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-24117248.bin.gz",
+      "bytes": 787553,
+      "sha256": "926696080abea36b749bf7998e0608d508bf309f7f9119cc4983699d9108908a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-25165824.bin.gz",
+      "bytes": 805367,
+      "sha256": "e9bf9e3c162796fbe390012f18fa3c2145b5e575a275bf801d72f561cf0ef564",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-26214400.bin.gz",
+      "bytes": 836032,
+      "sha256": "250e61ddf871be144f3ede48ac37be600cd76bc44915ce558052e63842651ced",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-27262976.bin.gz",
+      "bytes": 823674,
+      "sha256": "3dd86fb5a6f71f5f3750a57c64fa4a7e8bf9e5007b8c547fc9f4f0c5d0ec8bcb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-28311552.bin.gz",
+      "bytes": 820986,
+      "sha256": "9a93bacb4674dcb70ca711469cb1096bc41dbd0bfcfe6aa8667b7087056f1ecc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-29360128.bin.gz",
+      "bytes": 806408,
+      "sha256": "3812061560d37ae030779445a05094dce3e5d5e0e70e73ad8ee7572ebcd44eb7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-30408704.bin.gz",
+      "bytes": 808695,
+      "sha256": "80d1b7e81b6de917379c5538a4623072f02018ec62b7e7229f7188c3b0d81e68",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-31457280.bin.gz",
+      "bytes": 832892,
+      "sha256": "863ce7fff601a93db02edd1531009d164d54c3cd21490b54fe8681955767e53e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-32505856.bin.gz",
+      "bytes": 858311,
+      "sha256": "9a038a8c295cb214a4cbdaff5e8bc1f405f22c8eb46049ed458aa82e966af515",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-33554432.bin.gz",
+      "bytes": 879781,
+      "sha256": "69c9a9aa7dc2e5dded441b546dbd0f9e71bccfeef7b6a6ce9c72830753512b1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-34603008.bin.gz",
+      "bytes": 868501,
+      "sha256": "6a3faf3247af3280b4c5b0e9d5f296d77db9702a372d6ba7b7967fe6d4af163b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-35651584.bin.gz",
+      "bytes": 894561,
+      "sha256": "2de73434360f3fec6dfc31421d9f3ad3f07929fbc473e08f604bf9a1864c237b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-36700160.bin.gz",
+      "bytes": 892222,
+      "sha256": "e1d45c40e94a9477ef884d4e7442f660e82ad6d2068a3d6c19ec011fdb4e9d50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-37748736.bin.gz",
+      "bytes": 880210,
+      "sha256": "fe61aae60194057c7a5553c3e04e5f7e51d4ffe4518e8fd9c00a1b18a3fa77b7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-38797312.bin.gz",
+      "bytes": 869877,
+      "sha256": "82d918007b85f938959c096c392b052a1b7ad9f9abe422d3fb826abb58f3e6e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-39845888.bin.gz",
+      "bytes": 873657,
+      "sha256": "bc6181fac8db4a6862442c2b6d4c4afa3ffd7d5b693f37b8212219e5b86fdeb1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-40894464.bin.gz",
+      "bytes": 888592,
+      "sha256": "2c21ede414723b33348928dec98bc20c268ffe41075ede4d77212a40de2c4ee4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-41943040.bin.gz",
+      "bytes": 896691,
+      "sha256": "d06e5a56232678e63d5bd701f4a787ae2e880dfac6e3b21a8c0221061d15331c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-42991616.bin.gz",
+      "bytes": 890514,
+      "sha256": "5d4a53ca4fbecb41a22ade83be1f51d555515b99e3e9127fc590e6acd5cdd3c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-44040192.bin.gz",
+      "bytes": 876779,
+      "sha256": "0a1415d515299ddd89185c384efa480b49e16e5cd91cc7008a3e196b236bb215",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-45088768.bin.gz",
+      "bytes": 883441,
+      "sha256": "d8104a36685a1a81d13c0c03f826a3ecdb4da7dd9438cc0bf4da1b0226f03dcd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-46137344.bin.gz",
+      "bytes": 884832,
+      "sha256": "6ff7413c2df6409f94fb227c743a0abfb3ee022089dff2e4e1feb92bf802d652",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-47185920.bin.gz",
+      "bytes": 899858,
+      "sha256": "3d8ae24e2a33273bb6d9697cf2614b5188fd218b3348125c1990f3c0a613c7da",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-48234496.bin.gz",
+      "bytes": 878691,
+      "sha256": "6de3f0243cae91e3063cb632b5896b7750145a58424f2c6709ab91d118f3b827",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-49283072.bin.gz",
+      "bytes": 903386,
+      "sha256": "fcc3d15b486338c48b20870d59762ade92c835d61c55afe90d73296a630259d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-50331648.bin.gz",
+      "bytes": 877379,
+      "sha256": "df458b0b5688a78f8f1c9d2e46a79556df3900e62bd760b48c3f80c1e31290f7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-51380224.bin.gz",
+      "bytes": 859555,
+      "sha256": "73a2f7f4ab57d0a3518f9223ec495587b7f561afd3757c8608aa7bf4a8487942",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-52428800.bin.gz",
+      "bytes": 848454,
+      "sha256": "415af8c2b57737017c0191a044024955dccb8b1ca743cc7334a9d7d1615f9688",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-53477376.bin.gz",
+      "bytes": 822915,
+      "sha256": "db67f32c964150e752c5fe2d2ea53c9841b2920fd20e45183e650b3a0eb31919",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-54525952.bin.gz",
+      "bytes": 798580,
+      "sha256": "a82bfc28b4398ebe4febafbe2b939b7a70a9989c4aa9ee522c75ebb28cdddd3b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-55574528.bin.gz",
+      "bytes": 813323,
+      "sha256": "f3d4b03696fed6e6230258a7f96793a4b8cfdff74c778b234caa6b0347c700f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/canonical-grid/ownership/runs-56623104.bin.gz",
+      "bytes": 852661,
+      "sha256": "919dc5a1fd22715dea336587a8cbc22653fea70a9bf1219fd90e1d534114327c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/pixel-grid.js",
+      "bytes": 3617,
+      "sha256": "320cc48796d5d3aaf07bb096441346abbe44ed4fab66df08ee003620ce5870a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/pixel-ownership.js",
+      "bytes": 6134,
+      "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/ownership-assets.js",
+      "bytes": 4148,
+      "sha256": "b14470b088208ac66d6ed564b063100c1e58d4d191d441b5e7c5d031eed5864c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compile.mjs",
+      "bytes": 9108,
+      "sha256": "0c9b3569f99ea87e4b8b97228763a15b8e7c842a809265dffbb59de652b74b3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/staged-neighbors.json",
+      "bytes": 152156,
+      "sha256": "8cde9abc927bd3477dd60dc024332307d46206a3b26d1373d53d3b91ba0908db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json",
+      "bytes": 10637,
+      "sha256": "6719f0c4e1b91d1734abf3fd9777790e4397de6a0af35a738af7891b0177c84a",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "prior_packet": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11"
+}
