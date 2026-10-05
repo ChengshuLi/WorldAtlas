@@ -110,7 +110,19 @@ export async function cleanupCandidate(options, reference, expectedSHA) {
 // Cleanup is best-effort after an independently confirmed merge. GitHub's
 // delete-ref endpoint has no SHA compare-and-swap: workers must never reuse or
 // push to merged head branches. Recheck the ref immediately before deletion.
-export async function cleanupMergedHead({api, repo, number, expectedHead}) {
+export async function cleanupMergedHead({api: rawAPI, repo, number, expectedHead, cleanupNow = () => performance.now()}) {
+  const started = cleanupNow();
+  let calls = 0;
+  const api = async (...args) => {
+    // No abandoned Promise.race: await each bounded GitHub request, then stop.
+    // The production adapter limits a single request to 20 seconds. A request
+    // already in progress can finish after this 30-second cleanup budget.
+    need(calls < 10 && cleanupNow() - started < 30000, 'Head cleanup API/time budget exhausted');
+    calls++;
+    const result = await rawAPI(...args);
+    need(cleanupNow() - started < 30000, 'Head cleanup time budget exhausted');
+    return result;
+  };
   let reference;
   const retained = reason => ({status: 'retained', ...(reference ? {reference} : {}), reason});
   try {

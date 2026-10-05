@@ -476,3 +476,14 @@ test('successful integration records cleanup separately, including deletion fail
   f.api=cleanup.api;
   const result=await f.complete();assert.equal(result.accepted,true);assert.equal(result.replayed,true);assert.equal(result.head_cleanup.status,'deleted');
 });
+
+
+test('cleanup stops on time or inventory call budget without starting deletion after pending',async()=>{
+  const timed=headCleanupFixture();let elapsed=0;timed.cleanupNow=()=>elapsed;
+  const original=timed.api;timed.api=async(...args)=>{const value=await original(...args);elapsed+=16000;return value;};
+  assert.equal((await cleanupMergedHead(timed)).status,'pending');assert.equal(timed.deletes.length,0);
+  const paged=headCleanupFixture();paged.pages=Array.from({length:20},()=>Array.from({length:100},(_,i)=>({
+    number:i+10,state:'open',head:{ref:'engineering/other',repo:{full_name:paged.repo}},base:{ref:'main',repo:{full_name:paged.repo}}})));
+  const result=await cleanupMergedHead(paged);assert.equal(result.status,'pending');assert.match(result.reason,/budget/);
+  assert.equal(paged.deletes.length,0);assert.equal(paged.reads.length,10);
+});
