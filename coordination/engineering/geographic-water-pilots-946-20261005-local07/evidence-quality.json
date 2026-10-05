@@ -1,0 +1,477 @@
+{
+  "baseline": {
+    "commit": "4877ef4e99528615daf657a376b7605d1657f817",
+    "files": [
+      {
+        "bytes": 26701,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/report.json",
+        "role": "immutable-input",
+        "sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478"
+      },
+      {
+        "bytes": 3642057,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-000.json.gz",
+        "role": "immutable-input",
+        "sha256": "115179a2e6ddda1a74e41d088c97643a56479deaaa0cb880b93a07fcd731e76f",
+        "uncompressed_bytes": 16775947,
+        "uncompressed_sha256": "0bfa4da8a3d0a6bb1866e917da0937d408c86bb0f293cb91d1f30985f5ab413f"
+      },
+      {
+        "bytes": 3640001,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-004.json.gz",
+        "role": "immutable-input",
+        "sha256": "c8726499e2d34c89b45fcf5d4c725b9583d2cb14319736580c032d460c04cb54",
+        "uncompressed_bytes": 16776852,
+        "uncompressed_sha256": "65f2af624321492c509355e5d6e9835ecb5480117c8e6e2766d2ba7532194801"
+      }
+    ],
+    "pin_files": {},
+    "pins": {}
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2017_01-0000200000-0000960000.tif",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2017_07-0000200000-0000960000.tif",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2020_01-0000160000-0000680000.tif",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2020_07-0000160000-0000680000.tif",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/DataUsersGuidev2024_v.5.pdf",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/copyright.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/data-access.html",
+      "status": "added"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_WATER_PILOTS.md",
+      "status": "added"
+    },
+    {
+      "path": "scripts/diagnose-geographic-water.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts/geographic_water.py",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-water.py",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-water.test.mjs",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python -I -B test/geographic-water.py",
+    "python -I -B scripts/diagnose-geographic-water.py --commit dc757ee059b7e20c576fcb6d6d2513d64e12a86c --inputs coordination/engineering/geographic-water-pilots-946-20261005-local07/inputs.json --inputs-bytes 9086 --inputs-sha256 f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5 --out .cache/your-unused-water-run"
+  ],
+  "conclusions": [],
+  "issue": 946,
+  "lane": "engineering",
+  "limits": [
+    "Two sampled months cannot certify annual permanence or historical extent.",
+    "No local geolocation bound or fine-scale water/land classification is certified.",
+    "Native FTP class semantics are inferred from the published monthly-history schema.",
+    "Portugal/Spain pilot covers an explicit small AOI, not its entire connected seam.",
+    "No boundary edit, owner assignment, water waiver, release or deployment.",
+    "Original geography context and component IDs preserved. Nearby administrative IDs are unverified diagnostics, not certified adjacency.",
+    "Water-pilot diagnostics cannot be submitted as native GeoJSON adjudication or a water waiver to the current integration gate.",
+    "Global detailed hydrography, exact canonical-grid comparison and coordinated source repairs remain outstanding."
+  ],
+  "methods": [
+    {
+      "description": "Whole original Git pins; actual native raster metadata; bounded exact strict-interior native-centre counts without resampling; dated conditional support/contradiction/no-observation signals; explicit pilot AOI; never ownership or full-shape water adjudication.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "native-monthly-water-pilots",
+      "kind": "generator",
+      "software": "Python3.12;Rasterio1.4.3;Shapely2.1.2;GEOS3.13.1;committed requirements.txt",
+      "units": "native-pixel-centre counts; raw classes; explicit source months"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/pilots/0/records/0/raw_class_counts/0",
+      "metric_id": "iran-pakistan-2017-01-raw-0",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/0/records/0/raw_class_counts/1",
+      "metric_id": "iran-pakistan-2017-01-raw-1",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/0/records/0/raw_class_counts/2",
+      "metric_id": "iran-pakistan-2017-01-raw-2",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/0/records/1/raw_class_counts/0",
+      "metric_id": "iran-pakistan-2017-07-raw-0",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/0/records/1/raw_class_counts/1",
+      "metric_id": "iran-pakistan-2017-07-raw-1",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/0/records/1/raw_class_counts/2",
+      "metric_id": "iran-pakistan-2017-07-raw-2",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/1/records/0/raw_class_counts/0",
+      "metric_id": "portugal-spain-2020-01-raw-0",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/1/records/0/raw_class_counts/1",
+      "metric_id": "portugal-spain-2020-01-raw-1",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/1/records/0/raw_class_counts/2",
+      "metric_id": "portugal-spain-2020-01-raw-2",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/1/records/1/raw_class_counts/0",
+      "metric_id": "portugal-spain-2020-07-raw-0",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/1/records/1/raw_class_counts/1",
+      "metric_id": "portugal-spain-2020-07-raw-1",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    },
+    {
+      "json_pointer": "/pilots/1/records/1/raw_class_counts/2",
+      "metric_id": "portugal-spain-2020-07-raw-2",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "iran-pakistan-2017-01-raw-0",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 12,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "iran-pakistan-2017-01-raw-1",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 25436,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "iran-pakistan-2017-01-raw-2",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "iran-pakistan-2017-07-raw-0",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "iran-pakistan-2017-07-raw-1",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 25448,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "iran-pakistan-2017-07-raw-2",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "portugal-spain-2020-01-raw-0",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 12619,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "portugal-spain-2020-01-raw-1",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "portugal-spain-2020-01-raw-2",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "portugal-spain-2020-07-raw-0",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 0,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "portugal-spain-2020-07-raw-1",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 12619,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+      "id": "portugal-spain-2020-07-raw-2",
+      "input_sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5",
+      "scope": "Frozen diagnostic evaluation at the stated input commit using candidate adapter. Raw counts; semantic labels conditional on published monthly-history schema. No water or ownership approval.",
+      "unit": "native-interior-pixel-centre-count",
+      "value": 0,
+      "vintage": "archived"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 9086,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/inputs.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "f371b1d221915307f1e50aebbdbfc58c733c5fb1144c78770d9836c94d3991b5"
+    },
+    {
+      "bytes": 465,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/negative-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "8944d37da267602e16f94e072f93e8ecf65906c843f1d1c9195c3ad0b9ec7551"
+    },
+    {
+      "bytes": 16811,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "a30d6007324b63699a587100ccd4484dcabea54ddd75c8a92fd831c629410794"
+    },
+    {
+      "bytes": 409,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/positive-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "7ddd555e3fd43e6058a9ab81caacc81b72282ef40c1d8c0802597b4ac1cf2125"
+    },
+    {
+      "bytes": 589,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/reproducibility.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "198c25a0595a0609bf916b60b80514d932fdd15db17b292a1b27b32785a1e393"
+    },
+    {
+      "bytes": 7089,
+      "hash_kind": "file-bytes",
+      "path": "scripts/geographic_water.py",
+      "role": "implementation-or-audit-output",
+      "sha256": "a0d6eef448346bf660aa3b76e2cc05b31c20bd231f6f2ff5df54acc1941aeb36"
+    },
+    {
+      "bytes": 7075,
+      "hash_kind": "file-bytes",
+      "path": "scripts/diagnose-geographic-water.py",
+      "role": "implementation-or-audit-output",
+      "sha256": "a5176f1a63d851e22481debed439c1100cb612d4f08bc597f332298850699014"
+    },
+    {
+      "bytes": 5150,
+      "hash_kind": "file-bytes",
+      "path": "test/geographic-water.py",
+      "role": "implementation-or-audit-output",
+      "sha256": "c752a7dbe1bff41a2b6e4704548ad7a0073682d298e631ce1b2291a8241969c9"
+    },
+    {
+      "bytes": 483,
+      "hash_kind": "file-bytes",
+      "path": "test/geographic-water.test.mjs",
+      "role": "implementation-or-audit-output",
+      "sha256": "3604005681099797281cc6658eb9b67798ebb94bf484c31ebd55f18ed27e33bb"
+    },
+    {
+      "bytes": 4172,
+      "hash_kind": "file-bytes",
+      "path": "docs/GEOGRAPHIC_WATER_PILOTS.md",
+      "role": "implementation-or-audit-output",
+      "sha256": "3cd5ee8558232938ed4e96008f0a1bfb4c7ec9ee35697bd045cbad8b3201f7a2"
+    }
+  ],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 26546492,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2017_01-0000200000-0000960000.tif",
+          "role": "original-source",
+          "sha256": "175054bf6155aa561d520e659191bb31932da5fd74187fb1f6d03fa11f2ded69"
+        },
+        {
+          "bytes": 16072250,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2017_07-0000200000-0000960000.tif",
+          "role": "original-source",
+          "sha256": "99a6109ea3df7d53c2eaf03cc5193013e21d761db963744e36e329aa36baf834"
+        },
+        {
+          "bytes": 11454941,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2020_01-0000160000-0000680000.tif",
+          "role": "original-source",
+          "sha256": "ebed30e6ffdb01e96ce11ae69d569a483376317898c77bfb862d38f5e3fcaefb"
+        },
+        {
+          "bytes": 13230639,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2020_07-0000160000-0000680000.tif",
+          "role": "original-source",
+          "sha256": "3532877fc304ee3a8242d8d3a0b21b5b46aaf14810b12c5fb14b52645b1f664c"
+        },
+        {
+          "bytes": 1142853,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/DataUsersGuidev2024_v.5.pdf",
+          "role": "original-source",
+          "sha256": "94aebddbb2d66bcbacea14326d84d0b9d9401c8ef95bc48b42991448f36b839b"
+        },
+        {
+          "bytes": 540,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/copyright.txt",
+          "role": "original-source",
+          "sha256": "8a21a4c6c31a378cf73ec5d99b94edfb022e26383cf74defba991957f1d0f9c5"
+        },
+        {
+          "bytes": 82680,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/data-access.html",
+          "role": "original-source",
+          "sha256": "bc07b9e5b6a7627d5c2082d9e314e90ed039359cce74c19f8fc71f8414228b7d"
+        }
+      ],
+      "id": "jrc-original-monthly-pilots",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 per retained MonthlyHistory copyright.txt; Source: EC JRC/Google; Pekel et al., Nature 540 (2016), doi:10.1038/nature20584."
+      },
+      "limit": "Two bounded dated diagnostic pilots. No complete global or full-shape water adjudication. Original FTP semantics inferred from published monthly-history schema; raw byte counts retained.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "independent-physical-water-diagnostic",
+      "temporal_status": "reference",
+      "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/MonthlyHistory/VER5-0/tiles/",
+      "verification": "unverified",
+      "vintage": "Original FTP VER5-0 dated monthly tiles 2017-01, 2017-07, 2020-01, 2020-07; not relabelled GSW v1.5"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "not-requested",
+    "implementation": "proposed",
+    "research": "partial"
+  },
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "native-monthly-water-pilots",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "native-monthly-water-pilots",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "native-monthly-water-pilots",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "engineering-coverage-gaps-907-20261005-local01"
+}

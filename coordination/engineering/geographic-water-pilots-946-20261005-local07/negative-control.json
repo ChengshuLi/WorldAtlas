@@ -1,0 +1,10 @@
+{
+  "actual_command": "python -I -B test/geographic-water.py",
+  "assertions": "Invalid geometry, unknown codes, unsupported CRS/nodata/date, partial native coverage, subpixel ambiguity, duplicate months, shifted grid, unknown seasonality",
+  "exit_code": 0,
+  "kind": "negative-control",
+  "method_id": "native-monthly-water-pilots",
+  "outcome": "passed",
+  "stderr_sha256": "3b923d132c2e13e91d8d38591f2c277b921ed855e40c05d2672284af60abce7d",
+  "tests_run": 17
+}

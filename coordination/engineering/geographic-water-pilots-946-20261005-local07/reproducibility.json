@@ -1,0 +1,15 @@
+{
+  "comparison": "Exact raw JSON equality; no field normalization",
+  "immutable_cli_negative_controls": [
+    "Wrong whole-file registry SHA rejected",
+    "Existing report destination rejected"
+  ],
+  "input_commit": "dc757ee059b7e20c576fcb6d6d2513d64e12a86c",
+  "kind": "reproducibility",
+  "method_id": "native-monthly-water-pilots",
+  "native_controls": 17,
+  "outcome": "passed",
+  "report_bytes": 16811,
+  "run_one_sha256": "a30d6007324b63699a587100ccd4484dcabea54ddd75c8a92fd831c629410794",
+  "run_two_sha256": "a30d6007324b63699a587100ccd4484dcabea54ddd75c8a92fd831c629410794"
+}

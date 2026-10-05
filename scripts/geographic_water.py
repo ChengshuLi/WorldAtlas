@@ -36,6 +36,8 @@ def monthly_diagnostics(raw, feature, month, anchor):
             raise ValueError('Require native north-up EPSG:4326 single-byte monthly raster')
         if source.nodata not in (None, 0):
             raise ValueError('Unexpected monthly nodata encoding')
+        if any(rows * columns > 1_000_000 for rows, columns in source.block_shapes):
+            raise ValueError('Native decoder block exceeds bounded working-memory scope')
         xmin, ymin, xmax, ymax = g.bounds
         left = math.floor((xmin - t.c) / t.a)
         right = math.ceil((xmax - t.c) / t.a)

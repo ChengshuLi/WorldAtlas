@@ -3,6 +3,7 @@ import argparse
 import gzip
 import io
 import json
+import math
 import pathlib
 import sys
 
@@ -64,6 +65,10 @@ def diagnose(commit, inputs_path, inputs_bytes, inputs_sha256, destination):
         if sha256(canonical_json(f)) != pilot['component_feature_sha256']:
             raise ValueError('Whole original component feature hash mismatch')
         original = shape(f['geometry'])
+        aoi = pilot['aoi']
+        if aoi is not None and (len(aoi) != 4 or not all(math.isfinite(v) for v in aoi)
+                                or aoi[0] >= aoi[2] or aoi[1] >= aoi[3]):
+            raise ValueError('Explicit ordered finite pilot bounds required')
         sampling = original if pilot['aoi'] is None else original.intersection(box(*pilot['aoi']))
         sampled_feature = {**f, 'geometry': mapping(sampling)}
         records = []
@@ -102,6 +107,8 @@ def diagnose(commit, inputs_path, inputs_bytes, inputs_sha256, destination):
         raise ValueError('Output must be an unused nonsymlink vintage')
     out.mkdir(parents=True)
     raw = canonical_json(result)
+    if len(raw) > MAX_FILE_BYTES:
+        raise ValueError('Diagnostic report exceeds ordinary-file budget')
     with (out / 'report.json').open('xb') as f:
         f.write(raw)
     return descriptor(str((out / 'report.json').relative_to(ROOT)), raw)

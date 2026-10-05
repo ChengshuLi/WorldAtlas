@@ -1,0 +1,10 @@
+{
+  "actual_command": "python -I -B test/geographic-water.py",
+  "assertions": "Native water/dry/mixed/no-observation counts; holes and strict boundary centres; exact reproducibility",
+  "exit_code": 0,
+  "kind": "positive-control",
+  "method_id": "native-monthly-water-pilots",
+  "outcome": "passed",
+  "stderr_sha256": "3b923d132c2e13e91d8d38591f2c277b921ed855e40c05d2672284af60abce7d",
+  "tests_run": 17
+}
