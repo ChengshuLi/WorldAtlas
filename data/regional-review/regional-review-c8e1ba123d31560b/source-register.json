@@ -1,0 +1,113 @@
+{
+  "issue": 402,
+  "retrieved_utc": "2026-10-05",
+  "baseline_commit": "e5393834c715396a60967d366523712edd5d1b65",
+  "owned_member_ids": [
+    "FLK-5152",
+    "atlas:coverage:SGS+00?"
+  ],
+  "sources": [
+    {
+      "id": "natural-earth-admin1-arg-5493-2022-06-02",
+      "title": "Natural Earth 1:10m Admin-1 states/provinces",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "repository_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "commit_date": "2022-06-02T07:25:00Z",
+      "upstream_blob_sha": "4a8438f98ac7dfec7dc1739b1eaf91398ad33f22",
+      "retained_archive": "data/regional-review/regional-review-7cf674a63057d43f/source/NaturalEarth-ca96624/ne_10m_admin_1_states_provinces.geojson.gz",
+      "archive_bytes": 12210503,
+      "archive_sha256": "20777a70803489a26b57194f4626797a84784c2ee66b3f56da3d6ea72fc4849c",
+      "uncompressed_bytes": 40726851,
+      "uncompressed_sha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+      "extracted_in_scope_features": "source/natural-earth-selected-features.geojson",
+      "license": "Public domain; https://www.naturalearthdata.com/about/terms-of-use/",
+      "limitations": "Natural Earth disclaims completeness and accuracy warranties. Pinned 10m reference, not legal boundary survey."
+    },
+    {
+      "id": "south-georgia-order-1985-449",
+      "title": "South Georgia and South Sandwich Islands Order 1985, SI 1985/449",
+      "url": "https://www.legislation.gov.uk/uksi/1985/449/pdfs/uksi_19850449_en.pdf",
+      "retrieved_utc": "2026-10-05",
+      "retained": "source/south-georgia-order-1985.pdf",
+      "bytes": 1605113,
+      "sha256": "fa761f8cf4e90eb28beb467d806b14c447fd64fe29515c563ab1e81d6cabf610",
+      "license": "Open Government Licence v3.0; reuse terms https://legislation.github.io/data-documentation/reuse-licence.html",
+      "use": "Sections 2–3 describe coordinate-delimited islands/territories and the separate BOT; not a coastline dataset."
+    },
+    {
+      "id": "gsgssi-official-about-gis-protected-features-laws",
+      "urls": [
+        "https://gov.gs/about-sgssi/",
+        "https://gov.gs/gis/",
+        "https://gov.gs/wp-content/uploads/2023/10/Description-of-the-protected-features.pdf",
+        "https://laws.gov.gs/1985-onwards-laws/"
+      ],
+      "retrieval": "Attempted 2026-10-05 via verified HTTPS; local CA chain verification failed for gov.gs/laws.gov.gs.",
+      "retained": false,
+      "response_hash": null,
+      "license": "not identified; do not redistribute; restore from official URLs",
+      "use": "Official territorial role, Argentine claim, island/rock descriptions, 2016–17 GIS update statement, and 1985 separation context. Exact page byte provenance remains an explicit gap."
+    },
+    {
+      "id": "falkland-government-geography-and-camp",
+      "urls": [
+        "https://www.falklands.gov.fk/our-home",
+        "https://www.falklands.gov.fk/22-visiting-the-falkland-islands/visiting-the-falklands-list/277-camp"
+      ],
+      "retrieved_utc": "2026-10-05",
+      "response_hashes": "source/remote-response-hashes.json",
+      "license": "not identified; do not redistribute; restore from official URLs",
+      "use": "Government description of Overseas Territory/self-government and island count; Camp is countryside/outside Stanley, not a province tier."
+    },
+    {
+      "id": "argentina-official-sovereignty-claim",
+      "urls": [
+        "https://www.argentina.gob.ar/defensa/malvinas",
+        "https://www.argentina.gob.ar/noticias/comunicado-oficial-numero-157"
+      ],
+      "retrieved_utc": "2026-10-05",
+      "response_hashes": "source/remote-response-hashes.json",
+      "license": "not identified; do not redistribute; restore from official URLs",
+      "use": "Evidence of Argentina's current official claim; not an adjudication of sovereignty."
+    },
+    {
+      "id": "un-treaty-depositary-xxvii-7",
+      "url": "https://treaties.un.org/pages/ViewDetailsIII.aspx?Temp=mtdsg3&chapter=27&clang=_en&mtdsg_no=XXVII-7&src=TREATY",
+      "retrieved_utc": "2026-10-05",
+      "response_hashes": "source/remote-response-hashes.json",
+      "license": "not identified; do not redistribute; restore from official URL",
+      "use": "Depositary note records Argentine notification/reaffirmation; do not imply a UN adjudication or that Malvinas resolutions separately decide SGSSI."
+    },
+    {
+      "id": "natural-earth-terms",
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "retrieved_utc": "2026-10-05",
+      "response_hashes": "source/remote-response-hashes.json",
+      "license": "Natural Earth states all versions are public domain; no credit required, attribution encouraged."
+    },
+    {
+      "id": "worldatlas-policy-context-402",
+      "title": "Pinned WorldAtlas policy schema and South America semantic follow-up",
+      "paths": [
+        "data/location-policy.json",
+        "data/source-policy-corrections/europe-v1.json.gz",
+        "data/world-review.json",
+        "data/geographic-semantic-followup/south-america.json.gz"
+      ],
+      "baseline_commit": "e5393834c715396a60967d366523712edd5d1b65",
+      "sha256": {
+        "data/location-policy.json": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+        "data/source-policy-corrections/europe-v1.json.gz": "b5570900525b037ac10350e54793bf11c040b2afa867a261f819ca5d1e601d18",
+        "data/world-review.json": "e3fabc14cfe505c2f834f88e4848ff281bc646750e584088214760203e251164",
+        "data/geographic-semantic-followup/south-america.json.gz": "2bf5d32ef46e6e828fd4492445f67c8b405ce8f2925509edfdb3855aaa5d754b"
+      },
+      "findings": "The 201-entry location-policy map has neither FLK nor SGS; the global fallback crosswalk maps neither and lists both reference territories as unmatched. South America assessment records one location for each, no policy or policy metadata receipt, FLK unspecified source role and SGS named territory. Existing Europe overlay contains only ITA/ESP/XKX. Selected current entries are not transferred across ADM tiers.",
+      "reuse": "WorldAtlas repository data; inspected at pinned commit and summarized in owned source/source-policy-context.json"
+    }
+  ],
+  "missing_policy_profiles": [
+    "FLK",
+    "SGS"
+  ],
+  "policy_followup": "No source suitability decision may be inferred from the absent policy profiles; identify those omissions explicitly in a bounded policy follow-up."
+}
