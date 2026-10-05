@@ -7,7 +7,7 @@ from shapely.ops import transform
 from shapely.affinity import translate
 from pyproj import Transformer
 B=Path(__file__).resolve().parent
-BASELINE='7ffd4e35364ec8246b9add7459378b3f971fcd72'
+BASELINE='9df98ad16f2e58edeb361d235a59ed4ddabb2c7a'
 def baseline_json(path): return json.loads(Path(path).read_bytes())
 scope_doc=json.loads((B/'issue-scope.json').read_text()); scope=scope_doc['scope']; ids=scope['member_location_ids']; wanted=set(ids)
 source_path=B/'sources/geoboundaries-9469f09/geoBoundaries-TUR-ADM2.geojson'; source=json.loads(source_path.read_text())['features']; source_by_id={'gb:TUR:ADM2:'+f['properties']['shapeID']:f for f in source}

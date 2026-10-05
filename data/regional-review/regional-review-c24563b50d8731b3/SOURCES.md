@@ -1,6 +1,6 @@
 # Turkey ADM2 evidence packet (issue #72)
 
-Research snapshot: 2026-10-04 (America/Los_Angeles). Exact scoped IDs are preserved in `issue-scope.json`; baseline is `7ffd4e35364ec8246b9add7459378b3f971fcd72`. `district-assessments.json` reports one row for every declared ID, and `reproduce.py` regenerates that inventory and its input hashes from the repository root.
+Research snapshot: 2026-10-04 (America/Los_Angeles). Exact scoped IDs are preserved in `issue-scope.json`; baseline is `9df98ad16f2e58edeb361d235a59ed4ddabb2c7a`. `district-assessments.json` reports one row for every declared ID, and `reproduce.py` regenerates that inventory and its input hashes from the repository root.
 
 ## Scope and result
 
