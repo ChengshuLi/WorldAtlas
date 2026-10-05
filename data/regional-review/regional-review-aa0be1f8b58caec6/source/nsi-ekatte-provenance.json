@@ -1,0 +1,26 @@
+{
+  "title": "Unified Classifier of Administrative-Territorial and Territorial Units (EKATTE), JSON export",
+  "publisher": "National Statistical Institute of Bulgaria (NSI)",
+  "retrieved_at": "2026-10-05",
+  "retrieval_url": "https://www.nsi.bg/nrnm/ekatte/zip/download?files_type=json",
+  "landing_page": "https://www.nsi.bg/nrnm/ekatte/index",
+  "archive_file": "NSI-EKATTE-export-20261005.zip",
+  "archive_sha256": "6d848e467493f4d6ec6c1c9081bf51266ad888dc8f232c3d1fd2b0a265ace77d",
+  "archive_bytes": 413854,
+  "archive_contents": {
+    "municipality_register": "ek_obst.json",
+    "district_register": "ek_obl.json"
+  },
+  "export_timestamp_in_archive": "2026-10-05 03:00",
+  "data_current_as_of_in_archive": "2023-12-12",
+  "license_url": "https://www.nsi.bg/pages/licenz-za-izpolzvaneto-na-statisticheskata-informaciya-proizvejdana-i-razprostranyavana-ot-nacionalniya-statisticheski-institut-485",
+  "license_version": "2.0 (published 2022-08-11)",
+  "license_summary": "NSI's license permits worldwide reproduction, distribution and use of information produced and disseminated by NSI with source attribution and preservation of its original meaning, but does not permit distribution of derivative or composite works and excludes information produced by other institutions. This archive is served as the NSI-maintained EKATTE register. The exact original archive is retained with NSI attribution; no NSI boundary polygons or derived row-level extracts are distributed in this packet.",
+  "attribution": "Source: National Statistical Institute of Bulgaria, EKATTE.",
+  "notes": [
+    "The municipality JSON contains 265 municipality rows plus a final metadata row; the data-current-as-of field says 2023-12-12.",
+    "The 2025 NSI administrative-territorial release independently reports 265 municipalities as of 2025-12-31.",
+    "The archive's 2026 export timestamp is not the effective date of the register contents.",
+    "The archive contains municipality and district codes, names and NUTS relationships, not authoritative municipality polygons."
+  ]
+}

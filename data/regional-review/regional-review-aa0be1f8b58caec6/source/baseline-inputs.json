@@ -1,0 +1,12 @@
+{
+  "base_commit": "7493f9864c351a2b482329afdd86b2716553ce59",
+  "retrieved_at": "2026-10-05",
+  "inputs": {
+    "data/geography/part-1.json": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+    "data/geography/part-2.json": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+    "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "data/regional-review/regional-review-aa0be1f8b58caec6/source/issue-scope.json": "466e192a88a8fd66030ee2d5094ed05057711af797ffcb9d61c49b7cad96f70b",
+    "data/regional-review/regional-review-aa0be1f8b58caec6/source/issue-snapshot.json": "f0bcb6be45e0fcfc20b4472232234645160f0135642befd9b5e1abbb312cddca"
+  },
+  "note": "Atlas input files are pinned to the freshly fetched main base; rerunning after their contents change must fail rather than silently recompute against a new baseline."
+}
