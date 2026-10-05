@@ -62,8 +62,8 @@ changes, valid joint repairs, unchanged gaps/overlaps, newly added overlap,
 islands/lake holes, deletions/replacement, thin gaps, tile edges, the date line,
 invalid polygons, immutable input reads, release hashes and exclusive outputs.
 The Node test wrapper includes them in the existing full regression inventory.
-The next part of #920 must invoke trusted detector code against the exact PR and
-combined merge candidate; passing these controls alone does not install that gate.
+Passing detector controls alone does not install enforcement; the separate
+workflow jobs below invoke the check on exact PR and combined merge commits.
 
 ## Trusted premerge enforcement
 

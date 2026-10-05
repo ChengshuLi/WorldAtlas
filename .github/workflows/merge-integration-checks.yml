@@ -38,6 +38,7 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: read
+      pull-requests: read
     steps:
       # Trusted baseline code reads candidate blobs; candidate code never runs.
       - name: Checkout trusted geographic checker

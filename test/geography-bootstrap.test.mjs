@@ -42,3 +42,14 @@ for(const [name,args] of [
 ]) test(`bootstrap rejects ${name}`,()=>{
  const {result,report}=probe(args);assert.notEqual(result.status,0);assert.equal(report,null);
 });
+
+test('bootstrap job explicitly grants only the read permissions its API calls require',()=>{
+ function allowed(text) {
+  const job=text.match(/\n  geography:\n([\s\S]*?)(?=\n  [a-z][a-z-]*:|$)/)?.[1];
+  const permissions=job?.match(/    permissions:\n([\s\S]*?)    steps:/)?.[1];
+  return permissions?.trim()==='contents: read\n      pull-requests: read';
+ }
+ assert.equal(allowed(yaml),true);
+ assert.equal(allowed(yaml.replace('      pull-requests: read\n','')),false);
+ assert.equal(allowed(yaml.replace('      pull-requests: read','      pull-requests: write')),false);
+});

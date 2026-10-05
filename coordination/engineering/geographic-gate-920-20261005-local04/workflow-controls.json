@@ -1,7 +1,7 @@
 {
   "method_id": "trusted-geography-check",
   "outcome": "passed",
-  "tests": 89,
+  "tests": 90,
   "skipped": 0,
   "controls": [
     "only named no-data activation branch can report bootstrap absence",
@@ -13,6 +13,7 @@
     "bootstrap rejects incomplete inventory",
     "bootstrap rejects duplicate inventory",
     "bootstrap rejects oversized inventory",
+    "bootstrap job explicitly grants only the read permissions its API calls require",
     "successful full and focused workflows prove exact tree and pinned current attempt",
     "head metadata without explicit reviewed-head checkout never proves tested tree",
     "different complete tree or modified approved workflow/runner always falls back",
@@ -103,8 +104,8 @@
     },
     {
       "path": ".github/workflows/merge-integration-checks.yml",
-      "bytes": 7025,
-      "sha256": "87c82c12676ec87f0ac0a9e064df0040bbcb774e62542c838d40d83a635f52f0",
+      "bytes": 7051,
+      "sha256": "3887405cef4e461e726c9963ba7c8850bb59b0d3adf483ba1a0c3aaa83c9d030",
       "hash_kind": "file-bytes"
     },
     {
@@ -121,8 +122,8 @@
     },
     {
       "path": "test/geography-bootstrap.test.mjs",
-      "bytes": 3214,
-      "sha256": "f7a8b63cdd8b497eb404a9dc78275f2ebb09c5a7955f2b79243672bd34586412",
+      "bytes": 3793,
+      "sha256": "822b0600da49688fbee895a8f302ae5140fe0dd0ba8b31d08c8d6dca76fa02ba",
       "hash_kind": "file-bytes"
     },
     {
