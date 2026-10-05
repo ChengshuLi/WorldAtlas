@@ -1,0 +1,26 @@
+{
+  "parent_issue": 457,
+  "regional_integration_parent": 458,
+  "items": [
+    {
+      "issue": 887,
+      "title": "Verify AAFC Arctic ecoregion portions against territorial boundaries",
+      "blocking_issue": 457,
+      "affected_location_count": 114,
+      "source_entity_count": 90,
+      "owned_path": "data/regional-review/subarctic-america-aafc-boundary-followup/",
+      "scope_source": "#457 exact pinned member IDs with source_id aafc:ecoregion:*; derive the exact list from #457 scope.json and its subject-assessment.json after merge",
+      "interpretation": "Official ecological source identity is supported, but territorial clipping, boundary fidelity, completeness and neighboring granularity remain unverified."
+    },
+    {
+      "issue": 888,
+      "title": "Find authoritative Greenland physical sources north of 70\u00b0N",
+      "blocking_issue": 457,
+      "affected_location_count": 11,
+      "source_entity_count": 5,
+      "owned_path": "data/regional-review/subarctic-america-greenland-high-arctic-followup/",
+      "scope_source": "#457 exact 11 Greenland member IDs, comprising 9 RESOLVE portions and 2 geoBoundaries ADM1 records; retain the exact IDs from #457 scope.json",
+      "interpretation": "RESOLVE item metadata extent ends at 70\u00b0N; ADM1 and national statistical sources do not independently validate physical-region or park boundary semantics."
+    }
+  ]
+}
