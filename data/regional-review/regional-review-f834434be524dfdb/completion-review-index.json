@@ -1,0 +1,136 @@
+{
+  "author_worker_id": "codex-01a10948-7d38-75d0-bc01-4cc28ea41f49-474-fresh",
+  "branch": "geography/west-africa-batch8-completion-20261005",
+  "changed_outputs": [
+    {
+      "bytes": 19475,
+      "path": "data/regional-review/regional-review-f834434be524dfdb/complete_second_pass.py",
+      "sha256": "40bf0a4eea0617f506ff4c8d9bd06e7b4b6e163744c53d05f30720cd6601e7df"
+    },
+    {
+      "bytes": 1031246,
+      "path": "data/regional-review/regional-review-f834434be524dfdb/completion-review.json",
+      "sha256": "3d0050705461daa4d8486150ddafc5e9f46198ce22ffd179d1c5646545bf80ec"
+    },
+    {
+      "bytes": 6700,
+      "path": "data/regional-review/regional-review-f834434be524dfdb/completion-review.md",
+      "sha256": "162bb8a70a430ecca2050f6be0dfc00fc903e25df9d5581a0174128866bfec2f"
+    },
+    {
+      "bytes": 3740,
+      "path": "data/regional-review/regional-review-f834434be524dfdb/verify_completion.py",
+      "sha256": "60a60bff747286b0d74ac2159fb5dd83dbb648de8d10d5f52a15125846d354ce"
+    }
+  ],
+  "claim_id": "bad99f6e-93a6-42a3-b699-bcc9c95716c0",
+  "current_main_base": "b0ade2e782003af8c9568ee98cb01582ef1bd13a",
+  "followups": [
+    {
+      "dependency": "#474",
+      "issue": 833,
+      "subjects": 31
+    },
+    {
+      "dependencies": [
+        "#474",
+        "#475"
+      ],
+      "issue": 834,
+      "subjects": 255
+    }
+  ],
+  "frozen_scope_baseline": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+  "issue": 474,
+  "limits": [
+    "Source vintage and overlap evidence do not establish current legal parentage or boundary equality.",
+    "Niger ADM3 raw geometry is not retained pending a resolved lawful redistribution chain; see #834.",
+    "Mauritania source completeness, current source role and RESOLVE fragment purpose findings remain explicitly unresolved in linked children.",
+    "Completion does not certify the regional branch, macro envelope, any source license, or eligibility for historical import."
+  ],
+  "packet": "regional-review:f834434be524dfdb",
+  "retained_evidence": {
+    "base_commit": "b0ade2e782003af8c9568ee98cb01582ef1bd13a",
+    "files": [
+      {
+        "bytes": 28483,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/issue-scope.json",
+        "sha256": "e13e6a9158ea9433d30d586be0591f5950fad557ab66239ee8a48f785208382a"
+      },
+      {
+        "bytes": 10405,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/baseline-inputs.json",
+        "sha256": "c766d29e043e73076ce62714d314b53fb557dd6676dc152f5b090fe255fce641"
+      },
+      {
+        "bytes": 483836,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/assessment.json",
+        "sha256": "e7b5d628ff7949216eb270760eee9665e842ce052ca8d75be41c3a6f107070ae"
+      },
+      {
+        "bytes": 11196,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/sources.json",
+        "sha256": "b02395599631839fc6c5209d8bc8e61aac1a5c10e7027c493496c4a43493e6d5"
+      },
+      {
+        "bytes": 93643,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/niger-ins-crosswalk.json",
+        "sha256": "58a71fae25a5ecb236b69926f2c300e6eeb189e6d6752a3809cc0a591eaeecd5"
+      },
+      {
+        "bytes": 131319,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/niger-parent-overlap.json",
+        "sha256": "e7fb2eaea2c3c657a5560110c71c231889655f9934078d1aeea2c527d2ea460f"
+      },
+      {
+        "bytes": 8526,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-parent-overlap.json",
+        "sha256": "4d11409605224a51ea8f9f969fb5f59d1fd8897d5fa943c881368ee86a79d975"
+      },
+      {
+        "bytes": 5718,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-fragment-reproduction.json",
+        "sha256": "c0fad33a00f825aba51ddd9d40ca1c805e4416c4938600d9e4ef813bd2505f46"
+      },
+      {
+        "bytes": 3991812,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/sources/resolve/features-2017-ids.json",
+        "sha256": "63d8aa93b237b9abe8a2e3ca8b52c85cc32d993ee962e3a8503e9a619a462979"
+      },
+      {
+        "bytes": 8638,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/sources/resolve/item.json",
+        "sha256": "b251ba0471182c0eeae8899534f13ca6d2f0ec2125ca52a12e4188a2c4ef525a"
+      },
+      {
+        "bytes": 36547,
+        "path": "data/regional-review/regional-review-f834434be524dfdb/issue-snapshot.json",
+        "sha256": "74fff045c78e5f3427d657ad77d4c4d95550b05747a7796cae38987e5f4cc12a"
+      }
+    ]
+  },
+  "scope_counts": {
+    "locations": 228,
+    "partial_areas": 2,
+    "provinces": 56
+  },
+  "source_hashes": {
+    "mauritania_adm2_geometry": "29caf92b290e3281d43c3a6497893ebfcebede733694d49cebb6d12ea4ff256b",
+    "mauritania_adm2_metadata": "8721b5c751fc7a4d2aad33982c764892f69ec01bf302750c6f9e365dd399f1df",
+    "mauritania_ami_2021": "2981f5faf9505edefb252b65dd8e045f3c2546b23601d99e64b13b05b4e71890",
+    "mauritania_dgat_2024": "7defec0b154dc267455a841c3f5c6704aa3c517f1dbdbfc7de2ff80afcd185ae",
+    "mauritania_sngm_2021_2023": "5fac5c780589b421a806e7e87e487c46839d0a2029c118772d2cce111fa10cb8",
+    "niger_adm2_geometry_restoration": "228f3bb7fee0259949727102b309b987c56d29f3e23c77f64d1c48fc19955dc3",
+    "niger_adm3_geometry_restoration": "9e51e9033ff65c867faa8d741a5b39522d448fa15ae75e0bf5b1da68cb7bc5fa",
+    "niger_adm3_metadata": "3034f4a476bac69a50cac388077df2fcd3f0dc7c1c5f45982e0e437c499c3896",
+    "niger_ins_response": "a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7",
+    "resolve_features": "63d8aa93b237b9abe8a2e3ca8b52c85cc32d993ee962e3a8503e9a619a462979",
+    "resolve_item": "b251ba0471182c0eeae8899534f13ca6d2f0ec2125ca52a12e4188a2c4ef525a"
+  },
+  "validation_commands": [
+    "python3 data/regional-review/regional-review-f834434be524dfdb/reproduce_review.py",
+    "python3 data/regional-review/regional-review-f834434be524dfdb/complete_second_pass.py",
+    "python3 data/regional-review/regional-review-f834434be524dfdb/verify_completion.py"
+  ],
+  "version": 1
+}
