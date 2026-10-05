@@ -61,6 +61,12 @@
         "bytes": 3919,
         "sha256": "da3c2e8ab4886677efc476b3c7a3a19a7df05a5a88d393ebc0d392d900bd29a4",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/queue-pr-merge.mjs",
+        "bytes": 3117,
+        "sha256": "2daedba75ce32cbe246bd37156dcfe2ce345810a96c21ade8f970b7ed8f336c9",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {}
@@ -87,8 +93,8 @@
     },
     {
       "path": "coordination/engineering/local-workspace-budget-20261005/positive-control.json",
-      "bytes": 357,
-      "sha256": "bed4af51be4679b1d3caec7f432505c43843bafd7f0411d5575cd0498c6518d3",
+      "bytes": 494,
+      "sha256": "6fa2f100cfc34f208f177a58866adfc0d3e3440c5a01455b45310303d8f95e28",
       "hash_kind": "file-bytes"
     },
     {
@@ -99,14 +105,14 @@
     },
     {
       "path": "coordination/engineering/local-workspace-budget-20261005/validation.txt",
-      "bytes": 400,
-      "sha256": "e421cf60a6760238e8becc0fd0faa4f94f50f1b9389ce78174294501e1bf5bf6",
+      "bytes": 440,
+      "sha256": "bd42447d4b2a20de2796c6a91bbc305902467fb359da94d0dd33d0b2341bf2c3",
       "hash_kind": "file-bytes"
     },
     {
       "path": "docs/LOCAL_WORKSPACES.md",
-      "bytes": 6873,
-      "sha256": "f758f5e48407f84dd6285ecc62eba219d4901591268f6df0db2b9cc5d4c73fb2",
+      "bytes": 7662,
+      "sha256": "dfe1992d361c543628a8968dfc4270bca877b6986784fe4addda18abe60aa7d1",
       "hash_kind": "file-bytes"
     },
     {
@@ -129,44 +135,50 @@
     },
     {
       "path": "docs/prompts/AUDITOR.txt",
-      "bytes": 6767,
-      "sha256": "3efe7297e3234203689ab9a73d4cc8d52d4b30a909c849d94fd5d495513a1c75",
+      "bytes": 7251,
+      "sha256": "14730e609fd32f4362d91eac1086940947f3ebaf32f746df32668c4ef908d0a8",
       "hash_kind": "file-bytes"
     },
     {
       "path": "docs/prompts/ENGINEERING.txt",
-      "bytes": 9483,
-      "sha256": "babf9a6b106007c7decb96c2a4e22513a8c5ef600803e9e66d978c1834670690",
+      "bytes": 9967,
+      "sha256": "f1e01e14e11a79438b2d818e79c6309181e3f74b39c9fa0a22b0d29d261d4fb3",
       "hash_kind": "file-bytes"
     },
     {
       "path": "docs/prompts/GEOGRAPHY.txt",
-      "bytes": 6968,
-      "sha256": "d43a5af12ffea4d703ee97fc8a6ec4e999ad812a9a325f2d62c48df81fd3d68e",
+      "bytes": 7452,
+      "sha256": "dfbf1ed85fef74768c89d800fa1bea3f2be1eb8efaa2e1388472a2444e580ccb",
       "hash_kind": "file-bytes"
     },
     {
       "path": "docs/prompts/LUNA_HISTORY.txt",
-      "bytes": 7813,
-      "sha256": "b7623baf1bb2729b665c920c338085e7a0fc72209091dbb59b8d9fcc7469d1bf",
+      "bytes": 8297,
+      "sha256": "d0301512a965bf71e03beb7ec393aa733274af9b1c9cc03ea12ad02a09bfa944",
       "hash_kind": "file-bytes"
     },
     {
       "path": "docs/prompts/PUBLISHER.txt",
-      "bytes": 4689,
-      "sha256": "2615c8926da9e0ebd14d28af4f789fa2e77217abb2ba1071c0ccea5498ebb47b",
+      "bytes": 5173,
+      "sha256": "4f0e45f9c67052e1a02212fc33b18895ecd2067281b2a3c56308397048805066",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/local-workspace.mjs",
-      "bytes": 11411,
-      "sha256": "82ff8a63d52f03deeba5137d82f018b0757f080eda63ee02ca018877ee2f368d",
+      "bytes": 12738,
+      "sha256": "449fe610ae072a0398f0b973dd1ca91d679e8c0e6e28c6eec5c7274578666b80",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/local-workspace.test.mjs",
-      "bytes": 8596,
-      "sha256": "e5761d1e9a970ab48ee0c58df8367cdb273d083a97bb07792c34689c2b0fb6b6",
+      "bytes": 9494,
+      "sha256": "2bac004af36c9abd84545f3d8eaa45dea37966a0e25f5c3c91caeda7f4ef3b06",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "bytes": 3271,
+      "sha256": "5aaef3641e262332a8d21484e8bc2682c740205af8ad1e0c72878a4cd1a50178",
       "hash_kind": "file-bytes"
     }
   ],
@@ -188,7 +200,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/local-workspace.test.mjs",
+    "node --test test/local-workspace.test.mjs test/merge-integration-client.test.mjs",
     "node scripts/local-workspace.mjs report"
   ],
   "validation": [
@@ -286,6 +298,11 @@
     {
       "path": "test/local-workspace.test.mjs",
       "status": "added"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "status": "modified",
+      "original_sha256": "2daedba75ce32cbe246bd37156dcfe2ce345810a96c21ade8f970b7ed8f336c9"
     }
   ]
 }

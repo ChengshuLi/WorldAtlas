@@ -52,11 +52,12 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     }
     try { return operation(); } finally { fs.rmdirSync(lock); }
   };
-  const worktrees = () => git('worktree', 'list', '--porcelain').trim().split('\n\n').map(block => {
+  const worktrees = (measure = true) => git('worktree', 'list', '--porcelain').trim().split('\n\n').map(block => {
     const lines = block.split('\n');
     const directory = lines.find(line => line.startsWith('worktree '))?.slice(9);
     if (!directory) throw Error('Incomplete worktree inventory');
     ordinaryDirectory(directory);
+    if (!measure) return {path: directory};
     // Missing/prunable paths need explicit inspection; they are not zero-cost proof.
     const bytes = Number(execFileSync('du', ['-sk', directory], {encoding: 'utf8'}).split(/\s/)[0]) * 1024;
     if (!Number.isSafeInteger(bytes) || bytes < 0) throw Error('Unknown checkout usage');
@@ -129,7 +130,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (!entry || entry.token !== token) throw Error('Exact current slot ownership token required');
     if (entry.status !== 'ready') throw Error('Interrupted workspace needs operator inspection; automatic release refused');
     ordinaryDirectory(entry.path);
-    const inventory = worktrees();
+    const inventory = worktrees(false);
     if (!inventory.some(item => item.path === entry.path)) throw Error('Managed checkout missing; inspect registry');
     const localGit = (...args) => execFileSync('git', ['-C', entry.path, ...args], {encoding: 'utf8'});
     if (localGit('rev-parse', '--path-format=absolute', '--git-common-dir').trim() !== common) throw Error('Checkout Git identity changed');
@@ -148,7 +149,25 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (usage.freeBytes < limits.minimumFree || usage.checkoutBytes > limits.maximumCheckouts) throw Error('Local storage budget breached; stop new generation/installations and inspect report');
     return usage;
   };
-  return {report, check, allocate, release};
+  const ownedEntry = directory => state().entries.find(entry => entry.path === directory && entry.slot === 'work');
+  return {report, check, allocate, release, ownedEntry};
+}
+
+// Called only after the queue verifies its accepted receipt against actual GitHub
+// merged state. Local cleanup is separate from successful remote integration.
+export function cleanupCompletedWorkspace(repo, expectedHead) {
+  try {
+    const manager = workspaceManager(repo);
+    const current = fs.realpathSync(execFileSync('git', ['-C', repo, 'rev-parse', '--show-toplevel'], {encoding: 'utf8'}).trim());
+    const entry = manager.ownedEntry(current);
+    if (!entry) return {status: 'unmanaged', reason: 'No owned managed author slot; legacy checkout retained'};
+    const head = execFileSync('git', ['-C', repo, 'rev-parse', 'HEAD'], {encoding: 'utf8'}).trim();
+    const branch = execFileSync('git', ['-C', repo, 'symbolic-ref', '--short', 'HEAD'], {encoding: 'utf8'}).trim();
+    if (head !== expectedHead || branch !== entry.branch) return {status: 'retained', reason: 'Checkout advanced or changed branch since reviewed merge'};
+    return {status: 'released', ...manager.release({worker: entry.worker, slot: entry.slot, token: entry.token})};
+  } catch (error) {
+    return {status: 'pending', reason: error.message};
+  }
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

@@ -2,6 +2,7 @@ import {execFileSync} from 'node:child_process';
 import {randomUUID} from 'node:crypto';
 import {githubPages} from './issue-claim-contract.mjs';
 import {readWorkerResult} from './worker-result.mjs';
+import {cleanupCompletedWorkspace} from './local-workspace.mjs';
 
 const args = process.argv.slice(2), values = {};
 for (let i = 0; i < args.length; i += 2) {
@@ -42,7 +43,8 @@ for (let attempt = 1; attempt <= 3; attempt++) {
   if (result.accepted) {
     const actual = api(`/repos/${repo}/pulls/${number}`);
     if (!actual.merged || actual.head.sha !== head || actual.merge_commit_sha !== result.merge_commit) throw Error('Merge receipt differs from actual PR state');
-    console.log(JSON.stringify({...result, workflow_url: run.html_url})); break;
+    const local_cleanup = cleanupCompletedWorkspace(process.cwd(), head);
+    console.log(JSON.stringify({...result, workflow_url: run.html_url, local_cleanup})); break;
   }
   if (result.retryable && attempt < 3) { await sleep(2000 + Math.random()*3000); continue; }
   console.log(JSON.stringify({...result, workflow_url: run.html_url})); process.exitCode = 2; break;

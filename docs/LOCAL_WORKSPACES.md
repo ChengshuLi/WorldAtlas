@@ -72,8 +72,19 @@ cache paths and ownership tokens stay out of committed evidence.
 
 ## Finish and release
 
-After posting a completed review, or after a verified merge and durable issue/PR
-handoff, stop processes using the slot and run:
+Cleanup is the primary lifecycle rule. After verifying actual GitHub merge state,
+`queue-pr-merge.mjs` automatically attempts release of its current managed author
+slot, only if the checkout still has the reviewed head and branch. Its result
+includes `local_cleanup`; pending cleanup never invalidates a successful merge.
+Before queueing, stop local servers/reproduction processes, push required evidence
+and leave the slot clean. Record durable handoff before queueing; after automatic
+release, continue from the primary checkout to release the issue claim and allocate
+the next job. Legacy/unmanaged checkouts are retained for explicit inspection.
+
+Reviewers must release their local review slot immediately after durably posting
+the review; no waiting for the author to merge. Failed/blocked tasks first preserve
+their checkpoint and unique work. For a manual finish/release, stop processes using
+the slot and run:
 
 ```sh
 node scripts/local-workspace.mjs release --worker YOUR-WORKER-ID --slot work \

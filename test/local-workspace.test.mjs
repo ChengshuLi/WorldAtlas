@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {execFileSync, spawn} from 'node:child_process';
-import {workspaceManager, GiB} from '../scripts/local-workspace.mjs';
+import {workspaceManager, cleanupCompletedWorkspace, GiB} from '../scripts/local-workspace.mjs';
 
 function fixture(t, overrides = {}) {
   const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-storage-test-'));
@@ -140,4 +140,19 @@ test('new sparse packet paths permit ordinary creation and staging', t => {
   fs.mkdirSync(path.dirname(file), {recursive: true}); fs.writeFileSync(file, '{}');
   execFileSync('git', ['-C', entry.path, 'add', 'research/campaigns/new/result.json']);
   assert.match(execFileSync('git', ['-C', entry.path, 'status', '--porcelain'], {encoding: 'utf8'}), /A  research\/campaigns\/new\/result.json/);
+});
+
+test('confirmed merge cleanup removes only the unchanged clean managed author checkout', t => {
+  const {manager, repo, head} = fixture(t);
+  assert.equal(cleanupCompletedWorkspace(repo, head).status, 'unmanaged');
+  const entry = manager.allocate({worker: 'one', branch: 'engineering/finished'});
+  assert.equal(cleanupCompletedWorkspace(entry.path, 'a'.repeat(40)).status, 'retained');
+  assert.ok(fs.existsSync(entry.path));
+  fs.writeFileSync(path.join(entry.path, 'unique.txt'), 'retain');
+  assert.equal(cleanupCompletedWorkspace(entry.path, head).status, 'pending');
+  assert.ok(fs.existsSync(path.join(entry.path, 'unique.txt')));
+  fs.unlinkSync(path.join(entry.path, 'unique.txt'));
+  assert.equal(cleanupCompletedWorkspace(entry.path, head).status, 'released');
+  assert.ok(!fs.existsSync(entry.path));
+  assert.equal(manager.report().entries.length, 0);
 });
