@@ -1,0 +1,62 @@
+{
+  "scope_count": 216,
+  "classification_counts": {
+    "insufficient-evidence": 216
+  },
+  "state_counts": {
+    "05": 75,
+    "22": 64,
+    "40": 77
+  },
+  "unique_geoid_count": 216,
+  "state_division_members": [
+    [
+      "05",
+      "Arkansas",
+      "3",
+      "7"
+    ],
+    [
+      "22",
+      "Louisiana",
+      "3",
+      "7"
+    ],
+    [
+      "40",
+      "Oklahoma",
+      "3",
+      "7"
+    ],
+    [
+      "48",
+      "Texas",
+      "3",
+      "7"
+    ]
+  ],
+  "baseline_vs_geoboundaries_min_iou": 0.98305974,
+  "baseline_vs_geoboundaries_avg_iou": 0.99637444,
+  "baseline_vs_geoboundaries_max_iou": 0.99976855,
+  "atlas_geometries_coordinate_structure_different_from_source_count": 216,
+  "baseline_vs_geoboundaries_below_0_99_count": 15,
+  "baseline_vs_census2026_min_iou": 0.30169002,
+  "baseline_vs_census2026_below_0_98_count": 37,
+  "coastal_followup_ids": [
+    "22023",
+    "22045",
+    "22057",
+    "22075",
+    "22087",
+    "22101",
+    "22109",
+    "22113"
+  ],
+  "tiger2025_sample_count": 9,
+  "tiger2025_sample_min_iou": 0.999999997,
+  "negative_control": {
+    "same_name": "Lafayette",
+    "Louisiana_expected_geoid": "22055",
+    "Arkansas_distinct_geoid": "05073"
+  }
+}

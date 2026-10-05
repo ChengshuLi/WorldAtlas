@@ -1,0 +1,47 @@
+{
+  "bytes": 531,
+  "content_type": "application/geo+json;charset=UTF-8",
+  "endpoint": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0/query",
+  "feature_count": 4,
+  "features": [
+    {
+      "DIVISION": "7",
+      "GEOID": "05",
+      "NAME": "Arkansas",
+      "REGION": "3",
+      "STUSAB": "AR"
+    },
+    {
+      "DIVISION": "7",
+      "GEOID": "22",
+      "NAME": "Louisiana",
+      "REGION": "3",
+      "STUSAB": "LA"
+    },
+    {
+      "DIVISION": "7",
+      "GEOID": "40",
+      "NAME": "Oklahoma",
+      "REGION": "3",
+      "STUSAB": "OK"
+    },
+    {
+      "DIVISION": "7",
+      "GEOID": "48",
+      "NAME": "Texas",
+      "REGION": "3",
+      "STUSAB": "TX"
+    }
+  ],
+  "http_status": 200,
+  "parameters": {
+    "f": "geojson",
+    "orderByFields": "GEOID",
+    "outFields": "GEOID,NAME,STUSAB,REGION,DIVISION",
+    "returnGeometry": "false",
+    "where": "STATE IN ('05','22','40','48')"
+  },
+  "retrieved_utc_date": "2026-10-05",
+  "sha256": "1dde0ce06216f16303f45948fe0bd74118a626b98dce6cb3ddbc00687466e560",
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0/query?where=STATE+IN+%28%2705%27%2C%2722%27%2C%2740%27%2C%2748%27%29&outFields=GEOID%2CNAME%2CSTUSAB%2CREGION%2CDIVISION&returnGeometry=false&f=geojson&orderByFields=GEOID"
+}

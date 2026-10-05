@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-05",
+  "issue": 432,
+  "owned_scope": "216 exact member IDs in Arkansas, Louisiana and Oklahoma; three parent states. Texas is outside scope in #431.",
+  "recommended_disposition": "Keep all shared geography and source records unchanged. Treat this as a research handoff; do not certify this area's interior, the combined four-state division, or the regional branch.",
+  "classification": "insufficient-evidence",
+  "supported_findings": [
+    "All 216 exact baseline IDs and original IDs match features in the retained pinned GeoBoundaries file.",
+    "All 216 match unique Census county/parish-equivalent records by state code and exact name, and unique Census GEOIDs; state FIPS prefixes match the current framework parent IDs.",
+    "The Census Bureau identifies these as county/equivalent units; Louisiana's parish terminology is explicitly included at that semantic tier.",
+    "The official Census state layer places Arkansas, Louisiana, Oklahoma and Texas together in Region 3 / Division 7."
+  ],
+  "unresolved": [
+    {
+      "finding": "The main catalog SHA does not match exact bytes from its own URL at pinned geoBoundaries commit.",
+      "engineering_action": "Do not rewrite the shared hash. Trace the original source manifest/build and determine whether this is a byte revision, alternate packaging/serialization, or stale catalog pin; fix centrally only after exact evidence.",
+      "source_scope": "Nationwide gb:USA:ADM2 catalog entry; this packet supplies exact 216 affected IDs."
+    },
+    {
+      "finding": "Eight coastal county geometries have large 2018-to-2025 TIGER screen differences; 28 total rows have IoU below 0.98.",
+      "engineering_action": "Use dated county-change notes and exact contemporaneous cartographic source. Distinguish legal changes from water representation/generalization before proposing any polygon edits. Current Census geometry does not prove the older geometry was unlawful or wrong at its claimed vintage.",
+      "source_scope": "Cameron, Iberia, Lafourche, Plaquemines, St. Bernard, St. Mary, Terrebonne, Vermilion; their exact Atlas IDs, measurements and GEOIDs are in county-assessments.jsonl."
+    },
+    {
+      "finding": "TIGER products are Census statistical boundary representations and do not determine jurisdiction, rights or legal land descriptions.",
+      "engineering_action": "If a legally dispositive boundary question arises, obtain dated state/local legal boundary authority; Census shape alignment alone is insufficient."
+    }
+  ],
+  "next_research": "Follow-up #954 is blocked until #432 is merged. It has its own exact 216-ID scope and eight coastal comparison targets; do not reserve it early.",
+  "prohibited_by_scope": [
+    "core geography edit",
+    "shared source registry edit",
+    "production publication",
+    "deployment",
+    "historical import",
+    "region certification",
+    "approval of Texas or another worker's packet"
+  ]
+}
