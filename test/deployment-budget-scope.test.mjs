@@ -198,6 +198,8 @@ test('unavailable, capped, malformed, symlinked or hash-mismatched package depen
     async route => route.includes('/git/trees/') ? {truncated: false, tree: fixture.tree.map(row => row.path === 'database.mjs' ? {...row, sha: 'f'.repeat(40)} : row)} : fixture.api(route),
     async route => route.includes('/git/trees/') ? {truncated: false, tree: fixture.tree.map(row => ({...row, mode: '120000'}))} : fixture.api(route),
     async route => route.includes('/git/trees/') ? fixture.api(route) : {...await fixture.api(route), content: Buffer.from('{}').toString('base64')},
+    inputFixture({'data/world-review.json': 'invalid manifest'}).api,
+    inputFixture({'data/world-index.json': {parts: 'invalid inventory'}}).api,
     inputFixture({'data/source-quality-reviews/index.json': {parts: [{path: '../research.json'}]}}).api,
     inputFixture({'data/source-quality-reviews/index.json': {parts: [{path: 'missing.json'}]}}).api,
   ]) {

@@ -155,7 +155,12 @@ export async function packageResearchInputs({route, base, api}) {
       const sha = createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
       if (raw.length !== entry.size || sha !== entry.sha) throw Error('Package input blob hash mismatch');
       inputs.add(file);
-      return JSON.parse(raw);
+      const value = JSON.parse(raw);
+      if (!value || typeof value !== 'object' || Array.isArray(value)) throw Error('Invalid package input manifest object');
+      if (file === 'data/world-index.json' && (!Array.isArray(value.parts) || value.parts.some(part => typeof part !== 'string'))) throw Error('Invalid world input inventory');
+      if (file === 'data/granularity-audit.json' && (!value.input_sha256 || typeof value.input_sha256 !== 'object' || Array.isArray(value.input_sha256))) throw Error('Invalid geography audit input inventory');
+      for (const key of ['location_parts', 'change_parts']) if (value[key] !== undefined && (!Array.isArray(value[key]) || value[key].some(part => typeof part !== 'string'))) throw Error('Invalid copied package input inventory');
+      return value;
     })();
     reads.set(file, operation);
     return operation;
