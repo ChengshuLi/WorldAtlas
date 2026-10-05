@@ -1,0 +1,28 @@
+# Issue #454 — Southern Melanesian Islands interior batch 1
+
+Research packet only. Scope: the 25 `member_location_ids` and four full areas pinned by [`scope.json`](scope.json). This packet does not certify the Southern Melanesian region, approve publication, or authorize an import.
+
+## Reproduce
+
+From the repository root, using the repository-pinned Python environment:
+
+```sh
+python data/regional-review/regional-review-1aa97b490604ea4e/reproduce.py
+```
+
+The script verifies the issue body against the packet scope, reads baseline blobs from the recorded commit, scans every part in the pinned world index for duplicates/missing subjects, checks retained source hashes/native IDs/names, and runs positive and negative controls. It compares valid source/Atlas outlines with the repository shared WGS84 land helper. It computes New Caledonia overlays separately in EPSG:3163; `make_valid` is applied only to an in-memory clone as a diagnostic, never written or proposed as a candidate. The 45,177,077-byte full GeoReP response exceeded the 32 MiB per-file limit, so the original query hash is pinned in `source-acquisition.json` and all three raw feature objects are preserved losslessly in per-province partitions under `sources/new-caledonia-province-parts/`. Results are in `reproduction.json`, `unit-review.csv` and `area-review.csv`.
+
+The follow-up issue contracts can be checked with the repository-pinned Node 24 runtime: `node data/regional-review/regional-review-1aa97b490604ea4e/verify-followup-contracts.mjs`. It validates each child issue body, its evidence-quality contract, exact subset scope and file-hash pins against the recorded main commit.
+
+## Evidence and source limitations
+
+- [`sources.json`](sources.json) inventories byte hashes, licensing, attribution, vintage, completeness, source meaning and restoration URLs. [`source-acquisition.json`](source-acquisition.json) records retrieval date, response type, byte count and hash for downloaded sources. All downloaded evidence is retained under `sources/`.
+- Fiji: the Census Bureau's 2017 report lists 14 provinces and Rotuma and its current census page identifies 2017 as the latest population census. The boundary source is titled as a 2007 Census dataset and warns (in its catalog) that administrative boundaries may differ from official boundaries. Repository metadata records 2020 and a different hash; neither discrepancy is resolved here. The [Fiji Prime Minister's office](https://www.pmoffice.gov.fj/official-handover-speech-new-vehicle-for-the-council-of-rotuma-18-06-2024/) describes Rotuma as a dependency under the Rotuma Act, despite the census boundary roster's ADM2 grouping and current Atlas province parent. This is a sourced hierarchy/semantic correction handoff for the Rotuma subject; do not alter its geometry based on this packet.
+- Solomon Islands: the [Solomon Islands Ministry of Provincial Government](https://www.mpgis.gov.sb/temotu.html) says Temotu was formerly Santa Cruz Islands Province, but comprises several scattered island chains and Santa Cruz/Nendo is its largest island. Thus the current Temotu administrative province and the named Santa Cruz Islands geography are related but not interchangeable. Natural Earth is generalized, public domain, and not a precise administrative authority. Boundary correctness and the geographic area-parent relation remain unresolved.
+- Fiji neighboring granularity: the source registry identifies four ADM1 Divisions, while this packet reviews the Census-derived 15-feature ADM2 grouping; the 2017 Fiji Bureau of Statistics table groups Rotuma with provinces for reporting, not necessarily legal level. Its [2017 Census page](https://www.statsfiji.gov.fj/census-surveys/census-of-population-and-housing/) confirms the current census vintage, while the row table itself is linked in `sources.json` as restoration-only because reuse terms were not established.
+- Vanuatu: the [Department of Local Authorities](https://dla.gov.vu/index.php/about-us/provinces) confirms six provinces and their island-group meaning. The retained 2017 boundary polygons derive from OpenStreetMap/Wambacher under ODbL 1.0. Government profiles and small-scale maps support names/groupings but do not validate these exact province edges or confirm current completeness. Preserve attribution and share-alike obligations for any downstream derivative.
+- New Caledonia: current Government of New Caledonia GeoReP data is open-licensed and identifies the three official provinces. Its raw province geometries are invalid (`Nested shells`). Diagnostic repaired clones differ substantially from current Natural Earth geometry (Jaccard 0.819–0.917; symmetric difference 394–816 km²). This flags a bounded correction handoff to the geometry/source owner: request a valid ungeneralized source or clarification, then compare against [Organic Law 99-209](https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000020960246) sets the commune membership, including Poya's split. No repair, swap, or boundary certification is justified by these results.
+
+## Disposition
+
+20 subjects have matching native ID/name evidence but insufficient evidence to certify current exact boundaries: 13 Fiji provinces other than Rotuma and Lau, Temotu, and six Vanuatu provinces. Five subjects are correction-needed: Rotuma's administrative parent category, Lau's source/footprint discrepancy, and three New Caledonia geometry comparisons. These dispositions do not represent full regional approval. Exact unresolved facts, source limitations and engineering handoffs are recorded in [`findings.md`](findings.md).

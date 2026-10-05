@@ -1,0 +1,90 @@
+{
+  "subjects": 25,
+  "all_identity_controls": "passed",
+  "baseline_files": {
+    "data/world-index.json": {
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "bytes": 944
+    },
+    "data/administrative-sources.json": {
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "bytes": 661416
+    },
+    "data/validation/macro-publication-v5.json": {
+      "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "bytes": 2826
+    },
+    "data/macro-foundation/macro-certificate.json": {
+      "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "bytes": 38959
+    },
+    "data/hierarchy.json": {
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "bytes": 10164089
+    },
+    "data/macro-foundation/regional-handoffs.json.gz": {
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "bytes": 71286
+    },
+    "data/macro-foundation/current-membership-inventory.json.gz": {
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "bytes": 2404397
+    },
+    "data/geography/part-8.json": {
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+      "bytes": 5097739
+    },
+    "data/geography/part-22.json": {
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "bytes": 4746385
+    },
+    "data/geography/part-28.json": {
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "bytes": 6613963
+    }
+  },
+  "ncl": [
+    {
+      "location_id": "NCL-559",
+      "source_feature": "PROVINCE_NORD",
+      "source_valid": false,
+      "source_validity_reason": "Nested shells[164.288563583004 -20.5691327386611]",
+      "source_repair_used_only_for_diagnostic": true,
+      "atlas_area_km2": 9517.155162089792,
+      "diagnostic_source_area_km2": 9418.737426154456,
+      "atlas_coverage": 0.9519704781783843,
+      "source_coverage": 0.9619177540074599,
+      "jaccard": 0.9173952863414581,
+      "symmetric_difference_km2": 815.7910871392197,
+      "interpretation": "Large disagreement is a review signal only; invalid-source repair semantics and source boundary generalization prevent deciding which footprint is correct."
+    },
+    {
+      "location_id": "NCL-1258",
+      "source_feature": "PROVINCE_DES_ILES",
+      "source_valid": false,
+      "source_validity_reason": "Nested shells[167.870321236749 -21.5741319853041]",
+      "source_repair_used_only_for_diagnostic": true,
+      "atlas_area_km2": 2014.486663536663,
+      "diagnostic_source_area_km2": 1948.3490770134179,
+      "atlas_coverage": 0.8857836621501324,
+      "source_coverage": 0.9158519873221969,
+      "jaccard": 0.8191193471276464,
+      "symmetric_difference_km2": 394.03699218987447,
+      "interpretation": "Large disagreement is a review signal only; invalid-source repair semantics and source boundary generalization prevent deciding which footprint is correct."
+    },
+    {
+      "location_id": "NCL-1259",
+      "source_feature": "PROVINCE_SUD",
+      "source_valid": false,
+      "source_validity_reason": "Nested shells[166.125730121754 -22.0910746177353]",
+      "source_repair_used_only_for_diagnostic": true,
+      "atlas_area_km2": 7301.211204724169,
+      "diagnostic_source_area_km2": 6981.253414794294,
+      "atlas_coverage": 0.932473887284528,
+      "source_coverage": 0.9752100932945583,
+      "jaccard": 0.9108827333704769,
+      "symmetric_difference_km2": 666.0870316092164,
+      "interpretation": "Large disagreement is a review signal only; invalid-source repair semantics and source boundary generalization prevent deciding which footprint is correct."
+    }
+  ]
+}
