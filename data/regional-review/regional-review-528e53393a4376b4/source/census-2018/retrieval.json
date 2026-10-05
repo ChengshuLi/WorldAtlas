@@ -1,0 +1,20 @@
+{
+  "source_id": "census-tigerweb-2018",
+  "layer_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2018/MapServer/84",
+  "metadata_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2018/MapServer/84?f=pjson",
+  "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2018/MapServer/84/query?where=STATE+IN+%28%2713%27%2C%2721%27%29&outFields=GEOID%2CSTATE%2CCOUNTY%2CNAME%2CBASENAME%2CLSADC%2CFUNCSTAT%2CCOUNTYNS%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+  "retrieval_started_at": "2026-10-05T14:20:29.367Z",
+  "retrieval_completed_at": "2026-10-05T14:21:09.552Z",
+  "returned_feature_count": 279,
+  "state_fips": [
+    "13",
+    "21"
+  ],
+  "metadata_sha256": "2d3b72f3957787cae0f8ae5a77bafd0b9603f8d6a5b4db2a700898e179e855c6",
+  "metadata_bytes": 9479,
+  "response_sha256": "aab25c2227638b0048020747f8dd82b019ddd6f26100585c35533c5036cc7219",
+  "response_bytes": 28167517,
+  "description": "Counties (or statistically equivalent entities); January 1, 2018 vintage",
+  "service_copyright": "Source: U.S. Census Bureau",
+  "limitation": "Census statistical geography and reference geometry; not a legal adjudication of each county line."
+}
