@@ -1,0 +1,56 @@
+{
+  "result": {
+    "version": 1,
+    "deployment_id": 6853304833,
+    "operation_id": "b1958782-e408-400c-bc5a-0149cfd37cc6",
+    "worker_id": "publisher-wheel-retry-20261005-local01",
+    "primary_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344",
+    "state": "verified",
+    "cleanup_confirmed": true,
+    "worker_version": "f46f5cdd-58f5-41cd-abee-cb5b41c2106d",
+    "public_reads": true,
+    "database_writes_enabled": false,
+    "database_information_deleted": false,
+    "original_site_and_storage_preserved": true,
+    "acceptance_url": "https://github.com/ChengshuLi/WorldAtlas/issues/886#issuecomment-5989805566",
+    "issue_checks": [
+      {
+        "issue": 886,
+        "outcome": "deferred",
+        "evidence_urls": [
+          "https://github.com/ChengshuLi/WorldAtlas/issues/886#issuecomment-5989805566"
+        ]
+      }
+    ],
+    "site_primary_delivery_boundary_advanced": false,
+    "completed_at": "2026-10-05T07:10:36.867Z"
+  },
+  "acceptance_url": "https://github.com/ChengshuLi/WorldAtlas/issues/886#issuecomment-5989805566",
+  "result_url": "https://github.com/ChengshuLi/WorldAtlas/issues/886#issuecomment-5989806012",
+  "changed_assets": [
+    {
+      "path": "index.html",
+      "bytes": 462,
+      "sha256": "5fba1d5becd55c8aaa22a6bd917b2142d8ae4d59221f5d09bb60f63ee04a7b35",
+      "status": 200
+    },
+    {
+      "path": "assets/index-C3pmC4rP.css",
+      "bytes": 31457,
+      "sha256": "3719753e6385f4d59f7271b56c6b439d40905c4777bc202cb05b17796ce1db39",
+      "status": 200
+    },
+    {
+      "path": "assets/index-D-52J2_Y.js",
+      "bytes": 360425,
+      "sha256": "43670696440b787d6d07d2469f0bbbb4dc4fd94e9ff10053e7d0802206a71d02",
+      "status": 200
+    }
+  ],
+  "hashes": {
+    "wheel-retry-package-inventory.json": "32f1ad3681d37560ee67d13e20e5ce608c19b7f468ca832fbcbee1c718a7f5b4",
+    "wheel-retry-provider-readback.json": "90810b2852d82337697d835269cabdb70e790bd0f3ccf57d9f39c4690ff9c8e1",
+    "wheel-retry-map-host-check.json": "a8ac4e6363a696b8391d80d87f55c860ebd8afb181deb08e2d43c0b476db71f1",
+    "wheel-retry-dry-run.log": "47dc5e74852ac25beededea0b39c91dbcff3d5aaf58f62ebc7262800f37bfbe5"
+  }
+}

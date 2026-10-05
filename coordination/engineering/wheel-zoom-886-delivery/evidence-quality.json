@@ -1,0 +1,1878 @@
+{
+  "version": 1,
+  "issue": 886,
+  "lane": "engineering",
+  "worker_id": "engineering-cloudflare-wheel-886-20261004-01a10934",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "59f0e6b155d17e42880e0750c19aa9789f70b7d2",
+    "files": [
+      {
+        "path": "src/wheel-zoom.js",
+        "bytes": 3116,
+        "sha256": "65d8fb02a6beb04a9e917d962f240bca48daa2872a8417260dd5d1c04a247f19",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/main.js",
+        "bytes": 35483,
+        "sha256": "5e45f3419696516de7821b77c9cfd9d0682f47f48ae29c54c8d37a305f0259ac",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/pixel-layer.js",
+        "bytes": 7305,
+        "sha256": "78df4421cb0262a2dbc813f565f68673f1afbd5a8d72b1746d918441d6ed793d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/pixel-canvas-layer.js",
+        "bytes": 8739,
+        "sha256": "8c94181f24f73ce9c735e924e1c9b314f3703797f5a869fe3f6ae59be7811b48",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/pixel-grid.js",
+        "bytes": 3617,
+        "sha256": "320cc48796d5d3aaf07bb096441346abbe44ed4fab66df08ee003620ce5870a9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/pixel-ownership.js",
+        "bytes": 6134,
+        "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/style.css",
+        "bytes": 16086,
+        "sha256": "521732f6c73f093310ba72dada0398d8993efbe0f8ac03e6dd9ef5944ba98687",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/benchmark-wheel-zoom.mjs",
+        "bytes": 7906,
+        "sha256": "576072d674d8be7aa79dd64f95a648ce234833d74dbc29a4210521cb74363ea4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/verify-wheel-app.mjs",
+        "bytes": 4389,
+        "sha256": "a2ee6c209b3c38ff67cc91947d965cc1bead4147901a06a0b17bad09d9654ec3",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [
+    {
+      "id": "wheel-publication-failure",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/886#issuecomment-5989673505",
+      "role": "Original user-owned failed and successful publisher operational receipts; HTTP/assets/data/access acceptance is distinct from author live browser measurements",
+      "vintage": "2026-10-05 failed operation 2a2ac472-32ef-45db-ae9c-746a52fa6ee1 and fresh verified retry b1958782-e408-400c-bc5a-0149cfd37cc6",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "User-owned operational receipts; minimal provider error text retained as failure evidence"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/neon-quota-failure.json",
+          "bytes": 211,
+          "sha256": "9313c58c2855483e16d432b90f2c9da9e2d44e9d473770689784f8840b93ac0e",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/rollback-readback.json",
+          "bytes": 584,
+          "sha256": "5b6b1475b48be4ac4f70558b16ecc220fb417a85460442ce11d2d33dd920e01f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-failure-comment.md",
+          "bytes": 2464,
+          "sha256": "97bc05ea322c6547d74c16bb522a892f5b106f596e9d76a6fe7ffa3d96e7cb15",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-result-comment.md",
+          "bytes": 1044,
+          "sha256": "d462c825e32e0aa03db6896de09f04c13c5a9cdb897f05d9733c203a2cb2f817",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-retry-acceptance-comment.md",
+          "bytes": 3079,
+          "sha256": "712f7408eef7063e8a401cc962734fddfff1d3fe147c5903481af4d4d8519806",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-retry-result-comment.md",
+          "bytes": 1016,
+          "sha256": "eb049291cd183fb0caf9975646874db1755d88404aabd45f5246b99527d6793d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/wheel-retry-publication-result.json",
+          "bytes": 2150,
+          "sha256": "ecc89072c4b7fc2bbaac700ec1b28fbc82fa3382a255d249be0d1aa62908b516",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/wheel-retry-map-host-check.json",
+          "bytes": 21243,
+          "sha256": "a8ac4e6363a696b8391d80d87f55c860ebd8afb181deb08e2d43c0b476db71f1",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/wheel-retry-package-inventory.json",
+          "bytes": 71837,
+          "sha256": "32f1ad3681d37560ee67d13e20e5ce608c19b7f468ca832fbcbee1c718a7f5b4",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/wheel-retry-provider-readback.json",
+          "bytes": 736,
+          "sha256": "90810b2852d82337697d835269cabdb70e790bd0f3ccf57d9f39c4690ff9c8e1",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/README.md",
+      "bytes": 6786,
+      "sha256": "aa730d5f82affcf247924b8ca57ddfc160739c91ff2cad11040c51ecc758d931",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/claim.json",
+      "bytes": 837,
+      "sha256": "b2ee3157413cc3785a4d775b93292ae9ed1b1563c809ad63e659872adb96c406",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/independent-public-readback.json",
+      "bytes": 1749,
+      "sha256": "486bfcba4281507562a0d6fcb7637b745f91f00d1f9be54b7cc5e9d38e135d9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/independent-success-readback.json",
+      "bytes": 1069,
+      "sha256": "c417fc200f383d50518556b0cb75561f33a3e0908b8aa35748884c84b583e8ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after-trace.json.gz",
+      "bytes": 443010,
+      "sha256": "5e040abb86c4b3c60032ad9a7099cd4389c50d8aef7277316a9f084d2aef4092",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 9974049,
+      "uncompressed_sha256": "2215e01792d8ea5047404b646a2a0bbfbc5f6396fe12f7165832f2620174e99a"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "bytes": 203232,
+      "sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.png",
+      "bytes": 194146,
+      "sha256": "2d362bb3708a15b3211ba22e5512388a9772a6f4435ea86fc1bd368410760eb7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-app.json",
+      "bytes": 7400,
+      "sha256": "790a414f9b47e6f46b4bd1060c36cc0bf743d86d3234392348d6798fb739079b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after-trace.json.gz",
+      "bytes": 408591,
+      "sha256": "09dd1291cf04555ef0e9f72e88c98028c7b0de02b75fff244d3c7174c5e02cb7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 9036933,
+      "uncompressed_sha256": "406fde82325e8a860d1d7072cadc781be481eb93e19690833f86fb2a5757ee67"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "bytes": 239653,
+      "sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.png",
+      "bytes": 151577,
+      "sha256": "ec3ace5735a904db89da1af0696076960c338d4653a2786e114abe756e14df47",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-app.json",
+      "bytes": 10646,
+      "sha256": "bbcb72fe2f6ac051b1aac8a71cfcb9c11be5f8980b85a17142516a722eeb3c71",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/negative-control.json",
+      "bytes": 1965,
+      "sha256": "38678c275dded4d56f3597498a33e92ff68c3e710ae15bc0760bdc3f2ca5f4e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/positive-control.json",
+      "bytes": 1144,
+      "sha256": "0aa1e033f9376aa175d76a6f4c9131596a0618f5ac01498709428be6a9557aa7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/post-upgrade-public-preflight.json",
+      "bytes": 5188,
+      "sha256": "5b7c7355826d17ea692e59d61597916d49f680293eb7f8eade897aaf3e6aafd7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/quota-identification.json",
+      "bytes": 772,
+      "sha256": "ab0aed5cfab47bd353360926839fbe7730e388fee4861189249dc8674ccb1b0e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/targets.json",
+      "bytes": 1111,
+      "sha256": "2e02209df848773d07ea588f81daac8ac9571e4e2863121b9cbc4badd4d9c95f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "delivery-checkpoint",
+      "kind": "source",
+      "description": "Retain original sanitized operation/rollback receipts and GitHub result bytes, independently compare anonymous served HTML/JS/CSS hashes to the prior publication and capture unavailable release/snapshot responses. This is failure/provenance review, not a wheel benchmark or data-integrity certificate.",
+      "software": "Node24 bounded HTTP GET and GitHub API; no user browser/profile, production write, billing action or management-key assumption",
+      "units": "HTTP state and byte hashes"
+    },
+    {
+      "id": "wheel-observation",
+      "kind": "measurement",
+      "description": "Fresh isolated public-host synthetic wheel traces at pinned Worker f46f5cdd-58f5-41cd-abee-cb5b41c2106d primary4a1fc677. Native Metal and forced Canvas separately; preserve all samples and limitations. rAF/first CSS change are browser proxies, not physical device or photon latency.",
+      "software": "Node24 Playwright Chromium153; recorded native GPU and viewport; fresh contexts, no user profile or artificial throttles",
+      "units": "ms and counts"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "live-canvas-after-notched-in-1-first_observed_transform_ms",
+      "value": 31.7999999996282,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-1-raf_p50_ms",
+      "value": 16.69999999999891,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-1-raf_p95_ms",
+      "value": 16.80000000000109,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-1-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-1-frames",
+      "value": 69,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-1-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-1-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-2-first_observed_transform_ms",
+      "value": 31.999999999254214,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-2-raf_p50_ms",
+      "value": 16.69999999999891,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-2-raf_p95_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-2-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-2-frames",
+      "value": 69,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-2-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-2-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-3-first_observed_transform_ms",
+      "value": 32.09999999925458,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-3-raf_p50_ms",
+      "value": 16.69999999999891,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-3-raf_p95_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-3-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-3-frames",
+      "value": 70,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-3-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-in-3-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-high-resolution-first_observed_transform_ms",
+      "value": 32.09999999851061,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-high-resolution-raf_p50_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-high-resolution-raf_p95_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-high-resolution-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-high-resolution-frames",
+      "value": 149,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-high-resolution-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-high-resolution-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-rapid-reversal-first_observed_transform_ms",
+      "value": 32,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-rapid-reversal-raf_p50_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-rapid-reversal-raf_p95_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-rapid-reversal-frames_over_34ms",
+      "value": 1,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-rapid-reversal-frames",
+      "value": 51,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-rapid-reversal-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-rapid-reversal-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-out-first_observed_transform_ms",
+      "value": 32,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-out-raf_p50_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-out-raf_p95_ms",
+      "value": 16.80000000000291,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-out-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-out-frames",
+      "value": 71,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-out-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-notched-out-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-in-first_observed_transform_ms",
+      "value": 32.20000000000073,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-in-raf_p50_ms",
+      "value": 16.69999999999709,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-in-raf_p95_ms",
+      "value": 16.799999999999272,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-in-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-in-frames",
+      "value": 69,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-in-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-in-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-out-first_observed_transform_ms",
+      "value": 32.699999999626016,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-out-raf_p50_ms",
+      "value": 16.69999999999709,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-out-raf_p95_ms",
+      "value": 16.799999999999272,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-out-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-out-frames",
+      "value": 75,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-out-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-canvas-after-full-range-out-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "47e4fb757b0f37170d92f23a2b5585458d129c989287ccd4f4ba97c65cdfb1fb",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-1-first_observed_transform_ms",
+      "value": 32.20000000000073,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-1-raf_p50_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-1-raf_p95_ms",
+      "value": 16.799999999999272,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-1-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-1-frames",
+      "value": 71,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-1-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-1-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-2-first_observed_transform_ms",
+      "value": 32.30000000111613,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-2-raf_p50_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-2-raf_p95_ms",
+      "value": 16.799999999999272,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-2-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-2-frames",
+      "value": 69,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-2-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-2-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-3-first_observed_transform_ms",
+      "value": 32.2000000003718,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-3-raf_p50_ms",
+      "value": 16.69999999999709,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-3-raf_p95_ms",
+      "value": 16.799999999999272,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-3-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-3-frames",
+      "value": 69,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-3-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-in-3-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-high-resolution-first_observed_transform_ms",
+      "value": 32.00000000149157,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-high-resolution-raf_p50_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-high-resolution-raf_p95_ms",
+      "value": 16.799999999999272,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-high-resolution-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-high-resolution-frames",
+      "value": 150,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-high-resolution-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-high-resolution-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-rapid-reversal-first_observed_transform_ms",
+      "value": 32.400000000001455,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-rapid-reversal-raf_p50_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-rapid-reversal-raf_p95_ms",
+      "value": 16.700000000000728,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-rapid-reversal-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-rapid-reversal-frames",
+      "value": 53,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-rapid-reversal-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-rapid-reversal-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-out-first_observed_transform_ms",
+      "value": 32.800000000373984,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-out-raf_p50_ms",
+      "value": 16.69999999999709,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-out-raf_p95_ms",
+      "value": 16.799999999999272,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-out-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-out-frames",
+      "value": 69,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-out-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-notched-out-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-in-first_observed_transform_ms",
+      "value": 15.400000000743603,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-in-raf_p50_ms",
+      "value": 16.69999999999709,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-in-raf_p95_ms",
+      "value": 16.700000000004366,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-in-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-in-frames",
+      "value": 69,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-in-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-in-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-out-first_observed_transform_ms",
+      "value": 32.599999999998545,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-out-raf_p50_ms",
+      "value": 16.69999999999709,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-out-raf_p95_ms",
+      "value": 16.799999999995634,
+      "unit": "ms",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-out-frames_over_34ms",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-out-frames",
+      "value": 70,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-out-ownership_compilation_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "live-metal-after-full-range-out-ownership_upload_delta",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "565b0b782f3e91a2e8058ee6992ebd15d0dfc65e56606b682f36dc73b5d7b807",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "live-canvas-after-notched-in-1-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/0/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-1-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/0/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-1-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/0/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-1-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/0/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-1-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/0/frames"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-1-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/0/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-1-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/0/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-2-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/1/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-2-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/1/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-2-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/1/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-2-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/1/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-2-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/1/frames"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-2-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/1/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-2-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/1/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-3-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/2/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-3-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/2/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-3-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/2/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-3-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/2/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-3-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/2/frames"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-3-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/2/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-in-3-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/2/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-high-resolution-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/3/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-high-resolution-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/3/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-high-resolution-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/3/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-high-resolution-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/3/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-canvas-after-high-resolution-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/3/frames"
+    },
+    {
+      "metric_id": "live-canvas-after-high-resolution-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/3/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-high-resolution-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/3/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-rapid-reversal-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/4/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-rapid-reversal-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/4/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-rapid-reversal-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/4/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-rapid-reversal-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/4/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-canvas-after-rapid-reversal-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/4/frames"
+    },
+    {
+      "metric_id": "live-canvas-after-rapid-reversal-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/4/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-rapid-reversal-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/4/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-out-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/5/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-out-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/5/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-out-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/5/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-out-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/5/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-out-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/5/frames"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-out-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/5/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-notched-out-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/5/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-in-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/6/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-in-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/6/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-in-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/6/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-in-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/6/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-in-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/6/frames"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-in-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/6/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-in-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/6/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-out-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/7/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-out-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/7/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-out-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/7/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-out-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/7/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-out-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/7/frames"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-out-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/7/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-canvas-after-full-range-out-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "json_pointer": "/samples/7/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-1-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/0/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-1-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/0/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-1-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/0/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-1-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/0/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-1-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/0/frames"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-1-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/0/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-1-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/0/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-2-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/1/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-2-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/1/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-2-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/1/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-2-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/1/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-2-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/1/frames"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-2-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/1/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-2-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/1/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-3-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/2/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-3-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/2/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-3-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/2/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-3-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/2/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-3-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/2/frames"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-3-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/2/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-metal-after-notched-in-3-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/2/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-metal-after-high-resolution-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/3/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-metal-after-high-resolution-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/3/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-metal-after-high-resolution-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/3/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-metal-after-high-resolution-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/3/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-metal-after-high-resolution-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/3/frames"
+    },
+    {
+      "metric_id": "live-metal-after-high-resolution-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/3/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-metal-after-high-resolution-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/3/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-metal-after-rapid-reversal-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/4/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-metal-after-rapid-reversal-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/4/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-metal-after-rapid-reversal-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/4/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-metal-after-rapid-reversal-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/4/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-metal-after-rapid-reversal-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/4/frames"
+    },
+    {
+      "metric_id": "live-metal-after-rapid-reversal-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/4/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-metal-after-rapid-reversal-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/4/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-metal-after-notched-out-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/5/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-out-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/5/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-out-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/5/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-out-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/5/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-metal-after-notched-out-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/5/frames"
+    },
+    {
+      "metric_id": "live-metal-after-notched-out-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/5/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-metal-after-notched-out-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/5/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-in-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/6/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-in-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/6/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-in-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/6/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-in-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/6/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-in-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/6/frames"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-in-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/6/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-in-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/6/ownership_upload_delta"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-out-first_observed_transform_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/7/first_observed_transform_ms"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-out-raf_p50_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/7/raf_p50_ms"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-out-raf_p95_ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/7/raf_p95_ms"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-out-frames_over_34ms",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/7/frames_over_34ms"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-out-frames",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/7/frames"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-out-ownership_compilation_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/7/ownership_compilation_delta"
+    },
+    {
+      "metric_id": "live-metal-after-full-range-out-ownership_upload_delta",
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "json_pointer": "/samples/7/ownership_upload_delta"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/independent-public-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/independent-success-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-after.png",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-canvas-app.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after-trace.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-after.png",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/live-metal-app.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/neon-quota-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/post-upgrade-public-preflight.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-failure-comment.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-result-comment.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-retry-acceptance-comment.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-retry-result-comment.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/quota-identification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/rollback-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/targets.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/wheel-retry-map-host-check.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/wheel-retry-package-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/wheel-retry-provider-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/wheel-retry-publication-result.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "wheel-observation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/wheel-zoom-886-delivery/positive-control.json"
+    },
+    {
+      "method_id": "wheel-observation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/wheel-zoom-886-delivery/negative-control.json"
+    }
+  ],
+  "commands": [
+    "node scripts/evidence-quality.mjs coordination/engineering/wheel-zoom-886-delivery/evidence-quality.json",
+    "ATLAS_BENCH_ANGLE=metal node scripts/benchmark-wheel-zoom.mjs https://worldatlas-explorer.chengshu-worldatlas.workers.dev OWNED_OUTPUT.json",
+    "ATLAS_BENCH_ANGLE=metal ATLAS_BENCH_CANVAS=1 node scripts/verify-wheel-app.mjs https://worldatlas-explorer.chengshu-worldatlas.workers.dev OWNED_OUTPUT.json",
+    "node scripts/check-wheel-measurement.mjs coordination/engineering/wheel-zoom-886-delivery/"
+  ]
+}
