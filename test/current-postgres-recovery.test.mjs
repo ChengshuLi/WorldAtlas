@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {generateKeyPairSync,createHash} from 'node:crypto';
-import {loadRecoveryReservation,validateRecoveryWindow,validatedOwnerConnection,assertRestoredInventory,boundedOwnerJSON,runCurrentPostgresRecovery,isolatedDatabaseACLList,isolatedDatabaseACLSQL,isolatedRestoreSQL,isolatedOriginalChecks} from '../scripts/current-postgres-recovery.mjs';
+import {nativeReadbackFailureCode,isolatedFilesystemUsage,loadRecoveryReservation,validateRecoveryWindow,validatedOwnerConnection,assertRestoredInventory,boundedOwnerJSON,runCurrentPostgresRecovery,isolatedDatabaseACLList,isolatedDatabaseACLSQL,isolatedRestoreSQL,isolatedOriginalChecks} from '../scripts/current-postgres-recovery.mjs';
 import {backupRecipientFingerprint} from '../scripts/recovery-backup-envelope.mjs';
 import {storageExportV2Contract,storageExportV2Collections,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -116,3 +116,15 @@ test('database ACL rendering excludes the forced create prelude and rejects unex
 });
 
 test('TOC-style early input close reproduces full-size spawnSync EPIPE despite successful child exit',async()=>{const {execFileSync}=await import('node:child_process');assert.throws(()=>execFileSync('head',['-c','10'],{input:Buffer.alloc(22510251),stdio:['pipe','pipe','pipe']}),error=>error.code==='EPIPE'&&error.status===0);});
+
+
+test('native readback diagnostics retain only fixed process codes or terse SQLSTATE',()=>{
+ assert.equal(nativeReadbackFailureCode({stderr:Buffer.from('ERROR:  53100\nprivate-value-do-not-copy')}),'native-query-sqlstate-53100');
+ assert.equal(nativeReadbackFailureCode({code:'ENOBUFS',stderr:'private://credentials'}),'native-query-enobufs');
+ assert.equal(nativeReadbackFailureCode({stderr:'ERROR: private credential source value'}),'native-query-failed');
+ assert.equal(nativeReadbackFailureCode({stderr:'ERROR:  53100private-token'}),'native-query-failed');
+});
+test('isolated disk readback accepts one bounded mount measurement and rejects malformed or unsafe totals',()=>{
+ assert.deepEqual(isolatedFilesystemUsage('Filesystem 1024-blocks Used Available Capacity Mounted on\ntmpfs 3145728 2400000 745728 77% /var/lib/postgresql\n'),{capacity_bytes:3221225472,used_bytes:2457600000,available_bytes:763625472});
+ for(const row of ['', 'tmpfs 10 9 2 90% /var/lib/postgresql', 'tmpfs 99999999999999999999 0 0 0% /var/lib/postgresql','tmpfs 10 1 9 10% /other','tmpfs 10 1 9 10% /var/lib/postgresql\ntmpfs 10 1 9 10% /var/lib/postgresql'])assert.throws(()=>isolatedFilesystemUsage(row));
+});

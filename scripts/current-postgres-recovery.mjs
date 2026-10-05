@@ -244,8 +244,22 @@ export function assertRestoredInventory(before,target,after){
  need(same({...before,identity:null},{...target,identity:null}),'restored-facts-owner-or-permissions-differ');
 }
 
+// Only fixed process codes or PostgreSQL's terse SQLSTATE are retained. Never
+// publish native stderr, which can contain source values or connection details.
+export function nativeReadbackFailureCode(error){
+ if(['EPIPE','ENOBUFS','ETIMEDOUT'].includes(error?.code))return 'native-query-'+error.code.toLowerCase();
+ const state=/\bERROR:\s+([0-9A-Z]{5})(?=\s|$)/.exec(String(error?.stderr??''))?.[1];
+ return state?'native-query-sqlstate-'+state.toLowerCase():'native-query-failed';
+}
+export function isolatedFilesystemUsage(text){
+ const row=String(text).split('\n').map(line=>/^\S+\s+(\d+)\s+(\d+)\s+(\d+)\s+\d+%\s+\/var\/lib\/postgresql\s*$/.exec(line)).filter(Boolean);
+ need(row.length===1,'invalid-isolated-filesystem-measurement');
+ const [capacity_bytes,used_bytes,available_bytes]=row[0].slice(1).map(value=>Number(value)*1024);
+ need([capacity_bytes,used_bytes,available_bytes].every(Number.isSafeInteger)&&capacity_bytes>0&&used_bytes+available_bytes<=capacity_bytes,'invalid-isolated-filesystem-measurement');
+ return {capacity_bytes,used_bytes,available_bytes};
+}
 function queryJSON(execute,secrets=[]){return async sql=>{
- const raw=execute(`SELECT coalesce(json_agg(row_to_json(q)),'[]'::json) FROM (${sql}) q;`);
+ let raw;try{raw=execute(`SELECT coalesce(json_agg(row_to_json(q)),'[]'::json) FROM (${sql}) q;`);}catch(error){throw Error(nativeReadbackFailureCode(error));}
  need(raw.length<=maxJSON&&!secrets.some(s=>s&&raw.includes(Buffer.from(s))),'raw-query-size-or-secret-limit');const rows=JSON.parse(raw.toString());need(Array.isArray(rows),'invalid-native-json');return rows;
 };}
 function sourceDockerArgs(connection,name){return ['create','--name',name,'-i','--read-only','--network','bridge','--tmpfs','/tmp:rw,size=16m',
@@ -329,7 +343,7 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   fs.writeFileSync(path.join(publicOutput,'current-public-schema.dump.aesgcm'),sealed.ciphertext,{flag:'wx',mode:0o600});save(path.join(publicOutput,'backup-envelope.json'),sealed.envelope,secrets);
   need(sha(fs.readFileSync(path.join(publicOutput,'current-public-schema.dump.aesgcm')))===sealed.envelope.ciphertext_sha256&&same(JSON.parse(fs.readFileSync(path.join(publicOutput,'backup-envelope.json'),'utf8')),sealed.envelope),'encrypted-backup-disk-readback-failed');
   receipt.encrypted_backup={recipient_sha256:sealed.envelope.recipient_sha256,ciphertext_bytes:sealed.ciphertext.length,ciphertext_sha256:sealed.envelope.ciphertext_sha256,envelope_sha256:sha(fs.readFileSync(path.join(publicOutput,'backup-envelope.json'))),in_memory_aead_roundtrip_verified:true,ciphertext_disk_readback_verified:sha(fs.readFileSync(path.join(publicOutput,'current-public-schema.dump.aesgcm')))===sealed.envelope.ciphertext_sha256,recipient_private_key_recovery_verified:false};save(receiptFile,receipt,secrets);
-  stage='isolated-native-target';target='atlas-recovery-'+randomUUID();native(['run','-d','--name',target,'--network','none','--read-only','--tmpfs','/var/lib/postgresql:rw,size=2g','--tmpfs','/var/run/postgresql:rw,size=16m','--memory','4g','-e','POSTGRES_HOST_AUTH_METHOD=trust',recoveryImage],undefined,60000,1024*1024);
+  stage='isolated-native-target';target='atlas-recovery-'+randomUUID();native(['run','-d','--name',target,'--network','none','--read-only','--tmpfs','/var/lib/postgresql:rw,size=3g','--tmpfs','/var/run/postgresql:rw,size=16m','--memory','4g','-e','POSTGRES_HOST_AUTH_METHOD=trust',recoveryImage],undefined,60000,1024*1024);
   const targetExec=(args,input,maxBuffer=maxJSON)=>native(['exec','-i',target,...args],input,180000,maxBuffer);
   let ready=false;for(let attempt=0;attempt<30;attempt++){try{targetExec(['pg_isready','-h','127.0.0.1','-U','postgres']);ready=true;break;}catch{await new Promise(resolve=>setTimeout(resolve,1000));}}need(ready,'isolated-target-not-ready');
   targetExec(['psql','-X','-Atq','-U','postgres','-v','ON_ERROR_STOP=1'],isolatedRecoveryBootstrapSQL);
@@ -339,7 +353,9 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   stage='actual-current-native-restore-header';patchNativeRestoreFile(expanded);
   stage='actual-current-native-restore-apply';
   await nativeRestoreFromFile(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],expanded);stage='actual-current-native-database-acl';receipt.database_acl_recovery=restoreIsolatedDatabaseACL(target,readback,output);targetExec(['psql','-X','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));receipt.isolated_original_checks_revalidated=true;receipt.restore_duration_ms=Date.now()-restoreStarted;receipt.dump.local_readback_verified=true;
-  stage='full-source-and-target-readback';const targetQuery=queryJSON(sql=>targetExec(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],'SET ROLE neondb_owner; '+sql),secrets),restored=await readRecoveryInventory(targetQuery),after=await readRecoveryInventory(sourceQuery);assertCurrentInventory(after,window.source_marker);assertRestoredInventory(before,restored,after);
+  receipt.isolated_target_filesystem_before_readback=isolatedFilesystemUsage(targetExec(['df','-Pk','/var/lib/postgresql']).toString());save(receiptFile,receipt,secrets);
+  stage='restored-target-inventory';const targetQuery=queryJSON(sql=>targetExec(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1','-v','VERBOSITY=sqlstate'],'SET ROLE neondb_owner; '+sql),secrets),restored=await readRecoveryInventory(targetQuery);
+  stage='final-source-inventory';const after=await readRecoveryInventory(sourceQuery);assertCurrentInventory(after,window.source_marker);assertRestoredInventory(before,restored,after);
   const finalReservation=await loadRecoveryReservation(window,api);
   validateRecoveryWindow(window,finalReservation.claim,{head:env.GITHUB_SHA,toolSHA,phase:'end',...finalReservation});
   save(path.join(output,'restored-inventory.json'),restored,secrets);save(path.join(output,'after-inventory.json'),after,secrets);receipt.status='verified';receipt.collections=before.collections;receipt.owner_registry_sha256=before.owner_registry_sha256;receipt.catalog_sha256=before.catalog_sha256;receipt.owner_registry_private=true;
@@ -347,7 +363,7 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
  finally{
   if(lock){try{lock.close();await releaseProbe();receipt.source_lock_cleanup='database-lock-absence-and-reader-removal-confirmed';}catch{receipt.status='failed';receipt.source_lock_cleanup='unconfirmed';}}
   for(const reader of readers){try{removeOwnedContainer(reader);}catch{receipt.status='failed';(receipt.retained_source_readers??=[]).push(reader);}}
-  if(target){try{removeOwnedContainer(target);receipt.isolated_target_cleanup='removed-and-absence-confirmed';}catch{receipt.status='failed';receipt.isolated_target_cleanup='failed';receipt.retained_target_name=target;}}
+  if(target){try{receipt.isolated_target_filesystem_after_readback=isolatedFilesystemUsage(native(['exec',target,'df','-Pk','/var/lib/postgresql']).toString());}catch{}try{removeOwnedContainer(target);receipt.isolated_target_cleanup='removed-and-absence-confirmed';}catch{receipt.status='failed';receipt.isolated_target_cleanup='failed';receipt.retained_target_name=target;}}
   receipt.duration_ms=Date.now()-started;receipt.completed_at_utc=new Date().toISOString();receipt.limitations=['Logical public-schema recovery; not verified provider-managed backup or server-global recovery.','Source role passwords, managed role memberships, provider secrets and private runtime bindings are excluded; restore through unchanged provider/Sites setup and documented private credential handoff.','Isolated roles are NOLOGIN, with inert cloud_admin/neon_superuser placeholders and isolated neondb database; original owner/database/default ACL statements are restored as the isolated superuser; table owners/ACLs and effective table privileges are compared. Membership rows use a bounded native ordered row-digest inventory; original raw bytes are retained in the dump, not duplicated as an unbounded client JSON array. Schema/sequence/function/domain/default ACLs are retained in the original dump but not separately compared.','Publisher Site read-only/drain attestation is authenticated by queue author/dispatch actor; Actions does not independently access private Site. Worker IDs are cooperative identities, not separate security principals.','Registered object bytes are the separate414-object proof from PR711; no R2 objects are written.','Publisher must settle maintenance and prove restored writes separately; this tool never changes Site/read-only state.','Artifacts/local copies have limited retention; preserve original dump/rows and receipts before expiry.'];save(receiptFile,receipt,secrets);
  }
  return receipt;
