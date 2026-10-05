@@ -483,8 +483,8 @@
     },
     {
       "path": "data/regional-review/coastal-reference-check-428/findings.md",
-      "bytes": 11205,
-      "sha256": "984463706ae94c3310696b8ebd70d788312f04ddaf56ab6ecde597ae04990ad3",
+      "bytes": 11580,
+      "sha256": "94daa5fb954248f5b874941f6fad98b96e27b7762ef8276897291bdca8d282f2",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
@@ -586,7 +586,7 @@
       "kind": "measurement",
       "description": "Measure each unchanged original Atlas and TIGER polygon pair with equal-area EPSG:6933 planar overlays. Only temporary in-memory Shapely make_valid clones are used for invalid TIGER comparators; the shared helper v1 lon/lat transform control is recorded separately. This statistical measurement does not establish legal boundaries.",
       "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; NumPy 2.3.5; pyproj Transformer always_xy",
-      "units": "Equal-area IoU dimensionless; projected area km2; source AREALAND/AREAWATER attributes in m2",
+      "units": "Equal-area IoU dimensionless; projected area km2; 2025 TIGER/Line documentation specifies area attributes in m2, inferred for matching 2026 TIGERweb fields whose layer metadata omits units",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326 input / EPSG:6933 equal-area calculation",
       "area_method": "EPSG:6933 equal-area planar polygon overlay for comparative diagnostics; source area attributes retained as published; water convention unresolved",
