@@ -1,0 +1,370 @@
+{
+  "attribution_requirements": [
+    "geoBoundaries and underlying OpenStreetMap/Wambacher attribution for ODbL data.",
+    "Eurostat/GISCO attribution for CC BY 4.0 NUTS2 geometry.",
+    "Surveying and Mapping Authority of the Republic of Slovenia, municipality/statistical-region data, date accessed 2026-10-05 (CC BY 4.0).",
+    "RZS attribution required; clearly label any changed/transcribed statistical data."
+  ],
+  "baseline_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+  "cross_packet_evidence": [
+    {
+      "files": [
+        {
+          "bytes": 28686,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/2017-name-assessment.csv",
+          "role": "cross-packet-research-output",
+          "sha256": "46ebdac5372a45cfc7e45d463be4a59e13364ae048f25551348a5c86a3bd056b"
+        },
+        {
+          "bytes": 311717,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-53-codes-2017.json",
+          "role": "original-source",
+          "sha256": "828455fec8aa86b9841670da1d00d0b02b8538ea5bc85c2067feba0912915805"
+        },
+        {
+          "bytes": 1652,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-request.json",
+          "role": "original-source",
+          "sha256": "55dd678cdf939d51efecee9af4a309258cfc9e1469cf90fc6258f2807b1a5528"
+        },
+        {
+          "bytes": 6800,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source-provenance.json",
+          "role": "cross-packet-research-output",
+          "sha256": "e9292cda8e2bbac5a6033201e1feb138728c6068b62caa131327b4f853e9d8f8"
+        },
+        {
+          "bytes": 3807,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction-summary.json",
+          "role": "cross-packet-research-output",
+          "sha256": "9c4008d680aecbf0415aec88703b90a791a6f9eda6033b4e659816879e2de407"
+        }
+      ],
+      "id": "gurs-historical-names-53-crosswalk-issue-1016",
+      "issue": 1016,
+      "license": "GURS public data CC BY 4.0 attribution under published terms; attribute GURS and identify derived assessment.",
+      "limit": "WFS response has no geometry; establishes dated official name validity only, not boundaries, parent relationships, neighboring granularity or regional approval. Separate #1016 review claims remain scoped to names.",
+      "publisher": "GURS; Surveying and Mapping Authority of Slovenia",
+      "retention": "Original official WFS response, exact request, assessment and provenance retained in #1016 packet at baseline commit; hashes recorded in evidence manifest baseline.files.",
+      "retrieved_at": "2026-10-05",
+      "scope_overlap": "53 exact #1016 candidate IDs overlap the #1018 278-ID Slovenia child scope; every overlapped code has exactly one official name feature at both dates, and the official name is stable across both dates. See issue-1016-overlap.csv.",
+      "url": "https://ipi.eprostor.gov.si/wfs-si-gurs-rpe/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=SI.GURS.RPE%3AOBCINE_H",
+      "vintage": "Official municipality history; 53 code query; effective intervals evaluated at 2017-01-01 and 2017-07-01"
+    }
+  ],
+  "issue": 1018,
+  "official_source_pages_and_restoration": [
+    {
+      "accessed_utc": "2026-10-05",
+      "id": "rzs-current-administrative-register",
+      "license": {
+        "status": "redistributable",
+        "terms": "RZS copyright terms at https://www.stat.gov.rs/sr-latn/copyright/ allow reuse of files and statistical data for commercial/noncommercial purposes with RZS attribution and clear marking of changes."
+      },
+      "limits": "National aggregates do not independently enumerate children in each of the 12 Atlas districts.",
+      "publisher": "Statistical Office of the Republic of Serbia",
+      "retention": "Factual findings only; no complete HTML copy retained. Restore this URL for the table and preserve the cited scope/date.",
+      "role": "Current official administrative tier/count context. RZS page lists 29 administrative districts; 197 municipality/city rows and 174 local self-government units including 29 Kosovo and Metohija rows (145 outside).",
+      "sha256": null,
+      "title": "Administrative territorial division and NSTJ levels 1, 2, 3",
+      "url": "https://www.stat.gov.rs/sr-latn/oblasti/registar-prostornih-jedinica-i-gis/administrativno-teritorijalna-podela-i-nstj-nivoi-1-2-3/"
+    },
+    {
+      "accessed_utc": "2026-10-05",
+      "id": "rzs-current-administrative-unit-register-xlsx",
+      "license": {
+        "status": "redistributable",
+        "terms": "RZS copyright terms at https://www.stat.gov.rs/sr-latn/copyright/ permit reuse of files/statistical data with RZS attribution and a clear note of changes."
+      },
+      "limits": "The workbook bytes and current per-district roster have not been verified; do not claim current Serbian per-parent completeness.",
+      "publisher": "Statistical Office of the Republic of Serbia",
+      "retention": "Restoration-only. Direct HTTPS API retrieval failed local certificate-chain validation; the web content reader reports unsupported XLSX MIME. Restore exact linked file, record response headers/date/bytes/SHA-256 and retain the original under RZS terms before roster comparison.",
+      "role": "Needed for exact current Serbian per-unit code/name roster to validate the 12 district child sets.",
+      "sha256": null,
+      "title": "Tekuće stanje Opštine/gradske opštine i gradovi (current status municipalities/city municipalities/cities)",
+      "url": "https://www.stat.gov.rs/media/412350/sifarnikgradovi-opstine-tekucestanje.xlsx"
+    },
+    {
+      "accessed_utc": "2026-10-05",
+      "id": "surs-cohesion-membership",
+      "license": {
+        "status": "unknown",
+        "terms": "Only factual notes and source URL retained; republishing terms for full page text not established."
+      },
+      "limits": "2019 membership text supports the cohesion/statistical grouping, not current legal municipality geometry.",
+      "publisher": "Statistical Office of the Republic of Slovenia (SURS)",
+      "retention": "Restoration-only. Restore the official page and its 2019 register vintage; the current GURS polygons used separately carry feature-level dates.",
+      "role": "Official published list of eight NUTS3 statistical regions in Vzhodna Slovenija and four in Zahodna Slovenija.",
+      "sha256": null,
+      "title": "Territorial units and house numbers (2019 register snapshot)",
+      "url": "https://www.stat.si/StatWeb/en/news/Index/7910"
+    },
+    {
+      "accessed_utc": "2026-10-05",
+      "id": "surs-current-region-municipality-update",
+      "license": {
+        "status": "unknown",
+        "terms": "Only factual notes and URL retained; page reuse terms not established."
+      },
+      "limits": "Published 2026-02-17 update describes current counts, not a complete territorial-boundary change log.",
+      "publisher": "Statistical Office of the Republic of Slovenia (SURS)",
+      "retention": "Restoration-only. Restore the official page directly.",
+      "role": "Official context confirming 12 statistical regions and 212 municipalities, updated with 2024 data.",
+      "sha256": null,
+      "title": "Regions and municipalities in figures (2026 update)",
+      "url": "https://www.stat.si/statweb/en/News/Index/14129"
+    },
+    {
+      "accessed_utc": "2026-10-05",
+      "id": "surs-skte-2024",
+      "license": {
+        "status": "unknown",
+        "terms": "The document is not retained; page reuse terms not established."
+      },
+      "limits": "A classification specification does not establish the legal boundary of any individual unit.",
+      "publisher": "Statistical Office of the Republic of Slovenia (SURS)",
+      "retention": "Restoration-only. Restore the exact linked official PDF, verify its date and the English classification definitions.",
+      "role": "Official classification context: NUTS is the basis through SKTE level 3 and changes are maintained from official registers.",
+      "sha256": null,
+      "title": "Standard Classification of Territorial Units (SKTE), 1 January 2024",
+      "url": "https://www.stat.si/dokument/12673/SKTE_2024_angl.pdf"
+    },
+    {
+      "accessed_utc": "2026-10-05",
+      "id": "gurs-access-terms",
+      "license": {
+        "status": "redistributable",
+        "terms": "GURS lists public geospatial data under CC BY 4.0 and requires attribution of source/data type/date; see the exact official URL."
+      },
+      "limits": "GURS disclaims quality/availability and may alter services; a license is not a boundary-accuracy certification.",
+      "publisher": "Surveying and Mapping Authority of the Republic of Slovenia (GURS)",
+      "retention": "URL and license/attribution notes only; raw data is retained in the prior packet with byte hashes in `items`. Restore the terms page directly.",
+      "role": "Reuse terms for official GURS geospatial data retained in the #423 baseline.",
+      "sha256": null,
+      "title": "Access to geodetic data",
+      "url": "https://www.e-prostor.gov.si/en/access-to-geodetic-data/"
+    },
+    {
+      "accessed_utc": "2026-10-05",
+      "id": "govsi-municipality-role-and-count",
+      "license": {
+        "status": "unknown",
+        "terms": "Only factual notes and URL retained; page reuse/redistribution terms not established."
+      },
+      "limits": "The page is not a legal register of the complete coastal boundary history; do not use it to replace polygon evidence.",
+      "publisher": "Government of Slovenia",
+      "retention": "Restoration-only. Restore official page directly and inspect the municipality definition/history.",
+      "role": "Official administrative definition: a municipality is the basic local self-government unit; page states Slovenia has 212 municipalities and that Ankaran was established in 2011. Used with current GURS IDs to distinguish municipalities from synthetic Atlas province wrappers.",
+      "sha256": null,
+      "title": "Municipalities in numbers",
+      "url": "https://www.gov.si/en/topics/municipalities-in-numbers/"
+    }
+  ],
+  "prior_packet": "#423; original bytes remain at pinned immutable baseline paths and are not duplicated",
+  "retained_source_items": [
+    {
+      "artifact": "boundary features",
+      "attribution": "geoBoundaries, boundary source OpenStreetMap / Wambacher; cite geoBoundaries and the underlying source.",
+      "bytes": 1069003,
+      "dataset": "SRB-ADM1",
+      "file": "source/geoboundaries-9469f09/geoBoundaries-SRB-ADM1.geojson",
+      "license": "Open Data Commons Open Database License 1.0 (ODbL 1.0)",
+      "limits": "2017 source vintage; does not certify current boundaries, administrative meaning, or polygon equivalence.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SRB-ADM1.geojson",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "599422b9a5b51b68f31ca97004ee7af1b4d2d2b1c4f2f5265a1d9870cba35a51",
+      "source": "geoBoundaries",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SRB-ADM1/geoBoundaries-SRB-ADM1.geojson",
+      "use": "Exact source shape identity and contextual geometry diagnostics for the scoped Atlas features.",
+      "vintage": "boundaryYear 2017; sourceDataUpdateDate 2023-01-19; geoBoundaries buildDate 2023-12-12"
+    },
+    {
+      "artifact": "source metadata",
+      "attribution": "geoBoundaries, boundary source OpenStreetMap / Wambacher; cite geoBoundaries and the underlying source.",
+      "bytes": 860,
+      "dataset": "SRB-ADM1",
+      "file": "source/geoboundaries-9469f09/geoBoundaries-SRB-ADM1-metaData.json",
+      "license": "Open Data Commons Open Database License 1.0 (ODbL 1.0)",
+      "limits": "2017 source vintage; does not certify current boundaries, administrative meaning, or polygon equivalence.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SRB-ADM1-metaData.json",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "4f45b3d01fa888c0e4dae17684c71992d35b965cde7031e9c9e820a79b20e6e3",
+      "source": "geoBoundaries",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SRB-ADM1/geoBoundaries-SRB-ADM1-metaData.json",
+      "use": "Exact source shape identity and contextual geometry diagnostics for the scoped Atlas features.",
+      "vintage": "boundaryYear 2017; sourceDataUpdateDate 2023-01-19; geoBoundaries buildDate 2023-12-12"
+    },
+    {
+      "artifact": "boundary features",
+      "attribution": "geoBoundaries, boundary source OpenStreetMap / Wambacher; cite geoBoundaries and the underlying source.",
+      "bytes": 1653192,
+      "dataset": "SRB-ADM2",
+      "file": "source/geoboundaries-9469f09/geoBoundaries-SRB-ADM2.geojson",
+      "license": "Open Data Commons Open Database License 1.0 (ODbL 1.0)",
+      "limits": "2017 source vintage; does not certify current boundaries, administrative meaning, or polygon equivalence.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SRB-ADM2.geojson",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "f94ba868818e4f87dd24bc97aeaf37732cc23f6744facd1010cd91d2349fc884",
+      "source": "geoBoundaries",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SRB-ADM2/geoBoundaries-SRB-ADM2.geojson",
+      "use": "Exact source shape identity and contextual geometry diagnostics for the scoped Atlas features.",
+      "vintage": "boundaryYear 2017; sourceDataUpdateDate 2023-01-19; geoBoundaries buildDate 2023-12-12"
+    },
+    {
+      "artifact": "source metadata",
+      "attribution": "geoBoundaries, boundary source OpenStreetMap / Wambacher; cite geoBoundaries and the underlying source.",
+      "bytes": 851,
+      "dataset": "SRB-ADM2",
+      "file": "source/geoboundaries-9469f09/geoBoundaries-SRB-ADM2-metaData.json",
+      "license": "Open Data Commons Open Database License 1.0 (ODbL 1.0)",
+      "limits": "2017 source vintage; does not certify current boundaries, administrative meaning, or polygon equivalence.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SRB-ADM2-metaData.json",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "65d65d75249a6b766fc5e7bc0d856d1cca9ea67d04b53db1a151678891c11312",
+      "source": "geoBoundaries",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SRB-ADM2/geoBoundaries-SRB-ADM2-metaData.json",
+      "use": "Exact source shape identity and contextual geometry diagnostics for the scoped Atlas features.",
+      "vintage": "boundaryYear 2017; sourceDataUpdateDate 2023-01-19; geoBoundaries buildDate 2023-12-12"
+    },
+    {
+      "artifact": "boundary features",
+      "attribution": "geoBoundaries; underlying boundary source Eurostat / European Commission GISCO; cite Eurostat GISCO and geoBoundaries.",
+      "bytes": 4177,
+      "dataset": "SVN-ADM1",
+      "file": "source/geoboundaries-9469f09/geoBoundaries-SVN-ADM1.geojson",
+      "license": "Creative Commons Attribution 4.0 (CC BY 4.0), inherited from Eurostat GISCO NUTS source",
+      "limits": "NUTS2 statistical cohesion regions, not administrative provinces; statistical boundaries do not establish political or administrative province meaning.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM1.geojson",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "2c75e262a75938c59908485eb01227e4f973fd5be307bf218dbefab3020d41b8",
+      "source": "geoBoundaries",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SVN-ADM1/geoBoundaries-SVN-ADM1.geojson",
+      "use": "Exact source shape identity and contextual geometry diagnostics for the scoped Atlas features.",
+      "vintage": "boundaryYear 2021; sourceDataUpdateDate and buildDate retained in exact geoBoundaries metadata."
+    },
+    {
+      "artifact": "source metadata",
+      "attribution": "geoBoundaries; underlying boundary source Eurostat / European Commission GISCO; cite Eurostat GISCO and geoBoundaries.",
+      "bytes": 883,
+      "dataset": "SVN-ADM1",
+      "file": "source/geoboundaries-9469f09/geoBoundaries-SVN-ADM1-metaData.json",
+      "license": "Creative Commons Attribution 4.0 (CC BY 4.0), inherited from Eurostat GISCO NUTS source",
+      "limits": "NUTS2 statistical cohesion regions, not administrative provinces; statistical boundaries do not establish political or administrative province meaning.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM1-metaData.json",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "23b633c5a6c851c2dac7a30fd317313546f20ac662c213917b3b95e905d7fbbb",
+      "source": "geoBoundaries",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SVN-ADM1/geoBoundaries-SVN-ADM1-metaData.json",
+      "use": "Exact source shape identity and contextual geometry diagnostics for the scoped Atlas features.",
+      "vintage": "boundaryYear 2021; sourceDataUpdateDate and buildDate retained in exact geoBoundaries metadata."
+    },
+    {
+      "artifact": "boundary features",
+      "attribution": "geoBoundaries, boundary source OpenStreetMap / Wambacher; cite geoBoundaries and the underlying source.",
+      "bytes": 5188866,
+      "dataset": "SVN-ADM2",
+      "file": "source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2.geojson",
+      "license": "Open Data Commons Open Database License 1.0 (ODbL 1.0)",
+      "limits": "2017 source vintage; does not certify current boundaries, administrative meaning, or polygon equivalence.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2.geojson",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "b5e2bb260cd78a05e16a457d85cc3fce83b9ad7f65cbefc7feae6f4b836a97fe",
+      "source": "geoBoundaries",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SVN-ADM2/geoBoundaries-SVN-ADM2.geojson",
+      "use": "Exact source shape identity and contextual geometry diagnostics for the scoped Atlas features.",
+      "vintage": "boundaryYear 2017; sourceDataUpdateDate 2023-01-19; geoBoundaries buildDate 2023-12-12"
+    },
+    {
+      "artifact": "source metadata",
+      "attribution": "geoBoundaries, boundary source OpenStreetMap / Wambacher; cite geoBoundaries and the underlying source.",
+      "bytes": 851,
+      "dataset": "SVN-ADM2",
+      "file": "source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2-metaData.json",
+      "license": "Open Data Commons Open Database License 1.0 (ODbL 1.0)",
+      "limits": "2017 source vintage; does not certify current boundaries, administrative meaning, or polygon equivalence.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2-metaData.json",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "ae1647ee586ac5460522c087c911c2c9a3176adc9a76c3b926b07fece7e1d2d1",
+      "source": "geoBoundaries",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/SVN-ADM2/geoBoundaries-SVN-ADM2-metaData.json",
+      "use": "Exact source shape identity and contextual geometry diagnostics for the scoped Atlas features.",
+      "vintage": "boundaryYear 2017; sourceDataUpdateDate 2023-01-19; geoBoundaries buildDate 2023-12-12"
+    },
+    {
+      "attribution": "Surveying and Mapping Authority of the Republic of Slovenia, municipality/statistical-region data, date accessed 2026-10-05.",
+      "bytes": 13049219,
+      "dataset": "Current Slovenia municipalities",
+      "file": "source/gurs-municipal-boundaries.geojson",
+      "license": "CC BY 4.0 per GURS access-to-geodetic-data terms",
+      "limits": "Current crosswalk is not historical equivalence to 2017 geoBoundaries; sampled vertices are not an area accuracy metric.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "b74a49d83ce08363b1b43eae38a1900a985c610860ff443e20db712c28d26e1b",
+      "source": "Surveying and Mapping Authority of the Republic of Slovenia (GURS)",
+      "url": "https://ipi.eprostor.gov.si/wfs-si-gurs-rpe/ogc/features/collections/SI.GURS.RPE%3AOBCINE/items?f=application%2Fgeo%2Bjson&limit=500",
+      "use": "Current name, point-in-polygon crosswalk, and tier/neighboring-granularity context.",
+      "vintage": "Live official WFS; feature DATUM_SYS attributes retained in the files. Municipality response numberMatched=212; statistical regions=12."
+    },
+    {
+      "attribution": "Surveying and Mapping Authority of the Republic of Slovenia, municipality/statistical-region data, date accessed 2026-10-05.",
+      "bytes": 4010628,
+      "dataset": "Current Slovenia statistical regions",
+      "file": "source/gurs-statistical-regions.geojson",
+      "license": "CC BY 4.0 per GURS access-to-geodetic-data terms",
+      "limits": "Current crosswalk is not historical equivalence to 2017 geoBoundaries; sampled vertices are not an area accuracy metric.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-statistical-regions.geojson",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "fbb417e232bd7d03ffbd8eaa9f6978f9800c2e3927f29a80a412fd6562aa5064",
+      "source": "Surveying and Mapping Authority of the Republic of Slovenia (GURS)",
+      "url": "https://ipi.eprostor.gov.si/wfs-si-gurs-rpe/ogc/features/collections/SI.GURS.RPE%3ASTATISTICNE_REGIJE/items?f=application%2Fgeo%2Bjson&limit=500",
+      "use": "Current name, point-in-polygon crosswalk, and tier/neighboring-granularity context.",
+      "vintage": "Live official WFS; feature DATUM_SYS attributes retained in the files. Municipality response numberMatched=212; statistical regions=12."
+    },
+    {
+      "attribution": "Surveying and Mapping Authority of the Republic of Slovenia, municipality/statistical-region data, date accessed 2026-10-05.",
+      "bytes": 417486,
+      "dataset": "GURS WFS collection catalog",
+      "file": "source/gurs-wfs-collections.json",
+      "license": "CC BY 4.0 per GURS access-to-geodetic-data terms",
+      "limits": "Current crosswalk is not historical equivalence to 2017 geoBoundaries; sampled vertices are not an area accuracy metric.",
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-wfs-collections.json",
+      "retrieved_utc": "2026-10-05",
+      "role": "Original source bytes retained in the pinned #423 baseline; this work references and hashes them without copying.",
+      "sha256": "028f8c5dc424219d02da7291330689afd6570e8e55983ce35d1b958a92827cc2",
+      "source": "Surveying and Mapping Authority of the Republic of Slovenia (GURS)",
+      "url": "https://ipi.eprostor.gov.si/wfs-si-gurs-rpe/ogc/collections",
+      "use": "Current name, point-in-polygon crosswalk, and tier/neighboring-granularity context.",
+      "vintage": "Live official WFS; feature DATUM_SYS attributes retained in the files. Municipality response numberMatched=212; statistical regions=12."
+    }
+  ],
+  "retrieved_utc": "2026-10-05",
+  "scope_limits": [
+    "No official current Serbian per-district unit register or official boundary polygons were retained.",
+    "SURS cohesion membership page describes 2019 territorial reference context; GURS current RPE feature geometry is retained separately.",
+    "Source bytes, metadata and hashes in retained_source_items refer to unchanged files committed in the exact baseline and must be verified against evidence-quality.json."
+  ],
+  "version": 1
+}

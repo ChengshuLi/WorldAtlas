@@ -1,0 +1,13 @@
+{
+  "artifacts": [
+    "parent-study.json",
+    "geometry-comparison.json",
+    "issue-1016-overlap.csv"
+  ],
+  "kind": "reproducibility",
+  "method_id": "identity-scope-join",
+  "note": "Two consecutive runs from final code, fresh-main baseline and pinned source inputs produced byte-identical parent joins, full polygon overlays and #1016 overlap crosswalk.",
+  "outcome": "passed",
+  "run_one_sha256": "28b238e1c0b86003ef759e140e14217b6d154277119b10fa3c48a8ba694080ff",
+  "run_two_sha256": "28b238e1c0b86003ef759e140e14217b6d154277119b10fa3c48a8ba694080ff"
+}
