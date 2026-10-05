@@ -1,0 +1,264 @@
+{
+  "version": 1,
+  "baseline_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+  "method": {
+    "version": "worldatlas-evidence-geometry-v1",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m"
+  },
+  "method_details": "WGS84 ellipsoidal area intersections via shared WorldAtlas evidence.geometry.land_area_m2; compare each 2020 ADM2 subject with every 2015 ADM1 candidate. Overlap does not establish legal parentage or current completeness.",
+  "positive_control": "gb:MRT:ADM2:47542326B9245180339851",
+  "negative_control": "F'Derick × distant Adrar parent candidate is empty",
+  "software": {
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2"
+  },
+  "rows": [
+    {
+      "id": "gb:MRT:ADM2:47542326B14226246765401",
+      "name": "F'Derick",
+      "atlas_parent_id": "framework:province:tiris-zemmour:e4f15f4c3ba2",
+      "candidate_parents": [
+        {
+          "name": "Tiris Zemmour",
+          "shapeID": "64602211B50097143527370",
+          "subject_area_fraction": 0.99999533,
+          "parent_area_fraction": 0.01886753
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B26087332325113",
+      "name": "Timbedgha",
+      "atlas_parent_id": "framework:province:hodh-ech-chargui:67275800e2ac",
+      "candidate_parents": [
+        {
+          "name": "Hodh ech Chargui",
+          "shapeID": "64602211B22115476481884",
+          "subject_area_fraction": 0.99922878,
+          "parent_area_fraction": 0.06082444
+        },
+        {
+          "name": "Hodh el Gharbi",
+          "shapeID": "64602211B52393032227980",
+          "subject_area_fraction": 0.00077122,
+          "parent_area_fraction": 0.00017418
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B404198781259",
+      "name": "Tijigja",
+      "atlas_parent_id": "framework:province:tagant:4ae9301037d7",
+      "candidate_parents": [
+        {
+          "name": "Tagant",
+          "shapeID": "64602211B48349945606013",
+          "subject_area_fraction": 0.97929842,
+          "parent_area_fraction": 0.19708153
+        },
+        {
+          "name": "Assaba",
+          "shapeID": "64602211B24757493091095",
+          "subject_area_fraction": 0.01203096,
+          "parent_area_fraction": 0.00640294
+        },
+        {
+          "name": "Adrar",
+          "shapeID": "64602211B19416274064143",
+          "subject_area_fraction": 0.00867062,
+          "parent_area_fraction": 0.00074527
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B43555481021158",
+      "name": "Koubenni",
+      "atlas_parent_id": "framework:province:hodh-el-gharbi:9c0e266dd53e",
+      "candidate_parents": [
+        {
+          "name": "Hodh el Gharbi",
+          "shapeID": "64602211B52393032227980",
+          "subject_area_fraction": 0.99493667,
+          "parent_area_fraction": 0.17096686
+        },
+        {
+          "name": "Hodh ech Chargui",
+          "shapeID": "64602211B22115476481884",
+          "subject_area_fraction": 0.00393236,
+          "parent_area_fraction": 0.00018213
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B47795340566920",
+      "name": "Eayoune El Atrous",
+      "atlas_parent_id": "framework:province:hodh-el-gharbi:9c0e266dd53e",
+      "candidate_parents": [
+        {
+          "name": "Hodh el Gharbi",
+          "shapeID": "64602211B52393032227980",
+          "subject_area_fraction": 0.99911535,
+          "parent_area_fraction": 0.33962286
+        },
+        {
+          "name": "Hodh ech Chargui",
+          "shapeID": "64602211B22115476481884",
+          "subject_area_fraction": 0.00088465,
+          "parent_area_fraction": 8.105e-05
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B49487198034252",
+      "name": "Tamchekett",
+      "atlas_parent_id": "framework:province:hodh-el-gharbi:9c0e266dd53e",
+      "candidate_parents": [
+        {
+          "name": "Hodh el Gharbi",
+          "shapeID": "64602211B52393032227980",
+          "subject_area_fraction": 0.99812836,
+          "parent_area_fraction": 0.25678062
+        },
+        {
+          "name": "Assaba",
+          "shapeID": "64602211B24757493091095",
+          "subject_area_fraction": 0.00187164,
+          "parent_area_fraction": 0.0006747
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B49589683558539",
+      "name": "Tintane",
+      "atlas_parent_id": "framework:province:hodh-el-gharbi:9c0e266dd53e",
+      "candidate_parents": [
+        {
+          "name": "Hodh el Gharbi",
+          "shapeID": "64602211B52393032227980",
+          "subject_area_fraction": 0.99244313,
+          "parent_area_fraction": 0.19764997
+        },
+        {
+          "name": "Assaba",
+          "shapeID": "64602211B24757493091095",
+          "subject_area_fraction": 0.00731283,
+          "parent_area_fraction": 0.00204076
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B50345645287156",
+      "name": "El Mejrya",
+      "atlas_parent_id": "framework:province:tagant:4ae9301037d7",
+      "candidate_parents": [
+        {
+          "name": "Tagant",
+          "shapeID": "64602211B48349945606013",
+          "subject_area_fraction": 0.98914466,
+          "parent_area_fraction": 0.12240792
+        },
+        {
+          "name": "Assaba",
+          "shapeID": "64602211B24757493091095",
+          "subject_area_fraction": 0.00975634,
+          "parent_area_fraction": 0.0031929
+        },
+        {
+          "name": "Adrar",
+          "shapeID": "64602211B19416274064143",
+          "subject_area_fraction": 0.00065171,
+          "parent_area_fraction": 3.445e-05
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B52298833192374",
+      "name": "Djigueni",
+      "atlas_parent_id": "framework:province:hodh-ech-chargui:67275800e2ac",
+      "candidate_parents": [
+        {
+          "name": "Hodh ech Chargui",
+          "shapeID": "64602211B22115476481884",
+          "subject_area_fraction": 0.96473471,
+          "parent_area_fraction": 0.02860447
+        },
+        {
+          "name": "Hodh el Gharbi",
+          "shapeID": "64602211B52393032227980",
+          "subject_area_fraction": 0.03526529,
+          "parent_area_fraction": 0.00387944
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B75019227159374",
+      "name": "Moughataa d'Enneama",
+      "atlas_parent_id": "framework:province:hodh-ech-chargui:67275800e2ac",
+      "candidate_parents": [
+        {
+          "name": "Hodh ech Chargui",
+          "shapeID": "64602211B22115476481884",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.05041965
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B78705057775708",
+      "name": "N'beiket Lehouach",
+      "atlas_parent_id": "framework:province:hodh-ech-chargui:67275800e2ac",
+      "candidate_parents": [
+        {
+          "name": "Hodh ech Chargui",
+          "shapeID": "64602211B22115476481884",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.14979405
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B79518958456259",
+      "name": "Basseknou",
+      "atlas_parent_id": "framework:province:hodh-ech-chargui:67275800e2ac",
+      "candidate_parents": [
+        {
+          "name": "Hodh ech Chargui",
+          "shapeID": "64602211B22115476481884",
+          "subject_area_fraction": 0.99875758,
+          "parent_area_fraction": 0.06565671
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    },
+    {
+      "id": "gb:MRT:ADM2:47542326B9245180339851",
+      "name": "Amourj",
+      "atlas_parent_id": "framework:province:hodh-ech-chargui:67275800e2ac",
+      "candidate_parents": [
+        {
+          "name": "Hodh ech Chargui",
+          "shapeID": "64602211B22115476481884",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.04875289
+        }
+      ],
+      "atlas_parent_matches_top_name": true
+    }
+  ]
+}

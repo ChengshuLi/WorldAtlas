@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "method": {
+    "version": "worldatlas-evidence-geometry-v1",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m"
+  },
+  "method_details": "WGS84 ellipsoidal area and intersections through evidence.geometry.land_area_m2. Expected = retained 2020 Moughataa × exact RESOLVE ECO_ID. Shapely make_valid is applied only to diagnostic clones of unchanged global RESOLVE polygons because raw files contain nested shells; this repair can alter interpretation. Results do not imply that an ecological fragment is an administrative unit or certify source completeness.",
+  "software": {
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2"
+  },
+  "raw_invalid_resolve_eco_ids": [
+    53,
+    833,
+    842
+  ],
+  "positive_control": "atlas:physical:113aa100b85a7271239e",
+  "negative_control": "Tichitt source Moughataa × West Sahara desert expected intersection is empty",
+  "rows": [
+    {
+      "moughataa_source_id": "47542326B42701553126465",
+      "ecoregion_id": 53,
+      "atlas_ids": [
+        "atlas:physical:113aa100b85a7271239e"
+      ],
+      "expected_area_m2": 63418670077.93179,
+      "actual_area_m2": 63418658858.17735,
+      "symmetric_difference_m2": 793343.1443035782,
+      "symmetric_difference_fraction_of_expected": 1.2509614965572148e-05,
+      "actual_coverage_of_expected": 0.9999936567346983,
+      "valid": true
+    },
+    {
+      "moughataa_source_id": "47542326B42701553126465",
+      "ecoregion_id": 842,
+      "atlas_ids": [
+        "atlas:physical:435bbe2c27cf05a14bf2"
+      ],
+      "expected_area_m2": 4573693096.851317,
+      "actual_area_m2": 4573738415.2240095,
+      "symmetric_difference_m2": 45350.37725839178,
+      "symmetric_difference_fraction_of_expected": 9.91548324254911e-06,
+      "actual_coverage_of_expected": 0.999999996501236,
+      "valid": true
+    },
+    {
+      "moughataa_source_id": "47542326B49457561972338",
+      "ecoregion_id": 745,
+      "atlas_ids": [
+        "atlas:physical:b520cbcb65b15ae05d60"
+      ],
+      "expected_area_m2": 209815941.89674434,
+      "actual_area_m2": 207909066.23829538,
+      "symmetric_difference_m2": 7092437.524084088,
+      "symmetric_difference_fraction_of_expected": 0.033803139360947386,
+      "actual_coverage_of_expected": 0.9785542673707789,
+      "valid": true
+    },
+    {
+      "moughataa_source_id": "47542326B49457561972338",
+      "ecoregion_id": 833,
+      "atlas_ids": [
+        "atlas:physical:e22a07c08a97de3ebbd0"
+      ],
+      "expected_area_m2": 10784218295.268595,
+      "actual_area_m2": 10647874655.471224,
+      "symmetric_difference_m2": 163953384.62119788,
+      "symmetric_difference_fraction_of_expected": 0.015203084742185702,
+      "actual_coverage_of_expected": 0.9860770147544986,
+      "valid": true
+    },
+    {
+      "moughataa_source_id": "47542326B49457561972338",
+      "ecoregion_id": 842,
+      "atlas_ids": [
+        "atlas:physical:a731c0b7441ec1a3b2b5"
+      ],
+      "expected_area_m2": 59362401229.52206,
+      "actual_area_m2": 59231171882.59328,
+      "symmetric_difference_m2": 223986862.68608913,
+      "symmetric_difference_fraction_of_expected": 0.0037732109558717814,
+      "actual_coverage_of_expected": 0.9970080707463177,
+      "valid": true
+    },
+    {
+      "moughataa_source_id": "47542326B49457561972338",
+      "ecoregion_id": 845,
+      "atlas_ids": [
+        "atlas:physical:59369c6461e768d3172c"
+      ],
+      "expected_area_m2": 15161527981.65339,
+      "actual_area_m2": 15117101857.426556,
+      "symmetric_difference_m2": 66699335.619289264,
+      "symmetric_difference_fraction_of_expected": 0.0043992489213488615,
+      "actual_coverage_of_expected": 0.9963352816424373,
+      "valid": true
+    },
+    {
+      "moughataa_source_id": "47542326B56395627841614",
+      "ecoregion_id": 53,
+      "atlas_ids": [
+        "atlas:physical:b8e6263e50bd032d3a1c"
+      ],
+      "expected_area_m2": 50113238839.71822,
+      "actual_area_m2": 50125406821.09584,
+      "symmetric_difference_m2": 12316934.191662328,
+      "symmetric_difference_fraction_of_expected": 0.00024578204236722176,
+      "actual_coverage_of_expected": 0.9999985138376857,
+      "valid": true
+    },
+    {
+      "moughataa_source_id": "47542326B56395627841614",
+      "ecoregion_id": 842,
+      "atlas_ids": [
+        "atlas:physical:ceb670555985a6a7c1c8"
+      ],
+      "expected_area_m2": 52324548897.52121,
+      "actual_area_m2": 52312616549.40331,
+      "symmetric_difference_m2": 11985348.296638016,
+      "symmetric_difference_fraction_of_expected": 0.00022905784281316188,
+      "actual_coverage_of_expected": 0.9997714486133328,
+      "valid": true
+    },
+    {
+      "moughataa_source_id": "47542326B94085620874331",
+      "ecoregion_id": 745,
+      "atlas_ids": [
+        "atlas:physical:c772894cae582ca21523"
+      ],
+      "expected_area_m2": 1491909775.8631115,
+      "actual_area_m2": 1479943279.7005262,
+      "symmetric_difference_m2": 40244130.803396165,
+      "symmetric_difference_fraction_of_expected": 0.026974909243498865,
+      "actual_coverage_of_expected": 0.9825020829641727,
+      "valid": true
+    },
+    {
+      "moughataa_source_id": "47542326B94085620874331",
+      "ecoregion_id": 842,
+      "atlas_ids": [
+        "atlas:physical:66dcc053607bcb5896e6"
+      ],
+      "expected_area_m2": 165769056497.10498,
+      "actual_area_m2": 164366139757.98145,
+      "symmetric_difference_m2": 1427144623.9616933,
+      "symmetric_difference_fraction_of_expected": 0.008609234160578197,
+      "actual_coverage_of_expected": 0.9914638430630911,
+      "valid": true
+    }
+  ]
+}

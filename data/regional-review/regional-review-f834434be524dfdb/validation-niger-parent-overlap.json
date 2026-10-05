@@ -1,0 +1,9 @@
+{
+  "method_id": "niger-parent-overlap",
+  "kind": "geography",
+  "outcome": "passed",
+  "verification": "204 scoped source shapes intersected all 67 ADM2 shapes using WGS84 ellipsoidal helper",
+  "positive_control": "high-overlap named subject present",
+  "negative_control": "Agadez < 0.8 maximum overlap present",
+  "evidence_path": "niger-parent-overlap.json"
+}

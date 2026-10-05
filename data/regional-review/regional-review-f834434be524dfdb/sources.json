@@ -1,0 +1,239 @@
+{
+  "baseline": {
+    "commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+    "pins_file": "baseline-inputs.json",
+    "purpose": "exact frozen input version; every listed input SHA256 and byte length is rechecked by reproduce_review.py"
+  },
+  "niger_ins_2012": {
+    "title": "INS Niger, Projections démographiques du Niger 2012–2026",
+    "url": "https://www.stat-niger.org/projections/",
+    "retrieved": "2026-10-04 America/Los_Angeles",
+    "local_evidence": "The exact official HTML is not committed; it is currently retrievable from the canonical root route. The scoped row crosswalk and exact body digest are retained.",
+    "bytes": 64074,
+    "sha256": "a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7",
+    "claims_used": "Census 4 (2012) base; reference organized by region, department and commune; 266 rows; four special city departments contain arrondissement-level entries.",
+    "limit": "The current root route restores the captured hash and supports full reproduction. The old nested paths do not. Census/statistical labels are not a current legal gazetteer or independent boundary source.",
+    "canonical_route": "https://www.stat-niger.org/projections/",
+    "restoration": "Fetch https://www.stat-niger.org/projections/ and verify the 64074-byte response SHA256 a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7 before parsing. The older /statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/ path and the nested /statistique/file/Annuaires_Statistiques/projections/ path currently return non-table landing responses; use the root canonical route.",
+    "current_probe": [
+      {
+        "url": "https://www.stat-niger.org/projections/",
+        "retrieved": "2026-10-04 America/Los_Angeles",
+        "http_status": 200,
+        "bytes": 64074,
+        "sha256": "a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7",
+        "contains_projection_table": true
+      },
+      {
+        "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/",
+        "retrieved": "2026-10-04 America/Los_Angeles",
+        "http_status": 200,
+        "bytes": 215768,
+        "sha256": "8afe4c8eb0173ffb23685ed401c7b1e6442b2b2bb790f719b5194d8d7dd96fec",
+        "contains_projection_table": false
+      },
+      {
+        "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/projections/",
+        "retrieved": "2026-10-04 America/Los_Angeles",
+        "http_status": 200,
+        "bytes": 215768,
+        "sha256": "ee97a333234e421384a0fe740145ae0c965443d80312cd941225c05b2b1c5dcb",
+        "contains_projection_table": false
+      }
+    ],
+    "captured_as_url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/"
+  },
+  "niger_geoboundaries_adm3": {
+    "source_id": "NER-ADM3-39565319",
+    "year": "2012",
+    "features": 266,
+    "canonical": "Communes",
+    "upstream_source": "OCHA ROWCA, OpenStreetMap",
+    "metadata_license": "CC BY 3.0 (metadata claim)",
+    "license_source": "CityPopulation terms https://www.citypopulation.de/termsofuse.html",
+    "retained_metadata": {
+      "bytes": 825,
+      "sha256": "3034f4a476bac69a50cac388077df2fcd3f0dc7c1c5f45982e0e437c499c3896"
+    },
+    "geometry_not_retained": {
+      "sha256": "9e51e9033ff65c867faa8d741a5b39522d448fa15ae75e0bf5b1da68cb7bc5fa",
+      "bytes": 764972,
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/NER/ADM3/geoBoundaries-NER-ADM3.geojson",
+      "restoration": "Download only to a private cache, verify exact SHA256, do not redistribute until license chain is resolved."
+    },
+    "license_assessment": "unresolved; metadata asserts CC BY 3.0 while identifying CityPopulation as source; CityPopulation terms say its geospatial/maps data may belong to it or upstream sources. Do not commit geometry."
+  },
+  "niger_geoboundaries_adm2": {
+    "source_id": "NER-ADM2-23599985",
+    "year": "2018",
+    "features": 67,
+    "canonical": "Department",
+    "retained_metadata": {
+      "bytes": 900,
+      "sha256": "034c1220516e8d6bb8d9818a577e54063fbd63efe76aef819b783b2538382fa6"
+    },
+    "geometry_not_retained": {
+      "sha256": "228f3bb7fee0259949727102b309b987c56d29f3e23c77f64d1c48fc19955dc3",
+      "bytes": 163642,
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/NER/ADM2/geoBoundaries-NER-ADM2.geojson",
+      "restoration": "Download only to a private cache, verify exact SHA256, do not redistribute until license chain is resolved."
+    },
+    "license_assessment": "same underlying-source ambiguity as NER ADM3"
+  },
+  "mauritania_geoboundaries_adm2": {
+    "source_id": "MRT-ADM2-47542326",
+    "year": "2020",
+    "features": 57,
+    "canonical": "Mauritania (ADM2/Moughataa)",
+    "upstream_source": "WFP / OCHA ROWCA, HDX",
+    "license": "CC BY 3.0 IGO per source metadata",
+    "retained_metadata": {
+      "bytes": 918,
+      "sha256": "8721b5c751fc7a4d2aad33982c764892f69ec01bf302750c6f9e365dd399f1df"
+    },
+    "retained_geometry": {
+      "bytes": 163642,
+      "sha256": "29caf92b290e3281d43c3a6497893ebfcebede733694d49cebb6d12ea4ff256b"
+    },
+    "source_url": "https://data.humdata.org/dataset/mauritania-administrative-boundaries"
+  },
+  "mauritania_geoboundaries_adm1": {
+    "source_id": "MRT-ADM1-64602211",
+    "year": "2015",
+    "features": 13,
+    "canonical": "Wilya",
+    "upstream_source": "Princeton University Library",
+    "license": "CC BY-SA 3.0 per metadata",
+    "retained_metadata": {
+      "bytes": 868,
+      "sha256": "338fde5de6dfafb7060ce33f0eeb3f33914ad9640390a4b79f1ef5b032797533"
+    },
+    "retained_geometry": {
+      "bytes": 1514006,
+      "sha256": "9d769a13c98fc68d7de847d3ae2fbd413433c13a6f6e811bf402afa2a58a8c23"
+    },
+    "source_url": "https://maps.princeton.edu/catalog/stanford-nw291zj7245"
+  },
+  "resolve_2017": {
+    "item_id": "37ea320eebb647c6838c23f72abae5ef",
+    "layer": "Biomes and Ecoregions 2017",
+    "source_vintage": "2017",
+    "description": "Ecological ecoregions; not administrative/political divisions.",
+    "license": "CC BY 4.0 item licenseInfo",
+    "dataLastEditDate": "2022-01-28T00:00:23Z",
+    "retrieved": "2026-10-04 America/Los_Angeles",
+    "retained": {
+      "features-2017-ids.json": {
+        "bytes": 3991812,
+        "sha256": "63d8aa93b237b9abe8a2e3ca8b52c85cc32d993ee962e3a8503e9a619a462979"
+      },
+      "item.json": {
+        "bytes": 8638,
+        "sha256": "b251ba0471182c0eeae8899534f13ca6d2f0ec2125ca52a12e4188a2c4ef525a"
+      },
+      "layer-0.json": {
+        "bytes": 25682,
+        "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3"
+      },
+      "service.json": {
+        "bytes": 3399,
+        "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15"
+      }
+    },
+    "ecoregions": [
+      {
+        "ECO_ID": 53,
+        "name": "Sahelian Acacia savanna"
+      },
+      {
+        "ECO_ID": 745,
+        "name": "Saharan halophytics"
+      },
+      {
+        "ECO_ID": 833,
+        "name": "North Saharan Xeric Steppe and Woodland"
+      },
+      {
+        "ECO_ID": 842,
+        "name": "South Sahara desert"
+      },
+      {
+        "ECO_ID": 845,
+        "name": "West Sahara desert"
+      }
+    ]
+  },
+  "citypopulation_terms": {
+    "url": "https://www.citypopulation.de/termsofuse.html",
+    "retrieved": "2026-10-04 America/Los_Angeles",
+    "sha256": "abb466a27547e59596e96fe18fdd02f6ff9de82f00c71e92d561a525a04cf132",
+    "claim_used": "Terms distinguish population data license from map/geospatial data; geospatial rights may belong to CityPopulation or original organizations.",
+    "limit": "Captured response remains private due to page terms; exact wording and current terms should be rechecked before redistribution."
+  },
+  "geoboundaries_release": {
+    "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "repository": "https://github.com/wmgeolab/geoBoundaries",
+    "release": "geoBoundaries open data release data at exact commit; feature files pinned individually above"
+  },
+  "mauritania_dgat_current": {
+    "title": "Direction Générale de l’Administration Territoriale home page",
+    "url": "https://dgat.interieur.gov.mr/",
+    "retrieved": "2026-10-04 America/Los_Angeles",
+    "sha256": "7defec0b154dc267455a841c3f5c6704aa3c517f1dbdbfc7de2ff80afcd185ae",
+    "claim_used": "15 Wilayas and 63 Moughataas; page attributes counts to 2024 RGPH.",
+    "limit": "A current summary count does not provide a gazetteer or boundary geometry."
+  },
+  "mauritania_2021_new_moughataas": {
+    "title": "AMI official government announcement: six arrondissements elevated to Moughataas",
+    "url": "https://ami.mr/fr/archives/213579",
+    "retrieved": "2026-10-04 America/Los_Angeles",
+    "sha256": "2981f5faf9505edefb252b65dd8e045f3c2546b23601d99e64b13b05b4e71890",
+    "effective_date": "2021-09-08",
+    "units": [
+      {
+        "name": "Adel Bagrou",
+        "wilaya": "Hodh Ech Chargui"
+      },
+      {
+        "name": "Touil",
+        "wilaya": "Hodh El Gharbi"
+      },
+      {
+        "name": "Lexeiba",
+        "wilaya": "Gorgol"
+      },
+      {
+        "name": "Male",
+        "wilaya": "Brakna"
+      },
+      {
+        "name": "Tékane",
+        "wilaya": "Trarza"
+      },
+      {
+        "name": "Wompou",
+        "wilaya": "Guidimaka"
+      }
+    ],
+    "claim_used": "Announcement states six arrondissement seats were elevated to Moughataas; government decree texts/polygons were not retained.",
+    "limit": "Press notice establishes names/date/parent Wilayas but does not provide statutory decree text or redistributable boundary polygons."
+  },
+  "mauritania_official_map_diagnostic": {
+    "title": "DGAT interactive administrative SVG",
+    "url": "https://dgat.interieur.gov.mr/img/dernierecartv2.html",
+    "retrieved": "2026-10-04 America/Los_Angeles",
+    "sha256": "3f6888d82c43a597b590780d5b70aebcae65b1a119d686495a53e22f383e065f",
+    "limit": "SVG contains duplicate labels and paths whose data-name values are numeric placeholders; not used as a complete 63-unit register or geometry source."
+  },
+  "mauritania_sngm_2021_2023": {
+    "title": "Mauritania SNGM / Plan d’Action 2021–2023 strategy document",
+    "url": "https://dgat.interieur.gov.mr/sites/default/files/2025-06/SNGM%20ET%20PA%202021%2020230_0_0.pdf",
+    "document_date": "2022-01-25",
+    "retrieved": "2026-10-04 America/Los_Angeles",
+    "bytes": 1132514,
+    "sha256": "5fac5c780589b421a806e7e87e487c46839d0a2029c118772d2cce111fa10cb8",
+    "page": 6,
+    "claim_used": "Reports 15 Wilayas, 61 Moughataas and 218 communes in a dated 2021–2023 strategy/action-plan snapshot.",
+    "limit": "This is an earlier dated official snapshot than DGAT’s current page attributing 63 Moughataas to RGPH 2024. It does not provide a complete legal register or reconcile the count change; the hosting path /2025-06/ is not the document date. Exact decrees and current polygons remain outstanding."
+  }
+}

@@ -1,0 +1,1716 @@
+{
+  "version": 1,
+  "issue": 474,
+  "lane": "geography",
+  "worker_id": "worldatlas-geography-20261004-3bb8a59a-6f46-46bb-9803-e789cb8b98b4",
+  "subject_ids": [
+    "atlas:city:NER-94",
+    "atlas:physical:113aa100b85a7271239e",
+    "atlas:physical:435bbe2c27cf05a14bf2",
+    "atlas:physical:59369c6461e768d3172c",
+    "atlas:physical:66dcc053607bcb5896e6",
+    "atlas:physical:a731c0b7441ec1a3b2b5",
+    "atlas:physical:b520cbcb65b15ae05d60",
+    "atlas:physical:b8e6263e50bd032d3a1c",
+    "atlas:physical:c772894cae582ca21523",
+    "atlas:physical:ceb670555985a6a7c1c8",
+    "atlas:physical:e22a07c08a97de3ebbd0",
+    "gb:MRT:ADM2:47542326B14226246765401",
+    "gb:MRT:ADM2:47542326B26087332325113",
+    "gb:MRT:ADM2:47542326B404198781259",
+    "gb:MRT:ADM2:47542326B43555481021158",
+    "gb:MRT:ADM2:47542326B47795340566920",
+    "gb:MRT:ADM2:47542326B49487198034252",
+    "gb:MRT:ADM2:47542326B49589683558539",
+    "gb:MRT:ADM2:47542326B50345645287156",
+    "gb:MRT:ADM2:47542326B52298833192374",
+    "gb:MRT:ADM2:47542326B75019227159374",
+    "gb:MRT:ADM2:47542326B78705057775708",
+    "gb:MRT:ADM2:47542326B79518958456259",
+    "gb:MRT:ADM2:47542326B9245180339851",
+    "gb:NER:ADM3:39565319B10092467573849",
+    "gb:NER:ADM3:39565319B10210352621684",
+    "gb:NER:ADM3:39565319B10654989344066",
+    "gb:NER:ADM3:39565319B10967605907059",
+    "gb:NER:ADM3:39565319B1153099536729",
+    "gb:NER:ADM3:39565319B12762473436660",
+    "gb:NER:ADM3:39565319B12962447426204",
+    "gb:NER:ADM3:39565319B13373750799405",
+    "gb:NER:ADM3:39565319B13466993173172",
+    "gb:NER:ADM3:39565319B1352676573510",
+    "gb:NER:ADM3:39565319B13831478637213",
+    "gb:NER:ADM3:39565319B1475913776299",
+    "gb:NER:ADM3:39565319B15389669974290",
+    "gb:NER:ADM3:39565319B15423710005725",
+    "gb:NER:ADM3:39565319B15732435238555",
+    "gb:NER:ADM3:39565319B16142515695167",
+    "gb:NER:ADM3:39565319B16287295475848",
+    "gb:NER:ADM3:39565319B17615238650269",
+    "gb:NER:ADM3:39565319B17832551182815",
+    "gb:NER:ADM3:39565319B17836819446625",
+    "gb:NER:ADM3:39565319B1897183956502",
+    "gb:NER:ADM3:39565319B19013886489598",
+    "gb:NER:ADM3:39565319B19355332213463",
+    "gb:NER:ADM3:39565319B19554062596545",
+    "gb:NER:ADM3:39565319B19655052028724",
+    "gb:NER:ADM3:39565319B20269432226833",
+    "gb:NER:ADM3:39565319B20654781697936",
+    "gb:NER:ADM3:39565319B20782182438889",
+    "gb:NER:ADM3:39565319B2079186163890",
+    "gb:NER:ADM3:39565319B20880970142082",
+    "gb:NER:ADM3:39565319B21317799673067",
+    "gb:NER:ADM3:39565319B22275434856130",
+    "gb:NER:ADM3:39565319B22689890400378",
+    "gb:NER:ADM3:39565319B22801325162875",
+    "gb:NER:ADM3:39565319B23972537824214",
+    "gb:NER:ADM3:39565319B24840818526960",
+    "gb:NER:ADM3:39565319B25022356273677",
+    "gb:NER:ADM3:39565319B26753388093766",
+    "gb:NER:ADM3:39565319B27231895998921",
+    "gb:NER:ADM3:39565319B27838165675081",
+    "gb:NER:ADM3:39565319B28002261636344",
+    "gb:NER:ADM3:39565319B28229541453532",
+    "gb:NER:ADM3:39565319B28637506737945",
+    "gb:NER:ADM3:39565319B29103452353205",
+    "gb:NER:ADM3:39565319B29586520896486",
+    "gb:NER:ADM3:39565319B29744534493161",
+    "gb:NER:ADM3:39565319B30546058731378",
+    "gb:NER:ADM3:39565319B30797865124081",
+    "gb:NER:ADM3:39565319B31379636025775",
+    "gb:NER:ADM3:39565319B31754557173380",
+    "gb:NER:ADM3:39565319B32043358356064",
+    "gb:NER:ADM3:39565319B32916941032007",
+    "gb:NER:ADM3:39565319B33216046467228",
+    "gb:NER:ADM3:39565319B33550161908789",
+    "gb:NER:ADM3:39565319B33585511971503",
+    "gb:NER:ADM3:39565319B33650899689009",
+    "gb:NER:ADM3:39565319B3376937255177",
+    "gb:NER:ADM3:39565319B33833643085465",
+    "gb:NER:ADM3:39565319B34458908308296",
+    "gb:NER:ADM3:39565319B3512519826150",
+    "gb:NER:ADM3:39565319B35185139600445",
+    "gb:NER:ADM3:39565319B35514754936261",
+    "gb:NER:ADM3:39565319B3628272189511",
+    "gb:NER:ADM3:39565319B36624348238607",
+    "gb:NER:ADM3:39565319B36634963124352",
+    "gb:NER:ADM3:39565319B37636667492257",
+    "gb:NER:ADM3:39565319B37651259696635",
+    "gb:NER:ADM3:39565319B3777775141900",
+    "gb:NER:ADM3:39565319B37814068281498",
+    "gb:NER:ADM3:39565319B38044080890565",
+    "gb:NER:ADM3:39565319B39414843606519",
+    "gb:NER:ADM3:39565319B40007698057933",
+    "gb:NER:ADM3:39565319B4065670259952",
+    "gb:NER:ADM3:39565319B41093251759078",
+    "gb:NER:ADM3:39565319B41337311066900",
+    "gb:NER:ADM3:39565319B414197429400",
+    "gb:NER:ADM3:39565319B41892864822509",
+    "gb:NER:ADM3:39565319B42255216936306",
+    "gb:NER:ADM3:39565319B42543677057839",
+    "gb:NER:ADM3:39565319B42643613483437",
+    "gb:NER:ADM3:39565319B42843069370242",
+    "gb:NER:ADM3:39565319B42963178638059",
+    "gb:NER:ADM3:39565319B43509649476372",
+    "gb:NER:ADM3:39565319B43721142807138",
+    "gb:NER:ADM3:39565319B45407951194186",
+    "gb:NER:ADM3:39565319B45497236396760",
+    "gb:NER:ADM3:39565319B46320647119032",
+    "gb:NER:ADM3:39565319B47150999995325",
+    "gb:NER:ADM3:39565319B47446911477651",
+    "gb:NER:ADM3:39565319B49188636597470",
+    "gb:NER:ADM3:39565319B49520541976573",
+    "gb:NER:ADM3:39565319B49829877216142",
+    "gb:NER:ADM3:39565319B5088692803175",
+    "gb:NER:ADM3:39565319B50934725897931",
+    "gb:NER:ADM3:39565319B51314611719737",
+    "gb:NER:ADM3:39565319B51357983250246",
+    "gb:NER:ADM3:39565319B5197111999489",
+    "gb:NER:ADM3:39565319B52575840429923",
+    "gb:NER:ADM3:39565319B52641947778094",
+    "gb:NER:ADM3:39565319B5333613633817",
+    "gb:NER:ADM3:39565319B5334465698124",
+    "gb:NER:ADM3:39565319B53487880702251",
+    "gb:NER:ADM3:39565319B53804595889844",
+    "gb:NER:ADM3:39565319B54696059425906",
+    "gb:NER:ADM3:39565319B54778508175580",
+    "gb:NER:ADM3:39565319B55762599945287",
+    "gb:NER:ADM3:39565319B55963509648917",
+    "gb:NER:ADM3:39565319B5621781462382",
+    "gb:NER:ADM3:39565319B56589595295326",
+    "gb:NER:ADM3:39565319B56836281674842",
+    "gb:NER:ADM3:39565319B57210079941947",
+    "gb:NER:ADM3:39565319B57416437059332",
+    "gb:NER:ADM3:39565319B57840073254234",
+    "gb:NER:ADM3:39565319B59074405754076",
+    "gb:NER:ADM3:39565319B60733918620118",
+    "gb:NER:ADM3:39565319B61004810688472",
+    "gb:NER:ADM3:39565319B61029713660883",
+    "gb:NER:ADM3:39565319B61353473247471",
+    "gb:NER:ADM3:39565319B61373871852790",
+    "gb:NER:ADM3:39565319B6169365707343",
+    "gb:NER:ADM3:39565319B61799560991042",
+    "gb:NER:ADM3:39565319B62167566836547",
+    "gb:NER:ADM3:39565319B6351781551637",
+    "gb:NER:ADM3:39565319B63692121899477",
+    "gb:NER:ADM3:39565319B64387588165417",
+    "gb:NER:ADM3:39565319B64596899446461",
+    "gb:NER:ADM3:39565319B6538344592522",
+    "gb:NER:ADM3:39565319B65562350215158",
+    "gb:NER:ADM3:39565319B65665596113112",
+    "gb:NER:ADM3:39565319B66150995456006",
+    "gb:NER:ADM3:39565319B67163204620766",
+    "gb:NER:ADM3:39565319B67211159326012",
+    "gb:NER:ADM3:39565319B67479999875968",
+    "gb:NER:ADM3:39565319B68007360290865",
+    "gb:NER:ADM3:39565319B68101521076682",
+    "gb:NER:ADM3:39565319B68706856624292",
+    "gb:NER:ADM3:39565319B69026319129781",
+    "gb:NER:ADM3:39565319B69193569370150",
+    "gb:NER:ADM3:39565319B69541182883677",
+    "gb:NER:ADM3:39565319B6995566962304",
+    "gb:NER:ADM3:39565319B69978821633529",
+    "gb:NER:ADM3:39565319B70343149989749",
+    "gb:NER:ADM3:39565319B70543987678949",
+    "gb:NER:ADM3:39565319B70600244053448",
+    "gb:NER:ADM3:39565319B71148685540180",
+    "gb:NER:ADM3:39565319B71988491596185",
+    "gb:NER:ADM3:39565319B72283596019690",
+    "gb:NER:ADM3:39565319B73325679199597",
+    "gb:NER:ADM3:39565319B73736931864986",
+    "gb:NER:ADM3:39565319B73928168036558",
+    "gb:NER:ADM3:39565319B74285074887218",
+    "gb:NER:ADM3:39565319B74447328459706",
+    "gb:NER:ADM3:39565319B74465026874470",
+    "gb:NER:ADM3:39565319B74839102757106",
+    "gb:NER:ADM3:39565319B75624546771300",
+    "gb:NER:ADM3:39565319B76169023695954",
+    "gb:NER:ADM3:39565319B76173588202000",
+    "gb:NER:ADM3:39565319B76403530794224",
+    "gb:NER:ADM3:39565319B76500446614370",
+    "gb:NER:ADM3:39565319B76849175678821",
+    "gb:NER:ADM3:39565319B77530905556219",
+    "gb:NER:ADM3:39565319B77658591196933",
+    "gb:NER:ADM3:39565319B7828806917469",
+    "gb:NER:ADM3:39565319B78657214368072",
+    "gb:NER:ADM3:39565319B79160686966047",
+    "gb:NER:ADM3:39565319B79581883738563",
+    "gb:NER:ADM3:39565319B79826529462291",
+    "gb:NER:ADM3:39565319B81065564890705",
+    "gb:NER:ADM3:39565319B81096810558736",
+    "gb:NER:ADM3:39565319B82593564710711",
+    "gb:NER:ADM3:39565319B82699996601433",
+    "gb:NER:ADM3:39565319B83051667394357",
+    "gb:NER:ADM3:39565319B83153114035538",
+    "gb:NER:ADM3:39565319B84229199619375",
+    "gb:NER:ADM3:39565319B84586248034381",
+    "gb:NER:ADM3:39565319B86758205906716",
+    "gb:NER:ADM3:39565319B86861495506135",
+    "gb:NER:ADM3:39565319B87130216229278",
+    "gb:NER:ADM3:39565319B87227821745793",
+    "gb:NER:ADM3:39565319B87606056296585",
+    "gb:NER:ADM3:39565319B88178898219578",
+    "gb:NER:ADM3:39565319B88539640494757",
+    "gb:NER:ADM3:39565319B88940782166431",
+    "gb:NER:ADM3:39565319B89053607448214",
+    "gb:NER:ADM3:39565319B9030683927093",
+    "gb:NER:ADM3:39565319B90787690652503",
+    "gb:NER:ADM3:39565319B90965604106556",
+    "gb:NER:ADM3:39565319B92373241546187",
+    "gb:NER:ADM3:39565319B92375330867167",
+    "gb:NER:ADM3:39565319B92857685768834",
+    "gb:NER:ADM3:39565319B94014495854698",
+    "gb:NER:ADM3:39565319B94746190490148",
+    "gb:NER:ADM3:39565319B9482106166284",
+    "gb:NER:ADM3:39565319B95003123966455",
+    "gb:NER:ADM3:39565319B9519656841548",
+    "gb:NER:ADM3:39565319B96050649569939",
+    "gb:NER:ADM3:39565319B96223542959465",
+    "gb:NER:ADM3:39565319B96232797912039",
+    "gb:NER:ADM3:39565319B96250293075452",
+    "gb:NER:ADM3:39565319B97379541170196",
+    "gb:NER:ADM3:39565319B98030121500718",
+    "gb:NER:ADM3:39565319B98389260852937",
+    "gb:NER:ADM3:39565319B98692557133651",
+    "gb:NER:ADM3:39565319B98932760270264"
+  ],
+  "subject_ids_sha256": "f3d34f3223d94139c3e82264a2ee308bd0cb3b9f8b97d61bce174ab625636fd8",
+  "baseline": {
+    "commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/source-inventory.json",
+        "bytes": 24983,
+        "sha256": "018789ae0ce569ff402700faf1d34cc8cb8195e2ae4b4e2638ad2aedee08d79a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/semantic-report.json",
+        "bytes": 6091596,
+        "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/semantic-sources.json",
+        "bytes": 4849,
+        "sha256": "287a7ae13787b9e9fb97051afb977c8ea054ca1a6fed389c6672d6455d24bf7e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 71286,
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2404397,
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-1.json",
+        "bytes": 8060108,
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-4.json",
+        "bytes": 4835479,
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-6.json",
+        "bytes": 4607953,
+        "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-7.json",
+        "bytes": 4257402,
+        "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-10.json",
+        "bytes": 5144571,
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-12.json",
+        "bytes": 4489493,
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-14.json",
+        "bytes": 4355198,
+        "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "bytes": 4909063,
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-21.json",
+        "bytes": 6737781,
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-24.json",
+        "bytes": 4816899,
+        "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-26.json",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-27.json",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-30.json",
+        "bytes": 11979437,
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-31.json",
+        "bytes": 10086485,
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "bytes": 10211739,
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-33.json",
+        "bytes": 607984,
+        "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/source-restoration-additions.json",
+        "bytes": 1573576,
+        "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/macro-loose-ends-v5-additions.json",
+        "bytes": 11393,
+        "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "regional_handoffs": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "current_membership": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "administrative_sources": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    "pin_files": {
+      "hierarchy": "data/hierarchy.json",
+      "regional_handoffs": "data/macro-foundation/regional-handoffs.json.gz",
+      "current_membership": "data/macro-foundation/current-membership-inventory.json.gz",
+      "administrative_sources": "data/administrative-sources.json"
+    },
+    "subject_files": {
+      "gb:MRT:ADM2:47542326B9245180339851": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B79518958456259": "data/geography/part-16.json",
+      "atlas:physical:e22a07c08a97de3ebbd0": "data/geography/part-16.json",
+      "atlas:physical:b520cbcb65b15ae05d60": "data/geography/part-16.json",
+      "atlas:physical:a731c0b7441ec1a3b2b5": "data/geography/part-16.json",
+      "atlas:physical:59369c6461e768d3172c": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B52298833192374": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B47795340566920": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B50345645287156": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B14226246765401": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B43555481021158": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B75019227159374": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B78705057775708": "data/geography/part-16.json",
+      "atlas:physical:b8e6263e50bd032d3a1c": "data/geography/part-16.json",
+      "atlas:physical:ceb670555985a6a7c1c8": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B49487198034252": "data/geography/part-16.json",
+      "atlas:physical:113aa100b85a7271239e": "data/geography/part-16.json",
+      "atlas:physical:435bbe2c27cf05a14bf2": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B404198781259": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B26087332325113": "data/geography/part-16.json",
+      "gb:MRT:ADM2:47542326B49589683558539": "data/geography/part-16.json",
+      "atlas:physical:c772894cae582ca21523": "data/geography/part-16.json",
+      "atlas:physical:66dcc053607bcb5896e6": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B52575840429923": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B25022356273677": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B69541182883677": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B71988491596185": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B17836819446625": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B16142515695167": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B6351781551637": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B15389669974290": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B5333613633817": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B69193569370150": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B19355332213463": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B56836281674842": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B89053607448214": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B83153114035538": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B61799560991042": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B98030121500718": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B42963178638059": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B79160686966047": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B83051667394357": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B26753388093766": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B36634963124352": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B24840818526960": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B414197429400": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B54778508175580": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B61004810688472": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B47150999995325": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B79581883738563": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B61373871852790": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B7828806917469": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B37814068281498": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B64596899446461": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B55963509648917": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B29744534493161": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B69026319129781": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B65562350215158": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B22275434856130": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B13466993173172": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B33550161908789": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B1352676573510": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B88539640494757": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B53487880702251": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B3777775141900": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B66150995456006": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B86861495506135": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B49188636597470": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B61353473247471": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B67479999875968": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B5088692803175": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B59074405754076": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B38044080890565": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B22801325162875": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B98692557133651": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B12962447426204": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B46320647119032": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B43509649476372": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B73736931864986": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B50934725897931": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B96223542959465": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B34458908308296": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B29103452353205": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B42643613483437": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B3376937255177": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B19554062596545": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B86758205906716": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B70600244053448": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B12762473436660": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B97379541170196": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B5621781462382": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B94014495854698": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B90965604106556": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B68007360290865": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B92857685768834": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B74447328459706": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B33585511971503": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B70343149989749": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B42255216936306": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B57210079941947": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B35185139600445": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B40007698057933": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B22689890400378": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B63692121899477": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B92373241546187": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B81065564890705": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B77530905556219": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B71148685540180": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B96050649569939": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B51357983250246": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B28637506737945": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B41337311066900": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B81096810558736": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B67163204620766": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B96250293075452": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B37636667492257": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B64387588165417": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B65665596113112": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B60733918620118": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B42843069370242": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B52641947778094": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B49829877216142": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B20880970142082": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B98389260852937": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B76403530794224": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B10967605907059": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B33216046467228": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B47446911477651": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B54696059425906": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B1475913776299": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B76500446614370": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B53804595889844": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B6169365707343": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B57840073254234": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B88940782166431": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B55762599945287": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B41093251759078": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B28002261636344": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B15732435238555": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B27838165675081": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B76173588202000": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B33650899689009": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B20269432226833": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B87130216229278": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B56589595295326": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B45497236396760": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B77658591196933": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B74285074887218": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B88178898219578": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B82593564710711": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B30797865124081": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B19013886489598": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B20654781697936": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B31754557173380": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B9482106166284": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B3512519826150": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B9519656841548": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B9030683927093": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B31379636025775": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B68706856624292": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B17615238650269": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B96232797912039": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B69978821633529": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B5197111999489": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B13831478637213": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B36624348238607": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B30546058731378": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B16287295475848": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B84229199619375": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B68101521076682": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B62167566836547": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B70543987678949": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B87227821745793": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B29586520896486": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B10210352621684": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B82699996601433": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B10654989344066": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B87606056296585": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B17832551182815": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B33833643085465": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B92375330867167": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B95003123966455": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B74465026874470": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B73325679199597": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B98932760270264": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B35514754936261": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B51314611719737": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B3628272189511": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B1153099536729": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B39414843606519": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B6538344592522": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B74839102757106": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B72283596019690": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B19655052028724": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B57416437059332": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B21317799673067": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B13373750799405": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B28229541453532": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B90787690652503": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B79826529462291": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B42543677057839": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B23972537824214": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B45407951194186": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B32916941032007": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B15423710005725": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B61029713660883": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B76849175678821": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B49520541976573": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B20782182438889": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B5334465698124": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B73928168036558": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B67211159326012": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B32043358356064": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B4065670259952": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B78657214368072": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B94746190490148": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B43721142807138": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B84586248034381": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B1897183956502": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B6995566962304": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B27231895998921": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B10092467573849": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B2079186163890": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B41892864822509": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B76169023695954": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B75624546771300": "data/geography/part-16.json",
+      "gb:NER:ADM3:39565319B37651259696635": "data/geography/part-16.json",
+      "atlas:city:NER-94": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "worldatlas-baseline",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "role": "worldAtlas main repository source state for the exact frozen geography packet inputs",
+      "vintage": "2026-10-02 issue baseline commit 0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository contains sources with differing individual licenses; each data source is cited separately."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Checkout exact commit 0c6232db2b2f9531a479f0c752f66c4d12013f3b and verify baseline-inputs.json SHA-256 descriptors.",
+      "limit": "Baseline pins preserve reviewed inputs but do not certify correctness or unify upstream licenses.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "niger-ins-2012",
+      "url": "https://www.stat-niger.org/projections/",
+      "role": "National census-based statistical reference for region/department/commune labels",
+      "vintage": "2012 census / 2012-2026 projection horizon",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "unknown",
+        "terms": "Official page contains census-derived statistical rows; no explicit redistribution terms reviewed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch https://www.stat-niger.org/projections/ and verify SHA256 a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7 (64074 bytes). The older nested file route and mistaken nested /statistique/file/Annuaires_Statistiques/projections/ route return non-table content.",
+      "limit": "Current root endpoint reproduces the exact captured body, but the roster remains a dated statistical reference rather than current legal or polygon evidence.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "niger-geoboundaries-adm3",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/NER/ADM3/geoBoundaries-NER-ADM3.geojson",
+      "role": "2012 Niger commune-labeled ADM3 source geometry",
+      "vintage": "2012",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "unknown",
+        "terms": "geoBoundaries metadata says CC BY 3.0 but points to CityPopulation; geospatial redistribution rights require authoritative license-chain confirmation."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch exact immutable URL into a private cache; verify SHA256 9e51e9033ff65c867faa8d741a5b39522d448fa15ae75e0bf5b1da68cb7bc5fa. Do not redistribute geometry.",
+      "limit": "CityPopulation and original-source rights are unresolved; official row table does not supply boundary geometry.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2012,
+        "to": 2013
+      }
+    },
+    {
+      "id": "niger-geoboundaries-adm2",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/NER/ADM2/geoBoundaries-NER-ADM2.geojson",
+      "role": "2018 Niger ADM2 department candidate geometry",
+      "vintage": "2018",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "unknown",
+        "terms": "Same CityPopulation underlying-source ambiguity as NER ADM3."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch exact immutable URL into a private cache; verify SHA256 228f3bb7fee0259949727102b309b987c56d29f3e23c77f64d1c48fc19955dc3. Do not redistribute geometry.",
+      "limit": "Different source vintage from 2012 ADM3; overlap is diagnostic only and does not prove legal parentage.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      }
+    },
+    {
+      "id": "mauritania-dgat-current",
+      "url": "https://dgat.interieur.gov.mr/",
+      "role": "Current DGAT summary of 15 Wilayas and 63 Moughataas (RGPH 2024)",
+      "vintage": "Current summary accessed 2026",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "unknown",
+        "terms": "Official page; redistribution terms not reviewed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch URL and verify SHA256 7defec0b154dc267455a841c3f5c6704aa3c517f1dbdbfc7de2ff80afcd185ae.",
+      "limit": "Summary count only, without full gazetteer or redistributable geometry.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mauritania-six-moughataas-2021",
+      "url": "https://ami.mr/fr/archives/213579",
+      "role": "Government announcement of six Moughataa elevations and parent Wilayas",
+      "vintage": "effective 2021-09-08",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "unknown",
+        "terms": "Government press notice; legal decree texts not attached."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch URL and verify SHA256 2981f5faf9505edefb252b65dd8e045f3c2546b23601d99e64b13b05b4e71890.",
+      "limit": "Names/date/parent Wilayas are documented; statutory texts and reusable boundaries remain to be obtained.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2021,
+        "to": 2022
+      }
+    },
+    {
+      "id": "mauritania-geoboundaries-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MRT/ADM2",
+      "role": "2020 Mauritania ADM2 Moughataa candidates",
+      "vintage": "2020",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 3.0 IGO per geoBoundaries and WFP/OCHA HDX metadata; attribution required."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "Retained exact data and metadata in this packet; hashes in sources.json.",
+      "limit": "2020 vintage predates six units created in 2021; exact current coverage is incomplete.",
+      "temporal_status": "historical",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-MRT-ADM2.geojson",
+          "bytes": 163642,
+          "sha256": "29caf92b290e3281d43c3a6497893ebfcebede733694d49cebb6d12ea4ff256b",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-MRT-ADM2-metaData.json",
+          "bytes": 918,
+          "sha256": "8721b5c751fc7a4d2aad33982c764892f69ec01bf302750c6f9e365dd399f1df",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "supported_interval": {
+        "from": 2020,
+        "to": 2021
+      }
+    },
+    {
+      "id": "mauritania-geoboundaries-adm1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MRT/ADM1",
+      "role": "2015 Mauritania Wilayas candidate parent boundaries",
+      "vintage": "2015",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY-SA 3.0 per Princeton/geoBoundaries metadata; attribution and share-alike required."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "Retained exact data and metadata in this packet; hashes in sources.json.",
+      "limit": "2015 vintage; 13 features do not prove current 15-Wilaya completeness.",
+      "temporal_status": "historical",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-MRT-ADM1.geojson",
+          "bytes": 1514006,
+          "sha256": "9d769a13c98fc68d7de847d3ae2fbd413433c13a6f6e811bf402afa2a58a8c23",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-MRT-ADM1-metaData.json",
+          "bytes": 868,
+          "sha256": "338fde5de6dfafb7060ce33f0eeb3f33914ad9640390a4b79f1ef5b032797533",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "supported_interval": {
+        "from": 2015,
+        "to": 2016
+      }
+    },
+    {
+      "id": "resolve-2017-ecoregions",
+      "url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+      "role": "2017 ecological ecoregion polygons, not administrative units",
+      "vintage": "2017; service data last edit 2022-01-28",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 item terms; attribution required."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "Retained item, service, layer, and exact five-feature response; hashes in sources.json.",
+      "limit": "Three raw global polygons contain nested shells; diagnostic repair is labeled and may alter interpreted intersection. Does not confer legal administrative role.",
+      "temporal_status": "historical",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-f834434be524dfdb/sources/resolve/item.json",
+          "bytes": 8638,
+          "sha256": "b251ba0471182c0eeae8899534f13ca6d2f0ec2125ca52a12e4188a2c4ef525a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-f834434be524dfdb/sources/resolve/service.json",
+          "bytes": 3399,
+          "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-f834434be524dfdb/sources/resolve/layer-0.json",
+          "bytes": 25682,
+          "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-f834434be524dfdb/sources/resolve/features-2017-ids.json",
+          "bytes": 3991812,
+          "sha256": "63d8aa93b237b9abe8a2e3ca8b52c85cc32d993ee962e3a8503e9a619a462979",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      }
+    },
+    {
+      "id": "geoboundaries-use-terms",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d",
+      "role": "geoBoundaries source citation/use instructions",
+      "vintage": "release at commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 for general repository instructions; individual source licenses remain controlling."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "Retained CITATION-AND-USE text with its file hash.",
+      "limit": "Does not resolve third-party-source licensing for NER geometry.",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/CITATION-AND-USE-geoBoundaries.txt",
+          "bytes": 4316,
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "mauritania-sngm-strategy-2022",
+      "url": "https://dgat.interieur.gov.mr/sites/default/files/2025-06/SNGM%20ET%20PA%202021%2020230_0_0.pdf",
+      "role": "Official dated Mauritania strategy/action-plan snapshot reporting 61 Moughataas",
+      "vintage": "2021–2023 strategy; document dated 2022-01-25; page 6",
+      "retrieved_at": "2026-10-04 America/Los_Angeles",
+      "license": {
+        "status": "unknown",
+        "terms": "Official strategy PDF; redistribution terms not reviewed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact PDF URL into a private cache and verify SHA256 5fac5c780589b421a806e7e87e487c46839d0a2029c118772d2cce111fa10cb8 (1132514 bytes). The evidence is the dated count on page 6.",
+      "limit": "Reports 61 Moughataas in a dated 2022 snapshot; later DGAT page attributes 63 to RGPH 2024. This count pair does not establish the exact legal roster transition or full current boundary completeness.",
+      "temporal_status": "historical",
+      "files": [],
+      "supported_interval": {
+        "from": 2021,
+        "to": 2023
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/README.md",
+      "bytes": 9863,
+      "sha256": "bea6d8cdf39f2c1169414daf10e88ff3d51ff062272fad107eac9df71a36d9ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/assessment.json",
+      "bytes": 483836,
+      "sha256": "e7b5d628ff7949216eb270760eee9665e842ce052ca8d75be41c3a6f107070ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/baseline-inputs.json",
+      "bytes": 10405,
+      "sha256": "c766d29e043e73076ce62714d314b53fb557dd6676dc152f5b090fe255fce641",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/claim-receipt.json",
+      "bytes": 944,
+      "sha256": "3a1647c70a0d7674887a43b4a3bcc2ed7bfb40fa16170abb8b25a901a2be8ffb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/issue-scope.json",
+      "bytes": 28483,
+      "sha256": "e13e6a9158ea9433d30d586be0591f5950fad557ab66239ee8a48f785208382a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/issue-snapshot.json",
+      "bytes": 36547,
+      "sha256": "74fff045c78e5f3427d657ad77d4c4d95550b05747a7796cae38987e5f4cc12a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-fragment-reproduction.json",
+      "bytes": 5718,
+      "sha256": "c0fad33a00f825aba51ddd9d40ca1c805e4416c4938600d9e4ef813bd2505f46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-parent-metric.json",
+      "bytes": 44,
+      "sha256": "8fde667b2db294432f3beb98373aab26ae9c0044a1d89e901f220c8c08f2c553",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-parent-overlap.json",
+      "bytes": 8526,
+      "sha256": "4d11409605224a51ea8f9f969fb5f59d1fd8897d5fa943c881368ee86a79d975",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-ins-crosswalk.json",
+      "bytes": 93643,
+      "sha256": "58a71fae25a5ecb236b69926f2c300e6eeb189e6d6752a3809cc0a591eaeecd5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-parent-overlap.json",
+      "bytes": 131319,
+      "sha256": "e7fb2eaea2c3c657a5560110c71c231889655f9934078d1aeea2c527d2ea460f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_mauritania_fragments.py",
+      "bytes": 6067,
+      "sha256": "a88443efd757169db6dfe8357dc39ba3fd5d855f5a622e5dc4fbdd8b93b1f800",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_mauritania_parent_overlap.py",
+      "bytes": 5196,
+      "sha256": "3f866966de3f78f369a90e4878c513b9b8b1b1149ac85e9edb8e02c975447f8b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_niger_ins_crosswalk.py",
+      "bytes": 6970,
+      "sha256": "040efe0142faf1f58f73d751188a6968df7d95580219eed294982b302610aebb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_niger_parent_overlap.py",
+      "bytes": 5779,
+      "sha256": "e3e3e5515ec1829707fc1563a43e55d819330e04884322312f752a504d96da30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_review.py",
+      "bytes": 2790,
+      "sha256": "1f2d6a65858085140ef5be032856337c68937338e50806213c388914cf35a28e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources.json",
+      "bytes": 11196,
+      "sha256": "b02395599631839fc6c5209d8bc8e61aac1a5c10e7027c493496c4a43493e6d5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-NER-ADM2-metaData.json",
+      "bytes": 900,
+      "sha256": "034c1220516e8d6bb8d9818a577e54063fbd63efe76aef819b783b2538382fa6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-NER-ADM3-metaData.json",
+      "bytes": 825,
+      "sha256": "3034f4a476bac69a50cac388077df2fcd3f0dc7c1c5f45982e0e437c499c3896",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/validation-mauritania-fragment-overlap.json",
+      "bytes": 408,
+      "sha256": "6dd338f6ddd6b09f604c9fba312455f7d33a9b6ea32509b1f3e88b08338ff287",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/validation-mauritania-parent-overlap.json",
+      "bytes": 486,
+      "sha256": "1b60c0b31a20f8e9d9dfd1064b8d5e8ae8e5797c4675d8d4f1b589971ae619f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/validation-niger-ins-crosswalk.json",
+      "bytes": 365,
+      "sha256": "db3020a468caa5ad129646b6caa5225a9c42ab6be4df3eaaf42fe008ee9d1f75",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/validation-niger-parent-overlap.json",
+      "bytes": 366,
+      "sha256": "62e6fc953fb537127e83453dbc0ccf5d650d0cd60e0d4c8a9438fc75f6294d62",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/validation-pinned-membership.json",
+      "bytes": 338,
+      "sha256": "ead6b0fc9ef6e1fe7e032c7466b00d3247fb7d3efaf2fdef1281f4093896b491",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/work-contract.json",
+      "bytes": 414,
+      "sha256": "9dca9690e07f7f5c307795c0518c684356b35a395cf760f37ff7bb867a61ccaf",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "pinned-membership",
+      "kind": "source",
+      "description": "Resolve all 228 exact scope IDs against immutable geography parts and verify every pinned file size/hash.",
+      "software": "Python 3 standard library; repository commit 75c73b8485d1d28a9392bff656a5cbbb7db284ec",
+      "units": "exact subject IDs / bytes"
+    },
+    {
+      "id": "niger-parent-overlap",
+      "kind": "geography",
+      "description": "Pairwise area intersection of scoped 2012 Niger ADM3 units against 2018 ADM2 candidates. Diagnostic, source-vintage cross-check.",
+      "software": "Python 3.12; Shapely 2.1.2; pyproj 3.7.2; WorldAtlas evidence.geometry v1",
+      "units": "fraction of source feature area",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic"
+    },
+    {
+      "id": "mauritania-fragment-overlap",
+      "kind": "geography",
+      "description": "Compare each retained Atlas fragment with pinned Moughataa intersected with the corresponding RESOLVE ECO_ID, applying make_valid only to diagnostic clones of invalid raw RESOLVE shapes.",
+      "software": "Python 3.12; Shapely 2.1.2; pyproj 3.7.2; WorldAtlas evidence.geometry v1",
+      "units": "m² and fraction of expected source intersection",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic"
+    },
+    {
+      "id": "niger-ins-crosswalk",
+      "kind": "source",
+      "description": "Extract official INS HTML table with standard library HTMLParser and join name/department labels to source identity with explicit aliases.",
+      "software": "Python 3 standard library",
+      "units": "official table rows / subjects"
+    },
+    {
+      "id": "mauritania-admin-parent-overlap",
+      "kind": "geography",
+      "description": "Compare 2020 scoped Mauritania ADM2 candidate polygons against all 2015 ADM1 parent candidates.",
+      "software": "Python 3.12; Shapely 2.1.2; pyproj 3.7.2; WorldAtlas evidence.geometry v1",
+      "units": "fraction of subject area",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "niger-ins-exact-normalized-official-name-and-parent",
+      "value": 190,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "58a71fae25a5ecb236b69926f2c300e6eeb189e6d6752a3809cc0a591eaeecd5"
+    },
+    {
+      "id": "niger-ins-official-spelling-or-role-alias-confirmed",
+      "value": 10,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "58a71fae25a5ecb236b69926f2c300e6eeb189e6d6752a3809cc0a591eaeecd5"
+    },
+    {
+      "id": "niger-ins-official-name-candidate-parent-unresolved",
+      "value": 4,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "58a71fae25a5ecb236b69926f2c300e6eeb189e6d6752a3809cc0a591eaeecd5"
+    },
+    {
+      "id": "niger-parent-max-overlap-ge-0p9999",
+      "value": 30,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "e7fb2eaea2c3c657a5560110c71c231889655f9934078d1aeea2c527d2ea460f"
+    },
+    {
+      "id": "niger-parent-max-overlap-ge-0p99",
+      "value": 54,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "e7fb2eaea2c3c657a5560110c71c231889655f9934078d1aeea2c527d2ea460f"
+    },
+    {
+      "id": "niger-parent-max-overlap-ge-0p95",
+      "value": 124,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "e7fb2eaea2c3c657a5560110c71c231889655f9934078d1aeea2c527d2ea460f"
+    },
+    {
+      "id": "niger-parent-max-overlap-ge-0p9",
+      "value": 172,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "e7fb2eaea2c3c657a5560110c71c231889655f9934078d1aeea2c527d2ea460f"
+    },
+    {
+      "id": "niger-parent-max-overlap-ge-0p8",
+      "value": 200,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "e7fb2eaea2c3c657a5560110c71c231889655f9934078d1aeea2c527d2ea460f"
+    },
+    {
+      "id": "mauritania-fragment-groups",
+      "value": 10,
+      "unit": "groups",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "c0fad33a00f825aba51ddd9d40ca1c805e4416c4938600d9e4ef813bd2505f46"
+    },
+    {
+      "id": "mauritania-fragment-max-symmetric-difference",
+      "value": 0.033803139360947386,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "c0fad33a00f825aba51ddd9d40ca1c805e4416c4938600d9e4ef813bd2505f46"
+    },
+    {
+      "id": "mauritania-fragment-min-coverage",
+      "value": 0.9785542673707789,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "c0fad33a00f825aba51ddd9d40ca1c805e4416c4938600d9e4ef813bd2505f46"
+    },
+    {
+      "id": "mauritania-parent-overlap-at-least-95",
+      "value": 13,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+      "input_sha256": "b02395599631839fc6c5209d8bc8e61aac1a5c10e7027c493496c4a43493e6d5"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "niger-ins-exact-normalized-official-name-and-parent",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-ins-crosswalk.json",
+      "json_pointer": "/summary/exact-normalized-official-name-and-parent"
+    },
+    {
+      "metric_id": "niger-ins-official-spelling-or-role-alias-confirmed",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-ins-crosswalk.json",
+      "json_pointer": "/summary/official-spelling-or-role-alias-confirmed"
+    },
+    {
+      "metric_id": "niger-ins-official-name-candidate-parent-unresolved",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-ins-crosswalk.json",
+      "json_pointer": "/summary/official-name-candidate-parent-unresolved"
+    },
+    {
+      "metric_id": "niger-parent-max-overlap-ge-0p9999",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-parent-overlap.json",
+      "json_pointer": "/counts_by_maximum_source_parent_overlap_fraction/0.9999"
+    },
+    {
+      "metric_id": "niger-parent-max-overlap-ge-0p99",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-parent-overlap.json",
+      "json_pointer": "/counts_by_maximum_source_parent_overlap_fraction/0.99"
+    },
+    {
+      "metric_id": "niger-parent-max-overlap-ge-0p95",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-parent-overlap.json",
+      "json_pointer": "/counts_by_maximum_source_parent_overlap_fraction/0.95"
+    },
+    {
+      "metric_id": "niger-parent-max-overlap-ge-0p9",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-parent-overlap.json",
+      "json_pointer": "/counts_by_maximum_source_parent_overlap_fraction/0.9"
+    },
+    {
+      "metric_id": "niger-parent-max-overlap-ge-0p8",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-parent-overlap.json",
+      "json_pointer": "/counts_by_maximum_source_parent_overlap_fraction/0.8"
+    },
+    {
+      "metric_id": "mauritania-fragment-groups",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-fragment-reproduction.json",
+      "json_pointer": "/rows"
+    },
+    {
+      "metric_id": "mauritania-fragment-max-symmetric-difference",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-fragment-reproduction.json",
+      "json_pointer": "/rows/2/symmetric_difference_fraction_of_expected"
+    },
+    {
+      "metric_id": "mauritania-fragment-min-coverage",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-fragment-reproduction.json",
+      "json_pointer": "/rows/2/actual_coverage_of_expected"
+    },
+    {
+      "metric_id": "mauritania-parent-overlap-at-least-95",
+      "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-parent-metric.json",
+      "json_pointer": "/scoped_parent_match_at_least_95"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "niger-ins-exact-normalized-official-name-and-parent",
+      "value": 190,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "niger-ins-official-spelling-or-role-alias-confirmed",
+      "value": 10,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "niger-ins-official-name-candidate-parent-unresolved",
+      "value": 4,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "niger-parent-max-overlap-ge-0p9999",
+      "value": 30,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "niger-parent-max-overlap-ge-0p99",
+      "value": 54,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "niger-parent-max-overlap-ge-0p95",
+      "value": 124,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "niger-parent-max-overlap-ge-0p9",
+      "value": 172,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "niger-parent-max-overlap-ge-0p8",
+      "value": 200,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "mauritania-fragment-groups",
+      "value": 10,
+      "unit": "groups"
+    },
+    {
+      "metric_id": "mauritania-fragment-max-symmetric-difference",
+      "value": 0.033803139360947386,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "mauritania-fragment-min-coverage",
+      "value": 0.9785542673707789,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "mauritania-parent-overlap-at-least-95",
+      "value": 13,
+      "unit": "subjects"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Pinned 228-member scope and input digests reproduce; individual legal/source/geographic correctness remains unresolved.",
+      "status": "supported",
+      "source_ids": [
+        "worldatlas-baseline",
+        "niger-ins-2012"
+      ]
+    },
+    {
+      "text": "The official 2012 INS census roster supports 190 exact scoped name/department joins, 10 documented spelling/role aliases, and four candidate but unresolved Tibiri(Doutchi) parent mappings.",
+      "status": "supported",
+      "source_ids": [
+        "niger-ins-2012",
+        "niger-geoboundaries-adm3"
+      ]
+    },
+    {
+      "text": "The 2020 Mauritania source lacks the six Moughataa units named in a 2021 government notice; official snapshots report 61 units in a document dated 2022 and 63 in DGAT’s later RGPH 2024 summary, leaving the current roster transition unresolved.",
+      "status": "supported",
+      "source_ids": [
+        "mauritania-dgat-current",
+        "mauritania-six-moughataas-2021",
+        "mauritania-geoboundaries-adm2",
+        "mauritania-sngm-strategy-2022"
+      ]
+    },
+    {
+      "text": "Underlying-source redistribution rights for NER geometry remain unresolved; raw NER files were not retained in the public packet.",
+      "status": "unresolved",
+      "source_ids": [
+        "niger-geoboundaries-adm3",
+        "niger-geoboundaries-adm2"
+      ]
+    },
+    {
+      "text": "Ecological fragment intersections are diagnostic and unresolved as a geographic tier and boundary purpose.",
+      "status": "unresolved",
+      "source_ids": [
+        "mauritania-geoboundaries-adm2",
+        "resolve-2017-ecoregions"
+      ]
+    },
+    {
+      "text": "All 13 scoped 2020 Mauritania ADM2 candidates overlap a 2015 ADM1 candidate whose name agrees with the Atlas parent; this is not current legal verification.",
+      "status": "supported",
+      "source_ids": [
+        "mauritania-geoboundaries-adm2",
+        "mauritania-geoboundaries-adm1"
+      ]
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/assessment.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/baseline-inputs.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/claim-receipt.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/issue-scope.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/issue-snapshot.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-fragment-reproduction.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-parent-metric.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/mauritania-parent-overlap.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-ins-crosswalk.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/niger-parent-overlap.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_mauritania_fragments.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_mauritania_parent_overlap.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_niger_ins_crosswalk.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_niger_parent_overlap.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_review.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/CITATION-AND-USE-geoBoundaries.txt",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-MRT-ADM1-metaData.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-MRT-ADM1.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-MRT-ADM2-metaData.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-MRT-ADM2.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-NER-ADM2-metaData.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/geoboundaries/geoBoundaries-NER-ADM3-metaData.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/resolve/features-2017-ids.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/resolve/item.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/resolve/layer-0.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/sources/resolve/service.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/validation-mauritania-fragment-overlap.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/validation-mauritania-parent-overlap.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/validation-niger-ins-crosswalk.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/validation-niger-parent-overlap.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/validation-pinned-membership.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-f834434be524dfdb/work-contract.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ],
+  "rendered_tables": [],
+  "validation": [
+    {
+      "method_id": "pinned-membership",
+      "kind": "source",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-f834434be524dfdb/validation-pinned-membership.json"
+    },
+    {
+      "method_id": "niger-parent-overlap",
+      "kind": "geography",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-f834434be524dfdb/validation-niger-parent-overlap.json"
+    },
+    {
+      "method_id": "mauritania-fragment-overlap",
+      "kind": "geography",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-f834434be524dfdb/validation-mauritania-fragment-overlap.json"
+    },
+    {
+      "method_id": "niger-ins-crosswalk",
+      "kind": "source",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-f834434be524dfdb/validation-niger-ins-crosswalk.json"
+    },
+    {
+      "method_id": "mauritania-admin-parent-overlap",
+      "kind": "geography",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-f834434be524dfdb/validation-mauritania-parent-overlap.json"
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/regional-review-f834434be524dfdb/reproduce_review.py",
+    "PYTHONPATH=/tmp/worldatlas-geography-pydeps python3 data/regional-review/regional-review-f834434be524dfdb/reproduce_niger_ins_crosswalk.py --ins-html /private/cache/ins.html --adm3 /private/cache/ner-adm3.geojson",
+    "PYTHONPATH=/tmp/worldatlas-geography-pydeps python3 data/regional-review/regional-review-f834434be524dfdb/reproduce_niger_parent_overlap.py --adm3 /private/cache/ner-adm3.geojson --adm2 /private/cache/ner-adm2.geojson",
+    "PYTHONPATH=/tmp/worldatlas-geography-pydeps python3 data/regional-review/regional-review-f834434be524dfdb/reproduce_mauritania_fragments.py"
+  ]
+}
