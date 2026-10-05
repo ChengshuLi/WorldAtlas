@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "parent_issue": 454,
+  "pinned_main_commit": "a7c44deed5de3dd08bfdb0ee099d6e57efb3ea8b",
+  "followups": [
+    {
+      "issue": 910,
+      "title": "Resolve Fiji province source vintage and Lau/Rotuma evidence",
+      "subject_count": 15,
+      "scope": "exact subset of #454",
+      "status": "blocked on parent",
+      "manifest_path": "data/regional-review/fiji-admin-source-reconciliation-20261005/evidence-quality.json",
+      "verified_pins": [
+        {
+          "name": "world_index",
+          "path": "data/world-index.json",
+          "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+        },
+        {
+          "name": "source_registry",
+          "path": "data/administrative-sources.json",
+          "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+        },
+        {
+          "name": "geography_part_8",
+          "path": "data/geography/part-8.json",
+          "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+        },
+        {
+          "name": "macro_publication_v5",
+          "path": "data/validation/macro-publication-v5.json",
+          "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674"
+        }
+      ]
+    },
+    {
+      "issue": 911,
+      "title": "Restore valid official New Caledonia province boundary evidence",
+      "subject_count": 3,
+      "scope": "exact subset of #454",
+      "status": "blocked on parent",
+      "manifest_path": "data/regional-review/new-caledonia-valid-province-source-20261005/evidence-quality.json",
+      "verified_pins": [
+        {
+          "name": "world_index",
+          "path": "data/world-index.json",
+          "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+        },
+        {
+          "name": "source_registry",
+          "path": "data/administrative-sources.json",
+          "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+        },
+        {
+          "name": "geography_part_28",
+          "path": "data/geography/part-28.json",
+          "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+        },
+        {
+          "name": "macro_publication_v5",
+          "path": "data/validation/macro-publication-v5.json",
+          "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674"
+        }
+      ]
+    },
+    {
+      "issue": 912,
+      "title": "Reconcile Vanuatu province boundary evidence and island coverage",
+      "subject_count": 6,
+      "scope": "exact subset of #454",
+      "status": "blocked on parent",
+      "manifest_path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/evidence-quality.json",
+      "verified_pins": [
+        {
+          "name": "world_index",
+          "path": "data/world-index.json",
+          "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+        },
+        {
+          "name": "source_registry",
+          "path": "data/administrative-sources.json",
+          "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+        },
+        {
+          "name": "geography_part_28",
+          "path": "data/geography/part-28.json",
+          "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+        },
+        {
+          "name": "macro_publication_v5",
+          "path": "data/validation/macro-publication-v5.json",
+          "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674"
+        }
+      ]
+    },
+    {
+      "issue": 913,
+      "title": "Verify Temotu province and Santa Cruz Islands parent scope",
+      "subject_count": 1,
+      "scope": "exact subset of #454",
+      "status": "blocked on parent",
+      "manifest_path": "data/regional-review/temotu-santa-cruz-parent-scope-20261005/evidence-quality.json",
+      "verified_pins": [
+        {
+          "name": "world_index",
+          "path": "data/world-index.json",
+          "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+        },
+        {
+          "name": "source_registry",
+          "path": "data/administrative-sources.json",
+          "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+        },
+        {
+          "name": "geography_part_22",
+          "path": "data/geography/part-22.json",
+          "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+        },
+        {
+          "name": "macro_publication_v5",
+          "path": "data/validation/macro-publication-v5.json",
+          "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674"
+        }
+      ]
+    }
+  ],
+  "all_contracts_valid": true
+}

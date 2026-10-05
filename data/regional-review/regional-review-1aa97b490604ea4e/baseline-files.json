@@ -1,0 +1,315 @@
+{
+  "commit": "5f6ab02338a07fd4b3d1cf82d58b96bc84b70312",
+  "files": {
+    "data/world-index.json": {
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "bytes": 944
+    },
+    "data/administrative-sources.json": {
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "bytes": 661416
+    },
+    "data/validation/macro-publication-v5.json": {
+      "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "bytes": 2826
+    },
+    "data/macro-foundation/macro-certificate.json": {
+      "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "bytes": 38959
+    },
+    "data/hierarchy.json": {
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "bytes": 10164089
+    },
+    "data/macro-foundation/regional-handoffs.json.gz": {
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "bytes": 71286
+    },
+    "data/macro-foundation/current-membership-inventory.json.gz": {
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "bytes": 2404397
+    },
+    "data/geography/part-8.json": {
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+      "bytes": 5097739
+    },
+    "data/geography/part-22.json": {
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "bytes": 4746385
+    },
+    "data/geography/part-28.json": {
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "bytes": 6613963
+    }
+  },
+  "scope": {
+    "area_scopes": [
+      {
+        "full_area_location_count": 15,
+        "id": "framework:area:fiji:bd568cb3834f",
+        "name": "Fiji",
+        "original_full_area_location_count": 15,
+        "owned_member_location_count": 15,
+        "partial": false
+      },
+      {
+        "full_area_location_count": 3,
+        "id": "framework:area:new-caledonia:42bf5323d811",
+        "name": "New Caledonia",
+        "original_full_area_location_count": 3,
+        "owned_member_location_count": 3,
+        "partial": false
+      },
+      {
+        "full_area_location_count": 1,
+        "id": "framework:area:santa-cruz-is:a2bb7bce4e86",
+        "name": "Santa Cruz Islands",
+        "original_full_area_location_count": 1,
+        "owned_member_location_count": 1,
+        "partial": false
+      },
+      {
+        "full_area_location_count": 6,
+        "id": "framework:area:vanuatu:97c1380d5908",
+        "name": "Vanuatu",
+        "original_full_area_location_count": 6,
+        "owned_member_location_count": 6,
+        "partial": false
+      }
+    ],
+    "batch_id": "regional-review:1aa97b490604ea4e",
+    "frozen_region_geometry_sha256": "0efd2ad3025773a00240fc067c8bf0395ed28f0169a0fc7e71b214f279f5e768",
+    "frozen_region_member_ids_sha256": "68582a71a2e035f8a1027d7e03a566a8c20bd19af93d27a4b5e4a618c8255da8",
+    "location_count": 25,
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "member_location_ids": [
+      "NCL-1258",
+      "NCL-1259",
+      "NCL-559",
+      "gb:FJI:ADM2:14151628B20319301670654",
+      "gb:FJI:ADM2:14151628B28251361437248",
+      "gb:FJI:ADM2:14151628B39642918357252",
+      "gb:FJI:ADM2:14151628B42533076410957",
+      "gb:FJI:ADM2:14151628B48978228339800",
+      "gb:FJI:ADM2:14151628B53541640625043",
+      "gb:FJI:ADM2:14151628B53702400461405",
+      "gb:FJI:ADM2:14151628B59272471160482",
+      "gb:FJI:ADM2:14151628B61046117406534",
+      "gb:FJI:ADM2:14151628B68154180840071",
+      "gb:FJI:ADM2:14151628B71764118664060",
+      "gb:FJI:ADM2:14151628B80423492752803",
+      "gb:FJI:ADM2:14151628B8492423103487",
+      "gb:FJI:ADM2:14151628B95966095088914",
+      "gb:FJI:ADM2:14151628B98370545668292",
+      "gb:SLB:ADM1:17018030B19935783635883",
+      "gb:VUT:ADM1:32282491B17169683382430",
+      "gb:VUT:ADM1:32282491B5439526076152",
+      "gb:VUT:ADM1:32282491B61228346728599",
+      "gb:VUT:ADM1:32282491B7486560380604",
+      "gb:VUT:ADM1:32282491B78905986242135",
+      "gb:VUT:ADM1:32282491B8417950609019"
+    ],
+    "member_location_ids_sha256": "9ad2fdbe14d1ed4a41a35e58741fee7b4c45177ff3064c63b4b5b04f1b02cf75",
+    "original_scope_release": {
+      "footprints_sha256": "5d7236fe7e9d2f83c07c0b5cc1d5e703bf685f860fd49c850edd18eea27c61a8",
+      "hierarchy_sha256": "4cd48d8704e3510a6cacef89838704e04f2a9ee886570852aa2ed940e175cafa",
+      "id": "geography:review:ba8215bac84f44622b36567c95cd3e2cc933e384343fa7e89a2333260fc655b8",
+      "version": 3
+    },
+    "owned_evidence_path": "data/regional-review/regional-review-1aa97b490604ea4e/",
+    "policy_codes": [
+      "FJI",
+      "NCL",
+      "SLB",
+      "VUT"
+    ],
+    "province_scopes": [
+      {
+        "full_province_locations": 3,
+        "id": "framework:province:eastern:40803850f50c",
+        "name": "Eastern",
+        "original_full_province_locations": 3,
+        "original_name": "Eastern",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:rotuma:29a91f2e1d93",
+        "name": "Rotuma",
+        "original_full_province_locations": 1,
+        "original_name": "Rotuma",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 3,
+        "id": "framework:province:western:2f1c11ee875a",
+        "name": "Western",
+        "original_full_province_locations": 3,
+        "original_name": "Western",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 5,
+        "id": "framework:province:central:782a9671170f",
+        "name": "Central",
+        "original_full_province_locations": 5,
+        "original_name": "Central",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 3,
+        "id": "framework:province:northern:a3c9676c58e4",
+        "name": "Northern",
+        "original_full_province_locations": 3,
+        "original_name": "Northern",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:nord:4b48cbfce7bf",
+        "name": "Nord",
+        "original_full_province_locations": 1,
+        "original_name": "Nord",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:sud:bc594d611e94",
+        "name": "Sud",
+        "original_full_province_locations": 1,
+        "original_name": "Sud",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:iles-loyaute:e5b43b46af0a",
+        "name": "Îles Loyauté",
+        "original_full_province_locations": 1,
+        "original_name": "Îles Loyauté",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:temotu:c9f46b66cd8a",
+        "name": "Temotu",
+        "original_full_province_locations": 1,
+        "original_name": "Temotu",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:sanma:8119acf2da29",
+        "name": "Sanma",
+        "original_full_province_locations": 1,
+        "original_name": "Sanma",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:torba:5452a3ed9fe5",
+        "name": "Torba",
+        "original_full_province_locations": 1,
+        "original_name": "Torba",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:penama:1733b9017b86",
+        "name": "Penama",
+        "original_full_province_locations": 1,
+        "original_name": "Penama",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:malampa:2642cdded634",
+        "name": "Malampa",
+        "original_full_province_locations": 1,
+        "original_name": "Malampa",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:shefa-province:b8de6a5b3c88",
+        "name": "Shefa Province",
+        "original_full_province_locations": 1,
+        "original_name": "Shefa Province",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      },
+      {
+        "full_province_locations": 1,
+        "id": "framework:province:tafea:a355702cd743",
+        "name": "Tafea",
+        "original_full_province_locations": 1,
+        "original_name": "Tafea",
+        "original_parts": 1,
+        "part": 1,
+        "partial": false,
+        "parts": 1
+      }
+    ],
+    "reference_owners": [
+      "Fiji",
+      "New Caledonia",
+      "Solomon Islands",
+      "Vanuatu"
+    ],
+    "region_id": "framework:region:southwestern-pacific:f41052c09453",
+    "release": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+    },
+    "required_revalidation_location_ids": [],
+    "review_only": true,
+    "source_ids": [
+      "gb:FJI:ADM2",
+      "gb:SLB:ADM1",
+      "gb:VUT:ADM1",
+      "natural-earth"
+    ]
+  }
+}
