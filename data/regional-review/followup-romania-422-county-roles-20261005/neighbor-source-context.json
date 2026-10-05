@@ -1,0 +1,91 @@
+{
+  "retrieved_at": "2026-10-05",
+  "catalog_path": "data/administrative-sources.json",
+  "purpose": "Compare neighboring catalogued administrative-layer labels, counts, vintages, sources, and license labels; mismatched tiers/vintages do not imply comparable legal status.",
+  "rows": [
+    {
+      "id": "gb:HUN:ADM1",
+      "layer": "ADM1",
+      "canonical_label": "County",
+      "count": 20,
+      "vintage": "2011",
+      "source": "geoBoundaries, Wikimedia Commons",
+      "license_label": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+      "source_url": "commons.wikimedia.org/wiki/File",
+      "metadata_sha256": "b7ccb4f9b7e8ffff95edd9f74a4f6cdee026cc3f4317d3aa917512888c9eab24",
+      "interpretation": "Pinned WorldAtlas source-catalog metadata only; not an authoritative legal-role comparison."
+    },
+    {
+      "id": "gb:BGR:ADM1",
+      "layer": "ADM1",
+      "canonical_label": "Province",
+      "count": 28,
+      "vintage": "2019",
+      "source": "geoBoundaries, Wikimedia",
+      "license_label": "Public Domain",
+      "source_url": "commons.wikimedia.org/wiki/File",
+      "metadata_sha256": "aea14fe3ec0e601ffc9b73c9dcccaefadc002f961418319cd24d45bdac66116a",
+      "interpretation": "Pinned WorldAtlas source-catalog metadata only; not an authoritative legal-role comparison."
+    },
+    {
+      "id": "gb:SRB:ADM1",
+      "layer": "ADM1",
+      "canonical_label": "district",
+      "count": 25,
+      "vintage": "2017",
+      "source": "OpenStreetMap, Wambacher",
+      "license_label": "Open Data Commons Open Database License 1.0",
+      "source_url": "wambachers-osm.website/boundaries/",
+      "metadata_sha256": "886d17adb5d9491d9b464b02a2b3f02ff1a7f2ef71a702840019ab3739f4f562",
+      "interpretation": "Pinned WorldAtlas source-catalog metadata only; not an authoritative legal-role comparison."
+    },
+    {
+      "id": "gb:SRB:ADM2",
+      "layer": "ADM2",
+      "canonical_label": "Unknown",
+      "count": 145,
+      "vintage": "2017",
+      "source": "OpenStreetMap, Wambacher",
+      "license_label": "Open Data Commons Open Database License 1.0",
+      "source_url": "wambachers-osm.website/boundaries/",
+      "metadata_sha256": "a6b70eb39c0efe525bab5ca28ac3173680718577bd59b166fcd244236e8c8565",
+      "interpretation": "Pinned WorldAtlas source-catalog metadata only; not an authoritative legal-role comparison."
+    },
+    {
+      "id": "gb:MDA:ADM1",
+      "layer": "ADM1",
+      "canonical_label": "Districts",
+      "count": 37,
+      "vintage": "2020",
+      "source": "UNHCR, OCHA FISS",
+      "license_label": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_url": "data.humdata.org/dataset/moldova-administrative-level-0-1-boundaries",
+      "metadata_sha256": "b9f85b5b94d053cd3fc7f60d9823ec2ba9cd37b780f4935a778203d67cb5f523",
+      "interpretation": "Pinned WorldAtlas source-catalog metadata only; not an authoritative legal-role comparison."
+    },
+    {
+      "id": "gb:UKR:ADM1",
+      "layer": "ADM1",
+      "canonical_label": "Unknown",
+      "count": 27,
+      "vintage": "2017",
+      "source": "OpenStreetMap, Wambacher",
+      "license_label": "Open Data Commons Open Database License 1.0",
+      "source_url": "wambachers-osm.website/boundaries/",
+      "metadata_sha256": "4a5947e7497574d51f93255dfa7e03dce0c7acf6ecee52d25773a5205854a399",
+      "interpretation": "Pinned WorldAtlas source-catalog metadata only; not an authoritative legal-role comparison."
+    },
+    {
+      "id": "gb:ROU:ADM1",
+      "layer": "ADM1",
+      "canonical_label": "Counties",
+      "count": 42,
+      "vintage": "2017",
+      "source": "World Bank",
+      "license_label": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "source_url": "www.arcgis.com/home/item.html?id=361134ff4ff44e78a9aeec01af9a5175",
+      "metadata_sha256": "575dd44adcf34264baf4cf9fe5e4d5ed79dabcd1ccc11e592cb4c4a5895d6968",
+      "interpretation": "Pinned WorldAtlas source-catalog metadata only; not an authoritative legal-role comparison."
+    }
+  ]
+}
