@@ -12,7 +12,7 @@ Issue #446, branch base `702a55f8e03a2442a153eb1176919feaf84eb115`, packet ID `r
 - `ury-gb-2017.geojson` and `ury-igm-current.geojson` are byte-preserved original GeoJSON responses. Their source terms and hashes are in the inventory.
 - `reproduce.py` performs positive identity/scope/crosswalk checks and a negative duplicate-roster control. It writes the deterministic `reproduction-results.json`.
 - `verify-packet.py` checks retained file hashes, scope/roster equality, baseline blob pins, crosswalk totals, retained-source hashes, packet size/symlink rules and the single issue-close reference without fetching the oversized source.
-- `findings.md` records the interpretation, factual limits and handoffs.
+- `findings.md` records the interpretation, factual limits and handoffs. `follow-up-issues.json` pins the five blocked, bounded child issues linked for subsequent work.
 - `claim-receipt.json` preserves the serialized reservation accepted for this issue.
 
 ## Reproduction

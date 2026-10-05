@@ -38,11 +38,13 @@ The sole Argentina South row is `country-SPI`, named Southern Patagonian Ice Fie
 
 ## Explicit handoffs
 
-1. **Engineering / identity and topology:** investigate `atlas:multipart:eab6ecd59520b6841455` from both retained source-member IDs. Confirm whether the second ring is a hole, a separate component, or a source overlap before selecting the correct geometry type; preserve the stable atlas ID unless contrary identifier evidence is found.
-2. **Geography research / Paraguay current vintage:** reconcile the 2012 247-feature source against current legal district instruments and the INE 2022 263-district inventory. Determine row-level successor, merger, creation, naming and boundary changes, and which current geometry is legally suitable. The 2022 INE statistical polygons alone are expressly not legal boundaries.
-3. **Engineering / Paraguay granularity:** review `atlas:city:PRY-4837` as a city aggregation of four districts and ensure that interfaces or future district-level analysis do not mistake it for a district.
-4. **Geography research / Uruguay border meaning:** compare the separately flagged contested Artigas features with treaty/official territory evidence and resolve whether they belong in the administrative department shape, a separate contested-territory concept, or neither. No unilateral boundary edit is supported here.
-5. **Engineering / type and parent:** reassess `country-SPI` as a physical feature and its `province` parent using a geophysical source and the bilateral boundary context; keep boundary uncertainty explicit. Do not change the core hierarchy in this packet.
+1. **Engineering / identity and topology:** tracked in [#929](https://github.com/ChengshuLi/WorldAtlas/issues/929); investigate `atlas:multipart:eab6ecd59520b6841455` from both retained source-member IDs. Confirm whether the second ring is a hole, a separate component, or a source overlap before selecting the correct geometry type; preserve the stable atlas ID unless contrary identifier evidence is found.
+2. **Geography research / Paraguay current vintage:** tracked in [#926](https://github.com/ChengshuLi/WorldAtlas/issues/926); reconcile the 2012 247-feature source against current legal district instruments and the INE 2022 263-district inventory. Determine row-level successor, merger, creation, naming and boundary changes, and which current geometry is legally suitable. The 2022 INE statistical polygons alone are expressly not legal boundaries.
+3. **Engineering / Paraguay granularity:** tracked in [#930](https://github.com/ChengshuLi/WorldAtlas/issues/930); review `atlas:city:PRY-4837` as a city aggregation of four districts and ensure that interfaces or future district-level analysis do not mistake it for a district.
+4. **Geography research / Uruguay border meaning:** tracked in [#927](https://github.com/ChengshuLi/WorldAtlas/issues/927); compare the separately flagged contested Artigas features with treaty/official territory evidence and resolve whether they belong in the administrative department shape, a separate contested-territory concept, or neither. No unilateral boundary edit is supported here.
+5. **Geography source restoration / type and parent handoff:** tracked in [#928](https://github.com/ChengshuLi/WorldAtlas/issues/928); reassess `country-SPI` as a physical feature and its `province` parent using a geophysical source and the bilateral boundary context; keep boundary uncertainty explicit. Do not change the core hierarchy in this packet.
+
+The five linked child items are deliberately blocked on #446; none changes the current packet’s ownership or claims completion of an engineering/geography correction.
 
 ## Limits
 

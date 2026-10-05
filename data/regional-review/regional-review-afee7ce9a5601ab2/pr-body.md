@@ -15,3 +15,8 @@ The 45,589,273-byte Paraguay original is not committed because it exceeds the 32
 - Geometry overlays, legal-boundary validation, and regional approval remain out of scope; the exact limits and follow-ups are in `findings.md`.
 
 Closes #446
+
+
+## Bounded follow-ups
+
+Created five exact-scope, blocked follow-ups dependent on #446: geography research #926 (Paraguay legal-vintage reconciliation), #927 (contested Artigas records), #928 (ice-field source provenance); engineering #929 (San Juan multipart topology) and #930 (Asunción city/district semantics). Machine-readable IDs, current status and URLs are retained in `follow-up-issues.json`. These are future work handoffs; this packet does not certify or complete them.
