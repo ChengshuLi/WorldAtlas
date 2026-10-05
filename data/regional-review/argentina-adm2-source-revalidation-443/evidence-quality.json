@@ -877,8 +877,18 @@
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json"
     },
     {
+      "json_pointer": "/buenos_aires_to_current_entre_rios_top_share",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/buenos_aires_to_current_entre_rios_top_share",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json"
+    },
+    {
       "json_pointer": "/current_feature_count",
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/current_feature_count",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json"
+    },
+    {
+      "json_pointer": "/entre_rios_2006_union_coverage",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/entre_rios_2006_union_coverage",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json"
     },
     {
@@ -899,6 +909,16 @@
     {
       "json_pointer": "/invalid_old",
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/invalid_old",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json"
+    },
+    {
+      "json_pointer": "/la_rioja_2006_union_coverage",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/la_rioja_2006_union_coverage",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json"
+    },
+    {
+      "json_pointer": "/la_roja_to_current_la_rioja_top_share",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/la_roja_to_current_la_rioja_top_share",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json"
     },
     {
@@ -1443,10 +1463,26 @@
     },
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/buenos_aires_to_current_entre_rios_top_share",
+      "input_sha256": "ec2536776b385cf12ceaf95b4432d5a421483a57df741a8c54e2ac5dbb27b949",
+      "unit": "ratio-or-source-value",
+      "value": 0.977395534,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/current_feature_count",
       "input_sha256": "b086852064c26813d9f607c82c91b4e74e18ea83fd21993ddedd473cf8495af5",
       "unit": "count",
       "value": 24,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/entre_rios_2006_union_coverage",
+      "input_sha256": "ec2536776b385cf12ceaf95b4432d5a421483a57df741a8c54e2ac5dbb27b949",
+      "unit": "ratio-or-source-value",
+      "value": 0.982987325,
       "vintage": "current"
     },
     {
@@ -1479,6 +1515,22 @@
       "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
       "unit": "count",
       "value": 0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/la_rioja_2006_union_coverage",
+      "input_sha256": "ec2536776b385cf12ceaf95b4432d5a421483a57df741a8c54e2ac5dbb27b949",
+      "unit": "ratio-or-source-value",
+      "value": 0.999308329,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/la_roja_to_current_la_rioja_top_share",
+      "input_sha256": "ec2536776b385cf12ceaf95b4432d5a421483a57df741a8c54e2ac5dbb27b949",
+      "unit": "ratio-or-source-value",
+      "value": 0.95113356,
       "vintage": "current"
     },
     {
@@ -1975,11 +2027,11 @@
       "sha256": "a5853f964bb214f3ee46373d2d07db8691292fe4af2f939df5fc18e869133569"
     },
     {
-      "bytes": 36181,
+      "bytes": 37883,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json",
       "role": "measurement-result",
-      "sha256": "1376ae4034e44b2807896df5e0fc8f729cdc1fd7f7ddc517be7ae58914588c4f"
+      "sha256": "58eac6cc2cab9ee4aa42d7019c911e70c2543be611fad95a511d2fcf16423fbd"
     },
     {
       "bytes": 482,
@@ -1996,11 +2048,11 @@
       "sha256": "a7ceb64dfdf74c86bcbf0975425e3503fb0faa334171410a0b2dcb98aa69c1cd"
     },
     {
-      "bytes": 1554,
+      "bytes": 1545,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json",
       "role": "measurement-result",
-      "sha256": "eb59cd50bf3afe3e8066cf64c5c6ea3bd95565c9ee0cccacb348dc559f83680c"
+      "sha256": "9a31080916751283996958149c56f15e050ad7ab3c4635db2044f41e9a992fb8"
     },
     {
       "bytes": 89,
@@ -2171,11 +2223,11 @@
       "sha256": "bcb4a5a7de5b0df75b9ee5a07d1991d2cc6da6c3ff9b221b733f563abdb02d61"
     },
     {
-      "bytes": 3916,
+      "bytes": 3944,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/reproduce-province-crosswalk.py",
       "role": "reproduction-code",
-      "sha256": "daf648c600247d95f7f0b1716e6ca87916f3e1d35c9e4f22f083a012618935b5"
+      "sha256": "073413d6ccc218da15860ce8f818ab546e90761cf4f664af5699225de897b2ad"
     },
     {
       "bytes": 12989,
@@ -2920,9 +2972,19 @@
       "value": 2501271.862538802
     },
     {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/buenos_aires_to_current_entre_rios_top_share",
+      "unit": "ratio-or-source-value",
+      "value": 0.977395534
+    },
+    {
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/current_feature_count",
       "unit": "count",
       "value": 24
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/entre_rios_2006_union_coverage",
+      "unit": "ratio-or-source-value",
+      "value": 0.982987325
     },
     {
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/geometry_types_old/MultiPolygon",
@@ -2943,6 +3005,16 @@
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/invalid_old",
       "unit": "count",
       "value": 0
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/la_rioja_2006_union_coverage",
+      "unit": "ratio-or-source-value",
+      "value": 0.999308329
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/la_roja_to_current_la_rioja_top_share",
+      "unit": "ratio-or-source-value",
+      "value": 0.95113356
     },
     {
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/old_count_below_99pct_current_coverage",
