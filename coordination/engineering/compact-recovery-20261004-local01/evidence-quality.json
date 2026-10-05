@@ -70,8 +70,8 @@
     },
     {
       "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
-      "bytes": 13508,
-      "sha256": "c7e65d1ac68605f6ba148420a78af83025b8cca04ab12f50409040231a3db1f1",
+      "bytes": 14270,
+      "sha256": "4f5f6971f9f4f056bacaaa5bda4b1c04bd21d9bf3c2f6f22326ddef923adfcd7",
       "hash_kind": "file-bytes"
     },
     {
@@ -106,15 +106,21 @@
     },
     {
       "path": "coordination/engineering/compact-recovery-20261004-local01/README.md",
-      "bytes": 1433,
-      "sha256": "31c5bfbc21fc5e8d5a0dada6d3e71d9efc8191e255e9a945b1182f229e2d8163",
+      "bytes": 1809,
+      "sha256": "3a3c48fbe85f7dea6eac7df496291fec9c5d0e2d294f124e6a27c7b90d32574b",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/compact-recovery-20261004-local01/controls.json",
-      "bytes": 935,
-      "sha256": "82bb3b6a6e62b7b805ccaaee769fbdf8ad01e8cd0bdd7bcc33f032e06a6d6151",
+      "bytes": 1434,
+      "sha256": "ffe7f93f83dbfd1fafbd422e81f9a1aa55b2c7dbb20acaf72fd2027a68fb9056",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "hash_kind": "file-bytes",
+      "bytes": 7212,
+      "sha256": "26bcc899d8fc2bacea6479ff4466aa1c56e87802e87de3d2289f34c3b13f2bbb"
     }
   ],
   "methods": [
@@ -134,8 +140,550 @@
       "evidence_path": "coordination/engineering/compact-recovery-20261004-local01/controls.json"
     }
   ],
-  "metrics": [],
-  "metric_bindings": [],
+  "metrics": [
+    {
+      "id": "fixture-database_acl_recovery-archive_bytes",
+      "value": 23920720,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-dump-bytes",
+      "value": 23949524,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-logical_memberships-count",
+      "value": 2,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-physical-worldatlas_membership_release_keys-count",
+      "value": 1,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-physical-worldatlas_membership_entity_keys-count",
+      "value": 2,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-physical-worldatlas_membership_source_keys-count",
+      "value": 1,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-physical-worldatlas_membership_evidence-count",
+      "value": 2,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-physical-worldatlas_membership_rows-count",
+      "value": 2,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-sequences-worldatlas_membership_release_keys_key_seq-last_value",
+      "value": 1,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-sequences-worldatlas_membership_entity_keys_key_seq-last_value",
+      "value": 2,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-sequences-worldatlas_membership_source_keys_key_seq-last_value",
+      "value": 1,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-compact-sequences-worldatlas_membership_evidence_key_seq-last_value",
+      "value": 2,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-dump-bytes",
+      "value": 23920720,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-sources-count",
+      "value": 5201,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-entity_types-count",
+      "value": 6,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-entities-count",
+      "value": 6,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-categories-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-records-count",
+      "value": 1,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-names-count",
+      "value": 1,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-relationships-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-media-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-media_links-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-retirements-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-ingestions-count",
+      "value": 1,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-geographic_releases-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-geographic_memberships-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-geographic_changes-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-temporal_geography_validations-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-geographic_membership_records-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-geographic_existence_records-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-temporal_geography_retirements-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-footprint_versions-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-footprint_version_objects-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-footprint_selection_validations-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-geographic_footprint_records-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    },
+    {
+      "id": "fixture-collections-footprint_retirements-count",
+      "value": 0,
+      "method_id": "compact-native-recovery",
+      "stage": "fixture-only",
+      "unit": "fixture-count-or-sequence-state",
+      "vintage": "archived",
+      "evaluation_commit": "09cf867c3927529a33194d1004adf0f79607ab90",
+      "input_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "fixture-database_acl_recovery-archive_bytes",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/database_acl_recovery/archive_bytes"
+    },
+    {
+      "metric_id": "fixture-compact-dump-bytes",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/dump/bytes"
+    },
+    {
+      "metric_id": "fixture-compact-logical_memberships-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/logical_memberships/count"
+    },
+    {
+      "metric_id": "fixture-compact-physical-worldatlas_membership_release_keys-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/physical/worldatlas_membership_release_keys/count"
+    },
+    {
+      "metric_id": "fixture-compact-physical-worldatlas_membership_entity_keys-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/physical/worldatlas_membership_entity_keys/count"
+    },
+    {
+      "metric_id": "fixture-compact-physical-worldatlas_membership_source_keys-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/physical/worldatlas_membership_source_keys/count"
+    },
+    {
+      "metric_id": "fixture-compact-physical-worldatlas_membership_evidence-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/physical/worldatlas_membership_evidence/count"
+    },
+    {
+      "metric_id": "fixture-compact-physical-worldatlas_membership_rows-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/physical/worldatlas_membership_rows/count"
+    },
+    {
+      "metric_id": "fixture-compact-sequences-worldatlas_membership_release_keys_key_seq-last_value",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/sequences/worldatlas_membership_release_keys_key_seq/last_value"
+    },
+    {
+      "metric_id": "fixture-compact-sequences-worldatlas_membership_entity_keys_key_seq-last_value",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/sequences/worldatlas_membership_entity_keys_key_seq/last_value"
+    },
+    {
+      "metric_id": "fixture-compact-sequences-worldatlas_membership_source_keys_key_seq-last_value",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/sequences/worldatlas_membership_source_keys_key_seq/last_value"
+    },
+    {
+      "metric_id": "fixture-compact-sequences-worldatlas_membership_evidence_key_seq-last_value",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/compact/sequences/worldatlas_membership_evidence_key_seq/last_value"
+    },
+    {
+      "metric_id": "fixture-dump-bytes",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/dump/bytes"
+    },
+    {
+      "metric_id": "fixture-collections-sources-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/sources/count"
+    },
+    {
+      "metric_id": "fixture-collections-entity_types-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/entity_types/count"
+    },
+    {
+      "metric_id": "fixture-collections-entities-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/entities/count"
+    },
+    {
+      "metric_id": "fixture-collections-categories-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/categories/count"
+    },
+    {
+      "metric_id": "fixture-collections-records-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/records/count"
+    },
+    {
+      "metric_id": "fixture-collections-names-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/names/count"
+    },
+    {
+      "metric_id": "fixture-collections-relationships-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/relationships/count"
+    },
+    {
+      "metric_id": "fixture-collections-media-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/media/count"
+    },
+    {
+      "metric_id": "fixture-collections-media_links-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/media_links/count"
+    },
+    {
+      "metric_id": "fixture-collections-retirements-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/retirements/count"
+    },
+    {
+      "metric_id": "fixture-collections-ingestions-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/ingestions/count"
+    },
+    {
+      "metric_id": "fixture-collections-geographic_releases-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/geographic_releases/count"
+    },
+    {
+      "metric_id": "fixture-collections-geographic_memberships-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/geographic_memberships/count"
+    },
+    {
+      "metric_id": "fixture-collections-geographic_changes-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/geographic_changes/count"
+    },
+    {
+      "metric_id": "fixture-collections-temporal_geography_validations-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/temporal_geography_validations/count"
+    },
+    {
+      "metric_id": "fixture-collections-geographic_membership_records-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/geographic_membership_records/count"
+    },
+    {
+      "metric_id": "fixture-collections-geographic_existence_records-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/geographic_existence_records/count"
+    },
+    {
+      "metric_id": "fixture-collections-temporal_geography_retirements-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/temporal_geography_retirements/count"
+    },
+    {
+      "metric_id": "fixture-collections-footprint_versions-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/footprint_versions/count"
+    },
+    {
+      "metric_id": "fixture-collections-footprint_version_objects-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/footprint_version_objects/count"
+    },
+    {
+      "metric_id": "fixture-collections-footprint_selection_validations-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/footprint_selection_validations/count"
+    },
+    {
+      "metric_id": "fixture-collections-geographic_footprint_records-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/geographic_footprint_records/count"
+    },
+    {
+      "metric_id": "fixture-collections-footprint_retirements-count",
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+      "json_pointer": "/collections/footprint_retirements/count"
+    }
+  ],
   "summaries": [],
   "conclusions": [],
   "stages": {
@@ -192,6 +740,10 @@
     },
     {
       "path": "coordination/engineering/compact-recovery-20261004-local01/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
       "status": "added"
     }
   ],

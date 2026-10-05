@@ -15,7 +15,15 @@
     "Changed physical digest, sequence position and view/function ACL inventories rejected"
   ],
   "limits": [
-    "Local unit controls use isolated fixture objects; native PostgreSQL fixture still pending",
-    "No current production capture/restore/recipient-decrypt proof from these source tests"
-  ]
+    "Local/native results are synthetic fixture controls, not current production recovery certification",
+    "Current production backup/isolated restore/recipient decryption remain publisher acceptance under parent51"
+  ],
+  "native_fixture": {
+    "outcome": "passed",
+    "run_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37263053473",
+    "tested_head": "09cf867c3927529a33194d1004adf0f79607ab90",
+    "receipt_path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+    "recipe_path": "scripts/test-current-postgres-recovery-native.mjs",
+    "recipe_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+  }
 }
