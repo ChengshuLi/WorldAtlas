@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "method_id": "hdx-source-equivalence-and-current-layer-crosswalk",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": {
+    "invalid_latitude_rejected": true,
+    "invalid_geometry_rejected_without_repair": true
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "method_id": "hdx-source-equivalence-and-current-layer-crosswalk",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "8e715852c8a14bfea8aaad738fc981f6a4ca6c6c10b8ea3d4961492c057488a1",
+  "run_two_sha256": "8e715852c8a14bfea8aaad738fc981f6a4ca6c6c10b8ea3d4961492c057488a1",
+  "run_command": "python data/regional-review/followup-northern-macedonia-422-roster-20261005/reproduce.py",
+  "note": "Two sequential network-restored reproductions produced identical crosswalk-result bytes under unchanged pinned AKN response hash."
+}

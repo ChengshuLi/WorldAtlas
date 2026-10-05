@@ -1,0 +1,3480 @@
+{
+  "issue": 995,
+  "retrieved_at_utc": "2026-10-05",
+  "source_geojson_sha256": "0a0d7340810fb353c3faa37ab9afea20830ce6124083ffe6321182277da61d01",
+  "retained_hdx_source_archive": {
+    "bytes": 224800,
+    "sha256": "dabdc4f606584f9df0410fd3faaaa1a0b932a944d0a9b3015078fc4e1a54d7fb",
+    "adm4_shape_records": 84,
+    "unique_source_codes": 71,
+    "repeated_codes": {
+      "MK00307": 5,
+      "MK00809": 10
+    },
+    "geoBoundaries_geometry_equivalence_count": 84,
+    "maximum_ellipsoidal_symmetric_difference_fraction": 8.050588843771585e-12
+  },
+  "official_akn_response": {
+    "url": "https://portal.app.gov.mk/arcgis/rest/services/Servis_za_opsti_podatoci_od_AKN_2022/MapServer/4/query?where=1%3D1&outFields=NAME%2CNAMEMK%2CMaticenBro%2CCode_TU&returnGeometry=true&outSR=4326&f=geojson",
+    "bytes": 11431261,
+    "sha256": "2f5832c11ffdf4a22a4825db399cf40d31645d6340353ce4fe166e433a27efea",
+    "service_layer": "Servis_za_opsti_podatoci_od_AKN_2022 / layer 4",
+    "returned_features": 82,
+    "municipality_coded_features": 80,
+    "unique_municipality_codes": 80,
+    "attribute_only_response_sha256": "ffb4c27c6b08291b0fa1798c911f0108c42c0aad49b4ccf2588a32520e51d6ce",
+    "license_status": "unknown; no layer reuse terms or copyright text",
+    "geometry_retained": false
+  },
+  "method": {
+    "software": "Python 3.12; Shapely 2.1.2; pyproj 3.7.2",
+    "coordinate_order": "longitude-latitude",
+    "input_crs": "EPSG:4326",
+    "area_method": {
+      "version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "area_units": "m2",
+      "distance_method": "WGS84 inverse geodesic",
+      "distance_units": "m"
+    },
+    "area_helper_version": "worldatlas-evidence-geometry-v1",
+    "method": "source polygon area intersected with current AKN municipality polygons; maximum-area target, with official current NTES code roster as target registry",
+    "warning": "Area overlap supports a spatial crosswalk and flags geometry differences; it does not certify legal boundaries, epochs or correct source geometry."
+  },
+  "summary": {
+    "source_shapes": 84,
+    "current_official_municipalities": 80,
+    "direct_current_roster_matches": 79,
+    "historic_kichevo_source_rows": 5,
+    "direct_native_label_exact_matches": 76,
+    "direct_native_label_variants_or_omissions": 3,
+    "four_historical_units_to_kichevo": 4,
+    "old_kichevo_component_to_kichevo": 1,
+    "distinct_current_target_codes_covered": 80,
+    "parent_region_assignments_matching_ntes": 1,
+    "unique_hdx_source_code_values": 71,
+    "nonunique_hdx_source_code_groups": {
+      "MK00307": 5,
+      "MK00809": 10
+    },
+    "min_source_overlap_share": 0.9430958857060754,
+    "median_source_overlap_share": 0.9929678529604526,
+    "min_current_municipality_area_covered_by_source_union": 0.7430195936475323,
+    "minimum_dojran_target_area_covered_by_source_union": 0.8276647806315511,
+    "median_current_municipality_area_covered_by_source_union": 1.0,
+    "kichevo_area_covered_by_union_of_five_legacy_shapes": 0.9968063339171015,
+    "source_geometry_valid_features": 84,
+    "current_geometry_valid_features": 80
+  },
+  "current_target_coverage": [
+    {
+      "code": "MK00509",
+      "name": "Resen",
+      "source_union_coverage_share": 0.7430195936475323,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00406",
+      "name": "Dojran",
+      "source_union_coverage_share": 0.8276647806315511,
+      "source_shapes_with_positive_overlap": 3
+    },
+    {
+      "code": "MK00403",
+      "name": "Valandovo",
+      "source_union_coverage_share": 0.9920963938151877,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00405",
+      "name": "Gevgelija",
+      "source_union_coverage_share": 0.9927582181401943,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00303",
+      "name": "Debar",
+      "source_union_coverage_share": 0.9942285029986662,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00702",
+      "name": "Kriva Palanka",
+      "source_union_coverage_share": 0.9945845008662847,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00208",
+      "name": "Pehchevo",
+      "source_union_coverage_share": 0.9946581892298906,
+      "source_shapes_with_positive_overlap": 3
+    },
+    {
+      "code": "MK00805",
+      "name": "Gjorche Petrov",
+      "source_union_coverage_share": 0.9956862312511057,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00408",
+      "name": "Novo Selo",
+      "source_union_coverage_share": 0.9966323291061947,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00604",
+      "name": "Gostivar",
+      "source_union_coverage_share": 0.9966931106514656,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00207",
+      "name": "Makedonska Kamenitsa",
+      "source_union_coverage_share": 0.9969493031233462,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00203",
+      "name": "Delchevo",
+      "source_union_coverage_share": 0.997003106000118,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00313",
+      "name": "Centar Zhupa",
+      "source_union_coverage_share": 0.997024837510872,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00704",
+      "name": "Lipkovo",
+      "source_union_coverage_share": 0.9971153975078114,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00608",
+      "name": "Teartse",
+      "source_union_coverage_share": 0.997479130056549,
+      "source_shapes_with_positive_overlap": 3
+    },
+    {
+      "code": "MK00312",
+      "name": "Struga",
+      "source_union_coverage_share": 0.9976278351225326,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00606",
+      "name": "Jegunovtse",
+      "source_union_coverage_share": 0.9976869379859463,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00816",
+      "name": "Chucher - Sandevo",
+      "source_union_coverage_share": 0.9977042180107603,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00706",
+      "name": "Staro Nagorichane",
+      "source_union_coverage_share": 0.9978851356816986,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00210",
+      "name": "Cheshinovo - Obleshevo",
+      "source_union_coverage_share": 0.9980856515109977,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00705",
+      "name": "Rankovtse",
+      "source_union_coverage_share": 0.9983889946763647,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00609",
+      "name": "Tetovo",
+      "source_union_coverage_share": 0.9984484037520636,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00201",
+      "name": "Berovo",
+      "source_union_coverage_share": 0.9984710857560829,
+      "source_shapes_with_positive_overlap": 8
+    },
+    {
+      "code": "MK00301",
+      "name": "Vevchani",
+      "source_union_coverage_share": 0.9985484073408091,
+      "source_shapes_with_positive_overlap": 2
+    },
+    {
+      "code": "MK00507",
+      "name": "Novatsi",
+      "source_union_coverage_share": 0.9986055468121228,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00209",
+      "name": "Probishtip",
+      "source_union_coverage_share": 0.998625926852642,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00310",
+      "name": "Ohrid",
+      "source_union_coverage_share": 0.9988995763856927,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00401",
+      "name": "Bogdantsi",
+      "source_union_coverage_share": 0.9989279079616046,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00703",
+      "name": "Kumanovo",
+      "source_union_coverage_share": 0.9991768084572488,
+      "source_shapes_with_positive_overlap": 8
+    },
+    {
+      "code": "MK00104",
+      "name": "Kavadartsi",
+      "source_union_coverage_share": 0.9992327297688417,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00607",
+      "name": "Mavrovo i Rostushe",
+      "source_union_coverage_share": 0.9993767190955604,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00811",
+      "name": "Saraj",
+      "source_union_coverage_share": 0.9994376278520365,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00501",
+      "name": "Bitola",
+      "source_union_coverage_share": 0.9997876930880101,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00601",
+      "name": "Bogovinje",
+      "source_union_coverage_share": 0.9998618300201999,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00603",
+      "name": "Vrapchishte",
+      "source_union_coverage_share": 0.9999223597148994,
+      "source_shapes_with_positive_overlap": 4
+    },
+    {
+      "code": "MK00410",
+      "name": "Strumitsa",
+      "source_union_coverage_share": 0.999930089245696,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00508",
+      "name": "Prilep",
+      "source_union_coverage_share": 0.9999805818489303,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00103",
+      "name": "Demir Kapija",
+      "source_union_coverage_share": 0.9999976474598045,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00101",
+      "name": "Veles",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00102",
+      "name": "Gradsko",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00105",
+      "name": "Lozovo",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00106",
+      "name": "Negotino",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 8
+    },
+    {
+      "code": "MK00107",
+      "name": "Rosoman",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00108",
+      "name": "Sveti Nikole",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 8
+    },
+    {
+      "code": "MK00109",
+      "name": "Chashka",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 10
+    },
+    {
+      "code": "MK00202",
+      "name": "Vinitsa",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 8
+    },
+    {
+      "code": "MK00204",
+      "name": "Zrnovtsi",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00205",
+      "name": "Karbintsi",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00206",
+      "name": "Kochani",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 8
+    },
+    {
+      "code": "MK00211",
+      "name": "Shtip",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 8
+    },
+    {
+      "code": "MK00304",
+      "name": "Debrtsa",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00307",
+      "name": "Kichevo",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 13
+    },
+    {
+      "code": "MK00308",
+      "name": "Makedonski Brod",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 12
+    },
+    {
+      "code": "MK00311",
+      "name": "Plasnitsa",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00402",
+      "name": "Bosilovo",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00404",
+      "name": "Vasilevo",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00407",
+      "name": "Konche",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 8
+    },
+    {
+      "code": "MK00502",
+      "name": "Demir Hisar",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00503",
+      "name": "Dolneni",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00504",
+      "name": "Krivogashtani",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00505",
+      "name": "Krushevo",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 9
+    },
+    {
+      "code": "MK00506",
+      "name": "Mogila",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00602",
+      "name": "Brvenitsa",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00605",
+      "name": "Zhelino",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00701",
+      "name": "Kratovo",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 8
+    },
+    {
+      "code": "MK00801",
+      "name": "Aerodrom",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00802",
+      "name": "Arachinovo",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00803",
+      "name": "Butel",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00804",
+      "name": "Gazi Baba",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 10
+    },
+    {
+      "code": "MK00806",
+      "name": "Zelenikovo",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00807",
+      "name": "Ilinden",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00808",
+      "name": "Karposh",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 9
+    },
+    {
+      "code": "MK00809",
+      "name": "Kisela Voda",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00810",
+      "name": "Petrovets",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 8
+    },
+    {
+      "code": "MK00812",
+      "name": "Sopishte",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 7
+    },
+    {
+      "code": "MK00813",
+      "name": "Studenichani",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 9
+    },
+    {
+      "code": "MK00814",
+      "name": "Centar",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 6
+    },
+    {
+      "code": "MK00815",
+      "name": "Chair",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 5
+    },
+    {
+      "code": "MK00817",
+      "name": "Shuto Orizari",
+      "source_union_coverage_share": 1.0,
+      "source_shapes_with_positive_overlap": 3
+    },
+    {
+      "code": "MK00409",
+      "name": "Radovish",
+      "source_union_coverage_share": 1.0000000000000002,
+      "source_shapes_with_positive_overlap": 7
+    }
+  ],
+  "rows": [
+    {
+      "location_id": "gb:MKD:ADM2:65306769B11113266730381",
+      "source_shape_id": "65306769B11113266730381",
+      "source_name": "Gostivar",
+      "source_native_name": "Гостивар",
+      "hdx_source_code": "MK00604",
+      "hdx_source_statistical_region": "Polog",
+      "atlas_parent_id": "framework:province:polog:76d403f17558",
+      "current_ntes_code": "MK00604",
+      "current_ntes_name": "Gostivar",
+      "current_ntes_native_name": "Гостивар",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK006",
+      "current_ntes_region_name": "Polog",
+      "atlas_parent_name": "Polog",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.993167173125214,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00604",
+          "name": "Gostivar",
+          "source_area_share": 0.993167173125214
+        },
+        {
+          "code": "MK00607",
+          "name": "Mavrovo i Rostushe",
+          "source_area_share": 0.001745377001359454
+        },
+        {
+          "code": "MK00603",
+          "name": "Vrapchishte",
+          "source_area_share": 0.0016806874692834812
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B11231402107621",
+      "source_shape_id": "65306769B11231402107621",
+      "source_name": "Vinitsa",
+      "source_native_name": "Виница",
+      "hdx_source_code": "MK00202",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00202",
+      "current_ntes_name": "Vinitsa",
+      "current_ntes_native_name": "Виница",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9953275850985787,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00202",
+          "name": "Vinitsa",
+          "source_area_share": 0.9953275850985787
+        },
+        {
+          "code": "MK00409",
+          "name": "Radovish",
+          "source_area_share": 0.001054802967218331
+        },
+        {
+          "code": "MK00206",
+          "name": "Kochani",
+          "source_area_share": 0.001043872868698744
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B13037945767817",
+      "source_shape_id": "65306769B13037945767817",
+      "source_name": "Gjorche Petrov",
+      "source_native_name": "Ѓорче Петров",
+      "hdx_source_code": "MK00809",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00805",
+      "current_ntes_name": "Gjorche Petrov",
+      "current_ntes_native_name": "Ѓорче Петров",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.98326211887378,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00805",
+          "name": "Gjorche Petrov",
+          "source_area_share": 0.98326211887378
+        },
+        {
+          "code": "MK00811",
+          "name": "Saraj",
+          "source_area_share": 0.007633612108942784
+        },
+        {
+          "code": "MK00816",
+          "name": "Chucher - Sandevo",
+          "source_area_share": 0.00422088335251121
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B1402835444879",
+      "source_shape_id": "65306769B1402835444879",
+      "source_name": "Demir Kapija",
+      "source_native_name": "Демир Капија",
+      "hdx_source_code": "MK00103",
+      "hdx_source_statistical_region": "Vardar",
+      "atlas_parent_id": "framework:province:vardar:178ce5206540",
+      "current_ntes_code": "MK00103",
+      "current_ntes_name": "Demir Kapija",
+      "current_ntes_native_name": "Демир Капија",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK001",
+      "current_ntes_region_name": "Vardar",
+      "atlas_parent_name": "Vardar",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9931197078503315,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00103",
+          "name": "Demir Kapija",
+          "source_area_share": 0.9931197078503315
+        },
+        {
+          "code": "MK00106",
+          "name": "Negotino",
+          "source_area_share": 0.0028830571025803397
+        },
+        {
+          "code": "MK00104",
+          "name": "Kavadartsi",
+          "source_area_share": 0.0019758525654706275
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B16547433729319",
+      "source_shape_id": "65306769B16547433729319",
+      "source_name": "Kratovo",
+      "source_native_name": "Кратово",
+      "hdx_source_code": "MK00701",
+      "hdx_source_statistical_region": "Northeast",
+      "atlas_parent_id": "framework:province:northeast:ae810c24404c",
+      "current_ntes_code": "MK00701",
+      "current_ntes_name": "Kratovo",
+      "current_ntes_native_name": "Кратово",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK007",
+      "current_ntes_region_name": "Northeast",
+      "atlas_parent_name": "Northeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9932719068884939,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00701",
+          "name": "Kratovo",
+          "source_area_share": 0.9932719068884939
+        },
+        {
+          "code": "MK00209",
+          "name": "Probishtip",
+          "source_area_share": 0.0025568869437966463
+        },
+        {
+          "code": "MK00703",
+          "name": "Kumanovo",
+          "source_area_share": 0.001156689816850835
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B16932285740052",
+      "source_shape_id": "65306769B16932285740052",
+      "source_name": "Mogila",
+      "source_native_name": "Могила",
+      "hdx_source_code": "MK00506",
+      "hdx_source_statistical_region": "Pelagonia",
+      "atlas_parent_id": "framework:province:pelagonia:4091f04e8c10",
+      "current_ntes_code": "MK00506",
+      "current_ntes_name": "Mogila",
+      "current_ntes_native_name": "Могила",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK005",
+      "current_ntes_region_name": "Pelagonia",
+      "atlas_parent_name": "Pelagonia",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9937971927999439,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00506",
+          "name": "Mogila",
+          "source_area_share": 0.9937971927999439
+        },
+        {
+          "code": "MK00501",
+          "name": "Bitola",
+          "source_area_share": 0.001969661582829135
+        },
+        {
+          "code": "MK00507",
+          "name": "Novatsi",
+          "source_area_share": 0.0018433927049060375
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B17532316382540",
+      "source_shape_id": "65306769B17532316382540",
+      "source_name": "Gevgelija",
+      "source_native_name": "Гевгелија",
+      "hdx_source_code": "MK00405",
+      "hdx_source_statistical_region": "Southeast",
+      "atlas_parent_id": "framework:province:southeast:133e6267a43b",
+      "current_ntes_code": "MK00405",
+      "current_ntes_name": "Gevgelija",
+      "current_ntes_native_name": "Гевгелија",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK004",
+      "current_ntes_region_name": "Southeast",
+      "atlas_parent_name": "Southeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9944750792750193,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00405",
+          "name": "Gevgelija",
+          "source_area_share": 0.9944750792750193
+        },
+        {
+          "code": "MK00104",
+          "name": "Kavadartsi",
+          "source_area_share": 0.001135605597028615
+        },
+        {
+          "code": "MK00403",
+          "name": "Valandovo",
+          "source_area_share": 0.0010701337626031397
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B19811324233496",
+      "source_shape_id": "65306769B19811324233496",
+      "source_name": "Rosoman",
+      "source_native_name": "Росоман",
+      "hdx_source_code": "MK00107",
+      "hdx_source_statistical_region": "Vardar",
+      "atlas_parent_id": "framework:province:vardar:178ce5206540",
+      "current_ntes_code": "MK00107",
+      "current_ntes_name": "Rosoman",
+      "current_ntes_native_name": "Росоман",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK001",
+      "current_ntes_region_name": "Vardar",
+      "atlas_parent_name": "Vardar",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9901043494026618,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00107",
+          "name": "Rosoman",
+          "source_area_share": 0.9901043494026618
+        },
+        {
+          "code": "MK00104",
+          "name": "Kavadartsi",
+          "source_area_share": 0.005834346254551266
+        },
+        {
+          "code": "MK00102",
+          "name": "Gradsko",
+          "source_area_share": 0.002806620149555067
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B20870628535314",
+      "source_shape_id": "65306769B20870628535314",
+      "source_name": "Teartse",
+      "source_native_name": "Теарце",
+      "hdx_source_code": "MK00608",
+      "hdx_source_statistical_region": "Polog",
+      "atlas_parent_id": "framework:province:polog:76d403f17558",
+      "current_ntes_code": "MK00608",
+      "current_ntes_name": "Teartse",
+      "current_ntes_native_name": "Теарце",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK006",
+      "current_ntes_region_name": "Polog",
+      "atlas_parent_name": "Polog",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9928082363266453,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00608",
+          "name": "Teartse",
+          "source_area_share": 0.9928082363266453
+        },
+        {
+          "code": "MK00606",
+          "name": "Jegunovtse",
+          "source_area_share": 0.004054029280055596
+        },
+        {
+          "code": "MK00609",
+          "name": "Tetovo",
+          "source_area_share": 0.0021307555063528765
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B21440943325425",
+      "source_shape_id": "65306769B21440943325425",
+      "source_name": "Oslomej",
+      "source_native_name": "Осломеј",
+      "hdx_source_code": "MK00307",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00307",
+      "current_ntes_name": "Kichevo",
+      "current_ntes_native_name": "Кичево",
+      "native_label_relation": "historical source label; current target is a merger crosswalk",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "former_municipality_merged_into_current_kichevo",
+      "source_polygon_share_overlapping_target": 0.9976197738402363,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00307",
+          "name": "Kichevo",
+          "source_area_share": 0.9976197738402363
+        },
+        {
+          "code": "MK00308",
+          "name": "Makedonski Brod",
+          "source_area_share": 0.0015251380800116669
+        },
+        {
+          "code": "MK00604",
+          "name": "Gostivar",
+          "source_area_share": 0.0008550880797556248
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B24962411373352",
+      "source_shape_id": "65306769B24962411373352",
+      "source_name": "Shuto Orizari",
+      "source_native_name": "Шуто Оризари",
+      "hdx_source_code": "MK00809",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00817",
+      "current_ntes_name": "Shuto Orizari",
+      "current_ntes_native_name": "Шуто Оризари",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9732819421879751,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00817",
+          "name": "Shuto Orizari",
+          "source_area_share": 0.9732819421879751
+        },
+        {
+          "code": "MK00816",
+          "name": "Chucher - Sandevo",
+          "source_area_share": 0.013517152980305336
+        },
+        {
+          "code": "MK00803",
+          "name": "Butel",
+          "source_area_share": 0.013200904831717335
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B25269203277023",
+      "source_shape_id": "65306769B25269203277023",
+      "source_name": "Dolneni",
+      "source_native_name": "Долнени",
+      "hdx_source_code": "MK00503",
+      "hdx_source_statistical_region": "Pelagonia",
+      "atlas_parent_id": "framework:province:pelagonia:4091f04e8c10",
+      "current_ntes_code": "MK00503",
+      "current_ntes_name": "Dolneni",
+      "current_ntes_native_name": "Долнени",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK005",
+      "current_ntes_region_name": "Pelagonia",
+      "atlas_parent_name": "Pelagonia",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9957649753127427,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00503",
+          "name": "Dolneni",
+          "source_area_share": 0.9957649753127427
+        },
+        {
+          "code": "MK00508",
+          "name": "Prilep",
+          "source_area_share": 0.0015042768609175926
+        },
+        {
+          "code": "MK00505",
+          "name": "Krushevo",
+          "source_area_share": 0.0009826214378717867
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B28760853140319",
+      "source_shape_id": "65306769B28760853140319",
+      "source_name": "Novatsi",
+      "source_native_name": "Новаци",
+      "hdx_source_code": "MK00507",
+      "hdx_source_statistical_region": "Pelagonia",
+      "atlas_parent_id": "framework:province:pelagonia:4091f04e8c10",
+      "current_ntes_code": "MK00507",
+      "current_ntes_name": "Novatsi",
+      "current_ntes_native_name": "Новаци",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK005",
+      "current_ntes_region_name": "Pelagonia",
+      "atlas_parent_name": "Pelagonia",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.996836619636694,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00507",
+          "name": "Novatsi",
+          "source_area_share": 0.996836619636694
+        },
+        {
+          "code": "MK00508",
+          "name": "Prilep",
+          "source_area_share": 0.0009877349266453723
+        },
+        {
+          "code": "MK00501",
+          "name": "Bitola",
+          "source_area_share": 0.0004092040670838998
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B29228652763838",
+      "source_shape_id": "65306769B29228652763838",
+      "source_name": "Bitola",
+      "source_native_name": "Битола",
+      "hdx_source_code": "MK00501",
+      "hdx_source_statistical_region": "Pelagonia",
+      "atlas_parent_id": "framework:province:pelagonia:4091f04e8c10",
+      "current_ntes_code": "MK00501",
+      "current_ntes_name": "Bitola",
+      "current_ntes_native_name": "Битола",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK005",
+      "current_ntes_region_name": "Pelagonia",
+      "atlas_parent_name": "Pelagonia",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.996001179409635,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00501",
+          "name": "Bitola",
+          "source_area_share": 0.996001179409635
+        },
+        {
+          "code": "MK00509",
+          "name": "Resen",
+          "source_area_share": 0.0013750314891227517
+        },
+        {
+          "code": "MK00507",
+          "name": "Novatsi",
+          "source_area_share": 0.0011746246652102996
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B30499724495111",
+      "source_shape_id": "65306769B30499724495111",
+      "source_name": "Dojran",
+      "source_native_name": "Дојран",
+      "hdx_source_code": "MK00406",
+      "hdx_source_statistical_region": "Southeast",
+      "atlas_parent_id": "framework:province:southeast:133e6267a43b",
+      "current_ntes_code": "MK00406",
+      "current_ntes_name": "Dojran",
+      "current_ntes_native_name": "Дојран",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK004",
+      "current_ntes_region_name": "Southeast",
+      "atlas_parent_name": "Southeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9917480657299567,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00406",
+          "name": "Dojran",
+          "source_area_share": 0.9917480657299567
+        },
+        {
+          "code": "MK00401",
+          "name": "Bogdantsi",
+          "source_area_share": 0.0030264488348744384
+        },
+        {
+          "code": "MK00403",
+          "name": "Valandovo",
+          "source_area_share": 0.002519935872662484
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B3097110342626",
+      "source_shape_id": "65306769B3097110342626",
+      "source_name": "Konche",
+      "source_native_name": "Конче",
+      "hdx_source_code": "MK00407",
+      "hdx_source_statistical_region": "Southeast",
+      "atlas_parent_id": "framework:province:southeast:133e6267a43b",
+      "current_ntes_code": "MK00407",
+      "current_ntes_name": "Konche",
+      "current_ntes_native_name": "Конче",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK004",
+      "current_ntes_region_name": "Southeast",
+      "atlas_parent_name": "Southeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9940550617208003,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00407",
+          "name": "Konche",
+          "source_area_share": 0.9940550617208003
+        },
+        {
+          "code": "MK00409",
+          "name": "Radovish",
+          "source_area_share": 0.0015696802178654403
+        },
+        {
+          "code": "MK00403",
+          "name": "Valandovo",
+          "source_area_share": 0.001245400193344245
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B31253280068655",
+      "source_shape_id": "65306769B31253280068655",
+      "source_name": "Zhelino",
+      "source_native_name": "Желино",
+      "hdx_source_code": "MK00605",
+      "hdx_source_statistical_region": "Polog",
+      "atlas_parent_id": "framework:province:polog:76d403f17558",
+      "current_ntes_code": "MK00605",
+      "current_ntes_name": "Zhelino",
+      "current_ntes_native_name": "Желино",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK006",
+      "current_ntes_region_name": "Polog",
+      "atlas_parent_name": "Polog",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9909164565444766,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00605",
+          "name": "Zhelino",
+          "source_area_share": 0.9909164565444766
+        },
+        {
+          "code": "MK00602",
+          "name": "Brvenitsa",
+          "source_area_share": 0.0033337767465480305
+        },
+        {
+          "code": "MK00606",
+          "name": "Jegunovtse",
+          "source_area_share": 0.0017596865911671555
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B31528709538806",
+      "source_shape_id": "65306769B31528709538806",
+      "source_name": "Centar",
+      "source_native_name": "Центар",
+      "hdx_source_code": "MK00809",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00814",
+      "current_ntes_name": "Centar",
+      "current_ntes_native_name": "Центар",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9775723048080546,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00814",
+          "name": "Centar",
+          "source_area_share": 0.9775723048080546
+        },
+        {
+          "code": "MK00808",
+          "name": "Karposh",
+          "source_area_share": 0.01028851215457586
+        },
+        {
+          "code": "MK00809",
+          "name": "Kisela Voda",
+          "source_area_share": 0.0042850929058479495
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B32864383387565",
+      "source_shape_id": "65306769B32864383387565",
+      "source_name": "Brvenitsa",
+      "source_native_name": "Брвеница",
+      "hdx_source_code": "MK00602",
+      "hdx_source_statistical_region": "Polog",
+      "atlas_parent_id": "framework:province:polog:76d403f17558",
+      "current_ntes_code": "MK00602",
+      "current_ntes_name": "Brvenitsa",
+      "current_ntes_native_name": "Брвеница",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK006",
+      "current_ntes_region_name": "Polog",
+      "atlas_parent_name": "Polog",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9884462667743509,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00602",
+          "name": "Brvenitsa",
+          "source_area_share": 0.9884462667743509
+        },
+        {
+          "code": "MK00605",
+          "name": "Zhelino",
+          "source_area_share": 0.0037916802207757327
+        },
+        {
+          "code": "MK00604",
+          "name": "Gostivar",
+          "source_area_share": 0.0027737870518820098
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B34923793156893",
+      "source_shape_id": "65306769B34923793156893",
+      "source_name": "Kichevo",
+      "source_native_name": "Кичево",
+      "hdx_source_code": "MK00307",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00307",
+      "current_ntes_name": "Kichevo",
+      "current_ntes_native_name": "Кичево",
+      "native_label_relation": "historical source label; current target is a merger crosswalk",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "historic_kichevo_component_of_current_municipality",
+      "source_polygon_share_overlapping_target": 1.0,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00307",
+          "name": "Kichevo",
+          "source_area_share": 1.0
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B35230400843522",
+      "source_shape_id": "65306769B35230400843522",
+      "source_name": "Zelenikovo",
+      "source_native_name": "Зелениково",
+      "hdx_source_code": "MK00806",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00806",
+      "current_ntes_name": "Zelenikovo",
+      "current_ntes_native_name": "Зелениково",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9925710057911515,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00806",
+          "name": "Zelenikovo",
+          "source_area_share": 0.9925710057911515
+        },
+        {
+          "code": "MK00813",
+          "name": "Studenichani",
+          "source_area_share": 0.002983605475982938
+        },
+        {
+          "code": "MK00109",
+          "name": "Chashka",
+          "source_area_share": 0.0017138246633810184
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B37555850097023",
+      "source_shape_id": "65306769B37555850097023",
+      "source_name": "Gradsko",
+      "source_native_name": "Градско",
+      "hdx_source_code": "MK00102",
+      "hdx_source_statistical_region": "Vardar",
+      "atlas_parent_id": "framework:province:vardar:178ce5206540",
+      "current_ntes_code": "MK00102",
+      "current_ntes_name": "Gradsko",
+      "current_ntes_native_name": "Градско",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK001",
+      "current_ntes_region_name": "Vardar",
+      "atlas_parent_name": "Vardar",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9919957977546102,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00102",
+          "name": "Gradsko",
+          "source_area_share": 0.9919957977546102
+        },
+        {
+          "code": "MK00109",
+          "name": "Chashka",
+          "source_area_share": 0.00309217469687763
+        },
+        {
+          "code": "MK00107",
+          "name": "Rosoman",
+          "source_area_share": 0.0019513485227580433
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B37694813292745",
+      "source_shape_id": "65306769B37694813292745",
+      "source_name": "Kriva Palanka",
+      "source_native_name": "Крива Паланка",
+      "hdx_source_code": "MK00702",
+      "hdx_source_statistical_region": "Northeast",
+      "atlas_parent_id": "framework:province:northeast:ae810c24404c",
+      "current_ntes_code": "MK00702",
+      "current_ntes_name": "Kriva Palanka",
+      "current_ntes_native_name": "Крива Паланка",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK007",
+      "current_ntes_region_name": "Northeast",
+      "atlas_parent_name": "Northeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.995399126157008,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00702",
+          "name": "Kriva Palanka",
+          "source_area_share": 0.995399126157008
+        },
+        {
+          "code": "MK00705",
+          "name": "Rankovtse",
+          "source_area_share": 0.0015903692342109264
+        },
+        {
+          "code": "MK00701",
+          "name": "Kratovo",
+          "source_area_share": 0.0007517361134623122
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B38681121769962",
+      "source_shape_id": "65306769B38681121769962",
+      "source_name": "Sopishte",
+      "source_native_name": "Сопиште",
+      "hdx_source_code": "MK00812",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00812",
+      "current_ntes_name": "Sopishte",
+      "current_ntes_native_name": "Сопиште",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9935820432883721,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00812",
+          "name": "Sopishte",
+          "source_area_share": 0.9935820432883721
+        },
+        {
+          "code": "MK00813",
+          "name": "Studenichani",
+          "source_area_share": 0.0027554826080010662
+        },
+        {
+          "code": "MK00308",
+          "name": "Makedonski Brod",
+          "source_area_share": 0.0009647529818164762
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B39088451231406",
+      "source_shape_id": "65306769B39088451231406",
+      "source_name": "Chair",
+      "source_native_name": "Чаир",
+      "hdx_source_code": "MK00809",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00815",
+      "current_ntes_name": "Chair",
+      "current_ntes_native_name": "Чаир",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9430958857060754,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00815",
+          "name": "Chair",
+          "source_area_share": 0.9430958857060754
+        },
+        {
+          "code": "MK00814",
+          "name": "Centar",
+          "source_area_share": 0.02638824237291505
+        },
+        {
+          "code": "MK00804",
+          "name": "Gazi Baba",
+          "source_area_share": 0.01455271640956387
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B40750666784819",
+      "source_shape_id": "65306769B40750666784819",
+      "source_name": "Karbintsi",
+      "source_native_name": "Карбинци",
+      "hdx_source_code": "MK00205",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00205",
+      "current_ntes_name": "Karbintsi",
+      "current_ntes_native_name": "Карбинци",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9882416587735849,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00205",
+          "name": "Karbintsi",
+          "source_area_share": 0.9882416587735849
+        },
+        {
+          "code": "MK00211",
+          "name": "Shtip",
+          "source_area_share": 0.009058840533058781
+        },
+        {
+          "code": "MK00210",
+          "name": "Cheshinovo - Obleshevo",
+          "source_area_share": 0.0012147296203288654
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B41644037603367",
+      "source_shape_id": "65306769B41644037603367",
+      "source_name": "Kisela Voda",
+      "source_native_name": "Кисела Вода",
+      "hdx_source_code": "MK00809",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00809",
+      "current_ntes_name": "Kisela Voda",
+      "current_ntes_native_name": "Кисела Вода",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.982166850389405,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00809",
+          "name": "Kisela Voda",
+          "source_area_share": 0.982166850389405
+        },
+        {
+          "code": "MK00813",
+          "name": "Studenichani",
+          "source_area_share": 0.008394868851940709
+        },
+        {
+          "code": "MK00801",
+          "name": "Aerodrom",
+          "source_area_share": 0.00355414554241416
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B43786994605209",
+      "source_shape_id": "65306769B43786994605209",
+      "source_name": "Bosilovo",
+      "source_native_name": "Босилово",
+      "hdx_source_code": "MK00402",
+      "hdx_source_statistical_region": "Southeast",
+      "atlas_parent_id": "framework:province:southeast:133e6267a43b",
+      "current_ntes_code": "MK00402",
+      "current_ntes_name": "Bosilovo",
+      "current_ntes_native_name": "Босилово",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK004",
+      "current_ntes_region_name": "Southeast",
+      "atlas_parent_name": "Southeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9926948767719344,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00402",
+          "name": "Bosilovo",
+          "source_area_share": 0.9926948767719344
+        },
+        {
+          "code": "MK00408",
+          "name": "Novo Selo",
+          "source_area_share": 0.0021372719897958022
+        },
+        {
+          "code": "MK00201",
+          "name": "Berovo",
+          "source_area_share": 0.0020028555485223343
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B44883072269450",
+      "source_shape_id": "65306769B44883072269450",
+      "source_name": "Pehchevo",
+      "source_native_name": "Пехчево",
+      "hdx_source_code": "MK00208",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00208",
+      "current_ntes_name": "Pehchevo",
+      "current_ntes_native_name": "Пехчево",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9925647655652007,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00208",
+          "name": "Pehchevo",
+          "source_area_share": 0.9925647655652007
+        },
+        {
+          "code": "MK00201",
+          "name": "Berovo",
+          "source_area_share": 0.004450652376421874
+        },
+        {
+          "code": "MK00203",
+          "name": "Delchevo",
+          "source_area_share": 0.001465165272353168
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B4612015917677",
+      "source_shape_id": "65306769B4612015917677",
+      "source_name": "Jegunovtse",
+      "source_native_name": "Јегуновце",
+      "hdx_source_code": "MK00606",
+      "hdx_source_statistical_region": "Polog",
+      "atlas_parent_id": "framework:province:polog:76d403f17558",
+      "current_ntes_code": "MK00606",
+      "current_ntes_name": "Jegunovtse",
+      "current_ntes_native_name": "Јегуновце",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK006",
+      "current_ntes_region_name": "Polog",
+      "atlas_parent_name": "Polog",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9916511777167691,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00606",
+          "name": "Jegunovtse",
+          "source_area_share": 0.9916511777167691
+        },
+        {
+          "code": "MK00608",
+          "name": "Teartse",
+          "source_area_share": 0.003327193018510336
+        },
+        {
+          "code": "MK00811",
+          "name": "Saraj",
+          "source_area_share": 0.0015558049080683838
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B48294308075018",
+      "source_shape_id": "65306769B48294308075018",
+      "source_name": "Karposh",
+      "source_native_name": "Карпош",
+      "hdx_source_code": "MK00809",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00808",
+      "current_ntes_name": "Karposh",
+      "current_ntes_native_name": "Карпош",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9729646857139675,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00808",
+          "name": "Karposh",
+          "source_area_share": 0.9729646857139675
+        },
+        {
+          "code": "MK00814",
+          "name": "Centar",
+          "source_area_share": 0.013511591593865223
+        },
+        {
+          "code": "MK00805",
+          "name": "Gjorche Petrov",
+          "source_area_share": 0.004914266293184724
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B48467279151544",
+      "source_shape_id": "65306769B48467279151544",
+      "source_name": "Makedonski Brod",
+      "source_native_name": "Македонски Брод",
+      "hdx_source_code": "MK00308",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00308",
+      "current_ntes_name": "Makedonski Brod",
+      "current_ntes_native_name": "Македонски Брод",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9963233440671609,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00308",
+          "name": "Makedonski Brod",
+          "source_area_share": 0.9963233440671609
+        },
+        {
+          "code": "MK00307",
+          "name": "Kichevo",
+          "source_area_share": 0.0006830579290087238
+        },
+        {
+          "code": "MK00503",
+          "name": "Dolneni",
+          "source_area_share": 0.0006046396872885376
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B50594974244279",
+      "source_shape_id": "65306769B50594974244279",
+      "source_name": "Novo Selo",
+      "source_native_name": "Ново Село",
+      "hdx_source_code": "MK00408",
+      "hdx_source_statistical_region": "Southeast",
+      "atlas_parent_id": "framework:province:southeast:133e6267a43b",
+      "current_ntes_code": "MK00408",
+      "current_ntes_name": "Novo Selo",
+      "current_ntes_native_name": "Ново Село",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK004",
+      "current_ntes_region_name": "Southeast",
+      "atlas_parent_name": "Southeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9940250835963662,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00408",
+          "name": "Novo Selo",
+          "source_area_share": 0.9940250835963662
+        },
+        {
+          "code": "MK00402",
+          "name": "Bosilovo",
+          "source_area_share": 0.001520024548984805
+        },
+        {
+          "code": "MK00410",
+          "name": "Strumitsa",
+          "source_area_share": 0.0008435474214669752
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B51033238442002",
+      "source_shape_id": "65306769B51033238442002",
+      "source_name": "Demir Hisar",
+      "source_native_name": "Демир Хисар",
+      "hdx_source_code": "MK00502",
+      "hdx_source_statistical_region": "Pelagonia",
+      "atlas_parent_id": "framework:province:pelagonia:4091f04e8c10",
+      "current_ntes_code": "MK00502",
+      "current_ntes_name": "Demir Hisar",
+      "current_ntes_native_name": "Демир Хисар",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK005",
+      "current_ntes_region_name": "Pelagonia",
+      "atlas_parent_name": "Pelagonia",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9959611842360411,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00502",
+          "name": "Demir Hisar",
+          "source_area_share": 0.9959611842360411
+        },
+        {
+          "code": "MK00505",
+          "name": "Krushevo",
+          "source_area_share": 0.0010819698111275578
+        },
+        {
+          "code": "MK00501",
+          "name": "Bitola",
+          "source_area_share": 0.0010446851985519508
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B51513115302581",
+      "source_shape_id": "65306769B51513115302581",
+      "source_name": "Zrnovtsi",
+      "source_native_name": "Зрновци",
+      "hdx_source_code": "MK00204",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00204",
+      "current_ntes_name": "Zrnovtsi",
+      "current_ntes_native_name": "Зрновци",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9922758350800126,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00204",
+          "name": "Zrnovtsi",
+          "source_area_share": 0.9922758350800126
+        },
+        {
+          "code": "MK00202",
+          "name": "Vinitsa",
+          "source_area_share": 0.0034071738904295442
+        },
+        {
+          "code": "MK00210",
+          "name": "Cheshinovo - Obleshevo",
+          "source_area_share": 0.0017728311664535232
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B52717367250393",
+      "source_shape_id": "65306769B52717367250393",
+      "source_name": "Lipkovo",
+      "source_native_name": "Липково",
+      "hdx_source_code": "MK00704",
+      "hdx_source_statistical_region": "Northeast",
+      "atlas_parent_id": "framework:province:northeast:ae810c24404c",
+      "current_ntes_code": "MK00704",
+      "current_ntes_name": "Lipkovo",
+      "current_ntes_native_name": "Липково",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK007",
+      "current_ntes_region_name": "Northeast",
+      "atlas_parent_name": "Northeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9906212059129424,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00704",
+          "name": "Lipkovo",
+          "source_area_share": 0.9906212059129424
+        },
+        {
+          "code": "MK00804",
+          "name": "Gazi Baba",
+          "source_area_share": 0.0013320005173768825
+        },
+        {
+          "code": "MK00816",
+          "name": "Chucher - Sandevo",
+          "source_area_share": 0.0012402410947804365
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B54195317631303",
+      "source_shape_id": "65306769B54195317631303",
+      "source_name": "Shtip",
+      "source_native_name": "Штип",
+      "hdx_source_code": "MK00211",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00211",
+      "current_ntes_name": "Shtip",
+      "current_ntes_native_name": "Штип",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9899042574399088,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00211",
+          "name": "Shtip",
+          "source_area_share": 0.9899042574399088
+        },
+        {
+          "code": "MK00106",
+          "name": "Negotino",
+          "source_area_share": 0.003946514772734957
+        },
+        {
+          "code": "MK00105",
+          "name": "Lozovo",
+          "source_area_share": 0.0021235551376501934
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B55292490733903",
+      "source_shape_id": "65306769B55292490733903",
+      "source_name": "Chashka",
+      "source_native_name": "Чашка",
+      "hdx_source_code": "MK00109",
+      "hdx_source_statistical_region": "Vardar",
+      "atlas_parent_id": "framework:province:vardar:178ce5206540",
+      "current_ntes_code": "MK00109",
+      "current_ntes_name": "Chashka",
+      "current_ntes_native_name": "Чашка",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK001",
+      "current_ntes_region_name": "Vardar",
+      "atlas_parent_name": "Vardar",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.997145903136774,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00109",
+          "name": "Chashka",
+          "source_area_share": 0.997145903136774
+        },
+        {
+          "code": "MK00503",
+          "name": "Dolneni",
+          "source_area_share": 0.0008427258264681036
+        },
+        {
+          "code": "MK00101",
+          "name": "Veles",
+          "source_area_share": 0.0006186878318891374
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B55307449205038",
+      "source_shape_id": "65306769B55307449205038",
+      "source_name": "Kumanovo",
+      "source_native_name": "Куманово",
+      "hdx_source_code": "MK00703",
+      "hdx_source_statistical_region": "Northeast",
+      "atlas_parent_id": "framework:province:northeast:ae810c24404c",
+      "current_ntes_code": "MK00703",
+      "current_ntes_name": "Kumanovo",
+      "current_ntes_native_name": "Куманово",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK007",
+      "current_ntes_region_name": "Northeast",
+      "atlas_parent_name": "Northeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9944961313069076,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00703",
+          "name": "Kumanovo",
+          "source_area_share": 0.9944961313069076
+        },
+        {
+          "code": "MK00706",
+          "name": "Staro Nagorichane",
+          "source_area_share": 0.0011681241300369113
+        },
+        {
+          "code": "MK00810",
+          "name": "Petrovets",
+          "source_area_share": 0.0010252451331391182
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B55321164164480",
+      "source_shape_id": "65306769B55321164164480",
+      "source_name": "Vevchani",
+      "source_native_name": "Вевчани",
+      "hdx_source_code": "MK00301",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00301",
+      "current_ntes_name": "Vevchani",
+      "current_ntes_native_name": "Вевчани",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9759765698764128,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00301",
+          "name": "Vevchani",
+          "source_area_share": 0.9759765698764128
+        },
+        {
+          "code": "MK00312",
+          "name": "Struga",
+          "source_area_share": 0.022333673060646965
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B57074060571114",
+      "source_shape_id": "65306769B57074060571114",
+      "source_name": "Butel",
+      "source_native_name": "Бутел",
+      "hdx_source_code": "MK00809",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00803",
+      "current_ntes_name": "Butel",
+      "current_ntes_native_name": "Бутел",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.986635909035213,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00803",
+          "name": "Butel",
+          "source_area_share": 0.986635909035213
+        },
+        {
+          "code": "MK00816",
+          "name": "Chucher - Sandevo",
+          "source_area_share": 0.004707710258341625
+        },
+        {
+          "code": "MK00804",
+          "name": "Gazi Baba",
+          "source_area_share": 0.0037083312939788287
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B57665907630306",
+      "source_shape_id": "65306769B57665907630306",
+      "source_name": "Mavrovo and Rostusha",
+      "source_native_name": "Маврово и Ростуша",
+      "hdx_source_code": "MK00607",
+      "hdx_source_statistical_region": "Polog",
+      "atlas_parent_id": "framework:province:polog:76d403f17558",
+      "current_ntes_code": "MK00607",
+      "current_ntes_name": "Mavrovo i Rostushe",
+      "current_ntes_native_name": "Маврово и Ростуше",
+      "native_label_relation": "official-name spelling variant; code and spatial crosswalk inspected",
+      "current_ntes_region_code": "MK006",
+      "current_ntes_region_name": "Polog",
+      "atlas_parent_name": "Polog",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9953555060877375,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00607",
+          "name": "Mavrovo i Rostushe",
+          "source_area_share": 0.9953555060877375
+        },
+        {
+          "code": "MK00604",
+          "name": "Gostivar",
+          "source_area_share": 0.0021135944872129877
+        },
+        {
+          "code": "MK00303",
+          "name": "Debar",
+          "source_area_share": 0.0011111381343879166
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B57810703972123",
+      "source_shape_id": "65306769B57810703972123",
+      "source_name": "Krivogashtani",
+      "source_native_name": "Кривогаштани",
+      "hdx_source_code": "MK00504",
+      "hdx_source_statistical_region": "Pelagonia",
+      "atlas_parent_id": "framework:province:pelagonia:4091f04e8c10",
+      "current_ntes_code": "MK00504",
+      "current_ntes_name": "Krivogashtani",
+      "current_ntes_native_name": "Кривогаштани",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK005",
+      "current_ntes_region_name": "Pelagonia",
+      "atlas_parent_name": "Pelagonia",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9907385562370229,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00504",
+          "name": "Krivogashtani",
+          "source_area_share": 0.9907385562370229
+        },
+        {
+          "code": "MK00508",
+          "name": "Prilep",
+          "source_area_share": 0.002949636497087694
+        },
+        {
+          "code": "MK00503",
+          "name": "Dolneni",
+          "source_area_share": 0.0026779095663682193
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B58175225548943",
+      "source_shape_id": "65306769B58175225548943",
+      "source_name": "Chucher - Sandevo",
+      "source_native_name": "Чучер - Сандево",
+      "hdx_source_code": "MK00816",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00816",
+      "current_ntes_name": "Chucher - Sandevo",
+      "current_ntes_native_name": "Чучер - Сандево",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9901470302229398,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00816",
+          "name": "Chucher - Sandevo",
+          "source_area_share": 0.9901470302229398
+        },
+        {
+          "code": "MK00803",
+          "name": "Butel",
+          "source_area_share": 0.0013886670911862037
+        },
+        {
+          "code": "MK00704",
+          "name": "Lipkovo",
+          "source_area_share": 0.0008140555388699558
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B59831193355348",
+      "source_shape_id": "65306769B59831193355348",
+      "source_name": "Struga",
+      "source_native_name": "Струга",
+      "hdx_source_code": "MK00312",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00312",
+      "current_ntes_name": "Struga",
+      "current_ntes_native_name": "Струга",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9949079798739722,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00312",
+          "name": "Struga",
+          "source_area_share": 0.9949079798739722
+        },
+        {
+          "code": "MK00304",
+          "name": "Debrtsa",
+          "source_area_share": 0.0009623727863828539
+        },
+        {
+          "code": "MK00301",
+          "name": "Vevchani",
+          "source_area_share": 0.0006861240628925001
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B60147523647729",
+      "source_shape_id": "65306769B60147523647729",
+      "source_name": "Bogdantsi",
+      "source_native_name": "Богданци",
+      "hdx_source_code": "MK00401",
+      "hdx_source_statistical_region": "Southeast",
+      "atlas_parent_id": "framework:province:southeast:133e6267a43b",
+      "current_ntes_code": "MK00401",
+      "current_ntes_name": "Bogdantsi",
+      "current_ntes_native_name": "Богданци",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK004",
+      "current_ntes_region_name": "Southeast",
+      "atlas_parent_name": "Southeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9939059937085586,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00401",
+          "name": "Bogdantsi",
+          "source_area_share": 0.9939059937085586
+        },
+        {
+          "code": "MK00405",
+          "name": "Gevgelija",
+          "source_area_share": 0.00266896636160909
+        },
+        {
+          "code": "MK00403",
+          "name": "Valandovo",
+          "source_area_share": 0.0014529735059005803
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B60953626693828",
+      "source_shape_id": "65306769B60953626693828",
+      "source_name": "Cheshinovo - Obleshevo",
+      "source_native_name": "Чешиново - Облешево",
+      "hdx_source_code": "MK00210",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00210",
+      "current_ntes_name": "Cheshinovo - Obleshevo",
+      "current_ntes_native_name": "Чешиново - Облешево",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9911165840384711,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00210",
+          "name": "Cheshinovo - Obleshevo",
+          "source_area_share": 0.9911165840384711
+        },
+        {
+          "code": "MK00205",
+          "name": "Karbintsi",
+          "source_area_share": 0.0033596521836758274
+        },
+        {
+          "code": "MK00206",
+          "name": "Kochani",
+          "source_area_share": 0.003043554919916206
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B61721229469178",
+      "source_shape_id": "65306769B61721229469178",
+      "source_name": "Centar Zhupa",
+      "source_native_name": "Центар Жупа",
+      "hdx_source_code": "MK00313",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00313",
+      "current_ntes_name": "Centar Zhupa",
+      "current_ntes_native_name": "Центар Жупа",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9889863842976606,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00313",
+          "name": "Centar Zhupa",
+          "source_area_share": 0.9889863842976606
+        },
+        {
+          "code": "MK00303",
+          "name": "Debar",
+          "source_area_share": 0.003647657074086276
+        },
+        {
+          "code": "MK00312",
+          "name": "Struga",
+          "source_area_share": 0.002544223215974468
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B63258214258120",
+      "source_shape_id": "65306769B63258214258120",
+      "source_name": "Negotino",
+      "source_native_name": "Неготино",
+      "hdx_source_code": "MK00106",
+      "hdx_source_statistical_region": "Vardar",
+      "atlas_parent_id": "framework:province:vardar:178ce5206540",
+      "current_ntes_code": "MK00106",
+      "current_ntes_name": "Negotino",
+      "current_ntes_native_name": "Неготино",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK001",
+      "current_ntes_region_name": "Vardar",
+      "atlas_parent_name": "Vardar",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9933391924653727,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00106",
+          "name": "Negotino",
+          "source_area_share": 0.9933391924653727
+        },
+        {
+          "code": "MK00104",
+          "name": "Kavadartsi",
+          "source_area_share": 0.0016726532276878417
+        },
+        {
+          "code": "MK00103",
+          "name": "Demir Kapija",
+          "source_area_share": 0.0016401646463249657
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B638558710054",
+      "source_shape_id": "65306769B638558710054",
+      "source_name": "Prilep",
+      "source_native_name": "Прилеп",
+      "hdx_source_code": "MK00508",
+      "hdx_source_statistical_region": "Pelagonia",
+      "atlas_parent_id": "framework:province:pelagonia:4091f04e8c10",
+      "current_ntes_code": "MK00508",
+      "current_ntes_name": "Prilep",
+      "current_ntes_native_name": "Прилеп",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK005",
+      "current_ntes_region_name": "Pelagonia",
+      "atlas_parent_name": "Pelagonia",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9969654949648391,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00508",
+          "name": "Prilep",
+          "source_area_share": 0.9969654949648391
+        },
+        {
+          "code": "MK00104",
+          "name": "Kavadartsi",
+          "source_area_share": 0.0007453543472565185
+        },
+        {
+          "code": "MK00507",
+          "name": "Novatsi",
+          "source_area_share": 0.0004737395896016909
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B68285102273894",
+      "source_shape_id": "65306769B68285102273894",
+      "source_name": "Saraj",
+      "source_native_name": "Сарај",
+      "hdx_source_code": "MK00809",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00811",
+      "current_ntes_name": "Saraj",
+      "current_ntes_native_name": "Сарај",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9925627827016517,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00811",
+          "name": "Saraj",
+          "source_area_share": 0.9925627827016517
+        },
+        {
+          "code": "MK00606",
+          "name": "Jegunovtse",
+          "source_area_share": 0.0023414866578867237
+        },
+        {
+          "code": "MK00812",
+          "name": "Sopishte",
+          "source_area_share": 0.001684854150934415
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B69057078753294",
+      "source_shape_id": "65306769B69057078753294",
+      "source_name": "Radovish",
+      "source_native_name": "Радовиш",
+      "hdx_source_code": "MK00409",
+      "hdx_source_statistical_region": "Southeast",
+      "atlas_parent_id": "framework:province:southeast:133e6267a43b",
+      "current_ntes_code": "MK00409",
+      "current_ntes_name": "Radovish",
+      "current_ntes_native_name": "Радовиш",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK004",
+      "current_ntes_region_name": "Southeast",
+      "atlas_parent_name": "Southeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9947803263726238,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00409",
+          "name": "Radovish",
+          "source_area_share": 0.9947803263726238
+        },
+        {
+          "code": "MK00404",
+          "name": "Vasilevo",
+          "source_area_share": 0.0017769335699901604
+        },
+        {
+          "code": "MK00211",
+          "name": "Shtip",
+          "source_area_share": 0.0009689349284272237
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B7034673009325",
+      "source_shape_id": "65306769B7034673009325",
+      "source_name": "Kochani",
+      "source_native_name": "Кочани",
+      "hdx_source_code": "MK00206",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00206",
+      "current_ntes_name": "Kochani",
+      "current_ntes_native_name": "Кочани",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9884716822371471,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00206",
+          "name": "Kochani",
+          "source_area_share": 0.9884716822371471
+        },
+        {
+          "code": "MK00207",
+          "name": "Makedonska Kamenitsa",
+          "source_area_share": 0.00724312273741036
+        },
+        {
+          "code": "MK00210",
+          "name": "Cheshinovo - Obleshevo",
+          "source_area_share": 0.0013882893136611207
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B70601166108403",
+      "source_shape_id": "65306769B70601166108403",
+      "source_name": "Resen",
+      "source_native_name": "Ресен",
+      "hdx_source_code": "MK00509",
+      "hdx_source_statistical_region": "Pelagonia",
+      "atlas_parent_id": "framework:province:pelagonia:4091f04e8c10",
+      "current_ntes_code": "MK00509",
+      "current_ntes_name": "Resen",
+      "current_ntes_native_name": "Ресен",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK005",
+      "current_ntes_region_name": "Pelagonia",
+      "atlas_parent_name": "Pelagonia",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9937105728289967,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00509",
+          "name": "Resen",
+          "source_area_share": 0.9937105728289967
+        },
+        {
+          "code": "MK00310",
+          "name": "Ohrid",
+          "source_area_share": 0.0028186736359417128
+        },
+        {
+          "code": "MK00501",
+          "name": "Bitola",
+          "source_area_share": 0.002122633819594497
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B7192425425597",
+      "source_shape_id": "65306769B7192425425597",
+      "source_name": "Zajas",
+      "source_native_name": "Зајас",
+      "hdx_source_code": "MK00307",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00307",
+      "current_ntes_name": "Kichevo",
+      "current_ntes_native_name": "Кичево",
+      "native_label_relation": "historical source label; current target is a merger crosswalk",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "former_municipality_merged_into_current_kichevo",
+      "source_polygon_share_overlapping_target": 0.9974198281116871,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00307",
+          "name": "Kichevo",
+          "source_area_share": 0.9974198281116871
+        },
+        {
+          "code": "MK00607",
+          "name": "Mavrovo i Rostushe",
+          "source_area_share": 0.0022908704539371227
+        },
+        {
+          "code": "MK00604",
+          "name": "Gostivar",
+          "source_area_share": 0.00028930143437125235
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B72053820604170",
+      "source_shape_id": "65306769B72053820604170",
+      "source_name": "Studenichani",
+      "source_native_name": "Студеничани",
+      "hdx_source_code": "MK00813",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00813",
+      "current_ntes_name": "Studenichani",
+      "current_ntes_native_name": "Студеничани",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9946189028058714,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00813",
+          "name": "Studenichani",
+          "source_area_share": 0.9946189028058714
+        },
+        {
+          "code": "MK00812",
+          "name": "Sopishte",
+          "source_area_share": 0.0025720623104738024
+        },
+        {
+          "code": "MK00806",
+          "name": "Zelenikovo",
+          "source_area_share": 0.0011576538826085447
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B74199760072032",
+      "source_shape_id": "65306769B74199760072032",
+      "source_name": "Vraneshtitsa",
+      "source_native_name": "Вранештица",
+      "hdx_source_code": "MK00307",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00307",
+      "current_ntes_name": "Kichevo",
+      "current_ntes_native_name": "Кичево",
+      "native_label_relation": "historical source label; current target is a merger crosswalk",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "former_municipality_merged_into_current_kichevo",
+      "source_polygon_share_overlapping_target": 0.9966007180276866,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00307",
+          "name": "Kichevo",
+          "source_area_share": 0.9966007180276866
+        },
+        {
+          "code": "MK00308",
+          "name": "Makedonski Brod",
+          "source_area_share": 0.0018680286467349188
+        },
+        {
+          "code": "MK00311",
+          "name": "Plasnitsa",
+          "source_area_share": 0.0015312533255782816
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B7593203088025",
+      "source_shape_id": "65306769B7593203088025",
+      "source_name": "Vrapchishte",
+      "source_native_name": "Врапчиште",
+      "hdx_source_code": "MK00603",
+      "hdx_source_statistical_region": "Polog",
+      "atlas_parent_id": "framework:province:polog:76d403f17558",
+      "current_ntes_code": "MK00603",
+      "current_ntes_name": "Vrapchishte",
+      "current_ntes_native_name": "Врапчиште",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK006",
+      "current_ntes_region_name": "Polog",
+      "atlas_parent_name": "Polog",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9862026999592453,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00603",
+          "name": "Vrapchishte",
+          "source_area_share": 0.9862026999592453
+        },
+        {
+          "code": "MK00604",
+          "name": "Gostivar",
+          "source_area_share": 0.010272497985324239
+        },
+        {
+          "code": "MK00601",
+          "name": "Bogovinje",
+          "source_area_share": 0.0016995582676746718
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B77105819408507",
+      "source_shape_id": "65306769B77105819408507",
+      "source_name": "Probishtip",
+      "source_native_name": "Пробиштип",
+      "hdx_source_code": "MK00209",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00209",
+      "current_ntes_name": "Probishtip",
+      "current_ntes_native_name": "Пробиштип",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9928463753501637,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00209",
+          "name": "Probishtip",
+          "source_area_share": 0.9928463753501637
+        },
+        {
+          "code": "MK00108",
+          "name": "Sveti Nikole",
+          "source_area_share": 0.002093392747429985
+        },
+        {
+          "code": "MK00701",
+          "name": "Kratovo",
+          "source_area_share": 0.0019987404033317215
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B78023528365293",
+      "source_shape_id": "65306769B78023528365293",
+      "source_name": "Debartsa",
+      "source_native_name": "Дебарца",
+      "hdx_source_code": "MK00304",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00304",
+      "current_ntes_name": "Debrtsa",
+      "current_ntes_native_name": "Дебрца",
+      "native_label_relation": "official-name spelling variant; code and spatial crosswalk inspected",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9922708066753271,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00304",
+          "name": "Debrtsa",
+          "source_area_share": 0.9922708066753271
+        },
+        {
+          "code": "MK00310",
+          "name": "Ohrid",
+          "source_area_share": 0.004147016517806426
+        },
+        {
+          "code": "MK00312",
+          "name": "Struga",
+          "source_area_share": 0.0022498106323619485
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B79358437937603",
+      "source_shape_id": "65306769B79358437937603",
+      "source_name": "Veles",
+      "source_native_name": "Велес",
+      "hdx_source_code": "MK00101",
+      "hdx_source_statistical_region": "Vardar",
+      "atlas_parent_id": "framework:province:vardar:178ce5206540",
+      "current_ntes_code": "MK00101",
+      "current_ntes_name": "Veles",
+      "current_ntes_native_name": "Велес",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK001",
+      "current_ntes_region_name": "Vardar",
+      "atlas_parent_name": "Vardar",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9939726155458166,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00101",
+          "name": "Veles",
+          "source_area_share": 0.9939726155458166
+        },
+        {
+          "code": "MK00109",
+          "name": "Chashka",
+          "source_area_share": 0.0017526223785097174
+        },
+        {
+          "code": "MK00102",
+          "name": "Gradsko",
+          "source_area_share": 0.0012518921711365102
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B81455536397038",
+      "source_shape_id": "65306769B81455536397038",
+      "source_name": "Lozovo",
+      "source_native_name": "Лозово",
+      "hdx_source_code": "MK00105",
+      "hdx_source_statistical_region": "Vardar",
+      "atlas_parent_id": "framework:province:vardar:178ce5206540",
+      "current_ntes_code": "MK00105",
+      "current_ntes_name": "Lozovo",
+      "current_ntes_native_name": "Лозово",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK001",
+      "current_ntes_region_name": "Vardar",
+      "atlas_parent_name": "Vardar",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9907920164291788,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00105",
+          "name": "Lozovo",
+          "source_area_share": 0.9907920164291788
+        },
+        {
+          "code": "MK00211",
+          "name": "Shtip",
+          "source_area_share": 0.0028006357654395586
+        },
+        {
+          "code": "MK00102",
+          "name": "Gradsko",
+          "source_area_share": 0.002291182041437993
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B82299046319271",
+      "source_shape_id": "65306769B82299046319271",
+      "source_name": "Gazi Baba",
+      "source_native_name": "Гази Ба",
+      "hdx_source_code": "MK00809",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00804",
+      "current_ntes_name": "Gazi Baba",
+      "current_ntes_native_name": "Гази Баба",
+      "native_label_relation": "English label matches; source native-script label differs",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9915012817443299,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00804",
+          "name": "Gazi Baba",
+          "source_area_share": 0.9915012817443299
+        },
+        {
+          "code": "MK00803",
+          "name": "Butel",
+          "source_area_share": 0.002571901477646969
+        },
+        {
+          "code": "MK00801",
+          "name": "Aerodrom",
+          "source_area_share": 0.0025431146211174634
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B82420997238505",
+      "source_shape_id": "65306769B82420997238505",
+      "source_name": "Tetovo",
+      "source_native_name": "Тетово",
+      "hdx_source_code": "MK00609",
+      "hdx_source_statistical_region": "Polog",
+      "atlas_parent_id": "framework:province:polog:76d403f17558",
+      "current_ntes_code": "MK00609",
+      "current_ntes_name": "Tetovo",
+      "current_ntes_native_name": "Тетово",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK006",
+      "current_ntes_region_name": "Polog",
+      "atlas_parent_name": "Polog",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9936077359204096,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00609",
+          "name": "Tetovo",
+          "source_area_share": 0.9936077359204096
+        },
+        {
+          "code": "MK00601",
+          "name": "Bogovinje",
+          "source_area_share": 0.001396363915776474
+        },
+        {
+          "code": "MK00608",
+          "name": "Teartse",
+          "source_area_share": 0.0009347939879043847
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B82535052466784",
+      "source_shape_id": "65306769B82535052466784",
+      "source_name": "Berovo",
+      "source_native_name": "Берово",
+      "hdx_source_code": "MK00201",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00201",
+      "current_ntes_name": "Berovo",
+      "current_ntes_native_name": "Берово",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9940482772206531,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00201",
+          "name": "Berovo",
+          "source_area_share": 0.9940482772206531
+        },
+        {
+          "code": "MK00404",
+          "name": "Vasilevo",
+          "source_area_share": 0.0023553587657855366
+        },
+        {
+          "code": "MK00208",
+          "name": "Pehchevo",
+          "source_area_share": 0.000710289910214096
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B84975747896428",
+      "source_shape_id": "65306769B84975747896428",
+      "source_name": "Makedonska Kamenitsa",
+      "source_native_name": "Македонска Каменица",
+      "hdx_source_code": "MK00207",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00207",
+      "current_ntes_name": "Makedonska Kamenitsa",
+      "current_ntes_native_name": "Македонска Каменица",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9938415005099248,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00207",
+          "name": "Makedonska Kamenitsa",
+          "source_area_share": 0.9938415005099248
+        },
+        {
+          "code": "MK00206",
+          "name": "Kochani",
+          "source_area_share": 0.003389177866218406
+        },
+        {
+          "code": "MK00203",
+          "name": "Delchevo",
+          "source_area_share": 0.001015266835647026
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B86752814527149",
+      "source_shape_id": "65306769B86752814527149",
+      "source_name": "Ohrid",
+      "source_native_name": "Охрид",
+      "hdx_source_code": "MK00310",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00310",
+      "current_ntes_name": "Ohrid",
+      "current_ntes_native_name": "Охрид",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9916596650518221,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00310",
+          "name": "Ohrid",
+          "source_area_share": 0.9916596650518221
+        },
+        {
+          "code": "MK00509",
+          "name": "Resen",
+          "source_area_share": 0.002448419387754753
+        },
+        {
+          "code": "MK00304",
+          "name": "Debrtsa",
+          "source_area_share": 0.002162278553831272
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B87468718843329",
+      "source_shape_id": "65306769B87468718843329",
+      "source_name": "Petrovets",
+      "source_native_name": "Петровец",
+      "hdx_source_code": "MK00810",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00810",
+      "current_ntes_name": "Petrovets",
+      "current_ntes_native_name": "Петровец",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9896346699266949,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00810",
+          "name": "Petrovets",
+          "source_area_share": 0.9896346699266949
+        },
+        {
+          "code": "MK00101",
+          "name": "Veles",
+          "source_area_share": 0.0034485519544807837
+        },
+        {
+          "code": "MK00807",
+          "name": "Ilinden",
+          "source_area_share": 0.0022208518826170556
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B90097726978799",
+      "source_shape_id": "65306769B90097726978799",
+      "source_name": "Delchevo",
+      "source_native_name": "Делчево",
+      "hdx_source_code": "MK00203",
+      "hdx_source_statistical_region": "East",
+      "atlas_parent_id": "framework:province:east:93d71c19983e",
+      "current_ntes_code": "MK00203",
+      "current_ntes_name": "Delchevo",
+      "current_ntes_native_name": "Делчево",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK002",
+      "current_ntes_region_name": "East",
+      "atlas_parent_name": "East",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9954140939968475,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00203",
+          "name": "Delchevo",
+          "source_area_share": 0.9954140939968475
+        },
+        {
+          "code": "MK00202",
+          "name": "Vinitsa",
+          "source_area_share": 0.0016184826019956205
+        },
+        {
+          "code": "MK00207",
+          "name": "Makedonska Kamenitsa",
+          "source_area_share": 0.0006702687138628126
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B91068225618475",
+      "source_shape_id": "65306769B91068225618475",
+      "source_name": "Valandovo",
+      "source_native_name": "Валандово",
+      "hdx_source_code": "MK00403",
+      "hdx_source_statistical_region": "Southeast",
+      "atlas_parent_id": "framework:province:southeast:133e6267a43b",
+      "current_ntes_code": "MK00403",
+      "current_ntes_name": "Valandovo",
+      "current_ntes_native_name": "Валандово",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK004",
+      "current_ntes_region_name": "Southeast",
+      "atlas_parent_name": "Southeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9940623712744291,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00403",
+          "name": "Valandovo",
+          "source_area_share": 0.9940623712744291
+        },
+        {
+          "code": "MK00410",
+          "name": "Strumitsa",
+          "source_area_share": 0.002232066162101741
+        },
+        {
+          "code": "MK00406",
+          "name": "Dojran",
+          "source_area_share": 0.0013406164574466957
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B91405117981087",
+      "source_shape_id": "65306769B91405117981087",
+      "source_name": "Sveti Nikole",
+      "source_native_name": "Свети Николе",
+      "hdx_source_code": "MK00108",
+      "hdx_source_statistical_region": "Vardar",
+      "atlas_parent_id": "framework:province:vardar:178ce5206540",
+      "current_ntes_code": "MK00108",
+      "current_ntes_name": "Sveti Nikole",
+      "current_ntes_native_name": "Свети Николе",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK001",
+      "current_ntes_region_name": "Vardar",
+      "atlas_parent_name": "Vardar",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9956530691787479,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00108",
+          "name": "Sveti Nikole",
+          "source_area_share": 0.9956530691787479
+        },
+        {
+          "code": "MK00211",
+          "name": "Shtip",
+          "source_area_share": 0.0014788136468845336
+        },
+        {
+          "code": "MK00105",
+          "name": "Lozovo",
+          "source_area_share": 0.0008882011007504624
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B92481103020830",
+      "source_shape_id": "65306769B92481103020830",
+      "source_name": "Staro Nagorichane",
+      "source_native_name": "Старо Нагоричане",
+      "hdx_source_code": "MK00706",
+      "hdx_source_statistical_region": "Northeast",
+      "atlas_parent_id": "framework:province:northeast:ae810c24404c",
+      "current_ntes_code": "MK00706",
+      "current_ntes_name": "Staro Nagorichane",
+      "current_ntes_native_name": "Старо Нагоричане",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK007",
+      "current_ntes_region_name": "Northeast",
+      "atlas_parent_name": "Northeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9954673787471351,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00706",
+          "name": "Staro Nagorichane",
+          "source_area_share": 0.9954673787471351
+        },
+        {
+          "code": "MK00703",
+          "name": "Kumanovo",
+          "source_area_share": 0.001969667470895483
+        },
+        {
+          "code": "MK00705",
+          "name": "Rankovtse",
+          "source_area_share": 0.0007271313113257231
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B92913941164091",
+      "source_shape_id": "65306769B92913941164091",
+      "source_name": "Bogovinje",
+      "source_native_name": "Боговиње",
+      "hdx_source_code": "MK00601",
+      "hdx_source_statistical_region": "Polog",
+      "atlas_parent_id": "framework:province:polog:76d403f17558",
+      "current_ntes_code": "MK00601",
+      "current_ntes_name": "Bogovinje",
+      "current_ntes_native_name": "Боговиње",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK006",
+      "current_ntes_region_name": "Polog",
+      "atlas_parent_name": "Polog",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9930893305707416,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00601",
+          "name": "Bogovinje",
+          "source_area_share": 0.9930893305707416
+        },
+        {
+          "code": "MK00609",
+          "name": "Tetovo",
+          "source_area_share": 0.004016628870532181
+        },
+        {
+          "code": "MK00603",
+          "name": "Vrapchishte",
+          "source_area_share": 0.0015121344780074202
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B94389460478239",
+      "source_shape_id": "65306769B94389460478239",
+      "source_name": "Debar",
+      "source_native_name": "Дебар",
+      "hdx_source_code": "MK00303",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00303",
+      "current_ntes_name": "Debar",
+      "current_ntes_native_name": "Дебар",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9871236122400711,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00303",
+          "name": "Debar",
+          "source_area_share": 0.9871236122400711
+        },
+        {
+          "code": "MK00313",
+          "name": "Centar Zhupa",
+          "source_area_share": 0.0026480115907393698
+        },
+        {
+          "code": "MK00607",
+          "name": "Mavrovo i Rostushe",
+          "source_area_share": 0.0026445662226977015
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B9482621128818",
+      "source_shape_id": "65306769B9482621128818",
+      "source_name": "Rankovtse",
+      "source_native_name": "Ранковце",
+      "hdx_source_code": "MK00705",
+      "hdx_source_statistical_region": "Northeast",
+      "atlas_parent_id": "framework:province:northeast:ae810c24404c",
+      "current_ntes_code": "MK00705",
+      "current_ntes_name": "Rankovtse",
+      "current_ntes_native_name": "Ранковце",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK007",
+      "current_ntes_region_name": "Northeast",
+      "atlas_parent_name": "Northeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9951736277628688,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00705",
+          "name": "Rankovtse",
+          "source_area_share": 0.9951736277628688
+        },
+        {
+          "code": "MK00701",
+          "name": "Kratovo",
+          "source_area_share": 0.0021021146519329004
+        },
+        {
+          "code": "MK00702",
+          "name": "Kriva Palanka",
+          "source_area_share": 0.0013829352616728042
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B95040273905804",
+      "source_shape_id": "65306769B95040273905804",
+      "source_name": "Aerodrom",
+      "source_native_name": "Аеродром",
+      "hdx_source_code": "MK00809",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00801",
+      "current_ntes_name": "Aerodrom",
+      "current_ntes_native_name": "Аеродром",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.975637405575638,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00801",
+          "name": "Aerodrom",
+          "source_area_share": 0.975637405575638
+        },
+        {
+          "code": "MK00804",
+          "name": "Gazi Baba",
+          "source_area_share": 0.013182715486702646
+        },
+        {
+          "code": "MK00809",
+          "name": "Kisela Voda",
+          "source_area_share": 0.011127946784788035
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B95473368394754",
+      "source_shape_id": "65306769B95473368394754",
+      "source_name": "Krushevo",
+      "source_native_name": "Крушево",
+      "hdx_source_code": "MK00505",
+      "hdx_source_statistical_region": "Pelagonia",
+      "atlas_parent_id": "framework:province:pelagonia:4091f04e8c10",
+      "current_ntes_code": "MK00505",
+      "current_ntes_name": "Krushevo",
+      "current_ntes_native_name": "Крушево",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK005",
+      "current_ntes_region_name": "Pelagonia",
+      "atlas_parent_name": "Pelagonia",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9917671212133347,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00505",
+          "name": "Krushevo",
+          "source_area_share": 0.9917671212133347
+        },
+        {
+          "code": "MK00502",
+          "name": "Demir Hisar",
+          "source_area_share": 0.003389352452250214
+        },
+        {
+          "code": "MK00504",
+          "name": "Krivogashtani",
+          "source_area_share": 0.0013514779142708593
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B96120860372222",
+      "source_shape_id": "65306769B96120860372222",
+      "source_name": "Ilinden",
+      "source_native_name": "Илинден",
+      "hdx_source_code": "MK00807",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00807",
+      "current_ntes_name": "Ilinden",
+      "current_ntes_native_name": "Илинден",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9926355028701136,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00807",
+          "name": "Ilinden",
+          "source_area_share": 0.9926355028701136
+        },
+        {
+          "code": "MK00810",
+          "name": "Petrovets",
+          "source_area_share": 0.0027481811195282447
+        },
+        {
+          "code": "MK00804",
+          "name": "Gazi Baba",
+          "source_area_share": 0.0018824414840404875
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B9612885815739",
+      "source_shape_id": "65306769B9612885815739",
+      "source_name": "Strumitsa",
+      "source_native_name": "Струмица",
+      "hdx_source_code": "MK00410",
+      "hdx_source_statistical_region": "Southeast",
+      "atlas_parent_id": "framework:province:southeast:133e6267a43b",
+      "current_ntes_code": "MK00410",
+      "current_ntes_name": "Strumitsa",
+      "current_ntes_native_name": "Струмица",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK004",
+      "current_ntes_region_name": "Southeast",
+      "atlas_parent_name": "Southeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9941851941552415,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00410",
+          "name": "Strumitsa",
+          "source_area_share": 0.9941851941552415
+        },
+        {
+          "code": "MK00403",
+          "name": "Valandovo",
+          "source_area_share": 0.002606060592775336
+        },
+        {
+          "code": "MK00402",
+          "name": "Bosilovo",
+          "source_area_share": 0.0013594510133737511
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B96152204239158",
+      "source_shape_id": "65306769B96152204239158",
+      "source_name": "Kavadartsi",
+      "source_native_name": "Кавадарци",
+      "hdx_source_code": "MK00104",
+      "hdx_source_statistical_region": "Vardar",
+      "atlas_parent_id": "framework:province:vardar:178ce5206540",
+      "current_ntes_code": "MK00104",
+      "current_ntes_name": "Kavadartsi",
+      "current_ntes_native_name": "Кавадарци",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK001",
+      "current_ntes_region_name": "Vardar",
+      "atlas_parent_name": "Vardar",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9961865836907176,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00104",
+          "name": "Kavadartsi",
+          "source_area_share": 0.9961865836907176
+        },
+        {
+          "code": "MK00508",
+          "name": "Prilep",
+          "source_area_share": 0.001674218543572676
+        },
+        {
+          "code": "MK00107",
+          "name": "Rosoman",
+          "source_area_share": 0.00038820213839825996
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B96419265045604",
+      "source_shape_id": "65306769B96419265045604",
+      "source_name": "Arachinovo",
+      "source_native_name": "Арачиново",
+      "hdx_source_code": "MK00802",
+      "hdx_source_statistical_region": "Skopje",
+      "atlas_parent_id": "framework:province:skopje:d4d0d12ba0f8",
+      "current_ntes_code": "MK00802",
+      "current_ntes_name": "Arachinovo",
+      "current_ntes_native_name": "Арачиново",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK008",
+      "current_ntes_region_name": "Skopje",
+      "atlas_parent_name": "Skopje",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9764169902727374,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00802",
+          "name": "Arachinovo",
+          "source_area_share": 0.9764169902727374
+        },
+        {
+          "code": "MK00807",
+          "name": "Ilinden",
+          "source_area_share": 0.009048307960225542
+        },
+        {
+          "code": "MK00804",
+          "name": "Gazi Baba",
+          "source_area_share": 0.005893679887707017
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B97994960223658",
+      "source_shape_id": "65306769B97994960223658",
+      "source_name": "Plasnitsa",
+      "source_native_name": "Пласница",
+      "hdx_source_code": "MK00311",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00311",
+      "current_ntes_name": "Plasnitsa",
+      "current_ntes_native_name": "Пласница",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.987628981862638,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00311",
+          "name": "Plasnitsa",
+          "source_area_share": 0.987628981862638
+        },
+        {
+          "code": "MK00307",
+          "name": "Kichevo",
+          "source_area_share": 0.007150074248178496
+        },
+        {
+          "code": "MK00308",
+          "name": "Makedonski Brod",
+          "source_area_share": 0.003850119663826434
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B98629679609772",
+      "source_shape_id": "65306769B98629679609772",
+      "source_name": "Vasilevo",
+      "source_native_name": "Василево",
+      "hdx_source_code": "MK00404",
+      "hdx_source_statistical_region": "Southeast",
+      "atlas_parent_id": "framework:province:southeast:133e6267a43b",
+      "current_ntes_code": "MK00404",
+      "current_ntes_name": "Vasilevo",
+      "current_ntes_native_name": "Василево",
+      "native_label_relation": "exact native-script label match",
+      "current_ntes_region_code": "MK004",
+      "current_ntes_region_name": "Southeast",
+      "atlas_parent_name": "Southeast",
+      "outcome": "current_roster_unit_spatially_corresponds",
+      "source_polygon_share_overlapping_target": 0.9896824066617277,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00404",
+          "name": "Vasilevo",
+          "source_area_share": 0.9896824066617277
+        },
+        {
+          "code": "MK00201",
+          "name": "Berovo",
+          "source_area_share": 0.003665699856760239
+        },
+        {
+          "code": "MK00410",
+          "name": "Strumitsa",
+          "source_area_share": 0.003297464203731499
+        }
+      ]
+    },
+    {
+      "location_id": "gb:MKD:ADM2:65306769B99207835594431",
+      "source_shape_id": "65306769B99207835594431",
+      "source_name": "Drugovo",
+      "source_native_name": "Другово",
+      "hdx_source_code": "MK00307",
+      "hdx_source_statistical_region": "Southwest",
+      "atlas_parent_id": "framework:province:southwest:683e6a222125",
+      "current_ntes_code": "MK00307",
+      "current_ntes_name": "Kichevo",
+      "current_ntes_native_name": "Кичево",
+      "native_label_relation": "historical source label; current target is a merger crosswalk",
+      "current_ntes_region_code": "MK003",
+      "current_ntes_region_name": "Southwest",
+      "atlas_parent_name": "Southwest",
+      "outcome": "former_municipality_merged_into_current_kichevo",
+      "source_polygon_share_overlapping_target": 0.9943689464772937,
+      "target_overlap_ranked_codes": [
+        {
+          "code": "MK00307",
+          "name": "Kichevo",
+          "source_area_share": 0.9943689464772937
+        },
+        {
+          "code": "MK00304",
+          "name": "Debrtsa",
+          "source_area_share": 0.002958951358652251
+        },
+        {
+          "code": "MK00607",
+          "name": "Mavrovo i Rostushe",
+          "source_area_share": 0.001330102208463135
+        }
+      ]
+    }
+  ]
+}
