@@ -63,3 +63,33 @@ invalid polygons, immutable input reads, release hashes and exclusive outputs.
 The Node test wrapper includes them in the existing full regression inventory.
 The next part of #920 must invoke trusted detector code against the exact PR and
 combined merge candidate; passing these controls alone does not install that gate.
+
+## Trusted premerge enforcement
+
+The PR and serialized queue workflows run a separate read-only geography job.
+It checks out the immutable trusted baseline, fetches the proposed commit as
+Git data, and executes `python -I -B scripts/run-geographic-check.py --fetch
+--out geography-check.json`. Candidate scripts and reproduction commands never
+run. The complete scripts namespace must match baseline bytes; untracked import
+shadows, symlinks and cached bytecode are rejected. Dependencies come from the
+trusted baseline requirements.
+
+Unchanged live input blob inventories produce an explicit `not-applicable`
+receipt, with no claim of fresh polygon validation or worldwide gap clearance.
+Changes to indexed parts, the index or geography/release pins invoke the full
+immutable detector. New loss, overlap or invalid geometry fails the job. The
+queue requires fresh geography success even when application tests reuse an
+exact-tree proof; an advanced baseline still requires a new integration.
+
+Rollout has one bounded bootstrap exception: the specifically named activation
+branch can report unavailable baseline code only after trusted API code verifies
+its exact head and complete changed-file inventory, including rename origins,
+and rejects every live `data/` change. The combined queue job has no fallback.
+Already-running older queue workflows fail closed after the new final merge
+condition becomes active and must resubmit.
+
+No source-backed water waiver exists yet. Intentional shoreline changes remain
+blocked until exact geometry, original source bytes and substantive independent
+review are retained through the separate adjudication protocol. Existing source,
+identity, crosswalk, regional certificate, content and publication requirements
+remain in force.

@@ -305,6 +305,8 @@ export async function completeIntegration(options) {
   const state = await inspectMerge(options);
   if (state.replayed) return {accepted: true, replayed: true, merge_commit: state.pr.merge_commit_sha,
     head_cleanup: await cleanupMergedHead(options)};
+  need(options.geographyResult === 'success',
+    'Trusted combined geography check missing, failed or cancelled; no merge performed');
   need(options.integrationResult === 'success' || (options.integrationResult === 'skipped' && options.proofRunId),
     'An open PR requires successful isolated integration tests or revalidated trusted proof');
   need(state.base === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
@@ -338,6 +340,7 @@ export async function completeIntegration(options) {
   });
   need(merged.merged, 'GitHub did not merge the PR');
   return {accepted: true, merge_commit: merged.sha, title: state.pr.title, github_issue: state.issue.number,
+    geography: {status: 'passed', trusted_code_commit: state.base, candidate_commit: options.testedCandidate},
     tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof,
     head_cleanup: await cleanupMergedHead(options)};
 }
