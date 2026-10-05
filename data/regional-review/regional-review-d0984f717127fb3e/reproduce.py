@@ -19,13 +19,25 @@ assert len(readj('province-assessments.json'))==len(s['province_scopes'])==37
 assert len(readj('area-assessments.json'))==len(s['area_scopes'])==3
 with gzip.open(ROOT/'sources/geoBoundaries-IND-ADM3-2018-retained.geojson.gz','rt') as f: g3=json.load(f)
 g2=readj('sources/geoBoundaries-IND-ADM2-2021.geojson')
-ids3={x['properties'].get('shapeID') for x in g3['features']}; ids2={x['properties'].get('shapeID') for x in g2['features']}
+def index(features):
+    out={}
+    for feature in features:
+        sid=feature['properties'].get('shapeID')
+        assert sid and sid not in out, f'missing or duplicate provider shapeID: {sid}'
+        out[sid]=feature
+    return out
+features3=index(g3['features']); features2=index(g2['features'])
+ids3=set(features3); ids2=set(features2)
 for x in rows.values():
  shape=x['id'].rsplit(':',1)[-1]
- assert shape in (ids3 if x['source_id']=='gb:IND:ADM3' else ids2), x['id']
+ source_feature=(features3 if x['source_id']=='gb:IND:ADM3' else features2).get(shape)
+ assert source_feature is not None, x['id']
+ assert x['source_name']==source_feature['properties'].get('shapeName')==x['name'], x['id']
+ assert x['geometry_type']==source_feature['geometry']['type'], x['id']
+ assert x['geometry_components']==(len(source_feature['geometry']['coordinates']) if source_feature['geometry']['type']=='MultiPolygon' else 1), x['id']
 assert sum(x['source_id']=='gb:IND:ADM3' for x in rows.values())==204
 assert sum(x['source_id']=='gb:IND:ADM2' for x in rows.values())==26
 inv=readj('source-inventory.json')
 for f in inv['sources']:
  assert sha(f['path'])==f['sha256'], f['path']
-print(json.dumps({'scope_ids':len(ids),'unique_scope_ids':len(set(ids)),'assessment_rows':len(rows),'province_rows':37,'area_rows':3,'source_feature_id_matches':230,'source_name_equalities':sum(x['source_name']==x['name'] for x in rows.values()),'adm2_source_features':len(g2['features']),'adm3_source_features':len(g3['features']),'scoped_adm2':26,'scoped_adm3':204,'result':'PASS','meaning':'Exact scope, source identity, packet coverage and retained-byte hashes only; no proof of legal/current boundaries, source completeness, tier suitability, topological accuracy or geographic truth.'},indent=2))
+print(json.dumps({'scope_ids':len(ids),'unique_scope_ids':len(set(ids)),'assessment_rows':len(rows),'province_rows':37,'area_rows':3,'source_feature_id_matches':230,'source_name_equalities':230,'source_geometry_type_and_component_checks':230,'adm2_source_features':len(g2['features']),'adm3_source_features':len(g3['features']),'scoped_adm2':26,'scoped_adm3':204,'result':'PASS','meaning':'Exact scope, source identity, packet coverage and retained-byte hashes only; no proof of legal/current boundaries, source completeness, tier suitability, topological accuracy or geographic truth.'},indent=2))
