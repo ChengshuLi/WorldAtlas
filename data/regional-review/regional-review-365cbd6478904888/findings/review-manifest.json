@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "manifest_kind": "packet-review-inventory (legacy issue supplement; not the evidence-v1 policy manifest)",
+  "issue": 449,
+  "pull_request": 918,
+  "lane": "geography",
+  "worker_id": "worldatlas-geography-chat-20261005-897",
+  "claim_id": "1f67d2e6-520b-42db-beec-2965341aa636",
+  "branch": "geography/regional-review-365cbd6478904888",
+  "base_commit": "062e0585025359c596a887e5a10d3e25479aff21",
+  "scope": {
+    "members": 228,
+    "member_ids_sha256": "dead711a4c27de5faf065955bb7b151dae29c6363a69567b9e0e8a490b227f4a",
+    "areas": 3,
+    "parent_scopes": 22,
+    "review_only": true
+  },
+  "reproduction_summary": {
+    "path": "data/regional-review/regional-review-365cbd6478904888/findings/reproduction-summary.json",
+    "sha256": "365b53aad6d44922ba053cac90db508405bbde9bebf62ac039041a67ac919519",
+    "metrics": {
+      "scope_digest_valid": true,
+      "matched_scoped_source_features": 228,
+      "unique_scoped_source_features": 228,
+      "source_name_matches_atlas_name": 228,
+      "matches_after_rounding_source_to_atlas_4dp": 3,
+      "rows_with_reduced_vertex_count": 225,
+      "source_vertices_total": 14634,
+      "atlas_vertices_total": 12905,
+      "source_geometry_types": {
+        "Polygon": 228
+      },
+      "source_rows_with_interior_rings": 2,
+      "province_scope_count": 22,
+      "area_scope_count": 3,
+      "source_feature_property_fields": [
+        "shapeGroup",
+        "shapeID",
+        "shapeISO",
+        "shapeName",
+        "shapeType"
+      ],
+      "parent_assignment_sources": {
+        "geoBoundaries gbHumanitarian / HDX China ADM2, 2020": 228
+      },
+      "parent_source_levels": {
+        "ADM1": 228
+      }
+    }
+  },
+  "changed_files": [
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/coordination/reservation-receipt.json",
+      "bytes": 591,
+      "sha256": "15a94a14ef5178c62421f5ebc1311c75c79d3b15b997f1158c93d06d0dda2d1b",
+      "role": "review-output"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/findings/area-scope-review.csv",
+      "bytes": 1850,
+      "sha256": "bd97c3bc9900e8fb02d086057844efa02435f3db39f8de7f625d70f414b0404d",
+      "role": "review-output"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/findings/followup-917.md",
+      "bytes": 707,
+      "sha256": "66e2563f5abb41e414675e326b05cf9ca1fafdb1b59a0fa027fd68e069c246bb",
+      "role": "review-output"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/findings/location-source-crosswalk.csv",
+      "bytes": 130418,
+      "sha256": "cea7bd712ad31dfbc83a1e9bcc5c1fe64bcf2645390591bdd45fc69185c833ec",
+      "role": "review-output"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/findings/parent-scope-review.csv",
+      "bytes": 4569,
+      "sha256": "b06cc9d84b849591a05cb20aa2ae4f1887d219cfbf8f13b4c4d58fdff32c5407",
+      "role": "review-output"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/findings/report.md",
+      "bytes": 8956,
+      "sha256": "ffa3ec74fbc125403855d1e32e36f70901499fc7febbe6efe9204e3352f8d816",
+      "role": "review-output"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/findings/reproduction-summary.json",
+      "bytes": 12623,
+      "sha256": "365b53aad6d44922ba053cac90db508405bbde9bebf62ac039041a67ac919519",
+      "role": "review-output"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/findings/source-inventory.json",
+      "bytes": 7017,
+      "sha256": "5496ab51f8423bcf132527a91c38fed3c057fe2c4ea4c31dbccbbc17d0a7ea53",
+      "role": "review-output"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/issue-api-snapshot.json",
+      "bytes": 28389,
+      "sha256": "b4eacd6009fac902c76a0bc6d02749842beafad0c9c7fccfb07f8b1975a6631f",
+      "role": "issue-snapshot"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/reproduce.py",
+      "bytes": 10069,
+      "sha256": "75f7a01dc44f9e41089eae273011efbbcf1c9fdfe571d80c6597f030c6f854a0",
+      "role": "review-output"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2-metaData.json",
+      "bytes": 1101,
+      "sha256": "7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a",
+      "role": "retained-original-source"
+    },
+    {
+      "path": "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson",
+      "bytes": 7618692,
+      "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "role": "retained-original-source"
+    }
+  ],
+  "manifest_self_hash_excluded": true,
+  "review_limits": [
+    "Current official code roster/current parent class not retained or verified",
+    "Current legal boundaries and territorial completeness not verified",
+    "Cause of 225 geometry reductions unknown",
+    "Detached islands, topology, coastline and neighboring gaps/overlaps not evaluated"
+  ],
+  "checks": {
+    "scope_check": "passed on base 062e0585025359c596a887e5a10d3e25479aff21; rerun after update",
+    "local_reproduction": "passed",
+    "git_diff_check": "passed after update",
+    "hosted_ci": "passed on previous head; updated-head CI must be checked"
+  },
+  "non_claims": [
+    "No factual geographic approval",
+    "No boundary correction proposed without source proof",
+    "No publication/import authorization",
+    "Not a formal evidence-v1 manifest because issue #449 predates activation and does not declare evidence_quality"
+  ]
+}

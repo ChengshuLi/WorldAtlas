@@ -1,0 +1,91 @@
+{
+  "issue": 449,
+  "follow_up_issue": 917,
+  "retrieved_at": "2026-10-05 America/Los_Angeles",
+  "source": {
+    "name": "geoBoundaries gbOpen CHN ADM2",
+    "repository": "https://github.com/wmgeolab/geoBoundaries",
+    "repository_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "source_path": "releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+    "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+    "download_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+    "boundary_id": "CHN-ADM2-17275852",
+    "boundary_year": "2017",
+    "boundary_type": "ADM2",
+    "boundary_canonical": "County Level",
+    "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+    "build_date": "Dec 12, 2023",
+    "declared_unit_count": 2391,
+    "retained_features": 2391,
+    "retention_basis": "geoBoundaries metadata declares Open Data Commons Public Domain Dedication and License (PDDL) v1.0",
+    "upstream_attribution": "National Administration of Surveying, Mapping and Geoinformation of China, Revolutionary GIS",
+    "upstream_source_url_as_published": "https//github.com/justinelliotmeyers/-1_400-/blob/master/%E4%B8%AD%E5%9B%BD%E5%8E%BF%E7%95%8C.shp",
+    "upstream_license_uncertainty": "The gbOpen metadata declares PDDL v1.0; its upstream-source license and chain of rights were not independently established from the two malformed https// license links in the retained metadata.",
+    "geojson_bytes": 7618692,
+    "geojson_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+    "metadata_bytes": 1101,
+    "metadata_sha256": "7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a",
+    "lfs_integrity": "Both downloaded byte streams match the SHA-256 OIDs and byte lengths recorded in their Git LFS pointers at the pinned repository commit.",
+    "restoration": "Fetch the two paths from the geoBoundaries repository at commit 9469f09592ced973a3448cf66b6100b741b64c0d. LFS media URLs above resolve the original blobs. Validate against the listed SHA-256 and byte lengths."
+  },
+  "current_authority": [
+    {
+      "title": "Administrative Division Code Management Measures (民政部令第79号)",
+      "url": "https://www.moj.gov.cn/pub/sfbgw/flfggz/flfggzbmgz/202512/t20251204_528920.html",
+      "publisher": "Ministry of Justice PRC, hosting the Ministry of Civil Affairs regulation",
+      "retrieved_at": "2026-10-05 via indexed official page",
+      "relevant_rules": "Articles 5, 14-16 assign province/prefecture/county code determination to national civil affairs; require complete/accurate maintained code information and publication in January through the National Geographical Names Information Database for the prior year-end roster.",
+      "retained_original": false,
+      "limitation": "Legal authority and publication schedule only; not the roster itself or boundary geometry."
+    },
+    {
+      "title": "National Geographical Names Information Database code publication",
+      "url": "https://dmfw.mca.gov.cn/XzqhVersionPublish.html",
+      "publisher": "Ministry of Civil Affairs PRC",
+      "retrieved_at": "2026-10-05",
+      "retained_original": false,
+      "limitation": "The official endpoint was not retrievable from the research runtime (DNS resolution failure and official web fetch unavailable). The current 2025 year-end code roster and downloadable format are therefore not independently retained or verified in this packet."
+    },
+    {
+      "title": "Statistical division code publication policy response (2025)",
+      "url": "https://www.stats.gov.cn/hd/lyzx/zxgk/202509/t20250903_1960996.html",
+      "publisher": "National Bureau of Statistics of China",
+      "retrieved_at": "2026-10-05 via indexed official page",
+      "relevant_finding": "NBS says it stopped publicly releasing specific statistical division and urban-rural codes from October 2024; statistical codes are not a substitute for civil-affairs administrative codes.",
+      "retained_original": false
+    },
+    {
+      "title": "Chongqing administrative division and code table (2025 year-end)",
+      "url": "https://mzj.cq.gov.cn/zwgk_218/zfxxgkml/tzgg/202601/t20260119_15332641.html",
+      "publisher": "Chongqing Municipal Civil Affairs Bureau",
+      "retrieved_at": "2026-10-05 via indexed official page",
+      "retained_original": false,
+      "limitation": "Official web fetch timed out in this runtime; detailed row-by-row crosswalk and license terms remain unverified."
+    },
+    {
+      "title": "Guizhou Civil Affairs administrative division/code catalogue",
+      "url": "https://mzt.guizhou.gov.cn/xxgk/xxgkml/zdlyxx1/qhdm_88523/",
+      "publisher": "Guizhou Provincial Civil Affairs Department",
+      "retrieved_at": "2026-10-05",
+      "retained_original": false,
+      "limitation": "Official listing fetch timed out/DNS failed in this runtime; the current 2025 year-end file, row-level matches and reuse terms remain unverified."
+    },
+    {
+      "title": "Sichuan county/city administrative division code table (2026-06-30 snapshot)",
+      "url": "https://mzt.sc.gov.cn/scmzt/quhuaxinxi/2026/7/24/3e9fade9afb548958c2387ed44b5f29a.shtml",
+      "publisher": "Sichuan Provincial Civil Affairs Department",
+      "retrieved_at": "2026-10-05 via indexed official result",
+      "retained_original": false,
+      "limitation": "The official page was not accessible to the web retrieval tool in this runtime. Row-level matches, boundary geometry and reuse terms remain unverified."
+    }
+  ],
+  "parent_assignment_evidence": {"atlas_metadata_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020", "atlas_metadata_method": "Prefecture-level source territory, greatest geographic overlap; county locations remain indivisible", "parent_source_level_claim": "ADM1", "original_2017_properties": ["shapeName", "shapeISO", "shapeID", "shapeGroup", "shapeType"], "original_parent_ids_present": false, "status": "The original 2017 file does not reproduce parent assignments; preserve distinction between ADM2 boundary source and separate 2020 parent crosswalk."},
+  "scope_and_limitations": {
+    "exact_issue_scope_ids": 228,
+    "exact_issue_scope_digest": "dead711a4c27de5faf065955bb7b151dae29c6363a69567b9e0e8a490b227f4a",
+    "area_counts": {"Chongqing": 33, "Guizhou": 82, "Sichuan": 113},
+    "province_scopes": 22,
+    "neighboring_granularity": "Pinned source feature type is ADM2 and its own canonical role is County Level for all 228 scoped source features. Current administrative class and the accuracy/completeness of the 22 parent relationships are not certified because a current authoritative roster and legally meaningful current boundary source were not available.",
+    "disposition": "insufficient-evidence for all 228 locations and all 22 province-parent scopes pending the source-restoration work described in report.md"
+  }
+}
