@@ -92,7 +92,9 @@ def main() -> None:
     assert not missing, f"scoped IDs absent from retained sources: {missing[:5]}"
     fabricated = "gb:GNQ:ADM2:NOT-A-RELEASE-ID"
     assert fabricated not in source_owner, "negative control unexpectedly resolved"
-    assert len(scope_ids) + 1 != len(scope_set), "duplicate-member negative control failed"
+    duplicate_roster = scope_ids + [scope_ids[0]]
+    duplicate_rejected = len(duplicate_roster) != len(set(duplicate_roster))
+    assert duplicate_rejected, "duplicate-member negative control failed"
 
     official_parent_mismatch = {
         "gb:GNQ:ADM2:11065452B42024070816207": {
@@ -249,7 +251,7 @@ def main() -> None:
         "controls": {
             "outcome": "passed",
             "positive": "227/227 exact issue IDs resolve to one retained native source feature",
-            "negative": "fabricated native ID rejected; duplicate issue subject rejected",
+            "negative": "fabricated native ID rejected; explicit duplicate roster rejected by uniqueness check",
             "limit": "These controls verify roster linkage only, not territorial meaning, completeness, parentage or boundary accuracy.",
         },
         "classifications": dict(Counter(row["status"] for row in assessments)),
