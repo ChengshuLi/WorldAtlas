@@ -18,7 +18,8 @@ positive-length shared contacts. It uses exact retained coordinates without a
 buffer, rounding, snapping, simplification, area cutoff or geometry repair.
 Positive-area intersections are retained as input-overlap defects and flag the
 entire component. They cannot establish a unique measured union area.
-Point-only contacts remain distinct components with an explicit ambiguity record.
+Point-only contacts do not themselves join components and retain an explicit
+ambiguity record. Other shared edges can still connect the same fragments.
 The spatial index filters candidate pairs; it does not determine connectivity.
 
 At longitude +/-180, translated copies are used only to test exact cylinder
@@ -36,7 +37,7 @@ are never replaced.
 Measured area totals are sums of the existing measured fragment values. They are
 not new physical-water measurements or a certification of missing land. Every
 original null measurement and blocked tile remains explicit. Domain-edge and
-blocked-tile contact flags identify additional limits, without inventing coverage
+blocked-tile contact flags, including wrapped date-line contacts, identify additional limits, without inventing coverage
 inside a blocked area. Nearby location/source metadata remains an inherited
 diagnostic; its original halo search does not certify true neighbor adjacency.
 

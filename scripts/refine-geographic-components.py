@@ -119,7 +119,7 @@ def refine(commit, report_path, report_bytes, report_sha256, destination):
         'software': {'shapely': shapely.__version__, 'geos': shapely.geos_version_string},
         'limits': [
             'Connectivity is exact for the retained continuous polygons; no snapping or sliver cutoff.',
-            'Point-only contacts remain distinct components and explicitly ambiguous.',
+            'Point-only contacts do not themselves join components and remain explicitly ambiguous.',
             'Dateline components retain original coordinates as potentially disconnected planar MultiPolygon.',
             'Measured area is a sum of original measured fragments, not a newly certified physical area.',
             'Three blocked tiles and all original measurement failures remain unresolved.',

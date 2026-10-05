@@ -89,6 +89,10 @@ def components(features, blocked_tiles=(), domain=(-180, -60, 180, 85.0511287798
         groups.setdefault(root(i), []).append(i)
     records, membership = [], {}
     blocks = [box(*t['bounds']) for t in blocked_tiles]
+    # Unknown coverage at the cylinder seam is just as adjacent as fragments.
+    # Exact edge/point contact keeps uncertainty; near contacts are not snapped.
+    blocks += [translate(b, xoff=-360) for b in blocks if b.bounds[2] == 180] + [
+        translate(b, xoff=360) for b in blocks if b.bounds[0] == -180]
     boundary = box(*domain).boundary
     for indexes in groups.values():
         bindings = [{'id': ids[i], 'feature_sha256': sha256(canonical_json(features[i]))}
@@ -101,6 +105,8 @@ def components(features, blocked_tiles=(), domain=(-180, -60, 180, 85.0511287798
         geometry = union_all([geometries[i] for i in indexes])
         if not geometry.is_valid or geometry.is_empty:
             raise ValueError('Invalid exact component union; preserve original inputs')
+        if any(not geometry.covers(geometries[i]) for i in indexes):
+            raise ValueError('Component union loses an original fragment; preserve inputs')
         measured = [features[i]['properties'].get('area_m2') for i in indexes]
         nearby = {}
         for i in indexes:

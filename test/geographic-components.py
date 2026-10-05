@@ -37,6 +37,14 @@ class ComponentControls(unittest.TestCase):
         self.assertEqual(len(records), 2)
         self.assertEqual(contacts[0]['kind'], 'point-only-ambiguous')
 
+    def test_point_contact_can_have_an_independent_edge_path(self):
+        records, contacts = components([feature('a', box(0, 0, 1, 1)),
+                                        feature('b', box(1, 1, 2, 2)), feature('c', box(0, 1, 1, 2))])
+        self.assertEqual(len(records), 1)
+        point = [c for c in contacts if c['kind'] == 'point-only-ambiguous']
+        self.assertEqual(len(point), 1)
+        self.assertEqual(point[0]['components'][0], point[0]['components'][1])
+
     def test_subpixel_gap_is_not_snapped(self):
         records, contacts = components([feature('a', box(0, 0, 1, 1)),
                                         feature('b', box(1 + 1e-12, 0, 2, 1))])
@@ -79,6 +87,24 @@ class ComponentControls(unittest.TestCase):
         self.assertEqual(p['unmeasured_fragment_ids'], ['a'])
         self.assertIsNone(p['administrative_assignment'])
         self.assertEqual(p['water_status'], 'unverified')
+
+    def test_wrapped_blocked_tile_contacts_in_both_directions(self):
+        for geometry, blocked in [(box(-180, 0, -179, 1), [179, 0, 180, 1]),
+                                  (box(179, 0, 180, 1), [-180, 0, -179, 1])]:
+            records, _ = components([feature('a', geometry)], [{'bounds': blocked}])
+            self.assertTrue(records[0]['properties']['touches_blocked_tile'])
+
+    def test_wrapped_blocked_point_contact_retains_uncertainty(self):
+        for geometry, blocked in [(box(-180, 0, -179, 1), [179, 1, 180, 2]),
+                                  (box(179, 0, 180, 1), [-180, 1, -179, 2])]:
+            records, _ = components([feature('a', geometry)], [{'bounds': blocked}])
+            self.assertTrue(records[0]['properties']['touches_blocked_tile'])
+
+    def test_wrapped_nearby_blocked_tile_does_not_invent_contact(self):
+        for geometry, blocked in [(box(-180, 0, -179, 1), [179, 0, 180 - 1e-12, 1]),
+                                  (box(179, 0, 180, 1), [-180 + 1e-12, 0, -179, 1])]:
+            records, _ = components([feature('a', geometry)], [{'bounds': blocked}])
+            self.assertFalse(records[0]['properties']['touches_blocked_tile'])
 
     def test_permutation_and_two_runs_are_identical(self):
         inputs = [feature('b', box(1, 0, 2, 1)), feature('a', box(0, 0, 1, 1))]
