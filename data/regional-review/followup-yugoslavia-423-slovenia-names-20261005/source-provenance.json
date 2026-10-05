@@ -29,14 +29,14 @@
     },
     {
       "id": "slovenia-zkn-article-130",
-      "url": "https://pisrs.si/Pis.web/pregledPredpisa?d-49687-s=1&id=ZAKO7952",
+      "url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2021-01-1047",
       "official_gazette_url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina?urlurid=20062024",
       "title": "Zakon o katastru nepremičnin (ZKN), Article 130",
       "retrieved_at": "2026-10-05",
-      "role": "Primary legal access rule for RPE historical data and the collection of documents",
-      "finding": "Historical RPE data access is provided to authorized geodetic professionals and state bodies. Any person may request to inspect/copy RPE collection-of-documents records by a reasoned written request demonstrating legal interest.",
-      "retention": "Restoration-only; legal text cited, not redistributed",
-      "limit": "No legal interest determination, authorized professional, or state-body request was available in this research."
+      "role": "Primary legal access rule for historical RPE data and the separate collection-of-documents route.",
+      "finding": "Article 130(2) grants everyone the right, subject to Articles 126–128, to view/copy historical RPE data; paragraph 4 says the historical data have been available in IS Kataster since 2022-04-04. Paragraph 3 separately authorizes geodetic professionals/state bodies to request access to collection-of-documents materials and historic copies. The earlier contrary interpretation is withdrawn.",
+      "retention": "restoration-only; official legal text cited, not redistributed",
+      "limit": "The statute is interpreted here only for access to historical RPE data; this packet makes no legal determination about collection-of-documents requests."
     },
     {
       "id": "govsi-gurs-rpe-description",
@@ -45,7 +45,28 @@
       "retrieved_at": "2026-10-05",
       "role": "Identifies authoritative RPE fields (type, code, name, area) and states its documentary collection is retained permanently, physically and electronically",
       "retention": "Restoration-only; no third-party files copied",
-      "limit": "This description does not supply the requested historical entries or documents."
+      "limit": "Describes GURS registry records and archival retention; direct historical name values are established by the retained official OBCINE_H response."
+    },
+    {
+      "id": "gurs-obcine-h-history",
+      "url": "https://ipi.eprostor.gov.si/wfs-si-gurs-rpe/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=SI.GURS.RPE%3AOBCINE_H&propertyName=EID_OBCINA%2CSIFRA%2CNAZIV%2CNAZIV_DJ%2CDATUM_OD%2CDATUM_DO%2CDATUM_SYS%2CSTATUS_VELJAVNOSTI&CQL_FILTER=SIFRA+IN+%281%2C9%2C10%2C15%2C16%2C23%2C28%2C33%2C42%2C54%2C57%2C69%2C72%2C87%2C103%2C105%2C106%2C108%2C111%2C115%2C116%2C117%2C118%2C119%2C120%2C121%2C122%2C123%2C124%2C125%2C126%2C127%2C131%2C132%2C134%2C146%2C147%2C166%2C169%2C176%2C179%2C182%2C183%2C188%2C190%2C191%2C192%2C193%2C194%2C202%2C203%2C205%2C206%29&outputFormat=application%2Fjson",
+      "publisher": "Surveying and Mapping Authority of the Republic of Slovenia (GURS)",
+      "role": "Official historical RPE municipality name and validity features for all 53 exact candidate municipality codes; basis for names effective on 2017-01-01 and 2017-07-01.",
+      "vintage": "Municipality history collection; public historical service announced 2024-01-11; queried 2026-10-05 for exact 53-code set; full history available for municipalities per GURS notice.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "GURS public geodetic data are public information offered under CC BY 4.0 attribution subject to GURS general terms. Attribute Surveying and Mapping Authority of the Republic of Slovenia (GURS); identify the derived assessment."
+      },
+      "terms_url": "https://www.e-prostor.gov.si/dostopi/javni-dostop/",
+      "retention": "retained",
+      "verification": "verified",
+      "retained_original": "source/gurs-obcine-h-53-codes-2017.json",
+      "request": "source/gurs-obcine-h-request.json",
+      "sha256": "828455fec8aa86b9841670da1d00d0b02b8538ea5bc85c2067feba0912915805",
+      "bytes": 311717,
+      "method": "WFS 2.0 GetFeature against SI.GURS.RPE:OBCINE_H; CQL filter on the 53 leading-zero-preserved municipality codes (numeric in WFS); request attribute fields EID_OBCINA,SIFRA,NAZIV,NAZIV_DJ,DATUM_OD,DATUM_DO,DATUM_SYS,STATUS_VELJAVNOSTI; no geometry returned. For each code and target date, select the unique feature whose validity start is on/before the date and whose end is after it.",
+      "limit": "This evidence resolves names and validity only. Geometry is omitted and no boundary, parent, neighbor-granularity, or regional approval is inferred."
     }
   ],
   "baseline": {
