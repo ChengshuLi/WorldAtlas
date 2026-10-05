@@ -12,7 +12,7 @@
         446
       ],
       "subject_count": 194,
-      "source_requirement": "Restore and verify the exact PRY ADM2 source from its immutable URL/SHA in source-inventory.json before crosswalking; do not commit the oversized original."
+      "source_requirement": "Restore immutable PRY ADM2 source and verify expected byte length 45,589,273 and SHA-256 d42bd1f910070bf805e32dc46708230c91f58902a3c8792eda60928b22362858 before source-derived claims; do not commit >32 MiB source. If retrieval/length/hash verification fails, stop and record blocker without inferring membership."
     },
     {
       "issue": 927,

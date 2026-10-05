@@ -26,3 +26,6 @@ Per-location acceptance dispositions have now been added for all 215 subjects, a
 
 
 Source restoration is explicit in the child contracts: the original Paraguay ADM2 geometry is not retained because it is 45,589,273 bytes. Issues #926 and #929 require restoring its immutable source URL and verifying the exact SHA-256 before crosswalking or geometry review; the file remains outside the packet due to the 32 MiB limit.
+
+
+Issue #926 now uses the same fail-closed source rule as #929: verify both the exact 45,589,273-byte length and SHA-256 before using the original source, and stop without source-derived inference if retrieval or verification fails.
