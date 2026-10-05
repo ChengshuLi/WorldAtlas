@@ -1,0 +1,17 @@
+{
+  "checks": [
+    {
+      "audit_controls": 12,
+      "command": "node --test --test-reporter=tap test/audit-grid-intervals.test.mjs test/merge-integration.test.mjs",
+      "exit_code": 0,
+      "merge_controls": 42,
+      "tests_passed": 54
+    }
+  ],
+  "kind": "positive-control",
+  "limits": [
+    "Controls establish representation/argument and CI grouping invariants, not global geographic truth or source authority."
+  ],
+  "method_id": "sparse-canonical-row-comparison",
+  "outcome": "passed"
+}
