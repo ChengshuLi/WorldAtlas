@@ -1,0 +1,41 @@
+{
+  "source_id": "resolve-ecoregions-scoped-live-response",
+  "retrieved_on": "2026-10-05",
+  "entrypoint": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=ECO_NAME+IN+%28%27Central+Tibetan+Plateau+alpine+steppe%27%2C%27Rock+and+Ice%27%2C%27Karakoram-West+Tibetan+Plateau+alpine+steppe%27%2C%27North+Tibetan+Plateau-Kunlun+Mountains+alpine+desert%27%2C%27Tibetan+Plateau+alpine+shrublands+and+meadows%27%29&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+  "source_response_sha256": "49e2ae4c56ada9359babda39cb0c49a9ef13b641dc9b7d0f673b44a416d30a38",
+  "source_response_bytes": 43230525,
+  "attribution": "RESOLVE, Esri; Creative Commons Attribution 4.0 International as declared by the retained ArcGIS item metadata.",
+  "features": [
+    {
+      "object_id": 152,
+      "eco_name": "Central Tibetan Plateau alpine steppe",
+      "eco_id": 750,
+      "license": "CC-BY 4.0"
+    },
+    {
+      "object_id": 207,
+      "eco_name": "Rock and Ice",
+      "eco_id": 0,
+      "license": "CC-BY 4.0"
+    },
+    {
+      "object_id": 365,
+      "eco_name": "Karakoram-West Tibetan Plateau alpine steppe",
+      "eco_id": 754,
+      "license": "CC-BY 4.0"
+    },
+    {
+      "object_id": 492,
+      "eco_name": "North Tibetan Plateau-Kunlun Mountains alpine desert",
+      "eco_id": 759,
+      "license": "CC-BY 4.0"
+    },
+    {
+      "object_id": 741,
+      "eco_name": "Tibetan Plateau alpine shrublands and meadows",
+      "eco_id": 768,
+      "license": "CC-BY 4.0"
+    }
+  ],
+  "limits": "Compact property observations only; no source geometry retained. The exact full GeoJSON response exceeded the 32 MiB per-input policy budget; restore by repeating the recorded query and compare its SHA-256. The live service may have changed since retrieval."
+}

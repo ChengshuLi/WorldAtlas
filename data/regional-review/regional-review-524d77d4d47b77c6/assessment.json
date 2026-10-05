@@ -53,25 +53,26 @@
       "item_bytes": 8638,
       "item_data_sha256": "07ebea5c4a70c20b929508acb0bbb929e2f841d145b9c45f2c044ec6953fbb9c",
       "item_data_bytes": 3277,
-      "live_scoped_features_sha256": "49e2ae4c56ada9359babda39cb0c49a9ef13b641dc9b7d0f673b44a416d30a38",
-      "live_scoped_features_bytes": 43230525,
-      "feature_count": 5,
+      "feature_name_observations": 5,
       "ecoregion_names": [
         "Central Tibetan Plateau alpine steppe",
         "Karakoram-West Tibetan Plateau alpine steppe",
         "North Tibetan Plateau-Kunlun Mountains alpine desert",
         "Rock and Ice",
         "Tibetan Plateau alpine shrublands and meadows"
-      ]
+      ],
+      "full_geometry_response_retained": false,
+      "full_geometry_response_sha256": "49e2ae4c56ada9359babda39cb0c49a9ef13b641dc9b7d0f673b44a416d30a38"
     },
     "official_administration": {
-      "sichuan_page_sha256": "28fe67db51904b7a5c90e9d725296227f1cb80eaf7f6b1b89f134dc4203d49f9",
-      "sichuan_page_bytes": 12027,
       "sichuan_official_count_2026_04": 183,
-      "xizang_page_sha256": "b746b510993af9133ad769d5eecdafaf1cb9d44d6762bb3de8474ed57162dcf9",
-      "xizang_page_bytes": 594387,
+      "sichuan_page_retained": false,
+      "sichuan_page_sha256": "28fe67db51904b7a5c90e9d725296227f1cb80eaf7f6b1b89f134dc4203d49f9",
       "xizang_current_county_codes_2026_06_30": 74,
-      "yunnan_full_response_retained": false
+      "xizang_page_retained": false,
+      "xizang_page_sha256": "b746b510993af9133ad769d5eecdafaf1cb9d44d6762bb3de8474ed57162dcf9",
+      "yunnan_full_response_retained": false,
+      "verification_status": "Count and code observations were extracted on retrieval date from official source bytes whose reuse terms were not established; source files were removed and are restoration-only. The recorded SHA-256 values let a future worker compare restored bytes; this packet does not independently recompute those observations."
     }
   },
   "classification_counts": {
@@ -328,7 +329,7 @@
       "atlas_direct_geoboundaries_ids_in_scope": 73,
       "represented_distinct_2017_source_adm2_ids_in_scope": 78,
       "delta_candidate_source_units_vs_current_official_count": 4,
-      "comparison_limit": "The 17 physical fragments are not county units and represent five source ADM2 IDs. Names/codes and polygons were not crosswalked; the difference is not a specific omission finding."
+      "comparison_limit": "The official count was transcribed from official response bytes captured on 2026-10-05; those bytes are restoration-only because reuse terms were not established, and this packet checker cannot independently recompute the count. The 17 physical fragments are not county units and represent five source ADM2 IDs. Names/codes and polygons were not crosswalked; the difference is not a specific omission finding."
     },
     "yunnan": {
       "atlas_full_area_inventory": 125,
