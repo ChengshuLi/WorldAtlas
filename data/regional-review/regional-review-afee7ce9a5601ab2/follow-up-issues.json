@@ -1,0 +1,71 @@
+{
+  "format": "worldatlas-geography-followups:v1",
+  "parent_issue": 446,
+  "issues": [
+    {
+      "issue": 926,
+      "title": "Reconcile Paraguay’s 2012 district source with current legal units",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/926",
+      "lane": "geography",
+      "status": "blocked",
+      "depends_on": [
+        446
+      ],
+      "subject_count": 194,
+      "source_requirement": "Restore immutable PRY ADM2 source and verify expected byte length 45,589,273 and SHA-256 d42bd1f910070bf805e32dc46708230c91f58902a3c8792eda60928b22362858 before source-derived claims; do not commit >32 MiB source. If retrieval/length/hash verification fails, stop and record blocker without inferring membership."
+    },
+    {
+      "issue": 927,
+      "title": "Resolve territorial meaning of the contested Artigas source features",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/927",
+      "lane": "geography",
+      "status": "blocked",
+      "depends_on": [
+        446
+      ],
+      "subject_ids": [
+        "gb:URY:ADM1:27058087B22084813565519"
+      ]
+    },
+    {
+      "issue": 928,
+      "title": "Restore source provenance and assess Southern Patagonian Ice Field identity",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/928",
+      "lane": "geography",
+      "status": "blocked",
+      "depends_on": [
+        446
+      ],
+      "subject_ids": [
+        "country-SPI"
+      ]
+    },
+    {
+      "issue": 929,
+      "title": "Verify San Juan del Paraná multipart geometry encoding",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/929",
+      "lane": "engineering",
+      "status": "blocked",
+      "depends_on": [
+        446
+      ],
+      "subject_ids": [
+        "atlas:multipart:eab6ecd59520b6841455"
+      ],
+      "source_requirement": "Original source geometry is not retained: restore 45,589,273-byte immutable PRY ADM2 GeoJSON and verify SHA-256 d42bd1f910070bf805e32dc46708230c91f58902a3c8792eda60928b22362858 before source-shape analysis; do not commit it above the 32 MiB cap."
+    },
+    {
+      "issue": 930,
+      "title": "Preserve district semantics for the Asunción city aggregate",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/930",
+      "lane": "engineering",
+      "status": "blocked",
+      "depends_on": [
+        446
+      ],
+      "subject_ids": [
+        "atlas:city:PRY-4837"
+      ]
+    }
+  ]
+}
