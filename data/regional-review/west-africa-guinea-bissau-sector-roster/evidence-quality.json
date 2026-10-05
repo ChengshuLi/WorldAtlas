@@ -1,0 +1,544 @@
+{
+  "version": 1,
+  "issue": 812,
+  "lane": "geography",
+  "worker_id": "worldatlas-geography-812-20261005-r1-415dc98e",
+  "subject_ids": [
+    "gb:GNB:ADM2:13655514B11561761851968",
+    "gb:GNB:ADM2:13655514B12793543239296",
+    "gb:GNB:ADM2:13655514B15077734082289",
+    "gb:GNB:ADM2:13655514B15408487636665",
+    "gb:GNB:ADM2:13655514B16168252486838",
+    "gb:GNB:ADM2:13655514B168355566476",
+    "gb:GNB:ADM2:13655514B24413703823033",
+    "gb:GNB:ADM2:13655514B30693048438959",
+    "gb:GNB:ADM2:13655514B31772276876031",
+    "gb:GNB:ADM2:13655514B37452641895852",
+    "gb:GNB:ADM2:13655514B37576476310465",
+    "gb:GNB:ADM2:13655514B38974563194217",
+    "gb:GNB:ADM2:13655514B4319146558278",
+    "gb:GNB:ADM2:13655514B44985576134462",
+    "gb:GNB:ADM2:13655514B47112439721810",
+    "gb:GNB:ADM2:13655514B47480576799194",
+    "gb:GNB:ADM2:13655514B48763126228848",
+    "gb:GNB:ADM2:13655514B49812801634354",
+    "gb:GNB:ADM2:13655514B51179315853055",
+    "gb:GNB:ADM2:13655514B53615250576563",
+    "gb:GNB:ADM2:13655514B57644193184055",
+    "gb:GNB:ADM2:13655514B57740331915335",
+    "gb:GNB:ADM2:13655514B59106895169358",
+    "gb:GNB:ADM2:13655514B65296626482863",
+    "gb:GNB:ADM2:13655514B65471558325414",
+    "gb:GNB:ADM2:13655514B65726406107890",
+    "gb:GNB:ADM2:13655514B65757043009502",
+    "gb:GNB:ADM2:13655514B66751603958816",
+    "gb:GNB:ADM2:13655514B71925291750028",
+    "gb:GNB:ADM2:13655514B76388735674013",
+    "gb:GNB:ADM2:13655514B77006902429960",
+    "gb:GNB:ADM2:13655514B8216177448850",
+    "gb:GNB:ADM2:13655514B91246233663569",
+    "gb:GNB:ADM2:13655514B91994517778696",
+    "gb:GNB:ADM2:13655514B9524670555472",
+    "gb:GNB:ADM2:13655514B95678269815128",
+    "gb:GNB:ADM2:13655514B97576906537580",
+    "gb:GNB:ADM2:13655514B98496568253651",
+    "gb:GNB:ADM2:13655514B99052541590952"
+  ],
+  "subject_ids_sha256": "e019ccbc7d300050962b0920ccff7782d991bcee1b70ed776ca5bf6543e943a1",
+  "baseline": {
+    "commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93",
+    "files": [
+      {
+        "path": "data/regional-review/regional-review-1deb892647c1aa26/scope.json",
+        "bytes": 20394,
+        "sha256": "8a9bedb094e325279f6444ee4e0514373efacc4562f0d57f2bdc250ae1197d65",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1deb892647c1aa26/sources/geoboundaries-9469f09/GNB-geoBoundaries-GNB-ADM2.geojson",
+        "bytes": 2384670,
+        "sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "issue-472-scope": "8a9bedb094e325279f6444ee4e0514373efacc4562f0d57f2bdc250ae1197d65",
+      "source-layer": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680"
+    },
+    "pin_files": {
+      "issue-472-scope": "data/regional-review/regional-review-1deb892647c1aa26/scope.json",
+      "source-layer": "data/regional-review/regional-review-1deb892647c1aa26/sources/geoboundaries-9469f09/GNB-geoBoundaries-GNB-ADM2.geojson"
+    },
+    "subject_files": {
+      "gb:GNB:ADM2:13655514B11561761851968": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B12793543239296": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B15077734082289": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B15408487636665": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B16168252486838": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B168355566476": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B24413703823033": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B30693048438959": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B31772276876031": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B37452641895852": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B37576476310465": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B38974563194217": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B4319146558278": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B44985576134462": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B47112439721810": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B47480576799194": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B48763126228848": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B49812801634354": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B51179315853055": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B53615250576563": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B57644193184055": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B57740331915335": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B59106895169358": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B65296626482863": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B65471558325414": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B65726406107890": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B65757043009502": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B66751603958816": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B71925291750028": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B76388735674013": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B77006902429960": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B8216177448850": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B91246233663569": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B91994517778696": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B9524670555472": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B95678269815128": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B97576906537580": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B98496568253651": "data/geography/part-9.json",
+      "gb:GNB:ADM2:13655514B99052541590952": "data/geography/part-9.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "salb-data",
+      "url": "https://geoportal.un.org/arcgis/sharing/rest/content/items/59a87026ba7c4e718c330817fa459789/data",
+      "role": "official national administrative units validated by national authority via UN SALB",
+      "vintage": "temporal validity 2016-01-01 through last verification 2021-09-02",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "restricted",
+        "terms": "SALB Terms of Use 2021 allow non-commercial use only; attribute DGGC and from SALB Data, United Nations; do not change geometry/content without contributor consent."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Download exact item URL; require 411079 bytes and SHA-256 4c758eb2cb41f796ac12b58676a85eda509f622a51ad05a91cdef8572304e7b9. Layer metadata: https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_GNB/FeatureServer/0?f=pjson",
+      "limit": "Restricted original geometry is not redistributed; source completeness is disclaimed by SALB terms, and its 2021 roster conflicts with the 2025 government count.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "pcgn-2024",
+      "url": "https://assets.publishing.service.gov.uk/media/65f31c5efa1851001a011765/Guinea-Bissau_toponymic_factfile.pdf",
+      "role": "national names/structure reference; cites DGGC/SALB",
+      "vintage": "2024 factfile asset; exact issue/publication day not established",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "UK Crown copyright; Open Government Licence as specified by the official factfile asset."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Download official PDF; require 399888 bytes and SHA-256 2ba9d5a71da25fc8c173da80be134381e91001c0873518bfa50d4c040df54dbf. p.4 describes the 39 ADM2 count.",
+      "limit": "Factfile gives 39 count but no dated unit-by-unit effective roster in inspected text.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "unfccc-nc4",
+      "url": "https://unfccc.int/documents/654402",
+      "role": "2025 national government account of administrative sectors",
+      "vintage": "submitted 2025-11-17; NC4 p.22",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Official record, but reuse license for full PDF is not established; no PDF content is republished."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Prefer official record and PDF https://unfccc.int/sites/default/files/resource/GNB_NC4_English_FINAL_16112025_JLT.pdf. Direct PDF returned anti-bot HTML; verify any copy against 6182709 bytes and SHA-256 4481f2a8346c7b71d6ffb5e7b6badc504ac4271c61982ea82d9ed2306b12a694 recorded in #472 context.",
+      "limit": "Direct official bytes could not be retrieved in this session. Earlier captured mirror hash matched #472 record; filing states 36 under regions but gives no names.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "geoboundaries-2017",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GNB/ADM2/geoBoundaries-GNB-ADM2.geojson",
+      "role": "pinned 2017 OSM/Wambacher-derived comparison roster",
+      "vintage": "2017 source; commit 9469f09592ced973a3448cf66b6100b741b64c0d, metadata build 2023-12-12",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0; attribution and share-alike obligations apply."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use immutable baseline file data/regional-review/regional-review-1deb892647c1aa26/sources/geoboundaries-9469f09/GNB-geoBoundaries-GNB-ADM2.geojson at commit 6b60f1598b7b1f222b671cb57e12561fd3c3fb93; verify SHA-256 8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680.",
+      "limit": "A 2017 comparison source does not certify current or legal boundaries.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "salb-layer-metadata",
+      "url": "https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_GNB/FeatureServer/0?f=pjson",
+      "role": "official SALB service metadata/data dictionary",
+      "vintage": "retrieved 2026-10-05; layer validity through 2021-09-02",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "restricted",
+        "terms": "UN SALB terms govern features; cite DGGC and SALB/UN; metadata bytes are referenced only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "GET canonical metadata endpoint; recorded hash and size in sources.json.",
+      "limit": "Metadata can change and original JSON bytes are not redistributed.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "salb-country-page",
+      "url": "https://salb.un.org/en/data/gnb",
+      "role": "official country metadata and national source attribution",
+      "vintage": "retrieved 2026-10-05; page-wide validity display says 2000-01-01 through last update",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "restricted",
+        "terms": "SALB data page; cite DGGC and SALB/United Nations; no page content is republished."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch canonical country page; sources.json records 54116 bytes and SHA-256 fb26244440e95148c66e9f9dd9dc38dce3d974f7a1b538e7dd350fcf4ce87a93.",
+      "limit": "Page-level 2000 start differs from the specific layer metadata; treat as a page-level discrepancy, not a layer temporal date.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "salb-terms-of-use-2021",
+      "url": "https://salb.un.org/sites/default/files/wysiwyg_uploads/docs_uploads/TermsOfUseSALB2021.pdf",
+      "role": "primary rights/terms evidence for the SALB data",
+      "vintage": "2021 Terms of Use",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "restricted",
+        "terms": "Terms PDF is cited but not redistributed; it governs use of the associated SALB data."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch canonical PDF; sources.json records 116142 bytes and SHA-256 aaac013743486c9f4be986e236fdba6b3a4ac0ff00921cecc171c42778544381.",
+      "limit": "Terms confirm SALB use is non-commercial with attribution and no geometry/content changes without contributor consent.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/README.md",
+      "bytes": 9531,
+      "sha256": "d5006caa2262a547677894916cd83d12196e412c8e26e37fbfca7834543cf4d7",
+      "hash_kind": "file-bytes",
+      "role": "research-packet"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/reproduce.py",
+      "bytes": 10494,
+      "sha256": "1f4ecc9bcb8db30359194d1260061c90f55edd02c4c28effdd631f4b46f26bfb",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-code"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/crosswalk-screen.csv",
+      "bytes": 26127,
+      "sha256": "949ce2e49da9dc271580e3bf17e6474f10ca8f929a68e75de046a944140f527b",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-output"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/salb-roster.csv",
+      "bytes": 20793,
+      "sha256": "e8b091ce9b5ff0ccfc196b5573728bd1afacaec4416d9c0493648ffa0c435f83",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-output"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "bytes": 744,
+      "sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
+      "hash_kind": "file-bytes",
+      "role": "result-ledger"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/positive-control.json",
+      "bytes": 570,
+      "sha256": "8f1fa56aa22bbbba77b9ee12dd4590139da578e6c62fdc70070f5b1f404cf7e1",
+      "hash_kind": "file-bytes",
+      "role": "control-evidence"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/negative-control.json",
+      "bytes": 558,
+      "sha256": "ab3c5e5a23e56cf06b151e380c1e00c1773b0bd5c9eb563bf5f957aa99d83854",
+      "hash_kind": "file-bytes",
+      "role": "control-evidence"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/sources.json",
+      "bytes": 5476,
+      "sha256": "c5fe862eed497757a4ca50207ddf3cb034f1644279133a5d78aba15eec221601",
+      "hash_kind": "file-bytes",
+      "role": "source-register"
+    }
+  ],
+  "methods": [
+    {
+      "id": "salb-overlap-screen",
+      "kind": "geography",
+      "description": "For all 39 retained geoBoundaries GNB ADM2 features, compare each SALB ADM2 polygon and record normalized name candidates, Atlas declared parent, SALB ADM1 parent, greatest area-overlap candidate, reciprocal coverage, and top three candidates. Cross-vintage diagnostic only; does not establish legal identity or completeness.",
+      "software": "Python 3; shapely 2.0.7; pyproj 3.5.0; numpy 1.24.4; worldatlas-evidence-geometry-v1",
+      "units": "percent of feature ellipsoidal land area and row/feature counts",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "salb-overlap-screen",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/west-africa-guinea-bissau-sector-roster/positive-control.json"
+    },
+    {
+      "method_id": "salb-overlap-screen",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/west-africa-guinea-bissau-sector-roster/negative-control.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "old_subjects_2017",
+      "value": 39,
+      "unit": "subjects",
+      "vintage": "archived",
+      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
+      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+    },
+    {
+      "id": "salb_features",
+      "value": 39,
+      "unit": "features",
+      "vintage": "archived",
+      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
+      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+    },
+    {
+      "id": "salb_regional_sectors",
+      "value": 38,
+      "unit": "sectors",
+      "vintage": "archived",
+      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
+      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+    },
+    {
+      "id": "salb_autonomous_sector",
+      "value": 1,
+      "unit": "sectors",
+      "vintage": "archived",
+      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
+      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+    },
+    {
+      "id": "screen_review_required",
+      "value": 18,
+      "unit": "rows",
+      "vintage": "archived",
+      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
+      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+    },
+    {
+      "id": "screen_consistent",
+      "value": 21,
+      "unit": "rows",
+      "vintage": "archived",
+      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
+      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+    },
+    {
+      "id": "nc4_count_gap",
+      "value": 2,
+      "unit": "sectors",
+      "vintage": "archived",
+      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
+      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "old_subjects_2017",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/old_geoboundaries_subject_count"
+    },
+    {
+      "metric_id": "salb_features",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/salb_adm2_count"
+    },
+    {
+      "metric_id": "salb_regional_sectors",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/salb_regional_sector_count"
+    },
+    {
+      "metric_id": "salb_autonomous_sector",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/salb_autonomous_sector_count"
+    },
+    {
+      "metric_id": "screen_review_required",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/atlas_parent_vs_overlap_candidate_review_rows"
+    },
+    {
+      "metric_id": "screen_consistent",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/atlas_parent_vs_overlap_candidate_consistent_rows"
+    },
+    {
+      "metric_id": "nc4_count_gap",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/salb_regional_sector_difference_vs_2025_nc4"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "old_subjects_2017",
+      "value": 39,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "salb_features",
+      "value": 39,
+      "unit": "features"
+    },
+    {
+      "metric_id": "salb_regional_sectors",
+      "value": 38,
+      "unit": "sectors"
+    },
+    {
+      "metric_id": "salb_autonomous_sector",
+      "value": 1,
+      "unit": "sectors"
+    },
+    {
+      "metric_id": "screen_review_required",
+      "value": 18,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "screen_consistent",
+      "value": 21,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "nc4_count_gap",
+      "value": 2,
+      "unit": "sectors"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The SALB layer contains 39 exact ADM2 codes beneath eight regional ADM1s and autonomous Bissau; layer validity ends at last verification/update 2021-09-02.",
+      "status": "supported",
+      "source_ids": [
+        "salb-data",
+        "salb-layer-metadata"
+      ]
+    },
+    {
+      "text": "The 2025 government filing reports 36 sectors under regions and Bissau separately; versus 38 regional SALB records, two regional units remain unreconciled and no dated unit list/effective-date instrument was found.",
+      "status": "unresolved",
+      "source_ids": [
+        "unfccc-nc4",
+        "salb-data"
+      ]
+    },
+    {
+      "text": "The 2024 PCGN factfile cites SALB/DGGC and reports 39 ADM2 sectors but does not establish contemporaneity with the 2025 count.",
+      "status": "supported",
+      "source_ids": [
+        "pcgn-2024",
+        "salb-data"
+      ]
+    },
+    {
+      "text": "The 2017 geoBoundaries to SALB screen has candidate correspondences but discrepancies remain; no parent or source ID correction is justified from this evidence.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-2017",
+        "salb-data"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONPATH=scripts python data/regional-review/west-africa-guinea-bissau-sector-roster/reproduce.py /path/to/restored-salb.geojson --output data/regional-review/west-africa-guinea-bissau-sector-roster/crosswalk-screen.csv --roster-output data/regional-review/west-africa-guinea-bissau-sector-roster/salb-roster.csv",
+    "node scripts/evidence-quality.mjs data/regional-review/west-africa-guinea-bissau-sector-roster/evidence-quality.json",
+    "Run scripts/check-handoff-scope.mjs for issue 812 with the branch and PR inputs per repository docs."
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/crosswalk-screen.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/salb-roster.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/sources.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
