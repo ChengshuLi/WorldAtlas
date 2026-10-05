@@ -2,6 +2,8 @@
 
 ## Scope and result
 
+Chile Central is a partial area in this packet (75 of 252 locations); companion issue [#444](https://github.com/ChengshuLi/WorldAtlas/issues/444) covers 177 of the same 252. Paraguay is also partial here (48 of 243); companion issue [#446](https://github.com/ChengshuLi/WorldAtlas/issues/446) covers 195 of the same 243. The API snapshot in `scope/companion-workload-scopes.json` retains both embedded scope ID lists, their exact source hashes, capture date and issue URLs. The reproducer verifies roster uniqueness/hashes and zero overlap with #445: its 75 Chile Central IDs plus #444’s 177 make 252, and its 48 Paraguay IDs plus #446’s 195 make 243. Chile North (29/29), Chile South (62/62), and Juan Fernández Is. (1/1) are fully represented in this packet. The crosswalk rows repeat each owned/full area count from the retained `area-review.csv`.
+
 This addendum examines the five existing area labels and all 39 parent IDs in the already pinned 215-location issue scope. It does not replace the original packet, alter a hierarchy ID, or validate polygon geometry. The reproducible comparison is `area-source-crosswalk.csv`; its source tables are restoration-only and its method is `reproduce-area-source-crosswalk.py`. The hierarchy input is pinned to PR1 baseline commit `7995cfb8cc9f1f282e1419bdddf13de1f8107e21`, file SHA-256 `568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b`.
 
 The Atlas hierarchy explicitly describes Chile Central, Chile North, Chile South, Juan Fernández Is. and Paraguay as WGSRPD Level 3 geographic areas and notes that WGSRPD calls Level 3 units “botanical countries.” At the pinned TDWG repository commit `52da7828aba9d461dd133c27b3bd7a4407161f54`, its Level 3 source table places all five labels/codes (CLC, CLN, CLS, JNF, PAR) under Level 2 `85,00` (Southern South America). The source abstract explains its use for plant-distribution records and states Level 3 may disregard political considerations; Level 4 is the basic recording-unit tier. Kew's Plants of the World Online describes using WGSRPD for biodiversity distribution and likewise warns that Level 3 botanical-country borders can differ from political boundaries. This supports the labels' botanical/distribution purpose. It does not establish that these groupings are the best fit for every Atlas purpose.
@@ -23,7 +25,7 @@ The official Chile administrative DPA contains other distinct islands (including
 ```sh
 python3 data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/reproduce-area-source-crosswalk.py \
   --level3 /path/to/tblLevel3.txt --level4 /path/to/tblLevel4.txt \
-  --hierarchy /path/to/baseline-hierarchy.json --output data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/area-source-crosswalk.csv
+  --hierarchy /path/to/baseline-hierarchy.json --areas /path/to/area-review.csv --parents /path/to/province-review.csv --workload-scope /path/to/embedded-workload-scope.json --companion-scopes data/regional-review/regional-review-9b6d6a9ecf8f6c3b/scope/companion-workload-scopes.json --output data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/area-source-crosswalk.csv
 ```
 
 The exact source commit, raw URLs, hashes, retrieval date, and restoration path are in `source/source-register.json`. No source table or polygon is retained because the repository did not state reuse terms. This is a text/name and hierarchy-count crosswalk only; no geometry operation, legal conclusion, completeness claim, regional approval, import or release authorization is made.

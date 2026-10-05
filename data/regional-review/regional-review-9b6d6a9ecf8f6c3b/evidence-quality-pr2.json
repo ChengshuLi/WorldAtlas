@@ -480,7 +480,7 @@
       "id": "tdwg-wgsrpd-level3-level4-2021",
       "url": "https://github.com/tdwg/wgsrpd/tree/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition",
       "role": "Pinned TDWG WGSRPD classification labels and historical Level 4 unit lists for the five issue areas",
-      "vintage": "WGSRPD 2nd Edition, source tables in pinned repository commit 52da7828aba9d461dd133c27b3bd7a4407161f54",
+      "vintage": "WGSRPD 2nd Edition source tables in repository commit 52da7828aba9d461dd133c27b3bd7a4407161f54",
       "retrieved_at": "2026-10-05",
       "license": {
         "status": "unknown",
@@ -488,48 +488,108 @@
       },
       "retention": "restoration-only",
       "verification": "verified",
-      "restoration": "Fetch tblLevel3.txt and tblLevel4.txt from the raw URLs and exact commit listed in source/source-register.json; verify whole-file SHA-256 values before running findings/reproduce-area-source-crosswalk.py.",
-      "limit": "The comparison verifies source labels and historical row counts, not current administrative identity, legal parentage, membership completeness or boundary geometry.",
+      "restoration": "Fetch tblLevel3.txt and tblLevel4.txt from raw URLs and exact commit listed in source/source-register.json; verify whole-file SHA-256 before reproduction.",
+      "limit": "Verifies source labels and historical row counts only; not current administrative identity, legal parentage, membership completeness or boundary geometry.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "worldatlas-issue-444-scope",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/444",
+      "role": "Companion research workload scope metadata for the partial Chile Central area",
+      "vintage": "Issue scope captured 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Internal GitHub issue scope metadata; retained as bounded work-partition identifiers, not redistributed geographic source data."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Retrieve the exact embedded workload-scope JSON from issue #444 through the GitHub API; compare its IDs/hash with the retained snapshot.",
+      "limit": "Work ownership/scope partition only; no geography correctness or approval.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "worldatlas-issue-446-scope",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/446",
+      "role": "Companion research workload scope metadata for the partial Paraguay area",
+      "vintage": "Issue scope captured 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Internal GitHub issue scope metadata; retained as bounded work-partition identifiers, not redistributed geographic source data."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Retrieve the exact embedded workload-scope JSON from issue #446 through the GitHub API; compare its IDs/hash with the retained snapshot.",
+      "limit": "Work ownership/scope partition only; no geography correctness or approval.",
       "temporal_status": "reference"
     }
   ],
   "outputs": [
     {
       "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/2026-10-05-area-purpose-review.md",
-      "bytes": 6599,
-      "sha256": "81cd1cc8d37edab92ae4638692dc61f73a134019f91ff0f2543da537b6203c60",
+      "bytes": 7693,
+      "sha256": "43e2a8c293ec5dd6979595edf73745def4592667f84d9defe13d5b20d8c89505",
       "hash_kind": "file-bytes",
       "role": "evidence-report"
     },
     {
       "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/area-source-crosswalk.csv",
-      "bytes": 13970,
-      "sha256": "6ee73d439f3e281045fab4f287bf8fe61960e08e9ad4dea7d47409016f930724",
+      "bytes": 14209,
+      "sha256": "66093ef613629ec10f28ba7390e38f75f91ace2b3b2d7fdc9ae19f5119798790",
       "hash_kind": "file-bytes",
       "role": "evidence-report"
     },
     {
       "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/reproduce-area-source-crosswalk.py",
-      "bytes": 4983,
-      "sha256": "aa45a2a2381e6fde75e2f3bd5591645beb5943d926c0fd13c7cb7cd38ee8eeb2",
+      "bytes": 8349,
+      "sha256": "6ba491ef8e7f514ebeb8a480308ef2f9716528e2dbe728cf87471c128b530bbc",
       "hash_kind": "file-bytes",
       "role": "reproduction-or-source-inventory"
     },
     {
       "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/source/source-register.json",
-      "bytes": 10385,
-      "sha256": "bd336b7a80819e2574d27f7a33a5b46b19b5ce6972914af2715bffb9826c7ac4",
+      "bytes": 10930,
+      "sha256": "1e124f1c15ce6b9396ffd97e2d791b2d7cc995eb7d134f2d6dcfed1f18f235ca",
       "hash_kind": "file-bytes",
       "role": "reproduction-or-source-inventory"
+    },
+    {
+      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/scope/companion-workload-scopes.json",
+      "bytes": 23322,
+      "sha256": "40c1faa8fb3fa51eff8653eb92312af753692d1790558a8597f9e96d9ca70ec1",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-or-source-inventory"
+    },
+    {
+      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/area-review.csv",
+      "bytes": 3161,
+      "sha256": "7971335af98f6c8be11ab8699caca7f698384b2dd871983f5059b66da3fad17a",
+      "hash_kind": "file-bytes",
+      "role": "review-input"
+    },
+    {
+      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/province-review.csv",
+      "bytes": 29625,
+      "sha256": "26fa50de3fa6515fface069755f89b13dc6cb674b41fb95d9abcb9fbd0f91c2f",
+      "hash_kind": "file-bytes",
+      "role": "review-input"
+    },
+    {
+      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/scope/embedded-workload-scope.json",
+      "bytes": 25111,
+      "sha256": "29a5984b06b96dff899a2c4d16659e63b66f75ab25dd2a744191e0267bc21af8",
+      "hash_kind": "file-bytes",
+      "role": "review-input"
     }
   ],
   "methods": [
     {
       "id": "wgsrpd-area-scale-crosswalk",
       "kind": "source",
-      "description": "Verify whole-file hashes for the two pinned TDWG tables; parse Windows-1252 source rows; compare exact L3 code/name/L2 labels and expected L4 counts against the five pinned Atlas area IDs and 39 scoped parent IDs. No geometry operations are performed.",
-      "software": "Python 3.11 standard library; Git; source tables retrieved at pinned repository commit",
-      "units": "WGSRPD codes, source labels, source-row counts, Atlas hierarchy child counts and parent IDs"
+      "description": "Verify whole-file hashes for pinned TDWG tables and baseline hierarchy; parse Windows-1252 rows; compare L3 code/name/L2 labels and expected L4 counts to five baseline areas and 39 scoped parents. Validate issue #445 workload hash, companion roster hashes, uniqueness, complementary partial-area totals and disjointness. No geometry operations.",
+      "software": "Python 3 standard library; Git; GitHub issue API; pinned TDWG repository",
+      "units": "WGSRPD codes, source labels and row counts, workload member counts, hierarchy child counts and parent IDs"
     }
   ],
   "metrics": [],
@@ -545,10 +605,18 @@
       ]
     },
     {
-      "text": "The historic WGSRPD Level 4 unit lists are not a one-to-one match to Atlas area child counts; scale mismatch alone does not establish an error or a current administrative boundary claim.",
+      "text": "The historic WGSRPD Level 4 unit lists are not a one-to-one match to Atlas area child counts; scale mismatch alone does not establish a current administrative error or boundary claim.",
       "status": "supported",
       "source_ids": [
         "tdwg-wgsrpd-level3-level4-2021"
+      ]
+    },
+    {
+      "text": "Retained embedded scope snapshots for companion issues #444 and #446 are disjoint from #445 and cover the complementary 177 Chile Central and 195 Paraguay location partitions.",
+      "status": "supported",
+      "source_ids": [
+        "worldatlas-issue-444-scope",
+        "worldatlas-issue-446-scope"
       ]
     },
     {
@@ -565,79 +633,34 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "Fetch the two TDWG raw tables at the pinned commit from the URLs in source/source-register.json and verify their SHA-256 values.",
+    "Fetch TDWG raw tables at the pinned commit from source/source-register.json; restore hierarchy.json from the baseline commit; use retained area, parent and workload scope inputs.",
     "python3 data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/reproduce-area-source-crosswalk.py --level3 /path/to/tblLevel3.txt --level4 /path/to/tblLevel4.txt --hierarchy /path/to/baseline-hierarchy.json --output data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/area-source-crosswalk.csv"
   ],
   "change_receipts": [
     {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/area-review.csv",
-      "status": "added",
-      "previous_path": null
+      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/evidence-quality-pr2.json",
+      "status": "added"
     },
     {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/crosswalk.csv",
-      "status": "added",
-      "previous_path": null
+      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/2026-10-05-area-purpose-review.md",
+      "status": "added"
     },
     {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/follow-ups.md",
-      "status": "added",
-      "previous_path": null
+      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/area-source-crosswalk.csv",
+      "status": "added"
     },
     {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/geometry-screen.json",
-      "status": "added",
-      "previous_path": null
+      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/reproduce-area-source-crosswalk.py",
+      "status": "added"
     },
     {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/province-review.csv",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/reproduce.py",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/reproduction-summary.json",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/semantic-screen.md",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/findings/source-review.md",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/issue-api-snapshot.json",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/scope/embedded-workload-scope.json",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/source/geoBoundaries-CHL-ADM3-metaData.json",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/source/geoBoundaries-PRY-ADM2-metaData.json",
-      "status": "added",
-      "previous_path": null
+      "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/scope/companion-workload-scopes.json",
+      "status": "added"
     },
     {
       "path": "data/regional-review/regional-review-9b6d6a9ecf8f6c3b/source/source-register.json",
-      "status": "added",
-      "previous_path": null
+      "status": "modified",
+      "original_sha256": "24d34c91f5e3517d1a05e29f1733cc4c0a656422f54ea71a855f63de95f9f57a"
     }
   ]
 }
