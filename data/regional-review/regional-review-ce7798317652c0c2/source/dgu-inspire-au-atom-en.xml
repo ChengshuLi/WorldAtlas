@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss" xml:lang="en">
+    <title>Administrative Units</title>
+    <subtitle>Source that includes data on the following spatial units: state, counties, cities and municipalities, settlements, statistical and census districts.</subtitle>
+    <link href="http://inspire.ec.europa.eu/featureconcept/AdministrativeUnit" rel="describedby" type="text/html"/>
+    <link href="https://geoportal.dgu.hr/services/atom/au/en.xml" rel="self" type="application/atom+xml" hreflang="en" title="This document"/>
+    <link href="https://geoportal.dgu.hr/services/atom/au/xml" rel="alternate" type="application/atom+xml" hreflang="hr" title="This document in Croatian"/>
+    <link href="https://geoportal.dgu.hr/services/atom/en.xml" rel="up" type="application/atom+xml" hreflang="en" title="The parent service feed document"/>
+    <id>https://geoportal.dgu.hr/services/atom/au/en.xml</id>
+    <rights>public access limited according to Article 13(1)(e) of the INSPIRE Directive</rights>
+    <updated>2026-10-05T05:33:51.000000+02:00</updated>
+    <author>
+        <name>Državna geodetska uprava</name>
+        <email>irena.magdic@dgu.hr</email>
+    </author>
+    <entry>
+        <title>Administrative Units in INSPIRE GML 3.2.1 format in ETRS89/LAEA projection in a compressed zip file</title>
+        <link href="https://geoportal.dgu.hr/services/atom/INSPIRE_Administrative_Units_(AU).zip" rel="alternate" type="application/x-gmz" hreflang="en" title="Administrative Units on the territory of the entire Republic of Croatia in INSPIRE GML 3.2.1 format in ETRS89/LAEA projection in a compressed zip file. The content of the data set is in Croatian." length="219327549"/>
+        <id>https://geoportal.dgu.hr/services/atom/INSPIRE_Administrative_Units_(AU).zip</id>
+        <updated>2026-10-04T06:31:47.000000+02:00</updated>
+        <polygon>42.3982 13.2858 46.5321 13.2858 46.5321 19.6392 42.3982 19.6392 42.3982 13.2858</polygon>
+        <category term="http://www.opengis.net/def/crs/EPSG/0/3035" label="ETRS89/LAEA"/>
+    </entry>
+</feed>

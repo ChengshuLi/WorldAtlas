@@ -1,0 +1,31 @@
+{
+  "baseline_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+  "dzs_roster_extraction": {
+    "original_workbook_sha256": "c2b1cff240a19b5bfbf6dcb5e919a264284dfa444a326adae5517bf39b6d7d42",
+    "retained_extract": "source/dzs-census-2021-detail-extract.csv",
+    "run_one_sha256": "225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c",
+    "run_two_sha256": "225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c"
+  },
+  "issue": 419,
+  "output_files": [
+    {
+      "bytes": 10913,
+      "path": "assessment-summary.json",
+      "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467"
+    },
+    {
+      "bytes": 1448,
+      "path": "province-completeness.csv",
+      "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37"
+    },
+    {
+      "bytes": 167059,
+      "path": "scoped-location-assessments.csv",
+      "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+    }
+  ],
+  "run_one_sha256": "5583a75284a46c9e1ce8a8f92e8742f5576cf368e5de0c27df4995ae21bb700c",
+  "run_two_sha256": "5583a75284a46c9e1ce8a8f92e8742f5576cf368e5de0c27df4995ae21bb700c",
+  "source_sha256": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e",
+  "version": 1
+}
