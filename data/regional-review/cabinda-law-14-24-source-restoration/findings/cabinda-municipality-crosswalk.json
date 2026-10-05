@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-10-05",
+  "scope": "Four exact legacy IDs in issue #896 only; this does not inventory every WorldAtlas ID.",
+  "parent": {"name": "Cabinda", "atlas_id": "framework:province:cabinda:fb67d098df5d", "basis": "Baseline feature parent_id; Law 14/24 establishes the provincial/municipal hierarchy."},
+  "current_statutory_roster": ["Cabinda", "Cacongo", "Buco Zau", "Belize", "Miconje", "Massabi", "Necuto", "Tando Zinze", "Liambo", "Ngoio"],
+  "legacy_crosswalk": [
+    {"id":"gb:AGO:ADM2:16411231B22766430211667","legacy_name":"Belize","current_name_overlap":"Belize","source_id":"16411231B22766430211667","source_vintage":"2018","source_level":"ADM2 / Municipality","parent_id":"framework:province:cabinda:fb67d098df5d","current_identity":"unresolved","footprint_persistence":"unresolved","reason":"Name overlap alone does not establish continuity of legal identity or boundaries across the 2024 redivision."},
+    {"id":"gb:AGO:ADM2:16411231B42954517222252","legacy_name":"Cabinda","current_name_overlap":"Cabinda","source_id":"16411231B42954517222252","source_vintage":"2018","source_level":"ADM2 / Municipality","parent_id":"framework:province:cabinda:fb67d098df5d","current_identity":"unresolved","footprint_persistence":"unresolved","reason":"Name overlap alone does not establish continuity of legal identity or boundaries across the 2024 redivision."},
+    {"id":"gb:AGO:ADM2:16411231B63355352791940","legacy_name":"Cacongo (Landana)","current_name_overlap":"Cacongo","source_id":"16411231B63355352791940","source_vintage":"2018","source_level":"ADM2 / Municipality","parent_id":"framework:province:cabinda:fb67d098df5d","current_identity":"unresolved","footprint_persistence":"unresolved","reason":"2018 source display name differs; no lawful current geometry or identity crosswalk establishes persistence."},
+    {"id":"gb:AGO:ADM2:16411231B679187258105","legacy_name":"Buco Zau","current_name_overlap":"Buco Zau","source_id":"16411231B679187258105","source_vintage":"2018","source_level":"ADM2 / Municipality","parent_id":"framework:province:cabinda:fb67d098df5d","current_identity":"unresolved","footprint_persistence":"unresolved","reason":"Name overlap alone does not establish continuity of legal identity or boundaries across the 2024 redivision."}
+  ],
+  "current_names_not_represented_as_separate_members_by_these_four_ids": ["Miconje", "Massabi", "Necuto", "Tando Zinze", "Liambo", "Ngoio"],
+  "scope_limit": "The six-name statement is limited to the four IDs declared by issue #896; it does not assert absence from all Atlas identities or that their territories are absent from old polygons.",
+  "boundary_result": "No authoritative, current, openly reusable vector boundary dataset was verified. The Gazette statute supplies legal descriptions and annex maps, but reuse permission and georeferencing/restoration specifications for derived geometry were not cleared. No boundary is proposed or approved."
+}
