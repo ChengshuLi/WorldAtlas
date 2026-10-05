@@ -1,0 +1,86 @@
+{
+  "comparison": "Exact whole-file bytes of report and every gzip sample partition; no field normalization",
+  "files": [
+    {
+      "bytes": 38613,
+      "file": "report.json",
+      "sha256": "ba7a4b190683f8436109b6159359727a2300053ac42a96dcdd53ebef7f092b20"
+    },
+    {
+      "bytes": 1689245,
+      "file": "samples-000.json.gz",
+      "sha256": "11a8c8fe3a225f0202f1a3a3a761f69a4262f19a15814e0874a19287e7297440"
+    },
+    {
+      "bytes": 1687134,
+      "file": "samples-001.json.gz",
+      "sha256": "4b838031e8f4576bfb0dbc44eb919797f2cedf07d0f79a6ac3844ca61d784b1e"
+    },
+    {
+      "bytes": 1689397,
+      "file": "samples-002.json.gz",
+      "sha256": "ab03a5c876e550cee86689afa80608b2dbd5c3523a9cd8db19a65d4305cc4a56"
+    },
+    {
+      "bytes": 1688089,
+      "file": "samples-003.json.gz",
+      "sha256": "21fe138bee5c3d55c6241e4b4f8a4c0b70faa31dc48e6509af7ebe785044ad77"
+    },
+    {
+      "bytes": 1686877,
+      "file": "samples-004.json.gz",
+      "sha256": "76361e1836917159489f0ae8d07b832d979715a3877d36f72dc10b31eb140f3b"
+    },
+    {
+      "bytes": 1688927,
+      "file": "samples-005.json.gz",
+      "sha256": "9c80d1dcf87689c39a1824b1bf1e282da99f4785ce35f3807465e82b944de8a9"
+    },
+    {
+      "bytes": 1688256,
+      "file": "samples-006.json.gz",
+      "sha256": "1a189076cfcc51dd375b2c0398b54bb1a3bcfcf31968c63fc9c9308bb95bf18a"
+    },
+    {
+      "bytes": 1687664,
+      "file": "samples-007.json.gz",
+      "sha256": "caf37153862b6215c0e5f282bdc444476841e2c94ebfd4397aec48272ac33440"
+    },
+    {
+      "bytes": 1688885,
+      "file": "samples-008.json.gz",
+      "sha256": "ca54fc1f0fa8d7d686936fb26e0e297653c8b2cadc02feea8f4f88a5c5a45c23"
+    },
+    {
+      "bytes": 1688697,
+      "file": "samples-009.json.gz",
+      "sha256": "4246a204482d86ce2cca1a4baa6b57e7cd64242c10ee8d27d9f95ab332ae5e12"
+    },
+    {
+      "bytes": 1688456,
+      "file": "samples-010.json.gz",
+      "sha256": "07d2fd7fe76c0371641564413ba73d7716602f18146684f6362a1a76ab858d4a"
+    },
+    {
+      "bytes": 1687988,
+      "file": "samples-011.json.gz",
+      "sha256": "cb20693ddc9e804ebabcbb35a976c1cc5f753ff804eb4093a5c95f9fb7a1b6c3"
+    },
+    {
+      "bytes": 1689893,
+      "file": "samples-012.json.gz",
+      "sha256": "f3546382d58b3b56104e29acd08bfd52555abb49e41a100bcbb2532dbd1a5697"
+    },
+    {
+      "bytes": 80596,
+      "file": "samples-013.json.gz",
+      "sha256": "4cfab7c9920333e8c620bd905f880a24f264ffb70da18a0438c5ef2985d45b30"
+    }
+  ],
+  "input_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+  "kind": "reproducibility",
+  "method_id": "immutable-native-grid-triage",
+  "outcome": "passed",
+  "run_one_sha256": "ba7a4b190683f8436109b6159359727a2300053ac42a96dcdd53ebef7f092b20",
+  "run_two_sha256": "ba7a4b190683f8436109b6159359727a2300053ac42a96dcdd53ebef7f092b20"
+}

@@ -4,6 +4,7 @@ import collections
 import gzip
 import io
 import json
+import math
 import pathlib
 import re
 import sys
@@ -16,7 +17,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 from evidence.immutable import (Baseline, MAX_FILE_BYTES, canonical_json, descriptor,
                                 deterministic_gzip, safe_path, sha256)
 from geographic_grid import (VERSION, CanonicalGrid, component_sample, owner_shape_check,
-                             project, cell_centre)
+                             project)
 
 
 def decoded(raw, pin=None):
@@ -72,6 +73,9 @@ def write_parts(out, rows):
 
 
 def triage(input_commit, inputs_path, inputs_bytes, inputs_sha256, destination):
+    out = ROOT / safe_path(destination)
+    if out.exists() or any(p.is_symlink() for p in [out, *out.parents]):
+        raise ValueError('Output must be an unused nonsymlink vintage')
     registry_pin = {'path': safe_path(inputs_path), 'bytes': inputs_bytes,
                     'sha256': inputs_sha256, 'hash_kind': 'file-bytes'}
     registry_source = Baseline(ROOT, input_commit, [registry_pin])
@@ -151,7 +155,12 @@ def triage(input_commit, inputs_path, inputs_bytes, inputs_sha256, destination):
     samples, counts, interpretations = [], collections.Counter(), collections.Counter()
     # A single representative cell per component. This does not examine every
     # native cell and cannot establish absence of raster-only gaps elsewhere.
-    for identity in sorted(features):
+    def row_order(identity):
+        point = shape(features[identity]['geometry']).representative_point()
+        return math.floor(project(point.x, point.y, grid.size)[1]), identity
+    # Visit native rows in order to avoid repeatedly decoding distant partitions.
+    # Final output is sorted by stable component ID, independent of traversal.
+    for identity in sorted(features, key=row_order):
         f = features[identity];sample = component_sample(f, grid)
         p = f['properties'];nearby = sorted({n['id'] for n in p['diagnostic_nearby_locations']})
         sample.update(original_component_file=original_files[identity],
@@ -181,10 +190,12 @@ def triage(input_commit, inputs_path, inputs_bytes, inputs_sha256, destination):
                 interpretations['unknown-unextracted-owner-footprint'] += 1
         sample['triage_priority'] = (
             'blocked-or-unmeasured' if p['touches_blocked_tile'] or p['unmeasured_fragment_ids']
+            else 'sampling-unknown' if sample['owner_integer'] is None
             else 'interior-multiple-nearby-unassigned-sample' if not p['touches_reference_shore']
             and len(nearby) >= 2 and sample['status'] == 'centre-in-gap-unassigned'
             else 'other-retained-candidate')
         counts[sample['status']] += 1;samples.append(sample)
+    samples.sort(key=lambda s: s['component_id'])
     pilots = []
     for pilot in r['pilot_components']:
         f = features[pilot['component_id']];g = shape(f['geometry'])
@@ -215,9 +226,6 @@ def triage(input_commit, inputs_path, inputs_bytes, inputs_sha256, destination):
                        'current_contacts': sorted(contacts, key=lambda v: v['location_id']),
                        'source_status': 'native-provider-verification-still-required',
                        'administrative_assignment': None})
-    out = ROOT / safe_path(destination)
-    if out.exists() or any(p.is_symlink() for p in [out, *out.parents]):
-        raise ValueError('Output must be an unused nonsymlink vintage')
     out.mkdir(parents=True)
     outputs = write_parts(out, samples)
     report = {'version': VERSION, 'status': 'partial-diagnostic-only',

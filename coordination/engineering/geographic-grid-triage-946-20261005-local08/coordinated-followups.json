@@ -1,0 +1,883 @@
+{
+  "administrative_assignment": null,
+  "global_remainder": [
+    "Native source-backed classification for ranked candidates beyond the two pilots",
+    "Exhaustive grid-only gap discovery; one-cell samples do not cover every native cell",
+    "Detailed dated hydrography and local registration validation",
+    "Three original blocked physical-reference tiles and five unmeasured fragments",
+    "Reviewed coordinated boundary repairs, release/certificate/content checks and deferred delivery"
+  ],
+  "pilot_cases": [
+    {
+      "acceptance": [
+        "Original native files or lawful restoration receipt, whole-file hashes and exact source-member extraction; no derived atlas polygon relabelled native.",
+        "Separate true land omissions, real water, source-vintage differences, rendering projection and unobserved/subpixel cases.",
+        "Retain point-only contacts and all positive-area numerical flags; any subject-scope narrowing must be justified against unchanged full component.",
+        "Link existing neighboring regional packets without replacing their assigned workloads.",
+        "A repair proposal must cover every changed neighbor, stable identity/crosswalk, current release pins, regression report and certificate/content revalidation obligations; factual uncertainty stays explicit."
+      ],
+      "anchor": [
+        63.207727681,
+        26.8032
+      ],
+      "canonical_anchor_owner_integer": 0,
+      "component_id": "gap:10c95e9f3b4b8d93b3ce3145916de2de656527cc706a5f64b323aa680406cefb",
+      "current_contacts": [
+        {
+          "current_feature_sha256": "e3453bbbd2e5fb7ed48a467cb829e61c8940b01eba0ed77197fbfa8fe941b071",
+          "current_footprint_file": {
+            "bytes": 5131824,
+            "hash_kind": "file-bytes",
+            "path": "data/geography/part-11.json",
+            "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+          },
+          "existing_research_issue_numbers": [
+            121
+          ],
+          "kind": "positive-length-boundary",
+          "location_id": "gb:IRN:ADM2:26516999B17111396986996",
+          "name": "Saravan",
+          "parent_id": "framework:province:sistan-and-baluchestan:ed7f0643a0ed",
+          "source_metadata": {
+            "administrative_level": "ADM2",
+            "coverage_version": 1,
+            "framework_match": {
+              "id": "IRN-3247",
+              "overlap": 0.969872,
+              "source": "Natural Earth"
+            },
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "geographic_area_code": "IRN",
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.97667,
+            "geographic_region_code": 34,
+            "granularity_version": 3,
+            "hierarchy_overlap": 0.998872,
+            "hierarchy_source": "gb:IRN:ADM1",
+            "hierarchy_version": 4,
+            "license": "Open Data Commons Open Database License 1.0",
+            "original_geometry_sha256": "d6b0610deddfc45400dad3a749e3b6a787723395498a9fc4da5034fe2c1481c9",
+            "original_id": "26516999B17111396986996",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "parent_source_level": "ADM1",
+            "reference_owner_id": "owner:Q794",
+            "reference_polity": "Iran",
+            "reference_polity_evidence": {
+              "classification": "Sovereign country",
+              "note": null,
+              "reference_territory": "Iran",
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "uncertainty": false
+            },
+            "reference_polity_status": "reference",
+            "reference_version": 3,
+            "reference_year": "2017",
+            "regional_match": {
+              "method": "reference-territory-constrained overlap",
+              "overlap": 0.969872,
+              "reference_iso": "IRN",
+              "source_id": "IRN-3247"
+            },
+            "remote_version": 1,
+            "representative_point": [
+              62.456378119764764,
+              27.33035
+            ],
+            "selection_reason": "Shahrestan county/city territories; bakhsh are subdistricts.",
+            "semantic_review": {
+              "continent": "Asia",
+              "decision_index": 2087,
+              "evidence_file": "geographic-decisions",
+              "status": "open"
+            },
+            "semantic_version": 1,
+            "source_id": "gb:IRN:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_role": "Shahrestan",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IRN/ADM2/geoBoundaries-IRN-ADM2.geojson",
+            "topology_conflicts": 3,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "topology_reconciled": true,
+            "topology_version": 1
+          }
+        },
+        {
+          "current_feature_sha256": "13b715336e2a6aa2f13864350f7eb25dd589776bdd1dbe3a96272bcdf16b3d7d",
+          "current_footprint_file": {
+            "bytes": 4945828,
+            "hash_kind": "file-bytes",
+            "path": "data/geography/part-17.json",
+            "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+          },
+          "existing_research_issue_numbers": [
+            115
+          ],
+          "kind": "positive-length-boundary",
+          "location_id": "gb:PAK:ADM2:60131773B78019453337506",
+          "name": "Panjgur",
+          "parent_id": "framework:province:balochistan:c6b6e17e4739",
+          "source_metadata": {
+            "administrative_level": "ADM2",
+            "coverage_version": 1,
+            "framework_match": {
+              "id": "PAK-1108",
+              "overlap": 0.999068,
+              "source": "Natural Earth"
+            },
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "geographic_area_code": "PAK",
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.99008,
+            "geographic_region_code": 40,
+            "granularity_version": 3,
+            "hierarchy_overlap": 0.999991,
+            "hierarchy_source": "gb:PAK:ADM1",
+            "hierarchy_version": 4,
+            "license": "Public Domain",
+            "original_geometry_sha256": "f946b0d17c0696747fbe0a263f98f6e528722c301f2de823cba008c303776b13",
+            "original_id": "60131773B78019453337506",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "parent_source_level": "ADM1",
+            "reference_owner_id": "owner:Q843",
+            "reference_polity": "Pakistan",
+            "reference_polity_evidence": {
+              "classification": "Sovereign country",
+              "note": null,
+              "reference_territory": "Pakistan",
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "uncertainty": false
+            },
+            "reference_polity_status": "reference",
+            "reference_version": 3,
+            "reference_year": "2019",
+            "regional_match": {
+              "method": "reference-territory-constrained overlap",
+              "overlap": 0.999068,
+              "reference_iso": "PAK",
+              "source_id": "PAK-1108"
+            },
+            "remote_version": 1,
+            "representative_point": [
+              64.26623468961101,
+              26.74705
+            ],
+            "selection_reason": "Districts; tehsils are subordinate subdivisions.",
+            "semantic_review": {
+              "continent": "Asia",
+              "decision_index": 607,
+              "evidence_file": "geographic-decisions",
+              "status": "open"
+            },
+            "semantic_version": 1,
+            "source_id": "gb:PAK:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_role": "Districts",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PAK/ADM2/geoBoundaries-PAK-ADM2.geojson",
+            "topology_conflicts": 1,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "topology_reconciled": true,
+            "topology_version": 1
+          }
+        }
+      ],
+      "exact_current_contact_subject_ids": [
+        "gb:IRN:ADM2:26516999B17111396986996",
+        "gb:PAK:ADM2:60131773B78019453337506"
+      ],
+      "existing_research_issues": [
+        115,
+        121
+      ],
+      "grid_manifest_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "id": "iran-pakistan-native-border-source-review",
+      "lane": "engineering",
+      "later_integration_gate": "Distinct evidence/geometry review and regression tests before ordinary merge; verified release/certificates/content revalidation before live adoption. No direct deployment request.",
+      "live_work": false,
+      "max_prs": 3,
+      "native_provider_verified": false,
+      "reference_commit": "44d699c44e0e61402e39d6e1270a2af903801d8b",
+      "release_id": "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+      "scope": "Coordinate both sides of this exact retained component. Read the existing research packets without modifying their scopes. Restore/hash/licence original administrative geometry for exact source members on both sides; compare current and native shapes, source dates and projection. Retain independent physical-water/date/registration uncertainty. Stage a mutually consistent sourced proposal or explicit unknown with exact affected neighbor IDs; no live writes, publication or unilateral fill."
+    },
+    {
+      "acceptance": [
+        "Original native files or lawful restoration receipt, whole-file hashes and exact source-member extraction; no derived atlas polygon relabelled native.",
+        "Separate true land omissions, real water, source-vintage differences, rendering projection and unobserved/subpixel cases.",
+        "Retain point-only contacts and all positive-area numerical flags; any subject-scope narrowing must be justified against unchanged full component.",
+        "Link existing neighboring regional packets without replacing their assigned workloads.",
+        "A repair proposal must cover every changed neighbor, stable identity/crosswalk, current release pins, regression report and certificate/content revalidation obligations; factual uncertainty stays explicit."
+      ],
+      "anchor": [
+        -6.936597423006788,
+        39.864256315736014
+      ],
+      "canonical_anchor_owner_integer": 0,
+      "component_id": "gap:ad2052defbeba8e89287bcc4344e641225c6579f9afd584497b381fe8fd8eedc",
+      "current_contacts": [
+        {
+          "current_feature_sha256": "35890367522e7fdbd3907f64393a24745778f4c8129a0af373d5f247d24dc278",
+          "current_footprint_file": {
+            "bytes": 6613963,
+            "hash_kind": "file-bytes",
+            "path": "data/geography/part-28.json",
+            "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+          },
+          "existing_research_issue_numbers": [
+            243
+          ],
+          "kind": "positive-length-boundary",
+          "location_id": "atlas:district:ESP-1003:a5622946",
+          "name": "Brozas",
+          "parent_id": "framework:province:caceres:19c64f4a7f11",
+          "source_metadata": {
+            "administrative_level": "MAPA agricultural district; separately mapped major cities excluded",
+            "coverage_version": 1,
+            "framework_match": {
+              "id": "ESP-5811",
+              "overlap": 1.0,
+              "source": "Natural Earth"
+            },
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "hierarchy_source": "gb:ESP:ADM2",
+            "hierarchy_version": 4,
+            "license": "Underlying source licenses retained in semantic-report.json",
+            "location_basis": "MAPA agricultural district; separately mapped major cities excluded",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "reference_owner_id": "owner:Q29",
+            "reference_polity": "Spain",
+            "reference_polity_evidence": {
+              "classification": "Sovereign country",
+              "note": null,
+              "reference_territory": "Spain",
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "uncertainty": false
+            },
+            "reference_polity_status": "reference",
+            "reference_version": 3,
+            "reference_year": "Undated modern reference",
+            "regional_match": {
+              "method": "reference-territory-constrained overlap",
+              "overlap": 1.0,
+              "reference_iso": "ESP",
+              "source_id": "ESP-5811"
+            },
+            "remote_version": 1,
+            "representative_point": [
+              -6.802379769475358,
+              39.726600000000005
+            ],
+            "search_aliases": [
+              "Aceh\u00fache",
+              "Alc\u00e1ntara",
+              "Brozas",
+              "Ceclav\u00edn",
+              "Mata de Alc\u00e1ntara",
+              "Navas del Madro\u00f1o",
+              "Piedras Albas",
+              "Villa del Rey",
+              "Zarza la Mayor"
+            ],
+            "semantic_review": {
+              "continent": "Europe",
+              "decision_index": 880,
+              "evidence_file": "geographic-decisions",
+              "status": "open"
+            },
+            "semantic_version": 1,
+            "source_id": "atlas:district:ESP-1003:a5622946",
+            "source_member_ids": [
+              "gb:ESP:ADM3:28895703B1835624156930",
+              "gb:ESP:ADM3:28895703B82548737542812",
+              "gb:ESP:ADM3:28895703B3804507234292",
+              "gb:ESP:ADM3:28895703B1282501153922",
+              "gb:ESP:ADM3:28895703B48826752630847",
+              "gb:ESP:ADM3:28895703B85095494640837",
+              "gb:ESP:ADM3:28895703B67929325166276",
+              "gb:ESP:ADM3:28895703B30158793681569",
+              "gb:ESP:ADM3:28895703B7779734299381"
+            ],
+            "source_name": "Atlas source aggregation",
+            "source_url": "https://sig.mapa.gob.es/arcgis/rest/services/25830/comunComarcasAgrarias/MapServer/2",
+            "topology_version": 1
+          }
+        },
+        {
+          "current_feature_sha256": "f734fe1efe233e4dc7efe312b3c64353f71708cc6653656bd572da8bfce14271",
+          "current_footprint_file": {
+            "bytes": 6613963,
+            "hash_kind": "file-bytes",
+            "path": "data/geography/part-28.json",
+            "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+          },
+          "existing_research_issue_numbers": [
+            243
+          ],
+          "kind": "positive-length-boundary",
+          "location_id": "atlas:district:ESP-1004:a5622946",
+          "name": "Valencia De Alcantara",
+          "parent_id": "framework:province:caceres:19c64f4a7f11",
+          "source_metadata": {
+            "administrative_level": "MAPA agricultural district; separately mapped major cities excluded",
+            "coverage_version": 1,
+            "framework_match": {
+              "id": "ESP-5811",
+              "overlap": 0.996354,
+              "source": "Natural Earth"
+            },
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "hierarchy_source": "gb:ESP:ADM2",
+            "hierarchy_version": 4,
+            "license": "Underlying source licenses retained in semantic-report.json",
+            "location_basis": "MAPA agricultural district; separately mapped major cities excluded",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "reference_owner_id": "owner:Q29",
+            "reference_polity": "Spain",
+            "reference_polity_evidence": {
+              "classification": "Sovereign country",
+              "note": null,
+              "reference_territory": "Spain",
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "uncertainty": false
+            },
+            "reference_polity_status": "reference",
+            "reference_version": 3,
+            "reference_year": "Undated modern reference",
+            "regional_match": {
+              "method": "reference-territory-constrained overlap",
+              "overlap": 0.996354,
+              "reference_iso": "ESP",
+              "source_id": "ESP-5811"
+            },
+            "remote_version": 1,
+            "representative_point": [
+              -7.070710126582265,
+              39.464749999999995
+            ],
+            "search_aliases": [
+              "Carbajo",
+              "Cedillo",
+              "Herrera de Alc\u00e1ntara",
+              "Herreruela",
+              "Membr\u00edo",
+              "Salorino",
+              "Santiago de Alc\u00e1ntara",
+              "Valencia de Alc\u00e1ntara",
+              "ValenciaDeAlcantara"
+            ],
+            "semantic_review": {
+              "continent": "Europe",
+              "decision_index": 880,
+              "evidence_file": "geographic-decisions",
+              "status": "open"
+            },
+            "semantic_version": 1,
+            "source_id": "atlas:district:ESP-1004:a5622946",
+            "source_member_ids": [
+              "gb:ESP:ADM3:28895703B13140653225823",
+              "gb:ESP:ADM3:28895703B14062142060065",
+              "gb:ESP:ADM3:28895703B53394348397471",
+              "gb:ESP:ADM3:28895703B10780329116174",
+              "gb:ESP:ADM3:28895703B338875182194",
+              "gb:ESP:ADM3:28895703B70249451952675",
+              "gb:ESP:ADM3:28895703B63318736662408",
+              "gb:ESP:ADM3:28895703B27168998160281"
+            ],
+            "source_name": "Atlas source aggregation",
+            "source_url": "https://sig.mapa.gob.es/arcgis/rest/services/25830/comunComarcasAgrarias/MapServer/2",
+            "topology_version": 1
+          }
+        },
+        {
+          "current_feature_sha256": "1306e2048a70d7eaf449a70b252910759e8277c6566a36d7eba27f218cf6ca03",
+          "current_footprint_file": {
+            "bytes": 6613963,
+            "hash_kind": "file-bytes",
+            "path": "data/geography/part-28.json",
+            "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+          },
+          "existing_research_issue_numbers": [
+            243
+          ],
+          "kind": "positive-area-intersection-flag",
+          "location_id": "atlas:district:ESP-1010:a5622946",
+          "name": "Coria",
+          "parent_id": "framework:province:caceres:19c64f4a7f11",
+          "source_metadata": {
+            "administrative_level": "MAPA agricultural district; separately mapped major cities excluded",
+            "coverage_version": 1,
+            "framework_match": {
+              "id": "ESP-5811",
+              "overlap": 0.995164,
+              "source": "Natural Earth"
+            },
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "hierarchy_source": "gb:ESP:ADM2",
+            "hierarchy_version": 4,
+            "license": "Underlying source licenses retained in semantic-report.json",
+            "location_basis": "MAPA agricultural district; separately mapped major cities excluded",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "reference_owner_id": "owner:Q29",
+            "reference_polity": "Spain",
+            "reference_polity_evidence": {
+              "classification": "Sovereign country",
+              "note": null,
+              "reference_territory": "Spain",
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "uncertainty": false
+            },
+            "reference_polity_status": "reference",
+            "reference_version": 3,
+            "reference_year": "Undated modern reference",
+            "regional_match": {
+              "method": "reference-territory-constrained overlap",
+              "overlap": 0.995164,
+              "reference_iso": "ESP",
+              "source_id": "ESP-5811"
+            },
+            "remote_version": 1,
+            "representative_point": [
+              -6.634708186026936,
+              40.0479
+            ],
+            "search_aliases": [
+              "Acebo",
+              "Cachorrilla",
+              "Cadalso",
+              "Calzadilla",
+              "Casas de Don G\u00f3mez",
+              "Casillas de Coria",
+              "Cilleros",
+              "Coria",
+              "Descargamar\u00eda",
+              "Eljas",
+              "Gata",
+              "Guijo de Coria",
+              "Guijo de Galisteo",
+              "Hern\u00e1n-P\u00e9rez",
+              "Holguera",
+              "Hoyos",
+              "Hu\u00e9laga",
+              "Moraleja",
+              "Morcillo",
+              "Pedroso de Acim",
+              "Perales del Puerto",
+              "Pescueza",
+              "Portaje",
+              "Portezuelo",
+              "Pozuelo de Zarz\u00f3n",
+              "Riolobos",
+              "Robledillo de Gata",
+              "San Mart\u00edn de Trevejo",
+              "Santib\u00e1\u00f1ez el Alto",
+              "Torre de Don Miguel",
+              "Torrecilla de los \u00c1ngeles",
+              "Torrejoncillo",
+              "Valverde del Fresno",
+              "Vegaviana",
+              "Villa del Campo",
+              "Villamiel",
+              "Villanueva de la Sierra",
+              "Villasbuenas de Gata"
+            ],
+            "semantic_review": {
+              "continent": "Europe",
+              "decision_index": 880,
+              "evidence_file": "geographic-decisions",
+              "status": "open"
+            },
+            "semantic_version": 1,
+            "source_id": "atlas:district:ESP-1010:a5622946",
+            "source_member_ids": [
+              "gb:ESP:ADM3:28895703B28522931824552",
+              "gb:ESP:ADM3:28895703B99282973116256",
+              "gb:ESP:ADM3:28895703B54879014591619",
+              "gb:ESP:ADM3:28895703B53699708324201",
+              "gb:ESP:ADM3:28895703B5292882314031",
+              "gb:ESP:ADM3:28895703B23050862381315",
+              "gb:ESP:ADM3:28895703B53185227122602",
+              "gb:ESP:ADM3:28895703B87864629930018",
+              "gb:ESP:ADM3:28895703B51993338328555",
+              "gb:ESP:ADM3:28895703B81055151763379",
+              "gb:ESP:ADM3:28895703B97931593221615",
+              "gb:ESP:ADM3:28895703B69540066067597",
+              "gb:ESP:ADM3:28895703B22467911559292",
+              "gb:ESP:ADM3:28895703B72781944566556",
+              "gb:ESP:ADM3:28895703B36482302042061",
+              "gb:ESP:ADM3:28895703B19284280025539",
+              "gb:ESP:ADM3:28895703B67321888215102",
+              "gb:ESP:ADM3:28895703B22637664262919",
+              "gb:ESP:ADM3:28895703B43757112145878",
+              "gb:ESP:ADM3:28895703B63784014975340",
+              "gb:ESP:ADM3:28895703B72207068340135",
+              "gb:ESP:ADM3:28895703B22317665421242",
+              "gb:ESP:ADM3:28895703B83987940384040",
+              "gb:ESP:ADM3:28895703B78711733350131",
+              "gb:ESP:ADM3:28895703B89170657955856",
+              "gb:ESP:ADM3:28895703B83025870993522",
+              "gb:ESP:ADM3:28895703B57593189965134",
+              "gb:ESP:ADM3:28895703B90364109035892",
+              "gb:ESP:ADM3:28895703B65721961147794",
+              "gb:ESP:ADM3:28895703B30828392830239",
+              "gb:ESP:ADM3:28895703B22802032603031",
+              "gb:ESP:ADM3:28895703B12043619386201",
+              "gb:ESP:ADM3:28895703B57205199972307",
+              "gb:ESP:ADM3:28895703B74750764283942",
+              "gb:ESP:ADM3:28895703B14873712777227",
+              "gb:ESP:ADM3:28895703B30805816994528",
+              "gb:ESP:ADM3:28895703B7505629736115",
+              "gb:ESP:ADM3:28895703B10478549218083"
+            ],
+            "source_name": "Atlas source aggregation",
+            "source_url": "https://sig.mapa.gob.es/arcgis/rest/services/25830/comunComarcasAgrarias/MapServer/2",
+            "topology_version": 1
+          }
+        },
+        {
+          "current_feature_sha256": "65347c03bdaa9749ec1f08e1bd5f005797cff5ce159813aaf81199cd6a94e6b8",
+          "current_footprint_file": {
+            "bytes": 4583022,
+            "hash_kind": "file-bytes",
+            "path": "data/geography/part-19.json",
+            "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+          },
+          "existing_research_issue_numbers": [
+            242
+          ],
+          "kind": "positive-length-boundary",
+          "location_id": "gb:PRT:ADM2:2272694B24025236019409",
+          "name": "Nisa",
+          "parent_id": "framework:province:portalegre:3c2b106a57a4",
+          "source_metadata": {
+            "administrative_level": "ADM2",
+            "coverage_version": 1,
+            "framework_match": {
+              "id": "PRT-747",
+              "overlap": 0.752979,
+              "source": "Natural Earth"
+            },
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "geographic_area_code": "POR",
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 1.0,
+            "geographic_region_code": 12,
+            "granularity_version": 3,
+            "hierarchy_overlap": 0.666062,
+            "hierarchy_source": "gb:PRT:ADM1",
+            "hierarchy_version": 4,
+            "license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+            "original_geometry_sha256": "1910e3ca9c3c3fcaebfdeee2868c083730585835f9d6f26c22cd9ba014a87c42",
+            "original_id": "2272694B24025236019409",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "parent_source_level": "ADM1",
+            "reference_owner_id": "owner:Q45",
+            "reference_polity": "Portugal",
+            "reference_polity_evidence": {
+              "classification": "Sovereign country",
+              "note": null,
+              "reference_territory": "Portugal",
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "uncertainty": false
+            },
+            "reference_polity_status": "reference",
+            "reference_version": 3,
+            "reference_year": "2020",
+            "regional_match": {
+              "method": "reference-territory-constrained overlap",
+              "overlap": 0.752979,
+              "reference_iso": "PRT",
+              "source_id": "PRT-747"
+            },
+            "remote_version": 1,
+            "representative_point": [
+              -7.727334008208883,
+              39.56529999999999
+            ],
+            "selection_reason": "Named gbOpen territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "semantic_review": {
+              "continent": "Europe",
+              "decision_index": 648,
+              "evidence_file": "geographic-decisions",
+              "status": "open"
+            },
+            "semantic_version": 1,
+            "source_id": "gb:PRT:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_role": "Municipality",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/90a1d52/releaseData/gbOpen/PRT/ADM2/geoBoundaries-PRT-ADM2.geojson",
+            "topology_conflicts": 1,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "topology_reconciled": true,
+            "topology_version": 1
+          }
+        },
+        {
+          "current_feature_sha256": "3aaa7c86a11d93ed08bd43187be3fff5a617cac7ce85383e5c500fefa64da40d",
+          "current_footprint_file": {
+            "bytes": 4583022,
+            "hash_kind": "file-bytes",
+            "path": "data/geography/part-19.json",
+            "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+          },
+          "existing_research_issue_numbers": [
+            242
+          ],
+          "kind": "positive-length-boundary",
+          "location_id": "gb:PRT:ADM2:2272694B40601521893357",
+          "name": "Idanha-a-Nova",
+          "parent_id": "framework:province:castelo-branco:0229cb05ada5",
+          "source_metadata": {
+            "administrative_level": "ADM2",
+            "coverage_version": 1,
+            "framework_match": {
+              "id": "PRT-751",
+              "overlap": 0.994053,
+              "source": "Natural Earth"
+            },
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "geographic_area_code": "POR",
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 0.99921,
+            "geographic_region_code": 12,
+            "granularity_version": 3,
+            "hierarchy_overlap": 0.999058,
+            "hierarchy_source": "gb:PRT:ADM1",
+            "hierarchy_version": 4,
+            "license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+            "original_geometry_sha256": "101341aa49ff41204c9f549cc7fed0601cc50abe0717f593f71a5b1f043a373e",
+            "original_id": "2272694B40601521893357",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "parent_source_level": "ADM1",
+            "reference_owner_id": "owner:Q45",
+            "reference_polity": "Portugal",
+            "reference_polity_evidence": {
+              "classification": "Sovereign country",
+              "note": null,
+              "reference_territory": "Portugal",
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "uncertainty": false
+            },
+            "reference_polity_status": "reference",
+            "reference_version": 3,
+            "reference_year": "2020",
+            "regional_match": {
+              "method": "reference-territory-constrained overlap",
+              "overlap": 0.994053,
+              "reference_iso": "PRT",
+              "source_id": "PRT-751"
+            },
+            "remote_version": 1,
+            "representative_point": [
+              -7.14056871559633,
+              39.911550000000005
+            ],
+            "selection_reason": "Named gbOpen territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "semantic_review": {
+              "continent": "Europe",
+              "decision_index": 650,
+              "evidence_file": "geographic-decisions",
+              "status": "open"
+            },
+            "semantic_version": 1,
+            "source_id": "gb:PRT:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_role": "Municipality",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/90a1d52/releaseData/gbOpen/PRT/ADM2/geoBoundaries-PRT-ADM2.geojson",
+            "topology_conflicts": 2,
+            "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+            "topology_reconciled": true,
+            "topology_version": 1
+          }
+        },
+        {
+          "current_feature_sha256": "d7a505eb3bab5f3318b1242e118238cc1565320fcb526af97d8ce7ccb8c47caa",
+          "current_footprint_file": {
+            "bytes": 4583022,
+            "hash_kind": "file-bytes",
+            "path": "data/geography/part-19.json",
+            "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+          },
+          "existing_research_issue_numbers": [
+            242
+          ],
+          "kind": "positive-length-boundary",
+          "location_id": "gb:PRT:ADM2:2272694B64876814145037",
+          "name": "Castelo Branco",
+          "parent_id": "framework:province:castelo-branco:0229cb05ada5",
+          "source_metadata": {
+            "administrative_level": "ADM2",
+            "coverage_version": 1,
+            "framework_match": {
+              "id": "PRT-751",
+              "overlap": 1.0,
+              "source": "Natural Earth"
+            },
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "geographic_area_code": "POR",
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 1.0,
+            "geographic_region_code": 12,
+            "granularity_version": 3,
+            "hierarchy_overlap": 1.0,
+            "hierarchy_source": "gb:PRT:ADM1",
+            "hierarchy_version": 4,
+            "license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+            "original_id": "2272694B64876814145037",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "parent_source_level": "ADM1",
+            "reference_owner_id": "owner:Q45",
+            "reference_polity": "Portugal",
+            "reference_polity_evidence": {
+              "classification": "Sovereign country",
+              "note": null,
+              "reference_territory": "Portugal",
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "uncertainty": false
+            },
+            "reference_polity_status": "reference",
+            "reference_version": 3,
+            "reference_year": "2020",
+            "regional_match": {
+              "method": "reference-territory-constrained overlap",
+              "overlap": 1.0,
+              "reference_iso": "PRT",
+              "source_id": "PRT-751"
+            },
+            "remote_version": 1,
+            "representative_point": [
+              -7.595268446956255,
+              39.89505
+            ],
+            "search_aliases": [
+              "Castelo Branco"
+            ],
+            "selection_reason": "Named gbOpen territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "semantic_review": {
+              "continent": "Europe",
+              "decision_index": 650,
+              "evidence_file": "geographic-decisions",
+              "status": "open"
+            },
+            "semantic_version": 1,
+            "source_id": "gb:PRT:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_role": "Municipality",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/90a1d52/releaseData/gbOpen/PRT/ADM2/geoBoundaries-PRT-ADM2.geojson",
+            "topology_version": 1
+          }
+        },
+        {
+          "current_feature_sha256": "cc875c128c8f723f4c1bc36ad305fb7be612a6e774ac65787fd89ee44d23a3e0",
+          "current_footprint_file": {
+            "bytes": 4583022,
+            "hash_kind": "file-bytes",
+            "path": "data/geography/part-19.json",
+            "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+          },
+          "existing_research_issue_numbers": [
+            242
+          ],
+          "kind": "point-only-ambiguous",
+          "location_id": "gb:PRT:ADM2:2272694B74999887486897",
+          "name": "Vila Velha de Rodao",
+          "parent_id": "framework:province:castelo-branco:0229cb05ada5",
+          "source_metadata": {
+            "administrative_level": "ADM2",
+            "coverage_version": 1,
+            "framework_match": {
+              "id": "PRT-751",
+              "overlap": 1.0,
+              "source": "Natural Earth"
+            },
+            "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+            "geographic_area_code": "POR",
+            "geographic_match": "largest source overlap",
+            "geographic_overlap": 1.0,
+            "geographic_region_code": 12,
+            "granularity_version": 3,
+            "hierarchy_overlap": 1.0,
+            "hierarchy_source": "gb:PRT:ADM1",
+            "hierarchy_version": 4,
+            "license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+            "original_id": "2272694B74999887486897",
+            "parent_match": "Named source administrative unit grouped within this geographic area",
+            "parent_source_level": "ADM1",
+            "reference_owner_id": "owner:Q45",
+            "reference_polity": "Portugal",
+            "reference_polity_evidence": {
+              "classification": "Sovereign country",
+              "note": null,
+              "reference_territory": "Portugal",
+              "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+              "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+              "uncertainty": false
+            },
+            "reference_polity_status": "reference",
+            "reference_version": 3,
+            "reference_year": "2020",
+            "regional_match": {
+              "method": "reference-territory-constrained overlap",
+              "overlap": 1.0,
+              "reference_iso": "PRT",
+              "source_id": "PRT-751"
+            },
+            "remote_version": 1,
+            "representative_point": [
+              -7.680104131147541,
+              39.71495
+            ],
+            "selection_reason": "Named gbOpen territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+            "semantic_review": {
+              "continent": "Europe",
+              "decision_index": 650,
+              "evidence_file": "geographic-decisions",
+              "status": "open"
+            },
+            "semantic_version": 1,
+            "source_id": "gb:PRT:ADM2",
+            "source_name": "geoBoundaries gbOpen",
+            "source_role": "Municipality",
+            "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/90a1d52/releaseData/gbOpen/PRT/ADM2/geoBoundaries-PRT-ADM2.geojson",
+            "topology_version": 1
+          }
+        }
+      ],
+      "exact_current_contact_subject_ids": [
+        "atlas:district:ESP-1003:a5622946",
+        "atlas:district:ESP-1004:a5622946",
+        "atlas:district:ESP-1010:a5622946",
+        "gb:PRT:ADM2:2272694B24025236019409",
+        "gb:PRT:ADM2:2272694B40601521893357",
+        "gb:PRT:ADM2:2272694B64876814145037",
+        "gb:PRT:ADM2:2272694B74999887486897"
+      ],
+      "existing_research_issues": [
+        242,
+        243
+      ],
+      "grid_manifest_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "id": "portugal-spain-native-border-source-review",
+      "lane": "engineering",
+      "later_integration_gate": "Distinct evidence/geometry review and regression tests before ordinary merge; verified release/certificates/content revalidation before live adoption. No direct deployment request.",
+      "live_work": false,
+      "max_prs": 3,
+      "native_provider_verified": false,
+      "reference_commit": "44d699c44e0e61402e39d6e1270a2af903801d8b",
+      "release_id": "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+      "scope": "Coordinate both sides of this exact retained component. Read the existing research packets without modifying their scopes. Restore/hash/licence original administrative geometry for exact source members on both sides; compare current and native shapes, source dates and projection. Retain independent physical-water/date/registration uncertainty. Stage a mutually consistent sourced proposal or explicit unknown with exact affected neighbor IDs; no live writes, publication or unilateral fill."
+    }
+  ],
+  "reference_commit": "44d699c44e0e61402e39d6e1270a2af903801d8b",
+  "status": "proposed-bounded-followups",
+  "triage_report_sha256": "ba7a4b190683f8436109b6159359727a2300053ac42a96dcdd53ebef7f092b20",
+  "version": 1
+}

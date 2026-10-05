@@ -147,6 +147,16 @@ class GridTests(unittest.TestCase):
         s, m = fixture()
         with self.assertRaises(ValueError): CanonicalGrid(s, m, max_owner_id=1)
 
+    def test_valid_ulp_thin_polygon_retained_as_sampling_unknown(self):
+        s, m = fixture();g = CanonicalGrid(s, m)
+        polygon = box(1, 0, math.nextafter(1, 2), 2)
+        self.assertTrue(polygon.is_valid)
+        self.assertGreater(polygon.area, 0)
+        r = component_sample(feature(polygon), g)
+        self.assertEqual(r['status'], 'unknown-no-strict-representative-point')
+        self.assertIsNone(r['owner_integer'])
+        self.assertIsNone(r['cell'])
+
     def test_true_grid_only_control_is_flagged(self):
         sample = {'cell': [3, 3], 'cell_centre_lonlat': list(cell_centre(3, 3, 8)), 'owner_integer': 0}
         lon, lat = sample['cell_centre_lonlat']
@@ -157,6 +167,10 @@ class GridTests(unittest.TestCase):
         s, m = fixture();g = CanonicalGrid(s, m)
         with self.assertRaises(ValueError):
             component_sample(feature(Polygon([(0, 0), (3, 3), (0, 3), (3, 0), (0, 0)])), g)
+
+    def test_row_allocation_budget_rejected_before_decoding(self):
+        s, m = fixture();m['size'] = 2 ** 30;m['coordinateBits'] = 30
+        with self.assertRaises(ValueError): CanonicalGrid(s, m)
 
     def test_nonfinite_coordinates_rejected(self):
         with self.assertRaises(ValueError): project(float('nan'), 3, 8)

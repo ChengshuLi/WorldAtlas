@@ -44,7 +44,7 @@ class CanonicalGrid:
         self.source, self.manifest, self.root = source, manifest, root
         self.size, self.bits = manifest['size'], manifest['coordinateBits']
         if (manifest.get('version') != 2 or type(self.size) is not int
-                or not 2 <= self.size <= 2 ** 31
+                or not 2 <= self.size <= MAX_FILE_BYTES // 8
                 or self.bits != math.ceil(math.log2(self.size))):
             raise ValueError('Unsupported canonical size/packing')
         self.mask = 2 ** self.bits - 1
@@ -161,7 +161,11 @@ def component_sample(feature, grid):
         raise ValueError('Unchanged valid component polygon required')
     point = g.representative_point()
     if not g.contains(point):
-        raise ValueError('Representative point is not strictly inside original component')
+        return {'component_id': feature['id'], 'representative_lonlat': [point.x, point.y],
+                'cell': None, 'cell_centre_lonlat': None, 'cell_centre_strictly_inside': False,
+                'owner_integer': None, 'status': 'unknown-no-strict-representative-point',
+                'sample_scope': 'No strictly interior floating-point sample; original geometry retained',
+                'administrative_assignment': None}
     px, py = project(point.x, point.y, grid.size)
     x, y = math.floor(px), math.floor(py)
     if not (0 <= x < grid.size and 0 <= y < grid.size):
