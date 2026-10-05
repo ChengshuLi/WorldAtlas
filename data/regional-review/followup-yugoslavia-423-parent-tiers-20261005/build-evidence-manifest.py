@@ -33,12 +33,12 @@ world=json.loads(git('data/world-index.json'))
 assert 'geography/part-22.json' in world['parts']
 feature_ids={x.get('id',x.get('properties',{}).get('id')) for x in json.loads(git('data/geography/part-22.json'))['features']}
 assert set(ids)<=feature_ids
-pins={'issue_423_scope':B[scope_path]['sha256'],'issue_423_unit_assessments':B[unit_path]['sha256'],'issue_423_parent_assessments':B[prov_path]['sha256'],
+pins={scope_path:B[scope_path]['sha256'],unit_path:B[unit_path]['sha256'],prov_path:B[prov_path]['sha256'],
 'world_index':B['data/world-index.json']['sha256'],'hierarchy':B['data/hierarchy.json']['sha256'],'source_registry':B['data/administrative-sources.json']['sha256'],
 'current_geographic_release_manifest':B['data/geographic-releases/current-manifest.json']['sha256'],'macro_certificate':B['data/macro-foundation/macro-certificate.json']['sha256'],
 'approved_boundary_decisions':B['data/macro-foundation/approved-boundary-decisions.json']['sha256'],'regional_handoffs_gzip':B['data/macro-foundation/regional-handoffs.json.gz']['sha256']}
 pin_files={k:v for k,v in zip(pins,['', '', '', '', '', '', '', '', '', ''])}
-pin_files={'issue_423_scope':scope_path,'issue_423_unit_assessments':unit_path,'issue_423_parent_assessments':prov_path,
+pin_files={scope_path:scope_path,unit_path:unit_path,prov_path:prov_path,
 'world_index':'data/world-index.json','hierarchy':'data/hierarchy.json','source_registry':'data/administrative-sources.json',
 'current_geographic_release_manifest':'data/geographic-releases/current-manifest.json','macro_certificate':'data/macro-foundation/macro-certificate.json',
 'approved_boundary_decisions':'data/macro-foundation/approved-boundary-decisions.json','regional_handoffs_gzip':'data/macro-foundation/regional-handoffs.json.gz'}
