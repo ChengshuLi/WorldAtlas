@@ -16,7 +16,7 @@
   ],
   "subject_ids_sha256": "24cd732f4d8f0b7abdab633fef4d0166da778451c209e7a94adf9168a3a215d3",
   "baseline": {
-    "commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
+    "commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
     "files": [
       {
         "path": "data/world-index.json",
@@ -104,36 +104,36 @@
       }
     ],
     "pin_files": {
-      "world-index": "data/world-index.json",
-      "hierarchy": "data/hierarchy.json",
-      "current-release-manifest": "data/geographic-releases/current-manifest.json",
-      "source-catalog": "data/administrative-sources.json",
-      "current-membership-inventory": "data/macro-foundation/current-membership-inventory.json.gz",
-      "review-index": "data/macro-foundation/review-index.json",
-      "regional-handoffs": "data/macro-foundation/regional-handoffs.json.gz",
-      "macro-certificate": "data/macro-foundation/macro-certificate.json",
-      "approved-boundary-decisions": "data/macro-foundation/approved-boundary-decisions.json",
-      "geography-part-25": "data/geography/part-25.json",
-      "geography-part-26": "data/geography/part-26.json",
-      "geography-part-27": "data/geography/part-27.json",
-      "geography-part-28": "data/geography/part-28.json",
-      "geography-part-29": "data/geography/part-29.json"
+      "data/world-index.json": "data/world-index.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/geographic-releases/current-manifest.json": "data/geographic-releases/current-manifest.json",
+      "data/administrative-sources.json": "data/administrative-sources.json",
+      "data/macro-foundation/current-membership-inventory.json.gz": "data/macro-foundation/current-membership-inventory.json.gz",
+      "data/macro-foundation/review-index.json": "data/macro-foundation/review-index.json",
+      "data/macro-foundation/regional-handoffs.json.gz": "data/macro-foundation/regional-handoffs.json.gz",
+      "data/macro-foundation/macro-certificate.json": "data/macro-foundation/macro-certificate.json",
+      "data/macro-foundation/approved-boundary-decisions.json": "data/macro-foundation/approved-boundary-decisions.json",
+      "data/geography/part-25.json": "data/geography/part-25.json",
+      "data/geography/part-26.json": "data/geography/part-26.json",
+      "data/geography/part-27.json": "data/geography/part-27.json",
+      "data/geography/part-28.json": "data/geography/part-28.json",
+      "data/geography/part-29.json": "data/geography/part-29.json"
     },
     "pins": {
-      "world-index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
-      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
-      "current-release-manifest": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
-      "source-catalog": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
-      "current-membership-inventory": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
-      "review-index": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
-      "regional-handoffs": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
-      "macro-certificate": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
-      "approved-boundary-decisions": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
-      "geography-part-25": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
-      "geography-part-26": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
-      "geography-part-27": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
-      "geography-part-28": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
-      "geography-part-29": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+      "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/geographic-releases/current-manifest.json": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "data/macro-foundation/current-membership-inventory.json.gz": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "data/macro-foundation/review-index.json": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+      "data/macro-foundation/regional-handoffs.json.gz": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "data/macro-foundation/macro-certificate.json": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "data/macro-foundation/approved-boundary-decisions.json": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+      "data/geography/part-25.json": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "data/geography/part-26.json": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+      "data/geography/part-27.json": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+      "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "data/geography/part-29.json": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
     },
     "subject_files": {
       "gb:USA:ADM2:52423323B58673559392327": "data/geography/part-26.json",
@@ -331,7 +331,7 @@
       "id": "census-georgia-change-notes-2011-2025",
       "url": "https://www.census.gov/programs-surveys/geography/technical-documentation/boundary-change-notes.html",
       "role": "Selected Georgia county and subcounty change-note history, completeness caveat",
-      "vintage": "2011–2025 notes accessed 2026-10-05",
+      "vintage": "2011\u20132025 notes accessed 2026-10-05",
       "retrieved_at": "2026-10-05T15:33:02.965Z",
       "license": {
         "status": "redistributable",
@@ -452,7 +452,7 @@
     {
       "id": "georgia-county-boundary-law-2025",
       "url": "https://georgiacommons.org/code/36-1-1",
-      "role": "General Georgia county boundary laws and line-change/dispute procedures, §§36-1-1, 36-1-2, 36-3-1, 36-3-25",
+      "role": "General Georgia county boundary laws and line-change/dispute procedures, \u00a7\u00a736-1-1, 36-1-2, 36-3-1, 36-3-25",
       "vintage": "Official Code of Georgia Annotated 2025 supplement; section responses accessed 2026-10-05",
       "retrieved_at": "2026-10-05T15:46:30.855Z",
       "license": {
@@ -469,8 +469,8 @@
   "outputs": [
     {
       "path": "data/regional-review/coastal-reference-check-428/REPRODUCTION.md",
-      "bytes": 4013,
-      "sha256": "673467fdd50a5b178602d6e7b9a6937df001ebeb369c69e3c2f368375bdf260d",
+      "bytes": 3996,
+      "sha256": "23b859ac11c34049e730f340f08cd35bc475fb3d2230bd713d7d7a81484b870b",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
@@ -483,36 +483,36 @@
     },
     {
       "path": "data/regional-review/coastal-reference-check-428/findings.md",
-      "bytes": 11082,
-      "sha256": "29d1b34c7ec00cc2b330ba50452d4dfcfa00cc29cceeb574296b6e666d405173",
+      "bytes": 11138,
+      "sha256": "9215deb3fe317bdf5ee443264330a9f854968cfdaf4e68e699d9e1ac5a5d2d25",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
     {
       "path": "data/regional-review/coastal-reference-check-428/issue-snapshot.json",
       "bytes": 5104,
-      "sha256": "a985c1ce8490df8610d4318e8c3e50f094f1978ce42ed7fa4a0f8c4c3c35df6e",
+      "sha256": "4419b20bb0f17be7edf738645621d689b6b0a221d5ac6853056bd94bebac95e1",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
     {
       "path": "data/regional-review/coastal-reference-check-428/reproduce.py",
       "bytes": 5902,
-      "sha256": "cc8cda24392fb290d038dc67a5299d5e0cff3a630c570d65b077a3abb5f388ea",
+      "sha256": "051b7989766516308da6adcbd4bfba7c4c08eeb1a886baf474d55ef4de97fe9d",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
     {
       "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
       "bytes": 23719,
-      "sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4",
+      "sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
     {
       "path": "data/regional-review/coastal-reference-check-428/scope.json",
       "bytes": 800,
-      "sha256": "68bdf3ecd2e9227dfa3b124ff99b8b53fd20a1061b6a86cd77cf243c28285493",
+      "sha256": "546eb16f9c0f88d61d07680b2ae027e1a86ef955fcb4218aa0efceab358d88d7",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
@@ -585,360 +585,360 @@
       "value": 0.770335987,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Chatham:atlas_to_tiger_2025",
       "value": 0.770335987,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Chatham:atlas_to_tiger_2026",
       "value": 0.770335987,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Chatham:tiger_2018_to_tiger_2025",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Chatham:tiger_2025_to_tiger_2026",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Glynn:atlas_to_tiger_2018",
       "value": 0.787632113,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Glynn:atlas_to_tiger_2025",
       "value": 0.787636823,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Glynn:atlas_to_tiger_2026",
       "value": 0.787636823,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Glynn:tiger_2018_to_tiger_2025",
       "value": 0.999994261,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Glynn:tiger_2025_to_tiger_2026",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "McIntosh:atlas_to_tiger_2018",
       "value": 0.834332645,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "McIntosh:atlas_to_tiger_2025",
       "value": 0.834334728,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "McIntosh:atlas_to_tiger_2026",
       "value": 0.834334728,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "McIntosh:tiger_2018_to_tiger_2025",
       "value": 0.999997495,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "McIntosh:tiger_2025_to_tiger_2026",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Camden:atlas_to_tiger_2018",
       "value": 0.864182534,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Camden:atlas_to_tiger_2025",
       "value": 0.864182534,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Camden:atlas_to_tiger_2026",
       "value": 0.864182534,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Camden:tiger_2018_to_tiger_2025",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Camden:tiger_2025_to_tiger_2026",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Liberty:atlas_to_tiger_2018",
       "value": 0.883335278,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Liberty:atlas_to_tiger_2025",
       "value": 0.883319346,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Liberty:atlas_to_tiger_2026",
       "value": 0.883319346,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Liberty:tiger_2018_to_tiger_2025",
       "value": 0.99998317,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Liberty:tiger_2025_to_tiger_2026",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Schley:atlas_to_tiger_2018",
       "value": 0.981944596,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Schley:atlas_to_tiger_2025",
       "value": 0.981944596,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Schley:atlas_to_tiger_2026",
       "value": 0.981944596,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Schley:tiger_2018_to_tiger_2025",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Schley:tiger_2025_to_tiger_2026",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Pike:atlas_to_tiger_2018",
       "value": 0.982322654,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Pike:atlas_to_tiger_2025",
       "value": 0.982322674,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Pike:atlas_to_tiger_2026",
       "value": 0.982322674,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Pike:tiger_2018_to_tiger_2025",
       "value": 0.99999998,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Pike:tiger_2025_to_tiger_2026",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Terrell:atlas_to_tiger_2018",
       "value": 0.988874986,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Terrell:atlas_to_tiger_2025",
       "value": 0.988874986,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Terrell:atlas_to_tiger_2026",
       "value": 0.988874986,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Terrell:tiger_2018_to_tiger_2025",
       "value": 0.999999991,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Terrell:tiger_2025_to_tiger_2026",
       "value": 1.0,
       "unit": "equal-area IoU fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Chatham:tiger2026-minus-atlas-share-of-areawater",
       "value": 0.718162,
       "unit": "fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Glynn:tiger2026-minus-atlas-share-of-areawater",
       "value": 0.726641,
       "unit": "fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "McIntosh:tiger2026-minus-atlas-share-of-areawater",
       "value": 0.655579,
       "unit": "fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Camden:tiger2026-minus-atlas-share-of-areawater",
       "value": 0.675648,
       "unit": "fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     },
     {
       "id": "Liberty:tiger2026-minus-atlas-share-of-areawater",
       "value": 0.769853,
       "unit": "fraction",
       "vintage": "baseline",
-      "evaluation_commit": "f81f77eae61c9e537e7f160fef85b65925359c70",
-      "input_sha256": "09b94107ec7eb911716fb726256f24314e45c2d2614ab2d844df04025861aff4"
+      "evaluation_commit": "aa42ca45e4e687cd109a86cbc40583b77016b8bb",
+      "input_sha256": "895828eb89363d9d3a71843f5c32a45857b43032240484df861e4cdb1dfa6a8e"
     }
   ],
   "summaries": [
@@ -1015,9 +1015,9 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "python3.12 -m venv /tmp/worldatlas-geo980",
-    "/tmp/worldatlas-geo980/bin/python -m pip install -r data/regional-review/regional-review-528e53393a4376b4/source/reproduction-requirements.txt",
-    "/tmp/worldatlas-geo980/bin/python data/regional-review/coastal-reference-check-428/reproduce.py",
+    "python3.12 -m venv .venv-geography",
+    "./.venv-geography/bin/python -m pip install -r data/regional-review/regional-review-528e53393a4376b4/source/reproduction-requirements.txt",
+    "./.venv-geography/bin/python data/regional-review/coastal-reference-check-428/reproduce.py",
     "node scripts/evidence-quality.mjs data/regional-review/coastal-reference-check-428/evidence-quality.json"
   ],
   "change_receipts": [

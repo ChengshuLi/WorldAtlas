@@ -2,7 +2,7 @@
 
 **Issue:** [#980](https://github.com/ChengshuLi/WorldAtlas/issues/980), parent [#428](https://github.com/ChengshuLi/WorldAtlas/issues/428)
 **Research/retrieval date:** 2026-10-05 UTC
-**Baseline:** `f81f77eae61c9e537e7f160fef85b65925359c70` (current `origin/main` used for reproduction after fast-forward from the reserved `8a6a74d194bcde786c03b9acfa4c3b3a92ffc75e`; all issue evidence-quality pins remained byte-identical)
+**Baseline:** `aa42ca45e4e687cd109a86cbc40583b77016b8bb` (current `origin/main` used for reproduction after upstream advances from the reserved `8a6a74d194bcde786c03b9acfa4c3b3a92ffc75e` through `f81f77eae61c9e537e7f160fef85b65925359c70`; all issue evidence-quality pins remained byte-identical)
 **Scope:** the exact eight `gb:USA:ADM2` IDs in `scope.json`; no other county or geography edited.
 
 ## Finding

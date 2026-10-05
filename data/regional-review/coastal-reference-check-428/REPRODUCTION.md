@@ -1,15 +1,15 @@
 # Reproduce issue #980 county checks
 
-Run from repository root in the exact baseline checkout recorded in `scope.json` (commit `f81f77eae61c9e537e7f160fef85b65925359c70`). The geometry program loads Atlas features using `git show` at this immutable commit and reads the retained 2018/2025 source responses in the read-only #428 packet plus the eight-record 2026 response in this directory. It fails if the exact eight IDs are missing or duplicated.
+Run from repository root in the exact baseline checkout recorded in `scope.json` (commit `aa42ca45e4e687cd109a86cbc40583b77016b8bb`). The geometry program loads Atlas features using `git show` at this immutable commit and reads the retained 2018/2025 source responses in the read-only #428 packet plus the eight-record 2026 response in this directory. It fails if the exact eight IDs are missing or duplicated.
 
 ## Environment and commands
 
 Use Python 3.12.14 with the versions pinned by the parent packet's `source/reproduction-requirements.txt` (NumPy 2.3.5, Shapely 2.1.2, pyproj 3.7.2, PyShp 2.3.1, certifi 2026.7.22) and Node.js 24 for receipt reproduction. Geometry results can be regenerated with:
 
 ```sh
-python3.12 -m venv /tmp/worldatlas-geo980
-/tmp/worldatlas-geo980/bin/python -m pip install -r data/regional-review/regional-review-528e53393a4376b4/source/reproduction-requirements.txt
-/tmp/worldatlas-geo980/bin/python data/regional-review/coastal-reference-check-428/reproduce.py
+python3.12 -m venv .venv-geography
+./.venv-geography/bin/python -m pip install -r data/regional-review/regional-review-528e53393a4376b4/source/reproduction-requirements.txt
+./.venv-geography/bin/python data/regional-review/coastal-reference-check-428/reproduce.py
 ```
 
 The program writes `runs/eight-county-comparison.json`, from the retained source bytes. Its equal-area overlays use EPSG:6933 and longitude/latitude source coordinates, matching the #428 comparison method. Source geometries are not edited. Invalid TIGER geometries remain invalid in the source and are passed to `make_valid` only in memory for overlap triage. A shared `worldatlas-evidence-geometry-v1` longitude/latitude axis-order control is run and recorded; the shared land-only area helper is not applied to the Census water-inclusive county polygons.
