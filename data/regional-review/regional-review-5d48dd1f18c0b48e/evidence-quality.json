@@ -427,7 +427,52 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BEN-ADM1/geoBoundaries-BEN-ADM1-metaData.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BEN-ADM1/geoBoundaries-BEN-ADM1.geojson",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BEN-ADM2/geoBoundaries-BEN-ADM2-metaData.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BEN-ADM2/geoBoundaries-BEN-ADM2.geojson",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BFA-ADM2/geoBoundaries-BFA-ADM2-metaData.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BFA-ADM2/geoBoundaries-BFA-ADM2.geojson",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BFA-ADM3/geoBoundaries-BFA-ADM3-metaData.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BFA-ADM3/geoBoundaries-BFA-ADM3.geojson",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/subject-assessments.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/evidence-quality.json",
       "previous_path": null,
       "status": "added"
     }
@@ -487,10 +532,10 @@
       "units": "source features, locations and administrative parent groups"
     },
     {
-      "area_method": "WGS84 straight-source-edge ellipsoidal integral; Shapely planar lon/lat intersection numerator",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326",
-      "description": "Diagnostic source/current and child/parent polygon overlays with positive identity and negative disjoint controls; no geometry is changed and overlaps do not establish legal boundaries.",
+      "description": "Diagnostic source/current and child/parent polygon overlays; Shapely forms the planar longitude/latitude polygon intersection before its area is measured. No geometry is changed and overlaps do not establish legal boundaries.",
       "distance_method": "WGS84 inverse geodesic",
       "helper_version": "worldatlas-evidence-geometry-v1",
       "id": "geographic-overlay",
@@ -583,10 +628,10 @@
       "sha256": "a7d36619c794ce4a9a02f1cd3a13aaa0d60b22e46cdacaac9168608acb41d362"
     },
     {
-      "bytes": 11079,
+      "bytes": 11196,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/build_evidence_manifest.py",
-      "sha256": "ab05e2bb1646ceabf3924f22a5bf491dd0eecec91cde78267c6b50254563d69b"
+      "sha256": "77c262610874ba440a12dcbedbf78038dc23c928a8c977519c3db089adac075f"
     },
     {
       "bytes": 159,
