@@ -30,7 +30,6 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             scripts/classify-deployment-budget.mjs
-            scripts/package-research-inputs.mjs
             package.json
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
@@ -68,8 +67,20 @@ jobs:
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
+      - name: Checkout only Node budget unit inputs
+        if: needs.classify.outputs.full == 'false'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/deployment-budget.mjs
+            scripts/classify-deployment-budget.mjs
+            test/deployment-budget.test.mjs
+            test/deployment-budget-scope.test.mjs
+            .github/workflows/deployment-budget.yml
+            package.json
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
-        if: needs.classify.outputs.full != 'false'
         with:
           node-version: '24'
           cache: ${{ needs.classify.outputs.full != 'false' && 'npm' || '' }}
@@ -83,13 +94,12 @@ jobs:
       - run: python -m pip install -r requirements.txt
         if: needs.classify.outputs.full != 'false'
       - run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs
-        if: needs.classify.outputs.full != 'false'
       - name: Build and enforce archive/file reserves without publishing
         if: needs.classify.outputs.full != 'false'
         run: npm run build:hosted
       - name: Record package rebuild inapplicability
         if: needs.classify.outputs.full == 'false'
-        run: echo 'Package rebuild inapplicable to explicit package-independent coordination/documentation/receipt or unpublished research paths; package inputs and budget controls are unchanged, so their unit tests and compilation are inapplicable. No current package size measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"
+        run: echo 'Package rebuild inapplicable to explicit coordination/documentation/receipt paths; mandatory Node budget/archive unit tests passed. No current package size measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"
       - name: Retain exact file and archive accounting
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

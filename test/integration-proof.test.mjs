@@ -169,3 +169,20 @@ test('non-geography selectors preserve existing profiles without requesting geog
     assert.equal((await select(f)).profile,profile);assert.equal(f.calls.some(route=>route.includes('/issues/')),false);
   }
 });
+
+// Package selection is a coordination control. Exercise its focused contracts
+// when the runner omits application regression; full discovery runs that file
+// separately, so do not register the same tests twice in the full profile.
+if (process.env.INTEGRATION_PROFILE === 'evidence') await import('./deployment-budget-scope.test.mjs');
+
+test('package CI coordination paths use focused tests while builders and runners stay full', () => {
+  for (const filename of ['scripts/classify-deployment-budget.mjs', 'scripts/package-research-inputs.mjs',
+    '.github/workflows/deployment-budget.yml', 'test/deployment-budget-scope.test.mjs']) {
+    assert.equal(integrationProfile('engineering/example', [{filename}]), 'evidence', filename);
+  }
+  for (const filename of ['scripts/build-hosted.mjs', 'scripts/build-static.mjs', 'scripts/deployment-budget.mjs',
+    'scripts/run-integration-tests.mjs', 'src/main.js', 'data/hierarchy.json', 'drizzle/0002.sql']) {
+    assert.equal(integrationProfile('engineering/example', [{filename}]), 'full', filename);
+  }
+  assert.equal(integrationProfile('engineering/example', [{filename:'scripts/classify-deployment-budget.mjs', previous_filename:'src/main.js'}]), 'full');
+});
