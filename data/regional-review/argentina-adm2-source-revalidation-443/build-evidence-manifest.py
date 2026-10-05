@@ -150,8 +150,8 @@ all_paths=sorted(str(p.relative_to(ROOT)) for p in OWN.rglob('*') if p.is_file()
 manifest_path=f'{PACKET}/evidence-quality.json'
 non_table_outputs=[]; outputs=[]; receipts=[]
 for rel in all_paths:
-    if rel==manifest_path:continue
     receipts.append({'path':rel,'status':'added'})
+    if rel==manifest_path:continue
     if rel in source_candidate_paths:continue
     d=desc_candidate(rel)
     if rel.endswith('.csv'):
