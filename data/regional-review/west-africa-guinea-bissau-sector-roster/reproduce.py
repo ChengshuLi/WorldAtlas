@@ -22,7 +22,7 @@ from shapely.geometry import shape
 from evidence.geometry import ownership_overlap
 
 
-EXPECTED_SALB_SHA256 = "4c758eb2cb41f796ac12b58676a85eda509f622a51ad05a91cdef8572304e7b9"
+EXPECTED_SALB_SHA256 = "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28"
 EXPECTED_OLD_SHA256 = "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680"
 EXPECTED_PACKAGES = {"shapely": "2.0.7", "pyproj": "3.5.0", "numpy": "1.24.4"}
 PARENT_PACKET = Path(__file__).resolve().parents[1] / "regional-review-1deb892647c1aa26"

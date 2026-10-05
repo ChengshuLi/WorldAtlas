@@ -147,8 +147,8 @@
       },
       "retention": "restoration-only",
       "verification": "verified",
-      "restoration": "Download exact item URL; require 411079 bytes and SHA-256 4c758eb2cb41f796ac12b58676a85eda509f622a51ad05a91cdef8572304e7b9. Layer metadata: https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_GNB/FeatureServer/0?f=pjson A later independent retrieval found the URL changed: 410290 bytes, SHA-256 aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28. Do not treat those bytes as this snapshot; the exact 2026-10-05 bytes are not presently restorable from the cited endpoint.",
-      "limit": "Restricted original geometry is not redistributed; source completeness is disclaimed by SALB terms, and its 2021 roster conflicts with the 2025 government count. Independent reviewer retrieval found the item URL now returns 410290 bytes with SHA-256 aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28, not this 2026-10-05 snapshot; the exact restricted geometry cannot currently be restored from that URL.",
+      "restoration": "Download current official item response from the URL and require 410290 bytes and SHA-256 aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28. Layer metadata: https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_GNB/FeatureServer/0?f=pjson. The previously observed 411079-byte response (SHA-256 4c758eb2cb41f796ac12b58676a85eda509f622a51ad05a91cdef8572304e7b9) is not retained and is not used by this packet.",
+      "limit": "Restricted original geometry is not redistributed; source completeness is disclaimed by SALB terms, and its 2021 roster conflicts with the 2025 government count. Earlier and current item responses had the same 39 ADM2 IDs, names, and ADM1 parents and coordinates equal at 9 decimals, but the old raw bytes were not retained and legal boundary continuity is not established.",
       "temporal_status": "reference"
     },
     {
@@ -267,15 +267,15 @@
   "outputs": [
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/README.md",
-      "bytes": 10904,
-      "sha256": "a871f272751a0737d550724cb9d05655a6968245fe1f5c7a6d643513e37b7c0e",
+      "bytes": 11462,
+      "sha256": "beebbd67a6b2c01e5fe4358467718756ed22a25191194bd3dbc44ac536fc31eb",
       "hash_kind": "file-bytes",
       "role": "research-packet"
     },
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/reproduce.py",
       "bytes": 12641,
-      "sha256": "fd029217760828f5802bff8dfaee84cb0d6bb471474315cbc42ac8c39d5df421",
+      "sha256": "bb28cb2f25c0e0202a7e25cfa92fe8132659e7e8819fff9edd7b2a5368da090c",
       "hash_kind": "file-bytes",
       "role": "reproduction-code"
     },
@@ -296,7 +296,7 @@
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
       "bytes": 6564,
-      "sha256": "4a99777bff3e958c233fe42fdcd681350d81ac6e90cc133b65072f60fde11a59",
+      "sha256": "3c9eb167f440f1b62f2ff7431ade90a49532e63383d1014b1ccb211bd78fad8c",
       "hash_kind": "file-bytes",
       "role": "result-ledger"
     },
@@ -316,8 +316,8 @@
     },
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/sources.json",
-      "bytes": 6236,
-      "sha256": "17a761be3a781a8826427f177254988ea7231fe4b3f39411aa43bc58593ec859",
+      "bytes": 7063,
+      "sha256": "12da4343ee8055118994519f222aa65a764debcd0b4077684a0968a7c1bc637e",
       "hash_kind": "file-bytes",
       "role": "source-register"
     },

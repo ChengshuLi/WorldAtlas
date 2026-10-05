@@ -82,7 +82,7 @@ fields are included for both source rosters, together with exact IDs/parents.
 | Evidence | Retrieval / vintage | SHA-256 | Rights and use |
 | --- | --- | --- | --- |
 | Existing geoBoundaries GNB ADM2 GeoJSON, parent packet | pinned 2017; baseline `6b60f1598b7b1f222b671cb57e12561fd3c3fb93` | `8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680` | ODbL 1.0; keep its attribution and share-alike obligations. |
-| UN SALB GeoJSON item `59a87026ba7c4e718c330817fa459789` | downloaded from the official item endpoint 2026-10-05 UTC; layer validity 2016-01-01–2021-09-02 | `4c758eb2cb41f796ac12b58676a85eda509f622a51ad05a91cdef8572304e7b9` | SALB Terms of Use: non-commercial use only; attribute DGGC and “from SALB Data, United Nations”; do not change geometry/content without contributor consent. The original bytes are restoration-only and are not redistributed in this packet. |
+| UN SALB GeoJSON item `59a87026ba7c4e718c330817fa459789` | official item response retrieved 2026-10-05 UTC; layer validity 2016-01-01–2021-09-02 | `aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28` | SALB Terms of Use: non-commercial use only; attribute DGGC and “from SALB Data, United Nations”; do not change geometry/content without contributor consent. Exact source bytes are restored by URL and hash, not redistributed in this packet. |
 | UN SALB Guinea-Bissau country page | retrieved 2026-10-05 UTC | `fb26244440e95148c66e9f9dd9dc38dce3d974f7a1b538e7dd350fcf4ce87a93` | Identifies DGGC and links the validated units layer; its broad page-level start date differs from the more specific REST layer metadata. |
 | UN SALB Terms of Use 2021 | retrieved 2026-10-05 UTC | `aaac013743486c9f4be986e236fdba6b3a4ac0ff00921cecc171c42778544381` | Primary evidence for the non-commercial restriction, attribution and geometry/content terms; cited, not redistributed. |
 | SALB REST layer metadata JSON | downloaded 2026-10-05 UTC | `56f9bd7057a567d07f1db11c463f63f7c174b02daee7f38d23c75836d5250cd1` | Public service metadata; cite DGGC/SALB/UN. |
@@ -91,22 +91,28 @@ fields are included for both source rosters, together with exact IDs/parents.
 
 The SALB web page exposes a general administrative-data validity range of
 2000-01-01 to its last update, while the service layer metadata specifically
-describes this layer's validity as 2016-01-01 to 2021-09-02. An independent
-reviewer later found that the official GeoJSON item URL returned 410,290 bytes
-with a different SHA-256 (`aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28`), rather than this retrieval's
-411,079-byte snapshot. The exact restricted snapshot is not redistributed and
-is no longer restorable from the endpoint response observed during review.
-Current endpoint bytes must not be substituted into this reproduction; a new
-snapshot would require fresh temporal/source review and outputs. This packet uses
-the more specific layer metadata for the 39-row roster and records the page
-range as a page-level discrepancy, not as an inferred geometry start date.
-The endpoint's copyrightText credits MITC/DGGC and the SALB programme, United
-Nations. SALB's terms also disclaim completeness and warranty. This packet
-does not treat an official source as proof of completeness.
+describes this layer's validity as 2016-01-01 to 2021-09-02. The current item
+response is 410,290 bytes and is hash-pinned in `sources.json` and the evidence
+manifest. A prior 411,079-byte response observed on 2026-10-05 had a different
+file hash. A local comparison found the same 39 exact ADM2 IDs, names, and ADM1
+parents; all 19,642 coordinate values matched when rounded to nine decimal
+places, with 16,346 serialized numeric values differing and a maximum absolute
+difference of 5.684341886080802e-14 degrees. Treat this as a serialized-source
+version observation, not evidence of legal boundary continuity. The older raw
+snapshot was not retained because the SALB terms restrict geometry
+redistribution; its exact byte sequence is no longer restorable from the URL.
+The script uses the currently restorable 410,290-byte response, rejects any
+other bytes, and records the older retrieval only as a bounded comparison.
 
+The service layer metadata specifies the temporal range used for the 39-row
+roster; the broader country-page 2000 start is retained as a page-level
+observation, not an inferred geometry start date. The endpoint's copyrightText
+credits MITC/DGGC and the SALB programme, United Nations. SALB's terms disclaim
+completeness and warranty. This packet does not treat an official source as
+proof of completeness.
 Restoration: fetch the GeoJSON from
 `https://geoportal.un.org/arcgis/sharing/rest/content/items/59a87026ba7c4e718c330817fa459789/data`
-and verify its SHA-256 before use. Fetch layer metadata from
+and verify 410290 bytes and SHA-256 `aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28` before use. The prior 411079-byte response is not restorable by that URL and is not an input to this version of the packet. Fetch layer metadata from
 `https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_GNB/FeatureServer/0?f=pjson`.
 For the PDFs use the URLs recorded in `sources.json`. For NC4, prefer the
 official record `https://unfccc.int/documents/654402` and official PDF

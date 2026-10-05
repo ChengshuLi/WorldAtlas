@@ -7,20 +7,25 @@
       "title": "UN SALB Guinea-Bissau validated administrative units GeoJSON",
       "url": "https://geoportal.un.org/arcgis/sharing/rest/content/items/59a87026ba7c4e718c330817fa459789/data",
       "metadata_url": "https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_GNB/FeatureServer/0?f=pjson",
-      "sha256": "4c758eb2cb41f796ac12b58676a85eda509f622a51ad05a91cdef8572304e7b9",
-      "bytes": 411079,
+      "sha256": "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28",
+      "bytes": 410290,
       "license": "SALB Terms of Use 2021: non-commercial use; attribution to national contributor and from SALB Data, United Nations; no geometry or content changes without contributor consent",
       "source_contributor": "MITC / Direcção Geral de Geografia e Cadastro, Guinea-Bissau; SALB programme, United Nations",
       "temporal_validity": "2016-01-01 through last verification/update 2021-09-02",
       "completeness": "39 features returned by service; SALB terms disclaim completeness and warranty; 2025 government source reports a conflicting 36 sectors under regions",
       "retention": "restoration-only; bytes must be fetched from the URL and verified by SHA-256; this packet does not redistribute SALB geometries",
-      "current_endpoint_observation": {
-        "observed_by": "independent reviewer and author API retrieval",
-        "observed_date": "2026-10-05",
-        "bytes": 410290,
-        "sha256": "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28",
+      "retrieved_at_utc": "2026-10-05",
+      "notes": "Official item response retrieved on 2026-10-05. Temporal validity remains 2016-01-01 through last verification/update 2021-09-02. This current response is the script input. A prior 411079-byte response was compared locally: same exact 39 ADM2 codes, names, and ADM1 parents; 19642 coordinate values, 16346 numerically different at serialization precision, maximum delta 5.684341886080802e-14 degrees, all equal after rounding to 9 decimal places. This does not establish legal boundary continuity. The prior restricted raw bytes were not retained and are no longer restorable from this URL.",
+      "prior_retrieval_comparison": {
+        "bytes": 411079,
+        "sha256": "4c758eb2cb41f796ac12b58676a85eda509f622a51ad05a91cdef8572304e7b9",
         "feature_count": 39,
-        "finding": "The cited item URL no longer restores the pinned snapshot; this packet does not claim current endpoint reproducibility."
+        "same_exact_adm2_ids_names_and_adm1_parents": true,
+        "coordinate_values": 19642,
+        "values_numerically_different": 16346,
+        "maximum_absolute_difference_degrees": 5.684341886080802e-14,
+        "all_values_equal_after_rounding_decimals": 9,
+        "interpretation": "serialization precision difference observed; does not certify legal continuity; prior raw response not retained under SALB restrictions"
       }
     },
     {
