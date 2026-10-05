@@ -1,0 +1,814 @@
+{
+  "runs": [
+    {
+      "vintage": "full-v3",
+      "progress_sha256": "3f7265237da7c7617ec6dde2c49d371ea12926dcdee410580153527c9e00661f",
+      "phase": "complete",
+      "evaluation_commit": "71f9e596204cee5a754bf8bd77eb53131fb22c85",
+      "baseline_commit": "d55795e4c0ad01527029db0bd1d774124a12a61a",
+      "completed_rows": 262166,
+      "declared_rows": 262166,
+      "completed_partitions": 65,
+      "observations": [
+        {
+          "row_start": 0,
+          "row_end": 4096,
+          "elapsed_ms": 18.496291999999812,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 4096,
+          "row_end": 8192,
+          "elapsed_ms": 7.1681250000001455,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 8192,
+          "row_end": 12288,
+          "elapsed_ms": 43.32737499999985,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 12288,
+          "row_end": 16384,
+          "elapsed_ms": 190.90241700000024,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 16384,
+          "row_end": 20480,
+          "elapsed_ms": 245.6237919999994,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 20480,
+          "row_end": 24576,
+          "elapsed_ms": 218.6633750000001,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 24576,
+          "row_end": 28672,
+          "elapsed_ms": 415.7579160000005,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 28672,
+          "row_end": 32768,
+          "elapsed_ms": 330.2024590000001,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 32768,
+          "row_end": 36864,
+          "elapsed_ms": 347.20129200000065,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 36864,
+          "row_end": 40960,
+          "elapsed_ms": 350.9633329999997,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 40960,
+          "row_end": 45056,
+          "elapsed_ms": 391.5632910000004,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 45056,
+          "row_end": 49152,
+          "elapsed_ms": 267.36320800000067,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 49152,
+          "row_end": 53248,
+          "elapsed_ms": 438.9007499999989,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 53248,
+          "row_end": 57344,
+          "elapsed_ms": 764.5357499999991,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 57344,
+          "row_end": 61440,
+          "elapsed_ms": 1644.5192079999997,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 61440,
+          "row_end": 65536,
+          "elapsed_ms": 1628.3286659999994,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 65536,
+          "row_end": 69632,
+          "elapsed_ms": 2216.7146250000005,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 69632,
+          "row_end": 73728,
+          "elapsed_ms": 2044.0225840000003,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 73728,
+          "row_end": 77824,
+          "elapsed_ms": 2197.787375,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 77824,
+          "row_end": 81920,
+          "elapsed_ms": 2518.824540999998,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 81920,
+          "row_end": 86016,
+          "elapsed_ms": 3659.8071249999994,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 86016,
+          "row_end": 90112,
+          "elapsed_ms": 3586.2659170000006,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 90112,
+          "row_end": 94208,
+          "elapsed_ms": 4025.4297920000026,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 94208,
+          "row_end": 98304,
+          "elapsed_ms": 3911.672458000001,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 98304,
+          "row_end": 102400,
+          "elapsed_ms": 4785.758540999996,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 102400,
+          "row_end": 106496,
+          "elapsed_ms": 4594.5743749999965,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 106496,
+          "row_end": 110592,
+          "elapsed_ms": 3453.775834,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 110592,
+          "row_end": 114688,
+          "elapsed_ms": 3788.3331659999967,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 114688,
+          "row_end": 118784,
+          "elapsed_ms": 4559.955374999998,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 118784,
+          "row_end": 122880,
+          "elapsed_ms": 3795.013208000004,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 122880,
+          "row_end": 126976,
+          "elapsed_ms": 3604.2193750000006,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 126976,
+          "row_end": 131072,
+          "elapsed_ms": 2437.8676669999986,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 131072,
+          "row_end": 135168,
+          "elapsed_ms": 2111.8137089999946,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 135168,
+          "row_end": 139264,
+          "elapsed_ms": 1743.7794580000045,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 139264,
+          "row_end": 143360,
+          "elapsed_ms": 1625.346875000003,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 143360,
+          "row_end": 147456,
+          "elapsed_ms": 1934.0144999999902,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 147456,
+          "row_end": 151552,
+          "elapsed_ms": 1882.7826670000068,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 151552,
+          "row_end": 155648,
+          "elapsed_ms": 1644.3440840000112,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 155648,
+          "row_end": 159744,
+          "elapsed_ms": 917.0509170000005,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 159744,
+          "row_end": 163840,
+          "elapsed_ms": 419.2397090000013,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 163840,
+          "row_end": 167936,
+          "elapsed_ms": 251.6287500000035,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 167936,
+          "row_end": 172032,
+          "elapsed_ms": 167.52716599999985,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 172032,
+          "row_end": 176128,
+          "elapsed_ms": 186.40429199999198,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 176128,
+          "row_end": 180224,
+          "elapsed_ms": 152.89908400000422,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 180224,
+          "row_end": 184320,
+          "elapsed_ms": 15.144499999994878,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 184320,
+          "row_end": 188416,
+          "elapsed_ms": 15.460082999998122,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 188416,
+          "row_end": 192512,
+          "elapsed_ms": 11.193041999998968,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 192512,
+          "row_end": 196608,
+          "elapsed_ms": 8.713375000006636,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 196608,
+          "row_end": 200704,
+          "elapsed_ms": 6.240583000006154,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 200704,
+          "row_end": 204800,
+          "elapsed_ms": 5.6539579999953276,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 204800,
+          "row_end": 208896,
+          "elapsed_ms": 5.411916000011843,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 208896,
+          "row_end": 212992,
+          "elapsed_ms": 6.324457999988226,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 212992,
+          "row_end": 217088,
+          "elapsed_ms": 6.020582999990438,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 217088,
+          "row_end": 221184,
+          "elapsed_ms": 5.704916999995476,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 221184,
+          "row_end": 225280,
+          "elapsed_ms": 6.325500000006286,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 225280,
+          "row_end": 229376,
+          "elapsed_ms": 5.699292000004789,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 229376,
+          "row_end": 233472,
+          "elapsed_ms": 5.35479199999827,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 233472,
+          "row_end": 237568,
+          "elapsed_ms": 5.436832999999751,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 237568,
+          "row_end": 241664,
+          "elapsed_ms": 6.052792000002228,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 241664,
+          "row_end": 245760,
+          "elapsed_ms": 5.490791999996873,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 245760,
+          "row_end": 249856,
+          "elapsed_ms": 5.599000000001979,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 249856,
+          "row_end": 253952,
+          "elapsed_ms": 6.169083000000683,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 253952,
+          "row_end": 258048,
+          "elapsed_ms": 5.392290999996476,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 258048,
+          "row_end": 262144,
+          "elapsed_ms": 5.536333999989438,
+          "maxRSS_raw": 777296
+        },
+        {
+          "row_start": 262144,
+          "row_end": 262166,
+          "elapsed_ms": 2.064708999998402,
+          "maxRSS_raw": 777296
+        }
+      ],
+      "elapsed_ms": 81402.635917,
+      "maxRSS_raw": 777296
+    },
+    {
+      "vintage": "full-v4",
+      "progress_sha256": "dc070767fc67d03a463544a636c6cf7764d7d6616f40dffc579617e1cc34b2ca",
+      "phase": "complete",
+      "evaluation_commit": "71f9e596204cee5a754bf8bd77eb53131fb22c85",
+      "baseline_commit": "d55795e4c0ad01527029db0bd1d774124a12a61a",
+      "completed_rows": 262166,
+      "declared_rows": 262166,
+      "completed_partitions": 65,
+      "observations": [
+        {
+          "row_start": 0,
+          "row_end": 4096,
+          "elapsed_ms": 17.766625000000204,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 4096,
+          "row_end": 8192,
+          "elapsed_ms": 6.882416999999805,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 8192,
+          "row_end": 12288,
+          "elapsed_ms": 38.49491699999999,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 12288,
+          "row_end": 16384,
+          "elapsed_ms": 128.35712500000045,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 16384,
+          "row_end": 20480,
+          "elapsed_ms": 156.92299999999977,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 20480,
+          "row_end": 24576,
+          "elapsed_ms": 195.96479100000033,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 24576,
+          "row_end": 28672,
+          "elapsed_ms": 316.4259999999995,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 28672,
+          "row_end": 32768,
+          "elapsed_ms": 295.1788750000005,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 32768,
+          "row_end": 36864,
+          "elapsed_ms": 279.08850000000075,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 36864,
+          "row_end": 40960,
+          "elapsed_ms": 242.51375000000007,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 40960,
+          "row_end": 45056,
+          "elapsed_ms": 349.75054199999977,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 45056,
+          "row_end": 49152,
+          "elapsed_ms": 267.9623329999995,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 49152,
+          "row_end": 53248,
+          "elapsed_ms": 416.71987499999886,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 53248,
+          "row_end": 57344,
+          "elapsed_ms": 635.4840829999994,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 57344,
+          "row_end": 61440,
+          "elapsed_ms": 1136.0058750000007,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 61440,
+          "row_end": 65536,
+          "elapsed_ms": 1424.1303750000006,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 65536,
+          "row_end": 69632,
+          "elapsed_ms": 1962.939042,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 69632,
+          "row_end": 73728,
+          "elapsed_ms": 1744.5373330000002,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 73728,
+          "row_end": 77824,
+          "elapsed_ms": 1876.9707080000007,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 77824,
+          "row_end": 81920,
+          "elapsed_ms": 2389.839749999999,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 81920,
+          "row_end": 86016,
+          "elapsed_ms": 3327.725458000001,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 86016,
+          "row_end": 90112,
+          "elapsed_ms": 3400.059000000001,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 90112,
+          "row_end": 94208,
+          "elapsed_ms": 3743.181124999999,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 94208,
+          "row_end": 98304,
+          "elapsed_ms": 4230.308624999998,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 98304,
+          "row_end": 102400,
+          "elapsed_ms": 4440.865207999996,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 102400,
+          "row_end": 106496,
+          "elapsed_ms": 4216.226999999999,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 106496,
+          "row_end": 110592,
+          "elapsed_ms": 3283.1087909999987,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 110592,
+          "row_end": 114688,
+          "elapsed_ms": 3926.1465830000016,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 114688,
+          "row_end": 118784,
+          "elapsed_ms": 3772.9908339999965,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 118784,
+          "row_end": 122880,
+          "elapsed_ms": 3826.5074999999997,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 122880,
+          "row_end": 126976,
+          "elapsed_ms": 3772.329791999997,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 126976,
+          "row_end": 131072,
+          "elapsed_ms": 2327.6284579999992,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 131072,
+          "row_end": 135168,
+          "elapsed_ms": 2228.433207999995,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 135168,
+          "row_end": 139264,
+          "elapsed_ms": 1715.867207999996,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 139264,
+          "row_end": 143360,
+          "elapsed_ms": 1711.6240830000024,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 143360,
+          "row_end": 147456,
+          "elapsed_ms": 2097.6536250000063,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 147456,
+          "row_end": 151552,
+          "elapsed_ms": 1898.5232499999984,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 151552,
+          "row_end": 155648,
+          "elapsed_ms": 1591.5527079999883,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 155648,
+          "row_end": 159744,
+          "elapsed_ms": 912.2134580000129,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 159744,
+          "row_end": 163840,
+          "elapsed_ms": 432.064750000005,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 163840,
+          "row_end": 167936,
+          "elapsed_ms": 241.6823330000043,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 167936,
+          "row_end": 172032,
+          "elapsed_ms": 155.2027919999964,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 172032,
+          "row_end": 176128,
+          "elapsed_ms": 147.6586670000106,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 176128,
+          "row_end": 180224,
+          "elapsed_ms": 134.10858300000837,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 180224,
+          "row_end": 184320,
+          "elapsed_ms": 15.389334000006784,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 184320,
+          "row_end": 188416,
+          "elapsed_ms": 12.219542000006186,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 188416,
+          "row_end": 192512,
+          "elapsed_ms": 12.314375000001746,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 192512,
+          "row_end": 196608,
+          "elapsed_ms": 10.33741700000246,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 196608,
+          "row_end": 200704,
+          "elapsed_ms": 5.796791999993729,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 200704,
+          "row_end": 204800,
+          "elapsed_ms": 5.402625000002445,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 204800,
+          "row_end": 208896,
+          "elapsed_ms": 5.685041000004276,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 208896,
+          "row_end": 212992,
+          "elapsed_ms": 5.242416000008234,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 212992,
+          "row_end": 217088,
+          "elapsed_ms": 5.461624999996275,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 217088,
+          "row_end": 221184,
+          "elapsed_ms": 6.342166999995243,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 221184,
+          "row_end": 225280,
+          "elapsed_ms": 5.513374999994994,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 225280,
+          "row_end": 229376,
+          "elapsed_ms": 5.47041700000409,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 229376,
+          "row_end": 233472,
+          "elapsed_ms": 6.093334000004688,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 233472,
+          "row_end": 237568,
+          "elapsed_ms": 5.473707999990438,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 237568,
+          "row_end": 241664,
+          "elapsed_ms": 5.579250000009779,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 241664,
+          "row_end": 245760,
+          "elapsed_ms": 6.647124999988591,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 245760,
+          "row_end": 249856,
+          "elapsed_ms": 15.485207999998238,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 249856,
+          "row_end": 253952,
+          "elapsed_ms": 20.106374999988475,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 253952,
+          "row_end": 258048,
+          "elapsed_ms": 18.90837499999907,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 258048,
+          "row_end": 262144,
+          "elapsed_ms": 20.744999999995343,
+          "maxRSS_raw": 1049184
+        },
+        {
+          "row_start": 262144,
+          "row_end": 262166,
+          "elapsed_ms": 6.507375000001048,
+          "maxRSS_raw": 1049184
+        }
+      ],
+      "elapsed_ms": 76978.003417,
+      "maxRSS_raw": 1049184
+    }
+  ],
+  "units": "elapsed_ms milliseconds; maxRSS_raw native Node process.resourceUsage().maxRSS units; whole process peak, not sum of partitions",
+  "platform": "Darwin x86_64"
+}
