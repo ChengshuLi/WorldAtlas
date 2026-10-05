@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "method": "Spherical area approximation of source GeoJSON exterior rings minus interior rings; candidate screening only. Parent ratios compare source ADM2 to normalized-name source ADM1. The representative point selects a parent candidate. This is not equal-area GIS overlay, complete edge coverage, or a geographic approval.",
+  "flags": [
+    {
+      "subject_id": "gb:MLI:ADM2:8926073B70420899930674",
+      "name": "Bamako",
+      "country": "Mali",
+      "source_name": "Bamako",
+      "source_role": "Cercle",
+      "source_area_km2_screen": 246.62,
+      "source_adm1_area_km2_screen": 246.62,
+      "area_ratio_screen": 1,
+      "source_parent_children_at_representative_point": 1,
+      "source_geometry_equals_parent": true,
+      "flag": "single source ADM2 child at the representative point and same/near-coextensive with source ADM1; tier purpose needs individual review",
+      "status": "correction-needed",
+      "recommendation": "Engineering should verify Bamako's separate district/cercle role against the current official 2023 source, then correct only its role/rationale if supported. Preserve its ID, geometry and parent until current source review; do not merge or delete the feature from area equality alone."
+    },
+    {
+      "subject_id": "gb:MRT:ADM2:47542326B41685059019738",
+      "name": "Nouadhibou",
+      "country": "Mauritania",
+      "source_name": "Nouadhibou",
+      "source_role": "Mauritania",
+      "source_area_km2_screen": 15815.576,
+      "source_adm1_area_km2_screen": 17541.251,
+      "area_ratio_screen": 0.901622,
+      "source_parent_children_at_representative_point": 1,
+      "source_geometry_equals_parent": false,
+      "flag": "single source ADM2 child at the representative point and same/near-coextensive with source ADM1; tier purpose needs individual review",
+      "status": "correction-needed",
+      "recommendation": "Engineering should not retain 'Mauritania' as an administrative source role; source restoration/review should crosswalk the 2020 polygons to DCIG/UN SALB 2021–2023 or later official moughataa data before changing labels, parent links or footprints."
+    }
+  ],
+  "limits": [
+    "Bamako source ADM2 and ADM1 geometry equality is exact in the retained pinned GeoJSON, but role/purpose requires current legal source review.",
+    "Nouadhibou's source ADM2 is approximately 90.16% of the Dakhlet Nouadhibou ADM1 screen area and is a single-child parent candidate; do not infer a city fragment, a mistaken parent or a required merge from area ratio alone.",
+    "Source administrative extents and point counts do not establish the boundaries of cities or settlements; no urban footprint or complete settlement source was inspected."
+  ]
+}

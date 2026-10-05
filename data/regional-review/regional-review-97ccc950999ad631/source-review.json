@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "retrieved_utc": "2026-10-04",
+  "sources": [
+    {
+      "source_id": "gb:LBR:ADM2",
+      "source_name": "geoBoundaries gbOpen Liberia ADM2",
+      "immutable_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LBR/ADM2/geoBoundaries-LBR-ADM2.geojson",
+      "metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/LBR/ADM2/",
+      "metadata_path": "sources/geoboundaries-current-metadata-lbr.json",
+      "metadata_mutability": "The metadata API is a mutable current endpoint, not a reconstruction of the pinned 2021 metadata. Its as-retrieved bytes and SHA-256 are retained; source vintage and role also agree with the pre-existing pinned Atlas feature metadata.",
+      "source_vintage": "2021",
+      "publisher_role": "Districts (ADM2)",
+      "upstream_source": "UNMIL, OCHA ROWCA; geoBoundaries API metadata identifies the source dataset as the Liberia admin-level 2 boundaries catalog.",
+      "license": "CC BY 3.0 IGO",
+      "immutable_data_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "full_country_feature_count": 136,
+      "issue_direct_subject_count": 127,
+      "issue_scope_partial": true,
+      "admin1_parent_feature_count": 15,
+      "parent_screen": "All 127 scoped representative points fall in exactly one pinned 2021 ADM1 feature whose normalized name agrees with the current province parent. This is a point screen, not a complete boundary overlay.",
+      "current_official_comparator": {
+        "publisher": "Liberia Institute of Statistics and Geo-Information Services (LISGIS)",
+        "source": "The official catalog lists 2022 district boundaries and a 2022 district-boundaries simplified dataset under CC BY 4.0.",
+        "url": "https://lisgis.gov.lr/open-data-license",
+        "license": "CC BY 4.0",
+        "status": "No current feature download or geometry/code crosswalk was performed in this packet. Current completeness and all exact 127 old-to-current matches remain unverified.",
+        "restoration": "Use LISGIS data catalog and dataset metadata to retrieve the 2022 district boundaries; record the actual download URL, license metadata, date and whole-file hash before crosswalking."
+      },
+      "interpretation": "District is supported as the named source's administrative role, and the point-screened county parent is coherent. This does not establish suitability as the final WorldAtlas tier, source completeness, current legal extent, urban/settlement coverage, detached land or island completeness."
+    },
+    {
+      "source_id": "gb:MLI:ADM2",
+      "source_name": "geoBoundaries gbOpen Mali ADM2",
+      "immutable_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MLI/ADM2/geoBoundaries-MLI-ADM2.geojson",
+      "metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/MLI/ADM2/",
+      "metadata_path": "sources/geoboundaries-current-metadata-mli.json",
+      "metadata_mutability": "The metadata API is a mutable current endpoint, not a reconstruction of the pinned 2017 metadata. Its as-retrieved bytes and SHA-256 are retained; source vintage and Cercle role also agree with the pre-existing pinned Atlas feature metadata.",
+      "source_vintage": "2017",
+      "publisher_role": "Cercle (ADM2)",
+      "upstream_source": "DNCT, DNP and OCHA Mali, as identified in geoBoundaries source metadata.",
+      "license": "CC BY 4.0",
+      "immutable_data_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "full_country_feature_count": 50,
+      "issue_subject_count": 56,
+      "issue_direct_subject_count": 47,
+      "issue_ecoregion_portion_subject_count": 9,
+      "unique_source_predecessors_in_issue": 50,
+      "issue_scope_partial": false,
+      "admin1_parent_feature_count": 9,
+      "parent_screen": "All 56 scoped representative points fall in exactly one pinned 2017 ADM1 feature whose normalized name agrees with the current province parent. This is a point screen, not a complete boundary overlay.",
+      "current_official_comparator": {
+        "publisher": "Republic of Mali, Ministry of Territorial Administration and Decentralization / DNAT",
+        "source": "Law No. 2023-006 of 13 March 2023 establishes the administrative circumscriptions; current government reporting describes 19 regions and 159 circles. DNAT's Tombouctou regional plan cites the law and lists the new circle/arrondissement codes.",
+        "urls": [
+          "https://matd.gouv.ml/le-conseil-des-ministres-du-vendredi-6-fevrier-2026",
+          "https://dnat.gouv.ml/wp-content/uploads/2025/03/Plan-Strat%C3%A9gique-de-D%C3%A9veloppement-R%C3%A9gional-de-Tombouctou-vfinale_090532.pdf",
+          "https://www.unfoodsystemshub.org/docs/unfoodsystemslibraries/national-pathways/mali/23-07-25-fr-mali-national-pathway.pdf?sfvrsn=4e112e30_5"
+        ],
+        "status": "The pinned 2017 source has 50 circles and nine ADM1 features, while the post-reform national organization is 19 regions and 159 circles. Exact updated geometry/code crosswalk is a required follow-up; no name-only mapping or new boundary is selected.",
+        "restoration": "Retrieve the official post-2023 administrative map or coded boundary data from MATD/DNAT/IGM; record the native data vintage, access/redistribution terms and whole-file hashes, then crosswalk every scoped old circle and its parent."
+      },
+      "interpretation": "Cercle is the source's named second-level administrative role. The 2017 vintage predates the sourced 2023 administrative reorganization and cannot establish current administrative coverage or current parents."
+    },
+    {
+      "source_id": "gb:MRT:ADM2",
+      "source_name": "geoBoundaries gbOpen Mauritania ADM2",
+      "immutable_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MRT/ADM2/geoBoundaries-MRT-ADM2.geojson",
+      "metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/MRT/ADM2/",
+      "metadata_path": "sources/geoboundaries-current-metadata-mrt.json",
+      "metadata_mutability": "The metadata API is a mutable current endpoint, not a reconstruction of the pinned 2020 metadata. Its as-retrieved bytes and SHA-256 are retained; source vintage and the questionable canonical role also appear in pre-existing Atlas feature metadata.",
+      "source_vintage": "2020",
+      "publisher_role": "Mauritania (ADM2 canonical label; not a territorial-unit name)",
+      "upstream_source": "World Food Programme, OCHA ROWCA, per geoBoundaries metadata.",
+      "license": "CC BY 3.0 IGO",
+      "immutable_data_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "full_country_feature_count": 57,
+      "issue_subject_count": 46,
+      "issue_direct_subject_count": 38,
+      "issue_ecoregion_portion_subject_count": 8,
+      "unique_source_predecessors_in_issue": 40,
+      "issue_scope_partial": true,
+      "admin1_parent_feature_count": 13,
+      "parent_screen": "All 46 scoped representative points fall in exactly one pinned 2020 ADM1 feature whose normalized name agrees with the current province parent. This is a point screen, not a complete boundary overlay.",
+      "current_official_comparator": {
+        "publisher": "Direction de la Cartographie et de l'Information Géographique (DCIG), as listed by UN SALB; UK Permanent Committee on Geographical Names (PCGN) toponymic fact file.",
+        "source": "UN SALB lists validated administrative polygon data with temporal validity 2021-09-15 through the 2023-07-27 update and names DCIG as the national geospatial authority. The 2023 PCGN fact file describes 15 wilayas, 54 moughataa/departments and communes below.",
+        "urls": [
+          "https://salb.un.org/en/data/mrt",
+          "https://assets.publishing.service.gov.uk/media/6504627b6771b90014fdab69/Mauritania_Toponymic_Factfile-Sept23.pdf",
+          "https://mdp.dgct.mr/map"
+        ],
+        "status": "The scoped issue subset is partial, the 2020 source has 57 features, and its canonical ADM2 role is recorded as the country name. Neither the mismatch in reported counts nor the mutable current metadata independently determines an error; exact current moughataa mapping, parent links and geometry remain unresolved.",
+        "restoration": "Acquire the current official DCIG/SALB moughataa layer or code register and corresponding license/terms. Record retrieval date and full hash, crosswalk the 40 represented source predecessors, and enumerate the 17 unrepresented source features as partial-scope remainder only after exact source IDs are identified."
+      },
+      "interpretation": "The current source-role value 'Mauritania' is not a territorial subdivision name. Replace only after the original 2020 source lineage and current moughataa crosswalk are inspected; do not silently relabel, repin or transfer any geometry."
+    },
+    {
+      "source_id_pattern": "resolve:{53,71,745,842,846}",
+      "source_name": "RESOLVE Ecoregions and Biomes, feature service layer 0",
+      "item_metadata_url": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef?f=json",
+      "layer_metadata_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0?f=json",
+      "query_receipt": "sources/resolve-query-receipt.json",
+      "source_vintage": "2017 ecoregions",
+      "source_role": "Ecological ecoregion, not administrative district",
+      "license": "CC BY 4.0; the selected features' LICENSE attributes each report CC-BY 4.0. The underlying geoBoundaries ADM2 predecessor retains its separate country-specific license.",
+      "assigned_physical_subjects": 17,
+      "unique_admin_predecessors": 5,
+      "assigned_ecoregion_ids": [53, 71, 745, 842, 846],
+      "facts": "ArcGIS item description calls the product RESOLVE Ecoregions and Biomes and describes 846 terrestrial ecoregions representing biogeographic/ecological assemblages. Exact selected ECO_ID and ECO_NAME feature geometries were queried and retained. Every assigned subject's recorded representative point lies in its baseline feature, the referenced pinned ADM2 feature and its referenced RESOLVE ecological feature; all 17 also match the named ADM1 parent by the representative-point screen.",
+      "limits": "No full polygon intersection/rebuild, complete ecology-to-location accounting, ecology-tier suitability decision, area remainder assessment or current ecological source comparison was performed. Point containment does not establish extent, exact clipping or completeness.",
+      "recommendation": "Engineering should replace the current administrative source_role and administrative selection_reason for all 17 physical fragments with an explicit ecological/physical-portion derivation. Preserve IDs, geometry, source member and parent; do not infer that this metadata correction approves their tier, full extent or parent."
+    },
+    {
+      "source_id": "neighbor-review-context",
+      "source_name": "West Africa interior batch 12 (#478) neighbor-edge screen",
+      "path": "data/regional-review/regional-review-0ed7b50d2b74736e/neighbor-edge-screen.csv",
+      "fact": "The related screen records same-source OCHA WCA 2026 shared edges and no positive areal overlap for Senegal–Mauritania or Senegal–Mali at its stated precision. This is neighbor context only; it does not inspect this packet's 2020/2017 country ADM2 boundaries or approve a shared border.",
+      "handoff": "Any new source mismatch at Mali–Mauritania, Senegal–Mali, or Senegal–Mauritania must be one coordinated neighbor proposal covering all affected scopes; no unilateral border edits are proposed here."
+    }
+  ],
+  "common_limits": [
+    "geoBoundaries /api/current metadata is mutable; immutable feature bytes are pinned to the stated Git commit and separately hashed.",
+    "Administrative counts and name/point screens do not establish final WorldAtlas semantic tiers or independent polygon accuracy.",
+    "No complete settlements, physical land/island, coastal low-tide, urban-footprint or named-territorial-remainder source was acquired for these three countries. Such completeness remains unresolved for every assigned subject.",
+    "No complete source boundary overlay was executed. Source representative-point containment is only a correspondence screen.",
+    "No history, sovereignty transfer, region-interior approval, geographic mutation, certificate update, publication or import authorization is implied."
+  ]
+}

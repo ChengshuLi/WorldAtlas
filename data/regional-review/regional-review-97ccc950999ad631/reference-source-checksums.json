@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "title": "LISGIS open data license and 2022 administrative boundary catalog",
+      "url": "https://lisgis.gov.lr/open-data-license",
+      "retrieved_utc": "2026-10-04",
+      "http_status": 200,
+      "resolved_url": "https://lisgis.gov.lr/open-data-license",
+      "content_type": "text/html; charset=utf-8",
+      "response_bytes": 2414,
+      "response_sha256": "05a638d8e270dba318a1ee1e7beeec75eae6293fe01b768b5573839c534b0f62",
+      "retained_bytes": false,
+      "retention_reason": "No direct redistribution license was verified for the page/document; retain exact URL, response hash and restoration steps instead.",
+      "use_and_limit": "Official public HTML catalog; it identifies 2022 district boundaries as CC BY 4.0. Catalog page only; no boundary geometry downloaded.",
+      "restoration_instruction": "Fetch the exact URL again; compare complete response byte count and SHA-256, and record any source vintage/terms changes. https://lisgis.gov.lr/open-data-license"
+    },
+    {
+      "title": "LISGIS data catalog API",
+      "url": "https://lisgis.gov.lr/api/datasets",
+      "retrieved_utc": "2026-10-04",
+      "http_status": 200,
+      "resolved_url": "https://lisgis.gov.lr/api/datasets",
+      "content_type": "application/json; charset=utf-8",
+      "response_bytes": 515945,
+      "response_sha256": "e7d19393a7f75ccd18b80181df7c2f0db6e9a129997fd36a4049c649cb6bcfed",
+      "retained_bytes": false,
+      "retention_reason": "No direct redistribution license was verified for the page/document; retain exact URL, response hash and restoration steps instead.",
+      "use_and_limit": "Official dataset metadata endpoint; if 2022 district data are later acquired, check dataset-specific license and geography vintage.",
+      "restoration_instruction": "Fetch the exact URL again; compare complete response byte count and SHA-256, and record any source vintage/terms changes. https://lisgis.gov.lr/data/api"
+    },
+    {
+      "title": "Mali Government 2023 administrative reorganization evidence",
+      "url": "https://gouvernement.ml/5eme-cohorte-de-a-lecole-de-la-citoyennete-le-general-de-brigade-issa-ousmane-coulibaly-fait-le-point-sur-les-reformes-territoriales-et-de-la-decentralisation-dans-notre-pays/",
+      "retrieved_utc": "2026-10-04",
+      "http_status": 200,
+      "resolved_url": "https://gouvernement.ml/5eme-cohorte-de-a-lecole-de-la-citoyennete-le-general-de-brigade-issa-ousmane-coulibaly-fait-le-point-sur-les-reformes-territoriales-et-de-la-decentralisation-dans-notre-pays/",
+      "content_type": "text/html; charset=UTF-8",
+      "response_bytes": 266192,
+      "response_sha256": "c611bb13f6b64fe06e56c73beee29ec8e7d2ca99e0f9d5e3bcb1776cf245f3a0",
+      "retained_bytes": false,
+      "retention_reason": "No direct redistribution license was verified for the page/document; retain exact URL, response hash and restoration steps instead.",
+      "use_and_limit": "Government reporting gives the current 19 regions and 159 circles; the official law and regional plan are separately cited. This page is not a boundary dataset.",
+      "restoration_instruction": "Fetch the exact URL again; compare complete response byte count and SHA-256, and record any source vintage/terms changes. https://gouvernement.ml/5eme-cohorte-de-a-lecole-de-la-citoyennete-le-general-de-brigade-issa-ousmane-coulibaly-fait-le-point-sur-les-reformes-territoriales-et-de-la-decentralisation-dans-notre-pays/"
+    },
+    {
+      "title": "DNAT Tombouctou regional plan",
+      "url": "https://dnat.gouv.ml/wp-content/uploads/2025/03/Plan-Strat%C3%A9gique-de-D%C3%A9veloppement-R%C3%A9gional-de-Tombouctou-vfinale_090532.pdf",
+      "retrieved_utc": "2026-10-04",
+      "http_status": 200,
+      "resolved_url": "https://dnat.gouv.ml/wp-content/uploads/2025/03/Plan-Strat%C3%A9gique-de-D%C3%A9veloppement-R%C3%A9gional-de-Tombouctou-vfinale_090532.pdf",
+      "content_type": "application/pdf",
+      "response_bytes": 4468410,
+      "response_sha256": "da2f435bed62bd6b4b8137f1ed82d6086bc760f1a9066719f8ec0ffd9ad8d51c",
+      "retained_bytes": false,
+      "retention_reason": "No direct redistribution license was verified for the page/document; retain exact URL, response hash and restoration steps instead.",
+      "use_and_limit": "Official regional planning source citing Law 2023-006 and identifying newer circle/arrondissement codes; not a nationwide boundary layer.",
+      "restoration_instruction": "Fetch the exact URL again; compare complete response byte count and SHA-256, and record any source vintage/terms changes. https://dnat.gouv.ml/wp-content/uploads/2025/03/Plan-Strat%C3%A9gique-de-D%C3%A9veloppement-R%C3%A9gional-de-Tombouctou-vfinale_090532.pdf"
+    },
+    {
+      "title": "Mali 2023 National Pathway",
+      "url": "https://www.unfoodsystemshub.org/docs/unfoodsystemslibraries/national-pathways/mali/23-07-25-fr-mali-national-pathway.pdf?sfvrsn=4e112e30_5",
+      "retrieved_utc": "2026-10-04",
+      "error": "HTTP Error 503: Service Unavailable",
+      "retained_bytes": false,
+      "use_and_limit": "Government-submitted country pathway reports one district, 19 regions and 159 circles; secondary corroboration, not boundary geometry.",
+      "restoration_instruction": "Retry this canonical URL and retain the actual access result and hash before relying on it: https://www.unfoodsystemshub.org/docs/unfoodsystemslibraries/national-pathways/mali/23-07-25-fr-mali-national-pathway.pdf?sfvrsn=4e112e30_5"
+    },
+    {
+      "title": "UN SALB Mauritania data catalog",
+      "url": "https://salb.un.org/en/data/mrt",
+      "retrieved_utc": "2026-10-04",
+      "http_status": 200,
+      "resolved_url": "https://salb.un.org/en/data/mrt",
+      "content_type": "text/html; charset=utf-8",
+      "response_bytes": 51914,
+      "response_sha256": "5c143d590e220a4a09af62ba5363eff33ee19744593bde20219efd15af716812",
+      "retained_bytes": false,
+      "retention_reason": "No direct redistribution license was verified for the page/document; retain exact URL, response hash and restoration steps instead.",
+      "use_and_limit": "UN catalog attributes validated polygons to national authority DCIG and reports temporal validity 2021-09-15 through update 2023-07-27; the page is metadata, not the source dataset.",
+      "restoration_instruction": "Fetch the exact URL again; compare complete response byte count and SHA-256, and record any source vintage/terms changes. https://salb.un.org/en/data/mrt"
+    },
+    {
+      "title": "UK PCGN Mauritania Toponymic Fact File",
+      "url": "https://assets.publishing.service.gov.uk/media/6504627b6771b90014fdab69/Mauritania_Toponymic_Factfile-Sept23.pdf",
+      "retrieved_utc": "2026-10-04",
+      "http_status": 200,
+      "resolved_url": "https://assets.publishing.service.gov.uk/media/6504627b6771b90014fdab69/Mauritania_Toponymic_Factfile-Sept23.pdf",
+      "content_type": "application/pdf",
+      "response_bytes": 612265,
+      "response_sha256": "60eb1286b7de96f1e64b7b845f587c7ac9dc67a06def522504726b17d94ce009",
+      "retained_bytes": false,
+      "retention_reason": "No direct redistribution license was verified for the page/document; retain exact URL, response hash and restoration steps instead.",
+      "use_and_limit": "2023 official UK government reference states 15 wilayas, 54 moughataa/departments and communes below; this is a role/count crosscheck, not boundary geometry.",
+      "restoration_instruction": "Fetch the exact URL again; compare complete response byte count and SHA-256, and record any source vintage/terms changes. https://assets.publishing.service.gov.uk/media/6504627b6771b90014fdab69/Mauritania_Toponymic_Factfile-Sept23.pdf"
+    },
+    {
+      "title": "Mauritania Directorate General of Territorial Communities map",
+      "url": "https://mdp.dgct.mr/map",
+      "retrieved_utc": "2026-10-04",
+      "http_status": 200,
+      "resolved_url": "https://mdp.dgct.mr/map",
+      "content_type": "text/html; charset=UTF-8",
+      "response_bytes": 47621,
+      "response_sha256": "29da81bd929fa171c5cc9eb2948c1f14162693a31d33005234cee73e10fb5367",
+      "retained_bytes": false,
+      "retention_reason": "No direct redistribution license was verified for the page/document; retain exact URL, response hash and restoration steps instead.",
+      "use_and_limit": "Official territorial-community map interface exposes wilaya/moughataa and local-government hierarchy; dynamic app and not retained as a geometry extract.",
+      "restoration_instruction": "Fetch the exact URL again; compare complete response byte count and SHA-256, and record any source vintage/terms changes. https://mdp.dgct.mr/map"
+    }
+  ]
+}
