@@ -1,0 +1,78 @@
+{
+  "retrieved_at_utc": "2026-10-05T09:46:03.904601+00:00",
+  "repository": "nvkelso/natural-earth-vector",
+  "commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+  "files": [
+    {
+      "path": "10m_cultural/ne_10m_admin_1_states_provinces.README.html",
+      "retained_path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/README.html.gz",
+      "download_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/10m_cultural/ne_10m_admin_1_states_provinces.README.html",
+      "github_blob_sha": "0337247d61537fcf060c956642852f1f6974eb42",
+      "bytes": 44181,
+      "sha256": "27d12def2c79a2ff3744abb27a3ba2783334f4dc1ec2dedc3ce3c00c4ea71e25",
+      "retention_encoding": "gzip; decompression reproduces exact source bytes",
+      "stored_path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/README.html.gz",
+      "stored_bytes": 10152,
+      "stored_sha256": "2bd8c98597e4712c5b7eb9be80be26033466a0ff567851c66433a6ae345521ed",
+      "restore_command": "gzip -dc data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/README.html.gz > data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/README.html"
+    },
+    {
+      "path": "LICENSE.md",
+      "retained_path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/LICENSE.md.gz",
+      "download_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/LICENSE.md",
+      "github_blob_sha": "9dfbc3d55a4ab1dd758c253b2ee339888f632889",
+      "bytes": 4636,
+      "sha256": "2631b5b39b6d1acc56de75235109b5af2dbb4b0ac5a127b6f06185977247fd4b",
+      "retention_encoding": "gzip; decompression reproduces exact source bytes",
+      "stored_path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/LICENSE.md.gz",
+      "stored_bytes": 1403,
+      "stored_sha256": "5c150db3b362f1c4930500613ad105f11ab7331bdbf36e009ad550117f1c2aa1",
+      "restore_command": "gzip -dc data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/LICENSE.md.gz > data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/LICENSE.md"
+    }
+  ],
+  "restoration": "For README/license, gzip -dc the retained .gz into the original filename, then verify the raw-source byte count and SHA-256 in files. Restore the polygon components from the exact repository commit and validate listed Git blob IDs and SHA-256.",
+  "geometry_dataset": {
+    "name": "Natural Earth 10m Admin 1 States, Provinces",
+    "version": "5.1.1 stated by retained README",
+    "repository": "nvkelso/natural-earth-vector",
+    "commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+    "commit_date": "2022-06-02T07:25:00Z",
+    "licensing": "Retained LICENSE.md states Natural Earth vector/raster map data is public domain; source dataset license as asserted by repo license, not separate upstream source licensing.",
+    "files": {
+      "ne_10m_admin_1_states_provinces.shp": {
+        "repo_path": "10m_cultural/ne_10m_admin_1_states_provinces.shp",
+        "github_blob_sha": "f97a631c6784f4097304a83668df51ec803b0072",
+        "bytes": 20998780,
+        "sha256": "c6f5c8b4b1320d9417033762419c6df1eb423989cd880fba78ea0b1e3522cbe4",
+        "retrieved_from": "https://api.github.com/repos/nvkelso/natural-earth-vector/contents/10m_cultural/ne_10m_admin_1_states_provinces.shp?ref=ca96624a56bd078437bca8184e78163e5039ad19"
+      },
+      "ne_10m_admin_1_states_provinces.shx": {
+        "repo_path": "10m_cultural/ne_10m_admin_1_states_provinces.shx",
+        "github_blob_sha": "710af4895e4b4bef697fe7104456f002517682ee",
+        "bytes": 36868,
+        "sha256": "37a9e2bc79ed31d3bdea3cb62d928f77281a1c88d645cd33430231c75dbcf350"
+      },
+      "ne_10m_admin_1_states_provinces.dbf": {
+        "repo_path": "10m_cultural/ne_10m_admin_1_states_provinces.dbf",
+        "github_blob_sha": "dfa7e3f72b79a875d54bb008c6afe3b814050db0",
+        "bytes": 15161514,
+        "sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+        "retrieved_from": "https://api.github.com/repos/nvkelso/natural-earth-vector/contents/10m_cultural/ne_10m_admin_1_states_provinces.dbf?ref=ca96624a56bd078437bca8184e78163e5039ad19"
+      },
+      "ne_10m_admin_1_states_provinces.prj": {
+        "repo_path": "10m_cultural/ne_10m_admin_1_states_provinces.prj",
+        "github_blob_sha": "f45cbadf0074d8b7b2669559a93bc50bb95f82d4",
+        "bytes": 145,
+        "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+      },
+      "ne_10m_admin_1_states_provinces.cpg": {
+        "repo_path": "10m_cultural/ne_10m_admin_1_states_provinces.cpg",
+        "github_blob_sha": "3ad133c048f2189041151425a73485649e6c32c0",
+        "bytes": 5,
+        "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+      }
+    },
+    "restoration": "At the exact repository commit, restore all five .shp/.shx/.dbf/.prj/.cpg paths listed in files using GitHub Contents API or raw.githubusercontent.com; verify Git blob SHA, byte length, and SHA-256 before use.",
+    "retrieved_date_utc": "2026-10-05"
+  }
+}
