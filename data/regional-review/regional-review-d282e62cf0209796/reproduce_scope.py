@@ -150,10 +150,10 @@ def main():
             sampled_points = source_points[::stride][:25]
             inside_vertex_count = sum(in_geometry(tuple(point), official_record["geometry"], official_bounds[id(official_record)]) for point in sampled_points)
         upstream_meta = source_meta[collection]
-        role_ok = (
-            meta.get("source_role") == "Municipality"
-            and meta.get("reference_year") == "2017"
-            and upstream_meta.get("boundaryCanonical") == "municipality"
+        source_level_ok = (
+            upstream_meta.get("boundaryISO") == country
+            and upstream_meta.get("boundaryType") == level
+            and source_feature["properties"].get("shapeType") == level
             and upstream_meta.get("boundaryYear") == "2017"
         )
         source_ok = source_feature.get("properties", {}).get("shapeID") == meta.get("original_id")
@@ -177,7 +177,9 @@ def main():
             "source_identity_match": source_ok,
             "atlas_reference_source_role": meta.get("source_role"),
             "atlas_reference_year": meta.get("reference_year"),
-            "geoboundaries_canonical_role": upstream_meta.get("boundaryCanonical"),
+            "geoboundaries_source_level": upstream_meta.get("boundaryType"),
+            "geoboundaries_feature_level": source_feature["properties"].get("shapeType"),
+            "geoboundaries_canonical_role": upstream_meta.get("boundaryCanonical") or None,
             "geoboundaries_boundary_year": upstream_meta.get("boundaryYear"),
             "source_license": meta.get("license"),
             "source_data_update_date": source_meta[collection].get("sourceDataUpdateDate"),
@@ -190,12 +192,13 @@ def main():
             "current_official_name": official_record.get("properties", {}).get("NAZIV") if official_record else None,
             "current_official_feature_date": official_record.get("properties", {}).get("DATUM_SYS") if official_record else None,
             "sampled_source_vertex_share_inside_matched_official_unit": (inside_vertex_count / len(sampled_points)) if official_record and sampled_points else None,
-            "identity_role_finding": "supported" if source_ok and role_ok and official_record else "unresolved",
+            "source_identity_and_level_finding": "supported" if source_ok and source_level_ok else "unresolved",
+            "current_territorial_role_finding": "current-municipality-crosswalk-supported" if official_record else "unresolved",
             "name_finding": name_finding,
             "proposed_official_name": official_name if name_mismatch else None,
             "boundary_finding": "insufficient-evidence",
             "overall_classification": "correction-needed" if name_mismatch else "insufficient-evidence",
-            "classification_reason": ("The source representative point maps to a unique current GURS municipality, whose official name differs from the retained Atlas/source name after case, diacritic and punctuation normalization; preserve the stable ID and review a sourced name crosswalk. Polygon equivalence remains unverified." if name_mismatch else "The exact source identity and municipal role are supported. Slovenia's current official name maps by point or an explicit bilingual alias; Serbia's current per-unit official register was not retained. Neither point nor sampled-vertex diagnostics establish polygon equivalence."),
+            "classification_reason": ("The source representative point maps to a unique current GURS municipality, whose official name differs from the retained Atlas/source name after case, diacritic and punctuation normalization; preserve the stable ID and review a sourced name crosswalk. Polygon equivalence and historical name validity remain unverified." if name_mismatch else "The exact source shape identity and ADM2 source level are supported. A unique current GURS crosswalk supports present-day municipality identity for scoped Slovenia rows. Current per-unit Serbian territorial role was not independently crosswalked. Neither point nor sampled-vertex diagnostics establish polygon equivalence."),
         })
 
     expected = set(member_ids)
@@ -203,8 +206,8 @@ def main():
         raise SystemExit("scope count or uniqueness failure")
     if collections.Counter(r["source_collection"] for r in rows) != {"SRB-ADM2": 67, "SVN-ADM2": 211}:
         raise SystemExit("unexpected scoped country/source counts")
-    if not all(row["source_identity_match"] for row in rows):
-        raise SystemExit("not every exact scoped ID matches the pinned source feature")
+    if not all(row["source_identity_match"] and row["source_identity_and_level_finding"] == "supported" for row in rows):
+        raise SystemExit("not every exact scoped ID and source ADM2 level matches the pinned source feature")
     official_matches = [r for r in rows if r["source_collection"] == "SVN-ADM2" and r["current_official_point_matches"] == 1]
     scope_text = "\n".join(sorted(member_ids))
     scope_hash = hashlib.sha256(scope_text.encode("utf-8")).hexdigest()
@@ -283,7 +286,24 @@ def main():
     }
     out = ROOT / "unit-assessments.json"
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({k: report[k] for k in ("scope_location_count", "source_counts", "slovenia_official_current_features", "slovenia_official_point_match_count", "slovenia_official_point_unmatched_or_ambiguous")}, ensure_ascii=False, indent=2))
+    summary = {
+        "scope_location_count": report["scope_location_count"],
+        "scope_member_ids_sha256": report["computed_scope_member_ids_sha256"],
+        "source_counts": report["source_counts"],
+        "source_identity_and_level_supported": sum(r["source_identity_and_level_finding"] == "supported" for r in rows),
+        "atlas_metadata_municipality_label_count": sum(r["atlas_reference_source_role"] == "Municipality" for r in rows),
+        "upstream_adm2_canonical_role_unspecified_count": sum(r["geoboundaries_canonical_role"] is None for r in rows),
+        "current_territorial_role_finding_counts": dict(collections.Counter(r["current_territorial_role_finding"] for r in rows)),
+        "slovenia_official_current_features": report["slovenia_official_current_features"],
+        "slovenia_official_point_match_count": report["slovenia_official_point_match_count"],
+        "slovenia_unique_official_code_count": report["slovenia_official_unique_name_code_match_count"],
+        "slovenia_name_correction_candidate_count": report["slovenia_name_correction_candidate_count"],
+        "slovenia_official_point_unmatched_or_ambiguous": report["slovenia_official_point_unmatched_or_ambiguous"],
+        "boundary_equivalence_finding": "insufficient-evidence for all scoped rows",
+        "limitations": report["limitations"],
+    }
+    (ROOT / "reproduction-summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

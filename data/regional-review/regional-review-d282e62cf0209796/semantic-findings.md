@@ -5,7 +5,7 @@ Research packet only. This records what was checked for the issue's exact 278 ID
 ## Scope and reproduction
 
 - The immutable issue scope is `scope.json`: 278 unique IDs, exact sorted-ID SHA-256 `e5db7702819affa14cb1d75948102332e5c50ec148212ef1e1d7393f2693b471`, area `framework:area:yugoslavia:cff5e9ba6c8e`, region Southeastern Europe.
-- `unit-assessments.json` retains one row per scoped ID, exact source shape identity, parent, source role/year/license, current Slovenia municipality crosswalk when possible, and independent identity/name/boundary findings.
+- `unit-assessments.json` retains one row per scoped ID, exact source shape identity and ADM2 level, Atlas reference role/year, upstream boundary role/year (including explicitly unspecified canonical role), parent, license, current Slovenia municipality crosswalk when possible, and independent identity/name/boundary findings.
 - `reproduce_scope.py` reproduces the packet ID hash and source joins. It verifies the issue's 1,169 area count and all 278 IDs against the complete pinned-v5 and current-main inventory. Both inventories contain 1,169 IDs with sorted-ID SHA-256 `ff60a7cfb463a8e5206fadbba78655153d374634d6f4b9f5639fda5f3603312c`. The hierarchy's semantic-review sentence saying 1,162 is stale narrative; it is not supported by either inventory.
 - The packet consists of 67 Serbian and 211 Slovenian ADM2 members. This is a bounded sample, not a complete national inventory.
 
@@ -18,10 +18,10 @@ Research packet only. This records what was checked for the issue's exact 278 ID
 
 ## Per-feature findings
 
-- All 278 exact Atlas IDs have matching geoBoundaries `shapeID` records in the retained source vintage; Atlas source metadata labels all 278 features as Municipality with reference year 2017, and the retained upstream geoBoundaries metadata independently identifies these ADM2 collections as canonical municipalities with boundaryYear 2017.
+- All 278 exact Atlas IDs join to matching geoBoundaries `shapeID` records. Their retained upstream source metadata and features agree on ADM2 and boundaryYear 2017. The Atlas reference metadata labels them Municipality with reference year 2017, but upstream `boundaryCanonical` is empty for both ADM2 collections. Accordingly, exact source identity and ADM2 level are supported, while the source does not independently certify a uniform municipal role. Current GURS crosswalks support present-day municipality identity for the 211 scoped Slovenian features; individual current Serbian unit roles remain unresolved.
 - For the 211 Slovenian scoped features, current official GURS provides 212 municipality polygons. The crosswalk identifies 211 distinct official codes: 208 representative points fall in exactly one current municipality polygon; the three coastal bilingual aliases map by explicit alias (`Piran / Pirano` → Piran, `Izola / Isola` → Izola, `Ankaran / Ancarano` → Ankaran) where the source representative point falls outside its current polygon. This is a current identity/name crosswalk, not proof of historical or polygon equivalence.
 - 53 Atlas names differ from the matched current official GURS names after case/diacritic/punctuation normalization. `slovenia-name-correction-candidates.csv` gives the stable Atlas IDs, source names, current GURS codes/names, official feature dates, and Atlas reference year. These are review candidates only: check date-specific official records and source vintage before proposing a rename; preserve IDs and record name history if an edit is justified.
-- Current official Serbia unit polygons were not included. Serbian identity, role and historic parent source are supported, but current geometry and boundary adjudication remain insufficiently evidenced.
+- Current official Serbia unit polygons were not included. The 67 Serbian source IDs and ADM2 level join exactly to retained shapes, but their individual present-day municipality/city status and current geometry were not crosswalked; those findings remain unresolved.
 - A simple sample of up to 25 source vertices per Slovenian feature is recorded as a diagnostic only. It is not an area-weighted overlap, Hausdorff distance, topological check, or accuracy score. Boundary finding remains `insufficient-evidence` for every row.
 
 ## Area meaning and neighboring scope

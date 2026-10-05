@@ -1,16 +1,33 @@
 {
   "scope_location_count": 278,
+  "scope_member_ids_sha256": "e5db7702819affa14cb1d75948102332e5c50ec148212ef1e1d7393f2693b471",
   "source_counts": {
     "SRB-ADM1": 25,
     "SRB-ADM2": 145,
     "SVN-ADM1": 2,
     "SVN-ADM2": 213
   },
+  "source_identity_and_level_supported": 278,
+  "atlas_metadata_municipality_label_count": 278,
+  "upstream_adm2_canonical_role_unspecified_count": 278,
+  "current_territorial_role_finding_counts": {
+    "unresolved": 67,
+    "current-municipality-crosswalk-supported": 211
+  },
   "slovenia_official_current_features": 212,
   "slovenia_official_point_match_count": 208,
+  "slovenia_unique_official_code_count": 211,
+  "slovenia_name_correction_candidate_count": 53,
   "slovenia_official_point_unmatched_or_ambiguous": [
     "gb:SVN:ADM2:79292919B28514023631155",
     "gb:SVN:ADM2:79292919B51493819354721",
     "gb:SVN:ADM2:79292919B72223984432251"
+  ],
+  "boundary_equivalence_finding": "insufficient-evidence for all scoped rows",
+  "limitations": [
+    "A point match is a current identity crosswalk diagnostic, not polygon-boundary equivalence.",
+    "The source boundary vintage is 2017; buildDate Dec 12 2023 is not the boundary reference year.",
+    "Current Serbia administrative geometry was not retained from Serbia's official register in this packet; Serbian boundary correspondence remains unresolved.",
+    "The packet owns only 211 of the 212 Slovenia municipality descendants identified in the current hierarchy; Hodoš is outside the pinned issue scope and is not reassigned here."
   ]
 }
