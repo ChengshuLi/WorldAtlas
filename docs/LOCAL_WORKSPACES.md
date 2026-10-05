@@ -2,7 +2,7 @@
 
 Whenever an author, premerge reviewer, Auditor or publisher needs a new local checkout, use `scripts/local-workspace.mjs`
 for new local checkouts. Fresh branches do not require accumulating fresh directories.
-Use Node 24 from any checkout of the same primary repository. One shared Git object
+Use Node 24 from any checkout of the same primary repository. Keep one stable worker ID for each chat across successive issues; a new job is not a new worker. Distinct reviewer agents keep their own worker IDs. One shared Git object
 store and registry serve all its worktrees. Each unique worker ID has at most one
 `work` slot and one `review` slot. Release a finished slot before allocating its
 replacement. A reviewer remains isolated from the author's files and reasoning. Review slots are optional: inspect exact diffs and immutable evidence through GitHub APIs or Git blobs without allocating a checkout when no filesystem reproduction/test is needed.
@@ -94,7 +94,7 @@ node scripts/local-workspace.mjs release --worker YOUR-WORKER-ID --slot work \
 Release preserves the current commit at a local `refs/worldatlas-local-recovery/`
 ref, then asks Git to remove the exact owned worktree without `--force`. Branches
 and the shared Git store remain. It rejects uncommitted, untracked **and ignored**
-files: first commit/push necessary evidence, preserve unique scratch outputs, and
+files, plus index trust flags that can hide edits (`assume-unchanged` or materialized `skip-worktree`): first commit/push necessary evidence, preserve unique scratch outputs, and
 remove only verified regenerable artifacts. A review checkout must be clean too.
 Release does not decide whether acceptance is complete or a process is finished;
 the holder must establish that before calling it. It does not delete remote refs,

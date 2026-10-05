@@ -134,6 +134,13 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (!inventory.some(item => item.path === entry.path)) throw Error('Managed checkout missing; inspect registry');
     const localGit = (...args) => execFileSync('git', ['-C', entry.path, ...args], {encoding: 'utf8'});
     if (localGit('rev-parse', '--path-format=absolute', '--git-common-dir').trim() !== common) throw Error('Checkout Git identity changed');
+    for (const row of localGit('ls-files', '-vz').split('\0').filter(Boolean)) {
+      // Git status/remove can trust assume-unchanged and skip-worktree bits.
+      // Absent uppercase S entries are normal sparse omissions, not dirty work.
+      if (/[a-z]/.test(row[0]) || row[0] === 'S' && fs.lstatSync(path.join(entry.path, row.slice(2)), {throwIfNoEntry: false})) {
+        throw Error('Index trust flags can hide edits; inspect materialized files and clear flags before cleanup');
+      }
+    }
     if (localGit('status', '--porcelain', '--untracked-files=all') || localGit('ls-files', '--others', '--ignored', '--exclude-standard')) throw Error('Workspace contains uncommitted, untracked or ignored files; preserve unique work and remove only verified generated artifacts first');
     const head = localGit('rev-parse', 'HEAD').trim();
     const preservedRef = `refs/worldatlas-local-recovery/${entry.token}`;

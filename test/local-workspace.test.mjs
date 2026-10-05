@@ -156,3 +156,14 @@ test('confirmed merge cleanup removes only the unchanged clean managed author ch
   assert.ok(!fs.existsSync(entry.path));
   assert.equal(manager.report().entries.length, 0);
 });
+
+test('assume-unchanged cannot hide unique tracked bytes from cleanup', t => {
+  const {manager, head} = fixture(t);
+  const entry = manager.allocate({worker: 'one', branch: 'engineering/hidden-edits'});
+  execFileSync('git', ['-C', entry.path, 'update-index', '--assume-unchanged', 'README.md']);
+  fs.writeFileSync(path.join(entry.path, 'README.md'), 'unique hidden work');
+  assert.equal(execFileSync('git', ['-C', entry.path, 'status', '--porcelain'], {encoding: 'utf8'}), '');
+  assert.throws(() => manager.release({worker: 'one', token: entry.token}), /trust flags/);
+  assert.equal(cleanupCompletedWorkspace(entry.path, head).status, 'pending');
+  assert.equal(fs.readFileSync(path.join(entry.path, 'README.md'), 'utf8'), 'unique hidden work');
+});
