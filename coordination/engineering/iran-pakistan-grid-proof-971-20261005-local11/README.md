@@ -12,7 +12,7 @@ All inputs are ordinary whole-file pinned Git blobs at the recorded baseline. Re
 
 ## Reproduction and controls
 
-Use Python 3.12 with the committed pinned NumPy/Shapely/pyproj requirements and Node 24. Restore the evaluation commits from this PR head. Exact registry/staged descriptors and commands are recorded in the evidence manifest. All outputs use fresh filenames/directories; no browser, provider, live database or deployment connection is needed. Two complete geometry-stage reproductions and two complete application compilations must match their respective retained reports byte-for-byte.
+Use Python 3.12 with the committed pinned NumPy/Shapely/pyproj requirements and Node 24. Fetch `refs/pull/990/head` to restore the recorded evaluation commits. Exact registry/staged descriptors and commands are recorded in the evidence manifest. All outputs use fresh filenames/directories; no browser, provider, live database or deployment connection is needed. Two complete geometry-stage reproductions and two complete application compilations must match their respective retained reports byte-for-byte.
 
 `controls.mjs` uses a known two-cell stripe at the actual integer grid width with high global owner IDs, detects overlap independently of picking priority and rejects wrong widths, stale bounds, incomplete neighbors and oversized domains. The existing world-regression controls cover lost coverage, new/tiny overlap, invalid inputs and unchanged geometry; shared scientific controls preserve method/immutability checks. Actual CLI wrong-pin/overwrite rejections are recorded separately.
 
