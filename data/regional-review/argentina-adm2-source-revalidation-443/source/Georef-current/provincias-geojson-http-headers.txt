@@ -1,0 +1,39 @@
+HTTP/1.1 302 Found
+Date: Mon, 05 Oct 2026 11:23:42 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+X-RateLimit-Limit-day: 3000000
+X-RateLimit-Remaining-day: 2965097
+X-RateLimit-Limit-minute: 6000
+X-RateLimit-Remaining-minute: 5894
+X-RateLimit-Limit-hour: 154000
+X-RateLimit-Remaining-hour: 140869
+X-RateLimit-Limit-second: 200
+X-RateLimit-Remaining-second: 195
+Server: cloudflare
+Location: https://infra.datos.gob.ar/georef/provincias.geojson
+Access-Control-Allow-Origin: *
+X-Kong-Upstream-Latency: 3
+X-Kong-Proxy-Latency: 0
+cf-cache-status: DYNAMIC
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tl4LlMLJdlvdQGeMYRSPOC49Ag8JFUFyogfs4w2pwq6f0poOjgNmUxIuxdaWmb6jVM5%2FdVyO26pGryu2pWLqK93pQGsMAXZnITpbvO%2Fo24wIXr37fxWHScsomHLCeevn%2Bk6Zqw%3D%3D"}]}
+CF-RAY: a45c0e44bdaf327e-SJC
+alt-svc: h3=":443"; ma=86400
+
+HTTP/1.1 200 OK
+Date: Mon, 05 Oct 2026 11:23:44 GMT
+Content-Type: application/geo+json; charset=utf-8
+Content-Length: 614706
+Connection: keep-alive
+Server: cloudflare
+Last-Modified: Wed, 19 Aug 2026 15:02:43 GMT
+ETag: "96132-65967b20c0904"
+Accept-Ranges: bytes
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Ulr1%2B5%2FK%2B3%2FYgVM5BCquSiOZ2KmQd1G6co7E%2BTEhxe4yCCXinoLcNg0L2B9%2FOvhD5boR0fmaZjJQLlcJ5FV6yNo855lNiwYJKRQ20ABHbPSTgIfcON%2BnxnUuxS8pIRCR6wI1N2I%3D"}]}
+cf-cache-status: DYNAMIC
+CF-RAY: a45c0e4b6de7b8b6-SJC
+alt-svc: h3=":443"; ma=86400
+

@@ -1,0 +1,39 @@
+HTTP/1.1 302 Found
+Date: Mon, 05 Oct 2026 11:10:13 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+X-RateLimit-Limit-day: 3000000
+X-RateLimit-Remaining-day: 2971914
+X-RateLimit-Limit-minute: 6000
+X-RateLimit-Remaining-minute: 5720
+X-RateLimit-Limit-hour: 154000
+X-RateLimit-Remaining-hour: 147686
+X-RateLimit-Limit-second: 200
+X-RateLimit-Remaining-second: 180
+Server: cloudflare
+Location: https://infra.datos.gob.ar/georef/departamentos.json
+Access-Control-Allow-Origin: *
+X-Kong-Upstream-Latency: 3
+X-Kong-Proxy-Latency: 0
+cf-cache-status: DYNAMIC
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=JPIuqDe0zAERBxITTpDohU6RYbsErpk%2BtGBqrSv5AH3sLSSQdpJeol1Y6YOTfI8CvubDiyGg9FMKazHClYtv%2BqBDKjADiYd1s%2F9Oc07lZ0%2Bdqs5L%2FuW%2Bf1laJ314yY9OPquCww%3D%3D"}]}
+CF-RAY: a45bfa85d9178b3c-SJC
+alt-svc: h3=":443"; ma=86400
+
+HTTP/1.1 200 OK
+Date: Mon, 05 Oct 2026 11:10:14 GMT
+Content-Type: application/json
+Content-Length: 127459
+Connection: keep-alive
+Server: cloudflare
+Last-Modified: Wed, 19 Aug 2026 15:02:17 GMT
+ETag: "1f1e3-65967b07ada02"
+Accept-Ranges: bytes
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=l2%2FjXfuAMa%2FVYJ8%2Bx1PhBSiXIY2vA6yEjMN7QGWmVELn%2B8kh5L36W1ukjNTkQonHGoD%2F3%2Fm08vOjzO3hhp%2FIHxG8VuGH0VlFMhIL4ih0ta5%2FYEJunLHg9eeTRtZIrBRU%2FNooFgA%3D"}]}
+cf-cache-status: DYNAMIC
+CF-RAY: a45bfa87bf7f23fd-SJC
+alt-svc: h3=":443"; ma=86400
+
