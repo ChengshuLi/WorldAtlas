@@ -21,13 +21,15 @@
     "data:import": "node scripts/import.mjs",
     "test:static": "node test/static-rendering.mjs",
     "research:prepare": "node scripts/prepare-research-bundle.mjs",
-    "research:import": "node scripts/import-research-bundle.mjs"
+    "research:import": "node scripts/import-research-bundle.mjs",
+    "build:cloudflare": "node scripts/build-cloudflare.mjs"
   },
   "dependencies": {
     "@neon/config": "^1.8.3",
     "@neon/env": "^1.4.8",
     "@neondatabase/serverless": "^1.2.0",
     "drizzle-orm": "^0.45.3",
+    "jose": "6.2.12",
     "leaflet": "^1.9.4"
   },
   "devDependencies": {

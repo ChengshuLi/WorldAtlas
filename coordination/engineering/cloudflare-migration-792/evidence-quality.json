@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "issue": 792,
+  "lane": "engineering",
+  "worker_id": "engineering-cloudflare-20261004-01a10934",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "712b1a107a1c4a53e0c2a29d66c5d703f3a7698a",
+    "files": [
+      {
+        "path": "package.json",
+        "bytes": 1304,
+        "sha256": "746e558c6636feb8342681f8b9b77d2391d2b96c2bd7829c79c878fe091de398",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 245755,
+        "sha256": "47aa40b82e7f6b225a6567d28a0427df39d415dcf86df1d26f6d32ab84fd7a12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "hosted/worker.js",
+        "bytes": 16325,
+        "sha256": "0362020ef057ed1a0a32ba2f35f3061da6dae1af3029b9709a004902d573cd28",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "hosted/content-backend.js",
+        "bytes": 927,
+        "sha256": "fe2ba22d7c1ee519914b1c7f81f05e00e35625f43746a64e9819ba10f45700d0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/build-hosted.mjs",
+        "bytes": 2414,
+        "sha256": "6d6a9b38d3a96ca759606ef44e91240aee25db8534a238eeb18c17d1f41371db",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/build-static.mjs",
+        "bytes": 13617,
+        "sha256": "4349be4bb1e58337ec05b09aa7655f6fb8b326cb49662c22d3ba81b7293bc267",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "package.json",
+      "bytes": 1387,
+      "sha256": "96481c8339f7ea60cfdfe91b8a42a4bf9d60ef108b3b1d9ffe2de780db1fa443",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 246133,
+      "sha256": "38279076ceffe227ac3e77678916d5f223bd0fb086c0036a4fe0c8905d110394",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "hosted/cloudflare-access.js",
+      "bytes": 1754,
+      "sha256": "4a3f5ab9dc73c1256f9ca2b21c455f808983cebdc3f135155e172665adb027fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "hosted/cloudflare-worker.js",
+      "bytes": 129,
+      "sha256": "a7a4c00b6c1e8ac45ecb906235e67bbd91470f06ae3d0137f17afb7751930df0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-cloudflare.mjs",
+      "bytes": 1779,
+      "sha256": "911fd507b010f0658e8c692c360a43caaa632d4ad3e79d17d27d243a7dc52b1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/cloudflare-access.test.mjs",
+      "bytes": 4361,
+      "sha256": "f4fd30999610621e4152d0c88a8bc2190254b80b4d59aa5ee12141f678679d17",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/CLOUDFLARE_HOSTING.md",
+      "bytes": 5329,
+      "sha256": "3647188bec2b15d80cb53eeec0932d1bea0b50540b269e39b5b5f5bafa5e68fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/README.md",
+      "bytes": 2013,
+      "sha256": "19e7ae1fbb3c427745c8acf0fb11f9d8ee5c64e367b724758d4462f13a44b78a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/build.log",
+      "bytes": 678,
+      "sha256": "1bdc1fe64c35d1beeec6b1851e7b89aca02ab5a5a7443bf8233787e47d721eb2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/claim.json",
+      "bytes": 828,
+      "sha256": "c5832708871705f14b0eeda8d1fa0cadaa4a8397452913e1dda306267d9660df",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/dry-run.log",
+      "bytes": 988,
+      "sha256": "f26906d713aeda5278889f8740329c609832abbffdad4eb26fd4f89b4086c2f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/targeted-tests.log",
+      "bytes": 886,
+      "sha256": "717938e801f6a177fbded75df9173d1793458731d633e20def1eb95c9be32e73",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "cloudflare-access-controls",
+      "kind": "code",
+      "description": "Sign controlled RS256 tokens and exercise real atlas routing behind the access wrapper; build the full prepared atlas and check Wrangler dry-run without deployment or database mutation.",
+      "software": "Node24, jose6.2.12, pinned project/Python dependencies",
+      "units": "boolean code/security assertions"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/cloudflare-access.test.mjs test/content-backend.test.mjs",
+    "node scripts/build-cloudflare.mjs",
+    "node node_modules/wrangler/bin/wrangler.js deploy --dry-run --config dist/cloudflare/wrangler.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "package.json",
+      "status": "modified",
+      "original_sha256": "746e558c6636feb8342681f8b9b77d2391d2b96c2bd7829c79c878fe091de398"
+    },
+    {
+      "path": "package-lock.json",
+      "status": "modified",
+      "original_sha256": "47aa40b82e7f6b225a6567d28a0427df39d415dcf86df1d26f6d32ab84fd7a12"
+    },
+    {
+      "path": "hosted/cloudflare-access.js",
+      "status": "added"
+    },
+    {
+      "path": "hosted/cloudflare-worker.js",
+      "status": "added"
+    },
+    {
+      "path": "scripts/build-cloudflare.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/cloudflare-access.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "docs/CLOUDFLARE_HOSTING.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/build.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/dry-run.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/targeted-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-migration-792/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": []
+}
