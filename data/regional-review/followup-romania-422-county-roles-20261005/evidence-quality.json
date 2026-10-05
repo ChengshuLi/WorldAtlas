@@ -1,0 +1,605 @@
+{
+  "version": 1,
+  "issue": 997,
+  "lane": "geography",
+  "worker_id": "worldatlas-geography-427-20261005-a64f10",
+  "subject_ids": [
+    "gb:ROU:ADM1:36066543B11233778748537",
+    "gb:ROU:ADM1:36066543B11747992440272",
+    "gb:ROU:ADM1:36066543B14518908529982",
+    "gb:ROU:ADM1:36066543B15225072959052",
+    "gb:ROU:ADM1:36066543B20641671386087",
+    "gb:ROU:ADM1:36066543B24619858626166",
+    "gb:ROU:ADM1:36066543B26260700062336",
+    "gb:ROU:ADM1:36066543B2949768471564",
+    "gb:ROU:ADM1:36066543B31003852704017",
+    "gb:ROU:ADM1:36066543B36343129004237",
+    "gb:ROU:ADM1:36066543B36508208096212",
+    "gb:ROU:ADM1:36066543B37248446823778",
+    "gb:ROU:ADM1:36066543B39156092034573",
+    "gb:ROU:ADM1:36066543B42198475713558",
+    "gb:ROU:ADM1:36066543B44844051198398",
+    "gb:ROU:ADM1:36066543B45061076601041",
+    "gb:ROU:ADM1:36066543B49718248736475",
+    "gb:ROU:ADM1:36066543B51562338382257",
+    "gb:ROU:ADM1:36066543B53231297119391",
+    "gb:ROU:ADM1:36066543B54316219236217",
+    "gb:ROU:ADM1:36066543B5722188715477",
+    "gb:ROU:ADM1:36066543B58098055223766",
+    "gb:ROU:ADM1:36066543B58663638147212",
+    "gb:ROU:ADM1:36066543B64946384360033",
+    "gb:ROU:ADM1:36066543B68152190067022",
+    "gb:ROU:ADM1:36066543B72359943930714",
+    "gb:ROU:ADM1:36066543B74561209637266",
+    "gb:ROU:ADM1:36066543B77825502227768",
+    "gb:ROU:ADM1:36066543B78296944586190",
+    "gb:ROU:ADM1:36066543B78402216072727",
+    "gb:ROU:ADM1:36066543B7969361625805",
+    "gb:ROU:ADM1:36066543B86483735073728",
+    "gb:ROU:ADM1:36066543B87560711020488",
+    "gb:ROU:ADM1:36066543B8882897274660",
+    "gb:ROU:ADM1:36066543B89779678405362",
+    "gb:ROU:ADM1:36066543B92634150337313",
+    "gb:ROU:ADM1:36066543B93424276500239",
+    "gb:ROU:ADM1:36066543B9514402375092",
+    "gb:ROU:ADM1:36066543B96905451171357",
+    "gb:ROU:ADM1:36066543B9731027217688",
+    "gb:ROU:ADM1:36066543B97406375074903",
+    "gb:ROU:ADM1:36066543B98418194735101"
+  ],
+  "subject_ids_sha256": "f77b100d55270807c909cf0c33f9612dc3ad1780035f7ccffe81e4dc31c33cae",
+  "baseline": {
+    "commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15",
+    "files": [
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/approved-boundary-decisions.json",
+        "bytes": 634171,
+        "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2404397,
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/macro-certificate.json",
+        "bytes": 38959,
+        "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 71286,
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/review-index.json",
+        "bytes": 2383,
+        "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/ROU-ADM1-CITATION-AND-USE-geoBoundaries.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/ROU-ADM1-geoBoundaries-ROU-ADM1-metaData.json",
+        "bytes": 861,
+        "sha256": "ffbe05c013dabcff41f69c0691e9dbd9e8468b331244d6d67dd139b8ec7298fd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-ROU-ADM1.geojson",
+        "bytes": 32428002,
+        "sha256": "e70d8bedfcaad1b99f387b044f7e7563102b98ccee982496a092178d05f22387",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/scope-subjects.json",
+        "bytes": 39553,
+        "sha256": "b04605f887479d1040614682bce80fa6f069332d723da82b12a2553baf3b5a3a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json",
+        "bytes": 6787,
+        "sha256": "fded0febc8ef8d934b1f7358755b3102ec8043cc027a88ad8106dec8247b7f56",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/subject-assessments.json",
+        "bytes": 361842,
+        "sha256": "9ca1665ab634d7ffa2c25230bb73509e4b3166dd4d00aab805502ddae0dc2ae5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/geographic-releases/current-manifest.json": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "data/macro-foundation/current-membership-inventory.json.gz": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "data/macro-foundation/review-index.json": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+      "data/macro-foundation/regional-handoffs.json.gz": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "data/macro-foundation/macro-certificate.json": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "data/macro-foundation/approved-boundary-decisions.json": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18"
+    },
+    "pin_files": {
+      "data/world-index.json": "data/world-index.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/geographic-releases/current-manifest.json": "data/geographic-releases/current-manifest.json",
+      "data/administrative-sources.json": "data/administrative-sources.json",
+      "data/macro-foundation/current-membership-inventory.json.gz": "data/macro-foundation/current-membership-inventory.json.gz",
+      "data/macro-foundation/review-index.json": "data/macro-foundation/review-index.json",
+      "data/macro-foundation/regional-handoffs.json.gz": "data/macro-foundation/regional-handoffs.json.gz",
+      "data/macro-foundation/macro-certificate.json": "data/macro-foundation/macro-certificate.json",
+      "data/macro-foundation/approved-boundary-decisions.json": "data/macro-foundation/approved-boundary-decisions.json"
+    },
+    "subject_files": {
+      "gb:ROU:ADM1:36066543B11233778748537": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B11747992440272": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B14518908529982": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B15225072959052": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B20641671386087": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B24619858626166": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B26260700062336": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B2949768471564": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B31003852704017": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B36343129004237": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B36508208096212": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B37248446823778": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B39156092034573": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B42198475713558": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B44844051198398": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B45061076601041": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B49718248736475": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B51562338382257": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B53231297119391": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B54316219236217": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B5722188715477": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B58098055223766": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B58663638147212": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B64946384360033": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B68152190067022": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B72359943930714": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B74561209637266": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B77825502227768": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B78296944586190": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B78402216072727": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B7969361625805": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B86483735073728": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B87560711020488": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B8882897274660": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B89779678405362": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B92634150337313": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B93424276500239": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B9514402375092": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B96905451171357": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B9731027217688": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B97406375074903": "data/geography/part-20.json",
+      "gb:ROU:ADM1:36066543B98418194735101": "data/geography/part-20.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "romania-law-2-1968",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/215837",
+      "role": "Legal county roster and separate Bucharest municipal status (Law 2/1968, Article 2 and Annex)",
+      "vintage": "Consolidated legal text accessed 2026-10-05; consolidation date displayed by portal",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "The official portal was inspected for factual administrative names/status; portal reuse terms were not established. The packet retains only a factual transcribed roster and source link, not a source-document copy."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the official legislation portal URL and inspect Law no. 2/1968 Article 2 and Annex. The roster extraction is retained as official-county-roster.json; no raw HTTP response was retained.",
+      "limit": "The legal roster supports names/roles and statutory organization, not the geometry or legal boundary accuracy of the 2017 polygons.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "eurostat-ro-nuts-2024",
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/reg_eco10_esms_ro.htm",
+      "role": "Romanian national/regional accounts metadata; NUTS 3 nomenclature cross-check",
+      "vintage": "Metadata updated 2025-01-31 (as displayed)",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Public official metadata inspected; reuse terms for a retained snapshot not established. No copied snapshot retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the Eurostat Romania regional accounts metadata and inspect the territorial classification paragraph listing NUTS 3 units.",
+      "limit": "NUTS statistical nomenclature corroborates a 41-county plus Bucharest listing, but is not a source for administrative polygon boundaries or province-level units.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "world-bank-romania-counties-catalog",
+      "url": "https://datacatalog.worldbank.org/search/dataset/0037841/romania-counties",
+      "role": "World Bank dataset catalog license/purpose and item listing cross-check",
+      "vintage": "Catalog metadata last updated 2023-01-31 (as displayed)",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "World Bank catalog labels the dataset Creative Commons Attribution 4.0 International (CC BY 4.0); item-level ArcGIS identity does not match the item ID in retained geoBoundaries metadata."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open World Bank Data Catalog record; compare catalog-listed ArcGIS item ID 40320b20a03e469596202d77d5f5d374 with retained geoBoundaries metadata source ID 361134ff4ff44e78a9aeec01af9a5175.",
+      "limit": "License label agrees with the retained metadata, but catalog object ID differs from source metadata and both REST objects were inaccessible in this retrieval; exact upstream object lineage remains unresolved.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "ancpi-uat-2024-county-layer",
+      "url": "https://data.gov.ro/dataset/unitati-administrativ-teritoriale-07-03-2024",
+      "role": "Romanian national ANCPI administrative-unit dataset listing and current first-order vector cross-check",
+      "vintage": "Dataset/resource date 2024-05-17; county-level SHP ZIP resource",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "data.gov.ro resource page labels the county layer CC BY 4.0 and lists a 8,175,720-byte ZIP; downloaded bytes were not obtained."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Dataset page: https://data.gov.ro/dataset/unitati-administrativ-teritoriale-07-03-2024 ; county resource: https://data.gov.ro/dataset/37639a5a-64d0-4682-b8ab-f7188a28ae8e/resource/d94e8e1a-297a-4061-ba09-85eff048a35f/download/unitate_administrativa_judet.zip ; retry retrieval and hash original ZIP before inspection.",
+      "limit": "Archive download timed out on repeated attempts; no binary SHA-256 or polygon comparison is available. Page metadata describes the first-order layer as counties plus Bucharest Municipality.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "romania-inspire-country-fiche-2024",
+      "url": "https://inspire-mif.github.io/INSPIRE-in-your-Country/RO/Country_fiches/RO-Country_fiche-2024.html",
+      "role": "INSPIRE Romania country fiche cross-reference for national administrative-unit data access and reuse statement",
+      "vintage": "2024 country fiche",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Fiche states AU INSPIRE dataset is accessible through INIS under an open-data license; exact dataset terms/object not retained or resolved."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the country fiche and inspect its administrative-units dataset entry and cited INIS access path.",
+      "limit": "Secondary discovery aid; no geometry retained or compared, and the linked dataset/license must be resolved at object level.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "prior-422-retained-geoboundaries-rou-adm1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d",
+      "role": "Retained exact 2017 source feature collection, original metadata, attribution file, and prior per-subject assessment inputs from #422 source commit",
+      "vintage": "Boundary year 2017; source metadata updated 2023-01-19; geoBoundaries release pinned to source commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "2026-10-05 (retrieved from immutable GitHub source commit in local evidence history)",
+      "license": {
+        "status": "redistributable",
+        "terms": "Original geoBoundaries metadata labels source World Bank, CC BY 4.0; attribution/use file retained. Upstream ArcGIS item identity mismatch means exact object lineage is unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "At immutable repository commit 9469f09592ced973a3448cf66b6100b741b64c0d restore paths data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json, data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-ROU-ADM1.geojson, data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/ROU-ADM1-geoBoundaries-ROU-ADM1-metaData.json, data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/ROU-ADM1-CITATION-AND-USE-geoBoundaries.txt, data/regional-review/regional-review-3c4fe25a21fa428d/source/subject-assessments.json, data/regional-review/regional-review-3c4fe25a21fa428d/source/scope-subjects.json ; GeoJSON SHA256 e70d8bedfcaad1b99f387b044f7e7563102b98ccee982496a092178d05f22387; metadata SHA256 ffbe05c013dabcff41f69c0691e9dbd9e8468b331244d6d67dd139b8ec7298fd; attribution SHA256 f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5.",
+      "limit": "The retained source advertises 42 first-order features as Counties although one is the Municipality of Bucharest. This packet verifies name/identity correspondence, not legal boundary accuracy. Catalog ArcGIS item ID 40320... and source metadata ID 361134... differ.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/github-issue-contract.json",
+      "bytes": 10743,
+      "sha256": "80f2ebe6ef1abf8a84c431bb653aba463916e7d3033261bf835ae4a401aa56a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/official-county-roster.json",
+      "bytes": 1174,
+      "sha256": "33c87b6f0dfad065edfd028c88ee3816b08ba8a3cb9ad15b936515998cb06768",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/neighbor-source-context.json",
+      "bytes": 4055,
+      "sha256": "815590c185d6adda2c609c3250f9c14b8fa52c988516ef2648eb38b1738f3123",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/reproduce.py",
+      "bytes": 13166,
+      "sha256": "0ee0c7b80324ea4ba5caab9e6a76e48b95d43ee20a1fac80988f3298aa557651",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/source-crosswalk.json",
+      "bytes": 40710,
+      "sha256": "4272cd06a16f7c30e1128fae6d4bd2f41246f83997f565816190e78bf4cb563d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/SOURCE_RESTORATION.md",
+      "bytes": 2684,
+      "sha256": "417846ab0ba2751c904cf02a8bccf2ad232ca11f96cdbd2d7b1fefad2515591a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/RESEARCH.md",
+      "bytes": 5564,
+      "sha256": "129b239c3ef7be430928dce9c3054a8d7e6561ff910a28814b99b9a2921f62f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/validation/positive-control.json",
+      "bytes": 571,
+      "sha256": "3fcf00f4082c3205b3026f419143fa0296635670015ca91f47f852d467927371",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/validation/negative-control.json",
+      "bytes": 310,
+      "sha256": "9113fbc4e97a094fe65b170e9b0cef9f24e077305cbbb7007fb402f27e8cb701",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/validation/reproducibility.json",
+      "bytes": 378,
+      "sha256": "fc997498dbb4504255b8b94fc3efb762312ffb31edf4170340a4f8d605540f95",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "romania-42-unit-source-and-parent-crosswalk",
+      "description": "Rebuild exact source shapeID to Atlas ID and source/Atlas name join for all 42 IDs; normalize diacritics/punctuation only for matching the official name roster; inspect each same-name singleton parent; compare canonical geometry JSON hashes and recursive coordinate-vertex counts as representation diagnostics only. Run deliberate incomplete-scope rejection and two byte-identical builds.",
+      "software": "Python 3 standard library (json, hashlib, unicodedata); repository checked out at 0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15",
+      "units": "IDs, features, parent nodes, recursive positions, SHA-256; no geodesic units or geometric accuracy claim",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "subject_count",
+      "value": 42,
+      "unit": "IDs",
+      "vintage": "baseline",
+      "input_sha256": "4272cd06a16f7c30e1128fae6d4bd2f41246f83997f565816190e78bf4cb563d",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    },
+    {
+      "id": "county_count",
+      "value": 41,
+      "unit": "units",
+      "vintage": "baseline",
+      "input_sha256": "4272cd06a16f7c30e1128fae6d4bd2f41246f83997f565816190e78bf4cb563d",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    },
+    {
+      "id": "bucharest_municipality_count",
+      "value": 1,
+      "unit": "units",
+      "vintage": "baseline",
+      "input_sha256": "4272cd06a16f7c30e1128fae6d4bd2f41246f83997f565816190e78bf4cb563d",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    },
+    {
+      "id": "same_name_singleton_parent_count",
+      "value": 42,
+      "unit": "parent nodes",
+      "vintage": "baseline",
+      "input_sha256": "4272cd06a16f7c30e1128fae6d4bd2f41246f83997f565816190e78bf4cb563d",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    },
+    {
+      "id": "exact_json_geometry_match_count",
+      "value": 0,
+      "unit": "geometries",
+      "vintage": "baseline",
+      "input_sha256": "4272cd06a16f7c30e1128fae6d4bd2f41246f83997f565816190e78bf4cb563d",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "subject_count",
+      "value": 42,
+      "unit": "IDs",
+      "text": "Exact scoped subjects"
+    },
+    {
+      "metric_id": "county_count",
+      "value": 41,
+      "unit": "units",
+      "text": "Official county-role matches"
+    },
+    {
+      "metric_id": "bucharest_municipality_count",
+      "value": 1,
+      "unit": "units",
+      "text": "Bucharest municipal-role matches"
+    },
+    {
+      "metric_id": "same_name_singleton_parent_count",
+      "value": 42,
+      "unit": "parent nodes",
+      "text": "Same-name singleton parent nodes"
+    },
+    {
+      "metric_id": "exact_json_geometry_match_count",
+      "value": 0,
+      "unit": "geometries",
+      "text": "Exact source/Atlas JSON geometry matches"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The source has 42 unique first-order features and each maps by source shapeID/name to one exact issue ID; legal and statistical sources identify the set as 41 counties plus Bucharest Municipality. This establishes roster/role correspondence, not polygon correctness.",
+      "status": "supported",
+      "source_ids": [
+        "romania-law-2-1968",
+        "eurostat-ro-nuts-2024",
+        "ancpi-uat-2024-county-layer",
+        "prior-422-retained-geoboundaries-rou-adm1"
+      ]
+    },
+    {
+      "text": "The retained source and World Bank catalog both display CC BY 4.0, but their ArcGIS item IDs differ; exact object license lineage remains unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "world-bank-romania-counties-catalog",
+        "prior-422-retained-geoboundaries-rou-adm1"
+      ]
+    },
+    {
+      "text": "The 2017 source vintage, feature count, source metadata and stored attribution are reproducible. The official 2024 vector archive could not be downloaded, so current boundary geometry, legal accuracy and polygon-level completeness remain unverified.",
+      "status": "unresolved",
+      "source_ids": [
+        "ancpi-uat-2024-county-layer",
+        "prior-422-retained-geoboundaries-rou-adm1"
+      ]
+    },
+    {
+      "text": "All 42 Atlas children point to same-name singleton framework province nodes whose status is retained-reference and semantic review is open. Official sources do not establish a Romanian province tier; hierarchy design needs an ID-preserving owner review.",
+      "status": "unresolved",
+      "source_ids": [
+        "romania-law-2-1968",
+        "eurostat-ro-nuts-2024"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/followup-romania-422-county-roles-20261005/reproduce.py --root .",
+    "node scripts/evidence-quality.mjs data/regional-review/followup-romania-422-county-roles-20261005/evidence-quality.json .",
+    "git diff --check"
+  ],
+  "validation": [
+    {
+      "method_id": "romania-42-unit-source-and-parent-crosswalk",
+      "kind": "positive-control",
+      "evidence_path": "data/regional-review/followup-romania-422-county-roles-20261005/validation/positive-control.json",
+      "outcome": "passed"
+    },
+    {
+      "method_id": "romania-42-unit-source-and-parent-crosswalk",
+      "kind": "negative-control",
+      "evidence_path": "data/regional-review/followup-romania-422-county-roles-20261005/validation/negative-control.json",
+      "outcome": "passed"
+    },
+    {
+      "method_id": "romania-42-unit-source-and-parent-crosswalk",
+      "kind": "reproducibility",
+      "evidence_path": "data/regional-review/followup-romania-422-county-roles-20261005/validation/reproducibility.json",
+      "outcome": "passed"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/github-issue-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/official-county-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/neighbor-source-context.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/source-crosswalk.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/SOURCE_RESTORATION.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/RESEARCH.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/validation/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/validation/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/validation/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "subject_count",
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/source-crosswalk.json",
+      "json_pointer": "/atlas_subject_count"
+    },
+    {
+      "metric_id": "county_count",
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/source-crosswalk.json",
+      "json_pointer": "/county_member_count"
+    },
+    {
+      "metric_id": "bucharest_municipality_count",
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/source-crosswalk.json",
+      "json_pointer": "/bucharest_municipality_count"
+    },
+    {
+      "metric_id": "same_name_singleton_parent_count",
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/source-crosswalk.json",
+      "json_pointer": "/same_name_singleton_province_parent_count"
+    },
+    {
+      "metric_id": "exact_json_geometry_match_count",
+      "path": "data/regional-review/followup-romania-422-county-roles-20261005/source-crosswalk.json",
+      "json_pointer": "/exact_source_atlas_geometry_matches"
+    }
+  ]
+}
