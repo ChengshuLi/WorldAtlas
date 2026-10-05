@@ -12,6 +12,7 @@ import {caseIndex} from '../iran-pakistan-grid-proof-971-20261005-local11/compil
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..');
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
 export function validateRuns(grid,maxOwner){
+ if(grid.version!==2||!Number.isSafeInteger(maxOwner)||maxOwner<1)throw Error('Invalid original run inventory context');
  let offset=0,cells=0;
  for(let y=0;y<grid.size;y++){
   if(grid.rows[y*2]!==offset)throw Error('Row offset mismatch');
@@ -62,6 +63,8 @@ async function main(){
  if(membership.length!==bounds.length+1||membership[0]!==0)throw Error('Incomplete membership');
  for(const r of bounds)if(membership[r.index]!==r.province_index||manifest.provinces[r.province_index-1]!==r.province_id)throw Error('Original province membership differs');
  const current=JSON.parse(read('data/geographic-releases/current-manifest.json')),releaseRaw=read('data/geographic-releases/'+current.path);if(hash(releaseRaw)!==current.sha256)throw Error('Release byte pin mismatch');
+ const releaseManifest=JSON.parse(gunzipSync(releaseRaw)),release=releaseManifest.releases.at(-1);
+ if(release.footprints_sha256!==manifest.footprints_sha256||release.hierarchy_sha256!==manifest.hierarchy_sha256||release.expected_counts.location!==bounds.length)throw Error('Immutable release/grid context differs');
  const loaded=[];
  const original=await loadOwnershipAssets(manifest,async url=>{const p='data/canonical-grid/'+url.replace(/^\.\//,'');const raw=read(p);loaded.push(p);return new Response(raw,{status:200});});
  if(new Set(loaded).size!==manifest.parts.length||loaded.length!==manifest.parts.length)throw Error('Original partition load inventory differs');
@@ -71,7 +74,7 @@ async function main(){
  const prior=JSON.parse(read(registry.prior_packet+'/results-v2/compiled.json'));
  const reference=differences(baseline,candidate,bbox);
  if(reference.cells!==prior.change_counts.changed_cells||JSON.stringify(reference.runs.map(r=>({y:r.y,start:r.start,end:r.end,baseline_owner:r.original_owner,candidate_owner:r.reconstructed_owner})))!==JSON.stringify(prior.changes.map(({component_mask,...r})=>r)))throw Error('Prior complete changed-cell inventory differs');
- const out={version:1,method_id:'original-encoded-baseline-parity',evaluation_commit:options['--commit'],baseline_commit:registry.baseline_commit,registry_sha256:descriptor.sha256,partition_count:loaded.length,owner_count:bounds.length,footprints_sha256:manifest.footprints_sha256,hierarchy_sha256:manifest.hierarchy_sha256,accounting,bbox,inspected_cells:native.length,baseline_parity:baselineParity,candidate_changes:candidateChanges,installation_ready:false,limits:['All original encoded partitions and their decoded digests/row-run ordering/owner range checked. Original stored ID/parent/province inventory checked; full-world geometry proof is inherited from PR990, not recomputed here.','Original versus reconstructed ownership compared exhaustively only in the full affected rectangle. No world-wide raster comparison, source/geographic approval, core integration or deployment.','Positive native/baseline discrepancies, if any, remain explicit. Nine geometric residuals and factual/source/projection uncertainty remain unresolved.']};
+ const out={version:1,method_id:'original-encoded-baseline-parity',evaluation_commit:options['--commit'],baseline_commit:registry.baseline_commit,registry_sha256:descriptor.sha256,partition_count:loaded.length,owner_count:bounds.length,geographic_release:release.id,footprints_sha256:manifest.footprints_sha256,hierarchy_sha256:manifest.hierarchy_sha256,accounting,bbox,inspected_cells:native.length,baseline_parity:baselineParity,candidate_changes:candidateChanges,installation_ready:false,limits:['All original encoded partitions and their decoded digests/row-run ordering/owner range checked. Original stored ID/parent/province inventory checked; full-world geometry proof is inherited from PR990, not recomputed here.','Original versus reconstructed ownership compared exhaustively only in the full affected rectangle. No world-wide raster comparison, source/geographic approval, core integration or deployment.','Positive native/baseline discrepancies, if any, remain explicit. Nine geometric residuals and factual/source/projection uncertainty remain unresolved.']};
  fs.writeFileSync(options['--out'],JSON.stringify(out)+'\n',{flag:'wx'});
  console.log(JSON.stringify({partitions:loaded.length,accounting,bbox_cells:native.length,baseline_discrepancies:baselineParity.cells,candidate_changes:candidateChanges.cells}));
 }
