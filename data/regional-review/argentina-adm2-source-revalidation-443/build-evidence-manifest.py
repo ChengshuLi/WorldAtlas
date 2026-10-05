@@ -36,6 +36,27 @@ source_hash={
  'controls':sha_bytes((OWN/'validate-controls.py').read_bytes()),
  'adm2_archive':sha_bytes(subprocess.check_output(['git','-C',str(ROOT),'show',f'{BASE}:data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz'])),
  'parent_scope':sha_bytes(subprocess.check_output(['git','-C',str(ROOT),'show',f'{BASE}:data/regional-review/regional-review-7cf674a63057d43f/findings/scoped-province-review.csv']))}
+
+# Composite input sets bind measurements whose values depend on two vintages.
+# The descriptor bytes are canonical JSON; their exact SHA-256 is the manifest's
+# input_sha256 so the validator can verify the whole input set as one listed file.
+input_sets=[]
+for input_id,filename,pairs in (
+ ('argentina-adm2-2020-plus-georef-current-departments','adm2-georef-current-input-set.txt',[
+  ('geoBoundaries-ARG-ADM2-scoped-214',source_hash['adm2']),
+  ('DatosArgentina-Georef-departamentos',source_hash['departments'])]),
+ ('argentina-adm1-2006-plus-georef-current-provinces','adm1-georef-current-input-set.txt',[
+  ('geoBoundaries-ARG-ADM1-2006',source_hash['adm1']),
+  ('DatosArgentina-Georef-provincias',source_hash['provinces'])])):
+    descriptor={'id':input_id,'inputs':[{'id':name,'sha256':digest} for name,digest in pairs],
+                'hash_definition':'SHA-256 of these canonical JSON descriptor bytes (UTF-8, sorted keys, compact separators, trailing LF).','version':1}
+    raw=(json.dumps(descriptor,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode('utf-8')
+    path=OUT/filename;path.write_bytes(raw)
+    key='input_set_'+('adm2_departments' if 'adm2' in input_id else 'adm1_provinces')
+    source_hash[key]=sha_bytes(raw)
+    input_sets.append({'id':input_id,'path':f'{PACKET}/findings/{filename}','sha256':source_hash[key],
+                       'component_inputs':[{'id':name,'sha256':digest} for name,digest in pairs]})
+
 columns={filename:{'record_count':'count'} for filename in (
  '2006-adm1-to-current-province-overlay.csv',
  'scoped-2020-to-current-georef-overlay.csv',
@@ -44,9 +65,9 @@ columns={filename:{'record_count':'count'} for filename in (
  'scoped-parent-review.csv',
  'scoped-2020-internal-overlaps.csv')}
 table_input={
- '2006-adm1-to-current-province-overlay.csv':source_hash['adm1'],
+ '2006-adm1-to-current-province-overlay.csv':source_hash['provinces'],
  'scoped-2020-to-current-georef-overlay.csv':source_hash['adm2'],
- 'scoped-current-georef-positive-area-overlaps.csv':source_hash['departments'],
+ 'scoped-current-georef-positive-area-overlaps.csv':source_hash['input_set_adm2_departments'],
  'scoped-multipart-components.csv':source_hash['adm2'],
  'scoped-parent-review.csv':source_hash['parent_scope'],
  'scoped-2020-internal-overlaps.csv':source_hash['adm2']}
@@ -102,11 +123,22 @@ def metric_input(file_rel, pointer):
     if name=='source-partition-summary.json':
         return source_hash['adm2_archive'] if pointer in {'/national_features','/restored_bytes'} else source_hash['adm2']
     if name=='spatial-reproduction-summary.json':
-        current_fields={'/current_feature_count','/invalid_current_geometry_count',
-                        '/scoped_current_source_overlap_pairs_gt_1sqm','/scoped_current_source_overlap_pairs_over_1hectare'}
-        return source_hash['departments'] if pointer in current_fields or pointer.startswith('/current_categories/') or pointer.startswith('/scoped_top_province_counts/') else source_hash['adm2']
+        current_fields={'/current_feature_count','/invalid_current_geometry_count'}
+        two_vintage_fields={
+            '/scoped_current_source_overlap_pairs_gt_1sqm','/scoped_current_source_overlap_pairs_over_1hectare',
+            '/scoped_exact_normalized_top_name_matches','/scoped_same_normalized_name_candidates',
+            '/scoped_unique_same_normalized_name_candidates','/scoped_exact_same_name_candidate_geometry_symdiff_gt_5pct'}
+        if pointer in current_fields or pointer.startswith('/current_categories/'):
+            return source_hash['departments']
+        if pointer in two_vintage_fields or pointer.startswith('/scoped_top_province_counts/') or pointer.startswith('/priority_top_share_by_source_id/'):
+            return source_hash['input_set_adm2_departments']
+        return source_hash['adm2']
     if name=='province-crosswalk-summary.json':
-        return source_hash['provinces'] if pointer in {'/current_feature_count','/invalid_current'} else source_hash['adm1']
+        if pointer in {'/current_feature_count','/invalid_current'}:
+            return source_hash['provinces']
+        if pointer in {'/old_feature_count','/old_unique_id_count','/invalid_old'} or pointer.startswith('/geometry_types_old/'):
+            return source_hash['adm1']
+        return source_hash['input_set_adm1_provinces']
     if name=='component-summary.json':
         return source_hash['adm2']
     return source_hash['adm2']
@@ -192,6 +224,7 @@ manifest={
  'subject_ids':subject_ids,'subject_ids_sha256':subject_digest,
  'baseline':{'commit':BASE,'files':baseline_files,'pins':pins,'pin_files':pin_files,'subject_files':{sid:'data/geography/part-0.json' for sid in subject_ids}},
  'sources':sources,'outputs':outputs,
+ 'input_sets':input_sets,
  'methods':[
   {'id':'source-partition','kind':'generator','helper_version':'worldatlas-evidence-preparation-v1','description':'Restore/hash the pinned full 2020 ADM2 object, verify its 525-feature/unique-ID roster, and extract exactly the issue-scoped 214 IDs from retained #443 scope.','software':'Python 3.12.14; stdlib gzip/json/hashlib; geoBoundaries upstream commit 9469f09','units':'features, bytes and SHA-256'},
   {'id':'polygon-overlay','kind':'measurement','description':'Project longitude/latitude WGS84 polygons into EPSG:6933 with always_xy; run equal-area Shapely overlay at positive area >1 m2 without geometry repair. Produce the exact scoped 2020/current department candidate, overlap, parent and component ledgers plus the 2006 ADM1/current-province comparison.','software':'Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; pyproj 3.7.2; PROJ 9.5.1; NumPy 2.3.5','units':'m2, km2, component counts, interior rings and dimensionless area shares'},

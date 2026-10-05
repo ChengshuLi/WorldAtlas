@@ -375,6 +375,14 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/adm1-georef-current-input-set.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/adm2-georef-current-input-set.txt",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-generation-reproducibility.json",
       "status": "added"
     },
@@ -626,6 +634,38 @@
       ],
       "status": "unresolved",
       "text": "The advertised licensed 2017 IGN boundary data was not retrievable; its metadata PDF does not provide overlay geometry."
+    }
+  ],
+  "input_sets": [
+    {
+      "component_inputs": [
+        {
+          "id": "geoBoundaries-ARG-ADM2-scoped-214",
+          "sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305"
+        },
+        {
+          "id": "DatosArgentina-Georef-departamentos",
+          "sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92"
+        }
+      ],
+      "id": "argentina-adm2-2020-plus-georef-current-departments",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/adm2-georef-current-input-set.txt",
+      "sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d"
+    },
+    {
+      "component_inputs": [
+        {
+          "id": "geoBoundaries-ARG-ADM1-2006",
+          "sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6"
+        },
+        {
+          "id": "DatosArgentina-Georef-provincias",
+          "sha256": "b086852064c26813d9f607c82c91b4e74e18ea83fd21993ddedd473cf8495af5"
+        }
+      ],
+      "id": "argentina-adm1-2006-plus-georef-current-provinces",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/adm1-georef-current-input-set.txt",
+      "sha256": "ec2536776b385cf12ceaf95b4432d5a421483a57df741a8c54e2ac5dbb27b949"
     }
   ],
   "issue": 944,
@@ -1116,7 +1156,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "table:2006-adm1-to-current-province-overlay.csv:2:record_count:-",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
+      "input_sha256": "b086852064c26813d9f607c82c91b4e74e18ea83fd21993ddedd473cf8495af5",
       "unit": "count",
       "value": 24,
       "vintage": "current"
@@ -1132,7 +1172,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "table:scoped-current-georef-positive-area-overlaps.csv:2:record_count:-",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 484,
       "vintage": "current"
@@ -1444,7 +1484,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/old_count_below_99pct_current_coverage",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
+      "input_sha256": "ec2536776b385cf12ceaf95b4432d5a421483a57df741a8c54e2ac5dbb27b949",
       "unit": "count",
       "value": 7,
       "vintage": "current"
@@ -1588,7 +1628,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B14767108287685",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "ratio-or-source-value",
       "value": 0.852828872,
       "vintage": "current"
@@ -1596,7 +1636,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B47006381015187",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "ratio-or-source-value",
       "value": 0.875492712,
       "vintage": "current"
@@ -1604,7 +1644,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B76052784863315",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "ratio-or-source-value",
       "value": 0.739947994,
       "vintage": "current"
@@ -1644,7 +1684,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_current_source_overlap_pairs_gt_1sqm",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 484,
       "vintage": "current"
@@ -1652,7 +1692,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_current_source_overlap_pairs_over_1hectare",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 446,
       "vintage": "current"
@@ -1660,7 +1700,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_exact_normalized_top_name_matches",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 203,
       "vintage": "current"
@@ -1668,7 +1708,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_exact_same_name_candidate_geometry_symdiff_gt_5pct",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 26,
       "vintage": "current"
@@ -1724,7 +1764,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_same_normalized_name_candidates",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 205,
       "vintage": "current"
@@ -1732,7 +1772,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Buenos Aires",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 11,
       "vintage": "current"
@@ -1740,7 +1780,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Catamarca",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 16,
       "vintage": "current"
@@ -1748,7 +1788,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Corrientes",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 24,
       "vintage": "current"
@@ -1756,7 +1796,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Jujuy",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 16,
       "vintage": "current"
@@ -1764,7 +1804,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/La Rioja",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 18,
       "vintage": "current"
@@ -1772,7 +1812,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Mendoza",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 18,
       "vintage": "current"
@@ -1780,7 +1820,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Misiones",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 17,
       "vintage": "current"
@@ -1788,7 +1828,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Salta",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 23,
       "vintage": "current"
@@ -1796,7 +1836,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/San Juan",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 19,
       "vintage": "current"
@@ -1804,7 +1844,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/San Luis",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 9,
       "vintage": "current"
@@ -1812,7 +1852,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Santiago del Estero",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 26,
       "vintage": "current"
@@ -1820,7 +1860,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Tucumán",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 17,
       "vintage": "current"
@@ -1828,7 +1868,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_unique_same_normalized_name_candidates",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d",
       "unit": "count",
       "value": 141,
       "vintage": "current"
@@ -1844,18 +1884,18 @@
   ],
   "outputs": [
     {
-      "bytes": 13949,
+      "bytes": 14390,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/README.md",
       "role": "research-output",
-      "sha256": "072d6303e6d707d9052f084bece9d4c865d54298c3eb348ed47487abd16ca79a"
+      "sha256": "4851aa3f8a177a26d594e3189aba8e43b14e97818111ca8df506044886a00cdf"
     },
     {
-      "bytes": 24795,
+      "bytes": 26935,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py",
       "role": "reproduction-code",
-      "sha256": "17100313862bca3446b75db0fcd9c1921ad200a86d9311fccf55626c55bc5c41"
+      "sha256": "cca3d5548c26bc88e0698353f86c2cd5a7d9774f3796f5dd1ed6e703c04a334f"
     },
     {
       "bytes": 15859,
@@ -1884,6 +1924,20 @@
       ],
       "role": "generated-table",
       "sha256": "a328935626dce53acdd673cc5bc40009c3c6cb60362d3f5d897131ffae164c43"
+    },
+    {
+      "bytes": 437,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/adm1-georef-current-input-set.txt",
+      "role": "research-output",
+      "sha256": "ec2536776b385cf12ceaf95b4432d5a421483a57df741a8c54e2ac5dbb27b949"
+    },
+    {
+      "bytes": 448,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/adm2-georef-current-input-set.txt",
+      "role": "research-output",
+      "sha256": "46d19264bbb677c2167b912372fffd4a34c40bac9394b92631ed167a8e18ed4d"
     },
     {
       "bytes": 561,
@@ -1925,7 +1979,7 @@
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json",
       "role": "measurement-result",
-      "sha256": "195cd750cf263391a90a53e43a6dcb4a4670d78e6e4606d21835d1779a4480b5"
+      "sha256": "1376ae4034e44b2807896df5e0fc8f729cdc1fd7f7ddc517be7ae58914588c4f"
     },
     {
       "bytes": 482,
