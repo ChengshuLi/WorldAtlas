@@ -30,6 +30,13 @@ assert comparison['results']['same_at_4dp'] == 0 and comparison['results']['diff
 assert [(p['atlas_owned_member_count'], p['official_2025_count']) for p in parents['parent_assessments']] == [(13,13),(8,9),(11,11),(8,8)]
 assert all(p['disposition'] in {'insufficient-evidence','correction-needed'} for p in parents['parent_assessments'])
 assert all(source.get('sha256') is None and source.get('restoration') for source in register['sources'] if source['id'] in {'yunnan-civil-affairs-administrative-setup','yunnan-local-administrative-code-standards-release'})
+rows = comparison['results']['per_location']
+assert comparison['results']['unique_source_features'] == len({r['source_shape_id'] for r in rows}) == 40
+assert comparison['results']['same_at_4dp'] == sum(r['same_geometry_after_coordinate_rounding_to_4dp_and_ring_normalization'] for r in rows)
+assert comparison['results']['different_at_4dp'] == sum(not r['same_geometry_after_coordinate_rounding_to_4dp_and_ring_normalization'] for r in rows)
+for key, row_key in [('source_parts_total', 'source_polygon_parts'), ('atlas_parts_total', 'atlas_polygon_parts'), ('source_rings_total', 'source_ring_count'), ('atlas_rings_total', 'atlas_ring_count'), ('source_vertices_total', 'source_vertex_count'), ('atlas_vertices_total', 'atlas_vertex_count')]:
+    assert comparison['results'][key] == sum(r[row_key] for r in rows)
+assert len({r['source_shape_id'] for r in rows}) == 40
 assert parents['area_assessment']['disposition'] == 'insufficient-evidence'
 assert scope['regional_interiors_approved'] is False and scope['location_attribute_imports_ready'] is False
 print(json.dumps({'issue':451,'scope_count':40,'roster_sha256':roster_hash,'source_coverage':len(register['sources']),'parent_counts':[p['atlas_owned_member_count'] for p in parents['parent_assessments']],'lineage_differences':comparison['results']['different_at_4dp'],'status':'passed'},indent=2))

@@ -31,7 +31,7 @@ def feature_id(feature: dict) -> str | None:
     return feature.get("id") or (feature.get("properties") or {}).get("id")
 
 
-def vertices_and_bbox(geometry: dict) -> tuple[int, int, list[float]]:
+def vertices_and_bbox(geometry: dict) -> tuple[int, int, list[float], int]:
     geom_type = geometry.get("type")
     coordinates = geometry.get("coordinates")
     if geom_type == "Polygon":
