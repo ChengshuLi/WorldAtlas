@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "issue": 1016,
+  "retrieved_at_utc": "2026-10-05",
+  "sources": [
+    {
+      "id": "surs-sistat-0214809s",
+      "data_url": "https://pxweb.stat.si/SiStatData/api/v1/en/Data/0214809S.px",
+      "table_url": "https://pxweb.stat.si/SiStatData/pxweb/en/Data/-/0214809S.px",
+      "table": "0214809S",
+      "title": "Territorial units and house numbers by the municipalities, Slovenia, 2004H2–2018H2",
+      "publisher_and_attribution": "Statistical Office of the Republic of Slovenia (SURS) and Surveying and Mapping Authority (SMA); cite SURS as required by SURS terms",
+      "source_role": "Municipality code/label dimension and dated municipality-area observations; supports per-code series presence, not historical name effective dates",
+      "retrieval_query": "Exact POST body retained at source/sistat-request.json; selected all municipality codes, 2017H1 and 2017H2, Area [sq. km]",
+      "dataset_vintage": "2017H1=2017-01-01 and 2017H2=2017-07-01 observations; table reports 2004H2–2018H2 and page last-update 2022-01-24; municipality labels are one static dimension",
+      "license": "SURS statistical data and information are available for free unrestricted use with attribution to Statistical Office of the Republic of Slovenia/SURS; user modifications must be identified. The SURS notice says third-party rights are not altered.",
+      "terms_url": "https://www.stat.si/StatWeb/StaticPages/Index/Copyright",
+      "retained_original": "source/sistat-0214809S-2017-area.json",
+      "limit": "A static current table dimension cannot establish what each official RPE name was in 2017; area observations do not establish polygon equivalence or source-name correctness."
+    },
+    {
+      "id": "surs-2017-07-01-rpe-release",
+      "url": "https://www.stat.si/StatWeb/News/Index/6776",
+      "publisher": "SURS; article reports Register of Spatial Units maintained by GURS",
+      "vintage": "Published 2017-07-18; reference date 2017-07-01",
+      "role": "Dated corroboration of 212 municipalities and register-maintainer context only",
+      "retention": "Restoration-only; no page snapshot redistributed",
+      "limit": "Article gives national totals and selected area extremes, not municipality names by code."
+    },
+    {
+      "id": "slovenia-zkn-article-130",
+      "url": "https://pisrs.si/Pis.web/pregledPredpisa?d-49687-s=1&id=ZAKO7952",
+      "official_gazette_url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina?urlurid=20062024",
+      "title": "Zakon o katastru nepremičnin (ZKN), Article 130",
+      "retrieved_at": "2026-10-05",
+      "role": "Primary legal access rule for RPE historical data and the collection of documents",
+      "finding": "Historical RPE data access is provided to authorized geodetic professionals and state bodies. Any person may request to inspect/copy RPE collection-of-documents records by a reasoned written request demonstrating legal interest.",
+      "retention": "Restoration-only; legal text cited, not redistributed",
+      "limit": "No legal interest determination, authorized professional, or state-body request was available in this research."
+    },
+    {
+      "id": "govsi-gurs-rpe-description",
+      "url": "https://www.gov.si/teme/nepremicninske-evidence/",
+      "publisher": "Government of Slovenia describing the GURS Register of Spatial Units",
+      "retrieved_at": "2026-10-05",
+      "role": "Identifies authoritative RPE fields (type, code, name, area) and states its documentary collection is retained permanently, physically and electronically",
+      "retention": "Restoration-only; no third-party files copied",
+      "limit": "This description does not supply the requested historical entries or documents."
+    }
+  ],
+  "baseline": {
+    "commit": "3042d1278e87dae00c26924c339e940c9fba240e",
+    "candidate_roster_sha256": "ac6abb4d3d6f908b1fd958a8afc196447b23a9abb1527bf09cdb9530928340c7",
+    "atlas_geography_file": "data/geography/part-22.json",
+    "atlas_geography_sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+  }
+}

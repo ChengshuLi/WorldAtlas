@@ -1,0 +1,408 @@
+{
+  "version": 1,
+  "issue": 1016,
+  "lane": "geography",
+  "worker_id": "codex-geography-422-20261005-a88425a6-102e-4a9f-b3f4-ef588ed6c410",
+  "subject_ids": [
+    "gb:SVN:ADM2:79292919B14844764164504",
+    "gb:SVN:ADM2:79292919B19982075256158",
+    "gb:SVN:ADM2:79292919B22803518802899",
+    "gb:SVN:ADM2:79292919B24232853487661",
+    "gb:SVN:ADM2:79292919B24234918778023",
+    "gb:SVN:ADM2:79292919B27119869854741",
+    "gb:SVN:ADM2:79292919B27121964158679",
+    "gb:SVN:ADM2:79292919B29250597194434",
+    "gb:SVN:ADM2:79292919B30339441017456",
+    "gb:SVN:ADM2:79292919B31270316639781",
+    "gb:SVN:ADM2:79292919B34418813957407",
+    "gb:SVN:ADM2:79292919B36449465355430",
+    "gb:SVN:ADM2:79292919B36906673582366",
+    "gb:SVN:ADM2:79292919B37217694614402",
+    "gb:SVN:ADM2:79292919B37893156652188",
+    "gb:SVN:ADM2:79292919B39454020264245",
+    "gb:SVN:ADM2:79292919B40236159589403",
+    "gb:SVN:ADM2:79292919B41680562738857",
+    "gb:SVN:ADM2:79292919B41699436206095",
+    "gb:SVN:ADM2:79292919B41960414721213",
+    "gb:SVN:ADM2:79292919B43187654305214",
+    "gb:SVN:ADM2:79292919B4491351811803",
+    "gb:SVN:ADM2:79292919B4658103719865",
+    "gb:SVN:ADM2:79292919B47659572418488",
+    "gb:SVN:ADM2:79292919B50582380192051",
+    "gb:SVN:ADM2:79292919B51659604970826",
+    "gb:SVN:ADM2:79292919B51703506835671",
+    "gb:SVN:ADM2:79292919B52859595102923",
+    "gb:SVN:ADM2:79292919B53548294602396",
+    "gb:SVN:ADM2:79292919B54937293403521",
+    "gb:SVN:ADM2:79292919B550141556557",
+    "gb:SVN:ADM2:79292919B606741638743",
+    "gb:SVN:ADM2:79292919B61887521642572",
+    "gb:SVN:ADM2:79292919B63771260852336",
+    "gb:SVN:ADM2:79292919B64708895890629",
+    "gb:SVN:ADM2:79292919B66240323896523",
+    "gb:SVN:ADM2:79292919B6737679693048",
+    "gb:SVN:ADM2:79292919B69562863296028",
+    "gb:SVN:ADM2:79292919B71143168599957",
+    "gb:SVN:ADM2:79292919B72046348709828",
+    "gb:SVN:ADM2:79292919B72096121739234",
+    "gb:SVN:ADM2:79292919B72498543032792",
+    "gb:SVN:ADM2:79292919B74602913806737",
+    "gb:SVN:ADM2:79292919B76966153673191",
+    "gb:SVN:ADM2:79292919B80018774368860",
+    "gb:SVN:ADM2:79292919B85077344195583",
+    "gb:SVN:ADM2:79292919B88661184998894",
+    "gb:SVN:ADM2:79292919B90781452828589",
+    "gb:SVN:ADM2:79292919B92459471483438",
+    "gb:SVN:ADM2:79292919B95549890377821",
+    "gb:SVN:ADM2:79292919B98583397902155",
+    "gb:SVN:ADM2:79292919B98620751360041",
+    "gb:SVN:ADM2:79292919B99171533039052"
+  ],
+  "subject_ids_sha256": "53c01f96e0082121c2e13b8d1745e39a0efbad26486483c9159c9e4e2afd7d47",
+  "baseline": {
+    "commit": "3042d1278e87dae00c26924c339e940c9fba240e",
+    "files": [
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/scope.json",
+        "bytes": 19188,
+        "sha256": "7456674ffc3ede4604fd243aaece1dbbb80868f5d3de08efa6868a8574f7884e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json",
+        "bytes": 563382,
+        "sha256": "98e3d72e5f497b71488e1a233a457d6be31e675de196e6ee7595b1e06a0529c1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv",
+        "bytes": 15544,
+        "sha256": "ac6abb4d3d6f908b1fd958a8afc196447b23a9abb1527bf09cdb9530928340c7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson",
+        "bytes": 13049219,
+        "sha256": "b74a49d83ce08363b1b43eae38a1900a985c610860ff443e20db712c28d26e1b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-wfs-collections.json",
+        "bytes": 417486,
+        "sha256": "028f8c5dc424219d02da7291330689afd6570e8e55983ce35d1b958a92827cc2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/source/source-provenance.json",
+        "bytes": 15793,
+        "sha256": "67d39db1cb2f1c73f0106799c2a6f6c85443d7a548a09b6f0c5742778a2d4d74",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "data/regional-review/regional-review-d282e62cf0209796/scope.json": "7456674ffc3ede4604fd243aaece1dbbb80868f5d3de08efa6868a8574f7884e",
+      "data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json": "98e3d72e5f497b71488e1a233a457d6be31e675de196e6ee7595b1e06a0529c1",
+      "data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv": "ac6abb4d3d6f908b1fd958a8afc196447b23a9abb1527bf09cdb9530928340c7"
+    },
+    "pin_files": {
+      "data/regional-review/regional-review-d282e62cf0209796/scope.json": "data/regional-review/regional-review-d282e62cf0209796/scope.json",
+      "data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json": "data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json",
+      "data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv": "data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv"
+    },
+    "subject_files": {
+      "gb:SVN:ADM2:79292919B14844764164504": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B19982075256158": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B22803518802899": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B24232853487661": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B24234918778023": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B27119869854741": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B27121964158679": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B29250597194434": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B30339441017456": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B31270316639781": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B34418813957407": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B36449465355430": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B36906673582366": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B37217694614402": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B37893156652188": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B39454020264245": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B40236159589403": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B41680562738857": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B41699436206095": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B41960414721213": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B43187654305214": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B4491351811803": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B4658103719865": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B47659572418488": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B50582380192051": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B51659604970826": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B51703506835671": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B52859595102923": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B53548294602396": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B54937293403521": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B550141556557": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B606741638743": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B61887521642572": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B63771260852336": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B64708895890629": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B66240323896523": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B6737679693048": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B69562863296028": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B71143168599957": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B72046348709828": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B72096121739234": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B72498543032792": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B74602913806737": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B76966153673191": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B80018774368860": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B85077344195583": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B88661184998894": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B90781452828589": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B92459471483438": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B95549890377821": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B98583397902155": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B98620751360041": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B99171533039052": "data/geography/part-22.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "surs-sistat-0214809s",
+      "url": "https://pxweb.stat.si/SiStatData/api/v1/en/Data/0214809S.px",
+      "role": "Official SURS/SMA municipality-code dimension and municipality-area observations at both 2017 half-year reference dates; static labels do not establish historical name spellings.",
+      "vintage": "Table 0214809S covers 2004H2–2018H2; retrieved 2026-10-05; table page last updated 2022-01-24; selected 2017H1 and 2017H2 area values.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "SURS statistical data are free for unrestricted use with attribution to Statistical Office of the Republic of Slovenia (SURS); identify user-derived results. SURS states third-party rights are unaffected."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-0214809S-2017-area.json",
+          "bytes": 8900,
+          "sha256": "4682c0cfa67c31a322c6c29bd50dd6184843cd5636c02fe6f98766724f1a7534",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ],
+      "limit": "The table has a static municipality dimension. It does not provide historical official names by half-year; area observations only support row presence, not name or polygon equivalence.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "surs-rpe-release-2017",
+      "url": "https://www.stat.si/StatWeb/News/Index/6776",
+      "role": "Official 2017-07-01 reference confirming 212 RPE municipalities and GURS register-maintainer context.",
+      "vintage": "Published 2017-07-18, reference date 2017-07-01.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "SURS terms permit free reuse with SURS attribution; page text is cited/paraphrased, not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the cited SURS release; repository retains its URL and assessed fact only.",
+      "limit": "Article reports aggregate totals, not a per-code municipality-name roster.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gurs-current-rpe-crosswalk",
+      "url": "https://ipi.eprostor.gov.si/wfs-si-gurs-rpe/ogc/collections",
+      "role": "Current GURS municipal names/codes and source feature dates already preserved in the pinned #423 packet.",
+      "vintage": "Current WFS response with per-feature DATUM_SYS dates, retrieval 2026-10-05; not a 2017 vintage.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "The pinned #423 source provenance records CC BY 4.0 under GURS access terms; attribution is Surveying and Mapping Authority of the Republic of Slovenia (GURS)."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use the exact original GeoJSON and source catalog at data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson and source/gurs-wfs-collections.json in the baseline commit; their whole-file hashes are in baseline.files.",
+      "limit": "Current-name/code join is a current crosswalk, not historical spelling evidence or polygon equivalence.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gurs-historical-rpe-access",
+      "url": "https://pisrs.si/Pis.web/pregledPredpisa?d-49687-s=1&id=ZAKO7952",
+      "role": "ZKN Article 130 and GURS documentation identify the authoritative historical RPE name records and access restriction.",
+      "vintage": "Law and official RPE documentation checked 2026-10-05.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Legal and official register information cited only; no separate reuse license for underlying historical RPE material is asserted."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Request historical RPE entries through an authorized geodetic professional or state body; alternatively submit a reasoned written request establishing legal interest for inspection/copy of exact RPE collection-of-documents records. The 53 exact codes, both 2017 reference dates, required name/effective-date fields and fallback are listed in findings.md and 2017-name-assessment.csv.",
+      "limit": "No authorized historical-data requester or legal-interest determination was available; no individual historical name is verified.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "atlas-reference-features",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/3042d1278e87dae00c26924c339e940c9fba240e/data/geography/part-22.json",
+      "role": "The exact Atlas location IDs and 2017-reference names under review.",
+      "vintage": "Fresh origin/main at 3042d1278e87dae00c26924c339e940c9fba240e.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Project baseline evidence retained in Git; this inventory cites it and makes no external reuse claim."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read the immutable baseline commit, path and exact SHA-256 in baseline.files; do not replace the original Atlas features.",
+      "limit": "Identifies the claims to check, not independent proof that the Atlas names are official.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/findings.md",
+      "bytes": 6178,
+      "sha256": "3adafa61ea3b5c9a52b7a6f2f32d241b9282c1b921aa24097552826d8f11c9e0",
+      "hash_kind": "file-bytes",
+      "role": "research-report"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source-provenance.json",
+      "bytes": 4082,
+      "sha256": "d820b19490fa5b4a0a5e82e684584d5a8420ceb01329ec523b3bfc38ff58ca14",
+      "hash_kind": "file-bytes",
+      "role": "source-inventory"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-request.json",
+      "bytes": 253,
+      "sha256": "79152f24e7b36014a7711e61ab165e204fffda4efaecda45e3dec816bc71373b",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-request"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py",
+      "bytes": 5128,
+      "sha256": "b1caa611ee710bf733300c05b8d833175371242be83ed593e2350d03358992da",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-script"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/2017-name-assessment.csv",
+      "bytes": 14803,
+      "sha256": "0f1cd4616087a79b2d6cdded923220f9372c37e4848caccb535e128209f3b5a6",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction-summary.json",
+      "bytes": 3369,
+      "sha256": "4c2206128563d439101fc0deb26be0a28377720258ed756fcab1d37a36371066",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-result"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/github-issue-contract.json",
+      "bytes": 9321,
+      "sha256": "7f2bfb0e72dd8a0d1a933ae6cc77bef1998bea1f2611c0f1fc51ce3fda63491f",
+      "hash_kind": "file-bytes",
+      "role": "issue-scope-contract"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/pr-body.txt",
+      "bytes": 1026,
+      "sha256": "b87b7d9ae76d34bdf23480875764c38e6af38db8cb2019fe5e3519fd2932f0f4",
+      "hash_kind": "file-bytes",
+      "role": "pr-body"
+    }
+  ],
+  "methods": [
+    {
+      "id": "slovenia-2017-code-name-review",
+      "kind": "source",
+      "description": "Verify exact candidate ID/name identity against the fresh-main Atlas part file; verify each current GURS code/name/source-date row against the retained official GURS GeoJSON; join code to SURS 0214809S 2017H1/H2 area observations. Treat the SURS label dimension as static and stop short of a historical spelling determination.",
+      "software": "Python 3 standard library; Git; SHA-256",
+      "units": "location IDs, municipal codes, source labels, dates, square kilometres"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "All 53 exact issue subjects and their candidate Atlas labels occur in baseline data/geography/part-22.json; each code/name/source-date row matches the pinned current GURS municipal boundary source and has non-null SURS area observations at both 2017H1 and 2017H2. This is identity and dated row-presence support only.",
+      "status": "supported",
+      "source_ids": [
+        "atlas-reference-features",
+        "gurs-current-rpe-crosswalk",
+        "surs-sistat-0214809s"
+      ]
+    },
+    {
+      "text": "The official name effective in 2017 is unresolved for every one of the 53 IDs. SURS dimensions are static; the dated SURS article gives only aggregate counts. Retrieve exact historical RPE records through an authorized professional/state body or the legally described reasoned request route; make no name correction until then.",
+      "status": "unresolved",
+      "source_ids": [
+        "surs-sistat-0214809s",
+        "surs-rpe-release-2017",
+        "gurs-historical-rpe-access"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py",
+    "node scripts/evidence-quality.mjs data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/evidence-quality.json",
+    "node scripts/check-handoff-scope.mjs --branch geography/yugoslavia-slovenia-names-1016-20261005-r1 --base origin/main --issue-file data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/github-issue-contract.json --pr-body-file data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/pr-body.txt"
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/findings.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source-provenance.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-request.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/2017-name-assessment.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/github-issue-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/pr-body.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-0214809S-2017-area.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
