@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "issue": 463,
+  "findings": [
+    {
+      "id": "F463-01",
+      "status": "correction-needed",
+      "subject_id": "gb:GAB:ADM2:22940354B92057182831829",
+      "subject": "Doutsita",
+      "finding": "Provider feature is spelled Doutsita and Atlas places it beneath standalone framework province Doutsita; Gabon Ministry of Interior administrative page spells Doutsila and lists it under Nyanga, among departments. Recommend engineering review a source-name crosswalk and parent/tier correction candidate.",
+      "evidence": [
+        "Pinned geoBoundaries GAB ADM2 feature and provider metadata, bytes/hashes in source-inventory.json",
+        "Gabon Ministry of Interior administrative division page, inspected 2026-10-05: https://interieur.gouv.ga/decoupage-administratif/",
+        "Gabon Ministry territorial page reports 48 departments, DGAT May 2016: https://interieur.gouv.ga/decoupage-territorial/"
+      ],
+      "uncertainty": "No legally authoritative boundary or alias evidence retained; Doutsita may be variant spelling or source error. Do not change ID/name/parent or certify geometry from this packet.",
+      "follow_up_issue": 871
+    },
+    {
+      "id": "F463-02",
+      "status": "correction-needed",
+      "subject_id": "gb:GNQ:ADM2:11065452B42024070816207",
+      "subject": "ELOBEY CHICO",
+      "finding": "Pinned 2013 provider metadata reports canonical role Unknown, although issue migration metadata says District. Atlas wraps this single feature as a standalone province. Equatorial Guinea Government memorial to ICJ describes Elobey Chico as an island in Cogo District, Litoral Province. Recommend engineering review tier/parent crosswalk and island purpose; no geometry correction is authorized.",
+      "evidence": [
+        "Pinned geoBoundaries GNQ ADM2 feature and provider metadata, hashes in source-inventory.json",
+        "ICJ-hosted Government memorial Volume VI, Annex 195, pp. 382–383: https://www.icj-cij.org/index.php/node/204237",
+        "2012 Fundamental Law reference: https://minfuncionpublica.gob.gq/regulacion/constitucion/"
+      ],
+      "uncertainty": "ICJ download returned 403; only indexed/extracted page evidence inspected. Restore exact memorial and current government legal text before implementation; current boundary and legal status need confirmation.",
+      "follow_up_issue": 869
+    },
+    {
+      "id": "F463-03",
+      "status": "follow-up-required",
+      "subject": "Equatorial Guinea full 2013 source roster and current administrative frame",
+      "finding": "Source is vintage 2013 and provider canonical role is Unknown; issue says District. Law 4/2017 created Djibloho and Government reports Law 3/2026 revalidated a 2025 extension affecting Evodulu and villages from Añisok. The 28-feature source cannot demonstrate current roster, current boundary, or tier placement. Restore current legal acts and official roster/boundaries.",
+      "evidence": [
+        "geoBoundaries GNQ source inventory",
+        "https://www.guineaecuatorialpress.com/noticias/la_presidencia_de_la_republica_sanciona_dos_nuevas_leyes",
+        "https://www.guineaecuatorialpress.com/noticias/la_camara_de_los_diputados_ha_revalidado_dos_decretos_leyes",
+        "https://www.guineaecuatorialpress.com/noticias/publicacion_de_leyes_sancionadas_por_el_presidente_de_la_republica_el_10_de_abril"
+      ],
+      "uncertainty": "Government article reported ratification context in 2026; underlying law and full affected roster were not retained due unclear reuse rights.",
+      "follow_up_issue": 868
+    },
+    {
+      "id": "F463-04",
+      "status": "follow-up-required",
+      "subject": "Democratic Republic of the Congo 169 member unit roles, roster and boundaries",
+      "finding": "Provider labels ADM2 canonical role as mixed territory, city; this does not give the exact role of each of the 169 scoped units. Official legal framework distinguishes decentralized entities and ordinary territorial subdivisions. Require primary legal/current roster crosswalk for each exact subject and boundary source review.",
+      "evidence": [
+        "geoBoundaries COD source inventory",
+        "DRC Organic Law 10/011 of 18 May 2010: https://www.leganet.cd/Legislation/Droit%20Public/Administration.ter/Loi.10.011.18.05.2010.pdf",
+        "DRC Organic Law 15/006 of 25 March 2015: https://www.leganet.cd/Legislation/JO/2015/Numeros/JOS.28.03.2015.pdf",
+        "Decree 18/020 (2018): https://www.leganet.cd/Legislation/JO/2018/jo.01.07.2018.pdf"
+      ],
+      "uncertainty": "Official PDFs timed out in raw retrieval; restore originals and map exact names/roles/boundaries. Source has 189 features; this packet owns 169 only.",
+      "follow_up_issue": 870
+    },
+    {
+      "id": "F463-05",
+      "status": "follow-up-required",
+      "subject": "Gabon department roster and Doutsila crosswalk",
+      "finding": "Pinned source contains 49 features vs Ministry reported 48 departments (DGAT May 2016); source metadata vintage 2018, update 2023. Reconcile roster, vintage, role and Doutsita/Doutsila spelling against authoritative current data.",
+      "evidence": [
+        "geoBoundaries GAB source inventory",
+        "https://interieur.gouv.ga/decoupage-territorial/",
+        "https://interieur.gouv.ga/decoupage-administratif/"
+      ],
+      "uncertainty": "Count and name mismatch alone do not establish omission, duplication, or boundary error.",
+      "follow_up_issue": 866
+    },
+    {
+      "id": "F463-06",
+      "status": "follow-up-required",
+      "subject": "Inter-region island parent and source-code crosswalk",
+      "finding": "Scope includes five Gulf of Guinea Islands members and source rows use multiple internal area codes; both Elobey features are source GNQ but have baseline area code GAB. Island spellings and jurisdiction/parent purposes require a coordinated neighboring-scope source crosswalk before any shared-parent/source-predecessor edit.",
+      "evidence": [
+        "Exact baseline rows in baseline-unit-inventory.json",
+        "Equatorial Guinea ICJ memorial reference above"
+      ],
+      "uncertainty": "Internal area codes are application metadata, not evidence of national ownership or administrative placement. No outer scope move recommended.",
+      "follow_up_issue": 869
+    },
+    {
+      "id": "F463-07",
+      "status": "review-limit",
+      "subject": "Province and area coverage",
+      "finding": "All 227 exact IDs resolve to the pinned baseline and native source features; all 38 scoped province groups and five area groups are enumerated with exact descendant location IDs. Area membership was reconstructed from baseline parent links and matches the issue-pinned counts. Of 227, 225 are insufficient-evidence and two have bounded correction-needed findings. WGSRPD defines country-level-and-upward units for recording plant distributions; its Botanical Country level may ignore purely political factors, so the source purpose does not by itself certify these as general-purpose atlas areas.",
+      "evidence": [
+        "scope.json",
+        "baseline-unit-inventory.json",
+        "location-assessments.json",
+        "province-assessments.json",
+        "area-assessments.json",
+        "https://www.tdwg.org/standards/wgsrpd/",
+        "https://unstats.un.org/unsd/methodology/m49/overview/"
+      ],
+      "uncertainty": "Exact area membership has been recovered but the issue packet still lacks evidence establishing appropriate atlas semantic purpose, boundary correspondence, and resolution of neighboring crosswalk disagreements."
+    },
+    {
+      "id": "F463-08",
+      "status": "follow-up-required",
+      "subject_ids": [
+        "gb:GNQ:ADM2:11065452B22787327477805",
+        "gb:GNQ:ADM2:11065452B23490115173263",
+        "gb:GNQ:ADM2:11065452B47830871634702",
+        "gb:GAB:ADM2:22940354B80874584292882"
+      ],
+      "subject": "Multipart source geometry screening",
+      "finding": "Pinned source geometry contains multipart Cogo (4 components), Elobey Grande (2), Annobón (2), and Bendjè (2). The Government memorial locates Corisco and both Elobey islands within Cogo District. Reconcile the islands to legally sourced roles/parents and inspect Cogo’s components in its source context; Bendjè’s components also need local administrative interpretation. #869 includes Cogo and all five scoped Gulf-island area members; #871 covers the Doutsita/Doutsila location only.",
+      "evidence": [
+        "source-geometry-screen.json",
+        "source-inventory.json",
+        "https://www.icj-cij.org/index.php/node/204237"
+      ],
+      "uncertainty": "A multipart polygon can be islands, coastal parts, topology artefacts or separate territorial components. Component count and bounding boxes do not establish legal or physical interpretation. Restore the exact ICJ source and authoritative boundary/roster before any correction.",
+      "follow_up_issues": [
+        869,
+        871
+      ]
+    }
+  ]
+}

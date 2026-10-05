@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "issue": 463,
+  "retrieved_date_local": "2026-10-04 America/Los_Angeles",
+  "retrieved_date_utc": "2026-10-05",
+  "base_commit": "b7aab8b8d353eb3510cf7323da7bc2dcde10147b",
+  "retention_policy": "Retain the three licensed geoBoundaries source GeoJSONs, exact release metadata responses and citation files. Do not retain government or legal page bytes where reuse terms are absent, restricted or unclear; retain restoration instructions, observed facts and raw response hashes where fetched.",
+  "geoBoundaries_sources": [
+    {
+      "source_id": "gb:COD:ADM2",
+      "release_ref": "geoBoundaries repository commit 9469f09",
+      "raw_geojson_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2.geojson",
+      "geometry_file": "data/regional-review/regional-review-42fc12dc97387a2a/sources/geoboundaries-9469f09/COD-ADM2.geojson",
+      "geometry_retrieved_utc": "2026-10-05T04:53:16Z",
+      "geometry_bytes": 6386010,
+      "geometry_sha256": "7e6a8509a3b40ad7256245f021cfa757a71582f1e0ec6ed8a30e48c6ab888a54",
+      "feature_count": 189,
+      "api_metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/COD/ADM2/",
+      "metadata_file": "data/regional-review/regional-review-42fc12dc97387a2a/sources/geoboundaries-9469f09/COD-geoBoundaries-api-current-metadata.json",
+      "metadata_retrieved_utc": "2026-10-05T04:53:14Z",
+      "metadata_sha256": "66af6d69724e4f4c009768e9856f350f263283aae3cd1617458036924916ad46",
+      "boundary_id": "COD-ADM2-63176286",
+      "boundary_name": "Democratic Republic of the Congo",
+      "canonical_role": "territory, city",
+      "boundary_year_represented": "2019",
+      "boundary_source": "Referenciel Géographique Commun, OCHA DR Congo",
+      "boundary_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "license_source": "data.humdata.org/dataset/drc-administrative-boundaries-levels-0-2",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "release_build_date": "Dec 12, 2023",
+      "pinned_release_link_from_metadata": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2.geojson",
+      "citation_and_use_file": "data/regional-review/regional-review-42fc12dc97387a2a/sources/geoboundaries-9469f09/COD-CITATION-AND-USE.txt",
+      "citation_and_use_retrieved_utc": "2026-10-05T04:53:24Z",
+      "citation_and_use_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "citation_and_use_bytes": 4316,
+      "issue_starting_claim": {
+        "role": "territory, city",
+        "vintage": "2019",
+        "scope_features": 169
+      }
+    },
+    {
+      "source_id": "gb:GAB:ADM2",
+      "release_ref": "geoBoundaries repository commit 9469f09",
+      "raw_geojson_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GAB/ADM2/geoBoundaries-GAB-ADM2.geojson",
+      "geometry_file": "data/regional-review/regional-review-42fc12dc97387a2a/sources/geoboundaries-9469f09/GAB-ADM2.geojson",
+      "geometry_retrieved_utc": "2026-10-05T04:53:17Z",
+      "geometry_bytes": 420216,
+      "geometry_sha256": "244d4936746c39ffa9c7805a1359df33743e6356ded0c941381f8980e3b3c156",
+      "feature_count": 49,
+      "api_metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/GAB/ADM2/",
+      "metadata_file": "data/regional-review/regional-review-42fc12dc97387a2a/sources/geoboundaries-9469f09/GAB-geoBoundaries-api-current-metadata.json",
+      "metadata_retrieved_utc": "2026-10-05T04:53:16Z",
+      "metadata_sha256": "d619c961fb370aa56104cf2f04047a614ca610b8bd92745eac7ee08ea71986c9",
+      "boundary_id": "GAB-ADM2-22940354",
+      "boundary_name": "Gabon",
+      "canonical_role": "Department",
+      "boundary_year_represented": "2018",
+      "boundary_source": "geoBoundaries, Wikimedia",
+      "boundary_license": "Creative Commons Attribution 3.0 License",
+      "license_source": "commons.wikimedia.org/wiki/File",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "release_build_date": "Dec 12, 2023",
+      "pinned_release_link_from_metadata": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GAB/ADM2/geoBoundaries-GAB-ADM2.geojson",
+      "citation_and_use_file": "data/regional-review/regional-review-42fc12dc97387a2a/sources/geoboundaries-9469f09/GAB-CITATION-AND-USE.txt",
+      "citation_and_use_retrieved_utc": "2026-10-05T04:53:24Z",
+      "citation_and_use_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "citation_and_use_bytes": 4316,
+      "issue_starting_claim": {
+        "role": "Department",
+        "vintage": "2018",
+        "scope_features": 30
+      }
+    },
+    {
+      "source_id": "gb:GNQ:ADM2",
+      "release_ref": "geoBoundaries repository commit 9469f09",
+      "raw_geojson_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GNQ/ADM2/geoBoundaries-GNQ-ADM2.geojson",
+      "geometry_file": "data/regional-review/regional-review-42fc12dc97387a2a/sources/geoboundaries-9469f09/GNQ-ADM2.geojson",
+      "geometry_retrieved_utc": "2026-10-05T04:53:18Z",
+      "geometry_bytes": 620211,
+      "geometry_sha256": "63be99f8ac57da01d985b04e3bc70557d05ed91216262ec9e5ee20452c60ef6e",
+      "feature_count": 28,
+      "api_metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/GNQ/ADM2/",
+      "metadata_file": "data/regional-review/regional-review-42fc12dc97387a2a/sources/geoboundaries-9469f09/GNQ-geoBoundaries-api-current-metadata.json",
+      "metadata_retrieved_utc": "2026-10-05T04:53:17Z",
+      "metadata_sha256": "3acab021e70ef601313e127da3677e25cba1d28883cb6ab0dd69cc4ecf213e6b",
+      "boundary_id": "GNQ-ADM2-11065452",
+      "boundary_name": "Equatorial Guinea",
+      "canonical_role": "Unknown",
+      "boundary_year_represented": "2013",
+      "boundary_source": "World Resources Institute, Congo Forest Basin Atlas",
+      "boundary_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "license_source": "gnq-data.forest-atlas.org/datasets/equatorial-guinea-gis-data-2013",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "release_build_date": "Dec 12, 2023",
+      "pinned_release_link_from_metadata": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GNQ/ADM2/geoBoundaries-GNQ-ADM2.geojson",
+      "citation_and_use_file": "data/regional-review/regional-review-42fc12dc97387a2a/sources/geoboundaries-9469f09/GNQ-CITATION-AND-USE.txt",
+      "citation_and_use_retrieved_utc": "2026-10-05T04:53:24Z",
+      "citation_and_use_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "citation_and_use_bytes": 4316,
+      "issue_starting_claim": {
+        "role": "District",
+        "vintage": "2013",
+        "scope_features": 28
+      }
+    }
+  ],
+  "primary_reference_sources": [
+    {
+      "id": "drc-law-10-011-2010",
+      "title": "Loi organique n° 10/011 du 18 mai 2010 portant fixation des subdivisions territoriales à l’intérieur des provinces",
+      "url": "https://www.leganet.cd/Legislation/Droit%20Public/Administration.ter/Loi.10.011.18.05.2010.pdf",
+      "retrieved_date_utc": "2026-10-05",
+      "raw_bytes_retained": false,
+      "raw_sha256": null,
+      "restoration_instruction": "Restore the exact Journal Officiel PDF; inspect the subdivision articles/annexes before any unit-level role decisions. Web index reports territory/common-law subdivision and city, commune, sector, chefferie hierarchy. Download timed out in this session.",
+      "reuse": "No reuse terms established for host copy; not redistributed."
+    },
+    {
+      "id": "drc-law-15-006-2015",
+      "title": "Loi organique n° 15/006 du 25 mars 2015 portant fixation des limites des provinces et celles de la ville de Kinshasa",
+      "url": "https://www.leganet.cd/Legislation/JO/2015/Numeros/JOS.28.03.2015.pdf",
+      "retrieved_date_utc": "2026-10-05",
+      "raw_bytes_retained": false,
+      "raw_sha256": null,
+      "restoration_instruction": "Restore exact Journal Officiel issue and inspect the law’s provincial limits. Web index reports 25 provinces plus Kinshasa; PDF fetch timed out.",
+      "reuse": "No reuse terms established for host copy; not redistributed."
+    },
+    {
+      "id": "drc-decree-18-020-2018",
+      "title": "Décret n°18/020 du 30 mai 2018 levant the suspension on 2013 decrees creating cities/communes",
+      "url": "https://www.leganet.cd/Legislation/JO/2018/jo.01.07.2018.pdf",
+      "retrieved_date_utc": "2026-10-05",
+      "raw_bytes_retained": false,
+      "raw_sha256": null,
+      "restoration_instruction": "Restore the Journal Officiel source and verify the exact affected named units; search index confirms legal activation of 2013 city/commune status decrees."
+    },
+    {
+      "id": "gabon-ministry-territorial-2018",
+      "title": "Découpage Territorial, Ministère de l’Intérieur du Gabon",
+      "url": "https://interieur.gouv.ga/decoupage-territorial/",
+      "retrieved_date_utc": "2026-10-05",
+      "raw_bytes_retained": false,
+      "raw_sha256": null,
+      "restoration_instruction": "Restore Ministry page; inspect table and DGAT May 2016 source note. Ministry page reports 9 provinces and 48 departments. Direct raw fetch timed out; web page retrieval was inspected."
+    },
+    {
+      "id": "gabon-ministry-admin-2018",
+      "title": "Découpage Administratif, Ministère de l’Intérieur du Gabon",
+      "url": "https://interieur.gouv.ga/decoupage-administratif/",
+      "retrieved_date_utc": "2026-10-05",
+      "raw_bytes_retained": false,
+      "raw_sha256": null,
+      "restoration_instruction": "Restore Ministry page and inspect Nyanga list. Page spells the unit Doutsila and lists it in Nyanga. Direct raw fetch timed out; web page retrieval was inspected."
+    },
+    {
+      "id": "eqg-constitution-2012",
+      "title": "Constitución / Ley Fundamental de Guinea Ecuatorial, Ministry of Public Function",
+      "url": "https://minfuncionpublica.gob.gq/regulacion/constitucion/",
+      "retrieved_date_utc": "2026-10-05",
+      "raw_bytes_retained": false,
+      "raw_sha256": null,
+      "restoration_instruction": "Restore the Government-hosted 2012 Basic Law; inspect territorial provisions for named islands and tiers. The Ministry page identifies 16 February 2012 promulgation; byte fetch did not complete."
+    },
+    {
+      "id": "eqg-law-4-2017",
+      "title": "La Presidencia de la República sanciona dos nuevas leyes",
+      "url": "https://www.guineaecuatorialpress.com/noticias/la_presidencia_de_la_republica_sanciona_dos_nuevas_leyes",
+      "retrieved_utc": "2026-10-05T04:51:16Z",
+      "raw_sha256": "4c65735d293cf33bbacae989ea228e61d89b098254085bdcd95ce73afc2cecd3",
+      "raw_bytes": 65058,
+      "raw_bytes_retained": false,
+      "restoration_instruction": "Restore the Government article; reports Law 4/2017 (20 June) created Province of Djibloho. Response hash is a transient raw-byte identifier; do not redistribute the page because rights terms require attribution/consent."
+    },
+    {
+      "id": "eqg-djibloho-amendment-2026",
+      "title": "La Cámara de los Diputados ha revalidado dos decretos leyes",
+      "url": "https://www.guineaecuatorialpress.com/noticias/la_camara_de_los_diputados_ha_revalidado_dos_decretos_leyes",
+      "retrieved_utc": "2026-10-05T04:51:17Z",
+      "raw_sha256": "797673aa86f18dbb4c9d01028f167e88cd89542f32a77c1c41a8e7532576ab0a",
+      "raw_bytes": 68897,
+      "raw_bytes_retained": false,
+      "restoration_instruction": "Restore Government article. It reports the 2025 decree-law extends Djibloho to include Evodulu from Akonibe and named villages from Añisok, pending ratification at that article date; its raw bytes are not retained."
+    },
+    {
+      "id": "eqg-laws-3-2026",
+      "title": "Publicación de leyes sancionadas por el Presidente de la República el 10 de abril",
+      "url": "https://www.guineaecuatorialpress.com/noticias/publicacion_de_leyes_sancionadas_por_el_presidente_de_la_republica_el_10_de_abril",
+      "retrieved_utc": "2026-10-05T04:51:18Z",
+      "raw_sha256": "8b8575d5a2866c5f22a1a252391202399caa3edbf9978d568e251afdc1ee7ed7",
+      "raw_bytes": 66824,
+      "raw_bytes_retained": false,
+      "restoration_instruction": "Restore Government article; reports Law 3/2026 (10 April) ratified Decree-Law 2/2025 enlarging Djibloho to include Evodulu and named villages from Añisok. Raw bytes are not retained."
+    },
+    {
+      "id": "eqg-icj-admin-submission",
+      "title": "Equatorial Guinea, Memorial, Volume VI, Annexes 147–196, Annex 195 Geography and Administrative Division",
+      "url": "https://www.icj-cij.org/index.php/node/204237",
+      "retrieved_date_utc": "2026-10-05",
+      "raw_bytes_retained": false,
+      "raw_sha256": null,
+      "restoration_instruction": "Restore filed memorial annex pp. 382–383. It describes 2 regions, 8 provinces, 19 districts and 37 municipalities; it states Cogo district (Litoral Province) includes Corisco, Elobey Grande and Elobey Chico. Web index excerpts were inspected; ICJ download returned 403; restore before unit-level legal certainty."
+    },
+    {
+      "id": "tdwg-wgsrpd-2001",
+      "title": "World Geographical Scheme for Recording Plant Distributions (WGSRPD), TDWG",
+      "url": "https://www.tdwg.org/standards/wgsrpd/",
+      "retrieved_date_utc": "2026-10-05",
+      "inspection": "Web page inspected. It states WGSRPD provides geographical units for plant-distribution recording at approximately country level and upwards; level 3 Botanical Country can ignore purely political factors; level 4 Basic Recording Units recognizes political integrity. Hierarchy declares this the area reference basis.",
+      "raw_bytes_retained": false,
+      "raw_sha256": null,
+      "restoration_instruction": "Restore the standard citation and data tables using the TDWG permanent IRI https://rs.tdwg.org/wgsrpd/doc/data/; compare exact member names, vintage and maps before area-purpose or boundary decisions. No raw byte capture/hash available from web inspection."
+    },
+    {
+      "id": "un-m49-current-overview",
+      "title": "Standard country or area codes for statistical use (M49), UN Statistics Division",
+      "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+      "retrieved_date_utc": "2026-10-05",
+      "inspection": "Web page inspected as a statistical label/region comparator. Its table separates Africa, Sub-Saharan Africa and Middle Africa and lists country/area names. It does not establish legal ownership, local territory, or exact boundaries.",
+      "raw_bytes_retained": false,
+      "raw_sha256": null,
+      "restoration_instruction": "Restore current UN Statistics Division M49 overview and record retrieval date/hash if preserving a byte-level comparison; use only as statistical classification evidence."
+    }
+  ],
+  "independently_inspected_facts": [
+    {
+      "fact": "DRC provider metadata marks ADM2 canonical role as mixed “territory, city”; source is the Referenciel Géographique Commun, OCHA DR Congo. The official legal hierarchy distinguishes territories and cities; the 2013 city-status decrees were activated in 2018.",
+      "references": [
+        "gb:COD:ADM2",
+        "drc-law-10-011-2010",
+        "drc-decree-18-020-2018"
+      ],
+      "limit": "The exact 169-unit roster, unit roles and boundaries were not crosswalked to primary legal/current source geometry."
+    },
+    {
+      "fact": "Gabon provider metadata says canonical role Department, vintage 2018, source “geoBoundaries, Wikimedia”; geoBoundaries supplies 49 features. The Ministry’s official page reports 48 departments from DGAT May 2016 and its administrative list spells Doutsila under Nyanga.",
+      "references": [
+        "gb:GAB:ADM2",
+        "gabon-ministry-territorial-2018",
+        "gabon-ministry-admin-2018"
+      ],
+      "limit": "The 2018 vs 2016 vintage and 49 vs 48 mismatch leave completeness unresolved; Doutsita/Doutsila could be an alias or source spelling error."
+    },
+    {
+      "fact": "Equatorial Guinea provider metadata says canonical role Unknown, vintage 2013, source World Resources Institute / Congo Forest Basin Atlas; issue migration text describes District. Its 28 native features include island names. Government sources say Law 4/2017 created Djibloho; official Government reporting in 2026 confirms Law 3/2026 revalidated a 2025 extension affecting Evodulu and villages in Añisok. A Government memorial to the ICJ places Corisco and Elobey islands within Cogo District/Litoral Province.",
+      "references": [
+        "gb:GNQ:ADM2",
+        "eqg-constitution-2012",
+        "eqg-law-4-2017",
+        "eqg-djibloho-amendment-2026",
+        "eqg-laws-3-2026",
+        "eqg-icj-admin-submission"
+      ],
+      "limit": "The provider says Unknown role; exact 2013 feature meanings/boundaries are not independently reconstructed. Current changes postdate the source."
+    },
+    {
+      "fact": "The five scoped areas are existing descendants of the baseline parent hierarchy. Their metadata declares WGSRPD level 3 as basis; TDWG says WGSRPD is for recording plant distributions, with a Botanical Country level that may ignore purely political factors. UN M49 provides a separate statistical regional/naming scheme. Neither reference alone verifies that the Atlas areas have suitable purpose or boundaries.",
+      "references": [
+        "tdwg-wgsrpd-2001",
+        "un-m49-current-overview"
+      ],
+      "limit": "Area membership was exactly reproduced from baseline location→province→area parent links, but the source-purpose fit and boundary correspondence remain unresolved."
+    }
+  ],
+  "known_limits": [
+    "The geoBoundaries API is a current endpoint, but each metadata response links to the pinned 9469f09 GeoJSON release; hashes and raw response bytes are retained. It is provider metadata, not a cryptographic publisher signature.",
+    "DRC issue scope’s exact 169-member subset excludes 20 of the 189 features in the retained country-wide source file; the other packet scopes own separate workloads.",
+    "Gabon’s retained source has 49 features, while the Ministry page cites 48 departments in 2016; no count alone resolves the 2018 source roster.",
+    "Equatorial Guinea’s issue metadata and geoBoundaries API conflict on canonical role (District vs Unknown). The 2013 source predates Djibloho and 2025–26 changes.",
+    "Official/legal raw pages with uncertain or restricted reuse are not retained. For DRC and Gabon the source HTML/PDF raw hash was unavailable because direct fetch timed out or TLS failed; restoration URLs are exact.",
+    "Source and identity hashes validate bytes and roster linking only, not territorial meaning, completeness, hierarchy, topology or boundaries.",
+    "The retained geoBoundaries citation/use files describe the general data product under CC BY 4.0 and require users to cite the individual boundary source. This packet follows each retained boundary metadata record’s more specific boundaryLicense/source terms (COD CC BY 3.0 IGO, GAB CC BY 3.0, GNQ CC BY 4.0), and retains the provider instructions. Recheck upstream terms before reuse beyond this evidence packet."
+  ]
+}
