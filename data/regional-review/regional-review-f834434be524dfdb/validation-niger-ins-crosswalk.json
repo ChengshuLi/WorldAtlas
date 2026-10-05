@@ -1,0 +1,9 @@
+{
+  "method_id": "niger-ins-crosswalk",
+  "kind": "source",
+  "outcome": "passed",
+  "verification": "official table parsed and joined 204 scoped units",
+  "positive_control": "190 exact normalized name/department matches",
+  "negative_control": "4 candidate rows remain parent-unresolved; no silent alias accepted",
+  "evidence_path": "niger-ins-crosswalk.json"
+}

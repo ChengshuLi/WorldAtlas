@@ -1,0 +1,2473 @@
+{
+  "version": 1,
+  "source": {
+    "title": "INS Niger Projections démographiques 2012–2026",
+    "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/",
+    "sha256": "a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7",
+    "extracted_rows": 266
+  },
+  "method": "Python standard-library HTMLParser extracts three source columns. Normalize Unicode accents/punctuation and join source feature name plus Atlas parent slug to INS commune and department; apply explicit spelling and special-city arrondissement aliases. Duplicate names use the parent label.",
+  "summary": {
+    "exact-normalized-official-name-and-parent": 190,
+    "official-spelling-or-role-alias-confirmed": 10,
+    "official-name-candidate-parent-unresolved": 4
+  },
+  "scoped_rows": [
+    {
+      "id": "gb:NER:ADM3:39565319B10092467573849",
+      "source_name": "Fakara",
+      "atlas_parent": "framework:province:boboye:dc7dff7b5c4c",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "BOBOYE",
+        "FAKARA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B10210352621684",
+      "source_name": "Kourfèye Centre",
+      "atlas_parent": "framework:province:filingue:1f56a264617e",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "FILINGUE",
+        "KOURFEYE CENTRE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B10654989344066",
+      "source_name": "Imanan",
+      "atlas_parent": "framework:province:filingue:1f56a264617e",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "FILINGUE",
+        "IMANAN"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B10967605907059",
+      "source_name": "Tahoua II",
+      "atlas_parent": "framework:province:tahoua-ville:2fad0db84b9e",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "VILLE DE TAHOUA",
+        "TAHOUA ARRONDISSEMENT 2"
+      ],
+      "resolution": "official-spelling-or-role-alias-confirmed",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B1153099536729",
+      "source_name": "Anzourou",
+      "atlas_parent": "framework:province:tillaberi:51ead91bf010",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TILLABERI",
+        "ANZOUROU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B12762473436660",
+      "source_name": "Yaouri",
+      "atlas_parent": "framework:province:kantche:f27063f42f65",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "KANTCHE",
+        "YAOURI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B12962447426204",
+      "source_name": "Baoudetta",
+      "atlas_parent": "framework:province:tessaoua:5242c9f49520",
+      "official_INS_2012_row": [
+        "MARADI",
+        "TESSAOUA",
+        "BAOUDETTA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B13373750799405",
+      "source_name": "Dargol",
+      "atlas_parent": "framework:province:gotheye:1738a1682d1e",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "GOTHEYE",
+        "DARGOL"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B13466993173172",
+      "source_name": "Dan-Issa",
+      "atlas_parent": "framework:province:madarounfa:489a3d3ad658",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MADAROUNFA",
+        "DAN-ISSA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B1352676573510",
+      "source_name": "Attantané",
+      "atlas_parent": "framework:province:mayahi:6f330b446652",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MAYAHI",
+        "ATTANTANE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B13831478637213",
+      "source_name": "Gollé",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "GOLLE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B1475913776299",
+      "source_name": "Badaguichiri",
+      "atlas_parent": "framework:province:illela:0360c05aba33",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "ILLELA",
+        "BADAGUICHIRI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B15389669974290",
+      "source_name": "Ingall",
+      "atlas_parent": "framework:province:ingall:d484be261c0d",
+      "official_INS_2012_row": [
+        "AGADEZ",
+        "INGALL",
+        "INGALL"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B15423710005725",
+      "source_name": "Tagazar",
+      "atlas_parent": "framework:province:balleyara:eaa2388eb747",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "BALLEYARA",
+        "TAGAZAR"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B15732435238555",
+      "source_name": "Tébaram",
+      "atlas_parent": "framework:province:tahoua:93dca58ebcae",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "TAHOUA",
+        "TEBARAM"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B16142515695167",
+      "source_name": "Tchirozérine",
+      "atlas_parent": "framework:province:tchirozerine:ecb04cbe049c",
+      "official_INS_2012_row": [
+        "AGADEZ",
+        "TCHIROZERINE",
+        "TCHIROZERINE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B16287295475848",
+      "source_name": "Tombokoirey I",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "TOMBOKOIREY I"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B17615238650269",
+      "source_name": "Farey",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "FAREY"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B17832551182815",
+      "source_name": "Bani Bangou",
+      "atlas_parent": "framework:province:banibangou:f695b25df58e",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "BANIBANGOU",
+        "BANIBANGOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B17836819446625",
+      "source_name": "Dabaga",
+      "atlas_parent": "framework:province:tchirozerine:ecb04cbe049c",
+      "official_INS_2012_row": [
+        "AGADEZ",
+        "TCHIROZERINE",
+        "DABAGA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B1897183956502",
+      "source_name": "Guilladjé",
+      "atlas_parent": "framework:province:falmey:71640624f82e",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "FALMEY",
+        "GUILLADJE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B19013886489598",
+      "source_name": "Zabori",
+      "atlas_parent": "framework:province:dioundiou:25f6b558104f",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DIOUNDIOU",
+        "ZABORI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B19355332213463",
+      "source_name": "Korahane",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "KORAHANE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B19554062596545",
+      "source_name": "Mataméye",
+      "atlas_parent": "framework:province:kantche:f27063f42f65",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "KANTCHE",
+        "MATAMEY"
+      ],
+      "resolution": "official-spelling-or-role-alias-confirmed",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B19655052028724",
+      "source_name": "Téra",
+      "atlas_parent": "framework:province:tera:44c41747d39b",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TERA",
+        "TERA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B20269432226833",
+      "source_name": "Soucoucoutane",
+      "atlas_parent": "framework:province:dogondoutchi:f429b0e863ee",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOGONDOUTCHI",
+        "SOUCOUCOUTANE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B20654781697936",
+      "source_name": "Dioundiou",
+      "atlas_parent": "framework:province:dioundiou:25f6b558104f",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DIOUNDIOU",
+        "DIOUNDIOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B20782182438889",
+      "source_name": "Say",
+      "atlas_parent": "framework:province:say:0bff364ebff0",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "SAY",
+        "SAY"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B2079186163890",
+      "source_name": "Kirtachi",
+      "atlas_parent": "framework:province:kollo:f4d3e43a9868",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "KOLLO",
+        "KIRTACHI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B20880970142082",
+      "source_name": "Kalfou",
+      "atlas_parent": "framework:province:tahoua:93dca58ebcae",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "TAHOUA",
+        "KALFOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B21317799673067",
+      "source_name": "Kokorou",
+      "atlas_parent": "framework:province:tera:44c41747d39b",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TERA",
+        "KOKOROU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B22275434856130",
+      "source_name": "Saé Saboua",
+      "atlas_parent": "framework:province:guidan-roumdji:fa38d4e6bf35",
+      "official_INS_2012_row": [
+        "MARADI",
+        "GUIDAN-ROUMDJI",
+        "SAE SABOUA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B22689890400378",
+      "source_name": "Tabalak",
+      "atlas_parent": "framework:province:abalak:3765b82f62c7",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "ABALAK",
+        "TABALAK"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B22801325162875",
+      "source_name": "Gazaoua",
+      "atlas_parent": "framework:province:gazaoua:f6330a2f7cab",
+      "official_INS_2012_row": [
+        "MARADI",
+        "GAZAOUA",
+        "GAZAOUA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B23972537824214",
+      "source_name": "Bitinkodji",
+      "atlas_parent": "framework:province:kollo:f4d3e43a9868",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "KOLLO",
+        "BITINKODJI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B24840818526960",
+      "source_name": "MaÏyara",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "MAIYARA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B25022356273677",
+      "source_name": "Arlit",
+      "atlas_parent": "framework:province:arlit:5e704b6593c0",
+      "official_INS_2012_row": [
+        "AGADEZ",
+        "ARLIT",
+        "ARLIT"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B26753388093766",
+      "source_name": "Sabon-Machi",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "SABON MACHI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B27231895998921",
+      "source_name": "Fabidji",
+      "atlas_parent": "framework:province:boboye:dc7dff7b5c4c",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "BOBOYE",
+        "FABIDJI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B27838165675081",
+      "source_name": "Dan-Kassari",
+      "atlas_parent": "framework:province:dogondoutchi:f429b0e863ee",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOGONDOUTCHI",
+        "DAN-KASSARI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B28002261636344",
+      "source_name": "Bagaroua",
+      "atlas_parent": "framework:province:bagaroua:a3261c148c47",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BAGAROUA",
+        "BAGAROUA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B28229541453532",
+      "source_name": "Gothéye",
+      "atlas_parent": "framework:province:gotheye:1738a1682d1e",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "GOTHEYE",
+        "GOTHEYE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B28637506737945",
+      "source_name": "Madaoua",
+      "atlas_parent": "framework:province:madaoua:38a44ed9992f",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "MADAOUA",
+        "MADAOUA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B29103452353205",
+      "source_name": "Kantché",
+      "atlas_parent": "framework:province:kantche:f27063f42f65",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "KANTCHE",
+        "KANTCHE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B29586520896486",
+      "source_name": "Abala",
+      "atlas_parent": "framework:province:abala:3e2c02abfa89",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "ABALA",
+        "ABALA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B29744534493161",
+      "source_name": "Maradi III",
+      "atlas_parent": "framework:province:maradi:f7c340b5c282",
+      "official_INS_2012_row": [
+        "MARADI",
+        "VILLE DE MARADI",
+        "MARADI ARRONDISSEMENT 3"
+      ],
+      "resolution": "official-spelling-or-role-alias-confirmed",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B30546058731378",
+      "source_name": "Goroubankassam",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "GOROUBANKASSAM"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B30797865124081",
+      "source_name": "Karakara",
+      "atlas_parent": "framework:province:dioundiou:25f6b558104f",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DIOUNDIOU",
+        "KARAKARA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B31379636025775",
+      "source_name": "Tanda",
+      "atlas_parent": "framework:province:gaya:dc7ee95aeec9",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "GAYA",
+        "TANDA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B31754557173380",
+      "source_name": "Yélou",
+      "atlas_parent": "framework:province:gaya:dc7ee95aeec9",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "GAYA",
+        "YELOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B32043358356064",
+      "source_name": "Koygolo",
+      "atlas_parent": "framework:province:boboye:dc7dff7b5c4c",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "BOBOYE",
+        "KOYGOLO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B32916941032007",
+      "source_name": "Hamdallaye",
+      "atlas_parent": "framework:province:kollo:f4d3e43a9868",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "KOLLO",
+        "HAMDALLAYE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B33216046467228",
+      "source_name": "Tahoua I",
+      "atlas_parent": "framework:province:tahoua-ville:2fad0db84b9e",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "VILLE DE TAHOUA",
+        "TAHOUA ARRONDISSEMENT 1"
+      ],
+      "resolution": "official-spelling-or-role-alias-confirmed",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B33550161908789",
+      "source_name": "Tchadoua",
+      "atlas_parent": "framework:province:aguie:8fca3939d5ee",
+      "official_INS_2012_row": [
+        "MARADI",
+        "AGUIE",
+        "TCHADOUA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B33585511971503",
+      "source_name": "Tassara",
+      "atlas_parent": "framework:province:tassara:42585fbe002e",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "TASSARA",
+        "TASSARA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B33650899689009",
+      "source_name": "Sanam",
+      "atlas_parent": "framework:province:abala:3e2c02abfa89",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "ABALA",
+        "SANAM"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B3376937255177",
+      "source_name": "Tsaouni",
+      "atlas_parent": "framework:province:kantche:f27063f42f65",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "KANTCHE",
+        "TSAOUNI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B33833643085465",
+      "source_name": "Dingazi",
+      "atlas_parent": "framework:province:ouallam:277ce268b1b3",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "OUALLAM",
+        "DINGAZI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B34458908308296",
+      "source_name": "Garagoumsa",
+      "atlas_parent": "framework:province:takeita:52f31ddc3079",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "TAKEITA",
+        "GARAGOUMSA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B3512519826150",
+      "source_name": "Bengou",
+      "atlas_parent": "framework:province:gaya:dc7ee95aeec9",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "GAYA",
+        "BENGOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B35185139600445",
+      "source_name": "Tillia",
+      "atlas_parent": "framework:province:tillia:b5fa0545f13f",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "TILLIA",
+        "TILLIA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B35514754936261",
+      "source_name": "Sinder",
+      "atlas_parent": "framework:province:tillaberi:51ead91bf010",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TILLABERI",
+        "SINDER"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B3628272189511",
+      "source_name": "Bibiyergou",
+      "atlas_parent": "framework:province:tillaberi:51ead91bf010",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TILLABERI",
+        "BIBIYERGOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B36624348238607",
+      "source_name": "Dosso",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "DOSSO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B36634963124352",
+      "source_name": "Chadakori",
+      "atlas_parent": "framework:province:guidan-roumdji:fa38d4e6bf35",
+      "official_INS_2012_row": [
+        "MARADI",
+        "GUIDAN-ROUMDJI",
+        "CHADAKORI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B37636667492257",
+      "source_name": "Tabotaki",
+      "atlas_parent": "framework:province:bouza:354c3b6881ac",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BOUZA",
+        "TABOTAKI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B37651259696635",
+      "source_name": "Méhana",
+      "atlas_parent": "framework:province:tera:44c41747d39b",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TERA",
+        "MEHANA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B3777775141900",
+      "source_name": "Kanan-Bakaché",
+      "atlas_parent": "framework:province:mayahi:6f330b446652",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MAYAHI",
+        "KANAN-BAKACHE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B37814068281498",
+      "source_name": "Gabi",
+      "atlas_parent": "framework:province:madarounfa:489a3d3ad658",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MADAROUNFA",
+        "GABI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B38044080890565",
+      "source_name": "Gangara",
+      "atlas_parent": "framework:province:tanout:c2691b090b33",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "TANOUT",
+        "GANGARA (TANOUT)"
+      ],
+      "resolution": "official-spelling-or-role-alias-confirmed",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B39414843606519",
+      "source_name": "Inatés",
+      "atlas_parent": "framework:province:ayerou:15b41995440a",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "AYEROU",
+        "INATES"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B40007698057933",
+      "source_name": "Kao",
+      "atlas_parent": "framework:province:tchintabaraden:8f250b92c68c",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "TCHINTABARADEN",
+        "KAO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B4065670259952",
+      "source_name": "Harikanassou",
+      "atlas_parent": "framework:province:boboye:dc7dff7b5c4c",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "BOBOYE",
+        "HARIKANASSOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B41093251759078",
+      "source_name": "Alléla",
+      "atlas_parent": "framework:province:birni-n-konni:0c9438677815",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BIRNI N'KONNI",
+        "ALLELA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B41337311066900",
+      "source_name": "Azarori",
+      "atlas_parent": "framework:province:madaoua:38a44ed9992f",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "MADAOUA",
+        "AZARORI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B414197429400",
+      "source_name": "Bader Goula",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "BADER GOULA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B41892864822509",
+      "source_name": "Tamou",
+      "atlas_parent": "framework:province:say:0bff364ebff0",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "SAY",
+        "TAMOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B42255216936306",
+      "source_name": "Tamaya",
+      "atlas_parent": "framework:province:abalak:3765b82f62c7",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "ABALAK",
+        "TAMAYA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B42543677057839",
+      "source_name": "Makalondi",
+      "atlas_parent": "framework:province:torodi:13341dce4dad",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TORODI",
+        "MAKALONDI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B42643613483437",
+      "source_name": "Daouché",
+      "atlas_parent": "framework:province:kantche:f27063f42f65",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "KANTCHE",
+        "DAOUCHE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B42843069370242",
+      "source_name": "Ibohamane",
+      "atlas_parent": "framework:province:keita:8e93327d2f99",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "KEITA",
+        "IBOHAMANE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B42963178638059",
+      "source_name": "Dakoro",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "DAKORO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B43509649476372",
+      "source_name": "Hawandawaki",
+      "atlas_parent": "framework:province:tessaoua:5242c9f49520",
+      "official_INS_2012_row": [
+        "MARADI",
+        "TESSAOUA",
+        "HAWANDAWAKI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B43721142807138",
+      "source_name": "Birni N'Gaouré",
+      "atlas_parent": "framework:province:boboye:dc7dff7b5c4c",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "BOBOYE",
+        "BIRNI N'GAOURE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B45407951194186",
+      "source_name": "Karma",
+      "atlas_parent": "framework:province:kollo:f4d3e43a9868",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "KOLLO",
+        "KARMA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B45497236396760",
+      "source_name": "Kiéché",
+      "atlas_parent": "framework:province:dogondoutchi:f429b0e863ee",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOGONDOUTCHI",
+        "KIECHE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B46320647119032",
+      "source_name": "Tessaoua",
+      "atlas_parent": "framework:province:tessaoua:5242c9f49520",
+      "official_INS_2012_row": [
+        "MARADI",
+        "TESSAOUA",
+        "TESSAOUA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B47150999995325",
+      "source_name": "Guidan Sori",
+      "atlas_parent": "framework:province:guidan-roumdji:fa38d4e6bf35",
+      "official_INS_2012_row": [
+        "MARADI",
+        "GUIDAN-ROUMDJI",
+        "GUIDAN SORI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B47446911477651",
+      "source_name": "Takanamat",
+      "atlas_parent": "framework:province:tahoua:93dca58ebcae",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "TAHOUA",
+        "TAKANAMAT"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B49188636597470",
+      "source_name": "El Allassane MaÏreyrey",
+      "atlas_parent": "framework:province:mayahi:6f330b446652",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MAYAHI",
+        "EL ALLASSANE MAIREYREY"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B49520541976573",
+      "source_name": "Ouro Guéladjo",
+      "atlas_parent": "framework:province:say:0bff364ebff0",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "SAY",
+        "OURO GUELADJO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B49829877216142",
+      "source_name": "Tamaské",
+      "atlas_parent": "framework:province:keita:8e93327d2f99",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "KEITA",
+        "TAMASKE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B5088692803175",
+      "source_name": "Gangara",
+      "atlas_parent": "framework:province:gazaoua:f6330a2f7cab",
+      "official_INS_2012_row": [
+        "MARADI",
+        "GAZAOUA",
+        "GANGARA (AGUIE)"
+      ],
+      "resolution": "official-spelling-or-role-alias-confirmed",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B50934725897931",
+      "source_name": "Maïjirgui",
+      "atlas_parent": "framework:province:tessaoua:5242c9f49520",
+      "official_INS_2012_row": [
+        "MARADI",
+        "TESSAOUA",
+        "MAIJIRGUI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B51314611719737",
+      "source_name": "Sakoira",
+      "atlas_parent": "framework:province:tillaberi:51ead91bf010",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TILLABERI",
+        "SAKOIRA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B51357983250246",
+      "source_name": "Sabon-Guida",
+      "atlas_parent": "framework:province:madaoua:38a44ed9992f",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "MADAOUA",
+        "SABON GUIDA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B5197111999489",
+      "source_name": "Tombokoirey II",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "TOMBOKOIREY II"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B52575840429923",
+      "source_name": "Gougaram",
+      "atlas_parent": "framework:province:arlit:5e704b6593c0",
+      "official_INS_2012_row": [
+        "AGADEZ",
+        "ARLIT",
+        "GOUGARAM"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B52641947778094",
+      "source_name": "Kéita",
+      "atlas_parent": "framework:province:keita:8e93327d2f99",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "KEITA",
+        "KEITA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B5333613633817",
+      "source_name": "Gadabédji",
+      "atlas_parent": "framework:province:bermo:a3e7b55474d2",
+      "official_INS_2012_row": [
+        "MARADI",
+        "BERMO",
+        "GADABEDJI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B5334465698124",
+      "source_name": "Kollo",
+      "atlas_parent": "framework:province:kollo:f4d3e43a9868",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "KOLLO",
+        "KOLLO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B53487880702251",
+      "source_name": "Sarkin Haoussa",
+      "atlas_parent": "framework:province:mayahi:6f330b446652",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MAYAHI",
+        "SARKIN HAOUSSA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B53804595889844",
+      "source_name": "Malbaza",
+      "atlas_parent": "framework:province:malbaza:93ca53b6d1c8",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "MALBAZA",
+        "MALBAZA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B54696059425906",
+      "source_name": "Bambéye",
+      "atlas_parent": "framework:province:tahoua:93dca58ebcae",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "TAHOUA",
+        "BAMBEYE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B54778508175580",
+      "source_name": "Tagriss",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "TAGRISS"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B55762599945287",
+      "source_name": "Bazaga",
+      "atlas_parent": "framework:province:birni-n-konni:0c9438677815",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BIRNI N'KONNI",
+        "BAZAGA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B55963509648917",
+      "source_name": "Maradi II",
+      "atlas_parent": "framework:province:maradi:f7c340b5c282",
+      "official_INS_2012_row": [
+        "MARADI",
+        "VILLE DE MARADI",
+        "MARADI ARRONDISSEMENT 2"
+      ],
+      "resolution": "official-spelling-or-role-alias-confirmed",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B5621781462382",
+      "source_name": "Ichirnawa",
+      "atlas_parent": "framework:province:kantche:f27063f42f65",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "KANTCHE",
+        "ICHIRNAWA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B56589595295326",
+      "source_name": "Dogondoutchi",
+      "atlas_parent": "framework:province:dogondoutchi:f429b0e863ee",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOGONDOUTCHI",
+        "DOGONDOUTCHI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B56836281674842",
+      "source_name": "Adjékoria",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "ADJEKORIA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B57210079941947",
+      "source_name": "Abalak",
+      "atlas_parent": "framework:province:abalak:3765b82f62c7",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "ABALAK",
+        "ABALAK"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B57416437059332",
+      "source_name": "Bankilaré",
+      "atlas_parent": "framework:province:bankilare:10a68ccffd4a",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "BANKILARE",
+        "BANKILARE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B57840073254234",
+      "source_name": "Tsernaoua",
+      "atlas_parent": "framework:province:birni-n-konni:0c9438677815",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BIRNI N'KONNI",
+        "TSERNAOUA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B59074405754076",
+      "source_name": "Falenko",
+      "atlas_parent": "framework:province:tanout:c2691b090b33",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "TANOUT",
+        "FALENKO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B60733918620118",
+      "source_name": "Garhanga",
+      "atlas_parent": "framework:province:keita:8e93327d2f99",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "KEITA",
+        "GARHANGA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B61004810688472",
+      "source_name": "Guidan Amoumoune",
+      "atlas_parent": "framework:province:mayahi:6f330b446652",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MAYAHI",
+        "GUIDAN AMOUMOUNE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B61029713660883",
+      "source_name": "N'Dounga",
+      "atlas_parent": "framework:province:kollo:f4d3e43a9868",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "KOLLO",
+        "N'DOUNGA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B61353473247471",
+      "source_name": "Issawane",
+      "atlas_parent": "framework:province:mayahi:6f330b446652",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MAYAHI",
+        "ISSAWANE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B61373871852790",
+      "source_name": "Sarkin Yama",
+      "atlas_parent": "framework:province:madarounfa:489a3d3ad658",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MADAROUNFA",
+        "SARKIN YAMMA"
+      ],
+      "resolution": "official-spelling-or-role-alias-confirmed",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B6169365707343",
+      "source_name": "Doguérawa",
+      "atlas_parent": "framework:province:malbaza:93ca53b6d1c8",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "MALBAZA",
+        "DOGUERAWA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B61799560991042",
+      "source_name": "Roumboui",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "ROUMBOU I"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B62167566836547",
+      "source_name": "Garankedey",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "GARANKEDEY"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B6351781551637",
+      "source_name": "Agadez",
+      "atlas_parent": "framework:province:tchirozerine:ecb04cbe049c",
+      "official_INS_2012_row": [
+        "AGADEZ",
+        "TCHIROZERINE",
+        "AGADEZ"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B63692121899477",
+      "source_name": "Akoubounou",
+      "atlas_parent": "framework:province:abalak:3765b82f62c7",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "ABALAK",
+        "AKOUBOUNOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B64387588165417",
+      "source_name": "Déoulé",
+      "atlas_parent": "framework:province:bouza:354c3b6881ac",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BOUZA",
+        "DEOULE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B64596899446461",
+      "source_name": "Madarounfa",
+      "atlas_parent": "framework:province:madarounfa:489a3d3ad658",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MADAROUNFA",
+        "MADAROUNFA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B6538344592522",
+      "source_name": "Dessa",
+      "atlas_parent": "framework:province:tillaberi:51ead91bf010",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TILLABERI",
+        "DESSA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B65562350215158",
+      "source_name": "Djiratawa",
+      "atlas_parent": "framework:province:madarounfa:489a3d3ad658",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MADAROUNFA",
+        "DJIRATAWA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B65665596113112",
+      "source_name": "Allakaye",
+      "atlas_parent": "framework:province:bouza:354c3b6881ac",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BOUZA",
+        "ALLAKAYE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B66150995456006",
+      "source_name": "Tarka",
+      "atlas_parent": "framework:province:belbedji:bd3741af3fff",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "BELBEDJI",
+        "TARKA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B67163204620766",
+      "source_name": "Tama",
+      "atlas_parent": "framework:province:bouza:354c3b6881ac",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BOUZA",
+        "TAMA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B67211159326012",
+      "source_name": "Diantchandou",
+      "atlas_parent": "framework:province:kollo:f4d3e43a9868",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "KOLLO",
+        "DIANTCHANDOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B67479999875968",
+      "source_name": "Aguié",
+      "atlas_parent": "framework:province:aguie:8fca3939d5ee",
+      "official_INS_2012_row": [
+        "MARADI",
+        "AGUIE",
+        "AGUIE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B68007360290865",
+      "source_name": "Tanout",
+      "atlas_parent": "framework:province:tanout:c2691b090b33",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "TANOUT",
+        "TANOUT"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B68101521076682",
+      "source_name": "Mokko",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "MOKKO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B68706856624292",
+      "source_name": "Sambéra",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "SAMBERA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B69026319129781",
+      "source_name": "Maradi I",
+      "atlas_parent": "framework:province:maradi:938ad51c7c91",
+      "official_INS_2012_row": [
+        "MARADI",
+        "VILLE DE MARADI",
+        "MARADI ARRONDISSEMENT 1"
+      ],
+      "resolution": "official-spelling-or-role-alias-confirmed",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B69193569370150",
+      "source_name": "Bérmo",
+      "atlas_parent": "framework:province:bermo:a3e7b55474d2",
+      "official_INS_2012_row": [
+        "MARADI",
+        "BERMO",
+        "BERMO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B69541182883677",
+      "source_name": "Dannet",
+      "atlas_parent": "framework:province:arlit:5e704b6593c0",
+      "official_INS_2012_row": [
+        "AGADEZ",
+        "ARLIT",
+        "DANNET"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B6995566962304",
+      "source_name": "Falméy",
+      "atlas_parent": "framework:province:falmey:71640624f82e",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "FALMEY",
+        "FALMEY"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B69978821633529",
+      "source_name": "Karguibangou",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "KARGUIBANGOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B70343149989749",
+      "source_name": "Tchintabaraden",
+      "atlas_parent": "framework:province:tchintabaraden:8f250b92c68c",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "TCHINTABARADEN",
+        "TCHINTABARADEN"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B70543987678949",
+      "source_name": "Sokorbé",
+      "atlas_parent": "framework:province:loga:79a85a440efd",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "LOGA",
+        "SOKORBE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B70600244053448",
+      "source_name": "Kourni",
+      "atlas_parent": "framework:province:kantche:f27063f42f65",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "KANTCHE",
+        "KOURNI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B71148685540180",
+      "source_name": "Ourno",
+      "atlas_parent": "framework:province:madaoua:38a44ed9992f",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "MADAOUA",
+        "OURNO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B71988491596185",
+      "source_name": "Tabelot",
+      "atlas_parent": "framework:province:tchirozerine:ecb04cbe049c",
+      "official_INS_2012_row": [
+        "AGADEZ",
+        "TCHIROZERINE",
+        "TABELOT"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B72283596019690",
+      "source_name": "Diagourou",
+      "atlas_parent": "framework:province:tera:44c41747d39b",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TERA",
+        "DIAGOUROU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B73325679199597",
+      "source_name": "Kourtéye",
+      "atlas_parent": "framework:province:tillaberi:51ead91bf010",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TILLABERI",
+        "KOURTEYE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B73736931864986",
+      "source_name": "Korgom",
+      "atlas_parent": "framework:province:tessaoua:5242c9f49520",
+      "official_INS_2012_row": [
+        "MARADI",
+        "TESSAOUA",
+        "KORGOM"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B73928168036558",
+      "source_name": "Kouré",
+      "atlas_parent": "framework:province:kollo:f4d3e43a9868",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "KOLLO",
+        "KOURE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B74285074887218",
+      "source_name": "Tibiri",
+      "atlas_parent": "framework:province:tibiri:243872a9d380",
+      "official_INS_2012_row": [
+        [
+          "DOSSO",
+          "TIBIRI (DOUTCHI)",
+          "TIBIRI (DOUTCHI)"
+        ]
+      ],
+      "resolution": "official-name-candidate-parent-unresolved",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B74447328459706",
+      "source_name": "Dakoussa",
+      "atlas_parent": "framework:province:takeita:52f31ddc3079",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "TAKEITA",
+        "DAKOUSSA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B74465026874470",
+      "source_name": "Simiri",
+      "atlas_parent": "framework:province:ouallam:277ce268b1b3",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "OUALLAM",
+        "SIMIRI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B74839102757106",
+      "source_name": "Ayérou",
+      "atlas_parent": "framework:province:ayerou:15b41995440a",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "AYEROU",
+        "AYEROU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B75624546771300",
+      "source_name": "Gorouol",
+      "atlas_parent": "framework:province:tera:44c41747d39b",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TERA",
+        "GOROUOL"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B76169023695954",
+      "source_name": "Birni N'Konni",
+      "atlas_parent": "framework:province:birni-n-konni:0c9438677815",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BIRNI N'KONNI",
+        "BIRNI N'KONNI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B76173588202000",
+      "source_name": "Dogonkiria",
+      "atlas_parent": "framework:province:dogondoutchi:f429b0e863ee",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOGONDOUTCHI",
+        "DOGONKIRIA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B76403530794224",
+      "source_name": "Affala",
+      "atlas_parent": "framework:province:tahoua:93dca58ebcae",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "TAHOUA",
+        "AFFALA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B76500446614370",
+      "source_name": "Tajaé",
+      "atlas_parent": "framework:province:illela:0360c05aba33",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "ILLELA",
+        "TAJAE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B76849175678821",
+      "source_name": "Youri",
+      "atlas_parent": "framework:province:kollo:f4d3e43a9868",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "KOLLO",
+        "YOURI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B77530905556219",
+      "source_name": "Karofane",
+      "atlas_parent": "framework:province:bouza:354c3b6881ac",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BOUZA",
+        "KAROFANE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B77658591196933",
+      "source_name": "Koré Maïroua",
+      "atlas_parent": "framework:province:tibiri:243872a9d380",
+      "official_INS_2012_row": [
+        [
+          "DOSSO",
+          "TIBIRI (DOUTCHI)",
+          "KORE MAIROUA"
+        ]
+      ],
+      "resolution": "official-name-candidate-parent-unresolved",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B7828806917469",
+      "source_name": "Safo",
+      "atlas_parent": "framework:province:madarounfa:489a3d3ad658",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MADAROUNFA",
+        "SAFO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B78657214368072",
+      "source_name": "Kiota",
+      "atlas_parent": "framework:province:boboye:dc7dff7b5c4c",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "BOBOYE",
+        "KIOTA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B79160686966047",
+      "source_name": "Birni Lallé",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "BIRNI LALLE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B79581883738563",
+      "source_name": "Tibiri",
+      "atlas_parent": "framework:province:guidan-roumdji:fa38d4e6bf35",
+      "official_INS_2012_row": [
+        "MARADI",
+        "GUIDAN-ROUMDJI",
+        "TIBIRI (MARADI)"
+      ],
+      "resolution": "official-spelling-or-role-alias-confirmed",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B79826529462291",
+      "source_name": "Torodi",
+      "atlas_parent": "framework:province:torodi:13341dce4dad",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TORODI",
+        "TORODI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B81065564890705",
+      "source_name": "Babankatami",
+      "atlas_parent": "framework:province:bouza:354c3b6881ac",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BOUZA",
+        "BABANKATAMI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B81096810558736",
+      "source_name": "Galma Koudawatché",
+      "atlas_parent": "framework:province:madaoua:38a44ed9992f",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "MADAOUA",
+        "GALMA KOUDAWATCHE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B82593564710711",
+      "source_name": "Guéchémé",
+      "atlas_parent": "framework:province:tibiri:243872a9d380",
+      "official_INS_2012_row": [
+        [
+          "DOSSO",
+          "TIBIRI (DOUTCHI)",
+          "GUECHEME"
+        ]
+      ],
+      "resolution": "official-name-candidate-parent-unresolved",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B82699996601433",
+      "source_name": "Tondikandia",
+      "atlas_parent": "framework:province:filingue:1f56a264617e",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "FILINGUE",
+        "TONDIKANDIA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B83051667394357",
+      "source_name": "Kornaka",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "KORNAKA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B83153114035538",
+      "source_name": "Guidan Roumdji",
+      "atlas_parent": "framework:province:guidan-roumdji:fa38d4e6bf35",
+      "official_INS_2012_row": [
+        "MARADI",
+        "GUIDAN-ROUMDJI",
+        "GUIDAN ROUMDJI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B84229199619375",
+      "source_name": "Falwel",
+      "atlas_parent": "framework:province:loga:79a85a440efd",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "LOGA",
+        "FALWEL"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B84586248034381",
+      "source_name": "Kankandi",
+      "atlas_parent": "framework:province:boboye:dc7dff7b5c4c",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "BOBOYE",
+        "KANKANDI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B86758205906716",
+      "source_name": "Dan-Barto",
+      "atlas_parent": "framework:province:kantche:f27063f42f65",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "KANTCHE",
+        "DAN BARTO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B86861495506135",
+      "source_name": "Tchaké",
+      "atlas_parent": "framework:province:mayahi:6f330b446652",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MAYAHI",
+        "TCHAKE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B87130216229278",
+      "source_name": "Matankari",
+      "atlas_parent": "framework:province:dogondoutchi:f429b0e863ee",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOGONDOUTCHI",
+        "MATANKARI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B87227821745793",
+      "source_name": "Loga",
+      "atlas_parent": "framework:province:loga:79a85a440efd",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "LOGA",
+        "LOGA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B87606056296585",
+      "source_name": "Filingué",
+      "atlas_parent": "framework:province:filingue:1f56a264617e",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "FILINGUE",
+        "FILINGUE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B88178898219578",
+      "source_name": "Douméga",
+      "atlas_parent": "framework:province:tibiri:243872a9d380",
+      "official_INS_2012_row": [
+        [
+          "DOSSO",
+          "TIBIRI (DOUTCHI)",
+          "DOUMEGA"
+        ]
+      ],
+      "resolution": "official-name-candidate-parent-unresolved",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B88539640494757",
+      "source_name": "Mayahi",
+      "atlas_parent": "framework:province:mayahi:6f330b446652",
+      "official_INS_2012_row": [
+        "MARADI",
+        "MAYAHI",
+        "MAYAHI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B88940782166431",
+      "source_name": "Illéla",
+      "atlas_parent": "framework:province:illela:0360c05aba33",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "ILLELA",
+        "ILLELA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B89053607448214",
+      "source_name": "Dan-Goulbi",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "DAN-GOULBI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B9030683927093",
+      "source_name": "Gaya",
+      "atlas_parent": "framework:province:gaya:dc7ee95aeec9",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "GAYA",
+        "GAYA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B90787690652503",
+      "source_name": "Namaro",
+      "atlas_parent": "framework:province:kollo:f4d3e43a9868",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "KOLLO",
+        "NAMARO"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B90965604106556",
+      "source_name": "Olléléwa",
+      "atlas_parent": "framework:province:tanout:c2691b090b33",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "TANOUT",
+        "OLLELEWA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B92373241546187",
+      "source_name": "Azéye",
+      "atlas_parent": "framework:province:abalak:3765b82f62c7",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "ABALAK",
+        "AZEYE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B92375330867167",
+      "source_name": "Tondikiwindi",
+      "atlas_parent": "framework:province:ouallam:277ce268b1b3",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "OUALLAM",
+        "TONDIKIWINDI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B92857685768834",
+      "source_name": "Tenhya",
+      "atlas_parent": "framework:province:tanout:c2691b090b33",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "TANOUT",
+        "TENHYA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B94014495854698",
+      "source_name": "Tirmini",
+      "atlas_parent": "framework:province:takeita:52f31ddc3079",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "TAKEITA",
+        "TIRMINI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B94746190490148",
+      "source_name": "N'Gonga",
+      "atlas_parent": "framework:province:boboye:dc7dff7b5c4c",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "BOBOYE",
+        "N'GONGA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B9482106166284",
+      "source_name": "Bana",
+      "atlas_parent": "framework:province:gaya:dc7ee95aeec9",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "GAYA",
+        "BANA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B95003123966455",
+      "source_name": "Ouallam",
+      "atlas_parent": "framework:province:ouallam:277ce268b1b3",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "OUALLAM",
+        "OUALLAM"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B9519656841548",
+      "source_name": "Tounouga",
+      "atlas_parent": "framework:province:gaya:dc7ee95aeec9",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "GAYA",
+        "TOUNOUGA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B96050649569939",
+      "source_name": "Bangui",
+      "atlas_parent": "framework:province:madaoua:38a44ed9992f",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "MADAOUA",
+        "BANGUI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B96223542959465",
+      "source_name": "Ourafane",
+      "atlas_parent": "framework:province:tessaoua:5242c9f49520",
+      "official_INS_2012_row": [
+        "MARADI",
+        "TESSAOUA",
+        "OURAFANE"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B96232797912039",
+      "source_name": "Téssa",
+      "atlas_parent": "framework:province:dosso:98f4695b7987",
+      "official_INS_2012_row": [
+        "DOSSO",
+        "DOSSO",
+        "TESSA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B96250293075452",
+      "source_name": "Bouza",
+      "atlas_parent": "framework:province:bouza:354c3b6881ac",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "BOUZA",
+        "BOUZA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B97379541170196",
+      "source_name": "Doungou",
+      "atlas_parent": "framework:province:kantche:f27063f42f65",
+      "official_INS_2012_row": [
+        "ZINDER",
+        "KANTCHE",
+        "DOUNGOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B98030121500718",
+      "source_name": "Azagor",
+      "atlas_parent": "framework:province:dakoro:eecff876ae0d",
+      "official_INS_2012_row": [
+        "MARADI",
+        "DAKORO",
+        "AZAGOR"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B98389260852937",
+      "source_name": "Barmou",
+      "atlas_parent": "framework:province:tahoua:93dca58ebcae",
+      "official_INS_2012_row": [
+        "TAHOUA",
+        "TAHOUA",
+        "BARMOU"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B98692557133651",
+      "source_name": "Koona",
+      "atlas_parent": "framework:province:tessaoua:5242c9f49520",
+      "official_INS_2012_row": [
+        "MARADI",
+        "TESSAOUA",
+        "KOONA"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B98932760270264",
+      "source_name": "Tillabéri",
+      "atlas_parent": "framework:province:tillaberi:51ead91bf010",
+      "official_INS_2012_row": [
+        "TILLABERI",
+        "TILLABERI",
+        "TILLABERI"
+      ],
+      "resolution": "exact-normalized-official-name-and-parent",
+      "official_role_limit": "INS 2012 census/projection table; not a current legal gazetteer or independent polygon boundary"
+    }
+  ]
+}

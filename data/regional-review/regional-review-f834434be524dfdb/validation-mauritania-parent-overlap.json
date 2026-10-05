@@ -1,0 +1,9 @@
+{
+  "method_id": "mauritania-admin-parent-overlap",
+  "kind": "geography",
+  "outcome": "passed",
+  "verification": "all 13 scoped 2020 Moughataa candidates overlap 2015 ADM1 candidate shapes and Atlas parent names are preserved in the result",
+  "positive_control": "Amourj intersects the named Hodh Ech Chargui ADM1 candidate",
+  "negative_control": "F'Derick × distant Adrar ADM1 source polygon produces an empty intersection",
+  "evidence_path": "mauritania-parent-overlap.json"
+}

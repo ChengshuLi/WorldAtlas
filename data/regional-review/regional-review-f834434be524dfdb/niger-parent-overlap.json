@@ -1,0 +1,4282 @@
+{
+  "version": 1,
+  "baseline_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
+  "source_sha256": {
+    "adm3": "9e51e9033ff65c867faa8d741a5b39522d448fa15ae75e0bf5b1da68cb7bc5fa",
+    "adm2": "228f3bb7fee0259949727102b309b987c56d29f3e23c77f64d1c48fc19955dc3"
+  },
+  "method": {
+    "version": "worldatlas-evidence-geometry-v1",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m"
+  },
+  "software": {
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2"
+  },
+  "method_details": "WGS84 ellipsoidal area and intersections using evidence.geometry.land_area_m2; 2012 ADM3 polygons compared with every 2018 ADM2 source polygon. Fractions are overlap diagnostics, not proof of legal role or boundary equality.",
+  "positive_control": "gb:NER:ADM3:39565319B52575840429923",
+  "negative_control": "gb:NER:ADM3:39565319B6351781551637",
+  "summary_scoped_subject_count": 204,
+  "counts_by_maximum_source_parent_overlap_fraction": {
+    "0.9999": 30,
+    "0.99": 54,
+    "0.95": 124,
+    "0.9": 172,
+    "0.8": 200
+  },
+  "subjects": [
+    {
+      "id": "gb:NER:ADM3:39565319B10092467573849",
+      "name": "Fakara",
+      "atlas_parent_id": "framework:province:boboye:dc7dff7b5c4c",
+      "source_parent_candidates": [
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.94101849,
+          "parent_area_fraction": 0.1715309
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.05898151,
+          "parent_area_fraction": 0.00360806
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B10210352621684",
+      "name": "Kourfèye Centre",
+      "atlas_parent_id": "framework:province:filingue:1f56a264617e",
+      "source_parent_candidates": [
+        {
+          "name": "Filingué",
+          "shapeID": "23599985B22646074094064",
+          "subject_area_fraction": 0.98179999,
+          "parent_area_fraction": 0.2201239
+        },
+        {
+          "name": "Abala",
+          "shapeID": "23599985B96366222257755",
+          "subject_area_fraction": 0.01260258,
+          "parent_area_fraction": 0.00238633
+        },
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.00559743,
+          "parent_area_fraction": 0.00160867
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B10654989344066",
+      "name": "Imanan",
+      "atlas_parent_id": "framework:province:filingue:1f56a264617e",
+      "source_parent_candidates": [
+        {
+          "name": "Filingué",
+          "shapeID": "23599985B22646074094064",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.05949906
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B10967605907059",
+      "name": "Tahoua II",
+      "atlas_parent_id": "framework:province:tahoua-ville:2fad0db84b9e",
+      "source_parent_candidates": [
+        {
+          "name": "Tahoua Ville",
+          "shapeID": "23599985B25077979802367",
+          "subject_area_fraction": 0.89678307,
+          "parent_area_fraction": 0.40195041
+        },
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.10321693,
+          "parent_area_fraction": 0.00295259
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B1153099536729",
+      "name": "Anzourou",
+      "atlas_parent_id": "framework:province:tillaberi:51ead91bf010",
+      "source_parent_candidates": [
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.98054285,
+          "parent_area_fraction": 0.324873
+        },
+        {
+          "name": "Ayérou",
+          "shapeID": "23599985B66518443893936",
+          "subject_area_fraction": 0.01253376,
+          "parent_area_fraction": 0.00693241
+        },
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.00692339,
+          "parent_area_fraction": 0.00079815
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B12762473436660",
+      "name": "Yaouri",
+      "atlas_parent_id": "framework:province:kantche:f27063f42f65",
+      "source_parent_candidates": [
+        {
+          "name": "Kantché",
+          "shapeID": "23599985B81952569357883",
+          "subject_area_fraction": 0.98796697,
+          "parent_area_fraction": 0.12957199
+        },
+        {
+          "name": "Magaria",
+          "shapeID": "23599985B72934105448405",
+          "subject_area_fraction": 0.01203303,
+          "parent_area_fraction": 0.00090416
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B12962447426204",
+      "name": "Baoudetta",
+      "atlas_parent_id": "framework:province:tessaoua:5242c9f49520",
+      "source_parent_candidates": [
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.00964158
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B13373750799405",
+      "name": "Dargol",
+      "atlas_parent_id": "framework:province:gotheye:1738a1682d1e",
+      "source_parent_candidates": [
+        {
+          "name": "Gothèye",
+          "shapeID": "23599985B45142923275636",
+          "subject_area_fraction": 0.95018136,
+          "parent_area_fraction": 0.5537901
+        },
+        {
+          "name": "Téra",
+          "shapeID": "23599985B14211003047249",
+          "subject_area_fraction": 0.04654283,
+          "parent_area_fraction": 0.01185164
+        },
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.0032645,
+          "parent_area_fraction": 0.00154385
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B13466993173172",
+      "name": "Dan-Issa",
+      "atlas_parent_id": "framework:province:madarounfa:489a3d3ad658",
+      "source_parent_candidates": [
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.99723013,
+          "parent_area_fraction": 0.27577346
+        },
+        {
+          "name": "Aguié",
+          "shapeID": "23599985B59469969297601",
+          "subject_area_fraction": 0.00276987,
+          "parent_area_fraction": 0.00161526
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B1352676573510",
+      "name": "Attantané",
+      "atlas_parent_id": "framework:province:mayahi:6f330b446652",
+      "source_parent_candidates": [
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.94581284,
+          "parent_area_fraction": 0.09332899
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.05418716,
+          "parent_area_fraction": 0.00326536
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B13831478637213",
+      "name": "Gollé",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.93000842,
+          "parent_area_fraction": 0.13120414
+        },
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.04693459,
+          "parent_area_fraction": 0.01931572
+        },
+        {
+          "name": "Falmèy",
+          "shapeID": "23599985B42967903288320",
+          "subject_area_fraction": 0.02305699,
+          "parent_area_fraction": 0.01841828
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B1475913776299",
+      "name": "Badaguichiri",
+      "atlas_parent_id": "framework:province:illela:0360c05aba33",
+      "source_parent_candidates": [
+        {
+          "name": "Illéla",
+          "shapeID": "23599985B93785804329420",
+          "subject_area_fraction": 0.93336721,
+          "parent_area_fraction": 0.26901908
+        },
+        {
+          "name": "Malbaza",
+          "shapeID": "23599985B4654450212041",
+          "subject_area_fraction": 0.05655704,
+          "parent_area_fraction": 0.03996648
+        },
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.01007575,
+          "parent_area_fraction": 0.00289585
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B15389669974290",
+      "name": "Ingall",
+      "atlas_parent_id": "framework:province:ingall:d484be261c0d",
+      "source_parent_candidates": [
+        {
+          "name": "Ingall",
+          "shapeID": "23599985B91742674817727",
+          "subject_area_fraction": 0.95110214,
+          "parent_area_fraction": 0.96043177
+        },
+        {
+          "name": "Tassara",
+          "shapeID": "23599985B43997741220428",
+          "subject_area_fraction": 0.02537488,
+          "parent_area_fraction": 0.05320555
+        },
+        {
+          "name": "Tchirozérine",
+          "shapeID": "23599985B66307714151869",
+          "subject_area_fraction": 0.0073795,
+          "parent_area_fraction": 0.01477286
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B15423710005725",
+      "name": "Tagazar",
+      "atlas_parent_id": "framework:province:balleyara:eaa2388eb747",
+      "source_parent_candidates": [
+        {
+          "name": "Balléyara",
+          "shapeID": "23599985B53989443832132",
+          "subject_area_fraction": 0.9552649,
+          "parent_area_fraction": 0.93991267
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.03503496,
+          "parent_area_fraction": 0.00525497
+        },
+        {
+          "name": "Filingué",
+          "shapeID": "23599985B22646074094064",
+          "subject_area_fraction": 0.00588938,
+          "parent_area_fraction": 0.00076996
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B15732435238555",
+      "name": "Tébaram",
+      "atlas_parent_id": "framework:province:tahoua:93dca58ebcae",
+      "source_parent_candidates": [
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.94375035,
+          "parent_area_fraction": 0.26795465
+        },
+        {
+          "name": "Bagaroua",
+          "shapeID": "23599985B53990886897515",
+          "subject_area_fraction": 0.03896973,
+          "parent_area_fraction": 0.04152574
+        },
+        {
+          "name": "Abala",
+          "shapeID": "23599985B96366222257755",
+          "subject_area_fraction": 0.01727991,
+          "parent_area_fraction": 0.00460062
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B16142515695167",
+      "name": "Tchirozérine",
+      "atlas_parent_id": "framework:province:tchirozerine:ecb04cbe049c",
+      "source_parent_candidates": [
+        {
+          "name": "Tchirozérine",
+          "shapeID": "23599985B66307714151869",
+          "subject_area_fraction": 0.85811655,
+          "parent_area_fraction": 0.25201126
+        },
+        {
+          "name": "Aderbissinat",
+          "shapeID": "23599985B52241460380538",
+          "subject_area_fraction": 0.10680076,
+          "parent_area_fraction": 0.01887375
+        },
+        {
+          "name": "Ingall",
+          "shapeID": "23599985B91742674817727",
+          "subject_area_fraction": 0.03508269,
+          "parent_area_fraction": 0.00519719
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B16287295475848",
+      "name": "Tombokoirey I",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.96077329,
+          "parent_area_fraction": 0.04800208
+        },
+        {
+          "name": "Loga",
+          "shapeID": "23599985B16490635358595",
+          "subject_area_fraction": 0.03922671,
+          "parent_area_fraction": 0.00618078
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B17615238650269",
+      "name": "Farey",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.12456153
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B17832551182815",
+      "name": "Bani Bangou",
+      "atlas_parent_id": "framework:province:banibangou:f695b25df58e",
+      "source_parent_candidates": [
+        {
+          "name": "Banibangou",
+          "shapeID": "23599985B31350615327928",
+          "subject_area_fraction": 0.97534813,
+          "parent_area_fraction": 0.97018341
+        },
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.02161723,
+          "parent_area_fraction": 0.00954646
+        },
+        {
+          "name": "Abala",
+          "shapeID": "23599985B96366222257755",
+          "subject_area_fraction": 0.0020911,
+          "parent_area_fraction": 0.00108306
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B17836819446625",
+      "name": "Dabaga",
+      "atlas_parent_id": "framework:province:tchirozerine:ecb04cbe049c",
+      "source_parent_candidates": [
+        {
+          "name": "Tchirozérine",
+          "shapeID": "23599985B66307714151869",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.10436171
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B1897183956502",
+      "name": "Guilladjé",
+      "atlas_parent_id": "framework:province:falmey:71640624f82e",
+      "source_parent_candidates": [
+        {
+          "name": "Falmèy",
+          "shapeID": "23599985B42967903288320",
+          "subject_area_fraction": 0.99033641,
+          "parent_area_fraction": 0.24870265
+        },
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.00961812,
+          "parent_area_fraction": 0.0012444
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 4.547e-05,
+          "parent_area_fraction": 2.02e-06
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B19013886489598",
+      "name": "Zabori",
+      "atlas_parent_id": "framework:province:dioundiou:25f6b558104f",
+      "source_parent_candidates": [
+        {
+          "name": "Dioundiou",
+          "shapeID": "23599985B87103937584190",
+          "subject_area_fraction": 0.88925727,
+          "parent_area_fraction": 0.07334093
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.11074273,
+          "parent_area_fraction": 0.0016079
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B19355332213463",
+      "name": "Korahane",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.99997022,
+          "parent_area_fraction": 0.02482647
+        },
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 2.978e-05,
+          "parent_area_fraction": 2.19e-06
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B19554062596545",
+      "name": "Mataméye",
+      "atlas_parent_id": "framework:province:kantche:f27063f42f65",
+      "source_parent_candidates": [
+        {
+          "name": "Kantché",
+          "shapeID": "23599985B81952569357883",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.109255
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B19655052028724",
+      "name": "Téra",
+      "atlas_parent_id": "framework:province:tera:44c41747d39b",
+      "source_parent_candidates": [
+        {
+          "name": "Téra",
+          "shapeID": "23599985B14211003047249",
+          "subject_area_fraction": 0.97952414,
+          "parent_area_fraction": 0.21492673
+        },
+        {
+          "name": "Bankilaré",
+          "shapeID": "23599985B18164013569517",
+          "subject_area_fraction": 0.01825848,
+          "parent_area_fraction": 0.02587172
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B20269432226833",
+      "name": "Soucoucoutane",
+      "atlas_parent_id": "framework:province:dogondoutchi:f429b0e863ee",
+      "source_parent_candidates": [
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.9876591,
+          "parent_area_fraction": 0.15949678
+        },
+        {
+          "name": "Filingué",
+          "shapeID": "23599985B22646074094064",
+          "subject_area_fraction": 0.0123409,
+          "parent_area_fraction": 0.00155474
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B20654781697936",
+      "name": "Dioundiou",
+      "atlas_parent_id": "framework:province:dioundiou:25f6b558104f",
+      "source_parent_candidates": [
+        {
+          "name": "Dioundiou",
+          "shapeID": "23599985B87103937584190",
+          "subject_area_fraction": 0.93883908,
+          "parent_area_fraction": 0.45377184
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.06116092,
+          "parent_area_fraction": 0.0052041
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B20782182438889",
+      "name": "Say",
+      "atlas_parent_id": "framework:province:say:0bff364ebff0",
+      "source_parent_candidates": [
+        {
+          "name": "Say",
+          "shapeID": "23599985B83200163093073",
+          "subject_area_fraction": 0.95668219,
+          "parent_area_fraction": 0.09634981
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.04331781,
+          "parent_area_fraction": 0.00306124
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B2079186163890",
+      "name": "Kirtachi",
+      "atlas_parent_id": "framework:province:kollo:f4d3e43a9868",
+      "source_parent_candidates": [
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.93075474,
+          "parent_area_fraction": 0.11020069
+        },
+        {
+          "name": "Say",
+          "shapeID": "23599985B83200163093073",
+          "subject_area_fraction": 0.06855964,
+          "parent_area_fraction": 0.0115683
+        },
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.00068562,
+          "parent_area_fraction": 0.00024189
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B20880970142082",
+      "name": "Kalfou",
+      "atlas_parent_id": "framework:province:tahoua:93dca58ebcae",
+      "source_parent_candidates": [
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.89731038,
+          "parent_area_fraction": 0.08327874
+        },
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.08037797,
+          "parent_area_fraction": 0.02423781
+        },
+        {
+          "name": "Illéla",
+          "shapeID": "23599985B93785804329420",
+          "subject_area_fraction": 0.01569657,
+          "parent_area_fraction": 0.00472119
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B21317799673067",
+      "name": "Kokorou",
+      "atlas_parent_id": "framework:province:tera:44c41747d39b",
+      "source_parent_candidates": [
+        {
+          "name": "Téra",
+          "shapeID": "23599985B14211003047249",
+          "subject_area_fraction": 0.98242851,
+          "parent_area_fraction": 0.22822534
+        },
+        {
+          "name": "Bankilaré",
+          "shapeID": "23599985B18164013569517",
+          "subject_area_fraction": 0.0107328,
+          "parent_area_fraction": 0.01610131
+        },
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.0040429,
+          "parent_area_fraction": 0.00174429
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B22275434856130",
+      "name": "Saé Saboua",
+      "atlas_parent_id": "framework:province:guidan-roumdji:fa38d4e6bf35",
+      "source_parent_candidates": [
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.9753518,
+          "parent_area_fraction": 0.12467589
+        },
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.02416921,
+          "parent_area_fraction": 0.00391773
+        },
+        {
+          "name": "Maradi",
+          "shapeID": "23599985B96333695472040",
+          "subject_area_fraction": 0.00047899,
+          "parent_area_fraction": 0.00377405
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B22689890400378",
+      "name": "Tabalak",
+      "atlas_parent_id": "framework:province:abalak:3765b82f62c7",
+      "source_parent_candidates": [
+        {
+          "name": "Abalak",
+          "shapeID": "23599985B73397103622086",
+          "subject_area_fraction": 0.90283538,
+          "parent_area_fraction": 0.05699542
+        },
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.05264968,
+          "parent_area_fraction": 0.00398111
+        },
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.04451493,
+          "parent_area_fraction": 0.01093651
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B22801325162875",
+      "name": "Gazaoua",
+      "atlas_parent_id": "framework:province:gazaoua:f6330a2f7cab",
+      "source_parent_candidates": [
+        {
+          "name": "Gazaoua",
+          "shapeID": "23599985B75774451533542",
+          "subject_area_fraction": 0.97517974,
+          "parent_area_fraction": 0.65716079
+        },
+        {
+          "name": "Aguié",
+          "shapeID": "23599985B59469969297601",
+          "subject_area_fraction": 0.01848504,
+          "parent_area_fraction": 0.00700281
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.00318735,
+          "parent_area_fraction": 0.00040536
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B23972537824214",
+      "name": "Bitinkodji",
+      "atlas_parent_id": "framework:province:kollo:f4d3e43a9868",
+      "source_parent_candidates": [
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.96518206,
+          "parent_area_fraction": 0.07226485
+        },
+        {
+          "name": "Torodi",
+          "shapeID": "23599985B58853598919637",
+          "subject_area_fraction": 0.01959392,
+          "parent_area_fraction": 0.00194221
+        },
+        {
+          "name": "Niamey",
+          "shapeID": "23599985B37846693808008",
+          "subject_area_fraction": 0.01522401,
+          "parent_area_fraction": 0.01848432
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B24840818526960",
+      "name": "MaÏyara",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.92531602,
+          "parent_area_fraction": 0.04939347
+        },
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.07468398,
+          "parent_area_fraction": 0.00911677
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B25022356273677",
+      "name": "Arlit",
+      "atlas_parent_id": "framework:province:arlit:5e704b6593c0",
+      "source_parent_candidates": [
+        {
+          "name": "Arlit",
+          "shapeID": "23599985B35740417673211",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.02055775
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B26753388093766",
+      "name": "Sabon-Machi",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.81088829,
+          "parent_area_fraction": 0.02240457
+        },
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.18911171,
+          "parent_area_fraction": 0.0119489
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B27231895998921",
+      "name": "Fabidji",
+      "atlas_parent_id": "framework:province:boboye:dc7dff7b5c4c",
+      "source_parent_candidates": [
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.9457124,
+          "parent_area_fraction": 0.22159548
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.04839284,
+          "parent_area_fraction": 0.00380537
+        },
+        {
+          "name": "Falmèy",
+          "shapeID": "23599985B42967903288320",
+          "subject_area_fraction": 0.00589476,
+          "parent_area_fraction": 0.002681
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B27838165675081",
+      "name": "Dan-Kassari",
+      "atlas_parent_id": "framework:province:dogondoutchi:f429b0e863ee",
+      "source_parent_candidates": [
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.98022445,
+          "parent_area_fraction": 0.19243397
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B28002261636344",
+      "name": "Bagaroua",
+      "atlas_parent_id": "framework:province:bagaroua:a3261c148c47",
+      "source_parent_candidates": [
+        {
+          "name": "Bagaroua",
+          "shapeID": "23599985B53990886897515",
+          "subject_area_fraction": 0.94621074,
+          "parent_area_fraction": 0.9292756
+        },
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.02464777,
+          "parent_area_fraction": 0.00917963
+        },
+        {
+          "name": "Birni-N'Konni",
+          "shapeID": "23599985B12101722290167",
+          "subject_area_fraction": 0.02226898,
+          "parent_area_fraction": 0.02156936
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B28229541453532",
+      "name": "Gothéye",
+      "atlas_parent_id": "framework:province:gotheye:1738a1682d1e",
+      "source_parent_candidates": [
+        {
+          "name": "Gothèye",
+          "shapeID": "23599985B45142923275636",
+          "subject_area_fraction": 0.99390885,
+          "parent_area_fraction": 0.4055553
+        },
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.00190475,
+          "parent_area_fraction": 0.00063065
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.00111717,
+          "parent_area_fraction": 0.00020506
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B28637506737945",
+      "name": "Madaoua",
+      "atlas_parent_id": "framework:province:madaoua:38a44ed9992f",
+      "source_parent_candidates": [
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.17581312
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B29103452353205",
+      "name": "Kantché",
+      "atlas_parent_id": "framework:province:kantche:f27063f42f65",
+      "source_parent_candidates": [
+        {
+          "name": "Kantché",
+          "shapeID": "23599985B81952569357883",
+          "subject_area_fraction": 0.90524563,
+          "parent_area_fraction": 0.13543906
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.0946404,
+          "parent_area_fraction": 0.00604906
+        },
+        {
+          "name": "Takeita",
+          "shapeID": "23599985B25575457251727",
+          "subject_area_fraction": 0.00011397,
+          "parent_area_fraction": 1.12e-05
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B29586520896486",
+      "name": "Abala",
+      "atlas_parent_id": "framework:province:abala:3e2c02abfa89",
+      "source_parent_candidates": [
+        {
+          "name": "Abala",
+          "shapeID": "23599985B96366222257755",
+          "subject_area_fraction": 0.95612874,
+          "parent_area_fraction": 0.53538157
+        },
+        {
+          "name": "Filingué",
+          "shapeID": "23599985B22646074094064",
+          "subject_area_fraction": 0.03847849,
+          "parent_area_fraction": 0.0255116
+        },
+        {
+          "name": "Banibangou",
+          "shapeID": "23599985B31350615327928",
+          "subject_area_fraction": 0.004001,
+          "parent_area_fraction": 0.00430262
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B29744534493161",
+      "name": "Maradi III",
+      "atlas_parent_id": "framework:province:maradi:f7c340b5c282",
+      "source_parent_candidates": [
+        {
+          "name": "Maradi",
+          "shapeID": "23599985B96333695472040",
+          "subject_area_fraction": 0.5927225,
+          "parent_area_fraction": 0.46762031
+        },
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.4072775,
+          "parent_area_fraction": 0.00661038
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B30546058731378",
+      "name": "Goroubankassam",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.05759583
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B30797865124081",
+      "name": "Karakara",
+      "atlas_parent_id": "framework:province:dioundiou:25f6b558104f",
+      "source_parent_candidates": [
+        {
+          "name": "Dioundiou",
+          "shapeID": "23599985B87103937584190",
+          "subject_area_fraction": 0.97666365,
+          "parent_area_fraction": 0.40980991
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.02296288,
+          "parent_area_fraction": 0.00169625
+        },
+        {
+          "name": "Tibiri",
+          "shapeID": "23599985B22885280076406",
+          "subject_area_fraction": 0.00037347,
+          "parent_area_fraction": 8.965e-05
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B31379636025775",
+      "name": "Tanda",
+      "atlas_parent_id": "framework:province:gaya:dc7ee95aeec9",
+      "source_parent_candidates": [
+        {
+          "name": "Gaya",
+          "shapeID": "23599985B94426243670688",
+          "subject_area_fraction": 0.9024306,
+          "parent_area_fraction": 0.15210721
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.08504296,
+          "parent_area_fraction": 0.00395544
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B31754557173380",
+      "name": "Yélou",
+      "atlas_parent_id": "framework:province:gaya:dc7ee95aeec9",
+      "source_parent_candidates": [
+        {
+          "name": "Gaya",
+          "shapeID": "23599985B94426243670688",
+          "subject_area_fraction": 0.93977474,
+          "parent_area_fraction": 0.40117268
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.03858687,
+          "parent_area_fraction": 0.00454535
+        },
+        {
+          "name": "Dioundiou",
+          "shapeID": "23599985B87103937584190",
+          "subject_area_fraction": 0.02163839,
+          "parent_area_fraction": 0.01447862
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B32043358356064",
+      "name": "Koygolo",
+      "atlas_parent_id": "framework:province:boboye:dc7dff7b5c4c",
+      "source_parent_candidates": [
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.92544983,
+          "parent_area_fraction": 0.1383207
+        },
+        {
+          "name": "Balléyara",
+          "shapeID": "23599985B53989443832132",
+          "subject_area_fraction": 0.04471029,
+          "parent_area_fraction": 0.01471129
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.02983988,
+          "parent_area_fraction": 0.00149674
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B32916941032007",
+      "name": "Hamdallaye",
+      "atlas_parent_id": "framework:province:kollo:f4d3e43a9868",
+      "source_parent_candidates": [
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.99451287,
+          "parent_area_fraction": 0.19114876
+        },
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.00538458,
+          "parent_area_fraction": 0.00064958
+        },
+        {
+          "name": "Balléyara",
+          "shapeID": "23599985B53989443832132",
+          "subject_area_fraction": 0.00010255,
+          "parent_area_fraction": 0.0001293
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B33216046467228",
+      "name": "Tahoua I",
+      "atlas_parent_id": "framework:province:tahoua-ville:2fad0db84b9e",
+      "source_parent_candidates": [
+        {
+          "name": "Tahoua Ville",
+          "shapeID": "23599985B25077979802367",
+          "subject_area_fraction": 0.86241891,
+          "parent_area_fraction": 0.49307265
+        },
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.13758109,
+          "parent_area_fraction": 0.00502017
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B33550161908789",
+      "name": "Tchadoua",
+      "atlas_parent_id": "framework:province:aguie:8fca3939d5ee",
+      "source_parent_candidates": [
+        {
+          "name": "Aguié",
+          "shapeID": "23599985B59469969297601",
+          "subject_area_fraction": 0.81453699,
+          "parent_area_fraction": 0.24996814
+        },
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.09587806,
+          "parent_area_fraction": 0.01395297
+        },
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.08958495,
+          "parent_area_fraction": 0.01028092
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B33585511971503",
+      "name": "Tassara",
+      "atlas_parent_id": "framework:province:tassara:42585fbe002e",
+      "source_parent_candidates": [
+        {
+          "name": "Tassara",
+          "shapeID": "23599985B43997741220428",
+          "subject_area_fraction": 0.98082488,
+          "parent_area_fraction": 0.94455996
+        },
+        {
+          "name": "Tillia",
+          "shapeID": "23599985B40327375212482",
+          "subject_area_fraction": 0.00862107,
+          "parent_area_fraction": 0.01389091
+        },
+        {
+          "name": "Tchintabaraden",
+          "shapeID": "23599985B37880443282078",
+          "subject_area_fraction": 0.00782247,
+          "parent_area_fraction": 0.020191
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B33650899689009",
+      "name": "Sanam",
+      "atlas_parent_id": "framework:province:abala:3e2c02abfa89",
+      "source_parent_candidates": [
+        {
+          "name": "Abala",
+          "shapeID": "23599985B96366222257755",
+          "subject_area_fraction": 0.98558386,
+          "parent_area_fraction": 0.43731234
+        },
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.01231253,
+          "parent_area_fraction": 0.00829185
+        },
+        {
+          "name": "Filingué",
+          "shapeID": "23599985B22646074094064",
+          "subject_area_fraction": 0.0021036,
+          "parent_area_fraction": 0.00110518
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B3376937255177",
+      "name": "Tsaouni",
+      "atlas_parent_id": "framework:province:kantche:f27063f42f65",
+      "source_parent_candidates": [
+        {
+          "name": "Kantché",
+          "shapeID": "23599985B81952569357883",
+          "subject_area_fraction": 0.90094089,
+          "parent_area_fraction": 0.0697301
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.09905911,
+          "parent_area_fraction": 0.00327531
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B33833643085465",
+      "name": "Dingazi",
+      "atlas_parent_id": "framework:province:ouallam:277ce268b1b3",
+      "source_parent_candidates": [
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.98920011,
+          "parent_area_fraction": 0.21990803
+        },
+        {
+          "name": "Filingué",
+          "shapeID": "23599985B22646074094064",
+          "subject_area_fraction": 0.00660916,
+          "parent_area_fraction": 0.00204038
+        },
+        {
+          "name": "Banibangou",
+          "shapeID": "23599985B31350615327928",
+          "subject_area_fraction": 0.00419072,
+          "parent_area_fraction": 0.00209845
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B34458908308296",
+      "name": "Garagoumsa",
+      "atlas_parent_id": "framework:province:takeita:52f31ddc3079",
+      "source_parent_candidates": [
+        {
+          "name": "Takeita",
+          "shapeID": "23599985B25575457251727",
+          "subject_area_fraction": 0.92291099,
+          "parent_area_fraction": 0.15960563
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.05963761,
+          "parent_area_fraction": 0.00670792
+        },
+        {
+          "name": "Kantché",
+          "shapeID": "23599985B81952569357883",
+          "subject_area_fraction": 0.0174514,
+          "parent_area_fraction": 0.00459478
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B3512519826150",
+      "name": "Bengou",
+      "atlas_parent_id": "framework:province:gaya:dc7ee95aeec9",
+      "source_parent_candidates": [
+        {
+          "name": "Gaya",
+          "shapeID": "23599985B94426243670688",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.07227959
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B35185139600445",
+      "name": "Tillia",
+      "atlas_parent_id": "framework:province:tillia:b5fa0545f13f",
+      "source_parent_candidates": [
+        {
+          "name": "Tillia",
+          "shapeID": "23599985B40327375212482",
+          "subject_area_fraction": 0.96928414,
+          "parent_area_fraction": 0.98109679
+        },
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.01549393,
+          "parent_area_fraction": 0.02360512
+        },
+        {
+          "name": "Tchintabaraden",
+          "shapeID": "23599985B37880443282078",
+          "subject_area_fraction": 0.00723405,
+          "parent_area_fraction": 0.01172968
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B35514754936261",
+      "name": "Sinder",
+      "atlas_parent_id": "framework:province:tillaberi:51ead91bf010",
+      "source_parent_candidates": [
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.96382959,
+          "parent_area_fraction": 0.02817098
+        },
+        {
+          "name": "Téra",
+          "shapeID": "23599985B14211003047249",
+          "subject_area_fraction": 0.02099169,
+          "parent_area_fraction": 0.00033036
+        },
+        {
+          "name": "Gothèye",
+          "shapeID": "23599985B45142923275636",
+          "subject_area_fraction": 0.01517872,
+          "parent_area_fraction": 0.00054675
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B3628272189511",
+      "name": "Bibiyergou",
+      "atlas_parent_id": "framework:province:tillaberi:51ead91bf010",
+      "source_parent_candidates": [
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.01512378
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B36624348238607",
+      "name": "Dosso",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.06622306
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B36634963124352",
+      "name": "Chadakori",
+      "atlas_parent_id": "framework:province:guidan-roumdji:fa38d4e6bf35",
+      "source_parent_candidates": [
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.98194376,
+          "parent_area_fraction": 0.28786179
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.01805624,
+          "parent_area_fraction": 0.00231468
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B37636667492257",
+      "name": "Tabotaki",
+      "atlas_parent_id": "framework:province:bouza:354c3b6881ac",
+      "source_parent_candidates": [
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.9974747,
+          "parent_area_fraction": 0.08892248
+        },
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.0025253,
+          "parent_area_fraction": 0.00022634
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B37651259696635",
+      "name": "Méhana",
+      "atlas_parent_id": "framework:province:tera:44c41747d39b",
+      "source_parent_candidates": [
+        {
+          "name": "Téra",
+          "shapeID": "23599985B14211003047249",
+          "subject_area_fraction": 0.97256609,
+          "parent_area_fraction": 0.04213877
+        },
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.02083071,
+          "parent_area_fraction": 0.00167621
+        },
+        {
+          "name": "Bankilaré",
+          "shapeID": "23599985B18164013569517",
+          "subject_area_fraction": 0.0066032,
+          "parent_area_fraction": 0.00184758
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B3777775141900",
+      "name": "Kanan-Bakaché",
+      "atlas_parent_id": "framework:province:mayahi:6f330b446652",
+      "source_parent_candidates": [
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.95893933,
+          "parent_area_fraction": 0.09602745
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.02999485,
+          "parent_area_fraction": 0.00376566
+        },
+        {
+          "name": "Aguié",
+          "shapeID": "23599985B59469969297601",
+          "subject_area_fraction": 0.01106582,
+          "parent_area_fraction": 0.0041383
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B37814068281498",
+      "name": "Gabi",
+      "atlas_parent_id": "framework:province:madarounfa:489a3d3ad658",
+      "source_parent_candidates": [
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.98211106,
+          "parent_area_fraction": 0.20716414
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B38044080890565",
+      "name": "Gangara",
+      "atlas_parent_id": "framework:province:tanout:c2691b090b33",
+      "source_parent_candidates": [
+        {
+          "name": "Tanout",
+          "shapeID": "23599985B69081741011402",
+          "subject_area_fraction": 0.92611689,
+          "parent_area_fraction": 0.15953391
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.03967622,
+          "parent_area_fraction": 0.03167919
+        },
+        {
+          "name": "Belbédji",
+          "shapeID": "23599985B37162587774633",
+          "subject_area_fraction": 0.02354539,
+          "parent_area_fraction": 0.01069129
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B39414843606519",
+      "name": "Inatés",
+      "atlas_parent_id": "framework:province:ayerou:15b41995440a",
+      "source_parent_candidates": [
+        {
+          "name": "Ayérou",
+          "shapeID": "23599985B66518443893936",
+          "subject_area_fraction": 0.97595213,
+          "parent_area_fraction": 0.56672943
+        },
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.01072126,
+          "parent_area_fraction": 0.00129765
+        },
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.00647391,
+          "parent_area_fraction": 0.00225195
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B40007698057933",
+      "name": "Kao",
+      "atlas_parent_id": "framework:province:tchintabaraden:8f250b92c68c",
+      "source_parent_candidates": [
+        {
+          "name": "Tchintabaraden",
+          "shapeID": "23599985B37880443282078",
+          "subject_area_fraction": 0.91669521,
+          "parent_area_fraction": 0.2963851
+        },
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.03588531,
+          "parent_area_fraction": 0.01090154
+        },
+        {
+          "name": "Abalak",
+          "shapeID": "23599985B73397103622086",
+          "subject_area_fraction": 0.03275137,
+          "parent_area_fraction": 0.00830661
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B4065670259952",
+      "name": "Harikanassou",
+      "atlas_parent_id": "framework:province:boboye:dc7dff7b5c4c",
+      "source_parent_candidates": [
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.93486122,
+          "parent_area_fraction": 0.05690184
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.06513878,
+          "parent_area_fraction": 0.00133055
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B41093251759078",
+      "name": "Alléla",
+      "atlas_parent_id": "framework:province:birni-n-konni:0c9438677815",
+      "source_parent_candidates": [
+        {
+          "name": "Birni-N'Konni",
+          "shapeID": "23599985B12101722290167",
+          "subject_area_fraction": 0.93969216,
+          "parent_area_fraction": 0.4727459
+        },
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.03991025,
+          "parent_area_fraction": 0.00772035
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B41337311066900",
+      "name": "Azarori",
+      "atlas_parent_id": "framework:province:madaoua:38a44ed9992f",
+      "source_parent_candidates": [
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.04571145
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B414197429400",
+      "name": "Bader Goula",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.98638253,
+          "parent_area_fraction": 0.15890344
+        },
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.01283328,
+          "parent_area_fraction": 0.00338534
+        },
+        {
+          "name": "Bérmo",
+          "shapeID": "23599985B15241034776795",
+          "subject_area_fraction": 0.00078419,
+          "parent_area_fraction": 0.00023808
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B41892864822509",
+      "name": "Tamou",
+      "atlas_parent_id": "framework:province:say:0bff364ebff0",
+      "source_parent_candidates": [
+        {
+          "name": "Say",
+          "shapeID": "23599985B83200163093073",
+          "subject_area_fraction": 0.96032857,
+          "parent_area_fraction": 0.7277051
+        },
+        {
+          "name": "Falmèy",
+          "shapeID": "23599985B42967903288320",
+          "subject_area_fraction": 0.00732798,
+          "parent_area_fraction": 0.0225363
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.00658844,
+          "parent_area_fraction": 0.00350321
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B42255216936306",
+      "name": "Tamaya",
+      "atlas_parent_id": "framework:province:abalak:3765b82f62c7",
+      "source_parent_candidates": [
+        {
+          "name": "Abalak",
+          "shapeID": "23599985B73397103622086",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.13946058
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B42543677057839",
+      "name": "Makalondi",
+      "atlas_parent_id": "framework:province:torodi:13341dce4dad",
+      "source_parent_candidates": [
+        {
+          "name": "Torodi",
+          "shapeID": "23599985B58853598919637",
+          "subject_area_fraction": 0.99098961,
+          "parent_area_fraction": 0.17047726
+        },
+        {
+          "name": "Say",
+          "shapeID": "23599985B83200163093073",
+          "subject_area_fraction": 0.00901039,
+          "parent_area_fraction": 0.00166853
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B42643613483437",
+      "name": "Daouché",
+      "atlas_parent_id": "framework:province:kantche:f27063f42f65",
+      "source_parent_candidates": [
+        {
+          "name": "Kantché",
+          "shapeID": "23599985B81952569357883",
+          "subject_area_fraction": 0.80292312,
+          "parent_area_fraction": 0.05957318
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.19707688,
+          "parent_area_fraction": 0.00624664
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B42843069370242",
+      "name": "Ibohamane",
+      "atlas_parent_id": "framework:province:keita:8e93327d2f99",
+      "source_parent_candidates": [
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.91452657,
+          "parent_area_fraction": 0.34805684
+        },
+        {
+          "name": "Abalak",
+          "shapeID": "23599985B73397103622086",
+          "subject_area_fraction": 0.06050128,
+          "parent_area_fraction": 0.00591666
+        },
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.02497215,
+          "parent_area_fraction": 0.00945298
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B42963178638059",
+      "name": "Dakoro",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.99987893,
+          "parent_area_fraction": 0.02987572
+        },
+        {
+          "name": "Bérmo",
+          "shapeID": "23599985B15241034776795",
+          "subject_area_fraction": 0.00012107,
+          "parent_area_fraction": 6.82e-06
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B43509649476372",
+      "name": "Hawandawaki",
+      "atlas_parent_id": "framework:province:tessaoua:5242c9f49520",
+      "source_parent_candidates": [
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.92656217,
+          "parent_area_fraction": 0.04212271
+        },
+        {
+          "name": "Gazaoua",
+          "shapeID": "23599985B75774451533542",
+          "subject_area_fraction": 0.02050812,
+          "parent_area_fraction": 0.00494021
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B43721142807138",
+      "name": "Birni N'Gaouré",
+      "atlas_parent_id": "framework:province:boboye:dc7dff7b5c4c",
+      "source_parent_candidates": [
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.16790869
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B45407951194186",
+      "name": "Karma",
+      "atlas_parent_id": "framework:province:kollo:f4d3e43a9868",
+      "source_parent_candidates": [
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.97142311,
+          "parent_area_fraction": 0.12375797
+        },
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.01471922,
+          "parent_area_fraction": 0.00338259
+        },
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.01201919,
+          "parent_area_fraction": 0.00096108
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B45497236396760",
+      "name": "Kiéché",
+      "atlas_parent_id": "framework:province:dogondoutchi:f429b0e863ee",
+      "source_parent_candidates": [
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.93421798,
+          "parent_area_fraction": 0.04919146
+        },
+        {
+          "name": "Tibiri",
+          "shapeID": "23599985B22885280076406",
+          "subject_area_fraction": 0.05687479,
+          "parent_area_fraction": 0.00889698
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.00870601,
+          "parent_area_fraction": 0.00041911
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B46320647119032",
+      "name": "Tessaoua",
+      "atlas_parent_id": "framework:province:tessaoua:5242c9f49520",
+      "source_parent_candidates": [
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.90060642,
+          "parent_area_fraction": 0.19176127
+        },
+        {
+          "name": "Aguié",
+          "shapeID": "23599985B59469969297601",
+          "subject_area_fraction": 0.04232925,
+          "parent_area_fraction": 0.02684786
+        },
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.03163741,
+          "parent_area_fraction": 0.00537324
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B47150999995325",
+      "name": "Guidan Sori",
+      "atlas_parent_id": "framework:province:guidan-roumdji:fa38d4e6bf35",
+      "source_parent_candidates": [
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.95087211,
+          "parent_area_fraction": 0.13045092
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B47446911477651",
+      "name": "Takanamat",
+      "atlas_parent_id": "framework:province:tahoua:93dca58ebcae",
+      "source_parent_candidates": [
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.14969598
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B49188636597470",
+      "name": "El Allassane MaÏreyrey",
+      "atlas_parent_id": "framework:province:mayahi:6f330b446652",
+      "source_parent_candidates": [
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.99994189,
+          "parent_area_fraction": 0.18238701
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 5.811e-05,
+          "parent_area_fraction": 6.47e-06
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B49520541976573",
+      "name": "Ouro Guéladjo",
+      "atlas_parent_id": "framework:province:say:0bff364ebff0",
+      "source_parent_candidates": [
+        {
+          "name": "Say",
+          "shapeID": "23599985B83200163093073",
+          "subject_area_fraction": 0.86910826,
+          "parent_area_fraction": 0.11332191
+        },
+        {
+          "name": "Torodi",
+          "shapeID": "23599985B58853598919637",
+          "subject_area_fraction": 0.09169585,
+          "parent_area_fraction": 0.01110697
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.03919589,
+          "parent_area_fraction": 0.00358615
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B49829877216142",
+      "name": "Tamaské",
+      "atlas_parent_id": "framework:province:keita:8e93327d2f99",
+      "source_parent_candidates": [
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.87565693,
+          "parent_area_fraction": 0.2009276
+        },
+        {
+          "name": "Illéla",
+          "shapeID": "23599985B93785804329420",
+          "subject_area_fraction": 0.10568445,
+          "parent_area_fraction": 0.02418842
+        },
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.01154325,
+          "parent_area_fraction": 0.00081521
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B5088692803175",
+      "name": "Gangara",
+      "atlas_parent_id": "framework:province:gazaoua:f6330a2f7cab",
+      "source_parent_candidates": [
+        {
+          "name": "Gazaoua",
+          "shapeID": "23599985B75774451533542",
+          "subject_area_fraction": 0.85980323,
+          "parent_area_fraction": 0.21857459
+        },
+        {
+          "name": "Aguié",
+          "shapeID": "23599985B59469969297601",
+          "subject_area_fraction": 0.13920343,
+          "parent_area_fraction": 0.0198937
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B50934725897931",
+      "name": "Maïjirgui",
+      "atlas_parent_id": "framework:province:tessaoua:5242c9f49520",
+      "source_parent_candidates": [
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.99922012,
+          "parent_area_fraction": 0.14000205
+        },
+        {
+          "name": "Takeita",
+          "shapeID": "23599985B25575457251727",
+          "subject_area_fraction": 0.00077988,
+          "parent_area_fraction": 0.000168
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B51314611719737",
+      "name": "Sakoira",
+      "atlas_parent_id": "framework:province:tillaberi:51ead91bf010",
+      "source_parent_candidates": [
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.99912955,
+          "parent_area_fraction": 0.1352323
+        },
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.00087045,
+          "parent_area_fraction": 4.099e-05
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B51357983250246",
+      "name": "Sabon-Guida",
+      "atlas_parent_id": "framework:province:madaoua:38a44ed9992f",
+      "source_parent_candidates": [
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 0.9188258,
+          "parent_area_fraction": 0.13685014
+        },
+        {
+          "name": "Malbaza",
+          "shapeID": "23599985B4654450212041",
+          "subject_area_fraction": 0.0180397,
+          "parent_area_fraction": 0.00819099
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B5197111999489",
+      "name": "Tombokoirey II",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.99181499,
+          "parent_area_fraction": 0.09840666
+        },
+        {
+          "name": "Tibiri",
+          "shapeID": "23599985B22885280076406",
+          "subject_area_fraction": 0.00816849,
+          "parent_area_fraction": 0.00263359
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B52575840429923",
+      "name": "Gougaram",
+      "atlas_parent_id": "framework:province:arlit:5e704b6593c0",
+      "source_parent_candidates": [
+        {
+          "name": "Arlit",
+          "shapeID": "23599985B35740417673211",
+          "subject_area_fraction": 0.99057976,
+          "parent_area_fraction": 0.78363705
+        },
+        {
+          "name": "Iférouane",
+          "shapeID": "23599985B42361363165505",
+          "subject_area_fraction": 0.00459985,
+          "parent_area_fraction": 0.00158588
+        },
+        {
+          "name": "Ingall",
+          "shapeID": "23599985B91742674817727",
+          "subject_area_fraction": 0.00442144,
+          "parent_area_fraction": 0.00348475
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B52641947778094",
+      "name": "Kéita",
+      "atlas_parent_id": "framework:province:keita:8e93327d2f99",
+      "source_parent_candidates": [
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.98936211,
+          "parent_area_fraction": 0.194194
+        },
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.01063789,
+          "parent_area_fraction": 0.00064265
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B5333613633817",
+      "name": "Gadabédji",
+      "atlas_parent_id": "framework:province:bermo:a3e7b55474d2",
+      "source_parent_candidates": [
+        {
+          "name": "Bérmo",
+          "shapeID": "23599985B15241034776795",
+          "subject_area_fraction": 0.94122667,
+          "parent_area_fraction": 0.83639871
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.0396648,
+          "parent_area_fraction": 0.01870316
+        },
+        {
+          "name": "Abalak",
+          "shapeID": "23599985B73397103622086",
+          "subject_area_fraction": 0.01677097,
+          "parent_area_fraction": 0.0060624
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B5334465698124",
+      "name": "Kollo",
+      "atlas_parent_id": "framework:province:kollo:f4d3e43a9868",
+      "source_parent_candidates": [
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.98230643,
+          "parent_area_fraction": 0.04233323
+        },
+        {
+          "name": "Say",
+          "shapeID": "23599985B83200163093073",
+          "subject_area_fraction": 0.01769357,
+          "parent_area_fraction": 0.00108668
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B53487880702251",
+      "name": "Sarkin Haoussa",
+      "atlas_parent_id": "framework:province:mayahi:6f330b446652",
+      "source_parent_candidates": [
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.8376004,
+          "parent_area_fraction": 0.08897262
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.07393681,
+          "parent_area_fraction": 0.00479626
+        },
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.05056249,
+          "parent_area_fraction": 0.00750075
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B53804595889844",
+      "name": "Malbaza",
+      "atlas_parent_id": "framework:province:malbaza:93ca53b6d1c8",
+      "source_parent_candidates": [
+        {
+          "name": "Malbaza",
+          "shapeID": "23599985B4654450212041",
+          "subject_area_fraction": 0.89212235,
+          "parent_area_fraction": 0.42779378
+        },
+        {
+          "name": "Birni-N'Konni",
+          "shapeID": "23599985B12101722290167",
+          "subject_area_fraction": 0.10787765,
+          "parent_area_fraction": 0.02409757
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B54696059425906",
+      "name": "Bambéye",
+      "atlas_parent_id": "framework:province:tahoua:93dca58ebcae",
+      "source_parent_candidates": [
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.93949095,
+          "parent_area_fraction": 0.21574673
+        },
+        {
+          "name": "Illéla",
+          "shapeID": "23599985B93785804329420",
+          "subject_area_fraction": 0.04213854,
+          "parent_area_fraction": 0.03136077
+        },
+        {
+          "name": "Bagaroua",
+          "shapeID": "23599985B53990886897515",
+          "subject_area_fraction": 0.01784124,
+          "parent_area_fraction": 0.01537667
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B54778508175580",
+      "name": "Tagriss",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.90883288,
+          "parent_area_fraction": 0.1286193
+        },
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.09116712,
+          "parent_area_fraction": 0.02112698
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B55762599945287",
+      "name": "Bazaga",
+      "atlas_parent_id": "framework:province:birni-n-konni:0c9438677815",
+      "source_parent_candidates": [
+        {
+          "name": "Birni-N'Konni",
+          "shapeID": "23599985B12101722290167",
+          "subject_area_fraction": 0.84849166,
+          "parent_area_fraction": 0.1038879
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B55963509648917",
+      "name": "Maradi II",
+      "atlas_parent_id": "framework:province:maradi:f7c340b5c282",
+      "source_parent_candidates": [
+        {
+          "name": "Maradi",
+          "shapeID": "23599985B96333695472040",
+          "subject_area_fraction": 0.88608414,
+          "parent_area_fraction": 0.09851765
+        },
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.11391586,
+          "parent_area_fraction": 0.00026057
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B5621781462382",
+      "name": "Ichirnawa",
+      "atlas_parent_id": "framework:province:kantche:f27063f42f65",
+      "source_parent_candidates": [
+        {
+          "name": "Kantché",
+          "shapeID": "23599985B81952569357883",
+          "subject_area_fraction": 0.99212716,
+          "parent_area_fraction": 0.18855517
+        },
+        {
+          "name": "Takeita",
+          "shapeID": "23599985B25575457251727",
+          "subject_area_fraction": 0.00787284,
+          "parent_area_fraction": 0.00098278
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B56589595295326",
+      "name": "Dogondoutchi",
+      "atlas_parent_id": "framework:province:dogondoutchi:f429b0e863ee",
+      "source_parent_candidates": [
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.96312191,
+          "parent_area_fraction": 0.07879974
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.01989389,
+          "parent_area_fraction": 0.0014881
+        },
+        {
+          "name": "Loga",
+          "shapeID": "23599985B16490635358595",
+          "subject_area_fraction": 0.0169842,
+          "parent_area_fraction": 0.00400663
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B56836281674842",
+      "name": "Adjékoria",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.92653593,
+          "parent_area_fraction": 0.09899905
+        },
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 0.05310726,
+          "parent_area_fraction": 0.01358047
+        },
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.02035681,
+          "parent_area_fraction": 0.0064544
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B57210079941947",
+      "name": "Abalak",
+      "atlas_parent_id": "framework:province:abalak:3765b82f62c7",
+      "source_parent_candidates": [
+        {
+          "name": "Abalak",
+          "shapeID": "23599985B73397103622086",
+          "subject_area_fraction": 0.99944189,
+          "parent_area_fraction": 0.49009238
+        },
+        {
+          "name": "Tchintabaraden",
+          "shapeID": "23599985B37880443282078",
+          "subject_area_fraction": 0.00055811,
+          "parent_area_fraction": 0.00034888
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B57416437059332",
+      "name": "Bankilaré",
+      "atlas_parent_id": "framework:province:bankilare:10a68ccffd4a",
+      "source_parent_candidates": [
+        {
+          "name": "Bankilaré",
+          "shapeID": "23599985B18164013569517",
+          "subject_area_fraction": 0.95726379,
+          "parent_area_fraction": 0.94033002
+        },
+        {
+          "name": "Téra",
+          "shapeID": "23599985B14211003047249",
+          "subject_area_fraction": 0.03462237,
+          "parent_area_fraction": 0.00526648
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B57840073254234",
+      "name": "Tsernaoua",
+      "atlas_parent_id": "framework:province:birni-n-konni:0c9438677815",
+      "source_parent_candidates": [
+        {
+          "name": "Birni-N'Konni",
+          "shapeID": "23599985B12101722290167",
+          "subject_area_fraction": 0.89088765,
+          "parent_area_fraction": 0.08453084
+        },
+        {
+          "name": "Malbaza",
+          "shapeID": "23599985B4654450212041",
+          "subject_area_fraction": 3.857e-05,
+          "parent_area_fraction": 7.86e-06
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B59074405754076",
+      "name": "Falenko",
+      "atlas_parent_id": "framework:province:tanout:c2691b090b33",
+      "source_parent_candidates": [
+        {
+          "name": "Tanout",
+          "shapeID": "23599985B69081741011402",
+          "subject_area_fraction": 0.94562305,
+          "parent_area_fraction": 0.00273967
+        },
+        {
+          "name": "Takeita",
+          "shapeID": "23599985B25575457251727",
+          "subject_area_fraction": 0.04214013,
+          "parent_area_fraction": 0.00087007
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.01223682,
+          "parent_area_fraction": 0.00016433
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B60733918620118",
+      "name": "Garhanga",
+      "atlas_parent_id": "framework:province:keita:8e93327d2f99",
+      "source_parent_candidates": [
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.85178977,
+          "parent_area_fraction": 0.16430287
+        },
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.14821023,
+          "parent_area_fraction": 0.02843479
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B61004810688472",
+      "name": "Guidan Amoumoune",
+      "atlas_parent_id": "framework:province:mayahi:6f330b446652",
+      "source_parent_candidates": [
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.89770229,
+          "parent_area_fraction": 0.15747447
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.10229771,
+          "parent_area_fraction": 0.01095889
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B61029713660883",
+      "name": "N'Dounga",
+      "atlas_parent_id": "framework:province:kollo:f4d3e43a9868",
+      "source_parent_candidates": [
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.02864663
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B61353473247471",
+      "name": "Issawane",
+      "atlas_parent_id": "framework:province:mayahi:6f330b446652",
+      "source_parent_candidates": [
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.9989517,
+          "parent_area_fraction": 0.08109761
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.0010483,
+          "parent_area_fraction": 0.00010669
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B61373871852790",
+      "name": "Sarkin Yama",
+      "atlas_parent_id": "framework:province:madarounfa:489a3d3ad658",
+      "source_parent_candidates": [
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.80754139,
+          "parent_area_fraction": 0.05212908
+        },
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.19245861,
+          "parent_area_fraction": 0.0097972
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B6169365707343",
+      "name": "Doguérawa",
+      "atlas_parent_id": "framework:province:malbaza:93ca53b6d1c8",
+      "source_parent_candidates": [
+        {
+          "name": "Malbaza",
+          "shapeID": "23599985B4654450212041",
+          "subject_area_fraction": 0.94263201,
+          "parent_area_fraction": 0.4755143
+        },
+        {
+          "name": "Birni-N'Konni",
+          "shapeID": "23599985B12101722290167",
+          "subject_area_fraction": 0.01240137,
+          "parent_area_fraction": 0.00291422
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B61799560991042",
+      "name": "Roumboui",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.87113375,
+          "parent_area_fraction": 0.03936286
+        },
+        {
+          "name": "Bérmo",
+          "shapeID": "23599985B15241034776795",
+          "subject_area_fraction": 0.12886625,
+          "parent_area_fraction": 0.01097363
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B62167566836547",
+      "name": "Garankedey",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.94899466,
+          "parent_area_fraction": 0.06831508
+        },
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.05100534,
+          "parent_area_fraction": 0.0107109
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B6351781551637",
+      "name": "Agadez",
+      "atlas_parent_id": "framework:province:tchirozerine:ecb04cbe049c",
+      "source_parent_candidates": [
+        {
+          "name": "Tchirozérine",
+          "shapeID": "23599985B66307714151869",
+          "subject_area_fraction": 0.77625352,
+          "parent_area_fraction": 0.0112379
+        },
+        {
+          "name": "Aderbissinat",
+          "shapeID": "23599985B52241460380538",
+          "subject_area_fraction": 0.22374648,
+          "parent_area_fraction": 0.00194916
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B63692121899477",
+      "name": "Akoubounou",
+      "atlas_parent_id": "framework:province:abalak:3765b82f62c7",
+      "source_parent_candidates": [
+        {
+          "name": "Abalak",
+          "shapeID": "23599985B73397103622086",
+          "subject_area_fraction": 0.94987578,
+          "parent_area_fraction": 0.11221674
+        },
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.05012422,
+          "parent_area_fraction": 0.02304517
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B64387588165417",
+      "name": "Déoulé",
+      "atlas_parent_id": "framework:province:bouza:354c3b6881ac",
+      "source_parent_candidates": [
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.99479168,
+          "parent_area_fraction": 0.07817066
+        },
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.00520832,
+          "parent_area_fraction": 0.00041148
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B64596899446461",
+      "name": "Madarounfa",
+      "atlas_parent_id": "framework:province:madarounfa:489a3d3ad658",
+      "source_parent_candidates": [
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.07785523
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B6538344592522",
+      "name": "Dessa",
+      "atlas_parent_id": "framework:province:tillaberi:51ead91bf010",
+      "source_parent_candidates": [
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.92700308,
+          "parent_area_fraction": 0.09323326
+        },
+        {
+          "name": "Ayérou",
+          "shapeID": "23599985B66518443893936",
+          "subject_area_fraction": 0.05441728,
+          "parent_area_fraction": 0.00913656
+        },
+        {
+          "name": "Téra",
+          "shapeID": "23599985B14211003047249",
+          "subject_area_fraction": 0.01857964,
+          "parent_area_fraction": 0.00100615
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B65562350215158",
+      "name": "Djiratawa",
+      "atlas_parent_id": "framework:province:madarounfa:489a3d3ad658",
+      "source_parent_candidates": [
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.92677959,
+          "parent_area_fraction": 0.13028354
+        },
+        {
+          "name": "Maradi",
+          "shapeID": "23599985B96333695472040",
+          "subject_area_fraction": 0.05392273,
+          "parent_area_fraction": 0.36846031
+        },
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.01929769,
+          "parent_area_fraction": 0.00213928
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B65665596113112",
+      "name": "Allakaye",
+      "atlas_parent_id": "framework:province:bouza:354c3b6881ac",
+      "source_parent_candidates": [
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.9672945,
+          "parent_area_fraction": 0.12366427
+        },
+        {
+          "name": "Illéla",
+          "shapeID": "23599985B93785804329420",
+          "subject_area_fraction": 0.02150171,
+          "parent_area_fraction": 0.0027567
+        },
+        {
+          "name": "Malbaza",
+          "shapeID": "23599985B4654450212041",
+          "subject_area_fraction": 0.01120379,
+          "parent_area_fraction": 0.00352177
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B66150995456006",
+      "name": "Tarka",
+      "atlas_parent_id": "framework:province:belbedji:bd3741af3fff",
+      "source_parent_candidates": [
+        {
+          "name": "Belbédji",
+          "shapeID": "23599985B37162587774633",
+          "subject_area_fraction": 0.93332462,
+          "parent_area_fraction": 0.92453031
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.03140537,
+          "parent_area_fraction": 0.02664677
+        },
+        {
+          "name": "Tanout",
+          "shapeID": "23599985B69081741011402",
+          "subject_area_fraction": 0.0154343,
+          "parent_area_fraction": 0.00580014
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B67163204620766",
+      "name": "Tama",
+      "atlas_parent_id": "framework:province:bouza:354c3b6881ac",
+      "source_parent_candidates": [
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.86091827,
+          "parent_area_fraction": 0.07935222
+        },
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 0.11066595,
+          "parent_area_fraction": 0.00822671
+        },
+        {
+          "name": "Malbaza",
+          "shapeID": "23599985B4654450212041",
+          "subject_area_fraction": 0.02841578,
+          "parent_area_fraction": 0.00643972
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B67211159326012",
+      "name": "Diantchandou",
+      "atlas_parent_id": "framework:province:kollo:f4d3e43a9868",
+      "source_parent_candidates": [
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.99917916,
+          "parent_area_fraction": 0.10804278
+        },
+        {
+          "name": "Balléyara",
+          "shapeID": "23599985B53989443832132",
+          "subject_area_fraction": 0.00071221,
+          "parent_area_fraction": 0.00050519
+        },
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.00010863,
+          "parent_area_fraction": 3.5e-05
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B67479999875968",
+      "name": "Aguié",
+      "atlas_parent_id": "framework:province:aguie:8fca3939d5ee",
+      "source_parent_candidates": [
+        {
+          "name": "Aguié",
+          "shapeID": "23599985B59469969297601",
+          "subject_area_fraction": 0.96390362,
+          "parent_area_fraction": 0.66235733
+        },
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.02779422,
+          "parent_area_fraction": 0.00905705
+        },
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.00642718,
+          "parent_area_fraction": 0.00118262
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B68007360290865",
+      "name": "Tanout",
+      "atlas_parent_id": "framework:province:tanout:c2691b090b33",
+      "source_parent_candidates": [
+        {
+          "name": "Tanout",
+          "shapeID": "23599985B69081741011402",
+          "subject_area_fraction": 0.98794743,
+          "parent_area_fraction": 0.26124661
+        },
+        {
+          "name": "Damagaram Takaya",
+          "shapeID": "23599985B91194911882215",
+          "subject_area_fraction": 0.00717939,
+          "parent_area_fraction": 0.00886553
+        },
+        {
+          "name": "Belbédji",
+          "shapeID": "23599985B37162587774633",
+          "subject_area_fraction": 0.00487317,
+          "parent_area_fraction": 0.00339677
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B68101521076682",
+      "name": "Mokko",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.96965898,
+          "parent_area_fraction": 0.11262188
+        },
+        {
+          "name": "Loga",
+          "shapeID": "23599985B16490635358595",
+          "subject_area_fraction": 0.03034102,
+          "parent_area_fraction": 0.01111363
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B68706856624292",
+      "name": "Sambéra",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.96440373,
+          "parent_area_fraction": 0.11284361
+        },
+        {
+          "name": "Falmèy",
+          "shapeID": "23599985B42967903288320",
+          "subject_area_fraction": 0.03474548,
+          "parent_area_fraction": 0.02301983
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B69026319129781",
+      "name": "Maradi I",
+      "atlas_parent_id": "framework:province:maradi:938ad51c7c91",
+      "source_parent_candidates": [
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.38360638,
+          "parent_area_fraction": 0.00189332
+        },
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.35951298,
+          "parent_area_fraction": 0.00139927
+        },
+        {
+          "name": "Maradi",
+          "shapeID": "23599985B96333695472040",
+          "subject_area_fraction": 0.25688064,
+          "parent_area_fraction": 0.06162769
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B69193569370150",
+      "name": "Bérmo",
+      "atlas_parent_id": "framework:province:bermo:a3e7b55474d2",
+      "source_parent_candidates": [
+        {
+          "name": "Bérmo",
+          "shapeID": "23599985B15241034776795",
+          "subject_area_fraction": 0.81196082,
+          "parent_area_fraction": 0.07618994
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.16968748,
+          "parent_area_fraction": 0.00844896
+        },
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.0183517,
+          "parent_area_fraction": 0.00271148
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B69541182883677",
+      "name": "Dannet",
+      "atlas_parent_id": "framework:province:arlit:5e704b6593c0",
+      "source_parent_candidates": [
+        {
+          "name": "Arlit",
+          "shapeID": "23599985B35740417673211",
+          "subject_area_fraction": 0.88569539,
+          "parent_area_fraction": 0.18005605
+        },
+        {
+          "name": "Ingall",
+          "shapeID": "23599985B91742674817727",
+          "subject_area_fraction": 0.09363545,
+          "parent_area_fraction": 0.01896471
+        },
+        {
+          "name": "Tchirozérine",
+          "shapeID": "23599985B66307714151869",
+          "subject_area_fraction": 0.02066917,
+          "parent_area_fraction": 0.00829903
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B6995566962304",
+      "name": "Falméy",
+      "atlas_parent_id": "framework:province:falmey:71640624f82e",
+      "source_parent_candidates": [
+        {
+          "name": "Falmèy",
+          "shapeID": "23599985B42967903288320",
+          "subject_area_fraction": 0.94371049,
+          "parent_area_fraction": 0.67366332
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.03845777,
+          "parent_area_fraction": 0.0047465
+        },
+        {
+          "name": "Say",
+          "shapeID": "23599985B83200163093073",
+          "subject_area_fraction": 0.00801434,
+          "parent_area_fraction": 0.00140964
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B69978821633529",
+      "name": "Karguibangou",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.9966218,
+          "parent_area_fraction": 0.08054076
+        },
+        {
+          "name": "Dioundiou",
+          "shapeID": "23599985B87103937584190",
+          "subject_area_fraction": 0.0033782,
+          "parent_area_fraction": 0.00155076
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B70343149989749",
+      "name": "Tchintabaraden",
+      "atlas_parent_id": "framework:province:tchintabaraden:8f250b92c68c",
+      "source_parent_candidates": [
+        {
+          "name": "Tchintabaraden",
+          "shapeID": "23599985B37880443282078",
+          "subject_area_fraction": 0.96424238,
+          "parent_area_fraction": 0.64868069
+        },
+        {
+          "name": "Abalak",
+          "shapeID": "23599985B73397103622086",
+          "subject_area_fraction": 0.03516162,
+          "parent_area_fraction": 0.01855567
+        },
+        {
+          "name": "Tillia",
+          "shapeID": "23599985B40327375212482",
+          "subject_area_fraction": 0.00059601,
+          "parent_area_fraction": 0.0002503
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B70543987678949",
+      "name": "Sokorbé",
+      "atlas_parent_id": "framework:province:loga:79a85a440efd",
+      "source_parent_candidates": [
+        {
+          "name": "Loga",
+          "shapeID": "23599985B16490635358595",
+          "subject_area_fraction": 0.86798064,
+          "parent_area_fraction": 0.1202979
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.1068004,
+          "parent_area_fraction": 0.00469352
+        },
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.02521896,
+          "parent_area_fraction": 0.00323303
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B70600244053448",
+      "name": "Kourni",
+      "atlas_parent_id": "framework:province:kantche:f27063f42f65",
+      "source_parent_candidates": [
+        {
+          "name": "Kantché",
+          "shapeID": "23599985B81952569357883",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.06199341
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B71148685540180",
+      "name": "Ourno",
+      "atlas_parent_id": "framework:province:madaoua:38a44ed9992f",
+      "source_parent_candidates": [
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 0.98574455,
+          "parent_area_fraction": 0.2422145
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.01425545,
+          "parent_area_fraction": 0.00146361
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B71988491596185",
+      "name": "Tabelot",
+      "atlas_parent_id": "framework:province:tchirozerine:ecb04cbe049c",
+      "source_parent_candidates": [
+        {
+          "name": "Tchirozérine",
+          "shapeID": "23599985B66307714151869",
+          "subject_area_fraction": 0.91127849,
+          "parent_area_fraction": 0.52855085
+        },
+        {
+          "name": "Aderbissinat",
+          "shapeID": "23599985B52241460380538",
+          "subject_area_fraction": 0.08872151,
+          "parent_area_fraction": 0.03096527
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B72283596019690",
+      "name": "Diagourou",
+      "atlas_parent_id": "framework:province:tera:44c41747d39b",
+      "source_parent_candidates": [
+        {
+          "name": "Téra",
+          "shapeID": "23599985B14211003047249",
+          "subject_area_fraction": 0.97002363,
+          "parent_area_fraction": 0.12979479
+        },
+        {
+          "name": "Gothèye",
+          "shapeID": "23599985B45142923275636",
+          "subject_area_fraction": 0.01739171,
+          "parent_area_fraction": 0.00532636
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B73325679199597",
+      "name": "Kourtéye",
+      "atlas_parent_id": "framework:province:tillaberi:51ead91bf010",
+      "source_parent_candidates": [
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.95901417,
+          "parent_area_fraction": 0.24024279
+        },
+        {
+          "name": "Gothèye",
+          "shapeID": "23599985B45142923275636",
+          "subject_area_fraction": 0.03436546,
+          "parent_area_fraction": 0.01060958
+        },
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.00653094,
+          "parent_area_fraction": 0.00056927
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B73736931864986",
+      "name": "Korgom",
+      "atlas_parent_id": "framework:province:tessaoua:5242c9f49520",
+      "source_parent_candidates": [
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.9448241,
+          "parent_area_fraction": 0.11363618
+        },
+        {
+          "name": "Gazaoua",
+          "shapeID": "23599985B75774451533542",
+          "subject_area_fraction": 0.0551759,
+          "parent_area_fraction": 0.03516359
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B73928168036558",
+      "name": "Kouré",
+      "atlas_parent_id": "framework:province:kollo:f4d3e43a9868",
+      "source_parent_candidates": [
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.99649892,
+          "parent_area_fraction": 0.10101693
+        },
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.00350108,
+          "parent_area_fraction": 0.00105756
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B74285074887218",
+      "name": "Tibiri",
+      "atlas_parent_id": "framework:province:tibiri:243872a9d380",
+      "source_parent_candidates": [
+        {
+          "name": "Tibiri",
+          "shapeID": "23599985B22885280076406",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.21878057
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B74447328459706",
+      "name": "Dakoussa",
+      "atlas_parent_id": "framework:province:takeita:52f31ddc3079",
+      "source_parent_candidates": [
+        {
+          "name": "Takeita",
+          "shapeID": "23599985B25575457251727",
+          "subject_area_fraction": 0.95299602,
+          "parent_area_fraction": 0.24054803
+        },
+        {
+          "name": "Zinder",
+          "shapeID": "23599985B17840081467963",
+          "subject_area_fraction": 0.04141108,
+          "parent_area_fraction": 0.06758307
+        },
+        {
+          "name": "Mirriah",
+          "shapeID": "23599985B93207740600063",
+          "subject_area_fraction": 0.0055929,
+          "parent_area_fraction": 0.00130345
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B74465026874470",
+      "name": "Simiri",
+      "atlas_parent_id": "framework:province:ouallam:277ce268b1b3",
+      "source_parent_candidates": [
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.99215504,
+          "parent_area_fraction": 0.16743396
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.00691439,
+          "parent_area_fraction": 0.00185908
+        },
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.00038379,
+          "parent_area_fraction": 0.00018614
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B74839102757106",
+      "name": "Ayérou",
+      "atlas_parent_id": "framework:province:ayerou:15b41995440a",
+      "source_parent_candidates": [
+        {
+          "name": "Ayérou",
+          "shapeID": "23599985B66518443893936",
+          "subject_area_fraction": 0.97442822,
+          "parent_area_fraction": 0.40526913
+        },
+        {
+          "name": "Téra",
+          "shapeID": "23599985B14211003047249",
+          "subject_area_fraction": 0.0062572,
+          "parent_area_fraction": 0.00083937
+        },
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.00065301,
+          "parent_area_fraction": 0.00016269
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B75624546771300",
+      "name": "Gorouol",
+      "atlas_parent_id": "framework:province:tera:44c41747d39b",
+      "source_parent_candidates": [
+        {
+          "name": "Téra",
+          "shapeID": "23599985B14211003047249",
+          "subject_area_fraction": 0.97262731,
+          "parent_area_fraction": 0.35615987
+        },
+        {
+          "name": "Bankilaré",
+          "shapeID": "23599985B18164013569517",
+          "subject_area_fraction": 0.00549642,
+          "parent_area_fraction": 0.01299762
+        },
+        {
+          "name": "Ayérou",
+          "shapeID": "23599985B66518443893936",
+          "subject_area_fraction": 0.00285704,
+          "parent_area_fraction": 0.00324364
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B76169023695954",
+      "name": "Birni N'Konni",
+      "atlas_parent_id": "framework:province:birni-n-konni:0c9438677815",
+      "source_parent_candidates": [
+        {
+          "name": "Birni-N'Konni",
+          "shapeID": "23599985B12101722290167",
+          "subject_area_fraction": 0.97796771,
+          "parent_area_fraction": 0.26762464
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B76173588202000",
+      "name": "Dogonkiria",
+      "atlas_parent_id": "framework:province:dogondoutchi:f429b0e863ee",
+      "source_parent_candidates": [
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.99017586,
+          "parent_area_fraction": 0.31208132
+        },
+        {
+          "name": "Abala",
+          "shapeID": "23599985B96366222257755",
+          "subject_area_fraction": 0.00554045,
+          "parent_area_fraction": 0.00115052
+        },
+        {
+          "name": "Bagaroua",
+          "shapeID": "23599985B53990886897515",
+          "subject_area_fraction": 0.00428369,
+          "parent_area_fraction": 0.00356026
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B76403530794224",
+      "name": "Affala",
+      "atlas_parent_id": "framework:province:tahoua:93dca58ebcae",
+      "source_parent_candidates": [
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.97347688,
+          "parent_area_fraction": 0.16694842
+        },
+        {
+          "name": "Tahoua Ville",
+          "shapeID": "23599985B25077979802367",
+          "subject_area_fraction": 0.02652312,
+          "parent_area_fraction": 0.07127119
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B76500446614370",
+      "name": "Tajaé",
+      "atlas_parent_id": "framework:province:illela:0360c05aba33",
+      "source_parent_candidates": [
+        {
+          "name": "Illéla",
+          "shapeID": "23599985B93785804329420",
+          "subject_area_fraction": 0.88943575,
+          "parent_area_fraction": 0.15362734
+        },
+        {
+          "name": "Malbaza",
+          "shapeID": "23599985B4654450212041",
+          "subject_area_fraction": 0.06831642,
+          "parent_area_fraction": 0.02893062
+        },
+        {
+          "name": "Birni-N'Konni",
+          "shapeID": "23599985B12101722290167",
+          "subject_area_fraction": 0.04224783,
+          "parent_area_fraction": 0.00833429
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B76849175678821",
+      "name": "Youri",
+      "atlas_parent_id": "framework:province:kollo:f4d3e43a9868",
+      "source_parent_candidates": [
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.98135579,
+          "parent_area_fraction": 0.06398944
+        },
+        {
+          "name": "Say",
+          "shapeID": "23599985B83200163093073",
+          "subject_area_fraction": 0.01461631,
+          "parent_area_fraction": 0.00135822
+        },
+        {
+          "name": "Niamey",
+          "shapeID": "23599985B37846693808008",
+          "subject_area_fraction": 0.0040279,
+          "parent_area_fraction": 0.0042591
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B77530905556219",
+      "name": "Karofane",
+      "atlas_parent_id": "framework:province:bouza:354c3b6881ac",
+      "source_parent_candidates": [
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.83635863,
+          "parent_area_fraction": 0.15621401
+        },
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 0.16364137,
+          "parent_area_fraction": 0.02465106
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B77658591196933",
+      "name": "Koré Maïroua",
+      "atlas_parent_id": "framework:province:tibiri:243872a9d380",
+      "source_parent_candidates": [
+        {
+          "name": "Tibiri",
+          "shapeID": "23599985B22885280076406",
+          "subject_area_fraction": 0.96091506,
+          "parent_area_fraction": 0.26788105
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.03816015,
+          "parent_area_fraction": 0.00327382
+        },
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.00044795,
+          "parent_area_fraction": 4.203e-05
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B7828806917469",
+      "name": "Safo",
+      "atlas_parent_id": "framework:province:madarounfa:489a3d3ad658",
+      "source_parent_candidates": [
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 0.9227437,
+          "parent_area_fraction": 0.17923993
+        },
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.05821551,
+          "parent_area_fraction": 0.00891747
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B78657214368072",
+      "name": "Kiota",
+      "atlas_parent_id": "framework:province:boboye:dc7dff7b5c4c",
+      "source_parent_candidates": [
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.05993933
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B79160686966047",
+      "name": "Birni Lallé",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.06397325
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B79581883738563",
+      "name": "Tibiri",
+      "atlas_parent_id": "framework:province:guidan-roumdji:fa38d4e6bf35",
+      "source_parent_candidates": [
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.96554094,
+          "parent_area_fraction": 0.17551564
+        },
+        {
+          "name": "Madarounfa",
+          "shapeID": "23599985B10786712449018",
+          "subject_area_fraction": 1.051e-05,
+          "parent_area_fraction": 2.42e-06
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B79826529462291",
+      "name": "Torodi",
+      "atlas_parent_id": "framework:province:torodi:13341dce4dad",
+      "source_parent_candidates": [
+        {
+          "name": "Torodi",
+          "shapeID": "23599985B58853598919637",
+          "subject_area_fraction": 0.9824236,
+          "parent_area_fraction": 0.79502185
+        },
+        {
+          "name": "Gothèye",
+          "shapeID": "23599985B45142923275636",
+          "subject_area_fraction": 0.00808165,
+          "parent_area_fraction": 0.01098178
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.00276136,
+          "parent_area_fraction": 0.0016879
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B81065564890705",
+      "name": "Babankatami",
+      "atlas_parent_id": "framework:province:bouza:354c3b6881ac",
+      "source_parent_candidates": [
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.99943921,
+          "parent_area_fraction": 0.21698891
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.00056079,
+          "parent_area_fraction": 4.103e-05
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B81096810558736",
+      "name": "Galma Koudawatché",
+      "atlas_parent_id": "framework:province:madaoua:38a44ed9992f",
+      "source_parent_candidates": [
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 0.95915613,
+          "parent_area_fraction": 0.0742156
+        },
+        {
+          "name": "Malbaza",
+          "shapeID": "23599985B4654450212041",
+          "subject_area_fraction": 0.04084387,
+          "parent_area_fraction": 0.00963448
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B82593564710711",
+      "name": "Guéchémé",
+      "atlas_parent_id": "framework:province:tibiri:243872a9d380",
+      "source_parent_candidates": [
+        {
+          "name": "Tibiri",
+          "shapeID": "23599985B22885280076406",
+          "subject_area_fraction": 0.97008065,
+          "parent_area_fraction": 0.39391475
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.01896999,
+          "parent_area_fraction": 0.00237055
+        },
+        {
+          "name": "Dioundiou",
+          "shapeID": "23599985B87103937584190",
+          "subject_area_fraction": 0.01090503,
+          "parent_area_fraction": 0.00774075
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B82699996601433",
+      "name": "Tondikandia",
+      "atlas_parent_id": "framework:province:filingue:1f56a264617e",
+      "source_parent_candidates": [
+        {
+          "name": "Filingué",
+          "shapeID": "23599985B22646074094064",
+          "subject_area_fraction": 0.95140475,
+          "parent_area_fraction": 0.27818811
+        },
+        {
+          "name": "Loga",
+          "shapeID": "23599985B16490635358595",
+          "subject_area_fraction": 0.01601259,
+          "parent_area_fraction": 0.01730448
+        },
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.01600229,
+          "parent_area_fraction": 0.00336937
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B83051667394357",
+      "name": "Kornaka",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.99999834,
+          "parent_area_fraction": 0.2041659
+        },
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 1.66e-06,
+          "parent_area_fraction": 5.5e-07
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B83153114035538",
+      "name": "Guidan Roumdji",
+      "atlas_parent_id": "framework:province:guidan-roumdji:fa38d4e6bf35",
+      "source_parent_candidates": [
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.93907318,
+          "parent_area_fraction": 0.2096078
+        },
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 0.03423841,
+          "parent_area_fraction": 0.00799797
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.00122169,
+          "parent_area_fraction": 0.00011924
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B84229199619375",
+      "name": "Falwel",
+      "atlas_parent_id": "framework:province:loga:79a85a440efd",
+      "source_parent_candidates": [
+        {
+          "name": "Loga",
+          "shapeID": "23599985B16490635358595",
+          "subject_area_fraction": 0.97532493,
+          "parent_area_fraction": 0.38833508
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.02315635,
+          "parent_area_fraction": 0.00292351
+        },
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.00151872,
+          "parent_area_fraction": 0.00020972
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B84586248034381",
+      "name": "Kankandi",
+      "atlas_parent_id": "framework:province:boboye:dc7dff7b5c4c",
+      "source_parent_candidates": [
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.96636772,
+          "parent_area_fraction": 0.06576125
+        },
+        {
+          "name": "Falmèy",
+          "shapeID": "23599985B42967903288320",
+          "subject_area_fraction": 0.0328551,
+          "parent_area_fraction": 0.00433969
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.00077718,
+          "parent_area_fraction": 1.813e-05
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B86758205906716",
+      "name": "Dan-Barto",
+      "atlas_parent_id": "framework:province:kantche:f27063f42f65",
+      "source_parent_candidates": [
+        {
+          "name": "Kantché",
+          "shapeID": "23599985B81952569357883",
+          "subject_area_fraction": 0.82939547,
+          "parent_area_fraction": 0.07082073
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.12302787,
+          "parent_area_fraction": 0.00448782
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B86861495506135",
+      "name": "Tchaké",
+      "atlas_parent_id": "framework:province:mayahi:6f330b446652",
+      "source_parent_candidates": [
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.11479218
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B87130216229278",
+      "name": "Matankari",
+      "atlas_parent_id": "framework:province:dogondoutchi:f429b0e863ee",
+      "source_parent_candidates": [
+        {
+          "name": "Dogondoutchi",
+          "shapeID": "23599985B71800364259973",
+          "subject_area_fraction": 0.97199415,
+          "parent_area_fraction": 0.1789658
+        },
+        {
+          "name": "Loga",
+          "shapeID": "23599985B16490635358595",
+          "subject_area_fraction": 0.02800585,
+          "parent_area_fraction": 0.01486776
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B87227821745793",
+      "name": "Loga",
+      "atlas_parent_id": "framework:province:loga:79a85a440efd",
+      "source_parent_candidates": [
+        {
+          "name": "Loga",
+          "shapeID": "23599985B16490635358595",
+          "subject_area_fraction": 0.97182983,
+          "parent_area_fraction": 0.43789375
+        },
+        {
+          "name": "Balléyara",
+          "shapeID": "23599985B53989443832132",
+          "subject_area_fraction": 0.01329454,
+          "parent_area_fraction": 0.01219821
+        },
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 0.01239976,
+          "parent_area_fraction": 0.00177162
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B87606056296585",
+      "name": "Filingué",
+      "atlas_parent_id": "framework:province:filingue:1f56a264617e",
+      "source_parent_candidates": [
+        {
+          "name": "Filingué",
+          "shapeID": "23599985B22646074094064",
+          "subject_area_fraction": 0.98570644,
+          "parent_area_fraction": 0.41092765
+        },
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.01361425,
+          "parent_area_fraction": 0.004087
+        },
+        {
+          "name": "Abala",
+          "shapeID": "23599985B96366222257755",
+          "subject_area_fraction": 0.00067931,
+          "parent_area_fraction": 0.00023917
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B88178898219578",
+      "name": "Douméga",
+      "atlas_parent_id": "framework:province:tibiri:243872a9d380",
+      "source_parent_candidates": [
+        {
+          "name": "Tibiri",
+          "shapeID": "23599985B22885280076406",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.08242759
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B88539640494757",
+      "name": "Mayahi",
+      "atlas_parent_id": "framework:province:mayahi:6f330b446652",
+      "source_parent_candidates": [
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.12300648
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B88940782166431",
+      "name": "Illéla",
+      "atlas_parent_id": "framework:province:illela:0360c05aba33",
+      "source_parent_candidates": [
+        {
+          "name": "Illéla",
+          "shapeID": "23599985B93785804329420",
+          "subject_area_fraction": 0.96030459,
+          "parent_area_fraction": 0.51229655
+        },
+        {
+          "name": "Birni-N'Konni",
+          "shapeID": "23599985B12101722290167",
+          "subject_area_fraction": 0.0230851,
+          "parent_area_fraction": 0.01406548
+        },
+        {
+          "name": "Bagaroua",
+          "shapeID": "23599985B53990886897515",
+          "subject_area_fraction": 0.01661032,
+          "parent_area_fraction": 0.01026173
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B89053607448214",
+      "name": "Dan-Goulbi",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.92307199,
+          "parent_area_fraction": 0.08821568
+        },
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.04880632,
+          "parent_area_fraction": 0.01066646
+        },
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 0.02812169,
+          "parent_area_fraction": 0.00643197
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B9030683927093",
+      "name": "Gaya",
+      "atlas_parent_id": "framework:province:gaya:dc7ee95aeec9",
+      "source_parent_candidates": [
+        {
+          "name": "Gaya",
+          "shapeID": "23599985B94426243670688",
+          "subject_area_fraction": 0.99092764,
+          "parent_area_fraction": 0.11464082
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B90787690652503",
+      "name": "Namaro",
+      "atlas_parent_id": "framework:province:kollo:f4d3e43a9868",
+      "source_parent_candidates": [
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.96479477,
+          "parent_area_fraction": 0.10421319
+        },
+        {
+          "name": "Gothèye",
+          "shapeID": "23599985B45142923275636",
+          "subject_area_fraction": 0.0189947,
+          "parent_area_fraction": 0.00456111
+        },
+        {
+          "name": "Torodi",
+          "shapeID": "23599985B58853598919637",
+          "subject_area_fraction": 0.01456403,
+          "parent_area_fraction": 0.0020827
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B90965604106556",
+      "name": "Olléléwa",
+      "atlas_parent_id": "framework:province:tanout:c2691b090b33",
+      "source_parent_candidates": [
+        {
+          "name": "Tanout",
+          "shapeID": "23599985B69081741011402",
+          "subject_area_fraction": 0.94988586,
+          "parent_area_fraction": 0.09777142
+        },
+        {
+          "name": "Takeita",
+          "shapeID": "23599985B25575457251727",
+          "subject_area_fraction": 0.04815285,
+          "parent_area_fraction": 0.03532154
+        },
+        {
+          "name": "Damagaram Takaya",
+          "shapeID": "23599985B91194911882215",
+          "subject_area_fraction": 0.00196129,
+          "parent_area_fraction": 0.00094272
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B92373241546187",
+      "name": "Azéye",
+      "atlas_parent_id": "framework:province:abalak:3765b82f62c7",
+      "source_parent_candidates": [
+        {
+          "name": "Abalak",
+          "shapeID": "23599985B73397103622086",
+          "subject_area_fraction": 0.89037405,
+          "parent_area_fraction": 0.13597154
+        },
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.05634865,
+          "parent_area_fraction": 0.03348888
+        },
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.05327729,
+          "parent_area_fraction": 0.03149331
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B92375330867167",
+      "name": "Tondikiwindi",
+      "atlas_parent_id": "framework:province:ouallam:277ce268b1b3",
+      "source_parent_candidates": [
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.99503278,
+          "parent_area_fraction": 0.47920693
+        },
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.0015656,
+          "parent_area_fraction": 0.00216693
+        },
+        {
+          "name": "Banibangou",
+          "shapeID": "23599985B31350615327928",
+          "subject_area_fraction": 0.00020184,
+          "parent_area_fraction": 0.00021895
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B92857685768834",
+      "name": "Tenhya",
+      "atlas_parent_id": "framework:province:tanout:c2691b090b33",
+      "source_parent_candidates": [
+        {
+          "name": "Tanout",
+          "shapeID": "23599985B69081741011402",
+          "subject_area_fraction": 0.98611451,
+          "parent_area_fraction": 0.43522512
+        },
+        {
+          "name": "Belbédji",
+          "shapeID": "23599985B37162587774633",
+          "subject_area_fraction": 0.00880706,
+          "parent_area_fraction": 0.010246
+        },
+        {
+          "name": "Gouré",
+          "shapeID": "23599985B20082731758941",
+          "subject_area_fraction": 0.00507842,
+          "parent_area_fraction": 0.00262206
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B94014495854698",
+      "name": "Tirmini",
+      "atlas_parent_id": "framework:province:takeita:52f31ddc3079",
+      "source_parent_candidates": [
+        {
+          "name": "Takeita",
+          "shapeID": "23599985B25575457251727",
+          "subject_area_fraction": 0.94760961,
+          "parent_area_fraction": 0.51351257
+        },
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.03902303,
+          "parent_area_fraction": 0.01375378
+        },
+        {
+          "name": "Mirriah",
+          "shapeID": "23599985B93207740600063",
+          "subject_area_fraction": 0.00765553,
+          "parent_area_fraction": 0.00383039
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B94746190490148",
+      "name": "N'Gonga",
+      "atlas_parent_id": "framework:province:boboye:dc7dff7b5c4c",
+      "source_parent_candidates": [
+        {
+          "name": "Boboye",
+          "shapeID": "23599985B30838539224942",
+          "subject_area_fraction": 0.98243893,
+          "parent_area_fraction": 0.07776131
+        },
+        {
+          "name": "Kollo",
+          "shapeID": "23599985B29201413246391",
+          "subject_area_fraction": 0.01756107,
+          "parent_area_fraction": 0.00046647
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B9482106166284",
+      "name": "Bana",
+      "atlas_parent_id": "framework:province:gaya:dc7ee95aeec9",
+      "source_parent_candidates": [
+        {
+          "name": "Gaya",
+          "shapeID": "23599985B94426243670688",
+          "subject_area_fraction": 0.99992613,
+          "parent_area_fraction": 0.1051836
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B95003123966455",
+      "name": "Ouallam",
+      "atlas_parent_id": "framework:province:ouallam:277ce268b1b3",
+      "source_parent_candidates": [
+        {
+          "name": "Ouallam",
+          "shapeID": "23599985B18642698649368",
+          "subject_area_fraction": 0.98897816,
+          "parent_area_fraction": 0.11206599
+        },
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.01102184,
+          "parent_area_fraction": 0.00358939
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B9519656841548",
+      "name": "Tounouga",
+      "atlas_parent_id": "framework:province:gaya:dc7ee95aeec9",
+      "source_parent_candidates": [
+        {
+          "name": "Gaya",
+          "shapeID": "23599985B94426243670688",
+          "subject_area_fraction": 0.92832285,
+          "parent_area_fraction": 0.08189355
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B96050649569939",
+      "name": "Bangui",
+      "atlas_parent_id": "framework:province:madaoua:38a44ed9992f",
+      "source_parent_candidates": [
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 0.95659127,
+          "parent_area_fraction": 0.25285582
+        },
+        {
+          "name": "Guidan-Roumdji",
+          "shapeID": "23599985B37435064601183",
+          "subject_area_fraction": 0.00047882,
+          "parent_area_fraction": 0.00012094
+        },
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 0.00039614,
+          "parent_area_fraction": 4.375e-05
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B96223542959465",
+      "name": "Ourafane",
+      "atlas_parent_id": "framework:province:tessaoua:5242c9f49520",
+      "source_parent_candidates": [
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.94918142,
+          "parent_area_fraction": 0.41573458
+        },
+        {
+          "name": "Mayahi",
+          "shapeID": "23599985B12759501052009",
+          "subject_area_fraction": 0.03958616,
+          "parent_area_fraction": 0.01382992
+        },
+        {
+          "name": "Takeita",
+          "shapeID": "23599985B25575457251727",
+          "subject_area_fraction": 0.01123242,
+          "parent_area_fraction": 0.00756416
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B96232797912039",
+      "name": "Téssa",
+      "atlas_parent_id": "framework:province:dosso:98f4695b7987",
+      "source_parent_candidates": [
+        {
+          "name": "Dosso",
+          "shapeID": "23599985B13950466033624",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.06276792
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B96250293075452",
+      "name": "Bouza",
+      "atlas_parent_id": "framework:province:bouza:354c3b6881ac",
+      "source_parent_candidates": [
+        {
+          "name": "Bouza",
+          "shapeID": "23599985B24942158565256",
+          "subject_area_fraction": 0.92306379,
+          "parent_area_fraction": 0.17034776
+        },
+        {
+          "name": "Madaoua",
+          "shapeID": "23599985B88186704259068",
+          "subject_area_fraction": 0.07693621,
+          "parent_area_fraction": 0.01145119
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B97379541170196",
+      "name": "Doungou",
+      "atlas_parent_id": "framework:province:kantche:f27063f42f65",
+      "source_parent_candidates": [
+        {
+          "name": "Kantché",
+          "shapeID": "23599985B81952569357883",
+          "subject_area_fraction": 0.98114377,
+          "parent_area_fraction": 0.09380948
+        },
+        {
+          "name": "Mirriah",
+          "shapeID": "23599985B93207740600063",
+          "subject_area_fraction": 0.01885623,
+          "parent_area_fraction": 0.00109338
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B98030121500718",
+      "name": "Azagor",
+      "atlas_parent_id": "framework:province:dakoro:eecff876ae0d",
+      "source_parent_candidates": [
+        {
+          "name": "Dakoro",
+          "shapeID": "23599985B7432037800977",
+          "subject_area_fraction": 1.0,
+          "parent_area_fraction": 0.01445211
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B98389260852937",
+      "name": "Barmou",
+      "atlas_parent_id": "framework:province:tahoua:93dca58ebcae",
+      "source_parent_candidates": [
+        {
+          "name": "Tahoua",
+          "shapeID": "23599985B71026362524800",
+          "subject_area_fraction": 0.97899545,
+          "parent_area_fraction": 0.06845709
+        },
+        {
+          "name": "Tahoua Ville",
+          "shapeID": "23599985B25077979802367",
+          "subject_area_fraction": 0.02024524,
+          "parent_area_fraction": 0.02218163
+        },
+        {
+          "name": "Keita",
+          "shapeID": "23599985B44584919101761",
+          "subject_area_fraction": 0.0007593,
+          "parent_area_fraction": 0.00017251
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B98692557133651",
+      "name": "Koona",
+      "atlas_parent_id": "framework:province:tessaoua:5242c9f49520",
+      "source_parent_candidates": [
+        {
+          "name": "Tessaoua",
+          "shapeID": "23599985B9962986153255",
+          "subject_area_fraction": 0.74819119,
+          "parent_area_fraction": 0.00959298
+        },
+        {
+          "name": "Gazaoua",
+          "shapeID": "23599985B75774451533542",
+          "subject_area_fraction": 0.25180881,
+          "parent_area_fraction": 0.01710763
+        }
+      ]
+    },
+    {
+      "id": "gb:NER:ADM3:39565319B98932760270264",
+      "name": "Tillabéri",
+      "atlas_parent_id": "framework:province:tillaberi:51ead91bf010",
+      "source_parent_candidates": [
+        {
+          "name": "Tillabéri",
+          "shapeID": "23599985B45975933186230",
+          "subject_area_fraction": 0.99130414,
+          "parent_area_fraction": 0.14410253
+        },
+        {
+          "name": "Gothèye",
+          "shapeID": "23599985B45142923275636",
+          "subject_area_fraction": 0.00869586,
+          "parent_area_fraction": 0.00155786
+        }
+      ]
+    }
+  ]
+}
