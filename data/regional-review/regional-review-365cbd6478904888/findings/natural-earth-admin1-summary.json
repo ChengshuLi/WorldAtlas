@@ -1,0 +1,29 @@
+{
+  "issue": 449,
+  "source_repository": "nvkelso/natural-earth-vector",
+  "source_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+  "source_version_claim": "5.1.1 stated by retained README",
+  "retained_source_file_count": 7,
+  "shapefile_geometry_type": "Polygon",
+  "dbf_records": 4596,
+  "shape_index_records": 4596,
+  "southwest_china_china_admin1_features": 5,
+  "southwest_china_admin1_names": [
+    "Chongqing",
+    "Guizhou",
+    "Sichuan",
+    "Tibet",
+    "Yunnan"
+  ],
+  "issue449_members_found": [
+    "Chongqing",
+    "Guizhou",
+    "Sichuan"
+  ],
+  "neighbor_packet_members_found": [
+    "Tibet",
+    "Yunnan"
+  ],
+  "interpretation": "Natural Earth attributes these five first-order China units to Southwest China. This supports a source-defined regional grouping and component names/classes at the dataset's map vintage; it does not prove current legal status, official boundary correctness, the WorldAtlas area-tier design, coastline/fragment completeness, or geometry agreement with Atlas units.",
+  "output": "data/regional-review/regional-review-365cbd6478904888/findings/natural-earth-admin1-southwest-china.csv"
+}
