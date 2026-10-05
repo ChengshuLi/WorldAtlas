@@ -40,7 +40,7 @@ Use `--profile full` only when the actual build/test needs it, with an adequate
 ## Storage admission and ongoing checks
 
 Allocation is serialized across this repository by an exclusive local directory
-lock. It requires at least **50 GiB free after the new reservation**, and at most
+lock. It requires at least **10 GiB free after the new reservation**, and at most
 **50 GiB total checkout usage/reservations**. Usage includes all registered legacy
 worktrees, even outside the managed root. The primary checkout's Git store is
 included conservatively. Each managed slot counts the greater of measured usage

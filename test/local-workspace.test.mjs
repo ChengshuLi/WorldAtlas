@@ -23,7 +23,7 @@ function fixture(t, overrides = {}) {
   }
   git('add', '.'); git('commit', '-m', 'fixture'); git('remote', 'add', 'origin', repo);
   const head = git('rev-parse', 'HEAD').trim();
-  const manager = workspaceManager(repo, {freeBytes: () => 100 * GiB, limits: {minimumFree: 50 * GiB, maximumCheckouts: 50 * GiB}, ...overrides});
+  const manager = workspaceManager(repo, {freeBytes: () => 100 * GiB, limits: {minimumFree: 10 * GiB, maximumCheckouts: 50 * GiB}, ...overrides});
   return {repo, git, manager, head, temporary};
 }
 
@@ -50,10 +50,10 @@ test('sparse work is isolated and contains required directories and individual i
 });
 
 test('low disk and existing legacy checkouts prevent allocation without creating a branch', t => {
-  const {manager, git, repo} = fixture(t, {freeBytes: () => 50 * GiB});
+  const {manager, git, repo} = fixture(t, {freeBytes: () => 10 * GiB});
   assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/no-space'}), /headroom/);
   assert.throws(() => git('rev-parse', '--verify', 'engineering/no-space'));
-  const capped = workspaceManager(repo, {freeBytes: () => 100 * GiB, limits: {minimumFree: 50 * GiB, maximumCheckouts: 1}});
+  const capped = workspaceManager(repo, {freeBytes: () => 100 * GiB, limits: {minimumFree: 10 * GiB, maximumCheckouts: 1}});
   assert.ok(capped.report().worktrees.some(row => row.path === fs.realpathSync(repo) && !row.managed));
   assert.throws(() => capped.allocate({worker: 'one', branch: 'engineering/over-budget'}), /budget/);
   assert.throws(() => capped.check(), /breached/);

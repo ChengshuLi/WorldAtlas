@@ -5,7 +5,7 @@ import {createHash, randomUUID} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
 export const GiB = 1024 ** 3;
-export const policy = {minimumFree: 50 * GiB, maximumCheckouts: 50 * GiB};
+export const policy = {minimumFree: 10 * GiB, maximumCheckouts: 50 * GiB};
 const support = ['docs', 'scripts', 'test', 'src', 'hosted', 'drizzle', '.github', '.agents', 'coordination/templates'];
 const id = value => typeof value === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$/.test(value);
 const safeInclude = value => typeof value === 'string' && /^(data|research|coordination)\/[a-zA-Z0-9_./-]+$/.test(value)
